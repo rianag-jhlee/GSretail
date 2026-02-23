@@ -1,0 +1,2 @@
+# GSretail
+frameWork:Vue
