@@ -1,24 +1,9 @@
 # gsretail
+- vue@3.2.13
+- typescript
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
+# Server실행
 npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 프로젝트 시작일
+2026.02
