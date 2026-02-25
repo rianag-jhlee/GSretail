@@ -1,0 +1,35 @@
+@charset 'UTF-8';
+
+html {font-size:62.5%;}
+
+* {margin:0; padding:0; color:#222; font-size:1.4rem; box-sizing:border-box;}
+
+/* reset */
+ul, ol {list-style:none;}
+button, select, input {border:0;}
+a {text-decoration:none;}
+a:visited {color:#222;}
+
+/* align */
+.al {text-align:left !important;}
+.ac {text-align:center !important;}
+.ar {text-align:right !important;}
+
+/* color */
+.highlight {color:#0B48EF; text-decoration:underline;}
+
+/* margin */
+.mt10 {margin-top:10px !important;}
+
+/*::::::::::::::::::::::::::::::: Element :::::::::::::::::::::::::::::::*/
+input {font-size:14px; vertical-align:middle;}
+input, textarea {height:42px; padding:0 15px; background-color:#fff; border:1px solid #e8e5e2; border-radius:0; -webkit-appearance:none; -moz-appearance:none; -ms-appearance:none; -o-appearance:none;}
+
+textarea {width:100%; min-height:150px;}
+
+select {font-size:14px; background-color:#fff;}
+@media screen and (max-width: 1024px) {
+}
+
+@media screen and (max-width: 767px) {
+}
