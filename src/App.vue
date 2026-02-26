@@ -1,13 +1,15 @@
 <template>
-    <!-- header -->
-    <Header />
+    <div id="wrap">
+        <!-- header -->
+        <Header />
 
-    <!-- content -->
-    <router-view></router-view>
-    <!-- //content -->
+        <!-- content -->
+        <router-view></router-view>
+        <!-- //content -->
 
-    <!-- footer -->
-    <Footer />
+        <!-- footer -->
+        <Footer />
+    </div>
 </template>
 
 <script>
