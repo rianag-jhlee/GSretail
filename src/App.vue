@@ -1,24 +1,28 @@
 <template>
-  <!-- header -->
-  <Header/>
+    <!-- header -->
+    <Header />
 
-  <!-- content -->
-  <router-view></router-view>
-  <!-- //content -->
+    <!-- content -->
+    <router-view></router-view>
+    <!-- //content -->
 
-  <!-- footer -->  
+    <!-- footer -->
+    <Footer />
 </template>
 
 <script>
-import Header from '@/inc/Header.vue'
+import Header from "@/inc/Header.vue";
+import Footer from "@/inc/Footer.vue";
 
 export default {
-  name: 'App',
-  components: {
-    Header
-  },
-}
+    name: "App",
+    components: {
+        Header,
+        Footer,
+    },
+};
 </script>
 
 <style>
+@import "@/assets/css/common.css";
 </style>

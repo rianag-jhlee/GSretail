@@ -1,12 +1,12 @@
 <template>
-  <div>Test Component</div>
+    <div>Test Component</div>
 </template>
 
 <script>
 export default {
-  name: 'TestComponent',
-  props: {
-  }
+    name: 'TestComponent',
+    props: {
+    }
 }
 </script>
 
