@@ -3,7 +3,7 @@ import { createWebHistory, createRouter } from "vue-router";
 const routes = [
     {
         path: "/",
-        component: () => import("@/views/gsr00/gsr-00-00-00")
+        component: () => import("@/uiPub/gsr00/gsr-00-00-00")
     }
 ];
 
