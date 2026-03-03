@@ -1,0 +1,12 @@
+/* header */
+nav {position:relative; z-index:100;}
+nav ul.depth1 {display:flex;}
+nav ul.depth2 {width:100vw; background-color:#fff; position:absolute; top:100%; left:0;}
+nav li > ul {height:0; overflow:hidden;}
+nav li:hover ul, nav li.is_open ul {height:auto; overflow:initial; display:block;}
+nav li:hover ul.depth2, nav li.is_open ul.depth2 {height:auto; overflow:initial; display:flex;}
+
+/* breadcrumb */
+.breadcrumb > ul {display:flex;}
+.breadcrumb > ul > li {position:relative;}
+.breadcrumb li ul {position:absolute; top:100%; left:0; display:none;}
