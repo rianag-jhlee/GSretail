@@ -1,6 +1,9 @@
 const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
+    devServer: {
+        historyApiFallback: true
+    },
     transpileDependencies: true,
     lintOnSave: false,
     publicPath: "",     // 루트 경로 기준
