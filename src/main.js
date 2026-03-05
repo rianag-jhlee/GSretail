@@ -4,7 +4,7 @@ import App from './App.vue';
 import $ from "jquery";
 
 //modal
-import modal from "@/utils/modal";
+import modal from "@/assets/js/modal";
 
 const app = createApp(App);
 window.$ = window.jQuery = $;

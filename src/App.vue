@@ -23,7 +23,6 @@ import Header from "@/inc/Header.vue";
 import Footer from "@/inc/Footer.vue";
 
 import { onMounted } from "vue";
-import { initMenu } from "@/assets/js/common";
 
 export default {
     name: "App",
