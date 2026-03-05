@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkGSretail"]=self["webpackChunkGSretail"]||[]).push([[464],{7464:function(n,u,e){e.r(u),e.d(u,{default:function(){return l}});var r=e(6768);function t(n,u,e,t,a,c){return(0,r.uX)(),(0,r.CE)("div",null,"Sub01 ")}var a={name:"Sub01"},c=e(1241);const i=(0,c.A)(a,[["render",t]]);var l=i}}]);
+//# sourceMappingURL=464.e7ef0906.js.map
