@@ -10,8 +10,10 @@
         <!-- //modal content -->
         <!-- modal bottom -->
         <div class="modal_bottom">
-            <a href="#none" class="btn_small black">확인</a>
-            <a href="#none" @click="closeModal" class="btn_small white">취소</a>
+            <div class="btnBox">
+                <a href="#none" class="btn_fill">확인</a>
+                <a href="#none" @click="closeModal" class="btn_border">취소</a>
+            </div>
         </div>
         <!-- //modal bottom -->
     </div>

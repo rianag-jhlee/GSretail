@@ -8,15 +8,13 @@
             <ul class="explain">
                 <li><strong>Modal 호출</strong> : @click="openModal" data-popid="호출할 아이디" data-type="타입" //사이즈 = full, small || dim 미노출 원할 시 타입에 no_dim 추가</li>
                 <li><strong>data-cont</strong> : 모달 콘텐츠 호출하여 사용할 경우 사용 [data-cont="호출할 콘텐츠"] ※팝업 콘텐츠의 기본경로: /uiPub/popUp/</li>
-                <li><strong>Toast</strong> : onclick="toast(타입(자동:auto, 수동:confirm), 노출할 메세지, 토스트팝업이 닫히는 시간);parent_focus(this);"</li>
-                <li><strong>parent_focus(this)</strong> : 웹접근성 고려하여 모달 닫을 경우 그 전 버튼으로 포커스 이동</li>
             </ul>
             
             <p class="tit_wrap">
                 <strong class="tit">Design</strong>
             </p>
             <div class="design_box">
-                <button class="btn_small black" @click="openModal" data-popid="sample_id" data-type="full" data-cont="modal_test">Sample Popup</button>
+                <button class="btn_small fill" @click="openModal" data-popid="sample_id" data-type="full" data-cont="modal_test">Sample Popup</button>
             </div>
 
             <p class="tit_wrap">
@@ -59,15 +57,18 @@ export default {
         <section>
             <h4>toast</h4>
             <ul class="explain">
-                <li><strong>Toast 호출</strong> : @click="toast" data-type="자동:auto / 수동:confirm" data-msg="Auto Toast" data-time="토스트팝업 닫히는 시간(type="auto"인 경우만 적용 : default = 3s)"</li>
+                <li><strong>Toast 호출</strong> : @click="toast" data-type="자동:auto / 수동:confirm" data-time="토스트팝업 닫히는 시간(type="auto"인 경우만 적용 : default = 3s)"</li>
+                <li><strong>노출 문구</strong> :  data-msg="노출문구"</li>
             </ul>
             
             <p class="tit_wrap">
                 <strong class="tit">Design</strong>
             </p>
             <div class="design_box">
-                <button class="btn_small black" @click="toast" data-type="auto" data-msg="Auto Toast" data-time="3000">Toast Auto</button>
-                <button class="btn_small black" @click="toast" data-type="confirm" data-msg="Confirm Toast" style="margin-left:12px;">Toast Confirm</button>
+                <div class="btnBox">
+                    <button class="btn_small fill" @click="toast" data-type="auto" data-msg="Auto Toast" data-time="3000">Toast Auto</button>
+                    <button class="btn_small fill" @click="toast" data-type="confirm" data-msg="Confirm Toast">Toast Confirm</button>
+                </div>
             </div>
 
             <p class="tit_wrap">
@@ -77,10 +78,10 @@ export default {
             <pre class="code_box">
 <code>&lt;template&gt;
     &lt;!-- Auto --&gt;
-    &lt;button class="btn_small black" @click="toast" data-type="auto" data-msg="Auto Toast" data-time="3000"&gt;Toast Auto&lt;/button&gt;
+    &lt;button class="btn_small fill" @click="toast" data-type="auto" data-msg="Auto Toast" data-time="3000"&gt;Toast Auto&lt;/button&gt;
 
     &lt;!-- Confirm --&gt;
-    &lt;button class="btn_small black" @click="toast" data-type="confirm" data-msg="Confirm Toast"&gt;Toast Confirm&lt;/button&gt;
+    &lt;button class="btn_small fill" @click="toast" data-type="confirm" data-msg="Confirm Toast"&gt;Toast Confirm&lt;/button&gt;
 &lt;/template&gt;
 
 &lt;script&gt;
@@ -125,15 +126,13 @@ export default {
             }
     },
     mounted() {
-        $(document).ready(function () {
-            /* 소스보기 */
-            $('.tit_wrap a').click(function() {
-                if ($(this).hasClass('active')) {
-                    $(this).removeClass('active').parent().siblings('.code_box').slideUp();
-                } else {
-                    $(this).addClass('active').parent().siblings('.code_box').slideDown();
-                }
-            });
+        /* 소스보기 */
+        $('.tit_wrap a').click(function() {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active').parent().siblings('.code_box').slideUp();
+            } else {
+                $(this).addClass('active').parent().siblings('.code_box').slideDown();
+            }
         });
     },
     methods: {

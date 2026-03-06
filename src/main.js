@@ -1,6 +1,6 @@
-import { createApp } from 'vue';
-import { router } from './routers/index';
-import App from './App.vue';
+import { createApp } from "vue";
+import { router } from "./routers/index";
+import App from "./App.vue";
 import $ from "jquery";
 
 //modal

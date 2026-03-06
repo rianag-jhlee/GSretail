@@ -1,5 +1,5 @@
 <template>
-    <div>Main</div>
+    <div>gsr-00-00-00</div>
 </template>
 
 <script>

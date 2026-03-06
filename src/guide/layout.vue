@@ -88,30 +88,45 @@
 <script>
 
 export default {
-    name: 'App',
+    name: "App",
     props: ["openModal"],
     components: {
     },
     data() {
-            return {
-            }
+        return {
+        };
     },
     mounted() {
-        $(document).ready(function () {
-            /* 소스보기 */
-            $('.tit_wrap a').click(function() {
-                if ($(this).hasClass('active')) {
-                    $(this).removeClass('active').parent().siblings('.code_box').slideUp();
-                } else {
-                    $(this).addClass('active').parent().siblings('.code_box').slideDown();
-                }
-            });
+        /* 소스보기 */
+        $('.tit_wrap a').click(function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active').parent().siblings('.code_box').slideUp();
+            } else {
+                $(this).addClass('active').parent().siblings('.code_box').slideDown();
+            }
         });
     },
 }
 </script>
 
 <style scoped>
-#sample_wrap div {margin:20px; padding:20px; border:1px solid #ccc; position:relative;}
-#sample_wrap em {padding:3px 6px; color:#fff; font-size:1.1rem; font-style:normal; background-color:#222; border-radius:4px; position:absolute; top:-12px; left:12px; display:inline-block;}
+#sample_wrap div {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+#sample_wrap em {
+    padding: 3px 6px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-style: normal;
+    background-color: #222;
+    border-radius: 4px;
+    position: absolute;
+    top: -12px;
+    left: 12px;
+    display: inline-block;
+}
 </style>
