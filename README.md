@@ -1,7 +1,7 @@
 # gsretail
 - vue3
 - Vue CLI : 5.0.9
-- vue-router : 5.0.3
+- vue-router : 4.6.4
 
 # Server실행
 npm run serve

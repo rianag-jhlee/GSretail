@@ -1,12 +1,24 @@
+import NotFound from "@/uiPub/warning/not_found.vue";
+import WaitBuilding from "@/uiPub/warning/wait_building.vue";
+
+const loadPage = (path) => {
+    return () =>
+        import(`@/guide/${path}`).catch(() => WaitBuilding);
+};
+
 export const guideRoutes = [
     {
-        path: '/guide',
-        component: () => import("@/guide/guide_wrap"),
+        path: "/guide",
+        component: loadPage("guide_wrap.vue"), // guide_wrap도 lazy-load
         name: "Guide_wrap",
         children: [
-            { path: '', component: () => import("@/guide/index") },
-            { path: 'layout', component: () => import("@/guide/layout") },
-            { path: 'popup', component: () => import("@/guide/popup") },
+            { path: "", component: loadPage("index.vue") },
+            { path: "layout", component: loadPage("layout.vue") },
+            { path: "elements", component: loadPage("elements.vue") },
+            { path: "form", component: loadPage("form.vue") },
+            { path: "list", component: loadPage("list.vue") },
+            { path: "popup", component: loadPage("popup.vue") },
         ]
     },
+    { path: "/:pathMatch(.*)*", name: 'NotFound', component: NotFound },
 ];

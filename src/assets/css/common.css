@@ -30,11 +30,28 @@ textarea {width:100%; min-height:150px;}
 select {font-size:14px; background-color:#fff;}
 
 /* button */
-[class*="btn_"] {display:inline-flex; align-items:center;}
-.btn_small {height:24px; padding:0 8px; font-size:1.2rem;}
+[class*="btn_"] {height:26px; padding:0 10px; font-size:1.4rem; display:inline-flex; align-items:center;}
 
-[class*="btn_"].black {color:#fff; background-color:#222;}
-[class*="btn_"].white {color:#222; border:1px solid #222;}
+/* button size */
+.btn_big {height:42px; padding:0 16px; font-size:1.8rem;}
+.btn_mid {height:24px; padding:0 10px; font-size:1.4rem;}
+.btn_small {height:20px; padding:0 4px; font-size:1.2rem;}
+
+/* button color */
+[class*="btn_"][class*="fill"] {color:#fff; background-color:#222;}
+[class*="btn_"][class*="border"] {color:#222; border:1px solid #222;}
+
+.btnBox {display:inline-flex; align-items:center;}
+.btnBox [class*="btn_"] + [class*="btn_"] {margin-left:8px;}
+
+/* tab */
+.tab_wrap {margin-bottom:20px; position:relative; overflow:hidden;}
+.tab_wrap .more {position:absolute; top:5px; right:0; display:flex; align-items:center; color:#888;}
+.tab_wrap .more:after {width:8px; height:8px; margin-top:-2px; margin-right:7px; margin-left:10px; border:1px solid #888; border-bottom:0; border-left:0; content:''; display:block; transform:rotate(45deg);}
+.tab_wrap ul {display:flex; transition: transform 0.4s cubic-bezier(0.1, 0.57, 0.1, 1);}
+.tab_wrap li {list-style:none;}
+.tab_wrap li a {display:block; padding:15px 20px; white-space:nowrap; cursor:pointer;}
+.tab_wrap li.current a {color:#00C294; font-weight:700;}
 
 @media screen and (max-width: 1024px) {
 }
