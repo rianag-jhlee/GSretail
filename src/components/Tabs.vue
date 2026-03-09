@@ -1,5 +1,5 @@
 <template>
-    <div class="tab_wrap" :class="{type_slide : tabType === 'slide'}" ref="tabWrap">
+    <div class="tab_wrap" :class="{tabSlide}" ref="tabWrap">
         <!-- more button -->
         <a v-if="moreTxt" :href="moreLink" class="more">{{ moreTxt }}</a>
         <!-- //more button -->
@@ -10,7 +10,7 @@
                 :key="index" 
                 :class="{ current: currentTab === index }"
             >
-                <a href="javascript:void(0);" @click="selectTab(index)">{{ item.item }}</a>
+                <a href="javascript:void(0);" class="item" @click="selectTab(index)">{{ item.item }}</a>
             </li>
         </ul>
     </div>
@@ -24,8 +24,8 @@ export default {
     props: {
         tabItems: { type: Array, required: true },
         modelValue: { type: Number, default: 0 }, // v-model
-        tabClass: { type: String, default: "tab_type_default" },
-        tabType: { type: String, default: "" }, // 'slide' 등
+        tabClass: { type: String, default: "type_01" },
+        tabSlide: { type: Boolean, default: false }, // 'slide' 등
         moreLink: { type: String, default: "#" },
         moreTxt: { type: String, default: "" },
     },
@@ -53,7 +53,7 @@ export default {
         };
 
         const adjustSlide = (index) => {
-            if (props.tabType !== "slide") return;
+            if (!props.tabSlide) return;
 
             const wrap = tabWrap.value;
             const list = tabList.value;
@@ -86,7 +86,7 @@ export default {
         // 터치 이벤트 (모바일)
         // ===========================
         onMounted(() => {
-            if (props.tabType !== "slide") return;
+            if (!props.tabSlide) return;
 
             const list = tabList.value;
             const wrap = tabWrap.value;
