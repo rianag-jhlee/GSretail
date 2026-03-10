@@ -39,7 +39,7 @@ select {font-size:14px; background-color:#fff;}
 
 /* button color */
 [class*="btn_"][class*="fill"] {color:#fff; background-color:#222;}
-[class*="btn_"][class*="border"] {color:#222; border:1px solid #222;}
+[class*="btn_"][class*="border"] {color:#222; background-color:#fff; border:1px solid #222;}
 
 .btnBox {display:inline-flex; align-items:center;}
 .btnBox [class*="btn_"] + [class*="btn_"] {margin-left:8px;}

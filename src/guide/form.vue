@@ -1,0 +1,147 @@
+<template>
+    <div class="contents">
+
+        <h2>Form</h2>
+
+        <section>
+            <h4>Inputs</h4>
+            <ul class="explain">
+                <li><strong>type</strong> : text/password/check/radio/switch input type 선택 // default="text"</li>
+            </ul>
+
+            <p class="tit_wrap">
+                <strong class="tit">Design</strong>
+            </p>
+
+            <ul class="toolbar">
+                <li><button class="current" @click="tool_select('text')">Text</button></li>
+                <li><button @click="tool_select('text_err')">Text Error</button></li>
+                <li><button @click="tool_select('error')">Error Message</button></li>
+                <li><button @click="tool_select('pw')">Password</button></li>
+                <li><button @click="tool_select('check')">Checkbox</button></li>
+                <li><button @click="tool_select('radio')">Radio</button></li>
+                <li><button @click="tool_select('isswitch')">Switch</button></li>
+            </ul>
+            <div class="design_box">
+
+                <Inputs :type="input_opt.type" :isswitch="input_opt.isswitch" :placeholder="input_opt.Placeholder" text="Label" :isDisabled="_disabled" :isError="input_opt.isError" :errText="input_opt.err_text" :class="input_opt.class" />
+            </div>
+
+            <p class="tit_wrap">
+                <strong class="tit">Code</strong>
+                <a href="#none">OPEN</a>
+            </p>
+            <pre class="code_box"><code>&lt;Inputs {{ input_opt.opt }} /&gt;</code></pre>
+        </section>
+
+    </div>
+</template>
+
+<script>
+import Inputs from "@/components/Inputs.vue";
+
+export default {
+    name: "form",
+    components: {
+        Inputs,
+    },
+
+    data() {
+        return {
+            // 현재 선택된 버튼 index
+            selectedIndex: 0,
+
+            // Inputs 옵션 상태
+            input_opt: {
+                type: "text",
+                isswitch: false,
+                Placeholder: "문구를 입력해주세요",
+                isError: false,
+                err_text: "",
+                class: "",
+                opt: 'type="text" placeholder="문구를 입력해주세요"',
+            },
+
+            // toolbar 버튼 리스트
+            toolbarButtons: [
+                "text",
+                "text_err",
+                "error",
+                "pw",
+                "check",
+                "radio",
+                "isswitch",
+            ],
+        };
+    },
+    mounted() {
+        /* 소스보기 */
+        $('.tit_wrap a').click(function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active').parent().siblings('.code_box').slideUp();
+            } else {
+                $(this).addClass('active').parent().siblings('.code_box').slideDown();
+            }
+        });
+    },
+    methods: {
+        tool_select(type, index) {
+            // 선택된 버튼 index
+            this.selectedIndex = index;
+
+            // 기본 초기화
+            this.input_opt.isswitch = false;
+            this.input_opt.isError = false;
+            this.input_opt.err_text = "";
+            this.input_opt.class = "";
+            this.input_opt.Placeholder = "문구를 입력해주세요";
+
+            switch (type) {
+                case "text":
+                    this.input_opt.type = "text";
+                    this.input_opt.opt = `:type="${this.input_opt.type}" :placeholder="${this.input_opt.Placeholder}"`;
+                    break;
+
+                case "text_err":
+                    this.input_opt.type = "text";
+                    this.input_opt.class = "err";
+                    this.input_opt.opt = `:type="${this.input_opt.type}" class="err"`;
+                    break;
+
+                case "error":
+                    this.input_opt.type = "text";
+                    this.input_opt.opt = `:type="${this.input_opt.type}" :placeholder="${this.input_opt.Placeholder}"`;
+                    this.input_opt.isswitch = false;
+                    this.input_opt.isError = true;
+                    this.input_opt.err_text = "Error Text";
+                    break;
+
+                case "pw":
+                    this.input_opt.type = "password";
+                    this.input_opt.Placeholder = "비밀번호를 입력해주세요";
+                    this.input_opt.opt = `:type="${this.input_opt.type}" :placeholder="${this.input_opt.Placeholder}"`;
+                    break;
+
+                case "check":
+                    this.input_opt.type = "checkbox";
+                    this.input_opt.opt = `:type="${this.input_opt.type}" text="Label"`;
+                    break;
+
+                case "radio":
+                    this.input_opt.type = "radio";
+                    this.input_opt.opt = `:type="${this.input_opt.type}" text="Label"`;
+                    break;
+
+                case "isswitch":
+                    this.input_opt.type = "checkbox";
+                    this.input_opt.isswitch = true;
+                    this.input_opt.opt = `_type="${this.input_opt.type}" :isswitch="${this.input_opt.isswitch}" text="Label"`;
+                    break;
+            }
+        },
+    },
+};
+</script>
+
+<style scope>
+</style>

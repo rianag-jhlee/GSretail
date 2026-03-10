@@ -8,10 +8,10 @@
                 <dd>
                     <ul>
                         <li>layout(wrap)</li>
-                        <li>header</li>
-                        <li>footer</li>                
-                        <li>headline(h2~5)</li>
-                        <li>breadcrumb</li>
+                        <li><del>header</del></li>
+                        <li><del>footer</del></li>
+                        <li><del>headline(h2~5)</del></li>
+                        <li><del>breadcrumb</del></li>
                     </ul>
                 </dd>
             </dl>
@@ -22,8 +22,8 @@
                     <ul>
                         <li>button</li>
                         <li>tab</li>
-                        <li>search</li>
-                        <li>pagination</li>
+                        <li><del>search</del></li>
+                        <li><del>pagination</del></li>
                     </ul>
                 </dd>
             </dl>
