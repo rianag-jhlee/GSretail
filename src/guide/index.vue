@@ -32,8 +32,7 @@
                 <dt>Forms</dt>
                 <dd>
                     <ul>
-                        <li>input</li>
-                        <li>radio / check</li>
+                        <li>input / radio / check</li>
                         <li>selectbox</li>
                         <li>multi form</li>
                     </ul>
