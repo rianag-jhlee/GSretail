@@ -2,7 +2,7 @@
     <div class="input_wrap" :class="[`type-${type}`, { err: isError, disabled: isDisabled }]">
         <!-- checkbox / radio -->
         <label v-if="isCheckType" :class="['check', { check_ani: isswitch }]">
-            <input :id="id" :name="name" :type="type" v-model="model" :disabled="isDisabled" />
+            <input :id="id" :name="name" :type="type" :value="value" v-model="model" :disabled="isDisabled" />
             <em class="label">{{ text }}</em>
         </label>
 
@@ -60,6 +60,11 @@ export default {
         type: {
             type: String,
             default: "text"
+        },
+
+        value: {
+            type: [String, Number, Boolean],
+            default: null
         },
 
         modelValue: {

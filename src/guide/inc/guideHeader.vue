@@ -6,7 +6,7 @@
 
         <nav>
             <ul class="depth1">
-                <li v-for="(i, index) in menu" :key="i.item" :class="{ current: $route.path.startsWith(i.link) }">
+                <li v-for="(i, index) in menu" :key="index" :class="{ current: $route.path.startsWith(i.link) }">
                     <router-link :to="i.link">
                         {{ i.item }}
                     </router-link>
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style scoped>
-    header {padding:10px 20px; text-align:center;}
+    header {padding:10px 20px 0; text-align:center; position:sticky; top:0; z-index:100; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);}
     header h1 {padding-bottom:20px; color:#3366cc; font-size:2.4rem;}
     header nav {margin:0 -20px; border-top:1px solid #dfdfdf; border-bottom:1px solid #dfdfdf; justify-content:center;}
     header .depth1 > li {flex:1;}

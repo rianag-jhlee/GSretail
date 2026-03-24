@@ -31,14 +31,15 @@
                 <strong class="tit">Code</strong>
                 <a href="#none">OPEN</a>
             </p>
-            <pre class="code_box"><code>&lt;Inputs {{ input_opt.opt }} /&gt;</code></pre>
+            <pre class="code_box">
+<code>&lt;Inputs {{ input_opt.opt }} /&gt;</code></pre>
         </section>
 
         <section>
             <h4>Select</h4>
             <ul class="explain">
-                <li><strong>type</strong> : text/password/check/radio/switch 선택 // default="text"</li>
-                <li><strong>isswitch</strong> : true/false ※checkbox의 스위치 형태 // default="false"</li>
+                <li><strong>v-model</strong> : 선택한 옵션값 적용</li>
+                <li><strong>initMsg</strong> : placeholder // default = "선택하세요."</li>
             </ul>
 
             <p class="tit_wrap">
@@ -53,16 +54,19 @@
                 <strong class="tit">Code</strong>
                 <a href="#none">OPEN</a>
             </p>
-            <pre class="code_box"><code>&lt;SelectBox :options="[
-    { val: '', txt: '선택하세요' },
-    { val: 'A', txt: '옵션 A' },
-    { val: 'B', txt: '옵션 B' }
-]" v-model="selected" initMsg="선택해주세요" /&gt;
+            <pre class="code_box">
+<code>&lt;template&gt;
+    &lt;SelectBox :options="[
+        { value: '', label: '선택하세요' },
+        { value: 'A', label: '옵션 A' },
+        { value: 'B', label: '옵션 B' }
+    ]" v-model="selected" initMsg="선택해주세요" /&gt;
+&lt;/template&gt;
 
 &lt;script&gt;
     data() {
         return {
-            selected: ""
+            selected: "" //셀렉트 콤포넌트가 여러개 일 경우 변수 추가.
         };
     }
 &lt;/script&gt;</code></pre>
@@ -110,15 +114,14 @@ export default {
             ],
 
             /* select */
-            selected: "",
-            selected2: "",
+            selected: "", //초기 선택값 지정할땐 vaule 값 입력
             options: [
-                { val: "opt1", txt: "text 01" },
-                { val: "opt2", txt: "text 02" },
-                { val: "opt3", txt: "text 03" },
-                { val: "opt4", txt: "text 04" },
-                { val: "opt5", txt: "text 05" },
-                { val: "opt6", txt: "text 06" },
+                { value: "opt1", label: "text 01" },
+                { value: "opt2", label: "text 02" },
+                { value: "opt3", label: "text 03" },
+                { value: "opt4", label: "text 04" },
+                { value: "opt5", label: "text 05" },
+                { value: "opt6", label: "text 06" },
             ],
         };
     },

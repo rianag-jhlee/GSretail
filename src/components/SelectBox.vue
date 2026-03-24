@@ -3,14 +3,14 @@
         <div>
             <select :class="{ changed }" :value="modelValue" @change="onChange" :disabled="isDisabled">
                 <!-- placeholder -->
-                <!-- <option value="" disabled :hidden="modelValue !== ''"> -->
-                <option value="" disabled hidden>
+                <option value="" disabled :hidden="modelValue !== ''">
+                <!-- <option value="" disabled hidden> -->
                     {{ initMsg }}
                 </option>
 
                 <!-- options -->
-                <option v-for="(select, i) in options" :key="i" :value="select.val">
-                    {{ select.txt }}
+                <option v-for="(select, i) in options" :key="i" :value="select.value">
+                    {{ select.label }}
                 </option>
             </select>
         </div>
@@ -42,28 +42,16 @@ export default {
 
     emits: ["update:modelValue", "change"],
 
-    data() {
-        return {
-            changed: false
-        };
-    },
-
-    watch: {
-        modelValue(v) {
-            this.changed = v !== "" && v !== null;
+    computed: {
+        changed() {
+            return this.modelValue !== "" && this.modelValue !== null;
         }
     },
 
     methods: {
         onChange(e) {
             const value = e.target.value;
-
-            this.changed = true;
-
-            // v-model 업데이트
             this.$emit("update:modelValue", value);
-
-            // 필요하면 change 이벤트도 전달
             this.$emit("change", value);
         }
     }
