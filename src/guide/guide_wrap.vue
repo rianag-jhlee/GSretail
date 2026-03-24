@@ -50,7 +50,7 @@ export default {
 @import "@/assets/css/common.css";
 
 #guide_container {margin:50px auto; padding:0 20px;}
-#guide_wrap h2 {margin-bottom:20px; padding-bottom:5px; color:#009999; font-size:2.4rem; border-bottom:1px dotted #d4d4d4;}
+#guide_wrap .contents > h2 {margin-bottom:20px; padding-bottom:5px; color:#009999; font-size:2.4rem; border-bottom:1px dotted #d4d4d4;}
 #guide_wrap section + section {margin-top:20px; padding-top:20px; border-top:1px dashed #d4d4d4;}
 
 #guide_wrap .design_box {margin-top:10px; padding:10px; border:1px solid #ddd;}

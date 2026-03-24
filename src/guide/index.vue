@@ -10,8 +10,6 @@
                         <li>layout(wrap)</li>
                         <li><del>header</del></li>
                         <li><del>footer</del></li>
-                        <li><del>headline(h2~5)</del></li>
-                        <li><del>breadcrumb</del></li>
                     </ul>
                 </dd>
             </dl>
@@ -20,10 +18,10 @@
                 <dt>Elements</dt>
                 <dd>
                     <ul>
+                        <li>headline(h2~5)</li>
+                        <li>breadcrumb</li>
                         <li>button</li>
                         <li>tab</li>
-                        <li><del>search</del></li>
-                        <li><del>pagination</del></li>
                     </ul>
                 </dd>
             </dl>
@@ -34,7 +32,7 @@
                     <ul>
                         <li>input / radio / check</li>
                         <li>selectbox</li>
-                        <li>multi form</li>
+                        <li><del>multi form</del></li>
                     </ul>
                 </dd>
             </dl>
@@ -43,9 +41,11 @@
                 <dt>List</dt>
                 <dd>
                     <ul>
-                        <li>board</li>
-                        <li>thumb</li>
-                        <li>gallery</li>
+                        <li><del>search</del></li>
+                        <li><del>pagination</del></li>
+                        <li><del>board</del></li>
+                        <li><del>thumb</del></li>
+                        <li><del>gallery</del></li>
                     </ul>
                 </dd>
             </dl>
