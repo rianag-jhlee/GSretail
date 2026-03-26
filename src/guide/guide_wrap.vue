@@ -72,5 +72,5 @@ export default {
 #guide_wrap .explain li em {font-size:1.2rem;}
 
 #guide_wrap .toolbar {margin-top:12px; display:flex; gap:4px;}
-#guide_wrap .toolbar button {padding:4px 8px; color:#fff; background-color:#222; border-radius:3px; cursor:pointer;}
+#guide_wrap .toolbar button {padding:4px 8px; color:#fff; background-color:#222; border-radius:3px;}
 </style>

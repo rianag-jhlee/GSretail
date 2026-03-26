@@ -66,7 +66,7 @@
 &lt;script&gt;
     data() {
         return {
-            selected: "" //셀렉트 콤포넌트가 여러개 일 경우 변수 추가.
+            selected: "" //초기 선택값 지정할땐 vaule 값 입력
         };
     }
 &lt;/script&gt;</code></pre>

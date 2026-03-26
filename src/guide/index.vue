@@ -41,8 +41,8 @@
                 <dt>List</dt>
                 <dd>
                     <ul>
-                        <li><del>search</del></li>
-                        <li><del>pagination</del></li>
+                        <li>search</li>
+                        <li>pagination</li>
                         <li><del>board</del></li>
                         <li><del>thumb</del></li>
                         <li><del>gallery</del></li>

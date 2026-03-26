@@ -7,25 +7,25 @@
             </li>
 
             <!-- depth1 -->
-            <li v-if="depth1" class="depth_1">
+            <li v-if="depth1" class="depth_1" @focusin="setFocus($event)" @focusout="removeFocus($event)">
                 <button v-if="depth1.children?.length">{{ depth1.text }}</button>
                 <a v-else :href="depth1.link">{{ depth1.text }}</a>
 
                 <ul v-if="depth1.children?.length">
                     <li v-for="child in depth1.children" :key="child.link">
-                        <a :href="child.link">{{ child.text }}</a>
+                        <a :href="child.link" @click="close($event)">{{ child.text }}</a>
                     </li>
                 </ul>
             </li>
 
             <!-- depth2 -->
-            <li v-if="depth2" class="depth_2">
+            <li v-if="depth2" class="depth_2" @focusin="setFocus($event)" @focusout="removeFocus($event)">
                 <button v-if="depth2.children?.length">{{ depth2.text }}</button>
                 <a v-else :href="depth2.link">{{ depth2.text }}</a>
 
                 <ul v-if="depth2.children?.length">
                     <li v-for="child in depth2.children" :key="child.link">
-                        <a :href="child.link">{{ child.text }}</a>
+                        <a :href="child.link" @click="close($event)">{{ child.text }}</a>
                     </li>
                 </ul>
             </li>
@@ -55,39 +55,48 @@ export default {
         }
     },
 
-    mounted() {
-        const $breadcrumb = $(this.$el);
+    methods: {
+        close(e) {
+            const el = e.currentTarget;
+            const openParent = el.closest(".is_open");
 
-        $breadcrumb.find("button").each(function () {
-            $(this).on("click", function (e) {
-                e.stopPropagation();
+            el.closest('ul').previousElementSibling.textContent = el.textContent;
 
-                const $btn = $(this);
-                const $ul = $btn.siblings("ul");
+            document.activeElement.blur();
 
-                $ul.stop(true, true).slideToggle(200);
+            // setTimeout(() => {
+            //     // openParent.classList.remove("is_open");
+            // }, 150);
+        },
+        /* 접근성 관련 */
+        setFocus(e) {
+            const li = e.currentTarget;
+            const CLOSE_DELAY = 150; // methods 안에서 상수 정의
 
-                $btn.closest("li").siblings("li").find("ul").stop(true, true).slideUp(200);
-            });
-            
-            $(this).siblings('ul').find('a').on("click", function (e) {
-                $(this).closest('ul').siblings('button').text($(this).text());
+            // 기존에 타이머가 있으면 clear
+            if (li.closeTimer) clearTimeout(li.closeTimer);
 
-                $(this).closest('ul').stop(true, true).slideUp(200);
-            });
-        });
+            li.closeTimer = setTimeout(() => {
+                if (li.contains(document.activeElement)) {
+                    li.classList.add("is_open");
+                }
+                li.closeTimer = null;
+            }, CLOSE_DELAY);
+        },
+        removeFocus(e) {
+            const li = e.currentTarget;
+            const CLOSE_DELAY = 150; // methods 안에서 상수 정의
 
-        $("body").on("click.breadcrumb", function () {
-            $breadcrumb.find("ul ul").slideUp(200);
-        });
+            if (li.closeTimer) clearTimeout(li.closeTimer);
 
-        $breadcrumb.on("click", function (e) {
-            e.stopPropagation();
-        });
-    },
-
-    beforeUnmount() {
-        $("body").off("click.breadcrumb");
+            li.closeTimer = setTimeout(() => {
+                if (!li.contains(document.activeElement)) {
+                    li.classList.remove("is_open");
+                }
+                li.closeTimer = null;
+            }, CLOSE_DELAY);
+        }
+        /* //접근성 관련 */
     }
 };
 </script>

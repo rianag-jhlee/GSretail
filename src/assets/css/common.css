@@ -9,6 +9,7 @@ ul, ol {list-style:none;}
 button, select, input {border:0;}
 a {text-decoration:none;}
 a:visited {color:#222;}
+button {cursor:pointer;}
 
 /* align */
 .al {text-align:left !important;}
