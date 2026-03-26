@@ -16,6 +16,7 @@
             <div class="design_box">
                 <div class="title_wrap">
                     <h2>Headline2</h2>
+                    <p class="explain">h2 설명글</p>
                 </div>
 
                 <div class="subtit_wrap">

@@ -53,16 +53,61 @@ methods: {
 }
 &lt;/script&gt;</code></pre>
         </section>
+
+        <section>
+            <h4>Pagination</h4>
+            <ul class="explain">
+                <li><strong>totalPages</strong> : 총 페이지 목록 수</li>
+                <li><strong>visiblePages</strong> : pagination 목록에 보여질 버튼 수</li>
+                <li><strong>showEllipsis</strong> : pagination 중간 생략 여부 // default = false</li>
+            </ul>
+
+            <p class="tit_wrap">
+                <strong class="tit">Design</strong>
+            </p>
+            <div class="design_box">
+                <Pagination v-model="page" :totalPages="32" :visiblePages="10" @change="handlePage" />
+            </div>
+
+            <p class="tit_wrap">
+                <strong class="tit">Code</strong>
+                <a href="#none">OPEN</a>
+            </p>
+            <pre class="code_box">
+<code>&lt;template&gt;
+    &lt;Pagination v-model="page" :totalPages="32" :visiblePages="10" :showEllipsis="false" @change="handlePage" /&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import Pagination from "@/components/Pagination.vue";
+
+data() {
+    return {
+        page: 2, // pagination 현재 선택된 페이지
+    }
+},
+methods: {
+    /* pagination */
+    handlePage(page) {
+        console.log("선택된 페이지:", page);
+        this.page = page;
+    }
+}
+&lt;/script&gt;</code></pre>
+        </section>
+
     </div>
 </template>
 
 <script>
 import Search from "@/components/Search.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
     name: "list",
     components: {
         Search,
+        Pagination,
     },
 
     data() {
@@ -78,7 +123,10 @@ export default {
                 { value: "all", label: "전체" },
                 { value: "title", label: "제목" },
                 { value: "content", label: "내용" },
-            ]
+            ],
+
+            /* 초기 선택된 페이지 */
+            page: 2,
         }
     },
     mounted() {
@@ -95,6 +143,12 @@ export default {
         handleSearch(val) {
             const i = 0;
             console.log("검색 실행:", val);
+        },
+
+        /* pagination */
+        handlePage(page) {
+            console.log("선택된 페이지:", page);
+            this.page = page;
         }
     }
 }
