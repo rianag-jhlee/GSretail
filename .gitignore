@@ -22,5 +22,6 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-# SB 폴더 전체 제외
+# 제외 폴더
 SB/
+Preview/
