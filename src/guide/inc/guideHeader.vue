@@ -22,7 +22,7 @@ export default {
     data() {
         return {
             menu: [
-                { item: "Layout", link: "/guide/layout" },
+                { item: "Info", link: "/guide/setInfo" },
                 { item: "Elements", link: "/guide/elements" },
                 { item: "Form", link: "/guide/form" },
                 { item: "List", link: "/guide/list" },

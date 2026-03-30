@@ -1,110 +1,139 @@
 <template>
     <div class="contents">
 
-        <h2>Layout</h2>
+        <h2>Info</h2>
 
         <section>
-            <h4>Layout</h4>
-            <p class="tit_wrap">
-                <strong class="tit">Design</strong>
-            </p>
-            <div class="design_box">
-                <div id="sample_wrap">
-                    <div>
-                        <em>&lt;wrap&gt;</em>
+            <h4>Language Set</h4>
+            <ul class="explain">
+                <li><strong>App.vue에서 설정 가능</strong> : const lang = ref("ko/en"); // default="ko"</li>
+                <li>main_wrap.vue, sub_wrap.vue 공통 선언</li>
+            </ul>
+            <pre class="code_box">
+<code>&lt;script&gt;
+import { ref, computed } from "vue";
 
-                        <!-- skip menu-->
-                        <div>
-                            <em>&lt;skip menu (본문/주메뉴)&gt;</em>
-                        </div>
+export default {
+    name: "App",
+    components: {},
+    setup() {
+        const route = useRoute();
+        const isGuide = computed(() =&gt; route.path.startsWith("/guide"));
 
-                        <!-- header -->
-                        <div>
-                            <em>&lt;Header /&gt;</em>
-                        </div>
-                        <!-- //header -->
+        const lang = ref("ko"); // 언어 선택 ko/en [default = "ko"]
 
-                        <!-- content -->
-                        <div>
-                            <em>&lt;router-view /&gt;</em>
-                        </div>
-                        <!-- //content -->
+        const setLang = (value) =&gt; {
+            lang.value = value; // 'ko' or 'en'
+        };
 
-                        <!-- footer -->
-                        <div>
-                            <em>&lt;Footer /&gt;</em>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        return { lang, setLang };
+    }
+};
+&lt;/script&gt;</code></pre>
         </section>
 
         <section>
-            <h4>Main_wrap</h4>
-            <p class="tit_wrap">
-                <strong class="tit">Design</strong>
-            </p>
-            <div class="design_box">
-                <div id="sample_wrap">
-                    <div id="container">
-                        <em>&lt;id="container"&gt;</em>
-                        <div>
-                            <em>&lt;id="content_wrap"&gt;</em>
-                            <div>
-                                <em>&lt;router-view /&gt;</em>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h4>Header Menu</h4>
+            <ul class="explain">
+                <li><strong>language</strong> : /assets/languag/menu/menu.(ko/en).json</li>
+            </ul>
+            <pre class="code_box">
+<code>[
+    {
+        "title": "1Depth",
+        "path": "link주소",
+        "children": [
+            {
+                "title": "2Depth",
+                "path": "link주소",
+                "blank": true, // 새창여부 true = 새창열기 // default = "false" 생략가능
+                "children": [
+                    { "title": "3Depth", "path": "link주소" },
+                ]
+            },
+        ]
+    },
+]</code></pre>
         </section>
 
         <section>
-            <h4>Sub_wrap</h4>
-            <p class="tit_wrap">
-                <strong class="tit">Design</strong>
-            </p>
-            <div class="design_box">
-                <div id="sample_wrap">
-                    <div id="container">
-                        <em>&lt;id="container"&gt;</em>
-                        <div>
-                            <em>&lt;BreadCrumb /&gt;</em>
-                        </div>
-                        <div>
-                            <em>&lt;id="content_wrap"&gt;</em>
-                            <div>
-                                <em>&lt;router-view /&gt;</em>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h4>Contents Use Language</h4>
+            <ul class="explain">
+                <li><strong>단일 선언</strong> : &#123;&#123; t.langData값 &#125;&#125;</li>
+                <li><strong>HTML 선언</strong> : v-html="t.MixType"</li>
+            </ul>
+            <pre class="code_box">
+<code>&lt;template&gt;
+    &lt;div&gt;
+        &lt;p&gt;&#123;&#123; t.Text1 &#125;&#125;&lt;/p&gt;
+        &lt;strong&gt;&#123;&#123; t.Text2 &#125;&#125;&lt;/strong&gt;
+        &lt;div v-html="t.MixType"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: "gsr-00-00-00",
+    props: {
+        lang: { type: String }, // ko/en
+    },
+    data() {
+        return {
+            langData: {
+                ko: {
+                    Text1: "문구1",
+                    Text2: "문구2",
+                    MixType: "이것은 &lt;strong&gt;혼합형&lt;/strong&gt;입니다."
+                },
+                en: {
+                    Text1: "Text1",
+                    Text2: "Test2",
+                    MixType: "This is &lt;strong&gt;MixType&lt;/strong&gt;"
+                }
+            }
+        };
+    },
+    computed: {
+        t() {
+            return this.langData[this.lang] || this.langData.ko;
+        }
+    },
+    mounted() {
+    }
+};
+&lt;/script&gt;</code></pre>
         </section>
 
     </div>
 </template>
 
 <script>
+import Header from "@/inc/Header.vue";
+import Footer from "@/inc/Footer.vue";
 
 export default {
-    name: "App",
-    props: ["openModal"],
+    name: "Layout",
+    props: {
+        lang: {
+        type: String,
+        default: "ko"
+        },
+        openModal: {
+            type: Function,
+            default: () => {}
+        }
+    },
     components: {
+        Header,
+        Footer,
     },
     data() {
-        return {
-        };
+        return {}
     },
-    mounted() {
-        /* 소스보기 */
-        $('.tit_wrap a').click(function () {
-            if ($(this).hasClass('active')) {
-                $(this).removeClass('active').parent().siblings('.code_box').slideUp();
-            } else {
-                $(this).addClass('active').parent().siblings('.code_box').slideDown();
-            }
-        });
+    computed: {
+        t() {
+            return this.langData[this.lang] || this.langData.ko;
+        }
     },
 }
 </script>
@@ -128,5 +157,9 @@ export default {
     top: -12px;
     left: 12px;
     display: inline-block;
+}
+
+#guide_wrap .code_box {
+    display:block;
 }
 </style>
