@@ -7,14 +7,18 @@
         </ul>
 
         <!-- header -->
-        <Header v-if="!isGuide" />
+        <Header v-if="!isGuide" :lang="lang" />
 
         <!-- content -->
-        <router-view></router-view>
+        <router-view v-slot="{ Component }">
+            <component :is="Component" :lang="lang" />
+        </router-view>
+
+        {{ lang }}
         <!-- //content -->
 
         <!-- footer -->
-        <Footer v-if="!isGuide" />
+        <Footer v-if="!isGuide" :lang="lang" />
     </div>
 </template>
 
@@ -22,24 +26,23 @@
 import Header from "@/inc/Header.vue";
 import Footer from "@/inc/Footer.vue";
 
-import { onMounted, computed } from "vue";
+import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 
 export default {
     name: "App",
-    components: {
-        Header,
-        Footer,
-    },
+    components: { Header, Footer },
     setup() {
         const route = useRoute();
-
         const isGuide = computed(() => route.path.startsWith("/guide"));
 
-        onMounted(() => {
-        });
+        const lang = ref("ko"); // 기본 국문
 
-        return { isGuide };
+        const setLang = (value) => {
+            lang.value = value; // 'ko' or 'en'
+        };
+
+        return { isGuide, lang, setLang };
     }
 };
 </script>

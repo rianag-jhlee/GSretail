@@ -13,7 +13,7 @@ export const guideRoutes = [
         name: "Guide_wrap",
         children: [
             { path: "", component: loadPage("index.vue") },
-            { path: "layout", component: loadPage("layout.vue") },
+            { path: "setInfo", component: loadPage("layout.vue") },
             { path: "elements", component: loadPage("elements.vue") },
             { path: "form", component: loadPage("form.vue") },
             { path: "list", component: loadPage("list.vue") },

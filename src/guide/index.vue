@@ -4,12 +4,11 @@
 
         <div class="index">
             <dl>
-                <dt>Layout</dt>
+                <dt>Info</dt>
                 <dd>
                     <ul>
-                        <li>layout(wrap)</li>
-                        <li><del>header</del></li>
-                        <li><del>footer</del></li>
+                        <li>language</li>
+                        <li>Header Menu</li>
                     </ul>
                 </dd>
             </dl>

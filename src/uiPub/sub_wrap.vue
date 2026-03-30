@@ -2,7 +2,9 @@
     <div id="container">
         <BreadCrumb />
         <div id="content_wrap">
-            <router-view />
+            <router-view v-slot="{ Component }">
+                <component :is="Component" :lang="lang" />
+            </router-view>
         </div>
     </div>
 </template>
@@ -14,6 +16,9 @@ export default {
     name: 'App',
     components: {
         BreadCrumb
+    },
+    props: {
+        lang: String
     },
     data() {
         return {}

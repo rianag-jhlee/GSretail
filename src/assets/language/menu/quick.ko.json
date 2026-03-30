@@ -1,0 +1,41 @@
+[
+    {
+        "title": "채용안내",
+        "path": "#none",
+        "children": []
+    },
+    {
+        "title": "입점상담",
+        "path": "#none",
+        "children": []
+    },
+    {
+        "title": "제휴/협력문의",
+        "path": "#none",
+        "children": []
+    },
+    {
+        "title": "고객센터",
+        "path": "#none",
+        "children": []
+    },
+    {
+        "title": "GS리테일 브랜드",
+        "path": "#none",
+        "children": []
+    },
+    {
+        "title": "회사소개",
+        "path": "",
+        "children": [
+            {
+                "title": "CEO 경영이념/비전",
+                "path": "/about/vision"
+            },
+            {
+                "title": "GS Way & GS Value",
+                "path": "/about/value"
+            }
+        ]
+    }
+]

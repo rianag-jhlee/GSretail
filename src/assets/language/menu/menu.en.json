@@ -1,0 +1,37 @@
+[
+    {
+        "title": "ABOUT GSR",
+        "path": "#none",
+        "children": [
+            {
+                "title": "CEO 인사말",
+                "path": "/about/ceo",
+                "children": []
+            },
+            {
+                "title": "회사소개",
+                "path": "",
+                "children": [
+                    { "title": "CEO 경영이념/비전", "path": "/about/vision" },
+                    { "title": "GS Way & GS Value", "path": "/about/value" }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "BRAND",
+        "path": "#none",
+        "children": [
+            {
+                "title": "GS25",
+                "path": "#none",
+                "children": [
+                    { "title": "GS25 소개 + 이미지", "path": "#none" },
+                    { "title": "홈페이지", "path": "http://gs25.gsretail.com/gscvs/ko/main", "blank": true },
+                    { "title": "공식 인스타그램", "path": "#none", "blank": true },
+                    { "title": "공식 유튜브", "path": "#none", "blank": true }
+                ]
+            }
+        ]
+    }
+]
