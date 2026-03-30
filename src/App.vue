@@ -7,7 +7,7 @@
         </ul>
 
         <!-- header -->
-        <Header v-if="!isGuide" :lang="lang" />
+        <Header v-if="!isGuide" :lang="lang" @change-lang="setLang" />
 
         <!-- content -->
         <router-view v-slot="{ Component }">
