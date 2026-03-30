@@ -26,10 +26,11 @@
             </div>
 
             <!-- select language -->
-            <dl class="language">
+            <Inputs type="checkbox" isswitch="true" text="ENG" v-model="onChangeLang" /><!-- language test -->
+            <!-- <dl class="language">
                 <dt><button >{{ lang === 'ko' ? 'language' : 'EN' }}</button></dt>
                 <dd><a :href="lang === 'ko' ? 'http://www.gsretail.com/gsretail/en/global/gsretail-main' : 'http://www.gsretail.com/gsretail/ko/company'" target="_blank">{{ lang === 'ko' ? 'GS리테일 ENG' : 'KO' }}</a></dd>
-            </dl>
+            </dl> -->
             <!-- //select language -->
         </div>
         <!-- //quick -->
@@ -46,13 +47,13 @@
                         <li v-for="item2 in item1.children" :key="item2.title">
                             <span v-if="item2.children && item2.children.length">{{ item2.title }}</span>
                             <a v-else :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{ item2.title
-                                }}</a>
+                            }}</a>
 
                             <!-- 3depth -->
                             <ul class="depth3" v-if="item2.children && item2.children.length">
                                 <li v-for="item3 in item2.children" :key="item3.title">
                                     <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{ item3.title
-                                        }}</a>
+                                    }}</a>
                                 </li>
                             </ul>
                         </li>
@@ -64,16 +65,22 @@
 </template>
 
 <script>
+import Inputs from "@/components/Inputs.vue";
+
 import menuEn from "@/assets/language/menu/menu.en.json";
 import menuKo from "@/assets/language/menu/menu.ko.json";
 import { computed } from "vue";
 
 export default {
     name: "Header",
+    components: {
+        Inputs,
+    },
     props: {
         lang: { type: String, default: "ko" }, // ko/en
     },
-    setup(props) {
+    emits: ["change-lang"], // language change for publish
+    setup(props, { emit }) {
         // 메뉴 목록 computed
         const menuList = computed(() => {
             return props.lang === "en" ? menuEn : menuKo;
@@ -110,6 +117,12 @@ export default {
             }, 150);
         };
 
+        // language change for publish
+        const onChangeLang = computed({
+            get: () => props.lang === "en",
+            set: (val) => emit("change-lang", val ? "en" : "ko")
+        });
+
         return {
             menuList,
             getLink,
@@ -117,6 +130,8 @@ export default {
             handleMouseLeave,
             setFocus,
             removeFocus,
+
+            onChangeLang, //language change
         };
     },
 };
