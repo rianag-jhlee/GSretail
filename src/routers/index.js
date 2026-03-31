@@ -13,7 +13,7 @@ const routes = [
         children: [
             {
                 path: '',
-                component: () => import("@/uiPub/gsr00/gsr-00-00-00")
+                component: () => import("@/uiPub/gsr00/gsr-00-00-00"),
             },
         ],
     },
@@ -23,7 +23,18 @@ const routes = [
         children: [
             {
                 path: '',
-                component: () => import("@/uiPub/gsr01/gsr-01-00-00")
+                component: () => import("@/uiPub/gsr01/gsr-01-00-00"),
+            },
+        ],
+    },
+    // test페이지
+    {
+        path: '/gsr02',
+        component: () => import("@/uiPub/main_wrap"),
+        children: [
+            {
+                path: '',
+                component: () => import("@/uiPub/gsr02/gsr-02-00-00"),
             },
         ],
     },
