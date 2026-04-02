@@ -1,16 +1,28 @@
 ---
-description: GSretail 프로젝트 시맨틱 마크업 및 CSS 구조 가이드라인
+description: GSretail 프로젝트 Vue 3 퍼블리싱 코딩 컨벤션 (전체 적용)
 alwaysApply: true
 ---
 
 # GSretail 코딩 컨벤션
 
-## 기술 스택
-- Vue 3 `<script setup>` (Composition API)
-- Pure CSS `<style scoped>`
-- CSS 임포트 순서: `common.css` → `ui.css`
+## 역할
+숙련된 Vue 3 전문 웹 퍼블리셔로 작업. Figma 구조가 복잡해도 불필요한 구조는 제거하고 시맨틱하게 작업.
 
-## 1. 시맨틱 마크업
+---
+
+## 1. 기술 스택
+
+- **Framework:** Vue 3 (`<script setup>` Composition API) — Options API 사용 금지
+- **Styling:** Pure CSS (`<style scoped>`)
+- **CSS Import 순서:** `common.css` → `ui.css`
+- **디렉토리:**
+  - `src/components/` — 공통 컴포넌트 (PascalCase)
+  - `src/assets/images/` — 이미지
+  - `src/assets/js/modal.js` — 팝업/토스트 제어
+
+---
+
+## 2. 시맨틱 마크업
 
 `div` 남발 금지. 콘텐츠 성격에 맞는 태그 우선 사용.
 
@@ -25,20 +37,9 @@ alwaysApply: true
 | 버튼 | `button` (type 필수) |
 | 링크 | `a` |
 
-Heading은 h1→h6 순서를 지켜 계층 구조 유지.
+Heading은 `h1` → `h6` 순서를 지켜 계층 구조 유지.
 
-## 2. 클래스 최소화 (Descendant Selector 활용)
-
-불필요한 클래스 부여 지양. 부모 클래스 + 태그 조합으로 선택.
-
-```css
-/* ❌ BAD */
-.brand_title { ... }
-
-/* ✅ GOOD */
-.sec_brand > h2 { ... }
-.news_head > p { ... }
-```
+---
 
 ## 3. 클래스 명명 규칙
 
@@ -56,105 +57,154 @@ Heading은 h1→h6 순서를 지켜 계층 구조 유지.
 </section>
 ```
 
-## 4. 반응형 브레이크포인트
+---
 
-**PC First** 방식으로 작성. PC 스타일을 기본으로 작성하고 하위 해상도는 미디어쿼리로 override.
+## 4. 클래스 최소화 (Descendant Selector)
+
+불필요한 클래스 부여 지양. 부모 클래스 + 직계 자식(`>`) 조합으로 선택.
 
 ```css
-/* PC: 1025px 이상 — 기본값으로 작성 */
+/* ❌ BAD */
+.brand_title { ... }
 
-/* Tablet: 769px ~ 1024px */
-@media screen and (max-width: 1024px) { ... }
-
-/* Mobile: 768px 이하 */
-@media screen and (max-width: 768px) { ... }
+/* ✅ GOOD */
+.sec_brand > h2 { ... }
+.sec_news header > p { ... }
 ```
 
-### 콘텐츠 최대 너비 (PC 기준)
+---
 
-| 페이지 유형 | 콘텐츠 폭 | 클래스 예시 |
-|---|---|---|
-| 메인 페이지 | 1680px | `.inner_1680` |
-| 서브 페이지 | 1420px | `.inner_1420` |
-| 정보 밀집형 (IR, 공시 등) | 1280px | `.inner_1280` |
+## 5. 반응형 (PC First)
 
-※ 페이지 성격에 따라 콘텐츠 폭을 유동적으로 운영. 단일 고정 폭 아님.
+PC 스타일 기본 작성 후 미디어쿼리로 하위 해상도 오버라이드.
 
-### 뷰포트 기준
+```css
+/* PC: 1025px 이상 — 기본값 */
 
-| 구간 | 해상도 |
+/* Tablet: 769px ~ 1024px */
+@media (max-width: 1024px) { ... }
+
+/* Mobile: 768px 이하 */
+@media (max-width: 768px) { ... }
+```
+
+### 콘텐츠 최대 너비
+
+| 페이지 유형 | 콘텐츠 폭 |
 |---|---|
-| PC | 기준 1920×1080 / 최대 2560px |
-| Tablet | 820×1180 기준, 769px~1024px 적용 |
-| Mobile | iOS 375×812 / AOS 360×780, 좌우 패딩 20px |
+| 메인 페이지 | 1680px |
+| 서브 페이지 | 1420px |
+| 정보 밀집형 (IR, 공시 등) | 1280px |
 
-## 5. Vue 컴포넌트 규칙
+- **Mobile:** 좌우 패딩 20px 필수
+- **PC 기준:** 1920×1080 / 최대 2560px
+- **Tablet 기준:** 820×1180
+
+---
+
+## 6. Vue 컴포넌트 규칙
 
 ```vue
 <script setup>
 import { ref, computed, defineProps, defineEmits } from "vue";
-// defineProps, defineEmits 반드시 명시적 import
 </script>
 ```
 
-- `defineProps` / `defineEmits` 반드시 vue에서 명시적으로 import
-- Options API 사용 금지 (신규 작업 기준)
-- 이미지: `import img from "@/assets/images/..."` 로 import 후 바인딩
+- `ref`, `computed`, `defineProps`, `defineEmits` 반드시 `vue`에서 명시적 import
+- Options API(`data()`, `methods`) 사용 금지
+- 이미지: `import imgSrc from "@/assets/images/..."` 후 바인딩. 존재하지 않는 경로는 주석 처리
+- `new URL(..., import.meta.url)` 방식 사용 불가 (Webpack 환경)
 
-## 6. 공통 컴포넌트 (`src/components/`)
+---
 
-### 디렉토리 구조
+## 7. 다국어 처리 (langData 패턴)
+
+```vue
+<script setup>
+import { ref, computed } from "vue";
+
+const langData = {
+  ko: { Title: "안녕하세요", Desc: "설명 텍스트" },
+  en: { Title: "Hello",     Desc: "Description" },
+};
+
+const locale = ref("ko");
+const t = computed(() => langData[locale.value]);
+</script>
+
+<template>
+  <h2>{{ t.Title }}</h2>
+  <p v-html="t.Desc" />
+</template>
 ```
-components/
-├── BreadCrumb.vue
-├── Buttons.vue
-├── Inputs.vue
-├── SelectBox.vue
-├── Tabs.vue
-└── Anchor.vue
-```
 
-### 공통 규칙
-- 컴포넌트명: PascalCase
-- 상태 제어는 `props`로 전달
-- 클래스 구분자: `_` (언더스코어)
+- 순수 텍스트: `{{ t.Key }}`
+- HTML 포함(줄바꿈 등): `v-html="t.Key"`
 
-### 컴포넌트별 가이드
+---
 
-**Buttons.vue**
+## 8. 공통 컴포넌트
+
+### Buttons.vue
 ```html
-<!-- 사이즈: btn_small / btn_mid / btn_[default] / btn_big -->
-<!-- 타입: fill(배경색) / border(테두리선) -->
+<!-- 사이즈: btn_small / btn_mid / btn_big -->
+<!-- 타입: fill / border -->
 <Buttons btn-class="btn_mid fill" />
 <Buttons btn-class="btn_mid border" />
-<!-- 색상 추가 시 색상 클래스 병기 -->
 <!-- 테두리+배경 혼합: border_[색상클래스]01~ -->
+<Buttons btn-class="btn_mid border_white01" />
 ```
 
-**Tabs.vue**
+### Tabs.vue
 ```html
-<!-- slide: 탭 슬라이드 여부 (true/false), default=false -->
-<!-- 선택된 탭은 중앙 정렬 -->
+<!-- slide: true/false (기본 false), 선택 탭 중앙 정렬 -->
 <Tabs :slide="false" />
 ```
 
-**Inputs.vue**
+### Inputs.vue
 ```html
-<!-- type: text / password / check / radio / switch, default=text -->
+<!-- type: text / password / check / radio / switch -->
 <Inputs type="text" />
 <Inputs type="check" />
+<Inputs type="switch" isswitch />
 ```
 
-※ 사용 예시는 `src/guide/` 폴더 퍼블리싱 가이드 페이지 참고.
+### SelectBox.vue
+```html
+<!-- options 배열 전달, initMsg로 placeholder 설정 -->
+<SelectBox :options="['옵션1', '옵션2']" initMsg="선택하세요" />
+```
 
-## 7. 이미지 처리
+### Anchor.vue
+```html
+<!-- size: md(기본) / sm -->
+<Anchor href="#none" />
+<Anchor href="#none" size="sm" />
+<!-- 아이콘 색상 커스텀 -->
+<Anchor href="#none" iconColor="#fff" bgColor="transparent" />
+```
+
+---
+
+## 9. Modal & Toast
 
 ```js
-// ✅ Webpack 환경에서 올바른 방식
-import imgSrc from "@/assets/images/example.png";
+// 팝업 열기
+modal.open(popId, type, el, cont);
 
-// ❌ Vite 전용 (이 프로젝트에서 사용 불가)
-new URL("@/assets/...", import.meta.url)
+// 토스트
+modal.toast(type, msg, time);
 ```
 
-존재하지 않는 이미지 경로는 반드시 주석 처리.
+HTML 속성 방식:
+```html
+<button data-popid="alertPop" data-type="alert" data-cont="내용">열기</button>
+<button data-type="toast" data-msg="저장되었습니다.">토스트</button>
+```
+
+---
+
+## 10. 가이드 페이지 참고
+
+`src/guide/` 폴더의 퍼블리싱 가이드 페이지를 항상 참고.
+단, 가이드 내 코드는 반드시 `<script setup>` 방식으로 변환하여 작성.
