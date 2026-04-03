@@ -246,6 +246,210 @@ export default {
 &lt;/script&gt;</code></pre>
         </section>
 
+        <section>
+            <h4>accordion</h4>
+            <ul class="explain">
+                <li><strong>Accordion</strong> · <code>multiple</code>: <code>false</code>(기본) Single — 하나 열리면 나머지 닫힘 / <code>true</code> Multi — 여러 패널 동시 오픈</li>
+                <li><strong>AccordionItem</strong> · <code>item-key</code> 형제 간 고유 값(문자·숫자) 필수 · <code>#title</code> 제목 슬롯 · 기본 슬롯 본문</li>
+            </ul>
+
+            <p class="tit_wrap">
+                <strong class="tit">Design</strong>
+            </p>
+            <div class="design_box accordion_guide_box">
+                <p class="accordion_guide_label">Single · <code>:multiple="false"</code> (기본)</p>
+                <Accordion class="accordion_guide_acc">
+                    <AccordionItem item-key="sg1">
+                        <template #title>첫 번째 항목</template>
+                        <p>한 번에 하나만 열립니다. 다른 항목을 열면 이전 패널은 닫힙니다.</p>
+                    </AccordionItem>
+                    <AccordionItem item-key="sg2">
+                        <template #title>두 번째 항목</template>
+                        <p>본문은 문단, 리스트 등 자유롭게 넣을 수 있습니다.</p>
+                    </AccordionItem>
+                    <AccordionItem item-key="sg3">
+                        <template #title>세 번째 항목</template>
+                        <p>제목은 <code>#title</code> 슬롯으로 구성합니다.</p>
+                    </AccordionItem>
+                </Accordion>
+
+                <p class="accordion_guide_label">Multi · <code>:multiple="true"</code></p>
+                <Accordion :multiple="true" class="accordion_guide_acc">
+                    <AccordionItem item-key="m1">
+                        <template #title>동시 오픈 A</template>
+                        <p>여러 패널을 동시에 열 수 있습니다.</p>
+                    </AccordionItem>
+                    <AccordionItem item-key="m2">
+                        <template #title>동시 오픈 B</template>
+                        <p>각 항목의 <code>item-key</code>는 Accordion 안에서 중복되지 않게 지정합니다.</p>
+                    </AccordionItem>
+                </Accordion>
+            </div>
+
+            <p class="tit_wrap">
+                <strong class="tit">Code</strong>
+                <a href="#none">OPEN</a>
+            </p>
+            <pre class="code_box">
+<code>&lt;template&gt;
+    &lt;Accordion&gt;
+        &lt;AccordionItem item-key="1"&gt;
+            &lt;template #title&gt;제목&lt;/template&gt;
+            &lt;p&gt;본문&lt;/p&gt;
+        &lt;/AccordionItem&gt;
+    &lt;/Accordion&gt;
+
+    &lt;Accordion :multiple="true"&gt;
+        &lt;AccordionItem item-key="a"&gt;
+            &lt;template #title&gt;Multi 제목&lt;/template&gt;
+            &lt;p&gt;본문&lt;/p&gt;
+        &lt;/AccordionItem&gt;
+    &lt;/Accordion&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import Accordion from "@/components/Accordion.vue";
+import AccordionItem from "@/components/AccordionItem.vue";
+&lt;/script&gt;</code></pre>
+        </section>
+
+        <section>
+            <h4>date input</h4>
+            <ul class="explain">
+                <li><strong>레이블</strong> · <code>label</code> 또는 <code>#label</code> 슬롯 — 입력 안내</li>
+                <li><strong>입력 필드</strong> · <code>.date_input_row</code> 배경으로 필드 영역 구분, 흰색 <code>.date_input_field</code> 안에 텍스트 입력</li>
+                <li><strong>달력 버튼(선택)</strong> · <code>:show-calendar-button="false"</code>로 숨김 · 클릭 시 레이어에 네이티브 <code>type="date"</code> 표시(브라우저 달력)</li>
+                <li><strong>도움말(선택)</strong> · <code>hint</code> 일반 안내 · <code>isError</code> + <code>errorMessage</code> 오류 시 <code>role="alert"</code></li>
+                <li><strong>플레이스홀더(선택)</strong> · <code>placeholder</code>로 입력 형식 힌트(예: YYYY-MM-DD)</li>
+            </ul>
+
+            <p class="tit_wrap">
+                <strong class="tit">Design</strong>
+            </p>
+            <div class="design_box date_input_guide_box">
+                <DateInput
+                    id="guide_date_full"
+                    v-model="dateGuideFull"
+                    label="시작일"
+                    name="guide_date_full"
+                    placeholder="YYYY-MM-DD"
+                    hint="하이픈(-)으로 구분된 연·월·일 형식으로 입력하거나, 달력 버튼으로 선택할 수 있습니다."
+                />
+                <DateInput
+                    id="guide_date_min"
+                    v-model="dateGuideMin"
+                    label="종료일(달력 버튼 없음)"
+                    name="guide_date_min"
+                    :show-calendar-button="false"
+                    placeholder="YYYY-MM-DD"
+                />
+                <DateInput
+                    id="guide_date_err"
+                    v-model="dateGuideErr"
+                    label="오류 예시"
+                    name="guide_date_err"
+                    placeholder="YYYY-MM-DD"
+                    :is-error="true"
+                    error-message="올바른 날짜 형식이 아닙니다. 예: 2026-04-03"
+                />
+            </div>
+
+            <p class="tit_wrap">
+                <strong class="tit">Code</strong>
+                <a href="#none">OPEN</a>
+            </p>
+            <pre class="code_box">
+<code>&lt;DateInput
+    id="start_date"
+    v-model="startDate"
+    label="시작일"
+    name="start_date"
+    placeholder="YYYY-MM-DD"
+    hint="형식 안내 또는 도움말"
+/&gt;
+
+&lt;!-- 달력 버튼 숨김 --&gt;
+&lt;DateInput
+    v-model="endDate"
+    label="종료일"
+    :show-calendar-button="false"
+    placeholder="YYYY-MM-DD"
+/&gt;
+
+&lt;!-- 오류 --&gt;
+&lt;DateInput
+    v-model="due"
+    label="마감일"
+    :is-error="true"
+    error-message="올바른 날짜 형식이 아닙니다."
+/&gt;
+
+&lt;script setup&gt;
+import { ref } from "vue";
+import DateInput from "@/components/DateInput.vue";
+
+const startDate = ref("");
+&lt;/script&gt;</code></pre>
+        </section>
+
+        <section>
+            <h4>card</h4>
+            <ul class="explain">
+                <li><strong>CardItem</strong> · 이미지(<code>#image</code>) + 제목(<code>#title</code>) + 본문(기본 슬롯) · 쓰지 않는 영역은 슬롯 자체를 생략</li>
+                <li>이미지는 부모에서 <code>import</code> 후 <code>&lt;img&gt;</code>로 <code>#image</code>에 전달 · 루트는 <code>article.card_item</code></li>
+                <li>목록은 <code>ul</code> + <code>li</code>로 감싸 <code>role="list"</code> 유지 · 실제 페이지에서는 <code>v-for</code>로 데이터 배열과 매핑하면 됨</li>
+            </ul>
+
+            <p class="tit_wrap">
+                <strong class="tit">Design</strong>
+            </p>
+            <div class="design_box">
+                <ul class="card_list" role="list">
+                    <li
+                        v-for="card in cardGuideList"
+                        :key="card.key"
+                    >
+                        <CardItem>
+                            <template v-if="card.image" #image>
+                                <img :src="card.image" :alt="card.imgAlt || ''" />
+                            </template>
+                            <template v-if="card.title" #title>{{ card.title }}</template>
+                            <p v-if="card.desc">{{ card.desc }}</p>
+                        </CardItem>
+                    </li>
+                </ul>
+            </div>
+
+            <p class="tit_wrap">
+                <strong class="tit">Code</strong>
+                <a href="#none">OPEN</a>
+            </p>
+            <pre class="code_box" v-pre>
+<code>&lt;template&gt;
+    &lt;ul class="card_list" role="list"&gt;
+        &lt;li v-for="card in cards" :key="card.id"&gt;
+            &lt;CardItem&gt;
+                &lt;template v-if="card.image" #image&gt;
+                    &lt;img :src="card.image" :alt="card.imgAlt || ''" /&gt;
+                &lt;/template&gt;
+                &lt;template v-if="card.title" #title&gt;{{ card.title }}&lt;/template&gt;
+                &lt;p v-if="card.desc"&gt;{{ card.desc }}&lt;/p&gt;
+            &lt;/CardItem&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref } from "vue";
+import CardItem from "@/components/CardItem.vue";
+import thumb from "@/assets/images/news_01.png";
+
+const cards = ref([
+    { id: 1, image: thumb, imgAlt: "", title: "제목", desc: "본문" },
+]);
+&lt;/script&gt;</code></pre>
+        </section>
+
     </div>
 </template>
 
@@ -253,16 +457,63 @@ export default {
 import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
 import BreadCrumb from "@/components/BreadCrumb.vue";
+import Accordion from "@/components/Accordion.vue";
+import AccordionItem from "@/components/AccordionItem.vue";
+import CardItem from "@/components/CardItem.vue";
+import DateInput from "@/components/DateInput.vue";
+import cardGuideImg1 from "@/assets/images/main_bg_01.png";
+import cardGuideImg2 from "@/assets/images/main_bg_02.png";
+import cardGuideImg3 from "@/assets/images/main_bg_03.png";
 
 export default {
     name: "Elements",
     components: {
         BreadCrumb,
         Tabs,
-        Buttons
+        Buttons,
+        Accordion,
+        AccordionItem,
+        CardItem,
+        DateInput,
     },
     data() {
         return {
+            dateGuideFull: "",
+            dateGuideMin: "",
+            dateGuideErr: "99-99-99",
+
+            /*카드 가이드 목록*/ 
+            cardGuideList: [
+                {
+                    key: 1,
+                    image: cardGuideImg1,
+                    imgAlt: "",
+                    title: "이미지·제목·본문 전체",
+                    desc: "카드 본문입니다. 문단·리스트 등 자유롭게 넣을 수 있습니다.",
+                },
+                {
+                    key: 2,
+                    image: cardGuideImg2,
+                    imgAlt: "",
+                    title: "제목만 (본문 없음)",
+                    desc: null,
+                },
+                {
+                    key: 3,
+                    image: cardGuideImg3,
+                    imgAlt: "",
+                    title: null,
+                    desc: "제목 없이 본문만 있는 카드입니다.",
+                },
+                {
+                    key: 4,
+                    image: cardGuideImg1,
+                    imgAlt: "이미지 단독 카드",
+                    title: null,
+                    desc: null,
+                },
+            ],
+
             /* breadcrumb 관련 */
             breadcrumb: [
                 {
@@ -328,4 +579,62 @@ export default {
 .tab_wrap {
     margin-bottom: 0;
 }
+
+.accordion_guide_box {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 720px;
+}
+
+.accordion_guide_label {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+}
+
+.accordion_guide_acc {
+    width: 100%;
+}
+
+.date_input_guide_box {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 440px;
+}
+
+/* 카드 가이드: ul.card_list + CardItem */
+.card_list {
+    display: grid;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+.card_list > li {
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+}
+
+@media (max-width: 1024px) {
+    .card_list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .card_list {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+}
+
 </style>
