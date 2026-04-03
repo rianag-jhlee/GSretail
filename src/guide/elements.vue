@@ -155,6 +155,24 @@ data() {
             </p>
             <div class="design_box">
                 <Tabs @change="onTabChange1" v-model="CTabIdx" :tab-items="tabs" tab-class="type_01" :tab-slide="false" />
+                <div class="tab_content mt10" v-if="CTabIdx === 0">
+                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_01" :tab-slide="false" />
+                    <div class="sub_cont" v-if="SUBTabIdx === 0">1</div>
+                    <div class="sub_cont" v-if="SUBTabIdx === 1">2</div>
+                    <div class="sub_cont" v-if="SUBTabIdx === 2">3</div>
+                </div>
+                <div class="tab_content mt10" v-if="CTabIdx === 1">
+                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_01" :tab-slide="false" />
+                    <div class="sub_cont" v-if="SUBTabIdx === 0">4</div>
+                    <div class="sub_cont" v-if="SUBTabIdx === 1">5</div>
+                    <div class="sub_cont" v-if="SUBTabIdx === 2">6</div>
+                </div>
+                <div class="tab_content mt10" v-if="CTabIdx === 2">
+                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_01" :tab-slide="false" />
+                    <div class="sub_cont" v-if="SUBTabIdx === 0">7</div>
+                    <div class="sub_cont" v-if="SUBTabIdx === 1">8</div>
+                    <div class="sub_cont" v-if="SUBTabIdx === 2">9</div>
+                </div>
             </div>
 
             <p class="tit_wrap">
@@ -164,6 +182,28 @@ data() {
             <pre class="code_box">
 <code>&lt;template&gt;
     &lt;Tabs @change="탭 클릭 기능" v-model="CTabIdx(초기 선택 탭 index)" :tab-items="탭 아이템 목록" tab-class="탭 클래스" :tab-slide="슬라이드여부" /&gt;
+
+    ============================== 실제 사용 시 =====================================
+
+    &lt;Tabs @change="onTabChange1" v-model="CTabIdx" :tab-items="tabs" tab-class="type_01" :tab-slide="false" /&gt;
+    &lt;div class="tab_content mt10" v-if="CTabIdx === 0"&gt;
+        &lt;Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_01" :tab-slide="false" /&gt;
+        &lt;div class="sub_cont" v-if="SUBTabIdx === 0"&gt;1&lt;/div&gt;
+        &lt;div class="sub_cont" v-if="SUBTabIdx === 1"&gt;2&lt;/div&gt;
+        &lt;div class="sub_cont" v-if="SUBTabIdx === 2"&gt;3&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="tab_content mt10" v-if="CTabIdx === 1"&gt;
+        &lt;Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_01" :tab-slide="false" /&gt;
+        &lt;div class="sub_cont" v-if="SUBTabIdx === 0"&gt;4&lt;/div&gt;
+        &lt;div class="sub_cont" v-if="SUBTabIdx === 1"&gt;5&lt;/div&gt;
+        &lt;div class="sub_cont" v-if="SUBTabIdx === 2"&gt;6&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="tab_content mt10" v-if="CTabIdx === 2"&gt;
+        &lt;Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_01" :tab-slide="false" /&gt;
+        &lt;div class="sub_cont" v-if="SUBTabIdx === 0"&gt;7&lt;/div&gt;
+        &lt;div class="sub_cont" v-if="SUBTabIdx === 1"&gt;8&lt;/div&gt;
+        &lt;div class="sub_cont" v-if="SUBTabIdx === 2"&gt;9&lt;/div&gt;
+    &lt;/div&gt;
 &lt;/template&gt;
 
 &lt;script&gt;
@@ -177,16 +217,30 @@ export default {
     data() {
         return {
             CTabIdx: 0, //최초 선택된 탭 index
+            SUBTabIdx: 0, //최초 선택된 서브 탭 index   
             tabs: [ //탭 아이템 배열
                 { item: "Tab01" },
-                { item: "Tab02" }
-            ]
+                { item: "Tab02" },
+                { item: "Tab03" }
+            ],
+            tab2: [ //탭 아이템 배열
+                { item: "sub01" },
+                { item: "sub02" },
+                { item: "sub03" }
+            ],
         };
     },
     methods: {
-        onTabChange1(idx) { //탭 클릭 기능
-            console.log(idx);
+        onTabChange1(idx) {
+            // [수정 핵심] 상위 탭 변경 시 하위 탭 인덱스를 0으로 초기화
+            this.CTabIdx = idx;
+            this.SUBTabIdx = 0; 
+            console.log('Main Tab:', idx);
         },
+        onTabChange2(idx) {
+            this.SUBTabIdx = idx;
+            console.log('Sub Tab:', idx);
+        }
     },
 }
 &lt;/script&gt;</code></pre>
@@ -230,25 +284,32 @@ export default {
             ],
 
             /* tab관련 */
-            CTabIdx: 0,
-            tabs: [
+            CTabIdx: 0, //최초 선택된 탭 index
+            SUBTabIdx: 0, //최초 선택된 서브 탭 index   
+            tabs: [ //탭 아이템 배열
                 { item: "Tab01" },
                 { item: "Tab02" },
-                { item: "Tab03" },
-                { item: "Tab04" },
-                { item: "Tab05" },
-                { item: "Tab06" },
-                { item: "Tab07" },
-                { item: "Tab08" },
-                { item: "Tab09" },
-                { item: "Tab10" }
-            ]
+                { item: "Tab03" }
+            ],
+            tab2: [ //탭 아이템 배열
+                { item: "sub01" },
+                { item: "sub02" },
+                { item: "sub03" }
+            ],
         };
     },
     methods: {
+        /* tab 관련 함수 */
         onTabChange1(idx) {
-            console.log(idx);
+            // [수정 핵심] 상위 탭 변경 시 하위 탭 인덱스를 0으로 초기화
+            this.CTabIdx = idx;
+            this.SUBTabIdx = 0; 
+            console.log('Main Tab:', idx);
         },
+        onTabChange2(idx) {
+            this.SUBTabIdx = idx;
+            console.log('Sub Tab:', idx);
+        }
     },
     mounted() {
         /* 소스보기 */
