@@ -131,7 +131,7 @@ label.select > div:after {width:12px; height:12px; margin-top:-4px; border:1px s
 label.select select {color:#aaa; background-color:transparent; -moz-appearance:none;}
 label.select select:disabled {background-color:#eee; border-color:#ddd;}
 label.select select.changed {color:#222;}
-label.select > em {margin-top:5px; color:#F24F39; font-size:1.2rem;; font-family:'Noto Sans'; line-height:18px; display:none;}
+label.select > em {margin-top:5px; color:#F24F39; font-size:1.2rem; line-height:18px; display:none;}
 label.select.err > em {display:block;}
 
 @media screen and (max-width:1024px) {
