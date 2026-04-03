@@ -177,11 +177,14 @@ const t = computed(() => langData[locale.value]);
 
 ### Anchor.vue
 ```html
-<!-- size: md(기본) / sm -->
-<Anchor href="#none" />
-<Anchor href="#none" size="sm" />
-<!-- 아이콘 색상 커스텀 -->
-<Anchor href="#none" iconColor="#fff" bgColor="transparent" />
+<!-- type: go(기본, 슬롯으로 이미지+텍스트) / more(텍스트+화살표) · url · text · is-target -->
+<Anchor type="go" url="#none" text="바로가기" />
+<Anchor type="go" url="#none">
+  <img :src="anchorImg" width="20" height="20" alt="" />
+  <span class="btn_anchor_text">라벨</span>
+</Anchor>
+<Anchor type="more" url="#none" text="더보기" />
+<Anchor type="more" url="https://example.com" text="새 탭" :is-target="true" />
 ```
 
 ---
