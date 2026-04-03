@@ -1,0 +1,213 @@
+---
+description: GSretail 프로젝트 Vue 3 퍼블리싱 코딩 컨벤션 (전체 적용)
+alwaysApply: true
+---
+
+# GSretail 코딩 컨벤션
+
+## 역할
+숙련된 Vue 3 전문 웹 퍼블리셔로 작업. Figma 구조가 복잡해도 불필요한 구조는 제거하고 시맨틱하게 작업.
+
+---
+
+## 1. 기술 스택
+
+- **Framework:** Vue 3 (`<script setup>` Composition API) — Options API 사용 금지
+- **Styling:** Pure CSS (`<style scoped>`)
+- **CSS Import 순서:** `common.css` → `ui.css`
+- **디렉토리:**
+  - `src/components/` — 공통 컴포넌트 (PascalCase)
+  - `src/assets/images/` — 이미지
+  - `src/assets/js/modal.js` — 팝업/토스트 제어
+
+---
+
+## 2. 시맨틱 마크업
+
+`div` 남발 금지. 콘텐츠 성격에 맞는 태그 우선 사용.
+
+| 용도 | 태그 |
+|---|---|
+| 페이지 영역 구분 | `section`, `article`, `aside` |
+| 상단 영역 | `header` |
+| 하단 영역 | `footer` |
+| 내비게이션 | `nav` |
+| 이미지+캡션 | `figure`, `figcaption` |
+| 목록 | `ul > li`, `ol > li` |
+| 버튼 | `button` (type 필수) |
+| 링크 | `a` |
+
+Heading은 `h1` → `h6` 순서를 지켜 계층 구조 유지.
+
+---
+
+## 3. 클래스 명명 규칙
+
+- 클래스명 구분자: `_` (언더스코어)
+- 컴포넌트 파일명: PascalCase (`Anchor.vue`, `Buttons.vue`)
+- 섹션 루트: `sec_*` (예: `sec_hero`, `sec_brand`, `sec_news`)
+
+```html
+<!-- ✅ GOOD -->
+<section class="sec_brand">
+  <h2>타이틀</h2>
+  <ul class="brand_list">
+    <li>...</li>
+  </ul>
+</section>
+```
+
+---
+
+## 4. 클래스 최소화 (Descendant Selector)
+
+불필요한 클래스 부여 지양. 부모 클래스 + 직계 자식(`>`) 조합으로 선택.
+
+```css
+/* ❌ BAD */
+.brand_title { ... }
+
+/* ✅ GOOD */
+.sec_brand > h2 { ... }
+.sec_news header > p { ... }
+```
+
+---
+
+## 5. 반응형 (PC First)
+
+PC 스타일 기본 작성 후 미디어쿼리로 하위 해상도 오버라이드.
+
+```css
+/* PC: 1025px 이상 — 기본값 */
+
+/* Tablet: 769px ~ 1024px */
+@media (max-width: 1024px) { ... }
+
+/* Mobile: 768px 이하 */
+@media (max-width: 768px) { ... }
+```
+
+### 콘텐츠 최대 너비
+
+| 페이지 유형 | 콘텐츠 폭 |
+|---|---|
+| 메인 페이지 | 1680px |
+| 서브 페이지 | 1420px |
+| 정보 밀집형 (IR, 공시 등) | 1280px |
+
+- **Mobile:** 좌우 패딩 20px 필수
+- **PC 기준:** 1920×1080 / 최대 2560px
+- **Tablet 기준:** 820×1180
+
+---
+
+## 6. Vue 컴포넌트 규칙
+
+```vue
+<script setup>
+import { ref, computed, defineProps, defineEmits } from "vue";
+</script>
+```
+
+- `ref`, `computed`, `defineProps`, `defineEmits` 반드시 `vue`에서 명시적 import
+- Options API(`data()`, `methods`) 사용 금지
+- 이미지: `import imgSrc from "@/assets/images/..."` 후 바인딩. 존재하지 않는 경로는 주석 처리
+- `new URL(..., import.meta.url)` 방식 사용 불가 (Webpack 환경)
+
+---
+
+## 7. 다국어 처리 (langData 패턴)
+
+```vue
+<script setup>
+import { ref, computed } from "vue";
+
+const langData = {
+  ko: { Title: "안녕하세요", Desc: "설명 텍스트" },
+  en: { Title: "Hello",     Desc: "Description" },
+};
+
+const locale = ref("ko");
+const t = computed(() => langData[locale.value]);
+</script>
+
+<template>
+  <h2>{{ t.Title }}</h2>
+  <p v-html="t.Desc" />
+</template>
+```
+
+- 순수 텍스트: `{{ t.Key }}`
+- HTML 포함(줄바꿈 등): `v-html="t.Key"`
+
+---
+
+## 8. 공통 컴포넌트
+
+### Buttons.vue
+```html
+<!-- 사이즈: btn_small / btn_mid / btn_big -->
+<!-- 타입: fill / border -->
+<Buttons btn-class="btn_mid fill" />
+<Buttons btn-class="btn_mid border" />
+<!-- 테두리+배경 혼합: border_[색상클래스]01~ -->
+<Buttons btn-class="btn_mid border_white01" />
+```
+
+### Tabs.vue
+```html
+<!-- slide: true/false (기본 false), 선택 탭 중앙 정렬 -->
+<Tabs :slide="false" />
+```
+
+### Inputs.vue
+```html
+<!-- type: text / password / check / radio / switch -->
+<Inputs type="text" />
+<Inputs type="check" />
+<Inputs type="switch" isswitch />
+```
+
+### SelectBox.vue
+```html
+<!-- options 배열 전달, initMsg로 placeholder 설정 -->
+<SelectBox :options="['옵션1', '옵션2']" initMsg="선택하세요" />
+```
+
+### Anchor.vue
+```html
+<!-- type: go(기본, 슬롯으로 이미지+텍스트) / more(텍스트+화살표) · url · text · is-target -->
+<Anchor type="go" url="#none" text="바로가기" />
+<Anchor type="go" url="#none">
+  <img :src="anchorImg" width="20" height="20" alt="" />
+  <span class="btn_anchor_text">라벨</span>
+</Anchor>
+<Anchor type="more" url="#none" text="더보기" />
+<Anchor type="more" url="https://example.com" text="새 탭" :is-target="true" />
+```
+
+---
+
+## 9. Modal & Toast
+
+```js
+// 팝업 열기
+modal.open(popId, type, el, cont);
+
+// 토스트
+modal.toast(type, msg, time);
+```
+
+HTML 속성 방식:
+```html
+<button data-popid="alertPop" data-type="alert" data-cont="내용">열기</button>
+<button data-type="toast" data-msg="저장되었습니다.">토스트</button>
+```
+
+---
+
+## 10. 가이드 페이지 참고
+
+`src/guide/` 폴더의 퍼블리싱 가이드 페이지를 항상 참고.
+단, 가이드 내 코드는 반드시 `<script setup>` 방식으로 변환하여 작성.
