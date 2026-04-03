@@ -59,7 +59,50 @@ Heading은 `h1` → `h6` 순서를 지켜 계층 구조 유지.
 
 ---
 
-## 4. 클래스 최소화 (Descendant Selector)
+## 4. CSS 속성 선언 순서
+
+스타일 블록 안에서는 아래 **카테고리 순서**로 선언한다. (한 카테고리에 해당 속성이 없으면 생략.)
+
+| 순서 | 구분 | 포함 속성 예시 |
+|:---:|:---|:---|
+| 1 | 넓이 | `width`, `height`, `max-width`, `min-height` … |
+| 2 | 외부 여백 | `margin`, `margin-top` … |
+| 3 | 내부 여백 | `padding`, `padding-left` … |
+| 4 | 폰트 | `color`, `font-size`, `font-family`, `font-weight`, `line-height`, `letter-spacing` … |
+| 5 | 배경 | `background`, `background-color`, `background-image` … |
+| 6 | 테두리 | `border`, `border-radius`, `outline` … |
+| 7 | 정렬 | `text-align`, `vertical-align` … |
+| 8 | 위치 | `float`, `clear`, `position`, `top` / `right` / `bottom` / `left`, `z-index` … |
+| 9 | 블록(표시·레이아웃) | `display`, `flex-*`, `grid-*`, `gap`, `overflow` … |
+| 10 | 변형 | `transform`, `transition`, `animation` … |
+
+```css
+.test {
+    width: 10px;
+    height: 10px;
+    margin: 10px;
+    padding: 10px;
+    color: #333;
+    font-size: 14px;
+    font-family: "dotum", sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    background: url("/test.jpg");
+    border: 1px solid #ccc;
+    text-align: left;
+    float: none;
+    position: relative;
+    display: block;
+    transform: rotate(90deg);
+}
+```
+
+- `flex` / `grid` 관련은 **9. 블록**에 둔다.
+- 미디어쿼리 안 블록도 동일 순서를 따른다.
+
+---
+
+## 5. 클래스 최소화 (Descendant Selector)
 
 불필요한 클래스 부여 지양. 부모 클래스 + 직계 자식(`>`) 조합으로 선택.
 
@@ -74,7 +117,7 @@ Heading은 `h1` → `h6` 순서를 지켜 계층 구조 유지.
 
 ---
 
-## 5. 반응형 (PC First)
+## 6. 반응형 (PC First)
 
 PC 스타일 기본 작성 후 미디어쿼리로 하위 해상도 오버라이드.
 
@@ -102,7 +145,7 @@ PC 스타일 기본 작성 후 미디어쿼리로 하위 해상도 오버라이�
 
 ---
 
-## 6. Vue 컴포넌트 규칙
+## 7. Vue 컴포넌트 규칙
 
 ```vue
 <script setup>
@@ -117,7 +160,7 @@ import { ref, computed, defineProps, defineEmits } from "vue";
 
 ---
 
-## 7. 다국어 처리 (langData 패턴)
+## 8. 다국어 처리 (langData 패턴)
 
 ```vue
 <script setup>
@@ -143,7 +186,7 @@ const t = computed(() => langData[locale.value]);
 
 ---
 
-## 8. 공통 컴포넌트
+## 9. 공통 컴포넌트
 
 ### Buttons.vue
 ```html
@@ -161,6 +204,24 @@ const t = computed(() => langData[locale.value]);
 <Tabs :slide="false" />
 ```
 
+### Accordion.vue · AccordionItem.vue
+```html
+<!-- 렌더: dl.board_type_toggle[.single] > 반복 (dt>a + dd) · multiple=false 일 때 .single -->
+<!-- multiple: false(기본)=한 번에 하나, true=여러 패널 동시 오픈 · item-key는 형제 간 고유 -->
+<Accordion>
+  <AccordionItem item-key="1">
+    <template #title>제목</template>
+    <p>본문</p>
+  </AccordionItem>
+</Accordion>
+<Accordion :multiple="true">
+  <AccordionItem item-key="a">
+    <template #title>제목</template>
+    <p>본문</p>
+  </AccordionItem>
+</Accordion>
+```
+
 ### Inputs.vue
 ```html
 <!-- type: text / password / check / radio / switch -->
@@ -169,10 +230,28 @@ const t = computed(() => langData[locale.value]);
 <Inputs type="switch" isswitch />
 ```
 
+### DateInput.vue
+```html
+<!-- 레이블 · 배경 구분 필드 · 달력 버튼(선택) · hint / errorMessage(선택) · placeholder(선택) -->
+<DateInput v-model="startDate" label="시작일" name="start_date" placeholder="YYYY-MM-DD" hint="형식 안내" />
+<DateInput v-model="endDate" label="종료일" :show-calendar-button="false" placeholder="YYYY-MM-DD" />
+<DateInput v-model="due" label="마감일" :is-error="true" error-message="올바른 날짜 형식이 아닙니다." />
+```
+
 ### SelectBox.vue
 ```html
 <!-- options 배열 전달, initMsg로 placeholder 설정 -->
 <SelectBox :options="['옵션1', '옵션2']" initMsg="선택하세요" />
+```
+
+### CardItem.vue
+```html
+<!-- #image · #title · 기본 슬롯(본문) — 안 쓰는 슬롯은 생략 -->
+<CardItem>
+  <template #image><img :src="thumb" alt="" /></template>
+  <template #title>제목</template>
+  <p>본문</p>
+</CardItem>
 ```
 
 ### Anchor.vue
@@ -189,7 +268,7 @@ const t = computed(() => langData[locale.value]);
 
 ---
 
-## 9. Modal & Toast
+## 10. Modal & Toast
 
 ```js
 // 팝업 열기
@@ -207,7 +286,7 @@ HTML 속성 방식:
 
 ---
 
-## 10. 가이드 페이지 참고
+## 11. 가이드 페이지 참고
 
 `src/guide/` 폴더의 퍼블리싱 가이드 페이지를 항상 참고.
 단, 가이드 내 코드는 반드시 `<script setup>` 방식으로 변환하여 작성.
