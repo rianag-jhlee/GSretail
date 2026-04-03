@@ -314,85 +314,6 @@ import AccordionItem from "@/components/AccordionItem.vue";
         </section>
 
         <section>
-            <h4>date input</h4>
-            <ul class="explain">
-                <li><strong>레이블</strong> · <code>label</code> 또는 <code>#label</code> 슬롯 — 입력 안내</li>
-                <li><strong>입력 필드</strong> · <code>.date_input_row</code> 배경으로 필드 영역 구분, 흰색 <code>.date_input_field</code> 안에 텍스트 입력</li>
-                <li><strong>달력 버튼(선택)</strong> · <code>:show-calendar-button="false"</code>로 숨김 · 클릭 시 레이어에 네이티브 <code>type="date"</code> 표시(브라우저 달력)</li>
-                <li><strong>도움말(선택)</strong> · <code>hint</code> 일반 안내 · <code>isError</code> + <code>errorMessage</code> 오류 시 <code>role="alert"</code></li>
-                <li><strong>플레이스홀더(선택)</strong> · <code>placeholder</code>로 입력 형식 힌트(예: YYYY-MM-DD)</li>
-            </ul>
-
-            <p class="tit_wrap">
-                <strong class="tit">Design</strong>
-            </p>
-            <div class="design_box date_input_guide_box">
-                <DateInput
-                    id="guide_date_full"
-                    v-model="dateGuideFull"
-                    label="시작일"
-                    name="guide_date_full"
-                    placeholder="YYYY-MM-DD"
-                    hint="하이픈(-)으로 구분된 연·월·일 형식으로 입력하거나, 달력 버튼으로 선택할 수 있습니다."
-                />
-                <DateInput
-                    id="guide_date_min"
-                    v-model="dateGuideMin"
-                    label="종료일(달력 버튼 없음)"
-                    name="guide_date_min"
-                    :show-calendar-button="false"
-                    placeholder="YYYY-MM-DD"
-                />
-                <DateInput
-                    id="guide_date_err"
-                    v-model="dateGuideErr"
-                    label="오류 예시"
-                    name="guide_date_err"
-                    placeholder="YYYY-MM-DD"
-                    :is-error="true"
-                    error-message="올바른 날짜 형식이 아닙니다. 예: 2026-04-03"
-                />
-            </div>
-
-            <p class="tit_wrap">
-                <strong class="tit">Code</strong>
-                <a href="#none">OPEN</a>
-            </p>
-            <pre class="code_box">
-<code>&lt;DateInput
-    id="start_date"
-    v-model="startDate"
-    label="시작일"
-    name="start_date"
-    placeholder="YYYY-MM-DD"
-    hint="형식 안내 또는 도움말"
-/&gt;
-
-&lt;!-- 달력 버튼 숨김 --&gt;
-&lt;DateInput
-    v-model="endDate"
-    label="종료일"
-    :show-calendar-button="false"
-    placeholder="YYYY-MM-DD"
-/&gt;
-
-&lt;!-- 오류 --&gt;
-&lt;DateInput
-    v-model="due"
-    label="마감일"
-    :is-error="true"
-    error-message="올바른 날짜 형식이 아닙니다."
-/&gt;
-
-&lt;script setup&gt;
-import { ref } from "vue";
-import DateInput from "@/components/DateInput.vue";
-
-const startDate = ref("");
-&lt;/script&gt;</code></pre>
-        </section>
-
-        <section>
             <h4>card</h4>
             <ul class="explain">
                 <li><strong>CardItem</strong> · 이미지(<code>#image</code>) + 제목(<code>#title</code>) + 본문(기본 슬롯) · 쓰지 않는 영역은 슬롯 자체를 생략</li>
@@ -460,7 +381,6 @@ import BreadCrumb from "@/components/BreadCrumb.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
 import CardItem from "@/components/CardItem.vue";
-import DateInput from "@/components/DateInput.vue";
 import cardGuideImg1 from "@/assets/images/main_bg_01.png";
 import cardGuideImg2 from "@/assets/images/main_bg_02.png";
 import cardGuideImg3 from "@/assets/images/main_bg_03.png";
@@ -474,14 +394,9 @@ export default {
         Accordion,
         AccordionItem,
         CardItem,
-        DateInput,
     },
     data() {
         return {
-            dateGuideFull: "",
-            dateGuideMin: "",
-            dateGuideErr: "99-99-99",
-
             /*카드 가이드 목록*/ 
             cardGuideList: [
                 {
@@ -598,12 +513,6 @@ export default {
     width: 100%;
 }
 
-.date_input_guide_box {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    max-width: 440px;
-}
 
 /* 카드 가이드: ul.card_list + CardItem */
 .card_list {
