@@ -1,0 +1,72 @@
+[
+    {
+        "depth1": "메인", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrmain/gsrmain",
+        "link": "/",
+        "startDate": "2026-04-06",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "ABOUT", "depth2": "CEO인사말", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrab/gsrab01",
+        "link": "/gsrab01",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "회사소개", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "연혁", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "CI/BI", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "위치", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "BRAND", "depth2": "GS25", "depth3": "차별화 상품/서비스", "depth4": "차별화 상품", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/01/gsrbr010101",
+        "link": "/gsrbr010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": ""
+    }
+]

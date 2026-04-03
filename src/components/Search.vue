@@ -4,7 +4,7 @@
         <SelectBox :options="search_opt" :modelValue="searchValue.type"  @update:modelValue="onChangeType" :initMsg="initMsg" />
 
         <!-- input -->
-        <Inputs type="text" placeholder="문구를 입력해주세요" v-model="searchValue.keyword" @update:modelValue="onChangeKeyword" />
+        <Inputs type="text" :placeholder="placeholder" v-model="searchValue.keyword" @update:modelValue="onChangeKeyword" />
 
         <!-- button -->
         <button class="btn_search" @click="onSearch">검색</button>
@@ -40,7 +40,12 @@ export default {
                 type: "",
                 keyword: ""
             })
+        },
+        placeholder: {
+            type: String,
+            default: "문구를 입력하세요."
         }
+
     },
 
     emits: ["update:modelValue", "search"],

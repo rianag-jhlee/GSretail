@@ -12,6 +12,21 @@
                 "title": "회사소개",
                 "path": "#",
                 "children": []
+            },
+            {
+                "title": "연혁",
+                "path": "#",
+                "children": []
+            },
+            {
+                "title": "CI/BI",
+                "path": "#",
+                "children": []
+            },
+            {
+                "title": "위치",
+                "path": "#",
+                "children": []
             }
         ]
     },

@@ -22,6 +22,7 @@ export default {
     data() {
         return {
             menu: [
+                { item: "Work List", link: "/guide/WorkList" },
                 { item: "Info", link: "/guide/setInfo" },
                 { item: "Elements", link: "/guide/elements" },
                 { item: "Form", link: "/guide/form" },
