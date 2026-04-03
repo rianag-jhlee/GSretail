@@ -583,7 +583,7 @@ section:not(.sec_about2) {
     margin-top:auto;
     border-radius: 10px;
     background: #d9d9d9;
-    background-image: url("@/assets/images/main_bg02_small.png");
+    background-image: url("@/assets/images/main_bg02.png");
     background-position: center center;
     background-size: cover;
 }
