@@ -13,8 +13,6 @@
         <router-view v-slot="{ Component }">
             <component :is="Component" :lang="lang" />
         </router-view>
-
-        {{ lang }}
         <!-- //content -->
 
         <!-- footer -->

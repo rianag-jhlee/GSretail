@@ -1,5 +1,5 @@
 <template>
-    <div>Sub01 = {{ lang }}
+    <div>BRAND > GS25 > 차별화 상품/서비스 = {{ lang }}
         
     </div>
 </template>

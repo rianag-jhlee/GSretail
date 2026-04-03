@@ -61,7 +61,7 @@ export default {
 #guide_wrap .tit_wrap a.active:after {content:'CLOSE';}
 #guide_wrap strong.tit {margin-top:10px; padding:3px 10px; color:#fff; font-size:1.1rem; font-weight:500; line-height:1; background-color:#009999; border-radius:100px; display:inline-block;}
 
-#guide_wrap .code_box {margin-top:10px; padding:20px; color:#fff; font-size:14px; font-family:dotum !important; line-height:1.4; white-space:pre-wrap; background-color:#000; border:1px solid #ddd; display:none;}
+#guide_wrap .code_box {margin-top:10px; padding:20px; color:#fff; font-size:1.4rem; font-family:dotum !important; line-height:1.4; white-space:pre-wrap; background-color:#000; border:1px solid #ddd; display:none;}
 #guide_wrap .code_box code {color:#fff; font-size:1.2rem;}
 
 #guide_wrap .explain {margin-top:10px; margin-bottom:10px;}

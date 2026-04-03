@@ -8,7 +8,7 @@
 
 <script>
 export default {
-    name: "gsr-00-00-00",
+    name: "gsrmain",
     props: {
         lang: { type: String }, // ko/en
     },
