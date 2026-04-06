@@ -86,9 +86,8 @@ import { useRouter } from "vue-router";
 import Tabs from "@/components/Tabs.vue";
 
 import imgHero from "@/assets/images/dummy/differentiated_bg_01.png";
-import imgCard1 from "@/assets/images/news_02.png";
-import imgCard2 from "@/assets/images/news_03.png";
-import imgCafe from "@/assets/images/main_bg_02.png";
+import imgCard1 from "@/assets/images/dummy/differentiated_product_01.png";
+import imgCard2 from "@/assets/images/dummy/differentiated_product_02.png";
 
 const props = defineProps({
     lang: { type: String, default: "ko" },
@@ -138,14 +137,14 @@ const langData = {
                 },
             },
             {
-                hero: imgCafe,
+                hero: '',
                 heroAlt: "",
                 title: "CAFE25",
                 subtitle:
                     "최고급 커피머신과 스페셜티 블렌딩 원두를 사용하여 최상의 커피를 합리적인 가격으로 제공하는 GS25의 차별화 원두커피 전문 존입니다.",
                 cards: [
                     {
-                        image: imgCafe,
+                        image: '',
                         alt: "",
                         title: "스페셜티 블렌드",
                         desc: "매장에서 직접 추출하는 에스프레소 기반 메뉴와 시즌 한정 음료로 차별화된 카페 경험을 제공합니다.",
@@ -199,7 +198,7 @@ const langData = {
                         desc: "클래식부터 인기 토핑까지 선택 폭을 넓혀 고객 취향을 만족시킵니다.",
                     },
                     {
-                        image: imgCafe,
+                        image: '',
                         alt: "",
                         title: "빠른 픽업",
                         desc: "매장 픽업 동선과 조리 안내를 통해 대기 시간을 줄였습니다.",
@@ -256,13 +255,13 @@ const langData = {
                 },
             },
             {
-                hero: imgCafe,
+                hero: '',
                 heroAlt: "",
                 title: "CAFE25",
                 subtitle: "Specialty coffee zone with espresso-based drinks and seasonal beverages.",
                 cards: [
                     {
-                        image: imgCafe,
+                        image: '',
                         alt: "",
                         title: "Specialty blend",
                         desc: "In-store espresso and limited drinks for a differentiated cafe experience.",
@@ -316,7 +315,7 @@ const langData = {
                         desc: "From classics to popular toppings for every taste.",
                     },
                     {
-                        image: imgCafe,
+                        image: '',
                         alt: "",
                         title: "Quick pickup",
                         desc: "Pickup flow and prep guidance to reduce wait time.",
@@ -514,6 +513,7 @@ function goBack() {
     line-height: 1.5;
     letter-spacing: -0.01em;
     color: #161618;
+    font-weight: normal;
 }
 
 .diff_qr_desc {
