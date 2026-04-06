@@ -381,9 +381,9 @@ import BreadCrumb from "@/components/BreadCrumb.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
 import CardItem from "@/components/CardItem.vue";
-import cardGuideImg1 from "@/assets/images/main_bg_01.png";
-import cardGuideImg2 from "@/assets/images/main_bg_02.png";
-import cardGuideImg3 from "@/assets/images/main_bg_03.png";
+import cardGuideImg1 from "@/assets/images/guide/main_bg_01.png";
+import cardGuideImg2 from "@/assets/images/guide/main_bg_02.png";
+import cardGuideImg3 from "@/assets/images/guide/main_bg_03.png";
 
 export default {
     name: "Elements",

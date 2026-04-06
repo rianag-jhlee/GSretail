@@ -38,6 +38,7 @@ export default {
     header {padding:10px 20px 0; text-align:center; position:sticky; top:0; z-index:100; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);}
     header h1 {padding-bottom:20px; color:#3366cc; font-size:2.4rem;}
     header nav {margin:0 -20px; border-top:1px solid #dfdfdf; border-bottom:1px solid #dfdfdf; justify-content:center;}
+    header .depth1 {display:flex;}
     header .depth1 > li {flex:1;}
     header .depth1 > li > a {padding:8px 6px; color:#fff; font-size:1.3rem; font-weight:700; background-color:#3366cc; position:relative; display:block;}
     header nav li.current a {color:#222; background-color:#fff;}

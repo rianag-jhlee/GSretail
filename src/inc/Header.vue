@@ -1,41 +1,7 @@
 <template>
-    <header>
+    <header id="header">
         <div class="inner">
-            <h1><img class="CI" src="/assets/images/commopn/header_logo.png" /></h1>
-            <!-- quick : 국문에서만 노출 -->
-            <div class="quick">
-                <div v-if="lang != 'en'"><!-- 영문에서 노출 안되도록 -->
-                    <a href="#none" target="_blank">채용안내</a>
-                    <a href="#none" target="_blank">입점상담</a>
-                    <a href="#none" target="_blank">제휴/협력문의</a>
-                    <a href="#none" target="_blank">고객센터</a>
-                    <ul>
-                        <li>
-                            <a href="#none">GS리테일</a>
-                        </li>
-                        <li>
-                            <strong>온라인 브랜드</strong>
-                            <a href="#none">GS SHOP</a>
-                            <a href="#none">팝카드</a>
-                            <a href="#none">우리동네 딜리버리</a>
-                        </li>
-                        <li>
-                            <strong>오프라인 브랜드</strong>
-                            <a href="#none">GS25</a>
-                            <a href="#none">GS THE FRESH</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- select language -->
-                <Inputs type="checkbox" isswitch="true" text="ENG" v-model="onChangeLang" /><!-- language test -->
-                <!-- <dl class="language">
-                    <dt><button >{{ lang === 'ko' ? 'language' : 'EN' }}</button></dt>
-                    <dd><a :href="lang === 'ko' ? 'http://www.gsretail.com/gsretail/en/global/gsretail-main' : 'http://www.gsretail.com/gsretail/ko/company'" target="_blank">{{ lang === 'ko' ? 'GS리테일 ENG' : 'KO' }}</a></dd>
-                </dl> -->
-                <!-- //select language -->
-            </div>
-            <!-- //quick -->
+            <h1><img class="CI" src="@/assets/images/common/h1_logo.png" /></h1>
 
             <nav id="gnb_nav">
                 <ul class="depth1">
@@ -63,6 +29,40 @@
                     </li>
                 </ul>
             </nav>
+
+            <!-- quick : 국문에서만 노출 -->
+            <div class="quick">
+                <ul v-if="lang != 'en'"><!-- 영문에서 노출 안되도록 -->
+                    <li><a href="#none" target="_blank">채용안내</a></li>
+                    <li><a href="#none" target="_blank">입점상담</a></li>
+                    <li><a href="#none" target="_blank">제휴/협력문의</a></li>
+                    <li><a href="#none" target="_blank">고객센터</a></li>
+                    <li><a href="#none">GS리테일</a>
+                        <ul>
+                            <li>
+                                <strong>온라인 브랜드</strong>
+                                <a href="#none">GS SHOP</a>
+                                <a href="#none">팝카드</a>
+                                <a href="#none">우리동네 딜리버리</a>
+                            </li>
+                            <li>
+                                <strong>오프라인 브랜드</strong>
+                                <a href="#none">GS25</a>
+                                <a href="#none">GS THE FRESH</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- select language -->
+                <Inputs type="checkbox" isswitch="true" text="ENG" v-model="onChangeLang" /><!-- language test -->
+                <!-- <dl class="language">
+                    <dt><button >{{ lang === 'ko' ? 'language' : 'EN' }}</button></dt>
+                    <dd><a :href="lang === 'ko' ? 'http://www.gsretail.com/gsretail/en/global/gsretail-main' : 'http://www.gsretail.com/gsretail/ko/company'" target="_blank">{{ lang === 'ko' ? 'GS리테일 ENG' : 'KO' }}</a></dd>
+                </dl> -->
+                <!-- //select language -->
+            </div>
+            <!-- //quick -->
         </div>
     </header>
 </template>

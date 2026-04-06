@@ -87,5 +87,20 @@
                 ]
             }
         ]
+    },
+    {
+        "title": "INVESTORS",
+        "path": "#none",
+        "children": []
+    },
+    {
+        "title": "SUSTAINABILITY",
+        "path": "#none",
+        "children": []
+    },
+    {
+        "title": "GS NEWS",
+        "path": "#none",
+        "children": []
     }
 ]
