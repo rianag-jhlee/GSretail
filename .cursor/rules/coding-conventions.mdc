@@ -83,7 +83,7 @@ Heading은 `h1` → `h6` 순서를 지켜 계층 구조 유지.
     margin: 10px;
     padding: 10px;
     color: #333;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-family: "dotum", sans-serif;
     font-weight: 500;
     letter-spacing: -0.05em;
@@ -99,6 +99,7 @@ Heading은 `h1` → `h6` 순서를 지켜 계층 구조 유지.
 
 - `flex` / `grid` 관련은 **9. 블록**에 둔다.
 - 미디어쿼리 안 블록도 동일 순서를 따른다.
+- **`font-size`는 반드시 `rem` 단위 사용** (`px` 금지). `html { font-size: 62.5% }` 기준이므로 `1rem = 10px`.
 
 ---
 
