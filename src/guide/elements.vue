@@ -156,19 +156,19 @@ data() {
             <div class="design_box">
                 <Tabs @change="onTabChange1" v-model="CTabIdx" :tab-items="tabs" tab-class="type_01" :tab-slide="false" />
                 <div class="tab_content mt10" v-if="CTabIdx === 0">
-                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_01" :tab-slide="false" />
+                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_02" :tab-slide="false" />
                     <div class="sub_cont" v-if="SUBTabIdx === 0">1</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 1">2</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 2">3</div>
                 </div>
                 <div class="tab_content mt10" v-if="CTabIdx === 1">
-                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_01" :tab-slide="false" />
+                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_02" :tab-slide="false" />
                     <div class="sub_cont" v-if="SUBTabIdx === 0">4</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 1">5</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 2">6</div>
                 </div>
                 <div class="tab_content mt10" v-if="CTabIdx === 2">
-                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_01" :tab-slide="false" />
+                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_02" :tab-slide="false" />
                     <div class="sub_cont" v-if="SUBTabIdx === 0">7</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 1">8</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 2">9</div>

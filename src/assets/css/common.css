@@ -52,13 +52,20 @@ select {width:100%; height:46px; padding:12px 40px 12px 12px; font-size:1.4rem; 
 .tab_wrap ul {display:flex; flex-wrap:wrap;}
 .tab_wrap li {list-style:none;}
 .tab_wrap li .item {display:block; padding:15px 20px; white-space:nowrap; cursor:pointer;}
-.tab_wrap li.current .item {color:#00C294; font-weight:700;}
+.tab_wrap li.current .item {color:#161618;}
 
 .tab_wrap.tabSlide {overflow:hidden;}
 .tab_wrap.tabSlide ul {flex-wrap:nowrap; transition:transform 0.4s cubic-bezier(0.1, 0.57, 0.1, 1);}
-
+.tab_wrap ul.type_01 {border-bottom:1px solid #C4C4D0;}
 .tab_wrap ul.type_01 li {flex:1;}
-.tab_wrap ul.type_01 li .item {text-align:center;}
+.tab_wrap ul.type_01 li.current {border-bottom:2px solid #161618;}
+.tab_wrap ul.type_01 li .item {color:#90909A; font-size:24px; font-weight:600; text-align:center;}
+.tab_wrap ul.type_01 li.current .item {color:#161618;}
+
+.tab_wrap ul.type_02 {}
+.tab_wrap ul.type_02 li {}
+.tab_wrap ul.type_02 li .item {padding:15px 28px; color:#666666; font-size:20px; font-weight:500; text-align:center; background-color:#F8F8F8; border-radius:99px;}
+.tab_wrap ul.type_02 li.current .item {background:transparent; border:1px solid #000000;}
 
 .input_wrap {flex:1;}
 .input_wrap input[type='text']:disabled {background-color:#eee !important; border-color:#ddd !important;}
