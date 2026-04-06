@@ -3,9 +3,9 @@
 
     <div style="display:flex; align-items:center; justify-content:space-between;">
         <ul class="legend">
-            <li><em class="com"></em> <span>완료</span></li>
-            <li><em class="ing"></em> <span>진행중</span></li>
-            <li><em class="del"></em> <span>삭제</span></li>
+            <li><em class="com"></em> <span>완료(com)</span></li>
+            <li><em class="ing"></em> <span>진행중(ing)</span></li>
+            <li><em class="del"></em> <span>삭제(del)</span></li>
         </ul>
 
         <!-- 필터 -->

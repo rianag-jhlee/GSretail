@@ -1,66 +1,69 @@
 <template>
     <header>
-        <!-- quick : 국문에서만 노출 -->
-        <div class="quick">
-            <div v-if="lang != 'en'"><!-- 영문에서 노출 안되도록 -->
-                <a href="#none" target="_blank">채용안내</a>
-                <a href="#none" target="_blank">입점상담</a>
-                <a href="#none" target="_blank">제휴/협력문의</a>
-                <a href="#none" target="_blank">고객센터</a>
-                <ul>
-                    <li>
-                        <a href="#none">GS리테일</a>
-                    </li>
-                    <li>
-                        <strong>온라인 브랜드</strong>
-                        <a href="#none">GS SHOP</a>
-                        <a href="#none">팝카드</a>
-                        <a href="#none">우리동네 딜리버리</a>
-                    </li>
-                    <li>
-                        <strong>오프라인 브랜드</strong>
-                        <a href="#none">GS25</a>
-                        <a href="#none">GS THE FRESH</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- select language -->
-            <Inputs type="checkbox" isswitch="true" text="ENG" v-model="onChangeLang" /><!-- language test -->
-            <!-- <dl class="language">
-                <dt><button >{{ lang === 'ko' ? 'language' : 'EN' }}</button></dt>
-                <dd><a :href="lang === 'ko' ? 'http://www.gsretail.com/gsretail/en/global/gsretail-main' : 'http://www.gsretail.com/gsretail/ko/company'" target="_blank">{{ lang === 'ko' ? 'GS리테일 ENG' : 'KO' }}</a></dd>
-            </dl> -->
-            <!-- //select language -->
-        </div>
-        <!-- //quick -->
-
-        <nav id="gnb_nav">
-            <ul class="depth1">
-                <li v-for="item1 in menuList" :key="item1.title" @focusin="setFocus($event)"
-                    @focusout="removeFocus($event)" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
-                    <!-- 1depth -->
-                    <a :href="getLink(item1)" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a>
-
-                    <!-- 2depth -->
-                    <ul class="depth2" v-if="item1.children && item1.children.length">
-                        <li v-for="item2 in item1.children" :key="item2.title">
-                            <span v-if="item2.children && item2.children.length">{{ item2.title }}</span>
-                            <a v-else :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{ item2.title
-                            }}</a>
-
-                            <!-- 3depth -->
-                            <ul class="depth3" v-if="item2.children && item2.children.length">
-                                <li v-for="item3 in item2.children" :key="item3.title">
-                                    <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{ item3.title
-                                    }}</a>
-                                </li>
-                            </ul>
+        <div class="inner">
+            <h1><img class="CI" src="/assets/images/commopn/header_logo.png" /></h1>
+            <!-- quick : 국문에서만 노출 -->
+            <div class="quick">
+                <div v-if="lang != 'en'"><!-- 영문에서 노출 안되도록 -->
+                    <a href="#none" target="_blank">채용안내</a>
+                    <a href="#none" target="_blank">입점상담</a>
+                    <a href="#none" target="_blank">제휴/협력문의</a>
+                    <a href="#none" target="_blank">고객센터</a>
+                    <ul>
+                        <li>
+                            <a href="#none">GS리테일</a>
+                        </li>
+                        <li>
+                            <strong>온라인 브랜드</strong>
+                            <a href="#none">GS SHOP</a>
+                            <a href="#none">팝카드</a>
+                            <a href="#none">우리동네 딜리버리</a>
+                        </li>
+                        <li>
+                            <strong>오프라인 브랜드</strong>
+                            <a href="#none">GS25</a>
+                            <a href="#none">GS THE FRESH</a>
                         </li>
                     </ul>
-                </li>
-            </ul>
-        </nav>
+                </div>
+
+                <!-- select language -->
+                <Inputs type="checkbox" isswitch="true" text="ENG" v-model="onChangeLang" /><!-- language test -->
+                <!-- <dl class="language">
+                    <dt><button >{{ lang === 'ko' ? 'language' : 'EN' }}</button></dt>
+                    <dd><a :href="lang === 'ko' ? 'http://www.gsretail.com/gsretail/en/global/gsretail-main' : 'http://www.gsretail.com/gsretail/ko/company'" target="_blank">{{ lang === 'ko' ? 'GS리테일 ENG' : 'KO' }}</a></dd>
+                </dl> -->
+                <!-- //select language -->
+            </div>
+            <!-- //quick -->
+
+            <nav id="gnb_nav">
+                <ul class="depth1">
+                    <li v-for="item1 in menuList" :key="item1.title" @focusin="setFocus($event)"
+                        @focusout="removeFocus($event)" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
+                        <!-- 1depth -->
+                        <a :href="getLink(item1)" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a>
+
+                        <!-- 2depth -->
+                        <ul class="depth2" v-if="item1.children && item1.children.length">
+                            <li v-for="item2 in item1.children" :key="item2.title">
+                                <span v-if="item2.children && item2.children.length">{{ item2.title }}</span>
+                                <a v-else :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{ item2.title
+                                }}</a>
+
+                                <!-- 3depth -->
+                                <ul class="depth3" v-if="item2.children && item2.children.length">
+                                    <li v-for="item3 in item2.children" :key="item3.title">
+                                        <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{ item3.title
+                                        }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 </template>
 

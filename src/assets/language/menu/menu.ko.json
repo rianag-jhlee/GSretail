@@ -1,6 +1,6 @@
 [
     {
-        "title": "회사소개",
+        "title": "ABOUT",
         "path": "#none",
         "children": [
             {
@@ -38,10 +38,52 @@
                 "title": "GS25",
                 "path": "#none",
                 "children": [
-                    { "title": "GS25 소개 + 이미지", "path": "#none" },
-                    { "title": "홈페이지", "path": "http://gs25.gsretail.com/gscvs/ko/main", "blank": true },
-                    { "title": "공식 인스타그램", "path": "#none", "blank": true },
-                    { "title": "공식 유튜브", "path": "#none", "blank": true }
+                    { "title": "차별화 상품/서비스", "path": "#none" },
+                    { "title": "신선강화점", "path": "#none", "blank": false },
+                    { "title": "매장/서비스", "path": "#none" },
+                    { "title": "상생협력", "path": "#none" },
+                    { "title": "밀박스/스낵바", "path": "#none" },
+                    { "title": "매장찾기", "path": "#none" }
+                ]
+            },
+            {
+                "title": "GS THE FRESH",
+                "path": "#none",
+                "children": [
+                    { "title": "신선 산지 안내", "path": "#none" },
+                    { "title": "맛/선도 관리", "path": "#none", "blank": false },
+                    { "title": "매장찾기", "path": "#none", "blank": false },
+                    { "title": "입지제안", "path": "#none" }
+                ]
+            },
+            {
+                "title": "GS SHOP",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "우리동네 GS",
+                "path": "#none",
+                "children": [
+                    { "title": "배달·픽업", "path": "#none" },
+                    { "title": "와인25플러스", "path": "#none" },
+                    { "title": "재고찾기", "path": "#none" },
+                    { "title": "행사/이벤트", "path": "#none" }
+                ]
+            },
+            {
+                "title": "GS PAY",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "우리동네 GS",
+                "path": "#none",
+                "children": [
+                    { "title": "배달·픽업", "path": "#none" },
+                    { "title": "와인25플러스", "path": "#none" },
+                    { "title": "재고찾기", "path": "#none" },
+                    { "title": "행사/이벤트", "path": "#none" }
                 ]
             }
         ]
