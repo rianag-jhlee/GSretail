@@ -230,12 +230,12 @@ const t = computed(() => langData[locale.value]);
 <Inputs type="switch" isswitch />
 ```
 
-### DateInput.vue
+### Textarea.vue
 ```html
-<!-- 레이블 · 배경 구분 필드 · 달력 버튼(선택) · hint / errorMessage(선택) · placeholder(선택) -->
-<DateInput v-model="startDate" label="시작일" name="start_date" placeholder="YYYY-MM-DD" hint="형식 안내" />
-<DateInput v-model="endDate" label="종료일" :show-calendar-button="false" placeholder="YYYY-MM-DD" />
-<DateInput v-model="due" label="마감일" :is-error="true" error-message="올바른 날짜 형식이 아닙니다." />
+<!-- label · placeholder · hint(선택) · isError + errText(선택) · rows · maxlength(1 이상이면 메타 행 우측 글자수) -->
+<Textarea v-model="body" label="문의 내용" name="inquiry_body" placeholder="내용을 입력해 주세요" :rows="6" :maxlength="500" />
+<Textarea v-model="note" label="비고" hint="선택 항목입니다." />
+<Textarea v-model="memo" label="메모" :is-error="true" err-text="필수 입력입니다." />
 ```
 
 ### SelectBox.vue
