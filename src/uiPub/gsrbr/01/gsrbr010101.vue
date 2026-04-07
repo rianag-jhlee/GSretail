@@ -17,7 +17,7 @@
             />
 
             <!-- 탭 0: 차별화 상품 -->
-            <div v-show="activeTab === 0" class="brand_panel">
+            <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel">
                 <PanelHeader :hero="tab0.hero" :hero-alt="tab0.heroAlt" :title="tab0.title" :subtitle="tab0.subtitle" />
 
                 <ul v-if="tab0.cards && tab0.cards.length" class="diff_card_grid" role="list">
@@ -38,7 +38,7 @@
             </div>
 
             <!-- 탭 1: CAFE25 -->
-            <div v-show="activeTab === 1" class="brand_panel">
+            <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel">
                 <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :subtitle="tab1.subtitle" hero-bg="#fff" />
 
                 <section v-for="(sec, i) in tab1.sections" :key="i" class="cafe25_sec">
@@ -113,7 +113,7 @@
             </div>
 
             <!-- 탭 2: CHICKEN25 -->
-            <div v-show="activeTab === 2" class="brand_panel">
+            <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel">
                 <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :subtitle="tab2.subtitle" />
 
                 <section v-for="(sec, i) in tab2.sections" :key="i" class="chicken25_sec">
@@ -144,7 +144,7 @@
             </div>
 
             <!-- 탭 3: GOPIZZA -->
-            <div v-show="activeTab === 3" class="brand_panel">
+            <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel">
                 <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :subtitle="tab3.subtitle" />
 
                 <section
@@ -234,6 +234,46 @@
                 </div>
             </div>
 
+            <!-- depth1 = 1: 신선강화점 -->
+            <div v-if="depth1ActiveIdx === 1" class="brand_panel">
+                <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :subtitle="sinsen.subtitle" />
+
+                <section v-for="(sec, i) in sinsen.sections" :key="i" class="sinsen_sec">
+                    <header>
+                        <h3>{{ sec.title }}</h3>
+                        <p v-if="sec.desc" v-html="sec.desc" />
+                    </header>
+
+                    <!-- 특징 카드 4열 -->
+                    <ul v-if="sec.features" class="sinsen_feature_list" role="list">
+                        <li v-for="(feat, fi) in sec.features" :key="fi">
+                            <div class="sinsen_feature_card">
+                                <span class="sinsen_feature_icon" aria-hidden="true"></span>
+                                <h4>{{ feat.title }}</h4>
+                                <p v-html="feat.desc" />
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- 배송 흐름도 -->
+                    <div v-if="sec.flow" class="sinsen_card sinsen_card_flow">
+                        <img :src="imgFlow" alt="" class="sinsen_flow_img" />
+                    </div>
+
+                    <!-- 운영 장점 체크리스트 카드 -->
+                    <div v-if="sec.advantages" class="sinsen_card">
+                        <ul class="sinsen_check_list">
+                            <li v-for="(item, ii) in sec.advantages.items" :key="ii">
+                                <div>
+                                    <span>{{ item.text }}</span>
+                                    <span v-if="item.note" class="sinsen_check_note">{{ item.note }}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
             <div class="diff_actions">
                 <Buttons btn-class="btn_back" @click="goBack">{{ t.backLabel }}</Buttons>
             </div>
@@ -281,6 +321,17 @@ import imgMenu1 from "@/assets/images/dummy/gopizza_menu_01.png";
 import imgMenu2 from "@/assets/images/dummy/gopizza_menu_02.png";
 import imgPhone1 from "@/assets/images/dummy/gopizza_phone_01.png";
 import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
+
+/*신선강화점 이미지*/ 
+import imgHero4 from "@/assets/images/dummy/brand_bg_05.png";
+import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
+
+// import imgSinsenFeature1 from "@/assets/images/dummy/sinsen_feature_01.png";
+// import imgSinsenFeature2 from "@/assets/images/dummy/sinsen_feature_02.png";
+// import imgSinsenFeature3 from "@/assets/images/dummy/sinsen_feature_03.png";
+// import imgSinsenFeature4 from "@/assets/images/dummy/sinsen_feature_04.png";
+// import imgSinsenFeature5 from "@/assets/images/dummy/sinsen_feature_05.png";
+// import imgSinsenFeature6 from "@/assets/images/dummy/sinsen_feature_06.png";
 
 const props = defineProps({
     lang: { type: String, default: "ko" },
@@ -511,6 +562,41 @@ const langData = {
                 },
             },
         ],
+        sinsen: {
+            hero: imgHero4,
+            heroAlt: "신선강화점",
+            title: "신선강화점",
+            subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
+            sections: [
+                {
+                    title: "신선강화점 특징",
+                    features: [
+                        { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정 콜드체인 시스템 적용으로 신선도 유지" },
+                        { title: "합리적인 가격", desc: "GS 더프레시와의 통합 구매를 통해 합리적인 가격에 판매" },
+                        { title: "소용량 소포장", desc: "1인가구 및 2~3인 가구에 적합한 <br />소용량·소포장 상품 구성" },
+                        { title: "전용 상품 브랜드", desc: "신선식품 전문 브랜드 <br />신선특별시 운영" },
+                    ],
+                },
+                {
+                    title: "GS25 신선 배송 방식",
+                    flow: true,
+                },
+                {
+                    title: "신선강화점 운영의 장점",
+                    advantages: {
+                        items: [
+                            { text: "전용상품을 통한 다양한 상품 구색(약 400SKU)" },
+                            { text: "신선강화점 전용 행사 운영 (신선 & 가공)" },
+                            { text: "신선식품에 신선함을 더해주는 전용 장비 운영" },
+                            { text: "전자가격표시기를 활용한 신선 가격 대응 자동화" },
+                            { text: "마감할인 라벨프린터 운영으로 폐기 최소화" },
+                            { text: "내/외부 전용 홍보물을 통한 홍보 강화" },
+                            { text: "기존 일반점 → 신선강화점 변경 시 효과성 검증", note: "\u201C도입 후 일평균 매출 기존대비 약 12.6% 증가, 일평균 고객 수 21명 증가\u201D" },
+                        ],
+                    },
+                },
+            ],
+        },
         backLabel: "목록으로 돌아가기",
     },
     en: {
@@ -734,11 +820,48 @@ const langData = {
                 },
             },
         ],
+        sinsen: {
+            hero: null,
+            heroAlt: "Fresh focus stores",
+            title: "Fresh focus stores",
+            subtitle: "Fresh focus stores cater to the growing trend of 1–2 person households and small-quantity shopping, offering a one-stop grocery experience 24/7.<br />Combining the convenience of a convenience store with the freshness of a supermarket, they provide daily fresh produce including fruits, vegetables, meat, and seafood.",
+            sections: [
+                {
+                    title: "Fresh focus store features",
+                    desc: "FCS (Fresh Concept Store) is GS25's next-generation store model combining the convenience of a convenience store with the freshness of a supermarket.",
+                    features: [
+                        { title: "Fresh products",        desc: "Cold chain system applied throughout the entire process from logistics to display and sale" },
+                        { title: "Reasonable prices",     desc: "Competitive pricing through integrated purchasing with GS The Fresh" },
+                        { title: "Small-pack options",    desc: "Small-volume, small-pack products suitable for 1–3 person households" },
+                        { title: "Exclusive brand",       desc: "Operating 'Fresh Special City', an exclusive fresh food brand" },
+                    ],
+                },
+                {
+                    title: "GS25 fresh delivery process",
+                    flow: true,
+                },
+                {
+                    title: "Advantages of operating fresh focus stores",
+                    advantages: {
+                        items: [
+                            { text: "Diverse product assortment through exclusive products (approx. 400 SKUs)" },
+                            { text: "Exclusive promotional events for fresh focus stores (fresh & processed)" },
+                            { text: "Dedicated equipment to enhance freshness of fresh foods" },
+                            { text: "Automated fresh price response using electronic shelf labels" },
+                            { text: "Minimizing waste through discount label printers at closing time" },
+                            { text: "Enhanced promotion through dedicated internal/external promotional materials" },
+                            { text: "Verified effectiveness when converting from standard to fresh focus stores", note: "\u201CAfter adoption, daily average sales increased by approx. 12.6% and daily customer count increased by 21\u201D" },
+                        ],
+                    },
+                },
+            ],
+        },
         backLabel: "Back to list",
     },
 };
 
 const t = computed(() => langData[props.lang] || langData.ko);
+const sinsen = computed(() => t.value.sinsen);
 const tab0 = computed(() => t.value.tabs[0]);
 const tab1 = computed(() => t.value.tabs[1]);
 const tab2 = computed(() => t.value.tabs[2]);
@@ -792,11 +915,7 @@ img {
 
 .brand_panel {
     padding-top: 40px;
-    padding-bottom: 48px;
-}
-
-.diff_actions {
-    margin-top: 24px;
+    padding-bottom: 100px;
 }
 
 /* ── 탭 0: 차별화 상품 ── */
@@ -1318,6 +1437,141 @@ img {
     letter-spacing: -0.02em;
 }
 
+/* ── 신선강화점 ── */
+.sinsen_sec {
+    margin-bottom: 120px;
+}
+.sinsen_sec:last-of-type{
+    margin-bottom: 0;
+}
+.sinsen_sec > header {
+    margin-bottom: 40px;
+}
+
+.sinsen_sec > header > h3 {
+    margin: 0 0 16px;
+    color: #161618;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.sinsen_sec > header > p {
+    margin: 0;
+    color: #161618;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+.sinsen_feature_list {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.sinsen_feature_list > li {
+    min-width: 0;
+}
+
+.sinsen_feature_card {
+    height: 240px;
+    padding: 32px 32px 60px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+}
+
+.sinsen_feature_icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+    background-color: #d7d7df;
+    border-radius: 8px;
+    display: block;
+}
+
+.sinsen_feature_card > h4 {
+    margin: 0 0 16px;
+    color: #161618;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.sinsen_feature_card > p {
+    margin: 0;
+    color: #67676f;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+.sinsen_card {
+    padding: 32px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+}
+
+.sinsen_card + .sinsen_card {
+    margin-top: 20px;
+}
+
+
+.sinsen_flow_img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 24px;
+}
+
+/* 운영 장점 체크리스트 */
+.sinsen_check_list > li {
+    padding-bottom:12px ;
+    color: #161618;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+
+.sinsen_check_list > li:last-child {
+    padding-bottom: 0;
+}
+
+.sinsen_check_list > li::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    background-color: #107af2;
+    border-radius: 50%;
+    position: relative;
+    top: 2px;
+}
+.sinsen_check_list > li span{
+    font-size: 1.8rem;
+}
+.sinsen_check_list > li > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sinsen_check_note {
+    color: #67676f;
+
+}
+
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .cafe25_card_list {
@@ -1398,6 +1652,17 @@ img {
     .diff_bottom_row {
         flex-direction: column;
         gap: 20px;
+    }
+
+    /* 신선강화점 반응형 */
+    .sinsen_feature_list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sinsen_check_list > li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
     }
 }
 </style>
