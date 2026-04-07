@@ -169,14 +169,12 @@ img {
 
 .sec_diff {
     width: 100%;
-    box-sizing: border-box;
 }
 
 .sec_diff > .inner {
     max-width: 1460px;
     margin: 0 auto;
     padding: 109px 20px 200px;
-    box-sizing: border-box;
 }
 
 .diff_panel {
@@ -285,7 +283,6 @@ img {
     padding: 32px;
     background-color: #f8f8f8;
     border-radius: 12px;
-    box-sizing: border-box;
 }
 
 .chicken25_card > h4 {

@@ -131,14 +131,12 @@ img {
 
 .sec_diff {
     width: 100%;
-    box-sizing: border-box;
 }
 
 .sec_diff > .inner {
     max-width: 1460px;
     margin: 0 auto;
     padding: 109px 20px 200px;
-    box-sizing: border-box;
 }
 
 .diff_panel {
@@ -189,7 +187,6 @@ img {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 460px));
     gap: 20px;
-    box-sizing: border-box;
 }
 
 .diff_card {
@@ -197,7 +194,6 @@ img {
     padding: 0;
     background-color: #fff;
     border-radius: 12px;
-    box-sizing: border-box;
     overflow: hidden;
 }
 
@@ -218,7 +214,6 @@ img {
     min-height: 200px;
     padding: 32px;
     background-color: #f8f8f8;
-    box-sizing: border-box;
 }
 
 .diff_card > div > h3 {

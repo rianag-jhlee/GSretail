@@ -271,14 +271,12 @@ function goBack() {
 <style scoped>
 .sec_diff {
     width: 100%;
-    box-sizing: border-box;
 }
 
 .sec_diff > .inner {
     max-width: 1460px;
     margin: 0 auto;
     padding: 109px 20px 200px;
-    box-sizing: border-box;
 }
 
 .diff_panel {
@@ -399,7 +397,6 @@ function goBack() {
 .cafe25_card > div {
     min-height: 200px;
     padding: 32px;
-    box-sizing: border-box;
 }
 
 .cafe25_card > div > h4 {
@@ -464,11 +461,6 @@ function goBack() {
     display: flex;
     justify-content: center;
     align-items: center;
-    ;
-    /* background-image: url('@/assets/images/dummy/cafe25_menu.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
 }
 
 .cafe25_split_img > img {
@@ -479,7 +471,6 @@ function goBack() {
 }
 
 .cafe25_split_table {
-
     overflow-x: auto;
 }
 
@@ -503,7 +494,7 @@ function goBack() {
     font-weight: 400;
     line-height: 1.6;
     letter-spacing: -0.01em;
-    border: 1px solid #e5e5e9;
+    border-bottom: 1px solid #e5e5e9;
     vertical-align: middle;
     white-space: nowrap;
 }
