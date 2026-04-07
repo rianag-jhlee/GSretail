@@ -47,7 +47,7 @@ select {width:100%; height:46px; padding:12px 40px 12px 12px; font-size:1.4rem; 
 
 /* button back */
 .btn_back {height:72px; padding:0 24px; font-size:2rem; font-weight:400; letter-spacing:-0.01em; color:#000; background-color:transparent; border:0; gap:10px; cursor:pointer;}
-.btn_back:before {width:16px; height:24px; background-color: #eee; content:''; display:inline-block; }
+.btn_back:before {width:16px; height:30px; background-color: #eee; content:''; display:inline-block; }
 
 
 /* tab */
