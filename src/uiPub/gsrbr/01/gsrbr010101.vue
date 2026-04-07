@@ -298,8 +298,19 @@
                         :hero-alt="tab.heroAlt"
                         :title="tab.title"
                         :subtitle="tab.desc"
-                        
                     />
+                    <table v-if="tab.table" class="cash_table">
+                        <tbody>
+                            <tr v-for="(row, ri) in tab.table.rows" :key="ri">
+                                <th scope="row">{{ row.head }}</th>
+                                <td>
+                                    <div class="cash_table_cell">
+                                        <span>{{ row.text }}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             </div>
         </div>
@@ -688,8 +699,19 @@ const langData = {
                             label:   "편의점캐시\n구입/충전",
                             hero:    null,
                             heroAlt: "",
-                            title:   "편의점캐시 구입/충전",
-                            desc:    "",
+                            title:   "편의점 캐시 구입/충전 서비스",
+                            desc:    "편의점캐시는 온라인콘텐츠, 쇼핑몰, 게임캐시, 국제전화카드를 편의점에서 구입/충전 할 수 있는 서비스입니다.",
+                            table: {
+                                rows: [
+                                    { head: "게임 · 상품권 · 통신", text: "(알뜰폰/국제전화/모바일 데이터) 등 다양한 서비스를 편의점에서 실시간으로 구입, 충전 할 수 있는 서비스 영수증형 PIN 구입과 국제전화카드 충전 이외에 스마트폰 APP를 통한 실시간 잔액 충전 가능" },
+                                    { head: "게임캐시",         text: "N코인(엔씨소프트), 넥슨, 월드오브워크레프트, 리그오브레전드, 틴캐시, 한게임, 퍼니카드, 한빛소프트 등" },
+                                    { head: "상품권",           text: "문화상품권, 스마트문화상품권, 해피머니상품권, 도서문화상품권 등" },
+                                    { head: "스마트폰 APP충전", text: "넥슨플레이, 컬쳐랜드" },
+                                    { head: "알뜰폰",           text: "EG CARD, 7mobile, 아이즈, 모빙, M모바일, free C/T, 이야기 모바일 등" },
+                                    { head: "국제전화카드",     text: "LG U+, Naray, SK broadband" },
+                                    { head: "통신(데이터)/기타", text: "올레 WiFi, T데이터쿠폰, KT LTE 데이터쿠폰, DAUM캐시" },
+                                ],
+                            },
                         },
                         {
                             label:   "교통카드\n충전",
@@ -1044,8 +1066,19 @@ const langData = {
                             label:   "Convenience\ncash",
                             hero:    null,
                             heroAlt: "",
-                            title:   "Convenience cash",
-                            desc:    "",
+                            title:   "Convenience Cash Purchase / Recharge Service",
+                            desc:    "Convenience cash is a service that allows you to purchase or recharge online content, shopping malls, game cash, and international calling cards at convenience stores.",
+                            table: {
+                                rows: [
+                                    { head: "Game · Gift · Telecom", text: "A service for purchasing and recharging various services (budget phone/international call/mobile data) in real time at convenience stores. Receipt-type PIN purchase and international calling card recharge, plus real-time balance top-up via smartphone app." },
+                                    { head: "Game cash",    text: "NCoin (NCSoft), Nexon, World of Warcraft, League of Legends, Teen Cash, Hangame, Funnycard, Hanbit Soft, etc." },
+                                    { head: "Gift cards",  text: "Culture Gift Card, Smart Culture Gift Card, Happy Money, Book Culture Gift Card, etc." },
+                                    { head: "Smartphone APP charge", text: "Nexon Play, Cultureland" },
+                                    { head: "Budget phone", text: "EG CARD, 7mobile, iZ, Mobing, M Mobile, free C/T, Story Mobile, etc." },
+                                    { head: "International calling card", text: "LG U+, Naray, SK broadband" },
+                                    { head: "Telecom (data) / Other", text: "Olleh WiFi, T Data Coupon, KT LTE Data Coupon, DAUM Cash" },
+                                ],
+                            },
                         },
                         {
                             label:   "Transit card\nrecharge",
@@ -1778,6 +1811,52 @@ img {
 .service_panel :deep(.brand_panel_title) {
     margin-bottom: 0;
 }
+
+/* 편의점캐시 테이블 */
+.cash_table {
+    width: 100%;
+    margin-top: 100px;
+    border-collapse: collapse;
+}
+.cash_table {border-top:1px solid #e5e5e9;}
+.cash_table th,
+.cash_table td {
+    color: #161618;
+    border-bottom: 1px solid #e5e5e9;
+    vertical-align: middle;
+}
+
+.cash_table th {
+    width: 200px;
+    padding: 0 24px;
+    font-weight: 700;
+    background-color: #f8f8f8;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+.cash_table th span,.cash_table td span{
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+
+} 
+
+.cash_table td {
+    padding: 18px 24px;
+}
+
+.cash_table_cell {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
 
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
