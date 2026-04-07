@@ -1,94 +1,75 @@
 <template>
-    <section class="sec_diff">
-        <div class="inner">
-            <Tabs
-                :model-value="depth1ActiveIdx"
-                tab-class="type_01"
-                :tab-items="depth1Tabs"
-                :tab-slide="false"
-                @change="onDepth1Change"
-            />
-            <Tabs
-                v-if="depth1ActiveIdx === 0"
-                v-model="activeTab"
-                tab-class="type_02"
-                :tab-items="depth2Tabs"
-                :tab-slide="false"
-            />
+    <div class="inner">
+        <Tabs
+            :model-value="depth1ActiveIdx"
+            tab-class="type_01"
+            :tab-items="depth1Tabs"
+            :tab-slide="false"
+            @change="onDepth1Change"
+        />
+        <Tabs
+            v-if="depth1ActiveIdx === 0"
+            v-model="activeTab"
+            tab-class="type_02"
+            :tab-items="depth2Tabs"
+            :tab-slide="false"
+        />
+        <Tabs
+            v-if="depth1ActiveIdx === 2"
+            v-model="storeActiveTab"
+            tab-class="type_02"
+            :tab-items="storeTabs"
+            :tab-slide="false"
+        />
 
-            <!-- 탭 0: 차별화 상품 -->
-            <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel">
-                <PanelHeader :hero="tab0.hero" :hero-alt="tab0.heroAlt" :title="tab0.title" :subtitle="tab0.subtitle" />
+        <!-- 탭 0: 차별화 상품 -->
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel">
+            <PanelHeader :hero="tab0.hero" :hero-alt="tab0.heroAlt" :title="tab0.title" :subtitle="tab0.subtitle" />
 
-                <ul v-if="tab0.cards && tab0.cards.length" class="diff_card_grid" role="list">
-                    <li v-for="(card, c) in tab0.cards" :key="c">
-                        <article class="diff_card">
-                            <figure>
-                                <img :src="card.image" :alt="card.alt || ''" width="460" height="320" />
-                            </figure>
-                            <div>
-                                <h3>{{ card.title }}</h3>
-                                <p>{{ card.desc }}</p>
-                            </div>
-                        </article>
+            <ul v-if="tab0.cards && tab0.cards.length" class="diff_card_grid" role="list">
+                <li v-for="(card, c) in tab0.cards" :key="c">
+                    <article class="diff_card">
+                        <figure>
+                            <img :src="card.image" :alt="card.alt || ''" width="460" height="320" />
+                        </figure>
+                        <div>
+                            <h3>{{ card.title }}</h3>
+                            <p>{{ card.desc }}</p>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+
+            <DiffQrRow v-if="tab0.qr" :title="tab0.qr.title" :desc="tab0.qr.desc" />
+        </div>
+
+        <!-- 탭 1: CAFE25 -->
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel">
+            <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :subtitle="tab1.subtitle" hero-bg="#fff" />
+
+            <section v-for="(sec, i) in tab1.sections" :key="i">
+                <SectionHeader :title="sec.title" :desc="sec.desc" :source="sec.source" />
+
+                <!-- 카드형 -->
+                <ul v-if="sec.type === 'cards'" class="cafe25_card_list" role="list">
+                    <li v-for="(card, c) in sec.cards" :key="c">
+                        <div>
+                            <img :src="card.image" :alt="card.alt || ''" />
+                        </div>
                     </li>
                 </ul>
 
-                <DiffQrRow v-if="tab0.qr" :title="tab0.qr.title" :desc="tab0.qr.desc" />
-            </div>
+                <!-- 이미지형 -->
+                <figure v-else-if="sec.type === 'image'" class="cafe25_img_wrap">
+                    <img :src="sec.image" :alt="sec.imageAlt || ''" width="938" height="472" />
+                </figure>
 
-            <!-- 탭 1: CAFE25 -->
-            <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel">
-                <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :subtitle="tab1.subtitle" hero-bg="#fff" />
-
-                <section v-for="(sec, i) in tab1.sections" :key="i" class="cafe25_sec">
-                    <header>
-                        <h3>{{ sec.title }}</h3>
-                        <p v-if="sec.desc">{{ sec.desc }}<cite v-if="sec.source" class="cafe25_sec_cite">{{ sec.source }}</cite></p>
-                    </header>
-
-                    <!-- 카드형 -->
-                    <ul v-if="sec.type === 'cards'" class="cafe25_card_list" role="list">
-                        <li v-for="(card, c) in sec.cards" :key="c">
-                            <div>
-                                <img :src="card.image" :alt="card.alt || ''" />
-                            </div>
-                        </li>
-                    </ul>
-
-                    <!-- 이미지형 -->
-                    <figure v-else-if="sec.type === 'image'" class="cafe25_img_wrap">
-                        <img :src="sec.image" :alt="sec.imageAlt || ''" width="938" height="472" />
-                    </figure>
-
-                    <!-- 분할형 (이미지 + 테이블) -->
-                    <div v-else-if="sec.type === 'split'" class="cafe25_split">
-                        <div class="cafe25_split_img">
-                            <img :src="sec.image" :alt="sec.imageAlt || ''" />
-                        </div>
-                        <div class="cafe25_split_table">
-                            <table class="cafe25_table">
-                                <thead>
-                                    <tr>
-                                        <th
-                                            v-for="(col, ci) in sec.columns"
-                                            :key="ci"
-                                            scope="col"
-                                            :style="{ width: col.width + 'px', textAlign: col.align }"
-                                        >{{ col.label }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(row, ri) in sec.rows" :key="ri">
-                                        <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }">{{ row[col.key] }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <!-- 분할형 (이미지 + 테이블) -->
+                <div v-else-if="sec.type === 'split'" class="cafe25_split">
+                    <div class="cafe25_split_img">
+                        <img :src="sec.image" :alt="sec.imageAlt || ''" />
                     </div>
-
-                    <!-- 테이블형 -->
-                    <div v-else-if="sec.type === 'table'" class="cafe25_table_wrap">
+                    <div class="cafe25_split_table">
                         <table class="cafe25_table">
                             <thead>
                                 <tr>
@@ -102,183 +83,233 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(row, ri) in sec.rows" :key="ri">
-                                    <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }">
-                                        <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />{{ row[col.key] }}
-                                    </td>
+                                    <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }">{{ row[col.key] }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </section>
-            </div>
+                </div>
 
-            <!-- 탭 2: CHICKEN25 -->
-            <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel">
-                <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :subtitle="tab2.subtitle" />
+                <!-- 테이블형 -->
+                <div v-else-if="sec.type === 'table'" class="cafe25_table_wrap">
+                    <table class="cafe25_table">
+                        <thead>
+                            <tr>
+                                <th
+                                    v-for="(col, ci) in sec.columns"
+                                    :key="ci"
+                                    scope="col"
+                                    :style="{ width: col.width + 'px', textAlign: col.align }"
+                                >{{ col.label }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(row, ri) in sec.rows" :key="ri">
+                                <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }">
+                                    <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />{{ row[col.key] }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
 
-                <section v-for="(sec, i) in tab2.sections" :key="i" class="chicken25_sec">
-                    <header>
-                        <h3>{{ sec.title }}</h3>
-                        <p v-if="sec.desc">{{ sec.desc }}</p>
-                    </header>
+        <!-- 탭 2: CHICKEN25 -->
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel">
+            <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :subtitle="tab2.subtitle" />
 
-                    <ul v-if="sec.type === 'text_cards'" class="chicken25_card_list" role="list">
-                        <li v-for="(card, c) in sec.cards" :key="c">
-                            <div class="chicken25_card">
-                                <h4 v-html="card.title" />
-                                <p>{{ card.desc }}</p>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
+            <section v-for="(sec, i) in tab2.sections" :key="i">
+                <SectionHeader :title="sec.title" :desc="sec.desc" />
 
-                <ul v-if="tab2.imgGrid && tab2.imgGrid.length" class="chicken25_img_grid" role="list">
-                    <li v-for="(item, i) in tab2.imgGrid" :key="i">
+                <ul v-if="sec.type === 'text_cards'" class="chicken25_card_list" role="list">
+                    <li v-for="(card, c) in sec.cards" :key="c">
+                        <div class="chicken25_card">
+                            <h4 v-html="card.title" />
+                            <p>{{ card.desc }}</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <ul v-if="tab2.imgGrid && tab2.imgGrid.length" class="chicken25_img_grid" role="list">
+                <li v-for="(item, i) in tab2.imgGrid" :key="i">
+                    <div>
+                        <img :src="item.image" :alt="item.alt || ''" />
+                    </div>
+                </li>
+            </ul>
+
+            <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" />
+        </div>
+
+        <!-- 탭 3: GOPIZZA -->
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel">
+            <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :subtitle="tab3.subtitle" />
+
+            <section v-for="(sec, i) in tab3.sections" :key="i">
+                <SectionHeader :title="sec.title" :desc="sec.desc" />
+
+                <!-- 이미지 2열 -->
+                <ul v-if="sec.type === 'img_grid'" class="gopizza_img_grid" role="list">
+                    <li v-for="(item, gi) in sec.images" :key="gi">
                         <div>
-                            <img :src="item.image" :alt="item.alt || ''" />
+                            <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
                         </div>
                     </li>
                 </ul>
 
-                <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" />
-            </div>
+                <!-- 단일 이미지 -->
+                <figure v-else-if="sec.type === 'image'" class="gopizza_img_wrap">
+                    <img v-if="sec.image" :src="sec.image" :alt="sec.imageAlt || ''" />
+                </figure>
 
-            <!-- 탭 3: GOPIZZA -->
-            <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel">
-                <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :subtitle="tab3.subtitle" />
-
-                <section
-                    v-for="(sec, i) in tab3.sections"
-                    :key="i"
-                    class="gopizza_sec"
-                >
-                    <header>
-                        <h3>{{ sec.title }}</h3>
-                        <p v-if="sec.desc" v-html="sec.desc" />
-                    </header>
-
-                    <!-- 이미지 2열 -->
-                    <ul v-if="sec.type === 'img_grid'" class="gopizza_img_grid" role="list">
-                        <li v-for="(item, gi) in sec.images" :key="gi">
-                            <div>
-                                <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
-                            </div>
-                        </li>
-                    </ul>
-
-                    <!-- 단일 이미지 -->
-                    <figure v-else-if="sec.type === 'image'" class="gopizza_img_wrap">
-                        <img v-if="sec.image" :src="sec.image" :alt="sec.imageAlt || ''" />
-                    </figure>
-
-                    <!-- 메뉴 소개 (REGULAR / GRAB 2패널) -->
-                    <ul v-else-if="sec.type === 'menu'" class="gopizza_menu">
-                        <li v-for="(pnl, pi) in sec.panels" :key="pi" class="gopizza_menu_panel">
-                            <div>
-                                <img v-if="pnl.image" :src="pnl.image" :alt="pnl.size" />
-                            </div>
-                            <div class="gopizza_menu_info">
-                                <div class="gopizza_menu_title">
-                                    <strong>{{ pnl.size }}</strong>
-                                    <span v-for="(tag, ti) in pnl.tags" :key="ti" class="gopizza_menu_tag">{{ tag }}</span>
-                                </div>
-                                <div class="gopizza_table_wrap">
-                                    <table class="gopizza_table">
-                                        <thead>
-                                            <tr>
-                                                <th
-                                                    v-for="(col, ci) in pnl.columns"
-                                                    :key="ci"
-                                                    scope="col"
-                                                    :style="{ textAlign: col.align }"
-                                                >{{ col.label }}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="(row, ri) in pnl.rows" :key="ri">
-                                                <td
-                                                    v-for="(col, ci) in pnl.columns"
-                                                    :key="ci"
-                                                    :style="{ textAlign: col.align }"
-                                                >
-                                                    <span v-if="ci === 0" class="gopizza_menu_name">
-                                                        {{ row[col.key] }}
-                                                        <em v-if="row.badge" class="gopizza_badge_best">{{ row.badge }}</em>
-                                                    </span>
-                                                    <span v-else>{{ row[col.key] }}</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <!-- 배달·픽업 앱 (2열) -->
-                    <ul v-else-if="sec.type === 'phone_grid'" class="gopizza_phone_grid" role="list">
-                        <li v-for="(item, ii) in sec.items" :key="ii">
-                            <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
-                        </li>
-                    </ul>
-                </section>
-
-                <div class="diff_bottom_row">
-                    <DiffQrRow v-if="tab3.qr" :title="tab3.qr.title" :desc="tab3.qr.desc" />
-                    <a v-if="tab3.link" :href="tab3.link.url" class="gopizza_link" target="_blank" rel="noopener noreferrer">
+                <!-- 메뉴 소개 (REGULAR / GRAB 2패널) -->
+                <ul v-else-if="sec.type === 'menu'" class="gopizza_menu">
+                    <li v-for="(pnl, pi) in sec.panels" :key="pi" class="gopizza_menu_panel">
                         <div>
-                            <p class="gopizza_link_title">{{ tab3.link.title }}</p>
-                            <p v-html="tab3.link.desc" />
+                            <img v-if="pnl.image" :src="pnl.image" :alt="pnl.size" />
                         </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- depth1 = 1: 신선강화점 -->
-            <div v-if="depth1ActiveIdx === 1" class="brand_panel">
-                <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :subtitle="sinsen.subtitle" />
-
-                <section v-for="(sec, i) in sinsen.sections" :key="i" class="sinsen_sec">
-                    <header>
-                        <h3>{{ sec.title }}</h3>
-                        <p v-if="sec.desc" v-html="sec.desc" />
-                    </header>
-
-                    <!-- 특징 카드 4열 -->
-                    <ul v-if="sec.features" class="sinsen_feature_list" role="list">
-                        <li v-for="(feat, fi) in sec.features" :key="fi">
-                            <div class="sinsen_feature_card">
-                                <span class="sinsen_feature_icon" aria-hidden="true"></span>
-                                <h4>{{ feat.title }}</h4>
-                                <p v-html="feat.desc" />
+                        <div class="gopizza_menu_info">
+                            <div class="gopizza_menu_title">
+                                <strong>{{ pnl.size }}</strong>
+                                <span v-for="(tag, ti) in pnl.tags" :key="ti" class="gopizza_menu_tag">{{ tag }}</span>
                             </div>
-                        </li>
-                    </ul>
+                            <div class="gopizza_table_wrap">
+                                <table class="gopizza_table">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                v-for="(col, ci) in pnl.columns"
+                                                :key="ci"
+                                                scope="col"
+                                                :style="{ textAlign: col.align }"
+                                            >{{ col.label }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(row, ri) in pnl.rows" :key="ri">
+                                            <td
+                                                v-for="(col, ci) in pnl.columns"
+                                                :key="ci"
+                                                :style="{ textAlign: col.align }"
+                                            >
+                                                <span v-if="ci === 0" class="gopizza_menu_name">
+                                                    {{ row[col.key] }}
+                                                    <em v-if="row.badge" class="gopizza_badge_best">{{ row.badge }}</em>
+                                                </span>
+                                                <span v-else>{{ row[col.key] }}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
 
-                    <!-- 배송 흐름도 -->
-                    <div v-if="sec.flow" class="sinsen_card sinsen_card_flow">
-                        <img :src="imgFlow" alt="" class="sinsen_flow_img" />
+                <!-- 배달·픽업 앱 (2열) -->
+                <ul v-else-if="sec.type === 'phone_grid'" class="gopizza_phone_grid" role="list">
+                    <li v-for="(item, ii) in sec.items" :key="ii">
+                        <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
+                    </li>
+                </ul>
+            </section>
+
+            <div class="diff_bottom_row">
+                <DiffQrRow v-if="tab3.qr" :title="tab3.qr.title" :desc="tab3.qr.desc" />
+                <a v-if="tab3.link" :href="tab3.link.url" class="gopizza_link" target="_blank" rel="noopener noreferrer">
+                    <div>
+                        <p class="gopizza_link_title">{{ tab3.link.title }}</p>
+                        <p v-html="tab3.link.desc" />
                     </div>
-
-                    <!-- 운영 장점 체크리스트 카드 -->
-                    <div v-if="sec.advantages" class="sinsen_card">
-                        <ul class="sinsen_check_list">
-                            <li v-for="(item, ii) in sec.advantages.items" :key="ii">
-                                <div>
-                                    <span>{{ item.text }}</span>
-                                    <span v-if="item.note" class="sinsen_check_note">{{ item.note }}</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-
-            <div class="diff_actions">
-                <Buttons btn-class="btn_back" @click="goBack">{{ t.backLabel }}</Buttons>
+                </a>
             </div>
         </div>
-    </section>
+
+        <!-- depth1 = 1: 신선강화점 -->
+        <div v-if="depth1ActiveIdx === 1" class="brand_panel">
+            <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :subtitle="sinsen.subtitle" />
+
+            <section v-for="(sec, i) in sinsen.sections" :key="i">
+                <SectionHeader :title="sec.title" :desc="sec.desc" />
+
+                <!-- 특징 카드 4열 -->
+                <ul v-if="sec.features" class="sinsen_feature_list" role="list">
+                    <li v-for="(feat, fi) in sec.features" :key="fi">
+                        <div class="sinsen_feature_card">
+                            <span class="sinsen_feature_icon" aria-hidden="true"></span>
+                            <h4>{{ feat.title }}</h4>
+                            <p v-html="feat.desc" />
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- 배송 흐름도 -->
+                <div v-if="sec.flow" class="sinsen_card sinsen_card_flow">
+                    <p v-if="sec.flowNote">{{ sec.flowNote }}</p>
+                    <img :src="imgFlow" alt="" class="sinsen_flow_img" />
+                </div>
+
+                <!-- 운영 장점 체크리스트 카드 -->
+                <div v-if="sec.advantages" class="sinsen_card">
+                    <ul class="sinsen_check_list">
+                        <li v-for="(item, ii) in sec.advantages.items" :key="ii">
+                            <div>
+                                <span>{{ item.text }}</span>
+                                <span v-if="item.note" class="sinsen_check_note">{{ item.note }}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- depth1 = 2: 매장/서비스 -->
+        <!-- 생활 서비스 -->
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 0" class="brand_panel">
+            <PanelHeader
+                :hero="store.tabs[0].hero"
+                :hero-alt="store.tabs[0].heroAlt"
+                :title="store.tabs[0].title"
+                :subtitle="store.tabs[0].subtitle"
+            />
+        </div>
+
+        <!-- 택배&픽업 -->
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel">
+            <PanelHeader
+                :hero="store.tabs[1].hero"
+                :hero-alt="store.tabs[1].heroAlt"
+                :title="store.tabs[1].title"
+                :subtitle="store.tabs[1].subtitle"
+            />
+        </div>
+
+        <!-- 공공요금수납 -->
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel">
+            <PanelHeader
+                :hero="store.tabs[2].hero"
+                :hero-alt="store.tabs[2].heroAlt"
+                :title="store.tabs[2].title"
+                :subtitle="store.tabs[2].subtitle"
+            />
+        </div>
+
+        <!-- 상품권 판매 -->
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
+            <PanelHeader
+                :hero="store.tabs[3].hero"
+                :hero-alt="store.tabs[3].heroAlt"
+                :title="store.tabs[3].title"
+                :subtitle="store.tabs[3].subtitle"
+            />
+        </div>
+
+        <div class="diff_actions">
+            <Buttons btn-class="btn_back" @click="goBack">{{ t.backLabel }}</Buttons>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -286,6 +317,7 @@ import { ref, computed, defineProps } from "vue";
 import { useRouter } from "vue-router";
 import Tabs from "@/components/Tabs.vue";
 import PanelHeader from "@/components/PanelHeader.vue";
+import SectionHeader from "@/components/SectionHeader.vue";
 import Buttons from "@/components/Buttons.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
 
@@ -355,6 +387,12 @@ const langData = {
                 { item: "CAFE25" },
                 { item: "치킨25" },
                 { item: "고피자" },
+            ],
+            depth2Store: [
+                { item: "생활 서비스" },
+                { item: "택배&픽업" },
+                { item: "공공요금수납" },
+                { item: "상품권 판매" },
             ],
         },
         tabs: [
@@ -578,8 +616,10 @@ const langData = {
                     ],
                 },
                 {
-                    title: "GS25 신선 배송 방식",
+                    title: "왜 GS25 신선강화점인가?",
+                    desc: "GSTHEFRESH 통합 구매를 통한 상품 경쟁력을 확보하여 타 편의점 대비 다양한 신선·장보기 상품을 운영합니다. <br />업계 유일의 신선상품 전용 물류센터를 운영중이며, 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
                     flow: true,
+                    flowNote: "*신선센터를 거치지 않는 운영 구조에서는 상품 검품, 물류비, 신선도 관리 방식에 차이가 발생할 수 있습니다.",
                 },
                 {
                     title: "신선강화점 운영의 장점",
@@ -594,6 +634,38 @@ const langData = {
                             { text: "기존 일반점 → 신선강화점 변경 시 효과성 검증", note: "\u201C도입 후 일평균 매출 기존대비 약 12.6% 증가, 일평균 고객 수 21명 증가\u201D" },
                         ],
                     },
+                },
+            ],
+        },
+        store: {
+            tabs: [
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "생활 서비스",
+                    subtitle: "",
+                    sections: [],
+                },
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "택배&픽업",
+                    subtitle: "",
+                    sections: [],
+                },
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "공공요금수납",
+                    subtitle: "",
+                    sections: [],
+                },
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "상품권 판매",
+                    subtitle: "",
+                    sections: [],
                 },
             ],
         },
@@ -613,6 +685,12 @@ const langData = {
                 { item: "CAFE25" },
                 { item: "Chicken25" },
                 { item: "Go Pizza" },
+            ],
+            depth2Store: [
+                { item: "Daily services" },
+                { item: "Parcel & Pickup" },
+                { item: "Utility bill payment" },
+                { item: "Gift card sales" },
             ],
         },
         tabs: [
@@ -839,6 +917,7 @@ const langData = {
                 {
                     title: "GS25 fresh delivery process",
                     flow: true,
+                    flowNote: "*Stores operating without a fresh center may differ in product inspection, logistics costs, and freshness management.",
                 },
                 {
                     title: "Advantages of operating fresh focus stores",
@@ -856,12 +935,45 @@ const langData = {
                 },
             ],
         },
+        store: {
+            tabs: [
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "Daily services",
+                    subtitle: "",
+                    sections: [],
+                },
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "Parcel & Pickup",
+                    subtitle: "",
+                    sections: [],
+                },
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "Utility bill payment",
+                    subtitle: "",
+                    sections: [],
+                },
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "Gift card sales",
+                    subtitle: "",
+                    sections: [],
+                },
+            ],
+        },
         backLabel: "Back to list",
     },
 };
 
 const t = computed(() => langData[props.lang] || langData.ko);
 const sinsen = computed(() => t.value.sinsen);
+const store = computed(() => t.value.store);
 const tab0 = computed(() => t.value.tabs[0]);
 const tab1 = computed(() => t.value.tabs[1]);
 const tab2 = computed(() => t.value.tabs[2]);
@@ -870,6 +982,9 @@ const tab3 = computed(() => t.value.tabs[3]);
 const depth1ActiveIdx = ref(0);
 const depth1Tabs = computed(() => t.value.nav.depth1);
 const depth2Tabs = computed(() => t.value.nav.depth2);
+const storeTabs = computed(() => t.value.nav.depth2Store);
+
+const storeActiveTab = ref(0);
 
 const depth1Routes = ["/gsrbr010101", null, null, null, null];
 
@@ -903,11 +1018,7 @@ img {
     margin-bottom: 24px;
 }
 
-.sec_diff {
-    width: 100%;
-}
-
-.sec_diff > .inner {
+.inner {
     max-width: 1460px;
     margin: 0 auto;
     padding: 109px 20px 200px;
@@ -916,6 +1027,14 @@ img {
 .brand_panel {
     padding-top: 40px;
     padding-bottom: 100px;
+}
+
+.brand_panel section {
+    margin-bottom: 120px;
+}
+
+.brand_panel section:last-of-type {
+    margin-bottom: 0;
 }
 
 /* ── 탭 0: 차별화 상품 ── */
@@ -936,10 +1055,10 @@ img {
 }
 
 .diff_card > figure {
+    aspect-ratio: 460 / 320;
     margin: 0;
     padding: 0;
     background-color: #e8e8ec;
-    aspect-ratio: 460 / 320;
     overflow: hidden;
 }
 
@@ -973,41 +1092,6 @@ img {
 }
 
 /* ── 탭 1: CAFE25 ── */
-.cafe25_sec {
-    padding-bottom: 120px;
-}
-
-.cafe25_sec > header {
-    margin: 0 0 40px;
-}
-
-.cafe25_sec > header > h3 {
-    margin: 0 0 12px;
-    color: #161618;
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-.cafe25_sec > header > p {
-    margin: 0;
-    color: #161618;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-}
-
-.cafe25_sec_cite {
-    margin-left: 16px;
-    color: #67676f;
-    font-size: 1.4rem;
-    font-weight: 500;
-    font-style: normal;
-    letter-spacing: -0.01em;
-}
-
 .cafe25_card_list {
     margin: 0;
     padding: 0;
@@ -1115,38 +1199,12 @@ img {
     height: 24px;
     margin-right: 8px;
     border-radius: 50%;
-    object-fit: cover;
     vertical-align: middle;
     display: inline-block;
+    object-fit: cover;
 }
 
 /* ── 탭 2: CHICKEN25 ── */
-.chicken25_sec {
-    margin-bottom: 120px;
-}
-
-.chicken25_sec > header {
-    margin-bottom: 32px;
-}
-
-.chicken25_sec > header > h3 {
-    margin: 0 0 12px;
-    color: #161618;
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-.chicken25_sec > header > p {
-    margin: 0;
-    color: #161618;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-}
-
 .chicken25_card_list {
     margin: 0;
     padding: 0;
@@ -1160,7 +1218,7 @@ img {
 }
 
 .chicken25_card {
-    max-height: 260px;
+    height: 264px;
     padding: 32px;
     background-color: #f8f8f8;
     border-radius: 12px;
@@ -1185,7 +1243,7 @@ img {
 }
 
 .chicken25_img_grid {
-    margin: 0 0 40px;
+    margin: 120px 0 40px;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, calc((100% - 20px) / 2));
@@ -1203,36 +1261,6 @@ img {
 }
 
 /* ── 탭 3: GOPIZZA ── */
-.gopizza_sec {
-    margin-bottom: 120px;
-}
-
-.gopizza_sec:last-of-type {
-    margin-bottom: 40px;
-}
-
-.gopizza_sec > header {
-    margin-bottom: 40px;
-}
-
-.gopizza_sec > header > h3 {
-    margin: 0 0 12px;
-    color: #161618;
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-.gopizza_sec > header > p {
-    margin: 0;
-    color: #161618;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-}
-
 .gopizza_img_grid {
     margin: 0;
     padding: 0;
@@ -1387,7 +1415,7 @@ img {
 }
 
 .gopizza_phone_grid {
-    margin: 0;
+    margin-bottom: 100px;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, calc((100% - 20px) / 2));
@@ -1438,34 +1466,6 @@ img {
 }
 
 /* ── 신선강화점 ── */
-.sinsen_sec {
-    margin-bottom: 120px;
-}
-.sinsen_sec:last-of-type{
-    margin-bottom: 0;
-}
-.sinsen_sec > header {
-    margin-bottom: 40px;
-}
-
-.sinsen_sec > header > h3 {
-    margin: 0 0 16px;
-    color: #161618;
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-.sinsen_sec > header > p {
-    margin: 0;
-    color: #161618;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-}
-
 .sinsen_feature_list {
     margin: 0;
     padding: 0;
@@ -1513,26 +1513,29 @@ img {
 }
 
 .sinsen_card {
+    max-width: 940px;
     padding: 32px;
     background-color: #f8f8f8;
     border-radius: 12px;
 }
 
-.sinsen_card + .sinsen_card {
-    margin-top: 20px;
+.sinsen_card > p {
+    margin-bottom: 32px;
+    color: #67676f;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
 }
 
-
 .sinsen_flow_img {
-    width: 100%;
-    height: auto;
-    display: block;
     margin-top: 24px;
+    display: block;
 }
 
 /* 운영 장점 체크리스트 */
 .sinsen_check_list > li {
-    padding-bottom:12px ;
+    padding-bottom: 12px;
     color: #161618;
     font-size: 1.8rem;
     font-weight: 400;
@@ -1543,7 +1546,6 @@ img {
     gap: 8px;
 }
 
-
 .sinsen_check_list > li:last-child {
     padding-bottom: 0;
 }
@@ -1552,15 +1554,13 @@ img {
     content: "";
     width: 16px;
     height: 16px;
-    flex-shrink: 0;
     background-color: #107af2;
     border-radius: 50%;
     position: relative;
     top: 2px;
+    flex-shrink: 0;
 }
-.sinsen_check_list > li span{
-    font-size: 1.8rem;
-}
+
 .sinsen_check_list > li > div {
     display: flex;
     flex-direction: column;
@@ -1569,7 +1569,6 @@ img {
 
 .sinsen_check_note {
     color: #67676f;
-
 }
 
 /* ── 반응형 ── */
@@ -1588,7 +1587,7 @@ img {
 }
 
 @media (max-width: 768px) {
-    .sec_diff > .inner {
+    .inner {
         padding: 24px 20px 60px;
     }
 
@@ -1605,10 +1604,6 @@ img {
         font-size: 2.2rem;
     }
 
-    .cafe25_sec > header > h3 {
-        font-size: 2.2rem;
-    }
-
     .cafe25_card_list {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -1619,10 +1614,6 @@ img {
 
     .cafe25_split > div {
         width: 100%;
-    }
-
-    .chicken25_sec > header > h3 {
-        font-size: 2.2rem;
     }
 
     .chicken25_card_list {
@@ -1660,9 +1651,7 @@ img {
     }
 
     .sinsen_check_list > li {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
+        flex-wrap: wrap;
     }
 }
 </style>
