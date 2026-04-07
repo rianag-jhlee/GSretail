@@ -12,10 +12,12 @@ const workListRoutes = workListData
         return {
             path: item.link || `/${item.path}`,
             component: () => import(`@/uiPub/${parentComponent}.vue`),
+            meta: { hideLayout: item.type === "embed" },
             children: [
                 {
                     path: '', // 기본 child
-                    component: () => import(`@/uiPub/${item.path}.vue`)
+                    component: () => import(`@/uiPub/${item.path}.vue`),
+                    meta: { hideLayout: item.type === "embed" }
                 }
             ]
         }
