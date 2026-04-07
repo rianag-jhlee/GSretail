@@ -3,6 +3,7 @@
 #skip_menu a:focus {height:auto; padding:4px 10px;}
 
 /* header */
+#header {position:fixed; top:0; right:0; left:0;}
 #header .inner {width:100%; max-width:1720px; margin:0 auto; padding:38px 20px;display:flex; align-items:center; justify-content:space-between;}
 #header nav {position:relative; display:flex; align-items:center;}
 #header nav ul.depth1 {display:flex;}
