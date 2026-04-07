@@ -40,7 +40,7 @@
                     <!-- 분할형 (이미지 + 테이블) -->
                     <div v-else-if="sec.type === 'split'" class="cafe25_split">
                         <div class="cafe25_split_img">
-                           <img :src="sec.image" :alt="sec.imageAlt || ''" />
+                            <img :src="sec.image" :alt="sec.imageAlt || ''" />
                         </div>
                         <div class="cafe25_split_table">
                             <table class="cafe25_table">
@@ -326,7 +326,7 @@ function goBack() {
 
 /* 1섹션 (커피머신 등 서브섹션) */
 .cafe25_sec {
-    padding-bottom: 80px;
+    padding-bottom: 120px;
 }
 
 .cafe25_sec > header {
@@ -454,7 +454,6 @@ function goBack() {
 }
 .cafe25_split > div{
     width: calc(50% - 10px);
-    flex:1;
     min-width: 0;
 }
 .cafe25_split_img {
@@ -475,6 +474,7 @@ function goBack() {
 .cafe25_split_img > img {
     width: 100%;
     height: auto;
+    max-height: 358px;
     display: block;
 }
 
@@ -508,9 +508,25 @@ function goBack() {
     white-space: nowrap;
 }
 
+.cafe25_table th:first-child,
+.cafe25_table td:first-child{
+    border-left: 0;
+}
+.cafe25_table th:last-child,
+.cafe25_table td:last-child{
+    border-right: 0;
+}
+.cafe25_table th:first-child{
+    border-radius: 10px 0 0 0;
+}
+.cafe25_table th:last-child{
+    border-radius: 0 10px 0 0;
+}
+
 .cafe25_table th {
-    background-color: #f8f8f8;
     font-weight: 600;
+    background-color: #f8f8f8;
+    border-top: 0;
 }
 
 .cafe25_table > tbody > tr > td > .flag_icon {
