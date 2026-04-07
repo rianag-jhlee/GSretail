@@ -28,9 +28,8 @@ img {
 .diff_qr_row {
     max-width: 100%;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
-    box-sizing: border-box;
 }
 
 .diff_qr_row > figure {
@@ -42,7 +41,6 @@ img {
     border: 1px solid #e5e5e9;
     border-radius: 10px;
     flex-shrink: 0;
-    box-sizing: border-box;
 }
 
 .diff_qr_row > div {
@@ -69,9 +67,9 @@ img {
     letter-spacing: -0.02em;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .diff_qr_row {
         flex-direction: column;
     }
-}
+} */
 </style>
