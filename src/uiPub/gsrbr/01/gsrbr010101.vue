@@ -268,42 +268,70 @@
         <!-- depth1 = 2: 매장/서비스 -->
         <!-- 생활 서비스 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 0" class="brand_panel">
-            <PanelHeader
-                :hero="store.tabs[0].hero"
-                :hero-alt="store.tabs[0].heroAlt"
-                :title="store.tabs[0].title"
-                :subtitle="store.tabs[0].subtitle"
-            />
+            <!-- 3depth 탭 네비 -->
+            <nav class="service_tab_wrap" role="tablist" aria-label="생활 서비스">
+                <button
+                    v-for="(tab, i) in store.tabs[0].serviceTabs"
+                    :key="i"
+                    type="button"
+                    role="tab"
+                    :aria-selected="serviceActiveTab === i"
+                    class="service_tab_item"
+                    :class="{ is_active: serviceActiveTab === i }"
+                    @click="serviceActiveTab = i"
+                >
+                    <span class="service_tab_icon" aria-hidden="true"></span>
+                    <span class="service_tab_label">{{ tab.label }}</span>
+                </button>
+            </nav>
+
+            <!-- 3depth 패널 -->
+            <div
+                v-for="(tab, i) in store.tabs[0].serviceTabs"
+                :key="i"
+                v-show="serviceActiveTab === i"
+                class="service_panel"
+            >
+                <section>
+                    <PanelHeader
+                        :hero="tab.hero"
+                        :hero-alt="tab.heroAlt"
+                        :title="tab.title"
+                        :subtitle="tab.desc"
+                        
+                    />
+                </section>
+            </div>
         </div>
 
         <!-- 택배&픽업 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel">
-            <PanelHeader
+            <!-- <PanelHeader
                 :hero="store.tabs[1].hero"
                 :hero-alt="store.tabs[1].heroAlt"
                 :title="store.tabs[1].title"
                 :subtitle="store.tabs[1].subtitle"
-            />
+            /> -->
         </div>
 
         <!-- 공공요금수납 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel">
-            <PanelHeader
+            <!-- <PanelHeader
                 :hero="store.tabs[2].hero"
                 :hero-alt="store.tabs[2].heroAlt"
                 :title="store.tabs[2].title"
                 :subtitle="store.tabs[2].subtitle"
-            />
+            /> -->
         </div>
 
         <!-- 상품권 판매 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
-            <PanelHeader
+            <!-- <PanelHeader
                 :hero="store.tabs[3].hero"
                 :hero-alt="store.tabs[3].heroAlt"
                 :title="store.tabs[3].title"
                 :subtitle="store.tabs[3].subtitle"
-            />
+            /> -->
         </div>
 
         <div class="diff_actions">
@@ -357,6 +385,9 @@ import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 /*신선강화점 이미지*/ 
 import imgHero4 from "@/assets/images/dummy/brand_bg_05.png";
 import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
+
+/*매장/서비스 이미지*/ 
+import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
 
 // import imgSinsenFeature1 from "@/assets/images/dummy/sinsen_feature_01.png";
 // import imgSinsenFeature2 from "@/assets/images/dummy/sinsen_feature_02.png";
@@ -645,6 +676,64 @@ const langData = {
                     title: "생활 서비스",
                     subtitle: "",
                     sections: [],
+                    serviceTabs: [
+                        {
+                            label:   "현금인출기\n서비스",
+                            hero:    imgHero5,
+                            heroAlt: "",
+                            title:   "현금인출기 서비스",
+                            desc:    "현금인출, 계좌 이체 등 금융서비스 외에도 프로스포츠(야구, 축구, 배구, 농구) 정규리그 입장권(즉시 입장), 에버랜드 자유이용권의 발권도 가능합니다.<br />그 밖에 하이패스 충전(신용카드 결제), 알뜰폰 판매 등 다양한 생활 편의 서비스를 제공하고 있습니다.",
+                        },
+                        {
+                            label:   "편의점캐시\n구입/충전",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "편의점캐시 구입/충전",
+                            desc:    "",
+                        },
+                        {
+                            label:   "교통카드\n충전",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "교통카드 충전",
+                            desc:    "",
+                        },
+                        {
+                            label:   "기프트\n카드",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "기프트 카드",
+                            desc:    "",
+                        },
+                        {
+                            label:   "유심\n요금제",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "유심 요금제",
+                            desc:    "",
+                        },
+                        {
+                            label:   "하이패스\n카드/단말기",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "하이패스 카드/단말기",
+                            desc:    "",
+                        },
+                        {
+                            label:   "고속도로 미납\n통행료 납부",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "고속도로 미납 통행료 납부",
+                            desc:    "",
+                        },
+                        {
+                            label:   "온라인몰\n편의점 결제",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "온라인몰 편의점 결제",
+                            desc:    "",
+                        },
+                    ],
                 },
                 {
                     hero: null,
@@ -943,6 +1032,64 @@ const langData = {
                     title: "Daily services",
                     subtitle: "",
                     sections: [],
+                    serviceTabs: [
+                        {
+                            label:   "ATM\nServices",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "ATM Services",
+                            desc:    "In addition to financial services such as cash withdrawals and bank transfers, you can also purchase tickets for professional sports (baseball, soccer, volleyball, basketball) regular league games (immediate entry) and Everland unlimited passes.<br />We also offer a variety of daily convenience services including Hi-Pass charging (credit card payment) and budget phone sales.",
+                        },
+                        {
+                            label:   "Convenience\ncash",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "Convenience cash",
+                            desc:    "",
+                        },
+                        {
+                            label:   "Transit card\nrecharge",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "Transit card recharge",
+                            desc:    "",
+                        },
+                        {
+                            label:   "Gift\ncard",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "Gift card",
+                            desc:    "",
+                        },
+                        {
+                            label:   "USIM\nplan",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "USIM plan",
+                            desc:    "",
+                        },
+                        {
+                            label:   "Hi-Pass\ncard/device",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "Hi-Pass card/device",
+                            desc:    "",
+                        },
+                        {
+                            label:   "Expressway\ntoll payment",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "Expressway toll payment",
+                            desc:    "",
+                        },
+                        {
+                            label:   "Online mall\nstore payment",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "Online mall store payment",
+                            desc:    "",
+                        },
+                    ],
                 },
                 {
                     hero: null,
@@ -985,6 +1132,7 @@ const depth2Tabs = computed(() => t.value.nav.depth2);
 const storeTabs = computed(() => t.value.nav.depth2Store);
 
 const storeActiveTab = ref(0);
+const serviceActiveTab = ref(0);
 
 const depth1Routes = ["/gsrbr010101", null, null, null, null];
 
@@ -1571,6 +1719,66 @@ img {
     color: #67676f;
 }
 
+/* ── 생활 서비스 3depth 탭 ── */
+.service_tab_wrap {
+    margin-bottom: 40px;
+    border-radius: 12px;
+    display: flex;
+    overflow-x: auto;
+}
+
+.service_tab_item {
+    min-width: 177.5px;
+    padding: 24px 8px;
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+}
+
+
+
+.service_tab_icon {
+    width: 48px;
+    height: 48px;
+    background-color: #d7d7df;
+    border-radius: 8px;
+    display: block;
+    flex-shrink: 0;
+}
+
+.service_tab_item.is_active .service_tab_icon {
+    background-color: #107af2;
+}
+
+.service_tab_label {
+    color: #7c7c86;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.service_tab_item.is_active .service_tab_label {
+    color: #107af2;
+}
+
+.service_panel {
+    min-height: 200px;
+}
+
+.service_panel :deep(.brand_panel_title) {
+    margin-bottom: 0;
+}
+
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .cafe25_card_list {
@@ -1653,5 +1861,12 @@ img {
     .sinsen_check_list > li {
         flex-wrap: wrap;
     }
+
+    /* 생활 서비스 3depth 탭 반응형 */
+    .service_tab_item {
+        min-width: 120px;
+        padding: 16px 8px;
+    }
+
 }
 </style>
