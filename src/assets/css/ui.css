@@ -3,22 +3,32 @@
 #skip_menu a:focus {height:auto; padding:4px 10px;}
 
 /* header */
-#header {position:fixed; top:0; right:0; left:0;}
+#header {position:fixed; top:0; right:0; left:0; transition:transform 0.25s ease-in-out;}
+#header.hide {transform:translateY(-100%);}
+
 #header .inner {width:100%; max-width:1720px; margin:0 auto; padding:38px 20px;display:flex; align-items:center; justify-content:space-between;}
 #header nav {position:relative; display:flex; align-items:center;}
 #header nav ul.depth1 {display:flex;}
+#header nav ul.depth1 > li > a {color:#fff;}
 #header nav ul.depth2 {width:100vw; background-color:#fff; position:absolute; top:100%; left:0;}
 #header nav li > ul {height:0; overflow:hidden;}
-#header nav li:hover ul, nav li.is_open ul {height:auto; overflow:initial; display:block;}
-#header nav li:hover ul.depth2, nav li.is_open ul.depth2 {height:auto; overflow:initial; display:flex;}
+#header nav li:hover ul, nav li.is_open ul {height:auto !important; overflow:initial !important; display:block;}
+#header nav li:hover ul.depth2, nav li.is_open ul.depth2 {height:auto !important; overflow:initial !important; display:flex;}
 
 #header .quick {display:flex; align-items:center;}
 #header .quick > ul {display:flex; align-items:center;}
 #header .quick > ul > li {position:relative; display:flex; align-items:center;}
 #header .quick > ul > li + li:before {height:8px; margin:0 16px; border-left:1px solid #d9d9d9; content:''; display:block;}
+#header .quick > ul > li > a {color:#fff;}
 #header .quick > ul ul {display:none;}
 
 #header nav .depth1 > li > a {padding:0 28px; font-size:2rem; font-weight:600; line-height:140%; letter-spacing:0.02em; display:block;}
+
+#header h1 a {width:151px; height:44px; font-size:0; background:url('@/assets/images/common/h1_logo.png') 50% no-repeat; background-size:cover; display:block;}
+#header.head_black h1 a {background-image:url('@/assets/images/common/h1_logo_black.png');}
+#header.head_black nav ul.depth1 > li > a {color:#111;}
+
+#header.head_black .quick > ul > li > a {color:#111;}
 
 /* headline */
 .title_wrap {display:flex; align-items:center; flex-wrap:wrap;}

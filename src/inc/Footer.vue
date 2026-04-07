@@ -1,10 +1,6 @@
 <template>
     <footer>
-        <!-- 국문푸터 -->
-        <div v-if="lang === 'ko'">Footer</div>
-        
-        <!-- 영문푸터 -->
-        <div v-else>En Footer</div>
+        <div>{{ t.info.address }}</div>
     </footer>
 </template>
 
@@ -13,8 +9,29 @@ export default {
     name: 'Footer',
     props: {
         lang: { type: String, default: "ko" }, // ko/en
+    },
+    data() {
+        return {
+            langData: {
+                ko: {
+                    info: {
+                        address: "서울시 강남구 논현로 508(역삼동 679번지 GS타워)"
+                    }
+                },
+                en: {
+                    info: {
+                        address: "508, Nonhyeon-ro, Gangnam-gu, Seoul, Republic of Korea"
+                    }
+                }
+            }
+        };
+    },
+    computed: {
+        t() {
+            return this.langData[this.lang] || this.langData.ko;
+        }
     }
-}
+};
 </script>
 
 <style>

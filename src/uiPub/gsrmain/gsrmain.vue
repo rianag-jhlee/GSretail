@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <div v-if="t.mainVisual" class="main_visual" :style="{ backgroundImage: 'url(' + t.mainVisual.img + ')' }">
-            <p>
+    <div class="content">
+        <div class="main_visual" :style="{ backgroundImage: 'url(' + t.mainVisual.img + ')' }">
+            <p class="main_copy">
                 <strong v-html="t.mainVisual.title"></strong>
+                <span>{{ t.mainVisual.sub }}</span>
             </p>
         </div>
 
@@ -14,7 +15,7 @@
                     <li v-for="item in t.sec01.link" :key="item.txt"><a :href="item.link">{{ item.txt }}</a></li>
                 </ul>
             </div>
-            <div class="clip_mask">
+            <div class="clip_mask" :style="{ backgroundImage: 'url(' + t.sec01.img + ')' }">
                 <div>
                     <strong>Lifestyle</strong>
                     <em></em>
@@ -26,7 +27,7 @@
         <section v-if="t.sec02" class="sec02">
             <h2 v-html="t.sec02.title"></h2>
 
-            <div>
+            <!-- <div>
                 <div v-for="item in t.sec02.items" :key="item.txt">
                     <span class="thumb">
                         <em><img :src="item.img" /></em>
@@ -37,7 +38,27 @@
                         <p>{{ item.exp }}</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <!-- coverflow test -->
+            <swiper :slides-per-view="'auto'" :centered-slides="true" :loop="true" effect="coverflow" :coverflow-effect="{
+                rotate: 30,
+                stretch: 0,
+                depth: 150,
+                modifier: 1,
+                slideShadows: true
+            }" grab-cursor="true" class="sec02Swiper">
+                <swiper-slide v-for="item in t.sec02.items" :key="item.txt">
+                    <div class="slide-content">
+                        <span class="thumb"><em><img :src="item.img" /></em></span>
+                        <div>
+                            <strong>{{ item.txt }}</strong>
+                            <span>{{ item.sub }}</span>
+                            <p>{{ item.exp }}</p>
+                        </div>
+                    </div>
+                </swiper-slide>
+            </swiper>
+            <!-- //coverflow test -->
         </section>
 
         <section v-if="t.sec03" class="sec03">
@@ -84,8 +105,16 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from "swiper/vue"; //coverflow test
+import "swiper/swiper-bundle.css";
+import "swiper/css/effect-coverflow";
+
 export default {
     name: "gsrmain",
+    components: {
+        Swiper,
+        SwiperSlide
+    },
     props: {
         lang: { type: String }, // ko/en
     },
@@ -96,7 +125,7 @@ export default {
                     mainVisual: {
                         title: "Every Life.<br/> One Platform.",
                         sub: "GS리테일",
-                        img: require("@/assets/images/dummy/main_visual.png")
+                        img: require("@/assets/images/dummy/main_visual.png"),
                     },
 
                     sec01: {
@@ -106,7 +135,8 @@ export default {
                             { txt: "경영이념 및 가치 체계", link: "#none" },
                             { txt: "기업 연혁", link: "#none" },
                             { txt: "수상 이력", link: "#none" }
-                        ]
+                        ],
+                        img: require("@/assets/images/dummy/bg_sec01.png")
                     },
                     sec02: {
                         title: "GS리테일이 실천하는<br/> Together Green",
@@ -150,8 +180,11 @@ export default {
                     }
                 },
                 en: {
-                    Title: "This is a title",
-                    GreetingTxt: "Hello"
+                    mainVisual: {
+                        title: "Every Life.<br/> One Platform.",
+                        sub: "GS Retail",
+                        img: require("@/assets/images/dummy/main_visual.png"),
+                    }
                 }
             }
         };
@@ -161,8 +194,29 @@ export default {
             return this.langData[this.lang] || this.langData.ko;
         }
     },
+    /* scroll 시 특정영역에서 header 로고 및 네비 컬러 변경 */
     mounted() {
+        this.handleScroll = this.handleScroll.bind(this);
+        window.addEventListener("scroll", this.handleScroll);
+    },
+    beforeUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+    },
+    methods: {
+        handleScroll() {
+            const header = document.getElementById("header");
+            if (!header) return;
+
+            const head_black = document.querySelector('.main_visual').offsetHeight - (header.offsetHeight * 0.5); // 원하는 값
+
+            if (window.scrollY > head_black) {
+                header.classList.add("head_black");
+            } else {
+                header.classList.remove("head_black");
+            }
+        }
     }
+    /* //scroll 시 특정영역에서 header 로고 및 네비 컬러 변경 */
 };
 </script>
 
@@ -181,28 +235,166 @@ h2+.explain {
     letter-spacing: -0.02em;
 }
 
-.main_visual {height:100vh; background-position:50%; background-size:cover;}
-.main_visual * {color:#fff;}
+.main_visual {
+    height: 100vh;
+    padding: 60px 120px;
+    background-position: 50%;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
 
-section {padding: 200px 0;}
+.main_visual * {
+    color: #fff;
+}
 
-.sec01 {padding: 0 20px; display: flex; flex-direction: row-reverse; align-items: flex-end; justify-content: space-between;}
+.main_visual .main_copy strong {
+    font-size: 8rem;
+    line-height: 124%;
+    letter-spacing: -0.02em;
+    display: block;
+}
 
-.sec01 h2 {text-align: left;}
+.main_visual .main_copy span {
+    margin-top: 24px;
+    font-size: 4rem;
+    font-weight: 600;
+    line-height: 130%;
+    letter-spacing: -0.02em;
+    display: block;
+}
 
-.sec01 .explain {margin-top: 80px; margin-bottom: 60px;}
+section {
+    width: 100%;
+    padding: 200px 0;
+}
 
-.sec01 ul {border-top: 1px solid #000;}
+.sec01 {
+    max-width: 1720px;
+    padding: 200px 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    justify-content: space-between;
+}
 
-.sec01 li {border-bottom: 1px solid #aaa;}
+.sec01 h2 {
+    text-align: left;
+}
 
-.sec01 li a {padding: 24px 16px 24px 0; font-size: 2.4rem; font-weight: 600; line-height: 150%; letter-spacing: -0.02em; display: flex; align-items: center; justify-content: space-between;}
+.sec01 .explain {
+    margin-top: 80px;
+    margin-bottom: 60px;
+}
 
-.sec01 li a:after {width: 16px; height: 16px; background-color: red; content: ''; display: block;}
+.sec01 ul {
+    border-top: 1px solid #000;
+}
 
-.sec01 .clip_mask div {color: #fff; display: flex; flex-direction: column; align-items: center;}
+.sec01 li {
+    border-bottom: 1px solid #aaa;
+}
 
-.sec01 .clip_mask strong {font-size: 8rem; line-height: 124%; letter-spacing: -0.02em; text-align: center; display: block;}
+.sec01 li a {
+    padding: 24px 16px 24px 0;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-.sec01 .clip_mask em {width: 1px; background-color: #fff; flex: 1;}
+.sec01 li a:after {
+    width: 16px;
+    height: 16px;
+    background-color: red;
+    content: '';
+    display: block;
+}
+
+.sec01 .clip_mask {
+    width: 552px;
+    height: 338px;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.sec01 .clip_mask div {
+    color: #fff;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sec01 .clip_mask strong {
+    font-size: 8rem;
+    line-height: 124%;
+    letter-spacing: -0.02em;
+    text-align: center;
+    display: block;
+}
+
+.sec01 .clip_mask em {
+    width: 1px;
+    background-color: #fff;
+    flex: 1;
+}
+
+/* coverflow test */
+.sec02Swiper {
+  width: 100%;
+  padding: 80px 0;
+}
+
+.swiper-slide {
+  background: #fff;
+  width: 280px; /* 각 슬라이드 폭 */
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.slide-content {
+  text-align: center;
+  padding: 20px;
+}
+
+.slide-content .thumb em {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.slide-content .thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.slide-content strong {
+  margin-top: 15px;
+  display: block;
+  font-size: 1.5rem;
+}
+
+.slide-content span {
+  display: block;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.slide-content p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+/* //coverflow test */
 </style>

@@ -1,7 +1,7 @@
 <template>
     <header id="header">
         <div class="inner">
-            <h1><img class="CI" src="@/assets/images/common/h1_logo.png" /></h1>
+            <h1><a href="/">GS리테일</a></h1>
 
             <nav id="gnb_nav">
                 <ul class="depth1">
@@ -72,7 +72,7 @@ import Inputs from "@/components/Inputs.vue";
 
 import menuEn from "@/assets/language/menu/menu.en.json";
 import menuKo from "@/assets/language/menu/menu.ko.json";
-import { computed } from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 
 export default {
     name: "Header",
@@ -91,6 +91,8 @@ export default {
 
         // 링크 처리: blank 또는 lang 기반 경로
         const getLink = (item) => {
+
+
             if (!item.path || item.path === "#none" || item.path === "#") return "#";
             return item.blank ? item.path : `/${props.lang}${item.path}`;
         };
@@ -124,6 +126,43 @@ export default {
         const onChangeLang = computed({
             get: () => props.lang === "en",
             set: (val) => emit("change-lang", val ? "en" : "ko")
+        });
+
+        /* header scroll show/hide */
+        let lastScrollY = 0;
+
+        const handleScroll = () => {
+            const header = document.getElementById("header");
+            const currentScrollY = window.scrollY;
+
+            if (!header) return;
+
+            const scrollHeight = document.documentElement.scrollHeight;
+            const innerHeight = window.innerHeight;
+
+            // ✅ 여유값 (10~50px 정도 추천)
+            const buffer = 20;
+
+            const isBottom =
+                innerHeight + currentScrollY >= scrollHeight - buffer;
+
+            if (isBottom) {
+                header.classList.remove("hide");
+            } else if (currentScrollY > lastScrollY) {
+                header.classList.add("hide");
+            } else {
+                header.classList.remove("hide");
+            }
+
+            lastScrollY = currentScrollY;
+        };
+
+        onMounted(() => {
+            window.addEventListener("scroll", handleScroll);
+        });
+
+        onUnmounted(() => {
+            window.removeEventListener("scroll", handleScroll);
         });
 
         return {
