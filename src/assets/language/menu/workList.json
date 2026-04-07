@@ -69,6 +69,7 @@
         "status": "ing",
         "note": ""
     },
+<<<<<<< HEAD
         {
         "depth1": "BRAND", "depth2": "GS25", "depth3": "차별화 상품/서비스", "depth4": "차별화 상품", "depth5": "", "depth6": "",
         "type": "embed",
@@ -98,5 +99,59 @@
         "endDate": "",
         "status": "ing",
         "note": ""
+=======
+    {
+    "depth1": "BRAND", "depth2": "GS25", "depth3": "차별화 상품/서비스", "depth4": "차별화 상품", "depth5": "", "depth6": "",
+    "type": "",
+    "path": "gsrbr/01/gsrbr010102",
+    "link": "/gsrbr010102",
+    "startDate": "",
+    "endDate": "",
+    "status": "ing",
+    "note": ""
+    },
+    {
+    "depth1": "INVESTORS", "depth2": "기업지배구조", "depth3": "지배구조헌장", "depth4": "", "depth5": "", "depth6": "",
+    "type": "",
+    "path": "gsrbr/01/gsrin0101",
+    "link": "/gsrin0101",
+    "startDate": "26-04-07",
+    "endDate": "",
+    "status": "ing",
+    "note": "gsrin0101 ~ gsrin0104 포함됨 "
+>>>>>>> 3c268e40f55d923a257eb7bb9179b6178ebb5826
     }
+    ,
+    {
+    "depth1": "", "depth2": "", "depth3": "이사회 및 위원회 구성", "depth4": "", "depth5": "", "depth6": "",
+    "type": "",
+    "path": "gsrbr/01/gsrin0102",
+    "link": "",
+    "startDate": "",
+    "endDate": "",
+    "status": "ing",
+    "note": "gsrin0101 포함됨 "
+    },
+    {
+    "depth1": "", "depth2": "", "depth3": "이사회 평가", "depth4": "", "depth5": "", "depth6": "",
+    "type": "",
+    "path": "gsrbr/01/gsrin0103",
+    "link": "",
+    "startDate": "",
+    "endDate": "",
+    "status": "",
+    "note": "gsrin0101 포함됨 "
+    },
+    {
+    "depth1": "", "depth2": "", "depth3": "지배구조 모범규준과의 차이", "depth4": "", "depth5": "", "depth6": "",
+    "type": "",
+    "path": "gsrbr/01/gsrin0104",
+    "link": "",
+    "startDate": "",
+    "endDate": "",
+    "status": "",
+    "note": "gsrin0101 포함됨 "
+    }
+    
+
 ]
