@@ -2176,7 +2176,7 @@ button {
     color: #161616;
     font-size: 2.4rem;
     font-weight: 700;
-    line-height:1.35;
+    line-height: 1.35;
     letter-spacing: -0.01em;
 }
 
@@ -2250,9 +2250,8 @@ button {
 }
 
 /* ── 기프트카드 대표 브랜드 슬라이더 ── */
-.swiper-wrapper{
-    padding:24px 0;
-
+.swiper-wrapper {
+    padding: 24px 0;
 }
 .gift_brand_slider {
     position: relative;
@@ -2298,8 +2297,8 @@ button {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    flex-shrink: 0;
     position: relative;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2491,7 +2490,6 @@ button {
         gap: 20px;
     }
 
-    /* 신선강화점 반응형 */
     .sinsen_feature_list {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2500,57 +2498,11 @@ button {
         flex-wrap: wrap;
     }
 
-    /* 생활 서비스 3depth 탭 반응형 */
     .service_tab_item {
         min-width: 120px;
         padding: 16px 8px;
     }
 
-    /* 교통카드 충전 LNB 반응형 */
-    .pop_lnb {
-        width: 180px;
-    }
-
-    .pop_lnb > ul > li > button {
-        font-size: 1.8rem;
-    }
-
-    .pop_card_list {
-        flex-wrap: wrap;
-    }
-
-    .pop_card_item {
-        flex: 1 1 calc(50% - 10px);
-    }
-
-    .charging_service_list {
-        flex-wrap: wrap;
-    }
-
-    .charging_service_item {
-        flex: 1 1 calc((100% - 20px) / 2);
-    }
-
-    .traffic_logo_list > li {
-        width: calc(100% / 4);
-    }
-
-    .retail_logo_list > li {
-        width: calc(100% / 3);
-    }
-
-    .gift_advantage_list {
-        flex-wrap: wrap;
-    }
-
-    .gift_advantage_item {
-        height: auto;
-        min-height: 200px;
-        flex: 1 1 calc((100% - 20px) / 2);
-    }
-}
-
-@media (max-width: 768px) {
     .pop_wrap {
         flex-direction: column;
     }
@@ -2582,12 +2534,12 @@ button {
         background-color: #f0faf4;
     }
 
-    .pop_card_item {
-        flex: 1 1 100%;
-    }
-
     .pop_card_list {
         flex-wrap: wrap;
+    }
+
+    .pop_card_item {
+        flex: 1 1 100%;
     }
 
     .charging_service_list {
@@ -2612,6 +2564,10 @@ button {
         width: calc(100% / 2);
     }
 
+    .gift_advantage_list {
+        flex-wrap: wrap;
+    }
+
     .gift_advantage_item {
         height: auto;
         min-height: 0;
@@ -2630,13 +2586,16 @@ button {
     .gift_brand_card > figcaption {
         font-size: 1.2rem;
     }
-    .gift_purchase_steps{
-        width: 100%;
-    }
-    .gift_purchase_wrap{
+
+    .gift_purchase_wrap {
         flex-direction: column;
     }
-    .gift_purchase_img{
+
+    .gift_purchase_img {
+        width: 100%;
+    }
+
+    .gift_purchase_steps {
         width: 100%;
     }
 }

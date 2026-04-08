@@ -3,11 +3,7 @@ import { defineProps } from "vue";
 
 defineProps({
     type: { type: String, default: "1" },
-    items: {
-        type: Array,
-        default: () => [],
-        // [{ step: "Step 1", title: "..." }]
-    },
+    items: { type: Array, default: () => [] },
 });
 </script>
 
@@ -65,9 +61,9 @@ defineProps({
 }
 
 .step_type1 .step_item {
-    gap: 20px;
     display: flex;
     align-items: center;
+    gap: 20px;
 }
 
 .step_type1 .step_body {
