@@ -497,6 +497,79 @@
                         </SectionHeader>
                         <FeatureCards :items="tab.advantages" class="usim_advantage_cards" />
                     </section>
+                    <section>
+                        <SectionHeader :title="tab.introTitle" />
+                        <div class="usim_plan_table_wrap">
+                            <table class="usim_plan_table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" scope="col">상품명</th>
+                                        <th colspan="3" scope="col">제공량</th>
+                                        <th rowspan="2" scope="col">정상 요금</th>
+                                        <th rowspan="2" scope="col">프로모션 할인</th>
+                                        <th rowspan="2" scope="col">월 기본요금<br />(제휴카드 이용 시)</th>
+                                        <th rowspan="2" scope="col">타사 유사<br />요금제</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">데이터</th>
+                                        <th scope="col">음성</th>
+                                        <th scope="col">문자</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(plan, pi) in tab.plans" :key="pi">
+                                        <td>{{ plan.name }}</td>
+                                        <td class="usim_plan_data" v-html="plan.data.replace('\n', '<br />')"></td>
+                                        <td>{{ plan.voice }}</td>
+                                        <td>{{ plan.sms }}</td>
+                                        <td>{{ plan.normalPrice }}</td>
+                                        <td>{{ plan.discount }}</td>
+                                        <td>
+                                            {{ plan.monthly }}<br />
+                                            <em class="usim_plan_dc">{{ plan.monthlyDc }}</em>
+                                        </td>
+                                        <td>{{ plan.competitor }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.benefitTitle">
+                        </SectionHeader>
+                        <ul class="usim_benefit_cards">
+                            <li v-for="(card, ci) in tab.benefitCards" :key="ci" class="usim_benefit_card">
+                                <figure class="usim_benefit_img">
+                                    <img v-if="card.img" :src="card.img" :alt="card.imgAlt" />
+                                </figure>
+                                <div class="usim_benefit_body">
+                                    <h3>{{ card.title }}</h3>
+                                    <ul class="usim_benefit_list">
+                                        <li v-for="(item, ii) in card.items" :key="ii">
+                                            <span class="usim_benefit_icon"></span>
+                                            <span>{{ item }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <SectionHeader :title="tab.purchaseTitle" />
+                        <Steps type="2" :items="tab.purchaseSteps" />
+                    </section>
+
+                    <section>
+                        <SectionHeader :title="tab.phoneTitle" />
+                        <dl class="usim_phone_list">
+                            <template v-for="(phone, pi) in tab.phones" :key="pi">
+                                <dt>{{ phone.term }}</dt>
+                                <dd>{{ phone.desc }}</dd>
+                            </template>
+                        </dl>
+                    </section>
+
                 </template>
 
                 <!-- 그 외 패널: 기본 구조 -->
@@ -636,6 +709,8 @@ import imgGiftCard4 from "@/assets/images/dummy/gift_card_04.png";
 import imgGiftCard5 from "@/assets/images/dummy/gift_card_05.png";
 import imgGiftCard6 from "@/assets/images/dummy/gift_card_06.png";
 import imgGiftPurchase from "@/assets/images/dummy/gift_purchase_bg.png";
+import imgRateBenefit1 from "@/assets/images/dummy/rate_benefit_01.png";
+import imgRateBenefit2 from "@/assets/images/dummy/rate_benefit_02.png";
 
 
 const router = useRouter();
@@ -1094,12 +1169,87 @@ const langData = {
                         title:          "유심 요금제",
                         desc:           "U+ 알뜰모바일과 GS25가 만나 획기적으로 낮춘 휴대폰 요금제로 GS25편의점 및 GS25 온라인사이트에서 유심칩 구매 가능합니다.",
                         advantageTitle: "GS25 요금제 장점",
-                        advantageDesc:  "이제 팝 하세요! 다양한 결제 수단과 결합하여 혜택은 더 크게, 소비는 더 합리적으로, 사용은 더 편리하게 할 수 있도록 팝카드만의 차별화된 서비스를 제공합니다.",
-                        advantageNote:  "팝카드 사용 제외 매장 : 디몰점, 영풍종로점, 부천세이브존점, 동대문현대시티아울렛점, 서면NC점, 현대시티몰가든파이브점, 모란NC점, 대구이월드점, 동아쇼핑NC점, 이천NC점, 동수원NC점, 야탑NC점",
                         advantages: [
-                            { num: "01", title: "간편하게 가입하는 요금제", desc: "가까운 GS25에서 구매 가능 전용 사이트에서 간편하게 가입하는 요금제" },
+                            { num: "01", title: "간편하게 가입하는 요금제", desc: "가까운 GS25에서 구매 가능 전용 사이트에서<br /> 간편하게 가입하는 요금제" },
                             { num: "02", title: "대한민국 최저가",          desc: "데이터 마음껏 쓰는 대한민국 최저가 요금제!" },
                             { num: "03", title: "약정 조건/위약금 ZERO",    desc: "번호, 휴대폰 모두 그대로, 약정 조건과 위약금 없는 요금제!" },
+                        ],
+                        phoneTitle: "사용 가능 핸드폰",
+                        phones: [
+                            { term: "LG U+휴대폰",    desc: "LG U+로 최초 개통한 모든 LTE 휴대폰" },
+                            { term: "SKT/KT 휴대폰",  desc: "14년 8월 이후출시된 LTE 휴대폰(갤럭시노트4, AKA 이후 출시 휴대폰)" },
+                            { term: "외산휴대폰",      desc: "아이폰6 이후출시 휴대폰, 그외 주파수 850(Band5), 2100(Band1), 2600(Band7) 지원 모델 주파수(LTE 밴드)는 제조사를 통해서 확인 가능" },
+                        ],
+                        purchaseTitle: "GS25 매장에서 유심 구매/사용 방법",
+                        purchaseSteps: [
+                            { step: "Step 1", title: "텍스트<br />최대2줄" },
+                            { step: "Step 2", title: "GS25 편의점에서<br />유심카드 구입" },
+                            { step: "Step 3", title: "유심 일련번호 완료 후<br />개통 신청 (또는 전화로 개통 신청)" },
+                            { step: "Step 4", title: "해피콜/개통 완료 후<br />휴대폰에 유심을 장착하면 간편 개통 끝!" },
+                        ],
+                        benefitTitle: "GS25 요금제 혜택",
+                        benefitCards: [
+                            {
+                                img:   imgRateBenefit1,
+                                imgAlt: "",
+                                title: "통신비 실속 있게 할인 받자!",
+                                desc:  "가까운 GS25에서 구매 가능 전용 사이트에서\n간편하게 가입하는 요금제",
+                                items: ["가입비 무료", "통신비 최대 할인", "무약정 위약금 없음"],
+                            },
+                            {
+                                img:   imgRateBenefit2,
+                                imgAlt: "",
+                                title: "다양한 부가서비스 4종 무료",
+                                desc:  "가까운 GS25에서 구매 가능 전용 사이트에서\n간편하게 가입하는 요금제",
+                                items: ["U+ Zone Wi-Fi로 인터넷을", "U+ Box 내 파일을 클라우드로", "매너콜 전화 온 곳을 문자로", "mVOIP 보이스톡 무료 통화"],
+                            },
+                        ],
+                        introTitle: "GS25 요금제 소개",
+                        plans: [
+                            {
+                                name:         "GS25(15GB+/100분)",
+                                data:         "15GB\n(소진시 3Mbps속도로 계속 사용)",
+                                voice:        "100분",
+                                sms:          "100건",
+                                normalPrice:  "47,300원",
+                                discount:     "19,800원",
+                                monthly:      "27,500원",
+                                monthlyDc:    "12,500원",
+                                competitor:   "65,890원",
+                            },
+                            {
+                                name:         "GS25(10GB/100분)",
+                                data:         "10GB",
+                                voice:        "100분",
+                                sms:          "100건",
+                                normalPrice:  "41,800원",
+                                discount:     "20,900원",
+                                monthly:      "20,900원",
+                                monthlyDc:    "5,900원",
+                                competitor:   "45,650원",
+                            },
+                            {
+                                name:         "GS25(6GB/100분)",
+                                data:         "6GB",
+                                voice:        "100분",
+                                sms:          "100건",
+                                normalPrice:  "30,000원",
+                                discount:     "12,500원",
+                                monthly:      "17,500원",
+                                monthlyDc:    "2,500원",
+                                competitor:   "45,250원",
+                            },
+                            {
+                                name:         "GS25(3GB/150분)",
+                                data:         "3GB",
+                                voice:        "100분",
+                                sms:          "100건",
+                                normalPrice:  "20,900원",
+                                discount:     "12,100원",
+                                monthly:      "12,100원",
+                                monthlyDc:    "0원",
+                                competitor:   "41,800원",
+                            },
                         ],
                     },
                     {
@@ -2177,6 +2327,211 @@ button {
     gap: 12px;
 }
 
+
+/* ── 유심 요금제 혜택 ── */
+.usim_benefit_note {
+    margin: 8px 0 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+}
+
+.usim_benefit_cards {
+    display: flex;
+    gap: 20px;
+}
+
+.usim_benefit_card {
+    overflow: hidden;
+    border-radius: 12px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.usim_benefit_img {
+    width: 100%;
+    height: 340px;
+    margin: 0;
+    background-color: #c4c4c4;
+    overflow: hidden;
+}
+
+.usim_benefit_img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.usim_benefit_body {
+    padding: 32px 0;
+    flex: 1;
+}
+
+.usim_benefit_body > h3 {
+    color: #161616;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.usim_benefit_body > p {
+    color: #67676f;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    white-space: pre-line;
+}
+.usim_benefit_body h3{
+    margin-bottom: 24px;
+}
+.usim_benefit_list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.usim_benefit_list > li {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.usim_benefit_icon {
+    width: 16px;
+    height: 16px;
+    background-color: #0059fe;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.usim_benefit_list > li > span:last-child {
+    color: #161616;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .usim_benefit_cards {
+        flex-direction: column;
+    }
+
+    .usim_benefit_img {
+        height: 220px;
+    }
+
+    .usim_benefit_body {
+        padding: 24px 20px;
+    }
+
+    .usim_benefit_body > h3 {
+        font-size: 2rem;
+    }
+
+    .usim_benefit_list > li > span:last-child {
+        font-size: 1.6rem;
+    }
+}
+
+/* ── 사용 가능 핸드폰 ── */
+.usim_phone_list {
+    margin: 0;
+    padding: 0;
+}
+
+.usim_phone_list dt {
+    padding: 20px 0 6px;
+    color: #161616;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.usim_phone_list dd {
+    margin: 0;
+    padding: 0 0 20px;
+    color: #67676f;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+}
+
+@media (max-width: 768px) {
+    .usim_phone_list dt {
+        font-size: 1.6rem;
+    }
+
+    .usim_phone_list dd {
+        font-size: 1.5rem;
+    }
+}
+
+/* ── 유심 요금제 소개 ── */
+.usim_plan_table_wrap {
+    overflow-x: auto;
+}
+
+.usim_plan_table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e5e5e9;
+    table-layout: fixed;
+}
+
+.usim_plan_table th {
+    padding: 16px 12px;
+    background-color: #f8f8f8;
+    border: 1px solid #e5e5e9;
+    color: #161616;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.usim_plan_table td {
+    padding: 16px 12px;
+    border: 1px solid #e5e5e9;
+    color: #161616;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.usim_plan_data {
+    font-size: 1.4rem;
+}
+
+.usim_plan_dc {
+    color: #107AF2;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .usim_plan_table th,
+    .usim_plan_table td {
+        padding: 10px 8px;
+        font-size: 1.3rem;
+    }
+
+    .usim_plan_dc {
+        font-size: 1.3rem;
+    }
+}
 
 /* ── 유심 요금제 장점 ── */
 .usim_advantage_cards :deep(.feature_card_item) {
