@@ -405,6 +405,95 @@
                     </div>
                 </template>
 
+                <!-- 기프트카드 패널 -->
+                <template v-else-if="i === 3">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <section>
+                        <SectionHeader :title="tab.advantageTitle" />
+                        <ul class="gift_advantage_list">
+                            <li v-for="(item, ai) in tab.advantages" :key="ai" class="gift_advantage_item">
+                                <em class="gift_advantage_num">{{ item.num }}</em>
+                                <strong class="gift_advantage_title">{{ item.title }}</strong>
+                                <p class="gift_advantage_desc">{{ item.desc }}</p>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <SectionHeader :title="tab.brandTitle" />
+                        <div class="gift_brand_slider">
+                            <button
+                                type="button"
+                                class="gift_brand_nav gift_brand_prev"
+                                aria-label="이전"
+                                :disabled="giftIsBeginning"
+                                @click="giftSwiperInst?.slidePrev()"
+                            ></button>
+                            <Swiper
+                                :modules="[Pagination]"
+                                :space-between="0"
+                                :speed="700"
+                                :observer="true"
+                                :observe-parents="true"
+                                :breakpoints="{
+                                    0:    { slidesPerView: 2, slidesPerGroup: 2 },
+                                    769:  { slidesPerView: 4, slidesPerGroup: 4 },
+                                    1025: { slidesPerView: 6, slidesPerGroup: 6 },
+                                }"
+                                :pagination="{ el: '.gift_brand_pagination', clickable: true }"
+                                class="gift_brand_swiper"
+                                @swiper="onGiftSwiper"
+                                @slide-change="onGiftSlideChange"
+                                @breakpoint="onGiftBreakpoint"
+                            >
+                                <SwiperSlide v-for="(brand, bi) in tab.brands" :key="bi">
+                                    <figure class="gift_brand_card">
+                                        <img :src="brand.img" :alt="brand.name" />
+                                    </figure>
+                                </SwiperSlide>
+                            </Swiper>
+                            <button
+                                type="button"
+                                class="gift_brand_nav gift_brand_next"
+                                aria-label="다음"
+                                :disabled="giftIsEnd"
+                                @click="giftSwiperInst?.slideNext()"
+                            ></button>
+                        </div>
+                        <div class="gift_brand_pagination"></div>
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.purchaseTitle" :desc="tab.purchaseNote" />
+                        <div class="gift_purchase_wrap">
+                            <figure class="gift_purchase_img">
+                                <img :src="tab.purchaseImg" alt="" />
+                            </figure>
+                            <ol class="gift_purchase_steps">
+                                <li v-for="(step, si) in tab.purchaseSteps" :key="si" class="gift_purchase_step">
+                                    <div class="gift_step_header">
+                                        <em class="gift_step_num">{{ step.num }}</em>
+                                        <strong class="gift_step_title">{{ step.title }}</strong>
+                                    </div>
+                                    <p class="gift_step_desc">{{ step.desc }}</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.usageTitle" :desc="tab.usageDesc" />
+                        <div class="gift_usage_wrap">
+                            <div class="gift_usage_group">
+                                <h3>{{ tab.onlineLabel }}</h3>
+                                <Steps type="1" :items="tab.onlineSteps" />
+                            </div>
+                            <div class="gift_usage_group">
+                                <h3>{{ tab.offlineLabel }}</h3>
+                                <Steps type="1" :items="tab.offlineSteps" />
+                            </div>
+                        </div>
+                    </section>
+                </template>
+
                 <!-- 그 외 패널: 기본 구조 -->
                 <template v-else>
                     <section>
@@ -453,14 +542,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, nextTick, watch, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
 import PanelHeader from "@/components/PanelHeader.vue";
 import SectionHeader from "@/components/SectionHeader.vue";
 import Buttons from "@/components/Buttons.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
+import Steps from "@/components/Steps.vue";
 
 /* 탭 0 이미지 */
 import imgHero0 from "@/assets/images/dummy/differentiated_bg_01.png";
@@ -501,6 +594,7 @@ import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 
 /*매장/서비스 이미지*/
 import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
+import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";   
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
@@ -529,6 +623,14 @@ import imgBrandUsage6 from "@/assets/images/dummy/brand_usage_06.png";
 import imgBrandUsage7 from "@/assets/images/dummy/brand_usage_07.png";
 import imgBrandUsage8 from "@/assets/images/dummy/brand_usage_08.png";
 import imgBrandUsage9 from "@/assets/images/dummy/brand_usage_09.png";
+import imgGiftCard1 from "@/assets/images/dummy/gift_card_01.png";
+import imgGiftCard2 from "@/assets/images/dummy/gift_card_02.png";
+import imgGiftCard3 from "@/assets/images/dummy/gift_card_03.png";
+import imgGiftCard4 from "@/assets/images/dummy/gift_card_04.png";
+import imgGiftCard5 from "@/assets/images/dummy/gift_card_05.png";
+import imgGiftCard6 from "@/assets/images/dummy/gift_card_06.png";
+import imgGiftPurchase from "@/assets/images/dummy/gift_purchase_bg.png";
+
 
 const router = useRouter();
 const activeTab = ref(0);
@@ -904,11 +1006,80 @@ const langData = {
                         ],
                     },
                     {
-                        label:   "기프트\n카드",
-                        hero:    null,
-                        heroAlt: "",
-                        title:   "기프트 카드",
-                        desc:    "",
+                        label:          "기프트\n카드",
+                        hero:           imgHero6,
+                        heroAlt:        "",
+                        title:          "기프트카드",
+                        desc:           "GS25는 기프트카드를 운영하고 있으며, 전국 어디에서나 충전 및 사용이 가능합니다.<br />다양한 기프트카드를 소중한 친구, 가족, 지인들에게 선물할 수 있습니다. (단,일부 매장에서는 충전 및 사용이 불가합니다.)",
+                        brandTitle: "POSA 기프트카드 대표 브랜드",
+                        brands: [
+                            { img: imgGiftCard1, name: "구글플레이" },
+                            { img: imgGiftCard2, name: "KT 와이파이" },
+                            { img: imgGiftCard3, name: "틴캐시" },
+                            { img: imgGiftCard4, name: "에그머니" },
+                            { img: imgGiftCard5, name: "T데이터쿠폰" },
+                            { img: imgGiftCard6, name: "해피머니" },
+                            { img: imgGiftCard1, name: "문화상품권" },
+                            { img: imgGiftCard2, name: "스마트문화상품권" },
+                            { img: imgGiftCard3, name: "도서문화상품권" },
+                            { img: imgGiftCard4, name: "넥슨캐시" },
+                            { img: imgGiftCard5, name: "NC소프트" },
+                            { img: imgGiftCard6, name: "한게임" },
+                            { img: imgGiftCard1, name: "컬쳐랜드" },
+                            { img: imgGiftCard2, name: "퍼니카드" },
+                            { img: imgGiftCard3, name: "버거킹" },
+                            { img: imgGiftCard4, name: "CGV" },
+                            { img: imgGiftCard5, name: "스타벅스" },
+                            { img: imgGiftCard6, name: "올레WiFi" },
+                        ],
+                        purchaseTitle: "POSA 기프트카드 구매방법",
+                        purchaseNote:  "기프트 카드별로 사용방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용방법을 참고하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.",
+                        purchaseImg:   imgGiftPurchase,
+                        purchaseSteps: [
+                            { num: "01", title: "판매처 방문",    desc: "가까운 GS25 편의점에 방문하세요." },
+                            { num: "02", title: "기프트카드 선택", desc: "가까운 GS25 편의점에 방문하세요." },
+                            { num: "03", title: "사용설명 확인",   desc: "구매하신 카드 뒷면 사용설명을 잘 확인하시고 사용하세요." },
+                            { num: "04", title: "계산",           desc: "계산대에서 계산을 완료하시면 활성화되어 사용 가능한 상태가 됩니다." },
+                        ],
+                        usageTitle:   "POSA 기프트카드 사용방법",
+                        usageDesc:    "<span style=\"color:#F95823;font-size:1.8rem\">기프트카드별로 사용방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용방법을 참고</span>하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.",
+                        onlineLabel:  "온라인 사용방법",
+                        onlineSteps: [
+                            { step: "Step 1", title: "사이트 접속 및 로그인" },
+                            { step: "Step 2", title: "캐시충전" },
+                            { step: "Step 3", title: "결제수단 선택" },
+                            { step: "Step 4", title: "PIN번호 입력" },
+                        ],
+                        offlineLabel: "오프라인 사용방법",
+                        offlineSteps: [
+                            { step: "Step 1", title: "매장 방문" },
+                            { step: "Step 2", title: "상품 선택" },
+                            { step: "Step 3", title: "기프트카드 제시" },
+                            { step: "Step 4", title: "결제완료" },
+                        ],
+                        advantageTitle: "POSA 기프트카드 장점",
+                        advantages: [
+                            {
+                                num:   "01",
+                                title: "신용카드와 함께\n지갑속에 쏙!",
+                                desc:  "신용카드처럼 작아서 지갑에 보관하기 편리하며, 결제해야만 사용할 수 있기에 판매점의 관리 부담이 적습니다.",
+                            },
+                            {
+                                num:   "02",
+                                title: "온/오프라인\n다양한 브랜드 제공",
+                                desc:  "외식, 게임, 레저, 영화, 커피, 도서 등 오프라인과 온라인의 다양한 브랜드를 제공하기에 선물 받는 사람의 기호와 특성에 따라 최고의 만족도를 함께 드릴 수 있습니다.",
+                            },
+                            {
+                                num:   "03",
+                                title: "가치를 아는 당신의 선택\n고품격 디자인 기프트카드",
+                                desc:  "현금이나 기존 상품권과 달리 고품격으로 디자인되어 선물하는 분의 가치와 품격을 높여 드릴 수 있습니다.",
+                            },
+                            {
+                                num:   "04",
+                                title: "전국 언제 어디서나\n편리한 구매",
+                                desc:  "전국의 대형마트, 대형서점, 편의점, 유명 프랜차이즈 등으로 판매점을 확대할 것이기에 고객과 가장 가까운 곳에서 언제든지 간편하게 카드를 구입할 수 있습니다.",
+                            },
+                        ],
                     },
                     {
                         label:   "유심\n요금제",
@@ -979,7 +1150,28 @@ const depth2Tabs = langData.nav.depth2;
 const storeTabs = langData.nav.depth2Store;
 
 const storeActiveTab = ref(0);
+const giftSwiperInst = ref(null);
+const giftIsBeginning = ref(true);
+const giftIsEnd = ref(false);
+const updateGiftNavState = (swiper) => {
+    giftIsBeginning.value = swiper.isBeginning;
+    giftIsEnd.value = swiper.isEnd;
+};
+const onGiftSwiper = (swiper) => {
+    giftSwiperInst.value = swiper;
+};
+const onGiftSlideChange = (swiper) => updateGiftNavState(swiper);
+const onGiftBreakpoint = (swiper) => updateGiftNavState(swiper);
 const serviceActiveTab = ref(0);
+
+watch(serviceActiveTab, (idx) => {
+    if (idx === 3 && giftSwiperInst.value) {
+        nextTick(() => {
+            giftSwiperInst.value.update();
+            updateGiftNavState(giftSwiperInst.value);
+        });
+    }
+});
 const popLnbActiveIdx = ref(0);
 const trafficSelectVal = ref("express");
 const retailSelectVal = ref("coffee");
@@ -1972,6 +2164,238 @@ button {
 }
 
 
+/* ── 기프트카드 사용방법 ── */
+.gift_usage_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.gift_usage_group > h3 {
+    margin-bottom: 16px;
+    color: #161616;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height:1.35;
+    letter-spacing: -0.01em;
+}
+
+/* ── 기프트카드 구매방법 ── */
+.gift_purchase_wrap {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.gift_purchase_img {
+    width: calc(50% - 10px);
+    margin: 0;
+    padding: 0;
+    border-radius: 12px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.gift_purchase_img > img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.gift_purchase_steps {
+    width: calc(50% - 10px);
+    margin: 0;
+    padding: 20px 0 0;
+    list-style: none;
+}
+
+.gift_purchase_step {
+    padding-bottom: 40px;
+}
+
+.gift_purchase_step:last-child {
+    padding-bottom: 0;
+}
+
+.gift_step_header {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gift_step_num {
+    color: #107af2;
+    font-size: 2.4rem;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: -0.01em;
+}
+
+.gift_step_title {
+    color: #161616;
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.gift_step_desc {
+    margin: 0;
+    padding-left: 38px;
+    color: #67676f;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+/* ── 기프트카드 대표 브랜드 슬라이더 ── */
+.swiper-wrapper{
+    padding:24px 0;
+
+}
+.gift_brand_slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.gift_brand_swiper {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.gift_brand_card {
+    margin: 0;
+    padding: 0;
+}
+
+.gift_brand_card > img {
+    width: 100%;
+    max-width: 140px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 4px;
+    aspect-ratio: 140 / 214;
+    display: block;
+    object-fit: cover;
+}
+
+.gift_brand_card > figcaption {
+    margin-top: 8px;
+    color: #161618;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+.gift_brand_nav {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gift_brand_nav::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #161616;
+    border-right: 2px solid #161616;
+    display: block;
+}
+
+.gift_brand_prev::before {
+    transform: rotate(-135deg) translateX(-2px);
+}
+
+.gift_brand_next::before {
+    transform: rotate(45deg) translateX(-2px);
+}
+
+.gift_brand_nav:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.gift_brand_pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.gift_brand_pagination :deep(.swiper-pagination-bullet) {
+    width: 8px;
+    height: 8px;
+    background-color: #d7d7df;
+    border-radius: 50%;
+    opacity: 1;
+    cursor: pointer;
+    display: block;
+}
+
+.gift_brand_pagination :deep(.swiper-pagination-bullet-active) {
+    background-color: #161616;
+}
+
+/* ── 기프트카드 장점 ── */
+.gift_advantage_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.gift_advantage_item {
+    min-height: 300px;
+    padding: 32px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.gift_advantage_num {
+    margin-bottom: 8px;
+    color: #107af2;
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: -0.01em;
+    display: block;
+}
+
+.gift_advantage_title {
+    margin-bottom: 16px;
+    color: #161616;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    white-space: pre-line;
+    display: block;
+}
+
+.gift_advantage_desc {
+    margin: 0;
+    color: #67676f;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .cafe25_card_list {
@@ -1996,6 +2420,15 @@ button {
 
     .retail_logo_list > li {
         width: calc(100% / 3);
+    }
+
+    .gift_brand_nav {
+        width: 32px;
+        height: 32px;
+    }
+
+    .gift_brand_card > figcaption {
+        font-size: 1.4rem;
     }
 }
 
@@ -2105,6 +2538,16 @@ button {
     .retail_logo_list > li {
         width: calc(100% / 3);
     }
+
+    .gift_advantage_list {
+        flex-wrap: wrap;
+    }
+
+    .gift_advantage_item {
+        height: auto;
+        min-height: 200px;
+        flex: 1 1 calc((100% - 20px) / 2);
+    }
 }
 
 @media (max-width: 768px) {
@@ -2167,6 +2610,34 @@ button {
 
     .retail_logo_list > li {
         width: calc(100% / 2);
+    }
+
+    .gift_advantage_item {
+        height: auto;
+        min-height: 0;
+        flex: 1 1 100%;
+    }
+
+    .gift_brand_slider {
+        gap: 12px;
+    }
+
+    .gift_brand_nav {
+        width: 28px;
+        height: 28px;
+    }
+
+    .gift_brand_card > figcaption {
+        font-size: 1.2rem;
+    }
+    .gift_purchase_steps{
+        width: 100%;
+    }
+    .gift_purchase_wrap{
+        flex-direction: column;
+    }
+    .gift_purchase_img{
+        width: 100%;
     }
 }
 </style>
