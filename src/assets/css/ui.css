@@ -3,7 +3,7 @@
 #skip_menu a:focus {height:auto; padding:4px 10px;}
 
 /* header */
-#header {position:fixed; top:0; right:0; left:0; transition:transform 0.25s ease-in-out;}
+#header {position:fixed; top:0; right:0; left:0; z-index:100; transition:transform 0.25s ease-in-out;}
 #header.hide {transform:translateY(-100%);}
 
 #header .inner {width:100%; max-width:1720px; margin:0 auto; padding:38px 20px;display:flex; align-items:center; justify-content:space-between;}

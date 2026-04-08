@@ -6,7 +6,7 @@
         "link": "/",
         "startDate": "2026-04-06",
         "endDate": "",
-        "status": "",
+        "status": "ing",
         "note": ""
     },
     {
@@ -100,6 +100,56 @@
         "note": ""
     },
     {
+        "depth1": "", "depth2": "개발/임대사업", "depth3": "지하철", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/01/gsrbr1101",
+        "link": "/gsrbr1101",
+        "startDate": "26-04-08",
+        "endDate": "",
+        "status": "ing",
+        "note": "gsrbr110201~gsrbr110204 포함됨, 아이콘 이미지만 넣으면 완료됨됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "쇼핑몰", "depth4": "안녕인사동", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/01/gsrbr110201",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrbr1101 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "구로 지밸리몰", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/01/gsrbr110202",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrbr1101 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "판교 파미어스몰", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/01/gsrbr110203",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrbr1101 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "동부산 미식일상", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/01/gsrbr110204",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrbr1101 포함됨 "
+    },
+    {
         "depth1": "INVESTORS", "depth2": "기업지배구조", "depth3": "지배구조헌장", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
         "path": "gsrbr/01/gsrin0101",
@@ -117,7 +167,7 @@
         "link": "",
         "startDate": "",
         "endDate": "",
-        "status": "ing",
+        "status": "com",
         "note": "gsrin0101 포함됨 "
     },
     {
@@ -140,6 +190,6 @@
         "status": "",
         "note": "gsrin0101 포함됨 "
     }
-    
+
 
 ]

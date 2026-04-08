@@ -7,7 +7,7 @@
 
         <section class="section-investor">
             <div class="cont_inner">
-                <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="false" @change="onTabChange1" />
+                <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
                 
                 <p class="title-sub-text" v-html="t.MainDesc[CTabIdx]"></p>
 
@@ -24,25 +24,17 @@
                                 <dt>{{ t.PolicyIntroTitle }}</dt>
                                 <dd v-html="t.PolicyIntroDesc"></dd>
 
-                                <dt>{{ t.PolicySec1Title }}</dt>
-                                <dd>
-                                    <template v-for="(sec, sIdx) in t.PolicySec1" :key="'sec1-'+sIdx">
-                                        <strong class="bullet_title" :class="{mt30: sIdx > 0}">{{ sec.subTitle }}</strong>
-                                        <ul class="mt15">
-                                            <li v-for="(li, lIdx) in sec.list" :key="'sec1-l-'+sIdx+'-'+lIdx" class="bullet_01 no_type">{{ li }}</li>
-                                        </ul>
-                                    </template>
-                                </dd>
-
-                                <dt>{{ t.PolicySec2Title }}</dt>
-                                <dd>
-                                    <template v-for="(sec, sIdx) in t.PolicySec2" :key="'sec2-'+sIdx">
-                                        <strong class="bullet_title" :class="{mt30: sIdx > 0}">{{ sec.subTitle }}</strong>
-                                        <ul class="mt15">
-                                            <li v-for="(li, lIdx) in sec.list" :key="'sec2-l-'+sIdx+'-'+lIdx" class="bullet_01 no_type">{{ li }}</li>
-                                        </ul>
-                                    </template>
-                                </dd>
+                                <template v-for="(section, idx) in t.PolicySections" :key="'section-'+idx">
+                                    <dt>{{ section.title }}</dt>
+                                    <dd>
+                                        <template v-for="(sec, sIdx) in section.content" :key="'content-'+idx+'-'+sIdx">
+                                            <strong class="bullet_title" :class="{mt30: sIdx > 0}">{{ sec.subTitle }}</strong>
+                                            <ul v-if="sec.list && sec.list.length > 0" class="mt15 bullet_01 no_type">
+                                                <li v-for="(li, lIdx) in sec.list" :key="'l-'+idx+'-'+sIdx+'-'+lIdx">{{ li }}</li>
+                                            </ul>
+                                        </template>
+                                    </dd>
+                                </template>
                             </dl>
                         </div>
                     </section>
@@ -68,10 +60,9 @@
                                                     <div class="text-wrapper-6">{{ member.term }}</div>
                                                     <div class="text-wrapper-7">{{ member.firstDate }}</div>
                                                 </div>
-                                                <ul class="view-5 mt10">
+                                                <ul class="view-5 bullet_01 mt10">
                                                     <li v-for="(career, cIdx) in member.careers" 
                                                         :key="'career-' + cIdx" 
-                                                        class="bullet_01"
                                                         :class="career.class"
                                                     >
                                                         {{ career.text }}
@@ -111,10 +102,9 @@
                                                     <div class="text-wrapper-6">{{ member.term }}</div>
                                                     <div class="text-wrapper-7">{{ member.firstDate }}</div>
                                                 </div>
-                                                <ul class="view-5 mt10">
+                                                <ul class="view-5 bullet_01 mt10">
                                                     <li v-for="(career, cIdx) in member.careers" 
                                                         :key="'sc-' + cIdx" 
-                                                        class="bullet_01"
                                                         :class="career.class"
                                                     >
                                                         {{ career.text }}
@@ -128,7 +118,10 @@
                             </div>
                         </div>
                         <div class="view-2">
-                            <div class="sub-title"><div class="text-wrapper-3">{{ t.BoardSectionTitle2 }}</div></div>
+                            <div class="sub-title">
+                                <h3 class="text-wrapper-3">{{ t.BoardSectionTitleSub }}</h3>
+                                <p class="p" v-html="t.BoardSectionDescSub"></p>
+                            </div>
                             <div class="div-4">
                                 <div class="view-6">
                                     <div v-for="(skill, idx) in t.SkillsList" :key="'skill-' + idx" class="frame-5">
@@ -213,77 +206,139 @@ export default {
                     MainTitle: "기업지배구조",
                     MainsubTitle: "CORPORATE GOVERNANCE",
                     MainDesc: [
-                        "GS리테일은 기업지배구조헌장에 의거, <br/>건전한 지배구조를 확립하고 있습니다",
-                        "GS리테일은 투명한 경영 문화 정착을 위해,<br/>이사회 중심 경영을 실천하고 있습니다.",
-                        "GS리테일은 <b>이사회 운영 개선 및 지배구조 신뢰성 제고</b>를 위하여<br/>2021년 12월 개최된 정기이사회에서 이사회 평가제도를 도입하였습니다.",
-                        "GS리테일은 <b>지속가능한 경영</b>을 위해, <b>지배구조건정성을 지속 개선</b>해 나아가겠습니다."
+                        "GS리테일은<br/> 기업지배구조헌장에 의거, <br/>건전한 지배구조를 <br/>확립하고 있습니다",
+                        "GS리테일은<br/> 투명한 경영 문화 정착을 위해,<br/>이사회 중심 경영을<br/> 실천하고 있습니다.",
+                        "GS리테일은<br/> 이사회 운영 개선 및 지배구조 신뢰성 제고를 위하여<br/>2021년 12월 개최된 정기이사회에서<br/> 이사회 평가제도를 도입하였습니다.",
+                        "GS리테일은<br/> 지속가능한 경영을 위해,<br/> 지배구조건정성을 <br/>지속 개선해 나아가겠습니다."
                     ],
                     Tabs1: [{ item: "지배구조헌장" }, { item: "이사회 및 위원회 구성" }, { item: "이사회 평가" }, { item: "지배구조 모범규준과의 차이" }],
                     
-                    // [Tab 1] 지배구조헌장
-                    CharterTitle: "㈜GS리테일 기업지배구조헌장", CharterDate: "제정 2021.02.08",
+                    // [Tab 1] 지배구조헌장 전체 데이터 (KO)
+                    CharterTitle: "㈜GS리테일 기업지배구조헌장", 
+                    CharterDate: "제정 2021.02.08",
                     PolicyIntroTitle: "전문",
                     PolicyIntroDesc: "<p class='desc'>㈜GS리테일(이하 “회사”라 함.)은 건전한 기업지배구조 확립을 기반으로 하여, 모든 이해관계자와 신뢰를 구축하고, 끊임없는 도전으로 고객의 라이프 이노베이션(Life Innovation)을 선도하는 회사로 도약하고자 한다. 이러한 비전 달성을 위해 본 기업지배구조헌장을 제정한다.</p><p class='desc'>회사는 본 기업지배구조헌장에 따라, 주주의 권리 보장, 이사회의 역할과 책임, 전문 감사기구의 독립적 운영 등 회사의 건전한 지배구조를 확립하여, 공정하고 투명한 경영활동을 지향하며, 주주·고객·임직원 등 모든 이해관계자의 지속적인 권익 증진을 위해 노력한다.</p>",
-                    PolicySec1Title: "I. 주 주",
-                    PolicySec1: [
-                        { subTitle: "1. 주주의 권리", list: [
-                            "① 주주는 회사의 소유자이며, 이익 분배에 참여 할 수 있는 권리, 주주총회 참석 및 의결권을 행사 할 수 있는 권리, 주주총회의 목적사항을 제안할 수 있는 권리 등 관련 법령이 보장하는 기본적인 권리를 보장 받는다.",
-                            "② 정관의 변경, 합병, 영업양수도 및 기업의 분할, 해산, 자본금의 감소 등 관련 법령이 정하는 사항 중 회사의 존립과 주주권에 중대한 변화를 가져오는 사항은 주주의 권리를 최대한 보장하여, 주주총회를 통해 결정한다.",
-                            "③ 회사는 주주총회의 결의가 투명하고 공정한 절차에 따라 이루어지도록 노력하며, 주주에 대하여 주주총회 참석 전에 주주총회의 일시와 장소 및 의안 의결권의 행사 방법 등에 관하여 충분한 정보를 제공한다.",
-                            "④ 주주권의 행사는 주주의 자유로운 의사에 따라 행사되어야 한다."
-                        ]},
-                        { subTitle: "2. 주주의 공평한 대우", list: [
-                            "① 주주는 1주 1의결권 원칙에 따라 권리를 보장 받는다. 단, 법령에 의거하여, 특정 주주의 의결권이 제한되는 경우, 관련 법령을 따른다. 회사는 상법 및 관련 법령이 정하는 기준에 따라 주주의 본질적인 권리가 훼손되지 않도록 공평하게 대우한다.",
-                            "② 회사는 주주에게 필요한 정보를 적시에 충분히 이해할 수 있도록 쉽게 구성하여, 공평한 방법으로 제공한다. 또한 부당한 내부거래 및 자기거래로부터 주주가 보호될 수 있도록 노력한다."
-                        ]},
-                        { subTitle: "3. 주주의 책임", list: [
-                            "① 주주는 회사의 발전과 이익을 위하여. 자신의 의결권을 적극적으로 행사하여야 한다.",
-                            "② 회사 경영에 영향력을 행사하는 지배주주는 회사와 다른 모든 주주의 이익을 고려하여 주주권을 행사하며, 그 지배권을 남용하여 다른 주주에게 손해가 발생하지 않도록 노력해야 한다."
-                        ]}
+                    PolicySections: [
+                        {
+                            title: "I. 주 주",
+                            content: [
+                                { subTitle: "1. 주주의 권리", list: [
+                                    "① 주주는 회사의 소유자이며, 이익 분배에 참여 할 수 있는 권리, 주주총회 참석 및 의결권을 행사 할 수 있는 권리, 주주총회의 목적사항을 제안할 수 있는 권리 등 관련 법령이 보장하는 기본적인 권리를 보장 받는다.",
+                                    "② 정관의 변경, 합병, 영업양수도 및 기업의 분할, 해산, 자본금의 감소 등 관련 법령이 정하는 사항 중 회사의 존립과 주주권에 중대한 변화를 가져오는 사항은 주주의 권리를 최대한 보장하여, 주주총회를 통해 결정한다.",
+                                    "③ 회사는 주주총회의 결의가 투명하고 공정한 절차에 따라 이루어지도록 노력하며, 주주에 대하여 주주총회 참석 전에 주주총회의 일시와 장소 및 의안 의결권의 행사 방법 등에 관하여 충분한 정보를 제공한다.",
+                                    "④ 주주권의 행사는 주주의 자유로운 의사에 따라 행사되어야 한다."
+                                ]},
+                                { subTitle: "2. 주주의 공평한 대우", list: [
+                                    "① 주주는 1주 1의결권 원칙에 따라 권리를 보장 받는다. 단, 법령에 의거하여, 특정 주주의 의결권이 제한되는 경우, 관련 법령을 따른다. 회사는 상법 및 관련 법령이 정하는 기준에 따라 주주의 본질적인 권리가 훼손되지 않도록 공평하게 대우한다.",
+                                    "② 회사는 주주에게 필요한 정보를 적시에 충분히 이해할 수 있도록 쉽게 구성하여, 공평한 방법으로 제공한다. 또한 부당한 내부거래 및 자기거래로부터 주주가 보호될 수 있도록 노력한다."
+                                ]},
+                                { subTitle: "3. 주주의 책임", list: [
+                                    "① 주주는 회사의 발전과 이익을 위하여. 자신의 의결권을 적극적으로 행사하여야 한다.",
+                                    "② 회사 경영에 영향력을 행사하는 지배주주는 회사와 다른 모든 주주의 이익을 고려하여 주주권을 행사하며, 그 지배권을 남용하여 다른 주주에게 손해가 발생하지 않도록 노력해야 한다."
+                                ]}
+                            ]
+                        },
+                        {
+                            title: "II. 이 사 회",
+                            content: [
+                                { subTitle: "1. 이사회의 기능", list: [
+                                    "① 이사회는 관련 법령에 의거하여, 경영에 대해 포괄적인 권한을 가지며, 회사와 주주의 이익을 위하여 회사의 기본적인 경영목표를 결정하고, 법령, 정관, 이사회 규정 등 관련 규정이 정하는 회사의 주요 의사 결정 사항에 대한 심의, 의결을 한다.",
+                                    "② 이사회는 투명하고, 공정한 회사의 업무 수행 및 주주가치 훼손 방지를 위해 경영진의 활동을 감독한다.",
+                                    "③ 이사회는 관련 법령, 정관, 이사회 규정 등에 의해, 위임이 허용되지 않는 주요한 사항을 제외하고, 대표이사 또는 이사회 내 위원회에 권한을 위임할 수 있다."
+                                ]},
+                                { subTitle: "2. 이사회의 구성", list: [
+                                    "① 회사는 이사회에서 다양한 논의와 효율적인 의사결정이 가능하도록 6 인 이상의 이사로 이사회를 구성하며, 이사회 독립성 보장을 위해 사외이사는 이사회 구성원 총수의 과반수 이상으로 구성한다.",
+                                    "② 이사회는 회사의 투명한 경영에 대한 감독기능을 강화하기 위하여 감사위원회를 설치하며, 각 상정 안건에 대한 객관적이고 전문적인 심의를 위해 기타 법령, 정관에서 정하는 바에 따라 이사회 내 위원회를 설치 할 수 있다."
+                                ]},
+                                { subTitle: "3. 이사의 선임", list: [
+                                    "① 이사는 이사회 추천, 사외이사후보추천위원회 추천, 주주 추천 등의 방법을 통해 선정된 후보자에 대해, 주주총회 결의로 선임하며, 회사는 전문성이 충분히 검증된 후보자가 이사로 선임되어, 이사회 중심의 기업경영이 달성될 수 있도록 노력한다.",
+                                    "② 대표이사들은 주주총회에서 선임된 이사 중에서 이사회의 결의에 의하여 선임한다.",
+                                    "③ 이사회 의장은 주주총회에서 선임된 이사 중 이사회의 결의로 선임하되, 대표이사와의 겸직을 지양한다."
+                                ]},
+                                { subTitle: "4. 이사의 자격", list: [
+                                    "① 사내이사는 회사의 사업 내용과 관련된 풍부한 경험과 전문지식을 갖춰야하며, 회사의 발전과 주주가치의 제고에 기여할 수 있어야 한다.",
+                                    "② 사외이사는 법조, 재무, 회계, 신사업, IT-TECH, 공공부문 등에서 충분한 식견과 전문성을 갖춘 자로, 회사와 중대한 이해관계가 없고, 독립성이 검증 되어야 한다."
+                                ]},
+                                { subTitle: "5. 이사회의 운영", list: [
+                                    "① 이사회는 정기이사회와 필요에 따라 개최되는 임시이사회로 운영되며, 회사는 이사회의 원활한 운영을 위하여 이사회의 권한과 책임, 운영절차 등을 구체적으로 규정한 이사회 규정을 제정, 운영한다.",
+                                    "② 회사는 이사회 내 위원회의 원활한 운영을 위하여 위원회의 권한과 책임, 운영절차 등을 구체적으로 규정한 위원회 규정을 제정, 운영한다.",
+                                    "③ 회사는 이사회 회의의 경과 과정, 중요한 심의 내용을 기록한 의사록을 작성하고 이를 보관하여야 한다."
+                                ]},
+                                { subTitle: "6. 사외이사의 역할", list: [
+                                    "① 사외이사는 독립성을 바탕으로 중요한 경영정책 결정에 참여하고, 전문성을 바탕으로 경영진을 감독하여, 회사가 건전하게 사업을 영위할 수 있도록 지원한다.",
+                                    "② 회사는 사외이사가 회사의 경영 실태 및 현황에 대하여 정확히 파악할 수 있도록 직무 수행에 필요한 정보를 신속하게 제공하며, 사외이사는 회사에게 직무수행에 필요한 정보의 제공을 요청할 수 있다. 또한 사외이사는 필요한 경우 외부 전문가의 조력을 받을 수 있으며, 회사는 이에 소요되는 비용을 지원한다."
+                                ]},
+                                { subTitle: "7. 이사의 역할", list: [
+                                    "① 이사는 선량한 관리자로서 그 책임을 다해, 이사회에 적극적으로 참여하며, 회사와 주주 및 이해관계자의 지속적인 이익 증진을 위해 최선의 의사 결정을 하여야 한다.",
+                                    "② 이사는 전체 주주의 이익을 고려한 의사결정을 하며, 직무상 얻어진 정보를 외부에 누출하거나 개인의 이익을 위하여 사용하여서는 안되며, 이사가 법령이나 정관을 위배하여 그 임무를 소홀히 하여 손해가 발생한 경우, 이사는 회사 또는 제3자에 대하여 손해배상책임을 진다.",
+                                    "③ 회사는 유능한 인사를 유치하고 책임 주공의 실효성을 확보하기 위하여 회사의 비용으로 이사를 위한 손해배상책임보험에 가입할 수 있다."
+                                ]},
+                                { subTitle: "8. 평가 및 보상", list: [
+                                    "① 경영진의 경영활동을 공정하게 평가하여야 하며, 그 결과를 보수에 적정하게 반영한다. 이사의 보수는 주주총회에서 승인된 범위 내에서 적절한 심사를 거쳐 집행한다.",
+                                    "② 사외이사의 활동 내역은 사외이사후보추천위원회에서 공정하게 평가하여, 그 평가결과를 재선임의 결정 등에 반영할 수 있다."
+                                ]},
+                                { subTitle: "9. 이사의 교육", list: [
+                                    "① 회사는 이사회의 전문성 제고를 위해, 이사의 직무 수행에 필요한 교육 및 능력 개발의 기회를 회사의 비용으로 제공할 수 있다."
+                                ]}
+                            ]
+                        },
+                        {
+                            title: "III. 감 사 기 구",
+                            content: [
+                                { subTitle: "1. 감사위원회", list: [
+                                    "① 감사위원회는 3인 이상의 이사로 구성하되, 위원의 3분의 2 이상은 사외이사로 하고, 회계 또는 재무 전문가를 1인 이상 포함하여 구성한다.",
+                                    "② 감사위원회의 회계 및 업무 감사에 관한 사항 등 법령과 정관이 정하는 바에 따라, 이사와 경영진의 직무집행에 대한 적법성 감사, 재무활동의 건전성과 재무보고의 정확성 검토, 중요한 회계처리기준이나 회계추정 변경의 타당성 검토, 외부감사인의 선임 및 해임에 대한 승인, 외부감사인의 감사활동에 대한 평가 등의 업무를 독립적으로 수행한다.",
+                                    "③ 감사위원회 회의는 분기 1회 이상 개최하고, 필요한 경우 수시로 개최할 수 있다."
+                                ]},
+                                { subTitle: "2. 외부감사인", list: [
+                                    "① 외부감사인은 회사와 경영진 및 특정주주 등으로부터 독립적인 입장에서 공정하게 감사 업무를 수행하여야 한다.",
+                                    "② 외부감사인은 외부감사 활동 중 확인한 중요사항을 감사위원회에 보고한다.",
+                                    "③ 외부감사인은 주주총회에 참석하여 감사보고서에 관한 주주의 질문이 있는 경우, 이에 충분히 설명하여야 한다."
+                                ]}
+                            ]
+                        },
+                        {
+                            title: "IV. 이해관계자",
+                            content: [
+                                { subTitle: "1. 회사는 고객, 주주, 임직원 등 모든 이해관계자의 권리 보호를 위한 사회적 책임을 충실히 이행한다.", list: [] },
+                                { subTitle: "2. 회사는 근로기준법 등 노동관련 법령을 성실히 준수하고, 근로조건의 유지 개선에 노력한다.", list: [] },
+                                { subTitle: "3. 회사는 법령이 허용하는 범위 내에서 이해관계자의 권리보호에 필요한 정보를 제공하며, 이해관계자의 관련정보 접근을 지원한다.", list: [] }
+                            ]
+                        },
+                        {
+                            title: "V. 공 시",
+                            content: [
+                                { subTitle: "1. 회사는 정기적으로 사업보고서, 분기보고서 및 반기보고서 등을 작성하여 공시하며, 법령에서 요구하는 공시 사항과 주주 및 이해관계자에게 중대한 영향을 미칠 수 있는 사항은 신속하고 정확하게 공시한다.", list: [] },
+                                { subTitle: "2. 회사는 중요한 기업 정보의 공개 범위나 공개 시기에 있어 특정인을 우대하거나 차별하지 않으며, 모든 이해관계자들이 동시에 접근할 수 있도록 공시한다.", list: [] }
+                            ]
+                        },
+                        {
+                            title: "부 칙(2021.2.8)",
+                            content: [
+                                { subTitle: "제 1 조(시행일) 이 헌장은 2021년 2월 8일부터 시행한다.", list: [] }
+                            ]
+                        }
                     ],
-                    PolicySec2Title: "II. 이 사 회",
-                    PolicySec2: [
-                        { subTitle: "1. 이사회의 기능", list: [
-                            "① 이사회는 관련 법령에 의거하여, 경영에 대해 포괄적인 권한을 가지며, 회사와 주주의 이익을 위하여 회사의 기본적인 경영목표를 결정하고, 법령, 정관, 이사회 규정 등 관련 규정이 정하는 회사의 주요 의사 결정 사항에 대한 심의, 의결을 한다.",
-                            "② 이사회는 투명하고, 공정한 회사의 업무 수행 및 주주가치 훼손 방지를 위해 경영진의 활동을 감독한다.",
-                            "③ 이사회는 관련 법령, 정관, 이사회 규정 등에 의해, 위임이 허용되지 않는 주요한 사항을 제외하고, 대표이사 또는 이사회 내 위원회에 권한을 위임할 수 있다."
-                        ]},
-                        { subTitle: "2. 이사회의 구성", list: [
-                            "① 회사는 이사회에서 다양한 논의와 효율적인 의사결정이 가능하도록 6 인 이상의 이사로 이사회를 구성하며, 이사회 독립성 보장을 위해 사외이사는 이사회 구성원 총수의 과반수 이상으로 구성한다.",
-                            "② 이사회는 회사의 투명한 경영에 대한 감독기능을 강화하기 위하여 감사위원회를 설치하며, 각 상정 안건에 대한 객관적이고 전문적인 심의를 위해 기타 법령, 정관에서 정하는 바에 따라 이사회 내 위원회를 설치 할 수 있다."
-                        ]},
-                        { subTitle: "3. 이사의 선임", list: [
-                            "① 이사는 이사회 추천, 사외이사후보추천위원회 추천, 주주 추천 등의 방법을 통해 선정된 후보자에 대해, 주주총회 결의로 선임하며, 회사는 전문성이 충분히 검증된 후보자가 이사로 선임되어, 이사회 중심의 기업경영이 달성될 수 있도록 노력한다.",
-                            "② 대표이사는 주주총회에서 선임된 이사 중에서 이사회의 결의에 의하여 선임한다.",
-                            "③ 이사회 의장은 주주총회에서 선임된 이사 중 이사회의 결의로 선임하되, 대표이사와의 겸직을 지양한다."
-                        ]},
-                        { subTitle: "4. 이사의 자격", list: [
-                            "① 사내이사는 회사의 사업 내용과 관련된 풍부한 경험과 전문지식을 갖춰야하며, 회사의 발전과 주주가치의 제고에 기여할 수 있어야 한다.",
-                            "② 사외이사는 법조, 재무, 회계, 신사업, IT-TECH, 공공부문 등에서 충분한 식견과 전문성을 갖춘 자로, 회사와 중대한 이해관계가 없고, 독립성이 검증 되어야 한다."
-                        ]},
-                        { subTitle: "5. 이사회의 운영", list: [
-                            "① 이사회는 정기이사회와 필요에 따라 개최되는 임시이사회로 운영되며, 회사는 이사회의 원활한 운영을 위하여 이사회의 권한과 책임, 운영절차 등을 구체적으로 규정한 이사회 규정을 제정, 운영한다.",
-                            "② 회사는 이사회 내 위원회의 원활한 운영을 위하여 위원회의 권한과 책임, 운영절차 등을 구체적으로 규정한 위원회 규정을 제정, 운영한다.",
-                            "③ 회사는 이사회 회의의 경과 과정, 중요한 심의 내용을 기록한 의사록을 작성하고 이를 보관하여야 한다."
-                        ]}
-                    ],
-
-                    // [Tab 2] 이사회 구성 현황
-                    BoardSectionTitle1: "이사회 구성 현황",
-                    BoardSectionDesc1: "대표이사, 사내이사, 기타 비상무 이사로 구성된 이사회 현황입니다.",
+                    // [Tab 2] 이사회 구성 현황 데이터 (KO)
+                    BoardSectionTitle1: `이사회 구성 현황`,
+                    BoardSectionDesc1: `대표이사, 사내이사, 기타 비상무 이사로 구성된 이사회 현황입니다.`,
+                    BoardSectionTitleSub: `사외이사 및 위원회 구성`,
+                    BoardSectionDescSub: `독립성과 전문성을 갖춘 사외이사를 통해 경영 투명성과 견제 기능을 강화하고 있습니다.`,
                     BoardMemberList: [
                         {
-                            pos: "대표이사", name: "허서홍", img: "/images/gsrin0102/gsrin0102_1.png",
+                            pos: "대표이사", name: "허서홍", 
+                            img: require("@/assets/images/dummy/gsrin0102_1.png"),
                             term: "2025.03.20~2028.03.19", firstDate: "2025.03.20 최초선임",
                             careers: [
                                 { text: "美 스탠퍼드대", class: "" },
                                 { text: "2022년 (주)GS 미래사업팀장", class: "" },
                                 { text: "2024년 (주)GS리테일 경영전략 Service Unit장", class: "" },
-                                { text: "現) (주)GS리테일 대표이사", class: "point" } // 강조가 필요한 행에만 클래스 부여
+                                { text: "現) (주)GS리테일 대표이사", class: "point" }
                             ]
                         },
                         {
-                            pos: "사내이사", name: "오진석", img: "/images/gsrin0102/gsrin0102_2.png",
+                            pos: "사내이사", name: "오진석", 
+                            img: require("@/assets/images/dummy/gsrin0102_2.png"),
                             term: "2024.03.21~2027.03.20", firstDate: "2024.03.21 최초선임",
                             careers: [
                                 { text: "서강대", class: "" },
@@ -293,7 +348,8 @@ export default {
                             ]
                         },
                         {
-                            pos: "기타 비상무이사", name: "홍순기", img: "/images/gsrin0102/gsrin0102_3.png",
+                            pos: "기타 비상무이사", name: "홍순기", 
+                            img: require("@/assets/images/dummy/gsrin0102_3.png"),
                             term: "2025.03.21~2027.03.20", firstDate: "2021.07.01 최초선임",
                             careers: [
                                 { text: "연세대", class: "" },
@@ -302,11 +358,10 @@ export default {
                             ]
                         }
                     ],
-                    BoardSectionTitleSub: "사외이사 및 위원회 구성",
-                    BoardSectionDescSub: "독립성과 전문성을 갖춘 사외이사를 통해 경영 투명성과 견제 기능을 강화하고 있습니다.",
                     SubMemberList: [
                         {
-                            pos: "사외이사 / 이사회의장", name: "이성락", img: "/images/gsrin0102/gsrin0102_4.png",
+                            pos: "사외이사 / 이사회의장", name: "이성락", 
+                            img: require("@/assets/images/dummy/gsrin0102_4.png"),
                             term: "2025.03.20~2028.03.19", firstDate: "2023.03.25 최초선임",
                             careers: [
                                 { text: "건국대", class: "" },
@@ -316,7 +371,8 @@ export default {
                             ]
                         },
                         {
-                            pos: "사외이사", name: "이인무", img: "/images/gsrin0102/gsrin0102_5.png",
+                            pos: "사외이사", name: "이인무", 
+                            img: require("@/assets/images/dummy/gsrin0102_5.png"),
                             term: "2024.03.21~2027.03.20", firstDate: "2021.07.01 최초선임",
                             careers: [
                                 { text: "美 일리노이대", class: "" },
@@ -326,7 +382,8 @@ export default {
                             ]
                         },
                         {
-                            pos: "사외이사", name: "이상규", img: "/images/gsrin0102/gsrin0102_6.png",
+                            pos: "사외이사", name: "이상규", 
+                            img: require("@/assets/images/dummy/gsrin0102_6.png"),
                             term: "2023.03.23~2026.03.22", firstDate: "2023.03.23 최초선임",
                             careers: [
                                 { text: "美 워싱턴대", class: "" },
@@ -337,7 +394,8 @@ export default {
                             ]
                         },
                         {
-                            pos: "사외이사", name: "윤윤진", img: "/images/gsrin0102/gsrin0102_7.png",
+                            pos: "사외이사", name: "윤윤진", 
+                            img: require("@/assets/images/dummy/gsrin0102_7.png"),
                             term: "2025.03.20~2028.03.19", firstDate: "2025.03.20 최초선임",
                             careers: [
                                 { text: "美 UC 버클리대", class: "" },
@@ -366,186 +424,64 @@ export default {
                         { title: "ESG위원회", chair: "이상규", members: "이성락, 윤윤진" },
                         { title: "보상위원회", chair: "이상규", members: "이성락, 윤윤진" }
                     ],
+                    // [Tab 2] BoardDownloadBtns 데이터 부분
                     BoardDownloadBtns: [
-                        { text: "(주)GS리테일 정관", link: "#" }, { text: "이사회 규정", link: "#" }, { text: "감사위원회 규정", link: "#" },
-                        { text: "사외이사후보 추천위원회 규정", link: "#" }, { text: "내부거래위원회 운영규정", link: "#" },
-                        { text: "ESG 위원회 운영 규정", link: "#" }, { text: "보상위원회 운영규정", link: "#" }
+                        { 
+                            text: "(주)GS리테일 정관", 
+                            link: require("@/assets/download/gsr_incorporation_1.pdf").default || require("@/assets/download/gsr_incorporation_1.pdf") 
+                        },
+                        { 
+                            text: "이사회 규정", 
+                            link: require("@/assets/download/boardCharter_2.pdf").default || require("@/assets/download/boardCharter_2.pdf") 
+                        },
+                        { 
+                            text: "감사위원회 규정", 
+                            link: require("@/assets/download/directors_audit_committee_3.pdf").default || require("@/assets/download/directors_audit_committee_3.pdf") 
+                        },
+                        { 
+                            text: "사외이사후보 추천위원회 규정", 
+                            link: require("@/assets/download/Outside_Director_4.pdf").default || require("@/assets/download/Outside_Director_4.pdf") 
+                        },
+                        { 
+                            text: "내부거래위원회 운영규정", 
+                            link: require("@/assets/download/internal_trade_commission_rule_5.pdf").default || require("@/assets/download/internal_trade_commission_rule_5.pdf") 
+                        },
+                        { 
+                            text: "ESG 위원회 운영 규정", 
+                            link: require("@/assets/download/ESG_6.pdf").default || require("@/assets/download/ESG_6.pdf") 
+                        },
+                        { 
+                            text: "보상위원회 운영규정", 
+                            link: require("@/assets/download/compensation_7.pdf").default || require("@/assets/download/compensation_7.pdf") 
+                        }
                     ],
                     SelectMsg: "위원회 선택", SelectOptions: [{value:'', label:'위원회 선택'}, {value:'0', label:'감사위원회'}, {value:'1', label:'ESG위원회'}],
                     BtnConfirm: "목록보기"
                 },
                 en: {
-                    MainTitle: "Governance",
-                    MainsubTitle: "CORPORATE GOVERNANCE",
-                    MainDesc: [
-                        "GS Retail is establishing sound governance <br/>in accordance with the Corporate Governance Charter.",
-                        "GS Retail practices board-centered management <br/>to establish a transparent corporate culture.",
-                        "GS Retail introduced a board evaluation system <br/>at the regular board meeting held in December 2021 <br/>to <b>improve board operations and enhance governance reliability</b>.",
-                        "GS Retail will <b>continuously improve governance health</b> <br/>for <b>sustainable management</b>."
-                    ],
-                    Tabs1: [{ item: "Charter" }, { item: "Board & Committee" }, { item: "Evaluation" }, { item: "Governance GAP" }],
-                    
-                    // [Tab 1] Corporate Governance Charter
-                    CharterTitle: "GS Retail Corporate Governance Charter", CharterDate: "Established Feb 08, 2021",
-                    PolicyIntroTitle: "Preamble",
-                    PolicyIntroDesc: "<p class='desc'>GS Retail Co., Ltd. (hereinafter referred to as the \"Company\") aims to build trust with all stakeholders based on the establishment of sound corporate governance and leap forward as a company leading Life Innovation for customers through constant challenges. To achieve this vision, the Company establishes this Corporate Governance Charter.</p><p class='desc'>In accordance with this Charter, the Company establishes sound governance, such as guaranteeing shareholders' rights, the role and responsibility of the Board, and independent operation of specialized audit bodies, aiming for fair and transparent management activities, and striving to continuously promote the interests of all stakeholders, including shareholders, customers, and employees.</p>",
-                    PolicySec1Title: "I. Shareholders",
-                    PolicySec1: [
-                        { subTitle: "1. Rights of Shareholders", list: [
-                            "① Shareholders are the owners of the company and are guaranteed basic rights guaranteed by relevant laws, such as the right to participate in profit distribution, the right to attend and vote at general meetings of shareholders, and the right to propose agenda items for general meetings.",
-                            "② Matters that bring significant changes to the existence of the company and shareholder rights, such as amendments to the Articles of Incorporation, mergers, transfer of business, division, dissolution, and reduction of capital, are decided through general meetings of shareholders by maximizing the guarantee of shareholder rights.",
-                            "③ The Company strives to ensure that resolutions at the general meeting of shareholders are made through transparent and fair procedures, and provides sufficient information to shareholders regarding the date, time, location, and method of exercising voting rights before the meeting.",
-                            "④ The exercise of shareholder rights should be manifested according to the free will of the shareholders."
-                        ]},
-                        { subTitle: "2. Fair Treatment of Shareholders", list: [
-                            "① Shareholders are guaranteed rights according to the principle of one vote per share. However, if the voting rights of specific shareholders are restricted by law, the relevant laws shall be followed. The Company treats shareholders fairly so that their essential rights are not damaged in accordance with the Commercial Act and relevant laws.",
-                            "② The Company provides necessary information to shareholders in a timely and sufficient manner, structured for easy understanding, and in a fair way. It also strives to protect shareholders from unfair internal transactions and self-dealing."
-                        ]},
-                        { subTitle: "3. Responsibilities of Shareholders", list: [
-                            "① Shareholders should actively exercise their voting rights for the development and interest of the company.",
-                            "② Controlling shareholders who exercise influence over company management should exercise their shareholder rights considering the interests of the company and all other shareholders, and strive to prevent damage to other shareholders due to abuse of their control."
-                        ]}
-                    ],
-                    PolicySec2Title: "II. Board of Directors",
-                    PolicySec2: [
-                        { subTitle: "1. Functions of the Board", list: [
-                            "① The Board has comprehensive authority over management in accordance with relevant laws, determines basic management goals for the interests of the company and shareholders, and deliberates and decides on major decision-making matters of the company as determined by laws, the Articles of Incorporation, and Board regulations.",
-                            "② The Board supervises the activities of the management for transparent and fair business performance and to prevent damage to shareholder value.",
-                            "③ The Board may delegate authority to the CEO or committees within the Board, except for major matters that are not allowed to be delegated by laws, the Articles of Incorporation, or Board regulations."
-                        ]},
-                        { subTitle: "2. Composition of the Board", list: [
-                            "① The Board consists of 6 or more directors to enable diverse discussions and efficient decision-making. To ensure independence, outside directors constitute more than half of the total number of Board members.",
-                            "② The Board establishes an Audit Committee to strengthen the monitoring function for transparent management and may establish other committees within the Board for objective and professional deliberation of each agenda item."
-                        ]},
-                        { subTitle: "3. Appointment of Directors", list: [
-                            "① Directors are appointed by resolution of the general meeting of shareholders from candidates selected through recommendations from the Board, the Outside Director Candidate Recommendation Committee, or shareholders. The Company strives to ensure that candidates with verified expertise are appointed.",
-                            "② The CEO is appointed by resolution of the Board from among the directors appointed at the general meeting of shareholders.",
-                            "③ The Chairman of the Board is appointed by resolution of the Board from among the directors, and concurrent holding of the CEO position is discouraged."
-                        ]},
-                        { subTitle: "4. Qualifications of Directors", list: [
-                            "① Inside directors must have abundant experience and expertise related to the company's business and be able to contribute to the company's development and enhancement of shareholder value.",
-                            "② Outside directors must be persons with sufficient knowledge and expertise in fields such as law, finance, accounting, new business, IT-TECH, and the public sector, with no significant interest in the company and verified independence."
-                        ]},
-                        { subTitle: "5. Operation of the Board", list: [
-                            "① The Board operates through regular meetings and temporary meetings held as needed. The Company enacts and operates Board regulations that specifically define the authority, responsibilities, and operating procedures of the Board.",
-                            "② The Company enacts and operates committee regulations that specifically define the authority, responsibilities, and operating procedures of the committees within the Board.",
-                            "③ The Company must prepare and maintain minutes recording the progress of Board meetings and important deliberation details."
-                        ]}
-                    ],
-
-                    // [Tab 2] Board Status
-                    BoardSectionTitle1: "Board Composition",
-                    BoardSectionDesc1: "Current status of the Board consisting of the CEO, Inside Directors, and Non-executive Directors.",
-                    ChairLabel: "Chair", MemberLabel: "Member",
-                    BoardMemberList: [
-                        {
-                            pos: "CEO", name: "Heo Seo-hong", img: "/images/gsrin0102/gsrin0102_1.png",
-                            term: "2025.03.20~2028.03.19", firstDate: "First appointed Mar 20, 2025",
-                            careers: [
-                                { text: "Stanford Univ.", class: "" },
-                                { text: "2022 Head of Future Business Team, GS Corp", class: "" },
-                                { text: "2024 Head of Management Strategy Service Unit, GS Retail", class: "" },
-                                { text: "Present) CEO of GS Retail", class: "point" }
-                            ]
-                        },
-                        {
-                            pos: "Inside Director", name: "Oh Jin-seok", img: "/images/gsrin0102/gsrin0102_2.png",
-                            term: "2024.03.21~2027.03.20", firstDate: "First appointed Mar 21, 2024",
-                            careers: [
-                                { text: "Sogang Univ.", class: "" },
-                                { text: "2014 Head of Management Support Division, GS Retail", class: "" },
-                                { text: "2021 Head of Strategy Division, GS Retail", class: "" },
-                                { text: "Present) Head of Platform BU, GS Retail", class: "point" }
-                            ]
-                        },
-                        {
-                            pos: "Non-executive Director", name: "Hong Soon-ky", img: "/images/gsrin0102/gsrin0102_3.png",
-                            term: "2025.03.21~2027.03.20", firstDate: "First appointed Jul 01, 2021",
-                            careers: [
-                                { text: "Yonsei Univ.", class: "" },
-                                { text: "2017 Head of Finance Team, GS Corp", class: "" },
-                                { text: "Present) CEO of GS Corp", class: "point" }
-                            ]
-                        }
-                    ],
-                    BoardSectionTitleSub: "Outside Directors & Committees",
-                    BoardSectionDescSub: "Strengthening management transparency and check functions through independent and professional outside directors.",
-                    SubMemberList: [
-                        {
-                            pos: "Outside Director / Chairman", name: "Lee Seong-rak", img: "/images/gsrin0102/gsrin0102_4.png",
-                            term: "2025.03.20~2028.03.19", firstDate: "First appointed Mar 25, 2023",
-                            careers: [
-                                { text: "Konkuk Univ.", class: "" },
-                                { text: "2009 Vice President of Shinhan Bank", class: "" },
-                                { text: "2013 President of Shinhan Life Insurance", class: "" },
-                                { text: "2017 CEO of Gordon & Partners", class: "" }
-                            ]
-                        },
-                        {
-                            pos: "Outside Director", name: "Lee In-mu", img: "/images/gsrin0102/gsrin0102_5.png",
-                            term: "2024.03.21~2027.03.20", firstDate: "First appointed Jul 01, 2021",
-                            careers: [
-                                { text: "Univ. of Illinois", class: "" },
-                                { text: "2007 VP at Dimensional Fund Advisors", class: "" },
-                                { text: "2015 Advisor at Reserve Management Office, BOK", class: "" },
-                                { text: "Present) Professor at KAIST Business School", class: "point" }
-                            ]
-                        },
-                        {
-                            pos: "Outside Director", name: "Lee Sang-kyu", img: "/images/gsrin0102/gsrin0102_6.png",
-                            term: "2023.03.23~2026.03.22", firstDate: "First appointed Mar 23, 2023",
-                            careers: [
-                                { text: "Univ. of Washington", class: "" },
-                                { text: "2012 Head of Korea B2C Group, LG Electronics", class: "" },
-                                { text: "2016 Head of Korea Mobile Group, LG Electronics", class: "" },
-                                { text: "2021 President of Korea Sales & Marketing, LG Electronics", class: "" },
-                                { text: "Present) Chaired Professor at Sookmyung Women's Univ.", class: "point" }
-                            ]
-                        },
-                        {
-                            pos: "Outside Director", name: "Yoon Yoon-jin", img: "/images/gsrin0102/gsrin0102_7.png",
-                            term: "2025.03.20~2028.03.19", firstDate: "First appointed Mar 20, 2025",
-                            careers: [
-                                { text: "UC Berkeley", class: "" },
-                                { text: "2009 Researcher at Stanford SRI International AI Center", class: "" },
-                                { text: "2018 Non-executive Director of Korea Authority of Land & Infrastructure Safety", class: "" },
-                                { text: "Present) Professor of Civil & Environmental Engineering at KAIST", class: "point" }
-                            ]
-                        }
-                    ],
-                    BoardSectionTitle2: "Board Skills Matrix",
-                    SkillsList: [
-                        { type: "Inside Director/CEO", name: "Heo Seo-hong", appointDate: "Appointed 2025.03", tags: [{text: "Leadership", class:""}, {text: "ESG", class:""}] },
-                        { type: "Inside Director", name: "Oh Jin-seok", appointDate: "Appointed 2024.03", tags: [{text: "Leadership", class:""}, {text: "Retail", class:""}, {text: "Finance", class:"TAG-2"}, {text: "ESG", class:""}, {text: "Remuneration", class:"TAG-3"}] },
-                        { type: "Non-executive Director", name: "Hong Soon-ky", appointDate: "Appointed 2021.07", tags: [{text: "Leadership", class:""}, {text: "Accounting", class:""}, {text: "ESG", class:""}, {text: "ESG Comm.", class:"TAG-3"}] },
-                        { type: "Outside Director", name: "Lee Seong-rak", appointDate: "Appointed 2022.03", tags: [{text: "Leadership", class:"TAG-2"}, {text: "Finance", class:"TAG-2"}, {text: "ESG", class:"TAG-2"}, {text: "Independence", class:"TAG-2"}, {text: "Internal Trans.", class:"TAG-4"}, {text: "Recommendation", class:"TAG-4"}, {text: "Audit", class:"TAG-4"}] },
-                        { type: "Outside Director", name: "Lee In-mu", appointDate: "Appointed 2021.07", tags: [{text: "Accounting", class:"TAG-2"}, {text: "Finance", class:"TAG-2"}, {text: "ESG", class:"TAG-2"}, {text: "Independence", class:"TAG-2"}, {text: "Recommendation", class:"TAG-4"}, {text: "Audit", class:"TAG-4"}, {text: "ESG Comm.", class:"TAG-4"}, {text: "Remuneration", class:"TAG-4"}] },
-                        { type: "Outside Director", name: "Lee Sang-kyu", appointDate: "Appointed 2023.03", tags: [{text: "Retail", class:""}, {text: "ESG", class:""}, {text: "Independence", class:"TAG-2"}, {text: "Internal Trans.", class:"TAG-3"}, {text: "Recommendation", class:"TAG-3"}, {text: "ESG Comm.", class:"TAG-3"}] },
-                        { type: "Outside Director", name: "Yoon Yoon-jin", appointDate: "Appointed 2025.03", tags: [{text: "IT·Digital", class:""}, {text: "ESG", class:""}, {text: "Independence", class:""}, {text: "Recommendation", class:"TAG-3"}, {text: "Audit", class:"TAG-3"}, {text: "ESG Comm.", class:"TAG-3"}, {text: "Remuneration", class:"TAG-3"}] }
-                    ],
-                    BoardSectionTitle3: "Committees under the Board",
-                    CommitteeTable: [
-                        { title: "Internal Transaction Committee", chair: "Lee Sang-kyu", members: "Lee Seong-rak, Yoon Yoon-jin" },
-                        { title: "Outside Director Candidate Recommendation Committee", chair: "Lee Sang-kyu", members: "Lee Seong-rak, Lee In-mu" },
-                        { title: "Audit Committee", chair: "Lee In-mu", members: "Lee Seong-rak, Yoon Yoon-jin" },
-                        { title: "ESG Committee", chair: "Lee Sang-kyu", members: "Lee Seong-rak, Yoon Yoon-jin" },
-                        { title: "Remuneration Committee", chair: "Lee Sang-kyu", members: "Lee Seong-rak, Yoon Yoon-jin" }
-                    ],
-                    BoardDownloadBtns: [
-                        { text: "Articles of Incorporation", link: "#" }, { text: "Board Regulations", link: "#" }, { text: "Audit Committee Regulations", link: "#" },
-                        { text: "Recommendation Committee Regulations", link: "#" }, { text: "Internal Transaction Regulations", link: "#" },
-                        { text: "ESG Committee Regulations", link: "#" }, { text: "Remuneration Committee Regulations", link: "#" }
-                    ],
-                    SelectMsg: "Select Committee", SelectOptions: [{value:'', label:'Select Committee'}, {value:'0', label:'Audit'}, {value:'1', label:'ESG'}],
-                    BtnConfirm: "Back to List"
                 }
             }
         };
     },
     computed: { t() { return this.langData[this.lang] || this.langData.ko; } },
     methods: {
-        onTabChange1(idx) { this.CTabIdx = idx; this.selectedFilter = ""; },
-        handleConfirm() { console.log('Confirmed'); }
+        onTabChange1(idx) {
+            this.CTabIdx = idx;
+            this.selectedFilter = "";
+        },
+        handleDownload(link) {
+            if (!link || link === "#") {
+                alert("파일을 준비 중입니다.");
+                return;
+            }
+
+            // require 결과가 객체로 넘어올 경우를 대비한 방어 코드
+            const downloadUrl = typeof link === 'object' ? link.default : link;
+            
+            if (downloadUrl) {
+                window.open(downloadUrl, "_blank");
+            }
+        }
     }
 };
 </script>
@@ -555,11 +491,12 @@ export default {
 /* gsrin0101 전용 스타일 */
 .main-container {width: 100%; position: relative; display: block;}
 .section-investor {width: 100%; position: relative; display: block;}
-.title_wrap {width: 100%; padding: 110px 0 150px; background: url('/public/images/gsrin0101_bg.png') no-repeat center / contain; text-align: center; position: relative; display: block;}
+.title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0101_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title {color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; display: block;}
 .visual-sub {margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center;}
 .cont_inner {width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px;}
 .title-sub-text {width: 100%; padding: 80px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4;}
+:deep(.title-sub-text br:not(:nth-of-type(2))) {display: none;}
 .subtit_wrap {width: 100%; padding: 60px 40px; background: #F0F3F5; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
 .section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align: center;}
 .section-date {margin-top: 15px; color: #666666; font-size: 18px; text-align: center; display: block;}
@@ -567,9 +504,9 @@ export default {
 .policy_wrap dt {margin-top: 60px; color: #161618; font-size: 2.4rem; font-weight: 700;}
 .policy_wrap dt:first-child {margin-top: 0;}
 .policy_wrap dd {margin-top: 20px; color: #444444; font-size: 1.8rem; line-height: 1.8;}
-.bullet_title {color: #161618; font-size: 2rem; font-weight: 700; display: block;}
+.bullet_title {color: #161618; font-size: 20px; font-weight: 700; display: block;}
 .bullet_01 {font-size:18px;}
-.bullet_01.point {color:#242428}
+.bullet_01 li.point {color:#242428}
 
 /* gsrin0102 전용 스타일 */
 .gsrin0102 > * {margin-top: 80px;}
@@ -581,7 +518,7 @@ export default {
 .view-3 {width: 100%; padding: 0; position: relative; display: flex; align-items: flex-start; gap: 28px; align-self: stretch; flex: 0 0 auto;}
 .div-2 {width: 21.97%; padding: 0; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 32px;}
 .view-4 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; align-self: stretch; flex: 0 0 auto;}
-.img {width: 100%; height: 160px; position: relative; align-self: stretch;}
+.img {width: 100%; height:auto; position: relative; align-self: stretch;}
 .div-3 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; align-self: stretch; flex: 0 0 auto;}
 .text-wrapper-4 {width: fit-content; margin-top: -1.00px; padding: 0; color: #161618; font-size: 16px; font-weight: 700; letter-spacing: -0.16px; line-height: 24px; position: relative; white-space: nowrap;}
 .text-wrapper-5 {width: fit-content; padding: 0; color: #161618; font-size: 28px; font-weight: 700; font-style: normal; letter-spacing: -0.28px; line-height: 135.0000023841858%; position: relative; white-space: nowrap;}
@@ -632,30 +569,32 @@ export default {
 
 @media screen and (max-width:1024px) {
     .title-sub-text {padding: 60px 0; font-size: 36px;}
-    .view-3 {flex-wrap: wrap; gap: 40px 20px;}
+    .view-3 {flex-wrap: wrap; justify-content:space-between; gap:0;}
     .div-2 {width: calc(48% - 10px);} /* 2열 배치 */
-    .frame-5 {width:calc((100% - 12px) / 2)}
+    .frame-5 {width:calc((100% - 12px) / 2); max-width:none;}
     .view-6:last-of-type {width:100%;}
+    .divider {display:none;}
 }
 
 @media screen and (max-width: 767px) {
-.title_wrap {padding: 60px 20px 80px;}
+    .title_wrap {padding: 60px 20px 80px;}
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
-    .title-sub-text {padding: 40px 0; font-size: 28px; line-height: 1.3;}
+    .title-sub-text {padding: 40px 0; font-size: 28px; line-height: 1.3; text-align:left;}
+    :deep(.title-sub-text br) {display:block !important;}
     .view-3 {flex-direction: column; align-items: center; gap: 40px;}
     .div-2 {width: 100%; max-width: 400px;} /* 1열 배치 및 최대너비 제한 */
     .view-6 {flex-direction: column; gap: 12px;}
     .view-6:last-of-type {width:100%;}
     .frame-5 {width: 100%; max-width:none;} /* 역량 구성표 1열 */
     .img {height: auto; aspect-ratio: 16 / 9;} /* 이미지 비율 유지 */
-    .divider {width: 100%; height: 1px; margin: 20px 0;} /* 구분선 가로로 변경 */
+    .divider {display:none;} /* 구분선 가로로 변경 */
     .policy_wrap {padding: 30px 20px;}
     .policy_wrap dt {margin-top: 40px; font-size: 20px;}
     .policy_wrap dd {font-size: 16px;}
     .table {flex-direction: column;}
     .column {width: 100%;}
     .divider-2 {width: 100%; height: 1px;}
-    .button-group {flex-direction: column; gap: 8px;}
+    .button-group {gap: 8px;}
 }
 </style>
