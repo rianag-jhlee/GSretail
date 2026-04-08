@@ -1,13 +1,13 @@
 <template>
     <div id="wrap">
         <!-- skip menu-->
-        <ul id="skip_menu" v-if="!isGuide && !hideLayout">
+        <ul id="skip_menu" v-if="!isGuide">
             <li><a href="#content_wrap">본문 바로가기</a></li>
             <li><a href="#gnb_nav">주메뉴 바로가기</a></li>
         </ul>
 
         <!-- header -->
-        <Header v-if="!isGuide && !hideLayout" :lang="lang" @change-lang="setLang" />
+        <Header v-if="!isGuide" :lang="lang" @change-lang="setLang" />
 
         <!-- content -->
         <router-view v-slot="{ Component }">
@@ -16,7 +16,7 @@
         <!-- //content -->
 
         <!-- footer -->
-        <Footer v-if="!isGuide && !hideLayout" :lang="lang" />
+        <Footer v-if="!isGuide" :lang="lang" />
     </div>
 </template>
 
@@ -33,7 +33,6 @@ export default {
     setup() {
         const route = useRoute();
         const isGuide = computed(() => route.path.startsWith("/guide"));
-        const hideLayout = computed(() => !!route.meta.hideLayout);
 
         const lang = ref("ko"); // 기본 국문
 
@@ -41,7 +40,7 @@ export default {
             lang.value = value; // 'ko' or 'en'
         };
 
-        return { isGuide, hideLayout, lang, setLang };
+        return { isGuide, lang, setLang };
     }
 };
 </script>
