@@ -12,7 +12,7 @@ defineProps({
         <li v-for="(item, i) in items" :key="i" class="feature_card_item">
             <em class="feature_card_num">{{ item.num }}</em>
             <strong class="feature_card_title">{{ item.title }}</strong>
-            <p class="feature_card_desc">{{ item.desc }}</p>
+            <p class="feature_card_desc" v-html="item.desc"></p>
         </li>
     </ul>
 </template>
