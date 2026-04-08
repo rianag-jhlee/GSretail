@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div class="inner">
         <Tabs
             :model-value="depth1ActiveIdx"
@@ -292,72 +292,174 @@
                 v-show="serviceActiveTab === i"
                 class="service_panel"
             >
-                <section>
-                    <PanelHeader
-                        :hero="tab.hero"
-                        :hero-alt="tab.heroAlt"
-                        :title="tab.title"
-                        :subtitle="tab.desc"
-                    />
-                    <table v-if="tab.table" class="cash_table">
-                        <tbody>
-                            <tr v-for="(row, ri) in tab.table.rows" :key="ri">
-                                <th scope="row">{{ row.head }}</th>
-                                <td>
-                                    <div class="cash_table_cell">
-                                        <span>{{ row.text }}</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+                <!-- 교통카드 충전: LNB + 콘텐츠 2열 레이아웃 -->
+                <template v-if="i === 2">
+                    <PanelHeader :title="tab.pageTitle" :subtitle="tab.pageDesc" />
+                    <div class="pop_wrap">
+                        <nav class="pop_lnb" aria-label="팝카드 메뉴">
+                            <ul>
+                                <li v-for="(lnb, li) in tab.lnbItems" :key="li">
+                                    <button
+                                        type="button"
+                                        :class="{ is_active: popLnbActiveIdx === li }"
+                                        @click="scrollToSection(li)"
+                                    >{{ lnb }}</button>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="pop_content">
+                            <!-- 팝카드란? -->
+                            <section id="pop-sec-0" data-pop-sec="0" class="pop_sec">
+                                <SectionHeader :title="tab.popTitle" :desc="tab.popDesc">
+                                    <p class="pop_exclude">{{ tab.popExclude }}</p>
+                                </SectionHeader>
+                                <ul class="pop_card_list">
+                                    <li v-for="(card, ci) in tab.popCards" :key="ci" class="pop_card_item">
+                                        <strong class="pop_card_name">{{ card.name }}</strong>
+                                        <figure class="pop_card_thumb">
+                                            <img :src="card.img" :alt="card.name" />
+                                        </figure>
+                                        <div class="pop_card_body">
+                                            <p class="pop_card_desc" style="white-space:pre-line">{{ card.desc }}</p>
+                                            <p v-if="card.note" class="pop_card_note" :class="{ is_warn: card.noteWarn }">{{ card.note }}</p>
+                                            <div v-if="card.logos && card.logos.length" class="pop_card_logos">
+                                                <img
+                                                    v-for="(logo, li) in card.logos"
+                                                    :key="li"
+                                                    :src="logo.src"
+                                                    :width="logo.w"
+                                                    :height="logo.h"
+                                                    alt=""
+                                                    class="pop_logo_thumb"
+                                                />
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </section>
+
+                            <!-- 교통카드 충전 서비스 -->
+                            <section class="pop_sec">
+                                <SectionHeader :title="tab.chargingTitle" />
+                                <ul class="charging_service_list">
+                                    <li v-for="(item, ci) in tab.chargingItems" :key="ci" class="charging_service_item">
+                                        <img :src="item.img" :alt="item.name" />
+                                    </li>
+                                </ul>
+                                <p class="charging_service_note">
+                                    <span class="charging_note_label">{{ tab.chargingNote.label }}</span>
+                                    {{ tab.chargingNote.text }}
+                                </p>
+                            </section>
+
+                            <!-- 교통 사용처 안내 -->
+                            <section id="pop-sec-1" data-pop-sec="1" class="pop_sec">
+                                <div class="traffic_sec_header">
+                                    <SectionHeader :title="tab.lnbItems[1]" />
+                                    <SelectBox
+                                        class="traffic_select_box"
+                                        v-model="trafficSelectVal"
+                                        :options="tab.trafficSelectOptions"
+                                        initMsg="선택하세요"
+                                    />
+                                </div>
+
+                                <!-- 고속버스 -->
+                                <div v-if="trafficSelectVal === 'express'" class="traffic_group">
+                                    <h4 class="traffic_group_title">{{ tab.trafficExpressBus.title }}</h4>
+                                    <ul class="traffic_bullet_list">
+                                        <li v-for="(item, bi) in tab.trafficExpressBus.bullets" :key="bi">{{ item }}</li>
+                                    </ul>
+                                    <ul class="traffic_logo_list">
+                                        <li v-for="(logo, li) in tab.trafficExpressBus.logos" :key="li">
+                                            <img :src="logo" :alt="tab.trafficExpressBus.bullets[li]" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+
+                            <!-- 유통 사용처 안내 -->
+                            <section id="pop-sec-2" data-pop-sec="2" class="pop_sec">
+                                <div class="traffic_sec_header">
+                                    <SectionHeader :title="tab.lnbItems[2]" />
+                                    <SelectBox
+                                        class="traffic_select_box"
+                                        v-model="retailSelectVal"
+                                        :options="tab.retailSelectOptions"
+                                        initMsg="선택하세요"
+                                    />
+                                </div>
+
+                                <!-- 커피/아이스크림 -->
+                                <div v-if="retailSelectVal === 'coffee'" class="traffic_group">
+                                    <h4 class="traffic_group_title">{{ tab.retailCoffee.title }}</h4>
+                                    <p class="retail_note">{{ tab.retailCoffee.note }}</p>
+                                    <ul class="retail_logo_list">
+                                        <li v-for="(logo, ri) in tab.retailCoffee.logos" :key="ri">
+                                            <img :src="logo" :alt="tab.retailCoffee.brands[ri]" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- 그 외 패널: 기본 구조 -->
+                <template v-else>
+                    <section>
+                        <PanelHeader
+                            :hero="tab.hero"
+                            :hero-alt="tab.heroAlt"
+                            :title="tab.title"
+                            :subtitle="tab.desc"
+                        />
+                        <table v-if="tab.table" class="cash_table">
+                            <tbody>
+                                <tr v-for="(row, ri) in tab.table.rows" :key="ri">
+                                    <th scope="row">{{ row.head }}</th>
+                                    <td>
+                                        <div class="cash_table_cell">
+                                            <span>{{ row.text }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </template>
             </div>
         </div>
 
         <!-- 택배&픽업 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel">
-            <!-- <PanelHeader
-                :hero="store.tabs[1].hero"
-                :hero-alt="store.tabs[1].heroAlt"
-                :title="store.tabs[1].title"
-                :subtitle="store.tabs[1].subtitle"
-            /> -->
+
         </div>
 
         <!-- 공공요금수납 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel">
-            <!-- <PanelHeader
-                :hero="store.tabs[2].hero"
-                :hero-alt="store.tabs[2].heroAlt"
-                :title="store.tabs[2].title"
-                :subtitle="store.tabs[2].subtitle"
-            /> -->
+
         </div>
 
         <!-- 상품권 판매 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
-            <!-- <PanelHeader
-                :hero="store.tabs[3].hero"
-                :hero-alt="store.tabs[3].heroAlt"
-                :title="store.tabs[3].title"
-                :subtitle="store.tabs[3].subtitle"
-            /> -->
+
         </div>
 
         <div class="diff_actions">
-            <Buttons btn-class="btn_back" @click="goBack">{{ t.backLabel }}</Buttons>
+            <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, computed, defineProps } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import Tabs from "@/components/Tabs.vue";
 import PanelHeader from "@/components/PanelHeader.vue";
 import SectionHeader from "@/components/SectionHeader.vue";
 import Buttons from "@/components/Buttons.vue";
+import SelectBox from "@/components/SelectBox.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
 
 /* 탭 0 이미지 */
@@ -397,775 +499,519 @@ import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 import imgHero4 from "@/assets/images/dummy/brand_bg_05.png";
 import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 
-/*매장/서비스 이미지*/ 
+/*매장/서비스 이미지*/
 import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
-
-// import imgSinsenFeature1 from "@/assets/images/dummy/sinsen_feature_01.png";
-// import imgSinsenFeature2 from "@/assets/images/dummy/sinsen_feature_02.png";
-// import imgSinsenFeature3 from "@/assets/images/dummy/sinsen_feature_03.png";
-// import imgSinsenFeature4 from "@/assets/images/dummy/sinsen_feature_04.png";
-// import imgSinsenFeature5 from "@/assets/images/dummy/sinsen_feature_05.png";
-// import imgSinsenFeature6 from "@/assets/images/dummy/sinsen_feature_06.png";
-
-const props = defineProps({
-    lang: { type: String, default: "ko" },
-});
+import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
+import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
+import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
+import imgPoint1 from "@/assets/images/dummy/point_01.png";
+import imgPoint2 from "@/assets/images/dummy/point_02.png";
+import imgPoint3 from "@/assets/images/dummy/point_03.png";
+import imgPoint4 from "@/assets/images/dummy/point_04.png";
+import imgTransService1 from "@/assets/images/dummy/transportation_service_01.png";
+import imgTransService2 from "@/assets/images/dummy/transportation_service_02.png";
+import imgTransService3 from "@/assets/images/dummy/transportation_service_03.png";
+import imgTransService4 from "@/assets/images/dummy/transportation_service_04.png";
+import imgBus1 from "@/assets/images/dummy/bus_01.png";
+import imgBus2 from "@/assets/images/dummy/bus_02.png";
+import imgBus3 from "@/assets/images/dummy/bus_03.png";
+import imgBus4 from "@/assets/images/dummy/bus_04.png";
+import imgBus5 from "@/assets/images/dummy/bus_05.png";
+import imgBus6 from "@/assets/images/dummy/bus_06.png";
+import imgBus7 from "@/assets/images/dummy/bus_07.png";
+import imgBus8 from "@/assets/images/dummy/bus_08.png";
+import imgBrandUsage1 from "@/assets/images/dummy/brand_usage_01.png";
+import imgBrandUsage2 from "@/assets/images/dummy/brand_usage_02.png";
+import imgBrandUsage3 from "@/assets/images/dummy/brand_usage_03.png";
+import imgBrandUsage4 from "@/assets/images/dummy/brand_usage_04.png";
+import imgBrandUsage5 from "@/assets/images/dummy/brand_usage_05.png";
+import imgBrandUsage6 from "@/assets/images/dummy/brand_usage_06.png";
+import imgBrandUsage7 from "@/assets/images/dummy/brand_usage_07.png";
+import imgBrandUsage8 from "@/assets/images/dummy/brand_usage_08.png";
+import imgBrandUsage9 from "@/assets/images/dummy/brand_usage_09.png";
 
 const router = useRouter();
 const activeTab = ref(0);
 
 const langData = {
-    ko: {
-        nav: {
-            depth1: [
-                { item: "차별화 상품/서비스" },
-                { item: "신선강화점" },
-                { item: "매장/서비스" },
-                { item: "상생협력" },
-                { item: "밀박스/스낵바" },
+    nav: {
+        depth1: [
+            { item: "차별화 상품/서비스" },
+            { item: "신선강화점" },
+            { item: "매장/서비스" },
+            { item: "상생협력" },
+            { item: "밀박스/스낵바" },
+        ],
+        depth2: [
+            { item: "차별화 상품" },
+            { item: "CAFE25" },
+            { item: "치킨25" },
+            { item: "고피자" },
+        ],
+        depth2Store: [
+            { item: "생활 서비스" },
+            { item: "택배&픽업" },
+            { item: "공공요금수납" },
+            { item: "상품권 판매" },
+        ],
+    },
+    tabs: [
+        {
+            hero: imgHero0,
+            heroAlt: "",
+            title: "차별화 상품",
+            subtitle: "최고급 커피머신과 스페셜티 블렌딩 원두를 사용하여 최상의 커피를 합리적인 가격으로 제공하는 GS25의 차별화 원두커피",
+            cards: [
+                {
+                    image: imgCard1,
+                    alt: "",
+                    title: "김혜자 도시락",
+                    desc: "정성 가득한 한끼를 위한 프리미엄 도시락 라인으로, 높은 고객 만족도를 자랑하는 GS25 대표 차별화 상품입니다.",
+                },
+                {
+                    image: imgCard2,
+                    alt: "",
+                    title: "넷플릭스 시리즈",
+                    desc: "넷플릭스 인기 콘텐츠와 협업한 GS25 단독 콜라보 상품 시리즈로, 트렌디한 소비 경험을 제공합니다.",
+                },
             ],
-            depth2: [
-                { item: "차별화 상품" },
-                { item: "CAFE25" },
-                { item: "치킨25" },
-                { item: "고피자" },
-            ],
-            depth2Store: [
-                { item: "생활 서비스" },
-                { item: "택배&픽업" },
-                { item: "공공요금수납" },
-                { item: "상품권 판매" },
+            qr: {
+                title: "우리동네GS 앱 다운로드",
+                desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+            },
+        },
+        {
+            hero: imgHero1,
+            heroAlt: "",
+            title: "CAFE25",
+            subtitle: "최고급 커피머신과 스페셜티 블렌딩 원두를 사용하여 최상의 커피를 합리적인 가격으로 제공하는 GS25의 차별화 원두커피 전문 존입니다.",
+            sections: [
+                {
+                    type: "cards",
+                    title: "커피머신",
+                    desc: "소비자가 1,300만원 상당의 스위스 명품 커피 머신 브랜드 프랑케 머신입니다.",
+                    cards: [
+                        { image: imgCoffeeMachine01, alt: "" },
+                        { image: imgCoffeeMachine02, alt: "" },
+                        { image: imgCoffeeMachine03, alt: "" },
+                    ],
+                },
+                {
+                    type: "table",
+                    title: "원두",
+                    desc: "국내 NO1. 로스터인 동서식품의 스페셜티 블렌딩 원두입니다. (브라질, 과테말라, 콜롬비아 등 최상위 원두 생산국의 원두 5종 블렌딩)",
+                    columns: [
+                        { key: "country", label: "원산지",  width: 200, align: "left" },
+                        { key: "ratio",   label: "배합비",  width: 160, align: "center" },
+                        { key: "process", label: "가공방식", width: 289, align: "center" },
+                        { key: "feature", label: "원두특징", width: 289, align: "left" },
+                    ],
+                    rows: [
+                        { flag: imgFlagBrazil,    country: "브라질",      ratio: "35%", process: "Natural", feature: "균형감 있는 향미" },
+                        { flag: imgFlagGuatemala, country: "과테말라",     ratio: "30%", process: "Washed",  feature: "뛰어난 바디감" },
+                        { flag: imgFlagColombia,  country: "콜롬비아",     ratio: "25%", process: "Washed",  feature: "견과류의 고소함" },
+                        { flag: imgFlagEthiopia,  country: "에티오피아",   ratio: "5%",  process: "Washed",  feature: "밝고 경쾌한 산미" },
+                        { flag: imgFlagPapua,     country: "파푸아뉴기니", ratio: "5%",  process: "Washed",  feature: "꽃과 허브의 향기" },
+                    ],
+                },
+                {
+                    type: "image",
+                    title: "전문점 커피보다 맛이 뛰어난 CAFE25",
+                    desc: "바리스타협회 평가 결과 커피 프랜차이즈 수준의 커피 맛이 입증되었습니다.",
+                    source: "한국커피연합회 관능평가결과(23.05)",
+                    image: imgCafe25Graph,
+                    imageAlt: "커피 맛 비교 그래프 - GS25가 전문점 커피 수준임을 나타낸 바 차트",
+                },
+                {
+                    type: "split",
+                    title: "메뉴 소개",
+                    image: imgCafeMenu,
+                    imageAlt: "CAFE25 메뉴 이미지",
+                    columns: [
+                        { key: "menu",     label: "구분",           width: 260, align: "left" },
+                        { key: "volume",   label: "1회 제공량(mL)", width: 220, align: "center" },
+                        { key: "caffeine", label: "카페인 함량(mg)", width: 220, align: "center" },
+                    ],
+                    rows: [
+                        { menu: "에스프레소",            volume: "35",  caffeine: "137" },
+                        { menu: "카카오에스프레소",       volume: "43",  caffeine: "127" },
+                        { menu: "아메리카노",             volume: "200", caffeine: "121" },
+                        { menu: "아메리카노 큰컵",        volume: "245", caffeine: "132" },
+                        { menu: "아이스아메리카노",       volume: "380", caffeine: "144" },
+                        { menu: "아이스아메리카노 큰컵",  volume: "480", caffeine: "140" },
+                        { menu: "아이스아메리카노 점보",  volume: "780", caffeine: "180" },
+                    ],
+                },
             ],
         },
-        tabs: [
-            {
-                hero: imgHero0,
-                heroAlt: "",
-                title: "차별화 상품",
-                subtitle: "최고급 커피머신과 스페셜티 블렌딩 원두를 사용하여 최상의 커피를 합리적인 가격으로 제공하는 GS25의 차별화 원두커피",
-                cards: [
-                    {
-                        image: imgCard1,
-                        alt: "",
-                        title: "김혜자 도시락",
-                        desc: "정성 가득한 한끼를 위한 프리미엄 도시락 라인으로, 높은 고객 만족도를 자랑하는 GS25 대표 차별화 상품입니다.",
-                    },
-                    {
-                        image: imgCard2,
-                        alt: "",
-                        title: "넷플릭스 시리즈",
-                        desc: "넷플릭스 인기 콘텐츠와 협업한 GS25 단독 콜라보 상품 시리즈로, 트렌디한 소비 경험을 제공합니다.",
-                    },
-                ],
-                qr: {
-                    title: "우리동네GS 앱 다운로드",
-                    desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+        {
+            hero: imgHero2,
+            heroAlt: "",
+            title: "CHICKEN25",
+            subtitle: "최고의 원재료를 사용하여 즉석에서 조리한 튀김을 합리적인 가격으로 제공하는 GS25만의 차별화 먹거리입니다.<br />편의점에서도 치킨25와 함께 전문점 수준의 치킨을 즐길 수 있습니다.",
+            sections: [
+                {
+                    type: "text_cards",
+                    title: "엄선된 원재료, 믿을 수 있는 맛",
+                    desc: "최고의 원재료로 만들어 안심하고 더 맛있게 즐길 수 있는 고품질의 치킨을 제공합니다.",
+                    cards: [
+                        {
+                            title: "깨끗한 기름으로<br />더 맛있는 튀김",
+                            desc: "깨끗하게 관리한 기름을 사용하여 더욱 바삭하고 맛있고, 철저한 위생 관리로 안심하고 즐길 수 있는 맛있는 치킨을 제공합니다.",
+                        },
+                        {
+                            title: "다양한 메뉴,<br />골라 먹는 재미",
+                            desc: "전문점보다 더 풍성하게 준비된 메뉴들로 다양한 메뉴를 골라 드실 수 있습니다. (한마리, 반마리, 닭다리, 날개, 봉, 꼬치, 핫도그, 튀김만두 등)",
+                        },
+                        {
+                            title: "가까운 곳에서 언제든<br />간편히 구매",
+                            desc: "가까운 GS25에서 갓 튀긴 바삭한 치킨을 언제든지 간편하게 접할 수 있습니다. 우리동네GS앱을 통한 배달/픽업 서비스로 인근 GS25에서 더욱 간편한 구매가 가능합니다.",
+                        },
+                    ],
                 },
+            ],
+            imgGrid: [
+                { image: imgChickenLeft, alt: "" },
+                { image: imgChickenRight, alt: "" },
+            ],
+            qr: {
+                title: "우리동네GS 앱 다운로드",
+                desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+            },
+        },
+        {
+            hero: imgHero3,
+            heroAlt: "",
+            title: "GOPIZZA",
+            subtitle: "한 판의 즐거움! 한 손의 간편함! 고피자는 1인 피자의 선두 브랜드로, 빠르고 맛있는 피자를 제공합니다.<br />이제 가까운 GS25에서도 고피자의 대표 메뉴를 만나볼 수 있습니다.",
+            sections: [
+                {
+                    type: "img_grid",
+                    title: "GS25에만 있는 고븐미니 조리 시스템",
+                    desc: "매장에서 바로 구워내 더욱 바삭한 식감! 편의점에서 만나는 피자 전문점 퀄리티!<br />초소형, 초고온, 저전력의 고븐미니는 고온에서 짧은 시간의 조리를 할 수 있어 언제 어디서나 갓 구운 피자를 즐길 수 있습니다.",
+                    images: [
+                        { image: imgGoben1, alt: "" },
+                        { image: imgGoben2, alt: "" },
+                    ],
+                },
+                {
+                    type: "image",
+                    title: "차별화된 도우",
+                    desc: "9˚C 저온에서 24시간 숙성한 파베이크 도우를 사용하여 겉바속쫄!<br />고피자의 기술력이 집적된 파베이크 도우는 저온숙성을 거쳐 먹기 좋은 볼륨감과 충분한 수분 함량으로 빠삭하고 쫄깃한 식감을 제공합니다.",
+                    image: imgDough,
+                    imageAlt: "",
+                },
+                {
+                    type: "menu",
+                    title: "메뉴 소개",
+                    desc: "고피자의 스테디셀러부터 기대되는 신메뉴까지! GS25에서 REGULAR와 GRAB으로 간편하고 맛있게 즐기세요!<br />REGULAR 사이즈의 경우 피자가 W모양으로 5등분 컷팅되어 한조각씩 간편하게 먹을 수 있습니다.",
+                    panels: [
+                        {
+                            image: imgMenu1,
+                            size: "REGULAR (27cm)",
+                            tags: ["식사대용", "일반피자 4조각 분량"],
+                            columns: [
+                                { key: "name",  label: "메뉴명",       align: "left"  },
+                                { key: "price", label: "금액(원)",      align: "right" },
+                                { key: "kcal",  label: "칼로리(kcal)", align: "right" },
+                            ],
+                            rows: [
+                                { name: "포테이토&베이컨", price: "7,900", kcal: "922",   badge: "BEST" },
+                                { name: "체다 페퍼로니",   price: "7,900", kcal: "1,017" },
+                                { name: "미트치즈",        price: "7,900", kcal: "945"   },
+                                { name: "트리플치즈",      price: "8,500", kcal: "1,009" },
+                            ],
+                        },
+                        {
+                            image: imgMenu2,
+                            size: "GRAB (20cm)",
+                            tags: ["간식용", "일반피자 2조각 분량"],
+                            columns: [
+                                { key: "name",  label: "메뉴명",       align: "left"  },
+                                { key: "price", label: "금액(원)",      align: "right" },
+                                { key: "kcal",  label: "칼로리(kcal)", align: "right" },
+                            ],
+                            rows: [
+                                { name: "포테이토&베이컨", price: "3,500", kcal: "357",  badge: "BEST" },
+                                { name: "체다 페퍼로니",   price: "3,500", kcal: "355"  },
+                                { name: "미트치즈",        price: "3,500", kcal: "341"  },
+                                { name: "트리플치즈",      price: "3,500", kcal: "349"  },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    type: "phone_grid",
+                    title: "우리동네GS앱에서는 빠른 배달, 픽업 가능",
+                    items: [
+                        { image: imgPhone1, alt: "" },
+                        { image: imgPhone2, alt: "" },
+                    ],
+                },
+            ],
+            qr: {
+                title: "우리동네GS 앱 다운로드",
+                desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+            },
+            link: {
+                title: "GOPIZZA 홈페이지 바로가기",
+                desc: "GOPIZZA 홈페이지에서 내 주변 매장 찾고 합리적인 가격과 차별화된 맛을 경험해보세요.<br />버튼을 클릭하면 해당 홈페이지로 이동합니다.",
+                url: "https://gopizza.kr",
+            },
+        },
+    ],
+    sinsen: {
+        hero: imgHero4,
+        heroAlt: "신선강화점",
+        title: "신선강화점",
+        subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
+        sections: [
+            {
+                title: "신선강화점 특징",
+                features: [
+                    { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정 콜드체인 시스템 적용으로 신선도 유지" },
+                    { title: "합리적인 가격", desc: "GS 더프레시와의 통합 구매를 통해 합리적인 가격에 판매" },
+                    { title: "소용량 소포장", desc: "1인가구 및 2~3인 가구에 적합한 <br />소용량·소포장 상품 구성" },
+                    { title: "전용 상품 브랜드", desc: "신선식품 전문 브랜드 <br />신선특별시 운영" },
+                ],
             },
             {
-                hero: imgHero1,
-                heroAlt: "",
-                title: "CAFE25",
-                subtitle: "최고급 커피머신과 스페셜티 블렌딩 원두를 사용하여 최상의 커피를 합리적인 가격으로 제공하는 GS25의 차별화 원두커피 전문 존입니다.",
-                sections: [
-                    {
-                        type: "cards",
-                        title: "커피머신",
-                        desc: "소비자가 1,300만원 상당의 스위스 명품 커피 머신 브랜드 프랑케 머신입니다.",
-                        cards: [
-                            { image: imgCoffeeMachine01, alt: "" },
-                            { image: imgCoffeeMachine02, alt: "" },
-                            { image: imgCoffeeMachine03, alt: "" },
-                        ],
-                    },
-                    {
-                        type: "table",
-                        title: "원두",
-                        desc: "국내 NO1. 로스터인 동서식품의 스페셜티 블렌딩 원두입니다. (브라질, 과테말라, 콜롬비아 등 최상위 원두 생산국의 원두 5종 블렌딩)",
-                        columns: [
-                            { key: "country", label: "원산지",  width: 200, align: "left" },
-                            { key: "ratio",   label: "배합비",  width: 160, align: "center" },
-                            { key: "process", label: "가공방식", width: 289, align: "center" },
-                            { key: "feature", label: "원두특징", width: 289, align: "left" },
-                        ],
-                        rows: [
-                            { flag: imgFlagBrazil,    country: "브라질",      ratio: "35%", process: "Natural", feature: "균형감 있는 향미" },
-                            { flag: imgFlagGuatemala, country: "과테말라",     ratio: "30%", process: "Washed",  feature: "뛰어난 바디감" },
-                            { flag: imgFlagColombia,  country: "콜롬비아",     ratio: "25%", process: "Washed",  feature: "견과류의 고소함" },
-                            { flag: imgFlagEthiopia,  country: "에티오피아",   ratio: "5%",  process: "Washed",  feature: "밝고 경쾌한 산미" },
-                            { flag: imgFlagPapua,     country: "파푸아뉴기니", ratio: "5%",  process: "Washed",  feature: "꽃과 허브의 향기" },
-                        ],
-                    },
-                    {
-                        type: "image",
-                        title: "전문점 커피보다 맛이 뛰어난 CAFE25",
-                        desc: "바리스타협회 평가 결과 커피 프랜차이즈 수준의 커피 맛이 입증되었습니다.",
-                        source: "한국커피연합회 관능평가결과(23.05)",
-                        image: imgCafe25Graph,
-                        imageAlt: "커피 맛 비교 그래프 - GS25가 전문점 커피 수준임을 나타낸 바 차트",
-                    },
-                    {
-                        type: "split",
-                        title: "메뉴 소개",
-                        image: imgCafeMenu,
-                        imageAlt: "CAFE25 메뉴 이미지",
-                        columns: [
-                            { key: "menu",     label: "구분",           width: 260, align: "left" },
-                            { key: "volume",   label: "1회 제공량(mL)", width: 220, align: "center" },
-                            { key: "caffeine", label: "카페인 함량(mg)", width: 220, align: "center" },
-                        ],
-                        rows: [
-                            { menu: "에스프레소",            volume: "35",  caffeine: "137" },
-                            { menu: "카카오에스프레소",       volume: "43",  caffeine: "127" },
-                            { menu: "아메리카노",             volume: "200", caffeine: "121" },
-                            { menu: "아메리카노 큰컵",        volume: "245", caffeine: "132" },
-                            { menu: "아이스아메리카노",       volume: "380", caffeine: "144" },
-                            { menu: "아이스아메리카노 큰컵",  volume: "480", caffeine: "140" },
-                            { menu: "아이스아메리카노 점보",  volume: "780", caffeine: "180" },
-                        ],
-                    },
-                ],
+                title: "왜 GS25 신선강화점인가?",
+                desc: "GSTHEFRESH 통합 구매를 통한 상품 경쟁력을 확보하여 타 편의점 대비 다양한 신선·장보기 상품을 운영합니다. <br />업계 유일의 신선상품 전용 물류센터를 운영중이며, 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
+                flow: true,
+                flowNote: "*신선센터를 거치지 않는 운영 구조에서는 상품 검품, 물류비, 신선도 관리 방식에 차이가 발생할 수 있습니다.",
             },
             {
-                hero: imgHero2,
-                heroAlt: "",
-                title: "CHICKEN25",
-                subtitle: "최고의 원재료를 사용하여 즉석에서 조리한 튀김을 합리적인 가격으로 제공하는 GS25만의 차별화 먹거리입니다.<br />편의점에서도 치킨25와 함께 전문점 수준의 치킨을 즐길 수 있습니다.",
-                sections: [
-                    {
-                        type: "text_cards",
-                        title: "엄선된 원재료, 믿을 수 있는 맛",
-                        desc: "최고의 원재료로 만들어 안심하고 더 맛있게 즐길 수 있는 고품질의 치킨을 제공합니다.",
-                        cards: [
-                            {
-                                title: "깨끗한 기름으로<br />더 맛있는 튀김",
-                                desc: "깨끗하게 관리한 기름을 사용하여 더욱 바삭하고 맛있고, 철저한 위생 관리로 안심하고 즐길 수 있는 맛있는 치킨을 제공합니다.",
-                            },
-                            {
-                                title: "다양한 메뉴,<br />골라 먹는 재미",
-                                desc: "전문점보다 더 풍성하게 준비된 메뉴들로 다양한 메뉴를 골라 드실 수 있습니다. (한마리, 반마리, 닭다리, 날개, 봉, 꼬치, 핫도그, 튀김만두 등)",
-                            },
-                            {
-                                title: "가까운 곳에서 언제든<br />간편히 구매",
-                                desc: "가까운 GS25에서 갓 튀긴 바삭한 치킨을 언제든지 간편하게 접할 수 있습니다. 우리동네GS앱을 통한 배달/픽업 서비스로 인근 GS25에서 더욱 간편한 구매가 가능합니다.",
-                            },
-                        ],
-                    },
-                ],
-                imgGrid: [
-                    { image: imgChickenLeft, alt: "" },
-                    { image: imgChickenRight, alt: "" },
-                ],
-                qr: {
-                    title: "우리동네GS 앱 다운로드",
-                    desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
-                },
-            },
-            {
-                hero: imgHero3,
-                heroAlt: "",
-                title: "GOPIZZA",
-                subtitle: "한 판의 즐거움! 한 손의 간편함! 고피자는 1인 피자의 선두 브랜드로, 빠르고 맛있는 피자를 제공합니다.<br />이제 가까운 GS25에서도 고피자의 대표 메뉴를 만나볼 수 있습니다.",
-                sections: [
-                    {
-                        type: "img_grid",
-                        title: "GS25에만 있는 고븐미니 조리 시스템",
-                        desc: "매장에서 바로 구워내 더욱 바삭한 식감! 편의점에서 만나는 피자 전문점 퀄리티!<br />초소형, 초고온, 저전력의 고븐미니는 고온에서 짧은 시간의 조리를 할 수 있어 언제 어디서나 갓 구운 피자를 즐길 수 있습니다.",
-                        images: [
-                            { image: imgGoben1, alt: "" },
-                            { image: imgGoben2, alt: "" },
-                        ],
-                    },
-                    {
-                        type: "image",
-                        title: "차별화된 도우",
-                        desc: "9˚C 저온에서 24시간 숙성한 파베이크 도우를 사용하여 겉바속쫄!<br />고피자의 기술력이 집적된 파베이크 도우는 저온숙성을 거쳐 먹기 좋은 볼륨감과 충분한 수분 함량으로 빠삭하고 쫄깃한 식감을 제공합니다.",
-                        image: imgDough,
-                        imageAlt: "",
-                    },
-                    {
-                        type: "menu",
-                        title: "메뉴 소개",
-                        desc: "고피자의 스테디셀러부터 기대되는 신메뉴까지! GS25에서 REGULAR와 GRAB으로 간편하고 맛있게 즐기세요!<br />REGULAR 사이즈의 경우 피자가 W모양으로 5등분 컷팅되어 한조각씩 간편하게 먹을 수 있습니다.",
-                        panels: [
-                            {
-                                image: imgMenu1,
-                                size: "REGULAR (27cm)",
-                                tags: ["식사대용", "일반피자 4조각 분량"],
-                                columns: [
-                                    { key: "name",  label: "메뉴명",       align: "left"  },
-                                    { key: "price", label: "금액(원)",      align: "right" },
-                                    { key: "kcal",  label: "칼로리(kcal)", align: "right" },
-                                ],
-                                rows: [
-                                    { name: "포테이토&베이컨", price: "7,900", kcal: "922",   badge: "BEST" },
-                                    { name: "체다 페퍼로니",   price: "7,900", kcal: "1,017" },
-                                    { name: "미트치즈",        price: "7,900", kcal: "945"   },
-                                    { name: "트리플치즈",      price: "8,500", kcal: "1,009" },
-                                ],
-                            },
-                            {
-                                image: imgMenu2,
-                                size: "GRAB (20cm)",
-                                tags: ["간식용", "일반피자 2조각 분량"],
-                                columns: [
-                                    { key: "name",  label: "메뉴명",       align: "left"  },
-                                    { key: "price", label: "금액(원)",      align: "right" },
-                                    { key: "kcal",  label: "칼로리(kcal)", align: "right" },
-                                ],
-                                rows: [
-                                    { name: "포테이토&베이컨", price: "3,500", kcal: "357",  badge: "BEST" },
-                                    { name: "체다 페퍼로니",   price: "3,500", kcal: "355"  },
-                                    { name: "미트치즈",        price: "3,500", kcal: "341"  },
-                                    { name: "트리플치즈",      price: "3,500", kcal: "349"  },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        type: "phone_grid",
-                        title: "우리동네GS앱에서는 빠른 배달, 픽업 가능",
-                        items: [
-                            { image: imgPhone1, alt: "" },
-                            { image: imgPhone2, alt: "" },
-                        ],
-                    },
-                ],
-                qr: {
-                    title: "우리동네GS 앱 다운로드",
-                    desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
-                },
-                link: {
-                    title: "GOPIZZA 홈페이지 바로가기",
-                    desc: "GOPIZZA 홈페이지에서 내 주변 매장 찾고 합리적인 가격과 차별화된 맛을 경험해보세요.<br />버튼을 클릭하면 해당 홈페이지로 이동합니다.",
-                    url: "https://gopizza.kr",
+                title: "신선강화점 운영의 장점",
+                advantages: {
+                    items: [
+                        { text: "전용상품을 통한 다양한 상품 구색(약 400SKU)" },
+                        { text: "신선강화점 전용 행사 운영 (신선 & 가공)" },
+                        { text: "신선식품에 신선함을 더해주는 전용 장비 운영" },
+                        { text: "전자가격표시기를 활용한 신선 가격 대응 자동화" },
+                        { text: "마감할인 라벨프린터 운영으로 폐기 최소화" },
+                        { text: "내/외부 전용 홍보물을 통한 홍보 강화" },
+                        { text: "기존 일반점 → 신선강화점 변경 시 효과성 검증", note: "\u201C도입 후 일평균 매출 기존대비 약 12.6% 증가, 일평균 고객 수 21명 증가\u201D" },
+                    ],
                 },
             },
         ],
-        sinsen: {
-            hero: imgHero4,
-            heroAlt: "신선강화점",
-            title: "신선강화점",
-            subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
-            sections: [
-                {
-                    title: "신선강화점 특징",
-                    features: [
-                        { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정 콜드체인 시스템 적용으로 신선도 유지" },
-                        { title: "합리적인 가격", desc: "GS 더프레시와의 통합 구매를 통해 합리적인 가격에 판매" },
-                        { title: "소용량 소포장", desc: "1인가구 및 2~3인 가구에 적합한 <br />소용량·소포장 상품 구성" },
-                        { title: "전용 상품 브랜드", desc: "신선식품 전문 브랜드 <br />신선특별시 운영" },
-                    ],
-                },
-                {
-                    title: "왜 GS25 신선강화점인가?",
-                    desc: "GSTHEFRESH 통합 구매를 통한 상품 경쟁력을 확보하여 타 편의점 대비 다양한 신선·장보기 상품을 운영합니다. <br />업계 유일의 신선상품 전용 물류센터를 운영중이며, 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
-                    flow: true,
-                    flowNote: "*신선센터를 거치지 않는 운영 구조에서는 상품 검품, 물류비, 신선도 관리 방식에 차이가 발생할 수 있습니다.",
-                },
-                {
-                    title: "신선강화점 운영의 장점",
-                    advantages: {
-                        items: [
-                            { text: "전용상품을 통한 다양한 상품 구색(약 400SKU)" },
-                            { text: "신선강화점 전용 행사 운영 (신선 & 가공)" },
-                            { text: "신선식품에 신선함을 더해주는 전용 장비 운영" },
-                            { text: "전자가격표시기를 활용한 신선 가격 대응 자동화" },
-                            { text: "마감할인 라벨프린터 운영으로 폐기 최소화" },
-                            { text: "내/외부 전용 홍보물을 통한 홍보 강화" },
-                            { text: "기존 일반점 → 신선강화점 변경 시 효과성 검증", note: "\u201C도입 후 일평균 매출 기존대비 약 12.6% 증가, 일평균 고객 수 21명 증가\u201D" },
-                        ],
-                    },
-                },
-            ],
-        },
-        store: {
-            tabs: [
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "생활 서비스",
-                    subtitle: "",
-                    sections: [],
-                    serviceTabs: [
-                        {
-                            label:   "현금인출기\n서비스",
-                            hero:    imgHero5,
-                            heroAlt: "",
-                            title:   "현금인출기 서비스",
-                            desc:    "현금인출, 계좌 이체 등 금융서비스 외에도 프로스포츠(야구, 축구, 배구, 농구) 정규리그 입장권(즉시 입장), 에버랜드 자유이용권의 발권도 가능합니다.<br />그 밖에 하이패스 충전(신용카드 결제), 알뜰폰 판매 등 다양한 생활 편의 서비스를 제공하고 있습니다.",
-                        },
-                        {
-                            label:   "편의점캐시\n구입/충전",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "편의점 캐시 구입/충전 서비스",
-                            desc:    "편의점캐시는 온라인콘텐츠, 쇼핑몰, 게임캐시, 국제전화카드를 편의점에서 구입/충전 할 수 있는 서비스입니다.",
-                            table: {
-                                rows: [
-                                    { head: "게임 · 상품권 · 통신", text: "(알뜰폰/국제전화/모바일 데이터) 등 다양한 서비스를 편의점에서 실시간으로 구입, 충전 할 수 있는 서비스 영수증형 PIN 구입과 국제전화카드 충전 이외에 스마트폰 APP를 통한 실시간 잔액 충전 가능" },
-                                    { head: "게임캐시",         text: "N코인(엔씨소프트), 넥슨, 월드오브워크레프트, 리그오브레전드, 틴캐시, 한게임, 퍼니카드, 한빛소프트 등" },
-                                    { head: "상품권",           text: "문화상품권, 스마트문화상품권, 해피머니상품권, 도서문화상품권 등" },
-                                    { head: "스마트폰 APP충전", text: "넥슨플레이, 컬쳐랜드" },
-                                    { head: "알뜰폰",           text: "EG CARD, 7mobile, 아이즈, 모빙, M모바일, free C/T, 이야기 모바일 등" },
-                                    { head: "국제전화카드",     text: "LG U+, Naray, SK broadband" },
-                                    { head: "통신(데이터)/기타", text: "올레 WiFi, T데이터쿠폰, KT LTE 데이터쿠폰, DAUM캐시" },
-                                ],
-                            },
-                        },
-                        {
-                            label:   "교통카드\n충전",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "교통카드 충전",
-                            desc:    "",
-                        },
-                        {
-                            label:   "기프트\n카드",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "기프트 카드",
-                            desc:    "",
-                        },
-                        {
-                            label:   "유심\n요금제",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "유심 요금제",
-                            desc:    "",
-                        },
-                        {
-                            label:   "하이패스\n카드/단말기",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "하이패스 카드/단말기",
-                            desc:    "",
-                        },
-                        {
-                            label:   "고속도로 미납\n통행료 납부",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "고속도로 미납 통행료 납부",
-                            desc:    "",
-                        },
-                        {
-                            label:   "온라인몰\n편의점 결제",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "온라인몰 편의점 결제",
-                            desc:    "",
-                        },
-                    ],
-                },
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "택배&픽업",
-                    subtitle: "",
-                    sections: [],
-                },
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "공공요금수납",
-                    subtitle: "",
-                    sections: [],
-                },
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "상품권 판매",
-                    subtitle: "",
-                    sections: [],
-                },
-            ],
-        },
-        backLabel: "목록으로 돌아가기",
     },
-    en: {
-        nav: {
-            depth1: [
-                { item: "Products & Services" },
-                { item: "Fresh focus stores" },
-                { item: "Store / Services" },
-                { item: "Win-win partnership" },
-                { item: "Mealbox / Snack bar" },
-            ],
-            depth2: [
-                { item: "Differentiated products" },
-                { item: "CAFE25" },
-                { item: "Chicken25" },
-                { item: "Go Pizza" },
-            ],
-            depth2Store: [
-                { item: "Daily services" },
-                { item: "Parcel & Pickup" },
-                { item: "Utility bill payment" },
-                { item: "Gift card sales" },
-            ],
-        },
+    store: {
         tabs: [
             {
-                hero: imgHero0,
+                hero: null,
                 heroAlt: "",
-                title: "Differentiated products",
-                subtitle: "GS25 specialty coffee with premium machines and blended beans at a reasonable price.",
-                cards: [
+                title: "생활 서비스",
+                subtitle: "",
+                sections: [],
+                serviceTabs: [
                     {
-                        image: imgCard1,
-                        alt: "",
-                        title: "Kim Hye-ja lunchbox",
-                        desc: "A premium lunchbox line for a hearty meal—one of GS25's signature differentiated products.",
+                        label:   "현금인출기\n서비스",
+                        hero:    imgHero5,
+                        heroAlt: "",
+                        title:   "현금인출기 서비스",
+                        desc:    "현금인출, 계좌 이체 등 금융서비스 외에도 프로스포츠(야구, 축구, 배구, 농구) 정규리그 입장권(즉시 입장), 에버랜드 자유이용권의 발권도 가능합니다.<br />그 밖에 하이패스 충전(신용카드 결제), 알뜰폰 판매 등 다양한 생활 편의 서비스를 제공하고 있습니다.",
                     },
                     {
-                        image: imgCard2,
-                        alt: "",
-                        title: "Netflix series",
-                        desc: "Exclusive GS25 collabs with popular Netflix IP for a trendy experience.",
+                        label:   "편의점캐시\n구입/충전",
+                        hero:    null,
+                        heroAlt: "",
+                        title:   "편의점 캐시 구입/충전 서비스",
+                        desc:    "편의점캐시는 온라인콘텐츠, 쇼핑몰, 게임캐시, 국제전화카드를 편의점에서 구입/충전 할 수 있는 서비스입니다.",
+                        table: {
+                            rows: [
+                                { head: "게임 · 상품권 · 통신", text: "(알뜰폰/국제전화/모바일 데이터) 등 다양한 서비스를 편의점에서 실시간으로 구입, 충전 할 수 있는 서비스 영수증형 PIN 구입과 국제전화카드 충전 이외에 스마트폰 APP를 통한 실시간 잔액 충전 가능" },
+                                { head: "게임캐시",         text: "N코인(엔씨소프트), 넥슨, 월드오브워크레프트, 리그오브레전드, 틴캐시, 한게임, 퍼니카드, 한빛소프트 등" },
+                                { head: "상품권",           text: "문화상품권, 스마트문화상품권, 해피머니상품권, 도서문화상품권 등" },
+                                { head: "스마트폰 APP충전", text: "넥슨플레이, 컬쳐랜드" },
+                                { head: "알뜰폰",           text: "EG CARD, 7mobile, 아이즈, 모빙, M모바일, free C/T, 이야기 모바일 등" },
+                                { head: "국제전화카드",     text: "LG U+, Naray, SK broadband" },
+                                { head: "통신(데이터)/기타", text: "올레 WiFi, T데이터쿠폰, KT LTE 데이터쿠폰, DAUM캐시" },
+                            ],
+                        },
+                    },
+                    {
+                        label:    "교통카드\n충전",
+                        hero:     null,
+                        heroAlt:  "",
+                        title:    "",
+                        desc:     "",
+                        lnbItems: ["팝카드란?", "교통 사용처 안내", "유통 사용처 안내"],
+                        trafficSelectOptions: [
+                            { value: "express", label: "고속버스" },
+                            { value: "subway",  label: "지하철" },
+                            { value: "bus",     label: "버스" },
+                            { value: "taxi",    label: "택시" },
+                            { value: "inter",   label: "시외버스" },
+                        ],
+                        trafficExpressBus: {
+                            title: "고속버스",
+                            bullets: ["금호고속", "동부 익스프레스", "동양고속", "속리산고속", "(주)중앙고속", "삼화 고속", "천일 고속", "한일 익스프레스"],
+                            logos: [imgBus1, imgBus2, imgBus3, imgBus4, imgBus5, imgBus6, imgBus7, imgBus8],
+                        },
+                        retailSelectOptions: [
+                            { value: "coffee", label: "커피/아이스크림" },
+                        ],
+                        retailCoffee: {
+                            title: "커피/아이스크림",
+                            note: "마트, 백화점, 휴게소 등 일부 입점 매장 제외",
+                            brands: ["스타벅스", "파스쿠찌", "베라", "잠바주스", "엔젤인어스", "카페띠아모", "자바시티", "커피베이", "요거프레소"],
+                            logos: [imgBrandUsage1, imgBrandUsage2, imgBrandUsage3, imgBrandUsage4, imgBrandUsage5, imgBrandUsage6, imgBrandUsage7, imgBrandUsage8, imgBrandUsage9],
+                        },
+                        pageTitle: "교통카드 충전서비스(팝티머니,마이비,캐시비(EZL),한페이)",
+                        pageDesc:  "GS25는 대중교통을 이용하는 고객님을 위해 교통카드 충전 서비스를 실행하고있습니다.<br />또한, GS25에서 상품을 구매할 수 있어 결제수단의 편의성을 제공하고있는 유익한 서비스입니다. (복권, 로또, 토토, 택배 등 일부상품제외)",
+                        popTitle:   "팝카드란?",
+                        popDesc:    "이제 팝 하세요! <br />다양한 결제 수단과 결합하여 혜택은 더 크게, 소비는 더 합리적으로, 사용은 더 편리하게 할 수 있도록 팝카드만의 차별화된 서비스를 제공합니다.",
+                        popExclude: "팝카드 사용 제외 매장 : 디몰점, 영풍종로점, 부천세이브존점, 동대문현대시티아울렛점, 서면NC점, 현대시티몰가든파이브점, 모란NC점, 대구이월드점, 동아쇼핑NC점, 이천NC점, 동수원NC점, 야탑NC점",
+                        chargingTitle: "교통카드 충전 서비스",
+                        chargingItems: [
+                            { name: "티머니",     img: imgTransService1 },
+                            { name: "캐시비(EZL)", img: imgTransService2 },
+                            { name: "한페이",      img: imgTransService3 },
+                            { name: "iM유페이",   img: imgTransService4 },
+                        ],
+                        chargingNote: {
+                            label: "충전 및 결제 가능 지역",
+                            text:  "티머니/캐시비(EZL) : GS25 전 매장 / 한페이: 전라도, 광주광역시 / iM유페이: 경상북도, 대구광역시",
+                        },
+                        popCards: [
+                            {
+                                img:   imgPopCard1,
+                                name:  "팝티머니",
+                                desc:  "하나의 카드로 관리가능한 멀티멤버십의 혜택까지!\n팝티머니는 T-money와 팝카드의 기능을 동시에\n사용할 수 있는 차별화된 서비스입니다.",
+                                logos: [
+                                    { src: imgPoint1, w: 28, h: 36 },
+                                    { src: imgPoint2, w: 44, h: 24 },
+                                    { src: imgPoint3, w: 29, h: 36 },
+                                    { src: imgPoint4, w: 32, h: 32 },
+                                ],
+                            },
+                            {
+                                img:      imgPopCard2,
+                                name:     "멥버십 팝카드",
+                                desc:     "멤버십팝카드는 GS ALL 포인트와 팝카드가 결합되어 GS25, GS THE FRESH에서 결제와 동시에 포인트가 적립되고, 600여 온라인쇼핑, 게임 등에서 결제가 가능한 혜택이 많은 선불카드입니다.",
+                                note:     "*교통기능 없음",
+                                noteWarn: true,
+                                logos:    [{ src: imgPoint2, w: 44, h: 24 }],
+                            },
+                            {
+                                img:   imgPopCard3,
+                                name:  "팝 신용/체크 카드",
+                                desc:  "팝 신용/체크카드는 고객의 소비생활에\n팝카드의 혜택 및 기능을 추가한 서비스입니다.",
+                                logos: [],
+                            },
+                        ],
+                    },
+                    {
+                        label:   "기프트\n카드",
+                        hero:    null,
+                        heroAlt: "",
+                        title:   "기프트 카드",
+                        desc:    "",
+                    },
+                    {
+                        label:   "유심\n요금제",
+                        hero:    null,
+                        heroAlt: "",
+                        title:   "유심 요금제",
+                        desc:    "",
+                    },
+                    {
+                        label:   "하이패스\n카드/단말기",
+                        hero:    null,
+                        heroAlt: "",
+                        title:   "하이패스 카드/단말기",
+                        desc:    "",
+                    },
+                    {
+                        label:   "고속도로 미납\n통행료 납부",
+                        hero:    null,
+                        heroAlt: "",
+                        title:   "고속도로 미납 통행료 납부",
+                        desc:    "",
+                    },
+                    {
+                        label:   "온라인몰\n편의점 결제",
+                        hero:    null,
+                        heroAlt: "",
+                        title:   "온라인몰 편의점 결제",
+                        desc:    "",
                     },
                 ],
-                qr: {
-                    title: "Download Wooridongne GS app",
-                    desc: "Download the app for events and differentiated products. Scan the QR code to open the store page.",
-                },
             },
             {
-                hero: imgHero1,
+                hero: null,
                 heroAlt: "",
-                title: "CAFE25",
-                subtitle: "Specialty coffee zone with espresso-based drinks and seasonal beverages.",
-                sections: [
-                    {
-                        type: "cards",
-                        title: "Coffee Machine",
-                        desc: "The Franke machine is a Swiss premium coffee machine brand worth 13 million won.",
-                        cards: [
-                            { image: imgCoffeeMachine01, alt: "" },
-                            { image: imgCoffeeMachine02, alt: "" },
-                            { image: imgCoffeeMachine03, alt: "" },
-                        ],
-                    },
-                    {
-                        type: "table",
-                        title: "Coffee Beans",
-                        desc: "Specialty blended beans from Dongsuh Foods, Korea's No.1 roaster. (5 varieties from top producing countries including Brazil, Guatemala, and Colombia)",
-                        columns: [
-                            { key: "country", label: "Origin",          width: 200, align: "left" },
-                            { key: "ratio",   label: "Blend ratio",     width: 160, align: "center" },
-                            { key: "process", label: "Process",         width: 289, align: "center" },
-                            { key: "feature", label: "Characteristics", width: 289, align: "left" },
-                        ],
-                        rows: [
-                            { flag: imgFlagBrazil,    country: "Brazil",           ratio: "35%", process: "Natural", feature: "Balanced flavor" },
-                            { flag: imgFlagGuatemala, country: "Guatemala",        ratio: "30%", process: "Washed",  feature: "Full body" },
-                            { flag: imgFlagColombia,  country: "Colombia",         ratio: "25%", process: "Washed",  feature: "Nutty richness" },
-                            { flag: imgFlagEthiopia,  country: "Ethiopia",         ratio: "5%",  process: "Washed",  feature: "Bright acidity" },
-                            { flag: imgFlagPapua,     country: "Papua New Guinea", ratio: "5%",  process: "Washed",  feature: "Floral & herbal" },
-                        ],
-                    },
-                    {
-                        type: "image",
-                        title: "CAFE25 beats specialty coffee shops",
-                        desc: "Barista Association evaluation confirmed coffee franchise-level taste.",
-                        source: "Korea Coffee Association sensory evaluation (23.05)",
-                        image: imgCafe25Graph,
-                        imageAlt: "Bar chart showing GS25 coffee quality vs competitors",
-                    },
-                    {
-                        type: "split",
-                        title: "Menu",
-                        image: imgCafeMenu,
-                        imageAlt: "CAFE25 menu image",
-                        columns: [
-                            { key: "menu",     label: "Category",         width: 260, align: "left" },
-                            { key: "volume",   label: "Serving size (mL)", width: 220, align: "center" },
-                            { key: "caffeine", label: "Caffeine (mg)",     width: 220, align: "center" },
-                        ],
-                        rows: [
-                            { menu: "Espresso",             volume: "35",  caffeine: "137" },
-                            { menu: "Cacao Espresso",       volume: "43",  caffeine: "127" },
-                            { menu: "Americano",            volume: "200", caffeine: "121" },
-                            { menu: "Americano Large",      volume: "245", caffeine: "132" },
-                            { menu: "Iced Americano",       volume: "380", caffeine: "144" },
-                            { menu: "Iced Americano Large", volume: "480", caffeine: "140" },
-                            { menu: "Iced Americano Jumbo", volume: "780", caffeine: "180" },
-                        ],
-                    },
-                ],
+                title: "택배&픽업",
+                subtitle: "",
+                sections: [],
             },
             {
-                hero: imgHero2,
+                hero: null,
                 heroAlt: "",
-                title: "Chicken25",
-                subtitle: "GS25 chicken with crisp texture and varied sauces.",
-                sections: [
-                    {
-                        type: "text_cards",
-                        title: "Premium Ingredients, Trustworthy Taste",
-                        desc: "We provide high-quality chicken made with the finest ingredients you can enjoy with confidence.",
-                        cards: [
-                            {
-                                title: "Clean Oil,<br />Crispier Chicken",
-                                desc: "Using carefully managed oil for extra crispy and delicious chicken, with strict hygiene standards you can trust.",
-                            },
-                            {
-                                title: "Diverse Menu,<br />Fun to Choose",
-                                desc: "A wider variety than specialty stores — whole chicken, half, drumstick, wing, skewer, hot dog, fried dumpling and more.",
-                            },
-                            {
-                                title: "Nearby, Anytime,<br />Easy to Buy",
-                                desc: "Freshly fried crispy chicken available at your nearest GS25 anytime. Order via delivery or pickup through the Wooridongne GS app.",
-                            },
-                        ],
-                    },
-                ],
-                imgGrid: [
-                    { image: imgChickenLeft, alt: "" },
-                    { image: imgChickenRight, alt: "" },
-                ],
-                qr: {
-                    title: "Download Wooridongne GS app",
-                    desc: "Download the app for events and differentiated products. Scan the QR code to open the store page.",
-                },
+                title: "공공요금수납",
+                subtitle: "",
+                sections: [],
             },
             {
-                hero: imgHero3,
+                hero: null,
                 heroAlt: "",
-                title: "GOPIZZA",
-                subtitle: "Fun for one! Easy to hold! GOPIZZA is a leading personal pizza brand delivering fast, delicious pizza.<br />Now available at your nearest GS25.",
-                sections: [
-                    {
-                        type: "img_grid",
-                        title: "GoBen Mini — GS25 Exclusive Cooking System",
-                        desc: "Baked fresh in-store for extra crispiness!<br />The ultra-compact, high-heat, low-power GoBen Mini cooks at high temperatures in seconds.",
-                        images: [
-                            { image: null, alt: "" },
-                            { image: null, alt: "" },
-                        ],
-                    },
-                    {
-                        type: "image",
-                        title: "Signature Dough",
-                        desc: "Par-baked dough cold-fermented at 9˚C for 24 hours — crispy outside, chewy inside!<br />GOPIZZA's proprietary dough delivers great volume and moisture for the perfect bite.",
-                        image: null,
-                        imageAlt: "",
-                    },
-                    {
-                        type: "menu",
-                        title: "Menu",
-                        desc: "From steady sellers to exciting new items — enjoy REGULAR and GRAB at GS25!<br />REGULAR is W-cut into 5 slices for easy eating.",
-                        panels: [
-                            {
-                                image: null,
-                                size: "REGULAR (27cm)",
-                                tags: ["Meal-size", "4 slices equiv."],
-                                columns: [
-                                    { key: "name",  label: "Menu",            align: "left"  },
-                                    { key: "price", label: "Price (KRW)",     align: "right" },
-                                    { key: "kcal",  label: "Calories (kcal)", align: "right" },
-                                ],
-                                rows: [
-                                    { name: "Potato & Bacon",    price: "7,900", kcal: "922",   badge: "BEST" },
-                                    { name: "Cheddar Pepperoni", price: "7,900", kcal: "1,017" },
-                                    { name: "Meat Cheese",       price: "7,900", kcal: "945"   },
-                                    { name: "Triple Cheese",     price: "8,500", kcal: "1,009" },
-                                ],
-                            },
-                            {
-                                image: null,
-                                size: "GRAB (20cm)",
-                                tags: ["Snack-size", "2 slices equiv."],
-                                columns: [
-                                    { key: "name",  label: "Menu",            align: "left"  },
-                                    { key: "price", label: "Price (KRW)",     align: "right" },
-                                    { key: "kcal",  label: "Calories (kcal)", align: "right" },
-                                ],
-                                rows: [
-                                    { name: "Potato & Bacon",    price: "3,500", kcal: "357",  badge: "BEST" },
-                                    { name: "Cheddar Pepperoni", price: "3,500", kcal: "355"  },
-                                    { name: "Meat Cheese",       price: "3,500", kcal: "341"  },
-                                    { name: "Triple Cheese",     price: "3,500", kcal: "349"  },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        type: "phone_grid",
-                        title: "Fast Delivery & Pickup via Wooridongne GS App",
-                        items: [
-                            { image: null, alt: "" },
-                            { image: null, alt: "" },
-                        ],
-                    },
-                ],
-                qr: {
-                    title: "Download Wooridongne GS app",
-                    desc: "Download the app for events and differentiated products.<br />Scan the QR code to open the store page.",
-                },
-                link: {
-                    title: "Visit GOPIZZA Homepage",
-                    desc: "Find the nearest store on the GOPIZZA website and experience great value and unique flavors. Click the button to visit the site.",
-                    url: "https://gopizza.kr",
-                },
+                title: "상품권 판매",
+                subtitle: "",
+                sections: [],
             },
         ],
-        sinsen: {
-            hero: null,
-            heroAlt: "Fresh focus stores",
-            title: "Fresh focus stores",
-            subtitle: "Fresh focus stores cater to the growing trend of 1–2 person households and small-quantity shopping, offering a one-stop grocery experience 24/7.<br />Combining the convenience of a convenience store with the freshness of a supermarket, they provide daily fresh produce including fruits, vegetables, meat, and seafood.",
-            sections: [
-                {
-                    title: "Fresh focus store features",
-                    desc: "FCS (Fresh Concept Store) is GS25's next-generation store model combining the convenience of a convenience store with the freshness of a supermarket.",
-                    features: [
-                        { title: "Fresh products",        desc: "Cold chain system applied throughout the entire process from logistics to display and sale" },
-                        { title: "Reasonable prices",     desc: "Competitive pricing through integrated purchasing with GS The Fresh" },
-                        { title: "Small-pack options",    desc: "Small-volume, small-pack products suitable for 1–3 person households" },
-                        { title: "Exclusive brand",       desc: "Operating 'Fresh Special City', an exclusive fresh food brand" },
-                    ],
-                },
-                {
-                    title: "GS25 fresh delivery process",
-                    flow: true,
-                    flowNote: "*Stores operating without a fresh center may differ in product inspection, logistics costs, and freshness management.",
-                },
-                {
-                    title: "Advantages of operating fresh focus stores",
-                    advantages: {
-                        items: [
-                            { text: "Diverse product assortment through exclusive products (approx. 400 SKUs)" },
-                            { text: "Exclusive promotional events for fresh focus stores (fresh & processed)" },
-                            { text: "Dedicated equipment to enhance freshness of fresh foods" },
-                            { text: "Automated fresh price response using electronic shelf labels" },
-                            { text: "Minimizing waste through discount label printers at closing time" },
-                            { text: "Enhanced promotion through dedicated internal/external promotional materials" },
-                            { text: "Verified effectiveness when converting from standard to fresh focus stores", note: "\u201CAfter adoption, daily average sales increased by approx. 12.6% and daily customer count increased by 21\u201D" },
-                        ],
-                    },
-                },
-            ],
-        },
-        store: {
-            tabs: [
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "Daily services",
-                    subtitle: "",
-                    sections: [],
-                    serviceTabs: [
-                        {
-                            label:   "ATM\nServices",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "ATM Services",
-                            desc:    "In addition to financial services such as cash withdrawals and bank transfers, you can also purchase tickets for professional sports (baseball, soccer, volleyball, basketball) regular league games (immediate entry) and Everland unlimited passes.<br />We also offer a variety of daily convenience services including Hi-Pass charging (credit card payment) and budget phone sales.",
-                        },
-                        {
-                            label:   "Convenience\ncash",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "Convenience Cash Purchase / Recharge Service",
-                            desc:    "Convenience cash is a service that allows you to purchase or recharge online content, shopping malls, game cash, and international calling cards at convenience stores.",
-                            table: {
-                                rows: [
-                                    { head: "Game · Gift · Telecom", text: "A service for purchasing and recharging various services (budget phone/international call/mobile data) in real time at convenience stores. Receipt-type PIN purchase and international calling card recharge, plus real-time balance top-up via smartphone app." },
-                                    { head: "Game cash",    text: "NCoin (NCSoft), Nexon, World of Warcraft, League of Legends, Teen Cash, Hangame, Funnycard, Hanbit Soft, etc." },
-                                    { head: "Gift cards",  text: "Culture Gift Card, Smart Culture Gift Card, Happy Money, Book Culture Gift Card, etc." },
-                                    { head: "Smartphone APP charge", text: "Nexon Play, Cultureland" },
-                                    { head: "Budget phone", text: "EG CARD, 7mobile, iZ, Mobing, M Mobile, free C/T, Story Mobile, etc." },
-                                    { head: "International calling card", text: "LG U+, Naray, SK broadband" },
-                                    { head: "Telecom (data) / Other", text: "Olleh WiFi, T Data Coupon, KT LTE Data Coupon, DAUM Cash" },
-                                ],
-                            },
-                        },
-                        {
-                            label:   "Transit card\nrecharge",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "Transit card recharge",
-                            desc:    "",
-                        },
-                        {
-                            label:   "Gift\ncard",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "Gift card",
-                            desc:    "",
-                        },
-                        {
-                            label:   "USIM\nplan",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "USIM plan",
-                            desc:    "",
-                        },
-                        {
-                            label:   "Hi-Pass\ncard/device",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "Hi-Pass card/device",
-                            desc:    "",
-                        },
-                        {
-                            label:   "Expressway\ntoll payment",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "Expressway toll payment",
-                            desc:    "",
-                        },
-                        {
-                            label:   "Online mall\nstore payment",
-                            hero:    null,
-                            heroAlt: "",
-                            title:   "Online mall store payment",
-                            desc:    "",
-                        },
-                    ],
-                },
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "Parcel & Pickup",
-                    subtitle: "",
-                    sections: [],
-                },
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "Utility bill payment",
-                    subtitle: "",
-                    sections: [],
-                },
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "Gift card sales",
-                    subtitle: "",
-                    sections: [],
-                },
-            ],
-        },
-        backLabel: "Back to list",
     },
+    backLabel: "목록으로 돌아가기",
 };
 
-const t = computed(() => langData[props.lang] || langData.ko);
-const sinsen = computed(() => t.value.sinsen);
-const store = computed(() => t.value.store);
-const tab0 = computed(() => t.value.tabs[0]);
-const tab1 = computed(() => t.value.tabs[1]);
-const tab2 = computed(() => t.value.tabs[2]);
-const tab3 = computed(() => t.value.tabs[3]);
+const sinsen = langData.sinsen;
+const store = langData.store;
+const tab0 = langData.tabs[0];
+const tab1 = langData.tabs[1];
+const tab2 = langData.tabs[2];
+const tab3 = langData.tabs[3];
 
 const depth1ActiveIdx = ref(0);
-const depth1Tabs = computed(() => t.value.nav.depth1);
-const depth2Tabs = computed(() => t.value.nav.depth2);
-const storeTabs = computed(() => t.value.nav.depth2Store);
+const depth1Tabs = langData.nav.depth1;
+const depth2Tabs = langData.nav.depth2;
+const storeTabs = langData.nav.depth2Store;
 
 const storeActiveTab = ref(0);
 const serviceActiveTab = ref(0);
+const popLnbActiveIdx = ref(0);
+const trafficSelectVal = ref("express");
+const retailSelectVal = ref("coffee");
+
+const scrollToSection = (idx) => {
+    popLnbActiveIdx.value = idx;
+    const el = document.getElementById(`pop-sec-${idx}`);
+    if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 57;
+        window.scrollTo({ top, behavior: "smooth" });
+    }
+};
+
+let popSecObserver = null;
+onMounted(() => {
+    const targets = document.querySelectorAll("[data-pop-sec]");
+    if (!targets.length) return;
+    popSecObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    popLnbActiveIdx.value = Number(entry.target.dataset.popSec);
+                }
+            });
+        },
+        { threshold: 0.3 }
+    );
+    targets.forEach((el) => popSecObserver.observe(el));
+});
+onUnmounted(() => {
+    if (popSecObserver) popSecObserver.disconnect();
+});
 
 const depth1Routes = ["/gsrbr010101", null, null, null, null];
 
@@ -1190,6 +1036,20 @@ img {
     display: block;
 }
 
+button {
+    background-color: #fff;
+}
+
+.traffic_select_box :deep(select) {
+    width: 180px;
+    padding: 10px 20px;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    background-color: #f8f8f8;
+    border: 0;
+    border-radius: 6px;
+}
 .tab_wrap {
     margin-bottom: 0;
 }
@@ -1211,11 +1071,11 @@ img {
 }
 
 .brand_panel section {
-    margin-bottom: 120px;
+    padding-bottom: 120px;
 }
 
 .brand_panel section:last-of-type {
-    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* ── 탭 0: 차별화 상품 ── */
@@ -1424,7 +1284,7 @@ img {
 }
 
 .chicken25_img_grid {
-    margin: 120px 0 40px;
+    margin-bottom: 40px;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, calc((100% - 20px) / 2));
@@ -1596,7 +1456,6 @@ img {
 }
 
 .gopizza_phone_grid {
-    margin-bottom: 100px;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, calc((100% - 20px) / 2));
@@ -1754,7 +1613,7 @@ img {
 
 /* ── 생활 서비스 3depth 탭 ── */
 .service_tab_wrap {
-    margin-bottom: 40px;
+    margin-bottom: 80px;
     border-radius: 12px;
     display: flex;
     overflow-x: auto;
@@ -1767,12 +1626,11 @@ img {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
     flex: 1;
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
-
 }
 
 
@@ -1808,17 +1666,273 @@ img {
     min-height: 200px;
 }
 
-.service_panel :deep(.brand_panel_title) {
+/* section 안에 SectionHeader만 있을 때 header 여백 제거 */
+.service_panel section:has(> header:only-child) :deep(header) {
     margin-bottom: 0;
+    padding: 0;
+}
+
+.pop_exclude {
+    margin-top: 8px;
+    color: #f95823;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.pop_card_list {
+    display: flex;
+    gap: 20px;
+}
+
+.pop_card_item {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.pop_card_thumb {
+    width: 100%;
+    display: block;
+}
+
+.pop_card_thumb > img {
+    width: auto;
+    height: auto;
+}
+
+.pop_card_body {
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.pop_card_name {
+    margin-bottom: 12px;
+    color: #161616;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    display: block;
+}
+
+.pop_card_desc {
+    color: #67676f;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+.pop_card_note {
+    margin-top: 8px;
+    color: #67676f;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+}
+
+.pop_card_note.is_warn {
+    color: #f95823;
+}
+
+.pop_card_logos {
+    margin-top: auto;
+    padding-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.pop_logo_thumb {
+    width: auto;
+    display: block;
+}
+
+/* ── 교통카드 충전 서비스 (50:9900) ── */
+.charging_service_list {
+    display: flex;
+    gap: 20px;
+}
+
+.charging_service_item {
+    border-radius: 12px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.charging_service_item > img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.charging_service_note {
+    margin-top: 16px;
+    color: #67676f;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+.charging_note_label {
+    padding-right: 8px;
+    color: #7c7c86;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+/* ── 교통 사용처 안내 (50:10103) ── */
+.traffic_sec_header {
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.traffic_sec_header :deep(header) {
+    margin-bottom: 0;
+}
+
+.traffic_sec_header :deep(h3) {
+    margin: 0;
+}
+
+.traffic_group_title {
+    margin: 0 0 8px;
+    color: #161616;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.traffic_bullet_list {
+    margin: 0 0 24px;
+    padding: 0;
+    list-style: none;
+}
+
+.traffic_bullet_list > li {
+    padding: 0 0 0 12px;
+    color: #67676f;
+    font-size: 1.8rem;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+.traffic_bullet_list > li::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    background-color: #67676f;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: block;
+    transform: translateY(-50%);
+}
+
+.traffic_logo_list {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.traffic_logo_list > li {
+    width: calc(100% / 8);
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.traffic_logo_list > li > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* ── 유통 사용처 안내 (50:10253) ── */
+.retail_note {
+    margin: 0 0 24px;
+    color: #f95823;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.retail_logo_list {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.retail_logo_list > li {
+    width: calc(100% / 6);
+    height: 56px;
+    overflow: hidden;
+}
+
+.retail_logo_list > li > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* 교통카드 충전 LNB 레이아웃 */
+.pop_wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.pop_lnb {
+    width: 240px;
+    position: sticky;
+    top: 40px;
+    left: 0;
+    flex-shrink: 0;
+}
+
+.pop_lnb > ul > li > button {
+    width: 100%;
+    min-height: 64px;
+    padding: 17px 0;
+    color: #161616;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+
+.pop_content {
+    flex: 1;
+    min-width: 0;
 }
 
 /* 편의점캐시 테이블 */
 .cash_table {
     width: 100%;
-    margin-top: 100px;
     border-collapse: collapse;
+    border-top: 1px solid #e5e5e9;
 }
-.cash_table {border-top:1px solid #e5e5e9;}
+
 .cash_table th,
 .cash_table td {
     color: #161618;
@@ -1829,23 +1943,23 @@ img {
 .cash_table th {
     width: 200px;
     padding: 0 24px;
-    font-weight: 700;
-    background-color: #f8f8f8;
-    text-align: left;
-    white-space: nowrap;
+    color: #161618;
     font-size: 1.8rem;
     font-weight: 700;
     line-height: 1.6;
     letter-spacing: -0.01em;
+    background-color: #f8f8f8;
+    text-align: left;
+    white-space: nowrap;
 }
 
-.cash_table th span,.cash_table td span{
+.cash_table th span,
+.cash_table td span {
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 1.6;
     letter-spacing: -0.01em;
-
-} 
+}
 
 .cash_table td {
     padding: 18px 24px;
@@ -1870,6 +1984,18 @@ img {
 
     .gopizza_menu {
         flex-direction: column;
+    }
+
+    .charging_service_item {
+        flex: 1 1 calc((100% - 20px) / 2);
+    }
+
+    .traffic_logo_list > li {
+        width: calc(100% / 4);
+    }
+
+    .retail_logo_list > li {
+        width: calc(100% / 3);
     }
 }
 
@@ -1947,5 +2073,100 @@ img {
         padding: 16px 8px;
     }
 
+    /* 교통카드 충전 LNB 반응형 */
+    .pop_lnb {
+        width: 180px;
+    }
+
+    .pop_lnb > ul > li > button {
+        font-size: 1.8rem;
+    }
+
+    .pop_card_list {
+        flex-wrap: wrap;
+    }
+
+    .pop_card_item {
+        flex: 1 1 calc(50% - 10px);
+    }
+
+    .charging_service_list {
+        flex-wrap: wrap;
+    }
+
+    .charging_service_item {
+        flex: 1 1 calc((100% - 20px) / 2);
+    }
+
+    .traffic_logo_list > li {
+        width: calc(100% / 4);
+    }
+
+    .retail_logo_list > li {
+        width: calc(100% / 3);
+    }
+}
+
+@media (max-width: 768px) {
+    .pop_wrap {
+        flex-direction: column;
+    }
+
+    .pop_lnb {
+        width: 100%;
+    }
+
+    .pop_lnb > ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .pop_lnb > ul > li {
+        flex: none;
+    }
+
+    .pop_lnb > ul > li > button {
+        min-height: 44px;
+        padding: 8px 12px;
+        font-size: 1.6rem;
+        border: 1px solid #e5e5e9;
+        border-radius: 4px;
+    }
+
+    .pop_lnb > ul > li > button.is_active {
+        border-color: #109f4c;
+        background-color: #f0faf4;
+    }
+
+    .pop_card_item {
+        flex: 1 1 100%;
+    }
+
+    .pop_card_list {
+        flex-wrap: wrap;
+    }
+
+    .charging_service_list {
+        flex-wrap: wrap;
+    }
+
+    .charging_service_item {
+        flex: 1 1 calc(50% - 10px);
+    }
+
+    .traffic_sec_header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .traffic_logo_list > li {
+        width: calc(100% / 2);
+    }
+
+    .retail_logo_list > li {
+        width: calc(100% / 2);
+    }
 }
 </style>
