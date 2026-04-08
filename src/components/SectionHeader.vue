@@ -2,6 +2,7 @@
     <header>
         <h3>{{ title }}</h3>
         <p v-if="desc || source" v-html="descWithSource" />
+        <slot />
     </header>
 </template>
 
