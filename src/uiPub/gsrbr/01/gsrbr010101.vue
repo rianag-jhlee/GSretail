@@ -410,13 +410,7 @@
                     <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
                     <section>
                         <SectionHeader :title="tab.advantageTitle" />
-                        <ul class="gift_advantage_list">
-                            <li v-for="(item, ai) in tab.advantages" :key="ai" class="gift_advantage_item">
-                                <em class="gift_advantage_num">{{ item.num }}</em>
-                                <strong class="gift_advantage_title">{{ item.title }}</strong>
-                                <p class="gift_advantage_desc">{{ item.desc }}</p>
-                            </li>
-                        </ul>
+                        <FeatureCards :items="tab.advantages" />
                     </section>
 
                     <section>
@@ -554,6 +548,7 @@ import Buttons from "@/components/Buttons.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
 import Steps from "@/components/Steps.vue";
+import FeatureCards from "@/components/FeatureCards.vue";
 
 /* 탭 0 이미지 */
 import imgHero0 from "@/assets/images/dummy/differentiated_bg_01.png";
@@ -2347,53 +2342,6 @@ button {
     background-color: #161616;
 }
 
-/* ── 기프트카드 장점 ── */
-.gift_advantage_list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.gift_advantage_item {
-    min-height: 300px;
-    padding: 32px;
-    background-color: #f8f8f8;
-    border-radius: 12px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.gift_advantage_num {
-    margin-bottom: 8px;
-    color: #107af2;
-    font-size: 1.8rem;
-    font-weight: 600;
-    font-style: normal;
-    letter-spacing: -0.01em;
-    display: block;
-}
-
-.gift_advantage_title {
-    margin-bottom: 16px;
-    color: #161616;
-    font-size: 2.4rem;
-    font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    white-space: pre-line;
-    display: block;
-}
-
-.gift_advantage_desc {
-    margin: 0;
-    color: #67676f;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-}
 
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
@@ -2564,15 +2512,6 @@ button {
         width: calc(100% / 2);
     }
 
-    .gift_advantage_list {
-        flex-wrap: wrap;
-    }
-
-    .gift_advantage_item {
-        height: auto;
-        min-height: 0;
-        flex: 1 1 100%;
-    }
 
     .gift_brand_slider {
         gap: 12px;
