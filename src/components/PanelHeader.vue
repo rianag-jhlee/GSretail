@@ -3,9 +3,9 @@
         <img :src="hero" :alt="heroAlt || ''" width="1420" height="340" />
     </figure>
 
-    <header class="brand_panel_title">
+    <header v-if="title" class="brand_panel_title">
         <h2>{{ title }}</h2>
-        <p v-html="subtitle" />
+        <p v-if="subtitle" v-html="subtitle" />
     </header>
 </template>
 

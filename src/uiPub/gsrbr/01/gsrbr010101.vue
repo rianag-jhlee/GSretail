@@ -405,6 +405,173 @@
                     </div>
                 </template>
 
+                <!-- 기프트카드 패널 -->
+                <template v-else-if="i === 3">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <section>
+                        <SectionHeader :title="tab.advantageTitle" />
+                        <FeatureCards :items="tab.advantages" />
+                    </section>
+
+                    <section>
+                        <SectionHeader :title="tab.brandTitle" />
+                        <div class="gift_brand_slider">
+                            <button
+                                type="button"
+                                class="gift_brand_nav gift_brand_prev"
+                                aria-label="이전"
+                                :disabled="giftIsBeginning"
+                                @click="giftSwiperInst?.slidePrev()"
+                            ></button>
+                            <Swiper
+                                :modules="[Pagination]"
+                                :space-between="0"
+                                :speed="700"
+                                :observer="true"
+                                :observe-parents="true"
+                                :breakpoints="{
+                                    0:    { slidesPerView: 2, slidesPerGroup: 2 },
+                                    769:  { slidesPerView: 4, slidesPerGroup: 4 },
+                                    1025: { slidesPerView: 6, slidesPerGroup: 6 },
+                                }"
+                                :pagination="{ el: '.gift_brand_pagination', clickable: true }"
+                                class="gift_brand_swiper"
+                                @swiper="onGiftSwiper"
+                                @slide-change="onGiftSlideChange"
+                                @breakpoint="onGiftBreakpoint"
+                            >
+                                <SwiperSlide v-for="(brand, bi) in tab.brands" :key="bi">
+                                    <figure class="gift_brand_card">
+                                        <img :src="brand.img" :alt="brand.name" />
+                                    </figure>
+                                </SwiperSlide>
+                            </Swiper>
+                            <button
+                                type="button"
+                                class="gift_brand_nav gift_brand_next"
+                                aria-label="다음"
+                                :disabled="giftIsEnd"
+                                @click="giftSwiperInst?.slideNext()"
+                            ></button>
+                        </div>
+                        <div class="gift_brand_pagination"></div>
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.purchaseTitle" :desc="tab.purchaseNote" />
+                        <div class="gift_purchase_wrap">
+                            <figure class="gift_purchase_img">
+                                <img :src="tab.purchaseImg" alt="" />
+                            </figure>
+                            <ol class="gift_purchase_steps">
+                                <li v-for="(step, si) in tab.purchaseSteps" :key="si" class="gift_purchase_step">
+                                    <div class="gift_step_header">
+                                        <em class="gift_step_num">{{ step.num }}</em>
+                                        <strong class="gift_step_title">{{ step.title }}</strong>
+                                    </div>
+                                    <p class="gift_step_desc">{{ step.desc }}</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.usageTitle" :desc="tab.usageDesc" />
+                        <div class="gift_usage_wrap">
+                            <div class="gift_usage_group">
+                                <h3>{{ tab.onlineLabel }}</h3>
+                                <Steps type="1" :items="tab.onlineSteps" />
+                            </div>
+                            <div class="gift_usage_group">
+                                <h3>{{ tab.offlineLabel }}</h3>
+                                <Steps type="1" :items="tab.offlineSteps" />
+                            </div>
+                        </div>
+                    </section>
+                </template>
+ 
+
+                <!-- GS25 유심 요금제 패널 -->
+                <template v-else-if="i === 4">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <section>
+                        <SectionHeader :title="tab.advantageTitle">
+                        </SectionHeader>
+                        <FeatureCards :items="tab.advantages" class="usim_advantage_cards" />
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.introTitle" />
+                        <div class="usim_plan_table_wrap">
+                            <table class="usim_plan_table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" scope="col">상품명</th>
+                                        <th colspan="3" scope="col">제공량</th>
+                                        <th rowspan="2" scope="col">정상 요금</th>
+                                        <th rowspan="2" scope="col">프로모션 할인</th>
+                                        <th rowspan="2" scope="col">월 기본요금<br />(제휴카드 이용 시)</th>
+                                        <th rowspan="2" scope="col">타사 유사<br />요금제</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">데이터</th>
+                                        <th scope="col">음성</th>
+                                        <th scope="col">문자</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(plan, pi) in tab.plans" :key="pi">
+                                        <td>{{ plan.name }}</td>
+                                        <td class="usim_plan_data" v-html="plan.data.replace('\n', '<br />')"></td>
+                                        <td>{{ plan.voice }}</td>
+                                        <td>{{ plan.sms }}</td>
+                                        <td>{{ plan.normalPrice }}</td>
+                                        <td>{{ plan.discount }}</td>
+                                        <td>
+                                            {{ plan.monthly }}<br />
+                                            <em class="usim_plan_dc">{{ plan.monthlyDc }}</em>
+                                        </td>
+                                        <td>{{ plan.competitor }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.benefitTitle">
+                        </SectionHeader>
+                        <ul class="usim_benefit_cards">
+                            <li v-for="(card, ci) in tab.benefitCards" :key="ci" class="usim_benefit_card">
+                                <figure class="usim_benefit_img">
+                                    <img v-if="card.img" :src="card.img" :alt="card.imgAlt" />
+                                </figure>
+                                <div class="usim_benefit_body">
+                                    <h3>{{ card.title }}</h3>
+                                    <ul class="usim_benefit_list">
+                                        <li v-for="(item, ii) in card.items" :key="ii">
+                                            <span class="usim_benefit_icon"></span>
+                                            <span>{{ item }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <SectionHeader :title="tab.purchaseTitle" />
+                        <Steps type="2" :items="tab.purchaseSteps" />
+                    </section>
+
+                    <section>
+                        <SectionHeader :title="tab.phoneTitle" />
+                        <dl class="usim_phone_list">
+                            <template v-for="(phone, pi) in tab.phones" :key="pi">
+                                <dt>{{ phone.term }}</dt>
+                                <dd>{{ phone.desc }}</dd>
+                            </template>
+                        </dl>
+                    </section>
+
+                </template>
+
                 <!-- 그 외 패널: 기본 구조 -->
                 <template v-else>
                     <section>
@@ -453,14 +620,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, nextTick, watch, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
 import PanelHeader from "@/components/PanelHeader.vue";
 import SectionHeader from "@/components/SectionHeader.vue";
 import Buttons from "@/components/Buttons.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
+import Steps from "@/components/Steps.vue";
+import FeatureCards from "@/components/FeatureCards.vue";
 
 /* 탭 0 이미지 */
 import imgHero0 from "@/assets/images/dummy/differentiated_bg_01.png";
@@ -501,6 +673,7 @@ import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 
 /*매장/서비스 이미지*/
 import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
+import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";   
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
@@ -529,6 +702,16 @@ import imgBrandUsage6 from "@/assets/images/dummy/brand_usage_06.png";
 import imgBrandUsage7 from "@/assets/images/dummy/brand_usage_07.png";
 import imgBrandUsage8 from "@/assets/images/dummy/brand_usage_08.png";
 import imgBrandUsage9 from "@/assets/images/dummy/brand_usage_09.png";
+import imgGiftCard1 from "@/assets/images/dummy/gift_card_01.png";
+import imgGiftCard2 from "@/assets/images/dummy/gift_card_02.png";
+import imgGiftCard3 from "@/assets/images/dummy/gift_card_03.png";
+import imgGiftCard4 from "@/assets/images/dummy/gift_card_04.png";
+import imgGiftCard5 from "@/assets/images/dummy/gift_card_05.png";
+import imgGiftCard6 from "@/assets/images/dummy/gift_card_06.png";
+import imgGiftPurchase from "@/assets/images/dummy/gift_purchase_bg.png";
+import imgRateBenefit1 from "@/assets/images/dummy/rate_benefit_01.png";
+import imgRateBenefit2 from "@/assets/images/dummy/rate_benefit_02.png";
+
 
 const router = useRouter();
 const activeTab = ref(0);
@@ -904,18 +1087,170 @@ const langData = {
                         ],
                     },
                     {
-                        label:   "기프트\n카드",
-                        hero:    null,
-                        heroAlt: "",
-                        title:   "기프트 카드",
-                        desc:    "",
+                        label:          "기프트\n카드",
+                        hero:           imgHero6,
+                        heroAlt:        "",
+                        title:          "기프트카드",
+                        desc:           "GS25는 기프트카드를 운영하고 있으며, 전국 어디에서나 충전 및 사용이 가능합니다.<br />다양한 기프트카드를 소중한 친구, 가족, 지인들에게 선물할 수 있습니다. (단,일부 매장에서는 충전 및 사용이 불가합니다.)",
+                        brandTitle: "POSA 기프트카드 대표 브랜드",
+                        brands: [
+                            { img: imgGiftCard1, name: "구글플레이" },
+                            { img: imgGiftCard2, name: "KT 와이파이" },
+                            { img: imgGiftCard3, name: "틴캐시" },
+                            { img: imgGiftCard4, name: "에그머니" },
+                            { img: imgGiftCard5, name: "T데이터쿠폰" },
+                            { img: imgGiftCard6, name: "해피머니" },
+                            { img: imgGiftCard1, name: "문화상품권" },
+                            { img: imgGiftCard2, name: "스마트문화상품권" },
+                            { img: imgGiftCard3, name: "도서문화상품권" },
+                            { img: imgGiftCard4, name: "넥슨캐시" },
+                            { img: imgGiftCard5, name: "NC소프트" },
+                            { img: imgGiftCard6, name: "한게임" },
+                            { img: imgGiftCard1, name: "컬쳐랜드" },
+                            { img: imgGiftCard2, name: "퍼니카드" },
+                            { img: imgGiftCard3, name: "버거킹" },
+                            { img: imgGiftCard4, name: "CGV" },
+                            { img: imgGiftCard5, name: "스타벅스" },
+                            { img: imgGiftCard6, name: "올레WiFi" },
+                        ],
+                        purchaseTitle: "POSA 기프트카드 구매방법",
+                        purchaseNote:  "기프트 카드별로 사용방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용방법을 참고하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.",
+                        purchaseImg:   imgGiftPurchase,
+                        purchaseSteps: [
+                            { num: "01", title: "판매처 방문",    desc: "가까운 GS25 편의점에 방문하세요." },
+                            { num: "02", title: "기프트카드 선택", desc: "가까운 GS25 편의점에 방문하세요." },
+                            { num: "03", title: "사용설명 확인",   desc: "구매하신 카드 뒷면 사용설명을 잘 확인하시고 사용하세요." },
+                            { num: "04", title: "계산",           desc: "계산대에서 계산을 완료하시면 활성화되어 사용 가능한 상태가 됩니다." },
+                        ],
+                        usageTitle:   "POSA 기프트카드 사용방법",
+                        usageDesc:    "<span style=\"color:#F95823;font-size:1.8rem\">기프트카드별로 사용방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용방법을 참고</span>하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.",
+                        onlineLabel:  "온라인 사용방법",
+                        onlineSteps: [
+                            { step: "Step 1", title: "사이트 접속 및 로그인" },
+                            { step: "Step 2", title: "캐시충전" },
+                            { step: "Step 3", title: "결제수단 선택" },
+                            { step: "Step 4", title: "PIN번호 입력" },
+                        ],
+                        offlineLabel: "오프라인 사용방법",
+                        offlineSteps: [
+                            { step: "Step 1", title: "매장 방문" },
+                            { step: "Step 2", title: "상품 선택" },
+                            { step: "Step 3", title: "기프트카드 제시" },
+                            { step: "Step 4", title: "결제완료" },
+                        ],
+                        advantageTitle: "POSA 기프트카드 장점",
+                        advantages: [
+                            {
+                                num:   "01",
+                                title: "신용카드와 함께\n지갑속에 쏙!",
+                                desc:  "신용카드처럼 작아서 지갑에 보관하기 편리하며, 결제해야만 사용할 수 있기에 판매점의 관리 부담이 적습니다.",
+                            },
+                            {
+                                num:   "02",
+                                title: "온/오프라인\n다양한 브랜드 제공",
+                                desc:  "외식, 게임, 레저, 영화, 커피, 도서 등 오프라인과 온라인의 다양한 브랜드를 제공하기에 선물 받는 사람의 기호와 특성에 따라 최고의 만족도를 함께 드릴 수 있습니다.",
+                            },
+                            {
+                                num:   "03",
+                                title: "가치를 아는 당신의 선택\n고품격 디자인 기프트카드",
+                                desc:  "현금이나 기존 상품권과 달리 고품격으로 디자인되어 선물하는 분의 가치와 품격을 높여 드릴 수 있습니다.",
+                            },
+                            {
+                                num:   "04",
+                                title: "전국 언제 어디서나\n편리한 구매",
+                                desc:  "전국의 대형마트, 대형서점, 편의점, 유명 프랜차이즈 등으로 판매점을 확대할 것이기에 고객과 가장 가까운 곳에서 언제든지 간편하게 카드를 구입할 수 있습니다.",
+                            },
+                        ],
                     },
                     {
-                        label:   "유심\n요금제",
-                        hero:    null,
-                        heroAlt: "",
-                        title:   "유심 요금제",
-                        desc:    "",
+                        label:          "유심\n요금제",
+                        hero:           null,
+                        heroAlt:        "",
+                        title:          "유심 요금제",
+                        desc:           "U+ 알뜰모바일과 GS25가 만나 획기적으로 낮춘 휴대폰 요금제로 GS25편의점 및 GS25 온라인사이트에서 유심칩 구매 가능합니다.",
+                        advantageTitle: "GS25 요금제 장점",
+                        advantages: [
+                            { num: "01", title: "간편하게 가입하는 요금제", desc: "가까운 GS25에서 구매 가능 전용 사이트에서<br /> 간편하게 가입하는 요금제" },
+                            { num: "02", title: "대한민국 최저가",          desc: "데이터 마음껏 쓰는 대한민국 최저가 요금제!" },
+                            { num: "03", title: "약정 조건/위약금 ZERO",    desc: "번호, 휴대폰 모두 그대로, 약정 조건과 위약금 없는 요금제!" },
+                        ],
+                        phoneTitle: "사용 가능 핸드폰",
+                        phones: [
+                            { term: "LG U+휴대폰",    desc: "LG U+로 최초 개통한 모든 LTE 휴대폰" },
+                            { term: "SKT/KT 휴대폰",  desc: "14년 8월 이후출시된 LTE 휴대폰(갤럭시노트4, AKA 이후 출시 휴대폰)" },
+                            { term: "외산휴대폰",      desc: "아이폰6 이후출시 휴대폰, 그외 주파수 850(Band5), 2100(Band1), 2600(Band7) 지원 모델 주파수(LTE 밴드)는 제조사를 통해서 확인 가능" },
+                        ],
+                        purchaseTitle: "GS25 매장에서 유심 구매/사용 방법",
+                        purchaseSteps: [
+                            { step: "Step 1", title: "텍스트<br />최대2줄" },
+                            { step: "Step 2", title: "GS25 편의점에서<br />유심카드 구입" },
+                            { step: "Step 3", title: "유심 일련번호 완료 후<br />개통 신청 (또는 전화로 개통 신청)" },
+                            { step: "Step 4", title: "해피콜/개통 완료 후<br />휴대폰에 유심을 장착하면 간편 개통 끝!" },
+                        ],
+                        benefitTitle: "GS25 요금제 혜택",
+                        benefitCards: [
+                            {
+                                img:   imgRateBenefit1,
+                                imgAlt: "",
+                                title: "통신비 실속 있게 할인 받자!",
+                                desc:  "가까운 GS25에서 구매 가능 전용 사이트에서\n간편하게 가입하는 요금제",
+                                items: ["가입비 무료", "통신비 최대 할인", "무약정 위약금 없음"],
+                            },
+                            {
+                                img:   imgRateBenefit2,
+                                imgAlt: "",
+                                title: "다양한 부가서비스 4종 무료",
+                                desc:  "가까운 GS25에서 구매 가능 전용 사이트에서\n간편하게 가입하는 요금제",
+                                items: ["U+ Zone Wi-Fi로 인터넷을", "U+ Box 내 파일을 클라우드로", "매너콜 전화 온 곳을 문자로", "mVOIP 보이스톡 무료 통화"],
+                            },
+                        ],
+                        introTitle: "GS25 요금제 소개",
+                        plans: [
+                            {
+                                name:         "GS25(15GB+/100분)",
+                                data:         "15GB\n(소진시 3Mbps속도로 계속 사용)",
+                                voice:        "100분",
+                                sms:          "100건",
+                                normalPrice:  "47,300원",
+                                discount:     "19,800원",
+                                monthly:      "27,500원",
+                                monthlyDc:    "12,500원",
+                                competitor:   "65,890원",
+                            },
+                            {
+                                name:         "GS25(10GB/100분)",
+                                data:         "10GB",
+                                voice:        "100분",
+                                sms:          "100건",
+                                normalPrice:  "41,800원",
+                                discount:     "20,900원",
+                                monthly:      "20,900원",
+                                monthlyDc:    "5,900원",
+                                competitor:   "45,650원",
+                            },
+                            {
+                                name:         "GS25(6GB/100분)",
+                                data:         "6GB",
+                                voice:        "100분",
+                                sms:          "100건",
+                                normalPrice:  "30,000원",
+                                discount:     "12,500원",
+                                monthly:      "17,500원",
+                                monthlyDc:    "2,500원",
+                                competitor:   "45,250원",
+                            },
+                            {
+                                name:         "GS25(3GB/150분)",
+                                data:         "3GB",
+                                voice:        "100분",
+                                sms:          "100건",
+                                normalPrice:  "20,900원",
+                                discount:     "12,100원",
+                                monthly:      "12,100원",
+                                monthlyDc:    "0원",
+                                competitor:   "41,800원",
+                            },
+                        ],
                     },
                     {
                         label:   "하이패스\n카드/단말기",
@@ -979,7 +1314,28 @@ const depth2Tabs = langData.nav.depth2;
 const storeTabs = langData.nav.depth2Store;
 
 const storeActiveTab = ref(0);
+const giftSwiperInst = ref(null);
+const giftIsBeginning = ref(true);
+const giftIsEnd = ref(false);
+const updateGiftNavState = (swiper) => {
+    giftIsBeginning.value = swiper.isBeginning;
+    giftIsEnd.value = swiper.isEnd;
+};
+const onGiftSwiper = (swiper) => {
+    giftSwiperInst.value = swiper;
+};
+const onGiftSlideChange = (swiper) => updateGiftNavState(swiper);
+const onGiftBreakpoint = (swiper) => updateGiftNavState(swiper);
 const serviceActiveTab = ref(0);
+
+watch(serviceActiveTab, (idx) => {
+    if (idx === 3 && giftSwiperInst.value) {
+        nextTick(() => {
+            giftSwiperInst.value.update();
+            updateGiftNavState(giftSwiperInst.value);
+        });
+    }
+});
 const popLnbActiveIdx = ref(0);
 const trafficSelectVal = ref("express");
 const retailSelectVal = ref("coffee");
@@ -1972,6 +2328,407 @@ button {
 }
 
 
+/* ── 유심 요금제 혜택 ── */
+.usim_benefit_note {
+    margin: 8px 0 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+}
+
+.usim_benefit_cards {
+    display: flex;
+    gap: 20px;
+}
+
+.usim_benefit_card {
+    overflow: hidden;
+    border-radius: 12px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.usim_benefit_img {
+    width: 100%;
+    height: 340px;
+    margin: 0;
+    background-color: #c4c4c4;
+    overflow: hidden;
+}
+
+.usim_benefit_img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.usim_benefit_body {
+    padding: 32px 0;
+    flex: 1;
+}
+
+.usim_benefit_body > h3 {
+    color: #161616;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.usim_benefit_body > p {
+    color: #67676f;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    white-space: pre-line;
+}
+.usim_benefit_body h3{
+    margin-bottom: 24px;
+}
+.usim_benefit_list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.usim_benefit_list > li {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.usim_benefit_icon {
+    width: 16px;
+    height: 16px;
+    background-color: #0059fe;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.usim_benefit_list > li > span:last-child {
+    color: #161616;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .usim_benefit_cards {
+        flex-direction: column;
+    }
+
+    .usim_benefit_img {
+        height: 220px;
+    }
+
+    .usim_benefit_body {
+        padding: 24px 20px;
+    }
+
+    .usim_benefit_body > h3 {
+        font-size: 2rem;
+    }
+
+    .usim_benefit_list > li > span:last-child {
+        font-size: 1.6rem;
+    }
+}
+
+/* ── 사용 가능 핸드폰 ── */
+.usim_phone_list {
+    margin: 0;
+    padding: 0;
+}
+
+.usim_phone_list dt {
+    padding: 20px 0 6px;
+    color: #161616;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.usim_phone_list dd {
+    margin: 0;
+    padding: 0 0 20px;
+    color: #67676f;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+}
+
+@media (max-width: 768px) {
+    .usim_phone_list dt {
+        font-size: 1.6rem;
+    }
+
+    .usim_phone_list dd {
+        font-size: 1.5rem;
+    }
+}
+
+/* ── 유심 요금제 소개 ── */
+.usim_plan_table_wrap {
+    overflow-x: auto;
+}
+
+.usim_plan_table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e5e5e9;
+    table-layout: fixed;
+}
+
+.usim_plan_table th {
+    padding: 16px 12px;
+    background-color: #f8f8f8;
+    border: 1px solid #e5e5e9;
+    color: #161616;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.usim_plan_table td {
+    padding: 16px 12px;
+    border: 1px solid #e5e5e9;
+    color: #161616;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.usim_plan_data {
+    font-size: 1.4rem;
+}
+
+.usim_plan_dc {
+    color: #107AF2;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .usim_plan_table th,
+    .usim_plan_table td {
+        padding: 10px 8px;
+        font-size: 1.3rem;
+    }
+
+    .usim_plan_dc {
+        font-size: 1.3rem;
+    }
+}
+
+/* ── 유심 요금제 장점 ── */
+.usim_advantage_cards :deep(.feature_card_item) {
+    min-height: 212px;
+}
+.usim_advantage_note {
+    margin: 8px 0 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+/* ── 기프트카드 사용방법 ── */
+.gift_usage_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.gift_usage_group > h3 {
+    margin-bottom: 16px;
+    color: #161616;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+/* ── 기프트카드 구매방법 ── */
+.gift_purchase_wrap {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.gift_purchase_img {
+    width: calc(50% - 10px);
+    margin: 0;
+    padding: 0;
+    border-radius: 12px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.gift_purchase_img > img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.gift_purchase_steps {
+    width: calc(50% - 10px);
+    margin: 0;
+    padding: 20px 0 0;
+    list-style: none;
+}
+
+.gift_purchase_step {
+    padding-bottom: 40px;
+}
+
+.gift_purchase_step:last-child {
+    padding-bottom: 0;
+}
+
+.gift_step_header {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gift_step_num {
+    color: #107af2;
+    font-size: 2.4rem;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: -0.01em;
+}
+
+.gift_step_title {
+    color: #161616;
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.gift_step_desc {
+    margin: 0;
+    padding-left: 38px;
+    color: #67676f;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+/* ── 기프트카드 대표 브랜드 슬라이더 ── */
+.swiper-wrapper {
+    padding: 24px 0;
+}
+.gift_brand_slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.gift_brand_swiper {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.gift_brand_card {
+    margin: 0;
+    padding: 0;
+}
+
+.gift_brand_card > img {
+    width: 100%;
+    max-width: 140px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 4px;
+    aspect-ratio: 140 / 214;
+    display: block;
+    object-fit: cover;
+}
+
+.gift_brand_card > figcaption {
+    margin-top: 8px;
+    color: #161618;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+.gift_brand_nav {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gift_brand_nav::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #161616;
+    border-right: 2px solid #161616;
+    display: block;
+}
+
+.gift_brand_prev::before {
+    transform: rotate(-135deg) translateX(-2px);
+}
+
+.gift_brand_next::before {
+    transform: rotate(45deg) translateX(-2px);
+}
+
+.gift_brand_nav:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.gift_brand_pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.gift_brand_pagination :deep(.swiper-pagination-bullet) {
+    width: 8px;
+    height: 8px;
+    background-color: #d7d7df;
+    border-radius: 50%;
+    opacity: 1;
+    cursor: pointer;
+    display: block;
+}
+
+.gift_brand_pagination :deep(.swiper-pagination-bullet-active) {
+    background-color: #161616;
+}
+
+
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .cafe25_card_list {
@@ -1996,6 +2753,15 @@ button {
 
     .retail_logo_list > li {
         width: calc(100% / 3);
+    }
+
+    .gift_brand_nav {
+        width: 32px;
+        height: 32px;
+    }
+
+    .gift_brand_card > figcaption {
+        font-size: 1.4rem;
     }
 }
 
@@ -2058,7 +2824,6 @@ button {
         gap: 20px;
     }
 
-    /* 신선강화점 반응형 */
     .sinsen_feature_list {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2067,47 +2832,11 @@ button {
         flex-wrap: wrap;
     }
 
-    /* 생활 서비스 3depth 탭 반응형 */
     .service_tab_item {
         min-width: 120px;
         padding: 16px 8px;
     }
 
-    /* 교통카드 충전 LNB 반응형 */
-    .pop_lnb {
-        width: 180px;
-    }
-
-    .pop_lnb > ul > li > button {
-        font-size: 1.8rem;
-    }
-
-    .pop_card_list {
-        flex-wrap: wrap;
-    }
-
-    .pop_card_item {
-        flex: 1 1 calc(50% - 10px);
-    }
-
-    .charging_service_list {
-        flex-wrap: wrap;
-    }
-
-    .charging_service_item {
-        flex: 1 1 calc((100% - 20px) / 2);
-    }
-
-    .traffic_logo_list > li {
-        width: calc(100% / 4);
-    }
-
-    .retail_logo_list > li {
-        width: calc(100% / 3);
-    }
-}
-
-@media (max-width: 768px) {
     .pop_wrap {
         flex-direction: column;
     }
@@ -2139,12 +2868,12 @@ button {
         background-color: #f0faf4;
     }
 
-    .pop_card_item {
-        flex: 1 1 100%;
-    }
-
     .pop_card_list {
         flex-wrap: wrap;
+    }
+
+    .pop_card_item {
+        flex: 1 1 100%;
     }
 
     .charging_service_list {
@@ -2167,6 +2896,32 @@ button {
 
     .retail_logo_list > li {
         width: calc(100% / 2);
+    }
+
+
+    .gift_brand_slider {
+        gap: 12px;
+    }
+
+    .gift_brand_nav {
+        width: 28px;
+        height: 28px;
+    }
+
+    .gift_brand_card > figcaption {
+        font-size: 1.2rem;
+    }
+
+    .gift_purchase_wrap {
+        flex-direction: column;
+    }
+
+    .gift_purchase_img {
+        width: 100%;
+    }
+
+    .gift_purchase_steps {
+        width: 100%;
     }
 }
 </style>
