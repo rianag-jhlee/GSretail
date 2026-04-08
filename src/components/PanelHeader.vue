@@ -42,7 +42,7 @@ img {
 }
 
 .brand_panel_title {
-    margin: 0 0 100px;
+    padding: 0 0 100px;
 }
 
 .brand_panel_title > h2 {
