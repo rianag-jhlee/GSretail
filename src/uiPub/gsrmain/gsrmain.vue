@@ -1,10 +1,22 @@
 <template>
     <div class="content">
-        <div class="main_visual" :style="{ backgroundImage: 'url(' + t.mainVisual.img + ')' }">
-            <p class="main_copy">
-                <strong v-html="t.mainVisual.title"></strong>
-                <span>{{ t.mainVisual.sub }}</span>
-            </p>
+        <div class="main_visual">
+            <!-- <div v-for="item in mainVisual.items" :key="item" :style="{ backgroundImage: 'url(' + t.mainVisual.img + ')' }">
+                <p class="main_copy">
+                    <strong v-html="t.mainVisual.title"></strong>
+                    <span>{{ t.mainVisual.sub }}</span>
+                </p>
+            </div> -->
+            <swiper :loop="true" :autoplay="{ delay: 5000 }" class="mainSwiper">
+                <swiper-slide v-for="item in t.mainVisual.items" :key="item.title">
+                <div class="slide" :style="{ backgroundImage: 'url(' + item.img + ')' }">
+                    <p class="main_copy">
+                    <strong v-html="item.title"></strong>
+                    <span>{{ item.sub }}</span>
+                    </p>
+                </div>
+                </swiper-slide>
+            </swiper>
         </div>
 
         <section v-if="t.sec01" class="sec01">
@@ -109,12 +121,19 @@
 <script>
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import SwiperCore, { EffectFade, Autoplay } from "swiper";
 
 gsap.registerPlugin(ScrollTrigger);
+SwiperCore.use([EffectFade, Autoplay]);
 
 export default {
     name: "gsrmain",
     components: {
+        Swiper,
+        SwiperSlide
     },
     props: {
         lang: { type: String }, // ko/en
@@ -124,9 +143,11 @@ export default {
             langData: {
                 ko: {
                     mainVisual: {
-                        title: "Every Life.<br/> One Platform.",
-                        sub: "GS리테일",
-                        img: require("@/assets/images/dummy/main_visual.png"),
+                        items: [
+                            { title: "Every Life.<br/> One Platform.", sub: "GS리테일", img: require("@/assets/images/dummy/main_visual_01.png") },
+                            { title: "Every Life.<br/> One Platform.", sub: "GS리테일", img: require("@/assets/images/dummy/main_visual_02.png") },
+                            { title: "Every Life.<br/> One Platform.", sub: "GS리테일", img: require("@/assets/images/dummy/main_visual_03.png") }
+                        ]
                     },
 
                     sec01: {
@@ -184,7 +205,7 @@ export default {
                     mainVisual: {
                         title: "Every Life.<br/> One Platform.",
                         sub: "GS Retail",
-                        img: require("@/assets/images/dummy/main_visual.png"),
+                        img: require("@/assets/images/dummy/main_visual_01.png"),
                     }
                 }
             }
@@ -196,6 +217,7 @@ export default {
         }
     },
     mounted() {
+        
         /* scroll bind */
         this.handleScroll = this.handleScroll.bind(this);
         window.addEventListener("scroll", this.handleScroll);
@@ -248,7 +270,7 @@ export default {
                 width: window.innerWidth,
                 height: "100vh",
                 borderRadius: 0,
-                top: 0,
+                top: "-200px",
                 bottom: "auto",
                 left: "50%",
                 x: "-50%",
@@ -281,15 +303,19 @@ export default {
 h2 {font-size: 7.2rem; font-weight: 700; line-height: 124%; letter-spacing: -0.02em; text-align: center;}
 h2+.explain {font-size: 2rem; line-height: 150%; letter-spacing: -0.02em;}
 
-.main_visual {height: 100vh; padding: 60px 120px; background-position: 50%; background-size: cover; position: sticky; top: 0; z-index: -1; display: flex; align-items: center;}
+/* .main_visual {height: 100vh; padding: 60px 120px; background-position: 50%; background-size: cover; position: sticky; top: 0; z-index: -1; display: flex; align-items: center;}
 .main_visual * {color: #fff;}
 .main_visual .main_copy strong {font-size: 8rem; line-height: 124%; letter-spacing: -0.02em; display: block;}
-.main_visual .main_copy span {margin-top: 24px; font-size: 4rem; font-weight: 600; line-height: 130%; letter-spacing: -0.02em; display: block;}
+.main_visual .main_copy span {margin-top: 24px; font-size: 4rem; font-weight: 600; line-height: 130%; letter-spacing: -0.02em; display: block;} */
+.main_visual {width: 100%; position: relative; overflow: hidden;}
+.main_visual .slide {height: 100vh; padding: 60px 120px; background-position: 50%; background-size: cover; position: sticky; top: 0; z-index: -1; display: flex; align-items: center;}
+.main_copy strong {color: #fff; font-size: 8rem; line-height: 1.2; text-align: center;}
+.main_copy span {margin-top: 20px; color: #fff; font-size: 4rem; display: block;}
 
 section {padding: 200px 0; background-color: #fff;}
 
-.sec01 {padding:0;}
-.sec01 .inner {width:100%; max-width:1720px; height:100vh; margin:0 auto; padding:200px 20px 20px; position:relative; display: flex; align-items:flex-end; justify-content:flex-end;}
+.sec01 {height:100vh; padding:200px 20px 20px; overflow:hidden;}
+.sec01 .inner {width:100%; max-width:1720px; margin:0 auto; position:relative; display: flex; justify-content:flex-end;}
 .sec01 h2 {text-align: left;}
 .sec01 .explain {margin-top: 80px; margin-bottom: 60px;}
 .sec01 ul {border-top: 1px solid #000;}
