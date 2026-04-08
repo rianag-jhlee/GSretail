@@ -487,6 +487,17 @@
                         </div>
                     </section>
                 </template>
+ 
+
+                <!-- GS25 유심 요금제 패널 -->
+                <template v-else-if="i === 4">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <section>
+                        <SectionHeader :title="tab.advantageTitle">
+                        </SectionHeader>
+                        <FeatureCards :items="tab.advantages" class="usim_advantage_cards" />
+                    </section>
+                </template>
 
                 <!-- 그 외 패널: 기본 구조 -->
                 <template v-else>
@@ -1077,11 +1088,19 @@ const langData = {
                         ],
                     },
                     {
-                        label:   "유심\n요금제",
-                        hero:    null,
-                        heroAlt: "",
-                        title:   "유심 요금제",
-                        desc:    "",
+                        label:          "유심\n요금제",
+                        hero:           null,
+                        heroAlt:        "",
+                        title:          "유심 요금제",
+                        desc:           "U+ 알뜰모바일과 GS25가 만나 획기적으로 낮춘 휴대폰 요금제로 GS25편의점 및 GS25 온라인사이트에서 유심칩 구매 가능합니다.",
+                        advantageTitle: "GS25 요금제 장점",
+                        advantageDesc:  "이제 팝 하세요! 다양한 결제 수단과 결합하여 혜택은 더 크게, 소비는 더 합리적으로, 사용은 더 편리하게 할 수 있도록 팝카드만의 차별화된 서비스를 제공합니다.",
+                        advantageNote:  "팝카드 사용 제외 매장 : 디몰점, 영풍종로점, 부천세이브존점, 동대문현대시티아울렛점, 서면NC점, 현대시티몰가든파이브점, 모란NC점, 대구이월드점, 동아쇼핑NC점, 이천NC점, 동수원NC점, 야탑NC점",
+                        advantages: [
+                            { num: "01", title: "간편하게 가입하는 요금제", desc: "가까운 GS25에서 구매 가능 전용 사이트에서 간편하게 가입하는 요금제" },
+                            { num: "02", title: "대한민국 최저가",          desc: "데이터 마음껏 쓰는 대한민국 최저가 요금제!" },
+                            { num: "03", title: "약정 조건/위약금 ZERO",    desc: "번호, 휴대폰 모두 그대로, 약정 조건과 위약금 없는 요금제!" },
+                        ],
                     },
                     {
                         label:   "하이패스\n카드/단말기",
@@ -2158,6 +2177,18 @@ button {
     gap: 12px;
 }
 
+
+/* ── 유심 요금제 장점 ── */
+.usim_advantage_cards :deep(.feature_card_item) {
+    min-height: 212px;
+}
+.usim_advantage_note {
+    margin: 8px 0 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
 
 /* ── 기프트카드 사용방법 ── */
 .gift_usage_wrap {
