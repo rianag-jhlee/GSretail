@@ -8,12 +8,16 @@ defineProps({
 </script>
 
 <template>
-    <ul class="step_list" :class="`step_type${type}`">
+    <ul class="step_list" :class="`step_type${type}`" :style="{ '--step-cols': items.length }">
         <li v-for="(item, i) in items" :key="i" class="step_item">
             <span class="step_icon"></span>
             <div class="step_body">
                 <em class="step_num">{{ item.step }}</em>
                 <strong class="step_title" v-html="item.title" />
+                <ul v-if="item.bullets && item.bullets.length" class="step_bullets">
+                    <li v-for="(bullet, bi) in item.bullets" :key="bi" v-html="bullet" />
+                </ul>
+                <p v-if="item.note" class="step_note" v-html="item.note" />
             </div>
         </li>
     </ul>
@@ -25,7 +29,7 @@ defineProps({
     background-color: #f8f8f8;
     border-radius: 8px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--step-cols), 1fr);
 }
 
 /* ── 공통 아이콘 ── */
@@ -82,6 +86,40 @@ defineProps({
     display: flex;
     flex-direction: column;
     gap: 4px;
+}
+
+.step_bullets {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.step_bullets > li {
+    padding-left: 12px;
+    color: #67676f;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+.step_bullets > li::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    background-color: #67676f;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+
+.step_note {
+    margin: 4px 0 0;
+    color: #fb6432;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
 }
 
 /* ── 반응형 ── */
