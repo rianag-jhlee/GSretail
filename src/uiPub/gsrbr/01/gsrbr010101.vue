@@ -605,6 +605,34 @@
                     </section>
                 </template>
 
+                <!-- 온라인몰 편의점 결제 패널 (Figma 97:16410, 97:16422) -->
+                <template v-else-if="i === 7">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <section class="sec_mall_payment_advantage">
+                        <SectionHeader :title="tab.serviceTitle" :desc="tab.serviceDesc" />
+                        <FeatureCards :items="tab.serviceAdvantages" />
+                    </section>
+                    <section class="sec_mall_payment_method">
+                        <SectionHeader :title="tab.mallPaymentTitle" />
+                        <Steps type="2" :items="tab.mallPaymentSteps" />
+                    </section>
+                    <section class="sec_mall_sites">
+                        <SectionHeader :title="tab.mallSiteTitle">
+                            <p v-if="tab.mallSiteNote" class="mall_site_note">{{ tab.mallSiteNote }}</p>
+                        </SectionHeader>
+                        <ul class="mall_site_list">
+                            <li v-for="(item, si) in tab.mallSiteItems" :key="si">
+                                <figure>
+                                    <div class="mall_site_thumb">
+                                        <img :src="item.img" :alt="item.name" />
+                                    </div>
+                                    <figcaption>{{ item.name }}</figcaption>
+                                </figure>
+                            </li>
+                        </ul>
+                    </section>
+                </template>
+
                 <!-- 그 외 패널: 기본 구조 -->
                 <template v-else>
                     <section>
@@ -743,7 +771,13 @@ import imgGiftCard6 from "@/assets/images/dummy/gift_card_06.png";
 import imgGiftPurchase from "@/assets/images/dummy/gift_purchase_bg.png";
 import imgRateBenefit1 from "@/assets/images/dummy/rate_benefit_01.png";
 import imgRateBenefit2 from "@/assets/images/dummy/rate_benefit_02.png";
-import imgHipassTerminal from "@/assets/images/dummy/hipass_terminal.png";
+import imgHipassTerminal    from "@/assets/images/dummy/hipass_terminal.png";
+import imgServiceDesc01    from "@/assets/images/dummy/service_desc_01.png";
+import imgServiceDesc02    from "@/assets/images/dummy/service_desc_02.png";
+import imgServiceDesc03    from "@/assets/images/dummy/service_desc_03.png";
+import imgServiceDesc04    from "@/assets/images/dummy/service_desc_04.png";
+import imgServiceDesc05    from "@/assets/images/dummy/service_desc_05.png";
+import imgServiceDesc06    from "@/assets/images/dummy/service_desc_06.png";
 
 const router = useRouter();
 const activeTab = ref(0);
@@ -1329,24 +1363,29 @@ const langData = {
                         heroAlt: "",
                         title:   "고속도로 미납 통행료 납부",
                         desc:    "국내편의점 중 최초로 고속도로 미납통행료 실시간 조회 및 납부할 수 있는 서비스입니다.",
-                        serviceTitle: "서비스 장점",
+                        serviceTitle: "편의점 결제의 장점",
                         serviceDesc:
                             "이제 팝 하세요! 다양한 결제 수단과 결합하여 혜택은 더 크게, 소비는 더 합리적으로, 사용은 더 편리하게 할 수 있도록 팝카드만의 차별화된 서비스를 제공합니다.",
                         serviceAdvantages: [
                             {
                                 num:   "01",
-                                title: "전국 GS25 편의점에서\n차량번호만으로 편리하게 납부 가능",
-                                desc:  "서비스 시행 : 2019.08.23부터",
+                                title: "보편성",
+                                desc:  "은행보다 많고 가까운 집 근처 편의점에서 24시간 결제 가능<br /><span class=\"txt_point\">전국 모든 GS25 점포에서 수납 대행</span><br />(실시간 입금확인, 대면 거래)",
                             },
                             {
                                 num:   "02",
-                                title: "미납통행료\n실시간 납부",
-                                desc:  "*법인 차량은 추후 서비스 예정",
+                                title: "경제성",
+                                desc:  "고객 수수료 별도 부담 없음<br />계좌이체, 무통장입금 발생되는 뱅킹 수수료 없음",
                             },
                             {
                                 num:   "03",
-                                title: "현금, 신용카드로\n납부 가능",
-                                desc:  "현금이든 신용카드든 편의에 따라 납부 가능",
+                                title: "편리성",
+                                desc:  "은행에 가지 않아도, 신용카드가 없어도, 온라인상점에서 주문하면 결제(입금)은 편의점에서 완료<br /><span class=\"txt_point\">거스름돈은 점포에서 바로 수령 가능</span>",
+                            },
+                            {
+                                num:   "04",
+                                title: "안전성",
+                                desc:  "복잡한 공인인증서나 보안 카드가 필요 없고, 결제정보 노출 방지<br />대면 거래에 따른 전자금융사고 (스미싱)<br />예방",
                             },
                         ],
                         unpaidTitle: "고속도로 미납통행료 납부 방법",
@@ -1363,7 +1402,47 @@ const langData = {
                         hero:    null,
                         heroAlt: "",
                         title:   "온라인몰 편의점 결제",
-                        desc:    "",
+                        desc:    "온라인몰(쇼핑, 게임, 항공사, 기타)에서 구매할 때 '편의점결제'를 선택하고 문자로 수납번호나 바코드를 받아 GS25에서 현금 결제할 수 있는 서비스입니다.",
+                        serviceTitle: "편의점 결제의 장점",
+                        serviceAdvantages: [
+                            {
+                                num:   "01",
+                                title: "보편성",
+                                desc:  "은행보다 많고 가까운 집 근처 편의점에서 24시간 결제 가능<br /><span class=\"txt_point\">전국 모든 GS25 점포에서 수납 대행</span><br />(실시간 입금확인, 대면 거래)",
+                            },
+                            {
+                                num:   "02",
+                                title: "경제성",
+                                desc:  "고객 수수료 별도 부담 없음<br />계좌이체, 무통장입금 발생되는 뱅킹 수수료 없음",
+                            },
+                            {
+                                num:   "03",
+                                title: "편리성",
+                                desc:  "은행에 가지 않아도, 신용카드가 없어도, 온라인상점에서 주문하면 결제(입금)은 편의점에서 완료<br /><span class=\"txt_point\">거스름돈은 점포에서 바로 수령 가능</span>",
+                            },
+                            {
+                                num:   "04",
+                                title: "안전성",
+                                desc:  "복잡한 공인인증서나 보안 카드가 필요 없고, 결제정보 노출 방지<br />대면 거래에 따른 전자금융사고 (스미싱)<br />예방",
+                            },
+                        ],
+                        mallPaymentTitle: "편의점 결제 이용 방법",
+                        mallPaymentSteps: [
+                            { step: "Step 1", title: "온라인몰에서<br />상품/서비스 구매" },
+                            { step: "Step 2", title: "온라인몰에서<br />상품/서비스 구매" },
+                            { step: "Step 3", title: "가까운 GS25에서<br />24시간 결제" },
+                            { step: "Step 4", title: "집으로 상품 배송<br />(캐시충전)" },
+                        ],
+                        mallSiteTitle: "이용 가능한 온라인 및 모바일 사이트",
+                        mallSiteNote:  "* 향후 지속 확대예정",
+                        mallSiteItems: [
+                            { name: "11번가",                  img: imgServiceDesc01 },
+                            { name: "스타일쉐어",              img: imgServiceDesc02 },
+                            { name: "NC소프트",                img: imgServiceDesc03 },
+                            { name: "파워콜 항공/쇼핑",        img: imgServiceDesc04 },
+                            { name: "티웨이항공",              img: imgServiceDesc05 },
+                            { name: "유니컴즈\n(LG U+ 별정통신사)", img: imgServiceDesc06 },
+                        ],
                     },
                 ],
             },
@@ -2386,9 +2465,94 @@ button {
     letter-spacing: -0.01em;
 }
 
-/* ── 고속도로 미납 통행료 납부 ── */
-.sec_unpaid_advantage :deep(.feature_card_item) {
-    min-height: 215px;
+/* ── 고속도로 미납 통행료 납부 · 온라인몰 편의점 결제 공통 ── */
+.sec_unpaid_advantage :deep(.feature_card_item),
+.sec_mall_payment_advantage :deep(.feature_card_item) {
+    min-height: 260px;
+}
+
+:deep(.txt_point) {
+    color: #fb6432;
+}
+
+@media (max-width: 768px) {
+    .sec_unpaid_advantage :deep(.feature_card_item),
+    .sec_mall_payment_advantage :deep(.feature_card_item) {
+        min-height: 0;
+    }
+}
+
+/* ── 온라인몰 편의점 결제 — 이용 가능 사이트 ── */
+.mall_site_note {
+    margin: 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+}
+
+.mall_site_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.mall_site_list > li {
+    flex: 1;
+}
+
+.mall_site_list > li > figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mall_site_thumb {
+    width: 100%;
+    height: 200px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mall_site_thumb > img {
+    width: auto;
+    max-width: 100%;
+}
+
+.mall_site_list > li > figure > figcaption {
+    color: #67676f;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    white-space: pre-line;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .mall_site_list {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .mall_site_list > li {
+        flex: 1 1 calc((100% - 32px) / 3);
+    }
+}
+
+@media (max-width: 768px) {
+    .mall_site_list > li {
+        flex: 1 1 calc((100% - 16px) / 2);
+    }
+
+    .mall_site_thumb {
+        height: 140px;
+    }
 }
 
 /* ── 편의점캐시 테이블 ── */
