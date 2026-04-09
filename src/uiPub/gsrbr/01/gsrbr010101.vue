@@ -811,6 +811,32 @@
                 </div>
             </section>
         </div>
+        <!-- 상품권 판매 -->
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
+            <PanelHeader
+                :hero="store.tabs[3].hero"
+                :hero-alt="store.tabs[3].heroAlt"
+                :title="store.tabs[3].subtitle"
+                :subtitle="store.tabs[3].desc"
+            />
+            <section v-if="store.tabs[3].voucherItems && store.tabs[3].voucherItems.length" class="sec_voucher">
+                <SectionHeader :title="store.tabs[3].voucherTitle" />
+                <ul class="voucher_list">
+                    <li v-for="(item, vi) in store.tabs[3].voucherItems" :key="vi" class="voucher_item">
+                        <div class="voucher_img">
+                            <img :src="item.img" :alt="item.name" />
+                        </div>
+                        <div class="voucher_info">
+                            <strong class="voucher_name">{{ item.name }}</strong>
+                            <div class="voucher_tags">
+                                <span v-for="(tag, ti) in item.tags" :key="ti" class="voucher_tag" :class="`tag_${tag.type}`">{{ tag.text }}</span>
+                            </div>
+                            <p class="voucher_desc">{{ item.desc }}</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
         <div class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
         </div>
@@ -920,6 +946,9 @@ import imgServiceDesc03    from "@/assets/images/dummy/service_desc_03.png";
 import imgServiceDesc04    from "@/assets/images/dummy/service_desc_04.png";
 import imgServiceDesc05    from "@/assets/images/dummy/service_desc_05.png";
 import imgServiceDesc06    from "@/assets/images/dummy/service_desc_06.png";
+import imgGiftCerti01 from "@/assets/images/dummy/gift_certi_01.png";
+import imgGiftCerti02 from "@/assets/images/dummy/gift_certi_02.png";
+import imgGiftCerti03 from "@/assets/images/dummy/gift_certi_03.png";
 
 const router = useRouter();
 const activeTab = ref(0);
@@ -1836,8 +1865,40 @@ const langData = {
                 hero: null,
                 heroAlt: "",
                 title: "상품권 판매",
-                subtitle: "",
+                subtitle: "상품권 판매 서비스",
+                desc: "문화상품권, 금강제화, GS칼텍스 상품권 등을 판매하고 있습니다.",
                 sections: [],
+                voucherTitle: "상품권 종류",
+                voucherItems: [
+                    {
+                        img: imgGiftCerti01,
+                        name: "문화상품권",
+                        tags: [
+                            { text: "5천원권", type: "blue" },
+                            { text: "1만원권", type: "green" },
+                        ],
+                        desc: "도서음반, 영화티켓구입, 외식(일부), 인터넷(게임, 포털)에서 사용 가능한 상품권",
+                    },
+                    {
+                        img: imgGiftCerti02,
+                        name: "금강제화상품권",
+                        tags: [
+                            { text: "5만원권", type: "orange" },
+                            { text: "10만원권", type: "orange" },
+                        ],
+                        desc: "전국 1300여개 도시 4000여 매장 (~5만원권, 10만원권)/(금강, 버팔로, PGA, LPGA, 금강핸드백 등) 어디서나 사용 가능한 실속 있는 상품권",
+                    },
+                    {
+                        img: imgGiftCerti03,
+                        name: "GS칼텍스상품권",
+                        tags: [
+                            { text: "1만원권", type: "green" },
+                            { text: "5만원권", type: "orange" },
+                            { text: "10만원권", type: "orange" },
+                        ],
+                        desc: "주유소,백화점,외식,마트,호텔,여행사 등에서 사용 가능한 상품권",
+                    },
+                ],
             },
         ],
     },
@@ -3722,6 +3783,79 @@ button {
     line-height: 1.4;
 }
 
+/* 상품권 판매 */
+.voucher_list {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.voucher_item {
+    max-width: 340px;
+    flex: 1;
+}
+
+.voucher_img {
+    height: 200px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voucher_img > img {
+ width: auto;
+}
+
+.voucher_info {
+    margin-top: 24px;
+}
+
+.voucher_name {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.voucher_tags {
+    margin-top: 10px;
+    display: flex;
+    gap: 6px;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+}
+
+.voucher_tag {
+    padding: 2px 8px;
+    font-size: 1.4rem;
+    border-radius: 4px;
+}
+
+.tag_blue {
+    background-color: #e7f2fe;
+    color: #0d62c2;
+}
+
+.tag_green {
+    background-color: #dff5ec;
+    color: #0d6e46;
+}
+
+.tag_orange {
+    background-color: #f9f2ea;
+    color: #ca5028;
+}
+
+.voucher_desc {
+    margin-top: 10px;
+    font-size: 1.6rem;
+    color: #67676f;
+    line-height: 1.5;
+}
+
 @media (max-width: 768px) {
     .sec_tax_list {
         margin-top: 40px;
@@ -3729,6 +3863,15 @@ button {
 
     .tax_group_subtitle {
         font-size: 2rem;
+    }
+
+    .sec_voucher {
+        margin-top: 40px;
+    }
+
+    .voucher_list {
+        flex-direction: column;
+        gap: 32px;
     }
 }
 </style>
