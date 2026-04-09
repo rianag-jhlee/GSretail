@@ -320,7 +320,7 @@
                                             <img :src="card.img" :alt="card.name" />
                                         </figure>
                                         <div class="pop_card_body">
-                                            <p class="pop_card_desc" style="white-space:pre-line">{{ card.desc }}</p>
+                                            <p class="pop_card_desc">{{ card.desc }}</p>
                                             <p v-if="card.note" class="pop_card_note" :class="{ is_warn: card.noteWarn }">{{ card.note }}</p>
                                             <div v-if="card.logos && card.logos.length" class="pop_card_logos">
                                                 <img
@@ -487,14 +487,12 @@
                         </div>
                     </section>
                 </template>
- 
 
                 <!-- GS25 유심 요금제 패널 -->
                 <template v-else-if="i === 4">
                     <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
                     <section>
-                        <SectionHeader :title="tab.advantageTitle">
-                        </SectionHeader>
+                        <SectionHeader :title="tab.advantageTitle" />
                         <FeatureCards :items="tab.advantages" class="usim_advantage_cards" />
                     </section>
                     <section>
@@ -535,8 +533,7 @@
                         </div>
                     </section>
                     <section>
-                        <SectionHeader :title="tab.benefitTitle">
-                        </SectionHeader>
+                        <SectionHeader :title="tab.benefitTitle" />
                         <ul class="usim_benefit_cards">
                             <li v-for="(card, ci) in tab.benefitCards" :key="ci" class="usim_benefit_card">
                                 <figure class="usim_benefit_img">
@@ -570,6 +567,29 @@
                         </dl>
                     </section>
 
+                </template>
+
+                <!-- 하이패스 카드/단말기 패널 -->
+                <template v-else-if="i === 5">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc">
+                        <ul class="hipass_note_list">
+                            <li>* 하이플러스카드에서 출시한 모든 카드를 충전하실 수 있습니다. (http://www.hipluscard.co.kr/)</li>
+                            <li>* 하이패스카드(자동충전) 및 단말기를 구매하실 수 있습니다.</li>
+                        </ul>
+                    </PanelHeader>
+                    <section>
+                        <SectionHeader :title="tab.hipassStepTitle" />
+                        <Steps type="2" :items="tab.hipassSteps" />
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.hipassChargeTitle" :desc="tab.hipassChargeDesc" />
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.hipassTerminalTitle" :desc="tab.hipassTerminalDesc" />
+                        <div class="hipass_terminal_img">
+                            <img :src="tab.hipassTerminalImg" :alt="tab.hipassTerminalImgAlt" />
+                        </div>
+                    </section>
                 </template>
 
                 <!-- 그 외 패널: 기본 구조 -->
@@ -610,7 +630,6 @@
 
         <!-- 상품권 판매 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
-
         </div>
 
         <div class="diff_actions">
@@ -667,13 +686,13 @@ import imgMenu2 from "@/assets/images/dummy/gopizza_menu_02.png";
 import imgPhone1 from "@/assets/images/dummy/gopizza_phone_01.png";
 import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 
-/*신선강화점 이미지*/ 
+/* 신선강화점 이미지 */
 import imgHero4 from "@/assets/images/dummy/brand_bg_05.png";
 import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 
-/*매장/서비스 이미지*/
+/* 매장/서비스 이미지 */
 import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
-import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";   
+import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
@@ -711,7 +730,7 @@ import imgGiftCard6 from "@/assets/images/dummy/gift_card_06.png";
 import imgGiftPurchase from "@/assets/images/dummy/gift_purchase_bg.png";
 import imgRateBenefit1 from "@/assets/images/dummy/rate_benefit_01.png";
 import imgRateBenefit2 from "@/assets/images/dummy/rate_benefit_02.png";
-
+import imgHipassTerminal from "@/assets/images/dummy/hipass_terminal.png";
 
 const router = useRouter();
 const activeTab = ref(0);
@@ -1072,7 +1091,7 @@ const langData = {
                             },
                             {
                                 img:      imgPopCard2,
-                                name:     "멥버십 팝카드",
+                                name:     "멤버십 팝카드",
                                 desc:     "멤버십팝카드는 GS ALL 포인트와 팝카드가 결합되어 GS25, GS THE FRESH에서 결제와 동시에 포인트가 적립되고, 600여 온라인쇼핑, 게임 등에서 결제가 가능한 혜택이 많은 선불카드입니다.",
                                 note:     "*교통기능 없음",
                                 noteWarn: true,
@@ -1118,7 +1137,7 @@ const langData = {
                         purchaseImg:   imgGiftPurchase,
                         purchaseSteps: [
                             { num: "01", title: "판매처 방문",    desc: "가까운 GS25 편의점에 방문하세요." },
-                            { num: "02", title: "기프트카드 선택", desc: "가까운 GS25 편의점에 방문하세요." },
+                            { num: "02", title: "기프트카드 선택", desc: "원하는 브랜드의 기프트카드를 선택하세요." },
                             { num: "03", title: "사용설명 확인",   desc: "구매하신 카드 뒷면 사용설명을 잘 확인하시고 사용하세요." },
                             { num: "04", title: "계산",           desc: "계산대에서 계산을 완료하시면 활성화되어 사용 가능한 상태가 됩니다." },
                         ],
@@ -1182,10 +1201,9 @@ const langData = {
                         ],
                         purchaseTitle: "GS25 매장에서 유심 구매/사용 방법",
                         purchaseSteps: [
-                            { step: "Step 1", title: "텍스트<br />최대2줄" },
-                            { step: "Step 2", title: "GS25 편의점에서<br />유심카드 구입" },
-                            { step: "Step 3", title: "유심 일련번호 완료 후<br />개통 신청 (또는 전화로 개통 신청)" },
-                            { step: "Step 4", title: "해피콜/개통 완료 후<br />휴대폰에 유심을 장착하면 간편 개통 끝!" },
+                            { step: "Step 1", title: "간편하게 가입하는 요금제" },
+                            { step: "Step 2", title: "대한민국 최저가" },
+                            { step: "Step 3", title: "약정 조건/위약금 ZERO" },
                         ],
                         benefitTitle: "GS25 요금제 혜택",
                         benefitCards: [
@@ -1208,7 +1226,7 @@ const langData = {
                         plans: [
                             {
                                 name:         "GS25(15GB+/100분)",
-                                data:         "15GB\n(소진시 3Mbps속도로 계속 사용)",
+                                data:         "15GB\n<span class=\"usim_plan_data_sub\">(소진시 3Mbps속도로 계속 사용)</span>",
                                 voice:        "100분",
                                 sms:          "100건",
                                 normalPrice:  "47,300원",
@@ -1253,11 +1271,44 @@ const langData = {
                         ],
                     },
                     {
-                        label:   "하이패스\n카드/단말기",
-                        hero:    null,
-                        heroAlt: "",
-                        title:   "하이패스 카드/단말기",
-                        desc:    "",
+                        label:          "하이패스\n카드/단말기",
+                        hero:           null,
+                        heroAlt:        "",
+                        title:          "하이패스 카드/단말기",
+                        desc:           "GS25에서 24시간 하이패스카드를 구매/충전하세요.",
+                        hipassStepTitle:    "하이패스카드 구매 (셀프형 자동충전카드)",
+                        hipassSteps: [
+                            {
+                                step:    "Step 1",
+                                title:   "셀프형 자동충전카드 구매",
+                                bullets: [
+                                    "가까운 GS25에서 하이패스 카드 구매",
+                                    "카드 구입비: 5,000원",
+                                ],
+                            },
+                            {
+                                step:    "Step 2",
+                                title:   "카드등록 및 결제정보등록",
+                                bullets: [
+                                    "홈페이지에서 카드번호 및 결제정보등록<br />(계좌 or 신용카드)",
+                                ],
+                                note:    "카드등록 후 24시간 이후 사용 가능",
+                            },
+                            {
+                                step:    "Step 3",
+                                title:   "하이패스 카드 이용",
+                                bullets: [
+                                    "하이패스 단말기에 삽입하여 사용",
+                                    "등록된 결제방식을 통해 자동 충전됨",
+                                ],
+                            },
+                        ],
+                        hipassChargeTitle: "하이패스 카드 충전",
+                        hipassChargeDesc: "하이플러스카드에서 출시한 모든 카드 충전가능 ('도로공사', 'EX' 기재된 카드 충전불가)",
+                        hipassTerminalTitle: "하이패스단말기 판매",
+                        hipassTerminalDesc: "한국도로공사가 인증하고 2년 연속 한국품질만족도 1위 'GPASS' 단말기 판매",
+                        hipassTerminalImg:    imgHipassTerminal,
+                        hipassTerminalImgAlt: "하이패스 단말기(GPASS) 이미지",
                     },
                     {
                         label:   "고속도로 미납\n통행료 납부",
@@ -1989,8 +2040,6 @@ button {
     gap: 8px;
 }
 
-
-
 .service_tab_icon {
     width: 48px;
     height: 48px;
@@ -2080,6 +2129,7 @@ button {
     font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
+    white-space: pre-line;
 }
 
 .pop_card_note {
@@ -2276,13 +2326,26 @@ button {
     text-align: left;
 }
 
-
 .pop_content {
     flex: 1;
     min-width: 0;
 }
 
-/* 편의점캐시 테이블 */
+/* ── 하이패스 카드/단말기 ── */
+.hipass_note_list {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hipass_note_list > li {
+    color: #67676f;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+/* ── 편의점캐시 테이블 ── */
 .cash_table {
     width: 100%;
     border-collapse: collapse;
@@ -2327,17 +2390,7 @@ button {
     gap: 12px;
 }
 
-
 /* ── 유심 요금제 혜택 ── */
-.usim_benefit_note {
-    margin: 8px 0 0;
-    color: #f95823;
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-}
-
 .usim_benefit_cards {
     display: flex;
     gap: 20px;
@@ -2371,6 +2424,7 @@ button {
 }
 
 .usim_benefit_body > h3 {
+    margin-bottom: 24px;
     color: #161616;
     font-size: 2.4rem;
     font-weight: 700;
@@ -2386,9 +2440,7 @@ button {
     letter-spacing: -0.01em;
     white-space: pre-line;
 }
-.usim_benefit_body h3{
-    margin-bottom: 24px;
-}
+
 .usim_benefit_list {
     display: flex;
     flex-direction: column;
@@ -2415,8 +2467,18 @@ button {
     font-weight: 400;
     line-height: 1.4;
 }
+.hipass_terminal_img > img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 
 @media (max-width: 768px) {
+    .hipass_terminal_img > img {
+        width: 100%;
+    }
+
     .usim_benefit_cards {
         flex-direction: column;
     }
@@ -2480,43 +2542,70 @@ button {
 
 .usim_plan_table {
     width: 100%;
+    min-width: 860px;
     border-collapse: collapse;
-    border: 1px solid #e5e5e9;
-    table-layout: fixed;
 }
 
 .usim_plan_table th {
-    padding: 16px 12px;
+    padding: 14.5px 24px;
     background-color: #f8f8f8;
-    border: 1px solid #e5e5e9;
+    border-right: none;
+    border-bottom: 1px solid #e5e5e9;
     color: #161616;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 600;
     line-height: 1.5;
     letter-spacing: -0.01em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
     text-align: center;
     vertical-align: middle;
+}
+
+/* 2행 th(데이터·음성·문자) 패딩 축소 */
+.usim_plan_table thead tr:nth-child(2) th {
+    padding: 10.5px 24px;
+}
+
+/* 상품명 오른쪽 / 제공량 오른쪽 세로선 (rowspan=2 ↔ 제공량 그룹 경계) */
+.usim_plan_table thead tr:nth-child(1) th:first-child,
+.usim_plan_table thead tr:nth-child(1) th[colspan="3"] {
+    border-right: 1px solid #e5e5e9;
+}
+
+/* 문자 오른쪽 세로선 (제공량 그룹 ↔ 정상 요금 경계) */
+.usim_plan_table thead tr:nth-child(2) th:last-child {
+    border-right: 1px solid #e5e5e9;
 }
 
 .usim_plan_table td {
-    padding: 16px 12px;
-    border: 1px solid #e5e5e9;
+    padding: 15px 24px;
+    border-right: none;
+    border-bottom: 1px solid #e5e5e9;
     color: #161616;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.01em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
     text-align: center;
     vertical-align: middle;
 }
 
-.usim_plan_data {
+/* 상품명·문자 열 세로선 tbody에서 유지 */
+.usim_plan_table tbody td:first-child,
+.usim_plan_table tbody td:nth-child(4) {
+    border-right: 1px solid #e5e5e9;
+}
+
+.usim_plan_data_sub {
     font-size: 1.4rem;
 }
 
 .usim_plan_dc {
-    color: #107AF2;
-    font-size: 1.6rem;
+    color: #107af2;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 600;
 }
@@ -2536,13 +2625,6 @@ button {
 /* ── 유심 요금제 장점 ── */
 .usim_advantage_cards :deep(.feature_card_item) {
     min-height: 212px;
-}
-.usim_advantage_note {
-    margin: 8px 0 0;
-    color: #f95823;
-    font-size: 1.4rem;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
 }
 
 /* ── 기프트카드 사용방법 ── */
@@ -2728,7 +2810,13 @@ button {
     background-color: #161616;
 }
 
-
+.usim_hiplus_list > li {
+    color: #67676f;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .cafe25_card_list {
@@ -2897,7 +2985,6 @@ button {
     .retail_logo_list > li {
         width: calc(100% / 2);
     }
-
 
     .gift_brand_slider {
         gap: 12px;
