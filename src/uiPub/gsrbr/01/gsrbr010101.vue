@@ -768,6 +768,18 @@
                                 </li>
                             </ul>
                         </section>
+                        <section v-if="tab.pickupItems && tab.pickupItems.length" class="sec_delivery_pickup">
+                            <SectionHeader :title="tab.pickupTitle" />
+                            <Steps type="2" :items="tab.pickupItems" />
+                        </section>
+                        <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
+                            <SectionHeader :title="tab.shoppingTitle" />
+                            <ul class="list_dotted">
+                                <li v-for="(item, ii) in tab.shoppingItems" :key="ii">
+                                    <p v-html="item.text"></p>
+                                </li>
+                            </ul>
+                        </section>
                     </div>
                 </template>
             </div>
@@ -836,6 +848,7 @@ import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";
 import imgHero7 from "@/assets/images/dummy/brand_bg_08.png"; 
 import imgHero8 from "@/assets/images/dummy/brand_bg_09.png"; 
 import imgHero9 from "@/assets/images/dummy/brand_bg_10.png"; 
+import imgHero10 from "@/assets/images/dummy/brand_bg_11.png"; 
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
@@ -1719,19 +1732,45 @@ const langData = {
                     },
                     {
                         label: "픽업",
-                        hero:    null,
-                        heroAlt: "",
-                        title: "국제택배 서비스",
-                        desc: "365일 24시간 가까운 GS25에서 국제택배 접수가 가능 합니다. (SFExpress, 우체국EMS, DHL)",
-                    },
-                    {
-                        label: "쇼핑몰거래",
-                        hero:    null,
+                        hero: imgHero10,
                         heroAlt: "",
                         title: "픽업 서비스",
                         desc: "쇼핑몰에서 상품주문 후, 가까운 GS25에서 물건을 찾아가세요.",
+                        notes: [
+                            {
+                                text: "원하는 시간에 지정한 점포에서 수령이 가능합니다. (안심택배)",
+                            },
+                            {
+                                text: "도착 완료 시 SMS 알림 서비스를 제공합니다.",
+                            },
+                        ],
+                        pickupTitle: "픽업 이용방법",
+                        pickupItems: [
+                            { step: "Step 1", title: "쇼핑몰 배송방법<br />편의점 PICK-UP 선택" },
+                            { step: "Step 2", title: "가까운 GS25 선택"},
+                            { step: "Step 3", title: "물건 도착 SMS를 받고<br />편의점 방문 수령"},
+                        ],
+                        shoppingTitle: "픽업서비스 제휴쇼핑몰",
+                        shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
                     },
-
+                    {
+                        label:   "쇼핑몰거래",
+                        hero:    imgHero10,
+                        heroAlt: "",
+                        title:   "쇼핑몰 거래 서비스",
+                        desc:    "홈쇼핑 반품, 오픈마켓, 온라인 쇼핑몰 등 편리하게 이용하실 수 있는 서비스입니다.",
+                        notes: [
+                            { text: "365일 24시간 편리한 시간대에 가까운 GS25에 방문하여 이용 가능합니다." },
+                        ],
+                        pickupTitle: "이용방법",
+                        pickupItems: [
+                            { step: "Step 1", title: "제휴업체 승인번호 발급 후<br />GS25 방문", bullets: ["회원, 영문작성"]},
+                            { step: "Step 2", title: "무인택배장비에서<br />승인번호 입력" },
+                            { step: "Step 3", title: "운송장 출력 후<br />접수" },
+                        ],
+                        shoppingTitle: "이용가능 제휴처",
+                        shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
+                    },
                 ],
             },
             {
@@ -1864,8 +1903,14 @@ function goBack() {
 .list_dotted > li > p {
     margin: 0;
     color: #161616;
+    font-size: 1.8rem; 
+    line-height: 1.4;
+}
+.list_dotted > li > p :deep(a) {
+    color: #107af2;
     font-size: 1.8rem;
     line-height: 1.4;
+    text-decoration: underline;
 }
 img {
     width: 100%;
