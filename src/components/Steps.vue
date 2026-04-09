@@ -25,13 +25,18 @@ defineProps({
 
 <style scoped>
 .step_list {
-    padding: 40px 64px;
+    padding: 56px 64px;
     background-color: #f8f8f8;
-    border-radius: 8px;
+    border-radius: 12px;
     display: grid;
     grid-template-columns: repeat(var(--step-cols), 1fr);
 }
-
+.step_list.step_type1{
+    gap:16px;
+}
+.step_list.step_type2{
+    gap:20px;
+}
 /* ── 공통 아이콘 ── */
 .step_icon {
     width: 40px;
