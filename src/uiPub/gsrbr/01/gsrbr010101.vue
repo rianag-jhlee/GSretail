@@ -175,8 +175,8 @@
                                 <strong>{{ pnl.size }}</strong>
                                 <span v-for="(tag, ti) in pnl.tags" :key="ti" class="gopizza_menu_tag">{{ tag }}</span>
                             </div>
-                            <div class="gopizza_table_wrap">
-                                <table class="gopizza_table">
+                            <div class="com_table_wrap">
+                                <table class="com_table com_table_col">
                                     <thead>
                                         <tr>
                                             <th
@@ -642,18 +642,20 @@
                             :title="tab.title"
                             :subtitle="tab.desc"
                         />
-                        <table v-if="tab.table" class="cash_table">
-                            <tbody>
-                                <tr v-for="(row, ri) in tab.table.rows" :key="ri">
-                                    <th scope="row">{{ row.head }}</th>
-                                    <td>
-                                        <div class="cash_table_cell">
-                                            <span>{{ row.text }}</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div v-if="tab.table" class="com_table_wrap">
+                            <table class="com_table">
+                                <tbody>
+                                    <tr v-for="(row, ri) in tab.table.rows" :key="ri">
+                                        <th scope="row">{{ row.head }}</th>
+                                        <td>
+                                            <div class="cash_table_cell">
+                                                <span>{{ row.text }}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
                 </template>
             </div>
@@ -661,18 +663,115 @@
 
         <!-- 택배&픽업 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel">
-
+            <nav class="service_tab_wrap" role="tablist" aria-label="택배&픽업 서비스">
+                <button
+                    v-for="(tab, i) in store.tabs[1].serviceTabs"
+                    :key="i"
+                    type="button"
+                    role="tab"
+                    :aria-selected="deliveryActiveTab === i"
+                    class="service_tab_item"
+                    :class="{ is_active: deliveryActiveTab === i }"
+                    @click="deliveryActiveTab = i"
+                >
+                    <span class="service_tab_icon" aria-hidden="true"></span>
+                    <span class="service_tab_label">{{ tab.label }}</span>
+                </button>
+            </nav>
+            <div class="service_panel_wrap">
+                <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
+                    <div v-show="deliveryActiveTab === i" class="service_panel">
+                        <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc">
+                            <ul v-if="tab.notes && tab.notes.length" class="delivery_note_list">
+                                <li v-for="(note, ni) in tab.notes" :key="ni">
+                                    <p>{{ note.text }}</p>
+                                    <p v-if="note.sub" class="delivery_note_sub">{{ note.sub }}</p>
+                                </li>
+                            </ul>
+                        </PanelHeader>
+                        <section v-if="tab.steps && tab.steps.length" class="sec_delivery_service">
+                            <SectionHeader :title="tab.stepTitle" />
+                            <Steps type="2" :items="tab.steps" />
+                        </section>
+                        <section v-if="tab.priceTable" class="sec_delivery_price_table">
+                            <SectionHeader :title="tab.priceTable.title" />
+                            <div class="com_table_wrap">
+                                <table class="com_table com_table_col">
+                                    <thead>
+                                        <tr>
+                                            <th v-for="(col, ci) in tab.priceTable.columns" :key="ci" scope="col">{{ col }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(row, ri) in tab.priceTable.rows" :key="ri">
+                                            <td v-for="(cell, ci) in row.cells" :key="ci" v-html="cell"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <section v-if="tab.infoTable" class="sec_delivery_info_table">
+                            <SectionHeader :title="tab.infoTable.title" />
+                            <div class="com_table_wrap">
+                                <table class="com_table">
+                                    <tbody>
+                                        <tr v-for="(row, ri) in tab.infoTable.rows" :key="ri">
+                                            <th scope="row">{{ row.head }}</th>
+                                            <td v-html="row.text"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <section v-if="tab.priceItems && tab.priceItems.length" class="sec_delivery_price">
+                            <SectionHeader :title="tab.priceTitle" />
+                            <div class="delivery_price_box">
+                                <ul class="delivery_price_list">
+                                    <li v-for="(item, pi) in tab.priceItems" :key="pi">
+                                        <p>{{ item.text }}</p>
+                                        <ul v-if="item.subs && item.subs.length" class="delivery_price_subs">
+                                            <li v-for="(sub, si) in item.subs" :key="si">{{ sub }}</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section v-if="tab.cautionItems && tab.cautionItems.length" class="sec_delivery_caution">
+                            <SectionHeader :title="tab.cautionTitle" />
+                            <FeatureCards type="icon" :items="tab.cautionItems" />
+                        </section>
+                        <section v-if="tab.periodItems && tab.periodItems.length" class="sec_delivery_period">
+                            <SectionHeader :title="tab.periodTitle" />
+                            <ul class="list_dotted">
+                                <li v-for="(item, pi) in tab.periodItems" :key="pi">
+                                    <p>{{ item.text }}</p>
+                                </li>
+                            </ul>
+                        </section>
+                        <section v-if="tab.noticeItems && tab.noticeItems.length" class="sec_delivery_notice">
+                            <SectionHeader :title="tab.noticeTitle" />
+                            <Steps type="2" :items="tab.noticeItems" />
+                        </section>
+                        <section v-if="tab.chargeItems && tab.chargeItems.length" class="sec_delivery_charge">
+                            <SectionHeader :title="tab.chargeTitle" />
+                            <ul class="list_dotted">
+                                <li v-for="(item, ii) in tab.chargeItems" :key="ii">
+                                    <p>{{ item.text }}</p>
+                                </li>
+                            </ul>
+                        </section>
+                        <section v-if="tab.methodItems && tab.methodItems.length" class="sec_delivery_method">
+                            <SectionHeader :title="tab.methodTitle" />
+                            <ul class="list_dotted">
+                                <li v-for="(item, ii) in tab.methodItems" :key="ii">
+                                    <p>{{ item.text }}</p>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </template>
+            </div>
         </div>
-
-        <!-- 공공요금수납 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel">
-
-        </div>
-
-        <!-- 상품권 판매 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
-        </div>
-
         <div class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
         </div>
@@ -734,11 +833,14 @@ import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 /* 매장/서비스 이미지 */
 import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
 import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";
+import imgHero7 from "@/assets/images/dummy/brand_bg_08.png"; 
+import imgHero8 from "@/assets/images/dummy/brand_bg_09.png"; 
+import imgHero9 from "@/assets/images/dummy/brand_bg_10.png"; 
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
 import imgPoint1 from "@/assets/images/dummy/point_01.png";
-import imgPoint2 from "@/assets/images/dummy/point_02.png";
+import imgPoint2 from "@/assets/images/dummy/point_02.png"; 
 import imgPoint3 from "@/assets/images/dummy/point_03.png";
 import imgPoint4 from "@/assets/images/dummy/point_04.png";
 import imgTransService1 from "@/assets/images/dummy/transportation_service_01.png";
@@ -1447,11 +1549,190 @@ const langData = {
                 ],
             },
             {
-                hero: null,
-                heroAlt: "",
-                title: "택배&픽업",
+                hero:     null,
+                heroAlt:  "",
+                title:    "택배&픽업",
                 subtitle: "",
                 sections: [],
+                serviceTabs: [
+                    {
+                        label:   "국내택배",
+                        hero:  imgHero7,
+                        heroAlt: "",
+                        title:   "국내택배 서비스",
+                        desc:    "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
+                        notes: [
+                            {
+                                text: "중량 측정을 통한 합리적인 운임을 제공합니다. (최저 3,400원)",
+                                sub:  "*25년 4월1일부로 변경",
+                            },
+                            {
+                                text: "접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.",
+                            },
+                            {
+                                text: "GS포스트박스 회원으로 접수 시 다양한 이벤트에 참여 가능하며, 사용량에 따라 등급 별 혜택을 제공합니다.",
+                            },
+                        ],
+                        stepTitle: "국내택배 서비스",
+                        steps: [
+                            { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약" },
+                            { step: "Step 2", title: "홈페이지/모바일APP<br />택배접수 예약" },
+                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" },
+                            { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관" },
+                        ],
+                        cautionTitle: "국내택배 유의사항",
+                        cautionItems: [
+                            {
+                                // icon: imgCautionSize,
+                                icon:    null,
+                                iconAlt: "사이즈 아이콘",
+                                title:   "사이즈",
+                                desc:    "가로 세로 높이의 합 160cm 이내<br />한변의 길이가 1m 이내",
+                            },
+                            {
+                                // icon: imgCautionWeight,
+                                icon:    null,
+                                iconAlt: "중량 아이콘",
+                                title:   "중량",
+                                desc:    "20kg 이하",
+                            },
+                            {
+                                // icon: imgCautionPrice,
+                                icon:    null,
+                                iconAlt: "물품가액 아이콘",
+                                title:   "물품가액",
+                                desc:    "50만원 이하",
+                            },
+                        ],
+                        priceTitle: "국내택배 이용요금",
+                        priceItems: [
+                            {
+                                text: "최저 3,400원부터 중량 및 거리에 따라 요금 적용",
+                                subs: [
+                                    "동일권/타권/제주권에 따라 다름",
+                                    "서신/서류는 우편법 규정에 의거하여 운임산정",
+                                ],
+                            },
+                            { text: "착불 시 착불수수료(300원) 부과" },
+                            { text: "도서지역으로 배송 시 4,000원 부과" },
+                            { text: "고액상품(50만원 초과) 배송시 2,500원 부과" },
+                        ],
+                        periodTitle: "국내택배 이용기간",
+                        periodItems: [
+                            { text: "평일 17시(시,군,구 일부지역 및 경기 일부지역 15시), 토요일 12시 이전 접수 시 익일 배송" },
+                            { text: "일요일 및 공휴일은 접수만 가능" },
+                            { text: "점포 별로 마감시간이 다를 수 있음" },
+                        ],
+                    },
+                    {
+                        label: "반값택배",
+                        hero: imgHero8,
+                        heroAlt: "",
+                        title: "반값택배 서비스",
+                        desc: "편의점 최초! 국내유일 공휴일 배송! 최저가택배 GS25에서 보내고 GS25에서 받아보세요.",
+                        notes: [
+                            {
+                                text: "편의점 최초! 편의점에서 접수하고 편의점에서 수령 가능합니다.",
+                            },
+                            {
+                                text: "거리에 상관없이 무게에 따라 이용 가능합니다.",
+                            },
+                            {
+                                text: "접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.",
+                            },
+                        ],
+                        stepTitle: "반값택배 이용 방법",
+                        steps: [
+                            { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약", bullets: ["수령점포 선택 입력"] },
+                            { step: "Step 2", title: "물품 포장 후<br />GS25 방문", bullets: ["세부 내용 작성", "세부 내용 작성", "<span style=\"color: #fb6432;\">특이사항 기재시 컬러</span>"] },
+                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" },
+                            { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관" },
+                        ],
+                        priceTable: {
+                            title: "반값택배 이용요금",
+                            desc:  "운임 결제는 선불만 가능",
+                            note:  "향후 지속 확대예정",
+                            columns: ["구분", "내륙↔내륙 / 제주↔제주", "제주↔내륙 / 내륙↔도서"],
+                            rows: [
+                                {
+                                    cells: [
+                                        "이용요금",
+                                        "~500g: 1,900원<br />~1kg: 2,300원<br />~5kg: 2,700원",
+                                        "~500g: 3,600원<br />~1kg: 4,000원<br />~5kg: 4,400원",
+                                    ],
+                                },
+                            ],
+                        },
+                        infoTable: {
+                            title: "반값택배 이용안내",
+                            rows: [
+                                { head: "예약방법",    text: "반값택배 예약 시 도착점을 GS25 편의점으로 선택" },
+                                { head: "서비스 지역", text: "GS25 ↔ GS25" },
+                                { head: "수령방법",    text: "점포 근무자에게 알림톡으로 전송된 QR코드 제시" },
+                                { head: "배송기간",    text: "내륙~내륙, 제주~제주 : 접수일포함 4일 이내, 동일권역 2~3일 이내<br />제주↔내륙 : 접수일 포함 5~7일 내 *주말/공휴일 배송 가능<br />*내륙↔제주 간 반값택배는 접수일 포함 7일 이내 배송 완료 됩니다.<br />*기상 상황으로 선박 운행이 불가하거나, 선박운행 스케줄 변동으로 배송소요일이 추가될 수 있습니다." },
+                            ],
+                        },
+                        cautionTitle: "반값택배 유의사항",
+                        cautionItems: [
+                            { icon: null, iconAlt: "마감시간 아이콘",   title: "마감시간",          desc: "당일 수거 마감시간 오전 09시" },
+                            { icon: null, iconAlt: "규격 아이콘",       title: "규격 초과 시 수거 불가", desc: "세변의 합 80cm 이내" },
+                            { icon: null, iconAlt: "중량 아이콘",       title: "중량",              desc: "5kg 이하" },
+                            { icon: null, iconAlt: "물품가액 아이콘",   title: "물품가액",          desc: "50만원 이하" },
+                        ],
+                    },
+                    {
+                        label: "국제택배",
+                        hero:    imgHero9,
+                        heroAlt: "",
+                        title: "국제택배 서비스",
+                        desc: "365일 24시간 가까운 GS25에서 국제택배 접수가 가능 합니다. (SFExpress, 우체국EMS, DHL)",
+                        notes: [
+                            {
+                                text: "GS25 편의점에서 24시간 국제택배 예약/접수가 가능합니다.",
+                            },
+                            {
+                                text: "예약 시 특송사(SF Express, EMS, DHL)를 선택하여 접수 가능합니다.",
+                            },
+                            {
+                                text: "접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.",
+                            },
+                        ],
+                        noticeTitle:"국제택배 이용방법",
+                        noticeItems: [
+                            { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약", bullets: ["회원, 영문작성"] },
+                            { step: "Step 2", title: "물품 포장 후<br />GS25 방문",          bullets: ["세부 내용 작성", "세부 내용 작성", "<span style=\"color: #fb6432;\">특이사항 기재시 컬러</span>"] },
+                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)"},
+                            { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관"},
+                        ],
+                        chargeTitle: "국제택배 이용요금 및 배송 가능 국가",
+                        chargeItems: [
+                            { text: "서비스 운임 및 배송가능 국가는 각 특송사 별 상이하며, 홈페이지/모바일 APP 예약 시 운임 조회 가능" },
+                            { text: "운임 결제는 선불만 가능" },
+                            { text: "점포 별로 마감시간이 다를 수 있음" },
+                        ],
+                        methodTitle: "국제택배 배송방법",
+                        methodItems: [
+                            { text: "평일 17시(시,군,구 일부지역 및 경기 일부지역 15시), 토요일 12시 이전 접수 시 CJ대한통운 택배를 통해 수거 되며, 익일 각 특송사에 접수되어 해외로 발송" },
+                            { text: "일요일 및 공휴일은 접수만 가능" },
+                            { text: "점포 별로 마감시간이 다를 수 있음" },
+                        ],
+                    },
+                    {
+                        label: "픽업",
+                        hero:    null,
+                        heroAlt: "",
+                        title: "국제택배 서비스",
+                        desc: "365일 24시간 가까운 GS25에서 국제택배 접수가 가능 합니다. (SFExpress, 우체국EMS, DHL)",
+                    },
+                    {
+                        label: "쇼핑몰거래",
+                        hero:    null,
+                        heroAlt: "",
+                        title: "픽업 서비스",
+                        desc: "쇼핑몰에서 상품주문 후, 가까운 GS25에서 물건을 찾아가세요.",
+                    },
+
+                ],
             },
             {
                 hero: null,
@@ -1497,7 +1778,8 @@ const onGiftSwiper = (swiper) => {
 };
 const onGiftSlideChange = (swiper) => updateGiftNavState(swiper);
 const onGiftBreakpoint = (swiper) => updateGiftNavState(swiper);
-const serviceActiveTab = ref(0);
+const serviceActiveTab  = ref(0);
+const deliveryActiveTab = ref(0);
 
 watch(serviceActiveTab, (idx) => {
     if (idx === 3 && giftSwiperInst.value) {
@@ -1558,6 +1840,33 @@ function goBack() {
 </script>
 
 <style scoped>
+
+.list_dotted > li {
+    padding-left: 12px;
+    position: relative;
+}
+
+.list_dotted > li + li {
+    margin-top: 8px;
+}
+
+.list_dotted > li::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    background-color: #161616;
+    border-radius: 50%;
+    position: absolute;
+    top: 11px;
+    left: 0;
+}
+
+.list_dotted > li > p {
+    margin: 0;
+    color: #161616;
+    font-size: 1.8rem;
+    line-height: 1.4;
+}
 img {
     width: 100%;
     display: block;
@@ -1748,14 +2057,6 @@ button {
     border-right: 0;
 }
 
-.cafe25_table th:first-child {
-    border-radius: 10px 0 0 0;
-}
-
-.cafe25_table th:last-child {
-    border-radius: 0 10px 0 0;
-}
-
 .cafe25_table th {
     font-weight: 600;
     background-color: #f8f8f8;
@@ -1780,7 +2081,6 @@ button {
     grid-template-columns: repeat(3, calc((100% - 40px) / 3));
     gap: 20px;
 }
-
 .chicken25_card_list > li {
     min-width: 0;
 }
@@ -1811,7 +2111,7 @@ button {
 }
 
 .chicken25_img_grid {
-    margin-bottom: 40px;
+    margin-top: 120px;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, calc((100% - 20px) / 2));
@@ -1911,58 +2211,50 @@ button {
     display: inline-block;
 }
 
-.gopizza_table_wrap {
+/* ── 공통 테이블 ── */
+.com_table_wrap {
     overflow-x: auto;
 }
 
-.gopizza_table {
+.com_table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    border-top: 1px solid #e5e5e9;
 }
 
-.gopizza_table th,
-.gopizza_table td {
-    padding: 0 16px;
-    border-bottom: 1px solid #e5e5e9;
-}
-
-.gopizza_table th:first-child,
-.gopizza_table td:first-child {
-    border-left: 0;
-}
-
-.gopizza_table th:last-child,
-.gopizza_table td:last-child {
-    border-right: 0;
-}
-
-.gopizza_table th:first-child {
-    border-radius: 10px 0 0 0;
-}
-
-.gopizza_table th:last-child {
-    border-radius: 0 10px 0 0;
-}
-
-.gopizza_table thead th {
-    height: 64px;
+.com_table th,
+.com_table td {
+    padding: 0 24px;
     color: #161618;
     font-size: 1.8rem;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-    background-color: #f8f8f8;
-    border-top: 0;
-}
-
-.gopizza_table tbody td {
-    height: 64px;
-    color: #161618;
-    font-size: 1.8rem;
-    font-weight: 400;
     line-height: 1.6;
     letter-spacing: -0.01em;
+    border-bottom: 1px solid #e5e5e9;
+    vertical-align: middle;
+}
+
+.com_table thead th {
+    height: 64px;
+    font-weight: 600;
+    background-color: #f8f8f8;
+}
+
+.com_table tbody th {
+    font-weight: 700;
+    background-color: #f8f8f8;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.com_table tbody td {
+    padding: 18px 24px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.com_table_col thead th,
+.com_table_col tbody td {
+    text-align: center;
 }
 
 .gopizza_menu_name {
@@ -2141,23 +2433,21 @@ button {
 /* ── 생활 서비스 3depth 탭 ── */
 .service_tab_wrap {
     margin-bottom: 80px;
-    border-radius: 12px;
+    min-width: 0;
     display: flex;
     overflow-x: auto;
 }
 
 .service_tab_item {
-    min-width: 177.5px;
-    padding: 24px 8px;
+    padding: 24px 0;
     background-color: transparent;
     border: none;
-    border-radius: 8px;
     cursor: pointer;
-    flex: 1;
+    flex: 0 0 max(177.5px, calc(100% / 8));
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
 }
 
 .service_tab_icon {
@@ -2175,10 +2465,9 @@ button {
 
 .service_tab_label {
     color: #7c7c86;
-    font-size: 1.8rem;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
+    font-size: 1.8rem; 
+    font-weight: 700;
+    line-height: 1.5;
     text-align: center;
     white-space: pre-line;
 }
@@ -2465,12 +2754,133 @@ button {
     letter-spacing: -0.01em;
 }
 
+/* ── 택배&픽업 — 안내 목록 ── */
+.delivery_note_list {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.delivery_note_list > li {
+    padding-left: 12px;
+    position: relative;
+}
+
+.delivery_note_list > li + li {
+    margin-top: 8px;
+}
+
+.delivery_note_list > li::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    background-color: #67676f;
+    border-radius: 50%;
+    position: absolute;
+    top: 11px;
+    left: 0;
+}
+
+.delivery_note_list > li > p {
+    margin: 0;
+    color: #67676f;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.delivery_note_sub {
+    color: #f95823;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+.delivery_note_list > li > p.delivery_note_sub{
+    color: #f95823;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+/* ── 택배&픽업 — 이용요금 테이블 ── */
+.price_table_note {
+    margin: 4px 0 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+}
+
+
+/* ── 택배&픽업 — 이용요금 ── */
+.delivery_price_box {
+    max-width: 940px;
+    padding: 32px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+}
+
+.delivery_price_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.delivery_price_list > li {
+    padding-left: 28px;
+    position: relative;
+}
+
+.delivery_price_list > li + li {
+    margin-top: 16px;
+}
+
+.delivery_price_list > li::before {
+    content: "";
+    width: 5px;
+    height: 10px;
+    border-right: 2px solid #107af2;
+    border-bottom: 2px solid #107af2;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    transform: rotate(45deg);
+    display: block;
+}
+
+.delivery_price_list > li > p {
+    margin: 0;
+    color: #161616;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.delivery_price_subs {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.delivery_price_subs > li {
+    color: #67676f;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
 /* ── 고속도로 미납 통행료 납부 · 온라인몰 편의점 결제 공통 ── */
 .sec_unpaid_advantage :deep(.feature_card_item),
 .sec_mall_payment_advantage :deep(.feature_card_item) {
     min-height: 260px;
 }
 
+.sec_delivery_caution :deep(.feature_card_item){
+    min-height: 235px;
+}
+
+.sec_delivery_caution :deep(.feature_card_item){
+    min-height: 216px;
+}
 :deep(.txt_point) {
     color: #fb6432;
 }
@@ -2556,43 +2966,6 @@ button {
 }
 
 /* ── 편의점캐시 테이블 ── */
-.cash_table {
-    width: 100%;
-    border-collapse: collapse;
-    border-top: 1px solid #e5e5e9;
-}
-
-.cash_table th,
-.cash_table td {
-    color: #161618;
-    border-bottom: 1px solid #e5e5e9;
-    vertical-align: middle;
-}
-
-.cash_table th {
-    width: 200px;
-    padding: 0 24px;
-    color: #161618;
-    font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-    background-color: #f8f8f8;
-    text-align: left;
-    white-space: nowrap;
-}
-
-.cash_table th span,
-.cash_table td span {
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-}
-
-.cash_table td {
-    padding: 18px 24px;
-}
 
 .cash_table_cell {
     display: flex;
@@ -3131,8 +3504,8 @@ button {
     }
 
     .service_tab_item {
-        min-width: 120px;
         padding: 16px 8px;
+        flex: 0 0 120px;
     }
 
     .pop_wrap {
