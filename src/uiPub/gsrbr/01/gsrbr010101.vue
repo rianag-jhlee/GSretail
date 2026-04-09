@@ -592,6 +592,19 @@
                     </section>
                 </template>
 
+                <!-- 고속도로 미납 통행료 납부 패널 -->
+                <template v-else-if="i === 6">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <section class="sec_unpaid_advantage">
+                        <SectionHeader :title="tab.serviceTitle" :desc="tab.serviceDesc" />
+                        <FeatureCards :items="tab.serviceAdvantages" />
+                    </section>
+                    <section class="sec_unpaid_method">
+                        <SectionHeader :title="tab.unpaidTitle" />
+                        <Steps type="2" :items="tab.unpaidSteps" />
+                    </section>
+                </template>
+
                 <!-- 그 외 패널: 기본 구조 -->
                 <template v-else>
                     <section>
@@ -1315,7 +1328,35 @@ const langData = {
                         hero:    null,
                         heroAlt: "",
                         title:   "고속도로 미납 통행료 납부",
-                        desc:    "",
+                        desc:    "국내편의점 중 최초로 고속도로 미납통행료 실시간 조회 및 납부할 수 있는 서비스입니다.",
+                        serviceTitle: "서비스 장점",
+                        serviceDesc:
+                            "이제 팝 하세요! 다양한 결제 수단과 결합하여 혜택은 더 크게, 소비는 더 합리적으로, 사용은 더 편리하게 할 수 있도록 팝카드만의 차별화된 서비스를 제공합니다.",
+                        serviceAdvantages: [
+                            {
+                                num:   "01",
+                                title: "전국 GS25 편의점에서\n차량번호만으로 편리하게 납부 가능",
+                                desc:  "서비스 시행 : 2019.08.23부터",
+                            },
+                            {
+                                num:   "02",
+                                title: "미납통행료\n실시간 납부",
+                                desc:  "*법인 차량은 추후 서비스 예정",
+                            },
+                            {
+                                num:   "03",
+                                title: "현금, 신용카드로\n납부 가능",
+                                desc:  "현금이든 신용카드든 편의에 따라 납부 가능",
+                            },
+                        ],
+                        unpaidTitle: "고속도로 미납통행료 납부 방법",
+                        unpaidSteps: [
+                            { step: "Step 1", title: "GS25 편의점에게<br />납부요청" },
+                            { step: "Step 2", title: "차량번호 입력" },
+                            { step: "Step 3", title: "개인정보제공동의" },
+                            { step: "Step 4", title: "생년월일 입력" },
+                            { step: "Step 5", title: "결제(현금/신용카드)" },
+                        ],
                     },
                     {
                         label:   "온라인몰\n편의점 결제",
@@ -2343,6 +2384,11 @@ button {
     font-size: 1.8rem;
     line-height: 1.4;
     letter-spacing: -0.01em;
+}
+
+/* ── 고속도로 미납 통행료 납부 ── */
+.sec_unpaid_advantage :deep(.feature_card_item) {
+    min-height: 215px;
 }
 
 /* ── 편의점캐시 테이블 ── */
