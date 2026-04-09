@@ -3,14 +3,19 @@ import { defineProps } from "vue";
 
 defineProps({
     items: { type: Array, default: () => [] },
-    // [{ num: "01", title: "...", desc: "..." }]
+    // type="num"  (기본): [{ num: "01", title: "...", desc: "..." }]
+    // type="icon"        : [{ icon: imgSrc, iconAlt: "...", title: "...", desc: "..." }]
+    type: { type: String, default: "num" },
 });
 </script>
 
 <template>
     <ul class="feature_card_list">
         <li v-for="(item, i) in items" :key="i" class="feature_card_item">
-            <em class="feature_card_num">{{ item.num }}</em>
+            <em v-if="type === 'num'" class="feature_card_num">{{ item.num }}</em>
+            <figure v-else-if="type === 'icon'" class="feature_card_icon">
+                <img v-if="item.icon" :src="item.icon" :alt="item.iconAlt || ''" />
+            </figure>
             <strong class="feature_card_title">{{ item.title }}</strong>
             <p class="feature_card_desc" v-html="item.desc"></p>
         </li>
@@ -44,6 +49,20 @@ defineProps({
     font-style: normal;
     letter-spacing: -0.01em;
     display: block;
+}
+
+.feature_card_icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    background-color: #d7d7df;
+    border-radius: 8px;
+}
+
+.feature_card_icon > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .feature_card_title {
