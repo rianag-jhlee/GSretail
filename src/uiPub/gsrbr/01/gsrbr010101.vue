@@ -678,7 +678,7 @@
                     <span class="service_tab_label">{{ tab.label }}</span>
                 </button>
             </nav>
-            <div class="service_panel_wrap">
+            <div>
                 <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
                     <div v-show="deliveryActiveTab === i" class="service_panel">
                         <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc">
@@ -783,6 +783,33 @@
                     </div>
                 </template>
             </div>
+        </div>
+
+        <!-- 공공요금수납 -->
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel">
+            <PanelHeader
+                :hero="store.tabs[2].hero"
+                :hero-alt="store.tabs[2].heroAlt"
+                :title="store.tabs[2].title"
+                :subtitle="store.tabs[2].desc"
+            >
+                <p class="brand_panel_desc">지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.
+                    기존지로 납부 외 휴대폰을 통한 모바일수납도 가능하며,납부공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부가능합니다.</p>
+            </PanelHeader>
+            <section v-if="store.tabs[2].taxGroups && store.tabs[2].taxGroups.length" class="sec_tax_list">
+                <SectionHeader :title="store.tabs[2].taxTitle" />
+                <div class="tax_group_list">
+                    <div v-for="(group, gi) in store.tabs[2].taxGroups" :key="gi" class="tax_group">
+                        <h4 class="tax_group_subtitle">{{ group.subtitle }}</h4>
+                        <ul v-if="group.isList" class="list_dotted">
+                            <li v-for="(item, ii) in group.items" :key="ii"><p>{{ item }}</p></li>
+                        </ul>
+                        <template v-else>
+                            <p v-for="(item, ii) in group.items" :key="ii" class="tax_group_desc">{{ item }}</p>
+                        </template>
+                    </div>
+                </div>
+            </section>
         </div>
         <div class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
@@ -1777,8 +1804,33 @@ const langData = {
                 hero: null,
                 heroAlt: "",
                 title: "공공요금수납",
-                subtitle: "",
+                subtitle: "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
+                desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.",
                 sections: [],
+                taxTitle: "납부가능 세금 및 공과금",
+                taxGroups: [
+                    {
+                        subtitle: "세금",
+                        isList: true,
+                        items: [
+                            "국세(소득세, 법인세, 부가세, 상속세, 증여세, 개별소비세, 종합부동산세)",
+                            "서울, 부산시지방세(취득세, 등록세, 재산세, 자동차세, 주민세, 상하수도요금 버스정용차선위반벌칙금 등)",
+                            "기타 지방세(남양, 안양, 안산, 고양, 과천부, 양주, 동두천, 마주, 충전, 제천, 보령시 및 음성군 - 취득세, 등록세, 재산세, 주민세, 자동차세 등)",
+                        ],
+                    },
+                    {
+                        subtitle: "4대보험료",
+                        items: [
+                            "건강보험, 국민연금, 고용보험, 산재보험(사회보험통합 4대보험료)",
+                        ],
+                    },
+                    {
+                        subtitle: "공과금",
+                        items: [
+                            "전기요금, 도시가스요금(서울, 삼천리, 서라벨, 인천, 강남, 경동도시가스), 통신요금(kt, LGU+, SKT), 케이블TV요금(현대HCN, 티브로드, C&M, CMB, 스카이라이프, 아름방송, 충북방송, 남인천방송, 금강방송, 무료방송 등), 신문료(조선일보, 매일경제신문), 한국도로공사 과태료 등",
+                        ],
+                    },
+                ],
             },
             {
                 hero: null,
@@ -1879,7 +1931,13 @@ function goBack() {
 </script>
 
 <style scoped>
-
+.brand_panel_desc {
+    margin-top: 16px;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color:#67676F;
+}
 .list_dotted > li {
     padding-left: 12px;
     position: relative;
@@ -3637,6 +3695,40 @@ button {
 
     .gift_purchase_steps {
         width: 100%;
+    }
+}
+
+/* 공공요금수납 납부가능 세금 및 공과금 */
+.tax_group_list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.tax_group_list .list_dotted > li p{
+    color:#67676F;
+}
+.tax_group_subtitle {
+    margin-bottom: 16px;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #161616;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.tax_group_desc {
+    font-size: 1.8rem;
+    color: #67676f;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .sec_tax_list {
+        margin-top: 40px;
+    }
+
+    .tax_group_subtitle {
+        font-size: 2rem;
     }
 }
 </style>
