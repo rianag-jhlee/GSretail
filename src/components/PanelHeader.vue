@@ -6,6 +6,7 @@
     <header v-if="title" class="brand_panel_title">
         <h2>{{ title }}</h2>
         <p v-if="subtitle" v-html="subtitle" />
+        <slot />
     </header>
 </template>
 
@@ -58,7 +59,7 @@ img {
     margin: 0;
     color: #161618;
     font-size: 2.4rem;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.01em;
 }
