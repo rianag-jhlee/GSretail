@@ -370,7 +370,7 @@
                                     <ul class="traffic_bullet_list">
                                         <li v-for="(item, bi) in tab.trafficExpressBus.bullets" :key="bi">{{ item }}</li>
                                     </ul>
-                                    <ul class="traffic_logo_list">
+                                    <ul class="retail_logo_list">
                                         <li v-for="(logo, li) in tab.trafficExpressBus.logos" :key="li">
                                             <img :src="logo" :alt="tab.trafficExpressBus.bullets[li]" />
                                         </li>
@@ -913,14 +913,14 @@ import imgTransService1 from "@/assets/images/dummy/transportation_service_01.pn
 import imgTransService2 from "@/assets/images/dummy/transportation_service_02.png";
 import imgTransService3 from "@/assets/images/dummy/transportation_service_03.png";
 import imgTransService4 from "@/assets/images/dummy/transportation_service_04.png";
-import imgBus1 from "@/assets/images/dummy/bus_01.png";
-import imgBus2 from "@/assets/images/dummy/bus_02.png";
-import imgBus3 from "@/assets/images/dummy/bus_03.png";
-import imgBus4 from "@/assets/images/dummy/bus_04.png";
-import imgBus5 from "@/assets/images/dummy/bus_05.png";
-import imgBus6 from "@/assets/images/dummy/bus_06.png";
-import imgBus7 from "@/assets/images/dummy/bus_07.png";
-import imgBus8 from "@/assets/images/dummy/bus_08.png";
+import imgBus1 from "@/assets/images/dummy/express_bus_01.png";
+import imgBus2 from "@/assets/images/dummy/express_bus_02.png";
+import imgBus3 from "@/assets/images/dummy/express_bus_03.png";
+import imgBus4 from "@/assets/images/dummy/express_bus_04.png";
+import imgBus5 from "@/assets/images/dummy/express_bus_05.png";
+import imgBus6 from "@/assets/images/dummy/express_bus_06.png";
+import imgBus7 from "@/assets/images/dummy/express_bus_07.png";
+import imgBus8 from "@/assets/images/dummy/express_bus_08.png";
 import imgBrandUsage1 from "@/assets/images/dummy/brand_usage_01.png";
 import imgBrandUsage2 from "@/assets/images/dummy/brand_usage_02.png";
 import imgBrandUsage3 from "@/assets/images/dummy/brand_usage_03.png";
@@ -2541,7 +2541,10 @@ button {
     background-color: #f8f8f8;
     border-radius: 12px;
 }
-
+.sinsen_card span{
+font-size: 1.8rem;
+line-height: 1.4;
+}
 .sinsen_card > p {
     margin-bottom: 32px;
     color: #67676f;
@@ -2738,15 +2741,20 @@ button {
 }
 
 .charging_service_item {
+    max-width: 220px;
+    aspect-ratio: 1 / 1;
     border-radius: 12px;
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #F8F8F8;
 }
 
 .charging_service_item > img {
-    width: 100%;
+    max-width: 80%;
+    max-height: 80%;
+    width: auto;
     height: auto;
     display: block;
 }
@@ -2821,26 +2829,6 @@ button {
     transform: translateY(-50%);
 }
 
-.traffic_logo_list {
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.traffic_logo_list > li {
-    width: calc(100% / 8);
-    height: 56px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.traffic_logo_list > li > img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
 
 /* ── 유통 사용처 안내 (50:10253) ── */
 .retail_note {
@@ -2854,20 +2842,26 @@ button {
 .retail_logo_list {
     padding: 0;
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
+    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
 }
 
 .retail_logo_list > li {
-    width: calc(100% / 6);
     height: 56px;
-    overflow: hidden;
+    min-width: 0;
+    padding: 6px 12px;
+    border: 1px solid #e5e5e9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .retail_logo_list > li > img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    max-width: 100%;
+    width: auto;
+    height: auto;
     display: block;
 }
 
@@ -3578,16 +3572,17 @@ button {
         flex-direction: column;
     }
 
+    .charging_service_list {
+        flex-wrap: wrap;
+    }
+
     .charging_service_item {
+        max-width: none;
         flex: 1 1 calc((100% - 20px) / 2);
     }
 
-    .traffic_logo_list > li {
-        width: calc(100% / 4);
-    }
-
-    .retail_logo_list > li {
-        width: calc(100% / 3);
+    .retail_logo_list {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .gift_brand_nav {
@@ -3725,12 +3720,8 @@ button {
         gap: 12px;
     }
 
-    .traffic_logo_list > li {
-        width: calc(100% / 2);
-    }
-
-    .retail_logo_list > li {
-        width: calc(100% / 2);
+    .retail_logo_list {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .gift_brand_slider {
