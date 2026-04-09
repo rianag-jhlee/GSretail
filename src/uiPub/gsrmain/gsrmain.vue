@@ -1,10 +1,16 @@
 <template>
     <div class="content">
-        <div class="main_visual" :style="{ backgroundImage: 'url(' + t.mainVisual.img + ')' }">
-            <p class="main_copy">
-                <strong v-html="t.mainVisual.title"></strong>
-                <span>{{ t.mainVisual.sub }}</span>
-            </p>
+        <div class="main_visual">
+            <swiper class="mainSwiper" :modules="swiperModules" v-bind="visualOptions" @slideChange="onSlideChange">
+                <swiper-slide v-for="item in t.mainVisual.items" :key="item.img">
+                    <div class="slide" :style="{ backgroundImage: 'url(' + item.img + ')' }">
+                        <p class="main_copy">
+                            <strong v-html="item.title"></strong>
+                            <span>{{ item.sub }}</span>
+                        </p>
+                    </div>
+                </swiper-slide>
+            </swiper>
         </div>
 
         <section v-if="t.sec01" class="sec01">
@@ -110,23 +116,44 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay } from 'swiper/modules';
+import "swiper/css";
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default {
     name: "gsrmain",
     components: {
+        Swiper,
+        SwiperSlide
     },
     props: {
         lang: { type: String }, // ko/en
     },
     data() {
         return {
+            /* swiper */
+            swiperModules: [Autoplay],
+            visualOptions: {
+                loop: true,
+                slidesPerView: 1, // 메인 비주얼은 보통 1개씩 노출
+                speed: 800,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+            },
+            
+            /* language contents */
             langData: {
                 ko: {
                     mainVisual: {
-                        title: "Every Life.<br/> One Platform.",
-                        sub: "GS리테일",
-                        img: require("@/assets/images/dummy/main_visual.png"),
+                        items: [
+                            { title: "Every Life.<br/> One Platform.", sub: "GS리테일", img: require("@/assets/images/dummy/main_visual_01.png") },
+                            { title: "Every Life.<br/> One Platform.", sub: "GS리테일", img: require("@/assets/images/dummy/main_visual_02.png") },
+                            { title: "Every Life.<br/> One Platform.", sub: "GS리테일", img: require("@/assets/images/dummy/main_visual_03.png") }
+                        ]
                     },
 
                     sec01: {
@@ -184,7 +211,7 @@ export default {
                     mainVisual: {
                         title: "Every Life.<br/> One Platform.",
                         sub: "GS Retail",
-                        img: require("@/assets/images/dummy/main_visual.png"),
+                        img: require("@/assets/images/dummy/main_visual_01.png"),
                     }
                 }
             }
@@ -196,6 +223,7 @@ export default {
         }
     },
     mounted() {
+        
         /* scroll bind */
         this.handleScroll = this.handleScroll.bind(this);
         window.addEventListener("scroll", this.handleScroll);
@@ -209,6 +237,22 @@ export default {
     },
     methods: {
 
+        // 슬라이드가 변경될 때 실행되는 함수
+        onSlideChange(swiper) {
+            // swiper.realIndex는 loop: true일 때 실제 데이터 상의 인덱스를 가져옵니다.
+            this.activeIndex = swiper.realIndex;
+            
+            console.log("현재 슬라이드 인덱스:", this.activeIndex);
+
+            // 필요하다면 여기서 추가 로직 실행
+            // 예: 특정 슬라이드일 때 헤더 색상 강제 변경 등
+            /*
+            if (this.activeIndex === 1) {
+                document.getElementById("header").classList.add("white_mode");
+            }
+            */
+        },
+
         /* scroll 시 특정영역에서 header 로고 및 네비 컬러 변경 */
         handleScroll() {
             const header = document.getElementById("header");
@@ -221,9 +265,6 @@ export default {
             } else {
                 header.classList.remove("head_black");
             }
-
-            console.log('trigger : ', $('.sec02').offset().top);
-            console.log("scrollY:", window.scrollY);
         },
         /* //scroll 시 특정영역에서 header 로고 및 네비 컬러 변경 */
 
@@ -248,7 +289,7 @@ export default {
                 width: window.innerWidth,
                 height: "100vh",
                 borderRadius: 0,
-                top: 0,
+                top: "-200px",
                 bottom: "auto",
                 left: "50%",
                 x: "-50%",
@@ -280,16 +321,15 @@ export default {
 <style scope>
 h2 {font-size: 7.2rem; font-weight: 700; line-height: 124%; letter-spacing: -0.02em; text-align: center;}
 h2+.explain {font-size: 2rem; line-height: 150%; letter-spacing: -0.02em;}
+.main_visual {width:100%; position:sticky; top:0; overflow:hidden;}
+.main_visual .slide {height: 100vh; padding: 60px 120px; background-position: 50%; background-size: cover; display: flex; align-items: center;}
+.main_copy strong {color: #fff; font-size: 8rem; line-height: 1.2; text-align: center;}
+.main_copy span {margin-top: 20px; color: #fff; font-size: 4rem; display: block;}
 
-.main_visual {height: 100vh; padding: 60px 120px; background-position: 50%; background-size: cover; position: sticky; top: 0; z-index: -1; display: flex; align-items: center;}
-.main_visual * {color: #fff;}
-.main_visual .main_copy strong {font-size: 8rem; line-height: 124%; letter-spacing: -0.02em; display: block;}
-.main_visual .main_copy span {margin-top: 24px; font-size: 4rem; font-weight: 600; line-height: 130%; letter-spacing: -0.02em; display: block;}
+section {padding: 200px 0; background-color: #fff; position:relative; z-index:1;}
 
-section {padding: 200px 0; background-color: #fff;}
-
-.sec01 {padding:0;}
-.sec01 .inner {width:100%; max-width:1720px; height:100vh; margin:0 auto; padding:200px 20px 20px; position:relative; display: flex; align-items:flex-end; justify-content:flex-end;}
+.sec01 {height:100vh; padding:200px 20px 20px; overflow:hidden;}
+.sec01 .inner {width:100%; max-width:1720px; margin:0 auto; position:relative; display: flex; justify-content:flex-end;}
 .sec01 h2 {text-align: left;}
 .sec01 .explain {margin-top: 80px; margin-bottom: 60px;}
 .sec01 ul {border-top: 1px solid #000;}
