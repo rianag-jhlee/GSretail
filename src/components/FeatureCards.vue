@@ -40,7 +40,7 @@ defineProps({
     margin-bottom: 8px;
     color: #107af2;
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: 700;
     font-style: normal;
     letter-spacing: -0.01em;
     display: block;
