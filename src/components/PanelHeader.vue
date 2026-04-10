@@ -5,7 +5,7 @@
 
     <header v-if="title" class="brand_panel_title">
         <h2>{{ title }}</h2>
-        <p v-if="subtitle" v-html="subtitle" />
+        <p v-if="desc" v-html="desc" />
         <slot />
     </header>
 </template>
@@ -17,7 +17,7 @@ defineProps({
     hero:    { type: String, default: null },
     heroAlt: { type: String, default: "" },
     title:   { type: String, default: "" },
-    subtitle:{ type: String, default: "" },
+    desc:    { type: String, default: "" },
     heroBg:  { type: String, default: "" },
 });
 </script>
