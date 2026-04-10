@@ -353,25 +353,25 @@
 
                             <!-- 교통 사용처 안내 -->
                             <section id="pop-sec-1" data-pop-sec="1" class="pop_sec">
-                                <div class="traffic_sec_header">
+                                <div class="usage_header">
                                     <SectionHeader :title="tab.lnbItems[1]" />
                                     <SelectBox
-                                        class="traffic_select_box"
+                                        class="usage_select_box"
                                         v-model="trafficSelectVal"
                                         :options="tab.trafficSelectOptions"
                                         initMsg="선택하세요"
                                     />
                                 </div>
 
-                                <!-- 고속버스 -->
-                                <div v-if="trafficSelectVal === 'express'" class="traffic_group">
-                                    <h4 class="traffic_group_title">{{ tab.trafficExpressBus.title }}</h4>
-                                    <ul class="traffic_bullet_list">
-                                        <li v-for="(item, bi) in tab.trafficExpressBus.bullets" :key="bi">{{ item }}</li>
+                                <div v-if="trafficSelectVal && tab.trafficOptions[trafficSelectVal]" class="usage_group">
+                                    <h4 class="usage_group_title">{{ tab.trafficOptions[trafficSelectVal].title }}</h4>
+                                    <ul v-if="trafficSelectVal !== 'express' && tab.trafficOptions[trafficSelectVal].bullets?.length" class="list_dotted">
+                                        <li v-for="(item, bi) in tab.trafficOptions[trafficSelectVal].bullets" :key="bi">{{ item }}</li>
                                     </ul>
-                                    <ul class="retail_logo_list">
-                                        <li v-for="(logo, li) in tab.trafficExpressBus.logos" :key="li">
-                                            <img :src="logo" :alt="tab.trafficExpressBus.bullets[li]" />
+                                    <!-- 고속버스일 때만 로고 표시 -->
+                                    <ul v-if="trafficSelectVal === 'express'" class="logo_list">
+                                        <li v-for="(logo, li) in tab.trafficOptions[trafficSelectVal].logos" :key="li">
+                                            <img :src="logo" :alt="tab.trafficOptions[trafficSelectVal].bullets[li]" />
                                         </li>
                                     </ul>
                                 </div>
@@ -379,25 +379,38 @@
 
                             <!-- 유통 사용처 안내 -->
                             <section id="pop-sec-2" data-pop-sec="2" class="pop_sec">
-                                <div class="traffic_sec_header">
+                                <div class="usage_header">
                                     <SectionHeader :title="tab.lnbItems[2]" />
                                     <SelectBox
-                                        class="traffic_select_box"
+                                        class="usage_select_box"
                                         v-model="retailSelectVal"
                                         :options="tab.retailSelectOptions"
                                         initMsg="선택하세요"
                                     />
                                 </div>
 
-                                <!-- 커피/아이스크림 -->
-                                <div v-if="retailSelectVal === 'coffee'" class="traffic_group">
-                                    <h4 class="traffic_group_title">{{ tab.retailCoffee.title }}</h4>
-                                    <p class="retail_note">{{ tab.retailCoffee.note }}</p>
-                                    <ul class="retail_logo_list">
-                                        <li v-for="(logo, ri) in tab.retailCoffee.logos" :key="ri">
-                                            <img :src="logo" :alt="tab.retailCoffee.brands[ri]" />
+                                <div v-if="retailSelectVal && tab.retailOptions[retailSelectVal]" class="usage_group">
+                                    <h4 class="usage_group_title">{{ tab.retailOptions[retailSelectVal].title }}</h4>
+                                    <p v-if="tab.retailOptions[retailSelectVal].note" class="retail_note">{{ tab.retailOptions[retailSelectVal].note }}</p>
+                                    <!-- 로고 그리드 -->
+                                    <ul v-if="tab.retailOptions[retailSelectVal].items" class="logo_list">
+                                        <li v-for="(item, ri) in tab.retailOptions[retailSelectVal].items" :key="ri">
+                                            <img v-if="item.logo" :src="item.logo" :alt="item.brand" />
+                                            <span v-else class="logo_placeholder"></span>
                                         </li>
                                     </ul>
+                                    <!-- 텍스트 목록 -->
+                                    <ul v-else-if="tab.retailOptions[retailSelectVal].bullets?.length && !tab.retailOptions[retailSelectVal].bullets[0]?.dt" class="list_dotted">
+                                        <li v-for="(bullet, bi) in tab.retailOptions[retailSelectVal].bullets" :key="bi">{{ bullet }}</li>
+                                    </ul>
+                                    <!-- 정의 목록 (dt/dd) -->
+                                    <dl v-else-if="tab.retailOptions[retailSelectVal].bullets?.length" class="usage_def_list">
+                                        <template v-for="(bullet, bi) in tab.retailOptions[retailSelectVal].bullets" :key="bi">
+                                            <dt>{{ bullet.dt }}</dt>
+                                            <dd>{{ bullet.dd }}</dd>
+                                        </template>
+                                    </dl>
+                                    <p v-if="tab.retailOptions[retailSelectVal].footnote" class="retail_footnote">{{ tab.retailOptions[retailSelectVal].footnote }}</p>
                                 </div>
                             </section>
                         </div>
@@ -1353,25 +1366,95 @@ const langData = {
                         desc:     "",
                         lnbItems: ["팝카드란?", "교통 사용처 안내", "유통 사용처 안내"],
                         trafficSelectOptions: [
-                            { value: "express", label: "고속버스" },
                             { value: "subway",  label: "지하철" },
                             { value: "bus",     label: "버스" },
-                            { value: "taxi",    label: "택시" },
+                            { value: "express", label: "고속버스" },
                             { value: "inter",   label: "시외버스" },
                         ],
-                        trafficExpressBus: {
-                            title: "고속버스",
-                            bullets: ["금호고속", "동부 익스프레스", "동양고속", "속리산고속", "(주)중앙고속", "삼화 고속", "천일 고속", "한일 익스프레스"],
-                            logos: [imgBus1, imgBus2, imgBus3, imgBus4, imgBus5, imgBus6, imgBus7, imgBus8],
+                        trafficOptions: {
+                            express: {
+                                title: "고속버스",
+                                bullets: ["금호고속", "동부 익스프레스", "동양고속", "속리산고속", "(주)중앙고속", "삼화 고속", "천일 고속", "한일 익스프레스"],
+                                logos: [imgBus1, imgBus2, imgBus3, imgBus4, imgBus5, imgBus6, imgBus7, imgBus8],
+                            },
+                            subway: { title: "지하철", bullets: ["수도권(1~9호선, 수인선, 경춘선, 경의선, 중앙선, 의정부, 분당선, 신분당, 공항, 인천)", "대전(1호선)", "대구(1~2호선)", "부산(1~4호선, 부산-김해경전철)"] },
+                            bus:    { title: "버스",   bullets: ["수도권","대전광역시, 세종시", "충남, 충북(충주, 영동, 청주, 옥천, 단양, 제천, 진천, 청원, 괴산, 보은, 음성", "강원(원주, 횡성, 춘천, 강릉)", "부산광역시, 대구광역시, 울산광역시","경남(창원, 통영, 거제, 밀양, 양산, 함안, 사천, 마산, 진해, 진주)","경북(포항, 구미, 경주, 안동, 상주, 문경, 영주, 김천, 경산, 예천)", "전남(목포, 여수, 광양, 순천, 화순, 나주, 장성, 함평, 담양, 보성, 영암, 해남)","전북(군산, 전주, 익산, 군산, 김제, 남원, 고창, 정읍, 진안, 임실, 부안)","제주"] },
+                            inter:  { title: "시외버스", bullets: ["수도권(서울시 공항버스 제외)","충남","강원(원주 제외)"] },
                         },
                         retailSelectOptions: [
-                            { value: "coffee", label: "커피/아이스크림" },
+                            { value: "convenience",   label: "편의점" },
+                            { value: "mart",          label: "대형마트/유통점" },
+                            { value: "bakery",        label: "베이커리" },
+                            { value: "coffee",        label: "커피/아이스크림" },
+                            { value: "fastfood",      label: "패스트푸드" },
+                            { value: "restaurant",    label: "요식" },
+                            { value: "cosmetics",     label: "화장품" },
+                            { value: "entertainment", label: "엔터테인먼트" },
+                            { value: "pcroom",        label: "PC방" },
+                            { value: "university",    label: "대학" },
+                            { value: "tourism",       label: "관광" },
+                            { value: "parking",       label: "주차장" },
+                            { value: "kiosk",         label: "무인기기" },
+                            { value: "etc",           label: "기타" },
                         ],
-                        retailCoffee: {
-                            title: "커피/아이스크림",
-                            note: "마트, 백화점, 휴게소 등 일부 입점 매장 제외",
-                            brands: ["스타벅스", "파스쿠찌", "베라", "잠바주스", "엔젤인어스", "카페띠아모", "자바시티", "커피베이", "요거프레소"],
-                            logos: [imgBrandUsage1, imgBrandUsage2, imgBrandUsage3, imgBrandUsage4, imgBrandUsage5, imgBrandUsage6, imgBrandUsage7, imgBrandUsage8, imgBrandUsage9],
+                        retailOptions: {
+                            convenience:   { title: "편의점",          items: Array.from({ length: 7 }, () => ({ brand: "", logo: null })) },
+                            mart:          { title: "대형마트/유통점",  note:"마트, 익스프레스의 일부 매장은 향후 서비스 도입 예정", items: Array.from({ length: 4 }, () => ({ brand: "", logo: null })) },
+                            bakery:        { title: "베이커리", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: Array.from({ length: 3 }, () => ({ brand: "", logo: null })) },
+                            coffee:        { title: "커피/아이스크림",  note: "마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: [
+                                { brand: "스타벅스",   logo: imgBrandUsage1 },
+                                { brand: "파스쿠찌",   logo: imgBrandUsage2 },
+                                { brand: "베라",       logo: imgBrandUsage3 },
+                                { brand: "잠바주스",   logo: imgBrandUsage4 },
+                                { brand: "엔젤인어스", logo: imgBrandUsage5 },
+                                { brand: "카페띠아모", logo: imgBrandUsage6 },
+                                { brand: "자바시티",   logo: imgBrandUsage7 },
+                                { brand: "커피베이",   logo: imgBrandUsage8 },
+                                { brand: "요거프레소", logo: imgBrandUsage9 },
+                            ]},
+                            fastfood:      { title: "패스트푸드", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: Array.from({ length: 3 }, () => ({ brand: "", logo: null })) },
+                            restaurant:    { title: "요식", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: Array.from({ length: 3 }, () => ({ brand: "", logo: null })) },
+                            cosmetics:     { title: "화장품", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: Array.from({ length: 6 }, () => ({ brand: "", logo: null })) },
+                            entertainment: { title: "엔터테인먼트", note:"LOTTE CINEMA(피카디리관), MEGABOX(안산관), SK와이번스(연간회원권)", items: Array.from({ length: 3 }, () => ({ brand: "", logo: null })) },
+                            pcroom:        { title: "PC방",       bullets: ["T-money PC방"], footnote: "어린이카드는 사용이 제한됨" },
+                            university:    { title: "대학",
+                            bullets: [
+                                { dt: "교내식당", dd: "충남대" }, 
+                                { dt: "매점", dd: "동국대, 백석대, 정의여중고, 건대부속고, 동덕여대"},
+                                { dt: "OA기기", dd:"동국대, 서울과학기술대, 한양대, 이화여대, 인천대"},
+                                { dt: "셔틀버스", dd:"아주대, 성균관대"},
+                                { dt: "기타", dd:"자판기(중앙대, 건양대, 아주대, 명지대 등)", dd:"무인사물함(연세대, 경기대, 명지대 등)"}
+                                     ] },
+                            public:       { title: "공공시설", bullets: [
+                                "경륜 / 경정장(서울올림픽기념국민체육진흥공단)",
+                                "경마장(한국마사회)",
+                                "서초구청 아방세홀 식대 결제",  
+                                "서울시청 다산프라자 민원발급 수수료",
+                                "서울시 구청 민원결제(전체)",
+                                "종로구 자치회관 19개소 (가회동, 삼청동 등)",
+                                "중앙우체국(식당결제)",
+                                "대전시 공용자전거 타슈 결제",
+                                "과천 과학관 식대, 매점, 카페 등 결제",
+                                "포항시청 세무과 민원결제(시청, 구청, 읍 / 면 / 동사무소 32개소)",
+                                "음식물종량제 : 군포시, 의정부시, 인천남구, 인천서구, 원주시, 포항시, 제주시, 서귀포시, 송파구, 순창군",
+                            ] },
+                            tourism:       { title: "관광",        bullets: ["한강수상택시","시티투어버스(T-money카드 결제 시 요금 5% 할인혜택)"] },
+                            parking:       { title: "주차장", bullets: [
+                                "서울특별시 공영주차장",
+                                "서울특별시 강남시설관리공단 노외주차장 9개소 : 탄천, 강남구청, 강남교육원, 언북초교, 포이초교, 개포공영, 역삼1로, 역삼10, 대치3동 문화센터",
+                                "서울특별시 시설관리공단 환승주차장 (T-money로 지하철 탑승 후 출차시 주차요금 환승할인 혜택가능) : 잠실역, 창동역, 구로디지털단지역, 개화산역, 수서역, 도봉산역, 봉화산역, 수락산역, 한강진역, 화랑대역, 월드컵경기장주차장",
+                                "서울특별시 체육시설관리사업소 주차장(잠실종합운동장)",
+                                "북서울 꿈의 숲, 인천공항",
+                                "수원시 시설관리공단 주차장 : 시청제1지상, 시청제2지상, 선경, 영통구청, 영통공영, 권선공영, 인계공영, 율전공영, 터미널공영, 대황교화물, 화서환승, 성대환승, 꽃뫼환승, 세류역 환승, 광교공영, 만석공원, 백설공영, 영화동, 세류2동, 인계동, 매교동, 탑동, 곡반정동 제1,2",
+                                "성남시 시설관리공단 주차장 : 금곡동, 서현동, 정자 환승, 오리 환승, 야탑 제1, 중부초교, 해오름, 대원천, 단대공원, 복정동. 신흥제, 태평제, 아래숯골 등 44개소",
+                                "파주시 시설관리공단 주차장 : 금촌2공영, 금촌2-8공영, 금촌3공영",
+                                "KTX 철도역사 주차장 (광명역, 천안 / 아산역 등)",
+                                "하이파킹 주차장 : 춘천 지하, 대구 두류1번가 지하, 수진역 환승, 죽전 아이원프라자",
+                                "기타 : 월드컵경기장, 목동 노상, 응봉동(건물), 삼성동 오크우드, 강북삼성병원, SH공사 주차장, 누리꿈스퀘어 주차장, 서울숲 공원 주차장, 서울무역전시장 주차장, 동원산업 빌딩 지하 주차장, 인천경제통상진흥원 주차장, 지에스파크24㈜ 서울디자인고 주차장",
+                                "무인기기",
+                            ] },
+                            kiosk:         { title: "무인기기",    bullets: ["KTL 공중전화","지하철 무인택배 보관함, 음료 / 스낵 자판기, 도서자판기, 무인사진 촬영기","우체국 무인우편창구 : 서울체신청, 경인체신청, 충청체신청, 경북체신청, 부산체신청"] },
+                            etc:           { title: "기타",        bullets: ["고속도로 휴게소 : 진영휴게소, 영천휴게소", "개그스토리 마트 (일부점)","문구점 색연필 (일부점)", "비디오 대여점 영화마을 (일부점)"] },
                         },
                         pageTitle: "교통카드 충전서비스(팝티머니,마이비,캐시비(EZL),한페이)",
                         pageDesc:  "GS25는 대중교통을 이용하는 고객님을 위해 교통카드 충전 서비스를 실행하고있습니다.<br />또한, GS25에서 상품을 구매할 수 있어 결제수단의 편의성을 제공하고있는 유익한 서비스입니다. (복권, 로또, 토토, 택배 등 일부상품제외)",
@@ -2184,7 +2267,7 @@ watch(serviceActiveTab, (idx) => {
     }
 });
 const popLnbActiveIdx = ref(0);
-const trafficSelectVal = ref("express");
+const trafficSelectVal = ref("subway");
 const retailSelectVal = ref("coffee");
 
 const scrollToSection = (idx) => {
@@ -2282,7 +2365,7 @@ button {
     background-color: #fff;
 }
 
-.traffic_select_box :deep(select) {
+.usage_select_box :deep(select) {
     width: 180px;
     padding: 10px 20px;
     font-size: 1.6rem;
@@ -2978,22 +3061,22 @@ line-height: 1.4;
 }
 
 /* ── 교통 사용처 안내 (50:10103) ── */
-.traffic_sec_header {
+.usage_header {
     margin-bottom: 40px;
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.traffic_sec_header :deep(header) {
+.usage_header :deep(header) {
     margin-bottom: 0;
 }
 
-.traffic_sec_header :deep(h3) {
+.usage_header :deep(h3) {
     margin: 0;
 }
 
-.traffic_group_title {
+.usage_group_title {
     margin: 0 0 8px;
     color: #161616;
     font-size: 2.4rem;
@@ -3002,13 +3085,42 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-.traffic_bullet_list {
-    margin: 0 0 24px;
-    padding: 0;
-    
+.retail_footnote {
+    margin: 6px 0 0;
+    color: #fb6432;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
 }
 
-.traffic_bullet_list > li {
+.usage_def_list {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 16px;
+}
+
+.usage_def_list > dt {
+    color: #161616;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+.usage_def_list > dd {
+    margin: 0;
+    color: #67676f;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+
+.usage_group .list_dotted > li {
     padding: 0 0 0 12px;
     color: #67676f;
     font-size: 1.8rem;
@@ -3017,7 +3129,7 @@ line-height: 1.4;
     position: relative;
 }
 
-.traffic_bullet_list > li::before {
+.usage_group .list_dotted > li::before {
     content: "";
     width: 4px;
     height: 4px;
@@ -3031,7 +3143,6 @@ line-height: 1.4;
 }
 
 
-/* ── 유통 사용처 안내 (50:10253) ── */
 .retail_note {
     margin: 0 0 24px;
     color: #f95823;
@@ -3040,15 +3151,14 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-.retail_logo_list {
+.logo_list {
     padding: 0;
-    
     gap: 12px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
 }
 
-.retail_logo_list > li {
+.logo_list > li {
     height: 56px;
     min-width: 0;
     padding: 6px 12px;
@@ -3059,10 +3169,18 @@ line-height: 1.4;
     justify-content: center;
 }
 
-.retail_logo_list > li > img {
+.logo_list > li > img {
     max-width: 100%;
     width: auto;
     height: auto;
+    display: block;
+}
+
+.logo_placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #d7d7df;
+    border-radius: 4px;
     display: block;
 }
 
@@ -3924,7 +4042,7 @@ line-height: 1.4;
         flex: 1 1 calc((100% - 20px) / 2);
     }
 
-    .retail_logo_list {
+    .logo_list {
         grid-template-columns: repeat(3, 1fr);
     }
 
@@ -4058,13 +4176,13 @@ line-height: 1.4;
         flex: 1 1 calc(50% - 10px);
     }
 
-    .traffic_sec_header {
+    .usage_header {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
     }
 
-    .retail_logo_list {
+    .logo_list {
         grid-template-columns: repeat(2, 1fr);
     }
 
