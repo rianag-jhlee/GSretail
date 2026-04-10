@@ -17,7 +17,7 @@ defineProps({
                 <img v-if="item.icon" :src="item.icon" :alt="item.iconAlt || ''" />
             </figure>
             <strong class="feature_card_title">{{ item.title }}</strong>
-            <p class="feature_card_desc" v-html="item.desc"></p>
+            <p v-if="item.desc" class="feature_card_desc" v-html="item.desc"></p>
         </li>
     </ul>
 </template>
@@ -67,13 +67,18 @@ defineProps({
 
 .feature_card_title {
     margin-bottom: 16px;
+}
+
+.feature_card_title:last-child {
+    margin-bottom: 0;
     color: #161616;
-    font-size: 2.4rem;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 700;
     line-height: 1.35;
     letter-spacing: -0.01em;
     white-space: pre-line;
     display: block;
+    word-break: keep-all;
 }
 
 .feature_card_desc {
@@ -85,13 +90,8 @@ defineProps({
 }
 
 @media (max-width: 1024px) {
-    .feature_card_list {
-        flex-wrap: wrap;
-    }
-
     .feature_card_item {
         height: auto;
-        min-height: 200px;
         flex: 1 1 calc((100% - 20px) / 2);
     }
 }
@@ -102,6 +102,7 @@ defineProps({
     }
 
     .feature_card_item {
+        max-width: 100%;
         height: auto;
         min-height: 0;
         flex: 1 1 100%;
