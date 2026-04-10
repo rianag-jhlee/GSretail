@@ -21,6 +21,13 @@
             :tab-items="storeTabs"
             :tab-slide="false"
         />
+        <Tabs
+            v-if="depth1ActiveIdx === 3"
+            v-model="winwinActiveTab"
+            tab-class="type_02"
+            :tab-items="winwinTabs"
+            :tab-slide="false"
+        />
 
         <!-- 탭 0: 차별화 상품 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel">
@@ -572,7 +579,7 @@
                 <!-- 하이패스 카드/단말기 패널 -->
                 <template v-else-if="i === 5">
                     <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc">
-                        <ul class="hipass_note_list">
+                        <ul class="note_list">
                             <li>* 하이플러스카드에서 출시한 모든 카드를 충전하실 수 있습니다. (http://www.hipluscard.co.kr/)</li>
                             <li>* 하이패스카드(자동충전) 및 단말기를 구매하실 수 있습니다.</li>
                         </ul>
@@ -837,6 +844,67 @@
                 </ul>
             </section>
         </div>
+        <!-- 상생협력: 운영지원제도 -->
+        <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 0" class="brand_panel">
+            <!-- 3depth 탭 네비 -->
+            <nav class="service_tab_wrap" role="tablist" aria-label="운영지원제도">
+                <button
+                    v-for="(tab, i) in winwin.tabs[0].serviceTabs"
+                    :key="i"
+                    type="button"
+                    role="tab"
+                    :aria-selected="winwinServiceActiveTab === i"
+                    class="service_tab_item"
+                    :class="{ is_active: winwinServiceActiveTab === i }"
+                    @click="winwinServiceActiveTab = i"
+                >
+                    <span class="service_tab_icon" aria-hidden="true"></span>
+                    <span class="service_tab_label">{{ tab.label }}</span>
+                </button>
+            </nav>
+
+            <!-- 3depth 패널 -->
+            <div
+                v-for="(tab, i) in winwin.tabs[0].serviceTabs"
+                :key="i"
+                v-show="winwinServiceActiveTab === i"
+                class="service_panel"
+            >
+                <PanelHeader :title="tab.title">
+                    <ul v-if="tab.notes && tab.notes.length" class="note_list">
+                        <li v-for="(note, ni) in tab.notes" :key="ni">{{ note.text }}</li>
+                    </ul>
+                </PanelHeader>
+                <ul v-if="tab.items && tab.items.length" class="winwin_item_list">
+                    <li v-for="(item, ii) in tab.items" :key="ii" class="winwin_item">
+                        <article>
+                            <div class="winwin_item_icon" aria-hidden="true"></div>
+                            <div class="winwin_item_content">
+                                <div class="winwin_item_title">
+                                    <span class="winwin_item_num">{{ item.num }}</span>
+                                    <strong>
+                                        {{ item.title }}
+                                        <a v-if="item.link" :href="item.link" target="_blank" class="winwin_item_link" aria-label="링크 바로가기"></a>
+                                    </strong>
+                                </div>
+                                <div class="winwin_item_body">
+                                    <p v-if="item.desc" v-html="item.desc"></p>
+                                    <ul v-if="item.bullets && item.bullets.length" class="winwin_bullet_list">
+                                        <li v-for="(b, bi) in item.bullets" :key="bi">{{ b }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 상생협력: 참여제도 -->
+        <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 1" class="brand_panel">
+            <PanelHeader :title="winwin.tabs[1].title" />
+        </div>
+
         <div class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
         </div>
@@ -973,6 +1041,10 @@ const langData = {
             { item: "택배&픽업" },
             { item: "공공요금수납" },
             { item: "상품권 판매" },
+        ],
+        depth2Winwin: [
+            { item: "운영지원제도" },
+            { item: "참여제도" },
         ],
     },
     tabs: [
@@ -1902,11 +1974,114 @@ const langData = {
             },
         ],
     },
+    winwin: {
+        tabs: [
+            {
+                serviceTabs: [
+                    { 
+                        label: "점포\n운영지원 혜택",
+                        title: "점포 운영지원 혜택",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
+                        items: [
+                            {
+                                num: "01",
+                                title: "인력 지원 제도",
+                                desc: "매출 향상, 신상품 도입 등 점포 경쟁력 향상을 위해<br />노력하시는 경영주님을 위한 인센티브 제도",
+                            },
+                            {
+                                num: "02",
+                                title: "카운터FF 운영 우수점 지원",
+                                desc: "카운터FF 매출 활성화 도모",
+                                bullets: ["치킨25 운영비 지원", "카페25 운영비 지원", "위생등급 취득 점포 점수 필터 지원"],
+                            },
+                            {
+                                num: "03",
+                                title: "채용 플랫폼 지원",
+                                desc: "스토어매니저(근무자) 구인 지원",
+                                bullets: ["알바몬 이용 지원", "제휴 플랫폼 지원"],
+                            },
+                            {
+                                num: "04",
+                                title: "상생지원 보험",
+                                desc: "업계를 선도하는 '다양한 보험 지원'제도",
+                                bullets: ["안심상해/횡령", "택배도난/현금도난"],
+                            },
+                            {
+                                num: "05",
+                                title: "가맹점 상생대출",
+                                desc: "신용/담보대출 우대금리 적용",
+                                bullets: ["우리은행 연계 대출", "추가 우대금리 적용"],
+                            },
+                        ],
+                    },
+                    {
+                        label: "장기운영점 및\n우수점포 혜택",
+                        title: "장기운영점 및 우수점포 혜택",
+                        items: [
+                            { num: "01", title: "10년차 장기운영 지원 혜택", desc: "10주년 운영 경영주님 예우",bullets: ["기념패", "건강검진"] },
+                            { num: "02", title: "20년차 장기운영 지원 혜택", desc: "20’s Clubf 가입", bullets: ["기념패", "여행상품권", "건강검진"] },
+                            { num: "03", title: "30년차 장기운영 지원 혜택", desc: "30주년 운영 경영주님 점포 세레머니 진행", bullets: ["기념패", "30주년 기념 행사", "여행상품권","건강검진"]},
+                            { num: "04", title: "우수점포 경영주 포상", desc: null, bullets: ["우수점포 대상 혜택 지급"] },
+                        ],
+                    },
+                    {
+                        label: "점포\n소원 지원",
+                        title: "점포 소원 지원",
+                        items: [
+                            { num: "01", title: "해피콜 센터 운영(24H)", desc: "24시간 소통채널 운영" , bullets: ["시설", "전산", "건의사항", "기타문의"]},
+                            { num: "02", title: "무료 법률 상담 서비스", desc: "변호사 무료 법률 자문 상담", bullets: ["민사 / 형사", "가사 / 행정"] },
+                            { num: "03", title: "노무상담 콜센터 운영", desc: "전반적인 노무 상담 서비스 제공", bullets: ["채용","4대 보험","전반적인 노무"] },
+                        ],
+                    },
+                    {
+                        label: "(경영주/스토어매니저)\n역량 레벨업 지원",
+                        title: "(경영주/스토어매니저) 역량 레벨업 지원",
+                        items: [
+                            { num: "01", title: "GS25 챗봇조이", desc: "GS25 근무 지원을 위한 카카오톡 챗봇 서비스" , bullets: ["365일 24시간 응답", "재고 / 물류 조회", "점포 운영 매뉴얼", "모바일 해피콜 등록"], link: "https://pf.kakao.com/_xmTxexcb?from=qr" },
+                            { num: "02", title: "모바일 점포경영", desc: "경영주와 스토어매니저 간 점포 운영 업무에 대한 소통 지원 APP", bullets: ["경영주/스토어매니저 전용 앱", "서비스 체크타임", "소비기한 관리","오늘의 업무 관리", "공지 전달"] },
+                            { num: "03", title: "온라인 열린아카데미", desc: "경영주 역량 강화", bullets: ["매월 2회 라이브 교육", "다양한 컨텐츠","사내/외 전문강사"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F"},
+                            { num: "04", title: "우수점 연구소", desc: "GS25 온라인 소식지", bullets: ["이달의 우수 경영주","성공 사례 안내","운영 Tip 소개"] },
+                            { num: "05", title: "신규 경영주 입문교육", desc: null, bullets: ["운영 교육(POS, 점포경영, 시스템","서비스 교육","온라인 교육과정(GS클래스)"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F" },
+                            { num: "06", title: "스토어매니저 클래스", desc: "근무자 교육 지원", bullets: ["POS 교육","청결 교육","접객서비스 교육"] , link: "http://hpimg.gsretail.com/images/gs25/winwin/web/store_manager_map.html" },
+                        ],
+                    },
+                    {
+                        label: "사회공헌\n지원",
+                        title: "사회공헌 지원",
+                        items: [
+                            { num: "01", title: "상생나눔 플랫폼 운영", desc: "사회적 약자를 위한 사회공헌형 점포 운영", bullets: ["내일스토어", "시니어스토어", "늘봄스토어"] },
+                            { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
+                            { num: "03", title: "GS 히어로상", desc: "사회적으로 귀감이 되는 경영주,근무자에게 지원", bullets: ["모범상","귀감상","나눔상"] },
+                            { num: "04", title: "화재예방 소화기 공유", desc: "점포 인근 화재발생 시 소화기 공유를 통한 화재예방", bullets: ["점포인근 화재발생 시 점포 소화기 공유", "사용 후 교환 지원"] },
+                        ],
+                    },
+                    {
+                        label: "경영주\n복지 혜택",
+                        title: "경영주 복지 혜택",
+                        items: [
+                            { num: "01", title: "경조사 지원", desc: "경조금 및 용품 지원", bullets:["경조금 지급", "점포 운영 지원금 지급","장례 용품 지급", "출산 용품 지급"] },
+                            { num: "02", title: "명절 및 경조사 자율휴무", desc: "자율 휴무 진행", bullets: ["명절 휴점 및 단축 영업","경조사 휴점 및 단축 영업"] },
+                            { num: "03", title: "경영주 복지몰 운영", desc: "경영주 전용 복지몰", bullets: ["합리적 가격", "단독상품", "기획 특가전"] },
+                            { num: "04", title: "종합 건강검진 할인", desc: "제휴 건강검진 센터 종합 건강검진 할인가 이용", bullets: ["KMI 센터","협력 병원"] },
+                            { num: "05", title: "엔젤 리조트", desc: "엔젤리조트 회원가 이용", bullets: ["한화리조트", "엘리시안 강촌"] },
+                            { num: "06", title: "엔젤 렌터카 (장기/중고차)", desc: "GS25 경영주님만을 위한 엔젤 렌터카 (장기/중고차)", bullets: ["제휴가 견적 제공", "빠른 출고/전 차종","전용 상담 채널 운영"] },
+                        ],
+                    },
+                ],
+            },
+            {
+                title: "참여제도",
+            },
+        ],
+    },
     backLabel: "목록으로 돌아가기",
 };
 
 const sinsen = langData.sinsen;
 const store = langData.store;
+const winwin = langData.winwin;
 const tab0 = langData.tabs[0];
 const tab1 = langData.tabs[1];
 const tab2 = langData.tabs[2];
@@ -1916,8 +2091,11 @@ const depth1ActiveIdx = ref(0);
 const depth1Tabs = langData.nav.depth1;
 const depth2Tabs = langData.nav.depth2;
 const storeTabs = langData.nav.depth2Store;
+const winwinTabs = langData.nav.depth2Winwin;
 
 const storeActiveTab = ref(0);
+const winwinActiveTab = ref(0);
+const winwinServiceActiveTab = ref(0);
 const giftSwiperInst = ref(null);
 const giftIsBeginning = ref(true);
 const giftIsEnd = ref(false);
@@ -2899,17 +3077,156 @@ line-height: 1.4;
 }
 
 /* ── 하이패스 카드/단말기 ── */
-.hipass_note_list {
+.note_list {
     margin: 8px 0 0;
     padding: 0;
     list-style: none;
 }
 
-.hipass_note_list > li {
+.note_list > li {
     color: #67676f;
     font-size: 1.8rem;
     line-height: 1.4;
     letter-spacing: -0.01em;
+}
+
+/* ── 상생협력 운영지원제도 카드 그리드 ── */
+.winwin_item_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.winwin_item {
+    padding: 64px 0;
+    border-bottom: 1px solid #e5e5e9;
+}
+
+/* 첫 번째 줄: 상단 여백 제거 */
+.winwin_item:nth-child(-n+2) {
+    padding-top: 0;
+}
+
+/* 마지막 줄 보더 제거 — 홀수/짝수 아이템 모두 대응 */
+.winwin_item:last-child,
+.winwin_item:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
+}
+
+.winwin_item > article {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.winwin_item_icon {
+    width: 80px;
+    height: 80px;
+    background-color: #f2f2f4;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.winwin_item_content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.winwin_item_title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* 번호·제목 공통 폰트 */
+.winwin_item_num,
+.winwin_item_title > strong {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.winwin_item_num {
+    color: #107af2;
+}
+
+.winwin_item_title > strong {
+    color: #161616;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.winwin_item_link {
+    width: 24px;
+    height: 24px;
+    background-color: #d0d0d8;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.winwin_item_body > p {
+    color: #67676f;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.winwin_bullet_list {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.winwin_bullet_list > li {
+    padding-left: 12px;
+    color: #67676f;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+    position: relative;
+}
+
+.winwin_bullet_list > li::before {
+    width: 4px;
+    height: 4px;
+    background-color: #67676f;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    content: "";
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .winwin_item_list {
+        grid-template-columns: 1fr;
+    }
+
+    /* PC에서 제거된 2번째 아이템 상단 여백 복원 */
+    .winwin_item:nth-child(2) {
+        padding-top: 64px;
+    }
+
+    /* PC에서 제거된 보더 복원 */
+    .winwin_item:nth-last-child(2):nth-child(odd) {
+        border-bottom: 1px solid #e5e5e9;
+    }
+
+    .winwin_item_num,
+    .winwin_item_title > strong {
+        font-size: 2.4rem;
+    }
 }
 
 /* ── 택배&픽업 — 안내 목록 ── */
