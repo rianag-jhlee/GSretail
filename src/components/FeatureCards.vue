@@ -67,6 +67,11 @@ defineProps({
 
 .feature_card_title {
     margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+
 }
 
 .feature_card_title:last-child {
@@ -104,7 +109,7 @@ defineProps({
     .feature_card_item {
         max-width: 100%;
         height: auto;
-        min-height: 0;
+        min-height: 0 !important;
         flex: 1 1 100%;
     }
 }
