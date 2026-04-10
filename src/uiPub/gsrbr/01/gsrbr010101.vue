@@ -31,7 +31,7 @@
 
         <!-- 탭 0: 차별화 상품 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel">
-            <PanelHeader :hero="tab0.hero" :hero-alt="tab0.heroAlt" :title="tab0.title" :subtitle="tab0.subtitle" />
+            <PanelHeader :hero="tab0.hero" :hero-alt="tab0.heroAlt" :title="tab0.title" :desc="tab0.subtitle" />
 
             <ul v-if="tab0.cards && tab0.cards.length" class="diff_card_grid" role="list">
                 <li v-for="(card, c) in tab0.cards" :key="c">
@@ -52,7 +52,7 @@
 
         <!-- 탭 1: CAFE25 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel">
-            <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :subtitle="tab1.subtitle" hero-bg="#fff" />
+            <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :desc="tab1.subtitle" hero-bg="#fff" />
 
             <section v-for="(sec, i) in tab1.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" :source="sec.source" />
@@ -124,7 +124,7 @@
 
         <!-- 탭 2: CHICKEN25 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel">
-            <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :subtitle="tab2.subtitle" />
+            <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :desc="tab2.subtitle" />
 
             <section v-for="(sec, i) in tab2.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
@@ -152,7 +152,7 @@
 
         <!-- 탭 3: GOPIZZA -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel">
-            <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :subtitle="tab3.subtitle" />
+            <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :desc="tab3.subtitle" />
 
             <section v-for="(sec, i) in tab3.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
@@ -236,21 +236,13 @@
 
         <!-- depth1 = 1: 신선강화점 -->
         <div v-if="depth1ActiveIdx === 1" class="brand_panel">
-            <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :subtitle="sinsen.subtitle" />
+            <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :desc="sinsen.subtitle" />
 
             <section v-for="(sec, i) in sinsen.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
 
                 <!-- 특징 카드 4열 -->
-                <ul v-if="sec.features" class="sinsen_feature_list" role="list">
-                    <li v-for="(feat, fi) in sec.features" :key="fi">
-                        <div class="sinsen_feature_card">
-                            <span class="sinsen_feature_icon" aria-hidden="true"></span>
-                            <h4>{{ feat.title }}</h4>
-                            <p v-html="feat.desc" />
-                        </div>
-                    </li>
-                </ul>
+                <FeatureCards v-if="sec.features" :items="sec.features" type="icon" class="sinsen_feature" />
 
                 <!-- 배송 흐름도 -->
                 <div v-if="sec.flow" class="sinsen_card sinsen_card_flow">
@@ -301,7 +293,7 @@
             >
                 <!-- 교통카드 충전: LNB + 콘텐츠 2열 레이아웃 -->
                 <template v-if="i === 2">
-                    <PanelHeader :title="tab.pageTitle" :subtitle="tab.pageDesc" />
+                    <PanelHeader :title="tab.pageTitle" :desc="tab.pageDesc" />
                     <div class="pop_wrap">
                         <nav class="pop_lnb" aria-label="팝카드 메뉴">
                             <ul>
@@ -414,7 +406,7 @@
 
                 <!-- 기프트카드 패널 -->
                 <template v-else-if="i === 3">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
                     <section>
                         <SectionHeader :title="tab.advantageTitle" />
                         <FeatureCards :items="tab.advantages" />
@@ -497,7 +489,7 @@
 
                 <!-- GS25 유심 요금제 패널 -->
                 <template v-else-if="i === 4">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
                     <section>
                         <SectionHeader :title="tab.advantageTitle" />
                         <FeatureCards :items="tab.advantages" class="usim_advantage_cards" />
@@ -578,8 +570,8 @@
 
                 <!-- 하이패스 카드/단말기 패널 -->
                 <template v-else-if="i === 5">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc">
-                        <ul class="note_list">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc">
+                        <ul class="list_caution">
                             <li>* 하이플러스카드에서 출시한 모든 카드를 충전하실 수 있습니다. (http://www.hipluscard.co.kr/)</li>
                             <li>* 하이패스카드(자동충전) 및 단말기를 구매하실 수 있습니다.</li>
                         </ul>
@@ -601,7 +593,7 @@
 
                 <!-- 고속도로 미납 통행료 납부 패널 -->
                 <template v-else-if="i === 6">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
                     <section class="sec_unpaid_advantage">
                         <SectionHeader :title="tab.serviceTitle" :desc="tab.serviceDesc" />
                         <FeatureCards :items="tab.serviceAdvantages" />
@@ -614,7 +606,7 @@
 
                 <!-- 온라인몰 편의점 결제 패널 (Figma 97:16410, 97:16422) -->
                 <template v-else-if="i === 7">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
                     <section class="sec_mall_payment_advantage">
                         <SectionHeader :title="tab.serviceTitle" :desc="tab.serviceDesc" />
                         <FeatureCards :items="tab.serviceAdvantages" />
@@ -647,7 +639,7 @@
                             :hero="tab.hero"
                             :hero-alt="tab.heroAlt"
                             :title="tab.title"
-                            :subtitle="tab.desc"
+                            :desc="tab.desc"
                         />
                         <div v-if="tab.table" class="com_table_wrap">
                             <table class="com_table">
@@ -688,11 +680,11 @@
             <div>
                 <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
                     <div v-show="deliveryActiveTab === i" class="service_panel">
-                        <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc">
-                            <ul v-if="tab.notes && tab.notes.length" class="delivery_note_list">
+                        <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc">
+                            <ul v-if="tab.notes && tab.notes.length" class="list_dotted">
                                 <li v-for="(note, ni) in tab.notes" :key="ni">
                                     <p>{{ note.text }}</p>
-                                    <p v-if="note.sub" class="delivery_note_sub">{{ note.sub }}</p>
+                                    <p v-if="note.sub" class="note_sub">{{ note.sub }}</p>
                                 </li>
                             </ul>
                         </PanelHeader>
@@ -798,7 +790,6 @@
                 :hero="store.tabs[2].hero"
                 :hero-alt="store.tabs[2].heroAlt"
                 :title="store.tabs[2].title"
-                :subtitle="store.tabs[2].desc"
             >
                 <p class="brand_panel_desc">지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.
                     기존지로 납부 외 휴대폰을 통한 모바일수납도 가능하며,납부공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부가능합니다.</p>
@@ -824,7 +815,7 @@
                 :hero="store.tabs[3].hero"
                 :hero-alt="store.tabs[3].heroAlt"
                 :title="store.tabs[3].subtitle"
-                :subtitle="store.tabs[3].desc"
+                :desc="store.tabs[3].desc"
             />
             <section v-if="store.tabs[3].voucherItems && store.tabs[3].voucherItems.length" class="sec_voucher">
                 <SectionHeader :title="store.tabs[3].voucherTitle" />
@@ -871,9 +862,9 @@
                 class="service_panel"
             >
                 <PanelHeader :title="tab.title">
-                    <ul v-if="tab.notes && tab.notes.length" class="note_list">
+                    <ul v-if="tab.notes && tab.notes.length" class="list_caution">
                         <li v-for="(note, ni) in tab.notes" :key="ni">{{ note.text }}</li>
-                    </ul>
+                    </ul> 
                 </PanelHeader>
                 <ul v-if="tab.items && tab.items.length" class="winwin_item_list">
                     <li v-for="(item, ii) in tab.items" :key="ii" class="winwin_item">
@@ -902,12 +893,41 @@
 
         <!-- 상생협력: 참여제도 -->
         <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 1" class="brand_panel">
-            <PanelHeader :title="winwin.tabs[1].title" />
+            <PanelHeader :hero="winwin.tabs[1].hero" :hero-alt="winwin.tabs[1].heroAlt" :title="winwin.tabs[1].title" :desc="winwin.tabs[1].desc" />
+            <ul v-if="winwin.tabs[1].items && winwin.tabs[1].items.length" class="winwin_item_list">
+                <li v-for="(item, ii) in winwin.tabs[1].items" :key="ii" class="winwin_item">
+                    <article>
+                        <div class="winwin_item_content">
+                            <div class="winwin_item_title">
+                                <span class="winwin_item_num">{{ item.num }}</span>
+                                <strong>{{ item.title }}</strong>
+                            </div>
+                            <div class="winwin_item_body">
+                                <p v-if="item.desc" class="winwin_item_desc" v-html="item.desc"></p>
+                            </div>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </div>
+
+        <!-- depth1 = 4: 밀박스/스낵바 -->
+        <div v-if="depth1ActiveIdx === 4" class="brand_panel">
+            <PanelHeader :hero="milbox.hero" :hero-alt="milbox.heroAlt" :title="milbox.title" />
+            <section v-for="(sec, si) in milbox.sections" :key="si">
+                <SectionHeader :title="sec.title" :desc="sec.desc">
+                    <p v-if="sec.note" class="sec_note">{{ sec.note }}</p>
+                </SectionHeader>
+                <FeatureCards v-if="sec.items && sec.items.length" :items="sec.items" type="icon" class="milbox_feature" />
+            </section>
         </div>
 
         <div class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
         </div>
+
+
+        
     </div>
 </template>
 
@@ -970,6 +990,8 @@ import imgHero7 from "@/assets/images/dummy/brand_bg_08.png";
 import imgHero8 from "@/assets/images/dummy/brand_bg_09.png"; 
 import imgHero9 from "@/assets/images/dummy/brand_bg_10.png"; 
 import imgHero10 from "@/assets/images/dummy/brand_bg_11.png"; 
+import imgHero11 from "@/assets/images/dummy/brand_bg_12.png"; 
+import imgHero12 from "@/assets/images/dummy/brand_bg_13.png"; 
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
@@ -2072,7 +2094,48 @@ const langData = {
                 ],
             },
             {
+                hero: imgHero11,
+                heroAlt: "",
                 title: "참여제도",
+                desc: "GS25에서는 다양한 의견 수렴, 홍보, 콜센터 지원으로 경영주님에게 도움을 드리고 있습니다.",
+                items: [
+                    {
+                        num: "01",
+                        title: "경영주 협의회",
+                        desc: "지역별 정기 간담회(격월, 분기별)를 통하여 각종 제도제안 및 이슈사항 협의",
+                    },
+                    {
+                        num: "02",
+                        title: "자율분쟁조정위원회",
+                        desc: "가맹본부와 경영주 간의 분쟁이 발생 시, 위원장(외부 전문가), 경영주/본부 대표가 자율적 해결/조정안 마련",
+                    },
+                    {
+                        num: "03",
+                        title: "24시간 통합 콜센터 운영",
+                        desc: "점포 운영의 불편사항에 대한 접수<br />및 상담 창구 운영(24시간 운영)",
+                    },
+                    {
+                        num: "04",
+                        title: "경영주 열린제안",
+                        desc: "경영주님의 다양한 제안과 아이디어 접수를 통해 생생한 현장의 목소리를 청취하여 점포 운영 및 본부 정책에 개선 반영하고 있습니다.",
+                    },
+                ],
+            },
+        ],
+    },
+    milbox: {
+        hero: imgHero12,
+        heroAlt: "",
+        title: "밀박스/스낵바",
+        sections: [
+            {
+                title: "GS25 기업/단체 대상 정기 배송 서비스란?",
+                desc: "대한민국 대표 편의점 GS25가 가진 차별화 경쟁력을 기반으로 한 기업·단체 대상 조식/간식 정기 배송 서비스입니다.<br />사내 식당이 없거나 간식 복지 도입을 고민 중이라면, 아래 서비스를 확인해보세요.",
+                items: [
+                    { title: "트렌디한 상품" },
+                    { title: "합리적인 가격" },
+                    { title: "약 1,200개 기업 이용중" },
+                ],
             },
         ],
     },
@@ -2082,6 +2145,7 @@ const langData = {
 const sinsen = langData.sinsen;
 const store = langData.store;
 const winwin = langData.winwin;
+const milbox = langData.milbox;
 const tab0 = langData.tabs[0];
 const tab1 = langData.tabs[1];
 const tab2 = langData.tabs[2];
@@ -2667,50 +2731,9 @@ button {
 }
 
 /* ── 신선강화점 ── */
-.sinsen_feature_list {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.sinsen_feature_list > li {
-    min-width: 0;
-}
-
-.sinsen_feature_card {
-    height: 240px;
+.sinsen_feature :deep(.feature_card_item) {
+    min-height: 240px;
     padding: 32px 32px 60px;
-    background-color: #f8f8f8;
-    border-radius: 12px;
-}
-
-.sinsen_feature_icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 12px;
-    background-color: #d7d7df;
-    border-radius: 8px;
-    display: block;
-}
-
-.sinsen_feature_card > h4 {
-    margin: 0 0 16px;
-    color: #161618;
-    font-size: 2.4rem;
-    font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-.sinsen_feature_card > p {
-    margin: 0;
-    color: #67676f;
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
 }
 
 .sinsen_card {
@@ -2982,7 +3005,7 @@ line-height: 1.4;
 .traffic_bullet_list {
     margin: 0 0 24px;
     padding: 0;
-    list-style: none;
+    
 }
 
 .traffic_bullet_list > li {
@@ -3019,7 +3042,7 @@ line-height: 1.4;
 
 .retail_logo_list {
     padding: 0;
-    list-style: none;
+    
     gap: 12px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -3077,13 +3100,13 @@ line-height: 1.4;
 }
 
 /* ── 하이패스 카드/단말기 ── */
-.note_list {
+.list_caution {
     margin: 8px 0 0;
     padding: 0;
-    list-style: none;
+    
 }
 
-.note_list > li {
+.list_caution > li {
     color: #67676f;
     font-size: 1.8rem;
     line-height: 1.4;
@@ -3094,7 +3117,7 @@ line-height: 1.4;
 .winwin_item_list {
     margin: 0;
     padding: 0;
-    list-style: none;
+    
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -3171,17 +3194,43 @@ line-height: 1.4;
 }
 
 .winwin_item_body > p {
+    margin-top: 8px;
     color: #67676f;
     font-size: 2rem;
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.35;
     letter-spacing: -0.01em;
 }
 
-.winwin_bullet_list {
+.winwin_item_body > p.winwin_item_desc {
+    margin-top: 0;
+    font-weight: 400;
+}
+
+.sec_note {
     margin: 8px 0 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+}
+
+.milbox_feature :deep(.feature_card_item) {
+    min-height: 171px;
+    max-width: 340px;
+}
+
+@media (max-width: 768px) {
+    .milbox_feature :deep(.feature_card_item) {
+        min-height: 0;
+        max-width: 100%;
+    }
+}
+
+.winwin_bullet_list {
+    margin: 16px 0 0;
     padding: 0;
-    list-style: none;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -3230,47 +3279,24 @@ line-height: 1.4;
 }
 
 /* ── 택배&픽업 — 안내 목록 ── */
-.delivery_note_list {
+/* PanelHeader 슬롯 내 list_dotted — 회색 계열 별도 스타일 */
+.brand_panel_title .list_dotted {
     margin: 16px 0 0;
-    padding: 0;
-    list-style: none;
 }
 
-.delivery_note_list > li {
-    padding-left: 12px;
-    position: relative;
-}
-
-.delivery_note_list > li + li {
-    margin-top: 8px;
-}
-
-.delivery_note_list > li::before {
-    content: "";
-    width: 4px;
-    height: 4px;
+.brand_panel_title .list_dotted > li::before {
     background-color: #67676f;
-    border-radius: 50%;
-    position: absolute;
-    top: 11px;
-    left: 0;
 }
 
-.delivery_note_list > li > p {
-    margin: 0;
+.brand_panel_title .list_dotted > li > p {
     color: #67676f;
     font-size: 2rem;
     line-height: 1.35;
     letter-spacing: -0.01em;
 }
 
-.delivery_note_sub {
-    color: #f95823;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-}
-.delivery_note_list > li > p.delivery_note_sub{
+.note_sub,
+.brand_panel_title .list_dotted > li > p.note_sub {
     color: #f95823;
     font-size: 1.6rem;
     line-height: 1.5;
@@ -3297,7 +3323,7 @@ line-height: 1.4;
 .delivery_price_list {
     margin: 0;
     padding: 0;
-    list-style: none;
+    
 }
 
 .delivery_price_list > li {
@@ -3333,7 +3359,7 @@ line-height: 1.4;
 .delivery_price_subs {
     margin: 6px 0 0;
     padding: 0;
-    list-style: none;
+    
 }
 
 .delivery_price_subs > li {
@@ -3379,7 +3405,7 @@ line-height: 1.4;
 .mall_site_list {
     margin: 0;
     padding: 0;
-    list-style: none;
+    
     display: flex;
     gap: 20px;
 }
@@ -3728,7 +3754,7 @@ line-height: 1.4;
     width: calc(50% - 10px);
     margin: 0;
     padding: 20px 0 0;
-    list-style: none;
+    
 }
 
 .gift_purchase_step {
@@ -3910,6 +3936,7 @@ line-height: 1.4;
     .gift_brand_card > figcaption {
         font-size: 1.4rem;
     }
+
 }
 
 @media (max-width: 768px) {
@@ -4095,7 +4122,7 @@ line-height: 1.4;
 .voucher_list {
     display: flex;
     gap: 20px;
-    list-style: none;
+    
 }
 
 .voucher_item {
@@ -4180,6 +4207,9 @@ line-height: 1.4;
     .voucher_list {
         flex-direction: column;
         gap: 32px;
+    }
+    .winwin_item_body > p{
+        margin-top: 0;
     }
 }
 </style>
