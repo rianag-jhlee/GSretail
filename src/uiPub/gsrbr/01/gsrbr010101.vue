@@ -1056,6 +1056,8 @@ import imgGiftCerti03 from "@/assets/images/dummy/gift_certi_03.png";
 const router = useRouter();
 const activeTab = ref(0);
 
+const ph = (n) => Array.from({ length: n }, () => ({ brand: "", logo: null }));
+
 const langData = {
     nav: {
         depth1: [
@@ -1392,15 +1394,16 @@ const langData = {
                             { value: "entertainment", label: "엔터테인먼트" },
                             { value: "pcroom",        label: "PC방" },
                             { value: "university",    label: "대학" },
+                            { value: "public",        label: "공공시설" },
                             { value: "tourism",       label: "관광" },
                             { value: "parking",       label: "주차장" },
                             { value: "kiosk",         label: "무인기기" },
                             { value: "etc",           label: "기타" },
                         ],
                         retailOptions: {
-                            convenience:   { title: "편의점",          items: Array.from({ length: 7 }, () => ({ brand: "", logo: null })) },
-                            mart:          { title: "대형마트/유통점",  note:"마트, 익스프레스의 일부 매장은 향후 서비스 도입 예정", items: Array.from({ length: 4 }, () => ({ brand: "", logo: null })) },
-                            bakery:        { title: "베이커리", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: Array.from({ length: 3 }, () => ({ brand: "", logo: null })) },
+                            convenience:   { title: "편의점",          items: ph(7) },
+                            mart:          { title: "대형마트/유통점",  note:"마트, 익스프레스의 일부 매장은 향후 서비스 도입 예정", items: ph(4) },
+                            bakery:        { title: "베이커리", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(3) },
                             coffee:        { title: "커피/아이스크림",  note: "마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: [
                                 { brand: "스타벅스",   logo: imgBrandUsage1 },
                                 { brand: "파스쿠찌",   logo: imgBrandUsage2 },
@@ -1412,10 +1415,10 @@ const langData = {
                                 { brand: "커피베이",   logo: imgBrandUsage8 },
                                 { brand: "요거프레소", logo: imgBrandUsage9 },
                             ]},
-                            fastfood:      { title: "패스트푸드", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: Array.from({ length: 3 }, () => ({ brand: "", logo: null })) },
-                            restaurant:    { title: "요식", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: Array.from({ length: 3 }, () => ({ brand: "", logo: null })) },
-                            cosmetics:     { title: "화장품", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: Array.from({ length: 6 }, () => ({ brand: "", logo: null })) },
-                            entertainment: { title: "엔터테인먼트", note:"LOTTE CINEMA(피카디리관), MEGABOX(안산관), SK와이번스(연간회원권)", items: Array.from({ length: 3 }, () => ({ brand: "", logo: null })) },
+                            fastfood:      { title: "패스트푸드", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(3) },
+                            restaurant:    { title: "요식", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(3) },
+                            cosmetics:     { title: "화장품", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(6) },
+                            entertainment: { title: "엔터테인먼트", note:"LOTTE CINEMA(피카디리관), MEGABOX(안산관), SK와이번스(연간회원권)", items: ph(3) },
                             pcroom:        { title: "PC방",       bullets: ["T-money PC방"], footnote: "어린이카드는 사용이 제한됨" },
                             university:    { title: "대학",
                             bullets: [
@@ -1423,7 +1426,7 @@ const langData = {
                                 { dt: "매점", dd: "동국대, 백석대, 정의여중고, 건대부속고, 동덕여대"},
                                 { dt: "OA기기", dd:"동국대, 서울과학기술대, 한양대, 이화여대, 인천대"},
                                 { dt: "셔틀버스", dd:"아주대, 성균관대"},
-                                { dt: "기타", dd:"자판기(중앙대, 건양대, 아주대, 명지대 등)", dd:"무인사물함(연세대, 경기대, 명지대 등)"}
+                                { dt: "기타", dd:"자판기(중앙대, 건양대, 아주대, 명지대 등), 무인사물함(연세대, 경기대, 명지대 등)"}
                                      ] },
                             public:       { title: "공공시설", bullets: [
                                 "경륜 / 경정장(서울올림픽기념국민체육진흥공단)",
@@ -3493,11 +3496,7 @@ line-height: 1.4;
     min-height: 260px;
 }
 
-.sec_delivery_caution :deep(.feature_card_item){
-    min-height: 235px;
-}
-
-.sec_delivery_caution :deep(.feature_card_item){
+.sec_delivery_caution :deep(.feature_card_item) {
     min-height: 216px;
 }
 :deep(.txt_point) {
@@ -4114,10 +4113,6 @@ line-height: 1.4;
     .diff_bottom_row {
         flex-direction: column;
         gap: 20px;
-    }
-
-    .sinsen_feature_list {
-        grid-template-columns: repeat(2, 1fr);
     }
 
     .sinsen_check_list > li {
