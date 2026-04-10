@@ -21,10 +21,17 @@
             :tab-items="storeTabs"
             :tab-slide="false"
         />
+        <Tabs
+            v-if="depth1ActiveIdx === 3"
+            v-model="winwinActiveTab"
+            tab-class="type_02"
+            :tab-items="winwinTabs"
+            :tab-slide="false"
+        />
 
         <!-- 탭 0: 차별화 상품 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel">
-            <PanelHeader :hero="tab0.hero" :hero-alt="tab0.heroAlt" :title="tab0.title" :subtitle="tab0.subtitle" />
+            <PanelHeader :hero="tab0.hero" :hero-alt="tab0.heroAlt" :title="tab0.title" :desc="tab0.subtitle" />
 
             <ul v-if="tab0.cards && tab0.cards.length" class="diff_card_grid" role="list">
                 <li v-for="(card, c) in tab0.cards" :key="c">
@@ -45,7 +52,7 @@
 
         <!-- 탭 1: CAFE25 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel">
-            <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :subtitle="tab1.subtitle" hero-bg="#fff" />
+            <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :desc="tab1.subtitle" hero-bg="#fff" />
 
             <section v-for="(sec, i) in tab1.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" :source="sec.source" />
@@ -117,7 +124,7 @@
 
         <!-- 탭 2: CHICKEN25 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel">
-            <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :subtitle="tab2.subtitle" />
+            <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :desc="tab2.subtitle" />
 
             <section v-for="(sec, i) in tab2.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
@@ -145,7 +152,7 @@
 
         <!-- 탭 3: GOPIZZA -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel">
-            <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :subtitle="tab3.subtitle" />
+            <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :desc="tab3.subtitle" />
 
             <section v-for="(sec, i) in tab3.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
@@ -175,8 +182,8 @@
                                 <strong>{{ pnl.size }}</strong>
                                 <span v-for="(tag, ti) in pnl.tags" :key="ti" class="gopizza_menu_tag">{{ tag }}</span>
                             </div>
-                            <div class="gopizza_table_wrap">
-                                <table class="gopizza_table">
+                            <div class="com_table_wrap">
+                                <table class="com_table com_table_col">
                                     <thead>
                                         <tr>
                                             <th
@@ -229,21 +236,13 @@
 
         <!-- depth1 = 1: 신선강화점 -->
         <div v-if="depth1ActiveIdx === 1" class="brand_panel">
-            <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :subtitle="sinsen.subtitle" />
+            <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :desc="sinsen.subtitle" />
 
             <section v-for="(sec, i) in sinsen.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
 
                 <!-- 특징 카드 4열 -->
-                <ul v-if="sec.features" class="sinsen_feature_list" role="list">
-                    <li v-for="(feat, fi) in sec.features" :key="fi">
-                        <div class="sinsen_feature_card">
-                            <span class="sinsen_feature_icon" aria-hidden="true"></span>
-                            <h4>{{ feat.title }}</h4>
-                            <p v-html="feat.desc" />
-                        </div>
-                    </li>
-                </ul>
+                <FeatureCards v-if="sec.features" :items="sec.features" type="icon" class="sinsen_feature" />
 
                 <!-- 배송 흐름도 -->
                 <div v-if="sec.flow" class="sinsen_card sinsen_card_flow">
@@ -294,7 +293,7 @@
             >
                 <!-- 교통카드 충전: LNB + 콘텐츠 2열 레이아웃 -->
                 <template v-if="i === 2">
-                    <PanelHeader :title="tab.pageTitle" :subtitle="tab.pageDesc" />
+                    <PanelHeader :title="tab.pageTitle" :desc="tab.pageDesc" />
                     <div class="pop_wrap">
                         <nav class="pop_lnb" aria-label="팝카드 메뉴">
                             <ul>
@@ -320,7 +319,7 @@
                                             <img :src="card.img" :alt="card.name" />
                                         </figure>
                                         <div class="pop_card_body">
-                                            <p class="pop_card_desc" style="white-space:pre-line">{{ card.desc }}</p>
+                                            <p class="pop_card_desc">{{ card.desc }}</p>
                                             <p v-if="card.note" class="pop_card_note" :class="{ is_warn: card.noteWarn }">{{ card.note }}</p>
                                             <div v-if="card.logos && card.logos.length" class="pop_card_logos">
                                                 <img
@@ -354,25 +353,25 @@
 
                             <!-- 교통 사용처 안내 -->
                             <section id="pop-sec-1" data-pop-sec="1" class="pop_sec">
-                                <div class="traffic_sec_header">
+                                <div class="usage_header">
                                     <SectionHeader :title="tab.lnbItems[1]" />
                                     <SelectBox
-                                        class="traffic_select_box"
+                                        class="usage_select_box"
                                         v-model="trafficSelectVal"
                                         :options="tab.trafficSelectOptions"
                                         initMsg="선택하세요"
                                     />
                                 </div>
 
-                                <!-- 고속버스 -->
-                                <div v-if="trafficSelectVal === 'express'" class="traffic_group">
-                                    <h4 class="traffic_group_title">{{ tab.trafficExpressBus.title }}</h4>
-                                    <ul class="traffic_bullet_list">
-                                        <li v-for="(item, bi) in tab.trafficExpressBus.bullets" :key="bi">{{ item }}</li>
+                                <div v-if="trafficSelectVal && tab.trafficOptions[trafficSelectVal]" class="usage_group">
+                                    <h4 class="usage_group_title">{{ tab.trafficOptions[trafficSelectVal].title }}</h4>
+                                    <ul v-if="trafficSelectVal !== 'express' && tab.trafficOptions[trafficSelectVal].bullets?.length" class="list_dotted">
+                                        <li v-for="(item, bi) in tab.trafficOptions[trafficSelectVal].bullets" :key="bi">{{ item }}</li>
                                     </ul>
-                                    <ul class="traffic_logo_list">
-                                        <li v-for="(logo, li) in tab.trafficExpressBus.logos" :key="li">
-                                            <img :src="logo" :alt="tab.trafficExpressBus.bullets[li]" />
+                                    <!-- 고속버스일 때만 로고 표시 -->
+                                    <ul v-if="trafficSelectVal === 'express'" class="logo_list">
+                                        <li v-for="(logo, li) in tab.trafficOptions[trafficSelectVal].logos" :key="li">
+                                            <img :src="logo" :alt="tab.trafficOptions[trafficSelectVal].bullets[li]" />
                                         </li>
                                     </ul>
                                 </div>
@@ -380,25 +379,38 @@
 
                             <!-- 유통 사용처 안내 -->
                             <section id="pop-sec-2" data-pop-sec="2" class="pop_sec">
-                                <div class="traffic_sec_header">
+                                <div class="usage_header">
                                     <SectionHeader :title="tab.lnbItems[2]" />
                                     <SelectBox
-                                        class="traffic_select_box"
+                                        class="usage_select_box"
                                         v-model="retailSelectVal"
                                         :options="tab.retailSelectOptions"
                                         initMsg="선택하세요"
                                     />
                                 </div>
 
-                                <!-- 커피/아이스크림 -->
-                                <div v-if="retailSelectVal === 'coffee'" class="traffic_group">
-                                    <h4 class="traffic_group_title">{{ tab.retailCoffee.title }}</h4>
-                                    <p class="retail_note">{{ tab.retailCoffee.note }}</p>
-                                    <ul class="retail_logo_list">
-                                        <li v-for="(logo, ri) in tab.retailCoffee.logos" :key="ri">
-                                            <img :src="logo" :alt="tab.retailCoffee.brands[ri]" />
+                                <div v-if="retailSelectVal && tab.retailOptions[retailSelectVal]" class="usage_group">
+                                    <h4 class="usage_group_title">{{ tab.retailOptions[retailSelectVal].title }}</h4>
+                                    <p v-if="tab.retailOptions[retailSelectVal].note" class="retail_note">{{ tab.retailOptions[retailSelectVal].note }}</p>
+                                    <!-- 로고 그리드 -->
+                                    <ul v-if="tab.retailOptions[retailSelectVal].items" class="logo_list">
+                                        <li v-for="(item, ri) in tab.retailOptions[retailSelectVal].items" :key="ri">
+                                            <img v-if="item.logo" :src="item.logo" :alt="item.brand" />
+                                            <span v-else class="logo_placeholder"></span>
                                         </li>
                                     </ul>
+                                    <!-- 텍스트 목록 -->
+                                    <ul v-else-if="tab.retailOptions[retailSelectVal].bullets?.length && !tab.retailOptions[retailSelectVal].bullets[0]?.dt" class="list_dotted">
+                                        <li v-for="(bullet, bi) in tab.retailOptions[retailSelectVal].bullets" :key="bi">{{ bullet }}</li>
+                                    </ul>
+                                    <!-- 정의 목록 (dt/dd) -->
+                                    <dl v-else-if="tab.retailOptions[retailSelectVal].bullets?.length" class="usage_def_list">
+                                        <template v-for="(bullet, bi) in tab.retailOptions[retailSelectVal].bullets" :key="bi">
+                                            <dt>{{ bullet.dt }}</dt>
+                                            <dd>{{ bullet.dd }}</dd>
+                                        </template>
+                                    </dl>
+                                    <p v-if="tab.retailOptions[retailSelectVal].footnote" class="retail_footnote">{{ tab.retailOptions[retailSelectVal].footnote }}</p>
                                 </div>
                             </section>
                         </div>
@@ -407,7 +419,7 @@
 
                 <!-- 기프트카드 패널 -->
                 <template v-else-if="i === 3">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
                     <section>
                         <SectionHeader :title="tab.advantageTitle" />
                         <FeatureCards :items="tab.advantages" />
@@ -487,14 +499,12 @@
                         </div>
                     </section>
                 </template>
- 
 
                 <!-- GS25 유심 요금제 패널 -->
                 <template v-else-if="i === 4">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :subtitle="tab.desc" />
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
                     <section>
-                        <SectionHeader :title="tab.advantageTitle">
-                        </SectionHeader>
+                        <SectionHeader :title="tab.advantageTitle" />
                         <FeatureCards :items="tab.advantages" class="usim_advantage_cards" />
                     </section>
                     <section>
@@ -535,8 +545,7 @@
                         </div>
                     </section>
                     <section>
-                        <SectionHeader :title="tab.benefitTitle">
-                        </SectionHeader>
+                        <SectionHeader :title="tab.benefitTitle" />
                         <ul class="usim_benefit_cards">
                             <li v-for="(card, ci) in tab.benefitCards" :key="ci" class="usim_benefit_card">
                                 <figure class="usim_benefit_img">
@@ -572,6 +581,70 @@
 
                 </template>
 
+                <!-- 하이패스 카드/단말기 패널 -->
+                <template v-else-if="i === 5">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc">
+                        <ul class="list_caution">
+                            <li>* 하이플러스카드에서 출시한 모든 카드를 충전하실 수 있습니다. (http://www.hipluscard.co.kr/)</li>
+                            <li>* 하이패스카드(자동충전) 및 단말기를 구매하실 수 있습니다.</li>
+                        </ul>
+                    </PanelHeader>
+                    <section>
+                        <SectionHeader :title="tab.hipassStepTitle" />
+                        <Steps type="2" :items="tab.hipassSteps" />
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.hipassChargeTitle" :desc="tab.hipassChargeDesc" />
+                    </section>
+                    <section>
+                        <SectionHeader :title="tab.hipassTerminalTitle" :desc="tab.hipassTerminalDesc" />
+                        <div class="hipass_terminal_img">
+                            <img :src="tab.hipassTerminalImg" :alt="tab.hipassTerminalImgAlt" />
+                        </div>
+                    </section>
+                </template>
+
+                <!-- 고속도로 미납 통행료 납부 패널 -->
+                <template v-else-if="i === 6">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
+                    <section class="sec_unpaid_advantage">
+                        <SectionHeader :title="tab.serviceTitle" :desc="tab.serviceDesc" />
+                        <FeatureCards :items="tab.serviceAdvantages" />
+                    </section>
+                    <section class="sec_unpaid_method">
+                        <SectionHeader :title="tab.unpaidTitle" />
+                        <Steps type="2" :items="tab.unpaidSteps" />
+                    </section>
+                </template>
+
+                <!-- 온라인몰 편의점 결제 패널 (Figma 97:16410, 97:16422) -->
+                <template v-else-if="i === 7">
+                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
+                    <section class="sec_mall_payment_advantage">
+                        <SectionHeader :title="tab.serviceTitle" :desc="tab.serviceDesc" />
+                        <FeatureCards :items="tab.serviceAdvantages" />
+                    </section>
+                    <section class="sec_mall_payment_method">
+                        <SectionHeader :title="tab.mallPaymentTitle" />
+                        <Steps type="2" :items="tab.mallPaymentSteps" />
+                    </section>
+                    <section class="sec_mall_sites">
+                        <SectionHeader :title="tab.mallSiteTitle">
+                            <p v-if="tab.mallSiteNote" class="mall_site_note">{{ tab.mallSiteNote }}</p>
+                        </SectionHeader>
+                        <ul class="mall_site_list">
+                            <li v-for="(item, si) in tab.mallSiteItems" :key="si">
+                                <figure>
+                                    <div class="mall_site_thumb">
+                                        <img :src="item.img" :alt="item.name" />
+                                    </div>
+                                    <figcaption>{{ item.name }}</figcaption>
+                                </figure>
+                            </li>
+                        </ul>
+                    </section>
+                </template>
+
                 <!-- 그 외 패널: 기본 구조 -->
                 <template v-else>
                     <section>
@@ -579,20 +652,22 @@
                             :hero="tab.hero"
                             :hero-alt="tab.heroAlt"
                             :title="tab.title"
-                            :subtitle="tab.desc"
+                            :desc="tab.desc"
                         />
-                        <table v-if="tab.table" class="cash_table">
-                            <tbody>
-                                <tr v-for="(row, ri) in tab.table.rows" :key="ri">
-                                    <th scope="row">{{ row.head }}</th>
-                                    <td>
-                                        <div class="cash_table_cell">
-                                            <span>{{ row.text }}</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div v-if="tab.table" class="com_table_wrap">
+                            <table class="com_table">
+                                <tbody>
+                                    <tr v-for="(row, ri) in tab.table.rows" :key="ri">
+                                        <th scope="row">{{ row.head }}</th>
+                                        <td>
+                                            <div class="cash_table_cell">
+                                                <span>{{ row.text }}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
                 </template>
             </div>
@@ -600,22 +675,272 @@
 
         <!-- 택배&픽업 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel">
-
+            <nav class="service_tab_wrap" role="tablist" aria-label="택배&픽업 서비스">
+                <button
+                    v-for="(tab, i) in store.tabs[1].serviceTabs"
+                    :key="i"
+                    type="button"
+                    role="tab"
+                    :aria-selected="deliveryActiveTab === i"
+                    class="service_tab_item"
+                    :class="{ is_active: deliveryActiveTab === i }"
+                    @click="deliveryActiveTab = i"
+                >
+                    <span class="service_tab_icon" aria-hidden="true"></span>
+                    <span class="service_tab_label">{{ tab.label }}</span>
+                </button>
+            </nav>
+            <div>
+                <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
+                    <div v-show="deliveryActiveTab === i" class="service_panel">
+                        <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc">
+                            <ul v-if="tab.notes && tab.notes.length" class="list_dotted">
+                                <li v-for="(note, ni) in tab.notes" :key="ni">
+                                    <p>{{ note.text }}</p>
+                                    <p v-if="note.sub" class="note_sub">{{ note.sub }}</p>
+                                </li>
+                            </ul>
+                        </PanelHeader>
+                        <section v-if="tab.steps && tab.steps.length" class="sec_delivery_service">
+                            <SectionHeader :title="tab.stepTitle" />
+                            <Steps type="2" :items="tab.steps" />
+                        </section>
+                        <section v-if="tab.priceTable" class="sec_delivery_price_table">
+                            <SectionHeader :title="tab.priceTable.title" />
+                            <div class="com_table_wrap">
+                                <table class="com_table com_table_col">
+                                    <thead>
+                                        <tr>
+                                            <th v-for="(col, ci) in tab.priceTable.columns" :key="ci" scope="col">{{ col }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(row, ri) in tab.priceTable.rows" :key="ri">
+                                            <td v-for="(cell, ci) in row.cells" :key="ci" v-html="cell"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <section v-if="tab.infoTable" class="sec_delivery_info_table">
+                            <SectionHeader :title="tab.infoTable.title" />
+                            <div class="com_table_wrap">
+                                <table class="com_table">
+                                    <tbody>
+                                        <tr v-for="(row, ri) in tab.infoTable.rows" :key="ri">
+                                            <th scope="row">{{ row.head }}</th>
+                                            <td v-html="row.text"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <section v-if="tab.priceItems && tab.priceItems.length" class="sec_delivery_price">
+                            <SectionHeader :title="tab.priceTitle" />
+                            <div class="delivery_price_box">
+                                <ul class="delivery_price_list">
+                                    <li v-for="(item, pi) in tab.priceItems" :key="pi">
+                                        <p>{{ item.text }}</p>
+                                        <ul v-if="item.subs && item.subs.length" class="delivery_price_subs">
+                                            <li v-for="(sub, si) in item.subs" :key="si">{{ sub }}</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section v-if="tab.cautionItems && tab.cautionItems.length" class="sec_delivery_caution">
+                            <SectionHeader :title="tab.cautionTitle" />
+                            <FeatureCards type="icon" :items="tab.cautionItems" />
+                        </section>
+                        <section v-if="tab.periodItems && tab.periodItems.length" class="sec_delivery_period">
+                            <SectionHeader :title="tab.periodTitle" />
+                            <ul class="list_dotted">
+                                <li v-for="(item, pi) in tab.periodItems" :key="pi">
+                                    <p>{{ item.text }}</p>
+                                </li>
+                            </ul>
+                        </section>
+                        <section v-if="tab.noticeItems && tab.noticeItems.length" class="sec_delivery_notice">
+                            <SectionHeader :title="tab.noticeTitle" />
+                            <Steps type="2" :items="tab.noticeItems" />
+                        </section>
+                        <section v-if="tab.chargeItems && tab.chargeItems.length" class="sec_delivery_charge">
+                            <SectionHeader :title="tab.chargeTitle" />
+                            <ul class="list_dotted">
+                                <li v-for="(item, ii) in tab.chargeItems" :key="ii">
+                                    <p>{{ item.text }}</p>
+                                </li>
+                            </ul>
+                        </section>
+                        <section v-if="tab.methodItems && tab.methodItems.length" class="sec_delivery_method">
+                            <SectionHeader :title="tab.methodTitle" />
+                            <ul class="list_dotted">
+                                <li v-for="(item, ii) in tab.methodItems" :key="ii">
+                                    <p>{{ item.text }}</p>
+                                </li>
+                            </ul>
+                        </section>
+                        <section v-if="tab.pickupItems && tab.pickupItems.length" class="sec_delivery_pickup">
+                            <SectionHeader :title="tab.pickupTitle" />
+                            <Steps type="2" :items="tab.pickupItems" />
+                        </section>
+                        <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
+                            <SectionHeader :title="tab.shoppingTitle" />
+                            <ul class="list_dotted">
+                                <li v-for="(item, ii) in tab.shoppingItems" :key="ii">
+                                    <p v-html="item.text"></p>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </template>
+            </div>
         </div>
 
         <!-- 공공요금수납 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel">
-
+            <PanelHeader
+                :hero="store.tabs[2].hero"
+                :hero-alt="store.tabs[2].heroAlt"
+                :title="store.tabs[2].title"
+            >
+                <p class="brand_panel_desc">지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.
+                    기존지로 납부 외 휴대폰을 통한 모바일수납도 가능하며,납부공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부가능합니다.</p>
+            </PanelHeader>
+            <section v-if="store.tabs[2].taxGroups && store.tabs[2].taxGroups.length" class="sec_tax_list">
+                <SectionHeader :title="store.tabs[2].taxTitle" />
+                <div class="tax_group_list">
+                    <div v-for="(group, gi) in store.tabs[2].taxGroups" :key="gi" class="tax_group">
+                        <h4 class="tax_group_subtitle">{{ group.subtitle }}</h4>
+                        <ul v-if="group.isList" class="list_dotted">
+                            <li v-for="(item, ii) in group.items" :key="ii"><p>{{ item }}</p></li>
+                        </ul>
+                        <template v-else>
+                            <p v-for="(item, ii) in group.items" :key="ii" class="tax_group_desc">{{ item }}</p>
+                        </template>
+                    </div>
+                </div>
+            </section>
         </div>
-
         <!-- 상품권 판매 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
+            <PanelHeader
+                :hero="store.tabs[3].hero"
+                :hero-alt="store.tabs[3].heroAlt"
+                :title="store.tabs[3].subtitle"
+                :desc="store.tabs[3].desc"
+            />
+            <section v-if="store.tabs[3].voucherItems && store.tabs[3].voucherItems.length" class="sec_voucher">
+                <SectionHeader :title="store.tabs[3].voucherTitle" />
+                <ul class="voucher_list">
+                    <li v-for="(item, vi) in store.tabs[3].voucherItems" :key="vi" class="voucher_item">
+                        <div class="voucher_img">
+                            <img :src="item.img" :alt="item.name" />
+                        </div>
+                        <div class="voucher_info">
+                            <strong class="voucher_name">{{ item.name }}</strong>
+                            <div class="voucher_tags">
+                                <span v-for="(tag, ti) in item.tags" :key="ti" class="voucher_tag" :class="`tag_${tag.type}`">{{ tag.text }}</span>
+                            </div>
+                            <p class="voucher_desc">{{ item.desc }}</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <!-- 상생협력: 운영지원제도 -->
+        <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 0" class="brand_panel">
+            <!-- 3depth 탭 네비 -->
+            <nav class="service_tab_wrap" role="tablist" aria-label="운영지원제도">
+                <button
+                    v-for="(tab, i) in winwin.tabs[0].serviceTabs"
+                    :key="i"
+                    type="button"
+                    role="tab"
+                    :aria-selected="winwinServiceActiveTab === i"
+                    class="service_tab_item"
+                    :class="{ is_active: winwinServiceActiveTab === i }"
+                    @click="winwinServiceActiveTab = i"
+                >
+                    <span class="service_tab_icon" aria-hidden="true"></span>
+                    <span class="service_tab_label">{{ tab.label }}</span>
+                </button>
+            </nav>
 
+            <!-- 3depth 패널 -->
+            <div
+                v-for="(tab, i) in winwin.tabs[0].serviceTabs"
+                :key="i"
+                v-show="winwinServiceActiveTab === i"
+                class="service_panel"
+            >
+                <PanelHeader :title="tab.title">
+                    <ul v-if="tab.notes && tab.notes.length" class="list_caution">
+                        <li v-for="(note, ni) in tab.notes" :key="ni">{{ note.text }}</li>
+                    </ul> 
+                </PanelHeader>
+                <ul v-if="tab.items && tab.items.length" class="winwin_item_list">
+                    <li v-for="(item, ii) in tab.items" :key="ii" class="winwin_item">
+                        <article>
+                            <div class="winwin_item_icon" aria-hidden="true"></div>
+                            <div class="winwin_item_content">
+                                <div class="winwin_item_title">
+                                    <span class="winwin_item_num">{{ item.num }}</span>
+                                    <strong>
+                                        {{ item.title }}
+                                        <a v-if="item.link" :href="item.link" target="_blank" class="winwin_item_link" aria-label="링크 바로가기"></a>
+                                    </strong>
+                                </div>
+                                <div class="winwin_item_body">
+                                    <p v-if="item.desc" v-html="item.desc"></p>
+                                    <ul v-if="item.bullets && item.bullets.length" class="winwin_bullet_list">
+                                        <li v-for="(b, bi) in item.bullets" :key="bi">{{ b }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 상생협력: 참여제도 -->
+        <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 1" class="brand_panel">
+            <PanelHeader :hero="winwin.tabs[1].hero" :hero-alt="winwin.tabs[1].heroAlt" :title="winwin.tabs[1].title" :desc="winwin.tabs[1].desc" />
+            <ul v-if="winwin.tabs[1].items && winwin.tabs[1].items.length" class="winwin_item_list">
+                <li v-for="(item, ii) in winwin.tabs[1].items" :key="ii" class="winwin_item">
+                    <article>
+                        <div class="winwin_item_content">
+                            <div class="winwin_item_title">
+                                <span class="winwin_item_num">{{ item.num }}</span>
+                                <strong>{{ item.title }}</strong>
+                            </div>
+                            <div class="winwin_item_body">
+                                <p v-if="item.desc" class="winwin_item_desc" v-html="item.desc"></p>
+                            </div>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </div>
+
+        <!-- depth1 = 4: 밀박스/스낵바 -->
+        <div v-if="depth1ActiveIdx === 4" class="brand_panel">
+            <PanelHeader :hero="milbox.hero" :hero-alt="milbox.heroAlt" :title="milbox.title" />
+            <section v-for="(sec, si) in milbox.sections" :key="si">
+                <SectionHeader :title="sec.title" :desc="sec.desc">
+                    <p v-if="sec.note" class="sec_note">{{ sec.note }}</p>
+                </SectionHeader>
+                <FeatureCards v-if="sec.items && sec.items.length" :items="sec.items" type="icon" class="milbox_feature" />
+            </section>
         </div>
 
         <div class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
         </div>
+
+
+        
     </div>
 </template>
 
@@ -667,32 +992,38 @@ import imgMenu2 from "@/assets/images/dummy/gopizza_menu_02.png";
 import imgPhone1 from "@/assets/images/dummy/gopizza_phone_01.png";
 import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 
-/*신선강화점 이미지*/ 
+/* 신선강화점 이미지 */
 import imgHero4 from "@/assets/images/dummy/brand_bg_05.png";
 import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 
-/*매장/서비스 이미지*/
+/* 매장/서비스 이미지 */
 import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
-import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";   
+import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";
+import imgHero7 from "@/assets/images/dummy/brand_bg_08.png"; 
+import imgHero8 from "@/assets/images/dummy/brand_bg_09.png"; 
+import imgHero9 from "@/assets/images/dummy/brand_bg_10.png"; 
+import imgHero10 from "@/assets/images/dummy/brand_bg_11.png"; 
+import imgHero11 from "@/assets/images/dummy/brand_bg_12.png"; 
+import imgHero12 from "@/assets/images/dummy/brand_bg_13.png"; 
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
 import imgPoint1 from "@/assets/images/dummy/point_01.png";
-import imgPoint2 from "@/assets/images/dummy/point_02.png";
+import imgPoint2 from "@/assets/images/dummy/point_02.png"; 
 import imgPoint3 from "@/assets/images/dummy/point_03.png";
 import imgPoint4 from "@/assets/images/dummy/point_04.png";
 import imgTransService1 from "@/assets/images/dummy/transportation_service_01.png";
 import imgTransService2 from "@/assets/images/dummy/transportation_service_02.png";
 import imgTransService3 from "@/assets/images/dummy/transportation_service_03.png";
 import imgTransService4 from "@/assets/images/dummy/transportation_service_04.png";
-import imgBus1 from "@/assets/images/dummy/bus_01.png";
-import imgBus2 from "@/assets/images/dummy/bus_02.png";
-import imgBus3 from "@/assets/images/dummy/bus_03.png";
-import imgBus4 from "@/assets/images/dummy/bus_04.png";
-import imgBus5 from "@/assets/images/dummy/bus_05.png";
-import imgBus6 from "@/assets/images/dummy/bus_06.png";
-import imgBus7 from "@/assets/images/dummy/bus_07.png";
-import imgBus8 from "@/assets/images/dummy/bus_08.png";
+import imgBus1 from "@/assets/images/dummy/express_bus_01.png";
+import imgBus2 from "@/assets/images/dummy/express_bus_02.png";
+import imgBus3 from "@/assets/images/dummy/express_bus_03.png";
+import imgBus4 from "@/assets/images/dummy/express_bus_04.png";
+import imgBus5 from "@/assets/images/dummy/express_bus_05.png";
+import imgBus6 from "@/assets/images/dummy/express_bus_06.png";
+import imgBus7 from "@/assets/images/dummy/express_bus_07.png";
+import imgBus8 from "@/assets/images/dummy/express_bus_08.png";
 import imgBrandUsage1 from "@/assets/images/dummy/brand_usage_01.png";
 import imgBrandUsage2 from "@/assets/images/dummy/brand_usage_02.png";
 import imgBrandUsage3 from "@/assets/images/dummy/brand_usage_03.png";
@@ -711,10 +1042,21 @@ import imgGiftCard6 from "@/assets/images/dummy/gift_card_06.png";
 import imgGiftPurchase from "@/assets/images/dummy/gift_purchase_bg.png";
 import imgRateBenefit1 from "@/assets/images/dummy/rate_benefit_01.png";
 import imgRateBenefit2 from "@/assets/images/dummy/rate_benefit_02.png";
-
+import imgHipassTerminal    from "@/assets/images/dummy/hipass_terminal.png";
+import imgServiceDesc01    from "@/assets/images/dummy/service_desc_01.png";
+import imgServiceDesc02    from "@/assets/images/dummy/service_desc_02.png";
+import imgServiceDesc03    from "@/assets/images/dummy/service_desc_03.png";
+import imgServiceDesc04    from "@/assets/images/dummy/service_desc_04.png";
+import imgServiceDesc05    from "@/assets/images/dummy/service_desc_05.png";
+import imgServiceDesc06    from "@/assets/images/dummy/service_desc_06.png";
+import imgGiftCerti01 from "@/assets/images/dummy/gift_certi_01.png";
+import imgGiftCerti02 from "@/assets/images/dummy/gift_certi_02.png";
+import imgGiftCerti03 from "@/assets/images/dummy/gift_certi_03.png";
 
 const router = useRouter();
 const activeTab = ref(0);
+
+const ph = (n) => Array.from({ length: n }, () => ({ brand: "", logo: null }));
 
 const langData = {
     nav: {
@@ -736,6 +1078,10 @@ const langData = {
             { item: "택배&픽업" },
             { item: "공공요금수납" },
             { item: "상품권 판매" },
+        ],
+        depth2Winwin: [
+            { item: "운영지원제도" },
+            { item: "참여제도" },
         ],
     },
     tabs: [
@@ -1022,25 +1368,96 @@ const langData = {
                         desc:     "",
                         lnbItems: ["팝카드란?", "교통 사용처 안내", "유통 사용처 안내"],
                         trafficSelectOptions: [
-                            { value: "express", label: "고속버스" },
                             { value: "subway",  label: "지하철" },
                             { value: "bus",     label: "버스" },
-                            { value: "taxi",    label: "택시" },
+                            { value: "express", label: "고속버스" },
                             { value: "inter",   label: "시외버스" },
                         ],
-                        trafficExpressBus: {
-                            title: "고속버스",
-                            bullets: ["금호고속", "동부 익스프레스", "동양고속", "속리산고속", "(주)중앙고속", "삼화 고속", "천일 고속", "한일 익스프레스"],
-                            logos: [imgBus1, imgBus2, imgBus3, imgBus4, imgBus5, imgBus6, imgBus7, imgBus8],
+                        trafficOptions: {
+                            express: {
+                                title: "고속버스",
+                                bullets: ["금호고속", "동부 익스프레스", "동양고속", "속리산고속", "(주)중앙고속", "삼화 고속", "천일 고속", "한일 익스프레스"],
+                                logos: [imgBus1, imgBus2, imgBus3, imgBus4, imgBus5, imgBus6, imgBus7, imgBus8],
+                            },
+                            subway: { title: "지하철", bullets: ["수도권(1~9호선, 수인선, 경춘선, 경의선, 중앙선, 의정부, 분당선, 신분당, 공항, 인천)", "대전(1호선)", "대구(1~2호선)", "부산(1~4호선, 부산-김해경전철)"] },
+                            bus:    { title: "버스",   bullets: ["수도권","대전광역시, 세종시", "충남, 충북(충주, 영동, 청주, 옥천, 단양, 제천, 진천, 청원, 괴산, 보은, 음성", "강원(원주, 횡성, 춘천, 강릉)", "부산광역시, 대구광역시, 울산광역시","경남(창원, 통영, 거제, 밀양, 양산, 함안, 사천, 마산, 진해, 진주)","경북(포항, 구미, 경주, 안동, 상주, 문경, 영주, 김천, 경산, 예천)", "전남(목포, 여수, 광양, 순천, 화순, 나주, 장성, 함평, 담양, 보성, 영암, 해남)","전북(군산, 전주, 익산, 군산, 김제, 남원, 고창, 정읍, 진안, 임실, 부안)","제주"] },
+                            inter:  { title: "시외버스", bullets: ["수도권(서울시 공항버스 제외)","충남","강원(원주 제외)"] },
                         },
                         retailSelectOptions: [
-                            { value: "coffee", label: "커피/아이스크림" },
+                            { value: "convenience",   label: "편의점" },
+                            { value: "mart",          label: "대형마트/유통점" },
+                            { value: "bakery",        label: "베이커리" },
+                            { value: "coffee",        label: "커피/아이스크림" },
+                            { value: "fastfood",      label: "패스트푸드" },
+                            { value: "restaurant",    label: "요식" },
+                            { value: "cosmetics",     label: "화장품" },
+                            { value: "entertainment", label: "엔터테인먼트" },
+                            { value: "pcroom",        label: "PC방" },
+                            { value: "university",    label: "대학" },
+                            { value: "public",        label: "공공시설" },
+                            { value: "tourism",       label: "관광" },
+                            { value: "parking",       label: "주차장" },
+                            { value: "kiosk",         label: "무인기기" },
+                            { value: "etc",           label: "기타" },
                         ],
-                        retailCoffee: {
-                            title: "커피/아이스크림",
-                            note: "마트, 백화점, 휴게소 등 일부 입점 매장 제외",
-                            brands: ["스타벅스", "파스쿠찌", "베라", "잠바주스", "엔젤인어스", "카페띠아모", "자바시티", "커피베이", "요거프레소"],
-                            logos: [imgBrandUsage1, imgBrandUsage2, imgBrandUsage3, imgBrandUsage4, imgBrandUsage5, imgBrandUsage6, imgBrandUsage7, imgBrandUsage8, imgBrandUsage9],
+                        retailOptions: {
+                            convenience:   { title: "편의점",          items: ph(7) },
+                            mart:          { title: "대형마트/유통점",  note:"마트, 익스프레스의 일부 매장은 향후 서비스 도입 예정", items: ph(4) },
+                            bakery:        { title: "베이커리", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(3) },
+                            coffee:        { title: "커피/아이스크림",  note: "마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: [
+                                { brand: "스타벅스",   logo: imgBrandUsage1 },
+                                { brand: "파스쿠찌",   logo: imgBrandUsage2 },
+                                { brand: "베라",       logo: imgBrandUsage3 },
+                                { brand: "잠바주스",   logo: imgBrandUsage4 },
+                                { brand: "엔젤인어스", logo: imgBrandUsage5 },
+                                { brand: "카페띠아모", logo: imgBrandUsage6 },
+                                { brand: "자바시티",   logo: imgBrandUsage7 },
+                                { brand: "커피베이",   logo: imgBrandUsage8 },
+                                { brand: "요거프레소", logo: imgBrandUsage9 },
+                            ]},
+                            fastfood:      { title: "패스트푸드", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(3) },
+                            restaurant:    { title: "요식", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(3) },
+                            cosmetics:     { title: "화장품", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(6) },
+                            entertainment: { title: "엔터테인먼트", note:"LOTTE CINEMA(피카디리관), MEGABOX(안산관), SK와이번스(연간회원권)", items: ph(3) },
+                            pcroom:        { title: "PC방",       bullets: ["T-money PC방"], footnote: "어린이카드는 사용이 제한됨" },
+                            university:    { title: "대학",
+                            bullets: [
+                                { dt: "교내식당", dd: "충남대" }, 
+                                { dt: "매점", dd: "동국대, 백석대, 정의여중고, 건대부속고, 동덕여대"},
+                                { dt: "OA기기", dd:"동국대, 서울과학기술대, 한양대, 이화여대, 인천대"},
+                                { dt: "셔틀버스", dd:"아주대, 성균관대"},
+                                { dt: "기타", dd:"자판기(중앙대, 건양대, 아주대, 명지대 등), 무인사물함(연세대, 경기대, 명지대 등)"}
+                                     ] },
+                            public:       { title: "공공시설", bullets: [
+                                "경륜 / 경정장(서울올림픽기념국민체육진흥공단)",
+                                "경마장(한국마사회)",
+                                "서초구청 아방세홀 식대 결제",  
+                                "서울시청 다산프라자 민원발급 수수료",
+                                "서울시 구청 민원결제(전체)",
+                                "종로구 자치회관 19개소 (가회동, 삼청동 등)",
+                                "중앙우체국(식당결제)",
+                                "대전시 공용자전거 타슈 결제",
+                                "과천 과학관 식대, 매점, 카페 등 결제",
+                                "포항시청 세무과 민원결제(시청, 구청, 읍 / 면 / 동사무소 32개소)",
+                                "음식물종량제 : 군포시, 의정부시, 인천남구, 인천서구, 원주시, 포항시, 제주시, 서귀포시, 송파구, 순창군",
+                            ] },
+                            tourism:       { title: "관광",        bullets: ["한강수상택시","시티투어버스(T-money카드 결제 시 요금 5% 할인혜택)"] },
+                            parking:       { title: "주차장", bullets: [
+                                "서울특별시 공영주차장",
+                                "서울특별시 강남시설관리공단 노외주차장 9개소 : 탄천, 강남구청, 강남교육원, 언북초교, 포이초교, 개포공영, 역삼1로, 역삼10, 대치3동 문화센터",
+                                "서울특별시 시설관리공단 환승주차장 (T-money로 지하철 탑승 후 출차시 주차요금 환승할인 혜택가능) : 잠실역, 창동역, 구로디지털단지역, 개화산역, 수서역, 도봉산역, 봉화산역, 수락산역, 한강진역, 화랑대역, 월드컵경기장주차장",
+                                "서울특별시 체육시설관리사업소 주차장(잠실종합운동장)",
+                                "북서울 꿈의 숲, 인천공항",
+                                "수원시 시설관리공단 주차장 : 시청제1지상, 시청제2지상, 선경, 영통구청, 영통공영, 권선공영, 인계공영, 율전공영, 터미널공영, 대황교화물, 화서환승, 성대환승, 꽃뫼환승, 세류역 환승, 광교공영, 만석공원, 백설공영, 영화동, 세류2동, 인계동, 매교동, 탑동, 곡반정동 제1,2",
+                                "성남시 시설관리공단 주차장 : 금곡동, 서현동, 정자 환승, 오리 환승, 야탑 제1, 중부초교, 해오름, 대원천, 단대공원, 복정동. 신흥제, 태평제, 아래숯골 등 44개소",
+                                "파주시 시설관리공단 주차장 : 금촌2공영, 금촌2-8공영, 금촌3공영",
+                                "KTX 철도역사 주차장 (광명역, 천안 / 아산역 등)",
+                                "하이파킹 주차장 : 춘천 지하, 대구 두류1번가 지하, 수진역 환승, 죽전 아이원프라자",
+                                "기타 : 월드컵경기장, 목동 노상, 응봉동(건물), 삼성동 오크우드, 강북삼성병원, SH공사 주차장, 누리꿈스퀘어 주차장, 서울숲 공원 주차장, 서울무역전시장 주차장, 동원산업 빌딩 지하 주차장, 인천경제통상진흥원 주차장, 지에스파크24㈜ 서울디자인고 주차장",
+                                "무인기기",
+                            ] },
+                            kiosk:         { title: "무인기기",    bullets: ["KTL 공중전화","지하철 무인택배 보관함, 음료 / 스낵 자판기, 도서자판기, 무인사진 촬영기","우체국 무인우편창구 : 서울체신청, 경인체신청, 충청체신청, 경북체신청, 부산체신청"] },
+                            etc:           { title: "기타",        bullets: ["고속도로 휴게소 : 진영휴게소, 영천휴게소", "개그스토리 마트 (일부점)","문구점 색연필 (일부점)", "비디오 대여점 영화마을 (일부점)"] },
                         },
                         pageTitle: "교통카드 충전서비스(팝티머니,마이비,캐시비(EZL),한페이)",
                         pageDesc:  "GS25는 대중교통을 이용하는 고객님을 위해 교통카드 충전 서비스를 실행하고있습니다.<br />또한, GS25에서 상품을 구매할 수 있어 결제수단의 편의성을 제공하고있는 유익한 서비스입니다. (복권, 로또, 토토, 택배 등 일부상품제외)",
@@ -1072,7 +1489,7 @@ const langData = {
                             },
                             {
                                 img:      imgPopCard2,
-                                name:     "멥버십 팝카드",
+                                name:     "멤버십 팝카드",
                                 desc:     "멤버십팝카드는 GS ALL 포인트와 팝카드가 결합되어 GS25, GS THE FRESH에서 결제와 동시에 포인트가 적립되고, 600여 온라인쇼핑, 게임 등에서 결제가 가능한 혜택이 많은 선불카드입니다.",
                                 note:     "*교통기능 없음",
                                 noteWarn: true,
@@ -1118,7 +1535,7 @@ const langData = {
                         purchaseImg:   imgGiftPurchase,
                         purchaseSteps: [
                             { num: "01", title: "판매처 방문",    desc: "가까운 GS25 편의점에 방문하세요." },
-                            { num: "02", title: "기프트카드 선택", desc: "가까운 GS25 편의점에 방문하세요." },
+                            { num: "02", title: "기프트카드 선택", desc: "원하는 브랜드의 기프트카드를 선택하세요." },
                             { num: "03", title: "사용설명 확인",   desc: "구매하신 카드 뒷면 사용설명을 잘 확인하시고 사용하세요." },
                             { num: "04", title: "계산",           desc: "계산대에서 계산을 완료하시면 활성화되어 사용 가능한 상태가 됩니다." },
                         ],
@@ -1182,10 +1599,9 @@ const langData = {
                         ],
                         purchaseTitle: "GS25 매장에서 유심 구매/사용 방법",
                         purchaseSteps: [
-                            { step: "Step 1", title: "텍스트<br />최대2줄" },
-                            { step: "Step 2", title: "GS25 편의점에서<br />유심카드 구입" },
-                            { step: "Step 3", title: "유심 일련번호 완료 후<br />개통 신청 (또는 전화로 개통 신청)" },
-                            { step: "Step 4", title: "해피콜/개통 완료 후<br />휴대폰에 유심을 장착하면 간편 개통 끝!" },
+                            { step: "Step 1", title: "간편하게 가입하는 요금제" },
+                            { step: "Step 2", title: "대한민국 최저가" },
+                            { step: "Step 3", title: "약정 조건/위약금 ZERO" },
                         ],
                         benefitTitle: "GS25 요금제 혜택",
                         benefitCards: [
@@ -1208,7 +1624,7 @@ const langData = {
                         plans: [
                             {
                                 name:         "GS25(15GB+/100분)",
-                                data:         "15GB\n(소진시 3Mbps속도로 계속 사용)",
+                                data:         "15GB\n<span class=\"usim_plan_data_sub\">(소진시 3Mbps속도로 계속 사용)</span>",
                                 voice:        "100분",
                                 sms:          "100건",
                                 normalPrice:  "47,300원",
@@ -1253,48 +1669,559 @@ const langData = {
                         ],
                     },
                     {
-                        label:   "하이패스\n카드/단말기",
-                        hero:    null,
-                        heroAlt: "",
-                        title:   "하이패스 카드/단말기",
-                        desc:    "",
+                        label:          "하이패스\n카드/단말기",
+                        hero:           null,
+                        heroAlt:        "",
+                        title:          "하이패스 카드/단말기",
+                        desc:           "GS25에서 24시간 하이패스카드를 구매/충전하세요.",
+                        hipassStepTitle:    "하이패스카드 구매 (셀프형 자동충전카드)",
+                        hipassSteps: [
+                            {
+                                step:    "Step 1",
+                                title:   "셀프형 자동충전카드 구매",
+                                bullets: [
+                                    "가까운 GS25에서 하이패스 카드 구매",
+                                    "카드 구입비: 5,000원",
+                                ],
+                            },
+                            {
+                                step:    "Step 2",
+                                title:   "카드등록 및 결제정보등록",
+                                bullets: [
+                                    "홈페이지에서 카드번호 및 결제정보등록<br />(계좌 or 신용카드)",
+                                ],
+                                note:    "카드등록 후 24시간 이후 사용 가능",
+                            },
+                            {
+                                step:    "Step 3",
+                                title:   "하이패스 카드 이용",
+                                bullets: [
+                                    "하이패스 단말기에 삽입하여 사용",
+                                    "등록된 결제방식을 통해 자동 충전됨",
+                                ],
+                            },
+                        ],
+                        hipassChargeTitle: "하이패스 카드 충전",
+                        hipassChargeDesc: "하이플러스카드에서 출시한 모든 카드 충전가능 ('도로공사', 'EX' 기재된 카드 충전불가)",
+                        hipassTerminalTitle: "하이패스단말기 판매",
+                        hipassTerminalDesc: "한국도로공사가 인증하고 2년 연속 한국품질만족도 1위 'GPASS' 단말기 판매",
+                        hipassTerminalImg:    imgHipassTerminal,
+                        hipassTerminalImgAlt: "하이패스 단말기(GPASS) 이미지",
                     },
                     {
                         label:   "고속도로 미납\n통행료 납부",
                         hero:    null,
                         heroAlt: "",
                         title:   "고속도로 미납 통행료 납부",
-                        desc:    "",
+                        desc:    "국내편의점 중 최초로 고속도로 미납통행료 실시간 조회 및 납부할 수 있는 서비스입니다.",
+                        serviceTitle: "편의점 결제의 장점",
+                        serviceDesc:
+                            "이제 팝 하세요! 다양한 결제 수단과 결합하여 혜택은 더 크게, 소비는 더 합리적으로, 사용은 더 편리하게 할 수 있도록 팝카드만의 차별화된 서비스를 제공합니다.",
+                        serviceAdvantages: [
+                            {
+                                num:   "01",
+                                title: "보편성",
+                                desc:  "은행보다 많고 가까운 집 근처 편의점에서 24시간 결제 가능<br /><span class=\"txt_point\">전국 모든 GS25 점포에서 수납 대행</span><br />(실시간 입금확인, 대면 거래)",
+                            },
+                            {
+                                num:   "02",
+                                title: "경제성",
+                                desc:  "고객 수수료 별도 부담 없음<br />계좌이체, 무통장입금 발생되는 뱅킹 수수료 없음",
+                            },
+                            {
+                                num:   "03",
+                                title: "편리성",
+                                desc:  "은행에 가지 않아도, 신용카드가 없어도, 온라인상점에서 주문하면 결제(입금)은 편의점에서 완료<br /><span class=\"txt_point\">거스름돈은 점포에서 바로 수령 가능</span>",
+                            },
+                            {
+                                num:   "04",
+                                title: "안전성",
+                                desc:  "복잡한 공인인증서나 보안 카드가 필요 없고, 결제정보 노출 방지<br />대면 거래에 따른 전자금융사고 (스미싱)<br />예방",
+                            },
+                        ],
+                        unpaidTitle: "고속도로 미납통행료 납부 방법",
+                        unpaidSteps: [
+                            { step: "Step 1", title: "GS25 편의점에게<br />납부요청" },
+                            { step: "Step 2", title: "차량번호 입력" },
+                            { step: "Step 3", title: "개인정보제공동의" },
+                            { step: "Step 4", title: "생년월일 입력" },
+                            { step: "Step 5", title: "결제(현금/신용카드)" },
+                        ],
                     },
                     {
                         label:   "온라인몰\n편의점 결제",
                         hero:    null,
                         heroAlt: "",
                         title:   "온라인몰 편의점 결제",
-                        desc:    "",
+                        desc:    "온라인몰(쇼핑, 게임, 항공사, 기타)에서 구매할 때 '편의점결제'를 선택하고 문자로 수납번호나 바코드를 받아 GS25에서 현금 결제할 수 있는 서비스입니다.",
+                        serviceTitle: "편의점 결제의 장점",
+                        serviceAdvantages: [
+                            {
+                                num:   "01",
+                                title: "보편성",
+                                desc:  "은행보다 많고 가까운 집 근처 편의점에서 24시간 결제 가능<br /><span class=\"txt_point\">전국 모든 GS25 점포에서 수납 대행</span><br />(실시간 입금확인, 대면 거래)",
+                            },
+                            {
+                                num:   "02",
+                                title: "경제성",
+                                desc:  "고객 수수료 별도 부담 없음<br />계좌이체, 무통장입금 발생되는 뱅킹 수수료 없음",
+                            },
+                            {
+                                num:   "03",
+                                title: "편리성",
+                                desc:  "은행에 가지 않아도, 신용카드가 없어도, 온라인상점에서 주문하면 결제(입금)은 편의점에서 완료<br /><span class=\"txt_point\">거스름돈은 점포에서 바로 수령 가능</span>",
+                            },
+                            {
+                                num:   "04",
+                                title: "안전성",
+                                desc:  "복잡한 공인인증서나 보안 카드가 필요 없고, 결제정보 노출 방지<br />대면 거래에 따른 전자금융사고 (스미싱)<br />예방",
+                            },
+                        ],
+                        mallPaymentTitle: "편의점 결제 이용 방법",
+                        mallPaymentSteps: [
+                            { step: "Step 1", title: "온라인몰에서<br />상품/서비스 구매" },
+                            { step: "Step 2", title: "온라인몰에서<br />상품/서비스 구매" },
+                            { step: "Step 3", title: "가까운 GS25에서<br />24시간 결제" },
+                            { step: "Step 4", title: "집으로 상품 배송<br />(캐시충전)" },
+                        ],
+                        mallSiteTitle: "이용 가능한 온라인 및 모바일 사이트",
+                        mallSiteNote:  "* 향후 지속 확대예정",
+                        mallSiteItems: [
+                            { name: "11번가",                  img: imgServiceDesc01 },
+                            { name: "스타일쉐어",              img: imgServiceDesc02 },
+                            { name: "NC소프트",                img: imgServiceDesc03 },
+                            { name: "파워콜 항공/쇼핑",        img: imgServiceDesc04 },
+                            { name: "티웨이항공",              img: imgServiceDesc05 },
+                            { name: "유니컴즈\n(LG U+ 별정통신사)", img: imgServiceDesc06 },
+                        ],
+                    },
+                ],
+            },
+            {
+                hero:     null,
+                heroAlt:  "",
+                title:    "택배&픽업",
+                subtitle: "",
+                sections: [],
+                serviceTabs: [
+                    {
+                        label:   "국내택배",
+                        hero:  imgHero7,
+                        heroAlt: "",
+                        title:   "국내택배 서비스",
+                        desc:    "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
+                        notes: [
+                            {
+                                text: "중량 측정을 통한 합리적인 운임을 제공합니다. (최저 3,400원)",
+                                sub:  "*25년 4월1일부로 변경",
+                            },
+                            {
+                                text: "접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.",
+                            },
+                            {
+                                text: "GS포스트박스 회원으로 접수 시 다양한 이벤트에 참여 가능하며, 사용량에 따라 등급 별 혜택을 제공합니다.",
+                            },
+                        ],
+                        stepTitle: "국내택배 서비스",
+                        steps: [
+                            { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약" },
+                            { step: "Step 2", title: "홈페이지/모바일APP<br />택배접수 예약" },
+                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" },
+                            { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관" },
+                        ],
+                        cautionTitle: "국내택배 유의사항",
+                        cautionItems: [
+                            {
+                                // icon: imgCautionSize,
+                                icon:    null,
+                                iconAlt: "사이즈 아이콘",
+                                title:   "사이즈",
+                                desc:    "가로 세로 높이의 합 160cm 이내<br />한변의 길이가 1m 이내",
+                            },
+                            {
+                                // icon: imgCautionWeight,
+                                icon:    null,
+                                iconAlt: "중량 아이콘",
+                                title:   "중량",
+                                desc:    "20kg 이하",
+                            },
+                            {
+                                // icon: imgCautionPrice,
+                                icon:    null,
+                                iconAlt: "물품가액 아이콘",
+                                title:   "물품가액",
+                                desc:    "50만원 이하",
+                            },
+                        ],
+                        priceTitle: "국내택배 이용요금",
+                        priceItems: [
+                            {
+                                text: "최저 3,400원부터 중량 및 거리에 따라 요금 적용",
+                                subs: [
+                                    "동일권/타권/제주권에 따라 다름",
+                                    "서신/서류는 우편법 규정에 의거하여 운임산정",
+                                ],
+                            },
+                            { text: "착불 시 착불수수료(300원) 부과" },
+                            { text: "도서지역으로 배송 시 4,000원 부과" },
+                            { text: "고액상품(50만원 초과) 배송시 2,500원 부과" },
+                        ],
+                        periodTitle: "국내택배 이용기간",
+                        periodItems: [
+                            { text: "평일 17시(시,군,구 일부지역 및 경기 일부지역 15시), 토요일 12시 이전 접수 시 익일 배송" },
+                            { text: "일요일 및 공휴일은 접수만 가능" },
+                            { text: "점포 별로 마감시간이 다를 수 있음" },
+                        ],
+                    },
+                    {
+                        label: "반값택배",
+                        hero: imgHero8,
+                        heroAlt: "",
+                        title: "반값택배 서비스",
+                        desc: "편의점 최초! 국내유일 공휴일 배송! 최저가택배 GS25에서 보내고 GS25에서 받아보세요.",
+                        notes: [
+                            {
+                                text: "편의점 최초! 편의점에서 접수하고 편의점에서 수령 가능합니다.",
+                            },
+                            {
+                                text: "거리에 상관없이 무게에 따라 이용 가능합니다.",
+                            },
+                            {
+                                text: "접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.",
+                            },
+                        ],
+                        stepTitle: "반값택배 이용 방법",
+                        steps: [
+                            { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약", bullets: ["수령점포 선택 입력"] },
+                            { step: "Step 2", title: "물품 포장 후<br />GS25 방문", bullets: ["세부 내용 작성", "세부 내용 작성", "<span style=\"color: #fb6432;\">특이사항 기재시 컬러</span>"] },
+                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" },
+                            { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관" },
+                        ],
+                        priceTable: {
+                            title: "반값택배 이용요금",
+                            desc:  "운임 결제는 선불만 가능",
+                            note:  "향후 지속 확대예정",
+                            columns: ["구분", "내륙↔내륙 / 제주↔제주", "제주↔내륙 / 내륙↔도서"],
+                            rows: [
+                                {
+                                    cells: [
+                                        "이용요금",
+                                        "~500g: 1,900원<br />~1kg: 2,300원<br />~5kg: 2,700원",
+                                        "~500g: 3,600원<br />~1kg: 4,000원<br />~5kg: 4,400원",
+                                    ],
+                                },
+                            ],
+                        },
+                        infoTable: {
+                            title: "반값택배 이용안내",
+                            rows: [
+                                { head: "예약방법",    text: "반값택배 예약 시 도착점을 GS25 편의점으로 선택" },
+                                { head: "서비스 지역", text: "GS25 ↔ GS25" },
+                                { head: "수령방법",    text: "점포 근무자에게 알림톡으로 전송된 QR코드 제시" },
+                                { head: "배송기간",    text: "내륙~내륙, 제주~제주 : 접수일포함 4일 이내, 동일권역 2~3일 이내<br />제주↔내륙 : 접수일 포함 5~7일 내 *주말/공휴일 배송 가능<br />*내륙↔제주 간 반값택배는 접수일 포함 7일 이내 배송 완료 됩니다.<br />*기상 상황으로 선박 운행이 불가하거나, 선박운행 스케줄 변동으로 배송소요일이 추가될 수 있습니다." },
+                            ],
+                        },
+                        cautionTitle: "반값택배 유의사항",
+                        cautionItems: [
+                            { icon: null, iconAlt: "마감시간 아이콘",   title: "마감시간",          desc: "당일 수거 마감시간 오전 09시" },
+                            { icon: null, iconAlt: "규격 아이콘",       title: "규격 초과 시 수거 불가", desc: "세변의 합 80cm 이내" },
+                            { icon: null, iconAlt: "중량 아이콘",       title: "중량",              desc: "5kg 이하" },
+                            { icon: null, iconAlt: "물품가액 아이콘",   title: "물품가액",          desc: "50만원 이하" },
+                        ],
+                    },
+                    {
+                        label: "국제택배",
+                        hero:    imgHero9,
+                        heroAlt: "",
+                        title: "국제택배 서비스",
+                        desc: "365일 24시간 가까운 GS25에서 국제택배 접수가 가능 합니다. (SFExpress, 우체국EMS, DHL)",
+                        notes: [
+                            {
+                                text: "GS25 편의점에서 24시간 국제택배 예약/접수가 가능합니다.",
+                            },
+                            {
+                                text: "예약 시 특송사(SF Express, EMS, DHL)를 선택하여 접수 가능합니다.",
+                            },
+                            {
+                                text: "접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.",
+                            },
+                        ],
+                        noticeTitle:"국제택배 이용방법",
+                        noticeItems: [
+                            { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약", bullets: ["회원, 영문작성"] },
+                            { step: "Step 2", title: "물품 포장 후<br />GS25 방문",          bullets: ["세부 내용 작성", "세부 내용 작성", "<span style=\"color: #fb6432;\">특이사항 기재시 컬러</span>"] },
+                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)"},
+                            { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관"},
+                        ],
+                        chargeTitle: "국제택배 이용요금 및 배송 가능 국가",
+                        chargeItems: [
+                            { text: "서비스 운임 및 배송가능 국가는 각 특송사 별 상이하며, 홈페이지/모바일 APP 예약 시 운임 조회 가능" },
+                            { text: "운임 결제는 선불만 가능" },
+                            { text: "점포 별로 마감시간이 다를 수 있음" },
+                        ],
+                        methodTitle: "국제택배 배송방법",
+                        methodItems: [
+                            { text: "평일 17시(시,군,구 일부지역 및 경기 일부지역 15시), 토요일 12시 이전 접수 시 CJ대한통운 택배를 통해 수거 되며, 익일 각 특송사에 접수되어 해외로 발송" },
+                            { text: "일요일 및 공휴일은 접수만 가능" },
+                            { text: "점포 별로 마감시간이 다를 수 있음" },
+                        ],
+                    },
+                    {
+                        label: "픽업",
+                        hero: imgHero10,
+                        heroAlt: "",
+                        title: "픽업 서비스",
+                        desc: "쇼핑몰에서 상품주문 후, 가까운 GS25에서 물건을 찾아가세요.",
+                        notes: [
+                            {
+                                text: "원하는 시간에 지정한 점포에서 수령이 가능합니다. (안심택배)",
+                            },
+                            {
+                                text: "도착 완료 시 SMS 알림 서비스를 제공합니다.",
+                            },
+                        ],
+                        pickupTitle: "픽업 이용방법",
+                        pickupItems: [
+                            { step: "Step 1", title: "쇼핑몰 배송방법<br />편의점 PICK-UP 선택" },
+                            { step: "Step 2", title: "가까운 GS25 선택"},
+                            { step: "Step 3", title: "물건 도착 SMS를 받고<br />편의점 방문 수령"},
+                        ],
+                        shoppingTitle: "픽업서비스 제휴쇼핑몰",
+                        shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
+                    },
+                    {
+                        label:   "쇼핑몰거래",
+                        hero:    imgHero10,
+                        heroAlt: "",
+                        title:   "쇼핑몰 거래 서비스",
+                        desc:    "홈쇼핑 반품, 오픈마켓, 온라인 쇼핑몰 등 편리하게 이용하실 수 있는 서비스입니다.",
+                        notes: [
+                            { text: "365일 24시간 편리한 시간대에 가까운 GS25에 방문하여 이용 가능합니다." },
+                        ],
+                        pickupTitle: "이용방법",
+                        pickupItems: [
+                            { step: "Step 1", title: "제휴업체 승인번호 발급 후<br />GS25 방문", bullets: ["회원, 영문작성"]},
+                            { step: "Step 2", title: "무인택배장비에서<br />승인번호 입력" },
+                            { step: "Step 3", title: "운송장 출력 후<br />접수" },
+                        ],
+                        shoppingTitle: "이용가능 제휴처",
+                        shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
                     },
                 ],
             },
             {
                 hero: null,
                 heroAlt: "",
-                title: "택배&픽업",
-                subtitle: "",
-                sections: [],
-            },
-            {
-                hero: null,
-                heroAlt: "",
                 title: "공공요금수납",
-                subtitle: "",
+                subtitle: "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
+                desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.",
                 sections: [],
+                taxTitle: "납부가능 세금 및 공과금",
+                taxGroups: [
+                    {
+                        subtitle: "세금",
+                        isList: true,
+                        items: [
+                            "국세(소득세, 법인세, 부가세, 상속세, 증여세, 개별소비세, 종합부동산세)",
+                            "서울, 부산시지방세(취득세, 등록세, 재산세, 자동차세, 주민세, 상하수도요금 버스정용차선위반벌칙금 등)",
+                            "기타 지방세(남양, 안양, 안산, 고양, 과천부, 양주, 동두천, 마주, 충전, 제천, 보령시 및 음성군 - 취득세, 등록세, 재산세, 주민세, 자동차세 등)",
+                        ],
+                    },
+                    {
+                        subtitle: "4대보험료",
+                        items: [
+                            "건강보험, 국민연금, 고용보험, 산재보험(사회보험통합 4대보험료)",
+                        ],
+                    },
+                    {
+                        subtitle: "공과금",
+                        items: [
+                            "전기요금, 도시가스요금(서울, 삼천리, 서라벨, 인천, 강남, 경동도시가스), 통신요금(kt, LGU+, SKT), 케이블TV요금(현대HCN, 티브로드, C&M, CMB, 스카이라이프, 아름방송, 충북방송, 남인천방송, 금강방송, 무료방송 등), 신문료(조선일보, 매일경제신문), 한국도로공사 과태료 등",
+                        ],
+                    },
+                ],
             },
             {
                 hero: null,
                 heroAlt: "",
                 title: "상품권 판매",
-                subtitle: "",
+                subtitle: "상품권 판매 서비스",
+                desc: "문화상품권, 금강제화, GS칼텍스 상품권 등을 판매하고 있습니다.",
                 sections: [],
+                voucherTitle: "상품권 종류",
+                voucherItems: [
+                    {
+                        img: imgGiftCerti01,
+                        name: "문화상품권",
+                        tags: [
+                            { text: "5천원권", type: "blue" },
+                            { text: "1만원권", type: "green" },
+                        ],
+                        desc: "도서음반, 영화티켓구입, 외식(일부), 인터넷(게임, 포털)에서 사용 가능한 상품권",
+                    },
+                    {
+                        img: imgGiftCerti02,
+                        name: "금강제화상품권",
+                        tags: [
+                            { text: "5만원권", type: "orange" },
+                            { text: "10만원권", type: "orange" },
+                        ],
+                        desc: "전국 1300여개 도시 4000여 매장 (~5만원권, 10만원권)/(금강, 버팔로, PGA, LPGA, 금강핸드백 등) 어디서나 사용 가능한 실속 있는 상품권",
+                    },
+                    {
+                        img: imgGiftCerti03,
+                        name: "GS칼텍스상품권",
+                        tags: [
+                            { text: "1만원권", type: "green" },
+                            { text: "5만원권", type: "orange" },
+                            { text: "10만원권", type: "orange" },
+                        ],
+                        desc: "주유소,백화점,외식,마트,호텔,여행사 등에서 사용 가능한 상품권",
+                    },
+                ],
+            },
+        ],
+    },
+    winwin: {
+        tabs: [
+            {
+                serviceTabs: [
+                    { 
+                        label: "점포\n운영지원 혜택",
+                        title: "점포 운영지원 혜택",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
+                        items: [
+                            {
+                                num: "01",
+                                title: "인력 지원 제도",
+                                desc: "매출 향상, 신상품 도입 등 점포 경쟁력 향상을 위해<br />노력하시는 경영주님을 위한 인센티브 제도",
+                            },
+                            {
+                                num: "02",
+                                title: "카운터FF 운영 우수점 지원",
+                                desc: "카운터FF 매출 활성화 도모",
+                                bullets: ["치킨25 운영비 지원", "카페25 운영비 지원", "위생등급 취득 점포 점수 필터 지원"],
+                            },
+                            {
+                                num: "03",
+                                title: "채용 플랫폼 지원",
+                                desc: "스토어매니저(근무자) 구인 지원",
+                                bullets: ["알바몬 이용 지원", "제휴 플랫폼 지원"],
+                            },
+                            {
+                                num: "04",
+                                title: "상생지원 보험",
+                                desc: "업계를 선도하는 '다양한 보험 지원'제도",
+                                bullets: ["안심상해/횡령", "택배도난/현금도난"],
+                            },
+                            {
+                                num: "05",
+                                title: "가맹점 상생대출",
+                                desc: "신용/담보대출 우대금리 적용",
+                                bullets: ["우리은행 연계 대출", "추가 우대금리 적용"],
+                            },
+                        ],
+                    },
+                    {
+                        label: "장기운영점 및\n우수점포 혜택",
+                        title: "장기운영점 및 우수점포 혜택",
+                        items: [
+                            { num: "01", title: "10년차 장기운영 지원 혜택", desc: "10주년 운영 경영주님 예우",bullets: ["기념패", "건강검진"] },
+                            { num: "02", title: "20년차 장기운영 지원 혜택", desc: "20’s Clubf 가입", bullets: ["기념패", "여행상품권", "건강검진"] },
+                            { num: "03", title: "30년차 장기운영 지원 혜택", desc: "30주년 운영 경영주님 점포 세레머니 진행", bullets: ["기념패", "30주년 기념 행사", "여행상품권","건강검진"]},
+                            { num: "04", title: "우수점포 경영주 포상", desc: null, bullets: ["우수점포 대상 혜택 지급"] },
+                        ],
+                    },
+                    {
+                        label: "점포\n소원 지원",
+                        title: "점포 소원 지원",
+                        items: [
+                            { num: "01", title: "해피콜 센터 운영(24H)", desc: "24시간 소통채널 운영" , bullets: ["시설", "전산", "건의사항", "기타문의"]},
+                            { num: "02", title: "무료 법률 상담 서비스", desc: "변호사 무료 법률 자문 상담", bullets: ["민사 / 형사", "가사 / 행정"] },
+                            { num: "03", title: "노무상담 콜센터 운영", desc: "전반적인 노무 상담 서비스 제공", bullets: ["채용","4대 보험","전반적인 노무"] },
+                        ],
+                    },
+                    {
+                        label: "(경영주/스토어매니저)\n역량 레벨업 지원",
+                        title: "(경영주/스토어매니저) 역량 레벨업 지원",
+                        items: [
+                            { num: "01", title: "GS25 챗봇조이", desc: "GS25 근무 지원을 위한 카카오톡 챗봇 서비스" , bullets: ["365일 24시간 응답", "재고 / 물류 조회", "점포 운영 매뉴얼", "모바일 해피콜 등록"], link: "https://pf.kakao.com/_xmTxexcb?from=qr" },
+                            { num: "02", title: "모바일 점포경영", desc: "경영주와 스토어매니저 간 점포 운영 업무에 대한 소통 지원 APP", bullets: ["경영주/스토어매니저 전용 앱", "서비스 체크타임", "소비기한 관리","오늘의 업무 관리", "공지 전달"] },
+                            { num: "03", title: "온라인 열린아카데미", desc: "경영주 역량 강화", bullets: ["매월 2회 라이브 교육", "다양한 컨텐츠","사내/외 전문강사"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F"},
+                            { num: "04", title: "우수점 연구소", desc: "GS25 온라인 소식지", bullets: ["이달의 우수 경영주","성공 사례 안내","운영 Tip 소개"] },
+                            { num: "05", title: "신규 경영주 입문교육", desc: null, bullets: ["운영 교육(POS, 점포경영, 시스템","서비스 교육","온라인 교육과정(GS클래스)"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F" },
+                            { num: "06", title: "스토어매니저 클래스", desc: "근무자 교육 지원", bullets: ["POS 교육","청결 교육","접객서비스 교육"] , link: "http://hpimg.gsretail.com/images/gs25/winwin/web/store_manager_map.html" },
+                        ],
+                    },
+                    {
+                        label: "사회공헌\n지원",
+                        title: "사회공헌 지원",
+                        items: [
+                            { num: "01", title: "상생나눔 플랫폼 운영", desc: "사회적 약자를 위한 사회공헌형 점포 운영", bullets: ["내일스토어", "시니어스토어", "늘봄스토어"] },
+                            { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
+                            { num: "03", title: "GS 히어로상", desc: "사회적으로 귀감이 되는 경영주,근무자에게 지원", bullets: ["모범상","귀감상","나눔상"] },
+                            { num: "04", title: "화재예방 소화기 공유", desc: "점포 인근 화재발생 시 소화기 공유를 통한 화재예방", bullets: ["점포인근 화재발생 시 점포 소화기 공유", "사용 후 교환 지원"] },
+                        ],
+                    },
+                    {
+                        label: "경영주\n복지 혜택",
+                        title: "경영주 복지 혜택",
+                        items: [
+                            { num: "01", title: "경조사 지원", desc: "경조금 및 용품 지원", bullets:["경조금 지급", "점포 운영 지원금 지급","장례 용품 지급", "출산 용품 지급"] },
+                            { num: "02", title: "명절 및 경조사 자율휴무", desc: "자율 휴무 진행", bullets: ["명절 휴점 및 단축 영업","경조사 휴점 및 단축 영업"] },
+                            { num: "03", title: "경영주 복지몰 운영", desc: "경영주 전용 복지몰", bullets: ["합리적 가격", "단독상품", "기획 특가전"] },
+                            { num: "04", title: "종합 건강검진 할인", desc: "제휴 건강검진 센터 종합 건강검진 할인가 이용", bullets: ["KMI 센터","협력 병원"] },
+                            { num: "05", title: "엔젤 리조트", desc: "엔젤리조트 회원가 이용", bullets: ["한화리조트", "엘리시안 강촌"] },
+                            { num: "06", title: "엔젤 렌터카 (장기/중고차)", desc: "GS25 경영주님만을 위한 엔젤 렌터카 (장기/중고차)", bullets: ["제휴가 견적 제공", "빠른 출고/전 차종","전용 상담 채널 운영"] },
+                        ],
+                    },
+                ],
+            },
+            {
+                hero: imgHero11,
+                heroAlt: "",
+                title: "참여제도",
+                desc: "GS25에서는 다양한 의견 수렴, 홍보, 콜센터 지원으로 경영주님에게 도움을 드리고 있습니다.",
+                items: [
+                    {
+                        num: "01",
+                        title: "경영주 협의회",
+                        desc: "지역별 정기 간담회(격월, 분기별)를 통하여 각종 제도제안 및 이슈사항 협의",
+                    },
+                    {
+                        num: "02",
+                        title: "자율분쟁조정위원회",
+                        desc: "가맹본부와 경영주 간의 분쟁이 발생 시, 위원장(외부 전문가), 경영주/본부 대표가 자율적 해결/조정안 마련",
+                    },
+                    {
+                        num: "03",
+                        title: "24시간 통합 콜센터 운영",
+                        desc: "점포 운영의 불편사항에 대한 접수<br />및 상담 창구 운영(24시간 운영)",
+                    },
+                    {
+                        num: "04",
+                        title: "경영주 열린제안",
+                        desc: "경영주님의 다양한 제안과 아이디어 접수를 통해 생생한 현장의 목소리를 청취하여 점포 운영 및 본부 정책에 개선 반영하고 있습니다.",
+                    },
+                ],
+            },
+        ],
+    },
+    milbox: {
+        hero: imgHero12,
+        heroAlt: "",
+        title: "밀박스/스낵바",
+        sections: [
+            {
+                title: "GS25 기업/단체 대상 정기 배송 서비스란?",
+                desc: "대한민국 대표 편의점 GS25가 가진 차별화 경쟁력을 기반으로 한 기업·단체 대상 조식/간식 정기 배송 서비스입니다.<br />사내 식당이 없거나 간식 복지 도입을 고민 중이라면, 아래 서비스를 확인해보세요.",
+                items: [
+                    { title: "트렌디한 상품" },
+                    { title: "합리적인 가격" },
+                    { title: "약 1,200개 기업 이용중" },
+                ],
             },
         ],
     },
@@ -1303,6 +2230,8 @@ const langData = {
 
 const sinsen = langData.sinsen;
 const store = langData.store;
+const winwin = langData.winwin;
+const milbox = langData.milbox;
 const tab0 = langData.tabs[0];
 const tab1 = langData.tabs[1];
 const tab2 = langData.tabs[2];
@@ -1312,8 +2241,11 @@ const depth1ActiveIdx = ref(0);
 const depth1Tabs = langData.nav.depth1;
 const depth2Tabs = langData.nav.depth2;
 const storeTabs = langData.nav.depth2Store;
+const winwinTabs = langData.nav.depth2Winwin;
 
 const storeActiveTab = ref(0);
+const winwinActiveTab = ref(0);
+const winwinServiceActiveTab = ref(0);
 const giftSwiperInst = ref(null);
 const giftIsBeginning = ref(true);
 const giftIsEnd = ref(false);
@@ -1326,7 +2258,8 @@ const onGiftSwiper = (swiper) => {
 };
 const onGiftSlideChange = (swiper) => updateGiftNavState(swiper);
 const onGiftBreakpoint = (swiper) => updateGiftNavState(swiper);
-const serviceActiveTab = ref(0);
+const serviceActiveTab  = ref(0);
+const deliveryActiveTab = ref(0);
 
 watch(serviceActiveTab, (idx) => {
     if (idx === 3 && giftSwiperInst.value) {
@@ -1337,7 +2270,7 @@ watch(serviceActiveTab, (idx) => {
     }
 });
 const popLnbActiveIdx = ref(0);
-const trafficSelectVal = ref("express");
+const trafficSelectVal = ref("subway");
 const retailSelectVal = ref("coffee");
 
 const scrollToSection = (idx) => {
@@ -1387,6 +2320,45 @@ function goBack() {
 </script>
 
 <style scoped>
+.brand_panel_desc {
+    margin-top: 16px;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color:#67676F;
+}
+.list_dotted > li {
+    padding-left: 12px;
+    position: relative;
+}
+
+.list_dotted > li + li {
+    margin-top: 8px;
+}
+
+.list_dotted > li::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    background-color: #161616;
+    border-radius: 50%;
+    position: absolute;
+    top: 11px;
+    left: 0;
+}
+
+.list_dotted > li > p {
+    margin: 0;
+    color: #161616;
+    font-size: 1.8rem; 
+    line-height: 1.4;
+}
+.list_dotted > li > p :deep(a) {
+    color: #107af2;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    text-decoration: underline;
+}
 img {
     width: 100%;
     display: block;
@@ -1396,7 +2368,7 @@ button {
     background-color: #fff;
 }
 
-.traffic_select_box :deep(select) {
+.usage_select_box :deep(select) {
     width: 180px;
     padding: 10px 20px;
     font-size: 1.6rem;
@@ -1577,14 +2549,6 @@ button {
     border-right: 0;
 }
 
-.cafe25_table th:first-child {
-    border-radius: 10px 0 0 0;
-}
-
-.cafe25_table th:last-child {
-    border-radius: 0 10px 0 0;
-}
-
 .cafe25_table th {
     font-weight: 600;
     background-color: #f8f8f8;
@@ -1609,7 +2573,6 @@ button {
     grid-template-columns: repeat(3, calc((100% - 40px) / 3));
     gap: 20px;
 }
-
 .chicken25_card_list > li {
     min-width: 0;
 }
@@ -1640,7 +2603,7 @@ button {
 }
 
 .chicken25_img_grid {
-    margin-bottom: 40px;
+    margin-top: 120px;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, calc((100% - 20px) / 2));
@@ -1740,58 +2703,50 @@ button {
     display: inline-block;
 }
 
-.gopizza_table_wrap {
+/* ── 공통 테이블 ── */
+.com_table_wrap {
     overflow-x: auto;
 }
 
-.gopizza_table {
+.com_table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    border-top: 1px solid #e5e5e9;
 }
 
-.gopizza_table th,
-.gopizza_table td {
-    padding: 0 16px;
-    border-bottom: 1px solid #e5e5e9;
-}
-
-.gopizza_table th:first-child,
-.gopizza_table td:first-child {
-    border-left: 0;
-}
-
-.gopizza_table th:last-child,
-.gopizza_table td:last-child {
-    border-right: 0;
-}
-
-.gopizza_table th:first-child {
-    border-radius: 10px 0 0 0;
-}
-
-.gopizza_table th:last-child {
-    border-radius: 0 10px 0 0;
-}
-
-.gopizza_table thead th {
-    height: 64px;
+.com_table th,
+.com_table td {
+    padding: 0 24px;
     color: #161618;
     font-size: 1.8rem;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-    background-color: #f8f8f8;
-    border-top: 0;
-}
-
-.gopizza_table tbody td {
-    height: 64px;
-    color: #161618;
-    font-size: 1.8rem;
-    font-weight: 400;
     line-height: 1.6;
     letter-spacing: -0.01em;
+    border-bottom: 1px solid #e5e5e9;
+    vertical-align: middle;
+}
+
+.com_table thead th {
+    height: 64px;
+    font-weight: 600;
+    background-color: #f8f8f8;
+}
+
+.com_table tbody th {
+    font-weight: 700;
+    background-color: #f8f8f8;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.com_table tbody td {
+    padding: 18px 24px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.com_table_col thead th,
+.com_table_col tbody td {
+    text-align: center;
 }
 
 .gopizza_menu_name {
@@ -1862,50 +2817,9 @@ button {
 }
 
 /* ── 신선강화점 ── */
-.sinsen_feature_list {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.sinsen_feature_list > li {
-    min-width: 0;
-}
-
-.sinsen_feature_card {
-    height: 240px;
+.sinsen_feature :deep(.feature_card_item) {
+    min-height: 240px;
     padding: 32px 32px 60px;
-    background-color: #f8f8f8;
-    border-radius: 12px;
-}
-
-.sinsen_feature_icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 12px;
-    background-color: #d7d7df;
-    border-radius: 8px;
-    display: block;
-}
-
-.sinsen_feature_card > h4 {
-    margin: 0 0 16px;
-    color: #161618;
-    font-size: 2.4rem;
-    font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-.sinsen_feature_card > p {
-    margin: 0;
-    color: #67676f;
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
 }
 
 .sinsen_card {
@@ -1914,7 +2828,10 @@ button {
     background-color: #f8f8f8;
     border-radius: 12px;
 }
-
+.sinsen_card span{
+font-size: 1.8rem;
+line-height: 1.4;
+}
 .sinsen_card > p {
     margin-bottom: 32px;
     color: #67676f;
@@ -1970,26 +2887,22 @@ button {
 /* ── 생활 서비스 3depth 탭 ── */
 .service_tab_wrap {
     margin-bottom: 80px;
-    border-radius: 12px;
+    min-width: 0;
     display: flex;
     overflow-x: auto;
 }
 
 .service_tab_item {
-    min-width: 177.5px;
-    padding: 24px 8px;
+    padding: 24px 0;
     background-color: transparent;
     border: none;
-    border-radius: 8px;
     cursor: pointer;
-    flex: 1;
+    flex: 0 0 max(177.5px, calc(100% / 8));
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
 }
-
-
 
 .service_tab_icon {
     width: 48px;
@@ -2006,10 +2919,9 @@ button {
 
 .service_tab_label {
     color: #7c7c86;
-    font-size: 1.8rem;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
+    font-size: 1.8rem; 
+    font-weight: 700;
+    line-height: 1.5;
     text-align: center;
     white-space: pre-line;
 }
@@ -2080,6 +2992,7 @@ button {
     font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
+    white-space: pre-line;
 }
 
 .pop_card_note {
@@ -2115,15 +3028,20 @@ button {
 }
 
 .charging_service_item {
+    max-width: 220px;
+    aspect-ratio: 1 / 1;
     border-radius: 12px;
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #F8F8F8;
 }
 
 .charging_service_item > img {
-    width: 100%;
+    max-width: 80%;
+    max-height: 80%;
+    width: auto;
     height: auto;
     display: block;
 }
@@ -2146,22 +3064,22 @@ button {
 }
 
 /* ── 교통 사용처 안내 (50:10103) ── */
-.traffic_sec_header {
+.usage_header {
     margin-bottom: 40px;
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.traffic_sec_header :deep(header) {
+.usage_header :deep(header) {
     margin-bottom: 0;
 }
 
-.traffic_sec_header :deep(h3) {
+.usage_header :deep(h3) {
     margin: 0;
 }
 
-.traffic_group_title {
+.usage_group_title {
     margin: 0 0 8px;
     color: #161616;
     font-size: 2.4rem;
@@ -2170,13 +3088,42 @@ button {
     letter-spacing: -0.01em;
 }
 
-.traffic_bullet_list {
-    margin: 0 0 24px;
-    padding: 0;
-    list-style: none;
+.retail_footnote {
+    margin: 6px 0 0;
+    color: #fb6432;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
 }
 
-.traffic_bullet_list > li {
+.usage_def_list {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 16px;
+}
+
+.usage_def_list > dt {
+    color: #161616;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+.usage_def_list > dd {
+    margin: 0;
+    color: #67676f;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+
+.usage_group .list_dotted > li {
     padding: 0 0 0 12px;
     color: #67676f;
     font-size: 1.8rem;
@@ -2185,7 +3132,7 @@ button {
     position: relative;
 }
 
-.traffic_bullet_list > li::before {
+.usage_group .list_dotted > li::before {
     content: "";
     width: 4px;
     height: 4px;
@@ -2198,28 +3145,7 @@ button {
     transform: translateY(-50%);
 }
 
-.traffic_logo_list {
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-}
 
-.traffic_logo_list > li {
-    width: calc(100% / 8);
-    height: 56px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.traffic_logo_list > li > img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
-/* ── 유통 사용처 안내 (50:10253) ── */
 .retail_note {
     margin: 0 0 24px;
     color: #f95823;
@@ -2228,23 +3154,36 @@ button {
     letter-spacing: -0.01em;
 }
 
-.retail_logo_list {
+.logo_list {
     padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
+    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
 }
 
-.retail_logo_list > li {
-    width: calc(100% / 6);
+.logo_list > li {
     height: 56px;
-    overflow: hidden;
+    min-width: 0;
+    padding: 6px 12px;
+    border: 1px solid #e5e5e9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.retail_logo_list > li > img {
+.logo_list > li > img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+.logo_placeholder {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    background-color: #d7d7df;
+    border-radius: 4px;
     display: block;
 }
 
@@ -2276,50 +3215,375 @@ button {
     text-align: left;
 }
 
-
 .pop_content {
     flex: 1;
     min-width: 0;
 }
 
-/* 편의점캐시 테이블 */
-.cash_table {
-    width: 100%;
-    border-collapse: collapse;
-    border-top: 1px solid #e5e5e9;
+/* ── 하이패스 카드/단말기 ── */
+.list_caution {
+    margin: 8px 0 0;
+    padding: 0;
+    
 }
 
-.cash_table th,
-.cash_table td {
-    color: #161618;
-    border-bottom: 1px solid #e5e5e9;
-    vertical-align: middle;
-}
-
-.cash_table th {
-    width: 200px;
-    padding: 0 24px;
-    color: #161618;
+.list_caution > li {
+    color: #67676f;
     font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 1.6;
+    line-height: 1.4;
     letter-spacing: -0.01em;
-    background-color: #f8f8f8;
-    text-align: left;
-    white-space: nowrap;
 }
 
-.cash_table th span,
-.cash_table td span {
+/* ── 상생협력 운영지원제도 카드 그리드 ── */
+.winwin_item_list {
+    margin: 0;
+    padding: 0;
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.winwin_item {
+    padding: 64px 0;
+    border-bottom: 1px solid #e5e5e9;
+}
+
+/* 첫 번째 줄: 상단 여백 제거 */
+.winwin_item:nth-child(-n+2) {
+    padding-top: 0;
+}
+
+/* 마지막 줄 보더 제거 — 홀수/짝수 아이템 모두 대응 */
+.winwin_item:last-child,
+.winwin_item:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
+}
+
+.winwin_item > article {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.winwin_item_icon {
+    width: 80px;
+    height: 80px;
+    background-color: #f2f2f4;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.winwin_item_content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.winwin_item_title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* 번호·제목 공통 폰트 */
+.winwin_item_num,
+.winwin_item_title > strong {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.winwin_item_num {
+    color: #107af2;
+}
+
+.winwin_item_title > strong {
+    color: #161616;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.winwin_item_link {
+    width: 24px;
+    height: 24px;
+    background-color: #d0d0d8;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.winwin_item_body > p {
+    margin-top: 8px;
+    color: #67676f;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.winwin_item_body > p.winwin_item_desc {
+    margin-top: 0;
+    font-weight: 400;
+}
+
+.sec_note {
+    margin: 8px 0 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+}
+
+.milbox_feature :deep(.feature_card_item) {
+    min-height: 171px;
+    max-width: 340px;
+}
+
+@media (max-width: 768px) {
+    .milbox_feature :deep(.feature_card_item) {
+        min-height: 0;
+        max-width: 100%;
+    }
+}
+
+.winwin_bullet_list {
+    margin: 16px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.winwin_bullet_list > li {
+    padding-left: 12px;
+    color: #67676f;
     font-size: 1.8rem;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.4;
+    position: relative;
+}
+
+.winwin_bullet_list > li::before {
+    width: 4px;
+    height: 4px;
+    background-color: #67676f;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    content: "";
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .winwin_item_list {
+        grid-template-columns: 1fr;
+    }
+
+    /* PC에서 제거된 2번째 아이템 상단 여백 복원 */
+    .winwin_item:nth-child(2) {
+        padding-top: 64px;
+    }
+
+    /* PC에서 제거된 보더 복원 */
+    .winwin_item:nth-last-child(2):nth-child(odd) {
+        border-bottom: 1px solid #e5e5e9;
+    }
+
+    .winwin_item_num,
+    .winwin_item_title > strong {
+        font-size: 2.4rem;
+    }
+}
+
+/* ── 택배&픽업 — 안내 목록 ── */
+/* PanelHeader 슬롯 내 list_dotted — 회색 계열 별도 스타일 */
+.brand_panel_title .list_dotted {
+    margin: 16px 0 0;
+}
+
+.brand_panel_title .list_dotted > li::before {
+    background-color: #67676f;
+}
+
+.brand_panel_title .list_dotted > li > p {
+    color: #67676f;
+    font-size: 2rem;
+    line-height: 1.35;
     letter-spacing: -0.01em;
 }
 
-.cash_table td {
-    padding: 18px 24px;
+.note_sub,
+.brand_panel_title .list_dotted > li > p.note_sub {
+    color: #f95823;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
 }
+/* ── 택배&픽업 — 이용요금 테이블 ── */
+.price_table_note {
+    margin: 4px 0 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+}
+
+
+/* ── 택배&픽업 — 이용요금 ── */
+.delivery_price_box {
+    max-width: 940px;
+    padding: 32px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+}
+
+.delivery_price_list {
+    margin: 0;
+    padding: 0;
+    
+}
+
+.delivery_price_list > li {
+    padding-left: 28px;
+    position: relative;
+}
+
+.delivery_price_list > li + li {
+    margin-top: 16px;
+}
+
+.delivery_price_list > li::before {
+    content: "";
+    width: 5px;
+    height: 10px;
+    border-right: 2px solid #107af2;
+    border-bottom: 2px solid #107af2;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    transform: rotate(45deg);
+    display: block;
+}
+
+.delivery_price_list > li > p {
+    margin: 0;
+    color: #161616;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.delivery_price_subs {
+    margin: 6px 0 0;
+    padding: 0;
+    
+}
+
+.delivery_price_subs > li {
+    color: #67676f;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+/* ── 고속도로 미납 통행료 납부 · 온라인몰 편의점 결제 공통 ── */
+.sec_unpaid_advantage :deep(.feature_card_item),
+.sec_mall_payment_advantage :deep(.feature_card_item) {
+    min-height: 260px;
+}
+
+.sec_delivery_caution :deep(.feature_card_item) {
+    min-height: 216px;
+}
+:deep(.txt_point) {
+    color: #fb6432;
+}
+
+@media (max-width: 768px) {
+    .sec_unpaid_advantage :deep(.feature_card_item),
+    .sec_mall_payment_advantage :deep(.feature_card_item) {
+        min-height: 0;
+    }
+}
+
+/* ── 온라인몰 편의점 결제 — 이용 가능 사이트 ── */
+.mall_site_note {
+    margin: 0;
+    color: #f95823;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+}
+
+.mall_site_list {
+    margin: 0;
+    padding: 0;
+    
+    display: flex;
+    gap: 20px;
+}
+
+.mall_site_list > li {
+    flex: 1;
+}
+
+.mall_site_list > li > figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mall_site_thumb {
+    width: 100%;
+    height: 200px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mall_site_thumb > img {
+    width: auto;
+    max-width: 100%;
+}
+
+.mall_site_list > li > figure > figcaption {
+    color: #67676f;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    white-space: pre-line;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .mall_site_list {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .mall_site_list > li {
+        flex: 1 1 calc((100% - 32px) / 3);
+    }
+}
+
+@media (max-width: 768px) {
+    .mall_site_list > li {
+        flex: 1 1 calc((100% - 16px) / 2);
+    }
+
+    .mall_site_thumb {
+        height: 140px;
+    }
+}
+
+/* ── 편의점캐시 테이블 ── */
 
 .cash_table_cell {
     display: flex;
@@ -2327,17 +3591,7 @@ button {
     gap: 12px;
 }
 
-
 /* ── 유심 요금제 혜택 ── */
-.usim_benefit_note {
-    margin: 8px 0 0;
-    color: #f95823;
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-}
-
 .usim_benefit_cards {
     display: flex;
     gap: 20px;
@@ -2371,6 +3625,7 @@ button {
 }
 
 .usim_benefit_body > h3 {
+    margin-bottom: 24px;
     color: #161616;
     font-size: 2.4rem;
     font-weight: 700;
@@ -2386,9 +3641,7 @@ button {
     letter-spacing: -0.01em;
     white-space: pre-line;
 }
-.usim_benefit_body h3{
-    margin-bottom: 24px;
-}
+
 .usim_benefit_list {
     display: flex;
     flex-direction: column;
@@ -2415,8 +3668,18 @@ button {
     font-weight: 400;
     line-height: 1.4;
 }
+.hipass_terminal_img > img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 
 @media (max-width: 768px) {
+    .hipass_terminal_img > img {
+        width: 100%;
+    }
+
     .usim_benefit_cards {
         flex-direction: column;
     }
@@ -2480,43 +3743,70 @@ button {
 
 .usim_plan_table {
     width: 100%;
+    min-width: 860px;
     border-collapse: collapse;
-    border: 1px solid #e5e5e9;
-    table-layout: fixed;
 }
 
 .usim_plan_table th {
-    padding: 16px 12px;
+    padding: 14.5px 24px;
     background-color: #f8f8f8;
-    border: 1px solid #e5e5e9;
+    border-right: none;
+    border-bottom: 1px solid #e5e5e9;
     color: #161616;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 600;
     line-height: 1.5;
     letter-spacing: -0.01em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
     text-align: center;
     vertical-align: middle;
+}
+
+/* 2행 th(데이터·음성·문자) 패딩 축소 */
+.usim_plan_table thead tr:nth-child(2) th {
+    padding: 10.5px 24px;
+}
+
+/* 상품명 오른쪽 / 제공량 오른쪽 세로선 (rowspan=2 ↔ 제공량 그룹 경계) */
+.usim_plan_table thead tr:nth-child(1) th:first-child,
+.usim_plan_table thead tr:nth-child(1) th[colspan="3"] {
+    border-right: 1px solid #e5e5e9;
+}
+
+/* 문자 오른쪽 세로선 (제공량 그룹 ↔ 정상 요금 경계) */
+.usim_plan_table thead tr:nth-child(2) th:last-child {
+    border-right: 1px solid #e5e5e9;
 }
 
 .usim_plan_table td {
-    padding: 16px 12px;
-    border: 1px solid #e5e5e9;
+    padding: 15px 24px;
+    border-right: none;
+    border-bottom: 1px solid #e5e5e9;
     color: #161616;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.01em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
     text-align: center;
     vertical-align: middle;
 }
 
-.usim_plan_data {
+/* 상품명·문자 열 세로선 tbody에서 유지 */
+.usim_plan_table tbody td:first-child,
+.usim_plan_table tbody td:nth-child(4) {
+    border-right: 1px solid #e5e5e9;
+}
+
+.usim_plan_data_sub {
     font-size: 1.4rem;
 }
 
 .usim_plan_dc {
-    color: #107AF2;
-    font-size: 1.6rem;
+    color: #107af2;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 600;
 }
@@ -2536,13 +3826,6 @@ button {
 /* ── 유심 요금제 장점 ── */
 .usim_advantage_cards :deep(.feature_card_item) {
     min-height: 212px;
-}
-.usim_advantage_note {
-    margin: 8px 0 0;
-    color: #f95823;
-    font-size: 1.4rem;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
 }
 
 /* ── 기프트카드 사용방법 ── */
@@ -2588,7 +3871,7 @@ button {
     width: calc(50% - 10px);
     margin: 0;
     padding: 20px 0 0;
-    list-style: none;
+    
 }
 
 .gift_purchase_step {
@@ -2728,7 +4011,13 @@ button {
     background-color: #161616;
 }
 
-
+.usim_hiplus_list > li {
+    color: #67676f;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .cafe25_card_list {
@@ -2743,16 +4032,17 @@ button {
         flex-direction: column;
     }
 
+    .charging_service_list {
+        flex-wrap: wrap;
+    }
+
     .charging_service_item {
+        max-width: none;
         flex: 1 1 calc((100% - 20px) / 2);
     }
 
-    .traffic_logo_list > li {
-        width: calc(100% / 4);
-    }
-
-    .retail_logo_list > li {
-        width: calc(100% / 3);
+    .logo_list {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .gift_brand_nav {
@@ -2763,6 +4053,7 @@ button {
     .gift_brand_card > figcaption {
         font-size: 1.4rem;
     }
+
 }
 
 @media (max-width: 768px) {
@@ -2824,17 +4115,13 @@ button {
         gap: 20px;
     }
 
-    .sinsen_feature_list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .sinsen_check_list > li {
         flex-wrap: wrap;
     }
 
     .service_tab_item {
-        min-width: 120px;
         padding: 16px 8px;
+        flex: 0 0 120px;
     }
 
     .pop_wrap {
@@ -2884,20 +4171,15 @@ button {
         flex: 1 1 calc(50% - 10px);
     }
 
-    .traffic_sec_header {
+    .usage_header {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
     }
 
-    .traffic_logo_list > li {
-        width: calc(100% / 2);
+    .logo_list {
+        grid-template-columns: repeat(2, 1fr);
     }
-
-    .retail_logo_list > li {
-        width: calc(100% / 2);
-    }
-
 
     .gift_brand_slider {
         gap: 12px;
@@ -2922,6 +4204,125 @@ button {
 
     .gift_purchase_steps {
         width: 100%;
+    }
+}
+
+/* 공공요금수납 납부가능 세금 및 공과금 */
+.tax_group_list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.tax_group_list .list_dotted > li p{
+    color:#67676F;
+}
+.tax_group_subtitle {
+    margin-bottom: 16px;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #161616;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.tax_group_desc {
+    font-size: 1.8rem;
+    color: #67676f;
+    line-height: 1.4;
+}
+
+/* 상품권 판매 */
+.voucher_list {
+    display: flex;
+    gap: 20px;
+    
+}
+
+.voucher_item {
+    max-width: 340px;
+    flex: 1;
+}
+
+.voucher_img {
+    height: 200px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voucher_img > img {
+ width: auto;
+}
+
+.voucher_info {
+    margin-top: 24px;
+}
+
+.voucher_name {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.voucher_tags {
+    margin-top: 10px;
+    display: flex;
+    gap: 6px;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+}
+
+.voucher_tag {
+    padding: 2px 8px;
+    font-size: 1.4rem;
+    border-radius: 4px;
+}
+
+.tag_blue {
+    background-color: #e7f2fe;
+    color: #0d62c2;
+}
+
+.tag_green {
+    background-color: #dff5ec;
+    color: #0d6e46;
+}
+
+.tag_orange {
+    background-color: #f9f2ea;
+    color: #ca5028;
+}
+
+.voucher_desc {
+    margin-top: 10px;
+    font-size: 1.6rem;
+    color: #67676f;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .sec_tax_list {
+        margin-top: 40px;
+    }
+
+    .tax_group_subtitle {
+        font-size: 2rem;
+    }
+
+    .sec_voucher {
+        margin-top: 40px;
+    }
+
+    .voucher_list {
+        flex-direction: column;
+        gap: 32px;
+    }
+    .winwin_item_body > p{
+        margin-top: 0;
     }
 }
 </style>

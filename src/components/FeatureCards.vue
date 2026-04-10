@@ -3,16 +3,21 @@ import { defineProps } from "vue";
 
 defineProps({
     items: { type: Array, default: () => [] },
-    // [{ num: "01", title: "...", desc: "..." }]
+    // type="num"  (기본): [{ num: "01", title: "...", desc: "..." }]
+    // type="icon"        : [{ icon: imgSrc, iconAlt: "...", title: "...", desc: "..." }]
+    type: { type: String, default: "num" },
 });
 </script>
 
 <template>
     <ul class="feature_card_list">
         <li v-for="(item, i) in items" :key="i" class="feature_card_item">
-            <em class="feature_card_num">{{ item.num }}</em>
+            <em v-if="type === 'num'" class="feature_card_num">{{ item.num }}</em>
+            <figure v-else-if="type === 'icon'" class="feature_card_icon">
+                <img v-if="item.icon" :src="item.icon" :alt="item.iconAlt || ''" />
+            </figure>
             <strong class="feature_card_title">{{ item.title }}</strong>
-            <p class="feature_card_desc" v-html="item.desc"></p>
+            <p v-if="item.desc" class="feature_card_desc" v-html="item.desc"></p>
         </li>
     </ul>
 </template>
@@ -40,21 +45,45 @@ defineProps({
     margin-bottom: 8px;
     color: #107af2;
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: 700;
     font-style: normal;
     letter-spacing: -0.01em;
     display: block;
 }
 
+.feature_card_icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    background-color: #d7d7df;
+    border-radius: 8px;
+}
+
+.feature_card_icon > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .feature_card_title {
     margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+
+}
+
+.feature_card_title:last-child {
+    margin-bottom: 0;
     color: #161616;
-    font-size: 2.4rem;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 700;
     line-height: 1.35;
     letter-spacing: -0.01em;
     white-space: pre-line;
     display: block;
+    word-break: keep-all;
 }
 
 .feature_card_desc {
@@ -66,13 +95,8 @@ defineProps({
 }
 
 @media (max-width: 1024px) {
-    .feature_card_list {
-        flex-wrap: wrap;
-    }
-
     .feature_card_item {
         height: auto;
-        min-height: 200px;
         flex: 1 1 calc((100% - 20px) / 2);
     }
 }
@@ -83,8 +107,9 @@ defineProps({
     }
 
     .feature_card_item {
+        max-width: 100%;
         height: auto;
-        min-height: 0;
+        min-height: 0 !important;
         flex: 1 1 100%;
     }
 }
