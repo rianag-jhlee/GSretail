@@ -44,10 +44,8 @@
                     <div class="str_actions">
                         <a href="#none" class="btn_store_find">매장 찾기</a>
                         <div class="sns_wrap">
-                            <a href="#none" class="btn_sns btn_sns_insta" aria-label="인스타그램">
-                            </a>
-                            <a href="#none" class="btn_sns btn_sns_yt" aria-label="유튜브">
-                            </a>
+                            <a href="#none" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
+                            <a href="#none" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
                         </div>
                     </div>
                 </header>
@@ -74,7 +72,10 @@
                                     <p class="acc_desc" v-html="item.desc"></p>
                                 </div>
                             </div>
-                            <div class="acc_img_wrap">
+                            <div
+                                :ref="el => { if (el) imgRefs[i] = el }"
+                                class="acc_img_wrap"
+                            >
                                 <img :src="item.img" alt="" />
                             </div>
                         </div>
@@ -122,11 +123,11 @@ const strItems = [
 
 const openAcc = ref(-1);
 const descRefs = [];
+const imgRefs = [];
 const tokens = strItems.map(() => 0);
 
-function expandDesc(el, index) {
+function _animateOpen(el, myToken, index) {
     if (el.classList.contains("acc_show") && el.style.height === "auto") return;
-    const myToken = ++tokens[index];
     el.classList.add("acc_animating", "acc_show");
     el.style.height = "auto";
     const heightPx = `${el.scrollHeight}px`;
@@ -146,9 +147,8 @@ function expandDesc(el, index) {
     });
 }
 
-function collapseDesc(el, index) {
+function _animateClose(el, myToken, index) {
     if (!el.classList.contains("acc_show")) return;
-    const myToken = ++tokens[index];
     el.classList.add("acc_animating");
     const h = el.scrollHeight;
     if (h === 0) {
@@ -176,14 +176,20 @@ function toggleAcc(index) {
     const prev = openAcc.value;
     if (prev === index) {
         openAcc.value = -1;
-        collapseDesc(descRefs[index], index);
+        const t = ++tokens[index];
+        _animateClose(descRefs[index], t, index);
+        _animateClose(imgRefs[index], t, index);
         return;
     }
-    if (prev !== -1 && descRefs[prev]) {
-        collapseDesc(descRefs[prev], prev);
+    if (prev !== -1) {
+        const t = ++tokens[prev];
+        _animateClose(descRefs[prev], t, prev);
+        _animateClose(imgRefs[prev], t, prev);
     }
     openAcc.value = index;
-    expandDesc(descRefs[index], index);
+    const t = ++tokens[index];
+    _animateOpen(descRefs[index], t, index);
+    _animateOpen(imgRefs[index], t, index);
 }
 
 let ctx = null;
@@ -228,18 +234,14 @@ onMounted(() => {
         ScrollTrigger.create({
             trigger: sectionRef.value,
             start: "top+=250 top",
+            once: false,
             onEnter: () => textTl.play(),
             onLeaveBack: () => textTl.reverse(),
-            once: false,
         });
 
         const aboutSpans = aboutSectionRef.value.querySelectorAll("span");
 
-        gsap.set(aboutSpans, {
-            y: 200,
-            opacity: 0,
-            willChange: "transform, opacity",
-        });
+        gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
 
         ScrollTrigger.create({
             trigger: aboutSectionRef.value,
@@ -486,13 +488,33 @@ onBeforeUnmount(() => {
 .btn_sns {
     width: 56px;
     height: 56px;
-    background-color: #e5e5e9;    
+    background-color: #e5e5e9;
     border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.btn_sns::before {
+    content: "";
+    background-color: #161616;
+    border-radius: 4px;
+    display: block;
+}
 
+.btn_sns_insta::before {
+    width: 18px;
+    height: 18px;
+}
 
-/* Accordion 커스텀 */
+.btn_sns_yt::before {
+    width: 22px;
+    height: 16px;
+}
+
+/* =====================
+   Accordion 커스텀
+   ===================== */
 .brand_acc {
     margin: 0;
     padding: 0;
@@ -509,17 +531,13 @@ onBeforeUnmount(() => {
 .acc_inner {
     padding: 40px 64px;
     display: grid;
-    grid-template-columns: 1fr 0px;
-    column-gap: 0;
+    grid-template-columns: 1fr 0;
     align-items: start;
-    
+     
 }
-
-.acc_item.is_open .acc_inner {
+.acc_item.is_open .acc_inner{
     grid-template-columns: 1fr 1fr;
-   
 }
-
 .acc_body {
     min-width: 0;
 }
@@ -527,14 +545,14 @@ onBeforeUnmount(() => {
 .acc_btn {
     width: 100%;
     padding: 0;
-    background: transparent;
-    border: none;
-    cursor: pointer;
     color: #161616;
     font-size: 2.8rem;
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -0.01em;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     text-align: left;
     display: flex;
     align-items: center;
@@ -564,8 +582,8 @@ onBeforeUnmount(() => {
 .acc_desc_wrap {
     overflow: hidden;
     height: 0;
-    transition: height 0.35s ease;
     box-sizing: border-box;
+    transition: height 0.35s ease;
 }
 
 .acc_desc {
@@ -580,17 +598,11 @@ onBeforeUnmount(() => {
 .acc_img_wrap {
     overflow: hidden;
     height: 0;
-    opacity: 0;
-
-}
-
-.acc_item.is_open .acc_img_wrap {
-    height: auto;
-    opacity: 1;
+    transition: height 0.65s ease;
 }
 
 .acc_img_wrap > img {
-    width:auto;
+    width: auto;
     margin-left:auto;
     border-radius: 12px;
     display: block;
@@ -620,10 +632,6 @@ onBeforeUnmount(() => {
     .acc_item.is_open .acc_inner {
         grid-template-columns: 1fr 280px;
         column-gap: 28px;
-    }
-
-    .acc_item.is_open .acc_img_wrap {
-        height: 200px;
     }
 
     .acc_img_wrap > img {
@@ -687,3 +695,4 @@ onBeforeUnmount(() => {
     }
 }
 </style>
+
