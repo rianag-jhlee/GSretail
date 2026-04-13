@@ -169,7 +169,7 @@
                 </SwiperSlide>
             </Swiper>
 
-            <DiffQrRow v-if="tab0.qr" :title="tab0.qr.title" :desc="tab0.qr.desc" :mobile-desc="tab0.qr.mobileDesc" />
+            <DiffQrRow v-if="tab0.qr" :title="tab0.qr.title" :desc="tab0.qr.desc" />
         </div>
 
         <!-- 탭 1: CAFE25 -->
@@ -221,12 +221,12 @@
                                         :key="ci"
                                         scope="col"
                                         :style="{ width: col.width + 'px', textAlign: col.align }"
-                                    >{{ col.label }}</th>
+                                    ><span>{{ col.label }}</span></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(row, ri) in sec.rows" :key="ri">
-                                    <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }">{{ row[col.key] }}</td>
+                                    <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }"><span>{{ row[col.key] }}</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -244,13 +244,14 @@
                                     :key="ci"
                                     scope="col"
                                     :style="{ width: col.width + 'px', textAlign: col.align }"
-                                >{{ col.label }}</th>
+                                ><span>{{ col.label }}</span></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(row, ri) in sec.rows" :key="ri">
                                 <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }">
-                                    <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />{{ row[col.key] }}
+                                    <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />
+                                    <span>{{ row[col.key] }}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -264,12 +265,13 @@
                             class="cafe25_table_swiper"
                         >
                             <SwiperSlide v-for="(row, ri) in sec.rows" :key="ri">
-                                <table class="cafe25_table_mo">
+                                <table class="tbl_mo">
                                     <tbody>
                                         <tr v-for="(col, ci) in sec.columns" :key="ci">
-                                            <th scope="row">{{ col.label }}</th>
+                                            <th scope="row" style="width: 96px"><span>{{ col.label }}</span></th>
                                             <td>
-                                                <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />{{ row[col.key] }}
+                                                <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />
+                                                <span>{{ row[col.key] }}</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -283,48 +285,65 @@
         </div>
 
         <!-- 탭 2: CHICKEN25 -->
-        <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel chicken_panel">
             <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :desc="tab2.subtitle" />
 
             <section v-for="(sec, i) in tab2.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
 
-                <ul v-if="sec.type === 'text_cards'" class="chicken25_card_list" role="list">
-                    <li v-for="(card, c) in sec.cards" :key="c">
-                        <div class="chicken25_card">
-                            <h4 v-html="card.title" />
-                            <p>{{ card.desc }}</p>
-                        </div>
-                    </li>
-                </ul>
+                <FeatureCards v-if="sec.type === 'text_cards'" :items="sec.cards" type="text" />
             </section>
 
-            <ul v-if="tab2.imgGrid && tab2.imgGrid.length" class="chicken25_img_grid" role="list">
+            <ul v-if="tab2.imgGrid && tab2.imgGrid.length && !isMobileView" class="img_grid" role="list">
                 <li v-for="(item, i) in tab2.imgGrid" :key="i">
                     <div>
                         <img :src="item.image" :alt="item.alt || ''" />
                     </div>
                 </li>
             </ul>
+            <Swiper
+                v-else-if="tab2.imgGrid && tab2.imgGrid.length && isMobileView"
+                class="img_grid_swiper"
+                slides-per-view="auto"
+                :space-between="8"
+            >
+                <SwiperSlide v-for="(item, i) in tab2.imgGrid" :key="i">
+                    <div class="img_grid_slide">
+                        <img :src="item.image" :alt="item.alt || ''" />
+                    </div>
+                </SwiperSlide>
+            </Swiper>
 
             <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" />
         </div>
 
         <!-- 탭 3: GOPIZZA -->
-        <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel gopizza_panel">
             <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :desc="tab3.subtitle" />
 
             <section v-for="(sec, i) in tab3.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
 
                 <!-- 이미지 2열 -->
-                <ul v-if="sec.type === 'img_grid'" class="gopizza_img_grid" role="list">
+                <ul v-if="sec.type === 'img_grid' && !isMobileView" class="img_grid" role="list">
                     <li v-for="(item, gi) in sec.images" :key="gi">
                         <div>
                             <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
                         </div>
                     </li>
                 </ul>
+                <Swiper
+                    v-else-if="sec.type === 'img_grid' && isMobileView"
+                    class="img_grid_swiper"
+                    slides-per-view="auto"
+                    :space-between="8"
+                >
+                    <SwiperSlide v-for="(item, gi) in sec.images" :key="gi">
+                        <div class="img_grid_slide">
+                            <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
 
                 <!-- 단일 이미지 -->
                 <figure v-else-if="sec.type === 'image'" class="gopizza_img_wrap">
@@ -340,9 +359,12 @@
                         <div class="gopizza_menu_info">
                             <div class="gopizza_menu_title">
                                 <strong>{{ pnl.size }}</strong>
-                                <span v-for="(tag, ti) in pnl.tags" :key="ti" class="gopizza_menu_tag">{{ tag }}</span>
+                                <div>
+                                    <span v-for="(tag, ti) in pnl.tags" :key="ti" class="gopizza_menu_tag">{{ tag }}</span>
+                                </div>
                             </div>
-                            <div class="com_table_wrap">
+                            <!-- PC: 기존 테이블 -->
+                            <div v-if="!isMobileView" class="com_table_wrap">
                                 <table class="com_table com_table_col">
                                     <thead>
                                         <tr>
@@ -371,43 +393,86 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- Mobile: row별 Swiper -->
+                            <template v-if="isMobileView">
+                                <Swiper
+                                    :modules="[Pagination]"
+                                    :slides-per-view="1"
+                                    :pagination="{ el: `.gopizza_menu_pagi_${pnl.size.replace(/[^a-z0-9]/gi, '')}`, clickable: true }"
+                                    class="cafe25_table_swiper"
+                                >
+                                    <SwiperSlide v-for="(row, ri) in pnl.rows" :key="ri">
+                                        <table class="tbl_mo">
+                                            <tbody>
+                                                <tr v-for="(col, ci) in pnl.columns" :key="ci">
+                                                    <th scope="row" style="width: 136px"><span>{{ col.label }}</span></th>
+                                                    <td>
+                                                        <span v-if="ci === 0" class="gopizza_menu_name">
+                                                            {{ row[col.key] }}
+                                                            <em v-if="row.badge" class="gopizza_badge_best">{{ row.badge }}</em>
+                                                        </span>
+                                                        <span v-else>{{ row[col.key] }}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </SwiperSlide>
+                                </Swiper>
+                                <div :class="`gopizza_menu_pagi_${pnl.size.replace(/[^a-z0-9]/gi, '')} gopizza_table_pagination`"></div>
+                            </template>
                         </div>
                     </li>
                 </ul>
 
                 <!-- 배달·픽업 앱 (2열) -->
-                <ul v-else-if="sec.type === 'phone_grid'" class="gopizza_phone_grid" role="list">
+                <ul v-else-if="sec.type === 'phone_grid' && !isMobileView" class="img_grid" role="list">
                     <li v-for="(item, ii) in sec.items" :key="ii">
                         <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
                     </li>
                 </ul>
+                <Swiper
+                    v-else-if="sec.type === 'phone_grid' && isMobileView"
+                    class="img_grid_swiper"
+                    slides-per-view="auto"
+                    :space-between="8"
+                >
+                    <SwiperSlide v-for="(item, ii) in sec.items" :key="ii">
+                        <div class="img_grid_slide">
+                            <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
             </section>
 
             <div class="diff_bottom_row">
                 <DiffQrRow v-if="tab3.qr" :title="tab3.qr.title" :desc="tab3.qr.desc" />
                 <a v-if="tab3.link" :href="tab3.link.url" class="gopizza_link" target="_blank" rel="noopener noreferrer">
+                    <figure aria-hidden="true">
+                        <img v-if="isMobileView" :src="imgQrMo" alt="" />
+                    </figure>
                     <div>
-                        <p class="gopizza_link_title">{{ tab3.link.title }}</p>
-                        <p v-html="tab3.link.desc" />
+                        <strong>{{ tab3.link.title }}</strong>
+                        <p v-html="isMobileView && tab3.link.descMo ? tab3.link.descMo : tab3.link.desc" />
                     </div>
                 </a>
             </div>
         </div>
 
         <!-- depth1 = 1: 신선강화점 -->
-        <div v-if="depth1ActiveIdx === 1" class="brand_panel">
+        <div v-if="depth1ActiveIdx === 1" class="brand_panel fresh_panel">
             <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :desc="sinsen.subtitle" />
 
             <section v-for="(sec, i) in sinsen.sections" :key="i">
-                <SectionHeader :title="sec.title" :desc="sec.desc" />
+                <SectionHeader :title="sec.title" :desc="sec.desc" :mobile-desc="sec.mobileDesc" />
 
                 <!-- 특징 카드 4열 -->
-                <FeatureCards v-if="sec.features" :items="sec.features" type="icon" class="sinsen_feature" />
+                <FeatureCards v-if="sec.features" :items="sec.features" type="icon" no-pagination class="sinsen_feature" />
 
                 <!-- 배송 흐름도 -->
                 <div v-if="sec.flow" class="sinsen_card sinsen_card_flow">
+                    <strong v-if="sec.flowTitle">{{ sec.flowTitle }}</strong>
                     <p v-if="sec.flowNote">{{ sec.flowNote }}</p>
-                    <img :src="imgFlow" alt="" class="sinsen_flow_img" />
+                    <img :src="isMobileView ? imgFlowMo : imgFlow" alt="" class="sinsen_flow_img" />
                 </div>
 
                 <!-- 운영 장점 체크리스트 카드 -->
@@ -1119,6 +1184,7 @@ import SectionHeader from "@/components/SectionHeader.vue";
 import Buttons from "@/components/Buttons.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
+import imgQrMo from "@/assets/images/dummy/qr_app.png";
 import Steps from "@/components/Steps.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
 
@@ -1165,6 +1231,7 @@ import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 /* 신선강화점 이미지 */
 import imgHero4 from "@/assets/images/dummy/brand_bg_05.png";
 import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
+import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
 
 /* 매장/서비스 이미지 */
 import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
@@ -1277,7 +1344,6 @@ const langData = {
             qr: {
                 title: "우리동네GS 앱 다운로드",
                 desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요. QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
-                mobileDesc: "GS25의 다양한 이벤트와 차별화 상품만",
             },
         },
         {
@@ -1349,7 +1415,7 @@ const langData = {
             hero: imgHero2,
             heroAlt: "",
             title: "CHICKEN25",
-            subtitle: "최고의 원재료를 사용하여 즉석에서 조리한 튀김을 합리적인 가격으로 제공하는 GS25만의 차별화 먹거리입니다.<br />편의점에서도 치킨25와 함께 전문점 수준의 치킨을 즐길 수 있습니다.",
+            subtitle: "최고의 원재료를 사용하여 즉석에서 조리한 튀김을 합리적인 가격으로 제공하는 GS25만의 차별화 먹거리입니다. <br class=\"p_br\" />편의점에서도 치킨25와 함께 전문점 수준의 치킨을 즐길 수 있습니다.",
             sections: [
                 {
                     type: "text_cards",
@@ -1358,15 +1424,15 @@ const langData = {
                     cards: [
                         {
                             title: "깨끗한 기름으로<br />더 맛있는 튀김",
-                            desc: "깨끗하게 관리한 기름을 사용하여 더욱 바삭하고 맛있고, 철저한 위생 관리로 안심하고 즐길 수 있는 맛있는 치킨을 제공합니다.",
+                            desc: "깨끗하게 관리한 기름을 사용하여 더욱 바삭하고 맛있고,<br />철저한 위생 관리로 안심하고 즐길 수 있는<br />맛있는 치킨을 제공합니다.",
                         },
                         {
                             title: "다양한 메뉴,<br />골라 먹는 재미",
-                            desc: "전문점보다 더 풍성하게 준비된 메뉴들로 다양한 메뉴를 골라 드실 수 있습니다. (한마리, 반마리, 닭다리, 날개, 봉, 꼬치, 핫도그, 튀김만두 등)",
+                            desc: "전문점보다 더 풍성하게 준비된 메뉴들로<br /> 다양한 메뉴를 골라 드실 수 있습니다.<br />(한마리, 반마리, 닭다리, 날개, 봉, 꼬치, 핫도그, 튀김만두 등)",
                         },
                         {
                             title: "가까운 곳에서 언제든<br />간편히 구매",
-                            desc: "가까운 GS25에서 갓 튀긴 바삭한 치킨을 언제든지 간편하게 접할 수 있습니다. 우리동네GS앱을 통한 배달/픽업 서비스로 인근 GS25에서 더욱 간편한 구매가 가능합니다.",
+                            desc: "가까운 GS25에서 갓 튀긴 바삭한 치킨을<br />언제든지 간편하게 접할 수 있습니다.<br />우리동네GS앱을 통한 배달/픽업 서비스로<br />인근 GS25에서 더욱 간편한 구매가 가능합니다.",
                         },
                     ],
                 },
@@ -1398,14 +1464,14 @@ const langData = {
                 {
                     type: "image",
                     title: "차별화된 도우",
-                    desc: "9˚C 저온에서 24시간 숙성한 파베이크 도우를 사용하여 겉바속쫄!<br />고피자의 기술력이 집적된 파베이크 도우는 저온숙성을 거쳐 먹기 좋은 볼륨감과 충분한 수분 함량으로 빠삭하고 쫄깃한 식감을 제공합니다.",
+                    desc: "9˚C 저온에서 24시간 숙성한 파베이크 도우를 사용하여 겉바속쫄!<br class=\"p_br\" />고피자의 기술력이 집적된 파베이크 도우는 저온숙성을 거쳐 먹기 좋은 볼륨감과 충분한 수분 함량으로 빠삭하고 쫄깃한 식감을 제공합니다.",
                     image: imgDough,
                     imageAlt: "",
                 },
                 {
                     type: "menu",
                     title: "메뉴 소개",
-                    desc: "고피자의 스테디셀러부터 기대되는 신메뉴까지! GS25에서 REGULAR와 GRAB으로 간편하고 맛있게 즐기세요!<br />REGULAR 사이즈의 경우 피자가 W모양으로 5등분 컷팅되어 한조각씩 간편하게 먹을 수 있습니다.",
+                    desc: "고피자의 스테디셀러부터 기대되는 신메뉴까지! GS25에서 REGULAR와 GRAB으로 간편하고 맛있게 즐기세요!<br class=\"p_br\" />REGULAR 사이즈의 경우 피자가 W모양으로 5등분 컷팅되어 한조각씩 간편하게 먹을 수 있습니다.",
                     panels: [
                         {
                             image: imgMenu1,
@@ -1443,7 +1509,7 @@ const langData = {
                 },
                 {
                     type: "phone_grid",
-                    title: "우리동네GS앱에서는 빠른 배달, 픽업 가능",
+                    title: "우리동네GS앱에서는 빠른 배달,<br class=\"m_br\" /> 픽업 가능",
                     items: [
                         { image: imgPhone1, alt: "" },
                         { image: imgPhone2, alt: "" },
@@ -1457,6 +1523,7 @@ const langData = {
             link: {
                 title: "GOPIZZA 홈페이지 바로가기",
                 desc: "GOPIZZA 홈페이지에서 내 주변 매장 찾고 합리적인 가격과 차별화된 맛을 경험해보세요.<br />버튼을 클릭하면 해당 홈페이지로 이동합니다.",
+                descMo: "합리적인 가격과 차별화된 맛 GOPIZZA",
                 url: "https://gopizza.kr",
             },
         },
@@ -1465,10 +1532,11 @@ const langData = {
         hero: imgHero4,
         heroAlt: "신선강화점",
         title: "신선강화점",
-        subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
+        subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br /><br class=\"m_br\" />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
         sections: [
             {
                 title: "신선강화점 특징",
+                mobileDesc: "매장에서 바로 구워내 더욱 바삭한 식감! 편의점에서 만나는 피자 전문점 퀄리티!\n초소형, 초고온, 저전력의 고븐미니는 고온에서 짧은 시간의 조리를 할 수 있어 언제 어디서나 갓 구운 피자를 즐길 수 있습니다.",
                 features: [
                     { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정 콜드체인 시스템 적용으로 신선도 유지" },
                     { title: "합리적인 가격", desc: "GS 더프레시와의 통합 구매를 통해 합리적인 가격에 판매" },
@@ -1478,8 +1546,9 @@ const langData = {
             },
             {
                 title: "왜 GS25 신선강화점인가?",
-                desc: "GSTHEFRESH 통합 구매를 통한 상품 경쟁력을 확보하여 타 편의점 대비 다양한 신선·장보기 상품을 운영합니다. <br />업계 유일의 신선상품 전용 물류센터를 운영중이며, 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
+                desc: "GSTHEFRESH 통합 구매를 통한 상품 경쟁력을 확보하여 타 편의점 대비 다양한 신선·장보기 상품을 운영합니다. <br /><br class=\"m_br\" />업계 유일의 신선상품 전용 물류센터를 운영중이며, 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
                 flow: true,
+                flowTitle: "GS25 신선 배송 방식",
                 flowNote: "*신선센터를 거치지 않는 운영 구조에서는 상품 검품, 물류비, 신선도 관리 방식에 차이가 발생할 수 있습니다.",
             },
             {
@@ -2684,11 +2753,32 @@ function goBack() {
 .cafe_panel :deep(.brand_panel_bg > img) {
     object-position: center bottom;
 }
+
+.gopizza_panel .img_grid,
+.gopizza_panel .img_grid_swiper{
+    margin-top: 0;
+    padding:0;
+}
+
 @media (max-width: 768px) {
+    :deep(.brand_panel_bg > img){
+        object-fit: none;
+    }
     .cafe_panel :deep(.brand_panel_bg > img) {
-        object-position: -348px center ;
+        object-position: -348px center;
+    }
+    .chicken_panel :deep(.brand_panel_bg > img) {
+        object-position: -385px center;
+    }
+    .gopizza_panel :deep(.brand_panel_bg > img) {
+        object-position: -591px bottom;
+    }
+
+    .gopizza_panel :deep(.diff_bottom_row){
+        margin-top:120px;
     }
 }
+
 .sec_brand_visual {
     position: relative;
     height: calc(100vh + 800px);
@@ -3023,9 +3113,8 @@ function goBack() {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    background:
-        linear-gradient(#161616, #161616) center / 2px 20px no-repeat,
-        linear-gradient(#161616, #161616) center / 20px 2px no-repeat;
+    background-color:#161616;
+    display:block;
 }
 
 .acc_item.is_open .acc_btn::after {
@@ -3297,7 +3386,7 @@ button {
 }
 
 .brand_content {
-    max-width: 1460px;
+    max-width: 1420px;
     margin: 0 auto;
     padding: 0 0 200px;
 }
@@ -3436,51 +3525,65 @@ button {
     table-layout: fixed;
 }
 
-.cafe25_table_mo {
+.tbl_mo {
     width: 100%;
     border-collapse: collapse;
 }
 
-.cafe25_table_mo th,
-.cafe25_table_mo td {
-    font-size: 1.6rem;
-    line-height: 1.24;
-    letter-spacing: 0;
+.tbl_mo th,
+.tbl_mo td {
+    height: 56px;
     text-align: left;
     border-bottom: 1px solid #E5E5E9;
     vertical-align: middle;
 }
 
-.cafe25_table_mo th {
-    width:104px;
+.tbl_mo th {
     padding: 18px 24px;
-    font-weight: 700;
     background-color: #F8F8F8;
 }
 
-.cafe25_table_mo td {
-    padding:16px 20px;
-    color: #161616;
-    font-weight: 400;
-}
-.cafe25_table_mo tr:first-child td {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.tbl_mo th > span {
+    color: #161618;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.24;
+    letter-spacing: 0;
 }
 
-.cafe25_table_mo tr:first-child th,
-.cafe25_table_mo tr:first-child td{
-    border-top:1px solid #E5E5E9;
+.tbl_mo td {
+    padding: 16px 20px;
 }
-.cafe25_table_pagination {
+
+.tbl_mo td > span {
+    color: #161616;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.24;
+    letter-spacing: 0;
+}
+
+.tbl_mo td .flag_icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.tbl_mo tr:first-child th,
+.tbl_mo tr:first-child td {
+    border-top: 1px solid #E5E5E9;
+}
+
+.cafe25_table_pagination,
+.gopizza_table_pagination {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
-.cafe25_table_pagination :deep(.swiper-pagination-bullet) {
+.cafe25_table_pagination :deep(.swiper-pagination-bullet),
+.gopizza_table_pagination :deep(.swiper-pagination-bullet) {
     width: 6px;
     height: 6px;
     background-color: #D7D7DF;
@@ -3490,7 +3593,8 @@ button {
     display: block;
 }
 
-.cafe25_table_pagination :deep(.swiper-pagination-bullet-active) {
+.cafe25_table_pagination :deep(.swiper-pagination-bullet-active),
+.gopizza_table_pagination :deep(.swiper-pagination-bullet-active) {
     background-color: #161616;
 }
 
@@ -3498,14 +3602,18 @@ button {
 .cafe25_table td {
     height: 56px;
     padding: 0 24px;
+    border-bottom: 1px solid #e5e5e9;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.cafe25_table th > span,
+.cafe25_table td > span {
     color: #161618;
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 1.6;
     letter-spacing: -0.01em;
-    border-bottom: 1px solid #e5e5e9;
-    vertical-align: middle;
-    white-space: nowrap;
 }
 
 .cafe25_table th:first-child,
@@ -3518,23 +3626,29 @@ button {
     border-right: 0;
 }
 
+.cafe25_table th {
+    background-color: #f8f8f8;
+    border-top: 0;
+}
+
+.cafe25_table th > span {
+    font-weight: 600;
+}
+
 @media (max-width: 768px) {
     .cafe25_table th,
     .cafe25_table td {
-        padding:16px 24px;
+        padding: 16px 24px;
+    }
+    .cafe25_table th > span,
+    .cafe25_table td > span {
         font-size: 1.6rem;
         line-height: 1.5;
         letter-spacing: -0.01em;
     }
-    .cafe25_table th{
+    .cafe25_table th > span {
         font-weight: 700;
     }
-}
-
-.cafe25_table th {
-    font-weight: 600;
-    background-color: #f8f8f8;
-    border-top: 0;
 }
 
 .cafe25_table > tbody > tr > td > .flag_icon {
@@ -3584,7 +3698,7 @@ button {
     letter-spacing: -0.01em;
 }
 
-.chicken25_img_grid {
+.img_grid {
     margin-top: 120px;
     padding: 0;
     display: grid;
@@ -3592,13 +3706,14 @@ button {
     gap: 20px;
 }
 
-.chicken25_img_grid > li {
+.img_grid > li {
     min-width: 0;
     border-radius: 12px;
     overflow: hidden;
 }
 
-.chicken25_img_grid img {
+.img_grid img {
+    width: 100%;
     object-fit: cover;
 }
 
@@ -3649,6 +3764,22 @@ button {
     flex: 1;
 }
 
+
+.gopizza_menu_panel img{
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .gopizza_menu_panel + .gopizza_menu_panel{
+        margin-top:100px;
+    }
+    .gopizza_menu_panel img{
+        min-height: 240px;
+    }
+}
+
 .gopizza_menu_info {
     padding-top: 24px;
 }
@@ -3663,9 +3794,22 @@ button {
 .gopizza_menu_title > strong {
     color: #161618;
     font-size: 2.4rem;
-    font-weight: 600;
+    font-weight: 700; 
     line-height: 1.35;
     letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+    .gopizza_menu_title{
+        gap:4px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .gopizza_menu_title > strong {
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+    }
 }
 
 .gopizza_menu_tag {
@@ -3675,7 +3819,9 @@ button {
     line-height: 1.4;
     letter-spacing: -0.01em;
 }
-
+.gopizza_menu_tag + .gopizza_menu_tag{
+    margin-left: 8px;
+}   
 .gopizza_menu_tag + .gopizza_menu_tag::before {
     content: "";
     width: 1px;
@@ -3731,6 +3877,7 @@ button {
     text-align: center;
 }
 
+
 .gopizza_menu_name {
     display: flex;
     align-items: center;
@@ -3748,12 +3895,6 @@ button {
     border-radius: 4px;
 }
 
-.gopizza_phone_grid {
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, calc((100% - 20px) / 2));
-    gap: 20px;
-}
 
 .diff_bottom_row {
     display: flex;
@@ -3767,8 +3908,27 @@ button {
 .gopizza_link {
     min-width: 0;
     display: flex;
+    align-items: center;
     flex: 1;
     gap: 20px;
+    text-decoration: none;
+}
+
+.gopizza_link > figure {
+    width: 90px;
+    height: 90px;
+    margin: 0;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #e5e5e9;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: none;
+    }
+
+.gopizza_link > figure > img {
+    width: 100%;
+    display: block;
 }
 
 .gopizza_link > div {
@@ -3777,19 +3937,26 @@ button {
     flex: 1;
 }
 
-.gopizza_link_title {
+.gopizza_link > div > strong {
     margin: 0 0 6px;
     color: #161618;
     font-size: 2rem;
     font-weight: 700;
     line-height: 1.5;
     letter-spacing: -0.01em;
-    display: flex;
+    display:flex;
+    gap:8px;
     align-items: center;
-    gap: 6px;
 }
 
-.gopizza_link > div > p + p {
+.gopizza_link > div > strong:after{
+    content:"";
+    width:20px;
+    height:20px;
+    background-color:red;
+}
+
+.gopizza_link > div > p {
     margin: 0;
     color: #67676f;
     font-size: 1.4rem;
@@ -3801,7 +3968,6 @@ button {
 /* ── 신선강화점 ── */
 .sinsen_feature :deep(.feature_card_item) {
     min-height: 240px;
-    padding: 32px 32px 60px;
 }
 
 .sinsen_card {
@@ -3810,9 +3976,38 @@ button {
     background-color: #f8f8f8;
     border-radius: 12px;
 }
+
+.sinsen_card strong{
+    margin-bottom:8px;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    display: block;
+}
+@media (max-width: 768px) {
+    .sinsen_card strong{
+        font-size: 18px;
+        line-height: 150%;
+        letter-spacing: 0%;
+    }
+
+}
+@media (max-width: 768px) {
+    .sinsen_feature :deep(.feature_card_item) {
+        min-height: 227px;
+    }
+}
 .sinsen_card span{
 font-size: 1.8rem;
 line-height: 1.4;
+}
+@media (max-width: 768px) {
+    .sinsen_card span {
+    font-size: 1.4rem; 
+    letter-spacing: -0.01em;
+
+    }
 }
 .sinsen_card > p {
     margin-bottom: 32px;
@@ -3823,9 +4018,23 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
+@media (max-width: 768px) {
+    .sinsen_card > p {
+     margin-bottom:12px;
+    }
+}
+
 .sinsen_flow_img {
+    width: 100%;
     margin-top: 24px;
     display: block;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .sinsen_flow_img {
+       height:130px;
+    }
 }
 
 /* 운영 장점 체크리스트 */
@@ -3865,6 +4074,12 @@ line-height: 1.4;
 .sinsen_check_note {
     color: #67676f;
 }
+
+.chicken_panel :deep(.feature_card_item) {
+    min-height: 238px; 
+   
+}
+
 
 /* ── 생활 서비스 3depth 탭 ── */
 .service_tab_wrap {
@@ -5050,9 +5265,9 @@ line-height: 1.4;
         overflow: visible;
     }
 
-    .diff_card_swiper .swiper-slide {
+    /* .diff_card_swiper .swiper-slide {
         width: 87.2vw;
-    }
+    } */
 
     .diff_card > div {
         min-height: 163px;
@@ -5124,24 +5339,30 @@ line-height: 1.4;
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .chicken25_img_grid {
-        grid-template-columns: minmax(0, 1fr);
+    .img_grid_swiper {
+        padding: 0 20px;
+        overflow: visible;
     }
 
-    .gopizza_img_grid {
-        grid-template-columns: minmax(0, 1fr);
+    .img_grid_swiper :deep(.swiper-slide) {
+        width: 327px;
     }
 
-    .gopizza_img_grid > li > div {
-        height: 260px;
+    .img_grid_slide {
+        width: 327px;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    .img_grid_slide > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
     .gopizza_img_wrap {
         height: 260px;
-    }
-
-    .gopizza_phone_grid {
-        grid-template-columns: minmax(0, 1fr);
     }
 
     .diff_bottom_row {
@@ -5149,8 +5370,48 @@ line-height: 1.4;
         gap: 20px;
     }
 
+    .gopizza_link {
+        padding: 0 16px;
+        position: relative;
+        gap: 12px;
+    }
+
+    .gopizza_link > figure {
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        border: 0;
+        display:block;
+    }
+
+    .gopizza_link > figure > img {
+        height: 48px;
+    }
+
+    .gopizza_link > div {
+        padding: 0;
+    }
+
+    .gopizza_link > div > strong {
+        font-size: 1.6rem;
+
+    }
+    .gopizza_link > div > strong:after{
+        display:none;
+    }
+    .gopizza_link::after {
+        content: "";
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        background-color: #e5e5e9;
+    }
+
     .sinsen_check_list > li {
-        flex-wrap: wrap;
+        padding-bottom: 4px;
     }
 
     .service_tab_item {
