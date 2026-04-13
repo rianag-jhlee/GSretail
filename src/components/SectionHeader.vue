@@ -1,7 +1,8 @@
 <template>
     <header>
-        <h3>{{ title }}</h3>
+        <h3 v-html="title" />
         <p v-if="desc || source" v-html="descWithSource" />
+        <p v-if="mobileDesc" class="sec_mobile_desc">{{ mobileDesc }}</p>
         <slot />
     </header>
 </template>
@@ -10,9 +11,10 @@
 import { computed, defineProps } from "vue";
 
 const props = defineProps({
-    title:  { type: String, required: true },
-    desc:   { type: String, default: "" },
-    source: { type: String, default: "" },
+    title:      { type: String, required: true },
+    desc:       { type: String, default: "" },
+    source:     { type: String, default: "" },
+    mobileDesc: { type: String, default: "" },
 });
 
 const descWithSource = computed(() => {
@@ -54,6 +56,10 @@ header > p {
     letter-spacing: -0.01em;
 }
 
+.sec_mobile_desc {
+    display: none;
+}
+
 @media (max-width: 768px) {
     header{
         padding-bottom: 24px;
@@ -66,11 +72,19 @@ header > p {
         font-size: 1.6rem;
         line-height: 1.5;
         letter-spacing: -0.01em;
-
     }
     :deep(.sec_cite){
         margin-top: 4px;
         margin-left: 0;
+        display: block;
+    }
+    .sec_mobile_desc {
+        margin: 8px 0 0;
+        color: #161618;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+        white-space: pre-line;
         display: block;
     }
 }
