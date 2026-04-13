@@ -35,10 +35,13 @@ img {
     border-radius: 12px;
     overflow: hidden;
 }
+@media (max-width: 768px) {
+    .brand_panel_bg {
+        border-radius: 0;
+    }
+}
 
 .brand_panel_bg > img {
-    height: auto;
-    max-height: 340px;
     object-fit: cover;
 }
 
@@ -63,6 +66,14 @@ img {
     line-height: 1.5;
     letter-spacing: -0.01em;
 }
+@media (max-width: 768px){
+    .brand_panel_title{
+        padding: 0 20px 64px;
+    }
+    .brand_panel_bg {
+        margin: 0 0 24px;
+    }
+}
 
 @media (max-width: 1024px) {
     .brand_panel_title > h2 {
@@ -75,7 +86,11 @@ img {
 }
 
 @media (max-width: 768px) {
+    .brand_panel_bg > img{
+        max-height: 245px;
+    }
     .brand_panel_title > h2 {
+        margin-bottom: 12px;
         font-size: 2.6rem;
     }
 
