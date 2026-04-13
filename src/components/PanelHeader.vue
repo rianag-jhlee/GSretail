@@ -95,7 +95,10 @@ img {
     }
 
     .brand_panel_title > p {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+
     }
 }
 </style>
