@@ -79,7 +79,7 @@
         "status": "com",
         "note": "gsrbr010101 ~ gsrbr0105 포함됨"
     },
-        {
+    {
         "depth1": "BRAND", "depth2": "GS25", "depth3": "차별화 상품/서비스", "depth4": "차별화 상품", "depth5": "", "depth6": "",
         "type": "",
         "path": "gsrbr/01/gsrbr010102",
@@ -108,6 +108,76 @@
         "endDate": "",
         "status": "ing",
         "note": ""
+    },
+    {
+        "depth1": "", "depth2": "GS THE FRESH", "depth3": "신선 산지 안내", "depth4": "전국 우수 산지", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/02/gsrbr020101",
+        "link": "/gsrbr020101",
+        "startDate": "26-04-13",
+        "endDate": "26-04-13",
+        "status": "com",
+        "note": "gsrbr020101~gsrbr020401 포함"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "함께하는 지자체", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/02/gsrbr020102",
+        "link": "/gsrbr020102",
+        "startDate": "26-04-13",
+        "endDate": "26-04-13",
+        "status": "com",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "맛/선도 관리", "depth4": "맛/선도 지킴이 안내", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/02/gsrbr020201",
+        "link": "/gsrbr020201",
+        "startDate": "26-04-13",
+        "endDate": "26-04-13",
+        "status": "com",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "맛/선도 관리방침 및 TIP", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/02/gsrbr020202",
+        "link": "/gsrbr020202",
+        "startDate": "26-04-13",
+        "endDate": "26-04-13",
+        "status": "com",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "매장찾기", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr/02/gsrbr0203",
+        "link": "/gsrbr0203",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": "tab"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "입지제안", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr/02/gsrbr0204",
+        "link": "/gsrbr0204",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": "tab"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "상담신청", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr/02/gsrbr020401",
+        "link": "/gsrbr020401",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": "tab"
     },
     {
         "depth1": "", "depth2": "개발/임대사업", "depth3": "지하철", "depth4": "", "depth5": "", "depth6": "",
