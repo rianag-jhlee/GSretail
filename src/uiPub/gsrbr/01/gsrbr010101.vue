@@ -173,20 +173,34 @@
         </div>
 
         <!-- 탭 1: CAFE25 -->
-        <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel cafe_panel">
             <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :desc="tab1.subtitle" hero-bg="#fff" />
 
             <section v-for="(sec, i) in tab1.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" :source="sec.source" />
 
                 <!-- 카드형 -->
-                <ul v-if="sec.type === 'cards'" class="cafe25_card_list" role="list">
-                    <li v-for="(card, c) in sec.cards" :key="c">
-                        <div>
-                            <img :src="card.image" :alt="card.alt || ''" />
-                        </div>
-                    </li>
-                </ul>
+                <template v-if="sec.type === 'cards'">
+                    <ul v-if="!isMobileView" class="cafe25_card_list" role="list">
+                        <li v-for="(card, c) in sec.cards" :key="c">
+                            <div>
+                                <img :src="card.image" :alt="card.alt || ''" />
+                            </div>
+                        </li>
+                    </ul>
+                    <Swiper
+                        v-else
+                        class="cafe25_card_swiper"
+                        :space-between="8"
+                        slides-per-view="auto"
+                    >
+                        <SwiperSlide v-for="(card, c) in sec.cards" :key="c">
+                            <div class="cafe25_card_slide">
+                                <img :src="card.image" :alt="card.alt || ''" />
+                            </div>
+                        </SwiperSlide>
+                    </Swiper>
+                </template>
 
                 <!-- 이미지형 -->
                 <figure v-else-if="sec.type === 'image'" class="cafe25_img_wrap">
@@ -196,7 +210,7 @@
                 <!-- 분할형 (이미지 + 테이블) -->
                 <div v-else-if="sec.type === 'split'" class="cafe25_split">
                     <div class="cafe25_split_img">
-                        <img :src="sec.image" :alt="sec.imageAlt || ''" />
+                        <img :src="isMobileView && sec.imageMo ? sec.imageMo : sec.image" :alt="sec.imageAlt || ''" />
                     </div>
                     <div class="cafe25_split_table">
                         <table class="cafe25_table">
@@ -221,7 +235,8 @@
 
                 <!-- 테이블형 -->
                 <div v-else-if="sec.type === 'table'" class="cafe25_table_wrap">
-                    <table class="cafe25_table">
+                    <!-- PC: 기존 테이블 -->
+                    <table v-if="!isMobileView" class="cafe25_table">
                         <thead>
                             <tr>
                                 <th
@@ -240,6 +255,29 @@
                             </tr>
                         </tbody>
                     </table>
+                    <!-- Mobile: row별 Swiper -->
+                    <template v-if="isMobileView">
+                        <Swiper
+                            :modules="[Pagination]"
+                            :slides-per-view="1"
+                            :pagination="{ el: '.cafe25_table_pagination', clickable: true }"
+                            class="cafe25_table_swiper"
+                        >
+                            <SwiperSlide v-for="(row, ri) in sec.rows" :key="ri">
+                                <table class="cafe25_table_mo">
+                                    <tbody>
+                                        <tr v-for="(col, ci) in sec.columns" :key="ci">
+                                            <th scope="row">{{ col.label }}</th>
+                                            <td>
+                                                <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />{{ row[col.key] }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </SwiperSlide>
+                        </Swiper>
+                        <div class="cafe25_table_pagination"></div>
+                    </template>
                 </div>
             </section>
         </div>
@@ -1096,7 +1134,7 @@ import imgCard1 from "@/assets/images/dummy/differentiated_product_01.png";
 import imgCard2 from "@/assets/images/dummy/differentiated_product_02.png";
 
 /* 탭 1 이미지 */
-import imgHero1 from "@/assets/images/dummy/differentiated_bg_02.png";
+import imgHero1 from "@/assets/images/dummy/brand_bg_02.png";
 import imgCoffeeMachine01 from "@/assets/images/dummy/coffee_machine_01.png";
 import imgCoffeeMachine02 from "@/assets/images/dummy/coffee_machine_02.png";
 import imgCoffeeMachine03 from "@/assets/images/dummy/coffee_machine_03.png";
@@ -1107,6 +1145,7 @@ import imgFlagEthiopia from "@/assets/images/dummy/img_flag_ethiopia.png";
 import imgFlagPapua from "@/assets/images/dummy/img_flag_papua.png";
 import imgCafe25Graph from "@/assets/images/dummy/cafe25_graph.png";
 import imgCafeMenu from "@/assets/images/dummy/cafe25_menu.png";
+import imgCafeMenuMo from "@/assets/images/dummy/mo/cafe25_menu_mo.png";
 
 /* 탭 2 이미지 */
 import imgHero2 from "@/assets/images/dummy/differentiated_bg_03.png";
@@ -1287,6 +1326,7 @@ const langData = {
                     type: "split",
                     title: "메뉴 소개",
                     image: imgCafeMenu,
+                    imageMo: imgCafeMenuMo,
                     imageAlt: "CAFE25 메뉴 이미지",
                     columns: [
                         { key: "menu",     label: "구분",           width: 260, align: "left" },
@@ -2414,12 +2454,13 @@ const scrollToSection = (idx) => {
     }
 };
 
-const isMobileView = ref(window.innerWidth <= 768);
-
-const _onResize = () => { isMobileView.value = window.innerWidth <= 768; };
+const _getIsMobile = () => window.innerWidth <= 768;
+const isMobileView = ref(_getIsMobile());
+const _onResize = () => { isMobileView.value = _getIsMobile(); };
 
 let popSecObserver = null;
 onMounted(() => {
+    isMobileView.value = _getIsMobile();
     window.addEventListener("resize", _onResize);
 
     const targets = document.querySelectorAll("[data-pop-sec]");
@@ -2640,6 +2681,14 @@ function goBack() {
 /* =====================
    sec_brand_visual
    ===================== */
+.cafe_panel :deep(.brand_panel_bg > img) {
+    object-position: center bottom;
+}
+@media (max-width: 768px) {
+    .cafe_panel :deep(.brand_panel_bg > img) {
+        object-position: -348px center ;
+    }
+}
 .sec_brand_visual {
     position: relative;
     height: calc(100vh + 800px);
@@ -3221,7 +3270,6 @@ function goBack() {
     text-decoration: underline;
 }
 img {
-    width: 100%;
     display: block;
 }
 
@@ -3261,6 +3309,15 @@ button {
 
 .brand_panel section {
     padding-bottom: 120px;
+}
+
+
+
+@media (max-width: 768px) {
+    .brand_panel section {
+        padding: 0 20px 80px;
+    }
+
 }
 
 .brand_panel section:last-of-type {
@@ -3364,19 +3421,7 @@ button {
     min-width: 0;
 }
 
-.cafe25_split_img {
-    padding: 45px 75px;
-    background-color: #0e376b;
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.cafe25_split_img > img {
-    max-height: 358px;
-}
 
 .cafe25_split_table {
     overflow-x: auto;
@@ -3389,6 +3434,64 @@ button {
 .cafe25_table {
     border-collapse: collapse;
     table-layout: fixed;
+}
+
+.cafe25_table_mo {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cafe25_table_mo th,
+.cafe25_table_mo td {
+    font-size: 1.6rem;
+    line-height: 1.24;
+    letter-spacing: 0;
+    text-align: left;
+    border-bottom: 1px solid #E5E5E9;
+    vertical-align: middle;
+}
+
+.cafe25_table_mo th {
+    width:104px;
+    padding: 18px 24px;
+    font-weight: 700;
+    background-color: #F8F8F8;
+}
+
+.cafe25_table_mo td {
+    padding:16px 20px;
+    color: #161616;
+    font-weight: 400;
+}
+.cafe25_table_mo tr:first-child td {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cafe25_table_mo tr:first-child th,
+.cafe25_table_mo tr:first-child td{
+    border-top:1px solid #E5E5E9;
+}
+.cafe25_table_pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cafe25_table_pagination :deep(.swiper-pagination-bullet) {
+    width: 6px;
+    height: 6px;
+    background-color: #D7D7DF;
+    border-radius: 50%;
+    opacity: 1;
+    cursor: pointer;
+    display: block;
+}
+
+.cafe25_table_pagination :deep(.swiper-pagination-bullet-active) {
+    background-color: #161616;
 }
 
 .cafe25_table th,
@@ -3413,6 +3516,19 @@ button {
 .cafe25_table th:last-child,
 .cafe25_table td:last-child {
     border-right: 0;
+}
+
+@media (max-width: 768px) {
+    .cafe25_table th,
+    .cafe25_table td {
+        padding:16px 24px;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+    }
+    .cafe25_table th{
+        font-weight: 700;
+    }
 }
 
 .cafe25_table th {
@@ -4957,8 +5073,39 @@ line-height: 1.4;
         margin-bottom: 8px;
     }
 
-    .cafe25_card_list {
-        grid-template-columns: minmax(0, 1fr);
+    .cafe25_img_wrap {
+        max-width: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cafe25_img_wrap > img {
+        max-width: none;
+        display: block;
+    }
+
+    .cafe25_card_swiper {
+        overflow: visible;
+        margin-bottom: 20px;
+    }
+
+    .cafe25_card_swiper .swiper-slide {
+        width: 164px;
+    }
+
+    .cafe25_card_slide {
+        width: 164px;
+        height: 164px;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    .cafe25_card_slide > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
     .cafe25_split {
@@ -4967,6 +5114,10 @@ line-height: 1.4;
 
     .cafe25_split > div {
         width: 100%;
+    }
+
+    .brand_panel:first-of-type section:not(:first-of-type) :deep(header) {
+        padding-bottom: 40px;
     }
 
     .chicken25_card_list {
