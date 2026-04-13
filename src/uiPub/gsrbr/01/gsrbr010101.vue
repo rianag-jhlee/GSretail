@@ -459,7 +459,7 @@
         </div>
 
         <!-- depth1 = 1: 신선강화점 -->
-        <div v-if="depth1ActiveIdx === 1" class="brand_panel fresh_panel">
+        <div v-if="depth1ActiveIdx === 1" class="brand_panel sinsen_panel">
             <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :desc="sinsen.subtitle" />
 
             <section v-for="(sec, i) in sinsen.sections" :key="i">
@@ -2772,11 +2772,14 @@ function goBack() {
     }
     .gopizza_panel :deep(.brand_panel_bg > img) {
         object-position: -591px bottom;
-    }
-
+    } 
     .gopizza_panel :deep(.diff_bottom_row){
         margin-top:120px;
     }
+    .sinsen_panel :deep(.brand_panel_bg > img) {
+        object-position: -797px bottom;
+    }
+
 }
 
 .sec_brand_visual {
