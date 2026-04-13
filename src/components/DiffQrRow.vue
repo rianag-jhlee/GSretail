@@ -16,9 +16,9 @@ import imgQrPc from "@/assets/images/dummy/qr-app-download.svg";
 import imgQrMo from "@/assets/images/dummy/qr_app.png";
 
 defineProps({
-    title:      { type: String, default: "" },
-    desc:       { type: String, default: "" },
-    mobileDesc: { type: String, default: "" },
+    title: { type: String, default: "" },
+    desc:  { type: String, default: "" },
+    mobileDesc: { type: String, default: "GS25의 다양한 이벤트와 차별화 상품" },
 });
 
 const isMobileView = ref(window.innerWidth <= 768);
