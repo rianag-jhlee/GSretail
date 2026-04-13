@@ -46,10 +46,23 @@
                                 <div class="text-wrapper-3">{{ t.BoardSectionTitle1 }}</div>
                                 <p class="p">{{ t.BoardSectionDesc1 }}</p>
                             </div>
-                            <div class="view-3">
-                                <template v-for="(member, mIdx) in t.BoardMemberList" :key="'board-' + mIdx">
-                                    <div class="div-2">
-                                        <div class="view-4"><img class="img" :src="member.img" :alt="member.name" /></div>
+
+
+                            <div class="view-3 res-swiper-container">
+                                <swiper
+                                    :slides-per-view="'auto'"
+                                    :space-between="0"
+                                    :breakpoints="{
+                                        768: {
+                                            allowTouchMove: false
+                                        }
+                                    }"
+                                    class="board-swiper"
+                                >
+                                    <swiper-slide v-for="(member, mIdx) in t.BoardMemberList" :key="'board-' + mIdx" class="div-2 res-slide-item">
+                                        <div class="view-4">
+                                            <img class="img" :src="member.img" :alt="member.name" />
+                                        </div>
                                         <div class="view-4">
                                             <div class="div-3">
                                                 <div class="text-wrapper-4">{{ member.pos }}</div>
@@ -70,9 +83,9 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div v-if="mIdx < t.BoardMemberList.length - 1" class="divider"></div>
-                                </template>
+                                        <div v-if="mIdx < t.BoardMemberList.length - 1" class="divider pc-only"></div>
+                                    </swiper-slide>
+                                </swiper>
                             </div>
                         </div>
                         <div class="view-2">
@@ -80,9 +93,16 @@
                                 <div class="text-wrapper-3">{{ t.BoardSectionTitleSub }}</div>
                                 <p class="p">{{ t.BoardSectionDescSub }}</p>
                             </div>
-                            <div class="view-3">
-                                <template v-for="(member, sIdx) in t.SubMemberList" :key="'sub-' + sIdx">
-                                    <div class="div-2">
+                            <div class="view-3 res-swiper-container" v-if="t">
+                                <swiper
+                                    :slides-per-view="'auto'"
+                                    :space-between="0"
+                                    :breakpoints="{
+                                        768: {allowTouchMove: false}
+                                    }"
+                                    class="sub-member-swiper"
+                                >
+                                    <swiper-slide v-for="(member, sIdx) in t.SubMemberList" :key="'sub-' + sIdx" class="div-2 res-slide-item">
                                         <div class="view-4">
                                             <img class="img" :src="member.img" :alt="member.name" />
                                         </div>
@@ -112,15 +132,14 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div v-if="sIdx < t.SubMemberList.length - 1" class="divider"></div>
-                                </template>
+                                        <div v-if="sIdx < t.SubMemberList.length - 1" class="divider pc-divider"></div>
+                                    </swiper-slide>
+                                </swiper>
                             </div>
                         </div>
                         <div class="view-2">
                             <div class="sub-title">
-                                <h3 class="text-wrapper-3">{{ t.BoardSectionTitleSub }}</h3>
-                                <p class="p" v-html="t.BoardSectionDescSub"></p>
+                                <h3 class="text-wrapper-3">{{ t.BoardSectionTitle2 }}</h3>
                             </div>
                             <div class="div-4">
                                 <div class="view-6">
@@ -142,6 +161,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="view-2">
                             <div class="sub-title"><div class="text-wrapper-3">{{ t.BoardSectionTitle3 }}</div></div>
@@ -192,10 +212,13 @@
 
 <script>
 import Tabs from "@/components/Tabs.vue";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+
 
 export default {
     name: "gsrin0102",
-    components: { Tabs },
+    components: { Tabs, Swiper, SwiperSlide },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
@@ -494,7 +517,7 @@ export default {
 .title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0101_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title {color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; display: block;}
 .visual-sub {margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center;}
-.cont_inner {width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px;}
+.cont_inner {width: 100%; max-width: 1420px; margin: 0 auto;}
 .title-sub-text {width: 100%; padding: 80px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4;}
 :deep(.title-sub-text br:not(:nth-of-type(2))) {display: none;}
 .subtit_wrap {width: 100%; padding: 60px 40px; background: #F0F3F5; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
@@ -516,7 +539,7 @@ export default {
 .text-wrapper-3 {width: 100%; margin-top: -1.00px; padding: 0; color: #161618; font-size: 40px; font-weight: 700; font-style: normal; letter-spacing: -0.4px; line-height: 129.99999523162842%; position: relative; align-self: stretch;}
 .p {width: 100%; padding: 0; color: #242428; font-size: 24px; font-weight: 500; font-style: normal; letter-spacing: -0.24px; line-height: 150%; position: relative; align-self: stretch;}
 .view-3 {width: 100%; padding: 0; position: relative; display: flex; align-items: flex-start; gap: 28px; align-self: stretch; flex: 0 0 auto;}
-.div-2 {width: 21.97%; padding: 0; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 32px;}
+.div-2 {width: 21.97%; height:auto; padding: 0; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 32px;}
 .view-4 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; align-self: stretch; flex: 0 0 auto;}
 .img {width: 100%; height:auto; position: relative; align-self: stretch;}
 .div-3 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; align-self: stretch; flex: 0 0 auto;}
@@ -568,6 +591,7 @@ export default {
 /*:::::::::::::::::::::::::::::::Responsive Style :::::::::::::::::::::::::::::::*/
 
 @media screen and (max-width:1024px) {
+    .cont_inner {padding: 0 20px;}
     .title-sub-text {padding: 60px 0; font-size: 36px;}
     .view-3 {flex-wrap: wrap; justify-content:space-between; gap:0;}
     .div-2 {width: calc(48% - 10px);} /* 2열 배치 */
@@ -577,6 +601,7 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
+    .cont_inner {padding: 0 20px;}
     .title_wrap {padding: 60px 20px 80px;}
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
@@ -596,5 +621,29 @@ export default {
     .column {width: 100%;}
     .divider-2 {width: 100%; height: 1px;}
     .button-group {gap: 8px;}
+}
+
+/* swiper */
+.swiper {width:100%;}
+.swiper-slide {height:auto; position:relative;}
+.swiper-slide.div-2 {margin-right:28px; margin-left:28px}
+.swiper-slide.div-2:first-of-type {margin-left:0;}
+.swiper-slide.div-2:last-of-type::after {display:none;}
+.swiper-slide.div-2::after {content:''; width:1px; height:100%; background:#F2F2F4; display:block; position:absolute; top:0; right:-28px}
+
+
+
+/* 모바일 스타일: 스와이퍼 활성화 */
+@media screen and (max-width: 767px) {
+    .res-slide-item {
+        width: 280px !important; /* 모바일에서 적절한 카드 너비 */
+        margin-right: 0;
+        padding-right: 20px; /* 카드 간 간격 */
+        box-sizing: border-box;
+    }
+    .pc-only { display: none; } /* 모바일에서 세로선 제거 */
+    .div-2 { width: 100% !important; }
+    .swiper-slide.div-2 {margin-right:0; margin-left:0}
+    .swiper-slide.div-2::after {display:none}
 }
 </style>
