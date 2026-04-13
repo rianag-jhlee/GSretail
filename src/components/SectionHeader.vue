@@ -24,7 +24,7 @@ const descWithSource = computed(() => {
 
 <style scoped>
 header {
-    margin-bottom: 40px;
+   padding-bottom: 40px;
 }
 
 header > h3 {
@@ -55,8 +55,23 @@ header > p {
 }
 
 @media (max-width: 768px) {
+    header{
+        padding-bottom: 24px;
+    }
     header > h3 {
+        margin-bottom: 8px;
         font-size: 2.2rem;
+    }
+    header > p {
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+
+    }
+    :deep(.sec_cite){
+        margin-top: 4px;
+        margin-left: 0;
+        display: block;
     }
 }
 </style>

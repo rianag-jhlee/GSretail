@@ -33,7 +33,7 @@ img {
     padding: 0;
     background-color: #e8e8ec;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: hidden; 
 }
 @media (max-width: 768px) {
     .brand_panel_bg {
