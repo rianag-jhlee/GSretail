@@ -31,6 +31,7 @@ defineProps({
     display: grid;
     grid-template-columns: repeat(var(--step-cols), 1fr);
 }
+
 .step_list.step_type1{
     gap:16px;
 }
@@ -138,9 +139,28 @@ defineProps({
 
 @media (max-width: 768px) {
     .step_list {
-        padding: 24px 20px;
+        padding: 40px;
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 30px;
+    }
+
+    .step_list.step_type1,
+    .step_list.step_type2 {
+        gap: 30px;
+    }
+    .step_type1 .step_item{
+        gap: 24px;
+    }
+    .step_num{
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+    }
+    .step_title{
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+
     }
 }
 </style>

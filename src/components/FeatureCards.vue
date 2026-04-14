@@ -89,6 +89,13 @@ onUnmounted(() => {
     letter-spacing: -0.01em;
     display: block;
 }
+@media (max-width: 768px) {
+    .feature_card_num {
+        margin-bottom: 6px;
+        line-height: 1.5;
+        letter-spacing: 0;
+    }
+}
 
 .feature_card_icon {
     width: 48px;
