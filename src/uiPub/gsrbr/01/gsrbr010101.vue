@@ -587,6 +587,14 @@
                                 <AccordionItem item-key="pop-charging" @opened="onChargingOpened">
                                     <template #title>{{ tab.chargingTitle }}</template>
                                     <section class="pop_sec">
+                                        <SectionHeader :title="tab.chargingTitle" />
+                                        <!-- PC: 기존 flex 레이아웃 -->
+                                        <ul class="charging_service_list">
+                                            <li v-for="(item, ci) in tab.chargingItems" :key="ci" class="charging_service_item">
+                                                <img :src="item.img" :alt="item.name" />
+                                            </li>
+                                        </ul>
+                                        <!-- 모바일: Swiper -->
                                         <Swiper
                                             class="charging_service_swiper"
                                             slides-per-view="auto"
@@ -4354,12 +4362,17 @@ line-height: 1.4;
         height: auto !important;
         overflow: visible;
     }
-    /* 데스크탑에서는 acc_item 구분선 제거 (pop_sec 자체 간격으로 처리) */
+    /* acc_item이 기존 section의 역할: 구분선 제거, 섹션 간격 부여 */
     .pop_sec_acc :deep(.acc_item) {
         border: none;
+        padding-bottom: 120px;
     }
-    .pop_sec_acc :deep(.acc_item:first-child) {
-        border: none;
+    .pop_sec_acc :deep(.acc_item:last-child) {
+        padding-bottom: 0;
+    }
+    /* acc_panel_cont 기본 패딩 초기화 (간격은 acc_item이 담당) */
+    .pop_sec_acc :deep(.acc_panel_cont) {
+        padding: 0;
     }
 }
 
@@ -4389,37 +4402,33 @@ line-height: 1.4;
     }
 }
 
+
 /* ── 교통카드 충전 서비스 (50:9900) ── */
-/* 데스크탑: Swiper 비활성화 → 기존 flex 레이아웃처럼 표시 */
-@media (min-width: 769px) {
-    .charging_service_swiper {
-        overflow: visible;
-    }
-    .charging_service_swiper :deep(.swiper-wrapper) {
-        gap: 20px;
-        transform: none !important;
-    }
-    .charging_service_swiper :deep(.swiper-slide) {
-        width: auto !important;
-        height: auto !important;
-        flex: 1;
-    }
+/* PC: flex 리스트 표시 / Swiper 숨김 */
+.charging_service_list { 
+    display: flex;
+    gap: 20px;
+}
+.charging_service_swiper {
+    display: none;
 }
 
-/* 모바일: Swiper 활성화 — 110x109px 슬라이드, 8px 간격 */
-.charging_service_swiper {
-    overflow: hidden;
-}
+/* 모바일: 리스트 숨김 / Swiper 표시 */
 @media (max-width: 768px) {
-    .charging_service_swiper{
-      margin-top:24px;
-      padding:0 32px;
+    .charging_service_list {
+        display: none;
     }
-}
-.charging_service_swiper :deep(.swiper-slide) {
-    width: 110px !important;
-    height: 109px !important;
-    flex: none;
+    .charging_service_swiper {
+        display: block;
+        overflow: hidden;
+        margin-top: 24px;
+        padding: 0 32px;
+    }
+    .charging_service_swiper :deep(.swiper-slide) {
+        width: 110px !important;
+        height: 109px !important;
+        flex: none;
+    }
 }
 
 .charging_service_item {
@@ -4487,10 +4496,10 @@ line-height: 1.4;
 }
 /* ── 교통 사용처 안내 (50:10103) ── */
 .usage_header {
-    margin-bottom: 40px;
     display: flex; 
     align-items: center;
     gap: 20px;
+    margin-bottom: 40px;
 }
 @media (max-width: 768px){
     .usage_header{
@@ -4501,6 +4510,7 @@ line-height: 1.4;
 
 .usage_header :deep(header) {
     margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .usage_header :deep(h3) {
