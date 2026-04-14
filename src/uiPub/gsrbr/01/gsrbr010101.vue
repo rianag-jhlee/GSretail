@@ -60,7 +60,14 @@
                 <header class="str_header">
                     <h2>당신 곁에는 언제나<br />GS25가 있습니다.</h2>
                     <div class="str_actions">
-                        <a href="#none" class="btn_store_find">매장 찾기</a>
+                        <a
+                            href="#none"
+                            class="btn_store_find"
+                            data-popid="pop_store_find"
+                            data-type="lg"
+                            data-cont="store_find"
+                            @click.prevent="openModal"
+                        >매장 찾기</a>
                         <div class="sns_wrap">
                             <a href="#none" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
                             <a href="#none" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
@@ -1152,9 +1159,10 @@
         <div v-if="!isMobileView" class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
         </div>
+    </div>
 
-
-        
+    <div id="pop_store_find" class="modal_wrap">
+        <div class="modal_container"></div>
     </div>
 </template>
 
@@ -1176,6 +1184,7 @@ import DiffQrRow from "@/components/DiffQrRow.vue";
 import imgQrMo from "@/assets/images/dummy/qr_app.png";
 import Steps from "@/components/Steps.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
+import modal from "@/assets/js/modal";
 
 /* smain 이미지 */
 import imgLogo from "@/assets/images/dummy/brand_gs25_logo.png";
@@ -1280,6 +1289,12 @@ import imgGiftCerti02 from "@/assets/images/dummy/gift_certi_02.png";
 import imgGiftCerti03 from "@/assets/images/dummy/gift_certi_03.png";
 
 const router = useRouter();
+
+function openModal(event) {
+    const el = event.currentTarget;
+    modal.open(el.dataset.popid, el.dataset.type || "default", el);
+}
+
 const activeTab = ref(0);
 
 const ph = (n) => Array.from({ length: n }, () => ({ brand: "", logo: null }));
@@ -5029,7 +5044,7 @@ line-height: 1.4;
     line-height: 1.35;
     letter-spacing: -0.01em;
 }
-
+ 
 @media (max-width: 768px) {
     .gift_usage_group > h3 {
         font-size: 1.8rem;
