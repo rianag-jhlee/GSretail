@@ -498,7 +498,7 @@
 
         <!-- depth1 = 2: 매장/서비스 -->
         <!-- 생활 서비스 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 0" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 0" class="brand_panel pop_panel">
             <!-- 3depth 탭 네비 -->
             <nav class="service_tab_wrap" role="tablist" aria-label="생활 서비스">
                 <button
@@ -539,112 +539,146 @@
                             </ul>
                         </nav>
                         <div class="pop_content">
-                            <!-- 팝카드란? -->
-                            <section id="pop-sec-0" data-pop-sec="0" class="pop_sec">
-                                <SectionHeader :title="tab.popTitle" :desc="tab.popDesc">
-                                    <p class="pop_exclude">{{ tab.popExclude }}</p>
-                                </SectionHeader>
-                                <ul class="pop_card_list">
-                                    <li v-for="(card, ci) in tab.popCards" :key="ci" class="pop_card_item">
-                                        <strong class="pop_card_name">{{ card.name }}</strong>
-                                        <figure class="pop_card_thumb">
-                                            <img :src="card.img" :alt="card.name" />
-                                        </figure>
-                                        <div class="pop_card_body">
-                                            <p class="pop_card_desc">{{ card.desc }}</p>
-                                            <p v-if="card.note" class="pop_card_note" :class="{ is_warn: card.noteWarn }">{{ card.note }}</p>
-                                            <div v-if="card.logos && card.logos.length" class="pop_card_logos">
-                                                <img
-                                                    v-for="(logo, li) in card.logos"
-                                                    :key="li"
-                                                    :src="logo.src"
-                                                    :width="logo.w"
-                                                    :height="logo.h"
-                                                    alt=""
-                                                    class="pop_logo_thumb"
-                                                />
-                                            </div>
+                            <Accordion :multiple="true" class="pop_sec_acc">
+                                <!-- 팝카드란? -->
+                                <AccordionItem item-key="pop0" @opened="onPopCard0Opened">
+                                    <template #title>{{ tab.popTitle }}</template>
+                                    <section id="pop-sec-0" data-pop-sec="0" class="pop_sec">
+                                        <SectionHeader :title="tab.popTitle" :desc="tab.popDesc">
+                                            <p class="pop_exclude">{{ tab.popExclude }}</p>
+                                        </SectionHeader>
+                                        <Swiper
+                                            class="pop_card_swiper"
+                                            slides-per-view="auto"
+                                            :space-between="20"
+                                            :observer="true"
+                                            :observe-parents="true"
+                                            @swiper="onPopCardSwiper"
+                                        >
+                                            <SwiperSlide v-for="(card, ci) in tab.popCards" :key="ci" class="pop_card_item">
+                                                <strong class="pop_card_name">{{ card.name }}</strong>
+                                                <figure class="pop_card_thumb">
+                                                    <picture>
+                                                        <source v-if="card.imgMo" media="(max-width: 768px)" :srcset="card.imgMo" />
+                                                        <img :src="card.img" :alt="card.name" />
+                                                    </picture>
+                                                </figure>
+                                                <div class="pop_card_body">
+                                                    <p class="pop_card_desc">{{ card.desc }}</p>
+                                                    <p v-if="card.note" class="pop_card_note" :class="{ is_warn: card.noteWarn }">{{ card.note }}</p>
+                                                    <div v-if="card.logos && card.logos.length" class="pop_card_logos">
+                                                        <img
+                                                            v-for="(logo, li) in card.logos"
+                                                            :key="li"
+                                                            :src="logo.src"
+                                                            :width="logo.w"
+                                                            :height="logo.h"
+                                                            alt=""
+                                                            class="pop_logo_thumb"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </SwiperSlide>
+                                        </Swiper>
+                                    </section>
+                                </AccordionItem>
+
+                                <!-- 교통카드 충전 서비스 -->
+                                <AccordionItem item-key="pop-charging" @opened="onChargingOpened">
+                                    <template #title>{{ tab.chargingTitle }}</template>
+                                    <section class="pop_sec">
+                                        <Swiper
+                                            class="charging_service_swiper"
+                                            slides-per-view="auto"
+                                            :space-between="8"
+                                            :observer="true"
+                                            :observe-parents="true"
+                                            @swiper="onChargingSwiper"
+                                        >
+                                            <SwiperSlide v-for="(item, ci) in tab.chargingItems" :key="ci" class="charging_service_item">
+                                                <img :src="item.img" :alt="item.name" />
+                                            </SwiperSlide>
+                                        </Swiper>
+                                        <p class="charging_service_note">
+                                            <span class="charging_note_label">{{ tab.chargingNote.label }}</span>
+                                            {{ tab.chargingNote.text }}
+                                        </p>
+                                    </section>
+                                </AccordionItem>
+
+                                <!-- 교통 사용처 안내 -->
+                                <AccordionItem item-key="pop1">
+                                    <template #title>{{ tab.lnbItems[1] }}</template>
+                                    <section id="pop-sec-1" data-pop-sec="1" class="pop_sec">
+                                        <div class="usage_header">
+                                            <SectionHeader :title="tab.lnbItems[1]" />
+                                            <select
+                                                class="usage_select_box"
+                                                v-model="trafficSelectVal"
+                                                aria-label="교통 사용처 선택"
+                                            >
+                                                <option value="" disabled>선택하세요</option>
+                                                <option v-for="o in tab.trafficSelectOptions" :key="o.value" :value="o.value">{{ o.label }}</option>
+                                            </select>
                                         </div>
-                                    </li>
-                                </ul>
-                            </section>
 
-                            <!-- 교통카드 충전 서비스 -->
-                            <section class="pop_sec">
-                                <SectionHeader :title="tab.chargingTitle" />
-                                <ul class="charging_service_list">
-                                    <li v-for="(item, ci) in tab.chargingItems" :key="ci" class="charging_service_item">
-                                        <img :src="item.img" :alt="item.name" />
-                                    </li>
-                                </ul>
-                                <p class="charging_service_note">
-                                    <span class="charging_note_label">{{ tab.chargingNote.label }}</span>
-                                    {{ tab.chargingNote.text }}
-                                </p>
-                            </section>
+                                        <div v-if="trafficSelectVal && tab.trafficOptions[trafficSelectVal]" class="usage_group">
+                                            <h4 class="usage_group_title">{{ tab.trafficOptions[trafficSelectVal].title }}</h4>
+                                            <ul v-if="trafficSelectVal !== 'express' && tab.trafficOptions[trafficSelectVal].bullets?.length" class="list_dotted">
+                                                <li v-for="(item, bi) in tab.trafficOptions[trafficSelectVal].bullets" :key="bi">{{ item }}</li>
+                                            </ul>
+                                            <!-- 고속버스일 때만 로고 표시 -->
+                                            <ul v-if="trafficSelectVal === 'express'" class="logo_list">
+                                                <li v-for="(logo, li) in tab.trafficOptions[trafficSelectVal].logos" :key="li">
+                                                    <img :src="logo" :alt="tab.trafficOptions[trafficSelectVal].bullets[li]" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </section>
+                                </AccordionItem>
 
-                            <!-- 교통 사용처 안내 -->
-                            <section id="pop-sec-1" data-pop-sec="1" class="pop_sec">
-                                <div class="usage_header">
-                                    <SectionHeader :title="tab.lnbItems[1]" />
-                                    <SelectBox
-                                        class="usage_select_box"
-                                        v-model="trafficSelectVal"
-                                        :options="tab.trafficSelectOptions"
-                                        initMsg="선택하세요"
-                                    />
-                                </div>
+                                <!-- 유통 사용처 안내 -->
+                                <AccordionItem item-key="pop2">
+                                    <template #title>{{ tab.lnbItems[2] }}</template>
+                                    <section id="pop-sec-2" data-pop-sec="2" class="pop_sec">
+                                        <div class="usage_header">
+                                            <SectionHeader :title="tab.lnbItems[2]" />
+                                            <select
+                                                class="usage_select_box"
+                                                v-model="retailSelectVal"
+                                                aria-label="유통 사용처 선택"
+                                            >
+                                                <option value="" disabled>선택하세요</option>
+                                                <option v-for="o in tab.retailSelectOptions" :key="o.value" :value="o.value">{{ o.label }}</option>
+                                            </select>
+                                        </div>
 
-                                <div v-if="trafficSelectVal && tab.trafficOptions[trafficSelectVal]" class="usage_group">
-                                    <h4 class="usage_group_title">{{ tab.trafficOptions[trafficSelectVal].title }}</h4>
-                                    <ul v-if="trafficSelectVal !== 'express' && tab.trafficOptions[trafficSelectVal].bullets?.length" class="list_dotted">
-                                        <li v-for="(item, bi) in tab.trafficOptions[trafficSelectVal].bullets" :key="bi">{{ item }}</li>
-                                    </ul>
-                                    <!-- 고속버스일 때만 로고 표시 -->
-                                    <ul v-if="trafficSelectVal === 'express'" class="logo_list">
-                                        <li v-for="(logo, li) in tab.trafficOptions[trafficSelectVal].logos" :key="li">
-                                            <img :src="logo" :alt="tab.trafficOptions[trafficSelectVal].bullets[li]" />
-                                        </li>
-                                    </ul>
-                                </div>
-                            </section>
-
-                            <!-- 유통 사용처 안내 -->
-                            <section id="pop-sec-2" data-pop-sec="2" class="pop_sec">
-                                <div class="usage_header">
-                                    <SectionHeader :title="tab.lnbItems[2]" />
-                                    <SelectBox
-                                        class="usage_select_box"
-                                        v-model="retailSelectVal"
-                                        :options="tab.retailSelectOptions"
-                                        initMsg="선택하세요"
-                                    />
-                                </div>
-
-                                <div v-if="retailSelectVal && tab.retailOptions[retailSelectVal]" class="usage_group">
-                                    <h4 class="usage_group_title">{{ tab.retailOptions[retailSelectVal].title }}</h4>
-                                    <p v-if="tab.retailOptions[retailSelectVal].note" class="retail_note">{{ tab.retailOptions[retailSelectVal].note }}</p>
-                                    <!-- 로고 그리드 -->
-                                    <ul v-if="tab.retailOptions[retailSelectVal].items" class="logo_list">
-                                        <li v-for="(item, ri) in tab.retailOptions[retailSelectVal].items" :key="ri">
-                                            <img v-if="item.logo" :src="item.logo" :alt="item.brand" />
-                                            <span v-else class="logo_placeholder"></span>
-                                        </li>
-                                    </ul>
-                                    <!-- 텍스트 목록 -->
-                                    <ul v-else-if="tab.retailOptions[retailSelectVal].bullets?.length && !tab.retailOptions[retailSelectVal].bullets[0]?.dt" class="list_dotted">
-                                        <li v-for="(bullet, bi) in tab.retailOptions[retailSelectVal].bullets" :key="bi">{{ bullet }}</li>
-                                    </ul>
-                                    <!-- 정의 목록 (dt/dd) -->
-                                    <dl v-else-if="tab.retailOptions[retailSelectVal].bullets?.length" class="usage_def_list">
-                                        <template v-for="(bullet, bi) in tab.retailOptions[retailSelectVal].bullets" :key="bi">
-                                            <dt>{{ bullet.dt }}</dt>
-                                            <dd>{{ bullet.dd }}</dd>
-                                        </template>
-                                    </dl>
-                                    <p v-if="tab.retailOptions[retailSelectVal].footnote" class="retail_footnote">{{ tab.retailOptions[retailSelectVal].footnote }}</p>
-                                </div>
-                            </section>
+                                        <div v-if="retailSelectVal && tab.retailOptions[retailSelectVal]" class="usage_group">
+                                            <h4 class="usage_group_title">{{ tab.retailOptions[retailSelectVal].title }}</h4>
+                                            <p v-if="tab.retailOptions[retailSelectVal].note" class="retail_note">{{ tab.retailOptions[retailSelectVal].note }}</p>
+                                            <!-- 로고 그리드 -->
+                                            <ul v-if="tab.retailOptions[retailSelectVal].items" class="logo_list">
+                                                <li v-for="(item, ri) in tab.retailOptions[retailSelectVal].items" :key="ri">
+                                                    <img v-if="item.logo" :src="item.logo" :alt="item.brand" />
+                                                    <span v-else class="logo_placeholder"></span>
+                                                </li>
+                                            </ul>
+                                            <!-- 텍스트 목록 -->
+                                            <ul v-else-if="tab.retailOptions[retailSelectVal].bullets?.length && !tab.retailOptions[retailSelectVal].bullets[0]?.dt" class="list_dotted">
+                                                <li v-for="(bullet, bi) in tab.retailOptions[retailSelectVal].bullets" :key="bi">{{ bullet }}</li>
+                                            </ul>
+                                            <!-- 정의 목록 (dt/dd) -->
+                                            <dl v-else-if="tab.retailOptions[retailSelectVal].bullets?.length" class="usage_def_list">
+                                                <template v-for="(bullet, bi) in tab.retailOptions[retailSelectVal].bullets" :key="bi">
+                                                    <dt>{{ bullet.dt }}</dt>
+                                                    <dd>{{ bullet.dd }}</dd>
+                                                </template>
+                                            </dl>
+                                            <p v-if="tab.retailOptions[retailSelectVal].footnote" class="retail_footnote">{{ tab.retailOptions[retailSelectVal].footnote }}</p>
+                                        </div>
+                                    </section>
+                                </AccordionItem>
+                            </Accordion>
                         </div>
                     </div>
                 </template>
@@ -1184,6 +1218,8 @@ import DiffQrRow from "@/components/DiffQrRow.vue";
 import imgQrMo from "@/assets/images/dummy/qr_app.png";
 import Steps from "@/components/Steps.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
+import Accordion from "@/components/Accordion.vue";
+import AccordionItem from "@/components/AccordionItem.vue";
 import modal from "@/assets/js/modal";
 
 /* smain 이미지 */
@@ -1243,6 +1279,9 @@ import imgHero12 from "@/assets/images/dummy/brand_bg_13.png";
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
+import imgPopCard1Mo from "@/assets/images/dummy/mo/pop_card_01_mo.png";
+import imgPopCard2Mo from "@/assets/images/dummy/mo/pop_card_02_mo.png";
+import imgPopCard3Mo from "@/assets/images/dummy/mo/pop_card_03_mo.png";
 import imgPoint1 from "@/assets/images/dummy/point_01.png";
 import imgPoint2 from "@/assets/images/dummy/point_02.png"; 
 import imgPoint3 from "@/assets/images/dummy/point_03.png";
@@ -1665,14 +1704,16 @@ const langData = {
                             cosmetics:     { title: "화장품", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(6) },
                             entertainment: { title: "엔터테인먼트", note:"LOTTE CINEMA(피카디리관), MEGABOX(안산관), SK와이번스(연간회원권)", items: ph(3) },
                             pcroom:        { title: "PC방",       bullets: ["T-money PC방"], footnote: "어린이카드는 사용이 제한됨" },
-                            university:    { title: "대학",
-                            bullets: [
-                                { dt: "교내식당", dd: "충남대" }, 
-                                { dt: "매점", dd: "동국대, 백석대, 정의여중고, 건대부속고, 동덕여대"},
-                                { dt: "OA기기", dd:"동국대, 서울과학기술대, 한양대, 이화여대, 인천대"},
-                                { dt: "셔틀버스", dd:"아주대, 성균관대"},
-                                { dt: "기타", dd:"자판기(중앙대, 건양대, 아주대, 명지대 등), 무인사물함(연세대, 경기대, 명지대 등)"}
-                                     ] },
+                            university: {
+                                title: "대학",
+                                bullets: [
+                                    { dt: "교내식당", dd: "충남대" },
+                                    { dt: "매점", dd: "동국대, 백석대, 정의여중고, 건대부속고, 동덕여대" },
+                                    { dt: "OA기기", dd: "동국대, 서울과학기술대, 한양대, 이화여대, 인천대" },
+                                    { dt: "셔틀버스", dd: "아주대, 성균관대" },
+                                    { dt: "기타", dd: "자판기(중앙대, 건양대, 아주대, 명지대 등), 무인사물함(연세대, 경기대, 명지대 등)" },
+                                ],
+                            },
                             public:       { title: "공공시설", bullets: [
                                 "경륜 / 경정장(서울올림픽기념국민체육진흥공단)",
                                 "경마장(한국마사회)",
@@ -1723,6 +1764,7 @@ const langData = {
                         popCards: [
                             {
                                 img:   imgPopCard1,
+                                imgMo: imgPopCard1Mo,
                                 name:  "팝티머니",
                                 desc:  "하나의 카드로 관리가능한 멀티멤버십의 혜택까지!\n팝티머니는 T-money와 팝카드의 기능을 동시에\n사용할 수 있는 차별화된 서비스입니다.",
                                 logos: [
@@ -1734,6 +1776,7 @@ const langData = {
                             },
                             {
                                 img:      imgPopCard2,
+                                imgMo:    imgPopCard2Mo,
                                 name:     "멤버십 팝카드",
                                 desc:     "멤버십팝카드는 GS ALL 포인트와 팝카드가 결합되어 GS25, GS THE FRESH에서 결제와 동시에 포인트가 적립되고, 600여 온라인쇼핑, 게임 등에서 결제가 가능한 혜택이 많은 선불카드입니다.",
                                 note:     "*교통기능 없음",
@@ -1742,6 +1785,7 @@ const langData = {
                             },
                             {
                                 img:   imgPopCard3,
+                                imgMo: imgPopCard3Mo,
                                 name:  "팝 신용/체크 카드",
                                 desc:  "팝 신용/체크카드는 고객의 소비생활에\n팝카드의 혜택 및 기능을 추가한 서비스입니다.",
                                 logos: [],
@@ -2509,6 +2553,32 @@ watch(serviceActiveTab, (idx) => {
 const popLnbActiveIdx = ref(0);
 const trafficSelectVal = ref("subway");
 const retailSelectVal = ref("coffee");
+
+/* 팝카드 Swiper — 아코디언 패널 오픈 완료 후 update() 호출 */
+const popCardSwiperInst = ref(null);
+
+function onPopCardSwiper(swiper) {
+    popCardSwiperInst.value = swiper;
+}
+
+function onPopCard0Opened() {
+    if (popCardSwiperInst.value) {
+        popCardSwiperInst.value.update();
+    }
+}
+
+/* 교통카드 충전 서비스 Swiper */
+const chargingSwiperInst = ref(null);
+
+function onChargingSwiper(swiper) {
+    chargingSwiperInst.value = swiper;
+}
+
+function onChargingOpened() {
+    if (chargingSwiperInst.value) {
+        chargingSwiperInst.value.update();
+    }
+}
 
 const scrollToSection = (idx) => {
     popLnbActiveIdx.value = idx;
@@ -3365,15 +3435,30 @@ button {
     background-color: #fff;
 }
 
-.usage_select_box :deep(select) {
+.usage_select_box {
     width: 180px;
-    padding: 10px 20px;
+    padding: 11px 44px 11px 16px;
     font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
-    background-color: #f8f8f8;
+    background-color: #F8F8F8;
     border: 0;
     border-radius: 6px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7.5L10 12.5L15 7.5' stroke='%23111111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 20px 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px){
+    .usage_select_box  {
+        width: 100%;
+        font-size: 1.4rem;
+        line-height: 1.4;
+    }
 }
 .tab_wrap {
     margin-bottom: 0;
@@ -4144,16 +4229,28 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-.pop_card_list {
-    display: flex;
-    gap: 20px;
-}
-
 .pop_card_item {
-    flex: 1;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+/* 데스크탑: Swiper 비활성화 → 기존 flex 레이아웃처럼 표시 */
+@media (min-width: 769px) {
+    .pop_card_swiper {
+        overflow: visible;
+    }
+
+    .pop_card_swiper :deep(.swiper-wrapper) {
+        gap: 20px;
+        transform: none !important;
+    }
+
+    .pop_card_swiper :deep(.swiper-slide) {
+        width: auto !important;
+        height: auto !important;
+        flex: 1;
+    }
 }
 
 .pop_card_thumb {
@@ -4161,7 +4258,7 @@ line-height: 1.4;
     display: block;
 }
 
-.pop_card_thumb > img {
+.pop_card_thumb  img {
     width: auto;
     height: auto;
 }
@@ -4173,22 +4270,46 @@ line-height: 1.4;
     flex: 1;
 }
 
+@media (max-width: 768px) {
+    .pop_card_body {
+        min-height: 196px;
+        padding-right: 8px;
+    }
+}
+
 .pop_card_name {
     margin-bottom: 12px;
     color: #161616;
     font-size: 2.4rem;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.35;
     letter-spacing: -0.01em;
     display: block;
 }
 
+@media (max-width: 768px) {
+    .pop_card_name {
+        margin-bottom: 12px;
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0;
+
+    }
+}
 .pop_card_desc {
     color: #67676f;
     font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
     white-space: pre-line;
+}
+
+@media (max-width: 768px) {
+    .pop_card_desc {
+        font-size: 1.4rem;
+        line-height: 1.4;
+
+    }
 }
 
 .pop_card_note {
@@ -4212,15 +4333,93 @@ line-height: 1.4;
     flex-wrap: wrap;
 }
 
+@media (max-width: 768px) {
+    .pop_card_logos {
+        padding-top: 0;
+    }
+}
 .pop_logo_thumb {
     width: auto;
     display: block;
 }
 
+/* ── pop_sec 아코디언 (데스크탑: 항상 펼침 / 모바일: 아코디언) ── */
+
+/* 데스크탑: 아코디언 트리거 숨김, 패널 항상 오픈 */
+@media (min-width: 769px) {
+    .pop_sec_acc :deep(.acc_tit_btn) {
+        display: none;
+    }
+    .pop_sec_acc :deep(.acc_panel) {
+        height: auto !important;
+        overflow: visible;
+    }
+    /* 데스크탑에서는 acc_item 구분선 제거 (pop_sec 자체 간격으로 처리) */
+    .pop_sec_acc :deep(.acc_item) {
+        border: none;
+    }
+    .pop_sec_acc :deep(.acc_item:first-child) {
+        border: none;
+    }
+}
+
+/* 모바일: 아코디언 활성화 */
+@media (max-width: 768px) {
+    /* 패널 내부 여백 */
+    .pop_sec_acc :deep(.acc_panel_cont .pop_sec) {
+        padding: 0 !important;
+    }
+    /* 교통·유통 사용처 안내 섹션 패딩 */
+    .pop_sec_acc :deep(.acc_panel_cont #pop-sec-1),
+    .pop_sec_acc :deep(.acc_panel_cont #pop-sec-2) {
+        padding: 12px 32px 24px !important;
+    }
+    /* 팝카드란? SectionHeader 패딩 (첫 번째 아이템만) */
+    .pop_sec_acc :deep(#pop-sec-0 > header) {
+        padding: 12px 32px 24px;
+    }
+    /* 첫 번째 아이템도 h3 제목은 숨김 (AccordionItem 타이틀이 대신함) */
+    .pop_sec_acc :deep(#pop-sec-0 > header > h3) {
+        display: none;
+    }
+    /* 나머지 아이템 SectionHeader 숨김 */
+    .pop_sec_acc :deep(.pop_sec:not(#pop-sec-0) > header),
+    .pop_sec_acc :deep(.pop_sec > .usage_header > header) {
+        display: none;
+    }
+}
+
 /* ── 교통카드 충전 서비스 (50:9900) ── */
-.charging_service_list {
-    display: flex;
-    gap: 20px;
+/* 데스크탑: Swiper 비활성화 → 기존 flex 레이아웃처럼 표시 */
+@media (min-width: 769px) {
+    .charging_service_swiper {
+        overflow: visible;
+    }
+    .charging_service_swiper :deep(.swiper-wrapper) {
+        gap: 20px;
+        transform: none !important;
+    }
+    .charging_service_swiper :deep(.swiper-slide) {
+        width: auto !important;
+        height: auto !important;
+        flex: 1;
+    }
+}
+
+/* 모바일: Swiper 활성화 — 110x109px 슬라이드, 8px 간격 */
+.charging_service_swiper {
+    overflow: hidden;
+}
+@media (max-width: 768px) {
+    .charging_service_swiper{
+      margin-top:24px;
+      padding:0 32px;
+    }
+}
+.charging_service_swiper :deep(.swiper-slide) {
+    width: 110px !important;
+    height: 109px !important;
+    flex: none;
 }
 
 .charging_service_item {
@@ -4232,6 +4431,15 @@ line-height: 1.4;
     align-items: center;
     justify-content: center;
     background: #F8F8F8;
+}
+
+@media (max-width: 768px) {
+    .charging_service_item {
+        max-width: none;
+        width: 100%;
+        height: 100%;
+        aspect-ratio: unset;
+    }
 }
 
 .charging_service_item > img {
@@ -4250,21 +4458,45 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
+@media (max-width: 768px) {
+    .charging_service_note {
+        margin-top:24px;
+        margin-bottom: 8px;
+        padding:0 32px 24px;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+    }
+}
+
 .charging_note_label {
     padding-right: 8px;
     color: #7c7c86;
     font-size: 1.6rem;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.5;
     letter-spacing: -0.01em;
 }
 
+@media (max-width: 768px){
+    .charging_note_label{
+        font-size: 1.4rem; 
+        line-height: 1.4;
+        margin-top: 8px;
+    }
+}
 /* ── 교통 사용처 안내 (50:10103) ── */
 .usage_header {
     margin-bottom: 40px;
-    display: flex;
+    display: flex; 
     align-items: center;
     gap: 20px;
+}
+@media (max-width: 768px){
+    .usage_header{
+       margin-bottom: 24px;
+       display: block;
+    }
 }
 
 .usage_header :deep(header) {
@@ -4282,6 +4514,18 @@ line-height: 1.4;
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px){
+    .usage_group_title{
+        margin-bottom: 24px;
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+    }
+    .usage_group_title:has(+ .retail_note) {
+        margin-bottom: 8px;
+    }
 }
 
 .retail_footnote {
@@ -4309,6 +4553,18 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
+@media (max-width: 768px){
+    .usage_def_list {
+        gap: 8px 16px;
+    }
+    .usage_def_list > dt {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+        min-width:60px;
+    }
+}
+
 .usage_def_list > dd {
     margin: 0;
     color: #67676f;
@@ -4318,6 +4574,14 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
+@media (max-width: 768px){
+    .usage_def_list > dd {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+}
+
 
 .usage_group .list_dotted > li {
     padding: 0 0 0 12px;
@@ -4325,7 +4589,15 @@ line-height: 1.4;
     font-size: 1.8rem;
     line-height: 1.6;
     letter-spacing: -0.01em;
-    position: relative;
+    position: relative; 
+}
+
+@media (max-width: 768px){
+    .usage_group .list_dotted > li {
+        font-size: 1.4rem;
+        line-height: 1.4;
+
+} 
 }
 
 .usage_group .list_dotted > li::before {
@@ -4335,10 +4607,16 @@ line-height: 1.4;
     background-color: #67676f;
     border-radius: 50%;
     position: absolute;
-    top: 50%;
+    top: 0.8em; /* 첫 번째 줄 중앙: line-height(1.6) / 2 */
     left: 0;
     display: block;
     transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+    .usage_group .list_dotted > li::before {
+        top: 0.7em; /* 첫 번째 줄 중앙: line-height(1.4) / 2 */
+    }
 }
 
 
@@ -4388,6 +4666,13 @@ line-height: 1.4;
     position: relative;
     display: flex;
     align-items: flex-start;
+}
+
+
+@media (max-width: 768px) {
+    .pop_panel :deep(.brand_panel_title) {
+        padding-bottom: 24px;
+    }
 }
 
 .pop_lnb {
@@ -5285,15 +5570,6 @@ line-height: 1.4;
         flex-direction: column;
     }
 
-    .charging_service_list {
-        flex-wrap: wrap;
-    }
-
-    .charging_service_item {
-        max-width: none;
-        flex: 1 1 calc((100% - 20px) / 2);
-    }
-
     .logo_list {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -5469,59 +5745,24 @@ line-height: 1.4;
         flex: 0 0 120px;
     }
 
-    .pop_wrap {
-        flex-direction: column;
-    }
 
     .pop_lnb {
-        width: 100%;
+        display:none;
     }
 
-    .pop_lnb > ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
+    /* 모바일: Swiper 활성화 — 300px 슬라이드, 8px 간격 */
+    .pop_card_swiper {
+        padding: 12px 32px 40px;
+        overflow: hidden;
     }
 
-    .pop_lnb > ul > li {
+    .pop_card_swiper :deep(.swiper-slide) {
+        width: 220px !important;
+        height: auto !important;
         flex: none;
     }
 
-    .pop_lnb > ul > li > button {
-        min-height: 44px;
-        padding: 8px 12px;
-        font-size: 1.6rem;
-        border: 1px solid #e5e5e9;
-        border-radius: 4px;
-    }
-
-    .pop_lnb > ul > li > button.is_active {
-        border-color: #109f4c;
-        background-color: #f0faf4;
-    }
-
-    .pop_card_list {
-        flex-wrap: wrap;
-    }
-
-    .pop_card_item {
-        flex: 1 1 100%;
-    }
-
-    .charging_service_list {
-        flex-wrap: wrap;
-    }
-
-    .charging_service_item {
-        flex: 1 1 calc(50% - 10px);
-    }
-
-    .usage_header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
+ 
     .logo_list {
         grid-template-columns: repeat(2, 1fr);
     }
