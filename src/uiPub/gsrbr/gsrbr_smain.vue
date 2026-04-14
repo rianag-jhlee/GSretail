@@ -42,7 +42,14 @@
                 <header class="str_header">
                     <h2>당신 곁에는 언제나<br />GS25가 있습니다.</h2>
                     <div class="str_actions">
-                        <a href="#none" class="btn_store_find">매장 찾기</a>
+                        <a
+                            href="#none" 
+                            class="btn_store_find"
+                            data-popid="pop_store_find"
+                            data-type="lg"
+                            data-cont="store_find"
+                            @click.prevent="openModal"
+                        >매장 찾기</a>
                         <div class="sns_wrap">
                             <a href="#none" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
                             <a href="#none" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
@@ -84,10 +91,20 @@
             </div>
         </section>
     </div>
+
+    <div id="pop_store_find" class="modal_wrap">
+        <div class="modal_container"></div>
+    </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
+import modal from "@/assets/js/modal";
+
+function openModal(event) {
+    const el = event.currentTarget;
+    modal.open(el.dataset.popid, el.dataset.type || "default", el);
+}
 import imgLogo from "@/assets/images/dummy/brand_gs25_logo.png";
 import imgAcc01 from "@/assets/images/dummy/brand_accordion_01.png";
 import imgAcc02 from "@/assets/images/dummy/brand_accordion_02.png";
