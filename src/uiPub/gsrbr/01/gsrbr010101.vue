@@ -704,15 +704,21 @@
                     <section>
                         <SectionHeader :title="tab.brandTitle" />
                         <div class="gift_brand_slider">
+                            <button type="button" class="gift_brand_nav gift_brand_prev" aria-label="이전">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
                             <Swiper
-                                :modules="[Pagination]"
+                                :modules="[Pagination, Navigation]"
                                 slides-per-view="auto"
                                 :slides-per-group="3"
                                 :space-between="14"
-                                :breakpoints="{ 769: { spaceBetween: 12 } }"
+                                :breakpoints="{
+                                    769: { slidesPerView: 6, slidesPerGroup: 6, spaceBetween: 12 }
+                                }"
                                 :speed="700"
                                 :observer="true"
                                 :observe-parents="true"
+                                :navigation="{ prevEl: '.gift_brand_prev', nextEl: '.gift_brand_next' }"
                                 :pagination="{ el: '.gift_brand_pagination', clickable: true }"
                                 class="gift_brand_swiper"
                                 @swiper="onGiftSwiper"
@@ -723,6 +729,9 @@
                                     </figure>
                                 </SwiperSlide>
                             </Swiper>
+                            <button type="button" class="gift_brand_nav gift_brand_next" aria-label="다음">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
                         </div>
                         <div class="gift_brand_pagination"></div>
                     </section>
@@ -1215,7 +1224,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import { useRouter } from "vue-router";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Pagination } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
 import PanelHeader from "@/components/PanelHeader.vue";
@@ -4410,7 +4419,7 @@ line-height: 1.4;
     gap: 20px;
 }
 .charging_service_swiper {
-    display: none;
+    display: none; 
 }
 
 /* 모바일: 리스트 숨김 / Swiper 표시 */
@@ -5460,35 +5469,73 @@ line-height: 1.4;
     }
 }
 
-/* ── 기프트카드 대표 브랜드 슬라이더 (Figma 772:12681, 화살표 없음·페이지네이션만) ── */
+/* ── 기프트카드 대표 브랜드 슬라이더 ── */
 .gift_brand_swiper :deep(.swiper-wrapper) {
     padding: 24px 0;
 }
 
 @media (max-width: 768px) {
-.gift_brand_swiper :deep(.swiper-wrapper) {
-    padding: 0 0 24px;
+    .gift_brand_swiper :deep(.swiper-wrapper) {
+        padding: 0 0 24px;
+    }
 }
-}
-
 
 .gift_brand_slider {
     position: relative;
     width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
-/* 3장 뷰 너비 = 카드 106×3 + 슬라이드 간격×2 */
+/* 모바일: 3장 뷰 너비 */
 .gift_brand_swiper {
-    width: 100%; 
+    width: 100%;
     max-width: calc(106px * 3 + 14px * 2);
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
 }
 
+/* PC: 6장 뷰 너비, 슬라이더가 flex:1로 남은 공간 차지 */
 @media (min-width: 769px) {
     .gift_brand_swiper {
-        max-width: calc(106px * 3 + 12px * 2);
+        max-width: none;
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+/* 네비게이션 버튼 */
+.gift_brand_nav {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid #d7d7df;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #111;
+    transition: border-color 0.2s;
+}
+.gift_brand_nav:hover {
+    border-color: #111;
+}
+.gift_brand_nav.swiper-button-disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+/* 모바일: 네비게이션 버튼 숨김 */
+@media (max-width: 768px) {
+    .gift_brand_nav {
+        display: none;
+    }
+    .gift_brand_slider {
+        display: block;
     }
 }
 
