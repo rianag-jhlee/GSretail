@@ -647,35 +647,26 @@
                     <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
                     <section>
                         <SectionHeader :title="tab.advantageTitle" />
-                        <FeatureCards :items="tab.advantages" />
+                        <div class="gift_advantage_cards">
+                            <FeatureCards :items="tab.advantages" />
+                        </div>
                     </section>
 
                     <section>
                         <SectionHeader :title="tab.brandTitle" />
                         <div class="gift_brand_slider">
-                            <button
-                                type="button"
-                                class="gift_brand_nav gift_brand_prev"
-                                aria-label="이전"
-                                :disabled="giftIsBeginning"
-                                @click="giftSwiperInst?.slidePrev()"
-                            ></button>
                             <Swiper
                                 :modules="[Pagination]"
-                                :space-between="0"
+                                slides-per-view="auto"
+                                :slides-per-group="3"
+                                :space-between="14"
+                                :breakpoints="{ 769: { spaceBetween: 12 } }"
                                 :speed="700"
                                 :observer="true"
                                 :observe-parents="true"
-                                :breakpoints="{
-                                    0:    { slidesPerView: 2, slidesPerGroup: 2 },
-                                    769:  { slidesPerView: 4, slidesPerGroup: 4 },
-                                    1025: { slidesPerView: 6, slidesPerGroup: 6 },
-                                }"
                                 :pagination="{ el: '.gift_brand_pagination', clickable: true }"
                                 class="gift_brand_swiper"
                                 @swiper="onGiftSwiper"
-                                @slide-change="onGiftSlideChange"
-                                @breakpoint="onGiftBreakpoint"
                             >
                                 <SwiperSlide v-for="(brand, bi) in tab.brands" :key="bi">
                                     <figure class="gift_brand_card">
@@ -683,13 +674,6 @@
                                     </figure>
                                 </SwiperSlide>
                             </Swiper>
-                            <button
-                                type="button"
-                                class="gift_brand_nav gift_brand_next"
-                                aria-label="다음"
-                                :disabled="giftIsEnd"
-                                @click="giftSwiperInst?.slideNext()"
-                            ></button>
                         </div>
                         <div class="gift_brand_pagination"></div>
                     </section>
@@ -703,15 +687,20 @@
                                 <li v-for="(step, si) in tab.purchaseSteps" :key="si" class="gift_purchase_step">
                                     <div class="gift_step_header">
                                         <em class="gift_step_num">{{ step.num }}</em>
-                                        <strong class="gift_step_title">{{ step.title }}</strong>
+                                        <strong class="gift_step_title" v-html="step.title"></strong>
                                     </div>
-                                    <p class="gift_step_desc">{{ step.desc }}</p>
+                                    <p class="gift_step_desc" v-html="step.desc"></p>
                                 </li>
                             </ol>
                         </div>
                     </section>
                     <section>
-                        <SectionHeader :title="tab.usageTitle" :desc="tab.usageDesc" />
+                        <SectionHeader
+                            :title="tab.usageTitle"
+                            :desc="tab.usageDesc"
+                            desc-tag="div"
+                            class="gift_usage_heading"
+                        />
                         <div class="gift_usage_wrap">
                             <div class="gift_usage_group">
                                 <h3>{{ tab.onlineLabel }}</h3>
@@ -1777,11 +1766,12 @@ const langData = {
                         purchaseSteps: [
                             { num: "01", title: "판매처 방문",    desc: "가까운 GS25 편의점에 방문하세요." },
                             { num: "02", title: "기프트카드 선택", desc: "원하는 브랜드의 기프트카드를 선택하세요." },
-                            { num: "03", title: "사용설명 확인",   desc: "구매하신 카드 뒷면 사용설명을 잘 확인하시고 사용하세요." },
+                            { num: "03", title: "사용설명 확인",   desc: "구매하신 카드 뒷면 사용설명을<br class=\"m_br\" />잘 확인하시고 사용하세요." },
                             { num: "04", title: "계산",           desc: "계산대에서 계산을 완료하시면 활성화되어 사용 가능한 상태가 됩니다." },
                         ],
                         usageTitle:   "POSA 기프트카드 사용방법",
-                        usageDesc:    "<span style=\"color:#F95823;font-size:1.8rem\">기프트카드별로 사용방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용방법을 참고</span>하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.",
+                        usageDesc:
+                            '<span class="gift_usage_desc_emphasis">기프트카드별로 사용방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용방법을 참고</span>하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.',
                         onlineLabel:  "온라인 사용방법",
                         onlineSteps: [
                             { step: "Step 1", title: "사이트 접속 및 로그인" },
@@ -2488,17 +2478,9 @@ const storeActiveTab = ref(0);
 const winwinActiveTab = ref(0);
 const winwinServiceActiveTab = ref(0);
 const giftSwiperInst = ref(null);
-const giftIsBeginning = ref(true);
-const giftIsEnd = ref(false);
-const updateGiftNavState = (swiper) => {
-    giftIsBeginning.value = swiper.isBeginning;
-    giftIsEnd.value = swiper.isEnd;
-};
 const onGiftSwiper = (swiper) => {
     giftSwiperInst.value = swiper;
 };
-const onGiftSlideChange = (swiper) => updateGiftNavState(swiper);
-const onGiftBreakpoint = (swiper) => updateGiftNavState(swiper);
 const serviceActiveTab  = ref(0);
 const deliveryActiveTab = ref(0);
 
@@ -2506,7 +2488,6 @@ watch(serviceActiveTab, (idx) => {
     if (idx === 3 && giftSwiperInst.value) {
         nextTick(() => {
             giftSwiperInst.value.update();
-            updateGiftNavState(giftSwiperInst.value);
         });
     }
 });
@@ -2777,7 +2758,7 @@ function goBack() {
         margin-top:120px;
     }
     .sinsen_panel :deep(.brand_panel_bg > img) {
-        object-position: -797px bottom;
+        object-position: -797px bottom; 
     }
 
 }
@@ -5029,6 +5010,10 @@ line-height: 1.4;
     min-height: 212px;
 }
 
+.gift_advantage_cards :deep(.feature_card_item) {
+    min-height: 271px;
+}
+
 /* ── 기프트카드 사용방법 ── */
 .gift_usage_wrap {
     display: flex;
@@ -5037,12 +5022,21 @@ line-height: 1.4;
 }
 
 .gift_usage_group > h3 {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     color: #161616;
     font-size: 2.4rem;
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+    .gift_usage_group > h3 {
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+
+    }
 }
 
 /* ── 기프트카드 구매방법 ── */
@@ -5105,6 +5099,32 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
+@media (max-width: 768px) {
+    .gift_step_header{
+        gap:6px;
+        margin-bottom: 4px;
+    }
+    .gift_step_title{
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+    }
+    .gift_step_desc {
+        padding-left:36px;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+    }
+    .gift_step_num{
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0;
+    }
+
+
+}
+
 .gift_step_desc {
     margin: 0;
     padding-left: 38px;
@@ -5114,21 +5134,60 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-/* ── 기프트카드 대표 브랜드 슬라이더 ── */
-.swiper-wrapper {
-    padding: 24px 0;
-}
-.gift_brand_slider {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+:deep(.gift_usage_heading .gift_usage_desc_emphasis) {
+    color: #f95823;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
 }
 
+@media (max-width: 768px) {
+    :deep(.gift_usage_heading .gift_usage_desc_emphasis) {
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+    }
+}
+
+/* ── 기프트카드 대표 브랜드 슬라이더 (Figma 772:12681, 화살표 없음·페이지네이션만) ── */
+.gift_brand_swiper :deep(.swiper-wrapper) {
+    padding: 24px 0;
+}
+
+@media (max-width: 768px) {
+.gift_brand_swiper :deep(.swiper-wrapper) {
+    padding: 0 0 24px;
+}
+}
+
+
+.gift_brand_slider {
+    position: relative;
+    width: 100%;
+}
+
+/* 3장 뷰 너비 = 카드 106×3 + 슬라이드 간격×2 */
 .gift_brand_swiper {
-    min-width: 0;
-    flex: 1;
+    width: 100%; 
+    max-width: calc(106px * 3 + 14px * 2);
+    margin-left: auto;
+    margin-right: auto;
     overflow: hidden;
+}
+
+@media (min-width: 769px) {
+    .gift_brand_swiper {
+        max-width: calc(106px * 3 + 12px * 2);
+    }
+}
+
+.gift_brand_swiper :deep(.swiper-slide) {
+    width: 106px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .gift_brand_card {
@@ -5137,12 +5196,11 @@ line-height: 1.4;
 }
 
 .gift_brand_card > img {
-    width: 100%;
-    max-width: 140px;
-    height: auto;
+    width: 106px;
+    height: 165px;
+    max-width: 106px;
     margin: 0 auto;
     border-radius: 4px;
-    aspect-ratio: 140 / 214;
     display: block;
     object-fit: cover;
 }
@@ -5156,47 +5214,13 @@ line-height: 1.4;
     text-align: center;
 }
 
-.gift_brand_nav {
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    position: relative;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.gift_brand_nav::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid #161616;
-    border-right: 2px solid #161616;
-    display: block;
-}
-
-.gift_brand_prev::before {
-    transform: rotate(-135deg) translateX(-2px);
-}
-
-.gift_brand_next::before {
-    transform: rotate(45deg) translateX(-2px);
-}
-
-.gift_brand_nav:disabled {
-    opacity: 0.3;
-    cursor: default;
-}
-
 .gift_brand_pagination {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 16px;
 }
+
 
 .gift_brand_pagination :deep(.swiper-pagination-bullet) {
     width: 8px;
@@ -5207,6 +5231,19 @@ line-height: 1.4;
     cursor: pointer;
     display: block;
 }
+
+@media (max-width: 768px) {
+    .gift_brand_pagination {
+        margin-top: 16px;
+        gap: 10px;
+    }
+
+    .gift_brand_pagination :deep(.swiper-pagination-bullet) {
+        width: 6px;
+        height:6px;
+    }
+}
+
 
 .gift_brand_pagination :deep(.swiper-pagination-bullet-active) {
     background-color: #161616;
@@ -5244,11 +5281,6 @@ line-height: 1.4;
 
     .logo_list {
         grid-template-columns: repeat(3, 1fr);
-    }
-
-    .gift_brand_nav {
-        width: 32px;
-        height: 32px;
     }
 
     .gift_brand_card > figcaption {
@@ -5477,15 +5509,6 @@ line-height: 1.4;
 
     .logo_list {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .gift_brand_slider {
-        gap: 12px;
-    }
-
-    .gift_brand_nav {
-        width: 28px;
-        height: 28px;
     }
 
     .gift_brand_card > figcaption {
