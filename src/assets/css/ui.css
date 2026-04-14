@@ -73,6 +73,7 @@ h5 {font-size:1.8rem;}
 .modal_container {max-width:96%;}
 [modal-type="small"] .modal_container {width:450px;}
 [modal-type="mid"] .modal_container {width:650px;}
+[modal-type="lg"] .modal_container {box-sizing:border-box; width:94rem; max-width:min(94rem, 96vw); padding:4.8rem; border-radius:1.2rem; max-height:92vh; overflow-y:auto;}
 [modal-type="full"] .modal_container {width:98%;}
 
 /* toast */
