@@ -8,7 +8,7 @@
 
         <!-- prev -->
         <button :disabled="currentPage === 1" @click="goToPage(currentPage - 1)">
-            Prev
+            이전
         </button>
 
         <!-- 앞쪽 생략 -->
@@ -24,7 +24,7 @@
 
         <!-- next -->
         <button :disabled="currentPage === totalPages" @click="goToPage(currentPage + 1)">
-            Next
+            다음
         </button>
 
         <!-- 마지막 페이지 -->
