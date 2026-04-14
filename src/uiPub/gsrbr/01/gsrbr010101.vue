@@ -1,5 +1,109 @@
 ﻿<template>
-    <div class="inner">
+    <div class="brand">
+        <section ref="sectionRef" class="sec_brand_visual">
+            <div class="sticky">
+                <div ref="bgWrapRef" class="bg_wrap">
+                    <div class="bg"></div>
+                    <div class="visual_inner">
+                        <div class="txt_area">
+                            <p ref="textParaRef">
+                                <span>일상생활의 중심</span>
+                                <span>하루의 시작<em class="m_gs25"> GS25</em></span>
+                            </p>
+                            <div ref="logoWrapRef" class="logo_wrap">
+                                <img :src="imgLogo" alt="GS25" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="brand_kv"></section>
+
+        <section ref="aboutSectionRef" class="sec_brand_about">
+            <div class="about_inner">
+                <p class="pc_txt">
+                    <span>대한민국 토종 브랜드의 자존심을 지키고 있는 GS25는</span>
+                    <span>'수익을 낼 수 있는 가맹점을 늘린다'는 프랜차이즈 사업의 대원칙을</span>
+                    <span>변함없이 지켜온 결과, 개발점 수익성이 가장 높은 국내 최고의 편의점 브랜드로</span>
+                    <span>자리매김하였습니다.</span>
+                </p>
+                <p class="pc_txt">
+                    <span>이는 '한국에서 가장 존경받는 기업' 16년 연속 1위,</span>
+                    <span>한국서비스 품질지수(KS-SQI) 1위 총 19회 수상 등 공신력 있는 대외 기관의</span>
+                    <span>평가 결과로 이어지고 있습니다.</span>
+                </p>
+
+                <p class="mo_txt">
+                    대한민국 토종 브랜드의<br />
+                    자존심을 지키고 있는 GS25는<br />
+                    '수익을 낼 수 있는 가맹점을 늘린다'는<br />
+                    프랜차이즈 사업의 대원칙을<br />
+                    변함없이 지켜온 결과,<br />
+                    개발점 수익성이 가장 높은 국내 최고의<br />
+                    편의점 브랜드로 자리매김하였습니다.<br />
+                </p>
+                <p class="mo_txt">
+                    이는<br />
+                    '한국에서 가장 존경받는 기업' 16년 연속 1위,<br />
+                    한국서비스 품질지수(KS-SQI) 1위<br />
+                    총 19회 수상 등 공신력 있는 대외 기관의<br />
+                    평가 결과로 이어지고 있습니다.<br />
+                </p>
+
+            </div>
+        </section>
+
+        <section class="sec_brand_str">
+            <div class="str_inner">
+                <header class="str_header">
+                    <h2>당신 곁에는 언제나<br />GS25가 있습니다.</h2>
+                    <div class="str_actions">
+                        <a href="#none" class="btn_store_find">매장 찾기</a>
+                        <div class="sns_wrap">
+                            <a href="#none" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
+                            <a href="#none" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
+                        </div>
+                    </div>
+                </header>
+                <ul class="brand_acc">
+                    <li
+                        v-for="(item, i) in strItems"
+                        :key="i"
+                        class="acc_item"
+                        :class="{ is_open: openAcc === i }"
+                    >
+                        <div class="acc_inner">
+                            <div class="acc_body">
+                                <button
+                                    type="button"
+                                    class="acc_btn"
+                                    :aria-expanded="openAcc === i"
+                                    @click="toggleAcc(i)"
+                                    v-html="item.title"
+                                ></button>
+                                <div
+                                    :ref="el => { if (el) descRefs[i] = el }"
+                                    class="acc_desc_wrap"
+                                >
+                                    <p class="acc_desc" v-html="item.desc"></p>
+                                </div>
+                            </div>
+                            <div
+                                :ref="el => { if (el) imgRefs[i] = el }"
+                                class="acc_img_wrap"
+                            >
+                                <img :src="item.img" alt="" />
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <div class="brand_content">
         <Tabs
             :model-value="depth1ActiveIdx"
             tab-class="type_01"
@@ -33,7 +137,7 @@
         <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel">
             <PanelHeader :hero="tab0.hero" :hero-alt="tab0.heroAlt" :title="tab0.title" :desc="tab0.subtitle" />
 
-            <ul v-if="tab0.cards && tab0.cards.length" class="diff_card_grid" role="list">
+            <ul v-if="tab0.cards && tab0.cards.length && !isMobileView" class="diff_card_grid" role="list">
                 <li v-for="(card, c) in tab0.cards" :key="c">
                     <article class="diff_card">
                         <figure>
@@ -46,25 +150,57 @@
                     </article>
                 </li>
             </ul>
+            <Swiper
+                v-if="tab0.cards && tab0.cards.length && isMobileView"
+                class="diff_card_swiper"
+                :space-between="8"
+                slides-per-view="auto"
+            >
+                <SwiperSlide v-for="(card, c) in tab0.cards" :key="c">
+                    <article class="diff_card">
+                        <figure>
+                            <img :src="card.image" :alt="card.alt || ''" width="460" height="320" />
+                        </figure>
+                        <div>
+                            <h3>{{ card.title }}</h3>
+                            <p>{{ card.desc }}</p>
+                        </div>
+                    </article>
+                </SwiperSlide>
+            </Swiper>
 
             <DiffQrRow v-if="tab0.qr" :title="tab0.qr.title" :desc="tab0.qr.desc" />
         </div>
 
         <!-- 탭 1: CAFE25 -->
-        <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel cafe_panel">
             <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :desc="tab1.subtitle" hero-bg="#fff" />
 
             <section v-for="(sec, i) in tab1.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" :source="sec.source" />
 
                 <!-- 카드형 -->
-                <ul v-if="sec.type === 'cards'" class="cafe25_card_list" role="list">
-                    <li v-for="(card, c) in sec.cards" :key="c">
-                        <div>
-                            <img :src="card.image" :alt="card.alt || ''" />
-                        </div>
-                    </li>
-                </ul>
+                <template v-if="sec.type === 'cards'">
+                    <ul v-if="!isMobileView" class="cafe25_card_list" role="list">
+                        <li v-for="(card, c) in sec.cards" :key="c">
+                            <div>
+                                <img :src="card.image" :alt="card.alt || ''" />
+                            </div>
+                        </li>
+                    </ul>
+                    <Swiper
+                        v-else
+                        class="cafe25_card_swiper"
+                        :space-between="8"
+                        slides-per-view="auto"
+                    >
+                        <SwiperSlide v-for="(card, c) in sec.cards" :key="c">
+                            <div class="cafe25_card_slide">
+                                <img :src="card.image" :alt="card.alt || ''" />
+                            </div>
+                        </SwiperSlide>
+                    </Swiper>
+                </template>
 
                 <!-- 이미지형 -->
                 <figure v-else-if="sec.type === 'image'" class="cafe25_img_wrap">
@@ -74,7 +210,7 @@
                 <!-- 분할형 (이미지 + 테이블) -->
                 <div v-else-if="sec.type === 'split'" class="cafe25_split">
                     <div class="cafe25_split_img">
-                        <img :src="sec.image" :alt="sec.imageAlt || ''" />
+                        <img :src="isMobileView && sec.imageMo ? sec.imageMo : sec.image" :alt="sec.imageAlt || ''" />
                     </div>
                     <div class="cafe25_split_table">
                         <table class="cafe25_table">
@@ -85,12 +221,12 @@
                                         :key="ci"
                                         scope="col"
                                         :style="{ width: col.width + 'px', textAlign: col.align }"
-                                    >{{ col.label }}</th>
+                                    ><span>{{ col.label }}</span></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(row, ri) in sec.rows" :key="ri">
-                                    <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }">{{ row[col.key] }}</td>
+                                    <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }"><span>{{ row[col.key] }}</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -99,7 +235,8 @@
 
                 <!-- 테이블형 -->
                 <div v-else-if="sec.type === 'table'" class="cafe25_table_wrap">
-                    <table class="cafe25_table">
+                    <!-- PC: 기존 테이블 -->
+                    <table v-if="!isMobileView" class="cafe25_table">
                         <thead>
                             <tr>
                                 <th
@@ -107,64 +244,106 @@
                                     :key="ci"
                                     scope="col"
                                     :style="{ width: col.width + 'px', textAlign: col.align }"
-                                >{{ col.label }}</th>
+                                ><span>{{ col.label }}</span></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(row, ri) in sec.rows" :key="ri">
                                 <td v-for="(col, ci) in sec.columns" :key="ci" :style="{ textAlign: col.align }">
-                                    <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />{{ row[col.key] }}
+                                    <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />
+                                    <span>{{ row[col.key] }}</span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    <!-- Mobile: row별 Swiper -->
+                    <template v-if="isMobileView">
+                        <Swiper
+                            :modules="[Pagination]"
+                            :slides-per-view="1"
+                            :pagination="{ el: '.cafe25_table_pagination', clickable: true }"
+                            class="cafe25_table_swiper"
+                        >
+                            <SwiperSlide v-for="(row, ri) in sec.rows" :key="ri">
+                                <table class="tbl_mo">
+                                    <tbody>
+                                        <tr v-for="(col, ci) in sec.columns" :key="ci">
+                                            <th scope="row" style="width: 96px"><span>{{ col.label }}</span></th>
+                                            <td>
+                                                <img v-if="ci === 0 && row.flag" :src="row.flag" :alt="row.country" class="flag_icon" width="24" height="24" />
+                                                <span>{{ row[col.key] }}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </SwiperSlide>
+                        </Swiper>
+                        <div class="cafe25_table_pagination"></div>
+                    </template>
                 </div>
             </section>
         </div>
 
         <!-- 탭 2: CHICKEN25 -->
-        <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel chicken_panel">
             <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :desc="tab2.subtitle" />
 
             <section v-for="(sec, i) in tab2.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
 
-                <ul v-if="sec.type === 'text_cards'" class="chicken25_card_list" role="list">
-                    <li v-for="(card, c) in sec.cards" :key="c">
-                        <div class="chicken25_card">
-                            <h4 v-html="card.title" />
-                            <p>{{ card.desc }}</p>
-                        </div>
-                    </li>
-                </ul>
+                <FeatureCards v-if="sec.type === 'text_cards'" :items="sec.cards" type="text" />
             </section>
 
-            <ul v-if="tab2.imgGrid && tab2.imgGrid.length" class="chicken25_img_grid" role="list">
+            <ul v-if="tab2.imgGrid && tab2.imgGrid.length && !isMobileView" class="img_grid" role="list">
                 <li v-for="(item, i) in tab2.imgGrid" :key="i">
                     <div>
                         <img :src="item.image" :alt="item.alt || ''" />
                     </div>
                 </li>
             </ul>
+            <Swiper
+                v-else-if="tab2.imgGrid && tab2.imgGrid.length && isMobileView"
+                class="img_grid_swiper"
+                slides-per-view="auto"
+                :space-between="8"
+            >
+                <SwiperSlide v-for="(item, i) in tab2.imgGrid" :key="i">
+                    <div class="img_grid_slide">
+                        <img :src="item.image" :alt="item.alt || ''" />
+                    </div>
+                </SwiperSlide>
+            </Swiper>
 
             <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" />
         </div>
 
         <!-- 탭 3: GOPIZZA -->
-        <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel gopizza_panel">
             <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :desc="tab3.subtitle" />
 
             <section v-for="(sec, i) in tab3.sections" :key="i">
                 <SectionHeader :title="sec.title" :desc="sec.desc" />
 
                 <!-- 이미지 2열 -->
-                <ul v-if="sec.type === 'img_grid'" class="gopizza_img_grid" role="list">
+                <ul v-if="sec.type === 'img_grid' && !isMobileView" class="img_grid" role="list">
                     <li v-for="(item, gi) in sec.images" :key="gi">
                         <div>
                             <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
                         </div>
                     </li>
                 </ul>
+                <Swiper
+                    v-else-if="sec.type === 'img_grid' && isMobileView"
+                    class="img_grid_swiper"
+                    slides-per-view="auto"
+                    :space-between="8"
+                >
+                    <SwiperSlide v-for="(item, gi) in sec.images" :key="gi">
+                        <div class="img_grid_slide">
+                            <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
 
                 <!-- 단일 이미지 -->
                 <figure v-else-if="sec.type === 'image'" class="gopizza_img_wrap">
@@ -180,9 +359,12 @@
                         <div class="gopizza_menu_info">
                             <div class="gopizza_menu_title">
                                 <strong>{{ pnl.size }}</strong>
-                                <span v-for="(tag, ti) in pnl.tags" :key="ti" class="gopizza_menu_tag">{{ tag }}</span>
+                                <div>
+                                    <span v-for="(tag, ti) in pnl.tags" :key="ti" class="gopizza_menu_tag">{{ tag }}</span>
+                                </div>
                             </div>
-                            <div class="com_table_wrap">
+                            <!-- PC: 기존 테이블 -->
+                            <div v-if="!isMobileView" class="com_table_wrap">
                                 <table class="com_table com_table_col">
                                     <thead>
                                         <tr>
@@ -211,43 +393,86 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- Mobile: row별 Swiper -->
+                            <template v-if="isMobileView">
+                                <Swiper
+                                    :modules="[Pagination]"
+                                    :slides-per-view="1"
+                                    :pagination="{ el: `.gopizza_menu_pagi_${pnl.size.replace(/[^a-z0-9]/gi, '')}`, clickable: true }"
+                                    class="cafe25_table_swiper"
+                                >
+                                    <SwiperSlide v-for="(row, ri) in pnl.rows" :key="ri">
+                                        <table class="tbl_mo">
+                                            <tbody>
+                                                <tr v-for="(col, ci) in pnl.columns" :key="ci">
+                                                    <th scope="row" style="width: 136px"><span>{{ col.label }}</span></th>
+                                                    <td>
+                                                        <span v-if="ci === 0" class="gopizza_menu_name">
+                                                            {{ row[col.key] }}
+                                                            <em v-if="row.badge" class="gopizza_badge_best">{{ row.badge }}</em>
+                                                        </span>
+                                                        <span v-else>{{ row[col.key] }}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </SwiperSlide>
+                                </Swiper>
+                                <div :class="`gopizza_menu_pagi_${pnl.size.replace(/[^a-z0-9]/gi, '')} gopizza_table_pagination`"></div>
+                            </template>
                         </div>
                     </li>
                 </ul>
 
                 <!-- 배달·픽업 앱 (2열) -->
-                <ul v-else-if="sec.type === 'phone_grid'" class="gopizza_phone_grid" role="list">
+                <ul v-else-if="sec.type === 'phone_grid' && !isMobileView" class="img_grid" role="list">
                     <li v-for="(item, ii) in sec.items" :key="ii">
                         <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
                     </li>
                 </ul>
+                <Swiper
+                    v-else-if="sec.type === 'phone_grid' && isMobileView"
+                    class="img_grid_swiper"
+                    slides-per-view="auto"
+                    :space-between="8"
+                >
+                    <SwiperSlide v-for="(item, ii) in sec.items" :key="ii">
+                        <div class="img_grid_slide">
+                            <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
             </section>
 
             <div class="diff_bottom_row">
                 <DiffQrRow v-if="tab3.qr" :title="tab3.qr.title" :desc="tab3.qr.desc" />
                 <a v-if="tab3.link" :href="tab3.link.url" class="gopizza_link" target="_blank" rel="noopener noreferrer">
+                    <figure aria-hidden="true">
+                        <img v-if="isMobileView" :src="imgQrMo" alt="" />
+                    </figure>
                     <div>
-                        <p class="gopizza_link_title">{{ tab3.link.title }}</p>
-                        <p v-html="tab3.link.desc" />
+                        <strong>{{ tab3.link.title }}</strong>
+                        <p v-html="isMobileView && tab3.link.descMo ? tab3.link.descMo : tab3.link.desc" />
                     </div>
                 </a>
             </div>
         </div>
 
         <!-- depth1 = 1: 신선강화점 -->
-        <div v-if="depth1ActiveIdx === 1" class="brand_panel">
+        <div v-if="depth1ActiveIdx === 1" class="brand_panel sinsen_panel">
             <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :desc="sinsen.subtitle" />
 
             <section v-for="(sec, i) in sinsen.sections" :key="i">
-                <SectionHeader :title="sec.title" :desc="sec.desc" />
+                <SectionHeader :title="sec.title" :desc="sec.desc" :mobile-desc="sec.mobileDesc" />
 
                 <!-- 특징 카드 4열 -->
-                <FeatureCards v-if="sec.features" :items="sec.features" type="icon" class="sinsen_feature" />
+                <FeatureCards v-if="sec.features" :items="sec.features" type="icon" no-pagination class="sinsen_feature" />
 
                 <!-- 배송 흐름도 -->
                 <div v-if="sec.flow" class="sinsen_card sinsen_card_flow">
+                    <strong v-if="sec.flowTitle">{{ sec.flowTitle }}</strong>
                     <p v-if="sec.flowNote">{{ sec.flowNote }}</p>
-                    <img :src="imgFlow" alt="" class="sinsen_flow_img" />
+                    <img :src="isMobileView ? imgFlowMo : imgFlow" alt="" class="sinsen_flow_img" />
                 </div>
 
                 <!-- 운영 장점 체크리스트 카드 -->
@@ -935,7 +1160,7 @@
             </section>
         </div>
 
-        <div class="diff_actions">
+        <div v-if="!isMobileView" class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
         </div>
 
@@ -945,7 +1170,10 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onMounted, onUnmounted } from "vue";
+import { ref, nextTick, watch, onMounted, onUnmounted, onBeforeUnmount } from "vue";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 import { useRouter } from "vue-router";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination } from "swiper/modules";
@@ -956,8 +1184,15 @@ import SectionHeader from "@/components/SectionHeader.vue";
 import Buttons from "@/components/Buttons.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
+import imgQrMo from "@/assets/images/dummy/qr_app.png";
 import Steps from "@/components/Steps.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
+
+/* smain 이미지 */
+import imgLogo from "@/assets/images/dummy/brand_gs25_logo.png";
+import imgAcc01 from "@/assets/images/dummy/brand_accordion_01.png";
+import imgAcc02 from "@/assets/images/dummy/brand_accordion_02.png";
+import imgAcc03 from "@/assets/images/dummy/brand_accordion_03.png";
 
 /* 탭 0 이미지 */
 import imgHero0 from "@/assets/images/dummy/differentiated_bg_01.png";
@@ -965,7 +1200,7 @@ import imgCard1 from "@/assets/images/dummy/differentiated_product_01.png";
 import imgCard2 from "@/assets/images/dummy/differentiated_product_02.png";
 
 /* 탭 1 이미지 */
-import imgHero1 from "@/assets/images/dummy/differentiated_bg_02.png";
+import imgHero1 from "@/assets/images/dummy/brand_bg_02.png";
 import imgCoffeeMachine01 from "@/assets/images/dummy/coffee_machine_01.png";
 import imgCoffeeMachine02 from "@/assets/images/dummy/coffee_machine_02.png";
 import imgCoffeeMachine03 from "@/assets/images/dummy/coffee_machine_03.png";
@@ -976,6 +1211,7 @@ import imgFlagEthiopia from "@/assets/images/dummy/img_flag_ethiopia.png";
 import imgFlagPapua from "@/assets/images/dummy/img_flag_papua.png";
 import imgCafe25Graph from "@/assets/images/dummy/cafe25_graph.png";
 import imgCafeMenu from "@/assets/images/dummy/cafe25_menu.png";
+import imgCafeMenuMo from "@/assets/images/dummy/mo/cafe25_menu_mo.png";
 
 /* 탭 2 이미지 */
 import imgHero2 from "@/assets/images/dummy/differentiated_bg_03.png";
@@ -995,6 +1231,7 @@ import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 /* 신선강화점 이미지 */
 import imgHero4 from "@/assets/images/dummy/brand_bg_05.png";
 import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
+import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
 
 /* 매장/서비스 이미지 */
 import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
@@ -1106,7 +1343,7 @@ const langData = {
             ],
             qr: {
                 title: "우리동네GS 앱 다운로드",
-                desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+                desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요. QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
             },
         },
         {
@@ -1155,6 +1392,7 @@ const langData = {
                     type: "split",
                     title: "메뉴 소개",
                     image: imgCafeMenu,
+                    imageMo: imgCafeMenuMo,
                     imageAlt: "CAFE25 메뉴 이미지",
                     columns: [
                         { key: "menu",     label: "구분",           width: 260, align: "left" },
@@ -1177,7 +1415,7 @@ const langData = {
             hero: imgHero2,
             heroAlt: "",
             title: "CHICKEN25",
-            subtitle: "최고의 원재료를 사용하여 즉석에서 조리한 튀김을 합리적인 가격으로 제공하는 GS25만의 차별화 먹거리입니다.<br />편의점에서도 치킨25와 함께 전문점 수준의 치킨을 즐길 수 있습니다.",
+            subtitle: "최고의 원재료를 사용하여 즉석에서 조리한 튀김을 합리적인 가격으로 제공하는 GS25만의 차별화 먹거리입니다. <br class=\"p_br\" />편의점에서도 치킨25와 함께 전문점 수준의 치킨을 즐길 수 있습니다.",
             sections: [
                 {
                     type: "text_cards",
@@ -1186,15 +1424,15 @@ const langData = {
                     cards: [
                         {
                             title: "깨끗한 기름으로<br />더 맛있는 튀김",
-                            desc: "깨끗하게 관리한 기름을 사용하여 더욱 바삭하고 맛있고, 철저한 위생 관리로 안심하고 즐길 수 있는 맛있는 치킨을 제공합니다.",
+                            desc: "깨끗하게 관리한 기름을 사용하여 더욱 바삭하고 맛있고,<br />철저한 위생 관리로 안심하고 즐길 수 있는<br />맛있는 치킨을 제공합니다.",
                         },
                         {
                             title: "다양한 메뉴,<br />골라 먹는 재미",
-                            desc: "전문점보다 더 풍성하게 준비된 메뉴들로 다양한 메뉴를 골라 드실 수 있습니다. (한마리, 반마리, 닭다리, 날개, 봉, 꼬치, 핫도그, 튀김만두 등)",
+                            desc: "전문점보다 더 풍성하게 준비된 메뉴들로<br /> 다양한 메뉴를 골라 드실 수 있습니다.<br />(한마리, 반마리, 닭다리, 날개, 봉, 꼬치, 핫도그, 튀김만두 등)",
                         },
                         {
                             title: "가까운 곳에서 언제든<br />간편히 구매",
-                            desc: "가까운 GS25에서 갓 튀긴 바삭한 치킨을 언제든지 간편하게 접할 수 있습니다. 우리동네GS앱을 통한 배달/픽업 서비스로 인근 GS25에서 더욱 간편한 구매가 가능합니다.",
+                            desc: "가까운 GS25에서 갓 튀긴 바삭한 치킨을<br />언제든지 간편하게 접할 수 있습니다.<br />우리동네GS앱을 통한 배달/픽업 서비스로<br />인근 GS25에서 더욱 간편한 구매가 가능합니다.",
                         },
                     ],
                 },
@@ -1226,14 +1464,14 @@ const langData = {
                 {
                     type: "image",
                     title: "차별화된 도우",
-                    desc: "9˚C 저온에서 24시간 숙성한 파베이크 도우를 사용하여 겉바속쫄!<br />고피자의 기술력이 집적된 파베이크 도우는 저온숙성을 거쳐 먹기 좋은 볼륨감과 충분한 수분 함량으로 빠삭하고 쫄깃한 식감을 제공합니다.",
+                    desc: "9˚C 저온에서 24시간 숙성한 파베이크 도우를 사용하여 겉바속쫄!<br class=\"p_br\" />고피자의 기술력이 집적된 파베이크 도우는 저온숙성을 거쳐 먹기 좋은 볼륨감과 충분한 수분 함량으로 빠삭하고 쫄깃한 식감을 제공합니다.",
                     image: imgDough,
                     imageAlt: "",
                 },
                 {
                     type: "menu",
                     title: "메뉴 소개",
-                    desc: "고피자의 스테디셀러부터 기대되는 신메뉴까지! GS25에서 REGULAR와 GRAB으로 간편하고 맛있게 즐기세요!<br />REGULAR 사이즈의 경우 피자가 W모양으로 5등분 컷팅되어 한조각씩 간편하게 먹을 수 있습니다.",
+                    desc: "고피자의 스테디셀러부터 기대되는 신메뉴까지! GS25에서 REGULAR와 GRAB으로 간편하고 맛있게 즐기세요!<br class=\"p_br\" />REGULAR 사이즈의 경우 피자가 W모양으로 5등분 컷팅되어 한조각씩 간편하게 먹을 수 있습니다.",
                     panels: [
                         {
                             image: imgMenu1,
@@ -1271,7 +1509,7 @@ const langData = {
                 },
                 {
                     type: "phone_grid",
-                    title: "우리동네GS앱에서는 빠른 배달, 픽업 가능",
+                    title: "우리동네GS앱에서는 빠른 배달,<br class=\"m_br\" /> 픽업 가능",
                     items: [
                         { image: imgPhone1, alt: "" },
                         { image: imgPhone2, alt: "" },
@@ -1285,6 +1523,7 @@ const langData = {
             link: {
                 title: "GOPIZZA 홈페이지 바로가기",
                 desc: "GOPIZZA 홈페이지에서 내 주변 매장 찾고 합리적인 가격과 차별화된 맛을 경험해보세요.<br />버튼을 클릭하면 해당 홈페이지로 이동합니다.",
+                descMo: "합리적인 가격과 차별화된 맛 GOPIZZA",
                 url: "https://gopizza.kr",
             },
         },
@@ -1293,10 +1532,11 @@ const langData = {
         hero: imgHero4,
         heroAlt: "신선강화점",
         title: "신선강화점",
-        subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
+        subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br /><br class=\"m_br\" />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
         sections: [
             {
                 title: "신선강화점 특징",
+                mobileDesc: "매장에서 바로 구워내 더욱 바삭한 식감! 편의점에서 만나는 피자 전문점 퀄리티!\n초소형, 초고온, 저전력의 고븐미니는 고온에서 짧은 시간의 조리를 할 수 있어 언제 어디서나 갓 구운 피자를 즐길 수 있습니다.",
                 features: [
                     { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정 콜드체인 시스템 적용으로 신선도 유지" },
                     { title: "합리적인 가격", desc: "GS 더프레시와의 통합 구매를 통해 합리적인 가격에 판매" },
@@ -1306,8 +1546,9 @@ const langData = {
             },
             {
                 title: "왜 GS25 신선강화점인가?",
-                desc: "GSTHEFRESH 통합 구매를 통한 상품 경쟁력을 확보하여 타 편의점 대비 다양한 신선·장보기 상품을 운영합니다. <br />업계 유일의 신선상품 전용 물류센터를 운영중이며, 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
+                desc: "GSTHEFRESH 통합 구매를 통한 상품 경쟁력을 확보하여 타 편의점 대비 다양한 신선·장보기 상품을 운영합니다. <br /><br class=\"m_br\" />업계 유일의 신선상품 전용 물류센터를 운영중이며, 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
                 flow: true,
+                flowTitle: "GS25 신선 배송 방식",
                 flowNote: "*신선센터를 거치지 않는 운영 구조에서는 상품 검품, 물류비, 신선도 관리 방식에 차이가 발생할 수 있습니다.",
             },
             {
@@ -2282,8 +2523,15 @@ const scrollToSection = (idx) => {
     }
 };
 
+const _getIsMobile = () => window.innerWidth <= 768;
+const isMobileView = ref(_getIsMobile());
+const _onResize = () => { isMobileView.value = _getIsMobile(); };
+
 let popSecObserver = null;
 onMounted(() => {
+    isMobileView.value = _getIsMobile();
+    window.addEventListener("resize", _onResize);
+
     const targets = document.querySelectorAll("[data-pop-sec]");
     if (!targets.length) return;
     popSecObserver = new IntersectionObserver(
@@ -2297,10 +2545,189 @@ onMounted(() => {
         { threshold: 0.3 }
     );
     targets.forEach((el) => popSecObserver.observe(el));
+
+    gsapCtx = gsap.context(() => {
+        const mm = gsap.matchMedia();
+        mm.add("(min-width: 769px)", () => {
+            const spans = textParaRef.value.querySelectorAll("span");
+            const PHASE1_PX = 400;
+
+            ScrollTrigger.create({
+                trigger: sectionRef.value,
+                start: "top top",
+                end: `+=${PHASE1_PX}`,
+                scrub: 1.5,
+                onUpdate(self) {
+                    const p = self.progress;
+                    const bw = bgWrapRef.value.offsetWidth;
+                    const bh = bgWrapRef.value.offsetHeight;
+                    const hInset = p * Math.max(0, (bw - 1420) / 2);
+                    const vInset = p * Math.max(0, (bh - 799) / 2);
+                    const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
+                    bgWrapRef.value.style.clipPath = clip;
+                    bgWrapRef.value.style.webkitClipPath = clip;
+                    bgWrapRef.value.classList.toggle("active", p >= 1);
+                },
+            });
+
+            gsap.set([...spans, logoWrapRef.value], { opacity: 0, y: 40 });
+
+            const textTl = gsap.timeline({ paused: true });
+            textTl
+                .to(spans, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.2,
+                    ease: "power2.out",
+                })
+                .to(logoWrapRef.value, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    ease: "power2.out",
+                }, "-=0.3");
+
+            ScrollTrigger.create({
+                trigger: sectionRef.value,
+                start: `top+=${PHASE1_PX} top`,
+                once: false,
+                onEnter: () => textTl.play(),
+                onLeaveBack: () => textTl.reverse(),
+            });
+
+            const aboutSpans = aboutSectionRef.value.querySelectorAll("span");
+
+            gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
+
+            ScrollTrigger.create({
+                trigger: aboutSectionRef.value,
+                start: "top 75%",
+                once: true,
+                onEnter: () => {
+                    gsap.to(aboutSpans, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.1,
+                        ease: "power3.out",
+                        onComplete() {
+                            gsap.set(aboutSpans, { willChange: "auto" });
+                        },
+                    });
+                },
+            });
+        });
+    });
 });
 onUnmounted(() => {
+    window.removeEventListener("resize", _onResize);
     if (popSecObserver) popSecObserver.disconnect();
 });
+onBeforeUnmount(() => {
+    if (gsapCtx) gsapCtx.revert();
+});
+
+/* =====================
+   sec_brand_visual / sec_brand_str (smain)
+   ===================== */
+const sectionRef = ref(null);
+const bgWrapRef = ref(null);
+const textParaRef = ref(null);
+const logoWrapRef = ref(null);
+const aboutSectionRef = ref(null);
+
+const strItems = [
+    {
+        title: "업계 최고<br />점포 당 매출액 달성",
+        desc: "점포 경쟁력을<br class=\"m_br\" />강화하고 고객중심의 상품서비스 제공을 통해<br />편의점 업계 최고의 매출액을 달성하고 있습니다.",
+        img: imgAcc01,
+    },
+    {
+        title: "GS25만의 차별화된<br class=\"p_br\" /> 상품과<br class=\"m_br\" />서비스 제공",
+        desc: "안전하고 맛있는 후레쉬푸드 상품 등 고품질의 먹거리 상품 개발과<br class=\"p_br\" />좋은 품질, 합리적 가격의 PB브랜드 'YOUUS',<br class=\"p_br\" />GS리테일의 전용 어플리케이션 우리동네GS 등 차별화된 상품과 서비스를 통해 고객에게 새로운 가치를 제공하고 있습니다.",
+        img: imgAcc02,
+    },
+    {
+        title: "경영주와의 끊임없는 소통과<br class=\"m_br\" />협력을 통한 <br class=\"p_br\" />단단한 파트너십",
+        desc: "경영주와 본부의 파트너십 구축을 위해 다양한 소통창구와 상생제도를 도입하여 운영중에 있습니다. Refresh 휴가지원, GS25 20's Club 등을 업계 최초로 개발하여 경영주의 만족과 자부심을 높이고 있습니다.",
+        img: imgAcc03,
+    },
+];
+
+const openAcc = ref(-1);
+const descRefs = [];
+const imgRefs = [];
+const tokens = strItems.map(() => 0);
+
+function _animateOpen(el, myToken, index) {
+    if (el.classList.contains("acc_show") && el.style.height === "auto") return;
+    el.classList.add("acc_animating", "acc_show");
+    el.style.height = "auto";
+    const heightPx = `${el.scrollHeight}px`;
+    el.style.height = "0px";
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            if (myToken !== tokens[index]) return;
+            el.style.height = heightPx;
+        });
+    });
+    el.addEventListener("transitionend", function onEnd(e) {
+        if (e.target !== el || e.propertyName !== "height") return;
+        el.removeEventListener("transitionend", onEnd);
+        if (myToken !== tokens[index]) return;
+        el.style.height = "auto";
+        el.classList.remove("acc_animating");
+    });
+}
+
+function _animateClose(el, myToken, index) {
+    if (!el.classList.contains("acc_show")) return;
+    el.classList.add("acc_animating");
+    const h = el.scrollHeight;
+    if (h === 0) {
+        el.classList.remove("acc_show", "acc_animating");
+        el.style.height = "";
+        return;
+    }
+    el.style.height = `${h}px`;
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            if (myToken !== tokens[index]) return;
+            el.style.height = "0px";
+        });
+    });
+    el.addEventListener("transitionend", function onEnd(e) {
+        if (e.target !== el || e.propertyName !== "height") return;
+        el.removeEventListener("transitionend", onEnd);
+        if (myToken !== tokens[index]) return;
+        el.classList.remove("acc_show", "acc_animating");
+        el.style.height = "";
+    });
+}
+
+function toggleAcc(index) {
+    const isMobile = window.innerWidth <= 768;
+    const prev = openAcc.value;
+    if (prev === index) {
+        openAcc.value = -1;
+        const t = ++tokens[index];
+        _animateClose(descRefs[index], t, index);
+        if (!isMobile) _animateClose(imgRefs[index], t, index);
+        return;
+    }
+    if (prev !== -1) {
+        const t = ++tokens[prev];
+        _animateClose(descRefs[prev], t, prev);
+        if (!isMobile) _animateClose(imgRefs[prev], t, prev);
+    }
+    openAcc.value = index;
+    const t = ++tokens[index];
+    _animateOpen(descRefs[index], t, index);
+    if (!isMobile) _animateOpen(imgRefs[index], t, index);
+}
+
+let gsapCtx = null;
 
 const depth1Routes = ["/gsrbr010101", null, null, null, null];
 
@@ -2320,6 +2747,581 @@ function goBack() {
 </script>
 
 <style scoped>
+/* =====================
+   sec_brand_visual
+   ===================== */
+.cafe_panel :deep(.brand_panel_bg > img) {
+    object-position: center bottom;
+}
+
+.gopizza_panel .img_grid,
+.gopizza_panel .img_grid_swiper{
+    margin-top: 0;
+    padding:0;
+}
+
+@media (max-width: 768px) {
+    :deep(.brand_panel_bg > img){
+        object-fit: none;
+    }
+    .cafe_panel :deep(.brand_panel_bg > img) {
+        object-position: -348px center;
+    }
+    .chicken_panel :deep(.brand_panel_bg > img) {
+        object-position: -385px center;
+    }
+    .gopizza_panel :deep(.brand_panel_bg > img) {
+        object-position: -591px bottom;
+    } 
+    .gopizza_panel :deep(.diff_bottom_row){
+        margin-top:120px;
+    }
+    .sinsen_panel :deep(.brand_panel_bg > img) {
+        object-position: -797px bottom;
+    }
+
+}
+
+.sec_brand_visual {
+    position: relative;
+    height: calc(100vh + 800px);
+}
+
+.sticky {
+    --base-ratio: 0.75;
+    --base-size: 1536;
+    --base-percent: 100vw;
+    width: 100%;
+    height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent))));
+    position: -webkit-sticky;
+    position: sticky;
+    top: max(calc(1 / var(--base-size) * var(--base-percent) * -1));
+    left: 0;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .sec_brand_visual {
+        height: 100vh;
+    }
+
+    .sticky {
+        height: 100vh;
+        top: 0;
+    }
+}
+
+.bg_wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    clip-path: inset(0% round 0px);
+    -webkit-clip-path: inset(0% round 0px);
+}
+
+.bg_wrap > .bg {
+    width: 100%;
+    height: 100%;
+    background-image: url(@/assets/images/dummy/brand_main_bg.jpg);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform: scale(1.2);
+    transition: transform 0.7s ease-out;
+}
+
+@media (max-width: 768px) {
+    .bg_wrap > .bg {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+            url(@/assets/images/dummy/brand_main_bg.jpg);
+        transform: scale(1.25);
+        background-position: 54% 50px;
+    }
+}
+.bg_wrap.active > .bg {
+    transform: scale(1);
+}
+
+.bg_wrap > .bg::before,
+.bg_wrap > .bg::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: 0.7s;
+}
+
+.bg_wrap > .bg::before {
+    background-color: #00000066;
+    z-index: 2;
+}
+
+.bg_wrap > .bg::after {
+    background: linear-gradient(180deg, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .3) 48.27%, rgba(0, 0, 0, 0) 90.33%);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+.bg_wrap.active > .bg::before,
+.bg_wrap.active > .bg::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.bg_wrap > .visual_inner {
+    /* width: 1420px;
+    height: 799px; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg_wrap .visual_inner > .txt_area {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+}
+
+.txt_area > p {
+    width: 100%;
+    margin-bottom: 48px;
+    overflow: hidden;
+}
+
+.txt_area > p > span {
+    color: #fff;
+    font-size: 5.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    word-break: keep-all;
+    word-wrap: break-word;
+    display: block;
+}
+
+.txt_area > .logo_wrap {
+    overflow: hidden;
+}
+
+.txt_area > .logo_wrap > img {
+    width: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.m_gs25 {
+    font-style: normal;
+    display: none;
+}
+
+/* =====================
+   sec_brand_about
+   ===================== */
+.sec_brand_about {
+    padding: 200px 0;
+    background-color: #f8f8f8;
+}
+
+.sec_brand_about .mo_txt {
+    display: none;
+}
+
+.sec_brand_about .pc_txt {
+    overflow: hidden;
+}
+
+.sec_brand_about > .about_inner {
+    width: 940px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.sec_brand_about > .about_inner > .pc_txt {
+    overflow: hidden;
+}
+
+.sec_brand_about > .about_inner > .pc_txt > span {
+    color: #161616;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    will-change: transform, opacity;
+    display: block;
+}
+
+/* =====================
+   sec_brand_str
+   ===================== */
+/* .sec_brand_str {
+    padding: 200px 0;
+} */
+
+.sec_brand_str > .str_inner {
+    width: 1420px;
+    margin: 0 auto;
+    padding:200px 0;
+}
+
+.str_header {
+    padding-bottom: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.str_header > h2 {
+    color: #161616;
+    font-size: 4.8rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.str_header > .str_actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.btn_store_find {
+    padding: 4px;
+    color: #161616;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn_store_find::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-color: #aca9a9;
+    flex-shrink: 0;
+    display: block;
+}
+
+.sns_wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn_sns {
+    width: 56px;
+    height: 56px;
+    background-color: #F8F8F8;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_sns::before {
+    content: "";
+    background-color: #161616;
+    border-radius: 4px;
+    display: block;
+}
+
+/* .btn_sns_insta::before {
+    width: 18px;
+    height: 18px;
+}
+
+.btn_sns_yt::before {
+    width: 22px;
+    height: 16px;
+} */
+
+/* =====================
+   Accordion 커스텀
+   ===================== */
+.brand_acc {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    list-style: none;
+    overflow: hidden;
+}
+
+.acc_item {
+    border-bottom: 1px solid #e5e5e9;
+}
+
+.acc_inner {
+    padding: 40px 64px;
+    display: grid;
+    grid-template-columns: 1fr 0;
+    align-items: start;
+}
+
+.acc_item.is_open .acc_inner {
+    grid-template-columns: 1fr 1fr;
+}
+
+.acc_body {
+    min-width: 0;
+}
+
+.acc_btn {
+    width: 100%;
+    padding: 0;
+    color: #161616;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.acc_btn:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 2px;
+}
+
+.acc_btn::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background-color:#161616;
+    display:block;
+}
+
+.acc_item.is_open .acc_btn::after {
+    opacity: 0;
+}
+
+.acc_desc_wrap {
+    overflow: hidden;
+    height: 0;
+    box-sizing: border-box;
+    transition: height 0.35s ease;
+}
+
+.acc_desc {
+    padding-top: 16px;
+    color: #67676f;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+:deep(.p_br) {
+    display: block;
+}
+:deep(.m_br) {
+    display: none;
+}
+
+.acc_img_wrap {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.65s ease;
+}
+
+.acc_img_wrap > img {
+    width: auto;
+    margin-left: auto;
+    border-radius: 12px;
+    display: block;
+    object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+    .sec_brand_about > .about_inner {
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
+
+    .sec_brand_str > .str_inner {
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
+
+    .acc_inner {
+        padding: 28px 40px;
+    }
+
+    .acc_item.is_open .acc_inner {
+        grid-template-columns: 1fr 280px;
+        column-gap: 28px;
+    }
+
+    .acc_img_wrap > img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .bg_wrap > .visual_inner {
+        width: calc(100% - 40px); /* 좌우 20px 여백 */
+        height: auto;
+        top: 358px;
+        bottom: 318px;
+        transform: translateX(-50%); /* 수평 중앙만 유지 */
+    }
+    .btn_store_find{
+        font-weight: 500;
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+        
+    }
+    .btn_store_find::before {
+        width: 20px;
+        height: 20px;
+    }
+    .txt_area > p{
+        margin-bottom: 0;
+    }
+    .txt_area > p > span, .txt_area > p > span em{
+        color:#fff;
+        font-size: 3.2rem;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        text-align: center;
+    }
+    .txt_area > .logo_wrap {
+        display: none;
+    }
+
+    .m_gs25 {
+        display: inline;
+    }
+
+    .txt_area > p > span:first-child::after {
+        content: ",";
+    }
+
+    .sec_brand_about .mo_txt {
+        font-weight: 700;
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0%;
+        display: block;
+    }
+
+    .sec_brand_about .pc_txt {
+        display: none;
+    }
+
+    .sec_brand_about {
+        padding: 140px 0;
+    }
+
+    .sec_brand_about > .about_inner {
+        padding: 0 20px;
+        gap: 40px;
+    }
+
+    .sec_brand_about > .about_inner > .pc_txt > span {
+        font-size: 1.8rem;
+    }
+
+    .sec_brand_str {
+        padding: 140px 0;
+    }
+
+    .sec_brand_str > .str_inner {
+        padding: 0 20px;
+    }
+
+    .str_header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-bottom: 40px;
+    }
+
+    .str_header > h2 {
+        font-size: 2.8rem;
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+    }
+
+    .str_header > .str_actions {
+        gap:14px;
+        flex: none;
+        justify-content: flex-start;
+    }
+    .sns_wrap{
+        gap:16px
+    }
+    .btn_sns{
+        width: 40px;
+        height: 40px;
+    }
+    .acc_btn {
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: -0;
+    }
+
+    .acc_inner {
+        padding: 24px;
+    }
+
+    .acc_desc{
+        font-size: 1.6rem;
+        line-height: 1.5;
+    }
+
+    .acc_item.is_open .acc_inner {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+        row-gap:40px;
+    }
+
+    .acc_item.is_open .acc_inner > .acc_img_wrap {
+        height: 100% !important;
+    }
+
+
+    :deep(.p_br) {
+        display: none;
+    }
+
+    :deep(.m_br) {
+        display: inline;
+    }
+}
+
 .brand_panel_desc {
     margin-top: 16px;
     font-size: 2rem;
@@ -2360,7 +3362,6 @@ function goBack() {
     text-decoration: underline;
 }
 img {
-    width: 100%;
     display: block;
 }
 
@@ -2387,19 +3388,28 @@ button {
     margin-bottom: 24px;
 }
 
-.inner {
-    max-width: 1460px;
+.brand_content {
+    max-width: 1420px;
     margin: 0 auto;
-    padding: 109px 20px 200px;
+    padding: 0 0 200px;
 }
 
 .brand_panel {
     padding-top: 40px;
-    padding-bottom: 100px;
+    padding-bottom: 145px;
 }
 
 .brand_panel section {
     padding-bottom: 120px;
+}
+
+
+
+@media (max-width: 768px) {
+    .brand_panel section {
+        padding: 0 20px 80px;
+    }
+
 }
 
 .brand_panel section:last-of-type {
@@ -2424,11 +3434,16 @@ button {
 }
 
 .diff_card > figure {
-    aspect-ratio: 460 / 320;
     margin: 0;
     padding: 0;
     background-color: #e8e8ec;
     overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .diff_card > figure {
+        height:220px;
+    }
 }
 
 .diff_card > figure > img {
@@ -2498,19 +3513,7 @@ button {
     min-width: 0;
 }
 
-.cafe25_split_img {
-    padding: 45px 75px;
-    background-color: #0e376b;
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.cafe25_split_img > img {
-    max-height: 358px;
-}
 
 .cafe25_split_table {
     overflow-x: auto;
@@ -2525,18 +3528,95 @@ button {
     table-layout: fixed;
 }
 
+.tbl_mo {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tbl_mo th,
+.tbl_mo td {
+    height: 56px;
+    text-align: left;
+    border-bottom: 1px solid #E5E5E9;
+    vertical-align: middle;
+}
+
+.tbl_mo th {
+    padding: 18px 24px;
+    background-color: #F8F8F8;
+}
+
+.tbl_mo th > span {
+    color: #161618;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.24;
+    letter-spacing: 0;
+}
+
+.tbl_mo td {
+    padding: 16px 20px;
+}
+
+.tbl_mo td > span {
+    color: #161616;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.24;
+    letter-spacing: 0;
+}
+
+.tbl_mo td .flag_icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.tbl_mo tr:first-child th,
+.tbl_mo tr:first-child td {
+    border-top: 1px solid #E5E5E9;
+}
+
+.cafe25_table_pagination,
+.gopizza_table_pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cafe25_table_pagination :deep(.swiper-pagination-bullet),
+.gopizza_table_pagination :deep(.swiper-pagination-bullet) {
+    width: 6px;
+    height: 6px;
+    background-color: #D7D7DF;
+    border-radius: 50%;
+    opacity: 1;
+    cursor: pointer;
+    display: block;
+}
+
+.cafe25_table_pagination :deep(.swiper-pagination-bullet-active),
+.gopizza_table_pagination :deep(.swiper-pagination-bullet-active) {
+    background-color: #161616;
+}
+
 .cafe25_table th,
 .cafe25_table td {
     height: 56px;
     padding: 0 24px;
+    border-bottom: 1px solid #e5e5e9;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.cafe25_table th > span,
+.cafe25_table td > span {
     color: #161618;
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 1.6;
     letter-spacing: -0.01em;
-    border-bottom: 1px solid #e5e5e9;
-    vertical-align: middle;
-    white-space: nowrap;
 }
 
 .cafe25_table th:first-child,
@@ -2550,9 +3630,28 @@ button {
 }
 
 .cafe25_table th {
-    font-weight: 600;
     background-color: #f8f8f8;
     border-top: 0;
+}
+
+.cafe25_table th > span {
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .cafe25_table th,
+    .cafe25_table td {
+        padding: 16px 24px;
+    }
+    .cafe25_table th > span,
+    .cafe25_table td > span {
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+    }
+    .cafe25_table th > span {
+        font-weight: 700;
+    }
 }
 
 .cafe25_table > tbody > tr > td > .flag_icon {
@@ -2602,7 +3701,7 @@ button {
     letter-spacing: -0.01em;
 }
 
-.chicken25_img_grid {
+.img_grid {
     margin-top: 120px;
     padding: 0;
     display: grid;
@@ -2610,13 +3709,14 @@ button {
     gap: 20px;
 }
 
-.chicken25_img_grid > li {
+.img_grid > li {
     min-width: 0;
     border-radius: 12px;
     overflow: hidden;
 }
 
-.chicken25_img_grid img {
+.img_grid img {
+    width: 100%;
     object-fit: cover;
 }
 
@@ -2667,6 +3767,22 @@ button {
     flex: 1;
 }
 
+
+.gopizza_menu_panel img{
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .gopizza_menu_panel + .gopizza_menu_panel{
+        margin-top:100px;
+    }
+    .gopizza_menu_panel img{
+        min-height: 240px;
+    }
+}
+
 .gopizza_menu_info {
     padding-top: 24px;
 }
@@ -2681,9 +3797,22 @@ button {
 .gopizza_menu_title > strong {
     color: #161618;
     font-size: 2.4rem;
-    font-weight: 600;
+    font-weight: 700; 
     line-height: 1.35;
     letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+    .gopizza_menu_title{
+        gap:4px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .gopizza_menu_title > strong {
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+    }
 }
 
 .gopizza_menu_tag {
@@ -2693,7 +3822,9 @@ button {
     line-height: 1.4;
     letter-spacing: -0.01em;
 }
-
+.gopizza_menu_tag + .gopizza_menu_tag{
+    margin-left: 8px;
+}   
 .gopizza_menu_tag + .gopizza_menu_tag::before {
     content: "";
     width: 1px;
@@ -2749,6 +3880,7 @@ button {
     text-align: center;
 }
 
+
 .gopizza_menu_name {
     display: flex;
     align-items: center;
@@ -2766,12 +3898,6 @@ button {
     border-radius: 4px;
 }
 
-.gopizza_phone_grid {
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, calc((100% - 20px) / 2));
-    gap: 20px;
-}
 
 .diff_bottom_row {
     display: flex;
@@ -2785,8 +3911,27 @@ button {
 .gopizza_link {
     min-width: 0;
     display: flex;
+    align-items: center;
     flex: 1;
     gap: 20px;
+    text-decoration: none;
+}
+
+.gopizza_link > figure {
+    width: 90px;
+    height: 90px;
+    margin: 0;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #e5e5e9;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: none;
+    }
+
+.gopizza_link > figure > img {
+    width: 100%;
+    display: block;
 }
 
 .gopizza_link > div {
@@ -2795,19 +3940,26 @@ button {
     flex: 1;
 }
 
-.gopizza_link_title {
+.gopizza_link > div > strong {
     margin: 0 0 6px;
     color: #161618;
     font-size: 2rem;
     font-weight: 700;
     line-height: 1.5;
     letter-spacing: -0.01em;
-    display: flex;
+    display:flex;
+    gap:8px;
     align-items: center;
-    gap: 6px;
 }
 
-.gopizza_link > div > p + p {
+.gopizza_link > div > strong:after{
+    content:"";
+    width:20px;
+    height:20px;
+    background-color:red;
+}
+
+.gopizza_link > div > p {
     margin: 0;
     color: #67676f;
     font-size: 1.4rem;
@@ -2819,7 +3971,6 @@ button {
 /* ── 신선강화점 ── */
 .sinsen_feature :deep(.feature_card_item) {
     min-height: 240px;
-    padding: 32px 32px 60px;
 }
 
 .sinsen_card {
@@ -2828,9 +3979,38 @@ button {
     background-color: #f8f8f8;
     border-radius: 12px;
 }
+
+.sinsen_card strong{
+    margin-bottom:8px;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    display: block;
+}
+@media (max-width: 768px) {
+    .sinsen_card strong{
+        font-size: 18px;
+        line-height: 150%;
+        letter-spacing: 0%;
+    }
+
+}
+@media (max-width: 768px) {
+    .sinsen_feature :deep(.feature_card_item) {
+        min-height: 227px;
+    }
+}
 .sinsen_card span{
 font-size: 1.8rem;
 line-height: 1.4;
+}
+@media (max-width: 768px) {
+    .sinsen_card span {
+    font-size: 1.4rem; 
+    letter-spacing: -0.01em;
+
+    }
 }
 .sinsen_card > p {
     margin-bottom: 32px;
@@ -2841,9 +4021,23 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
+@media (max-width: 768px) {
+    .sinsen_card > p {
+     margin-bottom:12px;
+    }
+}
+
 .sinsen_flow_img {
+    width: 100%;
     margin-top: 24px;
     display: block;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .sinsen_flow_img {
+       height:130px;
+    }
 }
 
 /* 운영 장점 체크리스트 */
@@ -2883,6 +4077,12 @@ line-height: 1.4;
 .sinsen_check_note {
     color: #67676f;
 }
+
+.chicken_panel :deep(.feature_card_item) {
+    min-height: 238px; 
+   
+}
+
 
 /* ── 생활 서비스 3depth 탭 ── */
 .service_tab_wrap {
@@ -3397,6 +4597,7 @@ line-height: 1.4;
     .winwin_item_title > strong {
         font-size: 2.4rem;
     }
+
 }
 
 /* ── 택배&픽업 — 안내 목록 ── */
@@ -4057,25 +5258,72 @@ line-height: 1.4;
 }
 
 @media (max-width: 768px) {
-    .inner {
-        padding: 24px 20px 60px;
+    .brand_content {
+        padding: 24px 0 60px;
+        overflow-x: clip;
     }
 
-    .diff_card_grid {
-        grid-template-columns: minmax(0, 1fr);
+    .diff_card_swiper {
+        padding: 0 20px;
+        overflow: visible;
     }
+
+    /* .diff_card_swiper .swiper-slide {
+        width: 87.2vw;
+    } */
 
     .diff_card > div {
-        min-height: 0;
-        padding: 24px;
+        min-height: 163px;
+        padding: 20px;
+    }
+    .diff_card > div > p{
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+
     }
 
     .diff_card > div > h3 {
-        font-size: 2.2rem;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+        margin-bottom: 8px;
     }
 
-    .cafe25_card_list {
-        grid-template-columns: minmax(0, 1fr);
+    .cafe25_img_wrap {
+        max-width: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cafe25_img_wrap > img {
+        max-width: none;
+        display: block;
+    }
+
+    .cafe25_card_swiper {
+        overflow: visible;
+        margin-bottom: 20px;
+    }
+
+    .cafe25_card_swiper .swiper-slide {
+        width: 164px;
+    }
+
+    .cafe25_card_slide {
+        width: 164px;
+        height: 164px;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    .cafe25_card_slide > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
     .cafe25_split {
@@ -4086,28 +5334,38 @@ line-height: 1.4;
         width: 100%;
     }
 
+    .brand_panel:first-of-type section:not(:first-of-type) :deep(header) {
+        padding-bottom: 40px;
+    }
+
     .chicken25_card_list {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .chicken25_img_grid {
-        grid-template-columns: minmax(0, 1fr);
+    .img_grid_swiper {
+        padding: 0 20px;
+        overflow: visible;
     }
 
-    .gopizza_img_grid {
-        grid-template-columns: minmax(0, 1fr);
+    .img_grid_swiper :deep(.swiper-slide) {
+        width: 327px;
     }
 
-    .gopizza_img_grid > li > div {
-        height: 260px;
+    .img_grid_slide {
+        width: 327px;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    .img_grid_slide > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
     .gopizza_img_wrap {
         height: 260px;
-    }
-
-    .gopizza_phone_grid {
-        grid-template-columns: minmax(0, 1fr);
     }
 
     .diff_bottom_row {
@@ -4115,8 +5373,48 @@ line-height: 1.4;
         gap: 20px;
     }
 
+    .gopizza_link {
+        padding: 0 16px;
+        position: relative;
+        gap: 12px;
+    }
+
+    .gopizza_link > figure {
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        border: 0;
+        display:block;
+    }
+
+    .gopizza_link > figure > img {
+        height: 48px;
+    }
+
+    .gopizza_link > div {
+        padding: 0;
+    }
+
+    .gopizza_link > div > strong {
+        font-size: 1.6rem;
+
+    }
+    .gopizza_link > div > strong:after{
+        display:none;
+    }
+    .gopizza_link::after {
+        content: "";
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        background-color: #e5e5e9;
+    }
+
     .sinsen_check_list > li {
-        flex-wrap: wrap;
+        padding-bottom: 4px;
     }
 
     .service_tab_item {
