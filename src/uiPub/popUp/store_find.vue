@@ -89,7 +89,6 @@
 </template>
 
 <script>
-import { ref } from "vue";
 import modal from "@/assets/js/modal";
 import icoChip01 from "@/assets/images/dummy/mo/ico_chip_01.png";
 import icoChip02 from "@/assets/images/dummy/mo/ico_chip_02.png";
@@ -125,35 +124,24 @@ const CHIP_DEF = [
 export default {
     name: "StoreFindModal",
 
-    setup() {
-        const keyword = ref("");
-        const filterExpanded = ref(true);
-        const selSido = ref("");
-        const selSigungu = ref("");
-        const selDong = ref("");
-
-        const optionsSido = ["서울시", "경기도", "인천광역시"];
-        const optionsSigungu = ["강남구", "서초구", "송파구"];
-        const optionsDong = ["역삼동", "삼성동", "청담동"];
-
-        const chips = ref(CHIP_DEF.map((c) => ({ ...c })));
-
-        function closeModal(event) {
-            modal.close(event.currentTarget);
-        }
-
+    data() {
         return {
-            keyword,
-            filterExpanded,
-            selSido,
-            selSigungu,
-            selDong,
-            optionsSido,
-            optionsSigungu,
-            optionsDong,
-            chips,
-            closeModal,
+            keyword: "",
+            filterExpanded: true,
+            selSido: "",
+            selSigungu: "",
+            selDong: "",
+            optionsSido: ["서울시", "경기도", "인천광역시"],
+            optionsSigungu: ["강남구", "서초구", "송파구"],
+            optionsDong: ["역삼동", "삼성동", "청담동"],
+            chips: CHIP_DEF.map((c) => ({ ...c })),
         };
+    },
+
+    methods: {
+        closeModal(event) {
+            modal.close(event.currentTarget);
+        },
     },
 };
 </script>
@@ -242,7 +230,6 @@ export default {
 }
 
 .sf_select {
-    flex: 1 1 276px;
     min-width: 0;
     height: 52px;
     padding: 0 40px 0 16px;
@@ -435,6 +422,7 @@ export default {
 
     .sf_select {
         width: 100%;
+        height: 48px;
     }
 
 
