@@ -159,7 +159,7 @@ onUnmounted(() => {
     }
 
     .feature_card_swiper :deep(.swiper-slide) {
-        width: 327px;
+        width: 84vw;
     }
 
     .feature_card_swiper :deep(.swiper-pagination) {
@@ -185,7 +185,7 @@ onUnmounted(() => {
     }
 
     .feature_card_item {
-        width: 327px;
+        width: 84vw;
         height: auto;
         min-height: 0;
         padding: 32px;

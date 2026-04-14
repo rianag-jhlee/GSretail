@@ -476,14 +476,14 @@
                 <FeatureCards v-if="sec.features" :items="sec.features" type="icon" no-pagination class="sinsen_feature" />
 
                 <!-- 배송 흐름도 -->
-                <div v-if="sec.flow" class="sinsen_card sinsen_card_flow">
+                <div v-if="sec.flow" class="info_card info_card_flow">
                     <strong v-if="sec.flowTitle">{{ sec.flowTitle }}</strong>
                     <p v-if="sec.flowNote">{{ sec.flowNote }}</p>
                     <img :src="isMobileView ? imgFlowMo : imgFlow" alt="" class="sinsen_flow_img" />
                 </div>
 
                 <!-- 운영 장점 체크리스트 카드 -->
-                <div v-if="sec.advantages" class="sinsen_card">
+                <div v-if="sec.advantages" class="info_card">
                     <ul class="sinsen_check_list">
                         <li v-for="(item, ii) in sec.advantages.items" :key="ii">
                             <div>
@@ -709,7 +709,7 @@
                             </button>
                             <Swiper
                                 :modules="[Pagination, Navigation]"
-                                slides-per-view="auto"
+                                :slides-per-view="3"
                                 :slides-per-group="3"
                                 :space-between="14"
                                 :breakpoints="{
@@ -762,11 +762,11 @@
                         <div class="gift_usage_wrap">
                             <div class="gift_usage_group">
                                 <h3>{{ tab.onlineLabel }}</h3>
-                                <Steps type="1" :items="tab.onlineSteps" />
+                                <Steps type="2" :items="tab.onlineSteps" />
                             </div>
                             <div class="gift_usage_group">
                                 <h3>{{ tab.offlineLabel }}</h3>
-                                <Steps type="1" :items="tab.offlineSteps" />
+                                <Steps type="2" :items="tab.offlineSteps" />
                             </div>
                         </div>
                     </section>
@@ -824,7 +824,7 @@
                                     <img v-if="card.img" :src="card.img" :alt="card.imgAlt" />
                                 </figure>
                                 <div class="usim_benefit_body">
-                                    <h3>{{ card.title }}</h3>
+                                    <h4>{{ card.title }}</h4>
                                     <ul class="usim_benefit_list">
                                         <li v-for="(item, ii) in card.items" :key="ii">
                                             <span class="usim_benefit_icon"></span>
@@ -904,7 +904,8 @@
                         <SectionHeader :title="tab.mallSiteTitle">
                             <p v-if="tab.mallSiteNote" class="mall_site_note">{{ tab.mallSiteNote }}</p>
                         </SectionHeader>
-                        <ul class="mall_site_list">
+                        <!-- PC -->
+                        <ul v-if="!isMobileView" class="mall_site_list">
                             <li v-for="(item, si) in tab.mallSiteItems" :key="si">
                                 <figure>
                                     <div class="mall_site_thumb">
@@ -914,6 +915,22 @@
                                 </figure>
                             </li>
                         </ul>
+                        <!-- 모바일: Swiper -->
+                        <Swiper
+                            v-else
+                            slides-per-view="auto"
+                            :space-between="8"
+                            class="mall_site_swiper"
+                        >
+                            <SwiperSlide v-for="(item, si) in tab.mallSiteItems" :key="si">
+                                <figure class="mall_site_figure">
+                                    <div class="mall_site_thumb">
+                                        <img :src="item.img" :alt="item.name" />
+                                    </div>
+                                    <figcaption>{{ item.name }}</figcaption>
+                                </figure>
+                            </SwiperSlide>
+                        </Swiper>
                     </section>
                 </template>
 
@@ -1009,13 +1026,15 @@
                         </section>
                         <section v-if="tab.priceItems && tab.priceItems.length" class="sec_delivery_price">
                             <SectionHeader :title="tab.priceTitle" />
-                            <div class="delivery_price_box">
-                                <ul class="delivery_price_list">
+                            <div class="info_card">
+                                <ul class="sinsen_check_list">
                                     <li v-for="(item, pi) in tab.priceItems" :key="pi">
-                                        <p>{{ item.text }}</p>
-                                        <ul v-if="item.subs && item.subs.length" class="delivery_price_subs">
-                                            <li v-for="(sub, si) in item.subs" :key="si">{{ sub }}</li>
-                                        </ul>
+                                        <div>
+                                            <span>{{ item.text }}</span>
+                                            <div v-if="item.subs && item.subs.length">
+                                                <span v-for="(sub, si) in item.subs" :key="si" style="color: #67676f;">{{ sub }}</span>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -1230,7 +1249,6 @@ import Tabs from "@/components/Tabs.vue";
 import PanelHeader from "@/components/PanelHeader.vue";
 import SectionHeader from "@/components/SectionHeader.vue";
 import Buttons from "@/components/Buttons.vue";
-import SelectBox from "@/components/SelectBox.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
 import imgQrMo from "@/assets/images/dummy/qr_app.png";
 import Steps from "@/components/Steps.vue";
@@ -1979,9 +1997,9 @@ const langData = {
                         label:          "하이패스\n카드/단말기",
                         hero:           null,
                         heroAlt:        "",
-                        title:          "하이패스 카드/단말기",
+                        title:          "하이패스 서비스",
                         desc:           "GS25에서 24시간 하이패스카드를 구매/충전하세요.",
-                        hipassStepTitle:    "하이패스카드 구매 (셀프형 자동충전카드)",
+                        hipassStepTitle:    "하이패스카드 구매<br class=\"m_br\" />(셀프형 자동충전카드)",
                         hipassSteps: [
                             {
                                 step:    "Step 1",
@@ -1996,8 +2014,8 @@ const langData = {
                                 title:   "카드등록 및 결제정보등록",
                                 bullets: [
                                     "홈페이지에서 카드번호 및 결제정보등록<br />(계좌 or 신용카드)",
+                                    "<span style=\"color: #fb6432\">카드등록 후 24시간 이후 사용 가능</span>",
                                 ],
-                                note:    "카드등록 후 24시간 이후 사용 가능",
                             },
                             {
                                 step:    "Step 3",
@@ -2021,9 +2039,7 @@ const langData = {
                         heroAlt: "",
                         title:   "고속도로 미납 통행료 납부",
                         desc:    "국내편의점 중 최초로 고속도로 미납통행료 실시간 조회 및 납부할 수 있는 서비스입니다.",
-                        serviceTitle: "편의점 결제의 장점",
-                        serviceDesc:
-                            "이제 팝 하세요! 다양한 결제 수단과 결합하여 혜택은 더 크게, 소비는 더 합리적으로, 사용은 더 편리하게 할 수 있도록 팝카드만의 차별화된 서비스를 제공합니다.",
+                        serviceTitle: "서비스 장점",
                         serviceAdvantages: [
                             {
                                 num:   "01",
@@ -2119,7 +2135,7 @@ const langData = {
                         desc:    "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
                         notes: [
                             {
-                                text: "중량 측정을 통한 합리적인 운임을 제공합니다. (최저 3,400원)",
+                                text: "중량 측정을 통한 합리적인 운임을 제공합니다.<br class=\"m_br\" />(최저 3,400원)",
                                 sub:  "*25년 4월1일부로 변경",
                             },
                             {
@@ -2790,24 +2806,26 @@ function _animateClose(el, myToken, index) {
 }
 
 function toggleAcc(index) {
-    const isMobile = window.innerWidth <= 768;
     const prev = openAcc.value;
     if (prev === index) {
         openAcc.value = -1;
         const t = ++tokens[index];
         _animateClose(descRefs[index], t, index);
-        if (!isMobile) _animateClose(imgRefs[index], t, index);
+        _animateClose(imgRefs[index], t, index);
         return;
     }
     if (prev !== -1) {
         const t = ++tokens[prev];
         _animateClose(descRefs[prev], t, prev);
-        if (!isMobile) _animateClose(imgRefs[prev], t, prev);
+        _animateClose(imgRefs[prev], t, prev);
     }
     openAcc.value = index;
     const t = ++tokens[index];
     _animateOpen(descRefs[index], t, index);
-    if (!isMobile) _animateOpen(imgRefs[index], t, index);
+    // DOM에 is_open 클래스가 적용된 후 이미지 높이를 측정해야 scrollHeight가 올바르게 반환됨
+    nextTick(() => {
+        _animateOpen(imgRefs[index], t, index);
+    });
 }
 
 let gsapCtx = null;
@@ -2833,15 +2851,30 @@ function goBack() {
 /* =====================
    sec_brand_visual
    ===================== */
+@media (max-width: 768px){
+    .cafe25_split_img >img{
+        width: 100%;
+    }
+}
+
 .cafe_panel :deep(.brand_panel_bg > img) {
     object-position: center bottom;
 }
+.chicken_panel .img_grid_swiper {
+   margin-top:120px;
+}
 
+@media (max-width: 768px) {
+    .chicken_panel .img_grid_swiper {
+        margin-top:60px;
+    }
+}
 .gopizza_panel .img_grid,
 .gopizza_panel .img_grid_swiper{
     margin-top: 0;
     padding:0;
 }
+
 
 @media (max-width: 768px) {
     :deep(.brand_panel_bg > img){
@@ -3253,7 +3286,7 @@ function goBack() {
 
     .sec_brand_str > .str_inner {
         width: 100%;
-        padding: 0 40px;
+        padding: 100px 40px;
         box-sizing: border-box;
     }
 
@@ -3391,9 +3424,6 @@ function goBack() {
         row-gap:40px;
     }
 
-    .acc_item.is_open .acc_inner > .acc_img_wrap {
-        height: 100% !important;
-    }
 
 
     :deep(.p_br) {
@@ -3437,6 +3467,14 @@ function goBack() {
     color: #161616;
     font-size: 1.8rem; 
     line-height: 1.4;
+}
+
+@media (max-width: 768px) {   
+    .list_dotted > li > p {
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+    }
 }
 .list_dotted > li > p :deep(a) {
     color: #107af2;
@@ -3489,7 +3527,14 @@ button {
 .brand_content {
     max-width: 1420px;
     margin: 0 auto;
-    padding: 0 0 200px;
+    padding: 0 80px 200px;
+}
+
+@media (max-width: 1280px) {
+    .brand_content {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
 }
 
 .brand_panel {
@@ -3961,10 +4006,17 @@ button {
 }
 
 .com_table tbody th {
+    width: 136px;
+    min-width: 136px;
+    max-width: 136px;
     font-weight: 700;
     background-color: #f8f8f8;
     text-align: left;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: keep-all;
+    vertical-align: top;
+    padding-top: 18px;
+    padding-bottom: 18px;
 }
 
 .com_table tbody td {
@@ -4071,14 +4123,14 @@ button {
     min-height: 240px;
 }
 
-.sinsen_card {
+.info_card {
     max-width: 940px;
     padding: 32px;
     background-color: #f8f8f8;
     border-radius: 12px;
 }
 
-.sinsen_card strong{
+.info_card strong{
     margin-bottom:8px;
     font-weight: 700;
     font-size: 2rem;
@@ -4087,7 +4139,7 @@ button {
     display: block;
 }
 @media (max-width: 768px) {
-    .sinsen_card strong{
+    .info_card strong{
         font-size: 18px;
         line-height: 150%;
         letter-spacing: 0%;
@@ -4099,18 +4151,18 @@ button {
         min-height: 227px;
     }
 }
-.sinsen_card span{
+.info_card span{
 font-size: 1.8rem;
 line-height: 1.4;
 }
 @media (max-width: 768px) {
-    .sinsen_card span {
+    .info_card span {
     font-size: 1.4rem; 
     letter-spacing: -0.01em;
 
     }
 }
-.sinsen_card > p {
+.info_card > p {
     margin-bottom: 32px;
     color: #67676f;
     font-size: 1.4rem;
@@ -4120,7 +4172,7 @@ line-height: 1.4;
 }
 
 @media (max-width: 768px) {
-    .sinsen_card > p {
+    .info_card > p {
      margin-bottom:12px;
     }
 }
@@ -4174,6 +4226,20 @@ line-height: 1.4;
 
 .sinsen_check_note {
     color: #67676f;
+}
+
+.sinsen_check_subs {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sinsen_check_subs > span {
+    color: #67676f;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
 }
 
 .chicken_panel :deep(.feature_card_item) {
@@ -4434,8 +4500,8 @@ line-height: 1.4;
         padding: 0 32px;
     }
     .charging_service_swiper :deep(.swiper-slide) {
-        width: 110px !important;
-        height: 109px !important;
+        width: 28vw !important;
+        height: 28vw !important;
         flex: none;
     }
 }
@@ -4724,15 +4790,24 @@ line-height: 1.4;
 .list_caution {
     margin: 8px 0 0;
     padding: 0;
-    
 }
 
 .list_caution > li {
-    color: #67676f;
+    color: #161616;
     font-size: 1.8rem;
     line-height: 1.4;
     letter-spacing: -0.01em;
+    color:#67676F;
 }
+
+@media (max-width: 768px) {    
+    .list_caution > li {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+}
+
 
 /* ── 상생협력 운영지원제도 카드 그리드 ── */
 .winwin_item_list {
@@ -4920,9 +4995,15 @@ line-height: 1.4;
 .note_sub,
 .brand_panel_title .list_dotted > li > p.note_sub {
     color: #f95823;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+    .brand_panel_title .list_dotted > li > p {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+
+    }
 }
 /* ── 택배&픽업 — 이용요금 테이블 ── */
 .price_table_note {
@@ -4935,12 +5016,7 @@ line-height: 1.4;
 
 
 /* ── 택배&픽업 — 이용요금 ── */
-.delivery_price_box {
-    max-width: 940px;
-    padding: 32px;
-    background-color: #f8f8f8;
-    border-radius: 12px;
-}
+/* .delivery_price_box 기본 박스 스타일은 .info_card로 통합 */
 
 .delivery_price_list {
     margin: 0;
@@ -5005,9 +5081,11 @@ line-height: 1.4;
 }
 
 @media (max-width: 768px) {
-    .sec_unpaid_advantage :deep(.feature_card_item),
+    .sec_unpaid_advantage :deep(.feature_card_item) {
+        min-height: 244px;
+    }
     .sec_mall_payment_advantage :deep(.feature_card_item) {
-        min-height: 0;
+        min-height: 244px;
     }
 }
 
@@ -5075,12 +5153,41 @@ line-height: 1.4;
 }
 
 @media (max-width: 768px) {
-    .mall_site_list > li {
-        flex: 1 1 calc((100% - 16px) / 2);
+    /* 모바일: Swiper 슬라이드 */
+    .mall_site_swiper {
+        overflow: visible;
     }
 
-    .mall_site_thumb {
-        height: 140px;
+
+    .mall_site_swiper :deep(.swiper-slide) {
+        width: 29.5vw;
+    }
+
+    .mall_site_swiper :deep(.swiper-slide:nth-child(1)) .mall_site_thumb > img { width: 60px; }
+    .mall_site_swiper :deep(.swiper-slide:nth-child(2)) .mall_site_thumb > img { width: 56px; }
+    .mall_site_swiper :deep(.swiper-slide:nth-child(3)) .mall_site_thumb > img { width: 62px; }
+    .mall_site_swiper :deep(.swiper-slide:nth-child(4)) .mall_site_thumb > img { width: 26px; }
+    .mall_site_swiper :deep(.swiper-slide:nth-child(5)) .mall_site_thumb > img { width: 82px; }
+    .mall_site_swiper :deep(.swiper-slide:nth-child(6)) .mall_site_thumb > img { width: 26px; }
+
+    .mall_site_figure {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .mall_site_figure > figcaption {
+        color: #67676f;
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+        text-align: center;
+        white-space: pre-line;
+    }
+
+    .mall_site_swiper .mall_site_thumb {
+        height: 104px;
     }
 }
 
@@ -5125,7 +5232,7 @@ line-height: 1.4;
     flex: 1;
 }
 
-.usim_benefit_body > h3 {
+.usim_benefit_body > h4 {
     margin-bottom: 24px;
     color: #161616;
     font-size: 2.4rem;
@@ -5183,6 +5290,7 @@ line-height: 1.4;
 
     .usim_benefit_cards {
         flex-direction: column;
+        gap:40px;
     }
 
     .usim_benefit_img {
@@ -5190,15 +5298,22 @@ line-height: 1.4;
     }
 
     .usim_benefit_body {
-        padding: 24px 20px;
+        padding: 24px 0;
     }
 
-    .usim_benefit_body > h3 {
-        font-size: 2rem;
+    .usim_benefit_body > h4 {
+        margin-bottom:8px;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0;
+
     }
 
     .usim_benefit_list > li > span:last-child {
         font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: 0;
     }
 }
 
@@ -5209,7 +5324,7 @@ line-height: 1.4;
 }
 
 .usim_phone_list dt {
-    padding: 20px 0 6px;
+    margin-bottom:6px;
     color: #161616;
     font-size: 1.8rem;
     font-weight: 700;
@@ -5217,23 +5332,31 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
+
+
 .usim_phone_list dd {
-    margin: 0;
-    padding: 0 0 20px;
+    margin-bottom: 32px;
     color: #67676f;
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 1.4;
     letter-spacing: 0;
 }
-
+   
 @media (max-width: 768px) {
     .usim_phone_list dt {
-        font-size: 1.6rem;
+        margin-bottom:8px;
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0;
+        
     }
 
     .usim_phone_list dd {
-        font-size: 1.5rem;
+        margin-bottom:12px;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: 0;
     }
 }
 
@@ -5635,6 +5758,80 @@ line-height: 1.4;
         font-size: 1.4rem;
     }
 
+    /* 브랜드 콘텐츠 수직 간격 축소 */
+    .brand_content {
+        padding-bottom: 120px;
+    }
+    .brand_panel {
+        padding-bottom: 80px;
+    }
+    .brand_panel section {
+        padding-bottom: 80px;
+    }
+
+    /* 탭 아이콘 크기 축소 */
+    .service_tab_item {
+        flex: 0 0 max(120px, calc(100% / 8));
+        padding: 20px 0;
+        gap: 12px;
+    }
+    .service_tab_icon {
+        width: 40px;
+        height: 40px;
+    }
+    .service_tab_label {
+        font-size: 1.4rem;
+    }
+
+    /* 팝카드 LNB 폭 축소 */
+    .pop_lnb {
+        width: 160px;
+    }
+    .pop_lnb > ul > li > button {
+        font-size: 1.6rem;
+        min-height: 52px;
+    }
+
+    /* 차별화 상품 그리드 */
+    .diff_card_grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* 팝카드 섹션 간격 축소 */
+    /* .pop_sec_acc :deep(.acc_item) {
+        padding-bottom: 80px;
+    } */
+
+    /* usage_header 간격 */
+    .usage_header {
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+    .usage_select_box {
+        width: 160px;
+    }
+}
+
+/* ── 태블릿 전용 (769px ~ 1024px) ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* 팝 wrap 수직 정렬 및 gap */
+    .pop_wrap {
+        gap: 24px;
+    }
+
+    /* pop_card_swiper 슬라이드 간격 축소 */
+    .pop_card_swiper :deep(.swiper-wrapper) {
+        gap: 16px;
+    }
+
+    /* 기프트 브랜드 슬라이더 버튼 크기 축소 */
+    .gift_brand_nav {
+        width: 40px;
+        height: 40px;
+    }
+    .gift_brand_slider {
+        gap: 12px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -5689,12 +5886,12 @@ line-height: 1.4;
     }
 
     .cafe25_card_swiper .swiper-slide {
-        width: 164px;
+        width: 42vw;
     }
 
     .cafe25_card_slide {
-        width: 164px;
-        height: 164px;
+        width: 42vw;
+        height: 42vw;
         overflow: hidden;
         border-radius: 12px;
     }
@@ -5713,7 +5910,9 @@ line-height: 1.4;
     .cafe25_split > div {
         width: 100%;
     }
-
+    .cafe25_split > img{
+        width: 100%;
+    }
     .brand_panel:first-of-type section:not(:first-of-type) :deep(header) {
         padding-bottom: 40px;
     }
@@ -5728,11 +5927,11 @@ line-height: 1.4;
     }
 
     .img_grid_swiper :deep(.swiper-slide) {
-        width: 327px;
+        width: 84vw;
     }
 
     .img_grid_slide {
-        width: 327px;
+        width: 84vw;
         overflow: hidden;
         border-radius: 12px;
     }
@@ -5814,7 +6013,7 @@ line-height: 1.4;
     }
 
     .pop_card_swiper :deep(.swiper-slide) {
-        width: 220px !important;
+        width: 56vw !important;
         height: auto !important;
         flex: none;
     }
@@ -5822,6 +6021,13 @@ line-height: 1.4;
  
     .logo_list {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gift_brand_card > img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        aspect-ratio: 106 / 165;
     }
 
     .gift_brand_card > figcaption {
