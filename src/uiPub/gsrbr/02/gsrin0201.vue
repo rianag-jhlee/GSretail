@@ -307,15 +307,14 @@ export default {
             selectedFilter: "",
             langData: {
                 ko: {
-                    MainTitle: "기업지배구조",
-                    MainsubTitle: "CORPORATE GOVERNANCE",
+                    MainTitle: "경영성과",
+                    MainsubTitle: "Business Performance",
                     MainDesc: [
-                        "GS리테일은<br/> 기업지배구조헌장에 의거, <br/>건전한 지배구조를 <br/>확립하고 있습니다",
+                        "투명한 GS리테일 경영성과 입니다.",
                         "GS리테일은<br/> 투명한 경영 문화 정착을 위해,<br/>이사회 중심 경영을<br/> 실천하고 있습니다.",
-                        "GS리테일은<br/> 이사회 운영 개선 및 지배구조 신뢰성 제고를 위하여<br/>2021년 12월 개최된 정기이사회에서<br/> 이사회 평가제도를 도입하였습니다.",
-                        "GS리테일은<br/> 지속가능한 경영을 위해,<br/> 지배구조건정성을 <br/>지속 개선해 나아가겠습니다."
+                        "투명한 GS리테일 경영성과 입니다.",
                     ],
-                    Tabs1: [{ item: "지배구조헌장" }, { item: "이사회 및 위원회 구성" }, { item: "이사회 평가" }, { item: "지배구조 모범규준과의 차이" }],
+                    Tabs1: [{ item: "재무현황" }, { item: "배당 정보" }, { item: "실적자료 등" }],
                     
                     // [Tab 1] 지배구조헌장 전체 데이터 (KO)
                     CharterTitle: "㈜GS리테일 기업지배구조헌장", 
@@ -638,7 +637,7 @@ export default {
 /* gsrin0101 전용 스타일 */
 .main-container {width: 100%; position: relative; display: block;}
 .section-investor {width: 100%; position: relative; display: block;}
-.title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0101_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
+.title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0201_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title {color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; display: block;}
 .visual-sub {margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center;}
 .cont_inner {width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom:200px;}

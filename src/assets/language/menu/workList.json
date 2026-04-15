@@ -156,8 +156,8 @@
         "link": "/gsrbr0203",
         "startDate": "",
         "endDate": "",
-        "status": "ing",
-        "note": "tab"
+        "status": "com",
+        "note": ""
     },
     {
         "depth1": "", "depth2": "", "depth3": "입지제안", "depth4": "", "depth5": "", "depth6": "",
@@ -166,8 +166,8 @@
         "link": "/gsrbr0204",
         "startDate": "",
         "endDate": "",
-        "status": "ing",
-        "note": "tab"
+        "status": "com",
+        "note": ""
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "상담신청", "depth5": "", "depth6": "",
@@ -176,8 +176,8 @@
         "link": "/gsrbr020401",
         "startDate": "",
         "endDate": "",
-        "status": "ing",
-        "note": "tab"
+        "status": "com",
+        "note": ""
     },
     {
         "depth1": "", "depth2": "개발/임대사업", "depth3": "지하철", "depth4": "", "depth5": "", "depth6": "",
@@ -231,7 +231,7 @@
     },
     {
         "depth1": "INVESTORS", "depth2": "기업지배구조", "depth3": "지배구조헌장", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "tab",
         "path": "gsrbr/01/gsrin0101",
         "link": "/gsrin0101",
         "startDate": "26-04-07",
@@ -242,7 +242,7 @@
     ,
     {
         "depth1": "", "depth2": "", "depth3": "이사회 및 위원회 구성", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "tab",
         "path": "gsrbr/01/gsrin0102",
         "link": "",
         "startDate": "",
@@ -252,23 +252,123 @@
     },
     {
         "depth1": "", "depth2": "", "depth3": "이사회 평가", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "tab",
         "path": "gsrbr/01/gsrin0103",
         "link": "",
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": "com",
         "note": "gsrin0101 포함됨 "
     },
     {
         "depth1": "", "depth2": "", "depth3": "지배구조 모범규준과의 차이", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "tab",
         "path": "gsrbr/01/gsrin0104",
         "link": "",
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": "com",
         "note": "gsrin0101 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "경영성과", "depth3": "재무현황", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/02/gsrin0201",
+        "link": "/gsrin0201",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": "gsrin0201 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "배당 정보", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/02/gsrin0202",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": "gsrin0201 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "실적자료 등", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/02/gsrin0203",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": "gsrin0201 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "공시정보", "depth3": "공고", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/03/gsrin0301",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": "gsrin0301 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "사업/감사보고서", "depth4": "분기보고서", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/01/gsrin030201",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": "gsrin0301 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "사업보고서", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/01/gsrin030202",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": "gsrin0301 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "감사보고서", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/01/gsrin030203",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": "gsrin0301 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "주주총회 공시", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrbr/03/gsrin0303",
+        "link": "/gsrin0303",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": " gsrin0303"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "주주보호 정책 및 관련 제도 정보", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr/03/ggsrin030301",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": "gsrin0303 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "IR자료실", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrbr/04/gsrin04",
+        "link": "/gsrin04",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": " "
     }
 
 
