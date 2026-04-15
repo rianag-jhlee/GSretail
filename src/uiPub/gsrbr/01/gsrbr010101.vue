@@ -115,7 +115,7 @@
             :model-value="depth1ActiveIdx"
             tab-class="type_01"
             :tab-items="depth1Tabs"
-            :tab-slide="false"
+            :tab-slide="true"
             @change="onDepth1Change"
         />
         <Tabs
@@ -123,21 +123,21 @@
             v-model="activeTab"
             tab-class="type_02"
             :tab-items="depth2Tabs"
-            :tab-slide="false"
+            :tab-slide="true"
         />
         <Tabs
             v-if="depth1ActiveIdx === 2"
             v-model="storeActiveTab"
             tab-class="type_02"
             :tab-items="storeTabs"
-            :tab-slide="false"
+            :tab-slide="true"
         />
         <Tabs
             v-if="depth1ActiveIdx === 3"
             v-model="winwinActiveTab"
             tab-class="type_02"
             :tab-items="winwinTabs"
-            :tab-slide="false"
+            :tab-slide="true"
         />
 
         <!-- 탭 0: 차별화 상품 -->
@@ -707,7 +707,7 @@
                         </div>
                     </section>
 
-                    <section>
+                    <section class="sec_gift_brand">
                         <SectionHeader :title="tab.brandTitle" />
                         <div class="gift_brand_slider">
                             <button type="button" class="gift_brand_nav gift_brand_prev" aria-label="이전">
@@ -1258,21 +1258,23 @@
         <!-- 상생협력: 참여제도 -->
         <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 1" class="brand_panel">
             <PanelHeader :hero="winwin.tabs[1].hero" :hero-alt="winwin.tabs[1].heroAlt" :title="winwin.tabs[1].title" :desc="winwin.tabs[1].desc" />
-            <ul v-if="winwin.tabs[1].items && winwin.tabs[1].items.length" class="winwin_item_list">
-                <li v-for="(item, ii) in winwin.tabs[1].items" :key="ii" class="winwin_item">
-                    <article>
-                        <div class="winwin_item_content">
-                            <div class="winwin_item_title">
-                                <span class="winwin_item_num">{{ item.num }}</span>
-                                <strong>{{ item.title }}</strong>
+            <section>
+                <ul v-if="winwin.tabs[1].items && winwin.tabs[1].items.length" class="winwin_item_list">
+                    <li v-for="(item, ii) in winwin.tabs[1].items" :key="ii" class="winwin_item">
+                        <article>
+                            <div class="winwin_item_content">
+                                <div class="winwin_item_title">
+                                    <span class="winwin_item_num">{{ item.num }}</span>
+                                    <strong>{{ item.title }}</strong>
+                                </div>
+                                <div class="winwin_item_body">
+                                    <p v-if="item.desc" class="winwin_item_desc" v-html="item.desc"></p>
+                                </div>
                             </div>
-                            <div class="winwin_item_body">
-                                <p v-if="item.desc" class="winwin_item_desc" v-html="item.desc"></p>
-                            </div>
-                        </div>
-                    </article>
-                </li>
-            </ul>
+                        </article>
+                    </li>
+                </ul>
+            </section>
         </div>
 
         <!-- depth1 = 4: 밀박스/스낵바 -->
@@ -1289,7 +1291,10 @@
                             <img v-if="item.img" :src="item.img" :alt="item.name" />
                         </figure>
                         <div class="imgcard_body">
-                            <h4>{{ item.name }}</h4>
+                            <h4>
+                                {{ item.name }}
+                                <a v-if="item.link" :href="item.link" target="_blank" class="imgcard_link" aria-label="링크 바로가기"></a>
+                            </h4>
                             <p v-if="item.desc" class="imgcard_desc" v-html="item.desc"></p>
                         </div>
                         <div v-if="sec.advantages" class="info_card">
@@ -2551,6 +2556,9 @@ const langData = {
                     {
                         label: "장기운영점 및\n우수점포 혜택",
                         title: "장기운영점 및 우수점포 혜택",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "10년차 장기운영 지원 혜택", desc: "10주년 운영 경영주님 예우",bullets: ["기념패", "건강검진"] },
                             { num: "02", title: "20년차 장기운영 지원 혜택", desc: "20’s Clubf 가입", bullets: ["기념패", "여행상품권", "건강검진"] },
@@ -2561,6 +2569,9 @@ const langData = {
                     {
                         label: "점포\n소원 지원",
                         title: "점포 소원 지원",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "해피콜 센터 운영(24H)", desc: "24시간 소통채널 운영" , bullets: ["시설", "전산", "건의사항", "기타문의"]},
                             { num: "02", title: "무료 법률 상담 서비스", desc: "변호사 무료 법률 자문 상담", bullets: ["민사 / 형사", "가사 / 행정"] },
@@ -2568,8 +2579,11 @@ const langData = {
                         ],
                     },
                     {
-                        label: "(경영주/스토어매니저)\n역량 레벨업 지원",
-                        title: "(경영주/스토어매니저) 역량 레벨업 지원",
+                        label: "(경영주/스토어매니저)역량 레벨업 지원",
+                        title: "(경영주/스토어매니저)<br class=\"m_br\" />역량 레벨업 지원",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "GS25 챗봇조이", desc: "GS25 근무 지원을 위한 카카오톡 챗봇 서비스" , bullets: ["365일 24시간 응답", "재고 / 물류 조회", "점포 운영 매뉴얼", "모바일 해피콜 등록"], link: "https://pf.kakao.com/_xmTxexcb?from=qr" },
                             { num: "02", title: "모바일 점포경영", desc: "경영주와 스토어매니저 간 점포 운영 업무에 대한 소통 지원 APP", bullets: ["경영주/스토어매니저 전용 앱", "서비스 체크타임", "소비기한 관리","오늘의 업무 관리", "공지 전달"] },
@@ -2581,7 +2595,10 @@ const langData = {
                     },
                     {
                         label: "사회공헌\n지원",
-                        title: "사회공헌 지원",
+                        title: "사회공헌 지원", 
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "상생나눔 플랫폼 운영", desc: "사회적 약자를 위한 사회공헌형 점포 운영", bullets: ["내일스토어", "시니어스토어", "늘봄스토어"] },
                             { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
@@ -2592,6 +2609,9 @@ const langData = {
                     {
                         label: "경영주\n복지 혜택",
                         title: "경영주 복지 혜택",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "경조사 지원", desc: "경조금 및 용품 지원", bullets:["경조금 지급", "점포 운영 지원금 지급","장례 용품 지급", "출산 용품 지급"] },
                             { num: "02", title: "명절 및 경조사 자율휴무", desc: "자율 휴무 진행", bullets: ["명절 휴점 및 단축 영업","경조사 휴점 및 단축 영업"] },
@@ -2656,6 +2676,7 @@ const langData = {
                         img: "",
                         name: "밀박스25",
                         desc: "GS25에서 제공하는 기업/단체 대상 간편식 정기 제공 서비스 입니다.<br class=\"p_br\" />주식부터 디저트, 음료까지 매일 새로운 구성으로 운영 됩니다.<br class=\"p_br\" />HACCP 인증, 개별 포장으로 위생적이고 맛있는 한끼를 제공합니다.",
+                        link: "#",
                     },
                     {
                         img: "",
@@ -4835,11 +4856,11 @@ button {
 }
 
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .pop_panel :deep(.brand_panel_title) {
         padding-bottom: 24px;
     }
-}
+} */
 
 .pop_lnb {
     width: 240px;
@@ -4981,6 +5002,16 @@ button {
     border-radius: 4px;
     flex-shrink: 0;
     display: inline-block;
+}
+
+.imgcard_link {
+    width: 20px;
+    height: 20px;
+    background-color: #d0d0d8;
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
 }
 
 .winwin_item_body > p {
@@ -5619,7 +5650,7 @@ button {
 }
 
 /* ── 기프트카드 대표 브랜드 슬라이더 ── */
-.gift_brand_swiper :deep(.swiper-wrapper) {
+/* .gift_brand_swiper :deep(.swiper-wrapper) {
     padding: 24px 0;
 }
 
@@ -5627,7 +5658,7 @@ button {
     .gift_brand_swiper :deep(.swiper-wrapper) {
         padding: 0 0 24px;
     }
-}
+} */
 
 .gift_brand_slider {
     position: relative;
@@ -5637,12 +5668,24 @@ button {
     gap: 16px;
 }
 
+
+
+@media (max-width: 768px) {
+    .brand_panel section.sec_gift_brand {
+    padding-left: 0;
+    padding-right:0;
+    }
+    .brand_panel section.sec_gift_brand :deep(header) {
+        padding: 0 20px;
+    }
+}
+
 /* 모바일: 3장 뷰 너비 */
 .gift_brand_swiper {
     width: 100%;
-    max-width: calc(106px * 3 + 14px * 2);
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0 20px;
+    /* margin-left: auto;
+    margin-right: auto; */
     overflow: hidden;
 }
 
@@ -5851,7 +5894,7 @@ button {
 
 @media (max-width: 768px) {
     .brand_content {
-        padding: 24px 0 60px;
+        padding: 48px 0 60px;
         overflow-x: clip;
     }
 
