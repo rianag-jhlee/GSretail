@@ -824,16 +824,16 @@
                     </section>
                     <section>
                         <SectionHeader :title="tab.benefitTitle" />
-                        <ul class="usim_benefit_cards">
-                            <li v-for="(card, ci) in tab.benefitCards" :key="ci" class="usim_benefit_card">
-                                <figure class="usim_benefit_img">
+                        <ul class="imgcard_list">
+                            <li v-for="(card, ci) in tab.benefitCards" :key="ci" class="imgcard_item">
+                                <figure class="imgcard_img">
                                     <img v-if="card.img" :src="card.img" :alt="card.imgAlt" />
                                 </figure>
-                                <div class="usim_benefit_body">
+                                <div class="imgcard_body">
                                     <h4>{{ card.title }}</h4>
-                                    <ul class="usim_benefit_list">
+                                    <ul class="imgcard_sublist">
                                         <li v-for="(item, ii) in card.items" :key="ii">
-                                            <span class="usim_benefit_icon"></span>
+                                            <span class="imgcard_icon"></span>
                                             <span>{{ item }}</span>
                                         </li>
                                     </ul>
@@ -1276,13 +1276,35 @@
         </div>
 
         <!-- depth1 = 4: 밀박스/스낵바 -->
-        <div v-if="depth1ActiveIdx === 4" class="brand_panel">
+        <div v-if="depth1ActiveIdx === 4" class="brand_panel milbox_panel">
             <PanelHeader :hero="milbox.hero" :hero-alt="milbox.heroAlt" :title="milbox.title" />
             <section v-for="(sec, si) in milbox.sections" :key="si">
                 <SectionHeader :title="sec.title" :desc="sec.desc">
                     <p v-if="sec.note" class="sec_note">{{ sec.note }}</p>
                 </SectionHeader>
-                <FeatureCards v-if="sec.items && sec.items.length" :items="sec.items" type="icon" class="milbox_feature" />
+                <FeatureCards v-if="sec.type === 'feature' && sec.items && sec.items.length" :items="sec.items" type="icon" class="milbox_feature" />
+                <ul v-if="sec.type === 'imgcard' && sec.items && sec.items.length" class="imgcard_list">
+                    <li v-for="(item, ii) in sec.items" :key="ii" class="imgcard_item">
+                        <figure class="imgcard_img">
+                            <img v-if="item.img" :src="item.img" :alt="item.name" />
+                        </figure>
+                        <div class="imgcard_body">
+                            <h4>{{ item.name }}</h4>
+                            <p v-if="item.desc" class="imgcard_desc" v-html="item.desc"></p>
+                        </div>
+                        <div v-if="sec.advantages" class="info_card">
+                            <strong v-if="sec.advantages.title" class="info_card_title">{{ sec.advantages.title }}</strong>
+                            <ul class="info_list">
+                                <li v-for="(adv, ai) in sec.advantages.items" :key="ai">
+                                    <div>
+                                        <span>{{ adv.text }}</span>
+                                        <span v-if="adv.note" class="info_check_note">{{ adv.note }}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </section>
         </div>
 
@@ -2620,6 +2642,7 @@ const langData = {
         title: "밀박스/스낵바",
         sections: [
             {
+                type: "feature",
                 title: "GS25 기업/단체 대상 정기 배송 서비스란?",
                 desc: "대한민국 대표 편의점 GS25가 가진 차별화 경쟁력을 기반으로 한 기업·단체 대상 조식/간식 정기 배송 서비스입니다.<br />사내 식당이 없거나 간식 복지 도입을 고민 중이라면, 아래 서비스를 확인해보세요.",
                 items: [
@@ -2627,6 +2650,30 @@ const langData = {
                     { title: "합리적인 가격" },
                     { title: "약 1,200개 기업 이용중" },
                 ],
+            },
+            {
+                type: "imgcard",
+                title: "서비스 소개",
+                items: [
+                    {
+                        img: "",
+                        name: "밀박스25",
+                        desc: "GS25에서 제공하는 기업/단체 대상 간편식 정기 제공 서비스 입니다.<br class=\"p_br\" />주식부터 디저트, 음료까지 매일 새로운 구성으로 운영 됩니다.<br class=\"p_br\" />HACCP 인증, 개별 포장으로 위생적이고 맛있는 한끼를 제공합니다.",
+                    },
+                    {
+                        img: "",
+                        name: "스낵바",
+                        desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다. 사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.",
+                    },
+                ],
+                advantages: {
+                    title: "이런 분들에게 추천 드립니다.",
+                    items: [
+                        { text: "정기적 조식/간식 서비스가 필요할 때" },
+                        { text: "합리적 가격의 복지 서비스가 필요할 때" },
+                        { text: "급식 인프라가 없어 정기적인 간편식 공급이 필요할 때" },
+                    ],
+                },
             },
         ],
     },
@@ -5074,7 +5121,7 @@ line-height: 1.4;
 
 @media (max-width: 768px) {
     .milbox_feature :deep(.feature_card_item) {
-        min-height: 0;
+        min-height: 163px;
         max-width: 100%;
     }
 }
@@ -5273,12 +5320,12 @@ line-height: 1.4;
 }
 
 /* ── 유심 요금제 혜택 ── */
-.usim_benefit_cards {
+.imgcard_list {
     display: flex;
     gap: 20px;
 }
 
-.usim_benefit_card {
+.imgcard_item {
     overflow: hidden;
     border-radius: 12px;
     display: flex;
@@ -5286,7 +5333,7 @@ line-height: 1.4;
     flex-direction: column;
 }
 
-.usim_benefit_img {
+.imgcard_img {
     width: 100%;
     height: 340px;
     margin: 0;
@@ -5294,19 +5341,19 @@ line-height: 1.4;
     overflow: hidden;
 }
 
-.usim_benefit_img > img {
+.imgcard_img > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.usim_benefit_body {
+.imgcard_body {
     padding: 32px 0;
     flex: 1;
 }
 
-.usim_benefit_body > h4 {
-    margin-bottom: 24px;
+.imgcard_body > h4 {
+    margin-bottom: 16px;
     color: #161616;
     font-size: 2.4rem;
     font-weight: 700;
@@ -5314,7 +5361,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-.usim_benefit_body > p {
+.imgcard_body > p {
     color: #67676f;
     font-size: 1.6rem;
     font-weight: 400;
@@ -5323,19 +5370,19 @@ line-height: 1.4;
     white-space: pre-line;
 }
 
-.usim_benefit_list {
+.imgcard_sublist {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.usim_benefit_list > li {
+.imgcard_sublist > li {
     display: flex;
     gap: 8px;
     align-items: center;
 }
 
-.usim_benefit_icon {
+.imgcard_icon {
     width: 16px;
     height: 16px;
     background-color: #0059fe;
@@ -5343,7 +5390,7 @@ line-height: 1.4;
     flex-shrink: 0;
 }
 
-.usim_benefit_list > li > span:last-child {
+.imgcard_sublist > li > span:last-child {
     color: #161616;
     font-size: 1.8rem;
     font-weight: 400;
@@ -5361,20 +5408,20 @@ line-height: 1.4;
         width: 100%;
     }
 
-    .usim_benefit_cards {
+    .imgcard_list {
         flex-direction: column;
         gap:40px;
     }
 
-    .usim_benefit_img {
+    .imgcard_img {
         height: 220px;
     }
 
-    .usim_benefit_body {
+    .imgcard_body {
         padding: 24px 0;
     }
 
-    .usim_benefit_body > h4 {
+    .imgcard_body > h4 {
         margin-bottom:8px;
         font-weight: 700;
         font-size: 1.8rem;
@@ -5383,7 +5430,7 @@ line-height: 1.4;
 
     }
 
-    .usim_benefit_list > li > span:last-child {
+    .imgcard_sublist > li > span:last-child {
         font-size: 1.6rem;
         line-height: 1.5;
         letter-spacing: 0;
@@ -6328,5 +6375,16 @@ line-height: 1.4;
         letter-spacing: -0.01em;
         border-radius: 8px;
     }
+
 }
+.milbox_panel .imgcard_body{
+    padding: 32px 0 24px;
+}
+@media (max-width: 768px) {
+    .milbox_panel .imgcard_body {
+        padding:24px 0;
+    }
+
+}
+
 </style>
