@@ -235,8 +235,8 @@
         "path": "gsrbr/01/gsrin0101",
         "link": "/gsrin0101",
         "startDate": "26-04-07",
-        "endDate": "",
-        "status": "ing",
+        "endDate": "26-04-14",
+        "status": "com",
         "note": "gsrin0101 ~ gsrin0104 포함됨 "
     }
     ,
@@ -275,9 +275,9 @@
         "type": "tab",
         "path": "gsrbr/02/gsrin0201",
         "link": "/gsrin0201",
-        "startDate": "",
-        "endDate": "",
-        "status": "ing",
+        "startDate": "26-04-14",
+        "endDate": "26-04-15",
+        "status": "com",
         "note": "gsrin0201 포함됨 "
     },
     {
@@ -287,7 +287,7 @@
         "link": "",
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": "com",
         "note": "gsrin0201 포함됨 "
     },
     {
@@ -297,15 +297,15 @@
         "link": "",
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": "com",
         "note": "gsrin0201 포함됨 "
     },
     {
         "depth1": "", "depth2": "공시정보", "depth3": "공고", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
         "path": "gsrbr/03/gsrin0301",
-        "link": "",
-        "startDate": "",
+        "link": "/gsrin0301",
+        "startDate": "26-04-15",
         "endDate": "",
         "status": "ing",
         "note": "gsrin0301 포함됨 "
@@ -315,9 +315,9 @@
         "type": "tab",
         "path": "gsrbr/01/gsrin030201",
         "link": "",
-        "startDate": "",
+        "startDate": "26-04-15",
         "endDate": "",
-        "status": "",
+        "status": "ing",
         "note": "gsrin0301 포함됨 "
     },
     {
@@ -325,19 +325,20 @@
         "type": "tab",
         "path": "gsrbr/01/gsrin030202",
         "link": "",
-        "startDate": "",
+        "startDate": "26-04-15",
         "endDate": "",
-        "status": "",
+        "status": "ing",
         "note": "gsrin0301 포함됨 "
     },
+    
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "감사보고서", "depth5": "", "depth6": "",
         "type": "tab",
         "path": "gsrbr/01/gsrin030203",
         "link": "",
-        "startDate": "",
+        "startDate": "26-04-15",
         "endDate": "",
-        "status": "",
+        "status": "ing",
         "note": "gsrin0301 포함됨 "
     },
     {
@@ -345,29 +346,29 @@
         "type": "tab",
         "path": "gsrbr/03/gsrin0303",
         "link": "/gsrin0303",
-        "startDate": "",
+        "startDate": "26-04-15",
         "endDate": "",
-        "status": "",
-        "note": " gsrin0303"
+        "status": "ing",
+        "note": " gsrin0301 포함됨"
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "주주보호 정책 및 관련 제도 정보", "depth5": "", "depth6": "",
         "type": "Pop-up",
         "path": "gsrbr/03/ggsrin030301",
         "link": "",
-        "startDate": "",
+        "startDate": "26-04-15",
         "endDate": "",
-        "status": "",
-        "note": "gsrin0303 포함됨 "
+        "status": "ing",
+        "note": "gsrin0301 포함됨 "
     },
     {
         "depth1": "", "depth2": "IR자료실", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
         "path": "gsrbr/04/gsrin04",
         "link": "/gsrin04",
-        "startDate": "",
-        "endDate": "",
-        "status": "ing",
+        "startDate": "26-04-14",
+        "endDate": "26-04-15",
+        "status": "com",
         "note": " "
     }
 

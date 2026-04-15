@@ -38,15 +38,15 @@
                         <div class="form_row">
                             <label class="row_label">{{ t.LabelName }}<span class="ess">*</span></label>
                             <div class="row_content">
-                                <Inputs type="search" v-model="form.name" class="w205" />
+                                <Inputs type="text" v-model="form.name" class="w205" />
                             </div>
                         </div>
                         <div class="form_row">
                             <label class="row_label">{{ t.LabelEmail }}<span class="ess">*</span></label>
                             <div class="row_content email_row">
-                                <Inputs type="search" v-model="form.emailId" />
+                                <Inputs type="text" v-model="form.emailId" />
                                 <span class="unit">@</span>
-                                <Inputs type="search" v-model="form.emailDomain" />
+                                <Inputs type="text" v-model="form.emailDomain" />
                                 <SelectBox :options="t.EmailOptions" v-model="form.emailDomainSelect" class="w180" />
                             </div>
                         </div>
@@ -55,9 +55,9 @@
                             <div class="row_content phone_row">
                                 <SelectBox :options="t.PhoneOptions" v-model="form.phone1" class="w134" />
                                 <span class="unit">-</span>
-                                <Inputs type="search" v-model="form.phone2" class="w134" />
+                                <Inputs type="text" v-model="form.phone2" class="w134" />
                                 <span class="unit">-</span>
-                                <Inputs type="search" v-model="form.phone3" class="w134" />
+                                <Inputs type="text" v-model="form.phone3" class="w134" />
                             </div>
                         </div>
                     </div>
@@ -73,12 +73,12 @@
                             <label class="row_label">{{ t.LabelAddress }}<span class="ess">*</span></label>
                             <div class="row_content address_row">
                                 <div class="zip_code">
-                                    <Inputs type="search" v-model="form.zipCode" readonly />
+                                    <Inputs type="text" v-model="form.zipCode" readonly />
                                     <Buttons type="button" class="btn_big border" @click="searchPost">{{ t.BtnZip }}</Buttons>
                                 </div>
                                 <div class="address_detail_group">
-                                    <Inputs type="search" v-model="form.addrBasic" :placeholder="t.PlaceholderAddrBasic" />
-                                    <Inputs type="search" v-model="form.addrDetail" :placeholder="t.PlaceholderAddrDetail" />
+                                    <Inputs type="text" v-model="form.addrBasic" :placeholder="t.PlaceholderAddrBasic" :isDisabled="true" />
+                                    <Inputs type="text" v-model="form.addrDetail" :placeholder="t.PlaceholderAddrDetail" :isDisabled="true" />
                                 </div>
                             </div>
                         </div>
@@ -87,12 +87,12 @@
                             <div class="row_content area_row">
                                 <div class="area_item">
                                     <span>계약면적</span>
-                                    <Inputs type="search" v-model="form.areaContract" class="w134" />
+                                    <Inputs type="text" v-model="form.areaContract" class="w134" />
                                     <span class="unit">m²</span>
                                 </div>
                                 <div class="area_item">
                                     <span>전용면적</span>
-                                    <Inputs type="search" v-model="form.areaPrivate" class="w134" />
+                                    <Inputs type="text" v-model="form.areaPrivate" class="w134" />
                                     <span class="unit">m²</span>
                                 </div>
                                 <span class="area_guide">{{ t.AreaGuide }}</span>
@@ -101,19 +101,26 @@
                         <div class="form_row">
                             <label class="row_label">{{ t.LabelStoreName }}</label>
                             <div class="row_content">
-                                <SelectBox :options="t.StoreOptions" v-model="form.storeName" class="w347" />
+                                <Inputs type="text" v-model="form.areaPrivate" class="w347" />
                             </div>
                         </div>
                         <div class="form_row">
                             <label class="row_label">{{ t.LabelFeature }}</label>
                             <div class="row_content w100">
-                                <SelectBox :options="t.FeatureOptions" v-model="form.feature" class="w100"/>
+                                <Textarea
+                                    v-model="body"
+                                    name="inquiry_body"
+                                    placeholder="내용을 입력해 주세요"
+                                    hint="최대 500자까지 입력할 수 있습니다."
+                                    :rows="6"
+                                    :maxlength="500"
+                                />
                             </div>
                         </div>
                         <div class="form_row">
                             <label class="row_label">{{ t.LabelRelation }}</label>
                             <div class="row_content">
-                                <SelectBox :options="t.RelationOptions" v-model="form.relation" :placeholder="t.PlaceholderRelation" class="w347" />
+                                <Inputs type="text" v-model="form.areaPrivate" class="w347" />
                             </div>
                         </div>
                     </div>
@@ -133,13 +140,15 @@ import modal from "@/assets/js/modal";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import Buttons from "@/components/Buttons.vue";
+import Textarea from "@/components/Textarea.vue";
 
 export default {
     name: "GsSiteProposalDetail",
     components: {
         Inputs,
         SelectBox,
-        Buttons
+        Buttons,
+        Textarea,
     },
     data() {
         return {

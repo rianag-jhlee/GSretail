@@ -9,281 +9,296 @@
             <div class="cont_inner">
                 <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
                 
-                <p class="title-sub-text" v-html="t.MainDesc[CTabIdx]"></p>
+                <p :class="['title-sub-text', { 'is_dividend': CTabIdx === 1 }]" v-html="t.MainDesc[CTabIdx]"></p>
 
                 <div class="tab_content_wrap">
-                    <!-- pageid:gsrin0101 -->
-                    <section class="tab_content gsrin0101" v-if="CTabIdx === 0" :aria-label="t.Tabs1[0].item">
-                        <div class="subtit_wrap ac">
-                            <h3 class="section-sub-title">{{ t.CharterTitle }}</h3>
-                            <p class="section-date mt15">{{ t.CharterDate }}</p>
-                        </div>
-
-                        <div class="policy_wrap">
-                            <dl>
-                                <dt>{{ t.PolicyIntroTitle }}</dt>
-                                <dd v-html="t.PolicyIntroDesc"></dd>
-
-                                <template v-for="(section, idx) in t.PolicySections" :key="'section-'+idx">
-                                    <dt>{{ section.title }}</dt>
-                                    <dd>
-                                        <template v-for="(sec, sIdx) in section.content" :key="'content-'+idx+'-'+sIdx">
-                                            <strong class="bullet_title" :class="{mt30: sIdx > 0}">{{ sec.subTitle }}</strong>
-                                            <ul v-if="sec.list && sec.list.length > 0" class="mt15 bullet_01 no_type">
-                                                <li v-for="(li, lIdx) in sec.list" :key="'l-'+idx+'-'+sIdx+'-'+lIdx">{{ li }}</li>
-                                            </ul>
-                                        </template>
-                                    </dd>
-                                </template>
-                            </dl>
-                        </div>
-                    </section>
-                    
-                    <!-- pageid:gsrin0102 -->
-                    <section class="tab_content gsrin0102" v-if="CTabIdx === 1" :aria-label="t.Tabs1[1].item">
-                        <div class="view-2">
-                            <div class="sub-title">
-                                <div class="text-wrapper-3">{{ t.BoardSectionTitle1 }}</div>
-                                <p class="p">{{ t.BoardSectionDesc1 }}</p>
-                            </div>
-
-
-                            <div class="view-3 res-swiper-container">
-                                <swiper
-                                    :slides-per-view="'auto'"
-                                    :space-between="0"
-                                    :breakpoints="{
-                                        768: {
-                                            allowTouchMove: false
-                                        }
-                                    }"
-                                    class="board-swiper"
-                                >
-                                    <swiper-slide v-for="(member, mIdx) in t.BoardMemberList" :key="'board-' + mIdx" class="div-2 res-slide-item">
-                                        <div class="view-4">
-                                            <img class="img" :src="member.img" :alt="member.name" />
-                                        </div>
-                                        <div class="view-4">
-                                            <div class="div-3">
-                                                <div class="text-wrapper-4">{{ member.pos }}</div>
-                                                <div class="text-wrapper-5">{{ member.name }}</div>
-                                            </div>
-                                            <div class="div-4">
-                                                <div class="div-3">
-                                                    <div class="text-wrapper-6">{{ member.term }}</div>
-                                                    <div class="text-wrapper-7">{{ member.firstDate }}</div>
-                                                </div>
-                                                <ul class="view-5 bullet_01 mt10">
-                                                    <li v-for="(career, cIdx) in member.careers" 
-                                                        :key="'career-' + cIdx" 
-                                                        :class="career.class"
-                                                    >
-                                                        {{ career.text }}
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div v-if="mIdx < t.BoardMemberList.length - 1" class="divider pc-only"></div>
-                                    </swiper-slide>
-                                </swiper>
-                            </div>
-                        </div>
-                        <div class="view-2">
-                            <div class="sub-title">
-                                <div class="text-wrapper-3">{{ t.BoardSectionTitleSub }}</div>
-                                <p class="p">{{ t.BoardSectionDescSub }}</p>
-                            </div>
-                            <div class="view-3 res-swiper-container" v-if="t">
-                                <swiper
-                                    :slides-per-view="'auto'"
-                                    :space-between="0"
-                                    :breakpoints="{
-                                        768: {allowTouchMove: false}
-                                    }"
-                                    class="sub-member-swiper"
-                                >
-                                    <swiper-slide v-for="(member, sIdx) in t.SubMemberList" :key="'sub-' + sIdx" class="div-2 res-slide-item">
-                                        <div class="view-4">
-                                            <img class="img" :src="member.img" :alt="member.name" />
-                                        </div>
-                                        <div class="view-4">
-                                            <div class="div-3">
-                                                <div class="frame-4">
-                                                    <div class="text-wrapper-4">{{ member.pos.split(' / ')[0] }}</div>
-                                                    <template v-if="member.pos.includes('/')">
-                                                        <div class="rectangle"></div>
-                                                        <div class="text-wrapper-4">{{ member.pos.split(' / ')[1] }}</div>
-                                                    </template>
-                                                </div>
-                                                <div class="text-wrapper-5">{{ member.name }}</div>
-                                            </div>
-                                            <div class="div-4">
-                                                <div class="div-3">
-                                                    <div class="text-wrapper-6">{{ member.term }}</div>
-                                                    <div class="text-wrapper-7">{{ member.firstDate }}</div>
-                                                </div>
-                                                <ul class="view-5 bullet_01 mt10">
-                                                    <li v-for="(career, cIdx) in member.careers" 
-                                                        :key="'sc-' + cIdx" 
-                                                        :class="career.class"
-                                                    >
-                                                        {{ career.text }}
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div v-if="sIdx < t.SubMemberList.length - 1" class="divider pc-divider"></div>
-                                    </swiper-slide>
-                                </swiper>
-                            </div>
-                        </div>
-                        <div class="view-2">
-                            <div class="sub-title">
-                                <h3 class="text-wrapper-3">{{ t.BoardSectionTitle2 }}</h3>
-                            </div>
-                            <div class="div-4">
-                                <div class="view-6">
-                                    <div v-for="(skill, idx) in t.SkillsList" :key="'skill-' + idx" class="frame-5">
-                                        <div class="frame-6">
-                                            <div class="div-6">
-                                                <div class="text-wrapper-10">{{ skill.type }}</div>
-                                                <div class="text-wrapper-11">{{ skill.name }}</div>
-                                            </div>
-                                            <div class="text-wrapper-12">{{ skill.appointDate }}</div>
-                                        </div>
-                                        <div class="frame-9">
-                                            <div v-for="(tag, tIdx) in skill.tags" :key="'tag-'+tIdx" :class="['TAG', tag.class]">
-                                                <div class="text-wrapper-13" :class="{'text-wrapper-14': tag.class === 'TAG-2', 'text-wrapper-15': tag.class === 'TAG-3', 'text-wrapper-18': tag.class === 'TAG-4'}">
-                                                    {{ tag.text }}
-                                                </div>
-                                            </div>
-                                        </div>
+                    <section class="tab_content gsrin0201" v-if="CTabIdx === 0" :aria-label="t.Tabs1[0].item">
+                        
+                        <div class="performance_charts">
+                            <div class="chart_grid">
+                                <div class="chart_item" v-for="(chart, idx) in t.PerformanceCharts" :key="'chart-'+idx">
+                                    <div class="chart_header">
+                                        <h3 class="chart_title">{{ chart.title }}</h3>
+                                        <span class="unit">{{ chart.unit }}</span>
+                                    </div>
+                                    <div class="chart_img">
+                                        <picture>
+                                            <source :srcset="require(`@/assets/images/dummy/${chart.imgName}_mo.png`)" media="(max-width: 767px)">
+                                            <img :src="require(`@/assets/images/dummy/${chart.imgName}.png`)" :alt="chart.title">
+                                        </picture>
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="view-2">
-                            <div class="sub-title"><div class="text-wrapper-3">{{ t.BoardSectionTitle3 }}</div></div>
-                            <div class="table">
-                                <template v-for="(committee, cIdx) in t.CommitteeTable" :key="'comm-'+cIdx">
-                                    <div class="column">
-                                        <div class="table-cell"><div class="text-wrapper-19">{{ committee.title }}</div></div>
-                                        <div class="view-wrapper">
-                                            <div class="view-7">
-                                                <div class="view-8">
-                                                    <div class="text-wrapper-20">{{ t.ChairLabel }}</div>
-                                                    <div class="text-wrapper-21">{{ committee.chair }}</div>
-                                                </div>
-                                                <div class="view-8">
-                                                    <div class="text-wrapper-20">{{ t.MemberLabel }}</div>
-                                                    <div class="text-wrapper-21">{{ committee.members }}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div v-if="cIdx < t.CommitteeTable.length - 1" class="divider-2"></div>
-                                </template>
-                            </div>
-                            <div class="button-group">
-                                <button v-for="(btn, bIdx) in t.BoardDownloadBtns" :key="'btn-'+bIdx" class="BUTTON" @click="handleDownload(btn.link)">
-                                    <div class="view-9"><div class="text-wrapper-22">{{ btn.text }}</div></div>
-                                    <img class="download" src="/public/images/gsrin0102/download.png" />
-                                </button>
-                            </div>
                         </div>
 
-                    </section>
-
-                    <!-- pageid:gsrin0103 -->
-                    <section class="tab_content gsrin0103" v-if="CTabIdx === 2" :aria-label="t.Tabs1[2].item">
-                        <div class="eval_item_group">
-                            <div class="eval_title_box ac">
-                                <h3 class="section-sub-title">{{ t.EvalSystemTitle }}</h3>
+                        <div class="table_section mt100">
+                            <div class="table_header">
+                                <h3 class="section-sub-title">{{ t.TableTitle1 }}</h3>
+                                <span class="unit">{{ t.UnitMillion }}</span>
                             </div>
-                            <div class="policy_wrap">
-                                <table>
+                            <div class="policy_wrap mt40">
+                                <table class="base_table">
                                     <colgroup>
+                                        <col style="width: 150px;">
                                         <col style="width: 200px;">
                                         <col style="width: auto;">
+                                        <col style="width: auto;">
+                                        <col style="width: auto;">
                                     </colgroup>
-                                    <tbody>
-                                        <tr v-for="(row, rIdx) in t.EvalSystemTable" :key="'system-'+rIdx">
-                                            <th scope="row"><span class="important"><span style="color:#ed3030;">*</span> {{ row.label }}</span></th>
-                                            <td v-html="row.content"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="eval_item_group">
-                            <div class="eval_title_box ac">
-                                <h3 class="section-sub-title">{{ t.EvalResultTitle }}</h3>
-                            </div>
-                            <div class="policy_wrap">
-                                <table>
                                     <thead>
                                         <tr>
-                                            <th>{{ t.EvalResultHeader.col1 }}</th>
-                                            <th>{{ t.EvalResultHeader.col2 }}</th>
+                                            <th scope="col" colspan="2" class="ac">구분</th>
+                                            <th scope="col" class="ac">2023</th>
+                                            <th scope="col" class="ac">2024</th>
+                                            <th scope="col" class="ac">2025</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(res, resIdx) in t.EvalResultData" :key="'res-'+resIdx">
-                                            <td>{{ res.category }}</td>
-                                            <td>{{ res.score }}</td>
+                                        <tr>
+                                            <th rowspan="2" scope="rowgroup" class="ac border_right">자산</th>
+                                            <td class="ac border_right">유동자산</td>
+                                            <td class="ar">{{ t.FSD.Asset.Current[0] }}</td>
+                                            <td class="ar">{{ t.FSD.Asset.Current[1] }}</td>
+                                            <td class="ar">{{ t.FSD.Asset.Current[2] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ac border_right">비유동자산</td>
+                                            <td class="ar">{{ t.FSD.Asset.NonCurrent[0] }}</td>
+                                            <td class="ar">{{ t.FSD.Asset.NonCurrent[1] }}</td>
+                                            <td class="ar">{{ t.FSD.Asset.NonCurrent[2] }}</td>
+                                        </tr>
+                                        <tr class="bg_light bold">
+                                            <td class="ac border_right" colspan="2">자산총계</td>
+                                            <td class="ar fc_red">{{ t.FSD.Asset.Total[0] }}</td>
+                                            <td class="ar fc_red">{{ t.FSD.Asset.Total[1] }}</td>
+                                            <td class="ar fc_red">{{ t.FSD.Asset.Total[2] }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th rowspan="2" scope="rowgroup" class="ac border_right">부채</th>
+                                            <td class="ac border_right">유동부채</td>
+                                            <td class="ar">{{ t.FSD.Debt.Current[0] }}</td>
+                                            <td class="ar">{{ t.FSD.Debt.Current[1] }}</td>
+                                            <td class="ar">{{ t.FSD.Debt.Current[2] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ac border_right">비유동부채</td>
+                                            <td class="ar">{{ t.FSD.Debt.NonCurrent[0] }}</td>
+                                            <td class="ar">{{ t.FSD.Debt.NonCurrent[1] }}</td>
+                                            <td class="ar">{{ t.FSD.Debt.NonCurrent[2] }}</td>
+                                        </tr>
+                                        <tr class="bg_light bold">
+                                            <td class="ac border_right" colspan="2">부채총계</td>
+                                            <td class="ar fc_red">{{ t.FSD.Debt.Total[0] }}</td>
+                                            <td class="ar fc_red">{{ t.FSD.Debt.Total[1] }}</td>
+                                            <td class="ar fc_red">{{ t.FSD.Debt.Total[2] }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th rowspan="2" scope="rowgroup" class="ac border_right">자본</th>
+                                            <td class="ac border_right">자본금</td>
+                                            <td class="ar">{{ t.FSD.Capital.Base[0] }}</td>
+                                            <td class="ar">{{ t.FSD.Capital.Base[1] }}</td>
+                                            <td class="ar">{{ t.FSD.Capital.Base[2] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ac border_right">이익잉여금 등</td>
+                                            <td class="ar">{{ t.FSD.Capital.Profit[0] }}</td>
+                                            <td class="ar">{{ t.FSD.Capital.Profit[1] }}</td>
+                                            <td class="ar">{{ t.FSD.Capital.Profit[2] }}</td>
+                                        </tr>
+                                        <tr class="bg_light bold">
+                                            <td class="ac border_right" colspan="2">자본총계</td>
+                                            <td class="ar fc_red">{{ t.FSD.Capital.Total[0] }}</td>
+                                            <td class="ar fc_red">{{ t.FSD.Capital.Total[1] }}</td>
+                                            <td class="ar fc_red">{{ t.FSD.Capital.Total[2] }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <div class="eval_item_group ">
-                            <div class="sub-title">
-                                <h3 class="text-wrapper-3" style="width:100%;">{{ t.EvalUsageTitle }}</h3>
+                        <div class="table_section mt100">
+                            <div class="table_header">
+                                <h3 class="section-sub-title">{{ t.TableTitle2 }}</h3>
+                                <span class="unit">{{ t.UnitMillion }}</span>
                             </div>
-                            <div class="key-features">
-                                <div v-for="(card, cIdx) in t.EvalUsageCards" :key="'usage-'+cIdx" :class="['card_item', 'card-' + (cIdx + 1)]">
-                                    <div class="title-2">
-                                        <div class="text-wrapper-6">{{ card.num }}</div>
-                                        <p class="element" v-html="card.title"></p>
-                                    </div>
-                                    <div v-if="card.sub" class="body">
-                                        <div class="text-wrapper-7">{{ card.sub }}</div>
-                                    </div>
-                                </div>
+                            <div class="policy_wrap mt40">
+                                <table class="base_table">
+                                    <colgroup>
+                                        <col style="width: 350px;">
+                                        <col style="width: auto;">
+                                        <col style="width: auto;">
+                                        <col style="width: auto;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr class="bold">
+                                            <th scope="col" class="ac">구분</th>
+                                            <th scope="col" class="ac">2023</th>
+                                            <th scope="col" class="ac">2024</th>
+                                            <th scope="col" class="ac">2025</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="bold">
+                                            <th scope="row" class="ac">매출액</th>
+                                            <td class="ar">{{ t.ISD.Sales[0] }}</td>
+                                            <td class="ar">{{ t.ISD.Sales[1] }}</td>
+                                            <td class="ar">{{ t.ISD.Sales[2] }}</td>
+                                        </tr>
+                                        <tr class="bold">
+                                            <th scope="row" class="ac">매출총이익</th>
+                                            <td class="ar">{{ t.ISD.GrossProfit[0] }}</td>
+                                            <td class="ar">{{ t.ISD.GrossProfit[1] }}</td>
+                                            <td class="ar">{{ t.ISD.GrossProfit[2] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="ac">판매비와 관리비 등</th>
+                                            <td class="ar">{{ t.ISD.SGA[0] }}</td>
+                                            <td class="ar">{{ t.ISD.SGA[1] }}</td>
+                                            <td class="ar">{{ t.ISD.SGA[2] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="ac">영업이익</th>
+                                            <td class="ar">{{ t.ISD.OperatingIncome[0] }}</td>
+                                            <td class="ar">{{ t.ISD.OperatingIncome[1] }}</td>
+                                            <td class="ar">{{ t.ISD.OperatingIncome[2] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="ac">기타손익</th>
+                                            <td class="ar">{{ t.ISD.OtherIncome[0] }}</td>
+                                            <td class="ar">{{ t.ISD.OtherIncome[1] }}</td>
+                                            <td class="ar">{{ t.ISD.OtherIncome[2] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="ac">금융손익</th>
+                                            <td class="ar">{{ t.ISD.FinancialIncome[0] }}</td>
+                                            <td class="ar">{{ t.ISD.FinancialIncome[1] }}</td>
+                                            <td class="ar">{{ t.ISD.FinancialIncome[2] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="ac">지분법손익</th>
+                                            <td class="ar">{{ t.ISD.EquityMethod[0] }}</td>
+                                            <td class="ar">{{ t.ISD.EquityMethod[1] }}</td>
+                                            <td class="ar">{{ t.ISD.EquityMethod[2] }}</td>
+                                        </tr>
+                                        <tr class="bold">
+                                            <th scope="row" class="ac">법인세비용 차감전순이익</th>
+                                            <td class="ar">{{ t.ISD.IncomeBeforeTax[0] }}</td>
+                                            <td class="ar">{{ t.ISD.IncomeBeforeTax[1] }}</td>
+                                            <td class="ar">{{ t.ISD.IncomeBeforeTax[2] }}</td>
+                                        </tr>
+                                        <tr class="bg_light bold">
+                                            <td scope="row" class="ac">당기순이익</td>
+                                            <td class="ar fc_red">{{ t.ISD.NetIncome[0] }}</td>
+                                            <td class="ar fc_red">{{ t.ISD.NetIncome[1] }}</td>
+                                            <td class="ar fc_red">{{ t.ISD.NetIncome[2] }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </section>
 
-                    <!-- gsrin0104 -->
-                    <section class="tab_content gsrin0104" v-if="CTabIdx === 3" :aria-label="t.Tabs1[3].item">
-                        <div class="diff_table_wrap ">
-                            <div class="policy_wrap">
-                                <table>
+                    <!-- gsrin0202 -->
+                    <section class="tab_content gsrin0202" v-if="CTabIdx === 1" :aria-label="t.Tabs1[1].item">
+                        <p class="policy_desc" v-html="t.DividendPolicyDesc"></p>
+                        <div class="table_section mt100">
+                            <div class="table_header">
+                                <h3 class="section-sub-title">{{ t.TableTitle3 }}</h3>
+                            </div>
+                            <div class="table_info_group">
+                                <span class="unit">{{ t.Recent5Years }}</span>
+                                <span class="unit ml20">{{ t.UnitMillion }}</span>
+                            </div>
+                            
+                            <div class="policy_wrap mt40">
+                                <table class="base_table">
                                     <colgroup>
-                                        <col style="width: auto;">
                                         <col style="width: 150px;">
-                                        <col style="width: 350px;">
+                                        <col style="width: auto;">
+                                        <col style="width: auto;">
+                                        <col style="width: auto;">
+                                        <col style="width: auto;">
+                                        <col style="width: auto;">
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th scope="col" style="text-align:center; border-right:1px solid #E5E5E9;">{{ t.DiffTableHeader.col1 }}</th>
-                                            <th scope="col" style="text-align:center; border-right:1px solid #E5E5E9;">{{ t.DiffTableHeader.col2 }}</th>
-                                            <th scope="col" style="text-align:center;">{{ t.DiffTableHeader.col3 }}</th>
+                                            <th scope="col" class="ac">년도</th>
+                                            <th scope="col" class="ac" v-for="year in t.DividendYears" :key="year">{{ year }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(item, idx) in t.DiffTableData" :key="'diff-'+idx">
-                                            <td>{{ item.recommendation }}</td>
-                                            <td class="ac">{{ item.status }}</td>
-                                            <td class="ac">{{ item.note }}</td>
+                                        <tr>
+                                            <th scope="row" class="ac">배당총액</th>
+                                            <td class="ar" v-for="(val, idx) in t.DividendData.TotalAmount" :key="'total-'+idx">{{ val }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="ac">배당종류</th>
+                                            <td class="ac" v-for="(val, idx) in t.DividendData.Type" :key="'type-'+idx">{{ val }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="ac">주당 배당금</th>
+                                            <td class="ar" v-for="(val, idx) in t.DividendData.PerShare" :key="'per-'+idx">{{ val }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="ac">배당성향</th>
+                                            <td class="ar" v-for="(val, idx) in t.DividendData.Propensity" :key="'prop-'+idx">{{ val }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="ac">배당수익률</th>
+                                            <td class="ar" v-for="(val, idx) in t.DividendData.Yield" :key="'yield-'+idx">{{ val }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+
+                    </section>
+
+                    <!-- gsrin0203 -->
+                    <section class="tab_content gsrin0203" v-if="CTabIdx === 2" :aria-label="t.Tabs1[2].item">
+                        <div class="table_container">
+                            <div class="search_group">
+                                <Search 
+                                    v-model="searchData" 
+                                    :search_opt="t.options"  @search="handleSearch"
+                                />
+                            </div>
+                            <div class="policy_wrap mt24">
+                                <table class="base_table ir_table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="ac">번호</th>
+                                            <th scope="col" class="ac">제목</th>
+                                            <th scope="col" class="ac">다운로드</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(item, idx) in t.IRListData" :key="'ir-'+idx">
+                                            <td class="ac border_right">{{ item.id }}</td>
+                                            <td class="al border_right">
+                                                <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
+                                            </td>
+                                            <td class="ac">
+                                                <button type="button" class="btn_download_file" @click="handleDownload(item.link)">
+                                                    <span class="file_type_text">PDF</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="pagination_area ">
+                                <Pagination 
+                                    v-model="currentPage" 
+                                    :total-pages="10" 
+                                    @change="onPageChange" 
+                                />
+                            </div>
+                        </div>
+
                     </section>
                 </div>
             </div>
@@ -293,522 +308,183 @@
 
 <script>
 import Tabs from "@/components/Tabs.vue";
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
-
+import Search from "@/components/Search.vue"; // Search 추가
+import Pagination from "@/components/Pagination.vue";
 
 export default {
-    name: "gsrin0102",
-    components: { Tabs, Swiper, SwiperSlide },
+    name: "gsrin0201",
+    components: { Tabs, Search, Pagination },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
             CTabIdx: 0,
-            selectedFilter: "",
+            searchData: {
+                type: "all",
+                keyword: ""
+            },
             langData: {
                 ko: {
                     MainTitle: "경영성과",
                     MainsubTitle: "Business Performance",
-                    MainDesc: [
-                        "투명한 GS리테일 경영성과 입니다.",
-                        "GS리테일은<br/> 투명한 경영 문화 정착을 위해,<br/>이사회 중심 경영을<br/> 실천하고 있습니다.",
-                        "투명한 GS리테일 경영성과 입니다.",
-                    ],
+                    MainDesc: ["투명한 GS리테일 경영성과 입니다.", "배당정책", "투명한 GS리테일 경영성과 입니다."],
                     Tabs1: [{ item: "재무현황" }, { item: "배당 정보" }, { item: "실적자료 등" }],
-                    
-                    // [Tab 1] 지배구조헌장 전체 데이터 (KO)
-                    CharterTitle: "㈜GS리테일 기업지배구조헌장", 
-                    CharterDate: "제정 2021.02.08",
-                    PolicyIntroTitle: "전문",
-                    PolicyIntroDesc: "<p class='desc'>㈜GS리테일(이하 “회사”라 함.)은 건전한 기업지배구조 확립을 기반으로 하여, 모든 이해관계자와 신뢰를 구축하고, 끊임없는 도전으로 고객의 라이프 이노베이션(Life Innovation)을 선도하는 회사로 도약하고자 한다. 이러한 비전 달성을 위해 본 기업지배구조헌장을 제정한다.</p><p class='desc'>회사는 본 기업지배구조헌장에 따라, 주주의 권리 보장, 이사회의 역할과 책임, 전문 감사기구의 독립적 운영 등 회사의 건전한 지배구조를 확립하여, 공정하고 투명한 경영활동을 지향하며, 주주·고객·임직원 등 모든 이해관계자의 지속적인 권익 증진을 위해 노력한다.</p>",
-                    PolicySections: [
-                        {
-                            title: "I. 주 주",
-                            content: [
-                                { subTitle: "1. 주주의 권리", list: [
-                                    "① 주주는 회사의 소유자이며, 이익 분배에 참여 할 수 있는 권리, 주주총회 참석 및 의결권을 행사 할 수 있는 권리, 주주총회의 목적사항을 제안할 수 있는 권리 등 관련 법령이 보장하는 기본적인 권리를 보장 받는다.",
-                                    "② 정관의 변경, 합병, 영업양수도 및 기업의 분할, 해산, 자본금의 감소 등 관련 법령이 정하는 사항 중 회사의 존립과 주주권에 중대한 변화를 가져오는 사항은 주주의 권리를 최대한 보장하여, 주주총회를 통해 결정한다.",
-                                    "③ 회사는 주주총회의 결의가 투명하고 공정한 절차에 따라 이루어지도록 노력하며, 주주에 대하여 주주총회 참석 전에 주주총회의 일시와 장소 및 의안 의결권의 행사 방법 등에 관하여 충분한 정보를 제공한다.",
-                                    "④ 주주권의 행사는 주주의 자유로운 의사에 따라 행사되어야 한다."
-                                ]},
-                                { subTitle: "2. 주주의 공평한 대우", list: [
-                                    "① 주주는 1주 1의결권 원칙에 따라 권리를 보장 받는다. 단, 법령에 의거하여, 특정 주주의 의결권이 제한되는 경우, 관련 법령을 따른다. 회사는 상법 및 관련 법령이 정하는 기준에 따라 주주의 본질적인 권리가 훼손되지 않도록 공평하게 대우한다.",
-                                    "② 회사는 주주에게 필요한 정보를 적시에 충분히 이해할 수 있도록 쉽게 구성하여, 공평한 방법으로 제공한다. 또한 부당한 내부거래 및 자기거래로부터 주주가 보호될 수 있도록 노력한다."
-                                ]},
-                                { subTitle: "3. 주주의 책임", list: [
-                                    "① 주주는 회사의 발전과 이익을 위하여. 자신의 의결권을 적극적으로 행사하여야 한다.",
-                                    "② 회사 경영에 영향력을 행사하는 지배주주는 회사와 다른 모든 주주의 이익을 고려하여 주주권을 행사하며, 그 지배권을 남용하여 다른 주주에게 손해가 발생하지 않도록 노력해야 한다."
-                                ]}
-                            ]
+                    UnitMillion: "(단위 : 백만원)",
+                    TableTitle1: "요약 연결재무상태표",
+                    TableTitle2: "요약 연결손익계산서",
+                    FSD: {
+                        Asset: {
+                            Current: ["1,857,062", "1,481,155", "1,797,888"],
+                            NonCurrent: ["8,184,954", "6,100,488", "5,685,209"],
+                            Total: ["10,042,016", "7,581,643", "7,483,097"]
                         },
-                        {
-                            title: "II. 이 사 회",
-                            content: [
-                                { subTitle: "1. 이사회의 기능", list: [
-                                    "① 이사회는 관련 법령에 의거하여, 경영에 대해 포괄적인 권한을 가지며, 회사와 주주의 이익을 위하여 회사의 기본적인 경영목표를 결정하고, 법령, 정관, 이사회 규정 등 관련 규정이 정하는 회사의 주요 의사 결정 사항에 대한 심의, 의결을 한다.",
-                                    "② 이사회는 투명하고, 공정한 회사의 업무 수행 및 주주가치 훼손 방지를 위해 경영진의 활동을 감독한다.",
-                                    "③ 이사회는 관련 법령, 정관, 이사회 규정 등에 의해, 위임이 허용되지 않는 주요한 사항을 제외하고, 대표이사 또는 이사회 내 위원회에 권한을 위임할 수 있다."
-                                ]},
-                                { subTitle: "2. 이사회의 구성", list: [
-                                    "① 회사는 이사회에서 다양한 논의와 효율적인 의사결정이 가능하도록 6 인 이상의 이사로 이사회를 구성하며, 이사회 독립성 보장을 위해 사외이사는 이사회 구성원 총수의 과반수 이상으로 구성한다.",
-                                    "② 이사회는 회사의 투명한 경영에 대한 감독기능을 강화하기 위하여 감사위원회를 설치하며, 각 상정 안건에 대한 객관적이고 전문적인 심의를 위해 기타 법령, 정관에서 정하는 바에 따라 이사회 내 위원회를 설치 할 수 있다."
-                                ]},
-                                { subTitle: "3. 이사의 선임", list: [
-                                    "① 이사는 이사회 추천, 사외이사후보추천위원회 추천, 주주 추천 등의 방법을 통해 선정된 후보자에 대해, 주주총회 결의로 선임하며, 회사는 전문성이 충분히 검증된 후보자가 이사로 선임되어, 이사회 중심의 기업경영이 달성될 수 있도록 노력한다.",
-                                    "② 대표이사들은 주주총회에서 선임된 이사 중에서 이사회의 결의에 의하여 선임한다.",
-                                    "③ 이사회 의장은 주주총회에서 선임된 이사 중 이사회의 결의로 선임하되, 대표이사와의 겸직을 지양한다."
-                                ]},
-                                { subTitle: "4. 이사의 자격", list: [
-                                    "① 사내이사는 회사의 사업 내용과 관련된 풍부한 경험과 전문지식을 갖춰야하며, 회사의 발전과 주주가치의 제고에 기여할 수 있어야 한다.",
-                                    "② 사외이사는 법조, 재무, 회계, 신사업, IT-TECH, 공공부문 등에서 충분한 식견과 전문성을 갖춘 자로, 회사와 중대한 이해관계가 없고, 독립성이 검증 되어야 한다."
-                                ]},
-                                { subTitle: "5. 이사회의 운영", list: [
-                                    "① 이사회는 정기이사회와 필요에 따라 개최되는 임시이사회로 운영되며, 회사는 이사회의 원활한 운영을 위하여 이사회의 권한과 책임, 운영절차 등을 구체적으로 규정한 이사회 규정을 제정, 운영한다.",
-                                    "② 회사는 이사회 내 위원회의 원활한 운영을 위하여 위원회의 권한과 책임, 운영절차 등을 구체적으로 규정한 위원회 규정을 제정, 운영한다.",
-                                    "③ 회사는 이사회 회의의 경과 과정, 중요한 심의 내용을 기록한 의사록을 작성하고 이를 보관하여야 한다."
-                                ]},
-                                { subTitle: "6. 사외이사의 역할", list: [
-                                    "① 사외이사는 독립성을 바탕으로 중요한 경영정책 결정에 참여하고, 전문성을 바탕으로 경영진을 감독하여, 회사가 건전하게 사업을 영위할 수 있도록 지원한다.",
-                                    "② 회사는 사외이사가 회사의 경영 실태 및 현황에 대하여 정확히 파악할 수 있도록 직무 수행에 필요한 정보를 신속하게 제공하며, 사외이사는 회사에게 직무수행에 필요한 정보의 제공을 요청할 수 있다. 또한 사외이사는 필요한 경우 외부 전문가의 조력을 받을 수 있으며, 회사는 이에 소요되는 비용을 지원한다."
-                                ]},
-                                { subTitle: "7. 이사의 역할", list: [
-                                    "① 이사는 선량한 관리자로서 그 책임을 다해, 이사회에 적극적으로 참여하며, 회사와 주주 및 이해관계자의 지속적인 이익 증진을 위해 최선의 의사 결정을 하여야 한다.",
-                                    "② 이사는 전체 주주의 이익을 고려한 의사결정을 하며, 직무상 얻어진 정보를 외부에 누출하거나 개인의 이익을 위하여 사용하여서는 안되며, 이사가 법령이나 정관을 위배하여 그 임무를 소홀히 하여 손해가 발생한 경우, 이사는 회사 또는 제3자에 대하여 손해배상책임을 진다.",
-                                    "③ 회사는 유능한 인사를 유치하고 책임 주공의 실효성을 확보하기 위하여 회사의 비용으로 이사를 위한 손해배상책임보험에 가입할 수 있다."
-                                ]},
-                                { subTitle: "8. 평가 및 보상", list: [
-                                    "① 경영진의 경영활동을 공정하게 평가하여야 하며, 그 결과를 보수에 적정하게 반영한다. 이사의 보수는 주주총회에서 승인된 범위 내에서 적절한 심사를 거쳐 집행한다.",
-                                    "② 사외이사의 활동 내역은 사외이사후보추천위원회에서 공정하게 평가하여, 그 평가결과를 재선임의 결정 등에 반영할 수 있다."
-                                ]},
-                                { subTitle: "9. 이사의 교육", list: [
-                                    "① 회사는 이사회의 전문성 제고를 위해, 이사의 직무 수행에 필요한 교육 및 능력 개발의 기회를 회사의 비용으로 제공할 수 있다."
-                                ]}
-                            ]
+                        Debt: {
+                            Current: ["2,688,039", "1,898,446", "1,995,791"],
+                            NonCurrent: ["2,920,238", "2,501,679", "2,211,212"],
+                            Total: ["5,608,277", "4,400,125", "4,207,003"]
                         },
-                        {
-                            title: "III. 감 사 기 구",
-                            content: [
-                                { subTitle: "1. 감사위원회", list: [
-                                    "① 감사위원회는 3인 이상의 이사로 구성하되, 위원의 3분의 2 이상은 사외이사로 하고, 회계 또는 재무 전문가를 1인 이상 포함하여 구성한다.",
-                                    "② 감사위원회의 회계 및 업무 감사에 관한 사항 등 법령과 정관이 정하는 바에 따라, 이사와 경영진의 직무집행에 대한 적법성 감사, 재무활동의 건전성과 재무보고의 정확성 검토, 중요한 회계처리기준이나 회계추정 변경의 타당성 검토, 외부감사인의 선임 및 해임에 대한 승인, 외부감사인의 감사활동에 대한 평가 등의 업무를 독립적으로 수행한다.",
-                                    "③ 감사위원회 회의는 분기 1회 이상 개최하고, 필요한 경우 수시로 개최할 수 있다."
-                                ]},
-                                { subTitle: "2. 외부감사인", list: [
-                                    "① 외부감사인은 회사와 경영진 및 특정주주 등으로부터 독립적인 입장에서 공정하게 감사 업무를 수행하여야 한다.",
-                                    "② 외부감사인은 외부감사 활동 중 확인한 중요사항을 감사위원회에 보고한다.",
-                                    "③ 외부감사인은 주주총회에 참석하여 감사보고서에 관한 주주의 질문이 있는 경우, 이에 충분히 설명하여야 한다."
-                                ]}
-                            ]
-                        },
-                        {
-                            title: "IV. 이해관계자",
-                            content: [
-                                { subTitle: "1. 회사는 고객, 주주, 임직원 등 모든 이해관계자의 권리 보호를 위한 사회적 책임을 충실히 이행한다.", list: [] },
-                                { subTitle: "2. 회사는 근로기준법 등 노동관련 법령을 성실히 준수하고, 근로조건의 유지 개선에 노력한다.", list: [] },
-                                { subTitle: "3. 회사는 법령이 허용하는 범위 내에서 이해관계자의 권리보호에 필요한 정보를 제공하며, 이해관계자의 관련정보 접근을 지원한다.", list: [] }
-                            ]
-                        },
-                        {
-                            title: "V. 공 시",
-                            content: [
-                                { subTitle: "1. 회사는 정기적으로 사업보고서, 분기보고서 및 반기보고서 등을 작성하여 공시하며, 법령에서 요구하는 공시 사항과 주주 및 이해관계자에게 중대한 영향을 미칠 수 있는 사항은 신속하고 정확하게 공시한다.", list: [] },
-                                { subTitle: "2. 회사는 중요한 기업 정보의 공개 범위나 공개 시기에 있어 특정인을 우대하거나 차별하지 않으며, 모든 이해관계자들이 동시에 접근할 수 있도록 공시한다.", list: [] }
-                            ]
-                        },
-                        {
-                            title: "부 칙(2021.2.8)",
-                            content: [
-                                { subTitle: "제 1 조(시행일) 이 헌장은 2021년 2월 8일부터 시행한다.", list: [] }
-                            ]
+                        Capital: {
+                            Base: ["104,718", "83,607", "83,607"],
+                            Profit: ["4,329,021", "3,097,911", "3,192,488"],
+                            Total: ["4,433,739", "3,181,518", "3,276,095"]
                         }
+                    },
+                    ISD: {
+                        Sales: ["11,080,326", "11,579,430", "11,957,422"],
+                        GrossProfit: ["2,829,457", "2,879,228", "2,911,663"],
+                        SGA: ["2,515,001", "2,623,102", "2,619,543"],
+                        OperatingIncome: ["314,456", "256,126", "292,120"],
+                        OtherIncome: ["-7,522", "-52,690", "-62,857"],
+                        FinancialIncome: ["-67,586", "-122,055", "-38,128"],
+                        EquityMethod: ["-154,794", "-40,445", "-101,903"],
+                        IncomeBeforeTax: ["84,554", "40,935", "89,231"],
+                        NetIncome: ["22,148", "9,792", "50,239"]
+                    },
+                    PerformanceCharts: [
+                        { title: "매출액", unit: "(단위 : 억원)", imgName: "gsrin0201_chat_1" },
+                        { title: "영업이익", unit: "(단위 : 억원)", imgName: "gsrin0201_chat_2" },
+                        { title: "당기 순이익", unit: "(단위 : 억원)", imgName: "gsrin0201_chat_3" },
+                        { title: "총자산", unit: "(단위 : 억원)", imgName: "gsrin0201_chat_4" }
                     ],
-                    // [Tab 2] 이사회 구성 현황 데이터 (KO)
-                    BoardSectionTitle1: `이사회 구성 현황`,
-                    BoardSectionDesc1: `대표이사, 사내이사, 기타 비상무 이사로 구성된 이사회 현황입니다.`,
-                    BoardSectionTitleSub: `사외이사 및 위원회 구성`,
-                    BoardSectionDescSub: `독립성과 전문성을 갖춘 사외이사를 통해 경영 투명성과 견제 기능을 강화하고 있습니다.`,
-                    BoardMemberList: [
-                        {
-                            pos: "대표이사", name: "허서홍", 
-                            img: require("@/assets/images/dummy/gsrin0102_1.png"),
-                            term: "2025.03.20~2028.03.19", firstDate: "2025.03.20 최초선임",
-                            careers: [
-                                { text: "美 스탠퍼드대", class: "" },
-                                { text: "2022년 (주)GS 미래사업팀장", class: "" },
-                                { text: "2024년 (주)GS리테일 경영전략 Service Unit장", class: "" },
-                                { text: "現) (주)GS리테일 대표이사", class: "point" }
-                            ]
-                        },
-                        {
-                            pos: "사내이사", name: "오진석", 
-                            img: require("@/assets/images/dummy/gsrin0102_2.png"),
-                            term: "2024.03.21~2027.03.20", firstDate: "2024.03.21 최초선임",
-                            careers: [
-                                { text: "서강대", class: "" },
-                                { text: "2014년 (주)GS리테일 경영지원부문장", class: "" },
-                                { text: "2021년 (주)GS리테일 전략부문장", class: "" },
-                                { text: "現) (주)GS리테일 플랫폼BU장", class: "point" }
-                            ]
-                        },
-                        {
-                            pos: "기타 비상무이사", name: "홍순기", 
-                            img: require("@/assets/images/dummy/gsrin0102_3.png"),
-                            term: "2025.03.21~2027.03.20", firstDate: "2021.07.01 최초선임",
-                            careers: [
-                                { text: "연세대", class: "" },
-                                { text: "2017년 (주)GS 재무팀장", class: "" },
-                                { text: "現) (주)GS 대표이사", class: "point" }
-                            ]
-                        }
+                    // [배당 정보 전용 데이터]
+                    DividendPolicyDesc: "주주가치 제고를 위하여 배당을 지속적으로 실시해 오고 있으며, 배당 규모는 향후 회사의 지속적인 성장을 위한 투자와 경영실적 및 Cash-flow 상황 등을 전반적으로 고려하여 결정하고 있습니다.<br/><br/>배당금은 비경상 손익을 제외한 (지배지분)연결당기순이익 중 40% 수준에서 배당금 산정이 적정하다고 판단하여, 향후에도 40%수준의 배당성향을 유지할 계획입니다.",
+                    TableTitle3: "투명한 GS리테일 경영성과 입니다.",
+                    Recent5Years: "(최근 5개년 기준)",
+                    DividendYears: ["2025", "2024", "2023", "2022", "2021"],
+                    DividendData: {
+                        TotalAmount: ["50,139,354,000", "41,782,795,000", "51,719,128,000", "43,937,410,750", "122,616,030,000"],
+                        Type: ["현금", "현금", "현금", "현금", "현금"],
+                        PerShare: ["600", "500", "500", "430", "1,200"],
+                        Propensity: ["115.4", "1,639.8", "292.6", "108.7", "15.0"],
+                        Yield: ["2.7", "3.3", "2.1", "1.5", "3.9"]
+                    },
+                    IRListData: [
+                        { id: "60", title: "2025년 4분기 경영실적", fileUrl: "#" },
+                        { id: "59", title: "2025년 3분기 경영실적", fileUrl: "#" },
+                        { id: "58", title: "2025년 2분기 경영실적", fileUrl: "#" },
+                        { id: "57", title: "2025년 1분기 경영실적", fileUrl: "#" },
+                        { id: "56", title: "2024년 4분기 경영실적", fileUrl: "#" },
+                        { id: "55", title: "2024년 3분기 경영실적", fileUrl: "#" },
+                        { id: "54", title: "2024년 2분기 경영실적", fileUrl: "#" },
+                        { id: "53", title: "(주)GS리테일 인적분할 설명자료", fileUrl: "#" },
+                        { id: "52", title: "2024년 1분기 경영실적", fileUrl: "#" },
+                        { id: "51", title: "2023년 4분기 경영실적", fileUrl: "#" }
                     ],
-                    SubMemberList: [
-                        {
-                            pos: "사외이사 / 이사회의장", name: "이성락", 
-                            img: require("@/assets/images/dummy/gsrin0102_4.png"),
-                            term: "2025.03.20~2028.03.19", firstDate: "2023.03.25 최초선임",
-                            careers: [
-                                { text: "건국대", class: "" },
-                                { text: "2009년 (주)신한은행 부행장", class: "" },
-                                { text: "2013년 신한생명보험(주) 사장", class: "" },
-                                { text: "2017년 (주)고든앤파트너스 대표이사", class: "" }
-                            ]
-                        },
-                        {
-                            pos: "사외이사", name: "이인무", 
-                            img: require("@/assets/images/dummy/gsrin0102_5.png"),
-                            term: "2024.03.21~2027.03.20", firstDate: "2021.07.01 최초선임",
-                            careers: [
-                                { text: "美 일리노이대", class: "" },
-                                { text: "2007년 디멘셔널 펀드 부사장", class: "" },
-                                { text: "2015년 한국은행 외화자산운용원 자문역", class: "" },
-                                { text: "現) 카이스트 경영대학 교수", class: "point" }
-                            ]
-                        },
-                        {
-                            pos: "사외이사", name: "이상규", 
-                            img: require("@/assets/images/dummy/gsrin0102_6.png"),
-                            term: "2023.03.23~2026.03.22", firstDate: "2023.03.23 최초선임",
-                            careers: [
-                                { text: "美 워싱턴대", class: "" },
-                                { text: "2012년 LG전자(주) 한국B2C 그룹장", class: "" },
-                                { text: "2016년 LG전자(주) 한국모바일 그룹장", class: "" },
-                                { text: "2021년 LG전자(주) 한국영업 본부장, 사장", class: "" },
-                                { text: "現) 숙명여자대학교 석좌교수", class: "point" }
-                            ]
-                        },
-                        {
-                            pos: "사외이사", name: "윤윤진", 
-                            img: require("@/assets/images/dummy/gsrin0102_7.png"),
-                            term: "2025.03.20~2028.03.19", firstDate: "2025.03.20 최초선임",
-                            careers: [
-                                { text: "美 UC 버클리대", class: "" },
-                                { text: "2009년 Stanford SRI International 인공지능 연구센터 연구원", class: "" },
-                                { text: "2018년 국토안전관리원 비상임 이사", class: "" },
-                                { text: "現) 카이스트 건설 및 환경공학과 교수", class: "point" }
-                            ]
-                        }
-                    ],
-                    BoardSectionTitle2: "이사회 역량 구성표",
-                    SkillsList: [
-                        { type: "사내이사/대표이사", name: "허서홍", appointDate: "2025.03 선임", tags: [{text: "경영·리더십", class:""}, {text: "리스크관리·ESG", class:""}] },
-                        { type: "사내이사", name: "오진석", appointDate: "2024.03 선임", tags: [{text: "경영·리더십", class:""}, {text: "유통·관련산업", class:""}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:""}, {text: "보상위원회", class:"TAG-3"}] },
-                        { type: "기타 비상무이사", name: "홍순기", appointDate: "2021.07 선임", tags: [{text: "경영·리더십", class:""}, {text: "재무·회계", class:""}, {text: "리스크관리·ESG", class:""}, {text: "ESG위원회", class:"TAG-3"}] },
-                        { type: "사외이사", name: "이성락", appointDate: "2022.03 선임", tags: [{text: "경영·리더십", class:"TAG-2"}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:"TAG-2"}, {text: "독립성", class:"TAG-2"}, {text: "내부거래위", class:"TAG-4"}, {text: "사외이사추천위", class:"TAG-4"}, {text: "감사위원회", class:"TAG-4"}] },
-                        { type: "사외이사", name: "오인무", appointDate: "2021.07 선임", tags: [{text: "재무·회계", class:"TAG-2"}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:"TAG-2"}, {text: "독립성", class:"TAG-2"}, {text: "사외이사추천위", class:"TAG-4"}, {text: "감사위원회", class:"TAG-4"}, {text: "ESG위원회", class:"TAG-4"}, {text: "보상위원회", class:"TAG-4"}] },
-                        { type: "사외이사", name: "이상규", appointDate: "2023.03 선임", tags: [{text: "유통·관련산업", class:""}, {text: "리스크관리·ESG", class:""}, {text: "독립성", class:"TAG-2"}, {text: "내부거래위", class:"TAG-3"}, {text: "사외이사추천위", class:"TAG-3"}, {text: "ESG위원회", class:"TAG-3"}] },
-                        { type: "사외이사", name: "윤윤진", appointDate: "2025.03 선임", tags: [{text: "IT·디지털", class:""}, {text: "리스크관리·ESG", class:""}, {text: "독립성", class:""}, {text: "사외이사추천위", class:"TAG-3"}, {text: "감사위원회", class:"TAG-3"}, {text: "ESG위원회", class:"TAG-3"}, {text: "보상위원회", class:"TAG-3"}] }
-                    ],
-                    BoardSectionTitle3: "이사회 내 위원회 현황",
-                    ChairLabel: "위원장", MemberLabel: "위원",
-                    CommitteeTable: [
-                        { title: "내부거래위원회", chair: "이상규", members: "이성락, 윤윤진" },
-                        { title: "사외이사후보추천위원회", chair: "이상규", members: "이성락, 이인무" },
-                        { title: "감사위원회", chair: "이인무", members: "이성락, 윤윤진" },
-                        { title: "ESG위원회", chair: "이상규", members: "이성락, 윤윤진" },
-                        { title: "보상위원회", chair: "이상규", members: "이성락, 윤윤진" }
-                    ],
-                    // [Tab 2] BoardDownloadBtns 데이터 부분
-                    BoardDownloadBtns: [
-                        { 
-                            text: "(주)GS리테일 정관", 
-                            link: require("@/assets/download/gsr_incorporation_1.pdf").default || require("@/assets/download/gsr_incorporation_1.pdf") 
-                        },
-                        { 
-                            text: "이사회 규정", 
-                            link: require("@/assets/download/boardCharter_2.pdf").default || require("@/assets/download/boardCharter_2.pdf") 
-                        },
-                        { 
-                            text: "감사위원회 규정", 
-                            link: require("@/assets/download/directors_audit_committee_3.pdf").default || require("@/assets/download/directors_audit_committee_3.pdf") 
-                        },
-                        { 
-                            text: "사외이사후보 추천위원회 규정", 
-                            link: require("@/assets/download/Outside_Director_4.pdf").default || require("@/assets/download/Outside_Director_4.pdf") 
-                        },
-                        { 
-                            text: "내부거래위원회 운영규정", 
-                            link: require("@/assets/download/internal_trade_commission_rule_5.pdf").default || require("@/assets/download/internal_trade_commission_rule_5.pdf") 
-                        },
-                        { 
-                            text: "ESG 위원회 운영 규정", 
-                            link: require("@/assets/download/ESG_6.pdf").default || require("@/assets/download/ESG_6.pdf") 
-                        },
-                        { 
-                            text: "보상위원회 운영규정", 
-                            link: require("@/assets/download/compensation_7.pdf").default || require("@/assets/download/compensation_7.pdf") 
-                        }
-                    ],
-                    SelectMsg: "위원회 선택", SelectOptions: [{value:'', label:'위원회 선택'}, {value:'0', label:'감사위원회'}, {value:'1', label:'ESG위원회'}],
-                    BtnConfirm: "목록보기",
-                    EvalSystemTitle: "이사회 평가 제도",
-                    EvalSystemTable: [
-                        { label: "평가 주기", content: "사업연도 中 1회" },
-                        { label: "평가 항목", content: "1.이사회 운영 효율성<br/>2.이사회 성과<br/>3.이사회 內 위원회 활동<br/>4.사외이사 자가 평가" },
-                        { label: "평가 사항", content: "관련 제도 및 운영 수준 등" },
-                        { label: "평가 방식", content: "구성원 자가 평가" },
-                        { label: "평가 참여자", content: "이사회 구성원 전원(7인)<br/>※ 사외이사 자가 평가는 사외이사(4인) 대상 진행" }
-                    ],
-                    EvalResultTitle: "2025년 이사회 평가 결과",
-                    EvalResultHeader: { col1: "구분", col2: "평가결과" }, // 추가
-                    EvalResultData: [
-                        { category: "이사회 성과", score: "4.6점/5.0점" },
-                        { category: "이사회 운영 효율성", score: "4.7점/5.0점" },
-                        { category: "위원회 활동", score: "4.5점/5.0점" },
-                        { category: "사외이사 자가 평가", score: "4.6점/5.0점" }
-                    ],
-                    EvalUsageTitle: "평가 결과 활용",
-                    EvalUsageCards: [
-                        { num: "01", title: "평가 결과<br/>이사회 보고" },
-                        { num: "02", title: "이사회 의장 및 사외이사<br/>중심 평가 결과 리뷰", sub: "(별도 대면 면담 방식)" },
-                        { num: "03", title: "리뷰를 통한<br/>개선점 도출 및 이사회 반영" },
-                        { num: "04", title: "이사회 운영<br/>개선 및 지배구조 신뢰성 제고" },
-                        { num: "05", title: "지속가능경영보고서 및<br/>홈페이지 등 이사회 평가 결과 공개" }
-                    ],
-                    DiffTableHeader: { col1: "기업지배구조 모범규준 권고 사항", col2: "채택여부", col3: "비고" },
-                    DiffTableData: [
-                        { recommendation: "기업지배구조헌장 도입", status: "O", note: "-" },
-                        { recommendation: "이사회 구성요건", status: "O", note: "과반수(57.1%) 사외이사 구성" },
-                        { recommendation: "이사회 의장과 대표이사 분리", status: "O", note: "사외이사 의장 운영" },
-                        { recommendation: "사외이사의 독립성", status: "O", note: "-" },
-                        { recommendation: "사외이사후보추천위원회 구성", status: "O", note: "-" },
-                        { recommendation: "보상위원회 구성", status: "O", note: "-" },
-                        { recommendation: "이사회 및 이사회 내 위원회 운영규정 제정", status: "O", note: "-" },
-                        { recommendation: "이사회 및 이사회 내 위원회 활동 내역, 주요 안건에 대한 찬반 여부 공시", status: "O", note: "-" },
-                        { recommendation: "이사회 평가", status: "O", note: "-" },
-                        { recommendation: "이사회 개최시 이사에 대한 사전 정보제공", status: "O", note: "-" },
-                        { recommendation: "감사위원회 구성", status: "O", note: "전원 사외이사" },
-                        { recommendation: "집중투표제의 도입", status: "X", note: "-" },
-                        { recommendation: "대표이사 및 재무담당 책임자의 재무보고에 대한 정확과 완전성 인증", status: "O", note: "-" },
-                        { recommendation: "회사비용으로 이사를 위한 손해배상보험 가입", status: "O", note: "임원배상책임보험 가입" },
-                        { recommendation: "임직원 윤리규정 도입 및 공시", status: "O", note: "-" },
-                        { recommendation: "모범규준과의 차이설명", status: "O", note: "-" }
+                    options: [
+                        { value: "all", label: "전체" },   // 'val'이 아니라 반드시 'value'
+                        { value: "title", label: "제목" }, // 'txt'가 아니라 반드시 'label'
+                        { value: "content", label: "내용" }
                     ]
-                },
-                en: {
+
                 }
             }
         };
     },
     computed: { t() { return this.langData[this.lang] || this.langData.ko; } },
-    methods: {
-        onTabChange1(idx) {
-            this.CTabIdx = idx;
-            this.selectedFilter = "";
-        },
-        handleDownload(link) {
-            if (!link || link === "#") {
-                alert("파일을 준비 중입니다.");
-                return;
-            }
-
-            // require 결과가 객체로 넘어올 경우를 대비한 방어 코드
-            const downloadUrl = typeof link === 'object' ? link.default : link;
-            
-            if (downloadUrl) {
-                window.open(downloadUrl, "_blank");
-            }
+    methods: { 
+        onTabChange1(idx) { this.CTabIdx = idx; },
+        handleSearch(val) { //[검색] 버튼 클릭 시 실행 이벤트
+            console.log("검색 실행:", val);
+            this.currentPage = 1;
         }
+    
     }
 };
 </script>
 
 <style scoped>
-/*::::::::::::::::::::::::::::::: PC Style (정제됨) :::::::::::::::::::::::::::::::*/
-/* gsrin0101 전용 스타일 */
-.main-container {width: 100%; position: relative; display: block;}
-.section-investor {width: 100%; position: relative; display: block;}
-.title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0201_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
-.page-title {color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; display: block;}
-.visual-sub {margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center;}
-.cont_inner {width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom:200px;}
-.title-sub-text {width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4;}
-:deep(.title-sub-text br:not(:nth-of-type(2))) {display: none;}
-.subtit_wrap {width: 100%; padding: 60px 40px; background: #F0F3F5; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
-.section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align: center;}
-.section-date {margin-top: 15px; color: #666666; font-size: 18px; text-align: center; display: block;}
-.policy_wrap {width: 100%; padding: 60px; text-align: left;}
-.policy_wrap dt {margin-top: 60px; color: #161618; font-size: 2.4rem; font-weight: 700;}
-.policy_wrap dt:first-child {margin-top: 0;}
-.policy_wrap dd {margin-top: 20px; color: #444444; font-size: 1.8rem; line-height: 1.8;}
-.bullet_title {color: #161618; font-size: 20px; font-weight: 700; display: block;}
-.bullet_01 {font-size:18px;}
-.bullet_01 li.point {color:#242428}
+.main-container { width: 100%; position: relative; }
+.title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0201_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
+.page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; }
+.visual-sub { margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center; }
+.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
+.title-sub-text { width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4; }
+.title-sub-text.is_dividend {padding-bottom: 16px; padding-top: 100px; text-align:left; }
+.ac { text-align: center; }
+.ar { text-align: right; }
+.mt40 { margin-top: 40px; }
+.mt100 { margin-top: 100px; }
+.search_group :deep(.search_wrap) {display: flex; justify-content: flex-end; gap: 8px;}
+.search_group :deep(.input_search_wrap) {flex: none !important; width: 360px !important;}
+.search_group :deep(.select_box) {width: 160px !important;}
+.pagination {margin-top:24px; justify-content:center;}
+:deep(label.select select) {width:160px !important;}
 
-/* gsrin0102 전용 스타일 */
-.gsrin0102 > * {margin-top: 80px;}
-.view {width: 100%; padding: 20px 0; position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
-.view-2 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 32px; align-self: stretch; flex: 0 0 auto;}
-.sub-title {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-3 {width: 100%; margin-top: -1.00px; padding: 0; color: #161618; font-size: 40px; font-weight: 700; font-style: normal; letter-spacing: -0.4px; line-height: 129.99999523162842%; position: relative; align-self: stretch;}
-.p {width: 100%; padding: 0; color: #242428; font-size: 24px; font-weight: 500; font-style: normal; letter-spacing: -0.24px; line-height: 150%; position: relative; align-self: stretch;}
-.view-3 {width: 100%; padding: 0; position: relative; display: flex; align-items: flex-start; gap: 28px; align-self: stretch; flex: 0 0 auto;}
-.div-2 {width: 21.97%; height:auto; padding: 0; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 32px;}
-.view-4 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; align-self: stretch; flex: 0 0 auto;}
-.img {width: 100%; height:auto; position: relative; align-self: stretch;}
-.div-3 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-4 {width: fit-content; margin-top: -1.00px; padding: 0; color: #161618; font-size: 16px; font-weight: 700; letter-spacing: -0.16px; line-height: 24px; position: relative; white-space: nowrap;}
-.text-wrapper-5 {width: fit-content; padding: 0; color: #161618; font-size: 28px; font-weight: 700; font-style: normal; letter-spacing: -0.28px; line-height: 135.0000023841858%; position: relative; white-space: nowrap;}
-.div-4 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-6 {width: 100%; margin-top: -1.00px; padding: 0; color: #242428; font-size: 18px; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; align-self: stretch;}
-.text-wrapper-7 {width: 100%; padding: 0; color: #67676f; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: -0.14px; line-height: 139.9999976158142%; position: relative; align-self: stretch;}
-.view-5 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; align-self: stretch; flex: 0 0 auto;}
-.frame-2 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; gap: 10px; align-self: stretch; flex: 0 0 auto;}
-.bullet {height: 24px; position: relative; display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto;}
-.ellipse {width: 3px; height: 3px; background-color: #67676f; border-radius: 50%; position: relative;}
-.text-wrapper-8 {margin-top: -1.00px; padding: 0; color: #67676f; font-size: 18px; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
-.frame-3 {width: 100%; padding: 0; position: relative; display: flex; align-items: flex-start; gap: 10px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-9 {margin-top: -1.00px; padding: 0; color: #242428; font-size: 18px; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
-.divider {width: 1px; background-color: #f2f2f4; position: relative; align-self: stretch;}
-.frame-4 {padding: 0; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 0 0 auto;}
-.rectangle {width: 1px; height: 12px; background-color: #e5e5e9; position: relative;}
-.view-6 {width: 100%; padding: 0; position: relative; display: flex; flex-wrap:wrap; align-items: flex-start; justify-content: flex-start; gap: 12px; align-self: stretch; flex: 0 0 auto;}
-.frame-5 {width: calc((100% - 24px) / 3); max-width:452px; padding: 32px; border: 1px solid #e5e5e9; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; flex: 1; align-self: stretch; flex: 0 0 auto;}
-.frame-6 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-10 {width: fit-content; margin-top: -1.00px; padding: 0; color: #161618; font-size: 24px; font-weight: 400; letter-spacing: -0.24px; line-height: 36px; position: relative; white-space: nowrap;}
-.text-wrapper-11 {width: fit-content; padding: 0; color: #161618; font-size: 24px; font-weight: 700; font-style: normal; letter-spacing: -0.24px; line-height: 135.0000023841858%; position: relative; white-space: nowrap;}
-.text-wrapper-12 {padding: 0; color: #656565; font-size: 16px; font-weight: 400; font-style: normal; text-align: right; letter-spacing: -0.16px; line-height: 150%; position: relative; flex: 1;}
-.frame-9 {width: 100%; padding: 24px 0 0; border-top: 1px solid #f2f2f4; position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 8px; flex: 0 0 auto; align-self: stretch;}
-.TAG {padding: 8px 12px; color: #107af2; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 99px; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 0 0 auto;}
-.TAG-2 {min-width: 64px; background-color: #e7f2fe; border-color: #107af2;}
-.TAG-3 {background-color: #f2f2f4; border-color: #c4c4d0;}
-.TAG-3 .text-wrapper-13 {color: #67676f;}
-.TAG-4 .text-wrapper-13 {color: #67676f;}
-.TAG-4 {min-width: 64px; background-color: #f2f2f4; border-color: #c4c4d0;}
-.text-wrapper-13 {width: fit-content; margin-top: -1.00px; padding: 0; color: #107af2; font-size: 16px; font-weight: 400; font-style: normal; letter-spacing: -0.16px; line-height: 150%; position: relative; white-space: nowrap;}
-.table {width: 100%; padding: 0; border-top: 1px solid #161618; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; align-self: stretch; flex: 0 0 auto;}
-.column {padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; flex: 1; flex-grow: 1;}
-.table-cell {width: 100%; height: 82px; padding: 12px 24px; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; position: relative; display: flex; align-items: center; gap: 10px; align-self: stretch;}
-.text-wrapper-19 {padding: 0; color: #161618; font-size: 18px; font-weight: 600; font-style: normal; text-align: center; letter-spacing: -0.18px; line-height: 139.9999976158142%; position: relative; flex: 1;}
-.view-wrapper {width: 100%; padding: 12px 24px; border-bottom: 1px solid #e5e5e9; position: relative; display: flex; align-items: center; gap: 12px; align-self: stretch; flex: 0 0 auto;}
-.view-7 {padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px; flex: 1; flex-grow: 1;}
-.view-8 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-20 {width: fit-content; margin-top: -1.00px; padding: 0; color: #67676f; font-size: 18px; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; white-space: nowrap;}
-.text-wrapper-21 {margin-top: -1.00px; padding: 0; color: #242428; font-size: 18px; font-weight: 400; font-style: normal; text-align: right; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
-.divider-2 {width: 1px; background-color: #e5e5e9; position: relative; align-self: stretch;}
-.button-group {width: 100%; padding: 0; position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 12px; flex: 0 0 auto; align-self: stretch;}
-.BUTTON {padding: 10px 16px; background-color: #f2f2f4; border-radius: 8px; border: 0; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 24px; flex: 0 0 auto; cursor: pointer;}
-.view-9 {padding: 0; position: relative; display: inline-flex; align-items: center; gap: 2px; flex: 0 0 auto;}
-.text-wrapper-22 {width: fit-content; margin-top: -1.00px; padding: 0; color: #242428; font-size: 16px; font-weight: 400; font-style: normal; letter-spacing: -0.16px; line-height: 150%; position: relative; white-space: nowrap;}
-.download {width: 24px; height: 24px; position: relative; aspect-ratio: 1;}
-.ac {text-align:center;}
+/* Charts */
+.performance_charts { width: 100%; }
+.chart_grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+.chart_item { width: 100%; display: flex; flex-direction: column; gap: 40px; }
+.chart_header { display: flex; align-items: flex-end; justify-content:space-between; }
+.chart_title { font-size: 40px; font-weight: 700; color: #161618; }
+.unit { font-size: 16px; color: #67676f; }
+.chart_img img { width: 100%; height: auto; }
 
-/* gsrin0103 */
-.gsrin0103 .eval_item_group { display: flex; flex-direction: column; width: 100%; }
-.gsrin0103 .section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align:left;}
-.gsrin0103 .policy_wrap {padding-top:40px; padding-bottom:100px;}
-.gsrin0103 .policy_wrap table { width: 100%; border-collapse: collapse; word-break: keep-all; border-top: 1px solid #000; }
-.gsrin0103 .policy_wrap th, .gsrin0103 .policy_wrap td {padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 18px; line-height: 1.6; vertical-align: middle; }
-.gsrin0103 .eval_item_group:nth-of-type(2) .policy_wrap th, .gsrin0103 .eval_item_group:nth-of-type(2) .policy_wrap td {text-align:center; }
-.gsrin0103 .policy_wrap {padding-left:0; padding-right:0;}
-.gsrin0103 .policy_wrap th { background-color: #F8F8F8; color: #161616; font-weight: 700; text-align: left; }
-.gsrin0103 .important { font-size: 18px; font-weight: 700; color: #161616; text-decoration:none;}
-.gsrin0103 .key-features {margin-top:30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.gsrin0103 .card_item { padding: 32px 32px 48px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; gap: 16px; min-height: 180px; }
-.gsrin0103 .text-wrapper-6 { font-size: 18px; font-weight: 700; color: #107af2; }
-.gsrin0103 .element { font-size: 20px; font-weight: 700; color: #161618; line-height: 1.35; }
-.gsrin0103 .text-wrapper-7 { font-size: 16px; color: #67676f; }
 
-/* gsrin0104 전용 스타일 */
-.gsrin0104 { display: flex; flex-direction: column; width: 100%; padding-bottom: 200px; }
-.gsrin0104 .top_visual_banner { width: 100%; padding: 60px 0; display: flex; align-items: center; justify-content: center; background-color: #ffffff; }
-.gsrin0104 .banner_text { font-size: 48px; font-weight: 700; color: #161616; text-align: center; line-height: 1.3; letter-spacing: -0.48px; }
-.gsrin0104 .diff_table_wrap { width: 100%; }
-.gsrin0104 .policy_wrap {padding-top:0;}
-.gsrin0104 .policy_wrap table { width: 100%; border-collapse: collapse; border-top: 1px solid #000; }
-.gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 18px; line-height: 1.5; vertical-align: middle; }
-.gsrin0104 .policy_wrap th { background-color: #F8F8F8; color: #161618; font-weight: 700; }
-.gsrin0104 .policy_wrap td { color: #242428; }
+/* 배당정책 설명 */
+.dividend_policy_info { width: 100%; text-align: left; }
+.section-sub-title { font-size: 48px; font-weight: 700; color: #161616; margin-bottom: 16px; letter-spacing: -0.48px; }
+.policy_desc { font-size: 24px; color: #161616; line-height: 1.5; letter-spacing: -0.24px; word-break: keep-all; }
+.table_info_group {display:flex; justify-content:space-between;}
 
-/*:::::::::::::::::::::::::::::::Responsive Style :::::::::::::::::::::::::::::::*/
+/* Table 스타일 */
+.policy_wrap table {width: 100%; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
+.policy_wrap th, .policy_wrap td {padding: 18px 24px; border: 1px solid #e5e5e9; font-size: 18px; line-height: 1.4; vertical-align: middle;}
+.policy_wrap th:first-child, .policy_wrap td:first-child { border-left: 0; }
+.policy_wrap th:last-child, .policy_wrap td:last-child { border-right: 0; }
+.policy_wrap thead th { background-color: #f8f8f8; color: #161618; font-weight: 700; }
+.policy_wrap tbody th { background-color: #ffffff; font-weight: 400; }
+.border_right { border-right: 1px solid #e5e5e9; }
+.table_header {display:flex; justify-content:space-between; align-items:flex-end;}
+.table_header h3 {font-size:40px;}
+.gsrin0203 .policy_wrap td {height: 82px; color: #161616; border-left:0; border-right:0; }
+.gsrin0203 .policy_wrap th {border-left:0; border-right:0;}
+.policy_wrap td a {font-size:18px;}
+/* 강조 스타일 */
+.bg_light { background-color: #f8f8f8 !important; }
+.fc_red { color: #ed3030 !important; }
+tr.bold td, tr.bold th { font-weight: 700 !important; }
 
-@media screen and (max-width:1024px) {
-    .cont_inner {padding: 0 20px;}
-    .title-sub-text {padding: 60px 0; font-size: 36px;}
-    .view-3 {flex-wrap: wrap; justify-content:space-between; gap:0;}
-    .div-2 {width: calc(48% - 10px);} /* 2열 배치 */
-    .frame-5 {width:calc((100% - 12px) / 2); max-width:none;}
-    .view-6:last-of-type {width:100%;}
-    .gsrin0104 .banner_text { font-size: 32px; }
-    .gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 12px 15px; font-size: 16px; }
+/* 미디어 쿼리 */
+@media screen and (max-width: 1024px) {
+    .cont_inner { padding-left: 20px; padding-right: 20px; }
+    .gsrin0201 .policy_wrap, .gsrin0201 .base_table  { overflow-x: auto; }
+    .gsrin0201 .base_table, .gsrin0202 .base_table { min-width:1000px; }
 }
-
 @media screen and (max-width: 767px) {
-    .cont_inner {padding: 0 20px;}
-    .title_wrap {padding: 60px 20px 80px;}
-    .page-title {font-size: 40px;}
-    .visual-sub {font-size: 20px;}
-    .title-sub-text {padding: 60px 0 80px; font-size: 28px; line-height: 1.3; text-align:left;}
-    :deep(.title-sub-text br) {display:block !important;}
-    .view-3 {flex-direction: column; align-items: center; gap: 40px;}
-    .div-2 {width: 100%; max-width: 400px;} /* 1열 배치 및 최대너비 제한 */
-    .view-6 {flex-direction: column; gap: 12px;}
-    .view-6:last-of-type {width:100%;}
-    .frame-5 {width: 100%; max-width:none;} /* 역량 구성표 1열 */
-    .img {height: auto; aspect-ratio: 16 / 9;} /* 이미지 비율 유지 */
-    .divider {display:none;} /* 구분선 가로로 변경 */
-    .policy_wrap {padding: 30px 20px;}
-    .policy_wrap dt {margin-top: 40px; font-size: 20px;}
-    .policy_wrap dd {font-size: 16px;}
-    .table {flex-direction: column;}
-    .column {width: 100%;}
-    .divider-2 {width: 100%; height: 1px;}
-    .button-group {gap: 8px;}
-    .text-wrapper-3 {font-size:24px;}
-    .bullet_01 li {font-size:16px;}
-    .p {font-size:18px;}
-    .gsrin0102 .view-2:first-of-type {margin-top:0;}
-    .gsrin0103 .section-sub-title {font-size:24px; text-align:left;}
-    .gsrin0103 .policy_wrap {padding-top:30px; padding-left:0; padding-right:0;}
-    .gsrin0103 .policy_wrap th { width: 120px !important; padding: 12px; font-size: 15px; } 
-    .gsrin0103 .policy_wrap td { padding: 12px; font-size: 15px; } 
-    .gsrin0103 .key-features {margin-top:30px; grid-template-columns: 1fr; }
-    .gsrin0104 .banner_text { font-size: 24px; padding: 0 20px; }
-    .gsrin0104 .policy_wrap { overflow-x: auto; }
-    .gsrin0104 .policy_wrap table { min-width: 700px; } /* 모바일에서는 가로 스크롤 허용 */
-    .gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 10px; font-size: 14px; }
-}
+    /* 요청하신 모바일 수정 사항 */
+    .cont_inner {padding:0 20px;}
+    h3 { font-size: 24px !important; }
+    .unit { font-size: 14px !important; }
+    .title_wrap { display: none !important; }
+    .gsrin0201 .policy_wrap, .gsrin0201 .base_table  { overflow-x: auto; }
+    .gsrin0201 .base_table, .gsrin0202 .base_table { min-width: 800px; }
+    label.select select {width:100%}
 
-/* swiper */
-.swiper {width:100%;}
-.swiper-slide {height:auto; position:relative;}
-.swiper-slide.div-2 {margin-right:28px; margin-left:28px}
-.swiper-slide.div-2:first-of-type {margin-left:0;}
-.swiper-slide.div-2:last-of-type::after {display:none;}
-.swiper-slide.div-2::after {content:''; width:1px; height:100%; background:#F2F2F4; display:block; position:absolute; top:0; right:-28px}
-
-
-
-/* 모바일 스타일: 스와이퍼 활성화 */
-@media screen and (max-width: 767px) {
-    .res-slide-item {
-        width: 280px !important; /* 모바일에서 적절한 카드 너비 */
-        margin-right: 0;
-        padding-right: 20px; /* 카드 간 간격 */
-        box-sizing: border-box;
-    }
-    .pc-only { display: none; } /* 모바일에서 세로선 제거 */
-    .div-2 { width: 100% !important; }
-    .swiper-slide.div-2 {margin-right:0; margin-left:0}
-    .swiper-slide.div-2::after {display:none}
+    /* 차트 영역 1열 배치 */
+    .chart_grid { grid-template-columns: 1fr; } 
+    .title-sub-text { font-size: 24px; padding: 60px 0; }
+    .policy_wrap th, .policy_wrap td { padding: 12px 15px; font-size: 14px; }
+    .gsrin0203 .policy_wrap th:first-child, .gsrin0203 .policy_wrap td:first-child { display: none; }
+    .gsrin0203 .policy_wrap thead {display:none;}
+    .search_group .search_wrap {flex-direction:column; align-items:stretch;}
 }
 </style>

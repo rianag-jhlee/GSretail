@@ -3,11 +3,12 @@
         <!-- select -->
         <SelectBox :options="search_opt" :modelValue="searchValue.type"  @update:modelValue="onChangeType" :initMsg="initMsg" />
 
-        <!-- input -->
-        <Inputs type="text" :placeholder="placeholder" v-model="searchValue.keyword" @update:modelValue="onChangeKeyword" />
-
-        <!-- button -->
-        <button class="btn_search" @click="onSearch">검색</button>
+        <div class="input_search_wrap">
+            <!-- input -->
+            <Inputs type="text" :placeholder="placeholder" v-model="searchValue.keyword" @update:modelValue="onChangeKeyword" />
+            <!-- button -->
+            <button class="btn_search" @click="onSearch">검색</button>
+        </div>
     </div>
 </template>
 
