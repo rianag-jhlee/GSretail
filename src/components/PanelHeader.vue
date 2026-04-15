@@ -91,7 +91,11 @@ img {
     }
     .brand_panel_title > h2 {
         margin-bottom: 12px;
-        font-size: 2.6rem;
+        font-family: Pretendard;
+        font-size: 2.8rem;
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+
     }
 
     .brand_panel_title > p {

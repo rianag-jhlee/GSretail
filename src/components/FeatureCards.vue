@@ -89,6 +89,13 @@ onUnmounted(() => {
     letter-spacing: -0.01em;
     display: block;
 }
+@media (max-width: 768px) {
+    .feature_card_num {
+        margin-bottom: 6px;
+        line-height: 1.5;
+        letter-spacing: 0;
+    }
+}
 
 .feature_card_icon {
     width: 48px;
@@ -152,7 +159,7 @@ onUnmounted(() => {
     }
 
     .feature_card_swiper :deep(.swiper-slide) {
-        width: 327px;
+        width: 84vw;
     }
 
     .feature_card_swiper :deep(.swiper-pagination) {
@@ -178,7 +185,7 @@ onUnmounted(() => {
     }
 
     .feature_card_item {
-        width: 327px;
+        width: 84vw;
         height: auto;
         min-height: 0;
         padding: 32px;

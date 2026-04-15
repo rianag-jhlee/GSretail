@@ -1,34 +1,36 @@
 <template>
-    <dt>
-        <a
-            :id="headerId"
-            href="#none"
-            class="acc_tit_btn"
-            :class="{ acc_tit_open: expanded }"
-            role="button"
-            :aria-expanded="expanded"
-            :aria-controls="panelId"
-            @click.prevent="onToggle"
-            @keydown.enter.prevent="onToggle"
-            @keydown.space.prevent="onToggle"
+    <div class="acc_item">
+        <dt>
+            <a
+                :id="headerId"
+                href="#none"
+                class="acc_tit_btn"
+                :class="{ acc_tit_open: expanded }"
+                role="button"
+                :aria-expanded="expanded"
+                :aria-controls="panelId"
+                @click.prevent="onToggle"
+                @keydown.enter.prevent="onToggle"
+                @keydown.space.prevent="onToggle"
+            >
+                <slot name="title">제목</slot>
+            </a>
+        </dt>
+        <dd
+            :id="panelId"
+            ref="panelRef"
+            class="acc_panel"
+            role="region"
+            :aria-labelledby="headerId"
+            :aria-hidden="!expanded"
         >
-            <slot name="title">제목</slot>
-        </a>
-    </dt>
-    <dd
-        :id="panelId"
-        ref="panelRef"
-        class="acc_panel"
-        role="region"
-        :aria-labelledby="headerId"
-        :aria-hidden="!expanded"
-    >
-        <div class="acc_panel_inner">
-            <div class="acc_panel_cont">
-                <slot />
+            <div class="acc_panel_inner">
+                <div class="acc_panel_cont">
+                    <slot />
+                </div>
             </div>
-        </div>
-    </dd>
+        </dd>
+    </div>
 </template>
 
 <script setup>
@@ -36,6 +38,7 @@ import {
     computed,
     inject,
     defineProps,
+    defineEmits,
     ref,
     watch,
     nextTick,
@@ -47,6 +50,8 @@ const props = defineProps({
     /** Accordion 내에서 고유한 키 (문자·숫자) */
     itemKey: { type: [String, Number], required: true },
 });
+
+const emit = defineEmits(["opened", "closed"]);
 
 const ctx = inject(ACCORDION_INJECT_KEY, null);
 
@@ -107,6 +112,7 @@ function expandPanel() {
         }
         el.style.height = "auto";
         el.classList.remove("acc_animating");
+        emit("opened");
     };
     el.addEventListener("transitionend", onEnd, { once: true });
 }
@@ -158,11 +164,13 @@ watch(
         if (wasOpen === undefined && !open) return;
         nextTick(() => {
             if (open) expandPanel();
-            else collapsePanel();
+            else collapsePanel(); 
         });
     },
     { flush: "post" }
 );
+
+defineExpose({ expanded });
 </script>
 
 <style scoped>
@@ -172,11 +180,10 @@ dt > a.acc_tit_btn {
     padding: 16px;
     margin: 0;
     border: none;
-    background: transparent;
     color: #111;
     cursor: pointer;
     box-sizing: border-box;
-    background-color: #f5f5f5;
+    background-color: #fff;
     text-decoration: none;
     font-size: 18px;
     font-weight: 600;
@@ -201,19 +208,15 @@ dt > a.acc_tit_btn::after {
     content: "";
     display: block;
     flex-shrink: 0;
-    width: 12px;
-    height: 12px;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: rotate(45deg);
-    margin-top: -4px;
-    transition: transform 0.3s ease;
+    width: 24px;
+    height: 24px;
+    background-color: red;
 }
 
-dt > a.acc_tit_open::after {
+/* dt > a.acc_tit_open::after {
     transform: rotate(225deg);
     margin-top: 4px;
-}
+} */
 
 dd.acc_panel {
     overflow: hidden;
@@ -230,15 +233,25 @@ dd.acc_panel > .acc_panel_inner > .acc_panel_cont {
 }
 
 @media (max-width: 768px) {
+    dd.acc_panel > .acc_panel_inner > .acc_panel_cont {
+        padding:0;
+    }
+}
+
+@media (max-width: 768px) {
     dt > a.acc_tit_btn {
-        padding-right: 0;
+        min-height: 64px;
+        padding:0 20px;
         font-size: 16px;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 1.4;
+        letter-spacing: 0%;
     }
 
     dd.acc_panel > .acc_panel_inner > .acc_panel_cont {
         padding-right: 0;
-        padding-bottom: 20px;
-        font-size: 15px;
+        font-size: 1.5rem;
     }
 }
 </style>
