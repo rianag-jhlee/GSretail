@@ -1228,7 +1228,8 @@
                         <li v-for="(note, ni) in tab.notes" :key="ni">{{ note.text }}</li>
                     </ul> 
                 </PanelHeader>
-                <ul v-if="tab.items && tab.items.length" class="winwin_item_list">
+                <section>
+                    <ul v-if="tab.items && tab.items.length" class="winwin_item_list">
                     <li v-for="(item, ii) in tab.items" :key="ii" class="winwin_item">
                         <article>
                             <div class="winwin_item_icon" aria-hidden="true"></div>
@@ -1242,14 +1243,15 @@
                                 </div>
                                 <div class="winwin_item_body">
                                     <p v-if="item.desc" v-html="item.desc"></p>
-                                    <ul v-if="item.bullets && item.bullets.length" class="winwin_bullet_list">
-                                        <li v-for="(b, bi) in item.bullets" :key="bi">{{ b }}</li>
+                                    <ul v-if="item.bullets && item.bullets.length" class="list_dotted">
+                                        <li v-for="(b, bi) in item.bullets" :key="bi"><p>{{ b }}</p></li>
                                     </ul>
                                 </div>
                             </div>
                         </article>
                     </li>
                 </ul>
+                </section>
             </div>
         </div>
 
@@ -2499,7 +2501,7 @@ const langData = {
                             {
                                 num: "01",
                                 title: "인력 지원 제도",
-                                desc: "매출 향상, 신상품 도입 등 점포 경쟁력 향상을 위해<br />노력하시는 경영주님을 위한 인센티브 제도",
+                                desc: "매출 향상, 신상품 도입 등 점포 경쟁력 향상을 위해<br class=\"p_br\" />노력하시는 경영주님을 위한 인센티브 제도",
                             },
                             {
                                 num: "02",
@@ -4919,6 +4921,12 @@ line-height: 1.4;
     padding: 64px 0;
     border-bottom: 1px solid #e5e5e9;
 }
+@media (max-width: 768px) {
+    .winwin_item {
+        padding: 0;
+        border:0;
+    }
+}
 
 /* 첫 번째 줄: 상단 여백 제거 */
 .winwin_item:nth-child(-n+2) {
@@ -4945,16 +4953,20 @@ line-height: 1.4;
     flex-shrink: 0;
 }
 
-.winwin_item_content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+@media (max-width: 768px) {
+    .winwin_item > article{
+        gap: 16px;
+    }
+    .winwin_item_icon {
+        width: 60px;
+        height: 60px;
+    }
 }
 
+
+
 .winwin_item_title {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    margin-bottom: 24px;
 }
 
 /* 번호·제목 공통 폰트 */
@@ -4966,8 +4978,11 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
+
 .winwin_item_num {
+    margin-bottom: 4px;
     color: #107af2;
+    display:inline-block;
 }
 
 .winwin_item_title > strong {
@@ -4987,7 +5002,6 @@ line-height: 1.4;
 }
 
 .winwin_item_body > p {
-    margin-top: 8px;
     color: #67676f;
     font-size: 2rem;
     font-weight: 700;
@@ -4996,9 +5010,53 @@ line-height: 1.4;
 }
 
 .winwin_item_body > p.winwin_item_desc {
-    margin-top: 0;
     font-weight: 400;
 }
+.winwin_item_body .list_dotted {
+    margin-top: 16px;
+}
+
+.winwin_item_body .list_dotted > li::before{
+     background-color:#67676f;
+}
+.winwin_item_body .list_dotted > li + li{
+    margin-top:6px;
+} 
+.winwin_item_body .list_dotted > li > p{
+    color:#67676f;
+    font-size: 1.8rem;
+    line-height: 1.4;
+
+}
+
+
+@media (max-width: 768px) {
+    .winwin_item_content{
+        gap:6px;
+    }
+    .winwin_item_num{
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0%;
+    }
+    .winwin_item_title{
+        margin-bottom: 6px;
+    }
+    .winwin_item_title > strong {
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+    }
+    .winwin_item_body .list_dotted > li p{
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+    }
+    .winwin_item_body .list_dotted > li + li{
+        margin-top:4px;
+    }
+}
+
 
 .sec_note {
     margin: 8px 0 0;
@@ -5021,54 +5079,14 @@ line-height: 1.4;
     }
 }
 
-.winwin_bullet_list {
-    margin: 16px 0 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
 
-.winwin_bullet_list > li {
-    padding-left: 12px;
-    color: #67676f;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.4;
-    position: relative;
-}
-
-.winwin_bullet_list > li::before {
-    width: 4px;
-    height: 4px;
-    background-color: #67676f;
-    border-radius: 50%;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    content: "";
-    display: block;
-}
 
 @media (max-width: 768px) {
     .winwin_item_list {
         grid-template-columns: 1fr;
+        gap:40px;
     }
 
-    /* PC에서 제거된 2번째 아이템 상단 여백 복원 */
-    .winwin_item:nth-child(2) {
-        padding-top: 64px;
-    }
-
-    /* PC에서 제거된 보더 복원 */
-    .winwin_item:nth-last-child(2):nth-child(odd) {
-        border-bottom: 1px solid #e5e5e9;
-    }
-
-    .winwin_item_num,
-    .winwin_item_title > strong {
-        font-size: 2.4rem;
-    }
 
 }
 
@@ -6265,7 +6283,10 @@ line-height: 1.4;
         width: 69.33vw; /* 260px ÷ 375px × 100 */
     }
     .winwin_item_body > p{
-        margin-top: 0;
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0;
+
     }
 }
 
