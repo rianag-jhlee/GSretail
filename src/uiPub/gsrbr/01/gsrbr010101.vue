@@ -1116,23 +1116,36 @@
                 :hero="store.tabs[2].hero"
                 :hero-alt="store.tabs[2].heroAlt"
                 :title="store.tabs[2].title"
+                :desc="store.tabs[2].subtitle"
             >
-                <p class="brand_panel_desc">지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.
+                <p class="brand_panel_desc">지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에 서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.
+                    <br class="m_br" />
+                    <br class="m_br" />
                     기존지로 납부 외 휴대폰을 통한 모바일수납도 가능하며,납부공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부가능합니다.</p>
-            </PanelHeader>
+                    <ul class="list_dotted">
+                        <li>
+                            <p>접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.</p>
+                        </li>
+                        <li>
+                            <p>GS포스트박스 회원으로 접수 시 다양한 이벤트에 참여 가능하며, 사용량에 따라 등급 별 혜택을 제공합니다.</p>
+                        </li>
+                    </ul>
+                </PanelHeader>
             <section v-if="store.tabs[2].taxGroups && store.tabs[2].taxGroups.length" class="sec_tax_list">
                 <SectionHeader :title="store.tabs[2].taxTitle" />
-                <div class="tax_group_list">
-                    <div v-for="(group, gi) in store.tabs[2].taxGroups" :key="gi" class="tax_group">
-                        <h4 class="tax_group_subtitle">{{ group.subtitle }}</h4>
-                        <ul v-if="group.isList" class="list_dotted">
-                            <li v-for="(item, ii) in group.items" :key="ii"><p>{{ item }}</p></li>
-                        </ul>
-                        <template v-else>
-                            <p v-for="(item, ii) in group.items" :key="ii" class="tax_group_desc">{{ item }}</p>
-                        </template>
-                    </div>
-                </div>
+                <dl class="tax_group_list">
+                    <template v-for="(group, gi) in store.tabs[2].taxGroups" :key="gi">
+                        <dt class="tax_group_subtitle">{{ group.subtitle }}</dt>
+                        <dd>
+                            <ul v-if="group.isList" class="list_dotted">
+                                <li v-for="(item, ii) in group.items" :key="ii"><p>{{ item }}</p></li>
+                            </ul>
+                            <template v-else>
+                                <p v-for="(item, ii) in group.items" :key="ii" class="tax_group_desc">{{ item }}</p>
+                            </template>
+                        </dd>
+                    </template>
+                </dl>
             </section>
         </div>
         <!-- 상품권 판매 -->
@@ -1145,7 +1158,8 @@
             />
             <section v-if="store.tabs[3].voucherItems && store.tabs[3].voucherItems.length" class="sec_voucher">
                 <SectionHeader :title="store.tabs[3].voucherTitle" />
-                <ul class="voucher_list">
+                <!-- PC -->
+                <ul v-if="!isMobileView" class="voucher_list">
                     <li v-for="(item, vi) in store.tabs[3].voucherItems" :key="vi" class="voucher_item">
                         <div class="voucher_img">
                             <img :src="item.img" :alt="item.name" />
@@ -1159,6 +1173,28 @@
                         </div>
                     </li>
                 </ul>
+                <!-- 모바일 Swiper -->
+                <Swiper
+                    v-else
+                    class="voucher_swiper"
+                    slides-per-view="auto"
+                    :space-between="20"
+                >
+                    <SwiperSlide v-for="(item, vi) in store.tabs[3].voucherItems" :key="vi">
+                        <div class="voucher_item">
+                            <div class="voucher_img">
+                                <img :src="item.img" :alt="item.name" />
+                            </div>
+                            <div class="voucher_info">
+                                <strong class="voucher_name">{{ item.name }}</strong>
+                                <div class="voucher_tags">
+                                    <span v-for="(tag, ti) in item.tags" :key="ti" class="voucher_tag" :class="`tag_${tag.type}`">{{ tag.text }}</span>
+                                </div>
+                                <p class="voucher_desc">{{ item.desc }}</p>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
             </section>
         </div>
         <!-- 상생협력: 운영지원제도 -->
@@ -2379,7 +2415,7 @@ const langData = {
             {
                 hero: null,
                 heroAlt: "",
-                title: "공공요금수납",
+                title: "공공요금수납 서비스",
                 subtitle: "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
                 desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.",
                 sections: [],
@@ -3485,6 +3521,14 @@ function goBack() {
     line-height: 1.35;
     letter-spacing: -0.01em;
     color:#67676F;
+}
+@media (max-width: 768px) {
+    .brand_panel_desc {
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+
+    }
 }
 /* ── 공통 list_dotted ── */
 .list_dotted > li {
@@ -6060,9 +6104,27 @@ line-height: 1.4;
 
 /* 공공요금수납 납부가능 세금 및 공과금 */
 .tax_group_list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.tax_group_list > dd {
+    margin: 0 0 40px;
+}
+
+.tax_group_list > dd:last-child {
+    margin-bottom: 0;
+}
+@media (max-width: 768px) {
+    .tax_group_list {
+       margin-top:24px;
+    }
+}
+.tax_group_list .list_dotted > li + li{
+    margin-top:6px;
+}
+.tax_group_list .list_dotted > li::before{
+    background-color:#67676F;
 }
 .tax_group_list .list_dotted > li p{
     color:#67676F;
@@ -6076,10 +6138,21 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-.tax_group_desc {
+.tax_group_desc,
+.tax_group_list .list_dotted > li p {
     font-size: 1.8rem;
     color: #67676f;
     line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .tax_group_desc,
+    .tax_group_list .list_dotted > li p  {
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+
+    }
 }
 
 /* 상품권 판매 */
@@ -6109,27 +6182,41 @@ line-height: 1.4;
 }
 
 .voucher_info {
-    margin-top: 24px;
+    padding-top: 24px;
 }
 
 .voucher_name {
-    display: block;
+    margin-bottom: 8px;
     font-size: 2rem;
-    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    font-weight: 700; 
     color: #000;
+    display: block;
 }
 
-.voucher_tags {
-    margin-top: 10px;
-    display: flex;
-    gap: 6px;
+
+@media (max-width: 768px) {
+    .voucher_name {
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+    }
+}
+
+.voucher_tags { 
+    margin-bottom: 16px;
     letter-spacing: -0.01em;
     line-height: 1.4;
+    display: flex;
+    gap: 4px; 
 }
 
 .voucher_tag {
     padding: 2px 8px;
     font-size: 1.4rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em; 
     border-radius: 4px;
 }
 
@@ -6149,28 +6236,33 @@ line-height: 1.4;
 }
 
 .voucher_desc {
-    margin-top: 10px;
     font-size: 1.6rem;
     color: #67676f;
     line-height: 1.5;
+    letter-spacing: -0.01em;
 }
 
 @media (max-width: 768px) {
-    .sec_tax_list {
-        margin-top: 40px;
-    }
-
     .tax_group_subtitle {
-        font-size: 2rem;
+        margin-bottom:12px;
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+ 
     }
 
-    .sec_voucher {
-        margin-top: 40px;
+    .brand_panel section.sec_voucher {
+        padding:0 !important;
+    }
+    .brand_panel section.sec_voucher header{
+        padding:0 20px;
+    }
+    .sec_voucher .voucher_swiper {
+      padding:0 20px;
     }
 
-    .voucher_list {
-        flex-direction: column;
-        gap: 32px;
+    .voucher_swiper .swiper-slide {
+        width: 69.33vw; /* 260px ÷ 375px × 100 */
     }
     .winwin_item_body > p{
         margin-top: 0;
