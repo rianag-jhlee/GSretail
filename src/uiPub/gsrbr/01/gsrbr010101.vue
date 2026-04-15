@@ -61,7 +61,7 @@
                     <h2>당신 곁에는 언제나<br />GS25가 있습니다.</h2>
                     <div class="str_actions">
                         <a
-                            href="#none"
+                            href="#"
                             class="btn_store_find"
                             data-popid="pop_store_find"
                             data-type="lg"
@@ -69,8 +69,8 @@
                             @click.prevent="openModal"
                         >매장 찾기</a>
                         <div class="sns_wrap">
-                            <a href="#none" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
-                            <a href="#none" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
+                            <a href="#" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
+                            <a href="#" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
                         </div>
                     </div>
                 </header>
@@ -991,7 +991,7 @@
                         <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc">
                             <ul v-if="tab.notes && tab.notes.length" class="list_dotted">
                                 <li v-for="(note, ni) in tab.notes" :key="ni">
-                                    <p>{{ note.text }}</p>
+                                    <p v-html="note.text"></p>
                                     <p v-if="note.sub" class="note_sub">{{ note.sub }}</p>
                                 </li>
                             </ul>
@@ -1319,10 +1319,9 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onMounted, onUnmounted, onBeforeUnmount } from "vue";
+import { ref, nextTick, watch, onMounted, onBeforeUnmount } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 import { useRouter } from "vue-router";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Navigation } from "swiper/modules";
@@ -1443,6 +1442,8 @@ import imgServiceDesc06    from "@/assets/images/dummy/service_desc_06.png";
 import imgGiftCerti01 from "@/assets/images/dummy/gift_certi_01.png";
 import imgGiftCerti02 from "@/assets/images/dummy/gift_certi_02.png";
 import imgGiftCerti03 from "@/assets/images/dummy/gift_certi_03.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const router = useRouter();
 
@@ -2311,7 +2312,7 @@ const langData = {
                                 { label: "내륙↔내륙 / 제주↔제주", labelMo: "내륙↔내륙<br />제주↔제주" },
                                 { label: "제주↔내륙 / 내륙↔도서", labelMo: "제주↔내륙<br />내륙↔도서" },
                             ],
-                            colWidths: ["54px", "auto", "auto"],
+                            colWidths: ["18.87%", "40.56%", "40.56%"],
                             rows: [
                                 {
                                     cells: [
@@ -2335,10 +2336,6 @@ const langData = {
                                         "제주↔내륙 : 접수일 포함 5~7일 내",
                                     ],
                                     note: [
-                                        "*주말/공휴일 배송 가능",
-                                        "*내륙↔제주 간 반값택배는 접수일 포함 7일 이내 배송 완료 됩니다.",
-                                        "*기상 상황으로 선박 운행이 불가하거나, 선박운행 스케줄 변동으로 배송소요일이 추가될 수 있습니다.",
-                                    ],                                    note: [
                                         "*주말/공휴일 배송 가능",
                                         "*내륙↔제주 간 반값택배는 접수일 포함 7일 이내 배송 완료 됩니다.",
                                         "*기상 상황으로 선박 운행이 불가하거나, 선박운행 스케줄 변동으로 배송소요일이 추가될 수 있습니다.",
@@ -2801,7 +2798,7 @@ onMounted(() => {
                     bgWrapRef.value.style.webkitClipPath = clip;
                     bgWrapRef.value.classList.toggle("active", p >= 1);
                 },
-            });
+            }); 
 
             gsap.set([...spans, logoWrapRef.value], { opacity: 0, y: 40 });
 
@@ -2853,11 +2850,9 @@ onMounted(() => {
         });
     });
 });
-onUnmounted(() => {
+onBeforeUnmount(() => {
     window.removeEventListener("resize", _onResize);
     if (popSecObserver) popSecObserver.disconnect();
-});
-onBeforeUnmount(() => {
     if (gsapCtx) gsapCtx.revert();
 });
 
@@ -2985,8 +2980,8 @@ function goBack() {
 /* =====================
    sec_brand_visual
    ===================== */
-@media (max-width: 768px){
-    .cafe25_split_img >img{
+@media (max-width: 768px) {
+    .cafe25_split_img > img {
         width: 100%;
     }
 }
@@ -2994,17 +2989,19 @@ function goBack() {
 .cafe_panel :deep(.brand_panel_bg > img) {
     object-position: center bottom;
 }
+
 .chicken_panel .img_grid_swiper {
-   margin-top:120px;
+    margin-top: 120px;
 }
 
 @media (max-width: 768px) {
     .chicken_panel .img_grid_swiper {
-        margin-top:60px;
+        margin-top: 60px;
     }
 }
+
 .gopizza_panel .img_grid,
-.gopizza_panel .img_grid_swiper{
+.gopizza_panel .img_grid_swiper {
     margin-top: 0;
     padding:0;
 }
@@ -3023,8 +3020,8 @@ function goBack() {
     .gopizza_panel :deep(.brand_panel_bg > img) {
         object-position: -591px bottom;
     } 
-    .gopizza_panel :deep(.diff_bottom_row){
-        margin-top:120px;
+    .gopizza_panel :deep(.diff_bottom_row) {
+        margin-top: 120px;
     }
     .sinsen_panel :deep(.brand_panel_bg > img) {
         object-position: -797px bottom; 
@@ -3229,7 +3226,7 @@ function goBack() {
 .sec_brand_str > .str_inner {
     width: 1420px;
     margin: 0 auto;
-    padding:200px 0;
+    padding: 200px 0;
 }
 
 .str_header {
@@ -3530,8 +3527,8 @@ function goBack() {
         flex: none;
         justify-content: flex-start;
     }
-    .sns_wrap{
-        gap:16px
+    .sns_wrap {
+        gap: 16px;
     }
     .btn_sns{
         width: 40px;
@@ -3678,20 +3675,12 @@ button {
     cursor: pointer;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_select_box  {
         width: 100%;
         font-size: 1.4rem;
         line-height: 1.4;
     }
-}
-.tab_wrap {
-    margin-bottom: 0;
-}
-
-.tab_wrap + .tab_wrap {
-    margin-top: 24px;
-    margin-bottom: 24px;
 }
 
 .brand_content {
@@ -3977,42 +3966,6 @@ button {
     object-fit: cover;
 }
 
-/* ── 탭 2: CHICKEN25 ── */
-.chicken25_card_list {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, calc((100% - 40px) / 3));
-    gap: 20px;
-}
-.chicken25_card_list > li {
-    min-width: 0;
-}
-
-.chicken25_card {
-    height: 264px;
-    padding: 32px;
-    background-color: #f8f8f8;
-    border-radius: 12px;
-}
-
-.chicken25_card > h4 {
-    margin: 0 0 16px;
-    color: #161618;
-    font-size: 2.4rem;
-    font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-.chicken25_card > p {
-    margin: 0;
-    color: #67676f;
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-}
 
 .img_grid {
     margin-top: 120px;
@@ -4034,29 +3987,6 @@ button {
 }
 
 /* ── 탭 3: GOPIZZA ── */
-.gopizza_img_grid {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, calc((100% - 20px) / 2));
-    gap: 20px;
-}
-
-.gopizza_img_grid > li {
-    min-width: 0;
-}
-
-.gopizza_img_grid > li > div {
-    height: 440px;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.gopizza_img_grid img {
-    height: 100%;
-    object-fit: cover;
-}
-
 .gopizza_img_wrap {
     height: 440px;
     margin: 0;
@@ -4088,10 +4018,10 @@ button {
 }
 
 @media (max-width: 768px) {
-    .gopizza_menu_panel + .gopizza_menu_panel{
-        margin-top:100px;
+    .gopizza_menu_panel + .gopizza_menu_panel {
+        margin-top: 100px;
     }
-    .gopizza_menu_panel img{
+    .gopizza_menu_panel img {
         min-height: 240px;
     }
 }
@@ -4199,6 +4129,7 @@ button {
 
 .com_table_col td {
     padding: 15px 24px;
+    text-align: center;
 }
 
 /* 모바일 */
@@ -4344,15 +4275,14 @@ button {
         min-height: 227px;
     }
 }
-.info_card span{
-font-size: 1.8rem;
-line-height: 1.4;
+.info_card span {
+    font-size: 1.8rem;
+    line-height: 1.4;
 }
 @media (max-width: 768px) {
     .info_card span {
-    font-size: 1.4rem; 
-    letter-spacing: -0.01em;
-
+        font-size: 1.4rem;
+        letter-spacing: -0.01em;
     }
 }
 .info_card > p {
@@ -4723,9 +4653,9 @@ line-height: 1.4;
 
 @media (max-width: 768px) {
     .charging_service_note {
-        margin-top:24px;
+        margin-top: 24px;
         margin-bottom: 8px;
-        padding:0 32px 24px;
+        padding: 0 32px 24px;
         font-size: 1.6rem;
         line-height: 1.5;
         letter-spacing: -0.01em;
@@ -4741,7 +4671,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .charging_note_label{
         font-size: 1.4rem; 
         line-height: 1.4;
@@ -4755,7 +4685,7 @@ line-height: 1.4;
     gap: 20px;
     margin-bottom: 40px;
 }
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_header{
        margin-bottom: 24px;
        display: block;
@@ -4780,7 +4710,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_group_title{
         margin-bottom: 24px;
         font-size: 1.8rem;
@@ -4817,7 +4747,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_def_list {
         gap: 8px 16px;
     }
@@ -4838,7 +4768,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_def_list > dd {
         font-size: 1.4rem;
         line-height: 1.4;
@@ -5069,12 +4999,12 @@ line-height: 1.4;
 }
 
 .winwin_item_body .list_dotted > li::before{
-     background-color:#67676f;
+    background-color: #67676f;
 }
-.winwin_item_body .list_dotted > li + li{
-    margin-top:6px;
-} 
-.winwin_item_body .list_dotted > li > p{
+.winwin_item_body .list_dotted > li + li {
+    margin-top: 6px;
+}
+.winwin_item_body .list_dotted > li > p {
     color:#67676f;
     font-size: 1.8rem;
     line-height: 1.4;
@@ -5104,8 +5034,8 @@ line-height: 1.4;
         line-height: 1.5;
         letter-spacing: -0.01em;
     }
-    .winwin_item_body .list_dotted > li + li{
-        margin-top:4px;
+    .winwin_item_body .list_dotted > li + li {
+        margin-top: 4px;
     }
 }
 
@@ -5136,10 +5066,8 @@ line-height: 1.4;
 @media (max-width: 768px) {
     .winwin_item_list {
         grid-template-columns: 1fr;
-        gap:40px;
+        gap: 40px;
     }
-
-
 }
 
 /* ── 택배&픽업 — 안내 목록 ── */
@@ -5159,35 +5087,8 @@ line-height: 1.4;
 .brand_panel_title .list_dotted > li > p.note_sub {
     color: #f95823;
 }
-/* ── 택배&픽업 — 이용요금 테이블 ── */
-.price_table_note {
-    margin: 4px 0 0;
-    color: #f95823;
-    font-size: 1.4rem;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-}
-
 
 /* ── 택배&픽업 — 이용요금 ── */
-
-
-
-@media (max-width: 768px) {
-
-}
-
-.info_list_subs {
-    margin: 6px 0 0;
-    padding: 0;
-}
-
-.info_list_subs > li {
-    color: #67676f;
-    font-size: 1.8rem;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-}
 
 /* ── 고속도로 미납 통행료 납부 · 온라인몰 편의점 결제 공통 ── */
 .sec_unpaid_advantage :deep(.feature_card_item),
@@ -5854,21 +5755,10 @@ line-height: 1.4;
     background-color: #161616;
 }
 
-.usim_hiplus_list > li {
-    color: #67676f;
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-}
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .cafe25_card_list {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .chicken25_card_list {
-        grid-template-columns: repeat(2, calc((100% - 20px) / 2));
     }
 
     .gopizza_menu {
@@ -6042,10 +5932,6 @@ line-height: 1.4;
         padding-bottom: 40px;
     }
 
-    .chicken25_card_list {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
     .img_grid_swiper {
         padding: 0 20px;
         overflow: visible;
@@ -6187,14 +6073,14 @@ line-height: 1.4;
 }
 @media (max-width: 768px) {
     .tax_group_list {
-       margin-top:24px;
+        margin-top: 24px;
     }
 }
-.tax_group_list .list_dotted > li + li{
-    margin-top:6px;
+.tax_group_list .list_dotted > li + li {
+    margin-top: 6px;
 }
-.tax_group_list .list_dotted > li::before{
-    background-color:#67676F;
+.tax_group_list .list_dotted > li::before {
+    background-color: #67676f;
 }
 .tax_group_list .list_dotted > li p{
     color:#67676F;
@@ -6322,19 +6208,19 @@ line-height: 1.4;
     }
 
     .brand_panel section.sec_voucher {
-        padding:0 !important;
+        padding: 0 !important;
     }
-    .brand_panel section.sec_voucher header{
-        padding:0 20px;
+    .brand_panel section.sec_voucher header {
+        padding: 0 20px;
     }
     .sec_voucher .voucher_swiper {
-      padding:0 20px;
+        padding: 0 20px;
     }
 
     .voucher_swiper .swiper-slide {
         width: 69.33vw; /* 260px ÷ 375px × 100 */
     }
-    .winwin_item_body > p{
+    .winwin_item_body > p {
         font-size: 1.6rem;
         line-height: 1.24;
         letter-spacing: 0;
@@ -6342,15 +6228,15 @@ line-height: 1.4;
     }
 }
 
-.link_wrap{
-    margin-top:64px;
+.link_wrap {
+    margin-top: 64px;
     display: flex;
     justify-content: center;
 }
-.link_wrap > .btn_pickup{
+.link_wrap > .btn_pickup {
     height: 64px;
-    padding:20px 32px;
-    color:#fff;
+    padding: 20px 32px;
+    color: #fff;
     text-align: center;
     font-size: 1.8rem;
     line-height: 1.4;
@@ -6372,9 +6258,9 @@ line-height: 1.4;
         margin-top: 80px;
     }
 
-    .link_wrap > .btn_pickup{
-        height:44px;
-        padding:10px 16px;
+    .link_wrap > .btn_pickup {
+        height: 44px;
+        padding: 10px 16px;
         font-size: 1.6rem;
         line-height: 1.5;
         letter-spacing: -0.01em;
@@ -6382,14 +6268,13 @@ line-height: 1.4;
     }
 
 }
-.milbox_panel .imgcard_body{
+.milbox_panel .imgcard_body {
     padding: 32px 0 24px;
 }
 @media (max-width: 768px) {
     .milbox_panel .imgcard_body {
-        padding:24px 0;
+        padding: 24px 0;
     }
-
 }
 
 </style>

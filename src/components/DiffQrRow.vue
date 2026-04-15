@@ -5,7 +5,7 @@
         </figure>
         <div>
             <strong>{{ title }}</strong>
-            <p>{{ isMobileView && mobileDesc ? mobileDesc : desc }}</p>
+            <p v-html="isMobileView && mobileDesc ? mobileDesc : desc"></p>
         </div>
     </div>
 </template>
