@@ -2753,7 +2753,12 @@ const scrollToSection = (idx) => {
 
 const _getIsMobile = () => window.innerWidth <= 768;
 const isMobileView = ref(_getIsMobile());
-const _onResize = () => { isMobileView.value = _getIsMobile(); };
+let _resizeTimer = null;
+const _onResize = () => {
+    isMobileView.value = _getIsMobile();
+    clearTimeout(_resizeTimer);
+    _resizeTimer = setTimeout(() => { ScrollTrigger.refresh(); }, 150);
+};
 
 let popSecObserver = null;
 onMounted(() => {
