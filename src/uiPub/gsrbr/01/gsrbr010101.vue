@@ -484,13 +484,13 @@
 
                 <!-- 운영 장점 체크리스트 카드 -->
                 <div v-if="sec.advantages" class="info_card">
-                    <ul class="sinsen_check_list">
+                    <ul class="info_list">
                         <li v-for="(item, ii) in sec.advantages.items" :key="ii">
                             <div>
-                                <span>{{ item.text }}</span>
-                                <span v-if="item.note" class="sinsen_check_note">{{ item.note }}</span>
+                                <span>{{ item.text }}</span> 
+                                <span v-if="item.note" class="info_check_note">{{ item.note }}</span>
                             </div>
-                        </li>
+                        </li> 
                     </ul>
                 </div>
             </section>
@@ -643,6 +643,12 @@
                                             </ul>
                                         </div>
                                     </section>
+
+
+
+
+
+
                                 </AccordionItem>
 
                                 <!-- 유통 사용처 안내 -->
@@ -837,7 +843,7 @@
                     </section>
 
                     <section>
-                        <SectionHeader :title="tab.purchaseTitle" />
+                        <SectionHeader :title="tab.purchaseTitle" steps-below />
                         <Steps type="2" :items="tab.purchaseSteps" />
                     </section>
 
@@ -862,7 +868,7 @@
                         </ul>
                     </PanelHeader>
                     <section>
-                        <SectionHeader :title="tab.hipassStepTitle" />
+                        <SectionHeader :title="tab.hipassStepTitle" steps-below />
                         <Steps type="2" :items="tab.hipassSteps" />
                     </section>
                     <section>
@@ -884,7 +890,7 @@
                         <FeatureCards :items="tab.serviceAdvantages" />
                     </section>
                     <section class="sec_unpaid_method">
-                        <SectionHeader :title="tab.unpaidTitle" />
+                        <SectionHeader :title="tab.unpaidTitle" steps-below />
                         <Steps type="2" :items="tab.unpaidSteps" />
                     </section>
                 </template>
@@ -936,13 +942,13 @@
 
                 <!-- 그 외 패널: 기본 구조 -->
                 <template v-else>
-                    <section>
                         <PanelHeader
                             :hero="tab.hero"
                             :hero-alt="tab.heroAlt"
                             :title="tab.title"
                             :desc="tab.desc"
                         />
+                    <section>
                         <div v-if="tab.table" class="com_table_wrap">
                             <table class="com_table">
                                 <tbody>
@@ -991,16 +997,19 @@
                             </ul>
                         </PanelHeader>
                         <section v-if="tab.steps && tab.steps.length" class="sec_delivery_service">
-                            <SectionHeader :title="tab.stepTitle" />
+                            <SectionHeader :title="tab.stepTitle" steps-below />
                             <Steps type="2" :items="tab.steps" />
                         </section>
                         <section v-if="tab.priceTable" class="sec_delivery_price_table">
                             <SectionHeader :title="tab.priceTable.title" />
                             <div class="com_table_wrap">
                                 <table class="com_table com_table_col">
+                                    <colgroup>
+                                        <col v-for="(w, ci) in tab.priceTable.colWidths" :key="ci" :style="{ width: w }">
+                                    </colgroup>
                                     <thead>
                                         <tr>
-                                            <th v-for="(col, ci) in tab.priceTable.columns" :key="ci" scope="col">{{ col }}</th>
+                                            <th v-for="(col, ci) in tab.priceTable.columns" :key="ci" scope="col" v-html="isMobileView && col.labelMo ? col.labelMo : col.label"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1015,10 +1024,21 @@
                             <SectionHeader :title="tab.infoTable.title" />
                             <div class="com_table_wrap">
                                 <table class="com_table">
+                                    <colgroup>
+                                        <col v-for="(w, ci) in tab.infoTable.colWidths" :key="ci" :style="{ width: w }">
+                                    </colgroup>
                                     <tbody>
                                         <tr v-for="(row, ri) in tab.infoTable.rows" :key="ri">
                                             <th scope="row">{{ row.head }}</th>
-                                            <td v-html="row.text"></td>
+                                            <td v-if="row.items">
+                                                <ul class="list_dotted">
+                                                    <li v-for="(item, ii) in row.items" :key="ii"><p>{{ item }}</p></li>
+                                                </ul>
+                                                <div v-if="row.note && row.note.length" class="caution_note">
+                                                    <p v-for="(n, ni) in row.note" :key="ni">{{ n }}</p>
+                                                </div>
+                                            </td>
+                                            <td v-else v-html="row.text"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1027,13 +1047,11 @@
                         <section v-if="tab.priceItems && tab.priceItems.length" class="sec_delivery_price">
                             <SectionHeader :title="tab.priceTitle" />
                             <div class="info_card">
-                                <ul class="sinsen_check_list">
+                                <ul class="info_list">
                                     <li v-for="(item, pi) in tab.priceItems" :key="pi">
                                         <div>
                                             <span>{{ item.text }}</span>
-                                            <div v-if="item.subs && item.subs.length">
-                                                <span v-for="(sub, si) in item.subs" :key="si" style="color: #67676f;">{{ sub }}</span>
-                                            </div>
+                                            <span v-for="(sub, si) in item.subs" :key="si" class="info_check_note">{{ sub }}</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -1052,7 +1070,7 @@
                             </ul>
                         </section>
                         <section v-if="tab.noticeItems && tab.noticeItems.length" class="sec_delivery_notice">
-                            <SectionHeader :title="tab.noticeTitle" />
+                            <SectionHeader :title="tab.noticeTitle" steps-below />
                             <Steps type="2" :items="tab.noticeItems" />
                         </section>
                         <section v-if="tab.chargeItems && tab.chargeItems.length" class="sec_delivery_charge">
@@ -1072,17 +1090,21 @@
                             </ul>
                         </section>
                         <section v-if="tab.pickupItems && tab.pickupItems.length" class="sec_delivery_pickup">
-                            <SectionHeader :title="tab.pickupTitle" />
+                            <SectionHeader :title="tab.pickupTitle" steps-below />
                             <Steps type="2" :items="tab.pickupItems" />
                         </section>
-                        <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
+                        <div v-if="tab.partnerBtnText" class="link_wrap">
+                            <a href="#" class="btn_pickup">{{ tab.partnerBtnText }}</a>
+                        </div>
+                            <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 -->     
+                        <!-- <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
                             <SectionHeader :title="tab.shoppingTitle" />
                             <ul class="list_dotted">
                                 <li v-for="(item, ii) in tab.shoppingItems" :key="ii">
                                     <p v-html="item.text"></p>
                                 </li>
-                            </ul>
-                        </section>
+                            </ul> 
+                        </section> -->
                     </div>
                 </template>
             </div>
@@ -2217,14 +2239,19 @@ const langData = {
                         steps: [
                             { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약", bullets: ["수령점포 선택 입력"] },
                             { step: "Step 2", title: "물품 포장 후<br />GS25 방문", bullets: ["세부 내용 작성", "세부 내용 작성", "<span style=\"color: #fb6432;\">특이사항 기재시 컬러</span>"] },
-                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" },
+                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" }, 
                             { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관" },
                         ],
                         priceTable: {
                             title: "반값택배 이용요금",
                             desc:  "운임 결제는 선불만 가능",
                             note:  "향후 지속 확대예정",
-                            columns: ["구분", "내륙↔내륙 / 제주↔제주", "제주↔내륙 / 내륙↔도서"],
+                            columns: [
+                                { label: "구분" },
+                                { label: "내륙↔내륙 / 제주↔제주", labelMo: "내륙↔내륙<br />제주↔제주" },
+                                { label: "제주↔내륙 / 내륙↔도서", labelMo: "제주↔내륙<br />내륙↔도서" },
+                            ],
+                            colWidths: ["54px", "auto", "auto"],
                             rows: [
                                 {
                                     cells: [
@@ -2237,11 +2264,26 @@ const langData = {
                         },
                         infoTable: {
                             title: "반값택배 이용안내",
+                            colWidths: ["136px", "auto"],
                             rows: [
                                 { head: "예약방법",    text: "반값택배 예약 시 도착점을 GS25 편의점으로 선택" },
                                 { head: "서비스 지역", text: "GS25 ↔ GS25" },
                                 { head: "수령방법",    text: "점포 근무자에게 알림톡으로 전송된 QR코드 제시" },
-                                { head: "배송기간",    text: "내륙~내륙, 제주~제주 : 접수일포함 4일 이내, 동일권역 2~3일 이내<br />제주↔내륙 : 접수일 포함 5~7일 내 *주말/공휴일 배송 가능<br />*내륙↔제주 간 반값택배는 접수일 포함 7일 이내 배송 완료 됩니다.<br />*기상 상황으로 선박 운행이 불가하거나, 선박운행 스케줄 변동으로 배송소요일이 추가될 수 있습니다." },
+                                { head: "배송기간",
+                                    items: [
+                                        "내륙~내륙, 제주~제주 : 접수일포함 4일 이내, 동일권역 2~3일 이내",
+                                        "제주↔내륙 : 접수일 포함 5~7일 내",
+                                    ],
+                                    note: [
+                                        "*주말/공휴일 배송 가능",
+                                        "*내륙↔제주 간 반값택배는 접수일 포함 7일 이내 배송 완료 됩니다.",
+                                        "*기상 상황으로 선박 운행이 불가하거나, 선박운행 스케줄 변동으로 배송소요일이 추가될 수 있습니다.",
+                                    ],                                    note: [
+                                        "*주말/공휴일 배송 가능",
+                                        "*내륙↔제주 간 반값택배는 접수일 포함 7일 이내 배송 완료 됩니다.",
+                                        "*기상 상황으로 선박 운행이 불가하거나, 선박운행 스케줄 변동으로 배송소요일이 추가될 수 있습니다.",
+                                    ],
+                                },
                             ],
                         },
                         cautionTitle: "반값택배 유의사항",
@@ -2305,12 +2347,13 @@ const langData = {
                         ],
                         pickupTitle: "픽업 이용방법",
                         pickupItems: [
-                            { step: "Step 1", title: "쇼핑몰 배송방법<br />편의점 PICK-UP 선택" },
+                            { step: "Step 1", title: "쇼핑몰 배송방법<br />편의점 PICK-UP 선택", bullets: ["회원, 영문작성"] },
                             { step: "Step 2", title: "가까운 GS25 선택"},
                             { step: "Step 3", title: "물건 도착 SMS를 받고<br />편의점 방문 수령"},
                         ],
                         shoppingTitle: "픽업서비스 제휴쇼핑몰",
                         shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
+                        partnerBtnText: "픽업 제휴쇼핑몰 확인하기",
                     },
                     {
                         label:   "쇼핑몰거래",
@@ -2329,6 +2372,7 @@ const langData = {
                         ],
                         shoppingTitle: "이용가능 제휴처",
                         shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
+                        partnerBtnText: "이용가능 제휴처 확인하기",
                     },
                 ],
             },
@@ -3442,6 +3486,7 @@ function goBack() {
     letter-spacing: -0.01em;
     color:#67676F;
 }
+/* ── 공통 list_dotted ── */
 .list_dotted > li {
     padding-left: 12px;
     position: relative;
@@ -3465,22 +3510,49 @@ function goBack() {
 .list_dotted > li > p {
     margin: 0;
     color: #161616;
-    font-size: 1.8rem; 
+    font-size: 1.8rem;
     line-height: 1.4;
 }
 
-@media (max-width: 768px) {   
-    .list_dotted > li > p {
-        font-size: 1.6rem;
-        line-height: 1.5;
-        letter-spacing: -0.01em;
-    }
-}
 .list_dotted > li > p :deep(a) {
     color: #107af2;
     font-size: 1.8rem;
     line-height: 1.4;
     text-decoration: underline;
+}
+
+.caution_note > p {
+    color: #67676f;
+}
+
+@media (max-width: 768px) {
+    .list_dotted > li {
+        padding-left: 6px;
+    }
+    .list_dotted > li::before {
+        top: 9px;
+        width:2px;
+        height:2px;
+    }
+    .list_dotted > li + li{
+        margin-top: 8px;
+    }
+    .list_dotted > li > p {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+    .caution_note {
+        margin-top: 8px;
+    }
+    .caution_note > p {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+    .brand_panel_title .list_dotted {
+        padding-right: 6px;
+    }
 }
 img {
     display: block;
@@ -3978,6 +4050,7 @@ button {
 }
 
 /* ── 공통 테이블 ── */
+/* ── 공통 테이블 ── */
 .com_table_wrap {
     overflow-x: auto;
 }
@@ -3990,7 +4063,7 @@ button {
 
 .com_table th,
 .com_table td {
-    padding: 0 24px;
+    padding: 18px 24px;
     color: #161618;
     font-size: 1.8rem;
     line-height: 1.6;
@@ -3999,38 +4072,60 @@ button {
     vertical-align: middle;
 }
 
+.com_table td {
+    font-weight: 400;
+    text-align: left;
+}
+
 .com_table thead th {
-    height: 64px;
+    padding: 11px 13px;
     font-weight: 600;
     background-color: #f8f8f8;
 }
 
 .com_table tbody th {
-    width: 136px;
-    min-width: 136px;
-    max-width: 136px;
     font-weight: 700;
     background-color: #f8f8f8;
     text-align: left;
     white-space: normal;
     word-break: keep-all;
-    vertical-align: top;
     padding-top: 18px;
     padding-bottom: 18px;
+    vertical-align: middle;
 }
 
-.com_table tbody td {
-    padding: 18px 24px;
-    font-weight: 400;
-    text-align: left;
-}
-
-.com_table_col thead th,
-.com_table_col tbody td {
+/* 열기준 테이블 (위 thead th / 아래 tbody td) */
+.com_table_col thead th {
     text-align: center;
 }
 
+.com_table_col td {
+    padding: 15px 24px;
+}
 
+/* 모바일 */
+@media (max-width: 768px) {
+    .com_table th,
+    .com_table td {
+        font-size: 1.6rem;
+        line-height: 1.24;
+    }
+    .com_table td {
+        padding: 14px 20px;
+        font-size: 1.4rem;
+        letter-spacing: 0.01em;
+    }
+    .com_table thead th {
+        padding: 14px 0;
+    }
+    .com_table tbody th {
+        padding: 14px 24px;
+    }
+    .com_table_col td {
+        padding: 11px 13px;
+        font-size: 1.4rem;
+    }
+}
 .gopizza_menu_name {
     display: flex;
     align-items: center;
@@ -4191,7 +4286,7 @@ line-height: 1.4;
 }
 
 /* 운영 장점 체크리스트 */
-.sinsen_check_list > li {
+.info_list > li {
     padding-bottom: 12px;
     color: #161618;
     font-size: 1.8rem;
@@ -4203,11 +4298,11 @@ line-height: 1.4;
     gap: 8px;
 }
 
-.sinsen_check_list > li:last-child {
+.info_list > li:last-child {
     padding-bottom: 0;
 }
 
-.sinsen_check_list > li::before {
+.info_list > li::before {
     content: "";
     width: 16px;
     height: 16px;
@@ -4218,28 +4313,14 @@ line-height: 1.4;
     flex-shrink: 0;
 }
 
-.sinsen_check_list > li > div {
+.info_list > li > div {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.sinsen_check_note {
+.info_check_note {
     color: #67676f;
-}
-
-.sinsen_check_subs {
-    margin-top: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.sinsen_check_subs > span {
-    color: #67676f;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
 }
 
 .chicken_panel :deep(.feature_card_item) {
@@ -4669,39 +4750,11 @@ line-height: 1.4;
 
 
 .usage_group .list_dotted > li {
-    padding: 0 0 0 12px;
     color: #67676f;
-    font-size: 1.8rem;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-    position: relative; 
-}
-
-@media (max-width: 768px){
-    .usage_group .list_dotted > li {
-        font-size: 1.4rem;
-        line-height: 1.4;
-
-} 
 }
 
 .usage_group .list_dotted > li::before {
-    content: "";
-    width: 4px;
-    height: 4px;
     background-color: #67676f;
-    border-radius: 50%;
-    position: absolute;
-    top: 0.8em; /* 첫 번째 줄 중앙: line-height(1.6) / 2 */
-    left: 0;
-    display: block;
-    transform: translateY(-50%);
-}
-
-@media (max-width: 768px) {
-    .usage_group .list_dotted > li::before {
-        top: 0.7em; /* 첫 번째 줄 중앙: line-height(1.4) / 2 */
-    }
 }
 
 
@@ -4980,30 +5033,17 @@ line-height: 1.4;
 .brand_panel_title .list_dotted {
     margin: 16px 0 0;
 }
-
 .brand_panel_title .list_dotted > li::before {
     background-color: #67676f;
 }
 
 .brand_panel_title .list_dotted > li > p {
     color: #67676f;
-    font-size: 2rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
 }
 
 .note_sub,
 .brand_panel_title .list_dotted > li > p.note_sub {
     color: #f95823;
-}
-
-@media (max-width: 768px) {
-    .brand_panel_title .list_dotted > li > p {
-        font-size: 1.4rem;
-        line-height: 1.4;
-        letter-spacing: -0.01em;
-
-    }
 }
 /* ── 택배&픽업 — 이용요금 테이블 ── */
 .price_table_note {
@@ -5016,51 +5056,19 @@ line-height: 1.4;
 
 
 /* ── 택배&픽업 — 이용요금 ── */
-/* .delivery_price_box 기본 박스 스타일은 .info_card로 통합 */
 
-.delivery_price_list {
-    margin: 0;
-    padding: 0;
-    
+
+
+@media (max-width: 768px) {
+
 }
 
-.delivery_price_list > li {
-    padding-left: 28px;
-    position: relative;
-}
-
-.delivery_price_list > li + li {
-    margin-top: 16px;
-}
-
-.delivery_price_list > li::before {
-    content: "";
-    width: 5px;
-    height: 10px;
-    border-right: 2px solid #107af2;
-    border-bottom: 2px solid #107af2;
-    position: absolute;
-    top: 3px;
-    left: 4px;
-    transform: rotate(45deg);
-    display: block;
-}
-
-.delivery_price_list > li > p {
-    margin: 0;
-    color: #161616;
-    font-size: 1.8rem;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-}
-
-.delivery_price_subs {
+.info_list_subs {
     margin: 6px 0 0;
     padding: 0;
-    
 }
 
-.delivery_price_subs > li {
+.info_list_subs > li {
     color: #67676f;
     font-size: 1.8rem;
     line-height: 1.4;
@@ -5074,7 +5082,7 @@ line-height: 1.4;
 }
 
 .sec_delivery_caution :deep(.feature_card_item) {
-    min-height: 216px;
+    min-height: 211px;
 }
 :deep(.txt_point) {
     color: #fb6432;
@@ -5086,6 +5094,9 @@ line-height: 1.4;
     }
     .sec_mall_payment_advantage :deep(.feature_card_item) {
         min-height: 244px;
+    }
+    .sec_delivery_caution :deep(.feature_card_item) {
+        min-height: 199px;
     }
 }
 
@@ -5179,7 +5190,7 @@ line-height: 1.4;
 
     .mall_site_figure > figcaption {
         color: #67676f;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         line-height: 1.4;
         letter-spacing: -0.01em;
         text-align: center;
@@ -5992,7 +6003,7 @@ line-height: 1.4;
         background-color: #e5e5e9;
     }
 
-    .sinsen_check_list > li {
+    .info_list > li {
         padding-bottom: 4px;
     }
 
@@ -6163,6 +6174,46 @@ line-height: 1.4;
     }
     .winwin_item_body > p{
         margin-top: 0;
+    }
+}
+
+.link_wrap{
+    margin-top:64px;
+    display: flex;
+    justify-content: center;
+}
+.link_wrap > .btn_pickup{
+    height: 64px;
+    padding:20px 32px;
+    color:#fff;
+    text-align: center;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    background-color: #107AF2;
+    border-radius: 10px;
+    border:0;
+    gap:8px;
+}
+.link_wrap > .btn_pickup::after{
+    content:'';
+    width: 16px;
+    height: 16px; 
+    background:#fff;
+
+}
+
+@media (max-width: 768px) {
+    .link_wrap {
+        margin-top: 80px;
+    }
+
+    .link_wrap > .btn_pickup{
+        height:44px;
+        padding:10px 16px;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+        border-radius: 8px;
     }
 }
 </style>
