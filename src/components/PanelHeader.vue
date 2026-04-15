@@ -4,7 +4,7 @@
     </figure>
 
     <header v-if="title" class="brand_panel_title">
-        <h2>{{ title }}</h2>
+        <h2 v-html="title"></h2>
         <p v-if="desc" v-html="desc" />
         <slot />
     </header>
