@@ -1,14 +1,36 @@
 <script setup>
-import { defineProps } from "vue";
+import { ref, defineProps, onMounted, onUnmounted } from "vue";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
 
 defineProps({
     type: { type: String, default: "1" },
     items: { type: Array, default: () => [] },
 });
+
+const _getIsMobile = () => window.innerWidth <= 768;
+const isMobileView = ref(false);
+const _onResize = () => { isMobileView.value = _getIsMobile(); };
+
+onMounted(() => {
+    isMobileView.value = _getIsMobile();
+    window.addEventListener("resize", _onResize);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("resize", _onResize);
+});
 </script>
 
 <template>
-    <ul class="step_list" :class="`step_type${type}`" :style="{ '--step-cols': items.length }">
+    <!-- PC, 또는 모바일 type=2: ul 리스트 -->
+    <ul
+        v-if="!isMobileView || type === '2'"
+        class="step_list"
+        :class="`step_type${type}`"
+        :style="{ '--step-cols': !isMobileView ? items.length : 1 }"
+    >
         <li v-for="(item, i) in items" :key="i" class="step_item">
             <span class="step_icon"></span>
             <div class="step_body">
@@ -21,6 +43,30 @@ defineProps({
             </div>
         </li>
     </ul>
+
+    <!-- 모바일 type=1: Swiper -->
+    <Swiper
+        v-else
+        :modules="[Pagination]"
+        slides-per-view="auto"
+        :space-between="8"
+        :pagination="{ clickable: true }"
+        class="step_swiper"
+    >
+        <SwiperSlide v-for="(item, i) in items" :key="i">
+            <div class="step_slide_card step_type1">
+                <span class="step_icon"></span>
+                <div class="step_body">
+                    <em class="step_num">{{ item.step }}</em>
+                    <strong class="step_title" v-html="item.title" />
+                    <ul v-if="item.bullets && item.bullets.length" class="step_bullets">
+                        <li v-for="(bullet, bi) in item.bullets" :key="bi" v-html="bullet" />
+                    </ul>
+                    <p v-if="item.note" class="step_note" v-html="item.note" />
+                </div>
+            </div>
+        </SwiperSlide>
+    </Swiper>
 </template>
 
 <style scoped>
@@ -31,6 +77,7 @@ defineProps({
     display: grid;
     grid-template-columns: repeat(var(--step-cols), 1fr);
 }
+
 .step_list.step_type1{
     gap:16px;
 }
@@ -69,7 +116,8 @@ defineProps({
     margin-bottom: 4px;
 }
 
-.step_type1 .step_item {
+.step_type1 .step_item,
+.step_type1.step_slide_card {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -81,7 +129,8 @@ defineProps({
 }
 
 /* ── Type 2: 아이콘 위, 텍스트 아래 세로 배치 ── */
-.step_type2 .step_item {
+.step_type2 .step_item,
+.step_type2.step_slide_card {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -90,7 +139,7 @@ defineProps({
 .step_type2 .step_body {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 }
 
 .step_bullets {
@@ -108,6 +157,18 @@ defineProps({
     position: relative;
 }
 
+@media (max-width: 768px) {
+    .step_bullets > li {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+    /* line-height 1.4 기준: (1.4em / 2) ≈ 0.7em */
+    .step_bullets > li::before {
+        top: 0.7em;
+    }
+}
+
 .step_bullets > li::before {
     content: "";
     width: 4px;
@@ -115,8 +176,10 @@ defineProps({
     background-color: #67676f;
     border-radius: 50%;
     position: absolute;
-    top: 10px;
+    /* line-height 1.5 기준: (1.5em / 2) - (4px / 2) ≈ 0.7em */
+    top: 0.7em;
     left: 0;
+    transform: translateY(-50%);
 }
 
 .step_note {
@@ -125,6 +188,13 @@ defineProps({
     font-size: 1.6rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
+}
+@media (max-width: 768px) {
+    .step_note {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
 }
 
 /* ── 반응형 ── */
@@ -137,10 +207,74 @@ defineProps({
 }
 
 @media (max-width: 768px) {
-    .step_list {
-        padding: 24px 20px;
+    /* type=2: 모바일 수직 리스트 */
+    .step_list.step_type2 {
+        padding: 40px;
         grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .step_type2 .step_item {
+        flex-direction: row;
         gap: 16px;
+    }
+
+    /* Swiper 컨테이너 */
+    .step_swiper {
+        overflow: visible;
+        padding-bottom: 32px;
+    }
+
+    .step_swiper :deep(.swiper-slide) {
+        width: 84vw;
+    }
+
+    /* 각 슬라이드 카드 */
+    .step_slide_card {
+        background-color: #f8f8f8;
+        border-radius: 12px;
+        padding: 32px;
+        box-sizing: border-box;
+        height: 100%;
+    }
+
+    /* pagination */
+    .step_swiper :deep(.swiper-pagination) {
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .step_swiper :deep(.swiper-pagination-bullet) {
+        width: 6px;
+        height: 6px;
+        background-color: #d7d7df;
+        border-radius: 50%;
+        opacity: 1;
+        cursor: pointer;
+        display: block;
+    }
+
+    .step_swiper :deep(.swiper-pagination-bullet-active) {
+        background-color: #161616;
+    }
+
+    /* 모바일 타이포 */
+    .step_num {
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0;
+    }
+
+    .step_title {
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0;
+    }
+
+    .step_type1.step_slide_card {
+        gap: 24px;
     }
 }
 </style>

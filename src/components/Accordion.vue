@@ -53,15 +53,12 @@ provide(ACCORDION_INJECT_KEY, {
     padding: 0;
 }
 
-.board_type_toggle :deep(dt) {
+.board_type_toggle :deep(.acc_item) {
     margin: 0;
-    padding: 0;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #d7d7df;
 }
 
-.board_type_toggle :deep(dt:first-of-type) {
-    border-top: 1px solid #e5e5e5;
-}
+
 
 .board_type_toggle :deep(dd) {
     margin: 0;
@@ -70,8 +67,6 @@ provide(ACCORDION_INJECT_KEY, {
 
 @media (max-width: 768px) {
     .board_type_toggle {
-        padding-left: 20px;
-        padding-right: 20px;
         box-sizing: border-box;
     }
 }
