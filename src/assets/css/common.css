@@ -193,4 +193,7 @@ label.select.err > em {display:block;}
 
 @media screen and (max-width:767px) {
     .tab_wrap ul.type_01 li .item {font-size:18px;}
+    .tab_wrap ul.type_02 li .item {padding:8px 18px; color:#666666; font-size:14px;}
+    .btn_download_file {gap:0px;}
+    .btn_download_file span {font-size:0;}
 }

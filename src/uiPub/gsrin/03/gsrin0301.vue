@@ -69,15 +69,13 @@
                     </section>
 
                     <section class="tab_content" v-if="CTabIdx === 1">
-                        <h4 class="content_title mb40">{{ t.Tabs1[1].item }}</h4>
-                        
                         <div class="inner_tabs_wrap mb40">
                             <Tabs v-model="InnerTabIdx" :tab-items="t.InnerTabs" tab-class="type_02" />
                         </div>
-
                         <!-- gsrin030201 -->
                         <section class="tab_content gsrin030201" v-if="InnerTabIdx === 0">
-                            <div class="search_group">
+                            <h4 class="content_title mb40">{{ t.InnerTabs[0].item }}</h4>
+                            <div class="search_group mb24">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
                             <div class="policy_wrap">
@@ -105,7 +103,8 @@
                         </section>
                         <!-- gsrin030202 -->
                         <section class="tab_content gsrin030202" v-if="InnerTabIdx === 1">
-                            <div class="search_group">
+                            <h4 class="content_title mb40">{{ t.InnerTabs[1].item }}</h4>
+                            <div class="search_group mb24">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
                             <div class="policy_wrap">
@@ -133,7 +132,8 @@
                         </section>
                         <!-- gsrin030203 -->
                         <section class="tab_content gsrin030203" v-if="InnerTabIdx === 2">
-                            <div class="search_group">
+                            <h4 class="content_title mb40">{{ t.InnerTabs[2].item }}</h4>
+                            <div class="search_group mb24">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
                             <div class="policy_wrap">
@@ -165,9 +165,16 @@
                     <section class="tab_content gsrin0303" v-if="CTabIdx === 2">
                         <h4 class="content_title mb40">
                             {{ t.Tabs1[2].item }}
-                            <a :href="t.DartLink" target="_blank" class="btn_big primary btn_icon after">
+                            <Buttons  
+                                class="btn_big primary btn_icon after" 
+                                btn-class="btn_icon" 
+                                @click="openModal" 
+                                data-popid="ggsrin030301" 
+                                data-type="lg" 
+                                data-cont="ggsrin030301"    
+                            >
                                 {{ t.GeneralText }}
-                            </a>
+                            </Buttons>
                         </h4>
 
                         <div class="search_filter_area mb24">
@@ -215,18 +222,24 @@
                 </div>
             </div>
         </section>
+
+        <div id="ggsrin030301" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
     </div>
 </template>
 
 <script>
 import Tabs from "@/components/Tabs.vue";
 import SelectBox from "@/components/SelectBox.vue";
+import Buttons from "@/components/Buttons.vue";
 import Search from "@/components/Search.vue";
 import Pagination from "@/components/Pagination.vue";
+import modal from "@/assets/js/modal";
 
 export default {
     name: "gsrin0301",
-    components: { Tabs, SelectBox, Search, Pagination },
+    components: { Tabs, SelectBox, Search, Pagination, Buttons },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
@@ -246,7 +259,7 @@ export default {
                     DartDesc: "GS리테일의 공시자료는 금융감독원의 DART(전자공시시스템)를 통해 제공하고 있습니다.",
                     DartBtnText: "공시자료 바로가기",
                     GeneralText: "주주보호 정책 및 관련 제도 정보",
-                    DartLink: "https://dart.fss.or.kr",
+                    DartLink: "https://dart.fss.or.kr/",
                     YearSelectLabel: "년도선택",
                     YearOptions: [
                         { value: "전체", label: "전체" },
@@ -286,7 +299,15 @@ export default {
         },
         handleSearch(val) { console.log("검색:", val); },
         handleDownload(link) { console.log("다운로드:", link); },
-        onPageChange(page) { this.currentPage = page; }
+        onPageChange(page) { this.currentPage = page; },
+        openModal(event) {
+            const el = event.currentTarget;
+            const popId = el.dataset.popid;
+            const type = el.dataset.type || "default";
+            const cont = el.dataset.cont; // 여기서 "gsrbr0203"을 가져옴
+            // modal.js 라이브러리를 통해 팝업 열기
+            modal.open(popId, type, el, cont);
+        },
     }
 };
 </script>
@@ -307,7 +328,7 @@ export default {
 .filter_group { display: flex; align-items: center; gap: 12px; }
 .filter_label { font-size: 16px; color: #161616; }
 .search_group :deep(.search_wrap) { display: flex; justify-content: flex-end; gap: 8px; }
-.search_group :deep(.input_search_wrap) { flex: none !important; width: 360px !important; }
+.search_group :deep(.input_search_wrap) { flex: none !important; width: 360px; }
 .search_group :deep(.select_box) { width: 160px !important; }
 
 /* 테이블 스타일 */
@@ -332,10 +353,29 @@ export default {
 .py80 { padding: 80px 0; }
 .pagination_area { display: flex; justify-content: center; }
 
+@media screen and (max-width:1024px) {
+    .cont_inner { padding: 0 20px; }
+    .tab_content_wrap.mt100 {margin-top:60px;}
+}
+
+
 @media screen and (max-width: 767px) {
+    h3.section-sub-title, h4.content_title {font-size:24px !important;}
+    .policy_desc {font-size:18px;}
     .title_wrap { display: none; }
     .cont_inner { padding: 0 20px; }
-    .search_filter_area { flex-direction: column; height: auto; align-items: stretch; gap: 12px; }
+    .tab_content_wrap.mt100 {margin-top:60px;}
+    :deep(ul.type_02) {margin-top:-35px !important;}
+    .search_filter_area { flex-direction: column; height: auto; align-items: stretch; gap:8px; }
     .policy_wrap th:first-child, .policy_wrap td:first-child { display: none; }
+    .policy_wrap thead {display:none;}
+    .filter_group {flex-direction:column; align-items:stretch;}
+    .search_group .search_wrap {flex-direction:column; align-items:stretch;}
+    .search_group :deep(.input_search_wrap) {width:100% !important;}
+    .gsrin0303 .content_title {flex-direction:column; align-items:flex-start; gap:12px}
+    .filter_label {display:none;}
+    .btn_big {font-size:16px;}
+    .mb100 {margin-bottom:80px;}
+    .policy_wrap td a {font-size:16px;}
 }
 </style>
