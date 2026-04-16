@@ -332,6 +332,27 @@
         "endDate": "26-04-15",
         "status": "com",
         "note": " "
+    },
+
+    {
+        "depth1": "GS NEWS", "depth2": "보도자료", "depth3": "목록", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrne/01/gsrne01",
+        "link": "/gsrne01",
+        "startDate": "26-04-16",
+        "endDate": "26-04-16",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "상세", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrne/01/gsrne0101",
+        "link": "/gsrne0101",
+        "startDate": "26-04-16",
+        "endDate": "",
+        "status": "ing",
+        "note": " "
     }
 
 
