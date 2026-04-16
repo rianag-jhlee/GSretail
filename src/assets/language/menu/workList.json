@@ -339,6 +339,16 @@
         "link": "/gsrst_smain",
         "startDate": "",
         "endDate": "",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
         "status": "ing",
         "note": " "
     }
