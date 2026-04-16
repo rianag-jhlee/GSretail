@@ -3227,7 +3227,7 @@ button { background-color: #fff }
 .brand_panel { padding-top: 64px; padding-bottom: 100px }
 .brand_panel section { padding-bottom: 120px }
 @media (max-width: 768px) {
-  .brand_panel section { padding: 0 20px 80px }
+  .brand_panel section { padding: 64px 20px 80px }
 }
 .brand_panel section:last-of-type { padding-bottom: 0 }
 .diff_card_grid { margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 460px)); gap: 20px }
@@ -3499,6 +3499,7 @@ button { background-color: #fff }
   .winwin_item_list { grid-template-columns: 1fr; gap: 40px }
 }
 .brand_panel_title .list_dotted { margin: 16px 0 0 }
+.brand_panel_title + section { padding-top: 0 }
 .brand_panel_title .list_dotted > li::before { background-color: #67676f }
 .brand_panel_title .list_dotted > li > p { color: #67676f }
 .note_sub, .brand_panel_title .list_dotted > li > p.note_sub { color: #f95823 }
