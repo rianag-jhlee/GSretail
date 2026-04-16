@@ -722,6 +722,9 @@ export default {
 .gsrin0103 .eval_item_group:nth-of-type(2) .policy_wrap th, .gsrin0103 .eval_item_group:nth-of-type(2) .policy_wrap td {text-align:center; }
 .gsrin0103 .policy_wrap {padding-left:0; padding-right:0;}
 .gsrin0103 .policy_wrap th { background-color: #F8F8F8; color: #161616; font-weight: 700; text-align: left; }
+.gsrin0103 .policy_wrap tbody tr th, .gsrin0103 .policy_wrap thead tr th:first-of-type, .gsrin0103 .policy_wrap tbody tr td:first-of-type  {border-left:0}
+.policy_wrap thead tr th:last-of-type {border-right:0;}
+.gsrin0103 .policy_wrap tbody tr td {border-right:0}
 .gsrin0103 .important { font-size: 18px; font-weight: 700; color: #161616; text-decoration:none;}
 .gsrin0103 .key-features {margin-top:30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .gsrin0103 .card_item { padding: 32px 32px 48px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; gap: 16px; min-height: 180px; }
@@ -755,7 +758,7 @@ export default {
 
 @media screen and (max-width: 767px) {
     .cont_inner {padding: 0 20px;}
-    .title_wrap {padding: 60px 20px 80px;}
+    .title_wrap {display:none;}
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
     .title-sub-text {padding: 60px 0 80px; font-size: 28px; line-height: 1.3; text-align:left;}

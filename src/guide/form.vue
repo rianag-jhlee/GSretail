@@ -22,7 +22,6 @@
                 <li><button @click="tool_select('check')">Checkbox</button></li>
                 <li><button @click="tool_select('radio')">Radio</button></li>
                 <li><button @click="tool_select('isswitch')">Switch</button></li>
-                <li><button :class="{ current: input_opt.type === 'search' }" @click="tool_select('search')">Search</button></li>
             </ul>
             <div class="design_box">
                 <Inputs :type="input_opt.type" :isswitch="input_opt.isswitch" :placeholder="input_opt.Placeholder" text="Label" :isDisabled="_disabled" :isError="input_opt.isError" :errText="input_opt.err_text" :class="input_opt.class" />
@@ -174,7 +173,6 @@ export default {
                 "check",
                 "radio",
                 "isswitch",
-                "search"
             ],
 
             /* select */
@@ -265,12 +263,6 @@ export default {
                 this.input_opt.type = "checkbox";
                 this.input_opt.isswitch = true;
                 this.input_opt.opt = `type="${this.input_opt.type}" isswitch="${this.input_opt.isswitch}" text="Label"`;
-                break;
-
-            case "search":
-                this.input_opt.type = "search";
-                this.input_opt.Placeholder = "검색어를 입력해주세요";
-                this.input_opt.opt = `type="${this.input_opt.type}" placeholder="${this.input_opt.Placeholder}"`;
                 break;
             }
         },
