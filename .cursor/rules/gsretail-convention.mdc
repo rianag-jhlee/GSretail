@@ -1,0 +1,192 @@
+---
+description: GSretail 프로젝트 Vue 3 퍼블리싱 코딩 컨벤션 (전체 적용)
+globs: **/*.vue, **/*.css
+alwaysApply: true
+---
+
+# GSretail 코딩 컨벤션
+
+## 역할
+숙련된 Vue 3 전문 웹 퍼블리셔. Figma 구조가 복잡해도 불필요한 구조는 제거하고 시맨틱하게 작업.
+
+---
+
+## 1. 기술 스택
+- Framework: Vue 3 (`<script setup>` Composition API) — Options API 사용 금지
+- Styling: Pure CSS (`<style scoped>`)
+- CSS Import 순서: common.css → ui.css
+- 디렉토리: `src/components/` (공통 컴포넌트 PascalCase), `src/assets/images/`, `src/assets/js/modal.js`
+
+---
+
+## 2. 시맨틱 마크업
+div 남발 금지. 콘텐츠 성격에 맞는 태그 우선 사용.
+
+| 용도 | 태그 |
+|---|---|
+| 페이지 영역 구분 | `section`, `article`, `aside` |
+| 상단/하단 | `header`, `footer` |
+| 내비게이션 | `nav` |
+| 이미지+캡션 | `figure`, `figcaption` |
+| 목록 | `ul > li`, `ol > li` |
+| 버튼/링크 | `button` (type 필수), `a` |
+
+Heading은 h1 → h6 순서 유지.
+
+---
+
+## 3. 클래스 명명 규칙
+- 구분자: `_` (언더스코어)
+- 컴포넌트 파일명: PascalCase (`Anchor.vue`, `Buttons.vue`)
+- 섹션 루트: `sec_*` (예: `sec_hero`, `sec_brand`)
+
+---
+
+## 4. CSS 속성 선언 순서
+
+| 순서 | 구분 | 속성 예시 |
+|:---:|:---|:---|
+| 1 | 넓이 | `width`, `height`, `max-width`, `min-height` |
+| 2 | 외부 여백 | `margin` |
+| 3 | 내부 여백 | `padding` |
+| 4 | 폰트 | `color`, `font-size`(rem 필수), `font-weight`, `line-height`, `letter-spacing` |
+| 5 | 배경 | `background`, `background-color` |
+| 6 | 테두리 | `border`, `border-radius` |
+| 7 | 정렬 | `text-align`, `vertical-align` |
+| 8 | 위치 | `position`, `top/right/bottom/left`, `z-index` |
+| 9 | 블록 | `display`, `flex-*`, `grid-*`, `gap`, `overflow` |
+| 10 | 변형 | `transform`, `transition`, `animation` |
+
+> `font-size`는 반드시 **rem** 단위 사용 (html { font-size: 62.5% } 기준, 1rem = 10px)
+
+---
+
+## 5. 클래스 최소화
+```css
+/* ❌ BAD */
+.brand_title { ... }
+
+/* ✅ GOOD */
+.sec_brand > h2 { ... }
+```
+
+---
+
+## 6. 반응형 (PC First)
+
+### 브레이크포인트
+```css
+/* PC: 1025px 이상 — 기본값 */
+/* Tablet: 769px ~ 1024px */
+@media (max-width: 1024px) { ... }
+/* Mobile: 768px 이하 */
+@media (max-width: 768px) { ... }
+```
+
+### 디바이스별 기준
+| 디바이스 | 기준 해상도 | 적용 구간 |
+|---|---|---|
+| PC | 1920×1080 (최대 2560px) | 1025px 이상 |
+| Tablet | 820×1180 | 769px ~ 1024px |
+| Mobile (iOS) | 375×812 | 768px 이하 |
+| Mobile (AOS) | 360×780 (최소) | 768px 이하 |
+
+### 콘텐츠 폭 기준
+| 페이지 유형 | 콘텐츠 폭 |
+|---|---|
+| 메인 페이지 | 1680px |
+| 서브 페이지 | 1420px |
+| 정보 밀집형 (IR, 공시 등) | 1280px (1420 권장) |
+
+> PC는 단일 고정 폭이 아닌, 페이지 성격에 따라 콘텐츠 폭을 유동적으로 운영
+
+- Mobile: 좌우 패딩 20px 필수
+- Mobile Swiper 슬라이드 내부 item의 크기(width, height, top, margin, padding 등)는 반드시 `clamp()`와 vw 단위로 계산한다.
+  - 기준 뷰포트: **375px** (iOS 기준)
+  - 계산식: `값(px) ÷ 375 × 100 = vw`
+  - 예: 320px → `clamp(280px, 85.33vw, 320px)`
+
+---
+
+## 7. Vue 컴포넌트 규칙
+```vue
+<script setup>
+import { ref, computed } from "vue";
+</script>
+```
+- `ref`, `computed`, `defineProps`, `defineEmits` 반드시 명시적 import
+- 이미지: `import imgSrc from "@/assets/images/..."` 후 바인딩
+- `new URL(..., import.meta.url)` 방식 사용 불가 (Webpack 환경)
+
+---
+
+## 8. 다국어 처리 (langData 패턴)
+```vue
+<script setup>
+const langData = {
+  ko: { title: "안녕하세요" },
+  en: { title: "Hello" },
+};
+const locale = ref("ko");
+const t = computed(() => langData[locale.value]);
+</script>
+<template>
+  <h2>{{ t.title }}</h2>
+  <p v-html="t.desc" />
+</template>
+```
+
+---
+
+## 9. 공통 컴포넌트 사용법
+
+```vue
+<!-- Buttons: btn_small / btn_mid / btn_big + fill / border -->
+<Buttons btn-class="btn_mid fill" />
+<Buttons btn-class="btn_mid border_white01" />
+
+<!-- Tabs: tabSlide로 슬라이드, tabClass로 type 지정 -->
+<Tabs :tab-items="items" tab-class="type_01" :tab-slide="true" />
+
+<!-- Accordion -->
+<Accordion>
+  <AccordionItem item-key="1">
+    <template #title>제목</template>
+    <p>본문</p>
+  </AccordionItem>
+</Accordion>
+
+<!-- Inputs: text / password / check / radio / switch -->
+<Inputs type="text" />
+<Inputs type="switch" isswitch />
+
+<!-- Textarea -->
+<Textarea v-model="body" label="문의 내용" :rows="6" :maxlength="500" />
+
+<!-- SelectBox -->
+<SelectBox :options="['옵션1', '옵션2']" initMsg="선택하세요" />
+
+<!-- CardItem -->
+<CardItem>
+  <template #image><img :src="thumb" alt="" /></template>
+  <template #title>제목</template>
+</CardItem>
+
+<!-- Anchor: go / more -->
+<Anchor type="more" url="#none" text="더보기" />
+<Anchor type="go" url="https://example.com" text="바로가기" :is-target="true" />
+```
+
+---
+
+## 10. Modal & Toast
+```js
+modal.open(popId, type, el, cont);  // 팝업
+modal.toast(type, msg, time);        // 토스트
+```
+
+
+## 11. 가이드 페이지 참고
+
+src/guide/ 폴더의 퍼블리싱 가이드 페이지를 항상 참고.
+단, 가이드 내 코드는 반드시 <script setup> 방식으로 변환하여 작성.

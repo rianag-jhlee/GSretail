@@ -355,6 +355,27 @@
         "note": " "
 
     },
+
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrst/gsrst_smain",
+        "link": "/gsrst_smain",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": " "
+    },
     
     {
         "depth1": "입점상담", "depth2": "GS25/GS THE FRESH/지원부문", "depth3": "공지사항", "depth4": "", "depth5": "", "depth6": "",
@@ -426,6 +447,7 @@
         "status": "com",
         "note": "gsrst01에서 확인 가능, 현재 외부링크 ( https://withgs.gsshop.com/sug/suggest )로 페이지 없음."
     }
+    
 
 
 ]
