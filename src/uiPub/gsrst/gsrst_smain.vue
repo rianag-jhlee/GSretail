@@ -93,7 +93,7 @@ const cards = [
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
 .sec_franchise { padding: 120px 0 200px; }
-.sec_inner { max-width: 1420px; margin: 0 auto; padding: 0 20px; }
+.sec_inner { max-width: 1460px; margin: 0 auto; padding: 0 20px; }
 
 .sec_inner > header { margin-bottom: 80px; text-align: center; }
 .sec_inner > header > h2 { color: #000; font-size: 6.4rem; font-weight: 700; line-height: 1.24; letter-spacing: -0.02em; }
