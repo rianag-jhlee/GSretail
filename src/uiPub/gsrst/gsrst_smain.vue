@@ -135,7 +135,7 @@ const cards = [
 @media (max-width: 768px) {
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
-    .sec_franchise { padding: 60px 0; }
+    .sec_franchise { padding: 60px 0; overflow-x: hidden; }
     .sec_inner { padding: 0; }
 
     .sec_inner > header { padding: 0 20px; text-align: left; }
@@ -143,15 +143,14 @@ const cards = [
     .sec_inner > header > p { margin-top: 0; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 
     .franchise_swiper { overflow: visible; padding-bottom: 36px; }
-    .franchise_swiper :deep(.swiper-slide) { width: clamp(280px, 85.33vw, 320px); }
+    .franchise_swiper :deep(.swiper-slide) { width: 85.33vw; }
 
-
-    .franchise_card { height: clamp(480px, 144vw, 540px); padding: clamp(96px, 26.93vw, 101px) 0 clamp(80px, 22.13vw, 83px); border-radius: 12px; }
-    .franchise_card > .badge { height: clamp(45px, 13.33vw, 50px);margin-bottom: clamp(45px, 13.33vw, 50px); font-size: 1.4rem; letter-spacing: -0.01em; }
-    .franchise_card > .card_txt { margin-bottom: clamp(45px, 13.33vw, 50px); padding: 0 clamp(16px, 10.67vw, 40px); }
+    .franchise_card { height: 540px; padding: 101px 0 83px; border-radius: 12px; }
+    .franchise_card > .badge { height: 50px; margin-bottom: 50px; font-size: 1.4rem; letter-spacing: -0.01em; }
+    .franchise_card > .card_txt { margin-bottom: 50px; padding: 0 20px; }
     .franchise_card > .card_txt > strong { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .franchise_card > .card_txt > strong:deep(span){ font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em;}
+    .franchise_card > .card_txt > strong:deep(span) { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
     .franchise_card > .card_txt > p { margin-top: 4px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .btn_go { height: clamp(40px, 11.73vw, 44px); margin-top: 0; font-size: 1.6rem; font-weight: 400; border-radius: 8px; }
+    .btn_go { height: 44px; margin-top: 0; font-size: 1.6rem; font-weight: 400; border-radius: 8px; }
 }
 </style>
