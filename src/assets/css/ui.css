@@ -97,3 +97,7 @@ h5 {font-size:1.8rem;}
 .toast .btn_close:before, .toast .btn_close:after {width:15px; border-top:1px solid #333; content:''; position:absolute; top:50%; right:0; display:inline-block;}
 .toast .btn_close:before {transform:rotate(45deg);}
 .toast .btn_close:after {transform:rotate(-45deg);}
+
+@media screen and (max-width:767px) {
+    [modal-type="lg"] .modal_container {padding-left:20px; padding-right:20px}
+}

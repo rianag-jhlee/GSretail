@@ -261,7 +261,7 @@
                         btn-class="btn_icon" 
                         @click="openModal" 
                         data-popid="gsrbr020401" 
-                        data-type="mid" 
+                        data-type="lg" 
                         data-cont="gsrbr020401"
                     >테스트</Buttons>
                 </div>

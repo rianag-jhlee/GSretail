@@ -194,7 +194,7 @@
     {
         "depth1": "INVESTORS", "depth2": "기업지배구조", "depth3": "지배구조헌장", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/01/gsrin0101",
+        "path": "gsrin/01/gsrin0101",
         "link": "/gsrin0101",
         "startDate": "26-04-07",
         "endDate": "26-04-14",
@@ -205,7 +205,7 @@
     {
         "depth1": "", "depth2": "", "depth3": "이사회 및 위원회 구성", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/01/gsrin0102",
+        "path": "gsrin/01/gsrin0102",
         "link": "",
         "startDate": "",
         "endDate": "",
@@ -215,7 +215,7 @@
     {
         "depth1": "", "depth2": "", "depth3": "이사회 평가", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/01/gsrin0103",
+        "path": "gsrin/01/gsrin0103",
         "link": "",
         "startDate": "",
         "endDate": "",
@@ -225,7 +225,7 @@
     {
         "depth1": "", "depth2": "", "depth3": "지배구조 모범규준과의 차이", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/01/gsrin0104",
+        "path": "gsrin/01/gsrin0104",
         "link": "",
         "startDate": "",
         "endDate": "",
@@ -235,7 +235,7 @@
     {
         "depth1": "", "depth2": "경영성과", "depth3": "재무현황", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/02/gsrin0201",
+        "path": "gsrin/02/gsrin0201",
         "link": "/gsrin0201",
         "startDate": "26-04-14",
         "endDate": "26-04-15",
@@ -245,88 +245,88 @@
     {
         "depth1": "", "depth2": "", "depth3": "배당 정보", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/02/gsrin0202",
+        "path": "gsrin/02/gsrin0202",
         "link": "",
-        "startDate": "",
-        "endDate": "",
+        "startDate": "26-04-14",
+        "endDate": "26-04-15",
         "status": "com",
         "note": "gsrin0201 포함됨 "
     },
     {
         "depth1": "", "depth2": "", "depth3": "실적자료 등", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/02/gsrin0203",
+        "path": "gsrin/02/gsrin0203",
         "link": "",
-        "startDate": "",
-        "endDate": "",
+        "startDate": "26-04-14",
+        "endDate": "26-04-15",
         "status": "com",
         "note": "gsrin0201 포함됨 "
     },
     {
         "depth1": "", "depth2": "공시정보", "depth3": "공고", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/03/gsrin0301",
+        "path": "gsrin/03/gsrin0301",
         "link": "/gsrin0301",
         "startDate": "26-04-15",
-        "endDate": "",
-        "status": "ing",
+        "endDate": "26-04-15",
+        "status": "com",
         "note": "gsrin0301 포함됨 "
     },
     {
         "depth1": "", "depth2": "", "depth3": "사업/감사보고서", "depth4": "분기보고서", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/01/gsrin030201",
+        "path": "gsrin/01/gsrin030201",
         "link": "",
         "startDate": "26-04-15",
-        "endDate": "",
-        "status": "ing",
+        "endDate": "26-04-15",
+        "status": "com",
         "note": "gsrin0301 포함됨 "
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "사업보고서", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/01/gsrin030202",
+        "path": "gsrin/01/gsrin030202",
         "link": "",
         "startDate": "26-04-15",
-        "endDate": "",
-        "status": "ing",
+        "endDate": "26-04-15",
+        "status": "com",
         "note": "gsrin0301 포함됨 "
     },
     
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "감사보고서", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/01/gsrin030203",
+        "path": "gsrin/01/gsrin030203",
         "link": "",
         "startDate": "26-04-15",
-        "endDate": "",
-        "status": "ing",
+        "endDate": "26-04-15",
+        "status": "com",
         "note": "gsrin0301 포함됨 "
     },
     {
         "depth1": "", "depth2": "", "depth3": "주주총회 공시", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrbr/03/gsrin0303",
+        "path": "gsrin/03/gsrin0303",
         "link": "/gsrin0303",
         "startDate": "26-04-15",
-        "endDate": "",
-        "status": "ing",
+        "endDate": "26-04-16",
+        "status": "com",
         "note": " gsrin0301 포함됨"
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "주주보호 정책 및 관련 제도 정보", "depth5": "", "depth6": "",
         "type": "Pop-up",
-        "path": "gsrbr/03/ggsrin030301",
+        "path": "",
         "link": "",
-        "startDate": "26-04-15",
-        "endDate": "",
-        "status": "ing",
+        "startDate": "26-04-16",
+        "endDate": "26-04-16",
+        "status": "com",
         "note": "gsrin0301 포함됨 "
     },
     {
         "depth1": "", "depth2": "IR자료실", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrbr/04/gsrin04",
+        "path": "gsrin/04/gsrin04",
         "link": "/gsrin04",
         "startDate": "26-04-14",
         "endDate": "26-04-15",
@@ -353,6 +353,78 @@
         "endDate": "",
         "status": "ing",
         "note": " "
+
+    },
+    
+    {
+        "depth1": "입점상담", "depth2": "GS25/GS THE FRESH/지원부문", "depth3": "공지사항", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst01",
+        "link": "/gsrst01",
+        "startDate": "26-04-16",
+        "endDate": "",
+        "status": "ing",
+        "note": "gsrst01에서 확인 가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "상세보기", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": "04-16:관련디자인 미작업 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "입점 안내", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst02",
+        "link": "",
+        "startDate": "26-04-16",
+        "endDate": "26-04-16",
+        "status": "com",
+        "note": "gsrst01에서 확인 가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "자주하는 질문 FAQ", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst03",
+        "link": "",
+        "startDate": "26-04-16",
+        "endDate": "26-04-16",
+        "status": "com",
+        "note": "gsrst01에서 확인 가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "상담신청", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": "04-16:관련디자인 미작업"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "신청완료", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": "04-16:관련디자인 미작업"
+    },
+    {
+        "depth1": "", "depth2": "GS SHOP", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrst01에서 확인 가능, 현재 외부링크 ( https://withgs.gsshop.com/sug/suggest )로 페이지 없음."
     }
 
 
