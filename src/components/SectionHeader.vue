@@ -1,6 +1,6 @@
 <template>
     <header>
-        <h3 v-html="title" />
+        <h3 v-html="title" :class="{ 'h3_steps': stepsBelow }" />
         <component
             :is="descTag"
             v-if="desc || source"
@@ -21,6 +21,7 @@ const props = defineProps({
     source:     { type: String, default: "" },
     mobileDesc: { type: String, default: "" },
     descTag:    { type: String, default: "p" },
+    stepsBelow: { type: Boolean, default: false },
 });
 
 const descWithSource = computed(() => {
@@ -43,6 +44,15 @@ header > h3 {
     line-height: 1.35;
     letter-spacing: -0.01em;
 }
+
+header:not(:has(p)) > h3 {
+    margin-bottom: 0;
+}
+
+/* header > h3.h3_steps,
+header:not(:has(p)) > h3.h3_steps {
+    margin-bottom: 24px;
+} */
 
 header > .sec_header_desc,
 header > .sec_mobile_desc {
@@ -67,12 +77,22 @@ header > .sec_mobile_desc {
     header{
         padding-bottom: 24px;
     }
-    header > h3 {
-        margin-bottom: 8px;
-        font-size: 2.2rem;
+    header:not(:has(p)) {
+        padding-bottom: 0;
     }
+    header > h3,
+    header:not(:has(p)) > h3 {
+        margin-bottom: 12px;
+        font-size: 2.4rem;
+    }
+    header > h3.h3_steps,
+    header:not(:has(p)) > h3.h3_steps {
+        margin-bottom: 24px;
+    }
+
     header > .sec_header_desc,
     header > .sec_mobile_desc {
+        margin-bottom: 12px;
         font-size: 1.6rem;
         line-height: 1.5;
         letter-spacing: -0.01em;

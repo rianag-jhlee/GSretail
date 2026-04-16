@@ -157,17 +157,7 @@ onUnmounted(() => {
     position: relative;
 }
 
-@media (max-width: 768px) {
-    .step_bullets > li {
-        font-size: 1.4rem;
-        line-height: 1.4;
-        letter-spacing: -0.01em;
-    }
-    /* line-height 1.4 기준: (1.4em / 2) ≈ 0.7em */
-    .step_bullets > li::before {
-        top: 0.7em;
-    }
-}
+
 
 .step_bullets > li::before {
     content: "";
@@ -196,7 +186,23 @@ onUnmounted(() => {
         letter-spacing: -0.01em;
     }
 }
-
+@media (max-width: 768px) {
+    .step_bullets > li {
+        padding-left: 6px;
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+    .step_bullets > li + li{
+        margin-top: 6px;
+    }
+    /* line-height 1.4 기준: (1.4em / 2) ≈ 0.7em */
+    .step_bullets > li::before {
+        top: 0.7em;
+        width:2px;
+        height:2px;
+    }
+}
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .step_list {
@@ -208,6 +214,9 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
     /* type=2: 모바일 수직 리스트 */
+    .step_bullets{
+        margin: 0;
+    }
     .step_list.step_type2 {
         padding: 40px;
         grid-template-columns: 1fr;

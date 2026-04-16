@@ -1,7 +1,6 @@
 <script setup>
 import { ref, defineProps, onMounted, onUnmounted } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Pagination } from "swiper/modules";
 import "swiper/css";
 
 defineProps({
@@ -10,7 +9,6 @@ defineProps({
     // type="icon"        : [{ icon: imgSrc, iconAlt: "...", title: "...", desc: "..." }]
     // type="text"        : [{ title: "...", desc: "..." }] — em/icon 없음, title은 HTML 가능
     type: { type: String, default: "num" },
-    noPagination: { type: Boolean, default: false },
 });
 
 const _getIsMobile = () => window.innerWidth <= 768;
@@ -42,10 +40,8 @@ onUnmounted(() => {
     <!-- Mobile: Swiper -->
     <Swiper
         v-else
-        :modules="noPagination ? [] : [Pagination]"
         slides-per-view="auto"
         :space-between="8"
-        :pagination="noPagination ? false : { clickable: true }"
         class="feature_card_swiper"
     >
         <SwiperSlide v-for="(item, i) in items" :key="i">
@@ -160,28 +156,6 @@ onUnmounted(() => {
 
     .feature_card_swiper :deep(.swiper-slide) {
         width: 84vw;
-    }
-
-    .feature_card_swiper :deep(.swiper-pagination) {
-        margin-top: 20px;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .feature_card_swiper :deep(.swiper-pagination-bullet) {
-        width: 6px;
-        height: 6px;
-        background-color: #D7D7DF;
-        border-radius: 50%;
-        opacity: 1;
-        cursor: pointer;
-        display: block;
-    }
-
-    .feature_card_swiper :deep(.swiper-pagination-bullet-active) {
-        background-color: #161616;
     }
 
     .feature_card_item {

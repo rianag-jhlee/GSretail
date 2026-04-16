@@ -61,7 +61,7 @@
                     <h2>당신 곁에는 언제나<br />GS25가 있습니다.</h2>
                     <div class="str_actions">
                         <a
-                            href="#none"
+                            href="#"
                             class="btn_store_find"
                             data-popid="pop_store_find"
                             data-type="lg"
@@ -69,8 +69,8 @@
                             @click.prevent="openModal"
                         >매장 찾기</a>
                         <div class="sns_wrap">
-                            <a href="#none" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
-                            <a href="#none" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
+                            <a href="#" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
+                            <a href="#" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
                         </div>
                     </div>
                 </header>
@@ -115,7 +115,7 @@
             :model-value="depth1ActiveIdx"
             tab-class="type_01"
             :tab-items="depth1Tabs"
-            :tab-slide="false"
+            :tab-slide="true"
             @change="onDepth1Change"
         />
         <Tabs
@@ -123,21 +123,21 @@
             v-model="activeTab"
             tab-class="type_02"
             :tab-items="depth2Tabs"
-            :tab-slide="false"
+            :tab-slide="true"
         />
         <Tabs
             v-if="depth1ActiveIdx === 2"
             v-model="storeActiveTab"
             tab-class="type_02"
             :tab-items="storeTabs"
-            :tab-slide="false"
+            :tab-slide="true"
         />
         <Tabs
             v-if="depth1ActiveIdx === 3"
             v-model="winwinActiveTab"
             tab-class="type_02"
             :tab-items="winwinTabs"
-            :tab-slide="false"
+            :tab-slide="true"
         />
 
         <!-- 탭 0: 차별화 상품 -->
@@ -484,13 +484,13 @@
 
                 <!-- 운영 장점 체크리스트 카드 -->
                 <div v-if="sec.advantages" class="info_card">
-                    <ul class="sinsen_check_list">
+                    <ul class="info_list">
                         <li v-for="(item, ii) in sec.advantages.items" :key="ii">
                             <div>
-                                <span>{{ item.text }}</span>
-                                <span v-if="item.note" class="sinsen_check_note">{{ item.note }}</span>
+                                <span>{{ item.text }}</span> 
+                                <span v-if="item.note" class="info_check_note">{{ item.note }}</span>
                             </div>
-                        </li>
+                        </li> 
                     </ul>
                 </div>
             </section>
@@ -643,6 +643,12 @@
                                             </ul>
                                         </div>
                                     </section>
+
+
+
+
+
+
                                 </AccordionItem>
 
                                 <!-- 유통 사용처 안내 -->
@@ -701,7 +707,7 @@
                         </div>
                     </section>
 
-                    <section>
+                    <section class="sec_gift_brand">
                         <SectionHeader :title="tab.brandTitle" />
                         <div class="gift_brand_slider">
                             <button type="button" class="gift_brand_nav gift_brand_prev" aria-label="이전">
@@ -818,16 +824,16 @@
                     </section>
                     <section>
                         <SectionHeader :title="tab.benefitTitle" />
-                        <ul class="usim_benefit_cards">
-                            <li v-for="(card, ci) in tab.benefitCards" :key="ci" class="usim_benefit_card">
-                                <figure class="usim_benefit_img">
+                        <ul class="imgcard_list">
+                            <li v-for="(card, ci) in tab.benefitCards" :key="ci" class="imgcard_item">
+                                <figure class="imgcard_img">
                                     <img v-if="card.img" :src="card.img" :alt="card.imgAlt" />
                                 </figure>
-                                <div class="usim_benefit_body">
+                                <div class="imgcard_body">
                                     <h4>{{ card.title }}</h4>
-                                    <ul class="usim_benefit_list">
+                                    <ul class="imgcard_sublist">
                                         <li v-for="(item, ii) in card.items" :key="ii">
-                                            <span class="usim_benefit_icon"></span>
+                                            <span class="imgcard_icon"></span>
                                             <span>{{ item }}</span>
                                         </li>
                                     </ul>
@@ -837,7 +843,7 @@
                     </section>
 
                     <section>
-                        <SectionHeader :title="tab.purchaseTitle" />
+                        <SectionHeader :title="tab.purchaseTitle" steps-below />
                         <Steps type="2" :items="tab.purchaseSteps" />
                     </section>
 
@@ -862,7 +868,7 @@
                         </ul>
                     </PanelHeader>
                     <section>
-                        <SectionHeader :title="tab.hipassStepTitle" />
+                        <SectionHeader :title="tab.hipassStepTitle" steps-below />
                         <Steps type="2" :items="tab.hipassSteps" />
                     </section>
                     <section>
@@ -884,7 +890,7 @@
                         <FeatureCards :items="tab.serviceAdvantages" />
                     </section>
                     <section class="sec_unpaid_method">
-                        <SectionHeader :title="tab.unpaidTitle" />
+                        <SectionHeader :title="tab.unpaidTitle" steps-below />
                         <Steps type="2" :items="tab.unpaidSteps" />
                     </section>
                 </template>
@@ -936,13 +942,13 @@
 
                 <!-- 그 외 패널: 기본 구조 -->
                 <template v-else>
-                    <section>
                         <PanelHeader
                             :hero="tab.hero"
                             :hero-alt="tab.heroAlt"
                             :title="tab.title"
                             :desc="tab.desc"
                         />
+                    <section>
                         <div v-if="tab.table" class="com_table_wrap">
                             <table class="com_table">
                                 <tbody>
@@ -985,22 +991,25 @@
                         <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc">
                             <ul v-if="tab.notes && tab.notes.length" class="list_dotted">
                                 <li v-for="(note, ni) in tab.notes" :key="ni">
-                                    <p>{{ note.text }}</p>
+                                    <p v-html="note.text"></p>
                                     <p v-if="note.sub" class="note_sub">{{ note.sub }}</p>
                                 </li>
                             </ul>
                         </PanelHeader>
                         <section v-if="tab.steps && tab.steps.length" class="sec_delivery_service">
-                            <SectionHeader :title="tab.stepTitle" />
+                            <SectionHeader :title="tab.stepTitle" steps-below />
                             <Steps type="2" :items="tab.steps" />
                         </section>
                         <section v-if="tab.priceTable" class="sec_delivery_price_table">
                             <SectionHeader :title="tab.priceTable.title" />
                             <div class="com_table_wrap">
                                 <table class="com_table com_table_col">
+                                    <colgroup>
+                                        <col v-for="(w, ci) in tab.priceTable.colWidths" :key="ci" :style="{ width: w }">
+                                    </colgroup>
                                     <thead>
                                         <tr>
-                                            <th v-for="(col, ci) in tab.priceTable.columns" :key="ci" scope="col">{{ col }}</th>
+                                            <th v-for="(col, ci) in tab.priceTable.columns" :key="ci" scope="col" v-html="isMobileView && col.labelMo ? col.labelMo : col.label"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1015,10 +1024,21 @@
                             <SectionHeader :title="tab.infoTable.title" />
                             <div class="com_table_wrap">
                                 <table class="com_table">
+                                    <colgroup>
+                                        <col v-for="(w, ci) in tab.infoTable.colWidths" :key="ci" :style="{ width: w }">
+                                    </colgroup>
                                     <tbody>
                                         <tr v-for="(row, ri) in tab.infoTable.rows" :key="ri">
                                             <th scope="row">{{ row.head }}</th>
-                                            <td v-html="row.text"></td>
+                                            <td v-if="row.items">
+                                                <ul class="list_dotted">
+                                                    <li v-for="(item, ii) in row.items" :key="ii"><p>{{ item }}</p></li>
+                                                </ul>
+                                                <div v-if="row.note && row.note.length" class="caution_note">
+                                                    <p v-for="(n, ni) in row.note" :key="ni">{{ n }}</p>
+                                                </div>
+                                            </td>
+                                            <td v-else v-html="row.text"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1027,13 +1047,11 @@
                         <section v-if="tab.priceItems && tab.priceItems.length" class="sec_delivery_price">
                             <SectionHeader :title="tab.priceTitle" />
                             <div class="info_card">
-                                <ul class="sinsen_check_list">
+                                <ul class="info_list">
                                     <li v-for="(item, pi) in tab.priceItems" :key="pi">
                                         <div>
                                             <span>{{ item.text }}</span>
-                                            <div v-if="item.subs && item.subs.length">
-                                                <span v-for="(sub, si) in item.subs" :key="si" style="color: #67676f;">{{ sub }}</span>
-                                            </div>
+                                            <span v-for="(sub, si) in item.subs" :key="si" class="info_check_note">{{ sub }}</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -1052,7 +1070,7 @@
                             </ul>
                         </section>
                         <section v-if="tab.noticeItems && tab.noticeItems.length" class="sec_delivery_notice">
-                            <SectionHeader :title="tab.noticeTitle" />
+                            <SectionHeader :title="tab.noticeTitle" steps-below />
                             <Steps type="2" :items="tab.noticeItems" />
                         </section>
                         <section v-if="tab.chargeItems && tab.chargeItems.length" class="sec_delivery_charge">
@@ -1072,17 +1090,21 @@
                             </ul>
                         </section>
                         <section v-if="tab.pickupItems && tab.pickupItems.length" class="sec_delivery_pickup">
-                            <SectionHeader :title="tab.pickupTitle" />
+                            <SectionHeader :title="tab.pickupTitle" steps-below />
                             <Steps type="2" :items="tab.pickupItems" />
                         </section>
-                        <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
+                        <div v-if="tab.partnerBtnText" class="link_wrap">
+                            <a href="#" class="btn_pickup">{{ tab.partnerBtnText }}</a>
+                        </div>
+                            <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 -->     
+                        <!-- <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
                             <SectionHeader :title="tab.shoppingTitle" />
                             <ul class="list_dotted">
                                 <li v-for="(item, ii) in tab.shoppingItems" :key="ii">
                                     <p v-html="item.text"></p>
                                 </li>
-                            </ul>
-                        </section>
+                            </ul> 
+                        </section> -->
                     </div>
                 </template>
             </div>
@@ -1094,23 +1116,36 @@
                 :hero="store.tabs[2].hero"
                 :hero-alt="store.tabs[2].heroAlt"
                 :title="store.tabs[2].title"
+                :desc="store.tabs[2].subtitle"
             >
-                <p class="brand_panel_desc">지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.
+                <p class="brand_panel_desc">지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에 서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.
+                    <br class="m_br" />
+                    <br class="m_br" />
                     기존지로 납부 외 휴대폰을 통한 모바일수납도 가능하며,납부공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부가능합니다.</p>
-            </PanelHeader>
+                    <ul class="list_dotted">
+                        <li>
+                            <p>접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.</p>
+                        </li>
+                        <li>
+                            <p>GS포스트박스 회원으로 접수 시 다양한 이벤트에 참여 가능하며, 사용량에 따라 등급 별 혜택을 제공합니다.</p>
+                        </li>
+                    </ul>
+                </PanelHeader>
             <section v-if="store.tabs[2].taxGroups && store.tabs[2].taxGroups.length" class="sec_tax_list">
                 <SectionHeader :title="store.tabs[2].taxTitle" />
-                <div class="tax_group_list">
-                    <div v-for="(group, gi) in store.tabs[2].taxGroups" :key="gi" class="tax_group">
-                        <h4 class="tax_group_subtitle">{{ group.subtitle }}</h4>
-                        <ul v-if="group.isList" class="list_dotted">
-                            <li v-for="(item, ii) in group.items" :key="ii"><p>{{ item }}</p></li>
-                        </ul>
-                        <template v-else>
-                            <p v-for="(item, ii) in group.items" :key="ii" class="tax_group_desc">{{ item }}</p>
-                        </template>
-                    </div>
-                </div>
+                <dl class="tax_group_list">
+                    <template v-for="(group, gi) in store.tabs[2].taxGroups" :key="gi">
+                        <dt class="tax_group_subtitle">{{ group.subtitle }}</dt>
+                        <dd>
+                            <ul v-if="group.isList" class="list_dotted">
+                                <li v-for="(item, ii) in group.items" :key="ii"><p>{{ item }}</p></li>
+                            </ul>
+                            <template v-else>
+                                <p v-for="(item, ii) in group.items" :key="ii" class="tax_group_desc">{{ item }}</p>
+                            </template>
+                        </dd>
+                    </template>
+                </dl>
             </section>
         </div>
         <!-- 상품권 판매 -->
@@ -1123,7 +1158,8 @@
             />
             <section v-if="store.tabs[3].voucherItems && store.tabs[3].voucherItems.length" class="sec_voucher">
                 <SectionHeader :title="store.tabs[3].voucherTitle" />
-                <ul class="voucher_list">
+                <!-- PC -->
+                <ul v-if="!isMobileView" class="voucher_list">
                     <li v-for="(item, vi) in store.tabs[3].voucherItems" :key="vi" class="voucher_item">
                         <div class="voucher_img">
                             <img :src="item.img" :alt="item.name" />
@@ -1137,6 +1173,28 @@
                         </div>
                     </li>
                 </ul>
+                <!-- 모바일 Swiper -->
+                <Swiper
+                    v-else
+                    class="voucher_swiper"
+                    slides-per-view="auto"
+                    :space-between="20"
+                >
+                    <SwiperSlide v-for="(item, vi) in store.tabs[3].voucherItems" :key="vi">
+                        <div class="voucher_item">
+                            <div class="voucher_img">
+                                <img :src="item.img" :alt="item.name" />
+                            </div>
+                            <div class="voucher_info">
+                                <strong class="voucher_name">{{ item.name }}</strong>
+                                <div class="voucher_tags">
+                                    <span v-for="(tag, ti) in item.tags" :key="ti" class="voucher_tag" :class="`tag_${tag.type}`">{{ tag.text }}</span>
+                                </div>
+                                <p class="voucher_desc">{{ item.desc }}</p>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
             </section>
         </div>
         <!-- 상생협력: 운영지원제도 -->
@@ -1170,7 +1228,8 @@
                         <li v-for="(note, ni) in tab.notes" :key="ni">{{ note.text }}</li>
                     </ul> 
                 </PanelHeader>
-                <ul v-if="tab.items && tab.items.length" class="winwin_item_list">
+                <section>
+                    <ul v-if="tab.items && tab.items.length" class="winwin_item_list">
                     <li v-for="(item, ii) in tab.items" :key="ii" class="winwin_item">
                         <article>
                             <div class="winwin_item_icon" aria-hidden="true"></div>
@@ -1184,45 +1243,73 @@
                                 </div>
                                 <div class="winwin_item_body">
                                     <p v-if="item.desc" v-html="item.desc"></p>
-                                    <ul v-if="item.bullets && item.bullets.length" class="winwin_bullet_list">
-                                        <li v-for="(b, bi) in item.bullets" :key="bi">{{ b }}</li>
+                                    <ul v-if="item.bullets && item.bullets.length" class="list_dotted">
+                                        <li v-for="(b, bi) in item.bullets" :key="bi"><p>{{ b }}</p></li>
                                     </ul>
                                 </div>
                             </div>
                         </article>
                     </li>
                 </ul>
+                </section>
             </div>
         </div>
 
         <!-- 상생협력: 참여제도 -->
         <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 1" class="brand_panel">
             <PanelHeader :hero="winwin.tabs[1].hero" :hero-alt="winwin.tabs[1].heroAlt" :title="winwin.tabs[1].title" :desc="winwin.tabs[1].desc" />
-            <ul v-if="winwin.tabs[1].items && winwin.tabs[1].items.length" class="winwin_item_list">
-                <li v-for="(item, ii) in winwin.tabs[1].items" :key="ii" class="winwin_item">
-                    <article>
-                        <div class="winwin_item_content">
-                            <div class="winwin_item_title">
-                                <span class="winwin_item_num">{{ item.num }}</span>
-                                <strong>{{ item.title }}</strong>
+            <section>
+                <ul v-if="winwin.tabs[1].items && winwin.tabs[1].items.length" class="winwin_item_list">
+                    <li v-for="(item, ii) in winwin.tabs[1].items" :key="ii" class="winwin_item">
+                        <article>
+                            <div class="winwin_item_content">
+                                <div class="winwin_item_title">
+                                    <span class="winwin_item_num">{{ item.num }}</span>
+                                    <strong>{{ item.title }}</strong>
+                                </div>
+                                <div class="winwin_item_body">
+                                    <p v-if="item.desc" class="winwin_item_desc" v-html="item.desc"></p>
+                                </div>
                             </div>
-                            <div class="winwin_item_body">
-                                <p v-if="item.desc" class="winwin_item_desc" v-html="item.desc"></p>
-                            </div>
-                        </div>
-                    </article>
-                </li>
-            </ul>
+                        </article>
+                    </li>
+                </ul>
+            </section>
         </div>
 
         <!-- depth1 = 4: 밀박스/스낵바 -->
-        <div v-if="depth1ActiveIdx === 4" class="brand_panel">
+        <div v-if="depth1ActiveIdx === 4" class="brand_panel milbox_panel">
             <PanelHeader :hero="milbox.hero" :hero-alt="milbox.heroAlt" :title="milbox.title" />
             <section v-for="(sec, si) in milbox.sections" :key="si">
                 <SectionHeader :title="sec.title" :desc="sec.desc">
                     <p v-if="sec.note" class="sec_note">{{ sec.note }}</p>
                 </SectionHeader>
-                <FeatureCards v-if="sec.items && sec.items.length" :items="sec.items" type="icon" class="milbox_feature" />
+                <FeatureCards v-if="sec.type === 'feature' && sec.items && sec.items.length" :items="sec.items" type="icon" class="milbox_feature" />
+                <ul v-if="sec.type === 'imgcard' && sec.items && sec.items.length" class="imgcard_list">
+                    <li v-for="(item, ii) in sec.items" :key="ii" class="imgcard_item">
+                        <figure class="imgcard_img">
+                            <img v-if="item.img" :src="item.img" :alt="item.name" />
+                        </figure>
+                        <div class="imgcard_body">
+                            <h4>
+                                {{ item.name }}
+                                <a v-if="item.link" :href="item.link" target="_blank" class="imgcard_link" aria-label="링크 바로가기"></a>
+                            </h4>
+                            <p v-if="item.desc" class="imgcard_desc" v-html="item.desc"></p>
+                        </div>
+                        <div v-if="sec.advantages" class="info_card">
+                            <strong v-if="sec.advantages.title" class="info_card_title">{{ sec.advantages.title }}</strong>
+                            <ul class="info_list">
+                                <li v-for="(adv, ai) in sec.advantages.items" :key="ai">
+                                    <div>
+                                        <span>{{ adv.text }}</span>
+                                        <span v-if="adv.note" class="info_check_note">{{ adv.note }}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </section>
         </div>
 
@@ -1237,10 +1324,9 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onMounted, onUnmounted, onBeforeUnmount } from "vue";
+import { ref, nextTick, watch, onMounted, onBeforeUnmount } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 import { useRouter } from "vue-router";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Navigation } from "swiper/modules";
@@ -1361,6 +1447,8 @@ import imgServiceDesc06    from "@/assets/images/dummy/service_desc_06.png";
 import imgGiftCerti01 from "@/assets/images/dummy/gift_certi_01.png";
 import imgGiftCerti02 from "@/assets/images/dummy/gift_certi_02.png";
 import imgGiftCerti03 from "@/assets/images/dummy/gift_certi_03.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const router = useRouter();
 
@@ -2217,14 +2305,19 @@ const langData = {
                         steps: [
                             { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약", bullets: ["수령점포 선택 입력"] },
                             { step: "Step 2", title: "물품 포장 후<br />GS25 방문", bullets: ["세부 내용 작성", "세부 내용 작성", "<span style=\"color: #fb6432;\">특이사항 기재시 컬러</span>"] },
-                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" },
+                            { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" }, 
                             { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관" },
                         ],
                         priceTable: {
                             title: "반값택배 이용요금",
                             desc:  "운임 결제는 선불만 가능",
                             note:  "향후 지속 확대예정",
-                            columns: ["구분", "내륙↔내륙 / 제주↔제주", "제주↔내륙 / 내륙↔도서"],
+                            columns: [
+                                { label: "구분" },
+                                { label: "내륙↔내륙 / 제주↔제주", labelMo: "내륙↔내륙<br />제주↔제주" },
+                                { label: "제주↔내륙 / 내륙↔도서", labelMo: "제주↔내륙<br />내륙↔도서" },
+                            ],
+                            colWidths: ["18.87%", "40.56%", "40.56%"],
                             rows: [
                                 {
                                     cells: [
@@ -2237,11 +2330,22 @@ const langData = {
                         },
                         infoTable: {
                             title: "반값택배 이용안내",
+                            colWidths: ["136px", "auto"],
                             rows: [
                                 { head: "예약방법",    text: "반값택배 예약 시 도착점을 GS25 편의점으로 선택" },
                                 { head: "서비스 지역", text: "GS25 ↔ GS25" },
                                 { head: "수령방법",    text: "점포 근무자에게 알림톡으로 전송된 QR코드 제시" },
-                                { head: "배송기간",    text: "내륙~내륙, 제주~제주 : 접수일포함 4일 이내, 동일권역 2~3일 이내<br />제주↔내륙 : 접수일 포함 5~7일 내 *주말/공휴일 배송 가능<br />*내륙↔제주 간 반값택배는 접수일 포함 7일 이내 배송 완료 됩니다.<br />*기상 상황으로 선박 운행이 불가하거나, 선박운행 스케줄 변동으로 배송소요일이 추가될 수 있습니다." },
+                                { head: "배송기간",
+                                    items: [
+                                        "내륙~내륙, 제주~제주 : 접수일포함 4일 이내, 동일권역 2~3일 이내",
+                                        "제주↔내륙 : 접수일 포함 5~7일 내",
+                                    ],
+                                    note: [
+                                        "*주말/공휴일 배송 가능",
+                                        "*내륙↔제주 간 반값택배는 접수일 포함 7일 이내 배송 완료 됩니다.",
+                                        "*기상 상황으로 선박 운행이 불가하거나, 선박운행 스케줄 변동으로 배송소요일이 추가될 수 있습니다.",
+                                    ],
+                                },
                             ],
                         },
                         cautionTitle: "반값택배 유의사항",
@@ -2305,12 +2409,13 @@ const langData = {
                         ],
                         pickupTitle: "픽업 이용방법",
                         pickupItems: [
-                            { step: "Step 1", title: "쇼핑몰 배송방법<br />편의점 PICK-UP 선택" },
+                            { step: "Step 1", title: "쇼핑몰 배송방법<br />편의점 PICK-UP 선택", bullets: ["회원, 영문작성"] },
                             { step: "Step 2", title: "가까운 GS25 선택"},
                             { step: "Step 3", title: "물건 도착 SMS를 받고<br />편의점 방문 수령"},
                         ],
                         shoppingTitle: "픽업서비스 제휴쇼핑몰",
                         shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
+                        partnerBtnText: "픽업 제휴쇼핑몰 확인하기",
                     },
                     {
                         label:   "쇼핑몰거래",
@@ -2329,13 +2434,14 @@ const langData = {
                         ],
                         shoppingTitle: "이용가능 제휴처",
                         shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
+                        partnerBtnText: "이용가능 제휴처 확인하기",
                     },
                 ],
             },
             {
                 hero: null,
                 heroAlt: "",
-                title: "공공요금수납",
+                title: "공공요금수납 서비스",
                 subtitle: "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
                 desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.",
                 sections: [],
@@ -2419,7 +2525,7 @@ const langData = {
                             {
                                 num: "01",
                                 title: "인력 지원 제도",
-                                desc: "매출 향상, 신상품 도입 등 점포 경쟁력 향상을 위해<br />노력하시는 경영주님을 위한 인센티브 제도",
+                                desc: "매출 향상, 신상품 도입 등 점포 경쟁력 향상을 위해<br class=\"p_br\" />노력하시는 경영주님을 위한 인센티브 제도",
                             },
                             {
                                 num: "02",
@@ -2450,6 +2556,9 @@ const langData = {
                     {
                         label: "장기운영점 및\n우수점포 혜택",
                         title: "장기운영점 및 우수점포 혜택",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "10년차 장기운영 지원 혜택", desc: "10주년 운영 경영주님 예우",bullets: ["기념패", "건강검진"] },
                             { num: "02", title: "20년차 장기운영 지원 혜택", desc: "20’s Clubf 가입", bullets: ["기념패", "여행상품권", "건강검진"] },
@@ -2460,6 +2569,9 @@ const langData = {
                     {
                         label: "점포\n소원 지원",
                         title: "점포 소원 지원",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "해피콜 센터 운영(24H)", desc: "24시간 소통채널 운영" , bullets: ["시설", "전산", "건의사항", "기타문의"]},
                             { num: "02", title: "무료 법률 상담 서비스", desc: "변호사 무료 법률 자문 상담", bullets: ["민사 / 형사", "가사 / 행정"] },
@@ -2467,8 +2579,11 @@ const langData = {
                         ],
                     },
                     {
-                        label: "(경영주/스토어매니저)\n역량 레벨업 지원",
-                        title: "(경영주/스토어매니저) 역량 레벨업 지원",
+                        label: "(경영주/스토어매니저)역량 레벨업 지원",
+                        title: "(경영주/스토어매니저)<br class=\"m_br\" />역량 레벨업 지원",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "GS25 챗봇조이", desc: "GS25 근무 지원을 위한 카카오톡 챗봇 서비스" , bullets: ["365일 24시간 응답", "재고 / 물류 조회", "점포 운영 매뉴얼", "모바일 해피콜 등록"], link: "https://pf.kakao.com/_xmTxexcb?from=qr" },
                             { num: "02", title: "모바일 점포경영", desc: "경영주와 스토어매니저 간 점포 운영 업무에 대한 소통 지원 APP", bullets: ["경영주/스토어매니저 전용 앱", "서비스 체크타임", "소비기한 관리","오늘의 업무 관리", "공지 전달"] },
@@ -2480,7 +2595,10 @@ const langData = {
                     },
                     {
                         label: "사회공헌\n지원",
-                        title: "사회공헌 지원",
+                        title: "사회공헌 지원", 
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "상생나눔 플랫폼 운영", desc: "사회적 약자를 위한 사회공헌형 점포 운영", bullets: ["내일스토어", "시니어스토어", "늘봄스토어"] },
                             { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
@@ -2491,6 +2609,9 @@ const langData = {
                     {
                         label: "경영주\n복지 혜택",
                         title: "경영주 복지 혜택",
+                        notes: [
+                            { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
+                        ],
                         items: [
                             { num: "01", title: "경조사 지원", desc: "경조금 및 용품 지원", bullets:["경조금 지급", "점포 운영 지원금 지급","장례 용품 지급", "출산 용품 지급"] },
                             { num: "02", title: "명절 및 경조사 자율휴무", desc: "자율 휴무 진행", bullets: ["명절 휴점 및 단축 영업","경조사 휴점 및 단축 영업"] },
@@ -2538,6 +2659,7 @@ const langData = {
         title: "밀박스/스낵바",
         sections: [
             {
+                type: "feature",
                 title: "GS25 기업/단체 대상 정기 배송 서비스란?",
                 desc: "대한민국 대표 편의점 GS25가 가진 차별화 경쟁력을 기반으로 한 기업·단체 대상 조식/간식 정기 배송 서비스입니다.<br />사내 식당이 없거나 간식 복지 도입을 고민 중이라면, 아래 서비스를 확인해보세요.",
                 items: [
@@ -2545,6 +2667,31 @@ const langData = {
                     { title: "합리적인 가격" },
                     { title: "약 1,200개 기업 이용중" },
                 ],
+            },
+            {
+                type: "imgcard",
+                title: "서비스 소개",
+                items: [
+                    {
+                        img: "",
+                        name: "밀박스25",
+                        desc: "GS25에서 제공하는 기업/단체 대상 간편식 정기 제공 서비스 입니다.<br class=\"p_br\" />주식부터 디저트, 음료까지 매일 새로운 구성으로 운영 됩니다.<br class=\"p_br\" />HACCP 인증, 개별 포장으로 위생적이고 맛있는 한끼를 제공합니다.",
+                        link: "#",
+                    },
+                    {
+                        img: "",
+                        name: "스낵바",
+                        desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다. 사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.",
+                    },
+                ],
+                advantages: {
+                    title: "이런 분들에게 추천 드립니다.",
+                    items: [
+                        { text: "정기적 조식/간식 서비스가 필요할 때" },
+                        { text: "합리적 가격의 복지 서비스가 필요할 때" },
+                        { text: "급식 인프라가 없어 정기적인 간편식 공급이 필요할 때" },
+                    ],
+                },
             },
         ],
     },
@@ -2624,7 +2771,12 @@ const scrollToSection = (idx) => {
 
 const _getIsMobile = () => window.innerWidth <= 768;
 const isMobileView = ref(_getIsMobile());
-const _onResize = () => { isMobileView.value = _getIsMobile(); };
+let _resizeTimer = null;
+const _onResize = () => {
+    isMobileView.value = _getIsMobile();
+    clearTimeout(_resizeTimer);
+    _resizeTimer = setTimeout(() => { ScrollTrigger.refresh(); }, 150);
+};
 
 let popSecObserver = null;
 onMounted(() => {
@@ -2667,7 +2819,7 @@ onMounted(() => {
                     bgWrapRef.value.style.webkitClipPath = clip;
                     bgWrapRef.value.classList.toggle("active", p >= 1);
                 },
-            });
+            }); 
 
             gsap.set([...spans, logoWrapRef.value], { opacity: 0, y: 40 });
 
@@ -2719,11 +2871,9 @@ onMounted(() => {
         });
     });
 });
-onUnmounted(() => {
+onBeforeUnmount(() => {
     window.removeEventListener("resize", _onResize);
     if (popSecObserver) popSecObserver.disconnect();
-});
-onBeforeUnmount(() => {
     if (gsapCtx) gsapCtx.revert();
 });
 
@@ -2851,8 +3001,8 @@ function goBack() {
 /* =====================
    sec_brand_visual
    ===================== */
-@media (max-width: 768px){
-    .cafe25_split_img >img{
+@media (max-width: 768px) {
+    .cafe25_split_img > img {
         width: 100%;
     }
 }
@@ -2860,17 +3010,19 @@ function goBack() {
 .cafe_panel :deep(.brand_panel_bg > img) {
     object-position: center bottom;
 }
+
 .chicken_panel .img_grid_swiper {
-   margin-top:120px;
+    margin-top: 120px;
 }
 
 @media (max-width: 768px) {
     .chicken_panel .img_grid_swiper {
-        margin-top:60px;
+        margin-top: 60px;
     }
 }
+
 .gopizza_panel .img_grid,
-.gopizza_panel .img_grid_swiper{
+.gopizza_panel .img_grid_swiper {
     margin-top: 0;
     padding:0;
 }
@@ -2889,8 +3041,8 @@ function goBack() {
     .gopizza_panel :deep(.brand_panel_bg > img) {
         object-position: -591px bottom;
     } 
-    .gopizza_panel :deep(.diff_bottom_row){
-        margin-top:120px;
+    .gopizza_panel :deep(.diff_bottom_row) {
+        margin-top: 120px;
     }
     .sinsen_panel :deep(.brand_panel_bg > img) {
         object-position: -797px bottom; 
@@ -3095,7 +3247,7 @@ function goBack() {
 .sec_brand_str > .str_inner {
     width: 1420px;
     margin: 0 auto;
-    padding:200px 0;
+    padding: 200px 0;
 }
 
 .str_header {
@@ -3396,8 +3548,8 @@ function goBack() {
         flex: none;
         justify-content: flex-start;
     }
-    .sns_wrap{
-        gap:16px
+    .sns_wrap {
+        gap: 16px;
     }
     .btn_sns{
         width: 40px;
@@ -3442,6 +3594,15 @@ function goBack() {
     letter-spacing: -0.01em;
     color:#67676F;
 }
+@media (max-width: 768px) {
+    .brand_panel_desc {
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+
+    }
+}
+/* ── 공통 list_dotted ── */
 .list_dotted > li {
     padding-left: 12px;
     position: relative;
@@ -3465,22 +3626,49 @@ function goBack() {
 .list_dotted > li > p {
     margin: 0;
     color: #161616;
-    font-size: 1.8rem; 
+    font-size: 1.8rem;
     line-height: 1.4;
 }
 
-@media (max-width: 768px) {   
-    .list_dotted > li > p {
-        font-size: 1.6rem;
-        line-height: 1.5;
-        letter-spacing: -0.01em;
-    }
-}
 .list_dotted > li > p :deep(a) {
     color: #107af2;
     font-size: 1.8rem;
     line-height: 1.4;
     text-decoration: underline;
+}
+
+.caution_note > p {
+    color: #67676f;
+}
+
+@media (max-width: 768px) {
+    .list_dotted > li {
+        padding-left: 6px;
+    }
+    .list_dotted > li::before {
+        top: 9px;
+        width:2px;
+        height:2px;
+    }
+    .list_dotted > li + li{
+        margin-top: 8px;
+    }
+    .list_dotted > li > p {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+    .caution_note {
+        margin-top: 8px;
+    }
+    .caution_note > p {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+    .brand_panel_title .list_dotted {
+        padding-right: 6px;
+    }
 }
 img {
     display: block;
@@ -3508,20 +3696,12 @@ button {
     cursor: pointer;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_select_box  {
         width: 100%;
         font-size: 1.4rem;
         line-height: 1.4;
     }
-}
-.tab_wrap {
-    margin-bottom: 0;
-}
-
-.tab_wrap + .tab_wrap {
-    margin-top: 24px;
-    margin-bottom: 24px;
 }
 
 .brand_content {
@@ -3807,42 +3987,6 @@ button {
     object-fit: cover;
 }
 
-/* ── 탭 2: CHICKEN25 ── */
-.chicken25_card_list {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, calc((100% - 40px) / 3));
-    gap: 20px;
-}
-.chicken25_card_list > li {
-    min-width: 0;
-}
-
-.chicken25_card {
-    height: 264px;
-    padding: 32px;
-    background-color: #f8f8f8;
-    border-radius: 12px;
-}
-
-.chicken25_card > h4 {
-    margin: 0 0 16px;
-    color: #161618;
-    font-size: 2.4rem;
-    font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-.chicken25_card > p {
-    margin: 0;
-    color: #67676f;
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-}
 
 .img_grid {
     margin-top: 120px;
@@ -3864,29 +4008,6 @@ button {
 }
 
 /* ── 탭 3: GOPIZZA ── */
-.gopizza_img_grid {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, calc((100% - 20px) / 2));
-    gap: 20px;
-}
-
-.gopizza_img_grid > li {
-    min-width: 0;
-}
-
-.gopizza_img_grid > li > div {
-    height: 440px;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.gopizza_img_grid img {
-    height: 100%;
-    object-fit: cover;
-}
-
 .gopizza_img_wrap {
     height: 440px;
     margin: 0;
@@ -3918,10 +4039,10 @@ button {
 }
 
 @media (max-width: 768px) {
-    .gopizza_menu_panel + .gopizza_menu_panel{
-        margin-top:100px;
+    .gopizza_menu_panel + .gopizza_menu_panel {
+        margin-top: 100px;
     }
-    .gopizza_menu_panel img{
+    .gopizza_menu_panel img {
         min-height: 240px;
     }
 }
@@ -3978,6 +4099,7 @@ button {
 }
 
 /* ── 공통 테이블 ── */
+/* ── 공통 테이블 ── */
 .com_table_wrap {
     overflow-x: auto;
 }
@@ -3990,7 +4112,7 @@ button {
 
 .com_table th,
 .com_table td {
-    padding: 0 24px;
+    padding: 18px 24px;
     color: #161618;
     font-size: 1.8rem;
     line-height: 1.6;
@@ -3999,38 +4121,61 @@ button {
     vertical-align: middle;
 }
 
+.com_table td {
+    font-weight: 400;
+    text-align: left;
+}
+
 .com_table thead th {
-    height: 64px;
+    padding: 11px 13px;
     font-weight: 600;
     background-color: #f8f8f8;
 }
 
 .com_table tbody th {
-    width: 136px;
-    min-width: 136px;
-    max-width: 136px;
     font-weight: 700;
     background-color: #f8f8f8;
     text-align: left;
     white-space: normal;
     word-break: keep-all;
-    vertical-align: top;
     padding-top: 18px;
     padding-bottom: 18px;
+    vertical-align: middle;
 }
 
-.com_table tbody td {
-    padding: 18px 24px;
-    font-weight: 400;
-    text-align: left;
-}
-
-.com_table_col thead th,
-.com_table_col tbody td {
+/* 열기준 테이블 (위 thead th / 아래 tbody td) */
+.com_table_col thead th {
     text-align: center;
 }
 
+.com_table_col td {
+    padding: 15px 24px;
+    text-align: center;
+}
 
+/* 모바일 */
+@media (max-width: 768px) {
+    .com_table th,
+    .com_table td {
+        font-size: 1.6rem;
+        line-height: 1.24;
+    }
+    .com_table td {
+        padding: 14px 20px;
+        font-size: 1.4rem;
+        letter-spacing: 0.01em;
+    }
+    .com_table thead th {
+        padding: 14px 0;
+    }
+    .com_table tbody th {
+        padding: 14px 24px;
+    }
+    .com_table_col td {
+        padding: 11px 13px;
+        font-size: 1.4rem;
+    }
+}
 .gopizza_menu_name {
     display: flex;
     align-items: center;
@@ -4151,15 +4296,14 @@ button {
         min-height: 227px;
     }
 }
-.info_card span{
-font-size: 1.8rem;
-line-height: 1.4;
+.info_card span {
+    font-size: 1.8rem;
+    line-height: 1.4;
 }
 @media (max-width: 768px) {
     .info_card span {
-    font-size: 1.4rem; 
-    letter-spacing: -0.01em;
-
+        font-size: 1.4rem;
+        letter-spacing: -0.01em;
     }
 }
 .info_card > p {
@@ -4191,7 +4335,7 @@ line-height: 1.4;
 }
 
 /* 운영 장점 체크리스트 */
-.sinsen_check_list > li {
+.info_list > li {
     padding-bottom: 12px;
     color: #161618;
     font-size: 1.8rem;
@@ -4203,11 +4347,11 @@ line-height: 1.4;
     gap: 8px;
 }
 
-.sinsen_check_list > li:last-child {
+.info_list > li:last-child {
     padding-bottom: 0;
 }
 
-.sinsen_check_list > li::before {
+.info_list > li::before {
     content: "";
     width: 16px;
     height: 16px;
@@ -4218,28 +4362,14 @@ line-height: 1.4;
     flex-shrink: 0;
 }
 
-.sinsen_check_list > li > div {
+.info_list > li > div {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.sinsen_check_note {
+.info_check_note {
     color: #67676f;
-}
-
-.sinsen_check_subs {
-    margin-top: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.sinsen_check_subs > span {
-    color: #67676f;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
 }
 
 .chicken_panel :deep(.feature_card_item) {
@@ -4544,9 +4674,9 @@ line-height: 1.4;
 
 @media (max-width: 768px) {
     .charging_service_note {
-        margin-top:24px;
+        margin-top: 24px;
         margin-bottom: 8px;
-        padding:0 32px 24px;
+        padding: 0 32px 24px;
         font-size: 1.6rem;
         line-height: 1.5;
         letter-spacing: -0.01em;
@@ -4562,7 +4692,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .charging_note_label{
         font-size: 1.4rem; 
         line-height: 1.4;
@@ -4576,7 +4706,7 @@ line-height: 1.4;
     gap: 20px;
     margin-bottom: 40px;
 }
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_header{
        margin-bottom: 24px;
        display: block;
@@ -4601,7 +4731,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_group_title{
         margin-bottom: 24px;
         font-size: 1.8rem;
@@ -4638,7 +4768,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_def_list {
         gap: 8px 16px;
     }
@@ -4659,7 +4789,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .usage_def_list > dd {
         font-size: 1.4rem;
         line-height: 1.4;
@@ -4669,39 +4799,11 @@ line-height: 1.4;
 
 
 .usage_group .list_dotted > li {
-    padding: 0 0 0 12px;
     color: #67676f;
-    font-size: 1.8rem;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-    position: relative; 
-}
-
-@media (max-width: 768px){
-    .usage_group .list_dotted > li {
-        font-size: 1.4rem;
-        line-height: 1.4;
-
-} 
 }
 
 .usage_group .list_dotted > li::before {
-    content: "";
-    width: 4px;
-    height: 4px;
     background-color: #67676f;
-    border-radius: 50%;
-    position: absolute;
-    top: 0.8em; /* 첫 번째 줄 중앙: line-height(1.6) / 2 */
-    left: 0;
-    display: block;
-    transform: translateY(-50%);
-}
-
-@media (max-width: 768px) {
-    .usage_group .list_dotted > li::before {
-        top: 0.7em; /* 첫 번째 줄 중앙: line-height(1.4) / 2 */
-    }
 }
 
 
@@ -4754,11 +4856,11 @@ line-height: 1.4;
 }
 
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .pop_panel :deep(.brand_panel_title) {
         padding-bottom: 24px;
     }
-}
+} */
 
 .pop_lnb {
     width: 240px;
@@ -4822,6 +4924,12 @@ line-height: 1.4;
     padding: 64px 0;
     border-bottom: 1px solid #e5e5e9;
 }
+@media (max-width: 768px) {
+    .winwin_item {
+        padding: 0;
+        border:0;
+    }
+}
 
 /* 첫 번째 줄: 상단 여백 제거 */
 .winwin_item:nth-child(-n+2) {
@@ -4848,16 +4956,20 @@ line-height: 1.4;
     flex-shrink: 0;
 }
 
-.winwin_item_content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+@media (max-width: 768px) {
+    .winwin_item > article{
+        gap: 16px;
+    }
+    .winwin_item_icon {
+        width: 60px;
+        height: 60px;
+    }
 }
 
+
+
 .winwin_item_title {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    margin-bottom: 24px;
 }
 
 /* 번호·제목 공통 폰트 */
@@ -4869,8 +4981,11 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
+
 .winwin_item_num {
+    margin-bottom: 4px;
     color: #107af2;
+    display:inline-block;
 }
 
 .winwin_item_title > strong {
@@ -4889,8 +5004,17 @@ line-height: 1.4;
     display: inline-block;
 }
 
+.imgcard_link {
+    width: 20px;
+    height: 20px;
+    background-color: #d0d0d8;
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
 .winwin_item_body > p {
-    margin-top: 8px;
     color: #67676f;
     font-size: 2rem;
     font-weight: 700;
@@ -4899,9 +5023,53 @@ line-height: 1.4;
 }
 
 .winwin_item_body > p.winwin_item_desc {
-    margin-top: 0;
     font-weight: 400;
 }
+.winwin_item_body .list_dotted {
+    margin-top: 16px;
+}
+
+.winwin_item_body .list_dotted > li::before{
+    background-color: #67676f;
+}
+.winwin_item_body .list_dotted > li + li {
+    margin-top: 6px;
+}
+.winwin_item_body .list_dotted > li > p {
+    color:#67676f;
+    font-size: 1.8rem;
+    line-height: 1.4;
+
+}
+
+
+@media (max-width: 768px) {
+    .winwin_item_content{
+        gap:6px;
+    }
+    .winwin_item_num{
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0%;
+    }
+    .winwin_item_title{
+        margin-bottom: 6px;
+    }
+    .winwin_item_title > strong {
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+    }
+    .winwin_item_body .list_dotted > li p{
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+    }
+    .winwin_item_body .list_dotted > li + li {
+        margin-top: 4px;
+    }
+}
+
 
 .sec_note {
     margin: 8px 0 0;
@@ -4919,60 +5087,18 @@ line-height: 1.4;
 
 @media (max-width: 768px) {
     .milbox_feature :deep(.feature_card_item) {
-        min-height: 0;
+        min-height: 163px;
         max-width: 100%;
     }
 }
 
-.winwin_bullet_list {
-    margin: 16px 0 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
 
-.winwin_bullet_list > li {
-    padding-left: 12px;
-    color: #67676f;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.4;
-    position: relative;
-}
-
-.winwin_bullet_list > li::before {
-    width: 4px;
-    height: 4px;
-    background-color: #67676f;
-    border-radius: 50%;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    content: "";
-    display: block;
-}
 
 @media (max-width: 768px) {
     .winwin_item_list {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
-
-    /* PC에서 제거된 2번째 아이템 상단 여백 복원 */
-    .winwin_item:nth-child(2) {
-        padding-top: 64px;
-    }
-
-    /* PC에서 제거된 보더 복원 */
-    .winwin_item:nth-last-child(2):nth-child(odd) {
-        border-bottom: 1px solid #e5e5e9;
-    }
-
-    .winwin_item_num,
-    .winwin_item_title > strong {
-        font-size: 2.4rem;
-    }
-
 }
 
 /* ── 택배&픽업 — 안내 목록 ── */
@@ -4980,16 +5106,12 @@ line-height: 1.4;
 .brand_panel_title .list_dotted {
     margin: 16px 0 0;
 }
-
 .brand_panel_title .list_dotted > li::before {
     background-color: #67676f;
 }
 
 .brand_panel_title .list_dotted > li > p {
     color: #67676f;
-    font-size: 2rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
 }
 
 .note_sub,
@@ -4997,75 +5119,7 @@ line-height: 1.4;
     color: #f95823;
 }
 
-@media (max-width: 768px) {
-    .brand_panel_title .list_dotted > li > p {
-        font-size: 1.4rem;
-        line-height: 1.4;
-        letter-spacing: -0.01em;
-
-    }
-}
-/* ── 택배&픽업 — 이용요금 테이블 ── */
-.price_table_note {
-    margin: 4px 0 0;
-    color: #f95823;
-    font-size: 1.4rem;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-}
-
-
 /* ── 택배&픽업 — 이용요금 ── */
-/* .delivery_price_box 기본 박스 스타일은 .info_card로 통합 */
-
-.delivery_price_list {
-    margin: 0;
-    padding: 0;
-    
-}
-
-.delivery_price_list > li {
-    padding-left: 28px;
-    position: relative;
-}
-
-.delivery_price_list > li + li {
-    margin-top: 16px;
-}
-
-.delivery_price_list > li::before {
-    content: "";
-    width: 5px;
-    height: 10px;
-    border-right: 2px solid #107af2;
-    border-bottom: 2px solid #107af2;
-    position: absolute;
-    top: 3px;
-    left: 4px;
-    transform: rotate(45deg);
-    display: block;
-}
-
-.delivery_price_list > li > p {
-    margin: 0;
-    color: #161616;
-    font-size: 1.8rem;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-}
-
-.delivery_price_subs {
-    margin: 6px 0 0;
-    padding: 0;
-    
-}
-
-.delivery_price_subs > li {
-    color: #67676f;
-    font-size: 1.8rem;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-}
 
 /* ── 고속도로 미납 통행료 납부 · 온라인몰 편의점 결제 공통 ── */
 .sec_unpaid_advantage :deep(.feature_card_item),
@@ -5074,7 +5128,7 @@ line-height: 1.4;
 }
 
 .sec_delivery_caution :deep(.feature_card_item) {
-    min-height: 216px;
+    min-height: 211px;
 }
 :deep(.txt_point) {
     color: #fb6432;
@@ -5086,6 +5140,9 @@ line-height: 1.4;
     }
     .sec_mall_payment_advantage :deep(.feature_card_item) {
         min-height: 244px;
+    }
+    .sec_delivery_caution :deep(.feature_card_item) {
+        min-height: 199px;
     }
 }
 
@@ -5179,7 +5236,7 @@ line-height: 1.4;
 
     .mall_site_figure > figcaption {
         color: #67676f;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         line-height: 1.4;
         letter-spacing: -0.01em;
         text-align: center;
@@ -5200,12 +5257,12 @@ line-height: 1.4;
 }
 
 /* ── 유심 요금제 혜택 ── */
-.usim_benefit_cards {
+.imgcard_list {
     display: flex;
     gap: 20px;
 }
 
-.usim_benefit_card {
+.imgcard_item {
     overflow: hidden;
     border-radius: 12px;
     display: flex;
@@ -5213,7 +5270,7 @@ line-height: 1.4;
     flex-direction: column;
 }
 
-.usim_benefit_img {
+.imgcard_img {
     width: 100%;
     height: 340px;
     margin: 0;
@@ -5221,19 +5278,19 @@ line-height: 1.4;
     overflow: hidden;
 }
 
-.usim_benefit_img > img {
+.imgcard_img > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.usim_benefit_body {
+.imgcard_body {
     padding: 32px 0;
     flex: 1;
 }
 
-.usim_benefit_body > h4 {
-    margin-bottom: 24px;
+.imgcard_body > h4 {
+    margin-bottom: 16px;
     color: #161616;
     font-size: 2.4rem;
     font-weight: 700;
@@ -5241,7 +5298,7 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-.usim_benefit_body > p {
+.imgcard_body > p {
     color: #67676f;
     font-size: 1.6rem;
     font-weight: 400;
@@ -5250,19 +5307,19 @@ line-height: 1.4;
     white-space: pre-line;
 }
 
-.usim_benefit_list {
+.imgcard_sublist {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.usim_benefit_list > li {
+.imgcard_sublist > li {
     display: flex;
     gap: 8px;
     align-items: center;
 }
 
-.usim_benefit_icon {
+.imgcard_icon {
     width: 16px;
     height: 16px;
     background-color: #0059fe;
@@ -5270,7 +5327,7 @@ line-height: 1.4;
     flex-shrink: 0;
 }
 
-.usim_benefit_list > li > span:last-child {
+.imgcard_sublist > li > span:last-child {
     color: #161616;
     font-size: 1.8rem;
     font-weight: 400;
@@ -5288,20 +5345,20 @@ line-height: 1.4;
         width: 100%;
     }
 
-    .usim_benefit_cards {
+    .imgcard_list {
         flex-direction: column;
         gap:40px;
     }
 
-    .usim_benefit_img {
+    .imgcard_img {
         height: 220px;
     }
 
-    .usim_benefit_body {
+    .imgcard_body {
         padding: 24px 0;
     }
 
-    .usim_benefit_body > h4 {
+    .imgcard_body > h4 {
         margin-bottom:8px;
         font-weight: 700;
         font-size: 1.8rem;
@@ -5310,7 +5367,7 @@ line-height: 1.4;
 
     }
 
-    .usim_benefit_list > li > span:last-child {
+    .imgcard_sublist > li > span:last-child {
         font-size: 1.6rem;
         line-height: 1.5;
         letter-spacing: 0;
@@ -5593,7 +5650,7 @@ line-height: 1.4;
 }
 
 /* ── 기프트카드 대표 브랜드 슬라이더 ── */
-.gift_brand_swiper :deep(.swiper-wrapper) {
+/* .gift_brand_swiper :deep(.swiper-wrapper) {
     padding: 24px 0;
 }
 
@@ -5601,7 +5658,7 @@ line-height: 1.4;
     .gift_brand_swiper :deep(.swiper-wrapper) {
         padding: 0 0 24px;
     }
-}
+} */
 
 .gift_brand_slider {
     position: relative;
@@ -5611,12 +5668,24 @@ line-height: 1.4;
     gap: 16px;
 }
 
+
+
+@media (max-width: 768px) {
+    .brand_panel section.sec_gift_brand {
+    padding-left: 0;
+    padding-right:0;
+    }
+    .brand_panel section.sec_gift_brand :deep(header) {
+        padding: 0 20px;
+    }
+}
+
 /* 모바일: 3장 뷰 너비 */
 .gift_brand_swiper {
     width: 100%;
-    max-width: calc(106px * 3 + 14px * 2);
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0 20px;
+    /* margin-left: auto;
+    margin-right: auto; */
     overflow: hidden;
 }
 
@@ -5729,21 +5798,10 @@ line-height: 1.4;
     background-color: #161616;
 }
 
-.usim_hiplus_list > li {
-    color: #67676f;
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-}
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .cafe25_card_list {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .chicken25_card_list {
-        grid-template-columns: repeat(2, calc((100% - 20px) / 2));
     }
 
     .gopizza_menu {
@@ -5836,7 +5894,7 @@ line-height: 1.4;
 
 @media (max-width: 768px) {
     .brand_content {
-        padding: 24px 0 60px;
+        padding: 48px 0 60px;
         overflow-x: clip;
     }
 
@@ -5917,10 +5975,6 @@ line-height: 1.4;
         padding-bottom: 40px;
     }
 
-    .chicken25_card_list {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
     .img_grid_swiper {
         padding: 0 20px;
         overflow: visible;
@@ -5992,7 +6046,7 @@ line-height: 1.4;
         background-color: #e5e5e9;
     }
 
-    .sinsen_check_list > li {
+    .info_list > li {
         padding-bottom: 4px;
     }
 
@@ -6049,9 +6103,27 @@ line-height: 1.4;
 
 /* 공공요금수납 납부가능 세금 및 공과금 */
 .tax_group_list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.tax_group_list > dd {
+    margin: 0 0 40px;
+}
+
+.tax_group_list > dd:last-child {
+    margin-bottom: 0;
+}
+@media (max-width: 768px) {
+    .tax_group_list {
+        margin-top: 24px;
+    }
+}
+.tax_group_list .list_dotted > li + li {
+    margin-top: 6px;
+}
+.tax_group_list .list_dotted > li::before {
+    background-color: #67676f;
 }
 .tax_group_list .list_dotted > li p{
     color:#67676F;
@@ -6065,10 +6137,21 @@ line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
-.tax_group_desc {
+.tax_group_desc,
+.tax_group_list .list_dotted > li p {
     font-size: 1.8rem;
     color: #67676f;
     line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .tax_group_desc,
+    .tax_group_list .list_dotted > li p  {
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+
+    }
 }
 
 /* 상품권 판매 */
@@ -6098,27 +6181,41 @@ line-height: 1.4;
 }
 
 .voucher_info {
-    margin-top: 24px;
+    padding-top: 24px;
 }
 
 .voucher_name {
-    display: block;
+    margin-bottom: 8px;
     font-size: 2rem;
-    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    font-weight: 700; 
     color: #000;
+    display: block;
 }
 
-.voucher_tags {
-    margin-top: 10px;
-    display: flex;
-    gap: 6px;
+
+@media (max-width: 768px) {
+    .voucher_name {
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+    }
+}
+
+.voucher_tags { 
+    margin-bottom: 16px;
     letter-spacing: -0.01em;
     line-height: 1.4;
+    display: flex;
+    gap: 4px; 
 }
 
 .voucher_tag {
     padding: 2px 8px;
     font-size: 1.4rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em; 
     border-radius: 4px;
 }
 
@@ -6138,31 +6235,89 @@ line-height: 1.4;
 }
 
 .voucher_desc {
-    margin-top: 10px;
     font-size: 1.6rem;
     color: #67676f;
     line-height: 1.5;
+    letter-spacing: -0.01em;
 }
 
 @media (max-width: 768px) {
-    .sec_tax_list {
-        margin-top: 40px;
-    }
-
     .tax_group_subtitle {
-        font-size: 2rem;
+        margin-bottom:12px;
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+ 
     }
 
-    .sec_voucher {
-        margin-top: 40px;
+    .brand_panel section.sec_voucher {
+        padding: 0 !important;
+    }
+    .brand_panel section.sec_voucher header {
+        padding: 0 20px;
+    }
+    .sec_voucher .voucher_swiper {
+        padding: 0 20px;
     }
 
-    .voucher_list {
-        flex-direction: column;
-        gap: 32px;
+    .voucher_swiper .swiper-slide {
+        width: 69.33vw; /* 260px ÷ 375px × 100 */
     }
-    .winwin_item_body > p{
-        margin-top: 0;
+    .winwin_item_body > p {
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0;
+
     }
 }
+
+.link_wrap {
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
+}
+.link_wrap > .btn_pickup {
+    height: 64px;
+    padding: 20px 32px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    background-color: #107AF2;
+    border-radius: 10px;
+    border:0;
+    gap:8px;
+}
+.link_wrap > .btn_pickup::after{
+    content:'';
+    width: 16px;
+    height: 16px; 
+    background:#fff;
+
+}
+
+@media (max-width: 768px) {
+    .link_wrap {
+        margin-top: 80px;
+    }
+
+    .link_wrap > .btn_pickup {
+        height: 44px;
+        padding: 10px 16px;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+        border-radius: 8px;
+    }
+
+}
+.milbox_panel .imgcard_body {
+    padding: 32px 0 24px;
+}
+@media (max-width: 768px) {
+    .milbox_panel .imgcard_body {
+        padding: 24px 0;
+    }
+}
+
 </style>
