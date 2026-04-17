@@ -1,14 +1,13 @@
 <template>
     <div class="gsrbr020101" v-if="t">
-        <section class="visual_section">
-            <div class="visual_img">
-                <img :src="t.Visual.img" :alt="t.Visual.alt" />
+        <section class="visual_section" ref="visualSection">
+            <div class="visual_img" ref="visualImg">
+                <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
             </div>
             <div class="visual_content">
                 <div class="text_box">
-                    <h2 class="brand_logo">
-                        <img :src="t.Visual.logo" :alt="t.Visual.logoAlt" />
-                    </h2>
+                    <span class="ani_text">{{ t.Visual.subTitle }}</span>
+                    <p class="ani_text" v-html="t.Visual.mainTitle"></p>
                 </div>
             </div>
         </section>
@@ -74,7 +73,7 @@
                     
                     <div class="sub_tab_content" v-if="originTabIdx2 === 0">
                         <div class="origin_intro">
-                            <div class="visual_img_small"></div>
+                            <div class="visual_img_small production_bg"></div>
                             <div class="text_box">
                                 <h3 class="title">{{ t.OriginContent.title }}</h3>
                                 <p class="desc">{{ t.OriginContent.desc }}</p>
@@ -118,7 +117,8 @@
                     <div class="sub_tab_content" v-if="originTabIdx2 === 1">
                         <div class="partnership_wrap">
                             <div class="origin_intro">
-                                <div class="visual_img_small partnership_bg"></div>
+                                <div class="visual_img_small partnership_bg">
+                                </div>
                                 <div class="text_box">
                                     <h3 class="title">{{ t.PartnershipTitle }}</h3>
                                     <p class="desc" v-html="t.PartnershipDesc"></p>
@@ -260,9 +260,9 @@
                     <Buttons 
                         btn-class="btn_icon" 
                         @click="openModal" 
-                        data-popid="gsrbr020401" 
+                        data-popid="gsrbr0203" 
                         data-type="lg" 
-                        data-cont="gsrbr020401"
+                        data-cont="gsrbr0203"
                     >테스트</Buttons>
                 </div>
             </div>
@@ -287,6 +287,11 @@
 import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
 import modal from "@/assets/js/modal";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// GSAP 플러그인 등록
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
     name: "GsTheFreshBrand",
@@ -296,6 +301,7 @@ export default {
     },
     data() {
         return {
+            isMobile: false, // 모바일 여부 체크 변수
             activeIdx: 0,
             originTabIdx1: 0,
             originTabIdx2: 0,
@@ -305,9 +311,10 @@ export default {
                 ko: {
                     Visual: {
                         img: require("@/assets/images/dummy/gsrbr020101_main.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr020101_main_mo.png"),
                         alt: "GS THE FRESH 메인 비주얼",
-                        logo: require("@/assets/images/dummy/gsrbr020101_2.png"),
-                        logoAlt: "GS THE FRESH 로고"
+                        subTitle: "신선한 행복을 주는 브랜드",
+                        mainTitle: "<strong>GS</strong> THE FRESH"
                     },
                     History: [
                         `1974년 럭키수퍼체인(주)로 출범한 LG수퍼마켓은<br/>GS그룹의 출범에 따라 GS수퍼마켓으로 변경되고,<br/>이후 2019년 '삶의 가치를 누리는 라이프 스타일 마켓' 으로의 변화를 위해<br/>"GS THE FRESH"로 새롭게 태어나게 되었습니다.`,
@@ -441,57 +448,50 @@ export default {
                             {
                                 category: "맛있는 고기",
                                 items: [
-                                    { name: "소갈비", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "국거리용 소고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "한우안심", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "삼겹살", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "계랸", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "닭고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "한우등심", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "불고기용 소고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "목심", img: require("@/assets/images/dummy/tab_1_9.png") }
+                                    { name: "소갈비", img: require("@/assets/images/dummy/tab_2_1.png") },
+                                    { name: "국거리용 소고기", img: require("@/assets/images/dummy/tab_2_2.png") },
+                                    { name: "한우안심", img: require("@/assets/images/dummy/tab_2_3.png") },
+                                    { name: "삼겹살", img: require("@/assets/images/dummy/tab_2_4.png") },
+                                    { name: "계랸", img: require("@/assets/images/dummy/tab_2_5.png") },
+                                    { name: "닭고기", img: require("@/assets/images/dummy/tab_2_6.png") },
+                                    { name: "한우등심", img: require("@/assets/images/dummy/tab_2_7.png") },
+                                    { name: "불고기용 소고기", img: require("@/assets/images/dummy/tab_2_8.png") },
+                                    { name: "목심", img: require("@/assets/images/dummy/tab_2_9.png") }
                                 ]
                             },
                             {
                                 category: "싱싱한 과일",
                                 items: [
-                                    { name: "소갈비", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "국거리용 소고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "한우안심", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "삼겹살", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "계랸", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "닭고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "한우등심", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "불고기용 소고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "목심", img: require("@/assets/images/dummy/tab_1_9.png") }
+                                    { name: "거창 애플딸기", img: require("@/assets/images/dummy/tab_2_10.png") },
+                                    { name: "딸기", img: require("@/assets/images/dummy/tab_2_11.png") },
+                                    { name: "수박", img: require("@/assets/images/dummy/tab_2_12.png") },
+                                    { name: "키위", img: require("@/assets/images/dummy/tab_2_13.png") },
+                                    { name: "밀감", img: require("@/assets/images/dummy/tab_2_14.png") },
+                                    { name: "토마토", img: require("@/assets/images/dummy/tab_2_15.png") },
+                                    { name: "참외", img: require("@/assets/images/dummy/tab_2_16.png") },
+                                    { name: "멜론", img: require("@/assets/images/dummy/tab_2_17.png") },
+                                    { name: "사과", img: require("@/assets/images/dummy/tab_2_18.png") },
+                                    { name: "배", img: require("@/assets/images/dummy/tab_2_19.png") }
                                 ]
                             },
                             {
                                 category: "신선한 채소",
                                 items: [
-                                    { name: "소갈비", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "국거리용 소고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "한우안심", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "삼겹살", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "계랸", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "닭고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "한우등심", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "불고기용 소고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "목심", img: require("@/assets/images/dummy/tab_1_9.png") }
+                                    { name: "무", img: require("@/assets/images/dummy/tab_2_20.png") },
+                                    { name: "파프리카", img: require("@/assets/images/dummy/tab_2_21.png") },
+                                    { name: "양파", img: require("@/assets/images/dummy/tab_2_22.png") },
+                                    { name: "배추", img: require("@/assets/images/dummy/tab_2_29.png") },
+                                    { name: "고구마", img: require("@/assets/images/dummy/tab_2_23.png") },
+                                    { name: "새송이 버섯", img: require("@/assets/images/dummy/tab_2_24.png") },
                                 ]
                             },
                             {
                                 category: "신선한 해산물",
                                 items: [
-                                    { name: "소갈비", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "국거리용 소고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "한우안심", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "삼겹살", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "계랸", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "닭고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "한우등심", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "불고기용 소고기", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                    { name: "목심", img: require("@/assets/images/dummy/tab_1_9.png") }
+                                    { name: "김", img: require("@/assets/images/dummy/tab_2_25.png") },
+                                    { name: "백진미", img: require("@/assets/images/dummy/tab_2_26.png") },
+                                    { name: "멸치", img: require("@/assets/images/dummy/tab_2_27.png") },
+                                    { name: "오징어", img: require("@/assets/images/dummy/tab_2_28.png") },
                                 ]
                             }
                         ]
@@ -505,7 +505,22 @@ export default {
             return this.langData.ko;
         }
     },
+    mounted() {
+        this.checkMobile();
+        window.addEventListener('resize', this.checkMobile);
+        this.$nextTick(() => {
+            setTimeout(() => {
+                this.initVisualInteraction();
+            }, 100);
+        });
+    },
+    beforeUnmount() {
+        window.removeEventListener('resize', this.checkMobile);
+    },
     methods: {
+        checkMobile() {
+            this.isMobile = window.innerWidth <= 767;
+        },
         onTabChange1(idx) {
             this.originTabIdx1 = idx;
             this.originTabIdx2 = 0;
@@ -515,7 +530,6 @@ export default {
         },
         scrollToSection(idx) {
             this.currentCat = idx;
-            // $refs에서 배열로 수집된 요소에 인덱스로 접근
             const targets = this.$refs.originRefs;
             if (targets && targets[idx]) {
                 targets[idx].scrollIntoView({ behavior: "smooth", block: "start" });
@@ -523,7 +537,6 @@ export default {
         },
         scrollToTasteSection(idx) {
             this.currentTasteCat = idx;
-            // $refs에서 배열로 수집된 요소에 인덱스로 접근
             const targets = this.$refs.tasteRefs;
             if (targets && targets[idx]) {
                 targets[idx].scrollIntoView({ behavior: "smooth", block: "start" });
@@ -539,10 +552,72 @@ export default {
             const el = event.currentTarget;
             const popId = el.dataset.popid;
             const type = el.dataset.type || "default";
-            const cont = el.dataset.cont; // 여기서 "gsrbr0203"을 가져옴
-            // modal.js 라이브러리를 통해 팝업 열기
+            const cont = el.dataset.cont;
             modal.open(popId, type, el, cont);
         },
+        initVisualInteraction() {
+            const section = this.$refs.visualSection;
+            const imgBox = this.$refs.visualImg;
+            const texts = section.querySelectorAll(".ani_text");
+
+            if (!section || !imgBox) return;
+
+            ScrollTrigger.matchMedia({
+                // 데스크탑: 처음에는 무조건 꽉 찬 이미지(from 100%) -> 스크롤 시 90%로 축소
+                "(min-width: 768px)": () => {
+                    const tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top top",
+                            end: "+=150%",
+                            pin: true,
+                            scrub: 1.2,
+                            anticipatePin: 1,
+                            invalidateOnRefresh: true
+                        }
+                    });
+
+                    tl.fromTo(imgBox, 
+                        { 
+                            width: "100%", 
+                            height: "100%", 
+                            borderRadius: "0px", 
+                            filter: "blur(0px) brightness(1)" 
+                        },
+                        { 
+                            width: "90%", 
+                            height: "75%", 
+                            borderRadius: "40px", 
+                            filter: "blur(10px) brightness(0.6)", 
+                            duration: 2, 
+                            ease: "none" 
+                        }
+                    )
+                    .fromTo(texts, 
+                        { 
+                            opacity: 0, 
+                            y: 50 
+                        }, 
+                        { 
+                            opacity: 1, 
+                            y: 0, 
+                            stagger: 0.3, 
+                            duration: 1, 
+                            ease: "power2.out" 
+                        }, 
+                        "-=1.5"
+                    );
+
+                    return () => {
+                        if (tl) tl.kill();
+                    };
+                },
+                // 모바일: 인터렉션 제거 및 스타일 초기화
+                "(max-width: 767px)": () => {
+                   gsap.set([imgBox, texts], { clearProps: "all" });
+                }
+            });
+        }
     }
 };
 </script>
@@ -554,12 +629,21 @@ export default {
 .gsrbr020101 { width: 100%; position: relative; display: block; }
 .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 
-/* Visual Section */
-.visual_section { width: 100%; position: relative; display: block; }
-.visual_img { width: 100%; height: 1080px; position: relative; }
+/* Visual Section 최적화 */
+.visual_section { width: 100%; height: 100vh; background-color: #fff; display: flex; position: relative;  align-items: center; justify-content: center; overflow: hidden; }
+.visual_img {width: 100%; height: 100%; transform: translate(-50%, -50%); position: absolute; top: 50%; left: 50%; z-index: 1;  overflow: hidden; will-change: width, height, border-radius; /* 성능 최적화 */}
 .visual_img img { width: 100%; height: 100%; object-fit: cover; }
-.visual_content { width: 100%; padding: 100px 0; background-color: #fff; position: relative; display: flex; align-items: center; justify-content: center; }
-.brand_logo img { width: 100%; height: auto; }
+.visual_content { position: relative; z-index: 2; width: 100%; text-align: center; }
+.text_box { display: flex; flex-direction: column; justify-content: center; }
+.text_box span { display: block; margin-bottom: 20px; color: #fff; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; }
+.visual_content .text_box p { color: #fff; font-size: 100px; font-weight: 300; line-height: 1.1; }
+.visual_content .text_box p :deep(strong) { color: #fff; font-size: 100px; font-weight: 800; }
+
+/* 하단 섹션들 */
+.brand_intro_section {width: 100%; padding: 200px 0; background-color: #f8f8f8; position: relative; display: block; }
+.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
+.history_text { color: #161616; font-size: 28px; font-weight: 700; line-height: 1.6; }
+.history_text + .history_text { margin-top: 40px; }
 
 /* Brand Intro */
 .brand_intro_section { width: 100%; padding: 200px 0; background-color: #f8f8f8; position: relative; display: block; }
@@ -599,6 +683,7 @@ export default {
 .empty_cont { padding: 100px 0; text-align: center; color: #67676f; font-size: 20px; background-color: #f8f8f8; border-radius: 12px; }
 
 /* 지자체 컨텐츠 디자인 */
+.production_bg { background-image: url('@/assets/images/dummy/gsrbr020101_6.png'); background-size: cover; }
 .partnership_bg { background-image: url('@/assets/images/dummy/gsrbr020101_5.png'); background-size: cover; }
 .sub_title { margin-bottom: 40px; color: #161616; font-size: 28px; font-weight: 700; }
 .mou_grid { display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 40px; column-gap: 20px; }
@@ -698,6 +783,8 @@ export default {
 
 @media screen and (max-width: 1024px) {
     .visual_img { height: 600px; }
+    .text_box span { font-size: 24px; }
+    .visual_content .text_box p { font-size: 70px; }
     .history_text { font-size: 22px; }
     .value_title { flex-direction: column; align-items: flex-start; gap: 30px; }
     .title_text { font-size: 32px; }
@@ -729,8 +816,12 @@ export default {
 /* 모바일 반응형 (767px 이하) */
 @media screen and (max-width: 767px) {
     .visual_img { height: 400px; }
+    .text_box span { font-size: 18px; }
+    .visual_content .text_box p, .visual_content .text_box p :deep(strong) { font-size: 48px; }
+    .visual_img { height: 100%; }
     .brand_intro_section { padding: 100px 0; }
     .history_text { font-size: 18px; }
+    .history_text :deep(br) {display:none;}
     .brand_value_section { padding: 100px 0; }
     .title_text { font-size: 24px; }
     .accordion_header, .accordion_item.active .accordion_header { padding: 24px; }
@@ -739,7 +830,7 @@ export default {
     .desc_text { font-size: 16px; }
     .origin_intro .title { font-size: 24px; }
     .visual_img_small { height: 200px; }
-    .item_grid { grid-template-columns: repeat(1, 1fr); }
+    .item_grid { grid-template-columns: repeat(2, 1fr); }
     .item_thumb { height: auto; aspect-ratio: 16/10; }
     .mou_grid { grid-template-columns: repeat(1, 1fr); }
     .mou_table th, .mou_table td { padding: 15px; font-size: 14px; }
@@ -748,13 +839,14 @@ export default {
     .tm-main-desc { font-size: 18px; }
     .tm-steps-grid { grid-template-columns: repeat(1, 1fr); gap: 30px; }
     .tm-steps-wrap { padding: 30px 20px; }
-    .tm-product-grid { grid-template-columns: repeat(1, 1fr); }
+    .tm-product-grid { grid-template-columns: repeat(2, 1fr); }
     .tm-product-thumb { height: auto; aspect-ratio: 16/10; }
     .origin_list_box {width:100%;}
     .mou_item.text_item { text-align: center; }
     .mou_logo {justify-content:flex-start;}
     .mou_logo img {width:100%;}
     .mou_logo.fipa_logo {justify-content:center;}
+    .visual_content {display:none;}
 }
 
 </style>

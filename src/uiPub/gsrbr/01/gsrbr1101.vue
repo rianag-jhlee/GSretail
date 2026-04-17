@@ -95,7 +95,7 @@
                         </div>
                     </section>
 
-                    <section v-if="CTabIdx === 1 && t?.MallData" class="tab_content mall_content">
+                    <section v-if="CTabIdx === 1 && t?.MallData" class="tab_content mall_content" :class="'mall-type-' + SUBTabIdx">
                         <template v-for="(mall, mIdx) in t.MallData" :key="mIdx">
                             <div v-if="SUBTabIdx === mIdx" class="inner_cont">
                                 <div class="visual_img">
@@ -144,18 +144,20 @@
                 </div>
 
                 <div class="lease_section">
-                    <h4 class="sub_title">임대차방식</h4>
+                    <h4 class="sub_title">{{ t.lease_subtitle }}</h4>
                     <ul class="bullet_01 ">
-                        <li>보증금/고정 월세</li>
-                        <li>보증금/변동 월세 (수수료 방식)</li>
+                        <li>{{ t.lease_subtitle_desc_1 }}</li>
+                        <li>{{ t.lease_subtitle_desc_2 }}</li>
                     </ul>
                     <div class="fee_tip_box">
                         <div class="ic_percent">%</div>
                         <div class="tip_txt">
-                            <strong class="blue_label">수수료방식이란?</strong>
+                            <strong class="blue_label">{{ t.fee_tip_title }}</strong>
                             <p class="val_txt">
-                                월 순매출의 일정 비율을 임대인에게 임대료로 지급하는 방식<br/>
-                                예) 월 순매출금액 x 수수료율 (VAT별도)
+                                {{ t.fee_tip_desc_1 }}
+                            </p>
+                            <p class="val_txt">
+                                {{ t.fee_tip_desc_2 }}
                             </p>
                         </div>
                     </div>
@@ -182,7 +184,7 @@ export default {
     },
     data() {
         return {
-            CTabIdx: 1,
+            CTabIdx: 0,
             SUBTabIdx: 0,
             langData: {
                 ko: {
@@ -222,8 +224,14 @@ export default {
                                     { th: `추천업종`, td: `악세사리, 잡화 등` }
                                 ]
                             }
-                        ]
+                        ],
                     },
+                    lease_subtitle: `임대차 방식`,
+                    lease_subtitle_desc_1: `보증금/고정 월세`,
+                    lease_subtitle_desc_2: `보증금/변동 월세 (수수료 방식)`,
+                    fee_tip_title: `수수료방식이란?`, 
+                    fee_tip_desc_1: `월 순매출의 일정 비율을 임대인에게 임대료로 지급하는 방식>예) 월 순매출금액 x 수수료율 (VAT별도)`,    
+                    fee_tip_desc_2: `예) 월 순매출금액 x 수수료율 (VAT별도)`,    
                     MallData: [
                         { 
                             name: `안녕인사동`, contentTitle: `안녕인사동 복합상업시설`,
@@ -254,7 +262,7 @@ export default {
                         { 
                             name: `판교 파미어스몰`, contentTitle: `판교 파미어스몰`,
                             intro: [
-                                `<b>아이와 함께, 친구와 함께, 연인와 함께, 판교에서 따로, 또 같이 '파미어스몰'로 여러분을 초대합니다.</b>`,
+                                `<b>아이와 함께, 친구와 함께, 연인와 함께,<br/> 판교에서 따로, 또 같이 '파미어스몰'로 여러분을 초대합니다.</br>`,
                                 `국내 최고의 자족형 신도시, 판교에 다양한 라이프 스타일이 조화롭게 어우러진 복합 문화 상업 공간, '파미어스몰'`,
                                 `파미어스몰은 연면적 약 7만 7천평 규모의 복합시설로 315실의 '나인트리 호텔', 785세대의 '오피스텔', 5개기업의 오피스로 사용되고, 약 8,653평의 저층부에는 극장, 메디컬, 키즈, 쇼핑, 카페, 레스토랑 등 지역 주민들의 풍요로운 하루를 완성할 수 있는 다양한 상업 및 문화시설이 자리잡았습니다.`
                             ], 
@@ -265,7 +273,7 @@ export default {
                         { 
                             name: `동부산 미식일상`, contentTitle: `동부산 미식일상`,
                             intro: [
-                                `<b>'푸드홀 부산 미식일상'은 동부산 '오시리아 관광단지' 중심에 위치해 있는 F&B Mall로써, 테마파크 단지 내방객의 휴식을 제공하기 위해 만들어진 시설입니다.</b>`,
+                                `<b>'푸드홀 부산 미식일상'은 동부산 '오시리아 관광단지' 중심에 위치해 있는 F&B Mall로써,<br/> 테마파크 단지 내방객의 휴식을 제공하기 위해 만들어진 시설입니다.</b>`,
                                 `오시리아 관광단지는 연간 방문객 1,060만명이 예상되는 사계절 체류형 해양 복합리조트로써, 제 2의 롯데월드와 전 세계 최대 규모의 스카이라인 루지(luge), 아쿠아월드, 호텔, 골프장, 해동용궁사 등으로 이루어져 있습니다. 상업시설은 당사의 미식일상 및 한국 최초의 프리미엄 전문리빙관으로 오픈한 메종 동부산 롯데몰 루지 상업시설로 이루어져 있습니다.`
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"),
@@ -332,6 +340,8 @@ export default {
 .sub_title { color: #161616; font-size: 24px; font-weight: 700; }
 .text_list { margin-top: 16px; }
 .text_item {width: 100%; padding-left: 24px; color: #67676f; font-size: 24px; line-height: 1.6; text-indent: -24px;}
+.mall-type-2 .text_item, .mall-type-3 .text_item {padding-left:0px; text-indent:0px;}
+.mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b) {font-size:24px; font-weight:700;}
 
 /* Route Map Area (Subway) */
 .route_map_wrap { width: 100%; margin-top: 64px; background-color: #f8f8f8; border-radius: 8px; }
@@ -411,7 +421,8 @@ export default {
 @media screen and (max-width: 768px) {
     .cont_inner { padding: 0 20px; }
     .text_box .title { font-size: 30px; letter-spacing: -0.5px; }
-    .text_item { font-size: 16px; }
+    .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b) { font-size: 16px; }
+    .mall-type-2 .text_item :deep(b br) , .mall-type-3 .text_item :deep(b br) {display:none;}
     .content_title { font-size: 24px; }
     .condition_grid {flex-direction:column;}
 
