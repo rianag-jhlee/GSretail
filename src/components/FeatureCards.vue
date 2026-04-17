@@ -9,6 +9,8 @@ defineProps({
     // type="icon"        : [{ icon: imgSrc, iconAlt: "...", title: "...", desc: "..." }]
     // type="text"        : [{ title: "...", desc: "..." }] — em/icon 없음, title은 HTML 가능
     type: { type: String, default: "num" },
+    // noSwipe=true: 모바일에서도 Swiper 대신 리스트(1열) 표시
+    noSwipe: { type: Boolean, default: false },
 });
 
 const _getIsMobile = () => window.innerWidth <= 768;
@@ -26,20 +28,27 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <!-- PC -->
-    <ul v-if="!isMobileView" class="feature_card_list">
+    <!-- PC / noSwipe 강제 리스트 -->
+    <ul v-if="!isMobileView || noSwipe" class="feature_card_list" :class="{ 'no_swipe': noSwipe }">
         <li v-for="(item, i) in items" :key="i" class="feature_card_item">
             <em v-if="type === 'num'" class="feature_card_num">{{ item.num }}</em>
             <figure v-else-if="type === 'icon'" class="feature_card_icon">
                 <img v-if="item.icon" :src="item.icon" :alt="item.iconAlt || ''" />
             </figure>
             <strong class="feature_card_title" v-html="item.title"></strong>
-            <p v-if="item.desc" class="feature_card_desc" v-html="item.desc"></p>
+            <template v-if="item.desc">
+                <ul v-if="Array.isArray(item.desc)" class="feature_card_desc_list">
+                    <li v-for="(line, li) in item.desc" :key="li">
+                        <p class="feature_card_desc" v-html="line"></p>
+                    </li>
+                </ul>
+                <p v-else class="feature_card_desc" v-html="item.desc"></p>
+            </template>
         </li>
     </ul>
     <!-- Mobile: Swiper -->
     <Swiper
-        v-else
+        v-else-if="!noSwipe"
         slides-per-view="auto"
         :space-between="8"
         class="feature_card_swiper"
@@ -51,7 +60,14 @@ onUnmounted(() => {
                     <img v-if="item.icon" :src="item.icon" :alt="item.iconAlt || ''" />
                 </figure>
                 <strong class="feature_card_title" v-html="item.title"></strong>
-                <p v-if="item.desc" class="feature_card_desc" v-html="item.desc"></p>
+                <template v-if="item.desc">
+                    <ul v-if="Array.isArray(item.desc)" class="feature_card_desc_list">
+                        <li v-for="(line, li) in item.desc" :key="li">
+                            <p class="feature_card_desc" v-html="line"></p>
+                        </li>
+                    </ul>
+                    <p v-else class="feature_card_desc" v-html="item.desc"></p>
+                </template>
             </div>
         </SwiperSlide>
     </Swiper>
@@ -82,6 +98,7 @@ onUnmounted(() => {
     font-size: 1.8rem;
     font-weight: 700;
     font-style: normal;
+    line-height: 1.5;
     letter-spacing: -0.01em;
     display: block;
 }
@@ -134,6 +151,12 @@ onUnmounted(() => {
     word-break: keep-all;
 }
 
+.feature_card_desc_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 .feature_card_desc {
     margin: 0;
     color: #67676f;
@@ -150,6 +173,13 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
+    .feature_card_list.no_swipe {
+        flex-direction: column;
+    }
+    .feature_card_list.no_swipe .feature_card_item {
+        flex: none;
+        width: 100%;
+    }
     .feature_card_swiper {
         overflow: visible;
     }
@@ -175,7 +205,10 @@ onUnmounted(() => {
     font-size: 1.4rem;
     line-height: 1.4;
     letter-spacing: -0.01em;
-
    }
-}
+
+    .feature_card_desc_list > li + li {
+        margin-top: 4px;
+    }
+} 
 </style>
