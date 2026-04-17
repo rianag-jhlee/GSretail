@@ -88,7 +88,11 @@
                                 <ul class="div_desc" v-html="t.ProcessDesc"></ul>
                             </div>
                             <div class="img_box">
-                                <img src="@/assets/images/dummy/gsrst01_01.png" :alt="t.ProcessTitle" class="full_img" />
+                                <img 
+                                    :src="isMobile ? require('@/assets/images/dummy/gsrse01_01_mo.png') : require('@/assets/images/dummy/gsrse01_01.png')" 
+                                    :alt="t.ProcessTitle" 
+                                    class="full_img" 
+                                />
                             </div>
                         </article>
 
@@ -100,7 +104,7 @@
                                 </ul>
                             </div>
 
-                            <div class="auth_table_area">
+                            <div class="auth_table_area pc">
                                 <h5 class="text-wrapper-2 mb24">{{ t.AuthTableTitle }}</h5>
                                 <div class="policy_wrap">
                                     <table class="base_table">
@@ -118,6 +122,18 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+
+                            <div class="auth_table_area mo">
+                                <h5 class="text-wrapper-2 mb24">{{ t.AuthTableTitle }}</h5>
+                                <div class="auth_card_list">
+                                    <div class="auth_card_item" v-for="(row, rIdx) in t.AuthAgencies_mo" :key="'auth-mo-' + rIdx">
+                                        <div class="auth_row">
+                                            <span class="agency_name">{{ row.name1 }}</span>
+                                            <a :href="row.url1" target="_blank" class="btn_go_link">바로가기</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </article>
@@ -234,6 +250,12 @@ export default {
                         { name1: "한국증권전산", url1: "http://www.signkorea.com/", name2: "한국전자인증", url2: "http://gca.crosscert.com/" },
                         { name1: "금융결제원", url1: "http://www.yessign.or.kr/", name2: "한국무역정보통신", url2: "http://www.tradesign.net/" }
                     ],
+                    AuthTableHeader_mo: ["상호", "사이트"],
+                    AuthAgencies_mo: [
+                        { name1: "한국정보인증", url1: "https://www.signgate.com", name2: "한국전산원", url2: "http://sign.nca.or.kr/" },
+                        { name1: "한국증권전산", url1: "http://www.signkorea.com/", name2: "한국전자인증", url2: "http://gca.crosscert.com/" },
+                        { name1: "금융결제원", url1: "http://www.yessign.or.kr/", name2: "한국무역정보통신", url2: "http://www.tradesign.net/" }
+                    ],
                     RelatedSitesTitle: "기타 관련 사이트 안내",
                     RelatedSites: [
                         { num: "01", name: "전자인증 공인기관", desc: "GS리테일이 공정하고 투명하며 합리적인 가격으로 상품과 서비스를 구매 및 도입하기 위한 인터넷 구매시스템 사이트 입니다." },
@@ -287,7 +309,19 @@ export default {
     computed: {
         t() { return this.langData[this.lang] || this.langData.ko; }
     },
+    // 2. 라이프사이클 훅 추가: 리사이즈 이벤트 감지
+    mounted() {
+        this.checkMobile();
+        window.addEventListener('resize', this.checkMobile);
+    },
+    beforeUnmount() { // Vue 3 기준 (Vue 2라면 beforeDestroy)
+        window.removeEventListener('resize', this.checkMobile);
+    },
     methods: {
+        checkMobile() {
+            // 3. 모바일 기준값(767px) 체크 로직
+            this.isMobile = window.innerWidth <= 767;
+        },
         onMainTabChange(idx) {
             // GS SHOP 탭(인덱스 1) 클릭 시 외부 페이지 오픈
             if (idx === 1) {
@@ -312,6 +346,8 @@ export default {
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrst01_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; letter-spacing: -1.44px; }
 .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
+.mo {display:none;}
+.pc {display:block;}
 
 .ac { text-align: center; }
 .al { text-align: left; }
@@ -403,7 +439,6 @@ export default {
 .a_box {padding:0px 30px 24px; color:#67676F; font-size:18px;}
 .faq_a { padding: 0 20px 24px 52px; background: #fafafa; }
 .a_text { font-size: 18px; line-height: 1.6; color: #67676f; }
-
 .pagination_area { display: flex; justify-content: center; }
 
 /* 9. 반응형 미디어 쿼리 */
@@ -416,12 +451,21 @@ export default {
     .policy_wrap th, .policy_wrap td, .policy_wrap td a {font-size: 16px !important; }
 }
 @media screen and (max-width: 767px) {
+    .mo {display:block;}
+    .pc {display:none;}
+    .title_wrap  {display:none;}
     .section-sub-title, .guide_title {font-size:24px;}
     .intro_desc {font-size:18px;}
     .step_list {flex-direction: column; align-items: flex-start; padding:0; }
     .div_desc :deep(li), .bullet_01 li, .div_desc { font-size:18px;}
     .step_list li {width:100%;}
-    .help_desk_area ul li { width:100%; padding:20px; flex-direction:column;}
+    .notice_list_area .base_table tbody tr td:first-of-type {display:none;}
+    .help_desk_area ul li { width:100%; padding:20px; display:flex; flex-direction:row; gap:20px; align-items:center;}
+    .help_desk_area ul li::before {width:100px; margin-right:0;}
+    .help_desk_area .info .brand { font-size:14px;}
+    .help_desk_area .info .tel { font-size:20px;}
+    .help_desk_area .info .note { font-size:12px;}
+    .help_desk_area .info .btn_big {height:38px; font-size:16px;}
     .faq_a { padding-left: 20px; }
     .card_grid {flex-direction:column;}
     .card_grid .info_card {width:100%;}
