@@ -76,6 +76,7 @@ export default {
 <style scoped>
 .input_wrap { position: relative; width: 100%; }
 .input { display: flex; align-items: center; position: relative; width: 100%; }
+.check em { font-weight: 400; font-style: normal; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
 .input input { width: 100%; height: 52px; padding: 0 16px; border: 1px solid #c4c4d0; border-radius: 12px; background: #fff; font-size: 16px; box-sizing: border-box; }
 .input i { position: absolute; left: 16px; color: #a4a4b0; font-style: normal; pointer-events: none; }
 /* 🔥 search 타입 가상 선택자 영역 */
