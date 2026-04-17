@@ -16,7 +16,7 @@
             <Tabs :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
 
             <!-- Depth 3: 타입 탭 (신규) -->
-            <div class="tab_d3_wrap">
+            <div class="tab_d3_wrap" v-show="activeD2 === 0">
                 <div class="inner">
                     <nav class="tab_type" role="tablist" aria-label="가맹 타입">
                         <button
@@ -33,7 +33,7 @@
             </div>
 
             <!-- 콘텐츠 영역 -->
-            <div class="tab_content_wrap">
+            <div class="tab_content_wrap" v-show="activeD2 === 0">
                 <!-- GSF1타입 (228:18909) -->
                 <div v-show="activeD3 === 0" class="tab_content" role="tabpanel">
                     <p class="type_info_bar">GSF1타입 - 본부가 임차하여 경영주 운영</p>
@@ -310,13 +310,22 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 가맹/창업 절차 -->
+            <div class="tab_content_wrap sec_procedure" v-show="activeD2 === 1">
+                <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
+                <div class="link_wrap">
+                    <a href="#none" class="go_site" target="_blank">설명회신청 바로가기</a>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<script setup>
+<script setup> 
 import { ref } from "vue";
 import Tabs from "@/components/Tabs.vue";
+import Steps from "@/components/Steps.vue";
 import imgBg from "@/assets/images/dummy/gsrst01010101_bg.png";
 import imgGph01 from "@/assets/images/dummy/gsrst01010101_gph_01.png";
 import imgGph01Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_01_mo.png";
@@ -349,6 +358,19 @@ const depth3Tabs = [
     { item: "GSF1타입" },
     { item: "GSF2타입" },
     { item: "GSF3타입" },
+];
+
+const procedureSteps = [
+    { step: "Step 1",  title: "사업설명회 참석",   text: "GS THE FRESH 가맹 계약<br />조건안내 및 절차소개",                          numColor: "#15b874" },
+    { step: "Step 2",  title: "정보공개서 확인",   text: "가맹본부로부터 정보공개서를 제공받아 GS THE FRESH 사업성 검토",         numColor: "#15b874" },
+    { step: "Step 3",  title: "지원서 접수",       text: "지원서 제출은 월~금요일 수시가능<br />(우편 접수 가능)",                    numColor: "#15b874" },
+    { step: "Step 4",  title: "경영주 면담",       text: "지원서를 토대로 면담 진행하여<br />사업 타당성 검토함",                     numColor: "#15b874" },
+    { step: "Step 5",  title: "점포소개",          text: "예비경영주 희망사항과<br />조건에 부합하는 점포를 소개함",                 numColor: "#15b874" },
+    { step: "Step 6",  title: "가맹약정",          text: "소개 점포의 운영의사 최종확인 및<br />약정금 지불",                        numColor: "#15b874" },
+    { step: "Step 7",  title: "가맹 본 계약",      text: "본계약금 최종 지불 및<br />본계약서 체결",                                 numColor: "#15b874" },
+    { step: "Step 8",  title: "경영주 교육 이수",  text: "점포 현장 OJT,<br />입문 교육(이론/실습)",                                numColor: "#15b874" },
+    { step: "Step 9",  title: "GRAND OPEN",       text: "상품 재고조사 후 오픈",                                             numColor: "#15b874" },
+    { step: "Step 10", title: "점포운영",          text: "점포 영업 지원 담당 직원의<br />주기적인 방문 및 컨설팅",                 numColor: "#15b874" },
 ];
 </script>
 
@@ -404,6 +426,11 @@ const depth3Tabs = [
 
 .type_graph_wrap + .list_caution {margin-top:32px;}
 
+/* ── 가맹/창업 절차 ── */
+.sec_procedure {padding-bottom: 160px;}
+.link_wrap {margin-top:40px;display: flex; justify-content: center;}
+.link_wrap > a {margin:0 auto;padding: 18px 32px;color: #fff; font-weight: 700;font-size: 1.8rem;line-height: 1.5; text-align:center;background-color:#107AF2; border-radius:10px; display:inline-block;}
+
 /* ── Tablet ── */
 @media (max-width: 1024px) {
     .page_header { height: 360px; }
@@ -441,6 +468,9 @@ const depth3Tabs = [
     .type_graph_inner { margin-top: 30px; padding-right:0; align-items: flex-start; gap: 20px; }
     .type_graph_item { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 16px; }
     .type_graph_item > p { font-size: 1.6rem; text-align: left; }
-    .type_graph_wrap + .list_caution {margin-top:16px;}
+    .type_graph_wrap + .list_caution {margin-top:1  6px;}
+    .sec_procedure { padding-bottom: 60px;}
+    .link_wrap > a {width:100%; padding:14px 0;font-weight: 400;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;
+}
 }
 </style>
