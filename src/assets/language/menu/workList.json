@@ -350,10 +350,30 @@
         "path": "gsrne/01/gsrne0101",
         "link": "/gsrne0101",
         "startDate": "26-04-16",
+        "endDate": "26-04-16",
+        "status": "com",
+        "note": " "
+
+    },
+    {
+        "depth1": "", "depth2": "GS리테일 Newsroom", "depth3": "목록", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrne/02/gsrne02",
+        "link": "/gsrne02",
+        "startDate": "26-04-17",
+        "endDate": "26-04-17",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "", "depth2": "GS리테일 Factbook", "depth3": "목록", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrne/03/gsrne03",
+        "link": "/gsrne03",
+        "startDate": "26-04-17",
         "endDate": "",
         "status": "ing",
         "note": " "
-
     },
 
     {
