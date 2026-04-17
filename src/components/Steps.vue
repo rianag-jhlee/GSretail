@@ -7,6 +7,8 @@ import "swiper/css";
 defineProps({
     type: { type: String, default: "1" },
     items: { type: Array, default: () => [] },
+    cols: { type: Number, default: null },
+    rowGap: { type: String, default: null },
 });
 
 const _getIsMobile = () => window.innerWidth <= 768;
@@ -29,13 +31,17 @@ onUnmounted(() => {
         v-if="!isMobileView || type === '2'"
         class="step_list"
         :class="`step_type${type}`"
-        :style="{ '--step-cols': !isMobileView ? items.length : 1 }"
+        :style="{
+            '--step-cols': !isMobileView ? (cols ?? items.length) : 1,
+            '--step-row-gap': rowGap || undefined,
+        }"
     >
         <li v-for="(item, i) in items" :key="i" class="step_item">
             <span class="step_icon"></span>
             <div class="step_body">
-                <em class="step_num">{{ item.step }}</em>
+                <em class="step_num" :style="item.numColor ? { color: item.numColor } : {}">{{ item.step }}</em>
                 <strong class="step_title" v-html="item.title" />
+                <p v-if="item.text" class="step_text" v-html="item.text" />
                 <ul v-if="item.bullets && item.bullets.length" class="step_bullets">
                     <li v-for="(bullet, bi) in item.bullets" :key="bi" v-html="bullet" />
                 </ul>
@@ -57,8 +63,9 @@ onUnmounted(() => {
             <div class="step_slide_card step_type1">
                 <span class="step_icon"></span>
                 <div class="step_body">
-                    <em class="step_num">{{ item.step }}</em>
+                    <em class="step_num" :style="item.numColor ? { color: item.numColor } : {}">{{ item.step }}</em>
                     <strong class="step_title" v-html="item.title" />
+                    <p v-if="item.text" class="step_text" v-html="item.text" />
                     <ul v-if="item.bullets && item.bullets.length" class="step_bullets">
                         <li v-for="(bullet, bi) in item.bullets" :key="bi" v-html="bullet" />
                     </ul>
@@ -82,7 +89,8 @@ onUnmounted(() => {
     gap:16px;
 }
 .step_list.step_type2{
-    gap:20px;
+    row-gap: var(--step-row-gap, 20px);
+    column-gap: 20px;
 }
 /* ── 공통 아이콘 ── */
 .step_icon {
@@ -148,6 +156,14 @@ onUnmounted(() => {
     list-style: none;
 }
 
+.step_text {
+    margin: 10px 0 0;
+    color: #67676f;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
 .step_bullets > li {
     padding-left: 12px;
     color: #67676f;
@@ -185,6 +201,12 @@ onUnmounted(() => {
         line-height: 1.4;
         letter-spacing: -0.01em;
     }
+    .step_text {
+        margin:0;
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
 }
 @media (max-width: 768px) {
     .step_bullets > li {
@@ -206,19 +228,26 @@ onUnmounted(() => {
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
     .step_list {
-        padding: 30px 40px;
+        /* padding: 30px 40px; */
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
+    }
+    .step_list.step_type2 {
+        row-gap: 40px;
     }
 }
 
 @media (max-width: 768px) {
     /* type=2: 모바일 수직 리스트 */
+    .step_icon {
+        width: 32px;
+        height: 32px;
+    }
     .step_bullets{
         margin: 0;
     }
     .step_list.step_type2 {
-        padding: 40px;
+        padding: 40px 30px;
         grid-template-columns: 1fr;
         gap: 24px;
     }
