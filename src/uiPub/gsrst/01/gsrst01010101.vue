@@ -318,6 +318,33 @@
                     <a href="#none" class="go_site" target="_blank">설명회신청 바로가기</a>
                 </div>
             </div>
+ 
+            <!-- 창업 전 필수 확인사항 -->
+            <div class="tab_content_wrap" v-show="activeD2 === 2">
+                <section class="sec_precaution">
+                    <h3 class="precaution_title mo_only">가맹 해약<br class="p_br">수수료</h3>
+                    <div class="sec_precaution_inner">
+                        <aside class="precaution_intro">
+                            <h3 class="pc_only">가맹 해약<br>수수료</h3>
+                        </aside>
+                        <div class="precaution_main">
+                            <div class="precaution_block precaution_block_sm">
+                                <h4>GSF1, GSF2 타입</h4>
+                                <FeatureCards type="num" :items="precautionCards1" :no-swipe="true" />
+                            </div>
+                            <div class="precaution_block">
+                                <h4>GSF3 타입</h4>
+                                <FeatureCards type="num" :items="precautionCards2" :no-swipe="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list_caution">
+                        <li><p>가맹 본부 회계 기준, 감가상각 건으로 별도 보상</p></li>
+                        <li><p>* 손해 배상금 별도이며 과거 영업기간이 1년 이하인 경우 해당 영업기간을 적용함.</p></li>
+                        <li><p>* '과거 1년간'의 기간은 관리금 중도해약인 경우 중도해약 월로부터 가까운 기간으로 하고, 해지사유 발생인 경우에는 계약 해지 사유가 발생한 달의 직전월의 말일로부터 기 기산함.</p></li>
+                    </ul>
+                </section>
+            </div>
         </div>
     </div>
 </template>
@@ -326,6 +353,7 @@
 import { ref } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import Steps from "@/components/Steps.vue";
+import FeatureCards from "@/components/FeatureCards.vue";
 import imgBg from "@/assets/images/dummy/gsrst01010101_bg.png";
 import imgGph01 from "@/assets/images/dummy/gsrst01010101_gph_01.png";
 import imgGph01Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_01_mo.png";
@@ -372,6 +400,17 @@ const procedureSteps = [
     { step: "Step 9",  title: "GRAND OPEN",       text: "상품 재고조사 후 오픈",                                             numColor: "#15b874" },
     { step: "Step 10", title: "점포운영",          text: "점포 영업 지원 담당 직원의<br />주기적인 방문 및 컨설팅",                 numColor: "#15b874" },
 ];
+
+const precautionCards1 = [
+    { num: "01", title: "중도해약",        desc: "· 과거 1년간의 월평균 매출 총이익 20% × 3개월" },
+    { num: "02", title: "해지 사유 발생 시", desc: "· 과거 1년간의 월평균 매출 총이익 20% × 6개월" },
+   
+];
+
+const precautionCards2 = [
+    { num: "03", title: "기타 중도해약", desc: ["· 본부 산정", "· 개점일~ 3년 이내 : 76(74)%의 8개월", "· 3년~5년 이내 : 76(74)%의 4개월", "· 경영주 산정", "· 개점일~ 3년 이내 : 24(26)%의 8개월", "· 3년~5년 이내 : 24(26)%의 4개월"] },
+    { num: "04", title: "해지 사유 발생시", desc: ["· 영업의 침해/근무계약 위반, 본부 귀산 등", "· 본부 과태 시 : 76(74)%의 12개월 분", "· 경영주 과태시 : 24(26)%의 12개월"] },
+];
 </script>
 
 <style scoped>
@@ -411,7 +450,7 @@ const procedureSteps = [
 .type_table tbody td { border-bottom: 1px solid #e5e5e9; font-size: 1.8rem; text-align: center; padding: 12px 24px; line-height: 1.4; }
 
 
-.list_caution {margin-top:16px;}
+.list_caution {margin-top:32px;}
 .list_caution > li + li{margin-top:8px;}
 .list_caution > li > p {color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 /* type_graph */
@@ -424,15 +463,71 @@ const procedureSteps = [
 .type_graph_item > picture { flex:1;display: block; }
 .type_graph_item img { display: block; max-width: 100%; }
 
-.type_graph_wrap + .list_caution {margin-top:32px;}
 
 /* ── 가맹/창업 절차 ── */
 .sec_procedure {padding-bottom: 160px;}
 .link_wrap {margin-top:40px;display: flex; justify-content: center;}
 .link_wrap > a {margin:0 auto;padding: 18px 32px;color: #fff; font-weight: 700;font-size: 1.8rem;line-height: 1.5; text-align:center;background-color:#107AF2; border-radius:10px; display:inline-block;}
 
+/* ── 창업 전 필수 확인사항 ── */
+.precaution_title,
+.precaution_intro > h3 {
+    color: #161616;
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+.mo_only { display: none; }
+.sec_precaution_inner {
+    padding: 64px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    display: flex;
+    align-items: flex-start;
+}
+.precaution_intro {
+    flex: 0 1 clamp(200px, 28%, 296px);
+    min-width: 0;
+    max-width: 296px;
+}
+.precaution_intro > h3 {
+    margin-bottom: 16px;
+}
+.precaution_intro > p {
+    color: #67676f;
+    font-size: 1.8rem;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+.precaution_main { flex: 1; min-width: 0; }
+.precaution_block + .precaution_block { margin-top: 56px; }
+.precaution_block > h4 {
+    margin-bottom: 40px;
+    color: #161616;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+.sec_precaution :deep(.feature_card_item) {
+    background-color: #fff;
+    min-height: 0;
+}
+.precaution_block_sm :deep(.feature_card_item) {
+    min-height: 180px;
+}
+.sec_precaution :deep(.feature_card_num) { color: #15b874; }
+.sec_precaution :deep(.feature_card_title) { font-size: 2.4rem; }
+
 /* ── Tablet ── */
 @media (max-width: 1024px) {
+    .precaution_intro > h3 { font-size: 2.6rem; }
+    .sec_precaution_inner { flex-direction: column; padding: 48px; gap: 32px; }
+    .precaution_intro { width: 100%; }
+    .precaution_intro > p { font-size: 1.6rem; }
+    .precaution_block > h4 { font-size: 2.4rem; margin-bottom: 24px; }
+    .precaution_block + .precaution_block { margin-top: 40px; }
     .page_header { height: 360px; }
     .header_title { font-size: 5.2rem; }
     .tab_type > button { font-size: 1.6rem; }
@@ -454,8 +549,9 @@ const procedureSteps = [
     .header_title { font-size: 3.6rem; }
     .tab_d3_wrap { padding-top: 60px; }
     .tab_type > button { height: 48px; font-size: 1.4rem; }
-    .tab_content_wrap { padding-top: 24px; padding-bottom: 100px; }
+    .tab_content_wrap { padding-top: 60px; padding-bottom: 100px; }
     .type_info_bar { height: auto; min-height: 48px; padding: 12px 16px; font-size: 1.4rem; }
+    .list_caution {margin-top:16px;}
     /* .type_table { min-width: 600px; } */
     .type_table_wrap{margin-top: 24px;}
     .type_table .col_item_main { width: 42px; }
@@ -468,9 +564,16 @@ const procedureSteps = [
     .type_graph_inner { margin-top: 30px; padding-right:0; align-items: flex-start; gap: 20px; }
     .type_graph_item { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 16px; }
     .type_graph_item > p { font-size: 1.6rem; text-align: left; }
-    .type_graph_wrap + .list_caution {margin-top:1  6px;}
+
     .sec_procedure { padding-bottom: 60px;}
-    .link_wrap > a {width:100%; padding:14px 0;font-weight: 400;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;
-}
+    .link_wrap > a {width:100%; padding:14px 0;font-weight: 400;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    .mo_only { display: block; }
+    .pc_only { display: none; }
+    .precaution_title {font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
+    .sec_precaution_inner { margin-top: 32px; padding: 30px 20px; gap: 40px; display: block;}
+    .precaution_intro{display: none;}
+    .precaution_intro > p { font-size: 1.4rem; }
+    .precaution_block > h4 { font-size: 2rem; margin-bottom: 24px; }
+    .sec_precaution :deep(.feature_card_title) { font-size: 1.8rem; }
 }
 </style>
