@@ -397,13 +397,93 @@
         "note": " "
     },
     {
-        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "depth1": "", "depth2": "GS THE FRESH ", "depth3": "가맹/창업가이드", "depth4": "가맹조건 안내", "depth5": "각 타입별 종합안내", "depth6": "",
         "type": "page",
         "path": "gsrst/01/gsrst01010101",
         "link": "/gsrst01010101",
         "startDate": "",
         "endDate": "",
+        "status": "ing",
+        "note": "gsrst01010101 ~ gsrst010201 포함"
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF1타입", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
         "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF2타입", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF3타입", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "가맹/창업 절차", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "가맹점 수익계산", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "창업 전 필수 확인사항", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "사업설명회", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "사업설명회 신청", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrst/01/gsrst01010101",
+        "link": "/gsrst01010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
         "note": " "
     },
     
