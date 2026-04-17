@@ -106,7 +106,11 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <p class="text_caution">*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)</p>
+                        <ul class="list_caution">
+                            <li>
+                                <p>*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)</p>
+                            </li>
+                        </ul>
                     </div>
                     <div class="type_graph_wrap">
                         <strong>GSF1타입</strong>
@@ -130,8 +134,181 @@
                 </div>
 
                 <!-- GSF2타입 / GSF3타입: 추후 구현 -->
-                <div v-show="activeD3 === 1" class="tab_content" role="tabpanel"></div>
-                <div v-show="activeD3 === 2" class="tab_content" role="tabpanel"></div>
+                <div v-show="activeD3 === 1" class="tab_content" role="tabpanel">
+                    <p class="type_info_bar">GSF2타입 - 경영주가 총투자비의 51% 부담. 경영주 운영</p>
+                    <div class="type_table_wrap">
+                        <table class="type_table">
+                            <colgroup>
+                                <col class="col_item_main" />
+                                <col class="col_item_sub" />
+                                <col class="col_cost" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" scope="col">항목</th>
+                                    <th scope="col">비용</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th rowspan="5" scope="rowgroup">투자 금액</th>
+                                    <th>가맹비</th>
+                                    <td>1,100만원 <br class="m_br">(부가세 포함)</td>
+                                </tr>
+                                <tr>
+                                    <th>초기 상품대</th>
+                                    <td>7,000만원</td>
+                                </tr>
+                                <tr>
+                                    <th>소모품</th>
+                                    <td>700만원</td>
+                                </tr>
+                                <tr>
+                                    <th>시설보증금</th>
+                                    <td>500만원</td>
+                                </tr>
+                                <tr>
+                                    <th>개점투자 계</th>
+                                    <td>9,300만원</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">임차비용 부담주체</th>
+                                    <td>본부</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">시설투자 부담주체</th>
+                                    <td>본부</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">예치보증금</th>
+                                    <td>* 점포 총 투자비 X 51% ~ 9,300만원 (현금)</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">경영주 투자 합계</th>
+                                    <td>9,300만원 + 예치보증금</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">가맹 수수료 <br class="m_br">(부가세별도)</th>
+                                    <td>49% 매출총이익 구간별 49% ~ 55%</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">계약기간 <br class="m_br">(최초/재계약)</th>
+                                    <td>3년 / 3년 단위</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">담보설정</th>
+                                    <td>없음</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">** 최저 <br class="m_br">수입 보조금</th>
+                                    <td>영업면적 200평  <br class="m_br">초과 : 18백만/월 영업면적 165평 이상~200평 이하 : 16백만/월 영업면적 165평 미만 : 13백만/월</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul class="list_caution">
+                            <li><p>*점포 총 투자비는 임차비용, 시설투자비용, 개점투자비의 총 합산액.</p></li>
+                            <li><p>**경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)</p></li>
+                        </ul>
+                    </div>
+                    <div class="type_graph_wrap">
+                        <strong>GSF2타입</strong>
+                        <ul class="type_graph_inner">
+                            <li class="type_graph_item">
+                                <p>매출이익<br class="p_br" />배분율</p>
+                                <picture>
+                                    <source media="(max-width: 768px)" :srcset="imgGph03Mo" />
+                                    <img :src="imgGph03" alt="GSF1타입 매출이익 배분율" />
+                                </picture>
+                            </li>
+                            <li class="type_graph_item">
+                                <p>월매출<br class="p_br" />총 이익 구간</p>
+                                <picture>
+                                    <source media="(max-width: 768px)" :srcset="imgGph04Mo" />
+                                    <img :src="imgGph04" alt="GSF1타입 월매출 총 이익 구간" /> 
+                                </picture>
+                            </li>
+                        </ul>        
+                    </div>
+                    <ul class="list_caution">
+                        <li><p class="txt_warning">*가맹계약 체결 간 가맹점사업자와 가맹본부가 협의에 따라 가맹수수료는 달리 정할 수 있습니다</p></li>
+                    </ul>
+                </div>
+                <div v-show="activeD3 === 2" class="tab_content" role="tabpanel">
+                    <p class="type_info_bar">GSF3타입 - 경영주가 임차하여 경영주 운영</p>
+                    <div class="type_table_wrap">
+                        <table class="type_table">
+                            <colgroup>
+                                <col class="col_item_main" />
+                                <col class="col_item_sub" />
+                                <col class="col_cost" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" scope="col">항목</th>
+                                    <th scope="col">비용</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th rowspan="5" scope="rowgroup">투자 금액</th>
+                                    <th>가맹비</th>
+                                    <td>1,100만원 <br class="m_br">(부가세 포함)</td>
+                                </tr>
+                                <tr>
+                                    <th>초기 상품대</th>
+                                    <td>7,000만원</td>
+                                </tr>
+                                <tr>
+                                    <th>소모품</th>
+                                    <td>700만원</td>
+                                </tr>
+                                <tr>
+                                    <th>시설보증금</th>
+                                    <td>500만원</td>
+                                </tr>
+                                <tr>
+                                    <th>개점투자 계</th>
+                                    <td>9,300만원</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">임차비용 부담주체</th>
+                                    <td>경영주</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">시설투자 부담주체</th>
+                                    <td>본부</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">예치보증금</th>
+                                    <td>없음</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">경영주 투자 합계</th> 
+                                    <td>9,300만원 + 예치보증금</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">가맹 수수료 <br class="m_br">(부가세별도)</th>
+                                    <td>24%</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">계약기간 <br class="m_br">(최초/재계약)</th>
+                                    <td>5년 / 5년 단위%</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">담보설정</th>
+                                    <td>최소 2억 이상</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">** 최저 <br class="m_br">수입 보조금</th>
+                                    <td>해당사항 없음</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul class="list_caution">
+                            <li><p>*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. <br class="mo"/>(개점일로부터 최소 1년만 적용)</p></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -142,9 +319,13 @@ import { ref } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import imgBg from "@/assets/images/dummy/gsrst01010101_bg.png";
 import imgGph01 from "@/assets/images/dummy/gsrst01010101_gph_01.png";
-import imgGph01Mo from "@/assets/images/dummy/gsrst01010101_gph_01_mo.png";
+import imgGph01Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_01_mo.png";
 import imgGph02 from "@/assets/images/dummy/gsrst01010101_gph_02.png";
-import imgGph02Mo from "@/assets/images/dummy/gsrst01010101_gph_02_mo.png";
+import imgGph02Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_02_mo.png";
+import imgGph03 from "@/assets/images/dummy/gsrst01010101_gph_03.png";
+import imgGph03Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_03_mo.png";
+import imgGph04 from "@/assets/images/dummy/gsrst01010101_gph_04.png";
+import imgGph04Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_04_mo.png";
 const activeD1 = ref(0);
 const activeD2 = ref(0);
 const activeD3 = ref(0);
@@ -172,6 +353,7 @@ const depth3Tabs = [
 </script>
 
 <style scoped>
+.txt_warning{color:#ED3030 !important;}
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
 /* ── HEADER ── */
@@ -194,7 +376,7 @@ const depth3Tabs = [
 .tab_content_wrap { padding-top: 40px; padding-bottom: 200px; }
 
 /* type_info_bar */
-.type_info_bar {padding: 17px 24px; background-color: #e8f8f1; border: 1px solid #d2ede2; border-radius: 6px; color: #11935d; font-size: 1.8rem; }
+.type_info_bar {padding: 17px 24px; background-color: #e8f8f1; border: 1px solid #d2ede2; border-radius: 6px; color: #11935d; font-size: 1.8rem; line-height: 1.4;}
 
 /* type_table */
 .type_table_wrap { margin-top: 20px; overflow-x: auto; border-top: 1px solid #161616;}
@@ -206,8 +388,10 @@ const depth3Tabs = [
 .type_table tbody th { padding:12px 24px; background-color: #f8f8f8; border: 1px solid #e5e5e9; font-size: 1.8rem; font-weight: 400;text-align: left;line-height: 1.4;}
 .type_table tbody td { border-bottom: 1px solid #e5e5e9; font-size: 1.8rem; text-align: center; padding: 12px 24px; line-height: 1.4; }
 
-p.text_caution {margin-top:16px;color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 
+.list_caution {margin-top:16px;}
+.list_caution > li + li{margin-top:8px;}
+.list_caution > li > p {color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 /* type_graph */
 .type_graph_wrap { margin-top: 60px; padding: 64px; background-color: #f8f8f8; border-radius: 12px; }
 .type_graph_wrap > strong { display: block; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
@@ -217,6 +401,8 @@ p.text_caution {margin-top:16px;color:#67676F;font-size: 1.6rem;line-height: 1.5
 .type_graph_item > p { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; text-align: right; }
 .type_graph_item > picture { flex:1;display: block; }
 .type_graph_item img { display: block; max-width: 100%; }
+
+.type_graph_wrap + .list_caution {margin-top:32px;}
 
 /* ── Tablet ── */
 @media (max-width: 1024px) {
@@ -255,5 +441,6 @@ p.text_caution {margin-top:16px;color:#67676F;font-size: 1.6rem;line-height: 1.5
     .type_graph_inner { margin-top: 30px; padding-right:0; align-items: flex-start; gap: 20px; }
     .type_graph_item { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 16px; }
     .type_graph_item > p { font-size: 1.6rem; text-align: left; }
+    .type_graph_wrap + .list_caution {margin-top:16px;}
 }
 </style>
