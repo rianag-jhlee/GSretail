@@ -15,25 +15,24 @@
             <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) --> 
             <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
 
-            <!-- Depth 3: 타입 탭 (신규) -->
-            <div class="tab_d3_wrap" v-show="activeD1 === 0 && activeD2 === 0">
-                <div class="inner">
-                    <nav class="tab_type" role="tablist" aria-label="가맹 타입">
-                        <button
-                            v-for="(tab, i) in depth3Tabs"
-                            :key="i"
-                            type="button"
-                            role="tab"
-                            :class="{ active: activeD3 === i }"
-                            :aria-selected="activeD3 === i"
-                            @click="activeD3 = i"
-                        >{{ tab.item }}</button>
-                    </nav>
-                </div>
-            </div>
-
             <!-- 가맹 조건 안내 (D2=0) -->
             <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 0">
+                <!-- Depth 3: 타입 탭 -->
+                <div class="tab_d3_wrap">
+                    <div class="inner">
+                        <nav class="tab_type" role="tablist" aria-label="가맹 타입">
+                            <button
+                                v-for="(tab, i) in depth3Tabs"
+                                :key="i"
+                                type="button"
+                                role="tab"
+                                :class="{ active: activeD3 === i }"
+                                :aria-selected="activeD3 === i"
+                                @click="activeD3 = i"
+                            >{{ tab.item }}</button>
+                        </nav>
+                    </div>
+                </div>
                 <div class="tab_content_wrap">
                     <!-- GSF1타입 (228:18909) -->
                     <div v-show="activeD3 === 0" class="tab_content" role="tabpanel">
@@ -510,7 +509,7 @@ function openModal(event) {
 .sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; }
 
 /* depth3 */
-.tab_d3_wrap { padding-top: 64px; }
+.tab_d3_wrap { padding-top: 0; }
 .tab_type { display: flex; border: 1px solid #c4c4d0; border-radius: 4px; overflow: hidden; }
 .tab_type > button { flex: 1; height: 60px; color: #90909a; font-size: 1.8rem;  background-color: #fff; border: none; border-right: 1px solid #c4c4d0; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
 .tab_type > button:last-child { border-right: none; }
@@ -710,7 +709,6 @@ function openModal(event) {
     .page_header { height: 260px; }
     .header_title { font-size: 3.6rem; }
     .tab_page { padding-top: 60px; padding-bottom: 80px; }
-    .tab_d3_wrap { padding-top: 0; }
     .tab_content_wrap { padding-top: 40px; }
     .tab_type > button { height: 48px; font-size: 1.4rem; }
     .type_info_bar { height: auto; min-height: 48px; padding: 12px 16px; font-size: 1.4rem; }
