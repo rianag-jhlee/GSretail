@@ -1,36 +1,35 @@
 <template>
-    <div class="acc_item">
-        <dt>
-            <a
-                :id="headerId"
-                href="#none"
-                class="acc_tit_btn"
-                :class="{ acc_tit_open: expanded }"
-                role="button"
-                :aria-expanded="expanded"
-                :aria-controls="panelId"
-                @click.prevent="onToggle"
-                @keydown.enter.prevent="onToggle"
-                @keydown.space.prevent="onToggle"
-            >
-                <slot name="title">제목</slot>
-            </a>
-        </dt>
-        <dd
-            :id="panelId"
-            ref="panelRef"
-            class="acc_panel"
-            role="region"
-            :aria-labelledby="headerId"
-            :aria-hidden="!expanded"
+    <!-- 26.04.20 이종환 Del : div class="acc_item" 제거 -->
+    <dt>
+        <a
+            :id="headerId"
+            href="#none"
+            class="acc_tit_btn"
+            :class="{ acc_tit_open: expanded }"
+            role="button"
+            :aria-expanded="expanded"
+            :aria-controls="panelId"
+            @click.prevent="onToggle"
+            @keydown.enter.prevent="onToggle"
+            @keydown.space.prevent="onToggle"
         >
-            <div class="acc_panel_inner">
-                <div class="acc_panel_cont">
-                    <slot />
-                </div>
+            <slot name="title">제목</slot>
+        </a>
+    </dt>
+    <dd
+        :id="panelId"
+        ref="panelRef"
+        class="acc_panel"
+        role="region"
+        :aria-labelledby="headerId"
+        :aria-hidden="!expanded"
+    >
+        <div class="acc_panel_inner">
+            <div class="acc_panel_cont">
+                <slot />
             </div>
-        </dd>
-    </div>
+        </div>
+    </dd>
 </template>
 
 <script setup>

@@ -51,13 +51,19 @@ provide(ACCORDION_INJECT_KEY, {
     width: 100%;
     margin: 0;
     padding: 0;
+    border-bottom:1px solid #d7d7df;
 }
 
-.board_type_toggle :deep(.acc_item) {
+/* .board_type_toggle :deep(.acc_item) { dl > div > dt 구조 수정 위한 css 제거
     margin: 0;
     border-bottom: 1px solid #d7d7df;
-}
+} */
 
+
+.board_type_toggle :deep(dd + dt) {
+    margin: 0;
+    border-top: 1px solid #d7d7df;
+}
 
 
 .board_type_toggle :deep(dd) {
