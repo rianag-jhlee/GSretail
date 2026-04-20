@@ -66,7 +66,7 @@ export default {
                 ko: {
                     Visual: { // 대문자 유지
                         img: require("@/assets/images/dummy/gsrbr09.png"),
-                        imgMo: require("@/assets/images/dummy/gsrbr10_mo.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr09_mo.png"),
                         alt: "GS THE FRESH 메인 비주얼",
                         subContent_1: "가격 이상의 가치,",
                         subContent_2: "GS THE FRESH PB브랜드",
