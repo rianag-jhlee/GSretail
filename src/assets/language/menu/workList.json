@@ -381,8 +381,18 @@
         "path": "gsrne/03/gsrne03",
         "link": "/gsrne03",
         "startDate": "26-04-17",
-        "endDate": "",
-        "status": "ing",
+        "endDate": "26-04-20",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "상세", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrne/03/gsrne0301",
+        "link": "/gsrne0301",
+        "startDate": "26-04-20",
+        "endDate": "26-04-20",
+        "status": "com",
         "note": " "
     },
 
