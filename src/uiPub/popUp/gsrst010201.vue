@@ -442,7 +442,6 @@ function closeModal(event) {
 
 .smn_bottom {
     margin-top:40px;
-    margin-bottom: 124px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -500,7 +499,7 @@ function closeModal(event) {
     .consent_radio_text{font-size: 1.6rem;}
     .form_field_radio { flex-direction: column; gap: 20px; align-items: flex-start; }
     .form_field_radio label{font-size: 1.6rem;letter-spacing: -0.01em;line-height: 1.5;}
-    .smn_bottom{margin-top:0; justify-content: center;}
+    .smn_bottom{margin-top:0; margin-bottom: 124px; justify-content: center;}
     .smn_bottom > :deep(.btn_big) {width:100%;flex:1;}
 }
 </style>
