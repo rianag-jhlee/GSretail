@@ -152,6 +152,16 @@
         "note": "gsrbr110201~gsrbr110204 포함됨, 아이콘 이미지만 넣으면 완료됨됨 "
     },
     {
+        "depth1": "", "depth2": "우딜", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/01/gsrbr10",
+        "link": "/gsrbr10",
+        "startDate": "26-04-17",
+        "endDate": "26-04-17",
+        "status": "com",
+        "note": " "
+    },
+    {
         "depth1": "", "depth2": "", "depth3": "쇼핑몰", "depth4": "안녕인사동", "depth5": "", "depth6": "",
         "type": "",
         "path": "gsrbr/01/gsrbr110201",
@@ -350,10 +360,30 @@
         "path": "gsrne/01/gsrne0101",
         "link": "/gsrne0101",
         "startDate": "26-04-16",
+        "endDate": "26-04-16",
+        "status": "com",
+        "note": " "
+
+    },
+    {
+        "depth1": "", "depth2": "GS리테일 Newsroom", "depth3": "목록", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrne/02/gsrne02",
+        "link": "/gsrne02",
+        "startDate": "26-04-17",
+        "endDate": "26-04-17",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "", "depth2": "GS리테일 Factbook", "depth3": "목록", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrne/03/gsrne03",
+        "link": "/gsrne03",
+        "startDate": "26-04-17",
         "endDate": "",
         "status": "ing",
         "note": " "
-
     },
 
     {
@@ -460,12 +490,12 @@
     {
         "depth1": "입점상담", "depth2": "GS25/GS THE FRESH/지원부문", "depth3": "공지사항", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst01",
-        "link": "/gsrst01",
+        "path": "gsrse/01/gsrse01",
+        "link": "/gsrse01",
         "startDate": "26-04-16",
         "endDate": "",
         "status": "ing",
-        "note": "gsrst01에서 확인 가능"
+        "note": "gsrse01에서 확인 가능"
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "상세보기", "depth5": "", "depth6": "",
@@ -480,22 +510,22 @@
     {
         "depth1": "", "depth2": "", "depth3": "입점 안내", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst02",
+        "path": "gsrse/01/gsrse02",
         "link": "",
         "startDate": "26-04-16",
         "endDate": "26-04-16",
         "status": "com",
-        "note": "gsrst01에서 확인 가능"
+        "note": "gsrse01에서 확인 가능"
     },
     {
         "depth1": "", "depth2": "", "depth3": "자주하는 질문 FAQ", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst03",
+        "path": "gsrse/01/gsrse03",
         "link": "",
         "startDate": "26-04-16",
         "endDate": "26-04-16",
         "status": "com",
-        "note": "gsrst01에서 확인 가능"
+        "note": "gsrse01에서 확인 가능"
     },
     {
         "depth1": "", "depth2": "", "depth3": "상담신청", "depth4": "", "depth5": "", "depth6": "",

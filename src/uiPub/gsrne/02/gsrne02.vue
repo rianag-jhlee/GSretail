@@ -2,11 +2,15 @@
     <div class="main-container">
         <div class="title_wrap">
             <h2 class="page-title">{{ t.MainTitle }}</h2>
-            <p class="visual-sub">{{ t.MainsubTitle }}</p>
+            <p class="visual-sub" v-html="t.MainsubTitle"></p>
         </div>
 
-        <section class="section-investor">
+        <section>
             <div class="cont_inner">
+
+                <Tabs @change="onTabChange1" v-model="t.CTabIdx" :tab-items="t.tabs" tab-class="type_02 ac" :tab-slide="false" />
+                
+                
                 <section>
                     <div class="element">
                         <div class="search_filter_area">
@@ -18,7 +22,7 @@
                             />
                         </div>
 
-                        <div class="board_wrap type_gallery">
+                        <div class="board_wrap type_gallery" v-if="t.CTabIdx === 0">
                             <ul class="body">
                                 <li v-for="item in t.ListData" :key="item">
                                     <div class="item">
@@ -27,7 +31,23 @@
                                         </a>
                                         <a href="#none" class="cont">
                                             <strong>{{ item.title }}</strong>
-                                            <p></p>
+                                            <p>{{ item.sub }}</p>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="board_wrap type_gallery type_long" v-if="t.CTabIdx === 1">
+                            <ul class="body">
+                                <li v-for="item in t.ListData2" :key="item">
+                                    <div class="item">
+                                        <a href="/gsrne0101">
+                                            <span class="thumb"><em><img :src="item.thumb" /></em></span>
+                                        </a>
+                                        <a href="#none" class="cont">
+                                            <strong>{{ item.title }}</strong>
+                                            <p>{{ item.sub }}</p>
                                         </a>
                                     </div>
                                 </li>
@@ -43,19 +63,20 @@
                         </div>
                     </div>
                 </section>
+
             </div>
         </section>
     </div>
 </template>
 
 <script>
-import SelectBox from "@/components/SelectBox.vue";
 import Search from "@/components/Search.vue";
 import Pagination from "@/components/Pagination.vue";
+import Tabs from "@/components/Tabs.vue";
 
 export default {
     name: "gsrin04",
-    components: { SelectBox, Search, Pagination },
+    components: { Search, Pagination, Tabs },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
@@ -71,8 +92,14 @@ export default {
             /* 4. 언어별 텍스트 데이터 */
             langData: {
                 ko: {
-                    MainTitle: "보도자료",
-                    MainsubTitle: "GS리테일의 최근 소식을 전달해 드립니다.",
+                    MainTitle: "GS리테일 Newsroom",
+                    MainsubTitle: "GS리테일뉴스룸은GS리테일 공식 유튜브 채널입니다.<br/> 최신 뉴스와 다양한 소식들을 영상으로 만나보세요!",
+
+                    CTabIdx: 0, //최초 선택된 탭 index
+                    tabs: [ //탭 아이템 배열
+                        { item: "롱폼" },
+                        { item: "숏폼" }
+                    ],
 
                     /* Search 컴포넌트 전용 옵션 (props: search_opt) */
                     SearchOptions: [
@@ -85,10 +112,15 @@ export default {
 
                     /* 리스트 데이터 */
                     ListData: [
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", sub: "GS리테일의 2025년 하반기 주요 경영성과와 사업부문별 성장 전략을 영상으로 만나보세요." },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", sub: "GS리테일의 2025년 하반기 주요 경영성과와 사업부문별 성장 전략을 영상으로 만나보세요." },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", sub: "GS리테일의 2025년 하반기 주요 경영성과와 사업부문별 성장 전략을 영상으로 만나보세요." },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", sub: "GS리테일의 2025년 하반기 주요 경영성과와 사업부문별 성장 전략을 영상으로 만나보세요." },
+                    ],
+                    ListData2: [
+                        { thumb:  require("@/assets/images/dummy/thumb_news_02-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", sub: "GS리테일의 2025년 하반기 주요 경영성과와 사업부문별 성장 전략을 영상으로 만나보세요." },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_02-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", sub: "GS리테일의 2025년 하반기 주요 경영성과와 사업부문별 성장 전략을 영상으로 만나보세요." },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_02-3.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", sub: "GS리테일의 2025년 하반기 주요 경영성과와 사업부문별 성장 전략을 영상으로 만나보세요." },
                     ]
                 }
             }
@@ -112,6 +144,12 @@ export default {
         onPageChange(page) { 
             this.currentPage = page;
         },
+
+        onTabChange(idx) {
+            // [수정 핵심] 상위 탭 변경 시 하위 탭 인덱스를 0으로 초기화
+            this.TabIdx = 0;
+            console.log('Main Tab:', idx);
+        },
     },
     mounted() {
         const header = document.getElementById("header");
@@ -134,6 +172,8 @@ export default {
 
 .pagination_area {width: 100%; margin-top:60px; display: flex; justify-content: center; }
 
+.tab_wrap {margin-top:48px;}
+
 /* board_wrap */
 .board_wrap.type_gallery .body {margin-top:-54px; margin-left:-50px; display:flex; flex-wrap:wrap;}
 .board_wrap.type_gallery .body > li {width:33.3333%; padding-top:54px; padding-left:50px;}
@@ -143,6 +183,9 @@ export default {
 .board_wrap.type_gallery .item .thumb img {width:100%; height:100%; object-fit:cover; display:block;}
 .board_wrap.type_gallery .item .cont {margin-top:24px;}
 .board_wrap.type_gallery .item .cont strong {font-size:2rem; line-height:135%; letter-spacing:-0.01em; display:block;}
+.board_wrap.type_gallery .item .cont p {margin-top:12px; font-size:1.6rem; line-height:150%; letter-spacing:-0.01em;}
+
+.board_wrap.type_gallery.type_long .item .thumb {padding-top:177.727272%;}
 
 @media screen and (max-width: 1024px) {
     .search_filter_area { flex-direction: column; height: auto; align-items: flex-start; gap: 10px; }
