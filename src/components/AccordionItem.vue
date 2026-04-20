@@ -38,6 +38,7 @@ import {
     inject,
     defineProps,
     defineEmits,
+    defineExpose,
     ref,
     watch,
     nextTick,
@@ -225,7 +226,7 @@ dd.acc_panel {
 }
 
 dd.acc_panel > .acc_panel_inner > .acc_panel_cont {
-    padding: 0 32px 24px 0;
+    /* padding: 0 32px 24px 0; */
     font-size: 16px;
     line-height: 1.6;
     color: #444;
@@ -252,5 +253,6 @@ dd.acc_panel > .acc_panel_inner > .acc_panel_cont {
         padding-right: 0;
         font-size: 1.5rem;
     }
+    dd.acc_panel:last-child{border-bottom:1px solid #D7D7DF;}
 }
 </style>
