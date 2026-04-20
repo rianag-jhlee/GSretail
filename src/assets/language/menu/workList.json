@@ -141,15 +141,27 @@
         "status": "com",
         "note": ""
     },
-    {
-        "depth1": "", "depth2": "개발/임대사업", "depth3": "지하철", "depth4": "", "depth5": "", "depth6": "",
+
+
+        {
+        "depth1": "", "depth2": "유어스", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
-        "path": "gsrbr/01/gsrbr1101",
-        "link": "/gsrbr1101",
-        "startDate": "26-04-08",
-        "endDate": "",
+        "path": "gsrbr/08/gsrbr08",
+        "link": "/gsrbr08",
+        "startDate": "26-04-20",
+        "endDate": "26-04-",
         "status": "ing",
-        "note": "gsrbr110201~gsrbr110204 포함됨, 아이콘 이미지만 넣으면 완료됨됨 "
+        "note": " "
+    },
+    {
+        "depth1": "", "depth2": "리얼 프라이스", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/09/gsrbr09",
+        "link": "/gsrbr09",
+        "startDate": "26-04-20",
+        "endDate": "26-04-20",
+        "status": "com",
+        "note": " "
     },
     {
         "depth1": "", "depth2": "우딜", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
@@ -160,6 +172,16 @@
         "endDate": "26-04-17",
         "status": "com",
         "note": " "
+    },
+    {
+        "depth1": "", "depth2": "개발/임대사업", "depth3": "지하철", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/01/gsrbr1101",
+        "link": "/gsrbr1101",
+        "startDate": "26-04-08",
+        "endDate": "",
+        "status": "ing",
+        "note": "gsrbr110201~gsrbr110204 포함됨, 아이콘 이미지만 넣으면 완료됨됨 "
     },
     {
         "depth1": "", "depth2": "", "depth3": "쇼핑몰", "depth4": "안녕인사동", "depth5": "", "depth6": "",
