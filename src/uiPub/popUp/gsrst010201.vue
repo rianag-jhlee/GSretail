@@ -104,7 +104,7 @@
                         <div class="form_field">
                             <Textarea
                                 v-model="seminarForm.content"
-                                placeholder="개설 희망 타입을 적어주세요. (타입 GSF1, GSF2, GSF3)"
+                                :placeholder="contentPlaceholder"
                                 :rows="6"
                             />
                         </div>
@@ -124,7 +124,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, computed, onMounted, onUnmounted } from "vue";
 import modal from "@/assets/js/modal";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
@@ -178,6 +178,18 @@ const seminarForm = reactive({
     seminarRegion: "",
     content: "",
 });
+
+const isMobile = ref(false);
+const mq = window.matchMedia("(max-width: 768px)");
+function onMqChange(e) { isMobile.value = e.matches; }
+onMounted(() => { isMobile.value = mq.matches; mq.addEventListener("change", onMqChange); });
+onUnmounted(() => { mq.removeEventListener("change", onMqChange); });
+
+const contentPlaceholder = computed(() =>
+    isMobile.value
+        ? "개설 희망 타입을 적어주세요.\n(타입 GSF1, GSF2, GSF3)"
+        : "개설 희망 타입을 적어주세요. (타입 GSF1, GSF2, GSF3)"
+);
 
 function closeModal(event) {
     modal.close(event.currentTarget);
@@ -430,15 +442,19 @@ function closeModal(event) {
 
 .smn_bottom {
     margin-top:40px;
+    margin-bottom: 124px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
 }
 .smn_bottom > :deep(.btn_big) {
   width: 134px;
   text-align: center;
+  font-size: 1.6rem;
+  line-height: 1.5;
+ letter-spacing: -0.01em;
+
 }
 
 /* 모바일 */
@@ -473,17 +489,18 @@ function closeModal(event) {
     .form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 1; min-width: 60px; }
     .form_field_email :deep(.select) { flex: 1 0 100%; width: 100%; }
    
-    /* 개설희망지역: 두 select를 나란히 wrap 허용 */
+    /* 개설희망지역: 한 줄씩 */
     .form_field_region { flex-wrap: wrap; }
-    .form_field_region :deep(.select) { flex: 1 0 calc(50% - 4px); }
+    .form_field_region :deep(.select) { flex: 1 0 100%; width: 100%; }
 
     .form_label{margin-bottom: 12px;}
 
     /* 라디오 */
     .consent_radio{width:20px; height: 20px;;}
     .consent_radio_text{font-size: 1.6rem;}
-    .form_field_radio { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .form_field_radio { flex-direction: column; gap: 20px; align-items: flex-start; }
     .form_field_radio label{font-size: 1.6rem;letter-spacing: -0.01em;line-height: 1.5;}
-    
+    .smn_bottom{margin-top:0; justify-content: center;}
+    .smn_bottom > :deep(.btn_big) {width:100%;flex:1;}
 }
 </style>
