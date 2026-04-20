@@ -22,13 +22,13 @@
                         <li>수집이용 및 목적: 수집된 개인정보를 통한 사업 및 문의사항 확인 및 답변을 위하여 활용</li>
                         <li>보유 및 이용기간: 개인정보 수집 및 이용 목적이 달성된 후에는 예외없이 정보를 파기 합니다.</li>
                     </ul>
-                </div>
-                <div class="consent_notice">
-                    <p class="consent_notice_text">고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br>사업설명회 신청 글 작성이 불가능합니다.</p>
-                    <label class="consent_radio_label">
-                        <input type="radio" class="consent_radio" name="consent_agree" value="agree" v-model="consentAgree" @click="consentAgree = consentAgree === 'agree' ? '' : 'agree'" />
-                        <span class="consent_radio_text">동의합니다.</span>
-                    </label>
+                    <div class="consent_notice">
+                        <p class="consent_notice_text">고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br class="p_br">사업설명회 신청 글 작성이 불가능합니다.</p>
+                        <label class="consent_radio_label">
+                            <input type="radio" class="consent_radio" name="consent_agree" value="agree" v-model="consentAgree" @click="consentAgree = consentAgree === 'agree' ? '' : 'agree'" />
+                            <span class="consent_radio_text">동의합니다.</span>
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
                     </div>
                     <!-- 사업설명회 신청 지역 -->
                     <div class="form_row form_row_radio">
-                        <div class="form_label">사업 설명회<br>신청 지역<span class="form_required">*</span></div>
+                        <div class="form_label">사업 설명회 신청<br class="p_br">지역<span class="form_required">*</span></div>
                         <div class="form_field form_field_radio">
                             <Inputs
                                 v-for="opt in seminarRegionOptions"
@@ -279,7 +279,8 @@ function closeModal(event) {
     top: 0.5lh;
 }
 .consent_notice {
-    padding: 24px 32px;
+    margin-top: 24px;
+    padding-top: 24px;
     border-top: 1px solid #d7d7df;
     display: flex;
     align-items: center;
@@ -287,7 +288,7 @@ function closeModal(event) {
     gap: 16px;
 }
 .consent_notice_text {
-    color: #161616;
+    color: #161616; 
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 1.24;
@@ -355,13 +356,12 @@ function closeModal(event) {
     font-size: 1.4rem;
     line-height: 1.4;
 }
-.form_body { border-top: 1px solid #e5e5e9; }
+.form_body { padding:12px 0;border-top: 1px solid #e5e5e9; }
 .form_row {
     min-height: 52px;
     padding: 12px 0;
-    border-bottom: 1px solid #e5e5e9;
     display: grid;
-    grid-template-columns: 142px 1fr;
+    grid-template-columns: 134px 1fr;
     align-items: center;
     gap: 0 8px;
 }
@@ -373,7 +373,6 @@ function closeModal(event) {
     font-weight: 400;
     letter-spacing: -0.01em;
     line-height: 1.5;
-    padding: 4px 0;
 }
 .form_required {
     margin-left: 2px;
@@ -396,23 +395,24 @@ function closeModal(event) {
 }
 
 /* 연락처 */
-.form_field_phone :deep(.select) { width: 100px; flex-shrink: 0; }
-.form_field_phone :deep(.select select) { width: 100%; }
-.form_field_phone > :deep(.input_wrap) { flex: 1; min-width: 80px; }
+.form_field_phone :deep(.select) { width: 134px; flex-shrink: 0;}
+.form_field_phone :deep(.select select) { width: 100%;font-size:1.6rem  }
+.form_field_phone > :deep(.input_wrap) { max-width:134px;flex: 1; min-width: 80px; }
 
 /* 이메일 */
-.form_field_email > :deep(.input_wrap) { flex: 1; min-width: 100px; }
-.form_field_email :deep(.select) { width: 140px; flex-shrink: 0; }
-.form_field_email :deep(.select select) { width: 100%; }
+.form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 0 0 205px; }
+.form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 0 0 180px; }
+.form_field_email :deep(.select) { width: 140px; flex: 1 0 180px; }
+.form_field_email :deep(.select select) { width: 100%; font-size:1.6rem;}
 
 /* 개설희망지역 */
 .form_field_region { flex-wrap: nowrap; }
 .form_field_region :deep(.select) { flex: 1; min-width: 0; }
-.form_field_region :deep(.select select) { width: 100%; }
+.form_field_region :deep(.select select) { width: 100%; font-size:1.6rem; }
 
 /* 사업설명회 신청 지역 라디오 */
-.form_field_radio { gap: 24px; padding: 8px 0; }
-.form_field_radio :deep(.input_wrap) { width: auto; flex-shrink: 0; }
+.form_field_radio {padding:13px 0; gap:8px; }
+.form_field_radio :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
 .form_field_radio :deep(.check) { gap: 8px; white-space: nowrap; cursor: pointer; }
 .form_field_radio :deep(.label) { font-size: 1.8rem; color: #161616; }
 
@@ -443,16 +443,47 @@ function closeModal(event) {
 
 /* 모바일 */
 @media (max-width: 768px) {
-    .sf_title_row {min-height: auto;margin-bottom: 20px;}
+    .smn_title_row { min-height: 60px; margin:0 -20px; padding:17px 20px; border-bottom:1px solid #C4C4D0;}
+    .smn_title { font-size: 1.8rem; line-height: 1.4; }
+    .smn_close { width: 24px;height: 24px; }
+    .smn_intro {display: none;;}
 
-    .smn_title {font-size: 2.4rem;line-height: 32px;}
-    .smn_close {margin-top: 2px;}
 
-    .smn_intro > p { font-size: 1.6rem; }
-    .form_row { grid-template-columns: 1fr; }
-    .form_label { padding-bottom: 8px; }
+    /* 개인정보 동의 */
+    .consent_info { padding:30px 20px; }
+    .consent_info_list > li{font-size:1.4rem;line-height:1.4;letter-spacing:-0.01em;}
+    .consent_info_title{font-weight: 700;font-size: 1.8rem;line-height: 1.5;}
+    .consent_notice { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .consent_notice_text{font-size: 1.4rem; line-height: 1.4;}
+
+    /* 폼 레이아웃: 레이블 + 필드 세로 배치 */
+    .form_head { height: auto; padding-bottom: 12px; }
+    .form_head_title { font-size: 2rem; }
+    .form_body{padding:30px 0;}
+    .form_row {padding:20px 0; grid-template-columns: 1fr; gap: 0; }
+    .form_row:first-child {padding-top:0;}
+    .form_row:last-child {padding-bottom:0;}
+
+    /* 연락처: select 너비 축소, input max-width 해제 */
     .form_field_phone :deep(.select) { width: 88px; }
-    .form_field_radio { flex-direction: column; gap: 12px; }
-    .consent_notice { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .form_field_phone > :deep(.input_wrap) { max-width: none; flex: 1; }
+
+    /* 이메일: 고정 너비 해제 → flex로 유연하게, SelectBox 다음 줄 */
+    .form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 1; min-width: 80px; }
+    .form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 1; min-width: 60px; }
+    .form_field_email :deep(.select) { flex: 1 0 100%; width: 100%; }
+   
+    /* 개설희망지역: 두 select를 나란히 wrap 허용 */
+    .form_field_region { flex-wrap: wrap; }
+    .form_field_region :deep(.select) { flex: 1 0 calc(50% - 4px); }
+
+    .form_label{margin-bottom: 12px;}
+
+    /* 라디오 */
+    .consent_radio{width:20px; height: 20px;;}
+    .consent_radio_text{font-size: 1.6rem;}
+    .form_field_radio { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .form_field_radio label{font-size: 1.6rem;letter-spacing: -0.01em;line-height: 1.5;}
+    
 }
 </style>
