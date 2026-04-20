@@ -43,21 +43,30 @@
                                     </li>
                                 </ul>
                             </div>
-
-                            <div class="pagination_area ">
-                                <Pagination 
-                                    v-model="currentPage" 
-                                    :total-pages="10" 
-                                    @change="onPageChange" 
-                                />
-                            </div>
                         </div>
 
                         <div v-if="t.TabIdx === 1">
-                            asdf
+                            <Accordion :multiple="true" class="qna">
+                                <AccordionItem item-key="a">
+                                    <template #title>입점비용은 얼마인가요?</template>
+                                    <p>답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다.</p>
+                                </AccordionItem>
+                                <AccordionItem item-key="b">
+                                    <template #title>기존 매장 리뉴얼도 가능한가요?</template>
+                                    <p>답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다.</p>
+                                </AccordionItem>
+                            </Accordion>
                         </div>
                     </div>
                 </section>
+
+                <div class="pagination_area ">
+                    <Pagination 
+                        v-model="currentPage" 
+                        :total-pages="10" 
+                        @change="onPageChange" 
+                    />
+                </div>
 
             </div>
         </section>
@@ -69,9 +78,12 @@ import Search from "@/components/Search.vue";
 import Pagination from "@/components/Pagination.vue";
 import Tabs from "@/components/Tabs.vue";
 
+import Accordion from "@/components/Accordion.vue";
+import AccordionItem from "@/components/AccordionItem.vue";
+
 export default {
     name: "gsrin04",
-    components: { Search, Pagination, Tabs },
+    components: { Search, Pagination, Tabs, Accordion, AccordionItem },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
@@ -90,7 +102,7 @@ export default {
                     MainTitle: "GS리테일 Factbook",
                     MainsubTitle: "궁금했던 GS리테일의 모든 것, 이제 여기저기 찾지 마세요.<br/> 여러분이 가장 많이 묻는 질문에 대한 정답을 한눈에 보기 쉽게 정리했습니다.",
 
-                    TabIdx: 0, //최초 선택된 탭 index
+                    TabIdx: 1, //최초 선택된 탭 index
                     sTabIdx: 0, //최초 선택된 탭 index
                     tabs: [ //탭 아이템 배열
                         { item: "Factbook M" },
@@ -199,6 +211,8 @@ export default {
 .board_wrap.type_gallery .item .cont p .date {color:#67676F; font-size:1.6rem; line-height:150%; letter-spacing:-0.01em;}
 
 .board_wrap.type_gallery.type_long .item .thumb {padding-top:177.727272%;}
+
+.qna :deep(dt) > a {font-weight:400;}
 
 @media screen and (max-width: 1024px) {
     .search_filter_area { flex-direction: column; height: auto; align-items: flex-start; gap: 10px; }
