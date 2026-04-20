@@ -373,7 +373,7 @@
                             </div>
                         </div>
                         <!-- 구분선 -->
-                        <div class="search_divider"></div>
+                     
                         <!-- 하단 row -->
                         <div class="search_bottom_row">
                             <!-- 가맹타입 -->
@@ -499,8 +499,8 @@
                     </div>
 
                     <!-- 테이블 뷰 -->
-                    <div v-show="storeView === 'list'" class="type_table_wrap">
-                        <table class="type_table type2">
+                    <div v-show="storeView === 'list'" class="type_table_wrap type2">
+                        <table class="type_table">
                             <colgroup>
                                 <col class="col_region"/>
                                 <col class="col_type"/>
@@ -556,6 +556,29 @@
                                 </template>
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- 모바일 아코디언 뷰 (목록형) -->
+                    <div class="store_accordion_list" v-show="storeView === 'list'">
+                        <Accordion class="store_acc">
+                            <AccordionItem
+                                v-for="item in storeList"
+                                :key="item.id"
+                                :item-key="item.id"
+                            >
+                                <template #title>
+                                    <div class="accordion_head_info">
+                                        <p class="accordion_region">{{ item.region }}</p>
+                                        <div class="accordion_badges">
+                                            <span class="type_badge" :class="'badge_' + item.type.toLowerCase()">{{ item.type }}</span>
+                                            <span class="type_badge badge_gray">{{ item.form }}</span>
+                                            <span v-if="item.isYouth" class="type_badge badge_gray">청년</span>
+                                        </div>
+                                    </div>
+                                </template>
+                                <StoreCardDetail :item="item" />
+                            </AccordionItem>
+                        </Accordion>
                     </div>
 
                     <!-- 카드 그리드 뷰 -->
@@ -639,6 +662,8 @@ import FeatureCards from "@/components/FeatureCards.vue";
 import Buttons from "@/components/Buttons.vue";
 import StoreCard from "@/components/StoreCard.vue";
 import StoreCardDetail from "@/components/StoreCardDetail.vue";
+import Accordion from "@/components/Accordion.vue";
+import AccordionItem from "@/components/AccordionItem.vue";
 import modal from "@/assets/js/modal";
 import imgBg from "@/assets/images/dummy/gsrst01010101_bg.png";
 import imgGph01 from "@/assets/images/dummy/gsrst01010101_gph_01.png";
@@ -786,18 +811,31 @@ const storeList = ref([
 ]);
 
 function closeYouthPopover() { youthPopoverVisible.value = false; }
-onMounted(() => document.addEventListener('click', closeYouthPopover));
-onUnmounted(() => document.removeEventListener('click', closeYouthPopover));
+
+const isMobile = ref(false);
+const mqStore = window.matchMedia("(max-width: 768px)");
+function onMqStoreChange(e) { isMobile.value = e.matches; }
+
+onMounted(() => {
+    document.addEventListener('click', closeYouthPopover);
+    isMobile.value = mqStore.matches;
+    mqStore.addEventListener("change", onMqStoreChange);
+});
+onUnmounted(() => {
+    document.removeEventListener('click', closeYouthPopover);
+    mqStore.removeEventListener("change", onMqStoreChange);
+});
 
 /* ── 카드 그리드 뷰 ── */
-const CARDS_PER_ROW = 4;
 const openCardId = ref(null);
 const openTableId = ref(null);
 
+const cardsPerRow = computed(() => isMobile.value ? 1 : 4);
+
 const storeCardRows = computed(() => {
     const rows = [];
-    for (let i = 0; i < storeList.value.length; i += CARDS_PER_ROW) {
-        rows.push(storeList.value.slice(i, i + CARDS_PER_ROW));
+    for (let i = 0; i < storeList.value.length; i += cardsPerRow.value) {
+        rows.push(storeList.value.slice(i, i + cardsPerRow.value));
     }
     return rows;
 });
@@ -862,9 +900,9 @@ function toggleCard(id) {
 .type_table thead th { padding:28px 24px; background-color: #f8f8f8; border: 1px solid #e5e5e9; font-size: 1.8rem; text-align: center; line-height: 1.4; }
 .type_table tbody th { padding:12px 24px; background-color: #f8f8f8; border: 1px solid #e5e5e9; font-size: 1.8rem; font-weight: 400;text-align: left;line-height: 1.4;}
 .type_table tbody td { border-bottom: 1px solid #e5e5e9; font-size: 1.8rem; text-align: center; padding: 12px 24px; line-height: 1.4; }
-.type_table.type2 thead th { padding:18px 20px; line-height: 1.5;}
-.type_table.type2 colgroup col{width: 12.5%;}
-.type_table.type2 tbody td{ height: 82px; padding:0 13px;}
+.type_table_wrap.type2 .type_table thead th { padding:18px 20px; line-height: 1.5;}
+.type_table_wrap.type2 .type_table colgroup col{width: 12.5%;}
+.type_table_wrap.type2 .type_table tbody td{ height: 82px; padding:0 13px;}
 
 .list_caution {margin-top:32px;}
 .list_caution > li + li{margin-top:8px;}
@@ -1038,7 +1076,8 @@ function toggleCard(id) {
 @media (max-width: 768px) {
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
-    .page_header { height: 260px; }
+    .page_header { display: none;}
+    .sec_body{padding-top:24px; padding-bottom:40;}
     .header_title { font-size: 3.6rem; }
     .tab_page { padding-top: 60px; padding-bottom: 80px; }
     .tab_content_wrap { padding-top: 40px; }
@@ -1077,12 +1116,6 @@ function toggleCard(id) {
     .seminar_table tbody td { padding: 16px 24px; font-size: 1.6rem;line-height: 1.5;;}
     .seminar_table col.seminar_col_label { width: clamp(60.75px, 27%, 118.125px); }
     .seminar_table col.seminar_col_value { width: 73%; }
-    /* store search mobile */
-    .store_search { padding: 24px 20px; }
-    .search_divider { margin: 20px 0; }
-    .search_bottom_row { flex-direction: column; gap: 20px; }
-    .search_group_input { width: 100%; }
-    .youth_popover { left: 0; right: 0; top: calc(100% + 8px); }
 }
 
 /* ── 추천 점포 찾기 ── */
@@ -1132,11 +1165,7 @@ function toggleCard(id) {
     border-color: #107af2;
     color: #107af2;
 }
-.search_divider {
-    height: 1px;
-    background-color: #d7d7df;
-    margin: 24px 0;
-}
+
 .search_bottom_row {
     display: flex;
     align-items: flex-start;
@@ -1317,7 +1346,7 @@ line-height: 1.24;
 .view_btn.active { border-color: #107af2; color: #107af2; }
 
 /* 테이블 */
-.type_table.type2 thead th {border:0;}
+.type_table_wrap.type2 .type_table thead th { border: 0; }
 
 .td_tag { font-size: 1.6rem; word-break: break-all; }
 
@@ -1355,7 +1384,7 @@ line-height: 1.24;
     transform-origin: center;
     transition: transform 0.2s ease;
 }
-.type_table.type2 tbody tr.is_open .detail_toggle_btn::after {
+.type_table_wrap.type2 .type_table tbody tr.is_open .detail_toggle_btn::after {
     transform: rotate(180deg);
 }
 
@@ -1369,13 +1398,50 @@ line-height: 1.24;
 .detail_panel :deep(.detail_card){
     border:0;
 }
+/* ── 모바일 아코디언 (목록형) ── */
+.store_accordion_list { display: none; }
+
+/* Accordion 컴포넌트 스타일 오버라이드 */
+.store_accordion_list :deep(.board_type_toggle) { border-top: 1px solid #d7d7df; }
+.store_accordion_list :deep(dt > a.acc_tit_btn) {
+    min-height: auto;
+    padding: 16px 20px;
+    font-size: inherit;
+    font-weight: inherit;
+    border-bottom: 1px solid #d7d7df;
+}
+.store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open) {
+    border: 1px solid #161616;
+    border-bottom: none;
+}
+.store_accordion_list :deep(dt > a.acc_tit_btn::after) {
+    width: 24px;
+    height: 24px;
+    background-color: #161616;
+    transform: rotate(0deg);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+}
+.store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open::after) {
+    transform: rotate(180deg);
+}
+.store_accordion_list :deep(dd.acc_panel.acc_show) {
+    border: 1px solid #161616;
+    border-top: none;
+}
+.store_accordion_list :deep(.acc_panel_cont) { padding: 0; }
+
+/* 아코디언 헤드 슬롯 내 정보 */
+.accordion_head_info { flex: 1; min-width: 0; }
+.accordion_region { font-size: 2rem; font-weight: 700; color: #161616; letter-spacing: -0.01em; line-height: 1.35; }
+.accordion_badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+
 /* ── 카드 그리드 뷰 ── */
 .store_card_grid_wrap { margin-top: 16px; display: flex; flex-direction: column; gap: 0; }
 .store_card_row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    margin-top: 20px;
 }
 .store_card_detail_row {
     margin-top: 20px;
@@ -1385,8 +1451,31 @@ line-height: 1.24;
 .store_pagination { display: flex; justify-content: center; margin-top: 24px; }
 
 @media (max-width: 768px) {
-    .store_list_bar { flex-direction: column; align-items: flex-start; gap: 12px; height: auto; }
-    .store_bar_right { width: 100%; justify-content: space-between; }
+    /* store search */
+    .store_list_wrap{margin-top:60px;}
+    .store_count{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .store_count > strong{font-weight: 400;}
+    .store_search { padding: 30px 20px; }
+    .search_divider { margin: 20px 0; }
+    .search_bottom_row { margin-top:24px; padding-top:24px; border-top:1px solid #D7D7DF;flex-direction: column; gap: 50px;}
+    .search_group_input { width: 100%; }
+    .store_search_input { height: 52px; }
+    .youth_popover { left: 0; right: 0; top: calc(100% + 8px); }
+    /* store list bar */
+    .store_list_bar { margin-bottom:16px;align-items: flex-end; gap: 12px; height: auto; }
+    .store_bar_right { justify-content: flex-end; }
+    .sort_btn { height: 32px; font-size: 1.3rem; padding: 0 10px; }
+    .view_btn { width: 32px; height: 32px; }
+    /* 테이블 → 아코디언 전환 */
+    .type_table_wrap.type2 { display: none; }
+    .store_accordion_list { display: block; }
+    /* 카드 그리드 1열 */
+    .store_card_grid_wrap{gap:8px;}
+    .store_card_row { grid-template-columns: 1fr; }
+    .store_card{padding:20px;}
+    /* detail panel */
     .detail_panel { padding: 16px; }
+    .store_card_detail_row {margin-top:0;}
+
 }
 </style>
