@@ -54,7 +54,7 @@
             <h4>button</h4>
             <ul class="explain">
                 <li><strong>tag :</strong> : a / button 테그 선택 // default="button"</li>
-                <li><strong>btn-class</strong> : [사이즈] btn_small / btn_mid / btn_[default] / btn_big , [타입] fill(배경색) /
+                <li><strong>btn-class</strong> : [사이즈] btn_small / btn_mid / btn_[default] / btn_big / btn_xl(h:64px, p:0 32px) , [타입] fill(배경색) /
                     border(테두리선) ※색상 추가 시 색상 가이드에 따른 [색상클래스] 추가 / 테두리 + 배경 혼합 시 border_[색생클래스]01~</li>
             </ul>
 
@@ -72,10 +72,17 @@
                     <Buttons btn-class="btn_icon btn_big before">big(h:52px)</Buttons>
                     <Buttons btn-class="btn_icon btn_big after">big(h:52px)</Buttons>
 
+                    <Buttons btn-class="btn_xl fill">xl(h:64px)</Buttons>
+                    <Buttons btn-class="btn_xl primary">xl(h:64px)</Buttons>
+                    <Buttons btn-class="btn_xl gray">xl(h:64px)</Buttons>
+                    <Buttons btn-class="btn_icon btn_xl before">xl(h:64px)</Buttons>
+                    <Buttons btn-class="btn_icon btn_xl after">xl(h:64px)</Buttons>
+
                     <Buttons btn-class="btn_small border">small(h:30px)</Buttons>
                     <Buttons btn-class="btn_mid border">mid(h:44px)</Buttons>
                     <Buttons btn-class="btn_border">border default(h:26px)</Buttons>
                     <Buttons btn-class="btn_big border">big(h:52px)</Buttons>
+                    <Buttons btn-class="btn_xl border">xl(h:64px)</Buttons>
                 </div>
             </div>
 
@@ -93,12 +100,18 @@
 &lt;Buttons btn-class="btn_big gray"&gt;big(h:52px)&lt;/Buttons&gt;
 &lt;Buttons btn-class="btn_icon btn_big before"&gt;big(h:52px)&lt;/Buttons&gt;
 &lt;Buttons btn-class="btn_icon btn_big after"&gt;big(h:52px)&lt;/Buttons&gt;
+&lt;Buttons btn-class="btn_xl fill"&gt;xl(h:64px)&lt;/Buttons&gt;
+&lt;Buttons btn-class="btn_xl primary"&gt;xl(h:64px)&lt;/Buttons&gt;
+&lt;Buttons btn-class="btn_xl gray"&gt;xl(h:64px)&lt;/Buttons&gt;
+&lt;Buttons btn-class="btn_icon btn_xl before"&gt;xl(h:64px)&lt;/Buttons&gt;
+&lt;Buttons btn-class="btn_icon btn_xl after"&gt;xl(h:64px)&lt;/Buttons&gt;
 
 &lt;!-- BORDER --&gt;
 &lt;Buttons btn-class="btn_small border"&gt;small(h:30px)&lt;/Buttons&gt;
 &lt;Buttons btn-class="btn_mid border"&gt;mid(h:44px)&lt;/Buttons&gt;
 &lt;Buttons btn-class="btn_border"&gt;border default(h:26px)&lt;/Buttons&gt;
-&lt;Buttons btn-class="btn_big border"&gt;big(h:52px)&lt;/Buttons&gt;</code></pre>
+&lt;Buttons btn-class="btn_big border"&gt;big(h:52px)&lt;/Buttons&gt;
+&lt;Buttons btn-class="btn_xl border"&gt;xl(h:64px)&lt;/Buttons&gt;</code></pre>
         </section>
 
         <section>
