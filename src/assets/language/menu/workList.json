@@ -141,16 +141,84 @@
         "status": "com",
         "note": ""
     },
-
-
-        {
+    {
+        "depth1": "", "depth2": "우리동네 GS", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/04/gsrbr04",
+        "link": "/gsrbr04",
+        "startDate": "26-04-2",
+        "endDate": "26-04-2",
+        "status": "ing",
+        "note": " "
+    },
+    {
+        "depth1": "", "depth2": "GS PAY", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/05/gsrbr05",
+        "link": "/gsrbr05",
+        "startDate": "26-04-2",
+        "endDate": "26-04-2",
+        "status": "ing",
+        "note": " "
+    },
+    {
+        "depth1": "", "depth2": "GS ALL 포인트", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/06/gsrbr06",
+        "link": "/gsrbr06",
+        "startDate": "26-04-21",
+        "endDate": "26-04-2",
+        "status": "ing",
+        "note": "gsrbr0601~gsrbr0603 포함됨 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "멤버십 FAQ", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr0601",
+        "link": "/gsrbr0601",
+        "startDate": "26-04-21",
+        "endDate": "26-04-2",
+        "status": "ing",
+        "note": "gsrbr06 확인가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "GS ALL 멤버십 회원약관", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr0602",
+        "link": "/gsrbr0602",
+        "startDate": "26-04-21",
+        "endDate": "26-04-2",
+        "status": "ing",
+        "note": "gsrbr06 확인가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "GS25 비회원 적립 서비스 이용 안내서", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr0603",
+        "link": "/gsrbr0603",
+        "startDate": "26-04-21",
+        "endDate": "26-04-2",
+        "status": "ing",
+        "note": "gsrbr06 확인가능"
+    },
+    {
+        "depth1": "", "depth2": "POP", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/07/gsrbr07",
+        "link": "/gsrbr07",
+        "startDate": "26-04-20",
+        "endDate": "26-04-20",
+        "status": "com",
+        "note": " "
+    },
+    {
         "depth1": "", "depth2": "유어스", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
         "path": "gsrbr/08/gsrbr08",
         "link": "/gsrbr08",
         "startDate": "26-04-20",
-        "endDate": "26-04-",
-        "status": "ing",
+        "endDate": "26-04-20",
+        "status": "com",
         "note": " "
     },
     {
@@ -415,8 +483,8 @@
         "path": "gsrse/01/gsrse01",
         "link": "/gsrse01",
         "startDate": "26-04-16",
-        "endDate": "",
-        "status": "ing",
+        "endDate": "26-04-16",
+        "status": "com",
         "note": "gsrse01에서 확인 가능"
     },
     {
