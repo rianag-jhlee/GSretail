@@ -150,7 +150,12 @@ function onInput(e) {
 }
 
 .textarea_field > textarea::placeholder {
-    color: #aaa;
+    color: #A4A4B0;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+
+    
 }
 
 .textarea_field > textarea:focus {
