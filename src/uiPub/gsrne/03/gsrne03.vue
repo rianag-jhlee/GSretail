@@ -29,7 +29,7 @@
                                 <ul class="body">
                                     <li v-for="item in t.ListData" :key="item">
                                         <div class="item">
-                                            <a href="/gsrne0101">
+                                            <a href="/gsrne0301">
                                                 <span class="thumb"><em><img :src="item.thumb" /></em></span>
                                             </a>
                                             <a href="#none" class="cont">
@@ -102,7 +102,7 @@ export default {
                     MainTitle: "GS리테일 Factbook",
                     MainsubTitle: "궁금했던 GS리테일의 모든 것, 이제 여기저기 찾지 마세요.<br/> 여러분이 가장 많이 묻는 질문에 대한 정답을 한눈에 보기 쉽게 정리했습니다.",
 
-                    TabIdx: 1, //최초 선택된 탭 index
+                    TabIdx: 0, //최초 선택된 탭 index
                     sTabIdx: 0, //최초 선택된 탭 index
                     tabs: [ //탭 아이템 배열
                         { item: "Factbook M" },
@@ -212,7 +212,10 @@ export default {
 
 .board_wrap.type_gallery.type_long .item .thumb {padding-top:177.727272%;}
 
-.qna :deep(dt) > a {font-weight:400;}
+.qna :deep(dt) > a {padding:22px 20px 22px 60px; font-size:2.4rem; font-weight:400; line-height:150%; letter-spacing:-0.01em; position:relative;}
+.qna :deep(dt) > a:before {width:32px; height:32px; font-size:1.8rem; font-weight:700; content:'Q'; position:absolute; top:50%; left:20px; display:flex; align-items:center; justify-content:center; transform:translateY(-50%);}
+.qna :deep(dt) > a.acc_tit_open {font-weight:700; line-height:135%;}
+.qna :deep(dd) .acc_panel_cont {padding:16px 32px 40px !important; font-size:2rem; line-height:135%; letter-spacing:-0.01em;}
 
 @media screen and (max-width: 1024px) {
     .search_filter_area { flex-direction: column; height: auto; align-items: flex-start; gap: 10px; }
