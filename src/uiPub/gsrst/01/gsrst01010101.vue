@@ -528,7 +528,7 @@
                                     <tr :class="{ is_open: openTableId === item.id }">
                                         <td>{{ item.region }}</td>
                                         <td>
-                                            <span class="type_badge" :class="'badge_' + item.type.toLowerCase()">{{ item.type }}</span>
+                                            <span v-for="t in item.type" :key="t" class="type_badge" :class="getBadgeClass(t)">{{ t }}</span>
                                         </td>
                                         <td>{{ item.form }}</td>
                                         <td>{{ item.cost }}</td>
@@ -570,7 +570,7 @@
                                     <div class="accordion_head_info">
                                         <p class="accordion_region">{{ item.region }}</p>
                                         <div class="accordion_badges">
-                                            <span class="type_badge" :class="'badge_' + item.type.toLowerCase()">{{ item.type }}</span>
+                                            <span v-for="t in item.type" :key="t" class="type_badge" :class="getBadgeClass(t)">{{ t }}</span>
                                             <span class="type_badge badge_gray">{{ item.form }}</span>
                                             <span v-if="item.isYouth" class="type_badge badge_gray">청년</span>
                                         </div>
@@ -802,13 +802,17 @@ const storePage = ref(1);
 const storeTotalPages = ref(5);
 
 const storeList = ref([
-    { id: 1, region: '대전 동구',   type: 'GS3', form: '기존점',  isYouth: false, cost: '7,200만원',  tags: '#버스정류장 #대로변',   area: '18평', date: '2025.12.24', feature: '신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다.' },
-    { id: 2, region: '강원 원주시', type: 'GS2', form: '기존점',  isYouth: true,  cost: '10,500만원', tags: '#버스정류장 #대로변',   area: '22평', date: '2025.12.24', feature: '대형 마트 인접 상권으로 유동 인구가 많아 안정적인 매출이 기대됩니다.' },
-    { id: 3, region: '대구 서구',   type: 'GS1', form: '기존점',  isYouth: true,  cost: '5,000만원',  tags: '#번화가 #버스정류장',  area: '14평', date: '2025.09.21', feature: '지하철역 출구 인근에 위치하여 출퇴근 고객 수요가 풍부합니다.' },
-    { id: 4, region: '대전 동구',   type: 'GS3', form: '기존점',  isYouth: false, cost: '7,200만원',  tags: '#버스정류장 #대로변',   area: '18평', date: '2025.12.24', feature: '신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다.' },
-    { id: 5, region: '인천 연수구', type: 'GS2', form: '기존점',  isYouth: false, cost: '8,000만원',  tags: '#주택가 #초등학교인근', area: '20평', date: '2025.11.10', feature: '주거 밀집 지역 내 독점 상권으로 안정적인 고정 고객층이 형성되어 있습니다.' },
-    { id: 6, region: '전북 익산시', type: 'GS1', form: '기존점',  isYouth: true,  cost: '4,500만원',  tags: '#대로변 #유동인구많음', area: '15평', date: '2025.10.05', feature: '도심 중심 상가 위치로 다양한 연령층의 유동 고객이 상시 방문합니다.' },
+    { id: 1, region: '대전 동구',   type: ['GS1','GS2'],        form: '기존점',  isYouth: false, cost: '7,200만원',  tags: '#버스정류장 #대로변',   area: '18평', date: '2025.12.24', feature: '신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다.' },
+    { id: 2, region: '강원 원주시', type: ['GS2', 'GS3'], form: '기존점',  isYouth: true,  cost: '10,500만원', tags: '#버스정류장 #대로변',   area: '22평', date: '2025.12.24', feature: '대형 마트 인접 상권으로 유동 인구가 많아 안정적인 매출이 기대됩니다.' },
+    { id: 3, region: '대구 서구',   type: ['GS1'],        form: '기존점',  isYouth: true,  cost: '5,000만원',  tags: '#번화가 #버스정류장',  area: '14평', date: '2025.09.21', feature: '지하철역 출구 인근에 위치하여 출퇴근 고객 수요가 풍부합니다.' },
+    { id: 4, region: '대전 동구',   type: ['GS3'],        form: '기존점',  isYouth: false, cost: '7,200만원',  tags: '#버스정류장 #대로변',   area: '18평', date: '2025.12.24', feature: '신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다.' },
+    { id: 5, region: '인천 연수구', type: ['GS2'],        form: '기존점',  isYouth: false, cost: '8,000만원',  tags: '#주택가 #초등학교인근', area: '20평', date: '2025.11.10', feature: '주거 밀집 지역 내 독점 상권으로 안정적인 고정 고객층이 형성되어 있습니다.' },
+    { id: 6, region: '전북 익산시', type: ['GS1', 'GS2'], form: '기존점',  isYouth: true,  cost: '4,500만원',  tags: '#대로변 #유동인구많음', area: '15평', date: '2025.10.05', feature: '도심 중심 상가 위치로 다양한 연령층의 유동 고객이 상시 방문합니다.' },
 ]);
+
+function getBadgeClass(t) {
+    return /^GS\d/i.test(t) ? 'badge_' + t.toLowerCase() : 'badge_gray';
+}
 
 function closeYouthPopover() { youthPopoverVisible.value = false; }
 
@@ -1167,6 +1171,9 @@ function toggleCard(id) {
 }
 
 .search_bottom_row {
+    margin-top:24px;
+    padding-top:24px;
+    border-top: 1px solid #D7D7DF;
     display: flex;
     align-items: flex-start;
     gap: 32px;
@@ -1360,6 +1367,7 @@ line-height: 1.24;
 .badge_gs1 { background: #e8f8f1; color: #15b874; }
 .badge_gs2 { background: #f9f2ea; color: #fb6432; }
 .badge_gs3 { background: #faeeee; color: #ed3030; }
+.type_badge.badge_gray { background: #f2f2f4; color: #67676f; }
 
 /* 상세 토글 버튼 */
 .detail_toggle_btn {
@@ -1437,15 +1445,13 @@ line-height: 1.24;
 .accordion_badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
 
 /* ── 카드 그리드 뷰 ── */
-.store_card_grid_wrap { margin-top: 16px; display: flex; flex-direction: column; gap: 0; }
+.store_card_grid_wrap { margin-top: 16px; display: flex; flex-direction: column; gap: 20px; }
 .store_card_row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
-.store_card_detail_row {
-    margin-top: 20px;
-}
+
 
 /* 페이지네이션 */
 .store_pagination { display: flex; justify-content: center; margin-top: 24px; }
@@ -1460,7 +1466,9 @@ line-height: 1.24;
     .search_bottom_row { margin-top:24px; padding-top:24px; border-top:1px solid #D7D7DF;flex-direction: column; gap: 50px;}
     .search_group_input { width: 100%; }
     .store_search_input { height: 52px; }
-    .youth_popover { left: 0; right: 0; top: calc(100% + 8px); }
+    .youth_popover { left: -20px;right: auto; top: calc(100% + 8px); transform: none; width: calc(100vw - 40px); max-width: 335px; }
+    .chip_list { position: relative; }
+    .chip_youth_wrap { position: static; }
     /* store list bar */
     .store_list_bar { margin-bottom:16px;align-items: flex-end; gap: 12px; height: auto; }
     .store_bar_right { justify-content: flex-end; }
@@ -1468,7 +1476,7 @@ line-height: 1.24;
     .view_btn { width: 32px; height: 32px; }
     /* 테이블 → 아코디언 전환 */
     .type_table_wrap.type2 { display: none; }
-    .store_accordion_list { display: block; }
+    .store_accordion_list { margin:0 -20px; display: block; }
     /* 카드 그리드 1열 */
     .store_card_grid_wrap{gap:8px;}
     .store_card_row { grid-template-columns: 1fr; }
@@ -1476,6 +1484,12 @@ line-height: 1.24;
     /* detail panel */
     .detail_panel { padding: 16px; }
     .store_card_detail_row {margin-top:0;}
-
+    .store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open),
+    .store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_btn) {border:0;}
+    .store_accordion_list :deep(.board_type_toggle) {border-top:1px solid #161616;}
+    .store_accordion_list :deep(.detail_card){padding:20px; border-radius:12px; border:0;}
+    .store_accordion_list :deep(dd.acc_panel > .acc_panel_inner > .acc_panel_cont){padding:30px 20px !important;background-color:#F8F8F8 !important;}
+    .store_accordion_list :deep(dd.acc_panel.acc_show){border:0;}
+    .accordion_badges{margin-top:6px;}
 }
 </style>

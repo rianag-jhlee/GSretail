@@ -2,7 +2,7 @@
     <div class="store_card" :class="{ is_open: isOpen }">
         <div class="card_head">
             <div class="card_badges">
-                <span class="type_badge" :class="'badge_' + item.type.toLowerCase()">{{ item.type }}</span>
+                <span v-for="t in item.type" :key="t" class="type_badge" :class="getBadgeClass(t)">{{ t }}</span>
                 <span class="type_badge badge_gray">{{ item.form }}</span>
                 <span v-if="item.isYouth" class="type_badge badge_gray">청년</span>
             </div>
@@ -24,6 +24,11 @@
 
 <script setup>
 import { defineProps, defineEmits } from "vue";
+
+function getBadgeClass(t) {
+    return /^GS\d/i.test(t) ? 'badge_' + t.toLowerCase() : 'badge_gray';
+}
+
 defineProps({
     item: { type: Object, required: true },
     isOpen: { type: Boolean, default: false },

@@ -30,7 +30,7 @@
                 </li>
                 <li class="detail_info_cell">
                     <span class="detail_info_label">타입</span>
-                    <strong class="detail_info_value">{{ item.type }}</strong>
+                    <strong class="detail_info_value">{{ Array.isArray(item.type) ? item.type.join(', ') : item.type }}</strong>
                 </li>
                 <li class="detail_info_cell">
                     <span class="detail_info_label">유형</span>
@@ -91,10 +91,11 @@ defineProps({
     .detail_info_table { border-top: 0; }
     .detail_info_row { flex-wrap: wrap; }
     .detail_info_cell { flex: 1 0 100%; min-height: 56px; padding: 18px 0; gap: 10px; border-top: 1px solid #e5e5e9; }
-    .detail_info_cell_full { padding: 18px 0; gap: 8px; }
+    .detail_info_cell_full { padding: 16px 0; gap: 8px; }
     .detail_info_label { min-width: 80px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .detail_info_label::before { width: 20px; height: 20px; }
     .detail_info_value { font-weight: 700; font-size: 1.6rem; line-height: 1.24; }
-    .detail_info_feature { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .detail_info_feature { padding-left:32px;font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .manager_tel_wrap {margin-top:12px;}
 }
 </style>
