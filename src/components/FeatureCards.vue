@@ -11,6 +11,8 @@ defineProps({
     type: { type: String, default: "num" },
     // noSwipe=true: 모바일에서도 Swiper 대신 리스트(1열) 표시
     noSwipe: { type: Boolean, default: false },
+    // 모바일 Swiper 슬라이드 간격(px). 페이지에서 margin으로 간격 줄 때 0과 함께 쓸 수 있음
+    swiperSpaceBetween: { type: Number, default: 8 },
 });
 
 const _getIsMobile = () => window.innerWidth <= 768;
@@ -50,7 +52,7 @@ onUnmounted(() => {
     <Swiper
         v-else-if="!noSwipe"
         slides-per-view="auto"
-        :space-between="8"
+        :space-between="swiperSpaceBetween"
         class="feature_card_swiper"
     >
         <SwiperSlide v-for="(item, i) in items" :key="i">
@@ -86,6 +88,9 @@ onUnmounted(() => {
     min-height: 300px;
     padding: 32px;
     background-color: #f8f8f8;
+    /* background-repeat: no-repeat;
+    background-position: left 32px bottom 32px;
+    background-size: auto; */
     border-radius: 12px;
     flex: 1;
     display: flex;

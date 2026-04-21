@@ -351,6 +351,7 @@
             <!-- 추천 점포 찾기 (activeD1 === 2) -->
             <section class="sec_store tab_page" v-show="activeD1 === 2">
                 <div class="inner">
+                    <p class="tab_intro">철저한 상권 조사를 바탕으로 가맹/창업을 위한 최적의 점포를 소개합니다.</p>
                     <div class="store_search">
                         <!-- 지역 -->
                         <div class="search_group">
@@ -646,6 +647,18 @@
                     </li>
                 </ul>
             </section>
+
+            <!-- 경영주 지원제도 (activeD1 === 3) -->
+            <section class="sec_owner_support tab_page" v-show="activeD1 === 3">
+                <p class="tab_intro">GS THE FRESH는 <br class="m_br"/><span>경영주와의 공동의 발전</span>을 위해 <br />
+                    다양한 상생 제도를 운영하고 있습니다.</p>
+                <PanelHeader
+                    :hero="imgBg02"
+                    title="운영지원제도"
+                    desc="GS THE FRESH 경영주님의 원활한 점포 운영을 위한 지원 제도 입니다."
+                />
+                <FeatureCards type="num" :items="supportCards" :swiper-space-between="0" />
+            </section>
         </div>
     </div>
 
@@ -667,8 +680,10 @@ import StoreCard from "@/components/StoreCard.vue";
 import StoreCardDetail from "@/components/StoreCardDetail.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
+import PanelHeader from "@/components/PanelHeader.vue";
 import modal from "@/assets/js/modal";
 import imgBg from "@/assets/images/dummy/gsrst01010101_bg.png";
+import imgBg02 from "@/assets/images/dummy/gsrst01010101_bg_02.png";
 import imgGph01 from "@/assets/images/dummy/gsrst01010101_gph_01.png";
 import imgGph01Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_01_mo.png";
 import imgGph02 from "@/assets/images/dummy/gsrst01010101_gph_02.png";
@@ -689,7 +704,7 @@ const depth1Tabs = [
     { item: "상담 및 신청" },
     { item: "가맹계약시스템" },
 ];
-
+ 
 const depth2Tabs = [
     { item: "가맹 조건 안내" },
     { item: "가맹/창업 절차" },
@@ -724,6 +739,13 @@ const precautionCards1 = [
 const precautionCards2 = [
     { num: "03", title: "기타 중도해약", desc: ["· 본부 산정", "· 개점일~ 3년 이내 : 76(74)%의 8개월", "· 3년~5년 이내 : 76(74)%의 4개월", "· 경영주 산정", "· 개점일~ 3년 이내 : 24(26)%의 8개월", "· 3년~5년 이내 : 24(26)%의 4개월"] },
     { num: "04", title: "해지 사유 발생시", desc: ["· 영업의 침해/근무계약 위반, 본부 귀산 등", "· 본부 과태 시 : 76(74)%의 12개월 분", "· 경영주 과태시 : 24(26)%의 12개월"] },
+];
+
+const supportCards = [
+    { num: "01", title: "최소 운영 보조", desc: "계약양식 조건에 따라, 개점일로부터 정해진 기간에 한해 경영주 총수입을 기준으로 하여 일정 금액이 보장될 수 있도록 본부지원금을 통해 최소 운영 보조를 지원하고 있습니다." },
+    { num: "02", title: "복리후생", desc: "경조사 발생시(가맹점 실경영주 기준 결혼 또는 조위) 경조금 및 화환 등을 지급하고 있습니다." },
+    { num: "03", title: "스토어매니저(근무자) 구인사이트 지원", desc: "GS THE FRESH 전용 배너 업체(알바천국) 운영" },
+    { num: "04", title: "기타 운영지원 제도", desc: "부진 점포에 한해, 본사 지원 활동으로 '보전점 케어활동'을 진행하며, 상권 특성 및 각종 이슈 사항으로 경제적지원금이 필요한 경우 특정점에 한해 '신규점 조기 정착 지원금'을 운영합니다. 또한, 필요시 영수도점 매출 향상을 위한 지원금을 지급하고 매년 가맹지원제도를 수립 및 운영하고 있습니다." },
 ];
 
 const seminarList = [
@@ -873,8 +895,9 @@ function toggleCard(id) {
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
 
-/* BODY */
-.sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; }
+/* BODY — PC: 좌우 20px / 모바일: 가로 패딩은 tab_page·Tabs 등에서 (아래 모바일 미디어쿼리 참고) */
+.sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+/* .sec_body > :deep(.tab_wrap) { padding-left: 20px; padding-right: 20px; box-sizing: border-box; } */
 
 /* depth3 탭 */
 .tab_d3_wrap { padding-top: 0; }
@@ -884,7 +907,7 @@ function toggleCard(id) {
 .tab_type > button.active { background-color: var(--color-brand-primary); color: #fff; border: 0; }
 
 /* 탭 페이지 공통 */
-.tab_page { padding-top: 64px; padding-bottom: 200px; }
+.tab_page { padding: 64px 0 200px; }
 .tab_content_wrap { padding-top: 40px; }
 
 /* type_info_bar */
@@ -980,9 +1003,11 @@ function toggleCard(id) {
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
     .page_header { display: none; }
-    .sec_body { padding-top: 24px; padding-bottom: 40px; }
+    .sec_body { padding: 24px 0 40px; }
     .header_title { font-size: 3.6rem; }
-    .tab_page { padding-top: 60px; padding-bottom: 80px; }
+    /* ul::after 20px spacer, tab_wrap::after 32px 그라데이션은 common.css에서 전역 처리 */
+    .tab_page { padding: 60px 20px 80px; }
+    .sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
     .tab_content_wrap { padding-top: 40px; }
     .tab_type > button { height: 48px; font-size: 1.4rem; }
     .type_info_bar { height: auto; min-height: 48px; padding: 12px 16px; font-size: 1.4rem; }
@@ -1022,6 +1047,8 @@ function toggleCard(id) {
 
 /* 추천 점포 찾기 */
 .sec_store { padding-top: 40px; }
+.tab_intro { margin-bottom:64px; font-size: 2.4rem; color: #161616; line-height: 1.5; letter-spacing: -0.01em; }
+.tab_intro span{ color:#11935D;}
 .store_search { background-color: #f8f8f8; border-radius: 12px; padding: 48px 42px; display: flex; flex-direction: column; gap: 0; }
 .search_group { display: flex; flex-direction: column; gap: 12px; }
 .search_group_label { font-size: 1.6rem; font-weight: 700; color: #161616; line-height: 1.24; }
@@ -1105,6 +1132,9 @@ function toggleCard(id) {
 /* 페이지네이션 */
 .store_pagination { display: flex; justify-content: center; margin-top: 24px; }
 
+
+
+
 /* 점포 리스트 Tablet */
 @media (max-width: 1024px) {
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
@@ -1113,6 +1143,7 @@ function toggleCard(id) {
 /* 점포 리스트 Mobile */
 @media (max-width: 768px) {
     .store_list_wrap { margin-top: 60px; }
+    .tab_intro { margin-bottom:60px; font-size: 1.8rem; line-height: 1.4;}
     .store_count { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .store_count > strong { font-weight: 400; }
     .store_search { padding: 30px 20px; }
@@ -1139,4 +1170,36 @@ function toggleCard(id) {
     .store_accordion_list :deep(dd.acc_panel.acc_show) { border: 0; }
     .accordion_badges { margin-top: 6px; }
 }
+
+
+/* 경영주 지원제도 — 가로 패딩 없음(Swiper), 텍스트·패널만 20px */
+.sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
+.sec_owner_support .tab_intro { margin-bottom: 24px; padding-left: 20px; padding-right: 20px; box-sizing: border-box; }
+.sec_owner_support :deep(.brand_panel_title) { padding: 0 20px 64px; box-sizing: border-box; }
+
+.sec_owner_support :deep(.feature_card_item) { min-height: 480px; background-repeat: no-repeat; background-position: left 32px bottom 32px; background-size: auto; }
+.sec_owner_support :deep(.feature_card_item > .feature_card_num) { color:#11935D;}
+.sec_owner_support :deep(.feature_card_list > .feature_card_item:nth-child(1)),
+.sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(1) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_01.png"); }
+.sec_owner_support :deep(.feature_card_list > .feature_card_item:nth-child(2)),
+.sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(2) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_02.png"); }
+.sec_owner_support :deep(.feature_card_list > .feature_card_item:nth-child(3)),
+.sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(3) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_03.png"); }
+.sec_owner_support :deep(.feature_card_list > .feature_card_item:nth-child(4)),
+.sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(4) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_04.png"); }
+
+@media (max-width: 768px) {
+    /* 가로 스크롤 방지: 네거티브 마진·Swiper overflow·슬라이드·카드 너비 불일치 대응 */
+    .sec_owner_support { overflow-x: hidden; }
+    /* sec_body/tab_page에 좌우 20px 없음 → 히어로는 네거티브 마진 불필요 */
+    .sec_owner_support :deep(.brand_panel_bg) { margin: 0 0 80px; }
+    .sec_owner_support :deep(.brand_panel_title) { padding: 0 20px 32px; }
+    .sec_owner_support :deep(.feature_card_swiper) { padding: 0 20px;overflow: hidden; }
+    .sec_owner_support :deep(.feature_card_swiper .swiper-slide) { width: 85.333vw; box-sizing: border-box; }
+    .sec_owner_support :deep(.feature_card_swiper .feature_card_item) { width: 100%; min-width: 0; min-height: 420px !important; box-sizing: border-box; }
+    .sec_owner_support :deep(.feature_card_swiper .swiper-slide:not(:last-child)) { margin-right: 20px; }
+}
+
+
+
 </style>
