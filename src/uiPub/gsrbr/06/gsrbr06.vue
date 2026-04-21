@@ -1,5 +1,5 @@
 <template>
-    <div class="gsrbr08" v-if="t">
+    <div class="gsrbr06" v-if="t">
         <section class="visual_section" ref="visualSection">
             <div class="visual_img" ref="visualImg">
                 <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
@@ -20,7 +20,6 @@
                     <div>
                         <p>{{ t.SubContent_1 }}</p>
                         <p>{{ t.SubContent_2 }}</p>
-                        <a :href="t.HopageLink" target="_blank">{{ t.HopageText }}</a>
                     </div>
                     <ul>
                         <li class="bi_section">
@@ -100,16 +99,14 @@ export default {
                     Visual: { // 대문자 유지
                         img: require("@/assets/images/dummy/gsrbr08.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr08_mo.png"),
-                        alt: "고객의 일상을 더욱 특별하고 재미있게 유어스",
-                        subContent_1: "고객의 일상을 ,",
-                        subContent_2: "더욱 특별하고 재미있게",
-                        subContent_3: "유어스",
+                        alt: "자동으로 포인트가 쌓이는 GS리테일 통합 멤버십 서비스 GS ALL 멤버십",
+                        subContent_1: "자동으로 포인트가 쌓이는",
+                        subContent_2: "GS리테일 통합 멤버십 서비스",
+                        subContent_3: "GS ALL 멤버십",
                     },
-                    HopageLink: `https://www.gsrbr.com/`,
-                    HopageText: `홈페이지`,
-                    SubTitle: `브랜드 소개`,
-                    SubContent_1: `함께 더 재미있는 유어스는 좋은 품질과 합리적인 가치를 기본으로 하며,`,
-                    SubContent_2: `오직 GS리테일에서만 만날 수 있는 라이프스타일 PB 브랜드입니다.`,
+                    SubTitle: `GS ALL 멤버십`,
+                    SubContent_1: `GS ALL 멤버십은 GS25, GS SHOP, GS THE FRESH 에서 혜택을 누릴 수 있는 GS리테일 통합 멤버십 서비스입니다.`,
+                    SubContent_2: `한 브랜드에서 VVIP나 VIP 달성해도 모든 브랜드 등급혜택을 누리실 수 있으니 VVIP, VIP에 도전해보세요.`,
                     Bi: {
                         txt: `BI 로고`,
                         img: require("@/assets/images/dummy/gsrbr08_bi_logo_1.png"),
@@ -175,7 +172,7 @@ export default {
 </script>
 
 <style scoped>
-.gsrbr08 { width: 100%; position: relative; display: block; }
+.gsrbr06 { width: 100%; position: relative; display: block; }
 .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 img {width:100%;}
 h4 {margin-bottom:40px; font-size:32px;}
@@ -230,7 +227,6 @@ ul li strong br {display:none;}
 
 @media screen and (max-width: 1024px) {
     .body_wrap .cont_area {padding:10.41% 20px;}
-    .body_wrap .cont_area .cont_inner ul {flex-direction:column; align-items:flex-start; gap:16px}
     .body_wrap .cont_inner:nth-of-type(2) ul {width:100%; display:flex; flex-direction:column; gap:20px}
     .body_wrap .cont_inner:nth-of-type(2) ul li {width:100%;}
     .body_wrap .cont_inner:nth-of-type(2) ul li img {width:100%; display:block;}
@@ -243,7 +239,6 @@ ul li strong br {display:none;}
     .text_box span {margin-bottom:10px; color:#fff; font-size:32px; font-weight:700; text-align:center; display: block;  }
     .body_wrap .cont_area {padding:60px 0px;}
     .bi_section {padding:0px;}
-    :deep(.desc_section h3 br) {display:block !important;}
     .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:24px; font-weight:700;}
     .body_wrap .cont_area .cont_inner ul {padding:30px; display:flex; justify-content:space-between; align-items:flex-start;}
     .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:18px; font-weight:400; line-height:1.5;}
@@ -253,9 +248,6 @@ ul li strong br {display:none;}
     .body_wrap .cont_area .cont_inner h3 + div a {right:auto; left:0; bottom:-40px;}
     ul li strong {font-size:16px;}
     ul li strong br {display:block !important;}
-    .desc_section br {display:block;}
-    .desc_section p span {font-size:18px !important; font-weight:400 !important;}
-    .desc_section p span br { display: none !important;}
     .btn_list_back span {font-size:16px;}
     .bottom_btns {display:none;}
     .bottom_btns + .btn_big.border {margin-top:0px; margin-bottom:80px; display:flex; justify-content: center;}

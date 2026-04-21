@@ -1,7 +1,7 @@
 <template>
     <div class="search_wrap">
         <!-- select -->
-        <SelectBox :options="search_opt" :modelValue="searchValue.type"  @update:modelValue="onChangeType" :initMsg="initMsg" />
+        <SelectBox v-if="useSelect" :options="search_opt" :modelValue="searchValue.type"  @update:modelValue="onChangeType" :initMsg="initMsg" />
 
         <div class="input_search_wrap">
             <!-- input -->
@@ -27,6 +27,10 @@ export default {
     },
 
     props: {
+        useSelect: { // 26.04.21 이종환 Add : select 사용 여부 선택
+            type: Boolean,
+            default: true
+        },
         initMsg: {
             type: String,
             default: "선택하세요."

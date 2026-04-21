@@ -8,6 +8,7 @@
             <ul class="explain">
                 <li><strong>[searchData]</strong> : [type] = "select 초기 선택 value 값" / [keyword] = "input 초기 입력 값"</li>
                 <li><strong>@search="handleSearch"</strong> : [검색] 버튼 클릭 시 실행 이벤트</li>
+                <li><strong>:useSelect="false"</strong> : select 사용여부 // default = "true"</li>
             </ul>
 
             <p class="tit_wrap">
