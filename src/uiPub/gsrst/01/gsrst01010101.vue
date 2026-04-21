@@ -317,7 +317,7 @@
             <div class="tab_page sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
                 <div class="link_wrap">
-                    <Buttons tag="a" href="#none" btn-class="btn_icon btn_xl">설명회신청 바로가기</Buttons>
+                    <Buttons tag="a" href="#none" btn-class="btn_icon btn_xl"> 바로가기</Buttons>
                 </div>
             </div>
  
@@ -648,6 +648,7 @@
                 </ul>
             </section>
 
+            
             <!-- 경영주 지원제도 (activeD1 === 3) -->
             <section class="sec_owner_support tab_page" v-show="activeD1 === 3">
                 <p class="tab_intro">GS THE FRESH는 <br class="m_br"/><span>경영주와의 공동의 발전</span>을 위해 <br />
@@ -658,6 +659,46 @@
                     desc="GS THE FRESH 경영주님의 원활한 점포 운영을 위한 지원 제도 입니다."
                 />
                 <FeatureCards type="num" :items="supportCards" :swiper-space-between="0" />
+            </section>
+                
+                
+            <!-- 상담 및 신청 (activeD1 === 4) -->
+            <section class="sec_consult tab_page"  v-show="activeD1 === 4">
+                <PanelHeader
+                    :hero=null
+                    title="컨설턴트와 1:1 상담"
+                    desc="가맹/창업 컨설턴트가 1:1로 상담해 드립니다. <br /> 가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.">
+                    <ul class="caution_list">
+                        <li>
+                            <p>※ 주말 및 공휴일은 연락이 불가하며 평일 09:00~17:30 사이에 연락 부탁드립니다.</p>
+                        </li>
+                    </ul>
+                </PanelHeader>
+                <ul class="consult_card_list">
+                    <li v-for="(card, i) in consultCards" :key="i" class="consult_card">
+                        <div class="consult_thumb">
+                            <!-- <img :src="card.img" :alt="card.name + ' 컨설턴트'" /> -->
+                        </div>
+                        <div class="consult_body">
+                            <div class="label_wrap">
+                                <p class="consult_label">컨설턴트</p>
+                                <p class="consult_label">{{ card.name }}</p>
+                            </div>
+                            <p class="consult_label region">{{ card.region }}</p>
+                            <p class="consult_note">{{ card.note }}</p>
+                            <button type="button" class="consult_tel_btn" @click="toggleConsultTel(i)">연락처 확인하기</button>
+                            <p v-show="consultTelOpen[i]" class="consult_tel">{{ card.tel }}</p>
+                            <div class="consult_foot">
+                                <Buttons btn-class="btn_big border btn_icon after">상담신청</Buttons>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="info_banner">
+                    <p>'입지' 및 '점포소유' 상담은 입지제안 사이트를 통해 확인 부탁드립니다.</p>
+                    <Buttons btn-class="btn_mid border btn_icon after">바로가기</Buttons>
+                </div>
             </section>
         </div>
     </div>
@@ -747,6 +788,22 @@ const supportCards = [
     { num: "03", title: "스토어매니저(근무자) 구인사이트 지원", desc: "GS THE FRESH 전용 배너 업체(알바천국) 운영" },
     { num: "04", title: "기타 운영지원 제도", desc: "부진 점포에 한해, 본사 지원 활동으로 '보전점 케어활동'을 진행하며, 상권 특성 및 각종 이슈 사항으로 경제적지원금이 필요한 경우 특정점에 한해 '신규점 조기 정착 지원금'을 운영합니다. 또한, 필요시 영수도점 매출 향상을 위한 지원금을 지급하고 매년 가맹지원제도를 수립 및 운영하고 있습니다." },
 ];
+
+const consultTelOpen = ref([]);
+const toggleConsultTel = (i) => {
+    const arr = [...consultTelOpen.value];
+    arr[i] = !arr[i];
+    consultTelOpen.value = arr;
+};
+
+const consultCards = [
+    { name: "윤경진", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst_smain_01.png"), link: "#none" },
+    { name: "이승현", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst_smain_02.png"), link: "#none" },
+    { name: "남창호",  region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst_smain_01.png"), link: "#none" },
+    { name: "남궁신영", region: "충북/강원권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst_smain_02.png"), link: "#none" },
+    { name: "김수진", region: "영남/호남권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst_smain_01.png"), link: "#none" },
+];
+
 
 const seminarList = [
     {
@@ -883,8 +940,9 @@ function toggleCard(id) {
 <style scoped>
 /* 브랜드 색 */
 .wrap_gsrst { --color-brand-primary: #15b874; }
+/*
 .wrap_gsrst :deep([class*="btn_"][class*="fill"]), .wrap_gsrst :deep([class*="btn_"][class*="icon"]), .wrap_gsrst :deep([class*="btn_"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
-.wrap_gsrst :deep([class*="btn_"][class*="border"]) { color: var(--color-brand-primary); background-color: #fff; border: 1px solid var(--color-brand-primary); }
+.wrap_gsrst :deep([class*="btn_"][class*="border"]) { color: var(--color-brand-primary); background-color: #fff; border: 1px solid var(--color-brand-primary); } */
 .txt_warning { color: #ED3030 !important; }
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
@@ -1010,7 +1068,7 @@ function toggleCard(id) {
     .sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
     .tab_content_wrap { padding-top: 40px; }
     .tab_type > button { height: 48px; font-size: 1.4rem; }
-    .type_info_bar { height: auto; min-height: 48px; padding: 12px 16px; font-size: 1.4rem; }
+    .type_info_bar { height: auto; min-height: 48px; padding: 20px 24px; font-size: 1.4rem; }
     .list_caution { margin-top: 16px; }
     .type_table_wrap { margin-top: 24px; }
     .type_table .col_item_main { width: 42px; }
@@ -1172,6 +1230,43 @@ function toggleCard(id) {
 }
 
 
+/* 상담 및 신청 */
+.caution_list { margin-top: 16px; }
+.caution_list li p { color: #67676F; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
+.consult_card_list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.consult_card { padding: 32px 24px; background: #F8F8F8; border-radius: 12px; display: flex; gap: 32px; min-width: 0; overflow: hidden; }
+.consult_thumb { flex: 1 0 0; min-height: 120px; background-color: #D7D7DF;}
+.consult_thumb > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.consult_body { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.consult_body p  { font-family: Pretendard;font-size: 1.8rem;line-height: 1.4;word-break: keep-all; }
+.consult_body p.region{margin-top:2px;}
+.consult_note { margin-top:2px;color:#67676F;}
+.consult_tel_btn { margin-top: 32px; padding: 4px; background: none; border: 0; font-size: 1.6rem; font-weight: 500; color: #15B874; letter-spacing: -0.01em; line-height: 1.5; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; white-space: nowrap; }
+.consult_tel_btn::after { content: ""; width: 16px; height: 16px; background-color: #15B874; border-radius: 50%; flex-shrink: 0; display: inline-block; }
+.consult_tel { margin-top: 4px; font-size: 1.4rem; font-weight: 500; color: #161616; letter-spacing: -0.01em; }
+.consult_foot { margin-top: 18px;  }
+.consult_foot button{max-width:123px;}
+/* .consult_foot :deep([class*="btn_"]) { width: 100%; max-width: 113px;;} */
+.info_banner { margin-top: 64px; padding: 34px 24px; background-color: #F9F2EA; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap:wrap;}
+.info_banner > p { display: flex; align-items: flex-start; gap: 12px; font-size: 1.8rem; line-height: 1.4; }
+.info_banner > p::before { content: ''; width: 27px; height: 27px; flex-shrink: 0; background-color: #FFB724;  display: block; }
+@media (max-width: 1200px) {
+    .consult_card_list { grid-template-columns: repeat(2, 1fr); }
+
+}
+@media (max-width: 768px) {
+    .info_banner{margin-top:32px;padding:20px; gap:12px;}
+    .info_banner button{margin-left:32px;}
+    .info_banner > p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .info_banner > p::before{width:24px; height:24px;}
+    .caution_list li p{font-size: 1.4rem;}
+    .consult_card{padding:30px 20px;gap:20px;}
+    .consult_card_list { grid-template-columns: 1fr; gap: 20px; }
+    .consult_thumb { flex: 0 0 135px; max-height: 180px; }
+    .consult_name { font-size: 1.6rem; }
+    .consult_foot button{max-width :100%;}
+}
+
 /* 경영주 지원제도 — 가로 패딩 없음(Swiper), 텍스트·패널만 20px */
 .sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
 .sec_owner_support .tab_intro { margin-bottom: 24px; padding-left: 20px; padding-right: 20px; box-sizing: border-box; }
@@ -1187,7 +1282,8 @@ function toggleCard(id) {
 .sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(3) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_03.png"); }
 .sec_owner_support :deep(.feature_card_list > .feature_card_item:nth-child(4)),
 .sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(4) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_04.png"); }
-
+.label_wrap{display:flex; flex-direction:column; gap:2px; }
+.consult_tel_btn{margin-top:20px;}
 @media (max-width: 768px) {
     /* 가로 스크롤 방지: 네거티브 마진·Swiper overflow·슬라이드·카드 너비 불일치 대응 */
     .sec_owner_support { overflow-x: hidden; }
@@ -1198,8 +1294,17 @@ function toggleCard(id) {
     .sec_owner_support :deep(.feature_card_swiper .swiper-slide) { width: 85.333vw; box-sizing: border-box; }
     .sec_owner_support :deep(.feature_card_swiper .feature_card_item) { width: 100%; min-width: 0; min-height: 420px !important; box-sizing: border-box; }
     .sec_owner_support :deep(.feature_card_swiper .swiper-slide:not(:last-child)) { margin-right: 20px; }
+    .label_wrap{display:flex; flex-direction:row; align-items: center; gap:0;}
+    .label_wrap .consult_label + .consult_label{font-weight:700; gap:0;}
+    .consult_body p{font-size: 1.6rem;}
+    .consult_body p.consult_label.region{margin-top:6px;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .consult_body p.consult_note{margin-top:2px;color:#67676F;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .consult_foot :deep([class*="btn_"]) {height:38px;}
+    .sec_consult :deep(.brand_panel_title){padding-bottom:32px !important;} 
 }
 
-
-
+/* 상담 및신청 */
+.sec_consult :deep(.brand_panel_title) {padding-bottom:64px;}
+.sec_consult :deep(.brand_panel_title h2){display:flex; align-items:center; gap:8px;}
+.sec_consult :deep(.brand_panel_title h2::after){content:''; display:block; width:40px; height:40px; background-color:#D7D7DF; }
 </style>
