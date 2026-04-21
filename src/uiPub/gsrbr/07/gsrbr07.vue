@@ -54,8 +54,8 @@ export default {
             langData: {
                 ko: {
                     Visual: { // 대문자 유지
-                        img: require("@/assets/images/dummy/gsrbr08.png"),
-                        imgMo: require("@/assets/images/dummy/gsrbr08_mo.png"),
+                        img: require("@/assets/images/dummy/gsrbr07.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr07_mo.png"),
                         alt: "모바일 팝으로 GS 브랜드를 더 편리하게 결제하세요!",
                         subContent_1: "모바일 팝으로",
                         subContent_2: "GS 브랜드를 더 편리하게",
@@ -148,7 +148,7 @@ ul li strong br {display:none;}
 }
 @media screen and (max-width: 767px) {
     h4 {margin-bottom:30px; font-size:18px;}
-    .text_box span {margin-bottom:10px; color:#fff; font-size:32px; font-weight:700; text-align:center; display: block;  }
+    .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .body_wrap .cont_area {padding:60px 0px;}
     .bi_section {padding:0px;}
     .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:24px; font-weight:700;}

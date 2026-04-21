@@ -167,8 +167,8 @@
         "path": "gsrbr/06/gsrbr06",
         "link": "/gsrbr06",
         "startDate": "26-04-21",
-        "endDate": "26-04-2",
-        "status": "ing",
+        "endDate": "26-04-21",
+        "status": "com",
         "note": "gsrbr0601~gsrbr0603 포함됨 "
     },
     {
@@ -177,8 +177,8 @@
         "path": "gsrbr0601",
         "link": "/gsrbr0601",
         "startDate": "26-04-21",
-        "endDate": "26-04-2",
-        "status": "ing",
+        "endDate": "26-04-21",
+        "status": "com",
         "note": "gsrbr06 확인가능"
     },
     {

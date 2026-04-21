@@ -160,7 +160,7 @@ export default {
     .bi_section {padding:30px;}
 }
 @media screen and (max-width: 767px) {
-    .text_box span {margin-bottom:10px; color:#fff; font-size:32px; font-weight:700; text-align:center; display: block;  }
+    .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .body_wrap .cont_area {padding:60px 0px;}
     .bi_section {padding:30px;}
     :deep(.desc_section h3 br) {display:block !important;}
