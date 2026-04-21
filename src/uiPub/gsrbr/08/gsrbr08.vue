@@ -240,7 +240,7 @@ ul li strong br {display:none;}
 }
 @media screen and (max-width: 767px) {
     h4 {margin-bottom:30px; font-size:18px;}
-    .text_box span {margin-bottom:10px; color:#fff; font-size:32px; font-weight:700; text-align:center; display: block;  }
+    .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .body_wrap .cont_area {padding:60px 0px;}
     .bi_section {padding:0px;}
     :deep(.desc_section h3 br) {display:block !important;}
