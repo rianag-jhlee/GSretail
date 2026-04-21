@@ -60,7 +60,7 @@ select {width:100%; height:52px; padding:12px 40px 12px 12px; font-size:1.4rem; 
 
 .btn_icon.search {}
 
-.btnBox {display:inline-flex; align-items:center;}
+.btnBox {display:inline-flex; align-items:center; flex-wrap:wrap;}
 .btnBox [class*="btn_"] + [class*="btn_"] {margin-left:8px;}
 
 /* button back */
