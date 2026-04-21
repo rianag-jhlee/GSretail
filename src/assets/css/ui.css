@@ -51,7 +51,7 @@ h5 {font-size:1.8rem;}
 .input_search_wrap {border:1px solid #c4c4d0; border-radius:12px; position:relative; flex:1; display:flex;}
 .input_search_wrap .input input {border:0;}
 .input_search_wrap .btn_search {width:20px; height:20px; font-size:0; background:red; position:absolute; top:50%; right:16px; transform:translateY(-50%);}
-.input_search_wrap .icon_del {top:15px !important; right:40px !important;}
+.input_search_wrap .icon_del {right:40px !important;}
 
 /* pagination */
 
