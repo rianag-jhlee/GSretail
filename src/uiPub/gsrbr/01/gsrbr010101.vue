@@ -3387,7 +3387,7 @@ button { background-color: #fff }
 .pop_logo_thumb { width: auto; display: block }
 @media (min-width: 769px) {
   .pop_sec_acc :deep(.acc_tit_btn) { display: none }
-  .pop_sec_acc :deep(.acc_panel) { height: auto !important; overflow: visible }
+  .pop_sec_acc :deep(.acc_panel) {padding-bottom:120px;height: auto !important; overflow: visible }
   .pop_sec_acc :deep(.acc_item) { border: none; padding-bottom: 120px }
   .pop_sec_acc :deep(.acc_item:last-child) { padding-bottom: 0 }
   .pop_sec_acc :deep(.acc_panel_cont) { padding: 0 }
