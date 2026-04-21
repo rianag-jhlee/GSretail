@@ -14,15 +14,39 @@
                     담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.</p>
             </div>
 
+            <!-- 컨설턴트와 1:1 상담 -->
+            <div class="gray_box consult_box">
+                <div class="consent_body">
+                    <div class="flex_wrap">
+                        <div class="consent_img_wrap">
+                            <!-- <img src="" alt=""> -->
+                        </div>
+                        <div class="consent_info">
+                            <h3 class="consent_info_title">컨설턴트와 1:1 상담</h3>
+                            <p>가맹/창업 컨설턴트가 1:1로 상담해 드립니다.<br />
+                                가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.</p>
+                            <button type="button">윤경진 컨설턴트</button>
+                        </div>
+                    </div>
+                    <div class="consent_notice">
+                        <ul class="list_caution">
+                            <li>
+                                <p>※ 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <!-- 개인정보 동의 -->
-            <div class="consent_box">
+            <div class="gray_box consent_box">
                 <div class="consent_info">
                     <h3 class="consent_info_title">개인정보 수집·이용 동의</h3>
                     <ul class="consent_info_list">
-                        <li>입력하신 정보는 사업설명회에 의한 확인을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같습니다.<br>기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 취급방침"을 참고하시기 바랍니다.</li>
-                        <li>수집하는 개인정보 항목 : 이름, 연락처, E-mail, 지역</li>
-                        <li>수집이용 및 목적: 수집된 개인정보를 통한 사업 및 문의사항 확인 및 답변을 위하여 활용</li>
-                        <li>보유 및 이용기간: 개인정보 수집 및 이용 목적이 달성된 후에는 예외없이 정보를 파기 합니다.</li>
+                        <li>입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.</li>
+                        <li>수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호</li>
+                        <li>수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용</li>
+                        <li>보유 및 이용기간: 접수 후 1년</li>
                     </ul>
                     <div class="consent_notice">
                         <p class="consent_notice_text">고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br class="p_br">사업설명회 신청 글 작성이 불가능합니다.</p>
@@ -34,10 +58,15 @@
                 </div>
             </div>
 
-            <!-- 신청 폼 -->
+            <div class="middle_bts_wrap">
+                <button :class="{ active: hasStore === true }"  @click="hasStore = true">내가 소유한 점포가 있다.</button>
+                <button :class="{ active: hasStore === false }" @click="hasStore = false">내가 소유한 점포가 없다.</button>
+            </div>
+
+            <!-- 고객정보 폼 -->
             <div class="apply_form">
                 <div class="form_head">
-                    <h3 class="form_head_title">신청하기</h3>
+                    <h3 class="form_head_title">고객정보</h3>
                     <span class="form_required_note">* 필수 입력사항</span>
                 </div>
                 <div class="form_body">
@@ -45,70 +74,109 @@
                     <div class="form_row">
                         <div class="form_label">이름<span class="form_required">*</span></div>
                         <div class="form_field">
-                            <Inputs type="text" v-model="seminarForm.name" />
+                            <Inputs type="text" />
+                        </div>
+                    </div>
+                    <!-- 이메일 -->
+                    <div class="form_row">
+                        <div class="form_label">이메일</div>
+                        <div class="form_field form_field_email">
+                            <Inputs type="text" v-model="consultForm.emailId" />
+                            <span class="form_sep">@</span>
+                            <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" placeholder="직접입력" />
+                            <Inputs v-else type="text" :model-value="consultForm.emailDomain" :is-readonly="true" />
+                            <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain"  />
                         </div>
                     </div>
                     <!-- 연락처 -->
                     <div class="form_row">
                         <div class="form_label">연락처<span class="form_required">*</span></div>
                         <div class="form_field form_field_phone">
-                            <SelectBox :options="phoneOptions" v-model="seminarForm.phone1" />
+                            <SelectBox :options="phoneOptions" v-model="consultForm.phone1" />
                             <span class="form_sep">-</span>
-                            <Inputs type="text" v-model="seminarForm.phone2" />
+                            <Inputs type="text" v-model="consultForm.phone2" />
                             <span class="form_sep">-</span>
-                            <Inputs type="text" v-model="seminarForm.phone3" />
+                            <Inputs type="text" v-model="consultForm.phone3" />
                         </div>
                     </div>
-                    <!-- 이메일 -->
-                    <div class="form_row">
-                        <div class="form_label">이메일<span class="form_required">*</span></div>
-                        <div class="form_field form_field_email">
-                            <Inputs type="text" v-model="seminarForm.emailId" />
-                            <span class="form_sep">@</span>
-                            <Inputs v-if="seminarForm.emailDomain === ''" type="text" v-model="seminarForm.emailDomainCustom" placeholder="직접입력" />
-                            <Inputs v-else type="text" :model-value="seminarForm.emailDomain" :is-readonly="true" />
-                            <SelectBox :options="emailDomainOptions" v-model="seminarForm.emailDomain" initMsg="직접입력" />
-                        </div>
-                    </div>
+
                     <!-- 개설희망지역 -->
                     <div class="form_row">
-                        <div class="form_label">개설희망지역<span class="form_required">*</span></div>
+                        <div class="form_label">소유점포 주소 <br />(과거, 현재 점포소유 <br>신청자에 한함)<span class="form_required">*</span></div>
                         <div class="form_field form_field_region">
-                            <SelectBox :options="regionSidoOptions" v-model="seminarForm.regionSido" initMsg="지역선택" />
-                            <SelectBox :options="[]" v-model="seminarForm.regionSigungu" initMsg="구/군 선택" />
+                            <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" initMsg="시/도 선택" @update:modelValue="consultForm.regionSigungu = ''" />
+                            <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" initMsg="구/군 선택" :disabled="!consultForm.regionSido" />
                         </div>
                     </div>
-                    <!-- 재직중인 과거직장 -->
-                    <div class="form_row">
-                        <div class="form_label">재직중인 과거직장</div>
-                        <div class="form_field">
-                            <Inputs type="text" v-model="seminarForm.prevJob" />
+                </div>
+            </div>
+
+            <!-- 상담내용 폼 (점포 소유 시에만 표시) -->
+            <div class="apply_form" v-show="hasStore === true">
+                <div class="form_head">
+                    <h3 class="form_head_title">상담내용</h3>
+                    <span class="form_required_note">* 필수 입력사항</span>
+                </div>
+                <div class="form_body">
+                    <!-- 소유점포 면적 -->
+                    <div class="form_row form_row_area">
+                        <div class="form_label">소유점포 면적</div>
+                        <div class="form_field form_field_area">
+                            <div class="area_group">
+                                <span class="form_sub_label">계약면적</span>
+                                <div class="area_input_wrap">
+                                    <Inputs type="text" v-model="consultForm.areaContract" />
+                                </div>
+                                <span class="area_unit">m²</span>
+                            </div>
+                            <div class="area_group">
+                                <span class="form_sub_label">전용면적</span>
+                                <div class="area_input_wrap">
+                                    <Inputs type="text" v-model="consultForm.areaExclusive" />
+                                </div>
+                                <span class="area_unit">m²</span>
+                            </div>
+                            <span class="area_note">* m² = (기준)평 x 3.3</span>
                         </div>
                     </div>
-                    <!-- 사업설명회 신청 지역 -->
-                    <div class="form_row form_row_radio">
-                        <div class="form_label">사업 설명회 신청<br class="p_br">지역<span class="form_required">*</span></div>
-                        <div class="form_field form_field_radio">
-                            <Inputs
-                                v-for="opt in seminarRegionOptions"
-                                :key="opt.value"
-                                type="radio"
-                                name="seminar_region"
-                                :value="opt.value"
-                                v-model="seminarForm.seminarRegion"
-                                :text="opt.label"
-                            />
+                    <!-- 수퍼 운영자 일 경우 -->
+                    <div class="form_row form_row_check">
+                        <div class="form_label">수퍼 운영자 일 경우</div>
+                        <div class="form_field form_field_check">
+                            <div class="check_group">
+                                <span class="form_sub_label">취급 품목 체크</span>
+                                <div class="check_list">
+                                    <Inputs v-for="opt in superItemOptions" :key="opt.value"
+                                            type="checkbox" :value="opt.value" v-model="consultForm.superItems" :text="opt.label" />
+                                </div>
+                            </div>
+                            <div class="check_etc">
+                                <span class="form_sub_label">기타</span>
+                                <Inputs type="text" v-model="consultForm.superItemEtc" />
+                            </div>
                         </div>
                     </div>
-                    <!-- 내용 -->
-                    <div class="form_row form_row_textarea">
-                        <div class="form_label">내용<span class="form_required">*</span></div>
-                        <div class="form_field">
-                            <Textarea
-                                v-model="seminarForm.content"
-                                :placeholder="contentPlaceholder"
-                                :rows="6"
-                            />
+                    <!-- 계약조건 -->
+                    <div class="form_row form_row_contract">
+                        <div class="form_label">계약조건</div>
+                        <div class="form_field form_field_contract">
+                            <div class="contract_row">
+                                <span class="form_sub_label">계약 기간</span>
+                                <div class="contract_period">
+                                    <Inputs type="text" v-model="consultForm.contractStart"/>
+                                    <span class="form_sep">~</span>
+                                    <Inputs type="text" v-model="consultForm.contractEnd" />
+                                </div>
+                            </div>
+                            <div class="contract_row">
+                                <span class="form_sub_label">보증금/월임대료</span>
+                                <div class="contract_rent">
+                                    <Inputs type="text" v-model="consultForm.deposit" />
+                                    <span class="area_unit">만원</span>
+                                    <Inputs type="text" v-model="consultForm.monthlyRent" />
+                                    <span class="area_unit">만원</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,22 +186,96 @@
         </div>
         
         <div class="smn_bottom">
-            <Buttons btn-class="btn_big primary">신청</Buttons>
-            <Buttons btn-class="btn_big gary" @click="closeModal">취소</Buttons>
+            <Buttons btn-class="btn_big primary">상담신청</Buttons>
+            <Buttons btn-class="btn_big gary" @click="closeModal">다시작성</Buttons>
         </div>
 
     </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, onUnmounted } from "vue";
+import { ref, reactive, computed } from "vue";
 import modal from "@/assets/js/modal";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
-import Textarea from "@/components/Textarea.vue";
 import Buttons from "@/components/Buttons.vue";
 
 const consentAgree = ref("");
+const hasStore = ref(null); // null: 미선택 / true: 있다 / false: 없다
+
+const superItemOptions = [
+    { value: "농산", label: "농산" },
+    { value: "축산", label: "축산" },
+    { value: "수산", label: "수산" },
+    { value: "공산품", label: "공산품" },
+    { value: "조리", label: "조리" },
+];
+
+const sidoOptions = [
+    { value: "서울", label: "서울특별시" },
+    { value: "부산", label: "부산광역시" },
+    { value: "대구", label: "대구광역시" },
+    { value: "인천", label: "인천광역시" },
+    { value: "광주", label: "광주광역시" },
+    { value: "대전", label: "대전광역시" },
+    { value: "울산", label: "울산광역시" },
+    { value: "세종", label: "세종특별자치시" },
+    { value: "경기", label: "경기도" },
+    { value: "강원", label: "강원특별자치도" },
+    { value: "충북", label: "충청북도" },
+    { value: "충남", label: "충청남도" },
+    { value: "전북", label: "전북특별자치도" },
+    { value: "전남", label: "전라남도" },
+    { value: "경북", label: "경상북도" },
+    { value: "경남", label: "경상남도" },
+    { value: "제주", label: "제주특별자치도" },
+];
+
+const sigunguMap = {
+    서울: ["종로구","중구","용산구","성동구","광진구","동대문구","중랑구","성북구","강북구","도봉구","노원구","은평구","서대문구","마포구","양천구","강서구","구로구","금천구","영등포구","동작구","관악구","서초구","강남구","송파구","강동구"],
+    부산: ["중구","서구","동구","영도구","부산진구","동래구","남구","북구","해운대구","사하구","금정구","강서구","연제구","수영구","사상구","기장군"],
+    대구: ["중구","동구","서구","남구","북구","수성구","달서구","달성군","군위군"],
+    인천: ["중구","동구","미추홀구","연수구","남동구","부평구","계양구","서구","강화군","옹진군"],
+    광주: ["동구","서구","남구","북구","광산구"],
+    대전: ["동구","중구","서구","유성구","대덕구"],
+    울산: ["중구","남구","동구","북구","울주군"],
+    세종: ["세종시"],
+    경기: ["수원시","성남시","의정부시","안양시","부천시","광명시","평택시","동두천시","안산시","고양시","과천시","구리시","남양주시","오산시","시흥시","군포시","의왕시","하남시","용인시","파주시","이천시","안성시","김포시","화성시","광주시","양주시","포천시","여주시","연천군","가평군","양평군"],
+    강원: ["춘천시","원주시","강릉시","동해시","태백시","속초시","삼척시","홍천군","횡성군","영월군","평창군","정선군","철원군","화천군","양구군","인제군","고성군","양양군"],
+    충북: ["청주시","충주시","제천시","보은군","옥천군","영동군","증평군","진천군","괴산군","음성군","단양군"],
+    충남: ["천안시","공주시","보령시","아산시","서산시","논산시","계룡시","당진시","금산군","부여군","서천군","청양군","홍성군","예산군","태안군"],
+    전북: ["전주시","군산시","익산시","정읍시","남원시","김제시","완주군","진안군","무주군","장수군","임실군","순창군","고창군","부안군"],
+    전남: ["목포시","여수시","순천시","나주시","광양시","담양군","곡성군","구례군","고흥군","보성군","화순군","장흥군","강진군","해남군","영암군","무안군","함평군","영광군","장성군","완도군","진도군","신안군"],
+    경북: ["포항시","경주시","김천시","안동시","구미시","영주시","영천시","상주시","문경시","경산시","군위군","의성군","청송군","영양군","영덕군","청도군","고령군","성주군","칠곡군","예천군","봉화군","울진군","울릉군"],
+    경남: ["창원시","진주시","통영시","사천시","김해시","밀양시","거제시","양산시","의령군","함안군","창녕군","고성군","남해군","하동군","산청군","함양군","거창군","합천군"],
+    제주: ["제주시","서귀포시"],
+};
+
+const sigunguOptions = computed(() => {
+    const list = sigunguMap[consultForm.regionSido] || [];
+    return list.map(v => ({ value: v, label: v }));
+});
+
+const consultForm = reactive({
+    name: "",
+    phone1: "010",
+    phone2: "",
+    phone3: "",
+    emailId: "",
+    emailDomain: "",
+    emailDomainCustom: "",
+    regionSido: "",
+    regionSigungu: "",
+    prevJob: "",
+    areaContract: "",
+    areaExclusive: "",
+    superItems: [],
+    superItemEtc: "",
+    contractStart: "",
+    contractEnd: "",
+    deposit: "",
+    monthlyRent: "",
+});
 
 const phoneOptions = [
     { value: "010", label: "010" },
@@ -150,48 +292,6 @@ const emailDomainOptions = [
     { value: "kakao.com", label: "kakao.com" },
     { value: "hanmail.net", label: "hanmail.net" },
 ];
-const regionSidoOptions = [
-    { value: "서울", label: "서울" },
-    { value: "경기", label: "경기" },
-    { value: "인천", label: "인천" },
-    { value: "충청", label: "충청" },
-    { value: "강원", label: "강원" },
-    { value: "제주", label: "제주" },
-    { value: "전라", label: "전라" },
-    { value: "경상", label: "경상" },
-];
-const seminarRegionOptions = [
-    { value: "수도",     label: "수도 (서울, 경기, 인천)" },
-    { value: "중부",     label: "중부 (충청, 강원, 제주)" },
-    { value: "영남호남", label: "영남/호남 (전라, 경상)" },
-];
-
-const seminarForm = reactive({
-    name: "",
-    phone1: "010",
-    phone2: "",
-    phone3: "",
-    emailId: "",
-    emailDomain: "",
-    emailDomainCustom: "",
-    regionSido: "",
-    regionSigungu: "",
-    prevJob: "",
-    seminarRegion: "",
-    content: "",
-});
-
-const isMobile = ref(false);
-const mq = window.matchMedia("(max-width: 768px)");
-function onMqChange(e) { isMobile.value = e.matches; }
-onMounted(() => { isMobile.value = mq.matches; mq.addEventListener("change", onMqChange); });
-onUnmounted(() => { mq.removeEventListener("change", onMqChange); });
-
-const contentPlaceholder = computed(() =>
-    isMobile.value
-        ? "개설 희망 타입을 적어주세요.\n(타입 GSF1, GSF2, GSF3)"
-        : "개설 희망 타입을 적어주세요. (타입 GSF1, GSF2, GSF3)"
-);
 
 function closeModal(event) {
     modal.close(event.currentTarget);
@@ -202,6 +302,7 @@ function closeModal(event) {
 /* 모달 래퍼 */
 
 /* 타이틀 */
+.smn_modal{--color-brand-primary: #15b874;}
 .smn_title_row {
     display: flex;
     align-items: flex-start;
@@ -212,7 +313,7 @@ function closeModal(event) {
 }
 
 .smn_title {
-    color: #161616;
+   
     font-size: 4rem;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -252,23 +353,36 @@ function closeModal(event) {
 }
 .smn_intro > p {
     margin-top:16px;
-    color: #161616;
+   
     font-size: 2rem;
     font-weight: 400;
     letter-spacing: -0.01em;
     line-height: 1.35;
 }
 
+/* 컨설턴트와 1:1 상담 박스 */
+.consent_body { padding: 32px; }
+.flex_wrap{ display: flex; align-items: flex-start; gap: 20px;}
+.consent_img_wrap { width: 114px; height: 152px;;border:1px solid #000; flex-shrink: 0; overflow: hidden; }
+.consent_img_wrap > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.consult_box .consent_info { padding:0;display: flex; flex-direction: column; gap: 24px; }
+.consult_box .consent_info_title { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; }
+.consult_box .consent_info > p { font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
+.consult_box .consent_info > button { width: fit-content; padding: 4px 12px; background:#E8F8F1; border: 1px solid #15B874; border-radius: 100px; color: #15B874; font-size: 1.4rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.4; cursor: default; }
+.consult_box .consent_notice { border-top: 1px solid #E5E5E9;}
+.list_caution { list-style: none; margin: 0; padding: 0; }
+.list_caution > li > p { color: #67676F; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
+
 /* 개인정보 동의 */
-.consent_box {
-    margin-top:40px;
+.gray_box {
+    margin-top: 40px;
     border-radius: 12px;
     background-color: #f8f8f8;
     overflow: hidden;
 }
 .consent_info { padding: 32px; }
 .consent_info_title {
-    color: #161616;
+   
     font-size: 2.4rem;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -309,7 +423,7 @@ function closeModal(event) {
     gap: 16px;
 }
 .consent_notice_text {
-    color: #161616; 
+    
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 1.24;
@@ -350,13 +464,19 @@ function closeModal(event) {
     transform: translate(-50%, -50%);
 }
 .consent_radio_text {
-    color: #161616;
+   
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 1.4;
 }
+/* 점포 소유 선택 버튼 */
+.middle_bts_wrap { margin-top: 40px; display: flex; gap: 8px; }
+.middle_bts_wrap > button {height: 52px; padding: 0 16px; background: #fff; border: 1px solid #90909A; border-radius: 10px; font-size: 1.8rem; font-weight: 700; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
+.middle_bts_wrap > button:hover, .middle_bts_wrap > button.active { border-color: #107AF2; color: #107AF2; }
+
 /* 신청 폼 */
 .apply_form { margin-top: 40px; }
+.apply_form + .apply_form{margin-top: 64px; } 
 .form_head {
     height: 48px;
     padding-bottom: 16px;
@@ -366,7 +486,7 @@ function closeModal(event) {
     justify-content: space-between;
 }
 .form_head_title {
-    color: #161616;
+   
     font-size: 2.4rem;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -377,7 +497,7 @@ function closeModal(event) {
     font-size: 1.4rem;
     line-height: 1.4;
 }
-.form_body { padding:12px 0;border-top: 1px solid #e5e5e9; }
+.form_body { padding:12px 0;border-bottom: 1px solid #E5E5E9; }
 .form_row {
     min-height: 52px;
     padding: 12px 0;
@@ -388,20 +508,14 @@ function closeModal(event) {
 }
 .form_row_radio,
 .form_row_textarea { align-items: start; }
-.form_label {
-    color: #161616;
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.5;
-}
+/* 레이블 공통 */
+.form_label, .form_sub_label { flex-shrink: 0; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
 .form_required {
     margin-left: 2px;
     color: #fb6432;
 }
 .form_field {
     display: flex;
-    align-items: center;
     gap: 8px;
     flex-wrap: wrap;
     min-width: 0;
@@ -416,30 +530,74 @@ function closeModal(event) {
 }
 
 /* 연락처 */
+.form_field_phone{align-items: center;}
 .form_field_phone :deep(.select) { width: 134px; flex-shrink: 0;}
 .form_field_phone :deep(.select select) { width: 100%;font-size:1.6rem  }
 .form_field_phone > :deep(.input_wrap) { max-width:134px;flex: 1; min-width: 80px; }
 
-/* 이메일 */
-.form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 0 0 205px; }
-.form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 0 0 180px; }
-.form_field_email :deep(.select) { width: 140px; flex: 1 0 180px; }
-.form_field_email :deep(.select select) { width: 100%; font-size:1.6rem;}
+/* 이메일 (순서: 로컬 205px / 도메인 180px / 셀렉트 180px) */
+.form_field_email { align-items: center; }
+.form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 0 0 205px; width: 205px; min-width: 0; }
+.form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 0 0 180px; width: 180px; min-width: 0; }
+.form_field_email :deep(.select) { flex: 0 0 180px; width: 180px; min-width: 0; }
+.form_field_email :deep(.select select) { width: 100%; font-size: 1.6rem; }
 
 /* 개설희망지역 */
 .form_field_region { flex-wrap: nowrap; }
-.form_field_region :deep(.select) { flex: 1; min-width: 0; }
+.form_field_region :deep(.select) { flex: 1; min-width: 0; max-width:220px;}
 .form_field_region :deep(.select select) { width: 100%; font-size:1.6rem; }
 
 /* 사업설명회 신청 지역 라디오 */
 .form_field_radio {padding:13px 0; gap:8px; }
 .form_field_radio :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
 .form_field_radio :deep(.check) { gap: 8px; white-space: nowrap; cursor: pointer; }
-.form_field_radio :deep(.label) { font-size: 1.8rem; color: #161616; }
+.form_field_radio :deep(.label) { font-size: 1.8rem; }
 
 /* textarea */
 .form_row_textarea .form_field { display: block; }
 .form_field > :deep(.textarea_wrap) { width: 100%; }
+
+/* 소유점포 면적 */
+.form_row_area { align-items: center; }
+.form_field_area { align-items: center; gap: 24px; }
+.area_group { display: flex; align-items: center; gap: 8px; }
+.form_sub_label { color: #67676F; }
+.area_input_wrap { position: relative; display: flex; align-items: center; }
+.area_input_wrap :deep(.input_wrap) { width: 160px; }
+.area_input_wrap :deep(input) { padding-right: 40px; }
+.btn_area_search { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; background: none; border: 0; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; }
+.btn_area_search::after { content: ""; width: 18px; height: 18px; background-color: #9292A0; display: block; mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Ccircle cx='8' cy='8' r='5.5' stroke='%23000' stroke-width='1.5'/%3E%3Cpath d='m12 12 3 3' stroke='%23000' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); mask-repeat: no-repeat; mask-size: contain; }
+.area_unit { flex-shrink: 0; font-size: 1.6rem; letter-spacing: -0.01em; }
+.area_note { font-size: 1.4rem; color: #107AF2; letter-spacing: -0.01em; line-height: 1.5; }
+
+/* 수퍼 운영자 */
+.form_row_check { align-items: start; }
+.form_field_check { flex-direction: column; gap: 12px; }
+.check_group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.check_list { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.check_list :deep(.input_wrap) { width: auto; }
+.check_list :deep(.check) { gap: 8px; cursor: pointer; }
+.check_list :deep(.label) { font-size: 1.8rem; white-space: nowrap; }
+.check_etc { display: flex; align-items: center; gap: 12px; }
+.check_etc .form_sub_label { min-width: 28px; }
+.check_etc :deep(.input_wrap) { flex: 1; max-width: 428px; }
+
+/* 계약조건 */
+.form_row_contract { align-items: start; }
+.form_field_contract { flex-direction: column; gap: 16px; }
+.contract_row { display: flex; align-items: center; gap: 12px; }
+.contract_row .form_sub_label { min-width: 88px; }
+.contract_period { display: flex; align-items: center; gap: 8px; }
+.contract_period :deep(.input_wrap) { width: 134px; }
+.contract_rent { display: flex; align-items: center; gap: 8px; }
+.contract_rent :deep(.input_wrap) { width: 134px; }
+
+/* Search 필드 */
+.form_field_search { display: block; }
+.form_field_search :deep(.search_wrap) { width: 100%; display: flex; gap: 8px; }
+.form_field_search :deep(.input_search_wrap) { flex: 1; min-width: 0; position: relative; display: flex; }
+.form_field_search :deep(.input_wrap) { flex: 1; min-width: 0; }
+.form_field_search :deep(.btn_search) { flex-shrink: 0; height: 52px; padding: 0 20px; background: #161616; border: 0; border-radius: 10px; color: #fff; font-size: 1.6rem; cursor: pointer; }
 
 /* 버튼 영역 */
 .smn_bottom {
@@ -470,7 +628,6 @@ function closeModal(event) {
     .smn_title_row { min-height: 60px; margin:0 -20px; padding:17px 20px; border-bottom:1px solid #C4C4D0;}
     .smn_title { font-size: 1.8rem; line-height: 1.4; }
     .smn_close { width: 24px;height: 24px; }
-    .smn_intro {display: none;;}
     .smn_intro > p{margin-top:12px;}
 
     /* 개인정보 동의 */
@@ -511,4 +668,6 @@ function closeModal(event) {
     .smn_bottom{margin-top:0; margin-bottom: 124px; justify-content: center;}
     .smn_bottom > :deep(.btn_big) {width:100%;flex:1;}
 }
+
+.smn_bottom :deep(.primary){background-color:var(--color-brand-primary);}
 </style>
