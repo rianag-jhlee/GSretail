@@ -689,7 +689,7 @@
                             <button type="button" class="consult_tel_btn" @click="toggleConsultTel(i)">연락처 확인하기</button>
                             <p v-show="consultTelOpen[i]" class="consult_tel">{{ card.tel }}</p>
                             <div class="consult_foot">
-                                <Buttons btn-class="btn_big border btn_icon after">상담신청</Buttons>
+                                <Buttons btn-class="btn_big border btn_icon after" data-popid="modal_gsrst_consult" data-type="lg" data-cont="gsrst010301" @click.prevent="openModal">상담신청</Buttons>
                             </div>
                         </div>
                     </li>
@@ -708,6 +708,11 @@
         <div class="modal_container"></div>
     </div>
     <!-- //사업설명회 신청 모달 -->
+    <!-- 상담 신청 모달 -->
+    <div id="modal_gsrst_consult" class="modal_wrap">
+        <div class="modal_container"></div>
+    </div>
+    <!-- //상담 신청 모달 -->
 </template>
 
 <script setup> 
