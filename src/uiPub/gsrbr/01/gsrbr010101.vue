@@ -65,7 +65,7 @@
                             class="btn_store_find"
                             data-popid="pop_store_find"
                             data-type="lg"
-                            data-cont="store_find"
+                            data-cont="gsrbr0106"
                             @click.prevent="openModal"
                         >매장 찾기</a>
                         <div class="sns_wrap">
