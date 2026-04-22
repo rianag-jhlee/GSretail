@@ -102,7 +102,7 @@
 
                     <!-- 개설희망지역 -->
                     <div class="form_row">
-                        <div class="form_label">소유점포 주소 <br />(과거, 현재 점포소유 <br>신청자에 한함)<span class="form_required">*</span></div>
+                        <div class="form_label">소유점포 주소 <br class="p_br"/>(과거, 현재 점포소유 <br class="p_br">신청자에 한함)<span class="form_required">*</span></div>
                         <div class="form_field form_field_region">
                             <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" initMsg="시/도 선택" @update:modelValue="consultForm.regionSigungu = ''" />
                             <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" initMsg="구/군 선택" :disabled="!consultForm.regionSido" />
@@ -122,28 +122,28 @@
                     <div class="form_row form_row_area">
                         <div class="form_label">소유점포 면적</div>
                         <div class="form_field form_field_area">
-                            <div class="area_group">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">계약면적</span>
-                                <div class="area_input_wrap">
-                                    <Inputs type="text" v-model="consultForm.areaContract" />
+                                <div class="form_sub_input_wrap">
+                                    <Inputs type="number" min="0" step="any" v-model="consultForm.areaContract" />
+                                    <span class="form_sub_unit">m²</span>
                                 </div>
-                                <span class="area_unit">m²</span>
                             </div>
-                            <div class="area_group">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">전용면적</span>
-                                <div class="area_input_wrap">
-                                    <Inputs type="text" v-model="consultForm.areaExclusive" />
+                                <div class="form_sub_input_wrap">
+                                    <Inputs type="number" min="0" step="any" v-model="consultForm.areaExclusive" />
+                                    <span class="form_sub_unit">m²</span>
                                 </div>
-                                <span class="area_unit">m²</span>
                             </div>
                             <span class="area_note">* m² = (기준)평 x 3.3</span>
                         </div>
                     </div>
                     <!-- 수퍼 운영자 일 경우 -->
-                    <div class="form_row form_row_check">
+                    <div class="form_row check_row">
                         <div class="form_label">수퍼 운영자 일 경우</div>
                         <div class="form_field form_field_check">
-                            <div class="check_group">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">취급 품목 체크</span>
                                 <div class="check_list">
                                     <Inputs v-for="opt in superItemOptions" :key="opt.value"
@@ -157,24 +157,28 @@
                         </div>
                     </div>
                     <!-- 계약조건 -->
-                    <div class="form_row form_row_contract">
+                    <div class="form_row contract_row">
                         <div class="form_label">계약조건</div>
                         <div class="form_field form_field_contract">
-                            <div class="contract_row">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">계약 기간</span>
-                                <div class="contract_period">
+                                <div class="form_sub_inputs">
                                     <Inputs type="text" v-model="consultForm.contractStart"/>
                                     <span class="form_sep">~</span>
                                     <Inputs type="text" v-model="consultForm.contractEnd" />
                                 </div>
                             </div>
-                            <div class="contract_row">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">보증금/월임대료</span>
                                 <div class="contract_rent">
-                                    <Inputs type="text" v-model="consultForm.deposit" />
-                                    <span class="area_unit">만원</span>
-                                    <Inputs type="text" v-model="consultForm.monthlyRent" />
-                                    <span class="area_unit">만원</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="number" min="0" step="1" v-model="consultForm.deposit" />
+                                        <span class="form_sub_unit">만원</span>
+                                    </div>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="number" min="0" step="1" v-model="consultForm.monthlyRent" />
+                                        <span class="form_sub_unit">만원</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -303,6 +307,7 @@ function closeModal(event) {
 
 /* 타이틀 */
 .smn_modal{--color-brand-primary: #15b874;}
+.smn_bottom :deep(.primary){background-color:var(--color-brand-primary);}
 .smn_title_row {
     display: flex;
     align-items: flex-start;
@@ -506,6 +511,7 @@ function closeModal(event) {
     align-items: center;
     gap: 0 8px;
 }
+.check_row { align-items: start; }
 .form_row_radio,
 .form_row_textarea { align-items: start; }
 /* 레이블 공통 */
@@ -521,7 +527,7 @@ function closeModal(event) {
     min-width: 0;
 }
 /* 단일 input이 꽉 채우도록 */
-.form_field > :deep(.input_wrap) { flex: 1; min-width: 0; }
+.form_field > :deep(.input_wrap) { flex: 1; min-width: 0; max-width:205px;}
 
 .form_sep {
     color: #67676f;
@@ -560,21 +566,24 @@ function closeModal(event) {
 /* 소유점포 면적 */
 .form_row_area { align-items: center; }
 .form_field_area { align-items: center; gap: 24px; }
-.area_group { display: flex; align-items: center; gap: 8px; }
+/* 라벨 + 입력/체크 묶음 (면적 / 취급품목 / 계약조건 공통) */
+.form_sub_group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.form_field_check .form_sub_group { gap: 12px; }
+.form_field_contract .form_sub_group { gap: 12px; }
+.form_field_contract .form_sub_group .form_sub_label { min-width: 88px; }
 .form_sub_label { color: #67676F; }
-.area_input_wrap { position: relative; display: flex; align-items: center; }
-.area_input_wrap :deep(.input_wrap) { width: 160px; }
-.area_input_wrap :deep(input) { padding-right: 40px; }
+/* 입력 + 단위 (m², 만원 등) */
+.form_sub_input_wrap { display: flex; align-items: center; gap: 8px; }
+.form_field_area .form_sub_input_wrap :deep(.input_wrap) { width: 160px; }
+.form_field_area .form_sub_input_wrap :deep(input) { padding-right: 40px; }
 .btn_area_search { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; background: none; border: 0; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; }
 .btn_area_search::after { content: ""; width: 18px; height: 18px; background-color: #9292A0; display: block; mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Ccircle cx='8' cy='8' r='5.5' stroke='%23000' stroke-width='1.5'/%3E%3Cpath d='m12 12 3 3' stroke='%23000' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); mask-repeat: no-repeat; mask-size: contain; }
-.area_unit { flex-shrink: 0; font-size: 1.6rem; letter-spacing: -0.01em; }
+.form_sub_unit { flex-shrink: 0; font-size: 1.6rem; letter-spacing: -0.01em; }
 .area_note { font-size: 1.4rem; color: #107AF2; letter-spacing: -0.01em; line-height: 1.5; }
 
 /* 수퍼 운영자 */
-.form_row_check { align-items: start; }
 .form_field_check { flex-direction: column; gap: 12px; }
-.check_group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.check_list { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.check_list { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .check_list :deep(.input_wrap) { width: auto; }
 .check_list :deep(.check) { gap: 8px; cursor: pointer; }
 .check_list :deep(.label) { font-size: 1.8rem; white-space: nowrap; }
@@ -583,14 +592,11 @@ function closeModal(event) {
 .check_etc :deep(.input_wrap) { flex: 1; max-width: 428px; }
 
 /* 계약조건 */
-.form_row_contract { align-items: start; }
 .form_field_contract { flex-direction: column; gap: 16px; }
-.contract_row { display: flex; align-items: center; gap: 12px; }
-.contract_row .form_sub_label { min-width: 88px; }
-.contract_period { display: flex; align-items: center; gap: 8px; }
-.contract_period :deep(.input_wrap) { width: 134px; }
-.contract_rent { display: flex; align-items: center; gap: 8px; }
-.contract_rent :deep(.input_wrap) { width: 134px; }
+.form_sub_inputs { display: flex; align-items: center; gap: 8px; }
+.form_sub_inputs :deep(.input_wrap) { width: 134px; }
+.contract_rent { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.contract_rent .form_sub_input_wrap :deep(.input_wrap) { width: 134px; }
 
 /* Search 필드 */
 .form_field_search { display: block; }
@@ -625,6 +631,8 @@ function closeModal(event) {
 
 /* 모바일 */
 @media (max-width: 768px) {
+    .smn_modal{padding: 0 0 32px;}
+    .modal_content {padding :40px 0;}
     .smn_title_row { min-height: 60px; margin:0 -20px; padding:17px 20px; border-bottom:1px solid #C4C4D0;}
     .smn_title { font-size: 1.8rem; line-height: 1.4; }
     .smn_close { width: 24px;height: 24px; }
@@ -638,8 +646,7 @@ function closeModal(event) {
     .consent_notice_text{font-size: 1.4rem; line-height: 1.4;}
 
     /* 폼 레이아웃: 레이블 + 필드 세로 배치 */
-    .form_head { height: auto; padding-bottom: 12px; }
-    .form_head_title { font-size: 2rem; }
+    .form_head { height: auto; padding-bottom: 16px; }
     .form_body{padding:30px 0;}
     .form_row {padding:20px 0; grid-template-columns: 1fr; gap: 0; }
     .form_row:first-child {padding-top:0;}
@@ -658,16 +665,90 @@ function closeModal(event) {
     .form_field_region { flex-wrap: wrap; }
     .form_field_region :deep(.select) { flex: 1 0 100%; width: 100%; }
 
-    .form_label{margin-bottom: 12px;}
+    .form_label{margin-bottom: 16px;font-weight: 700;font-size: 1.6rem;line-height: 1.24;}
 
     /* 라디오 */
     .consent_radio{width:20px; height: 20px;;}
-    .consent_radio_text{font-size: 1.6rem;}
+    .consent_radio_text{font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em;}
     .form_field_radio { flex-direction: column; gap: 20px; align-items: flex-start; }
     .form_field_radio label{font-size: 1.6rem;letter-spacing: -0.01em;line-height: 1.5;}
-    .smn_bottom{margin-top:0; margin-bottom: 124px; justify-content: center;}
+    .smn_bottom{margin-top:0; justify-content: center;}
     .smn_bottom > :deep(.btn_big) {width:100%;flex:1;}
+
+    .smn_intro strong{      font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
+    .smn_intro p{margin-top:12px; font-size: 1.8rem;line-height: 1.4;letter-spacing: 0%;}
+    .gray_box{margin-top:32px;}
+    .consent_body{padding:30px 20px;}
+    .consent_img_wrap{
+        width:90px;
+        height:120px;
+    }
+    .consult_box .consent_info_title{
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0%;
+
+    }
+    .consult_box .consent_info{
+        gap:6px;
+    }
+    .consult_box .consent_info > p{
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+
+    }
+    .consult_box .consent_info > button{
+        margin-top:6px;
+    }
+
+    .consent_notice{
+        margin-top:24px;
+        padding-top:24px;
+    }
+    .consult_box .consent_notice{
+        margin-top:16px;
+        padding-top:16px;
+    }
+    .list_caution > li > p{ 
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+
+    }
+    .gray_box{margin-top:60px;}
+    .middle_bts_wrap{gap:6px;}
+    .middle_bts_wrap > button{
+        padding:0 5px;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+
+    }
+    .form_field_region :deep(.select){
+        max-width: 100%;
+    }
+    .form_sub_group {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    .apply_form + .apply_form{
+        margin-top:60px;
+    }
+    .form_field_area .form_sub_input_wrap { width: 100%; }
+    .form_field_area .form_sub_input_wrap :deep(.input_wrap) {
+        width: 100%;
+    }
+    .form_field > :deep(.input_wrap) {max-width: 100%;}
+    .form_field_area{
+        gap:16px;
+    }
+    .check_etc{flex-direction: column; gap:12px; align-items: flex-start;}
+    .form_sub_inputs :deep(.input_wrap) {width:100%;}
+    .form_sub_input_wrap{flex:1;}
 }
 
-.smn_bottom :deep(.primary){background-color:var(--color-brand-primary);}
+
 </style>
