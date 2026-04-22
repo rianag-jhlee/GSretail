@@ -116,7 +116,7 @@
         </div>
         
         <div class="smn_bottom">
-            <Buttons btn-class="btn_big primary">신청</Buttons>
+            <Buttons btn-class="btn_big fill primary">신청</Buttons>
             <Buttons btn-class="btn_big gary" @click="closeModal">취소</Buttons>
         </div>
 
@@ -164,6 +164,8 @@ const seminarRegionOptions = [
     { value: "영남호남", label: "영남/호남 (전라, 경상)" },
 ];
 
+
+
 const seminarForm = reactive({
     name: "",
     phone1: "010",
@@ -198,7 +200,9 @@ function closeModal(event) {
 
 <style scoped>
 /* 모달 래퍼 */
-
+.smn_modal { --color-brand-primary: #15b874; }
+.smn_modal :deep([class*="btn_"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
+.modal_content{border-bottom:1px solid #E5E5E9;}
 /* 타이틀 */
 .smn_title_row {
     display: flex;
@@ -412,10 +416,12 @@ function closeModal(event) {
 .form_field_phone > :deep(.input_wrap) { max-width:134px;flex: 1; min-width: 80px; }
 
 /* 이메일 */
-.form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 0 0 205px; }
-.form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 0 0 180px; }
-.form_field_email :deep(.select) { width: 140px; flex: 1 0 180px; }
-.form_field_email :deep(.select select) { width: 100%; font-size:1.6rem;}
+/* 이메일 (순서: 로컬 205px / 도메인 180px / 셀렉트 180px) */
+.form_field_email { align-items: center; }
+.form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 0 0 205px; width: 205px; min-width: 0; }
+.form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 0 0 180px; width: 180px; min-width: 0; }
+.form_field_email :deep(.select) { flex: 0 0 180px; width: 180px; min-width: 0; }
+.form_field_email :deep(.select select) { width: 100%; font-size: 1.6rem; }
 
 /* 개설희망지역 */
 .form_field_region { flex-wrap: nowrap; }
@@ -458,6 +464,7 @@ function closeModal(event) {
 
 /* 모바일 */
 @media (max-width: 768px) {
+    .modal_wrap .modal_container{padding-bottom:32px;}
     .smn_title_row { min-height: 60px; margin:0 -20px; padding:17px 20px; border-bottom:1px solid #C4C4D0;}
     .smn_title { font-size: 1.8rem; line-height: 1.4; }
     .smn_close { width: 24px;height: 24px; }
@@ -499,7 +506,7 @@ function closeModal(event) {
     .consent_radio_text{font-size: 1.6rem;}
     .form_field_radio { flex-direction: column; gap: 20px; align-items: flex-start; }
     .form_field_radio label{font-size: 1.6rem;letter-spacing: -0.01em;line-height: 1.5;}
-    .smn_bottom{margin-top:0; margin-bottom: 124px; justify-content: center;}
+    .smn_bottom{justify-content: center;}
     .smn_bottom > :deep(.btn_big) {width:100%;flex:1;}
 }
 </style>
