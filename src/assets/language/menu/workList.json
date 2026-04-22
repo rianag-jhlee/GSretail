@@ -143,27 +143,67 @@
     },
     {
         "depth1": "", "depth2": "우리동네 GS", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "Page",
         "path": "gsrbr/04/gsrbr04",
         "link": "/gsrbr04",
         "startDate": "26-04-2",
         "endDate": "26-04-2",
-        "status": "ing",
-        "note": " "
+        "status": "",
+        "note": "gsrbr0401~gsrbr0404 해당 페이지에서 확인 가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "배달·픽업", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr0401",
+        "link": "/gsrbr04",
+        "startDate": "26-04-2",
+        "endDate": "26-04-2",
+        "status": "",
+        "note": "gsrbr04 내 확인 가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "와인25플러스", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr0402",
+        "link": "/gsrbr04",
+        "startDate": "26-04-2",
+        "endDate": "26-04-2",
+        "status": "",
+        "note": "gsrbr04 내 확인 가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "재고찾기", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr0403",
+        "link": "/gsrbr04",
+        "startDate": "26-04-2",
+        "endDate": "26-04-2",
+        "status": "",
+        "note": "gsrbr04 내 확인 가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "행사/이벤트", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrbr0404",
+        "link": "/gsrbr04",
+        "startDate": "26-04-2",
+        "endDate": "26-04-2",
+        "status": "",
+        "note": "gsrbr04 내 확인 가능"
     },
     {
         "depth1": "", "depth2": "GS PAY", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "Page",
         "path": "gsrbr/05/gsrbr05",
         "link": "/gsrbr05",
-        "startDate": "26-04-2",
-        "endDate": "26-04-2",
-        "status": "ing",
+        "startDate": "26-04-22",
+        "endDate": "26-04-22",
+        "status": "com",
         "note": " "
     },
     {
         "depth1": "", "depth2": "GS ALL 포인트", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "Page",
         "path": "gsrbr/06/gsrbr06",
         "link": "/gsrbr06",
         "startDate": "26-04-21",
@@ -187,8 +227,8 @@
         "path": "gsrbr0602",
         "link": "/gsrbr0602",
         "startDate": "26-04-21",
-        "endDate": "26-04-2",
-        "status": "ing",
+        "endDate": "26-04-22",
+        "status": "com",
         "note": "gsrbr06 확인가능"
     },
     {
@@ -196,14 +236,14 @@
         "type": "Pop-up",
         "path": "gsrbr0603",
         "link": "/gsrbr0603",
-        "startDate": "26-04-21",
+        "startDate": "26-04-2",
         "endDate": "26-04-2",
         "status": "",
-        "note": "04-21:화면설계서 및 디자인 확인 불가"
+        "note": "04-22:화면설계서 및 디자인 확인 불가"
     },
     {
         "depth1": "", "depth2": "POP", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "Page",
         "path": "gsrbr/07/gsrbr07",
         "link": "/gsrbr07",
         "startDate": "26-04-20",
@@ -213,7 +253,7 @@
     },
     {
         "depth1": "", "depth2": "유어스", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "Page",
         "path": "gsrbr/08/gsrbr08",
         "link": "/gsrbr08",
         "startDate": "26-04-20",
@@ -223,7 +263,7 @@
     },
     {
         "depth1": "", "depth2": "리얼 프라이스", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "Page",
         "path": "gsrbr/09/gsrbr09",
         "link": "/gsrbr09",
         "startDate": "26-04-20",
@@ -233,7 +273,7 @@
     },
     {
         "depth1": "", "depth2": "우딜", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "Page",
         "path": "gsrbr/01/gsrbr10",
         "link": "/gsrbr10",
         "startDate": "26-04-17",
@@ -243,7 +283,7 @@
     },
     {
         "depth1": "", "depth2": "개발/임대사업", "depth3": "지하철", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "TAB",
         "path": "gsrbr/01/gsrbr1101",
         "link": "/gsrbr1101",
         "startDate": "26-04-08",
@@ -253,7 +293,7 @@
     },
     {
         "depth1": "", "depth2": "", "depth3": "쇼핑몰", "depth4": "안녕인사동", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "TAB",
         "path": "gsrbr/01/gsrbr110201",
         "link": "",
         "startDate": "",
@@ -263,7 +303,7 @@
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "구로 지밸리몰", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "TAB",
         "path": "gsrbr/01/gsrbr110202",
         "link": "",
         "startDate": "",
@@ -273,7 +313,7 @@
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "판교 파미어스몰", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "TAB",
         "path": "gsrbr/01/gsrbr110203",
         "link": "",
         "startDate": "",
@@ -283,7 +323,7 @@
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "동부산 미식일상", "depth5": "", "depth6": "",
-        "type": "",
+        "type": "TAB",
         "path": "gsrbr/01/gsrbr110204",
         "link": "",
         "startDate": "",

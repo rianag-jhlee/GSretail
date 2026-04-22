@@ -1,121 +1,174 @@
 <template>
-    <div class="modal_cont gsrbr0601">
+    <div class="modal_cont gsrbr0602">
         <div class="modal_header">
             {{ t.MainTitle }}
             <a href="#none" @click="closeModal" class="btn_close">닫기</a>
         </div>
 
         <div class="modal_content">
-            <h3 v-html="t.Greeting"></h3>
-
-            <section class="accodian_sec">
-                <h4>{{ t.sub_title }}</h4>
-                <Accordion class="board_type_toggle">
-                    <AccordionItem v-for="(title, idx) in t.faq_1.title" :key="'best-' + idx" :item-key="'best-' + idx">
-                        <template #title>{{ title }}</template>
-                        <div class="faq_answer" v-html="t.faq_1.desc[idx] || t.default_desc"></div>
-                    </AccordionItem>
-                </Accordion>
-                <div class="info_box mt40">
-                    <p>{{ t.info_text }}</p>
-                    <Buttons href="#none" btn-class="btn_mid primary">{{ t.btn_customer }}</Buttons>
+            <div class="version_select_area mb40">
+                <div class="flex_between">
+                    <h3>{{ t.Greeting }}</h3>
+                    <div class="select_group">
+                        <SelectBox 
+                            :options="t.yearOptions" 
+                            v-model="selectedYear" 
+                            class="width_170"
+                        />
+                        <SelectBox 
+                            :options="t.versionOptions" 
+                            v-model="selectedVersion" 
+                            class="width_260"
+                        />
+                    </div>
                 </div>
-            </section>
+            </div>
 
-            <section class="tab_sec">
-                <Tabs @change="onTabChange1" v-model="CTabIdx" :tab-items="tabs" tab-class="type_01" :tab-slide="true" />
-                <div class="tab_content mt40">
-                    <Accordion class="board_type_toggle">
-                        <AccordionItem v-for="(title, idx) in t.faq_2.title" :key="'tab-' + CTabIdx + '-' + idx" :item-key="'tab-' + idx">
-                            <template #title>{{ title }}</template>
-                            <div class="faq_answer" v-html="t.faq_2.desc[idx] || t.default_desc"></div>
-                        </AccordionItem>
-                    </Accordion>
-                </div>
+            <div class="policy_wrap">
+                <dl>
+                    <dt>{{ t.Chapter1.title }}</dt>
+                    <dd>
+                        <dl v-for="(item, idx) in t.Chapter1.items" :key="'ch1-' + idx">
+                            <dt>{{ item.article }}</dt>
+                            <dd>
+                                <span v-if="typeof item.content === 'string'">{{ item.content }}</span>
+                                <ul v-else>
+                                    <li v-for="(sub, sIdx) in item.content" :key="'sub-' + sIdx">
+                                        {{ sub }}
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </dd>
 
-                <div class="pagination_area mt60 ac">
-                    <Pagination 
-                        v-model="currentPage" 
-                        :total-pages="5" 
-                        :visible-pages="5"
-                        @change="onPageChange" 
-                    />
-                </div>
-            </section>
+                    <dt>{{ t.Chapter4.title }}</dt>
+                    <dd>
+                        <dl>
+                            <dt>{{ t.Chapter4.article13.title }}</dt>
+                            <dd>
+                                <div class="desc">{{ t.Chapter4.article13.desc }}</div>
+                                <div class="table_scroll_area">
+                                    <table>
+                                        <colgroup>
+                                            <col style="width: 200px;">
+                                            <col v-for="n in 5" :key="n" style="width: auto;">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">기능/종류</th>
+                                                <th scope="col" v-for="head in t.Chapter4.article13.tableHead" :key="head" v-html="head"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(row, rIdx) in t.Chapter4.article13.tableRows" :key="'row-' + rIdx">
+                                                <th scope="row">{{ row.label }}</th>
+                                                <td v-for="(cell, cIdx) in row.data" :key="'cell-' + cIdx" v-html="cell" class="ac"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </dd>
+
+                            <dt>{{ t.Chapter4.article14.title }}</dt>
+                            <dd>
+                                <ul>
+                                    <li v-for="(sub, idx) in t.Chapter4.article14.content" :key="'art14-' + idx">
+                                        {{ sub }}
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </dd>
+
+                    <dt>{{ t.Appendix.title }}</dt>
+                    <dd>
+                        <dl>
+                            <dt>{{ t.Appendix.article }}</dt>
+                            <dd>
+                                <div class="desc">{{ t.Appendix.content }}</div>
+                                <p>{{ t.Appendix.copyright }}</p>
+                            </dd>
+                        </dl>
+                    </dd>
+                </dl>
+            </div>
+            <div class="btn-wrap">
+                <Buttons btn-class="btn_big primary" @click="closeModal">확인</Buttons>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import modal from "@/assets/js/modal";
-import Tabs from "@/components/Tabs.vue";
-import Pagination from "@/components/Pagination.vue";
-import Accordion from "@/components/Accordion.vue";
-import AccordionItem from "@/components/AccordionItem.vue";
+import SelectBox from "@/components/SelectBox.vue";
 import Buttons from "@/components/Buttons.vue";
 
 export default {
-    name: "gsrbr0601",
+    name: "gsrbr0602",
     components: {
-        Tabs,
-        Accordion,
-        AccordionItem,
-        Pagination,
-        Buttons
+        SelectBox, Buttons
     },
     data() {
         return {
-            CTabIdx: 0,
-            currentPage: 1,
-            tabs: [
-                { item: "멤버십 소개" },
-                { item: "가입방법" },
-                { item: "포인트" },
-                { item: "카드" },
-                { item: "정보보호/관리" },
-                { item: "회원탈퇴" },
-            ],
+            selectedYear: "2025",
+            selectedVersion: "v1",
             langData: {
                 ko: {
-                    MainTitle: "멤버십 FAQ",
-                    Greeting: "멤버십 포인트 관련<br/> 궁금하신 문제를 해결해 드립니다.",
-                    sub_title: "자주묻는질문 BEST",
-                    info_text: "원하시는 답변이 없으셨나요? 그럼 고객의 소리를 이용해 주세요.",
-                    btn_customer: "고객의 소리",
-                    default_desc: "상세 답변 준비 중입니다.",
-                    faq_1: {
-                        title: [
-                            "GS ALL 멤버십은 어떤건가요?",
-                            "이름을 개명했는데 어떻게 해야 하나요?",
-                            "GS ALL 패밀리란 어떤건가요?",
-                            "휴대폰번호 변경은 어떻게 할 수 있나요?",
-                            "GS ALL 멤버십 카드 등록은 어떻게 할 수 있나요?",
-                            "본인인증이 뭔가요? 꼭 해야만 하나요?",
-                            "본인인증이 안돼요. 어떻게 해야하나요?"
-                        ],
-                        desc: [
-                            "<span>GS ALL 멤버십은 GS리테일의 3개 브랜드(GS25, GS SHOP, GS THE FRESH)를 통합한 GS리테일 통합 멤버십입니다. 하나의 브랜드에서만 등급을 달성해도 3개 브랜드 등급혜택을 모두 받아보실 수 있습니다.</span><span>GS ALL 멤버십에 대한 자세한 내용은 각 앱별 마이페이지에서 확인하실 수 있습니다.</span>",
-                            "<span>개명하신 경우 통신사 실명인증 정보를 먼저 변경하신 후, 앱 내 개인정보 수정 메뉴에서 본인인증을 다시 진행해 주시기 바랍니다.</span>",
-                            "<span>가족이나 친구와 함께 포인트를 합산하여 사용할 수 있는 공유 서비스입니다.</span>",
-                            "<span>기존 번호로 로그인 후 마이페이지의 '휴대폰 번호 변경' 메뉴를 이용하세요.</span>",
-                            "<span>실물 카드의 바코드 번호를 등록하거나 모바일 카드를 발급받으실 수 있습니다.</span>"
+                    MainTitle: "GS ALL 멤버십 회원약관",
+                    Greeting: "2026.01.19 개정판 고시",
+                    numIcons: ["①", "②", "③", "④", "⑤"],
+                    yearOptions: [{ value: "2025", label: "2025" }],
+                    versionOptions: [{ value: "v1", label: "2025.02.26 개정판 고시" }],
+                    Chapter1: {
+                        title: "제1장 총칙",
+                        items: [
+                            { 
+                                article: "제1조(목적)", 
+                                // 백틱을 제거하고 일반 따옴표로 연결하여 줄바꿈/공백 오류 방지
+                                content: "이 약관은 주식회사 지에스리테일(이하 \"GS리테일\")이 제공하는 GS ALL 멤버십 서비스, 팝카드 서비스 및 GS리테일 관련 서비스를 회원들이 이용함에 있어 GS리테일과 회원 간의 권리 의무 및 기타 필요한 사항 등을 규정하는데 그 목적이 있습니다." 
+                            },
+                            { 
+                                article: "제2조(정의)", 
+                                content: [
+                                    "① \"회원\"이란 GS리테일에서 제공하는 서비스 이용을 위해 이 약관에 동의하고 GS리테일이 정한 방법과 절차에 따라 개인정보를 제공함으로써 서비스 이용 권한을 부여받은 자를 말합니다. 회원으로 가입하지 않은 \"비회원\" 혹은 본인인증이 완료되지 않은 \"미인증 회원\"은 GS리테일이 제공하는 일부 서비스만 이용할 수 있습니다.",
+                                    "② \"회원등급\"이란 GS리테일의 재화를 구매한 결과를 바탕으로 GS리테일이 정한 기준에 따라 GS리테일이 회원에게 부여하는 등급을 말합니다.",
+                                    "③ \"서비스\"라 함은 회원에게 제공하는 GS리테일 서비스 및 GS리테일 관련 제반 서비스를 의미합니다. 1. \"GS ALL 멤버십 서비스\"(이하 \"멤버십 서비스\")란 회원을 위해 GS리테일이 제공하는 서비스로서 그 개요는 제7조에 기술된 바와 같습니다. 2. \"팝카드 서비스\"란 회원을 위해 GS리테일이 제공하는 서비스로서 회원이 GS25, GS THE FRESH, 우리동네GS 등에서 재화, 용역 등을 팝카드로 결제 시 할인·증정 등의 혜택을 제공하는 것을 말합니다. 자세한 내용은 제4장에 기술된 바와 같습니다.",
+                                    "④ \"팝카드\"란 GS리테일 및 제휴가맹점이 회원으로 하여금 멤버십 서비스 및 팝카드 서비스를 이용할 수 있도록 발급한 카드(모바일 카드 포함)를 말합니다.",
+                                    "⑤ \"제휴가맹점\"이란 GS리테일이 멤버십 서비스 또는 팝카드 서비스와 관련하여 각 서비스를 공동으로 운영하기 위해 가맹점 계약 또는 제휴 계약을 체결한 업체(교통기관, 유통업체, 은행, 카드회사 등) 또는 업소(GS리테일 점포 내 임대업체 포함)를 말하며 회원에게 제공되는 서비스는 각 가맹점 계약 또는 제휴 계약의 약정내용에 따라 달라질 수 있습니다."
+                                ] 
+                            }
                         ]
                     },
-                    faq_2: {
-                        title: [
-                            "GS ALL 멤버십 등급 선정 기준은 무엇인가요?",
-                            "등급별 혜택 및 나의 등급은 어디서 확인할 수 있나요?",
-                            "얼마나 더 사용해야 승급할 수 있나요?",
-                            "GS ALL 멤버십을 이용하기 위해 별도의 신청이 필요한가요?",
-                            "고객 등급은 얼마나 유지되나요?",
-                            "GS ALL 패밀리란 어떤건가요?",
-                            "본인인증이 안돼요. 어떻게 해야하나요?"
-                        ],
-                        desc: [
-                            "<span>직전 3개월간의 이용 실적(금액/횟수)에 따라 산정됩니다.</span>",
-                            "<span>각 브랜드 앱의 마이페이지 상단 등급 표시 영역을 클릭하시면 상세 확인이 가능합니다.</span>",
-                            "<span>마이페이지 내 승급 가이드를 통해 다음 등급까지 필요한 조건이 표시됩니다.</span>"
-                        ]
+                    Chapter4: {
+                        title: "제4장 팝카드 서비스",
+                        article13: {
+                            title: "제13조(팝카드의 종류 및 기능)",
+                            desc: "GS리테일이 제공하는 팝카드 서비스를 이용할 수 있는 팝카드의 종류와 기능은 아래와 같습니다.",
+                            tableHead: ["팝캐시비 (일반)", "팝티머니 (일반)", "팝티머니(금융)", "멤버십팝", "팝체크/신용"],
+                            tableRows: [
+                                { label: "공통기능", data: ["O", "O", "O", "O", "O"] },
+                                { label: "교통카드", data: ["선불", "선불", "선불", "X", "후불 선택"] },
+                                { label: "충전식 선불결제 수단", data: ["O", "O", "O", "O", "X"] },
+                                { label: "체크/신용카드", data: ["X", "X", "O", "X", "O"] },
+                                { label: "T-마일리지", data: ["X", "X", "O", "X", "O"] },
+                                { label: "T-제휴가맹점", data: ["X", "O", "O", "X", "X"] },
+                                { label: "제휴가맹점", data: ["(주)이동의즐거움", "(주)티머니", "우리카드<br/>농협은행<br/>국민카드", "한국선불카드<br/>BC카드", "신한카드<br/>농협카드<br/>하나은행<br/>국민카드<br/>하나카드<br/>BC카드<br/>KBANK<br/>삼성카드"] },
+                            ]
+                        },
+                        article14: {
+                            title: "제14조(팝카드 서비스의 내용)",
+                            content: [
+                                "① 회원은 GS리테일 및 제휴가맹점에서 팝카드로 재화와 용역을 구매하고, 할인 및 행사상품을 증정 받을 수 있습니다. 할인율과 증정품은 GS리테일의 판매 정책에 따라 달라질 수 있습니다.",
+                                "② 팝카드의 종류 또는 기술적 사유(시스템 점검, 단말기 고장, 통신회선 불량, 신규 카드 또는 단말기의 안정화 작업 등)에 따라 일부 팝카드는 제휴가맹점 이용이 제한될 수 있으며, 이 경우GS리테일은 홈페이지 내 게시하는 방법 등을 통해 고객에게 고지합니다."
+                            ]
+                        }
+                    },
+                    Appendix: {
+                        title: "부칙",
+                        article: "부칙 제1조(효력 및 시행일)",
+                        content: "이 약관은 2026년 01월 19일부터 시행합니다.",
+                        copyright: "* 이 약관에 대한 저작권은 GS리테일에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다."
                     }
                 }
             }
@@ -125,62 +178,57 @@ export default {
         t() { return this.langData.ko; }
     },
     methods: {
-        closeModal(event) { modal.close(event.currentTarget); },
-        onTabChange1(idx) {
-            this.CTabIdx = idx;
-            this.currentPage = 1; // 탭 바뀔 때 페이지 초기화
-        },
-        onPageChange(page) {
-            this.currentPage = page;
-            console.log('Page:', page);
-        }
+        closeModal(event) { modal.close(event.currentTarget); }
     }
 };
 </script>
 
 <style scoped>
-.modal_header { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding-bottom: 40px; font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 40px; color: #161616; border-bottom: 0; }
-.modal_content { flex: 1; overflow-y: auto; padding-right: 10px; }
-h3 { margin-bottom: 60px; color: #161616; font-size: 32px; font-weight: 700; }
-:deep(.modal_content) h3 br {display:none;}
-h4 { margin-bottom: 21px; color: #161616; font-size: 24px; font-weight: 700; }
-.accodian_sec {margin-bottom:80px;}
-.btn_mid {padding:10px 23px !important;}
-.pagination {justify-content:center;}
-:deep(.acc_tit_btn).acc_tit_open {font-weight:700 !important;}
+/* policy_wrap 내부 스타일 */
+.policy_wrap {margin-top:64px; padding:32px; border:1px solid #E5E5E9; border-radius:12px;}
+.policy_wrap > dl > dt {margin-bottom:32px; color:#161616; font-size:24px; font-weight:700;}
+.policy_wrap > dl > dd > dl {margin-bottom:32px;}
+.policy_wrap dl dd + dt {margin-top:32px;}
+.policy_wrap > dl > dd > dl > dt {color:#161616; font-size:18px; font-weight:700;}
+.policy_wrap > dl > dd > dl > dd span {color:#67676F; font-size:18px; line-height:1.4; display:block;}
+.policy_wrap > dl > dd > dl > dd > ul > li {color:#67676F; font-size:18px; margin-left:20px; text-indent:-20px; line-height:1.4;}
 
-/* 안내 박스 영역 */
-.info_box { display: flex; align-items: center; justify-content: space-between; padding: 24px 32px; background-color: #f8f8f8; border-radius: 12px; }
-.info_box p { font-size: 18px; color: #666; }
-.btn_customer { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 24px; background-color: #107af2; color: #fff; font-size: 16px; font-weight: 700; border-radius: 6px; text-decoration: none; }
+/* 테이블 스타일 */
+.policy_wrap table { width: 100%; margin-top: 10px; border-collapse: collapse; word-break: keep-all; }
+.policy_wrap th, .policy_wrap td { padding:10px 20px; color:#161616; font-size:18px; border: 1px solid #E5E5E9; line-height:1.5; white-space: normal; word-break: keep-all; }
+.policy_wrap th { background-color: #F8F8F8; border-right: 1px solid #E5E5E9; border-top: 1px solid #000000; text-align: center; }
+.policy_wrap tr th:first-child { text-align: left; background-color: #F8F8F8; } /* 첫 번째 열 헤더 처리 */
 
-/* FAQ 아코디언 스타일링 */
-:deep(.board_type_toggle) dt a.acc_tit_btn {padding: 24px 29px; color: #161616; font-size: 20px; font-weight: 500; border-bottom:0; display: flex; align-items: center; }
-:deep(.board_type_toggle) dt a.acc_tit_btn::before { content: 'Q'; margin-right: 16px; font-weight: 700; color: #161616; }
-:deep(.board_type_toggle) dt a.acc_tit_btn::after { margin-left: auto; }
-:deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont {padding:12px 10px 24px 32px !important;}
-:deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont div {display:flex; flex-direction:column; gap:16px;}
-:deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont * {color:#67676F; font-size:18px;}
+/* 스크롤 영역 */
+.table_scroll_area { width: 100%; overflow-x: visible; }
 
-.faq_answer span { display: block; font-size: 18px; color: #67676f; line-height: 1.6; }
-.faq_answer span + span { margin-top: 16px; }
-
-/* Utils */
-.ac { text-align: center; }
-.mt40 { margin-top: 40px; }
-.mt60 { margin-top: 60px; }
-.mb40 { margin-bottom: 40px; }
-.mb100 { margin-bottom: 100px; }
+/* 모달 레이아웃 */
+.modal_cont { background-color: #fff;}
+.modal_header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 40px; font-size: 40px; font-weight: 700; border-bottom: 0; }
+.modal_content { max-height: 700px; overflow-y: auto; padding-right: 10px; }
+h3 { font-size: 32px; font-weight: 700; }
+.flex_between { display: flex; justify-content: space-between; align-items: center; }
+.select_group { display: flex; gap: 8px; }
+.width_170 { width: 170px; }
+.width_260 { width: 260px; }
+p {margin-top:4px; font-size:18px; color: #fb6432 !important; }
+.btn-wrap {display:flex; justify-content:flex-end;}
+.btn_big.primary {margin-top:32px; padding:14px 50px;}
 
 /* 반응형 */
+@media screen and (max-width: 1024px) { 
+    .table_scroll_area { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table_scroll_area table { min-width: 1000px; }
+}
+
 @media screen and (max-width: 767px) {
-    .modal_header { font-size:18px; }
-    .info_box {gap: 16px;}
-    .info_box p {width:55%; color:#161616; font-size:14px;}
-    :deep(.board_type_toggle) dt a.acc_tit_btn {padding:22px 0;  font-size: 16px; }
-    :deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont * {font-size:16px;}
-    .faq_answer span { font-size: 15px; }
-    h3 {font-size:20px;}
-    :deep(.modal_content) h3 br {display:block;}
+    .modal_header {font-size:18px;}
+    h3 {font-size:24px;}
+    .policy_wrap > dl > dt {font-size:20px;}
+    .policy_wrap > dl > dd > dl > dd span, .policy_wrap > dl > dd > dl > dd > ul > li, p, .desc {font-size:16px; }
+    .flex_between {display:flex; flex-direction:column; align-items:stretch;}
+    .select_group {margin-top:32px; flex-direction:column;}
+    .width_170, .width_260 {width:100%;}
+    .policy_wrap th, .policy_wrap td {font-size:16px;}
 }
 </style>
