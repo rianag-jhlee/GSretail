@@ -317,7 +317,7 @@
             <div class="tab_page sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
                 <div class="link_wrap">
-                    <Buttons tag="a" href="#none" btn-class="btn_icon btn_xl"> 바로가기</Buttons>
+                    <Buttons tag="a" href="#none" btn-class="btn_icon btn_xl">설명회신청 바로가기</Buttons>
                 </div>
             </div>
  
@@ -618,7 +618,7 @@
             <section class="sec_seminar tab_page" v-show="activeD1 === 1">
                 <div class="seminar_head">
                     <p>GS THE FRESH(GS수퍼마켓) 가맹 사업에 대한<br class="p_br">자세하고 다양한 정보를 얻을 수 있는 사업설명회에 참여해 보세요.</p>
-                    <Buttons btn-class="btn_big fill primary" data-popid="modal_gsrst_seminar" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">사업 설명회 신청</Buttons>
+                    <Buttons btn-class="btn_big fill primary btn_icon after" data-popid="modal_gsrst_seminar" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">사업 설명회 신청</Buttons>
                 </div>
                 <ul class="seminar_list">
                     <li v-for="(item, i) in seminarList" :key="i" class="seminar_item">
@@ -945,9 +945,8 @@ function toggleCard(id) {
 <style scoped>
 /* 브랜드 색 */
 .wrap_gsrst { --color-brand-primary: #15b874; }
-/*
-.wrap_gsrst :deep([class*="btn_"][class*="fill"]), .wrap_gsrst :deep([class*="btn_"][class*="icon"]), .wrap_gsrst :deep([class*="btn_"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
-.wrap_gsrst :deep([class*="btn_"][class*="border"]) { color: var(--color-brand-primary); background-color: #fff; border: 1px solid var(--color-brand-primary); } */
+
+.wrap_gsrst :deep([class*="btn_"][class*="fill"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
 .txt_warning { color: #ED3030 !important; }
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
