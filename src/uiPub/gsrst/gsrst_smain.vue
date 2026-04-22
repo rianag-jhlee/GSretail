@@ -23,7 +23,7 @@ const cards = [
         title:
             "신선함과 함께,<br><span class=\"franchise_card_title_point\">GS THE FRESH</span>가 함께 성장합니다",
         desc: "프리미엄 신선식품 전문 슈퍼마켓으로<br>고객에게 최상의 가치를 전달하는 사업 파트너가 되어드립니다",
-        link: "#none",
+        link: "/gsrst01010101",
     },
 ];
 </script>
@@ -56,8 +56,6 @@ const cards = [
                         <Buttons
                             tag="a"
                             :href="card.link"
-                            target="_blank"
-                            rel="noopener noreferrer"
                             btn-class="btn_icon btn_xl after"
                         >
                             바로가기
