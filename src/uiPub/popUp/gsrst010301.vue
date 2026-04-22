@@ -570,7 +570,6 @@ function closeModal(event) {
 .form_sub_group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .form_field_check .form_sub_group { gap: 12px; }
 .form_field_contract .form_sub_group { gap: 12px; }
-.form_field_contract .form_sub_group .form_sub_label { min-width: 88px; }
 .form_sub_label { color: #67676F; }
 /* 입력 + 단위 (m², 만원 등) */
 .form_sub_input_wrap { display: flex; align-items: center; gap: 8px; }
@@ -653,7 +652,6 @@ function closeModal(event) {
     .form_row:last-child {padding-bottom:0;}
 
     /* 연락처: select 너비 축소, input max-width 해제 */
-    .form_field_phone :deep(.select) { width: 88px; }
     .form_field_phone > :deep(.input_wrap) { max-width: none; flex: 1; }
 
     /* 이메일: 고정 너비 해제 → flex로 유연하게, SelectBox 다음 줄 */

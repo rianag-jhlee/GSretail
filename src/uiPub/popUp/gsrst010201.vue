@@ -487,7 +487,6 @@ function closeModal(event) {
     .form_row:last-child {padding-bottom:0;}
 
     /* 연락처: select 너비 축소, input max-width 해제 */
-    .form_field_phone :deep(.select) { width: 88px; }
     .form_field_phone > :deep(.input_wrap) { max-width: none; flex: 1; }
 
     /* 이메일: 고정 너비 해제 → flex로 유연하게, SelectBox 다음 줄 */
