@@ -944,7 +944,7 @@ let quickMenuResizeTimer = null;
 function updateQuickMenuBottom(quickMenu) {
     if (!quickMenu) return;
     if (!quickMenuFooterEl) {
-        quickMenuFooterEl = document.querySelector(".footer");
+        quickMenuFooterEl = document.querySelector("footer");
     }
     if (!quickMenuWrapEl) {
         quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
@@ -1013,7 +1013,7 @@ function initQuickMenuGsap() {
     if (mqMobile.matches) return;
     const quickMenu = quickMenuRef.value;
     if (!quickMenu) return;
-    quickMenuFooterEl = document.querySelector(".footer");
+    quickMenuFooterEl = document.querySelector("footer");
     quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
     quickMenuLastBottomPx = null;
     quickMenuLastTopPx = null;
