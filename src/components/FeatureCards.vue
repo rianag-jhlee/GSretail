@@ -7,7 +7,7 @@ defineProps({
     items: { type: Array, default: () => [] },
     // type="num"  (기본): [{ num: "01", title: "...", desc: "..." }]
     // type="icon"        : [{ icon: imgSrc, iconAlt: "...", title: "...", desc: "..." }]
-    // type="text"        : [{ title: "...", desc: "..." }] — em/icon 없음, title은 HTML 가능
+    // type="text"        : [{ title: "...", desc: "..." | [...], listDotted?: true }] — listDotted 시 desc 배열 ul에 list_dotted
     type: { type: String, default: "num" },
     // noSwipe=true: 모바일에서도 Swiper 대신 리스트(1열) 표시
     noSwipe: { type: Boolean, default: false },
@@ -39,7 +39,11 @@ onUnmounted(() => {
             </figure>
             <strong class="feature_card_title" v-html="item.title"></strong>
             <template v-if="item.desc">
-                <ul v-if="Array.isArray(item.desc)" class="feature_card_desc_list">
+                <ul
+                    v-if="Array.isArray(item.desc)"
+                    class="feature_card_desc_list"
+                    :class="{ list_dotted: item.listDotted }"
+                >
                     <li v-for="(line, li) in item.desc" :key="li">
                         <p class="feature_card_desc" v-html="line"></p>
                     </li>
@@ -63,7 +67,11 @@ onUnmounted(() => {
                 </figure>
                 <strong class="feature_card_title" v-html="item.title"></strong>
                 <template v-if="item.desc">
-                    <ul v-if="Array.isArray(item.desc)" class="feature_card_desc_list">
+                    <ul
+                        v-if="Array.isArray(item.desc)"
+                        class="feature_card_desc_list"
+                        :class="{ list_dotted: item.listDotted }"
+                    >
                         <li v-for="(line, li) in item.desc" :key="li">
                             <p class="feature_card_desc" v-html="line"></p>
                         </li>
@@ -169,6 +177,11 @@ onUnmounted(() => {
     line-height: 1.5;
     letter-spacing: -0.01em;
 }
+.list_dotted > li { padding-left: 12px; position: relative }
+.list_dotted > li + li { margin-top: 8px }
+.list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #67676F; border-radius: 50%; position: absolute; top: 11px; left: 0 }
+.list_dotted > li > p { margin: 0; color: #67676F; font-size: 1.8rem; line-height: 1.4 }
+.list_dotted > li > p :deep(a) { color: #107af2; font-size: 1.8rem; line-height: 1.4; text-decoration: underline }
 
 @media (max-width: 1024px) {
     .feature_card_item {
@@ -215,5 +228,9 @@ onUnmounted(() => {
     .feature_card_desc_list > li + li {
         margin-top: 4px;
     }
+  .list_dotted > li { padding-left: 6px }
+  .list_dotted > li::before { top: 9px; width:2px; height:2px }
+  .list_dotted > li + li { margin-top: 8px }
+  .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 } 
 </style>
