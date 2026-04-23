@@ -8,7 +8,7 @@
         <div v-else class="label_wrap">
             <label class="input" :class="{ 'is_search': type === 'search' }">
                 <i v-if="showPlaceholder">{{ placeholder }}</i>
-                <input ref="inputRef" :id="id" :name="name" :type="currentType" v-model="model" :readonly="isReadonly" :disabled="isDisabled" :min="min" :max="max" :step="step" @focus="isFocused = true" @blur="isFocused = false" />
+                <input ref="inputRef" :id="id" :name="name" :type="currentType" v-model="model" :readonly="isReadonly" :disabled="isDisabled" @focus="isFocused = true" @blur="isFocused = false" />
                 
                 <Buttons v-if="showClear" btn-class="icon_del" :class="{ active: hasValue }" @click.prevent="clear">전체삭제</Buttons>
 
@@ -40,10 +40,7 @@ export default {
         isError: { type: Boolean, default: false },
         isReadonly: { type: Boolean, default: false },
         isDisabled: { type: Boolean, default: false },
-        isswitch: { type: Boolean, default: false },
-        min: { type: [String, Number], default: undefined },
-        max: { type: [String, Number], default: undefined },
-        step: { type: [String, Number], default: undefined }
+        isswitch: { type: Boolean, default: false }
     },
     emits: ["update:modelValue"],
     data() {
