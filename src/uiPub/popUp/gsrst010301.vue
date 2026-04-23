@@ -125,14 +125,14 @@
                             <div class="form_sub_group">
                                 <span class="form_sub_label">계약면적</span>
                                 <div class="form_sub_input_wrap">
-                                    <Inputs type="number" min="0" step="any" v-model="consultForm.areaContract" />
+                                    <Inputs type="text" v-model="consultForm.areaContract" />
                                     <span class="form_sub_unit">m²</span>
                                 </div>
                             </div>
                             <div class="form_sub_group">
                                 <span class="form_sub_label">전용면적</span>
                                 <div class="form_sub_input_wrap">
-                                    <Inputs type="number" min="0" step="any" v-model="consultForm.areaExclusive" />
+                                    <Inputs type="text" v-model="consultForm.areaExclusive" />
                                     <span class="form_sub_unit">m²</span>
                                 </div>
                             </div>
@@ -172,11 +172,11 @@
                                 <span class="form_sub_label">보증금/월임대료</span>
                                 <div class="contract_rent">
                                     <div class="form_sub_input_wrap">
-                                        <Inputs type="number" min="0" step="1" v-model="consultForm.deposit" />
+                                        <Inputs type="text" v-model="consultForm.deposit" />
                                         <span class="form_sub_unit">만원</span>
                                     </div>
                                     <div class="form_sub_input_wrap">
-                                        <Inputs type="number" min="0" step="1" v-model="consultForm.monthlyRent" />
+                                        <Inputs type="text" v-model="consultForm.monthlyRent" />
                                         <span class="form_sub_unit">만원</span>
                                     </div>
                                 </div>
