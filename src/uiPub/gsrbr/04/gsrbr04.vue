@@ -54,7 +54,7 @@
                             <div class="benefit_info">
                                 <p class="tit_area">
                                     <strong>{{ item.title }}</strong>
-                                    <a v-if="item.link" :href="item.link" target="_blank" class="btn_link"></a>
+                                    <a v-if="item.popId" class="btn_link" @click="openModal" :data-popid="item.popId" :data-type="item.popType" :data-cont="item.popCont"></a>
                                 </p>
                                 <span class="desc">{{ item.desc }}</span>
                             </div>
@@ -72,10 +72,28 @@
                 <a class="btn_big border" href="javascript:void(0);" @click="handleBack">{{ t.ListBack }}</a>
             </div>
         </section>
+
+
+        <div id="gsrbr0401" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrbr0402" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrbr0403" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+        <div id="gsrbr0404" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
     </div>
 </template>
 
 <script>
+import modal from "@/assets/js/modal";
+
 export default {
     name: "gsrbr04",
     props: {
@@ -112,15 +130,15 @@ export default {
                     BenefitTitle: "‘우리동네 GS’ 앱에서 <br/>일상의 모든 것을 해결하세요.",
                     BenefitRows: [
                         [
-                            { title: "재고찾기/검색", desc: "전국 매장별 실시간 상품 재고 현황 및 잔여 수량을 간편하게 확인할 수 있습니다.", link: 'https://www.naver.com' },
+                            { title: "재고찾기/검색", desc: "전국 매장별 실시간 상품 재고 현황 및 잔여 수량을 간편하게 확인할 수 있습니다.", popId: "gsrbr0403", popType: "lg", popCont: "gsrbr0403"},
                             { title: "나만의 냉장고", desc: "GS25에서 받은 증정품이나 경품, GS THE FRESH의 사전예약 상품을 보관하고 원하는 때에 찾아갈 수 있습니다." },
-                            { title: "배달/픽업", desc: "GS25,GS THE FRESH의 인기상품을 배달/픽업으로 간편하게 만나보세요!", link: 'https://www.naver.com' },
+                            { title: "배달/픽업", desc: "GS25,GS THE FRESH의 인기상품을 배달/픽업으로 간편하게 만나보세요!", popId: "gsrbr0401", popType: "lg", popCont: "gsrbr0401"},
                             { title: "사전 예약", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다." },
-                            { title: "와인25플러스", desc: "5천여 종의 와인과 다양한 주류를 주문하고 전국 편의점/수퍼 매장에서 손 쉽게 수령할 수 있습니다.", link: 'https://www.naver.com' },
+                            { title: "와인25플러스", desc: "5천여 종의 와인과 다양한 주류를 주문하고 전국 편의점/수퍼 매장에서 손 쉽게 수령할 수 있습니다.", popId: "gsrbr0402", popType: "lg", popCont: "gsrbr0402" },
                             { title: "간편결제, 간편 로그인", desc: "다양한 수단으로 간편결제 및 간편 로그인 서비스를 지원합니다." },
                             { title: "멤버십 혜택", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다." },
                             { title: "택배 서비스", desc: "5천여 종의 와인과 다양한 주류를 주문하고 전국 편의점/수퍼 매장에서 손 쉽게 수령할 수 있습니다." },
-                            { title: "행사/이벤트", desc: "다양한 수단으로 간편결제 및 간편 로그인 서비스를 지원합니다.", link: 'https://www.naver.com' }
+                            { title: "행사/이벤트", desc: "다양한 수단으로 간편결제 및 간편 로그인 서비스를 지원합니다.", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" }
                         ]
                     ],
                     ListBack: "목록으로 돌아가기"
@@ -140,7 +158,14 @@ export default {
     },
     methods: {
         checkMobile() { this.isMobile = window.innerWidth < 768; },
-        handleBack() { this.$router.back(); }
+        handleBack() { this.$router.back(); },
+        openModal(event) {
+            const el = event.currentTarget;
+            const popId = el.dataset.popid;
+            const type = el.dataset.type || "default";
+            const cont = el.dataset.cont;
+            modal.open(popId, type, el, cont);
+        },
     }
 };
 </script>
@@ -228,7 +253,7 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
     .benefit_list { gap: 32px 10px; }
     .benefit_list li { width: calc((100% - 10px) / 2); }
     .bottom_btns { display: none; }
-    .bottom_btns + .btn_big.border { display: flex; justify-content: center; margin-top: 0; margin-bottom: 80px; }
+    .bottom_btns + .btn_big.border { display: flex; justify-content: center; margin-top: 100px; margin-bottom: 80px; }
     .bi_section h4 {flex-direction:column;}
     .body_wrap .cont_area .cont_inner .intro_text + ul {padding:30px;}
     .bi_section h4 p {width:100%; margin-top:8px; font-size:16px; flex-direction:column;}
