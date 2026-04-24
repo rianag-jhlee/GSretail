@@ -109,9 +109,9 @@
             <header class="str_header">
                 <h2>GS SHOP의 비즈니스 핵심역량</h2>
             </header>
-            <div>
-                <img :src="isBiCompetencyMobile ? imgBi09Mo : imgBi09"  alt="GS SHOP의 비즈니스 핵심역량" />
-            </div>
+            <figure class="sec_brand_competency_fig">
+                <img :src="isBiCompetencyMobile ? imgBi09Mo : imgBi09" alt="GS SHOP의 비즈니스 핵심역량" />
+            </figure>
         </section>
         <section class="sec_brand_biz str_inner" aria-label="GS SHOP 비즈니스 핵심역량">
             <header class="str_header">
@@ -120,19 +120,25 @@
             </header>
             <div class="str_biz_fig">
                 <div class="str_biz_fig_inner">
-                    <div class="str_biz_fig_txt">  
+                    <div class="str_biz_fig_txt">
                         <strong>CCM(Consumer<br class="m_br"/>Centered Management)<br class="m_br"/>인증이란?</strong>
                         <p>기업이 수행하는 모든 활동을 소비자 관점에서 소비자 중심으로 구성하고 관련 경영활동을 지속적으로 개선하고 있는지를 평가하여 인증하는 제도</p>
+                        <dl v-if="!isMobileView" class="str_biz_fig_cert">
+                            <template v-for="row in ccmCertDlItems" :key="row.term">
+                                <dt>{{ row.term }}</dt>
+                                <dd><img :src="row.imgSrc" :alt="row.imgAlt" /></dd>
+                            </template>
+                        </dl>
                     </div>
                     <div class="str_biz_fig_img">
                         <img :src="imgCert03" alt="소비자중심심" />
                     </div>
                 </div>
-                <dl>
-                    <dt>인증기관</dt>
-                    <dd><img :src="imgCert01" alt="공정거래위원회" /></dd>
-                    <dt>운영기관</dt>
-                    <dd><img :src="imgCert02" alt="한국소비자원" /></dd>
+                <dl v-if="isMobileView" class="str_biz_fig_cert">
+                    <template v-for="row in ccmCertDlItems" :key="row.term">
+                        <dt>{{ row.term }}</dt>
+                        <dd><img :src="row.imgSrc" :alt="row.imgAlt" /></dd>
+                    </template>
                 </dl>
             </div>
             <div class="str_biz_block">
@@ -184,7 +190,7 @@
             </ul> 
         </section>
         <div class="diff_actions">
-            <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
+            <Buttons btn-class="btn_back" @click="goBack">{{ t.backLabel }}</Buttons>
         </div>
     </div>
 
@@ -192,7 +198,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -237,8 +243,10 @@ gsap.registerPlugin(ScrollTrigger);
 const router = useRouter();
 
 const langData = {
-    backLabel: "목록으로 돌아가기",
+    ko: { backLabel: "목록으로 돌아가기" },
 };
+const locale = ref("ko");
+const t = computed(() => langData[locale.value]);
 
 const _getIsMobile = () => window.innerWidth <= 768;
 const isMobileView = ref(_getIsMobile());
@@ -257,6 +265,12 @@ let biColorMql = null;
 function onBiColorMqlChange(e) {
     isBiColorMobile.value = e.matches;
 }
+
+/** CCM 인증기관/운영기관 — PC: str_biz_fig_txt 내부, 모바일: str_biz_fig_inner 하단 */
+const ccmCertDlItems = [
+    { term: "인증기관", imgSrc: imgCert01, imgAlt: "공정거래위원회" },
+    { term: "운영기관", imgSrc: imgCert02, imgAlt: "한국소비자원" },
+];
 
 /** type="text" — num / icon 없이 feature_card_title + desc 배열만 */
 const ccmFeatureItems = [
@@ -495,11 +509,12 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-:deep(.p_br) { display: block }
-:deep(.m_br) { display: none }
-img{width:100%; object-fit: cover; display: block;}
-p {font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
-.brand { padding-bottom: 161px; overflow-x: clip; max-width: 100%; }
+/* PC first · 속성 순서: 넓이 → margin → padding → font → 배경 → 테두리 → 정렬 → 위치 → display/flex/grid → transform */
+:deep(.p_br) { display: block; }
+:deep(.m_br) { display: none; }
+img { width: 100%; object-fit: cover; display: block; }
+p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+.brand { max-width: 100%; padding-bottom: 161px; overflow-x: clip; }
 .sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
 /* 100vw는 스크롤바 폭까지 포함해 가로 오버플로를 자주 냄 → 부모와 동일한 100% 사용 */
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
@@ -515,14 +530,12 @@ p {font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
 .logo_wrap{max-width: 382px; margin:0 auto;}
 .txt_area > p { width: 100%; margin-bottom: 48px; overflow: hidden }
 .txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block }
-.sec_brand_about{padding: 200px 20px;}
-.sec_brand_about .mo_txt { display: none }
+.sec_brand_about { padding: 200px 20px; }
 .sec_brand_about > .about_inner { max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
 .sec_brand_about > .about_inner > .about_txt > p { overflow: hidden }
 .sec_brand_about > .about_inner > .about_txt > p > span { font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
 .str_inner { width: 1460px; max-width: 100%; margin: 0 auto; padding: 200px 20px 0; box-sizing: border-box; }
-.sec_brand_str { background-color: #F8F8F8; }
-.sec_brand_str { padding: 200px 0; }
+.sec_brand_str { padding: 200px 0; background-color: #f8f8f8; }
 .sec_brand_str .str_inner {padding: 0 20px;}
 .sec_brand_str .str_header {margin-bottom:40px;flex-wrap:wrap;}
 section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: block; }
@@ -559,56 +572,52 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .str_biz_fig_inner{display: flex; align-items: center; justify-content: space-between;}
 .str_biz_fig strong{font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
 .str_biz_fig p{margin-top:8px; color:#67676F; font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-.str_biz_fig dl{margin-top:50px; display: flex; align-items: center; gap:16px; }
-.str_biz_fig dl > dt{color:#67676F;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em; flex-shrink: 0; white-space: nowrap;}
-.str_biz_fig dl > dd + dt{padding-left:16px; position:relative;}
-.str_biz_fig dl > dd + dt::before{content:''; display:block; width:1px; height:16px; background-color: #D7D7DF; position:absolute; top:50%; left:0; transform: translateY(-50%);}
-.str_biz_fig dl > dd > img{display: block; width: auto; max-width: 100%; height: auto; mix-blend-mode: multiply;}
+.str_biz_fig_cert { margin-top: 50px; display: flex; align-items: center; gap: 16px; }
+.str_biz_fig_cert > dt { color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; flex-shrink: 0; white-space: nowrap; }
+.str_biz_fig_cert > dd + dt { padding-left: 16px; position: relative; }
+.str_biz_fig_cert > dd + dt::before { content: ""; display: block; width: 1px; height: 16px; background-color: #d7d7df; position: absolute; top: 50%; left: 0; transform: translateY(-50%); }
+.str_biz_fig_cert > dd > img { display: block; width: auto; max-width: 100%; height: auto; mix-blend-mode: multiply; }
 .str_biz_fig_img{padding:0 80px;}
 
 .str_biz_block { width: 100%; margin: 64px 0 0 0 }
 .str_biz_subtit { margin: 0; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em }
 .str_biz_block p { margin: 16px 0 0 0; color:#67676F;}
 .str_biz_block :deep(.feature_card_list) { margin-top: 32px }
-.str_biz_block :deep(.feature_card_item) {height: 317px;} 
+.str_biz_block :deep(.feature_card_item) { height: 317px; }
+.sec_brand_competency_fig { margin: 0; padding: 0; }
 /* 채널 */
 .sec_brand_channel .str_header_channel { display: block; margin-bottom: 64px }
 .sec_brand_channel .card_list { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 80px 40px; align-items: stretch }
-.sec_brand_channel .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column }
-.sec_brand_channel .card_list > li > * { flex: 1; min-height: 0 }
+.sec_brand_channel .card_list > li,
+.sec_brand_program .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.sec_brand_channel .card_list > li > *,
+.sec_brand_program .card_list > li > * { flex: 1; min-height: 0; }
 .sec_brand_channel .card_list :deep(.card_thumb) { aspect-ratio: 690 / 380; border-radius: 12px;  background-size:cover;background-blend-mode: multiply;}
 .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 24px;}
 .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 8px; }
 
-/* 프로그램램 */
+/* 프로그램 */
 .sec_brand_program .str_header_program { display: block; margin-bottom: 64px }
 .sec_brand_program .card_list { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 80px 20px; align-items: stretch }
-.sec_brand_program .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column }
-.sec_brand_program .card_list > li > * { flex: 1; min-height: 0 }
 .sec_brand_program .card_list :deep(.card_thumb) {aspect-ratio: 460 / 300; border-radius: 12px; background-size: contain;background-blend-mode: multiply;}
 
 .diff_actions { width: 100%; max-width: 1460px; margin: 0 auto; padding: 100px 20px 0; box-sizing: border-box; }
-/* @media (max-width: 1024px) {
-  section > .str_inner,
-  section.str_inner { width: 100%; padding: 100px 40px; box-sizing: border-box; }
-} */
+
 @media (max-width: 768px) {
-  :deep(.p_br) { display: none }
-  :deep(.m_br) { display: block }
-  p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+  :deep(.p_br) { display: none; }
+  :deep(.m_br) { display: block; }
+  p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
   .sec_brand_visual { height: 100vh }
   .sticky { height: 100vh; top: 0 }
   .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(@/assets/images/dummy/gs_shop_bg.png); background-position: 46% 17px }
   .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
   .txt_area > p { margin-bottom: 0 }
-  .txt_area > p > span, .txt_area > p > span em { color:#fff; font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center }
+  .txt_area > p > span { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; }
   .txt_area > .logo_wrap { max-width: 219px; margin:10px auto 0; }
   .txt_area > p > span:first-child::after { content: "," }
-  .sec_brand_about{padding: 140px 0;}
-  .sec_brand_about > .about_inner{width:100%;}
-  .sec_brand_about > .about_inner > .about_txt > p > span  { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
-  .sec_brand_about { padding: 140px 0 }
-  .sec_brand_about > .about_inner { padding: 0 20px; gap: 40px }
+  .sec_brand_about { padding: 140px 0; }
+  .sec_brand_about > .about_inner { width: 100%; padding: 0 20px; }
+  .sec_brand_about > .about_inner > .about_txt > p > span { display: block; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
   .sec_brand_str{padding: 60px 0;}
   section.str_inner { padding: 80px 20px 0;}
   
@@ -616,7 +625,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   .str_header h2 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em }
   .str_header p{margin-top:12px; }
   .str_bi_header{margin-bottom:20px; flex-direction: column; gap:8px; justify-content: flex-start;}
-  .str_bi_tit{font-family: Pretendard;font-size: 1.8rem;line-height: 1.5;letter-spacing: 0%;}
+  .str_bi_tit { font-family: Pretendard, sans-serif; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
   .str_header .str_actions { gap:14px; flex: none; justify-content: flex-start }
   .str_bi_fig:nth-child(2){padding:0 46px;}
   .str_bi_fig:nth-child(1) > img {min-height: 80px;}
@@ -626,10 +635,10 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   .str_bi_logo_figs { gap: 20px }
   .str_bi_sec_color .str_bi_tit { margin-bottom: 24px }
   .str_bi_color_figs { display: flex; flex-direction: column; align-items: stretch }
-  .str_bi_caption { font-size: 1.6rem; line-height: 1.42;letter-spacing: 0%;}
-  .str_color_core { margin-top: 12px; display: grid; grid-template-columns: 1fr; gap: 10px }
-  .str_color_core + .str_bi_caption { margin-top: 40px }
-  .str_color_sup { margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px }
+  .str_bi_caption { font-size: 1.6rem; line-height: 1.42; letter-spacing: 0; }
+  .str_color_core { grid-template-columns: 1fr; }
+  .str_color_core + .str_bi_caption { margin-top: 40px; }
+  .str_color_sup { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px; }
   .btn_store_find { font-weight: 500; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
   .btn_store_find::before { width: 20px; height: 20px }
   .sns_wrap { gap: 16px }
@@ -637,37 +646,36 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   .str_biz_fig_img{min-width:60px; padding:0;}
   section.sec_brand_biz.str_inner .str_header p {font-weight: 700; line-height: 1.24; letter-spacing: 0; }
   .str_biz_fig_inner{gap:20px;}
-  .str_biz_fig strong{font-size: 1.6rem;line-height: 1.24;letter-spacing: 0%;}
-  .str_biz_fig p{margin-top:12px; font-size: 1.2rem;line-height: 1.2;letter-spacing: 0%;}
-  .str_biz_fig dl{margin-top:20px; gap:10px;}
-  .str_biz_fig dl >dt{font-size: 1.2rem;line-height: 1.2;letter-spacing: 0%;}
-  .str_biz_fig dl > dd + dt{padding-left:10px;}
+  .str_biz_fig strong { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+  .str_biz_fig p { margin-top: 12px; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+  .str_biz_fig_cert { margin-top: 20px; gap: 10px; }
+  .str_biz_fig_cert > dt { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+  .str_biz_fig_cert > dd + dt { padding-left: 10px; }
   .str_biz_block { margin-top: 40px }
   .str_biz_subtit { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-  .str_biz_lead { margin-top: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-  .str_biz_block p{margin-top:8px;}
+  .str_biz_block p { margin-top: 8px; }
   .str_biz_block :deep(.swiper-wrapper) { margin-top: 24px }
-  .str_biz_block :deep(.feature_card_item) {height: 312px;} 
-  /* FeatureCards 모바일: 슬라이드 너비(공통은 var 훅만) · 간격은 :swiper-space-between="8" */
+  .str_biz_block :deep(.feature_card_item) { height: 312px; }
   .str_biz_feature_cards {--fc-swiper-slide-w: 84.53vw;}
 
-  /* 채널널 */
+  /* 채널 */
   .sec_brand_channel .card_list { grid-template-columns: minmax(0, 1fr); gap: 40px }
   .sec_brand_channel .str_header_channel { margin-bottom: 40px }
   .sec_brand_channel .card_list :deep(.card_thumb) { aspect-ratio: 335 / 190;}
   .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 20px; display: block;}
   .sec_brand_channel .card_list :deep(.card_item .card_body .card_num),
-  .sec_brand_channel .card_list :deep(.card_item .card_body .card_tit){margin: 0 0 0 5px; font-size: 1.8rem;line-height: 150%;letter-spacing: 0;display: inline-block;}
+  .sec_brand_channel .card_list :deep(.card_item .card_body .card_tit) { display: inline-block; margin: 0 0 0 5px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
   .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 16px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 
-  /* 프로그램램 */
+  /* 프로그램 */
   .sec_brand_program .str_header_program { margin-bottom: 40px }
   .sec_brand_program .card_list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 10px }
   .sec_brand_program .card_list :deep(.card_thumb) {aspect-ratio: 162 / 114;}
-  .sec_brand_program .card_list :deep(.card_item .card_body){padding-top: 20px;}
-  .sec_brand_program .card_list :deep(.card_desc) {margin-top: 8px;}
-  .sec_brand_program .card_list :deep(.card_desc p) {font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
-  .diff_actions{max-width:100%;padding:80px 20px 0;box-sizing: border-box;}
-  .diff_actions .btn_back{width:100%; height: 52px; border:1px solid #67676F; border-radius: 10px;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}}
-  .diff_actions .btn_back::before{display: none;}
+  .sec_brand_program .card_list :deep(.card_item .card_body) { padding-top: 20px; }
+  .sec_brand_program .card_list :deep(.card_desc) { margin-top: 8px; }
+  .sec_brand_program .card_list :deep(.card_desc p) { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+  .diff_actions { max-width: 100%; padding: 80px 20px 0; }
+  .diff_actions :deep(.btn_back) { width: 100%; height: 52px; border: 1px solid #67676f; border-radius: 10px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+  .diff_actions :deep(.btn_back)::before { display: none; }
+}
 </style>
