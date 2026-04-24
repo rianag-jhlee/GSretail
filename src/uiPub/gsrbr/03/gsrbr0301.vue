@@ -115,7 +115,7 @@
         </section>
         <section class="sec_brand_biz str_inner" aria-label="GS SHOP 비즈니스 핵심역량">
             <header class="str_header">
-                <h2>소비자중심경영(CCM)을 <br class="m _br"/>실천하는 <br class="p_br"/>GS SHOP</h2>
+                <h2>소비자중심경영(CCM)을 <br class="m_br"/>실천하는 <br class="p_br"/>GS SHOP</h2>
                 <p>GS SHOP은 소비자의 목소리를 가장 먼저 듣고, <br class="m_br"/> 나누고, 공감하는 CCM 인증기업입니다.</p>
             </header>
             <div class="str_biz_fig">
@@ -183,7 +183,7 @@
                 </li>
             </ul> 
         </section>
-        <div v-if="!isMobileView" class="diff_actions">
+        <div class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
         </div>
     </div>
@@ -499,7 +499,7 @@ onBeforeUnmount(() => {
 :deep(.m_br) { display: none }
 img{width:100%; object-fit: cover; display: block;}
 p {font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
-.brand { padding-bottom: 206px; overflow-x: clip; max-width: 100%; }
+.brand { padding-bottom: 161px; overflow-x: clip; max-width: 100%; }
 .sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
 /* 100vw는 스크롤바 폭까지 포함해 가로 오버플로를 자주 냄 → 부모와 동일한 100% 사용 */
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
@@ -510,25 +510,26 @@ p {font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
 .bg_wrap > .bg::before { background-color: #00000066; z-index: 2 }
 .bg_wrap > .bg::after { background: linear-gradient(180deg, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .3) 48.27%, rgba(0, 0, 0, 0) 90.33%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
 .bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible }
-.bg_wrap > .visual_inner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center }
+.bg_wrap > .visual_inner { width:100%;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center }
 .bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center }
+.logo_wrap{max-width: 382px; margin:0 auto;}
 .txt_area > p { width: 100%; margin-bottom: 48px; overflow: hidden }
 .txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block }
-.sec_brand_about{padding: 200px 0;}
+.sec_brand_about{padding: 200px 20px;}
 .sec_brand_about .mo_txt { display: none }
-.sec_brand_about > .about_inner { width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
+.sec_brand_about > .about_inner { max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
 .sec_brand_about > .about_inner > .about_txt > p { overflow: hidden }
 .sec_brand_about > .about_inner > .about_txt > p > span { font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
 .str_inner { width: 1460px; max-width: 100%; margin: 0 auto; padding: 200px 20px 0; box-sizing: border-box; }
 .sec_brand_str { background-color: #F8F8F8; }
 .sec_brand_str { padding: 200px 0; }
 .sec_brand_str .str_inner {padding: 0 20px;}
-.sec_brand_str .str_header {margin-bottom:40px;}
+.sec_brand_str .str_header {margin-bottom:40px;flex-wrap:wrap;}
 section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: block; }
 .str_header {margin-bottom: 64px; display: flex; justify-content: space-between; align-items: flex-end }
-.str_header h2 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em }
+.str_header h2 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;text-align: left; }
 .str_header p {margin-top: 16px;}
-.str_header .str_actions { display: flex; align-items: center; gap: 24px }
+.str_header .str_actions { margin-left:auto; display: flex; align-items: center; gap: 24px }
 .str_bi { width: 100% }
 .str_bi_sec {padding:56px 64px; background-color: #fff; border-radius: 12px; }
 .str_bi_sec + .str_bi_sec { margin-top: 40px }
@@ -575,7 +576,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .sec_brand_channel .card_list { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 80px 40px; align-items: stretch }
 .sec_brand_channel .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column }
 .sec_brand_channel .card_list > li > * { flex: 1; min-height: 0 }
-.sec_brand_channel .card_list :deep(.card_thumb) { min-height: 380px; border-radius: 12px;  background-size:cover;background-blend-mode: multiply;}
+.sec_brand_channel .card_list :deep(.card_thumb) { aspect-ratio: 690 / 380; border-radius: 12px;  background-size:cover;background-blend-mode: multiply;}
 .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 24px;}
 .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 8px; }
 
@@ -584,7 +585,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .sec_brand_program .card_list { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 80px 20px; align-items: stretch }
 .sec_brand_program .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column }
 .sec_brand_program .card_list > li > * { flex: 1; min-height: 0 }
-.sec_brand_program .card_list :deep(.card_thumb) {min-height: 300px; background-size: contain;background-blend-mode: multiply;}
+.sec_brand_program .card_list :deep(.card_thumb) {aspect-ratio: 460 / 300; border-radius: 12px; background-size: contain;background-blend-mode: multiply;}
 
 .diff_actions { width: 100%; max-width: 1460px; margin: 0 auto; padding: 100px 20px 0; box-sizing: border-box; }
 /* @media (max-width: 1024px) {
@@ -653,7 +654,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   /* 채널널 */
   .sec_brand_channel .card_list { grid-template-columns: minmax(0, 1fr); gap: 40px }
   .sec_brand_channel .str_header_channel { margin-bottom: 40px }
-  .sec_brand_channel .card_list :deep(.card_thumb) { min-height: 190px;}
+  .sec_brand_channel .card_list :deep(.card_thumb) { aspect-ratio: 335 / 190;}
   .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 20px; display: block;}
   .sec_brand_channel .card_list :deep(.card_item .card_body .card_num),
   .sec_brand_channel .card_list :deep(.card_item .card_body .card_tit){margin: 0 0 0 5px; font-size: 1.8rem;line-height: 150%;letter-spacing: 0;display: inline-block;}
@@ -662,9 +663,11 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   /* 프로그램램 */
   .sec_brand_program .str_header_program { margin-bottom: 40px }
   .sec_brand_program .card_list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 10px }
-  .sec_brand_program .card_list :deep(.card_thumb) {min-height: 114px;}
+  .sec_brand_program .card_list :deep(.card_thumb) {aspect-ratio: 162 / 114;}
   .sec_brand_program .card_list :deep(.card_item .card_body){padding-top: 20px;}
   .sec_brand_program .card_list :deep(.card_desc) {margin-top: 8px;}
   .sec_brand_program .card_list :deep(.card_desc p) {font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
-}
+  .diff_actions{max-width:100%;padding:80px 20px 0;box-sizing: border-box;}
+  .diff_actions .btn_back{width:100%; height: 52px; border:1px solid #67676F; border-radius: 10px;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}}
+  .diff_actions .btn_back::before{display: none;}
 </style>
