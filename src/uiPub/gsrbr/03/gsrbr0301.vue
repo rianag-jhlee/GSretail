@@ -8,10 +8,10 @@
                         <div class="txt_area">
                             <p ref="textParaRef">
                                 <span>고객의 모든 순간을</span>
-                                <span>가치 있게 만드는 중심<em class="m_gs25"> GS25</em></span>
+                                <span>가치 있게 만드는 중심</span>
                             </p>
                             <div ref="logoWrapRef" class="logo_wrap">
-                                <img :src="imgLogo" alt="GS25" />
+                                <img :src="imgLogo" alt="GS SHOP" />
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                 <header class="str_header">
                     <div>
                         <h2>브랜드 소개</h2>
-                        <p>GS SHOP은 TV쇼핑과 모바일/인터넷쇼핑몰 등에 개별적으로 사용되던 브랜드를 <br />
+                        <p>GS SHOP은 TV쇼핑과 모바일/인터넷쇼핑몰 등에 개별적으로 사용되던 브랜드를 <br class="p_br"/>
                             고객의 더 나은 쇼핑을 돕기 위해 하나로 통합한 브랜드입니다.</p>
                     </div>
                     <div class="str_actions">
@@ -105,82 +105,83 @@
                 </div>
             </div>
         </section>
-        <section class="str_inner">
+        <section class="sec_brand_competency str_inner">
             <header class="str_header">
                 <h2>GS SHOP의 비즈니스 핵심역량</h2>
             </header>
             <div>
-                <img :src="imgBi09"  alt="GS SHOP의 비즈니스 핵심역량" />
+                <img :src="isBiCompetencyMobile ? imgBi09Mo : imgBi09"  alt="GS SHOP의 비즈니스 핵심역량" />
             </div>
         </section>
         <section class="sec_brand_biz str_inner" aria-label="GS SHOP 비즈니스 핵심역량">
             <header class="str_header">
-                    <h2>소비자중심경영(CCM)을 실천하는 <br />GS SHOP</h2>
-                    <p>GS SHOP은 소비자의 목소리를 가장 먼저 듣고, 나누고, 공감하는 CCM 인증기업입니다.</p>
-                </header>
-                <div class="str_biz_fig">
+                <h2>소비자중심경영(CCM)을 <br class="m _br"/>실천하는 <br class="p_br"/>GS SHOP</h2>
+                <p>GS SHOP은 소비자의 목소리를 가장 먼저 듣고, <br class="m_br"/> 나누고, 공감하는 CCM 인증기업입니다.</p>
+            </header>
+            <div class="str_biz_fig">
+                <div class="str_biz_fig_inner">
                     <div class="str_biz_fig_txt">  
-                        <strong>CCM(Consumer Centered Management) 인증이란?</strong>
+                        <strong>CCM(Consumer<br class="m_br"/>Centered Management)<br class="m_br"/>인증이란?</strong>
                         <p>기업이 수행하는 모든 활동을 소비자 관점에서 소비자 중심으로 구성하고 관련 경영활동을 지속적으로 개선하고 있는지를 평가하여 인증하는 제도</p>
-                        <dl>
-                            <dt>인증기관</dt>
-                            <dd><img :src="imgCert01" alt="공정거래위원회" /></dd>
-                            <dt>운영기관</dt>
-                            <dd><img :src="imgCert02" alt="한국소비자원" /></dd>
-                        </dl>
                     </div>
                     <div class="str_biz_fig_img">
                         <img :src="imgCert03" alt="소비자중심심" />
                     </div>
                 </div>
-                <div class="str_biz_block">
-                    <h3 class="str_biz_subtit">CCM 도입, 운영 성과</h3>
-                    <p>
-                        GS SHOP은 2009년 12월, 첫 인증을 받은 이후 고객을 먼저 생각하는 다양한 활동을 통해 CCM 재인증을 지속적으로 진행해왔습니다.
-                    </p>
-                    <FeatureCards type="text" :items="ccmFeatureItems" :no-swipe="true" />
-                </div>
+                <dl>
+                    <dt>인증기관</dt>
+                    <dd><img :src="imgCert01" alt="공정거래위원회" /></dd>
+                    <dt>운영기관</dt>
+                    <dd><img :src="imgCert02" alt="한국소비자원" /></dd>
+                </dl>
+            </div>
+            <div class="str_biz_block">
+                <h3 class="str_biz_subtit">CCM 도입, 운영 성과</h3>
+                <p>
+                    GS SHOP은 2009년 12월, 첫 인증을 받은 이후 고객을 먼저 생각하는 다양한 활동을 통해 CCM 재인증을 지속적으로 진행해왔습니다.
+                </p>
+                <FeatureCards class="str_biz_feature_cards" type="text" :items="ccmFeatureItems" :swiper-space-between="8" />
+            </div>
         </section>
         <section class="sec_brand_channel str_inner" aria-label="판매 채널 소개">
             <header class="str_header str_header_channel">
-                    <h2>판매 채널 소개</h2>
-                    <p>TV, 온라인, 모바일 등 고객이 있는 접점에서 GS SHOP만의 쇼핑 경험을 제공합니다.</p>
-                </header>
-                <ul class="card_list" role="list">
-                    <li
-                        v-for="card in channelCardList"
-                        :key="card.key"
+                <h2>판매 채널 소개</h2>
+                <p>TV, 온라인, 모바일 등 고객이 있는 접점에서 GS SHOP만의 쇼핑 경험을 제공합니다.</p>
+            </header>
+            <ul class="card_list" role="list">
+                <li
+                    v-for="card in channelCardList"
+                    :key="card.key"
+                >
+                    <CardItem
+                        :thumb-src="card.image"
+                        :thumb-alt="card.imgAlt || ''"
                     >
-                        <CardItem
-                            :thumb-src="card.image"
-                            :thumb-alt="card.imgAlt || ''"
-                        >
-                            <template v-if="card.em" #num>{{ card.em }}</template>
-                            <template v-if="card.title" #title>{{ card.title }}</template>
-                            <p v-if="card.desc">{{ card.desc }}</p>
-                        </CardItem>
-                    </li>
-                </ul>
+                        <template v-if="card.em" #num>{{ card.em }}</template>
+                        <template v-if="card.title" #title>{{ card.title }}</template>
+                        <p v-if="card.desc">{{ card.desc }}</p>
+                    </CardItem>
+                </li>
+            </ul>
         </section>
         <section class="sec_brand_program str_inner" aria-label="대표 브랜드 프로그램 소개">
             <header class="str_header str_header_program">
-                    <h2>대표 브랜드 프로그램 소개</h2>
-                    <p>GS SHOP만의 대표 프로그램으로 고객에게 차별화된 가치를 전합니다.</p>
-                </header>
-                <ul class="card_list" role="list">
-                    <li
-                        v-for="card in programCardList"
-                        :key="card.key"
+                <h2>대표 브랜드 프로그램 소개</h2>
+            </header>
+            <ul class="card_list" role="list">
+                <li
+                    v-for="card in programCardList"
+                    :key="card.key"
+                >
+                    <CardItem
+                        :thumb-src="card.image"
+                        :thumb-alt="card.imgAlt || ''"
                     >
-                        <CardItem
-                            :thumb-src="card.image"
-                            :thumb-alt="card.imgAlt || ''"
-                        >
-                            <template v-if="card.title" #title>{{ card.title }}</template>
-                            <p v-if="card.desc" v-html="card.desc"></p>
-                        </CardItem>
-                    </li>
-                </ul> 
+                        <template v-if="card.title" #title>{{ card.title }}</template>
+                        <p v-if="card.desc" v-html="card.desc"></p>
+                    </CardItem>
+                </li>
+            </ul> 
         </section>
         <div v-if="!isMobileView" class="diff_actions">
             <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
@@ -208,6 +209,7 @@ import imgBi06 from "@/assets/images/dummy/gsrbr0301_06.png";
 import imgBi07 from "@/assets/images/dummy/gsrbr0301_07.png";
 import imgBi08 from "@/assets/images/dummy/gsrbr0301_08.png";
 import imgBi09 from "@/assets/images/dummy/gsrbr0301_09.png";
+import imgBi09Mo from "@/assets/images/dummy/mo/gsrbr0301_09_mo.png";
 import imgBi03Mo from "@/assets/images/dummy/mo/gsrbr0301_03_mo.png";
 import imgBi04Mo from "@/assets/images/dummy/mo/gsrbr0301_04_mo.png";
 import imgBi05Mo from "@/assets/images/dummy/mo/gsrbr0301_05_mo.png";
@@ -249,6 +251,8 @@ const aboutSectionRef = ref(null);
 
 /** 768px 이하에서 BI 색상 이미지(_mo) 사용 — CSS 모바일 구간과 동일 */
 const isBiColorMobile = ref(false);
+/** 비즈니스 핵심역량 섹션 이미지도 동일 구간에서 _mo 사용 */
+const isBiCompetencyMobile = isBiColorMobile;
 let biColorMql = null;
 function onBiColorMqlChange(e) {
     isBiColorMobile.value = e.matches;
@@ -493,9 +497,12 @@ onBeforeUnmount(() => {
 <style scoped>
 :deep(.p_br) { display: block }
 :deep(.m_br) { display: none }
-.brand{padding-bottom:206px;}
-.sec_brand_visual { position: relative; height: calc(100vh + 800px) }
-.sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100vw; width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
+img{width:100%; object-fit: cover; display: block;}
+p {font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
+.brand { padding-bottom: 206px; overflow-x: clip; max-width: 100%; }
+.sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
+/* 100vw는 스크롤바 폭까지 포함해 가로 오버플로를 자주 냄 → 부모와 동일한 100% 사용 */
+.sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
 .bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/gs_shop_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
 .bg_wrap.active > .bg { transform: scale(1) }
@@ -507,22 +514,20 @@ onBeforeUnmount(() => {
 .bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center }
 .txt_area > p { width: 100%; margin-bottom: 48px; overflow: hidden }
 .txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block }
-.txt_area > .logo_wrap { overflow: hidden }
-.txt_area > .logo_wrap > img { width: auto; margin: 0 auto; display: block }
-.m_gs25 { font-style: normal; display: none }
-.sec_brand_about { padding: 200px 0;}
+.sec_brand_about{padding: 200px 0;}
 .sec_brand_about .mo_txt { display: none }
 .sec_brand_about > .about_inner { width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
 .sec_brand_about > .about_inner > .about_txt > p { overflow: hidden }
 .sec_brand_about > .about_inner > .about_txt > p > span { font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
-.str_inner { width: 1460px; max-width: 100%; margin: 0 auto; padding: 200px 20px 0; }
+.str_inner { width: 1460px; max-width: 100%; margin: 0 auto; padding: 200px 20px 0; box-sizing: border-box; }
 .sec_brand_str { background-color: #F8F8F8; }
-.sec_brand_str { padding: 200px 20px; }
+.sec_brand_str { padding: 200px 0; }
 .sec_brand_str .str_inner {padding: 0 20px;}
+.sec_brand_str .str_header {margin-bottom:40px;}
 section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: block; }
 .str_header {margin-bottom: 64px; display: flex; justify-content: space-between; align-items: flex-end }
 .str_header h2 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em }
-.str_header p {margin-top: 16px;font-weight: 700;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
+.str_header p {margin-top: 16px;}
 .str_header .str_actions { display: flex; align-items: center; gap: 24px }
 .str_bi { width: 100% }
 .str_bi_sec {padding:56px 64px; background-color: #fff; border-radius: 12px; }
@@ -530,7 +535,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .str_bi_header {margin-bottom: 40px; display: flex; justify-content: space-between;gap:16px;}
 .str_bi_sec_color .str_bi_tit{margin-bottom: 40px;}
 .str_bi_tit {font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; flex: 1 }
-.str_bi_desc { width: 100%; color: #67676F; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; flex:1; }
+.str_bi_desc { color: #67676F; flex:1; }
 .str_bi_logo_figs { width: 100%; display: flex; flex-direction: column; gap: 24px }
 .str_bi_fig { width: 100% }
 .str_bi_fig:nth-child(2){padding:92px 0;}
@@ -540,7 +545,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .str_color_core { width: 100%; margin: 12px 0 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px }
 .str_color_core + .str_bi_caption { margin-top: 64px; }
 .str_color_core li { min-width: 0 }
-.str_color_core img { width: 100%; height: auto; display: block; border-radius: 12px }
+.str_color_core img { border-radius: 12px; display: block; }
 .str_color_sup { width: 100%; margin: 12px 0 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px }
 .str_color_sup li { min-width: 0 }
 .str_color_sup img { width: 100%; height: auto; display: block; }
@@ -549,61 +554,68 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .sns_wrap { display: flex; align-items: center; gap: 6px }
 .btn_sns { width: 56px; height: 56px; background-color: red; border-radius: 100%; display: flex; align-items: center; justify-content: center }
 .btn_sns::before { content: ""; background-color: #161616; border-radius: 4px; display: block }
-.str_biz_fig { padding:32px; background-color: #F8F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;}
+.str_biz_fig { padding:32px; background-color: #F8F8F8; border-radius: 12px; }
+.str_biz_fig_inner{display: flex; align-items: center; justify-content: space-between;}
 .str_biz_fig strong{font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
-.str_biz_fig p{margin-top:8px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+.str_biz_fig p{margin-top:8px; color:#67676F; font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 .str_biz_fig dl{margin-top:50px; display: flex; align-items: center; gap:16px; }
-.str_biz_fig dl > dt{color:#67676F;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+.str_biz_fig dl > dt{color:#67676F;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em; flex-shrink: 0; white-space: nowrap;}
 .str_biz_fig dl > dd + dt{padding-left:16px; position:relative;}
 .str_biz_fig dl > dd + dt::before{content:''; display:block; width:1px; height:16px; background-color: #D7D7DF; position:absolute; top:50%; left:0; transform: translateY(-50%);}
-.str_biz_fig dl > dd > img{display: block;}
+.str_biz_fig dl > dd > img{display: block; width: auto; max-width: 100%; height: auto; mix-blend-mode: multiply;}
 .str_biz_fig_img{padding:0 80px;}
 
 .str_biz_block { width: 100%; margin: 64px 0 0 0 }
 .str_biz_subtit { margin: 0; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em }
-.str_biz_block p { margin: 16px 0 0 0; color: #67676f; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em }
-.str_biz_block p + :deep(ul) { margin-top: 32px }
+.str_biz_block p { margin: 16px 0 0 0; color:#67676F;}
+.str_biz_block :deep(.feature_card_list) { margin-top: 32px }
+.str_biz_block :deep(.feature_card_item) {height: 317px;} 
+/* 채널 */
 .sec_brand_channel .str_header_channel { display: block; margin-bottom: 64px }
 .sec_brand_channel .card_list { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 80px 40px; align-items: stretch }
 .sec_brand_channel .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column }
 .sec_brand_channel .card_list > li > * { flex: 1; min-height: 0 }
-.sec_brand_channel .card_list :deep(.card_thumb) { min-height: 380px; aspect-ratio: auto }
+.sec_brand_channel .card_list :deep(.card_thumb) { min-height: 380px; border-radius: 12px;  background-size:cover;background-blend-mode: multiply;}
+.sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 24px;}
+.sec_brand_channel .card_list :deep(.card_desc) { margin-top: 8px; }
 
+/* 프로그램램 */
 .sec_brand_program .str_header_program { display: block; margin-bottom: 64px }
 .sec_brand_program .card_list { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 80px 20px; align-items: stretch }
 .sec_brand_program .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column }
 .sec_brand_program .card_list > li > * { flex: 1; min-height: 0 }
-.sec_brand_program .card_list :deep(.card_thumb) { min-height: 300px; aspect-ratio: auto; background-size:auto;}
-.sec_brand_program .card_list li :deep(.card_body) { padding-top: 24px }
-.sec_brand_program .card_list li :deep(.card_desc){margin-top:8px;}
-.diff_actions{ width: 1460px;margin: 0 auto;padding: 100px 20px 0;}
-@media (max-width: 1024px) {
-  .sec_brand_about > .about_inner { width: 100%; padding: 0 40px }
-  section > .str_inner { width: 100%; padding: 100px 40px }
-}
+.sec_brand_program .card_list :deep(.card_thumb) {min-height: 300px; background-size: contain;background-blend-mode: multiply;}
+
+.diff_actions { width: 100%; max-width: 1460px; margin: 0 auto; padding: 100px 20px 0; box-sizing: border-box; }
+/* @media (max-width: 1024px) {
+  section > .str_inner,
+  section.str_inner { width: 100%; padding: 100px 40px; box-sizing: border-box; }
+} */
 @media (max-width: 768px) {
   :deep(.p_br) { display: none }
   :deep(.m_br) { display: block }
+  p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
   .sec_brand_visual { height: 100vh }
   .sticky { height: 100vh; top: 0 }
-  .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(@/assets/images/dummy/gs_shop_bg.png); transform: scale(1.25); background-position: 54% 50px }
+  .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(@/assets/images/dummy/gs_shop_bg.png); background-position: 46% 17px }
   .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
   .txt_area > p { margin-bottom: 0 }
   .txt_area > p > span, .txt_area > p > span em { color:#fff; font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center }
-  .txt_area > .logo_wrap { display: none }
-  .m_gs25 { display: inline }
+  .txt_area > .logo_wrap { max-width: 219px; margin:10px auto 0; }
   .txt_area > p > span:first-child::after { content: "," }
+  .sec_brand_about{padding: 140px 0;}
+  .sec_brand_about > .about_inner{width:100%;}
   .sec_brand_about > .about_inner > .about_txt > p > span  { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
   .sec_brand_about { padding: 140px 0 }
   .sec_brand_about > .about_inner { padding: 0 20px; gap: 40px }
-  section { padding: 60px 0 }
-  section.str_inner { padding: 60px 20px }
-  .str_header { flex-direction: column; align-items: flex-start; gap: 16px; padding-bottom: 24px }
+  .sec_brand_str{padding: 60px 0;}
+  section.str_inner { padding: 80px 20px 0;}
+  
+  .str_header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px }
   .str_header h2 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em }
-  .str_header p{margin-top:12px; font-weight: 400;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+  .str_header p{margin-top:12px; }
   .str_bi_header{margin-bottom:20px; flex-direction: column; gap:8px; justify-content: flex-start;}
   .str_bi_tit{font-family: Pretendard;font-size: 1.8rem;line-height: 1.5;letter-spacing: 0%;}
-  .str_bi_desc{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
   .str_header .str_actions { gap:14px; flex: none; justify-content: flex-start }
   .str_bi_fig:nth-child(2){padding:0 46px;}
   .str_bi_fig:nth-child(1) > img {min-height: 80px;}
@@ -616,20 +628,43 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   .str_bi_caption { font-size: 1.6rem; line-height: 1.42;letter-spacing: 0%;}
   .str_color_core { margin-top: 12px; display: grid; grid-template-columns: 1fr; gap: 10px }
   .str_color_core + .str_bi_caption { margin-top: 40px }
-  .str_color_sup { margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px }
+  .str_color_sup { margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px }
   .btn_store_find { font-weight: 500; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
   .btn_store_find::before { width: 20px; height: 20px }
   .sns_wrap { gap: 16px }
   .btn_sns { width: 40px; height: 40px }
-  .str_biz_fig { margin-top: 40px }
+  .str_biz_fig_img{min-width:60px; padding:0;}
+  section.sec_brand_biz.str_inner .str_header p {font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+  .str_biz_fig_inner{gap:20px;}
+  .str_biz_fig strong{font-size: 1.6rem;line-height: 1.24;letter-spacing: 0%;}
+  .str_biz_fig p{margin-top:12px; font-size: 1.2rem;line-height: 1.2;letter-spacing: 0%;}
+  .str_biz_fig dl{margin-top:20px; gap:10px;}
+  .str_biz_fig dl >dt{font-size: 1.2rem;line-height: 1.2;letter-spacing: 0%;}
+  .str_biz_fig dl > dd + dt{padding-left:10px;}
   .str_biz_block { margin-top: 40px }
   .str_biz_subtit { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
   .str_biz_lead { margin-top: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-  .str_biz_block .str_biz_lead + :deep(ul) { margin-top: 24px }
-  .str_biz_block h3 + :deep(ul) { margin-top: 24px }
-  .sec_brand_channel .str_header_channel { margin-bottom: 40px }
+  .str_biz_block p{margin-top:8px;}
+  .str_biz_block :deep(.swiper-wrapper) { margin-top: 24px }
+  .str_biz_block :deep(.feature_card_item) {height: 312px;} 
+  /* FeatureCards 모바일: 슬라이드 너비(공통은 var 훅만) · 간격은 :swiper-space-between="8" */
+  .str_biz_feature_cards {--fc-swiper-slide-w: 84.53vw;}
+
+  /* 채널널 */
   .sec_brand_channel .card_list { grid-template-columns: minmax(0, 1fr); gap: 40px }
+  .sec_brand_channel .str_header_channel { margin-bottom: 40px }
+  .sec_brand_channel .card_list :deep(.card_thumb) { min-height: 190px;}
+  .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 20px; display: block;}
+  .sec_brand_channel .card_list :deep(.card_item .card_body .card_num),
+  .sec_brand_channel .card_list :deep(.card_item .card_body .card_tit){margin: 0 0 0 5px; font-size: 1.8rem;line-height: 150%;letter-spacing: 0;display: inline-block;}
+  .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 16px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+
+  /* 프로그램램 */
   .sec_brand_program .str_header_program { margin-bottom: 40px }
   .sec_brand_program .card_list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 10px }
+  .sec_brand_program .card_list :deep(.card_thumb) {min-height: 114px;}
+  .sec_brand_program .card_list :deep(.card_item .card_body){padding-top: 20px;}
+  .sec_brand_program .card_list :deep(.card_desc) {margin-top: 8px;}
+  .sec_brand_program .card_list :deep(.card_desc p) {font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
 }
 </style>
