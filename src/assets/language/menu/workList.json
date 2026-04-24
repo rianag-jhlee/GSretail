@@ -148,7 +148,7 @@
         "link": "/gsrbr0301",
         "startDate": "26-04-2",
         "endDate": "26-04-2",
-        "status": "ing",
+        "status": "com",
         "note": " "
     },
     {
@@ -706,6 +706,16 @@
         "endDate": "",
         "status": "com",
         "note": "gsrst01에서 확인 가능, 현재 외부링크 ( https://withgs.gsshop.com/sug/suggest )로 페이지 없음."
+    },
+    {
+        "depth1": "SUSTAINABILITY", "depth2": "지속가능경영", "depth3": "비전&전략", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/01/gsrsu0101",
+        "link": "/gsrsu0101",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": ""
     }
     
 
