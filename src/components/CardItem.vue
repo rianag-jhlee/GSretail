@@ -47,7 +47,6 @@ const showBody = computed(() => showNum.value || showTitle.value || showDesc.val
     width: 100%;
     height: 100%;
     min-height: 0;
-    border-radius: 12px;
     overflow: hidden;
 }
 
@@ -82,6 +81,9 @@ const showBody = computed(() => showNum.value || showTitle.value || showDesc.val
     flex: 1 1 auto;
 }
 
-
+@media screen and (max-width:768px) {
+.card_tit {font-size: 1.6rem;line-height: 1.24;letter-spacing: 0%;}
+.card_desc {font-size: 1.6rem;}
+}
 
 </style>
