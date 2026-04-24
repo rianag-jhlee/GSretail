@@ -11,7 +11,7 @@ defineProps({
     type: { type: String, default: "num" },
     // noSwipe=true: 모바일에서도 Swiper 대신 리스트(1열) 표시
     noSwipe: { type: Boolean, default: false },
-    // 모바일 Swiper 슬라이드 간격(px). 페이지에서 margin으로 간격 줄 때 0과 함께 쓸 수 있음
+    // 모바일 Swiper 슬라이드 간격(px). 슬라이드 너비는 사용 페이지에서 --fc-swiper-slide-w 로 지정
     swiperSpaceBetween: { type: Number, default: 8 },
 });
 
@@ -198,19 +198,23 @@ onUnmounted(() => {
         flex: none;
         width: 100%;
     }
+    /* 구조만: 슬라이드 픽셀/vw 값은 각 페이지에서 --fc-swiper-slide-w (미지정 시 85vw) */
     .feature_card_swiper {
-        overflow: visible;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
     }
-
     .feature_card_swiper :deep(.swiper-slide) {
-        width: 84vw;
+        width: var(--fc-swiper-slide-w, 85vw);
+        max-width: 100%;
+        box-sizing: border-box;
     }
-
+    .feature_card_swiper .feature_card_item {
+        width: 100%;
+    }
     .feature_card_item {
-        width: 84vw;
         height: auto;
         min-height: 0;
-        padding: 32px;
     }
     .feature_card_title{
         margin-bottom: 16px;
