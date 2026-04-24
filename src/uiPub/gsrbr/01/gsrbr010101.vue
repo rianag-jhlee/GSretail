@@ -3115,7 +3115,7 @@ function goBack() {
 .sec_brand_about > .about_inner { width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
 .sec_brand_about > .about_inner > .about_txt > p  { overflow: hidden }
 .sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
-.sec_brand_str > .str_inner { width: 1420px; margin: 0 auto; padding: 200px 0 }
+.sec_brand_str > .str_inner { max-width: 1460px; margin: 0 auto; padding: 200px 20px; }
 .str_header { padding-bottom: 80px; display: flex; justify-content: space-between; align-items: flex-end }
 .str_header > h2 { color: #161616; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em }
 .str_header > .str_actions { display: flex; align-items: center; gap: 24px }
