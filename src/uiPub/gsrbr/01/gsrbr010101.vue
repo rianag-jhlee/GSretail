@@ -23,35 +23,16 @@
 
         <section ref="aboutSectionRef" class="sec_brand_about">
             <div class="about_inner">
-                <p class="pc_txt">
-                    <span>대한민국 토종 브랜드의 자존심을 지키고 있는 GS25는</span>
-                    <span>'수익을 낼 수 있는 가맹점을 늘린다'는 프랜차이즈 사업의 대원칙을</span>
-                    <span>변함없이 지켜온 결과, 개발점 수익성이 가장 높은 국내 최고의 편의점 브랜드로</span>
-                    <span>자리매김하였습니다.</span>
-                </p>
-                <p class="pc_txt">
-                    <span>이는 '한국에서 가장 존경받는 기업' 16년 연속 1위,</span>
-                    <span>한국서비스 품질지수(KS-SQI) 1위 총 19회 수상 등 공신력 있는 대외 기관의</span>
-                    <span>평가 결과로 이어지고 있습니다.</span>
-                </p>
-
-                <p class="mo_txt">
-                    대한민국 토종 브랜드의<br />
-                    자존심을 지키고 있는 GS25는<br />
-                    '수익을 낼 수 있는 가맹점을 늘린다'는<br />
-                    프랜차이즈 사업의 대원칙을<br />
-                    변함없이 지켜온 결과,<br />
-                    개발점 수익성이 가장 높은 국내 최고의<br />
-                    편의점 브랜드로 자리매김하였습니다.<br />
-                </p>
-                <p class="mo_txt">
-                    이는<br />
-                    '한국에서 가장 존경받는 기업' 16년 연속 1위,<br />
-                    한국서비스 품질지수(KS-SQI) 1위<br />
-                    총 19회 수상 등 공신력 있는 대외 기관의<br />
-                    평가 결과로 이어지고 있습니다.<br />
-                </p>
-
+                <div class="about_txt">
+                    <p><span>대한민국 토종 브랜드의 <br class="m_br" />자존심을 지키고 있는 GS25는</span></p>
+                    <p><span>'수익을 낼 수 있는 가맹점을 늘린다'는 <br class="m_br" />프랜차이즈 사업의 대원칙을</span></p>
+                    <p><span>변함없이 지켜온 결과, <br class="m_br" />개발점 수익성이 가장 높은 국내 최고의<br class="m_br" /> 편의점 브랜드로 <br class="p_br" />자리매김하였습니다.</span></p>
+                </div>
+                <div class="about_txt">
+                    <p><span>이는 <br class="m_br" />'한국에서 가장 존경받는 기업' 16년 연속 1위,</span></p>
+                    <p><span>한국서비스 품질지수(KS-SQI) 1위 <br class="m_br" />총 19회 수상 등 공신력 있는 대외 기관의</span></p>
+                    <p><span>평가 결과로 이어지고 있습니다.</span></p>
+                </div>
             </div>
         </section>
 
@@ -3131,12 +3112,10 @@ function goBack() {
 .txt_area > .logo_wrap > img { width: auto; margin: 0 auto; display: block }
 .m_gs25 { font-style: normal; display: none }
 .sec_brand_about { padding: 200px 0; background-color: #f8f8f8 }
-.sec_brand_about .mo_txt { display: none }
-.sec_brand_about .pc_txt { overflow: hidden }
 .sec_brand_about > .about_inner { width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
-.sec_brand_about > .about_inner > .pc_txt { overflow: hidden }
-.sec_brand_about > .about_inner > .pc_txt > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
-.sec_brand_str > .str_inner { width: 1420px; margin: 0 auto; padding: 200px 0 }
+.sec_brand_about > .about_inner > .about_txt > p  { overflow: hidden }
+.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
+.sec_brand_str > .str_inner { max-width: 1460px; margin: 0 auto; padding: 200px 20px; }
 .str_header { padding-bottom: 80px; display: flex; justify-content: space-between; align-items: flex-end }
 .str_header > h2 { color: #161616; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em }
 .str_header > .str_actions { display: flex; align-items: center; gap: 24px }
@@ -3176,11 +3155,9 @@ function goBack() {
   .txt_area > .logo_wrap { display: none }
   .m_gs25 { display: inline }
   .txt_area > p > span:first-child::after { content: "," }
-  .sec_brand_about .mo_txt { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
-  .sec_brand_about .pc_txt { display: none }
+  .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
   .sec_brand_about { padding: 140px 0 }
   .sec_brand_about > .about_inner { padding: 0 20px; gap: 40px }
-  .sec_brand_about > .about_inner > .pc_txt > span { font-size: 1.8rem }
   .sec_brand_str { padding: 140px 0 }
   .sec_brand_str > .str_inner { padding: 0 20px }
   .str_header { flex-direction: column; align-items: flex-start; gap: 16px; padding-bottom: 40px }

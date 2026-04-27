@@ -59,7 +59,7 @@
             </div>
 
             <div class="middle_bts_wrap">
-                <button :class="{ active: hasStore === true }"  @click="hasStore = true">내가 소유한 점포가 있다.</button>
+                <button :class="{ active: hasStore === true }" @click="hasStore = true">내가 소유한 점포가 있다.</button>
                 <button :class="{ active: hasStore === false }" @click="hasStore = false">내가 소유한 점포가 없다.</button>
             </div>
 
@@ -85,7 +85,7 @@
                             <span class="form_sep">@</span>
                             <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" placeholder="직접입력" />
                             <Inputs v-else type="text" :model-value="consultForm.emailDomain" :is-readonly="true" />
-                            <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain"  />
+                            <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain" />
                         </div>
                     </div>
                     <!-- 연락처 -->
@@ -102,7 +102,7 @@
 
                     <!-- 개설희망지역 -->
                     <div class="form_row">
-                        <div class="form_label">소유점포 주소 <br />(과거, 현재 점포소유 <br>신청자에 한함)<span class="form_required">*</span></div>
+                        <div class="form_label">소유점포 주소 <br class="p_br"/>(과거, 현재 점포소유 <br class="p_br">신청자에 한함)<span class="form_required">*</span></div>
                         <div class="form_field form_field_region">
                             <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" initMsg="시/도 선택" @update:modelValue="consultForm.regionSigungu = ''" />
                             <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" initMsg="구/군 선택" :disabled="!consultForm.regionSido" />
@@ -122,28 +122,28 @@
                     <div class="form_row form_row_area">
                         <div class="form_label">소유점포 면적</div>
                         <div class="form_field form_field_area">
-                            <div class="area_group">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">계약면적</span>
-                                <div class="area_input_wrap">
+                                <div class="form_sub_input_wrap">
                                     <Inputs type="text" v-model="consultForm.areaContract" />
+                                    <span class="form_sub_unit">m²</span>
                                 </div>
-                                <span class="area_unit">m²</span>
                             </div>
-                            <div class="area_group">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">전용면적</span>
-                                <div class="area_input_wrap">
+                                <div class="form_sub_input_wrap">
                                     <Inputs type="text" v-model="consultForm.areaExclusive" />
+                                    <span class="form_sub_unit">m²</span>
                                 </div>
-                                <span class="area_unit">m²</span>
                             </div>
                             <span class="area_note">* m² = (기준)평 x 3.3</span>
                         </div>
                     </div>
                     <!-- 수퍼 운영자 일 경우 -->
-                    <div class="form_row form_row_check">
+                    <div class="form_row check_row">
                         <div class="form_label">수퍼 운영자 일 경우</div>
                         <div class="form_field form_field_check">
-                            <div class="check_group">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">취급 품목 체크</span>
                                 <div class="check_list">
                                     <Inputs v-for="opt in superItemOptions" :key="opt.value"
@@ -157,24 +157,28 @@
                         </div>
                     </div>
                     <!-- 계약조건 -->
-                    <div class="form_row form_row_contract">
+                    <div class="form_row contract_row">
                         <div class="form_label">계약조건</div>
                         <div class="form_field form_field_contract">
-                            <div class="contract_row">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">계약 기간</span>
-                                <div class="contract_period">
+                                <div class="form_sub_inputs">
                                     <Inputs type="text" v-model="consultForm.contractStart"/>
                                     <span class="form_sep">~</span>
                                     <Inputs type="text" v-model="consultForm.contractEnd" />
                                 </div>
                             </div>
-                            <div class="contract_row">
+                            <div class="form_sub_group">
                                 <span class="form_sub_label">보증금/월임대료</span>
                                 <div class="contract_rent">
-                                    <Inputs type="text" v-model="consultForm.deposit" />
-                                    <span class="area_unit">만원</span>
-                                    <Inputs type="text" v-model="consultForm.monthlyRent" />
-                                    <span class="area_unit">만원</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.deposit" />
+                                        <span class="form_sub_unit">만원</span>
+                                    </div>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.monthlyRent" />
+                                        <span class="form_sub_unit">만원</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -299,375 +303,152 @@ function closeModal(event) {
 </script>
 
 <style scoped>
-/* 모달 래퍼 */
-
-/* 타이틀 */
-.smn_modal{--color-brand-primary: #15b874;}
-.smn_title_row {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    min-height: 92px;
-    margin: 0;
-    padding: 0;
-}
-
-.smn_title {
-   
-    font-size: 4rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.3;
-}
-
-
-.smn_close {
-    width: 40px;
-    height: 40px;
-    background: none;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    flex-shrink: 0;
-    position: relative;
-}
-
-
-.smn_close::before,
-.smn_close::after {
-    width: 22px;
-    border-top: 2px solid #161616;
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
+:deep(.m_br) { display: none; }
+:deep(.p_br) { display: block; }
+.smn_modal { --color-brand-primary: #15b874; }
+.smn_bottom :deep(.primary) { background-color: var(--color-brand-primary); }
+.smn_modal :deep([class*="btn_"][class*="primary"]) { color: #fff; }
+.smn_title_row { display: flex; align-items: flex-start; justify-content: space-between; min-height: 92px; margin: 0; padding: 0; }
+.smn_title { color: #161616; font-size: 4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
+.smn_close { width: 40px; height: 40px; background: none; border: none; border-radius: 50%; cursor: pointer; flex-shrink: 0; position: relative; }
+.smn_close::before, .smn_close::after { width: 22px; border-top: 2px solid #161616; content: ""; position: absolute; top: 50%; left: 50%; }
 .smn_close::before { transform: translate(-50%, -50%) rotate(45deg); }
-.smn_close::after  { transform: translate(-50%, -50%) rotate(-45deg); }
-
-/* 인트로 */
-.smn_intro strong{
-    font-size: 3.2rem;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-}
-.smn_intro > p {
-    margin-top:16px;
-   
-    font-size: 2rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.35;
-}
-
-/* 컨설턴트와 1:1 상담 박스 */
+.smn_close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+.smn_intro strong { color: #161616; font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; }
+.smn_intro > p { margin-top: 16px; color: #161616; font-size: 2rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.35; }
 .consent_body { padding: 32px; }
-.flex_wrap{ display: flex; align-items: flex-start; gap: 20px;}
-.consent_img_wrap { width: 114px; height: 152px;;border:1px solid #000; flex-shrink: 0; overflow: hidden; }
+.flex_wrap { display: flex; align-items: flex-start; gap: 20px; }
+.consent_img_wrap { width: 114px; height: 152px; border: 1px solid #000; flex-shrink: 0; overflow: hidden; }
 .consent_img_wrap > img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.consult_box .consent_info { padding:0;display: flex; flex-direction: column; gap: 24px; }
-.consult_box .consent_info_title { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; }
-.consult_box .consent_info > p { font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
-.consult_box .consent_info > button { width: fit-content; padding: 4px 12px; background:#E8F8F1; border: 1px solid #15B874; border-radius: 100px; color: #15B874; font-size: 1.4rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.4; cursor: default; }
-.consult_box .consent_notice { border-top: 1px solid #E5E5E9;}
+.consult_box .consent_info { padding: 0; display: flex; flex-direction: column; gap: 24px; }
+.consult_box .consent_info_title { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; color: #161616; }
+.consult_box .consent_info > p { font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; color: #161616; }
+.consult_box .consent_info > button { width: fit-content; padding: 4px 12px; background: #e8f8f1; border: 1px solid #15b874; border-radius: 100px; color: #15b874; font-size: 1.4rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.4; cursor: default; }
+.consult_box .consent_notice { border-top: 1px solid #e5e5e9; }
 .list_caution { list-style: none; margin: 0; padding: 0; }
-.list_caution > li > p { color: #67676F; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
-
-/* 개인정보 동의 */
-.gray_box {
-    margin-top: 40px;
-    border-radius: 12px;
-    background-color: #f8f8f8;
-    overflow: hidden;
-}
+.list_caution > li > p { color: #67676f; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
+.gray_box { margin-top: 40px; border-radius: 12px; background-color: #f8f8f8; overflow: hidden; }
 .consent_info { padding: 32px; }
-.consent_info_title {
-   
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.35;
-}
-.consent_info_list {
-    margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-.consent_info_list > li {
-    padding-left: 10px;
-    color: #67676f;
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.5;
-    position: relative;
-}
-/* 첫 줄 기준 세로 중앙 (여러 줄이어도 첫 줄에만 맞춤) */
-.consent_info_list > li::before {
-    content: "";
-    width:4px;
-    height:1px;
-    background-color: #67676F;
-    position: absolute;
-    left: 0;
-    top: 0.5lh;
-}
-.consent_notice {
-    margin-top: 24px;
-    padding-top: 24px;
-    border-top: 1px solid #d7d7df;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-}
-.consent_notice_text {
-    
-    font-size: 1.6rem;
-    font-weight: 700;
-    line-height: 1.24;
-}
-.consent_radio_label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    cursor: pointer;
-    white-space: nowrap;
-}
-.consent_radio {
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    appearance: none;
-    border: 0;
-    border-radius: 8px;
-    background-color: #fff;
-    cursor: pointer;
-    flex-shrink: 0;
-    position: relative;
-    transition: border-color 0.2s, background-color 0.2s;
-}
-.consent_radio:checked {
-    border-color: #107af2;
-    background-color: #107af2;
-}
-.consent_radio:checked::after {
-    width: 13px;
-    height: 8px;
-    background-color: #fff;
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.consent_radio_text {
-   
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.4;
-}
-/* 점포 소유 선택 버튼 */
+.consent_info_title { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; color: #161616; }
+.consent_info_list { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
+.consent_info_list > li { padding-left: 10px; color: #67676f; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; position: relative; }
+.consent_info_list > li::before { content: ""; width: 4px; height: 1px; background-color: #67676f; position: absolute; left: 0; top: 0.5lh; }
+.consent_notice { margin-top: 24px; padding-top: 24px; border-top: 1px solid #d7d7df; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.consent_notice_text { font-size: 1.6rem; font-weight: 700; line-height: 1.24; color: #161616; }
+.consent_radio_label { display: flex; align-items: center; gap: 8px; flex-shrink: 0; cursor: pointer; white-space: nowrap; }
+.consent_radio { width: 24px; height: 24px; padding: 0; appearance: none; border: 0; border-radius: 8px; background-color: #fff; cursor: pointer; flex-shrink: 0; position: relative; transition: border-color 0.2s, background-color 0.2s; }
+.consent_radio:checked { border-color: #107af2; background-color: #107af2; }
+.consent_radio:checked::after { width: 13px; height: 8px; background-color: #fff; content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.consent_radio_text { font-size: 1.8rem; font-weight: 400; line-height: 1.4; color: #161616; }
 .middle_bts_wrap { margin-top: 40px; display: flex; gap: 8px; }
-.middle_bts_wrap > button {height: 52px; padding: 0 16px; background: #fff; border: 1px solid #90909A; border-radius: 10px; font-size: 1.8rem; font-weight: 700; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
-.middle_bts_wrap > button:hover, .middle_bts_wrap > button.active { border-color: #107AF2; color: #107AF2; }
-
-/* 신청 폼 */
+.middle_bts_wrap > button { height: 52px; padding: 0 16px; background: #fff; border: 1px solid #90909a; border-radius: 10px; font-size: 1.8rem; font-weight: 700; cursor: pointer; transition: border-color 0.15s, color 0.15s; color: #161616; }
+.middle_bts_wrap > button:hover, .middle_bts_wrap > button.active { border-color: #107af2; color: #107af2; }
 .apply_form { margin-top: 40px; }
-.apply_form + .apply_form{margin-top: 64px; } 
-.form_head {
-    height: 48px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #242428;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.form_head_title {
-   
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.35;
-}
-.form_required_note {
-    color: #fb6432;
-    font-size: 1.4rem;
-    line-height: 1.4;
-}
-.form_body { padding:12px 0;border-bottom: 1px solid #E5E5E9; }
-.form_row {
-    min-height: 52px;
-    padding: 12px 0;
-    display: grid;
-    grid-template-columns: 134px 1fr;
-    align-items: center;
-    gap: 0 8px;
-}
-.form_row_radio,
-.form_row_textarea { align-items: start; }
-/* 레이블 공통 */
-.form_label, .form_sub_label { flex-shrink: 0; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
-.form_required {
-    margin-left: 2px;
-    color: #fb6432;
-}
-.form_field {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    min-width: 0;
-}
-/* 단일 input이 꽉 채우도록 */
-.form_field > :deep(.input_wrap) { flex: 1; min-width: 0; }
-
-.form_sep {
-    color: #67676f;
-    font-size: 1.6rem;
-    flex-shrink: 0;
-}
-
-/* 연락처 */
-.form_field_phone{align-items: center;}
-.form_field_phone :deep(.select) { width: 134px; flex-shrink: 0;}
-.form_field_phone :deep(.select select) { width: 100%;font-size:1.6rem  }
-.form_field_phone > :deep(.input_wrap) { max-width:134px;flex: 1; min-width: 80px; }
-
-/* 이메일 (순서: 로컬 205px / 도메인 180px / 셀렉트 180px) */
+.apply_form + .apply_form { margin-top: 64px; }
+.form_head { height: 48px; padding-bottom: 16px; border-bottom: 1px solid #242428; display: flex; align-items: center; justify-content: space-between; }
+.form_head_title { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; color: #161616; }
+.form_required_note { color: #fb6432; font-size: 1.4rem; line-height: 1.4; }
+.form_body { padding: 12px 0; border-bottom: 1px solid #e5e5e9; }
+.form_row { min-height: 52px; padding: 12px 0; display: grid; grid-template-columns: 134px 1fr; align-items: center; gap: 0 8px; }
+.check_row, .contract_row { align-items: start; }
+.form_row_area { align-items: center; }
+.form_label, .form_sub_label { flex-shrink: 0; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; color: #161616; }
+.form_required { margin-left: 2px; color: #fb6432; }
+.form_field { display: flex; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.form_field > :deep(.input_wrap) { flex: 1; min-width: 0; max-width: 205px; }
+.form_sep { color: #67676f; font-size: 1.6rem; flex-shrink: 0; }
+.form_field_phone { align-items: center; }
+.form_field_phone :deep(.select) { width: 134px; flex-shrink: 0; }
+.form_field_phone :deep(.select select) { width: 100%; font-size: 1.6rem; }
+.form_field_phone > :deep(.input_wrap) { max-width: 134px; flex: 1; min-width: 80px; }
 .form_field_email { align-items: center; }
 .form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 0 0 205px; width: 205px; min-width: 0; }
 .form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 0 0 180px; width: 180px; min-width: 0; }
 .form_field_email :deep(.select) { flex: 0 0 180px; width: 180px; min-width: 0; }
 .form_field_email :deep(.select select) { width: 100%; font-size: 1.6rem; }
-
-/* 개설희망지역 */
 .form_field_region { flex-wrap: nowrap; }
-.form_field_region :deep(.select) { flex: 1; min-width: 0; max-width:220px;}
-.form_field_region :deep(.select select) { width: 100%; font-size:1.6rem; }
-
-/* 사업설명회 신청 지역 라디오 */
-.form_field_radio {padding:13px 0; gap:8px; }
-.form_field_radio :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
-.form_field_radio :deep(.check) { gap: 8px; white-space: nowrap; cursor: pointer; }
-.form_field_radio :deep(.label) { font-size: 1.8rem; }
-
-/* textarea */
-.form_row_textarea .form_field { display: block; }
-.form_field > :deep(.textarea_wrap) { width: 100%; }
-
-/* 소유점포 면적 */
-.form_row_area { align-items: center; }
+.form_field_region :deep(.select) { flex: 1; min-width: 0; max-width: 220px; }
+.form_field_region :deep(.select select) { width: 100%; font-size: 1.6rem; }
 .form_field_area { align-items: center; gap: 24px; }
-.area_group { display: flex; align-items: center; gap: 8px; }
-.form_sub_label { color: #67676F; }
-.area_input_wrap { position: relative; display: flex; align-items: center; }
-.area_input_wrap :deep(.input_wrap) { width: 160px; }
-.area_input_wrap :deep(input) { padding-right: 40px; }
-.btn_area_search { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; background: none; border: 0; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; }
-.btn_area_search::after { content: ""; width: 18px; height: 18px; background-color: #9292A0; display: block; mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Ccircle cx='8' cy='8' r='5.5' stroke='%23000' stroke-width='1.5'/%3E%3Cpath d='m12 12 3 3' stroke='%23000' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); mask-repeat: no-repeat; mask-size: contain; }
-.area_unit { flex-shrink: 0; font-size: 1.6rem; letter-spacing: -0.01em; }
-.area_note { font-size: 1.4rem; color: #107AF2; letter-spacing: -0.01em; line-height: 1.5; }
-
-/* 수퍼 운영자 */
-.form_row_check { align-items: start; }
+.form_sub_group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.form_field_check .form_sub_group { gap: 12px; }
+.form_field_contract .form_sub_group { gap: 12px; }
+.form_sub_label { color: #67676f; }
+.form_sub_input_wrap { display: flex; align-items: center; gap: 8px; }
+.form_field_area .form_sub_input_wrap :deep(.input_wrap) { width: 160px; }
+.form_field_area .form_sub_input_wrap :deep(input) { padding-right: 40px; }
+.form_sub_unit { flex-shrink: 0; font-size: 1.6rem; letter-spacing: -0.01em; }
+.area_note { font-size: 1.4rem; color: #107af2; letter-spacing: -0.01em; line-height: 1.5; }
 .form_field_check { flex-direction: column; gap: 12px; }
-.check_group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.check_list { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.check_list { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .check_list :deep(.input_wrap) { width: auto; }
 .check_list :deep(.check) { gap: 8px; cursor: pointer; }
-.check_list :deep(.label) { font-size: 1.8rem; white-space: nowrap; }
+.check_list :deep(.label) { font-size: 1.8rem; white-space: nowrap; color: #161616; }
 .check_etc { display: flex; align-items: center; gap: 12px; }
 .check_etc .form_sub_label { min-width: 28px; }
 .check_etc :deep(.input_wrap) { flex: 1; max-width: 428px; }
-
-/* 계약조건 */
-.form_row_contract { align-items: start; }
 .form_field_contract { flex-direction: column; gap: 16px; }
-.contract_row { display: flex; align-items: center; gap: 12px; }
-.contract_row .form_sub_label { min-width: 88px; }
-.contract_period { display: flex; align-items: center; gap: 8px; }
-.contract_period :deep(.input_wrap) { width: 134px; }
-.contract_rent { display: flex; align-items: center; gap: 8px; }
-.contract_rent :deep(.input_wrap) { width: 134px; }
+.form_sub_inputs { display: flex; align-items: center; gap: 8px; }
+.form_sub_inputs :deep(.input_wrap) { width: 134px; }
+.contract_rent { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.contract_rent .form_sub_input_wrap :deep(.input_wrap) { width: 134px; }
+.smn_bottom { margin-top: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.smn_bottom > :deep(.btn_big) { width: 134px; text-align: center; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 
-/* Search 필드 */
-.form_field_search { display: block; }
-.form_field_search :deep(.search_wrap) { width: 100%; display: flex; gap: 8px; }
-.form_field_search :deep(.input_search_wrap) { flex: 1; min-width: 0; position: relative; display: flex; }
-.form_field_search :deep(.input_wrap) { flex: 1; min-width: 0; }
-.form_field_search :deep(.btn_search) { flex-shrink: 0; height: 52px; padding: 0 20px; background: #161616; border: 0; border-radius: 10px; color: #fff; font-size: 1.6rem; cursor: pointer; }
-
-/* 버튼 영역 */
-.smn_bottom {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-}
-
-
-.smn_bottom {
-    margin-top:40px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-.smn_bottom > :deep(.btn_big) {
-  width: 134px;
-  text-align: center;
-  font-size: 1.6rem;
-  line-height: 1.5;
- letter-spacing: -0.01em;
-
-}
-
-/* 모바일 */
 @media (max-width: 768px) {
-    .smn_title_row { min-height: 60px; margin:0 -20px; padding:17px 20px; border-bottom:1px solid #C4C4D0;}
+    :deep(.m_br) { display: block; }
+    :deep(.p_br) { display: none; }
+    .smn_modal { padding: 0 0 32px; }
+    .modal_content { padding: 40px 0; }
+    .smn_title_row { min-height: 60px; margin: 0 -20px; padding: 17px 20px; border-bottom: 1px solid #c4c4d0; }
     .smn_title { font-size: 1.8rem; line-height: 1.4; }
-    .smn_close { width: 24px;height: 24px; }
-    .smn_intro > p{margin-top:12px;}
-
-    /* 개인정보 동의 */
-    .consent_info { padding:30px 20px; }
-    .consent_info_list > li{font-size:1.4rem;line-height:1.4;letter-spacing:-0.01em;}
-    .consent_info_title{font-weight: 700;font-size: 1.8rem;line-height: 1.5;}
+    .smn_close { width: 24px; height: 24px; }
+    .smn_intro > p { margin-top: 12px; }
+    .consent_info { padding: 30px 20px; }
+    .consent_info_list > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .consent_info_title { font-weight: 700; font-size: 1.8rem; line-height: 1.5; }
     .consent_notice { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .consent_notice_text{font-size: 1.4rem; line-height: 1.4;}
-
-    /* 폼 레이아웃: 레이블 + 필드 세로 배치 */
-    .form_head { height: auto; padding-bottom: 12px; }
-    .form_head_title { font-size: 2rem; }
-    .form_body{padding:30px 0;}
-    .form_row {padding:20px 0; grid-template-columns: 1fr; gap: 0; }
-    .form_row:first-child {padding-top:0;}
-    .form_row:last-child {padding-bottom:0;}
-
-    /* 연락처: select 너비 축소, input max-width 해제 */
-    .form_field_phone :deep(.select) { width: 88px; }
+    .consent_notice_text { font-size: 1.4rem; line-height: 1.4; }
+    .form_head { height: auto; padding-bottom: 16px; }
+    .form_body { padding: 30px 0; }
+    .form_row { padding: 20px 0; grid-template-columns: 1fr; gap: 0; }
+    .form_row:first-child { padding-top: 0; }
+    .form_row:last-child { padding-bottom: 0; }
     .form_field_phone > :deep(.input_wrap) { max-width: none; flex: 1; }
-
-    /* 이메일: 고정 너비 해제 → flex로 유연하게, SelectBox 다음 줄 */
     .form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 1; min-width: 80px; }
     .form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 1; min-width: 60px; }
     .form_field_email :deep(.select) { flex: 1 0 100%; width: 100%; }
-   
-    /* 개설희망지역: 한 줄씩 */
     .form_field_region { flex-wrap: wrap; }
-    .form_field_region :deep(.select) { flex: 1 0 100%; width: 100%; }
-
-    .form_label{margin-bottom: 12px;}
-
-    /* 라디오 */
-    .consent_radio{width:20px; height: 20px;;}
-    .consent_radio_text{font-size: 1.6rem;}
-    .form_field_radio { flex-direction: column; gap: 20px; align-items: flex-start; }
-    .form_field_radio label{font-size: 1.6rem;letter-spacing: -0.01em;line-height: 1.5;}
-    .smn_bottom{margin-top:0; margin-bottom: 124px; justify-content: center;}
-    .smn_bottom > :deep(.btn_big) {width:100%;flex:1;}
+    .form_field_region :deep(.select) { flex: 1 0 100%; width: 100%; max-width: 100%; }
+    .form_label { margin-bottom: 16px; font-weight: 700; font-size: 1.6rem; line-height: 1.24; }
+    .consent_radio { width: 20px; height: 20px; }
+    .consent_radio_text { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .smn_bottom { margin-top: 0; justify-content: center; }
+    .smn_bottom > :deep(.btn_big) { width: 100%; flex: 1; }
+    .smn_bottom :deep(.primary) { background-color: var(--color-brand-primary); }
+    .smn_intro strong { font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .smn_intro > p { margin-top: 12px; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+    .gray_box { margin-top: 32px; }
+    .gray_box + .gray_box { margin-top: 60px; }
+    .consent_body { padding: 30px 20px; }
+    .consent_img_wrap { width: 90px; height: 120px; }
+    .consult_box .consent_info_title { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .consult_box .consent_info { gap: 6px; }
+    .consult_box .consent_info > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .consult_box .consent_info > button { margin-top: 6px; }
+    .consent_notice { margin-top: 24px; padding-top: 24px; }
+    .consult_box .consent_notice { margin-top: 16px; padding-top: 16px; }
+    .list_caution > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .middle_bts_wrap { gap: 6px; }
+    .middle_bts_wrap > button { padding: 0 5px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .form_sub_group { width: 100%; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .apply_form + .apply_form { margin-top: 60px; }
+    .form_field_area .form_sub_input_wrap { width: 100%; }
+    .form_field_area .form_sub_input_wrap :deep(.input_wrap) { width: 100%; }
+    .form_field > :deep(.input_wrap) { max-width: 100%; }
+    .form_field_area { gap: 16px; }
+    .check_etc { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .form_sub_inputs :deep(.input_wrap) { width: 100%; }
+    .form_sub_input_wrap { flex: 1; }
 }
-
-.smn_bottom :deep(.primary){background-color:var(--color-brand-primary);}
 </style>

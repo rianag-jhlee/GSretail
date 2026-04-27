@@ -317,7 +317,7 @@
             <div class="tab_page sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
                 <div class="link_wrap">
-                    <Buttons tag="a" href="#none" btn-class="btn_icon btn_xl"> 바로가기</Buttons>
+                    <Buttons tag="a" href="#none" btn-class="btn_icon btn_xl">설명회신청 바로가기</Buttons>
                 </div>
             </div>
  
@@ -618,7 +618,7 @@
             <section class="sec_seminar tab_page" v-show="activeD1 === 1">
                 <div class="seminar_head">
                     <p>GS THE FRESH(GS수퍼마켓) 가맹 사업에 대한<br class="p_br">자세하고 다양한 정보를 얻을 수 있는 사업설명회에 참여해 보세요.</p>
-                    <Buttons btn-class="btn_big fill primary" data-popid="modal_gsrst_seminar" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">사업 설명회 신청</Buttons>
+                    <Buttons btn-class="btn_big fill primary btn_icon after" data-popid="modal_gsrst_seminar" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">사업 설명회 신청</Buttons>
                 </div>
                 <ul class="seminar_list">
                     <li v-for="(item, i) in seminarList" :key="i" class="seminar_item">
@@ -701,6 +701,15 @@
                 </div>
             </section>
         </div>
+        <ul
+            ref="quickMenuRef"
+            class="quick_menu"
+            :aria-hidden="!showQuickMenu"
+        >
+            <li><button type="button">창업안내</button></li>
+            <li><button type="button">입점상담</button></li>
+            <li><button type="button">고객센터</button></li>
+        </ul>
     </div>
 
     <!-- 사업설명회 신청 모달 -->
@@ -713,10 +722,14 @@
         <div class="modal_container"></div>
     </div>
     <!-- //상담 신청 모달 -->
+
+
 </template>
 
 <script setup> 
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted, nextTick } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Tabs from "@/components/Tabs.vue";
 import Pagination from "@/components/Pagination.vue";
 import Steps from "@/components/Steps.vue";
@@ -910,17 +923,167 @@ const mqTablet = window.matchMedia("(max-width: 1024px)");
 function onMqMobileChange(e) { isMobile.value = e.matches; }
 function onMqTabletChange(e) { isTablet.value = e.matches; }
 
+/** 퀵메뉴: 등장 scroll(px), 뷰포트 하단·푸터 사이 60px 유지(푸터에 붙이면 그 이상은 따라가지 않음) */
+const QUICK_MENU_REVEAL_PX = 100;
+const QUICK_MENU_VIEWPORT_BOTTOM_PX = 60;
+const QUICK_MENU_FOOTER_GAP_PX = 60;
+const showQuickMenu = ref(false);
+const quickMenuRef = ref(null);
+let quickMenuGsapCtx = null;
+let quickMenuFooterEl = null;
+let quickMenuWrapEl = null;
+let quickMenuLastBottomPx = null;
+let quickMenuLastTopPx = null;
+let quickMenuFooterZone = false;
+let quickMenuResizeTimer = null;
+
+/**
+ * 뷰포트 기준 bottom 60 → 푸터가 닿기 시작하면 푸터 상단에서 60px 위로 고정.
+ * 위치는 bottom만 사용(translate 등 transform은 쓰지 않음, 등장 tweens의 y와 충돌 방지).
+ */
+function updateQuickMenuBottom(quickMenu) {
+    if (!quickMenu) return;
+    if (!quickMenuFooterEl) {
+        quickMenuFooterEl = document.querySelector("footer");
+    }
+    if (!quickMenuWrapEl) {
+        quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
+    }
+    const footer = quickMenuFooterEl;
+    const wrap = quickMenuWrapEl;
+    if (!footer || !wrap) {
+        if (quickMenuLastBottomPx !== QUICK_MENU_VIEWPORT_BOTTOM_PX) {
+            gsap.set(quickMenu, { position: "fixed", top: "auto", bottom: QUICK_MENU_VIEWPORT_BOTTOM_PX });
+            quickMenuLastBottomPx = QUICK_MENU_VIEWPORT_BOTTOM_PX;
+            quickMenuLastTopPx = null;
+            quickMenuFooterZone = false;
+        }
+        return;
+    }
+    const rect = footer.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const gap = QUICK_MENU_FOOTER_GAP_PX;
+    const scrollY = window.scrollY ?? document.documentElement.scrollTop;
+    const footerTopDoc = rect.top + scrollY;
+    const wrapTopDoc = wrap.getBoundingClientRect().top + scrollY;
+    const quickMenuHeight = quickMenu.offsetHeight;
+    const fixedBottomDoc = scrollY + vh - QUICK_MENU_VIEWPORT_BOTTOM_PX;
+    const footerLimitDoc = footerTopDoc - gap;
+    const shouldDockToFooter = fixedBottomDoc >= footerLimitDoc;
+
+    if (shouldDockToFooter) {
+        const absoluteTopPx = Math.round(footerTopDoc - gap - quickMenuHeight - wrapTopDoc);
+        if (!quickMenuFooterZone) {
+            gsap.set(quickMenu, { clearProps: "transform" });
+            quickMenuFooterZone = true;
+        }
+        if (quickMenuLastTopPx !== absoluteTopPx) {
+            gsap.set(quickMenu, { position: "absolute", top: absoluteTopPx, bottom: "auto" });
+            quickMenuLastTopPx = absoluteTopPx;
+            quickMenuLastBottomPx = null;
+        }
+        return;
+    }
+
+    if (quickMenuFooterZone) {
+        quickMenuFooterZone = false;
+    }
+    if (quickMenuLastBottomPx !== QUICK_MENU_VIEWPORT_BOTTOM_PX) {
+        gsap.set(quickMenu, { position: "fixed", top: "auto", bottom: QUICK_MENU_VIEWPORT_BOTTOM_PX });
+        quickMenuLastBottomPx = QUICK_MENU_VIEWPORT_BOTTOM_PX;
+        quickMenuLastTopPx = null;
+    }
+}
+
+function refreshQuickMenuScrollTrigger() {
+    if (quickMenuResizeTimer) {
+        window.clearTimeout(quickMenuResizeTimer);
+    }
+    quickMenuResizeTimer = window.setTimeout(() => {
+        ScrollTrigger.refresh();
+        if (quickMenuRef.value) {
+            quickMenuLastBottomPx = null;
+            quickMenuLastTopPx = null;
+            updateQuickMenuBottom(quickMenuRef.value);
+        }
+    }, 120);
+}
+
+function initQuickMenuGsap() {
+    if (mqMobile.matches) return;
+    const quickMenu = quickMenuRef.value;
+    if (!quickMenu) return;
+    quickMenuFooterEl = document.querySelector("footer");
+    quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
+    quickMenuLastBottomPx = null;
+    quickMenuLastTopPx = null;
+    quickMenuFooterZone = false;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    quickMenuGsapCtx = gsap.context(() => {
+        gsap.fromTo(
+            quickMenu,
+            { opacity: 0, pointerEvents: "none" },
+            {
+                opacity: 1,
+                pointerEvents: "auto",
+                duration: 0.5,
+                scrollTrigger: {
+                    trigger: "body",
+                    start: `${QUICK_MENU_REVEAL_PX}px top`,
+                    toggleActions: "play reverse play reverse",
+                    onUpdate: () => {
+                        const y = window.scrollY ?? document.documentElement.scrollTop;
+                        showQuickMenu.value = y >= QUICK_MENU_REVEAL_PX;
+                    }
+                }
+            }
+        );
+
+        ScrollTrigger.create({
+            trigger: "body",
+            start: "top top",
+            end: "max",
+            onUpdate: () => {
+                updateQuickMenuBottom(quickMenu);
+            }
+        });
+    });
+    ScrollTrigger.refresh();
+    const y0 = window.scrollY ?? document.documentElement.scrollTop;
+    showQuickMenu.value = y0 >= QUICK_MENU_REVEAL_PX;
+    updateQuickMenuBottom(quickMenu);
+}
+
 onMounted(() => {
-    document.addEventListener('click', closeYouthPopover);
+    document.addEventListener("click", closeYouthPopover);
     isMobile.value = mqMobile.matches;
     isTablet.value = mqTablet.matches;
     mqMobile.addEventListener("change", onMqMobileChange);
     mqTablet.addEventListener("change", onMqTabletChange);
+    window.addEventListener("resize", refreshQuickMenuScrollTrigger);
+    nextTick(() => {
+        initQuickMenuGsap();
+    });
 });
 onUnmounted(() => {
-    document.removeEventListener('click', closeYouthPopover);
+    document.removeEventListener("click", closeYouthPopover);
     mqMobile.removeEventListener("change", onMqMobileChange);
     mqTablet.removeEventListener("change", onMqTabletChange);
+    window.removeEventListener("resize", refreshQuickMenuScrollTrigger);
+    if (quickMenuResizeTimer) {
+        window.clearTimeout(quickMenuResizeTimer);
+        quickMenuResizeTimer = null;
+    }
+    quickMenuGsapCtx?.revert();
+    quickMenuGsapCtx = null;
+    quickMenuFooterEl = null;
+    quickMenuWrapEl = null;
+    quickMenuLastBottomPx = null;
+    quickMenuLastTopPx = null;
+    quickMenuFooterZone = false;
+    showQuickMenu.value = false;
 });
 
 /* ── 카드 그리드 뷰 ── */
@@ -944,10 +1107,9 @@ function toggleCard(id) {
 
 <style scoped>
 /* 브랜드 색 */
-.wrap_gsrst { --color-brand-primary: #15b874; }
-/*
-.wrap_gsrst :deep([class*="btn_"][class*="fill"]), .wrap_gsrst :deep([class*="btn_"][class*="icon"]), .wrap_gsrst :deep([class*="btn_"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
-.wrap_gsrst :deep([class*="btn_"][class*="border"]) { color: var(--color-brand-primary); background-color: #fff; border: 1px solid var(--color-brand-primary); } */
+.wrap_gsrst { --color-brand-primary: #15b874; position: relative; }
+
+.wrap_gsrst :deep([class*="btn_"][class*="fill"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
 .txt_warning { color: #ED3030 !important; }
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
@@ -1195,9 +1357,6 @@ function toggleCard(id) {
 /* 페이지네이션 */
 .store_pagination { display: flex; justify-content: center; margin-top: 24px; }
 
-
-
-
 /* 점포 리스트 Tablet */
 @media (max-width: 1024px) {
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
@@ -1233,7 +1392,6 @@ function toggleCard(id) {
     .store_accordion_list :deep(dd.acc_panel.acc_show) { border: 0; }
     .accordion_badges { margin-top: 6px; }
 }
-
 
 /* 상담 및 신청 */
 .caution_list { margin-top: 16px; }
@@ -1312,4 +1470,15 @@ function toggleCard(id) {
 .sec_consult :deep(.brand_panel_title) {padding-bottom:64px;}
 .sec_consult :deep(.brand_panel_title h2){display:flex; align-items:center; gap:8px;}
 .sec_consult :deep(.brand_panel_title h2::after){content:''; display:block; width:40px; height:40px; background-color:#D7D7DF; }
+
+/* quick menu */
+.quick_menu{position:fixed; bottom:60px; right:clamp(24px, 4.5313vw, 87px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none;}
+.quick_menu li{position:relative; width:100%;}
+.quick_menu li button{width:100%; height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 0; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:700; letter-spacing:-0.01em; background:none; background-color:#F2F2F4; border:0; border-radius:99px; text-align:center; display:flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px);}
+.quick_menu li button::before{content:''; width:clamp(16px, 1.0417vw, 20px); height:clamp(19px, 1.25vw, 24px); background-color:#161616; display:block;}
+
+
+@media (max-width: 768px) {
+    .quick_menu{display: none;}
+}
 </style>
