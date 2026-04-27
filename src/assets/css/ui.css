@@ -15,12 +15,16 @@
 #header nav li:hover ul, nav li.is_open ul {height:auto !important; overflow:initial !important; display:block;}
 #header nav li:hover ul.depth2, nav li.is_open ul.depth2 {height:auto !important; overflow:initial !important; display:flex;}
 
+#header .quick_wrap {display:flex; align-items:center;}
 #header .quick {display:flex; align-items:center;}
-#header .quick > ul {display:flex; align-items:center;}
-#header .quick > ul > li {position:relative; display:flex; align-items:center;}
-#header .quick > ul > li + li:before {height:8px; margin:0 16px; border-left:1px solid #d9d9d9; content:''; display:block;}
-#header .quick > ul > li > a {color:#fff;}
-#header .quick > ul ul {display:none;}
+#header .quick > li {position:relative; display:flex; align-items:center;}
+#header .quick > li:first-child > * {padding:6px 11px; font-size:1.6rem; font-weight:600; letter-spacing:-0.02em; line-height:140%; border:1px solid #fff; border-radius:4px;}
+#header .quick > li + li:before {height:8px; margin:0 16px; border-left:1px solid #d9d9d9; content:''; display:block;}
+#header .quick > li > * {color:#fff;}
+#header.head_black .quick > li > * {color:#111;}
+#header.head_black .quick > li:first-child > * {border-color:#111;}
+#header .quick ul {display:none;}
+#header .quick_wrap .is-open ul {display:block;}
 
 #header nav .depth1 > li > a {padding:0 28px; font-size:2rem; font-weight:600; line-height:140%; letter-spacing:0.02em; display:block;}
 
@@ -29,6 +33,37 @@
 #header.head_black nav ul.depth1 > li > a {color:#111;}
 
 #header.head_black .quick > ul > li > a {color:#111;}
+
+#header .language {margin-left:8px; display:flex; align-items:center;}
+#header .language li {display:flex; align-items:center;}
+#header .language li + li:before {height:13px; border-left:1px solid #fff; content:''; display:block;}
+#header .language button {padding:4px 12px; color:#fff; font-size:1.6rem; letter-spacing:-0.02em; line-height:140%; background-color:transparent; display:flex; align-items:center;}
+#header.head_black .language li + li:before {border-color:#111;}
+#header.head_black .language button {color:#111;}
+
+/* footer */
+footer {padding-top:59px; padding-bottom:24px; border-top:1px solid #E5E5E9; position:relative; z-index:1;}
+footer .inner {max-width:1720px; margin:0 auto; padding:0 20px; position:relative;}
+footer .go_top {color:#000; font-size:1.6rem; font-weight:600; letter-spacing:-0.02em; line-height:150%; background-color:transparent; position:fixed; right:20px; bottom:100px; display:flex; align-items:center; gap:6px;}
+footer .go_top:after {width:16px; height:16px; background-color:red; content:''; display:block;}
+footer .go_top.isStatic {position:absolute; top:0; right:20px; bottom:initial;}
+
+footer nav {display:flex;}
+footer nav a {letter-spacing:-0.02em; line-height:150%; display:block;}
+footer nav dt a {color:#000; font-size:1.6rem; font-weight:600;}
+footer nav dd {margin-top:9px; display:flex;}
+footer nav dd a, footer nav dd a:visited {width:184px; padding:3px 0; color:#666;}
+
+footer .quick {margin-top:40px; padding-top:19px; padding-bottom:20px; border-top:1px solid #E5E5E9; border-bottom:1px solid #E5E5E9;}
+footer .quick ul {display:flex; align-items:center;}
+footer .quick a {height:21px; padding:0 16px; color:#000; font-size:1.4rem; letter-spacing:-0.02em; line-height:21px; display:block;}
+footer .quick li:hover a {font-weight:600;}
+footer .quick li:first-child a {padding-left:0; font-weight:600;}
+
+footer .info * {padding:19px 0 20px; color:#999; font-size:1.4rem; letter-spacing:-0.02em; line-height:150%;}
+footer .info div {display:flex; align-items:center; gap:32px;}
+footer .info div strong {font-weight:600;}
+footer .info {display:flex; align-items:center; justify-content:space-between;}
 
 /* headline */
 .title_wrap {display:flex; align-items:center; flex-wrap:wrap;}
