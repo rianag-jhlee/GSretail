@@ -238,7 +238,7 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
     .mo { display: flex; }
     .benefit_list { gap: 40px 15px; }
     .benefit_list li { width: calc((100% - 15px) / 2); padding-top: 70px; }
-    .benefit_info .tit_area strong { font-size: 20px; }
+    .benefit_info .tit_area strong { font-size:18px; }
     .benefit_info .desc { font-size: 16px; }
 }
 
