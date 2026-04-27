@@ -9,7 +9,7 @@
                 "children": []
             },
             {
-                "title": "회사소개",
+                "title": "회사 소개",
                 "path": "#",
                 "children": []
             },
@@ -47,7 +47,7 @@
                 ]
             },
             {
-                "title": "GS THE FRESH",
+                "title": "GS더프레시",
                 "path": "#none",
                 "children": [
                     { "title": "신선 산지 안내", "path": "#none" },
@@ -72,35 +72,113 @@
                 ]
             },
             {
+                "title": "우딜",
+                "path": "#none",
+                "children": []
+            },
+            {
                 "title": "GS PAY",
                 "path": "#none",
                 "children": []
             },
             {
-                "title": "우리동네 GS",
+                "title": "GS ALL",
                 "path": "#none",
-                "children": [
-                    { "title": "배달·픽업", "path": "#none" },
-                    { "title": "와인25플러스", "path": "#none" },
-                    { "title": "재고찾기", "path": "#none" },
-                    { "title": "행사/이벤트", "path": "#none" }
-                ]
+                "children": []
+            },
+            {
+                "title": "POP",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "유어스",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "리얼프라이스",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "개발/임대 사업",
+                "path": "#none",
+                "children": []
             }
         ]
     },
     {
         "title": "INVESTORS",
         "path": "#none",
-        "children": []
+        "children": [
+            {
+                "title": "기업지배구조",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "경영성과",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "공시정보",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "IR자료실",
+                "path": "#none",
+                "children": []
+            }
+        ]
     },
     {
         "title": "SUSTAINABILITY",
         "path": "#none",
-        "children": []
+        "children": [
+            {
+                "title": "지속가능경영",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "환경",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "사회적 책임",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "컴플라이언스",
+                "path": "#none",
+                "children": []
+            }
+        ]
     },
     {
         "title": "GS NEWS",
         "path": "#none",
-        "children": []
+        "children": [
+            {
+                "title": "보도자료",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "GS리테일 Newsroom",
+                "path": "#none",
+                "children": []
+            },
+            {
+                "title": "GS리테일 factbook",
+                "path": "#none",
+                "children": []
+            }
+        ]
     }
 ]
