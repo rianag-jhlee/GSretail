@@ -156,9 +156,9 @@
         "type": "Pop-up",
         "path": "gsrbr0401",
         "link": "/gsrbr04",
-        "startDate": "26-04-2",
-        "endDate": "26-04-2",
-        "status": "",
+        "startDate": "26-04-27",
+        "endDate": "26-04-27",
+        "status": "com",
         "note": "gsrbr04 내 확인 가능"
     },
     {
@@ -473,7 +473,66 @@
         "status": "com",
         "note": " "
     },
-
+    {
+        "depth1": "SUSTAINABILITY", "depth2": "환경", "depth3": "환경경영", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrsu/02/gsrsu0201",
+        "link": "/gsrsu0201",
+        "startDate": "26-04-27",
+        "endDate": "26-04-27",
+        "status": "com",
+        "note": " "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "친환경 활동", "depth4": "그린 벨류체인", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrsu/02/gsrsu020101",
+        "link": "/gsrsu0201",
+        "startDate": "26-04-27",
+        "endDate": "26-04-27",
+        "status": "com",
+        "note": "gsrsu0201 페이지에서 확인 가능 "
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "그린스토어", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrsu/02/gsrsu020102",
+        "link": "/gsrsu0201",
+        "startDate": "26-04-27",
+        "endDate": "26-04-27",
+        "status": "com",
+        "note": "gsrsu0201 페이지에서 확인 가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "그린 프로덕트", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrsu/02/gsrsu020103",
+        "link": "/gsrsu0201",
+        "startDate": "26-04-27",
+        "endDate": "26-04-",
+        "status": "ing",
+        "note": "gsrsu0201 페이지에서 확인 가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "", "depth5": "지속가능한 구매 방침", "depth6": "",
+        "type": "Pop-up",
+        "path": "gsrsu02010301",
+        "link": "/gsrsu0201",
+        "startDate": "26-04-27",
+        "endDate": "26-04-",
+        "status": "",
+        "note": "04-27: 디자인 확인 불가"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "함께하는 기후변화 대응", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrsu/02/gsrsu020104",
+        "link": "/gsrsu0201",
+        "startDate": "26-04-27",
+        "endDate": "26-04-27",
+        "status": "com",
+        "note": "gsrsu0201 페이지에서 확인 가능"
+    },
     {
         "depth1": "GS NEWS", "depth2": "보도자료", "depth3": "목록", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
