@@ -1183,10 +1183,89 @@
         "link": "/gsrsu0101",
         "startDate": "",
         "endDate": "",
+        "status": "com",
+        "note": "gsrsu010201, gsrsu010202, gsrsu010203, gsrsu010204, gsrsu0102 포함"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "ESG 자료실", "depth4": "환경경영 자료", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/01/gsrsu010201",
+        "link": "/gsrsu010201",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu0101에서 확인"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "상생경영 자료", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/01/gsrsu010202",
+        "link": "/gsrsu010202",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu0101에서 확인"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "ESG성과", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/01/gsrsu010203",
+        "link": "/gsrsu010203",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu0101에서 확인"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "사회공헌 수상내역", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/01/gsrsu010204",
+        "link": "/gsrsu010204",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu0101에서 확인"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "지속가능경영보고서", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/01/gsrsu0102",
+        "link": "/gsrsu0102",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu0101에서 확인"
+    },
+    {
+        "depth1": "", "depth2": "컴플라이언스", "depth3": "정도경영", "depth4": "소개", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/04/gsrsu040101",
+        "link": "/gsrsu040101",
+        "startDate": "",
+        "endDate": "",
         "status": "ing",
-        "note": ""
+        "note": "gsrsu040102, gsrsu04010201, gsrsu040103, gsrsu040104, gsrsu04010401, gsrsu0401040101, gsrsu04010501, gsrsu0401050101 포함"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "지침", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/04/gsrsu040102",
+        "link": "/gsrsu040102" ,
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu040101에서서 확인"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "제도", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/04/gsrsu040103",
+        "link": "/gsrsu040103" ,
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": "gsrsu040101에서서 확인"
     }
     
-
-
+    
 ]

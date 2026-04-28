@@ -1,137 +1,884 @@
 <template>
     <div class="main-container">
-        <div class="title_wrap ac">
-            <h2 class="page-title">{{ t.MainTitle }}</h2>
-            <p class="visual-sub">{{ t.MainsubTitle }}</p>
+        <div class="title_wrap tac">
+            <h2 class="page_title">{{ t.MainTitle }}</h2>
+            <p class="visual_sub">{{ t.MainsubTitle }}</p>
         </div>
 
-        <section class="section-investor">
-            <div class="cont_inner">
-                <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
-                <div class="tab_content_wrap">
-                    <!-- pageid:gsrin0101 -->
-                    <section class="tab_content gsrin0101" v-if="CTabIdx === 0" :aria-label="t.Tabs1?.[0]?.item || ''">
-                        <!-- green life together -->
-                        <p class="tab_desc">
-                            GS리테일은 통합 GS리테일 출범 이후 지속가능한 기업의 가치창출을 위해 
-                            ‘Green Life Together’라는 ESG비전을 수립하였습니다.<br/>
-                            이 중장기 비전이 실행될 수 있도록 환경과 사회의 세부전략 및 과제를 추진하고 있으며, <br/>
-                            이행현황과 지속가능한 경영의 성과를 이해관계자와 지속 소통해가겠습니다.
-                        </p>
+        <!-- gsrbr010101 맥락: brand_content ≈ content, Tabs 나열 후 v-show 패널 -->
+        <div class="content">
+            <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
+            <Tabs
+                v-if="CTabIdx === 1"
+                v-model="CTabIdxEsgArchive"
+                :tab-items="t.TabsEsgArchive"
+                tab-class="type_02"
+                :tab-slide="true"
+                @change="onEsgArchiveTabChange"
+            />
+        
+            <!-- 비전&전략 -->
+            <div v-show="CTabIdx === 0" class="panel panel_vision_strategy" :aria-label="t.Tabs1?.[0]?.item || ''">
+                <!-- green life together -->
+                <p class="tab_desc">
+                    GS리테일은 통합 GS리테일 출범 이후 지속가능한 기업의 가치창출을 위해
+                    ‘Green Life Together’라는 ESG비전을 수립하였습니다.<br/>
+                    이 중장기 비전이 실행될 수 있도록 환경과 사회의 세부전략 및 과제를 추진하고 있으며, <br/>
+                    이행현황과 지속가능한 경영의 성과를 이해관계자와 지속 소통해가겠습니다.
+                </p>
 
-                        <div class="sec_vision_together" :aria-label="t.VisionTogetherAria">
-                            <h3 class="vision_main_title">{{ t.VisionMainTitle }}</h3>
-                            <div class="vision_two_col">
-                                <div class="vision_col vision_col_env">
-                                    <strong class="vision_col_tit">{{ t.VisionEnvLabel }}</strong>
-                                    <span class="vision_col_sub">{{ t.VisionEnvSub }}</span>
-                                    <ul class="vision_circle_list">
-                                        <li v-for="(item, idx) in t.VisionEnvItems" :key="'env-' + idx" class="vision_item">
-                                            <p class="vision_item_tit">{{ item.title }}</p>
-                                            <p class="vision_item_desc">{{ item.desc }}</p>
-                                        </li>
-                                    </ul>
+                <div class="sec_vision_together" :aria-label="t.VisionTogetherAria">
+                    <h3 class="vision_main_title">{{ t.VisionMainTitle }}</h3>
+                    <div class="vision_two_col">
+                        <div class="vision_col vision_col_env">
+                            <strong class="vision_col_tit">{{ t.VisionEnvLabel }}</strong>
+                            <span class="vision_col_sub">{{ t.VisionEnvSub }}</span>
+                            <ul class="vision_circle_list">
+                                <li v-for="(item, idx) in t.VisionEnvItems" :key="'env-' + idx" class="vision_item">
+                                    <p class="vision_item_tit">{{ item.title }}</p>
+                                    <p class="vision_item_desc">{{ item.desc }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="vision_col vision_col_soc">
+                            <strong class="vision_col_tit">{{ t.VisionSocLabel }}</strong>
+                            <span class="vision_col_sub">{{ t.VisionSocSub }}</span>
+                            <ul class="vision_circle_list">
+                                <li v-for="(item, idx) in t.VisionSocItems" :key="'soc-' + idx" class="vision_item">
+                                    <p class="vision_item_tit">{{ item.title }}</p>
+                                    <p class="vision_item_desc">{{ item.desc }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <section>
+                    <header class="sub_header">
+                        <h3>{{ t.esgTitle }}</h3>
+                        <p>{{ t.esgDesc }}</p>
+                    </header>
+                    <div class="esg_process" :aria-label="t.esgProcessTitle">
+                        <ol class="esg_flow">
+                            <li v-for="(item, idx) in t.esgFlowItems" :key="'flow-' + idx" class="esg_flow_step">
+                                <div class="esg_flow_card" :class="{ final: idx === t.esgFlowItems.length - 1 }">
+                                    <header class="esg_flow_card_head">
+                                        <strong class="esg_flow_card_title">{{ item.title }}</strong>
+                                        <p v-if="item.meta" class="esg_flow_card_meta">{{ item.meta }}</p>
+                                    </header>
+                                    <p class="esg_flow_card_desc">{{ item.desc }}</p>
                                 </div>
-                                <div class="vision_col vision_col_soc">
-                                    <strong class="vision_col_tit">{{ t.VisionSocLabel }}</strong>
-                                    <span class="vision_col_sub">{{ t.VisionSocSub }}</span>
-                                    <ul class="vision_circle_list">
-                                        <li v-for="(item, idx) in t.VisionSocItems" :key="'soc-' + idx" class="vision_item">
-                                            <p class="vision_item_tit">{{ item.title }}</p>
-                                            <p class="vision_item_desc">{{ item.desc }}</p>
-                                        </li>
-                                    </ul>
+                                <div v-if="idx < t.esgFlowItems.length - 1" class="esg_flow_connector" aria-hidden="true">
+                                    <p><span class="esg_flow_connector_text">{{ item.connectorLeft }}</span></p>
+                                    <p><span class="esg_flow_connector_text">{{ item.connectorRight }}</span></p>
                                 </div>
+                            </li>
+                        </ol>
+                        <p class="esg_flow_note">{{ t.esgFlowNote }}</p>
+                    </div>
+                    <div class="esg_committee_table" :aria-label="t.esgTableHeader">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="2">{{ t.esgTableHeader }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(leftItem, idx) in t.esgTableLeftItems" :key="'tbl-row-' + idx">
+                                    <td>{{ leftItem }}</td>
+                                    <td>{{ t.esgTableRightItems[idx] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <section>
+                    <header class="sub_header">
+                        <h3>{{ t.bnbpTitle }}</h3>
+                    </header>
+                    <div class="bnbp_wrapper">
+                        <div class="bnbp_main">
+                            <div class="img_wrapper"><img :src="imgBnbpLogo" alt="기업과 생물다양성 플랫폼 이미지"></div>
+                            <div class="txt_box">
+                                <p>BNBP(Biz N Biodiversity Platform) 는 기업들로 하여금 생물다양성 보전 및 이용에 대한 산업계의 국제적, 사회적 책임이 있음을 인식하게 하고, 기업 활동 전반에서 생물다양성을 보전하며 이를 지속가능하게 이용할 수 있도록 지원하고자 지난 2016년 설립된 이니셔티브 입니다.</p>
+                                <br />
+                                <p>GS리테일은 BNBP 가입을 통해, 기업의 생물다양성 보전에 대한 사회적 책임을 인식하고 함께 어우러져 사는 삶을 영위하기 위한 노력을 지속하겠습니다.</p>
                             </div>
                         </div>
-                        <article>
-                            <header class="sub_header">
-                                <h3>{{ t.esgTitle }}</h3>
-                                <p>{{ t.esgDesc }}</p>
-                            </header>
-                            <div class="esg_process" :aria-label="t.esgProcessTitle">
-                                <ol class="esg_flow">
-                                    <li v-for="(item, idx) in t.esgFlowItems" :key="'flow-' + idx" class="esg_flow_step">
-                                        <div class="esg_flow_card" :class="{ final: idx === t.esgFlowItems.length - 1 }">
-                                            <header class="esg_flow_card_head">
-                                                <strong class="esg_flow_card_title">{{ item.title }}</strong>
-                                                <p v-if="item.meta" class="esg_flow_card_meta">{{ item.meta }}</p>
-                                            </header>
-                                            <p class="esg_flow_card_desc">{{ item.desc }}</p>
-                                        </div>
-                                        <div v-if="idx < t.esgFlowItems.length - 1" class="esg_flow_connector" aria-hidden="true">
-                                            <p><span class="esg_flow_connector_text">{{ item.connectorLeft }}</span></p>
-                                            <p><span class="esg_flow_connector_text">{{ item.connectorRight }}</span></p>  
-                                        </div>
-                                    </li>
-                                </ol>
-                                <p class="esg_flow_note">{{ t.esgFlowNote }}</p>
+                        <div class="bnbp_sub">
+                            <h4>창원이니셔티브</h4>
+                            <div class="txt_box">
+                                <p>2011년도 제10차 유엔사막화방지협약(United Nations Convention to Combat Desertification, UNCCD) 당사국 총회가 경상남도 창원에서 성공적으로 개최되었으며 성과 사업으로서 '창원 이니셔티브'가 출범하였습니다. 창원 이니셔티브는 UN 지속가능 발전 목표 (Sustainable Development Goal; SDG) 15.3에 해당하는 토지황폐화 중립에 기여하는데 중요한 역할을 하며 산림복원 사업의 추진을 지원하고 있습니다.</p>
+                                <br />
+                                <p>GS리테일은 '21년 10월 창원 이니셔티브 출범 10주년을 맞이하여, 토지황폐화 방지에 지지와 참여를 선언하였습니다. 뿐만 아니라 산림청 그리고 UNCCD 사무국과 업무협약을 체결하여 토지황폐화를 방지하기 위한 활동들에 참여하고 있습니다. 구체적으로 마을 공동숲 조성 등 황사와 가뭄을 억제하기 위한 지역사회 참여 프로그램을 실시했습니다. 정부, 기업, 국제기구 및 시민단체와의 파트너십을 통해 산림 복원 사업을 시행함으로써 보다 효과적으로 지역사회의 환경을 개선하고 생물다양성을 보전하는데 기여하고 있습니다.</p>
                             </div>
-                            <section class="esg_committee_table" :aria-label="t.esgTableHeader">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">{{ t.esgTableHeader }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(leftItem, idx) in t.esgTableLeftItems" :key="'tbl-row-' + idx">
-                                            <td>{{ leftItem }}</td>
-                                            <td>{{ t.esgTableRightItems[idx] }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </section>
-
-                        </article>
-                       
-                        <p class="title-sub-text" v-html="t.MainDesc"></p>
-                        <div class="subtit_wrap ac">
-                            <h3 class="section-sub-title">{{ t.CharterTitle }}</h3>
                         </div>
+                    </div>
+                </section>
+            </div>
 
-                        <div class="policy_wrap">
-                            <dl>
-                                <dt>{{ t.PolicyIntroTitle }}</dt>
-                                <dd v-html="t.PolicyIntroDesc"></dd>
-
-                                <template v-for="(section, idx) in t.PolicySections" :key="'section-'+idx">
-                                    <dt>{{ section.title }}</dt>
-                                    <dd>
-                                        <template v-for="(sec, sIdx) in section.content" :key="'content-'+idx+'-'+sIdx">
-                                            <strong class="bullet_title" :class="{mt30: sIdx > 0}">{{ sec.subTitle }}</strong>
-                                            <ul v-if="sec.list && sec.list.length > 0" class="mt15 bullet_01 no_type">
-                                                <li v-for="(li, lIdx) in sec.list" :key="'l-'+idx+'-'+sIdx+'-'+lIdx">{{ li }}</li>
-                                            </ul>
-                                        </template>
-                                    </dd>
-                                </template>
-                            </dl>
+            <!-- ESG 자료실 -->
+            <div v-show="CTabIdx === 1" class="panel" :aria-label="t.Tabs1?.[1]?.item || ''">
+                <!-- Figma 431:12931 — 환경경영 자료 (IR/공시 리스트 패턴) -->
+                <div v-show="CTabIdxEsgArchive === 0" class="panel_inner" :aria-label="t.TabsEsgArchive?.[0]?.item || ''">
+                    <header class="sub_header sub_header_center">
+                        <h3>GS리테일의 상생 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
+                        <p>본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br class="p_br" />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
+                    </header>
+                    <div class="table_wrap type1">
+                        <table class="base_table">
+                            <colgroup>
+                                <col style="width: 150px;" />
+                                <col style="width: auto;" />
+                                <col style="width: 200px;" />
+                            </colgroup>
+                            <tbody>
+                                <tr v-for="(item, idx) in t.EnvMgmtListData" :key="'env-doc-' + idx">
+                                    <td class="tac">{{ item.id }}</td>
+                                    <td class="tal">
+                                        <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
+                                    </td>
+                                    <td class="tac">
+                                        <button type="button" class="btn_download_file" @click="handleEnvMgmtDownload(item.link)">
+                                            <span class="file_type_text">{{ item.fileType || "PDF" }}</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr v-if="!t.EnvMgmtListData || t.EnvMgmtListData.length === 0">
+                                    <td colspan="3" class="tac py80">{{ t.EnvMgmtNoDataText }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination_area">
+                        <Pagination v-model="envMgmtPage" :total-pages="envMgmtTotalPages" @change="onEnvMgmtPageChange" />
+                    </div>
+                </div>
+                <div v-show="CTabIdxEsgArchive === 1" class="panel_inner" :aria-label="t.TabsEsgArchive?.[1]?.item || ''">
+                    <header class="sub_header sub_header_center">
+                        <h3>GS리테일의 환경 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
+                        <p>본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br class="p_br" />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
+                    </header>
+                    <div class="table_wrap type1">
+                        <table class="base_table">
+                            <colgroup>
+                                <col style="width: 150px;" />
+                                <col style="width: auto;" />
+                                <col style="width: 200px;" />
+                            </colgroup>
+                            <tbody>
+                                <tr v-for="(item, idx) in t.EnvMgmtListData" :key="'env-doc-' + idx">
+                                    <td class="tac">{{ item.id }}</td>
+                                    <td class="tal">
+                                        <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
+                                    </td>
+                                    <td class="tac">
+                                        <button type="button" class="btn_download_file" @click="handleEnvMgmtDownload(item.link)">
+                                            <span class="file_type_text">{{ item.fileType || "PDF" }}</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr v-if="!t.EnvMgmtListData || t.EnvMgmtListData.length === 0">
+                                    <td colspan="3" class="tac py80">{{ t.EnvMgmtNoDataText }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination_area">
+                        <Pagination v-model="envMgmtPage" :total-pages="envMgmtTotalPages" @change="onEnvMgmtPageChange" />
+                    </div>
+                
+                </div>
+                <div v-show="CTabIdxEsgArchive === 2" class="panel_inner" :aria-label="t.TabsEsgArchive?.[2]?.item || ''">
+                    <div class="table_wrap type2">
+                        <table class="base_table">
+                            <colgroup>
+                                <col style="width: 220px;" />
+                                <col style="width: 245px;" />
+                                <col style="width: 245px;" />
+                                <col style="width: 245px;" />
+                                <col style="width: 245px;" />
+                                <col style="width: 220px;" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="col" rowspan="2" class="tac bold th_item">항목</th>
+                                    <th scope="col" colspan="4" class="tac bold">KCGS</th>
+                                    <th scope="col" rowspan="2" class="tac bold th_sustin_best">서스틴 베스트</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="tac">종합등급</th>
+                                    <th scope="col" class="tac">환경</th>
+                                    <th scope="col" class="tac">사회</th>
+                                    <th scope="col" class="tac">지배구조</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="tac"><strong>2025</strong></td>
+                                    <td class="tac">A+</td>
+                                    <td class="tac">A+</td>
+                                    <td class="tac">A+</td>
+                                    <td class="tac">A</td>
+                                    <td class="tac"><strong>AA</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="tac"><strong>2024</strong></td>
+                                    <td class="tac">A+</td>
+                                    <td class="tac">A+</td>
+                                    <td class="tac">A+</td>
+                                    <td class="tac">A</td>
+                                    <td class="tac"><strong>AA</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="tac"><strong>2023</strong></td>
+                                    <td class="tac">A</td>
+                                    <td class="tac">A+</td>
+                                    <td class="tac">A</td>
+                                    <td class="tac">A</td>
+                                    <td class="tac"><strong>A</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="tac"><strong>2022</strong></td>
+                                    <td class="tac">A</td>
+                                    <td class="tac">B</td>
+                                    <td class="tac">A</td>
+                                    <td class="tac">A</td>
+                                    <td class="tac"><strong>-</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="tac"><strong>2021</strong></td>
+                                    <td class="tac">A</td>
+                                    <td class="tac">A</td>
+                                    <td class="tac">A</td>
+                                    <td class="tac">A</td>
+                                    <td class="tac"><strong>-</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="list_dotted">
+                        <li><p>평가기관: 한국기업지배구조원(Korea Corporate Governance Service, KCGS), 서스틴베스트(SUSTINVEST)</p></li>
+                        <li><p>EST 평가: 회사의 ESG 수준에 대한 직관적 정보 제공 및 투자 의사결정 활용 지원을 목적으로 하여, 매년 평가 실시함.</p></li>
+                    </ul>
+                </div>
+                <div v-show="CTabIdxEsgArchive === 3" class="panel_inner" :aria-label="t.TabsEsgArchive?.[3]?.item || ''">
+                    <header class="sub_header sub_header_center">
+                        <h3>구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 <br class="p_br"/>꾸준히 지역사회와 함께한 나눔 활동을 소개합니다.</h3>
+                        <p>2006년부터 구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 꾸준히 지역사회와 함께하며 <br class="p_br"/>나눔 활동을 지속적으로 함께하고 있습니다.<br />앞으로도 일상에서 함께하는 따뜻한 나눔을 실천, 마음을 나누겠습니다.</p>
+                    </header>
+                    <div class="social_award_wrap">
+                        <div class="table_wrap type3">
+                            <table class="base_table">
+                                <colgroup>
+                                    <col style="width: 120px;" />
+                                    <col style="width: 150px;" />
+                                    <col style="width: 470px;" />
+                                    <col style="width: 300px;" />
+                                    <col style="width: 380px;" />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="tac bold">연도</th>
+                                        <th scope="col" class="tac bold">구분</th>
+                                        <th scope="col" class="tac bold">표창명</th>
+                                        <th scope="col" class="tac bold">대회</th>
+                                        <th scope="col" class="tac bold">소속</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="tac" rowspan="2"><strong>2025</strong></td>
+                                        <td class="tac">봉사</td>
+                                        <td class="tal">화성특례시의회 표창장</td>
+                                        <td class="tal">화성시남부종합사회복지관</td>
+                                        <td class="tal">편의점 3부문4지역 GS나누미</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">봉사</td>
+                                        <td class="tal">국회의원 표창장</td>
+                                        <td class="tal">2025년 창영복지인의 날</td>
+                                        <td class="tal">편의점 3부문4지역 GS나누미</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac" rowspan="4"><strong>2024</strong></td>
+                                        <td class="tac">기부</td>
+                                        <td class="tal">한림화상재단 감사패(몽짱소방관 희망나눔 달력 캠페인)</td>
+                                        <td class="tal">한림화상재단</td>
+                                        <td class="tal">GS리테일</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">봉사</td>
+                                        <td class="tal">우리모두복지재단 등촌9종합사회복지관 감사패</td>
+                                        <td class="tal"></td>
+                                        <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">기부</td>
+                                        <td class="tal">제4회 대한민국 착한 기부자상 국무총리 표창장</td>
+                                        <td class="tal">행정안전부 주최</td>
+                                        <td class="tal">GS리테일</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">봉사</td>
+                                        <td class="tal">사단법인 나눔과실천 표창장</td>
+                                        <td class="tal">화성시남부종합사회복지관</td>
+                                        <td class="tal">편의점 3부문4지역 GS나누미</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac" rowspan="8"><strong>2023</strong></td>
+                                        <td class="tac">그외</td>
+                                        <td class="tal">경상북도지사 표창(정신건강 및 자살예방 사업 참여, 생명존중 문화 확산 기여)</td>
+                                        <td class="tal"></td>
+                                        <td class="tal">편의점사업부 5부문(박서우)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">그외</td>
+                                        <td class="tal">전주시장 표창(자살예방 사업 적극 참여, 생명존중 문화 확산 기여)</td>
+                                        <td class="tal"></td>
+                                        <td class="tal">편의점사업부 4부문</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">그외</td>
+                                        <td class="tal">강원특별자치도지사 표창(강원도정 발전 및 성공추진 공로)</td>
+                                        <td class="tal">강원도 유공</td>
+                                        <td class="tal">GS리테일(곽용구 상무)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">기부</td>
+                                        <td class="tal">한림화상재단 감사패(몽짱소방관 희망나눔 달력 캠페인)</td>
+                                        <td class="tal">한림화상재단</td>
+                                        <td class="tal">GS리테일</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">기부</td>
+                                        <td class="tal">영등포구 감사패(영등포 2023 희망온돌 따뜻한 겨울나기)</td>
+                                        <td class="tal"></td>
+                                        <td class="tal">GS리테일</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">기부</td>
+                                        <td class="tal">강릉시 감사장(4월 강릉산불 구호물품 지원)</td>
+                                        <td class="tal"></td>
+                                        <td class="tal">GS리테일</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">봉사</td>
+                                        <td class="tal">경기도 김포시 국회의원 표창장</td>
+                                        <td class="tal">김포시 자원봉사자의 날</td>
+                                        <td class="tal">수퍼 김포권 연합 GS나누미</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tac">봉사</td>
+                                        <td class="tal">부평구노인복지관 관장 표창장</td>
+                                        <td class="tal">부평구노인복지관 자원봉사자의 날</td>
+                                        <td class="tal">수퍼 인천권 연합 GS나누미(부평)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </section>
-
-
-                    <!-- pageid:gsrin0102 -->
-                    <section class="tab_content" v-if="CTabIdx === 1" :aria-label="t.Tabs1?.[1]?.item || ''"></section>
-                    <!-- pageid:gsrin0103 -->
-                    <section class="tab_content" v-if="CTabIdx === 2" :aria-label="t.Tabs1?.[2]?.item || ''">
-                    </section>
+                        <Accordion :multiple="false" class="social_award_acc">
+                            <AccordionItem item-key="social-award-1">
+                                <template #title>2022년 ~ 2018년</template>
+                                <div class="table_wrap type3">
+                                    <table class="base_table">
+                                        <colgroup>
+                                            <col style="width: 120px;" />
+                                            <col style="width: 150px;" />
+                                            <col style="width: 470px;" />
+                                            <col style="width: 300px;" />
+                                            <col style="width: 380px;" />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="tac bold">연도</th>
+                                                <th scope="col" class="tac bold">구분</th>
+                                                <th scope="col" class="tac bold">표창명</th>
+                                                <th scope="col" class="tac bold">대회</th>
+                                                <th scope="col" class="tac bold">소속</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="tac" rowspan="8"><strong>2022</strong></td>
+                                                <td class="tac">그외</td>
+                                                <td class="tal">경상북도지사 표창(소방 안전문화 확산 기여)</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">편의점사업부 5부문(김민호)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">아름다운가게 20주년 감사헌정</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS리테일</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">영등포구 감사패(영등포 2022 희망온돌 따뜻한 겨울나기)</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS리테일</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">아름다운가게 감사장(물품 기부)</td>
+                                                <td class="tal">아름다운가게</td>
+                                                <td class="tal">편의점사업부 3부문</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">대한민국나눔대상 한국사회복지협의회 보건복지부장관상 표창</td>
+                                                <td class="tal">전국사회복지나눔대회</td>
+                                                <td class="tal">GS나누미 조직문화서비스팀 직할연합(김시연)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">강남구청장 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">경기도 김포시 국회의원 표창장</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">수퍼 김포권 연합 GS나누미</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">우리모두복지재단 등촌9종합사회복지관 감사패</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="2"><strong>2021</strong></td>
+                                                <td class="tac">재해재난</td>
+                                                <td class="tal">대한적십자사 감사패(동해안 산불)</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS리테일</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">헌혈</td>
+                                                <td class="tal">대한적십자사 부산혈액원 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">편의점사업부 6부문(노준호)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="2"><strong>2020</strong></td>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">서울특별시장 표창</td>
+                                                <td class="tal">소방의날 기념표창</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">재해재난</td>
+                                                <td class="tal">행정안전부장관상 표창(우한교민)</td>
+                                                <td class="tal">재난구호유공</td>
+                                                <td class="tal">GS나누미 MD본부(유영준)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="9"><strong>2019</strong></td>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">서울시장상</td>
+                                                <td class="tal">민관협력 우수기관 표창</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">보건복지부장관상</td>
+                                                <td class="tal">보건복지부 유공자 표창</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">강남구청장 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 편의점 2부문1지역팀 </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">한빛맹아원 감사패</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 편의점 2부문2지역팀</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">창원시 감사패 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 편의점 4부문3지역팀</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">경남종합사회복지관에서 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 편의점 4부문3지역팀</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">전주 사랑의 집 감사패</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 수퍼 2부문 영업6팀 전주권</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">서울YWCA 봉천종합사회복지관 감사패 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 H&B 북서울권 영업팀</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">재해재난</td>
+                                                <td class="tal">행정안전부장관상 표창(고성 속초 산불)</td>
+                                                <td class="tal">재난구호유공</td>
+                                                <td class="tal">GS나누미 강원(황호성)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="12"><strong>2018</strong></td>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">TV홈쇼핑 부문 1위</td>
+                                                <td class="tal">재난구호유공</td>
+                                                <td class="tal">GS나누미 강원(황호성)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">마산시장 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 수퍼 마산점</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">강남구장애인복지관 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 편의점 2부문1지역팀</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">김포시장 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 수퍼 1부문 NSC영업1팀 김포권 연합</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">물운대종합사회복지관 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 수퍼 3부문 영업3팀 다대점</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">사단법인 한국국제연합봉사단 아름다운 大韓國人상</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS리테일</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">보건복지부장관 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS리테일</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">(사)한국유엔봉사단 대한민국 봉사대상</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS리테일</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">물운대종합사회복지관 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 수퍼 3부문 영업3팀 다대점</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">사단법인 한국국제연합봉사단 아름다운 大韓國人상</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS리테일</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">보건복지부장관 표창</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS리테일</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">(사)한국유엔봉사단 대한민국 봉사대상</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS리테일</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </AccordionItem>
+                            <AccordionItem item-key="social-award-2">
+                                <template #title>2017년 ~ 2013년</template>
+                                <div class="table_wrap type3">
+                                    <table class="base_table">
+                                        <colgroup>
+                                            <col style="width: 120px;" />
+                                            <col style="width: 150px;" />
+                                            <col style="width: 470px;" />
+                                            <col style="width: 300px;" />
+                                            <col style="width: 380px;" />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="tac bold">연도</th>
+                                                <th scope="col" class="tac bold">구분</th>
+                                                <th scope="col" class="tac bold">표창명</th>
+                                                <th scope="col" class="tac bold">대회</th>
+                                                <th scope="col" class="tac bold">소속</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="tac" rowspan="3"><strong>2017</strong></td>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">우리모두복지재단 등촌9종합사회복지관 감사패</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">대한적십자사 부산혈액원 표창</td>
+                                                <td class="tal">제 18회 사회복지의 날 표창</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">재해재난</td>
+                                                <td class="tal">국무총리단체 표창(포항지진)</td>
+                                                <td class="tal">재난구호유공</td>
+                                                <td class="tal">GS나누미 대구경북(김영욱)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="2"><strong>2016</strong></td>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">고용노동부 장관표창</td>
+                                                <td class="tal">사회적 기업육성</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">대한민국나눔대상 서울사회복지협의회 보건복지부장관상 표창</td>
+                                                <td class="tal">전국사회복지나눔대회</td>
+                                                <td class="tal">GS나누미 편의점 중부권경영주연합</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="1"><strong>2015</strong></td>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">대한민국나눔대상 서울사회복지협의회 보건복지부장관상 표창</td>
+                                                <td class="tal">전국사회복지나눔대회</td>
+                                                <td class="tal">GS나누미 건설부문</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="1"><strong>2014</strong></td>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">(사)대한노인회 강서지회 감사패</td>
+                                                <td class="tal"></td>
+                                                <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="2"><strong>2013</strong></td>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">대한민국나눔대상 제주도사회복지협의회 표창</td>
+                                                <td class="tal">전국사회복지나눔대회</td>
+                                                <td class="tal">GS나누미 편의점 영남권3지역/제주센타</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">대한민국나눔대상 한국사회복지협의회 표창</td>
+                                                <td class="tal">전국사회복지나눔대회</td>
+                                                <td class="tal">GS나누미 수퍼 당진점</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </AccordionItem>
+                            <AccordionItem item-key="social-award-3">
+                                <template #title>2012년 ~ 2005년</template>
+                                <div class="table_wrap type3">
+                                    <table class="base_table">
+                                        <colgroup>
+                                            <col style="width: 120px;" />
+                                            <col style="width: 150px;" />
+                                            <col style="width: 470px;" />
+                                            <col style="width: 300px;" />
+                                            <col style="width: 380px;" />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="tac bold">연도</th>
+                                                <th scope="col" class="tac bold">구분</th>
+                                                <th scope="col" class="tac bold">표창명</th>
+                                                <th scope="col" class="tac bold">대회</th>
+                                                <th scope="col" class="tac bold">소속</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="tac" rowspan="3"><strong>2012</strong></td>
+                                                <td class="tac">2012</td>
+                                                <td class="tal">중소기업청장 표창</td>
+                                                <td class="tal">대한민국 판로지원 종합대전</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">대한민국나눔대상 경기도사회복지협의회 표창</td>
+                                                <td class="tal">전국사회복지나눔대회</td>
+                                                <td class="tal">GS나누미 편의점 수도권3지역</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">대한민국나눔대상 경기도사회복지협의회 표창</td>
+                                                <td class="tal">전국사회복지나눔대회</td>
+                                                <td class="tal">GS나누미 수퍼 수도권3,4,5지역</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="4"><strong>2011</strong></td>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">아동복지부문 大賞</td>
+                                                <td class="tal">2011 사회공헌기업大賞</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">아동복지공헌부문大賞</td>
+                                                <td class="tal">2011 행복더함 사회공헌대상</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">기업부문</td>
+                                                <td class="tal">제1회SBS 희망나눔대상</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">봉사</td>
+                                                <td class="tal">보건복지부 장관상</td>
+                                                <td class="tal">이달의 나눔인‘기업 봉사 부문’</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="2"><strong>2010</strong></td>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">대통령 표창(사회 공헌 활동 우수 관리자)</td>
+                                                <td class="tal">2제11회 사회복지의 날기념 표창</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">아동복지부문 大賞</td>
+                                                <td class="tal">2010 사회공헌기업大賞</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="1"><strong>2009</strong></td>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">아동복지부문 大賞</td>
+                                                <td class="tal">2009사회공헌기업大賞</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="1"><strong>2007</strong></td>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">아동복지부문 대상</td>
+                                                <td class="tal">대한민국사회공헌기업대상</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tac" rowspan="1"><strong>2005</strong></td>
+                                                <td class="tac">기부</td>
+                                                <td class="tal">아동.청소년복지부문 대상</td>
+                                                <td class="tal">한국사회공헌대상</td>
+                                                <td class="tal">홈쇼핑BU</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
                 </div>
             </div>
-        </section>
+
+            <!-- 지속가능경영보고서 — Figma 431:13093 -->
+            <div v-show="CTabIdx === 2" class="panel panel_sustainability_report" :aria-label="t.Tabs1?.[2]?.item || ''">
+                <section class="sec_sustain_report_hero" aria-labelledby="sustain_report_feature_heading">
+                    <figure>
+                        <img :src="imgSr07" :alt="t.sustainReportHeroCoverAlt" width="465" height="280" />
+                    </figure>
+                    <article>
+                        <header class="sub_header">
+                            <h3 id="sustain_report_feature_heading">{{ t.sustainReportHeroTitle }}</h3>
+                            <p>{{ t.sustainReportHeroPeriod }}</p>
+                        </header>
+                        <p>{{ t.sustainReportHeroLead }}</p>
+                        <div class="sustain_report_hero_actions" :aria-label="t.sustainReportHeroNavAria">
+                            <Buttons tag="a" :href="t.sustainReportHeroKoHref" btn-class="btn_icon btn_big after border">{{ t.sustainReportKoBtn }}</Buttons>
+                            <Buttons tag="a" :href="t.sustainReportHeroEnHref" btn-class="btn_icon btn_big after border">{{ t.sustainReportEnBtn }}</Buttons>
+                        </div>
+                    </article>
+                </section>
+                <section class="sec_sustain_report_archive" aria-labelledby="sustain_report_archive_heading">
+                    <header class="sub_header">
+                        <h3 id="sustain_report_archive_heading">{{ t.sustainReportArchiveTitle }}</h3>
+                    </header>
+                    <div class="table_wrap type_report">
+                        <table>
+                            <colgroup>
+                                <col style="width: 236px" />
+                                <col style="width: auto" />
+                                <col style="width: 200px" />
+                            </colgroup>
+                            <tbody>
+                                <tr v-for="row in sustainReportPastRowsWithThumbs" :key="row.key">
+                                    <td>
+                                        <figure>
+                                            <img :src="row.thumbSrc" :alt="row.coverAlt" width="196" height="140" />
+                                        </figure>
+                                    </td>
+                                    <td>
+                                        <article>
+                                            <h3>{{ row.title }}</h3>
+                                            <p>{{ row.period }}</p>
+                                        </article>
+                                    </td>
+                                    <td>
+                                        <Buttons tag="a" :href="row.koHref" btn-class="btn_icon btn_big after border">{{ t.sustainReportKoBtn }}</Buttons>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 import Tabs from "@/components/Tabs.vue";
+import Pagination from "@/components/Pagination.vue";
+import Accordion from "@/components/Accordion.vue";
+import AccordionItem from "@/components/AccordionItem.vue";
+import Buttons from "@/components/Buttons.vue";
+import imgBnbpLogo from "@/assets/images/dummy/gsrsu0101_02.png";
+import imgSr03 from "@/assets/images/dummy/gsrsu0101_03.png";
+import imgSr04 from "@/assets/images/dummy/gsrsu0101_04.png";
+import imgSr05 from "@/assets/images/dummy/gsrsu0101_05.png";
+import imgSr06 from "@/assets/images/dummy/gsrsu0101_06.png";
+import imgSr07 from "@/assets/images/dummy/gsrsu0101_07.png";
+
+const sustainReportThumbByRow = [imgSr03, imgSr04, imgSr05, imgSr06];
 
 export default {
     name: "gsrsu0101",
-    components: { Tabs },
+    components: { Tabs, Pagination, Accordion, AccordionItem, Buttons },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
             CTabIdx: 0,
+            CTabIdxEsgArchive: 0,
+            envMgmtPage: 1,
+            envMgmtTotalPages: 5,
+            imgBnbpLogo,
+            imgSr07,
             langData: {
                 ko: {
                     MainTitle: "지속가능경영",
@@ -141,6 +888,12 @@ export default {
 
                     ],
                     Tabs1: [{ item: "비전&전략" }, { item: "ESG 자료실" }, { item: "지속가능경영보고서" }],
+                    TabsEsgArchive: [
+                        { item: "환경경영 자료" },
+                        { item: "상생경영 자료" },
+                        { item: "ESG성과" },
+                        { item: "사회공헌 수상내역" },
+                    ],
                     VisionTogetherAria: "Green Life Together — 환경·사회",
                     VisionMainTitle: "Green Life Together.",
                     VisionEnvLabel: "환경",
@@ -260,9 +1013,69 @@ export default {
                         "[경영주] 경영주협의회",
                     ],
                     esgTableRightItems: [
-                        "[환경] 환경영향평가위원회",
-                        "[임직원] 노사정협의회",
-                        "[경영주] 경영주협의회",
+                        "[파트너사] 파트너사 간담회",
+                        "[개인정보] 정보보안대책위원회",
+                        "[사회공헌] 사회공헌 심사위원회",
+                    ],
+                    bnbpTitle: "BNBP(Biz N Biodiversity Platform) 이니셔티브",
+                    esgCommitteeDetailImageAlt: "BNBP 로고 이미지",
+                    esgBnbpContents: [
+                        "BNBP(Biz N Biodiversity Platform)는 기업으로 하여금 생물다양성 관련 페이지 데이터 수집 및 성과 지표 관리를 체계적으로 진행할 수 있도록 지원하는 플랫폼입니다.",
+                        "GS리테일은 BNBP 가입을 통해, 기업의 생물다양성 보전에 대한 사회적 책임을 인지하고 함께 이행하는 생태 환경 문화에 기여하고 있습니다.",
+                    ],
+                    esgChangwonTitle: "창원이니셔티브",
+                    esgChangwonContents: [
+                        "2011년 제10차 유엔사막화방지협약(UNCCD) 총회에서 채택된 창원이니셔티브는 UN 지속가능발전목표(SDG 15.3) 이행을 촉진하기 위한 글로벌 협력 체계입니다.",
+                        "GS리테일은 2014년 10월 창원이니셔티브를 통해 10억 달러 조성을 목표로 추진되는 복원 프로젝트에 참여해 토지 황폐화 대응과 생물다양성 보전을 위한 실천 활동을 이어가고 있습니다.",
+                    ],
+                    EnvMgmtListData: [
+                        { id: "5", title: "2025년 4분기 분기보고서", link: "#", fileType: "다운로드" },
+                        { id: "4", title: "2025년 3분기 분기보고서", link: "#", fileType: "다운로드" },
+                        { id: "3", title: "2025년 2분기 분기보고서", link: "#", fileType: "다운로드" },
+                        { id: "2", title: "2025년 1분기 분기보고서", link: "#", fileType: "다운로드" },
+                        { id: "1", title: "2024년 4분기 분기보고서", link: "#", fileType: "다운로드" },
+                    ],
+                    EnvMgmtNoDataText: "조회된 데이터가 없습니다.",
+                    sustainReportHeroCoverAlt: "2024 지속가능경영보고서 표지",
+                    sustainReportHeroTitle: "2024년 지속가능경영 보고서",
+                    sustainReportHeroPeriod: "(보고기간: 2024.01.01 ~ 2024.12.31)",
+                    sustainReportHeroLead:
+                        "GS리테일의 2024 지속가능경영보고서는 고객과 사회, 그리고 다양한 이해관계자와 함께 만들어가는 지속 가능성의 여정과 GS리테일의 ESG 실천 성과를 담았습니다.",
+                    sustainReportHeroKoHref: "#none",
+                    sustainReportHeroEnHref: "#none",
+                    sustainReportHeroNavAria: "2024 보고서 다운로드",
+                    sustainReportKoBtn: "국문 보고서",
+                    sustainReportEnBtn: "영문 보고서",
+                    sustainReportArchiveTitle: "지난 지속가능경영보고서",
+                    sustainReportPastRows: [
+                        {
+                            key: "2023",
+                            title: "2023년 지속가능경영 보고서",
+                            period: "(보고기간: 2023.01.01 ~ 2023.12.31)",
+                            coverAlt: "2023 지속가능경영보고서 표지",
+                            koHref: "#none",
+                        },
+                        {
+                            key: "2022",
+                            title: "2022년 지속가능경영 보고서",
+                            period: "(보고기간: 2022.01.01 ~ 2022.12.31)",
+                            coverAlt: "2022 지속가능경영보고서 표지",
+                            koHref: "#none",
+                        },
+                        {
+                            key: "2021",
+                            title: "2021년 지속가능경영 보고서",
+                            period: "(보고기간: 2021.01.01 ~ 2021.12.31)",
+                            coverAlt: "2021 지속가능경영보고서 표지",
+                            koHref: "#none",
+                        },
+                        {
+                            key: "2020",
+                            title: "2020년 지속가능경영 보고서",
+                            period: "(보고기간: 2020.01.01 ~ 2020.12.31)",
+                            coverAlt: "2020 지속가능경영보고서 표지",
+                            koHref: "#none",
+                        },
                     ],
                 },
               
@@ -276,247 +1089,255 @@ export default {
                 return selected;
             }
             return this.langData.ko;
-        }
+        },
+        sustainReportPastRowsWithThumbs() {
+            const rows = this.t.sustainReportPastRows;
+            if (!rows || !rows.length) {
+                return [];
+            }
+            return rows.map((row, idx) => ({
+                ...row,
+                thumbSrc: sustainReportThumbByRow[idx] || sustainReportThumbByRow[0],
+            }));
+        },
     },
     methods: {
         onTabChange1(idx) {
             this.CTabIdx = idx;
+            this.envMgmtPage = 1;
+        },
+        onEsgArchiveTabChange() {
+            this.envMgmtPage = 1;
+        },
+        handleEnvMgmtDownload(link) {
+            console.log("환경경영 자료 다운로드:", link);
+        },
+        onEnvMgmtPageChange(page) {
+            this.envMgmtPage = page;
         },
     },
 }; 
 </script>
 
 <style scoped>
-/*::::::::::::::::::::::::::::::: PC Style :::::::::::::::::::::::::::::::*/
-:deep(.tab_content){padding-top: 80px;}
-.main-container {width: 100%; position: relative; display: block;}
-.section-investor {width: 100%; position: relative; display: block;}
-.title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url(@/assets/images/dummy/gsrsu0101_bg.jpg) no-repeat center / cover; text-align: center; position: relative; display: block;}
-.page-title {color: #FFFFFF; font-size: 7.2rem; font-weight: 700; text-align: center; display: block;}
-/* .sub_header{} */
-.sub_header h3{font-weight: 700;font-size: 4rem;line-height: 1.3;letter-spacing: -0.01em;}
-.sub_header p{margin-top: 16px;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;}
-.esg_process {margin-top: 40px;}
-.esg_flow {margin-top: 0;}
-.esg_flow_step + .esg_flow_step {margin-top: 0;}
-.esg_flow_card {
-    width: 100%;
-    min-height: 120px;
-    padding: 10px 20px;
-    background: #E7F2FE;
-    border-radius: 99px;
-    display: flex;
-    align-items: center;
+.tac{text-align: center !important;}
+.tal{text-align: left !important;}
+.p_br{display:block;}
+.bold{font-weight: 700 !important;}
+img{width:100%; height:auto; display:block; object-fit: cover;}
+.main-container { width: 100%; position: relative; display: block; }
+.title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url(@/assets/images/dummy/gsrsu0101_bg.jpg) no-repeat center / cover; text-align: center; position: relative; display: block; }
+.title_wrap::after{content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1;}
+.page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2;}
+.content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
+.panel { padding-top: 80px; }
+.table_wrap {margin-top:0; border-top: 1px solid #161616;}
+.sub_header + .table_wrap {margin-top: 64px;}
+.table_wrap table { margin-top:0;width: 100%; border-collapse: collapse; }
+.table_wrap th { padding: 0 20px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
+.table_wrap td { padding: 0 20px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
+.table_wrap thead tr:nth-child(1) th {padding: 16px 24px;}
+.table_wrap thead tr:nth-child(2) th {padding: 12px 24px;}
+.table_wrap thead th { font-weight: 400; background-color: #F8F8F8; }
+.table_wrap thead th.th_item { border-right: 1px solid #E5E5E9; }
+.table_wrap thead th.th_sustin_best { border-left: 1px solid #E5E5E9; }
+.table_wrap td{height: 82px; border-left: 0; border-right: 0;}
+.table_wrap td:not(:last-child) { border-right: 1px solid #E5E5E9; }
+.table_wrap th { border-left: 0; border-right: 0; }
+.table_wrap td .link_title { font-size: 1.6rem; color: #161616; text-decoration: none; }
+.table_wrap td .link_title:hover { text-decoration: underline; }
+.table_wrap.type1 table td{border-left:0; border-right:0; }
+.table_wrap.type2 table td{ height: 70px; }
+.table_wrap.type3 table th{font-weight: 600;font-size: 1.8rem;line-height: 1.4;letter-spacing: -0.01em;}
+.table_wrap.type3 table th:not(:last-child) { border-right: 1px solid #E5E5E9;}
+.table_wrap.type3 table td {height: auto; padding:16px 24px; font-size: 1.8rem;line-height:1.4; border-left: 0; border-right: 0; }
+.table_wrap.type3 table td[rowspan] { border-right: 1px solid #E5E5E9; }
+.pagination_area{margin-top:24px; display: flex; justify-content: center; }
+.social_award_wrap { margin-top: 64px; }
+.social_award_wrap :deep(dl dt > a.acc_tit_btn){padding:24px;font-weight: 700;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;
+background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
+.social_award_wrap :deep(dd.acc_panel > .acc_panel_inner > .acc_panel_cont > .table_wrap){border-top: 0;}
+.list_dotted {margin-top: 24px;}
+.list_dotted > li { padding-left: 12px; position: relative }
+.list_dotted > li + li { margin-top: 8px }
+.list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #67676F; border-radius: 50%; position: absolute; top: 11px; left: 0 }
+.list_dotted > li > p { margin: 0; color: #67676F; font-size: 1.8rem; line-height: 1.4 }
+/* 환경경영 자료 — gsrin0301 테이블·필터 패턴 (Figma 431:12931 대응) */
+.visual_sub {color: #FFFFFF; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;  text-align: center; position: relative; z-index: 2; }
+.panel.panel_vision_strategy > section { margin-top: 100px; }
+.sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
+.sub_header p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
+.sub_header_center h3 { text-align: center; }
+.sub_header_center p { text-align: center; }
+.tab_desc { padding: 20px 0; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
+.sec_vision_together { margin-top: 80px; }
+.vision_main_title { font-size: 7rem; font-weight: 700; line-height: 1.24; text-align: center; }
+.vision_two_col { width: 100%; margin-top: 24px; display: flex; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 50px; }
+.vision_col { width: calc((100% - 50px) / 2); max-width: 400px; padding: 64px 50px; text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; border-radius: 270px; border: 2px dashed; }
+.vision_col_env { border-color: #11935D; }
+.vision_col_soc { border-color: #0D62C2; }
+.vision_col_tit { font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.vision_col_sub { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+.vision_col_env .vision_col_tit { color: #11935D; }
+.vision_col_env .vision_col_sub { color: #11935D; }
+.vision_col_soc .vision_col_tit { color: #0D62C2; }
+.vision_col_soc .vision_col_sub { color: #0D62C2; }
+.vision_circle_list { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; align-items: center; }
+.vision_item { width: 300px; height: 300px; flex: 0 0 auto; padding: 0 32px; border-radius: 50%; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0.8; }
+.vision_item + .vision_item { margin-top: -6.7%; }
+.vision_col_soc .vision_item + .vision_item { margin-top: -30%; }
+.vision_col_env .vision_item { background: rgba(157, 226, 197, 1); }
+.vision_col_soc .vision_item { background: rgba(161, 196, 255, 1); }
+.vision_item_tit { font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+.vision_item_desc { margin-top: 12px; padding: 0 24px; font-size: 1.6rem; line-height: 1.4; letter-spacing: -0.01em; }
+.esg_process { margin-top: 40px; }
+.esg_flow { margin-top: 0; }
+.esg_flow_card { width: 100%; min-height: 120px; padding: 20px; background: #E7F2FE; border-radius: 99px; display: flex; align-items: center; }
+.esg_flow_card.final { background: #E8F8F1; }
+.esg_flow_card_head { width: 400px; height: 100%; min-height: 100px; padding: 0 16px; background: #ffffff; border-radius: 99px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 0 0 auto; }
+.esg_flow_card_title { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.esg_flow_card_meta { margin-top: 4px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.esg_flow_card_desc { margin-left: 36px; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.esg_flow_connector { width: 420px; height: 84px; padding: 30px 20px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.esg_flow_connector > p { flex: 1; }
+.esg_flow_connector_text { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; display: flex; align-items: center; gap: 12px; }
+.esg_flow_connector > p:first-child > span { justify-content: flex-end; }
+.esg_flow_connector > p:last-child > span { justify-content: flex-start; }
+.esg_flow_connector_text::after { content: ''; display: block; width: 20px; height: 20px; background: #15B874; }
+.esg_flow_connector > p:last-child > span::after { content: none; }
+.esg_flow_connector > p:last-child > span::before { content: ''; display: block; width: 20px; height: 20px; background: #107AF2; }
+.esg_flow_note { margin-top: 0; padding: 24px 0 0 24px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; color: #67676f; }
+.esg_committee_table { width: 100%; margin-top: 60px; }
+.esg_committee_table table { width: 100%; border-collapse: collapse; border: 1px solid #E5E5E9; }
+.esg_committee_table thead th { width: 100%; height: 70px; padding: 0 24px; background: #F8F8F8; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; text-align: center; border-right: 1px solid #E5E5E9; border-bottom: 1px solid #E5E5E9; }
+.esg_committee_table tbody td { width: 50%; padding: 6px 0; border-right: 1px solid #E5E5E9; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; text-align: center; }
+.esg_committee_table tbody tr:first-child td { padding-top: 24px; }
+.esg_committee_table tbody tr:last-child td { padding-bottom: 24px; }
+.bnbp_main { margin-top: 32px; display: flex; align-items: flex-start; gap: 60px; }
+.img_wrapper { width: 428px; max-width: 100%; flex: 0 0 auto; }
+.img_wrapper img { width: 100%; display: block; object-fit: contain; }
+.txt_box p { font-size: 1.8rem; line-height: 1.6; letter-spacing: -0.01em; }
+.txt_box p + p { margin-top: 20px; }
+.bnbp_sub { margin-top: 60px; }
+.bnbp_sub h4 { margin-bottom: 24px; font-weight: 700; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
+.bnbp_sub > .txt_box p { margin-top: 24px; }
+/* 지속가능경영보고서 — Figma 431:13093 */
+.panel_sustainability_report .sec_sustain_report_hero {width: 100%;max-width: 1025px;margin: 0 auto;padding: 0;display: flex;flex-wrap: nowrap;align-items: stretch;justify-content: center;gap: 60px;}
+.panel_sustainability_report .sec_sustain_report_hero > figure {width: 465px;max-width: 100%;margin: 0;flex-shrink: 0;}
+.panel_sustainability_report .sec_sustain_report_hero > figure > img {width: 100%;height: auto;border-radius: 1.6rem;}
+.panel_sustainability_report .sec_sustain_report_hero > article { width: 500px; max-width: 100%; flex: 1 1 auto; }
+.panel_sustainability_report .sec_sustain_report_hero > article > p { margin-top: 24px; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.panel_sustainability_report .sec_sustain_report_hero > article > .sustain_report_hero_actions { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.panel_sustainability_report .sec_sustain_report_archive { margin: 80px auto 0; }
+.panel_sustainability_report .table_wrap.type_report { margin-top: 32px; border-top: 1px solid #D7D7DF; }
+.panel_sustainability_report .table_wrap.type_report table { width: 100%; margin: 0; border-collapse: collapse; }
+.panel_sustainability_report .table_wrap.type_report tbody td { height: auto; padding: 27px 20px; vertical-align: middle; border-bottom: 1px solid #D7D7DF; border-right: 0; }
+.panel_sustainability_report .table_wrap.type_report tbody td:last-child { border-right: 0; }
+.panel_sustainability_report .table_wrap.type_report tbody td figure { width: 196px; max-width: 100%; margin: 0 auto; }
+.panel_sustainability_report .table_wrap.type_report tbody td figure > img { border-radius: 12px; }
+.panel_sustainability_report .table_wrap.type_report tbody td article > h3 {font-weight: 700;font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
+.panel_sustainability_report .table_wrap.type_report tbody td article > p {margin-top: 12px;font-size: 1.8rem;line-height: 1.4;}
+.panel_sustainability_report .table_wrap.type_report tbody td:last-child {text-align: center;}
+.panel_sustainability_report :deep([class*="btn_"][class*="border"]) {
+    color: #161616;
+    border-color: #67676f;
+    background-color: #fff;
 }
-.esg_flow_card.final {background: #E8F8F1;}
-.esg_flow_card_head {
-    width: 400px;
-    height: 100%;
-    min-height: 100px;
-    padding: 0 16px;
-    background: #ffffff;
-    border-radius: 99px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
+.panel_sustainability_report :deep([class*="btn_icon"][class*="after"]::after) {
+    background-color: #a4a4b0;
+    background-image: none;
 }
-.esg_flow_card_title {font-size: 2.4rem;font-weight: 700;line-height: 1.35;letter-spacing: -0.01em;}
-.esg_flow_card_meta {margin-top: 4px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-.esg_flow_card_desc {
-    margin-left: 36px;
-    font-size: 2rem;
-    font-weight: 400;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
+@media screen and (max-width: 1024px) {
+    .esg_flow_card { padding: 16px; }
+    .esg_flow_card_head { width: 320px; min-height: 84px; padding: 0 12px; }
+    .esg_flow_card_desc { margin-left: 20px; }
+    .esg_flow_connector { width: 100%; height: auto; padding: 20px 16px; gap: 16px; }
+    .esg_flow_connector_text { gap: 8px; }
+    .esg_flow_connector_text::after { width: 14px; height: 14px; }
+    .esg_flow_connector > p:last-child > span::before { width: 14px; height: 14px; }
+    .bnbp_main { gap: 32px; flex-direction: column; }
+    .panel_sustainability_report .sec_sustain_report_hero {flex-wrap: wrap;flex-direction: column;align-items: center;gap: 40px;}
+    .panel_sustainability_report .sec_sustain_report_hero > article {width: 100%;align-items: flex-start;}
 }
-.esg_flow_connector {
-    width: 420px;
-    height: 84px;
-    padding: 30px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap:40px;
-    
-}
-.esg_flow_connector > p{flex:1;}
-.esg_flow_connector_text {font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;display: flex;align-items: center; gap:12px}
-.esg_flow_connector > p:first-child > span{justify-content: flex-end;}
-.esg_flow_connector > p:last-child > span{justify-content: flex-start;}
-.esg_flow_connector_text::after{
-    content: '';
-    display: block;
-    width: 20px;
-    height: 20px;
-    background: #15B874;
-}
-
-.esg_flow_connector > p:last-child > span::after{
-    background: #107AF2;
-}
-.esg_flow_connector > p:last-child > span::after{
-    content: none;
-}
-.esg_flow_connector > p:last-child > span::before{
-    content: '';
-    display: block;
-    width: 20px;
-    height: 20px;
-    background: #107AF2;
-}
-.esg_flow_connector_down {
-    width: 10px;
-    height: 18px;
-    margin: 0 6px;
-    background: #00a86f;
-    border-radius: 999px;
-    display: inline-block;
-}
-.esg_flow_connector_up {
-    width: 10px;
-    height: 18px;
-    margin-right: 6px;
-    background: #1348e5;
-    border-radius: 999px;
-    display: inline-block;
-}
-.esg_flow_note {margin-top: 0;padding: 24px 0 0 24px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;color: #67676f;}
-.esg_committee_table {
-    width: 100%;
-    margin-top: 40px;
-}
-.esg_committee_table table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #E5E5E9;
-}
-.esg_committee_table thead th {
-    width: 100%;
-    height: 70px;
-    padding: 0 24px;
-    background: #F8F8F8;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    text-align: center;
-    border-right: 1px solid #E5E5E9;
-    border-bottom: 1px solid #E5E5E9;
-}
-.esg_committee_table tbody td {
-    width: 50%;
-    height: 49px;
-    padding: 24px;
-    border-right: 1px solid #E5E5E9;
-    font-size: 1.8rem;
-    line-height: 1.4;
-    letter-spacing: 0;
-    text-align: center;
-}
-.visual-sub {margin-top: 10px; color: #FFFFFF; font-size: 3.2rem; font-weight: 700; text-align: center;}
-.cont_inner {width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom:200px;}
-.title-sub-text {width: 100%; padding: 120px 0;font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;text-align: center;}
-.subtit_wrap {width: 100%; padding: 60px 40px; color:#fff;background: #15B874; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
-.subtit_wrap h3{font-weight: 700;font-size: 4.8rem;line-height: 1.3;letter-spacing: -0.01em;text-align: center;}
-.policy_wrap {padding: 32px 0; text-align: left;}
-.policy_wrap dt {margin-top: 32px; color: #2c2c2c; font-size: 2.4rem; font-weight: 700;}
-.policy_wrap dt:first-child {margin-top: 0;}
-.policy_wrap dd {margin-top: 32px; padding-bottom:32px;color: #444444; font-size: 1.8rem; line-height: 1.8;border-bottom: 1px solid #D7D7DF;}
-.policy_wrap dd:last-child {border-bottom: 0;}
-.bullet_title {color: #161618; font-size: 2rem; font-weight: 700; display: block;}
-.bullet_01 {margin-top: 16px;font-size:1.8rem;}
-.bullet_01 li{font-size: 1.8rem;line-height: 1.4;letter-spacing: 0%;}
-.bullet_01 li.point {color:#242428}
-.policy_wrap > dl > dd > ul > li{padding-left: 24px;}
-.policy_wrap > dl > dd > ul + strong{margin-top:32px; margin-bottom:0;}
-
-.ac {text-align:center;}
-
-/* Green Life Together — 환경·사회 2열 + CSS 겹침 원 */
-.tab_desc {padding:20px 0;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;text-align: center;}
-.sec_vision_together{margin-top: 80px;}
-.vision_main_title {font-size: 7rem;font-weight: 700;line-height: 1.24;text-align: center;}
-.vision_two_col {
-    width: 100%;
-    margin-top: 24px;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    justify-content: center;
-    gap: 50px;
-}
-.vision_col {
-    width: calc((100% - 50px) / 2);
-    max-width: 400px;
-    padding: 64px 50px;
-    text-align: center;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 270px;
-    border: 2px dashed;
-}
-.vision_col_env {border-color: #11935D;}
-.vision_col_soc {border-color: #0D62C2;}
-.vision_col_tit {font-size: 4rem;font-weight: 700;line-height: 1.3;letter-spacing: -0.01em;}
-.vision_col_env .vision_col_tit,
-.vision_col_env .vision_col_sub {color: #11935D;}
-.vision_col_soc .vision_col_tit,
-.vision_col_soc .vision_col_sub {color: #0D62C2;}
-.vision_col_sub {font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
-
-.vision_circle_list {
-    margin-top:auto;
-    padding-top: 40px;
-    flex-direction: column;
-    align-items: center;
-}
-.vision_item {
-    width: clamp(180px, 22vw, 300px);
-    height: clamp(180px, 22vw, 300px);
-    flex: 0 0 auto;
-    padding: 0 32px;
-    border-radius: 50%;
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity:0.8;
-}
-.vision_item + .vision_item{ margin-top: -6.7%;}
-.vision_col_env .vision_item {
-    background: rgba(157, 226, 197, 1)
-}
-.vision_col_soc .vision_item {
-    background: rgba(161, 196, 255, 1);
-}
-.vision_col_soc .vision_item + .vision_item {margin-top: -30%;}
-.vision_item_tit {font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
-.vision_item_desc {margin-top: 12px;padding:0 24px;font-size: 1.6rem;line-height: 1.4;letter-spacing: -0.01em;}
-
-/*::::::::::::::::::::::::::::::: Responsive :::::::::::::::::::::::::::::::*/
-@media screen and (max-width:1024px) {
-    .cont_inner {padding: 0 20px;}
-    
-
-}
-
-@media screen and (max-width: 767px) {
-    .cont_inner {padding: 0 20px;}
-    .title_wrap {display:none;}
-    .page-title {font-size: 4rem;}
-    .visual-sub {font-size: 2rem;}
-    .policy_wrap {padding: 30px 20px;}
-    .policy_wrap dt {margin-top: 40px; font-size: 2rem;}
-    .policy_wrap dd {font-size: 1.6rem;}
-    .bullet_01 li {font-size:1.6rem;}
- 
-    
+@media screen and (max-width: 768px) {
+    .p_br{display:none;}
+    .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
+    .panel{padding-top: 48px;}
+    .title_wrap { display: none; }
+    .page_title { font-size: 4rem; }
+    .visual_sub { font-size: 2rem; }
+    .table_wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table_wrap table { min-width: 960px; }
+    .table_wrap th { font-size: 1.6rem; }
+    .table_wrap td { font-size: 1.6rem; }
+    .table_wrap.type2 table { min-width: 960px; }
+    .table_wrap.type3 table { min-width: 960px; }
+    .table_wrap.type3 table th { font-size: 1.6rem; }
+    .table_wrap.type3 table td { font-size: 1.6rem; }
+    .table_wrap.type1 { overflow-x: visible; }
+    .table_wrap.type1 table { min-width: 0; table-layout: fixed; }
+    /* 지속가능 보고서 목록 — 모바일 카드형(가로 스크롤 없음) */
+    .panel_sustainability_report .table_wrap.type_report { overflow-x: visible; }
+    .panel_sustainability_report .table_wrap.type_report table { width: 100%; min-width: 0; display: block; }
+    .panel_sustainability_report .table_wrap.type_report colgroup { display: none; }
+    .panel_sustainability_report .table_wrap.type_report tbody { width: 100%; display: block; }
+    .panel_sustainability_report .table_wrap.type_report tbody tr { width: 100%; margin: 0 0 16px 0; padding: 20px 16px; display: block; background-color: #fff; border: 1px solid #d7d7df; border-radius: 12px; box-sizing: border-box; }
+    .panel_sustainability_report .table_wrap.type_report tbody tr:last-child { margin-bottom: 0; }
+    .panel_sustainability_report .table_wrap.type_report tbody td { width: 100%; min-width: 0; height: auto; margin: 0; padding: 0; display: block; border: 0; border-bottom: 0; text-align: left; }
+    .panel_sustainability_report .table_wrap.type_report tbody td + td { margin-top: 16px; }
+    .panel_sustainability_report .table_wrap.type_report tbody td article { margin: 0; padding: 0; text-align: left; }
+    .panel_sustainability_report .table_wrap.type_report tbody td article > h3 { margin: 0; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .panel_sustainability_report .table_wrap.type_report tbody td article > p { margin: 0; margin-top: 8px; color: #161616; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+    .panel_sustainability_report .table_wrap.type_report tbody td:last-child { margin-top: 20px; text-align: center; }
+    .panel_sustainability_report .table_wrap.type_report tbody td:last-child :deep([class*="btn_"]) { width: 100%; max-width: 100%; justify-content: center; box-sizing: border-box; }
+    .panel_sustainability_report .sec_sustain_report_archive { margin-top: 48px; }
+    .table_wrap.type1 colgroup col:nth-child(1) { width: 50px !important; }
+    .table_wrap.type1 colgroup col:nth-child(2) { width: auto !important; }
+    .table_wrap.type1 colgroup col:nth-child(3) { width: 70px !important; }
+    .table_wrap.type1 th { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
+    .table_wrap.type1 td { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
+    .table_wrap td .link_title{font-size: 1.4rem;}
+    .list_dotted > li { padding-left: 6px }
+    .list_dotted > li::before { top: 9px; width:2px; height:2px }
+    .list_dotted > li + li { margin-top: 8px }
+    .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
+    .sub_header h3 { font-size: 2.8rem; text-align: left; }
+    .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sub_header_center h3 { text-align: left; }
+    .sub_header_center p { text-align: left; }
+    .tab_desc { padding: 0; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+    .sec_vision_together { margin-top: 56px; }
+    .vision_main_title { font-size: 3.6rem; }
+    .vision_two_col { margin-top: 20px; flex-direction: column; align-items: center; gap: 24px; }
+    .vision_col { width: 100%; max-width: 320px; padding: 30px 16px 24px; border-radius: 160px; }
+    .vision_col_tit { font-size: 2.6rem; }
+    .vision_col_sub { font-size: 1.6rem; }
+    .vision_circle_list { width: 100%; margin-top: 16px; padding-top: 0; display: flex; align-items: center; }
+    .vision_item { width: min(236px, 70vw); height: min(236px, 70vw); padding: 0 18px; opacity: 1; }
+    .vision_item + .vision_item { margin-top: 12px; }
+    .vision_col_soc .vision_item + .vision_item { margin-top: 12px; }
+    .vision_item_tit { font-size: 1.8rem; line-height: 1.25; }
+    .vision_item_desc { margin-top: 8px; padding: 0 8px; font-size: 1.4rem; line-height: 1.35; }
+    .esg_process { margin-top: 28px; }
+    .esg_flow_card { min-height: 0; padding: 18px 16px; border-radius: 20px; flex-direction: column; align-items: flex-start; }
+    .esg_flow_card_head { width: 100%; min-height: 0; padding: 16px; border-radius: 14px; align-items: flex-start; text-align: left; }
+    .esg_flow_card_title { font-size: 1.8rem; line-height: 1.35; }
+    .esg_flow_card_meta { margin-top: 2px; font-size: 1.4rem; }
+    .esg_flow_card_desc { margin-top: 14px; margin-left: 0; font-size: 1.6rem; line-height: 1.5; }
+    .esg_flow_connector { padding: 14px 8px 18px; gap: 10px; }
+    .esg_flow_connector_text { font-size: 1.4rem; line-height: 1.4; }
+    .esg_flow_note { padding: 16px 0 0 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .esg_committee_table { overflow-x: auto; }
+    .esg_committee_table table { min-width: 640px; table-layout: fixed; }
+    .esg_committee_table thead th { height: 56px; padding: 0 24px; font-size: 1.8rem; white-space: nowrap; }
+    .esg_committee_table tbody td { padding: 14px 24px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; white-space: nowrap; }
+    .bnbp_main { margin-top: 24px; gap: 12px; }
+    .img_wrapper { width: 100%; }
+    .txt_box p { font-size: 1.6rem; line-height: 1.5; }
+    .txt_box p + p { margin-top: 14px; }
+    .bnbp_sub { margin-top: 40px; }
+    .bnbp_sub h4 { margin-bottom: 16px; font-size: 2.2rem; }
+    .bnbp_sub > .txt_box p { margin-top: 12px; }
+    .social_award_wrap :deep(dl dt > a.acc_tit_btn){min-height: 64px;padding: 0 20px;font-weight: 700;font-size: 1.8rem;line-height: 1.4;letter-spacing: 0;}
 }
 </style>
