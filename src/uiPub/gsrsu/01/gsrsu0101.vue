@@ -9,12 +9,12 @@
         <div class="content">
             <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
             <Tabs
-            v-if="CTabIdx === 1"
-            v-model="CTabIdxEsgArchive"
-            :tab-items="t.TabsEsgArchive"
-            tab-class="type_02"
-            :tab-slide="true"
-            @change="onEsgArchiveTabChange"
+                v-if="CTabIdx === 1"
+                v-model="CTabIdxEsgArchive"
+                :tab-items="t.TabsEsgArchive"
+                tab-class="type_02"
+                :tab-slide="true"
+                @change="onEsgArchiveTabChange"
             />
         
             <!-- 비전&전략 -->
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <section>
-                    <header class="sub_header social_intro">
+                    <header class="sub_header">
                         <h3>{{ t.esgTitle }}</h3>
                         <p>{{ t.esgDesc }}</p>
                     </header>
@@ -120,7 +120,7 @@
             <div v-show="CTabIdx === 1" class="panel" :aria-label="t.Tabs1?.[1]?.item || ''">
                 <!-- Figma 431:12931 — 환경경영 자료 (IR/공시 리스트 패턴) -->
                 <div v-show="CTabIdxEsgArchive === 0" class="panel_inner" :aria-label="t.TabsEsgArchive?.[0]?.item || ''">
-                    <header class="sub_header archive_intro">
+                    <header class="sub_header sub_header_center">
                         <h3>GS리테일의 상생 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
                         <p>본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br class="p_br" />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
                     </header>
@@ -154,7 +154,7 @@
                     </div>
                 </div>
                 <div v-show="CTabIdxEsgArchive === 1" class="panel_inner" :aria-label="t.TabsEsgArchive?.[1]?.item || ''">
-                    <header class="sub_header archive_intro">
+                    <header class="sub_header sub_header_center">
                         <h3>GS리테일의 환경 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
                         <p>본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br class="p_br" />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
                     </header>
@@ -262,7 +262,7 @@
                     </ul>
                 </div>
                 <div v-show="CTabIdxEsgArchive === 3" class="panel_inner" :aria-label="t.TabsEsgArchive?.[3]?.item || ''">
-                    <header class="sub_header">
+                    <header class="sub_header sub_header_center">
                         <h3>구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 <br class="p_br"/>꾸준히 지역사회와 함께한 나눔 활동을 소개합니다.</h3>
                         <p>2006년부터 구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 꾸준히 지역사회와 함께하며 <br class="p_br"/>나눔 활동을 지속적으로 함께하고 있습니다.<br />앞으로도 일상에서 함께하는 따뜻한 나눔을 실천, 마음을 나누겠습니다.</p>
                     </header>
@@ -817,7 +817,7 @@
                 </section>
                 <section class="sec_sustain_report_archive" aria-labelledby="sustain_report_archive_heading">
                     <header class="sub_header">
-                        <h3 id="sustain_report_feature_heading">지난 지속가능경영보고서</h3>
+                        <h3 id="sustain_report_archive_heading">{{ t.sustainReportArchiveTitle }}</h3>
                     </header>
                     <div class="table_wrap type_report">
                         <table>
@@ -875,15 +875,8 @@ export default {
         return {
             CTabIdx: 0,
             CTabIdxEsgArchive: 0,
-            sustainReportYear: "all",
-            sustainReportSearchType: "all",
-            sustainReportKeyword: "",
-            selectedYearEnvMgmt: "전체",
-            envMgmtSearch: { type: "all", keyword: "" },
             envMgmtPage: 1,
             envMgmtTotalPages: 5,
-            esgPerformancePage: 1,
-            esgPerformanceTotalPages: 3,
             imgBnbpLogo,
             imgSr07,
             langData: {
@@ -1035,19 +1028,6 @@ export default {
                         "2011년 제10차 유엔사막화방지협약(UNCCD) 총회에서 채택된 창원이니셔티브는 UN 지속가능발전목표(SDG 15.3) 이행을 촉진하기 위한 글로벌 협력 체계입니다.",
                         "GS리테일은 2014년 10월 창원이니셔티브를 통해 10억 달러 조성을 목표로 추진되는 복원 프로젝트에 참여해 토지 황폐화 대응과 생물다양성 보전을 위한 실천 활동을 이어가고 있습니다.",
                     ],
-                    EnvMgmtYearLabel: "년도선택",
-                    EnvMgmtYearOptions: [
-                        { value: "전체", label: "전체" },
-                        { value: "2026", label: "2026" },
-                        { value: "2025", label: "2025" },
-                        { value: "2024", label: "2024" },
-                    ],
-                    EnvMgmtSearchOptions: [
-                        { value: "all", label: "전체" },
-                        { value: "title", label: "제목" },
-                        { value: "content", label: "내용" },
-                    ],
-                    EnvMgmtTableHeader: { col1: "번호", col2: "제목", col3: "다운로드" },
                     EnvMgmtListData: [
                         { id: "5", title: "2025년 4분기 분기보고서", link: "#", fileType: "다운로드" },
                         { id: "4", title: "2025년 3분기 분기보고서", link: "#", fileType: "다운로드" },
@@ -1056,19 +1036,6 @@ export default {
                         { id: "1", title: "2024년 4분기 분기보고서", link: "#", fileType: "다운로드" },
                     ],
                     EnvMgmtNoDataText: "조회된 데이터가 없습니다.",
-                    EsgPerformanceListData: [
-                        { id: "5", title: "2025년 ESG 성과 데이터 북", link: "#", fileType: "다운로드" },
-                        { id: "4", title: "2025년 온실가스·에너지 성과", link: "#", fileType: "다운로드" },
-                        { id: "3", title: "2025년 사회 영역 KPI 성과", link: "#", fileType: "다운로드" },
-                        { id: "2", title: "2024년 ESG 핵심성과 지표", link: "#", fileType: "다운로드" },
-                        { id: "1", title: "2024년 ESG 성과 요약본", link: "#", fileType: "다운로드" },
-                    ],
-                    EsgPerformanceNoDataText: "조회된 데이터가 없습니다.",
-                    EsgPerformanceNotes: [
-                        "자료의 무단 전재 및 재배포를 금지합니다.",
-                        "공시 시점에 따라 일부 지표가 업데이트될 수 있습니다.",
-                        "문의사항은 ESG 담당부서로 접수해 주시기 바랍니다.",
-                    ],
                     sustainReportHeroCoverAlt: "2024 지속가능경영보고서 표지",
                     sustainReportHeroTitle: "2024년 지속가능경영 보고서",
                     sustainReportHeroPeriod: "(보고기간: 2024.01.01 ~ 2024.12.31)",
@@ -1080,19 +1047,6 @@ export default {
                     sustainReportKoBtn: "국문 보고서",
                     sustainReportEnBtn: "영문 보고서",
                     sustainReportArchiveTitle: "지난 지속가능경영보고서",
-                    sustainReportArchiveDesc: "연도별 보고서를 확인하실 수 있습니다.",
-                    sustainReportYearLabel: "년도선택",
-                    sustainReportYearAll: "전체",
-                    sustainReportYearOptions: [2023, 2022, 2021, 2020],
-                    sustainReportSearchTypeLabel: "검색 구분",
-                    sustainReportSearchTypeOptions: [
-                        { value: "all", label: "전체" },
-                        { value: "title", label: "제목" },
-                        { value: "content", label: "내용" },
-                    ],
-                    sustainReportSearchKeywordLabel: "검색어",
-                    sustainReportSearchKeywordPlaceholder: "검색어를 입력하세요",
-                    sustainReportTableHead: { colCover: "표지", colInfo: "보고서", colAction: "다운로드" },
                     sustainReportPastRows: [
                         {
                             key: "2023",
@@ -1151,26 +1105,15 @@ export default {
         onTabChange1(idx) {
             this.CTabIdx = idx;
             this.envMgmtPage = 1;
-            this.esgPerformancePage = 1;
         },
         onEsgArchiveTabChange() {
             this.envMgmtPage = 1;
-            this.esgPerformancePage = 1;
-        },
-        handleEnvMgmtSearch(payload) {
-            console.log("환경경영 자료 검색:", payload);
         },
         handleEnvMgmtDownload(link) {
             console.log("환경경영 자료 다운로드:", link);
         },
         onEnvMgmtPageChange(page) {
             this.envMgmtPage = page;
-        },
-        handleEsgPerformanceDownload(link) {
-            console.log("ESG성과 자료 다운로드:", link);
-        },
-        onEsgPerformancePageChange(page) {
-            this.esgPerformancePage = page;
         },
     },
 }; 
@@ -1180,20 +1123,19 @@ export default {
 .tac{text-align: center !important;}
 .tal{text-align: left !important;}
 .p_br{display:block;}
-.m_br{display:none;}
 .bold{font-weight: 700 !important;}
 img{width:100%; height:auto; display:block; object-fit: cover;}
 .main-container { width: 100%; position: relative; display: block; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url(@/assets/images/dummy/gsrsu0101_bg.jpg) no-repeat center / cover; text-align: center; position: relative; display: block; }
-.title_wrap::after{content:'';width:100%; height:480px; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1;}
+.title_wrap::after{content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1;}
 .page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2;}
 .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
 .panel { padding-top: 80px; }
-.panel_placeholder { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; color: #67676f; text-align: center; }
 .table_wrap {margin-top:0; border-top: 1px solid #161616;}
 .sub_header + .table_wrap {margin-top: 64px;}
 .table_wrap table { margin-top:0;width: 100%; border-collapse: collapse; }
-.table_wrap th, .table_wrap td { padding: 0 20px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
+.table_wrap th { padding: 0 20px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
+.table_wrap td { padding: 0 20px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
 .table_wrap thead tr:nth-child(1) th {padding: 16px 24px;}
 .table_wrap thead tr:nth-child(2) th {padding: 12px 24px;}
 .table_wrap thead th { font-weight: 400; background-color: #F8F8F8; }
@@ -1210,7 +1152,6 @@ img{width:100%; height:auto; display:block; object-fit: cover;}
 .table_wrap.type3 table th:not(:last-child) { border-right: 1px solid #E5E5E9;}
 .table_wrap.type3 table td {height: auto; padding:16px 24px; font-size: 1.8rem;line-height:1.4; border-left: 0; border-right: 0; }
 .table_wrap.type3 table td[rowspan] { border-right: 1px solid #E5E5E9; }
-/* .type3 table td { height: 57px; } */
 .pagination_area{margin-top:24px; display: flex; justify-content: center; }
 .social_award_wrap { margin-top: 64px; }
 .social_award_wrap :deep(dl dt > a.acc_tit_btn){padding:24px;font-weight: 700;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;
@@ -1221,14 +1162,13 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .list_dotted > li + li { margin-top: 8px }
 .list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #67676F; border-radius: 50%; position: absolute; top: 11px; left: 0 }
 .list_dotted > li > p { margin: 0; color: #67676F; font-size: 1.8rem; line-height: 1.4 }
-/* .list_dotted > li > p :deep(a) { color: #107af2; font-size: 1.8rem; line-height: 1.4; text-decoration: underline } */
 /* 환경경영 자료 — gsrin0301 테이블·필터 패턴 (Figma 431:12931 대응) */
 .visual_sub {color: #FFFFFF; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;  text-align: center; position: relative; z-index: 2; }
 .panel.panel_vision_strategy > section { margin-top: 100px; }
 .sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sub_header p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
-.archive_intro h3, .archive_intro p { text-align: center; }
-.social_intro h3, .social_intro p { text-align: center; }
+.sub_header_center h3 { text-align: center; }
+.sub_header_center p { text-align: center; }
 .tab_desc { padding: 20px 0; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
 .sec_vision_together { margin-top: 80px; }
 .vision_main_title { font-size: 7rem; font-weight: 700; line-height: 1.24; text-align: center; }
@@ -1238,8 +1178,10 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .vision_col_soc { border-color: #0D62C2; }
 .vision_col_tit { font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .vision_col_sub { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-.vision_col_env .vision_col_tit, .vision_col_env .vision_col_sub { color: #11935D; }
-.vision_col_soc .vision_col_tit, .vision_col_soc .vision_col_sub { color: #0D62C2; }
+.vision_col_env .vision_col_tit { color: #11935D; }
+.vision_col_env .vision_col_sub { color: #11935D; }
+.vision_col_soc .vision_col_tit { color: #0D62C2; }
+.vision_col_soc .vision_col_sub { color: #0D62C2; }
 .vision_circle_list { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; align-items: center; }
 .vision_item { width: 300px; height: 300px; flex: 0 0 auto; padding: 0 32px; border-radius: 50%; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0.8; }
 .vision_item + .vision_item { margin-top: -6.7%; }
@@ -1280,97 +1222,22 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .bnbp_sub h4 { margin-bottom: 24px; font-weight: 700; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
 .bnbp_sub > .txt_box p { margin-top: 24px; }
 /* 지속가능경영보고서 — Figma 431:13093 */
-.panel_sustainability_report .sec_sustain_report_hero {
-    width: 100%;
-    max-width: 1025px;
-    margin: 0 auto;
-    padding: 0;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    justify-content: center;
-    gap: 60px;
-}
-.panel_sustainability_report .sec_sustain_report_hero > figure {
-    width: 465px;
-    max-width: 100%;
-    margin: 0;
-    flex-shrink: 0;
-}
-.panel_sustainability_report .sec_sustain_report_hero > figure > img {
-    width: 100%;
-    height: auto;
-    border-radius: 1.6rem;
-}
-.panel_sustainability_report .sec_sustain_report_hero > article {
-    width: 500px;
-    max-width: 100%;
-    flex: 1 1 auto;
-    /* display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start; */
-}
-
-.panel_sustainability_report .sec_sustain_report_hero > article > p {
-    margin-top: 24px;
-    font-size: 2rem;
-    font-weight: 400;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-.panel_sustainability_report .sec_sustain_report_hero > article > .sustain_report_hero_actions {
-    margin-top: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-}
-.panel_sustainability_report .sec_sustain_report_archive {
-    margin: 80px auto 0;
-
-}
-
-
-.panel_sustainability_report .table_wrap.type_report {
-    margin-top: 32px;
-    border-top: 1px solid #D7D7DF;
-}
-.panel_sustainability_report .table_wrap.type_report table {
-    width: 100%;
-    margin: 0;
-    border-collapse: collapse;
-}
-
-.panel_sustainability_report .table_wrap.type_report tbody td {
-    height: auto;
-    padding: 27px 20px;
-    vertical-align: middle;
-    border-bottom: 1px solid #D7D7DF;
-    border-right: 0;
-}
-
-.panel_sustainability_report .table_wrap.type_report tbody td:last-child {
-    border-right: 0;
-}
-/* .panel_sustainability_report .table_wrap.type_report tbody td:first-child {
-    width: 23.6rem;
-    text-align: center;
-} */
-.panel_sustainability_report .table_wrap.type_report tbody td figure {
-    width: 196px;
-    max-width: 100%;
-    margin: 0 auto;
-}
-.panel_sustainability_report .table_wrap.type_report tbody td figure > img {
-    border-radius: 12px;
-}
-
+.panel_sustainability_report .sec_sustain_report_hero {width: 100%;max-width: 1025px;margin: 0 auto;padding: 0;display: flex;flex-wrap: nowrap;align-items: stretch;justify-content: center;gap: 60px;}
+.panel_sustainability_report .sec_sustain_report_hero > figure {width: 465px;max-width: 100%;margin: 0;flex-shrink: 0;}
+.panel_sustainability_report .sec_sustain_report_hero > figure > img {width: 100%;height: auto;border-radius: 1.6rem;}
+.panel_sustainability_report .sec_sustain_report_hero > article { width: 500px; max-width: 100%; flex: 1 1 auto; }
+.panel_sustainability_report .sec_sustain_report_hero > article > p { margin-top: 24px; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.panel_sustainability_report .sec_sustain_report_hero > article > .sustain_report_hero_actions { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.panel_sustainability_report .sec_sustain_report_archive { margin: 80px auto 0; }
+.panel_sustainability_report .table_wrap.type_report { margin-top: 32px; border-top: 1px solid #D7D7DF; }
+.panel_sustainability_report .table_wrap.type_report table { width: 100%; margin: 0; border-collapse: collapse; }
+.panel_sustainability_report .table_wrap.type_report tbody td { height: auto; padding: 27px 20px; vertical-align: middle; border-bottom: 1px solid #D7D7DF; border-right: 0; }
+.panel_sustainability_report .table_wrap.type_report tbody td:last-child { border-right: 0; }
+.panel_sustainability_report .table_wrap.type_report tbody td figure { width: 196px; max-width: 100%; margin: 0 auto; }
+.panel_sustainability_report .table_wrap.type_report tbody td figure > img { border-radius: 12px; }
 .panel_sustainability_report .table_wrap.type_report tbody td article > h3 {font-weight: 700;font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
 .panel_sustainability_report .table_wrap.type_report tbody td article > p {margin-top: 12px;font-size: 1.8rem;line-height: 1.4;}
-.panel_sustainability_report .table_wrap.type_report tbody td:last-child {
-    text-align: center;
-}
+.panel_sustainability_report .table_wrap.type_report tbody td:last-child {text-align: center;}
 .panel_sustainability_report :deep([class*="btn_"][class*="border"]) {
     color: #161616;
     border-color: #67676f;
@@ -1386,22 +1253,14 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .esg_flow_card_desc { margin-left: 20px; }
     .esg_flow_connector { width: 100%; height: auto; padding: 20px 16px; gap: 16px; }
     .esg_flow_connector_text { gap: 8px; }
-    .esg_flow_connector_text::after, .esg_flow_connector > p:last-child > span::before { width: 14px; height: 14px; }
+    .esg_flow_connector_text::after { width: 14px; height: 14px; }
+    .esg_flow_connector > p:last-child > span::before { width: 14px; height: 14px; }
     .bnbp_main { gap: 32px; flex-direction: column; }
-    .panel_sustainability_report .sec_sustain_report_hero {
-        flex-wrap: wrap;
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-    }
-    .panel_sustainability_report .sec_sustain_report_hero > article {
-        width: 100%;
-        align-items: flex-start;
-    }
+    .panel_sustainability_report .sec_sustain_report_hero {flex-wrap: wrap;flex-direction: column;align-items: center;gap: 40px;}
+    .panel_sustainability_report .sec_sustain_report_hero > article {width: 100%;align-items: flex-start;}
 }
 @media screen and (max-width: 768px) {
     .p_br{display:none;}
-    .m_br{display:block;}
     .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
     .panel{padding-top: 48px;}
     .title_wrap { display: none; }
@@ -1409,118 +1268,34 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .visual_sub { font-size: 2rem; }
     .table_wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .table_wrap table { min-width: 960px; }
-    .table_wrap th, .table_wrap td { font-size: 1.6rem; }
-    .table_wrap.type2 table, .table_wrap.type3 table { min-width: 960px; }
-    .table_wrap.type3 table th, .table_wrap.type3 table td { font-size: 1.6rem; }
+    .table_wrap th { font-size: 1.6rem; }
+    .table_wrap td { font-size: 1.6rem; }
+    .table_wrap.type2 table { min-width: 960px; }
+    .table_wrap.type3 table { min-width: 960px; }
+    .table_wrap.type3 table th { font-size: 1.6rem; }
+    .table_wrap.type3 table td { font-size: 1.6rem; }
     .table_wrap.type1 { overflow-x: visible; }
     .table_wrap.type1 table { min-width: 0; table-layout: fixed; }
     /* 지속가능 보고서 목록 — 모바일 카드형(가로 스크롤 없음) */
-    .panel_sustainability_report .table_wrap.type_report {
-        overflow-x: visible;
-    }
-    .panel_sustainability_report .table_wrap.type_report table {
-        width: 100%;
-        min-width: 0;
-        display: block;
-    }
-    .panel_sustainability_report .table_wrap.type_report colgroup {
-        display: none;
-    }
-    .panel_sustainability_report .table_wrap.type_report tbody {
-        width: 100%;
-        display: block;
-    }
-    .panel_sustainability_report .table_wrap.type_report tbody tr {
-        width: 100%;
-        margin: 0 0 16px 0;
-        padding: 20px 16px;
-        display: block;
-        background-color: #fff;
-        border: 1px solid #d7d7df;
-        border-radius: 12px;
-        box-sizing: border-box;
-    }
-    .panel_sustainability_report .table_wrap.type_report tbody tr:last-child {
-        margin-bottom: 0;
-    }
-    .panel_sustainability_report .table_wrap.type_report tbody td {
-        width: 100%;
-        min-width: 0;
-        height: auto;
-        margin: 0;
-        padding: 0;
-        display: block;
-        border: 0;
-        border-bottom: 0;
-        text-align: left;
-    }
-    .panel_sustainability_report .table_wrap.type_report tbody td + td {
-        margin-top: 16px;
-    }
-
-    .panel_sustainability_report .table_wrap.type_report tbody td article {
-        margin: 0;
-        padding: 0;
-        text-align: left;
-    }
-    .panel_sustainability_report .table_wrap.type_report tbody td article > h3 {
-        margin: 0;
-        color: #161616;
-        font-size: 1.8rem;
-        font-weight: 700;
-        line-height: 1.35;
-        letter-spacing: -0.01em;
-    }
-    .panel_sustainability_report .table_wrap.type_report tbody td article > p {
-        margin: 0;
-        margin-top: 8px;
-        color: #161616;
-        font-size: 1.4rem;
-        font-weight: 400;
-        line-height: 1.4;
-        letter-spacing: -0.01em;
-    }
-    .panel_sustainability_report .table_wrap.type_report tbody td:last-child {
-        margin-top: 20px;
-        text-align: center;
-    }
-    .panel_sustainability_report .table_wrap.type_report tbody td:last-child :deep([class*="btn_"]) {
-        width: 100%;
-        max-width: 100%;
-        justify-content: center;
-        box-sizing: border-box;
-    }
-    .panel_sustainability_report [role="search"] > select {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0;
-    }
-    .panel_sustainability_report [role="search"] > label {
-        width: 100%;
-        flex-wrap: wrap;
-    }
-    .panel_sustainability_report [role="search"] > label > select {
-        width: 100%;
-        max-width: 100%;
-        flex: 1 1 auto;
-    }
-    .panel_sustainability_report [role="search"] > input[type="search"] {
-        width: 100%;
-    }
-    .panel_sustainability_report .sec_sustain_report_archive {
-        margin-top: 48px;
-    }
-    .panel_sustainability_report .sec_sustain_report_archive > header > h2 {
-        font-size: 2.8rem;
-    }
-    .panel_sustainability_report .sec_sustain_report_archive > header > p {
-        margin-top: 8px;
-        font-size: 1.6rem;
-    }
+    .panel_sustainability_report .table_wrap.type_report { overflow-x: visible; }
+    .panel_sustainability_report .table_wrap.type_report table { width: 100%; min-width: 0; display: block; }
+    .panel_sustainability_report .table_wrap.type_report colgroup { display: none; }
+    .panel_sustainability_report .table_wrap.type_report tbody { width: 100%; display: block; }
+    .panel_sustainability_report .table_wrap.type_report tbody tr { width: 100%; margin: 0 0 16px 0; padding: 20px 16px; display: block; background-color: #fff; border: 1px solid #d7d7df; border-radius: 12px; box-sizing: border-box; }
+    .panel_sustainability_report .table_wrap.type_report tbody tr:last-child { margin-bottom: 0; }
+    .panel_sustainability_report .table_wrap.type_report tbody td { width: 100%; min-width: 0; height: auto; margin: 0; padding: 0; display: block; border: 0; border-bottom: 0; text-align: left; }
+    .panel_sustainability_report .table_wrap.type_report tbody td + td { margin-top: 16px; }
+    .panel_sustainability_report .table_wrap.type_report tbody td article { margin: 0; padding: 0; text-align: left; }
+    .panel_sustainability_report .table_wrap.type_report tbody td article > h3 { margin: 0; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .panel_sustainability_report .table_wrap.type_report tbody td article > p { margin: 0; margin-top: 8px; color: #161616; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+    .panel_sustainability_report .table_wrap.type_report tbody td:last-child { margin-top: 20px; text-align: center; }
+    .panel_sustainability_report .table_wrap.type_report tbody td:last-child :deep([class*="btn_"]) { width: 100%; max-width: 100%; justify-content: center; box-sizing: border-box; }
+    .panel_sustainability_report .sec_sustain_report_archive { margin-top: 48px; }
     .table_wrap.type1 colgroup col:nth-child(1) { width: 50px !important; }
     .table_wrap.type1 colgroup col:nth-child(2) { width: auto !important; }
     .table_wrap.type1 colgroup col:nth-child(3) { width: 70px !important; }
-    .table_wrap.type1 th, .table_wrap.type1 td { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
+    .table_wrap.type1 th { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
+    .table_wrap.type1 td { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
     .table_wrap td .link_title{font-size: 1.4rem;}
     .list_dotted > li { padding-left: 6px }
     .list_dotted > li::before { top: 9px; width:2px; height:2px }
@@ -1528,8 +1303,8 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
     .sub_header h3 { font-size: 2.8rem; text-align: left; }
     .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .archive_intro h3, .archive_intro p { text-align: left; }
-    .social_intro h3, .social_intro p { text-align: left; }
+    .sub_header_center h3 { text-align: left; }
+    .sub_header_center p { text-align: left; }
     .tab_desc { padding: 0; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .sec_vision_together { margin-top: 56px; }
     .vision_main_title { font-size: 3.6rem; }
@@ -1539,7 +1314,8 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .vision_col_sub { font-size: 1.6rem; }
     .vision_circle_list { width: 100%; margin-top: 16px; padding-top: 0; display: flex; align-items: center; }
     .vision_item { width: min(236px, 70vw); height: min(236px, 70vw); padding: 0 18px; opacity: 1; }
-    .vision_item + .vision_item, .vision_col_soc .vision_item + .vision_item { margin-top: 12px; }
+    .vision_item + .vision_item { margin-top: 12px; }
+    .vision_col_soc .vision_item + .vision_item { margin-top: 12px; }
     .vision_item_tit { font-size: 1.8rem; line-height: 1.25; }
     .vision_item_desc { margin-top: 8px; padding: 0 8px; font-size: 1.4rem; line-height: 1.35; }
     .esg_process { margin-top: 28px; }
@@ -1562,15 +1338,6 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .bnbp_sub { margin-top: 40px; }
     .bnbp_sub h4 { margin-bottom: 16px; font-size: 2.2rem; }
     .bnbp_sub > .txt_box p { margin-top: 12px; }
-    .social_award_wrap :deep(dl dt > a.acc_tit_btn){
-        min-height: 64px;
-        padding: 0 20px;
-        font-size: 16px;
-        font-weight: 700;
-        font-size: 1.8rem;
-        line-height: 1.4;
-        letter-spacing: 0%;
-    }
-
+    .social_award_wrap :deep(dl dt > a.acc_tit_btn){min-height: 64px;padding: 0 20px;font-weight: 700;font-size: 1.8rem;line-height: 1.4;letter-spacing: 0;}
 }
 </style>
