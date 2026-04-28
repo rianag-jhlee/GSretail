@@ -714,10 +714,18 @@
         "link": "/gsrsu0101",
         "startDate": "",
         "endDate": "",
-        "status": "ing",
-        "note": ""
+        "status": "com",
+        "note": "gsrsu010201, gsrsu010202, gsrsu010203, gsrsu010204, gsrsu0102 포함"
+    },
+    {
+        "depth1": "", "depth2": "컴플라이언스", "depth3": "정도경영", "depth4": "소개", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/04/gsrsu040101",
+        "link": "/gsrsu040101",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu040102, gsrsu04010201, gsrsu040103, gsrsu040104, gsrsu04010401, gsrsu0401040101, gsrsu04010501, gsrsu0401050101 포함"
     }
     
-
-
 ]
