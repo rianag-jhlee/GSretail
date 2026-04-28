@@ -142,6 +142,16 @@
         "note": ""
     },
     {
+        "depth1": "", "depth2": "GS SHOP", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrbr/03/gsrbr0301",
+        "link": "/gsrbr0301",
+        "startDate": "26-04-2",
+        "endDate": "26-04-2",
+        "status": "com",
+        "note": " "
+    },
+    {
         "depth1": "", "depth2": "우리동네 GS", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "Page",
         "path": "gsrbr/04/gsrbr04",
@@ -972,88 +982,128 @@
         "link": "/gsrst01010101",
         "startDate": "",
         "endDate": "",
-        "status": "ing",
+        "status": "com",
         "note": "gsrst01010101 ~ gsrst010201 포함"
     },
     {
-        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF1타입", "depth6": "",
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF1타입", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst01010101",
-        "link": "/gsrst01010101",
+        "path": "gsrst/01/gsrst01010102",
+        "link": "/gsrst01010102",
         "startDate": "",
         "endDate": "",
         "status": "com",
-        "note": " "
+        "note": "gsrst01010101에서 확인가능"
     },
     {
-        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF2타입", "depth6": "",
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF2타입", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst01010101",
-        "link": "/gsrst01010101",
+        "path": "gsrst/01/gsrst01010103",
+        "link": "/gsrst01010103",
         "startDate": "",
         "endDate": "",
         "status": "com",
-        "note": " "
+        "note": "gsrst01010101에서 확인가능"
     },
     {
-        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF3타입", "depth6": "",
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF3타입", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst01010101",
-        "link": "/gsrst01010101",
+        "path": "gsrst/01/gsrst01010104",
+        "link": "/gsrst01010104",
         "startDate": "",
         "endDate": "",
         "status": "com",
-        "note": " "
+        "note": "gsrst01010101에서 확인가능"
     },
     {
-        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "가맹/창업 절차", "depth5": "", "depth6": "",
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "가맹/창업 절차", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst01010101",
-        "link": "/gsrst01010101",
+        "path": "gsrst/01/gsrst010102",
+        "link": "/gsrst010102",
         "startDate": "",
         "endDate": "",
         "status": "com",
-        "note": " "
+        "note": "gsrst01010101에서 확인가능"
     },
     {
-        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "가맹점 수익계산", "depth5": "", "depth6": "",
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "가맹점 수익계산", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst01010101",
-        "link": "/gsrst01010101",
+        "path": "gsrst/01/gsrst010103",
+        "link": "/gsrst010103",
         "startDate": "",
         "endDate": "",
         "status": "com",
-        "note": " "
+        "note": "gsrst01010101에서 확인가능"
     },
     {
-        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "창업 전 필수 확인사항", "depth5": "", "depth6": "",
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "창업 전 필수 확인사항", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst01010101",
-        "link": "/gsrst01010101",
+        "path": "gsrst/01/gsrst010104",
+        "link": "/gsrst010104",
         "startDate": "",
         "endDate": "",
         "status": "com",
-        "note": " "
+        "note": "gsrst01010101에서 확인가능"
     },
     {
-        "depth1": "점포창업안내", "depth2": "", "depth3": "사업설명회", "depth4": "", "depth5": "", "depth6": "",
+        "depth1": "", "depth2": "", "depth3": "사업설명회", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst01010101",
-        "link": "/gsrst01010101",
+        "path": "gsrst/01/gsrst0102",
+        "link": "/gsrst0102",
         "startDate": "",
         "endDate": "",
         "status": "com",
-        "note": " "
+        "note": "gsrst01010101에서 확인가능"
     },
     {
-        "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "사업설명회 신청", "depth5": "", "depth6": "",
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "사업설명회 신청", "depth5": "", "depth6": "",
         "type": "Pop-up",
-        "path": "gsrst/01/gsrst01010101",
-        "link": "/gsrst01010101",
+        "path": "gsrst/01/gsrst010201",
+        "link": "/gsrst010201",
         "startDate": "",
         "endDate": "",
-        "status": "ing",
-        "note": " "
+        "status": "com",
+        "note": "gsrst01010101에서 확인가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "가맹/창업 상담", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst0104",
+        "link": "/gsrst0104",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrst01010101에서 확인가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "운경진 컨설턴트 상담신청", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst0105",
+        "link": "/gsrst0105",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrst01010101에서 확인가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "추첨점포소개", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst0104",
+        "link": "/gsrst0104",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrst01010101에서 확인가능"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "경영주 지원제도", "depth4": "", "depth5": "", "depth6": "",
+        "type": "tab",
+        "path": "gsrst/01/gsrst0105",
+        "link": "/gsrst0105",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrst01010101에서 확인가능"
     },
     
     {
@@ -1125,6 +1175,16 @@
         "endDate": "",
         "status": "com",
         "note": "gsrst01에서 확인 가능, 현재 외부링크 ( https://withgs.gsshop.com/sug/suggest )로 페이지 없음."
+    },
+    {
+        "depth1": "SUSTAINABILITY", "depth2": "지속가능경영", "depth3": "비전&전략", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrsu/01/gsrsu0101",
+        "link": "/gsrsu0101",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": ""
     }
     
 

@@ -10,7 +10,7 @@
                     {{ item.managerTel || '053-67890123' }}
                 </a>
             </div>
-            <Buttons btn-class="btn_icon btn_xl">무료 상담 신청하기</Buttons>
+            <Buttons btn-class="btn_xl fill primary btn_icon after">무료 상담 신청하기</Buttons>
         </div>
 
         <!-- 상세 정보 -->
@@ -50,6 +50,8 @@ defineProps({
 
 <style scoped>
 /* 카드 */
+.detail_card { --color-brand-primary: #15b874; }
+.detail_card :deep([class*="btn_"][class*="fill"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
 .detail_card { padding: 32px 40px; background: #fff; border: 1px solid var(--color-brand-primary); border-radius: 12px; display: flex; flex-direction: column; gap: 32px; }
 
 /* 담당자 */

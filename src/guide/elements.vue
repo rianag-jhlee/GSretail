@@ -337,8 +337,8 @@ import AccordionItem from "@/components/AccordionItem.vue";
         <section>
             <h4>card</h4>
             <ul class="explain">
-                <li><strong>CardItem</strong> · 이미지(<code>#image</code>) + 제목(<code>#title</code>) + 본문(기본 슬롯) · 쓰지 않는 영역은 슬롯 자체를 생략</li>
-                <li>이미지는 부모에서 <code>import</code> 후 <code>&lt;img&gt;</code>로 <code>#image</code>에 전달 · 루트는 <code>article.card_item</code></li>
+                <li><strong>CardItem</strong> · 썸은 <code>thumb-src</code> / <code>thumb-alt</code>(CSS <code>background-image</code>) + 번호(<code>#num</code>) + 제목(<code>#title</code>) + 본문(기본 슬롯) · 쓰지 않는 props·슬롯 생략</li>
+                <li>썸 이미지는 부모에서 <code>import</code>한 URL을 <code>:thumb-src</code>에 전달 · 루트는 <code>article.card_item</code> · 썸 박스는 <code>div.card_thumb</code></li>
                 <li>목록은 <code>ul</code> + <code>li</code>로 감싸 <code>role="list"</code> 유지 · 실제 페이지에서는 <code>v-for</code>로 데이터 배열과 매핑하면 됨</li>
             </ul>
 
@@ -351,10 +351,10 @@ import AccordionItem from "@/components/AccordionItem.vue";
                         v-for="card in cardGuideList"
                         :key="card.key"
                     >
-                        <CardItem>
-                            <template v-if="card.image" #image>
-                                <img :src="card.image" :alt="card.imgAlt || ''" />
-                            </template>
+                        <CardItem
+                            :thumb-src="card.image"
+                            :thumb-alt="card.imgAlt || ''"
+                        >
                             <template v-if="card.title" #title>{{ card.title }}</template>
                             <p v-if="card.desc">{{ card.desc }}</p>
                         </CardItem>
@@ -370,10 +370,10 @@ import AccordionItem from "@/components/AccordionItem.vue";
 <code>&lt;template&gt;
     &lt;ul class="card_list" role="list"&gt;
         &lt;li v-for="card in cards" :key="card.id"&gt;
-            &lt;CardItem&gt;
-                &lt;template v-if="card.image" #image&gt;
-                    &lt;img :src="card.image" :alt="card.imgAlt || ''" /&gt;
-                &lt;/template&gt;
+            &lt;CardItem
+                :thumb-src="card.image"
+                :thumb-alt="card.imgAlt || ''"
+            &gt;
                 &lt;template v-if="card.title" #title&gt;{{ card.title }}&lt;/template&gt;
                 &lt;p v-if="card.desc"&gt;{{ card.desc }}&lt;/p&gt;
             &lt;/CardItem&gt;
@@ -552,6 +552,14 @@ export default {
     margin: 0;
     padding: 0;
     min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.card_list > li > * {
+    flex: 1;
+    min-height: 0;
 }
 
 @media (max-width: 1024px) {
