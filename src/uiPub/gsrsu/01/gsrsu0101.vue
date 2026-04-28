@@ -1,22 +1,22 @@
 <template>
     <div class="main-container">
         <div class="title_wrap tac">
-            <h2 class="page-title">{{ t.MainTitle }}</h2>
-            <p class="visual-sub">{{ t.MainsubTitle }}</p>
+            <h2 class="page_title">{{ t.MainTitle }}</h2>
+            <p class="visual_sub">{{ t.MainsubTitle }}</p>
         </div>
 
         <!-- gsrbr010101 맥락: brand_content ≈ content, Tabs 나열 후 v-show 패널 -->
         <div class="content">
             <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
             <Tabs
-                v-if="CTabIdx === 1"
-                v-model="CTabIdxEsgArchive"
-                :tab-items="t.TabsEsgArchive"
-                tab-class="type_02"
-                :tab-slide="true"
-                @change="onEsgArchiveTabChange"
+            v-if="CTabIdx === 1"
+            v-model="CTabIdxEsgArchive"
+            :tab-items="t.TabsEsgArchive"
+            tab-class="type_02"
+            :tab-slide="true"
+            @change="onEsgArchiveTabChange"
             />
-
+        
             <!-- 비전&전략 -->
             <div v-show="CTabIdx === 0" class="panel panel_vision_strategy" :aria-label="t.Tabs1?.[0]?.item || ''">
                 <!-- green life together -->
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <section>
-                    <header class="sub_header">
+                    <header class="sub_header social_intro">
                         <h3>{{ t.esgTitle }}</h3>
                         <p>{{ t.esgDesc }}</p>
                     </header>
@@ -120,9 +120,9 @@
             <div v-show="CTabIdx === 1" class="panel" :aria-label="t.Tabs1?.[1]?.item || ''">
                 <!-- Figma 431:12931 — 환경경영 자료 (IR/공시 리스트 패턴) -->
                 <div v-show="CTabIdxEsgArchive === 0" class="panel_inner" :aria-label="t.TabsEsgArchive?.[0]?.item || ''">
-                    <header class="sub_header">
-                        <h3 class="tac">GS리테일의 상생 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
-                        <p class="tac">본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
+                    <header class="sub_header archive_intro">
+                        <h3>GS리테일의 상생 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
+                        <p>본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br class="p_br" />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
                     </header>
                     <div class="table_wrap type1">
                         <table class="base_table">
@@ -154,9 +154,9 @@
                     </div>
                 </div>
                 <div v-show="CTabIdxEsgArchive === 1" class="panel_inner" :aria-label="t.TabsEsgArchive?.[1]?.item || ''">
-                    <header class="sub_header">
-                        <h3 class="tac">GS리테일의 환경 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
-                        <p class="tac">본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로 <br />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
+                    <header class="sub_header archive_intro">
+                        <h3>GS리테일의 환경 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
+                        <p>본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br class="p_br" />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
                     </header>
                     <div class="table_wrap type1">
                         <table class="base_table">
@@ -263,8 +263,8 @@
                 </div>
                 <div v-show="CTabIdxEsgArchive === 3" class="panel_inner" :aria-label="t.TabsEsgArchive?.[3]?.item || ''">
                     <header class="sub_header">
-                        <h3 class="tac">구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 <br />꾸준히 지역사회와 함께한 나눔 활동을 소개합니다.</h3>
-                        <p class="tac">2006년부터 구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 꾸준히 지역사회와 함께하며<br />나눔 활동을 지속적으로 함께하고 있습니다.<br />앞으로도 일상에서 함께하는 따뜻한 나눔을 실천, 마음을 나누겠습니다.</p>
+                        <h3>구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 <br class="p_br"/>꾸준히 지역사회와 함께한 나눔 활동을 소개합니다.</h3>
+                        <p>2006년부터 구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 꾸준히 지역사회와 함께하며 <br class="p_br"/>나눔 활동을 지속적으로 함께하고 있습니다.<br />앞으로도 일상에서 함께하는 따뜻한 나눔을 실천, 마음을 나누겠습니다.</p>
                     </header>
                     <div class="social_award_wrap">
                         <div class="table_wrap type3">
@@ -376,7 +376,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <Accordion :multiple="true" class="social_award_acc">
+                        <Accordion :multiple="false" class="social_award_acc">
                             <AccordionItem item-key="social-award-1">
                                 <template #title>2022년 ~ 2018년</template>
                                 <div class="table_wrap type3">
@@ -797,11 +797,56 @@
                 </div>
             </div>
 
-            <!-- 지속가능경영보고서 -->
+            <!-- 지속가능경영보고서 — Figma 431:13093 -->
             <div v-show="CTabIdx === 2" class="panel panel_sustainability_report" :aria-label="t.Tabs1?.[2]?.item || ''">
-
-
-
+                <section class="sec_sustain_report_hero" aria-labelledby="sustain_report_feature_heading">
+                    <figure>
+                        <img :src="imgSr07" :alt="t.sustainReportHeroCoverAlt" width="465" height="280" />
+                    </figure>
+                    <article>
+                        <header class="sub_header">
+                            <h3 id="sustain_report_feature_heading">{{ t.sustainReportHeroTitle }}</h3>
+                            <p>{{ t.sustainReportHeroPeriod }}</p>
+                        </header>
+                        <p>{{ t.sustainReportHeroLead }}</p>
+                        <div class="sustain_report_hero_actions" :aria-label="t.sustainReportHeroNavAria">
+                            <Buttons tag="a" :href="t.sustainReportHeroKoHref" btn-class="btn_icon btn_big after border">{{ t.sustainReportKoBtn }}</Buttons>
+                            <Buttons tag="a" :href="t.sustainReportHeroEnHref" btn-class="btn_icon btn_big after border">{{ t.sustainReportEnBtn }}</Buttons>
+                        </div>
+                    </article>
+                </section>
+                <section class="sec_sustain_report_archive" aria-labelledby="sustain_report_archive_heading">
+                    <header class="sub_header">
+                        <h3 id="sustain_report_feature_heading">지난 지속가능경영보고서</h3>
+                    </header>
+                    <div class="table_wrap type_report">
+                        <table>
+                            <colgroup>
+                                <col style="width: 236px" />
+                                <col style="width: auto" />
+                                <col style="width: 200px" />
+                            </colgroup>
+                            <tbody>
+                                <tr v-for="row in sustainReportPastRowsWithThumbs" :key="row.key">
+                                    <td>
+                                        <figure>
+                                            <img :src="row.thumbSrc" :alt="row.coverAlt" width="196" height="140" />
+                                        </figure>
+                                    </td>
+                                    <td>
+                                        <article>
+                                            <h3>{{ row.title }}</h3>
+                                            <p>{{ row.period }}</p>
+                                        </article>
+                                    </td>
+                                    <td>
+                                        <Buttons tag="a" :href="row.koHref" btn-class="btn_icon btn_big after border">{{ t.sustainReportKoBtn }}</Buttons>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -812,16 +857,27 @@ import Tabs from "@/components/Tabs.vue";
 import Pagination from "@/components/Pagination.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
+import Buttons from "@/components/Buttons.vue";
 import imgBnbpLogo from "@/assets/images/dummy/gsrsu0101_02.png";
+import imgSr03 from "@/assets/images/dummy/gsrsu0101_03.png";
+import imgSr04 from "@/assets/images/dummy/gsrsu0101_04.png";
+import imgSr05 from "@/assets/images/dummy/gsrsu0101_05.png";
+import imgSr06 from "@/assets/images/dummy/gsrsu0101_06.png";
+import imgSr07 from "@/assets/images/dummy/gsrsu0101_07.png";
+
+const sustainReportThumbByRow = [imgSr03, imgSr04, imgSr05, imgSr06];
 
 export default {
     name: "gsrsu0101",
-    components: { Tabs, Pagination, Accordion, AccordionItem },
+    components: { Tabs, Pagination, Accordion, AccordionItem, Buttons },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
             CTabIdx: 0,
             CTabIdxEsgArchive: 0,
+            sustainReportYear: "all",
+            sustainReportSearchType: "all",
+            sustainReportKeyword: "",
             selectedYearEnvMgmt: "전체",
             envMgmtSearch: { type: "all", keyword: "" },
             envMgmtPage: 1,
@@ -829,6 +885,7 @@ export default {
             esgPerformancePage: 1,
             esgPerformanceTotalPages: 3,
             imgBnbpLogo,
+            imgSr07,
             langData: {
                 ko: {
                     MainTitle: "지속가능경영",
@@ -1012,6 +1069,60 @@ export default {
                         "공시 시점에 따라 일부 지표가 업데이트될 수 있습니다.",
                         "문의사항은 ESG 담당부서로 접수해 주시기 바랍니다.",
                     ],
+                    sustainReportHeroCoverAlt: "2024 지속가능경영보고서 표지",
+                    sustainReportHeroTitle: "2024년 지속가능경영 보고서",
+                    sustainReportHeroPeriod: "(보고기간: 2024.01.01 ~ 2024.12.31)",
+                    sustainReportHeroLead:
+                        "GS리테일의 2024 지속가능경영보고서는 고객과 사회, 그리고 다양한 이해관계자와 함께 만들어가는 지속 가능성의 여정과 GS리테일의 ESG 실천 성과를 담았습니다.",
+                    sustainReportHeroKoHref: "#none",
+                    sustainReportHeroEnHref: "#none",
+                    sustainReportHeroNavAria: "2024 보고서 다운로드",
+                    sustainReportKoBtn: "국문 보고서",
+                    sustainReportEnBtn: "영문 보고서",
+                    sustainReportArchiveTitle: "지난 지속가능경영보고서",
+                    sustainReportArchiveDesc: "연도별 보고서를 확인하실 수 있습니다.",
+                    sustainReportYearLabel: "년도선택",
+                    sustainReportYearAll: "전체",
+                    sustainReportYearOptions: [2023, 2022, 2021, 2020],
+                    sustainReportSearchTypeLabel: "검색 구분",
+                    sustainReportSearchTypeOptions: [
+                        { value: "all", label: "전체" },
+                        { value: "title", label: "제목" },
+                        { value: "content", label: "내용" },
+                    ],
+                    sustainReportSearchKeywordLabel: "검색어",
+                    sustainReportSearchKeywordPlaceholder: "검색어를 입력하세요",
+                    sustainReportTableHead: { colCover: "표지", colInfo: "보고서", colAction: "다운로드" },
+                    sustainReportPastRows: [
+                        {
+                            key: "2023",
+                            title: "2023년 지속가능경영 보고서",
+                            period: "(보고기간: 2023.01.01 ~ 2023.12.31)",
+                            coverAlt: "2023 지속가능경영보고서 표지",
+                            koHref: "#none",
+                        },
+                        {
+                            key: "2022",
+                            title: "2022년 지속가능경영 보고서",
+                            period: "(보고기간: 2022.01.01 ~ 2022.12.31)",
+                            coverAlt: "2022 지속가능경영보고서 표지",
+                            koHref: "#none",
+                        },
+                        {
+                            key: "2021",
+                            title: "2021년 지속가능경영 보고서",
+                            period: "(보고기간: 2021.01.01 ~ 2021.12.31)",
+                            coverAlt: "2021 지속가능경영보고서 표지",
+                            koHref: "#none",
+                        },
+                        {
+                            key: "2020",
+                            title: "2020년 지속가능경영 보고서",
+                            period: "(보고기간: 2020.01.01 ~ 2020.12.31)",
+                            coverAlt: "2020 지속가능경영보고서 표지",
+                            koHref: "#none",
+                        },
+                    ],
                 },
               
             }
@@ -1024,7 +1135,17 @@ export default {
                 return selected;
             }
             return this.langData.ko;
-        }
+        },
+        sustainReportPastRowsWithThumbs() {
+            const rows = this.t.sustainReportPastRows;
+            if (!rows || !rows.length) {
+                return [];
+            }
+            return rows.map((row, idx) => ({
+                ...row,
+                thumbSrc: sustainReportThumbByRow[idx] || sustainReportThumbByRow[0],
+            }));
+        },
     },
     methods: {
         onTabChange1(idx) {
@@ -1058,10 +1179,14 @@ export default {
 <style scoped>
 .tac{text-align: center !important;}
 .tal{text-align: left !important;}
+.p_br{display:block;}
+.m_br{display:none;}
 .bold{font-weight: 700 !important;}
+img{width:100%; height:auto; display:block; object-fit: cover;}
 .main-container { width: 100%; position: relative; display: block; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url(@/assets/images/dummy/gsrsu0101_bg.jpg) no-repeat center / cover; text-align: center; position: relative; display: block; }
-.page-title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700; text-align: center; display: block; }
+.title_wrap::after{content:'';width:100%; height:480px; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1;}
+.page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2;}
 .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
 .panel { padding-top: 80px; }
 .panel_placeholder { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; color: #67676f; text-align: center; }
@@ -1077,20 +1202,15 @@ export default {
 .table_wrap td{height: 82px; border-left: 0; border-right: 0;}
 .table_wrap td:not(:last-child) { border-right: 1px solid #E5E5E9; }
 .table_wrap th { border-left: 0; border-right: 0; }
-.table_wrap td .link_title { font-size: 1.8rem; color: #161616; text-decoration: none; }
+.table_wrap td .link_title { font-size: 1.6rem; color: #161616; text-decoration: none; }
 .table_wrap td .link_title:hover { text-decoration: underline; }
 .table_wrap.type1 table td{border-left:0; border-right:0; }
 .table_wrap.type2 table td{ height: 70px; }
 .table_wrap.type3 table th{font-weight: 600;font-size: 1.8rem;line-height: 1.4;letter-spacing: -0.01em;}
 .table_wrap.type3 table th:not(:last-child) { border-right: 1px solid #E5E5E9;}
 .table_wrap.type3 table td {height: auto; padding:16px 24px; font-size: 1.8rem;line-height:1.4; border-left: 0; border-right: 0; }
-.table_wrap.type3 table td:has(> strong) { border-right: 1px solid #E5E5E9; }
+.table_wrap.type3 table td[rowspan] { border-right: 1px solid #E5E5E9; }
 /* .type3 table td { height: 57px; } */
-
-
-
-
-
 .pagination_area{margin-top:24px; display: flex; justify-content: center; }
 .social_award_wrap { margin-top: 64px; }
 .social_award_wrap :deep(dl dt > a.acc_tit_btn){padding:24px;font-weight: 700;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;
@@ -1103,10 +1223,12 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .list_dotted > li > p { margin: 0; color: #67676F; font-size: 1.8rem; line-height: 1.4 }
 /* .list_dotted > li > p :deep(a) { color: #107af2; font-size: 1.8rem; line-height: 1.4; text-decoration: underline } */
 /* 환경경영 자료 — gsrin0301 테이블·필터 패턴 (Figma 431:12931 대응) */
-.visual-sub { margin-top: 10px; color: #FFFFFF; font-size: 3.2rem; font-weight: 700; text-align: center; }
+.visual_sub {color: #FFFFFF; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;  text-align: center; position: relative; z-index: 2; }
 .panel.panel_vision_strategy > section { margin-top: 100px; }
 .sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sub_header p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
+.archive_intro h3, .archive_intro p { text-align: center; }
+.social_intro h3, .social_intro p { text-align: center; }
 .tab_desc { padding: 20px 0; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
 .sec_vision_together { margin-top: 80px; }
 .vision_main_title { font-size: 7rem; font-weight: 700; line-height: 1.24; text-align: center; }
@@ -1157,6 +1279,107 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .bnbp_sub { margin-top: 60px; }
 .bnbp_sub h4 { margin-bottom: 24px; font-weight: 700; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
 .bnbp_sub > .txt_box p { margin-top: 24px; }
+/* 지속가능경영보고서 — Figma 431:13093 */
+.panel_sustainability_report .sec_sustain_report_hero {
+    width: 100%;
+    max-width: 1025px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: center;
+    gap: 60px;
+}
+.panel_sustainability_report .sec_sustain_report_hero > figure {
+    width: 465px;
+    max-width: 100%;
+    margin: 0;
+    flex-shrink: 0;
+}
+.panel_sustainability_report .sec_sustain_report_hero > figure > img {
+    width: 100%;
+    height: auto;
+    border-radius: 1.6rem;
+}
+.panel_sustainability_report .sec_sustain_report_hero > article {
+    width: 500px;
+    max-width: 100%;
+    flex: 1 1 auto;
+    /* display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start; */
+}
+
+.panel_sustainability_report .sec_sustain_report_hero > article > p {
+    margin-top: 24px;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+.panel_sustainability_report .sec_sustain_report_hero > article > .sustain_report_hero_actions {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+.panel_sustainability_report .sec_sustain_report_archive {
+    margin: 80px auto 0;
+
+}
+
+
+.panel_sustainability_report .table_wrap.type_report {
+    margin-top: 32px;
+    border-top: 1px solid #D7D7DF;
+}
+.panel_sustainability_report .table_wrap.type_report table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.panel_sustainability_report .table_wrap.type_report tbody td {
+    height: auto;
+    padding: 27px 20px;
+    vertical-align: middle;
+    border-bottom: 1px solid #D7D7DF;
+    border-right: 0;
+}
+
+.panel_sustainability_report .table_wrap.type_report tbody td:last-child {
+    border-right: 0;
+}
+/* .panel_sustainability_report .table_wrap.type_report tbody td:first-child {
+    width: 23.6rem;
+    text-align: center;
+} */
+.panel_sustainability_report .table_wrap.type_report tbody td figure {
+    width: 196px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.panel_sustainability_report .table_wrap.type_report tbody td figure > img {
+    border-radius: 12px;
+}
+
+.panel_sustainability_report .table_wrap.type_report tbody td article > h3 {font-weight: 700;font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
+.panel_sustainability_report .table_wrap.type_report tbody td article > p {margin-top: 12px;font-size: 1.8rem;line-height: 1.4;}
+.panel_sustainability_report .table_wrap.type_report tbody td:last-child {
+    text-align: center;
+}
+.panel_sustainability_report :deep([class*="btn_"][class*="border"]) {
+    color: #161616;
+    border-color: #67676f;
+    background-color: #fff;
+}
+.panel_sustainability_report :deep([class*="btn_icon"][class*="after"]::after) {
+    background-color: #a4a4b0;
+    background-image: none;
+}
 @media screen and (max-width: 1024px) {
     .esg_flow_card { padding: 16px; }
     .esg_flow_card_head { width: 320px; min-height: 84px; padding: 0 12px; }
@@ -1165,21 +1388,148 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .esg_flow_connector_text { gap: 8px; }
     .esg_flow_connector_text::after, .esg_flow_connector > p:last-child > span::before { width: 14px; height: 14px; }
     .bnbp_main { gap: 32px; flex-direction: column; }
+    .panel_sustainability_report .sec_sustain_report_hero {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    .panel_sustainability_report .sec_sustain_report_hero > article {
+        width: 100%;
+        align-items: flex-start;
+    }
 }
 @media screen and (max-width: 768px) {
+    .p_br{display:none;}
+    .m_br{display:block;}
     .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
+    .panel{padding-top: 48px;}
     .title_wrap { display: none; }
-    .page-title { font-size: 4rem; }
-    .visual-sub { font-size: 2rem; }
+    .page_title { font-size: 4rem; }
+    .visual_sub { font-size: 2rem; }
     .table_wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .table_wrap table { min-width: 960px; }
-    .table_wrap.type2 table, .table_wrap.type3 table { min-width: 1420px; }
+    .table_wrap th, .table_wrap td { font-size: 1.6rem; }
+    .table_wrap.type2 table, .table_wrap.type3 table { min-width: 960px; }
+    .table_wrap.type3 table th, .table_wrap.type3 table td { font-size: 1.6rem; }
+    .table_wrap.type1 { overflow-x: visible; }
+    .table_wrap.type1 table { min-width: 0; table-layout: fixed; }
+    /* 지속가능 보고서 목록 — 모바일 카드형(가로 스크롤 없음) */
+    .panel_sustainability_report .table_wrap.type_report {
+        overflow-x: visible;
+    }
+    .panel_sustainability_report .table_wrap.type_report table {
+        width: 100%;
+        min-width: 0;
+        display: block;
+    }
+    .panel_sustainability_report .table_wrap.type_report colgroup {
+        display: none;
+    }
+    .panel_sustainability_report .table_wrap.type_report tbody {
+        width: 100%;
+        display: block;
+    }
+    .panel_sustainability_report .table_wrap.type_report tbody tr {
+        width: 100%;
+        margin: 0 0 16px 0;
+        padding: 20px 16px;
+        display: block;
+        background-color: #fff;
+        border: 1px solid #d7d7df;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+    .panel_sustainability_report .table_wrap.type_report tbody tr:last-child {
+        margin-bottom: 0;
+    }
+    .panel_sustainability_report .table_wrap.type_report tbody td {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        display: block;
+        border: 0;
+        border-bottom: 0;
+        text-align: left;
+    }
+    .panel_sustainability_report .table_wrap.type_report tbody td + td {
+        margin-top: 16px;
+    }
+
+    .panel_sustainability_report .table_wrap.type_report tbody td article {
+        margin: 0;
+        padding: 0;
+        text-align: left;
+    }
+    .panel_sustainability_report .table_wrap.type_report tbody td article > h3 {
+        margin: 0;
+        color: #161616;
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+    }
+    .panel_sustainability_report .table_wrap.type_report tbody td article > p {
+        margin: 0;
+        margin-top: 8px;
+        color: #161616;
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+    .panel_sustainability_report .table_wrap.type_report tbody td:last-child {
+        margin-top: 20px;
+        text-align: center;
+    }
+    .panel_sustainability_report .table_wrap.type_report tbody td:last-child :deep([class*="btn_"]) {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+    .panel_sustainability_report [role="search"] > select {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+    }
+    .panel_sustainability_report [role="search"] > label {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .panel_sustainability_report [role="search"] > label > select {
+        width: 100%;
+        max-width: 100%;
+        flex: 1 1 auto;
+    }
+    .panel_sustainability_report [role="search"] > input[type="search"] {
+        width: 100%;
+    }
+    .panel_sustainability_report .sec_sustain_report_archive {
+        margin-top: 48px;
+    }
+    .panel_sustainability_report .sec_sustain_report_archive > header > h2 {
+        font-size: 2.8rem;
+    }
+    .panel_sustainability_report .sec_sustain_report_archive > header > p {
+        margin-top: 8px;
+        font-size: 1.6rem;
+    }
+    .table_wrap.type1 colgroup col:nth-child(1) { width: 50px !important; }
+    .table_wrap.type1 colgroup col:nth-child(2) { width: auto !important; }
+    .table_wrap.type1 colgroup col:nth-child(3) { width: 70px !important; }
+    .table_wrap.type1 th, .table_wrap.type1 td { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
+    .table_wrap td .link_title{font-size: 1.4rem;}
     .list_dotted > li { padding-left: 6px }
     .list_dotted > li::before { top: 9px; width:2px; height:2px }
     .list_dotted > li + li { margin-top: 8px }
     .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
-    .sub_header h3 { font-size: 2.8rem; }
+    .sub_header h3 { font-size: 2.8rem; text-align: left; }
     .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .archive_intro h3, .archive_intro p { text-align: left; }
+    .social_intro h3, .social_intro p { text-align: left; }
     .tab_desc { padding: 0; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .sec_vision_together { margin-top: 56px; }
     .vision_main_title { font-size: 3.6rem; }
@@ -1212,7 +1562,15 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .bnbp_sub { margin-top: 40px; }
     .bnbp_sub h4 { margin-bottom: 16px; font-size: 2.2rem; }
     .bnbp_sub > .txt_box p { margin-top: 12px; }
-
+    .social_award_wrap :deep(dl dt > a.acc_tit_btn){
+        min-height: 64px;
+        padding: 0 20px;
+        font-size: 16px;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 1.4;
+        letter-spacing: 0%;
+    }
 
 }
 </style>
