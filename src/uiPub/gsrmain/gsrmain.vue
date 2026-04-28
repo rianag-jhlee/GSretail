@@ -35,38 +35,22 @@
         <section v-if="t.sec02" class="sec02">
             <h2 v-html="t.sec02.title"></h2>
 
-            <div>
-                <div v-for="item in t.sec02.items" :key="item.txt">
-                    <span class="thumb">
-                        <em><img :src="item.img" /></em>
-                    </span>
-                    <div>
-                        <strong>{{ item.txt }}</strong>
-                        <span>{{ item.sub }}</span>
-                        <p>{{ item.exp }}</p>
+            <div class="expWrap">
+                <div class="expTrack">
+                    <div class="expSlide" v-for="item in t.sec02.items" :key="item.txt">
+                        <div class="card">
+                            <span class="thumb">
+                                <img :src="item.img" />
+                            </span>
+                            <div class="txt">
+                                <strong>{{ item.txt }}</strong>
+                                <span>{{ item.sub }}</span>
+                                <p>{{ item.exp }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- coverflow test
-            <swiper :slides-per-view="'auto'" :centered-slides="true" :loop="true" effect="coverflow" :coverflow-effect="{
-                rotate: 30,
-                stretch: 0,
-                depth: 150,
-                modifier: 1,
-                slideShadows: true
-            }" grab-cursor="true" class="sec02Swiper">
-                <swiper-slide v-for="item in t.sec02.items" :key="item.txt">
-                    <div class="slide-content">
-                        <span class="thumb"><em><img :src="item.img" /></em></span>
-                        <div>
-                            <strong>{{ item.txt }}</strong>
-                            <span>{{ item.sub }}</span>
-                            <p>{{ item.exp }}</p>
-                        </div>
-                    </div>
-                </swiper-slide>
-            </swiper>
-            //coverflow test -->
         </section>
 
         <section v-if="t.sec03" class="sec03">
@@ -144,7 +128,7 @@ export default {
                     disableOnInteraction: false,
                 },
             },
-            
+
             /* language contents */
             langData: {
                 ko: {
@@ -223,13 +207,16 @@ export default {
         }
     },
     mounted() {
-        
+
         /* scroll bind */
         this.handleScroll = this.handleScroll.bind(this);
         window.addEventListener("scroll", this.handleScroll);
         /* //scroll bind */
 
         this.initClipAnimation(); //clip mask
+
+        //sec02
+        this.initSec02();
     },
     beforeUnmount() {
         /* scroll unbind */
@@ -241,8 +228,8 @@ export default {
         onSlideChange(swiper) {
             // swiper.realIndex는 loop: true일 때 실제 데이터 상의 인덱스를 가져옵니다.
             this.activeIndex = swiper.realIndex;
-            
-            console.log("현재 슬라이드 인덱스:", this.activeIndex);
+
+            // console.log("현재 슬라이드 인덱스:", this.activeIndex);
 
             // 필요하다면 여기서 추가 로직 실행
             // 예: 특정 슬라이드일 때 헤더 색상 강제 변경 등
@@ -252,6 +239,79 @@ export default {
             }
             */
         },
+
+        /* sec02 */
+        initSec02() {
+            const wrap = this.$el.querySelector(".expWrap");
+            const slides = gsap.utils.toArray(".expSlide");
+
+            const state = {
+                activeIndex: -1
+            };
+
+            const setState = (index) => {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove("active", "prev");
+
+                    if (i === index) {
+                        slide.classList.add("active");
+                    }
+
+                    if (i === index - 1) {
+                        slide.classList.add("prev");
+                    }
+                });
+
+                state.activeIndex = index;
+            };
+
+            const clearAll = () => {
+                slides.forEach((slide) => {
+                    slide.classList.remove("active", "prev");
+                });
+                state.activeIndex = -1;
+            };
+
+            ScrollTrigger.create({
+                trigger: wrap,
+                start: "top top",
+                end: () => "+=" + (slides.length * window.innerHeight),
+                pin: true,
+                scrub: true,
+
+                onUpdate: (self) => {
+                    const progress = self.progress;
+
+                    // 🔥 위로 벗어난 경우만 초기화
+                    if (progress <= 0) {
+                        clearAll();
+                        return;
+                    }
+
+                    // 🔥 핵심: index clamp
+                    const index = Math.min(
+                        slides.length - 1,
+                        Math.floor(progress * slides.length)
+                    );
+
+                    // 🔥 상태 업데이트
+                    if (index !== state.activeIndex) {
+                        setState(index);
+                    }
+                },
+
+                onLeave: () => {
+                    // 👉 아래로 완전히 나가면 "마지막 유지"
+                    setState(slides.length - 1);
+                },
+
+                onLeaveBack: () => {
+                    // 👉 위로 나가면 초기화
+                    clearAll();
+                }
+            });
+        },
+        /* //sec02 */
 
         /* scroll 시 특정영역에서 header 로고 및 네비 컬러 변경 */
         handleScroll() {
@@ -319,27 +379,260 @@ export default {
 </script>
 
 <style scope>
-h2 {font-size: 7.2rem; font-weight: 700; line-height: 124%; letter-spacing: -0.02em; text-align: center;}
-h2+.explain {font-size: 2rem; line-height: 150%; letter-spacing: -0.02em;}
-.main_visual {width:100%; position:sticky; top:0; overflow:hidden;}
-.main_visual .slide {height: 100vh; padding: 60px 120px; background-position: 50%; background-size: cover; display: flex; align-items: center;}
-.main_copy strong {color: #fff; font-size: 8rem; line-height: 1.2; text-align: center;}
-.main_copy span {margin-top: 20px; color: #fff; font-size: 4rem; display: block;}
+h2 {
+    font-size: 7.2rem;
+    font-weight: 700;
+    line-height: 124%;
+    letter-spacing: -0.02em;
+    text-align: center;
+}
 
-section {padding: 200px 0; background-color: #fff; position:relative; z-index:1;}
+h2+.explain {
+    font-size: 2rem;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
 
-.sec01 {height:100vh; padding:200px 20px 20px; overflow:hidden;}
-.sec01 .inner {width:100%; max-width:1720px; margin:0 auto; position:relative; display: flex; justify-content:flex-end;}
-.sec01 h2 {text-align: left;}
-.sec01 .explain {margin-top: 80px; margin-bottom: 60px;}
-.sec01 ul {border-top: 1px solid #000;}
-.sec01 li {border-bottom: 1px solid #aaa;}
-.sec01 li a {padding: 24px 16px 24px 0; font-size: 2.4rem; font-weight: 600; line-height: 150%; letter-spacing: -0.02em; display: flex; align-items: center; justify-content: space-between;}
-.sec01 li a:after {width: 16px; height: 16px; background-color: red; content: ''; display: block;}
-.sec01 .clip_mask {width: 552px; max-width:100vw; height: 338px; border-radius: 10px; background-position: 50%; background-size: cover; overflow: hidden; position:absolute; bottom:20px; left:0;}
+.main_visual {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+}
 
-.sec01 .clip_mask div {height:0; overflow:hidden; position:absolute; top:50%; left:50%; display:flex; flex-direction: column; align-items: center; justify-content:center; transform:translate(-50%, -50%);}
-.sec01 .clip_mask strong {color:#fff; font-size: 8rem; line-height: 124%; letter-spacing: -0.02em; text-align: center; display: block;}
-.sec01 .clip_mask em {width: 1px; background-color: #fff; flex:1;}
+.main_visual .slide {
+    height: 100vh;
+    padding: 60px 120px;
+    background-position: 50%;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
 
+.main_copy strong {
+    color: #fff;
+    font-size: 8rem;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.main_copy span {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 4rem;
+    display: block;
+}
+
+section {
+    padding: 200px 0;
+    background-color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.sec01 {
+    height: 100vh;
+    padding: 200px 20px 20px;
+    overflow: hidden;
+}
+
+.sec01 .inner {
+    width: 100%;
+    max-width: 1720px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sec01 h2 {
+    text-align: left;
+}
+
+.sec01 .explain {
+    margin-top: 80px;
+    margin-bottom: 60px;
+}
+
+.sec01 ul {
+    border-top: 1px solid #000;
+}
+
+.sec01 li {
+    border-bottom: 1px solid #aaa;
+}
+
+.sec01 li a {
+    padding: 24px 16px 24px 0;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sec01 li a:after {
+    width: 16px;
+    height: 16px;
+    background-color: red;
+    content: '';
+    display: block;
+}
+
+.sec01 .clip_mask {
+    width: 552px;
+    max-width: 100vw;
+    height: 338px;
+    border-radius: 10px;
+    background-position: 50%;
+    background-size: cover;
+    overflow: hidden;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+}
+
+.sec01 .clip_mask div {
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+}
+
+.sec01 .clip_mask strong {
+    color: #fff;
+    font-size: 8rem;
+    line-height: 124%;
+    letter-spacing: -0.02em;
+    text-align: center;
+    display: block;
+}
+
+.sec01 .clip_mask em {
+    width: 1px;
+    background-color: #fff;
+    flex: 1;
+}
+
+.sec02 {
+    position: relative;
+    padding: 200px 0;
+}
+
+.expWrap {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.expTrack {
+    width: 100%;
+    height: 100%;
+    max-width:1720px;
+    margin:0 auto;
+    padding:0 20px;
+    position: relative;
+    display:flex;
+    justify-content:center;
+}
+
+.expSlide {
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: none;
+
+    z-index:1;
+}
+
+.expSlide:first-child {
+    z-index: 10; /* 🔥 첫 장이 기본 앞 */
+}
+
+/* 기본 카드 (작은 상태) */
+.card {
+    width: 0;
+    height: 0;
+
+    transform: translate(-40%, -40%) scale(0.85);
+    opacity: 0.9;
+
+    border-radius: 10px;
+
+    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+}
+
+.expSlide.active {
+    width: 100%;
+    height: 100vh;
+
+    max-width: 834px;
+    max-height: 860px;
+
+    position:absolute; top:50%;
+    left:50%;
+
+    pointer-events: auto;
+
+    z-index: 10;
+
+    transform:translate(-50%, -50%);
+}
+.expSlide.active .card {
+    transform: translate(0, 0) scale(1);
+}
+
+.expSlide.active + .expSlide {
+    width: 242px;
+    height: 242px;
+}
+
+.expSlide.prev {
+    width:242px;
+    z-index:5;
+}
+
+.expSlide.prev .card, .expSlide.active .card, .expSlide.active + .expSlide .card {
+    width: 100%;
+    height: 100%;
+}
+
+.expSlide .txt {
+    display:none;
+}
+
+/* 썸네일 */
+.thumb {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    display:block;
+
+    transition: all 0.7s ease;
+}
+
+.expSlide.active .thumb {
+    border-radius: 12px;
+}
+
+.expSlide.prev .thumb {
+    clip-path: inset(0 0 0 0 round 12px);
+    transform: scale(0.95);
+}
+
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 </style>

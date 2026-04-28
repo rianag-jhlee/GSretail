@@ -32,7 +32,7 @@
                 <p>{{ t.info.copyright }}</p>
             </div>
 
-            <button class="go_top" :class="{ isStatic: isFooterVisible }" @click="scrollTop">Go to top</button>
+            <button class="go_top" :class="{ hide: isTop, isStatic: isFooterVisible }" @click="scrollTop">Go to top</button>
         </div>
     </footer>
 </template>
@@ -52,6 +52,7 @@ export default {
         return {
             isFooterVisible: false,
             observer: null,
+            isTop: true,
 
             langData: {
                 ko: {
@@ -111,6 +112,10 @@ export default {
 
         scrollTop() {
             window.scrollTo({ top: 0, behavior: "smooth" });
+        },
+
+        handleScroll() {
+            this.isTop = window.scrollY === 0;
         }
     },
 
@@ -129,12 +134,17 @@ export default {
                 this.observer.observe(el);
             }
         });
+
+        //go_top 버튼 show/hide 관련
+        window.addEventListener("scroll", this.handleScroll);
     },
 
     beforeUnmount() {
         if (this.observer) {
             this.observer.disconnect();
         }
+
+        window.removeEventListener("scroll", this.handleScroll);
     }
 };
 </script>
