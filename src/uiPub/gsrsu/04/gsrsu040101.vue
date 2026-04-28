@@ -69,7 +69,7 @@
                             </li>
                         </ul>
                     </section>
-                    <section class="sec_practice">
+                    <section>
                         <header class="sub_header">
                             <h3>GS리테일실천지침</h3>
                             <p>본 내용은 정직과 공정의 신조직문화 창출을 위하여 GS리테일인으로서 지켜야 할 ‘임직원의 기본윤리’를 구체적으로 해설하고 실천에 용이하도록 제도화한 내용입니다.</p>
@@ -97,6 +97,18 @@
                                 <p>{{ item.desc }}</p>
                             </li>
                         </ol>
+                        <div class="signature_box">
+                            <div>
+                                <p class="signature_confirm">{{ t.EthicsPledgeText }}</p>
+                                <dl>
+                                    <dt>일시 : {{ t.EthicsPledgeMeta }}</dt>
+                                    <dd>소속 : {{ t.EthicsPledgeCompany }}</dd>
+                                    <dd>성명 : {{ t.EthicsPledgeName }}</dd>
+                                </dl>
+                            </div>
+                            <span>주식회사 GS리테일 귀중</span>
+
+                        </div> 
                     </section>
                 </div>
                 <div v-show="CTabIdxEsgArchive === 2" class="panel_inner" :aria-label="t.TabsEsgArchive?.[2]?.item || ''">
@@ -229,6 +241,10 @@ const langData = {
                 desc: "건실한 기업 성장을 통해 사회발전과 공익 증진에 기여합니다.",
             },
         ],
+        EthicsPledgeText: "본인은 GS리테일 윤리규범 세부실천사항을 최선의 노력으로 실천할 것을 다짐하여 이에 서약합니다.",
+        EthicsPledgeMeta: "20**. 01. 01",
+        EthicsPledgeCompany: "*****부문 ***점 *********",
+        EthicsPledgeName: "홍길동 (서명)",
         PurposeFeatureItems: [
             {
                 title: "정당성 획득",
@@ -360,6 +376,14 @@ section.gray_box > .button-area{width: 100%; display: flex; justify-content: cen
 .practice_list.type2 { padding: 64px; background-color: #f8f8f8; border-radius: 20px;}
 .practice_list.type2 .practice_item:first-child {padding-top: 0;}
 .practice_list.type2 .practice_item:last-child {padding-bottom: 0; border-bottom: 0; }
+.signature_box { margin-top: 40px; padding: 40px 64px; border: 1px solid #E5E5E9; border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-between;}
+.signature_box > div {flex:1;}
+.signature_confirm {font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
+.signature_box dl {margin-top: 40px;}
+.signature_box dl > dt {color:#67676F;font-size: 1.8rem;line-height: 1.4;}
+.signature_box dl > dd {color:#67676F;font-size: 1.8rem;line-height: 1.4;}
+.signature_box dl > dd { margin-top: 4px; }
+.signature_box span{color:#C4C4D0; font-size: 1.8rem; font-weight: 700; line-height: 1.5;}
 @media screen and (max-width: 768px) {
     .p_br{display:none;}
     .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
@@ -367,44 +391,50 @@ section.gray_box > .button-area{width: 100%; display: flex; justify-content: cen
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
     .visual_sub { font-size: 2rem; }
-    .tab_tit { margin-bottom:56px;padding: 0; font-size: 2rem; text-align: left;}
+    .tab_tit { margin-bottom:56px;padding: 0; font-size: 1.8rem; line-height: 1.4; text-align: left;}
     .sub_header{margin-bottom:32px;}
-    .sub_header h3 { font-size: 2.8rem; text-align: left; }
+    .sub_header h3 { font-size: 2.4rem; text-align: left; }
     .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     section + section{padding-top:80px;}
     section.gray_box{padding: 40px;}
     section.gray_box p{margin-top: 32px; }
     .purpose_feature_cards :deep(.feature_card_list) { gap: 12px; }
     .purpose_feature_cards :deep(.feature_card_item) { width: 100%; min-height: 0; padding: 24px; }
-    .purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 8px; font-size: 1.6rem; line-height: 1.4; }
-    .purpose_feature_cards :deep(.feature_card_desc) { font-size: 1.8rem; line-height: 1.35; }
-    /* .sec_history {  padding-left: 0; } */
+    .purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 8px; font-size: 1.6rem; line-height: 1.24; }
+    .purpose_feature_cards :deep(.feature_card_desc) { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em;}
     .history_list { padding-left: 20px; }
     .history_item { gap: 8px; flex-direction: column; }
     .history_item::before { width: 8px; height: 8px; border-width: 4px; top: 8px; left: -20px; }
     .history_item:not(:last-child)::after { top: 16px; left: -12px; }
     .history_item:last-child .history_body { padding-bottom: 0; }
-    .history_period { width: 100%; font-size: 2.4rem; line-height: 1.35; }
-    .history_body { margin-top:12px;padding-bottom: 42px; }
+    .history_period { width: 100%; font-size: 2rem; line-height: 1.35; }
+    .history_body { margin-top:6px;padding-bottom: 42px; }
     .history_summary { font-size: 1.4rem; line-height: 1.4; }
     .history_detail_list {  display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 6px; column-gap: 0; }
     .history_detail_list > dt { padding: 6px 0; font-size: 1.6rem; line-height: 1.4; grid-column: 1; }
-    .history_detail_list > dd { padding: 0; font-size: 1.6rem; line-height: 1.4; grid-column: 1; }
-    .history_detail_list > dd + dt { margin-top: 24px; }
+    .history_detail_list > dd { padding: 0; font-size: 1.4rem; line-height: 1.4; grid-column: 1; }
+    .history_detail_list > dd + dt { margin-top: 12px; }
     .history_detail_list > dd + dt + dd { margin-top: 0; }
     .sec_ethics_cards .card_list { grid-template-columns: minmax(0, 1fr); gap: 40px; }
     .sec_ethics_cards .card_list :deep(.card_thumb) { aspect-ratio: 335 / 190; }
     .sec_ethics_cards .card_list :deep(.card_item .card_body) { padding-top: 20px; display: block; }
     .sec_ethics_cards .card_list :deep(.card_desc) { margin-top: 16px; }
-    .card_list :deep(.card_tit) { font-size: 1.8rem; }
-    .card_list :deep(.card_desc) { font-size: 1.4rem; }
-    .practice_title { margin-top:0; font-size: 2.4rem; line-height: 1.35; }
+    .card_list :deep(.card_tit) { font-size: 1.8rem; line-height: 1.5;letter-spacing: 0;}
+    .card_list :deep(.card_desc) { font-size: 1.6rem;line-height: 1.5; letter-spacing: -0.01em;}
+    .practice_title { margin-top:0; font-size: 2rem; line-height: 1.35; }
     .practice_desc { margin-top: 12px; font-size: 1.6rem; }
     .practice_item { padding: 16px 0; }
-    .practice_item > em { font-size: 1.8rem; line-height: 1.4; }
-    .practice_item > strong { font-size: 1.8rem; line-height: 1.4; }
-    .practice_item > p { font-size: 1.4rem; line-height: 1.5; }
-    .practice_list.type2 { padding: 16px; border-radius: 12px; }
+    .practice_item > em { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
+    .practice_item > strong { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
+    .practice_item > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em;}
+    .practice_list.type2 { padding: 32px; border-radius: 12px; }
+    .signature_box { margin-top: 24px; padding: 24px 20px; border-radius: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .signature_confirm{ font-size: 1.6rem; line-height: 1.5; }
+    .signature_box dl { width: 100%; margin-top: 20px; }
+    .signature_box dl > dt { font-size: 1.4rem; line-height: 1.5; }
+    .signature_box dl > dd { font-size: 1.4rem; line-height: 1.5; }
+    .signature_box dl > dd { margin-top: 2px; }
+    .signature_box span { width: 100%; font-size: 1.4rem; line-height: 1.4; text-align: right; }
    
 }
 </style>
