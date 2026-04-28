@@ -102,7 +102,62 @@
                                     </section>
                                 </div>
                             </div>
-                            <div v-if="InnerTabIdx === 2">
+                            <div v-if="InnerTabIdx === 2" class="green_product"> 
+                                <ul>
+                                    <li class="one_divide">
+                                        <figure><img :src="t.GreenProduct.greenSave.img" :alt="t.GreenProduct.greenSave.tit"></figure>
+                                        <div>
+                                            <h4>{{ t.GreenProduct.greenSave.tit }}</h4>
+                                            <p>{{ t.GreenProduct.greenSave.sesc1 }}</p>
+                                            <p>{{ t.GreenProduct.greenSave.sesc2 }}</p>
+                                        </div>
+                                    </li>
+                                    <li class="two_divide">
+                                        <div>
+                                            <figure>
+                                                <img :src="t.GreenProduct.ecofriendly.img" :alt="t.GreenProduct.ecofriendly.tit">
+                                            </figure>
+                                            <div>
+                                                <h4>{{ t.GreenProduct.ecofriendly.tit }}</h4>
+                                                <p>{{ t.GreenProduct.ecofriendly.sesc1 }}</p>
+                                                <p>{{ t.GreenProduct.ecofriendly.sesc2 }}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <figure>
+                                                <img :src="t.GreenProduct.originmana.img" :alt="t.GreenProduct.originmana.tit">
+                                            </figure>
+                                            <div>
+                                                <h4>{{ t.GreenProduct.originmana.tit }}</h4>
+                                                <p>{{ t.GreenProduct.originmana.sesc1 }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <figure>
+                                            <img :src="t.GreenProduct.procurementpolicy.img" :alt="t.GreenProduct.procurementpolicy.tit">
+                                        </figure>
+                                        <div>
+                                            <h4>{{ t.GreenProduct.procurementpolicy.tit }}</h4>
+                                            <p>{{ t.GreenProduct.procurementpolicy.sesc1 }}</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="policy_card_box">
+                                    <div class="title_area">
+                                        <h4>{{ t.GreenProduct.guideline.tit }}</h4>
+                                        <p>{{ t.GreenProduct.guideline.desc }}</p>
+                                    </div>
+                                    <ul>
+                                        <li><strong>{{ t.GreenProduct.guideline.num1 }}</strong> <span>{{ t.GreenProduct.guideline.txt1 }}</span></li>
+                                        <li><strong>{{ t.GreenProduct.guideline.num2 }}</strong> <span>{{ t.GreenProduct.guideline.txt2 }}</span></li>
+                                        <li><strong>{{ t.GreenProduct.guideline.num3 }}</strong> <span>{{ t.GreenProduct.guideline.txt3 }}</span></li>
+                                        <li><strong>{{ t.GreenProduct.guideline.num4 }}</strong> <span>{{ t.GreenProduct.guideline.txt4 }}</span></li>
+                                    </ul>
+                                    <div class="ac">
+                                        <Buttons btn-class="btn_icon btn_xl border after">{{ t.GreenProduct.guideline.btn_txt }}</Buttons>
+                                    </div>
+                                </div>
                                 
                             </div>
                         </div>
@@ -257,8 +312,47 @@ export default {
                                 img: require("@/assets/images/dummy/gsrsu020102_3.png"),
                                 desc: "‘수요반응(DR)’ 시스템은 전력거래소가 전력 사용량이 많은 특정 시간대에 전력 사용 절감을 요청하면, 이에 참여한 개별 사용자가 인센티브를 지급받는 제도입니다. GS25 점포에 도입된 ‘자동 수요반응(AUTO DR)’ 시스템은 이를 한 단계 발전시킨 형태로, 원격 제어가 가능한 IoT장비(SEMS)와 연동되어 매장 내 시설을 자동으로 제어하는 것이 특징입니다. 수요 제어 시 자동 시스템을 통해 운영 효율을 높일 수 있으며, 전력 감축 효과는 물론 가맹점에 감축 인센티브가 제공되어 점포 수익성 제고에도 기여하고 있습니다."
                             }
-                        ]
+                        ] 
                     },
+                    GreenProduct:{
+                        greenSave : {
+                            img: require("@/assets/images/dummy/gsrsu020103_1.png"),
+                            tit: `지속가능한 제품`,
+                            sesc1: `GS리테일은 환경 친화적인 제품의 개발 및 도입을 통해 고객의 녹색소비를 촉진할 수 있도록 노력하고 있습니다. 특히, 취급 제품 중 제품 본연의 특성 혹은 패키징에 대해 제3자 친환경 관련 인증을 획득한 제품을 '지속가능제품'으로 정의하였습니다. 지속가능제품은 제품의 원재료, 패키징, 또는 제품의 전 생애주기에서 발생하는 환경 영향이 적은 제품들로 구성하고 있습니다.`,
+                            sesc2: `또한, 그린세이브(Green Save)라는 친환경 활동 통합 아이덴티티를 만들고, 자체적인 패키지 개선에 대해서도 기준을 수립해 그린 프로덕트 확대를 위해 노력하고 있습니다.`,
+                        },
+                        ecofriendly : {
+                            img: require("@/assets/images/dummy/gsrsu020103_2.png"),
+                            tit: `환경친화적 포장재`,
+                            sesc1: `상품 배송 시에도 환경영향도를 최소화하고자 FSC 인증받은 친환경 배송박스를 도입하여 운영중에 있습니다.`,
+                            sesc2: `또한, 당일 배송의 경우 다회용백을 통해 배송함으로써 고객의 필요에 따라 다회용으로 이용하여 환경영향도를 저감시키는 노력을 확대해가고 있습니다.`,
+                        },
+                        originmana : {
+                            img: require("@/assets/images/dummy/gsrsu020103_3.png"),
+                            tit: `원산지 관리 체계 구축`,
+                            sesc1: `유통업 최초로 블록체인 기술을 특정 농작물에 적용하여 제품의 생산부터 출고까지의 전체 이력을 체계적으로 관리하고 있습니다. ‘산지애 사과’ 에 최초로 적용된 이 기술을 통해 사과의 원산지, 재배자, 재배·보관·선별·포장 환경 등을 확인할 수 있습니다. 또한, 축산·수산물에 대해서도 일부 원산지 추적 시스템을 적용하고 있습니다. 이외에도 일부 건강식품의 경우 원재료에 대한 점검을 이행하여 상품의 안전성을 확보하고 있습니다.`,
+                        },
+                        procurementpolicy : {
+                            img: require("@/assets/images/dummy/gsrsu020103_4.png"),
+                            tit: `책임있는 원재료 지속가능한 구매 정책`,
+                            sesc1: `소모품 및 원재료 조달과정에서 사회적인 책임을 다하고자 지속가능한 구매 정책을 수립하고 준수하고자 노력하고 있습니다.`,
+                        },
+                        guideline : {
+                            tit: `지속가능한 구매 방침`,
+                            desc:`녹색구매활동을 통한 ESG 경영을 적극적으로 실천하기 위해 아래 방침 을 준수한다.`,
+                            num1:`첫째`,
+                            txt1:`적극적인 녹색구매활동을 통해 환경경영을 정착하고 확대하여 친환경의 가치를 고객에게 제공하는 등 친환경 선도 기업으로 사회적 책임과 역할을 다한다.`,
+                            num2:`둘째`,
+                            txt2:`당사의 녹색구매방침을 파트너사/협력사에게 공유 및 장려한다.`,
+                            num3:`셋째`,
+                            txt3:`모든 구매활동은 녹색구매를 우선으로 검토한다. 단, 녹색구매가 불가능한 경우(공급불가, 품질저하, 친환경/녹색 제품 부재 등)는 예외로 한다.`,
+                            num4:`넷째`,
+                            txt4:`녹색구매활동에 대해 정기적인 모니터링 및 평가를 실시하며 개선 필요 시 보완한다.`,
+                            btn_txt:`전문보기`
+                        }
+                        
+                    }
+
                 }
             }
         };
@@ -291,6 +385,7 @@ export default {
 .mb40 { margin-bottom: 40px; }
 .py80 { padding: 80px 0; }
 .tab_wrap {margin-left:-20px; margin-right:-20px;}
+.tab_wrap + div {margin-top:80px;}
 
 /* 2. Visual Area */
 .title_wrap { display: block; width: 100%; height: 480px; padding: 160px 0; background: url('/src/assets/images/dummy/gsrsu0201_bg.png') no-repeat center / cover; position: relative; }
@@ -365,6 +460,21 @@ figure img { width: 100%; height: 100%; object-fit: cover; }
 .system_item h4 { font-size: 32px; font-weight: 700; color: #161616; text-align: left; }
 .system_item p { font-size: 20px; color: #161616; line-height: 1.6; text-align: left; }
 
+
+/* 그린 프로덕트 컨테이너 */
+.green_product { width: 100%; margin-top: 80px; }
+.green_product > ul {display: flex; flex-direction: column;}
+.green_product li.one_divide { display: flex; gap: 40px; align-items: flex-start; }
+.green_product li.one_divide figure { flex: 0 0 690px; height: auto; border-radius: 20px; overflow: hidden; }
+.green_product li.one_divide div { flex: 1; }
+.green_product li.two_divide {margin-top:80px; display: flex; gap: 40px; align-items: flex-start; }
+.green_product li.two_divide > div { flex: 1; display: flex; flex-direction: column; gap: 32px; }
+.green_product li.two_divide figure { width: 100%; height: 360px; border-radius: 20px; overflow: hidden; }
+.green_product > ul > li:last-of-type {margin-top:200px; margin-bottom:80px;}
+.green_product > ul > li:last-of-type h4 {margin-top:40px;}
+.green_product > ul li div h4 + p {margin-bottom:20px;}
+.green_product figure img { width: 100%; height: 100%; object-fit: cover;}
+
 /* 7. Responsive */
 @media screen and (max-width: 1024px) {
     .cont_inner { padding: 0 20px; }
@@ -374,6 +484,9 @@ figure img { width: 100%; height: 100%; object-fit: cover; }
     .key_features_grid li::after {content:''; width:36px; height:36px; background:red; position:absolute; right:32px; bottom:32px}
     .card_content { flex: 0 0 100%; height: auto; gap: 24px; }
     .system_detail_grid { flex-direction: column; }
+    .green_product li.one_divide,
+    .green_product li.two_divide { flex-direction: column; gap: 32px; }
+    .green_product li.one_divide figure, .green_product li.two_divide figure { flex: 0 0 auto; width: 100%; height: auto;}
 }
 @media screen and (max-width: 767px) {
     h3, h4, .policy_card_box h4, .climate_change .intro_view p { font-size: 28px !important; }
@@ -401,5 +514,8 @@ figure img { width: 100%; height: 100%; object-fit: cover; }
     .feature_card p { font-size: 16px; }
     .system_item h4 { font-size: 24px !important; }
     .system_item p { font-size: 16px !important; }
+    .green_product h4 { font-size: 24px !important; }
+    .green_product p { font-size: 16px !important; }
+    .green_product > ul > li:last-of-type, .green_product li.two_divide {margin-top:40px;}
 }
 </style>

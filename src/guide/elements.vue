@@ -165,7 +165,7 @@ data() {
         <section>
             <h4>tab</h4>
             <ul class="explain">
-                <li><strong>tab-class</strong> : 탭 클래스 지정 // type_01~type_03</li>
+                <li><strong>tab-class</strong> : 탭 클래스 지정 // type_01~type_04</li>
                 <li><strong>tab-slide</strong> : 탭 슬라이드 여부 true/false // default="false" ※선택된 탭 중앙정렬</li>
                 <li><strong>tab-items</strong> : 탭 아이템 목록</li>
                 <li><strong>@change</strong> : 탭 클릭 기능</li>
@@ -183,13 +183,13 @@ data() {
                     <div class="sub_cont" v-if="SUBTabIdx === 2">3</div>
                 </div>
                 <div class="tab_content mt10" v-if="CTabIdx === 1">
-                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_02" :tab-slide="false" />
+                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_03" :tab-slide="false" />
                     <div class="sub_cont" v-if="SUBTabIdx === 0">4</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 1">5</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 2">6</div>
                 </div>
                 <div class="tab_content mt10" v-if="CTabIdx === 2">
-                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_03" :tab-slide="false" />
+                    <Tabs @change="onTabChange2" v-model="SUBTabIdx" :tab-items="tab2" tab-class="type_04" :tab-slide="false" />
                     <div class="sub_cont" v-if="SUBTabIdx === 0">7</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 1">8</div>
                     <div class="sub_cont" v-if="SUBTabIdx === 2">9</div>
