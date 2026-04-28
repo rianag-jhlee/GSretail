@@ -9,10 +9,183 @@
         "status": "ing",
         "note": ""
     },
+
+    {
+        "depth1": "공통", "depth2": "footer", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "inc/Footer",
+        "link": "/Footer",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "개인정보처리방침", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm01",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "알기쉬운개인정보처리방침", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm0101",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "영상정보기기운영방침", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm0102",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+	{
+        "depth1": "", "depth2": "이용약관", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm02",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "법적고지", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm03",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "채용안내", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm03",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "입점상담", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm03",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "제휴/협력문의", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm03",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "입지제안", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm04",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "임대상가안내", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm04",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "정도경영제보", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm04",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "고객센터", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm04",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "GSSHOP시청자관련", "depth3": "시청자위원회", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm0501",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "시청자위원회회의자료", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm0502",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "시청자의견반영결과보고서", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "gsrcm0503",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "기타", "depth3": "우편번호 검색", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "",
+        "link": "",
+        "startDate": "",
+        "endDate": "",
+        "status": "",
+        "note": ""
+    },
+
+
     {
         "depth1": "ABOUT", "depth2": "CEO인사말", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
-        "path": "gsrab/gsrab01",
+        "path": "gsrab/01/gsrab01",
         "link": "/gsrab01",
         "startDate": "",
         "endDate": "",
@@ -22,8 +195,8 @@
     {
         "depth1": "", "depth2": "회사소개", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
-        "path": "",
-        "link": "",
+        "path": "gsrab/02/gsrab02",
+        "link": "/gsrab02",
         "startDate": "",
         "endDate": "",
         "status": "",
@@ -32,8 +205,8 @@
     {
         "depth1": "", "depth2": "연혁", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
-        "path": "",
-        "link": "",
+        "path": "gsrab/03/gsrab03",
+        "link": "/gsrab03",
         "startDate": "",
         "endDate": "",
         "status": "",
@@ -42,8 +215,8 @@
     {
         "depth1": "", "depth2": "CI/BI", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
-        "path": "",
-        "link": "",
+        "path": "gsrab/04/gsrab04",
+        "link": "/gsrab04",
         "startDate": "",
         "endDate": "",
         "status": "",
@@ -52,8 +225,8 @@
     {
         "depth1": "", "depth2": "위치", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
-        "path": "",
-        "link": "",
+        "path": "gsrab/05/gsrab05",
+        "link": "/gsrab05",
         "startDate": "",
         "endDate": "",
         "status": "",
