@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div class="main-container">
         <div class="title_wrap ac">
             <h2 class="page_title">{{ t.MainTitle }}</h2>
@@ -230,27 +230,69 @@
                     </div>
                 </div>
                 <div v-show="CTabIdxEsgArchive === 3" class="panel_inner" :aria-label="t.TabsEsgArchive?.[3]?.item || ''">
-                    <header class="tab_tit_wrap">
-                        <h2 class="tab_tit" v-html="t.ReportIntroTitle"></h2>
-                        <p class="tab_tit_desc">{{ t.ReportIntroDesc }}</p>
-                    </header>
-                    <section class="sec_report_channels">
-                        <ul class="report_channel_list">
-                            <li v-for="item in t.ReportChannelItems" :key="item.key" class="report_channel_item">
-                                <article class="report_channel_card">
-                                    <figure class="report_channel_thumb" :class="'thumb_' + item.key" aria-hidden="true" />
-                                    <div class="report_channel_body">
-                                        <h3>{{ item.title }}</h3>
-                                        <p v-html="item.desc"></p>
-                                        <div class="button_area">
-                                            <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon after">{{ item.btnText }}</Buttons>
+                    <template v-if="!isEthicsInquiryOpen">
+                        <header class="tab_tit_wrap">
+                            <h2 class="tab_tit" v-html="t.ReportIntroTitle"></h2>
+                            <p class="tab_tit_desc">{{ t.ReportIntroDesc }}</p>
+                        </header>
+                        <section>
+                            <ul class="report_channel_list">
+                                <li v-for="item in t.ReportChannelItems" :key="item.key" class="report_channel_item">
+                                    <article class="report_channel_card">
+                                        <figure class="report_channel_thumb" :class="'thumb_' + item.key" aria-hidden="true" />
+                                        <div class="report_channel_body">
+                                            <h3>{{ item.title }}</h3>
+                                            <p v-html="item.desc"></p>
+                                            <div class="button_area">
+                                                <Buttons
+                                                    v-if="item.key === 'ethics'"
+                                                    tag="button"
+                                                    type="button"
+                                                    btn-class="btn_xl border btn_icon after"
+                                                    @click="openEthicsInquiry"
+                                                >
+                                                    {{ item.btnText }}
+                                                </Buttons>
+                                                <Buttons v-else tag="a" href="#none" btn-class="btn_xl border btn_icon after">{{ item.btnText }}</Buttons>
+                                            </div>
                                         </div>
-                                    </div>
-                                </article>
-                            </li>
-                        </ul>
-                        <p class="report_channel_notice" v-html="t.ReportNotice"></p>
-                    </section>
+                                    </article>
+                                </li>
+                            </ul>
+                            <p class="report_channel_notice" v-html="t.ReportNotice"></p>
+                        </section>
+                    </template>
+                    <template v-else>
+                        <header class="tab_tit_wrap">
+                            <h2 class="tab_tit">정도경영 목소리</h2>
+                            <p>언제나 고객님의 입장이 되어 작은 소리에도 귀를 기울이겠습니다.</p>
+                        </header>
+                        <section>
+                            <header class="sub_header">
+                                <h3>정도경영 사이버 신문고</h3>
+                                <p class="txt_blue">정도경영 목소리에는 임직원 또는 협력업체 직원의 불공정 행위들 (금품수수, 향응접대, 매출누락, 불공정거래, 기타 부정행위)에 대한 제보뿐만 아니라, 정도경영을 위한 좋은 의견들도 함께 접수하고 있습니다.</p>
+                            </header>
+                            <ul class="list_dotted">
+                                <li>
+                                    <p>이곳에서 접수되는 모든 글들은 철저한 보안과 안전 속에서 처리됨을 알려드립니다.</p>
+                                </li>
+                                <li>
+                                    <p>상담이나 제보를 하신 분에 대하여서는 어떠한 불이익도 발생하지 않도록 하겠습니다.</p>
+                                </li>
+                                <li>
+                                    <p>가급적 6하원칙에 입각하여 작성해 주시고, 내용이 부정확한 경우에는 조사대상에서 제외될 수도 있습니다.</p>
+                                </li>
+                                <li>
+                                    <p>허위 사실을 신고하여 개인의 명예를 훼손시키는 행위는 절대 삼가 바랍니다.</p>
+                                </li>
+                            </ul>
+                        </section>
+                        <section>
+                            <header class="sub_header">
+                                <h3>GS리테일 정도경영 제보 대상</h3>
+                            </header>
+                        </section>
+                    </template>
                 </div>
             </div>
 
@@ -331,6 +373,7 @@ const CTabIdx = ref(0);
 const CTabIdxEsgArchive = ref(0);
 const CTabIdxEsgSystem = ref(0);
 const CTabIdxCompliance = ref(0);
+const isEthicsInquiryOpen = ref(false);
 
 const langData = {
     ko: {
@@ -703,10 +746,15 @@ const onTabChange1 = (idx) => {
     CTabIdxEsgArchive.value = 0;
     CTabIdxEsgSystem.value = 0;
     CTabIdxCompliance.value = 0;
+    isEthicsInquiryOpen.value = false;
 };
 
 const goToWhistleTab = (idx) => {
     CTabIdxEsgSystem.value = idx;
+};
+
+const openEthicsInquiry = () => {
+    isEthicsInquiryOpen.value = true;
 };
 </script>
 
@@ -729,8 +777,17 @@ section + section{padding-top:120px;}
 .tab_tit_wrap{margin-bottom:80px; padding: 20px 0; text-align: center;}
 .tab_tit{  font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;}
 .tab_tit_desc{margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em;}
-/* FeatureCards 공통: 그리드(PC 3열 / 태블릿 2열 / 모바일 1열)
-   부모에서 준 class는 루트 ul(feature_card_list)에 병합되므로 자손 선택자가 아닌 동일 요소 선택 */
+.list_dotted > li { padding-left: 12px; position: relative }
+.list_dotted > li + li { margin-top: 8px }
+.list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color:#67676F; border-radius: 50%; position: absolute; top: 11px; left: 0 }
+.list_dotted > li > p { margin: 0; color: #67676F; font-size: 1.8rem; line-height: 1.4 }
+@media (max-width: 768px) {
+  .list_dotted > li { padding-left: 6px }
+  .list_dotted > li::before { top: 9px; width:2px; height:2px }
+  .list_dotted > li + li { margin-top: 8px }
+  .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
+}
+
 :deep(.feature_cards_grid.feature_card_list) {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1007,9 +1064,7 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     letter-spacing: -0.01em;
     text-align: center;
 }
-.sec_report_channels {
-    width: 100%;
-}
+
 .report_channel_list {
     width: 100%;
     border-top: 1px solid #e5e5e9;
@@ -1030,10 +1085,19 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     background-color: #f8f8f8;
     border-radius: 12px;
     display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-.report_channel_thumb.thumb_voice { background: linear-gradient(135deg, #d9e8fb 0%, #f8f8f8 100%); }
-.report_channel_thumb.thumb_ethics { background: linear-gradient(135deg, #d4f0df 0%, #f8f8f8 100%); }
-.report_channel_thumb.thumb_redwhistle { background: linear-gradient(135deg, #fde2e2 0%, #f8f8f8 100%); }
+.report_channel_thumb.thumb_voice {
+    background-image: url(@/assets/images/dummy/gsrsu040101_07.png);
+}
+.report_channel_thumb.thumb_ethics {
+    background-image: url(@/assets/images/dummy/gsrsu040101_08.png);
+}
+.report_channel_thumb.thumb_redwhistle {
+    background-image: url(@/assets/images/dummy/gsrsu040101_09.png);
+} 
 .report_channel_body {
     width: calc(100% - 380px);
 }
@@ -1283,3 +1347,5 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
    
 }
 </style>
+
+
