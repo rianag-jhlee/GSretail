@@ -14,7 +14,7 @@ const onAgreeChange = (event) => {
 </script>
 
 <template>
-    <section class="consent_box" aria-label="개인정보 제공 동의">
+    <div class="consent_box" aria-label="개인정보 제공 동의">
         <h3>개인정보 제공 동의</h3>
 
         <ul v-if="items && items.length" class="consent_list">
@@ -37,16 +37,16 @@ const onAgreeChange = (event) => {
                 <span>동의합니다.</span>
             </label>
         </div>
-    </section>
+    </div>
 </template>
 
 <style scoped>
 .consent_box { width: 100%; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
+.consent_box + .consent_box { margin-top: 40px; }
 .consent_box > h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .consent_list { margin-top: 24px; }
 .consent_list > li { padding-left: 10px; position: relative; }
 .consent_list > li + li { margin-top: 8px; }
-.consent_list > li::before { width: 4px; height: 4px; background-color: #67676f; border-radius: 50%; position: absolute; top: 10px; left: 0; content: ""; display: block; }
 .consent_list > li > p { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .consent_notice_area { margin-top: 24px; padding-top: 24px; border-top: 1px solid #d7d7df; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .consent_notice_area > p { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
@@ -60,7 +60,6 @@ const onAgreeChange = (event) => {
     .consent_box { padding: 24px 20px; }
     .consent_box > h3 { font-size: 2rem; line-height: 1.35; }
     .consent_list { margin-top: 16px; }
-    .consent_list > li::before { width: 2px; height: 2px; top: 8px; }
     .consent_list > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .consent_notice_area { margin-top: 16px; padding-top: 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
     .consent_notice_area > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
