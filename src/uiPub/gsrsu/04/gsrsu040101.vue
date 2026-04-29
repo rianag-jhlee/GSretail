@@ -14,7 +14,7 @@
                 :tab-items="t.TabsEsgArchive"
                 tab-class="type_02"
                 :tab-slide="true"
-            />
+            /> 
         
             <!-- 정도경영 -->
             <div v-show="CTabIdx === 0" class="panel" :aria-label="t.Tabs1?.[0]?.item || ''">
@@ -50,6 +50,7 @@
                         </ul>
                     </section>
                 </div>
+                <!-- 지침 -->
                 <div v-show="CTabIdxEsgArchive === 1" class="panel_inner" :aria-label="t.TabsEsgArchive?.[1]?.item || ''">
                     <h2 class="tab_tit"> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
                     <section class="gray_box">
@@ -57,7 +58,7 @@
                             <h3>GS리테일 윤리규범</h3>
                             <p>GS리테일은 상호 신뢰와 협력을 토대로 모든 이해관계자와 공동의 이익을 추구함으로써 모두가 선망하는 Value No.1 기업으로 발전하기 위해 올바른 행동과 가치 판단의 기준으로 윤리규범을 제정하고 정도경영의 길을 걷습니다.</p>
                         </header>
-                        <div class="button-area"><Buttons tag="a" href="#none" btn-class="btn_icon btn_xl after border">㈜GS리테일 윤리규범</Buttons></div>
+                        <div class="button_area"><Buttons tag="a" href="#none" btn-class="btn_icon btn_xl after border">㈜GS리테일 윤리규범</Buttons></div>
                     </section>
                     <section class="sec_ethics_cards">
                         <ul class="card_list" role="list">
@@ -77,8 +78,8 @@
                         <!-- 세부실천지침 -->
                         <h4 class="practice_title">세부실천지침</h4>
                         <p class="practice_desc">본 내용은 정직과 공정의 신조직문화 창출을 위하여 GS리테일인으로서 지켜야 할 ‘임직원의 기본윤리’를 구체적으로 해설하고 실천에 용이하도록 제도화한 내용입니다.</p>
-                        <ol class="practice_list">
-                            <li v-for="(item, idx) in t.EthicsPracticeItems" :key="item.key" class="practice_item">
+                        <ol class="base_list">
+                            <li v-for="(item, idx) in t.EthicsPracticeItems" :key="item.key" class="base_item">
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
                                 <strong>{{ item.title }}</strong>
                                 <p>{{ item.desc }}</p>
@@ -90,8 +91,8 @@
                             <h3>윤리규범 실천서약</h3>
                             <p>정도경영을 위한 임직원의 기본 윤리를 숙지하고 회사업무를 수행함에 있어 GS리테일인으로서 아래의 행위를 하지 않는다.</p>
                         </header>
-                        <ol class="practice_list type2">
-                            <li v-for="(item, idx) in t.EthicsPracticeItems" :key="item.key" class="practice_item">
+                        <ol class="base_list type2">
+                            <li v-for="(item, idx) in t.EthicsPracticeItems" :key="item.key" class="base_item">
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
                                 <strong>{{ item.title }}</strong>
                                 <p>{{ item.desc }}</p>
@@ -111,8 +112,90 @@
                         </div> 
                     </section>
                 </div>
+                <!-- 제도 -->
                 <div v-show="CTabIdxEsgArchive === 2" class="panel_inner" :aria-label="t.TabsEsgArchive?.[2]?.item || ''">
-
+                    <div class="wrap_tabs_type03">
+                        <Tabs
+                            v-model="CTabIdxEsgSystem"
+                            :tab-items="t.TabsEsgSystem"
+                            tab-class="type_03"
+                            :tab-slide="true"
+                        />
+                    </div>
+                    <div v-show="CTabIdxEsgSystem === 0" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[0]?.item || ''">
+                        <header class="sub_header">
+                            <h3>제보이용안내</h3>
+                        </header>
+                        <ol class="base_list">
+                            <li v-for="(row, idx) in t.WhistleGuideSections" :key="row.key" class="base_item">
+                                <em>{{ String(idx + 1).padStart(2, "0") }}</em>
+                                <strong>{{ row.title }}</strong>
+                                <p v-html="row.desc"></p>
+                                <div v-if="row.key === 'wg-04'" class="button_area">
+                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon after" @click="goToWhistleTab(1)">
+                                        제보자 포상제도
+                                    </Buttons>
+                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon after" @click="goToWhistleTab(2)">
+                                        제보자 보호제도
+                                    </Buttons>
+                                </div>
+                                <template v-if="row.key === 'wg-05'">
+                                    <div class="gray_box">
+                                        <div role="list" aria-label="제보 처리 단계" class="process_flow">
+                                            <template v-for="(stepLabel, sIdx) in t.WhistleProcessSteps" :key="stepLabel">
+                                                <p role="listitem">{{ stepLabel }}</p>
+                                                <span
+                                                    v-if="sIdx < t.WhistleProcessSteps.length - 1"
+                                                    aria-hidden="true"
+                                                />
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+                                <div v-if="row.key === 'wg-06'" class="button_area">
+                                    <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon after">제보하기</Buttons>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    <div v-show="CTabIdxEsgSystem === 1" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[1]?.item || ''">
+                        <header class="sub_header">
+                            <h3>{{ t.WhistleRewardPageTitle }}</h3>
+                        </header>
+                        <ol class="base_list whistle_reward_list">
+                            <li v-for="(row, idx) in t.WhistleRewardSections" :key="row.key" class="base_item">
+                                <em>{{ String(idx + 1).padStart(2, "0") }}</em>
+                                <strong>{{ row.title }}</strong>
+                                <div v-if="row.criteriaTables" class="reward_criteria">
+                                    <template v-for="(blk, bi) in row.criteriaTables" :key="row.key + '-tbl-' + bi">
+                                        <p v-if="blk.sectionLead" v-html="blk.sectionLead"></p>
+                                        <div class="reward_table_scroll">
+                                            <table class="reward_table">
+                                                <thead>
+                                                    <tr>
+                                                        <th v-for="col in blk.cols" :key="col" scope="col">{{ col }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td v-for="(cell, ci) in blk.cells" :key="ci">
+                                                            <p class="reward_table_sub">{{ cell.sub }}</p>
+                                                            <p v-html="cell.desc"></p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </template>
+                                </div>
+                                <p v-else v-html="row.desc"></p>
+                            </li>
+                        </ol>
+                        <div class="button_area reward_report_btn">
+                            <Buttons tag="a" href="#none" btn-class="btn_xl primary btn_icon after">제보하기</Buttons>
+                        </div>
+                    </div>
+                    <div v-show="CTabIdxEsgSystem === 2" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[2]?.item || ''" />
                 </div>
                 <div v-show="CTabIdxEsgArchive === 3" class="panel_inner" :aria-label="t.TabsEsgArchive?.[3]?.item || ''">
                  
@@ -153,6 +236,7 @@ const props = defineProps({
 
 const CTabIdx = ref(0);
 const CTabIdxEsgArchive = ref(0);
+const CTabIdxEsgSystem = ref(0);
 
 const langData = {
     ko: {
@@ -164,6 +248,112 @@ const langData = {
             { item: "지침" },
             { item: "제도" },
             { item: "제보" },
+        ],
+        TabsEsgSystem: [
+            { item: "제보 이용 안내" },
+            { item: "제보자 포상제도" },
+            { item: "제보자 보호제도" },
+        ],
+        WhistleGuideSections: [
+            {
+                key: "wg-01",
+                title: "제보이용안내",
+                desc: "GS리테일은 모든 임직원이 지켜야 할 올바른 행동과 가치 판단의 기준으로서 윤리규범 및 실천지침을 지키기 위해 노력하고 있습니다.<br />자유롭고 안전한 문제제기와 신고 문화의 정착이 GS리테일의 지속가능한 성장을 보장합니다.",
+            },
+            {
+                key: "wg-02",
+                title: "제보운영방침",
+                desc: "회사의 전 임직원, 이해관계자, 고객으로부터 회사의 윤리규범 및 관련 규정에 위반되거나 위반의 우려가 있는 일체 사안에 대해 제보할 수 있도록 다양한 제보방법을 운영합니다.",
+            },
+            {
+                key: "wg-03",
+                title: "제보 대상",
+                desc: "임직원 및 파트너사의 윤리경영 위반 사례 (금품수수, 향응/편의접대, 기타 부정행위 등), 불공정 거래 및 부당한 행위, 법규위반 및 회계부정 행위, 임직원의 성희롱, 무례한 언행 등의 인권침해 행위를 비롯하여 기타 정도경영을 위한 좋은 의견들도 함께 접수하고 있습니다.",
+            },
+            {
+                key: "wg-04",
+                title: "제보정책",
+                desc: "당사는 제보자에 대한 신분 및 비밀을 철저히 보호하며, 제보와 관련하여 어떠한 차별, 불이익 등으로부터 보호합니다. 또한 제보자에 대한 포상 정책에 따라 포상금을 지급할 수 있습니다.",
+            },
+            {
+                key: "wg-05",
+                title: "제보 처리 절차",
+                desc: "제보하신 내용은 객관적인 근거 확보 후 조사가 진행 되오며 후속 조치를 진행합니다.",
+            },
+            {
+                key: "wg-06",
+                title: "제보 방법",
+                desc: "온라인 신고, 전화 및 메일",
+            },
+        ],
+        WhistleProcessSteps: ["제보사항 제출", "접수 및 조사 진행", "제보대상 조치"],
+        WhistleRewardPageTitle: "제보자 포상제도",
+        WhistleRewardSections: [
+            {
+                key: "wr-01",
+                title: "제보내용",
+                desc: "-당사 임직원 부정 및 불공정 행위에 대한 제보<br />-협력회사 부정 및 불공정 행위 등",
+            },
+            {
+                key: "wr-02",
+                title: "포상대상",
+                desc: "제보자 : 임직원 및 외부 일반인(협력회사/협력사원/제 3 자)",
+            },
+            {
+                key: "wr-03",
+                title: "포상기준",
+                criteriaTables: [
+                    {
+                        sectionLead:
+                            "1. 자진신고<br />&nbsp;&nbsp; 협력업체는 「CEO가 거래상의 혜택」을 보장함.",
+                        cols: ["임직원", "협력업체"],
+                        cells: [
+                            {
+                                sub: "면책 또는 경감",
+                                desc: "신고기한(발생일 부터 1개월)내에 자진 신고한 경우<br />금품을 먼저 요구한 경우에는 적용대상에서 제외",
+                            },
+                            {
+                                sub: "거래상의 혜택 보장",
+                                desc: "CEO가 거래상의 혜택을 보장함.<br />제공되는 혜택은 당사의 내부심의를 통해 결정",
+                            },
+                        ],
+                    },
+                    {
+                        sectionLead: "2. 제 3자에 의한 신고<br />&nbsp;&nbsp; 「최대 1억원」까지 포상함",
+                        cols: ["금액환산 가능", "금액환산 불가능"],
+                        cells: [
+                            {
+                                sub: "제보내용 확인결과, 금액환산 가능한 경우",
+                                desc: "당사 정도경영 확립에 기여한 경우 손실감소(수익증대) 금액을<br />감안하여 내부기준에 따라 최대 1억원까지 지급",
+                            },
+                            {
+                                sub: "제보내용 확인결과, 금액환산 불가능한 경우",
+                                desc: "당사 정도경영 확립에 기여한 경우 50만원 정액 지급",
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                key: "wr-04",
+                title: "포상내역 선정",
+                desc: "-제보 내용이 당사 윤리위원회 사무국(경영진단팀)의 사실확인이 되어야 함<br />-포상 내역(금액 또는 거래상 혜택)의 결정 및 확정은 당사 심의 후 결정함.<br />-포상 사유가 중복하여 발생하는 경우는 가장 큰 금액 또는 혜택을 기준으로 함.",
+            },
+            {
+                key: "wr-05",
+                title: "포상금 지급 기준",
+                desc: "-신고자의 신고로 부정행위 적발 및 처리하는데 기여도를 고려하여 포상금을 결정한다.<br />-동일한 피신고자의 동일한 부정행위에 대하여 2인 이상의 신고자가 신고한 경우, 나중에 신고한 신고자에 대하여 보상금 또는 포상금을 지급하지 아니한다.<br />&nbsp;&nbsp;(나중에 신고된 내용이 부정행위 사건 해결에 결정적인 자료로 활용된 경우는 예외)<br />-동일한 피신고자의 동일한 부정행위에 대하여 2인 이상이 공동으로 신고한 경우, 포상금액 지급 기준의 범위내에서 균등분할 지급한다.",
+            },
+            {
+                key: "wr-06",
+                title: "신고자 기여도 결정 기준",
+                desc: "-증거자료의 신빙성 등 신고의 정확성<br />-피신고자의 부정행위가 신문, 방송 등 언론매체에 의하여 이미 공개된 것인지의 여부<br />-신고자가 신고와 관련한 불법행위를 행하였는지의 여부<br />-신고자가 부정행위를 신고할 의무를 가졌는지 또는 직무와 관련하여 부정부패를 신고하였는지 여부<br />그 밖에 신고자가 부정행위 사건의 해결에 기여한 정도",
+            },
+            {
+                key: "wr-07",
+                title: "제보사실 확인결과",
+                desc: "다음의 경우에는 포상을 실시하지 않음.<br />-제보 내용이 사실이 아닌 것으로 판명되거나 증거부족으로 인하여 사실여부 확인이 곤란한 경우<br />-외부 이해관계자와의 업무와 관련되지 않은 비 윤리행위 제보 시 (단, 공금횡령, 회사자산 절도 등 회사에 직접적인 손실을 끼치는 행위는 보상 가능)<br />-이미 제보된 사항이거나 경영진단팀 또는 기타 부서 또는 외부기관에서 이미 인지하여 조사가 진행중 이거나 징계절차 등이 진행 또는 완료된 사항<br />-언론보도 등에 의해 공개된 사항<br />-익명 또는 가명으로 제보하여 제보자가 누구인지 알 수 없는 경우<br />-단순 업무 개선과 관련된 사항<br />-조사관련 직무에 종사하는 경영진단팀 및 유사 부서 직원이 제보한 경우<br />기타 보상 심의 결과 보상이 부적절하다고 인정되는 경우",
+            },
         ],
         EthicsCardItems: [
             {
@@ -319,6 +509,11 @@ const t = computed(() => {
 const onTabChange1 = (idx) => {
     CTabIdx.value = idx;
     CTabIdxEsgArchive.value = 0;
+    CTabIdxEsgSystem.value = 0;
+};
+
+const goToWhistleTab = (idx) => {
+    CTabIdxEsgSystem.value = idx;
 };
 </script>
 
@@ -330,7 +525,8 @@ img{width:100%; height:auto; display:block; object-fit: cover;}
 .title_wrap::after{content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1;}
 .page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2;}
 .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
-.panel { padding-top: 80px; }
+.panel, .panel_third_depth { padding-top: 80px; }
+
 section + section{padding-top:120px;}
 .sub_header{margin-bottom:40px;}
 .sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
@@ -356,9 +552,9 @@ section + section{padding-top:120px;}
     
 
 /* 정도경영 > 지침 */
-section.gray_box { padding: 60px; background-color: #f8f8f8; border-radius: 20px;}
+.gray_box { padding: 60px; background-color: #f8f8f8; border-radius: 20px;}
 section.gray_box p{margin-top:40px;}
-section.gray_box > .button-area{width: 100%; display: flex; justify-content: center;}
+section.gray_box > .button_area{width: 100%; display: flex; justify-content: center;}
 .sec_ethics_cards .card_list { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 80px 40px; align-items: stretch; }
 .sec_ethics_cards .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
 .sec_ethics_cards .card_list > li > * { flex: 1; min-height: 0; }
@@ -369,13 +565,15 @@ section.gray_box > .button-area{width: 100%; display: flex; justify-content: cen
 .card_list :deep(.card_desc) { margin-top:12px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em;}
 .practice_title {margin-top:80px;font-weight: 700;font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
 .practice_desc { margin-top: 16px; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
-.practice_item {padding: 40px 0; border-bottom: 1px solid #E5E5E9; }
-.practice_item > em { color: #107af2; font-size: 2rem; font-style: normal; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block;}
-.practice_item > strong { margin-top:4px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block;}
-.practice_item > p {margin-top:16px; color: #67676F; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-.practice_list.type2 { padding: 64px; background-color: #f8f8f8; border-radius: 20px;}
-.practice_list.type2 .practice_item:first-child {padding-top: 0;}
-.practice_list.type2 .practice_item:last-child {padding-bottom: 0; border-bottom: 0; }
+.base_item {padding: 40px 0; border-bottom: 1px solid #E5E5E9; }
+.base_item > em { color: #107af2; font-size: 2rem; font-style: normal; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block;}
+.base_item > strong { margin-top:4px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block;}
+.base_item p {margin-top:16px; color: #67676F; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+.base_item > .button_area {margin-top:24px; display: flex; justify-content: center; gap:10px; justify-content: flex-start;}
+.base_list.type2 { padding: 64px; background-color: #f8f8f8; border-radius: 20px;}
+.base_list.type2 .base_item:first-child {padding-top: 0;}
+.base_list.type2 .base_item:last-child {padding-bottom: 0; border-bottom: 0; }
+.panel_third_depth .base_list .base_item:first-child{border-top: 1px solid #E5E5E9;}
 .signature_box { margin-top: 40px; padding: 40px 64px; border: 1px solid #E5E5E9; border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-between;}
 .signature_box > div {flex:1;}
 .signature_confirm {font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
@@ -384,6 +582,157 @@ section.gray_box > .button-area{width: 100%; display: flex; justify-content: cen
 .signature_box dl > dd {color:#67676F;font-size: 1.8rem;line-height: 1.4;}
 .signature_box dl > dd { margin-top: 4px; }
 .signature_box span{color:#C4C4D0; font-size: 1.8rem; font-weight: 700; line-height: 1.5;}
+
+/* 정도경영 > 제도 — type_03 (Figma TAB_3, node 470:17025) */
+.wrap_tabs_type03 {
+    width: 100%;
+}
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03) {
+    width: 100%;
+    gap: 0;
+}
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li) {
+    flex: 1;
+    min-width: 0;
+}
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li .item) {
+    width: 100%;
+    height: 60px;
+    padding: 0 16px;
+    color: #90909a;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #c4c4d0;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li + li .item) {
+    margin-left: -1px;
+}
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li.current .item) {
+    color: #ffffff;
+    background-color: #107af2;
+    border-color: #107af2;
+    position: relative;
+    z-index: 1;
+}
+
+/* 정도경영 > 제도 > 제보 이용 안내 (Figma 470:17030) */
+.base_item .gray_box{margin-top:20px; padding:56px 64px;}
+.base_item .gray_box .process_flow{display: flex; gap: 20px; align-items: center;}
+.base_item .gray_box .process_flow p {padding:20px;color:#107AF2; font-weight: 700;font-size: 1.6rem;line-height: 1.24;text-align: center; border-radius: 99px; background-color:#E7F2FE; flex:0 1 300px;}
+/* 제보 처리 절차: 가로 줄기 + 선분 2개로 만든 > 머리(이미지와 동일한 형태) */
+.base_item .gray_box .process_flow > span {
+    width: 40px;
+    height: 2px;
+    flex-shrink: 0;
+    align-self: center;
+    background-color: #107af2;
+    position: relative;
+    display: block;
+}
+.base_item .gray_box .process_flow > span::before,
+.base_item .gray_box .process_flow > span::after {
+    content: "";
+    width: 12px;
+    height: 2px;
+    position: absolute;
+    right:0;
+    top: 50%;
+    background-color: #107af2;
+    /* 줄기 쪽이 아니라 오른쪽 끝(촉)을 기준으로 벌려야 > (우향) */
+    transform-origin: right center;
+}
+.base_item .gray_box .process_flow > span::before {
+    transform: translateY(-50%) rotate(45deg);
+}
+.base_item .gray_box .process_flow > span::after {
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+/* 정도경영 > 제도 > 제보자 포상제도 (Figma 470:17264) */
+.panel_third_depth .reward_criteria {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.panel_third_depth .reward_table_scroll {
+    width: 100%;
+    margin-top: 20px;
+    padding:0 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.panel_third_depth .reward_table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    position: relative;
+}
+.panel_third_depth .reward_table:before{
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #161616;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
+}
+.panel_third_depth .reward_table th,
+.panel_third_depth .reward_table td {
+    border-bottom: 1px solid #e5e5e9;
+    vertical-align: top;
+    text-align: left;
+}
+
+.panel_third_depth .reward_table th {
+    padding:27px 24px;
+    background-color: #f8f8f8;
+    color: #161616;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.5;
+}
+.panel_third_depth .reward_table th + th{
+    border-left: 1px solid #e5e5e9;
+}
+
+
+.panel_third_depth .reward_table td{
+    padding:21px 24px;
+}
+.panel_third_depth .reward_table td p {
+    margin: 0;
+    font-size: 1.8rem;
+    line-height: 1.4;
+}
+.panel_third_depth .reward_table td p + p {
+    margin-top: 12px;
+}
+.panel_third_depth .reward_table_sub {
+    margin: 0 0 12px;
+    color: #4095F5;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.24;
+}
+.panel_third_depth .reward_report_btn {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+/* .panel_third_depth { min-height: 120px; } */
 @media screen and (max-width: 768px) {
     .p_br{display:none;}
     .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
@@ -423,11 +772,11 @@ section.gray_box > .button-area{width: 100%; display: flex; justify-content: cen
     .card_list :deep(.card_desc) { font-size: 1.6rem;line-height: 1.5; letter-spacing: -0.01em;}
     .practice_title { margin-top:0; font-size: 2rem; line-height: 1.35; }
     .practice_desc { margin-top: 12px; font-size: 1.6rem; }
-    .practice_item { padding: 16px 0; }
-    .practice_item > em { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
-    .practice_item > strong { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
-    .practice_item > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em;}
-    .practice_list.type2 { padding: 32px; border-radius: 12px; }
+    .base_item { padding: 16px 0; }
+    .base_item > em { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
+    .base_item > strong { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
+    .base_item p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em;}
+    .base_list.type2 { padding: 32px; border-radius: 12px; }
     .signature_box { margin-top: 24px; padding: 24px 20px; border-radius: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
     .signature_confirm{ font-size: 1.6rem; line-height: 1.5; }
     .signature_box dl { width: 100%; margin-top: 20px; }
@@ -435,6 +784,72 @@ section.gray_box > .button-area{width: 100%; display: flex; justify-content: cen
     .signature_box dl > dd { font-size: 1.4rem; line-height: 1.5; }
     .signature_box dl > dd { margin-top: 2px; }
     .signature_box span { width: 100%; font-size: 1.4rem; line-height: 1.4; text-align: right; }
+    .wrap_tabs_type03 {
+        margin-bottom: 32px;
+    }
+    .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li) {
+        flex: 0 0 auto;
+        min-width: 0;
+    }
+    .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li .item) {
+        width: auto;
+        height: clamp(48px, 14.93vw, 56px);
+        padding: 0 clamp(12px, 4.27vw, 16px);
+        font-size: 1.4rem;
+        line-height: 1.43;
+    }
+
+    .base_item .gray_box {
+        padding: clamp(24px, 6.4vw, 40px) clamp(16px, 5.33vw, 24px);
+    }
+    .base_item .gray_box .process_flow {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .base_item .gray_box .process_flow p {
+        flex: 1 1 auto;
+        width: 100%;
+        max-width: none;
+    }
+    .base_item .gray_box .process_flow > span {
+        width: 2px;
+        height: clamp(20px, 5.33vw, 24px);
+        margin: 0 auto;
+    }
+    .base_item .gray_box .process_flow > span::before,
+    .base_item .gray_box .process_flow > span::after {
+        left: 50%;
+        top: 100%;
+        width: 12px;
+        height: 2px;
+        margin-top: -1px;
+        /* 세로 줄기 아래쪽 끝(촉) 기준 → 아래로 진행 */
+        transform-origin: center bottom;
+    }
+    .base_item .gray_box .process_flow > span::before {
+        transform: translateX(-50%) rotate(45deg);
+    }
+    .base_item .gray_box .process_flow > span::after {
+        transform: translateX(-50%) rotate(-45deg);
+    }
+    .panel_third_depth .reward_table th,
+    .panel_third_depth .reward_table td {
+        padding: 16px 12px;
+    }
+    .panel_third_depth .reward_table th {
+        font-size: 1.6rem;
+    }
+    .panel_third_depth .reward_table td p {
+        font-size: 1.6rem;
+    }
+    .panel_third_depth .reward_table_sub {
+        font-size: 1.4rem;
+    }
+
+    .panel_third_depth .reward_report_btn {
+        margin-top: 32px;
+    }
+    /* .panel_third_depth { min-height: 80px; } */
    
 }
 </style>
