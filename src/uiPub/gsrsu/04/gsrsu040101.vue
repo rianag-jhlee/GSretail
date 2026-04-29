@@ -27,8 +27,8 @@
             <div v-show="CTabIdx === 0" class="panel" :aria-label="t.Tabs1?.[0]?.item || ''">
                 <!-- 소개 -->
                 <div v-show="CTabIdxEsgArchive === 0" class="panel_inner" :aria-label="t.TabsEsgArchive?.[0]?.item || ''">
-                    <header class="tab_tit_wrap">
-                        <h2 class="tab_tit"> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
+                    <header class="tab_header">
+                        <h2> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
                     </header>
                     <section>
                         <header class="sub_header">
@@ -66,8 +66,8 @@
                 </div>
                 <!-- 지침 -->
                 <div v-show="CTabIdxEsgArchive === 1" class="panel_inner" :aria-label="t.TabsEsgArchive?.[1]?.item || ''">
-                    <header class="tab_tit_wrap">
-                        <h2 class="tab_tit"> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
+                    <header class="tab_header">
+                        <h2> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
                     </header>
                     <section class="gray_box">
                         <header class="sub_header">
@@ -116,7 +116,7 @@
                         </ol>
                         <div class="signature_box">
                             <div>
-                                <p class="signature_confirm">{{ t.EthicsPledgeText }}</p>
+                                <p>{{ t.EthicsPledgeText }}</p>
                                 <dl>
                                     <dt>일시 : {{ t.EthicsPledgeMeta }}</dt>
                                     <dd>소속 : {{ t.EthicsPledgeCompany }}</dd>
@@ -216,12 +216,12 @@
                             <h3>{{ t.WhistleProtectPageTitle }}</h3>
                             <p>{{ t.WhistleProtectPageDesc }}</p>
                         </header>
-                        <ol class="base_list whistle_protect_list">
+                        <ol class="base_list">
                             <li v-for="(row, idx) in t.WhistleProtectSections" :key="row.key" class="base_item">
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
                                 <strong>{{ row.title }}</strong>
                                 <p v-html="row.desc"></p>
-                                <div v-if="row.grayBox" class="gray_box protect_gray_box">
+                                <div v-if="row.grayBox" class="gray_box gray_box">
                                     <strong>{{ row.grayBox.title }}</strong>
                                     <p v-html="row.grayBox.desc"></p>
                                 </div>
@@ -231,9 +231,9 @@
                 </div>
                 <div v-show="CTabIdxEsgArchive === 3" class="panel_inner" :aria-label="t.TabsEsgArchive?.[3]?.item || ''">
                     <template v-if="!isEthicsInquiryOpen">
-                        <header class="tab_tit_wrap">
-                            <h2 class="tab_tit" v-html="t.ReportIntroTitle"></h2>
-                            <p class="tab_tit_desc">{{ t.ReportIntroDesc }}</p>
+                        <header class="tab_header">
+                            <h2 v-html="t.ReportIntroTitle"></h2>
+                            <p>{{ t.ReportIntroDesc }}</p>
                         </header>
                         <section>
                             <ul class="report_channel_list">
@@ -263,8 +263,8 @@
                         </section>
                     </template>
                     <template v-else>
-                        <header class="tab_tit_wrap">
-                            <h2 class="tab_tit">정도경영 목소리</h2>
+                        <header class="tab_header">
+                            <h2>정도경영 목소리</h2>
                             <p>언제나 고객님의 입장이 되어 작은 소리에도 귀를 기울이겠습니다.</p>
                         </header>
                         <section>
@@ -291,6 +291,150 @@
                             <header class="sub_header">
                                 <h3>GS리테일 정도경영 제보 대상</h3>
                             </header>
+                            <NumberedInfoList
+                                class="ethics_target_list"
+                                :items="t.EthicsReportTargetItems"
+                                :show-icon="true"
+                            />
+                        </section>
+                        <section>
+                            <ConsentInfoBox
+                                :items="t.EthicsConsentItems"
+                                v-model="isEthicsConsentAgreed"
+                            />
+                            <ConsentInfoBox
+                                :items="t.EthicsConsentItems2"
+                                v-model="isEthicsConsentAgreed2"
+                            />
+                            <div class="report_form_wrap">
+                                <div class="apply_form">
+                                    <div class="form_head">
+                                        <h3 class="form_head_title">고객정보</h3>
+                                        <span class="form_required_note">* 필수 입력사항</span>
+                                    </div>
+                                    <div class="form_body">
+                                        <div class="form_row">
+                                            <div class="form_label">이름<span class="form_required">*</span></div>
+                                            <div class="form_field form_field_name">
+                                                <Inputs type="text" v-model="ethicsReportForm.name" />
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="form_label">이메일<span class="form_required">*</span></div>
+                                            <div class="form_field form_field_email">
+                                                <Inputs type="text" v-model="ethicsReportForm.emailId" />
+                                                <span class="form_sep">@</span>
+                                                <Inputs type="text" v-model="ethicsReportForm.emailDomain" />
+                                                <label class="select">
+                                                    <div>
+                                                        <select v-model="ethicsReportForm.emailDomainSelect">
+                                                            <option v-for="opt in ethicsEmailDomainOptions" :key="opt" :value="opt">{{ opt }}</option>
+                                                        </select>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="form_label">연락처<span class="form_required">*</span></div>
+                                            <div class="form_field form_field_phone">
+                                                <label class="select">
+                                                    <div>
+                                                        <select v-model="ethicsReportForm.phonePrefix">
+                                                            <option v-for="opt in ethicsPhonePrefixOptions" :key="opt" :value="opt">{{ opt }}</option>
+                                                        </select>
+                                                    </div>
+                                                </label>
+                                                <span class="form_sep">-</span>
+                                                <Inputs type="text" v-model="ethicsReportForm.phoneMid" />
+                                                <span class="form_sep">-</span>
+                                                <Inputs type="text" v-model="ethicsReportForm.phoneTail" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="apply_form">
+                                    <div class="form_head">
+                                        <h3 class="form_head_title">제보내용</h3>
+                                        <span class="form_required_note">* 필수 입력사항</span>
+                                    </div>
+                                    <div class="form_body">
+                                        <div class="form_row">
+                                            <div class="form_label">구분<span class="form_required">*</span></div>
+                                            <div class="form_field">
+                                                <label class="select">
+                                                    <div>
+                                                        <select v-model="ethicsReportForm.division">
+                                                            <option v-for="opt in ethicsDivisionOptions" :key="opt" :value="opt">{{ opt }}</option>
+                                                        </select>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="form_label">제보구분<span class="form_required">*</span></div>
+                                            <div class="form_field">
+                                                <label class="select">
+                                                    <div>
+                                                        <select v-model="ethicsReportForm.reportType">
+                                                            <option v-for="opt in ethicsReportTypeOptions" :key="opt" :value="opt">{{ opt }}</option>
+                                                        </select>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="form_label">매장명<span class="form_required">*</span></div>
+                                            <div class="form_field form_field_store">
+                                                <Inputs type="text" v-model="ethicsReportForm.storeName" />
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="form_label">제목<span class="form_required">*</span></div>
+                                            <div class="form_field">
+                                                <Inputs type="text" v-model="ethicsReportForm.title" />
+                                            </div>
+                                        </div>
+                                        <div class="form_row form_row_content">
+                                            <div class="form_label">내용<span class="form_required">*</span></div>
+                                            <div class="form_field form_field_content">
+                                                <textarea
+                                                    v-model="ethicsReportForm.content"
+                                                    placeholder="1.누가 :&#10;2.언제 :&#10;3.어디서 :&#10;4.내용 :&#10;5.아는 사람 :&#10;6.확인 방법 :"
+                                                />
+                                                <p class="form_field_note">※ 내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="form_label">파일첨부</div>
+                                            <div class="form_field form_field_file">
+                                                <div class="file_row">
+                                                    <button type="button" class="btn_file">파일선택</button>
+                                                    <span>선택된 파일 없음</span>
+                                                </div>
+                                                <p class="form_field_note">* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)</p>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="form_label">회신방법</div>
+                                            <div class="form_field">
+                                                <label class="select">
+                                                    <div>
+                                                        <select v-model="ethicsReportForm.replyType">
+                                                            <option v-for="opt in ethicsReplyTypeOptions" :key="opt" :value="opt">{{ opt }}</option>
+                                                        </select>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_action_area">
+                                    <Buttons btn-class="btn_big primary">신청</Buttons>
+                                    <Buttons btn-class="btn_big gray">취소</Buttons>
+                                </div>
+                            </div>
                         </section>
                     </template>
                 </div>
@@ -299,8 +443,8 @@
             <!-- 준법경영 -->
             <div v-show="CTabIdx === 1" class="panel" :aria-label="t.Tabs1?.[1]?.item || ''">
                 <div v-show="CTabIdxCompliance === 0" class="panel_inner" :aria-label="t.TabsCompliance?.[0]?.item || ''">
-                    <header class="tab_tit_wrap">
-                        <h2 class="tab_tit" v-html="t.ComplianceProgramHeroTitle"></h2>
+                    <header class="tab_header">
+                        <h2 v-html="t.ComplianceProgramHeroTitle"></h2>
                     </header>
                     <section>
                         <header class="sub_header">
@@ -313,21 +457,21 @@
                             :no-swipe="true"
                         />
                     </section>
-                    <div class="compliance_manual">
-                        <div class="compliance_manual_inner">
-                            <div>
-                                <strong>{{ t.ComplianceManualTitle }}</strong>
-                                <p>{{ t.ComplianceManualMeta }}</p>
-                            </div>
-                            <div class="button_area">
-                                <Buttons tag="a" href="#none" btn-class="btn_mid border btn_icon after">
-                                    {{ t.ComplianceManualBtnEbook }}
-                                </Buttons>
-                                <Buttons tag="a" href="#none" btn-class="btn_mid border btn_icon after">
-                                    {{ t.ComplianceManualBtnDownload }}
-                                </Buttons>
-                            </div>
+                    <div class="signature_box type02">
+                        <div>
+                            <strong>{{ t.ComplianceManualTitle }}</strong>
+                            <p>{{ t.ComplianceManualMeta }}</p>
                         </div>
+                        <div class="button_area">
+                            <Buttons tag="a" href="#none" btn-class="btn_mid border btn_icon after">
+                                {{ t.ComplianceManualBtnEbook }}
+                            </Buttons>
+                            <Buttons tag="a" href="#none" btn-class="btn_mid border btn_icon after">
+                                {{ t.ComplianceManualBtnDownload }}
+                            </Buttons>
+                        </div>
+                        <!-- <div class="compliance_manual_inner">
+                        </div> -->
                     </div>
                    
                     <!-- <section class="sec_compliance_manual" aria-label="공정거래 자율준수 편람">
@@ -354,7 +498,10 @@ import { computed, defineProps, ref } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
 import Buttons from "@/components/Buttons.vue";
+import Inputs from "@/components/Inputs.vue";
 import CardItem from "@/components/CardItem.vue";
+import NumberedInfoList from "@/components/NumberedInfoList.vue";
+import ConsentInfoBox from "@/components/ConsentInfoBox.vue";
 import imgEthics01 from "@/assets/images/dummy/gsrsu040101_01.png";
 import imgEthics02 from "@/assets/images/dummy/gsrsu040101_02.png";
 import imgEthics03 from "@/assets/images/dummy/gsrsu040101_03.png";
@@ -374,6 +521,28 @@ const CTabIdxEsgArchive = ref(0);
 const CTabIdxEsgSystem = ref(0);
 const CTabIdxCompliance = ref(0);
 const isEthicsInquiryOpen = ref(false);
+const isEthicsConsentAgreed = ref(false);
+const isEthicsConsentAgreed2 = ref(false);
+const ethicsEmailDomainOptions = ["직접입력", "naver.com", "gmail.com", "hanmail.net"];
+const ethicsPhonePrefixOptions = ["010", "011", "016", "017", "018", "019"];
+const ethicsDivisionOptions = ["사업부 선택", "GS25", "GS THE FRESH", "GS SHOP", "기타"];
+const ethicsReportTypeOptions = ["제보구분 선택", "부정행위", "불공정거래", "인권침해", "기타"];
+const ethicsReplyTypeOptions = ["이메일", "전화"];
+const ethicsReportForm = ref({
+    name: "",
+    emailId: "",
+    emailDomain: "",
+    emailDomainSelect: "직접입력",
+    phonePrefix: "010",
+    phoneMid: "",
+    phoneTail: "",
+    division: "사업부 선택",
+    reportType: "제보구분 선택",
+    storeName: "",
+    title: "",
+    content: "",
+    replyType: "이메일",
+});
 
 const langData = {
     ko: {
@@ -590,6 +759,51 @@ const langData = {
         ],
         ReportNotice:
             "※ 기타 제보 방법 : GS리테일 경영진단팀 (02-2006-2088 / singo@gsretail.com)<br />※ GS리테일에서는 <span class='txt_warn'>제보자 포상제도</span>를 실시하며, <span class='txt_warn'>제보자 보호제도</span>를 운영합니다.",
+        EthicsReportTargetItems: [
+            {
+                num: "01",
+                title: "불량한 직무수행",
+                desc: "업무 소홀/미흡 및 겸업 (투잡 등)<br />기준 위반",
+            },
+            {
+                num: "02",
+                title: "금전/선물 등 수수 및 접대",
+                desc: "당사 임직원과 금전/선물 등을<br />주거나 받거나, 접대를 하는 등의 행위",
+            },
+            {
+                num: "03",
+                title: "금전 거래 및 공동 투자",
+                desc: "당사 임직원이 금전 거래를<br />하는 등의 행위",
+            },
+            {
+                num: "04",
+                title: "불공정 거래 및 부정 청탁",
+                desc: "신규점포 오픈 시 기준<br />미준수 및 불공정 행위",
+            },
+            {
+                num: "05",
+                title: "불합리한 업무 관행/제도 개선 건의",
+                desc: "불필요한 업무 개선 요청",
+            },
+            {
+                num: "06",
+                title: "성희롱 및 직장내 괴롭힘",
+                desc: "",
+            },
+        ],
+        EthicsConsentItems: [
+            "- 입력하신 정보는 신속하고 정확한 처리를 위해 관련 부서(담당자)에게 전달되며 문의 및 컴플레인 응대를 위해서 사용됩니다.",
+            "- 제공받는 자: 고객님이 문의 신청한 GS리테일 점포 관리자, GS리테일 자회사, GS리테일에 입점 된 상품 제조사의 관리자(처리자)",
+            "- 이용 목적: 문의사항 확인 및 답변을 위해 활용",
+            "- 개인정보 항목: 이름, 연락처, 이메일",
+            "- 보유 및 이용기간: 접수 후 1년",
+        ],
+        EthicsConsentItems2 : [
+            "- 입력하신 정보는 문의사항에 대한 확인을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
+            "- 수집하는 개인정보 항목: 이름, 연락처, 이메일",
+            "- 수집이용 및 목적: 수집한 개인정보를 본인 식별, 문의사항 확인 및 답변을 위해 활용",
+            "- 보유 및 이용기간: 접수 후 1년",
+        ],
         EthicsCardItems: [
             {
                 key: "ethics-01",
@@ -747,6 +961,8 @@ const onTabChange1 = (idx) => {
     CTabIdxEsgSystem.value = 0;
     CTabIdxCompliance.value = 0;
     isEthicsInquiryOpen.value = false;
+    isEthicsConsentAgreed.value = false;
+    isEthicsConsentAgreed2.value = false;
 };
 
 const goToWhistleTab = (idx) => {
@@ -774,9 +990,9 @@ section + section{padding-top:120px;}
 .sub_header{margin-bottom:40px;}
 .sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sub_header p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
-.tab_tit_wrap{margin-bottom:80px; padding: 20px 0; text-align: center;}
-.tab_tit{  font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;}
-.tab_tit_desc{margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em;}
+.tab_header{margin-bottom:80px; padding: 20px 0; text-align: center;}
+.tab_header > h2{font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;}
+.tab_header > p{margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em;}
 .list_dotted > li { padding-left: 12px; position: relative }
 .list_dotted > li + li { margin-top: 8px }
 .list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color:#67676F; border-radius: 50%; position: absolute; top: 11px; left: 0 }
@@ -809,6 +1025,94 @@ section + section{padding-top:120px;}
 .purpose_feature_cards :deep(.feature_card_title) {
     color: #107af2;
 }
+:deep(.ethics_target_list.num_info_list) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 64px 60px;
+}
+.ethics_target_list :deep(.num_info_item) {
+    padding: 0;
+    border-bottom: 0;
+}
+.ethics_target_list :deep(.num_info_title) {
+    margin-bottom: 24px;
+}
+.ethics_target_list :deep(.num_info_num) {
+    font-size: 2.8rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+.ethics_target_list :deep(.num_info_title > strong) {
+    font-size: 2.4rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+.ethics_target_list :deep(.num_info_body > p) {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.24;
+    letter-spacing: 0;
+}
+
+.report_form_wrap .apply_form .form_field > :deep(.select),
+.report_form_wrap .apply_form .form_field > :deep(.input_wrap) {
+    width: 428px;
+    max-width: 428px;
+}
+.report_form_wrap .apply_form .form_field_phone label.select,
+.report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap) {
+    width: 134px;
+    max-width: 134px;
+}
+.report_form_wrap .apply_form .form_field_name > :deep(.input_wrap){
+    width: 205px;
+    max-width: 205px;
+}
+.report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(1)) {
+    width: 205px;
+    max-width: 205px;
+}
+.report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(3)),
+.report_form_wrap .apply_form .form_field_email label.select {
+    width: 180px;
+    max-width: 180px;
+}
+
+.report_form_wrap .apply_form .form_field_content > textarea {
+    width: 600px;
+    min-height: 170px;
+    padding: 12px 16px;
+    border: 1px solid #c4c4d0;
+    border-radius: 12px;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    resize: none;
+}
+.report_form_wrap .apply_form .form_field_content > textarea::placeholder{
+    color: #A4A4B0;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+.report_form_wrap .apply_form .form_row_content {
+    align-items: start;
+}
+.report_form_wrap .apply_form .form_row_content .form_label {
+    padding-top: 68px;
+}
+.report_form_wrap .apply_form .form_field_file .file_row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.report_form_wrap .apply_form .form_field_file .file_row > span {
+    color: #161616;
+    font-size: 1.4rem;
+    line-height: 1.4;
+}
+
+
+
 @media screen and (min-width: 769px) {
     .purpose_feature_cards :deep(.feature_card_item) {
         min-height: 194px;
@@ -832,10 +1136,55 @@ section + section{padding-top:120px;}
     :deep(.feature_cards_grid.feature_card_list) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    :deep(.ethics_target_list.num_info_list) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px 20px;
+    }
 }
 @media screen and (max-width: 768px) {
     :deep(.feature_cards_grid.feature_card_list) {
         grid-template-columns: 1fr;
+    }
+    :deep(.ethics_target_list.num_info_list) {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .ethics_target_list :deep(.num_info_icon) {
+        width: 60px;
+        height: 60px;
+    }
+    .ethics_target_list :deep(.num_info_title) {
+        margin-bottom: 6px;
+    }
+    .ethics_target_list :deep(.num_info_num) {
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0;
+    }
+    .ethics_target_list :deep(.num_info_title > strong) {
+        font-size: 1.8rem;
+        line-height: 1.5;
+        letter-spacing: 0;
+    }
+    .ethics_target_list :deep(.num_info_body > p) {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+    .report_form_wrap .apply_form .form_field > :deep(.input_wrap),
+    .report_form_wrap .apply_form .form_field_phone label.select,
+    .report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap),
+    .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(1)),
+    .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(3)),
+    .report_form_wrap .apply_form .form_field_email label.select {
+        width: 100%;
+        max-width: 100%;
+    }
+    .report_form_wrap .apply_form .form_field_content > textarea {
+        width: 100%;
+    }
+    .report_form_wrap .apply_form .form_row_content .form_label {
+        padding-top: 0;
     }
 }
 .sec_history { position: relative; }
@@ -855,8 +1204,8 @@ section + section{padding-top:120px;}
 
 /* 정도경영 > 지침 */
 .gray_box { padding: 60px; background-color: #f8f8f8; border-radius: 20px;}
-section.gray_box p{margin-top:40px;}
-section.gray_box > .button_area{width: 100%; display: flex; justify-content: center;}
+.gray_box p{margin-top:40px;}
+.gray_box > .button_area{width: 100%; display: flex; justify-content: center;}
 .sec_ethics_cards .card_list { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 80px 40px; align-items: stretch; }
 .sec_ethics_cards .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
 .sec_ethics_cards .card_list > li > * { flex: 1; min-height: 0; }
@@ -878,7 +1227,7 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
 .panel_third_depth .base_list .base_item:first-child{border-top: 1px solid #E5E5E9;}
 .signature_box { margin-top: 40px; padding: 40px 64px; border: 1px solid #E5E5E9; border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-between;}
 .signature_box > div {flex:1;}
-.signature_confirm {font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
+.signature_box p {font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
 .signature_box dl {margin-top: 40px;}
 .signature_box dl > dt {color:#67676F;font-size: 1.8rem;line-height: 1.4;}
 .signature_box dl > dd {color:#67676F;font-size: 1.8rem;line-height: 1.4;}
@@ -948,7 +1297,6 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     right:0;
     top: 50%;
     background-color: #107af2;
-    /* 줄기 쪽이 아니라 오른쪽 끝(촉)을 기준으로 벌려야 > (우향) */
     transform-origin: right center;
 }
 .base_item .gray_box .process_flow > span::before {
@@ -958,7 +1306,6 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     transform: translateY(-50%) rotate(-45deg);
 }
 
-/* 정도경영 > 제도 > 제보자 포상제도 (Figma 470:17264) */
 .panel_third_depth .reward_criteria {
     width: 100%;
     margin-top: 16px;
@@ -1036,11 +1383,11 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
 }
 
 /* 정도경영 > 제도 > 제보자 보호제도 (Figma 470:17701) */
-.whistle_protect_list .protect_gray_box {
+.base_list .gray_box {
     margin-top: 24px;
     padding: 40px 64px;
 }
-.whistle_protect_list .protect_gray_box > strong {
+.base_list .gray_box > strong {
     color: #67676f;
     font-size: 2rem;
     font-weight: 700;
@@ -1048,7 +1395,7 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     letter-spacing: -0.01em;
     display: block;
 }
-.whistle_protect_list .protect_gray_box > p {
+.base_list .gray_box > p {
     margin-top: 16px;
     color: #67676f;
     font-size: 2rem;
@@ -1125,40 +1472,31 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
 .report_channel_notice :deep(span){
     text-decoration: underline;
 }
-.compliance_manual {
-    margin-top: 120px;
-    padding: 40px 64px;
-    border: 1px solid #E5E5E9;
-    border-radius: 12px;
-    background-color: #ffffff;
-}
-.compliance_manual .compliance_manual_inner {
+
+.signature_box.type02{
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
     flex-wrap: wrap;
 }
-.compliance_manual .compliance_manual_inner > div:first-child strong {
+.signature_box.type02 strong {
     font-weight: 700;
     font-size: 2.8rem;
     line-height: 1.35;
     letter-spacing: -0.01em;
     display: block;
 }
-.compliance_manual .compliance_manual_inner > div:first-child p {
-    margin-top: 12px;
-    font-size: 2rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-.compliance_manual .compliance_manual_inner .button_area {
+
+.signature_box.type02 .button_area {
     margin-top: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-end;
 }
+
+
 .panel_inner header.sub_header p:only-child {
     margin-top: 0;
 }
@@ -1166,21 +1504,21 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
 @media screen and (max-width: 768px) {
     .p_br{display:none;}
     .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
-    .panel{padding-top: 48px;}
+    .panel, .panel_third_depth {padding-top: 48px;}
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
     .visual_sub { font-size: 2rem; }
-    .tab_tit_wrap{margin-bottom:56px; padding: 0;}
-    .tab_tit {font-size: 1.8rem; line-height: 1.4; text-align: left;}
-    .tab_tit_desc {font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em;}
+    .tab_header{margin-bottom:56px; padding: 0; text-align: left;}
+    .tab_header > h2 {font-size: 1.8rem; line-height: 1.4; text-align: left;}
+    .tab_header > p {font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em;}
     .sub_header{margin-bottom:32px;}
     .sub_header h3 { font-size: 2.4rem; text-align: left; }
     .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     section + section{padding-top:80px;}
-    section.gray_box{padding: 40px;}
-    section.gray_box p{margin-top: 32px; }
+    .gray_box{padding: 40px;}
+    .gray_box p{margin-top: 32px; }
     :deep(.feature_cards_grid.feature_card_list) { gap: 12px; }
-
+    .button_area [class*="btn_"] {width:auto; flex:1 1 auto;}
     .sec_compliance_manual {
         padding: 24px 20px;
     }
@@ -1233,15 +1571,18 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     .base_item p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em;}
     .base_list.type2 { padding: 32px; border-radius: 12px; }
     .signature_box { margin-top: 24px; padding: 24px 20px; border-radius: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
-    .signature_confirm{ font-size: 1.6rem; line-height: 1.5; }
+    .signature_box p { font-size: 1.6rem; line-height: 1.5; }
+    .signature_box.type02{justify-content: flex-start;align-items: flex-start;}
+    .signature_box.type02 strong{font-size: 2rem;}
+    .base_item .button_area,
+    .signature_box.type02 .button_area {width: 100%; display: flex; flex-direction: column; gap: 8px;}
+    .base_item .button_area :deep([class*="btn_"]),
+    .signature_box.type02 .button_area :deep([class*="btn_"]) {width: 100%;}
     .signature_box dl { width: 100%; margin-top: 20px; }
     .signature_box dl > dt { font-size: 1.4rem; line-height: 1.5; }
     .signature_box dl > dd { font-size: 1.4rem; line-height: 1.5; }
     .signature_box dl > dd { margin-top: 2px; }
     .signature_box span { width: 100%; font-size: 1.4rem; line-height: 1.4; text-align: right; }
-    .wrap_tabs_type03 {
-        margin-bottom: 32px;
-    }
     .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li) {
         flex: 0 0 auto;
         min-width: 0;
@@ -1304,11 +1645,15 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     .panel_third_depth .reward_report_btn {
         margin-top: 32px;
     }
-    .whistle_protect_list .protect_gray_box {
+    .base_list .gray_box {
         padding: 24px 20px;
     }
-    .whistle_protect_list .protect_gray_box > p {
+    .base_list .gray_box > strong{
+        font-size: 1.8rem;
+    }
+    .base_list .gray_box > p {
         margin-top: 12px;
+        font-size: 1.4rem;
     }
     .report_intro_desc {
         margin-top: -44px;
@@ -1343,7 +1688,7 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
         margin-top: 16px;
         font-size: 1.4rem;
     }
-    /* .panel_third_depth { min-height: 80px; } */
+
    
 }
 </style>
