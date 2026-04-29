@@ -741,18 +741,35 @@ section + section{padding-top:120px;}
     width: 100%;
     min-width: 0;
 }
-.purpose_feature_cards :deep(.feature_card_item) {
-    min-height: 194px;
-    padding: 32px;
-    border-radius: 12px;
-    background-color: #f8f8f8;
-}
 .law_feature_cards :deep(.feature_card_num),
 .law_feature_cards :deep(.feature_card_title){
     margin-bottom:6px;
 }
+.purpose_feature_cards :deep(.feature_card_desc),
 .law_feature_cards :deep(.feature_card_desc){
     color:#161616;
+}
+.purpose_feature_cards :deep(.feature_card_title) {
+    color: #107af2;
+}
+@media screen and (min-width: 769px) {
+    .purpose_feature_cards :deep(.feature_card_item) {
+        min-height: 194px;
+        padding: 32px;
+    }
+    /* 정도경영 목적과 취지: type="text" — 모바일은 FeatureCards 기본 스타일 */
+    .purpose_feature_cards :deep(.feature_card_title) {
+        margin-bottom: 6px;
+        font-size: 1.8rem;
+        line-height: 1.5;
+    }
+    .purpose_feature_cards :deep(.feature_card_desc) {
+        color: #161616;
+        font-weight: 700;
+        font-size: 2rem;
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+    }
 }
 @media screen and (max-width: 1024px) {
     :deep(.feature_cards_grid.feature_card_list) {
@@ -764,24 +781,6 @@ section + section{padding-top:120px;}
         grid-template-columns: 1fr;
     }
 }
-/* 정도경영 목적과 취지: type="text" */
-.purpose_feature_cards :deep(.feature_card_title) {
-    margin-bottom: 6px;
-    color: #107AF2;
-    font-size: 1.8rem;
-    line-height: 1.5;
-
-}
-.purpose_feature_cards :deep(.feature_card_desc) {
-color: #161616; 
-font-weight: 700;
-font-size: 2rem;
-line-height: 1.35;
-letter-spacing: -0.01em;
-
-}
-
-
 .sec_history { position: relative; }
 .history_list{padding-left:48px;position:relative;}
 .history_item { display: flex; gap: 32px; position: relative; }
@@ -1117,12 +1116,6 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     section.gray_box{padding: 40px;}
     section.gray_box p{margin-top: 32px; }
     :deep(.feature_cards_grid.feature_card_list) { gap: 12px; }
-    .purpose_feature_cards :deep(.feature_card_item) {
-        min-height: 0;
-        padding: 24px;
-    }
-    .purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 8px; font-size: 1.6rem; line-height: 1.24; }
-    .purpose_feature_cards :deep(.feature_card_desc) { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em;}
 
     .sec_compliance_manual {
         padding: 24px 20px;
