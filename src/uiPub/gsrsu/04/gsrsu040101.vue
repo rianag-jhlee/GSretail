@@ -14,18 +14,32 @@
                 :tab-items="t.TabsEsgArchive"
                 tab-class="type_02"
                 :tab-slide="true"
-            /> 
-        
+            />
+            <Tabs
+                v-if="CTabIdx === 1"
+                v-model="CTabIdxCompliance"
+                :tab-items="t.TabsCompliance"
+                tab-class="type_02"
+                :tab-slide="true"
+            />
+
             <!-- 정도경영 -->
             <div v-show="CTabIdx === 0" class="panel" :aria-label="t.Tabs1?.[0]?.item || ''">
                 <!-- 소개 -->
                 <div v-show="CTabIdxEsgArchive === 0" class="panel_inner" :aria-label="t.TabsEsgArchive?.[0]?.item || ''">
-                    <h2 class="tab_tit"> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
+                    <header class="tab_tit_wrap">
+                        <h2 class="tab_tit"> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
+                    </header>
                     <section>
                         <header class="sub_header">
                             <h3>목적과 취지</h3>
                         </header>
-                        <FeatureCards class="purpose_feature_cards" type="text" :items="t.PurposeFeatureItems" :no-swipe="true" />
+                        <FeatureCards
+                            class="purpose_feature_cards feature_cards_grid"
+                            type="text"
+                            :items="t.PurposeFeatureItems"
+                            :no-swipe="true"
+                        />
                     </section>
                     <section class="sec_history" aria-label="정도경영 연혁">
                         <header class="sub_header">
@@ -52,7 +66,9 @@
                 </div>
                 <!-- 지침 -->
                 <div v-show="CTabIdxEsgArchive === 1" class="panel_inner" :aria-label="t.TabsEsgArchive?.[1]?.item || ''">
-                    <h2 class="tab_tit"> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
+                    <header class="tab_tit_wrap">
+                        <h2 class="tab_tit"> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
+                    </header>
                     <section class="gray_box">
                         <header class="sub_header">
                             <h3>GS리테일 윤리규범</h3>
@@ -195,18 +211,95 @@
                             <Buttons tag="a" href="#none" btn-class="btn_xl primary btn_icon after">제보하기</Buttons>
                         </div>
                     </div>
-                    <div v-show="CTabIdxEsgSystem === 2" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[2]?.item || ''" />
+                    <div v-show="CTabIdxEsgSystem === 2" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[2]?.item || ''">
+                        <header class="sub_header">
+                            <h3>{{ t.WhistleProtectPageTitle }}</h3>
+                            <p>{{ t.WhistleProtectPageDesc }}</p>
+                        </header>
+                        <ol class="base_list whistle_protect_list">
+                            <li v-for="(row, idx) in t.WhistleProtectSections" :key="row.key" class="base_item">
+                                <em>{{ String(idx + 1).padStart(2, "0") }}</em>
+                                <strong>{{ row.title }}</strong>
+                                <p v-html="row.desc"></p>
+                                <div v-if="row.grayBox" class="gray_box protect_gray_box">
+                                    <strong>{{ row.grayBox.title }}</strong>
+                                    <p v-html="row.grayBox.desc"></p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
                 <div v-show="CTabIdxEsgArchive === 3" class="panel_inner" :aria-label="t.TabsEsgArchive?.[3]?.item || ''">
-                 
-
+                    <header class="tab_tit_wrap">
+                        <h2 class="tab_tit" v-html="t.ReportIntroTitle"></h2>
+                        <p class="tab_tit_desc">{{ t.ReportIntroDesc }}</p>
+                    </header>
+                    <section class="sec_report_channels">
+                        <ul class="report_channel_list">
+                            <li v-for="item in t.ReportChannelItems" :key="item.key" class="report_channel_item">
+                                <article class="report_channel_card">
+                                    <figure class="report_channel_thumb" :class="'thumb_' + item.key" aria-hidden="true" />
+                                    <div class="report_channel_body">
+                                        <h3>{{ item.title }}</h3>
+                                        <p v-html="item.desc"></p>
+                                        <div class="button_area">
+                                            <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon after">{{ item.btnText }}</Buttons>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                        </ul>
+                        <p class="report_channel_notice" v-html="t.ReportNotice"></p>
+                    </section>
                 </div>
             </div>
 
             <!-- 준법경영 -->
             <div v-show="CTabIdx === 1" class="panel" :aria-label="t.Tabs1?.[1]?.item || ''">
-                <!-- Figma 431:12931 — 환경경영 자료 (IR/공시 리스트 패턴) -->
-
+                <div v-show="CTabIdxCompliance === 0" class="panel_inner" :aria-label="t.TabsCompliance?.[0]?.item || ''">
+                    <header class="tab_tit_wrap">
+                        <h2 class="tab_tit" v-html="t.ComplianceProgramHeroTitle"></h2>
+                    </header>
+                    <section>
+                        <header class="sub_header">
+                            <p v-html="t.ComplianceProgramLead"></p>
+                        </header>
+                        <FeatureCards
+                            class="law_feature_cards feature_cards_grid"
+                            type="num"
+                            :items="t.ComplianceProgramFeatureItems"
+                            :no-swipe="true"
+                        />
+                    </section>
+                    <div class="compliance_manual">
+                        <div class="compliance_manual_inner">
+                            <div>
+                                <strong>{{ t.ComplianceManualTitle }}</strong>
+                                <p>{{ t.ComplianceManualMeta }}</p>
+                            </div>
+                            <div class="button_area">
+                                <Buttons tag="a" href="#none" btn-class="btn_mid border btn_icon after">
+                                    {{ t.ComplianceManualBtnEbook }}
+                                </Buttons>
+                                <Buttons tag="a" href="#none" btn-class="btn_mid border btn_icon after">
+                                    {{ t.ComplianceManualBtnDownload }}
+                                </Buttons>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <!-- <section class="sec_compliance_manual" aria-label="공정거래 자율준수 편람">
+                    </section> -->
+                </div>
+                <div v-show="CTabIdxCompliance === 1" class="panel_inner" :aria-label="t.TabsCompliance?.[1]?.item || ''">
+                    <!-- 자율준수 관리자 안내 -->
+                </div>
+                <div v-show="CTabIdxCompliance === 2" class="panel_inner" :aria-label="t.TabsCompliance?.[2]?.item || ''">
+                    <!-- 공정거래 4대 가이드라인 -->
+                </div>
+                <div v-show="CTabIdxCompliance === 3" class="panel_inner" :aria-label="t.TabsCompliance?.[3]?.item || ''">
+                    <!-- 공정거래 업무기준 -->
+                </div>
             </div>
 
 
@@ -237,6 +330,7 @@ const props = defineProps({
 const CTabIdx = ref(0);
 const CTabIdxEsgArchive = ref(0);
 const CTabIdxEsgSystem = ref(0);
+const CTabIdxCompliance = ref(0);
 
 const langData = {
     ko: {
@@ -254,6 +348,62 @@ const langData = {
             { item: "제보자 포상제도" },
             { item: "제보자 보호제도" },
         ],
+        TabsCompliance: [
+            { item: "자율준수 프로그램" },
+            { item: "자율준수 관리자 안내" },
+            { item: "공정거래 4대 가이드라인" },
+            { item: "공정거래 업무기준" },
+        ],
+        ComplianceProgramHeroTitle:
+            "GS리테일은 책임을 바탕으로 한 자유경쟁의 원칙에 따라 상호 신뢰와 협력으로 <br class=\"p_br\" />공동의 발전을 도모하기 위해 자율적으로 공정거래를 실천하고 있습니다.",
+        ComplianceProgramLead:
+            "GS리테일은 자율적 공정거래를 적극 실천하기 위해 ‘자율준수 프로그램’을 운영하고 있습니다.",
+        ComplianceProgramFeatureItems: [
+            {
+                num: "01",
+                title: "CP기준과 절차 마련 및 시행",
+                desc: "전사 구성원들이 공정거래 관련 법규 준수사항을 명확하게 인지하고 실천할 수 있도록 필요한 업무기준과 절차를 마련하고 시행하고 있습니다.",
+            },
+            {
+                num: "02",
+                title: "최고경영자의 자율준수 의지 및 지원",
+                desc: "최고경영자는 회사의 모든 구성원, 고객 및 이해관계자가 쉽게 인지할 수 있도록 자율준수 의지를 공개적으로 표명하고 CP운영을 적극적으로 지원하고 있습니다.",
+            },
+            {
+                num: "03",
+                title: "CP의 운영을 담당하는 자율준수 관리자 임명",
+                desc: "이사회 등 최고 의사결정기구에서 조직 내 자율준수 관리자를 임명하고 효과적인 CP운영에 대한 책임과 권한을 부여하고 있습니다.",
+            },
+            {
+                num: "04",
+                title: "자율준수 편람의 제작·활용",
+                desc: "회사의 모든 구성원이 쉽게 이해하고 실천할 수 있도록 공정거래 관련 법규 및 CP의 기준과 절차가 포함된 자율준수 편람을 제작하여 배포(e-book형태 포함)하고 구성원들은 활발하게 활용하고 있습니다.",
+            },
+            {
+                num: "05",
+                title: "지속적이고 체계적인 자율준수 교육 실시",
+                desc: "공정거래 관련법규 준수 사항 등에 대하여 최고 경영자를 포함한 전 구성원을 대상으로 효과적인 교육을 정기적으로 실시하고 있습니다.",
+            },
+            {
+                num: "06",
+                title: "내부감시체계 구축",
+                desc: "내부감시체계를 통해 취약점을 식별하고, 제도개선을 통해 투명한 공정거래 환경을 구축해 나가고 있습니다.",
+            },
+            {
+                num: "07",
+                title: "공정거래 관련 법규 위반 임직원에 대한 제재",
+                desc: "공정거래 관련 법규 위반 정도에 상응하는 제재 조치를 규정한 사규를 운영하고 있으며 구성원의 법 위반 발견 시, 적극 대응하고<br />향후 유사 행위가 재발하지 않도록 예방활동을 하고 있습니다.",
+            },
+            {
+                num: "08",
+                title: "효과성 평가와 개선조치",
+                desc: "CP가 효과적이고 지속적으로 운영될 수 있도록 CP의 기준, 절차 및 운용 등에 대한 점검과 평가 등을 실시하고 그에 따라 제도개선 조치 등을 시행하고 있습니다.",
+            },
+        ],
+        ComplianceManualTitle: "공정거래 자율준수 편람",
+        ComplianceManualMeta: "(개정 2024.12)",
+        ComplianceManualBtnEbook: "공정거래 자율준수 편람 e-book 보기",
+        ComplianceManualBtnDownload: "다운로드",
         WhistleGuideSections: [
             {
                 key: "wg-01",
@@ -355,6 +505,48 @@ const langData = {
                 desc: "다음의 경우에는 포상을 실시하지 않음.<br />-제보 내용이 사실이 아닌 것으로 판명되거나 증거부족으로 인하여 사실여부 확인이 곤란한 경우<br />-외부 이해관계자와의 업무와 관련되지 않은 비 윤리행위 제보 시 (단, 공금횡령, 회사자산 절도 등 회사에 직접적인 손실을 끼치는 행위는 보상 가능)<br />-이미 제보된 사항이거나 경영진단팀 또는 기타 부서 또는 외부기관에서 이미 인지하여 조사가 진행중 이거나 징계절차 등이 진행 또는 완료된 사항<br />-언론보도 등에 의해 공개된 사항<br />-익명 또는 가명으로 제보하여 제보자가 누구인지 알 수 없는 경우<br />-단순 업무 개선과 관련된 사항<br />-조사관련 직무에 종사하는 경영진단팀 및 유사 부서 직원이 제보한 경우<br />기타 보상 심의 결과 보상이 부적절하다고 인정되는 경우",
             },
         ],
+        WhistleProtectPageTitle: "제보자 보호제도",
+        WhistleProtectPageDesc: "다음과 같은 임직원 행동규범을 신설/직원 교육 등을 통하여, 제보자의 비밀유지를 강화함.",
+        WhistleProtectSections: [
+            {
+                key: "wp-01",
+                title: "제보자 신분누설 및 색출행위 금지",
+                desc: "-제보와 관련된 사실을 확인하는 경영진단팀은 제보자 본인의 동의 없이 제보자 및 조사 협조자의 신분 공개 또는 암시를 금지함.<br />-직무상 또는 우연히 제보자의 신분을 인지한 임직원은 누구든지 제보자의 신분 누설을 금함.<br />-피제보자 또는 피제보자의 소속 부서 및 기타 관련부서에서 경영진단팀 등에 제보자의 신분에 대한 문의, 제보자를 알아내기 위한 탐문 활동 등 제보자의 신분노출이 가능한 모든 행위를 금지함.<br />-신분 보호 의무위반(인사상/거래상 불이익)시 관련자는 처벌함.(전사 윤리위원회에 상정함)<br />제보를 한 임직원 및 업체에 대한 아래와 같은 불이익 조치를 금지하며, 해당 불이익 조치를 행한 임직원에 대해서는 전사윤리위원회에 상정함.",
+                grayBox: {
+                    title: "불이익 조치 정의",
+                    desc: "1)파면, 해임, 해고 그 밖에 신분 상실에 해당하는 신분상의 불이익 조치<br />2)징계,정직, 승진 제한, 그 밖에 부당한 인사조치<br />3)전보,전근, 직무 미 부여, 직무 재배치, 그 밖에 본인의 의사에 반하는 인사조치<br />4)주의 대상자 명단 작성 또는 그 명단의 공개, 집단 따돌림, 폭행 또는 폭언, 그 밖에 정신적, 신체적 손상을 가져오는 행위<br />5)물품계약 또는 용역계약의 해지, 그 밖에 경제적 불이익을 주는 조치",
+                },
+            },
+            {
+                key: "wp-02",
+                title: "제보자 신분노출이 예상되는 경우",
+                desc: "-제보자 신분노출(예상)시, 당사자는 경영진단팀에 통보 경영진단팀은 신분노출 경로를 조사하여, 관련자를 전사 윤리위원회에 상정함.<br />-제보자 본인이 원할 경우, 경영진단팀 면담을 요청할 수 있으며, 이 경우 경영진단팀은 CEO 보고 후, 해당 색출시도 임직원에 대해 즉시 보직변경/이동 발령 등 인사조치 권고를 할 수 있음.",
+            },
+        ],
+        ReportIntroTitle: "GS리테일 임직원 및 파트너사의 <span class='txt_blue'>부정/불공정 행위 제보와 개선제안</span>에 대한 의견을 쓰는 곳입니다.",
+        ReportIntroDesc: "아래 각 메뉴별 안내사항을 참고 하셔서 작성하여 주시기 바랍니다.",
+        ReportChannelItems: [
+            {
+                key: "voice",
+                title: "고객의 소리",
+                desc: "GS25/GS SHOP/GS THE FRESH/POP 이용 중<br />고객불만/불편/칭찬사항은 고객의 소리에 접수하시면 관련부서에서 신속히 처리가 됩니다.",
+                btnText: "고객의 소리 바로가기",
+            },
+            {
+                key: "ethics",
+                title: "정도경영 목소리",
+                desc: "임직원/협력업체 등 부정/불공정 사항 제보 → 조사부서(경영진단팀) 제보",
+                btnText: "문의하기",
+            },
+            {
+                key: "redwhistle",
+                title: "레드휘슬 (외부제보채널)",
+                desc: "GS리테일 정도경영 관련 불공정행위 및 윤리위반 행위 제보<br />→ 외부기관에서 운영하는 익명제보 시스템으로 익명성과 보안을 철저히 보호",
+                btnText: "문의하기",
+            },
+        ],
+        ReportNotice:
+            "※ 기타 제보 방법 : GS리테일 경영진단팀 (02-2006-2088 / singo@gsretail.com)<br />※ GS리테일에서는 <span class='txt_warn'>제보자 포상제도</span>를 실시하며, <span class='txt_warn'>제보자 보호제도</span>를 운영합니다.",
         EthicsCardItems: [
             {
                 key: "ethics-01",
@@ -510,6 +702,7 @@ const onTabChange1 = (idx) => {
     CTabIdx.value = idx;
     CTabIdxEsgArchive.value = 0;
     CTabIdxEsgSystem.value = 0;
+    CTabIdxCompliance.value = 0;
 };
 
 const goToWhistleTab = (idx) => {
@@ -526,16 +719,69 @@ img{width:100%; height:auto; display:block; object-fit: cover;}
 .page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2;}
 .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
 .panel, .panel_third_depth { padding-top: 80px; }
-
+/* v-html 삽입 노드에는 scoped data 속성이 없으므로 :deep 필요 */
+:deep(.txt_blue){color:#107AF2 !important;}
+:deep(.txt_warn){color:#FB6432 !important;}
 section + section{padding-top:120px;}
 .sub_header{margin-bottom:40px;}
 .sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sub_header p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
-.tab_tit{ margin-bottom:80px;padding: 20px 0; font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;text-align: center;}
-.purpose_feature_cards :deep(.feature_card_list) { gap: 20px; }
-.purpose_feature_cards :deep(.feature_card_item) { width: calc((100% - 40px) / 3); min-height: 194px; padding: 32px; border-radius: 12px; background-color: #f8f8f8; }
-.purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 6px; color: #107af2; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
-.purpose_feature_cards :deep(.feature_card_desc) { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.tab_tit_wrap{margin-bottom:80px; padding: 20px 0; text-align: center;}
+.tab_tit{  font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;}
+.tab_tit_desc{margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em;}
+/* FeatureCards 공통: 그리드(PC 3열 / 태블릿 2열 / 모바일 1열)
+   부모에서 준 class는 루트 ul(feature_card_list)에 병합되므로 자손 선택자가 아닌 동일 요소 선택 */
+:deep(.feature_cards_grid.feature_card_list) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+.feature_cards_grid :deep(.feature_card_item) {
+    width: 100%;
+    min-width: 0;
+}
+.purpose_feature_cards :deep(.feature_card_item) {
+    min-height: 194px;
+    padding: 32px;
+    border-radius: 12px;
+    background-color: #f8f8f8;
+}
+.law_feature_cards :deep(.feature_card_num),
+.law_feature_cards :deep(.feature_card_title){
+    margin-bottom:6px;
+}
+.law_feature_cards :deep(.feature_card_desc){
+    color:#161616;
+}
+@media screen and (max-width: 1024px) {
+    :deep(.feature_cards_grid.feature_card_list) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media screen and (max-width: 768px) {
+    :deep(.feature_cards_grid.feature_card_list) {
+        grid-template-columns: 1fr;
+    }
+}
+/* 정도경영 목적과 취지: type="text" */
+.purpose_feature_cards :deep(.feature_card_title) {
+    margin-bottom: 6px;
+    color: #107AF2;
+    font-size: 1.8rem;
+    line-height: 1.5;
+
+}
+.purpose_feature_cards :deep(.feature_card_desc) {
+color: #161616; 
+font-weight: 700;
+font-size: 2rem;
+line-height: 1.35;
+letter-spacing: -0.01em;
+
+}
+
+
 .sec_history { position: relative; }
 .history_list{padding-left:48px;position:relative;}
 .history_item { display: flex; gap: 32px; position: relative; }
@@ -732,6 +978,127 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     display: flex;
     justify-content: center;
 }
+
+/* 정도경영 > 제도 > 제보자 보호제도 (Figma 470:17701) */
+.whistle_protect_list .protect_gray_box {
+    margin-top: 24px;
+    padding: 40px 64px;
+}
+.whistle_protect_list .protect_gray_box > strong {
+    color: #67676f;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    display: block;
+}
+.whistle_protect_list .protect_gray_box > p {
+    margin-top: 16px;
+    color: #67676f;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+/* 정도경영 > 제보 (Figma 474:29330) */
+.report_intro_desc {
+    margin-bottom: 80px;
+    font-size: 2.4rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+.sec_report_channels {
+    width: 100%;
+}
+.report_channel_list {
+    width: 100%;
+    border-top: 1px solid #e5e5e9;
+}
+.report_channel_item {
+    border-bottom: 1px solid #e5e5e9;
+}
+.report_channel_card {
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    gap: 40px;
+}
+.report_channel_thumb {
+    width: 340px;
+    min-width: 340px;
+    height: 230px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    display: block;
+}
+.report_channel_thumb.thumb_voice { background: linear-gradient(135deg, #d9e8fb 0%, #f8f8f8 100%); }
+.report_channel_thumb.thumb_ethics { background: linear-gradient(135deg, #d4f0df 0%, #f8f8f8 100%); }
+.report_channel_thumb.thumb_redwhistle { background: linear-gradient(135deg, #fde2e2 0%, #f8f8f8 100%); }
+.report_channel_body {
+    width: calc(100% - 380px);
+}
+.report_channel_body h3 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+.report_channel_body > p {
+    margin-top: 16px;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+.report_channel_body .button_area {
+    margin-top: 24px;
+}
+.report_channel_notice {
+    margin-top: 20px;
+    color: #67676f;
+    font-size: 1.8rem;
+    line-height: 1.4;
+}
+.report_channel_notice :deep(span){
+    text-decoration: underline;
+}
+.compliance_manual {
+    margin-top: 120px;
+    padding: 40px 64px;
+    border: 1px solid #E5E5E9;
+    border-radius: 12px;
+    background-color: #ffffff;
+}
+.compliance_manual .compliance_manual_inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.compliance_manual .compliance_manual_inner > div:first-child strong {
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    display: block;
+}
+.compliance_manual .compliance_manual_inner > div:first-child p {
+    margin-top: 12px;
+    font-size: 2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+.compliance_manual .compliance_manual_inner .button_area {
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+.panel_inner header.sub_header p:only-child {
+    margin-top: 0;
+}
 /* .panel_third_depth { min-height: 120px; } */
 @media screen and (max-width: 768px) {
     .p_br{display:none;}
@@ -740,17 +1107,48 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
     .visual_sub { font-size: 2rem; }
-    .tab_tit { margin-bottom:56px;padding: 0; font-size: 1.8rem; line-height: 1.4; text-align: left;}
+    .tab_tit_wrap{margin-bottom:56px; padding: 0;}
+    .tab_tit {font-size: 1.8rem; line-height: 1.4; text-align: left;}
+    .tab_tit_desc {font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em;}
     .sub_header{margin-bottom:32px;}
     .sub_header h3 { font-size: 2.4rem; text-align: left; }
     .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     section + section{padding-top:80px;}
     section.gray_box{padding: 40px;}
     section.gray_box p{margin-top: 32px; }
-    .purpose_feature_cards :deep(.feature_card_list) { gap: 12px; }
-    .purpose_feature_cards :deep(.feature_card_item) { width: 100%; min-height: 0; padding: 24px; }
+    :deep(.feature_cards_grid.feature_card_list) { gap: 12px; }
+    .purpose_feature_cards :deep(.feature_card_item) {
+        min-height: 0;
+        padding: 24px;
+    }
     .purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 8px; font-size: 1.6rem; line-height: 1.24; }
     .purpose_feature_cards :deep(.feature_card_desc) { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em;}
+
+    .sec_compliance_manual {
+        padding: 24px 20px;
+    }
+    .sec_compliance_manual .compliance_manual_inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .sec_compliance_manual .compliance_manual_inner > div:first-child strong {
+        font-size: 2rem;
+        line-height: 1.35;
+    }
+    .sec_compliance_manual .compliance_manual_inner > div:first-child p {
+        margin-top: 6px;
+        font-size: 1.6rem;
+        line-height: 1.5;
+    }
+    .sec_compliance_manual .compliance_manual_inner .button_area {
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .sec_compliance_manual .compliance_manual_inner .button_area :deep(a),
+    .sec_compliance_manual .compliance_manual_inner .button_area :deep(button) {
+        width: 100%;
+    }
     .history_list { padding-left: 20px; }
     .history_item { gap: 8px; flex-direction: column; }
     .history_item::before { width: 8px; height: 8px; border-width: 4px; top: 8px; left: -20px; }
@@ -848,6 +1246,45 @@ section.gray_box > .button_area{width: 100%; display: flex; justify-content: cen
 
     .panel_third_depth .reward_report_btn {
         margin-top: 32px;
+    }
+    .whistle_protect_list .protect_gray_box {
+        padding: 24px 20px;
+    }
+    .whistle_protect_list .protect_gray_box > p {
+        margin-top: 12px;
+    }
+    .report_intro_desc {
+        margin-top: -44px;
+        margin-bottom: 40px;
+        font-size: 1.6rem;
+        text-align: left;
+    }
+    .report_channel_card {
+        padding: 24px 0;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .report_channel_thumb {
+        width: 100%;
+        min-width: 0;
+        height: 190px;
+    }
+    .report_channel_body {
+        width: 100%;
+    }
+    .report_channel_body h3 {
+        font-size: 2.4rem;
+    }
+    .report_channel_body > p {
+        margin-top: 12px;
+        font-size: 1.6rem;
+    }
+    .report_channel_body .button_area {
+        margin-top: 16px;
+    }
+    .report_channel_notice {
+        margin-top: 16px;
+        font-size: 1.4rem;
     }
     /* .panel_third_depth { min-height: 80px; } */
    
