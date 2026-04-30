@@ -233,4 +233,5 @@ label.select.err > em {display:block;}
     .tab_wrap ul.type_02 li .item {padding:8px 18px; color:#666666; font-size:14px;}
     .btn_download_file {gap:0px;}
     .btn_download_file span {font-size:0;}
+    .tab_wrap ul.type_04 li .item {font-size:14px;}
 }

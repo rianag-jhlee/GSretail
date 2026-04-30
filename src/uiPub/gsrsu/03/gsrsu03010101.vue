@@ -231,11 +231,6 @@
                                                         <col style="width: 15%;">
                                                         <col style="width: auto;">
                                                     </colgroup>
-                                                    <thead>
-                                                        <tr>
-                                                            <th v-for="th in t.CompetencySupport.Education.Table.Thead" :key="th">{{ th }}</th>
-                                                        </tr>
-                                                    </thead>
                                                     <tbody>
                                                         <tr v-for="(tr, idx) in t.CompetencySupport.Education.Table.Tbody" :key="idx">
                                                             <td class="ac"><strong>{{ tr.name }}</strong></td>
@@ -866,7 +861,46 @@
                                     <div v-if="SubTabIdx2 === 2">인재경영 지표 내용</div>
 
                                     <!-- gsrsu03030204 -->
-                                    <div v-if="SubTabIdx2 === 3">인재경영 실적자료 내용</div>
+                                    <div v-if="SubTabIdx2 === 3" class="talent_performance_data">
+                                        <div class="intro_summary">
+                                            <p class="text_summary_sub">{{ t.protect.talentmanagement.part_4.Summary }}</p>
+                                            <p class="GS" v-html="t.protect.talentmanagement.part_4.Desc"></p>
+                                        </div>
+
+                                        <div class="policy_wrap mt60">
+                                            <table>
+                                                <colgroup>
+                                                    <col style="width: 100px;">
+                                                    <col style="width: auto;">
+                                                    <col style="width: 200px;">
+                                                    <col style="width: 200px;">
+                                                </colgroup>
+                                                <thead>
+                                                    <tr>
+                                                        <th v-for="th in t.protect.talentmanagement.part_4.Table.Thead" :key="th" class="ac">{{ th }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(tr, idx) in t.protect.talentmanagement.part_4.Table.Tbody" :key="'perf-'+idx">
+                                                        <td class="ac">{{ tr.num }}</td>
+                                                        <td class="al">{{ tr.tit }}</td>
+                                                        <td class="ac">
+                                                            <!-- item.link를 tr.link로 수정 -->
+                                                            <button type="button" class="btn_download_file" @click="handleDownload(tr.link)">
+                                                                <span class="file_type_text">{{ t.protect.talentmanagement.part_4.txt }}</span>
+                                                            </button>
+                                                        </td>
+                                                        <td class="ac">{{ tr.date }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- 페이지네이션 (기본 Pagination 컴포넌트 활용) -->
+                                        <div class="pagination_wrap mt60">
+                                            <Pagination v-model="page" :totalPages="5" :visiblePages="5" @change="handlePage" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -1535,7 +1569,19 @@ export default {
                                 ]
                             },
                             part_3:{},
-                            part_4:{},
+                            part_4: {
+                                Summary: "GS리테일의 인재 경영과 관련된 실적 자료들을 열람하실 수 있습니다.",
+                                Desc: "본 자료는 이해 관계자 및 기관, 주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br/>용도 외 활용, 불법 유출 시에는 법에 의해 처벌을 받으실 수 있습니다.",
+                                Table: {
+                                    Tbody: [
+                                        {num: 4, tit: "인권 교육 실적 자료", date: "2021.06.21", url: "/files/human_rights_edu_2021.pdf" },
+                                        {num: 3, tit: "퇴직자 지원(창업·재고용) 제도", date: "2021.02.19", url: "/files/retirement_support.pdf" },
+                                        {num: 2, tit: "인원, 임금, 교육훈련비 현황", date: "2021.02.19", url: "/files/salary_status.pdf" },
+                                        {num: 1, tit: "산업안전보건 교육 자료", date: "2021.02.19", url: "/files/safety_edu.pdf" }
+                                    ]
+                                },
+                                txt:'다운로드'
+                            },
                         },
                         customer: {},
                         safetymanagement: {},
@@ -1561,6 +1607,22 @@ export default {
         handlePage(page) {
             console.log("선택된 페이지:", page);
             this.page = page;
+        },
+        handleDownload(link) {
+            if (!link) {
+                alert("연결된 파일이 없습니다.");
+                return;
+            }
+            // 방법 1: 새 창으로 열기 (PDF 등 브라우저에서 지원하는 경우)
+            window.open(link, '_blank');
+
+            /* 
+            방법 2: 강제 다운로드 (파일 이름 지정이 필요한 경우)
+            const anchor = document.createElement('a');
+            anchor.href = link;
+            anchor.download = ''; // 브라우저가 파일명을 판단하게 하거나 직접 지정 가능
+            anchor.click();
+                */
         }
     }
 };
@@ -1741,8 +1803,15 @@ export default {
     .human_rights_management .text_area span {margin-bottom:12px; font-size:32px; font-weight:700; display:block;}
     .human_rights_management .owner_card_layout {grid-template-columns: repeat(4, 1fr);}
 
-    /* 인재경영 */
+    /* 인재육성체계 */
     .p_desc {font-size:16px;}
+
+    /* 인재경영실적자료 */
+    .talent_performance_data .text_summary_sub {margin-bottom:16px;}
+    .talent_performance_data .intro_summary .GS {color:#90909A; font-size: 20px; line-height: 1.5;}
+    .talent_performance_data .policy_wrap table {border-top: 1px solid #161616;}
+    .talent_performance_data .policy_wrap th {background-color: #fff; border-bottom: 1px solid #E5E5E5;}
+    .talent_performance_data .policy_wrap td {border-right:0; border-left:0; border-bottom: 1px solid #E5E5E5; padding: 24px;}
 
 
     @media screen and (max-width: 1024px) {
@@ -1811,5 +1880,10 @@ export default {
         .vulnerable_support .brand_grid li {max-width:100%}
         .community_support_area .brand_grid {gap:0px 20px;}
         .human_rights_management .owner_card_layout {grid-template-columns: repeat(1, 1fr);}
+        .talent_performance_data .policy_wrap table {min-width: 500px;}
+        .talent_performance_data .intro_summary .GS {font-size: 16px;}
+        .talent_performance_data .intro_summary :deep(.GS) br {display:none;}
+        .talent_performance_data .policy_wrap tr td:last-of-type {display:none;}
+        .talent_performance_data .policy_wrap table colgroup col:last-of-type {display:none;}
     }
 </style>

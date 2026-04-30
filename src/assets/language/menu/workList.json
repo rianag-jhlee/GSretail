@@ -923,7 +923,7 @@
         "link": "/gsrsu03030201",
         "startDate": "26-04-30",
         "endDate": "26-04-30",
-        "status": "ing",
+        "status": "",
         "note": "gsrsu03010101 내 확인가능"
     },
     {
@@ -931,9 +931,9 @@
         "type": "tab",
         "path": "gsrsu/03/gsrsu03010101",
         "link": "/gsrsu03030202",
-        "startDate": "26-04-28",
-        "endDate": "26-04-2",
-        "status": "",
+        "startDate": "26-04-30",
+        "endDate": "26-04-30",
+        "status": "com",
         "note": "gsrsu03010101 내 확인가능"
     },
     {
@@ -951,9 +951,9 @@
         "type": "tab",
         "path": "gsrsu/03/gsrsu03010101",
         "link": "/gsrsu03030204",
-        "startDate": "26-04-28",
-        "endDate": "26-04-2",
-        "status": "",
+        "startDate": "26-04-30",
+        "endDate": "26-04-30",
+        "status": "com",
         "note": "gsrsu03010101 내 확인가능"
     },
     {
