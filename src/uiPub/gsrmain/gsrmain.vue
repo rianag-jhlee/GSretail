@@ -1,16 +1,18 @@
 <template>
     <div class="content">
         <div class="main_visual">
-            <swiper class="mainSwiper" :modules="swiperModules" v-bind="visualOptions" @slideChange="onSlideChange">
-                <swiper-slide v-for="item in t.mainVisual.items" :key="item.img">
-                    <div class="slide" :style="{ backgroundImage: 'url(' + item.img + ')' }">
-                        <p class="main_copy">
-                            <strong v-html="item.title"></strong>
-                            <span>{{ item.sub }}</span>
-                        </p>
+            <div class="swiper mainSwiper" ref="mainSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="item in t.mainVisual.items" :key="item.img">
+                        <div class="slide" :style="{ backgroundImage: 'url(' + item.img + ')' }">
+                            <p class="main_copy">
+                                <strong v-html="item.title"></strong>
+                                <span>{{ item.sub }}</span>
+                            </p>
+                        </div>
                     </div>
-                </swiper-slide>
-            </swiper>
+                </div>
+            </div>
         </div>
 
         <section v-if="t.sec01" class="sec01">
@@ -57,22 +59,24 @@
         <section v-if="t.sec03" class="sec03">
             <h2 v-html="t.sec03.title"></h2>
 
-            <swiper class="Swiper" :modules="swiperModules" v-bind="Options_sec03">
-                <swiper-slide v-for="item in t.sec03.items" :key="item.img">
-                    <div class="slide">
-                        <span class="thumb">
-                            <em><img :src="item.img" /></em>
-                        </span>
-                        <div>
-                            <em><img :src="item.sub" /></em>
-                            <p>
-                                <strong>{{ item.brand }}</strong>
-                                <span>{{ item.txt }}</span>
-                            </p>
+            <div class="swiper Swiper" ref="sec03Swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="item in t.sec03.items" :key="item.img">
+                        <div class="slide">
+                            <span class="thumb">
+                                <em><img :src="item.img" /></em>
+                            </span>
+                            <div>
+                                <em><img :src="item.sub" /></em>
+                                <p>
+                                    <strong>{{ item.brand }}</strong>
+                                    <span>{{ item.txt }}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </swiper-slide>
-            </swiper>
+                </div>
+            </div>
         </section>
 
         <section v-if="t.sec04" class="sec04">
@@ -84,25 +88,27 @@
                 </li>
             </ul>
 
-            <swiper class="Swiper" :modules="swiperModules" v-bind="Options_sec04">
-                <swiper-slide v-for="item in t.sec04.items" :key="item.img">
-                    <div class="slide">
-                        <span class="thumb">
-                            <em><img :src="item.img" /></em>
-                        </span>
+            <div class="swiper" ref="sec04Swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="(item, i) in t.sec04.items" :key="i">
+                        <div class="slide">
+                            <span class="thumb">
+                                <em><img :src="item.img" /></em>
+                            </span>
 
-                        <div class="txt">
-                            <ul>
-                                <li v-for="(sub, i) in item.item" :key="i">
-                                    <em>{{ sub.cate }}</em>
-                                </li>
-                            </ul>
+                            <div class="txt">
+                                <ul>
+                                    <li v-for="(sub, i) in item.item" :key="i">
+                                        <em>{{ sub.cate }}</em>
+                                    </li>
+                                </ul>
 
-                            <p v-html="item.title"></p>
+                                <p v-html="item.title"></p>
+                            </div>
                         </div>
                     </div>
-                </swiper-slide>
-            </swiper>
+                </div>
+            </div>
         </section>
     </div>
 </template>
@@ -111,8 +117,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Autoplay } from 'swiper/modules';
+import Swiper from "swiper";
 import "swiper/css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -120,51 +125,12 @@ gsap.registerPlugin(ScrollTrigger);
 export default {
     name: "gsrmain",
     components: {
-        Swiper,
-        SwiperSlide
     },
     props: {
         lang: { type: String }, // ko/en
     },
     data() {
         return {
-            /* swiper */
-            swiperModules: [Autoplay],
-            visualOptions: {
-                loop: true,
-                slidesPerView: 1, // 메인 비주얼은 보통 1개씩 노출
-                speed: 800,
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
-            },
-            Options_sec03: {
-                loop: false,
-                speed: 800,
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
-            },
-            Options_sec04: {
-                loop: true,
-                slidesPerView: 'auto',
-                spaceBetween: 12,
-                loopedSlides: 5,        // 실제 슬라이드 수보다 작게 지정
-                preloadImages: true,    // 이미지 미리 로드
-                watchSlidesProgress: true,
-                watchSlidesVisibility: true,
-
-                speed: 800, // ⭐ 부드럽게
-                watchSlidesProgress: true,
-
-                autoplay: {
-                    delay: 3000, // ⭐ 너무 짧게 금지
-                    disableOnInteraction: false,
-                },
-            },
-
             /* language contents */
             langData: {
                 ko: {
@@ -268,7 +234,10 @@ export default {
                         img: require("@/assets/images/dummy/main_visual_01.png"),
                     }
                 }
-            }
+            },
+            /* //language contents */
+            /* ✅ swiper 인스턴스 관리 */
+            swipers: {},
         };
     },
     computed: {
@@ -277,68 +246,112 @@ export default {
         }
     },
     mounted() {
+        /* swiper init */
+        this.handleSwiper();
+        window.addEventListener('resize', this.handleSwiper);
 
-        /* scroll bind */
+        /* scroll */
         this.handleScroll = this.handleScroll.bind(this);
         window.addEventListener("scroll", this.handleScroll);
-        /* //scroll bind */
 
-        this.initClipAnimation(); //clip mask
-
-        //sec02
+        this.initClipAnimation();
         this.initSec02();
     },
     beforeUnmount() {
-        /* scroll unbind */
+        window.removeEventListener('resize', this.handleSwiper);
+        this.destroyAllSwipers();
+
         window.removeEventListener("scroll", this.handleScroll);
     },
     methods: {
+        /* =========================
+           ✅ Swiper 관리
+        ========================= */
 
-        // 슬라이드가 변경될 때 실행되는 함수
-        onSlideChange(swiper) {
-            // swiper.realIndex는 loop: true일 때 실제 데이터 상의 인덱스를 가져옵니다.
-            this.activeIndex = swiper.realIndex;
-
-            // console.log("현재 슬라이드 인덱스:", this.activeIndex);
-
-            // 필요하다면 여기서 추가 로직 실행
-            // 예: 특정 슬라이드일 때 헤더 색상 강제 변경 등
-            /*
-            if (this.activeIndex === 1) {
-                document.getElementById("header").classList.add("white_mode");
+        createSwiper(key, el, options) {
+            if (!this.swipers[key] && el) {
+                this.swipers[key] = new Swiper(el, options);
             }
-            */
         },
 
-        /* sec02 */
+        destroySwiper(key) {
+            if (this.swipers[key]) {
+                this.swipers[key].destroy(true, true);
+                delete this.swipers[key];
+            }
+        },
+
+        destroyAllSwipers() {
+            Object.keys(this.swipers).forEach(key => {
+                this.destroySwiper(key);
+            });
+        },
+
+        handleSwiper() {
+            const width = window.innerWidth;
+
+            console.log('a : ', width);
+
+            /* main */
+            this.createSwiper('main', this.$refs.mainSwiper, {
+                loop: true,
+                slidesPerView: 1,
+                speed: 800,
+            });
+
+            /* sec03 */
+            this.createSwiper('sec03', this.$refs.sec03Swiper, {
+                loop: false,
+                speed: 800,
+                breakpoints: {
+                    0: {
+                        slidesPerView: "auto",
+                        spaceBetween:10,
+                    },
+                    769: {
+                        slidesPerView: 1,
+                    }
+                }
+            });
+
+            /* sec04 (반응형 제어) */
+            if (width >= 768) {
+                this.$nextTick(() => {
+                    this.createSwiper('sec04', this.$refs.sec04Swiper, {
+                        loop: true,
+                        slidesPerView: 'auto',
+                        spaceBetween: 12,
+                        speed: 800,
+                    });
+                });
+            } else {
+                this.destroySwiper('sec04');
+            }
+        },
+
+        /* =========================
+           기존 기능 유지
+        ========================= */
+
         initSec02() {
             const wrap = this.$el.querySelector(".expWrap");
             const slides = gsap.utils.toArray(".expSlide");
 
-            const state = {
-                activeIndex: -1
-            };
+            const state = { activeIndex: -1 };
 
             const setState = (index) => {
                 slides.forEach((slide, i) => {
                     slide.classList.remove("active", "prev");
 
-                    if (i === index) {
-                        slide.classList.add("active");
-
-                        console.log(i);
-                    }
-
-                    if (i === index - 1) {
-                        slide.classList.add("prev");
-                    }
+                    if (i === index) slide.classList.add("active");
+                    if (i === index - 1) slide.classList.add("prev");
                 });
 
                 state.activeIndex = index;
             };
 
             const clearAll = () => {
-                slides.forEach((slide) => {
+                slides.forEach(slide => {
                     slide.classList.remove("active", "prev");
                 });
                 state.activeIndex = -1;
@@ -352,45 +365,33 @@ export default {
                 scrub: true,
 
                 onUpdate: (self) => {
-                    const progress = self.progress;
-
-                    // 🔥 위로 벗어난 경우만 초기화
-                    if (progress <= 0) {
+                    if (self.progress <= 0) {
                         clearAll();
                         return;
                     }
 
-                    // 🔥 핵심: index clamp
                     const index = Math.min(
                         slides.length - 1,
-                        Math.floor(progress * slides.length)
+                        Math.floor(self.progress * slides.length)
                     );
 
-                    // 🔥 상태 업데이트
                     if (index !== state.activeIndex) {
                         setState(index);
                     }
                 },
 
-                onLeave: () => {
-                    // 👉 아래로 완전히 나가면 "마지막 유지"
-                    setState(slides.length - 1);
-                },
-
-                onLeaveBack: () => {
-                    // 👉 위로 나가면 초기화
-                    clearAll();
-                }
+                onLeave: () => setState(slides.length - 1),
+                onLeaveBack: clearAll
             });
         },
-        /* //sec02 */
 
-        /* scroll 시 특정영역에서 header 로고 및 네비 컬러 변경 */
         handleScroll() {
             const header = document.getElementById("header");
             if (!header) return;
 
-            const head_black = document.querySelector('.main_visual').offsetHeight - (header.offsetHeight * 0.5); // 원하는 값
+            const head_black =
+                document.querySelector('.main_visual').offsetHeight -
+                (header.offsetHeight * 0.5);
 
             if (window.scrollY > head_black) {
                 header.classList.add("head_black");
@@ -398,9 +399,7 @@ export default {
                 header.classList.remove("head_black");
             }
         },
-        /* //scroll 시 특정영역에서 header 로고 및 네비 컬러 변경 */
 
-        /* clip mask */
         initClipAnimation() {
             const el = this.$el.querySelector(".clip_mask");
             const innerDiv = el.querySelector("div");
@@ -409,11 +408,9 @@ export default {
                 scrollTrigger: {
                     trigger: ".sec01",
                     start: "top top",
-                    end: "+=300%", // 전체 스크롤 구간
+                    end: "+=300%",
                     scrub: true,
                     pin: true,
-                    pinSpacing: true,
-                    anticipatePin: 1,
                 }
             });
 
@@ -422,30 +419,16 @@ export default {
                 height: "100vh",
                 borderRadius: 0,
                 top: "-200px",
-                bottom: "auto",
                 left: "50%",
                 x: "-50%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".sec01",
-                    start: "top top",
-                    end: "bottom+=1000px bottom", // 스크롤 150vh에서 확장 완료
-                    scrub: true
-                }
+                ease: "none"
             });
 
             tl.to(innerDiv, {
                 height: "80vh",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".sec02",
-                    start: "top-=2500px top", // clip_mask가 꽉 찬 시점부터
-                    end: "top-=500px bottom",
-                    scrub: true
-                }
+                ease: "none"
             });
         }
-        /* //clip mask */
     }
 };
 </script>
@@ -762,7 +745,7 @@ section {
     text-align: left;
     position: absolute;
     right: 20px;
-    left:1128px;
+    left: 1128px;
 }
 
 .sec03 .swiper {
@@ -801,16 +784,204 @@ section {
     line-height: 150%;
 }
 
-.sec04 .explain {margin-top:24px; font-size:2rem; letter-spacing:-0.01em; line-height:135%; text-align:center;}
-.sec04 .quick {display:flex; justify-content:center; gap:12px;}
-.sec04 .quick a {padding:20px 24px; color:#000; font-size:2.4rem; font-weight:700; letter-spacing:-0.01em; line-height:135%; display:flex; align-items:center; gap:12px;}
-.sec04 .quick a:after {width:16px; height:24px; background-color:red; content:''; display:block;}
-.sec04 .swiper {margin-top:80px;}
-.sec04 .swiper-slide {width:552px;}
-.sec04 .slide {position:relative;}
-.sec04 .slide .txt {padding:40px; position:absolute; right:0; bottom:0; left:0; display:flex; flex-direction:column;}
-.sec04 .slide .txt * {color:#fff;}
-.sec04 .slide .txt ul {margin-bottom:12px; display:flex; align-items:center; gap:4px;}
-.sec04 .slide .txt li em {padding:1px 11px; font-size:1.6rem; letter-spacing:-0.01em; line-height:150%; border:1px solid #fff; border-radius:100px; display:block;}
-.sec04 .slide .txt p {font-size:2.4rem; letter-spacing:-0.01em; line-height:150%;}
+.sec04 .explain {
+    margin-top: 24px;
+    font-size: 2rem;
+    letter-spacing: -0.01em;
+    line-height: 135%;
+    text-align: center;
+}
+
+.sec04 .quick {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.sec04 .quick a {
+    padding: 20px 24px;
+    color: #000;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 135%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sec04 .quick a:after {
+    width: 16px;
+    height: 24px;
+    background-color: red;
+    content: '';
+    display: block;
+}
+
+.sec04 .swiper {
+    margin-top: 80px;
+}
+
+.sec04 .swiper-slide {
+    width: 552px;
+}
+
+.sec04 .slide {
+    position: relative;
+}
+
+.sec04 .slide .txt {
+    padding: 40px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sec04 .slide .txt * {
+    color: #fff;
+}
+
+.sec04 .slide .txt ul {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sec04 .slide .txt li em {
+    padding: 1px 11px;
+    font-size: 1.6rem;
+    letter-spacing: -0.01em;
+    line-height: 150%;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    display: block;
+}
+
+.sec04 .slide .txt p {
+    font-size: 2.4rem;
+    letter-spacing: -0.01em;
+    line-height: 150%;
+}
+
+@media screen and (max-width:1024px) {
+    .main_copy strong {
+        font-size: 6rem;
+    }
+
+    .main_copy span {
+        margin-top: 10px;
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width:768px) {
+    h2 {
+        font-size: 3.2rem;
+        letter-spacing: -0.01em;
+        line-height: 130%;
+    }
+
+    h2+.explain {
+        font-size: 1.6rem;
+    }
+
+    .main_visual .slide {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .sec01 {
+        padding-top: 100px;
+    }
+
+    .sec01 .inner {
+        flex-direction: column;
+    }
+
+    .sec01 .explain {
+        margin-top: 20px;
+    }
+
+    .sec01 .clip_mask {
+        display: none;
+    }
+
+    .sec01 li a {
+        padding-top: 21.5px;
+        padding-bottom: 21.5px;
+        font-size: 1.8rem;
+    }
+
+    .sec03 {overflow:hidden;}
+
+    .sec03 .swiper {
+        padding-left:0;
+    }
+
+    .sec03 .slide {
+        align-items:flex-start;
+        flex-direction:column;
+    }
+    .sec03 .slide div {margin-left:0;}
+
+    .sec04 {
+        padding-right:20px; padding-left:20px;
+    }
+
+    .sec04 .explain {
+        font-size: 1.4rem;
+    }
+
+    .sec04 .quick a {
+        padding: 24px 10px;
+        font-size: 1.6rem;
+    }
+
+    .sec04 .swiper-wrapper {
+        display: block;
+    }
+
+    .sec04 .swiper-slide {
+        width: 100%;
+    }
+    .sec04 .swiper-slide + .swiper-slide {
+        margin-top:24px;
+    }
+
+    .sec04 .thumb {
+        padding-top: 60.895522%;
+        border-radius:12px;
+        display: block;
+    }
+
+    .sec04 .thumb em {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .sec04 .slide .txt {
+        padding:24px 0;
+        position: static;
+    }
+
+    .sec04 .slide .txt * {
+        color: #161616;
+    }
+
+    .sec04 .slide .txt li em {border-color:#161616;}
+
+    .sec04 .slide .txt p {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
 </style>

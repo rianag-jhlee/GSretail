@@ -70,7 +70,6 @@ select {width:100%; height:52px; padding:12px 40px 12px 12px; font-size:1.4rem; 
 .btn_back {height:72px; padding:0 24px; font-size:2rem; font-weight:400; letter-spacing:-0.01em; color:#000; background-color:transparent; border:0; gap:10px; cursor:pointer;}
 .btn_back:before {width:16px; height:30px; background-color: #eee; content:''; display:inline-block; }
 
-
 /* tab */
 .tab_wrap {position:relative; }
 .tab_wrap ul.ac {justify-content:center;}
@@ -212,6 +211,9 @@ label.select.err > em {display:block;}
 .bullet_01 li { position: relative; padding-left: 15px; color: #67676f; font-size: 20px; line-height: 1.6; }
 .bullet_01 li::before { content: ""; position: absolute; left: 0; top: 12px; width: 4px; height: 4px; background: #67676f; border-radius: 50%; }
 .bullet_01.no_type li::before {content:none !important;}
+
+.thumb {overflow:hidden; position:relative;}
+.thumb img {width:100%; height:100%; object-fit:cover; display:block;}
 
 @media screen and (max-width:1024px) {
 }

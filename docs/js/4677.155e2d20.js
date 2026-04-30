@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkGSretail"]=self["webpackChunkGSretail"]||[]).push([[4677],{84677:function(e,r,n){n.r(r),n.d(r,{default:function(){return d}});var t=n(56768);function a(e,r,n,a,u,o){return(0,t.uX)(),(0,t.CE)("footer",null,"Published by GSretail in 2026, developed by 리앙에이지.")}var u={name:"Footer",props:{}},o=n(71241);const l=(0,o.A)(u,[["render",a],["__scopeId","data-v-2d28606a"]]);var d=l}}]);
+//# sourceMappingURL=4677.155e2d20.js.map

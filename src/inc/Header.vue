@@ -61,6 +61,10 @@
                 <!-- //select language -->
             </div>
             <!-- //quick -->
+
+            <!-- 26-04-30 이종환 Add -->
+            <button class="btn_allMenu">전체메뉴</button>
+            <!-- //26-04-30 이종환 Add -->
         </div>
     </header>
 </template>

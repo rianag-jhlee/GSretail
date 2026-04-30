@@ -14,13 +14,16 @@
                 </dl>
             </nav>
 
-            <div class="quick" v-if="t.quick">
-                <ul>
-                    <li v-for="item in t.quick" :key="item.title">
-                        <a :href="item.path">{{ item.title }}</a>
-                    </li>
-                </ul>
-            </div>
+            <div class="quick" v-if="t.quick" ref="quickWrap">
+    <ul
+        ref="quickList"
+        :style="quickStyle"
+    >
+        <li v-for="item in t.quick" :key="item.title">
+            <a :href="item.path">{{ item.title }}</a>
+        </li>
+    </ul>
+</div>
 
             <div class="info">
                 <div>
@@ -32,121 +35,213 @@
                 <p>{{ t.info.copyright }}</p>
             </div>
 
-            <button class="go_top" :class="{ hide: isTop, isStatic: isFooterVisible }" @click="scrollTop">Go to top</button>
+            <button class="go_top" :class="{ hide: isTop, isStatic: isFooterVisible }" @click="scrollTop">Go to
+                top</button>
         </div>
     </footer>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
 import menuEn from "@/assets/language/menu/menu.en.json";
 import menuKo from "@/assets/language/menu/menu.ko.json";
 
-export default {
-    name: "Footer",
+// =====================
+// props
+// =====================
+const props = defineProps({
+    lang: { type: String, default: "ko" }
+});
 
-    props: {
-        lang: { type: String, default: "ko" }
-    },
+// =====================
+// refs
+// =====================
+const footerEl = ref(null);
+const quickWrap = ref(null);
+const quickList = ref(null);
 
-    data() {
-        return {
-            isFooterVisible: false,
-            observer: null,
-            isTop: true,
+// =====================
+// state
+// =====================
+const isFooterVisible = ref(false);
+const isTop = ref(true);
 
-            langData: {
-                ko: {
-                    quick: [
-                        { title: "개인정보처리방침", path: "#none" },
-                        { title: "점포 창업안내", path: "#none" },
-                        { title: "입점상담", path: "#none" },
-                        { title: "고객센터", path: "#none" }
-                    ],
-                    info: {
-                        logo: "(주)GS리테일",
-                        address: "서울시 강남구 논현로 508(역삼동 679번지 GS타워)",
-                        ceo: "대표이사 허서홍",
-                        brn: "사업자등록번호 116-81-18746",
-                        copyright:
-                            "Copyright ⓒ 2021 GS Retail Co.,Ltd. All Rights Reserved."
-                    }
-                },
-                en: {
-                    quick: [
-                        { title: "Privacy Policy", path: "#none" },
-                        { title: "Store Franchise", path: "#none" },
-                        { title: "Partnership", path: "#none" },
-                        { title: "Customer Center", path: "#none" }
-                    ],
-                    info: {
-                        logo: "GS Retail Co., Ltd.",
-                        address:
-                            "508, Nonhyeon-ro, Gangnam-gu, Seoul, Republic of Korea",
-                        ceo: "CEO Heo Seo-hong",
-                        brn: "Business Registration Number 116-81-18746",
-                        copyright:
-                            "Copyright ⓒ 2021 GS Retail Co., Ltd. All Rights Reserved."
-                    }
-                }
-            }
-        };
-    },
+const quickX = ref(0);
+const isQuickSlide = ref(false);
 
-    computed: {
-        t() {
-            return this.langData[this.lang] || this.langData.ko;
-        },
-        menuList() {
-            return this.lang === "en" ? menuEn : menuKo;
+const observer = ref(null);
+
+// =====================
+// language data
+// =====================
+const langData = {
+    ko: {
+        quick: [
+            { title: "개인정보처리방침", path: "#none" },
+            { title: "채용안내", path: "#none" },
+            { title: "입점상담", path: "#none" },
+            { title: "멤버십/홈페이지문의", path: "#none" },
+            { title: "입지제안", path: "#none" },
+            { title: "임대상가안내", path: "#none" },
+            { title: "정도경영제보", path: "#none" },
+            { title: "고객센터", path: "#none" },
+            { title: "GS SHOP 시청자 관련", path: "#none" }
+        ],
+        info: {
+            logo: "(주)GS리테일",
+            address: "서울시 강남구 논현로 508",
+            ceo: "대표이사 허서홍",
+            brn: "사업자등록번호 116-81-18746",
+            copyright: "Copyright ⓒGS Retail. All rights reserved."
         }
     },
-
-    methods: {
-        chunk(arr = [], size = 6) {
-            const result = [];
-            for (let i = 0; i < arr.length; i += size) {
-                result.push(arr.slice(i, i + size));
-            }
-            return result;
-        },
-
-        scrollTop() {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        },
-
-        handleScroll() {
-            this.isTop = window.scrollY === 0;
+    en: {
+        quick: [
+            { title: "Privacy Policy", path: "#none" },
+            { title: "Store Franchise", path: "#none" },
+            { title: "Partnership", path: "#none" },
+            { title: "Customer Center", path: "#none" }
+        ],
+        info: {
+            logo: "GS Retail",
+            address: "Seoul, Korea",
+            ceo: "CEO Heo Seo-hong",
+            brn: "116-81-18746",
+            copyright: "Copyright ⓒ GS Retail"
         }
-    },
-
-    mounted() {
-        this.observer = new IntersectionObserver(
-            ([entry]) => {
-                this.isFooterVisible = entry.isIntersecting;
-            },
-            { threshold: 0.1 }
-        );
-
-        requestAnimationFrame(() => {
-            const el = this.$refs.footerEl;
-
-            if (el) {
-                this.observer.observe(el);
-            }
-        });
-
-        //go_top 버튼 show/hide 관련
-        window.addEventListener("scroll", this.handleScroll);
-    },
-
-    beforeUnmount() {
-        if (this.observer) {
-            this.observer.disconnect();
-        }
-
-        window.removeEventListener("scroll", this.handleScroll);
     }
 };
+
+// =====================
+// computed
+// =====================
+const t = computed(() => langData[props.lang] || langData.ko);
+
+const menuList = computed(() =>
+    props.lang === "en" ? menuEn : menuKo
+);
+
+const quickStyle = computed(() => ({
+    transform: `translateX(${quickX.value}px)`
+}));
+
+// =====================
+// chunk (FIX: 에러 해결 핵심)
+// =====================
+const chunk = (arr = [], size = 6) => {
+    const result = [];
+    for (let i = 0; i < arr.length; i += size) {
+        result.push(arr.slice(i, i + size));
+    }
+    return result;
+};
+
+// =====================
+// scroll
+// =====================
+const handleScroll = () => {
+    isTop.value = window.scrollY < 50;
+};
+
+const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+// =====================
+// quick slide
+// =====================
+const checkQuickSlide = () => {
+    isQuickSlide.value = window.innerWidth <= 768;
+};
+
+const initQuickSlide = () => {
+    const wrap = quickWrap.value;
+    const list = quickList.value;
+
+    if (!wrap || !list) return;
+
+    let startX = 0;
+    let baseX = 0;
+
+    const getLimit = () => wrap.offsetWidth - list.scrollWidth;
+
+    // touch
+    const onTouchStart = (e) => {
+        startX = e.touches[0].clientX;
+        baseX = quickX.value;
+    };
+
+    const onTouchMove = (e) => {
+        if (!isQuickSlide.value) return;
+
+        const delta = e.touches[0].clientX - startX;
+        let next = baseX + delta;
+
+        const minX = getLimit();
+        quickX.value = Math.min(0, Math.max(minX, next));
+    };
+
+    // mouse
+    let dragging = false;
+    let mx = 0;
+    let bx = 0;
+
+    const onMouseDown = (e) => {
+        if (!isQuickSlide.value) return;
+
+        dragging = true;
+        mx = e.clientX;
+        bx = quickX.value;
+    };
+
+    const onMouseMove = (e) => {
+        if (!dragging || !isQuickSlide.value) return;
+
+        const delta = e.clientX - mx;
+        let next = bx + delta;
+
+        const minX = getLimit();
+        quickX.value = Math.min(0, Math.max(minX, next));
+    };
+
+    const onMouseUp = () => {
+        dragging = false;
+    };
+
+    list.addEventListener("touchstart", onTouchStart, { passive: true });
+    list.addEventListener("touchmove", onTouchMove, { passive: true });
+
+    list.addEventListener("mousedown", onMouseDown);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+};
+
+// =====================
+// lifecycle
+// =====================
+onMounted(() => {
+    observer.value = new IntersectionObserver(([entry]) => {
+        isFooterVisible.value = entry.isIntersecting;
+    }, { threshold: 0.1 });
+
+    nextTick(() => {
+        if (footerEl.value) {
+            observer.value.observe(footerEl.value);
+        }
+
+        checkQuickSlide();
+        initQuickSlide();
+    });
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", checkQuickSlide);
+});
+
+onBeforeUnmount(() => {
+    observer.value?.disconnect();
+    window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("resize", checkQuickSlide);
+});
 </script>
 
 <style></style>
