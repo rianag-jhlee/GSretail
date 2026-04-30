@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <div class="brand">
         <section ref="sectionRef" class="sec_brand_visual">
             <div class="sticky">
@@ -1222,28 +1222,7 @@
                     </ul> 
                 </PanelHeader>
                 <section>
-                    <ul v-if="tab.items && tab.items.length" class="winwin_item_list">
-                    <li v-for="(item, ii) in tab.items" :key="ii" class="winwin_item">
-                        <article>
-                            <div class="winwin_item_icon" aria-hidden="true"></div>
-                            <div class="winwin_item_content">
-                                <div class="winwin_item_title">
-                                    <span class="winwin_item_num">{{ item.num }}</span>
-                                    <strong>
-                                        {{ item.title }}
-                                        <a v-if="item.link" :href="item.link" target="_blank" class="winwin_item_link" aria-label="링크 바로가기"></a>
-                                    </strong>
-                                </div>
-                                <div class="winwin_item_body">
-                                    <p v-if="item.desc" v-html="item.desc"></p>
-                                    <ul v-if="item.bullets && item.bullets.length" class="list_dotted">
-                                        <li v-for="(b, bi) in item.bullets" :key="bi"><p>{{ b }}</p></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-                    </li>
-                </ul>
+                    <NumberedInfoList :items="tab.items" :show-icon="true" />
                 </section>
             </div>
         </div>
@@ -1252,21 +1231,7 @@
         <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 1" class="brand_panel">
             <PanelHeader :hero="winwin.tabs[1].hero" :hero-alt="winwin.tabs[1].heroAlt" :title="winwin.tabs[1].title" :desc="winwin.tabs[1].desc" />
             <section>
-                <ul v-if="winwin.tabs[1].items && winwin.tabs[1].items.length" class="winwin_item_list">
-                    <li v-for="(item, ii) in winwin.tabs[1].items" :key="ii" class="winwin_item">
-                        <article>
-                            <div class="winwin_item_content">
-                                <div class="winwin_item_title">
-                                    <span class="winwin_item_num">{{ item.num }}</span>
-                                    <strong>{{ item.title }}</strong>
-                                </div>
-                                <div class="winwin_item_body">
-                                    <p v-if="item.desc" class="winwin_item_desc" v-html="item.desc"></p>
-                                </div>
-                            </div>
-                        </article>
-                    </li>
-                </ul>
+                <NumberedInfoList :items="winwin.tabs[1].items" desc-class="num_info_desc_light" />
             </section>
         </div>
 
@@ -1332,6 +1297,7 @@ import DiffQrRow from "@/components/DiffQrRow.vue";
 import imgQrMo from "@/assets/images/dummy/qr_app.png";
 import Steps from "@/components/Steps.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
+import NumberedInfoList from "@/components/NumberedInfoList.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
 import modal from "@/assets/js/modal";
@@ -3434,46 +3400,11 @@ button { background-color: #fff }
 @media (max-width: 768px) {
   .list_caution > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 }
-.winwin_item_list { margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr }
-.winwin_item { padding: 64px 0; border-bottom: 1px solid #e5e5e9 }
-@media (max-width: 768px) {
-  .winwin_item { padding: 0; border:0 }
-}
-.winwin_item:nth-child(-n+2) { padding-top: 0 }
-.winwin_item:last-child, .winwin_item:nth-last-child(2):nth-child(odd) { border-bottom: none }
-.winwin_item > article { display: flex; gap: 24px; align-items: flex-start }
-.winwin_item_icon { width: 80px; height: 80px; background-color: #f2f2f4; border-radius: 50%; flex-shrink: 0 }
-@media (max-width: 768px) {
-  .winwin_item > article { gap: 16px }
-  .winwin_item_icon { width: 60px; height: 60px }
-}
-.winwin_item_title { margin-bottom: 24px }
-.winwin_item_num, .winwin_item_title > strong { font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }
-.winwin_item_num { margin-bottom: 4px; color: #107af2; display:inline-block }
-.winwin_item_title > strong { color: #161616; display: flex; align-items: center; gap: 8px }
-.winwin_item_link { width: 24px; height: 24px; background-color: #d0d0d8; border-radius: 4px; flex-shrink: 0; display: inline-block }
 .imgcard_link { width: 20px; height: 20px; background-color: #d0d0d8; flex-shrink: 0; display: inline-block; vertical-align: middle; margin-left: 8px }
-.winwin_item_body > p { color: #67676f; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }
-.winwin_item_body > p.winwin_item_desc { font-weight: 400 }
-.winwin_item_body .list_dotted { margin-top: 16px }
-.winwin_item_body .list_dotted > li::before { background-color: #67676f }
-.winwin_item_body .list_dotted > li + li { margin-top: 6px }
-.winwin_item_body .list_dotted > li > p { color:#67676f; font-size: 1.8rem; line-height: 1.4 }
-@media (max-width: 768px) {
-  .winwin_item_content { gap:6px }
-  .winwin_item_num { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0% }
-  .winwin_item_title { margin-bottom: 6px }
-  .winwin_item_title > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
-  .winwin_item_body .list_dotted > li p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
-  .winwin_item_body .list_dotted > li + li { margin-top: 4px }
-}
 .sec_note { margin: 8px 0 0; color: #f95823; font-size: 1.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.02em }
 .milbox_feature :deep(.feature_card_item) { min-height: 171px; max-width: 340px }
 @media (max-width: 768px) {
   .milbox_feature :deep(.feature_card_item) { min-height: 163px; max-width: 100% }
-}
-@media (max-width: 768px) {
-  .winwin_item_list { grid-template-columns: 1fr; gap: 40px }
 }
 .brand_panel_title .list_dotted { margin: 16px 0 0 }
 .brand_panel_title + section { padding-top: 0 }
@@ -3719,7 +3650,6 @@ button { background-color: #fff }
   .brand_panel section.sec_voucher header { padding: 0 20px }
   .sec_voucher .voucher_swiper { padding: 0 20px }
   .voucher_swiper .swiper-slide { width: 69.33vw }
-  .winwin_item_body > p { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0 }
 }
 .link_wrap { margin-top: 64px; display: flex; justify-content: center }
 .link_wrap > .btn_pickup { height: 64px; padding: 20px 32px; color: #fff; text-align: center; font-size: 1.8rem; line-height: 1.4; background-color: #107AF2; border-radius: 10px; border:0; gap:8px }

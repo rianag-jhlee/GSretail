@@ -343,54 +343,21 @@ function closeModal(event) {
 .middle_bts_wrap { margin-top: 40px; display: flex; gap: 8px; }
 .middle_bts_wrap > button { height: 52px; padding: 0 16px; background: #fff; border: 1px solid #90909a; border-radius: 10px; font-size: 1.8rem; font-weight: 700; cursor: pointer; transition: border-color 0.15s, color 0.15s; color: #161616; }
 .middle_bts_wrap > button:hover, .middle_bts_wrap > button.active { border-color: #107af2; color: #107af2; }
-.apply_form { margin-top: 40px; }
-.apply_form + .apply_form { margin-top: 64px; }
-.form_head { height: 48px; padding-bottom: 16px; border-bottom: 1px solid #242428; display: flex; align-items: center; justify-content: space-between; }
-.form_head_title { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; color: #161616; }
-.form_required_note { color: #fb6432; font-size: 1.4rem; line-height: 1.4; }
-.form_body { padding: 12px 0; border-bottom: 1px solid #e5e5e9; }
-.form_row { min-height: 52px; padding: 12px 0; display: grid; grid-template-columns: 134px 1fr; align-items: center; gap: 0 8px; }
-.check_row, .contract_row { align-items: start; }
-.form_row_area { align-items: center; }
-.form_label, .form_sub_label { flex-shrink: 0; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; color: #161616; }
-.form_required { margin-left: 2px; color: #fb6432; }
-.form_field { display: flex; gap: 8px; flex-wrap: wrap; min-width: 0; }
 .form_field > :deep(.input_wrap) { flex: 1; min-width: 0; max-width: 205px; }
-.form_sep { color: #67676f; font-size: 1.6rem; flex-shrink: 0; }
-.form_field_phone { align-items: center; }
 .form_field_phone :deep(.select) { width: 134px; flex-shrink: 0; }
 .form_field_phone :deep(.select select) { width: 100%; font-size: 1.6rem; }
 .form_field_phone > :deep(.input_wrap) { max-width: 134px; flex: 1; min-width: 80px; }
-.form_field_email { align-items: center; }
 .form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 0 0 205px; width: 205px; min-width: 0; }
 .form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 0 0 180px; width: 180px; min-width: 0; }
 .form_field_email :deep(.select) { flex: 0 0 180px; width: 180px; min-width: 0; }
 .form_field_email :deep(.select select) { width: 100%; font-size: 1.6rem; }
-.form_field_region { flex-wrap: nowrap; }
 .form_field_region :deep(.select) { flex: 1; min-width: 0; max-width: 220px; }
 .form_field_region :deep(.select select) { width: 100%; font-size: 1.6rem; }
-.form_field_area { align-items: center; gap: 24px; }
-.form_sub_group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.form_field_check .form_sub_group { gap: 12px; }
-.form_field_contract .form_sub_group { gap: 12px; }
-.form_sub_label { color: #67676f; }
-.form_sub_input_wrap { display: flex; align-items: center; gap: 8px; }
 .form_field_area .form_sub_input_wrap :deep(.input_wrap) { width: 160px; }
-.form_field_area .form_sub_input_wrap :deep(input) { padding-right: 40px; }
-.form_sub_unit { flex-shrink: 0; font-size: 1.6rem; letter-spacing: -0.01em; }
-.area_note { font-size: 1.4rem; color: #107af2; letter-spacing: -0.01em; line-height: 1.5; }
-.form_field_check { flex-direction: column; gap: 12px; }
-.check_list { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .check_list :deep(.input_wrap) { width: auto; }
-.check_list :deep(.check) { gap: 8px; cursor: pointer; }
-.check_list :deep(.label) { font-size: 1.8rem; white-space: nowrap; color: #161616; }
-.check_etc { display: flex; align-items: center; gap: 12px; }
 .check_etc .form_sub_label { min-width: 28px; }
 .check_etc :deep(.input_wrap) { flex: 1; max-width: 428px; }
-.form_field_contract { flex-direction: column; gap: 16px; }
-.form_sub_inputs { display: flex; align-items: center; gap: 8px; }
 .form_sub_inputs :deep(.input_wrap) { width: 134px; }
-.contract_rent { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .contract_rent .form_sub_input_wrap :deep(.input_wrap) { width: 134px; }
 .smn_bottom { margin-top: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
 .smn_bottom > :deep(.btn_big) { width: 134px; text-align: center; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
@@ -409,18 +376,11 @@ function closeModal(event) {
     .consent_info_title { font-weight: 700; font-size: 1.8rem; line-height: 1.5; }
     .consent_notice { flex-direction: column; align-items: flex-start; gap: 16px; }
     .consent_notice_text { font-size: 1.4rem; line-height: 1.4; }
-    .form_head { height: auto; padding-bottom: 16px; }
-    .form_body { padding: 30px 0; }
-    .form_row { padding: 20px 0; grid-template-columns: 1fr; gap: 0; }
-    .form_row:first-child { padding-top: 0; }
-    .form_row:last-child { padding-bottom: 0; }
     .form_field_phone > :deep(.input_wrap) { max-width: none; flex: 1; }
     .form_field_email > :deep(.input_wrap:nth-child(1)) { flex: 1; min-width: 80px; }
     .form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 1; min-width: 60px; }
     .form_field_email :deep(.select) { flex: 1 0 100%; width: 100%; }
-    .form_field_region { flex-wrap: wrap; }
     .form_field_region :deep(.select) { flex: 1 0 100%; width: 100%; max-width: 100%; }
-    .form_label { margin-bottom: 16px; font-weight: 700; font-size: 1.6rem; line-height: 1.24; }
     .consent_radio { width: 20px; height: 20px; }
     .consent_radio_text { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .smn_bottom { margin-top: 0; justify-content: center; }
@@ -441,14 +401,9 @@ function closeModal(event) {
     .list_caution > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .middle_bts_wrap { gap: 6px; }
     .middle_bts_wrap > button { padding: 0 5px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .form_sub_group { width: 100%; flex-direction: column; gap: 12px; align-items: flex-start; }
-    .apply_form + .apply_form { margin-top: 60px; }
     .form_field_area .form_sub_input_wrap { width: 100%; }
     .form_field_area .form_sub_input_wrap :deep(.input_wrap) { width: 100%; }
     .form_field > :deep(.input_wrap) { max-width: 100%; }
-    .form_field_area { gap: 16px; }
-    .check_etc { flex-direction: column; gap: 12px; align-items: flex-start; }
     .form_sub_inputs :deep(.input_wrap) { width: 100%; }
-    .form_sub_input_wrap { flex: 1; }
 }
 </style>
