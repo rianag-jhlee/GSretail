@@ -231,11 +231,6 @@
                                                         <col style="width: 15%;">
                                                         <col style="width: auto;">
                                                     </colgroup>
-                                                    <thead>
-                                                        <tr>
-                                                            <th v-for="th in t.CompetencySupport.Education.Table.Thead" :key="th">{{ th }}</th>
-                                                        </tr>
-                                                    </thead>
                                                     <tbody>
                                                         <tr v-for="(tr, idx) in t.CompetencySupport.Education.Table.Tbody" :key="idx">
                                                             <td class="ac"><strong>{{ tr.name }}</strong></td>
@@ -670,10 +665,67 @@
                             </div>
 
                             <!-- gsrsu030204 -->
-                            <div v-if="SubTabIdx1 === 3">방송발전 내용</div>
+                            <div v-if="SubTabIdx1 === 3 && t.CSR.broadcasting" class="broadcasting_development">
+                                <div class="intro_summary ac mb100">
+                                    <h3 class="text_summary" v-html="t.CSR.broadcasting.Summary"></h3>
+                                </div>
+
+                                <section class="support_item mb120">
+                                    <div class="program_grid">
+                                        <article v-for="(project, pIdx) in t.CSR.broadcasting.Projects" :key="'broad-proj-'+pIdx" class="program_item">
+                                            <figure class="program_visual">
+                                                <img :src="project.img" :alt="project.tit">
+                                            </figure>
+                                            <div class="text_area mt40">
+                                                <h4 class="text_xl_bold" style="font-size:32px;">{{ project.tit }}</h4>
+                                                <p class="p">{{ project.desc }}</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </section>
+
+                                <section class="support_item">
+                                    <div class="div mb40">
+                                        <h4 class="section_title_sub">{{ t.CSR.broadcasting.Partners.Title }}</h4>
+                                    </div>
+                                    <ul class="brand_grid">
+                                        <li v-for="(partner, ptnIdx) in t.CSR.broadcasting.Partners.Items" :key="'broad-ptn-'+ptnIdx">
+                                            <figure class="brand_img_box">
+                                                <img :src="partner.img" :alt="partner.name">
+                                            </figure>
+                                            <div class="brand_name mt16">
+                                                <strong>{{ partner.name }}</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </div>
 
                             <!-- gsrsu030205 -->
-                            <div v-if="SubTabIdx1 === 4">숨은나눔천사 내용</div>
+                            <div v-if="SubTabIdx1 === 4 && t.CSR.sharing" class="sharing_angel">
+                                <div class="intro_summary ac mb100">
+                                    <h3 class="text_summary" v-html="t.CSR.sharing.Summary"></h3>
+                                </div>
+
+                                <div class="sharing_list_wrap">
+                                    <div class="program_grid">
+                                        <article v-for="(item, idx) in t.CSR.sharing.List" :key="'angel-'+idx" class="program_item sharing_card">
+                                            <figure class="program_visual">
+                                                <img :src="item.img" :alt="item.tit">
+                                            </figure>
+                                            <div class="text_area mt32">
+                                                <h4 class="text_l_bold">{{ item.tit }}</h4>
+                                                <p class="p mb24">{{ item.desc }}</p>
+                                                <div class="card_footer">
+                                                    <span class="badge_gray">{{ item.badge }}</span>
+                                                    <span class="date_text">{{ item.date }}</span>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <Pagination v-model="page" :totalPages="32" :visiblePages="10" :showEllipsis="false" @change="handlePage" />
+                                </div>
+                            </div>
                         </div>
                     </article>
 
@@ -686,7 +738,75 @@
                         />
                         <div class="sub_tab_content mt60">
                             <!-- gsrsu030301 -->
-                            <div v-if="SubTabIdx1 === 0">인권경영 내용</div>
+                            <div v-if="SubTabIdx1 === 0 && t.protect.humanrights" class="human_rights_management">
+                                <div class="intro_summary ac mb100">
+                                    <h3 class="text_summary" v-html="t.protect.humanrights.Summary"></h3>
+                                </div>
+
+                                <!-- 인권경영정책 -->
+                                <section class="support_item mb120">
+                                    <div class="policy_box_wrap">
+                                        <div class="div mb40">
+                                            <h4 class="section_title_sub">{{ t.protect.humanrights.Policy.Title }}</h4>
+                                        </div>
+                                        <div class="GS-universal-wrapper">
+                                            <p class="p" v-html="t.protect.humanrights.Policy.Desc"></p>
+                                        </div>
+                                        <div class="btn-wrap ac mt60">
+                                            <Buttons btn-class="btn_icon btn_xl border after">
+                                                {{ t.protect.humanrights.Policy.BtnText }}
+                                            </Buttons>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- 임직원 인권 목표 -->
+                                <section class="support_item mb120">
+                                    <div class="div mb40 ac">
+                                        <h4 class="section_title_sub">{{ t.protect.humanrights.Goals.Title }}</h4>
+                                    </div>
+                                    <ul class="card_grid owner_card_layout">
+                                        <li v-for="(item, idx) in t.protect.humanrights.Goals.Items" :key="'goal-'+idx" class="strategy_card">
+                                            <div class="card_head">
+                                                <span class="num">{{ item.num }}</span>
+                                            </div>
+                                            <strong>{{ item.desc }}</strong>
+                                        </li>
+                                    </ul>
+                                </section>
+
+                                <!-- 인권침해 방지 프로그램 (태블릿 2열, 모바일 1열) -->
+                                <section class="support_item mb120">
+                                    <div class="div mb40">
+                                        <h4 class="section_title_sub">{{ t.protect.humanrights.Programs.Title }}</h4>
+                                    </div>
+                                    <div class="program_grid">
+                                        <article v-for="(item, idx) in t.protect.humanrights.Programs.Items" :key="'prog-'+idx" class="program_item">
+                                            <figure class="program_visual">
+                                                <img :src="item.img" :alt="item.tit">
+                                            </figure>
+                                            <div class="text_area">
+                                                <strong>{{ item.tit }}</strong>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </section>
+
+                                <!-- 인권영향평가 -->
+                                <section class="support_item">
+                                    <div class="policy_box_wrap">
+                                        <div class="wide_info_box">
+                                            <figure class="img_frame">
+                                                <img :src="t.protect.humanrights.Assessment.img" alt="인권영향평가">
+                                            </figure>
+                                            <div class="text_area">
+                                                <span>{{ t.protect.humanrights.Assessment.Title }}</span>
+                                                <p class="p" v-html="t.protect.humanrights.Assessment.Desc"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
 
                             <div v-if="SubTabIdx1 === 1">
                                 <Tabs 
@@ -699,14 +819,88 @@
                                     <!-- gsrsu03030201 -->
                                     <div v-if="SubTabIdx2 === 0">인재상 내용</div>
 
-                                    <!-- gsrsu03030202 -->
-                                    <div v-if="SubTabIdx2 === 1">인재육성체계 내용</div>
+                                    <!-- gsrsu03030202: 인재육성체계 -->
+                                    <div v-if="SubTabIdx2 === 1" class="talent_development">
+                                        <div class="intro_summary">
+                                            <p class="text_summary_sub" v-html="t.protect.talentmanagement.part_2.Summary"></p>
+                                        </div>
+
+                                        <section class="support_item">
+                                            <!-- 상단 다이어그램 -->
+                                            <figure class="diagram_img_wrap ac">
+                                                <img :src="t.protect.talentmanagement.part_2.DiagramImg" alt="GS 인재육성 체계 다이어그램">
+                                            </figure>
+
+                                            <!-- 인재육성 카드 그리드 -->
+                                            <div class="div mb40">
+                                                <h4 class="section_title_sub">{{ t.protect.talentmanagement.part_2.MainTitle }}</h4>
+                                            </div>
+
+                                            <div class="card_grid owner_card_layout">
+                                                <article 
+                                                    v-for="(card, idx) in t.protect.talentmanagement.part_2.Cards" 
+                                                    :key="'talent-card-'+idx" 
+                                                    class="strategy_card"
+                                                >
+                                                    <div class="card_head">
+                                                        <span class="num">{{ card.num }}</span>
+                                                        <strong>{{ card.tit }}</strong>
+                                                        <p class="p_desc" v-html="card.desc"></p>
+                                                    </div>
+                                                    <ul class="bullet_01">
+                                                        <li v-for="(li, lIdx) in card.list" :key="'li-'+lIdx">
+                                                            {{ li }}
+                                                        </li>
+                                                    </ul>
+                                                </article>
+                                            </div>
+                                        </section>
+                                    </div>
 
                                     <!-- gsrsu03030203 -->
                                     <div v-if="SubTabIdx2 === 2">인재경영 지표 내용</div>
 
                                     <!-- gsrsu03030204 -->
-                                    <div v-if="SubTabIdx2 === 3">인재경영 실적자료 내용</div>
+                                    <div v-if="SubTabIdx2 === 3" class="talent_performance_data">
+                                        <div class="intro_summary">
+                                            <p class="text_summary_sub">{{ t.protect.talentmanagement.part_4.Summary }}</p>
+                                            <p class="GS" v-html="t.protect.talentmanagement.part_4.Desc"></p>
+                                        </div>
+
+                                        <div class="policy_wrap mt60">
+                                            <table>
+                                                <colgroup>
+                                                    <col style="width: 100px;">
+                                                    <col style="width: auto;">
+                                                    <col style="width: 200px;">
+                                                    <col style="width: 200px;">
+                                                </colgroup>
+                                                <thead>
+                                                    <tr>
+                                                        <th v-for="th in t.protect.talentmanagement.part_4.Table.Thead" :key="th" class="ac">{{ th }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(tr, idx) in t.protect.talentmanagement.part_4.Table.Tbody" :key="'perf-'+idx">
+                                                        <td class="ac">{{ tr.num }}</td>
+                                                        <td class="al">{{ tr.tit }}</td>
+                                                        <td class="ac">
+                                                            <!-- item.link를 tr.link로 수정 -->
+                                                            <button type="button" class="btn_download_file" @click="handleDownload(tr.link)">
+                                                                <span class="file_type_text">{{ t.protect.talentmanagement.part_4.txt }}</span>
+                                                            </button>
+                                                        </td>
+                                                        <td class="ac">{{ tr.date }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- 페이지네이션 (기본 Pagination 컴포넌트 활용) -->
+                                        <div class="pagination_wrap mt60">
+                                            <Pagination v-model="page" :totalPages="5" :visiblePages="5" @change="handlePage" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -729,13 +923,15 @@
 <script>
 import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
     name: "gsrsu03010101",
-    components: { Tabs, Buttons },
+    components: { Tabs, Buttons, Pagination },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
+            page: 2,
             CTabIdx: 0,      // 1depth
             SubTabIdx1: 0,   // 2depth
             SubTabIdx2: 0,   // 3depth
@@ -823,7 +1019,7 @@ export default {
                         }
                     },
                     Partnersupport : {
-                        Summary :"GS리테일은 상생경영을 통해 파트너사와 공동의 발전을 도모하고 있습니다. <br/> 이를 실현하기 위해 아래와 같은 제도를 운영하고 있습니다.",
+                        Summary :"GS리테일은 상생경영을 통해 파트너사와 공동의 발전을 도모하고 있습니다. <br/> 이를 실현하기 위해 아래와 같은 제도를 운영하고 있습니다.",
                         FinanceSupport: {
                             Summary: "파트너사의 지속성장 기반 강화를 위한<br/> 다양한 자금 지원 프로그램을 운영하고 있습니다.",
                             Fund: {
@@ -1219,7 +1415,179 @@ export default {
                                     { name: "한국백혈병소아암협회", img: require("@/assets/images/dummy/gsrsu030203_logo_9.png") }
                                 ]
                             }
+                        },
+                        broadcasting: {
+                            Summary: "방송 제작 인프라를 활용하여 미디어 소외 계층을 지원하고 <br/>관련 분야의 미래 인재를 육성합니다.",
+                            Projects: [
+                                { 
+                                    tit: "미디어나눔버스 지원", 
+                                    desc: "도서·산간 지역민과 노인·장애인 등 취약계층 미디어교육을 지원하기 위해 방송제작 시설과 장비를 탑재한 이동형 스튜디오 차량인 ‘찾아가는 미디어나눔버스’ 운영을 지원하고 있습니다.",
+                                    img: require("@/assets/images/dummy/gsrsu030204_1.png")
+                                },
+                                { 
+                                    tit: "콘텐츠리더장학금/소비자리더장학금 지원", 
+                                    desc: "GS SHOP 콘텐츠리더장학금과 소비자리더장학금을 지원하여 방송분야와 소비자권익보호를 위한 분야에서 활동할 미래 인재육성을 지원하고 있습니다.",
+                                    img: require("@/assets/images/dummy/gsrsu030204_2.png")
+                                }
+                            ],
+                            Partners: {
+                                Title: "주요 협력기관",
+                                Items: [
+                                    { name: "시청자미디어재단", img: require("@/assets/images/dummy/gsrsu030204_logo_1.png") },
+                                    { name: "KCOP", img: require("@/assets/images/dummy/gsrsu030204_logo_2.png") }
+                                ]
+                            }
+                        },
+                        sharing: {
+                            Summary: "GS리테일 숨은 나눔천사의 따뜻한 이야기를 전해드립니다.",
+                            List: [
+                                {
+                                    tit: "GS25 명륜아남점 박우정 스토어매니저",
+                                    desc: "신속한 판단과 실행으로 인명을 구한 GS25 명륜아남점 박우정 스토어매니저를 소개합니다.",
+                                    date: "2026.02.22",
+                                    badge: "GS25",
+                                    img: require("@/assets/images/dummy/gsrsu030205_1.png")
+                                },
+                                {
+                                    tit: "GS THE FRESH 상계점 김준영 매니저",
+                                    desc: "신속한 판단과 실행으로 인명을 구한 GS THE FRESH 상계점 김준영 매니저를 소개합니다.",
+                                    date: "2026.02.22",
+                                    badge: "GS THE FRESH",
+                                    img: require("@/assets/images/dummy/gsrsu030205_2.png")
+                                },
+                                {
+                                    tit: "편의점 1부문4지역)개발2팀 우찬용 팀장",
+                                    desc: "용기있는 행동으로 2번의 선행을 실천한 편의점 1부문4지역)개발2팀 우찬용 팀장을 소개합니다.",
+                                    date: "2026.02.22",
+                                    badge: "GS25",
+                                    img: require("@/assets/images/dummy/gsrsu030205_3.png")
+                                },
+                                {
+                                    tit: "수퍼사업부 가맹4팀 오동흠팀장",
+                                    desc: "무더운 날씨에 집에 오랜 시간 갇힌 어르신을 구조한 수퍼사업부 가맹4팀 오동흠 팀장을 소개합니다.",
+                                    date: "2026.02.22",
+                                    badge: "GS THE FRESH",
+                                    img: require("@/assets/images/dummy/gsrsu030205_4.png")
+                                },
+                                {
+                                    tit: "GS THE FRESH 안양메가트리아점 양승용부점장",
+                                    desc: "신속한 판단과 실행으로 인명을 구한 수퍼사업부 직영3팀 안양메가트리아점 양승용 부점장을 소개합니다.",
+                                    date: "2026.02.22",
+                                    badge: "GS THE FRESH",
+                                    img: require("@/assets/images/dummy/gsrsu030205_5.png")
+                                },
+                                {
+                                    tit: "GS THE FRESH 안양메가트리아점 양승용부점장",
+                                    desc: "신속한 판단과 실행으로 인명을 구한 수퍼사업부 직영3팀 안양메가트리아점 양승용 부점장을 소개합니다.",
+                                    date: "2026.02.22",
+                                    badge: "GS THE FRESH",
+                                    img: require("@/assets/images/dummy/gsrsu030205_6.png")
+                                }
+                            ]
                         }
+                    },
+                    protect: {
+                        humanrights: {
+                            Summary: "GS리테일은 임직원뿐만 아니라, 모든 이해관계자들의 인권을 존중하며 <br/>인간으로서의 가치와 존엄성을 보장하겠습니다.",
+                            Policy: {
+                                Title: "GS리테일 인권경영정책",
+                                Desc: "GS리테일은 세계인권선언(Universal Declaration of Human Rights)과 UNGC 10대 원칙(UN Global Compact), 그리고 국내외 노동 및 인권 관련 표준과 가이드라인을 지지하고 준수하여 회사의 경영활동에서 발생할 수 있는 모든 인권 관련 문제에 대한 방지와 해결을 위해 최선의 노력을 다하겠습니다.<br/><br/>이를 위해, GS리테일 인권경영정책을 수립해 임직원 외 협력사를 포함한 모든 이해관계자의 인권 존중을 실천하고자 합니다.<br/>또한, 협력사의 경우 '협력사 행동강령'에 인권관련 사항 역시 포함하여 인권경영을 실천할 수 있도록 하고 있습니다.",
+                                BtnText: "전문보기"
+                            },
+                            Goals: {
+                                Title: "일하기 좋은 직장만들기, 임직원 인권 목표",
+                                Items: [
+                                    { num: "01", desc: "즐겁고 보람된 일터를 만들어 갑니다." },
+                                    { num: "02", desc: "누구나 차별없이 존중받는 근무 환경을 만들어 갑니다." },
+                                    { num: "03", desc: "장애인, 취약근로자, 여성 및 임산부 근로자들의 행복하고, 일할 수 있는 근로환경을 제공합니다." },
+                                    { num: "04", desc: "GS리테일은 수평적 조직 문화를 통해 누구나 소신있는 발언과 의견을 존중합니다." }
+                                ]
+                            },
+                            Programs: {
+                                Title: "인권침해 방지 프로그램 운영",
+                                Items: [
+                                    { tit: "내부 신고제도 운영 (익명제보)", img: require("@/assets/images/dummy/gsrsu030301_1.png") },
+                                    { tit: "고충 상담실 운영", img: require("@/assets/images/dummy/gsrsu030301_2.png") },
+                                    { tit: "장애인 직업 훈련형 매장 운영", img: require("@/assets/images/dummy/gsrsu030301_3.png") },
+                                    { tit: "조직역량 서베이 운영", img: require("@/assets/images/dummy/gsrsu030301_4.png") },
+                                    { tit: "블라인드 채용 운영", img: require("@/assets/images/dummy/gsrsu030301_5.png") },
+                                    { tit: "아동 고용(노동) 금지", img: require("@/assets/images/dummy/gsrsu030301_6.png") },
+                                    { tit: "작은사랑 나눔회 운영", img: require("@/assets/images/dummy/gsrsu030301_7.png") },
+                                    { tit: "심리상담 (EAP)", img: require("@/assets/images/dummy/gsrsu030301_8.png") }
+                                ]
+                            },
+                            Assessment: {
+                                Title: "인권영향평가",
+                                Desc: "GS리테일은 2021년부터 임직원 대상 인권영향평가를 실시해, 현황 및 개선점을 도출하고 즉시 개선하고자 노력하고 있습니다.<br/><br/> 이외에도 인권 관련 임직원 교육을 실시하고, 인권영향평가 등이 이해관계자를 대상으로 확대될 수 있도록 협업을 계속해 나가겠습니다.",
+                                img: require("@/assets/images/dummy/gsrsu030301_2_1.png")
+                            }
+                        },
+                        talentmanagement: {
+                            part_1:{},
+                            part_2:{
+                                Summary: "진심 어린 서비스와 창의적 사고로 고객에게 사랑받는 최고의 전문가 육성을 위하여<br/>핵심가치, 직무역량, 리더십 역량, 자기주도학습 프로그램을 운영하고 있습니다.",
+                                MainTitle: "GS 인재육성 체계",
+                                DiagramImg: require("@/assets/images/dummy/gsrsu03030202.png"),
+                                Cards: [
+                                    {
+                                        num: "01",
+                                        tit: "제도직무 역량",
+                                        desc: "직무 수행에 필요한 전문 지식과 실무 역량을 확장하여, <br/>개인의 직무 성장을 체계적으로 이루도록 돕습니다.",
+                                        list: ["직무 Academy / GenAI Academy", "직무성장플랜(나의 성장계획 작성)"]
+                                    },
+                                    {
+                                        num: "02",
+                                        tit: "리더십 역량",
+                                        desc: "리더로서 구성원의 잠재력을 이해하고, 신뢰와 협력을 기반으로 함께 성장하는 리더십을 개발할 수 있도록 지원합니다.",
+                                        list: [
+                                            "임원 교육, 신임부문장 온보딩 과정 / 팀장 리더십 스쿨 / 신임 팀장 온보딩과정 / BOLD Leader 과정 / BOLD Manager 과정 등",
+                                            "조직책임자 리더십 워크숍, 임원/팀장 리더십 진단 및 피드백"
+                                        ]
+                                    },
+                                    {
+                                        num: "03",
+                                        tit: "GS Way 내재화",
+                                        desc: "직무 수행에 필요한 전문 지식과 실무 역량을 확장하여, <br/>개인의 직무 성장을 체계적으로 이루도록 돕습니다.",
+                                        list: ["GS Way 내재화 교육 프로그램(리더·구성원)", "GS Way 현업 적용 학습(Post Learning) 및 업무 적용 워크숍"]
+                                    },
+                                    {
+                                        num: "04",
+                                        tit: "온보딩",
+                                        desc: "각 직책 · 경력 단계별 구성원이 조직과 역할을 이해하고, 성장의 출발점을 형성할 수 있도록 지원합니다.",
+                                        list: [
+                                            "신임임원/신임팀장/신입사원/경력사원 온보딩 프로그램",
+                                            "신입사원/경력사원 리텐션 프로그램",
+                                            "GS그룹 신입사원 프로그램"
+                                        ]
+                                    },
+                                    {
+                                        num: "05",
+                                        tit: "자기주도 학습",
+                                        desc: "구성원이 스스로 학습하고 지속적으로 성장할 수 있도록, 학습 인프라와 제도적 지원을 제공합니다.",
+                                        list: ["내일On (온라인 연수원) / 전사 인사이트 특강", "자기주도학습 / 어학 / 자격증 / 사외과정 지원제도"]
+                                    }
+                                ]
+                            },
+                            part_3:{},
+                            part_4: {
+                                Summary: "GS리테일의 인재 경영과 관련된 실적 자료들을 열람하실 수 있습니다.",
+                                Desc: "본 자료는 이해 관계자 및 기관, 주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br/>용도 외 활용, 불법 유출 시에는 법에 의해 처벌을 받으실 수 있습니다.",
+                                Table: {
+                                    Tbody: [
+                                        {num: 4, tit: "인권 교육 실적 자료", date: "2021.06.21", url: "/files/human_rights_edu_2021.pdf" },
+                                        {num: 3, tit: "퇴직자 지원(창업·재고용) 제도", date: "2021.02.19", url: "/files/retirement_support.pdf" },
+                                        {num: 2, tit: "인원, 임금, 교육훈련비 현황", date: "2021.02.19", url: "/files/salary_status.pdf" },
+                                        {num: 1, tit: "산업안전보건 교육 자료", date: "2021.02.19", url: "/files/safety_edu.pdf" }
+                                    ]
+                                },
+                                txt:'다운로드'
+                            },
+                        },
+                        customer: {},
+                        safetymanagement: {},
+                        informationprotection: {},
+
+
                     }
                 }
             }
@@ -1235,6 +1603,26 @@ export default {
             this.CTabIdx = idx;
             this.SubTabIdx1 = 0;
             this.SubTabIdx2 = 0;
+        },
+        handlePage(page) {
+            console.log("선택된 페이지:", page);
+            this.page = page;
+        },
+        handleDownload(link) {
+            if (!link) {
+                alert("연결된 파일이 없습니다.");
+                return;
+            }
+            // 방법 1: 새 창으로 열기 (PDF 등 브라우저에서 지원하는 경우)
+            window.open(link, '_blank');
+
+            /* 
+            방법 2: 강제 다운로드 (파일 이름 지정이 필요한 경우)
+            const anchor = document.createElement('a');
+            anchor.href = link;
+            anchor.download = ''; // 브라우저가 파일명을 판단하게 하거나 직접 지정 가능
+            anchor.click();
+                */
         }
     }
 };
@@ -1252,6 +1640,7 @@ export default {
     .mb40 { margin-bottom: 40px; }
     .mb100 { margin-bottom:100px; }
     img {max-width:100%;}
+    .pagination {margin-top:60px; justify-content:center;}
     /* Visual Area */
     .title_wrap { display: block; width: 100%; height: 480px; padding: 160px 0; background: url('/src/assets/images/dummy/gsrsu03010101_bg.png') no-repeat center / cover; position: relative; }
     .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; letter-spacing: -1.44px; }
@@ -1358,7 +1747,7 @@ export default {
     .diagram_img_wrap {margin:100px 0; text-align:center;}
 
     /* 공급망 지속가능성 정책 한 줄 규칙 수정 */
-    .supplychain_policy .policy_box_wrap { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
+    .policy_box_wrap { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
     .policy_list { display: flex; flex-direction: column; gap: 24px; }
     .policy_item { display: flex; align-items: flex-start; gap: 12px; }
     .policy_item .label { font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; min-width: 60px; }
@@ -1386,15 +1775,43 @@ export default {
     .history_row:last-child::before {display:none;}
     .history_year { width: 80px; margin-left:60px; font-size: 32px; font-weight: 700; color: #000;}
     .history_details { flex: 1; list-style: none; padding: 0; }
-    .history_item {padding-bottom:40px; color:#161616; font-size:20px; font-weight:400;} /* 가이드상의 여백 유지 */
+    .history_item {padding-bottom:40px; color:#161616; font-size:20px; font-weight:400;} /* 가이드상의 여백 유지 */f
 
-    /* 아동/사회 취약계층지원 */
+    /* 아동/사회 취약계층지원, 방송발전 */
     .vulnerable_support .program_item .text_area {text-align: left;}
     .vulnerable_support .section_title_sub {margin-bottom: 40px; font-size: 40px; font-weight: 700;}
-    .vulnerable_support .brand_img_box {background-color: #F8F8F8;}
+    .vulnerable_support .brand_img_box, .broadcasting_development .brand_img_box {background-color: #F8F8F8;}
     .vulnerable_support .brand_grid li {max-width:340px;}
-    .community_support_area .brand_grid {display: flex; flex-wrap: wrap; gap: 40px 20px;}
-    .community_support_area .brand_grid li {width: calc(25% - 15px); flex: none; text-align: left;}
+    .community_support_area .brand_grid, .broadcasting_development .brand_grid {display: flex; flex-wrap: wrap; gap: 40px 20px;}
+    .community_support_area .brand_grid li, .broadcasting_development .brand_grid li {width: calc(25% - 15px); flex: none; text-align: left;}
+
+    /* 숨은나눔천사 특화 스타일 */
+    .sharing_card { width: calc(33.333% - 27px); } /* 3열 그리드 */
+    .sharing_card .text_l_bold { font-size: 20px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .sharing_card .p { font-size: 18px; color: #161616; min-height: 50px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .sharing_card .program_visual {height:auto;}
+    .card_footer { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+    .badge_gray { padding: 4px 8px; background: #F2F2F4; color: #67676F; border-radius: 4px; font-size: 14px; }
+    .date_text { font-size: 16px; color: #67676F; }
+
+    /* 인권경영 */
+    .human_rights_management .GS-universal-wrapper .p {color: #161616; font-size: 20px; line-height: 1.45;}
+    .human_rights_management .program_grid .program_item { width: calc(25% - 30px);}
+    .human_rights_management .program_visual { height: 240px;}
+    .human_rights_management .text_area {margin-top:24px;}
+    .human_rights_management strong  {font-size:20px; display:block;}
+    .human_rights_management .text_area span {margin-bottom:12px; font-size:32px; font-weight:700; display:block;}
+    .human_rights_management .owner_card_layout {grid-template-columns: repeat(4, 1fr);}
+
+    /* 인재육성체계 */
+    .p_desc {font-size:16px;}
+
+    /* 인재경영실적자료 */
+    .talent_performance_data .text_summary_sub {margin-bottom:16px;}
+    .talent_performance_data .intro_summary .GS {color:#90909A; font-size: 20px; line-height: 1.5;}
+    .talent_performance_data .policy_wrap table {border-top: 1px solid #161616;}
+    .talent_performance_data .policy_wrap th {background-color: #fff; border-bottom: 1px solid #E5E5E5;}
+    .talent_performance_data .policy_wrap td {border-right:0; border-left:0; border-bottom: 1px solid #E5E5E5; padding: 24px;}
 
 
     @media screen and (max-width: 1024px) {
@@ -1419,7 +1836,10 @@ export default {
         .timeline_wrapper { gap: 20px; }
         .history_row { gap: 20px; }
         .history_year { font-size: 24px; width: 60px; }
-        .community_support_area .brand_grid li {width: calc(50% - 15px);}
+        .sharing_card {width: calc(50% - 20px);}
+        .human_rights_management .program_grid .program_item {width: calc(50% - 20px);}
+        .human_rights_management .wide_info_box .img_frame {width: 100%; flex: none;}
+        .human_rights_management .owner_card_layout {grid-template-columns: repeat(2, 1fr);}
     }
 
     @media screen and (max-width: 767px) {
@@ -1446,7 +1866,8 @@ export default {
         .wide_info_box .img_frame { width: 100%; flex: none; }
         :deep(.sub_item) p br {display:none;}
         .owner_card_layout { grid-template-columns: 1fr; }
-        .gs25_owner_support .program_item { width: 100% !important; }
+        .gs25_owner_support .program_item, .community_support_area .brand_grid li, .broadcasting_development .brand_grid li, .human_rights_management .program_grid .program_item { width: 100% !important; }
+        .human_rights_management .program_visual {height: auto; aspect-ratio: 16/11;}
         .supplychain_policy .policy_box_wrap { padding: 20px; }
         .policy_item { flex-direction: column; gap: 4px; }
         .policy_item .label { font-size: 18px; min-width: auto; }
@@ -1458,6 +1879,11 @@ export default {
         .history_year { font-size: 20px; line-height: 1.4; width: 50px; }
         .vulnerable_support .brand_grid li {max-width:100%}
         .community_support_area .brand_grid {gap:0px 20px;}
-        .community_support_area .brand_grid li {width:100%;}
+        .human_rights_management .owner_card_layout {grid-template-columns: repeat(1, 1fr);}
+        .talent_performance_data .policy_wrap table {min-width: 500px;}
+        .talent_performance_data .intro_summary .GS {font-size: 16px;}
+        .talent_performance_data .intro_summary :deep(.GS) br {display:none;}
+        .talent_performance_data .policy_wrap tr td:last-of-type {display:none;}
+        .talent_performance_data .policy_wrap table colgroup col:last-of-type {display:none;}
     }
 </style>
