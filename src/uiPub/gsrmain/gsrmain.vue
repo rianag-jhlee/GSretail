@@ -46,6 +46,7 @@
                                 <strong>{{ item.txt }}</strong>
                                 <span>{{ item.sub }}</span>
                                 <p>{{ item.exp }}</p>
+                                <a href="#none">바로가기</a>
                             </div>
                         </div>
                     </div>
@@ -56,16 +57,22 @@
         <section v-if="t.sec03" class="sec03">
             <h2 v-html="t.sec03.title"></h2>
 
-            <div v-for="item in t.sec03.items" :key="item.img">
-                <span class="thumb">
-                    <em><img :src="item.img" /></em>
-                </span>
-                <div>
-                    <em><img :src="item.sub" /></em>
-                    <strong>{{ item.brand }}</strong>
-                    <p>{{ item.txt }}</p>
-                </div>
-            </div>
+            <swiper class="Swiper" :modules="swiperModules" v-bind="Options_sec03">
+                <swiper-slide v-for="item in t.sec03.items" :key="item.img">
+                    <div class="slide">
+                        <span class="thumb">
+                            <em><img :src="item.img" /></em>
+                        </span>
+                        <div>
+                            <em><img :src="item.sub" /></em>
+                            <p>
+                                <strong>{{ item.brand }}</strong>
+                                <span>{{ item.txt }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </swiper-slide>
+            </swiper>
         </section>
 
         <section v-if="t.sec04" class="sec04">
@@ -77,21 +84,25 @@
                 </li>
             </ul>
 
-            <div v-for="(item, idx) in t.sec04.items" :key="idx">
-                <span class="thumb">
-                    <em><img :src="item.img" /></em>
-                </span>
+            <swiper class="Swiper" :modules="swiperModules" v-bind="Options_sec04">
+                <swiper-slide v-for="item in t.sec04.items" :key="item.img">
+                    <div class="slide">
+                        <span class="thumb">
+                            <em><img :src="item.img" /></em>
+                        </span>
 
-                <div class="txt">
-                    <ul>
-                        <li v-for="(sub, i) in item.item" :key="i">
-                            <em>{{ sub.cate }}</em>
-                        </li>
-                    </ul>
+                        <div class="txt">
+                            <ul>
+                                <li v-for="(sub, i) in item.item" :key="i">
+                                    <em>{{ sub.cate }}</em>
+                                </li>
+                            </ul>
 
-                    <p v-html="item.title"></p>
-                </div>
-            </div>
+                            <p v-html="item.title"></p>
+                        </div>
+                    </div>
+                </swiper-slide>
+            </swiper>
         </section>
     </div>
 </template>
@@ -128,6 +139,31 @@ export default {
                     disableOnInteraction: false,
                 },
             },
+            Options_sec03: {
+                loop: false,
+                speed: 800,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+            },
+            Options_sec04: {
+                loop: true,
+                slidesPerView: 'auto',
+                spaceBetween: 12,
+                loopedSlides: 5,        // 실제 슬라이드 수보다 작게 지정
+                preloadImages: true,    // 이미지 미리 로드
+                watchSlidesProgress: true,
+                watchSlidesVisibility: true,
+
+                speed: 800, // ⭐ 부드럽게
+                watchSlidesProgress: true,
+
+                autoplay: {
+                    delay: 3000, // ⭐ 너무 짧게 금지
+                    disableOnInteraction: false,
+                },
+            },
 
             /* language contents */
             langData: {
@@ -161,6 +197,8 @@ export default {
                     sec03: {
                         title: "GS리테일이 만드는<br/> 편리한 일상",
                         items: [
+                            { img: require("@/assets/images/dummy/main_sec03_01.png"), sub: require("@/assets/images/dummy/main_sec03_01-1.png"), brand: "GS25", txt: "모든 순간, 일상의 중심" },
+                            { img: require("@/assets/images/dummy/main_sec03_01.png"), sub: require("@/assets/images/dummy/main_sec03_01-1.png"), brand: "GS25", txt: "모든 순간, 일상의 중심" },
                             { img: require("@/assets/images/dummy/main_sec03_01.png"), sub: require("@/assets/images/dummy/main_sec03_01-1.png"), brand: "GS25", txt: "모든 순간, 일상의 중심" }
                         ]
                     },
@@ -172,6 +210,38 @@ export default {
                             { link: "#none", txt: "GS리테일 Newsroom" },
                         ],
                         items: [
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "보도자료" }
+                                ],
+                                title: 'GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_01.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "보도자료" }
+                                ],
+                                title: 'GS25, 1300만 유튜버 쯔양과<br/> 공동 개발한 ‘대식가 시리즈’ 론칭'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "보도자료" }
+                                ],
+                                title: 'GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_01.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "보도자료" }
+                                ],
+                                title: 'GS25, 1300만 유튜버 쯔양과<br/> 공동 개발한 ‘대식가 시리즈’ 론칭'
+                            },
                             {
                                 img: require("@/assets/images/dummy/main_news_00.png"),
                                 item: [
@@ -255,6 +325,8 @@ export default {
 
                     if (i === index) {
                         slide.classList.add("active");
+
+                        console.log(i);
                     }
 
                     if (i === index - 1) {
@@ -524,115 +596,221 @@ section {
 
 .sec02 {
     position: relative;
-    padding: 200px 0;
+    padding: 200px 0 0;
 }
 
-.expWrap {
-    position: relative;
+.sec02 .expWrap {
     height: 100vh;
     overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.expTrack {
+.sec02 .expTrack {
     width: 100%;
     height: 100%;
-    max-width:1720px;
-    margin:0 auto;
-    padding:0 20px;
+    max-width: 1720px;
+    max-height: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
     position: relative;
-    display:flex;
-    justify-content:center;
-}
-
-.expSlide {
-    align-items: center;
+    display: flex;
+    align-items: flex-end;
     justify-content: center;
-
-    pointer-events: none;
-
-    z-index:1;
 }
 
-.expSlide:first-child {
-    z-index: 10; /* 🔥 첫 장이 기본 앞 */
-}
-
-/* 기본 카드 (작은 상태) */
-.card {
+.sec02 .expSlide {
     width: 0;
     height: 0;
+    pointer-events: none;
 
-    transform: translate(-40%, -40%) scale(0.85);
-    opacity: 0.9;
-
-    border-radius: 10px;
-
-    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    position: relative;
+    transition: all 0.95s cubic-bezier(0.82, 1, 0.86, 1);
 }
 
-.expSlide.active {
+.sec02 .expSlide:first-child {
+    margin-bottom: auto;
+}
+
+.sec02 .expSlide:first-child.active {
+    margin-left: 294px;
+}
+
+.sec02 .expSlide:last-child {
+    margin-top: auto;
+}
+
+.sec02 .expSlide:last-child.active {
+    margin-right: 242px;
+}
+
+.sec02 .expSlide.active {
     width: 100%;
     height: 100vh;
 
     max-width: 834px;
     max-height: 860px;
 
-    position:absolute; top:50%;
-    left:50%;
-
     pointer-events: auto;
-
-    z-index: 10;
-
-    transform:translate(-50%, -50%);
-}
-.expSlide.active .card {
-    transform: translate(0, 0) scale(1);
 }
 
-.expSlide.active + .expSlide {
+.sec02 .expSlide.active+.expSlide {
+    margin-left: 52px;
+}
+
+.sec02 .expSlide .card {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.sec02 .expSlide.active+.expSlide {
     width: 242px;
     height: 242px;
 }
 
-.expSlide.prev {
-    width:242px;
-    z-index:5;
+.sec02 .expSlide.prev {
+    width: 242px;
+    height: 242px;
+    margin-right: 52px;
+    margin-bottom: auto;
 }
 
-.expSlide.prev .card, .expSlide.active .card, .expSlide.active + .expSlide .card {
-    width: 100%;
-    height: 100%;
+.sec02 .expSlide.active .txt {
+    opacity: 1;
+    visibility: visible;
+    position: absolute;
+    bottom: 329px;
+    right: 0;
+    left: calc(50% + 467px);
+    display: flex;
+    flex-direction: column;
 }
 
-.expSlide .txt {
-    display:none;
+.sec02 .expSlide .txt {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s 1s;
+}
+
+.sec02 .expSlide .txt * {
+    color: #242428;
+}
+
+.sec02 .expSlide .txt strong {
+    font-size: 7.2rem;
+    letter-spacing: -0.02em;
+    line-height: 124%;
+}
+
+.sec02 .expSlide .txt span {
+    font-size: 2.4rem;
+    letter-spacing: -0.01em;
+    line-height: 150%;
+}
+
+.sec02 .expSlide .txt p {
+    margin-top: 24px;
+    color: #67676F;
+    font-size: 2rem;
+    letter-spacing: -0.01em;
+    line-height: 135%;
+}
+
+.sec02 .expSlide .txt a {
+    width: 56px;
+    height: 56px;
+    margin-top: 40px;
+    font-size: 0;
+    background-color: #F2F2F4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sec02 .expSlide .txt a:before {
+    width: 24px;
+    height: 24px;
+    background-color: red;
+    content: '';
+    display: block;
 }
 
 /* 썸네일 */
-.thumb {
+.sec02 .expSlide .thumb {
     width: 100%;
     height: 100%;
     overflow: hidden;
     border-radius: 16px;
-    display:block;
+    display: block;
 
     transition: all 0.7s ease;
 }
 
-.expSlide.active .thumb {
+.sec02 .expSlide.active .thumb {
     border-radius: 12px;
 }
 
-.expSlide.prev .thumb {
-    clip-path: inset(0 0 0 0 round 12px);
-    transform: scale(0.95);
-}
-
-.thumb img {
+.sec02 .thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
+.sec03 h2 {
+    text-align: left;
+    position: absolute;
+    right: 20px;
+    left:1128px;
+}
+
+.sec03 .swiper {
+    padding-left: 20px;
+}
+
+.sec03 .slide {
+    display: flex;
+    align-items: flex-end;
+}
+
+.sec03 .slide div {
+    margin-left: 153px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.sec03 .slide p {
+    display: flex;
+    flex-direction: column;
+}
+
+.sec03 .slide p strong {
+    color: #000;
+    font-size: 4rem;
+    letter-spacing: -0.01em;
+    line-height: 130%;
+}
+
+.sec03 .slide p span {
+    color: #67676F;
+    font-size: 2.4rem;
+    letter-spacing: -0.01em;
+    line-height: 150%;
+}
+
+.sec04 .explain {margin-top:24px; font-size:2rem; letter-spacing:-0.01em; line-height:135%; text-align:center;}
+.sec04 .quick {display:flex; justify-content:center; gap:12px;}
+.sec04 .quick a {padding:20px 24px; color:#000; font-size:2.4rem; font-weight:700; letter-spacing:-0.01em; line-height:135%; display:flex; align-items:center; gap:12px;}
+.sec04 .quick a:after {width:16px; height:24px; background-color:red; content:''; display:block;}
+.sec04 .swiper {margin-top:80px;}
+.sec04 .swiper-slide {width:552px;}
+.sec04 .slide {position:relative;}
+.sec04 .slide .txt {padding:40px; position:absolute; right:0; bottom:0; left:0; display:flex; flex-direction:column;}
+.sec04 .slide .txt * {color:#fff;}
+.sec04 .slide .txt ul {margin-bottom:12px; display:flex; align-items:center; gap:4px;}
+.sec04 .slide .txt li em {padding:1px 11px; font-size:1.6rem; letter-spacing:-0.01em; line-height:150%; border:1px solid #fff; border-radius:100px; display:block;}
+.sec04 .slide .txt p {font-size:2.4rem; letter-spacing:-0.01em; line-height:150%;}
 </style>
