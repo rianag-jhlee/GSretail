@@ -5,6 +5,7 @@ import "swiper/css";
 
 defineProps({
     items: { type: Array, default: () => [] },
+    // 선택: <template #action="{ item, index }">…</template> — 카드 하단 CTA(버튼 등)
     // type="num"  (기본): [{ num: "01", title: "...", desc: "..." }]
     // type="icon"        : [{ icon: imgSrc, iconAlt: "...", title: "...", desc: "..." }]
     // type="text"        : [{ title: "...", desc: "..." | [...], listDotted?: true }] — listDotted 시 desc 배열 ul에 list_dotted
@@ -50,6 +51,9 @@ onUnmounted(() => {
                 </ul>
                 <p v-else class="feature_card_desc" v-html="item.desc"></p>
             </template>
+            <div v-if="$slots.action" class="feature_card_action">
+                <slot name="action" :item="item" :index="i"></slot>
+            </div>
         </li>
     </ul>
     <!-- Mobile: Swiper -->
@@ -79,6 +83,9 @@ onUnmounted(() => {
                     </ul>
                     <p v-else class="feature_card_desc" v-html="item.desc"></p>
                 </template>
+                <div v-if="$slots.action" class="feature_card_action">
+                    <slot name="action" :item="item" :index="i"></slot>
+                </div>
             </div>
         </SwiperSlide>
     </Swiper>
@@ -100,7 +107,8 @@ onUnmounted(() => {
 .feature_card_title:last-child { margin-bottom: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; white-space: pre-line; display: block; word-break: keep-all; }
 .feature_card_desc_list { flex: 1; }
 .feature_card_desc { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-.feature_card_item > .feature_card_desc { flex: 1; }
+/* .feature_card_item > .feature_card_desc { flex: 1; } */
+.feature_card_action {flex-shrink: 0; }
 .list_dotted > li { padding-left: 12px; position: relative; }
 .list_dotted > li + li { margin-top: 8px; }
 .list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #67676f; border-radius: 50%; position: absolute; top: 11px; left: 0; }

@@ -107,7 +107,7 @@
                             <h3>윤리규범 실천서약</h3>
                             <p>정도경영을 위한 임직원의 기본 윤리를 숙지하고 회사업무를 수행함에 있어 GS리테일인으로서 아래의 행위를 하지 않는다.</p>
                         </header>
-                        <ol class="base_list type2">
+                        <ol class="base_list type02">
                             <li v-for="(item, idx) in t.EthicsPracticeItems" :key="item.key" class="base_item">
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
                                 <strong>{{ item.title }}</strong>
@@ -160,10 +160,7 @@
                                         <div role="list" aria-label="제보 처리 단계" class="process_flow">
                                             <template v-for="(stepLabel, sIdx) in t.WhistleProcessSteps" :key="stepLabel">
                                                 <p role="listitem">{{ stepLabel }}</p>
-                                                <span
-                                                    v-if="sIdx < t.WhistleProcessSteps.length - 1"
-                                                    aria-hidden="true"
-                                                />
+                                                <ProcessFlowArrow v-if="sIdx < t.WhistleProcessSteps.length - 1" />
                                             </template>
                                         </div>
                                     </div>
@@ -221,7 +218,7 @@
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
                                 <strong>{{ row.title }}</strong>
                                 <p v-html="row.desc"></p>
-                                <div v-if="row.grayBox" class="gray_box gray_box">
+                                <div v-if="row.grayBox" class="gray_box type02">
                                     <strong>{{ row.grayBox.title }}</strong>
                                     <p v-html="row.grayBox.desc"></p>
                                 </div>
@@ -432,7 +429,9 @@
 
                                 <div class="form_action_area">
                                     <Buttons btn-class="btn_big primary">신청</Buttons>
-                                    <Buttons btn-class="btn_big gray">취소</Buttons>
+                                    <Buttons tag="button" type="button" btn-class="btn_big gray" @click="closeEthicsInquiry">
+                                        취소
+                                    </Buttons>
                                 </div>
                             </div>
                         </section>
@@ -470,21 +469,190 @@
                                 {{ t.ComplianceManualBtnDownload }}
                             </Buttons>
                         </div>
-                        <!-- <div class="compliance_manual_inner">
-                        </div> -->
                     </div>
-                   
-                    <!-- <section class="sec_compliance_manual" aria-label="공정거래 자율준수 편람">
-                    </section> -->
                 </div>
                 <div v-show="CTabIdxCompliance === 1" class="panel_inner" :aria-label="t.TabsCompliance?.[1]?.item || ''">
                     <!-- 자율준수 관리자 안내 -->
+                    <header class="tab_header">
+                        <h2>GS리테일은협력사와의 신뢰와 협력을 통해 공동의 발전 도모와 자율준수 프로그램의 <br />
+                            적극적 실천을 위해 기준과 절차에 따라 ‘자율준수관리자’를 임명하여 운영하고 있습니다.</h2>
+                    </header>
+                    <section>
+                        <header class="sub_header">
+                            <h3>자율준수 관리자 역할</h3>
+                        </header>
+                        <FeatureCards
+                            class="law_feature_cards feature_cards_grid cp_manager_role_cards"
+                            type="num"
+                            :items="t.ComplianceManagerRoleFeatureItems"
+                            :no-swipe="true"
+                        />
+                    </section>
+                    <section>
+                        <header class="sub_header">
+                            <h3>자율준수 관리자 선임절차</h3>
+                        </header>
+                        <div class="cp_appoint_board">
+                            <div role="list" aria-label="자율준수 관리자 선임 절차" class="process_flow">
+                                <template v-for="(step, sIdx) in t.ComplianceAppointmentSteps" :key="step.key">
+                                    <article role="listitem">
+                                        <h4 v-html="step.title"></h4>
+                                        <p>{{ step.note }}</p>
+                                    </article>
+                                    <ProcessFlowArrow v-if="sIdx < t.ComplianceAppointmentSteps.length - 1" />
+                                </template>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <header class="sub_header">
+                            <h3>자율준수 관리자</h3>
+                        </header>
+                        <figure class="cp_manager_banner">
+                            <figcaption>
+                                <strong>GS리테일은<br />공정거래 자율준수 <br />모범기업입니다.</strong>
+                                <p>공정거래 자율준수를 통한 올바른 업무 수행을 통해 위험을 줄이고 지속 가능한 <br />성장을 이룰 수 있습니다.<br /><br />
+                                    법규 위반으로부터 GS리테일과 임직원을 안전하게 보호하고,<br />
+                                    고객과 파트너사 등으로부터 신뢰를 얻어 지속적으로 성장하도록 임직원 여러분의 <br />
+                                    적극적인 자율준수 실천을 당부드립니다.
+                                </p>
+                                <div class="cp_manager_banner_content">
+                                    <dl>
+                                        <dt>GS리테일 지속가능경영부분</dt>
+                                        <dd>상무 <strong>곽창헌</strong></dd>
+                                    </dl>
+                                    <div>
+                                        <img src="@/assets/images/dummy/gsrsu040101_11.png" alt="곽창헌 사인">
+                                    </div>
+                                </div>
+                            </figcaption>
+                        </figure>
+                        <p>
+                            GS리테일 임직원 여러분! <br />
+                            안녕하십니까. 자율준수 관리자 곽창헌 상무입니다.<br /><br />
+
+                            이윤 극대화를 추구하는 기업활동의 속성에도 불구하고,<br />
+                            오늘날에는 사회적 책임의 이행과 공정하고 투명한 경영체계의 확립이 기업의 지속적 성장 가능성을 판가름하는 핵심 요소로 자리 잡았습니다.<br />
+                            그렇기에 기업과 구성원이 공정한 경쟁에 관하여 정해진 법규를 스스로 준수하는 것은 선택사항이 아니라 필수 불가결한 사항입니다.<br /><br />
+
+                            공정거래 자율준수 프로그램(CP: Compliance Program)은<br />
+                            기업이 공정거래 관련 법규를 스스로 준수하기 위해 운영하는 준법시스템으로서, <br />
+                            공정거래 관련 법규 위반을 사전에 예방함은 물론 조기에 위반 여부를 발견하고 시정할 수 있도록 하는 제도입니다.<br /><br />
+
+                            편의점, 수퍼 및 홈쇼핑 사업을 견인하는 우리 GS리테일은 공정한 기업활동에 대한 시대적 요구에 부응하고자<br />
+                            1995년부터 이미 투명한 거래 의지를 대내외에 천명하고 공정거래를 자율적으로 실천해 왔으며,<br />
+                            자율준수 문화의 정착과 확산에 힘을 쏟고 있는 공정거래 자율준수 모범 기업입니다.<br /><br />
+
+                            공정거래 자율준수 프로그램은 자율준수 관리자와 CP 주관부서만의 업무가 아니라<br />
+                            모든 임직원이 일상 업무를 수행함에 있어 지켜야 할 원칙이자 기준입니다.<br />
+                            자율준수를 통한 올바른 업무 수행을 통해 위험을 줄이고 지속 가능한 성장을 이룰 수 있습니다.<br /><br />
+
+                            법규 위반으로부터 GS리테일과 임직원을 안전하게 보호하고, 고객과 파트너사 등으로부터 신뢰를 얻어<br />
+                            우리 GS리테일이 지속적으로 성장하도록 임직원 여러분의 적극적인 자율준수 실천을 당부 드립니다.<br /><br />
+                            자율준수 관리자와 CP 주관부서가 최선을 다해 임직원 여러분을 돕겠습니다.<br /><br />
+
+                            감사합니다.
+                        </p>
+                    </section>
                 </div>
                 <div v-show="CTabIdxCompliance === 2" class="panel_inner" :aria-label="t.TabsCompliance?.[2]?.item || ''">
-                    <!-- 공정거래 4대 가이드라인 -->
+                    <!-- 공정거래 4대 가이드라인 (Figma 491:13910) -->
+                    <header class="tab_header">
+                        <h2>GS리테일은 투명하고 거래질서 확립과 자율준수 프로그램의 지속적 실천을 위해<br />공정거래 4대 가이드라인을 도입, 적용하고 있습니다.</h2>
+                    </header>
+                    <section>
+                        <FeatureCards
+                            class="feature_cards_grid fair_trade_guideline_cards"
+                            type="num"
+                            :items="t.FairTradeGuidelineItems"
+                            :no-swipe="true"
+                        >
+                            <template #action>
+                                <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon after">{{ t.FairTradeGuidelineDetailBtn }}</Buttons>
+                            </template>
+                        </FeatureCards>
+                    </section>
                 </div>
                 <div v-show="CTabIdxCompliance === 3" class="panel_inner" :aria-label="t.TabsCompliance?.[3]?.item || ''">
-                    <!-- 공정거래 업무기준 -->
+                    <div class="wrap_tabs_type03">
+                        <Tabs
+                            v-model="CTabIdxFairTradeBiz"
+                            :tab-items="t.TabsFairTradeBiz"
+                            tab-class="type_03"
+                            :tab-slide="true"
+                        />
+                    </div>
+                    <div v-show="CTabIdxFairTradeBiz === 0" class="panel_third_depth" :aria-label="t.TabsFairTradeBiz?.[0]?.item || ''">
+                        <section class="fair_trade_work_standard_sec">
+                            <Accordion>
+                                <AccordionItem v-for="item in t.FairTradeWorkStandardAccordionItems" :key="'sup-' + item.key" :item-key="'sup-' + item.key">
+                                    <template #title><strong v-html="item.title" class="acc_tit_txt"></strong></template>
+                                    <template v-if="item.key === '01'"> 
+                                        <ol class="fair_trade_standard_sections">
+                                            <li v-for="section in t.FairTradePartnerStandardSections" :key="'sup-sec-' + section.no">
+                                                <article :class="{ gray_box: section.no === '부칙' }">
+                                                    <template v-if="section.no === '부칙'">
+                                                        <p v-html="section.addendumText"></p>
+                                                    </template>
+                                                    <template v-else>
+                                                        <h4>{{ section.title ? `${section.no} ${section.title}` : section.no }}</h4>
+                                                        <div class="fair_trade_standard_body">
+                                                            <p v-if="section.lead">{{ section.lead }}</p>
+                                                            <component v-if="section.items" :is="section.no === '05' ? 'ul' : 'ol'" :class="section.no === '05' ? 'plain_list' : 'num_list'">
+                                                                <li v-for="row in section.items" :key="'sup-sec-' + section.no + '-' + row.num">
+                                                                    <p v-html="row.title"></p>
+                                                                    <ul v-if="row.details">
+                                                                        <li v-for="(detail, dIdx) in row.details" :key="'sup-sec-' + section.no + '-' + row.num + '-' + dIdx">
+                                                                            <template v-if="typeof detail === 'string'">
+                                                                                {{ detail }}
+                                                                            </template>
+                                                                            <template v-else>
+                                                                                <p>{{ detail.text }}</p>
+                                                                                <ul v-if="detail.children">
+                                                                                    <li v-for="(child, cIdx) in detail.children" :key="'sup-sec-' + section.no + '-' + row.num + '-' + dIdx + '-' + cIdx">{{ child }}</li>
+                                                                                </ul>
+                                                                            </template>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </component>
+                                                            <dl v-if="section.criteria" class="fair_trade_standard_dl">
+                                                                <template v-for="row in section.criteria" :key="'sup-sec-' + section.no + '-' + row.term">
+                                                                    <dt>{{ row.term }}</dt>
+                                                                    <dd>
+                                                                        <ul v-if="row.details" class="fair_trade_standard_desc_list">
+                                                                            <li v-for="detail in row.details" :key="'sup-sec-' + section.no + '-' + row.term + '-' + detail">{{ detail }}</li>
+                                                                        </ul>
+                                                                        <p v-else>{{ row.desc }}</p>
+                                                                    </dd>
+                                                                </template>
+                                                            </dl>
+                                                            <ol v-if="section.definitions" class="num_list">
+                                                                <li v-for="row in section.definitions" :key="'sup-sec-' + section.no + '-' + row.term">
+                                                                    <p>{{ `${row.desc}` }}</p>
+                                                                    <ul v-if="row.details">
+                                                                        <li v-for="detail in row.details" :key="'sup-sec-' + section.no + '-' + row.term + '-' + detail">{{ detail }}</li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </template>
+
+
+                                                    
+                                                </article>
+                                            </li>
+                                        </ol>
+                                    </template>
+                                    <p v-else class="fair_trade_work_standard_desc">{{ item.desc }}</p>
+                                </AccordionItem>
+                            </Accordion>
+                        </section>
+                    </div>
+                    <div v-show="CTabIdxFairTradeBiz === 1" class="panel_third_depth" :aria-label="t.TabsFairTradeBiz?.[1]?.item || ''">
+                        
+                    </div>
+                   
                 </div>
             </div>
 
@@ -494,14 +662,17 @@
 </template>
 
 <script setup>
-import { computed, defineProps, ref } from "vue";
+import { computed, defineProps, ref, watch } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
+import Accordion from "@/components/Accordion.vue";
+import AccordionItem from "@/components/AccordionItem.vue";
 import Buttons from "@/components/Buttons.vue";
 import Inputs from "@/components/Inputs.vue";
 import CardItem from "@/components/CardItem.vue";
 import NumberedInfoList from "@/components/NumberedInfoList.vue";
 import ConsentInfoBox from "@/components/ConsentInfoBox.vue";
+import ProcessFlowArrow from "@/components/ProcessFlowArrow.vue";
 import imgEthics01 from "@/assets/images/dummy/gsrsu040101_01.png";
 import imgEthics02 from "@/assets/images/dummy/gsrsu040101_02.png";
 import imgEthics03 from "@/assets/images/dummy/gsrsu040101_03.png";
@@ -520,6 +691,7 @@ const CTabIdx = ref(0);
 const CTabIdxEsgArchive = ref(0);
 const CTabIdxEsgSystem = ref(0);
 const CTabIdxCompliance = ref(0);
+const CTabIdxFairTradeBiz = ref(0);
 const isEthicsInquiryOpen = ref(false);
 const isEthicsConsentAgreed = ref(false);
 const isEthicsConsentAgreed2 = ref(false);
@@ -565,6 +737,10 @@ const langData = {
             { item: "자율준수 관리자 안내" },
             { item: "공정거래 4대 가이드라인" },
             { item: "공정거래 업무기준" },
+        ],
+        TabsFairTradeBiz: [
+            { item: "수퍼, 편의점, 전문점" },
+            { item: "TV홈쇼핑" },
         ],
         ComplianceProgramHeroTitle:
             "GS리테일은 책임을 바탕으로 한 자유경쟁의 원칙에 따라 상호 신뢰와 협력으로 <br class=\"p_br\" />공동의 발전을 도모하기 위해 자율적으로 공정거래를 실천하고 있습니다.",
@@ -612,6 +788,263 @@ const langData = {
                 desc: "CP가 효과적이고 지속적으로 운영될 수 있도록 CP의 기준, 절차 및 운용 등에 대한 점검과 평가 등을 실시하고 그에 따라 제도개선 조치 등을 시행하고 있습니다.",
             },
         ],
+        ComplianceManagerRoleFeatureItems: [
+            { num: "01", title: "법규준수 여부에 대한 감독/감사를 실시합니다." },
+            { num: "02", title: "자율준수편람 제작 및 운영을 합니다." },
+            { num: "03", title: "자율준수 교육을 지휘/감독합니다." },
+        ],
+        ComplianceAppointmentSteps: [
+            { key: "ap1", iconKey: "recommend", title: "자율준수 관리자<br />후보 추천", note: "제척/기피 요건" },
+            { key: "ap2", iconKey: "verify", title: "자율준수 관리자<br />역량 검증", note: "반부패도 검증, 업무 역량 검증" },
+            { key: "ap3", iconKey: "appoint", title: "선임, 임명", note: "임기 3년" },
+            { key: "ap4", iconKey: "notify", title: "임직원 안내", note: "임무 수행" },
+        ],
+        FairTradeGuidelineDetailBtn: "자세히 보기",
+        FairTradeGuidelineItems: [
+            {
+                num: "01",
+                title: "파트너사 선정, 운영 가이드 라인",
+                desc: "파트너사의 공정한 선정 · 운영을 위한 실천사항",
+            },
+            {
+                num: "02",
+                title: "서면 발급, 보존 가이드 라인",
+                desc: "하도급거래에서의 서면발급 및 보존에 관한 가이드라인",
+            },
+            {
+                num: "03",
+                title: "하도급 거래 심의위원회 운영 규정",
+                desc: "GS리테일 하도급거래 내부 심의위원회 설치·운영을 위한 가이드라인",
+            },
+            {
+                num: "04", 
+                title: "규정계약 체결 가이드 라인",
+                desc: "대·중소기업간 상생협력을 위한 계약 체결 가이드라인",
+            },
+       
+        ],
+        FairTradeWorkStandardAccordionItems: [
+            {
+                key: "01",
+                title: "<span class='acc_num'>1.</span>파트너사 선정, 운영 기준",
+                desc: "파트너사의 공정한 선정 및 운영을 위한 기본 원칙입니다.",
+            },
+            {
+                key: "02",
+                title: "<span class='acc_num'>2.</span>서면 발급 및 보존 기준",
+                desc: "하도급거래에서의 서면 발급 및 보존 절차를 안내합니다.",
+            },
+            {
+                key: "03",
+                title: "<span class='acc_num'>3.</span>하도급 거래 심의위원회 운영 기준",
+                desc: "하도급거래 심의위원회의 설치, 심의, 의결 절차를 규정합니다.",
+            },
+            {
+                key: "04",
+                title: "<span class='acc_num'>4.</span>표준계약 체결 기준",
+                desc: "대·중소기업 상생협력을 위한 계약 체결 기준을 안내합니다.",
+            },
+            {
+                key: "05",
+                title: "<span class='acc_num'>5.</span>파트너사 경영정보요구 기준",
+                desc: "파트너사의 공정한 선정 · 운영을 위한 실천사항",
+            },
+            {
+                key: "06",
+                title: "<span class='acc_num'>6.</span>파트너사 종업원 파견 기준",
+                desc: "하도급거래에서의 서면발급 및 보존에 관한 가이드라인",
+            },
+            {
+                key: "07",
+                title: "<span class='acc_num'>7.</span>파트너사 특약매입거래 기준",
+                desc: "GS리테일 하도급거래 내부 심의위원회 설치·운영을 위한 가이드라인",
+            },
+            {
+                key: "08", 
+                title: "<span class='acc_num'>8.</span>파트너사 반품관련 기준",
+                desc: "대·중소기업간 상생협력을 위한 계약 체결 가이드라인",
+            },
+        ],
+        FairTradePartnerStandardSections: [
+            {
+                no: "01",
+                title: "목적",
+                lead: "이 기준은 주식회사 지에스리테일(이하“회사”라 함)과 동반자적 입장에서 파트너사(이하“파트너사”라 함) 선정 및 운용과정에 대한 투명성과 공정성을 제고하여 합리적이며 공정한 거래질서를 확립시키고, 소비자에게 안전한 상품을 제공하는 사회적 책임을 다함에 목적이 있다.",
+            },
+            {
+                no: "02",
+                title: "준수의무",
+                items: [
+                    { num: "1", title: "“회사”의 임직원은 “파트너사”와의 거래에 있어서 이 기준 이외에도 『독점규제 및 공정 거래에 관한 법률』과 『대규모유통업에서의 거래 공정화에 관한 법률(이하 ‘대규모유통업법’ 이라 함)』 등 관계 법령을 엄격히 준수하여야 한다." },
+                    { num: "2", title: "이 기준은 “파트너사”가 상시 확인할 수 있도록 “회사” 홈페이지 등에 게시하고, 내부직원에 대해서는 정기적으로 교육하여 준수할 수 있도록 한다." },
+                ],
+            },
+            {
+                no: "03",
+                title: "용어의 정의",
+                definitions: [
+                    { term: "1", desc: "“파트너사”란 “회사”와 상품 공급 거래 등의 대상업체로 예정되거나, 거래중인 사업자를 의미한다." },
+                    { term: "2", desc: "“파트너사Pool”이란 “회사”가 정한 기준에 따라 마스터에 등록하여 관리·운용하는 “파트너사” 그룹을 의미한다." },
+                    { term: "3", desc: "“파트너사 선정”은 “회사”의 “파트너사Pool”에 등록하는 것을 의미한다." },
+                    { term: "4", desc: "“파트너사 운용”이란 “회사”가 “파트너사”로 선정 및 등록된 업체에 대한 거래 개시 부여, 등록 취소 등 “파트너사Pool”을 일정한 기준에 따라 관리하는 것을 의미한다." },
+                ],
+            },
+            {
+                no: "04",
+                title: "파트너사 선정기준",
+                lead: "“회사”는 “파트너사” 선정 시 거래 개시를 위한 선정 기준에 공정성을 기하여야 하며, 고객 및 제3자에 대한 신뢰 및 건전성을 확보하기 위해 아래의 사항을 기준으로 “파트너사”를 선정한다.",
+                criteria: [
+                    { term: "1. 전문성", details: ["가. 상품개발력", "나. 가격경쟁력", "다. 판촉능력", "라. 업력"] },
+                    { term: "2. 공신력", details: ["가. 신용평가", "나. 현금흐름", "다. 담보능력", "라. 거래실적"] },
+                    { term: "3. ESG 기준", details: ["가. 환경", "나. 안전보건", "다. 노동 및 인권", "라. 윤리규범", "마. 반부패/준법경영"] },
+                    { term: "4. 기타 상품 특성에 따른 기준(위생, 인증, 배송능력 등)", desc: "" },
+                ],
+            },
+            {
+                no: "05",
+                title: "파트너사 신청절차",
+                lead: "“파트너사” 선정절차는 다음 각 호의 순서에 따라 공정하고 투명하게 진행한다.",
+                items: [
+                    { num: "1", title: "1. “회사” 홈페이지(www.gsretail.com) 입점상담 페이지를 통해 입점신청서, 기업소개서, 상품제안서 등 서류를 첨부하여 상담 신청" },
+                    { num: "2", title: "2. 상담 신청 접수일로부터 10 영업일 이내에 서류심사 결과 통보" },
+                    { num: "3", title: "3. 서류심사 통과 시, 상담일정 협의하여 상담 진행" },
+                    { num: "4", title: "4. 제출서류, 상담결과 등을 공정하게 정량 평가하여 최종 입점 여부 결정" },
+                    { num: "5", title: "5. 입점이 결정된 “파트너사”에게 거래 약정 체결에 필요한 사항과 절차 및 일정 안내" },
+                    { num: "6", title: "6. 상호 협의 하에 계약서를 작성" },
+                ],
+            },
+            {
+                no: "06",
+                title: "거래개시",
+                items: [
+                    { num: "1", title: "“파트너사”와 공정한 거래를 개시하기 위해서는 거래 관련 제반사항에 대하여 상호 충분한 협의 후 물품공급계약서를 체결하여야 한다." },
+                    { num: "2", title: "거래는 물품공급계약서에 기명 날인 또는 서명(전자서명 포함)하여 그 서면(전자문서 포함)을 “파트너사”에 준 때에 개시한다." },
+                    { num: "3", title: "“회사”는 계약기간 도중에 거래조건을 변경하지 않는다." },
+                    { num: "4", title: "“회사”는 구두발주를 하지 않는다." },
+                ],
+            },
+            {
+                no: "07",
+                title: "불공정거래행위의 금지",
+                items: [
+                    {
+                        num: "1",
+                        title: "“회사”는“파트너사”와 거래 시 다음 각 호의 사항을 준수하며, 우월적인 지위를 이용하여 “파트너사”에게 불공정한 거래를 강요하지 않는다. <br />이 기준은 공정거래 관련 법령에 정한 사항에 따른다.",
+                        details: [
+                            "1. 서면계약 체결 의무",    
+                            "2. 상품대금 감액금지",
+                            "3. 상품판매대금 지급의무",
+                            "4. 부당한 상품 수령 거부 및 수령 지체 금지",
+                            "5. 부당한 상품 반품 금지",
+                            "6. 판촉비용 등의 부당 강요 금지",
+                            "7. 배타적 거래 강요금지",
+                            "8. 경영정보 제공 요구 금지",
+                            "9. 경영활동 간섭 금지",
+                            "10. 부당한 경제상의 이익 수령 금지",
+                            "11. 부당한 계약 변경 등 불이익 제공 금지",
+                            "12. “파트너사”에게 특정 벤더를 지정하여 거래하도록 요구하는 행위 금지",
+                            "13. “파트너사”에게 특정 벤더를 이용하지 않으면 불이익을 주는 행위 금지",
+                        ],
+                    },
+                    { num: "2", title: "“회사”는 “파트너사”의 부득이한 사정을 제외하고는 직매입을 원칙으로 한다." },
+                    { num: "3", title: "최저임금 인상, 원재료 가격 상승 등으로 납품하는 상품의 공급원가가 변동되어 납품가격 조정이 불가피한 경우에는 “파트너사”는 “회사”에 납품가격의 조정을 신청할 수 있다." },
+                    { num: "4", title: "“파트너사”는 “회사”의 담당MD가 불공정한 거래를 요구할 경우에는 “회사”의 홈페이지 내 정도경영 제보 페이지에 제보를 할 수 있다." },
+                    { num: "5", title: "“파트너사”에게 부당하게 재고 부담을 전가하는 판매분 매입 거래는 원칙적으로 금지된다. 다만, 상품의 특성, “파트너사”의 필요 등을 고려하여 “파트너사”에게 부당하게 재고부담을 전가하기 위한 목적이 아니라고 인정되는 경우에는 예외적으로 인정될 수 있다." },
+                ],
+            },
+            {
+                no: "08",
+                title: "이해관계자 거래 배제",
+                items: [
+                    { num: "1", title: "“파트너사” 임직원 등이 “회사” 임직원의 친인척 등 이해관계자인 경우 “회사”는 관련 임직원이 해당 “파트너사”의 상품 선정 및 거래조건 협상 절차 등에 직·간접적으로 관여하지 않도록 배제한다." },
+                    {
+                        num: "2",
+                        title: "제1항의 이해관계자의 기준은 아래와 같다.",
+                        details: [
+                            {
+                                text: "1. 민법 제777조에 따른 다음 각 목의 친족",
+                                children: [
+                                    "가. 8촌 이내의 혈족",
+                                    "나. 4촌 이내의 인척(인척의 범위는 민법 제769조에 따름)",
+                                    "다. 배우자",
+                                ],
+                            },
+                            "2. “회사”에 근무이력이 있는 임직원 등 기존 퇴사자",
+                            "3. GS그룹 계열사 관계자",
+                        ],
+                    },
+                    { num: "3", title: "“최저임금 인상, 원재료 가격 상승 등으로 납품하는 상품의 공급원가가 변동되어 납품가격 조정이 불가피한 경우에는 “파트너사”는 “회사”에 납품가격의 조정을 신청할 수 있다." },
+                    { num: "4", title: "“파트너사”는 “회사”의 담당MD가 불공정한 거래를 요구할 경우에는 “회사”의 홈페이지 내 정도경영 제보 페이지에 제보를 할 수 있다." },
+                    { num: "5", title: "“파트너사”에게 부당하게 재고 부담을 전가하는 판매분 매입 거래는 원칙적으로 금지된다. 다만, 상품의 특성, “파트너사”의 필요 등을 고려하여 “파트너사”에게 부당하게 재고부담을 전가하기 위한 목적이 아니라고 인정되는 경우에는 예외적으로 인정될 수 있다." },
+                ],
+            },
+            {
+                no: "09",
+                title: "거래 종료",
+                items: [
+                    {
+                        num: "1",
+                        title: "“회사”와 “파트너사”는 다음 각 호의 어느 하나에 해당하는 경우 물품공급 계약을 중단 혹은 종료할 수 있다.",
+                        details: [
+                            "1. 양 당사자의 서면상 합의가 있는 경우",
+                            "2. “회사” 또는 “파트너사”가 발행한 어음·수표가 지급 거절되거나, “회사” 또는 “파트너사” 자신에 의한 회생·파산 절차의 신청이 있거나, 채권자의 신청에 의해 동 절차가 개시된 경우",
+                            "3. 기업구조조정촉진법상 부실징후기업으로 판단되어 이에 관한 절차가 개시된 경우",
+                            "4. “회사” 또는 “파트너사”의 주요 재산(이 계약에 따라 “파트너사”가 “회사”에 대하여 가지는 납품대금 청구 채권을 포함한다)에 대하여 강제경매 등이 실행되어 더 이상의 이 계약 이행이 곤란하게 된 경우",
+                            "5. 관계기관에 의하여 영업정지, 영업허가취소 등의 처분을 받은 경우",
+                            "6. “파트너사”가 납품한 상품이 관계법령에 저촉되거나, “파트너사”가 라이선스권자와 체결한 라이선스계약이 종료되어 해당 상품의 납품 또는 판매가 불가능하게 된 경우",
+                            "7. 물품공급계약에 명시된 브랜드나 거래 품목의 생산이 중단 또는 종료된 경우",
+                            {
+                                text: "8. 기타 다음 각 목의 예와 같이 원활한 계약이행을 현저히 저해하는 사유가 발생한 경우",
+                                children: [
+                                    "가. 공급상품의 생산이 장기간 중단되거나 종료된 경우",
+                                    "나. 원산지 표기 오류인 경우",
+                                    "다. “파트너사”의 관리소홀로 인한 품질 불량이 3회 이상 적발이 될 경우",
+                                    "라. 상품의 판매실적이 현저히 저조한 경우",
+                                    "마. “회사” 또는 “파트너사”가 물품공급계약의 중요한 사항을 위반하여 상대방이 14일 이상의 기간을 정하여 시정을 요구하였으나 시정이 이루어지지 않은 경우",
+                                    "바. 기타 물품공급계약서 기재된 계약의 해지 및 해제의 사유에 해당할 경우",
+                                ],
+                            },
+                        ],
+                    },
+                    { num: "2", title: "제1항에 의하여 거래가 중지 또는 종료가 되었다 하더라도 “파트너사”로부터 공급받는 물품에 대해서는 반품을 하여서는 안 된다. 단, 법령에서 허용하는 반품 사유에 해당하는 경우에는 예외로 한다." },
+                ],
+            },
+            {
+                no: "10",
+                title: "거래 종료 절차",
+                items: [
+                    { num: "1", title: "“회사”가 “파트너사”와의 거래를 종료할 경우에는 서면으로 종료에 대한 명확한 사유를 기재하여 전달하여야 하며, 계약기간 만료로 인한 거래종료의 경우 계약기간 만료일로부터 30일 전까지 계약갱신 거절사유를 구체적으로 적시하여 서면으로 통지하여야 한다." },
+                    { num: "2", title: "“회사”는 “파트너사”의 귀책 사유로 인하여 거래를 종료할 경우에는 “파트너사”가 소명할 수 있는 기회를 주어야 한다." },
+                    { num: "3", title: "“회사”와 “파트너사”는 거래 종료에 따른 대금 정산 등의 절차를 성실히 이행한다." },
+                ],
+            },
+            {
+                no: "11",
+                title: "불공정행위 접수 및 처리",
+                items: [
+                    { num: "1", title: "“파트너사”는 “회사”의 임직원이 이 기준을 위반하여 불공정한 처우에 따른 불이익을 받았을 경우 “회사”의 홈페이지 내 정도경영 제보 페이지에 제보할 수 있으며, “회사”는 제보 내용을 규정된 절차에 따라 처리하여야 한다." },
+                    { num: "2", title: "“회사”는 “파트너사”의 제보 업무를 처리하는 과정에서 “파트너사”관련 정보와 인적사항 등을 보호하며, 제보로 인하여 부당하게 차별 대우를 받거나 거래 중단 등의 행위가 발생되지 않도록 해야 한다." },
+                    { num: "3", title: "“회사”는 “파트너사”와 거래 중 발생한 제반 민원사항에 대한 재발방지를 위하여 최선을 다한다." },
+                ],
+            },
+            {
+                no: "12",
+                title: "제재",
+                items: [
+                    { num: "1", title: "“회사”의 임직원은 업무를 수행함에 있어 이 기준을 준수하여야 하며, 당사자의 고의 또는 중대한 과실로 이 기준을 위반한 사실이 확인된 경우에는 “회사”의 윤리 규범 등에 따라 제재조치를 진행하여야 한다." },
+                    { num: "2", title: "“회사”의 임직원이 사기, 횡령, 배임, 금전 수수, 부정 청탁 등에 해당할 경우 “회사”는 해당 임직원을 형사고발할 수 있다." },
+                ],
+            },
+            {
+                no: "부칙",
+                title: "",
+                addendumText: "부칙(2018.04.01.)<br />이 기준은 2018.04. 01. 제정·시행한다.<br /><br />부칙(2024.06.11.)<br />이 기준은 2024.06.11. 개정·시행한다.",
+            },
+        ],
+        ComplianceManagerBannerP1:
+            "자율준수 관리자는 공정거래 자율준수 프로그램(CP)의 효과적 운영을 위해 이사회 등 최고 의사결정기구에서 임명됩니다.",
+        ComplianceManagerBannerP2:
+            "임명된 관리자는 CP 기준과 절차에 따라 전 구성원의 법규 준수를 지원하고, 자율준수 활동이 현장에서 실현될 수 있도록 역할을 수행합니다.",
         ComplianceManualTitle: "공정거래 자율준수 편람",
         ComplianceManualMeta: "(개정 2024.12)",
         ComplianceManualBtnEbook: "공정거래 자율준수 편람 e-book 보기",
@@ -798,7 +1231,7 @@ const langData = {
             "- 개인정보 항목: 이름, 연락처, 이메일",
             "- 보유 및 이용기간: 접수 후 1년",
         ],
-        EthicsConsentItems2 : [
+        EthicsConsentItems2: [
             "- 입력하신 정보는 문의사항에 대한 확인을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
             "- 수집하는 개인정보 항목: 이름, 연락처, 이메일",
             "- 수집이용 및 목적: 수집한 개인정보를 본인 식별, 문의사항 확인 및 답변을 위해 활용",
@@ -955,14 +1388,22 @@ const t = computed(() => {
     return langData.ko;
 });
 
+watch(CTabIdxCompliance, () => {
+    CTabIdxFairTradeBiz.value = 0;
+});
+
+const resetEthicsInquiryState = () => {
+    isEthicsInquiryOpen.value = false;
+    isEthicsConsentAgreed.value = false;
+    isEthicsConsentAgreed2.value = false;
+};
+
 const onTabChange1 = (idx) => {
     CTabIdx.value = idx;
     CTabIdxEsgArchive.value = 0;
     CTabIdxEsgSystem.value = 0;
     CTabIdxCompliance.value = 0;
-    isEthicsInquiryOpen.value = false;
-    isEthicsConsentAgreed.value = false;
-    isEthicsConsentAgreed2.value = false;
+    resetEthicsInquiryState();
 };
 
 const goToWhistleTab = (idx) => {
@@ -971,6 +1412,10 @@ const goToWhistleTab = (idx) => {
 
 const openEthicsInquiry = () => {
     isEthicsInquiryOpen.value = true;
+};
+
+const closeEthicsInquiry = () => {
+    resetEthicsInquiryState();
 };
 </script>
 
@@ -982,7 +1427,8 @@ img{width:100%; height:auto; display:block; object-fit: cover;}
 .title_wrap::after{content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1;}
 .page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2;}
 .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
-.panel, .panel_third_depth { padding-top: 80px; }
+.panel,
+.panel_third_depth { padding-top: 80px; }
 /* v-html 삽입 노드에는 scoped data 속성이 없으므로 :deep 필요 */
 :deep(.txt_blue){color:#107AF2 !important;}
 :deep(.txt_warn){color:#FB6432 !important;}
@@ -1010,6 +1456,10 @@ section + section{padding-top:120px;}
     gap: 20px;
     align-items: stretch;
 }
+:deep(.feature_cards_grid.fair_trade_guideline_cards.feature_card_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+:deep(.feature_cards_grid.fair_trade_guideline_cards.feature_card_list .feature_card_item) {min-height:288px;}
+.fair_trade_guideline_cards :deep(.feature_card_action) { margin-top: 40px; }
+
 .feature_cards_grid :deep(.feature_card_item) {
     width: 100%;
     min-width: 0;
@@ -1022,6 +1472,64 @@ section + section{padding-top:120px;}
 .law_feature_cards :deep(.feature_card_desc){
     color:#161616;
 }
+.cp_manager_role_cards :deep(.feature_card_item) { min-height: 140px; }
+.fair_trade_work_standard_sec :deep(dl.board_type_toggle) { border-top: 1px solid #161616; }
+.fair_trade_work_standard_sec :deep(dl.board_type_toggle > dd) { border-bottom: 1px solid #d7d7df; }
+.fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 20px; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+.fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_tit_txt) {  font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: inline-flex; align-items: center; }
+.fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_num) { margin-right: 8px; padding:2px 9px; font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+.fair_trade_standard_sections { margin: 0; padding: 16px 32px 40px; display:flex; flex-direction:column; gap:32px;}
+.fair_trade_standard_sections > li { list-style: none; }
+.fair_trade_standard_sections > li > article { display: flex; flex-direction: column; gap: 32px; }
+.fair_trade_standard_sections > li > article > h4 { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.fair_trade_standard_body { padding-left: 24px; }
+.fair_trade_standard_body > p { margin: 0 0 16px; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
+.fair_trade_standard_sections > li > article.gray_box { padding: 20px 40px;  border-radius: 0; }
+.fair_trade_standard_sections > li > article.gray_box > p { margin: 0; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+.num_list {padding: 0; list-style: none; counter-reset: standard-item; }
+.num_list > li { margin-left: 0; padding-left: 32px; color: #67676f; font-size: 1.8rem; line-height: 1.5; position: relative; counter-increment: standard-item; }
+.num_list > li::before { content: counter(standard-item); width: 20px; height: 20px; border: 1px solid #67676f; border-radius: 50%; color: #67676f; font-size: 1.2rem; line-height: 1; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 4px; left: 0; box-sizing: border-box; }
+.num_list > li + li { margin-top: 8px; }
+.num_list > li > p { color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4;}
+.num_list > li > ul { margin-top: 8px; padding-left: 24px; }
+.num_list > li > ul > li { color: #67676f; font-size: 1.8rem; line-height: 1.4; }
+.num_list > li > ul > li > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
+.num_list > li > ul > li > ul {padding-left:24px;}
+.num_list > li > ul > li > ul > li {color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; list-style: none; }
+.plain_list {padding: 0; }
+.plain_list > li { color: #67676f; font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; list-style: none; }
+.plain_list > li > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
+.fair_trade_standard_dl { border:0;}
+.fair_trade_standard_dl > dt { margin-top: 16px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
+.fair_trade_standard_dl > dd { margin: 0; border:0; color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+.fair_trade_standard_dl dd + dt{margin-top: 16px;}
+.fair_trade_standard_dl > dd > ul{padding-left:24px;}
+.fair_trade_standard_dl > dd > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+
+.fair_trade_standard_desc_list { margin: 0; padding: 0; }
+.fair_trade_standard_desc_list > li { list-style: none; color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+/* 준법경영 > 자율준수 관리자 선임절차: width=height clamp로 원형 고정(PC~태블릿), 768 이하 세로 */
+
+/* 준법경영 > 자율준수 관리자 배너 (Figma 491:13873) */
+.cp_manager_banner { width: 100%; min-height: 588px; padding:67px 130px; background: url(@/assets/images/dummy/gsrsu040101_10.png) no-repeat center center / cover; display: flex; justify-content: flex-end; align-items: center; }
+.cp_manager_banner figcaption { max-width:621px; margin-left:auto; }
+.cp_manager_banner figcaption > strong{font-size: 4rem;line-height: 1.3;letter-spacing: -0.01em;}
+.cp_manager_banner figcaption p{margin-top:40px;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
+.cp_manager_banner_content { margin-top:40px; display: flex; gap: 17px; align-items: center; }
+.cp_manager_banner + p{margin-top:64px;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;}
+.cp_manager_banner_content dl dt, .cp_manager_banner_content dl dd{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+
+.cp_manager_banner_content dl dd strong{
+font-size: 1.6rem;
+font-weight: 700;
+line-height: 1.24;
+}
+.cp_manager_banner_content >div{flex: 0 1 auto;}
+.cp_appoint_board .process_flow { display: flex; gap: 20px; align-items: center; width: 100%; box-sizing: border-box; flex-wrap: wrap; }
+.cp_appoint_board .process_flow > article { flex: 0 1 220px; aspect-ratio: 1; min-width: 0; 
+   background-color: #f8f8f8; border-radius: 999px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
+.cp_appoint_board .process_flow > article > h4 {  color: #000000; font-size:2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.cp_appoint_board .process_flow > article > h4 + p { margin: 12px 0 0; color: #000000; font-size:1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; word-break: keep-all; }
 .purpose_feature_cards :deep(.feature_card_title) {
     color: #107af2;
 }
@@ -1133,9 +1641,9 @@ section + section{padding-top:120px;}
     }
 }
 @media screen and (max-width: 1024px) {
-    :deep(.feature_cards_grid.feature_card_list) {
+    /* :deep(.feature_cards_grid.feature_card_list) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    } */
     :deep(.ethics_target_list.num_info_list) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 40px 20px;
@@ -1145,10 +1653,37 @@ section + section{padding-top:120px;}
     :deep(.feature_cards_grid.feature_card_list) {
         grid-template-columns: 1fr;
     }
-    :deep(.ethics_target_list.num_info_list) {
+    :deep(.feature_cards_grid.fair_trade_guideline_cards.feature_card_list){
         grid-template-columns: 1fr;
-        gap: 32px;
     }
+    .fair_trade_work_standard_sec { margin-top: 32px; }
+    .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 20px; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
+    /* .fair_trade_standard_sections { margin: 12px 20px 20px; } */
+    .fair_trade_standard_sections > li > article { gap: 20px; }
+    .fair_trade_standard_sections > li > article > h4 { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .fair_trade_standard_body { padding-left: 20px; }
+    .fair_trade_standard_body { gap: 20px; }
+    .fair_trade_standard_body > p { margin: 0; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .fair_trade_standard_sections > li > article.gray_box { padding: 16px 20px; }
+    .fair_trade_standard_sections > li > article.gray_box > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .num_list > li { padding-left: 28px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .num_list > li::before { width: 18px; height: 18px; font-size: 1.1rem; top: 2px; }
+    .num_list > li > strong { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .num_list > li > ul > li { margin-left: 16px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .num_list > li > ul > li > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .num_list > li > ul > li > ul > li {font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .plain_list { padding-left: 0; }
+    .plain_list > li { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .plain_list > li > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .fair_trade_standard_dl > dt { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    .fair_trade_standard_dl > dd { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    .fair_trade_standard_dl > dd > p { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    .fair_trade_standard_desc_list > li { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    /* .fair_trade_guideline_cards :deep(.feature_card_action) a {
+        width: 100%;
+        min-width: 0;
+    } */
     .ethics_target_list :deep(.num_info_icon) {
         width: 60px;
         height: 60px;
@@ -1221,9 +1756,9 @@ section + section{padding-top:120px;}
 .base_item > strong { margin-top:4px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block;}
 .base_item p {margin-top:16px; color: #67676F; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 .base_item > .button_area {margin-top:24px; display: flex; justify-content: center; gap:10px; justify-content: flex-start;}
-.base_list.type2 { padding: 64px; background-color: #f8f8f8; border-radius: 20px;}
-.base_list.type2 .base_item:first-child {padding-top: 0;}
-.base_list.type2 .base_item:last-child {padding-bottom: 0; border-bottom: 0; }
+.base_list.type02 { padding: 64px; background-color: #f8f8f8; border-radius: 20px;}
+.base_list.type02 .base_item:first-child {padding-top: 0;}
+.base_list.type02 .base_item:last-child {padding-bottom: 0; border-bottom: 0; }
 .panel_third_depth .base_list .base_item:first-child{border-top: 1px solid #E5E5E9;}
 .signature_box { margin-top: 40px; padding: 40px 64px; border: 1px solid #E5E5E9; border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-between;}
 .signature_box > div {flex:1;}
@@ -1274,43 +1809,25 @@ section + section{padding-top:120px;}
     z-index: 1;
 }
 
-/* 정도경영 > 제도 > 제보 이용 안내 (Figma 470:17030) */
+/* 정도경영 > 제도 > 제보 이용 안내 */
 .base_item .gray_box{margin-top:20px; padding:56px 64px;}
 .base_item .gray_box .process_flow{display: flex; gap: 20px; align-items: center;}
-.base_item .gray_box .process_flow p {padding:20px;color:#107AF2; font-weight: 700;font-size: 1.6rem;line-height: 1.24;text-align: center; border-radius: 99px; background-color:#E7F2FE; flex:0 1 300px;}
-/* 제보 처리 절차: 가로 줄기 + 선분 2개로 만든 > 머리(이미지와 동일한 형태) */
-.base_item .gray_box .process_flow > span {
-    width: 40px;
-    height: 2px;
-    flex-shrink: 0;
-    align-self: center;
-    background-color: #107af2;
-    position: relative;
-    display: block;
-}
-.base_item .gray_box .process_flow > span::before,
-.base_item .gray_box .process_flow > span::after {
-    content: "";
-    width: 12px;
-    height: 2px;
-    position: absolute;
-    right:0;
-    top: 50%;
-    background-color: #107af2;
-    transform-origin: right center;
-}
-.base_item .gray_box .process_flow > span::before {
-    transform: translateY(-50%) rotate(45deg);
-}
-.base_item .gray_box .process_flow > span::after {
-    transform: translateY(-50%) rotate(-45deg);
-}
-
+.base_item .gray_box .process_flow p {margin:0;padding:20px;color:#107AF2; font-weight: 700;font-size: 1.6rem;line-height: 1.24;text-align: center; border-radius: 99px; background-color:#E7F2FE; flex:0 1 300px;}
 .panel_third_depth .reward_criteria {
     width: 100%;
     margin-top: 16px;
 }
+.base_item .gray_box.type02{
+    padding:40px 64px; border-radius: 0;
+}
+.base_item .gray_box.type02 strong{
+    color: #67676F;
+font-size: 2rem;
+line-height: 1.35;
+letter-spacing: -0.01em;
 
+
+}
 .panel_third_depth .reward_table_scroll {
     width: 100%;
     margin-top: 20px;
@@ -1383,9 +1900,8 @@ section + section{padding-top:120px;}
 }
 
 /* 정도경영 > 제도 > 제보자 보호제도 (Figma 470:17701) */
-.base_list .gray_box {
+/* .base_list .gray_box {
     margin-top: 24px;
-    padding: 40px 64px;
 }
 .base_list .gray_box > strong {
     color: #67676f;
@@ -1395,13 +1911,13 @@ section + section{padding-top:120px;}
     letter-spacing: -0.01em;
     display: block;
 }
-.base_list .gray_box > p {
+.ba.base_list .gray_box > p {
     margin-top: 16px;
     color: #67676f;
     font-size: 2rem;
     line-height: 1.35;
     letter-spacing: -0.01em;
-}
+} */
 
 /* 정도경영 > 제보 (Figma 474:29330) */
 .report_intro_desc {
@@ -1495,16 +2011,14 @@ section + section{padding-top:120px;}
     gap: 10px;
     justify-content: flex-end;
 }
-
-
 .panel_inner header.sub_header p:only-child {
     margin-top: 0;
 }
-/* .panel_third_depth { min-height: 120px; } */
 @media screen and (max-width: 768px) {
     .p_br{display:none;}
     .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
-    .panel, .panel_third_depth {padding-top: 48px;}
+    .panel,
+    .panel_third_depth {padding-top: 48px;}
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
     .visual_sub { font-size: 2rem; }
@@ -1519,31 +2033,6 @@ section + section{padding-top:120px;}
     .gray_box p{margin-top: 32px; }
     :deep(.feature_cards_grid.feature_card_list) { gap: 12px; }
     .button_area [class*="btn_"] {width:auto; flex:1 1 auto;}
-    .sec_compliance_manual {
-        padding: 24px 20px;
-    }
-    .sec_compliance_manual .compliance_manual_inner {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .sec_compliance_manual .compliance_manual_inner > div:first-child strong {
-        font-size: 2rem;
-        line-height: 1.35;
-    }
-    .sec_compliance_manual .compliance_manual_inner > div:first-child p {
-        margin-top: 6px;
-        font-size: 1.6rem;
-        line-height: 1.5;
-    }
-    .sec_compliance_manual .compliance_manual_inner .button_area {
-        width: 100%;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-    .sec_compliance_manual .compliance_manual_inner .button_area :deep(a),
-    .sec_compliance_manual .compliance_manual_inner .button_area :deep(button) {
-        width: 100%;
-    }
     .history_list { padding-left: 20px; }
     .history_item { gap: 8px; flex-direction: column; }
     .history_item::before { width: 8px; height: 8px; border-width: 4px; top: 8px; left: -20px; }
@@ -1569,7 +2058,7 @@ section + section{padding-top:120px;}
     .base_item > em { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
     .base_item > strong { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
     .base_item p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em;}
-    .base_list.type2 { padding: 32px; border-radius: 12px; }
+    .base_list.type02 { padding: 32px; border-radius: 12px; }
     .signature_box { margin-top: 24px; padding: 24px 20px; border-radius: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
     .signature_box p { font-size: 1.6rem; line-height: 1.5; }
     .signature_box.type02{justify-content: flex-start;align-items: flex-start;}
@@ -1596,7 +2085,8 @@ section + section{padding-top:120px;}
     }
 
     .base_item .gray_box {
-        padding: clamp(24px, 6.4vw, 40px) clamp(16px, 5.33vw, 24px);
+        padding: 40px 24px;
+        /* padding: clamp(24px, 6.4vw, 40px) clamp(16px, 5.33vw, 24px); */
     }
     .base_item .gray_box .process_flow {
         flex-direction: column;
@@ -1607,27 +2097,14 @@ section + section{padding-top:120px;}
         width: 100%;
         max-width: none;
     }
-    .base_item .gray_box .process_flow > span {
-        width: 2px;
-        height: clamp(20px, 5.33vw, 24px);
-        margin: 0 auto;
-    }
-    .base_item .gray_box .process_flow > span::before,
-    .base_item .gray_box .process_flow > span::after {
-        left: 50%;
-        top: 100%;
-        width: 12px;
-        height: 2px;
-        margin-top: -1px;
-        /* 세로 줄기 아래쪽 끝(촉) 기준 → 아래로 진행 */
-        transform-origin: center bottom;
-    }
-    .base_item .gray_box .process_flow > span::before {
-        transform: translateX(-50%) rotate(45deg);
-    }
-    .base_item .gray_box .process_flow > span::after {
-        transform: translateX(-50%) rotate(-45deg);
-    }
+ 
+    .cp_appoint_board .process_flow { flex-direction: column; }
+    .cp_manager_banner { padding: 40px 20px;justify-content: flex-start; }
+    .cp_manager_banner > figcaption { width: 100%; max-width: none; min-width: 0; }
+    .cp_manager_banner > figcaption > strong{font-size: 2.4rem;}
+    .cp_manager_banner > figcaption > p { font-size: 1.6rem; }
+    .cp_manager_banner > figcaption > p + p { margin-top: 12px; font-size: 1.6rem; }
+    .cp_manager_banner + p{margin-top:40px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
     .panel_third_depth .reward_table th,
     .panel_third_depth .reward_table td {
         padding: 16px 12px;
