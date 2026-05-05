@@ -587,9 +587,9 @@
                             <Accordion>
                                 <AccordionItem v-for="item in t.FairTradeWorkStandardAccordionItems" :key="'sup-' + item.key" :item-key="'sup-' + item.key">
                                     <template #title><strong v-html="item.title" class="acc_tit_txt"></strong></template>
-                                    <template v-if="item.key === '01'"> 
+                                    <template v-if="item.key === '01' || item.key === '02'"> 
                                         <ol class="fair_trade_standard_sections">
-                                            <li v-for="section in t.FairTradePartnerStandardSections" :key="'sup-sec-' + section.no">
+                                            <li v-for="section in item.key === '02' ? t.FairTradeSalesIncentiveSections : t.FairTradePartnerStandardSections" :key="'sup-sec-' + item.key + '-' + section.no">
                                                 <article :class="{ gray_box: section.no === '부칙' }">
                                                     <template v-if="section.no === '부칙'">
                                                         <p v-html="section.addendumText"></p>
@@ -865,6 +865,7 @@ const langData = {
                 desc: "대·중소기업간 상생협력을 위한 계약 체결 가이드라인",
             },
         ],
+        // 1. 파트너사 선정 및 운용기준
         FairTradePartnerStandardSections: [
             {
                 no: "01",
@@ -1040,6 +1041,99 @@ const langData = {
                 title: "",
                 addendumText: "부칙(2018.04.01.)<br />이 기준은 2018.04. 01. 제정·시행한다.<br /><br />부칙(2024.06.11.)<br />이 기준은 2024.06.11. 개정·시행한다.",
             },
+        ],
+        // 2. 판매장려금 결정, 변경에 대한 기준
+        FairTradeSalesIncentiveSections: [
+            {
+                no: "01",
+                title: "목적",
+                lead: "이 기준은 주식회사 지에스리테일(이하 “회사”라 한다)과 파트너사 등(이하 “파트너사”라 한다) 간에 거래관계에 있어 판매장려금의 합리적 인정범위에 대한 판단 기준을 명확히 함으로서 불공정한 행위를 예방하고, 관련법령을 준수하여 “파트너사”와 공정한 거래관계를 확립하고자 함을 목적으로 한다.",
+            },
+            {
+                no: "02",
+                title: "준수의무",
+                items: [
+                    { num: "1", title: "“회사”의 임직원은 “파트너사”와의 거래에 있어서 이 기준 이외에도 『대규모유통업에서의 거래공정화에 관한 법률(이하 ‘대규모유통업법’이라 함)』과 『대규모유통업 분야에서 판매장려금의 부당성 심사에 관한 지침』 등 관계 법령을 엄격히 준수하여야 한다." },
+                    { num: "2", title: "이 기준은 “파트너사”가 상시 확인할 수 있도록 “회사” 홈페이지 등에 게시하고, 내부직원에 대해서는 정기적으로 교육하여 준수할 수 있도록 한다." },
+                ],
+            },
+            {
+                no: "03",
+                title: "기본원칙",
+                definitions: [
+                    { term: "1", desc: "판매장려금은 “파트너사”가 “회사”에게 판매장려금을 지급하여 상품에 대한 소비자 수요를 늘려 판매를 증진시킴으로써, 판매성과에 대한 이익을 공유하는 것을 원칙으로 한다." },
+                    { term: "2", desc: "판매장려금의 약정은 “회사”와 “파트너사” 모두의 이익에 기여하여야 하며 판매장려금 지급 대상 기간 중 “회사”가 받은 판매장려금액과 해당 기간 중 “파트너사”의 납품액 증가로 인한 이익 간에는 합리적인 비례관계가 있어야 한다." },
+                ],
+            },
+            {
+                no: "04",
+                title: "용어의 정의",
+                definitions: [
+                    { term: "1", desc: "판매장려금”이란 직매입거래에서 상품의 판매촉진을 위하여 연간거래 물품공급계약에 명시된 조건에 따라 “파트너사”가 “회사”에 지급하는 경제적 이익을 의미한다." },
+                    { term: "2", desc: "“성과장려금”이란 “회사”와 파트너사”가 합의하여 전년동기 대비 납품액(납품단가*납품물량) 신장목표를 달성하였을 때, “회사”가 “파트너사”로부터 지급받는 형태의 판매장려금을 의미한다." },
+                    { term: "3", desc: "“신상품장려금”이란 “회사”가 “파트너사”의 신상품을 매장에 진열해 주는 대가로 “파트너사”로부터 받는 형태의 판매장려금을 의미한다. 이 때 신상품인지의 여부는 업계의 거래관행 등을 고려하여 출시 후 6개월 이내의 상품을 원칙으로 하며, 실질적으로 기존 상품과 상품코드가 바뀐 것에 불과한 리뉴얼 상품은 신상품에 해당되지 않는다." },
+                    { term: "4", desc: "“진열장려금”이란 “회사”가 “파트너사”의 상품을 매출증가 가능성이 큰 매대에 진열해주는 서비스에 대한 대가로 “파트너사”로부터 받는 형태의 판매장려금을 의미한다." },
+                ],
+            },
+            {
+                no: "05",
+                title: "허용되지 않는 판매장려금",
+                lead: "직매입거래에서 “회사”는 “파트너사”로부터 납품받은 상품에 대한 소유권을 취득하며, 상품판매에 대한 권한을 가짐과 동시에 판매부진에 따른 재고책임을 부담하므로 다음과 같은 유형의 장려금은 장려금으로 허용하지 않는다.",
+                items: [
+                    { num: "1", title: "1. “기본장려금”이란 “회사”가 “파트너사”로부터 “파트너사”의 매출증가여부와 상관없이 상품매입금액의 일정비율 또는 일정금액을 받는 형태의 장려금을 의미한다." },
+                    { num: "2", title: "2. “무반품장려금”이란 “회사”가 직매입한 상품을 반품하지 않는 것을 조건으로 “파트너사”로부터 수취하는 장려금을 의미한다." },
+                    { num: "3", title: "3. “시장판매가격 대응장려금”이란 “회사”가 “파트너사”로부터 기 납품받은 상품의 판매가격을 인하하기 위한 목적으로 받는 형태의 장려금을 의미한다." },
+                    { num: "4", title: "4. “재고소진 장려금”이란 “회사”가 직매입한 상품의 재고를 소진시킬 목적으로 재고분의 일정 비율에 해당하는 금액을 “파트너사”로부터 받는 형태의 장려금을 의미한다." },
+                    { num: "5", title: "5. “폐점장려금”이란 “회사”가 점포 폐점 시 덤핑, 가격할인 등을 통해 남아 있는 상품을 소진하는 과정에서 발생하는 비용을 보전하기 위해 “파트너사”로부터 받는 형태의 장려금을 의미한다." },
+                ],
+            },
+            {
+                no: "06",
+                title: "판매장려금의 결정 및 변경",
+                definitions: [
+                    { term: "1", desc: "“회사”는 상품의 판매촉진을 위하여 “파트너사”와 공정하게 체결한 물품공급계약에 따라 “파트너사”로부터 판매장려금을 수령할 수 있다." },
+                    { term: "2", desc: "판매장려금은 지급목적에 부합하는 기준에 따라 “회사”와 “파트너사”가 협의를 통하여 물품공급계약 및 개별약정서식에 의해 결정한다." },
+                    { term: "3", desc: "예측하지 못한 매출액의 급격한 증감 및 시장상황의 변동 등의 사유로 “파트너사”의 요청 또는 “회사”와 “파트너사” 간의 합의가 있을 경우 물품공급계약의 판매장려금 항목을 변경 또는 폐지하거나, 기존 판매장려금의 지급조건을 변경할 수 있다. 이 경우 제2항의 결정 절차와 동일한 방식으로 변경한다." },
+                ],
+            },
+            {
+                no: "07",
+                title: "판매장려금의 절차적 요건",
+                items: [
+                    {
+                        num: "1",
+                        title: "“회사”는 “파트너사”로부터 판매장려금을 수령하는 경우 다음 각 호의 약정사항을 계약 체결 이전에 서면으로 제공하여 사전에 충분히 협의한다.",
+                        details: [
+                            "1. 판매장려금의 종류 및 명칭",    
+                            "2. 판매장려금의 지급목적, 지급시기 및 지급횟수",
+                            "3. 판매장려금의 비율 또는 액수",
+                            "4. 판매장려금의 결정기준 및 결정절차",
+                            "5. 판매장려금의 변경사유, 변경기준 및 변경절차",
+                        ],
+                    },
+                    { num: "2", title: "“회사”와 “파트너사”는 강요에 의한 것이 아닌 자유로운 의사합치에 의해 판매장려금에 관한 약정을 체결한다." },
+                    { num: "3", title: "“회사”와 “파트너사”는 판매장려금 약정사항을 연간거래 기본계약 내용에 포함시키고 해당 계약 서면을 날인 후 즉시 교부한다." },
+                ],
+            },
+            {
+                no: "08",
+                title: "금지행위",
+                definitions: [
+                    { term: "1", desc: "회사”가 연간거래 물품공급계약시 약정되지 아니하거나 약정된 범위를 초과하여 판매장려금을 “파트너사”로부터 받는 행위" },
+                    { term: "2", desc: "“회사”가 판매장려금의 종류 및 명칭, 판매장려금의 지급목적, 지급시기 및 지급횟수, 판매장려금의 비율 또는 액수 등을 구체적으로 기재함이 없이 추후에 개별적으로 판매장려금 약정을 체결할 수 있다고 포괄적으로 규정한 후 수시로 판매장려금을 수취하는 행위" },
+                    { term: "3", desc: "“회사”가 계약기간 도중 판매장려금률 또는 액수를 “파트너사”의 의사와 무관하게 일방적으로 인상하는 행위" },
+                    { term: "4", desc: "회사”가 연간거래 기본계약 체결 시 판매장려금 항목과 비율을 협의 절차없이 일방적으로 정하여 통보하고 판매장려금을 수취하는 행위" },
+                    { term: "5", desc: "“회사”가 진열장려금과 관련하여 “파트너사”의 해당 상품이 진열될 위치 및 기간, 위치 별 판매장려금률 또는 금액 등 판매장려금 결정 및 변경 기준을 사전에 명확히 구체적으로 규정함이 없이 자신이 정한 규정에 따라 일방적으로 판매장려금을 수취하는 행위" },
+                    { term: "6", desc: "“회사”의 제안내용을 “파트너사”가 수용하지 않을 경우 거래중단 등 불이익을 받을 수 있음을 직간접적으로 암시하는 등 “파트너사”의 자율적인 의사가 제한된 상태에서 판매장려금 약정을 체결하는 경우" },
+                ],
+            },
+            { 
+                no: "09", title: "불공정행위 접수 및 처리", 
+                definitions: [
+                    { term: "1", desc: "회사”가 연간거래 물품공급계약시 약정되지 아니하거나 약정된 범위를 초과하여 판매장려금을 “파트너사”로부터 받는 행위" },
+                ] },
+            { no: "10", title: "거래 종료 절차", items: [{ num: "1", title: "" }] },
+            { no: "부칙", title: "", addendumText: "" },
         ],
         ComplianceManagerBannerP1:
             "자율준수 관리자는 공정거래 자율준수 프로그램(CP)의 효과적 운영을 위해 이사회 등 최고 의사결정기구에서 임명됩니다.",
@@ -1480,7 +1574,7 @@ section + section{padding-top:120px;}
 .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_num) { margin-right: 8px; padding:2px 9px; font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
 .fair_trade_standard_sections { margin: 0; padding: 16px 32px 40px; display:flex; flex-direction:column; gap:32px;}
 .fair_trade_standard_sections > li { list-style: none; }
-.fair_trade_standard_sections > li > article { display: flex; flex-direction: column; gap: 32px; }
+.fair_trade_standard_sections > li > article { display: flex; flex-direction: column; gap: 16px; }
 .fair_trade_standard_sections > li > article > h4 { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .fair_trade_standard_body { padding-left: 24px; }
 .fair_trade_standard_body > p { margin: 0 0 16px; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
