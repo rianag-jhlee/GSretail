@@ -817,7 +817,70 @@
                                 />
                                 <div class="inner_content">
                                     <!-- gsrsu03030201 -->
-                                    <div v-if="SubTabIdx2 === 0">인재상 내용</div>
+                                    <div v-if="SubTabIdx2 === 0" class="talent_vision">
+                                        <div class="intro_summary">
+                                            <h3 class="text_summary_sub">{{ t.protect.talentmanagement.part_1.Summary }}</h3>
+                                        </div>
+
+                                        <!-- 상단 핵심 가치 비주얼 (서클 레이아웃) -->
+                                        <section class="philosophy_box">
+                                            <div>
+                                                <h3 class="ac mb60" v-html="t.protect.talentmanagement.part_1.MainTitle"></h3>
+                                                <div class="circle_visual_wrap">
+                                                    <div class="circle_item value">
+                                                        <strong>{{ t.protect.talentmanagement.part_1.Philosophy.Items[0].tit }}</strong>
+                                                        <span>{{ t.protect.talentmanagement.part_1.Philosophy.Items[0].sub }}</span>
+                                                    </div>
+                                                    <div class="circle_item way">
+                                                        <strong>{{ t.protect.talentmanagement.part_1.Philosophy.Items[1].tit }}</strong>
+                                                        <span>{{ t.protect.talentmanagement.part_1.Philosophy.Items[1].sub }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 상세 가치 리스트 (화이트 박스) -->
+                                            <div class="value_detail_grid">
+                                                <div class="detail_card">
+                                                    <div class="card_title">GS Value</div>
+                                                    <ul class="value_list">
+                                                        <li v-for="(item, idx) in t.protect.talentmanagement.part_1.Details.Value" :key="'val-'+idx">
+                                                            <strong class="eng">{{ item.tit }}</strong>
+                                                            <p>{{ item.desc }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="detail_card">
+                                                    <div class="card_title">GS Way</div>
+                                                    <ul class="way_list">
+                                                        <li v-for="(item, idx) in t.protect.talentmanagement.part_1.Details.Way" :key="'way-'+idx">
+                                                            <strong>{{ item.tit }}</strong>
+                                                            <div class="tags">
+                                                                <span v-for="txt in item.list" :key="txt">{{ txt }}</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </section>
+
+
+                                        <!-- 하단 꿈 실현 섹션 (이미지 + 텍스트) -->
+                                        <section class="dream_realization">
+                                            <div class="wide_info_box type_bg">
+                                                <figure class="img_frame">
+                                                    <img src="@/assets/images/dummy/gsrsu03030201_2.png" alt="인재경영 회의">
+                                                </figure>
+                                                <div class="text_area">
+                                                    <h4 v-html="t.protect.talentmanagement.part_1.Description"></h4>
+                                                    <ul class="bullet_01 no_type mt32">
+                                                        <li v-for="(effort, idx) in t.protect.talentmanagement.part_1.Efforts" :key="'eff-'+idx" class="effort_item">
+                                                            <span class="num">{{ idx + 1 }}.</span>
+                                                            <span class="desc" v-html="effort"></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
 
                                     <!-- gsrsu03030202: 인재육성체계 -->
                                     <div v-if="SubTabIdx2 === 1" class="talent_development">
@@ -857,8 +920,64 @@
                                         </section>
                                     </div>
 
-                                    <!-- gsrsu03030203 -->
-                                    <div v-if="SubTabIdx2 === 2">인재경영 지표 내용</div>
+                                    <!-- gsrsu03030203: 인재경영 지표 -->
+                                    <div v-if="SubTabIdx2 === 2" class="talent_indicators">
+                                        <div class="intro_summary">
+                                            <p class="text_summary_sub" v-html="t.protect.talentmanagement.part_3.Summary"></p>
+                                        </div>
+
+                                        <!-- 복리후생 섹션 (Work, Engagement, Life, Leisure) -->
+                                        <section v-for="(section, sIdx) in t.protect.talentmanagement.part_3.Sections" :key="'sec-'+sIdx" class="support_section mb100">
+                                            <div class="section_head mb40">
+                                                <h4 class="section_title_sub">{{ section.title }}</h4>
+                                                <p class="p" v-html="section.desc"></p>
+                                            </div>
+                                            
+                                            <!-- 디자인에 맞춘 2열 리스트 구조 -->
+                                            <div class="support_grid">
+                                                <article v-for="(item, iIdx) in section.items" :key="'item-'+iIdx" class="support_item">
+                                                    <div class="item_inner">
+                                                        <div class="content_box">
+                                                            <div class="tit_area">
+                                                                <span class="num">{{ item.num }}</span>
+                                                                <strong class="tit">{{ item.tit }}</strong>
+                                                            </div>
+                                                            <p class="desc">{{ item.desc }}</p>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                        </section>
+
+                                        <!-- 인재경영 관련 인증 및 대외 수상 이력 -->
+                                        <section class="award_section mt100">
+                                            <h4 class="section_title_sub mb40">{{ t.protect.talentmanagement.part_3.Awards.Title }}</h4>
+                                            
+                                            <!-- 상단 리스트 영역 -->
+                                            <div class="award_list">
+                                                <div v-for="(item, idx) in t.protect.talentmanagement.part_3.Awards.List" :key="'award-'+idx" class="award_row">
+                                                    <span class="year">{{ item.year }}</span>
+                                                    <span class="month">{{ item.month }}</span>
+                                                    <span class="desc">{{ item.desc }}</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- 하단 강조 카드 영역 (요청하신 부분) -->
+                                            <div>
+                                                <ul class="brand_grid mt60">
+                                                    <li>
+                                                        <figure class="brand_img_box">
+                                                            <img :src="t.protect.talentmanagement.part_3.Awards.Highlight.Img" alt="GPTW 인증 로고">
+                                                        </figure>
+                                                    </li>
+                                                </ul>
+                                                <div class="info_box">
+                                                    <strong class="tit" v-html="t.protect.talentmanagement.part_3.Awards.Highlight.Tit"></strong>
+                                                    <span class="date">{{ t.protect.talentmanagement.part_3.Awards.Highlight.Date }}</span>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
 
                                     <!-- gsrsu03030204 -->
                                     <div v-if="SubTabIdx2 === 3" class="talent_performance_data">
@@ -904,8 +1023,155 @@
                                 </div>
                             </div>
 
-                            <!-- gsrsu030303 -->
-                            <div v-if="SubTabIdx1 === 2">고객만족경영 내용</div>
+                            <!-- gsrsu030303: 고객만족경영 -->
+                            <div v-if="SubTabIdx1 === 2 && t.protect.customer" class="customer_satisfaction">
+                                <!-- 상단 요약 -->
+                                <div class="intro_summary ac mb100">
+                                    <h3 class="text_summary" v-html="t.protect.customer.Summary"></h3>
+                                </div>
+
+                                <!-- 소비자 권익보호 정책 -->
+                                <section class="support_item mb120">
+                                    <div class="policy_box_wrap">
+                                        <div class="title_area mb40">
+                                            <h4 class="section_title_sub">{{ t.protect.customer.Policy.Title }}</h4>
+                                        </div>
+                                        <div class="GS-universal-wrapper">
+                                            <p class="p" v-html="t.protect.customer.Policy.Desc"></p>
+                                        </div>
+                                        <div class="policy_list_container mt40">
+                                            <ul class="policy_list">
+                                                <li v-for="(item, idx) in t.protect.customer.Policy.Items" :key="'policy-'+idx" class="policy_item">
+                                                    <span class="label">{{ item.label }}</span>
+                                                    <p class="desc">{{ item.text }}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="btn-wrap ac mt60">
+                                            <Buttons btn-class="btn_icon btn_xl border after">
+                                                {{ t.protect.customer.Policy.BtnText }}
+                                            </Buttons>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- 고객만족경영 주요 활동 -->
+                                <section class="support_item mb120">
+                                    <div class="title_area mb40">
+                                        <h4 class="section_title_sub">{{ t.protect.customer.Activities.Title }}</h4>
+                                    </div>
+                                    <div class="program_grid">
+                                        <article v-for="(item, idx) in t.protect.customer.Activities.Items" :key="'activity-'+idx" class="program_item">
+                                            <!-- 활동 사진은 img 태그 유지 -->
+                                            <figure class="program_visual">
+                                                <img :src="item.img" :alt="item.tit">
+                                            </figure>
+                                            <div class="text_area">
+                                                <h4 class="text-wrapper-4">{{ item.tit }}</h4>
+                                                <div class="card_desc">
+                                                    <p class="sub_tit">{{ item.subTit }}</p>
+                                                    <p class="p">{{ item.desc }}</p>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </section>
+
+                                <!-- 서비스 우수 직원 추천 -->
+                                <section class="support_item mb120">
+                                    <div class="recommend_banner_wrap">
+                                        <div class="title_area mb40">
+                                            <h4 class="section_title_sub">{{ t.protect.customer.Recommend.Title }}</h4>
+                                        </div>
+                                        <div class="recommend_box">
+                                            <div class="text_area">
+                                                <strong class="point_tit">{{ t.protect.customer.Recommend.PointTit }}</strong>
+                                                <p class="desc" v-html="t.protect.customer.Recommend.Desc"></p>
+                                            </div>
+                                            <!-- '서비스 우수 직원 추천하기' 버튼 -->
+                                            <Buttons btn-class="btn_icon btn_xl border after">
+                                                {{ t.protect.customer.Recommend.BtnText }}
+                                            </Buttons>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- 제품과 서비스 안전 제도 -->
+                                <section class="support_item mb120">
+                                    <div class="title_area mb40">
+                                        <h4 class="section_title_sub">{{ t.protect.customer.Safety.Title }}</h4>
+                                    </div>
+                                    <ul class="safety_system_list">
+                                        <li v-for="(item, idx) in t.protect.customer.Safety.Items" :key="'safety-'+idx">
+                                            <!-- 아이콘 영역만 ::before 사용 (태그 내부 비움) -->
+                                            <span class="num">{{ item.step }}</span>
+                                            <div class="tit_wrap">
+                                                <strong class="tit">
+                                                    {{ item.tit }}
+                                                    <button class="icon_link_before"></button>
+                                                </strong>
+                                                <!-- 링크 아이콘 영역 ::before 사용 -->
+                                            </div>
+                                            <p class="desc">{{ item.desc }}</p>
+                                        </li>
+                                    </ul>
+                                </section>
+
+                                <!-- 피해 보상 프로그램 -->
+                                <section class="support_item mb120">
+                                    <div class="title_area mb40 ac">
+                                        <h4 class="section_title_sub">{{ t.protect.customer.Compensation.Title }}</h4>
+                                    </div>
+                                    <div class="compensation_process_wrap">
+                                        <div class="process_steps">
+                                            <div v-for="(step, idx) in t.protect.customer.Compensation.Steps" :key="'step-'+idx" class="step_box">
+                                                <div class="step_info">
+                                                    <span class="label">{{ step.label }}</span>
+                                                    <p class="desc" v-html="step.desc"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="btn_wrap ac mt40">
+                                            <Buttons btn-class="btn_icon btn_xl primary after">
+                                                {{ t.protect.customer.Compensation.BtnText }}
+                                            </Buttons>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- 수상 이력 및 인증 -->
+                                <section class="support_item">
+                                    <div class="title_area mb40">
+                                        <h4 class="section_title_sub">제품과 서비스 인증 및 대외 수상 이력</h4>
+                                    </div>
+                                    
+                                    <div class="history_timeline mb80">
+                                        <div v-for="(history, idx) in t.protect.customer.Awards.History" :key="'history-'+idx" class="timeline_row">
+                                            <div class="year_area">
+                                                <strong v-if="history.year" class="year">{{ history.year }}</strong>
+                                            </div>
+                                            <div class="content_area">
+                                                <span class="month">{{ history.month }}</span>
+                                                <p class="text">{{ history.text }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 인증 마크 그리드 -->
+                                    <div class="award_marks_grid">
+                                        <article v-for="(mark, idx) in t.protect.customer.Awards.Marks" :key="'mark-'+idx" class="mark_item">
+                                            <!-- 인증 마크 이미지 img 태그 유지 -->
+                                            <figure class="mark_img">
+                                                <img :src="mark.img" :alt="mark.tit">
+                                            </figure>
+                                            <div class="mark_info">
+                                                <strong class="tit" v-html="mark.tit"></strong>
+                                                <span class="date">{{ mark.date }}</span>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </section>
+                            </div>
 
                             <!-- gsrsu030304 -->
                             <div v-if="SubTabIdx1 === 3">안전경영 내용</div>
@@ -1523,7 +1789,39 @@ export default {
                             }
                         },
                         talentmanagement: {
-                            part_1:{},
+                            part_1:{
+                                Summary: "Value No.1 GS리테일이 함께하고자 하는 인재의 모습입니다.",
+                                MainTitle:`“GS Value와 Way를<br/> 잘 실천하는 인재”`,
+                                Description: "GS리테일과 함께 할 인재의 모습과<br/> 직원들의 꿈을 실현시키기 위해 인재경영을 실현해 나아가고 있습니다.",
+                                Philosophy: {
+                                    Items: [
+                                        { tit: "GS Value", sub: "우리의 가치관", desc: "Fair, Friendly, Fresh, Fun" },
+                                        { tit: "GS Way", sub: "우리의 일하는 방식", desc: "고객 최우선, 성장 마인드, 열린 소통, AX 실행력" }
+                                    ]
+                                },
+                                Details: {
+                                    Value: [
+                                        { tit: "Fair", desc: "공정함을 지키고 사회와 환경에 기여합니다." },
+                                        { tit: "Friendly", desc: "다양성을 인정하고 서로를 존중합니다." },
+                                        { tit: "Fresh", desc: "창의와 도전을 장려하여 회사와 개인이 함께 성장합니다." },
+                                        { tit: "Fun", desc: "유연하고 자율적인 환경에서 즐겁게 일합니다." }
+                                    ],
+                                    Way: [
+                                        { tit: "고객 최우선", list: ["# 업무의 시작과 끝을 고객으로 연결합니다.", "# 고객을 위해 '되는 방법'을 먼저 찾습니다."] },
+                                        { tit: "성장 마인드", list: ["# 작고 빠르게 시도하며 성공 경험을 만듭니다.", "# 매일의 성장과 변화를 추구합니다."] },
+                                        { tit: "열린 소통", list: ["# 명확한 목표와 과정 공유로 눈높이를 맞춥니다.", "# 치열하게 논의하고, One Team으로 해냅니다."] },
+                                        { tit: "AX 실행력", list: ["# 설득과 결정 모두 데이터가 기준입니다.", "# 디지털/AI툴로 업무 방식을 개선합니다."] }
+                                    ]
+                                },
+                                Efforts: [
+                                    "직원들의 안전/보건을 최우선으로 하고,",
+                                    "교육훈련프로그램을 통한 인재육성,",
+                                    "인권 존중을 통한 배려와 선의의 경쟁,",
+                                    "최고의 처우수준과 다양한 복리후생 지원을 통한 자긍심 함양 등<br/> 인재경영을 실현해 나아가고 있습니다."
+                                ]
+                                
+                            
+                            },
                             part_2:{
                                 Summary: "진심 어린 서비스와 창의적 사고로 고객에게 사랑받는 최고의 전문가 육성을 위하여<br/>핵심가치, 직무역량, 리더십 역량, 자기주도학습 프로그램을 운영하고 있습니다.",
                                 MainTitle: "GS 인재육성 체계",
@@ -1568,7 +1866,72 @@ export default {
                                     }
                                 ]
                             },
-                            part_3:{},
+                            part_3: {
+                                Summary: "GS리테일은 인재의 가치를 소중히 여기고 있으며, 인재를 위한 다양한 제도를 운영하고 있습니다.",
+                                Sections: [
+                                    {
+                                        title: "Work",
+                                        desc: "모든 구성원이 일과 성장에 온전히 집중할 수 있도록 최상의 환경과 자원을 제공합니다.",
+                                        items: [
+                                            { num: "01", tit: "어학 지원", desc: "구성원의 자기개발을 위한 어학 학습 비용을 지원합니다." },
+                                            { num: "02", tit: "자격증 지원", desc: "직무 전문가를 육성하기 위해 자격증학습에 소요되는 비용을 지원합니다." },
+                                            { num: "03", tit: "셔틀/통근버스 운영", desc: "구성원의 안전하고 편리한 출근길을 지원합니다." },
+                                            { num: "04", tit: "원거리 지원금", desc: "실제 근무 지역과 연고지가 일정 거리 이상일 경우, 주거비 일부를 지원합니다." },
+                                            { num: "05", tit: "이동통신비 지원", desc: "업무상 통화할 일이 잦은 구성원을 위해 이동통신비를 지원합니다." },
+                                            { num: "06", tit: "시차근무제", desc: "일의 몰입도와 삶의 균형을 위해, 출퇴근 시간을 유연하게 조율합니다." }
+                                        ]
+                                    },
+                                    {
+                                        title: "Engagement",
+                                        desc: "모든 구성원이 자부심을 가지고 일하며 자신의 역량을 발휘할 수 있도록 아낌없는 지원을 제공합니다.",
+                                        items: [
+                                            { num: "01", tit: "임직원 할인 제공", desc: "구성원을 위해 GS홈쇼핑 & GS THE FRESH에서 임직원 한정 할인을 제공합니다." },
+                                            { num: "02", tit: "축하 선물 지급", desc: "출산 축하 선물 및 다자녀 출산 경조금을 제공합니다." },
+                                            { num: "03", tit: "명절 선물 지급", desc: "풍성하고 행복한 명절을 보낼 수 있도록 적극 지원합니다." },
+                                            { num: "04", tit: "심리상담 지원", desc: "구성원의 마음이 건강할 수 있도록 근로자 심리 상담을 제공합니다." },
+                                            { num: "05", tit: "장기 근속 포상", desc: "장기 근속 구성원에게 감사의 마음을 담아 포상 및 휴가를 제공합니다." }
+                                        ]
+                                    },
+                                    {
+                                        title: "Life",
+                                        desc: "일과 삶의 조화를 이루며 행복한 삶을 누릴 수 있도록 구성원들의 더 나은 내일을 지원합니다.",
+                                        items: [
+                                            { num: "01", tit: "보육비 / 유치원 보조비, 자녀 학자금 지원", desc: "구성원 자녀분들은 우리의 미래입니다. GS리테일이 함께 돌보고 지원합니다." },
+                                            { num: "02", tit: "사내 어린이집 운영", desc: "GS강서타워 / GS강남타워 사내 어린이집을 운영합니다." },
+                                            { num: "03", tit: "재해 지원", desc: "예상치 못한 재해도 GS리테일이 든든히 함께합니다." },
+                                            { num: "04", tit: "의료비/건강검진 지원", desc: "구성원의 건강을 위해 예방부터 치료까지 세심하게 케어합니다." },
+                                            { num: "05", tit: "아이사랑 휴직", desc: "아이와 함께하는 소중한 시간을 존중합니다." },
+                                            { num: "06", tit: "임직원 자녀 입학선물", desc: "임직원 자녀의 새 출발을 축하하며 입학 선물을 전달합니다." },
+                                            { num: "07", tit: "경조금 지원", desc: "구성원 경조사 발생 시, GS리테일이 기쁨과 슬픔을 함께 하고자 휴가 및 지원금을 지원합니다." },
+                                            { num: "08", tit: "작은사랑나눔회", desc: "구성원의 갑작스러운 어려움에 함께 힘을 보태는 상생 지원 제도입니다." },
+                                        ]
+                                    },
+                                    {
+                                        title: "Leisure",
+                                        desc: "즐거운 여가 생활이 최고의 성과를 만든다는 믿음으로, 리프레시를 위한 충전의 기회도 마련합니다.",
+                                        items: [
+                                            { num: "01", tit: "휴양시설 지원", desc: "구성원의 행복한 여행을 위해 휴양시설 할인혜택을 지원합니다." },
+                                            { num: "02", tit: "하계휴가 추가 지원", desc: "법정 연차 외에 별도로 부여되는 여름휴가! 일상의 행복을 GS리테일이 응원합니다." },
+                                            { num: "03", tit: "휴가(연차) 보상", desc: "잔여 연차 미사용 분에 대해 일부 1.5배 보상을 지원합니다." },
+                                            { num: "04", tit: "스포츠티켓 지원", desc: "축구, 야구, 배구 원하는 스포츠를 즐길 수 있도록 아낌없이 지원합니다." },
+                                            { num: "05", tit: "인포멀(사내동호회)", desc: "구성원의 상호 이해와 친목도모를 지원합니다." }
+                                        ]
+                                    }
+                                ],
+                                Awards: {
+                                    Title: "인재경영 관련 인증 및 대외 수상 이력",
+                                    List: [
+                                        { year: "2025", month: "4월", desc: "장애인 고용 우수기업 선정(강남구청)" },
+                                        { year: "2024", month: "11월", desc: "공정채용 우수기업 장관상 수상(고용노동부)" },
+                                        { year: "2023", month: "2월", desc: "대한민국 일하기 좋은 기업 인증 획득 (GPTW코리아)" }
+                                    ],
+                                    Highlight: {
+                                        Img: require("@/assets/images/dummy/gsrsu03030203.png"), // GPTW 로고 이미지
+                                        Tit: "대한민국 일하기 좋은 기업 인증 획득<br/> (GPTW코리아)",
+                                        Date: "2023.02"
+                                    }
+                                }
+                            },
                             part_4: {
                                 Summary: "GS리테일의 인재 경영과 관련된 실적 자료들을 열람하실 수 있습니다.",
                                 Desc: "본 자료는 이해 관계자 및 기관, 주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br/>용도 외 활용, 불법 유출 시에는 법에 의해 처벌을 받으실 수 있습니다.",
@@ -1583,12 +1946,73 @@ export default {
                                 txt:'다운로드'
                             },
                         },
-                        customer: {},
+                        customer: {
+                            Summary: "고객 한 분 한 분의 만족이 GS리테일의 사명이자 존재 이유입니다.<br/>GS리테일의 고객만족경영은 생활과 문화입니다.",
+                            Policy: {
+                                Title: "소비자 권익보호 정책",
+                                Desc: "GS리테일의 모든 임직원은 소비자의 권익 보호를 위해<br/>이로운 상품과 서비스를 제공하여 신뢰받는 GS리테일이 되고자 다음의 정책을 실천하고 있습니다.",
+                                BtnText: "전문보기",
+                                Items: [
+                                    { label: "첫째", text: "소비자의 합리적인 소비를 위해 충분하고 정확한 정보를 제공하겠습니다." },
+                                    { label: "둘째", text: "소비자에게 적합한 상품과 최상의 서비스를 제공하여 고객의 편익을 증진을 위해 노력하겠습니다." },
+                                    { label: "셋째", text: "소비자의 권익을 침해하는 불공정 거래행위를 근절하겠습니다." },
+                                    { label: "넷째", text: "소비자의 개인정보는 동의절차를 거치며 그 목적에 부합하는 최소한의 정보만 수집하겠습니다." },
+                                    { label: "다섯째", text: "소비자의 소리에 귀 기울이고 불편사항은 즉시 시정하여 최상의 상품을 제공하기 위해 노력하겠습니다." }
+                                ]
+                            },
+                            Activities: {
+                                Title: "고객만족경영 주요 활동",
+                                Items: [
+                                    { img: require("@/assets/images/dummy/gsrsu030303_1.png"), tit: "TOTAL 서비스", subTit: "고객관계관리를 통한 근본적 문제 해결", desc: "고객이 입점에서 퇴점까지 각 Value-Chain의 고객기대가치 만족을 위한 활동 및 고객의 소리를 지속 개선합니다." },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_2.png"), tit: "가치공유 및 소통", subTit: "가치공유 및 열린 소통 문화 정착", desc: "GS리테일의 모든 리더는 구성원과 매주 모닝톡, 매월 커넥팅데이를 진행합니다." },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_3.png"), tit: "서비스 붐업활동", subTit: "고객, 임직원 참여하는 다양한 서비스 프로그램 진행", desc: "매년, 매월 정기적으로 진행하는 서비스붐업활동을 통해 고객지향적인 마인드를 심화합니다." },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_4.png"), tit: "내부직원만족", subTit: "다양한 자긍심 함양 프로젝트", desc: "만족한 직원이 만족한 서비스를 제공한다는 철학아래 다양한 자긍심 함양제도를 진행합니다." }
+                                ]
+                            },
+                            Recommend: {
+                                Title: "서비스 우수 직원 추천",
+                                PointTit: "진심어린 서비스",
+                                Desc: "나의 마음(心)을 담아, 고객입장에서 기대에 앞서가는 서비스를 지속적으로 제공하는 것입니다.<br/>고객(동료)에게 진심어린 서비스를 실천한 서비스 우수 직원을 추천해주세요.",
+                                BtnText: "서비스 우수 직원 추천하기"
+                            },
+                            Safety: {
+                                Title: "제품과 서비스 안전을 위한 제도 운영",
+                                Items: [
+                                    { step: "01", tit: "맛, 신선도 지킴이 안내", desc: "신선, 맛, NO.1을 위한 GS리테일의 선도 지킴이 활동을 확인해보세요." },
+                                    { step: "02", tit: "안전, 위생관리 제도", desc: "GS리테일의 안전, 위생관리 제도를 확인해 보세요." },
+                                    { step: "03", tit: "위해상품 차단시스템", desc: "안전한 상품을 제공해 드리기 위해 위해상품 차단 시스템에 참여하고 있습니다." }
+                                ]
+                            },
+                            Compensation: {
+                                Title: "제품, 고객 서비스 피해 보상 프로그램 운영",
+                                BtnText: "소비자 피해보상 매뉴얼 보기",
+                                Steps: [
+                                    {label: "Step 1", desc: "제품 이상,<br/>서비스 불만족 접수" },
+                                    { label: "Step 2", desc: "사실관계 확인" },
+                                    { label: "Step 3", desc: "이상 여부에 따른<br/>보상 정책 적용" }
+                                ]
+                            },
+                            Awards: {
+                                History: [
+                                    { year: "2019", month: "12월", text: "대한민국브랜드 대상(산업통상자원부)" },
+                                    { year: "", month: "7월", text: "GS리테일, 한국서비스대상 종합유통부문 최초 명예의 전당 헌액" },
+                                    { year: "", month: "6월", text: "국가서비스대상 신선식품 쇼핑몰 부분 대상" },
+                                    { year: "2016", month: "9월", text: "GS리테일, 한국의 경영대상 명예의 전당 헌액" }
+                                ],
+                                Marks: [
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo1.png"), tit: "ISO9001 인증획득 <br/>(한국기업인증원)", date: "2021. 05" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo2.png"), tit: "대한민국브랜드 대상 <br/>(산업통상자원부)", date: "2019. 12" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo3.png"), tit: "GS리테일, 한국서비스대상 <br/>최초 명예의 전당 헌액", date: "2019. 07" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo4.png"), tit: "국가서비스대상 <br/>신선식품 쇼핑몰 부분 대상", date: "2019. 06" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo5.png"), tit: "GS리테일, 한국의경영대상 <br/>명예의 전당 헌액", date: "2016. 09" }
+                                ]
+                            }
+                        },
                         safetymanagement: {},
                         informationprotection: {},
 
 
-                    }
+                    },
                 }
             }
         };
@@ -1613,16 +2037,7 @@ export default {
                 alert("연결된 파일이 없습니다.");
                 return;
             }
-            // 방법 1: 새 창으로 열기 (PDF 등 브라우저에서 지원하는 경우)
             window.open(link, '_blank');
-
-            /* 
-            방법 2: 강제 다운로드 (파일 이름 지정이 필요한 경우)
-            const anchor = document.createElement('a');
-            anchor.href = link;
-            anchor.download = ''; // 브라우저가 파일명을 판단하게 하거나 직접 지정 가능
-            anchor.click();
-                */
         }
     }
 };
@@ -1813,6 +2228,72 @@ export default {
     .talent_performance_data .policy_wrap th {background-color: #fff; border-bottom: 1px solid #E5E5E5;}
     .talent_performance_data .policy_wrap td {border-right:0; border-left:0; border-bottom: 1px solid #E5E5E5; padding: 24px;}
 
+    /* 인재상 전용 스타일 (한 줄 정리 버전) */
+    .talent_vision .philosophy_box {display:flex; flex-direction:column; align-items:center;}
+    .talent_vision .philosophy_box > div:first-of-type {margin-bottom:40px; display:flex; align-items:center; justify-content:space-around; gap:65px;}
+    .talent_vision .circle_visual_wrap { display: flex; justify-content: center; align-items: center; gap: -40px; }
+    .talent_vision .circle_item { width: 320px; height: 320px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; mix-blend-mode: multiply; }
+    .talent_vision .circle_item.value { background-color: #4A90E2; margin-right: -40px; }
+    .talent_vision .circle_item.way { background-color: #50C878; }
+    .talent_vision .circle_item strong { font-size: 44px; font-weight: 700; }
+    .talent_vision .circle_item span { font-size: 18px; margin-top: 8px; opacity: 0.9; }
+    .value_detail_grid {width:100%; padding:40px 0; background:#fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display:flex; justify-content:space-evenly;}
+    .card_title { font-size: 28px; font-weight: 700; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid #E5E5E9; }
+    .value_list li, .way_list li { margin-bottom: 24px; display: flex; align-items: flex-start; }
+    .way_list li {gap:30px;}
+    .value_list strong, .way_list strong { min-width: 100px; font-size: 20px; font-weight: 700; color: #161616; }
+    .value_list p { font-size: 16px; color: #67676F; }
+    .way_list .tags { display: flex; flex-direction: column; gap: 4px; }
+    .way_list .tags span { font-size: 16px; color: #67676F; }
+    .dream_realization {margin-top:120px;}
+    .dream_realization .type_bg { background: #F8F8F8; padding: 60px; border-radius: 20px; }
+    .bullet_01.no_type {list-style: none;padding: 0;}
+    .effort_item {display: flex; align-items: flex-start;}
+    .effort_item .num {flex-shrink:0; width: 25px; font-size: 18px; color: #161616;}
+    .effort_item .desc {font-size: 18px; color: #161616; line-height: 1.5; word-break: keep-all;}
+
+    /* 인재경영지표 */
+    /* 섹션 공통 */
+    .talent_indicators .support_section {border-top: 1px solid #eee; padding-top: 60px; }
+    .talent_indicators .support_section:first-of-type {border-top:0;}
+    .talent_indicators .section_title_sub { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
+    /* 2열 그리드 레이아웃 */
+    .talent_indicators .support_grid {display: grid; grid-template-columns: repeat(2, 1fr); row-gap: 60px;}
+    .talent_indicators .support_item {min-height: 80px; padding-left: 100px; padding-bottom:80px; border-bottom:1px solid #E5E5E9; position: relative; }
+    .talent_indicators .support_item:nth-last-child(-n+2) {border-bottom: 0; padding-bottom: 0;}
+    .talent_indicators .support_item:before {content: ''; width: 80px; height: 80px; background: red; border-radius: 50%; position: absolute; left: 0; top: 0;}
+    .talent_indicators .item_inner .tit_area { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .talent_indicators .item_inner .num { color: #107AF2; font-weight: 700; font-size: 18px; }
+    .talent_indicators .item_inner .tit { font-size: 20px; font-weight: 600; color: #000; }
+    .talent_indicators .item_inner .desc { font-size: 16px; color: #666; line-height: 1.5; }
+
+    /* 수상 이력 리스트 (하단) */
+    .award_list {margin-top:20px;}
+    .award_row {padding: 20px 0; font-size: 18px; display: flex; align-items:center;}
+    .award_row .year { width: 100px; margin-right:32px; font-size:32px; font-weight: 700; }
+    .award_row .month { width: 50px; margin-right:20px; color: #90909A;  font-size:20px; }
+    .award_row .name { flex: 1; color: #161616; font-size:20px; }
+    .award_section .brand_grid li {max-width:340px;}
+    .award_section .info_box {margin-top:24px; display:flex; flex-direction:column; gap:12px;}
+    .award_section .info_box .tit {color:#161616; font-size:20px; font-weight:700;}
+    .award_section .info_box .data {color:#161616; font-size:16px;;}
+
+
+    /* 고객만족경영 */
+    .customer_satisfaction .text_area {margin-top:32px;}
+    .customer_satisfaction strong {margin-bottom:12px; font-size:32px; font-weight:700; display:inline-block;}
+    .customer_satisfaction .sub_tit {margin-bottom:12px; font-size:20px; font-weight:700;}
+    .customer_satisfaction .recommend_box {padding:60px; background:#E7F2FE; border-radius:20px; display:flex; align-items:center; justify-content:space-between;}
+    .customer_satisfaction .safety_system_list {padding:60px 0px; border-radius:20px; display:flex; align-items:center; justify-content:space-between; gap:60px;}
+    .customer_satisfaction .safety_system_list li {width:33.333%; padding-left:104px; position:relative;}
+    .customer_satisfaction .safety_system_list li::before {content:''; width:80px; height:80px; background:red; position:absolute; top:0; left:0;}
+    .customer_satisfaction .safety_system_list .num {color:#107AF2; font-size:28px; font-weight:700; }
+    .customer_satisfaction .safety_system_list .tit_wrap {margin-top:10px;}
+    .customer_satisfaction .safety_system_list .tit_wrap strong {font-size:24px; font-weight:700; position:relative;}
+    .customer_satisfaction .safety_system_list .tit_wrap strong button {width:24px; height:24px; background:red; position:absolute; right:-35px; top:50%; transform: translateY(-50%);}
+    .customer_satisfaction .safety_system_list .tit_wrap .desc {color:#67676F; font-size:16px; font-weight:700;}
+
+
 
     @media screen and (max-width: 1024px) {
         .cont_inner { padding: 0 20px; }
@@ -1840,6 +2321,15 @@ export default {
         .human_rights_management .program_grid .program_item {width: calc(50% - 20px);}
         .human_rights_management .wide_info_box .img_frame {width: 100%; flex: none;}
         .human_rights_management .owner_card_layout {grid-template-columns: repeat(2, 1fr);}
+        .talent_vision .circle_item { width: 240px; height: 240px; } 
+        .value_detail_grid {display:grid; grid-template-columns: 1fr; padding: 20px; }
+        .talent_vision .philosophy_box > div:first-of-type {flex-direction:column;}
+        .talent_vision .circle_item strong { font-size: 32px; } 
+        .talent_indicators .support_grid {grid-template-columns: 1fr; row-gap: 40px;}
+        .talent_indicators .support_item {padding-bottom:0px;}
+        .talent_indicators .support_item:nth-last-child(-n+2) {border-bottom: 1px solid #E5E5E9; padding-bottom: 80px;}
+        .talent_indicators .support_item:last-child {border-bottom: 0; padding-bottom: 0; }
+        .award_section .brand_grid li {width:100%; max-width:100%;}
     }
 
     @media screen and (max-width: 767px) {
@@ -1885,5 +2375,7 @@ export default {
         .talent_performance_data .intro_summary :deep(.GS) br {display:none;}
         .talent_performance_data .policy_wrap tr td:last-of-type {display:none;}
         .talent_performance_data .policy_wrap table colgroup col:last-of-type {display:none;}
+        .value_detail_grid { padding: 0;} 
+        .detail_card { padding: 24px; }
     }
 </style>
