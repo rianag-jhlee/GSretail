@@ -89,7 +89,7 @@ const langData = {
         ],
         info: {
             logo: "(주)GS리테일",
-            address: "서울시 강남구 논현로 508",
+            address: "서울시 강남구 논현로 508, 13층 (역삼동, GS강남타워)",
             ceo: "대표이사 허서홍",
             brn: "사업자등록번호 116-81-18746",
             copyright: "Copyright ⓒGS Retail. All rights reserved."
@@ -151,7 +151,7 @@ const scrollTop = () => {
 // quick slide
 // =====================
 const checkQuickSlide = () => {
-    isQuickSlide.value = window.innerWidth <= 768;
+    isQuickSlide.value = window.innerWidth <= 1024;
 };
 
 const initQuickSlide = () => {

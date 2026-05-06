@@ -15,101 +15,108 @@
             </div>
         </div>
 
-        <section v-if="t.sec01" class="sec01">
-            <div class="inner">
-                <div>
-                    <h2 v-html="t.sec01.title"></h2>
-                    <p class="explain" v-html="t.sec01.explain"></p>
-                    <ul>
-                        <li v-for="item in t.sec01.link" :key="item.txt"><a :href="item.link">{{ item.txt }}</a></li>
-                    </ul>
-                </div>
-                <div class="clip_mask" :style="{ backgroundImage: 'url(' + t.sec01.img + ')' }">
+        <div class="section_wrap">
+
+            <section v-if="t.sec01" class="sec01">
+                <div class="inner">
                     <div>
-                        <strong>Lifestyle</strong>
-                        <em></em>
-                        <strong>Platformed.</strong>
+                        <h2 v-html="t.sec01.title"></h2>
+                        <p class="explain" v-html="t.sec01.explain"></p>
+                        <ul>
+                            <li v-for="item in t.sec01.link" :key="item.txt"><a :href="item.link">{{ item.txt }}</a></li>
+                        </ul>
+                    </div>
+                    <div class="clip_mask" :style="{ backgroundImage: 'url(' + t.sec01.img + ')' }">
+                        <div>
+                            <strong>Lifestyle</strong>
+                            <em></em>
+                            <strong>Platformed.</strong>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section v-if="t.sec02" class="sec02">
-            <h2 v-html="t.sec02.title"></h2>
+            <section v-if="t.sec02" class="sec02">
+                <h2 v-html="t.sec02.title"></h2>
 
-            <div class="expWrap">
-                <div class="expTrack">
-                    <div class="expSlide" v-for="item in t.sec02.items" :key="item.txt">
-                        <div class="card">
-                            <span class="thumb">
-                                <img :src="item.img" />
-                            </span>
-                            <div class="txt">
-                                <strong>{{ item.txt }}</strong>
-                                <span>{{ item.sub }}</span>
-                                <p>{{ item.exp }}</p>
-                                <a href="#none">바로가기</a>
+                <div class="expWrap">
+                    <div class="expTrack">
+                        <div class="expSlide" v-for="item in t.sec02.items" :key="item.txt">
+                            <div class="card">
+                                <span class="thumb">
+                                    <img :src="item.img" />
+                                </span>
+                                <div class="txt">
+                                    <strong>{{ item.txt }}</strong>
+                                    <span>{{ item.sub }}</span>
+                                    <p>{{ item.exp }}</p>
+                                    <a href="#none">바로가기</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section v-if="t.sec03" class="sec03">
-            <h2 v-html="t.sec03.title"></h2>
+            <section v-if="t.sec03" class="sec03">
+                <div class="inner">
+                    <h2 v-html="t.sec03.title"></h2>
 
-            <div class="swiper Swiper" ref="sec03Swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="item in t.sec03.items" :key="item.img">
-                        <div class="slide">
-                            <span class="thumb">
-                                <em><img :src="item.img" /></em>
-                            </span>
-                            <div>
-                                <em><img :src="item.sub" /></em>
-                                <p>
-                                    <strong>{{ item.brand }}</strong>
-                                    <span>{{ item.txt }}</span>
-                                </p>
+                    <div class="swiper Swiper" ref="sec03Swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" v-for="item in t.sec03.items" :key="item.img">
+                                <div class="slide">
+                                    <span class="thumb">
+                                        <em><img :src="item.img" /></em>
+                                    </span>
+                                    <div>
+                                        <em><img :src="item.sub" /></em>
+                                        <p>
+                                            <strong>{{ item.brand }}</strong>
+                                            <span>{{ item.txt }}</span>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section v-if="t.sec04" class="sec04">
-            <h2 v-html="t.sec04.title"></h2>
-            <p class="explain" v-html="t.sec04.explain"></p>
-            <ul class="quick">
-                <li v-for="item in t.sec04.quick" :key="item.quick">
-                    <a :href="item.link">{{ item.txt }}</a>
-                </li>
-            </ul>
+            <section v-if="t.sec04" class="sec04">
+                <h2 v-html="t.sec04.title"></h2>
+                <p class="explain" v-html="t.sec04.explain"></p>
+                <ul class="quick">
+                    <li v-for="item in t.sec04.quick" :key="item.quick">
+                        <a :href="item.link">{{ item.txt }}</a>
+                    </li>
+                </ul>
 
-            <div class="swiper" ref="sec04Swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="(item, i) in t.sec04.items" :key="i">
-                        <div class="slide">
-                            <span class="thumb">
-                                <em><img :src="item.img" /></em>
-                            </span>
+                <div class="swiper" ref="sec04Swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" v-for="(item, i) in t.sec04.items" :key="i">
+                            <div class="slide">
+                                <span class="thumb">
+                                    <em><img :src="item.img" /></em>
+                                </span>
 
-                            <div class="txt">
-                                <ul>
-                                    <li v-for="(sub, i) in item.item" :key="i">
-                                        <em>{{ sub.cate }}</em>
-                                    </li>
-                                </ul>
+                                <div class="txt">
+                                    <ul>
+                                        <li v-for="(sub, i) in item.item" :key="i">
+                                            <em>{{ sub.cate }}</em>
+                                        </li>
+                                    </ul>
 
-                                <p v-html="item.title"></p>
+                                    <p v-html="item.title"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+        </div>
+
     </div>
 </template>
 
@@ -478,17 +485,34 @@ h2+.explain {
     display: block;
 }
 
-section {
-    padding: 200px 0;
-    background-color: #fff;
+.section_wrap {
+    background-color:#fff;
     position: relative;
     z-index: 1;
+}
+
+section {
+    padding: 200px 0;
+    position:relative;
 }
 
 .sec01 {
     height: 100vh;
     padding: 200px 20px 20px;
     overflow: hidden;
+}
+.sec01:after {
+    width:100vw;
+    height:100%;
+    background-image:url('@/assets/images/main/bg_about.png');
+    background-position:0 0;
+    background-repeat:no-repeat;
+    background-size:contain;
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:-1;
 }
 
 .sec01 .inner {
@@ -535,19 +559,18 @@ section {
     content: '';
     display: block;
 }
-
-.sec01 .clip_mask {
-    width: 552px;
-    max-width: 100vw;
-    height: 338px;
+ .sec01 .clip_mask {
+    width:32.093023%;
+    max-width:100vw;
+    min-height:338px;
     border-radius: 10px;
     background-position: 50%;
     background-size: cover;
     overflow: hidden;
     position: absolute;
-    bottom: 20px;
+    bottom: 16.728971%;
     left: 0;
-}
+ }
 
 .sec01 .clip_mask div {
     height: 0;
@@ -578,8 +601,11 @@ section {
 }
 
 .sec02 {
-    position: relative;
     padding: 200px 0 0;
+    background-image:url('@/assets/images/main/bg_subtain.png');
+    background-position:0 0;
+    background-repeat:no-repeat;
+    position: relative;
 }
 
 .sec02 .expWrap {
@@ -741,31 +767,40 @@ section {
     object-fit: cover;
 }
 
+.sec03 .inner {max-width:1720px; margin:0 auto; padding:0 20px; position:relative;}
 .sec03 h2 {
-    text-align: left;
+    text-align:left;
     position: absolute;
     right: 20px;
-    left: 1128px;
+    left: 67.142856%;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
 }
 
 .sec03 .swiper {
-    padding-left: 20px;
+    width:100%;
+    max-width:1680px;
+    margin:0 auto;
 }
 
 .sec03 .slide {
+    position:relative;
     display: flex;
     align-items: flex-end;
 }
 
+.sec03 .slide .thumb {width:58.035714%; margin-right:9.107142%;}
+
 .sec03 .slide div {
-    margin-left: 153px;
-    flex: 1;
+    flex:1;
     display: flex;
     align-items: center;
     gap: 40px;
 }
 
 .sec03 .slide p {
+    flex:1;
     display: flex;
     flex-direction: column;
 }
@@ -782,6 +817,19 @@ section {
     font-size: 2.4rem;
     letter-spacing: -0.01em;
     line-height: 150%;
+}
+
+.sec04:after {
+    width:100vw;
+    height:200vh;
+    background-image:url('@/assets/images/main/bg_news.png');
+    background-position:100% 100%;
+    background-repeat:no-repeat;
+    content:'';
+    position:absolute;
+    bottom:30%;
+    right:0;
+    z-index:-1;
 }
 
 .sec04 .explain {
@@ -876,6 +924,17 @@ section {
         margin-top: 10px;
         font-size: 3rem;
     }
+
+    .sec02 .expSlide:first-child.active {
+        margin-left:0;
+    }
+
+    .sec02 .expSlide:first-child, .sec02 .expSlide.prev {
+        margin-bottom:unset;        
+    }
+
+    .sec03 h2 {position:static;}
+
 }
 
 @media screen and (max-width:768px) {
@@ -897,6 +956,16 @@ section {
     .sec01 {
         padding-top: 100px;
     }
+    .sec01:after {
+        background-size:100% auto;
+        transform:rotate(90deg);
+        -moz-transform: scaleX(-1); 
+        -o-transform: scaleX(-1); 
+        -webkit-transform: scaleX(-1); 
+        transform: scaleX(-1);   
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    }
 
     .sec01 .inner {
         flex-direction: column;
@@ -906,8 +975,18 @@ section {
         margin-top: 20px;
     }
 
-    .sec01 .clip_mask {
+    /*.sec01 .clip_mask {
         display: none;
+    }*/
+    .sec01 .clip_mask {
+        width: 90vw;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+    }
+
+    .sec01 ul {
+        background-color:#fff;
     }
 
     .sec01 li a {
