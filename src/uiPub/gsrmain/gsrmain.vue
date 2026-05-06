@@ -23,7 +23,8 @@
                         <h2 v-html="t.sec01.title"></h2>
                         <p class="explain" v-html="t.sec01.explain"></p>
                         <ul>
-                            <li v-for="item in t.sec01.link" :key="item.txt"><a :href="item.link">{{ item.txt }}</a></li>
+                            <li v-for="item in t.sec01.link" :key="item.txt"><a :href="item.link">{{ item.txt }}</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="clip_mask" :style="{ backgroundImage: 'url(' + t.sec01.img + ')' }">
@@ -44,7 +45,7 @@
                         <div class="expSlide" v-for="item in t.sec02.items" :key="item.txt">
                             <div class="card">
                                 <span class="thumb">
-                                    <img :src="item.img" />
+                                    <em><img :src="item.img" /></em>
                                 </span>
                                 <div class="txt">
                                     <strong>{{ item.txt }}</strong>
@@ -296,43 +297,47 @@ export default {
 
         handleSwiper() {
             const width = window.innerWidth;
+            const isMobile = width <= 1024; // 요청하신 조건 (tablet ~ mobile)
 
-            console.log('a : ', width);
-
-            /* main */
+            // 기존 공통 스와이퍼 로직
             this.createSwiper('main', this.$refs.mainSwiper, {
                 loop: true,
                 slidesPerView: 1,
                 speed: 800,
             });
 
-            /* sec03 */
+            /* --- sec01 Swiper 제어 --- */
+            if (isMobile) {
+                // 모바일일 때만 Swiper 생성 (만약 sec01에 swiper를 쓰기로 하셨다면)
+                this.createSwiper('sec02', this.$refs.sec01Swiper, {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                });
+            } else {
+                // PC일 때는 Swiper 제거
+                this.destroySwiper('sec02');
+            }
+
+            /* sec03 - 태블릿/모바일 대응 */
             this.createSwiper('sec03', this.$refs.sec03Swiper, {
                 loop: false,
                 speed: 800,
                 breakpoints: {
-                    0: {
-                        slidesPerView: "auto",
-                        spaceBetween:10,
-                    },
-                    769: {
-                        slidesPerView: 1,
-                    }
+                    0: { slidesPerView: "auto", spaceBetween: 20 },
+                    769: { slidesPerView: 1, spaceBetween: 0 }
                 }
             });
 
-            /* sec04 (반응형 제어) */
-            if (width >= 768) {
-                this.$nextTick(() => {
-                    this.createSwiper('sec04', this.$refs.sec04Swiper, {
-                        loop: true,
-                        slidesPerView: 'auto',
-                        spaceBetween: 12,
-                        speed: 800,
-                    });
+            /* sec04 - 768px 초과시에만 Swiper 작동 */
+            if (width > 768) {
+                this.createSwiper('sec04', this.$refs.sec04Swiper, {
+                    loop: true,
+                    slidesPerView: 'auto',
+                    spaceBetween: 12,
+                    speed: 800,
                 });
             } else {
-                this.destroySwiper('sec04');
+                this.destroySwiper('sec04'); // 모바일은 세로 리스트
             }
         },
 
@@ -342,54 +347,60 @@ export default {
 
         initSec02() {
             const wrap = this.$el.querySelector(".expWrap");
+            const track = this.$el.querySelector(".expTrack");
             const slides = gsap.utils.toArray(".expSlide");
 
-            const state = { activeIndex: -1 };
+            if (!wrap || !track || slides.length === 0) return;
 
-            const setState = (index) => {
-                slides.forEach((slide, i) => {
-                    slide.classList.remove("active", "prev");
+            const isMobile = window.innerWidth <= 1024;
 
-                    if (i === index) slide.classList.add("active");
-                    if (i === index - 1) slide.classList.add("prev");
+            // 1. 기존 리소스 해제
+            const oldTrigger = ScrollTrigger.getById("sec02_trigger");
+            if (oldTrigger) oldTrigger.kill();
+            this.destroySwiper('sec02_mobile');
+
+            // 2. 초기화 (clearProps로 GSAP 스타일 제거)
+            gsap.set([track, wrap, ...slides], { clearProps: "all" });
+            track.classList.remove("swiper-wrapper");
+            slides.forEach(slide => slide.classList.remove("swiper-slide", "active", "prev"));
+
+            if (isMobile) {
+                track.classList.add("swiper-wrapper");
+                slides.forEach(slide => slide.classList.add("swiper-slide"));
+
+                const slideCount = slides.length;
+                this.createSwiper('sec02_mobile', wrap, {
+                    wrapperClass: 'expTrack',
+                    slideClass: 'expSlide',
+                    slidesPerView: "auto",
+                    spaceBetween: 16,
+                    centeredSlides: true, // 루프 계산을 위해 활성화
+                    loop: slideCount >= 3,
+                    loopedSlides: slideCount,
+                    loopAdditionalSlides: 1,
                 });
+            } else {
+                // PC 로직 유지 (기존 코드와 동일)
+                const scrollLength = slides.length * 100;
+                slides[0].classList.add("active");
 
-                state.activeIndex = index;
-            };
-
-            const clearAll = () => {
-                slides.forEach(slide => {
-                    slide.classList.remove("active", "prev");
+                ScrollTrigger.create({
+                    id: "sec02_trigger",
+                    trigger: wrap,
+                    start: "top top",
+                    end: () => `+=${scrollLength}%`,
+                    pin: true,
+                    scrub: true,
+                    onUpdate: (self) => {
+                        const index = Math.min(slides.length - 1, Math.floor(self.progress * slides.length));
+                        slides.forEach((slide, i) => {
+                            slide.classList.remove("active", "prev");
+                            if (i === index) slide.classList.add("active");
+                            if (i === index - 1) slide.classList.add("prev");
+                        });
+                    }
                 });
-                state.activeIndex = -1;
-            };
-
-            ScrollTrigger.create({
-                trigger: wrap,
-                start: "top top",
-                end: () => "+=" + (slides.length * window.innerHeight),
-                pin: true,
-                scrub: true,
-
-                onUpdate: (self) => {
-                    if (self.progress <= 0) {
-                        clearAll();
-                        return;
-                    }
-
-                    const index = Math.min(
-                        slides.length - 1,
-                        Math.floor(self.progress * slides.length)
-                    );
-
-                    if (index !== state.activeIndex) {
-                        setState(index);
-                    }
-                },
-
-                onLeave: () => setState(slides.length - 1),
-                onLeaveBack: clearAll
-            });
+            }
         },
 
         handleScroll() {
@@ -410,31 +421,70 @@ export default {
         initClipAnimation() {
             const el = this.$el.querySelector(".clip_mask");
             const innerDiv = el.querySelector("div");
+            const isMobile = window.innerWidth <= 1024;
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".sec01",
+                    // start: "top top", // 섹션이 상단에 닿으면 고정 및 시작
                     start: "top top",
-                    end: "+=300%",
+                    end: "+=200%",
                     scrub: true,
                     pin: true,
                 }
             });
 
-            tl.to(el, {
-                width: window.innerWidth,
-                height: "100vh",
-                borderRadius: 0,
-                top: "-200px",
-                left: "50%",
-                x: "-50%",
-                ease: "none"
-            });
+            if (isMobile) {
+                // ✅ 0.2 (약 10~20% 지점) 위치 파라미터를 사용하여 애니메이션 시작을 지연시킵니다.
+                // 섹션은 고정되어 있지만, 잠시 멈췄다가 아래에서 위로 올라오는 효과를 줍니다.
+                tl.to(el, {
+                    bottom: "-20px",        // -20px에서 0으로 붙음
+                    width: "100vw",
+                    height: "100vh",
+                    borderRadius: 0,
+                    ease: "none",
+                    onStart: () => {
+                        // 시작 시점에 위치 기준 재설정
+                        gsap.set(el, { top: "auto", bottom: "-20px", left: "50%", x: "-50%" });
+                    }
+                }, 0.2);// 👈 지연 시작 (0은 즉시, 숫자가 클수록 늦게 시작)
 
+                tl.to(innerDiv, {
+                    height: "70vh",
+                    ease: "none"
+                }, 0.2); // 👈 마스크 확장과 동시에 시작
+            } else {
+                // ✅ PC: 중앙에서 사방으로 확장
+                tl.to(el, {
+                    width: "100vw",
+                    height: "100vh",
+                    borderRadius: 0,
+                    top: "-200px",
+                    left: "50%",
+                    x: "-50%",
+                    ease: "none"
+                });
+            }
+
+            // 공통: 내부 텍스트(Lifestyle Platformed) 노출
             tl.to(innerDiv, {
-                height: "80vh",
+                height: "100vh",
                 ease: "none"
-            });
+            }, 0);//"<");
+        },
+
+        destroySwiper(key) {
+            if (this.swipers[key]) {
+                // Swiper 내부적으로 클래스와 이벤트를 제거하도록 설정
+                this.swipers[key].destroy(true, true);
+                delete this.swipers[key];
+
+                // 추가 조치: DOM에 남은 Swiper 관련 클래스 수동 제거
+                const swiperEl = this.$refs[`${key}Swiper`] || this.$el.querySelector(`.${key}`);
+                if (swiperEl) {
+                    swiperEl.classList.remove('swiper-initialized', 'swiper-horizontal', 'swiper-android', 'swiper-ios');
+                }
+            }
         }
     }
 };
@@ -486,14 +536,14 @@ h2+.explain {
 }
 
 .section_wrap {
-    background-color:#fff;
+    background-color: #fff;
     position: relative;
     z-index: 1;
 }
 
 section {
     padding: 200px 0;
-    position:relative;
+    position: relative;
 }
 
 .sec01 {
@@ -501,23 +551,25 @@ section {
     padding: 200px 20px 20px;
     overflow: hidden;
 }
+
 .sec01:after {
-    width:100vw;
-    height:100%;
-    background-image:url('@/assets/images/main/bg_about.png');
-    background-position:0 0;
-    background-repeat:no-repeat;
-    background-size:contain;
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:-1;
+    width: 100vw;
+    height: 100%;
+    background-image: url('@/assets/images/main/bg_about.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 .sec01 .inner {
     width: 100%;
     max-width: 1720px;
+    height: 100%;
     margin: 0 auto;
     position: relative;
     display: flex;
@@ -559,10 +611,11 @@ section {
     content: '';
     display: block;
 }
- .sec01 .clip_mask {
-    width:32.093023%;
-    max-width:100vw;
-    min-height:338px;
+
+.sec01 .clip_mask {
+    width: 32.093023%;
+    max-width: 100vw;
+    min-height: 338px;
     border-radius: 10px;
     background-position: 50%;
     background-size: cover;
@@ -570,7 +623,7 @@ section {
     position: absolute;
     bottom: 16.728971%;
     left: 0;
- }
+}
 
 .sec01 .clip_mask div {
     height: 0;
@@ -602,9 +655,9 @@ section {
 
 .sec02 {
     padding: 200px 0 0;
-    background-image:url('@/assets/images/main/bg_subtain.png');
-    background-position:0 0;
-    background-repeat:no-repeat;
+    background-image: url('@/assets/images/main/bg_subtain.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
     position: relative;
 }
 
@@ -767,40 +820,53 @@ section {
     object-fit: cover;
 }
 
-.sec03 .inner {max-width:1720px; margin:0 auto; padding:0 20px; position:relative;}
+.sec03 .inner {
+    max-width: 1720px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
 .sec03 h2 {
-    text-align:left;
+    text-align: left;
     position: absolute;
     right: 20px;
     left: 67.142856%;
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .sec03 .swiper {
-    width:100%;
-    max-width:1680px;
-    margin:0 auto;
+    width: 100%;
+    max-width: 1680px;
+    margin: 0 auto;
 }
 
 .sec03 .slide {
-    position:relative;
+    position: relative;
     display: flex;
     align-items: flex-end;
 }
 
-.sec03 .slide .thumb {width:58.035714%; margin-right:9.107142%;}
+.sec03 .slide .thumb {
+    width: 58.035714%;
+    margin-right: 9.107142%;
+}
 
 .sec03 .slide div {
-    flex:1;
+    flex: 1;
     display: flex;
     align-items: center;
     gap: 40px;
 }
 
+.sec03 .slide div em img {
+    display: block;
+}
+
 .sec03 .slide p {
-    flex:1;
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -820,16 +886,16 @@ section {
 }
 
 .sec04:after {
-    width:100vw;
-    height:200vh;
-    background-image:url('@/assets/images/main/bg_news.png');
-    background-position:100% 100%;
-    background-repeat:no-repeat;
-    content:'';
-    position:absolute;
-    bottom:30%;
-    right:0;
-    z-index:-1;
+    width: 100vw;
+    height: 200vh;
+    background-image: url('@/assets/images/main/bg_news.png');
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    content: '';
+    position: absolute;
+    bottom: 30%;
+    right: 0;
+    z-index: -1;
 }
 
 .sec04 .explain {
@@ -915,152 +981,387 @@ section {
     line-height: 150%;
 }
 
-@media screen and (max-width:1024px) {
-    .main_copy strong {
-        font-size: 6rem;
-    }
-
-    .main_copy span {
-        margin-top: 10px;
-        font-size: 3rem;
-    }
-
-    .sec02 .expSlide:first-child.active {
-        margin-left:0;
-    }
-
-    .sec02 .expSlide:first-child, .sec02 .expSlide.prev {
-        margin-bottom:unset;        
-    }
-
-    .sec03 h2 {position:static;}
-
-}
-
-@media screen and (max-width:768px) {
+/* --- [Tablet: 769px ~ 1024px] --- */
+@media screen and (max-width: 1024px) {
     h2 {
-        font-size: 3.2rem;
-        letter-spacing: -0.01em;
-        line-height: 130%;
-    }
-
-    h2+.explain {
-        font-size: 1.6rem;
-    }
-
-    .main_visual .slide {
-        text-align: center;
-        justify-content: center;
+        font-size: 5.2rem;
     }
 
     .sec01 {
+        position: relative;
+        height: 100vh;
+        /* 핀 효과를 위해 높이 고정[cite: 1] */
         padding-top: 100px;
-    }
-    .sec01:after {
-        background-size:100% auto;
-        transform:rotate(90deg);
-        -moz-transform: scaleX(-1); 
-        -o-transform: scaleX(-1); 
-        -webkit-transform: scaleX(-1); 
-        transform: scaleX(-1);   
-        filter: FlipH;
-        -ms-filter: "FlipH";
+        overflow: hidden;
     }
 
     .sec01 .inner {
         flex-direction: column;
-    }
-
-    .sec01 .explain {
-        margin-top: 20px;
-    }
-
-    /*.sec01 .clip_mask {
-        display: none;
-    }*/
-    .sec01 .clip_mask {
-        width: 90vw;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 0;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 0;
     }
 
     .sec01 ul {
-        background-color:#fff;
+        background-color: #fff;
     }
 
-    .sec01 li a {
-        padding-top: 21.5px;
-        padding-bottom: 21.5px;
-        font-size: 1.8rem;
-    }
-
-    .sec03 {overflow:hidden;}
-
-    .sec03 .swiper {
-        padding-left:0;
-    }
-
-    .sec03 .slide {
-        align-items:flex-start;
-        flex-direction:column;
-    }
-    .sec03 .slide div {margin-left:0;}
-
-    .sec04 {
-        padding-right:20px; padding-left:20px;
-    }
-
-    .sec04 .explain {
-        font-size: 1.4rem;
-    }
-
-    .sec04 .quick a {
-        padding: 24px 10px;
-        font-size: 1.6rem;
-    }
-
-    .sec04 .swiper-wrapper {
+    .sec01 .clip_mask {
+        /* 초기 위치를 하단 끝에 배치[cite: 1] */
+        position: absolute;
+        bottom: -20px;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        height: 0;
+        /* 초기 박스 높이[cite: 1] */
+        min-height: 0;
+        margin: 0;
+        z-index: 10;
         display: block;
+        /* relative 해제 확인 */
     }
 
-    .sec04 .swiper-slide {
+    .sec01 .inner>div:first-child {
+        width: 100%;
+        text-align: center;
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /*margin-bottom: 50px;*/
+        /* 텍스트와 마스크 사이 간격 */
+    }
+
+    .sec01 h2 {
+        text-align: center;
+    }
+
+    .sec01 .explain {
+        margin-top: 30px;
+        flex: 1;
+    }
+
+    .sec01 ul {
+        display: inline-block;
         width: 100%;
     }
-    .sec04 .swiper-slide + .swiper-slide {
-        margin-top:24px;
+
+    /* 마스크를 하단으로 이동 */
+    .sec01 .clip_mask {
+        width: 90%;
+        /* 화면 양옆 여백 */
+        bottom: 0;
+        left: auto;
+        margin: 60px auto 0;
+        transform: none;
     }
 
-    .sec04 .thumb {
-        padding-top: 60.895522%;
-        border-radius:12px;
-        display: block;
+    .sec01 .clip_mask strong {
+        font-size: 5.6rem;
+        /* 모바일 대응 폰트 크기 축소 */
     }
 
-    .sec04 .thumb em {
+    .sec02 {
+        height: auto !important;
+        padding: 100px 0 !important;
+    }
+
+    .sec02 .expWrap {
+        height: auto !important;
+        padding-top: 40px !important;
+        overflow: hidden;
+        /* 슬라이더 영역 제한 */
+    }
+
+    /* ✅ 가로 슬라이드 트랙 설정 */
+    .sec02 .expTrack {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        width: 100%;
+        max-height: none !important;
+    }
+
+    /* ✅ GSAP 애니메이션 값 강제 초기화 */
+    .sec02 .expSlide {
+        width: 33.3333%;
+        height: auto !important;
+        margin-top: 0 !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        flex-shrink: 0;
+        /* PC용 margin-left 제거 */
+        transform: none !important;
+        transition: unset;
+    }
+
+    .sec02 .expSlide .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sec02 .expSlide .thumb {
+        width: auto;
+        height: auto;
+        padding-top: 100%;
+        border-radius: 12px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .sec02 .expSlide .thumb em {
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    .sec02 .expSlide .thumb img {
+        height: 60%;
+        border-radius: 12px;
+
+        transition: all 0.25s;
+    }
+
+    /* ✅ 텍스트 영역 가시성 확보 */
+    .sec02 .expSlide .txt {
+        opacity: 1 !important;
+        visibility: visible !important;
+        position: relative !important;
+        inset: auto !important;
+        margin-top: 20px;
+        text-align: left;
+        display: none;
+    }
+
+    .sec02 .expSlide.swiper-slide-active .thumb img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .sec02 .expSlide.swiper-slide-active .txt {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sec03 h2 {
+        position: relative;
+        left: 0;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .sec03 .slide .thumb {
+        width: 50%;
+    }
+}
+
+/* --- [Mobile: 768px 이하] --- */
+@media screen and (max-width: 768px) {
+    h2 {
+        font-size: 3.2rem;
+        text-align: center;
+        word-break: keep-all;
+    }
+
+    h2+.explain {
+        font-size: 1.6rem;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    /* 메인 비주얼 */
+    .main_visual .slide {
+        padding: 40px 20px;
+        height: 100vh;
+    }
+
+    .main_copy strong {
+        font-size: 4.8rem;
+    }
+
+    .main_copy span {
+        font-size: 2.4rem;
+    }
+
+    /* Section 01 */
+    .sec01 {
+        padding: 80px 20px 20px;
+    }
+
+    .sec01:after {
+        background-size: 100% auto;
+        transform: rotate(90deg);
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    }
+
+    .sec01 h2 {
+        text-align: center;
+    }
+
+    .sec01 .clip_mask strong {
+        font-size: 3.8rem;
+    }
+
+    .sec02 {
+        background-size: 60vw;
+    }
+
+    .sec02 .expTrack {
+        width: 100% !important;
+        display: flex !important;
+    }
+
+    .sec02 .expSlide {
+        width: 286px !important;
+        transform: scale(0.9); /* 미리 작게 설정 */
+        opacity: 0.7;          /* 미리 투명하게 설정 */
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .sec02 .expSlide.swiper-slide-active {
+        transform: scale(1);    /* 원래 크기로 */
+        opacity: 1;             /* 불투명하게 */
+    }
+
+    .sec02 .expSlide .thumb {
+        height: 286px;
+    }
+
+    .sec02 .expSlide .txt {
+        margin-top: 36px;
+    }
+
+    .sec02 .expSlide .txt strong {
+        font-size: 4rem;
+        line-height: 130%;
+    }
+
+    .sec02 .expSlide .txt span {
+        font-size: 2rem;
+        line-height: 130%;
+    }
+
+    .sec02 .expSlide .txt p {
+        margin-top: 10px;
+        font-size: 1.4rem;
+        line-height: 140%;
+    }
+
+    .sec02 .expSlide .txt a {
+        width: 50px;
+        height: 50px;
+        margin-top: 20px;
+    }
+
+    .sec03 {
+        padding-top: 50px;
+        padding-bottom: 100px;
+    }
+
+    .sec03 .swiper {
+        width: auto;
+        margin: 0 -20px 0 -40px;
+        padding-right: 40px;
+    }
+
+    .sec03 .slide {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .sec03 .slide .thumb {
+        width: 100%;
+    }
+
+    .sec03 .slide div {
+        margin-top: 36px;
+        padding-left: 40px;
+        gap: 20px;
+    }
+
+    .sec03 .slide p strong {
+        font-size: 2.4rem;
+    }
+
+    .sec03 .slide p span {
+        font-size: 1.4rem;
+    }
+
+    /* Section 04 (세로 리스트화) */
+    .sec04 {
+        padding-top: 50px;
+        padding-right: 20px;
+        padding-bottom: 150px;
+        padding-left: 20px;
+    }
+
+    .sec04:after {
+        width: 60vw;
+        height: 100vw;
+        background-size: contain;
+        bottom: 95%;
+    }
+
+    .sec04 .explain {
+        font-size: 1.4rem;
+        line-height: 140%;
+    }
+
+    .sec04 .quick {
+        margin-top: 22px;
+    }
+
+    .sec04 .quick a {
+        padding: 26px 10px;
+        font-size: 1.6rem;
+    }
+
+    .sec04 .swiper {
+        margin-top: 60px;
+    }
+
+    .sec04 .swiper-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .sec04 .swiper-slide {
+        width: 100% !important;
     }
 
     .sec04 .slide .txt {
-        padding:24px 0;
-        position: static;
+        position: relative;
+        padding: 20px 0;
+        background: none;
     }
 
     .sec04 .slide .txt * {
-        color: #161616;
+        color: #222;
     }
 
-    .sec04 .slide .txt li em {border-color:#161616;}
-
     .sec04 .slide .txt p {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        font-size: 2rem;
+        line-height: 135%;
+    }
+
+    .sec04 .slide .txt li em {
+        border-color: #222;
     }
 }
 </style>
