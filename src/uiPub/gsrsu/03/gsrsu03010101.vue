@@ -25,7 +25,7 @@
                             :tab-slide="true" 
                         />
 
-                        <div class="sub_tab_content mt60">
+                        <div class="sub_tab_content">
                             <div v-if="SubTabIdx1 === 0" class="winwin_intro">
                                 <div class="intro_summary ac mb100">
                                     <h3 class="text_summary">{{ t.WinWinIntro.Summary }}</h3>
@@ -231,6 +231,11 @@
                                                         <col style="width: 15%;">
                                                         <col style="width: auto;">
                                                     </colgroup>
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="ac" v-for="(tr, idx) in t.CompetencySupport.Education.Table.Thead" :key="idx">{{ tr }}</th>
+                                                        </tr>
+                                                    </thead>
                                                     <tbody>
                                                         <tr v-for="(tr, idx) in t.CompetencySupport.Education.Table.Tbody" :key="idx">
                                                             <td class="ac"><strong>{{ tr.name }}</strong></td>
@@ -367,6 +372,7 @@
                                     :tab-items="t.Tabs3_2" 
                                     tab-class="type_04" 
                                     class="mb40" 
+                                    :tab-slide="true" 
                                 />
                                 <div class="inner_content">
 
@@ -537,7 +543,7 @@
                             tab-class="type_02" 
                             :tab-slide="true"
                         />
-                        <div class="sub_tab_content mt60">
+                        <div class="sub_tab_content">
 
                             <!-- gsrsu030201 -->
                             <div v-if="SubTabIdx1 === 0" class="csr_outline">
@@ -734,9 +740,10 @@
                             v-model="SubTabIdx1" 
                             :tab-items="t.Tabs2_3" 
                             tab-class="type_02" 
+                            :tab-slide="true" 
                             @change="SubTabIdx2 = 0" 
                         />
-                        <div class="sub_tab_content mt60">
+                        <div class="sub_tab_content">
                             <!-- gsrsu030301 -->
                             <div v-if="SubTabIdx1 === 0 && t.protect.humanrights" class="human_rights_management">
                                 <div class="intro_summary ac mb100">
@@ -1099,7 +1106,7 @@
                                 <!-- 제품과 서비스 안전 제도 -->
                                 <section class="support_item mb120">
                                     <div class="title_area mb40">
-                                        <h4 class="section_title_sub">{{ t.protect.customer.Safety.Title }}</h4>
+                                        <h4 class="section_title_sub" v-html=" t.protect.customer.Safety.Title"></h4>
                                     </div>
                                     <ul class="safety_system_list">
                                         <li v-for="(item, idx) in t.protect.customer.Safety.Items" :key="'safety-'+idx">
@@ -1119,8 +1126,8 @@
 
                                 <!-- 피해 보상 프로그램 -->
                                 <section class="support_item mb120">
-                                    <div class="title_area mb40 ac">
-                                        <h4 class="section_title_sub">{{ t.protect.customer.Compensation.Title }}</h4>
+                                    <div class="title_area mb40">
+                                        <h4 class="section_title_sub" v-html="t.protect.customer.Compensation.Title"></h4>
                                     </div>
                                     <div class="compensation_process_wrap">
                                         <div class="process_steps">
@@ -1131,7 +1138,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="btn_wrap ac mt40">
+                                        <div class="btn-wrap ac mt40">
                                             <Buttons btn-class="btn_icon btn_xl primary after">
                                                 {{ t.protect.customer.Compensation.BtnText }}
                                             </Buttons>
@@ -1142,42 +1149,317 @@
                                 <!-- 수상 이력 및 인증 -->
                                 <section class="support_item">
                                     <div class="title_area mb40">
-                                        <h4 class="section_title_sub">제품과 서비스 인증 및 대외 수상 이력</h4>
+                                        <h4 class="section_title_sub" v-html="t.protect.customer.Awards.Title"></h4>
                                     </div>
                                     
-                                    <div class="history_timeline mb80">
-                                        <div v-for="(history, idx) in t.protect.customer.Awards.History" :key="'history-'+idx" class="timeline_row">
-                                            <div class="year_area">
-                                                <strong v-if="history.year" class="year">{{ history.year }}</strong>
-                                            </div>
-                                            <div class="content_area">
-                                                <span class="month">{{ history.month }}</span>
-                                                <p class="text">{{ history.text }}</p>
-                                            </div>
+                                    <!-- 상단 리스트 영역 -->
+                                    <div class="award_list mb80">
+                                        <div v-for="(item, idx) in t.protect.customer.Awards.History" :key="'award-'+idx" class="award_row">
+                                            <span class="year">{{ item.year }}</span>
+                                            <span class="month">{{ item.month }}</span>
+                                            <span class="desc">{{ item.desc }}</span>
                                         </div>
                                     </div>
 
-                                    <!-- 인증 마크 그리드 -->
-                                    <div class="award_marks_grid">
-                                        <article v-for="(mark, idx) in t.protect.customer.Awards.Marks" :key="'mark-'+idx" class="mark_item">
-                                            <!-- 인증 마크 이미지 img 태그 유지 -->
-                                            <figure class="mark_img">
-                                                <img :src="mark.img" :alt="mark.tit">
-                                            </figure>
-                                            <div class="mark_info">
+                                    <section class="award_section">
+                                        <div v-for="(mark, idx) in t.protect.customer.Awards.Marks" :key="'mark-' + idx" class="mark_item_group">
+                                            <ul class="brand_grid mt60">
+                                                <li>
+                                                    <figure class="brand_img_box">
+                                                        <!-- 각 마크의 이미지 바인딩 -->
+                                                        <img :src="mark.img" :alt="mark.tit">
+                                                    </figure>
+                                                </li>
+                                            </ul>
+                                            <div class="info_box">
+                                                <!-- 제목 및 날짜 바인딩 -->
                                                 <strong class="tit" v-html="mark.tit"></strong>
                                                 <span class="date">{{ mark.date }}</span>
                                             </div>
-                                        </article>
-                                    </div>
+                                        </div>
+                                    </section>
                                 </section>
                             </div>
 
                             <!-- gsrsu030304 -->
-                            <div v-if="SubTabIdx1 === 3">안전경영 내용</div>
+                            <section v-if="SubTabIdx1 === 3 && t.protect.safetymanagement" class="safety_management_wrap">
+                                <div class="intro_summary ac mb100">
+                                    <h3 class="text_summary" v-html="t.protect.safetymanagement.Summary"></h3>
+                                </div>
+
+                                <div class="contents">
+                                    <!-- 1. 안전·보건 경영방침 -->
+                                    <section class="protection_section mb120">
+                                        <div class="policy_card_box">
+                                            <div class="section_title_area mb40">
+                                                <h4 class="section_title_sub">{{ t.protect.safetymanagement.Policy.Title }}</h4>
+                                            </div>
+                                            <ul class="policy_list_wrap">
+                                                <li v-for="(item, idx) in t.protect.safetymanagement.Policy.Items" :key="'policy-'+idx" class="policy_item">
+                                                    <strong class="item_label">{{ item.label }}</strong>
+                                                    <p class="item_text">{{ item.text }}</p>
+                                                </li>
+                                            </ul>
+                                            <div class="btn-wrap ac mt40">
+                                                <button type="button" class="btn_icon btn_xl border after">
+                                                    {{ t.protect.safetymanagement.Policy.BtnText }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <!-- 2. 안전보건 거버넌스 -->
+                                    <section class="protection_section mb120">
+                                        <div class="section_title_area mb40">
+                                            <h4 class="section_title_sub">{{ t.protect.safetymanagement.Governance.Title }}</h4>
+                                            <p class="p_desc" v-html="t.protect.safetymanagement.Governance.Desc"></p>
+                                        </div>
+                                        <figure class="diagram_box_wrap">
+                                            <div class="visual_area mb20">
+                                                <img :src="isMobile ? t.protect.safetymanagement.Governance.imgMo1 : t.protect.safetymanagement.Governance.img1" alt="플랫폼 BU 안전보건 조직도">
+                                            </div>
+                                            <div class="notice_wrap mt20">
+                                                <p class="notice_text">{{ t.protect.safetymanagement.Governance.Notice }}</p>
+                                            </div>
+                                        </figure>
+                                    </section>
+
+                                    <!-- 3. 안전보건 교육 및 관리 체계 -->
+                                    <section class="protection_section mb120">
+                                        <div class="section_title_area mb40">
+                                            <h4 class="section_title_sub">{{ t.protect.safetymanagement.Safety.Title }}</h4>
+                                            <p class="p_desc" v-html="t.protect.safetymanagement.Safety.Desc"></p>
+                                        </div>
+                                        <ul class="safety_system_grid">
+                                            <li v-for="(item, idx) in t.protect.safetymanagement.Safety.Systems" :key="'system-'+idx" class="system_item">
+                                                <div class="text_box">
+                                                    <span class="num">{{ item.num }}</span>
+                                                    <strong class="tit">{{ item.tit }}</strong>
+                                                    <span v-if="item.sub" class="sub">{{ item.sub }}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </section>
+
+                                    <!-- 4. 안전·보건 의견 청취함 (문의 폼) -->
+                                    <section class="listening_form_area">
+                                        <div class="section_title_area mb40">
+                                            <h4 class="section_title_sub">{{ t.protect.safetymanagement.listening.Title }}</h4>
+                                            <p class="p_desc" v-html="t.protect.safetymanagement.listening.Desc"></p>
+                                        </div>
+                                        
+                                        <!-- 개인정보 동의 영역 (반복) -->
+                                        <div class="consent_container mb40">
+                                            <article v-for="(consent, cIdx) in t.protect.safetymanagement.listening.Consents" :key="'consent-'+cIdx" class="consent_box">
+                                                <strong class="consent_tit">{{ consent.title }}</strong>
+                                                <ul class="consent_list">
+                                                    <li v-for="(list, lIdx) in consent.items" :key="'list-'+lIdx">{{ list }}</li>
+                                                </ul>
+                                                <div class="consent_agree">
+                                                    <p class="guide_text" v-html="consent.guide"></p>
+                                                    <Inputs type="checkbox" text="동의합니다." />
+                                                </div>
+                                            </article>
+                                        </div>
+
+                                        <article class="noti_non_member">
+                                            <span>{{ t.protect.safetymanagement.listening.Nonmember.title }}</span>
+                                            <ul class="bullet_01">
+                                                <li v-for="(list, lIdx) in t.protect.safetymanagement.listening.Nonmember.items" :key="'list-'+lIdx">{{ list }}</li>
+                                            </ul>
+                                        </article>
+
+                                        <!-- 문의 폼 입력 영역 (필수 요소만 유지) -->
+                                        <div class="form_container">
+                                            <article>
+                                                <strong class="consent_tit">{{ }}</strong>
+                                                <ul>
+                                                    <li>
+                                                        <span></span>
+                                                        <div>
+                                                            <Inputs type="text" placeholder="문구를 입력해주세요" />
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <span></span>
+                                                        <div>
+                                                            <Inputs type="text" placeholder="" />
+                                                            @
+                                                            <Inputs type="text" placeholder="" /> 
+                                                            <SelectBox :options="[{ value: '', label: '직접입력' },{ value: 'A', label: '옵션 A' }, { value: 'B', label: '옵션 B' }]" v-model="selected" initMsg="선택해주세요" />
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <span></span>
+                                                        <div>
+                                                            <SelectBox :options="[{ value: '', label: '010' },{ value: 'A', label: '옵션 A' }, { value: 'B', label: '옵션 B' }]" v-model="selected" initMsg="선택해주세요" />
+                                                            -
+                                                            <Inputs type="text" placeholder="" />
+                                                            -
+                                                            <Inputs type="text" placeholder="" />
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                            <article>
+                                                <strong class="consent_tit">{{  }}</strong>
+                                                <ul>
+                                                    <li>
+                                                        <span></span>
+                                                        <div><SelectBox :options="[{ value: '', label: '010' },{ value: 'A', label: '옵션 A' }, { value: 'B', label: '옵션 B' }]" v-model="selected" initMsg="사업장 선택" /></div>
+                                                    </li>
+                                                    <li>
+                                                        <span></span>
+                                                        <div><Inputs type="text" placeholder="" /></div>
+                                                    </li>
+                                                    <li>
+                                                        <span></span>
+                                                        <div><Inputs type="text" placeholder="" /></div>
+                                                    </li>
+                                                    <li>
+                                                        <span></span>
+                                                        <div>
+                                                            <Textarea
+                                                                v-model="body"
+                                                                label="문의 내용"
+                                                                name="inquiry_body"
+                                                                placeholder="내용을 입력해 주세요"
+                                                                hint="최대 500자까지 입력할 수 있습니다."
+                                                                :rows="6"
+                                                                :maxlength="500"
+                                                            />
+
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <span></span>
+                                                        <div>
+                                                            <p>
+                                                                <Buttons Buttons btn-class="btn_xl border">{{  }}</Buttons>
+                                                                <em></em>
+                                                            </p>
+                                                            <i></i>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <span></span>
+                                                        <div><SelectBox :options="[{ value: '', label: '010' },{ value: 'A', label: '옵션 A' }, { value: 'B', label: '옵션 B' }]" v-model="selected" initMsg="이메일" /></div>
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                            <div class="btn-wrap">
+                                                <Buttons btn-class="btn_big primary">big(h:52px)</Buttons>
+                                                <Buttons btn-class="btn_big gray">big(h:52px)</Buttons>
+                                            </div>
+                                        </div>
+                                        
+                                    </section>
+                                </div>
+                            </section>
 
                             <!-- gsrsu030305 -->
-                            <div v-if="SubTabIdx1 === 4">정보보호 내용</div>
+                            <section v-if="SubTabIdx1 === 4 && t.protect.informationprotection" class="information_protection_management">
+                                <div class="intro_summary ac mb100">
+                                    <h3 class="text_summary" v-html="t.protect.informationprotection.Summary"></h3>
+                                </div>
+
+                                <div class="contents">
+                                    <section class="protection_section mb120">
+                                        <div class="section_title_area mb40">
+                                            <h4 class="section_title_sub">{{ t.protect.informationprotection.Governance.Title }}</h4>
+                                            <p class="p_desc" v-html="t.protect.informationprotection.Governance.Desc"></p>
+                                        </div>
+                                        
+                                        <figure class="diagram_box_wrap">
+                                            <div class="visual_area">
+                                                <img 
+                                                    :src="isMobile ? t.protect.informationprotection.Governance.imgMo : t.protect.informationprotection.Governance.img" 
+                                                    :alt="t.protect.informationprotection.Governance.Title"
+                                                >
+                                            </div>
+                                        </figure>
+
+                                        <div class="committee_detail_area mt80">
+                                            <p class="p_desc mb40" v-html="t.protect.informationprotection.Committee.Desc"></p>
+                                            <figure class="diagram_box_wrap">
+                                                <div class="visual_area">
+                                                    <img 
+                                                        :src="isMobile ? t.protect.informationprotection.Committee.imgMo : t.protect.informationprotection.Committee.img" 
+                                                        alt="정보보호위원회 구성도"
+                                                    >
+                                                </div>
+                                                <div class="notice_wrap">
+                                                    <p class="notice_text">{{ t.protect.informationprotection.Committee.Notice }}</p>
+                                                </div>
+                                            </figure>
+                                        </div>
+                                    </section>
+
+                                    <section class="protection_section mb120">
+                                        <div class="section_title_area mb40">
+                                            <h4 class="section_title_sub">{{ t.protect.informationprotection.Policy.Title }}</h4>
+                                            <p class="p_desc" v-html="t.protect.informationprotection.Policy.Desc"></p>
+                                        </div>
+                                        <figure class="diagram_box_wrap">
+                                            <div class="visual_area">
+                                                <img 
+                                                    :src="isMobile ? t.protect.informationprotection.Policy.imgMo : t.protect.informationprotection.Policy.img" 
+                                                    :alt="t.protect.informationprotection.Policy.Title"
+                                                >
+                                            </div>
+                                        </figure>
+                                    </section>
+
+                                    <section class="protection_section mb120">
+                                        <div class="section_title_area mb40">
+                                            <h4 class="section_title_sub">{{ t.protect.informationprotection.Activities.Title }}</h4>
+                                            <p class="p_desc">{{ t.protect.informationprotection.Activities.Desc }}</p>
+                                        </div>
+                                        
+                                        <div class="policy_wrap">
+                                            <table>
+                                                <caption class="blind">정보보호 활동 상세 리스트</caption>
+                                                <colgroup>
+                                                    <col style="width: auto;">
+                                                    <col style="width: auto;">
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr v-for="(item, idx) in t.protect.informationprotection.Activities.Table" :key="'activity-'+idx">
+                                                        <th scope="row" class="ac"><strong>{{ item.tit }}</strong></th>
+                                                        <td class="al" v-html="item.desc"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="btn-wrap ac mt40">
+                                            <Buttons btn-class="btn_icon btn_xl border after">
+                                                {{ t.protect.informationprotection.Activities.BtnText }}
+                                            </Buttons>
+                                        </div>
+                                    </section>
+                                    <section class="award_section">
+                                        <div class="mark_item_group">
+                                            <ul class="brand_grid mt60">
+                                                <li>
+                                                    <figure class="brand_img_box">
+                                                        <!-- 각 마크의 이미지 바인딩 -->
+                                                        <img :src="t.protect.informationprotection.Certification.Img" alt="ISMS-P 인증">
+                                                    </figure>
+                                                </li>
+                                            </ul>
+                                            <div class="info_box">
+                                                <!-- 제목 및 날짜 바인딩 -->
+                                                <strong class="tit">
+                                                    <span v-html="t.protect.informationprotection.Certification.Title"></span>
+                                                    (2025.06.18 ~ 2028.06.17)
+                                                </strong>
+                                                <em v-html="t.protect.informationprotection.Certification.Desc"></em>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </section>
                         </div>
                     </article>
                 </div>
@@ -1190,17 +1472,22 @@
 import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
 import Pagination from "@/components/Pagination.vue";
+import Inputs from "@/components/Inputs.vue";
+import SelectBox from "@/components/Inputs.vue";
+import Textarea from "@/components/Inputs.vue";
 
 export default {
     name: "gsrsu03010101",
-    components: { Tabs, Buttons, Pagination },
+    components: { Tabs, Buttons, Pagination, Inputs, SelectBox, Textarea },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
+            isMobile: false, // 모바일 여부 체크 변수
             page: 2,
             CTabIdx: 0,      // 1depth
             SubTabIdx1: 0,   // 2depth
             SubTabIdx2: 0,   // 3depth
+            selected: "", //초기 선택값 지정할땐 vaule 값 입력
             langData: {
                 ko: {
                     MainTitle: "사회적 책임",
@@ -1224,7 +1511,7 @@ export default {
                     Tabs3_1: [
                         { item: "금융지원" }, 
                         { item: "판로지원" }, 
-                        { item: "경쟁력강화지원" }, 
+                        { item: "경쟁력 강화 지원" }, 
                         { item: "복리후생 제도" }, 
                         { item: "방송 편성" }, 
                         { item: "소통제도" }
@@ -1976,7 +2263,7 @@ export default {
                                 BtnText: "서비스 우수 직원 추천하기"
                             },
                             Safety: {
-                                Title: "제품과 서비스 안전을 위한 제도 운영",
+                                Title: "제품과 서비스 안전을 위한<br/> 제도 운영",
                                 Items: [
                                     { step: "01", tit: "맛, 신선도 지킴이 안내", desc: "신선, 맛, NO.1을 위한 GS리테일의 선도 지킴이 활동을 확인해보세요." },
                                     { step: "02", tit: "안전, 위생관리 제도", desc: "GS리테일의 안전, 위생관리 제도를 확인해 보세요." },
@@ -1984,7 +2271,7 @@ export default {
                                 ]
                             },
                             Compensation: {
-                                Title: "제품, 고객 서비스 피해 보상 프로그램 운영",
+                                Title: "제품, 고객 서비스<br/> 피해 보상 프로그램 운영",
                                 BtnText: "소비자 피해보상 매뉴얼 보기",
                                 Steps: [
                                     {label: "Step 1", desc: "제품 이상,<br/>서비스 불만족 접수" },
@@ -1993,11 +2280,12 @@ export default {
                                 ]
                             },
                             Awards: {
+                                Title: "제품과 서비스 인증 및<br/> 대외 수상 이력",
                                 History: [
-                                    { year: "2019", month: "12월", text: "대한민국브랜드 대상(산업통상자원부)" },
-                                    { year: "", month: "7월", text: "GS리테일, 한국서비스대상 종합유통부문 최초 명예의 전당 헌액" },
-                                    { year: "", month: "6월", text: "국가서비스대상 신선식품 쇼핑몰 부분 대상" },
-                                    { year: "2016", month: "9월", text: "GS리테일, 한국의 경영대상 명예의 전당 헌액" }
+                                    { year: "2019", month: "12월", desc: "대한민국브랜드 대상(산업통상자원부)" },
+                                    { year: "", month: "7월", desc: "GS리테일, 한국서비스대상 종합유통부문 최초 명예의 전당 헌액" },
+                                    { year: "", month: "6월", desc: "국가서비스대상 신선식품 쇼핑몰 부분 대상" },
+                                    { year: "2016", month: "9월", desc: "GS리테일, 한국의 경영대상 명예의 전당 헌액" }
                                 ],
                                 Marks: [
                                     { img: require("@/assets/images/dummy/gsrsu030303_logo1.png"), tit: "ISO9001 인증획득 <br/>(한국기업인증원)", date: "2021. 05" },
@@ -2008,8 +2296,116 @@ export default {
                                 ]
                             }
                         },
-                        safetymanagement: {},
-                        informationprotection: {},
+                        safetymanagement: {
+                            Summary: "GS리테일은 안전한 근무환경을 조성하여 사고 및 재해를 예방하고,<br/> 모든 구성원(임직원, 협력사), 시민(고객, 일반시민)의 건강한 삶의 질 향상을 위해<br/> 경영방침을 적극 실천하고 있습니다.",
+                            Policy: {
+                                Title: "안전·보건 경영방침",
+                                BtnText: "안전·보건 경영방침",
+                                Items: [
+                                    { label: "첫째", text: "회사는 산업안전보건법과 안전보건관리규정 등 관련 법규를 준수한다." },
+                                    { label: "둘째", text: "회사는 안전중심의 경영의지와 실적이 최고 수준에 도달하도록 노력한다." },
+                                    { label: "셋째", text: "회사는 안전보건업무를 경영의 한 요소로 인식하여 필요한 자원과 기술을 제공하고 안전·보건활동을 지속적으로 전개한다." },
+                                    { label: "넷째", text: "회사는 구성원(임직원, 협력사), 시민(고객, 일반시민)의 참여 및 의견을 적극 반영하고 불안전한 행동, 환경 등 사업장의 유해·위험 요소를 지속적으로 점검·제거하여 사고 및 재해를 예방하기 위해 노력한다." },
+                                    { label: "다섯째", text: "회사는 매년 사업장의 안전·보건 관련 법규 준수 상태를 확인하고 필요한 인력, 예산 등을 편성하여 집행한다." },
+                                    { label: "여섯째", text: "회사의 전 구성원은 본부의 안전·보건 활동 계획과 안전·보건 매뉴얼을 준수하여 중대재해 및 산업재해 예방활동에 적극 동참한다." }
+                                ]
+                            },
+                            Governance: {
+                                Title: "안전보건 거버넌스",
+                                Desc: "안전보건에 대한 전문성 강화를 위해 편의점/수퍼 BU와 홈쇼핑 BU에 각각 안전보건경영책임자(CSO)를 선임하였으며,<br/> 안전보건경영책임자 산하에 안전보건에 관한 업무를 총괄 관리하는 전담조직인 안전보건팀과 안전보건파트를 운영하고 있습니다.<br/> 또한 사업장별 안전보건 관리책임자, 관리감독자를 선임하고 유해요인 조사, 위험성 평가 등을 실시하여 안전보건관리체계를 고도화하고 있습니다.",
+                                img1: require("@/assets/images/dummy/gsrsu030304_1.png"),
+                                imgMo1: require("@/assets/images/dummy/gsrsu030304_1_mo.png"),
+                                Notice: "※이사회(ESG위원회) 정기보고"
+                            },
+                            Safety: {
+                                Title: "안전보건 교육 및 관리 체계",
+                                Desc: "GS리테일은 임직원들의 최고의 안전보건 상태를 지속하기 위해 안전보건교육을 실시하고 있으며,<br/> 다양한 보건 관리 활동을 통해 사전에 사고를 차단하고 있습니다.",
+                                Systems: [
+                                    { num: "01", tit: "근골격계 운동", sub: "(매일 비전 미팅시)" },
+                                    { num: "02", tit: "심리상담 서비스", sub: "(스트레스 관리)"},
+                                    { num: "03", tit: "보건 목표 지수관리"},
+                                    { num: "04", tit: "정기/수시 매일 안전 진단"},
+                                    { num: "05", tit: "종합검진 실시",},
+                                    { num: "06", tit: "금연 활동 지원",},
+                                    { num: "07", tit: "위험성 평가 안전 교육 활동",}
+                                ]
+                            },
+                            listening : {
+                                Title: "안전·보건 의견 청취함",
+                                Desc: "GS리테일은 안전 및 보건에 관한 사항에 대해 구성원의 의견을 성실히 청취합니다.",
+                                Consents: [
+                                    {
+                                        title: "개인정보 제공 동의",
+                                        items: [
+                                            "입력하신 개인정보는 신속하고 정확한 처리를 위해 안전담당 부서에만 전달되며 문의 내용 확인 및 답변에 사용 됩니다.",
+                                            "수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호",
+                                            "개인정보의 보유 및 이용기간: 목적 달성 시 지체 없이 파기(최대 1년)"
+                                        ],
+                                        guide: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br/> 정보가 확인해야 하는 문의에 대해 정확하고 신속한 답변을 받으시는데 어려움이 있습니다.",
+                                    },
+                                    {
+                                        title: "개인정보 수집·이용 동의",
+                                        items: [
+                                            "수집이용 및 목적: 문의사항 확인 및 답변 활용",
+                                            "수집하는 개인정보 항목: 이름, 연락처, 이메일",
+                                            "보유 및 이용기간: 접수 후 1년"
+                                        ],
+                                        guide: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br/> 문의 글 작성이 불가능합니다.",
+                                    }
+                                ],
+                                Nonmember : {
+                                    title:"고객님께서는 현재 비회원(비로그인)으로 문의를 접수 중이십니다.",
+                                    items: [
+                                        "비회원 문의를 하신 경우 답변은 '등록하신 연락처(문자,전화) 또는 이메일을 통해서만' 확인하실 수 있습니다.",
+                                        "연락처를 정확하게 입력해주세요. (홈페이지 내에서 이전 문의이력 확인 불가)",
+                                        "로그인 후 고객문의를 접수하시면, 마이페이지에서 문의/답변 내역 확인이 가능합니다.(단,정도경영 제외)"
+                                    ],
+                                }
+                                
+                            }
+                        },
+                        // data() 리턴 객체 내 langData.ko.protect.informationprotection 섹션
+                        informationprotection: {
+                            Summary: "GS리테일은 정보보호 및 개인정보보호에 대해 매우 중요하게 생각합니다.<br/>전사 차원의 정보보호 거버넌스를 수립하여 운영하며,<br/>이를 통해 고객들에게 안전하고 신뢰성 있는 서비스를 제공하기 위해 항상 노력하고 있습니다.",
+                            Governance: {
+                                Title: "정보보호 및 개인정보보호 거버넌스 체계",
+                                Desc: "GS리테일은 고객 개인정보 보호를 위해 CEO 직속의 거버넌스 체계를 운영하고 있습니다. CISO/CPO는 개인정보보호책임자 및 정보보호최고책임자로서 전사 개인정보 보호를 총괄하며, CISO/CPO 직속 조직을 통해 보안 전략 수립, 보안 기술 운영, 개인정보 보호 업무를 통합적으로 관리·수행하고 있습니다. 해당 조직은 보안전략, 보안기술, 개인정보보호의 3대 기능을 중심으로 전사 정보보호 및 개인정보 보호 체계를 일관되게 운영하고 있습니다.",
+                                img: require("@/assets/images/dummy/gsrsu030305_1.png"),
+                                imgMo: require("@/assets/images/dummy/gsrsu030305_1_mo.png"),
+                            },
+                            Committee: {
+                                Desc: "GS리테일은 중요 이슈를 관리하기 위해 정보보호위원회를 운영하고 있습니다. <br/>본 위원회는 CEO를 중심으로 각 BU장(임원)으로 구성된 전사 정보보호 및 개인정보보호 거버넌스 기구입니다. 간사 위원으로 CISO/CPO, 준법지원실장이 참여하며, 실무그룹과 정보보안부문이 연계되어 전사 정보보호 및 개인정보보호 거버넌스의 체계적 운영과 의사결정을 지원합니다.",
+                                img: require("@/assets/images/dummy/gsrsu030305_2.png"),
+                                imgMo: require("@/assets/images/dummy/gsrsu030305_2_mo.png"),
+                                CommitteeImg: "gsrsu030305_2",
+                                Notice: "※이사회(ESG위원회) 정기보고"
+                            },
+                            Policy: {
+                                Title: "정보보호 및 개인정보보호 정책",
+                                Desc: "GS리테일은 정보보호 정책, 정보보호지침, 매뉴얼을 기반으로 개인정보보호 & 정보보안 활동을 정의하고 있으며, 이를 바탕으로 각종 활동을 수행합니다.<br/>사내 게시판 내 정책, 지침 및 매뉴얼을 게재하며, 매년 개인정보보호법 등 관련 법령의 개정을 확인하여 정책, 지침, 매뉴얼을 제·개정하고 있습니다. 또한 GS리테일은 홈페이지 내 ‘알기 쉬운 개인정보처리방침’을 게시하여, 고객의 정보를 보호하고 있는 당사의 방안을 투명하게 공개하고 있습니다.",
+                                img: require("@/assets/images/dummy/gsrsu030305_3.png"),
+                                imgMo: require("@/assets/images/dummy/gsrsu030305_3_mo.png"),
+                            },
+                            Activities: {
+                                Title: "정보보호활동",
+                                Desc: "GS리테일은 정보보호 관리체계에 맞춰 실제 다양한 정보보호 활동을 수행하고 있으며, 정보보호 공시를 통해 이러한 활동을 안내하고 있습니다.",
+                                Table: [
+                                    { tit: "ISMS-P 인증", desc: "정보보호 및 개인정보보호 관리체계(ISMS-P) 인증을 유지하기 위해 관리,기술적 통제항목 등 다양한 정보보호 감사를 주기적으로 실시하고 있으며, 공신력 있는 기관을 통해 ISMS-P 인증심사를 수검 받고 있습니다." },
+                                    { tit: "서비스 보안 검토", desc: "신규 및 변경되는 서비스에 대하여 개발보안 프로세스를 운영하고 있습니다. 서비스 기획 단계에서 중요도평가를 통해 보안요구사항을 정의하고 이를 프로젝트 각 단계에 반영하고 있으며, 오픈 전 보안요구사항에 맞도록 개인정보생명주기, 개발보안, 어플리케이션 보안, 소스코드 및 인프라점검, 웹/앱 취약점 점검 등 전반적인 보안점검을 수행하고 식별된 취약점에 대한 조치를 진행하고 있습니다." },
+                                    { tit: "정보보호 교육", desc: "전사 임직원을 대상으로 개인정보보호 교육과, 정보보호 교육을 실시하고 있으며, 위치정보 및 다량의 개인정보를 취급하는 임직원 대상으로 별도의 심화교육을 실시하고 있습니다." },
+                                    { tit: "정보호호 인식제고", desc: "임직원의 정보보호 인식을 향상시키기 위해 개인정보보호의 날·정보보호의 날 캠페인을 운영하며, 꼭 지켜야 하는 사항 등에 대해 정기 메일링을 진행하고 있습니다." },
+                                    { tit: "모의훈련", desc: "임직원 대상으로 악성메일 모의훈련을 실시하여, 악성메일에 대한 보안인식을 향상시키고 있습니다.<br/>또한, 개인정보 유 노출 사고에 대한 모의훈련을 실시하여, 실제 사고 발생 시 고객분들께 발생하는 개인정보침해를 줄이기 위해 노력하고 있습니다." },
+                                    { tit: "위험관리", desc: "정보자산(인프라 등) 및 프로세스 등에서 발행사는 위험을 관리하기 위해 매년 취약점 점검 및 위험평가를 실시하고 있으며, 도출된 위험에 대해 관리할 수 있는 계획을 수립하여 운영하고 있습니다." }
+                                ],
+                                BtnText: "정보보호 공시 바로가기"
+                            },
+                            Certification: {
+                                Img: require("@/assets/images/dummy/gsrsu030305_logo.png"),
+                                Title: "GS리테일 온라인 서비스",
+                                date:"(2025.06.18 ~ 2028.06.17)",
+                                Desc: "정보보호 관리체계 및 정보보호 활동의 적정성 및 적합성을 객관적으로 입증하기 위해, <br/>정보보호 및 개인정보보호 관리체계(ISMS-P) 인증을 획득하여, 운영하고 있습니다."
+                            }
+                        }
 
 
                     },
@@ -2021,6 +2417,13 @@ export default {
         t() {
             return this.langData[this.lang] || this.langData.ko;
         }
+    },
+    mounted() {
+        this.checkMobile();
+        window.addEventListener('resize', this.checkMobile);
+    },
+    beforeUnmount() {
+        window.removeEventListener('resize', this.checkMobile);
     },
     methods: {
         onTabChange1(idx) {
@@ -2038,7 +2441,10 @@ export default {
                 return;
             }
             window.open(link, '_blank');
-        }
+        },
+        checkMobile() {
+            this.isMobile = window.innerWidth <= 767;
+        },
     }
 };
 </script>
@@ -2064,9 +2470,11 @@ export default {
     h3 { color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
     h4 { color: #161616; font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; }
     p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
-    .sub_tab_content { min-height: 300px; }
+    .sub_tab_content {min-height: 300px; margin-top:100px; }
     .inner_content {padding-top:40px; border-radius: 10px; }
     .tab_content_wrap {margin-top:20px !important;}
+    :deep(.section_title_sub) br {display:none;}
+    .date {font-size:16px;}
 
     /* 상생경영 개요 특화 스타일 */
     .text_summary { font-size: 32px; font-weight: 700; color: #161616; padding: 20px 0; }
@@ -2270,13 +2678,14 @@ export default {
     /* 수상 이력 리스트 (하단) */
     .award_list {margin-top:20px;}
     .award_row {padding: 20px 0; font-size: 18px; display: flex; align-items:center;}
-    .award_row .year { width: 100px; margin-right:32px; font-size:32px; font-weight: 700; }
-    .award_row .month { width: 50px; margin-right:20px; color: #90909A;  font-size:20px; }
+    .award_row .year { width: 130px; font-size:32px; font-weight: 700; }
+    .award_row .month { width: 70px; color: #90909A;  font-size:20px; }
     .award_row .name { flex: 1; color: #161616; font-size:20px; }
     .award_section .brand_grid li {max-width:340px;}
     .award_section .info_box {margin-top:24px; display:flex; flex-direction:column; gap:12px;}
     .award_section .info_box .tit {color:#161616; font-size:20px; font-weight:700;}
     .award_section .info_box .data {color:#161616; font-size:16px;;}
+    .award_section .info_box em {font-size:16px;}
 
 
     /* 고객만족경영 */
@@ -2292,6 +2701,75 @@ export default {
     .customer_satisfaction .safety_system_list .tit_wrap strong {font-size:24px; font-weight:700; position:relative;}
     .customer_satisfaction .safety_system_list .tit_wrap strong button {width:24px; height:24px; background:red; position:absolute; right:-35px; top:50%; transform: translateY(-50%);}
     .customer_satisfaction .safety_system_list .tit_wrap .desc {color:#67676F; font-size:16px; font-weight:700;}
+    .customer_satisfaction .compensation_process_wrap .process_steps {padding:56px 64px; background:#F8F8F8; border-radius:12px; display:flex; gap:20px;}
+    .customer_satisfaction .compensation_process_wrap .process_steps .step_box {width:33.333%; padding-top:60px; position:relative;}
+    .customer_satisfaction .compensation_process_wrap .process_steps .step_info span {color:#107AF2; font-size:18px; font-weight:700; display:flex;}
+    .customer_satisfaction .compensation_process_wrap .process_steps .step_info span::before {content:''; width:40px; height:40px; display:inline-block; background:red; position:absolute; top:0; left:0;}
+    .customer_satisfaction .compensation_process_wrap .process_steps .step_info p {margin-top:8px; font-size:20px; font-weight:700;}
+    .customer_satisfaction .award_section {display:flex; flex-wrap:wrap; gap: 40px 20px;}
+    .customer_satisfaction .award_section .mark_item_group {width: calc(25% - 15px); box-sizing: border-box;}
+
+
+    /* 안전경영 */
+    .safety_management_wrap .policy_card_box { background-color: #f8f8f8; padding: 60px; border-radius: 20px; }
+    .safety_management_wrap .section_title_sub { font-size: 40px; font-weight: 700; color: #161616; letter-spacing: -0.4px; }
+    .safety_management_wrap .p_desc { font-size: 24px; font-weight: 400; color: #161616; line-height: 1.5; word-break: keep-all; }
+    .safety_management_wrap .policy_list_wrap { display: flex; flex-direction: column; gap: 24px; }
+    .safety_management_wrap .policy_item { display: flex; align-items: flex-start; gap: 8px; }
+    .safety_management_wrap .item_label { font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; }
+    .safety_management_wrap .item_text { font-size: 20px; color: #161616; line-height: 1.35; }
+    .safety_management_wrap .diagram_box_wrap { width: 100%; padding: 60px 0; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; }
+    .safety_management_wrap .notice_text { font-size: 14px; color: #67676f; }
+    .safety_management_wrap .safety_system_grid { display: flex; flex-wrap:wrap; border-bottom: 1px solid #e5e5e9; }
+    .safety_management_wrap .system_item:first-of-type, .safety_management_wrap .system_item:nth-of-type(2)  {padding-top:0;}
+    .safety_management_wrap .system_item {width:50%; padding: 64px 0 64px 104px; border-bottom: 1px solid #e5e5e9; position:relative; display: flex; align-items: center; gap: 24px;}
+    .safety_management_wrap .system_item:last-of-type {border-bottom:0}
+    .safety_management_wrap .text_box::before {content:'';  width: 80px; height: 80px; background-color: red; position:absolute; top:64px; left:0; }
+    .safety_management_wrap .system_item:first-of-type .text_box::before {top:0px;}
+    .safety_management_wrap .system_item:nth-of-type(2) .text_box::before {top:0px;}
+    .safety_management_wrap .system_item .num { font-size: 28px; font-weight: 700; color: #107af2; display: block; }
+    .safety_management_wrap .system_item .tit { font-size: 28px; font-weight: 700; color: #161616; }
+    .safety_management_wrap .system_item .sub { font-size: 20px; color: #67676f; margin-top: 8px; display: block; }
+    .safety_management_wrap .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
+    .safety_management_wrap .consent_tit {margin-bottom: 24px; font-size: 24px; font-weight: 700; display: block; }
+    .safety_management_wrap .consent_list {padding-bottom:24px;}
+    .safety_management_wrap .consent_list li { font-size: 16px; color: #67676f; margin-bottom: 8px; position: relative; padding-left: 12px; }
+    .safety_management_wrap .consent_list li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 1px; background-color: #67676f; }
+    .safety_management_wrap .form_table { border-top: 1px solid #242428; }
+    .safety_management_wrap .form_row { display: flex; border-bottom: 1px solid #e5e5e9; align-items: center; }
+    .safety_management_wrap .form_row .label { width: 134px; padding: 24px; font-size: 16px; color: #161616; }
+    .safety_management_wrap .required { color: #fb6432; }
+    .safety_management_wrap .input_item { flex: 1; padding: 12px; }
+    .safety_management_wrap input, .safety_management_wrap textarea { width: 100%; padding: 14px 16px; border: 1px solid #c4c4d0; border-radius: 12px; font-size: 16px; }
+    .safety_management_wrap textarea { height: 160px; resize: none; }
+    .safety_management_wrap .consent_agree {padding-top:24px; border-top:1px solid #D7D7DF; display:flex; justify-content:space-between; align-items:center;}
+    .safety_management_wrap .consent_agree p {font-weight:16px; font-weight:700;}
+    .btn_primary { background-color: #107af2; color: #ffffff; border-radius: 10px; border: none; font-weight: 700; }
+    .btn_gray { background-color: #f2f2f4; color: #161616; border-radius: 10px; border: none; font-weight: 700; }
+    .input_wrap {display:flex; align-items:center; justify-content:flex-end;}
+    .noti_non_member {padding:24px; background:#F9F2EA; border-radius:12px;}
+    .noti_non_member span {margin-bottom:12px; padding-left:34px; font-size:18px; position:relative; display:block;}
+    .noti_non_member span::before {content:''; width:24px; height:24px; background:red; display:inline-block; position:absolute; top:0; left:0px;}
+    .noti_non_member ul {padding-left:34px;}
+    .listening_form_area article {margin-bottom:40px;}
+
+    /* 정보보호 */
+    .blind { position: absolute; width: 1px; height: 1px; clip: rect(0, 0, 0, 0); overflow: hidden; }
+    .information_protection_management .text_summary {font-size: 32px; font-weight: 700; color: #161616; letter-spacing: -0.32px; line-height: 1.3; }
+    .information_protection_management .contents { width: 100%; display: flex; flex-direction: column; align-items: flex-start; }
+    .information_protection_management .protection_section {display: flex; flex-direction: column; }
+    .information_protection_management .section_title_sub {font-size: 40px; font-weight: 700; color: #161616; letter-spacing: -0.4px; line-height: 1.3; }
+    .information_protection_management .p_desc {font-size: 24px; font-weight: 400; color: #161616; letter-spacing: -0.24px; line-height: 1.5; }
+    .information_protection_management .diagram_box_wrap { width: 100%; padding: 60px 0; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; }
+    .information_protection_management .visual_area img { max-width: 100%; height: auto; }
+    .information_protection_management .notice_text { font-size: 14px; color: #67676f; }
+    .information_protection_management .policy_wrap { width: 100%; border-top: 2px solid #161616; }
+    .information_protection_management .policy_wrap table { margin-top:0; }
+    .information_protection_management .policy_wrap th { border-top:0; }
+    .information_protection_management table th { font-size: 18px; font-weight: 700; color: #161616; padding: 24px;}
+    .information_protection_management table td { font-size: 18px; color: #161616; line-height: 1.6; padding: 24px;}
+
+
 
 
 
@@ -2299,10 +2777,16 @@ export default {
         .cont_inner { padding: 0 20px; }
         .item_wrap {flex-direction:column; align-items:center;}
         .card_grid {flex-wrap:wrap;}
+        :deep(.section_title_sub) br {display:block;}
         .strategy_card {width: calc(50% - 10px); flex: none;}
         .wide_info_box { flex-direction: column; align-items: flex-start; }
         .process_flow {flex-direction:column; flex-wrap: wrap; gap: 80px 20px; }
         .arrow_next {right:auto; top:auto; bottom:-60px; transform:translateY(0);}
+        .customer_satisfaction strong {font-size:20px;}
+        .customer_satisfaction strong + p {font-size:16px;}
+        span.label, p.desc {font-size:16px !important;}
+        .num {font-size:16px !important;}
+        .mt60 {margin-top:0;}
         /* 마케팅 지원: 태블릿 2열 */
         .brand_grid { flex-wrap: wrap; }
         .brand_grid li { flex: none; width: calc(50% - 10px); }
@@ -2330,10 +2814,38 @@ export default {
         .talent_indicators .support_item:nth-last-child(-n+2) {border-bottom: 1px solid #E5E5E9; padding-bottom: 80px;}
         .talent_indicators .support_item:last-child {border-bottom: 0; padding-bottom: 0; }
         .award_section .brand_grid li {width:100%; max-width:100%;}
+        .customer_satisfaction .recommend_box {padding:20px; flex-direction:column;}
+        .btn_icon {width:100%;}
+        .customer_satisfaction .recommend_box .btn_icon {margin-top:40px; display:block;}
+        .customer_satisfaction .safety_system_list{padding:0;}
+        .customer_satisfaction .safety_system_list li, .customer_satisfaction .compensation_process_wrap .process_steps .step_box {width:100%;}
+        .customer_satisfaction .safety_system_list li::before {width:60px; height:60px;}
+        .customer_satisfaction .safety_system_list .tit_wrap strong {font-size:18px;}
+        .customer_satisfaction .safety_system_list, .process_steps {flex-direction:column;}
+        .customer_satisfaction .award_section .mark_item_group {width: calc(33.333% - 14px);}
+        .customer_satisfaction .brand_img_box img {width: 100%; max-width: 160px; margin: 0 auto;}
+        .award_row .year, .award_row .month {width:60px;}
+        .award_row .desc {width:calc(100% - 60px - 60px); display:inline-block;}
+        .award_row .year,.award_row .month, .award_row .desc {font-size:14px;}
+        .information_protection_management .diagram_box_wrap {padding:20px 0;}
+        .information_protection_management .text_summary { font-size: 26px; } 
+        .information_protection_management .section_title_sub { font-size: 32px; } 
+        .information_protection_management .p_desc { font-size:18px; } 
+        .information_protection_management th strong { font-size:18px; } 
+        .information_protection_management td { font-size:16px !important; } 
+        .information_protection_management .policy_wrap table {min-width:auto !important;}
+        .information_protection_management .policy_wrap colgroup col:first-child { width: 100px !important; } 
+        .information_protection_management .mark_item_group { flex-direction: column; align-items: flex-start; gap: 20px; } 
+        .information_protection_management .brand_img_box { width: 100%; height: auto; padding: 40px 0; }
+        .information_protection_management .notice_wrap {width:100%;}
+        .information_protection_management .notice_text {margin-left:20px; margin-right:auto;}
     }
 
     @media screen and (max-width: 767px) {
         h3, h4 { font-size: 28px !important; }
+        .mb100 {margin-bottom:40px;}
+        .mb120 {margin-bottom:80px;}
+        :deep(.text_summary) br {display:none;}
         .strategy_card {width: 100%; min-width:100%; flex-direction:column;}
         .philosophy_box {padding:20px;}
         .item_wrap div {width:200px; height:200px;}
@@ -2350,6 +2862,7 @@ export default {
         /* 모바일에서 테이블 가독성을 위해 최소폭 지정 */
         .policy_wrap table { min-width: 600px; }
         .policy_wrap th, .policy_wrap td { font-size: 16px; padding: 12px 16px; }
+        .competency_support ul li {flex-direction:column;}
         
         /* 하단 섹션 이미지/텍스트 정렬 보정 */
         .wide_info_box { flex-direction: column; }
@@ -2358,7 +2871,7 @@ export default {
         .owner_card_layout { grid-template-columns: 1fr; }
         .gs25_owner_support .program_item, .community_support_area .brand_grid li, .broadcasting_development .brand_grid li, .human_rights_management .program_grid .program_item { width: 100% !important; }
         .human_rights_management .program_visual {height: auto; aspect-ratio: 16/11;}
-        .supplychain_policy .policy_box_wrap { padding: 20px; }
+        .policy_box_wrap { padding: 32px 20px; }
         .policy_item { flex-direction: column; gap: 4px; }
         .policy_item .label { font-size: 18px; min-width: auto; }
         .policy_item .desc { font-size: 16px; }
@@ -2377,5 +2890,15 @@ export default {
         .talent_performance_data .policy_wrap table colgroup col:last-of-type {display:none;}
         .value_detail_grid { padding: 0;} 
         .detail_card { padding: 24px; }
+        .customer_satisfaction .award_section .mark_item_group {width: calc(50% - 10px);}
+        .customer_satisfaction .brand_img_box img {width:50%;}
+        .award_section .info_box .tit {font-size:16px; text-align:center;}
+        :deep(.award_section) .info_box .tit br {display:none;}
+        .award_section .info_box .date {font-size:14px; text-align:center;}
+        .customer_satisfaction .compensation_process_wrap .process_steps {padding:40px;}
+        .customer_satisfaction .compensation_process_wrap .process_steps .step_box {padding-top:0; padding-left:60px;}
+        .information_protection_management .award_section .info_box .tit, .information_protection_management .award_section .info_box .date  {text-align:left;}
+        .information_protection_management .award_section .info_box .tit span {font-size:16px; font-weight:700;}
+        .information_protection_management .award_section .info_box .tit {font-size:14px; font-weight:400; display:flex; flex-direction:column;}
     }
 </style>
