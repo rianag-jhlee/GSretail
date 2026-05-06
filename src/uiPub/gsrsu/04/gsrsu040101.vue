@@ -256,7 +256,11 @@
                                     </article>
                                 </li>
                             </ul>
-                            <p class="report_channel_notice" v-html="t.ReportNotice"></p>
+                            <ul class="list_cuation">
+                                <li v-for="(notice, nIdx) in t.ReportNotice" :key="'report-notice-' + nIdx">
+                                    <p v-html="notice"></p>
+                                </li>
+                            </ul>
                         </section>
                     </template>
                     <template v-else>
@@ -747,6 +751,40 @@
                                                                     </ul>
                                                                 </li>
                                                             </ol>
+                                                            <p v-if="section.appendixTitle" class="fair_trade_work_standard_desc">{{ section.appendixTitle }}</p>
+                                                            <div v-if="section.commonTables">
+                                                                <div v-for="(tbl, tIdx) in section.commonTables" :key="'tv-common-table-' + section.no + '-' + tIdx" class="common_table_scroll">
+                                                                    <table class="common_table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th v-for="col in tbl.cols" :key="'tv-common-col-' + section.no + '-' + tIdx + '-' + col" scope="col">{{ col }}</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr v-for="(row, rIdx) in tbl.rows" :key="'tv-common-row-' + section.no + '-' + tIdx + '-' + rIdx">
+                                                                                <td v-for="(cell, cIdx) in row" :key="'tv-common-cell-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx">
+                                                                                    <template v-if="Array.isArray(cell)">
+                                                                                        <p v-for="(line, pIdx) in cell" :key="'tv-common-line-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + pIdx" :class="{ txt_warn: pIdx === 1 }" v-html="line"></p>
+                                                                                    </template>
+                                                                                    <template v-else-if="typeof cell === 'object' && cell.numList">
+                                                                                        <ul class="common_num_list">
+                                                                                            <li v-for="(text, nIdx) in cell.numList" :key="'tv-common-num-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + nIdx">
+                                                                                                <p v-html="text"></p>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </template>
+                                                                                    <p v-else v-html="cell"></p>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <ul v-if="section.cautionItems" class="list_cuation">
+                                                                <li v-for="(notice, nIdx) in section.cautionItems" :key="'tv-caution-' + section.no + '-' + nIdx">
+                                                                    <p v-html="notice"></p>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </template>
                                                 </article>
@@ -976,6 +1014,7 @@ const langData = {
             { key: "10", title: "<span class='acc_num'>10.</span>무형상품 선정 기준과 절차" },
             { key: "11", title: "<span class='acc_num'>11.</span>연계편성의 부당한 강요행위 금지 기준" },
         ],
+        // 1. 협력사와의 공정거래를 위한 기준과 절차
         FairTradeHomeShoppingCooperationSections: [
             {
                 no: "01",
@@ -1133,6 +1172,7 @@ const langData = {
                 addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />이 기준은 2016. 5. 9. 제정, 시행한다.<br />이 기준은 2017. 1. 1. 개정, 시행한다.<br />이 기준은 2018. 8. 2. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 기준은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
             },
         ],
+        // 2. 거래조건 결정 기준과 절차
         FairTradeHomeShoppingTermsSections: [
             {
                 no: "01",
@@ -1177,7 +1217,7 @@ const langData = {
                             "1. 거래형태, 거래품목 및 위탁 판매수량, 거래가격, 거래기간, 납품조건, 대금지급방법, 대금결제기간 및 판촉비용의 부담 여부 및 부담 조건, 반품 조건, 판매수수료, 판매장려금 부담 여부 및 부담 조건",
                             "2. 판매방송일정, 방송제작비용, 상품전문가/모델 등의 출연 여부, 일정 및 출연 비용 부담 여부 및 부담 조건, 소비자의 주문 및 반품 상품에 대한 배송 조건, 소비자의 구매 취소 및 반품 상품의 처리 조건 등"
                         ]
-                      },
+                    },
                     { term: "6", desc: "GS SHOP은 협력사와의 계약이 끝난 날부터 5년간 양 당사자 사이의 거래에 관한 서류를 보존하여야 한다." },
                 ],
             },
@@ -1197,7 +1237,7 @@ const langData = {
                 title: "판매수수료 결정",
                 items: [
                     { num: "1", title: "GS SHOP은 협력사와 다음 각 호의 사항을 고려하여 협력사 상품의 판매수수료를 협의·결정한다.",
-                    details:[
+                      details:[
                             "1. 품질",
                             "2. 유사상품(군)의 평균 판매수수료율",
                             "3. 협력사의 매출 추이, 상품 카테고리의 시황 및 유통채널 내 경쟁 상황",
@@ -1209,7 +1249,7 @@ const langData = {
                             "9. 기존 상품과의 차별성",
                             "10. 기타 상품의 특성에 따른 고려 사항"
                         ]
-                     },
+                    },
                     { num: "2", title: "판매수수료는 협력사와 상호 신뢰의 원칙 하에 공정하고 투명한 절차에 따라 산정되어야 한다." },
                     { num: "3", title: "협력사와의 공정거래협약 등 상생 협력을 위해 해당 상품이 다음 각 호에 해당하는 경우에는 협력사의 이익 등을 우선적으로 고려함을 원칙으로 한다.",
                         details:[
@@ -1217,7 +1257,7 @@ const langData = {
                             "2. 장애인/노인 등 사회적 소외계층이 공급하는 상품 또는 소외계층을 주 대상으로 하는 상품",
                             "3. 농축산어민이 최종 생산자이거나 농축산어민이 직접 공급하는 상품"
                         ]
-                     },
+                    },
                 ],
             },
             {
@@ -1249,7 +1289,148 @@ const langData = {
                 addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />이 기준은 2016. 5. 9. 제정, 시행한다.<br />이 기준은 2017. 1. 1. 개정, 시행한다.<br />이 기준은 2018. 8. 2. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 기준은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
             },
         ],
-        FairTradeHomeShoppingFixedCommissionSections: [],
+        // 3. 정액수수료 방송 운영기준과 절차
+        FairTradeHomeShoppingFixedCommissionSections: [
+            {
+                no: "01",
+                title: "목적",
+                lead: "이 지침은 상위 기준인 「협력사와의 공정한 거래를 위한 기준과 절차」에서 정한 사항 중 정액수수료 방송 운영의 기준 및 절차에 관한 세부적인 준수 사항을 제시함으로써, 정액수수료 형태의 방송 운영 과정에서 협력사가 주식회사 지에스리테일(이하 ‘GS SHOP’)로부터 정당하고 공정한 거래환경을 제공받을 수 있도록 하고, GS SHOP과 협력사가 지속적으로 상호 협력하는 관계를 구축하기 위해 작성한 것이다.",
+            },
+            {
+                no: "02",
+                title: "기본 원칙",
+                items: [
+                    { num: "1", title: "GS SHOP 임직원은 협력사와의 상담 또는 거래 과정에서 항상 이 지침을 숙지하고 준수하여야 한다." },
+                    { num: "2", title: "GS SHOP 임직원은 이 지침 외에도 협력사와의 거래에 있어 「독점규제 및 공정거래에 관한 법률」, 「대규모유통업에서의 거래 공정화에 관한 법률」 등 공정거래 관련 법령에 규정된 사항을 엄격히 준수하여야 한다." },
+                    { num: "3", title: "이 지침은 GS SHOP을 통해 방송을 진행하는 협력사 및 해당 협력사와의 거래에 한하여 적용하기로 한다." },
+                    { num: "4", title: "이 지침은 공식 홈페이지(http://www.gsretail.com) 또는 GS SHOP 투명거래시스템(http://withgs.gsshop.com) 게시판 등을 통해 공지하고, 협력사의 GS SHOP 방송을 위한 개별 입점 상담 시에도 공개함을 원칙으로 한다." },
+                    { num: "5", title: "GS SHOP은 협력사 교육을 통하여 이 지침을 지속적으로 고지하고 공유하기로 한다." },
+                    { num: "6", title: "GS SHOP은 협력사와 공정하고 투명한 원칙에 따라 정액수수료제 방송을 운영하여야 한다." },
+                ],
+            },
+            {
+                no: "03",
+                title: "정액수수료 방송 대상", 
+                usePlainList: true,
+                lead:"정액수수료를 적용하는 상품의 유형은 다음 각 호와 같다.",
+                items: [
+                    { num: "1", title: "1. 재고 소진 목적을 위한 상품" },
+                    { num: "2", title: "2. 시장 반응 점검을 목적으로 한 신규 상품" },
+                    { num: "3", title: "3. 판로 확보 및 재고 관리의 안정성 유지, 홍보/판촉비용 절감 등을 목적으로 한 상품" },
+                    { num: "4", title: "4. 기타의 사유로 협력사가 희망하는 상품" },
+                ],
+            },
+            {
+                no: "04",
+                title: "정액수수료 방송 편성 시간과 비율",
+                definitions: [
+                    { term: "1", desc: "정액수수료 방송 상품의 편성 시간은 생방송 시간대를 원칙으로 하나 협력사가 원하는 경우 생방송 이외의 시간대에도 편성할 수 있다." },
+                    { term: "2", desc: "중소기업 제품에 대한 정액수수료 방송의 편성 비율은 희망 협력사의 수요, 시장 상황 및 운영 전략 등에 따라 최소화하여 운용하도록 한다." },
+                ],
+            },
+            {
+                no: "05",
+                title: "정액수수료 방송 협의 및 계약 체결 절차",
+                items: [
+                    { num: "1", title: "GS SHOP은 「거래조건 결정 기준과 절차」에서 정한 바에 따라 방송 전까지 협력사와 상호 이익이 될 수 있도록 충분한 협의 절차를 진행하고 합리적으로 정액수수료를 산정하여야 한다." },
+                    { num: "2", title: "GS SHOP은 부당하게 일방적으로 정액수수료를 결정하거나, 방송 편성을 조건으로 협력사에 대하여 정액수수료 또는 혼합수수료 형태의 방송 조건을 수용하지 않았다는 이유로 다음 각 호에 해당하는 행위를 하여서는 아니된다.",
+                        details:[
+                            "1.방송 일자, 시각, 분량을 다른 협력사에 비해 현저히 불리하게 결정하는 행위",
+                            "2. 이미 결정한 방송 일자, 시각, 분량을 취소하는 행위",
+                            "3. 이미 결정한 방송 일자, 시각, 분량을 다른 협력사에 비해 현저히 불리하게 변경하는 행위"
+                        ]
+
+                    },
+                    { num: "3", title: "GS SHOP은 상호 간에 최종 합의된 정액수수료 조건 등을 기재한 정액 방송 조건에 관한 합의서를 전자계약 형태로 체결하여 투명거래시스템으로 교부한다. 계약 체결 및 교부는 원칙적으로 방송일 기준 3일 전까지 완료되어야 하고, 합의서의 교부는 계약 체결 즉시 이행한다." },
+                    { num: "4", title: "제3항에도 불구하고 현저한 시황 변동 등 불가피한 사유가 있는 경우에는 방송 전까지 계약 사항을 변경할 수 있으나 사전에 협력사와 합의되어야 하며 변경 계약을 체결하는 즉시 협력사에 변경된 합의서를 교부하여야 한다." },
+                    { num: "5", title: "GS SHOP은 협력사와의 계약이 끝난 날부터 5년간 양 당사자 사이의 거래에 관한 서류를 보존하여야 한다."}
+                ],
+            },
+            {
+                no: "06",
+                title: "정액수수료 방송 위험성 사전설명제도",
+                items: [
+                    { num: "1", title: "정액수수료 방송은 상품 판매액과 관계없는 수익 배분 방식으로 운영되기에, 방송 결과 상품 판매 실적이 저조한 경우 협력사에 손실이 발생할 수 있다. 따라서 협력사는 정액수수료 방송의 위험성에 대해 충분히 인지하고, 자신의 과거 판매 실적, 예상 총 판매금액 등을 고려하여 자유롭고 독자적인 판단과 책임에 따라 정액수수료 방송 진행 여부를 결정하여야 한다."},
+                    { num: "2", title: "GS SHOP은 협력사에게 제1항에서 명시한 정액수수료 방송 위험성에 대해 사전에 고지하여야 한다." },
+                    { num: "3", title: "GS SHOP은 협력사에게 제1항에서 명시한 정액수수료 방송 위험성에 대해 사전에 고지하여야 한다."},
+                ],
+            },
+            {
+                no: "07",
+                title: "정액수수료 방송 재고 소진 기회 제공",
+                lead: "GS SHOP은 중소기업 협력사1)가 정액수수료 조건의 방송을 진행한 결과 판매가 저조한 경우 재고 소진 기회를 제공하여 중소기업 부담을 경감시키고자 노력한다."
+            },
+            {
+                no: "08",
+                title: "정액수수료 방송에 대한 환급 제도 운영",
+                items: [
+                    { num: "1", title: "GS SHOP은 중소기업 협력사가 정액수수료 방송을 진행한 결과 판매가 저조한 경우 수수료 환급 제도를 운영하여 협력사의 부담을 경감하고자 노력한다."},
+                    { num: "2", title: "구체적인 환급 제도 운영 기준은 별표 1과 같으며, 환급 시점의 시장 상황, GS SHOP 경영 상태, 보유 재원 등을 고려하여 조정할 수 있다." },
+                ],
+            },
+            {
+                no: "09",
+                title: "불공정거래행위 금지",
+                lead: "GS SHOP은 정액수수료 운영 관련 업무를 처리함에 있어 이 지침에 의무 또는 금지 사항으로 명시되어 있지 아니하더라도 협력사에 대해 거래상 지위를 남용하여 불이익을 주거나 그 밖에 불공정한 거래 조건을 강요하는 행위를 하여서는 아니 된다."
+            },
+            {
+                no: "10",
+                title: "신고, 불만 접수 및 처리",
+                lead: "협력사는 GS SHOP이 협력사와 정액수수료 관련 조건을 협의·결정하는 과정에서 이 지침을 위반하거나 기타 정액수수료 조건의 결정과 관련하여 GS SHOP에 불만이 발생한 경우 GS SHOP에 위반 사항을 신고하거나 불만을 접수할 수 있고, 이 경우 GS SHOP은 상위 기준인 「협력사와의 공정거래를 위한 기준과 절차」에 규정된 절차에 따라 처리하여야 한다."
+            },
+            {
+                no: "11",
+                title: "제재",
+                lead: "GS SHOP 임직원이 이 지침에서 규정한 사항을 위반한 사실이 확인된 경우 상위 기준인 「협력사와의 공정거래를 위한 기준과 절차」에 규정된 절차에 따라 해당 임직원에 대한 제재 절차를 진행하여야 한다."
+            },
+            {
+                no: "12",
+                title: "별표",
+                appendixTitle: "[별표1] 정액수수료 방송 환급 제도 운영 기준",
+                commonTables: [
+                    {
+                        cols: ["구분", "내용"],
+                        rows: [
+                            [
+                                "환급기준",
+                                [
+                                    "• 중소기업 제품 정액수수료 방송별로 목표 대비 실적이 30% 미만인 경우 해당 방송 정액수수료의 10% 환급",
+                                    "※ 정액수수료와 정률수수료를 함께 지급한 방송의 경우 정액수수료 부분에 대해서만 환급",
+                                ],
+                            ],
+                            [
+                                "환급절차",
+                                [
+                                    "• 분기마다 실적 확인 후 환급",
+                                    "※ 공정성을 위해 외부 기관과 연계하여 해당 기관에서 검증 후 환급 가능",
+                                ],
+                            ],
+                            [
+                                "제외대상",
+                                {
+                                    numList: [
+                                        "대기업, 중견기업 및 수입 제품",
+                                        "여행·렌탈·핸드폰 등의 무형상품으로서 소개가 목적인 방송",
+                                        "전년도에 정액수수료 방송을 4회 이상 편성한 협력사의 방송",
+                                        "당해연도에 4회 이상 환급을 받은 협력사의 방송 <br />(※ 당해연도 환급 대상 방송 프로그램이 4회 이상인 경우)",
+                                        "정부·지방자치단체·공공기관 등을 통해 정액수수료를 지원받아 진행한 협력사의 방송",
+                                    ],
+                                },
+                            ],
+                        ],
+                    },
+                ],
+                cautionItems: [
+                    "※ 중소기업 제품 여부는 정부에서 정한 「홈쇼핑사업자의 중소기업 제품 기준」을 따름",
+                    "※ 환급 규모는 환급 시점의 시장 상황, GS SHOP 경영 상태, 보유한 재원 등을 고려하여 증감될 수 있음",
+                ],
+            },
+            {
+                no: "부칙",
+                title: "",
+                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />이 기준은 2016. 5. 9. 제정, 시행한다.<br />이 기준은 2017. 1. 1. 개정, 시행한다.<br />이 기준은 2018. 8. 2. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 기준은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
+            },
+        ],
         FairTradeHomeShoppingPromotionSections: [],
         FairTradeHomeShoppingProductionCostSections: [],
         FairTradeHomeShoppingReturnSections: [],
@@ -2462,8 +2643,10 @@ const langData = {
                 btnText: "문의하기",
             },
         ],
-        ReportNotice:
-            "※ 기타 제보 방법 : GS리테일 경영진단팀 (02-2006-2088 / singo@gsretail.com)<br />※ GS리테일에서는 <span class='txt_warn'>제보자 포상제도</span>를 실시하며, <span class='txt_warn'>제보자 보호제도</span>를 운영합니다.",
+        ReportNotice: [
+            "※ 기타 제보 방법 : GS리테일 경영진단팀 (02-2006-2088 / singo@gsretail.com)",
+            "※ GS리테일에서는 <span class='txt_red'>제보자 포상제도</span>를 실시하며, <span class='txt_red'>제보자 보호제도</span>를 운영합니다.",
+        ],
         EthicsReportTargetItems: [
             {
                 num: "01",
@@ -2703,7 +2886,7 @@ img{width:100%; height:auto; display:block; object-fit: cover;}
 .panel_third_depth { padding-top: 80px; }
 /* v-html 삽입 노드에는 scoped data 속성이 없으므로 :deep 필요 */
 :deep(.txt_blue){color:#107AF2 !important;}
-:deep(.txt_warn){color:#FB6432 !important;}
+:deep(.txt_red){color:#FB6432 !important;}
 section + section{padding-top:120px;}
 .sub_header{margin-bottom:40px;}
 .sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
@@ -2934,6 +3117,7 @@ line-height: 1.24;
     .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 20px; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
     .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
     /* .fair_trade_standard_sections { margin: 12px 20px 20px; } */
+    .fair_trade_standard_sections{padding:0;}
     .fair_trade_standard_sections > li > article { gap: 20px; }
     .fair_trade_standard_sections > li > article > h4 { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
     .fair_trade_standard_body { padding-left: 20px; }
@@ -3117,6 +3301,7 @@ letter-spacing: -0.01em;
     table-layout: fixed;
     position: relative;
 }
+
 .panel_third_depth .common_table:before{
     content: '';
     width: 100%;
@@ -3148,6 +3333,7 @@ letter-spacing: -0.01em;
 }
 
 
+
 .panel_third_depth .common_table td{
     padding:21px 24px;
 }
@@ -3172,7 +3358,21 @@ letter-spacing: -0.01em;
     display: flex;
     justify-content: center;
 }
-
+.fair_trade_standard_sections .common_table_scroll{padding:0;}
+.fair_trade_standard_sections .common_table thead th { text-align: center; }
+.fair_trade_standard_sections .common_table th{font-size: 1.6rem;line-height: 1.24;letter-spacing: 0;}
+.fair_trade_standard_sections .common_table th:first-child,
+.fair_trade_standard_sections .common_table td:first-child { width: 250px; }
+.fair_trade_standard_sections .common_table td:first-child{text-align: center;}
+.fair_trade_standard_sections .common_table td + td{border-left: 1px solid #e5e5e9;}
+.fair_trade_standard_sections .common_table td p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+.fair_trade_standard_sections .common_table td p.txt_warn { padding-left:12px; }
+.fair_trade_standard_sections .common_table .common_num_list { margin: 0; padding: 0; list-style: none; counter-reset: common-cell-num; }
+.fair_trade_standard_sections .common_table .common_num_list > li { margin: 0; padding-left: 32px; position: relative; counter-increment: common-cell-num; }
+.fair_trade_standard_sections .common_table .common_num_list > li + li { margin-top: 8px; }
+.fair_trade_standard_sections .common_table .common_num_list > li::before { content: counter(common-cell-num); width: 20px; height: 20px; color: #161616; font-size: 12px; line-height: 1.2; border: 1px solid #161616; border-radius: 50%; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 2px; left: 0; box-sizing: border-box; }
+.fair_trade_standard_sections .common_table .common_num_list > li > p { margin: 0; color: #161616; font-size: 16px; line-height: 1.5; letter-spacing: -0.01em; }
+.fair_trade_standard_sections .list_cuation  {margin-top:16px;}
 /* 정도경영 > 제도 > 제보자 보호제도 (Figma 470:17701) */
 /* .base_list .gray_box {
     margin-top: 24px;
@@ -3253,13 +3453,15 @@ letter-spacing: -0.01em;
 .report_channel_body .button_area {
     margin-top: 24px;
 }
-.report_channel_notice {
+.list_cuation {
     margin-top: 20px;
     color: #67676f;
     font-size: 1.8rem;
     line-height: 1.4;
 }
-.report_channel_notice :deep(span){
+.list_cuation > li > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
+
+.list_cuation :deep(span){
     text-decoration: underline;
 }
 
@@ -3435,7 +3637,7 @@ letter-spacing: -0.01em;
     .report_channel_body .button_area {
         margin-top: 16px;
     }
-    .report_channel_notice {
+    .list_cuation {
         margin-top: 16px;
         font-size: 1.4rem;
     }
