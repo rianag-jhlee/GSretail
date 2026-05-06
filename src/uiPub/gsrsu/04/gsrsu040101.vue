@@ -182,8 +182,8 @@
                                 <div v-if="row.criteriaTables" class="reward_criteria">
                                     <template v-for="(blk, bi) in row.criteriaTables" :key="row.key + '-tbl-' + bi">
                                         <p v-if="blk.sectionLead" v-html="blk.sectionLead"></p>
-                                        <div class="reward_table_scroll">
-                                            <table class="reward_table">
+                                        <div class="common_table_scroll">
+                                            <table class="common_table">
                                                 <thead>
                                                     <tr>
                                                         <th v-for="col in blk.cols" :key="col" scope="col">{{ col }}</th>
@@ -192,7 +192,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td v-for="(cell, ci) in blk.cells" :key="ci">
-                                                            <p class="reward_table_sub">{{ cell.sub }}</p>
+                                                            <p class="common_table_sub">{{ cell.sub }}</p>
                                                             <p v-html="cell.desc"></p>
                                                         </td>
                                                     </tr>
@@ -590,9 +590,14 @@
                                     <template v-if="item.key === '01' || item.key === '02' || item.key === '03' || item.key === '04' || item.key === '05' || item.key === '06' || item.key === '07' || item.key === '08'">
                                         <ol class="fair_trade_standard_sections">
                                             <li v-for="section in item.key === '02' ? t.FairTradeSalesIncentiveSections : item.key === '03' ? t.FairTradePromotionCostSharingSections : item.key === '04' ? t.FairInteriorAndPromotionCostSharingSections : item.key === '05' ? t.FairPartnerCompanyManagementSections : item.key === '06' ? t.FairPartnerEmployeeDispatchSections : item.key === '07' ? t.FairPartnerSpecialPurchaseSections : item.key === '08' ? t.FairPartnerReturnRelatedSections : t.FairTradePartnerStandardSections" :key="'sup-sec-' + item.key + '-' + section.no">
-                                                <article :class="{ gray_box: section.no === '부칙' }">
-                                                    <template v-if="section.no === '부칙'">
-                                                        <p v-html="section.addendumText"></p>
+                                                <article :class="{ gray_box: section.no === '부칙' || section.no === '부속지침' }">
+                                                    <template v-if="section.no === '부칙' || section.no === '부속지침'">
+                                                        <ul v-if="section.addendumItems">
+                                                            <li v-for="(text, idx) in section.addendumItems" :key="'sup-add-' + item.key + '-' + idx">
+                                                                <p>{{ text }}</p>
+                                                            </li>
+                                                        </ul>
+                                                        <p v-if="section.addendumText" v-html="section.addendumText"></p>
                                                     </template>
                                                     <template v-else>
                                                         <h4>{{ section.title ? `${section.no} ${section.title}` : section.no }}</h4>
@@ -685,7 +690,73 @@
                         </section>
                     </div>
                     <div v-show="CTabIdxFairTradeBiz === 1" class="panel_third_depth" :aria-label="t.TabsFairTradeBiz?.[1]?.item || ''">
-                        
+                        <section class="fair_trade_work_standard_sec">
+                            <Accordion>
+                                <AccordionItem v-for="item in t.FairTradeHomeShoppingAccordionItems" :key="'tv-' + item.key" :item-key="'tv-' + item.key">
+                                    <template #title><strong v-html="item.title" class="acc_tit_txt"></strong></template>
+                                    <template v-if="item.key === '01' || item.key === '02' || item.key === '03' || item.key === '04' || item.key === '05' || item.key === '06' || item.key === '07' || item.key === '08' || item.key === '09' || item.key === '10' || item.key === '11'">
+                                        <ol class="fair_trade_standard_sections">
+                                            <li v-for="section in item.key === '01' ? t.FairTradeHomeShoppingCooperationSections : item.key === '02' ? t.FairTradeHomeShoppingTermsSections : item.key === '03' ? t.FairTradeHomeShoppingFixedCommissionSections : item.key === '04' ? t.FairTradeHomeShoppingPromotionSections : item.key === '05' ? t.FairTradeHomeShoppingProductionCostSections : item.key === '06' ? t.FairTradeHomeShoppingReturnSections : item.key === '07' ? t.FairTradeHomeShoppingManagementInfoSections : item.key === '08' ? t.FairTradeHomeShoppingGuidelineComplianceSections : item.key === '09' ? t.FairTradeHomeShoppingProductSelectionSections : item.key === '10' ? t.FairTradeHomeShoppingIntangibleProductSections : item.key === '11' ? t.FairTradeHomeShoppingLinkedProgrammingSections : []" :key="'tv-sec-' + item.key + '-' + section.no">
+                                                <article :class="{ gray_box: section.no === '부칙' || section.no === '부속지침' }">
+                                                    <template v-if="section.no === '부칙' || section.no === '부속지침'">
+                                                        <ul v-if="section.addendumItems">
+                                                            <li v-for="(text, idx) in section.addendumItems" :key="'tv-add-' + item.key + '-' + idx">
+                                                                <p>{{ text }}</p>
+                                                            </li>
+                                                        </ul>
+                                                        <p v-if="section.addendumText" v-html="section.addendumText"></p>
+                                                    </template>
+                                                    <template v-else>
+                                                        <h4>{{ section.title ? `${section.no} ${section.title}` : section.no }}</h4>
+                                                        <div class="fair_trade_standard_body">
+                                                            <p v-if="section.lead">{{ section.lead }}</p>
+                                                            <component v-if="section.items" :is="section.usePlainList ? 'ul' : 'ol'" :class="section.usePlainList ? 'plain_list' : 'num_list'">
+                                                                <li v-for="row in section.items" :key="'tv-sec-' + section.no + '-' + row.num">
+                                                                    <p v-html="row.title"></p>
+                                                                    <ul v-if="row.details">
+                                                                        <li v-for="(detail, dIdx) in row.details" :key="'tv-sec-' + section.no + '-' + row.num + '-' + dIdx">
+                                                                            <template v-if="typeof detail === 'string'">
+                                                                                {{ detail }}
+                                                                            </template>
+                                                                            <template v-else>
+                                                                                <p>{{ detail.text }}</p>
+                                                                                <ul v-if="detail.children">
+                                                                                    <li v-for="(child, cIdx) in detail.children" :key="'tv-sec-' + section.no + '-' + row.num + '-' + dIdx + '-' + cIdx">{{ child }}</li>
+                                                                                </ul>
+                                                                            </template>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </component>
+                                                            <dl v-if="section.criteria" class="fair_trade_standard_dl">
+                                                                <template v-for="row in section.criteria" :key="'tv-sec-' + section.no + '-' + row.term">
+                                                                    <dt>{{ row.term }}</dt>
+                                                                    <dd>
+                                                                        <ul v-if="row.details" class="fair_trade_standard_desc_list">
+                                                                            <li v-for="detail in row.details" :key="'tv-sec-' + section.no + '-' + row.term + '-' + detail">{{ detail }}</li>
+                                                                        </ul>
+                                                                        <p v-else>{{ row.desc }}</p>
+                                                                    </dd>
+                                                                </template>
+                                                            </dl>
+                                                            <ol v-if="section.definitions" class="num_list">
+                                                                <li v-for="row in section.definitions" :key="'tv-sec-' + section.no + '-' + row.term">
+                                                                    <p>{{ `${row.desc}` }}</p>
+                                                                    <ul v-if="row.details">
+                                                                        <li v-for="detail in row.details" :key="'tv-sec-' + section.no + '-' + row.term + '-' + detail">{{ detail }}</li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </template>
+                                                </article>
+                                            </li>
+                                        </ol>
+                                    </template>
+                                    <p v-else class="fair_trade_work_standard_desc">{{ item.desc }}</p>
+                                </AccordionItem>
+                            </Accordion>
+                        </section>
                     </div>
                    
                 </div>
@@ -892,6 +963,301 @@ const langData = {
                 title: "<span class='acc_num'>8.</span>파트너사 반품관련 기준",
             },
         ],
+        FairTradeHomeShoppingAccordionItems: [
+            { key: "01", title: "<span class='acc_num'>1.</span>협력사와의 공정거래를 위한 기준과 절차" },
+            { key: "02", title: "<span class='acc_num'>2.</span>거래조건 결정 기준과 절차" },
+            { key: "03", title: "<span class='acc_num'>3.</span>정액수수료 방송 운영기준과 절차" },
+            { key: "04", title: "<span class='acc_num'>4.</span>판매촉진행사 진행 기준과 절차" },
+            { key: "05", title: "<span class='acc_num'>5.</span>방송제작비 등 분담 기준과 절차" },
+            { key: "06", title: "<span class='acc_num'>6.</span>직매입 상품 등의 반품 기준과 절차" },
+            { key: "07", title: "<span class='acc_num'>7.</span>경영정보 제공 요구 금지 기준" },
+            { key: "08", title: "<span class='acc_num'>8.</span>홈쇼핑 불공정거래행위에 대한 위법성 심사지침 준수 기준" },
+            { key: "09", title: "<span class='acc_num'>9.</span>상품선정 및 방송편성 기준과 절차" },
+            { key: "10", title: "<span class='acc_num'>10.</span>무형상품 선정 기준과 절차" },
+            { key: "11", title: "<span class='acc_num'>11.</span>연계편성의 부당한 강요행위 금지 기준" },
+        ],
+        FairTradeHomeShoppingCooperationSections: [
+            {
+                no: "01",
+                title: "목적",
+                lead: "이 기준은 주식회사 지에스리테일(이하 ‘GS SHOP’)의 TV홈쇼핑 및 데이터홈 쇼핑 방송(이하 통칭하여 ‘방송’)을 위한 협력사와의 거래 과정에서, 협력사와 GS SHOP 간의 정당하고 공정한 거래조건이 보장되도록 하고, GS SHOP과 협력사가 지속적으로 협력하는 관계를 유지하기 위해 GS SHOP 임직원이 준수해야 할 기본적인 사항들을 규정하기 위해 작성된 것이다.",
+            },
+            {
+                no: "02",
+                title: "기본 원칙",
+                items: [
+                    { num: "1", title: "GS SHOP 임직원은 협력사와의 상담 또는 거래 과정에서 항상 이 기준을 숙지하고 준수하여야 한다." },
+                    { num: "2", title: "GS SHOP 임직원은 이 기준 외에도 협력사와의 거래에 있어 「독점규제 및 공정거래에 관한 법률」, 「대규모유통업에서의 거래 공정화에 관한 법 률」 등 공정거래 관련 법령(이하 통칭하여 ‘공정거래 관련 법령’)에 규정 된 사항을 엄격히 준수하여야 한다." },
+                    { num: "3", title: "이 기준 및 부속 지침은 GS SHOP을 통해 방송을 진행하는 협력사 및 해 당 협력사와의 거래에 한하여 적용하기로 한다." },
+                    { num: "4", title: "이 기준은 공식 홈페이지(http://www.gsretail.com) 또는 GS SHOP 투명거 래시스템(http://withgs.gsshop.com) 게시판 등을 통해 공지하고, 협력사의 GS SHOP 방송을 위한 개별 입점 상담 시에도 공개함을 원칙으로 한다." },
+                    { num: "5", title: "GS SHOP은 협력사 교육을 통하여 이 기준을 지속적으로 고지하고 공유 하기로 한다." },
+                ],
+            },
+            {
+                no: "03",
+                title: "상품 및 협력사의 선정",
+                definitions: [
+                    { term: "1", desc: "GS SHOP은 온라인 또는 오프라인을 통해 협력사로부터 제안 받은 상품에 대해 공정하고 투명한 절차에 따라 상품 및 협력사를 선정한다." },
+                    { term: "2", desc: "제1항을 준수하기 위한 구체적 기준 및 절차는 별도 기준인 「상품 선정 및 방송 편성 기준과 절차」에서 정한다." },
+                ],
+            },
+            {
+                no: "04",
+                title: "판매수수료의 결정",
+                items:[
+                    {num:"1", title:"상품 판매수수료는 협력사와 상호 신뢰의 원칙에 따라 공정하고 투명한 기준에 따라 산정되어야 한다."},
+                    {num:"2", title:"GS SHOP은 협력사와의 상품 판매수수료 조건을 정액수수료 형태로 정하고자 하는 경우 대상 상품 및 편성 비율 등을 제한적으로 운영하여야 하며, 중소기업 협력사에 대한 보호 장치를 마련해야 한다."},
+                    {num:"3", title:"제1항 및 제2항을 준수하기 위한 구체적 기준 및 절차는 별도의 지침으로 정한다."},
+                ]
+            },
+            {
+                no: "05",
+                title: "판매촉진행사의 진행 및 비용 분담",
+                items: [
+                    { num: "1", title: "판매촉진행사는 협력사와 사전에 상호 합의한 후 진행하여야 하며, 진행시 공정거래 관련 법령을 준수하여 진행한다." },
+                    { num: "2", title: "제1항을 준수하기 위한 구체적 기준 및 절차는 별도의 지침으로 정한다." },
+                ],
+            },
+            {
+                no: "06",
+                title: "방송제작비의 분담",
+                items: [
+                    { num: "1", title: "상품 판매 방송의 제작비는 GS SHOP이 전액 부담함을 원칙으로 한다. 단, 협력사의 요청에 따라 판매전문가, 모델, 협력사가 사전에 제작한 자체 영상물 등을 추가로 사용할 경우 사전 합의를 통해 소요 비용을 분담 할 수 있다." },
+                    { num: "2", title: "제1항을 준수하기 위한 구체적 기준 및 절차는 별도의 지침으로 정한다." },
+                ],
+            },
+            {
+                no: "07",
+                title: "불공정거래행위의 금지",
+                items: [
+                    {
+                        num: "1",
+                        title: "GS SHOP은 협력사와의 거래 과정에서 다음 각 호의 사항들을 준수하고, 협력사에 대해 우월적 지위를 남용하여 부당한 강요나 그 밖의 불공정한 거래를 조장하는 행위를 하지 않는다. 이러한 불공정거래행위에 대한 구체적인 기준은 공정거래 관련 법령에서 정한 사항에 따른다.",
+                        details: [
+                            "1. 서면 계약 체결, 교부, 보존 의무",    
+                            "2. 상품 대금의 감액 금지",
+                            "3. 상품 판매 대금 지급 의무",
+                            "4. 부당한 상품 수령 거부, 지체 금지",
+                            "5. 부당한 상품 반품 금지",
+                            "6. 판매촉진비용 등의 부당한 강요 금지",
+                            "7. 배타적 거래 강요금지",
+                            "8. 경영정보 제공 요구 금지",
+                            "9. 부당한 경제적 이익 요구 및 수령 금지",
+                            "10. 부당한 계약 변경 등 불이익 제공 금지",
+                            "11. 보복 조치 금지",
+                            "12. 경영활동 간섭 금지",
+                        ],
+                    },
+                    { num: "2", title: "제1항 제5호를 준수하기 위한 구체적 기준은 별도의 지침으로 정한다." },
+                    { num: "3", title: "제1항 제8호를 준수하기 위한 구체적 기준은 별도의 지침으로 정한다." },
+                    { num: "4", title: "제1항의 내용과 더불어 공정거래위원회가 홈쇼핑 방송 거래 영역에서의 특정한 불공정거래행위에 관하여 규정한 위법성 심사지침 상의 내용을 준수하기 위한 구체적 기준은 별도의 지침으로 정한다." },
+                ],
+            },
+            {
+                no: "08",
+                title: "이해관계자 거래 배제",
+                items: [
+                    { num: "1", title: "협력사 임직원 등이 GS SHOP 임직원의 직계가족, 친인척 등 이해관계자인 경우, GS SHOP은 관련 임직원이 해당 협력사의 상품 선정 및 거래 조건 결정 절차 등에 직·간접적으로 관여하는 것을 금지한다." },
+                    {
+                        num: "2",
+                        title: "제1항의 이해관계자의 기준은 다음 각 호와 같다.",
+                        details: [
+                            {
+                                text: "민법 제777조에 의거한 친족",
+                                children: [
+                                    "가. 8촌 이내의 혈족",
+                                    "나. 4촌 이내의 인척 (인척의 범위는 민법 제769조를 따름)",
+                                    "다. 배우자",
+                                ],
+                            },
+                            "2. GS SHOP에 근무 이력이 있는 자",
+                            "3. GS 그룹 계열사 관계자",
+                        ],
+                    },
+                    { num: "3", title: "제1항에도 불구하고 협력사 임직원 등과 이해관계 있는 임직원이 협력사의 상품 선정 및 거래 조건 결정 절차 등에 관여한 것으로 밝혀진 경우 관련 임직원을 배제한 상태에서 상품 선정 및 거래 조건을 재검토한다." },
+                ],
+            },
+            {
+                no: "09",
+                title: "특정 협력사의 독점 방지",
+                items: [
+                    {
+                        num: "1",
+                        title: "GS SHOP은 유통단계 축소를 통한 중소기업 보호를 위해 제조사 직접 납품을 원칙으로 한다. 단, 제조사가 물류, A/S 접수 및 처리 등 통상적으로 납품에 필요한 행위를 수행할 능력을 갖추지 못하여 이를 대행할 협력사(이하 ‘대행 협력사’)를 통하여 입점하고자 할 경우에는 예외로 한다.",
+                    },
+                    { 
+                        num: "2", 
+                        title: "제1항의 단서와 관련하여 GS SHOP은 특정 대행 협력사가 납품을 독점하지 않도록 하고, 동일 상품에 대해 복수의 대행 협력사의 제안이 있을 경우에는 협력사의 선정에 관한 기준에 입각하여 공정하고 투명한 경쟁을 통해 협력사를 선정한다." 
+                    },
+                ],
+            },
+            {
+                no: "10",
+                title: "상품 판매 중단 등 기준",
+                items: [
+                    { num: "1", title: "GS SHOP은 협력사의 상품 판매 중단, 협력사와의 거래를 중단 또는 종료하려는 경우 그 사유 및 절차를 명확히 정하고 이를 준수하여야 하며, 그 과정에서 협력사에게 부당한 피해가 발생하지 않도록 노력하여야 한다." },
+                    { num: "2", title: "제1항의 구체적 사유 및 절차는 별도 기준인 「상품 선정 및 방송 편성 기준과 절차」에서 정한다." },
+                ],
+            },
+            {
+                no: "11",
+                title: "신고, 불만 접수 및 처리",
+                items: [
+                    { num: "1", title: "GS SHOP은 협력사와의 거래 중 발생한 협력사의 민원과 불만을 해소할 수 있도록 최선을 다하고 재발 방지를 위해 노력해야 한다." },
+                    { num: "2", title: "협력사는 GS SHOP 임직원이 이 기준 및 부속 지침을 위반하거나 GS SHOP과의 거래 중 불공정한 처우 등으로 인해 불만이 발생한 경우, 공식 홈페이지 또는 투명거래시스템 등에서 제공하는 신고 채널(레드휘슬 등)을 통해 위반 사항을 신고하거나 불만 사항을 접수할 수 있다." },
+                    { num: "3", title: "GS SHOP은 제2항에 따라 접수된 신고 건에 대해 GS SHOP의 감사업무담당부서, 법무 또는 컴플라이언스업무 담당부서 등(이하 ‘감사업무 담당부서 등’)의 실사 및 감사를 통해 사실 관계를 신속히 확인하여야 한다." },
+                    { num: "4", title: "GS SHOP은 사실 관계에 대한 조사가 종료되면, 해당 협력사에 조사된 사실 관계, 관련 임직원에 대한 제재 조치, 협력사 피해 구제책, 재발 방 지 대책 등을 포함한 신고 사건 처리 결과를 통보해야 한다." },
+                    { num: "5", title: "GS SHOP은 이 조에 따라 협력사의 신고 업무를 처리하는 과정이나 그 이후에도 협력사 및 협력사 관계자의 정보와 인적 사항 등을 비밀 정보로 보호하고, 협력사가 신고로 인해 부당하게 차별 대우를 받거나 거래 중단 등의 보복 조치가 발생하지 않도록 해야 한다." },
+                ],
+            },
+            {
+                no: "12",
+                title: "제재",
+                items: [
+                    { num: "1", title: "GS SHOP의 감사업무 담당부서 등은 협력사의 신고를 통해 또는 직권으로 GS SHOP 임직원이 이 기준, 공정거래 관련 법령, 윤리규범 및 실천지침, 기타 사규 등을 위반한 사실을 인지한 경우 즉시 해당 임직원의 위반 행위를 조사하여야 하고, 사실로 확인된 경우 윤리위원회에 보고하여야 하며, 해당 위원회에서 해당 임직원에 대한 제재 여부 및 수준을 최종 결정한다." },
+                    { num: "2", title: "GS SHOP은 임직원의 위반 행위가 사기, 횡령, 배임, 뇌물수수, 부정청탁 및 금품수수 등에 해당하여 형사 책임을 부담하여야 하는 사안인 경우 객관적인 사실 관계의 조사 및 재발 방지 등을 위해 해당 임직원을 수사기관에 형사 고발 조치할 수 있다." },
+                ],
+            },
+            {
+                no: "부속지침",
+                title: "",
+                addendumItems: [
+                    "지침1. 거래조건 결정 기준과 절차",
+                    "지침2. 정액수수료 방송 운영 기준과 절차",
+                    "지침3. 판매촉진행사 진행 기준과 절차",
+                    "지침4. 방송제작비 등 분담 기준과 절차",
+                    "지침5. 직매입 상품 등의 반품 기준과 절차",
+                    "지침6. 경영정보 제공 요구 금지 기준",
+                    "지침7. 홈쇼핑 불공정거래 행위에 대한 위법성 심사 지침 준수 기준",
+                ],
+                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />이 기준은 2016. 5. 9. 제정, 시행한다.<br />이 기준은 2017. 1. 1. 개정, 시행한다.<br />이 기준은 2018. 8. 2. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 기준은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
+            },
+        ],
+        FairTradeHomeShoppingTermsSections: [
+            {
+                no: "01",
+                title: "목적",
+                lead: "이 지침은 상위 기준인 「협력사와의 공정한 거래를 위한 기준과 절차」에서 정한 사항 중 협력사와의 거래 조건 결정 기준 및 절차에 관한 세부적인 준수 사항을 제시함으로써, 판매수수료 등 거래 조건의 결정 과정에서 협력사가 주식회사 지에스리테일(이하 ‘GS SHOP’)로부터 정당하고 공정한 거래환경을 제공받을 수 있도록 하고, GS SHOP과 협력사가 지속적으로 상호 협력하는 관계를 구축하기 위해 작성한 것이다.",
+            },
+            {
+                no: "02",
+                title: "기본 원칙",
+                items: [
+                    { num: "1", title: "GS SHOP 임직원은 협력사와의 상담 또는 거래 과정에서 항상 이 지침을 숙지하고 준수하여야 한다." },
+                    { num: "2", title: "GS SHOP 임직원은 이 지침 외에도 협력사와의 거래에 있어 「독점규제 및 공정거래에 관한 법률」, 「대규모유통업에서의 거래 공정화에 관한 법률」 등 공정거래 관련 법령에 규정된 사항을 엄격히 준수하여야 한다." },
+                    { num: "3", title: "이 지침은 GS SHOP을 통해 방송을 진행하는 협력사 및 해당 협력사와의 거래에 한하여 적용하기로 한다." },
+                    { num: "4", title: "이 지침은 공식 홈페이지(http://www.gsretail.com) 또는 GS SHOP 투명거래시스템(http://withgs.gsshop.com) 게시판 등을 통해 공지하고, 협력사의 GS SHOP 방송을 위한 개별 입점 상담 시에도 공개함을 원칙으로 한다." },
+                    { num: "5", title: "GS SHOP은 협력사 교육을 통하여 이 지침을 지속적으로 고지하고 공유하기로 한다." },
+                    { num: "6", title: "GS SHOP은 동종의 상품군에서는 협력사가 대기업 또는 중소기업이라는 이유로 판매수수료 등을 포함한 어떠한 거래 조건의 차별도 두지 아니한다." },
+                ],
+            },
+            {
+                no: "03",
+                title: "협의 절차",
+                items: [
+                    { num: "1", title: "GS SHOP은 온라인 또는 오프라인을 통해 협력사로부터 제안 받은 상품에 대해 별도 기준인 「상품선정 및 방송편성 기준과 절차」에 따라 GS SHOP 의 방송을 위한 상품을 선정한다." },
+                    { num: "2", title: "제1항에 따른 기준에 부합된 상품에 대해서는 품질 안전 담당부서를 통해 상품군별로 정해진 지침에 의거한 품질 검사를 거쳐야 한다." },
+                    { num: "3", title: "품질 검사 합격 후에는 협력사와 상품 구성, 판매가 등 방송 대상 상품의 판매 조건에 대해 구체적으로 협의해야 한다." },
+                    { num: "4", title: "방송 10~5일 전에는 협력사와 GS SHOP의 MD, PD가 상품 정보를 공유하고, 상호 간의 판매수수료, 공급 수량 등 거래 조건을 구체적으로 협의 해야 한다." },
+                    { num: "5", title: "방송 5일 전까지 협력사와 GS SHOP의 MD, PD가 모여 방송 진행 컨셉 등을 협의하고, 최종 판매수수료, 공급 수량 등 거래 조건을 확정한다." },
+                    { num: "6", title: "담당 MD 등은 협력사와 최종 합의된 내용에 대해서는 내부 전결 규정에 의거하여 보고하고 최종 결재를 득한다." },
+                    { num: "7", title: "판매수수료 등에 대해서는 상호 이익이 될 수 있도록 협력사와 충분한 협의 절차를 진행하고 합리적으로 산정되어야 하며, 부당하게 일방에 의해 결정되거나 정당한 사유 없이 결정된 판매수수료 등의 거래 조건을 변경해서는 아니 된다." },
+                ],
+            },
+            {
+                no: "04",
+                title: "계약 체결 절차",
+                definitions: [
+                    { term: "1", desc: "GS SHOP은 계약 체결 전이라도 상호 협의된 사항에 대해서는 상호 신뢰 원칙에 따라 준수하여야 한다. 단, 협력사에게 계약 체결 및 서면 교부 이전에 협력사로 하여금 상품을 제조·주문하게 하거나 납품할 상품을 위한 설비·장치를 준비하도록 요구하여서는 아니 된다." },
+                    { term: "2", desc: "GS SHOP은 상호 간에 최종 합의된 판매수수료 등의 거래 조건을 기재한 방송 조건에 관한 합의서를 전자계약 형태로 체결한 후 투명거래시스템으로 교부한다. 계약 체결 및 교부는 원칙적으로 방송일 기준 3일 전까지 완료되어야 하고, 합의서의 교부는 계약 체결 즉시 이행한다." },
+                    { term: "3", desc: "제2항에도 불구하고 현저한 시황 변동 등 불가피한 사유가 있는 경우에는 방송 전까지 계약 사항을 변경할 수 있으나 사전에 협력사와 합의되어야 하며 협력사로부터 변경 의사 및 사유를 확인하기 위한 신청서를 받아야 한다." },
+                    { term: "4", desc: "제3항에 따른 계약 사항 변경 변경 시 담당 MD는 변경 합의 전 담당 부서장에게 변경 사실 및 사유를 보고하고 담당 부서장은 그 사유나 변경 절차의 타당성을 검토하여야 하며, 변경 계약을 체결하는 즉시 협력사에 변경된 합의서를 교부하여야 한다." },
+                    { term: "5", desc: "계약의 내용에는 거래와 관련하여 분쟁의 대상이 될 수 있는 다음 각 호의 사항들을 포함하여야 한다.",
+                      details:[
+                            "1. 거래형태, 거래품목 및 위탁 판매수량, 거래가격, 거래기간, 납품조건, 대금지급방법, 대금결제기간 및 판촉비용의 부담 여부 및 부담 조건, 반품 조건, 판매수수료, 판매장려금 부담 여부 및 부담 조건",
+                            "2. 판매방송일정, 방송제작비용, 상품전문가/모델 등의 출연 여부, 일정 및 출연 비용 부담 여부 및 부담 조건, 소비자의 주문 및 반품 상품에 대한 배송 조건, 소비자의 구매 취소 및 반품 상품의 처리 조건 등"
+                        ]
+                      },
+                    { term: "6", desc: "GS SHOP은 협력사와의 계약이 끝난 날부터 5년간 양 당사자 사이의 거래에 관한 서류를 보존하여야 한다." },
+                ],
+            },
+            {
+                no: "05",
+                title: "계약 이행 절차",
+                lead: "직매입거래에서 “회사”는 “파트너사”로부터 납품받은 상품에 대한 소유권을 취득하며, 상품판매에 대한 권한을 가짐과 동시에 판매부진에 따른 재고책임을 부담하므로 다음과 같은 유형의 장려금은 장려금으로 허용하지 않는다.",
+                items: [
+                    { num: "1", title: "GS SHOP은 협력사의 계약 합의 여부를 확인한 후 합의된 거래 조건에 따라 방송 및 판매를 진행한다." },
+                    { num: "2", title: "MD는 방송 후 계약 내용대로 대금이 정산되었는지 여부를 반드시 확인하여야 한다. 당초 계약 내용과 달리 대금이 정산되었을 경우에는 해당 MD는 지체 없이 협력사에 통지하고 계약 내용대로 수정 이행해야 한다." },
+                    { num: "3", title: "GS SHOP은 계약서에 기재된 판매수수료율 및 거래 조건을 준수하고 어떠한 경우에도 방송 중 또는 그 이후에 거래 조건을 변경하거나 소급 적용하지 않는다." },
+                    { num: "4", title: "GS SHOP은 협력사와 사전에 합의하지 않거나 계약서에 정하지 않은 각종 명목의 수수료나 비용을 협력사에게 요구하거나 일절 부담시키지 않으며, 그 밖에 경제적 불이익을 전가하지 않는다." },
+                ],
+            },
+            {
+                no: "06",
+                title: "판매수수료 결정",
+                items: [
+                    { num: "1", title: "GS SHOP은 협력사와 다음 각 호의 사항을 고려하여 협력사 상품의 판매수수료를 협의·결정한다.",
+                    details:[
+                            "1. 품질",
+                            "2. 유사상품(군)의 평균 판매수수료율",
+                            "3. 협력사의 매출 추이, 상품 카테고리의 시황 및 유통채널 내 경쟁 상황",
+                            "4. 예상 판매실적 및 GS SHOP 전체 매출에의 기여도",
+                            "5. A/S 및 배송 등 관련 비용(설치상품인 경우 설치비용 등)",
+                            "6. 거래 이행의 안정성과 신뢰도",
+                            "7. 브랜드 인지도",
+                            "8. 시장성",
+                            "9. 기존 상품과의 차별성",
+                            "10. 기타 상품의 특성에 따른 고려 사항"
+                        ]
+                     },
+                    { num: "2", title: "판매수수료는 협력사와 상호 신뢰의 원칙 하에 공정하고 투명한 절차에 따라 산정되어야 한다." },
+                    { num: "3", title: "협력사와의 공정거래협약 등 상생 협력을 위해 해당 상품이 다음 각 호에 해당하는 경우에는 협력사의 이익 등을 우선적으로 고려함을 원칙으로 한다.",
+                        details:[
+                            "1.「중소기업기본법」 제2조 및 동법 시행령 제3조에 의거한 중소기업이 제조하거나 공급·판매하는 상품",
+                            "2. 장애인/노인 등 사회적 소외계층이 공급하는 상품 또는 소외계층을 주 대상으로 하는 상품",
+                            "3. 농축산어민이 최종 생산자이거나 농축산어민이 직접 공급하는 상품"
+                        ]
+                     },
+                ],
+            },
+            {
+                no: "07",
+                title: "정액수수료 운영",
+                items: [
+                    { num: "1", title: "정액수수료라 함은 「방송법」 시행령 별표2의 3에 규정된 바와 같이 상품 판매액과 관계 없는 수익배분방식(상품 판매액과 관계 없는 수익배분방식과 그 외의 수익배분방식을 혼합한 수익배분방식을 포함)을 말한다." },
+                    { num: "2", title: "정액수수료를 적용하는 상품의 유형, 편성 시간과 비율, 중소기업 협력사의 정액수수료로 인한 피해 방지 방안 등 정액수수료 방송의 구체적 운영 기준은 별도의 지침으로 정한다." },
+                ],
+            },
+            {
+                no: "08",
+                title: "불공정거래행위 금지",
+                lead: "GS SHOP은 협력사와의 거래 조건을 결정함에 있어 이 지침에 의무 또는 금지 사항으로 명시되어 있지 아니하더라도 협력사에 대해 거래상 지위를 남용하여 불이익을 주거나 그 밖에 불공정한 거래 조건을 강요하는 행위를 하여서는 아니 된다."
+            },
+            {
+                no: "09",
+                title: "신고, 불만 접수 및 처리",
+                lead: "협력사는 GS SHOP이 협력사와 거래 조건을 협의·결정하는 과정에서 이 지침을 위반하거나 기타 거래 조건의 결정과 관련하여 GS SHOP에 불만이 발생한 경우 GS SHOP에 위반 사항을 신고하거나 불만을 접수할 수 있고, 이 경우 GS SHOP은 상위 기준인 「협력사와의 공정거래를 위한 기준과 절차」에 규정된 절차에 따라 처리하여야 한다."
+            },
+            {
+                no: "10",
+                title: "제재",
+                lead: "GS SHOP 임직원이 이 지침에서 규정한 사항을 위반한 사실이 확인된 경우 상위 기준인 「협력사와의 공정거래를 위한 기준과 절차」에 규정된 절차에 따라 해당 임직원에 대한 제재 절차를 진행하여야 한다."
+            },
+            {
+                no: "부칙",
+                title: "",
+                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />이 기준은 2016. 5. 9. 제정, 시행한다.<br />이 기준은 2017. 1. 1. 개정, 시행한다.<br />이 기준은 2018. 8. 2. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 기준은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
+            },
+        ],
+        FairTradeHomeShoppingFixedCommissionSections: [],
+        FairTradeHomeShoppingPromotionSections: [],
+        FairTradeHomeShoppingProductionCostSections: [],
+        FairTradeHomeShoppingReturnSections: [],
+        FairTradeHomeShoppingManagementInfoSections: [],
+        FairTradeHomeShoppingGuidelineComplianceSections: [],
+        FairTradeHomeShoppingProductSelectionSections: [],
+        FairTradeHomeShoppingIntangibleProductSections: [],
+        FairTradeHomeShoppingLinkedProgrammingSections: [],
         // 1. 파트너사 선정 및 운용기준
         FairTradePartnerStandardSections: [
             {
@@ -1589,7 +1955,7 @@ const langData = {
                             "4. 파견된 종업원에게 “파트너사” 자사상품 뿐 아니라 다른 “파트너사”가 납품하는 상품의 판매 및 재고파악 및 관리, 진열업무 등을 맡기는 행위",
                             "5. “회사” 고유업무의 일환으로 수행하는 정기재고조사 업무 등의 원활한 수행을 위해 파견 종업원으로 하여금 “파트너사” 자사상품의 재고를 파악하도록 하는 행위",
                         ],
-                     },
+                    },
                 ],
             },
             {
@@ -1643,9 +2009,9 @@ const langData = {
                     { term: "2", desc: "“특약매입거래”란 “회사”가 매입한 상품 중 판매되지 아니한 상품을 반품할 수 있는 조건으로 납품업자로부터 상품을 외상매입하고, 상품판매 후 일정률이나 일정액의 판매수익을 공제한 상품판매대금을 납품업자에게 지급하는 형태의 거래를 말한다." },
                     { term: "3", desc: "“판매촉진행사”란 명칭이나 형식에 상관없이 상품에 대한 수요를 늘려 판매를 증진시킬 목적으로 행하는 모든 행사 또는 활동을 말하며, 세부 목적은 다음 각 호와 같다.",
                       details:[
-                        "1. 신상품/신규입점상품의 홍보 및 매출확대",
-                        "2. 경쟁사의 경쟁상품과 차별화된 추가 혜택 제공을 통한 매출 확대",
-                        "3. 관련 상품군내 해당기간 판촉활동을 통한매출증대 및 MS(점유율) 확대"
+                          "1. 신상품/신규입점상품의 홍보 및 매출확대",
+                          "2. 경쟁사의 경쟁상품과 차별화된 추가 혜택 제공을 통한 매출 확대",
+                          "3. 관련 상품군내 해당기간 판촉활동을 통한매출증대 및 MS(점유율) 확대"
                       ]
                     },
                 ],
@@ -1814,7 +2180,7 @@ const langData = {
         ],
         // 8. 파트너사 반품관련 기준
         FairPartnerReturnRelatedSections: [
-        {
+            {
                 no: "01",
                 title: "목적",
                 lead: "이 기준은 주식회사 지에스리테일(이하 “회사”라 함)과 파트너사(이하 “파트너사”라 함)간 거래에 있어 반품처리에 대한 기준을 명확히 규정하여, 반품과정에서 발생할 수 있는 불공정한 거래행위를 예방하고, 관련 법령을 준수함으로서, “파트너사”와 공정한 거래관계를 확립하고자 함을 목적으로 한다.",
@@ -1845,22 +2211,22 @@ const langData = {
                     { num: "1", title: "“회사”는 정당한 사유 없이 납품 받은 상품의 전부 또는 일부를 “파트너사”에게 반품하여서는 아니된다." },
                     { num: "2",title: "제1항에도 불구하고 다음 각 호의 어느 하나에 해당하는 경우에는 예외적으로 반품을 할 수 있다.", 
                       details:[
-                      "1. 특약매입거래의 경우로서 계약체결 시 반품조건을 구체적으로 약정하고 그 반품조건을 명시한 서면을 “파트너사”에게 준 경우에 그 반품조건에 해당하면 반품할 수 있다. “회사”는 구체적인 반품조건을 “회사”의 표준 물품공급계약서(특약매입)에 반영하여 활용할 수 있다.",
-                        "2. 위수탁거래의 경우는 별도의 제한없이 상품판매 후 남은 재고상품을 반품할 수 있다.",
-                        "3. 납품받은 상품의 “파트너사”의 책임있는 사유로 인하여 오손, 훼손되었거나 상품에 하자가 있는 경우에는 반품할 수 있다.",
-                        "4. 납품받은 상품이 계약한 상품과 다른 경우로서, 상품의 원산지, 유통기한, 크기 등 중요한 제품의 특성이 당초 계약한 내용과 다른 경우에는 상품을 반품할 수 있다.",
-                        "5. “회사”가 반품으로 인하여 생기는 손실을 스스로 부담하고, 해당 “파트너사”에게 반품의 동의를 얻는 경우에는 상품을 반품할 수 있다.",
-                        "6. 직매입거래의 경우로서 일정한 기간이나 계절에 집중적으로 판매되는 상품(이하 “시즌상품”이라 함)에 대하여 계약 체결 시 반품조건을 구체적으로 약정하고, 그 반품조건이 명시된 서면을 “파트너사”에 준 경우에는 상품을 반품할 수 있다.",
-                        "7. 직매입거래의 경우로서 “파트너사”가 반품이 자기에게 직접적으로 이익이 된다는 객관적인 근거자료를 첨부한 서면으로 반품일 이전에 자발적으로 반품을 요청한 경우에는 상품을 반품할 수 있다.",
-                        "8. 가맹점사업자가 폐업하면서 “회사”에 반품한 상품에 대해서는, “회사”가 다시 “파트너사”에게 반품할 수 있다. 이 경우 재판매가 불가능한 상품은 반품할 수 없다.",
-                        "9. 그 밖에 직매입거래의 경우로서 정당한 사유가 있는 경우에는 상품을 반품할 수 있다. 이 경우 정당한 사유의 판단은 납품거래의 형태와 특성, 반품의 의도와 목적, “파트너사”에 미치는 효과 등을 종합적으로 고려하여 개별적, 구체적으로 판단한다."
+                          "1. 특약매입거래의 경우로서 계약체결 시 반품조건을 구체적으로 약정하고 그 반품조건을 명시한 서면을 “파트너사”에게 준 경우에 그 반품조건에 해당하면 반품할 수 있다. “회사”는 구체적인 반품조건을 “회사”의 표준 물품공급계약서(특약매입)에 반영하여 활용할 수 있다.",
+                          "2. 위수탁거래의 경우는 별도의 제한없이 상품판매 후 남은 재고상품을 반품할 수 있다.",
+                          "3. 납품받은 상품의 “파트너사”의 책임있는 사유로 인하여 오손, 훼손되었거나 상품에 하자가 있는 경우에는 반품할 수 있다.",
+                          "4. 납품받은 상품이 계약한 상품과 다른 경우로서, 상품의 원산지, 유통기한, 크기 등 중요한 제품의 특성이 당초 계약한 내용과 다른 경우에는 상품을 반품할 수 있다.",
+                          "5. “회사”가 반품으로 인하여 생기는 손실을 스스로 부담하고, 해당 “파트너사”에게 반품의 동의를 얻는 경우에는 상품을 반품할 수 있다.",
+                          "6. 직매입거래의 경우로서 일정한 기간이나 계절에 집중적으로 판매되는 상품(이하 “시즌상품”이라 함)에 대하여 계약 체결 시 반품조건을 구체적으로 약정하고, 그 반품조건이 명시된 서면을 “파트너사”에 준 경우에는 상품을 반품할 수 있다.",
+                          "7. 직매입거래의 경우로서 “파트너사”가 반품이 자기에게 직접적으로 이익이 된다는 객관적인 근거자료를 첨부한 서면으로 반품일 이전에 자발적으로 반품을 요청한 경우에는 상품을 반품할 수 있다.",
+                          "8. 가맹점사업자가 폐업하면서 “회사”에 반품한 상품에 대해서는, “회사”가 다시 “파트너사”에게 반품할 수 있다. 이 경우 재판매가 불가능한 상품은 반품할 수 없다.",
+                          "9. 그 밖에 직매입거래의 경우로서 정당한 사유가 있는 경우에는 상품을 반품할 수 있다. 이 경우 정당한 사유의 판단은 납품거래의 형태와 특성, 반품의 의도와 목적, “파트너사”에 미치는 효과 등을 종합적으로 고려하여 개별적, 구체적으로 판단한다."
 
-                    ]},
+                      ]},
                     { num: "3", title: "제2항의 반품은 해당 거래분야에서 합리적이라고 인정되는 기간내에 반품하여야 하며, 다음 각 호의 경우 해당 거래분야에서 합리적이라고 인정되는 기간이라고 추정한다.",
                         details:[
-                        "1. 제2항 제3호 및 제4호의 경우 납품일로부터 10 영업일 이내. 다만, 납품일에 제2항 제3호 및 제4호에 해당하는 사유를 외견상 즉시 발견할 수 없는 합리적인 사유가 있는 경우에는 상호 별도의 합의로 그 기간을 연장할 수 있다.",
-                        "2. 제2항 제3호 및 제4호에 따른 상품이 농ㆍ수ㆍ축산물인 경우 납품한 시점부터 2일 이내",
-                        "3. 제2항 제6호의 경우 판매시즌 종료일로부터 30일 이내. 다만, “회사” 또는 “파트너사”의 사유로 30일을 초과될 것으로 예상될 경우에는 판매시즌 종료일 15일 이전 상호 서면 합의로 그 기간을 연장할 수 있다."]
+                          "1. 제2항 제3호 및 제4호의 경우 납품일로부터 10 영업일 이내. 다만, 납품일에 제2항 제3호 및 제4호에 해당하는 사유를 외견상 즉시 발견할 수 없는 합리적인 사유가 있는 경우에는 상호 별도의 합의로 그 기간을 연장할 수 있다.",
+                          "2. 제2항 제3호 및 제4호에 따른 상품이 농ㆍ수ㆍ축산물인 경우 납품한 시점부터 2일 이내",
+                          "3. 제2항 제6호의 경우 판매시즌 종료일로부터 30일 이내. 다만, “회사” 또는 “파트너사”의 사유로 30일을 초과될 것으로 예상될 경우에는 판매시즌 종료일 15일 이전 상호 서면 합의로 그 기간을 연장할 수 있다."]
                     },
                 ],
             },
@@ -2391,7 +2757,7 @@ section + section{padding-top:120px;}
 .fair_trade_standard_body { padding-left: 24px; }
 .fair_trade_standard_body > p { margin: 0 0 16px; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
 .fair_trade_standard_sections > li > article.gray_box { padding: 20px 40px;  border-radius: 0; }
-.fair_trade_standard_sections > li > article.gray_box > p { margin: 0; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+.fair_trade_standard_sections > li > article.gray_box p { margin: 0; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
 .num_list {padding: 0; list-style: none; counter-reset: standard-item; }
 .num_list > li { margin-left: 0; padding-left: 32px; color: #67676f; font-size: 1.8rem; line-height: 1.5; position: relative; counter-increment: standard-item; }
 .num_list > li::before { content: counter(standard-item); width: 20px; height: 20px; border: 1px solid #67676f; border-radius: 50%; color: #67676f; font-size: 1.2rem; line-height: 1; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 4px; left: 0; box-sizing: border-box; }
@@ -2574,7 +2940,7 @@ line-height: 1.24;
     .fair_trade_standard_body { gap: 20px; }
     .fair_trade_standard_body > p { margin: 0; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .fair_trade_standard_sections > li > article.gray_box { padding: 16px 20px; }
-    .fair_trade_standard_sections > li > article.gray_box > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .fair_trade_standard_sections > li > article.gray_box p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .num_list > li { padding-left: 28px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .num_list > li::before { width: 18px; height: 18px; font-size: 1.1rem; top: 2px; }
     .num_list > li > strong { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
@@ -2736,7 +3102,7 @@ letter-spacing: -0.01em;
 
 
 }
-.panel_third_depth .reward_table_scroll {
+.panel_third_depth .common_table_scroll {
     width: 100%;
     margin-top: 20px;
     padding:0 20px;
@@ -2744,14 +3110,14 @@ letter-spacing: -0.01em;
     -webkit-overflow-scrolling: touch;
 }
 
-.panel_third_depth .reward_table {
+.panel_third_depth .common_table {
     width: 100%;
     min-width: 640px;
     border-collapse: collapse;
     table-layout: fixed;
     position: relative;
 }
-.panel_third_depth .reward_table:before{
+.panel_third_depth .common_table:before{
     content: '';
     width: 100%;
     height: 1px;
@@ -2762,14 +3128,14 @@ letter-spacing: -0.01em;
     z-index: 1;
     display: block;
 }
-.panel_third_depth .reward_table th,
-.panel_third_depth .reward_table td {
+.panel_third_depth .common_table th,
+.panel_third_depth .common_table td {
     border-bottom: 1px solid #e5e5e9;
     vertical-align: top;
     text-align: left;
 }
 
-.panel_third_depth .reward_table th {
+.panel_third_depth .common_table th {
     padding:27px 24px;
     background-color: #f8f8f8;
     color: #161616;
@@ -2777,23 +3143,23 @@ letter-spacing: -0.01em;
     font-weight: 700;
     line-height: 1.5;
 }
-.panel_third_depth .reward_table th + th{
+.panel_third_depth .common_table th + th{
     border-left: 1px solid #e5e5e9;
 }
 
 
-.panel_third_depth .reward_table td{
+.panel_third_depth .common_table td{
     padding:21px 24px;
 }
-.panel_third_depth .reward_table td p {
+.panel_third_depth .common_table td p {
     margin: 0;
     font-size: 1.8rem;
     line-height: 1.4;
 }
-.panel_third_depth .reward_table td p + p {
+.panel_third_depth .common_table td p + p {
     margin-top: 12px;
 }
-.panel_third_depth .reward_table_sub {
+.panel_third_depth .common_table_sub {
     margin: 0 0 12px;
     color: #4095F5;
     font-size: 1.6rem;
@@ -3013,17 +3379,17 @@ letter-spacing: -0.01em;
     .cp_manager_banner > figcaption > p { font-size: 1.6rem; }
     .cp_manager_banner > figcaption > p + p { margin-top: 12px; font-size: 1.6rem; }
     .cp_manager_banner + p{margin-top:40px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-    .panel_third_depth .reward_table th,
-    .panel_third_depth .reward_table td {
+    .panel_third_depth .common_table th,
+    .panel_third_depth .common_table td {
         padding: 16px 12px;
     }
-    .panel_third_depth .reward_table th {
+    .panel_third_depth .common_table th {
         font-size: 1.6rem;
     }
-    .panel_third_depth .reward_table td p {
+    .panel_third_depth .common_table td p {
         font-size: 1.6rem;
     }
-    .panel_third_depth .reward_table_sub {
+    .panel_third_depth .common_table_sub {
         font-size: 1.4rem;
     }
 
