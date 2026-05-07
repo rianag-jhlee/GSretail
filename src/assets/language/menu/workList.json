@@ -183,53 +183,53 @@
 
 
     {
-        "depth1": "ABOUT", "depth2": "CEO인사말", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
+        "depth1": "About GSR", "depth2": "CEO 인사말", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
         "path": "gsrab/01/gsrab01",
-        "link": "/gsrab01",
+        "link": "/gsrab01" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": "ing",
         "note": ""
     },
     {
         "depth1": "", "depth2": "회사소개", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
-        "path": "gsrab/02/gsrab02",
-        "link": "/gsrab02",
+        "type": "page",
+        "path": "gsrab/01/gsrab02",
+        "link": "/gsrab02" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": "ing",
         "note": ""
     },
     {
         "depth1": "", "depth2": "연혁", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
-        "path": "gsrab/03/gsrab03",
-        "link": "/gsrab03",
+        "type": "page",
+        "path": "gsrab/01/gsrab03",
+        "link": "/gsrab03" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": "ing",
         "note": ""
     },
     {
         "depth1": "", "depth2": "CI/BI", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
-        "path": "gsrab/04/gsrab04",
-        "link": "/gsrab04",
+        "type": "page",
+        "path": "gsrab/01/gsrab04",
+        "link": "/gsrab04" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": "ing",
         "note": ""
     },
     {
         "depth1": "", "depth2": "위치", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
-        "type": "",
-        "path": "gsrab/05/gsrab05",
-        "link": "/gsrab05",
+        "type": "page",
+        "path": "gsrab/01/gsrab05",
+        "link": "/gsrab05" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
+        "status": "ing",
         "note": ""
     },
 
@@ -1578,7 +1578,5 @@
         "endDate": "",
         "status": "",
         "note": "gsrcu01에서 확인"
-    }
-    
-    
+    }    
 ]
