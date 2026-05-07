@@ -95,10 +95,8 @@ img { width: 100%; height: auto; object-fit: cover;display: block; }
 .inner { width: 1460px; max-width: 100%; margin: 0 auto; padding: 0 20px; }
 .inner > header h2 { margin: 0; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .inner > header p { margin: 16px 0 0; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-
-.visual { width: 100%; min-height:100vh; padding: 0 0 0 250px; position: relative; display: flex; align-items: center; background-image: url("@/assets/images/dummy/gsrab01_01.png"); background-repeat: no-repeat; background-position: center; background-size: cover; }
-/* .visual::before { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1; background-color: rgba(0, 0, 0, 0.2); content: ""; } */
-.visual > strong { margin: 0; padding: 200px 0; position: relative; z-index: 2; color: #ffffff; font-size: 7.2rem; font-weight: 700; line-height: 1.24; letter-spacing: -0.02em; }
+.visual { width: 100%; min-height:100vh; padding: 0 clamp(20px, 5vw, 80px) 0 clamp(20px, 13vw, 250px); position: relative; display: flex; align-items: center; background-image: url("@/assets/images/dummy/gsrab01_01.png"); background-repeat: no-repeat; background-position: center; background-size: cover; }
+.visual > strong { margin: 0; padding: 200px 0; position: relative; z-index: 2; color: #ffffff; font-size: clamp(3.2rem, 2.4rem + 2.5vw, 7.2rem); font-weight: 700; line-height: 1.24; letter-spacing: -0.02em; }
 .about { padding: 200px 0; background-color: #ffffff; }
 .about .inner > header { text-align: center; }
 .about .inner > .img_wrap { margin: 120px 0 0; overflow: hidden; }
@@ -107,7 +105,6 @@ img { width: 100%; height: auto; object-fit: cover;display: block; }
 .prepare .inner > header { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; justify-content: space-between;}
 .prepare .inner > header > h2 { margin: 0; text-align: left; }
 .prepare .inner > header > div { min-width: 0; }
-/* .prepare .inner > header > div > p { margin: 0; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.24px; text-align: left; } */
 .prepare .inner > header > div > p + p { margin: 10px 0 0; }
 .prepare .inner > .prepare_photos { margin: 140px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: 700fr 340fr 340fr; gap: 20px; }
 .prepare .inner > .prepare_photos > li { margin: 0; padding: 0; }
