@@ -15,15 +15,12 @@
             </nav>
 
             <div class="quick" v-if="t.quick" ref="quickWrap">
-    <ul
-        ref="quickList"
-        :style="quickStyle"
-    >
-        <li v-for="item in t.quick" :key="item.title">
-            <a :href="item.path">{{ item.title }}</a>
-        </li>
-    </ul>
-</div>
+                <ul ref="quickList" :style="quickStyle">
+                    <li v-for="item in t.quick" :key="item.title">
+                        <a :href="item.path">{{ item.title }}</a>
+                    </li>
+                </ul>
+            </div>
 
             <div class="info">
                 <div>

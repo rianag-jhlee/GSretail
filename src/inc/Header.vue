@@ -5,27 +5,27 @@
 
             <nav id="gnb_nav">
                 <ul class="depth1">
-                    <li v-for="item1 in menuList" :key="item1.title" @focusin="setFocus($event)"
+                    <li v-for="item1 in chunkedMenuList" :key="item1.title" @focusin="setFocus($event)"
                         @focusout="removeFocus($event)" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
-                        <!-- 1depth -->
+
                         <a :href="getLink(item1)" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a>
 
-                        <!-- 2depth -->
-                        <ul class="depth2" v-if="item1.children && item1.children.length">
-                            <li v-for="item2 in item1.children" :key="item2.title">
-                                <span v-if="item2.children && item2.children.length">{{ item2.title }}</span>
-                                <a v-else :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{ item2.title
-                                }}</a>
+                        <div class="depth2_wrap" v-if="item1.chunkedChildren && item1.chunkedChildren.length">
+                            <ul class="depth2" v-for="(group, idx) in item1.chunkedChildren" :key="idx">
+                                <li v-for="item2 in group" :key="item2.title">
+                                    <!-- 3Depth 미노출로 span 제거 <span v-if="item2.children && item2.children.length">{{ item2.title }}</span> -->
+                                    <a :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{
+                                        item2.title }}</a>
 
-                                <!-- 3depth -->
-                                <ul class="depth3" v-if="item2.children && item2.children.length">
-                                    <li v-for="item3 in item2.children" :key="item3.title">
-                                        <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{ item3.title
-                                        }}</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                                    <ul class="depth3" v-if="item2.children && item2.children.length">
+                                        <li v-for="item3 in item2.children" :key="item3.title">
+                                            <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{
+                                                item3.title }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -34,18 +34,19 @@
             <div class="quick_wrap">
                 <ul class="quick">
                     <li v-for="item1 in quickMenu" :key="item1.title">
-                        <strong v-if="item1.children && item1.children.length" @click="toggleMenu($event)">{{ item1.title }}</strong>
+                        <strong v-if="item1.children && item1.children.length" @click="toggleMenu($event)">{{
+                            item1.title }}</strong>
                         <a v-else :href="item1.path" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a>
                         <ul v-if="item1.children && item1.children.length">
                             <li v-for="item2 in item1.children" :key="item2.title">
                                 <strong v-if="item2.children && item2.children.length">{{ item2.title }}</strong>
                                 <a v-else :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{ item2.title
-                                }}</a>
+                                    }}</a>
                                 <!-- 3depth -->
                                 <ul class="depth3" v-if="item2.children && item2.children.length">
                                     <li v-for="item3 in item2.children" :key="item3.title">
                                         <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{ item3.title
-                                        }}</a>
+                                            }}</a>
                                     </li>
                                 </ul>
                             </li>
@@ -96,14 +97,20 @@ export default {
 
 
             if (!item.path || item.path === "#none" || item.path === "#") return "#";
-            return item.blank ? item.path : `/${props.lang}${item.path}`;
+            return item.blank ? item.path : `/${item.path}`;
         };
 
         // 기존 hover/focus 기능
-        const handleMouseEnter = (e) => e.currentTarget.classList.add("is-open");
+        const handleMouseEnter = (e) => {
+            e.currentTarget.classList.add("is-open");
+            console.log(e.currentTarget.textContent);
+            document.getElementById("header").classList.add('add_bg');
+        }
         const handleMouseLeave = (e) => {
             const li = e.currentTarget;
             if (!li.contains(e.relatedTarget)) li.classList.remove("is-open");
+
+            document.getElementById("header").classList.remove('add_bg');
         };
 
         // quick menu
@@ -113,7 +120,7 @@ export default {
 
         // const openMenu = ref(null);
         const toggleMenu = (e) => {
-            if(e.currentTarget.parentElement.classList.contains("is-open")){
+            if (e.currentTarget.parentElement.classList.contains("is-open")) {
                 e.currentTarget.parentElement.classList.remove("is-open");
             } else {
                 e.currentTarget.parentElement.classList.add("is-open");
@@ -172,6 +179,29 @@ export default {
             lastScrollY = currentScrollY;
         };
 
+        // 2depth 아이템을 3개씩 나누는 함수
+        const chunkArray = (array, size) => {
+            const result = [];
+            for (let i = 0; i < array.length; i += size) {
+                result.push(array.slice(i, i + size));
+            }
+            return result;
+        };
+
+        // 2depth가 그룹화된 메뉴 리스트
+        const chunkedMenuList = computed(() => {
+            return menuList.value.map(item => {
+                if (item.children && item.children.length > 0) {
+                    return {
+                        ...item,
+                        // children을 3개씩 묶은 이차원 배열로 변환
+                        chunkedChildren: chunkArray(item.children, 3)
+                    };
+                }
+                return item;
+            });
+        });
+
         onMounted(() => {
             window.addEventListener("scroll", handleScroll);
         });
@@ -192,6 +222,7 @@ export default {
             changeLang, //language change
 
             toggleMenu,
+            chunkedMenuList, // 템플릿에서 사용할 새로운 변수
         };
     },
 };

@@ -36,9 +36,9 @@
         "children": [
             {
                 "title": "GS25",
-                "path": "#none",
+                "path": "gsrbr010101",
                 "children": [
-                    { "title": "차별화 상품/서비스", "path": "#none" },
+                    { "title": "차별화 상품/서비스", "path": "gsrbr010101" },
                     { "title": "신선강화점", "path": "#none", "blank": false },
                     { "title": "매장/서비스", "path": "#none" },
                     { "title": "상생협력", "path": "#none" },
@@ -48,7 +48,7 @@
             },
             {
                 "title": "GS더프레시",
-                "path": "#none",
+                "path": "gsrbr020101",
                 "children": [
                     { "title": "신선 산지 안내", "path": "#none" },
                     { "title": "맛/선도 관리", "path": "#none", "blank": false },
@@ -58,12 +58,12 @@
             },
             {
                 "title": "GS SHOP",
-                "path": "#none",
+                "path": "gsrbr0301",
                 "children": []
             },
             {
                 "title": "우리동네 GS",
-                "path": "#none",
+                "path": "gsrbr04",
                 "children": [
                     { "title": "배달·픽업", "path": "#none" },
                     { "title": "와인25플러스", "path": "#none" },
@@ -73,37 +73,37 @@
             },
             {
                 "title": "우딜",
-                "path": "#none",
+                "path": "gsrbr10",
                 "children": []
             },
             {
                 "title": "GS PAY",
-                "path": "#none",
+                "path": "gsrbr05",
                 "children": []
             },
             {
                 "title": "GS ALL",
-                "path": "#none",
+                "path": "gsrbr06",
                 "children": []
             },
             {
                 "title": "POP",
-                "path": "#none",
+                "path": "gsrbr07",
                 "children": []
             },
             {
                 "title": "유어스",
-                "path": "#none",
+                "path": "gsrbr08",
                 "children": []
             },
             {
                 "title": "리얼프라이스",
-                "path": "#none",
+                "path": "gsrbr09",
                 "children": []
             },
             {
                 "title": "개발/임대 사업",
-                "path": "#none",
+                "path": "gsrbr1101",
                 "children": []
             }
         ]
@@ -114,22 +114,22 @@
         "children": [
             {
                 "title": "기업지배구조",
-                "path": "#none",
+                "path": "gsrin0101",
                 "children": []
             },
             {
                 "title": "경영성과",
-                "path": "#none",
+                "path": "gsrin0201",
                 "children": []
             },
             {
                 "title": "공시정보",
-                "path": "#none",
+                "path": "gsrin0301",
                 "children": []
             },
             {
                 "title": "IR자료실",
-                "path": "#none",
+                "path": "gsrin04",
                 "children": []
             }
         ]
@@ -140,22 +140,22 @@
         "children": [
             {
                 "title": "지속가능경영",
-                "path": "#none",
+                "path": "gsrsu0101",
                 "children": []
             },
             {
                 "title": "환경",
-                "path": "#none",
+                "path": "gsrsu0201",
                 "children": []
             },
             {
                 "title": "사회적 책임",
-                "path": "#none",
+                "path": "gsrsu03010101",
                 "children": []
             },
             {
                 "title": "컴플라이언스",
-                "path": "#none",
+                "path": "gsrsu040101",
                 "children": []
             }
         ]
@@ -166,17 +166,17 @@
         "children": [
             {
                 "title": "보도자료",
-                "path": "#none",
+                "path": "gsrne01",
                 "children": []
             },
             {
                 "title": "GS리테일 Newsroom",
-                "path": "#none",
+                "path": "gsrne02",
                 "children": []
             },
             {
                 "title": "GS리테일 factbook",
-                "path": "#none",
+                "path": "gsrne03",
                 "children": []
             }
         ]

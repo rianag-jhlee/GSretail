@@ -375,9 +375,10 @@ export default {
                     slidesPerView: "auto",
                     spaceBetween: 16,
                     centeredSlides: true, // 루프 계산을 위해 활성화
-                    loop: slideCount >= 3,
-                    loopedSlides: slideCount,
-                    loopAdditionalSlides: 1,
+                    loop:false
+                    // loop: slideCount >= 3,
+                    // loopedSlides: slideCount,
+                    // loopAdditionalSlides: 1,
                 });
             } else {
                 // PC 로직 유지 (기존 코드와 동일)
