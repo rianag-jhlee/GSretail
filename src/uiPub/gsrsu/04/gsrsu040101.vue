@@ -46,22 +46,7 @@
                             <h3>연혁</h3>
                             <p>GS그룹의 정도경영 추진 방침에 따라 당사도 1995년도부터 해당 방침에 따른 다양한 활동을 전개 해 나가고 있습니다.</p>
                         </header>
-                        <ul class="history_list">
-                            <li v-for="item in t.HistoryItems" :key="item.period" class="history_item">
-                                <div>
-                                    <strong class="history_period">{{ item.period }}</strong>
-                                    <p v-if="item.summary" class="history_summary">{{ item.summary }}</p>
-                                </div>
-                                <div class="history_body">
-                                    <dl class="history_detail_list">
-                                        <template v-for="(detail, idx) in item.details" :key="item.period + '-' + idx">
-                                            <dt v-if="detail.term">{{ detail.term }}</dt>
-                                            <dd>{{ detail.desc }}</dd>
-                                        </template>
-                                    </dl>
-                                </div>
-                            </li>
-                        </ul>
+                        <HistoryTimeline :items="t.HistoryItems" />
                     </section>
                 </div>
                 <!-- 지침 -->
@@ -817,6 +802,7 @@ import CardItem from "@/components/CardItem.vue";
 import NumberedInfoList from "@/components/NumberedInfoList.vue";
 import ConsentInfoBox from "@/components/ConsentInfoBox.vue";
 import ProcessFlowArrow from "@/components/ProcessFlowArrow.vue";
+import HistoryTimeline from "@/components/HistoryTimeline.vue";
 import imgEthics01 from "@/assets/images/dummy/gsrsu040101_01.png";
 import imgEthics02 from "@/assets/images/dummy/gsrsu040101_02.png";
 import imgEthics03 from "@/assets/images/dummy/gsrsu040101_03.png";
