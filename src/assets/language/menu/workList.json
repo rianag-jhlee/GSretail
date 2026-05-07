@@ -1442,10 +1442,10 @@
     {
         "depth1": "고객센터", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrcu/01/gsrcu01",
-        "link": "/gsrcu01" ,
-        "startDate": "26-05-07",
-        "endDate": "26-05-07",
+        "path": "gsrab/01/gsrab01",
+        "link": "/gsrab01" ,
+        "startDate": "",
+        "endDate": "",
         "status": "com",
         "note": ""
     },
@@ -1456,8 +1456,8 @@
         "link": "/gsrcu01" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
-        "note": "gsrcu01에서 확인"
+        "status": "com",
+        "note": ""
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "신청완료", "depth5": "", "depth6": "",
