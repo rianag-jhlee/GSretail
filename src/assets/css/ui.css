@@ -55,18 +55,19 @@ footer nav {display:flex;}
 footer nav a {letter-spacing:-0.02em; line-height:150%; display:block;}
 footer nav dt a {color:#000; font-size:1.6rem; font-weight:600;}
 footer nav dd {margin-top:9px; display:flex;}
-footer nav dd a, footer nav dd a:visited {width:calc(100vw / 6); max-width:184px; padding:3px 0; color:#666;}
+footer nav dd a, footer nav dd a:visited {width:calc(100vw / 6.5); max-width:184px; padding:3px 0; color:#666;}
 
 footer .quick {margin-top:40px; padding-top:19px; padding-bottom:20px; border-top:1px solid #E5E5E9; border-bottom:1px solid #E5E5E9; overflow:hidden;}
 footer .quick ul {display:flex; align-items:center; flex-wrap:nowrap;}
-footer .quick a {height:21px; padding:0 16px; color:#000; font-size:1.4rem; font-weight:700; letter-spacing:-0.02em; line-height:21px; display:block;}
+footer .quick a {height:21px; padding:0 16px; color:#000; font-size:1.4rem; font-weight:700; letter-spacing:-0.02em; line-height:21px; white-space:nowrap; display:block;}
 footer .quick li:hover a {font-weight:600;}
 footer .quick li:first-child a {padding-left:0;}
 
 footer .quick.slide ul {transition:transform 0.4s cubic-bezier(0.1, 0.57, 0.1, 1);}
 
-footer .info * {padding:19px 0 20px; color:#999; font-size:1.4rem; letter-spacing:-0.02em; line-height:150%;}
-footer .info div {display:flex; align-items:center; gap:32px;}
+footer .info * {color:#999; font-size:1.4rem; font-weight:700; letter-spacing:-0.01em; line-height:150%;}
+footer .info div {display:flex; align-items:center; gap:0 32px; flex-wrap:wrap;}
+footer .info div * {padding:19px 0 20px;}
 footer .info div strong {font-weight:600;}
 footer .info {display:flex; align-items:center; justify-content:space-between;}
 
@@ -148,14 +149,14 @@ h5 {font-size:1.8rem;}
     #header h1 a {width:110px;}
     #header nav .depth1 > li > a {padding:0 10px; font-size:1.4rem;}
     #header .quick > li:first-child > * {padding:2px 8px; font-size:1.4rem;}
+    footer .quick li:last-child a {padding-right:0;}
     #header .language button {padding:2px 8px; font-size:1.4rem;}
 
-    footer .info {display:block;}
-    footer .info * {padding:10px 0;}
-    footer .info div {display:block;}
-    footer .info div strong {display:block;}
-    footer .info div span {font-size:1.2rem; display:inline-block;}
-    footer .info div span + span {margin-left:10px;}
+    footer .info {flex-wrap:wrap;}
+    footer .info div {width:100%; padding-top:19px;}
+    footer .info div strong {width:100%; padding:0;}
+
+    footer .go_top.isStatic {margin-top:-40px;}
 }
 
 @media screen and (max-width:768px) {
@@ -165,12 +166,20 @@ h5 {font-size:1.8rem;}
 
     footer {padding-top:80px;}
     footer nav {display:none;}
-    footer .quick {margin-top:0; margin-right:-20px; margin-left:-20px; padding:13px 20px 14px; border:0; position:relative;}
+    footer .quick {margin-top:0; margin-right:-20px; margin-left:-20px; padding:13px 0 14px; border:0; position:relative;}
     footer .quick:before, footer .quick:after {border:1px solid #E5E5E9; content:''; position:absolute; right:20px; left:20px; display:block;}
     footer .quick:before {top:-1px;}
     footer .quick:after {bottom:-1px;}
-    footer .quick a {padding:0 16px; font-size:1.4rem; white-space:nowrap;}
+    footer .quick ul {padding-left:20px;}
+    footer .quick a {padding:0 16px; font-size:1.4rem;}
     footer .quick li:first-child a {padding-left:0;}
+    footer .quick li:last-child a {padding-right:20px;}
+
+    footer .info div {display:block;}
+    footer .info div * {padding:0; font-weight:700; line-height:140%; display:block !important;}
+    footer .info div span {margin-top:4px;}
+    footer .info div span + span {margin-left:0;}
+    footer .info p {margin-top:24px;}
 
     footer .go_top {line-height:124%;}
     footer .go_top.isStatic {margin-top:-52px;}
