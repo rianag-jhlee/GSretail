@@ -821,6 +821,7 @@
                                     :tab-items="t.Tabs3_3" 
                                     tab-class="type_04" 
                                     class="mb40" 
+                                    :tab-slide="true" 
                                 />
                                 <div class="inner_content">
                                     <!-- gsrsu03030201 -->
@@ -1271,85 +1272,129 @@
 
                                         <!-- 문의 폼 입력 영역 (필수 요소만 유지) -->
                                         <div class="form_container">
-                                            <article>
-                                                <strong class="consent_tit">{{ }}</strong>
-                                                <ul>
-                                                    <li>
-                                                        <span></span>
-                                                        <div>
-                                                            <Inputs type="text" placeholder="문구를 입력해주세요" />
+                                            <article class="listening_form_wrap">
+                                                <div class="form_section">
+                                                    <div class="form_header">
+                                                        <h5 class="form_title">{{ lp.part1.title }}</h5>
+                                                        <span class="required_guide">{{ lp.part1.requiredText }}</span>
+                                                    </div>
+                                                    <div class="form_body">
+                                                        <div class="form_row">
+                                                            <div class="label_item">
+                                                                <span class="label_text">{{ lp.part1.nameLabel }}</span>
+                                                                <span class="required_mark">*</span>
+                                                            </div>
+                                                            <div class="input_item">
+                                                                <Inputs type="text" v-model="formData.name" :placeholder="lp.part1.namePlaceholder" />
+                                                            </div>
                                                         </div>
-                                                    </li>
-                                                    <li>
-                                                        <span></span>
-                                                        <div>
-                                                            <Inputs type="text" placeholder="" />
-                                                            @
-                                                            <Inputs type="text" placeholder="" /> 
-                                                            <SelectBox :options="[{ value: '', label: '직접입력' },{ value: 'A', label: '옵션 A' }, { value: 'B', label: '옵션 B' }]" v-model="selected" initMsg="선택해주세요" />
+                                                        <div class="form_row">
+                                                            <div class="label_item">
+                                                                <span class="label_text">{{ lp.part1.emailLabel }}</span>
+                                                                <span class="required_mark">*</span>
+                                                            </div>
+                                                            <div class="input_group email">
+                                                                <div class="group_wrap">
+                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="이메일 아이디" /></div>
+                                                                    <span class="unit">@</span>
+                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="도메인 입력" /></div>
+                                                                </div>
+                                                                <SelectBox :options="lp.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
+                                                            </div>
                                                         </div>
-                                                    </li>
-                                                    <li>
-                                                        <span></span>
-                                                        <div>
-                                                            <SelectBox :options="[{ value: '', label: '010' },{ value: 'A', label: '옵션 A' }, { value: 'B', label: '옵션 B' }]" v-model="selected" initMsg="선택해주세요" />
-                                                            -
-                                                            <Inputs type="text" placeholder="" />
-                                                            -
-                                                            <Inputs type="text" placeholder="" />
+                                                        <div class="form_row">
+                                                            <div class="label_item">
+                                                                <span class="label_text">{{ lp.part1.telLabel }}</span>
+                                                                <span class="required_mark">*</span>
+                                                            </div>
+                                                            <div class="input_group">
+                                                                <div class="input_flex_item">
+                                                                    <SelectBox :options="lp.part1.telOptions" v-model="formData.tel1" initMsg="선택" />
+                                                                </div>
+                                                                <span class="unit">-</span>
+                                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
+                                                                <span class="unit">-</span>
+                                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel3" /></div>
+                                                            </div>
                                                         </div>
-                                                    </li>
-                                                </ul>
-                                            </article>
-                                            <article>
-                                                <strong class="consent_tit">{{  }}</strong>
-                                                <ul>
-                                                    <li>
-                                                        <span></span>
-                                                        <div><SelectBox :options="[{ value: '', label: '010' },{ value: 'A', label: '옵션 A' }, { value: 'B', label: '옵션 B' }]" v-model="selected" initMsg="사업장 선택" /></div>
-                                                    </li>
-                                                    <li>
-                                                        <span></span>
-                                                        <div><Inputs type="text" placeholder="" /></div>
-                                                    </li>
-                                                    <li>
-                                                        <span></span>
-                                                        <div><Inputs type="text" placeholder="" /></div>
-                                                    </li>
-                                                    <li>
-                                                        <span></span>
-                                                        <div>
-                                                            <Textarea
-                                                                v-model="body"
-                                                                label="문의 내용"
-                                                                name="inquiry_body"
-                                                                placeholder="내용을 입력해 주세요"
-                                                                hint="최대 500자까지 입력할 수 있습니다."
-                                                                :rows="6"
-                                                                :maxlength="500"
-                                                            />
+                                                    </div>
+                                                </div>
 
+                                                <div class="form_section">
+                                                    <div class="form_header">
+                                                        <h5 class="form_title">{{ lp.part2.title }}</h5>
+                                                        <span class="required_guide">{{ lp.part1.requiredText }}</span>
+                                                    </div>
+                                                    <div class="form_body">
+                                                        <div class="form_row">
+                                                            <div class="label_item">
+                                                                <span class="label_text">{{ lp.part2.categoryLabel }}</span>
+                                                                <span class="required_mark">*</span>
+                                                            </div>
+                                                            <div class="input_item full">
+                                                                <SelectBox :options="lp.part2.categoryOptions" v-model="formData.category" initMsg="사업장 선택" class="w428" />
+                                                            </div>
                                                         </div>
-                                                    </li>
-                                                    <li>
-                                                        <span></span>
-                                                        <div>
-                                                            <p>
-                                                                <Buttons Buttons btn-class="btn_xl border">{{  }}</Buttons>
-                                                                <em></em>
-                                                            </p>
-                                                            <i></i>
+                                                        <div class="form_row">
+                                                            <div class="label_item">
+                                                                <span class="label_text">{{ lp.part2.storeLabel }}</span>
+                                                                <span class="required_mark">*</span>
+                                                            </div>
+                                                            <div class="input_complex">
+                                                                <Inputs type="text" v-model="formData.storeName" placeholder="매장명을 입력해주세요" class="w428"/>
+                                                                <p class="guide_msg">{{ lp.part2.storeGuide }}</p>
+                                                            </div>
                                                         </div>
-                                                    </li>
-                                                    <li>
-                                                        <span></span>
-                                                        <div><SelectBox :options="[{ value: '', label: '010' },{ value: 'A', label: '옵션 A' }, { value: 'B', label: '옵션 B' }]" v-model="selected" initMsg="이메일" /></div>
-                                                    </li>
-                                                </ul>
+                                                        <div class="form_row">
+                                                            <div class="label_item">
+                                                                <span class="label_text">{{ lp.part2.subjectLabel }}</span>
+                                                                <span class="required_mark">*</span>
+                                                            </div>
+                                                            <div class="input_item full">
+                                                                <Inputs type="text" v-model="formData.subject" placeholder="제목을 입력해주세요" class="w428"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form_row">
+                                                            <div class="label_item">
+                                                                <span class="label_text">{{ lp.part2.contentLabel }}</span>
+                                                                <span class="required_mark">*</span>
+                                                            </div>
+                                                            <div class="input_complex">
+                                                                <Textarea
+                                                                    v-model="formData.body"
+                                                                    :placeholder="lp.part2.contentPlaceholder"
+                                                                    :rows="6"
+                                                                    :maxlength="500"
+                                                                />
+                                                                <p class="guide_msg_multi" v-html="lp.part2.noticeText"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form_row">
+                                                            <div class="label_item">
+                                                                <span class="label_text">{{ lp.part2.fileLabel }}</span>
+                                                            </div>
+                                                            <div class="input_complex">
+                                                                <div class="file_upload_group">
+                                                                    <button type="button" class="btn_file">파일선택</button>
+                                                                    <span class="file_name">선택된 파일 없음</span>
+                                                                </div>
+                                                                <p class="guide_msg">{{ lp.part2.fileNotice }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form_row">
+                                                            <div class="label_item">
+                                                                <span class="label_text">{{ lp.part2.replyLabel }}</span>
+                                                            </div>
+                                                            <div class="input_item full">
+                                                                <SelectBox :options="lp.part2.replyOptions" v-model="formData.replyType" initMsg="회신방법 선택" class="w428"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </article>
                                             <div class="btn-wrap">
-                                                <Buttons btn-class="btn_big primary">big(h:52px)</Buttons>
-                                                <Buttons btn-class="btn_big gray">big(h:52px)</Buttons>
+                                                <Buttons btn-class="btn_big primary">{{ lp.part2.btnSubmit }}</Buttons>
+                                                <Buttons btn-class="btn_big gray">{{ lp.part2.btnCancel }}</Buttons>
                                             </div>
                                         </div>
                                         
@@ -1381,8 +1426,8 @@
 
                                         <div class="committee_detail_area mt80">
                                             <p class="p_desc mb40" v-html="t.protect.informationprotection.Committee.Desc"></p>
-                                            <figure class="diagram_box_wrap">
-                                                <div class="visual_area">
+                                            <figure class="diagram_box_wrap scroll">
+                                                <div class="visual_area scroll_wrap">
                                                     <img 
                                                         :src="isMobile ? t.protect.informationprotection.Committee.imgMo : t.protect.informationprotection.Committee.img" 
                                                         alt="정보보호위원회 구성도"
@@ -1406,6 +1451,7 @@
                                                     :src="isMobile ? t.protect.informationprotection.Policy.imgMo : t.protect.informationprotection.Policy.img" 
                                                     :alt="t.protect.informationprotection.Policy.Title"
                                                 >
+
                                             </div>
                                         </figure>
                                     </section>
@@ -1473,8 +1519,8 @@ import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
 import Pagination from "@/components/Pagination.vue";
 import Inputs from "@/components/Inputs.vue";
-import SelectBox from "@/components/Inputs.vue";
-import Textarea from "@/components/Inputs.vue";
+import SelectBox from "@/components/SelectBox.vue"; 
+import Textarea from "@/components/Textarea.vue";
 
 export default {
     name: "gsrsu03010101",
@@ -1482,6 +1528,20 @@ export default {
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
+            formData: {
+                name: "",
+                emailId: "",
+                emailDomain: "",
+                emailSelect: "",
+                tel1: "",
+                tel2: "",
+                tel3: "",
+                category: "",
+                storeName: "",
+                subject: "",
+                body: "",
+                replyType: ""
+            },
             isMobile: false, // 모바일 여부 체크 변수
             page: 2,
             CTabIdx: 0,      // 1depth
@@ -2360,6 +2420,47 @@ export default {
                                         "연락처를 정확하게 입력해주세요. (홈페이지 내에서 이전 문의이력 확인 불가)",
                                         "로그인 후 고객문의를 접수하시면, 마이페이지에서 문의/답변 내역 확인이 가능합니다.(단,정도경영 제외)"
                                     ],
+                                },
+                                InputWrapcont: {
+                                    part1: {
+                                        title: "제보자 정보",
+                                        requiredText: "* 필수 입력사항",
+                                        nameLabel: "이름",
+                                        namePlaceholder: "이름을 입력해주세요",
+                                        emailLabel: "이메일",
+                                        emailOptions: [
+                                            { value: 'naver.com', label: 'naver.com' },
+                                            { value: 'gmail.com', label: 'gmail.com' }
+                                        ],
+                                        telLabel: "연락처",
+                                        telOptions: [
+                                            { value: '010', label: '010' },
+                                            { value: '011', label: '011' }
+                                        ]
+                                    },
+                                    part2: {
+                                        title: "상담내용",
+                                        categoryLabel: "구분",
+                                        categoryOptions: [
+                                            { value: 'store', label: '편의점/수퍼' },
+                                            { value: 'home', label: '홈쇼핑' }
+                                        ],
+                                        storeLabel: "매장명",
+                                        storeGuide: "* 단, 점포명을 모르시는 경우 점포위치를 적어주세요",
+                                        subjectLabel: "제목",
+                                        contentLabel: "내용",
+                                        contentPlaceholder: "입점 관련 궁금한 사항을 입력 해 주세요",
+                                        noticeText: "※ 매장 관련 제보내용은 정확한 점포명을 작성해 주셔야 보다 원할한 답변을 받아보실수 있습니다.<br/>※ 내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.<br/>※ 제보내용에 욕설이나 비속어가 포함되어 있으면 답변 되지 않을 수 있습니다.",
+                                        fileLabel: "파일첨부",
+                                        fileNotice: "* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)",
+                                        replyLabel: "회신방법",
+                                        replyOptions: [
+                                            { value: 'email', label: '이메일' },
+                                            { value: 'sms', label: 'SMS' }
+                                        ],
+                                        btnSubmit: "신청",
+                                        btnCancel: "취소"
+                                    }
                                 }
                                 
                             }
@@ -2416,6 +2517,10 @@ export default {
     computed: {
         t() {
             return this.langData[this.lang] || this.langData.ko;
+        },
+        // 바인딩 경로 단축을 위한 헬퍼
+        lp() {
+            return this.t.protect.safetymanagement.listening.InputWrapcont;
         }
     },
     mounted() {
@@ -2736,14 +2841,13 @@ export default {
     .safety_management_wrap .consent_list li { font-size: 16px; color: #67676f; margin-bottom: 8px; position: relative; padding-left: 12px; }
     .safety_management_wrap .consent_list li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 1px; background-color: #67676f; }
     .safety_management_wrap .form_table { border-top: 1px solid #242428; }
-    .safety_management_wrap .form_row { display: flex; border-bottom: 1px solid #e5e5e9; align-items: center; }
+    .safety_management_wrap .form_row { display: flex; align-items: center; }
     .safety_management_wrap .form_row .label { width: 134px; padding: 24px; font-size: 16px; color: #161616; }
     .safety_management_wrap .required { color: #fb6432; }
-    .safety_management_wrap .input_item { flex: 1; padding: 12px; }
     .safety_management_wrap input, .safety_management_wrap textarea { width: 100%; padding: 14px 16px; border: 1px solid #c4c4d0; border-radius: 12px; font-size: 16px; }
     .safety_management_wrap textarea { height: 160px; resize: none; }
     .safety_management_wrap .consent_agree {padding-top:24px; border-top:1px solid #D7D7DF; display:flex; justify-content:space-between; align-items:center;}
-    .safety_management_wrap .consent_agree p {font-weight:16px; font-weight:700;}
+    .safety_management_wrap .consent_agree p {font-size:16px; font-weight:700;}
     .btn_primary { background-color: #107af2; color: #ffffff; border-radius: 10px; border: none; font-weight: 700; }
     .btn_gray { background-color: #f2f2f4; color: #161616; border-radius: 10px; border: none; font-weight: 700; }
     .input_wrap {display:flex; align-items:center; justify-content:flex-end;}
@@ -2752,6 +2856,28 @@ export default {
     .noti_non_member span::before {content:''; width:24px; height:24px; background:red; display:inline-block; position:absolute; top:0; left:0px;}
     .noti_non_member ul {padding-left:34px;}
     .listening_form_area article {margin-bottom:40px;}
+    .listening_form_wrap .form_header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #242428; }
+    .listening_form_wrap .form_title { font-size: 24px; font-weight: 700; color: #161616; }
+    .listening_form_wrap .required_guide { font-size: 14px; color: #fb6432; }
+    .form_section:first-of-type {margin-bottom:64px;}
+    .listening_form_wrap .form_body {padding: 24px 0; border-bottom: 1px solid #e5e5e9; }
+    .listening_form_wrap .form_row { display: flex; align-items: flex-start; gap: 8px; padding: 12px 0; }
+    .listening_form_wrap .label_item { display: flex; width: 134px; align-items: center; gap: 4px; padding-top: 14px; }
+    .listening_form_wrap .label_text { font-size: 16px; color: #161616; }
+    .listening_form_wrap .required_mark { color: #fb6432; font-size: 16px; }
+    .listening_form_wrap .input_group { display: flex; align-items: center; gap: 8px;}
+    .listening_form_wrap .input_group .group_wrap { display: flex; align-items: center; gap: 8px;}
+    .listening_form_wrap .input_flex_item { flex: 1; min-width: 0; }
+    .listening_form_wrap .unit { color: #67676f; font-size: 16px; padding: 0 4px; }
+    .listening_form_wrap .input_complex { display: flex; flex-direction: column; gap: 8px;}
+    .listening_form_wrap .guide_msg { font-size: 14px; color: #67676f; }
+    .listening_form_wrap .guide_msg_multi { font-size: 12px; color: #67676f; line-height: 18px; margin-top: 8px; }
+    .listening_form_wrap .file_upload_group { display: flex; align-items: center; gap: 10px; }
+    .listening_form_wrap .btn_file { height: 38px; padding: 0 12px; border: 1px solid #67676f; background: #fff; border-radius: 4px; font-size: 16px; cursor: pointer; }
+    .listening_form_wrap .file_name { font-size: 14px; color: #161616; }
+    .form_container .btn-wrap {display:flex; justify-content:flex-end; gap:8px;}
+    .form_container .btn-wrap * {width:134px;}
+    .w428 {width:428px; display:inline-block;}
 
     /* 정보보호 */
     .blind { position: absolute; width: 1px; height: 1px; clip: rect(0, 0, 0, 0); overflow: hidden; }
@@ -2761,6 +2887,7 @@ export default {
     .information_protection_management .section_title_sub {font-size: 40px; font-weight: 700; color: #161616; letter-spacing: -0.4px; line-height: 1.3; }
     .information_protection_management .p_desc {font-size: 24px; font-weight: 400; color: #161616; letter-spacing: -0.24px; line-height: 1.5; }
     .information_protection_management .diagram_box_wrap { width: 100%; padding: 60px 0; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; }
+    .information_protection_management .diagram_box_wrap.scroll { width: 100%; max-width:335px; background:#fff; overflow: hidden; }
     .information_protection_management .visual_area img { max-width: 100%; height: auto; }
     .information_protection_management .notice_text { font-size: 14px; color: #67676f; }
     .information_protection_management .policy_wrap { width: 100%; border-top: 2px solid #161616; }
@@ -2786,7 +2913,6 @@ export default {
         .customer_satisfaction strong + p {font-size:16px;}
         span.label, p.desc {font-size:16px !important;}
         .num {font-size:16px !important;}
-        .mt60 {margin-top:0;}
         /* 마케팅 지원: 태블릿 2열 */
         .brand_grid { flex-wrap: wrap; }
         .brand_grid li { flex: none; width: calc(50% - 10px); }
@@ -2839,15 +2965,20 @@ export default {
         .information_protection_management .brand_img_box { width: 100%; height: auto; padding: 40px 0; }
         .information_protection_management .notice_wrap {width:100%;}
         .information_protection_management .notice_text {margin-left:20px; margin-right:auto;}
+
+        .listening_form_wrap .form_row {flex-direction:column;}
     }
 
     @media screen and (max-width: 767px) {
-        h3, h4 { font-size: 28px !important; }
+        h3, h4 { font-size:20px !important; }
+        .sub_tab_content {margin-top:0px;}
         .mb100 {margin-bottom:40px;}
         .mb120 {margin-bottom:80px;}
+        :deep(.text_summary) {padding: 60px 0 20px;}
         :deep(.text_summary) br {display:none;}
         .strategy_card {width: 100%; min-width:100%; flex-direction:column;}
         .philosophy_box {padding:20px;}
+        .philosophy_box .btn_icon {width:90%;}
         .item_wrap div {width:200px; height:200px;}
         .item_wrap div strong[data-v-39ac3108]::before {width:30px; height:30px;}
         .item_wrap div strong {font-size:18px;}
@@ -2863,6 +2994,7 @@ export default {
         .policy_wrap table { min-width: 600px; }
         .policy_wrap th, .policy_wrap td { font-size: 16px; padding: 12px 16px; }
         .competency_support ul li {flex-direction:column;}
+        .dream_realization .type_bg {padding:32px 20px;}
         
         /* 하단 섹션 이미지/텍스트 정렬 보정 */
         .wide_info_box { flex-direction: column; }
@@ -2900,5 +3032,35 @@ export default {
         .information_protection_management .award_section .info_box .tit, .information_protection_management .award_section .info_box .date  {text-align:left;}
         .information_protection_management .award_section .info_box .tit span {font-size:16px; font-weight:700;}
         .information_protection_management .award_section .info_box .tit {font-size:14px; font-weight:400; display:flex; flex-direction:column;}
+        .input_item, .input_complex, .input_wrap, .w428 {width:100%;}
+        .form_body .form_row:first-of-type {padding-top:0px;}
+        .listening_form_wrap .input_group.email {flex-direction:column;}
+        .listening_form_wrap .input_group.email .select {width:100%;}
+        .safety_management_wrap .system_item {width:100%;}
+        .safety_management_wrap .system_item {padding: 24px 0 24px 76px;}
+        .safety_management_wrap .text_box::before {width:60px; height:60px; top:50%; transform:translateY(-50%);}
+        .system_item:first-of-type .text_box::before {transform:translateY(0%);}
+        .safety_management_wrap .system_item:nth-of-type(2) .text_box::before {top:50%}
+        .safety_management_wrap .system_item:nth-of-type(2) {padding-top:24px;}
+        .safety_management_wrap .system_item .num { font-size: 16px;}
+        .safety_management_wrap .system_item .tit { font-size: 18px;}
+        .safety_management_wrap .system_item .sub { font-size: 16px;}
+        .safety_management_wrap .text_summary, .safety_management_wrap .section_title_sub {font-size:20px !important;}
+        .safety_management_wrap .consent_agree  {flex-direction:column;}
+        .safety_management_wrap .policy_card_box {padding:32px 20px;}
+        .safety_management_wrap .policy_list_wrap { display: flex;}
+        .safety_management_wrap .policy_item { display: flex; flex-direction:row; align-items: flex-start; gap: 8px; }
+        .safety_management_wrap .item_label {font-size:16px; font-weight: 700; color: #161616; white-space: nowrap; }
+        .safety_management_wrap .item_text { font-size:16px;}
+        .safety_management_wrap .p_desc, .safety_management_wrap .consent_tit {font-size:18px;}
+        .safety_management_wrap .consent_list li, .safety_management_wrap .consent_agree p  {font-size:14px;}
+        .check em {font-size:16px !important;}
+        .guide_text + .input_wrap {margin-top:16px; justify-content:flex-start;}
+        .form_container .btn-wrap {display:flex; justify-content:flex-start; gap:8px;}
+        .form_container .btn-wrap * {width:50%;}
+        .information_protection_management .visual_area.scroll_wrap {width: 100%; overflow-x: auto;  overflow-y: hidden; display: block; -webkit-overflow-scrolling: touch;}
+        .information_protection_management .visual_area.scroll_wrap img {min-width: 700px; width: auto;max-width: none;  display: block;}
+
+
     }
 </style>
