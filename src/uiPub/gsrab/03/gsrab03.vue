@@ -623,7 +623,7 @@ watch([locale, MainTabIdx], async () => {
 });
 </script>
 <style scoped>
-img { width: 100%; height: auto; display: block; object-fit: cover; }
+img { width: 100%; height: auto; object-fit: cover; display: block; }
 .main-container { width: 100%; position: relative; display: block; }
 .title_wrap { width: 100%; max-height: 480px; padding: 10.91% 0 11.25%; text-align: center; position: relative; display: block; background-color: transparent; background-image: url("@/assets/images/dummy/gsrab02_01.png"); background-repeat: no-repeat; background-size: cover; background-position: center -90px; }
 .title_wrap::after { content: ""; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); position: absolute; left: 0; top: 0; z-index: 1; }
@@ -637,16 +637,10 @@ img { width: 100%; height: auto; display: block; object-fit: cover; }
 .history_intro_images { margin: 0; padding: 0; position: relative; }
 .history_intro_images > li { width: 100%; max-width: 432px; aspect-ratio: 432/294; border-radius: 12px; position: absolute; left: 0; top: 0; overflow: hidden; }
 .sec_history :deep(.history_period) { width: auto; padding:7px 0;}
-/* .sec_history :deep(.history_detail_list) { gap: 40px; } */
 .sec_history :deep(.history_detail_row) { grid-template-columns: 40px minmax(0, 1fr); }
 .sec_history :deep(.history_detail_content) { min-height:72px; padding:14.5px 0 30.5px;gap:0; }
 .sec_history :deep(.history_detail_content > dd) { margin-left:12px; }
 .sec_history :deep(.history_term_primary) { padding:14.5px 0;}
-
-section+section{padding:200px 0 0; }
-.header h3 { margin: 0; font-weight: 700; font-size: 4.8rem; line-height: 1.3; letter-spacing: -0.01em; }
-.header p { margin: 16px 0 0; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-.header.center h3, .header.center p { text-align: center; }
 
 @media screen and (max-width: 1024px) {
     .sec_history :deep(.history_detail_content) { grid-auto-flow: row;grid-template-columns: minmax(0, 1fr);}
@@ -654,66 +648,24 @@ section+section{padding:200px 0 0; }
 
 @media screen and (max-width: 768px) {
     .title_wrap { display: none; }
-    .visual_sub { font-size: 2rem; }
-    section+section{padding:60px 0 0; }
-    .content { width: 100%; max-width: 100%; padding: 60px 20px 94px; }
-    .panel { padding: 60px 0 0; }
+    .content { width: 100%; max-width: 100%; padding: 60px 20px 135px; }
+    .panel { padding: 60px 0 100px; }
     .sec_history { grid-template-columns: minmax(0, 1fr); gap: 60px; }
     .history_intro > header { min-height: 0; }
     .history_intro > header > p { display: none; }
     .history_intro > header > h3 { margin-top: 0; font-size: 2.8rem; line-height: 1.35; }
     .history_intro_images { display: none; }
-    .header h3 { font-size: 2.4rem; text-align: left; }
-    .header p { margin-top: 12px; font-weight: 400; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .header.center h3, .header.center p { text-align: left; }
-    .sec_history :deep(.history_period){
-        font-size: 3.2rem;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-    }
-    .sec_history :deep(.history_body){ 
-        margin:0;
-        padding-bottom:94px;
-    }
-    .sec_history :deep(.history_detail_list){
-        gap:0;
-    }
-    .sec_history :deep(.history_item){
-        gap:32px;
-    }
-    .sec_history :deep(.history_list){
-        padding-left:48px;
-    }
-    .sec_history :deep(.history_item::before){
-        width:8px;
-        height:8px;
-        border-width:8px;
-        left:-48px;
-    }
-    .sec_history :deep(.history_item:not(:last-child)::after){
-        left:-36px;
-    }
-    .sec_history :deep(.history_detail_row){
-       gap:10px;
-       padding:0;
-    }
-    .sec_history :deep(.history_term_primary){
-        padding:16px 0;
-    }
-    .sec_history :deep(.history_detail_content){
-        min-height: 95px;
-        padding:16px 0;
-        row-gap:12px;
-    }
-    .sec_history :deep(.history_detail_content > dt),
-    .sec_history :deep(.history_detail_content > dd){
-        font-size: 1.6rem;
-        line-height: 1.24;
-        letter-spacing: 0%;
-
-    }
-    .sec_history :deep(.history_detail_content > dd){
-        margin:0;
-    }
+    .sec_history :deep(.history_period) { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; }
+    .sec_history :deep(.history_body) { margin: 0; padding-bottom: 94px; }
+    .sec_history :deep(.history_detail_list) { gap: 0; }
+    .sec_history :deep(.history_item) { gap: 32px; }
+    .sec_history :deep(.history_list) { padding-left: 48px; }
+    .sec_history :deep(.history_item::before) { width: 8px; height: 8px; border-width: 8px; left: -48px; }
+    .sec_history :deep(.history_item:not(:last-child)::after) { left: -36px; }
+    .sec_history :deep(.history_detail_row) { gap: 10px; padding: 0; }
+    .sec_history :deep(.history_term_primary) { padding: 16px 0; }
+    .sec_history :deep(.history_detail_content) { min-height: 95px; padding: 16px 0; row-gap: 12px; }
+    .sec_history :deep(.history_detail_content > dt), .sec_history :deep(.history_detail_content > dd) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; }
+    .sec_history :deep(.history_detail_content > dd) { margin: 0; }
 }
 </style>
