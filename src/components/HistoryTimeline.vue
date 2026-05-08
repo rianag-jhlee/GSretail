@@ -1,6 +1,6 @@
 <template>
     <ul class="history_list">
-        <li v-for="item in props.items" :key="item.period" class="history_item">
+        <li v-for="item in props.items" :key="item.period" class="history_item" :data-period="item.period">
             <div>
                 <strong class="history_period">{{ item.period }}</strong>
                 <p v-if="item.summary" class="history_summary">{{ item.summary }}</p>

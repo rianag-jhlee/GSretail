@@ -1466,8 +1466,8 @@
         "link": "/gsrcu01" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
-        "note": "gsrcu01에서 확인"
+        "status": "com",
+        "note": ""
     },
     {
         "depth1": "", "depth2": "", "depth3": "창업안내", "depth4": "", "depth5": "", "depth6": "",
