@@ -107,9 +107,9 @@ const locale = ref("ko");
 const t = computed(() => langData[locale.value]);
 </script>
 <style scoped>
-img { width: 100%; height: auto; display: block; object-fit: cover; }
+img { width: 100%; height: auto; object-fit: cover; display: block;  }
 .main-container { width: 100%; position: relative; display: block; }
-.title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; text-align: center; position: relative; display: block; background-color: transparent; background-image: url("@/assets/images/dummy/gsrab02_01.png"); background-repeat: no-repeat; background-size: cover; background-position: center -90px; }
+.title_wrap { width: 100%; max-height: 480px; padding: 10.91% 0 11.25%; text-align: center; position: relative; display: block; background-color: transparent; background-image: url("@/assets/images/dummy/gsrab02_01.png"); background-repeat: no-repeat; background-size: cover; background-position: center -90px; }
 .title_wrap::after { content: ""; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); position: absolute; left: 0; top: 0; z-index: 1; }
 .title_wrap > h2 { color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; position: relative; z-index: 2; }
 .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 200px 20px; position: relative; display: block; }
