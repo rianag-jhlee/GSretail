@@ -5,25 +5,27 @@
         </div>
         <div class="content">
             <Tabs v-model="MainTabIdx" :tab-items="t.MainTabs" tab-class="type_01" :tab-slide="true" />
-            <section v-if="MainTabIdx === 0" class="sec_history">
-                <div class="history_intro">
-                    <header>
-                        <p>{{ t.HistoryIntroPeriod }}</p>
-                        <h3 v-html="t.HistoryIntroTitle"></h3>
-                    </header>
-                    <ul class="history_intro_images">
-                        <li v-for="(img, idx) in t.HistoryImages" :key="'history-img-' + idx">
-                            <img :src="img.src" :alt="img.alt" />
-                        </li>
-                    </ul>
-                </div>
-                <HistoryTimeline :items="t.HistoryItems" />
-            </section>
+            <div v-show="MainTabIdx === 0" class="panel" :aria-label="t.MainTabs?.[0]?.item || ''">
+                <section ref="sectionRef" class="sec_history">
+                    <div class="history_intro">
+                        <header>
+                            <p>{{ t.HistoryIntroPeriod }}</p>
+                            <h3 v-html="t.HistoryIntroTitle"></h3>
+                        </header>
+                        <ul ref="introImagesRef" class="history_intro_images">
+                            <li v-for="(img, idx) in t.HistoryImages" :key="'history-img-' + idx" :style="{ top: (imagePositions[idx] || 0) + 'px' }">
+                                <img :src="img.src" :alt="img.alt" />
+                            </li>
+                        </ul>
+                    </div>
+                    <HistoryTimeline :items="t.HistoryItems" />
+                </section>
+            </div>
         </div>
     </div>
 </template>
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import HistoryTimeline from "@/components/HistoryTimeline.vue";
 import imgHistory1 from "@/assets/images/dummy/gsrab03_01.png";
@@ -34,6 +36,11 @@ import imgHistory5 from "@/assets/images/dummy/gsrab03_05.png";
 import imgHistory6 from "@/assets/images/dummy/gsrab03_06.png";
 
 const MainTabIdx = ref(0);
+const sectionRef = ref(null);
+const introImagesRef = ref(null);
+const imagePositions = ref([]);
+const MOBILE_BP = 768;
+let resizeObserver = null;
 const langData = {
     ko: {
         MainTitle: "연혁",
@@ -48,12 +55,12 @@ const langData = {
         HistoryIntroPeriod: "현재-2019",
         HistoryIntroTitle: "라이프스타일 <br />플랫폼으로 도약",
         HistoryImages: [
-            { src: imgHistory1, alt: "2025년 GS리테일 연혁 이미지" },
-            { src: imgHistory2, alt: "2024년 GS리테일 연혁 이미지" },
-            { src: imgHistory3, alt: "2023년 GS리테일 연혁 이미지" },
-            { src: imgHistory4, alt: "2022년 GS리테일 연혁 이미지" },
-            { src: imgHistory5, alt: "2021년 GS리테일 연혁 이미지" },
-            { src: imgHistory6, alt: "2020년 GS리테일 연혁 이미지" },
+            { period: "2025", entryIdx: 6 , src: imgHistory1, alt: "2025년 GS리테일 연혁 이미지" },
+            { period: "2024", entryIdx: 5, src: imgHistory2, alt: "2024년 GS리테일 연혁 이미지" },
+            { period: "2023", entryIdx: 4, src: imgHistory3, alt: "2023년 GS리테일 연혁 이미지" },
+            { period: "2022", entryIdx: 4, src: imgHistory4, alt: "2022년 GS리테일 연혁 이미지" },
+            { period: "2021", entryIdx: 0, src: imgHistory5, alt: "2021년 GS리테일 연혁 이미지" },
+            { period: "2020", entryIdx: 0, src: imgHistory6, alt: "2020년 GS리테일 연혁 이미지" },
         ],
         HistoryItems: [
             { period: "2025", details: [
@@ -62,13 +69,11 @@ const langData = {
                     "GS리테일"
                 ], desc: "'1천만불 수출의 탑' 수상 공정거래 자율준수프로그램(CP) 등급평가 <br /> 'AA' 등급 획득" },
                 { term: [
-                    "11월",
-                    "GS25"
-                ], desc: "베트남 전역 400호점·하노이 50호점 돌파" },
-                { term: [
-                    "11월",
-                    "GS리테일"
-                ], desc: "ESG평가 2년 연속 'A+' 등급 획득" },
+                    "11월"
+                    ], subDetails: [
+                        { term: "GS25", desc: "베트남 전역 400호점·하노이 50호점 돌파" },
+                        { term: "GS리테일", desc: "ESG평가 2년 연속 'A+' 등급 획득" }
+                    ] },
                 { term: [
                     "10월",
                     "GS25"
@@ -102,7 +107,7 @@ const langData = {
                 },
                 { term: [
                     "1월",
-                    "GS25"
+                    "GS리테일"
                 ], desc: "통합 멤버십 GS ALL 론칭" },
             ] },
             { period: "2024", details: [
@@ -157,12 +162,9 @@ const langData = {
                     "GS25"
                 ], desc: "편의점 업계 최초로 ESG 환경분야 평가 A+(매우 우수) 획득" },
                 { term: [
-                    "9월",
-                    "GS리테일"
-                ], desc: "'우리동네GS' MAU 283만 돌파 (9월 기준 오프라인 유통사 앱 중 1위 기록)" },
-                { term: [
                     "9월"
                 ], subDetails: [
+                    { term: "GS리테일", desc: "'우리동네GS' MAU 283만 돌파 (9월 기준 오프라인 유통사 앱 중 1위 기록)" },
                     { term: "GS SHOP", desc: "홈쇼핑 업계 최초 네트워크 기반 방송시스템(NDI) 구축" }
                 ] },
                 { term: [
@@ -174,22 +176,17 @@ const langData = {
                     "GS리테일"
                 ], desc: "통합 멤버십 출범" },
                 { term: [
-                    "2월",
-                    "GS25"
-                ], desc: "혜자로운 집밥(김혜자 도시락) 재출시" },
-                { term: [
                     "2월"
                 ], subDetails: [
-                    { term: "GS리테일", desc: "2023 대한민국 일하기 좋은 기업 선정" }
+                    { term: "GS25", desc: "혜자로운 집밥(김혜자 도시락) 재출시"},
+                    { term: "GS리테일", desc: "2023 대한민국 일하기 좋은 기업 선정" },
                 ] },
                 { term: [
                     "1월",
-                    "GS리테일"
-                ], desc: "요기요와 손잡고 '요편의점' 서비스 론칭" },
-                { term: [
-                    "1월",
-                    "GS25"
-                ], desc: "제28회 코리아 베스트 디자인 어워드' 브랜드아이덴티티 부문 대상 수상 (GS25 갓생기획)" }
+                ], subDetails: [
+                    { term: "GS리테일", desc: "요기요와 손잡고 '요편의점' 서비스 론칭" },
+                    { term: "GS25", desc: "제28회 코리아 베스트 디자인 어워드' 브랜드아이덴티티 부문 대상 수상 (GS25 갓생기획)" }
+                ] },
             ] },
             { period: "2022", details: [
                 {
@@ -205,10 +202,10 @@ const langData = {
                     "GS THE FRESH"
                 ], desc: "GS THE FRESH 수산물 이력제 도입" },
                 { term: ["10월",], 
-                subDetails:[
-                    { term: "GS리테일", desc: "GS리테일 극지연구소와 기후 위기 대응 업무협약 체결" },
-                    { term: "GS25", desc: "몽골GS25 100호점 오픈" }
-                            ] },
+                  subDetails:[
+                      { term: "GS리테일", desc: "GS리테일 극지연구소와 기후 위기 대응 업무협약 체결" },
+                      { term: "GS25", desc: "몽골GS25 100호점 오픈" }
+                  ] },
                 
                 { term: [
                     "8월",
@@ -248,13 +245,11 @@ const langData = {
                     "5월",
                     "GS리테일"
                 ], desc: "업계 최초 ISO14001·9001동시 인증" },
-                { term: [
-                    "3월",
-                    "GS25"
-                ], desc: "베트남 GS25 100호점 돌파" },
+                    
                 { term: [
                     "3월"
                 ], subDetails: [
+                    { term: "GS25", desc: "베트남 GS25 100호점 돌파" },
                     { term: "GS리테일", desc: "ESG추진위원회 출범" }
                 ] }
             ] },
@@ -331,26 +326,62 @@ const langData = {
 };
 const locale = ref("ko");
 const t = computed(() => langData[locale.value]);
+
+const updateImagePositions = () => {
+    const sec = sectionRef.value;
+    const intro = introImagesRef.value;
+    if (!sec || !intro) return;
+    if (typeof window !== "undefined" && window.innerWidth <= MOBILE_BP) return;
+
+    const introTop = intro.getBoundingClientRect().top;
+    const next = t.value.HistoryImages.map((img) => {
+        const row = sec.querySelector(`.history_item[data-period="${img.period}"]`);
+        if (!row) return 0;
+        let target = row;
+        if (typeof img.entryIdx === "number") {
+            const entries = row.querySelectorAll(".history_detail_row");
+            target = entries[img.entryIdx] || row;
+        }
+        const offset = target.getBoundingClientRect().top - introTop;
+        return Math.max(0, offset);
+    });
+    imagePositions.value = next;
+};
+
+onMounted(async () => {
+    await nextTick();
+    updateImagePositions();
+    if (typeof ResizeObserver !== "undefined" && sectionRef.value) {
+        resizeObserver = new ResizeObserver(updateImagePositions);
+        resizeObserver.observe(sectionRef.value);
+    }
+    window.addEventListener("resize", updateImagePositions);
+});
+
+onUnmounted(() => {
+    resizeObserver?.disconnect();
+    window.removeEventListener("resize", updateImagePositions);
+});
+
+watch([locale, MainTabIdx], async () => {
+    await nextTick();
+    updateImagePositions();
+});
 </script>
 <style scoped>
 img { width: 100%; height: auto; display: block; object-fit: cover; }
 .main-container { width: 100%; position: relative; display: block; }
-.title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; text-align: center; position: relative; display: block; background-color: transparent; background-image: url("@/assets/images/dummy/gsrab02_01.png"); background-repeat: no-repeat; background-size: cover; background-position: center -90px; }
+.title_wrap { width: 100%; max-height: 480px; padding: 10.91% 0 11.25%; text-align: center; position: relative; display: block; background-color: transparent; background-image: url("@/assets/images/dummy/gsrab02_01.png"); background-repeat: no-repeat; background-size: cover; background-position: center -90px; }
 .title_wrap::after { content: ""; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); position: absolute; left: 0; top: 0; z-index: 1; }
 .title_wrap > h2 { color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; position: relative; z-index: 2; }
 .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
-.sec_history { margin-top: 100px; display: grid; grid-template-columns: 460px minmax(0, 1fr); gap: 20px; align-items: start; }
-.history_intro > header {height: 230px;}
+.panel { padding: 120px 0 0; }
+.sec_history { display: grid; grid-template-columns: clamp(280px, 32vw, 480px) minmax(0, 1fr); gap: 20px; align-items: start; }
+.history_intro > header { min-height: 230px; }
 .history_intro > header > p { margin: 0; color: #67676f; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .history_intro > header > h3 { margin: 8px 0 0; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.history_intro_images {  padding: 0; display: flex; flex-direction: column; gap: 20px; }
-.history_intro_images > li {width:432px;  border-radius: 12px; overflow: hidden; }
-.history_intro_images > li:nth-child(1) {margin-top:262px;}
-.history_intro_images > li:nth-child(2) {margin-top:579px;}
-.history_intro_images > li:nth-child(3) {margin-top:505px;}
-.history_intro_images > li:nth-child(4) {margin-top:610px;}
-.history_intro_images > li:nth-child(5) {margin-top:148px;}
-.history_intro_images > li:nth-child(6) {margin-top:157px;}
+.history_intro_images { margin: 0; padding: 0; position: relative; }
+.history_intro_images > li { width: 100%; max-width: 480px; aspect-ratio: 432/294; border-radius: 12px; position: absolute; left: 0; top: 0; overflow: hidden; }
 .sec_history :deep(.history_period) { width: auto; padding:7px 0;}
 /* .sec_history :deep(.history_detail_list) { gap: 40px; } */
 .sec_history :deep(.history_detail_row) { padding-bottom:16px; grid-template-columns: 40px minmax(0, 1fr); }
@@ -363,18 +394,71 @@ section+section{padding:200px 0 0; }
 .header p { margin: 16px 0 0; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .header.center h3, .header.center p { text-align: center; }
 
+@media screen and (max-width: 1024px) {
+    .sec_history :deep(.history_detail_content) { grid-auto-flow: row;grid-template-columns: minmax(0, 1fr);}
+}
+
 @media screen and (max-width: 768px) {
     .title_wrap { display: none; }
     .visual_sub { font-size: 2rem; }
     section+section{padding:60px 0 0; }
     .content { width: 100%; max-width: 100%; padding: 60px 20px 94px; }
-    .sec_history { margin-top: 40px; grid-template-columns: minmax(0, 1fr); gap: 24px; }
-    .history_intro > header > p { font-size: 1.6rem; line-height: 1.5; }
-    .history_intro > header > h3 { margin-top: 4px; font-size: 2.8rem; line-height: 1.35; }
-    .history_intro_images { margin-top: 24px; gap: 12px; }
+    .panel { padding: 60px 0 0; }
+    .sec_history { grid-template-columns: minmax(0, 1fr); gap: 60px; }
+    .history_intro > header { min-height: 0; }
+    .history_intro > header > p { display: none; }
+    .history_intro > header > h3 { margin-top: 0; font-size: 2.8rem; line-height: 1.35; }
+    .history_intro_images { display: none; }
     .header h3 { font-size: 2.4rem; text-align: left; }
     .header p { margin-top: 12px; font-weight: 400; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .header.center h3, .header.center p { text-align: left; }
+    .sec_history :deep(.history_period){
+        font-size: 3.2rem;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+    }
+    .sec_history :deep(.history_body){
+        margin:0;
+    }
+    .sec_history :deep(.history_detail_list){
+        gap:0;
+    }
+    .sec_history :deep(.history_item){
+        gap:32px;
+    }
+    .sec_history :deep(.history_list){
+        padding-left:48px;
+    }
+    .sec_history :deep(.history_item::before){
+        width:8px;
+        height:8px;
+        border-width:8px;
+        left:-48px;
+    }
+    .sec_history :deep(.history_item:not(:last-child)::after){
+        left:-36px;
+    }
+    .sec_history :deep(.history_detail_row){
+       gap:10px;
+       padding:0;
+    }
+    .sec_history :deep(.history_term_primary){
+        padding:16px 0;
+    }
+    .sec_history :deep(.history_detail_content){
+        min-height: 95px;
+        padding:16px 0;
+        row-gap:12px;
+    }
+    .sec_history :deep(.history_detail_content > dt),
+    .sec_history :deep(.history_detail_content > dd){
+        font-size: 1.6rem;
+        line-height: 1.24;
+        letter-spacing: 0%;
 
+    }
+    .sec_history :deep(.history_detail_content > dd){
+        margin:0;
+    }
 }
 </style>
