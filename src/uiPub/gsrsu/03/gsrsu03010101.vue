@@ -1374,10 +1374,7 @@
                                                                 <span class="label_text">{{ lp.part2.fileLabel }}</span>
                                                             </div>
                                                             <div class="input_complex">
-                                                                <div class="file_upload_group">
-                                                                    <button type="button" class="btn_file">파일선택</button>
-                                                                    <span class="file_name">선택된 파일 없음</span>
-                                                                </div>
+                                                                <Inputs type="file" class="btn_file">파일선택</Inputs>
                                                                 <p class="guide_msg">{{ lp.part2.fileNotice }}</p>
                                                             </div>
                                                         </div>
@@ -2450,7 +2447,7 @@ export default {
                                         subjectLabel: "제목",
                                         contentLabel: "내용",
                                         contentPlaceholder: "입점 관련 궁금한 사항을 입력 해 주세요",
-                                        noticeText: "※ 매장 관련 제보내용은 정확한 점포명을 작성해 주셔야 보다 원할한 답변을 받아보실수 있습니다.<br/>※ 내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.<br/>※ 제보내용에 욕설이나 비속어가 포함되어 있으면 답변 되지 않을 수 있습니다.",
+                                        noticeText: "<span>※ 매장 관련 제보내용은 정확한 점포명을 작성해 주셔야 보다 원할한 답변을 받아보실수 있습니다.</span><span>※ 내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.</span><span>※ 제보내용에 욕설이나 비속어가 포함되어 있으면 답변 되지 않을 수 있습니다.</span>",
                                         fileLabel: "파일첨부",
                                         fileNotice: "* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)",
                                         replyLabel: "회신방법",
@@ -2835,26 +2832,24 @@ export default {
     .safety_management_wrap .system_item .num { font-size: 28px; font-weight: 700; color: #107af2; display: block; }
     .safety_management_wrap .system_item .tit { font-size: 28px; font-weight: 700; color: #161616; }
     .safety_management_wrap .system_item .sub { font-size: 20px; color: #67676f; margin-top: 8px; display: block; }
-    .safety_management_wrap .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
-    .safety_management_wrap .consent_tit {margin-bottom: 24px; font-size: 24px; font-weight: 700; display: block; }
-    .safety_management_wrap .consent_list {padding-bottom:24px;}
-    .safety_management_wrap .consent_list li { font-size: 16px; color: #67676f; margin-bottom: 8px; position: relative; padding-left: 12px; }
-    .safety_management_wrap .consent_list li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 1px; background-color: #67676f; }
-    .safety_management_wrap .form_table { border-top: 1px solid #242428; }
-    .safety_management_wrap .form_row { display: flex; align-items: center; }
-    .safety_management_wrap .form_row .label { width: 134px; padding: 24px; font-size: 16px; color: #161616; }
-    .safety_management_wrap .required { color: #fb6432; }
-    .safety_management_wrap input, .safety_management_wrap textarea { width: 100%; padding: 14px 16px; border: 1px solid #c4c4d0; border-radius: 12px; font-size: 16px; }
-    .safety_management_wrap textarea { height: 160px; resize: none; }
-    .safety_management_wrap .consent_agree {padding-top:24px; border-top:1px solid #D7D7DF; display:flex; justify-content:space-between; align-items:center;}
-    .safety_management_wrap .consent_agree p {font-size:16px; font-weight:700;}
-    .btn_primary { background-color: #107af2; color: #ffffff; border-radius: 10px; border: none; font-weight: 700; }
-    .btn_gray { background-color: #f2f2f4; color: #161616; border-radius: 10px; border: none; font-weight: 700; }
     .input_wrap {display:flex; align-items:center; justify-content:flex-end;}
     .noti_non_member {padding:24px; background:#F9F2EA; border-radius:12px;}
     .noti_non_member span {margin-bottom:12px; padding-left:34px; font-size:18px; position:relative; display:block;}
     .noti_non_member span::before {content:''; width:24px; height:24px; background:red; display:inline-block; position:absolute; top:0; left:0px;}
     .noti_non_member ul {padding-left:34px;}
+    .listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
+    .listening_form_area .consent_tit {margin-bottom: 24px; font-size: 24px; font-weight: 700; display: block; }
+    .listening_form_area .consent_list {padding-bottom:24px;}
+    .listening_form_area .consent_list li { font-size: 16px; color: #67676f; margin-bottom: 8px; position: relative; padding-left: 12px; }
+    .listening_form_area .consent_list li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 1px; background-color: #67676f; }
+    .listening_form_area .form_table { border-top: 1px solid #242428; }
+    .listening_form_area .form_row { display: flex; align-items: center; }
+    .listening_form_area .form_row .label { width: 134px; padding: 24px; font-size: 16px; color: #161616; }
+    .listening_form_area .required { color: #fb6432; }
+    .listening_form_area input, .listening_form_area textarea { width: 100%; padding: 14px 16px; border: 1px solid #c4c4d0; border-radius: 12px; font-size: 16px; }
+    .listening_form_area textarea { height: 160px; resize: none; }
+    .listening_form_area .consent_agree {padding-top:24px; border-top:1px solid #D7D7DF; display:flex; justify-content:space-between; align-items:center;}
+    .listening_form_area .consent_agree p {font-size:16px; font-weight:700;}
     .listening_form_area article {margin-bottom:40px;}
     .listening_form_wrap .form_header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #242428; }
     .listening_form_wrap .form_title { font-size: 24px; font-weight: 700; color: #161616; }
@@ -2870,10 +2865,11 @@ export default {
     .listening_form_wrap .input_flex_item { flex: 1; min-width: 0; }
     .listening_form_wrap .unit { color: #67676f; font-size: 16px; padding: 0 4px; }
     .listening_form_wrap .input_complex { display: flex; flex-direction: column; gap: 8px;}
+    .listening_form_wrap .input_complex .textarea_wrap {max-width:600px;}
     .listening_form_wrap .guide_msg { font-size: 14px; color: #67676f; }
-    .listening_form_wrap .guide_msg_multi { font-size: 12px; color: #67676f; line-height: 18px; margin-top: 8px; }
+    .listening_form_wrap :deep(.guide_msg_multi) span { font-size: 12px; color: #67676f; line-height: 18px; margin-top: 8px; }
     .listening_form_wrap .file_upload_group { display: flex; align-items: center; gap: 10px; }
-    .listening_form_wrap .btn_file { height: 38px; padding: 0 12px; border: 1px solid #67676f; background: #fff; border-radius: 4px; font-size: 16px; cursor: pointer; }
+    .listening_form_wrap .btn_file { height: 38px; padding: 0 12px; font-size: 16px; cursor: pointer; }
     .listening_form_wrap .file_name { font-size: 14px; color: #161616; }
     .form_container .btn-wrap {display:flex; justify-content:flex-end; gap:8px;}
     .form_container .btn-wrap * {width:134px;}
@@ -2887,7 +2883,7 @@ export default {
     .information_protection_management .section_title_sub {font-size: 40px; font-weight: 700; color: #161616; letter-spacing: -0.4px; line-height: 1.3; }
     .information_protection_management .p_desc {font-size: 24px; font-weight: 400; color: #161616; letter-spacing: -0.24px; line-height: 1.5; }
     .information_protection_management .diagram_box_wrap { width: 100%; padding: 60px 0; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; }
-    .information_protection_management .diagram_box_wrap.scroll { width: 100%; max-width:335px; background:#fff; overflow: hidden; }
+    .information_protection_management .diagram_box_wrap.scroll { width: 100%; max-width:100%; background:#fff; overflow: hidden; }
     .information_protection_management .visual_area img { max-width: 100%; height: auto; }
     .information_protection_management .notice_text { font-size: 14px; color: #67676f; }
     .information_protection_management .policy_wrap { width: 100%; border-top: 2px solid #161616; }
@@ -3034,6 +3030,7 @@ export default {
         .information_protection_management .award_section .info_box .tit {font-size:14px; font-weight:400; display:flex; flex-direction:column;}
         .input_item, .input_complex, .input_wrap, .w428 {width:100%;}
         .form_body .form_row:first-of-type {padding-top:0px;}
+        .listening_form_area .consent_box {padding:30px 20px;}
         .listening_form_wrap .input_group.email {flex-direction:column;}
         .listening_form_wrap .input_group.email .select {width:100%;}
         .safety_management_wrap .system_item {width:100%;}
@@ -3053,13 +3050,20 @@ export default {
         .safety_management_wrap .item_label {font-size:16px; font-weight: 700; color: #161616; white-space: nowrap; }
         .safety_management_wrap .item_text { font-size:16px;}
         .safety_management_wrap .p_desc, .safety_management_wrap .consent_tit {font-size:18px;}
-        .safety_management_wrap .consent_list li, .safety_management_wrap .consent_agree p  {font-size:14px;}
-        .check em {font-size:16px !important;}
-        .guide_text + .input_wrap {margin-top:16px; justify-content:flex-start;}
+        .safety_management_wrap .consent_list li, .safety_management_wrap .consent_agree p, .listening_form_wrap .guide_msg_multi {font-size:14px;}
+        .listening_form_wrap .input_complex .textarea_wrap {max-width:600px;}
+        :deep(.guide_msg_multi) span {margin-bottom:8px; display:block;}
+        :deep(.guide_msg_multi) span:last-of-type {margin-bottom:0;}
+        :deep(.check) em {font-size:16px !important;}
+        .guide_text + .input_wrap {justify-content:flex-start;}
         .form_container .btn-wrap {display:flex; justify-content:flex-start; gap:8px;}
         .form_container .btn-wrap * {width:50%;}
         .information_protection_management .visual_area.scroll_wrap {width: 100%; overflow-x: auto;  overflow-y: hidden; display: block; -webkit-overflow-scrolling: touch;}
         .information_protection_management .visual_area.scroll_wrap img {min-width: 700px; width: auto;max-width: none;  display: block;}
+        .information_protection_management .diagram_box_wrap.scroll {max-width:335px;}
+        .noti_non_member span {font-size:14px;}
+        .noti_non_member ul {padding-left:0;}
+        .noti_non_member ul li {font-size:12px;}
 
 
     }
