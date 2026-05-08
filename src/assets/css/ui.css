@@ -14,13 +14,13 @@
 #header nav .depth2_wrap {width:100vw; height:0; background-color:#fff; overflow:hidden; position:absolute; top:74px; left:0; display:flex;}
 #header nav .depth2_wrap:after {background-color:#fff; border-top:1px solid #E5E5E9; position:absolute; top:-1px; right:-10000%; bottom:0; left:-1000%; z-index:-1; content:'';}
 #header nav .depth2_wrap > ul + ul {margin-left:80px;}
-#header nav li:hover .depth2_wrap, nav li.is_open .depth2_wrap {height:auto !important; padding:40px 20px; overflow:initial !important; display:flex;}
+#header nav li:hover .depth2_wrap, nav li.is-open .depth2_wrap {height:auto !important; padding:40px 20px; overflow:initial !important; display:flex;}
 
 #header nav ul.depth2 > li > a, #header nav ul.depth2 > li > span {padding:10px 0; color:#111; font-size:1.8rem; line-height:140%; display:block;}
-#header nav li:hover ul, nav li.is_open ul {height:auto !important; overflow:initial !important; display:block;}
+#header nav li:hover ul, nav li.is-open ul {height:auto !important; overflow:initial !important; display:block;}
 #header nav ul.depth3 {display:none !important;}
 
-#header nav li:hover > a, nav li.is_open > a, #header nav li:hover > span, nav li.is_open > span {color:#107af2 !important;}
+#header nav li:hover > a, nav li.is-open > a, #header nav li:hover > span, nav li.is-open > span {color:#107af2 !important;}
 
 #header .quick_wrap {margin-top:-4px; display:flex; align-items:center;}
 #header .quick {display:flex; align-items:center;}
@@ -111,7 +111,7 @@ h5 {font-size:1.8rem;}
 .breadcrumb > ul {display:flex;}
 .breadcrumb li {position:relative;}
 .breadcrumb li ul {height:0; overflow:hidden; position:absolute; top:100%; left:0;}
-.breadcrumb .is_open ul {height:auto; overflow:initial; display:block !important;}
+.breadcrumb .is-open ul {height:auto; overflow:initial; display:block !important;}
 .breadcrumb a {white-space:nowrap;}
 
 /* search */
@@ -201,7 +201,7 @@ h5 {font-size:1.8rem;}
     #header nav {background-color:#fff; overflow:hidden; position:fixed; top:0; right:0; bottom:0; left:0; display:flex; flex-direction:column; transform:translateX(100%); transition:transform 0.25s ease-in-out;}
     #header nav ul.depth1 {width:100%; overflow-y:auto; flex:1; display:block;}
     #header nav ul.depth1 > li > a {padding:16.5px 20px; color:#000; font-size:2rem; font-weight:700; line-height:135%;}
-    #header nav li:hover .depth2_wrap, #header nav .is_open .depth2_wrap {padding:20px 0; background-color:#f8f8f8;}
+    #header nav li:hover .depth2_wrap, #header nav .is-open .depth2_wrap {padding:20px 0; background-color:#f8f8f8;}
     #header nav .depth2_wrap > ul > li > a {padding:10px 40px; color:#161616; font-size:1.8rem;}
 
     #header.mo_open h1 {margin-top:0; position:fixed; top:14px; left:20px; z-index:1;}

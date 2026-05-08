@@ -142,7 +142,7 @@ export default {
             const li = e.currentTarget;
             if (li.closeTimer) clearTimeout(li.closeTimer);
             li.closeTimer = setTimeout(() => {
-                if (li.contains(document.activeElement)) li.classList.add("is_open");
+                if (li.contains(document.activeElement)) li.classList.add("is-open");
                 li.closeTimer = null;
             }, 150);
         };
@@ -151,7 +151,7 @@ export default {
             const li = e.currentTarget;
             if (li.closeTimer) clearTimeout(li.closeTimer);
             li.closeTimer = setTimeout(() => {
-                if (!li.contains(document.activeElement)) li.classList.remove("is_open");
+                if (!li.contains(document.activeElement)) li.classList.remove("is-open");
                 li.closeTimer = null;
             }, 150);
         };
