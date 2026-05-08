@@ -1442,10 +1442,10 @@
     {
         "depth1": "고객센터", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrab/01/gsrab01",
-        "link": "/gsrab01" ,
-        "startDate": "",
-        "endDate": "",
+        "path": "gsrcu/01/gsrcu01",
+        "link": "/gsrcu01" ,
+        "startDate": "26-05-07",
+        "endDate": "26-05-07",
         "status": "com",
         "note": ""
     },
@@ -1454,8 +1454,8 @@
         "type": "Pop-up",
         "path": "popUp/gsrcu0101",
         "link": "/gsrcu01" ,
-        "startDate": "",
-        "endDate": "",
+        "startDate": "26-05-08",
+        "endDate": "26-05-08",
         "status": "com",
         "note": ""
     },
@@ -1486,8 +1486,8 @@
         "link": "/gsrcu01" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
-        "note": "gsrcu01에서 확인"
+        "status": "com",
+        "note": "gsrcu01에서 확인, gsrcu0101 동일화면으로 해당 화면으로 사용"
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "신청완료", "depth5": "", "depth6": "",
@@ -1506,8 +1506,8 @@
         "link": "/gsrcu01" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
-        "note": "gsrcu01에서 확인"
+        "status": "com",
+        "note": "gsrcu01에서 확인, gsrcu0101 동일화면으로 해당 화면으로 사용"
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "신청완료", "depth5": "", "depth6": "",
@@ -1566,8 +1566,8 @@
         "link": "/gsrcu01" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
-        "note": "gsrcu01에서 확인"
+        "status": "com",
+        "note": "gsrcu01에서 확인, gsrcu0101 동일화면으로 해당 화면으로 사용"
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "신청완료", "depth5": "", "depth6": "",

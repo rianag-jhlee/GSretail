@@ -52,8 +52,8 @@
                             <Buttons 
                                 v-if="link.type === 'popup'" 
                                 @click="openModal" 
-                                :data-popid="link.target" 
-                                :data-cont="link.target" 
+                                :data-popid="link.popId" 
+                                :data-cont="link.cont" 
                                 data-type="lg" 
                                 btn-class="btn_mid gray btn_icon after">
                                 {{ link.btnLabel }}
@@ -75,17 +75,7 @@
         <div id="gsrcu0201" class="modal_wrap">
             <div class="modal_container"></div>
         </div>
-        <div id="gsrcu0301" class="modal_wrap">
-            <div class="modal_container"></div>
-        </div>
 
-        <!-- 상담신청완료 팝업 -->
-        <div id="gsrcu010101" class="modal_wrap">
-            <div class="modal_container"></div>
-        </div>
-        <div id="gsrcu020101" class="modal_wrap">
-            <div class="modal_container"></div>
-        </div>
     </div>
 </template>
 
@@ -116,12 +106,12 @@ export default {
                         },
                         {
                             id: "gsshop", name: "GS SHOP", tel: "080-414-4545", hours: "· 24시간 콜센터",
-                            buttons: [{ label: "1:1 상담", type: "popup", popId: "gsrcu0201", cont: "gsrcu0201" }]
+                            buttons: [{ label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" }]
                         },
                         {
                             id: "gsthefresh", name: "GS THE FRESH", tel: "080-345-7700", hours: "· 평일, 주말, 공휴일 10:00~19:00<br/>(명절 당일은 휴무)",
                             buttons: [
-                                { label: "1:1 상담", type: "popup", popId: "gsrcu0301", cont: "gsrcu0301" },
+                                { label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" },
                                 { label: "창업안내", type: "link", target: "/franchise/gsthefresh" }
                             ]
                         }
@@ -130,7 +120,7 @@ export default {
                         { title: "정도경영목소리", btnLabel: "정도경영목소리", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu_ethics", cont: "EthicsVoice" },
                         { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/partner/intro" },
                         { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
-                        { title: "제휴/협력문의", btnLabel: "제휴/협력문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu_collabo", cont: "CollaboInquiry" }
+                        { title: "제휴/협력문의", btnLabel: "제휴/협력문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0201", cont: "gsrcu0201" }
                     ]
                 }
             }
