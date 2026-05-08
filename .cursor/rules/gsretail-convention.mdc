@@ -129,11 +129,11 @@ import { ref, computed } from "vue";
 - 이미지: `import imgSrc from "@/assets/images/..."` 후 바인딩
 - `new URL(..., import.meta.url)` 방식 사용 불가 (Webpack 환경)
 
----
-
+<!-- ---
+작업x
 ## 8. 다국어 처리 (langData 패턴)
 ```vue
-<script setup>
+<!-- <script setup>
 const langData = {
   ko: { title: "안녕하세요" },
   en: { title: "Hello" },
@@ -144,10 +144,10 @@ const t = computed(() => langData[locale.value]);
 <template>
   <h2>{{ t.title }}</h2>
   <p v-html="t.desc" />
-</template>
+</template> -->
 ```
 
----
+--- -->
 
 ## 9. 공통 컴포넌트 사용법
 
