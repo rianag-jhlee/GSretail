@@ -59,13 +59,15 @@
                     <h3>{{ pageData.colorReg.title }}</h3>
                     <p v-html="pageData.colorReg.desc"></p>
                 </header>
-                <div>
+                <div class="color_reg_list_wrap">
                     <ul class="reg_list">
                         <li v-for="brand in colorRegList" :key="brand.name" class="reg_list_item">
-                            <div>
-                                <strong>{{ brand.name }}</strong>
+                            <div class="reg_row">
+                                <div class="reg_title">
+                                    <strong>{{ brand.name }}</strong>
+                                </div>
                                 <ol class="color_list" :style="{ '--cols': brand.pantones.length }">
-                                    <li v-for="pantone in brand.pantones" :key="brand.name + '-' + pantone.name">
+                                    <li v-for="pantone in brand.pantones" :key="brand.name + '-' + pantone.name" class="color_swatch" :style="{ backgroundColor: pantone.bg }">
                                         <strong v-html="pantone.name"></strong>
                                         <ul class="color_detail">
                                             <li v-for="detail in pantone.details" :key="pantone.name + '-' + detail"><span>{{ detail }}</span></li>
@@ -77,17 +79,33 @@
                     </ul>
                 </div>
                 <div class="table_scroll">
-                    <table class="reg_table">
+                    <table class="spec_table">
                         <caption class="sr_only">{{ pageData.colorReg.tableCaption }}</caption>
+                        <colgroup>
+                            <col class="col_gs_color" />
+                            <col span="4" />
+                        </colgroup>
                         <thead>
                             <tr>
-                                <th v-for="head in pageData.colorReg.tableHeads" :key="'head-' + head">{{ head }}</th>
+                                <th scope="col">GS COLOR</th>
+                                <th scope="col">CMYK(PROCESS)</th>
+                                <th scope="col">RGB(DESKTOP)</th>
+                                <th scope="col">RGB(BROADCAST)</th>
+                                <th scope="col">HEX(WEB-SAFE)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="row in pageData.colorReg.tableRows" :key="'row-' + row.label">
-                                <th>{{ row.label }}</th>
-                                <td v-for="(value, valueIdx) in row.values" :key="row.label + '-' + valueIdx">{{ value }}</td>
+                            <tr v-for="row in colorSpecRows" :key="row.label">
+                                <th scope="row">
+                                    <span class="spec_cell_lead">
+                                        <span class="spec_swatch" :style="{ backgroundColor: row.swatch }" aria-hidden="true"></span>
+                                        <span>{{ row.label }}</span>
+                                    </span>
+                                </th>
+                                <td>{{ row.cmyk }}</td>
+                                <td>{{ row.rgbDesktop }}</td>
+                                <td>{{ row.rgbBroadcast }}</td>
+                                <td>{{ row.hex }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -131,14 +149,17 @@ const pageData = {
         title: "색상규정",
         desc: "기본적으로 심볼의 4원색(Gradient Color)표현을 기본으로 Communication을 하나, GS그룹을 알리는 Accent Color로 Jade Green을 사용합니다.<br />Gradient Color표현이 힘든 Service Space나 기타 요소에 Accent Color로 적용할 수 있습니다.",
         tableCaption: "GS 색상 규정 표",
-        tableHeads: ["GS COLOR", "PANTONE 321C", "PANTONE 300C", "PANTONE 368C", "PANTONE 173C", "PANTONE COOL GRAY 10C", "PANTONE WARM GRAY 1C"],
-        tableRows: [
-            { label: "CMYK (PROCESS)", values: ["100/0/50/0", "100/50/0/0", "53/0/100/0", "0/75/100/0", "0/0/0/75", "0/0/3/8"] },
-            { label: "RGB (DESKTOP)", values: ["0/153/153", "51/102/204", "153/204/0", "204/102/0", "102/102/102", "235/235/227"] },
-            { label: "HEX (WEB-SAFE)", values: ["#009999", "#3366CC", "#99CC00", "#CC6600", "#999999", "#EBEBE3"] },
-        ],
     },
 };
+
+const colorSpecRows = [
+    { label: "PANTONE 321C", swatch: "#009999", cmyk: "100/0/50/0", rgbDesktop: "0/153/153", rgbBroadcast: "0/153", hex: "009999" },
+    { label: "PANTONE 300C", swatch: "#3366CC", cmyk: "100/50/0/0", rgbDesktop: "51/102/204", rgbBroadcast: "20/102/204", hex: "3366CC" },
+    { label: "PANTONE 368C", swatch: "#99CC00", cmyk: "53/0/100/0", rgbDesktop: "153/204/0", rgbBroadcast: "600/200/10", hex: "99CC00" },
+    { label: "PANTONE 173C", swatch: "#CC6600", cmyk: "0/75/100/0", rgbDesktop: "204/102/0", rgbBroadcast: "20/102/1", hex: "CC6600" },
+    { label: "PANTONE COOL GRAY 10C", swatch: "#999999", cmyk: "0/0/0/75", rgbDesktop: "102/102/102", rgbBroadcast: "102/102/102", hex: "999999" },
+    { label: "PANTONE WARM GRAY 1C", swatch: "#ebebe3", cmyk: "0/0/3/8", rgbDesktop: "235/235/227", rgbBroadcast: "", hex: "EBEBE3" },
+];
 
 const ciBiLogos = [
     { src: imgCiBiLogo1, alt: "GS리테일 로고" },
@@ -151,29 +172,29 @@ const colorRegList = [
     {
         name: "GS리테일",
         pantones: [
-            { name: "PANTONE <br />166 C", details: ["C 0", "M 65", "Y 100", "K 0"] },
-            { name: "PANTONE <br />300 C", details: ["C 100", "M 50", "Y 0", "K 0"] },
-            { name: "PANTONE <br />7482 C", details: ["C 80", "M 0", "Y 75", "K 0"] },
-            { name: "PANTONE <br />COOL Gray <br />10C", details: ["C 0", "M 0", "Y 0", "K 50"] },
+            { name: "PANTONE <br />166 C", details: ["C 0", "M 65", "Y 100", "K 0"], bg: "#f47920" },
+            { name: "PANTONE <br />300 C", details: ["C 100", "M 50", "Y 0", "K 0"], bg: "#0072bc" },
+            { name: "PANTONE <br />7482 C", details: ["C 80", "M 0", "Y 75", "K 0"], bg: "#00b274" },
+            { name: "PANTONE <br />COOL Gray <br />10C", details: ["C 0", "M 0", "Y 0", "K 50"], bg: "#939598" },
         ],
     },
     {
         name: "GS25",
         pantones: [
-            { name: "PANTONE <br />285 C", details: ["C 100", "M 39", "Y 0", "K 0"] },
-            { name: "PANTONE <br />311 C", details: ["C 63", "M 0", "Y 10", "K 0"] },
+            { name: "PANTONE <br />285 C", details: ["C 100", "M 39", "Y 0", "K 0"], bg: "#007ec6" },
+            { name: "PANTONE <br />311 C", details: ["C 63", "M 0", "Y 10", "K 0"], bg: "#40c4e0" },
         ],
     },
     {
         name: "GS SHOP",
         pantones: [
-            { name: "PANTONE <br />2173 C", details: ["C 72", "M 27", "Y 0", "K 0"] },
+            { name: "PANTONE <br />2173 C", details: ["C 72", "M 27", "Y 0", "K 0"], bg: "#3698d4" },
         ],
     },
     {
         name: "GS THE FRESH",
         pantones: [
-            { name: "PANTONE <br />7484 C", details: ["C 91", "M 14", "Y 78", "K 60"] },
+            { name: "PANTONE <br />7484 C", details: ["C 91", "M 14", "Y 78", "K 60"], bg: "#005133" },
         ],
     },
 ];
@@ -189,12 +210,13 @@ const colorRegList = [
     .title_wrap > h2 { color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; position: relative; z-index: 2; }
     .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 200px 20px; position: relative; display: block; }
     section+section{padding:200px 0 0; }
-    .header h3 {  font-weight: 700; font-size: 4.8rem; line-height: 1.3; letter-spacing: -0.01em; }
-    .header p { margin: 16px 0 0; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    section > .header {margin-bottom:64px}
+    .header h3 { margin: 0; font-weight: 700; font-size: 4.8rem; line-height: 1.3; letter-spacing: -0.01em; color: #161616; }
+    .header p { margin: 16px 0 0; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; color: #161616; }
+    .sec_color_reg > .header p { color: #67676f; font-weight: 400; }
     .header.center h3, .header.center p { text-align: center; }
 
     .cont_box { border:1px solid #E5E5E9; border-radius: 12px; padding: 56px 64px; }
-    .sec_ci_intro { display: flex; flex-direction: column; gap: 60px; }
     .cont_box_row { width: 100%; display: flex; justify-content: space-between; }
     .cont_box_row > .sub_title {  font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
     .cont_box_row > .desc {  color:#67676F;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
@@ -213,37 +235,48 @@ const colorRegList = [
     .color_cards > li.color_blue strong{ color: #0D62C2; }
     .color_cards > li > strong {font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
     .color_cards > li > p { margin: 4px 0 0; color: #7C7C86; font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-    .sec_ci_bi { display: flex; flex-direction: column; gap: 40px; }
+
     .ci_bi_cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
     .ci_bi_card { height:230px; padding:0 36px;border: 1px solid #e5e5e9; border-radius: 12px;display: flex; justify-content: center; align-items: center;  }
-    .ci_bi_card > .img_wrap img{width:100%;display:block;}
+    .ci_bi_card > .img_wrap img{width:auto;display:block;}
     .button_wrap { margin-top: 64px; display: flex; justify-content: center; }
-    .notice_box { padding: 32px; border-radius: 12px; background-color: #f8f8f8; }
+    .notice_box { margin-top:40px;padding: 32px; border-radius: 12px; background-color: #f8f8f8; }
     .notice_tit { margin: 0 0 24px; display: flex; align-items: center; gap: 8px; }
     .notice_box > p{margin:0 0 8px;color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0;}
     .notice_tit > .notice_ico { width: 24px; height: 24px; background-color: red; display: inline-flex; align-items: center; justify-content: center; }
     .notice_tit > h4 { margin: 0; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-    .notice_list { padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .notice_list { display: flex; flex-direction: column; gap: 8px; }
     .notice_list > li { padding-left: 12px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; position: relative; }
     .notice_list > li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; position: absolute; left: 0; top: 11px; background-color: #67676f; }
-    .sec_color_reg { display: flex; flex-direction: column; gap: 40px; }
-    .sec_color_reg .reg_list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 24px; }
-    .sec_color_reg .reg_list > .reg_list_item {padding:56px 64px; border:1px solid #E5E5E9; border-radius: 12px; }
-    .sec_color_reg .reg_list > .reg_list_item > div { display: flex; justify-content: space-between; }
-    .sec_color_reg .reg_list > .reg_list_item > div > strong { color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_color_reg .reg_list .color_list { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 10px; }
-    .sec_color_reg .reg_list .color_list > li { padding: 18px; }
-    .sec_color_reg .reg_list .color_list > li > strong { color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
-    .sec_color_reg .reg_list .color_detail { margin: 12px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+
+    .sec_color_reg .color_reg_list_wrap { width: 100%; padding: 0 0 64px; }
+    .sec_color_reg .reg_list { display: flex; flex-direction: column; gap: 24px; }
+    .sec_color_reg .reg_list > .reg_list_item { width: 100%; max-width: 1420px; margin: 0 auto; padding: 56px 64px; border: 1px solid #e5e5e9; border-radius: 12px; background-color: #fff; box-sizing: border-box; }
+    .sec_color_reg .reg_row { width: 100%; display: flex; gap: 20px; align-items: flex-start; }
+    .sec_color_reg .reg_title > strong {  font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; display: block; }
+    .sec_color_reg .reg_list .color_list { flex: 1 1 0; min-width: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 10px; }
+    .sec_color_reg .reg_list .color_list > .color_swatch { min-height: 180px; padding: 24px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; gap: 26px; align-items: flex-start; box-sizing: border-box; }
+    .sec_color_reg .reg_list > .reg_list_item:first-child .color_list > .color_swatch { min-height: 240px; }
+    .sec_color_reg .reg_list .color_list > .color_swatch > strong {  flex: 1 1 0; min-height: 0; color: #fff; font-size: 2.4rem; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+    .sec_color_reg .reg_list .color_detail { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 4px 10px; width: 100%; }
+    .sec_color_reg .reg_list > .reg_list_item:first-child .color_detail > li { width: 48px; flex-shrink: 0; }
+    .sec_color_reg .reg_list > .reg_list_item:not(:first-child) .color_detail { flex-wrap: nowrap; gap: 10px; }
     .sec_color_reg .reg_list .color_detail > li { margin: 0; }
-    .sec_color_reg .reg_list .color_detail > li > span { color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+    .sec_color_reg .reg_list .color_detail > li > span { color: #e5e5e9; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 
     .table_scroll { width: 100%; overflow-x: auto; }
-    .reg_table { width: 100%; min-width: 1147px; border-collapse: collapse; table-layout: fixed; }
-    .reg_table th, .reg_table td { padding: 14px 10px; border: 1px solid #e5e5e9; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; text-align: center; word-break: keep-all; }
-    .reg_table thead th { background-color: #f8f8f8; color: #161616; font-weight: 700; }
-    .reg_table tbody th { background-color: #f8f8f8; color: #161616; font-weight: 700; }
-    .reg_table tbody td { color: #67676f; font-weight: 400; }
+    .spec_table { width: 100%; max-width: 1420px; margin: 0 auto; border-collapse: collapse; table-layout: fixed; border-spacing: 0; }
+    .spec_table col.col_gs_color { width: 320px; }
+    .spec_table thead th { height: 82px; padding: 27px 20px; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; vertical-align: middle; position: relative; box-sizing: border-box; }
+    .spec_table thead th::before { content: ""; width: 100%; height: 1px; background-color: #161616; position: absolute; left: 0; top: 0; }
+    .spec_table thead th:first-child { text-align: left; }
+    .spec_table thead th:not(:first-child) { text-align: center; }
+    .spec_table tbody th, .spec_table tbody td { min-height: 82px; padding: 27px 20px; border-bottom: 1px solid #d7d7df; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; vertical-align: middle; box-sizing: border-box; }
+    .spec_table tbody th { text-align: left; font-weight: 400; }
+    .spec_table tbody th[scope="row"] .spec_cell_lead { display: flex; align-items: center; gap: 12px; }
+    .spec_table tbody th[scope="row"] .spec_swatch { width: 24px; height: 24px; border-radius: 999px; flex-shrink: 0; }
+    .spec_table tbody th[scope="row"] .spec_cell_lead > span:last-child { white-space: nowrap; }
+    .spec_table tbody td { text-align: center; word-break: keep-all; }
     .sr_only { width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; position: absolute; clip: rect(0, 0, 0, 0); overflow: hidden; }
 
 
@@ -253,42 +286,63 @@ const colorRegList = [
         .title_wrap { display: none; }
         .visual_sub { font-size: 2rem; }
         section+section{padding:60px 0 0; }
-        .content { width: 100%; max-width: 100%; padding: 60px 20px 94px; }
-        .header h3 { font-size: 2.4rem; text-align: left; }
-        .header p { margin-top: 12px; font-weight: 400; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+        .content { width: 100%; max-width: 100%; padding: 60px 20px 94px; box-sizing: border-box; }
+        .header h3 { margin: 0; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; text-align: left; color: #161616; }
+        .header p { margin-top: 12px; font-weight: 400; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; color: #161616; }
         .header.center h3, .header.center p { text-align: left; }
-        .sec_ci_intro { gap: 24px; }
-        .cont_box_row { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-        .cont_box_row > .sub_title { font-size: 2.4rem; line-height: 1.35; }
-        .cont_box_row > .desc { font-size: 1.6rem; }
-        .gray_box { padding: 36px 20px; border-radius: 12px; }
-        .color_cards { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-        .color_cards > li { padding: 24px 20px; }
-        .color_cards > li > strong { font-size: 2rem; }
-        .color_cards > li > p { margin-top: 8px; font-size: 1.6rem; }
-        .sec_ci_bi { gap: 24px; }
+        .sec_color_reg > .header p { color: #67676f; }
+        .cont_box { padding: 36px 20px; border-radius: 12px; box-sizing: border-box; }
+        .cont_box_row { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+        .cont_box_row > .sub_title { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+        .cont_box_row > .desc { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+
+        .gray_box { min-height: 260px; padding: 70px 20px; border-radius: 12px; box-sizing: border-box; }
+        .gray_box > .img_wrap {  padding:16px 32px;}
+
+        .color_cards { margin-top: 24px; grid-template-columns: minmax(0, 1fr); gap: 0; }
+       
+        .color_cards > li + li { margin-top: 10px; }
+        .color_cards > li::before { height: 8px; border-radius: 10px; }
+        .color_cards > li > strong { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+        .color_cards > li > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+
         .ci_bi_cards { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-        .ci_bi_card { padding: 20px; }
+        .ci_bi_card { width: 100%; height: 230px; padding: 0 36px; border-radius: 12px; box-sizing: border-box; }
+        .ci_bi_card > .img_wrap { width: 100%; display: flex; align-items: center; justify-content: center; }
         .ci_bi_card > strong { font-size: 1.8rem; }
         .ci_bi_card > .logo_box { min-height: 110px; margin-top: 12px; }
         .ci_bi_card > .logo_box > p { font-size: 2rem; }
-        .notice_box { padding: 20px; }
+        .sec_ci_bi{padding-bottom:100px;}
+        .sec_ci_bi .button_wrap { margin-top: 64px; }
+        .notice_box { padding: 32px 20px; border-radius: 12px; }
+        .notice_box > p{font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em;}
+        .notice_tit { margin: 0 0 24px; }
         .notice_tit > h4 { font-size: 2rem; }
-        .notice_list { margin-top: 12px; gap: 6px; }
-        .notice_list > li { font-size: 1.4rem; line-height: 1.5; }
+        .notice_list { margin-top: 8px; gap: 8px; }
+        .notice_list > li { font-size: 1.4rem; line-height: 1.4; padding-left: 14px; }
         .notice_list > li::before { top: 8px; }
-        .sec_color_reg { gap: 24px; }
-        .sec_color_reg .reg_list { gap: 16px; }
-        .sec_color_reg .reg_list > .reg_list_item > div > strong { font-size: 2rem; }
-        .sec_color_reg .reg_list .color_list { grid-template-columns: minmax(0, 1fr); gap: 8px; }
-        .sec_color_reg .reg_list .color_list > li { padding: 14px; }
-        .sec_color_reg .reg_list .color_list > li > strong { font-size: 1.6rem; }
-        .sec_color_reg .reg_list .color_detail { gap: 2px 6px; }
-        .sec_color_reg .reg_list .color_detail > li > span { font-size: 1.3rem; }
-       
-        .table_scroll { margin: 0 -20px; padding: 0 20px; }
-        .reg_table { width: 1147px; min-width: 1147px; }
-        .reg_table th, .reg_table td { font-size: 1.4rem; }
+
+        .sec_color_reg .color_reg_list_wrap { width: 100%; padding: 0 0 40px; }
+        .sec_color_reg .reg_list { gap: 24px; }
+        .sec_color_reg .reg_list > .reg_list_item { max-width: 100%; margin: 0; padding: 36px 20px;  }
+        .sec_color_reg .reg_row { flex-direction: column; gap: 0; align-items: stretch; }
+        .sec_color_reg .reg_title > strong { margin-bottom:20px;font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+        .sec_color_reg .reg_list .color_list { width: 100%; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+        .sec_color_reg .reg_list .color_list > .color_swatch { width: 100%; min-height: 180px; height: auto; padding: 24px; border-radius: 10px; gap: 26px; box-sizing: border-box; }
+        .sec_color_reg .reg_list > .reg_list_item:first-child .color_list > .color_swatch { min-height: 180px; } 
+        .sec_color_reg .reg_list .color_list > .color_swatch > strong {margin-bottom:20px; font-size: 2.4rem; line-height: 1.35; }
+        .sec_color_reg .reg_list > .reg_list_item:first-child .color_detail > li { width: 48px; min-width: 0; flex-shrink: 0; }
+        .sec_color_reg .reg_list > .reg_list_item:not(:first-child) .color_detail { flex-wrap: wrap; gap: 4px 10px; }
+        .sec_color_reg .reg_list .color_detail { gap: 4px 10px; }
+        .sec_color_reg .reg_list .color_detail > li > span { font-size: 1.6rem; line-height: 1.5; }
+        .table_scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; box-sizing: border-box; }
+        .spec_table { width: 1147px; min-width: 1147px; max-width: none; margin: 0; }
+        .spec_table col.col_gs_color { width: 320px; }
+        .spec_table thead th { height: auto; min-height: 82px; padding: 27px 20px; font-size: 1.8rem; }
+        .spec_table tbody th, .spec_table tbody td { min-height: 82px; padding: 27px 20px; font-size: 1.8rem; line-height: 1.4; }
+        .spec_table tbody th[scope="row"] .spec_cell_lead > span:last-child { white-space: normal; }
+        .spec_table tbody th[scope="row"] .spec_swatch { width: 24px; height: 24px; }
+        .spec_table tbody th[scope="row"] .spec_cell_lead { gap: 12px; align-items: flex-start; }
         .sec_vision .img_wrap { margin-top: 60px; }
         .sec_vision .img_wrap picture img{max-width: 335px;}
         .sec_value { flex-direction: column; gap: 24px; }
