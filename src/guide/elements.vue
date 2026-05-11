@@ -392,6 +392,31 @@ const cards = ref([
 &lt;/script&gt;</code></pre>
         </section>
 
+        <section>
+            <h4>목록으로 이동 버튼</h4>
+            <ul class="explain">
+                <li>26.05.11 통일화 작업</li>
+            </ul>
+
+            <p class="tit_wrap">
+                <strong class="tit">Design</strong>
+            </p>
+            <div class="design_box">
+                <div class="bottom_btns">
+                    <button class="btn_back" @click="handleBack">목록으로 돌아가기</button>
+                </div>
+            </div>
+
+            <p class="tit_wrap">
+                <strong class="tit">Code</strong>
+                <a href="#none">OPEN</a>
+            </p>
+            <pre class="code_box">
+<code>&lt;div class="bottom_btns"&gt;
+    &lt;button class="btn_back" @click="handleBack"&gt;목록으로 돌아가기&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+
     </div>
 </template>
 

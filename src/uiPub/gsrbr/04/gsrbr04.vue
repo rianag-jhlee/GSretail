@@ -54,23 +54,21 @@
                             <div class="benefit_info">
                                 <p class="tit_area">
                                     <strong>{{ item.title }}</strong>
-                                    <a v-if="item.popId" class="btn_link" @click="openModal" :data-popid="item.popId" :data-type="item.popType" :data-cont="item.popCont"></a>
+                                    <a v-if="item.popId" class="btn_link ico_link" @click="openModal" :data-popid="item.popId" :data-type="item.popType" :data-cont="item.popCont"></a>
                                 </p>
                                 <span class="desc">{{ item.desc }}</span>
                             </div>
                         </li>
                     </ul>
                 </div>
+
+                <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
+                <div class="bottom_btns">
+                    <button class="btn_back" @click="handleBack">{{ t.ListBack }}</button>
+                </div>
+                <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
             </div>
 
-            <div class="cont_inner">
-                <div class="bottom_btns">
-                    <button type="button" class="btn_list_back" @click="handleBack">
-                        <span>{{ t.ListBack }}</span>
-                    </button>
-                </div>
-                <a class="btn_big border" href="javascript:void(0);" @click="handleBack">{{ t.ListBack }}</a>
-            </div>
         </section>
 
 
@@ -213,11 +211,12 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 .benefit_info .tit_area strong { color: #161616; font-size: 24px; font-weight: 700; }
 .benefit_info .btn_link { color: #107af2; font-size: 14px; text-decoration: underline; }
 .benefit_info .desc { display: block; color: #67676f; font-size: 18px; line-height: 1.5; }
+/* 26.05.11 제거
 .benefit_info a {font-size:0px;}
 .benefit_info a::after {content:''; width:24px; height:24px; background:red; display:inline-block;}
+*/
 
 /* Buttons Area */
-.bottom_btns { width: 100%; margin-top: 100px; padding-bottom: 100px; text-align: left; }
 .btn_list_back { display: block; background: transparent; padding: 0; border: 0; cursor: pointer; }
 .btn_list_back span { display: flex; align-items: center; gap: 12px; color: #161616; font-size: 20px; }
 .btn_list_back span::before { display: inline-block; width: 16px; height: 16px; background-color: red; content: ''; }
@@ -252,7 +251,6 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
     .benefit_section { padding-top: 80px; }
     .benefit_list { gap: 32px 10px; }
     .benefit_list li { width: calc((100% - 10px) / 2); }
-    .bottom_btns { display: none; }
     .bottom_btns + .btn_big.border { display: flex; justify-content: center; margin-top: 100px; margin-bottom: 80px; }
     .bi_section h4 {flex-direction:column;}
     .body_wrap .cont_area .cont_inner .intro_text + ul {padding:30px;}

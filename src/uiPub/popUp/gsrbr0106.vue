@@ -37,18 +37,21 @@
                 </select>
             </div>
 
-            <div class="sf_row sf_row_input">
+            <!-- 26.05.11 Edit 이종환 : search component로 변경 -->
+            <Search v-model="searchData" :search_opt="options" @search="handleSearch" :placeholder="placeholder" :useSelect="false" />
+
+            <!-- <div class="sf_row sf_row_input">
                 <div class="sf_input_wrap">
                     <input
                         v-model="keyword"
                         type="search"
                         class="sf_input"
-                        placeholder="찾으시려는 매장명을 입력하세요"
+                        placeholder="찾으시려는 매장명을 입력하세요."
                         autocomplete="off"
                     />
                     <span class="sf_input_trailing" aria-hidden="true"></span>
                 </div>
-            </div>
+            </div> -->
 
             <div class="sf_filter">
                 <button
@@ -96,6 +99,9 @@ import icoChip03 from "@/assets/images/dummy/mo/ico_chip_03.png";
 import icoChip04 from "@/assets/images/dummy/mo/ico_chip_04.png";
 import icoChip05 from "@/assets/images/dummy/mo/ico_chip_05.png";
 
+/* 26.05.11 Add Search */
+import Search from "@/components/Search.vue";
+
 /** Figma 198:26612~26633 chip 텍스트·선택 상태 */
 const CHIP_DEF = [
     { id: "c1",  label: "스포츠 토토",             selected: true  },
@@ -124,8 +130,14 @@ const CHIP_DEF = [
 export default {
     name: "StoreFindModal",
 
+    components: {
+        Search,
+    },
+
     data() {
         return {
+            placeholder: "찾으시려는 매장명을 입력하세요.",
+
             keyword: "",
             filterExpanded: true,
             selSido: "",
@@ -325,11 +337,13 @@ export default {
 .sf_chevron {
     width: 16px;
     height: 16px;
-    background-color: red;
+    background:url('@/assets/images/common/icon_set_16.png') -136px -14px no-repeat;
+    background-size:auto 83px;
+    transition:transform 0.25s;
 }
 
 .sf_chevron.is_collapsed {
-    transform: rotate(-135deg) translateY(2px);
+    transform: rotate(180deg) translateY(2px);
 }
 
 /* Chip 영역 h124, chip h36, gap 8 */

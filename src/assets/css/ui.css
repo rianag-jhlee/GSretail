@@ -117,8 +117,9 @@ h5 {font-size:1.8rem;}
 /* search */
 .search_wrap {display:flex; align-items:center; gap:8px;}
 .input_search_wrap {border:1px solid #c4c4d0; border-radius:12px; position:relative; flex:1; display:flex;}
-.input_search_wrap .input input {border:0;}
-.input_search_wrap .btn_search {width:20px; height:20px; font-size:0; background:red; position:absolute; top:50%; right:16px; transform:translateY(-50%);}
+.input_search_wrap .input input {border:0 !important;}
+.input_search_wrap .btn_search {width:20px; height:20px; font-size:0; background-color:transparent; position:absolute; top:50%; right:16px; transform:translateY(-50%); display:block;}
+.input_search_wrap .btn_search:before {width:20px; height:20px; background:url('@/assets/images/common/icon_set_20.png') -715px -24px no-repeat; background-size:auto 159px; content:''; position:absolute; top:50%; left:50%; display:block; transform:translate(-50%, -50%);}
 .input_search_wrap .icon_del {right:40px !important;}
 
 /* pagination */

@@ -44,8 +44,8 @@
                     <div class="str_actions">
                         <a
                             href="#"
-                            class="btn_store_find"
-                        >홈페이지</a>
+                            class="btn_website"
+                        >홈페이지</a><!-- 26.05.11 Edit 이종환 : class 수정 -->
                         <div class="sns_wrap">
                             <a href="#" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
                             <a href="#" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
@@ -187,11 +187,15 @@
                         <p v-if="card.desc" v-html="card.desc"></p>
                     </CardItem>
                 </li>
-            </ul> 
+            </ul>
+
+            <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
+            <div class="bottom_btns">
+                <button class="btn_back" @click="handleBack">{{ t.backLabel }}</button>
+            </div>
+            <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
+
         </section>
-        <div class="diff_actions">
-            <Buttons btn-class="btn_back" @click="goBack">{{ t.backLabel }}</Buttons>
-        </div>
     </div>
 
 
@@ -563,11 +567,19 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .str_color_sup { width: 100%; margin: 12px 0 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px }
 .str_color_sup li { min-width: 0 }
 .str_color_sup img { width: 100%; height: auto; display: block; }
+
+/* common.css로 이동
 .btn_store_find { padding: 4px; color:#161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; text-decoration: none; display: flex; align-items: center; gap: 8px }
 .btn_store_find::before { content: ""; width: 24px; height: 24px; background-color: #aca9a9; flex-shrink: 0; display: block }
+*/
+
 .sns_wrap { display: flex; align-items: center; gap: 6px }
+
+/* common.css로 이동
 .btn_sns { width: 56px; height: 56px; background-color: red; border-radius: 100%; display: flex; align-items: center; justify-content: center }
 .btn_sns::before { content: ""; background-color: #161616; border-radius: 4px; display: block }
+*/
+
 .str_biz_fig { padding:32px; background-color: #F8F8F8; border-radius: 12px; }
 .str_biz_fig_inner{display: flex; align-items: center; justify-content: space-between;}
 .str_biz_fig strong{font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
@@ -639,10 +651,18 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   .str_color_core { grid-template-columns: 1fr; }
   .str_color_core + .str_bi_caption { margin-top: 40px; }
   .str_color_sup { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px; }
+
+  /* common.css로 이동
   .btn_store_find { font-weight: 500; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
   .btn_store_find::before { width: 20px; height: 20px }
+  */
+
   .sns_wrap { gap: 16px }
+
+  /* common.css로 이동
   .btn_sns { width: 40px; height: 40px }
+  */
+
   .str_biz_fig_img{min-width:60px; padding:0;}
   section.sec_brand_biz.str_inner .str_header p {font-weight: 700; line-height: 1.24; letter-spacing: 0; }
   .str_biz_fig_inner{gap:20px;}

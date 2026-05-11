@@ -1271,9 +1271,11 @@
             </section>
         </div>
 
-        <div v-if="!isMobileView" class="diff_actions">
-            <Buttons btn-class="btn_back" @click="goBack">{{ langData.backLabel }}</Buttons>
+        <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
+        <div class="bottom_btns">
+            <button class="btn_back" @click="handleBack">{{ langData.backLabel }}</button>
         </div>
+        <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
     </div>
 
     <div id="pop_store_find" class="modal_wrap">
@@ -3085,11 +3087,13 @@ function goBack() {
 .str_header { padding-bottom: 80px; display: flex; justify-content: space-between; align-items: flex-end }
 .str_header > h2 { color: #161616; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em }
 .str_header > .str_actions { display: flex; align-items: center; gap: 24px }
-.btn_store_find { padding: 4px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; text-decoration: none; display: flex; align-items: center; gap: 8px }
-.btn_store_find::before { content: ""; width: 24px; height: 24px; background-color: #aca9a9; flex-shrink: 0; display: block }
 .sns_wrap { display: flex; align-items: center; gap: 6px }
+
+/* common.css로 이동
 .btn_sns { width: 56px; height: 56px; background-color: #F8F8F8; border-radius: 100%; display: flex; align-items: center; justify-content: center }
 .btn_sns::before { content: ""; background-color: #161616; border-radius: 4px; display: block }
+*/
+
 .brand_acc { margin: 0; padding: 0; background-color: #f8f8f8; border-radius: 12px; list-style: none; overflow: hidden }
 .acc_item { border-bottom: 1px solid #e5e5e9 }
 .acc_inner { padding: 40px 64px; display: grid; grid-template-columns: 1fr 0; align-items: start }
@@ -3097,7 +3101,7 @@ function goBack() {
 .acc_body { min-width: 0 }
 .acc_btn { width: 100%; padding: 0; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; background: transparent; border: none; cursor: pointer; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 16px }
 .acc_btn:focus-visible { outline: 2px solid #111; outline-offset: 2px }
-.acc_btn::after { content: ""; width: 20px; height: 20px; flex-shrink: 0; background-color:#161616; display:block }
+.acc_btn::after { content: ""; width: 20px; height: 20px; flex-shrink: 0; background:url('@/assets/images/common/icon_set_20.png') -539px -24px no-repeat; background-size:auto 159px; display:block }
 .acc_item.is_open .acc_btn::after { opacity: 0 }
 .acc_desc_wrap { overflow: hidden; height: 0; box-sizing: border-box; transition: height 0.35s ease }
 .acc_desc { padding-top: 16px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em }
@@ -3114,8 +3118,6 @@ function goBack() {
 }
 @media (max-width: 768px) {
   .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
-  .btn_store_find { font-weight: 500; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
-  .btn_store_find::before { width: 20px; height: 20px }
   .txt_area > p { margin-bottom: 0 }
   .txt_area > p > span, .txt_area > p > span em { color:#fff; font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center }
   .txt_area > .logo_wrap { display: none }
@@ -3130,7 +3132,9 @@ function goBack() {
   .str_header > h2 { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em }
   .str_header > .str_actions { gap:14px; flex: none; justify-content: flex-start }
   .sns_wrap { gap: 16px }
+  /* common.css로 이동
   .btn_sns { width: 40px; height: 40px }
+  */
   .acc_btn { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0 }
   .acc_inner { padding: 24px }
   .acc_desc { font-size: 1.6rem; line-height: 1.5 }

@@ -16,6 +16,8 @@
             </p>
             <div class="design_box">
                 <Search v-model="searchData" :search_opt="options" @search="handleSearch" />
+
+                <Search class="mt10" v-model="searchData" :search_opt="options" @search="handleSearch" :useSelect="false" />
             </div>
 
             <p class="tit_wrap">

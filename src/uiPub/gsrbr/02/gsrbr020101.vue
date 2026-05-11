@@ -28,9 +28,12 @@
                         <div class="btn_group">
                             <div class="links">
                                 <button type="button" class="btn_link ico_location">{{ t.Buttons.proposal }}</button>
-                                <button type="button" class="btn_link ico_store">{{ t.Buttons.findStore }}</button>
-                                <a href="#" class="btn_sns ico_insta"><span class="blind">{{ t.Sns.insta }}</span></a>
-                                <a href="#" class="btn_sns ico_facebook"><span class="blind">{{ t.Sns.facebook }}</span></a>
+                                <button type="button" class="btn_link btn_store_find">{{ t.Buttons.findStore }}</button><!-- 26.05.11 Edit 이종환 : class -->
+
+                                <!-- 26.05.11 Edit 이종환 : sns 버튼 통일 -->
+                                <a href="#" class="btn_sns btn_sns_insta" :aria-label="t.Sns.insta"></a>
+                                <a href="#" class="btn_sns btn_sns_yt" :aria-label="t.Sns.facebook"></a>
+                                <!-- //26.05.11 Edit 이종환 : sns 버튼 통일 -->
                             </div>
                         </div>
                     </div>
@@ -657,9 +660,10 @@ export default {
 
 .btn_group { display: flex; align-items: center; gap: 10px; }
 .links { display: flex; align-items: center; gap: 24px; }
-.btn_link { padding: 4px; color: #161616; font-size: 18px; background: none; border: 0; cursor: pointer; }
-.btn_link::before {content:''; width:24px; height:24px; margin-right:8px; background:red; display:inline-block;}
+
+/* common.css로 이동
 .btn_sns { width: 56px; height: 56px; background-color: #f8f8f8; border: 1px solid #e5e5e9; border-radius: 99px; display: flex; align-items: center; justify-content: center; }
+*/
 
 .accordion_list { width: 100%; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; position: relative; }
 .accordion_item { width: 100%; border-bottom: 1px solid #e5e5e3; position: relative; }
@@ -726,8 +730,12 @@ export default {
 .item_thumb { width: 100%; height: 198px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; }
 .item_thumb img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
 .item_name { width: 100%; margin-top: 16px; color: #67676f; font-size: 18px; text-align: center; }
+
+/* common.css로 이동
 .btn_back { padding-left: 28px; color: #161616; font-size: 20px; background: none; border: 0; cursor: pointer; position: relative; }
 .btn_back::before { width: 16px; height: 16px; background-color: red; content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
+*/
+
 .blind { width: 1px; height: 1px; clip: rect(0,0,0,0); overflow: hidden; position: absolute; }
 
 

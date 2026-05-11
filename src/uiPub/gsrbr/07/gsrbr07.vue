@@ -30,13 +30,13 @@
                     </ul>
                 </div>
             </div>
+
             <div class="cont_inner">
+                <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
                 <div class="bottom_btns">
-                    <button type="button" class="btn_list_back" @click="handleBack">
-                        <span>{{ t.ListBack }}</span>
-                    </button>
+                    <button class="btn_back" @click="handleBack">{{ t.ListBack }}</button>
                 </div>
-                <a class="btn_big border">{{ t.ListBack }}</a>
+                <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
             </div>
         </section>
     </div>

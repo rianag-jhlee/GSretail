@@ -129,12 +129,14 @@
                                             </div>
                                         </div>
                                         <div class="sns_right">
-                                            <a v-if="mall.contact.insta" :href="mall.contact.insta" target="_blank" class="btn_sns ico_insta">
+                                            <!-- 26.05.11 Edit 이종환 : small 클래스 추가 -->
+                                            <a v-if="mall.contact.insta" :href="mall.contact.insta" target="_blank" class="btn_sns small ico_insta">
                                                 <span class="blind">인스타그램 바로가기</span>
                                             </a>
-                                            <a v-if="mall.contact.homepage" :href="mall.contact.homepage" target="_blank" class="btn_sns ico_home">
+                                            <a v-if="mall.contact.homepage" :href="mall.contact.homepage" target="_blank" class="btn_sns small ico_home">
                                                 <span class="blind">홈페이지 바로가기</span>
                                             </a>
+                                            <!-- //26.05.11 Edit 이종환 : small 클래스 추가 -->
                                         </div>
                                     </div>
                                 </div>
@@ -163,11 +165,12 @@
                     </div>
                 </div>
 
+                <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
                 <div class="bottom_btns">
-                    <button type="button" class="btn_list_back" @click="handleBack">
-                        <span>목록으로 돌아가기</span>
-                    </button>
+                    <button class="btn_back" @click="handleBack">{{ t.backLabel }}</button>
                 </div>
+                <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
+
             </div>
         </div>
     </div>
@@ -280,8 +283,9 @@ export default {
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
                             contact: { phone: `031-755-5878`, email: `egg2bird@gsretail.com`, insta: `#`, homepage: `#` }
                         }
-                    ]
-                }
+                    ],
+                    backLabel : '목록으로 돌아가기' //26.05.11 add
+                },
             }
         };
     },
@@ -374,7 +378,9 @@ export default {
 .info_item i { width: 24px; height: 24px; background-color: red; background-size: contain; background-repeat: no-repeat; display: inline-block; }
 .info_item .val { color: #161616; font-size: 18px; }
 .sns_right { display: flex; gap: 10px; }
+/* common.css로 이동
 .btn_sns { width: 40px; height: 40px; background-color: #f8f8f8; background-size: 24px; background-repeat: no-repeat; background-position: center; border-radius: 50%; display: block; }
+*/
 
 /* Lease Section (Common) */
 .lease_section { width: 100%; margin-top: 80px; }

@@ -84,16 +84,12 @@
                         </Buttons>
                     </div>
                 </section>
-            </div>
 
-
-            <div class="cont_inner">
+                <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
                 <div class="bottom_btns">
-                    <button type="button" class="btn_list_back" @click="handleBack">
-                        <span>{{ t.ListBack }}</span>
-                    </button>
+                    <button class="btn_back" @click="handleBack">{{ t.ListBack }}</button>
                 </div>
-                <a class="btn_big border">{{ t.ListBack }}</a>
+                <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
             </div>
         </section>
     </div>
@@ -248,7 +244,6 @@ div.cont_inner {padding-top:200px}
 /* Buttons Area */
 .btn-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .btn-group button {width:320px;}
-.bottom_btns { width: 100%; margin-top: 100px; text-align: left; padding-bottom: 100px; }
 .btn_list_back { background: transparent; padding: 0; border: 0; cursor: pointer; }
 .btn_list_back span { color: #161616; font-size: 20px; display: flex; align-items: center; gap: 12px; }
 .btn_list_back span::before { width: 16px; height: 16px; background-color: red; content: ''; display: inline-block; }
@@ -297,7 +292,6 @@ div.cont_inner {padding-top:200px}
     .step_box {gap:40px;}
     .btn-group button {width:100%;}
     .mt200 {margin-top:80px}
-    .bottom_btns {display:none;}
     .bottom_btns + .btn_big.border {margin-top:0px; margin-bottom:80px; display:flex; justify-content: center;}
 }
 </style>
