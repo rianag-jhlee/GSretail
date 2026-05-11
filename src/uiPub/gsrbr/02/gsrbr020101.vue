@@ -205,17 +205,33 @@
                                 <h4 class="tm-section-title">{{ t.TasteManagement.principleTitle }}</h4>
                                 <p class="tm-section-subtext">{{ t.TasteManagement.principleSub }}</p>
                             </div>
-                            <div class="tm-principles-grid">
-                                <div v-for="(p, pIdx) in t.TasteManagement.principles" :key="pIdx" class="tm-principle-card">
-                                    <div class="tm-card-header">
-                                        <span class="tm-card-num">0{{ pIdx + 1 }}</span>
-                                        <strong class="tm-card-tit">{{ p.title }}</strong>
-                                    </div>
-                                    <div class="tm-card-body">
-                                        <p class="tm-card-main-text">{{ p.desc }}</p>
-                                        <p class="tm-card-sub-text">{{ p.subDesc }}</p>
-                                    </div>
-                                </div>
+                            <div class="tm-principles-container res-swiper-container">
+                                <swiper
+                                    :slides-per-view="'auto'"
+                                    :space-between="0"
+                                    :breakpoints="{
+                                        768: {
+                                            allowTouchMove: false
+                                        }
+                                    }"
+                                    class="tm-principles-swiper"
+                                >
+                                    <swiper-slide 
+                                        v-for="(p, pIdx) in t.TasteManagement.principles" 
+                                        :key="'principle-' + pIdx" 
+                                        class="tm-principle-card res-slide-item"
+                                    >
+                                        <div class="tm-card-header">
+                                            <span class="tm-card-num">0{{ pIdx + 1 }}</span>
+                                            <strong class="tm-card-tit">{{ p.title }}</strong>
+                                        </div>
+                                        <div class="tm-card-body">
+                                            <p class="tm-card-main-text">{{ p.desc }}</p>
+                                            <p class="tm-card-sub-text">{{ p.subDesc }}</p>
+                                        </div>
+                                        <div v-if="pIdx < t.TasteManagement.principles.length - 1" class="divider pc-only"></div>
+                                    </swiper-slide>
+                                </swiper>
                             </div>
                         </div>
 
@@ -257,14 +273,15 @@
                 <div class="bottom_btns">
                     <button type="button" class="btn_back" @click="handleBack">{{ t.Buttons.backToList }}</button>
                     <!-- gsrbr0203 ~ gsrbr020401 팝업 아이디만 변경해서 요청하면 됨 -->
-                    <Buttons 
+                    <!-- <Buttons 
                         btn-class="btn_icon" 
                         @click="openModal" 
                         data-popid="gsrbr0203" 
                         data-type="lg" 
                         data-cont="gsrbr0203"
-                    >테스트</Buttons>
+                    >테스트</Buttons> -->
                 </div>
+                <a class="btn_big border">{{ t.Buttons.backToList}}</a>
             </div>
         </section>
 
@@ -289,6 +306,8 @@ import Buttons from "@/components/Buttons.vue";
 import modal from "@/assets/js/modal";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
 
 // GSAP 플러그인 등록
 gsap.registerPlugin(ScrollTrigger);
@@ -297,7 +316,9 @@ export default {
     name: "GsTheFreshBrand",
     components: {
         Tabs,
-        Buttons
+        Buttons,
+        Swiper,
+        SwiperSlide
     },
     data() {
         return {
@@ -496,6 +517,7 @@ export default {
                             }
                         ]
                     }
+                    
                 }
             }
         };
@@ -666,14 +688,14 @@ export default {
 .accordion_item:last-child { border-bottom: 0; }
 .accordion_header { width: 100%; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border: 0; background: none; }
 .accordion_header:after { content: ''; width: 56px; height: 56px; border: 1px solid red; }
-.accordion_item.active .accordion_header { padding: 64px; }
+.accordion_item.active .accordion_header { padding:64px 64px 16px; }
 .accordion_item.active .accordion_header:after { display: none; }
 .header_text { color: #161616; font-size: 28px; font-weight: 700; }
 
-.accordion_body { width: 100%; padding: 0 64px 64px; position: relative; }
+.accordion_body { width: 100%; padding: 0 64px 110px; position: relative; }
 .body_content { display: flex; justify-content: space-between; gap: 40px; }
 .desc_text { flex: 1; color: #67676f; font-size: 20px; line-height: 1.6; }
-.content_img { width: 400px; height: 260px; border-radius: 12px; overflow: hidden; position: absolute; top: -100px; right: 64px; }
+.content_img { width: 400px; height: 260px; border-radius: 12px; overflow: hidden; position: absolute; top: -64px; right: 64px; }
 .content_img img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Origin Section & Tabs */
@@ -756,8 +778,9 @@ export default {
 .tm-step-text { font-size: 16px; color: #67676F; line-height: 1.5; }
 
 /* Principles */
-.tm-principles-grid { display: flex; gap: 20px; width: 100%; }
-.tm-principle-card {flex: 1; background-color: #F8F8F8; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 16px; overflow: hidden; }
+.tm-principle-card {width:calc((100% - 60px) / 4) !important; padding:32px; background-color:#F8F8F8; border-radius:12px; display:flex; flex-direction:column; gap:16px; position:relative; box-sizing:border-box;}
+.swiper-slide.tm-principle-card {height:stretch; margin-right:20px;}
+.swiper-slide.tm-principle-card:last-of-type {margin-right:0 !important;}
 .tm-card-header {display:flex; flex-direction:column; gap:8px;}
 .tm-card-num { font-size: 18px; font-weight: 700; color: #107AF2; }
 .tm-card-tit { font-size: 20px; font-weight: 700; color: #161616; }
@@ -779,6 +802,7 @@ export default {
 .tm-product-thumb { width: 100%; height: 198px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; }
 .tm-product-thumb img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
 .tm-product-name { margin-top: 16px; font-size: 18px; color: #67676F; text-align: center; line-height: 1.4; }
+.bottom_btns + .btn_big.border {display:none !important;}
 
 
 @media screen and (max-width: 1024px) {
@@ -824,29 +848,58 @@ export default {
     .history_text :deep(br) {display:none;}
     .brand_value_section { padding: 100px 0; }
     .title_text { font-size: 24px; }
-    .accordion_header, .accordion_item.active .accordion_header { padding: 24px; }
+    .accordion_header, .accordion_item.active .accordion_header { padding: 24px 80px 24px 24px; position:relative; }
     .header_text { font-size: 18px; text-align:left;}
     .accordion_body { padding: 0 20px 20px; }
     .desc_text { font-size: 16px; }
-    .origin_intro .title { font-size: 24px; }
+    :deep(.desc_text) br:first-of-type, :deep(.desc_text) br:last-of-type {display:none !important;}
+    .origin_group { padding-top:40px;}
+    .origin_lnb {display:none;}
+    .origin_intro {padding-top:20px;}
+    .origin_intro .title { font-size: 28px; }
+    .origin_intro .text_box p :deep(span) {font-size:14px !important;}
+    .sub_title {font-size:24px;}
+    .group_header { margin-bottom:24px; }
+    .group_title {font-size:20px;}
+    .group_title + p {font-size:16px; line-height:1.5;}
     .visual_img_small { height: 200px; }
     .item_grid { grid-template-columns: repeat(2, 1fr); }
     .item_thumb { height: auto; aspect-ratio: 16/10; }
-    .mou_grid { grid-template-columns: repeat(1, 1fr); }
+    .mou_name {font-size:16px;}
     .mou_table th, .mou_table td { padding: 15px; font-size: 14px; }
+    h4.tm-section-title {font-size:24px;}
+    .tm-intro-section {padding-bottom:64px;}
+    .tm-node-section {margin-bottom:80px;}
+    .tm-node-section:last-of-type {margin-bottom:0px;}
+    .tm-lnb-side {display:none;}
     .tm-product-main {width:100%;}
     .tm-main-title { font-size: 28px; }
-    .tm-main-desc { font-size: 18px; }
-    .tm-steps-grid { grid-template-columns: repeat(1, 1fr); gap: 30px; }
-    .tm-steps-wrap { padding: 30px 20px; }
+    .tm-card-tit {font-size:18px;}
+    .tm-main-desc, .tm-step-num, .tm-step-tit, .tm-section-subtext, .tm-card-main-text { font-size: 16px; }
+    .tm-step-text {font-size:14px;}
+    .tm-steps-grid {position:relative; grid-template-columns: repeat(1, 1fr); gap: 30px; }
+    .tm-steps-wrap { padding:40px; }
     .tm-product-grid { grid-template-columns: repeat(2, 1fr); }
     .tm-product-thumb { height: auto; aspect-ratio: 16/10; }
+    .tm-step-item {padding-left:80px; position:relative;}
+    .tm-step-num::before {margin-bottom:0; position:absolute; top:0; left:0;}
+    .tm-product-name, .item_name {font-size:14px;}
     .origin_list_box {width:100%;}
     .mou_item.text_item { text-align: center; }
     .mou_logo {justify-content:flex-start;}
     .mou_logo img {width:100%;}
     .mou_logo.fipa_logo {justify-content:center;}
     .visual_content {display:none;}
+    .btn_link {font-size:14px;}
+    .btn_sns { width:40px; height:40px;}
+    .btn_link::before {width:20px; height:20px;} 
+    .accordion_header:after {width:40px; height:40px; position:absolute; top:24px; right:24px;}
+    .origin_tabs_2depth {margin:0px;}
+    .bottom_btns {display:none;}
+    .bottom_btns + .btn_big.border {margin-top:80px; display:flex !important; justify-content: center;}
+    .tm-principles-swiper {overflow:hidden !important;}
+    .res-slide-item {width:280px !important; margin-right:16px !important; padding:24px; flex-shrink:0;}
+    .pc-only {display:none;}
 }
 
 </style>
