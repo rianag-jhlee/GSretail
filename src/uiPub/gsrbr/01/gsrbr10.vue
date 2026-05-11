@@ -23,7 +23,7 @@
                             <p>{{ t.SubContent_2 }}</p>
                         </li>
                         <li>
-                            <a :href="t.HopageLink" target="_blank">{{ t.HopageText }}</a>
+                            <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a>
                         </li>
                     </ul>
                 </div>
@@ -111,7 +111,6 @@ export default {
 .body_wrap .cont_area .cont_inner ul li {}
 .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:24px; font-weight:600; line-height:1.;}
 .body_wrap .cont_area .cont_inner ul li a {color:#161616; font-size:18px; display:flex; align-items:center;}
-.body_wrap .cont_area .cont_inner ul li a::before {width: 24px; height: 24px; background-color: red; content: ''; display: inline-block; margin-right: 8px;}
 
 /* Bottom Buttons */
 .btn_list_back { background: transparent; padding: 0; border: 0; cursor: pointer; }
