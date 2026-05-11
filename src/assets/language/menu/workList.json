@@ -1516,8 +1516,8 @@
         "link": "/gsrcu01" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
-        "note": "gsrcu01에서 확인"
+        "status": "com",
+        "note": ""
     },
     {
         "depth1": "", "depth2": "", "depth3": "창업안내", "depth4": "", "depth5": "", "depth6": "",
@@ -1526,8 +1526,8 @@
         "link": "/gsrcu01" ,
         "startDate": "",
         "endDate": "",
-        "status": "",
-        "note": "gsrcu01에서 확인"
+        "status": "com",
+        "note": ""
     },
     {
         "depth1": "", "depth2": "정도경영 목소리", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
@@ -1579,4 +1579,7 @@
         "status": "",
         "note": "gsrcu01에서 확인"
     }    
+    
+    
+    
 ]

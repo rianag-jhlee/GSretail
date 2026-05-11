@@ -1,0 +1,171 @@
+<template>
+    <div class="main-container">
+        <header class="title_wrap ac">
+            <h2 class="page_title">{{ pageData.pageTitle }}</h2>
+        </header>
+        <main class="content">
+            <section class="sec_location">
+                <header class="header">
+                    <h3>{{ pageData.location.title }}</h3>
+                </header>
+                <article class="location_panel">
+                    <div class="location_info">
+                        <div>
+                            <h4>{{ pageData.location.addressLabel }}</h4>
+                            <p>{{ pageData.location.address }}</p>
+                        </div>
+                        <div>
+                            <h4>{{ pageData.location.subwayLabel }}</h4>
+                            <p>{{ pageData.location.subwayDesc }}</p>
+                        </div>
+                        <div>
+                            <h4>{{ pageData.location.busLabel }}</h4>
+                            <p><span class="bus_tag_reg">{{ pageData.location.busMainLabel }}</span> {{ pageData.location.busMainRoutes }}</p>
+                            <p><span class="bus_tag_reg">{{ pageData.location.busExpressLabel }}</span> {{ pageData.location.busExpressRoutes }}</p>
+                        </div>
+                    </div>
+                    <div class="map_area" role="img" :aria-label="pageData.location.mapAriaLabel"></div>
+                </article>
+            </section>
+            <section class="sec_location">
+                <header class="header">
+                    <h3>{{ pageData.location2.title }}</h3>
+                </header>
+                <article class="location_panel">
+                    <div class="location_info">
+                        <div>
+                            <h4>{{ pageData.location2.addressLabel }}</h4>
+                            <p><span>{{ pageData.location2.addressLine1Label }}</span> {{ pageData.location2.addressLine1 }}</p>
+                            <p><span>{{ pageData.location2.addressLine2Label }}</span> {{ pageData.location2.addressLine2 }}</p>
+                        </div>
+                        <div>
+                            <h4>{{ pageData.location2.subwayLabel }}</h4>
+                            <p>{{ pageData.location2.subwayLine1 }}</p>
+                            <p>{{ pageData.location2.subwayLine2 }}</p>
+                        </div>
+                        <div>
+                            <h4>{{ pageData.location2.busLabel }}</h4>
+                            <ul class="route_list">
+                                <li v-for="(item, idx) in pageData.location2.busItems" :key="'bus-' + idx">
+                                    <strong class="txt_blue">{{ item.stop }}</strong>
+                                    <p><span>{{ pageData.location2.busGanLabel }}</span> {{ pageData.location2.busGanNums }}</p>
+                                    <p><span>{{ pageData.location2.busExpressLabel }}</span> {{ item.express }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>{{ pageData.location2.carLabel }}</h4>
+                            <ul class="route_list">
+                                <li v-for="(item, idx) in pageData.location2.carItems" :key="'car-' + idx">
+                                    <strong class="txt_blue">{{ item.route }}</strong>
+                                    <p>{{ item.desc }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="map_stack">
+                        <div class="map_area" role="img" :aria-label="pageData.location2.mapAriaLabel1"></div>
+                        <div class="map_area" role="img" :aria-label="pageData.location2.mapAriaLabel2"></div>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+</template>
+
+<script setup>
+const pageData = {
+    pageTitle: "위치",
+    location: {
+        title: "GS타워",
+        addressLabel: "주소",
+        address: "서울시 강남구 논현로 508 (역삼동 679번지 GS타워)",
+        subwayLabel: "지하철 이용시",
+        subwayDesc: "2호선 역삼역 7번 출구 (GS타워 지하 연결통로 이용)",
+        busLabel: "버스 이용시",
+        busMainLabel: "간선/순환",
+        busMainRoutes: "146, 147, 341, 360, 740, 41",
+        busExpressLabel: "직행/급행",
+        busExpressRoutes: "1100, 1700, 2000, 7007, 8001",
+        mapAriaLabel: "GS타워 위치 지도 영역(퍼블용 이미지)",
+    },
+    location2: {
+        title: "GS강서타워/GS강서N타워",
+        addressLabel: "주소",
+        addressLine1Label: "강서타워",
+        addressLine2Label: "강서N타워",
+        addressLine1: "서울특별시 영등포구 선유로 75 GS강서타워",
+        addressLine2: "서울특별시 영등포구 선유로 82 GS강서N타워",
+        subwayLabel: "지하철 이용시",
+        subwayLine1: "2호선 문래역 3번 출구 (출구방향 도보 7분)",
+        subwayLine2: "5호선 양평역 2번 출구 (출구방향 도보 15분)",
+        busLabel: "버스 이용시",
+        busGanLabel: "간선",
+        busGanNums: "640, 650",
+        busExpressLabel: "직행/급행",
+        busItems: [
+            { stop: "영등포기계상가 정류장(영등포역 방향 운행)", express: "6211, 6628, 6629, 6625, 6640, 6630, 5012" },
+            { stop: "영등포기계상가(오목교역 방향 운행)", express: "5616, 6211, 6628, 6629, 6625, 6640, 6630, 5012" },
+            { stop: "양남동로타리", express: "5616, 6211, 6628, 6629, 6640, 6630, 5012" },
+        ],
+        carLabel: "자동차 운전시",
+        carItems: [
+            { route: "올림픽대로", desc: "양화대교 남단에서 문래동 사거리 방향으로 직진, 약 10분 소요" },
+            { route: "강변북로", desc: "영등포 시장에서 오목교 방향으로 직진, 양남사거리에서 좌회전 후 50m 직진" },
+        ],
+        mapAriaLabel1: "GS강서타워 위치 지도 영역(퍼블용 이미지)",
+        mapAriaLabel2: "GS강서N타워 위치 지도 영역(퍼블용 이미지)",
+    },
+};
+</script>
+
+<style scoped>
+    .main-container { width: 100%; position: relative; display: block; }
+    .title_wrap { width: 100%; max-height: 480px; padding: 10.91% 0 11.25%; position: relative; display: block; overflow: hidden; text-align: center; background-color: transparent; }
+    .title_wrap::before { width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 0; content: ""; background-image: url("@/assets/images/dummy/gsrab_05_01.jpg"); background-repeat: no-repeat; background-position: 40% center; background-size: cover; transform-origin: center; }
+    .title_wrap::after { width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 1; content: ""; background-color: rgba(0, 0, 0, 0.5); }
+    .title_wrap > h2 { position: relative; z-index: 2; color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; }
+    .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 200px 20px; position: relative; display: block; }
+    section + section { padding: 200px 0 0; }
+    section { display: flex; flex-direction: column; gap: 64px; }
+    .header h3 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+    .header p { margin: 16px 0 0; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_location > .location_panel { width: 100%; padding: 40px 0; border-top: 1px solid #e5e5e9; display: flex; flex-wrap: nowrap; gap: 20px; justify-content: space-between; }
+    .sec_location .location_info { max-width: 700px; min-width: 474px; flex: 1 1 0; display: flex; flex-direction: column; gap: 56px; }
+    .sec_location .location_info > div h4 { margin-bottom: 16px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_location .location_info > div p { color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; display: flex; }
+    .sec_location .location_info > div > p + p,
+    .sec_location .location_info .route_list > li > p + p{ margin-top: 6px; }
+    .sec_location .location_info > div > p > span { margin-right: 8px; font-weight: 700; display: block; flex: 0 0 auto; letter-spacing: -0.02em; }
+    .sec_location .location_info .route_list { display: flex; flex-direction: column; gap: 16px; }
+
+    .sec_location .location_info .route_list > li > p { letter-spacing: -0.02em; }
+    .sec_location .location_info .route_list > li > p > span { margin-right: 8px; font-weight: 700; display: block; flex: 0 0 auto; }
+    .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { flex: 0 1 700px; min-width: 0; align-self: flex-start; }
+    .sec_location .map_area { width: 100%; max-width: 700px; aspect-ratio: 700 / 440; height: auto; border-radius: 12px; background-color: #e5e5e9; background-repeat: no-repeat; background-position: center; background-size: contain; box-sizing: border-box; }
+    .map_stack { width: 100%; max-width: 700px; min-width: 0; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; }
+    .sec_location .location_info strong.txt_blue { margin-bottom: 8px; color: #107af2; font-weight: 700; font-size: 1.8rem; line-height: 1.24; letter-spacing: 0; display: block; }
+    @media screen and (max-width: 1024px) {
+        .sec_location > .location_panel { flex-wrap: wrap; padding: 40px 0 32px; }
+        .sec_location .location_info { flex: 1 1 100%; max-width: none; min-width: 0; order: 2; }
+        .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { flex: none; width: 100%; max-width: 700px; }
+        .sec_location .map_area { max-width: 100%; }
+        .map_stack { max-width: 100%; }
+    }
+    @media screen and (max-width: 768px) {
+        .title_wrap { display: none; }
+        section + section { padding: 60px 0 0; }
+        .content { max-width: 100%; padding: 60px 20px 94px; }
+        .header h3 { font-size: 2.4rem; line-height: 1.35; text-align: left; }
+        .sec_location { gap: 30px; }
+        .sec_location > .location_panel { padding: 30px 0 36px; flex-direction: column; flex-wrap: nowrap; gap: 0; align-items: stretch; border-top: 1px solid #e5e5e9; }
+        .sec_location .location_info { order: 2; flex: none; padding-top: 30px; gap: 36px; }
+        .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { order: 1; max-width: 100%; }
+        .sec_location .map_area { aspect-ratio: 335 / 211; }
+        .map_stack { gap: 24px; }
+        .sec_location .location_info > div h4 { font-size: 2rem; }
+        .sec_location .location_info > div p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+        .sec_location .location_info strong.txt_blue { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+        .sec_location .location_info .bus_tag_reg { font-weight: 400; }
+    }
+</style>
