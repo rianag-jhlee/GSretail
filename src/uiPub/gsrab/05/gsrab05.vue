@@ -131,7 +131,7 @@ const pageData = {
     .header h3 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
     .header p { margin: 16px 0 0; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_location > .location_panel { width: 100%; padding: 40px 0; border-top: 1px solid #e5e5e9; display: flex; flex-wrap: nowrap; gap: 20px; justify-content: space-between; }
-    .sec_location .location_info { max-width: 700px; min-width: 0; flex: 1 1 0; display: flex; flex-direction: column; gap: 56px; }
+    .sec_location .location_info { max-width: 700px; min-width: 474px; flex: 1 1 0; display: flex; flex-direction: column; gap: 56px; }
     .sec_location .location_info > div h4 { margin-bottom: 16px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_location .location_info > div p { color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; display: flex; }
     .sec_location .location_info > div > p + p,
@@ -141,14 +141,16 @@ const pageData = {
 
     .sec_location .location_info .route_list > li > p { letter-spacing: -0.02em; }
     .sec_location .location_info .route_list > li > p > span { margin-right: 8px; font-weight: 700; display: block; flex: 0 0 auto; }
-    .sec_location .map_area { width: 100%; max-width: 700px; height: 440px; border-radius: 12px; background-color: #e5e5e9; background-repeat: no-repeat; background-position: center; background-size: contain; box-sizing: border-box; }
-    .map_stack { width: 100%; max-width: 700px; min-width: 0; display: flex; flex-direction: column; gap: 16px; flex: 0 1 auto; box-sizing: border-box; }
+    .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { flex: 0 1 700px; min-width: 0; align-self: flex-start; }
+    .sec_location .map_area { width: 100%; max-width: 700px; aspect-ratio: 700 / 440; height: auto; border-radius: 12px; background-color: #e5e5e9; background-repeat: no-repeat; background-position: center; background-size: contain; box-sizing: border-box; }
+    .map_stack { width: 100%; max-width: 700px; min-width: 0; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; }
     .sec_location .location_info strong.txt_blue { margin-bottom: 8px; color: #107af2; font-weight: 700; font-size: 1.8rem; line-height: 1.24; letter-spacing: 0; display: block; }
     @media screen and (max-width: 1024px) {
         .sec_location > .location_panel { flex-wrap: wrap; padding: 40px 0 32px; }
         .sec_location .location_info { flex: 1 1 100%; max-width: none; min-width: 0; order: 2; }
-        .sec_location .map_area { flex: none; width: 100%; max-width: 100%; height: 380px; }
-        .map_stack { flex: none; width: 100%; max-width: 100%; }
+        .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { flex: none; width: 100%; max-width: 700px; }
+        .sec_location .map_area { max-width: 100%; }
+        .map_stack { max-width: 100%; }
     }
     @media screen and (max-width: 768px) {
         .title_wrap { display: none; }
@@ -158,9 +160,9 @@ const pageData = {
         .sec_location { gap: 30px; }
         .sec_location > .location_panel { padding: 30px 0 36px; flex-direction: column; flex-wrap: nowrap; gap: 0; align-items: stretch; border-top: 1px solid #e5e5e9; }
         .sec_location .location_info { order: 2; flex: none; padding-top: 30px; gap: 36px; }
-        .sec_location .location_panel > .map_area { order: 1; width: 100%; height: 211px; flex: none; }
-        .map_stack { order: 1; width: 100%; flex: none; gap: 24px; }
-        .map_stack .map_area { width: 100%; height: 211px; flex: none; }
+        .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { order: 1; max-width: 100%; }
+        .sec_location .map_area { aspect-ratio: 335 / 211; }
+        .map_stack { gap: 24px; }
         .sec_location .location_info > div h4 { font-size: 2rem; }
         .sec_location .location_info > div p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
         .sec_location .location_info strong.txt_blue { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
