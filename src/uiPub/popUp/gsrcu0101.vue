@@ -1,5 +1,5 @@
 <template>
-    <div class="modal_cont delivery_modal">
+    <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
             <a href="#none" @click="closeModal" class="btn_close">닫기</a>
@@ -165,9 +165,11 @@
         </div>
 
         <!-- 상담신청완료 팝업 -->
-        <div id="gsrcu010101" class="modal_wrap">
-            <div class="modal_container"></div>
-        </div>
+        <teleport to="body">
+            <div id="gsrcu010101" class="modal_wrap">
+                <div class="modal_container"></div>
+            </div>
+        </teleport>
     </div>
 </template>
 

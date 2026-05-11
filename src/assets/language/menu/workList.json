@@ -1494,9 +1494,9 @@
         "type": "Pop-up",
         "path": "popUp/",
         "link": "/gsrcu01" ,
-        "startDate": "",
-        "endDate": "",
-        "status": "",
+        "startDate": "26-05-11",
+        "endDate": "26-05-11",
+        "status": "com",
         "note": "gsrcu01에서 확인"
     },
     {
@@ -1514,10 +1514,10 @@
         "type": "Pop-up",
         "path": "popUp/",
         "link": "/gsrcu01" ,
-        "startDate": "",
-        "endDate": "",
+        "startDate": "26-05-11",
+        "endDate": "26-05-11",
         "status": "com",
-        "note": ""
+        "note": "gsrcu01에서 확인"
     },
     {
         "depth1": "", "depth2": "", "depth3": "창업안내", "depth4": "", "depth5": "", "depth6": "",
@@ -1574,9 +1574,9 @@
         "type": "Pop-up",
         "path": "popUp/gsrcu020101",
         "link": "/gsrcu01" ,
-        "startDate": "",
-        "endDate": "",
-        "status": "",
+        "startDate": "26-05-11",
+        "endDate": "26-05-11",
+        "status": "com",
         "note": "gsrcu01에서 확인"
     }    
     

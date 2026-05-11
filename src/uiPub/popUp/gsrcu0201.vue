@@ -156,7 +156,7 @@
                         </div>
                     </article>
                     <div class="btn-wrap">
-                        <Buttons btn-class="btn_big primary"  @click="openModal" data-popid="gsrcu010101" data-type="small" data-cont="gsrcu010101">{{ t.listening.InputWrapcont.part2.btnSubmit }}</Buttons>
+                        <Buttons btn-class="btn_big primary"  @click="openModal" data-popid="gsrcu020101" data-type="small" data-cont="gsrcu020101">{{ t.listening.InputWrapcont.part2.btnSubmit }}</Buttons>
                         <Buttons btn-class="btn_big gray" @click="closeModal">{{ t.listening.InputWrapcont.part2.btnCancel }}</Buttons>
                     </div>
                 </div>
@@ -164,9 +164,11 @@
         </div>
 
         <!-- 상담신청완료 팝업 -->
-        <div id="gsrcu010101" class="modal_wrap">
-            <div class="modal_container"></div>
-        </div>
+        <teleport to="body">
+            <div id="gsrcu020101" class="modal_wrap">
+                <div class="modal_container"></div>
+            </div>
+        </teleport>
     </div>
 </template>
 
