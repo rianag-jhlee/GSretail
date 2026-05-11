@@ -164,8 +164,8 @@
             </section>
         </div>
 
+        <!-- 상담신청완료 팝업 -->
         <teleport to="body">
-            <!-- 상담신청완료 팝업 -->
             <div id="gsrcu010101" class="modal_wrap">
                 <div class="modal_container"></div>
             </div>
