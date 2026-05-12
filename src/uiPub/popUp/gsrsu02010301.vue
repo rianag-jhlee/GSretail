@@ -9,45 +9,45 @@
 
             <div class="sust_purc_policy_popup">
                 <!-- 1. 목적 -->
-                <div class="section first">
-                    <p class="title">{{ t.section1.title }}</p>
+                <section class="section first">
+                    <strong class="title">{{ t.section1.title }}</strong>
                     <p>{{ t.section1.content }}</p>
-                </div>
+                </section>
 
                 <!-- 2. 정의 -->
-                <div class="section">
-                    <p class="title">{{ t.section2.title }}</p>
+                <section class="section">
+                    <strong class="title">{{ t.section2.title }}</strong>
                     <ul class="txt_idn">
                         <li v-for="(item, index) in t.section2.items" :key="index">
                             <strong class="s_title">{{ item.label }}</strong>
                             <p class="desc">{{ item.content }}</p>
                         </li>
                     </ul>
-                </div>
+                </section>
 
                 <!-- 3. 적용대상 -->
-                <div class="section">
-                    <p class="title">{{ t.section3.title }}</p>
+                <section class="section">
+                    <strong class="title">{{ t.section3.title }}</strong>
                     <ul class="txt_idn">
                         <li v-for="(item, index) in t.section3.items" :key="index">
                             <strong class="s_title">{{ item.label }}</strong>
                             <p class="desc" v-html="item.content"></p>
                         </li>
                     </ul>
-                </div>
+                </section>
 
                 <!-- 4. 지속가능한 구매 방침 -->
-                <div class="section">
-                    <p class="title">{{ t.section4.title }}</p>
+                <section class="section">
+                    <strong class="title">{{ t.section4.title }}</strong>
                     <p class="intro_text">{{ t.section4.intro }}</p>
                     <p v-for="(policy, index) in t.section4.items" :key="index" class="dot">
-                        <span class="bold">{{ policy.step }}</span> {{ policy.text }}
+                        <strong class="bold">{{ policy.step }}</strong> {{ policy.text }}
                     </p>
-                </div>
+                </section>
 
                 <!-- 5. 지속가능한 구매 절차 -->
-                <div class="section">
-                    <h2 class="title">{{ t.section5.title }}</h2>
+                <section class="section">
+                    <strong class="title">{{ t.section5.title }}</strong>
                     <ul class="conti_step_list_orange">
                         <li v-for="(step, index) in t.section5.steps" :key="index">
                             <span class="num">{{ step.id }}</span>
@@ -59,7 +59,7 @@
                             </ul>
                         </li>
                     </ul>
-                </div>
+                </section>
             </div>
         </div>
     </div>
@@ -138,8 +138,8 @@ export default {
 .sust_purc_policy_popup {font-size:15px; line-height:25px;}
 .sust_purc_policy_popup .section {border-top:1px solid #dfdfdf; padding:30px 0}
 .sust_purc_policy_popup .section.first {padding-top:0px; border-top:0}
-.sust_purc_policy_popup .title {font-size:18px; font-weight:bold; padding:0 0 5px 0;}
-.sust_purc_policy_popup ul .s_title {font-weight:bold;}
+.sust_purc_policy_popup .title {display:block; font-size:18px; font-weight:bold; padding:0 0 5px 0;}
+.sust_purc_policy_popup ul .s_title {display:block;}
 .sust_purc_policy_popup ul.txt_idn > li + li {padding-top:30px}
 .conti_step_list_orange {overflow:hidden; display:flex; gap:10px; flex-wrap:wrap;}
 .conti_step_list_orange>li {flex: 0 0 calc(25% - 10px);position:relative;height:268px;border:3px solid #ebebeb;border-radius:8px;text-align:center;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
