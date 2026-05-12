@@ -189,7 +189,7 @@ h4 {margin-bottom:40px; font-size:32px;}
 /* body_wrap Section */
 .body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
 .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
-.body_wrap .cont_area .cont_inner ul {margin-bottom:40px; padding:50px; background:#fff;}
+.body_wrap .cont_area .cont_inner ul {margin-bottom:40px; padding:50px; background:#fff; border-radius:12px;}
 .body_wrap .cont_area .cont_inner h3 + div {margin-bottom:60px; position:relative;}
 .body_wrap .cont_area .cont_inner h3 + div a {font-size:16px; position:absolute; right:0; bottom:0; display:flex; align-items:center; gap:8px;}
 .body_wrap .cont_area .cont_inner h3 + div a::before {width: 24px; height: 24px; background-color: red; content: ''; display:inline-block;}
@@ -262,7 +262,8 @@ ul li strong br {display:none;}
     .bi_color {width:100%;}
     .bi_color div dl {width:100%;}
     .bi_color div dl dt {font-size:16px;}
-    :deep(.supp_color) div dl dd {gap:0px;}
+    .bi_color div dl dd {line-height:1.4;}
+    :deep(.supp_color) div dl dd {gap:0px; line-height:1.4;}
     :deep(.supp_color) div dl:nth-of-type(2) dd p:last-of-type {margin-top:0px !important;}
     :deep(.bi_color) div dl dd p {font-size:14px !important;}
     .supp_color div {display:flex; flex-wrap:wrap;}

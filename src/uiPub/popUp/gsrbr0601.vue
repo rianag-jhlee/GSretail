@@ -145,7 +145,7 @@ h3 { margin-bottom: 60px; color: #161616; font-size: 32px; font-weight: 700; }
 :deep(.modal_content) h3 br {display:none;}
 h4 { margin-bottom: 21px; color: #161616; font-size: 24px; font-weight: 700; }
 .accodian_sec {margin-bottom:80px;}
-.btn_mid {padding:10px 23px !important;}
+.btn_mid {padding:10px 23px;}
 .pagination {justify-content:center;}
 :deep(.acc_tit_btn).acc_tit_open {font-weight:700 !important;}
 
@@ -177,10 +177,14 @@ h4 { margin-bottom: 21px; color: #161616; font-size: 24px; font-weight: 700; }
     .modal_header { font-size:18px; }
     .info_box {gap: 16px;}
     .info_box p {width:55%; color:#161616; font-size:14px;}
-    :deep(.board_type_toggle) dt a.acc_tit_btn {padding:22px 0;  font-size: 16px; }
+    :deep(.board_type_toggle) {border-top:1px solid #161616;}
+    :deep(.board_type_toggle) dt a.acc_tit_btn {padding:8px 0;  font-size: 16px; }
     :deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont * {font-size:16px;}
     .faq_answer span { font-size: 15px; }
     h3 {font-size:20px;}
     :deep(.modal_content) h3 br {display:block;}
+    .tab_sec :deep(.board_type_toggle) {border-top:0;}
+    .tab_content.mt40 {margin-top:0px;}
+    .btn_mid {padding:7px 12px !important; font-size:16px; border-radius:4px;}
 }
 </style>

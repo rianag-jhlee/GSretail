@@ -117,7 +117,7 @@ export default {
                     ],
                     NoticeTxt: "사전예약 기획전 택배 배송 행사도 발 빠르게 확인하세요!",
                     ChildFoodTitle: "아동급식 사전예약",
-                    ChildFoodDesc: "우리동네GS 앱에서 '아동급식카드'로 사전예약 매장수령 결제 시 20%할인된 가로 구매 가능한 서비스입니다. 만 18세 미만 아동/청소년 이용 가능한 서비스로 아래 지자체에서 아동급 식카드를 제공받은 대상자라면 누구나 이용 가능합니다.",
+                    ChildFoodDesc: "우리동네GS 앱에서 '아동급식카드'로 사전예약 매장수령 결제 시 20%할인된 가로 구매 가능한 서비스입니다.<br/> 만 18세 미만 아동/청소년 이용 가능한 서비스로 아래 지자체에서 아동급 식카드를 제공받은 대상자라면 누구나 이용 가능합니다.",
                     ChildFoodNotice: "* 신한카드 대행 지자체 : 서울특별시, 인천광역시, 부산광역시, 춘천시, 원주시, 속초시\n* 농협은행 대행 지자체 : 경기도, 경상북도, 경상남도, 충청북도, 충청남도, 대전광역시, 울산광역시, 제주특별자치도",
                     AccTitle: "아동급식 사전예약 이용방법",
                     Steps: [
@@ -177,8 +177,8 @@ section { padding-bottom: 80px; }
 .product_category span { color: #67676f; font-size: 16px; text-align: center; }
 
 /* Notice Bar */
-.notice_bar { display: flex; align-items: center; gap: 6px; padding: 16px; background: #f8f8f8; border-radius: 6px; }
-.notice_bar p { position: relative; padding-left: 20px; color: #161616; font-size: 16px; }
+.notice_bar { padding: 16px !important; background: #f8f8f8; border-radius: 6px;  display: flex; align-items: center; gap: 6px;}
+.notice_bar p {margin-bottom:0px !important; padding-left: 20px; color: #161616; font-size: 16px; position: relative; }
 .notice_bar p::before { content: ''; display: inline-block; position: absolute; top: 2px; left: 0; width: 16px; height: 16px; background: red; }
 
 /* Child Food Section */
@@ -199,24 +199,28 @@ section { padding-bottom: 80px; }
 .how_to_grid figure img { height: 100%; object-fit: contain; }
 
 /* Receive Info */
-.receive_info { padding: 20px; background: #f8f8f8; border-radius: 12px; }
+.receive_info { padding: 20px !important; background: #f8f8f8; border-radius: 12px; }
 .receive_info p { color: #161616; font-size: 16px; line-height: 1.5; }
 
 .mt80 { margin-top: 80px; }
 
 /* Responsive */
 @media screen and (max-width: 1024px) {
-    .tip_section ul, .product_category { flex-wrap: wrap; }
+    .tip_section ul, .product_category { flex-wrap: wrap; gap:20px;}
     .tip_section li, .product_category li { flex: 0 0 calc(33.33% - 8px); }
 }
 @media screen and (max-width: 767px) {
     .modal_header { font-size: 18px; padding-bottom: 24px; }
+    .notice_bar p {font-size:12px !important; font-weight:400 !important;}
     section { padding-bottom:60px; }
     .tip_section h3 { font-size: 28px; }
     .tip_section ul { flex-wrap: wrap; gap: 20px 8px; }
     .tip_section ul li { flex: 0 0 calc(33.33% - 8px); }
     .tip_section ul li p { font-size: 12px; }
-    .product_category li { flex: 0 0 calc(50% - 8px); }
+    .product_category li { flex: 0 0 calc(50% - 10px); }
     .how_to_grid { grid-template-columns: 1fr; }
+    .product_category figure img {width:50%;}
+    .notice_bar p::before {top:-2px;}
+    .child_food_section h4 {margin-bottom:12px;}
 }
 </style>

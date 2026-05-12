@@ -17,7 +17,7 @@
             <div class="cont_area">
                 <article class="cont_inner">
                     <h3>{{ t.SubTitle }}</h3>
-                    <div class="intro_text mb100">
+                    <div class="intro_text">
                         <p>{{ t.SubContent_1 }}</p>
                         <p v-html="t.SubContent_2"></p>
                     </div>
@@ -61,7 +61,7 @@
                 <section class="how_to_section mt200">
                     <h3>{{ t.StepTitle }}</h3>
                     
-                    <div class="step_group" v-for="(group, gIdx) in t.StepGroups" :key="'group-' + gIdx" :class="{ mt80: gIdx > 0 }">
+                    <div class="step_group mt64" v-for="(group, gIdx) in t.StepGroups" :key="'group-' + gIdx">
                         <h4>{{ group.title }}</h4>
                         <ul class="step_box">
                             <li class="step_unit" v-for="(step, sIdx) in group.steps" :key="'step-' + sIdx">
@@ -194,9 +194,10 @@ export default {
 
 <style scoped>
 .gsrbr05 { width: 100%; position: relative; }
+.body_wrap {padding-bottom:200px;}
 .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 img { width: 100%; display: block; }
-h3 { margin-bottom: 64px; color: #161616; font-size: 48px; font-weight: 700; }
+h3 { margin-bottom:16px; color: #161616; font-size: 48px; font-weight: 700; }
 h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
 div.cont_inner {padding-top:200px}
 
@@ -207,6 +208,7 @@ div.cont_inner {padding-top:200px}
 
 /* Body Content Area */
 .body_wrap .cont_area { padding: 200px 0; background: #F8F8F8; }
+.intro_text {margin-bottom:64px;}
 .intro_text p { color: #161616; font-size: 24px; font-weight: 700; line-height: 1.35; }
 .body_wrap .cont_area .cont_inner .intro_text + ul {margin-bottom:40px; padding:50px; background:#fff;}
 .bi_section {margin-top:0px !important;}
@@ -223,6 +225,7 @@ div.cont_inner {padding-top:200px}
 .info .point_color { color: #107af2; font-size: 28px; font-weight: 700; display: block; margin-bottom: 4px; }
 .info .tit { font-size: 28px; font-weight: 700; color: #161616; display: block; margin-bottom: 16px; }
 .info .desc { font-size: 20px; font-weight: 700; color: #67676b; line-height: 1.35; margin-bottom: 16px; }
+.benefit_container {margin-top:64px;}
 
 /* Brand Logos */
 .brand_section h3 {margin-bottom:18px;}
@@ -263,7 +266,7 @@ div.cont_inner {padding-top:200px}
 
 /* Mobile Responsive */
 @media screen and (max-width: 1024px) {
-    h4 {font-size:18px;}
+    h4 {margin-bottom:24px; font-size:18px;}
     .logo_flex li {width: calc((100% - 20px) / 2);}
     .benefit_row { flex-direction: column; }
     .step_box { flex-direction: column; padding:32px; }
@@ -273,10 +276,12 @@ div.cont_inner {padding-top:200px}
     .intro_text {margin-bottom:40px;}
     .intro_text p {font-size:16px; font-weight:400; line-height:1.5;}
     .intro_text p:first-of-type {margin-bottom:20px;}
-    .logo_flex {margin-top: 32px; gap: 12px;}
+    .body_wrap .cont_area .cont_inner .intro_text + ul {padding:32px; border-radius:12px;}
+    .benefit_container {margin-top:0;}
+    .logo_flex {margin-top: 0px; gap: 12px;}
     .logo_flex li {width: 100%; height:70px; padding: 15px;}
     .logo_flex img {max-height:23px;}
-    .text_box span { font-size: 32px; }
+    .text_box span { font-size: 32px; text-align:center;}
     .body_wrap .cont_area {padding:60px 0;}
     div.cont_inner {padding-top:80px;}
     .info {padding-left:76px;}
@@ -288,10 +293,13 @@ div.cont_inner {padding-top:200px}
     .benefit_row.mt64 {margin-top:40px;}
     h3 { font-size: 24px; margin-bottom: 30px; }
     .unit_img { height: 280px; }
-    .unit_info + img {width:50%; margin:0 auto;}
+    .unit_info + img {width:80%; margin:0 auto;}
     .step_box {gap:40px;}
     .btn-group button {width:100%;}
     .mt200 {margin-top:80px}
+    .mt64 {margin-top:0px;}
     .bottom_btns + .btn_big.border {margin-top:0px; margin-bottom:80px; display:flex; justify-content: center;}
+    .step_group {margin-bottom:40px;}
+    .step_group:last-of-type {margin-bottom:0px;}
 }
 </style>
