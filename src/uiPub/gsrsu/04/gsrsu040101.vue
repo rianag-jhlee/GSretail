@@ -551,7 +551,7 @@
                     </header>
                     <section>
                         <FeatureCards
-                            class="feature_cards_grid fair_trade_guideline_cards"
+                            class="feature_cards_grid ft_gd_cards"
                             type="num"
                             :items="t.FairTradeGuidelineItems"
                             :no-swipe="true"
@@ -572,12 +572,12 @@
                         />
                     </div>
                     <div v-show="CTabIdxFairTradeBiz === 0" class="panel_third_depth" :aria-label="t.TabsFairTradeBiz?.[0]?.item || ''">
-                        <section class="fair_trade_work_standard_sec">
+                        <section class="ft_acc_wrap">
                             <Accordion>
                                 <AccordionItem v-for="item in t.FairTradeWorkStandardAccordionItems" :key="'sup-' + item.key" :item-key="'sup-' + item.key">
                                     <template #title><strong v-html="item.title" class="acc_tit_txt"></strong></template>
                                     <template v-if="item.key === '01' || item.key === '02' || item.key === '03' || item.key === '04' || item.key === '05' || item.key === '06' || item.key === '07' || item.key === '08'">
-                                        <ol class="fair_trade_standard_sections">
+                                        <ol class="ft_sec_list">
                                             <li v-for="section in item.key === '02' ? t.FairTradeSalesIncentiveSections : item.key === '03' ? t.FairTradePromotionCostSharingSections : item.key === '04' ? t.FairInteriorAndPromotionCostSharingSections : item.key === '05' ? t.FairPartnerCompanyManagementSections : item.key === '06' ? t.FairPartnerEmployeeDispatchSections : item.key === '07' ? t.FairPartnerSpecialPurchaseSections : item.key === '08' ? t.FairPartnerReturnRelatedSections : t.FairTradePartnerStandardSections" :key="'sup-sec-' + item.key + '-' + (section.no !== undefined && section.no !== '' ? section.no : section.title || 'sec')">
                                                 <article :class="{ gray_box: isFairTradeAddendumSection(section) }">
                                                     <template v-if="isFairTradeAddendumSection(section)">
@@ -590,23 +590,23 @@
                                                     </template>
                                                     <template v-else>
                                                         <h4>{{ section.title ? `${section.no} ${section.title}` : section.no }}</h4>
-                                                        <div class="fair_trade_standard_body">
+                                                        <div class="ft_stack">
                                                             <p v-if="section.lead">{{ section.lead }}</p>
                                                             <component v-if="section.items" :is="(item.key === '02' && section.no === '05') || section.usePlainList ? 'ul' : 'ol'" :class="(item.key === '02' && section.no === '05') || section.usePlainList ? 'plain_list' : 'num_list'">
                                                                 <li v-for="row in section.items" :key="'sup-sec-' + section.no + '-' + row.num">
                                                                     <p v-html="row.title"></p>
-                                                                    <dl v-if="row.criteria" class="fair_trade_standard_dl">
+                                                                    <dl v-if="row.criteria" class="ft_kvs">
                                                                         <template v-for="(crit, rIdx) in row.criteria" :key="'sup-sec-' + section.no + '-' + row.num + '-crit-' + rIdx">
                                                                             <dt v-if="crit.term || crit.text">{{ crit.term || crit.text }}</dt>
                                                                             <dd>
-                                                                                <ul v-if="crit.details" class="fair_trade_standard_desc_list">
+                                                                                <ul v-if="crit.details" class="ft_note_ul">
                                                                                     <li v-for="(detail, ddIdx) in crit.details" :key="'sup-sec-' + section.no + '-' + row.num + '-crit-' + rIdx + '-detail-' + ddIdx">
                                                                                         <template v-if="typeof detail === 'string'">
                                                                                             <span v-html="detail"></span>
                                                                                         </template>
                                                                                         <template v-else>
                                                                                             <p v-if="detail.text" v-html="detail.text"></p>
-                                                                                            <p v-if="detail.desc" class="txt_indent_24" v-html="detail.desc"></p>
+                                                                                            <p v-if="detail.desc" class="sub_txt" v-html="detail.desc"></p>
                                                                                             <ul v-if="detail.children">
                                                                                                 <li v-for="(child, cIdx) in detail.children" :key="'sup-sec-' + section.no + '-' + row.num + '-crit-' + rIdx + '-detail-' + ddIdx + '-' + cIdx" v-html="child"></li>
                                                                                             </ul>
@@ -645,11 +645,11 @@
                                                                     </ul>
                                                                 </li>
                                                             </component>
-                                                            <dl v-if="section.criteria" class="fair_trade_standard_dl">
+                                                            <dl v-if="section.criteria" class="ft_kvs">
                                                                 <template v-for="row in section.criteria" :key="'sup-sec-' + section.no + '-' + row.term">
                                                                     <dt>{{ row.term }}</dt>
                                                                     <dd>
-                                                                        <ul v-if="row.details" class="fair_trade_standard_desc_list">
+                                                                        <ul v-if="row.details" class="ft_note_ul">
                                                                             <li v-for="detail in row.details" :key="'sup-sec-' + section.no + '-' + row.term + '-' + detail">{{ detail }}</li>
                                                                         </ul>
                                                                         <p v-else>{{ row.desc }}</p>
@@ -670,18 +670,18 @@
                                             </li>
                                         </ol>
                                     </template>
-                                    <p v-else class="fair_trade_work_standard_desc">{{ item.desc }}</p>
+                                    <p v-else class="ft_preface">{{ item.desc }}</p>
                                 </AccordionItem>
                             </Accordion>
                         </section>
                     </div>
                     <div v-show="CTabIdxFairTradeBiz === 1" class="panel_third_depth" :aria-label="t.TabsFairTradeBiz?.[1]?.item || ''">
-                        <section class="fair_trade_work_standard_sec">
+                        <section class="ft_acc_wrap">
                             <Accordion>
                                 <AccordionItem v-for="item in t.FairTradeHomeShoppingAccordionItems" :key="'tv-' + item.key" :item-key="'tv-' + item.key">
                                     <template #title><strong v-html="item.title" class="acc_tit_txt"></strong></template>
                                     <template v-if="item.key === '01' || item.key === '02' || item.key === '03' || item.key === '04' || item.key === '05' || item.key === '06' || item.key === '07' || item.key === '08' || item.key === '09' || item.key === '10' || item.key === '11' || item.key === '12'">
-                                        <ol class="fair_trade_standard_sections">
+                                        <ol class="ft_sec_list">
                                             <li v-for="section in item.key === '01' ? t.FairTradeHomeShoppingCooperationSections : item.key === '02' ? t.FairTradeHomeShoppingTermsSections : item.key === '03' ? t.FairTradeHomeShoppingFixedCommissionSections : item.key === '04' ? t.FairTradeHomeShoppingPromotionSections : item.key === '05' ? t.FairTradeHomeShoppingProductionCostSections : item.key === '06' ? t.FairTradeHomeShoppingReturnSections : item.key === '07' ? t.FairTradeHomeShoppingManagementInfoSections : item.key === '08' ? t.FairTradeHomeShoppingGuidelineComplianceSections : item.key === '09' ? t.FairTradeHomeShoppingProductSelectionSections : item.key === '10' ? t.FairTradeHomeShoppingIntangibleProductSections : item.key === '11' ? t.FairTradeHomeShoppingLinkedProgrammingSections : item.key==='12' ?  t.FairTradeHomeShoppingDamageCompensationSections : []" :key="'tv-sec-' + item.key + '-' + (section.no !== undefined && section.no !== '' ? section.no : section.title || 'sec')">
                                                 <article :class="{ gray_box: isFairTradeAddendumSection(section) }">
                                                     <template v-if="isFairTradeAddendumSection(section)">
@@ -694,7 +694,7 @@
                                                     </template>
                                                     <template v-else>
                                                         <h4>{{ section.title ? `${section.no} ${section.title}` : section.no }}</h4>
-                                                        <div class="fair_trade_standard_body">
+                                                        <div class="ft_stack">
                                                             <p v-if="section.lead">{{ section.lead }}</p>
                                                             <component v-if="section.items" :is="section.usePlainList ? 'ul' : 'ol'" :class="section.usePlainList ? 'plain_list' : 'num_list'">
                                                                 <li v-for="row in section.items" :key="'tv-sec-' + section.no + '-' + row.num">
@@ -714,11 +714,11 @@
                                                                     </ul>
                                                                 </li>
                                                             </component>
-                                                            <dl v-if="section.criteria" class="fair_trade_standard_dl">
+                                                            <dl v-if="section.criteria" class="ft_kvs">
                                                                 <template v-for="row in section.criteria" :key="'tv-sec-' + section.no + '-' + row.term">
                                                                     <dt>{{ row.term }}</dt>
                                                                     <dd>
-                                                                        <ul v-if="row.details" class="fair_trade_standard_desc_list">
+                                                                        <ul v-if="row.details" class="ft_note_ul">
                                                                             <li v-for="detail in row.details" :key="'tv-sec-' + section.no + '-' + row.term + '-' + detail">{{ detail }}</li>
                                                                         </ul>
                                                                         <p v-else>{{ row.desc }}</p>
@@ -733,11 +733,11 @@
                                                                     </ul>
                                                                 </li>
                                                             </ol>
-                                                            <p v-if="section.appendixTitle" class="fair_trade_work_standard_desc">{{ section.appendixTitle }}</p>
+                                                            <p v-if="section.appendixTitle" class="ft_preface">{{ section.appendixTitle }}</p>
                                                             <div v-if="section.commonTables">
                                                                 <template v-for="(tbl, tIdx) in section.commonTables" :key="'tv-common-table-' + section.no + '-' + tIdx">
                                                                     <div class="table_wrap">
-                                                                        <p v-if="tbl.appendixTitle" class="fair_trade_work_standard_desc">{{ tbl.appendixTitle }}</p>
+                                                                        <p v-if="tbl.appendixTitle" class="ft_preface">{{ tbl.appendixTitle }}</p>
                                                                         <div class="common_table_scroll" :class="{ common_table_scroll_type_02: tbl.tableClass === 'type_02' }" :data-node-id="tbl.tableClass === 'type_02' ? '674:44720' : undefined">
                                                                             <table :class="getFairTradeCommonTableClassArray(tbl)">
                                                                                 <colgroup v-if="getCommonTableColGroupCount(tbl) > 0">
@@ -825,8 +825,8 @@
                                                                                 </tbody>
                                                                             </table>
                                                                             <table
-                                                                                v-if="isAppendixPartnerEvalTable(tbl)"
-                                                                                class="common_table type_01 appendix_partner_eval_mo fair_trade_partner_eval_mo"
+                                                                                v-if="isTblDualGrid(tbl)"
+                                                                                class="common_table type_01 tbl_dual_mo"
                                                                             >
                                                                                 <colgroup>
                                                                                     <col style="width: 50px" />
@@ -848,7 +848,7 @@
                                                                                             :class="{ txt_verticle: tdDef.lead && tdDef.cell && tdDef.cell.txt_verticle === true }"
                                                                                         >
                                                                                             <template v-if="tdDef.lead">
-                                                                                                <p class="appendix_partner_eval_mo_lead" v-html="appendixPartnerEvalMoLeadMobileHtml(tdDef.cell)"></p>
+                                                                                                <p class="mo_cell_lead" v-html="appendixPartnerEvalMoLeadMobileHtml(tdDef.cell)"></p>
                                                                                             </template>
                                                                                             <template v-else-if="typeof tdDef.cell === 'object' && tdDef.cell && tdDef.cell.html">
                                                                                                 <p v-html="tdDef.cell.html"></p>
@@ -877,7 +877,7 @@
                                             </li>
                                         </ol>
                                     </template>
-                                    <p v-else class="fair_trade_work_standard_desc">{{ item.desc }}</p>
+                                    <p v-else class="ft_preface">{{ item.desc }}</p>
                                 </AccordionItem>
                             </Accordion>
                         </section>
@@ -972,8 +972,8 @@ function getCommonTableCellTdStyle(cell) {
     if (cell.style == null || String(cell.style).trim() === "") return undefined;
     return cell.style;
 }
-function isAppendixPartnerEvalTable(tbl) {
-    return Boolean(tbl && tbl.tableClass === "appendix_partner_eval");
+function isTblDualGrid(tbl) {
+    return Boolean(tbl && tbl.tableClass === "tbl_dual_grid");
 }
 function getFairTradeCommonTableClassArray(tbl) {
     if (!tbl) return ["common_table", "type_01"];
@@ -985,7 +985,7 @@ function getFairTradeCommonTableClassArray(tbl) {
         out.push("type_01");
         if (tc && tc !== "type_01") out.push(tc);
     }
-    if (isAppendixPartnerEvalTable(tbl)) out.push("fair_trade_partner_eval_pc");
+    if (isTblDualGrid(tbl)) out.push("tbl_dual_pc");
     return out;
 }
 function appendixPartnerEvalMobileHeadLabels(tbl) {
@@ -2401,7 +2401,7 @@ const langData = {
                 commonTables: [
                     {
                         appendixTitle: "[별표1] 협력사 평가 기준 (제3조 제1항 제1호 관련)",
-                        tableClass: "appendix_partner_eval",
+                        tableClass: "tbl_dual_grid",
                         cols: [
                             "구분",
                             "상품군(대분류)",
@@ -2628,7 +2628,7 @@ const langData = {
                 commonTables: [
                     {
                         appendixTitle: "[별표1] 협력사 신용평가등급 기준 (제4조 제3항 제1호 관련)",
-                        tableClass: "appendix_partner_eval",
+                        tableClass: "tbl_dual_grid",
                         cols: [
                             "구분",
                             "상품군(대분류)",
@@ -4309,656 +4309,297 @@ const closeEthicsInquiry = () => {
 </script>
 
 <style scoped>
-:deep(.p_br) { display: block }
-:deep(.m_br) { display: none }
-img{width:100%; height:auto; display:block; object-fit: cover;}
+:deep(.p_br) { display: block; }
+img { width:100%; height:auto; display:block; object-fit: cover; }
 .main-container { width: 100%; position: relative; display: block; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url(@/assets/images/dummy/gsrsu040101_bg.jpg) no-repeat center / cover; text-align: center; position: relative; display: block; }
-.title_wrap::after{content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1;}
-.page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2;}
+.title_wrap::after { content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1; }
+.page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2; }
 .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
-.panel{padding-top:80px;}
+.panel { padding-top:80px; }
 .panel_third_depth { padding-top: 80px; }
 /* v-html 삽입 노드에는 scoped data 속성이 없으므로 :deep 필요 */
-:deep(.txt_blue){color:#107AF2 !important;}
-:deep(.txt_red){color:#FB6432 !important;}
-section + section{padding-top:120px;}
-.sub_header{margin-bottom:40px;}
+:deep(.txt_blue) { color:#107AF2 !important; }
+:deep(.txt_red) { color:#FB6432 !important; }
+section + section { padding-top:120px; }
+.sub_header { margin-bottom:40px; }
 .sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sub_header p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
-.tab_header{margin-bottom:80px; padding: 20px 0; text-align: center;}
-.tab_header > h2{font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;}
-.tab_header > p{margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em;}
+.tab_header { margin-bottom:80px; padding: 20px 0; text-align: center; }
+.tab_header > h2 { font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em; }
+.tab_header > p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
 .list_dotted > li { padding-left: 12px; position: relative }
 .list_dotted > li + li { margin-top: 8px }
 .list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color:#67676F; border-radius: 50%; position: absolute; top: 11px; left: 0 }
 .list_dotted > li > p { margin: 0; color: #67676F; font-size: 1.8rem; line-height: 1.4 }
 @media (max-width: 768px) {
-  .list_dotted > li { padding-left: 6px }
-  .list_dotted > li::before { top: 9px; width:2px; height:2px }
-  .list_dotted > li + li { margin-top: 8px }
-  .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
+    .list_dotted > li { padding-left: 6px }
+    .list_dotted > li::before { top: 9px; width:2px; height:2px }
+    .list_dotted > li + li { margin-top: 8px }
+    .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 }
-
-:deep(.feature_cards_grid.feature_card_list) {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-    align-items: stretch;
-}
-:deep(.feature_cards_grid.fair_trade_guideline_cards.feature_card_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-:deep(.feature_cards_grid.fair_trade_guideline_cards.feature_card_list .feature_card_item) {min-height:288px;}
-.fair_trade_guideline_cards :deep(.feature_card_action) { margin-top: 40px; }
-
-.feature_cards_grid :deep(.feature_card_item) {
-    width: 100%;
-    min-width: 0;
-}
-.law_feature_cards :deep(.feature_card_num),
-.law_feature_cards :deep(.feature_card_title){
-    margin-bottom:6px;
-}
-.purpose_feature_cards :deep(.feature_card_desc),
-.law_feature_cards :deep(.feature_card_desc){
-    color:#161616;
-}
+:deep(.feature_cards_grid.feature_card_list) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+:deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+:deep(.feature_cards_grid.ft_gd_cards.feature_card_list .feature_card_item) { min-height:288px; }
+.ft_gd_cards :deep(.feature_card_action) { margin-top: 40px; }
+.feature_cards_grid :deep(.feature_card_item) { width: 100%; min-width: 0; }
+.law_feature_cards :deep(.feature_card_num), .law_feature_cards :deep(.feature_card_title) { margin-bottom:6px; }
+.purpose_feature_cards :deep(.feature_card_desc), .law_feature_cards :deep(.feature_card_desc) { color:#161616; }
 .cp_manager_role_cards :deep(.feature_card_item) { min-height: 140px; }
-.fair_trade_work_standard_sec :deep(dl.board_type_toggle) { border-top: 1px solid #161616; }
-.fair_trade_work_standard_sec :deep(dl.board_type_toggle > dd) { border-bottom: 1px solid #d7d7df; }
-.fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 20px; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-.fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_tit_txt) {  font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: inline-flex; align-items: center; }
-.fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_num) { margin-right: 8px; padding:2px 9px; font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-.fair_trade_standard_sections { margin: 0; padding: 16px 32px 40px; display:flex; flex-direction:column; gap:32px;}
-.fair_trade_standard_sections > li { list-style: none; }
-.fair_trade_standard_sections > li > article { display: flex; flex-direction: column; gap: 16px; }
-.fair_trade_standard_sections > li > article > h4 { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.fair_trade_standard_body { padding-left: 24px; }
-.fair_trade_standard_body p { margin: 0 0 16px; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
-.fair_trade_standard_sections > li > article.gray_box { padding: 20px 40px;  border-radius: 0; }
-.fair_trade_standard_sections > li > article.gray_box p { margin: 0; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing:-0.01em; }
-.num_list {padding: 0; list-style: none; counter-reset: standard-item; }
+.ft_acc_wrap :deep(dl.board_type_toggle) { border-top: 1px solid #161616; }
+.ft_acc_wrap :deep(dl.board_type_toggle > dd) { border-bottom: 1px solid #d7d7df; }
+.ft_acc_wrap :deep(dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 20px; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+.ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: inline-flex; align-items: center; }
+.ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_num) { margin-right: 8px; padding:2px 9px; font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+.ft_sec_list { margin: 0; padding: 16px 32px 40px; display:flex; flex-direction:column; gap:32px; }
+.ft_sec_list > li { list-style: none; }
+.ft_sec_list > li > article { display: flex; flex-direction: column; gap: 16px; }
+.ft_sec_list > li > article > h4 { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.ft_stack { padding-left: 24px; }
+.ft_stack p { margin: 0 0 16px; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
+.ft_sec_list > li > article.gray_box { padding: 20px 40px; border-radius: 0; }
+.ft_sec_list > li > article.gray_box p { margin: 0; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing:-0.01em; }
+.num_list { padding: 0; list-style: none; counter-reset: standard-item; }
 .num_list > li { margin-left: 0; padding-left: 32px; color: #67676f; font-size: 1.8rem; line-height: 1.5; position: relative; counter-increment: standard-item; }
 .num_list > li::before { content: counter(standard-item); width: 20px; height: 20px; border: 1px solid #67676f; border-radius: 50%; color: #67676f; font-size: 1.2rem; line-height: 1; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 4px; left: 0; box-sizing: border-box; }
 .num_list > li + li { margin-top: 8px; }
-
-.num_list > li > ul { margin-top: 8px;}
-
-.txt_indent_24 { padding-left: 24px; }
-.num_list > li > ul > li > ul {padding-left:24px;}
-/* .plain_list {padding: 0; }
-.plain_list > li > p { margin: 0; } */
-.fair_trade_standard_dl { border:0;}
-.fair_trade_standard_dl > dt { margin-top: 16px;  }
-.fair_trade_standard_dl > dd { margin: 0; border:0; }
-.fair_trade_standard_dl dd + dt{margin-top: 16px;}
-.fair_trade_standard_dl > dd > ul{padding-left:24px;}
-.fair_trade_standard_dl > dd > ul > li > ul{padding-left:24px;}
-.fair_trade_standard_dl > dd > p { margin: 0; }
-.fair_trade_standard_desc_list { margin: 0; padding: 0; }
-.fair_trade_standard_desc_list > li { list-style: none;  }
+.num_list > li > ul { margin-top: 8px; }
+.sub_txt { padding-left: 24px; }
+.num_list > li > ul > li > ul { padding-left:24px; }
+.ft_kvs { border:0; }
+.ft_kvs > dt { margin-top: 16px; }
+.ft_kvs > dd { margin: 0; border:0; }
+.ft_kvs dd + dt { margin-top: 16px; }
+.ft_kvs > dd > ul { padding-left:24px; }
+.ft_kvs > dd > ul > li > ul { padding-left:24px; }
+.ft_kvs > dd > p { margin: 0; }
+.ft_note_ul { margin: 0; padding: 0; }
+.ft_note_ul > li { list-style: none; }
 /* 준법경영 > 자율준수 관리자 선임절차: width=height clamp로 원형 고정(PC~태블릿), 768 이하 세로 */
-
 /* 준법경영 > 자율준수 관리자 배너 (Figma 491:13873) */
 .cp_manager_banner { width: 100%; min-height: 588px; padding:67px 130px; background: url(@/assets/images/dummy/gsrsu040101_10.png) no-repeat center center / cover; display: flex; justify-content: flex-end; align-items: center; }
 .cp_manager_banner figcaption { max-width:621px; margin-left:auto; }
-.cp_manager_banner figcaption > strong{font-size: 4rem;line-height: 1.3;letter-spacing: -0.01em;}
-.cp_manager_banner figcaption p{margin-top:40px;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
+.cp_manager_banner figcaption > strong { font-size: 4rem;line-height: 1.3;letter-spacing: -0.01em; }
+.cp_manager_banner figcaption p { margin-top:40px;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em; }
 .cp_manager_banner_content { margin-top:40px; display: flex; gap: 17px; align-items: center; }
-.cp_manager_banner + p{margin-top:64px;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;}
-.cp_manager_banner_content dl dt, .cp_manager_banner_content dl dd{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
-
-.cp_manager_banner_content dl dd strong{
-font-size: 1.6rem;
-font-weight: 700;
-line-height: 1.24;
-}
-.cp_manager_banner_content >div{flex: 0 1 auto;}
+.cp_manager_banner + p { margin-top:64px;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em; }
+.cp_manager_banner_content dl dt, .cp_manager_banner_content dl dd { font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em; }
+.cp_manager_banner_content dl dd strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; }
+.cp_manager_banner_content >div { flex: 0 1 auto; }
 .cp_appoint_board .process_flow { display: flex; gap: 20px; align-items: center; width: 100%; box-sizing: border-box; flex-wrap: wrap; }
-.cp_appoint_board .process_flow > article { flex: 0 1 220px; aspect-ratio: 1; min-width: 0; 
-   background-color: #f8f8f8; border-radius: 999px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
-.cp_appoint_board .process_flow > article > h4 {  color: #000000; font-size:2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.cp_appoint_board .process_flow > article { flex: 0 1 220px; aspect-ratio: 1; min-width: 0; background-color: #f8f8f8; border-radius: 999px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
+.cp_appoint_board .process_flow > article > h4 { color: #000000; font-size:2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .cp_appoint_board .process_flow > article > h4 + p { margin: 12px 0 0; color: #000000; font-size:1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; word-break: keep-all; }
-.purpose_feature_cards :deep(.feature_card_title) {
-    color: #107af2;
-}
-:deep(.ethics_target_list.num_info_list) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 64px 60px;
-}
-.ethics_target_list :deep(.num_info_item) {
-    padding: 0;
-    border-bottom: 0;
-}
-.ethics_target_list :deep(.num_info_title) {
-    margin-bottom: 24px;
-}
-.ethics_target_list :deep(.num_info_num) {
-    font-size: 2.8rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-.ethics_target_list :deep(.num_info_title > strong) {
-    font-size: 2.4rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-.ethics_target_list :deep(.num_info_body > p) {
-    font-size: 1.6rem;
-    font-weight: 700;
-    line-height: 1.24;
-    letter-spacing: 0;
-}
-
-.report_form_wrap .apply_form .form_field > :deep(.select),
-.report_form_wrap .apply_form .form_field > :deep(.input_wrap) {
-    width: 428px;
-    max-width: 428px;
-}
-.report_form_wrap .apply_form .form_field_phone label.select,
-.report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap) {
-    width: 134px;
-    max-width: 134px;
-}
-.report_form_wrap .apply_form .form_field_name > :deep(.input_wrap){
-    width: 205px;
-    max-width: 205px;
-}
-.report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(1)) {
-    width: 205px;
-    max-width: 205px;
-}
-.report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(3)),
-.report_form_wrap .apply_form .form_field_email label.select {
-    width: 180px;
-    max-width: 180px;
-}
-
-.report_form_wrap .apply_form .form_field_content > textarea {
-    width: 600px;
-    min-height: 170px;
-    padding: 12px 16px;
-    border: 1px solid #c4c4d0;
-    border-radius: 12px;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-    resize: none;
-}
-.report_form_wrap .apply_form .form_field_content > textarea::placeholder{
-    color: #A4A4B0;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-}
-.report_form_wrap .apply_form .form_row_content {
-    align-items: start;
-}
-.report_form_wrap .apply_form .form_row_content .form_label {
-    padding-top: 68px;
-}
-.report_form_wrap .apply_form .form_field_file .file_row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.report_form_wrap .apply_form .form_field_file .file_row > span {
-    color: #161616;
-    font-size: 1.4rem;
-    line-height: 1.4;
-}
-
-
-
+.purpose_feature_cards :deep(.feature_card_title) { color: #107af2; }
+:deep(.ethics_target_list.num_info_list) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 64px 60px; }
+.ethics_target_list :deep(.num_info_item) { padding: 0; border-bottom: 0; }
+.ethics_target_list :deep(.num_info_title) { margin-bottom: 24px; }
+.ethics_target_list :deep(.num_info_num) { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
+.ethics_target_list :deep(.num_info_title > strong) { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+.ethics_target_list :deep(.num_info_body > p) { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+.report_form_wrap .apply_form .form_field > :deep(.select), .report_form_wrap .apply_form .form_field > :deep(.input_wrap) { width: 428px; max-width: 428px; }
+.report_form_wrap .apply_form .form_field_phone label.select, .report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap) { width: 134px; max-width: 134px; }
+.report_form_wrap .apply_form .form_field_name > :deep(.input_wrap) { width: 205px; max-width: 205px; }
+.report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(1)) { width: 205px; max-width: 205px; }
+.report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(3)), .report_form_wrap .apply_form .form_field_email label.select { width: 180px; max-width: 180px; }
+.report_form_wrap .apply_form .form_field_content > textarea { width: 600px; min-height: 170px; padding: 12px 16px; border: 1px solid #c4c4d0; border-radius: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; resize: none; }
+.report_form_wrap .apply_form .form_field_content > textarea::placeholder { color: #A4A4B0; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.report_form_wrap .apply_form .form_row_content { align-items: start; }
+.report_form_wrap .apply_form .form_row_content .form_label { padding-top: 68px; }
+.report_form_wrap .apply_form .form_field_file .file_row { display: flex; align-items: center; gap: 10px; }
+.report_form_wrap .apply_form .form_field_file .file_row > span { color: #161616; font-size: 1.4rem; line-height: 1.4; }
 @media screen and (min-width: 769px) {
-
-    .purpose_feature_cards :deep(.feature_card_item) {
-        min-height: 194px;
-        padding: 32px;
-    }
-    /* 정도경영 목적과 취지: type="text" — 모바일은 FeatureCards 기본 스타일 */
-    .purpose_feature_cards :deep(.feature_card_title) {
-        margin-bottom: 6px;
-        font-size: 1.8rem;
-        line-height: 1.5;
-    }
-    .purpose_feature_cards :deep(.feature_card_desc) {
-        color: #161616;
-        font-weight: 700;
-        font-size: 2rem;
-        line-height: 1.35;
-        letter-spacing: -0.01em;
-    }
+    .purpose_feature_cards :deep(.feature_card_item) { min-height: 194px; padding: 32px; }
+    .purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 6px; font-size: 1.8rem; line-height: 1.5; }
+    .purpose_feature_cards :deep(.feature_card_desc) { color: #161616; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 }
 @media screen and (max-width: 1024px) {
-    :deep(.ethics_target_list.num_info_list) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 40px 20px;
-    }
+    :deep(.ethics_target_list.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
 }
 @media screen and (max-width: 768px) {
-    :deep(.feature_cards_grid.feature_card_list) {
-        grid-template-columns: 1fr;
-    }
-    :deep(.feature_cards_grid.fair_trade_guideline_cards.feature_card_list){
-        grid-template-columns: 1fr;
-    }
-
-    .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 10px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-    .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0 }
-    /* .fair_trade_standard_sections { margin: 12px 20px 20px; } */
-    .fair_trade_standard_sections{padding:0;}
-    .fair_trade_standard_sections > li > article { gap: 20px; }
-    .fair_trade_standard_sections > li > article > h4 { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .fair_trade_standard_body { padding-left: 0; }
-    .fair_trade_standard_body { gap: 20px; }
-    .fair_trade_standard_body p {margin-bottom: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .fair_trade_standard_body > p + ul {margin-top:16px;}
-    .fair_trade_standard_sections > li > article.gray_box { padding: 20px; }
-    .fair_trade_standard_sections > li > article.gray_box p { font-size: 1.2rem; line-height: 1.2;  }
-    .fair_trade_standard_dl{padding-left:24px;}
+    :deep(.feature_cards_grid.feature_card_list) { grid-template-columns: 1fr; }
+    :deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: 1fr; }
+    .ft_acc_wrap :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 10px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0 }
+    .ft_sec_list { padding:0; }
+    .ft_sec_list > li > article { gap: 20px; }
+    .ft_sec_list > li > article > h4 { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .ft_stack { padding-left: 0; }
+    .ft_stack { gap: 20px; }
+    .ft_stack p { margin-bottom: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .ft_stack > p + ul { margin-top:16px; }
+    .ft_sec_list > li > article.gray_box { padding: 20px; }
+    .ft_sec_list > li > article.gray_box p { font-size: 1.2rem; line-height: 1.2; }
+    .ft_kvs { padding-left:24px; }
     .num_list > li { padding-left: 28px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .num_list > li::before {  font-size: 1.2rem; }
+    .num_list > li::before { font-size: 1.2rem; }
     .num_list > li > strong { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .num_list > li > ul{padding-left:8px;}
+    .num_list > li > ul { padding-left:8px; }
     .plain_list { padding-left: 0; }
     .plain_list > li { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .plain_list > li > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    
-    .fair_trade_standard_dl > dd > ul{padding:0;}
-    .fair_trade_standard_dl > dt { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-    .fair_trade_standard_dl > dd { margin-top:8px;font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-    .fair_trade_standard_dl > dd > p { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-    .fair_trade_standard_desc_list > li { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-
-    .ethics_target_list :deep(.num_info_icon) {
-        width: 60px;
-        height: 60px;
-    }
-    .ethics_target_list :deep(.num_info_title) {
-        margin-bottom: 6px;
-    }
-    .ethics_target_list :deep(.num_info_num) {
-        font-size: 1.6rem;
-        line-height: 1.24;
-        letter-spacing: 0;
-    }
-    .ethics_target_list :deep(.num_info_title > strong) {
-        font-size: 1.8rem;
-        line-height: 1.5;
-        letter-spacing: 0;
-    }
-    .ethics_target_list :deep(.num_info_body > p) {
-        font-size: 1.4rem;
-        line-height: 1.4;
-        letter-spacing: -0.01em;
-    }
-    .report_form_wrap .apply_form .form_field > :deep(.input_wrap),
-    .report_form_wrap .apply_form .form_field_phone label.select,
-    .report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap),
-    .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(1)),
-    .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(3)),
-    .report_form_wrap .apply_form .form_field_email label.select {
-        width: 100%;
-        max-width: 100%;
-    }
-    .report_form_wrap .apply_form .form_field_content > textarea {
-        width: 100%;
-    }
-    .report_form_wrap .apply_form .form_row_content .form_label {
-        padding-top: 0;
-    }
+    .ft_kvs > dd > ul { padding:0; }
+    .ft_kvs > dt { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    .ft_kvs > dd { margin-top:8px;font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    .ft_kvs > dd > p { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    .ft_note_ul > li { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    .ethics_target_list :deep(.num_info_icon) { width: 60px; height: 60px; }
+    .ethics_target_list :deep(.num_info_title) { margin-bottom: 6px; }
+    .ethics_target_list :deep(.num_info_num) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .ethics_target_list :deep(.num_info_title > strong) { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .ethics_target_list :deep(.num_info_body > p) { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .report_form_wrap .apply_form .form_field > :deep(.input_wrap), .report_form_wrap .apply_form .form_field_phone label.select, .report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap), .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(1)), .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(3)), .report_form_wrap .apply_form .form_field_email label.select { width: 100%; max-width: 100%; }
+    .report_form_wrap .apply_form .form_field_content > textarea { width: 100%; }
+    .report_form_wrap .apply_form .form_row_content .form_label { padding-top: 0; }
 }
 .sec_history { position: relative; }
-.history_list{padding-left:48px;position:relative;}
+.history_list { padding-left:48px;position:relative; }
 .history_item { display: flex; gap: 32px; position: relative; }
-.history_item::before { content: ""; width: 8px; height: 8px; background-color: #107af2; border: 8px solid #cfe4fc; border-radius: 50%; position: absolute; top: 11px; left: -48px; z-index: 5;}
+.history_item::before { content: ""; width: 8px; height: 8px; background-color: #107af2; border: 8px solid #cfe4fc; border-radius: 50%; position: absolute; top: 11px; left: -48px; z-index: 5; }
 .history_item:not(:last-child)::after { content: ""; width: 1px;height:100%; background-color: #107af2; position: absolute; top: 12px; bottom: 0; left: -36px; }
-.history_period { width: 300px; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex-shrink: 0; display: block;}
+.history_period { width: 300px; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex-shrink: 0; display: block; }
 .history_body { width: 100%; padding-bottom: 100px; }
-.history_summary { font-size: 1.6rem;line-height: 1.5; letter-spacing: -0.01em;}
+.history_summary { font-size: 1.6rem;line-height: 1.5; letter-spacing: -0.01em; }
 .history_detail_list { display: grid; grid-template-columns: 103px minmax(0, 1fr); row-gap: 0; column-gap: 20px; align-items: start; }
 .history_detail_list > dt { padding:14px 0; color:#90909A; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; grid-column: 1; }
 .history_detail_list > dd { padding:14px 0; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; word-break: keep-all; grid-column: 2; }
 .history_detail_list > dd + dt { margin-top: 32px; }
 .history_detail_list > dd + dt + dd { margin-top: 32px; }
-    
-
 /* 정도경영 > 지침 */
-.gray_box { padding: 60px; background-color: #f8f8f8; border-radius: 20px;}
-.gray_box p{margin-top:40px;}
-.gray_box > .button_area{width: 100%; display: flex; justify-content: center;}
+.gray_box { padding: 60px; background-color: #f8f8f8; border-radius: 20px; }
+.gray_box p { margin-top:40px; }
+.gray_box > .button_area { width: 100%; display: flex; justify-content: center; }
 .sec_ethics_cards .card_list { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 80px 40px; align-items: stretch; }
 .sec_ethics_cards .card_list > li { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
 .sec_ethics_cards .card_list > li > * { flex: 1; min-height: 0; }
 .sec_ethics_cards .card_list :deep(.card_thumb) { aspect-ratio: 690 / 360; border-radius: 12px; background-size: cover; background-blend-mode: multiply; }
 .sec_ethics_cards .card_list :deep(.card_item .card_body) { padding-top: 32px; }
 .sec_ethics_cards .card_list :deep(.card_desc) { margin-top: 8px; }
-.card_list :deep(.card_tit) {  font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;}
-.card_list :deep(.card_desc) { margin-top:12px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em;}
-.practice_title {margin-top:80px;font-weight: 700;font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
+.card_list :deep(.card_tit) { font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.card_list :deep(.card_desc) { margin-top:12px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+.practice_title { margin-top:80px;font-weight: 700;font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em; }
 .practice_desc { margin-top: 16px; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
-.base_item {padding: 40px 0; border-bottom: 1px solid #E5E5E9; }
-.base_item > em { color: #107af2; font-size: 2rem; font-style: normal; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block;}
-.base_item > strong { margin-top:4px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block;}
-.base_item p {margin-top:16px; color: #67676F; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-.base_item > .button_area {margin-top:24px; display: flex; justify-content: center; gap:10px; justify-content: flex-start;}
-.base_list.type02 { padding: 64px; background-color: #f8f8f8; border-radius: 20px;}
-.base_list.type02 .base_item:first-child {padding-top: 0;}
-.base_list.type02 .base_item:last-child {padding-bottom: 0; border-bottom: 0; }
-.panel_third_depth .base_list .base_item:first-child{border-top: 1px solid #E5E5E9;}
-.signature_box { margin-top: 40px; padding: 40px 64px; border: 1px solid #E5E5E9; border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-between;}
-.signature_box > div {flex:1;}
-.signature_box p {font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
-.signature_box dl {margin-top: 40px;}
-.signature_box dl > dt {color:#67676F;font-size: 1.8rem;line-height: 1.4;}
-.signature_box dl > dd {color:#67676F;font-size: 1.8rem;line-height: 1.4;}
+.base_item { padding: 40px 0; border-bottom: 1px solid #E5E5E9; }
+.base_item > em { color: #107af2; font-size: 2rem; font-style: normal; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.base_item > strong { margin-top:4px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.base_item p { margin-top:16px; color: #67676F; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+.base_item > .button_area { margin-top:24px; display: flex; justify-content: center; gap:10px; justify-content: flex-start; }
+.base_list.type02 { padding: 64px; background-color: #f8f8f8; border-radius: 20px; }
+.base_list.type02 .base_item:first-child { padding-top: 0; }
+.base_list.type02 .base_item:last-child { padding-bottom: 0; border-bottom: 0; }
+.panel_third_depth .base_list .base_item:first-child { border-top: 1px solid #E5E5E9; }
+.signature_box { margin-top: 40px; padding: 40px 64px; border: 1px solid #E5E5E9; border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-between; }
+.signature_box > div { flex:1; }
+.signature_box p { font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em; }
+.signature_box dl { margin-top: 40px; }
+.signature_box dl > dt { color:#67676F;font-size: 1.8rem;line-height: 1.4; }
+.signature_box dl > dd { color:#67676F;font-size: 1.8rem;line-height: 1.4; }
 .signature_box dl > dd { margin-top: 4px; }
-.signature_box span{color:#C4C4D0; font-size: 1.8rem; font-weight: 700; line-height: 1.5;}
-
+.signature_box span { color:#C4C4D0; font-size: 1.8rem; font-weight: 700; line-height: 1.5; }
 /* 정도경영 > 제도 — type_03 (Figma TAB_3, node 470:17025) */
-.wrap_tabs_type03 {
-    width: 100%;
-}
-.wrap_tabs_type03 :deep(.tab_wrap ul.type_03) {
-    width: 100%;
-    gap: 0;
-}
-.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li) {
-    flex: 1;
-    min-width: 0;
-}
-.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li .item) {
-    width: 100%;
-    height: 60px;
-    padding: 0 16px;
-    color: #90909a;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: 0;
-    text-align: center;
-    background-color: #ffffff;
-    border: 1px solid #c4c4d0;
-    border-radius: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li + li .item) {
-    margin-left: -1px;
-}
-.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li.current .item) {
-    color: #ffffff;
-    background-color: #107af2;
-    border-color: #107af2;
-    position: relative;
-    z-index: 1;
-}
-
+.wrap_tabs_type03 { width: 100%; }
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03) { width: 100%; gap: 0; }
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li) { flex: 1; min-width: 0; }
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li .item) { width: 100%; height: 60px; padding: 0 16px; color: #90909a; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; text-align: center; background-color: #ffffff; border: 1px solid #c4c4d0; border-radius: 0; display: flex; align-items: center; justify-content: center; }
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li + li .item) { margin-left: -1px; }
+.wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li.current .item) { color: #ffffff; background-color: #107af2; border-color: #107af2; position: relative; z-index: 1; }
 /* 정도경영 > 제도 > 제보 이용 안내 */
-.base_item .gray_box{margin-top:20px; padding:56px 64px;}
-.base_item .gray_box .process_flow{display: flex; gap: 20px; align-items: center;}
-.base_item .gray_box .process_flow p {margin:0;padding:20px;color:#107AF2; font-weight: 700;font-size: 1.6rem;line-height: 1.24;text-align: center; border-radius: 99px; background-color:#E7F2FE; flex:0 1 300px;}
-.panel_third_depth .reward_criteria {
-    width: 100%;
-    margin-top: 16px;
-}
-.base_item .gray_box.type02{
-    padding:40px 64px; border-radius: 0;
-}
-.base_item .gray_box.type02 strong{
-    color: #67676F;
-font-size: 2rem;
-line-height: 1.35;
-letter-spacing: -0.01em;
-
-
-}
-.panel_third_depth .table_wrap{
-    margin-top: 24px;
-}
-.panel_third_depth .common_table_scroll {
-    width: 100%;
-    padding: 0 20px;
-    min-width: 0;
-    overflow-x: visible;
-}
-
-.panel_third_depth .common_table_scroll + .common_table_scroll{
-    margin-top: 24px;
-}
-
-.panel_third_depth .common_table {
-    width: 100%;
-    min-width: 0;
-    border-collapse: collapse;
-    position: relative;
-}
-
-.panel_third_depth .common_table:before{
-    content: '';
-    width: 100%;
-    height: 1px;
-    background-color: #161616;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    display: block;
-}
-.panel_third_depth .common_table th,
-.panel_third_depth .common_table td {
-    border-bottom: 1px solid #e5e5e9;
-    text-align: left;
-}
-.panel_third_depth .common_table td  p{ color:#161616;}
-.panel_third_depth .common_table th {
-    padding:19px 24px;
-    background-color: #f8f8f8;
-    font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 1.5;
-}
-.panel_third_depth .common_table th + th{
-    border-left: 1px solid #e5e5e9;
-}
+.base_item .gray_box { margin-top:20px; padding:56px 64px; }
+.base_item .gray_box .process_flow { display: flex; gap: 20px; align-items: center; }
+.base_item .gray_box .process_flow p { margin:0;padding:20px;color:#107AF2; font-weight: 700;font-size: 1.6rem;line-height: 1.24;text-align: center; border-radius: 99px; background-color:#E7F2FE; flex:0 1 300px; }
+.panel_third_depth .reward_criteria { width: 100%; margin-top: 16px; }
+.reward_criteria .common_table_scroll{margin-top:20px;}
+.base_item .gray_box.type02 { padding:40px 64px; border-radius: 0; }
+.base_item .gray_box.type02 strong { color: #67676F; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+.panel_third_depth .table_wrap { margin-top: 24px; }
+.panel_third_depth .common_table_scroll { width: 100%; padding: 0 20px; min-width: 0; overflow-x: visible; }
+.panel_third_depth .common_table_scroll + .common_table_scroll { margin-top: 24px; }
+.panel_third_depth .common_table { width: 100%; min-width: 0; border-collapse: collapse; position: relative; }
+.panel_third_depth .common_table:before { content: ''; width: 100%; height: 1px; background-color: #161616; position: absolute; top: 0; left: 0; z-index: 1; display: block; }
+.panel_third_depth .common_table th, .panel_third_depth .common_table td { border-bottom: 1px solid #e5e5e9; text-align: left; }
+.panel_third_depth .common_table td p { color:#161616; }
+.panel_third_depth .common_table th { padding:19px 24px; background-color: #f8f8f8; font-size: 1.8rem; font-weight: 700; line-height: 1.5; }
+.panel_third_depth .common_table th + th { border-left: 1px solid #e5e5e9; }
 .panel_third_depth .common_table thead tr:not(:first-child) th:first-child { border-left: 1px solid #e5e5e9; }
-
-
-
-.panel_third_depth .common_table td{
-    padding:12px 24px;
-}
-.panel_third_depth .common_table td p {
-    margin: 0;
-
-}
-.panel_third_depth .common_table td p + p {
-    margin-top: 12px;
-}
-
-.panel_third_depth .common_table.type_01 td{
-    text-align: left; 
-}
+.panel_third_depth .common_table td { padding:12px 24px; }
+.panel_third_depth .common_table td p { margin: 0; }
+.panel_third_depth .common_table td p + p { margin-top: 12px; }
+.panel_third_depth .common_table.type_01 td { text-align: left; }
 .panel_third_depth .common_table.type_02 td { text-align: left; }
-.panel_third_depth .common_table_sub {
-    margin: 0 0 12px;
-    color: #4095F5;
-    font-size: 1.6rem;
-    font-weight: 700;
-    line-height: 1.24;
-}
-.panel_third_depth .reward_report_btn {
-    width: 100%;
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-}
-
-.fair_trade_standard_sections .common_table_scroll{padding:0;}
-.fair_trade_standard_sections .common_table thead th { text-align: center; }
-.fair_trade_standard_sections :deep(.m_txt) { display: none; }
-.fair_trade_standard_sections .common_table th{padding:19px 10px !important;font-size: 1.6rem;line-height: 1.24;letter-spacing: 0;}
-.fair_trade_standard_sections .common_table td:not(:last-child){border-right: 1px solid #e5e5e9;}
-.fair_trade_standard_sections .common_table.type_01 { table-layout: auto; min-width: 0; width: 100%; }
-.fair_trade_standard_sections .common_table.type_01 colgroup col { min-width: 0; }
-.fair_trade_standard_sections .common_table.type_01 th { overflow-wrap: break-word; word-break: keep-all; }
-
-.fair_trade_standard_sections .common_table.type_02 colgroup col { min-width: 0; }
-.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(1) { width: 250px; }
-.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(2) { width: 290px; }
-.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(3) { width: 290px; }
-.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(4) { width: 100px; }
-.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(5) { width: 100px; }
-.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(6) { width: 100px; }
-.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(7) { width: 100px; }
-.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(8) { width: 100px; }
-.fair_trade_standard_sections .common_table.type_02 th { overflow-wrap: break-word; word-break: keep-all; }
-.fair_trade_standard_sections .common_table.type_02 tbody tr td:nth-last-child(-n+5) { text-align: center; }
-.fair_trade_standard_sections .common_table_scroll.common_table_scroll_type_02 { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
-
-.fair_trade_standard_sections .common_table td{padding:12px 24px;}
-/* .fair_trade_standard_sections .common_table td:first-child{text-align: center;} */
-.fair_trade_standard_sections .common_table td p.txt_warn { padding-left:12px; }
-.fair_trade_standard_sections .common_table td p.dot_txt { padding-left: 12px;  position: relative; }
-.fair_trade_standard_sections .common_table td p.dot_txt::before { width: 4px; height: 4px; margin: 0 8px 0 0; background-color: #161616; border-radius: 50%; display: inline-block; vertical-align: 0.45em;position:absolute; top: 10px; left: 0; content: ""; }
-.fair_trade_standard_sections .common_table td p.warn_txt { margin: 6px 0 0;  font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-.fair_trade_standard_sections .common_table .common_num_list { margin: 0; padding: 0; list-style: none; counter-reset: common-cell-num; }
-.fair_trade_standard_sections .common_table .common_num_list > li { margin: 0; padding-left: 32px; position: relative; counter-increment: common-cell-num; }
-.fair_trade_standard_sections .common_table .common_num_list > li + li { margin-top: 8px; }
-.fair_trade_standard_sections .common_table .common_num_list > li::before { content: counter(common-cell-num); width: 20px; height: 20px;  font-size: 12px; line-height: 1.2; border: 1px solid #161616; border-radius: 50%; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 2px; left: 0; box-sizing: border-box; }
-
-.fair_trade_standard_sections .common_table.type_01 colgroup col:first-child { width: 250px; min-width: 250px; max-width: 250px; }
-.fair_trade_standard_sections .common_table.type_01 colgroup col:not(:first-child) { width: auto; min-width: 0; }
-.fair_trade_partner_eval_mo { display: none; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval { width: 100%; min-width: 0; table-layout: auto; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(1) { width: 250px; min-width: 0; max-width: 250px; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(2) { width: 390px; min-width: 0; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(3) { width: 150px; min-width: 0; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(4) { width: 390px; min-width: 0; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(5) { width: 150px; min-width: 0; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval thead th:nth-child(2),
-.fair_trade_standard_sections .common_table.appendix_partner_eval thead th:nth-child(4) { border-right: 0; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval thead th:nth-child(3),
-.fair_trade_standard_sections .common_table.appendix_partner_eval thead th:nth-child(5) { border-left: 0; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval tbody tr:first-child td:nth-child(2),
-.fair_trade_standard_sections .common_table.appendix_partner_eval tbody tr:first-child td:nth-child(4),
-.fair_trade_standard_sections .common_table.appendix_partner_eval tbody tr:not(:first-child) td:nth-child(1),
-.fair_trade_standard_sections .common_table.appendix_partner_eval tbody tr:not(:first-child) td:nth-child(3) { border-right: 0; }
+.panel_third_depth .common_table_sub { margin: 0 0 12px; color: #4095F5; font-size: 1.6rem; font-weight: 700; line-height: 1.24; }
+.panel_third_depth .reward_report_btn { width: 100%; margin-top: 40px; display: flex; justify-content: center; }
+.ft_sec_list .common_table_scroll { padding: 0; }
+.ft_sec_list .common_table_scroll.common_table_scroll_type_02 { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
+.ft_sec_list .common_table thead th { text-align: center; }
+.ft_sec_list :deep(.m_txt) { display: none; }
+.ft_sec_list .common_table th { padding: 19px 10px !important; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+.ft_sec_list .common_table td { padding: 12px 24px; }
+.ft_sec_list .common_table td:not(:last-child) { border-right: 1px solid #e5e5e9; }
+.ft_sec_list .common_table.type_01 { table-layout: auto; min-width: 0; width: 100%; }
+.ft_sec_list .common_table.type_01 colgroup col:first-child { width: 250px; min-width: 250px; max-width: 250px; }
+.ft_sec_list .common_table.type_01 colgroup col:not(:first-child) { width: auto; min-width: 0; }
+.ft_sec_list .common_table.type_01 colgroup col, .ft_sec_list .common_table.type_02 colgroup col { min-width: 0; }
+.ft_sec_list .common_table.type_02 colgroup col:nth-child(1) { width: 250px; }
+.ft_sec_list .common_table.type_02 colgroup col:nth-child(2), .ft_sec_list .common_table.type_02 colgroup col:nth-child(3) { width: 290px; }
+.ft_sec_list .common_table.type_02 colgroup col:nth-child(n+4):nth-child(-n+8) { width: 100px; }
+.ft_sec_list .common_table.type_01 th, .ft_sec_list .common_table.type_02 th { overflow-wrap: break-word; word-break: keep-all; }
+.ft_sec_list .common_table.type_02 tbody tr td:nth-last-child(-n+5) { text-align: center; }
+.ft_sec_list .common_table td p.txt_warn { padding-left: 12px; }
+.ft_sec_list .common_table td p.dot_txt { padding-left: 12px; position: relative; }
+.ft_sec_list .common_table td p.dot_txt::before { width: 4px; height: 4px; margin: 0 8px 0 0; background-color: #161616; border-radius: 50%; display: inline-block; vertical-align: 0.45em; position: absolute; top: 10px; left: 0; content: ""; }
+.ft_sec_list .common_table td p.warn_txt { margin: 6px 0 0; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.ft_sec_list .common_table .common_num_list { margin: 0; padding: 0; list-style: none; counter-reset: common-cell-num; }
+.ft_sec_list .common_table .common_num_list > li { margin: 0; padding-left: 32px; position: relative; counter-increment: common-cell-num; }
+.ft_sec_list .common_table .common_num_list > li + li { margin-top: 8px; }
+.ft_sec_list .common_table .common_num_list > li::before { content: counter(common-cell-num); width: 20px; height: 20px; font-size: 12px; line-height: 1.2; border: 1px solid #161616; border-radius: 50%; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 2px; left: 0; box-sizing: border-box; }
+.tbl_dual_mo { display: none; }
+.ft_sec_list .common_table.tbl_dual_grid { width: 100%; min-width: 0; table-layout: auto; }
+.ft_sec_list .common_table.tbl_dual_grid colgroup col:nth-child(1) { width: 250px; min-width: 0; max-width: 250px; }
+.ft_sec_list .common_table.tbl_dual_grid colgroup col:nth-child(2), .ft_sec_list .common_table.tbl_dual_grid colgroup col:nth-child(4) { width: 390px; min-width: 0; }
+.ft_sec_list .common_table.tbl_dual_grid colgroup col:nth-child(3), .ft_sec_list .common_table.tbl_dual_grid colgroup col:nth-child(5) { width: 150px; min-width: 0; }
+.ft_sec_list .common_table.tbl_dual_grid thead th:nth-child(2), .ft_sec_list .common_table.tbl_dual_grid thead th:nth-child(4) { border-right: 0; }
+.ft_sec_list .common_table.tbl_dual_grid thead th:nth-child(3), .ft_sec_list .common_table.tbl_dual_grid thead th:nth-child(5) { border-left: 0; }
+.ft_sec_list .common_table.tbl_dual_grid tbody tr:first-child td:nth-child(2), .ft_sec_list .common_table.tbl_dual_grid tbody tr:first-child td:nth-child(4), .ft_sec_list .common_table.tbl_dual_grid tbody tr:not(:first-child) td:nth-child(1), .ft_sec_list .common_table.tbl_dual_grid tbody tr:not(:first-child) td:nth-child(3) { border-right: 0; }
+.ft_sec_list .common_table.tbl_dual_grid tbody tr:first-child td:nth-child(3), .ft_sec_list .common_table.tbl_dual_grid tbody tr:first-child td:nth-child(5), .ft_sec_list .common_table.tbl_dual_grid tbody tr:not(:first-child) td:nth-child(2), .ft_sec_list .common_table.tbl_dual_grid tbody tr:not(:first-child) td:nth-child(4) { text-align: center; }
 /* 정도경영 > 제보 (Figma 474:29330) */
-.report_intro_desc {
-    margin-bottom: 80px;
-    font-size: 2.4rem;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-    text-align: center;
-}
-
-.report_channel_list {
-    width: 100%;
-    border-top: 1px solid #e5e5e9;
-}
-.report_channel_item {
-    border-bottom: 1px solid #e5e5e9;
-}
-.report_channel_card {
-    width: 100%;
-    padding: 40px 0;
-    display: flex;
-    gap: 40px;
-}
-.report_channel_thumb {
-    width: 340px;
-    min-width: 340px;
-    height: 230px;
-    background-color: #f8f8f8;
-    border-radius: 12px;
-    display: block;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
-.report_channel_thumb.thumb_voice {
-    background-image: url(@/assets/images/dummy/gsrsu040101_07.png);
-}
-.report_channel_thumb.thumb_ethics {
-    background-image: url(@/assets/images/dummy/gsrsu040101_08.png);
-}
-.report_channel_thumb.thumb_redwhistle {
-    background-image: url(@/assets/images/dummy/gsrsu040101_09.png);
-} 
-.report_channel_body {
-    width: calc(100% - 380px);
-}
-.report_channel_body h3 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-}
-.report_channel_body > p {
-    margin-top: 16px;
-    font-size: 2rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-.report_channel_body .button_area {
-    margin-top: 24px;
-}
-.list_cuation {
-    margin-top: 16px;
-}
-/* .list_cuation > li > p { margin: 0;  } */
-.list_cuation li + li { margin-top:8px;}
-.list_cuation :deep(span){
-    text-decoration: underline;
-}
-
-.signature_box.type02{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-.signature_box.type02 strong {
-    font-weight: 700;
-    font-size: 2.8rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    display: block;
-}
-
-.signature_box.type02 .button_area {
-    margin-top: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-end;
-}
-.panel_inner header.sub_header p:only-child {
-    margin-top: 0;
-}
+.report_intro_desc { margin-bottom: 80px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
+.report_channel_list { width: 100%; border-top: 1px solid #e5e5e9; }
+.report_channel_item { border-bottom: 1px solid #e5e5e9; }
+.report_channel_card { width: 100%; padding: 40px 0; display: flex; gap: 40px; }
+.report_channel_thumb { width: 340px; min-width: 340px; height: 230px; background-color: #f8f8f8; border-radius: 12px; display: block; background-repeat: no-repeat; background-position: center; background-size: cover; }
+.report_channel_thumb.thumb_voice { background-image: url(@/assets/images/dummy/gsrsu040101_07.png); }
+.report_channel_thumb.thumb_ethics { background-image: url(@/assets/images/dummy/gsrsu040101_08.png); }
+.report_channel_thumb.thumb_redwhistle { background-image: url(@/assets/images/dummy/gsrsu040101_09.png); }
+.report_channel_body { width: calc(100% - 380px); }
+.report_channel_body h3 { font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.report_channel_body > p { margin-top: 16px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+.report_channel_body .button_area { margin-top: 24px; }
+.list_cuation { margin-top: 16px; }
+.list_cuation li + li { margin-top: 8px; }
+.list_cuation :deep(span) { text-decoration: underline; }
+.signature_box.type02 { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.signature_box.type02 strong { font-weight: 700; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.signature_box.type02 .button_area { margin-top: 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+.panel_inner header.sub_header p:only-child { margin-top: 0; }
 @media screen and (max-width: 768px) {
-    :deep(.p_br) { display: none }
-    :deep(.m_br) { display: inline }
+    :deep(.p_br) { display: none; }
     .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
-    .panel{padding-top:60px;}
-    .panel_third_depth {padding-top: 32px;}
+    .panel { padding-top:60px; }
+    .panel_third_depth { padding-top: 32px; }
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
     .visual_sub { font-size: 2rem; }
-    .tab_header{margin-bottom:56px; padding: 0; text-align: left;}
-    .tab_header > h2 {font-size: 1.8rem; line-height: 1.4; text-align: left;}
-    .tab_header > p {font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em;}
-    .sub_header{margin-bottom:32px;}
+    .tab_header { margin-bottom:56px; padding: 0; text-align: left; }
+    .tab_header > h2 { font-size: 1.8rem; line-height: 1.4; text-align: left; }
+    .tab_header > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sub_header { margin-bottom:32px; }
     .sub_header h3 { font-size: 2.4rem; text-align: left; }
     .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    section + section{padding-top:80px;}
-    .gray_box{padding: 40px;}
-    .gray_box p{margin-top: 32px; }
+    section + section { padding-top:80px; }
+    .gray_box { padding: 40px; }
+    .gray_box p { margin-top: 32px; }
     :deep(.feature_cards_grid.feature_card_list) { gap: 12px; }
-    .button_area [class*="btn_"] {width:auto; flex:1 1 auto;}
+    .button_area [class*="btn_"] { width:auto; flex:1 1 auto; }
     .history_list { padding-left: 20px; }
     .history_item { gap: 8px; flex-direction: column; }
     .history_item::before { width: 8px; height: 8px; border-width: 4px; top: 8px; left: -20px; }
@@ -4967,7 +4608,7 @@ letter-spacing: -0.01em;
     .history_period { width: 100%; font-size: 2rem; line-height: 1.35; }
     .history_body { margin-top:6px;padding-bottom: 42px; }
     .history_summary { font-size: 1.4rem; line-height: 1.4; }
-    .history_detail_list {  display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 6px; column-gap: 0; }
+    .history_detail_list { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 6px; column-gap: 0; }
     .history_detail_list > dt { padding: 6px 0; font-size: 1.6rem; line-height: 1.4; grid-column: 1; }
     .history_detail_list > dd { padding: 0; font-size: 1.4rem; line-height: 1.4; grid-column: 1; }
     .history_detail_list > dd + dt { margin-top: 12px; }
@@ -4976,158 +4617,85 @@ letter-spacing: -0.01em;
     .sec_ethics_cards .card_list :deep(.card_thumb) { aspect-ratio: 335 / 190; }
     .sec_ethics_cards .card_list :deep(.card_item .card_body) { padding-top: 20px; display: block; }
     .sec_ethics_cards .card_list :deep(.card_desc) { margin-top: 16px; }
-    .card_list :deep(.card_tit) { font-size: 1.8rem; line-height: 1.5;letter-spacing: 0;}
-    .card_list :deep(.card_desc) { font-size: 1.6rem;line-height: 1.5; letter-spacing: -0.01em;}
+    .card_list :deep(.card_tit) { font-size: 1.8rem; line-height: 1.5;letter-spacing: 0; }
+    .card_list :deep(.card_desc) { font-size: 1.6rem;line-height: 1.5; letter-spacing: -0.01em; }
     .practice_title { margin-top:0; font-size: 2rem; line-height: 1.35; }
     .practice_desc { margin-top: 12px; font-size: 1.6rem; }
     .base_item { padding: 16px 0; }
-    .base_item > em { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
-    .base_item > strong { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0;}
-    .base_item p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em;}
+    .base_item > em { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0; }
+    .base_item > strong { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0; }
+    .base_item p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .base_list.type02 { padding: 32px; border-radius: 12px; }
     .signature_box { margin-top: 24px; padding: 24px 20px; border-radius: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
     .signature_box p { font-size: 1.6rem; line-height: 1.5; }
-    .signature_box.type02{justify-content: flex-start;align-items: flex-start;}
-    .signature_box.type02 strong{font-size: 2rem;}
-    .base_item .button_area,
-    .signature_box.type02 .button_area {width: 100%; display: flex; flex-direction: column; gap: 8px;}
-    .base_item .button_area :deep([class*="btn_"]),
-    .signature_box.type02 .button_area :deep([class*="btn_"]) {width: 100%;}
+    .signature_box.type02 { justify-content: flex-start;align-items: flex-start; }
+    .signature_box.type02 strong { font-size: 2rem; }
+    .base_item .button_area, .signature_box.type02 .button_area { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+    .base_item .button_area :deep([class*="btn_"]), .signature_box.type02 .button_area :deep([class*="btn_"]) { width: 100%; }
     .signature_box dl { width: 100%; margin-top: 20px; }
     .signature_box dl > dt { font-size: 1.4rem; line-height: 1.5; }
     .signature_box dl > dd { font-size: 1.4rem; line-height: 1.5; }
     .signature_box dl > dd { margin-top: 2px; }
     .signature_box span { width: 100%; font-size: 1.4rem; line-height: 1.4; text-align: right; }
-    .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li) {
-        flex: 1;
-        /* min-width: 0; */
-    }
-    .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li .item) {
-        width: auto;
-        height: 48px;
-        padding: 12px 0;
-        font-size: 1.4rem;
-        line-height: 1.43;
-    }
-
-    .base_item .gray_box {
-        padding: 40px 24px;
-    }
-    .base_item .gray_box .process_flow {
-        flex-direction: column;
-        gap: 12px;
-    }
-    .base_item .gray_box .process_flow p {
-        flex: 1 1 auto;
-        width: 100%;
-        max-width: none;
-    }
- 
+    .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li) { flex: 1; }
+    .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li .item) { width: auto; height: 48px; padding: 12px 0; font-size: 1.4rem; line-height: 1.43; }
+    .base_item .gray_box { padding: 40px 24px; }
+    .base_item .gray_box .process_flow { flex-direction: column; gap: 12px; }
+    .base_item .gray_box .process_flow p { flex: 1 1 auto; width: 100%; max-width: none; }
     .cp_appoint_board .process_flow { flex-direction: column; }
     .cp_manager_banner { padding: 40px 20px;justify-content: flex-start; }
     .cp_manager_banner > figcaption { width: 100%; max-width: none; min-width: 0; }
-    .cp_manager_banner > figcaption > strong{font-size: 2.4rem;}
+    .cp_manager_banner > figcaption > strong { font-size: 2.4rem; }
     .cp_manager_banner > figcaption > p { font-size: 1.6rem; }
     .cp_manager_banner > figcaption > p + p { margin-top: 12px; font-size: 1.6rem; }
-    .cp_manager_banner + p{margin-top:40px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-    
-    .panel_third_depth .common_table th,
-    .panel_third_depth .common_table td {
-        padding: 16px 12px;
-    }
-    .panel_third_depth .common_table th {
-        font-size: 1.6rem;
-    }
-    .panel_third_depth .common_table td p {
-        font-size: 1.6rem;
-        line-height: 1.5;
-        letter-spacing: -0.01em;
-    }
-    .panel_third_depth .common_table_sub {
-        font-size: 1.4rem;
-    }
-
-    .panel_third_depth .reward_report_btn {
-        margin-top: 32px;
-    }
-    .base_list .gray_box {
-        padding: 24px 20px;
-    }
-    .base_list .gray_box > strong{
-        font-size: 1.8rem;
-    }
-    .base_list .gray_box > p {
-        margin-top: 12px;
-        font-size: 1.4rem;
-    }
-    .report_intro_desc {
-        margin-top: -44px;
-        margin-bottom: 40px;
-        font-size: 1.6rem;
-        text-align: left;
-    }
-    .report_channel_card {
-        padding: 24px 0;
-        flex-direction: column;
-        gap: 20px;
-    }
-    .report_channel_thumb {
-        width: 100%;
-        min-width: 0;
-        height: 190px;
-    }
-    .report_channel_body {
-        width: 100%;
-    }
-    .report_channel_body h3 {
-        font-size: 2.4rem;
-    }
-    .report_channel_body > p {
-        margin-top: 12px;
-        font-size: 1.6rem;
-    }
-    .report_channel_body .button_area {
-        margin-top: 16px;
-    }
-    .fair_trade_standard_sections .common_table td{padding:12px 10px;}
-    .fair_trade_standard_sections .common_table td p.warn_txt { padding-left: 12px; }
-
-    .fair_trade_standard_sections .common_table.type_01 colgroup col:first-child { width: 100px ; min-width: 100px; max-width: 100px; }
-    .fair_trade_standard_sections .common_table.type_01 colgroup col:not(:first-child) { width: auto ; min-width: 0; }
-    .fair_trade_standard_sections .fair_trade_partner_eval_pc { display: none !important; }
-    .fair_trade_standard_sections .fair_trade_partner_eval_mo { display: table; width: 100%; min-width: 0; table-layout: auto; }
-    .fair_trade_standard_sections .appendix_partner_eval_mo.type_01 colgroup col:nth-child(1) { width: 50px !important; min-width: 50px !important; max-width: 50px !important; }
-    .fair_trade_standard_sections .appendix_partner_eval_mo.type_01 colgroup col:nth-child(2) { width: 165px !important; min-width: 0; }
-    .fair_trade_standard_sections .appendix_partner_eval_mo.type_01 colgroup col:nth-child(3) { width: 80px !important; min-width: 80px !important; max-width: 80px !important; }
-    .fair_trade_standard_sections .appendix_partner_eval_mo td .appendix_partner_eval_mo_lead { margin: 0; line-height: 1.15; text-align: center; letter-spacing: 0; }
-    /* .fair_trade_standard_sections .common_table.type_01 th:first-child,
-    .fair_trade_standard_sections .common_table.type_01 td:first-child { width: 100px; min-width: 100px; max-width: 100px; } */
-    .list_cuation {
-        margin-top: 8px;
-       
-    }
-    .panel_third_depth .table_wrap{margin-top: 16px;}
-    /* .fair_trade_work_standard_sec :deep(dd.acc_panel) { padding: 0 20px; } */
-    .fair_trade_work_standard_sec :deep(.acc_panel_inner) { padding: 16px 20px 24px; }
-    .fair_trade_work_standard_sec :deep(dd+ dt){border-top:0;}
-    .fair_trade_standard_sections > li > article{gap:16px;}
-    .fair_trade_standard_sections > li > article > h4{font-size: 1.6rem; line-height: 1.24; letter-spacing: 0;}
-    /* .fair_trade_standard_sections .common_table td:not(:first-child){vertical-align: top;} */
-    .fair_trade_standard_sections .common_table .common_num_list > li{padding-left:26px;}
-    .panel_third_depth .common_table td p + p{margin-top:6px;}
-
-    .fair_trade_standard_sections .common_table td p.dot_txt { margin: 0;  position: relative; padding-left: 8px;}
-    .fair_trade_standard_sections .common_table td p.dot_txt::before { width: 2px; height: 2px; margin: 0 6px 0 0; background-color: #161616; display: inline-block; vertical-align: 0.45em;position:absolute; top: 10px; left: 0; content: ""; }
-    .fair_trade_standard_sections .common_table.type_02 { table-layout: fixed; min-width: 695px; width: max-content; }
-    .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(1) { width: 50px; min-width: 50px; max-width: 50px; }
-    .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(2) { width: 90px; min-width: 90px; max-width: 90px; }
-    .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(3) { width: 155px; min-width: 155px; max-width: 155px; }
-    .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(4), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(5), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(6), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(7), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(8) { width: 80px; min-width: 80px; max-width: 80px; }
-    .fair_trade_standard_sections .common_table td.txt_verticle { vertical-align: middle; text-align: center; }
-    .fair_trade_standard_sections .common_table td.txt_verticle > p{  text-align: center; display: inline-block; writing-mode: vertical-rl; text-orientation: upright; }
-    .fair_trade_standard_sections :deep(.p_txt) { display: none !important; }
-    .fair_trade_standard_sections :deep(.m_txt) { display: inline; }
+    .cp_manager_banner + p { margin-top:40px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em; }
+    .reward_criteria .common_table_scroll{margin-top:6px;}
+    .panel_third_depth .common_table th, .panel_third_depth .common_table td { padding: 16px 12px; }
+    .panel_third_depth .common_table th { font-size: 1.6rem; }
+    .panel_third_depth .common_table td p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .panel_third_depth .common_table_sub { font-size: 1.4rem; }
+    .panel_third_depth .reward_report_btn { margin-top: 32px; }
+    .base_list .gray_box { padding: 24px 20px; }
+    .base_list .gray_box > strong { font-size: 1.8rem; }
+    .base_list .gray_box > p { margin-top: 12px; font-size: 1.4rem; }
+    .report_intro_desc { margin-top: -44px; margin-bottom: 40px; font-size: 1.6rem; text-align: left; }
+    .report_channel_card { padding: 24px 0; flex-direction: column; gap: 20px; }
+    .report_channel_thumb { width: 100%; min-width: 0; height: 190px; }
+    .report_channel_body { width: 100%; }
+    .report_channel_body h3 { font-size: 2.4rem; }
+    .report_channel_body > p { margin-top: 12px; font-size: 1.6rem; }
+    .report_channel_body .button_area { margin-top: 16px; }
+    .ft_sec_list .common_table td { padding: 12px 10px; }
+    .ft_sec_list .common_table td p.warn_txt { padding-left: 12px; }
+    .ft_sec_list .common_table.type_01 colgroup col:first-child { width: 100px; min-width: 100px; max-width: 100px; }
+    .ft_sec_list .common_table.type_01 colgroup col:not(:first-child) { width: auto; min-width: 0; }
+    .ft_sec_list .tbl_dual_pc { display: none !important; }
+    .ft_sec_list .tbl_dual_mo { display: table; width: 100%; min-width: 0; table-layout: auto; }
+    .ft_sec_list .tbl_dual_mo.type_01 colgroup col:nth-child(1) { width: 50px !important; min-width: 50px !important; max-width: 50px !important; }
+    .ft_sec_list .tbl_dual_mo.type_01 colgroup col:nth-child(2) { width: 165px !important; min-width: 0; }
+    .ft_sec_list .tbl_dual_mo.type_01 colgroup col:nth-child(3) { width: 80px !important; min-width: 80px !important; max-width: 80px !important; }
+    .ft_sec_list .tbl_dual_mo td .mo_cell_lead { margin: 0; line-height: 1.15; text-align: center; letter-spacing: 0; }
+    .list_cuation { margin-top: 8px; }
+    .panel_third_depth .table_wrap { margin-top: 16px; }
+    .ft_acc_wrap :deep(.acc_panel_inner) { padding: 16px 20px 24px; }
+    .ft_acc_wrap :deep(dd+ dt) { border-top: 0; }
+    .ft_sec_list > li > article { gap: 16px; }
+    .ft_sec_list > li > article > h4 { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .ft_sec_list .common_table .common_num_list > li { padding-left: 26px; }
+    .panel_third_depth .common_table td p + p { margin-top: 6px; }
+    .ft_sec_list .common_table td p.dot_txt { margin: 0; position: relative; padding-left: 8px; }
+    .ft_sec_list .common_table td p.dot_txt::before { width: 2px; height: 2px; margin: 0 6px 0 0; background-color: #161616; display: inline-block; vertical-align: 0.45em; position: absolute; top: 10px; left: 0; content: ""; }
+    .ft_sec_list .common_table.type_02 { table-layout: fixed; min-width: 695px; width: max-content; }
+    .ft_sec_list .common_table.type_02 colgroup col:nth-child(1) { width: 50px; min-width: 50px; max-width: 50px; }
+    .ft_sec_list .common_table.type_02 colgroup col:nth-child(2) { width: 90px; min-width: 90px; max-width: 90px; }
+    .ft_sec_list .common_table.type_02 colgroup col:nth-child(3) { width: 155px; min-width: 155px; max-width: 155px; }
+    .ft_sec_list .common_table.type_02 colgroup col:nth-child(n+4):nth-child(-n+8) { width: 80px; min-width: 80px; max-width: 80px; }
+    .ft_sec_list .common_table td.txt_verticle { vertical-align: middle; text-align: center; }
+    .ft_sec_list .common_table td.txt_verticle > p { text-align: center; display: inline-block; writing-mode: vertical-rl; text-orientation: upright; }
+    .ft_sec_list :deep(.p_txt) { display: none !important; }
+    .ft_sec_list :deep(.m_txt) { display: inline; }
 }
+
 </style>
 
 
