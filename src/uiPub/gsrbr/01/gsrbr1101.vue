@@ -366,8 +366,8 @@ export default {
 .visual_img_small img { width: 100%; height: 100%; object-fit: cover; }
 .policy_wrap {margin-top:24px;}
 .policy_wrap table { width: 100%; margin-top: 16px; border-top: 1px solid #e5e5e9; }
-.policy_wrap table th { padding: 18px 24px; color: #161616; font-size: 18px; font-weight: 700; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; border-top:0; border-left:0; border-right:0; text-align:left; }
-.policy_wrap table td { padding: 18px 24px; color: #161616; font-size: 18px; border-bottom: 1px solid #e5e5e9; border-left:0; border-right:0;}
+.policy_wrap table th { padding: 18px 24px; color: #161616; font-size: 1.8rem; font-weight: 700; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; border-top:0; border-left:0; border-right:0; text-align:left; }
+.policy_wrap table td { padding: 18px 24px; color: #161616; font-size: 1.8rem; border-bottom: 1px solid #e5e5e9; border-left:0; border-right:0;}
 
 /* Map & Contact Area (Mall) */
 .map_section { margin-top: 40px; }
@@ -376,7 +376,7 @@ export default {
 .contact_left { display: flex; gap: 40px; }
 .info_item { display: flex; align-items: center; gap: 8px; }
 .info_item i { width: 24px; height: 24px; background-color: red; background-size: contain; background-repeat: no-repeat; display: inline-block; }
-.info_item .val { color: #161616; font-size: 18px; }
+.info_item .val { color: #161616; font-size: 1.8rem; }
 .sns_right { display: flex; gap: 10px; }
 /* common.css로 이동
 .btn_sns { width: 40px; height: 40px; background-color: #f8f8f8; background-size: 24px; background-repeat: no-repeat; background-position: center; border-radius: 50%; display: block; }
@@ -388,7 +388,7 @@ export default {
 .bullet_01 li { padding-left: 15px; color: #67676f; font-size: 20px; line-height: 1.6; position: relative; }
 .bullet_01 li::before { width: 4px; height: 4px; background-color: #67676f; border-radius: 50%; content: ""; position: absolute; top: 12px; left: 0; }
 .fee_tip_box { width: 100%; margin-top: 40px; padding: 40px 64px; background-color: #f8f8f8; border-radius: 8px; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
-.ic_percent { width: 40px; height: 40px; color: #90909a; font-size: 18px; font-weight: 600; border: 2px solid #90909a; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.ic_percent { width: 40px; height: 40px; color: #90909a; font-size: 1.8rem; font-weight: 600; border: 2px solid #90909a; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .blue_label { color: #107af2; font-size: 16px; font-weight: 700; display: block; }
 .val_txt { margin-top: 6px; color: #161616; font-size: 20px; font-weight: 700; line-height: 1.4; }
 
@@ -406,13 +406,13 @@ export default {
     .intro_content { flex-direction: column; align-items: flex-start; gap: 40px; }
     .text_box .title { font-size: 36px; }
     .text_box .desc_box { margin-top: 24px; }
-    .text_box .summary, .text_box .desc { font-size: 18px; line-height: 1.5; }
+    .text_box .summary, .text_box .desc { font-size: 1.8rem; line-height: 1.5; }
     .body_wrap { padding: 60px 0 80px; }
     .detail_content { margin-top: 60px; }
     .visual_img { height: 220px; }
     .content_title { font-size: 28px; }
     .sub_title { font-size: 20px; }
-    .text_item { font-size: 18px; line-height: 1.6; }
+    .text_item { font-size: 1.8rem; line-height: 1.6; }
     .map_area { height: 400px; }
     .contact_info_wrap { padding: 0; flex-direction: column; align-items: flex-start; gap: 24px; }
     .contact_left { flex-direction: column; gap: 12px; }

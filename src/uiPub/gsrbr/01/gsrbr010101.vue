@@ -3272,7 +3272,7 @@ button { background-color: #fff }
 .info_card { max-width: 940px; padding: 32px; background-color: #f8f8f8; border-radius: 12px }
 .info_card strong { margin-bottom:8px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
 @media (max-width: 768px) {
-  .info_card strong { font-size: 18px; line-height: 150%; letter-spacing: 0% }
+  .info_card strong { font-size: 1.8rem; line-height: 150%; letter-spacing: 0% }
 }
 @media (max-width: 768px) {
   .sinsen_feature :deep(.feature_card_item) { min-height: 227px }

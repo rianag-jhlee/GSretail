@@ -47,21 +47,4 @@ provide(ACCORDION_INJECT_KEY, {
 </script>
 
 <style scoped>
-.board_type_toggle {width: 100%;margin: 0;padding: 0;}
-
-/* .board_type_toggle :deep(.acc_item) { dl > div > dt 구조 수정 위한 css 제거
-    margin: 0;
-    border-bottom: 1px solid #d7d7df;
-} */
-
-
-.board_type_toggle :deep(dd + dt) {margin: 0;border-bottom:0;border-top: 0;}
-
-
-.board_type_toggle :deep(dd) {margin: 0;padding: 0;}
-
-@media (max-width: 768px) {
-    .board_type_toggle {box-sizing: border-box;}
-    .board_type_toggle :deep(dd + dt) {margin: 0;border-bottom:0;border-top: 1px solid #d7d7df;}
-}
 </style>

@@ -16,7 +16,7 @@
         <section class="body_wrap">
             <div class="cont_area">
                 <div class="cont_inner">
-                    <div class="intro_group mb100">
+                    <div class="intro_group">
                         <h2 class="main_title">{{ t.Intro.title }}</h2>
                         <p class="main_desc" v-html="t.Intro.desc"></p>
                         
@@ -104,7 +104,7 @@
                                 <tbody>
                                     <tr v-for="(row, rIdx) in t.MemberBenefit.tableRows" :key="rIdx">
                                         <th scope="row" class="bg_light">{{ row.brand }}</th>
-                                        <td v-for="(cell, cIdx) in row.cells" :key="cIdx" v-html="cell"></td>
+                                        <td v-for="(cell, cIdx) in row.cells" :key="cIdx" v-html="cell.text" :class="{ 'verti_top': cell.isTop }"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -153,7 +153,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="btn_wrap mt64">
+                        <div class="btnSection ac"><!-- 26.05.12 Edit 이종환 : class 수정 -->
                             <Buttons 
                                 btn-class="btn_big primary"
                                 @click="openModal" 
@@ -276,13 +276,14 @@ export default {
                     MemberBenefit: {
                         title: "2. 멤버십 혜택 안내",
                         tableRows: [
-                            { brand: "GS25", cells: ["3천원 할인쿠폰 <br/>(1만원 이상 구매 시)", "2천원 할인쿠폰 <br/>(1만원 이상 구매 시)", "-", "-"] },
-                            { brand: "GS 더프레시", cells: ["상품별 할인쿠폰 8장", "상품별 할인쿠폰 6장", "-", "-"] },
+                            { brand: "GS25", cells: [
+                                {text:"3천원 할인쿠폰 <br/>(1만원 이상 구매 시)"}, {text:"2천원 할인쿠폰 <br/>(1만원 이상 구매 시)"}, {text:"-"},{text:"-"}] },
+                            { brand: "GS 더프레시", cells: [{text:"상품별 할인쿠폰 8장"}, {text:"상품별 할인쿠폰 6장"}, {text:"-"}, {text:"-"}] },
                             { brand: "GS SHOP", cells: [
-                                "<ul class='bullet_01'><li>5% 할인(월10만원)</li><li>TV상품 GS Pay 5% 할인(월10만원)</li><li>멤버십데이 GS Pay 10% 적립(월10만원)</li><li>무료배송 쿠폰</li><li>VIP 전용혜택: TV상품 프리미엄 아울렛, 와인25+ VIP 전용매장 등</li><li>출석체크 / 해피테스터</li></ul>",
-                                "<ul class='bullet_01'><li>5% 할인(월5만원)</li><li>TV상품 GS Pay 4% 할인(월8만원)</li><li>멤버십데이 GS Pay 8% 적립(월8만원)</li><li>VIP 전용 채팅상담 (모바일)</li><li>출석체크 / 해피테스터</li></ul>",
-                                "<ul class='bullet_01'><li>5% 할인(월4만원)</li><li>TV상품 GS Pay 3% 할인(월6만원)</li><li>멤버십데이 GS Pay 6% 적립(월6만원)</li><li>출석체크 / 해피테스터</li></ul>",
-                                "<ul class='bullet_01'><li>5% 할인(월3만원)</li><li>TV상품 GS Pay 2% 할인(월4만원)</li><li>멤버십데이 GS Pay 4% 적립(월4만원)</li><li>출석체크 / 해피테스터</li></ul>"
+                                {text:"<ul class='bullet_01'><li>5% 할인(월10만원)</li><li>TV상품 GS Pay 5% 할인(월10만원)</li><li>멤버십데이 GS Pay 10% 적립(월10만원)</li><li>무료배송 쿠폰</li><li>VIP 전용혜택:<br/>TV상품 프리미엄 아울렛 와인25+ <br/>VIP 전용매장 VVIP 전용 채팅상담 (모바일),<br/> VIP 1:1 채팅상담(PC)</li><li>출석체크</li><li>해피테스터</li></ul>", isTop: true},
+                                {text:"<ul class='bullet_01'><li>5% 할인(월5만원)</li><li>TV상품 GS Pay 4% 할인(월8만원)</li><li>멤버십데이 GS Pay 8% 적립(월8만원)</li><li>VIP 전용혜택:<br/>TV상품 프리미엄 아울렛 와인25+<br/> VIP 전용매장 VVIP 전용 채팅상담 <br/>(모바일)</li><li>출석체크</li><li>해피테스터</li></ul>", isTop: true},
+                                {text:"<ul class='bullet_01'><li>5% 할인(월4만원)</li><li>TV상품 GS Pay 3% 할인(월6만원)</li><li>멤버십데이 GS Pay 6% 적립(월6만원)</li><li>출석체크</li><li>해피테스터</li></ul>", isTop: true},
+                                {text:"<ul class='bullet_01'><li>5% 할인(월3만원)</li><li>TV상품 GS Pay 2% 할인(월4만원)</li><li>멤버십데이 GS Pay 4% 적립(월4만원)</li><li>출석체크</li><li>해피테스터</li></ul>", isTop: true}
                             ] }
                         ]
                     },
@@ -311,7 +312,7 @@ export default {
                             "신규 가입회원은 가입월 웰컴등급이 부여되며 다음달부터 실적에 따라 등급이 부여됩니다.",
                             "등급산정 기간 <br/><span>- GS25, GS THE FRESH : 최근 3개월 주문실적 기준으로 산정(3개월전 26일부터 전월 25일까지)</span><br/><span>- GS SHOP : 최근 6개월 주문실적 기준으로 산정(6개월전 26일부터 전월 25일까지)</span>",
                             "등급 혜택은 매월 1일 순차적으로 지급되며, 당월 말일까지 사용 가능합니다.",
-                            "전 브랜드 혜택을 받기 위해서는 GS ALL 멤버십 회원 약관에 동의해야합니다.<br/><span>(약관 동의 방법 : 우리동네GS 앱, GS SHOP앱 마이페이지에서 약관의 가입)</span>",
+                            "전 브랜드 혜택을 받기 위해서는 2021년 8월 개정된 GS ALL 멤버십 회원 약관에 동의해야합니다.<br/><span>(약관 동의 방법 : 우리동네GS 앱, GS SHOP앱 마이페이지에서 약관의 가입)</span>",
                             "쿠폰, 카드행사할인, 포인트, 배송비 등 등급산정 실적에서 제외됩니다.",
                             "GS Prime카드로 결제 시 GS&POINT로 적립됩니다.",
                             "등급쿠폰 및 GS SHOP할인권은 유효기간 연장 불가하며, 미사용시 자동 소멸됩니다.<br/><span style='color:#fb6432'>* 배송비쿠폰 및 5%할인(=GS SHOP 할인권)은 유효기간 연장 불가하며, 미사용시 자동 소멸됩니다.</span>",
@@ -362,6 +363,7 @@ export default {
 h4 {color:#161616; font-size:32px; font-weight:700;}
 .group_desc {color:#161616; font-size:20px;}
 .mo {display:none;}
+.verti_top {vertical-align:top;}
 
 /* Visual */
 .visual_section { width: 100%; position: relative; }
@@ -370,20 +372,21 @@ h4 {color:#161616; font-size:32px; font-weight:700;}
 .text_box span { color: #ffffff; font-size: 72px; font-weight: 700; display: block; margin-bottom: 10px; }
 
 /* Body Area */
-.body_wrap { padding: 100px 0; }
+.body_wrap { padding:200px 0; }
 .main_title { font-size: 48px; font-weight: 700; color: #161616; margin-bottom: 16px; }
 .main_desc { font-size: 24px; font-weight: 700; color: #161616; line-height: 1.35; }
+.intro_group {margin-bottom:200px;}
 
 .note_box {padding: 32px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction:column; justify-content: space-between; gap:48px;}
 .note_box .note_title {font-size: 20px; font-weight: 700; color: #161616; margin-bottom: 8px; display: block; }
-.note_box .note_desc {color:#67676F; font-size:16px;}
+.note_box .note_desc {color:#67676F; font-size:16px; line-height:1.5;}
 .note_box .note_img {height:17px; }
 .note_box .note_txt + p {display:flex; gap:32px;}
 .qr_download_area {display:flex; align-items:center;}
 .pc.qr_download_area::before {content:''; width:90px; height:90px; background-image:url('@/assets/images/dummy/gsrbr06_qr.png'); background-size: cover; ; display:inline-block; }
 .pc.qr_download_area .qr_info {padding-left:20px; display:flex; flex-direction:column;}
 .pc.qr_download_area .qr_info strong {color:#161616; font-size:20px; font-weight:700; margin-bottom:8px;}
-.pc.qr_download_area .qr_info p {color:#67676F; font-size:14px;}
+.pc.qr_download_area .qr_info p {color:#67676F; font-size:14px; line-height:1.5;}
 .qr_download_area.mo a {padding-left:60px; position:relative; display:flex; flex-direction:column; gap:4px;}
 .qr_download_area.mo a::before {content:''; width:48px; height:48px; background-image:url('@/assets/images/dummy/gsrbr06_app_icon.png'); background-size: cover; position:absolute; top:-5px; left:0; display:inline-block;}
 .qr_download_area.mo a strong {font-size:16px; display:flex; align-items:center; gap:4px;}
@@ -392,12 +395,14 @@ h4 {color:#161616; font-size:32px; font-weight:700;}
 
 /* policy_wrap 규칙 */
 .policy_wrap {overflow-x: auto; width: 100%; margin-bottom: 40px; }
+.policy_wrap table {margin-top:0px;}
 .policy_wrap th, .policy_wrap td {border:0; border-bottom: 1px solid #E5E5E9;}
 .policy_wrap thead tr th:first-of-type, .policy_wrap tbody tr th {border-right:1px solid #E5E5E9; }
 .policy_wrap thead {border-top:1px solid #000;}
 .policy_wrap tbody tr td {text-align:center;}
-.base_table { width: 100%;  min-width: 1100px; border-collapse: collapse; }
-.base_table th, .base_table td { padding: 18px 20px; font-size: 18px; line-height: 1.4; }
+.policy_wrap tbody tr td
+.base_table { width: 100%;  min-width: 1100px; margin-top:0px !important; border-collapse: collapse; }
+.base_table th, .base_table td { padding: 18px 20px; font-size: 1.8rem; line-height: 1.4; }
 .base_table th { background-color: #f8f8f8; font-weight: 700; color: #161616; }
 .base_table td { color: #161616; background-color: #ffffff; }
 .base_table .bg_light { background-color: #f8f8f8; }
@@ -415,7 +420,6 @@ h4 {color:#161616; font-size:32px; font-weight:700;}
 
 
 /* Buttons */
-.btn_wrap {width:100%;}
 /* ui.css로 이동
 .notice_section { padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
 .notice_section .bullet_01 {margin-top:24px;}
@@ -455,9 +459,13 @@ h5 + dl {margin-top:24px;}
 }
 
 @media screen and (max-width: 767px) {
+    .body_wrap { padding:60px 0 200px; }
+    .intro_group, .mb120 {margin-bottom:80px;}
     .text_box span { font-size:28px; text-align: center; }
     h4 {font-size:24px;}
-    .group_desc {font-size:16px;}
+    h5 {font-size:20px;}
+    .group_desc, .brand_name {font-size:16px;}
+    .notice_section .bullet_01 {margin-top:16px;}
     .cont_inner {padding: 0 20px; }
     /* .notice_section {padding:32px;} */
     .note_box .note_title {font-size:18px;}
@@ -466,9 +474,9 @@ h5 + dl {margin-top:24px;}
     .bullet_01 li, :deep(.bullet_01) li span {font-size:16px;}
     .pc {display:none;}
     .mo {display:flex;}
-    .main_title { font-size: 30px; }
-    .main_desc { font-size: 18px; font-weight:400; }
-    .sub_btn_group { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .main_title { font-size:24px; }
+    .main_desc { font-size:16px; font-weight:400; }
+    .sub_btn_group {height:auto; flex-direction: column; align-items: flex-start; gap: 10px; }
     .bottom_btns + .btn_big.border {margin-top:50px; display:flex;}
     .bottom_btns {display:none;}
     .policy_wrap thead {border-top-color:#E5E5E9;}
@@ -477,8 +485,6 @@ h5 + dl {margin-top:24px;}
     :deep(.policy_wrap) ul.bullet_01 li {font-size:16px !important;}
     .coupon_table tbody, .point_table tbody {border-top-color:#E5E5E9;}
     .mb40 {margin-bottom:24px;}
-    .btn_wrap {margin-top:0px;}
-    .btn_wrap button {width:100%;}
     .note_box .note_txt + p img {height:10px;}
 }
 </style>

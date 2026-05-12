@@ -99,13 +99,13 @@ export default {
 }
 
 .num_text {
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #161616;
 }
 
 .policy_item_text {
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 400;
     line-height: 1.4;
     color: #1d1d1d; /* var(--grayscale-90) */
@@ -115,7 +115,7 @@ export default {
 /* 모바일 대응 */
 @media screen and (max-width: 767px) {
     .modal_header { font-size: 24px; }
-    .intro_text { font-size: 18px; }
+    .intro_text { font-size: 1.8rem; }
     .base-accordion { padding: 16px 10px; }
     .policy_item_text { font-size: 16px; }
 }

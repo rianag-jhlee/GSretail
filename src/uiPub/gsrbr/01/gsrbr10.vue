@@ -16,7 +16,7 @@
         <section class="body_wrap">
             <div class="cont_area">
                 <div class="cont_inner">
-                    <h3>{{ t.SubTitle }}</h3>
+                    <h3 v-html="t.SubTitle"></h3>
                     <ul>
                         <li>
                             <p>{{ t.SubContent_1 }}</p>
@@ -59,7 +59,7 @@ export default {
                         subContent_2: "돈버는 즐거움",
                         subContent_3: "우리동네 딜리버리",
                     },
-                    SubTitle: `누구나 가볍게 참여 쉬운 배달 서비스`,
+                    SubTitle: `누구나 가볍게 참여 쉬운<br/> 배달 서비스`,
                     SubContent_1: `별도의 장비 없이, 청년부터 어르신까지 손쉽게 시작할 수 있는 도보 배달 서비스.`,
                     SubContent_2: `내가 원하는 시간에, 내가 아는 동네에서, 가볍게 배달하고 수입을 만들어보세요.`,
                     HopageLink: `https://www.gsrbr.com/`,
@@ -96,6 +96,7 @@ export default {
 <style scoped>
 .gsrbr10 { width: 100%; position: relative; display: block; }
 .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
+:deep(.cont_inner) h3 br {display:none;}
 
 /* Visual Section */
 .visual_section { width:100%; position: relative; overflow: hidden; }
@@ -108,7 +109,6 @@ export default {
 .body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
 .body_wrap .cont_area .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
 .body_wrap .cont_area .cont_inner ul {display:flex; justify-content:space-between; align-items:flex-end;}
-.body_wrap .cont_area .cont_inner ul li {}
 .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:24px; font-weight:600; line-height:1.;}
 .body_wrap .cont_area .cont_inner ul li a {color:#161616; font-size:18px; display:flex; align-items:center;}
 
@@ -126,10 +126,11 @@ export default {
     .body_wrap .cont_area {padding:140px 0px;}
     .body_wrap .cont_area .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:24px; font-weight:700;}
     .body_wrap .cont_area .cont_inner ul {display:flex; justify-content:space-between; align-items:flex-start;}
-    .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:18px; font-weight:400; line-height:1.5;}
+    .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:16px; font-weight:400; line-height:1.5;}
     .body_wrap .cont_area .cont_inner ul li a {color:#161616; font-size:14px; display:flex;}
     .body_wrap .cont_area .cont_inner ul li a::before {width: 24px; height: 24px; background-color: red; content: ''; display: inline-block; margin-right: 8px;}
     .btn_list_back span {font-size:16px;}
     .btn_big.border {margin-top:80px; margin-bottom:80px; display:flex; justify-content: center;}
+    :deep(.cont_inner) h3 br {display:block;}
 }
 </style>

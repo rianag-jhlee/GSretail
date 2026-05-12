@@ -447,7 +447,7 @@ export default {
 
 /* Table 스타일 */
 .policy_wrap table {width: 100%; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
-.policy_wrap th, .policy_wrap td {padding: 18px 24px; border: 1px solid #e5e5e9; font-size: 18px; line-height: 1.4; vertical-align: middle;}
+.policy_wrap th, .policy_wrap td {padding: 18px 24px; border: 1px solid #e5e5e9; font-size: 1.8rem; line-height: 1.4; vertical-align: middle;}
 .policy_wrap th:first-child, .policy_wrap td:first-child { border-left: 0; }
 .policy_wrap th:last-child, .policy_wrap td:last-child { border-right: 0; }
 .policy_wrap thead th { background-color: #f8f8f8; color: #161618; font-weight: 700; }

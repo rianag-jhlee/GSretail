@@ -114,7 +114,7 @@ export default {
 .title_area h3 { color: #161616; font-size: 32px; font-weight: 700; }
 :deep(.title_area) h3 br {display:none; }
 .desc_group { display: flex; flex-direction: column; gap: 8px; }
-.main_desc { color: #161616; font-size: 18px; line-height: 1.4; }
+.main_desc { color: #161616; font-size: 1.8rem; line-height: 1.4; }
 .sub_notice { color: #fb6432; font-size: 14px; }
 
 /* Feature List (3 Column) */
@@ -152,7 +152,7 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-    .modal_header { font-size: 18px; padding-bottom: 24px; }
+    .modal_header { font-size: 1.8rem; padding-bottom: 24px; }
     .title_area h3 { font-size: 24px; line-height:1.3;}
     :deep(.title_area) h3 br {display:block; }
     .feature_list { flex-direction: column; gap:20px; }

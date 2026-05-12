@@ -47,6 +47,7 @@
                             <dt>{{ t.Chapter4.article13.title }}</dt>
                             <dd>
                                 <div class="desc">{{ t.Chapter4.article13.desc }}</div>
+                                <div class="desc">{{ t.Chapter4.article13.content }}</div>
                                 <div class="table_scroll_area">
                                     <table>
                                         <colgroup>
@@ -148,6 +149,7 @@ export default {
                         article13: {
                             title: "제13조(팝카드의 종류 및 기능)",
                             desc: "GS리테일이 제공하는 팝카드 서비스를 이용할 수 있는 팝카드의 종류와 기능은 아래와 같습니다.",
+                            content: "① 카드별 기능 개요",
                             tableHead: ["팝캐시비 (일반)", "팝티머니 (일반)", "팝티머니(금융)", "멤버십팝", "팝체크/신용"],
                             tableRows: [
                                 { label: "공통기능", data: ["O", "O", "O", "O", "O"] },
@@ -222,11 +224,13 @@ p {margin-top:4px; font-size:18px; color: #fb6432 !important; }
 
 @media screen and (max-width: 767px) {
     h3 {font-size:24px;}
-    .policy_wrap > dl > dt {font-size:20px;}
+    .policy_wrap {padding:0px; border:0;}
+    .policy_wrap > dl > dt {margin-bottom:24px; font-size:20px;}
     .policy_wrap > dl > dd > dl > dd span, .policy_wrap > dl > dd > dl > dd > ul > li, p, .desc {font-size:16px; }
+    .policy_wrap dd .desc {margin-bottom:8px; font-size:16px;}
     .flex_between {display:flex; flex-direction:column; align-items:stretch;}
     .select_group {margin-top:32px; flex-direction:column;}
     .width_170, .width_260 {width:100%;}
-    .policy_wrap th, .policy_wrap td {font-size:16px;}
+    .policy_wrap th, .policy_wrap td, .policy_wrap > dl > dd > dl > dt {font-size:16px;}
 }
 </style>

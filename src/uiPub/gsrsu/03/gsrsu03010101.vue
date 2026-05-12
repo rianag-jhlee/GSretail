@@ -2602,18 +2602,18 @@ export default {
     .item_wrap div { width: 300px; height: 300px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; color: #fff; opacity: 0.8; }
     .item_wrap div  img { width: 60px; height: 60px; margin-bottom: 8px; }
     .item_wrap div strong { font-size: 24px; margin-bottom: 8px; }
-    .item_wrap div p { font-size: 18px; color: #fff; text-align: center; line-height: 1.4; }
+    .item_wrap div p { font-size: 1.8rem; color: #fff; text-align: center; line-height: 1.4; }
     .item_wrap div.color_01 { background-color: #107AF2; }
     .item_wrap div.color_02 { background-color: #15B874; }
     .item_wrap div.color_03 { background-color: #FB6432; }
     .item_wrap div img { width: 60px; height: 60px; margin-bottom: 8px; }
     .item_wrap div strong { font-size: 24px; margin-bottom: 8px; font-weight: 700; display:flex; flex-direction:column; align-items:center; gap:8px;}
     .item_wrap div strong::before {content:''; width:60px; height:60px; background:red; display:block;}
-    .item_wrap div p { font-size: 18px; color: #fff; text-align: center; line-height: 1.4; }
+    .item_wrap div p { font-size: 1.8rem; color: #fff; text-align: center; line-height: 1.4; }
     .card_grid { display: flex; gap: 20px; flex-wrap:wrap; }
     .strategy_card { min-width: calc(25% - 15px); padding: 32px 32px 56px; background: #F8F8F8; border-radius: 12px; flex: 1;}
     .card_head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-    .card_head .num { font-size: 18px; font-weight: 700; color: #107AF2; }
+    .card_head .num { font-size: 1.8rem; font-weight: 700; color: #107AF2; }
     .card_head strong { font-size: 20px; color: #161616; }
     .index_visual { position: relative; width: 100%; height: 340px; background: #F8F8F8; border-radius: 12px; overflow: hidden; }
     .index_visual img { width: 100%; height: 100%; object-fit: cover; }
@@ -2666,8 +2666,8 @@ export default {
     /* 테이블 공통 스타일 */
     .policy_wrap { width: 100%; margin-top:40px; overflow-x: auto;}
     .policy_wrap table { width: 100%; min-width:1000px; border-collapse: collapse; table-layout: fixed; }
-    .policy_wrap th { padding: 16px 24px; color: #161616; font-size: 18px; font-weight: 600; }
-    .policy_wrap td { padding: 16px 24px; color: #161616; font-size: 18px; line-height: 1.5; }
+    .policy_wrap th { padding: 16px 24px; color: #161616; font-size: 1.8rem; font-weight: 600; }
+    .policy_wrap td { padding: 16px 24px; color: #161616; font-size: 1.8rem; line-height: 1.5; }
     .policy_wrap th:first-child, .policy_wrap td:first-child { border-left: none; }
     .policy_wrap th:last-child, .policy_wrap td:last-child { border-right: none; }
     .policy_wrap td strong { font-weight: 600; }
@@ -2728,7 +2728,7 @@ export default {
     /* 숨은나눔천사 특화 스타일 */
     .sharing_card { width: calc(33.333% - 27px); } /* 3열 그리드 */
     .sharing_card .text_l_bold { font-size: 20px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .sharing_card .p { font-size: 18px; color: #161616; min-height: 50px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .sharing_card .p { font-size: 1.8rem; color: #161616; min-height: 50px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .sharing_card .program_visual {height:auto;}
     .card_footer { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
     .badge_gray { padding: 4px 8px; background: #F2F2F4; color: #67676F; border-radius: 4px; font-size: 14px; }
@@ -2761,7 +2761,7 @@ export default {
     .talent_vision .circle_item.value { background-color: #4A90E2; margin-right: -40px; }
     .talent_vision .circle_item.way { background-color: #50C878; }
     .talent_vision .circle_item strong { font-size: 44px; font-weight: 700; }
-    .talent_vision .circle_item span { font-size: 18px; margin-top: 8px; opacity: 0.9; }
+    .talent_vision .circle_item span { font-size: 1.8rem; margin-top: 8px; opacity: 0.9; }
     .value_detail_grid {width:100%; padding:40px 0; background:#fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display:flex; justify-content:space-evenly;}
     .card_title { font-size: 28px; font-weight: 700; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid #E5E5E9; }
     .value_list li, .way_list li { margin-bottom: 24px; display: flex; align-items: flex-start; }
@@ -2774,8 +2774,8 @@ export default {
     .dream_realization .type_bg { background: #F8F8F8; padding: 60px; border-radius: 20px; }
     .bullet_01.no_type {list-style: none;padding: 0;}
     .effort_item {display: flex; align-items: flex-start;}
-    .effort_item .num {flex-shrink:0; width: 25px; font-size: 18px; color: #161616;}
-    .effort_item .desc {font-size: 18px; color: #161616; line-height: 1.5; word-break: keep-all;}
+    .effort_item .num {flex-shrink:0; width: 25px; font-size: 1.8rem; color: #161616;}
+    .effort_item .desc {font-size: 1.8rem; color: #161616; line-height: 1.5; word-break: keep-all;}
 
     /* 인재경영지표 */
     /* 섹션 공통 */
@@ -2788,13 +2788,13 @@ export default {
     .talent_indicators .support_item:nth-last-child(-n+2) {border-bottom: 0; padding-bottom: 0;}
     .talent_indicators .support_item:before {content: ''; width: 80px; height: 80px; background: red; border-radius: 50%; position: absolute; left: 0; top: 0;}
     .talent_indicators .item_inner .tit_area { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .talent_indicators .item_inner .num { color: #107AF2; font-weight: 700; font-size: 18px; }
+    .talent_indicators .item_inner .num { color: #107AF2; font-weight: 700; font-size: 1.8rem; }
     .talent_indicators .item_inner .tit { font-size: 20px; font-weight: 600; color: #000; }
     .talent_indicators .item_inner .desc { font-size: 16px; color: #666; line-height: 1.5; }
 
     /* 수상 이력 리스트 (하단) */
     .award_list {margin-top:20px;}
-    .award_row {padding: 20px 0; font-size: 18px; display: flex; align-items:center;}
+    .award_row {padding: 20px 0; font-size: 1.8rem; display: flex; align-items:center;}
     .award_row .year { width: 130px; font-size:32px; font-weight: 700; }
     .award_row .month { width: 70px; color: #90909A;  font-size:20px; }
     .award_row .name { flex: 1; color: #161616; font-size:20px; }
@@ -2904,8 +2904,8 @@ export default {
     .information_protection_management .policy_wrap { width: 100%; border-top: 2px solid #161616; }
     .information_protection_management .policy_wrap table { margin-top:0; }
     .information_protection_management .policy_wrap th { border-top:0; }
-    .information_protection_management table th { font-size: 18px; font-weight: 700; color: #161616; padding: 24px;}
-    .information_protection_management table td { font-size: 18px; color: #161616; line-height: 1.6; padding: 24px;}
+    .information_protection_management table th { font-size: 1.8rem; font-weight: 700; color: #161616; padding: 24px;}
+    .information_protection_management table td { font-size: 1.8rem; color: #161616; line-height: 1.6; padding: 24px;}
 
 
 
@@ -3016,7 +3016,7 @@ export default {
         .human_rights_management .program_visual {height: auto; aspect-ratio: 16/11;}
         .policy_box_wrap { padding: 32px 20px; }
         .policy_item { flex-direction: column; gap: 4px; }
-        .policy_item .label { font-size: 18px; min-width: auto; }
+        .policy_item .label { font-size: 1.8rem; min-width: auto; }
         .policy_item .desc { font-size: 16px; }
         .supplychain_policy .system_bg { padding: 20px; }
         .csr_outline .view_box { padding: 30px 20px; }
@@ -3055,7 +3055,7 @@ export default {
         .safety_management_wrap .system_item:nth-of-type(2) .text_box::before {top:50%}
         .safety_management_wrap .system_item:nth-of-type(2) {padding-top:24px;}
         .safety_management_wrap .system_item .num { font-size: 16px;}
-        .safety_management_wrap .system_item .tit { font-size: 18px;}
+        .safety_management_wrap .system_item .tit { font-size: 1.8rem;}
         .safety_management_wrap .system_item .sub { font-size: 16px;}
         .safety_management_wrap .text_summary, .safety_management_wrap .section_title_sub {font-size:20px !important;}
         .safety_management_wrap .consent_agree  {flex-direction:column;}

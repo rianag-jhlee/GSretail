@@ -50,8 +50,8 @@
 
                             <div class="view-3 res-swiper-container">
                                 <swiper
-                                    :slides-per-view="'auto'"
-                                    :space-between="0"
+                                    :slides-per-view="'1.1'"
+                                    :space-between="20"
                                     :breakpoints="{
                                         768: {
                                             allowTouchMove: false
@@ -95,8 +95,8 @@
                             </div>
                             <div class="view-3 res-swiper-container" v-if="t">
                                 <swiper
-                                    :slides-per-view="'auto'"
-                                    :space-between="0"
+                                    :slides-per-view="'1.1'"
+                                    :space-between="20"
                                     :breakpoints="{
                                         768: {allowTouchMove: false}
                                     }"
@@ -141,7 +141,8 @@
                             <div class="sub-title">
                                 <h3 class="text-wrapper-3">{{ t.BoardSectionTitle2 }}</h3>
                             </div>
-                            <div class="div-4">
+
+                            <!-- <div class="div-4">
                                 <div class="view-6">
                                     <div v-for="(skill, idx) in t.SkillsList" :key="'skill-' + idx" class="frame-5">
                                         <div class="frame-6">
@@ -160,7 +161,44 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div> -->
+
+                            <div class="div-4">
+                                <div class="view-6 res-swiper-container">
+                                    <swiper
+                                        :slides-per-view="'1.1'"
+                                        :space-between="20"
+                                        :breakpoints="{
+                                            768: {
+                                                allowTouchMove: false
+                                            }
+                                        }"
+                                        class="skill-swiper"
+                                    >
+                                        <swiper-slide 
+                                            v-for="(skill, idx) in t.SkillsList" 
+                                            :key="'skill-' + idx" 
+                                            class="frame-5 res-slide-item"
+                                        >
+                                            <div class="frame-6">
+                                                <div class="div-6">
+                                                    <div class="text-wrapper-10">{{ skill.type }}</div>
+                                                    <div class="text-wrapper-11">{{ skill.name }}</div>
+                                                </div>
+                                                <div class="text-wrapper-12">{{ skill.appointDate }}</div>
+                                            </div>
+                                            <div class="frame-9">
+                                                <div v-for="(tag, tIdx) in skill.tags" :key="'tag-'+tIdx" :class="['TAG', tag.class]">
+                                                    <div class="text-wrapper-13" :class="{'text-wrapper-14': tag.class === 'TAG-2', 'text-wrapper-15': tag.class === 'TAG-3', 'text-wrapper-18': tag.class === 'TAG-4'}">
+                                                        {{ tag.text }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </swiper-slide>
+                                    </swiper>
+                                </div>
                             </div>
+                            
 
                         </div>
                         <div class="view-2">
@@ -195,7 +233,7 @@
 
                     </section>
 
-                    <!-- pageid:gsrin0103 -->
+                    <!-- pageid:gsrin0103 이사회평가 -->
                     <section class="tab_content gsrin0103" v-if="CTabIdx === 2" :aria-label="t.Tabs1[2].item">
                         <div class="eval_item_group">
                             <div class="eval_title_box ac">
@@ -204,7 +242,7 @@
                             <div class="policy_wrap">
                                 <table>
                                     <colgroup>
-                                        <col style="width: 200px;">
+                                        <col>
                                         <col style="width: auto;">
                                     </colgroup>
                                     <tbody>
@@ -239,20 +277,34 @@
                             </div>
                         </div>
 
-                        <div class="eval_item_group ">
+                        <div class="eval_item_group">
                             <div class="sub-title">
                                 <h3 class="text-wrapper-3" style="width:100%;">{{ t.EvalUsageTitle }}</h3>
                             </div>
-                            <div class="key-features">
-                                <div v-for="(card, cIdx) in t.EvalUsageCards" :key="'usage-'+cIdx" :class="['card_item', 'card-' + (cIdx + 1)]">
-                                    <div class="title-2">
-                                        <div class="text-wrapper-6">{{ card.num }}</div>
-                                        <p class="element" v-html="card.title"></p>
-                                    </div>
-                                    <div v-if="card.sub" class="body">
-                                        <div class="text-wrapper-7">{{ card.sub }}</div>
-                                    </div>
-                                </div>
+                            <div class="res-swiper-container">
+                                <swiper
+                                    :slides-per-view="'1.1'"
+                                    :space-between="20"
+                                    :breakpoints="{
+                                        768: { allowTouchMove: false }
+                                    }"
+                                    class="eval-usage-swiper"
+                                >
+                                    <swiper-slide 
+                                        v-for="(card, cIdx) in t.EvalUsageCards" 
+                                        :key="'usage-'+cIdx" 
+                                        class="card_item res-slide-item"
+                                        :class="'card-' + (cIdx + 1)"
+                                    >
+                                        <div class="title-2">
+                                            <div class="text-wrapper-6">{{ card.num }}</div>
+                                            <p class="element" v-html="card.title"></p>
+                                        </div>
+                                        <div v-if="card.sub" class="body">
+                                            <div class="text-wrapper-7">{{ card.sub }}</div>
+                                        </div>
+                                    </swiper-slide>
+                                </swiper>
                             </div>
                         </div>
                     </section>
@@ -645,15 +697,16 @@ export default {
 .title-sub-text {width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4;}
 :deep(.title-sub-text br:not(:nth-of-type(2))) {display: none;}
 .subtit_wrap {width: 100%; padding: 60px 40px; background: #F0F3F5; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
-.section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align: center;}
-.section-date {margin-top: 15px; color: #666666; font-size: 18px; text-align: center; display: block;}
-.policy_wrap {width: 100%; padding: 60px; text-align: left;}
-.policy_wrap dt {margin-top: 60px; color: #161618; font-size: 2.4rem; font-weight: 700;}
+.gsrin0101 .section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align: center;}
+.section-date {margin-top: 15px; color: #666666; font-size: 1.8rem; text-align: center; display: block;}
+.gsrin0101 .policy_wrap {width: 100%; padding: 60px; text-align: left;}
+.gsrin0101 .policy_wrap dt {margin-top: 60px; color: #161618; font-size: 24px; font-weight: 700;}
 .policy_wrap dt:first-child {margin-top: 0;}
-.policy_wrap dd {margin-top: 20px; color: #444444; font-size: 1.8rem; line-height: 1.8;}
-.bullet_title {color: #161618; font-size: 20px; font-weight: 700; display: block;}
-.bullet_01 {font-size:18px;}
+.gsrin0101 .policy_wrap dd {margin-top: 20px; padding-bottom:32px; color: #444444; font-size: 1.8rem; line-height: 1.8; border-bottom:1px solid #D7D7DF;}
+.bullet_title {margin-top:32px; color: #161618; font-size: 20px; font-weight: 700; display: block;}
+.bullet_01 li {font-size:18px;}
 .bullet_01 li.point {color:#242428}
+:deep(.gsrin0101) .policy_wrap dd .desc {font-size:16px;}
 
 /* gsrin0102 전용 스타일 */
 .gsrin0102 > * {margin-top: 80px;}
@@ -670,22 +723,24 @@ export default {
 .text-wrapper-4 {width: fit-content; margin-top: -1.00px; padding: 0; color: #161618; font-size: 16px; font-weight: 700; letter-spacing: -0.16px; line-height: 24px; position: relative; white-space: nowrap;}
 .text-wrapper-5 {width: fit-content; padding: 0; color: #161618; font-size: 28px; font-weight: 700; font-style: normal; letter-spacing: -0.28px; line-height: 135.0000023841858%; position: relative; white-space: nowrap;}
 .div-4 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-6 {width: 100%; margin-top: -1.00px; padding: 0; color: #242428; font-size: 18px; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; align-self: stretch;}
+.text-wrapper-6 {width: 100%; margin-top: -1.00px; padding: 0; color: #242428; font-size: 1.8rem; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; align-self: stretch;}
 .text-wrapper-7 {width: 100%; padding: 0; color: #67676f; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: -0.14px; line-height: 139.9999976158142%; position: relative; align-self: stretch;}
 .view-5 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; align-self: stretch; flex: 0 0 auto;}
 .frame-2 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; gap: 10px; align-self: stretch; flex: 0 0 auto;}
 .bullet {height: 24px; position: relative; display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto;}
 .ellipse {width: 3px; height: 3px; background-color: #67676f; border-radius: 50%; position: relative;}
-.text-wrapper-8 {margin-top: -1.00px; padding: 0; color: #67676f; font-size: 18px; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
+.text-wrapper-8 {margin-top: -1.00px; padding: 0; color: #67676f; font-size: 1.8rem; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
 .frame-3 {width: 100%; padding: 0; position: relative; display: flex; align-items: flex-start; gap: 10px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-9 {margin-top: -1.00px; padding: 0; color: #242428; font-size: 18px; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
+.text-wrapper-9 {margin-top: -1.00px; padding: 0; color: #242428; font-size: 1.8rem; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
 .divider {width: 1px; background-color: #f2f2f4; position: relative; align-self: stretch;}
 .frame-4 {padding: 0; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 0 0 auto;}
 .rectangle {width: 1px; height: 12px; background-color: #e5e5e9; position: relative;}
 .view-6 {width: 100%; padding: 0; position: relative; display: flex; flex-wrap:wrap; align-items: flex-start; justify-content: flex-start; gap: 12px; align-self: stretch; flex: 0 0 auto;}
-.frame-5 {width: calc((100% - 24px) / 3); max-width:452px; padding: 32px; border: 1px solid #e5e5e9; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; flex: 1; align-self: stretch; flex: 0 0 auto;}
+.frame-5 {max-width:452px; padding: 32px; border: 1px solid #e5e5e9; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; flex: 1; align-self: stretch; flex: 0 0 auto;}
 .frame-6 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-10 {width: fit-content; margin-top: -1.00px; padding: 0; color: #161618; font-size: 24px; font-weight: 400; letter-spacing: -0.24px; line-height: 36px; position: relative; white-space: nowrap;}
+.frame-6 .div-6 {display:flex; gap:8px;}
+:deep(.view-6.res-swiper-container) .swiper-wrapper {display: grid !important; grid-template-columns: repeat(3, 1fr);gap: 20px;}
+.text-wrapper-10 {width: fit-content; margin-top: -1.00px; padding: 0; color: #161618; font-size: 22px; font-weight: 400; letter-spacing: -0.24px; line-height: 36px; position: relative; white-space: nowrap;}
 .text-wrapper-11 {width: fit-content; padding: 0; color: #161618; font-size: 24px; font-weight: 700; font-style: normal; letter-spacing: -0.24px; line-height: 135.0000023841858%; position: relative; white-space: nowrap;}
 .text-wrapper-12 {padding: 0; color: #656565; font-size: 16px; font-weight: 400; font-style: normal; text-align: right; letter-spacing: -0.16px; line-height: 150%; position: relative; flex: 1;}
 .frame-9 {width: 100%; padding: 24px 0 0; border-top: 1px solid #f2f2f4; position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 8px; flex: 0 0 auto; align-self: stretch;}
@@ -699,12 +754,12 @@ export default {
 .table {width: 100%; padding: 0; border-top: 1px solid #161618; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; align-self: stretch; flex: 0 0 auto;}
 .column {padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; flex: 1; flex-grow: 1;}
 .table-cell {width: 100%; height: 82px; padding: 12px 24px; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; position: relative; display: flex; align-items: center; gap: 10px; align-self: stretch;}
-.text-wrapper-19 {padding: 0; color: #161618; font-size: 18px; font-weight: 600; font-style: normal; text-align: center; letter-spacing: -0.18px; line-height: 139.9999976158142%; position: relative; flex: 1;}
+.text-wrapper-19 {padding: 0; color: #161618; font-size: 1.8rem; font-weight: 600; font-style: normal; text-align: center; letter-spacing: -0.18px; line-height: 139.9999976158142%; position: relative; flex: 1;}
 .view-wrapper {width: 100%; padding: 12px 24px; border-bottom: 1px solid #e5e5e9; position: relative; display: flex; align-items: center; gap: 12px; align-self: stretch; flex: 0 0 auto;}
 .view-7 {padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px; flex: 1; flex-grow: 1;}
 .view-8 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
-.text-wrapper-20 {width: fit-content; margin-top: -1.00px; padding: 0; color: #67676f; font-size: 18px; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; white-space: nowrap;}
-.text-wrapper-21 {margin-top: -1.00px; padding: 0; color: #242428; font-size: 18px; font-weight: 400; font-style: normal; text-align: right; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
+.text-wrapper-20 {width: fit-content; margin-top: -1.00px; padding: 0; color: #67676f; font-size: 1.8rem; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; white-space: nowrap;}
+.text-wrapper-21 {margin-top: -1.00px; padding: 0; color: #242428; font-size: 1.8rem; font-weight: 400; font-style: normal; text-align: right; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
 .divider-2 {width: 1px; background-color: #e5e5e9; position: relative; align-self: stretch;}
 .button-group {width: 100%; padding: 0; position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 12px; flex: 0 0 auto; align-self: stretch;}
 .BUTTON {padding: 10px 16px; background-color: #f2f2f4; border-radius: 8px; border: 0; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 24px; flex: 0 0 auto; cursor: pointer;}
@@ -713,24 +768,29 @@ export default {
 .download {width: 24px; height: 24px; position: relative; aspect-ratio: 1;}
 .ac {text-align:center;}
 
-/* gsrin0103 */
+/* gsrin0103 이사회 평가 */
 .gsrin0103 .eval_item_group { display: flex; flex-direction: column; width: 100%; }
 .gsrin0103 .section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align:left;}
-.gsrin0103 .policy_wrap {padding-top:40px; padding-bottom:100px;}
-.gsrin0103 .policy_wrap table { width: 100%; border-collapse: collapse; word-break: keep-all; border-top: 1px solid #000; }
-.gsrin0103 .policy_wrap th, .gsrin0103 .policy_wrap td {padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 18px; line-height: 1.6; vertical-align: middle; }
+.gsrin0103 .policy_wrap {padding-top:32px; padding-bottom:100px;}
+.gsrin0103 colgroup col:first-of-type {width:200px}
+.gsrin0103 .policy_wrap table { width: 100%; border-collapse: collapse; word-break: keep-all;}
+.gsrin0103 .policy_wrap th, .gsrin0103 .policy_wrap td {padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 1.8rem; line-height: 1.6; vertical-align: middle; }
+.gsrin0103 .policy_wrap tr:first-of-type th, .gsrin0103 .policy_wrap tr:first-of-type td {border-top:1px solid #242428;}
 .gsrin0103 .eval_item_group:nth-of-type(2) .policy_wrap th, .gsrin0103 .eval_item_group:nth-of-type(2) .policy_wrap td {text-align:center; }
 .gsrin0103 .policy_wrap {padding-left:0; padding-right:0;}
 .gsrin0103 .policy_wrap th { background-color: #F8F8F8; color: #161616; font-weight: 700; text-align: left; }
 .gsrin0103 .policy_wrap tbody tr th, .gsrin0103 .policy_wrap thead tr th:first-of-type, .gsrin0103 .policy_wrap tbody tr td:first-of-type  {border-left:0}
 .policy_wrap thead tr th:last-of-type {border-right:0;}
 .gsrin0103 .policy_wrap tbody tr td {border-right:0}
-.gsrin0103 .important { font-size: 18px; font-weight: 700; color: #161616; text-decoration:none;}
-.gsrin0103 .key-features {margin-top:30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.gsrin0103 .important { font-size: 1.8rem; font-weight: 700; color: #161616; text-decoration:none;}
+:deep(.eval-usage-swiper .swiper-wrapper) {display:grid !important; grid-template-columns:repeat(3, 1fr); gap:20px; transform:none;}
+.card_item.res-slide-item {width:100%; margin:0 !important;}
 .gsrin0103 .card_item { padding: 32px 32px 48px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; gap: 16px; min-height: 180px; }
-.gsrin0103 .text-wrapper-6 { font-size: 18px; font-weight: 700; color: #107af2; }
+.gsrin0103 .text-wrapper-6 { font-size: 1.8rem; font-weight: 700; color: #107af2; }
 .gsrin0103 .element { font-size: 20px; font-weight: 700; color: #161618; line-height: 1.35; }
 .gsrin0103 .text-wrapper-7 { font-size: 16px; color: #67676f; }
+.gsrin0103 .eval-usage-swiper {width:100%;}
+.gsrin0103 .card_item {padding:32px; background-color:#f8f8f8; border-radius:12px; display:flex; flex-direction:column; gap:16px; min-height:180px; box-sizing:border-box;}
 
 /* gsrin0104 전용 스타일 */
 .gsrin0104 { display: flex; flex-direction: column; width: 100%; padding-bottom: 200px; }
@@ -739,7 +799,7 @@ export default {
 .gsrin0104 .diff_table_wrap { width: 100%; }
 .gsrin0104 .policy_wrap {padding-top:0;}
 .gsrin0104 .policy_wrap table { width: 100%; border-collapse: collapse; border-top: 1px solid #000; }
-.gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 18px; line-height: 1.5; vertical-align: middle; }
+.gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 1.8rem; line-height: 1.5; vertical-align: middle; }
 .gsrin0104 .policy_wrap th { background-color: #F8F8F8; color: #161618; font-weight: 700; }
 .gsrin0104 .policy_wrap td { color: #242428; }
 
@@ -750,21 +810,22 @@ export default {
     .title-sub-text {padding: 60px 0; font-size: 36px;}
     .view-3 {flex-wrap: wrap; justify-content:space-between; gap:0;}
     .div-2 {width: calc(48% - 10px);} /* 2열 배치 */
-    .frame-5 {width:calc((100% - 12px) / 2); max-width:none;}
+    :deep(.view-6.res-swiper-container) .swiper-wrapper {display: grid !important; grid-template-columns: repeat(2, 1fr); gap: 20px;}
+    .frame-5 { max-width:none;}
     .view-6:last-of-type {width:100%;}
     .gsrin0104 .banner_text { font-size: 32px; }
     .gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 12px 15px; font-size: 16px; }
 }
 
 @media screen and (max-width: 767px) {
-    .cont_inner {padding: 0 20px;}
+    .cont_inner {padding:80px 20px 200px;}
     .title_wrap {display:none;}
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
     .title-sub-text {padding: 60px 0 80px; font-size: 28px; line-height: 1.3; text-align:left;}
     :deep(.title-sub-text br) {display:block !important;}
     .view-3 {flex-direction: column; align-items: center; gap: 40px;}
-    .div-2 {width: 100%; max-width: 400px;} /* 1열 배치 및 최대너비 제한 */
+    .div-2 {max-width: 400px;} /* 1열 배치 및 최대너비 제한 */
     .view-6 {flex-direction: column; gap: 12px;}
     .view-6:last-of-type {width:100%;}
     .frame-5 {width: 100%; max-width:none;} /* 역량 구성표 1열 */
@@ -780,14 +841,17 @@ export default {
     .text-wrapper-3 {font-size:24px;}
     .bullet_01 li {font-size:16px;}
     .p {font-size:18px;}
+    .frame-6 {flex-direction:column; align-items:flex-start;}
+    .gsrin0101 .section-sub-title {font-size:28px;}
+    .gsrin0101 .policy_wrap {padding:30px 0;}
     .gsrin0102 .view-2:first-of-type {margin-top:0;}
     .gsrin0103 .section-sub-title {font-size:24px; text-align:left;}
     .gsrin0103 .policy_wrap {padding-top:30px; padding-left:0; padding-right:0;}
     .gsrin0103 .policy_wrap th { width: 120px !important; padding: 12px; font-size: 15px; } 
     .gsrin0103 .policy_wrap td { padding: 12px; font-size: 15px; } 
-    .gsrin0103 .key-features {margin-top:30px; grid-template-columns: 1fr; }
+    .gsrin0103 .important {font-size:16px;}
     .gsrin0104 .banner_text { font-size: 24px; padding: 0 20px; }
-    .gsrin0104 .policy_wrap { overflow-x: auto; }
+    .gsrin0104 .policy_wrap { padding:0; overflow-x: auto; }
     .gsrin0104 .policy_wrap table { min-width: 700px; } /* 모바일에서는 가로 스크롤 허용 */
     .gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 10px; font-size: 14px; }
 }
@@ -805,14 +869,22 @@ export default {
 /* 모바일 스타일: 스와이퍼 활성화 */
 @media screen and (max-width: 767px) {
     .res-slide-item {
-        width: 280px !important; /* 모바일에서 적절한 카드 너비 */
         margin-right: 0;
-        padding-right: 20px; /* 카드 간 간격 */
+        /* padding-right: 20px; 카드 간 간격 */
         box-sizing: border-box;
     }
+    :deep(.view-6.res-swiper-container) .swiper-wrapper {display: flex !important; gap:0px;}
     .pc-only { display: none; } /* 모바일에서 세로선 제거 */
-    .div-2 { width: 100% !important; }
     .swiper-slide.div-2 {margin-right:0; margin-left:0}
     .swiper-slide.div-2::after {display:none}
+
+    .eval-usage-swiper {overflow:hidden !important;}
+    /* 슬라이딩을 위해 flex-wrap 해제 및 초기 위치 설정 */
+    :deep(.eval-usage-swiper .swiper-wrapper) {display:flex !important; flex-wrap:nowrap;}
+    .eval-usage-swiper .card_item.res-slide-item {height: auto !important; flex-shrink: 0 !important; }
+    /* .card_item.res-slide-item {height:auto !important; margin-right:16px !important; padding:24px; flex-shrink:0;} */
+    .gsrin0103 .element {font-size:18px;}
+    .gsrin0103 .sub-title {margin-bottom:32px;}
+    .gsrin0103 colgroup col:first-of-type {width:80px}
 }
 </style>
