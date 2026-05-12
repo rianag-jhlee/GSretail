@@ -470,7 +470,11 @@
                                     </ul>
 
                                     <div class="btn-wrap ac mt40">
-                                        <Buttons btn-class="btn_icon btn_xl border after">
+                                        <Buttons btn-class="btn_icon btn_xl border after"
+                                            @click="openModal" 
+                                            data-popid="gsrsu0301010401" 
+                                            data-type="lg" 
+                                            data-cont="gsrsu0301010401">
                                             {{ t.community.Purpose.BtnText }}
                                         </Buttons>
                                     </div>
@@ -1508,6 +1512,10 @@
                 </div>
             </div>
         </section>
+
+        <div id="gsrsu0301010401" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
     </div>
 </template>
 
@@ -2547,6 +2555,13 @@ export default {
         checkMobile() {
             this.isMobile = window.innerWidth <= 767;
         },
+        openModal(event) {
+            const el = event.currentTarget;
+            const popId = el.dataset.popid;
+            const type = el.dataset.type || "default";
+            const cont = el.dataset.cont;
+            modal.open(popId, type, el, cont);
+        }
     }
 };
 </script>
