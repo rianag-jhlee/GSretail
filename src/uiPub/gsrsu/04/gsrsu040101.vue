@@ -735,14 +735,14 @@
                                                             </ol>
                                                             <p v-if="section.appendixTitle" class="fair_trade_work_standard_desc">{{ section.appendixTitle }}</p>
                                                             <div v-if="section.commonTables">
-                                                                <div v-for="(tbl, tIdx) in section.commonTables" :key="'tv-common-table-' + section.no + '-' + tIdx" class="common_table_scroll">
+                                                                <div v-for="(tbl, tIdx) in section.commonTables" :key="'tv-common-table-' + section.no + '-' + tIdx" class="common_table_scroll" :class="{ common_table_scroll_type_02: tbl.tableClass === 'type_02' }" :data-node-id="tbl.tableClass === 'type_02' ? '674:44720' : undefined">
                                                                     <p v-if="tbl.appendixTitle" class="fair_trade_work_standard_desc">{{ tbl.appendixTitle }}</p>
-                                                                    <table class="common_table evaluation_table" :class="tbl.tableClass">
-                                                                        <colgroup v-if="tbl.colgroupWidths && tbl.colgroupWidths.length">
+                                                                    <table :class="getFairTradeCommonTableClassArray(tbl)">
+                                                                        <colgroup v-if="getCommonTableColGroupCount(tbl) > 0">
                                                                             <col
-                                                                                v-for="(cw, cwi) in tbl.colgroupWidths"
-                                                                                :key="'tv-col-' + section.no + '-' + tIdx + '-' + cwi"
-                                                                                :style="{ width: (typeof cw === 'number' ? cw + 'px' : cw) }"
+                                                                                v-for="n in getCommonTableColGroupCount(tbl)"
+                                                                                :key="'tv-col-' + section.no + '-' + tIdx + '-' + (n - 1)"
+                                                                                :style="getCommonTableColWidthStyle(tbl, n - 1)"
                                                                             />
                                                                         </colgroup>
                                                                         <thead>
@@ -786,13 +786,21 @@
                                                                                     :key="'tv-common-cell-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx"
                                                                                     :rowspan="getCommonTableRowspan(cell)"
                                                                                     :colspan="getCommonTableColspan(cell)"
-                                                                                    :style="isCommonTableMergedMetaCell(cell) && cell.style != null && cell.style !== '' ? cell.style : undefined"
+                                                                                    :style="getCommonTableCellTdStyle(cell)"
+                                                                                    :class="{ txt_verticle: typeof cell === 'object' && cell && cell.txt_verticle === true }"
                                                                                 >
                                                                                     <template v-if="Array.isArray(cell)">
-                                                                                        <p v-for="(line, pIdx) in cell" :key="'tv-common-line-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + pIdx" :class="{ txt_warn: pIdx === 1 }" v-html="line"></p>
+                                                                                        <template v-for="(line, pIdx) in cell" :key="'tv-common-line-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + pIdx">
+                                                                                            <p v-if="tableCellLineHasLeadMark(line)" :class="{ txt_warn: pIdx === 1, dot_txt: true }">{{ stripTableCellLeadMarkPlain(line) }}</p>
+                                                                                            <p v-else :class="{ txt_warn: pIdx === 1, warn_txt: tableCellLineHasWarnTxt(line) }" v-html="line"></p>
+                                                                                        </template>
                                                                                     </template>
                                                                                     <template v-else-if="isCommonTableMergedMetaCell(cell)">
                                                                                         <p v-html="cell.html !== undefined ? cell.html : cell.label"></p>
+                                                                                    </template>
+                                                                                    <template v-else-if="isCommonTableStyledTextCell(cell)">
+                                                                                        <p v-if="cell.html != null && cell.html !== ''" v-html="cell.html"></p>
+                                                                                        <template v-else>{{ cell.label }}</template>
                                                                                     </template>
                                                                                     <template v-else-if="typeof cell === 'object' && cell && cell.numList">
                                                                                         <ul class="common_num_list">
@@ -801,7 +809,52 @@
                                                                                             </li>
                                                                                         </ul>
                                                                                     </template>
+                                                                                    <template v-else-if="getTableCellBulletParagraphs(cell)">
+                                                                                        <p
+                                                                                            v-for="(seg, sIdx) in getTableCellBulletParagraphs(cell)"
+                                                                                            :key="'tv-common-bull-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + sIdx"
+                                                                                            :class="{ dot_txt: seg.bullet, warn_txt: seg.warn }"
+                                                                                            v-html="seg.html"
+                                                                                        ></p>
+                                                                                    </template>
                                                                                     <p v-else v-html="cell"></p>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table
+                                                                        v-if="isAppendixPartnerEvalTable(tbl)"
+                                                                        class="common_table type_01 appendix_partner_eval_mo fair_trade_partner_eval_mo"
+                                                                    >
+                                                                        <colgroup>
+                                                                            <col style="width: 50px" />
+                                                                            <col style="width: 165px" />
+                                                                            <col style="width: 80px" />
+                                                                        </colgroup>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th v-for="(mh, mhIdx) in appendixPartnerEvalMobileHeadLabels(tbl)" :key="'tv-mo-h-' + section.no + '-' + tIdx + '-' + mhIdx" scope="col">{{ mh }}</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr v-for="(trCells, trIdx) in appendixPartnerEvalMobileTrDescriptors(tbl)" :key="'tv-mo-tr-' + section.no + '-' + tIdx + '-' + trIdx">
+                                                                                <td
+                                                                                    v-for="(tdDef, tdIdx) in trCells"
+                                                                                    :key="'tv-mo-td-' + section.no + '-' + tIdx + '-' + trIdx + '-' + tdIdx"
+                                                                                    :rowspan="tdDef.rowspan"
+                                                                                    :style="tdDef.style"
+                                                                                    :class="{ txt_verticle: tdDef.lead && tdDef.cell && tdDef.cell.txt_verticle === true }"
+                                                                                >
+                                                                                    <template v-if="tdDef.lead">
+                                                                                        <p class="appendix_partner_eval_mo_lead" v-html="appendixPartnerEvalMoLeadMobileHtml(tdDef.cell)"></p>
+                                                                                    </template>
+                                                                                    <template v-else-if="typeof tdDef.cell === 'object' && tdDef.cell && tdDef.cell.html">
+                                                                                        <p v-html="tdDef.cell.html"></p>
+                                                                                    </template>
+                                                                                    <template v-else-if="typeof tdDef.cell === 'object' && tdDef.cell && tdDef.cell.label !== undefined">
+                                                                                        {{ tdDef.cell.label }}
+                                                                                    </template>
+                                                                                    <p v-else>{{ tdDef.cell }}</p>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -870,10 +923,182 @@ function getCommonTableColspan(cell) {
     const n = Number(cell.colspan);
     return n >= 2 ? n : undefined;
 }
+function commonTableCellColspanUnits(cell) {
+    const cs = getCommonTableColspan(cell);
+    return cs != null ? cs : 1;
+}
+function getCommonTableColGroupCount(tbl) {
+    if (!tbl) return 0;
+    if (tbl.colgroupWidths && tbl.colgroupWidths.length) return tbl.colgroupWidths.length;
+    if (tbl.theadRows && tbl.theadRows.length > 0 && Array.isArray(tbl.theadRows[0])) {
+        const sum = tbl.theadRows[0].reduce((acc, hCell) => acc + commonTableCellColspanUnits(hCell), 0);
+        return sum > 0 ? sum : 0;
+    }
+    if (tbl.cols && tbl.cols.length) {
+        const sum = tbl.cols.reduce((acc, col) => acc + commonTableCellColspanUnits(col), 0);
+        return sum > 0 ? sum : 0;
+    }
+    if (tbl.rows && tbl.rows.length > 0 && Array.isArray(tbl.rows[0])) {
+        const sum = tbl.rows[0].reduce((acc, cell) => acc + commonTableCellColspanUnits(cell), 0);
+        return sum > 0 ? sum : 0;
+    }
+    return 0;
+}
+function getCommonTableColWidthStyle(tbl, colIndex) {
+    if (tbl.colgroupWidths && tbl.colgroupWidths.length > colIndex) {
+        const cw = tbl.colgroupWidths[colIndex];
+        return { width: typeof cw === "number" ? cw + "px" : cw };
+    }
+    return undefined;
+}
 function isCommonTableMergedMetaCell(cell) {
     if (cell === null || typeof cell !== "object" || Array.isArray(cell) || !cell || cell.numList) return false;
     if (cell.html === undefined && cell.label === undefined) return false;
     return getCommonTableRowspan(cell) != null || getCommonTableColspan(cell) != null;
+}
+function isCommonTableStyledTextCell(cell) {
+    if (cell == null || typeof cell !== "object" || Array.isArray(cell) || cell.numList) return false;
+    if (cell.html === undefined && cell.label === undefined) return false;
+    if (getCommonTableRowspan(cell) != null || getCommonTableColspan(cell) != null) return false;
+    return true;
+}
+function getCommonTableCellTdStyle(cell) {
+    if (cell == null || typeof cell !== "object" || Array.isArray(cell) || cell.numList) return undefined;
+    if (cell.style == null || String(cell.style).trim() === "") return undefined;
+    return cell.style;
+}
+function isAppendixPartnerEvalTable(tbl) {
+    return Boolean(tbl && tbl.tableClass === "appendix_partner_eval");
+}
+function getFairTradeCommonTableClassArray(tbl) {
+    if (!tbl) return ["common_table", "type_01"];
+    const tc = tbl.tableClass || "";
+    const out = ["common_table"];
+    if (tc === "type_02") {
+        out.push("type_02");
+    } else {
+        out.push("type_01");
+        if (tc && tc !== "type_01") out.push(tc);
+    }
+    if (isAppendixPartnerEvalTable(tbl)) out.push("fair_trade_partner_eval_pc");
+    return out;
+}
+function appendixPartnerEvalMobileHeadLabels(tbl) {
+    if (!tbl || !Array.isArray(tbl.cols)) return [];
+    return tbl.cols.slice(0, 3).map((col) => {
+        if (typeof col === "string") return col;
+        if (col && col.label !== undefined) return col.label;
+        if (col && col.html) return String(col.html).replace(/<[^>]+>/g, "");
+        return "";
+    });
+}
+function appendixPartnerEvalMoEscapeForVertical(ch) {
+    if (ch === "&") return "&amp;";
+    if (ch === "<") return "&lt;";
+    if (ch === ">") return "&gt;";
+    if (ch === "\"") return "&quot;";
+    return ch;
+}
+function appendixPartnerEvalMobileLeadVerticalHtml(leadCell) {
+    if (!leadCell || typeof leadCell !== "object" || Array.isArray(leadCell)) return "";
+    const raw = leadCell.html != null && String(leadCell.html).trim() !== "" ? String(leadCell.html) : leadCell.label != null ? String(leadCell.label) : "";
+    const plain = raw.replace(/<br\s*\/?>/gi, "").replace(/<[^>]+>/g, "").trim();
+    if (!plain) return "";
+    return [...plain].map(appendixPartnerEvalMoEscapeForVertical).join("<br />");
+}
+function appendixPartnerEvalMoLeadMobileHtml(leadCell) {
+    if (!leadCell || typeof leadCell !== "object" || Array.isArray(leadCell)) return "";
+    if (leadCell.txt_verticle === true) {
+        if (leadCell.html != null && String(leadCell.html).trim() !== "") return String(leadCell.html);
+        if (leadCell.label != null) return String(leadCell.label);
+        return "";
+    }
+    return appendixPartnerEvalMobileLeadVerticalHtml(leadCell);
+}
+function appendixPartnerEvalMobileTrDescriptors(tbl) {
+    if (!tbl || !Array.isArray(tbl.rows)) return [];
+    const rows = tbl.rows;
+    const gradeBlockA = [];
+    const gradeBlockB = [];
+    let leadCell = null;
+    let leadStyle;
+    for (let g = 0; g < rows.length; g++) {
+        const row = rows[g];
+        if (!Array.isArray(row)) continue;
+        let lead = null;
+        let a;
+        let b;
+        let c;
+        let d;
+        if (row.length === 5) {
+            [lead, a, b, c, d] = row;
+        } else if (row.length === 4) {
+            [a, b, c, d] = row;
+        } else {
+            continue;
+        }
+        if (g === 0 && lead != null && typeof lead === "object" && !Array.isArray(lead) && !lead.numList) {
+            leadCell = lead;
+            leadStyle = lead.style != null && String(lead.style).trim() !== "" ? lead.style : undefined;
+        }
+        gradeBlockA.push({ goods: a, grade: b });
+        gradeBlockB.push({ goods: c, grade: d });
+    }
+    const totalBodyRows = gradeBlockA.length + gradeBlockB.length;
+    const out = [];
+    const pushRow = (goods, grade, includeLead) => {
+        const tds = [];
+        if (includeLead && leadCell != null) {
+            tds.push({ lead: true, cell: leadCell, rowspan: totalBodyRows, style: leadStyle });
+        }
+        tds.push({ lead: false, cell: goods }, { lead: false, cell: grade });
+        out.push(tds);
+    };
+    for (let i = 0; i < gradeBlockA.length; i++) {
+        const { goods, grade } = gradeBlockA[i];
+        pushRow(goods, grade, i === 0);
+    }
+    for (let i = 0; i < gradeBlockB.length; i++) {
+        const { goods, grade } = gradeBlockB[i];
+        pushRow(goods, grade, false);
+    }
+    return out;
+}
+const TABLE_CELL_BULLET_RE = /^•/u;
+function tableCellLineHasLeadMark(line) {
+    return typeof line === "string" && TABLE_CELL_BULLET_RE.test(line.trim());
+}
+function tableCellLineHasWarnTxt(line) {
+    return typeof line === "string" && /^※/u.test(line.trim());
+}
+function stripTableCellLeadMarkPlain(line) {
+    if (typeof line !== "string") return "";
+    return line.trim().replace(/^•\s*/u, "");
+}
+function getTableCellBulletParagraphs(cell) {
+    if (typeof cell !== "string") return null;
+    const trimmed = cell.trim();
+    if (!trimmed) return null;
+    if (/<br\s*\/?>/i.test(trimmed)) {
+        const parts = trimmed.split(/<br\s*\/?>/i).map((p) => p.trim()).filter((p) => p.length > 0);
+        if (parts.length === 0) return null;
+        const mapped = parts.map((p) => ({
+            bullet: TABLE_CELL_BULLET_RE.test(p),
+            warn: /^※/u.test(p),
+            html: TABLE_CELL_BULLET_RE.test(p) ? p.replace(/^•\s*/u, "").trim() : p,
+        }));
+        if (mapped.length >= 2 && (mapped.some((m) => m.bullet) || mapped.some((m) => m.warn))) return mapped;
+        if (mapped.length === 1 && mapped[0].bullet) return mapped;
+        if (mapped.length === 1 && mapped[0].warn) return mapped;
+        return null;
+    }
+    if (TABLE_CELL_BULLET_RE.test(trimmed)) {
+        return [{ bullet: true, warn: false, html: trimmed.replace(/^•\s*/u, "").trim() }];
+    }
+    if (/^※/u.test(trimmed)) {
+        return [{ bullet: false, warn: true, html: trimmed }];
+    }
+    return null;
 }
 function isFairTradeAddendumSection(section) {
     if (!section) return false;
@@ -1327,7 +1552,7 @@ const langData = {
             {
                 no: "부칙",
                 title: "",
-                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />이 기준은 2016. 5. 9. 제정, 시행한다.<br />이 기준은 2017. 1. 1. 개정, 시행한다.<br />이 기준은 2018. 8. 2. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 기준은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
+                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />① 이 기준은 2016. 5. 9. 제정, 시행한다.<br />② 이 기준은 2017. 1. 1. 개정, 시행한다.<br />③ 이 기준은 2018. 8. 2. 개정, 시행한다.<br />④ 이 기준은 2020. 12. 30. 개정, 시행한다. <br />⑤ 이 기준은 2021. 11. 15. 개정, 시행한다.<br />⑥ 이 기준은 2025. 8. 1. 개정, 시행한다.",
             },
         ],
         // 3. 정액수수료 방송 운영기준과 절차
@@ -1430,24 +1655,25 @@ const langData = {
                 appendixTitle: "[별표1] 정액수수료 방송 환급 제도 운영 기준",
                 commonTables: [
                     {
+                        tableClass:"quality_standards",
                         cols: ["구분", "내용"],
                         rows: [
                             [
-                                "환급기준",
+                                { label: "환급기준", style: "text-align: center;" },
                                 [
-                                    "• 중소기업 제품 정액수수료 방송별로 목표 대비 실적이 30% 미만인 경우 해당 방송 정액수수료의 10% 환급",
+                                    "중소기업 제품 정액수수료 방송별로 목표 대비 실적이 30% 미만인 경우 해당 방송 정액수수료의 10% 환급",
                                     "※ 정액수수료와 정률수수료를 함께 지급한 방송의 경우 정액수수료 부분에 대해서만 환급",
                                 ],
                             ],
                             [
-                                "환급절차",
+                                { label: "환급절차", style: "text-align: center;" },
                                 [
-                                    "• 분기마다 실적 확인 후 환급",
+                                    "분기마다 실적 확인 후 환급",
                                     "※ 공정성을 위해 외부 기관과 연계하여 해당 기관에서 검증 후 환급 가능",
                                 ],
                             ],
                             [
-                                "제외대상",
+                                { label: "제외대상", style: "text-align: center;" },
                                 {
                                     numList: [
                                         "대기업, 중견기업 및 수입 제품",
@@ -1469,7 +1695,7 @@ const langData = {
             {
                 no: "부칙",
                 title: "",
-                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />이 기준은 2016. 5. 9. 제정, 시행한다.<br />이 기준은 2017. 1. 1. 개정, 시행한다.<br />이 기준은 2018. 8. 2. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 기준은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
+                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />① 이 기준은 2016. 5. 9. 제정, 시행한다.<br />② 이 기준은 2017. 1. 1. 개정, 시행한다.<br />③ 이 기준은 2018. 8. 2. 개정, 시행한다.<br />④ 이 기준은 2020. 12. 30. 개정, 시행한다. <br />⑤ 이 기준은 2021. 11. 15. 개정, 시행한다.<br />⑥ 이 기준은 2025. 8. 1. 개정, 시행한다.",
             },
         ],
         // 4. 판매촉진행사 진행 기준과 절차
@@ -1558,7 +1784,7 @@ const langData = {
             {
                 no: "부칙",
                 title: "",
-                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />이 기준은 2016. 5. 9. 제정, 시행한다.<br />이 기준은 2017. 1. 1. 개정, 시행한다.<br />이 기준은 2018. 8. 2. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 기준은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
+                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />① 이 기준은 2016. 5. 9. 제정, 시행한다.<br />② 이 기준은 2017. 1. 1. 개정, 시행한다.<br />③ 이 기준은 2018. 8. 2. 개정, 시행한다.<br />④ 이 기준은 2020. 12. 30. 개정, 시행한다. <br />⑤ 이 기준은 2021. 11. 15. 개정, 시행한다.<br />⑥ 이 기준은 2025. 8. 1. 개정, 시행한다.",
             },
         ],
         // 5. 방송제작비 등 분담 기준과 절차
@@ -1593,7 +1819,7 @@ const langData = {
                             "3. GS SHOP이 준비한 방송세트(무대장치·설비 등)의 추가 또는 변경",
                             "4. 협력사가 준비 또는 지참한 소품의 사용"
                         ]
-                     },
+                    },
                     { num: "4", title: "GS SHOP이 방송 제작 및 진행 시 제3항에 따른 협력사의 요청 사항을 반영하는 경우 그로 인해 추가로 발생되는 비용에 관하여 제4조 및 제5조의 기준과 절차에 따라 협력사와 사전에 서면으로 합의하여야 한다." },
                 ],
             },
@@ -1604,7 +1830,7 @@ const langData = {
                     { num: "1", title: "GS SHOP이 판매 방송을 위해 영상물을 사전 제작하는 경우 그 제작 비용은 원칙적으로 GS SHOP이 부담하여야 한다." },
                     { num: "2", title: "GS SHOP은 협력사의 요청이 있는 경우 협력사가 보유 또는 제작한 사전제작영상물을 제공 받아 사용할 수 있고, 그에 따른 비용은 GS SHOP과 협력사가 별도로 합의하여 정하기로 한다." },
                     { num: "3", title: "제2항에도 불구하고 GS SHOP이 TV홈쇼핑 방송에서 협력사로부터 직매입한 상품을 판매하면서 해당 협력사가 제공하는 사전제작영상물을 사용하는 경우 협력사에 다음 각 호의 기준에 따라 비용을 지급하기로 한다.",
-                    details:[
+                      details:[
                             "1. 협력사의 공급 상품이 라이선스 상품(GS SHOP이 협력사에 라이센싱한 상표권을 사용하여 제작한 상품)인 경우 : 20만원",
                             "2. 협력사의 공급 상품이 제1호 상품에 해당하지 않는 일반 상품인 경우 : 10만원",
                             "3. 해당 방송 프로그램에 사용된 협력사 사전제작영상물의 수가 2개 이상이더라도 추가 사용료를 지급하지 아니 한다.",
@@ -1619,7 +1845,7 @@ const langData = {
                             "2. 협력사의 사전제작영상물을 사용한 상품의 신규 본방송(최초 편성 방송) 프로그램에 대해 사용료를 지급하며, 동일한 상품의 재방송(최초 이후 편성 방송)부터는 사용료를 지급하지 않는다.",
                             "3. 그 밖에 TV홈쇼핑 방송 관련 제3항 제1호부터 제4호 및 제6호의 지급 기준은 본 항의 데이터홈쇼핑 방송에 대해서도 동일하게 적용한다."
                         ]
-                     },
+                    },
                 ],
                
             },
@@ -1650,7 +1876,7 @@ const langData = {
             {
                 no: "부칙",
                 title: "",
-                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />이 기준은 2016. 5. 9. 제정, 시행한다.<br />이 기준은 2017. 1. 1. 개정, 시행한다.<br />이 기준은 2018. 8. 2. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 기준은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
+                addendumText: "부칙(2018.04.01.)<br />제1조 (시행일)<br />① 이 기준은 2016. 5. 9. 제정, 시행한다.<br />② 이 기준은 2017. 1. 1. 개정, 시행한다.<br />③ 이 기준은 2018. 8. 2. 개정, 시행한다.<br />④ 이 기준은 2020. 12. 30. 개정, 시행한다. <br />⑤ 이 기준은 2021. 11. 15. 개정, 시행한다.<br />⑥ 이 기준은 2025. 8. 1. 개정, 시행한다.",
             },
         ],
         // 6. 직매입 상품 등의 반품 기준과 절차
@@ -1710,7 +1936,7 @@ const langData = {
                             "1. 협력사가 자신의 상품에 유해물질이 첨가되어 있다는 보도를 접하고 이를 신속히 반품 받아 소비자 피해를 줄이는 것이 스스로에게도 이익이 된다고 판단하여 GS SHOP에게 반품을 요청하면서 객관적인 근거서류를 제출한 경우",
                             "2. 협력사가 신제품을 출시하면서 기존에 납품한 상품을 매장에서 회수하는 것이 브랜드 이미지 제고에 더 도움이 된다는 판단을 하여 GS SHOP에게 반품을 요청하면서 객관적인 근거서류를 제출한 경우",
                         ]
-                     },
+                    },
                     { num: "8", title: "대규모유통업법 제10조 제1항 제3호부터 제7호까지에 직접적으로 해당되는 사유가 없더라도 그에 준하는 사유가 있는 경우에는 반품에 정당한 사유가 있는 것으로 추정될 수 있다.",}
                 ]
             },
@@ -1752,7 +1978,7 @@ const langData = {
                             "7. 반품된 상품의 반품사유",
                             "8. 협력사가 GS SHOP에 서면으로 반품을 요청하면서 해당 반품이 자신에게 직접적으로 이익이 된다는 사실을 증명하는 객관적인 근거 자료를 제출한 경우 협력사가 제출한 서면과 근거 자료"
                         ]
-                     },
+                    },
                     { num: "2", title: "GS SHOP은 반품조건을 적은 서면을 협력사에 교부하기 전까지는 협력사에게 반품을 하여서는 아니 된다."},
                   
                 ],
@@ -1780,7 +2006,7 @@ const langData = {
             {
                 no: "부칙",
                 title: "",
-                addendumText: "부칙<br />제1조 (시행일)<br />이 지침은 2018. 8. 2. 제정, 시행한다.<br />이 지침은 2020. 12. 30. 개정, 시행한다.<br />이 지침은 2021. 11. 15. 개정, 시행한다.<br />이 지침은 2025. 8. 1. 제정, 시행한다.",
+                addendumText: "부칙<br />제1조 (시행일)<br />① 이 지침은 2018. 8. 2. 제정, 시행한다.<br />② 이 지침은 2020. 12. 30. 개정, 시행한다.<br />③ 이 지침은 2021. 11. 15. 개정, 시행한다.<br />④ 이 지침은 2025. 8. 1. 제정, 시행한다.",
             },
 
         ],
@@ -1822,12 +2048,12 @@ const langData = {
                 items: [
                     { num: "1", title: "제3조에도 불구하고 GS SHOP이 협력사에 다음 각 호의 사항을 기입하고 각각 기명날인 한 서면을 제공한 경우 GS SHOP은 협력사에게 경영정보의 제공을 요구할 수 있다.",
                       details:[
-                                "1. 경영정보 제공을 요구하는 목적",
-                                "2. 비밀유지방법 등 요구 대상 정보의 비밀유지에 관한 사항 및 비밀침해 시 손해배상에 관한 사항",
-                                "3. 경영정보 요구일자, 제공일자 및 제공방법",
-                                "4. 경영정보 제공 요구가 불가피함을 객관적으로 증명할 수 있는 사항"
-                            ]
-                     },
+                          "1. 경영정보 제공을 요구하는 목적",
+                          "2. 비밀유지방법 등 요구 대상 정보의 비밀유지에 관한 사항 및 비밀침해 시 손해배상에 관한 사항",
+                          "3. 경영정보 요구일자, 제공일자 및 제공방법",
+                          "4. 경영정보 제공 요구가 불가피함을 객관적으로 증명할 수 있는 사항"
+                      ]
+                    },
                     { num: "2", title: "다음 각 호의 정보는 공개되어 있거나 협력사와의 거래 개시 또는 유지를 위해 필요한 정보로써 원칙적으로 협력사에 요구할 수 있는 정보로 본다.",
                         details:[
                             "1. 대외적으로 공개되어 있는 협력사의 일반 현황(대표자 학력, 직원수, 취급 상품명등)",
@@ -1835,7 +2061,7 @@ const langData = {
                             "3. 협력사의 연간 전체 매출액(단, 거래처별, 채널별 매출액은 제외)",
                             "4. 제1호부터 제3호까지에 준하는 것으로 제공하더라도 GS SHOP과의 거래 또는 협상 과정에서 불리하게 활용될 가능성이 없는 정보",
                         ]
-                     },
+                    },
                     { num: "3", title: "GS SHOP이 협력사에 정당한 절차를 거쳐 경영정보를 요구하는 경우에도 GS SHOP은 요구 목적에 필요한 최소한의 범위에서 요구하여야 하고, 수령한 경영정보는 요구 목적의 범위 내에서만 사용하여야 한다." },
                   
                 ]
@@ -1858,7 +2084,7 @@ const langData = {
             {
                 no: "부칙",
                 title: "",
-                addendumText: "부칙<br />제1조 (시행일)<br />이 지침은 2015. 6. 1. 제정, 시행한다.<br />이 지침은 2018. 8. 2. 개정, 시행한다.<br />이 지침은 2020. 12. 30. 개정, 시행한다.<br />이 기준은 2020. 12. 30. 개정, 시행한다. <br />이 지침은 2021. 11. 15. 개정, 시행한다.<br />이 기준은 2025. 8. 1. 개정, 시행한다.",
+                addendumText: "부칙<br />제1조 (시행일)<br />① 이 지침은 2015. 6. 1. 제정, 시행한다.<br />② 이 지침은 2018. 8. 2. 개정, 시행한다.<br />③ 이 지침은 2020. 12. 30. 개정, 시행한다.<br />④ 이 기준은 2020. 12. 30. 개정, 시행한다. <br />⑤ 이 지침은 2021. 11. 15. 개정, 시행한다.<br />⑥ 이 기준은 2025. 8. 1. 개정, 시행한다.",
             },
         ],
         // 8. 홈쇼핑 불공정거래행위에 대한 위법성 심사지침 준수 기준
@@ -1923,7 +2149,7 @@ const langData = {
             {
                 no: "부칙",
                 title: "",
-                addendumText: "부칙<br />제1조 (시행일)<br />이 지침은 2017. 4. 28. 제정, 시행한다.<br />이 지침은 2018. 8. 2. 개정, 시행한다.<br />이 지침은 2020. 12. 30. 개정, 시행한다.<br />이 지침은 2021. 11. 15. 개정, 시행한다.<br />이 지침은 2025. 8. 1. 개정, 시행한다.",
+                addendumText: "부칙<br />제1조 (시행일)<br />① 이 지침은 2017. 4. 28. 제정, 시행한다.<br />② 이 지침은 2018. 8. 2. 개정, 시행한다.<br />③ 이 지침은 2020. 12. 30. 개정, 시행한다.<br />④ 이 지침은 2021. 11. 15. 개정, 시행한다.<br />⑤ 이 지침은 2025. 8. 1. 개정, 시행한다.",
             },
         ],
         // 9.상품선정 및 방송편성 기준과 절차
@@ -1992,7 +2218,7 @@ const langData = {
                             "2. 장애인/노인 등이 사회적 소외계층이 공급하는 상품 또는 소외계층을 대상으로 하는 상품",
                             "3. 농축산어민이 최종 제조사이거나 농축산어민이 직접 공급하는 상품",
                         ]
-                     },
+                    },
                     { num: "3", title: "제1항 및 제2항의 기준에도 불구하고, 「상품소개 및 판매방송 심의에 관한 규정」 제64조(방송금지)에 해당하거나, 기타 방송 심의 상 문제가 발생될 여지가 있는 상품에 대해서는 입점 또는 상품 선정 제안을 반려하며, 해당 사유를 협력사에게 고지하여야 한다." },
                 ],
             },
@@ -2013,20 +2239,21 @@ const langData = {
                 ],
                 commonTables: [
                     {
+                       
                         cols: ["구분", { label: "세부 검사 항목", colspan: 2 }],
                         rows: [
                             [
-                                "서류 검사",
+                                { label: "서류 검사", style: "text-align: center;" },
                                 "• 상품 및 협력사 인허가 관련 서류 확인<br />• 상품의 기능, 성능 관련 내용 확인",
                                 "• 상품과 관련된 서류 전체 확인",
                             ],
                             [
-                                "실물 검사",
+                                { label: "실물 검사", style: "text-align: center;" },
                                 "• 상품의 안전성 및 외관의 이상여부<br />• 상품사양, 표시사항, 구성확인<br />• 포장 상태의 적합성 확인",
                                 "• 고객에게 배송 전 상태의 제품 전반 사항을 확인",
                             ],
                             [
-                                "성능 검사",
+                                { label: "성능 검사", style: "text-align: center;" },
                                 "• 테스트 통한 상품 기능/성능 점검 및 내구성 확인",
                                 "• 상품의 내구성 및 기능/성능 점검",
                             ],
@@ -2170,7 +2397,6 @@ const langData = {
                     {
                         appendixTitle: "[별표1] 협력사 평가 기준 (제3조 제1항 제1호 관련)",
                         tableClass: "appendix_partner_eval",
-                        colgroupWidths: [250, 390, 150, 390, 150],
                         cols: [
                             "구분",
                             "상품군(대분류)",
@@ -2179,7 +2405,7 @@ const langData = {
                             "신용등급",
                         ],
                         rows: [
-                            [{ html: "TV홈쇼핑<br />협력사", rowspan: 10, style:"text-align: center !important;" }, "디지털기기/핸드폰", "B", "스포츠/레저/자동차용품", "CCC"],
+                            [{ html: "TV홈쇼핑<br  class='p_br'/>협력사", rowspan: 10, style:"text-align: center !important;", txt_verticle: true }, "디지털기기/핸드폰", "B", "스포츠/레저/자동차용품", "CCC"],
                             ["컴퓨터/게임기/소프트웨어", "B", "가구/인테리어", "CCC"],
                             ["대형가전", "B", "의류", "CCC"],
                             ["생활/소형가전", "B", "패션잡화", "CCC"],
@@ -2193,8 +2419,7 @@ const langData = {
                     },
                     {
                         appendixTitle: "[별표2] 신상품 평가 기준 (제7조 제1항 관련)",
-                        tableClass: "appendix_new_product_eval",
-                        colgroupWidths: [250, 290, 290, 100, 100, 100, 100, 100],
+                        tableClass: "type_02",
                         theadRows: [
                             [
                                 { label: "구분", rowspan: 2 },
@@ -2205,7 +2430,7 @@ const langData = {
                             ["5점", "4점", "3점", "2점", "1점"],
                         ],
                         rows: [
-                            [{ html: "내부 평가단", rowspan: 8, style:"text-align: center !important;"}, { html: "PD", rowspan: 2 }, "소구 포인트 차별성", "우수", "양호", "보통", "미흡", "불량"],
+                            [{ html: "내부 평가단", rowspan: 8, style:"text-align: center !important;", txt_verticle: true }, { html: "PD", rowspan: 2 }, "소구 포인트 차별성", "우수", "양호", "보통", "미흡", "불량"],
                             ["상품 판매력", "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "품질안전", rowspan: 2 }, "관련 법 적합성", "우수", "양호", "보통", "미흡", "불량"],
                             ["사용 안전성", "우수", "양호", "보통", "미흡", "불량"],
@@ -2213,7 +2438,7 @@ const langData = {
                             ["대외 이슈 여부 (낮은 Risk)", "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "상품전략", rowspan: 2 }, "가격 경쟁력", "우수", "양호", "보통", "미흡", "불량"],
                             ["수수료율 적절성", "우수", "양호", "보통", "미흡", "불량"],
-                            [{ html: "외부 평가단", rowspan: 5, style:"text-align: center !important;"}, { html: "디자인 우수성", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
+                            [{ html: "외부 평가단", rowspan: 5, style:"text-align: center !important;", txt_verticle: true }, { html: "디자인 우수성", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "구매 의사", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "가격 경쟁력", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "기능성", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
@@ -2229,9 +2454,12 @@ const langData = {
                             { label: "세부 평가 기준", colspan: 2 },
                         ],
                         rows: [
-                            ["중소기업", "제조사 또는 협력사가 중소기업 기본법에 의거한 중소기업에 해당하는 경우", "상품 MD는 사업자 등록증 확인 후, 한국신용정보평가를 통하여 해당 기업의 규모를 확인"],
-                            ["소외계층", "장애인/노인 등 사회적 소외계층이 공급하는 상품 또는 소외계층을 대상으로 하는 상품", "상품 MD는 거래처를 통하여 관련 입증 서류를 수령, 상품 기획 및 전략 담당 부서에 제출"],
-                            ["농축산수산 식품", "농축산어민이 최종 제조사 혹은 직접 공급하는 상품", "식품 관련 영업 부서에 한하여 적용, 상품 MD는 식품팀장 결재"],
+                            [{ label: "중소기업", style: "text-align: center;" },
+                             "제조사 또는 협력사가 중소기업 기본법에 의거한 중소기업에 해당하는 경우", "상품 MD는 사업자 등록증 확인 후, 한국신용정보평가를 통하여 해당 기업의 규모를 확인"],
+                            [{ label: "소외계층", style: "text-align: center;" },
+                             "장애인/노인 등 사회적 소외계층이 공급하는 상품 또는 소외계층을 대상으로 하는 상품", "상품 MD는 거래처를 통하여 관련 입증 서류를 수령, 상품 기획 및 전략 담당 부서에 제출"],
+                            [ { label: "농축산수산 식품", style: "text-align: center;" },
+                              "농축산어민이 최종 제조사 혹은 직접 공급하는 상품", "식품 관련 영업 부서에 한하여 적용, 상품 MD는 식품팀장 결재"],
                         ],
                     },
                 ],
@@ -2282,19 +2510,19 @@ const langData = {
                     { num: "2", title: "입점을 제안한 업체는 온라인을 통해 입점 제안된 내역에 대한 진행 현황 및 입점 불가 판정을 받은 제안 내역에 대해서 확인 할 수 있다." },
                     { num: "3", title: "GS SHOP은 협력사 선정 시 다음 각 호의 요소를 고려하여 선정한다. 이 때 제1호에 대한 세부 기준은 별표 1에 따른다.",
                       details:[
-                        "1. 업체의 신용등급",
-                        "2. 업체의 무형상품 관련 법령에 따른 인·허가 보유 여부",
-                        "3. 여행상품의 경우 관광진흥법에 따른 보증보험 가입 여부",
-                        "4. 기타 무형상품 관련 법령에 따른 보증보험 가입 여부",
-                        "5. 업체가 제안한 무형상품의 소비자 보호 장치 구비 여부",
+                          "1. 업체의 신용등급",
+                          "2. 업체의 무형상품 관련 법령에 따른 인·허가 보유 여부",
+                          "3. 여행상품의 경우 관광진흥법에 따른 보증보험 가입 여부",
+                          "4. 기타 무형상품 관련 법령에 따른 보증보험 가입 여부",
+                          "5. 업체가 제안한 무형상품의 소비자 보호 장치 구비 여부",
                       ]
                     },
                     { num: "4", title: "GS SHOP은 협력사 선정 시 다음 각 호의 사유 중 어느 하나에 해당하는 업체에 대해서는 협력사 선정 대상에서 배제하거나 보증보험 증액 등을 통해 보완토록 요청할 수 있다.",
                       details:[
-                        "1. 업체가 자발적으로 제공한 재무제표 등 경영 관련 자료나, 신용평가 등 객관적으로 입수 가능한 외부 정보를 종합적으로 검토하여 업체의 폐업 또는 부도 위험이 매우 크다고 판단되는 경우",
-                        "2. 업체가 GS SHOP과 고객에 대한 무형상품 공급 계약의 이행 담보 수단을 적절히 제공 및 유지하지 못하는 경우",
-                        "3. 업체가 무형상품 A/S 약정의 이행 능력이 부족하다고 판단될 경우",
-                        "4. 업체의 무형상품이 「상품소개 및 판매방송 심의에 관한 규정」 제64조(방송금지)에 해당하는 등 기타 심의에 위반될 여지가 있거나, 특허법, 상표법 등 지식재산권 관련 법령 등에 저촉되는 등의 사유로 문제될 여지가 있는 상품이라고 판단하는 경우 등"
+                          "1. 업체가 자발적으로 제공한 재무제표 등 경영 관련 자료나, 신용평가 등 객관적으로 입수 가능한 외부 정보를 종합적으로 검토하여 업체의 폐업 또는 부도 위험이 매우 크다고 판단되는 경우",
+                          "2. 업체가 GS SHOP과 고객에 대한 무형상품 공급 계약의 이행 담보 수단을 적절히 제공 및 유지하지 못하는 경우",
+                          "3. 업체가 무형상품 A/S 약정의 이행 능력이 부족하다고 판단될 경우",
+                          "4. 업체의 무형상품이 「상품소개 및 판매방송 심의에 관한 규정」 제64조(방송금지)에 해당하는 등 기타 심의에 위반될 여지가 있거나, 특허법, 상표법 등 지식재산권 관련 법령 등에 저촉되는 등의 사유로 문제될 여지가 있는 상품이라고 판단하는 경우 등"
                       ]
                     }
                 ],
@@ -2308,11 +2536,11 @@ const langData = {
                     { num: "3", title: "Risk 검토 커미티에서 평가된 무형상품에 대해서는 품질·안전 담당부서와심의 담당부서를 통해 상품군별 정해진 기준에 의거한 품질 검사와 방송 심의 절차를 거쳐야 한다."},
                     { num: "4", title: "GS SHOP은 무형상품 선정 시 다음 각 호의 요소를 고려하여 평가한다.",
                         details:[
-                        "1. 상품의 가격 및 구성",
-                        "2. 상품의 차별성",
-                        "3. 상품의 경쟁력",
-                        "4. 안정적인 서비스 제공 가능 여부 (예 : 무형상품의 판매 업체와 제조 업체가 다른 경우 양 업체 간의 계약 관계 확인 등)",
-                        "5. 소비자 보호 장치 구비 여부 (예 : 청약철회 기간, 고지 방법 등)"
+                          "1. 상품의 가격 및 구성",
+                          "2. 상품의 차별성",
+                          "3. 상품의 경쟁력",
+                          "4. 안정적인 서비스 제공 가능 여부 (예 : 무형상품의 판매 업체와 제조 업체가 다른 경우 양 업체 간의 계약 관계 확인 등)",
+                          "5. 소비자 보호 장치 구비 여부 (예 : 청약철회 기간, 고지 방법 등)"
                         ]
                     },
                 ],
@@ -2397,7 +2625,6 @@ const langData = {
                     {
                         appendixTitle: "[별표1] 협력사 신용평가등급 기준 (제4조 제3항 제1호 관련)",
                         tableClass: "appendix_partner_eval",
-                        colgroupWidths: [250, 390, 150, 390, 150],
                         cols: [
                             "구분",
                             "상품군(대분류)",
@@ -2406,7 +2633,7 @@ const langData = {
                             "신용등급",
                         ],
                         rows: [
-                            [{ html: "TV홈쇼핑<br />협력사", rowspan: 10, style:"text-align: center !important;" }, "디지털기기/핸드폰", "B", "스포츠/레저/자동차용품", "CCC"],
+                            [{ html: 'TV홈쇼핑<br class="p_br" />협력사', rowspan: 10, style:"text-align: center !important;", txt_verticle: true }, "디지털기기/핸드폰", "B", "스포츠/레저/자동차용품", "CCC"],
                             ["컴퓨터/게임기/소프트웨어", "B", "가구/인테리어", "CCC"],
                             ["대형가전", "B", "의류", "CCC"],
                             ["생활/소형가전", "B", "패션잡화", "CCC"],
@@ -2570,9 +2797,9 @@ const langData = {
                     { num: "2", title: "협의회는 사건 조사가 완료되었다고 판단되면 전체회의를 소집하여 피해 협력사에 대한 보상안 등을 협의·의결한다."},
                     { num: "3", title: "전체회의의 소관 사항은 다음 각 호와 같다.",
                       details:[
-                        "1. 피해 보상 신청 사건에 대한 보상안의 협의",
-                        "2. 피해 보상 신청 사건에 대한 보상안의 의결",
-                        "3. 피해 보상 신청 사건이 이 기준에 따른 피해 보상 대상이 아님이 명백한 경우의 각하 결정",
+                          "1. 피해 보상 신청 사건에 대한 보상안의 협의",
+                          "2. 피해 보상 신청 사건에 대한 보상안의 의결",
+                          "3. 피해 보상 신청 사건이 이 기준에 따른 피해 보상 대상이 아님이 명백한 경우의 각하 결정",
                       ]
                     },
                 ],
@@ -2674,13 +2901,14 @@ const langData = {
                 no: "05",
                 title: "파트너사 신청절차",
                 lead: "“파트너사” 선정절차는 다음 각 호의 순서에 따라 공정하고 투명하게 진행한다.",
+                usePlainList:true,
                 items: [
-                    { num: "1", title: "“회사” 홈페이지(www.gsretail.com) 입점상담 페이지를 통해 입점신청서, 기업소개서, 상품제안서 등 서류를 첨부하여 상담 신청" },
-                    { num: "2", title: "상담 신청 접수일로부터 10 영업일 이내에 서류심사 결과 통보" },
-                    { num: "3", title: "서류심사 통과 시, 상담일정 협의하여 상담 진행" },
-                    { num: "4", title: "제출서류, 상담결과 등을 공정하게 정량 평가하여 최종 입점 여부 결정" },
-                    { num: "5", title: "입점이 결정된 “파트너사”에게 거래 약정 체결에 필요한 사항과 절차 및 일정 안내" },
-                    { num: "6", title: "상호 협의 하에 계약서를 작성" },
+                    { num: "1", title: "1. “회사” 홈페이지(www.gsretail.com) 입점상담 페이지를 통해 입점신청서, 기업소개서, 상품제안서 등 서류를 첨부하여 상담 신청" },
+                    { num: "2", title: "2. 상담 신청 접수일로부터 10 영업일 이내에 서류심사 결과 통보" },
+                    { num: "3", title: "3. 서류심사 통과 시, 상담일정 협의하여 상담 진행" },
+                    { num: "4", title: "4. 제출서류, 상담결과 등을 공정하게 정량 평가하여 최종 입점 여부 결정" },
+                    { num: "5", title: "5. 입점이 결정된 “파트너사”에게 거래 약정 체결에 필요한 사항과 절차 및 일정 안내" },
+                    { num: "6", title: "6. 상호 협의 하에 계약서를 작성" },
                 ],
             },
             {
@@ -4077,14 +4305,15 @@ const closeEthicsInquiry = () => {
 </script>
 
 <style scoped>
-.p_br{display:block;}
+:deep(.p_br) { display: block }
+:deep(.m_br) { display: none }
 img{width:100%; height:auto; display:block; object-fit: cover;}
 .main-container { width: 100%; position: relative; display: block; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url(@/assets/images/dummy/gsrsu040101_bg.jpg) no-repeat center / cover; text-align: center; position: relative; display: block; }
 .title_wrap::after{content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1;}
 .page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2;}
 .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
-.panel,
+.panel{padding-top:80px;}
 .panel_third_depth { padding-top: 80px; }
 /* v-html 삽입 노드에는 scoped data 속성이 없으므로 :deep 필요 */
 :deep(.txt_blue){color:#107AF2 !important;}
@@ -4140,33 +4369,30 @@ section + section{padding-top:120px;}
 .fair_trade_standard_sections > li > article { display: flex; flex-direction: column; gap: 16px; }
 .fair_trade_standard_sections > li > article > h4 { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .fair_trade_standard_body { padding-left: 24px; }
-.fair_trade_standard_body > p { margin: 0 0 16px; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
+.fair_trade_standard_body p { margin: 0 0 16px; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
 .fair_trade_standard_sections > li > article.gray_box { padding: 20px 40px;  border-radius: 0; }
-.fair_trade_standard_sections > li > article.gray_box p { margin: 0; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+.fair_trade_standard_sections > li > article.gray_box p { margin: 0; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing:-0.01em; }
 .num_list {padding: 0; list-style: none; counter-reset: standard-item; }
 .num_list > li { margin-left: 0; padding-left: 32px; color: #67676f; font-size: 1.8rem; line-height: 1.5; position: relative; counter-increment: standard-item; }
 .num_list > li::before { content: counter(standard-item); width: 20px; height: 20px; border: 1px solid #67676f; border-radius: 50%; color: #67676f; font-size: 1.2rem; line-height: 1; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 4px; left: 0; box-sizing: border-box; }
 .num_list > li + li { margin-top: 8px; }
-.num_list > li > p { color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4;}
-.num_list > li > ul { margin-top: 8px; padding-left: 24px; }
-.num_list > li > ul > li { color: #67676f; font-size: 1.8rem; line-height: 1.4; }
-.num_list > li > ul > li > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
+
+.num_list > li > ul { margin-top: 8px;}
+
 .txt_indent_24 { padding-left: 24px; }
 .num_list > li > ul > li > ul {padding-left:24px;}
-.num_list > li > ul > li > ul > li {color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; list-style: none; }
-.plain_list {padding: 0; }
-.plain_list > li { color: #67676f; font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; list-style: none; }
-.plain_list > li > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
+/* .plain_list {padding: 0; }
+.plain_list > li > p { margin: 0; } */
 .fair_trade_standard_dl { border:0;}
-.fair_trade_standard_dl > dt { margin-top: 16px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
-.fair_trade_standard_dl > dd { margin: 0; border:0; color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+.fair_trade_standard_dl > dt { margin-top: 16px;  }
+.fair_trade_standard_dl > dd { margin: 0; border:0; }
 .fair_trade_standard_dl dd + dt{margin-top: 16px;}
 .fair_trade_standard_dl > dd > ul{padding-left:24px;}
 .fair_trade_standard_dl > dd > ul > li > ul{padding-left:24px;}
-.fair_trade_standard_dl > dd > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+.fair_trade_standard_dl > dd > p { margin: 0; }
 .fair_trade_work_standard_desc{margin-bottom:16px;}
 .fair_trade_standard_desc_list { margin: 0; padding: 0; }
-.fair_trade_standard_desc_list > li { list-style: none; color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+.fair_trade_standard_desc_list > li { list-style: none;  }
 /* 준법경영 > 자율준수 관리자 선임절차: width=height clamp로 원형 고정(PC~태블릿), 768 이하 세로 */
 
 /* 준법경영 > 자율준수 관리자 배너 (Figma 491:13873) */
@@ -4281,6 +4507,7 @@ line-height: 1.24;
 
 
 @media screen and (min-width: 769px) {
+
     .purpose_feature_cards :deep(.feature_card_item) {
         min-height: 194px;
         padding: 32px;
@@ -4300,9 +4527,6 @@ line-height: 1.24;
     }
 }
 @media screen and (max-width: 1024px) {
-    /* :deep(.feature_cards_grid.feature_card_list) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    } */
     :deep(.ethics_target_list.num_info_list) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 40px 20px;
@@ -4315,35 +4539,34 @@ line-height: 1.24;
     :deep(.feature_cards_grid.fair_trade_guideline_cards.feature_card_list){
         grid-template-columns: 1fr;
     }
-    .fair_trade_work_standard_sec { margin-top: 32px; }
-    .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 20px; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
+
+    .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 10px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .fair_trade_work_standard_sec :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0 }
     /* .fair_trade_standard_sections { margin: 12px 20px 20px; } */
     .fair_trade_standard_sections{padding:0;}
     .fair_trade_standard_sections > li > article { gap: 20px; }
     .fair_trade_standard_sections > li > article > h4 { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .fair_trade_standard_body { padding-left: 20px; }
+    .fair_trade_standard_body { padding-left: 0; }
     .fair_trade_standard_body { gap: 20px; }
-    .fair_trade_standard_body > p { margin: 0; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .fair_trade_standard_sections > li > article.gray_box { padding: 16px 20px; }
-    .fair_trade_standard_sections > li > article.gray_box p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .fair_trade_standard_body p { margin: 0; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .fair_trade_standard_body > p + ul {margin-top:16px;}
+    .fair_trade_standard_sections > li > article.gray_box { padding: 20px; }
+    .fair_trade_standard_sections > li > article.gray_box p { font-size: 1.2rem; line-height: 1.2;  }
+    .fair_trade_standard_dl{padding-left:24px;}
     .num_list > li { padding-left: 28px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .num_list > li::before { width: 18px; height: 18px; font-size: 1.1rem; top: 2px; }
+    .num_list > li::before {  font-size: 1.2rem; }
     .num_list > li > strong { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .num_list > li > ul > li { margin-left: 16px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .num_list > li > ul > li > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .num_list > li > ul > li > ul > li {font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .num_list > li > ul{padding-left:8px;}
     .plain_list { padding-left: 0; }
     .plain_list > li { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .plain_list > li > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    
+    .fair_trade_standard_dl > dd > ul{padding:0;}
     .fair_trade_standard_dl > dt { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-    .fair_trade_standard_dl > dd { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    .fair_trade_standard_dl > dd { margin-top:8px;font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
     .fair_trade_standard_dl > dd > p { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
     .fair_trade_standard_desc_list > li { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-    /* .fair_trade_guideline_cards :deep(.feature_card_action) a {
-        width: 100%;
-        min-width: 0;
-    } */
+
     .ethics_target_list :deep(.num_info_icon) {
         width: 60px;
         height: 60px;
@@ -4491,9 +4714,9 @@ letter-spacing: -0.01em;
 .panel_third_depth .common_table_scroll {
     width: 100%;
     margin-top: 16px;
-    padding:0 20px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    padding: 0 20px;
+    min-width: 0;
+    overflow-x: visible;
 }
 
 .panel_third_depth .common_table_scroll + .common_table_scroll{
@@ -4502,9 +4725,8 @@ letter-spacing: -0.01em;
 
 .panel_third_depth .common_table {
     width: 100%;
-    min-width: 640px;
+    min-width: 0;
     border-collapse: collapse;
-    table-layout: fixed;
     position: relative;
 }
 
@@ -4524,11 +4746,10 @@ letter-spacing: -0.01em;
     border-bottom: 1px solid #e5e5e9;
     text-align: left;
 }
-
+.panel_third_depth .common_table td  p{ color:#161616;}
 .panel_third_depth .common_table th {
     padding:19px 24px;
     background-color: #f8f8f8;
-    color: #161616;
     font-size: 1.8rem;
     font-weight: 700;
     line-height: 1.5;
@@ -4536,6 +4757,7 @@ letter-spacing: -0.01em;
 .panel_third_depth .common_table th + th{
     border-left: 1px solid #e5e5e9;
 }
+.panel_third_depth .common_table thead tr:not(:first-child) th:first-child { border-left: 1px solid #e5e5e9; }
 
 
 
@@ -4544,16 +4766,16 @@ letter-spacing: -0.01em;
 }
 .panel_third_depth .common_table td p {
     margin: 0;
-    font-size: 1.8rem;
-    line-height: 1.4;
+
 }
 .panel_third_depth .common_table td p + p {
     margin-top: 12px;
 }
 
-.panel_third_depth .common_table.evaluation_table td{
-    text-align: left !important; 
+.panel_third_depth .common_table.type_01 td{
+    text-align: left; 
 }
+.panel_third_depth .common_table.type_02 td { text-align: left; }
 .panel_third_depth .common_table_sub {
     margin: 0 0 12px;
     color: #4095F5;
@@ -4567,59 +4789,56 @@ letter-spacing: -0.01em;
     display: flex;
     justify-content: center;
 }
+
 .fair_trade_standard_sections .common_table_scroll{padding:0;}
 .fair_trade_standard_sections .common_table thead th { text-align: center; }
-.fair_trade_standard_sections .common_table th{font-size: 1.6rem;line-height: 1.24;letter-spacing: 0;}
-.fair_trade_standard_sections .common_table th:first-child,
-.fair_trade_standard_sections .common_table td:first-child { width: 250px; }
-.fair_trade_standard_sections .common_table td:first-child{text-align: center;}
+.fair_trade_standard_sections .common_table th{padding:19px 10px !important;font-size: 1.6rem;line-height: 1.24;letter-spacing: 0;}
 .fair_trade_standard_sections .common_table td:not(:last-child){border-right: 1px solid #e5e5e9;}
-.fair_trade_standard_sections .common_table.appendix_partner_eval { width: 100%; table-layout: fixed; min-width: 1330px; }
-.fair_trade_standard_sections .common_table.appendix_partner_eval th,
-.fair_trade_standard_sections .common_table.appendix_partner_eval td { width: auto; }
-.fair_trade_standard_sections .common_table.appendix_new_product_eval { width: 100%; table-layout: fixed; min-width: 1330px; }
-.fair_trade_standard_sections .common_table.appendix_new_product_eval th,
-.fair_trade_standard_sections .common_table.appendix_new_product_eval td { width: auto; }
-.fair_trade_standard_sections .appendix_new_product_eval tbody td:nth-last-child(-n + 5) { text-align: center; }
-.panel_third_depth .fair_trade_standard_sections .appendix_new_product_eval.evaluation_table tbody td:nth-last-child(-n + 5) { text-align: center !important; }
-.panel_third_depth .fair_trade_standard_sections .appendix_new_product_priority.evaluation_table tbody td:first-child { text-align: center !important; }
-.fair_trade_standard_sections .appendix_partner_eval thead th:nth-child(2),
-.fair_trade_standard_sections .appendix_partner_eval thead th:nth-child(4) { border-right: 0; }
-.fair_trade_standard_sections .appendix_partner_eval thead th:nth-child(3),
-.fair_trade_standard_sections .appendix_partner_eval thead th:nth-child(5) { border-left: 0; }
-.fair_trade_standard_sections .appendix_partner_eval tbody tr:first-child td:nth-child(2),
-.fair_trade_standard_sections .appendix_partner_eval tbody tr:first-child td:nth-child(4),
-.fair_trade_standard_sections .appendix_partner_eval tbody tr:not(:first-child) td:nth-child(1),
-.fair_trade_standard_sections .appendix_partner_eval tbody tr:not(:first-child) td:nth-child(3) { border-right: 0; }
+.fair_trade_standard_sections .common_table.type_01 { table-layout: auto; min-width: 0; width: 100%; }
+.fair_trade_standard_sections .common_table.type_01 colgroup col { min-width: 0; }
+.fair_trade_standard_sections .common_table.type_01 th { overflow-wrap: break-word; word-break: keep-all; }
 
-.fair_trade_standard_sections .common_table td p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+.fair_trade_standard_sections .common_table.type_02 colgroup col { min-width: 0; }
+.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(1) { width: 250px; }
+.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(2) { width: 290px; }
+.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(3) { width: 290px; }
+.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(4) { width: 100px; }
+.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(5) { width: 100px; }
+.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(6) { width: 100px; }
+.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(7) { width: 100px; }
+.fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(8) { width: 100px; }
+.fair_trade_standard_sections .common_table.type_02 th { overflow-wrap: break-word; word-break: keep-all; }
+.fair_trade_standard_sections .common_table.type_02 tbody tr td:nth-last-child(-n+5) { text-align: center; }
+.fair_trade_standard_sections .common_table_scroll.common_table_scroll_type_02 { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
+
+.fair_trade_standard_sections .common_table td{padding:12px 24px;}
+/* .fair_trade_standard_sections .common_table td:first-child{text-align: center;} */
 .fair_trade_standard_sections .common_table td p.txt_warn { padding-left:12px; }
+.fair_trade_standard_sections .common_table td p.dot_txt { padding-left: 12px;  position: relative; }
+.fair_trade_standard_sections .common_table td p.dot_txt::before { width: 4px; height: 4px; margin: 0 8px 0 0; background-color: #161616; border-radius: 50%; display: inline-block; vertical-align: 0.45em;position:absolute; top: 10px; left: 0; content: ""; }
+.fair_trade_standard_sections .common_table td p.warn_txt { margin: 6px 0 0;  font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .fair_trade_standard_sections .common_table .common_num_list { margin: 0; padding: 0; list-style: none; counter-reset: common-cell-num; }
 .fair_trade_standard_sections .common_table .common_num_list > li { margin: 0; padding-left: 32px; position: relative; counter-increment: common-cell-num; }
 .fair_trade_standard_sections .common_table .common_num_list > li + li { margin-top: 8px; }
-.fair_trade_standard_sections .common_table .common_num_list > li::before { content: counter(common-cell-num); width: 20px; height: 20px; color: #161616; font-size: 12px; line-height: 1.2; border: 1px solid #161616; border-radius: 50%; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 2px; left: 0; box-sizing: border-box; }
-.fair_trade_standard_sections .common_table .common_num_list > li > p { margin: 0; color: #161616; font-size: 16px; line-height: 1.5; letter-spacing: -0.01em; }
-.fair_trade_standard_sections .list_cuation  {margin-top:16px;}
-/* 정도경영 > 제도 > 제보자 보호제도 (Figma 470:17701) */
-/* .base_list .gray_box {
-    margin-top: 24px;
-}
-.base_list .gray_box > strong {
-    color: #67676f;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    display: block;
-}
-.ba.base_list .gray_box > p {
-    margin-top: 16px;
-    color: #67676f;
-    font-size: 2rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-} */
+.fair_trade_standard_sections .common_table .common_num_list > li::before { content: counter(common-cell-num); width: 20px; height: 20px;  font-size: 12px; line-height: 1.2; border: 1px solid #161616; border-radius: 50%; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 2px; left: 0; box-sizing: border-box; }
 
+.fair_trade_standard_sections .common_table.type_01 colgroup col:first-child { width: 250px; min-width: 250px; max-width: 250px; }
+.fair_trade_standard_sections .common_table.type_01 colgroup col:not(:first-child) { width: auto; min-width: 0; }
+.fair_trade_partner_eval_mo { display: none; }
+.fair_trade_standard_sections .common_table.appendix_partner_eval { width: 100%; min-width: 0; table-layout: auto; }
+.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(1) { width: 250px; min-width: 0; max-width: 250px; }
+.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(2) { width: 390px; min-width: 0; }
+.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(3) { width: 150px; min-width: 0; }
+.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(4) { width: 390px; min-width: 0; }
+.fair_trade_standard_sections .common_table.appendix_partner_eval colgroup col:nth-child(5) { width: 150px; min-width: 0; }
+.fair_trade_standard_sections .common_table.appendix_partner_eval thead th:nth-child(2),
+.fair_trade_standard_sections .common_table.appendix_partner_eval thead th:nth-child(4) { border-right: 0; }
+.fair_trade_standard_sections .common_table.appendix_partner_eval thead th:nth-child(3),
+.fair_trade_standard_sections .common_table.appendix_partner_eval thead th:nth-child(5) { border-left: 0; }
+.fair_trade_standard_sections .common_table.appendix_partner_eval tbody tr:first-child td:nth-child(2),
+.fair_trade_standard_sections .common_table.appendix_partner_eval tbody tr:first-child td:nth-child(4),
+.fair_trade_standard_sections .common_table.appendix_partner_eval tbody tr:not(:first-child) td:nth-child(1),
+.fair_trade_standard_sections .common_table.appendix_partner_eval tbody tr:not(:first-child) td:nth-child(3) { border-right: 0; }
 /* 정도경영 > 제보 (Figma 474:29330) */
 .report_intro_desc {
     margin-bottom: 80px;
@@ -4681,13 +4900,10 @@ letter-spacing: -0.01em;
     margin-top: 24px;
 }
 .list_cuation {
-    margin-top: 20px;
-    color: #67676f;
-    font-size: 1.8rem;
-    line-height: 1.4;
+    margin-top: 16px;
 }
-.list_cuation > li > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
-
+/* .list_cuation > li > p { margin: 0;  } */
+.list_cuation li + li { margin-top:8px;}
 .list_cuation :deep(span){
     text-decoration: underline;
 }
@@ -4718,10 +4934,11 @@ letter-spacing: -0.01em;
     margin-top: 0;
 }
 @media screen and (max-width: 768px) {
-    .p_br{display:none;}
+    :deep(.p_br) { display: none }
+    :deep(.m_br) { display: inline }
     .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
-    .panel,
-    .panel_third_depth {padding-top: 48px;}
+    .panel{padding-top:60px;}
+    .panel_third_depth {padding-top: 32px;}
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
     .visual_sub { font-size: 2rem; }
@@ -4776,20 +4993,19 @@ letter-spacing: -0.01em;
     .signature_box dl > dd { margin-top: 2px; }
     .signature_box span { width: 100%; font-size: 1.4rem; line-height: 1.4; text-align: right; }
     .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li) {
-        flex: 0 0 auto;
-        min-width: 0;
+        flex: 1;
+        /* min-width: 0; */
     }
     .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li .item) {
         width: auto;
-        height: clamp(48px, 14.93vw, 56px);
-        padding: 0 clamp(12px, 4.27vw, 16px);
+        height: 48px;
+        padding: 12px 0;
         font-size: 1.4rem;
         line-height: 1.43;
     }
 
     .base_item .gray_box {
         padding: 40px 24px;
-        /* padding: clamp(24px, 6.4vw, 40px) clamp(16px, 5.33vw, 24px); */
     }
     .base_item .gray_box .process_flow {
         flex-direction: column;
@@ -4808,6 +5024,7 @@ letter-spacing: -0.01em;
     .cp_manager_banner > figcaption > p { font-size: 1.6rem; }
     .cp_manager_banner > figcaption > p + p { margin-top: 12px; font-size: 1.6rem; }
     .cp_manager_banner + p{margin-top:40px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    
     .panel_third_depth .common_table th,
     .panel_third_depth .common_table td {
         padding: 16px 12px;
@@ -4817,6 +5034,8 @@ letter-spacing: -0.01em;
     }
     .panel_third_depth .common_table td p {
         font-size: 1.6rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
     }
     .panel_third_depth .common_table_sub {
         font-size: 1.4rem;
@@ -4864,12 +5083,41 @@ letter-spacing: -0.01em;
     .report_channel_body .button_area {
         margin-top: 16px;
     }
-    .list_cuation {
-        margin-top: 16px;
-        font-size: 1.4rem;
-    }
+    .fair_trade_standard_sections .common_table td{padding:12px 10px;}
+    .fair_trade_standard_sections .common_table td p.warn_txt { padding-left: 12px; }
 
-   
+    .fair_trade_standard_sections .common_table.type_01 colgroup col:first-child { width: 100px ; min-width: 100px; max-width: 100px; }
+    .fair_trade_standard_sections .common_table.type_01 colgroup col:not(:first-child) { width: auto ; min-width: 0; }
+    .fair_trade_standard_sections .fair_trade_partner_eval_pc { display: none !important; }
+    .fair_trade_standard_sections .fair_trade_partner_eval_mo { display: table; width: 100%; min-width: 0; table-layout: auto; }
+    .fair_trade_standard_sections .appendix_partner_eval_mo.type_01 colgroup col:nth-child(1) { width: 50px !important; min-width: 50px !important; max-width: 50px !important; }
+    .fair_trade_standard_sections .appendix_partner_eval_mo.type_01 colgroup col:nth-child(2) { width: 165px !important; min-width: 0; }
+    .fair_trade_standard_sections .appendix_partner_eval_mo.type_01 colgroup col:nth-child(3) { width: 80px !important; min-width: 80px !important; max-width: 80px !important; }
+    .fair_trade_standard_sections .appendix_partner_eval_mo td .appendix_partner_eval_mo_lead { margin: 0; line-height: 1.15; text-align: center; letter-spacing: 0; }
+    /* .fair_trade_standard_sections .common_table.type_01 th:first-child,
+    .fair_trade_standard_sections .common_table.type_01 td:first-child { width: 100px; min-width: 100px; max-width: 100px; } */
+    .list_cuation {
+        margin-top: 8px;
+       
+    }
+    /* .fair_trade_work_standard_sec :deep(dd.acc_panel) { padding: 0 20px; } */
+    .fair_trade_work_standard_sec :deep(.acc_panel_inner) { padding: 16px 20px 24px; }
+    .fair_trade_work_standard_sec :deep(dd+ dt){border-top:0;}
+    .fair_trade_standard_sections > li > article{gap:16px;}
+    .fair_trade_standard_sections > li > article > h4{font-size: 1.6rem; line-height: 1.24; letter-spacing: 0;}
+    /* .fair_trade_standard_sections .common_table td:not(:first-child){vertical-align: top;} */
+    .fair_trade_standard_sections .common_table .common_num_list > li{padding-left:26px;}
+    .panel_third_depth .common_table td p + p{margin-top:6px;}
+
+    .fair_trade_standard_sections .common_table td p.dot_txt { margin: 0;  position: relative; padding-left: 8px;}
+    .fair_trade_standard_sections .common_table td p.dot_txt::before { width: 2px; height: 2px; margin: 0 6px 0 0; background-color: #161616; display: inline-block; vertical-align: 0.45em;position:absolute; top: 10px; left: 0; content: ""; }
+    .fair_trade_standard_sections .common_table.type_02 { table-layout: fixed; min-width: 695px; width: max-content; }
+    .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(1) { width: 50px; min-width: 50px; max-width: 50px; }
+    .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(2) { width: 90px; min-width: 90px; max-width: 90px; }
+    .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(3) { width: 155px; min-width: 155px; max-width: 155px; }
+    .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(4), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(5), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(6), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(7), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(8) { width: 80px; min-width: 80px; max-width: 80px; }
+    .fair_trade_standard_sections .common_table td.txt_verticle { vertical-align: middle; text-align: center; }
+    .fair_trade_standard_sections .common_table td.txt_verticle > p{  text-align: center; display: inline-block; writing-mode: vertical-rl; text-orientation: upright; }
 }
 </style>
 
