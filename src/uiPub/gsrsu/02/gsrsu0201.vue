@@ -155,7 +155,12 @@
                                         <li><strong>{{ t.GreenProduct.guideline.num4 }}</strong> <span>{{ t.GreenProduct.guideline.txt4 }}</span></li>
                                     </ul>
                                     <div class="ac">
-                                        <Buttons btn-class="btn_icon btn_xl border after">{{ t.GreenProduct.guideline.btn_txt }}</Buttons>
+                                        <Buttons btn-class="btn_icon btn_xl border after" 
+                                            @click="openModal" 
+                                            data-popid="gsrsu02010301" 
+                                            data-type="mid" 
+                                            data-cont="gsrsu02010301"
+                                        >{{ t.GreenProduct.guideline.btn_txt }}</Buttons>
                                     </div>
                                 </div>
                                 
@@ -194,12 +199,17 @@
                 </div>
             </div>
         </section>
+
+        <div id="gsrsu02010301" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
     </div>
 </template>
 
 <script>
 import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
+import modal from "@/assets/js/modal";
 
 export default {
     name: "gsrsu0201",
@@ -369,6 +379,15 @@ export default {
             this.CTabIdx = idx;
             this.InnerTabIdx = 0;
         }
+    },
+    methods: {
+        openModal(event) {
+            const el = event.currentTarget;
+            const popId = el.dataset.popid;
+            const type = el.dataset.type || "default";
+            const cont = el.dataset.cont;
+            modal.open(popId, type, el, cont);
+        },
     }
 };
 </script>
@@ -517,5 +536,6 @@ figure img { width: 100%; height: 100%; object-fit: cover; }
     .green_product h4 { font-size: 24px !important; }
     .green_product p { font-size: 16px !important; }
     .green_product > ul > li:last-of-type, .green_product li.two_divide {margin-top:40px;}
+    .modal_wrap .modal_container {padding:20px;}
 }
 </style>
