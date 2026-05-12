@@ -216,10 +216,19 @@ div.cont_inner {padding-top:200px}
 
 /* Benefits */
 .benefit_row { display: flex; gap: 20px; padding-bottom: 64px; border-bottom: 1px solid #e5e5e9; }
-.benefit_row.mt64 { border-bottom: 0; padding-bottom: 0; margin-top: 64px; }
+.benefit_row + .benefit_row { border-bottom: 0; padding-bottom: 0; margin-top: 64px; }
+/* .benefit_row.mt64 { border-bottom: 0; padding-bottom: 0; margin-top: 64px; } */
 .benefit_item { flex: 1; display: flex; gap: 24px; align-items: flex-start; }
 .info {padding-left:104px; position:relative;}
-.info::before {content:''; width:80px; height:80px; background:red; position:absolute; top:0; left:0; display:block;}
+/* 26.05.12 Edit 이종환 */
+.info::before {content:''; width:80px; height:80px; background:#F2F2F4; border-radius:50%; position:absolute; top:0; left:0; display:block;}
+.info::after {width:40px; height:40px; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat; background-size:auto 415px; content:''; position:absolute; top:20px; left:20px; display:block;}
+
+.benefit_row .benefit_item:nth-child(1) .info:after {background-position:-340px -346px;}
+.benefit_row .benefit_item:nth-child(2) .info:after {background-position:-420px -346px;}
+.benefit_row + .benefit_row .benefit_item:nth-child(1) .info:after {background-position:-500px -346px;}
+.benefit_row + .benefit_row .benefit_item:nth-child(2) .info:after {background-position:-20px -346px;}
+/* //26.05.12 Edit 이종환 */
 .info .point_color { color: #107af2; font-size: 28px; font-weight: 700; display: block; margin-bottom: 4px; }
 .info .tit { font-size: 28px; font-weight: 700; color: #161616; display: block; margin-bottom: 16px; }
 .info .desc { font-size: 20px; font-weight: 700; color: #67676b; line-height: 1.35; margin-bottom: 16px; }
@@ -282,10 +291,12 @@ div.cont_inner {padding-top:200px}
     .info {padding-left:76px;}
     .info .tit {font-size:18px;}
     .info::before {width:60px; height:60px;}
+    .info::after {width:32px; height:32px; background-image:url('@/assets/images/sub/icon_cont_32.png'); top:14px; left:14px;}
     .point_color, .point_color + p, .info .desc, .bullet_01 li, .brand_sub_txt {font-size:16px !important;}
     :deep(.point_color) + p br {display:none;}
     .benefit_row {padding-bottom:0; border-bottom:0; gap:40px}
-    .benefit_row.mt64 {margin-top:40px;}
+    .benefit_row + .benefit_row {margin-top:40px;}
+    /* .benefit_row.mt64 {margin-top:40px;} */
     h3 { font-size: 24px; margin-bottom: 30px; }
     .unit_img { height: 280px; }
     .unit_info + img {width:50%; margin:0 auto;}

@@ -164,16 +164,17 @@
                         </div>
                     </div>
 
+                    <!-- 26.05.12 Edit 이종환 : 공통화 작업으로 소스 수정 -->
                     <div class="notice_section mt100">
-                        <div class="policy_wrap mb40">
-                            <h5>{{ t.Notice.title }}</h5>
+                        <div class="policy_wrap">
+                            <strong class="tit">{{ t.Notice.title }}</strong>
                             <ul class="bullet_01">
                                 <li v-for="(n, idx) in t.Notice.list" :key="idx" v-html="n"></li>
                             </ul>
                         </div>
                         
                         <div class="policy_wrap">
-                            <h5>{{ t.NoticeBrand.title }}</h5>
+                            <strong class="tit">{{ t.NoticeBrand.title }}</strong>
                             <dl v-for="(brand, bIdx) in t.NoticeBrand.brands" :key="bIdx">
                                 <dt class="brand_name">{{ brand.name }}</dt>
                                 <dd>
@@ -198,6 +199,7 @@
                             >{{ t.CommonLabels.nonMemberBtn }}</Buttons>
                         </div>
                     </div>
+                    <!-- //26.05.12 Edit 이종환 : 공통화 작업으로 소스 수정 -->
 
                     <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
                     <div class="bottom_btns">
@@ -414,24 +416,24 @@ h4 {color:#161616; font-size:32px; font-weight:700;}
 
 /* Buttons */
 .btn_wrap {width:100%;}
+/* ui.css로 이동
 .notice_section { padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
 .notice_section .bullet_01 {margin-top:24px;}
 .notice_section .bullet_01 li {color:#67676F; font-size:18px;}
-h5 {padding-left:34px; color: #161616; font-size: 24px; font-weight:700; position:relative; }
+.notice_section .tit {padding-left:34px; color: #161616; font-size: 24px; font-weight:700; position:relative; }
 h5::before {content:''; width:24px; height:24px; background:red; display:inline-flex; position:absolute; top:50%; left:0; transform: translateY(-50%);}
 h5 + dl {margin-top:24px;}
 .brand_name {color:#161616; font-size:20px !important; font-weight:700;}
 .notice_section .policy_wrap {padding-bottom:40px; border-bottom:1px solid #D7D7DF;}
+*/
 
 /* Bottom Buttons */
-.btn_list_back { background: transparent; padding: 0; border: 0; cursor: pointer; }
-.btn_list_back span { color: #161616; font-size: 20px; display: flex; align-items: center; gap: 12px; }
-.btn_list_back span::before { width: 16px; height: 16px; background-color: red; content: ''; display: inline-block; }
 .btn_mid.border {display:none;}
 .bottom_btns + .btn_big.border {display:none;}
+.sub_btn_group {padding:0;}
 .sub_btn_group button {margin-right:24px; padding:6px 4px; color:#161616; font-size:14px; background:transparent; display:flex; align-items:center; gap:8px;}
 .sub_btn_group button:last-of-type {margin-right:0;}
-.sub_btn_group button::after {content:''; width:16px; height:16px; background:red; display:inline-flex;}
+.sub_btn_group button::after {content:''; width:16px; height:16px; background:url('@/assets/images/common/icon_set_16.png') -856px -14px no-repeat; display:inline-flex;}
 
 /* Utils */
 .ac { text-align: center; }
@@ -454,11 +456,10 @@ h5 + dl {margin-top:24px;}
 
 @media screen and (max-width: 767px) {
     .text_box span { font-size:28px; text-align: center; }
-    .modal_wrap .modal_container {padding:20px;}
     h4 {font-size:24px;}
     .group_desc {font-size:16px;}
     .cont_inner {padding: 0 20px; }
-    .notice_section {padding:32px;}
+    /* .notice_section {padding:32px;} */
     .note_box .note_title {font-size:18px;}
     .note_box .note_desc {font-size:16px; line-height:1.5;}
     .note_box .note_img {max-width:100%;}

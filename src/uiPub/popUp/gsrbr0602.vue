@@ -92,7 +92,10 @@
                     </dd>
                 </dl>
             </div>
-            <div class="btn-wrap">
+        </div>
+
+        <div class="modal_bottom right">
+            <div class="btnBox">
                 <Buttons btn-class="btn_big primary" @click="closeModal">확인</Buttons>
             </div>
         </div>
@@ -203,9 +206,6 @@ export default {
 .table_scroll_area { width: 100%; overflow-x: visible; }
 
 /* 모달 레이아웃 */
-.modal_cont { background-color: #fff;}
-.modal_header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 40px; font-size: 40px; font-weight: 700; border-bottom: 0; }
-.modal_content { max-height: 700px; overflow-y: auto; padding-right: 10px; }
 h3 { font-size: 32px; font-weight: 700; }
 .flex_between { display: flex; justify-content: space-between; align-items: center; }
 .select_group { display: flex; gap: 8px; }
@@ -213,7 +213,6 @@ h3 { font-size: 32px; font-weight: 700; }
 .width_260 { width: 260px; }
 p {margin-top:4px; font-size:18px; color: #fb6432 !important; }
 .btn-wrap {display:flex; justify-content:flex-end;}
-.btn_big.primary {margin-top:32px; padding:14px 50px;}
 
 /* 반응형 */
 @media screen and (max-width: 1024px) { 
@@ -222,7 +221,6 @@ p {margin-top:4px; font-size:18px; color: #fb6432 !important; }
 }
 
 @media screen and (max-width: 767px) {
-    .modal_header {font-size:18px;}
     h3 {font-size:24px;}
     .policy_wrap > dl > dt {font-size:20px;}
     .policy_wrap > dl > dd > dl > dd span, .policy_wrap > dl > dd > dl > dd > ul > li, p, .desc {font-size:16px; }
