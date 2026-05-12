@@ -735,131 +735,136 @@
                                                             </ol>
                                                             <p v-if="section.appendixTitle" class="fair_trade_work_standard_desc">{{ section.appendixTitle }}</p>
                                                             <div v-if="section.commonTables">
-                                                                <div v-for="(tbl, tIdx) in section.commonTables" :key="'tv-common-table-' + section.no + '-' + tIdx" class="common_table_scroll" :class="{ common_table_scroll_type_02: tbl.tableClass === 'type_02' }" :data-node-id="tbl.tableClass === 'type_02' ? '674:44720' : undefined">
-                                                                    <p v-if="tbl.appendixTitle" class="fair_trade_work_standard_desc">{{ tbl.appendixTitle }}</p>
-                                                                    <table :class="getFairTradeCommonTableClassArray(tbl)">
-                                                                        <colgroup v-if="getCommonTableColGroupCount(tbl) > 0">
-                                                                            <col
-                                                                                v-for="n in getCommonTableColGroupCount(tbl)"
-                                                                                :key="'tv-col-' + section.no + '-' + tIdx + '-' + (n - 1)"
-                                                                                :style="getCommonTableColWidthStyle(tbl, n - 1)"
-                                                                            />
-                                                                        </colgroup>
-                                                                        <thead>
-                                                                            <template v-if="tbl.theadRows && tbl.theadRows.length">
-                                                                                <tr v-for="(hRow, hRidx) in tbl.theadRows" :key="'tv-thead-' + section.no + '-' + tIdx + '-' + hRidx">
-                                                                                    <th
-                                                                                        v-for="(hCell, hCidx) in hRow"
-                                                                                        :key="'tv-thead-cell-' + section.no + '-' + tIdx + '-' + hRidx + '-' + hCidx"
-                                                                                        scope="col"
-                                                                                        :rowspan="getCommonTableRowspan(hCell)"
-                                                                                        :colspan="getCommonTableColspan(hCell)"
-                                                                                    >
-                                                                                        <template v-if="typeof hCell === 'object' && hCell && !Array.isArray(hCell)">
-                                                                                            <span v-if="hCell.html != null && hCell.html !== ''" v-html="hCell.html"></span>
-                                                                                            <template v-else>{{ hCell.label !== undefined ? hCell.label : "" }}</template>
-                                                                                        </template>
-                                                                                        <template v-else>{{ hCell }}</template>
-                                                                                    </th>
-                                                                                </tr>
-                                                                            </template>
-                                                                            <tr v-else-if="tbl.cols && tbl.cols.length">
-                                                                                <th
-                                                                                    v-for="(col, colIdx) in tbl.cols"
-                                                                                    :key="'tv-common-col-' + section.no + '-' + tIdx + '-' + colIdx"
-                                                                                    scope="col"
-                                                                                    :rowspan="getCommonTableRowspan(col)"
-                                                                                    :colspan="getCommonTableColspan(col) !== undefined ? getCommonTableColspan(col) : (typeof col === 'object' && col && col.colspan ? col.colspan : undefined)"
-                                                                                >
-                                                                                    <template v-if="typeof col === 'object' && col && !Array.isArray(col)">
-                                                                                        <span v-if="col.html != null && col.html !== ''" v-html="col.html"></span>
-                                                                                        <template v-else>{{ col.label !== undefined ? col.label : "" }}</template>
+                                                                <template v-for="(tbl, tIdx) in section.commonTables" :key="'tv-common-table-' + section.no + '-' + tIdx">
+                                                                    <div class="table_wrap">
+                                                                        <p v-if="tbl.appendixTitle" class="fair_trade_work_standard_desc">{{ tbl.appendixTitle }}</p>
+                                                                        <div class="common_table_scroll" :class="{ common_table_scroll_type_02: tbl.tableClass === 'type_02' }" :data-node-id="tbl.tableClass === 'type_02' ? '674:44720' : undefined">
+                                                                            <table :class="getFairTradeCommonTableClassArray(tbl)">
+                                                                                <colgroup v-if="getCommonTableColGroupCount(tbl) > 0">
+                                                                                    <col
+                                                                                        v-for="n in getCommonTableColGroupCount(tbl)"
+                                                                                        :key="'tv-col-' + section.no + '-' + tIdx + '-' + (n - 1)"
+                                                                                        :style="getCommonTableColWidthStyle(tbl, n - 1)"
+                                                                                    />
+                                                                                </colgroup>
+                                                                                <thead>
+                                                                                    <template v-if="tbl.theadRows && tbl.theadRows.length">
+                                                                                        <tr v-for="(hRow, hRidx) in tbl.theadRows" :key="'tv-thead-' + section.no + '-' + tIdx + '-' + hRidx">
+                                                                                            <th
+                                                                                                v-for="(hCell, hCidx) in hRow"
+                                                                                                :key="'tv-thead-cell-' + section.no + '-' + tIdx + '-' + hRidx + '-' + hCidx"
+                                                                                                scope="col"
+                                                                                                :rowspan="getCommonTableRowspan(hCell)"
+                                                                                                :colspan="getCommonTableColspan(hCell)"
+                                                                                            >
+                                                                                                <template v-if="typeof hCell === 'object' && hCell && !Array.isArray(hCell)">
+                                                                                                    <span v-if="hCell.html != null && hCell.html !== ''" v-html="hCell.html"></span>
+                                                                                                    <template v-else>{{ hCell.label !== undefined ? hCell.label : "" }}</template>
+                                                                                                </template>
+                                                                                                <template v-else>{{ hCell }}</template>
+                                                                                            </th>
+                                                                                        </tr>
                                                                                     </template>
-                                                                                    <template v-else>{{ col }}</template>
-                                                                                </th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr v-for="(row, rIdx) in tbl.rows" :key="'tv-common-row-' + section.no + '-' + tIdx + '-' + rIdx">
-                                                                                <td
-                                                                                    v-for="(cell, cIdx) in row"
-                                                                                    :key="'tv-common-cell-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx"
-                                                                                    :rowspan="getCommonTableRowspan(cell)"
-                                                                                    :colspan="getCommonTableColspan(cell)"
-                                                                                    :style="getCommonTableCellTdStyle(cell)"
-                                                                                    :class="{ txt_verticle: typeof cell === 'object' && cell && cell.txt_verticle === true }"
-                                                                                >
-                                                                                    <template v-if="Array.isArray(cell)">
-                                                                                        <template v-for="(line, pIdx) in cell" :key="'tv-common-line-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + pIdx">
-                                                                                            <p v-if="tableCellLineHasLeadMark(line)" :class="{ txt_warn: pIdx === 1, dot_txt: true }">{{ stripTableCellLeadMarkPlain(line) }}</p>
-                                                                                            <p v-else :class="{ txt_warn: pIdx === 1, warn_txt: tableCellLineHasWarnTxt(line) }" v-html="line"></p>
-                                                                                        </template>
-                                                                                    </template>
-                                                                                    <template v-else-if="isCommonTableMergedMetaCell(cell)">
-                                                                                        <p v-html="cell.html !== undefined ? cell.html : cell.label"></p>
-                                                                                    </template>
-                                                                                    <template v-else-if="isCommonTableStyledTextCell(cell)">
-                                                                                        <p v-if="cell.html != null && cell.html !== ''" v-html="cell.html"></p>
-                                                                                        <template v-else>{{ cell.label }}</template>
-                                                                                    </template>
-                                                                                    <template v-else-if="typeof cell === 'object' && cell && cell.numList">
-                                                                                        <ul class="common_num_list">
-                                                                                            <li v-for="(text, nIdx) in cell.numList" :key="'tv-common-num-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + nIdx">
-                                                                                                <p v-html="text"></p>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </template>
-                                                                                    <template v-else-if="getTableCellBulletParagraphs(cell)">
-                                                                                        <p
-                                                                                            v-for="(seg, sIdx) in getTableCellBulletParagraphs(cell)"
-                                                                                            :key="'tv-common-bull-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + sIdx"
-                                                                                            :class="{ dot_txt: seg.bullet, warn_txt: seg.warn }"
-                                                                                            v-html="seg.html"
-                                                                                        ></p>
-                                                                                    </template>
-                                                                                    <p v-else v-html="cell"></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <table
-                                                                        v-if="isAppendixPartnerEvalTable(tbl)"
-                                                                        class="common_table type_01 appendix_partner_eval_mo fair_trade_partner_eval_mo"
-                                                                    >
-                                                                        <colgroup>
-                                                                            <col style="width: 50px" />
-                                                                            <col style="width: 165px" />
-                                                                            <col style="width: 80px" />
-                                                                        </colgroup>
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th v-for="(mh, mhIdx) in appendixPartnerEvalMobileHeadLabels(tbl)" :key="'tv-mo-h-' + section.no + '-' + tIdx + '-' + mhIdx" scope="col">{{ mh }}</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr v-for="(trCells, trIdx) in appendixPartnerEvalMobileTrDescriptors(tbl)" :key="'tv-mo-tr-' + section.no + '-' + tIdx + '-' + trIdx">
-                                                                                <td
-                                                                                    v-for="(tdDef, tdIdx) in trCells"
-                                                                                    :key="'tv-mo-td-' + section.no + '-' + tIdx + '-' + trIdx + '-' + tdIdx"
-                                                                                    :rowspan="tdDef.rowspan"
-                                                                                    :style="tdDef.style"
-                                                                                    :class="{ txt_verticle: tdDef.lead && tdDef.cell && tdDef.cell.txt_verticle === true }"
-                                                                                >
-                                                                                    <template v-if="tdDef.lead">
-                                                                                        <p class="appendix_partner_eval_mo_lead" v-html="appendixPartnerEvalMoLeadMobileHtml(tdDef.cell)"></p>
-                                                                                    </template>
-                                                                                    <template v-else-if="typeof tdDef.cell === 'object' && tdDef.cell && tdDef.cell.html">
-                                                                                        <p v-html="tdDef.cell.html"></p>
-                                                                                    </template>
-                                                                                    <template v-else-if="typeof tdDef.cell === 'object' && tdDef.cell && tdDef.cell.label !== undefined">
-                                                                                        {{ tdDef.cell.label }}
-                                                                                    </template>
-                                                                                    <p v-else>{{ tdDef.cell }}</p>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
+                                                                                    <tr v-else-if="tbl.cols && tbl.cols.length">
+                                                                                        <th
+                                                                                            v-for="(col, colIdx) in tbl.cols"
+                                                                                            :key="'tv-common-col-' + section.no + '-' + tIdx + '-' + colIdx"
+                                                                                            scope="col"
+                                                                                            :rowspan="getCommonTableRowspan(col)"
+                                                                                            :colspan="getCommonTableColspan(col) !== undefined ? getCommonTableColspan(col) : (typeof col === 'object' && col && col.colspan ? col.colspan : undefined)"
+                                                                                        >
+                                                                                            <template v-if="typeof col === 'object' && col && !Array.isArray(col)">
+                                                                                                <span v-if="col.html != null && col.html !== ''" v-html="col.html"></span>
+                                                                                                <template v-else>{{ col.label !== undefined ? col.label : "" }}</template>
+                                                                                            </template>
+                                                                                            <template v-else>{{ col }}</template>
+                                                                                        </th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr v-for="(row, rIdx) in tbl.rows" :key="'tv-common-row-' + section.no + '-' + tIdx + '-' + rIdx">
+                                                                                        <td
+                                                                                            v-for="(cell, cIdx) in row"
+                                                                                            :key="'tv-common-cell-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx"
+                                                                                            :rowspan="getCommonTableRowspan(cell)"
+                                                                                            :colspan="getCommonTableColspan(cell)"
+                                                                                            :style="getCommonTableCellTdStyle(cell)"
+                                                                                            :class="{ txt_verticle: typeof cell === 'object' && cell && cell.txt_verticle === true }"
+                                                                                        >
+                                                                                            <template v-if="Array.isArray(cell)">
+                                                                                                <template v-for="(line, pIdx) in cell" :key="'tv-common-line-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + pIdx">
+                                                                                                    <p v-if="tableCellLineHasLeadMark(line)" :class="{ txt_warn: pIdx === 1, dot_txt: true }">{{ stripTableCellLeadMarkPlain(line) }}</p>
+                                                                                                    <p v-else :class="{ txt_warn: pIdx === 1, warn_txt: tableCellLineHasWarnTxt(line) }" v-html="line"></p>
+                                                                                                </template>
+                                                                                            </template>
+                                                                                            <template v-else-if="isCommonTableMergedMetaCell(cell)">
+                                                                                                <p v-html="cell.html !== undefined ? cell.html : cell.label"></p>
+                                                                                            </template>
+                                                                                            <template v-else-if="isCommonTableStyledTextCell(cell)">
+                                                                                                <p v-if="cell.html != null && cell.html !== ''" v-html="cell.html"></p>
+                                                                                                <template v-else>{{ cell.label }}</template>
+                                                                                            </template>
+                                                                                            <template v-else-if="typeof cell === 'object' && cell && cell.numList">
+                                                                                                <ul class="common_num_list">
+                                                                                                    <li v-for="(text, nIdx) in cell.numList" :key="'tv-common-num-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + nIdx">
+                                                                                                        <p v-html="text"></p>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </template>
+                                                                                            <template v-else-if="getTableCellBulletParagraphs(cell)">
+                                                                                                <p
+                                                                                                    v-for="(seg, sIdx) in getTableCellBulletParagraphs(cell)"
+                                                                                                    :key="'tv-common-bull-' + section.no + '-' + tIdx + '-' + rIdx + '-' + cIdx + '-' + sIdx"
+                                                                                                    :class="{ dot_txt: seg.bullet, warn_txt: seg.warn }"
+                                                                                                    v-html="seg.html"
+                                                                                                ></p>
+                                                                                            </template>
+                                                                                            <p v-else v-html="cell"></p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                            <table
+                                                                                v-if="isAppendixPartnerEvalTable(tbl)"
+                                                                                class="common_table type_01 appendix_partner_eval_mo fair_trade_partner_eval_mo"
+                                                                            >
+                                                                                <colgroup>
+                                                                                    <col style="width: 50px" />
+                                                                                    <col style="width: 165px" />
+                                                                                    <col style="width: 80px" />
+                                                                                </colgroup>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th v-for="(mh, mhIdx) in appendixPartnerEvalMobileHeadLabels(tbl)" :key="'tv-mo-h-' + section.no + '-' + tIdx + '-' + mhIdx" scope="col">{{ mh }}</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr v-for="(trCells, trIdx) in appendixPartnerEvalMobileTrDescriptors(tbl)" :key="'tv-mo-tr-' + section.no + '-' + tIdx + '-' + trIdx">
+                                                                                        <td
+                                                                                            v-for="(tdDef, tdIdx) in trCells"
+                                                                                            :key="'tv-mo-td-' + section.no + '-' + tIdx + '-' + trIdx + '-' + tdIdx"
+                                                                                            :rowspan="tdDef.rowspan"
+                                                                                            :style="tdDef.style"
+                                                                                            :class="{ txt_verticle: tdDef.lead && tdDef.cell && tdDef.cell.txt_verticle === true }"
+                                                                                        >
+                                                                                            <template v-if="tdDef.lead">
+                                                                                                <p class="appendix_partner_eval_mo_lead" v-html="appendixPartnerEvalMoLeadMobileHtml(tdDef.cell)"></p>
+                                                                                            </template>
+                                                                                            <template v-else-if="typeof tdDef.cell === 'object' && tdDef.cell && tdDef.cell.html">
+                                                                                                <p v-html="tdDef.cell.html"></p>
+                                                                                            </template>
+                                                                                            <template v-else-if="typeof tdDef.cell === 'object' && tdDef.cell && tdDef.cell.label !== undefined">
+                                                                                                {{ tdDef.cell.label }}
+                                                                                            </template>
+                                                                                            <p v-else>{{ tdDef.cell }}</p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </template>
                                                                 <ul v-if="section.cautionItems" class="list_cuation">
                                                                     <li v-for="(notice, nIdx) in section.cautionItems" :key="'tv-caution-' + section.no + '-' + nIdx">
                                                                         <p v-html="notice"></p>
@@ -2405,7 +2410,7 @@ const langData = {
                             "신용등급",
                         ],
                         rows: [
-                            [{ html: "TV홈쇼핑<br  class='p_br'/>협력사", rowspan: 10, style:"text-align: center !important;", txt_verticle: true }, "디지털기기/핸드폰", "B", "스포츠/레저/자동차용품", "CCC"],
+                            [{ html: '<span class="p_txt">TV홈쇼핑<br class="p_br" />협력사</span><span class="m_txt">TV홈쇼핑협력사</span>', rowspan: 10, style:"text-align: center !important;", txt_verticle: true }, "디지털기기/핸드폰", "B", "스포츠/레저/자동차용품", "CCC"],
                             ["컴퓨터/게임기/소프트웨어", "B", "가구/인테리어", "CCC"],
                             ["대형가전", "B", "의류", "CCC"],
                             ["생활/소형가전", "B", "패션잡화", "CCC"],
@@ -2430,7 +2435,7 @@ const langData = {
                             ["5점", "4점", "3점", "2점", "1점"],
                         ],
                         rows: [
-                            [{ html: "내부 평가단", rowspan: 8, style:"text-align: center !important;", txt_verticle: true }, { html: "PD", rowspan: 2 }, "소구 포인트 차별성", "우수", "양호", "보통", "미흡", "불량"],
+                            [{ html: '<span class="p_txt">내부 평가단</span><span class="m_txt">내부평가단</span>', rowspan: 8, style:"text-align: center !important;", txt_verticle: true }, { html: "PD", rowspan: 2 }, "소구 포인트 차별성", "우수", "양호", "보통", "미흡", "불량"],
                             ["상품 판매력", "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "품질안전", rowspan: 2 }, "관련 법 적합성", "우수", "양호", "보통", "미흡", "불량"],
                             ["사용 안전성", "우수", "양호", "보통", "미흡", "불량"],
@@ -2438,7 +2443,7 @@ const langData = {
                             ["대외 이슈 여부 (낮은 Risk)", "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "상품전략", rowspan: 2 }, "가격 경쟁력", "우수", "양호", "보통", "미흡", "불량"],
                             ["수수료율 적절성", "우수", "양호", "보통", "미흡", "불량"],
-                            [{ html: "외부 평가단", rowspan: 5, style:"text-align: center !important;", txt_verticle: true }, { html: "디자인 우수성", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
+                            [{ html: '<span class="p_txt">외부 평가단</span><span class="m_txt">외부평가단</span>', rowspan: 5, style:"text-align: center !important;", txt_verticle: true }, { html: "디자인 우수성", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "구매 의사", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "가격 경쟁력", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
                             [{ html: "기능성", colspan: 2 }, "우수", "양호", "보통", "미흡", "불량"],
@@ -2448,7 +2453,6 @@ const langData = {
                     {
                         appendixTitle: "[별표3] 신상품 우선 선정 기준 (제7조 제2항 관련)",
                         tableClass: "appendix_new_product_priority",
-                        colgroupWidths: [250, 540, 540],
                         cols: [
                             "평가내용",
                             { label: "세부 평가 기준", colspan: 2 },
@@ -2633,7 +2637,7 @@ const langData = {
                             "신용등급",
                         ],
                         rows: [
-                            [{ html: 'TV홈쇼핑<br class="p_br" />협력사', rowspan: 10, style:"text-align: center !important;", txt_verticle: true }, "디지털기기/핸드폰", "B", "스포츠/레저/자동차용품", "CCC"],
+                            [{ html: '<span class="p_txt">TV홈쇼핑<br class="p_br" />협력사</span><span class="m_txt">TV홈쇼핑협력사</span>', rowspan: 10, style:"text-align: center !important;", txt_verticle: true }, "디지털기기/핸드폰", "B", "스포츠/레저/자동차용품", "CCC"],
                             ["컴퓨터/게임기/소프트웨어", "B", "가구/인테리어", "CCC"],
                             ["대형가전", "B", "의류", "CCC"],
                             ["생활/소형가전", "B", "패션잡화", "CCC"],
@@ -4390,7 +4394,6 @@ section + section{padding-top:120px;}
 .fair_trade_standard_dl > dd > ul{padding-left:24px;}
 .fair_trade_standard_dl > dd > ul > li > ul{padding-left:24px;}
 .fair_trade_standard_dl > dd > p { margin: 0; }
-.fair_trade_work_standard_desc{margin-bottom:16px;}
 .fair_trade_standard_desc_list { margin: 0; padding: 0; }
 .fair_trade_standard_desc_list > li { list-style: none;  }
 /* 준법경영 > 자율준수 관리자 선임절차: width=height clamp로 원형 고정(PC~태블릿), 768 이하 세로 */
@@ -4548,7 +4551,7 @@ line-height: 1.24;
     .fair_trade_standard_sections > li > article > h4 { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
     .fair_trade_standard_body { padding-left: 0; }
     .fair_trade_standard_body { gap: 20px; }
-    .fair_trade_standard_body p { margin: 0; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .fair_trade_standard_body p {margin-bottom: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .fair_trade_standard_body > p + ul {margin-top:16px;}
     .fair_trade_standard_sections > li > article.gray_box { padding: 20px; }
     .fair_trade_standard_sections > li > article.gray_box p { font-size: 1.2rem; line-height: 1.2;  }
@@ -4711,9 +4714,11 @@ letter-spacing: -0.01em;
 
 
 }
+.panel_third_depth .table_wrap{
+    margin-top: 24px;
+}
 .panel_third_depth .common_table_scroll {
     width: 100%;
-    margin-top: 16px;
     padding: 0 20px;
     min-width: 0;
     overflow-x: visible;
@@ -4792,6 +4797,7 @@ letter-spacing: -0.01em;
 
 .fair_trade_standard_sections .common_table_scroll{padding:0;}
 .fair_trade_standard_sections .common_table thead th { text-align: center; }
+.fair_trade_standard_sections :deep(.m_txt) { display: none; }
 .fair_trade_standard_sections .common_table th{padding:19px 10px !important;font-size: 1.6rem;line-height: 1.24;letter-spacing: 0;}
 .fair_trade_standard_sections .common_table td:not(:last-child){border-right: 1px solid #e5e5e9;}
 .fair_trade_standard_sections .common_table.type_01 { table-layout: auto; min-width: 0; width: 100%; }
@@ -5100,6 +5106,7 @@ letter-spacing: -0.01em;
         margin-top: 8px;
        
     }
+    .panel_third_depth .table_wrap{margin-top: 16px;}
     /* .fair_trade_work_standard_sec :deep(dd.acc_panel) { padding: 0 20px; } */
     .fair_trade_work_standard_sec :deep(.acc_panel_inner) { padding: 16px 20px 24px; }
     .fair_trade_work_standard_sec :deep(dd+ dt){border-top:0;}
@@ -5118,6 +5125,8 @@ letter-spacing: -0.01em;
     .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(4), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(5), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(6), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(7), .fair_trade_standard_sections .common_table.type_02 colgroup col:nth-child(8) { width: 80px; min-width: 80px; max-width: 80px; }
     .fair_trade_standard_sections .common_table td.txt_verticle { vertical-align: middle; text-align: center; }
     .fair_trade_standard_sections .common_table td.txt_verticle > p{  text-align: center; display: inline-block; writing-mode: vertical-rl; text-orientation: upright; }
+    .fair_trade_standard_sections :deep(.p_txt) { display: none !important; }
+    .fair_trade_standard_sections :deep(.m_txt) { display: inline; }
 }
 </style>
 
