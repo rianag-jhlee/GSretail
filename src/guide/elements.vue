@@ -272,6 +272,7 @@ export default {
             <ul class="explain">
                 <li><strong>Accordion</strong> · <code>multiple</code>: <code>false</code>(기본) Single — 하나 열리면 나머지 닫힘 / <code>true</code> Multi — 여러 패널 동시 오픈</li>
                 <li><strong>AccordionItem</strong> · <code>item-key</code> 형제 간 고유 값(문자·숫자) 필수 · <code>#title</code> 제목 슬롯 · 기본 슬롯 본문</li>
+                <li><strong>Class</strong> faq = type_faq 등 해당하는 타입만 선언</li>
             </ul>
 
             <p class="tit_wrap">

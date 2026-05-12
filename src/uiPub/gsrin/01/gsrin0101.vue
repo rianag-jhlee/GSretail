@@ -47,7 +47,6 @@
                                 <p class="p">{{ t.BoardSectionDesc1 }}</p>
                             </div>
 
-
                             <div class="view-3 res-swiper-container">
                                 <swiper
                                     :slides-per-view="'1.1'"
@@ -858,11 +857,11 @@ export default {
 
 /* swiper */
 .swiper {width:100%;}
-.swiper-slide {height:auto; position:relative;}
-.swiper-slide.div-2 {margin-right:28px; margin-left:28px}
+.swiper-slide { height:auto; position:relative;}
+/* .swiper-slide.div-2 {margin-right:28px; margin-left:28px}
 .swiper-slide.div-2:first-of-type {margin-left:0;}
 .swiper-slide.div-2:last-of-type::after {display:none;}
-.swiper-slide.div-2::after {content:''; width:1px; height:100%; background:#F2F2F4; display:block; position:absolute; top:0; right:-28px}
+.swiper-slide.div-2::after {content:''; width:1px; height:100%; background:#F2F2F4; display:block; position:absolute; top:0; right:-28px} */
 
 
 
@@ -875,8 +874,9 @@ export default {
     }
     :deep(.view-6.res-swiper-container) .swiper-wrapper {display: flex !important; gap:0px;}
     .pc-only { display: none; } /* 모바일에서 세로선 제거 */
-    .swiper-slide.div-2 {margin-right:0; margin-left:0}
-    .swiper-slide.div-2::after {display:none}
+
+    /* .swiper-slide.div-2 {margin-right:0; margin-left:0}
+    .swiper-slide.div-2::after {display:none} */
 
     .eval-usage-swiper {overflow:hidden !important;}
     /* 슬라이딩을 위해 flex-wrap 해제 및 초기 위치 설정 */
