@@ -378,9 +378,7 @@ export default {
         onTabChange1(idx) {
             this.CTabIdx = idx;
             this.InnerTabIdx = 0;
-        }
-    },
-    methods: {
+        },
         openModal(event) {
             const el = event.currentTarget;
             const popId = el.dataset.popid;

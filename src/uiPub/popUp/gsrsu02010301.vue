@@ -160,7 +160,7 @@ export default {
 
 /* 반응형 */
 @media screen and (max-width: 767px) {
-    .modal_header {font-size:18px;}
+    .modal_header {font-size:18px; padding-bottom:24px;}
     .conti_step_list_orange>li {flex: 0 0 calc(50% - 10px);}
 }
 </style>
