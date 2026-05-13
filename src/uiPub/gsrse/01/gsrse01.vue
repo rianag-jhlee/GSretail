@@ -349,18 +349,6 @@ export default {
 .mo {display:none;}
 .pc {display:block;}
 
-.ac { text-align: center; }
-.al { text-align: left; }
-.mt64 { margin-top: 64px; }
-.mt100 { margin-top: 100px; }
-.mb12 { margin-bottom: 12px; }
-.mb16 { margin-bottom: 16px; }
-.mb24 { margin-bottom: 24px; }
-.mb40 { margin-bottom: 40px; }
-.mb100 { margin-bottom: 100px; }
-.mt20 { margin-top: 20px; }
-.py80 { padding: 80px 0; }
-
 /* 2. 텍스트 스타일 가이드 */
 .section-sub-title { font-size: 40px; font-weight: 700; color: #161616; }
 .intro_desc { font-size: 24px; color: #161616; line-height: 1.5; }
@@ -470,7 +458,5 @@ export default {
     .card_grid {flex-direction:column;}
     .card_grid .info_card {width:100%;}
     .policy_wrap th, .policy_wrap td, .policy_wrap td a {font-size: 16px !important; }
-    .mt100 {margin-top:60px !important;}
-    .mt64 {margin-top:16px !important;}
 }
 </style>
