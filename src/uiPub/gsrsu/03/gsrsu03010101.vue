@@ -1036,9 +1036,7 @@
                                         </div>
 
                                         <!-- 페이지네이션 (기본 Pagination 컴포넌트 활용) -->
-                                        <div class="pagination_wrap mt60">
-                                            <Pagination v-model="page" :totalPages="5" :visiblePages="5" @change="handlePage" />
-                                        </div>
+                                        <Pagination v-model="page" :totalPages="5" :visiblePages="5" @change="handlePage" />
                                     </div>
                                 </div>
                             </div>

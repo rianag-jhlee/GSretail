@@ -122,8 +122,15 @@ h5 {font-size:1.8rem;}
 .input_search_wrap .btn_search:before {width:20px; height:20px; background:url('@/assets/images/common/icon_set_20.png') -715px -24px no-repeat; background-size:auto 159px; content:''; position:absolute; top:50%; left:50%; display:block; transform:translate(-50%, -50%);}
 .input_search_wrap .icon_del {right:40px !important;}
 
+/* board top */
+.search_filter_area { display: flex; flex-wrap:wrap; width: 100%; justify-content: space-between; align-items: center; margin-top: 100px; margin-bottom:24px;}
+.search_filter_area .search_wrap {margin-left:auto;}
+
+.search_filter_area .filter_group { display: flex; align-items: center; gap: 12px; }
+.search_filter_area .filter_label { font-size: 16px; color: #161616; white-space: nowrap; }
+
 /* pagination */
-.pagination {display:flex; gap:6px; align-items:center; justify-content:center;}
+.pagination {margin-top:60px; display:flex; gap:6px; align-items:center; justify-content:center;}
 .pagination button {padding:6px 10px; background:white; cursor:pointer;}
 .pagination button.active {color:#161616; font-weight:700; background:#a5a5a8; border-radius:50%;}
 .pagination button:disabled {opacity:0.4; cursor:default;}
@@ -291,4 +298,10 @@ h5 {font-size:1.8rem;}
     .board_type_toggle.type_faq dt > a.acc_tit_btn {padding:20px 0 20px 40px; font-size:1.6rem; font-weight:400;}
     .board_type_toggle.type_faq dt > a.acc_tit_btn:before {top:50%; left:0; transform:translateY(-50%);}
     .board_type_toggle.type_faq dd.acc_panel .acc_panel_cont {padding:12px 32px 24px; font-size:1.6rem; line-height:150%;}
+
+    .search_filter_area {margin-top:60px; gap:8px;}
+    .search_filter_area .search_wrap {width:100%; flex-direction:column;}
+    .search_filter_area .search_wrap .select, .search_filter_area .search_wrap .input_search_wrap {width:100%;}
+
+    .search_filter_area .filter_group, .search_filter_area .filter_group .select {width:100%;}
 }
