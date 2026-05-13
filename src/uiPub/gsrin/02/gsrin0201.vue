@@ -431,7 +431,7 @@ export default {
 
 /* Charts */
 .performance_charts { width: 100%; }
-.chart_grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+.chart_grid { display: grid; grid-template-columns: repeat(2, 1fr); gap:100px 40px; }
 .chart_item { width: 100%; display: flex; flex-direction: column; gap: 40px; }
 .chart_header { display: flex; align-items: flex-end; justify-content:space-between; }
 .chart_title { font-size: 40px; font-weight: 700; color: #161618; }
@@ -446,7 +446,7 @@ export default {
 .table_info_group {display:flex; justify-content:space-between;}
 
 /* Table 스타일 */
-.policy_wrap table {width: 100%; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
+.policy_wrap table {width: 100%; margin-top:0px; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
 .policy_wrap th, .policy_wrap td {padding: 18px 24px; border: 1px solid #e5e5e9; font-size: 1.8rem; line-height: 1.4; vertical-align: middle;}
 .policy_wrap th:first-child, .policy_wrap td:first-child { border-left: 0; }
 .policy_wrap th:last-child, .policy_wrap td:last-child { border-right: 0; }
@@ -471,6 +471,7 @@ tr.bold td, tr.bold th { font-weight: 700 !important; }
 }
 @media screen and (max-width: 767px) {
     /* 요청하신 모바일 수정 사항 */
+    .mt100 { margin-top:80px; }
     .cont_inner {padding:0 20px;}
     h3 { font-size: 24px !important; }
     .unit { font-size: 14px !important; }
@@ -480,11 +481,12 @@ tr.bold td, tr.bold th { font-weight: 700 !important; }
     label.select select {width:100%}
 
     /* 차트 영역 1열 배치 */
-    .chart_grid { grid-template-columns: 1fr; } 
+    .chart_grid { grid-template-columns: 1fr; gap:80px; } 
     .title-sub-text { font-size: 24px; padding: 60px 0; }
     .policy_wrap th, .policy_wrap td { padding: 12px 15px; font-size: 14px; }
     .gsrin0203 .policy_wrap th:first-child, .gsrin0203 .policy_wrap td:first-child { display: none; }
     .gsrin0203 .policy_wrap thead {display:none;}
     .search_group .search_wrap {flex-direction:column; align-items:stretch;}
+    .section-sub-title {margin-bottom:0px;}
 }
 </style>
