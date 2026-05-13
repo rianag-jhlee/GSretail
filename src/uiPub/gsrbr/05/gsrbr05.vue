@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <section class="brand_section mt200">
+                <section class="brand_section">
                     <h3>{{ t.BrandTitle }}</h3>
                     <p class="brand_sub_txt">{{ t.BrandDesc }}</p>
                     <div class="brand_logos">
@@ -58,7 +58,7 @@
                     </div>
                 </section>
 
-                <section class="how_to_section mt200">
+                <section class="how_to_section">
                     <h3>{{ t.StepTitle }}</h3>
                     
                     <div class="step_group mt64" v-for="(group, gIdx) in t.StepGroups" :key="'group-' + gIdx">
@@ -194,12 +194,11 @@ export default {
 
 <style scoped>
 .gsrbr05 { width: 100%; position: relative; }
-.body_wrap {padding-bottom:200px;}
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 img { width: 100%; display: block; }
 h3 { margin-bottom:16px; color: #161616; font-size: 48px; font-weight: 700; }
 h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
-div.cont_inner {padding-top:200px}
+
+.cont_area + .cont_inner {margin-top:200px;}
 
 /* Visual Section */
 .visual_section { width: 100%; position: relative; overflow: hidden; }
@@ -237,6 +236,7 @@ div.cont_inner {padding-top:200px}
 .benefit_container {margin-top:64px;}
 
 /* Brand Logos */
+.brand_section, .how_to_section {margin-top:200px;}
 .brand_section h3 {margin-bottom:18px;}
 .brand_sub_txt { font-size: 24px; font-weight: 700; color: #161616; margin-bottom: 16px; }
 .logo_flex {margin-top:60px; padding:0; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;}
@@ -265,14 +265,6 @@ div.cont_inner {padding-top:200px}
 .sub_btn_group button:last-of-type {margin-right:0;}
 .sub_btn_group button::after {content:''; width:16px; height:16px; background:red; display:inline-flex;}
 
-/* Utils */
-.mt64 { margin-top: 64px; }
-.mt80 { margin-top: 80px; }
-.mt200 { margin-top: 200px; }
-.mb100 { margin-bottom: 100px; }
-.bullet_01 li { position: relative; padding-left: 12px; font-size: 1.8rem; color: #67676b; line-height: 1.4; list-style: none; }
-.bullet_01 li::before { content: ''; position: absolute; left: 0; top: 10px; width: 4px; height: 4px; background: #67676b; border-radius: 50%; }
-
 /* Mobile Responsive */
 @media screen and (max-width: 1024px) {
     h4 {margin-bottom:24px; font-size:18px;}
@@ -292,7 +284,7 @@ div.cont_inner {padding-top:200px}
     .logo_flex img {max-height:23px;}
     .text_box span { font-size: 32px; text-align:center;}
     .body_wrap .cont_area {padding:60px 0;}
-    div.cont_inner {padding-top:80px;}
+    .cont_area + .cont_inner {margin-top:80px;}
     .info {padding-left:76px;}
     .info .tit {font-size:18px;}
     .info::before {width:60px; height:60px;}
@@ -307,10 +299,10 @@ div.cont_inner {padding-top:200px}
     .unit_info + img {width:80%; margin:0 auto;}
     .step_box {gap:40px;}
     .btn-group button {width:100%;}
-    .mt200 {margin-top:80px}
-    .mt64 {margin-top:0px;}
     .bottom_btns + .btn_big.border {margin-top:0px; margin-bottom:80px; display:flex; justify-content: center;}
     .step_group {margin-bottom:40px;}
     .step_group:last-of-type {margin-bottom:0px;}
+
+    .brand_section, .how_to_section {margin-top:80px;}
 }
 </style>

@@ -31,12 +31,12 @@
                             </div>
                         </div>
 
-                        <div class="table_section mt100">
+                        <div class="table_section">
                             <div class="table_header">
                                 <h3 class="section-sub-title">{{ t.TableTitle1 }}</h3>
                                 <span class="unit">{{ t.UnitMillion }}</span>
                             </div>
-                            <div class="policy_wrap mt40">
+                            <div class="policy_wrap">
                                 <table class="base_table">
                                     <colgroup>
                                         <col style="width: 150px;">
@@ -118,12 +118,12 @@
                             </div>
                         </div>
 
-                        <div class="table_section mt100">
+                        <div class="table_section">
                             <div class="table_header">
                                 <h3 class="section-sub-title">{{ t.TableTitle2 }}</h3>
                                 <span class="unit">{{ t.UnitMillion }}</span>
                             </div>
-                            <div class="policy_wrap mt40">
+                            <div class="policy_wrap">
                                 <table class="base_table">
                                     <colgroup>
                                         <col style="width: 350px;">
@@ -203,7 +203,7 @@
                     <!-- gsrin0202 -->
                     <section class="tab_content gsrin0202" v-if="CTabIdx === 1" :aria-label="t.Tabs1[1].item">
                         <p class="policy_desc" v-html="t.DividendPolicyDesc"></p>
-                        <div class="table_section mt100">
+                        <div class="table_section">
                             <div class="table_header">
                                 <h3 class="section-sub-title">{{ t.TableTitle3 }}</h3>
                             </div>
@@ -212,7 +212,7 @@
                                 <span class="unit ml20">{{ t.UnitMillion }}</span>
                             </div>
                             
-                            <div class="policy_wrap mt40">
+                            <div class="policy_wrap">
                                 <table class="base_table">
                                     <colgroup>
                                         <col style="width: 150px;">
@@ -267,7 +267,7 @@
                         </div>
 
                         <div class="table_container">
-                            <div class="policy_wrap mt24">
+                            <div class="policy_wrap">
                                 <table class="base_table ir_table">
                                     <thead>
                                         <tr>
@@ -416,7 +416,6 @@ export default {
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0201_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; }
 .visual-sub { margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
 .title-sub-text { width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4; }
 .title-sub-text.is_dividend {padding-bottom: 16px; padding-top: 100px; text-align:left; }
 
@@ -429,6 +428,8 @@ export default {
 .unit { font-size: 16px; color: #67676f; }
 .chart_img img { width: 100%; height: auto; }
 
+.gsrin0203 .search_filter_area {margin-top:0;}
+
 
 /* 배당정책 설명 */
 .dividend_policy_info { width: 100%; text-align: left; }
@@ -437,7 +438,7 @@ export default {
 .table_info_group {display:flex; justify-content:space-between;}
 
 /* Table 스타일 */
-.policy_wrap table {width: 100%; margin-top:0px; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
+.policy_wrap table {width: 100%; margin-top:40px; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
 .policy_wrap th, .policy_wrap td {padding: 18px 24px; border: 1px solid #e5e5e9; font-size: 1.8rem; line-height: 1.4; vertical-align: middle;}
 .policy_wrap th:first-child, .policy_wrap td:first-child { border-left: 0; }
 .policy_wrap th:last-child, .policy_wrap td:last-child { border-right: 0; }
@@ -454,16 +455,14 @@ export default {
 .fc_red { color: #ed3030 !important; }
 tr.bold td, tr.bold th { font-weight: 700 !important; }
 
+.table_section {margin-top:100px;}
+
 /* 미디어 쿼리 */
 @media screen and (max-width: 1024px) {
-    .cont_inner { padding-left: 20px; padding-right: 20px; }
-    .gsrin0201 .policy_wrap, .gsrin0201 .base_table  { overflow-x: auto; }
+    .policy_wrap {overflow:auto;}
     .gsrin0201 .base_table, .gsrin0202 .base_table { min-width:1000px; }
 }
 @media screen and (max-width: 767px) {
-    /* 요청하신 모바일 수정 사항 */
-    .mt100 { margin-top:80px; }
-    .cont_inner {padding:0 20px;}
     h3 { font-size: 24px !important; }
     .unit { font-size: 14px !important; }
     .title_wrap { display: none !important; }
@@ -476,5 +475,9 @@ tr.bold td, tr.bold th { font-weight: 700 !important; }
     .policy_wrap th, .policy_wrap td { padding: 12px 15px; font-size: 14px; }
     .gsrin0203 .policy_wrap th:first-child, .gsrin0203 .policy_wrap td:first-child { display: none; }
     .gsrin0203 .policy_wrap thead {display:none;}
+
+    .table_section {margin-top:80px;}
+
+    .policy_wrap table {margin-top:32px;}
 }
 </style>

@@ -652,7 +652,6 @@ export default {
 /* 1.넓이 2.외부여백 3.내부여백 4.폰트 5.배경 6.테두리 7.정렬 8.위치 9.블록 10.변형 */
 
 .gsrbr020101 { width: 100%; position: relative; display: block; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 
 /* Visual Section 최적화 */
 .visual_section { width: 100%; height: 100vh; background-color: #fff; display: flex; position: relative;  align-items: center; justify-content: center; overflow: hidden; }
@@ -666,7 +665,6 @@ export default {
 
 /* 하단 섹션들 */
 .brand_intro_section {width: 100%; padding: 200px 0; background-color: #f8f8f8; position: relative; display: block; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 .history_text { color: #161616; font-size: 28px; font-weight: 700; line-height: 1.6; }
 .history_text + .history_text { margin-top: 40px; }
 
@@ -691,7 +689,7 @@ export default {
 .accordion_item { width: 100%; border-bottom: 1px solid #e5e5e3; position: relative; }
 .accordion_item:last-child { border-bottom: 0; }
 .accordion_header { width: 100%; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border: 0; background: none; }
-.accordion_header:after { content: ''; width: 56px; height: 56px; border: 1px solid red; }
+.accordion_header:after { content: ''; width: 24px; height: 24px; background:url('@/assets/images/common/icon_set_24.png') -592px -15px no-repeat; }
 .accordion_item.active .accordion_header { padding:64px 64px 16px; }
 .accordion_item.active .accordion_header:after { display: none; }
 .header_text { color: #161616; font-size: 28px; font-weight: 700; }

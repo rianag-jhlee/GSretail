@@ -103,7 +103,6 @@ export default {
 
 <style scoped>
 .gsrbr07 { width: 100%; position: relative; display: block; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 img {width:100%;}
 h4 {margin-bottom:40px; font-size:32px;}
 
@@ -130,7 +129,7 @@ ul li strong br {display:none;}
 
 
 /* Bottom Buttons */
-.bottom_btns { width: 100%; margin-top: 100px; text-align: left; padding-bottom: 100px; }
+.bottom_btns { width: 100%; margin-top: 100px; text-align: left;}
 
 @media screen and (max-width: 1024px) {
     .body_wrap .cont_area {padding:10.41% 20px;}

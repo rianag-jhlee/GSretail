@@ -170,7 +170,6 @@ export default {
 
 <style scoped>
 .gsrbr04 { position: relative; width: 100%; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 .benefit_section { padding-top: 200px; }
 img { display: block; width: 100%; }
 h3 { margin-bottom:16px; color: #161616; font-size: 48px; font-weight: 700; }

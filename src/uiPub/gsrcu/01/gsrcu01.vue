@@ -155,7 +155,6 @@ export default {
 .blind {width:1px; height:1px; position:absolute; top:0; left:0; overflow:hidden; z-index:-1;}
 .page-top-title {margin-bottom:48px; text-align:center;}
 .title-xl {width:100%; color:#111111; font-size:4.5rem; font-weight:700; line-height:1.24; letter-spacing:-1.44px;}
-.customer-intro-section .cont_inner {width:100%; max-width:1420px; margin:0 auto;}
 .cont_inner article {width:100%; padding:100px 64px; background-color:#f8f8f8; border-radius:12px; display:flex; gap:40px;}
 .intro-summary {width:30%;}
 h3 {color:#161616; font-size:32px; font-weight:700; line-height:1.3; letter-spacing:-0.32px;}

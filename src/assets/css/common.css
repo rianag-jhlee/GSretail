@@ -26,13 +26,16 @@ button {cursor:pointer;}
 .mt40 { margin-top: 40px !important; }
 .mt60 { margin-top: 60px !important; }
 .mt64 { margin-top: 64px !important; }
+.mt80 { margin-top: 80px !important; }
 .mt100 { margin-top: 100px !important; }
+.mt200 { margin-top: 200px !important; }
 .mb12 { margin-bottom: 12px !important; }
 .mb16 { margin-bottom: 16px !important; }
 .mb24 { margin-bottom: 24px !important; }
 .mb40 { margin-bottom: 40px !important; }
 .mb80 { margin-bottom: 80px !important; }
 .mb100 { margin-bottom: 100px !important; }
+.mb120 { margin-bottom: 120px !important; }
 .mb200 { margin-bottom: 200px !important; }
 
 /* padding */
@@ -76,6 +79,11 @@ select {width:100%; height:52px; padding:12px 40px 12px 12px; font-size:1.4rem; 
 [class*="btn_icon"][class*="after"]::after  {content:''; width:20px; height:20px; margin-left:10px; background:red; display:inline-block;}
 .btn_download_file { display: inline-flex; align-items: center; gap: 12px; background: none; border: 0; cursor: pointer; }
 .btn_download_file::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -832px -56px no-repeat; display:inline-block;}
+
+.btn_mid.btn_icon_file.after:after {width:16px; height:16px; background:url('@/assets/images/common/icon_set_16.png') -1016px -14px no-repeat;}
+
+.btn_icon_arrow.primary.after:after {width:16px; height:16px; background-color:transparent; background-image:url('@/assets/images/common/arrow_set_16.png'); background-position:-56px -20px; background-repeat:no-repeat; -webkit-filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1);}
 
 .btnBox {display:inline-flex; align-items:center; flex-wrap:wrap;}
 .btnBox [class*="btn_"] + [class*="btn_"] {margin-left:8px;}
@@ -314,7 +322,6 @@ label.select.err > em {display:block;}
     .tab_wrap ul.type_02 li .item {padding:8px 18px; color:#666666; font-size:14px;}
     .btn_download_file {gap:0px;}
     .btn_download_file span {font-size:0;}
-
     .bottom_btns {display:none;}
 }
 
@@ -325,8 +332,6 @@ label.select.err > em {display:block;}
 .btn_website::before {background-position:-1168px -56px;}
 .ico_location:before {background-position:-1120px -56px;}
 .ico_link:before {background-position:-832px -15px;}
-
-
 
 .btn_sns { width: 56px; height: 56px; background-color: #F8F8F8; border-radius: 100%; display: flex; align-items: center; justify-content: center;}
 .btn_sns::before {width:24px; height:24px; content: ""; background-image:url('@/assets/images/common/icon_set_24.png'); background-repeat:no-repeat; background-size:auto 95px; border-radius: 4px; display: block }
@@ -341,7 +346,7 @@ label.select.err > em {display:block;}
     .btn_store_find { font-weight: 500; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
     .btn_store_find::before, .btn_website::before { width: 20px; height: 20px; background-image:url('@/assets/images/common/icon_set_20.png');; background-size:auto 159px;}
     .btn_store_find::before {background-position:-1194px -71.43px;}
-    .btn_website::before {background-position:-1194px -71.43px;}
+    .btn_website::before {background-position:-454px -115px;}
 
     .btn_sns { width: 40px; height: 40px }
     .btn_sns::before {width:20px; height:20px; background-image:url('@/assets/images/common/icon_set_20.png'); background-size:auto 159px;}

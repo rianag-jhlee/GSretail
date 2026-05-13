@@ -208,9 +208,10 @@
                                 </template>
                             </div>
                             <div class="button-group">
-                                <button v-for="(btn, bIdx) in t.BoardDownloadBtns" :key="'btn-'+bIdx" class="BUTTON" @click="handleDownload(btn.link)">
-                                    <div class="view-9"><div class="text-wrapper-22">{{ btn.text }}</div></div>
-                                    <img class="download" src="/public/images/gsrin0102/download.png" />
+                                <button v-for="(btn, bIdx) in t.BoardDownloadBtns" :key="'btn-'+bIdx" class="btn_mid btn_icon_file after" @click="handleDownload(btn.link)">
+                                    <div class="view-9">
+                                        <div class="text-wrapper-22">{{ btn.text }}</div>
+                                    </div>
                                 </button>
                             </div>
                         </div>
@@ -689,13 +690,12 @@ export default {
 .title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0101_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title {color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; display: block;}
 .visual-sub {margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center;}
-.cont_inner {width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom:200px;}
 .title-sub-text {width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4;}
 :deep(.title-sub-text br:not(:nth-of-type(2))) {display: none;}
 .subtit_wrap {width: 100%; padding: 60px 40px; background: #F0F3F5; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
 .gsrin0101 .section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align: center;}
 .section-date {margin-top: 15px; color: #666666; font-size: 1.8rem; text-align: center; display: block;}
-.gsrin0101 .policy_wrap {width: 100%; padding: 60px; text-align: left;}
+.gsrin0101 .policy_wrap {padding-top: 60px;}
 .gsrin0101 .policy_wrap dt {margin-top: 60px; color: #161618; font-size: 24px; font-weight: 700;}
 .policy_wrap dt:first-child {margin-top: 0;}
 .gsrin0101 .policy_wrap dd {margin-top: 20px; padding-bottom:32px; color: #444444; font-size: 1.8rem; line-height: 1.8; border-bottom:1px solid #D7D7DF;}
@@ -762,7 +762,9 @@ export default {
 .text-wrapper-20 {width: fit-content; margin-top: -1.00px; padding: 0; color: #67676f; font-size: 1.8rem; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; white-space: nowrap;}
 .text-wrapper-21 {margin-top: -1.00px; padding: 0; color: #242428; font-size: 1.8rem; font-weight: 400; font-style: normal; text-align: right; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
 .divider-2 {width: 1px; background-color: #e5e5e9; position: relative; align-self: stretch;}
+
 .button-group {width: 100%; padding: 0; position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 12px; flex: 0 0 auto; align-self: stretch;}
+
 .BUTTON {padding: 10px 16px; background-color: #f2f2f4; border-radius: 8px; border: 0; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 24px; flex: 0 0 auto; cursor: pointer;}
 .view-9 {padding: 0; position: relative; display: inline-flex; align-items: center; gap: 2px; flex: 0 0 auto;}
 .text-wrapper-22 {width: fit-content; margin-top: -1.00px; padding: 0; color: #242428; font-size: 16px; font-weight: 400; font-style: normal; letter-spacing: -0.16px; line-height: 150%; position: relative; white-space: nowrap;}
@@ -813,7 +815,6 @@ export default {
 
 
 @media screen and (max-width:1024px) {
-    .cont_inner {padding: 0 20px;}
     .title-sub-text {padding: 60px 0; font-size: 36px;}
     .view-3 {display:block;}
     :deep(.view-6.res-swiper-container) .swiper-wrapper, :deep(.view-3.res-swiper-container) .swiper-wrapper {display: grid !important; grid-template-columns: repeat(2, 1fr); gap: 20px; transform:none;}
@@ -827,7 +828,7 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-    .cont_inner {padding:80px 20px 200px;}
+    .cont_inner {padding-top:80px;}
     .title_wrap {display:none;}
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}

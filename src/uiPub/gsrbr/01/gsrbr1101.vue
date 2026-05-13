@@ -313,7 +313,6 @@ export default {
 /* 1. 넓이 2. 외부여백 3. 내부여백 4. 폰트 5. 배경 6. 테두리 7. 정렬 8. 위치 9. 블록 10. 변형 */
 
 .gsrbr1101 { width: 100%; position: relative; display: block; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 
 /* Visual Section */
 .visual_wrap { width: 100%; padding: 200px 0; background-color: #f8f8f8; position: relative; }
@@ -425,7 +424,6 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-    .cont_inner { padding: 0 20px; }
     .text_box .title { font-size: 30px; letter-spacing: -0.5px; }
     .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b) { font-size: 16px; }
     .mall-type-2 .text_item :deep(b br) , .mall-type-3 .text_item :deep(b br) {display:none;}

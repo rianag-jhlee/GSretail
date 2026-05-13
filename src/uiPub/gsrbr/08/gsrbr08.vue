@@ -74,13 +74,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="cont_inner">
-                <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
-                <div class="bottom_btns">
-                    <button class="btn_back" @click="handleBack">{{ t.ListBack }}</button>
-                </div>
-                <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
+
+            <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
+            <div class="bottom_btns cont_inner">
+                <button class="btn_back" @click="handleBack">{{ t.ListBack }}</button>
             </div>
+            <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
+
         </section>
     </div>
 </template>
@@ -175,7 +175,6 @@ export default {
 
 <style scoped>
 .gsrbr08 { width: 100%; position: relative; display: block; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 img {width:100%;}
 h4 {margin-bottom:40px; font-size:32px;}
 
@@ -187,7 +186,7 @@ h4 {margin-bottom:40px; font-size:32px;}
 .text_box span {margin-bottom:10px; color:#fff; font-size:72px; font-weight:700; display: block;  }
 
 /* body_wrap Section */
-.body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
+.body_wrap .cont_area {padding:10.41% 0; background:#F8F8F8;}
 .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
 .body_wrap .cont_area .cont_inner ul {margin-bottom:40px; padding:50px; background:#fff; border-radius:12px;}
 .body_wrap .cont_area .cont_inner h3 + div {margin-bottom:60px; position:relative;}
@@ -216,10 +215,7 @@ ul li strong br {display:none;}
 :deep(.supp_color) div dl dd {display:flex; flex-wrap:wrap; gap:10px;}
 :deep(.supp_color) div dl:nth-of-type(2) dd p:last-of-type {margin-top:-6px}
 .supp_color div dl dd * {color:#7C7C86; font-size:14px;}
-
-
-/* Bottom Buttons */
-.bottom_btns { width: 100%; margin-top: 100px; text-align: left; padding-bottom: 100px; }
+.bottom_btns {margin-top:100px;}
 
 @media screen and (max-width: 1024px) {
     .body_wrap .cont_area {padding:10.41% 20px;}
@@ -249,7 +245,6 @@ ul li strong br {display:none;}
     .desc_section br {display:block;}
     .desc_section p span {font-size:18px !important; font-weight:400 !important;}
     .desc_section p span br { display: none !important;}
-    .btn_list_back span {font-size:16px;}
     .bottom_btns {display:none;}
     :deep(.bi_color) div {flex-direction:column;}
     .bi_color {width:100%;}

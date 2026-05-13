@@ -114,6 +114,8 @@ h5 {font-size:1.8rem;}
 .breadcrumb .is-open ul {height:auto; overflow:initial; display:block !important;}
 .breadcrumb a {white-space:nowrap;}
 
+.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
+
 /* search */
 .search_wrap {display:flex; align-items:center; gap:8px;}
 .input_search_wrap {border:1px solid #c4c4d0; border-radius:12px; position:relative; flex:1; display:flex;}
@@ -299,7 +301,7 @@ h5 {font-size:1.8rem;}
     .board_type_toggle.type_faq dt > a.acc_tit_btn:before {top:50%; left:0; transform:translateY(-50%);}
     .board_type_toggle.type_faq dd.acc_panel .acc_panel_cont {padding:12px 32px 24px; font-size:1.6rem; line-height:150%;}
 
-    .search_filter_area {margin-top:60px; gap:8px;}
+    .search_filter_area {margin-top:32px; gap:8px;}
     .search_filter_area .search_wrap {width:100%; flex-direction:column;}
     .search_filter_area .search_wrap .select, .search_filter_area .search_wrap .input_search_wrap {width:100%;}
 

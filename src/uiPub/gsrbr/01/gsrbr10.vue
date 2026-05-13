@@ -95,7 +95,6 @@ export default {
 
 <style scoped>
 .gsrbr10 { width: 100%; position: relative; display: block; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 :deep(.cont_inner) h3 br {display:none;}
 
 /* Visual Section */
@@ -112,11 +111,6 @@ export default {
 .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:24px; font-weight:600; line-height:1.;}
 .body_wrap .cont_area .cont_inner ul li a {color:#161616; font-size:18px; display:flex; align-items:center;}
 
-/* Bottom Buttons */
-.btn_list_back { background: transparent; padding: 0; border: 0; cursor: pointer; }
-.btn_list_back span { color: #161616; font-size: 20px; display: flex; align-items: center; gap: 12px; }
-.btn_list_back span::before { width: 16px; height: 16px; background-color: red; content: ''; display: inline-block; }
-.btn_mid.border {display:none;}
 @media screen and (max-width: 1160px) {
     .body_wrap .cont_area .cont_inner ul {flex-direction:column; align-items:flex-start; gap:16px}
 }
@@ -127,8 +121,6 @@ export default {
     .body_wrap .cont_area .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:24px; font-weight:700;}
     .body_wrap .cont_area .cont_inner ul {display:flex; justify-content:space-between; align-items:flex-start;}
     .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:16px; font-weight:400; line-height:1.5;}
-    .body_wrap .cont_area .cont_inner ul li a {color:#161616; font-size:14px; display:flex;}
-    .body_wrap .cont_area .cont_inner ul li a::before {width: 24px; height: 24px; background-color: red; content: ''; display: inline-block; margin-right: 8px;}
     .btn_list_back span {font-size:16px;}
     .btn_big.border {margin-top:80px; margin-bottom:80px; display:flex; justify-content: center;}
     :deep(.cont_inner) h3 br {display:block;}
