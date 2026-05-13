@@ -13,26 +13,10 @@
                     :tab-slide="true"
                     @change="onMainTabChange"
                 />
-
-                <div class="sub_tab_wrap mt64 ac">
-                    <Tabs 
-                        v-model="SubTabIdx" 
-                        :tab-items="t.SubTabs" 
-                        tab-class="type_02" 
-                        :tab-slide="true"
-                        @change="onSubTabChange" 
-                        v-if="MainTabIdx === 0"
-                    />
-                </div>
-
                 <div class="tab_content_wrap mt100" v-if="MainTabIdx === 0">
-                    <div class="partnership_intro">
+                    <div class="partnership_intro mb100">
                         <h3 class="section-sub-title mb16">{{ t.IntroTitle }}</h3>
-                        <p class="intro_desc mb40">{{ t.IntroDesc }}</p>
-                        <div class="btn_group justify-center mb100">
-                            <button type="button" class="btn_big primary">{{ t.BtnApply }}</button>
-                            <button type="button" class="btn_big">{{ t.BtnCheck }}</button>
-                        </div>
+                        <p class="intro_desc">{{ t.IntroDesc }}</p>
                     </div>
 
                     <div class="guide_step_area mb100">
@@ -47,6 +31,18 @@
                         </ul>
                     </div>
 
+
+                    <div class="sub_tab_wrap ac mb40">
+                        <Tabs 
+                            v-model="SubTabIdx" 
+                            :tab-items="t.SubTabs" 
+                            tab-class="type_02" 
+                            :tab-slide="true"
+                            @change="onSubTabChange" 
+                            v-if="MainTabIdx === 0"
+                        />
+                    </div>
+
                     <!-- gsrse01 -->
                     <section class="notice_list_area mb100" v-if="SubTabIdx === 0">
                         <h4 class="guide_title mb40">{{ t.SubTabs[0].item }}</h4>
@@ -55,11 +51,11 @@
                                 <tbody>
                                     <tr v-for="(item, idx) in t.NoticeList" :key="'notice-'+idx">
                                         <td class="ac color_gray">{{ item.id }}</td>
-                                        <td class="al">
+                                        <td class="al title_cell">
                                             <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
                                         </td>
-                                        <td class="ac color_gray">{{ item.date }}</td>
-                                        <td class="ac color_gray">{{ t.ViewCountText }} {{ item.views }}</td>
+                                        <td class="ac color_gray date_cell">{{ item.date }}</td>
+                                        <td class="ac color_gray view_cell">{{ t.ViewCountText }} {{ item.views }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -127,6 +123,10 @@
 
                             <div class="auth_table_area mo">
                                 <h5 class="text-wrapper-2 mb24">{{ t.AuthTableTitle }}</h5>
+                                <div class="auth_header">
+                                    <span>{{t.AuthTableHeader_mo[0]}}</span>
+                                    <span>{{t.AuthTableHeader_mo[1]}}</span>
+                                </div>
                                 <div class="auth_card_list">
                                     <div class="auth_card_item" v-for="(row, rIdx) in t.AuthAgencies_mo" :key="'auth-mo-' + rIdx">
                                         <div class="auth_row">
@@ -139,7 +139,7 @@
                         </article>
 
                         <article class="guide_view mb100">
-                            <h4 class="text-wrapper-8 mb40">{{ t.RelatedSitesTitle }}</h4>
+                            <h4 class="text-wrapper mb40">{{ t.RelatedSitesTitle }}</h4>
                             <div class="card_grid">
                                 <div class="info_card" v-for="(card, cIdx) in t.RelatedSites" :key="'site-'+cIdx">
                                     <div class="card_head mb16">
@@ -225,10 +225,8 @@ export default {
                     MainTitle: "입점상담",
                     MainTabs: [{ item: "GS25/GS THE FRESH/지원부문" }, { item: "GS SHOP" }],
                     SubTabs: [{ item: "공지사항" }, { item: "입점 안내" }, { item: "자주하는 질문 FAQ" }],
-                    IntroTitle: "입점상담 신청 및 결과 조회",
+                    IntroTitle: "입점상담 신청 ",
                     IntroDesc: "GS25/GS THE FRESH/지원부문 입점에 관한 상담을 신청하고 결과를 확인하세요.",
-                    BtnApply: "상담 신청",
-                    BtnCheck: "상담 결과 조회",
                     GuideTitle: "입점 상담 가이드",
                     StepList: [{ title: "신규업체 등록" }, { title: "입점상담 신청" }, { title: "담당MD 상담" }, { title: "입점계약 진행" }],
                     NoticeList: [
@@ -364,7 +362,7 @@ export default {
 .step_list li {padding: 56px 64px; background-color: #f8f8f8; border-radius: 8px;  flex: 1; display: flex; align-items: center; }
 .step_list li::before { content:''; width:40px; height:40px; margin-right:24px; background:red; display:inline-block; flex-shrink:0; } /* 아이콘 영역 */
 .step_info { display: flex; flex-direction: column; gap: 6px; }
-.step_label { font-size: 1.8rem; font-weight: 700; color: #107af2; }
+.step_label { font-size:18px; font-weight: 700; color: #107af2; }
 .step_text { font-size: 20px; font-weight: 700; color: #161616; }
 
 /* 4. 테이블 리스트 (공지사항 등) */
@@ -375,6 +373,7 @@ export default {
 .policy_wrap thead th { background-color: #F8F8F8; color: #161616; font-weight: 700; }
 .policy_wrap td { height: 82px; color: #161616; border-left: 0; border-right: 0; }
 .policy_wrap th { border-left: 0; border-right: 0; }
+.notice_list_area .policy_wrap tbody tr:first-of-type td {border-top:1px solid #161616;}
 
 /* 5. 입점 안내 상세 컨텐츠 (Table, Bullet, Card) */
 .full_img { width: 100%; height: auto; display: block; }
@@ -412,10 +411,11 @@ export default {
 .bottom_link_btns a::before, .bottom_link_btns a::after { content:''; width:40px; height:40px; background:red; display:inline-block; } /* 아이콘 가상요소 */
 .bottom_link_btns a::before { position:absolute; top:32px; left:50%; transform:translateX(-50%); }
 .bottom_link_btns a::after { width:16px; height:16px; margin-left:8px; }
-.bottom_link_btns a:hover { color:#fff; background:#107AF2; }
+.bottom_link_btns a:hover { color:#fff; background:#15B874; }
 
 /* 8. 버튼 및 FAQ 공통 */
 .board_type_toggle {border-top:1px solid #161616;}
+.board_type_toggle dt > a.acc_tit_btn {padding:20px !important;}
 .btn_group { display: flex; gap: 8px; }
 .faq_list_wrap { border-top: 1px solid #161616; }
 .faq_item { border-bottom: 1px solid #e5e5e9; }
@@ -441,13 +441,28 @@ export default {
 @media screen and (max-width: 767px) {
     .mo {display:block;}
     .pc {display:none;}
+    .cont_inner {padding: 80px 20px 200px;}
+    :deep(.tab_wrap) ul.type_02 {padding-left:0px !important;}
+    .text-wrapper { font-size: 24px;}
     .title_wrap  {display:none;}
     .section-sub-title, .guide_title {font-size:24px;}
     .intro_desc {font-size:18px;}
     .step_list {flex-direction: column; align-items: flex-start; padding:0; }
     .div_desc :deep(li), .bullet_01 li, .div_desc { font-size:18px;}
     .step_list li {width:100%;}
+    .step_text {font-size:18px;}
     .notice_list_area .base_table tbody tr td:first-of-type {display:none;}
+    /* 기존 테이블 레이아웃 해제 */
+    .notice_list_area .base_table tbody, .notice_list_area .base_table tr, .notice_list_area .base_table td {display: block; width: 100%; height:auto; border: 0;}
+    .notice_list_area .base_table tr {padding:12px 10px; border-bottom: 1px solid #EEE; display: flex; flex-wrap: wrap;}
+    /* 제목 셀: 상단 전체 너비 차지 */
+    .notice_list_area .policy_wrap tbody tr:first-of-type td {border-top:0;}
+    .notice_list_area .base_table {border-top:1px solid #161616;}
+    .notice_list_area .base_table .title_cell {padding: 0 0 8px 0; order: 1;}
+    .notice_list_area .base_table .title_cell .link_title {color: #161616; font-size:16px !important; font-weight: 500; line-height: 1.4;}
+    .notice_list_area .base_table .date_cell, .notice_list_area .base_table .view_cell {width: 50%; padding: 0; color: #999; font-size: 12px !important; text-align: left !important; order: 2;}
+    .notice_list_area .base_table .view_cell {color:#67676F; text-align:right !important; order: 3;}
+    .notice_list_area .base_table .view_cell::before {margin-right: 4px;}
     .help_desk_area ul li { width:100%; padding:20px; display:flex; flex-direction:row; gap:20px; align-items:center;}
     .help_desk_area ul li::before {width:100px; margin-right:0;}
     .help_desk_area .info .brand { font-size:14px;}

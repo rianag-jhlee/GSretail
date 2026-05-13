@@ -227,7 +227,7 @@
                             <div class="policy_wrap">
                                 <table>
                                     <colgroup>
-                                        <col>
+                                        <col style="width: auto;">
                                         <col style="width: auto;">
                                     </colgroup>
                                     <tbody>
@@ -773,6 +773,7 @@ export default {
 
 /* gsrin0103 이사회 평가 */
 .gsrin0103 .eval_item_group { display: flex; flex-direction: column; width: 100%; }
+.gsrin0103 .eval_item_group .sub-title {margin-bottom:32px;}
 .gsrin0103 .section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align:left;}
 .gsrin0103 .policy_wrap {padding-top:32px; padding-bottom:100px;}
 .gsrin0103 colgroup col:first-of-type {width:200px}

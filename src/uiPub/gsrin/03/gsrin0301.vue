@@ -169,9 +169,9 @@
                                 class="btn_big primary btn_icon_arrow after"
                                 btn-class="btn_icon" 
                                 @click="openModal" 
-                                data-popid="ggsrin030301" 
+                                data-popid="gsrin030301" 
                                 data-type="lg" 
-                                data-cont="ggsrin030301"    
+                                data-cont="gsrin030301"    
                             >
                                 {{ t.GeneralText }}
                             </Buttons>
@@ -222,7 +222,7 @@
             </div>
         </section>
 
-        <div id="ggsrin030301" class="modal_wrap">
+        <div id="gsrin030301" class="modal_wrap">
             <div class="modal_container"></div>
         </div>
     </div>
