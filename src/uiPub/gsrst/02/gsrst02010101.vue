@@ -26,10 +26,7 @@
                     <ul class="apply_list">
                         <li v-for="(item, i) in brandApplyLinks" :key="i">
                             <a :href="item.url">
-                                <strong v-html="item.title">
-
-                                  
-                                </strong>
+                                <strong v-html="item.title"></strong>
                                 <span v-html="item.desc"></span>
                             </a>
                         </li>
@@ -43,7 +40,7 @@
                 </section>
                 <section class="sec_success_point">
                     <header class="section_title">
-                        <span class="tit">{{ successPointPanel.badge }}</span>
+                        <p class="tit">{{ successPointPanel.badge }}</p>
                         <h2 v-html="successPointPanel.title"></h2>
                         <p>{{ successPointPanel.desc }}</p>
                     </header>
@@ -61,7 +58,7 @@
                                     <span class="thumb" aria-hidden="true"></span>
                                     <span class="txt">
                                         <strong>{{ item.title }}</strong>
-                                        <p>{{ item.desc }}</p>
+                                        <span class="desc">{{ item.desc }}</span>
                                     </span>
                                 </a>
                             </li>
@@ -70,26 +67,31 @@
                 </section>
             </div>
 
-            <!-- 차별화된 경쟁력 -->
-            <div class="tab_page sec_procedure" v-show="activeD1 === 0 && activeD2 === 1"></div>
+            <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 1">
+                <section class="sec_competitive">
+                    <header class="section_title">
+                        <h2 v-html="competitivePanel.title"></h2>
+                    </header>
+                    <ul class="competitive_list">
+                        <li v-for="(item, i) in competitiveCards" :key="i">
+                            <article>
+                                <span class="icon" aria-hidden="true"></span>
+                                <strong v-html="item.title"></strong>
+                            </article>
+                        </li>
+                    </ul>
+                </section>
+                
+            </div>
 
-            <!--편의점 창업 이해 -->
             <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 2"></div>
 
-            <!-- FAQ -->
-            <div class="tab_page" v-show="activeD1 === 0 && activeD2 ===3"></div>
-
-            
-            <!-- 창업 준비하기 -->
             <div class="tab_page" v-show="activeD1 === 1"></div>
 
-            <!-- 추천 점포 찾기 -->
-            <section class="sec_store tab_page" v-show="activeD1 === 2"></section>
+            <div class="tab_page" v-show="activeD1 === 2"></div>
 
-            <!-- 상담 및 신청 -->
-            <section class="sec_consult tab_page" v-show="activeD1 === 3"></section>
+            <div class="tab_page" v-show="activeD1 === 3"></div>
 
-            <!-- 가맹계약시스템 -->
             <div class="tab_page" v-show="activeD1 === 4"></div>
         </div>
         <ul
@@ -125,9 +127,10 @@ const depth1Tabs = [
 ];
 
 const depth2Tabs = [
-    { item: "가맹 조건 안내" },
-    { item: "가맹/창업 절차" },
-    { item: "창업 전 필수 확인사항" },
+    { item: "GS25 브랜드 소개" },
+    { item: "차별화된 경쟁력" },
+    { item: "편의점 창업 이해" },
+    { item: "FAQ" },
 ];
 
 const brandIntro = {
@@ -212,6 +215,16 @@ const brandSolutionCards = [
     },
 ];
 
+const competitivePanel = {
+    title: "수익성 중심 점포 오픈부터 스마트한 시스템과 밀착 지원까지<br /><span class='txt_blue'>1등 브랜드로 창업을 시작하세요.</span>",
+};
+
+const competitiveCards = [
+    { title: "수익성 중심의<br />점포 오픈" },
+    { title: "고객에게 사랑받는<br />상품/컨셉" },
+    { title: "압도적인<br />마케팅 & 멤버십" },
+    { title: "스마트한 시스템과<br />밀착 지원" },
+];
 
 
 const mqMobile = window.matchMedia("(max-width: 768px)");
@@ -379,8 +392,8 @@ onUnmounted(() => {
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
 .sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
 .section_title { margin-bottom: 64px; }
-.section_title > .tit { width: fit-content; margin-bottom:16px;padding: 8px 16px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 99px;display:block; }
-.section_title > h2 {  color: #161616; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.section_title > .tit { width: fit-content; margin-bottom: 16px; padding: 8px 16px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 99px; display: block; }
+.section_title > h2 { color: #161616; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .section_title > p { margin-top: 16px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 section + section { padding-top: 100px; }
 .tab_page { padding: 64px 0 200px; }
@@ -389,38 +402,55 @@ section + section { padding-top: 100px; }
 .sec_brand_intro > header, .sec_brand_intro > .apply_list, .sec_brand_intro > .stat_list { position: relative; z-index: 1; }
 .sec_brand_intro > header > .tit { width: fit-content; margin: 0; padding: 8px 16px; color: #fff; font-size: 1.4rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; background-color: rgba(255,255,255,0.2); border-radius: 99px; }
 .sec_brand_intro > header > h3 { margin: 8px 0 0; color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.sec_brand_intro > header > .desc { color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; white-space: pre-line; }
-.sec_brand_intro > .apply_list { width: 100%; max-width: 540px; margin-top:24px; display: flex; flex-direction: column; gap: 10px; }
+.sec_brand_intro > header > .desc { color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
+.sec_brand_intro > .apply_list { width: 100%; max-width: 540px; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
 .sec_brand_intro > .apply_list > li > a { width: 100%; min-height: 51px; padding: 12px 20px; background-color: rgba(16,122,242,0.8); border-radius: 12px; color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-sizing: border-box; }
 .sec_brand_intro > .apply_list > li:last-child > a { min-height: 64px; align-items: center; }
 .sec_brand_intro > .apply_list > li > a > strong { flex: 0 0 114px; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
 .sec_brand_intro > .apply_list > li:last-child > a > strong { flex-basis: 114px; font-size: 1.6rem; line-height: 1.24; }
 .sec_brand_intro > .apply_list > li > a > span { flex: 1; min-width: 0; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_brand_intro > .apply_list > li > a::after { content: ''; width: 16px; height: 16px; flex-shrink: 0; background-color: #fff; }
-.sec_brand_intro > .stat_list { width: 100%; max-width: 647px; margin-top:50px; display: flex; gap: 10px; }
+.sec_brand_intro > .stat_list { width: 100%; max-width: 647px; margin-top: 50px; display: flex; gap: 10px; }
 .sec_brand_intro > .stat_list > li { flex: 1; min-width: 0; min-height: 95px; padding: 20px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-align: center; }
 .sec_brand_intro > .stat_list > li > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_brand_intro > .stat_list > li > span { color: rgba(255,255,255,0.8); font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 .sec_success_point :deep(.num_info_list) { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; }
 .sec_success_point :deep(.num_info_item) { padding: 0; border-bottom: 0; }
-.sec_success_point :deep(.num_info_num){margin-bottom:8px; font-size:1.8rem; line-height: 1.5; letter-spacing: 0;} 
-.sec_success_point :deep(.num_info_item article){display:flex;flex-direction:column; gap:24px;} 
-.sec_success_point :deep(.num_info_item:nth-child(-n+2)) { padding-top: 0; }
-.sec_success_point :deep(.num_info_item:last-child), .sec_success_point :deep(.num_info_item:nth-last-child(2):nth-child(odd)) { border-bottom: 0; }
+.sec_success_point :deep(.num_info_num) { margin-bottom: 8px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+.sec_success_point :deep(.num_info_item article) { display: flex; flex-direction: column; gap: 24px; }
 .sec_success_point :deep(.num_info_icon) { width: 80px; height: 80px; }
 .sec_success_point :deep(.num_info_title) { margin-bottom: 8px; }
 .sec_success_point :deep(.num_info_title > strong) { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_success_point :deep(.num_info_body > p) { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_brand_solution > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50%); background-color: #f8f8f8; box-sizing: border-box; }
-.sec_brand_solution > .inner > .section_title { text-align: center; }
+section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50%); background-color: #f8f8f8; box-sizing: border-box; }
+section > .inner > .section_title { text-align: center; }
 .sec_brand_solution > .inner > .link_card_list { display: flex; align-items: stretch; gap: 20px; }
 .sec_brand_solution > .inner > .link_card_list > li { flex: 1; min-width: 0; display: flex; }
 .sec_brand_solution > .inner > .link_card_list > li > a { width: 100%; min-height: 144px; padding: 32px 24px; background-color: #fff; border-radius: 12px; text-decoration: none; display: flex; align-items: center; gap: 20px; box-sizing: border-box; }
 .sec_brand_solution > .inner > .link_card_list > li > a > .thumb { width: 80px; height: 80px; flex-shrink: 0; background-color: #f8f8f8; border-radius: 12px; }
 .sec_brand_solution > .inner > .link_card_list > li > a > .txt { flex: 1; min-width: 0; }
 .sec_brand_solution > .inner > .link_card_list > li > a > .txt > strong { color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
-.sec_brand_solution > .inner > .link_card_list > li > a > .txt > p { margin-top: 6px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_brand_solution > .inner > .link_card_list > li > a > .txt > .desc { margin-top: 6px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
 .sec_brand_solution > .inner > .link_card_list > li > a::after { content: ''; width: 24px; height: 24px; flex-shrink: 0; background-color: #161616; }
+.sec_competitive > .section_title { text-align: center; }
+.sec_competitive > .competitive_list { margin: 0; padding: 0; display: flex; justify-content: center; }
+.sec_competitive > .competitive_list > li { list-style: none; position: relative; }
+.sec_competitive > .competitive_list > li + li { margin-left: -30px; }
+.sec_competitive > .competitive_list > li:nth-child(1) { z-index: 1; }
+.sec_competitive > .competitive_list > li:nth-child(2) { z-index: 2; }
+.sec_competitive > .competitive_list > li:nth-child(3) { z-index: 3; }
+.sec_competitive > .competitive_list > li:nth-child(4) { z-index: 4; }
+.sec_competitive > .competitive_list > li > article { width: 260px; height: 260px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; box-sizing: border-box; }
+.sec_competitive > .competitive_list > li > article > .icon { width: 40px; height: 40px; background-color: #d0d0d8; }
+.sec_competitive > .competitive_list > li > article > strong { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_competitive > .competitive_list > li:nth-child(1) > article { background-color: rgba(255,118,48,0.12); }
+.sec_competitive > .competitive_list > li:nth-child(1) > article > strong { color: #f6671e; }
+.sec_competitive > .competitive_list > li:nth-child(2) > article { background-color: rgba(139,144,148,0.18); }
+.sec_competitive > .competitive_list > li:nth-child(2) > article > strong { color: #5a6670; }
+.sec_competitive > .competitive_list > li:nth-child(3) > article { background-color: rgba(21,80,244,0.11); }
+.sec_competitive > .competitive_list > li:nth-child(3) > article > strong { color: #1550f4; }
+.sec_competitive > .competitive_list > li:nth-child(4) > article { background-color: rgba(16,158,105,0.12); }
+.sec_competitive > .competitive_list > li:nth-child(4) > article > strong { color: #099762; }
 .quick_menu { position: fixed; bottom: 60px; right: clamp(24px, 4.5313vw, 87px); width: clamp(104px, 6.8229vw, 131px); z-index: 100; display: flex; flex-direction: column; gap: clamp(8px, 0.5208vw, 10px); opacity: 0; pointer-events: none; }
 .quick_menu li { position: relative; width: 100%; }
 .quick_menu li button { width: 100%; height: clamp(48px, 3.125vw, 60px); padding: clamp(12px, 0.9375vw, 18px) 0; color: #161616; font-size: clamp(1.3rem, 0.8333vw, 1.6rem); font-weight: 700; letter-spacing: -0.01em; background: none; background-color: #f2f2f4; border: 0; border-radius: 99px; text-align: center; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 0.5208vw, 10px); }
@@ -428,20 +458,22 @@ section + section { padding-top: 100px; }
 @media (max-width: 1024px) {
     .sec_success_point :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
     .sec_brand_solution > .inner > .link_card_list { flex-direction: column; }
+    .sec_competitive > .competitive_list { flex-wrap: wrap; gap: 20px 0; }
+    .sec_competitive > .competitive_list > li + li { margin-left: -30px; }
 }
 @media (max-width: 768px) {
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
-    section + section {padding-top: 80px;}
+    section + section { padding-top: 80px; }
     .page_header { display: none; }
     .sec_body { padding: 24px 0 40px; }
     .tab_page { padding: 60px 20px 80px; }
-    .section_title {margin-bottom:32px;}
-    .section_title > .tit{margin-bottom:12px;padding:4px 12px;}
-    .section_title > h2{  font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
-    .section_title > p {margin-top:12px;      font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}  
+    .section_title { margin-bottom: 32px; }
+    .section_title > .tit { margin-bottom: 12px; padding: 4px 12px; }
+    .section_title > h2 { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .section_title > p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .sec_brand_intro { max-height: none; min-height: 640px; padding: 50px 20px; border-radius: 20px; gap: 0; }
-    .sec_brand_intro > header { text-align: center; }
+    .sec_brand_intro > header { text-align: center; } 
     .sec_brand_intro > header > .tit { margin: 0 auto; padding: 8px 16px; font-size: 1.2rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_brand_intro > header > h3 { margin: 8px 0 0; font-size: 3rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
     .sec_brand_intro > header > .desc { margin-top: 4px; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
@@ -457,7 +489,7 @@ section + section { padding-top: 100px; }
     .sec_brand_intro > .stat_list > li > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
     .sec_brand_intro > .stat_list > li > span { font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
 
-    .sec_success_point .section_title > h2 + p { color:#67676f;font-size:1.8rem ;line-height: 1.4; letter-spacing: 0; }
+    .sec_success_point .section_title > h2 + p { color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .sec_success_point :deep(.num_info_list) { grid-template-columns: 1fr; gap: 40px; }
     .sec_success_point :deep(.num_info_item > article) { flex-direction: row; align-items: flex-start; gap: 16px; }
     .sec_success_point :deep(.num_info_icon) { width: 60px; height: 60px; }
@@ -467,11 +499,15 @@ section + section { padding-top: 100px; }
     .sec_success_point :deep(.num_info_title > strong) { font-size: 2rem; line-height: 1.35; }
     .sec_success_point :deep(.num_info_body > p) { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .sec_brand_solution > .inner { padding: 40px 20px; }
-    .sec_brand_solution > .inner > .link_card_list { margin-top: 32px; flex-direction: column; gap: 10px; }
-    .sec_brand_solution > .inner > .link_card_list > li > a { min-height: 0; padding: 16px; gap:16px;}
+    .sec_brand_solution > .inner > .link_card_list { margin-top: 32px; gap: 10px; }
+    .sec_brand_solution > .inner > .link_card_list > li > a { min-height: 0; padding: 16px; gap: 16px; }
     .sec_brand_solution > .inner > .link_card_list > li > a > .thumb { width: 64px; height: 64px; }
     .sec_brand_solution > .inner > .link_card_list > li > a > .txt > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-    .sec_brand_solution > .inner > .link_card_list > li > a > .txt > p { font-size: 1.4rem; line-height: 1.4; }
+    .sec_brand_solution > .inner > .link_card_list > li > a > .txt > .desc { font-size: 1.4rem; line-height: 1.4; }
+    .sec_competitive > .competitive_list { justify-content: center; }
+    .sec_competitive > .competitive_list > li > article { width: 160px; height: 160px; gap: 12px; }
+    .sec_competitive > .competitive_list > li > article > .icon { width: 32px; height: 32px; }
+    .sec_competitive > .competitive_list > li > article > strong { font-size: 1.6rem; line-height: 1.35; letter-spacing: -0.01em; }
     .quick_menu { display: none; }
 }
 </style>
