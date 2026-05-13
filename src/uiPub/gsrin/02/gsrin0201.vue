@@ -218,13 +218,15 @@
 
                     <!-- gsrin0203: 실적자료 등 -->
                     <section class="tab_content gsrin0203" v-if="CTabIdx === 2" :aria-label="t.Tabs1[2].item">
+
+                        <div class="search_filter_area">
+                            <Search 
+                                v-model="searchData" 
+                                :search_opt="t.options"  @search="handleSearch"
+                            />
+                        </div>
+
                         <div class="table_container">
-                            <div class="search_group">
-                                <Search 
-                                    v-model="searchData" 
-                                    :search_opt="t.options"  @search="handleSearch"
-                                />
-                            </div>
                             <div class="policy_wrap mt24">
                                 <table class="base_table ir_table">
                                     <thead>
@@ -250,13 +252,11 @@
                                 </table>
                             </div>
 
-                            <div class="pagination_area ">
-                                <Pagination 
-                                    v-model="currentPage" 
-                                    :total-pages="10" 
-                                    @change="onPageChange" 
-                                />
-                            </div>
+                            <Pagination 
+                                v-model="currentPage" 
+                                :total-pages="10" 
+                                @change="onPageChange" 
+                            />
                         </div>
                     </section>
                 </div>
@@ -428,17 +428,6 @@ export default {
 :deep(.title-sub-text) { width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4; }
 :deep(.title-sub-text) br {display:none;}
 .title-sub-text.is_dividend {padding-bottom: 16px; padding-top: 100px; text-align:left; }
-.ac { text-align: center; }
-.ar { text-align: right; }
-.al { text-align: left; }
-.mt24 { margin-top: 24px; }
-.mt40 { margin-top: 40px; }
-.mt100 { margin-top: 100px; }
-.search_group :deep(.search_wrap) {display: flex; justify-content: flex-end; gap: 8px;}
-.search_group :deep(.input_search_wrap) {flex: none !important; width: 360px;}
-.search_group :deep(.select_box) {width: 160px !important;}
-.pagination {margin-top:24px; justify-content:center;}
-:deep(label.select select) {width:160px;}
 
 /* Charts */
 .performance_charts { width: 100%; }
@@ -491,17 +480,13 @@ tr.bold td, tr.bold th { font-weight: 700 !important; }
     .title_wrap { display: none !important; }
     .gsrin0201 .policy_wrap, .gsrin0201 .base_table  { overflow-x: auto; }
     .gsrin0201 .base_table, .gsrin0202 .base_table { min-width: 800px; }
-    :deep(label.select select), .search_group :deep(.input_search_wrap) {width:100%;}
-    .title-sub-text.is_dividend {padding-top:60px;}
-    .gsrin0201 .policy_wrap .base_table colgroup col:first-of-type {width:180px !important;}
-    .gsrin0202 .policy_desc {font-size:18px; line-height:1.4;}
+
+    /* 차트 영역 1열 배치 */
     .chart_grid { grid-template-columns: 1fr; gap:80px; } 
     .title-sub-text { font-size: 28px; padding: 60px 0; text-align:left;}
     :deep(.title-sub-text) br {display:block;}
     .policy_wrap th, .policy_wrap td { padding: 12px 15px; font-size: 14px; }
     .gsrin0203 .policy_wrap th:first-child, .gsrin0203 .policy_wrap td:first-child { display: none; }
     .gsrin0203 .policy_wrap thead {display:none;}
-    .search_group .search_wrap {flex-direction:column; align-items:stretch;}
-    .section-sub-title {margin-bottom:0px;}
 }
 </style>

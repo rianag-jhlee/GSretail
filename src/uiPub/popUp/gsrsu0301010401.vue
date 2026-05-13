@@ -14,13 +14,13 @@
                     <!-- 1. 제정목적 -->
                     <section class="section">
                         <strong class="title">{{ t.section1.title }}</strong>
-                        <p class="desc">{{ t.section1.content }}</p>
+                        <p class="desc">{{ t.section1.desc }}</p>
                     </section>
 
                     <!-- 2. 정책 방향성 -->
                     <section class="section">
                         <strong class="title">{{ t.section2.title }}</strong>
-                        <p class="desc">{{ t.section2.intro }}</p>
+                        <p class="desc">{{ t.section2.desc }}</p>
                         <div class="smp_announcement">
                             <dl class="direction_list">
                             <template v-for="(item, index) in t.section2.items" :key="index">
@@ -34,13 +34,13 @@
                     <!-- 3. 관리체계 -->
                     <section class="section">
                         <strong class="title">{{ t.section3.title }}</strong>
-                        <p class="desc">{{ t.section3.content }}</p>
+                        <p class="desc">{{ t.section3.desc }}</p>
                     </section>
 
                     <!-- 4. 주요 활동 -->
                     <section class="section">
                         <strong class="title">{{ t.section4.title }}</strong>
-                        <p class="desc">{{ t.section4.intro }}</p>
+                        <p class="desc">{{ t.section4.desc }}</p>
 
                         <!-- 이미지 영역 -->
                         <figure class="image_wrap">
@@ -78,11 +78,11 @@ export default {
                     intro: 'GS리테일은 지역 경제 활성화 및 지역사회 성장 기반 마련을 목적으로 지역사회 지원 활동을 하고 있습니다. 특히 유통업의 특성을 살린 다양한 판로 지원 활동을 통해 상생의 문화를 만들어 나가는 중입니다.',
                     section1: {
                         title: '1. 제정목적',
-                        content: 'GS리테일은 기업의 사회적책임을 다하고자 사회공헌 활동을 비롯해 지역사회를 대상으로한 참여활동을 전개하고자 합니다. 또한, 이러한 활동에 있어 고객의 동참을 이끌어내 선한 영향력을 확산하기위해 노력합니다. 사회에 긍정적인 변화를 가져오기 위해서는 GS리테일 뿐만 아니라, 고객, 임직원이 함께 노력해야 하기 때문입니다. 따라서 함께 지역사회에 공헌할 수 있는 기회를 꾸준히 마련하고자 합니다. 미래세대 투자를 고려한 프로그램을 개발할 것입니다. 미래세대는 지속가능한 사회를 만들어가야 하는 주요한 이유 중 하나입니다. 미래세대에게 필요한 지역사회 참여프로그램 발굴함으로써 지역사회의 건강한 미래를 위해 힘쓸 것입니다.'
+                        desc: 'GS리테일은 기업의 사회적책임을 다하고자 사회공헌 활동을 비롯해 지역사회를 대상으로한 참여활동을 전개하고자 합니다. 또한, 이러한 활동에 있어 고객의 동참을 이끌어내 선한 영향력을 확산하기위해 노력합니다. 사회에 긍정적인 변화를 가져오기 위해서는 GS리테일 뿐만 아니라, 고객, 임직원이 함께 노력해야 하기 때문입니다. 따라서 함께 지역사회에 공헌할 수 있는 기회를 꾸준히 마련하고자 합니다. 미래세대 투자를 고려한 프로그램을 개발할 것입니다. 미래세대는 지속가능한 사회를 만들어가야 하는 주요한 이유 중 하나입니다. 미래세대에게 필요한 지역사회 참여프로그램 발굴함으로써 지역사회의 건강한 미래를 위해 힘쓸 것입니다.'
                     },
                     section2: {
                         title: '2. 정책 방향성',
-                        intro: '지역사회 참여 정책의 방향성은 다음과 같습니다.',
+                        desc: '지역사회 참여 정책의 방향성은 다음과 같습니다.',
                         items: [
                             { label: '하나', content: '지역사회와의 연계활동을 통한 협력모델 구현입니다. 지역 스타트업과의 제품 개발, 상품 입점 지원 등을 통해 함께 성장하는 사업 모델을 확대하고자 합니다.' },
                             { label: '둘', content: '지역 중소기업, 지역 전통시장, 스타트업 등 다양한 이해 관계자들과의 관계 강화입니다. 우리 사회의 다양한 이해관계자들과 건강한 관계를 유지하고 적극적인 교류를 이어 나가 함께 지역경제 활성화를 추진고자 노력할 것입니다.' },
@@ -91,11 +91,11 @@ export default {
                     },
                     section3: {
                         title: '3. 지역사회 참여정책 관리체계',
-                        content: '지역사회 참여활동은 지역사회 성장을 위한 활동들로 이루어지며, 사회공헌 관련한 활동은 사회공헌파트가 주관하고 지역 특산물 관련 판로개척은 MD 및 방송사업지원팀이 담당하고 있습니다.'
+                        desc: '지역사회 참여활동은 지역사회 성장을 위한 활동들로 이루어지며, 사회공헌 관련한 활동은 사회공헌파트가 주관하고 지역 특산물 관련 판로개척은 MD 및 방송사업지원팀이 담당하고 있습니다.'
                     },
                     section4: {
                         title: '4. 지역사회 참여정책 관련 주요 활동',
-                        intro: 'GS리테일은 지역사회가 가지고 있는 고민들에 공감하고 이를 해결하기 위해 꾸준히 지원하고 있습니다. GS리테일이 가지고 있는 유통경쟁력을 바탕으로 지역사회의 성장을 위한 선순환고리를 구축해 나가는 중입니다. 지역사회 관련 주요 활동은 아래와 같습니다.',
+                        desc: 'GS리테일은 지역사회가 가지고 있는 고민들에 공감하고 이를 해결하기 위해 꾸준히 지원하고 있습니다. GS리테일이 가지고 있는 유통경쟁력을 바탕으로 지역사회의 성장을 위한 선순환고리를 구축해 나가는 중입니다. 지역사회 관련 주요 활동은 아래와 같습니다.',
                         image: {
                             src: require("@/assets/images/dummy/gsrsu03010104_diagram.png"),
                             alt: '지역사회 참여정책 관련 주요 활동'
@@ -127,6 +127,8 @@ export default {
 
 <style scoped>
 /* smp_announcement_pop 스타일 */
+.smp_announcement_pop {font-size:15px; line-height:25px;}
+.smp_announcement_pop .intro_desc {color:#444; font-size:18px; line-height:26px;}
 .smp_announcement_pop .title {display:block;font-size:18px;font-weight:700;padding-bottom:20px}
 .smp_announcement_pop .title_b {display:block;font-size:15px;font-weight:700;padding:25px 0 6px 0}
 .smp_announcement_pop .section {padding:35px 0;border-bottom:1px solid #dfdfdf}
@@ -146,6 +148,6 @@ export default {
 
 /* 반응형 */
 @media screen and (max-width: 767px) {
-    .modal_header {font-size:18px;}
+    .modal_header {font-size:18px; padding-bottom:24px;}
 }
 </style>

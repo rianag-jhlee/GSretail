@@ -60,13 +60,13 @@
                     </div>
                 </section>
 
-                <div class="pagination_area ">
-                    <Pagination 
-                        v-model="currentPage" 
-                        :total-pages="10" 
-                        @change="onPageChange" 
-                    />
-                </div>
+                <!-- 26.05.13 Edit 이종환 : 공통화 -->
+                <Pagination 
+                    v-model="currentPage" 
+                    :total-pages="10" 
+                    @change="onPageChange" 
+                />
+                <!-- //26.05.13 Edit 이종환 : 공통화 -->
 
             </div>
         </section>
@@ -185,13 +185,6 @@ export default {
 .visual-sub { margin-top: 10px; color: #111; font-size: 24px; font-weight: 400; line-height:150%; }
 .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
 
-.search_filter_area { display: flex; width: 100%; height: 52px; justify-content: space-between; align-items: center; margin-top: 100px; margin-bottom:24px;}
-.search_filter_area .search_wrap {margin-left:auto;}
-
-.pagination_area {width: 100%; margin-top:60px; display: flex; justify-content: center; }
-
-.search_filter_area + .tab_wrap {margin-top:0;}
-
 .tab_wrap {margin-top:48px;}
 .tab_wrap :deep(ul.type_full) li {flex:1;}
 .tab_wrap :deep(ul.type_full) li a {padding:16.5px 5px; color:#90909A; font-size:1.8rem; line-height:140%; border:1px solid #C4C4D0; text-align:center;}
@@ -217,19 +210,11 @@ export default {
 .qna :deep(dt) > a.acc_tit_open {font-weight:700; line-height:135%;}
 .qna :deep(dd) .acc_panel_cont {padding:16px 32px 40px !important; font-size:2rem; line-height:135%; letter-spacing:-0.01em;}
 
-@media screen and (max-width: 1024px) {
-    .search_filter_area { flex-direction: column; height: auto; align-items: flex-start; gap: 10px; }
-}
 @media screen and (max-width: 767px) {
     .title_wrap {margin-top:48px; padding:0 20px; text-align:initial;}
     .title_wrap h2 {display:none;}
     .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
     .cont_inner {padding:0 20px;}
-
-    .search_filter_area {margin-top:60px;}
-
-    .search_wrap {width:100%; margin:0; flex-direction:column;}
-    .search_wrap > * {width:100%;}
 
     .board_wrap.type_gallery .body {margin-top:-48px;}
     .board_wrap.type_gallery .body > li {width:100%; padding-top:48px;}

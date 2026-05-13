@@ -21,10 +21,22 @@ button {cursor:pointer;}
 
 /* margin */
 .mt10 {margin-top:10px !important;}
-.mt40 { margin-top: 40px; }
-.mt60 { margin-top: 60px; }
-.mb40 { margin-bottom: 40px; }
-.mb100 { margin-bottom: 100px; }
+.mt16 { margin-top: 16px !important; }
+.mt20 { margin-top: 20px !important; }
+.mt40 { margin-top: 40px !important; }
+.mt60 { margin-top: 60px !important; }
+.mt64 { margin-top: 64px !important; }
+.mt100 { margin-top: 100px !important; }
+.mb12 { margin-bottom: 12px !important; }
+.mb16 { margin-bottom: 16px !important; }
+.mb24 { margin-bottom: 24px !important; }
+.mb40 { margin-bottom: 40px !important; }
+.mb80 { margin-bottom: 80px !important; }
+.mb100 { margin-bottom: 100px !important; }
+.mb200 { margin-bottom: 200px !important; }
+
+/* padding */
+.py80 { padding: 80px 0 !important; }
 
 /*:::::::::::::::::::::::::::::::Element :::::::::::::::::::::::::::::::*/
 input {font-size:1.4rem; vertical-align:middle;}
@@ -63,7 +75,7 @@ select {width:100%; height:52px; padding:12px 40px 12px 12px; font-size:1.4rem; 
 [class*="btn_icon"][class*="before"]::before  {content:''; width:20px; height:20px; margin-right:10px; background:red; display:inline-block;}
 [class*="btn_icon"][class*="after"]::after  {content:''; width:20px; height:20px; margin-left:10px; background:red; display:inline-block;}
 .btn_download_file { display: inline-flex; align-items: center; gap: 12px; background: none; border: 0; cursor: pointer; }
-.btn_download_file::before {content:''; width:24px; height:24px; background:red; display:inline-block;}
+.btn_download_file::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -832px -56px no-repeat; display:inline-block;}
 
 .btnBox {display:inline-flex; align-items:center; flex-wrap:wrap;}
 .btnBox [class*="btn_"] + [class*="btn_"] {margin-left:8px;}

@@ -520,8 +520,12 @@
                                         </ul>
 
                                         <div class="btn-wrap ac mt60">
-                                            <Buttons btn-class="btn_icon btn_xl border after">
-                                                {{ t.supplychain.Policy.BtnText }}
+                                            <Buttons btn-class="btn_icon btn_xl border after"
+                                                @click="openModal" 
+                                                data-popid="gsrsu0301010501" 
+                                                data-type="lg" 
+                                                data-cont="gsrsu0301010501">
+                                                    {{ t.supplychain.Policy.BtnText }}
                                             </Buttons>
                                         </div>
                                     </div>
@@ -764,7 +768,11 @@
                                             <p class="p" v-html="t.protect.humanrights.Policy.Desc"></p>
                                         </div>
                                         <div class="btn-wrap ac mt60">
-                                            <Buttons btn-class="btn_icon btn_xl border after">
+                                            <Buttons btn-class="btn_icon btn_xl border after"
+                                                @click="openModal" 
+                                                data-popid="gsrsu03030101" 
+                                                data-type="lg" 
+                                                data-cont="gsrsu03030101">
                                                 {{ t.protect.humanrights.Policy.BtnText }}
                                             </Buttons>
                                         </div>
@@ -1028,9 +1036,7 @@
                                         </div>
 
                                         <!-- 페이지네이션 (기본 Pagination 컴포넌트 활용) -->
-                                        <div class="pagination_wrap mt60">
-                                            <Pagination v-model="page" :totalPages="5" :visiblePages="5" @change="handlePage" />
-                                        </div>
+                                        <Pagination v-model="page" :totalPages="5" :visiblePages="5" @change="handlePage" />
                                     </div>
                                 </div>
                             </div>
@@ -1060,7 +1066,11 @@
                                             </ul>
                                         </div>
                                         <div class="btn-wrap ac mt60">
-                                            <Buttons btn-class="btn_icon btn_xl border after">
+                                            <Buttons btn-class="btn_icon btn_xl border after" 
+                                                @click="openModal" 
+                                                data-popid="gsrsu03030301" 
+                                                data-type="lg" 
+                                                data-cont="gsrsu03030301">
                                                 {{ t.protect.customer.Policy.BtnText }}
                                             </Buttons>
                                         </div>
@@ -1120,7 +1130,12 @@
                                             <div class="tit_wrap">
                                                 <strong class="tit">
                                                     {{ item.tit }}
-                                                    <button class="icon_link_before"></button>
+                                                    <button class="icon_link_before" 
+                                                        @click="openModal" 
+                                                        :data-popid="item.popContId" 
+                                                        data-type="lg" 
+                                                        :data-cont="item.popContId">
+                                                    </button>
                                                 </strong>
                                                 <!-- 링크 아이콘 영역 ::before 사용 -->
                                             </div>
@@ -1516,6 +1531,31 @@
         <div id="gsrsu0301010401" class="modal_wrap">
             <div class="modal_container"></div>
         </div>
+
+        <div id="gsrsu0301010501" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrsu03030101" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrsu03030301" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrsu03030302" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrsu03030303" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrsu03030304" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+        
     </div>
 </template>
 
@@ -1526,6 +1566,7 @@ import Pagination from "@/components/Pagination.vue";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue"; 
 import Textarea from "@/components/Textarea.vue";
+import modal from "@/assets/js/modal";
 
 export default {
     name: "gsrsu03010101",
@@ -2330,9 +2371,9 @@ export default {
                             Safety: {
                                 Title: "제품과 서비스 안전을 위한<br/> 제도 운영",
                                 Items: [
-                                    { step: "01", tit: "맛, 신선도 지킴이 안내", desc: "신선, 맛, NO.1을 위한 GS리테일의 선도 지킴이 활동을 확인해보세요." },
-                                    { step: "02", tit: "안전, 위생관리 제도", desc: "GS리테일의 안전, 위생관리 제도를 확인해 보세요." },
-                                    { step: "03", tit: "위해상품 차단시스템", desc: "안전한 상품을 제공해 드리기 위해 위해상품 차단 시스템에 참여하고 있습니다." }
+                                    { step: "01", tit: "맛, 신선도 지킴이 안내", desc: "신선, 맛, NO.1을 위한 GS리테일의 선도 지킴이 활동을 확인해보세요.", popContId: "gsrsu03030302"},
+                                    { step: "02", tit: "안전, 위생관리 제도", desc: "GS리테일의 안전, 위생관리 제도를 확인해 보세요.", popContId: "gsrsu03030303"},
+                                    { step: "03", tit: "위해상품 차단시스템", desc: "안전한 상품을 제공해 드리기 위해 위해상품 차단 시스템에 참여하고 있습니다.", popContId: "gsrsu03030304"}
                                 ]
                             },
                             Compensation: {

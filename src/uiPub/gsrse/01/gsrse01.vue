@@ -347,17 +347,6 @@ export default {
 .mo {display:none;}
 .pc {display:block;}
 
-.ac { text-align: center; }
-.al { text-align: left; }
-.mt64 { margin-top: 64px; }
-.mt100 { margin-top: 100px; }
-.mb12 { margin-bottom: 12px; }
-.mb16 { margin-bottom: 16px; }
-.mb24 { margin-bottom: 24px; }
-.mb40 { margin-bottom: 40px; }
-.mb100 { margin-bottom: 100px; }
-.mt20 { margin-top: 20px; }
-.py80 { padding: 80px 0; }
 /* 2. 텍스트 스타일 가이드 */
 .section-sub-title { font-size: 40px; font-weight: 700; color: #161616; }
 .intro_desc { font-size: 24px; color: #161616; line-height: 1.5; }
@@ -484,16 +473,5 @@ export default {
     .card_grid {flex-direction:column;}
     .card_grid .info_card {width:100%;}
     .policy_wrap th, .policy_wrap td, .policy_wrap td a {font-size: 16px !important; }
-    .mt100 {margin-top:60px !important;}
-    .mb100 {margin-bottom:60px;}
-    .mb40{margin-bottom:24px;}
-    .mt64 {margin-top:16px !important;}
-    /* 상단 헤더 (상호, 사이트) */
-    .auth_header {background-color: #f8f8f8; border-top:1px solid #161616; border-bottom: 1px solid #e5e5e9; display:flex;}
-    .auth_header span {padding: 15px 0; color: #161616; font-size: 16px; font-weight: 700; text-align: center; flex: 1}
-    .auth_row {padding: 16px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center;}
-    .agency_name {color: #161616; font-size: 16px; text-align:center;flex: 1;}
-    .btn_go_link {color: #107af2; font-size: 16px; font-weight: 500; text-align: center; text-decoration: underline; flex: 1;}
-    .auth_card_item:last-child .auth_row:last-child { border-bottom: 1px solid #e5e5e9;}
 }
 </style>

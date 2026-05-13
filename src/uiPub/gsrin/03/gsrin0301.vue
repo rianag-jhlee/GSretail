@@ -29,14 +29,13 @@
                     <section class="tab_content gsrin0301" v-if="CTabIdx === 0">
                         <h4 class="content_title mb40">{{ t.Tabs1[0].item }}</h4>
                         
-                        <div class="search_filter_area mb24">
+                        <div class="search_filter_area">
                             <div class="filter_group">
                                 <span class="filter_label">{{ t.YearSelectLabel }}</span>
                                 <SelectBox v-model="selectedYear1" :options="t.YearOptions" />
                             </div>
-                            <div class="search_group">
-                                <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
-                            </div>
+
+                            <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                         </div>
 
                         <div class="policy_wrap">
@@ -75,7 +74,7 @@
                         <!-- gsrin030201 -->
                         <section class="tab_content gsrin030201" v-if="InnerTabIdx === 0">
                             <h4 class="content_title mb40">{{ t.InnerTabs[0].item }}</h4>
-                            <div class="search_group mb24">
+                            <div class="search_filter_area">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
                             <div class="policy_wrap">
@@ -104,7 +103,7 @@
                         <!-- gsrin030202 -->
                         <section class="tab_content gsrin030202" v-if="InnerTabIdx === 1">
                             <h4 class="content_title mb40">{{ t.InnerTabs[1].item }}</h4>
-                            <div class="search_group mb24">
+                            <div class="search_filter_area">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
                             <div class="policy_wrap">
@@ -133,7 +132,7 @@
                         <!-- gsrin030203 -->
                         <section class="tab_content gsrin030203" v-if="InnerTabIdx === 2">
                             <h4 class="content_title mb40">{{ t.InnerTabs[2].item }}</h4>
-                            <div class="search_group mb24">
+                            <div class="search_filter_area">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
                             <div class="policy_wrap">
@@ -177,14 +176,13 @@
                             </Buttons>
                         </h4>
 
-                        <div class="search_filter_area mb24">
+                        <div class="search_filter_area">
                             <div class="filter_group">
                                 <span class="filter_label">{{ t.YearSelectLabel }}</span>
                                 <SelectBox v-model="selectedYear3" :options="t.YearOptions2" />
                             </div>
-                            <div class="search_group">
-                                <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
-                            </div>
+
+                            <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                         </div>
                         
                         <div class="policy_wrap">
@@ -323,14 +321,6 @@ export default {
 .section-sub-title { font-size: 40px; font-weight: 700; color: #161616; margin-bottom: 16px; }
 .policy_desc { font-size: 24px; color: #161616; line-height: 1.5; word-break: keep-all; }
 
-/* 검색 및 필터 */
-.search_filter_area { display: flex; justify-content: space-between; align-items: center; }
-.filter_group { display: flex; align-items: center; gap: 12px; }
-.filter_label { font-size: 16px; color: #161616; }
-.search_group :deep(.search_wrap) { display: flex; justify-content: flex-end; gap: 8px; }
-.search_group :deep(.input_search_wrap) { flex: none !important; width: 360px; }
-.search_group :deep(.select_box) { width: 160px !important; }
-
 /* 테이블 스타일 */
 .content_title { font-size: 40px; font-weight: 700; color: #161616; display:flex; align-items:center; justify-content:space-between;}
 .content_title a {font-weight:normal;}
@@ -341,17 +331,6 @@ export default {
 .policy_wrap th { border-left: 0; border-right: 0; }
 .policy_wrap td a { font-size: 1.8rem; color: #161616; text-decoration: none; }
 .policy_wrap td a:hover { text-decoration: underline; }
-
-
-.ac { text-align: center; }
-.al { text-align: left; }
-.mt100 { margin-top: 100px; }
-.mb100 { margin-bottom: 100px; }
-.mb40 { margin-bottom: 40px; }
-.mb24 { margin-bottom: 24px; }
-.mt16 { margin-top: 16px; }
-.py80 { padding: 80px 0; }
-.pagination_area { display: flex; justify-content: center; }
 
 @media screen and (max-width:1024px) {
     .cont_inner { padding: 0 20px; }
@@ -367,17 +346,11 @@ export default {
     .cont_inner {padding: 80px 20px 200px;}
     .tab_content_wrap.mt100 {margin-top:60px;}
     :deep(ul.type_02) {margin-top:-35px !important;}
-    .search_filter_area { flex-direction: column; height: auto; align-items: stretch; gap:8px; }
-    .policy_wrap td { padding:23px 10px; font-size:16px;}
     .policy_wrap th:first-child, .policy_wrap td:first-child { display: none; }
     .policy_wrap thead {display:none;}
-    .filter_group {flex-direction:column; align-items:stretch;}
-    .search_group .search_wrap {flex-direction:column; align-items:stretch;}
-    .search_group :deep(.input_search_wrap) {width:100% !important;}
     .gsrin0303 .content_title {flex-direction:column; align-items:flex-start; gap:12px}
     .filter_label {display:none;}
     .btn_big {font-size:16px;}
-    .mb100 {margin-bottom:80px;}
     .policy_wrap td a {font-size:16px;}
 }
 </style>
