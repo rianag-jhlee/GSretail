@@ -1416,12 +1416,12 @@
         "link": "/gsrsu040101",
         "startDate": "",
         "endDate": "",
-        "status": "ing",
+        "status": "com",
         "note": "gsrsu040102, gsrsu04010201, gsrsu040103, gsrsu040104, gsrsu04010401, gsrsu0401040101, gsrsu04010501, gsrsu0401050101 포함"
     },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "지침", "depth5": "", "depth6": "",
-        "type": "page",
+        "type": "TAB",
         "path": "gsrsu/04/gsrsu040102",
         "link": "/gsrsu040102" ,
         "startDate": "",
@@ -1429,18 +1429,71 @@
         "status": "com",
         "note": "gsrsu040101에서서 확인"
     },
+
     {
-        "depth1": "", "depth2": "", "depth3": "제도", "depth4": "", "depth5": "", "depth6": "",
-        "type": "page",
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "제도", "depth5": "", "depth6": "",
+        "type": "TAB",
         "path": "gsrsu/04/gsrsu040103",
         "link": "/gsrsu040103" ,
         "startDate": "",
         "endDate": "",
-        "status": "ing",
+        "status": "com",
         "note": "gsrsu040101에서서 확인"
     },
     {
-        "depth1": "고객센터", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "제보", "depth5": "", "depth6": "",
+        "type": "TAB",
+        "path": "gsrsu/04/gsrsu040104",
+        "link": "/gsrsu040104" ,
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu040101에서서 확인"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "준법경영", "depth4": "자율준수 프로그램", "depth5": "", "depth6": "",
+        "type": "TAB",
+        "path": "gsrsu/04/gsrsu040201",
+        "link": "/gsrsu040201",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu040102, gsrsu04010201, gsrsu040103, gsrsu040104, gsrsu04010401, gsrsu0401040101, gsrsu04010501, gsrsu0401050101 포함"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "자율준수 관리자 안내", "depth5": "", "depth6": "",
+        "type": "TAB",
+        "path": "gsrsu/04/gsrsu040202",
+        "link": "/gsrsu040202" ,
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu040101에서서 확인"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "공정거래 4대 가이드 라인", "depth5": "", "depth6": "",
+        "type": "TAB",
+        "path": "gsrsu/04/gsrsu04010201",
+        "link": "/gsrsu04010201" ,
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu040101에서서 확인"
+    },
+    {
+        "depth1": "", "depth2": "", "depth3": "", "depth4": "공정거래 업무기준", "depth5": "수퍼, 편의점, 전문점", "depth6": "",
+        "type": "TAB",
+        "path": "gsrsu/04/gsrsu04020401",
+        "link": "/gsrsu04020401" ,
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrsu040101에서서 확인"
+    },
+
+  
+    {
+        "depth1": "About GSR", "depth2": "CEO 인사말", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
         "path": "gsrcu/01/gsrcu01",
         "link": "/gsrcu01" ,

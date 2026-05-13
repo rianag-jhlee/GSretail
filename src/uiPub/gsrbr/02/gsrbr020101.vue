@@ -716,7 +716,7 @@ export default {
 .mou_item { border-radius: 12px; text-align: center; }
 .mou_logo { width: 100%; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
 .mou_logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.mou_name { color: #161616; font-size: 18px; font-weight: 700; }
+.mou_name { color: #161616; font-size: 1.8rem; font-weight: 700; }
 
 .mou_item.text_item { text-align: left; display: flex; flex-direction: column; justify-content: center; }
 .mou_logo.fipa_logo {margin-bottom:20px; justify-content: flex-start; }
@@ -724,7 +724,7 @@ export default {
 
 .mou_products { margin-top: 100px; }
 .mou_table { width: 100%; border-top: 1px solid #161616; border-collapse: collapse; }
-.mou_table th, .mou_table td { padding: 24px; border-bottom: 1px solid #e5e5e3; text-align: left; font-size: 18px; line-height: 1.6; }
+.mou_table th, .mou_table td { padding: 24px; border-bottom: 1px solid #e5e5e3; text-align: left; font-size: 1.8rem; line-height: 1.6; }
 .mou_table th { background-color: #f8f8f8; color: #161616; font-weight: 700; }
 .mou_table td { color: #67676f; }
 
@@ -751,7 +751,7 @@ export default {
 .origin_item { width: 100%; }
 .item_thumb { width: 100%; height: 198px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; }
 .item_thumb img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
-.item_name { width: 100%; margin-top: 16px; color: #67676f; font-size: 18px; text-align: center; }
+.item_name { width: 100%; margin-top: 16px; color: #67676f; font-size: 1.8rem; text-align: center; }
 
 /* common.css로 이동
 .btn_back { padding-left: 28px; color: #161616; font-size: 20px; background: none; border: 0; cursor: pointer; position: relative; }
@@ -780,7 +780,7 @@ export default {
 .tm-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px 20px; }
 .tm-step-item { display: flex; flex-direction: column; gap: 20px; }
 .tm-step-icon { width: 40px; height: 40px; }
-.tm-step-num { font-size: 18px; font-weight: 700; color: #107AF2; display: block; margin-bottom: 6px; }
+.tm-step-num { font-size: 1.8rem; font-weight: 700; color: #107AF2; display: block; margin-bottom: 6px; }
 .tm-step-num::before {content:''; width:40px; height:40px; margin-bottom:20px; background:red; display:block;}
 .tm-step-tit {margin-bottom:16px; font-size: 20px; font-weight: 700; color: #161616; display: block; }
 .tm-step-text { font-size: 16px; color: #67676F; line-height: 1.5; }
@@ -790,9 +790,9 @@ export default {
 .swiper-slide.tm-principle-card {height:stretch; margin-right:20px;}
 .swiper-slide.tm-principle-card:last-of-type {margin-right:0 !important;}
 .tm-card-header {display:flex; flex-direction:column; gap:8px;}
-.tm-card-num { font-size: 18px; font-weight: 700; color: #107AF2; }
+.tm-card-num { font-size: 1.8rem; font-weight: 700; color: #107AF2; }
 .tm-card-tit { font-size: 20px; font-weight: 700; color: #161616; }
-.tm-card-main-text { margin-bottom:8px; font-size: 18px; font-weight: 700; color: #67676F; line-height: 1.5; }
+.tm-card-main-text { margin-bottom:8px; font-size: 1.8rem; font-weight: 700; color: #67676F; line-height: 1.5; }
 .tm-card-sub-text { font-size: 16px; color: #67676F; line-height: 1.5; }
 
 /* Product Layout */
@@ -809,7 +809,7 @@ export default {
 .tm-product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .tm-product-thumb { width: 100%; height: 198px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; }
 .tm-product-thumb img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
-.tm-product-name { margin-top: 16px; font-size: 18px; color: #67676F; text-align: center; line-height: 1.4; }
+.tm-product-name { margin-top: 16px; font-size: 1.8rem; color: #67676F; text-align: center; line-height: 1.4; }
 .bottom_btns + .btn_big.border {display:none !important;}
 
 
@@ -827,7 +827,7 @@ export default {
     .content_img { position: static; width: 100%; height: auto; margin-top: 20px; }
     .origin_list_box {width:100%;}
     .origin_intro .title { font-size: 32px; }
-    .origin_intro .text_box p { font-size: 18px; }
+    .origin_intro .text_box p { font-size: 1.8rem; }
     .origin_content_wrap { flex-direction: column; }
     .origin_lnb { width: 100%; position: static; margin-bottom: 40px; }
     .origin_lnb ul { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -848,16 +848,16 @@ export default {
 /* 모바일 반응형 (767px 이하) */
 @media screen and (max-width: 767px) {
     .visual_img { height: 400px; }
-    .text_box span { font-size: 18px; }
+    .text_box span { font-size: 1.8rem; }
     .visual_content .text_box p, .visual_content .text_box p :deep(strong) { font-size: 48px; }
     .visual_img { height: 100%; }
     .brand_intro_section { padding: 100px 0; }
-    .history_text { font-size: 18px; }
+    .history_text { font-size: 1.8rem; }
     .history_text :deep(br) {display:none;}
     .brand_value_section { padding: 100px 0; }
     .title_text { font-size: 24px; }
     .accordion_header, .accordion_item.active .accordion_header { padding: 24px 80px 24px 24px; position:relative; }
-    .header_text { font-size: 18px; text-align:left;}
+    .header_text { font-size: 1.8rem; text-align:left;}
     .accordion_body { padding: 0 20px 20px; }
     .desc_text { font-size: 16px; }
     :deep(.desc_text) br:first-of-type, :deep(.desc_text) br:last-of-type {display:none !important;}

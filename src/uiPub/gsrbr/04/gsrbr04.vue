@@ -173,7 +173,7 @@ export default {
 .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 .benefit_section { padding-top: 200px; }
 img { display: block; width: 100%; }
-h3 { margin-bottom: 64px; color: #161616; font-size: 48px; font-weight: 700; }
+h3 { margin-bottom:16px; color: #161616; font-size: 48px; font-weight: 700; }
 h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 
 /* Visual Section */
@@ -182,8 +182,9 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 .text_box span { display: block; color: #fff; font-size: 72px; font-weight: 700; line-height: 1.2; }
 
 /* Body Content Area */
+.body_wrap {padding-bottom:200px;}
 .body_wrap .cont_area { padding: 200px 0; background: #F8F8F8; }
-.intro_text p { color: #161616; font-size: 24px; font-weight: 700; line-height: 1.35; }
+.intro_text p { color: #161616; font-size: 24px; font-weight:600; line-height: 1.35; }
 .body_wrap .cont_area .cont_inner .intro_text + ul { margin-top: 65px; margin-bottom: 40px; padding: 50px; background: #fff; list-style: none; }
 
 .bi_section { position: relative; width: 100%; margin-top: 0 !important; }
@@ -203,7 +204,7 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 .mo.qr_download_area a strong::after { display: inline-block; width: 20px; height: 20px; background: red; content: ''; }
 
 /* Benefit Section */
-.benefit_list { display: flex; flex-wrap: wrap; gap:80px 20px; padding: 0; list-style: none; }
+.benefit_list {padding-top:48px; display: flex; flex-wrap: wrap; gap:80px 20px;}
 .benefit_list li { position: relative; width: calc((100% - (20px * 2)) / 3); padding-top: 104px; }
 .benefit_list li::before { position: absolute; top: 0; left: 0; width: 80px; height: 80px; background-color: #eee; border-radius: 50%; content: ''; }
 .benefit_list li::after {width:40px; height:40px; background: url('@/assets/images/sub/icon_br04_search_40.png') 0 0 no-repeat; background-size:cover; content:''; position:absolute; top:20px; left:20px; display:block;}
@@ -213,7 +214,7 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 .benefit_info .tit_area { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .benefit_info .tit_area strong { color: #161616; font-size: 24px; font-weight: 700; }
 .benefit_info .btn_link { color: #107af2; font-size: 14px; text-decoration: underline; }
-.benefit_info .desc { display: block; color: #67676f; font-size: 18px; line-height: 1.5; }
+.benefit_info .desc { display: block; color: #67676f; font-size: 1.8rem; line-height: 1.5; }
 /* 26.05.11 제거
 .benefit_info a {font-size:0px;}
 .benefit_info a::after {content:''; width:24px; height:24px; background:red; display:inline-block;}
@@ -234,7 +235,7 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 }
 
 @media screen and (max-width: 1024px) {
-    h4 { font-size: 18px; }
+    h4 { font-size: 1.8rem; }
     .bi_section { padding: 0; }
     .pc { display: none; }
     .mo { display: flex; }
@@ -242,21 +243,24 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
     .benefit_list li { width: calc((100% - 15px) / 2); padding-top: 70px; }
     .benefit_info .tit_area strong { font-size:18px; }
     .benefit_info .desc { font-size: 16px; }
+        .benefit_list li::before { position: absolute; top: 0; left: 0; width: 60px; height: 60px; background-color: #eee; border-radius: 50%; content: ''; }
+    .benefit_list li::after {top:10px; left:10px;}
+    .benefit_list li:nth-child(2)::after, .benefit_list li:nth-child(3)::after {top:10px; left:10px;}
 }
 
 @media screen and (max-width: 767px) {
     h3 {font-size:24px;}
     .intro_text { margin-bottom: 40px; }
     .intro_text p { font-size: 16px; font-weight: 400; line-height: 1.5; }
-    .intro_text p:first-of-type { margin-bottom: 20px; }
-    .text_box span { font-size: 32px; }
+    .intro_text p:first-of-type { margin-bottom:0px; }
+    .text_box span { font-size: 32px; text-align:center; }
     .body_wrap .cont_area { padding: 60px 0; }
     .benefit_section { padding-top: 80px; }
     .benefit_list { gap: 32px 10px; }
     .benefit_list li { width: calc((100% - 10px) / 2); }
     .bottom_btns + .btn_big.border { display: flex; justify-content: center; margin-top: 100px; margin-bottom: 80px; }
     .bi_section h4 {flex-direction:column;}
-    .body_wrap .cont_area .cont_inner .intro_text + ul {padding:30px;}
-    .bi_section h4 p {width:100%; margin-top:8px; font-size:16px; flex-direction:column;}
+    .body_wrap .cont_area .cont_inner .intro_text + ul {margin-top:40px; margin-bottom:0; padding:32px; border-radius:12px;}
+    .bi_section h4 p {width:100%; margin-top:8px; font-size:16px; line-height:1.5; flex-direction:column;}
 }
 </style>

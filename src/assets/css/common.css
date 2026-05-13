@@ -21,6 +21,10 @@ button {cursor:pointer;}
 
 /* margin */
 .mt10 {margin-top:10px !important;}
+.mt40 { margin-top: 40px; }
+.mt60 { margin-top: 60px; }
+.mb40 { margin-bottom: 40px; }
+.mb100 { margin-bottom: 100px; }
 
 /*:::::::::::::::::::::::::::::::Element :::::::::::::::::::::::::::::::*/
 input {font-size:1.4rem; vertical-align:middle;}

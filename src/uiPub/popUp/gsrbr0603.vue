@@ -20,7 +20,8 @@
                         </div>
                     </div>
                     <div class="btn_group">
-                        <button type="button" class="btn_big btn_icon before primary" @click="handleSearch">{{ t.BtnSearch }}</button>
+                        <!-- 26.05.12 Edit 이종환 : class 수정 -->
+                        <button type="button" class="btn_big btn_icon_search primary" @click="handleSearch">{{ t.BtnSearch }}</button>
                         <button type="button" class="btn_big gray" @click="handleReset">{{ t.BtnReset }}</button>
                     </div>
                 </div>
@@ -126,23 +127,25 @@ export default {
 </script>
 
 <style scoped>
-.modal_header { font-size: 40px; font-weight: 700; border-bottom: 0; }
 .store_search_popup { padding: 10px 0; }
 .intro_box { margin-bottom: 32px; }
 .intro_text { font-size: 24px; font-weight: 700; line-height: 1.4; color: #161616; }
 .filter_search_wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+.filter_search_wrap .btn_icon_search {display:flex; align-items:center;}
+.filter_search_wrap .btn_icon_search:before {width:16px; height:16px; margin-right:10px; background:url('@/assets/images/common/icon_set_16.png') -496px -14px; filter: brightness(0) invert(1); content:''; display:block;}
 .input_group { display: flex; flex: 1; gap: 8px; }
 .base_select { width: 140px; }
 /* 🔥 input이 포함된 wrap이 나머지 가로 전체를 차지하게 설정 */
 .base_input_wrap { flex: 1; }
 /* 🔥 컴포넌트 내부의 input 태그 너비를 100%로 강제 */
 .base_input_wrap :deep(input) { width: 100% !important; }
-.store_layout_flex { display: flex; align-items: flex-start; gap: 32px; border-top: 1px solid #161618; }
+.store_layout_flex { display: flex; align-items: flex-start; gap: 32px; border-top: 1px solid #161618; border-bottom:1px solid #e5e5e9;}
 .store_list_side { flex: 1; width: 100%; max-height: 600px; overflow-y: auto; }
-.store_item { padding: 24px 0; border-bottom: 1px solid #e5e5e9; }
+.store_item { padding: 24px 0;}
+.store_item + .store_item {border-top: 1px solid #e5e5e9; }
 .store_item.active { background-color: #f8f9fb; }
-.store_name { font-size: 24px; font-weight: 700; display: block; margin-bottom: 12px; cursor: pointer; }
-.store_name::after { content: ''; width: 20px; height: 20px; margin-left: 8px; background: red; display: inline-block; vertical-align: middle; }
+.store_name { font-size: 24px; font-weight: 700; display: block; margin-bottom: 12px; cursor: pointer; display:flex; align-items:center;}
+.store_name::after { content: ''; width: 20px; height: 20px; margin-left: 8px; background:url('@/assets/images/common/icon_set_20.png') -324px -25px no-repeat; display: inline-block; vertical-align: middle; }
 .info_details { display: grid; grid-template-columns: 70px 1fr; gap: 8px 12px; font-size: 15px; }
 .info_details dt { color: #67676f; }
 .info_details dd { color: #161616; }

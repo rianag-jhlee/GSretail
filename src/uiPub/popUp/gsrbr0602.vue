@@ -47,6 +47,7 @@
                             <dt>{{ t.Chapter4.article13.title }}</dt>
                             <dd>
                                 <div class="desc">{{ t.Chapter4.article13.desc }}</div>
+                                <div class="desc">{{ t.Chapter4.article13.content }}</div>
                                 <div class="table_scroll_area">
                                     <table>
                                         <colgroup>
@@ -92,7 +93,10 @@
                     </dd>
                 </dl>
             </div>
-            <div class="btn-wrap">
+        </div>
+
+        <div class="modal_bottom right">
+            <div class="btnBox">
                 <Buttons btn-class="btn_big primary" @click="closeModal">확인</Buttons>
             </div>
         </div>
@@ -145,6 +149,7 @@ export default {
                         article13: {
                             title: "제13조(팝카드의 종류 및 기능)",
                             desc: "GS리테일이 제공하는 팝카드 서비스를 이용할 수 있는 팝카드의 종류와 기능은 아래와 같습니다.",
+                            content: "① 카드별 기능 개요",
                             tableHead: ["팝캐시비 (일반)", "팝티머니 (일반)", "팝티머니(금융)", "멤버십팝", "팝체크/신용"],
                             tableRows: [
                                 { label: "공통기능", data: ["O", "O", "O", "O", "O"] },
@@ -203,9 +208,6 @@ export default {
 .table_scroll_area { width: 100%; overflow-x: visible; }
 
 /* 모달 레이아웃 */
-.modal_cont { background-color: #fff;}
-.modal_header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 40px; font-size: 40px; font-weight: 700; border-bottom: 0; }
-.modal_content { max-height: 700px; overflow-y: auto; padding-right: 10px; }
 h3 { font-size: 32px; font-weight: 700; }
 .flex_between { display: flex; justify-content: space-between; align-items: center; }
 .select_group { display: flex; gap: 8px; }
@@ -213,7 +215,6 @@ h3 { font-size: 32px; font-weight: 700; }
 .width_260 { width: 260px; }
 p {margin-top:4px; font-size:18px; color: #fb6432 !important; }
 .btn-wrap {display:flex; justify-content:flex-end;}
-.btn_big.primary {margin-top:32px; padding:14px 50px;}
 
 /* 반응형 */
 @media screen and (max-width: 1024px) { 
@@ -222,13 +223,14 @@ p {margin-top:4px; font-size:18px; color: #fb6432 !important; }
 }
 
 @media screen and (max-width: 767px) {
-    .modal_header {font-size:18px;}
     h3 {font-size:24px;}
-    .policy_wrap > dl > dt {font-size:20px;}
+    .policy_wrap {padding:0px; border:0;}
+    .policy_wrap > dl > dt {margin-bottom:24px; font-size:20px;}
     .policy_wrap > dl > dd > dl > dd span, .policy_wrap > dl > dd > dl > dd > ul > li, p, .desc {font-size:16px; }
+    .policy_wrap dd .desc {margin-bottom:8px; font-size:16px;}
     .flex_between {display:flex; flex-direction:column; align-items:stretch;}
     .select_group {margin-top:32px; flex-direction:column;}
     .width_170, .width_260 {width:100%;}
-    .policy_wrap th, .policy_wrap td {font-size:16px;}
+    .policy_wrap th, .policy_wrap td, .policy_wrap > dl > dd > dl > dt {font-size:16px;}
 }
 </style>

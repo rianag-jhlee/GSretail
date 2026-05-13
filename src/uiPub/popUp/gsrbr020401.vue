@@ -209,7 +209,7 @@ export default {
 .modal_content { flex: 1; overflow-y: auto; padding-right: 10px; }
 .intro_section { margin-bottom: 40px; display: flex; flex-direction: column; gap: 16px; }
 .greeting_text { font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 32px; color: #161616; line-height: 1.3; }
-.desc_text { font-family: "Pretendard", Helvetica; font-size: 18px; line-height: 1.4; color: #161616; }
+.desc_text { font-family: "Pretendard", Helvetica; font-size: 1.8rem; line-height: 1.4; color: #161616; }
 .consent_container { padding: 32px; background-color: #f8f8f8; border-radius: 12px; margin-bottom: 40px; }
 .consent_title { font-size: 24px; font-weight: 700; color: #161616; margin-bottom: 24px; }
 .bullet_list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }

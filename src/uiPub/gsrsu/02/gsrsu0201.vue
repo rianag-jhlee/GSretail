@@ -468,7 +468,7 @@ figure img { width: 100%; height: 100%; object-fit: cover; }
 .key_features_grid li::after {content:''; width:72px; height:72px; background:red; position:absolute; right:32px; bottom:32px}
 .card_content { width: 100%; display: flex; flex-direction: column; gap: 16px; text-align: left; }
 .card_content strong { font-size: 24px; font-weight: 700; color: #161616; line-height: 1.35; }
-.card_content p { font-size: 18px; font-weight: 400; color: #67676f; line-height: 1.4; }
+.card_content p { font-size: 1.8rem; font-weight: 400; color: #67676f; line-height: 1.4; }
 
 /* 시스템 상세 그리드 (frame-3 & frame-4 기반) */
 .system_detail_grid { display: flex; gap: 40px; width: 100%; }

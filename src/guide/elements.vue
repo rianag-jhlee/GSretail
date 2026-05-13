@@ -272,6 +272,7 @@ export default {
             <ul class="explain">
                 <li><strong>Accordion</strong> · <code>multiple</code>: <code>false</code>(기본) Single — 하나 열리면 나머지 닫힘 / <code>true</code> Multi — 여러 패널 동시 오픈</li>
                 <li><strong>AccordionItem</strong> · <code>item-key</code> 형제 간 고유 값(문자·숫자) 필수 · <code>#title</code> 제목 슬롯 · 기본 슬롯 본문</li>
+                <li><strong>Class</strong> faq = type_faq 등 해당하는 타입만 선언</li>
             </ul>
 
             <p class="tit_wrap">
@@ -414,6 +415,102 @@ const cards = ref([
             <pre class="code_box">
 <code>&lt;div class="bottom_btns"&gt;
     &lt;button class="btn_back" @click="handleBack"&gt;목록으로 돌아가기&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+
+        <section>
+            <h4>Notice Section</h4>
+
+            <p class="tit_wrap">
+                <strong class="tit">Design</strong>
+            </p>
+            <div class="design_box">
+                <div class="notice_section">
+                    <div class="policy_wrap">
+                        <strong class="tit">꼭 확인해주세요</strong>
+                        <ul class="bullet_01">
+                            <li>멤버십 등급은 매월 1일 갱신되며, 해당월 말일까지 유효합니다.</li>
+                            <li>하나의 브랜드 등급기준에만 충족해도 해당 등급 및 혜택이 부여됩니다.</li>
+                            <li>신규 가입회원은 가입월 웰컴등급이 부여되며 다음달부터 실적에 따라 등급이 부여됩니다.</li>
+                            <li>등급산정 기간 <br/><span>- GS25, GS THE FRESH : 최근 3개월 주문실적 기준으로 산정(3개월전 26일부터 전월 25일까지)</span><br/><span>- GS SHOP : 최근 6개월 주문실적 기준으로 산정(6개월전 26일부터 전월 25일까지)</span></li>
+                            <li>등급 혜택은 매월 1일 순차적으로 지급되며, 당월 말일까지 사용 가능합니다.</li>
+                            <li>전 브랜드 혜택을 받기 위해서는 GS ALL 멤버십 회원 약관에 동의해야합니다.<br/><span>(약관 동의 방법 : 우리동네GS 앱, GS SHOP앱 마이페이지에서 약관의 가입)</span></li>
+                            <li>쿠폰, 카드행사할인, 포인트, 배송비 등 등급산정 실적에서 제외됩니다.</li>
+                            <li>GS Prime카드로 결제 시 GS&POINT로 적립됩니다.</li>
+                            <li>등급쿠폰 및 GS SHOP할인권은 유효기간 연장 불가하며, 미사용시 자동 소멸됩니다.<br/><span style='color:#fb6432'>* 배송비쿠폰 및 5%할인(=GS SHOP 할인권)은 유효기간 연장 불가하며, 미사용시 자동 소멸됩니다.</span></li>
+                            <li>회원 등급 및 제공 혜택은 당사 사정에 의해 별도 고지없이 변경 및 중지될 수 있습니다.</li>
+                            <li>부당한 방법으로 획득한 고객 등급은 사후 심사 후 조정될 수 있습니다."</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="policy_wrap">
+                        <strong class="tit">GS25</strong>
+                        <dl>
+                            <dt>GS25</dt>
+                            <dd>
+                                <ul class="bullet_01">
+                                    <li>구매일수는 하루에 여러번 구매해도 1일로 산정되며, 1,000원 이상 결제건만 인정됩니다.</li>
+                                    <li>GS ALL 포인트는 일 최대 5회 적립 가능합니다.</li>
+                                    <li>등급쿠폰은 오프라인 매장에서 사용 가능합니다.</li>
+                                </ul>
+                            </dd>
+
+                            <dt>GS THE FRESH</dt>
+                            <dd>
+                                <ul class="bullet_01">
+                                    <li>구매일수는 하루에 여러번 구매해도 1일로 산정되며, 포인트 적립대상금액 1,000원 이상 결제건만 인정됩니다.</li>
+                                    <li>등급쿠폰은 오프라인 매장에서 사용 가능합니다.</li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <p class="tit_wrap">
+                <strong class="tit">Code</strong>
+                <a href="#none">OPEN</a>
+            </p>
+            <pre class="code_box">
+<code>&lt;div class="notice_section"&gt;
+    &lt;div class="policy_wrap"&gt;
+        &lt;strong class="tit"&gt;꼭 확인해주세요&lt;/strong&gt;
+        &lt;ul class="bullet_01"&gt;
+            &lt;li&gt;멤버십 등급은 매월 1일 갱신되며, 해당월 말일까지 유효합니다.&lt;/li&gt;
+            &lt;li&gt;하나의 브랜드 등급기준에만 충족해도 해당 등급 및 혜택이 부여됩니다.&lt;/li&gt;
+            &lt;li&gt;신규 가입회원은 가입월 웰컴등급이 부여되며 다음달부터 실적에 따라 등급이 부여됩니다.&lt;/li&gt;
+            &lt;li&gt;등급산정 기간 &lt;br/&gt;&lt;span&gt;- GS25, GS THE FRESH : 최근 3개월 주문실적 기준으로 산정(3개월전 26일부터 전월 25일까지)&lt;/span&gt;&lt;br/&gt;&lt;span&gt;- GS SHOP : 최근 6개월 주문실적 기준으로 산정(6개월전 26일부터 전월 25일까지)&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;등급 혜택은 매월 1일 순차적으로 지급되며, 당월 말일까지 사용 가능합니다.&lt;/li&gt;
+            &lt;li&gt;전 브랜드 혜택을 받기 위해서는 GS ALL 멤버십 회원 약관에 동의해야합니다.&lt;br/&gt;&lt;span&gt;(약관 동의 방법 : 우리동네GS 앱, GS SHOP앱 마이페이지에서 약관의 가입)&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;쿠폰, 카드행사할인, 포인트, 배송비 등 등급산정 실적에서 제외됩니다.&lt;/li&gt;
+            &lt;li&gt;GS Prime카드로 결제 시 GS&POINT로 적립됩니다.&lt;/li&gt;
+            &lt;li&gt;등급쿠폰 및 GS SHOP할인권은 유효기간 연장 불가하며, 미사용시 자동 소멸됩니다.&lt;br/&gt;&lt;span style='color:#fb6432'&gt;* 배송비쿠폰 및 5%할인(=GS SHOP 할인권)은 유효기간 연장 불가하며, 미사용시 자동 소멸됩니다.&lt;/span&gt;&lt;/li&gt;
+            &lt;li&gt;회원 등급 및 제공 혜택은 당사 사정에 의해 별도 고지없이 변경 및 중지될 수 있습니다.&lt;/li&gt;
+            &lt;li&gt;부당한 방법으로 획득한 고객 등급은 사후 심사 후 조정될 수 있습니다."&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="policy_wrap"&gt;
+        &lt;strong class="tit"&gt;GS25&lt;/strong&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;GS25&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;ul class="bullet_01"&gt;
+                    &lt;li&gt;구매일수는 하루에 여러번 구매해도 1일로 산정되며, 1,000원 이상 결제건만 인정됩니다.&lt;/li&gt;
+                    &lt;li&gt;GS ALL 포인트는 일 최대 5회 적립 가능합니다.&lt;/li&gt;
+                    &lt;li&gt;등급쿠폰은 오프라인 매장에서 사용 가능합니다.&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/dd&gt;
+
+            &lt;dt&gt;GS THE FRESH&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;ul class="bullet_01"&gt;
+                    &lt;li&gt;구매일수는 하루에 여러번 구매해도 1일로 산정되며, 포인트 적립대상금액 1,000원 이상 결제건만 인정됩니다.&lt;/li&gt;
+                    &lt;li&gt;등급쿠폰은 오프라인 매장에서 사용 가능합니다.&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </section>
 

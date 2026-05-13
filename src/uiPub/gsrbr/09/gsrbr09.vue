@@ -131,7 +131,7 @@ export default {
 .body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
 .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
 .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:24px; font-weight:600;}
-.bi_section {width:100%; margin-top:60px; padding:50px; background:#fff;}
+.bi_section {width:100%; margin-top:60px; padding:50px; background:#fff; border-radius:12px;}
 .bi_section h4 {margin-bottom:40px;}
 .bi_section span {widows:100%; display:block;}
 .bi_section span img {width:100%; display:block; object-fit:cover;}

@@ -376,13 +376,13 @@ export default {
 .step_list li {padding: 56px 64px; background-color: #f8f8f8; border-radius: 8px;  flex: 1; display: flex; align-items: center; }
 .step_list li::before { content:''; width:40px; height:40px; margin-right:24px; background:red; display:inline-block; flex-shrink:0; } /* 아이콘 영역 */
 .step_info { display: flex; flex-direction: column; gap: 6px; }
-.step_label { font-size: 18px; font-weight: 700; color: #107af2; }
+.step_label { font-size: 1.8rem; font-weight: 700; color: #107af2; }
 .step_text { font-size: 20px; font-weight: 700; color: #161616; }
 
 /* 4. 테이블 리스트 (공지사항 등) */
 .policy_wrap table { width: 100%; border-collapse: collapse; border-top:0;}
 .policy_wrap th {border-top-color: #E5E5E9;}
-.policy_wrap th, .policy_wrap td { padding: 18px 24px; border-bottom: 1px solid #E5E5E9; font-size: 18px; vertical-align: middle; }
+.policy_wrap th, .policy_wrap td { padding: 18px 24px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
 .policy_wrap td a {font-size:18px;}
 .policy_wrap thead th { background-color: #F8F8F8; color: #161616; font-weight: 700; }
 .policy_wrap td { height: 82px; color: #161616; border-left: 0; border-right: 0; }
@@ -392,14 +392,14 @@ export default {
 .full_img { width: 100%; height: auto; display: block; }
 
 .auth_table { width: 100%; border-collapse: collapse; border-top: 2px solid #161616; }
-.auth_table th, .auth_table td { padding: 16px; border-bottom: 1px solid #e5e5e9; font-size: 18px; vertical-align: middle; }
+.auth_table th, .auth_table td { padding: 16px; border-bottom: 1px solid #e5e5e9; font-size: 1.8rem; vertical-align: middle; }
 .auth_table th { background: #f8f8f8; font-weight: 700; color: #161616; }
 .bg_light { background: #fbfbfb; font-weight: 700; }
 .link_url { color: #161616; text-decoration: none; word-break: break-all; }
 
 .card_grid {display:flex; gap:20px}
 .info_card {width:340px; padding: 32px 32px 56px; background: #f8f8f8; border-radius: 12px; }
-.card_num { font-size: 18px; font-weight: 700; color: #107af2; display: block; margin-bottom: 4px; }
+.card_num { font-size: 1.8rem; font-weight: 700; color: #107af2; display: block; margin-bottom: 4px; }
 .card_name { font-size: 20px; font-weight: 700; color: #161616; }
 .card_desc { font-size: 16px; line-height: 1.5; color: #67676f; margin-top: 12px; }
 
@@ -414,7 +414,7 @@ export default {
 .help_desk_area ul li:nth-child(2)::before { background-image: url('@/assets/images/dummy/gsrst01_fresh.png'); }
 
 .help_desk_area .info {vertical-align:top; display:inline-block;}
-.help_desk_area .brand { font-size: 18px; font-weight: 700; color: #161616; }
+.help_desk_area .brand { font-size: 1.8rem; font-weight: 700; color: #161616; }
 .help_desk_area .tel { font-size: 28px; font-weight: 700; color: #161616; margin: 4px 0; display: block; }
 .help_desk_area .note { font-size: 16px; color: #67676f; }
 
@@ -435,10 +435,10 @@ export default {
 .q_mark { font-size: 24px; font-weight: 700; color: #107af2; }
 .q_box {font-size:18px; display:flex;}
 .q_box::before {content:'Q'; margin-right:16px;}
-.q_text { font-size: 18px; font-weight: 700; color: #161616; }
+.q_text { font-size: 1.8rem; font-weight: 700; color: #161616; }
 .a_box {padding:0px 30px 24px; color:#67676F; font-size:18px;}
 .faq_a { padding: 0 20px 24px 52px; background: #fafafa; }
-.a_text { font-size: 18px; line-height: 1.6; color: #67676f; }
+.a_text { font-size: 1.8rem; line-height: 1.6; color: #67676f; }
 .pagination_area { display: flex; justify-content: center; }
 
 /* 9. 반응형 미디어 쿼리 */

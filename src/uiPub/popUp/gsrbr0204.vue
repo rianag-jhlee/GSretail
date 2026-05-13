@@ -101,13 +101,13 @@ export default {
 .intro_section { margin-bottom: 56px; display: flex; flex-direction: column; gap: 16px; }
 .sub_title { font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 32px; color: #161616; }
 .desc_box { display: flex; flex-direction: column; gap: 4px; }
-.desc_text { font-family: "Pretendard", Helvetica; font-size: 18px; line-height: 1.4; color: #161616; }
-.desc_info { font-family: "Pretendard", Helvetica; font-size: 18px; color: #67676f; }
+.desc_text { font-family: "Pretendard", Helvetica; font-size: 1.8rem; line-height: 1.4; color: #161616; }
+.desc_info { font-family: "Pretendard", Helvetica; font-size: 1.8rem; color: #67676f; }
 .notice_text { font-family: "Pretendard", Helvetica; font-size: 16px; color: #fb6432; }
 .consult_grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 24px; padding-top: 32px; border-top: 1px solid #161616; }
 .region_card { display: flex; flex-direction: column; gap: 16px; padding-bottom: 32px; border-bottom: 1px solid #e5e5e9; }
 .card_header { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.region_name { font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 18px; color: #161616; }
+.region_name { font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 1.8rem; color: #161616; }
 .region_districts { font-family: "Pretendard", Helvetica; font-size: 14px; line-height: 1.4; color: #67676f; }
 @media screen and (max-width: 1024px) {
     .consult_grid { grid-template-columns: repeat(1, 1fr); } 

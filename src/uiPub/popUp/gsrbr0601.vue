@@ -6,14 +6,16 @@
         </div>
 
         <div class="modal_content">
-            <h3 v-html="t.Greeting"></h3>
+            <div class="subtit_wrap">
+                <h3 v-html="t.Greeting"></h3>
+            </div>
 
             <section class="accodian_sec">
                 <h4>{{ t.sub_title }}</h4>
-                <Accordion class="board_type_toggle">
+                <Accordion class="type_faq"><!-- 26.05.12 Edit 이종환 : 클래스 수정 -->
                     <AccordionItem v-for="(title, idx) in t.faq_1.title" :key="'best-' + idx" :item-key="'best-' + idx">
                         <template #title>{{ title }}</template>
-                        <div class="faq_answer" v-html="t.faq_1.desc[idx] || t.default_desc"></div>
+                        <div v-html="t.faq_1.desc[idx] || t.default_desc"></div>
                     </AccordionItem>
                 </Accordion>
                 <div class="info_box mt40">
@@ -24,11 +26,11 @@
 
             <section class="tab_sec">
                 <Tabs @change="onTabChange1" v-model="CTabIdx" :tab-items="tabs" tab-class="type_01" :tab-slide="true" />
-                <div class="tab_content mt40">
-                    <Accordion class="board_type_toggle">
+                <div class="tab_content">
+                    <Accordion class="type_faq no_bor"><!-- 26.05.12 Edit 이종환 : 클래스 수정 -->
                         <AccordionItem v-for="(title, idx) in t.faq_2.title" :key="'tab-' + CTabIdx + '-' + idx" :item-key="'tab-' + idx">
                             <template #title>{{ title }}</template>
-                            <div class="faq_answer" v-html="t.faq_2.desc[idx] || t.default_desc"></div>
+                            <div v-html="t.faq_2.desc[idx] || t.default_desc"></div>
                         </AccordionItem>
                     </Accordion>
                 </div>
@@ -139,48 +141,46 @@ export default {
 </script>
 
 <style scoped>
-.modal_header { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding-bottom: 40px; font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 40px; color: #161616; border-bottom: 0; }
-.modal_content { flex: 1; overflow-y: auto; padding-right: 10px; }
-h3 { margin-bottom: 60px; color: #161616; font-size: 32px; font-weight: 700; }
+:deep(.modal_content) h3 {margin-bottom:64px;}
 :deep(.modal_content) h3 br {display:none;}
-h4 { margin-bottom: 21px; color: #161616; font-size: 24px; font-weight: 700; }
+
 .accodian_sec {margin-bottom:80px;}
-.btn_mid {padding:10px 23px !important;}
-.pagination {justify-content:center;}
-:deep(.acc_tit_btn).acc_tit_open {font-weight:700 !important;}
+.board_type_toggle {margin-top:24px;}
+.btn_mid {padding:10px 23px;}
 
 /* 안내 박스 영역 */
 .info_box { display: flex; align-items: center; justify-content: space-between; padding: 24px 32px; background-color: #f8f8f8; border-radius: 12px; }
-.info_box p { font-size: 18px; color: #666; }
+.info_box p { font-size: 1.8rem; color: #666; }
 .btn_customer { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 24px; background-color: #107af2; color: #fff; font-size: 16px; font-weight: 700; border-radius: 6px; text-decoration: none; }
 
+.tab_wrap {margin-bottom:24px;}
+
 /* FAQ 아코디언 스타일링 */
-:deep(.board_type_toggle) dt a.acc_tit_btn {padding: 24px 29px; color: #161616; font-size: 20px; font-weight: 500; border-bottom:0; display: flex; align-items: center; }
+/* :deep(.board_type_toggle) dt a.acc_tit_btn {padding: 24px 29px; color: #161616; font-size: 20px; font-weight: 500; border-bottom:0; display: flex; align-items: center; }
 :deep(.board_type_toggle) dt a.acc_tit_btn::before { content: 'Q'; margin-right: 16px; font-weight: 700; color: #161616; }
 :deep(.board_type_toggle) dt a.acc_tit_btn::after { margin-left: auto; }
 :deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont {padding:12px 10px 24px 32px !important;}
 :deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont div {display:flex; flex-direction:column; gap:16px;}
-:deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont * {color:#67676F; font-size:18px;}
-
-.faq_answer span { display: block; font-size: 18px; color: #67676f; line-height: 1.6; }
-.faq_answer span + span { margin-top: 16px; }
-
-/* Utils */
-.ac { text-align: center; }
-.mt40 { margin-top: 40px; }
-.mt60 { margin-top: 60px; }
-.mb40 { margin-bottom: 40px; }
-.mb100 { margin-bottom: 100px; }
+:deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont * {color:#67676F; font-size:18px;} */
+/* 
+.faq_answer span { display: block; font-size: 1.8rem; color: #67676f; line-height: 1.6; }
+.faq_answer span + span { margin-top: 16px; } */
 
 /* 반응형 */
 @media screen and (max-width: 767px) {
-    .modal_header { font-size:18px; }
     .info_box {gap: 16px;}
     .info_box p {width:55%; color:#161616; font-size:14px;}
-    :deep(.board_type_toggle) dt a.acc_tit_btn {padding:22px 0;  font-size: 16px; }
-    :deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont * {font-size:16px;}
-    .faq_answer span { font-size: 15px; }
-    h3 {font-size:20px;}
+    /* :deep(.board_type_toggle) {border-top:1px solid #161616;}
+    :deep(.board_type_toggle) dt a.acc_tit_btn {padding:8px 0;  font-size: 16px; }
+    :deep(dd.acc_panel) > .acc_panel_inner > .acc_panel_cont * {font-size:16px;} */
+    /* .faq_answer span { font-size: 15px; } */
     :deep(.modal_content) h3 br {display:block;}
+    /* .tab_sec :deep(.board_type_toggle) {border-top:0;} */
+    .btn_mid {padding:7px 12px !important; font-size:16px; border-radius:4px;}
+
+    .tab_wrap {margin-bottom:10px;}
+
+    :deep(.modal_content) h3 {margin-bottom:60px;}
+    .board_type_toggle.type_faq.no_bor {margin-top:0;}
 }
 </style>

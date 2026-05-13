@@ -166,7 +166,7 @@ section { padding-bottom: 80px; }
 /* Brand Header Area */
 .brand_intro_section div { display: block; padding-bottom: 0; margin-bottom: 24px; }
 .brand_intro_section h4 {margin-bottom: 8px; color: #161616; font-size: 24px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;}
-.brand_intro_section div p:nth-of-type(1) { margin-bottom: 8px; color: #161616; font-size: 18px; font-weight: 700; }
+.brand_intro_section div p:nth-of-type(1) { margin-bottom: 8px; color: #161616; font-size: 1.8rem; font-weight: 700; }
 .brand_intro_section div p:nth-of-type(2) { color: #67676f; font-size: 16px; line-height: 1.5; }
 
 /* Product Category */
@@ -210,7 +210,7 @@ section { padding-bottom: 80px; }
     .tip_section li, .product_category li { flex: 0 0 calc(33.33% - 8px); }
 }
 @media screen and (max-width: 767px) {
-    .modal_header { font-size: 18px; padding-bottom: 24px; }
+    .modal_header { font-size: 1.8rem; padding-bottom: 24px; }
     section { padding-bottom:60px; }
     .tip_section h3 { font-size: 28px; }
     .tip_section ul { flex-wrap: wrap; gap: 20px 8px; }

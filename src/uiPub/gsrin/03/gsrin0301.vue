@@ -335,11 +335,11 @@ export default {
 .content_title { font-size: 40px; font-weight: 700; color: #161616; display:flex; align-items:center; justify-content:space-between;}
 .content_title a {font-weight:normal;}
 .policy_wrap table { width: 100%; border-collapse: collapse; border-top: 2px solid #161616; }
-.policy_wrap th, .policy_wrap td { padding: 18px 24px; border-bottom: 1px solid #E5E5E9; font-size: 18px; vertical-align: middle; }
+.policy_wrap th, .policy_wrap td { padding: 18px 24px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
 .policy_wrap thead th { background-color: #F8F8F8; color: #161616; font-weight: 700; }
 .policy_wrap td { height: 82px; color: #161616; border-left: 0; border-right: 0; }
 .policy_wrap th { border-left: 0; border-right: 0; }
-.policy_wrap td a { font-size: 18px; color: #161616; text-decoration: none; }
+.policy_wrap td a { font-size: 1.8rem; color: #161616; text-decoration: none; }
 .policy_wrap td a:hover { text-decoration: underline; }
 
 

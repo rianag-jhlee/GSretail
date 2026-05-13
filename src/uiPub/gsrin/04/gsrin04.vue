@@ -182,14 +182,14 @@ export default {
 .filter_label { font-size: 16px; color: #161616; white-space: nowrap; }
 
 .policy_wrap table { width: 100%; border-collapse: collapse; word-break: keep-all; border-top: 1px solid #161616; }
-.policy_wrap th, .policy_wrap td { padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 18px; line-height: 1.6; vertical-align: middle; }
+.policy_wrap th, .policy_wrap td { padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 1.8rem; line-height: 1.6; vertical-align: middle; }
 .policy_wrap th { background-color: #F8F8F8; color: #161616; font-weight: 700; border-top: 1px solid #000; }
 .policy_wrap td a {font-size:18px;}
 .policy_wrap td {height: 82px; color: #161616; border-left:0; border-right:0; }
 .policy_wrap th {border-left:0; border-right:0;}
 .file_link { color: #161616; text-decoration: none; }
 .file_link:hover { text-decoration: underline; }
-.file_type_text { font-size: 18px; color: #161616; }
+.file_type_text { font-size: 1.8rem; color: #161616; }
 .img { width: 24px; height: 24px; }
 .policy_wrap th:first-child, .policy_wrap td:first-child {width:150px}
 
