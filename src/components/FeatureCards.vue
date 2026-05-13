@@ -7,7 +7,7 @@ defineProps({
     items: { type: Array, default: () => [] },
     // 선택: <template #action="{ item, index }">…</template> — 카드 하단 CTA(버튼 등)
     // type="num"  (기본): [{ num: "01", title: "...", desc: "..." }]
-    // type="icon"        : [{ icon: imgSrc, iconAlt: "...", title: "...", desc: "..." }]
+    // type="icon"        : [{ icon?: imgSrc, iconAlt?: "...", em?: "...", title: "...", desc: "..." }]
     // type="text"        : [{ title: "...", desc: "..." | [...], listDotted?: true }] — listDotted 시 desc 배열 ul에 list_dotted
     type: { type: String, default: "num" },
     // noSwipe=true: 모바일에서도 Swiper 대신 리스트(1열) 표시
@@ -38,6 +38,7 @@ onUnmounted(() => {
             <figure v-else-if="type === 'icon'" class="feature_card_icon">
                 <img v-if="item.icon" :src="item.icon" :alt="item.iconAlt || ''" />
             </figure>
+            <em v-if="item.em" class="feature_card_em">{{ item.em }}</em>
             <strong class="feature_card_title" v-html="item.title"></strong>
             <template v-if="item.desc">
                 <ul
@@ -70,6 +71,7 @@ onUnmounted(() => {
                 <figure v-else-if="type === 'icon'" class="feature_card_icon">
                     <img v-if="item.icon" :src="item.icon" :alt="item.iconAlt || ''" />
                 </figure>
+                <em v-if="item.em" class="feature_card_em">{{ item.em }}</em>
                 <strong class="feature_card_title" v-html="item.title"></strong>
                 <template v-if="item.desc">
                     <ul
@@ -103,6 +105,7 @@ onUnmounted(() => {
     .feature_card_icon { width: 40px; height: 40px; }
 }
 .feature_card_icon > img { width: 100%; height: 100%; object-fit: contain; }
+.feature_card_em { margin-bottom: 8px; color: #107af2; font-size: 1.8rem; font-weight: 700; font-style: normal; line-height: 1.5; letter-spacing: 0; display: block; }
 .feature_card_title { margin-bottom: 16px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 .feature_card_title:last-child { margin-bottom: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; white-space: pre-line; display: block; word-break: keep-all; }
 .feature_card_desc_list { flex: 1; }
