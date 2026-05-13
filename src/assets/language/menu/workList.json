@@ -195,7 +195,7 @@
     {
         "depth1": "", "depth2": "회사소개", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrab/01/gsrab02",
+        "path": "gsrab/02/gsrab02",
         "link": "/gsrab02" ,
         "startDate": "",
         "endDate": "",
@@ -205,7 +205,7 @@
     {
         "depth1": "", "depth2": "연혁", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrab/01/gsrab03",
+        "path": "gsrab/03/gsrab03",
         "link": "/gsrab03" ,
         "startDate": "",
         "endDate": "",
@@ -1278,7 +1278,16 @@
         "status": "com",
         "note": "gsrst01010101에서 확인가능"
     },
-    
+    {
+        "depth1": "", "depth2": "GS25 ", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrst/02/gsrst02010101",
+        "link": "/gsrst02010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": "gsrst01010101 ~ gsrst010201 포함"
+    },
     {
         "depth1": "입점상담", "depth2": "GS25/GS THE FRESH/지원부문", "depth3": "공지사항", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
