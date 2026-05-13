@@ -169,9 +169,9 @@
                                 class="btn_big primary btn_icon after" 
                                 btn-class="btn_icon" 
                                 @click="openModal" 
-                                data-popid="ggsrin030301" 
+                                data-popid="gsrin030301" 
                                 data-type="lg" 
-                                data-cont="ggsrin030301"    
+                                data-cont="gsrin030301"    
                             >
                                 {{ t.GeneralText }}
                             </Buttons>
@@ -223,7 +223,7 @@
             </div>
         </section>
 
-        <div id="ggsrin030301" class="modal_wrap">
+        <div id="gsrin030301" class="modal_wrap">
             <div class="modal_container"></div>
         </div>
     </div>
@@ -360,13 +360,15 @@ export default {
 
 
 @media screen and (max-width: 767px) {
+    .mb40 {margin-bottom:32px;}
     h3.section-sub-title, h4.content_title {font-size:24px !important;}
     .policy_desc {font-size:18px;}
     .title_wrap { display: none; }
-    .cont_inner { padding: 0 20px; }
+    .cont_inner {padding: 80px 20px 200px;}
     .tab_content_wrap.mt100 {margin-top:60px;}
     :deep(ul.type_02) {margin-top:-35px !important;}
     .search_filter_area { flex-direction: column; height: auto; align-items: stretch; gap:8px; }
+    .policy_wrap td { padding:23px 10px; font-size:16px;}
     .policy_wrap th:first-child, .policy_wrap td:first-child { display: none; }
     .policy_wrap thead {display:none;}
     .filter_group {flex-direction:column; align-items:stretch;}

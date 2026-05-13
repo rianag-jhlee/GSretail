@@ -12,8 +12,8 @@
                 <p :class="['title-sub-text', { 'is_dividend': CTabIdx === 1 }]" v-html="t.MainDesc[CTabIdx]"></p>
 
                 <div class="tab_content_wrap">
+                    <!-- gsrin0201: 재무현황 -->
                     <section class="tab_content gsrin0201" v-if="CTabIdx === 0" :aria-label="t.Tabs1[0].item">
-                        
                         <div class="performance_charts">
                             <div class="chart_grid">
                                 <div class="chart_item" v-for="(chart, idx) in t.PerformanceCharts" :key="'chart-'+idx">
@@ -39,79 +39,60 @@
                             <div class="policy_wrap mt40">
                                 <table class="base_table">
                                     <colgroup>
-                                        <col style="width: 150px;">
-                                        <col style="width: 200px;">
+                                        <col style="width:90px;">
+                                        <col style="width:150px;">
                                         <col style="width: auto;">
                                         <col style="width: auto;">
                                         <col style="width: auto;">
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th scope="col" colspan="2" class="ac">구분</th>
-                                            <th scope="col" class="ac">2023</th>
-                                            <th scope="col" class="ac">2024</th>
-                                            <th scope="col" class="ac">2025</th>
+                                            <th scope="col" colspan="2" class="ac">{{ t.Labels.Common.Category }}</th>
+                                            <th scope="col" class="ac" v-for="year in t.SummaryYears" :key="year">{{ year }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- 자산 영역 -->
                                         <tr>
-                                            <th rowspan="2" scope="rowgroup" class="ac border_right">자산</th>
-                                            <td class="ac border_right">유동자산</td>
-                                            <td class="ar">{{ t.FSD.Asset.Current[0] }}</td>
-                                            <td class="ar">{{ t.FSD.Asset.Current[1] }}</td>
-                                            <td class="ar">{{ t.FSD.Asset.Current[2] }}</td>
+                                            <th rowspan="2" scope="rowgroup" class="ac border_right">{{ t.Labels.Finance.Asset }}</th>
+                                            <td class="ac border_right">{{ t.Labels.Finance.CurrentAsset }}</td>
+                                            <td class="ar" v-for="(val, idx) in t.FSD.Asset.Current" :key="'ac-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <td class="ac border_right">비유동자산</td>
-                                            <td class="ar">{{ t.FSD.Asset.NonCurrent[0] }}</td>
-                                            <td class="ar">{{ t.FSD.Asset.NonCurrent[1] }}</td>
-                                            <td class="ar">{{ t.FSD.Asset.NonCurrent[2] }}</td>
+                                            <td class="ac border_right">{{ t.Labels.Finance.NonCurrentAsset }}</td>
+                                            <td class="ar" v-for="(val, idx) in t.FSD.Asset.NonCurrent" :key="'anc-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr class="bg_light bold">
-                                            <td class="ac border_right" colspan="2">자산총계</td>
-                                            <td class="ar fc_red">{{ t.FSD.Asset.Total[0] }}</td>
-                                            <td class="ar fc_red">{{ t.FSD.Asset.Total[1] }}</td>
-                                            <td class="ar fc_red">{{ t.FSD.Asset.Total[2] }}</td>
+                                            <td class="ac border_right" colspan="2">{{ t.Labels.Finance.TotalAsset }}</td>
+                                            <td class="ar fc_red" v-for="(val, idx) in t.FSD.Asset.Total" :key="'at-'+idx">{{ val }}</td>
                                         </tr>
-
+                                        <!-- 부채 영역 -->
                                         <tr>
-                                            <th rowspan="2" scope="rowgroup" class="ac border_right">부채</th>
-                                            <td class="ac border_right">유동부채</td>
-                                            <td class="ar">{{ t.FSD.Debt.Current[0] }}</td>
-                                            <td class="ar">{{ t.FSD.Debt.Current[1] }}</td>
-                                            <td class="ar">{{ t.FSD.Debt.Current[2] }}</td>
+                                            <th rowspan="2" scope="rowgroup" class="ac border_right">{{ t.Labels.Finance.Debt }}</th>
+                                            <td class="ac border_right">{{ t.Labels.Finance.CurrentDebt }}</td>
+                                            <td class="ar" v-for="(val, idx) in t.FSD.Debt.Current" :key="'dc-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <td class="ac border_right">비유동부채</td>
-                                            <td class="ar">{{ t.FSD.Debt.NonCurrent[0] }}</td>
-                                            <td class="ar">{{ t.FSD.Debt.NonCurrent[1] }}</td>
-                                            <td class="ar">{{ t.FSD.Debt.NonCurrent[2] }}</td>
+                                            <td class="ac border_right">{{ t.Labels.Finance.NonCurrentDebt }}</td>
+                                            <td class="ar" v-for="(val, idx) in t.FSD.Debt.NonCurrent" :key="'dnc-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr class="bg_light bold">
-                                            <td class="ac border_right" colspan="2">부채총계</td>
-                                            <td class="ar fc_red">{{ t.FSD.Debt.Total[0] }}</td>
-                                            <td class="ar fc_red">{{ t.FSD.Debt.Total[1] }}</td>
-                                            <td class="ar fc_red">{{ t.FSD.Debt.Total[2] }}</td>
+                                            <td class="ac border_right" colspan="2">{{ t.Labels.Finance.TotalDebt }}</td>
+                                            <td class="ar fc_red" v-for="(val, idx) in t.FSD.Debt.Total" :key="'dt-'+idx">{{ val }}</td>
                                         </tr>
-
+                                        <!-- 자본 영역 -->
                                         <tr>
-                                            <th rowspan="2" scope="rowgroup" class="ac border_right">자본</th>
-                                            <td class="ac border_right">자본금</td>
-                                            <td class="ar">{{ t.FSD.Capital.Base[0] }}</td>
-                                            <td class="ar">{{ t.FSD.Capital.Base[1] }}</td>
-                                            <td class="ar">{{ t.FSD.Capital.Base[2] }}</td>
+                                            <th rowspan="2" scope="rowgroup" class="ac border_right">{{ t.Labels.Finance.Capital }}</th>
+                                            <td class="ac border_right">{{ t.Labels.Finance.BaseCapital }}</td>
+                                            <td class="ar" v-for="(val, idx) in t.FSD.Capital.Base" :key="'cb-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <td class="ac border_right">이익잉여금 등</td>
-                                            <td class="ar">{{ t.FSD.Capital.Profit[0] }}</td>
-                                            <td class="ar">{{ t.FSD.Capital.Profit[1] }}</td>
-                                            <td class="ar">{{ t.FSD.Capital.Profit[2] }}</td>
+                                            <td class="ac border_right">{{ t.Labels.Finance.ProfitCapital }}</td>
+                                            <td class="ar" v-for="(val, idx) in t.FSD.Capital.Profit" :key="'cp-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr class="bg_light bold">
-                                            <td class="ac border_right" colspan="2">자본총계</td>
-                                            <td class="ar fc_red">{{ t.FSD.Capital.Total[0] }}</td>
-                                            <td class="ar fc_red">{{ t.FSD.Capital.Total[1] }}</td>
-                                            <td class="ar fc_red">{{ t.FSD.Capital.Total[2] }}</td>
+                                            <td class="ac border_right" colspan="2">{{ t.Labels.Finance.TotalCapital }}</td>
+                                            <td class="ar fc_red" v-for="(val, idx) in t.FSD.Capital.Total" :key="'ct-'+idx">{{ val }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -133,66 +114,46 @@
                                     </colgroup>
                                     <thead>
                                         <tr class="bold">
-                                            <th scope="col" class="ac">구분</th>
-                                            <th scope="col" class="ac">2023</th>
-                                            <th scope="col" class="ac">2024</th>
-                                            <th scope="col" class="ac">2025</th>
+                                            <th scope="col" class="ac">{{ t.Labels.Common.Category }}</th>
+                                            <th scope="col" class="ac" v-for="year in t.SummaryYears" :key="'h-'+year">{{ year }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="bold">
-                                            <th scope="row" class="ac">매출액</th>
-                                            <td class="ar">{{ t.ISD.Sales[0] }}</td>
-                                            <td class="ar">{{ t.ISD.Sales[1] }}</td>
-                                            <td class="ar">{{ t.ISD.Sales[2] }}</td>
+                                            <th scope="row" class="ac">{{ t.Labels.Finance.Sales }}</th>
+                                            <td class="ar" v-for="(val, idx) in t.ISD.Sales" :key="'s-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr class="bold">
-                                            <th scope="row" class="ac">매출총이익</th>
-                                            <td class="ar">{{ t.ISD.GrossProfit[0] }}</td>
-                                            <td class="ar">{{ t.ISD.GrossProfit[1] }}</td>
-                                            <td class="ar">{{ t.ISD.GrossProfit[2] }}</td>
+                                            <th scope="row" class="ac">{{ t.Labels.Finance.GrossProfit }}</th>
+                                            <td class="ar" v-for="(val, idx) in t.ISD.GrossProfit" :key="'gp-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="ac">판매비와 관리비 등</th>
-                                            <td class="ar">{{ t.ISD.SGA[0] }}</td>
-                                            <td class="ar">{{ t.ISD.SGA[1] }}</td>
-                                            <td class="ar">{{ t.ISD.SGA[2] }}</td>
+                                            <th scope="row" class="ac">{{ t.Labels.Finance.SGA }}</th>
+                                            <td class="ar" v-for="(val, idx) in t.ISD.SGA" :key="'sga-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="ac">영업이익</th>
-                                            <td class="ar">{{ t.ISD.OperatingIncome[0] }}</td>
-                                            <td class="ar">{{ t.ISD.OperatingIncome[1] }}</td>
-                                            <td class="ar">{{ t.ISD.OperatingIncome[2] }}</td>
+                                            <th scope="row" class="ac">{{ t.Labels.Finance.OperatingIncome }}</th>
+                                            <td class="ar" v-for="(val, idx) in t.ISD.OperatingIncome" :key="'oi-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="ac">기타손익</th>
-                                            <td class="ar">{{ t.ISD.OtherIncome[0] }}</td>
-                                            <td class="ar">{{ t.ISD.OtherIncome[1] }}</td>
-                                            <td class="ar">{{ t.ISD.OtherIncome[2] }}</td>
+                                            <th scope="row" class="ac">{{ t.Labels.Finance.OtherIncome }}</th>
+                                            <td class="ar" v-for="(val, idx) in t.ISD.OtherIncome" :key="'other-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="ac">금융손익</th>
-                                            <td class="ar">{{ t.ISD.FinancialIncome[0] }}</td>
-                                            <td class="ar">{{ t.ISD.FinancialIncome[1] }}</td>
-                                            <td class="ar">{{ t.ISD.FinancialIncome[2] }}</td>
+                                            <th scope="row" class="ac">{{ t.Labels.Finance.FinancialIncome }}</th>
+                                            <td class="ar" v-for="(val, idx) in t.ISD.FinancialIncome" :key="'fi-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="ac">지분법손익</th>
-                                            <td class="ar">{{ t.ISD.EquityMethod[0] }}</td>
-                                            <td class="ar">{{ t.ISD.EquityMethod[1] }}</td>
-                                            <td class="ar">{{ t.ISD.EquityMethod[2] }}</td>
+                                            <th scope="row" class="ac">{{ t.Labels.Finance.EquityMethod }}</th>
+                                            <td class="ar" v-for="(val, idx) in t.ISD.EquityMethod" :key="'em-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr class="bold">
-                                            <th scope="row" class="ac">법인세비용 차감전순이익</th>
-                                            <td class="ar">{{ t.ISD.IncomeBeforeTax[0] }}</td>
-                                            <td class="ar">{{ t.ISD.IncomeBeforeTax[1] }}</td>
-                                            <td class="ar">{{ t.ISD.IncomeBeforeTax[2] }}</td>
+                                            <th scope="row" class="ac">{{ t.Labels.Finance.IncomeBeforeTax }}</th>
+                                            <td class="ar" v-for="(val, idx) in t.ISD.IncomeBeforeTax" :key="'ibt-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr class="bg_light bold">
-                                            <td scope="row" class="ac">당기순이익</td>
-                                            <td class="ar fc_red">{{ t.ISD.NetIncome[0] }}</td>
-                                            <td class="ar fc_red">{{ t.ISD.NetIncome[1] }}</td>
-                                            <td class="ar fc_red">{{ t.ISD.NetIncome[2] }}</td>
+                                            <td scope="row" class="ac">{{ t.Labels.Finance.NetIncome }}</td>
+                                            <td class="ar fc_red" v-for="(val, idx) in t.ISD.NetIncome" :key="'ni-'+idx">{{ val }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -200,7 +161,7 @@
                         </div>
                     </section>
 
-                    <!-- gsrin0202 -->
+                    <!-- gsrin0202: 배당 정보 -->
                     <section class="tab_content gsrin0202" v-if="CTabIdx === 1" :aria-label="t.Tabs1[1].item">
                         <p class="policy_desc" v-html="t.DividendPolicyDesc"></p>
                         <div class="table_section mt100">
@@ -212,7 +173,7 @@
                                 <span class="unit ml20">{{ t.UnitMillion }}</span>
                             </div>
                             
-                            <div class="policy_wrap mt40">
+                            <div class="policy_wrap">
                                 <table class="base_table">
                                     <colgroup>
                                         <col style="width: 150px;">
@@ -224,39 +185,38 @@
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="ac">년도</th>
+                                            <th scope="col" class="ac">{{ t.Labels.Dividend.Year }}</th>
                                             <th scope="col" class="ac" v-for="year in t.DividendYears" :key="year">{{ year }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row" class="ac">배당총액</th>
+                                            <th scope="row" class="ac">{{ t.Labels.Dividend.TotalAmount }}</th>
                                             <td class="ar" v-for="(val, idx) in t.DividendData.TotalAmount" :key="'total-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="ac">배당종류</th>
-                                            <td class="ac" v-for="(val, idx) in t.DividendData.Type" :key="'type-'+idx">{{ val }}</td>
+                                            <th scope="row" class="ac">{{ t.Labels.Dividend.Type }}</th>
+                                            <td class="ar" v-for="(val, idx) in t.DividendData.Type" :key="'type-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="ac">주당 배당금</th>
+                                            <th scope="row" class="ac">{{ t.Labels.Dividend.PerShare }}</th>
                                             <td class="ar" v-for="(val, idx) in t.DividendData.PerShare" :key="'per-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="ac">배당성향</th>
+                                            <th scope="row" class="ac">{{ t.Labels.Dividend.Propensity }}</th>
                                             <td class="ar" v-for="(val, idx) in t.DividendData.Propensity" :key="'prop-'+idx">{{ val }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="ac">배당수익률</th>
+                                            <th scope="row" class="ac">{{ t.Labels.Dividend.Yield }}</th>
                                             <td class="ar" v-for="(val, idx) in t.DividendData.Yield" :key="'yield-'+idx">{{ val }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-
                     </section>
 
-                    <!-- gsrin0203 -->
+                    <!-- gsrin0203: 실적자료 등 -->
                     <section class="tab_content gsrin0203" v-if="CTabIdx === 2" :aria-label="t.Tabs1[2].item">
                         <div class="table_container">
                             <div class="search_group">
@@ -269,9 +229,9 @@
                                 <table class="base_table ir_table">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="ac">번호</th>
-                                            <th scope="col" class="ac">제목</th>
-                                            <th scope="col" class="ac">다운로드</th>
+                                            <th scope="col" class="ac">{{ t.Labels.Board.Num }}</th>
+                                            <th scope="col" class="ac">{{ t.Labels.Board.Title }}</th>
+                                            <th scope="col" class="ac">{{ t.Labels.Board.Download }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -298,7 +258,6 @@
                                 />
                             </div>
                         </div>
-
                     </section>
                 </div>
             </div>
@@ -308,7 +267,7 @@
 
 <script>
 import Tabs from "@/components/Tabs.vue";
-import Search from "@/components/Search.vue"; // Search 추가
+import Search from "@/components/Search.vue";
 import Pagination from "@/components/Pagination.vue";
 
 export default {
@@ -318,6 +277,7 @@ export default {
     data() {
         return {
             CTabIdx: 0,
+            currentPage: 1,
             searchData: {
                 type: "all",
                 keyword: ""
@@ -326,11 +286,58 @@ export default {
                 ko: {
                     MainTitle: "경영성과",
                     MainsubTitle: "Business Performance",
-                    MainDesc: ["투명한 GS리테일 경영성과 입니다.", "배당정책", "투명한 GS리테일 경영성과 입니다."],
+                    MainDesc: ["투명한 GS리테일<br/> 경영성과 입니다.", "배당정책", "투명한 GS리테일<br/> 경영성과 입니다."],
                     Tabs1: [{ item: "재무현황" }, { item: "배당 정보" }, { item: "실적자료 등" }],
                     UnitMillion: "(단위 : 백만원)",
+                    Recent5Years: "(최근 5개년 기준)",
+                    SummaryYears: ["2023", "2024", "2025"],
                     TableTitle1: "요약 연결재무상태표",
                     TableTitle2: "요약 연결손익계산서",
+                    TableTitle3: "투명한 GS리테일 경영성과 입니다.",
+                    
+                    // 추출된 텍스트 라벨들
+                    Labels: {
+                        Common: {
+                            Category: "구분"
+                        },
+                        Finance: {
+                            Asset: "자산",
+                            CurrentAsset: "유동자산",
+                            NonCurrentAsset: "비유동자산",
+                            TotalAsset: "자산총계",
+                            Debt: "부채",
+                            CurrentDebt: "유동부채",
+                            NonCurrentDebt: "비유동부채",
+                            TotalDebt: "부채총계",
+                            Capital: "자본",
+                            BaseCapital: "자본금",
+                            ProfitCapital: "이익잉여금 등",
+                            TotalCapital: "자본총계",
+                            Sales: "매출액",
+                            GrossProfit: "매출총이익",
+                            SGA: "판매비와 관리비 등",
+                            OperatingIncome: "영업이익",
+                            OtherIncome: "기타손익",
+                            FinancialIncome: "금융손익",
+                            EquityMethod: "지분법손익",
+                            IncomeBeforeTax: "법인세비용 차감전순이익",
+                            NetIncome: "당기순이익"
+                        },
+                        Dividend: {
+                            Year: "년도",
+                            TotalAmount: "2025",
+                            Type: "2024",
+                            PerShare: "2023",
+                            Propensity: "2022",
+                            Yield: "2021"
+                        },
+                        Board: {
+                            Num: "구분",
+                            Title: "제목",
+                            Download: "다운로드"
+                        }
+                    },
+
                     FSD: {
                         Asset: {
                             Current: ["1,857,062", "1,481,155", "1,797,888"],
@@ -365,17 +372,14 @@ export default {
                         { title: "당기 순이익", unit: "(단위 : 억원)", imgName: "gsrin0201_chat_3" },
                         { title: "총자산", unit: "(단위 : 억원)", imgName: "gsrin0201_chat_4" }
                     ],
-                    // [배당 정보 전용 데이터]
                     DividendPolicyDesc: "주주가치 제고를 위하여 배당을 지속적으로 실시해 오고 있으며, 배당 규모는 향후 회사의 지속적인 성장을 위한 투자와 경영실적 및 Cash-flow 상황 등을 전반적으로 고려하여 결정하고 있습니다.<br/><br/>배당금은 비경상 손익을 제외한 (지배지분)연결당기순이익 중 40% 수준에서 배당금 산정이 적정하다고 판단하여, 향후에도 40%수준의 배당성향을 유지할 계획입니다.",
-                    TableTitle3: "투명한 GS리테일 경영성과 입니다.",
-                    Recent5Years: "(최근 5개년 기준)",
-                    DividendYears: ["2025", "2024", "2023", "2022", "2021"],
+                    DividendYears: ["배당총액", "배당종류", "주당 배당금", "배당성향", "배당수익률"],
                     DividendData: {
-                        TotalAmount: ["50,139,354,000", "41,782,795,000", "51,719,128,000", "43,937,410,750", "122,616,030,000"],
-                        Type: ["현금", "현금", "현금", "현금", "현금"],
-                        PerShare: ["600", "500", "500", "430", "1,200"],
-                        Propensity: ["115.4", "1,639.8", "292.6", "108.7", "15.0"],
-                        Yield: ["2.7", "3.3", "2.1", "1.5", "3.9"]
+                        TotalAmount: ["50,139,354,000", "현금", "600", "115.4", "2.7"],
+                        Type: ["41,782,795,000", "현금", "500", "1,639.8", "3.3"],
+                        PerShare: ["51,719,128,000", "현금", "500", "292.6", "2.1"],
+                        Propensity: ["43,937,410,750", "현금", "430", "108.7", "1.5"],
+                        Yield: ["122,616,030,000", "현금", "1,200", "15.0", "3.9"]
                     },
                     IRListData: [
                         { id: "60", title: "2025년 4분기 경영실적", fileUrl: "#" },
@@ -390,11 +394,10 @@ export default {
                         { id: "51", title: "2023년 4분기 경영실적", fileUrl: "#" }
                     ],
                     options: [
-                        { value: "all", label: "전체" },   // 'val'이 아니라 반드시 'value'
-                        { value: "title", label: "제목" }, // 'txt'가 아니라 반드시 'label'
+                        { value: "all", label: "전체" },
+                        { value: "title", label: "제목" },
                         { value: "content", label: "내용" }
                     ]
-
                 }
             }
         };
@@ -402,32 +405,40 @@ export default {
     computed: { t() { return this.langData[this.lang] || this.langData.ko; } },
     methods: { 
         onTabChange1(idx) { this.CTabIdx = idx; },
-        handleSearch(val) { //[검색] 버튼 클릭 시 실행 이벤트
+        onPageChange(page) { this.currentPage = page; },
+        handleSearch(val) {
             console.log("검색 실행:", val);
             this.currentPage = 1;
+        },
+        handleDownload(link) {
+            if(link && link !== '#') window.open(link, "_blank");
+            else alert("파일 준비 중입니다.");
         }
-    
     }
 };
 </script>
 
 <style scoped>
+/* 기존 스타일 그대로 유지 */
 .main-container { width: 100%; position: relative; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0201_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; }
 .visual-sub { margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center; }
 .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
-.title-sub-text { width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4; }
+:deep(.title-sub-text) { width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4; }
+:deep(.title-sub-text) br {display:none;}
 .title-sub-text.is_dividend {padding-bottom: 16px; padding-top: 100px; text-align:left; }
 .ac { text-align: center; }
 .ar { text-align: right; }
+.al { text-align: left; }
+.mt24 { margin-top: 24px; }
 .mt40 { margin-top: 40px; }
 .mt100 { margin-top: 100px; }
 .search_group :deep(.search_wrap) {display: flex; justify-content: flex-end; gap: 8px;}
-.search_group :deep(.input_search_wrap) {flex: none !important; width: 360px !important;}
+.search_group :deep(.input_search_wrap) {flex: none !important; width: 360px;}
 .search_group :deep(.select_box) {width: 160px !important;}
 .pagination {margin-top:24px; justify-content:center;}
-:deep(label.select select) {width:160px !important;}
+:deep(label.select select) {width:160px;}
 
 /* Charts */
 .performance_charts { width: 100%; }
@@ -443,10 +454,12 @@ export default {
 .dividend_policy_info { width: 100%; text-align: left; }
 .section-sub-title { font-size: 48px; font-weight: 700; color: #161616; margin-bottom: 16px; letter-spacing: -0.48px; }
 .policy_desc { font-size: 24px; color: #161616; line-height: 1.5; letter-spacing: -0.24px; word-break: keep-all; }
-.table_info_group {display:flex; justify-content:space-between;}
+.table_info_group {margin-top:32px; margin-bottom:16px; display:flex; justify-content:space-between;}
+.gsrin0202 .policy_wrap {overflow-x:auto;}
 
 /* Table 스타일 */
-.policy_wrap table {width: 100%; margin-top:0px; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
+.policy_wrap {border-top: 2px solid #161616;}
+.policy_wrap table {width: 100%; margin-top:0px; border-collapse: collapse; border-left: 0 !important; border-right: 0 !important; }
 .policy_wrap th, .policy_wrap td {padding: 18px 24px; border: 1px solid #e5e5e9; font-size: 1.8rem; line-height: 1.4; vertical-align: middle;}
 .policy_wrap th:first-child, .policy_wrap td:first-child { border-left: 0; }
 .policy_wrap th:last-child, .policy_wrap td:last-child { border-right: 0; }
@@ -470,19 +483,21 @@ tr.bold td, tr.bold th { font-weight: 700 !important; }
     .gsrin0201 .base_table, .gsrin0202 .base_table { min-width:1000px; }
 }
 @media screen and (max-width: 767px) {
-    /* 요청하신 모바일 수정 사항 */
+    .cont_inner {padding: 80px 20px 200px;}
+    .tab_wrap {margin-bottom:0px;}
     .mt100 { margin-top:80px; }
-    .cont_inner {padding:0 20px;}
     h3 { font-size: 24px !important; }
     .unit { font-size: 14px !important; }
     .title_wrap { display: none !important; }
     .gsrin0201 .policy_wrap, .gsrin0201 .base_table  { overflow-x: auto; }
     .gsrin0201 .base_table, .gsrin0202 .base_table { min-width: 800px; }
-    label.select select {width:100%}
-
-    /* 차트 영역 1열 배치 */
+    :deep(label.select select), .search_group :deep(.input_search_wrap) {width:100%;}
+    .title-sub-text.is_dividend {padding-top:60px;}
+    .gsrin0201 .policy_wrap .base_table colgroup col:first-of-type {width:180px !important;}
+    .gsrin0202 .policy_desc {font-size:18px; line-height:1.4;}
     .chart_grid { grid-template-columns: 1fr; gap:80px; } 
-    .title-sub-text { font-size: 24px; padding: 60px 0; }
+    .title-sub-text { font-size: 28px; padding: 60px 0; text-align:left;}
+    :deep(.title-sub-text) br {display:block;}
     .policy_wrap th, .policy_wrap td { padding: 12px 15px; font-size: 14px; }
     .gsrin0203 .policy_wrap th:first-child, .gsrin0203 .policy_wrap td:first-child { display: none; }
     .gsrin0203 .policy_wrap thead {display:none;}
