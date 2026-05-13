@@ -258,13 +258,15 @@
 
                     <!-- gsrin0203 -->
                     <section class="tab_content gsrin0203" v-if="CTabIdx === 2" :aria-label="t.Tabs1[2].item">
+
+                        <div class="search_filter_area">
+                            <Search 
+                                v-model="searchData" 
+                                :search_opt="t.options"  @search="handleSearch"
+                            />
+                        </div>
+
                         <div class="table_container">
-                            <div class="search_group">
-                                <Search 
-                                    v-model="searchData" 
-                                    :search_opt="t.options"  @search="handleSearch"
-                                />
-                            </div>
                             <div class="policy_wrap mt24">
                                 <table class="base_table ir_table">
                                     <thead>
@@ -290,13 +292,11 @@
                                 </table>
                             </div>
 
-                            <div class="pagination_area ">
-                                <Pagination 
-                                    v-model="currentPage" 
-                                    :total-pages="10" 
-                                    @change="onPageChange" 
-                                />
-                            </div>
+                            <Pagination 
+                                v-model="currentPage" 
+                                :total-pages="10" 
+                                @change="onPageChange" 
+                            />
                         </div>
 
                     </section>
@@ -419,19 +419,10 @@ export default {
 .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
 .title-sub-text { width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4; }
 .title-sub-text.is_dividend {padding-bottom: 16px; padding-top: 100px; text-align:left; }
-.ac { text-align: center; }
-.ar { text-align: right; }
-.mt40 { margin-top: 40px; }
-.mt100 { margin-top: 100px; }
-.search_group :deep(.search_wrap) {display: flex; justify-content: flex-end; gap: 8px;}
-.search_group :deep(.input_search_wrap) {flex: none !important; width: 360px !important;}
-.search_group :deep(.select_box) {width: 160px !important;}
-.pagination {margin-top:24px; justify-content:center;}
-:deep(label.select select) {width:160px !important;}
 
 /* Charts */
 .performance_charts { width: 100%; }
-.chart_grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+.chart_grid { display: grid; grid-template-columns: repeat(2, 1fr); gap:100px 40px; }
 .chart_item { width: 100%; display: flex; flex-direction: column; gap: 40px; }
 .chart_header { display: flex; align-items: flex-end; justify-content:space-between; }
 .chart_title { font-size: 40px; font-weight: 700; color: #161618; }
@@ -446,7 +437,7 @@ export default {
 .table_info_group {display:flex; justify-content:space-between;}
 
 /* Table 스타일 */
-.policy_wrap table {width: 100%; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
+.policy_wrap table {width: 100%; margin-top:0px; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
 .policy_wrap th, .policy_wrap td {padding: 18px 24px; border: 1px solid #e5e5e9; font-size: 1.8rem; line-height: 1.4; vertical-align: middle;}
 .policy_wrap th:first-child, .policy_wrap td:first-child { border-left: 0; }
 .policy_wrap th:last-child, .policy_wrap td:last-child { border-right: 0; }
@@ -471,20 +462,19 @@ tr.bold td, tr.bold th { font-weight: 700 !important; }
 }
 @media screen and (max-width: 767px) {
     /* 요청하신 모바일 수정 사항 */
+    .mt100 { margin-top:80px; }
     .cont_inner {padding:0 20px;}
     h3 { font-size: 24px !important; }
     .unit { font-size: 14px !important; }
     .title_wrap { display: none !important; }
     .gsrin0201 .policy_wrap, .gsrin0201 .base_table  { overflow-x: auto; }
     .gsrin0201 .base_table, .gsrin0202 .base_table { min-width: 800px; }
-    label.select select {width:100%}
 
     /* 차트 영역 1열 배치 */
-    .chart_grid { grid-template-columns: 1fr; } 
+    .chart_grid { grid-template-columns: 1fr; gap:80px; } 
     .title-sub-text { font-size: 24px; padding: 60px 0; }
     .policy_wrap th, .policy_wrap td { padding: 12px 15px; font-size: 14px; }
     .gsrin0203 .policy_wrap th:first-child, .gsrin0203 .policy_wrap td:first-child { display: none; }
     .gsrin0203 .policy_wrap thead {display:none;}
-    .search_group .search_wrap {flex-direction:column; align-items:stretch;}
 }
 </style>
