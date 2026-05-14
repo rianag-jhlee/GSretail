@@ -125,7 +125,6 @@ export default {
 .title_wrap { width: 100%; padding: 10.91% 0 0; text-align: center; position: relative; display: block; }
 .page-title { color: #111; font-size: 72px; font-weight: 700; line-height:124%; letter-spacing:-0.02em;}
 .visual-sub { margin-top: 10px; color: #111; font-size: 24px; font-weight: 400; line-height:150%; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
 
 /* board_wrap */
 .board_wrap.type_gallery .body {margin-top:-54px; margin-left:-50px; display:flex; flex-wrap:wrap;}
@@ -141,7 +140,6 @@ export default {
     .title_wrap {margin-top:48px; padding:0 20px; text-align:initial;}
     .title_wrap h2 {display:none;}
     .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
-    .cont_inner {padding:0 20px;}
 
     .board_wrap.type_gallery .body {margin-top:-48px;}
     .board_wrap.type_gallery .body > li {width:100%; padding-top:48px;}

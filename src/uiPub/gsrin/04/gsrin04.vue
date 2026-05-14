@@ -172,7 +172,6 @@ export default {
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin04_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block; }
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; }
 .visual-sub { margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
 
 .policy_wrap table { width: 100%; border-collapse: collapse; word-break: keep-all; border-top: 1px solid #161616; }
 .policy_wrap th, .policy_wrap td { padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 1.8rem; line-height: 1.6; vertical-align: middle; }
@@ -188,7 +187,6 @@ export default {
 
 @media screen and (max-width: 767px) {
     .title_wrap {display:none;}
-    .cont_inner {padding:0 20px;}
     .policy_wrap th:first-child, .policy_wrap td:first-child { display: none; }
     .policy_wrap th, .policy_wrap td { padding: 12px; font-size: 15px; }
 }

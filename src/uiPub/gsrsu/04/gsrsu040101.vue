@@ -6,7 +6,7 @@
         </div>
 
 
-        <div class="content">
+        <div class="cont_inner">
             <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
             <Tabs
                 v-if="CTabIdx === 0"
@@ -451,10 +451,10 @@
                             <p>{{ t.ComplianceManualMeta }}</p>
                         </div>
                         <div class="button_area">
-                            <Buttons tag="a" href="#none" btn-class="btn_mid border btn_icon after">
+                            <Buttons tag="a" href="#none" btn-class="btn_mid border btn_icon_arrow after">
                                 {{ t.ComplianceManualBtnEbook }}
                             </Buttons>
-                            <Buttons tag="a" href="#none" btn-class="btn_mid border btn_icon after">
+                            <Buttons tag="a" href="#none" btn-class="btn_mid border btn_download_file">
                                 {{ t.ComplianceManualBtnDownload }}
                             </Buttons>
                         </div>
@@ -4345,7 +4345,6 @@ img { width:100%; height:auto; display:block; object-fit: cover; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url(@/assets/images/dummy/gsrsu040101_bg.jpg) no-repeat center / cover; text-align: center; position: relative; display: block; }
 .title_wrap::after { content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1; }
 .page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2; }
-.content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
 .panel { padding-top:80px; }
 .panel_third_depth { padding-top: 80px; }
 /* v-html 삽입 노드에는 scoped data 속성이 없으므로 :deep 필요 */
@@ -4613,7 +4612,6 @@ section + section { padding-top:120px; }
 .panel_inner header.sub_header p:only-child { margin-top: 0; }
 @media screen and (max-width: 768px) {
     :deep(.p_br) { display: none; }
-    .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
     .panel { padding-top:60px; }
     .panel_third_depth { padding-top: 32px; }
     .title_wrap { display: none; }

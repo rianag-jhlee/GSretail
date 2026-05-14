@@ -343,7 +343,6 @@ export default {
 .main-container { width: 100%; position: relative; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrst01_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; letter-spacing: -1.44px; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
 .mo {display:none;}
 .pc {display:block;}
 
@@ -433,7 +432,6 @@ export default {
 @media screen and (max-width: 1024px) {
     .step_list {flex-wrap:wrap;}
     .step_list li {width:50%; padding:40px 30px; flex: none;}
-    .cont_inner { padding: 0 20px; }
     .bottom_link_btns, .help_desk_area ul { flex-direction: column; grid-template-columns: 1fr; }
     .help_desk_area ul li { width:100%; padding:20px; flex-direction:column;}
     .policy_wrap th, .policy_wrap td, .policy_wrap td a {font-size: 16px !important; }
@@ -441,7 +439,7 @@ export default {
 @media screen and (max-width: 767px) {
     .mo {display:block;}
     .pc {display:none;}
-    .cont_inner {padding: 80px 20px 200px;}
+    .cont_inner {padding-top: 80px;}
     :deep(.tab_wrap) ul.type_02 {padding-left:0px !important;}
     .text-wrapper { font-size: 24px;}
     .title_wrap  {display:none;}
