@@ -245,14 +245,18 @@ export default {
                             part2: {
                                 title: "상담내용",
                                 categoryLabel: "구분",
-                                Consulting:"상담구분",
+                                Consulting:"상담구분 선택",
                                 categoryOptions: [{ value: 'store', label: '편의점/수퍼' }, { value: 'home', label: '홈쇼핑' }],
                                 storeLabel: "매장명",
                                 storeGuide: "* 단, 점포명을 모르시는 경우 점포위치를 적어주세요",
                                 subjectLabel: "제목",
                                 contentLabel: "내용",
                                 contentPlaceholder: "입점 관련 궁금한 사항을 입력 해 주세요",
-                                noticeText: "<span>※ 매장 관련 제보내용은 정확한 점포명을 작성해 주셔야 보다 원할한 답변을 받아보실수 있습니다.</span><span>※ 내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.</span><span>※ 제보내용에 욕설이나 비속어가 포함되어 있으면 답변 되지 않을 수 있습니다.</span>",
+                                noticeText: `
+                                    <span>GS25 매장관련문의를 하시는 경우, 정확한 점포명/방문(구매)날짜, 시간을 함께 작성해주셔야 보다 원활한 답변을 받아보실 수 있습니다.</span>
+                                    <span>내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.</span>
+                                    <span>상담내용에 욕설이나 비속어가 포함되어 있으면 답변 되지 않을 수 있습니다.</span>
+                                    <span>상담 내용(첨부파일 포함)과 관계 없이 성적 수치감이나 혐오감을 일으키는 내용을 게시하는 경우, 성폭력범죄의 처벌 등에 관한 특례법에 따라 처벌받을 수 있습니다.</span>`,
                                 fileLabel: "파일첨부",
                                 fileNotice: "* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)",
                                 replyLabel: "회신방법",
@@ -293,7 +297,7 @@ export default {
 
 <style scoped>
 .off {display:none;}
-.modal_header {width:100%; padding-bottom:40px; color:#161616; font-size:40px; font-weight:700; display:flex; align-items:center; justify-content:space-between; border-bottom:0 !important;}
+.modal_header {width:100%; color:#161616; font-size:40px; font-weight:700; display:flex; align-items:center; justify-content:space-between; border-bottom:0 !important;}
 .modal_content {width:100%; overflow-y:auto; flex:1;}
 section {padding-bottom:80px;}
 .input_wrap {display:flex; align-items:center; justify-content:flex-end;}
@@ -310,7 +314,7 @@ section {padding-bottom:80px;}
 .listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
 .listening_form_area .consent_tit {margin-bottom: 24px; font-size: 24px; font-weight: 700; display: block; }
 .listening_form_area .consent_list {padding-bottom:24px;}
-.listening_form_area .consent_list li { font-size: 16px; color: #67676f; margin-bottom: 8px; position: relative; padding-left: 12px; }
+.listening_form_area .consent_list li { font-size: 16px; color: #67676f; margin-bottom: 8px; padding-left: 12px; line-height:1.5; position: relative; }
 .listening_form_area .consent_list li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 1px; background-color: #67676f; }
 .listening_form_area .form_table { border-top: 1px solid #242428; }
 .listening_form_area .form_row { display: flex; align-items: center; }
@@ -325,7 +329,7 @@ section {padding-bottom:80px;}
 .listening_form_wrap .form_title { font-size: 24px; font-weight: 700; color: #161616; }
 .listening_form_wrap .required_guide { font-size: 14px; color: #fb6432; }
 .form_section:first-of-type {margin-bottom:64px;}
-.listening_form_wrap .form_body {padding: 24px 0; border-bottom: 1px solid #e5e5e9; }
+.listening_form_wrap .form_body {padding:10px 0 12px; border-bottom: 1px solid #e5e5e9; }
 .listening_form_wrap .form_row { display: flex; align-items: flex-start; gap: 8px; padding: 12px 0; }
 .listening_form_wrap .label_item { display: flex; width: 134px; align-items: center; gap: 4px; padding-top: 14px; }
 .listening_form_wrap .label_text { font-size: 16px; color: #161616; }
@@ -337,7 +341,9 @@ section {padding-bottom:80px;}
 .listening_form_wrap .input_complex {width:calc(100% - 134px);  display: flex; flex-direction: column; gap: 8px;}
 .listening_form_wrap .input_complex .textarea_wrap {max-width:600px;}
 .listening_form_wrap .guide_msg { font-size: 14px; color: #67676f; }
-.listening_form_wrap .guide_msg_multi { font-size: 12px; color: #67676f; line-height: 18px; margin-top: 8px; }
+.listening_form_wrap .guide_msg_multi {width:90%; margin-top: 8px; color: #67676f; font-size: 14px; line-height:1.4; display:flex; flex-direction:column; }
+.listening_form_wrap :deep(.guide_msg_multi) span {padding-left:15px; line-height:1.4; display:inline-block; position:relative;}
+.listening_form_wrap :deep(.guide_msg_multi) span::before {content:'*'; position:absolute; top:0; left:0;}
 .listening_form_wrap .file_upload_group { display: flex; align-items: center; gap: 10px; }
 .listening_form_wrap .btn_file { height: 38px; padding: 0 12px; font-size: 16px; cursor: pointer; }
 .listening_form_wrap .file_name { font-size: 14px; color: #161616; }
@@ -351,12 +357,13 @@ section {padding-bottom:80px;}
     .w428 {width:100%;}
 }
 @media screen and (max-width: 767px) {
+    .modal_header {font-size:18px;}
     .input_item, .input_complex, .input_wrap, .w428 {width:100%;}
     .section_title_sub {font-size:16px !important;}
     .p_desc {font-size:14px;}
     .listening_form_area i {font-weight:700;}
     :deep(.listening_form_area) i br {display:block;}
-    .listening_form_area .consent_box {padding:30px 20px;}
+    .listening_form_area .consent_box {margin-bottom:20px; padding:30px 20px;}
     .listening_form_wrap .input_group.email {flex-direction:column; align-items:stretch;}
     .consent_agree {flex-direction:column; align-items:flex-start; gap:15px;}
     .guide_text + .input_wrap {justify-content:flex-start;}
