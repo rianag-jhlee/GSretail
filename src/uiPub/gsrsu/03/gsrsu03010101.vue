@@ -1223,7 +1223,11 @@
                                                 </li>
                                             </ul>
                                             <div class="btn-wrap ac mt40">
-                                                <button type="button" class="btn_icon btn_xl border after">
+                                                <button type="button" class="btn_icon btn_xl border after" 
+                                                    @click="openModal" 
+                                                    data-popid="gsrsu03030401" 
+                                                    data-type="lg" 
+                                                    data-cont="gsrsu03030401">
                                                     {{ t.protect.safetymanagement.Policy.BtnText }}
                                                 </button>
                                             </div>
@@ -1557,7 +1561,11 @@
         <div id="gsrsu03030304" class="modal_wrap">
             <div class="modal_container"></div>
         </div>
-        
+
+        <div id="gsrsu03030401" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
     </div>
 </template>
 
