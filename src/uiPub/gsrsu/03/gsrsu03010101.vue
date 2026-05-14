@@ -275,7 +275,7 @@
 
                                             <div class="visual_wrap">
                                                 <figure class="img_frame" style="width:100%; height:340px;">
-                                                    <img src="@/assets/images/dummy/gsrsu0301010204_1.png" :alt="t.WelfareSupport.Football.Title">
+                                                    <img src="@/assets/images/dummy/gsrsu0301010204.png" :alt="t.WelfareSupport.Football.Title">
                                                 </figure>
                                             </div>
                                         </section>
@@ -298,15 +298,11 @@
                                         </section>
 
                                         <section class="support_item">
-                                            <div class="div mb40">
-                                                <h3 class="section_title_sub mb16">{{ t.BroadcastingSupport.PrioritySupport.Title }}</h3>
-                                                <p class="p" v-html="t.BroadcastingSupport.PrioritySupport.Desc"></p>
-                                            </div>
                                             <figure class="img_frame mb60">
                                                 <img src="@/assets/images/dummy/gsrsu0301010205_2.png" :alt="t.BroadcastingSupport.PrioritySupport.Title">
                                             </figure>
 
-                                            <div class="grid_column_2 mt60">
+                                            <div class="grid_column_2">
                                                 <div 
                                                     v-for="(sub, idx) in t.BroadcastingSupport.PrioritySupport.SubItems" 
                                                     :key="'broad-sub-'+idx"
@@ -1781,9 +1777,12 @@ export default {
                             Desc: "방송 경험이 없어 방송 준비를 외주에 맡기거나 매 방송 시마다 샘플준비, 디스플레이 등의 방송 준비를 해야 하는 협력사의 부담을 덜어드리기 위한 제도입니다. GS SHOP의 전문가들이 상품 스타일링부터 디스플레이, 판넬제작 등을 지원하여 방송 준비에 대한 부담을 해소하고 매출 확대에 기여하고자 합니다."
                         },
                         PrioritySupport: {
-                            Title: "중소기업 편성우대",
-                            Desc: "GS SHOP은 중소기업이 안정적으로 성장할 수 있도록 상품 편성 전반에서 중소기업을 우대하고 있습니다.<br/>TV홈쇼핑과 데이터홈쇼핑 전반에 걸쳐 중소기업 상품의 편성 비중을 확대해, 지속적인 판로 확보와 매출 성장을 지원하고 있습니다.<br/>또한 고객 유입이 높은 프라임 시간대에도 중소기업 상품을 우선적으로 편성하는 제도를 운영하여, 중소기업 상품이 보다 효과적으로 고객과 만날 수 있는 기회를 제공하고 있습니다. 이를 통해 중소기업의 시장 경쟁력 강화와 동반성장을 도모하고 있습니다.",
                             SubItems: [
+                                {
+                                    Title: "중소기업 편성우대",
+                                    Desc: "GS SHOP은 중소기업이 안정적으로 성장할 수 있도록 상품 편성 전반에서 중소기업을 우대하고 있습니다.<br/>TV홈쇼핑과 데이터홈쇼핑 전반에 걸쳐 중소기업 상품의 편성 비중을 확대해, 지속적인 판로 확보와 매출 성장을 지원하고 있습니다.<br/>또한 고객 유입이 높은 프라임 시간대에도 중소기업 상품을 우선적으로 편성하는 제도를 운영하여, 중소기업 상품이 보다 효과적으로 고객과 만날 수 있는 기회를 제공하고 있습니다. 이를 통해 중소기업의 시장 경쟁력 강화와 동반성장을 도모하고 있습니다."
+                                }
+                                ,
                                 {
                                     Title: "중소기업 무료판매방송",
                                     Desc: "GS SHOP은 중소기업의 원활한 시장 진입과 판로 확대를 지원하기 위해 무료판매방송을 운영하고 있습니다.<br/><br/>방송 제작 및 편성에 대한 부담을 완화하여, 중소기업 상품이 고객에게 소개될 수 있는 기회를 제공하고 있으며, 이를 통해 중소기업의 안정적인 성장 기반 마련을 지원하고 있습니다."
