@@ -556,8 +556,13 @@
                             :items="t.FairTradeGuidelineItems"
                             :no-swipe="true"
                         >
-                            <template #action>
-                                <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon after">{{ t.FairTradeGuidelineDetailBtn }}</Buttons>
+                            <template #action="{item}">
+                                <Buttons btn-class="btn_xl border btn_icon after"
+                                    @click="openModal" 
+                                    :data-popid="item.popContId" 
+                                    data-type="lg" 
+                                    :data-cont="item.popContId">
+                                {{ t.FairTradeGuidelineDetailBtn }}</Buttons>
                             </template>
                         </FeatureCards>
                     </section>
@@ -888,6 +893,22 @@
 
 
         </div>
+
+        <div id="gsrsu04020301" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrsu04020302" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrsu04020303" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <div id="gsrsu04020304" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
     </div>
 </template>
 
@@ -910,6 +931,7 @@ import imgEthics03 from "@/assets/images/dummy/gsrsu040101_03.png";
 import imgEthics04 from "@/assets/images/dummy/gsrsu040101_04.png";
 import imgEthics05 from "@/assets/images/dummy/gsrsu040101_05.png";
 import imgEthics06 from "@/assets/images/dummy/gsrsu040101_06.png";
+import modal from "@/assets/js/modal";
 
 const props = defineProps({
     lang: {
@@ -1228,22 +1250,23 @@ const langData = {
             {
                 num: "01",
                 title: "파트너사 선정, 운영 가이드 라인",
-               
+                popContId: "gsrsu04020301"
             },
             {
                 num: "02",
                 title: "서면 발급, 보존 가이드 라인",
-              
+                popContId: "gsrsu04020302"
+            
             },
             {
                 num: "03",
                 title: "하도급 거래 심의위원회 운영 규정",
-                
+                popContId: "gsrsu04020303"
             },
             {
                 num: "04", 
                 title: "계약 체결가이드 라인",
-               
+                popContId: "gsrsu04020304"
             },
        
         ],
@@ -4267,7 +4290,7 @@ const langData = {
                 ],
             },
         ],
-    },
+    }
 };
 const t = computed(() => {
     const selected = langData[props.lang];
@@ -4306,6 +4329,13 @@ const openEthicsInquiry = () => {
 const closeEthicsInquiry = () => {
     resetEthicsInquiryState();
 };
+const openModal=event => {
+    const el = event.currentTarget;
+    const popId = el.dataset.popid;
+    const type = el.dataset.type || "default";
+    const cont = el.dataset.cont;
+    modal.open(popId, type, el, cont);
+}
 </script>
 
 <style scoped>
