@@ -181,7 +181,7 @@ export default {
 .policy_wrap th {border-left:0; border-right:0;}
 .file_link { color: #161616; text-decoration: none; }
 .file_link:hover { text-decoration: underline; }
-.file_type_text { font-size: 1.8rem; color: #161616; }
+.file_type_text { font-size: 18px; color: #161616; }
 .img { width: 24px; height: 24px; }
 .policy_wrap th:first-child, .policy_wrap td:first-child {width:150px}
 
@@ -189,5 +189,7 @@ export default {
     .title_wrap {display:none;}
     .policy_wrap th:first-child, .policy_wrap td:first-child { display: none; }
     .policy_wrap th, .policy_wrap td { padding: 12px; font-size: 15px; }
+    .policy_wrap td a, .file_type_text {font-size:16px;}
+    .file_type_text {margin-left:8px;}
 }
 </style>

@@ -215,7 +215,7 @@
     {
         "depth1": "", "depth2": "CI/BI", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrab/01/gsrab04",
+        "path": "gsrab/04/gsrab04",
         "link": "/gsrab04" ,
         "startDate": "",
         "endDate": "",
@@ -225,7 +225,7 @@
     {
         "depth1": "", "depth2": "위치", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrab/01/gsrab05",
+        "path": "gsrab/05/gsrab05",
         "link": "/gsrab05" ,
         "startDate": "",
         "endDate": "",
@@ -1542,7 +1542,7 @@
 
   
     {
-        "depth1": "About GSR", "depth2": "CEO 인사말", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "depth1": "고객센터", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
         "path": "gsrcu/01/gsrcu01",
         "link": "/gsrcu01" ,
