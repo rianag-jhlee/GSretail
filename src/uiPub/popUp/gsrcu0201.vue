@@ -92,10 +92,9 @@
                                 <div class="form_row">
                                     <div class="label_item">
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.Inquirytype }}</span>
-                                        <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
-                                        <span></span>
+                                        <span>제휴 및 협력문의</span>
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -294,7 +293,7 @@ export default {
 
 <style scoped>
 .off {display:none;}
-.modal_header {width:100%; padding-bottom:40px; color:#161616; font-size:40px; font-weight:700; display:flex; align-items:center; justify-content:space-between; border-bottom:0 !important;}
+.modal_header {width:100%; padding-bottom:0; color:#161616; font-size:40px; font-weight:700; display:flex; align-items:center; justify-content:space-between; border-bottom:0 !important;}
 .modal_content {width:100%; overflow-y:auto; flex:1;}
 section {padding-bottom:80px;}
 .input_wrap {display:flex; align-items:center; justify-content:flex-end;}
@@ -326,13 +325,14 @@ section {padding-bottom:80px;}
 .listening_form_wrap .form_title { font-size: 24px; font-weight: 700; color: #161616; }
 .listening_form_wrap .required_guide { font-size: 14px; color: #fb6432; }
 .form_section:first-of-type {margin-bottom:64px;}
-.listening_form_wrap .form_body {padding: 24px 0; border-bottom: 1px solid #e5e5e9; }
+.listening_form_wrap .form_body {padding:10px 0 12px; border-bottom: 1px solid #e5e5e9; }
 .listening_form_wrap .form_row { display: flex; align-items: flex-start; gap: 8px; padding: 12px 0; }
 .listening_form_wrap .label_item { display: flex; width: 134px; align-items: center; gap: 4px; padding-top: 14px; }
 .listening_form_wrap .label_text { font-size: 16px; color: #161616; }
 .listening_form_wrap .required_mark { color: #fb6432; font-size: 16px; }
 .listening_form_wrap .input_group { display: flex; align-items: center; gap: 8px;}
 .listening_form_wrap .input_group .group_wrap { display: flex; align-items: center; gap: 8px;}
+.listening_form_wrap .input_flex_item { flex: 1; min-width: 0; }
 .listening_form_wrap .unit { color: #67676f; font-size: 16px; padding: 0 4px; }
 .listening_form_wrap .input_complex {width:calc(100% - 134px);  display: flex; flex-direction: column; gap: 8px;}
 .listening_form_wrap .input_complex .textarea_wrap {max-width:600px;}
@@ -351,7 +351,9 @@ section {padding-bottom:80px;}
     .w428 {width:100%;}
 }
 @media screen and (max-width: 767px) {
+    .modal_header {font-size:18px;}
     .input_item, .input_complex, .input_wrap, .w428 {width:100%;}
+    .input_item.full span {font-size:20px; font-weight:700;}
     .section_title_sub {font-size:16px !important;}
     .p_desc {font-size:14px;}
     .listening_form_area i {font-weight:700;}

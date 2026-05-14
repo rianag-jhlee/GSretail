@@ -272,7 +272,7 @@
 
                                             <div class="visual_wrap">
                                                 <figure class="img_frame" style="width:100%; height:340px;">
-                                                    <img src="@/assets/images/dummy/gsrsu0301010204_1.png" :alt="t.WelfareSupport.Football.Title">
+                                                    <img src="@/assets/images/dummy/gsrsu0301010204.png" :alt="t.WelfareSupport.Football.Title">
                                                 </figure>
                                             </div>
                                         </section>
@@ -514,7 +514,7 @@
                                                 data-popid="gsrsu0301010501" 
                                                 data-type="lg" 
                                                 data-cont="gsrsu0301010501">
-                                                    {{ t.supplychain.Policy.BtnText }}
+                                                {{ t.supplychain.Policy.BtnText }}
                                             </Buttons>
                                         </div>
                                     </div>
@@ -2941,7 +2941,7 @@ export default {
     .listening_form_wrap .form_title { font-size: 24px; font-weight: 700; color: #161616; }
     .listening_form_wrap .required_guide { font-size: 14px; color: #fb6432; }
     .form_section:first-of-type {margin-bottom:64px;}
-    .listening_form_wrap .form_body {padding: 24px 0; border-bottom: 1px solid #e5e5e9; }
+    .listening_form_wrap .form_body {padding:10px 0 12px; border-bottom: 1px solid #e5e5e9; }
     .listening_form_wrap .form_row { display: flex; align-items: flex-start; gap: 8px; padding: 12px 0; }
     .listening_form_wrap .label_item { display: flex; width: 134px; align-items: center; gap: 4px; padding-top: 14px; }
     .listening_form_wrap .label_text { font-size: 16px; color: #161616; }
