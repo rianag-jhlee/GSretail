@@ -740,12 +740,12 @@ export default {
 .pop_guide_wrap .section.addendum strong {font-weight:normal}
 .pop_guide_wrap .base_table {width: 100%; margin:5px 0 30px 0; border-collapse: collapse; border-top: 2px solid #161616; }
 .pop_guide_wrap .base_table th, 
-.pop_guide_wrap .base_table td { padding: 12px 18px; border-bottom: 1px solid #E5E5E9; font-size: 1.6rem; vertical-align: middle; white-space:pre-line;}
-.pop_guide_wrap .base_table thead th { background-color: #F8F8F8; color: #161616; font-weight: 700; }
-.pop_guide_wrap .base_table td { color: #161616; border-left: 0; border-right: 0; }
-.pop_guide_wrap .base_table td:first-child { border-right: 1px solid #E5E5E9; }
+.pop_guide_wrap .base_table td { padding:12px 24px; border-bottom: 1px solid #E5E5E9; border-right: 1px solid #E5E5E9; font-size:1.8rem; line-height:26px; vertical-align: middle; white-space:pre-line;}
+.pop_guide_wrap .base_table th:last-child ,
 .pop_guide_wrap .base_table td:last-child { border-right: 0; }
-.pop_guide_wrap .base_table th { border-left: 0; border-right: 0; }
+.pop_guide_wrap .base_table thead th { padding:28px 24px; background-color:#F8F8F8; color:#161616; font-weight:700; }
+.pop_guide_wrap .base_table td { color: #161616; border-left: 0; }
+.pop_guide_wrap .base_table th { border-left: 0; }
 .pop_guide_wrap .base_table td a { font-size: 1.8rem; color: #161616; text-decoration: none; }
 .pop_guide_wrap .base_table td a:hover { text-decoration: underline; }
 
@@ -760,6 +760,7 @@ export default {
     .modal_header {font-size:18px; padding-bottom:24px;}
     .pop_space .intro_desc {padding-top:80px; background-position:center top;}
     .pop_guide_wrap .base_table th, 
-    .pop_guide_wrap .base_table td {padding: 6px 12px;font-size: 1.5rem; }
+    .pop_guide_wrap .base_table td {padding:6px 12px; font-size:1.5rem; line-height:22px;}
+    .pop_guide_wrap .base_table thead th {padding:18px 12px;}
 }
 </style>
