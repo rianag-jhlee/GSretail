@@ -2608,18 +2608,8 @@ export default {
 </script>
 
 <style scoped>
-    .main-container { width: 100%; position: relative; background-color: #ffffff; }
-    .cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
-    .ac { text-align: center; }
-    .mt16 {margin-top: 16px;}
-    .mt32 {margin-top: 32px;}
-    .mt40 {margin-top: 40px;}
-    .mt80 { margin-top: 80px; }
-    .mt60 { margin-top: 60px; }
-    .mb40 { margin-bottom: 40px; }
-    .mb100 { margin-bottom:100px; }
+    .main-container { width: 100%; position: relative; background-color: #ffffff; }    
     img {max-width:100%;}
-    .pagination {margin-top:60px; justify-content:center;}
     /* Visual Area */
     .title_wrap { display: block; width: 100%; height: 480px; padding: 160px 0; background: url('/src/assets/images/dummy/gsrsu03010101_bg.png') no-repeat center / cover; position: relative; }
     .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; letter-spacing: -1.44px; }
@@ -2949,11 +2939,7 @@ export default {
     .information_protection_management table td { font-size: 1.8rem; color: #161616; line-height: 1.6; padding: 24px;}
 
 
-
-
-
     @media screen and (max-width: 1024px) {
-        .cont_inner { padding: 0 20px; }
         .item_wrap {flex-direction:column; align-items:center;}
         .card_grid {flex-wrap:wrap;}
         :deep(.section_title_sub) br {display:block;}
