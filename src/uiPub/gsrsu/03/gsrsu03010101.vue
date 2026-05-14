@@ -7,7 +7,7 @@
 
         <section class="section-investor">
             <div class="cont_inner">
-                <Tabs 
+                <Tabs  mb120
                     v-model="CTabIdx" 
                     :tab-items="t.Tabs1" 
                     tab-class="type_01" 
@@ -15,7 +15,7 @@
                     @change="onTabChange1" 
                 />
 
-                <div class="tab_content_wrap mt80">
+                <div class="tab_content_wrap">
                     <article v-if="CTabIdx === 0">
                         <Tabs 
                             v-model="SubTabIdx1" 
@@ -27,12 +27,12 @@
 
                         <div class="sub_tab_content">
                             <div v-if="SubTabIdx1 === 0" class="winwin_intro">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary">{{ t.WinWinIntro.Summary }}</h3>
                                 </div>
 
                                 <div class="intro_contents">
-                                    <section class="intro_section mb120">
+                                    <section class="intro_section">
                                         <h3 class="section_title">{{ t.WinWinIntro.Philosophy.Title }}</h3>
                                         <div class="philosophy_box mt40">
                                             <ul class="circle_grid">
@@ -47,7 +47,7 @@
                                                     </div>
                                                 </li>
                                                 <li class="btn-wrap ac mt40">
-                                                    <Buttons btn-class="btn_icon btn_xl border after">
+                                                    <Buttons btn-class="btn_icon_arrow btn_xl border after">
                                                         {{ t.WinWinIntro.Philosophy.Btn }}
                                                     </Buttons>
                                                 </li>
@@ -55,7 +55,7 @@
                                         </div>
                                     </section>
 
-                                    <section class="intro_section mb120">
+                                    <section class="intro_section">
                                         <h4 class="section_title">{{ t.WinWinIntro.Strategy.Title }}</h4>
                                         <div class="strategy_box mt40">
                                             <figure class="diagram_img mb40">
@@ -89,7 +89,7 @@
                             </div>
                             
                             <div v-if="SubTabIdx1 === 1">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.Partnersupport.Summary"></h3>
                                 </div>
                                 <Tabs 
@@ -103,11 +103,10 @@
 
                                     <!-- gsrsu0301010201 -->
                                     <div v-if="SubTabIdx2 === 0" class="finance_support">
-                                        <div class="intro_summary ">
-                                            <p class="text_summary_sub" v-html="t.Partnersupport.FinanceSupport.Summary"></p>
-                                        </div>
 
-                                        <section class="support_item mb120">
+                                        <p class="text_summary_sub" v-html="t.Partnersupport.FinanceSupport.Summary"></p>
+
+                                        <section class="support_item">
                                             <div class="wide_info_box">
                                                 <figure class="img_frame">
                                                     <img src="@/assets/images/dummy/gsrsu0301010201_1.png" :alt="t.Partnersupport.FinanceSupport.Fund.Title">
@@ -118,8 +117,8 @@
                                                 </div>
                                             </div>
 
-                                            <div class="process_container mt60">
-                                                <h3 class="section_title_sub mb40">{{ t.Partnersupport.FinanceSupport.Fund.ProcessTitle }}</h3>
+                                            <div class="process_container">
+                                                <h3 class="section_title_sub">{{ t.Partnersupport.FinanceSupport.Fund.ProcessTitle }}</h3>
                                                 <div class="process_flow">
                                                     <div 
                                                         v-for="(step, idx) in t.Partnersupport.FinanceSupport.Fund.Steps" 
@@ -136,7 +135,7 @@
                                             </div>
                                         </section>
 
-                                        <section class="grid_column_2 mb120">
+                                        <section class="support_item grid_column_2">
                                             <div 
                                                 v-for="(item, idx) in t.Partnersupport.FinanceSupport.SubFunds" 
                                                 :key="'subfund-'+idx" 
@@ -152,7 +151,7 @@
                                             </div>
                                         </section>
 
-                                        <section class="card_grid">
+                                        <section class="support_item card_grid">
                                             <div 
                                                 v-for="(card, idx) in t.Partnersupport.FinanceSupport.Cards" 
                                                 :key="'fcard-'+idx" 
@@ -168,10 +167,10 @@
 
                                     <!--gsrsu0301010202 -->
                                     <div v-if="SubTabIdx2 === 1" class="market_support">
-                                        <section class="support_item mb120">
-                                            <div class="intro_summary ">
-                                                <p class="text_summary_sub" v-html="t.MarketSupport.Marketing.Summary"></p>
-                                            </div>
+                                        <section class="support_item">
+
+                                            <p class="text_summary_sub" v-html="t.MarketSupport.Marketing.Summary"></p>
+
                                             <div class="div mb40">
                                                 <h4>{{ t.MarketSupport.Marketing.Title }}</h4>
                                                 <p class="p">{{ t.MarketSupport.Marketing.Desc }}</p>
@@ -189,7 +188,7 @@
                                             </ul>
                                         </section>
 
-                                        <section class="program_grid">
+                                        <section class="support_item program_grid">
                                             <article v-for="(item, idx) in t.MarketSupport.Programs" :key="'prog-'+idx" class="program_item">
                                                 <figure class="program_visual">
                                                     <img :src="item.img" :alt="item.tit">
@@ -204,11 +203,10 @@
 
                                     <!-- gsrsu0301010203 -->
                                     <div v-if="SubTabIdx2 === 2" class="competency_support">
-                                        <div class="intro_summary ">
-                                            <p class="text_summary_sub" v-html="t.CompetencySupport.Summary"></p>
-                                        </div>
 
-                                        <section class="support_item mb120">
+                                        <p class="text_summary_sub" v-html="t.CompetencySupport.Summary"></p>
+
+                                        <section class="support_item">
                                             <div class="div mb40">
                                                 <h4 class="section_title_sub">{{ t.CompetencySupport.Education.Title }}</h4>
                                                 <p class="p">{{ t.CompetencySupport.Education.Desc }}</p>
@@ -263,9 +261,8 @@
 
                                     <!-- gsrsu0301010204 -->
                                     <div v-if="SubTabIdx2 === 3 && t.WelfareSupport" class="welfare_support">
-                                        <div class="intro_summary ">
-                                            <p class="text_summary_sub" v-html="t.WelfareSupport.Summary"></p>
-                                        </div>
+                                        
+                                        <p class="text_summary_sub" v-html="t.WelfareSupport.Summary"></p>
 
                                         <section class="support_item">
                                             <div class="div mb40">
@@ -283,30 +280,25 @@
 
                                     <!-- gsrsu0301010205 -->
                                     <div v-if="SubTabIdx2 === 4 && t.BroadcastingSupport" class="broadcasting_support">
-                                        <div class="intro_summary ">
-                                            <p class="text_summary_sub" v-html="t.BroadcastingSupport.Summary"></p>
-                                        </div>
 
-                                        <section class="support_item mb120">
+                                        <p class="text_summary_sub" v-html="t.BroadcastingSupport.Summary"></p>
+
+                                        <section class="support_item">
                                             <div class="div mb40">
                                                 <h3 class="section_title_sub mb16">{{ t.BroadcastingSupport.PrepSupport.Title }}</h3>
                                                 <p class="p">{{ t.BroadcastingSupport.PrepSupport.Desc }}</p>
                                             </div>
                                             <figure class="img_frame" style="width:100%; height:340px;">
-                                                <img src="@/assets/images/dummy/gsrsu0301010205_1.png" :alt="t.BroadcastingSupport.PrepSupport.Title">
+                                                <img src="@/assets/images/sub/gsrsu03010101/img_01-02-05-01.png" :alt="t.BroadcastingSupport.PrepSupport.Title">
                                             </figure>
                                         </section>
 
                                         <section class="support_item">
-                                            <div class="div mb40">
-                                                <h3 class="section_title_sub mb16">{{ t.BroadcastingSupport.PrioritySupport.Title }}</h3>
-                                                <p class="p" v-html="t.BroadcastingSupport.PrioritySupport.Desc"></p>
-                                            </div>
                                             <figure class="img_frame mb60">
                                                 <img src="@/assets/images/dummy/gsrsu0301010205_2.png" :alt="t.BroadcastingSupport.PrioritySupport.Title">
                                             </figure>
 
-                                            <div class="grid_column_2 mt60">
+                                            <div class="mt60">
                                                 <div 
                                                     v-for="(sub, idx) in t.BroadcastingSupport.PrioritySupport.SubItems" 
                                                     :key="'broad-sub-'+idx"
@@ -321,9 +313,8 @@
 
                                     <!-- gsrsu0301010206 -->
                                     <div v-if="SubTabIdx2 === 5 && t.CommunicationSupport" class="communication_support">
-                                        <div class="intro_summary ">
-                                            <p class="text_summary_sub" v-html="t.CommunicationSupport.Summary"></p>
-                                        </div>
+                                            
+                                        <p class="text_summary_sub" v-html="t.CommunicationSupport.Summary"></p>
 
                                         <section class="support_item ">
                                             <figure class="img_frame">
@@ -363,7 +354,7 @@
                             </div>
 
                             <div v-if="SubTabIdx1 === 2">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.OwnerSupport.Summary"></h3>
                                 </div>
 
@@ -378,11 +369,10 @@
 
                                     <!-- gsrsu03010103 -->
                                     <div v-if="SubTabIdx2 === 0 && t.OwnerSupport" class="gs25_owner_support">
-                                        <div class="intro_summary ">
-                                            <p class="text_summary_sub" v-html="t.OwnerSupport.Summary"></p>
-                                        </div>
+                                            
+                                        <p class="text_summary_sub" v-html="t.OwnerSupport.Summary"></p>
 
-                                        <section class="support_item mb120">
+                                        <section class="support_item">
                                             <div class="div mb40">
                                                 <h4 class="section_title_sub">{{ t.OwnerSupport.part_1.MainTitle }}</h4>
                                             </div>
@@ -420,9 +410,8 @@
 
                                     <!-- gsrsu03010103_1 -->
                                     <div v-if="SubTabIdx2 === 1 && t.OwnerSupport.part_2" class="fresh_owner_support">
-                                        <div class="intro_summary ">
-                                            <p class="text_summary_sub" v-html="t.OwnerSupport.part_2.Summary"></p>
-                                        </div>
+
+                                        <p class="text_summary_sub" v-html="t.OwnerSupport.part_2.Summary"></p>
 
                                         <section class="support_item">
                                             <div class="div mb40">
@@ -451,11 +440,11 @@
 
                             <!-- gsrsu03010104 -->
                             <div v-if="SubTabIdx1 === 3 && t.community" class="community_policy">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.community.Summary"></h3>
                                 </div>
 
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="div mb40">
                                         <h4 class="section_title_sub">{{ t.community.Purpose.Title }}</h4>
                                     </div>
@@ -470,7 +459,7 @@
                                     </ul>
 
                                     <div class="btn-wrap ac mt40">
-                                        <Buttons btn-class="btn_icon btn_xl border after"
+                                        <Buttons btn-class="btn_icon_arrow btn_xl border after"
                                             @click="openModal" 
                                             data-popid="gsrsu0301010401" 
                                             data-type="lg" 
@@ -502,11 +491,11 @@
 
                             <!-- gsrsu03010105 -->
                             <div v-if="SubTabIdx1 === 4 && t.supplychain" class="supplychain_policy">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.supplychain.Summary"></h3>
                                 </div>
 
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="policy_box_wrap">
                                         <div class="div mb40">
                                             <h4 class="section_title_sub">{{ t.supplychain.Policy.Title }}</h4>
@@ -520,7 +509,7 @@
                                         </ul>
 
                                         <div class="btn-wrap ac mt60">
-                                            <Buttons btn-class="btn_icon btn_xl border after"
+                                            <Buttons btn-class="btn_icon_arrow btn_xl border after"
                                                 @click="openModal" 
                                                 data-popid="gsrsu0301010501" 
                                                 data-type="lg" 
@@ -555,11 +544,11 @@
 
                             <!-- gsrsu030201 -->
                             <div v-if="SubTabIdx1 === 0" class="csr_outline">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.CSR.outline.Summary"></h3>
                                 </div>
 
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="view_box">
                                         <div class="strategy_header mb40">
                                             <h4 class="text_xl_bold">사회공헌 전략</h4>
@@ -606,11 +595,11 @@
 
                             <!-- gsrsu030202 -->
                             <div v-if="SubTabIdx1 === 1 && t.CSR && t.CSR.vulnerable" class="vulnerable_support">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.CSR.vulnerable.Summary"></h3>
                                 </div>
 
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="program_grid">
                                         <article v-for="(project, pIdx) in t.CSR.vulnerable.Projects" :key="'proj-'+pIdx" class="program_item">
                                             <figure class="program_visual">
@@ -643,11 +632,11 @@
 
                             <!-- gsrsu030203 -->
                             <div v-if="SubTabIdx1 === 2 && t.CSR && t.CSR.communitysupport" class="community_support_area">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.CSR.communitysupport.Summary"></h3>
                                 </div>
 
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="program_grid">
                                         <article v-for="(project, pIdx) in t.CSR.communitysupport.Projects" :key="'comm-proj-'+pIdx" class="program_item">
                                             <figure class="program_visual">
@@ -680,11 +669,11 @@
 
                             <!-- gsrsu030204 -->
                             <div v-if="SubTabIdx1 === 3 && t.CSR.broadcasting" class="broadcasting_development">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.CSR.broadcasting.Summary"></h3>
                                 </div>
 
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="program_grid">
                                         <article v-for="(project, pIdx) in t.CSR.broadcasting.Projects" :key="'broad-proj-'+pIdx" class="program_item">
                                             <figure class="program_visual">
@@ -717,7 +706,7 @@
 
                             <!-- gsrsu030205 -->
                             <div v-if="SubTabIdx1 === 4 && t.CSR.sharing" class="sharing_angel">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.CSR.sharing.Summary"></h3>
                                 </div>
 
@@ -754,12 +743,12 @@
                         <div class="sub_tab_content">
                             <!-- gsrsu030301 -->
                             <div v-if="SubTabIdx1 === 0 && t.protect.humanrights" class="human_rights_management">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.protect.humanrights.Summary"></h3>
                                 </div>
 
                                 <!-- 인권경영정책 -->
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="policy_box_wrap">
                                         <div class="div mb40">
                                             <h4 class="section_title_sub">{{ t.protect.humanrights.Policy.Title }}</h4>
@@ -768,7 +757,7 @@
                                             <p class="p" v-html="t.protect.humanrights.Policy.Desc"></p>
                                         </div>
                                         <div class="btn-wrap ac mt60">
-                                            <Buttons btn-class="btn_icon btn_xl border after"
+                                            <Buttons btn-class="btn_icon_arrow btn_xl border after"
                                                 @click="openModal" 
                                                 data-popid="gsrsu03030101" 
                                                 data-type="lg" 
@@ -780,7 +769,7 @@
                                 </section>
 
                                 <!-- 임직원 인권 목표 -->
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="div mb40 ac">
                                         <h4 class="section_title_sub">{{ t.protect.humanrights.Goals.Title }}</h4>
                                     </div>
@@ -795,7 +784,7 @@
                                 </section>
 
                                 <!-- 인권침해 방지 프로그램 (태블릿 2열, 모바일 1열) -->
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="div mb40">
                                         <h4 class="section_title_sub">{{ t.protect.humanrights.Programs.Title }}</h4>
                                     </div>
@@ -947,8 +936,8 @@
                                         </div>
 
                                         <!-- 복리후생 섹션 (Work, Engagement, Life, Leisure) -->
-                                        <section v-for="(section, sIdx) in t.protect.talentmanagement.part_3.Sections" :key="'sec-'+sIdx" class="support_section mb100">
-                                            <div class="section_head mb40">
+                                        <section v-for="(section, sIdx) in t.protect.talentmanagement.part_3.Sections" :key="'sec-'+sIdx" class="icon_wrap support_section">
+                                            <div class="section_head">
                                                 <h4 class="section_title_sub">{{ section.title }}</h4>
                                                 <p class="p" v-html="section.desc"></p>
                                             </div>
@@ -970,7 +959,7 @@
                                         </section>
 
                                         <!-- 인재경영 관련 인증 및 대외 수상 이력 -->
-                                        <section class="award_section mt100">
+                                        <section class="support_section award_section">
                                             <h4 class="section_title_sub mb40">{{ t.protect.talentmanagement.part_3.Awards.Title }}</h4>
                                             
                                             <!-- 상단 리스트 영역 -->
@@ -1044,12 +1033,12 @@
                             <!-- gsrsu030303: 고객만족경영 -->
                             <div v-if="SubTabIdx1 === 2 && t.protect.customer" class="customer_satisfaction">
                                 <!-- 상단 요약 -->
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.protect.customer.Summary"></h3>
                                 </div>
 
                                 <!-- 소비자 권익보호 정책 -->
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="policy_box_wrap">
                                         <div class="title_area mb40">
                                             <h4 class="section_title_sub">{{ t.protect.customer.Policy.Title }}</h4>
@@ -1066,7 +1055,7 @@
                                             </ul>
                                         </div>
                                         <div class="btn-wrap ac mt60">
-                                            <Buttons btn-class="btn_icon btn_xl border after" 
+                                            <Buttons btn-class="btn_icon_arrow btn_xl border after" 
                                                 @click="openModal" 
                                                 data-popid="gsrsu03030301" 
                                                 data-type="lg" 
@@ -1078,7 +1067,7 @@
                                 </section>
 
                                 <!-- 고객만족경영 주요 활동 -->
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="title_area mb40">
                                         <h4 class="section_title_sub">{{ t.protect.customer.Activities.Title }}</h4>
                                     </div>
@@ -1100,7 +1089,7 @@
                                 </section>
 
                                 <!-- 서비스 우수 직원 추천 -->
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="recommend_banner_wrap">
                                         <div class="title_area mb40">
                                             <h4 class="section_title_sub">{{ t.protect.customer.Recommend.Title }}</h4>
@@ -1111,7 +1100,7 @@
                                                 <p class="desc" v-html="t.protect.customer.Recommend.Desc"></p>
                                             </div>
                                             <!-- '서비스 우수 직원 추천하기' 버튼 -->
-                                            <Buttons btn-class="btn_icon btn_xl border after">
+                                            <Buttons btn-class="btn_icon_arrow btn_xl border after">
                                                 {{ t.protect.customer.Recommend.BtnText }}
                                             </Buttons>
                                         </div>
@@ -1119,7 +1108,7 @@
                                 </section>
 
                                 <!-- 제품과 서비스 안전 제도 -->
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="title_area mb40">
                                         <h4 class="section_title_sub" v-html=" t.protect.customer.Safety.Title"></h4>
                                     </div>
@@ -1145,7 +1134,7 @@
                                 </section>
 
                                 <!-- 피해 보상 프로그램 -->
-                                <section class="support_item mb120">
+                                <section class="support_item">
                                     <div class="title_area mb40">
                                         <h4 class="section_title_sub" v-html="t.protect.customer.Compensation.Title"></h4>
                                     </div>
@@ -1203,7 +1192,7 @@
 
                             <!-- gsrsu030304 -->
                             <section v-if="SubTabIdx1 === 3 && t.protect.safetymanagement" class="safety_management_wrap">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.protect.safetymanagement.Summary"></h3>
                                 </div>
 
@@ -1221,7 +1210,7 @@
                                                 </li>
                                             </ul>
                                             <div class="btn-wrap ac mt40">
-                                                <button type="button" class="btn_icon btn_xl border after" 
+                                                <button type="button" class="btn_icon_arrow btn_xl border after" 
                                                     @click="openModal" 
                                                     data-popid="gsrsu03030401" 
                                                     data-type="lg" 
@@ -1424,7 +1413,7 @@
 
                             <!-- gsrsu030305 -->
                             <section v-if="SubTabIdx1 === 4 && t.protect.informationprotection" class="information_protection_management">
-                                <div class="intro_summary ac mb100">
+                                <div class="intro_summary">
                                     <h3 class="text_summary" v-html="t.protect.informationprotection.Summary"></h3>
                                 </div>
 
@@ -1499,7 +1488,7 @@
                                         </div>
 
                                         <div class="btn-wrap ac mt40">
-                                            <Buttons btn-class="btn_icon btn_xl border after">
+                                            <Buttons btn-class="btn_icon_arrow btn_xl border after">
                                                 {{ t.protect.informationprotection.Activities.BtnText }}
                                             </Buttons>
                                         </div>
@@ -1789,9 +1778,11 @@ export default {
                             Desc: "방송 경험이 없어 방송 준비를 외주에 맡기거나 매 방송 시마다 샘플준비, 디스플레이 등의 방송 준비를 해야 하는 협력사의 부담을 덜어드리기 위한 제도입니다. GS SHOP의 전문가들이 상품 스타일링부터 디스플레이, 판넬제작 등을 지원하여 방송 준비에 대한 부담을 해소하고 매출 확대에 기여하고자 합니다."
                         },
                         PrioritySupport: {
-                            Title: "중소기업 편성우대",
-                            Desc: "GS SHOP은 중소기업이 안정적으로 성장할 수 있도록 상품 편성 전반에서 중소기업을 우대하고 있습니다.<br/>TV홈쇼핑과 데이터홈쇼핑 전반에 걸쳐 중소기업 상품의 편성 비중을 확대해, 지속적인 판로 확보와 매출 성장을 지원하고 있습니다.<br/>또한 고객 유입이 높은 프라임 시간대에도 중소기업 상품을 우선적으로 편성하는 제도를 운영하여, 중소기업 상품이 보다 효과적으로 고객과 만날 수 있는 기회를 제공하고 있습니다. 이를 통해 중소기업의 시장 경쟁력 강화와 동반성장을 도모하고 있습니다.",
                             SubItems: [
+                                {
+                                    Title: "중소기업 편성우대",
+                                    Desc: "GS SHOP은 중소기업이 안정적으로 성장할 수 있도록 상품 편성 전반에서 중소기업을 우대하고 있습니다.<br/> TV홈쇼핑과 데이터홈쇼핑 전반에 걸쳐 중소기업 상품의 편성 비중을 확대해, 지속적인 판로 확보와 매출 성장을 지원하고 있습니다.<br/> 또한 고객 유입이 높은 프라임 시간대에도 중소기업 상품을 우선적으로 편성하는 제도를 운영하여, 중소기업 상품이 보다 효과적으로 고객과 만날 수 있는 기회를 제공하고 있습니다. 이를 통해 중소기업의 시장 경쟁력 강화와 동반성장을 도모하고 있습니다."
+                                },
                                 {
                                     Title: "중소기업 무료판매방송",
                                     Desc: "GS SHOP은 중소기업의 원활한 시장 진입과 판로 확대를 지원하기 위해 무료판매방송을 운영하고 있습니다.<br/><br/>방송 제작 및 편성에 대한 부담을 완화하여, 중소기업 상품이 고객에게 소개될 수 있는 기회를 제공하고 있으며, 이를 통해 중소기업의 안정적인 성장 기반 마련을 지원하고 있습니다."
@@ -2632,22 +2623,32 @@ export default {
     :deep(.section_title_sub) br {display:none;}
     .date {font-size:16px;}
 
+    .support_item {border:1px solid red;}
+    .support_item + .support_item {margin-top:120px;}
+
+    .finance_support .process_container {margin-top:60px;}
+    .finance_support h3 {margin-bottom:40px;}
+
     /* 상생경영 개요 특화 스타일 */
     .text_summary { font-size: 32px; font-weight: 700; color: #161616; padding: 20px 0; }
-    .mb120 { margin-bottom: 120px; }
     .philosophy_box { padding: 60px; background: #F8F8F8; border-radius: 12px; }
     .circle_grid { display: flex; justify-content: center; flex-direction:column; gap: 40px; background: #fff; padding: 60px 0; border-radius: 12px; list-style: none; }
     .item_wrap {width: 100%; display: flex; justify-content: center; gap: 40px; }
     .item_wrap div { width: 300px; height: 300px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; color: #fff; opacity: 0.8; }
+
     .item_wrap div  img { width: 60px; height: 60px; margin-bottom: 8px; }
-    .item_wrap div strong { font-size: 24px; margin-bottom: 8px; }
+    
+    .item_wrap div strong { font-size: 24px; margin-bottom: 8px; font-weight: 700; display:flex; flex-direction:column; align-items:center; gap:8px;}
+    .item_wrap div strong::before {content:''; width:60px; height:60px; background-repeat:no-repeat; display:block;}
+    .item_wrap .color_01 strong::before {background:url('@/assets/images/sub/icon_su03_01-01-01_60.png') 0 0;}
+    .item_wrap .color_02 strong::before {background:url('@/assets/images/sub/icon_su03_01-01-02_60.png') 0 0;}
+    .item_wrap .color_03 strong::before {background:url('@/assets/images/sub/icon_su03_01-01-03_60.png') 0 0;}
+
     .item_wrap div p { font-size: 1.8rem; color: #fff; text-align: center; line-height: 1.4; }
     .item_wrap div.color_01 { background-color: #107AF2; }
     .item_wrap div.color_02 { background-color: #15B874; }
     .item_wrap div.color_03 { background-color: #FB6432; }
     .item_wrap div img { width: 60px; height: 60px; margin-bottom: 8px; }
-    .item_wrap div strong { font-size: 24px; margin-bottom: 8px; font-weight: 700; display:flex; flex-direction:column; align-items:center; gap:8px;}
-    .item_wrap div strong::before {content:''; width:60px; height:60px; background:red; display:block;}
     .item_wrap div p { font-size: 1.8rem; color: #fff; text-align: center; line-height: 1.4; }
     .card_grid { display: flex; gap: 20px; flex-wrap:wrap; }
     .strategy_card { min-width: calc(25% - 15px); padding: 32px 32px 56px; background: #F8F8F8; border-radius: 12px; flex: 1;}
@@ -2665,10 +2666,10 @@ export default {
     .index_title strong { font-size: 28px; color: #161616; }
     .btn_xl {font-weight:700;}
     .bullet_01 li {font-size:16px;}
-    .index_box strong {margin-top:20px; font-size:28px; font-weight:700; display:block;}
+    .index_box strong {margin-top:20px; font-size:2.8rem; font-weight:700; display:block;}
 
     /* 금융지원 */
-    .text_summary_sub { margin-bottom:80px; font-size: 28px; font-weight: 700; color: #90909A; }
+    .text_summary_sub { margin-bottom:80px; font-size: 28px; font-weight: 700; color: #90909A; border:1px solid green;}
     .section_title_sub {margin-bottom:16px; font-size: 40px; font-weight: 700; color: #161616; }
     .wide_info_box { display: flex; gap: 40px; align-items: center; }
     .img_frame {height: 360px; max-height:100%; border-radius: 12px; overflow: hidden; }
@@ -2679,13 +2680,18 @@ export default {
     .circle_icon { width: 100px; height: 100px; background: #F8F8F8; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .circle_icon img { width: 40px; }
     .step_desc { font-size: 16px; font-weight: 700; text-align: center; color: #000; line-height: 1.2; display:flex; align-items:center; flex-direction:column;}
-    .step_desc::before {content:''; width:80px; height:80px; margin-bottom:12px; display:block; background:red;}
-    .arrow_next { width: 40px; height:40px; background:red; position:absolute; right:-60px; top:50%; transform:translateY(-50%);}
+    .step_desc::before {content:''; width:80px; height:80px; margin-bottom:12px; display:block; background-repeat:no-repeat;}
+    .arrow_next { width: 40px; height:40px; background:url('@/assets/images/sub/arrow_su03_01-02-01_40.png') 50% 50% no-repeat; position:absolute; right:-60px; top:50%; transform:translateY(-50%);}
     .grid_column_2 { display: flex; gap: 40px; }
     .grid_column_2 .sub_item {width:50%;}
     .sub_fund_item { flex: 1; }
     .img_frame_small { width: 100%; height: 360px; border-radius: 12px; overflow: hidden; }
     .img_frame_small img { width: 100%; height: 100%; object-fit: cover; }
+
+    .process_flow .step_unit:nth-child(1) .step_desc:before {background:url('@/assets/images/sub/icon_su03_01-02-01_80.png') 0 0;}
+    .process_flow .step_unit:nth-child(2) .step_desc:before {background:url('@/assets/images/sub/icon_su03_01-02-02_80.png') 0 0;}
+    .process_flow .step_unit:nth-child(3) .step_desc:before {background:url('@/assets/images/sub/icon_su03_01-02-03_80.png') 0 0;}
+    .process_flow .step_unit:nth-child(4) .step_desc:before {background:url('@/assets/images/sub/icon_su03_01-02-04_80.png') 0 0;}
 
     /* 하단 카드 보정 */
     .card_desc { font-size: 16px; color: #67676F; line-height: 1.5; margin-top: 8px; }
@@ -2749,7 +2755,7 @@ export default {
     .timeline_content_area { flex: 1; display: flex; flex-direction: column; }
     .history_row {padding-bottom: 100px; display: flex; gap: 32px; position:relative; }
     .history_row::before {content:''; width:1px; height:100%; background:#107AF2; position:absolute; bottom:0; top:0; left:12px; display: block;}
-    .history_row::after {content:''; width:24px; height:24px; background:red; position:absolute; bottom:0; top:0; display:block;}
+    .history_row::after {content:''; width:24px; height:24px; background:url('@/assets/images/sub/icon_history_dot.png') 50% 50% no-repeat; position:absolute; bottom:0; top:0; display:block;}
     .history_row:last-child { padding-bottom: 0; }
     .history_row:last-child::before {display:none;}
     .history_year { width: 80px; margin-left:60px; font-size: 32px; font-weight: 700; color: #000;}
@@ -2818,14 +2824,40 @@ export default {
 
     /* 인재경영지표 */
     /* 섹션 공통 */
-    .talent_indicators .support_section {border-top: 1px solid #eee; padding-top: 60px; }
-    .talent_indicators .support_section:first-of-type {border-top:0;}
+    .talent_indicators .support_section .section_head {margin-bottom:40px;}
+    .talent_indicators .support_section + .support_section {margin-top:100px;}
     .talent_indicators .section_title_sub { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
     /* 2열 그리드 레이아웃 */
     .talent_indicators .support_grid {display: grid; grid-template-columns: repeat(2, 1fr); row-gap: 60px;}
     .talent_indicators .support_item {min-height: 80px; padding-left: 100px; padding-bottom:80px; border-bottom:1px solid #E5E5E9; position: relative; }
-    .talent_indicators .support_item:nth-last-child(-n+2) {border-bottom: 0; padding-bottom: 0;}
-    .talent_indicators .support_item:before {content: ''; width: 80px; height: 80px; background: red; border-radius: 50%; position: absolute; left: 0; top: 0;}
+    .talent_indicators .support_item + .support_item {margin-top:0;}
+    /* .talent_indicators .support_item:nth-last-child(-n+2) {border-bottom: 0; padding-bottom: 0;} */
+
+    .talent_indicators .support_item:before {content: ''; width: 80px; height: 80px; background: #F2F2F4; border-radius: 50%; position: absolute; left: 0; top: 0;}
+    .talent_indicators .support_item:after {width:40px; height:40px; background:url('@/assets/images/sub/icon_cont_40.png') no-repeat; content:''; position:absolute; top:20px; left:20px; display:block;}
+
+    .talent_indicators .icon_wrap.support_section:nth-of-type(1) .support_item:nth-of-type(1):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(1) .support_item:nth-of-type(2):after {background-position:-980px -266px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(1) .support_item:nth-of-type(3):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(1) .support_item:nth-of-type(4):after {background-position:-100px -103px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(1) .support_item:nth-of-type(5):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(1) .support_item:nth-of-type(6):after {background-position:-260px -266px;}
+
+    .talent_indicators .icon_wrap.support_section:nth-of-type(2) .support_item:nth-of-type(1):after {background-position:-420px -346px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(2) .support_item:nth-of-type(2):after {background-position:-580px -20px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(2) .support_item:nth-of-type(3):after {background-position:-20px -266px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(2) .support_item:nth-of-type(4):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(2) .support_item:nth-of-type(5):after {background-position:-900px -20px;}
+
+    .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(1):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(2):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(3):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(4):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(5):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(6):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(7):after {background-color:red; background-image:none;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(8):after {background-color:red; background-image:none;}
+    
     .talent_indicators .item_inner .tit_area { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
     .talent_indicators .item_inner .num { color: #107AF2; font-weight: 700; font-size: 1.8rem; }
     .talent_indicators .item_inner .tit { font-size: 20px; font-weight: 600; color: #000; }
@@ -2852,7 +2884,7 @@ export default {
     .customer_satisfaction .safety_system_list {padding:60px 0px; border-radius:20px; display:flex; align-items:center; justify-content:space-between; gap:60px;}
     .customer_satisfaction .safety_system_list li {width:33.333%; padding-left:104px; position:relative;}
     .customer_satisfaction .safety_system_list li::before {content:''; width:80px; height:80px; background:red; position:absolute; top:0; left:0;}
-    .customer_satisfaction .safety_system_list .num {color:#107AF2; font-size:28px; font-weight:700; }
+    .customer_satisfaction .safety_system_list .num {color:#107AF2; font-size:2.8rem; font-weight:700; }
     .customer_satisfaction .safety_system_list .tit_wrap {margin-top:10px;}
     .customer_satisfaction .safety_system_list .tit_wrap strong {font-size:24px; font-weight:700; position:relative;}
     .customer_satisfaction .safety_system_list .tit_wrap strong button {width:24px; height:24px; background:red; position:absolute; right:-35px; top:50%; transform: translateY(-50%);}
@@ -2947,6 +2979,11 @@ export default {
     .information_protection_management table td { font-size: 1.8rem; color: #161616; line-height: 1.6; padding: 24px;}
 
 
+    .intro_section + .intro_section {margin-top:120px;}
+
+    .intro_summary {margin-bottom:100px; text-align:center;}
+
+
     @media screen and (max-width: 1024px) {
         .item_wrap {flex-direction:column; align-items:center;}
         .card_grid {flex-wrap:wrap;}
@@ -2954,7 +2991,7 @@ export default {
         .strategy_card {width: calc(50% - 10px); flex: none;}
         .wide_info_box { flex-direction: column; align-items: flex-start; }
         .process_flow {flex-direction:column; flex-wrap: wrap; gap: 80px 20px; }
-        .arrow_next {right:auto; top:auto; bottom:-60px; transform:translateY(0);}
+        .arrow_next {right:auto; top:auto; bottom:-60px; transform:translateY(0) rotate(90deg);}
         .customer_satisfaction strong {font-size:20px;}
         .customer_satisfaction strong + p {font-size:16px;}
         span.label, p.desc {font-size:16px !important;}
@@ -2983,8 +3020,6 @@ export default {
         .talent_vision .circle_item strong { font-size: 32px; } 
         .talent_indicators .support_grid {grid-template-columns: 1fr; row-gap: 40px;}
         .talent_indicators .support_item {padding-bottom:0px;}
-        .talent_indicators .support_item:nth-last-child(-n+2) {border-bottom: 1px solid #E5E5E9; padding-bottom: 80px;}
-        .talent_indicators .support_item:last-child {border-bottom: 0; padding-bottom: 0; }
         .award_section .brand_grid li {width:100%; max-width:100%;}
         .customer_satisfaction .recommend_box {padding:20px; flex-direction:column;}
         .btn_icon {width:100%;}
@@ -3018,21 +3053,23 @@ export default {
     @media screen and (max-width: 767px) {
         h3, h4 { font-size:20px !important; }
         .sub_tab_content {margin-top:0px;}
-        .mb100 {margin-bottom:40px;}
-        .mb120 {margin-bottom:80px;}
         :deep(.text_summary) {padding: 60px 0 20px;}
         :deep(.text_summary) br {display:none;}
         .strategy_card {width: 100%; min-width:100%; flex-direction:column;}
         .philosophy_box {padding:20px;}
         .philosophy_box .btn_icon {width:90%;}
         .item_wrap div {width:200px; height:200px;}
-        .item_wrap div strong[data-v-39ac3108]::before {width:30px; height:30px;}
-        .item_wrap div strong {font-size:18px;}
         .item_wrap div p {font-size:16px;}
+
+        .item_wrap div strong::before {width:40px; height:40px;}
+        .item_wrap div strong {font-size:1.8rem;}
+        .item_wrap .color_01 strong::before {background:url('@/assets/images/sub/icon_su03_01-01-01_40.png') 0 0;}
+        .item_wrap .color_02 strong::before {background:url('@/assets/images/sub/icon_su03_01-01-02_40.png') 0 0;}
+        .item_wrap .color_03 strong::before {background:url('@/assets/images/sub/icon_su03_01-01-03_40.png') 0 0;}
+
         .img_frame { width: 100%; flex: none; height: auto; aspect-ratio: 690/360; }
         .grid_column_2 { flex-direction: column; }
-        /* 마케팅 지원: 모바일 1열 */
-        .brand_grid li { width: 100%; }
+        .brand_grid {gap:10px;}
         /* 프로그램 그리드: 모바일 1열 */
         .program_item { width: 100%; }
         .program_visual { height: auto; aspect-ratio: 16/9; }
@@ -3116,5 +3153,23 @@ export default {
         .noti_non_member ul li {font-size:12px;}
 
 
+        .index_box strong {font-size:2rem;}
+
+        .intro_section + .intro_section {margin-top:80px;}
+
+        .process_flow {gap:60px 20px;}
+        .step_unit {width:200px; height:200px;}
+        .step_desc::before {width:60px; height:60px;}
+        .arrow_next {width:20px; height:20px; background-image:url('@/assets/images/sub/arrow_su03_01-02-01_20.png'); bottom:-40px; transform:rotate(0deg);}
+
+        .process_flow .step_unit:nth-child(1) .step_desc:before {background:url('@/assets/images/sub/icon_su03_01-02-01_60.png') 0 0;}
+        .process_flow .step_unit:nth-child(2) .step_desc:before {background:url('@/assets/images/sub/icon_su03_01-02-02_60.png') 0 0;}
+        .process_flow .step_unit:nth-child(3) .step_desc:before {background:url('@/assets/images/sub/icon_su03_01-02-03_60.png') 0 0;}
+        .process_flow .step_unit:nth-child(4) .step_desc:before {background:url('@/assets/images/sub/icon_su03_01-02-04_60.png') 0 0;}
+
+
+        .support_item + .support_item {margin-top:80px;}
+        .finance_support h3 {margin-bottom:20px;}
+        .text_summary_sub {margin-bottom:40px; font-size:1.6rem; line-height:124%;}
     }
 </style>
