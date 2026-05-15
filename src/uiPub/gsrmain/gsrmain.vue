@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <div class="main_visual">
+        <div class="main_visual top_visual">
             <div class="swiper mainSwiper" ref="mainSwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="item in t.mainVisual.items" :key="item.img">
@@ -259,8 +259,8 @@ export default {
         window.addEventListener('resize', this.handleSwiper);
 
         /* scroll */
-        this.handleScroll = this.handleScroll.bind(this);
-        window.addEventListener("scroll", this.handleScroll);
+        //this.handleScroll = this.handleScroll.bind(this);
+        //window.addEventListener("scroll", this.handleScroll);
 
         this.initClipAnimation();
         this.initSec02();
@@ -269,7 +269,7 @@ export default {
         window.removeEventListener('resize', this.handleSwiper);
         this.destroyAllSwipers();
 
-        window.removeEventListener("scroll", this.handleScroll);
+        //window.removeEventListener("scroll", this.handleScroll);
     },
     methods: {
         /* =========================
@@ -404,12 +404,12 @@ export default {
             }
         },
 
-        handleScroll() {
+        /*handleScroll() {
             const header = document.getElementById("header");
             if (!header) return;
 
             const head_black =
-                document.querySelector('.main_visual').offsetHeight -
+                document.querySelector('.visual').offsetHeight -
                 (header.offsetHeight * 0.5);
 
             if (window.scrollY > head_black) {
@@ -417,7 +417,7 @@ export default {
             } else {
                 header.classList.remove("head_black");
             }
-        },
+        },*/
 
         initClipAnimation() {
             const el = this.$el.querySelector(".clip_mask");

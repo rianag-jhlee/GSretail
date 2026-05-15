@@ -1,13 +1,15 @@
 <template>
     <div class="gsrbr020101" v-if="t">
-        <section class="visual_section" ref="visualSection">
-            <div class="visual_img" ref="visualImg">
-                <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
-            </div>
-            <div class="visual_content">
-                <div class="text_box">
-                    <span class="ani_text">{{ t.Visual.subTitle }}</span>
-                    <p class="ani_text" v-html="t.Visual.mainTitle"></p>
+        <section class="top_visual">
+            <div class="visual_section" ref="visualSection">
+                <div class="visual_img" ref="visualImg">
+                    <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
+                </div>
+                <div class="visual_content">
+                    <div class="text_box">
+                        <span class="ani_text">{{ t.Visual.subTitle }}</span>
+                        <p class="ani_text" v-html="t.Visual.mainTitle"></p>
+                    </div>
                 </div>
             </div>
         </section>

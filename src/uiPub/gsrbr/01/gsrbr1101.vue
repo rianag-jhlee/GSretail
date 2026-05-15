@@ -352,6 +352,11 @@ export default {
             this.isMobile = window.innerWidth < 768;
         },
     },
+    mounted() {
+        const header = document.getElementById("header");
+
+        header.classList.add("head_black");
+    }
 };
 </script>
 

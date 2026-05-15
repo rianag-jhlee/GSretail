@@ -1,6 +1,6 @@
 <template>
     <div class="main-container">
-        <div class="title_wrap ac">
+        <div class="title_wrap ac top_visual">
             <h2 class="page-title">{{ t.MainTitle }}</h2>
         </div>
 

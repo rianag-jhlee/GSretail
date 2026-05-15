@@ -1,7 +1,7 @@
 <template>
     <div class="wrap_gsrst">
         <!-- HEADER -->
-        <header class="page_header" :style="{ backgroundImage: `url(${imgBg})` }">
+        <header class="page_header top_visual" :style="{ backgroundImage: `url(${imgBg})` }">
             <div class="header_inner">
                 <h2 class="header_title">GS THE FRESH 창업안내</h2>
             </div>

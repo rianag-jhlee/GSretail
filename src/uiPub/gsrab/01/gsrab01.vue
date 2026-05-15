@@ -1,5 +1,5 @@
 <template>
-    <section class="visual">
+    <section class="visual top_visual">
         <strong>더 나은 일상을 만드는 기업,<br />항상 고객과 함께하는<br />GS리테일이 되겠습니다.</strong>
     </section>
     <section class="about">
