@@ -234,7 +234,18 @@
     },
 
     {
-        "depth1": "BRAND", "depth2": "GS25", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "depth1": "BRAND", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/gsrbr_smain",
+        "link": "/gsrbr_smain",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "26.05.15 이종환"
+    },
+
+    {
+        "depth1": "", "depth2": "GS25", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
         "path": "gsrbr/01/gsrbr010101",
         "link": "/gsrbr010101",

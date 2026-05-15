@@ -68,7 +68,7 @@ img {
 }
 @media (max-width: 768px){
     .brand_panel_title{
-        padding: 0 20px 64px;
+        padding: 0 0 64px;
     }
     .brand_panel_bg {
         margin: 0 0 24px;

@@ -91,7 +91,7 @@
         </section>
     </div>
 
-    <div class="brand_content">
+    <div class="cont_inner">
         <Tabs
             :model-value="depth1ActiveIdx"
             tab-class="type_01"
@@ -506,10 +506,58 @@
                 v-for="(tab, i) in store.tabs[0].serviceTabs"
                 :key="i"
                 v-show="serviceActiveTab === i"
-                class="service_panel"
-            >
+                class="service_panel">
+
+                <!-- 26.05.15 Edit 이종환 : 그 외 패널: 기본 구조를 각 패널로 다시 분리 -->
+                <template v-if="i === 0">
+                        <PanelHeader
+                            :hero="tab.hero"
+                            :hero-alt="tab.heroAlt"
+                            :title="tab.title"
+                            :desc="tab.desc"
+                        />
+                    <section>
+                        <div class="usage_group">
+                            <h4 class="usage_group_title">{{ tab.sub_item.title }}</h4>
+                            <p class="explain" v-html="tab.sub_item.explain"></p>
+                            <p class="retail_note" v-html="tab.sub_item.retail_note"></p>
+
+                            <ul class="logo_list">
+                                <li v-for="item in tab.sub_item.bank" :key="item">
+                                    <img :src="item.logo" :alt="name" />
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </template>
+
+                <template v-else-if="i === 1">
+                        <PanelHeader
+                            :hero="tab.hero"
+                            :hero-alt="tab.heroAlt"
+                            :title="tab.title"
+                            :desc="tab.desc"
+                        />
+                    <section>
+                        <div v-if="tab.table" class="com_table_wrap">
+                            <table class="com_table">
+                                <tbody>
+                                    <tr v-for="(row, ri) in tab.table.rows" :key="ri">
+                                        <th scope="row">{{ row.head }}</th>
+                                        <td>
+                                            <div class="cash_table_cell">
+                                                <span>{{ row.text }}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </template>
+
                 <!-- 교통카드 충전: LNB + 콘텐츠 2열 레이아웃 -->
-                <template v-if="i === 2">
+                <template v-else-if="i === 2">
                     <PanelHeader :title="tab.pageTitle" :desc="tab.pageDesc" />
                     <div class="pop_wrap">
                         <nav class="pop_lnb" aria-label="팝카드 메뉴">
@@ -924,32 +972,6 @@
                         </Swiper>
                     </section>
                 </template>
-
-                <!-- 그 외 패널: 기본 구조 -->
-                <template v-else>
-                        <PanelHeader
-                            :hero="tab.hero"
-                            :hero-alt="tab.heroAlt"
-                            :title="tab.title"
-                            :desc="tab.desc"
-                        />
-                    <section>
-                        <div v-if="tab.table" class="com_table_wrap">
-                            <table class="com_table">
-                                <tbody>
-                                    <tr v-for="(row, ri) in tab.table.rows" :key="ri">
-                                        <th scope="row">{{ row.head }}</th>
-                                        <td>
-                                            <div class="cash_table_cell">
-                                                <span>{{ row.text }}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                </template>
             </div>
         </div>
 
@@ -1308,12 +1330,12 @@ import modal from "@/assets/js/modal";
 import imgLogo from "@/assets/images/dummy/brand_gs25_logo.png";
 import imgAcc01 from "@/assets/images/dummy/brand_accordion_01.png";
 import imgAcc02 from "@/assets/images/dummy/brand_accordion_02.png";
-import imgAcc03 from "@/assets/images/dummy/brand_accordion_03.png";
+import imgAcc03 from "@/assets/images/sub/gsrbr010101/brand_accordion_03.png";
 
 /* 탭 0 이미지 */
-import imgHero0 from "@/assets/images/dummy/differentiated_bg_01.png";
-import imgCard1 from "@/assets/images/dummy/differentiated_product_01.png";
-import imgCard2 from "@/assets/images/dummy/differentiated_product_02.png";
+import imgHero0 from "@/assets/images/sub/gsrbr010101/img_01-01-01.png"; //26.05.15 Edit 이종환
+import imgCard1 from "@/assets/images/sub/gsrbr010101/img_01-01-02.png";
+import imgCard2 from "@/assets/images/sub/gsrbr010101/img_01-01-03.png";
 
 /* 탭 1 이미지 */
 import imgHero1 from "@/assets/images/dummy/brand_bg_02.png";
@@ -1326,8 +1348,8 @@ import imgFlagColombia from "@/assets/images/dummy/img_flag_colombia.png";
 import imgFlagEthiopia from "@/assets/images/dummy/img_flag_ethiopia.png";
 import imgFlagPapua from "@/assets/images/dummy/img_flag_papua.png";
 import imgCafe25Graph from "@/assets/images/dummy/cafe25_graph.png";
-import imgCafeMenu from "@/assets/images/dummy/cafe25_menu.png";
-import imgCafeMenuMo from "@/assets/images/dummy/mo/cafe25_menu_mo.png";
+import imgCafeMenu from "@/assets/images/sub/gsrbr010101/cafe25_menu.png";
+import imgCafeMenuMo from "@/assets/images/sub/gsrbr010101/cafe25_menu_mo.png";
 
 /* 탭 2 이미지 */
 import imgHero2 from "@/assets/images/dummy/differentiated_bg_03.png";
@@ -1345,12 +1367,12 @@ import imgPhone1 from "@/assets/images/dummy/gopizza_phone_01.png";
 import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 
 /* 신선강화점 이미지 */
-import imgHero4 from "@/assets/images/dummy/brand_bg_05.png";
+import imgHero4 from "@/assets/images/sub/gsrbr010101/brand_bg_05.png";
 import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
 
 /* 매장/서비스 이미지 */
-import imgHero5 from "@/assets/images/dummy/brand_bg_06.png";
+import imgHero5 from "@/assets/images/sub/gsrbr010101/brand_bg_06.png";
 import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";
 import imgHero7 from "@/assets/images/dummy/brand_bg_08.png"; 
 import imgHero8 from "@/assets/images/dummy/brand_bg_09.png"; 
@@ -1359,7 +1381,7 @@ import imgHero10 from "@/assets/images/dummy/brand_bg_11.png";
 import imgHero11 from "@/assets/images/dummy/brand_bg_12.png"; 
 import imgHero12 from "@/assets/images/dummy/brand_bg_13.png"; 
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
-import imgPopCard2 from "@/assets/images/dummy/pop_card_02.png";
+import imgPopCard2 from "@/assets/images/sub/gsrbr010101/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
 import imgPopCard1Mo from "@/assets/images/dummy/mo/pop_card_01_mo.png";
 import imgPopCard2Mo from "@/assets/images/dummy/mo/pop_card_02_mo.png";
@@ -1429,7 +1451,7 @@ const langData = {
             { item: "신선강화점" },
             { item: "매장/서비스" },
             { item: "상생협력" },
-            { item: "밀박스/스낵바" },
+            { item: "기업/단체 정기 서비스" }, //26.05.15 Edit 이종환
         ],
         depth2: [
             { item: "차별화 상품" },
@@ -1453,7 +1475,7 @@ const langData = {
             hero: imgHero0,
             heroAlt: "",
             title: "차별화 상품",
-            subtitle: "최고급 커피머신과 스페셜티 블렌딩 원두를 사용하여 최상의 커피를 합리적인 가격으로 제공하는 GS25의 차별화 원두커피",
+            subtitle: "합리적인 가격, 믿을 수 있는 품질, 삶의 가치를 높이는 새로운 상품까지 생활 속 기쁨을 누릴 수 있도록 늘 함께 합니다.",
             cards: [
                 {
                     image: imgCard1,
@@ -1464,8 +1486,8 @@ const langData = {
                 {
                     image: imgCard2,
                     alt: "",
-                    title: "넷플릭스 시리즈",
-                    desc: "넷플릭스 인기 콘텐츠와 협업한 GS25 단독 콜라보 상품 시리즈로, 트렌디한 소비 경험을 제공합니다.",
+                    title: "유어스",
+                    desc: "유어스는 좋은 품질과 합리적인 가치를 기본으로 하며, 오직 GS리테일에서만 만날 수 있는 재미와 즐거움을 제공합니다.",
                 },
             ],
             qr: {
@@ -1709,6 +1731,24 @@ const langData = {
                         heroAlt: "",
                         title:   "현금인출기 서비스",
                         desc:    "현금인출, 계좌 이체 등 금융서비스 외에도 프로스포츠(야구, 축구, 배구, 농구) 정규리그 입장권(즉시 입장), 에버랜드 자유이용권의 발권도 가능합니다.<br />그 밖에 하이패스 충전(신용카드 결제), 알뜰폰 판매 등 다양한 생활 편의 서비스를 제공하고 있습니다.",
+                        sub_item: {
+                            title: "현금인출 수수료 0원 서비스",
+                            explain: "신한은행 / KB국민은행 / 우리은행 / Kakaobank / K bank / 토스뱅크 / SC제일은행 / 광주은행 / SB저축은행 / 삼성증권 / NH투자증권 계좌에서 현금인출시 수수료 0원!",
+                            retail_note: "* 단, 은행 영업 시간 외에는 은행 조건에 따라서 수수료가 발생할 수 있으며, 저축은행은 출금 시에만 수수료가 면제 됩니다.",
+                            bank: [
+                                {name:"신한은행", logo: require("@/assets/images/sub/gsrbr010101/bank_shinhan.png")},
+                                {name:"KB국민은행", logo: require("@/assets/images/sub/gsrbr010101/bank_kookmin.png")},
+                                {name:"우리은행", logo: require("@/assets/images/sub/gsrbr010101/bank_woori.png")},
+                                {name:"kakaobank", logo: require("@/assets/images/sub/gsrbr010101/bank_kakao.png")},
+                                {name:"Kbank", logo: require("@/assets/images/sub/gsrbr010101/bank_kbank.png")},
+                                {name:"toss bank", logo: require("@/assets/images/sub/gsrbr010101/bank_toss.png")},
+                                {name:"standard chartered SC제일은행", logo: require("@/assets/images/sub/gsrbr010101/bank_sc.png")},
+                                {name:"광주은행", logo: require("@/assets/images/sub/gsrbr010101/bank_gwangju.png")},
+                                {name:"저축은행", logo: require("@/assets/images/sub/gsrbr010101/bank_sb.png")},
+                                {name:"삼성증권", logo: require("@/assets/images/sub/gsrbr010101/bank_samsung.png")},
+                                {name:"NH투자증권", logo: require("@/assets/images/sub/gsrbr010101/bank_nh.png")}
+                            ]
+                        }
                     },
                     {
                         label:   "편의점캐시\n구입/충전",
@@ -2617,7 +2657,7 @@ const langData = {
     milbox: {
         hero: imgHero12,
         heroAlt: "",
-        title: "밀박스/스낵바",
+        title: "기업/단체 정기 서비스",
         sections: [
             {
                 type: "feature",
@@ -3167,14 +3207,10 @@ button { background-color: #fff }
 @media (max-width: 768px) {
   .usage_select_box { width: 100%; font-size: 1.4rem; line-height: 1.4 }
 }
-.brand_content { max-width: 1420px; margin: 0 auto; padding: 0 0 200px }
-@media (max-width: 1280px) {
-  .brand_content { padding-left: 40px; padding-right: 40px }
-}
-.brand_panel { padding-top: 64px; padding-bottom: 100px }
+.brand_panel { padding-top: 64px; margin-bottom: 100px }
 .brand_panel section { padding-bottom: 120px }
 @media (max-width: 768px) {
-  .brand_panel section { padding: 64px 20px 80px }
+  .brand_panel section { padding: 64px 0 80px }
 }
 .brand_panel section:last-of-type { padding-bottom: 0 }
 .diff_card_grid { margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 460px)); gap: 20px }
@@ -3266,9 +3302,18 @@ button { background-color: #fff }
 .gopizza_link > figure > img { width: 100%; display: block }
 .gopizza_link > div { min-width: 0; padding: 7px 0; flex: 1 }
 .gopizza_link > div > strong { margin: 0 0 6px; color: #161618; font-size: 2rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; display:flex; gap:8px; align-items: center }
-.gopizza_link > div > strong:after { content:""; width:20px; height:20px; background-color:red }
+.gopizza_link > div > strong:after { content:""; width:20px; height:20px; background:url('@/assets/images/common/icon_set_20.png') -979px -24px;}
 .gopizza_link > div > p { margin: 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em }
 .sinsen_feature :deep(.feature_card_item) { min-height: 240px }
+
+/* 26.05.15 Add 이종환 : 신선강화점 특징 아이콘 */
+.sinsen_feature :deep(.feature_card_item .feature_card_icon) {width:40px; height:40px; background-color:transparent; background-position:50%; background-repeat:no-repeat; background-size:cover;}
+.sinsen_feature :deep(.feature_card_item:nth-child(1) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_01.png');}
+.sinsen_feature :deep(.feature_card_item:nth-child(2) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_02.png');}
+.sinsen_feature :deep(.feature_card_item:nth-child(3) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_03.png');}
+.sinsen_feature :deep(.feature_card_item:nth-child(4) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_04.png');}
+
+
 .info_card { max-width: 940px; padding: 32px; background-color: #f8f8f8; border-radius: 12px }
 .info_card strong { margin-bottom:8px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
 @media (max-width: 768px) {
@@ -3291,15 +3336,28 @@ button { background-color: #fff }
 }
 .info_list > li { padding-bottom: 12px; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 8px }
 .info_list > li:last-child { padding-bottom: 0 }
-.info_list > li::before { content: ""; width: 16px; height: 16px; background-color: #107af2; border-radius: 50%; position: relative; top: 2px; flex-shrink: 0 }
+.info_list > li::before { content: ""; width: 16px; height: 16px; background:url('@/assets/images/common/icon_bullet_checkmark.png') 0 0 no-repeat; border-radius: 50%; position: relative; top: 2px; flex-shrink: 0 }
 .info_list > li > div { display: flex; flex-direction: column; gap: 2px }
 .info_check_note { color: #67676f }
 .chicken_panel :deep(.feature_card_item) { min-height: 238px }
 .service_tab_wrap { margin-bottom: 80px; min-width: 0; overflow: hidden; position: relative }
 .service_tab_list { width: 100%; display: flex; transition: transform 0.4s cubic-bezier(0.1, 0.57, 0.1, 1) }
 .service_tab_item { background-color: transparent; border: none; cursor: pointer; border-radius: 12px; flex: 0 0 calc(100% / 8); aspect-ratio: 89 / 83; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px }
-.service_tab_icon { width: 48px; height: 48px; background-color: #d7d7df; border-radius: 8px; display: block; flex-shrink: 0 }
-.service_tab_item.is_active .service_tab_icon { background-color: #107af2 }
+
+/* 26.05.15 Edit 이종환 : 아아콘 적용으로 수정 (on / off 포지션은 동일) */
+.pop_panel .service_tab_icon { width: 32px; height: 32px; background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_off.png'); background-repeat:no-repeat; border-radius: 8px; display: block; flex-shrink: 0 }
+.pop_panel .service_tab_item.is_active .service_tab_icon { background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_on.png'); }
+
+.pop_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-34px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-134px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-234px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-334px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-434px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(6) .service_tab_icon {background-position:-534px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(7) .service_tab_icon {background-position:-634px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(8) .service_tab_icon {background-position:-734px -24px;}
+/* //26.05.15 Edit 이종환 : 아아콘 적용으로 수정 */
+
 .service_tab_label { color: #7c7c86; font-size: 1.8rem; font-weight: 700; line-height: 1.5; text-align: center; white-space: pre-line }
 .service_tab_item.is_active .service_tab_label { color: #107af2 }
 .service_panel { min-height: 200px }
@@ -3334,7 +3392,8 @@ button { background-color: #fff }
 .pop_logo_thumb { width: auto; display: block }
 @media (min-width: 769px) {
   .pop_sec_acc :deep(.acc_tit_btn) { display: none }
-  .pop_sec_acc :deep(.acc_panel) {padding-bottom:120px;height: auto !important; overflow: visible }
+  .pop_sec_acc :deep(.acc_panel) {height: auto !important; overflow: visible;}
+  .pop_sec_acc :deep(.acc_panel + dt) {padding-top:120px;}
   .pop_sec_acc :deep(.acc_item) { border: none; padding-bottom: 120px }
   .pop_sec_acc :deep(.acc_item:last-child) { padding-bottom: 0 }
   .pop_sec_acc :deep(.acc_panel_cont) { padding: 0 }
@@ -3390,6 +3449,9 @@ button { background-color: #fff }
 }
 .usage_group .list_dotted > li { color: #67676f }
 .usage_group .list_dotted > li::before { background-color: #67676f }
+
+.explain + .retail_note {margin-top:8px;}
+
 .retail_note { margin: 0 0 24px; color: #f95823; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 .logo_list { padding: 0; gap: 12px; display: grid; grid-template-columns: repeat(6, 1fr) }
 .logo_list > li { height: 56px; min-width: 0; padding: 6px 12px; border: 1px solid #e5e5e9; border-radius: 8px; display: flex; align-items: center; justify-content: center }
@@ -3456,8 +3518,13 @@ button { background-color: #fff }
 .imgcard_body > h4 { margin-bottom: 16px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }
 .imgcard_body > p { color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; white-space: pre-line }
 .imgcard_sublist { display: flex; flex-direction: column; gap: 8px }
+
+/* 26.05.15 Edit 이종환 : 아이콘 공통화 */
 .imgcard_sublist > li { display: flex; gap: 8px; align-items: center }
-.imgcard_icon { width: 16px; height: 16px; background-color: #0059fe; border-radius: 50%; flex-shrink: 0 }
+.imgcard_sublist > li:before { content: ""; width: 16px; height: 16px; background:url('@/assets/images/common/icon_bullet_checkmark.png') 0 0 no-repeat; border-radius: 50%; position: relative; top: 2px; flex-shrink: 0 }
+/* .imgcard_icon { width: 16px; height: 16px; background-color: #0059fe; border-radius: 50%; flex-shrink: 0 } */
+/* 26.05.15 Edit 이종환 : 아이콘 공통화 */
+
 .imgcard_sublist > li > span:last-child { color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4 }
 .hipass_terminal_img > img { width: auto; max-width: 100%; height: auto; display: block }
 @media (max-width: 768px) {
@@ -3548,9 +3615,8 @@ button { background-color: #fff }
   .gopizza_menu { flex-direction: column }
   .logo_list { grid-template-columns: repeat(3, 1fr) }
   .gift_brand_card > figcaption { font-size: 1.4rem }
-  .brand_content { padding-bottom: 120px }
   .brand_panel { padding-top: 48px; padding-bottom: 80px }
-  .brand_panel section { padding-bottom: 0 }
+  /* 26.05.15 Del 이종환 .brand_panel section { padding-bottom: 0 } */
   .service_tab_item { flex: 0 0 clamp(140px, 18.23vw, 175px); gap: 12px }
   .service_tab_item.is_active { background-color: #F8F8F8 }
   .service_tab_icon { width: 40px; height: 40px }
@@ -3580,7 +3646,7 @@ button { background-color: #fff }
   .service_tab_label { font-weight: 700; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0% }
 }
 @media (max-width: 768px) {
-  .brand_content { padding: 48px 0 60px; overflow-x: clip }
+  .cont_inner {overflow-x: clip;}
   .diff_card_swiper { padding: 0 20px; overflow: visible }
   .diff_card > div { min-height: 163px; padding: 20px }
   .diff_card > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
