@@ -296,6 +296,116 @@
                         </article>
                     </div>
                 </section>
+                <!-- 프랜차이즈란 -->
+                <section class="sec_franchise_define" >
+                    <div class="inner">
+                        <header class="section_header ac">
+                            <span v-show="isMobileView" class="tit">{{ franchiseDefinePanel.badge }}</span>
+                            <h2>{{ franchiseDefinePanel.title }}</h2>
+                            <p>{{ franchiseDefinePanel.desc }}</p>
+                        </header>
+                        <article class="franchise_define_card">
+                            <header class="sub_header ac">
+
+                                <span class="tit">{{ franchiseDefineCard.chip }}</span>
+                                <h3>{{ franchiseDefineCard.title }}</h3>
+                                <p>{{ franchiseDefineCard.desc }}</p>
+                            </header>
+                            <div class="franchise_formula" role="group" aria-label="프랜차이즈 성공 공식">
+                                <div>
+                                    <span aria-hidden="true"></span>
+                                    <p>
+                                        <strong v-html="franchiseFormula.franchisee.title"></strong>
+                                        <span v-httml="franchiseFormula.franchisee.label"></span>
+                                    </p>
+                                </div>
+                                <span aria-hidden="true">+</span>
+                                <div>
+                                    <span aria-hidden="true"></span>
+                                    <p>
+                                        <strong v-html="franchiseFormula.franchisor.title"></strong>
+                                        <span v-html="franchiseFormula.franchisor.label"></span>
+                                    </p>
+                                </div>
+                                <span aria-hidden="true">=</span>
+                                <div>
+                                    <span aria-hidden="true"></span>
+                                    <p>
+                                        <strong>{{ franchiseFormula.result.title }}</strong>
+                                        <span>{{ franchiseFormula.result.label }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="franchise_role_grid">
+                                <article v-for="(column, cIdx) in franchiseRoleColumns" :key="cIdx">
+                                    <header>
+                                        <span aria-hidden="true"></span>
+                                        <div>
+                                            <h4>{{ column.title }}</h4>
+                                            <p v-html="column.label"></p>
+                                        </div>
+                                    </header>
+                                    <ul>
+                                        <li v-for="(line, lIdx) in column.lines" :key="lIdx">
+                                            <span aria-hidden="true"></span>
+                                            <strong>{{ line }}</strong>
+                                        </li>
+                                    </ul>
+                                </article>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+                <!-- 상담 받고 싶은 지역 -->
+                <section class="sec_region_counsel" >
+                    <header class="section_header ac">
+                        <span class="tit">{{ regionCounselPanel.badge }}</span>
+                        <h2>{{ regionCounselPanel.title }}</h2>
+                    </header>
+                    <Tabs
+                        :tab-items="regionCounselTabs"
+                        tab-class="type_02"
+                        v-model="activeRegionTab"
+                        :tab-slide="true"
+                    />
+                    <!-- 지역 선택 전 -->
+                    <div class="region_counsel_board">
+                        <div class="region_counsel_map" role="region" aria-label="지도 연동 예정 영역"></div>
+                        <aside class="region_counsel_panel">
+                            <span class="icon"></span>                            
+                            <p class="tit">{{ regionCounselEmpty.title }}</p>
+                            <p class="desc" v-html="regionCounselEmpty.desc"></p>
+                            <p class="hint">{{ regionCounselEmpty.hint }}</p>
+                        </aside>
+                    </div>
+                    <!--  지역 선택 후 -->
+                    <div class="region_counsel_staff">
+                        <div class="region_counsel_staff_map" role="region" aria-label="지도 연동 예정 영역"></div>
+                        <div class="region_counsel_staff_body">
+                            <header>
+                                <span class="ico_pin" aria-hidden="true"></span>
+                                <h3>{{ regionCounselStaff.regionName }}</h3>
+                                <span class="badge">{{ regionCounselStaff.countLabel }}</span>
+                                <span class="ico_tool" aria-hidden="true"></span>
+                            </header>
+                            <ul>
+                                <li v-for="(manager, mi) in regionCounselStaff.managers" :key="mi">
+                                    <article>
+                                        <span class="photo" aria-hidden="true"></span>
+                                        <div>
+                                            <p class="name">{{ manager.name }}</p>
+                                            <p class="area">{{ manager.area }}</p>
+                                            <p class="phone">
+                                                <span class="ico_phone" aria-hidden="true"></span>
+                                                <a :href="`tel:${manager.phoneDial}`">{{ manager.phone }}</a>
+                                            </p>
+                                        </div>
+                                    </article>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
             </div>
             <!-- //편의점 창업 이해 -->
             <div class="tab_page" v-show="activeD1 === 1"></div>
@@ -696,6 +806,79 @@ const convenienceEvolutionStages = [
     },
 ];
 
+/**  프랜차이즈란 */
+const franchiseDefinePanel = {
+    badge:"점포개발",
+    title: "프랜차이즈란?",
+    desc: "쉽게 말해, 본부와 가맹점이 서로 힘을 합쳐 함께 성장하는 파트너십이에요. 혼자가 아니라 함께이기 때문에 더 든든합니다.",
+};
+
+const franchiseDefineCard = {
+    chip: "GS25 Franchise",
+    title: "프랜차이즈의 성공",
+    desc: "가맹본부와 가맹점이 함께 만드는 상생의 파트너십",
+};
+
+const franchiseFormula = {
+    franchisee: { title: "성실한 운영", label: "가맹점 <br class='m_br' />(Franchisee)" },
+    franchisor: { title: "체계적 지원", label: "가맹본부 <br class='m_br' />(Franchisor)" },
+    result: { title: "함께 성장", label: "GS25 Franchise" },
+};
+
+/** Figma 716:14559 — 역할 2열 카드 */
+const franchiseRoleColumns = [
+    {
+        title: "점포 운영",
+        label: "가맹점<br class='m_br' />(Franchisee)",
+        lines: [
+            "내 가게를 책임감 있게 운영해요",
+            "고객에게 친절한 점포를 만들어요",
+            "GS25 브랜드 가치를 함께 지켜요",
+            "상품 관리와 진열을 신경 써요",
+        ],
+    },
+    {
+        title: "운영 지원",
+        label: "가맹본부 (Franchisor)",
+        lines: [
+            "성공 창업을 위한 전략을 세워요",
+            "교육과 노하우를 아낌없이 전해요",
+            "설비 설치와 상품 공급을 책임져요",
+            "매출 올리는 마케팅을 지원해요",
+        ],
+    },
+];
+
+/** Figma 716:14623 — 상담 지역 (지도 API 미연동) */
+const regionCounselPanel = {
+    badge: "상담 지역",
+    title: "지금 바로 상담을 받고 싶으신가요?",
+    lead: "지도에서 원하시는 지역을 클릭하시면 해당 지역 담당자 정보를 바로 확인하실 수 있습니다.",
+};
+const regionCounselEmpty = {
+    title: "지역을 선택해주세요",
+    desc: "지도에서 점포를 오픈하고 싶은 지역을 클릭하면<br class='p_br'/>해당 지역 담당자 정보를 확인하실 수 있습니다.",
+    hint: "(서울/경기는 상단의 '수도권 상세' 탭 또는 지도에서 클릭하세요)",
+};
+const regionCounselTabs = [
+    { item: "전국" },
+    { item: "수도권 상세 - 서울" },
+    { item: "수도권 상세 - 경기" },
+];
+const activeRegionTab = ref(0);
+
+/** 지역 선택 후 담당자 목록(샘플) */
+const regionCounselStaff = {
+    regionName: "서울",
+    countLabel: "6명",
+    managers: [
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+    ],
+};
+
 
 const QUICK_MENU_REVEAL_PX = 100;
 const QUICK_MENU_VIEWPORT_BOTTOM_PX = 60;
@@ -905,7 +1088,7 @@ section + section { padding-top: 100px; }
 .sec_hero > header > h3 { margin: 8px 0 0; color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .sec_hero > header > .desc { color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
 .sec_hero > .action_list { width: 100%; max-width: 540px; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
-.sec_hero > .action_list > li > a { width: 100%; min-height: 51px; padding: 12px 20px; background-color: rgba(16,122,242,0.8); border-radius: 12px; color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.sec_hero > .action_list > li > a { width: 100%; min-height: 51px; padding: 12px 20px; background-color: rgba(16,122,242,0.8); border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .sec_hero > .action_list > li:last-child > a { min-height: 64px; align-items: center; }
 .sec_hero > .action_list > li > a > strong { flex: 0 0 114px; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
 .sec_hero > .action_list > li:last-child > a > strong { flex-basis: 114px; font-size: 1.6rem; line-height: 1.24; }
@@ -928,7 +1111,7 @@ section + section { padding-top: 100px; }
 section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50%); background-color: #f8f8f8; }
 .sec_band > .inner > .link_grid { display: flex; align-items: stretch; gap: 20px; }
 .sec_band > .inner > .link_grid > li { flex: 1; min-width: 0; display: flex; }
-.sec_band > .inner > .link_grid > li > a { width: 100%; min-height: 144px; padding: 32px 24px; background-color: #fff; border-radius: 12px; text-decoration: none; display: flex; align-items: center; gap: 20px; }
+.sec_band > .inner > .link_grid > li > a { width: 100%; min-height: 144px; padding: 32px 24px; background-color: #fff; border-radius: 12px; display: flex; align-items: center; gap: 20px; }
 .sec_band > .inner > .link_grid > li > a > .thumb { width: 80px; height: 80px; flex-shrink: 0; background-color: #f8f8f8; border-radius: 12px; }
 .sec_band > .inner > .link_grid > li > a > .txt { flex: 1; min-width: 0; }
 .sec_band > .inner > .link_grid > li > a > .txt > strong {  font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
@@ -1005,7 +1188,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { width: fit-content; margin-top: 16px; padding: 3px 6px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 4px; display: inline-block; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong { margin-top: 6px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 /* sec_icon_grid */
-.sec_icon_grid > .inner > .icon_grid { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; list-style: none; align-items: stretch; }
+.sec_icon_grid > .inner > .icon_grid { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px;  align-items: stretch; }
 .sec_icon_grid > .inner > .icon_grid > li { height: 100%; }
 .sec_icon_grid > .inner > .icon_grid > li > article { min-height: 157px; height: 100%; padding: 32px; background-color: #fff; border-radius: 20px; display: grid; grid-template-columns: 80px 1fr; column-gap: 20px; align-content: start; }
 .sec_icon_grid > .inner > .icon_grid > li > article > .icon { width: 80px; height: 80px; background-color: #f2f2f4; border-radius: 50%; grid-column: 1; grid-row: 1; }
@@ -1014,7 +1197,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_icon_grid > .inner > .icon_grid > li > article > div > strong { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_icon_grid > .inner > .icon_grid > li > article > div > p { margin-top: 8px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
 /* sec_tri_grid */
-.sec_tri_grid > ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; list-style: none; align-items: stretch; }
+.sec_tri_grid > ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;  align-items: stretch; }
 .sec_tri_grid > ul > li { height: 100%; padding: 60px 40px; border: 1px solid #D7D7DF; border-radius: 12px; }
 .sec_tri_grid > ul > li > h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_tri_grid > ul > li > dl { margin: 40px 0 0; }
@@ -1022,25 +1205,110 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_tri_grid > ul > li > dl > dt > .icon { width: 24px; height: 24px; flex-shrink: 0; background-color: #d9d9d9; }
 .sec_tri_grid > ul > li > dl > dd { margin: 4px 0 0; padding-left: 32px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_tri_grid > ul > li > dl > dd + dt { margin-top: 56px; }
-/* sec_diagram */
-.sec_diagram > .diagram_shell { display: flex; align-items: center; gap: 60px; padding: 32px; border: 1px solid #d7d7df; border-radius: 999px; background-color: #107af2; }
-.sec_diagram > .diagram_shell > .diagram_track { flex: 1; min-width: 0; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring { display: flex; align-items: center; border-radius: 999px; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer { width: 100%; max-width: 940px; min-height: 245px; padding: 16px 32px; background-color: #9fcafa; gap: 24px; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid { flex: 1; max-width: 555px; min-height: 181px; padding: 16px 24px; background-color: #cfe4fc; gap: 20px; border-radius: 999px;}
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner { flex-shrink: 0; width: 220px; min-height: 117px; padding: 16px 20px; background-color: #fff; border-radius: 999px; }
+/* sec_diagram — PC~태블릿: clamp·cqw / 모바일(768↓): rem(1rem=10px)·치수 px·Figma 716:17741 */
+.sec_diagram > .diagram_shell { display: flex; align-items: center; gap: clamp(24px, 3.125vw, 60px); padding: clamp(16px, 1.667vw, 32px); border: 1px solid #d7d7df; border-radius: 9999px; background-color: #107af2; min-width: 0; }
+.sec_diagram > .diagram_shell > .diagram_track { width: 100%; min-width: 0; flex: 1 1 0; }
+.sec_diagram > .diagram_shell > .diagram_track .diagram_ring { min-width: 0; border-radius: clamp(20px, 8vw, 999px); display: flex; justify-content: center; align-items: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer { container-type: inline-size; width: 100%; max-width: min(100%, 940px); min-width: 0; min-height: clamp(140px, 12.76vw, 245px); padding: clamp(14px, 1.667vw, 32px); background-color: #9fcafa; border-radius: 999px; display: flex; justify-content: center; align-items: center; gap: clamp(12px, 1.25vw, 24px); flex-wrap: wrap; align-content: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid { container-type: inline-size; width: min(100%, 59.04cqw); max-width: 100%; min-width: 0; min-height: clamp(110px, 9.43vw, 181px); padding: clamp(12px, 1.667vw, 32px); background-color: #cfe4fc; border-radius: 999px; display: flex; justify-content: center; align-items: center; gap: clamp(10px, 1.042vw, 20px); flex-wrap: wrap; align-content: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner { width: min(100%, 39.64cqw); max-width: 100%; min-width: 0; min-height: clamp(88px, 6.09vw, 117px); padding: clamp(12px, 1.667vw, 32px); background-color: #fff; border-radius: 999px; display: flex; justify-content: center; align-items: center; }
 .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article { width: 100%; text-align: center; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > strong { color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > span { color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested { flex: 1; min-width: 0; text-align: center; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > strong { color: #107af2; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > p { margin-top: 2px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring { flex: 1; min-width: 0; text-align: center; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > strong { color: #0a4991; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > p { margin-top: 2px; color: #0a4991; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_diagram > .diagram_shell > article.node_aside { width: 312px; flex-shrink: 0; text-align: center; }
-.sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: 3.2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
-.sec_diagram > .diagram_shell > article.node_aside > p { margin-top: 8px; color: #fff; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > strong { color: #67676f; font-size: clamp(1.4rem, 1.05vw, 1.8rem); font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > span { color: #67676f; font-size: clamp(1.2rem, 0.73vw, 1.4rem); font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested { flex: 1 1 clamp(120px, 12vw, 200px); min-width: 0; max-width: 100%; text-align: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > strong { color: #107af2; font-size: clamp(1.4rem, 1.05vw, 1.8rem); font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > p { margin-top: 2px; color: #107af2; font-size: clamp(1.2rem, 0.73vw, 1.4rem); font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring { flex: 1 1 clamp(140px, 14vw, 240px); min-width: 0; max-width: 100%; text-align: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > strong { color: #0a4991; font-size: clamp(2rem, 1.67vw, 2.4rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > p { margin-top: 2px; color: #0a4991; font-size: clamp(1.4rem, 0.83vw, 1.6rem); font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_diagram > .diagram_shell > article.node_aside { width: clamp(200px, 16.25vw, 312px); flex: 0 1 auto; min-width: 0; text-align: center; }
+.sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: clamp(2.4rem, 2.08vw, 3.2rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_diagram > .diagram_shell > article.node_aside > p { margin-top: clamp(4px, 0.42vw, 8px); color: #fff; font-size: clamp(1.4rem, 0.83vw, 1.6rem); font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_diagram > .diagram_shell article :is(strong, span, p) { word-break: keep-all; }
+/* sec_franchise_define — 카드·공식 행 (구조 선택자) */
+.sec_franchise_define .franchise_define_card { padding: 64px 80px; background-color: #fff; border-radius: 12px; }
+.sec_franchise_define .franchise_define_card .sub_header{margin-bottom:40px;}
+.sec_franchise_define .franchise_define_card .sub_header .tit + h3{margin-top: 8px;}
+.sec_franchise_define .franchise_define_card .sub_header h3 + p{margin-top: 8px;color:#67676F;font-size: 1.8rem;line-height: 1.4;}
+
+.sec_franchise_define .franchise_formula { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 32px; }
+.sec_franchise_define .franchise_formula > div { width: 320px; height: 136px; padding: 0 28px; border-radius: 999px; display: flex; align-items: center; justify-content: flex-start; gap: 16px; flex-shrink: 0; }
+.sec_franchise_define .franchise_formula > div:nth-child(1), 
+.sec_franchise_define .franchise_formula > div:nth-child(3) { background-color: #cfe4fc; }
+.sec_franchise_define .franchise_formula > div:nth-child(5) { background-color: #107af2; }
+.sec_franchise_define .franchise_formula > div > span { width: 72px; height: 72px; flex-shrink: 0; background-color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+/* .sec_franchise_define .franchise_formula > div:nth-child(1) > span::after { content: ""; width: 40px; height: 40px; background-color: #cfe4fc; border-radius: 8px; display: block; }
+.sec_franchise_define .franchise_formula > div:nth-child(3) > span::after { content: ""; width: 40px; height: 40px; background-color: #cfe4fc; border-radius: 12px; display: block; }
+.sec_franchise_define .franchise_formula > div:nth-child(5) > span::after { content: ""; width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.35); border-radius: 8px; display: block; } */
+.sec_franchise_define .franchise_formula > div > p { min-width: 0; margin: 0; text-align: left; }
+.sec_franchise_define .franchise_formula > div:nth-child(1) > p > strong, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > strong { color: #0d62c2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_franchise_define .franchise_formula > div:nth-child(1) > p > span, 
+.sec_franchise_define .franchise_formula > div:nth-child(3) > p > span { margin-top: 4px; color: #0d62c2; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
+.sec_franchise_define .franchise_formula > div:nth-child(5) > p > strong { color: #fff; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_franchise_define .franchise_formula > div:nth-child(5) > p > span { margin-top: 4px; color: #fff; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
+.sec_franchise_define .franchise_formula > span { color: #107af2; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex-shrink: 0; }
+/* .sec_franchise_define .franchise_formula :is(strong, span, p) { word-break: keep-all; } */
+.sec_franchise_define .franchise_role_grid { margin: 40px auto 0;  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.sec_franchise_define .franchise_role_grid > article {  padding: 32px; background-color: #f8f8f8; border-radius: 20px; }
+.sec_franchise_define .franchise_role_grid > article > header {  padding: 0 0 34px; border-bottom: 1px solid #e5e5e9; display: flex; align-items: center; gap: 20px; }
+.sec_franchise_define .franchise_role_grid > article > header > span { width: 60px; height: 60px; flex-shrink: 0; border-radius: 50%; display: block; }
+.sec_franchise_define .franchise_role_grid > article:nth-child(1) > header > span { background-color: #107af2; }
+.sec_franchise_define .franchise_role_grid > article:nth-child(2) > header > span { background-color: #15b874; }
+.sec_franchise_define .franchise_role_grid > article > header > div { min-width: 0; flex: 1 1 auto; }
+.sec_franchise_define .franchise_role_grid > article > header > div > h4 { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_franchise_define .franchise_role_grid > article > header > div > p {  color: #67676f; font-size: 1.6rem;  line-height: 1.5; letter-spacing: -0.01em; }
+.sec_franchise_define .franchise_role_grid > article > ul { padding:32px 24px; display: flex; flex-direction: column; gap: 24px; }
+.sec_franchise_define .franchise_role_grid > article > ul > li { display: flex; align-items: center; gap: 12px; }
+.sec_franchise_define .franchise_role_grid > article > ul > li > span { width: 24px; height: 24px; flex-shrink: 0; background-color: #d0d0d8; display: block; }
+.sec_franchise_define .franchise_role_grid > article > ul > li > strong { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_franchise_define .franchise_role_grid :is(strong, p) { word-break: keep-all; }
+/* 상담 지역 */
+
+.sec_region_counsel :deep(.tab_wrap ul.type_02){justify-content: center;}
+.sec_region_counsel :deep(.tab_wrap ul.type_02 li .item){color:#161616;font-weight:400;font-size: 1.8rem;line-height: 1.4;background-color:#fff;border:1px solid #161616;}
+.sec_region_counsel :deep(.tab_wrap ul.type_02 li.current .item){color:#fff;background-color:#161616;}
+
+
+.sec_region_counsel > .section_header { margin: 0 0 40px; }
+.sec_region_counsel :deep(.tab_wrap) { margin: 0 0 64px; }
+.sec_region_counsel .region_counsel_note { margin: 0 0 28px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; display: flex; align-items: flex-start; gap: 4px; }
+.sec_region_counsel .region_counsel_note > span { flex-shrink: 0; }
+.sec_region_counsel .region_counsel_board { width: 100%; display: grid; grid-template-columns: 700px 700px; gap: 20px; align-items: stretch; }
+.sec_region_counsel .region_counsel_map, .sec_region_counsel .region_counsel_staff_map { width: 100%; min-height: 620px; background-color: #f2f8fd; border: 1px solid #d7d7df; border-radius: 12px;  }
+.sec_region_counsel .region_counsel_panel { padding: 40px; border: 1px solid #d7d7df; border-radius: 12px;  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.sec_region_counsel .region_counsel_panel > span.icon{width:40px; height:40px;background-color:#67676f; display:block;}
+.sec_region_counsel .region_counsel_panel > p.tit { margin: 24px 0 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_panel > p.desc { margin: 8px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_panel > p.hint { margin: 8px 0 0; color: #107af2; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+/* .sec_region_counsel :is(.section_header, .region_counsel_panel) :is(h2, p) { word-break: keep-all; } */
+.sec_region_counsel .region_counsel_staff { width: 100%; margin-top: 64px; display: grid; grid-template-columns: 700px 700px; gap: 20px; align-items: stretch; }
+.sec_region_counsel .region_counsel_staff_body { height: 620px; padding: 40px; border: 1px solid #d7d7df; border-radius: 12px;  display: flex; flex-direction: column; overflow: hidden; }
+.sec_region_counsel .region_counsel_staff_body > header { margin: 0 0 32px; flex-shrink: 0; display: flex; align-items: center; gap: 8px; }
+.sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; flex-shrink: 0; background-color: #b8d4f0; border-radius: 6px; display: block; }
+.sec_region_counsel .region_counsel_staff_body > header > h3 { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_staff_body > header > .badge { padding: 2px 10px; color: #107af2; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border-radius: 99px; display: inline-block; }
+.sec_region_counsel .region_counsel_staff_body > header > .ico_tool { width: 20px; height: 20px; margin-left: auto; flex-shrink: 0; background-color: #d9d9d9; display: block; }
+.sec_region_counsel .region_counsel_staff_body > ul {  flex: 1 1 auto; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.sec_region_counsel .region_counsel_staff_body > ul > li > article { padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; gap: 24px;  }
+.sec_region_counsel .region_counsel_staff_body > ul > li > article > div { min-width: 0; flex: 1 1 auto; }
+.sec_region_counsel .region_counsel_staff_body .photo { width: 90px; height: 90px; flex-shrink: 0; background-color: #d7d7df; border-radius: 50%; display: block; }
+.sec_region_counsel .region_counsel_staff_body .name { margin: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_staff_body .area { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_staff_body .phone { margin: 8px 0 0; display: flex; align-items: center; gap: 8px; }
+.sec_region_counsel .region_counsel_staff_body .ico_phone { width: 16px; height: 16px; flex-shrink: 0; background-color: #a8c8ee; display: block; }
+.sec_region_counsel .region_counsel_staff_body .phone a { color: #107af2; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+/* .sec_region_counsel .region_counsel_staff_body :is(.name, .area, .phone a) { word-break: keep-all; } */
+/* sec_convenience_guide */
+.sec_diagram + .sec_convenience_guide { margin-top: 80px; }
+.sec_diagram header{margin-bottom:40px;}
+.sec_convenience_guide > .inner > .guide_body { width: 100%; max-width: 1420px; margin: 0 auto; }
+.sec_convenience_guide > .inner > .guide_body > .sub_header { margin-bottom: 40px; }
+.sec_convenience_guide .guide_steps {  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.sec_convenience_guide .guide_steps > li { min-height: 0; padding: 32px; background-color: #fff; border: 1px solid #d7d7df; border-radius: 12px; display: flex; align-items: flex-start; gap: 20px; }
+.sec_convenience_guide .guide_steps .step_index { width: 48px; height: 48px; flex-shrink: 0; background-color: #f2f2f4; border-radius: 50%; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: flex; align-items: center; justify-content: center; }
+.sec_convenience_guide .guide_steps > li > div { flex: 1; min-width: 0; }
+.sec_convenience_guide .guide_steps > li > div > strong { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_convenience_guide .guide_steps > li > div > p { margin-top: 8px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 /* quick_menu */
 .quick_menu { position: fixed; bottom: 60px; right: clamp(24px, 4.5313vw, 87px); width: clamp(104px, 6.8229vw, 131px); z-index: 100; display: flex; flex-direction: column; gap: clamp(8px, 0.5208vw, 10px); opacity: 0; pointer-events: none; }
 .quick_menu li { position: relative; width: 100%; }
@@ -1058,9 +1326,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .dual_panel{flex-direction: column;}
     /* sec_tri_grid */
     .sec_tri_grid > ul { grid-template-columns: 1fr; gap: 20px; }
-    /* sec_diagram */
-    .sec_diagram > .diagram_shell { gap: 40px; padding: 24px; }
-    .sec_diagram > .diagram_shell > article.node_aside { width: 260px; }
+    /* sec_convenience_guide */
+    .sec_convenience_guide .guide_steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 /* Mobile */
 @media (max-width: 768px) {
@@ -1164,17 +1431,71 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_tri_grid > ul > li > dl > dt { font-size: 1.6rem; line-height: 1.24; }
     .sec_tri_grid > ul > li > dl > dd { font-size: 1.4rem; line-height: 1.4; }
     .sec_tri_grid > ul > li > dl > dd + dt { margin-top: 32px; }
-    /* sec_diagram */
-    .sec_diagram > .diagram_shell { flex-direction: column; align-items: stretch; gap: 24px; padding: 20px; border-radius: 20px; }
-    .sec_diagram > .diagram_shell > .diagram_track { width: 100%; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer { max-width: none; min-height: 0; padding: 16px; flex-direction: column; align-items: stretch; gap: 16px; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid { max-width: none; min-height: 0; padding: 16px; flex-direction: column; align-items: stretch; gap: 16px; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner { width: 100%; min-height: 0; padding: 16px; }
-    .sec_diagram > .diagram_shell > article.node_aside { width: 100%; }
-    .sec_diagram > .diagram_shell > article.node_aside > strong { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_diagram > .diagram_shell > article.node_aside > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > strong { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    /* sec_diagram — 모바일(Figma 716:17741), clamp·cqw 미사용·폰트 rem(1rem=10px)·치수 px */
+    .sec_diagram .section_header p{color:#67676F;}
+    .sec_diagram > .diagram_shell { max-width: 335px; width: 100%; margin: 0 auto; padding: 100px 24px 24px; gap: 24px; border-radius: 999px; flex-direction: column; align-items: stretch; box-sizing: border-box; }
+    .sec_diagram > .diagram_shell > .diagram_track { order: 1; flex: 0 0 auto; width: 100%; min-width: 0; }
+    .sec_diagram > .diagram_shell > .diagram_track .diagram_ring { border-radius: 999px; }
+    .sec_diagram > .diagram_shell > article.node_aside { order: 0; width: 100%; max-width: none; flex: 0 0 auto; text-align: center; }
+    .sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.24px; display: block; }
+    .sec_diagram > .diagram_shell > article.node_aside > p { margin-top: 6px; color: #fff; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.14px; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer { container-type: normal; max-width: none; width: 100%; min-height: 541px; padding: 50px 24px 24px; border-radius: 999px; flex-direction: column; flex-wrap: nowrap; align-items: center; align-content: center; gap: 24px; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring { order: 0; width: 100%; max-width: 239px; flex: 0 0 auto; text-align: center; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > strong { color: #0a4991; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.24px; display: block; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > p { margin-top: 6px; color: #0a4991; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.16px; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid { container-type: normal; order: 1; width: 100%; max-width: 239px; min-height: 381px; padding: 50px 24 24px; border-radius: 999px; flex-direction: column; flex-wrap: nowrap; align-items: center; gap: 24px; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner { width: 100%; max-width: 191px; min-height: 210px; padding: 24px; border-radius: 999px; order:2;}
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > strong { color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > span { margin-top:6px;color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.14px; display: block; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested { width: 100%; max-width: 191px; flex: 0 0 auto; text-align: center; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > strong { color: #107af2; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > p { margin-top: 6px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.14px; }
+    /* sec_convenience_guide */
+    .sec_diagram + .sec_convenience_guide { margin-top: 60px; }
+    /* sec_franchise_define — 모바일(Figma 716:17765) */
+    .sec_franchise_define .franchise_define_card { padding: 24px 16px 24px; border-radius: 12px; }
+    .sec_franchise_define .franchise_define_card .sub_header { margin-bottom: 20px; }
+    .sec_franchise_define .franchise_define_card .sub_header > .tit { min-height: 28px; padding: 4px 12px; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; box-sizing: border-box; }
+    .sec_franchise_define .franchise_define_card .sub_header > .tit + h3 { margin-top: 8px; }
+    .sec_franchise_define .franchise_define_card .sub_header > h3 + p { margin-top: 8px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula { display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: auto auto auto; gap: 0 1.5px; align-items: stretch; justify-items: stretch; width: 100%; margin: 0 auto; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) { grid-column: 1; grid-row: 1; width: 100%; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(2) { grid-column: 2; grid-row: 1; justify-self: center; align-self: center; }
+    .sec_franchise_define .franchise_formula > div:nth-child(3) { grid-column: 3; grid-row: 1; width: 100%; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(4) { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) { grid-column: 1 / -1; grid-row: 3; justify-self: stretch; width: 100%; max-width: none; min-height: 88px; height: auto; padding: 12px 16px; flex-direction: row; align-items: center; justify-content: center; gap: 16px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1), .sec_franchise_define .franchise_formula > div:nth-child(3) { width: 100%; min-width: 0; max-width: none; height: auto; aspect-ratio: 1 / 1; padding: 8px; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > span, 
+    .sec_franchise_define .franchise_formula > div:nth-child(3) > span { width: 40px; height: 40px; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > span { width: 50px; height: 50px; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p,
+    .sec_franchise_define .franchise_formula > div:nth-child(3) > p { text-align: center; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > p { margin: 0; text-align: left; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p > strong,
+    .sec_franchise_define .franchise_formula > div:nth-child(3) > p > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p > span,
+    .sec_franchise_define .franchise_formula > div:nth-child(3) > p > span { margin-top: 0; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > p > strong { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > p > span { margin-top: 4px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula > span { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula > div:nth-child(3) > span::after { border-radius: 12px; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > span::after { content: ""; width: 32px; height: 32px; background-color: rgba(255, 255, 255, 0.35); border-radius: 8px; display: block; }
+    .sec_franchise_define .franchise_role_grid { width: 100%; max-width: none; margin: 20px auto 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+    .sec_franchise_define .franchise_role_grid > article { padding: 20px 10px; }
+    .sec_franchise_define .franchise_role_grid > article > header { padding: 0 0 24px; gap: 8px; align-items: flex-start; }
+    .sec_franchise_define .franchise_role_grid > article > header > span { width: 32px; height: 32px; }
+    .sec_franchise_define .franchise_role_grid > article > header > div > h4 { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .sec_franchise_define .franchise_role_grid > article > header > div > p { margin-top: 0; color: #67676f; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_franchise_define .franchise_role_grid > article > ul { padding: 24px 0 0; gap: 24px; }
+    .sec_franchise_define .franchise_role_grid > article > ul > li { align-items: center; gap: 8px; }
+    .sec_franchise_define .franchise_role_grid > article > ul > li > span { width: 20px; height: 20px; }
+    .sec_franchise_define .franchise_role_grid > article > ul > li > strong { color: #161616; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+    .sec_convenience_guide > .inner > .guide_body > .sub_header { margin-bottom: 24px; }
+    .sec_convenience_guide .guide_steps { grid-template-columns: 1fr; gap: 10px; }
+    .sec_convenience_guide .guide_steps > li { padding: 24px 16px; gap: 16px; }
+    .sec_convenience_guide .guide_steps .step_index { width: 40px; height: 40px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .sec_convenience_guide .guide_steps > li > div > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_convenience_guide .guide_steps > li > div > p { margin-top: 4px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     /* sec_stack · dual_panel */
     .sec_stack > .dual_panel > article > .btn_mid {width:100%; height:44px;}
     .sec_stack > .dual_panel > article > .stack_list{gap:12px;}
@@ -1188,6 +1509,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide)  { width: 85.333vw; height: auto; flex-shrink: 0; }
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong{margin-top:4px;font-size: 2rem;line-height: 1.325;letter-spacing: -0.01em;}
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span {padding:6px;font-size: 1.2rem;line-height: 1.2;}
+    
+    .sec_diagram header{margin-bottom:32px;}
     /* quick_menu */
     .quick_menu { display: none; }
 }
