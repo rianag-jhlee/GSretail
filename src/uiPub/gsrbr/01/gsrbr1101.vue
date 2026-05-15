@@ -306,6 +306,11 @@ export default {
             this.$router.back();
         }
     },
+    mounted() {
+        const header = document.getElementById("header");
+
+        header.classList.add("head_black");
+    }
 };
 </script>
 
