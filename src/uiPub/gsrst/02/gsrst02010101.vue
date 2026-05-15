@@ -1280,6 +1280,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_define .franchise_role_grid > article > ul > li > strong { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_franchise_define .franchise_role_grid :is(strong, p) { word-break: keep-all; }
 /* 상담 지역 */
+
+
 .sec_region_counsel :deep(.tab_wrap ul.type_02){justify-content: center;}
 .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item){color:#161616;font-weight:400;font-size: 1.8rem;line-height: 1.4;background-color:#fff;border:1px solid #161616;}
 .sec_region_counsel :deep(.tab_wrap ul.type_02 li.current .item){color:#fff;background-color:#161616;}
@@ -1381,6 +1383,16 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .section_header > p, .sub_header > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .section_header > p { margin-top: 12px; }
     section > .inner{padding-top:40px; padding-bottom: 40px;}
+    .sec_region_counsel :deep(.tab_wrap ul.type_02){padding-left:0;justify-content: flex-start;}
+    .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item){
+font-size: 1.6rem;
+line-height: 1.5;
+letter-spacing: -0.01em;
+
+    }
+    .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item)::after{
+        min-width:0;
+    }
     /* sec_hero */
     .sec_hero { max-height: none; min-height: 640px; padding: 50px 20px; border-radius: 20px; gap: 0; }
     .sec_hero > header { text-align: center; } 
@@ -1505,7 +1517,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_franchise_define .franchise_formula > div:nth-child(1) > p > span, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > span { margin-top: 0; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
     .sec_franchise_define .franchise_formula > div:nth-child(5) > p { text-align: left; }
     .sec_franchise_define .franchise_formula > div:nth-child(5) > p > strong { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_franchise_define .franchise_formula > div:nth-child(5) > p > span { margin-top: 0; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > p > span { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_define .franchise_role_grid { width: 100%; max-width: none; margin: 20px auto 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
     .sec_franchise_define .franchise_role_grid > article { padding: 20px 10px; }
     .sec_franchise_define .franchise_role_grid > article > header { padding: 0 0 24px; gap: 8px; align-items: flex-start; }
@@ -1536,16 +1548,30 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong{margin-top:4px;font-size: 2rem;line-height: 1.325;letter-spacing: -0.01em;}
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span {padding:6px;font-size: 1.2rem;line-height: 1.2;}
     
-    /* sec_region_counsel */
-    .sec_region_counsel > .section_header{margin-bottom:24px;}
-    .sec_region_counsel :deep(.tab_wrap){margin-bottom:32px;}
+    /* sec_region_counsel — 모바일(Figma 725:17800 선택 후) */
+    .sec_region_counsel > .section_header { margin-bottom: 24px; }
+    .sec_region_counsel :deep(.tab_wrap) { margin-bottom: 32px; }
     .sec_region_counsel .region_counsel_board { grid-template-columns: 1fr; gap: 10px; }
-    .sec_region_counsel .region_counsel_board > .region_counsel_map,
-    .sec_region_counsel .region_counsel_board > .region_counsel_side { height: auto; min-height: 297px; max-height: none; overflow: hidden; }
+    .sec_region_counsel .region_counsel_board > .region_counsel_map { height: auto; min-height: 297px; max-height: none; overflow: hidden; }
+    .sec_region_counsel .region_counsel_board > .region_counsel_side { height: auto; min-height: 297px; max-width: none; padding: 20px; box-sizing: border-box; }
+    .sec_region_counsel .region_counsel_board.is_staff > .region_counsel_side { min-height: 506px; padding: 20px 0 0; border:0;overflow: hidden; display: flex; flex-direction: column; }
+    .sec_region_counsel .region_counsel_panel > span.icon { width: 32px; height: 32px; }
+    .sec_region_counsel .region_counsel_panel > p.tit { margin-top: 16px; font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_panel > p.desc { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_staff_body { flex: 1 1 auto; min-height: 0; }
+    .sec_region_counsel .region_counsel_staff_body > header { margin: 0 0 24px; padding: 0 20px; flex-shrink: 0; gap: 8px; }
+    .sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; }
+    .sec_region_counsel .region_counsel_staff_body > header > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_staff_body > header > .badge { padding: 2px 10px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_staff_body > header > .btn_close { width: 20px; height: 20px; }
+    .sec_region_counsel .region_counsel_staff_body > ul { flex: 1 1 auto; min-height: 0; max-height: 430px; padding: 0; gap: 10px; overflow-y: auto; }
+    .sec_region_counsel .region_counsel_staff_body > ul > li > article { padding: 16px; border-radius: 12px; align-items: center; gap: 12px; }
+    .sec_region_counsel .region_counsel_staff_body .photo { width: 60px; height: 60px; }
+    .sec_region_counsel .region_counsel_staff_body .name { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+    .sec_region_counsel .region_counsel_staff_body .area { margin-top: 2px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_staff_body .phone { margin-top: 6px; gap: 8px; }
+    .sec_region_counsel .region_counsel_staff_body .phone a { font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 
-    .sec_region_counsel .region_counsel_board.is_staff > .region_counsel_side { overflow: hidden; }
-    .sec_region_counsel .region_counsel_staff_body > header { margin-bottom: 16px; }
-    
     .sec_diagram header{margin-bottom:32px;}
     /* quick_menu */
     .quick_menu { display: none; }
