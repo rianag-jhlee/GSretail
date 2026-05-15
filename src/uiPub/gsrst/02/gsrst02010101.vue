@@ -17,7 +17,7 @@
 
             <!-- GS25 브랜드 소개 -->
             <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 0">
-                <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg})` }">
+                <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg2})` }">
                     <header>
                         <span class="tit">{{ brandIntro.badge }}</span>
                         <h3>{{ brandIntro.title }}</h3>
@@ -316,7 +316,7 @@
                                     <span aria-hidden="true"></span>
                                     <p>
                                         <strong v-html="franchiseFormula.franchisee.title"></strong>
-                                        <span v-httml="franchiseFormula.franchisee.label"></span>
+                                        <span v-html="franchiseFormula.franchisee.label"></span>
                                     </p>
                                 </div>
                                 <span aria-hidden="true">+</span>
@@ -359,8 +359,8 @@
                 <!-- 상담 받고 싶은 지역 -->
                 <section class="sec_region_counsel" >
                     <header class="section_header ac">
-                        <span class="tit">{{ regionCounselPanel.badge }}</span>
                         <h2>{{ regionCounselPanel.title }}</h2>
+                        <p>{{ regionCounselPanel.lead }}</p>
                     </header>
                     <Tabs
                         :tab-items="regionCounselTabs"
@@ -368,41 +368,47 @@
                         v-model="activeRegionTab"
                         :tab-slide="true"
                     />
-                    <!-- 지역 선택 전 -->
-                    <div class="region_counsel_board">
-                        <div class="region_counsel_map" role="region" aria-label="지도 연동 예정 영역"></div>
-                        <aside class="region_counsel_panel">
-                            <span class="icon"></span>                            
-                            <p class="tit">{{ regionCounselEmpty.title }}</p>
-                            <p class="desc" v-html="regionCounselEmpty.desc"></p>
-                            <p class="hint">{{ regionCounselEmpty.hint }}</p>
-                        </aside>
-                    </div>
-                    <!--  지역 선택 후 -->
-                    <div class="region_counsel_staff">
-                        <div class="region_counsel_staff_map" role="region" aria-label="지도 연동 예정 영역"></div>
-                        <div class="region_counsel_staff_body">
-                            <header>
-                                <span class="ico_pin" aria-hidden="true"></span>
-                                <h3>{{ regionCounselStaff.regionName }}</h3>
-                                <span class="badge">{{ regionCounselStaff.countLabel }}</span>
-                                <span class="ico_tool" aria-hidden="true"></span>
-                            </header>
-                            <ul>
-                                <li v-for="(manager, mi) in regionCounselStaff.managers" :key="mi">
-                                    <article>
-                                        <span class="photo" aria-hidden="true"></span>
-                                        <div>
-                                            <p class="name">{{ manager.name }}</p>
-                                            <p class="area">{{ manager.area }}</p>
-                                            <p class="phone">
-                                                <span class="ico_phone" aria-hidden="true"></span>
-                                                <a :href="`tel:${manager.phoneDial}`">{{ manager.phone }}</a>
-                                            </p>
-                                        </div>
-                                    </article>
-                                </li>
-                            </ul>
+                    <!-- 지역 선택: 담당자 목록 닫기 시 region_counsel_panel. 지도 API 연동 후 onRegionCounselMapStubClick 제거 -->
+                    <div class="region_counsel_board" :class="{ is_staff: regionCounselBoardIsStaff }">
+                        <div
+                            class="region_counsel_map"
+                            role="region"
+                            aria-label="지도 연동 예정 영역"
+                            :tabindex="regionCounselBoardIsStaff ? -1 : 0"
+                            @click="onRegionCounselMapStubClick"
+                            @keydown.enter.prevent="onRegionCounselMapStubClick"
+                            @keydown.space.prevent="onRegionCounselMapStubClick"
+                        ></div>
+                        <div class="region_counsel_side">
+                            <aside v-show="!regionCounselBoardIsStaff" class="region_counsel_panel">
+                                <span class="icon"></span>
+                                <p class="tit">{{ regionCounselEmpty.title }}</p>
+                                <p class="desc" v-html="regionCounselEmpty.desc"></p>
+                                <p class="hint">{{ regionCounselEmpty.hint }}</p>
+                            </aside>
+                            <div v-show="regionCounselBoardIsStaff" class="region_counsel_staff_body">
+                                <header>
+                                    <span class="ico_pin" aria-hidden="true"></span>
+                                    <h3>{{ regionCounselStaff.regionName }}</h3>
+                                    <span class="badge">{{ regionCounselStaff.countLabel }}</span>
+                                    <button type="button" class="btn_close" aria-label="닫기" @click="closeRegionCounselStaff">닫기</button>
+                                </header>
+                                <ul>
+                                    <li v-for="(manager, mi) in regionCounselStaff.managers" :key="mi">
+                                        <article>
+                                            <span class="photo" aria-hidden="true"></span>
+                                            <div>
+                                                <p class="name">{{ manager.name }}</p>
+                                                <p class="area">{{ manager.area }}</p>
+                                                <p class="phone">
+                                                    <span class="ico_phone" aria-hidden="true"></span>
+                                                    <a :href="`tel:${manager.phoneDial}`">{{ manager.phone }}</a>
+                                                </p>
+                                            </div>
+                                        </article>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -438,8 +444,9 @@ import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
 import NumberedInfoList from "@/components/NumberedInfoList.vue";
-import imgBg from "@/assets/images/dummy/gsrst02010101_01.jpg";
-import imgStoreOpen from "@/assets/images/dummy/gsrst02010101_02.png";
+import imgBg from "@/assets/images/dummy/gsrst02010101_01.png";
+import imgBg2 from "@/assets/images/dummy/gsrst02010101_02.jpg";
+import imgStoreOpen from "@/assets/images/dummy/gsrst02010101_03.png";
 import imgProduct01 from "@/assets/images/dummy/gsrst02010101_p_01.png";
 import imgProduct02 from "@/assets/images/dummy/gsrst02010101_p_02.png";
 import imgProduct03 from "@/assets/images/dummy/gsrst02010101_p_03.png";
@@ -820,8 +827,8 @@ const franchiseDefineCard = {
 };
 
 const franchiseFormula = {
-    franchisee: { title: "성실한 운영", label: "가맹점 <br class='m_br' />(Franchisee)" },
-    franchisor: { title: "체계적 지원", label: "가맹본부 <br class='m_br' />(Franchisor)" },
+    franchisee: { title: "성실한 운영", label: "가맹점 (Franchisee)" },
+    franchisor: { title: "체계적 지원", label: "가맹본부 (Franchisor)" },
     result: { title: "함께 성장", label: "GS25 Franchise" },
 };
 
@@ -839,7 +846,7 @@ const franchiseRoleColumns = [
     },
     {
         title: "운영 지원",
-        label: "가맹본부 (Franchisor)",
+        label: "가맹본부br class='m_br' />(Franchisor)",
         lines: [
             "성공 창업을 위한 전략을 세워요",
             "교육과 노하우를 아낌없이 전해요",
@@ -851,7 +858,6 @@ const franchiseRoleColumns = [
 
 /** Figma 716:14623 — 상담 지역 (지도 API 미연동) */
 const regionCounselPanel = {
-    badge: "상담 지역",
     title: "지금 바로 상담을 받고 싶으신가요?",
     lead: "지도에서 원하시는 지역을 클릭하시면 해당 지역 담당자 정보를 바로 확인하실 수 있습니다.",
 };
@@ -866,6 +872,17 @@ const regionCounselTabs = [
     { item: "수도권 상세 - 경기" },
 ];
 const activeRegionTab = ref(0);
+/** true: region_counsel_side에 담당자 목록 / false: 지역 선택 전 안내 패널 */
+const regionCounselBoardIsStaff = ref(false);
+
+function closeRegionCounselStaff() {
+    regionCounselBoardIsStaff.value = false;
+}
+/** 지도 API 연동 전 퍼블용: 지도 영역 클릭 시 담당자 UI 표시(API 연동 시 삭제·지도 콜백으로 대체) */
+function onRegionCounselMapStubClick() {
+    if (regionCounselBoardIsStaff.value) return;
+    regionCounselBoardIsStaff.value = true;
+}
 
 /** 지역 선택 후 담당자 목록(샘플) */
 const regionCounselStaff = {
@@ -1057,7 +1074,7 @@ img {width:100%; height:auto; object-fit: cover; display: block;}
 .wrap_gsrst { position: relative; overflow-x: clip; }
 /* page_header */
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
-.page_header::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); content: ''; position: absolute; top: 0; left: 0; }
+.page_header::before { width: 100%; height: 100%; content: ''; position: absolute; top: 0; left: 0; }
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
 /* sec_body · 탭 · 공통 헤더 */
@@ -1076,7 +1093,7 @@ header.ac > .tit {margin-left:auto; margin-right:auto;}
 .section_header > h2 {  font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .section_header > p { margin-top: 16px;  font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 section + section { padding-top: 100px; }
-.tab_page { padding: 64px 0 200px; }
+.tab_page { padding: 100px 0 200px; }
 .list_dotted > li { padding-left: 12px; position: relative; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0;}
 .list_dotted > li + li { margin-top: 8px }
 .list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #161616; border-radius: 100%; position: absolute; top: 11px; left: 0 }
@@ -1231,7 +1248,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_define .franchise_define_card .sub_header .tit + h3{margin-top: 8px;}
 .sec_franchise_define .franchise_define_card .sub_header h3 + p{margin-top: 8px;color:#67676F;font-size: 1.8rem;line-height: 1.4;}
 
-.sec_franchise_define .franchise_formula { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 32px; }
+.sec_franchise_define .franchise_formula { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px; }
 .sec_franchise_define .franchise_formula > div { width: 320px; height: 136px; padding: 0 28px; border-radius: 999px; display: flex; align-items: center; justify-content: flex-start; gap: 16px; flex-shrink: 0; }
 .sec_franchise_define .franchise_formula > div:nth-child(1), 
 .sec_franchise_define .franchise_formula > div:nth-child(3) { background-color: #cfe4fc; }
@@ -1263,7 +1280,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_define .franchise_role_grid > article > ul > li > strong { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_franchise_define .franchise_role_grid :is(strong, p) { word-break: keep-all; }
 /* 상담 지역 */
-
 .sec_region_counsel :deep(.tab_wrap ul.type_02){justify-content: center;}
 .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item){color:#161616;font-weight:400;font-size: 1.8rem;line-height: 1.4;background-color:#fff;border:1px solid #161616;}
 .sec_region_counsel :deep(.tab_wrap ul.type_02 li.current .item){color:#fff;background-color:#161616;}
@@ -1273,21 +1289,24 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_region_counsel :deep(.tab_wrap) { margin: 0 0 64px; }
 .sec_region_counsel .region_counsel_note { margin: 0 0 28px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; display: flex; align-items: flex-start; gap: 4px; }
 .sec_region_counsel .region_counsel_note > span { flex-shrink: 0; }
-.sec_region_counsel .region_counsel_board { width: 100%; display: grid; grid-template-columns: 700px 700px; gap: 20px; align-items: stretch; }
-.sec_region_counsel .region_counsel_map, .sec_region_counsel .region_counsel_staff_map { width: 100%; min-height: 620px; background-color: #f2f8fd; border: 1px solid #d7d7df; border-radius: 12px;  }
-.sec_region_counsel .region_counsel_panel { padding: 40px; border: 1px solid #d7d7df; border-radius: 12px;  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.sec_region_counsel .region_counsel_board { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
+.sec_region_counsel .region_counsel_board > .region_counsel_map,
+.sec_region_counsel .region_counsel_board > .region_counsel_side { width: 100%; min-width: 0; height: 620px; min-height: 620px; overflow: hidden; border-radius: 12px; border: 1px solid #d7d7df; box-sizing: border-box; }
+.sec_region_counsel .region_counsel_board:not(.is_staff) .region_counsel_map { cursor: pointer; }
+.sec_region_counsel .region_counsel_map {  background-color: #f2f8fd; }
+.sec_region_counsel .region_counsel_side { min-width: 0; min-height: 0; padding: 40px; display: flex; flex-direction: column; }
+.sec_region_counsel .region_counsel_panel { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 0; }
 .sec_region_counsel .region_counsel_panel > span.icon{width:40px; height:40px;background-color:#67676f; display:block;}
 .sec_region_counsel .region_counsel_panel > p.tit { margin: 24px 0 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_region_counsel .region_counsel_panel > p.desc { margin: 8px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_region_counsel .region_counsel_panel > p.hint { margin: 8px 0 0; color: #107af2; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
 /* .sec_region_counsel :is(.section_header, .region_counsel_panel) :is(h2, p) { word-break: keep-all; } */
-.sec_region_counsel .region_counsel_staff { width: 100%; margin-top: 64px; display: grid; grid-template-columns: 700px 700px; gap: 20px; align-items: stretch; }
-.sec_region_counsel .region_counsel_staff_body { height: 620px; padding: 40px; border: 1px solid #d7d7df; border-radius: 12px;  display: flex; flex-direction: column; overflow: hidden; }
+.sec_region_counsel .region_counsel_staff_body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
 .sec_region_counsel .region_counsel_staff_body > header { margin: 0 0 32px; flex-shrink: 0; display: flex; align-items: center; gap: 8px; }
-.sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; flex-shrink: 0; background-color: #b8d4f0; border-radius: 6px; display: block; }
+.sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; flex-shrink: 0; background-color: #161616; display: block; }
 .sec_region_counsel .region_counsel_staff_body > header > h3 { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_region_counsel .region_counsel_staff_body > header > .badge { padding: 2px 10px; color: #107af2; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border-radius: 99px; display: inline-block; }
-.sec_region_counsel .region_counsel_staff_body > header > .ico_tool { width: 20px; height: 20px; margin-left: auto; flex-shrink: 0; background-color: #d9d9d9; display: block; }
+.sec_region_counsel .region_counsel_staff_body > header > .btn_close {width:20px; height: 20px;  margin-left:auto;background-color:#161616; border-radius:0; text-indent: -9999px;}
 .sec_region_counsel .region_counsel_staff_body > ul {  flex: 1 1 auto; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
 .sec_region_counsel .region_counsel_staff_body > ul > li > article { padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; gap: 24px;  }
 .sec_region_counsel .region_counsel_staff_body > ul > li > article > div { min-width: 0; flex: 1 1 auto; }
@@ -1321,13 +1340,26 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     /* sec_band */
     .sec_band > .inner > .link_grid { flex-direction: column; }
     /* sec_overlap */
-    .sec_overlap .section_header h2{font-size: 2.4rem;}
+    .sec_overlap .section_header h2 { font-size: 2.4rem; }
     /* sec_stack */
-    .sec_stack > .dual_panel{flex-direction: column;}
+    .sec_stack > .dual_panel { flex-direction: column; }
     /* sec_tri_grid */
     .sec_tri_grid > ul { grid-template-columns: 1fr; gap: 20px; }
     /* sec_convenience_guide */
     .sec_convenience_guide .guide_steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    /* sec_franchise_define — 그리드만 모바일형, 형태·폰트는 PC 유지 */
+    .sec_franchise_define .franchise_define_card { width: 100%; max-width: 100%; min-width: 0; padding: 40px 24px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula { display: grid; flex-wrap: unset; justify-content: unset; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-rows: auto auto auto; gap: 16px 8px; align-items: center; justify-items: stretch; width: 100%; max-width: 100%; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: stretch; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(2) { grid-column: 2; grid-row: 1; justify-self: center; align-self: center; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(3) { grid-column: 3; grid-row: 1; justify-self: stretch; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(4) { grid-column: 1 / -1; grid-row: 2; justify-self: center; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) { grid-column: 1 / -1; grid-row: 3; justify-self: stretch; width: 100%; max-width: none; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div { width: 100%; max-width: 100%; height: 136px; min-height: 136px; padding: 0 28px; flex-shrink: unset; flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) { max-width: none; }
+    .sec_franchise_define .franchise_formula > div > span { width: 72px; height: 72px; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p, .sec_franchise_define .franchise_formula > div:nth-child(3) > p { text-align: left; }
+    .sec_franchise_define .franchise_role_grid { margin-top: 32px; }
 }
 /* Mobile */
 @media (max-width: 768px) {
@@ -1433,7 +1465,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_tri_grid > ul > li > dl > dd + dt { margin-top: 32px; }
     /* sec_diagram — 모바일(Figma 716:17741), clamp·cqw 미사용·폰트 rem(1rem=10px)·치수 px */
     .sec_diagram .section_header p{color:#67676F;}
-    .sec_diagram > .diagram_shell { max-width: 335px; width: 100%; margin: 0 auto; padding: 100px 24px 24px; gap: 24px; border-radius: 999px; flex-direction: column; align-items: stretch; box-sizing: border-box; }
+    .sec_diagram > .diagram_shell { max-width: 335px; width: 100%; margin: 0 auto; padding: 100px 24px 24px; gap: 24px; border-radius: 999px; flex-direction: column; align-items: stretch;  }
     .sec_diagram > .diagram_shell > .diagram_track { order: 1; flex: 0 0 auto; width: 100%; min-width: 0; }
     .sec_diagram > .diagram_shell > .diagram_track .diagram_ring { border-radius: 999px; }
     .sec_diagram > .diagram_shell > article.node_aside { order: 0; width: 100%; max-width: none; flex: 0 0 auto; text-align: center; }
@@ -1452,34 +1484,28 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > p { margin-top: 6px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.14px; }
     /* sec_convenience_guide */
     .sec_diagram + .sec_convenience_guide { margin-top: 60px; }
-    /* sec_franchise_define — 모바일(Figma 716:17765) */
-    .sec_franchise_define .franchise_define_card { padding: 24px 16px 24px; border-radius: 12px; }
+    /* sec_franchise_define — 카드·공식 그리드(형태·폰트 PC 유지) */
+    .sec_franchise_define .franchise_define_card { padding: 24px 16px; border-radius: 12px; }
     .sec_franchise_define .franchise_define_card .sub_header { margin-bottom: 20px; }
-    .sec_franchise_define .franchise_define_card .sub_header > .tit { min-height: 28px; padding: 4px 12px; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; box-sizing: border-box; }
+    .sec_franchise_define .franchise_define_card .sub_header > .tit { min-height: 28px; padding: 4px 12px; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_define .franchise_define_card .sub_header > .tit + h3 { margin-top: 8px; }
     .sec_franchise_define .franchise_define_card .sub_header > h3 + p { margin-top: 8px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-    .sec_franchise_define .franchise_formula { display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: auto auto auto; gap: 0 1.5px; align-items: stretch; justify-items: stretch; width: 100%; margin: 0 auto; }
-    .sec_franchise_define .franchise_formula > div:nth-child(1) { grid-column: 1; grid-row: 1; width: 100%; min-width: 0; }
-    .sec_franchise_define .franchise_formula > span:nth-child(2) { grid-column: 2; grid-row: 1; justify-self: center; align-self: center; }
-    .sec_franchise_define .franchise_formula > div:nth-child(3) { grid-column: 3; grid-row: 1; width: 100%; min-width: 0; }
-    .sec_franchise_define .franchise_formula > span:nth-child(4) { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
-    .sec_franchise_define .franchise_formula > div:nth-child(5) { grid-column: 1 / -1; grid-row: 3; justify-self: stretch; width: 100%; max-width: none; min-height: 88px; height: auto; padding: 12px 16px; flex-direction: row; align-items: center; justify-content: center; gap: 16px; box-sizing: border-box; }
-    .sec_franchise_define .franchise_formula > div:nth-child(1), .sec_franchise_define .franchise_formula > div:nth-child(3) { width: 100%; min-width: 0; max-width: none; height: auto; aspect-ratio: 1 / 1; padding: 8px; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; }
-    .sec_franchise_define .franchise_formula > div:nth-child(1) > span, 
-    .sec_franchise_define .franchise_formula > div:nth-child(3) > span { width: 40px; height: 40px; }
-    .sec_franchise_define .franchise_formula > div:nth-child(5) > span { width: 50px; height: 50px; }
-    .sec_franchise_define .franchise_formula > div:nth-child(1) > p,
-    .sec_franchise_define .franchise_formula > div:nth-child(3) > p { text-align: center; }
-    .sec_franchise_define .franchise_formula > div:nth-child(5) > p { margin: 0; text-align: left; }
-    .sec_franchise_define .franchise_formula > div:nth-child(1) > p > strong,
-    .sec_franchise_define .franchise_formula > div:nth-child(3) > p > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-    .sec_franchise_define .franchise_formula > div:nth-child(1) > p > span,
-    .sec_franchise_define .franchise_formula > div:nth-child(3) > p > span { margin-top: 0; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    /* franchise_formula — 모바일(Figma 725:17719) */
+    .sec_franchise_define .franchise_formula { display: grid; flex-wrap: unset; justify-content: unset; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-rows: auto auto auto; row-gap: 0; column-gap: 1.5px; align-items: center; justify-items: stretch; width: 100%; max-width: 100%; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: stretch; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(2) { grid-column: 2; grid-row: 1; justify-self: center; align-self: center; min-width: 0; color: #107af2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula > div:nth-child(3) { grid-column: 3; grid-row: 1; justify-self: stretch; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(4) { grid-column: 1 / -1; grid-row: 2; justify-self: center; min-width: 0; margin-top: 12px; color: #107af2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) { grid-column: 1 / -1; grid-row: 3; justify-self: stretch; width: 100%; max-width: none; min-width: 0; min-height: 88px; height: auto; padding: 12px 16px; flex-direction: row; align-items: center; justify-content: center; gap: 16px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1), .sec_franchise_define .franchise_formula > div:nth-child(3) { width: 100%; max-width: none; height: auto; aspect-ratio: 1 / 1; padding: 8px; flex-shrink: unset; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div > span { width: 40px; height: 40px; flex-shrink: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > span { width: 50px; height: 50px; border-radius: 99px; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p, .sec_franchise_define .franchise_formula > div:nth-child(3) > p { text-align: center; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p > strong, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p > span, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > span { margin-top: 0; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > p { text-align: left; }
     .sec_franchise_define .franchise_formula > div:nth-child(5) > p > strong { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_franchise_define .franchise_formula > div:nth-child(5) > p > span { margin-top: 4px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_franchise_define .franchise_formula > span { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_franchise_define .franchise_formula > div:nth-child(3) > span::after { border-radius: 12px; }
-    .sec_franchise_define .franchise_formula > div:nth-child(5) > span::after { content: ""; width: 32px; height: 32px; background-color: rgba(255, 255, 255, 0.35); border-radius: 8px; display: block; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > p > span { margin-top: 0; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_define .franchise_role_grid { width: 100%; max-width: none; margin: 20px auto 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
     .sec_franchise_define .franchise_role_grid > article { padding: 20px 10px; }
     .sec_franchise_define .franchise_role_grid > article > header { padding: 0 0 24px; gap: 8px; align-items: flex-start; }
@@ -1509,6 +1535,16 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide)  { width: 85.333vw; height: auto; flex-shrink: 0; }
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong{margin-top:4px;font-size: 2rem;line-height: 1.325;letter-spacing: -0.01em;}
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span {padding:6px;font-size: 1.2rem;line-height: 1.2;}
+    
+    /* sec_region_counsel */
+    .sec_region_counsel > .section_header{margin-bottom:24px;}
+    .sec_region_counsel :deep(.tab_wrap){margin-bottom:32px;}
+    .sec_region_counsel .region_counsel_board { grid-template-columns: 1fr; gap: 10px; }
+    .sec_region_counsel .region_counsel_board > .region_counsel_map,
+    .sec_region_counsel .region_counsel_board > .region_counsel_side { height: auto; min-height: 297px; max-height: none; overflow: hidden; }
+
+    .sec_region_counsel .region_counsel_board.is_staff > .region_counsel_side { overflow: hidden; }
+    .sec_region_counsel .region_counsel_staff_body > header { margin-bottom: 16px; }
     
     .sec_diagram header{margin-bottom:32px;}
     /* quick_menu */
