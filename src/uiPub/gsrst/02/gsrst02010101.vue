@@ -846,7 +846,7 @@ const franchiseRoleColumns = [
     },
     {
         title: "운영 지원",
-        label: "가맹본부br class='m_br' />(Franchisor)",
+        label: "가맹본부<br class='m_br' />(Franchisor)",
         lines: [
             "성공 창업을 위한 전략을 세워요",
             "교육과 노하우를 아낌없이 전해요",
