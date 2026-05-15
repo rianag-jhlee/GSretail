@@ -1,6 +1,6 @@
 <template>
     <div class="brand">
-        <section ref="sectionRef" class="sec_brand_visual">
+        <section ref="sectionRef" class="sec_brand_visual top_visual">
             <div class="sticky">
                 <div ref="bgWrapRef" class="bg_wrap">
                     <div class="bg"></div>

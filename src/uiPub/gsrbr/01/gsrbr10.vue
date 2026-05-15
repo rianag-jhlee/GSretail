@@ -1,6 +1,6 @@
 <template>
     <div class="gsrbr10" v-if="t">
-        <section class="visual_section" ref="visualSection">
+        <section class="visual_section top_visual" ref="visualSection">
             <div class="visual_img" ref="visualImg">
                 <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
             </div>
