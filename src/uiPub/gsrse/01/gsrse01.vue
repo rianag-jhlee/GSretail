@@ -852,7 +852,6 @@ export default {
 .radio_wrap {display:flex; gap:20px;}
 .input_wrap {display:flex; align-items:center; justify-content:flex-end; gap:8px;}
 .input_wrap.type-radio {justify-content:flex-start; flex:auto;}
-.input_wrap.adress_wrap {flex-direction:column;}
 .listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
 .listening_form_area .consent_tit {margin-bottom: 24px; font-size: 24px; font-weight: 700; display: block; }
 .listening_form_area .consent_list {padding-bottom:24px;}
@@ -894,6 +893,7 @@ export default {
 .listening_form_wrap .department em { font-weight: 700; }
 .form_container .btn-wrap {display:flex; justify-content:flex-end; gap:8px;}
 .form_container .btn-wrap * {width:134px;}
+.input_wrap.type-radio {width:auto !important;}
 .w428 {width:428px; display:inline-block;}
 
 /* 9. 반응형 미디어 쿼리 */
@@ -963,5 +963,8 @@ export default {
     .listening_form_wrap .input_complex, .listening_form_wrap .input_complex .textarea_wrap {width:100%; max-width:100%;}
     .listening_form_wrap .department {display:flex; flex-direction:column; gap:10px;}
     .listening_form_wrap .department em {width:50px;}
+
+    /* 상담신청 */
+    .input_wrap.adress_wrap {flex-direction:column;}
 }
 </style>

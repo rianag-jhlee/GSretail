@@ -1,20 +1,29 @@
 <template>
     <div class="gsrbr1101">
-        <div class="visual_wrap">
-            <div class="cont_inner">
-                <div class="intro_content">
-                    <div class="text_box">
-                        <h2 class="title">{{ t?.MainTitle }}</h2>
-                        <div class="desc_box">
-                            <p class="summary">{{ t?.MainSummary }}</p>
-                            <p class="desc" v-html="t?.MainDesc"></p>
-                        </div>
-                    </div>
+        <section class="visual_section" ref="visualSection">
+            <div class="visual_img" ref="visualImg">
+                <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
+            </div>
+            <div class="visual_content">
+                <div class="text_box cont_inner">
+                    <span>{{ t.Visual.subContent_1 }}</span>
+                    <span>{{ t.Visual.subContent_2 }}</span>
                 </div>
             </div>
-        </div>
+        </section>
 
         <div class="body_wrap">
+            <div class="cont_area">
+                <div class="cont_inner">
+                    <ul>
+                        <li>
+                            <p>{{ t.SubContent_1 }}</p>
+                            <p v-html="t.SubContent_2"></p>
+                            <p v-html="t.SubContent_3"></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="cont_inner">
                 <div class="category_tabs">
                     <Tabs 
@@ -38,38 +47,51 @@
                 <div class="detail_content">
                     <section v-if="CTabIdx === 0 && t?.SubwayData" class="tab_content subway_content">
                         <div class="inner_cont">
-                            <div class="visual_img">
-                                <img :src="t.MallData[0].mainImg" alt="지하철 상업시설" />
-                            </div>
 
                             <div class="info_section">
                                 <h3 class="content_title">{{ t.SubwayData.title }}</h3>
-                                <div class="info_grid">
-                                    <div v-for="(info, idx) in t.SubwayData.introList" :key="idx" class="info_item">
-                                        <h4 class="sub_title">{{ info.subTitle }}</h4>
-                                        <div class="text_list ">
-                                            <p class="text_item" v-for="(txt, tIdx) in info.desc" :key="tIdx" v-html="txt"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="route_map_wrap">
-                                <div class="route_map_img">
-                                    <img :src="t.SubwayData.routeMapImg" alt="신분당선 노선도 및 연락처" />
-                                </div>
-                            </div>
-                            <div class="contact_info_wrap">
                                 <div class="contact_left">
                                     <div class="info_item">
-                                        <i class="ico_call"><span class="blind">전화번호</span></i>
+                                        <em>전화</em>
                                         <span class="val">{{ t.SubwayData.contact.phone }}</span>
                                     </div>
                                     <div class="info_item">
-                                        <i class="ico_mail"><span class="blind">이메일</span></i>
+                                        <em>이메일</em>
                                         <span class="val">{{ t.SubwayData.contact.email }}</span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="visual_img">
+                                <img :src="isMobile ? t.SubwayData.imgMo : t.SubwayData.img" :alt="t.SubwayData.alt" />
+                            </div>
+
+                            <div class="tm-principles-container res-swiper-container">
+                                <swiper
+                                    :slides-per-view="'auto'"
+                                    :space-between="0"
+                                    :breakpoints="{
+                                        768: {
+                                            allowTouchMove: false
+                                        }
+                                    }"
+                                    class="tm-principles-swiper"
+                                >
+                                    <swiper-slide 
+                                        v-for="(p, pIdx) in t.SubwayData.principles" 
+                                        :key="'principle-' + pIdx" 
+                                        class="tm-principle-card res-slide-item"
+                                    >
+                                        <div class="tm-card-header">
+                                            <span class="tm-card-num">0{{ pIdx + 1 }}</span>
+                                            <strong class="tm-card-tit">{{ p.title }}</strong>
+                                        </div>
+                                        <div class="tm-card-body">
+                                            <p class="tm-card-main-text">{{ p.desc }}</p>
+                                            <p class="tm-card-sub-text">{{ p.subDesc }}</p>
+                                        </div>
+                                        <div v-if="pIdx < t.SubwayData.principles.length - 1" class="divider pc-only"></div>
+                                    </swiper-slide>
+                                </swiper>
                             </div>
 
                             <div class="lease_condition_section">
@@ -120,11 +142,11 @@
                                     <div class="contact_info_wrap">
                                         <div class="contact_left">
                                             <div v-if="mall.contact.phone" class="info_item">
-                                                <i class="ico_call"><span class="blind">전화번호</span></i>
+                                                <span>전화번호</span>
                                                 <span class="val">{{ mall.contact.phone }}</span>
                                             </div>
                                             <div v-if="mall.contact.email" class="info_item">
-                                                <i class="ico_mail"><span class="blind">이메일</span></i>
+                                                <span>이메일</span>
                                                 <span class="val">{{ mall.contact.email }}</span>
                                             </div>
                                         </div>
@@ -189,20 +211,34 @@ export default {
         return {
             CTabIdx: 0,
             SUBTabIdx: 0,
+            isMobile: false,
             langData: {
                 ko: {
-                    MainTitle: `개발/임대 사업`,
-                    MainSummary: `GS리테일의 부동산 개발 및 임대 사업부입니다.`,
-                    MainDesc: `상업용 부동산 개발부터 임대, 관리까지 토탈 솔루션을 제공합니다.<br />최적의 입지 분석과 수익성 높은 부동산 포트폴리오를 구축합니다.`,
+                    Visual: { // 대문자 유지
+                        img: require("@/assets/images/dummy/gsrbr1101.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr1101_mo.png"),
+                        alt: "GS THE FRESH 메인 비주얼",
+                        subContent_1: "부동산",
+                        subContent_2: "개발 및 임대",
+                    },
+                    SubContent_1: `GS리테일의 부동산 개발 및 임대 사업부입니다.`,
+                    SubContent_2: `상업용 부동산 개발부터 임대, 관리까지<br/> 토탈 솔루션을 제공합니다.`,
+                    SubContent_3: `최적의 입지 분석과<br/> 수익성 높은 부동산 포트폴리오를 구축합니다.`,
                     Tabs1: [{ item: "지하철" }, { item: "쇼핑몰" }],
                     Tabs2_Mall: [{ item: "안녕인사동" }, { item: "구로 지밸리몰" }, { item: "판교 파미어스몰" }, { item: "동부산 미식일상" }],
                     SubwayData: {
-                        mainImg: require("@/assets/images/dummy/gsrbr1101_subway.png"),
+                        img: require("@/assets/images/dummy/gsrbr1101_subway.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr1101_subway_mo.png"),
                         title: `신분당선 1, 2단계 임대상가 모집`,
                         introList: [
                             { subTitle: `최단시간 강남접근`, desc: [`01. 강남역 ~ 정자역 16분대 운행 (기존 분당선 대비 약 30분 단축)`, `02. 광역버스 및 자가용 이용 통근자의 교통 체증 난(難) 해소`] },
                             { subTitle: `풍부한 유동성`, desc: [`01. 총 6개역 중 4개 역사가 환승역사 (강남, 양재, 판교, 정자)`, `02. 강남 최고의 오피스/상업 밀집지인 강남역 연결 (일 유동객 35만명)`] },
                             { subTitle: `최적화된 역사 환경`, desc: [`01. 현대적 감각의 인테리어 구현 및 높은 층고(3.6M)로 개방감 확보`] }
+                        ],
+                        principles: [
+                            { title: "최단시간 강남접근", desc: [`강남역 ~ 정자역 16분대 운행 (기존 분당선 대비 약 30분 단축)`, `광역버스 및 자가용 이용 통근자의 교통 체증 난(難) 해소`] },
+                            { title: "풍부한 유동성", desc:[`총 6개역 중 4개 역사가 환승역사 (강남, 양재, 판교, 정자)`, `강남 최고의 오피스/상업 밀집지인 강남역 연결 (일 유동객 35만명)`] },
+                            { title: "최적화된 역사 환경", desc: [`현대적 감각의 인테리어 구현 및 높은 층고(3.6M)로 개방감 확보`]},
                         ],
                         routeMapImg: require("@/assets/images/dummy/gsrbr1101_subway.png"),
                         contact: { phone: `02-2006-3198`, email: `hyungwook.lim@gsretail.com / gunbeom@gsretail.com` },
@@ -294,6 +330,13 @@ export default {
             return this.langData[this.lang] || this.langData.ko;
         }
     },
+    mounted() {
+        this.checkMobile();
+        window.addEventListener('resize', this.checkMobile);
+    },
+    beforeUnmount() {
+        window.removeEventListener('resize', this.checkMobile);
+    },
     methods: {
         onTabChange1(idx) {
             this.CTabIdx = idx;
@@ -304,7 +347,10 @@ export default {
         },
         handleBack() {
             this.$router.back();
-        }
+        },
+        checkMobile() {
+            this.isMobile = window.innerWidth < 768;
+        },
     },
 };
 </script>
@@ -314,31 +360,33 @@ export default {
 
 .gsrbr1101 { width: 100%; position: relative; display: block; }
 
-/* Visual Section */
-.visual_wrap { width: 100%; padding: 200px 0; background-color: #f8f8f8; position: relative; }
-.intro_content { display: flex; align-items: center; justify-content: space-between; }
-.text_box .title { color: #000; font-size: 56px; font-weight: 700; line-height: 1.3; }
-.text_box .desc_box { margin-top: 48px; }
-.text_box .summary, 
-.text_box .desc { color: #161616; font-size: 28px; font-weight: 500; line-height: 1.6; }
-.info_grid {margin-top:60px;}
-.info_grid .info_item {margin-bottom:40px; flex-direction:column; align-items:flex-start;}
 
-/* Body Section */
-.body_wrap { width: 100%; padding: 100px 0 140px; position: relative; }
+/* Visual Section */
+.visual_section { width:100%; position: relative; overflow: hidden; }
+.visual_img { width: 100%; height: auto; }
+.visual_img img {width: 100%; display: block; }
+.visual_content {width: 100%; position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 2; }
+.text_box span {margin-bottom:10px; color:#fff; font-size:72px; font-weight:700; display: block;  }
+
+/* body_wrap Section */
+.body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
+.body_wrap .cont_area .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
+.body_wrap .cont_area .cont_inner ul {display:flex; justify-content:space-between; align-items:flex-end;}
+.body_wrap :deep(.cont_area) .cont_inner ul li p {color:#161616; font-size:24px; font-weight:600; line-height:1.;}
+.body_wrap :deep(.cont_area) .cont_inner ul li p br {display:none;}
+.body_wrap .cont_area .cont_inner ul li a {color:#161616; font-size:18px; display:flex; align-items:center;}
 .sub_tabs { margin-top: 24px; }
 
 /* Content Section */
-.detail_content { margin-top: 120px; }
+.detail_content { margin-top:64px; }
 .tab_content { width: 100%; display: block; }
 .inner_cont { width: 100%; position: relative; }
 
-.visual_img { width: 100%; height: 340px; background-color: #eee; border-radius: 12px; overflow: hidden; }
+.visual_img { width: 100%;}
 .visual_img img { width: 100%; height: 100%; object-fit: cover; }
-.visual_img .no_img { display: flex; align-items: center; justify-content: center; height: 100%; color: #999; font-size: 20px; }
 
-.info_section { margin-top: 40px; }
-.content_title { color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
+.info_section { margin-bottom:100px; }
+.content_title { margin-bottom:16px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
 .info_box { margin-top: 16px; }
 .sub_title { color: #161616; font-size: 24px; font-weight: 700; }
 .text_list { margin-top: 16px; }
@@ -374,8 +422,8 @@ export default {
 .contact_info_wrap { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; }
 .contact_left { display: flex; gap: 40px; }
 .info_item { display: flex; align-items: center; gap: 8px; }
-.info_item i { width: 24px; height: 24px; background-color: red; background-size: contain; background-repeat: no-repeat; display: inline-block; }
-.info_item .val { color: #161616; font-size: 1.8rem; }
+.info_item em {color:#67676F; font-size:18px; font-weight:700;}
+.info_item span {color:#67676F; font-size:16px;}
 .sns_right { display: flex; gap: 10px; }
 /* common.css로 이동
 .btn_sns { width: 40px; height: 40px; background-color: #f8f8f8; background-size: 24px; background-repeat: no-repeat; background-position: center; border-radius: 50%; display: block; }
@@ -397,7 +445,6 @@ export default {
 .btn_list_back span { color: #161616; font-size: 20px; display: flex; align-items: center; gap: 12px; }
 .btn_list_back span::before { width: 16px; height: 16px; background-color: red; content: ''; display: inline-block; }
 .ac { text-align: center; }
-.blind { width: 1px; height: 1px; clip: rect(0,0,0,0); overflow: hidden; position: absolute; }
 
 /* Responsive Media Queries */
 @media screen and (max-width: 1024px) {
@@ -406,9 +453,7 @@ export default {
     .text_box .title { font-size: 36px; }
     .text_box .desc_box { margin-top: 24px; }
     .text_box .summary, .text_box .desc { font-size: 1.8rem; line-height: 1.5; }
-    .body_wrap { padding: 60px 0 80px; }
     .detail_content { margin-top: 60px; }
-    .visual_img { height: 220px; }
     .content_title { font-size: 28px; }
     .sub_title { font-size: 20px; }
     .text_item { font-size: 1.8rem; line-height: 1.6; }
@@ -424,6 +469,11 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+    .body_wrap .cont_area {padding:140px 0;}
+    .body_wrap .cont_area .cont_inner ul li p {font-size:16px;}
+    .body_wrap .cont_area .cont_inner ul li p {margin-bottom:20px;}
+    .body_wrap :deep(.cont_area) .cont_inner ul li p br {display:none;}
+    .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .text_box .title { font-size: 30px; letter-spacing: -0.5px; }
     .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b) { font-size: 16px; }
     .mall-type-2 .text_item :deep(b br) , .mall-type-3 .text_item :deep(b br) {display:none;}
