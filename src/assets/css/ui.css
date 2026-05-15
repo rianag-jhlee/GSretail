@@ -36,6 +36,7 @@
 
 #header h1 {margin-top:-8px; margin-right:75px;}
 #header h1 a {width:151px; padding-top:29.139072%; font-size:0; background:url('@/assets/images/common/h1_logo.png') 50% no-repeat; background-size:cover; display:block;}
+#header.head_black {background-color:#fff;}
 #header.head_black h1 a {background-image:url('@/assets/images/common/h1_logo_black.png');}
 #header.head_black nav ul.depth1 > li > a {color:#111;}
 
