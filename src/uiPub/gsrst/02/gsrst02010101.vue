@@ -1175,6 +1175,10 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .highlight_block > .highlight_body > div > h4 { margin-bottom: 24px;  font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_stack > .highlight_block > .highlight_body > div > ul { margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 20px; }
 .sec_stack > .highlight_block > .highlight_body > div > ul > li { flex: 0 0 234px; min-width: 0; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li article figure img{border-radius:12px 12px 0 0;}
+.sec_stack > .highlight_block > .highlight_body > div > ul > li article figcaption{padding:24px; background-color:#fff; border-radius:0 0 12px 12px;}
+.sec_stack > .highlight_block > .highlight_body > div > ul > li article figcaption p{color: #67676F;font-size: 1.2rem;line-height: 1.2;}
+.sec_stack > .highlight_block > .highlight_body > div > ul > li article figcaption strong{margin-top:4px;font-size: 1.8rem;line-height: 1.5; display: block;}
 .sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) { height: 100%; background-color: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
 .sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure { width: 100%; height: 100%; margin: 0; display: flex; flex-direction: column; }
 .sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure > img { width: 100%; height: 200px; object-fit: contain; display: block; }
@@ -1456,9 +1460,15 @@ letter-spacing: -0.01em;
     .sec_stack > .highlight_block > .highlight_body > div > h4 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_stack .swiper_edge { width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px; }
     .sec_stack > .highlight_block .swiper_edge { overflow: hidden; touch-action: pan-x; }
+    /* highlight_swiper — 모바일(Figma 725:17358) */
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-wrapper) { align-items: stretch; }
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) { width: 62.4vw; height: auto; flex-shrink: 0; }
-    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > strong { margin-top: 4px; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article { width: 100%; min-height: 285px; background-color: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure { width: 100%; margin: 0; display: flex; flex-direction: column; background-color: #fff; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > img { width: 100%; height: 200px; object-fit: contain; background-color: #fff; border-radius: 12px 12px 0 0; display: block; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption { min-height: 85px; padding: 20px 24px; box-sizing: border-box; background-color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > p { margin: 0; color: #67676f; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > strong { margin-top: 4px; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
     .sec_stack > .dual_panel > article{padding: 32px 20px;}
     /* sec_icon_grid */
     .sec_icon_grid > .inner > .icon_grid { grid-template-columns: 1fr; gap: 10px; }
