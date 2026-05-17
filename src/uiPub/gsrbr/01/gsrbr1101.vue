@@ -50,14 +50,16 @@
 
                             <div class="info_section">
                                 <h3 class="content_title">{{ t.SubwayData.title }}</h3>
-                                <div class="contact_left">
+                                <div class="contact_left pc">
                                     <div class="info_item">
                                         <em>전화</em>
                                         <span class="val">{{ t.SubwayData.contact.phone }}</span>
                                     </div>
                                     <div class="info_item">
                                         <em>이메일</em>
-                                        <span class="val">{{ t.SubwayData.contact.email }}</span>
+                                        <span class="val">{{ t.SubwayData.contact.email1 }}</span>
+                                        <span class="val">{{ t.SubwayData.contact.email2 }}</span>
+                                        <span class="val">{{ t.SubwayData.contact.email3 }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -92,6 +94,22 @@
                                         <div v-if="pIdx < t.SubwayData.principles.length - 1" class="divider pc-only"></div>
                                     </swiper-slide>
                                 </swiper>
+                            </div>
+
+                            <div class="tell_area mo">
+                                <h3 class="content_title">{{ t.SubwayData.contact.연락처 }}</h3>
+                                <ul>
+                                    <li>
+                                        <strong>{{ t.SubwayData.contact.전화 }}</strong>
+                                        <p>{{ t.SubwayData.contact.phone }}</p>
+                                    </li>
+                                    <li>
+                                        <strong>{{ t.SubwayData.contact.이메일 }}</strong>
+                                        <p>{{ t.SubwayData.contact.email1 }}</p>
+                                        <p>{{ t.SubwayData.contact.email2 }}</p>
+                                        <p>{{ t.SubwayData.contact.email3 }}</p>
+                                    </li>
+                                </ul>
                             </div>
 
                             <div class="lease_condition_section">
@@ -241,7 +259,15 @@ export default {
                             { title: "최적화된 역사 환경", desc: [`현대적 감각의 인테리어 구현 및 높은 층고(3.6M)로 개방감 확보`]},
                         ],
                         routeMapImg: require("@/assets/images/dummy/gsrbr1101_subway.png"),
-                        contact: { phone: `02-2006-3198`, email: `hyungwook.lim@gsretail.com / gunbeom@gsretail.com` },
+                        contact: { 
+                            연락처:"연락처",
+                            전화:"전화",
+                            phone: `02-2006-3198`, 
+                            이메일:"이메일",
+                            email1: `anyounginsadong@anyounginsadong.com` ,
+                            email2: `ha3kim1@gsretail.com` ,
+                            email3: `gsseri@gsretail.com` 
+                        },
                         conditions: [
                             {
                                 name: `임대상가`, img: require("@/assets/images/dummy/subway_shop.png"),
@@ -359,6 +385,7 @@ export default {
 /* 1. 넓이 2. 외부여백 3. 내부여백 4. 폰트 5. 배경 6. 테두리 7. 정렬 8. 위치 9. 블록 10. 변형 */
 
 .gsrbr1101 { width: 100%; position: relative; display: block; }
+.mo {display:none;}
 
 
 /* Visual Section */
@@ -469,6 +496,8 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+    .pc {display:none;}
+    .mo {display:block;}
     .body_wrap .cont_area {padding:140px 0;}
     .body_wrap .cont_area .cont_inner ul li p {font-size:16px;}
     .body_wrap .cont_area .cont_inner ul li p {margin-bottom:20px;}
