@@ -1,6 +1,6 @@
 <template>
     <div class="main-container">
-        <div class="title_wrap tac">
+        <div class="title_wrap tac top_visual">
             <h2 class="page_title">{{ t.MainTitle }}</h2>
             <p class="visual_sub">{{ t.MainsubTitle }}</p>
         </div>

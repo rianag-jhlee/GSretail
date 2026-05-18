@@ -186,12 +186,23 @@ export default {
         let lastScrollY = 0;
 
         const handleScroll = () => {
-            const header = document.getElementById("header");
+            const header = document.getElementById("header");            
+            const visual = document.querySelector('.top_visual');
             const currentScrollY = window.scrollY;
 
             if (!header) return;
 
-            // 1. [추가] 최상단 바운스 방지: 스크롤 위치가 0보다 작으면(iOS 반동) 무조건 노출
+            // 1. [추가] 특정 영역(visual) 기준 검정색 테마 적용
+            if (visual) {
+                const head_black_threshold = visual.offsetHeight - (header.offsetHeight * 0.5);
+                if (currentScrollY > head_black_threshold) {
+                    header.classList.add("head_black");
+                } else {
+                    header.classList.remove("head_black");
+                }
+            }
+
+            // 2. [추가] 최상단 바운스 방지: 스크롤 위치가 0보다 작으면(iOS 반동) 무조건 노출
             if (currentScrollY <= 0) {
                 header.classList.remove("hide");
                 lastScrollY = currentScrollY;
@@ -202,7 +213,7 @@ export default {
             const innerHeight = window.innerHeight;
             const buffer = 20;
 
-            // 2. [추가] 스크롤 감도 설정: 최소 5px 이상 움직였을 때만 동작 (미세한 반동 무시)
+            // 3. [추가] 스크롤 감도 설정: 최소 5px 이상 움직였을 때만 동작 (미세한 반동 무시)
             const tolerance = 5;
             const diff = currentScrollY - lastScrollY;
 
