@@ -71,7 +71,7 @@
             <!-- 차별화된 경쟁력 -->
             <div class="tab_page" v-if="activeD1 === 0 && activeD2 === 1">
                 <section class="sec_overlap">
-                    <header class="section_header ac">
+                    <header class="section_header ac no_desc">
                         <h2 v-html="competitivePanel.title"></h2>
                     </header>
                     <ul class="overlap_grid">
@@ -416,11 +416,10 @@
             <!-- //편의점 창업 이해 -->
             <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 3">
                 <section class="sec_startup_faq">
-                    <header class="section_header ac">
+                    <header class="section_header ac no_desc">
                         <h2>{{ startupFaqPanel.title }}</h2>
-                        <p>{{ startupFaqPanel.desc }}</p>
                     </header>
-                    <Accordion class="type_faq">
+                    <Accordion class="type_faq faq_acc">
                         <AccordionItem
                             v-for="(item, idx) in startupFaqItems"
                             :key="idx"
@@ -432,7 +431,7 @@
                     </Accordion>
                 </section>
                 <section class="sec_gs25_faq">
-                    <header class="section_header ac">
+                    <header class="section_header ac no_desc">
                         <h2>{{ gs25FaqPanel.title }}</h2>
                     </header>
                     <Tabs
@@ -441,7 +440,7 @@
                         v-model="activeGs25FaqTab"
                         :tab-slide="true"
                     />
-                    <Accordion class="type_faq">
+                    <Accordion class="type_faq faq_acc faq_acc_badge">
                         <AccordionItem
                             v-for="(item, idx) in paginatedGs25FaqItems"
                             :key="`${activeGs25FaqTab}-${activeGs25FaqPage}-${idx}-${item.question}`"
@@ -453,6 +452,28 @@
                             </template>
                             <p v-if="item.answer">{{ item.answer }}</p>
                             <p v-else>{{ gs25FaqDummyAnswer }}</p>
+                            <div v-if="item.answerTable" class="policy_wrap">
+                                <p>* 타입별/기간별 개월 수</p>
+                                <table>
+                                    <colgroup>
+                                        <col class="col_label" />
+                                        <col class="col_data" />
+                                        <col class="col_data" />
+                                        <col class="col_data" />
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th v-for="col in item.answerTable.headers" :key="col" scope="col">{{ col }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="row in item.answerTable.rows" :key="row.label">
+                                            <th scope="row">{{ row.label }}</th>
+                                            <td v-for="(cell, ci) in row.cells" :key="ci">{{ cell }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </AccordionItem>
                     </Accordion>
                     <Pagination
@@ -925,17 +946,17 @@ const startupFaqItems = [
     {
         question: "편의점 운영해본 경험이 없는데, 창업이 가능할까요?",
         answer:
-            "물론이죠! 점포 오픈 전, 점포 운영 전반에 대한 이론 및 실습 교육을 체계적으로 진행하여 안정적인 운영 기반을 마련해 드립니다. 오픈 이후에도 개점 담당 직원이 일정 기간 점포에 동행 근무하며 초기 운영 적응을 지원해 드리므로, 신규 경영주님도 안심하고 점포를 운영하실 수 있어요. 또한, 본사 영업 전문가(OFC)가 정기적으로 점포를 방문하여 매출 향상, 운영 개선 등 전반적인 점포 운영을 지속적으로 지원하고 있습니다.",
+            "물론이죠! 점포 오픈 전, 점포 운영 전반에 대한 이론 및 실습 교육을 체계적으로 진행하여 안정적인 운영 기반을 마련해 드립니다.\n오픈 이후에도 개점 담당 직원이 일정 기간 점포에 동행 근무하며 초기 운영 적응을 지원해 드리므로, 신규 경영주님도 안심하고 점포를 운영하실 수 있어요.\n 또한, 본사 영업 전문가(OFC)가 정기적으로 점포를 방문하여 매출 향상, 운영 개선 등 전반적인 점포 운영을 지속적으로 지원하고 있습니다.",
     },
     {
         question: "점포 유형에 신규점과 기존점 차이는 무엇인가요?",
         answer:
-            "신규점은 현재 GS25 매장이 없는 곳에서 새로 오픈하여 운영하는 점포를 의미해요. 기존점은 기존 GS25 매장을 새로운 경영주님께서 인수하여 운영하는 매장을 의미합니다.",
+            "신규점은 현재 GS25 매장이 없는 곳에서 새로 오픈하여 운영하는 점포를 의미해요.\n기존점은 기존 GS25 매장을 새로운 경영주님께서 인수하여 운영하는 매장을 의미합니다.",
     },
     {
         question: "24시간 영업은 필수인가요?",
         answer:
-            "계약을 맺기 전에는 점포 상황에 따라 영업시간을 서로 협의할 수 있어요.\n다만, 오픈 후부터는 최초 계약 체결시 합의된 영업 시간은 준수해 주셔야 합니다.\n또한 계약 기간 중이라도, 부득이한 사정이 있거나 심야 시간대 매출이 너무 적어 손해가 계속되는 경우에는 경영주님이 회사에 요청하고, 회사가 동의하면 24시간 운영을 하지 않을 수도 있습니다.\n단, 24시간 운영을 하지 않는 경우에는 24시간 운영 점포에 지급되는 장려금(지원금)은 받을 수 없습니다.",
+            "계약을 맺기 전에는 점포 상황에 따라 영업시간을 서로 협의할 수 있어요.\n다만, 오픈 후부터는 최초 계약 체결시 합의된 영업 시간은 준수해 주셔야 합니다.\n또한 계약 기간 중이라도, 부득이한 사정이 있거나 심야 시간대 매출이 너무 적어 손해가 계속되는 경우에는 경영주님이 회사에 요청하고,\n회사가 동의하면 24시간 운영을 하지 않을 수도 있습니다.\n단, 24시간 운영을 하지 않는 경우에는 24시간 운영 점포에 지급되는 장려금(지원금)은 받을 수 없습니다.",
     },
     {
         question: "근무자 채용은 직접 해야하나요?",
@@ -966,49 +987,49 @@ const gs25FaqItems = [
     {
         category: "가맹조건",
         question: "담보는 무엇인가요?",
-        answer: "GS25는 가맹계약에 따라 점포에 상품을 먼저 공급해 드리고 있어요. 경영주님이 상품을 판매한 뒤, 그 매출을 회사에 보내 정산하고 수익을 나누는 구조입니다. 만약 매출을 보내지 못하는 상황이 생기면, 이미 공급된 상품 대금은 회사의 손실로 남게 됩니다. 그래서 이런 상황에 대비해 ‘담보’를 설정하게 됩니다. 쉽게 말해, 혹시 모를 상황에 대비한 안전장치라고 생각하시면 됩니다.",
+        answer: "GS25는 가맹계약에 따라 점포에 상품을 먼저 공급해 드리고 있어요.\n경영주님이 상품을 판매한 뒤, 그 매출을 회사에 보내 정산하고 수익을 나누는 구조입니다.\n만약 매출을 보내지 못하는 상황이 생기면, 이미 공급된 상품 대금은 회사의 손실로 남게 됩니다. 그래서 이런 상황에 대비해 ‘담보’를 설정하게 됩니다.\n쉽게 말해, 혹시 모를 상황에 대비한 안전장치라고 생각하시면 됩니다.",
     },
     {
         category: "가맹조건",
         question: "담보의 종류는 어떻게 되나요? 꼭 현금이 있어야 할까요?",
         answer:
-            "담보 설정 방법은 크게 3가지입니다. 3가지 중에 가능한 방법으로 선택하시면 돼요!\n1️⃣ 근저당\n→ 집이나 건물 같은 부동산에 담보를 설정하는 방식입니다.\n(해당 부동산에 충분한 가치가 있어야 가능합니다.)\n\n2️⃣ 질권\n→ 은행 예금에 담보를 설정하는 방식입니다.\n(예금을 담보로 묶어두는 개념입니다.)\n\n3️⃣ 보증보험\n→ 보증보험사에 일정 수수료를 내면, 보증보험사가 약정 금액에 대해 일정 기간 대신 보증을 서주는 방식입니다.",
+            "담보 설정 방법은 크게 3가지입니다. 3가지 중에 가능한 방법으로 선택하시면 돼요!\n\n1️⃣ 근저당\n→ 집이나 건물 같은 부동산에 담보를 설정하는 방식입니다.\n(해당 부동산에 충분한 가치가 있어야 가능합니다.)\n\n2️⃣ 질권\n→ 은행 예금에 담보를 설정하는 방식입니다.\n(예금을 담보로 묶어두는 개념입니다.)\n\n3️⃣ 보증보험\n→ 보증보험사에 일정 수수료를 내면, 보증보험사가 약정 금액에 대해 일정 기간 대신 보증을 서주는 방식입니다.",
     },
     {
         category: "창업문의",
         question: "편의점 자리는 직접 알아봐야 하나요?",
         answer:
-            "직접 알아보시는 경우도 있고, 회사가 추천해 드리기도 해요! 가맹 희망자분이 개점 희망하는 후보지가 있는 경우 점포개발 담당자를 통해 검토가 가능합니다. 희망하시는 위치가 없는 경우 경영주님의 희망 조건에 따라 점포를 추천해드립니다.",
+            "직접 알아보시는 경우도 있고, 회사가 추천해 드리기도 해요!\n가맹 희망자분이 개점 희망하는 후보지가 있는 경우 점포개발 담당자를 통해 검토가 가능합니다.\n희망하시는 위치가 없는 경우 경영주님의 희망 조건에 따라 점포를 추천해드립니다.",
     },
     {
         category: "창업문의",
         question: "편의점 운영해본 경험이 없는데, 창업이 가능할까요?",
-        answer: "물론이죠! 점포 오픈 전, 점포 운영 전반에 대한 이론 및 실습 교육을 체계적으로 진행하여 안정적인 운영 기반을 마련해 드립니다. 오픈 이후에도 개점 담당 직원이 일정 기간 점포에 동행 근무하며 초기 운영 적응을 지원해 드리므로, 신규 경영주님도 안심하고 점포를 운영하실 수 있어요. 또한, 본사 영업 전문가(OFC)가 정기적으로 점포를 방문하여 매출 향상, 운영 개선 등 전반적인 점포 운영을 지속적으로 지원하고 있습니다.",
+        answer: "물론이죠! 점포 오픈 전, 점포 운영 전반에 대한 이론 및 실습 교육을 체계적으로 진행하여 안정적인 운영 기반을 마련해 드립니다.\n오픈 이후에도 개점 담당 직원이 일정 기간 점포에 동행 근무하며 초기 운영 적응을 지원해 드리므로, 신규 경영주님도 안심하고 점포를 운영하실 수 있어요.\n또한, 본사 영업 전문가(OFC)가 정기적으로 점포를 방문하여 매출 향상, 운영 개선 등 전반적인 점포 운영을 지속적으로 지원하고 있습니다.",
     },
     {
         category: "창업문의",
         question: "외국인도 창업이 가능한가요?",
-        answer: "네! 외국인분도 본인 명의 휴대폰이 있으면 창업이 가능합니다. 다만, 가지고 계신 비자로 사업자 등록이 가능한지 유무를 사전에 꼭 확인하셔야 하며, 각 지역 세무서에 문의해 주세요.",
+        answer: "네! 외국인분도 본인 명의 휴대폰이 있으면 창업이 가능합니다\n다만, 가지고 계신 비자로 사업자 등록이 가능한지 유무를 사전에 꼭 확인하셔야 하며, 각 지역 세무서에 문의해 주세요.",
     },
     {
         category: "창업문의",
         question: "수익이 보장되나요?",
-        answer: "모든 점포는 계약 조건, 매출 등이 다르므로 경영주님의 수익(정산금)은 점포마다 상이합니다. 수익배분율과 기타 가맹계약 조건을 기준으로 최종 수익이 산정되므로 수익을 보장하지는 않습니다. 점포의 매출이 상승하면 경영주님 수익도 상승하게 됩니다.",
+        answer: "모든 점포는 계약 조건, 매출 등이 다르므로 경영주님의 수익(정산금)은 점포마다 상이합니다.\n수익배분율과 기타 가맹계약 조건을 기준으로 최종 수익이 산정되므로 수익을 보장하지는 않습니다.\n점포의 매출이 상승하면 경영주님 수익도 상승하게 됩니다.",
     },
     {
         category: "창업문의",
         question: "점포 유형에 신규점과 기존점 차이는 무엇인가요?",
-        answer: "신규점은 현재 GS25 매장이 없는 곳에서 새로 오픈하여 운영하는 점포를 의미해요. 기존점은 기존 GS25 매장을 새로운 경영주님께서 인수하여 운영하는 매장을 의미합니다.",
+        answer: "신규점은 현재 GS25 매장이 없는 곳에서 새로 오픈하여 운영하는 점포를 의미해요.\n기존점은 기존 GS25 매장을 새로운 경영주님께서 인수하여 운영하는 매장을 의미합니다.",
     },
     {
         category: "창업문의",
         question: "창업할 때 대출을 지원해주는 제도가 있나요?",
-        answer: "신규 경영주님께 지원되는 대출 제도는 운영하고 있지 않습니다. 다만, 점포 운영 중인 경영주님들을 대상으로 GS25 점포를 추가 창업 시, 우리은행과 연계하여 우대금리를 적용하는 상생대출 제도를 지원하고 있습니다.",
+        answer: "신규 경영주님께 지원되는 대출 제도는 운영하고 있지 않습니다.\n다만, 점포 운영 중인 경영주님들을 대상으로 GS25 점포를 추가 창업 시, 우리은행과 연계하여 우대금리를 적용하는 상생대출 제도를 지원하고 있습니다.",
     },
     {
         category: "창업문의",
         question: "신규 경영주 교육은 꼭 들어야 하나요?",
-        answer: "네. GS25 점포 운영이 처음이신 경우, 신규 경영주 입문과정(이론 및 실습 교육)을 필수로 이수하셔야 해요. 총 2주간의 창업 교육(영업일 기준 7일 코스)을 수료하고, 최종 테스트까지 완료하셔야 오픈이 가능합니다.",
+        answer: "네. GS25 점포 운영이 처음이신 경우, 신규 경영주 입문과정(이론 및 실습 교육)을 필수로 이수하셔야 해요.\n총 2주간의 창업 교육(영업일 기준 7일 코스)을 수료하고, 최종 테스트까지 완료하셔야 오픈이 가능합니다.",
     },
     {
         category: "창업문의",
@@ -1053,7 +1074,7 @@ const gs25FaqItems = [
     {
         category: "운영문의",
         question: "GS25 점포를 2개 이상 운영할 수 있나요? 별도의 혜택이 있나요?",
-        answer: "네 가능합니다! 타업종 대비 낮은 투자비와 안정적인 창업이 가능하다는 점에서 다점포(2개 이상)를 운영하시는 경영주님들이 많이 계십니다. 기존 GS25를 운영하고 계시는 경영주님이 추가 점포를 운영할 경우 가맹비 770만원(VAT 포함) 중 330만원(VAT포함)을 할인해드립니다.",
+        answer: "네 가능합니다! 타업종 대비 낮은 투자비와 안정적인 창업이 가능하다는 점에서 다점포(2개 이상)를 운영하시는 경영주님들이 많이 계십니다.\n기존 GS25를 운영하고 계시는 경영주님이 추가 점포를 운영할 경우 가맹비 770만원(VAT 포함) 중 330만원(VAT포함)을 할인해드립니다.",
     },
     {
         category: "운영문의",
@@ -1063,7 +1084,7 @@ const gs25FaqItems = [
     {
         category: "운영문의",
         question: "상품 주문은 회사가 대신해주나요?",
-        answer: "상품 주문(발주)의 권한은 경영주님에게 있습니다. 각 점포의 상황이나 경영주님의 선택에 따라 상품 주문, 재고 관리 등이 이루어집니다.",
+        answer: "상품 주문(발주)의 권한은 경영주님에게 있습니다.\n각 점포의 상황이나 경영주님의 선택에 따라 상품 주문, 재고 관리 등이 이루어집니다.",
     },
     {
         category: "운영문의",
@@ -1098,7 +1119,15 @@ const gs25FaqItems = [
     {
         category: "폐점,계약해지",
         question: "가맹계약 중도 해지시 위약금은 어떻게 산정되나요?",
-        answer: "계약 타입과 운영 년수에 따라 해약 수수료가 산정됩니다.",
+        answer: "계약 타입과 운영 년수에 따라 해약 수수료가 산정됩니다.\n* 해약수수료 산정 방식\nGS1 타입: 직전 1년간의(영업기간 1년 미만일 경우에는 그 영업기간 중) 평균 월 매출총이익의 가맹수수료율 x 타입별/기간별 개월 수\nGS2, GS3 타입: 직전 1년간의(영업기간 1년 미만일 경우에는 그 영업기간 중) 평균 월 매출총이익의 35% x 타입별/기간별 개월 수",
+        answerTable: {
+            headers: ["구분", "개점 후 3년 미만", "3년 ~ 4년", "4년 ~ 5년"],
+            rows: [
+                { label: "GS1", cells: ["6개월", "4개월", "2개월"] },
+                { label: "GS2", cells: ["4개월", "2개월", "—"] },
+                { label: "GS3", cells: ["4개월", "2개월", "—"] },
+            ],
+        },
     },
     {
         category: "가맹조건",
@@ -1618,33 +1647,35 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 
 .sec_diagram + .sec_convenience_guide { margin-top: 80px; }
 .sec_diagram header{margin-bottom:40px;}
-/* sec_startup_faq */
-.sec_startup_faq :deep(.board_type_toggle.type_faq) { width: 100%; border-top: 1px solid #161616; }
-.sec_startup_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 24px 24px 60px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; border-bottom: 1px solid #d7d7df; }
-.sec_startup_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { top: 50%; left: 20px; width: 32px; height: 32px; font-size: 1.8rem; font-weight: 400; line-height: 1.5; transform: translateY(-50%); }
-.sec_startup_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
-.sec_startup_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
-.sec_startup_faq :deep(.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 16px 32px 32px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_startup_faq :deep(.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont p) { margin: 0; white-space: pre-line; }
+.sec_startup_faq .section_header.ac,
+.sec_gs25_faq .section_header.ac { text-align: left !important; }
+/* faq_acc — 창업 FAQ / GS25 답변 아코디언 공통 */
+:deep(.faq_acc.board_type_toggle.type_faq) { width: 100%; border-top: 1px solid #161616; }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 20px 24px 60px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; border-bottom: 1px solid #d7d7df; }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { top: 50%; left: 20px; width: 32px; height: 32px; font-size: 1.8rem; font-weight: 400; line-height: 1.5; transform: translateY(-50%); }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
+:deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 16px 32px 40px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+/* :deep(.faq_acc.board_type_toggle.type_faq > dt:last-of-type > a.acc_tit_btn:not(.acc_tit_open)) { border-bottom: 1px solid #67676f; } */
+:deep(.faq_acc.board_type_toggle.type_faq > dd.acc_panel:last-of-type.acc_show) { border-bottom: 1px solid #D7D7DF; }
+:deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont p) { margin: 0; white-space: pre-line; }
+/* faq_acc_badge — GS25 답변 (flex 제목 + badge) */
+:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn) { display: flex; align-items: center; gap: 8px; }
+:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { flex-shrink: 0; padding: 4px 12px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 99px; }
+:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .txt) { flex: 1; min-width: 0; }
 /* sec_gs25_faq — TAB_PC 725:14696 */
-.sec_gs25_faq :deep(.tab_wrap) { margin-bottom: 40px; overflow: hidden; }
-.sec_gs25_faq :deep(.tab_wrap ul.type_01) { gap: 0; flex-wrap: nowrap; }
-.sec_gs25_faq :deep(.tab_wrap ul.type_01 li) { flex: 1; min-width: 0; border-bottom: 0; }
+.sec_gs25_faq :deep(.tab_wrap) { margin-bottom: 24px; overflow: hidden; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01) { padding-left:0;gap: 0; flex-wrap: nowrap; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li) { border-bottom: 0; }
 .sec_gs25_faq :deep(.tab_wrap ul.type_01 li .item) { min-height: 60px; padding: 17px 12px; color: #90909a; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; text-align: center; background-color: #fff; border: 1px solid #c4c4d0; border-left: 0; display: flex; align-items: center; justify-content: center; }
 .sec_gs25_faq :deep(.tab_wrap ul.type_01 li:first-child .item) { border-left: 1px solid #c4c4d0; }
 .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current) { border-bottom: 0; }
 .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current .item) { color: #fff; background-color: #107af2; border-color: #107af2; }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq) { width: 100%; border-top: 1px solid #161616; }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 56px 24px 60px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; border-bottom: 1px solid #d7d7df; display: flex; align-items: center; gap: 12px; }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { top: 50%; left: 20px; width: 32px; height: 32px; font-size: 1.8rem; font-weight: 400; line-height: 1.5; transform: translateY(-50%); }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { flex-shrink: 0; padding: 4px 12px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 99px; }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn > .txt) { flex: 1; min-width: 0; }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open > .txt) { font-weight: 700; }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 16px 32px 32px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_gs25_faq :deep(.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont p) { margin: 0; white-space: pre-line; }
-.sec_gs25_faq :deep(.pagination) { margin-top: 60px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: center; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap) { margin-top: 24px; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap > p) { margin: 0 0 12px; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; white-space: normal; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_label) { width: auto; min-width: 120px; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_data) { width: 33.3333%; }
+
 .sec_convenience_guide > .inner > .guide_body { width: 100%; max-width: 1420px; margin: 0 auto; }
 .sec_convenience_guide > .inner > .guide_body > .sub_header { margin-bottom: 40px; }
 .sec_convenience_guide .guide_steps {  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
@@ -1705,27 +1736,25 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .section_header > h2, .sub_header > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
     .section_header > p, .sub_header > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .section_header > p { margin-top: 12px; }
-    .sec_startup_faq > .section_header { margin-bottom: 32px; }
-    .sec_startup_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 64px; padding: 20px 0 20px 40px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-    .sec_startup_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { left: 0; font-size: 1.8rem; font-weight: 400; line-height: 1.5; }
-    .sec_startup_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; }
-    .sec_startup_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
-    .sec_startup_faq :deep(.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 12px 0 24px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    /* sec_gs25_faq — TAB_PC */
-    .sec_gs25_faq :deep(.tab_wrap) { margin-bottom: 32px; }
-    .sec_gs25_faq :deep(.tab_wrap.tabSlide)::after { content: ''; width: 8.53vw; height: 100%; background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff); position: absolute; top: 0; right: 0; pointer-events: none; }
-    .sec_gs25_faq :deep(.tab_wrap ul.type_01) { padding-left: 20px; }
-    .sec_gs25_faq :deep(.tab_wrap ul.type_01::after) { content: ''; min-width: 20px; flex-shrink: 0; }
-    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li) { flex: 0 0 auto; }
-    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li .item) { min-height: 48px; padding: 12px 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; white-space: nowrap; }
-    .sec_gs25_faq > .section_header { margin-bottom: 32px; }
-    .sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 64px; padding: 20px 32px 20px 40px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; gap: 8px; }
-    .sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { left: 0; font-size: 1.8rem; font-weight: 400; line-height: 1.5; }
-    .sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { padding: 4px 8px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; }
-    .sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
-    .sec_gs25_faq :deep(.board_type_toggle.type_faq dt > a.acc_tit_open > .txt) { font-weight: 700; }
-    .sec_gs25_faq :deep(.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 12px 0 24px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .section_header.no_desc { margin-bottom: 24px; }
+    :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 64px; padding: 8px 0 8px 40px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+    :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { left: 0; font-size: 1.8rem;  line-height: 1.5; }
+    :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
+    :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
+    :deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 12px 32px 24px 40px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    /* sec_gs25_faq — TAB_MO 725:17863 */
+    .sec_gs25_faq :deep(.tab_wrap) { margin-bottom: 24px; overflow: visible; }
+    .sec_gs25_faq :deep(.tab_wrap.tabSlide) { overflow: visible; }
+    .sec_gs25_faq :deep(.tab_wrap.tabSlide ul.type_01) { flex-wrap: wrap; gap: 10px 8px; padding-left: 0; transform: none !important; transition: none; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01) { flex-wrap: wrap; gap: 10px 8px; padding-left: 0; justify-content: flex-start; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01::after) { display: none; content: none; min-width: 0; }
+    .sec_gs25_faq :deep(.tab_wrap)::after { display: none; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li) { flex: 0 0 auto; border-bottom: 0; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current) { border-bottom: 0; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li .item) { min-height: 40px; height: 40px; padding: 8px 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 24px; letter-spacing: -0.01em; text-align: center; white-space: nowrap; background-color: #fff; border: 1px solid #161616; border-radius: 99px; border-left: 1px solid #161616; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li:first-child .item) { border-left: 1px solid #161616; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current .item) { color: #107af2; background-color: #e7f2fe; border-color: #107af2; }
+    :deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { padding: 4px 8px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_gs25_faq :deep(.pagination) { margin-top: 40px; }
     section > .inner{padding-top:40px; padding-bottom: 40px;}
     .sec_region_counsel :deep(.tab_wrap ul.type_02){padding-left:0;justify-content: flex-start;}
