@@ -195,7 +195,7 @@
     {
         "depth1": "", "depth2": "회사소개", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrab/01/gsrab02",
+        "path": "gsrab/02/gsrab02",
         "link": "/gsrab02" ,
         "startDate": "",
         "endDate": "",
@@ -205,7 +205,7 @@
     {
         "depth1": "", "depth2": "연혁", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrab/01/gsrab03",
+        "path": "gsrab/03/gsrab03",
         "link": "/gsrab03" ,
         "startDate": "",
         "endDate": "",
@@ -215,7 +215,7 @@
     {
         "depth1": "", "depth2": "CI/BI", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrab/01/gsrab04",
+        "path": "gsrab/04/gsrab04",
         "link": "/gsrab04" ,
         "startDate": "",
         "endDate": "",
@@ -225,7 +225,7 @@
     {
         "depth1": "", "depth2": "위치", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
-        "path": "gsrab/01/gsrab05",
+        "path": "gsrab/05/gsrab05",
         "link": "/gsrab05" ,
         "startDate": "",
         "endDate": "",
@@ -234,7 +234,18 @@
     },
 
     {
-        "depth1": "BRAND", "depth2": "GS25", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "depth1": "BRAND", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/gsrbr_smain",
+        "link": "/gsrbr_smain",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "26.05.15 이종환"
+    },
+
+    {
+        "depth1": "", "depth2": "GS25", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "",
         "path": "gsrbr/01/gsrbr010101",
         "link": "/gsrbr010101",
@@ -1582,7 +1593,7 @@
 
   
     {
-        "depth1": "About GSR", "depth2": "CEO 인사말", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "depth1": "고객센터", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
         "path": "gsrcu/01/gsrcu01",
         "link": "/gsrcu01" ,

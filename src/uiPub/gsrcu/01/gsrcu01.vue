@@ -112,13 +112,13 @@ export default {
                             id: "gsthefresh", name: "GS THE FRESH", tel: "080-345-7700", hours: "· 평일, 주말, 공휴일 10:00~19:00<br/>(명절 당일은 휴무)",
                             buttons: [
                                 { label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" },
-                                { label: "창업안내", type: "link", target: "/franchise/gsthefresh" }
+                                { label: "창업안내", type: "link", target: "/gsrst01010101" }
                             ]
                         }
                     ],
                     BottomLinks: [
-                        { title: "정도경영목소리", btnLabel: "정도경영목소리", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu_ethics", cont: "EthicsVoice" },
-                        { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/partner/intro" },
+                        { title: "정도경영목소리", btnLabel: "정도경영목소리", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target:"/gsrsu040101" },
+                        { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
                         { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
                         { title: "제휴/협력문의", btnLabel: "제휴/협력문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0201", cont: "gsrcu0201" }
                     ]
@@ -158,7 +158,6 @@ export default {
 .blind {width:1px; height:1px; position:absolute; top:0; left:0; overflow:hidden; z-index:-1;}
 .page-top-title {margin-bottom:48px; text-align:center;}
 .title-xl {width:100%; color:#111111; font-size:4.5rem; font-weight:700; line-height:1.24; letter-spacing:-1.44px;}
-.customer-intro-section .cont_inner {width:100%; max-width:1420px; margin:0 auto;}
 .cont_inner article {width:100%; padding:100px 64px; background-color:#f8f8f8; border-radius:12px; display:flex; gap:40px;}
 .intro-summary {width:30%;}
 h3 {color:#161616; font-size:32px; font-weight:700; line-height:1.3; letter-spacing:-0.32px;}
@@ -179,15 +178,16 @@ h4 {margin-bottom:24px; color:#161616; font-size:20px; font-weight:700; line-hei
 .service-link-list li > div::before {content:''; width:40px; height:40px; background:red; position:absolute; top:0; left:0; display:block;}
 h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
 .service-link-list p {min-height:3em; color:#161616; font-size:16px; font-weight:400; line-height:1.5; letter-spacing:-0.16px;}
-.btn_mid {padding:0 14px;}
+.brand-card-group .btn_mid {padding:0 9px; border-radius:4px;}
 .btn_mid.gray {width:160px;}
 
 @media screen and (max-width: 1200px) {
     .cont_inner article {padding:60px 40px; flex-direction:column;}
-    .brand-btn-group, .brand-card-group {flex-direction:column;}
+    /* .brand-btn-group, .brand-card-group {flex-direction:column;} */
     .intro-summary {width:100%;}
 }
 @media screen and (max-width: 767px) {
+    h3 {font-size:28px;}
     h4 {font-size:18px;}
     .tel-number {font-size:24px;}
     .cont_inner article {padding:40px 24px; background:transparent; display:flex; flex-direction:column; gap:40px;}
@@ -197,7 +197,7 @@ h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
     .service-link-list li {width:100%; display:flex; flex-direction:row; gap:16px; align-items:flex-start;}
     .service-link-list li > div {width:100%; padding-top:0; padding-left:80px; display:flex; flex-direction:column; align-items: baseline; gap:16px;}
     .service-link-list li > div::before {left:20px;}
-    .service-link-list p {min-height:auto;}
+    .service-link-list p {min-height:auto; margin-top:-8px;}
     .btn_mid.gray {width:auto;}
 }
 </style>

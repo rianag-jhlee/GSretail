@@ -18,13 +18,12 @@
                                     style="width: 160px;" 
                                 />
                             </div>
-                            <div class="search_group">
-                                <Search 
-                                    v-model="searchData" 
-                                    :search_opt="t.SearchOptions" 
-                                    @search="handleSearch" 
-                                />
-                            </div>
+
+                            <Search 
+                                v-model="searchData" 
+                                :search_opt="t.SearchOptions" 
+                                @search="handleSearch" 
+                            />
                         </div>
 
                         <div class="policy_wrap ">
@@ -173,13 +172,6 @@ export default {
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin04_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block; }
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; }
 .visual-sub { margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
-.ac { text-align: center; }
-.al { text-align: left; }
-
-.search_filter_area { display: flex; width: 100%; height: 52px; justify-content: space-between; align-items: center; margin-top: 100px; }
-.filter_group, .search_group { display: flex; align-items: center; gap: 12px; }
-.filter_label { font-size: 16px; color: #161616; white-space: nowrap; }
 
 .policy_wrap table { width: 100%; border-collapse: collapse; word-break: keep-all; border-top: 1px solid #161616; }
 .policy_wrap th, .policy_wrap td { padding: 18px 24px; border: 1px solid #E5E5E9; font-size: 1.8rem; line-height: 1.6; vertical-align: middle; }
@@ -189,22 +181,15 @@ export default {
 .policy_wrap th {border-left:0; border-right:0;}
 .file_link { color: #161616; text-decoration: none; }
 .file_link:hover { text-decoration: underline; }
-.file_type_text { font-size: 1.8rem; color: #161616; }
+.file_type_text { font-size: 18px; color: #161616; }
 .img { width: 24px; height: 24px; }
 .policy_wrap th:first-child, .policy_wrap td:first-child {width:150px}
 
-.pagination_area {width: 100%; margin-top:24px; display: flex; justify-content: center; }
-
-@media screen and (max-width: 1024px) {
-    .search_filter_area { flex-direction: column; height: auto; align-items: flex-start; gap: 10px; }
-    .search_group { width: 100%; }
-}
 @media screen and (max-width: 767px) {
     .title_wrap {display:none;}
-    .cont_inner {padding:0 20px;}
     .policy_wrap th:first-child, .policy_wrap td:first-child { display: none; }
     .policy_wrap th, .policy_wrap td { padding: 12px; font-size: 15px; }
-    .search_group {align-items: flex-start; }
-    :deep(.search_group .search_wrap) { width: 100% !important; }
+    .policy_wrap td a, .file_type_text {font-size:16px;}
+    .file_type_text {margin-left:8px;}
 }
 </style>

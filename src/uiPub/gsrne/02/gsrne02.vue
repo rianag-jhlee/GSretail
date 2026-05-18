@@ -54,13 +54,13 @@
                             </ul>
                         </div>
 
-                        <div class="pagination_area ">
-                            <Pagination 
-                                v-model="currentPage" 
-                                :total-pages="10" 
-                                @change="onPageChange" 
-                            />
-                        </div>
+                        <!-- 26.05.13 Edit 이종환 : 공통화 -->
+                        <Pagination 
+                            v-model="currentPage" 
+                            :total-pages="10" 
+                            @change="onPageChange" 
+                        />
+                        <!-- //26.05.13 Edit 이종환 : 공통화 -->
                     </div>
                 </section>
 
@@ -165,12 +165,6 @@ export default {
 .title_wrap { width: 100%; padding: 10.91% 0 0; text-align: center; position: relative; display: block; }
 .page-title { color: #111; font-size: 72px; font-weight: 700; line-height:124%; letter-spacing:-0.02em;}
 .visual-sub { margin-top: 10px; color: #111; font-size: 24px; font-weight: 400; line-height:150%; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
-
-.search_filter_area { display: flex; width: 100%; height: 52px; justify-content: space-between; align-items: center; margin-top: 100px; margin-bottom:24px;}
-.search_filter_area .search_wrap {margin-left:auto;}
-
-.pagination_area {width: 100%; margin-top:60px; display: flex; justify-content: center; }
 
 .tab_wrap {margin-top:48px;}
 
@@ -187,19 +181,10 @@ export default {
 
 .board_wrap.type_gallery.type_long .item .thumb {padding-top:177.727272%;}
 
-@media screen and (max-width: 1024px) {
-    .search_filter_area { flex-direction: column; height: auto; align-items: flex-start; gap: 10px; }
-}
 @media screen and (max-width: 767px) {
     .title_wrap {margin-top:48px; padding:0 20px; text-align:initial;}
     .title_wrap h2 {display:none;}
     .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
-    .cont_inner {padding:0 20px;}
-
-    .search_filter_area {margin-top:60px;}
-
-    .search_wrap {width:100%; margin:0; flex-direction:column;}
-    .search_wrap > * {width:100%;}
 
     .board_wrap.type_gallery .body {margin-top:-48px;}
     .board_wrap.type_gallery .body > li {width:100%; padding-top:48px;}

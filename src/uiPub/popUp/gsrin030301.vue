@@ -34,7 +34,7 @@
 import modal from "@/assets/js/modal";
 
 export default {
-    name: "ggsrin030301",
+    name: "gsrin030301",
     data() {
         return {
             langData: {
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <style scoped>
-.modal_header { font-size: 40px; font-weight: 700; border-bottom: 0; padding-bottom: 24px; }
+.modal_header { font-size: 40px; font-weight: 700; border-bottom: 0; }
 .intro_box { margin-bottom: 32px; }
 .intro_text { font-size: 24px; font-weight: 400; line-height: 1.4; color: #161616; word-break: keep-all; }
 
@@ -114,8 +114,8 @@ export default {
 
 /* 모바일 대응 */
 @media screen and (max-width: 767px) {
-    .modal_header { font-size: 24px; }
-    .intro_text { font-size: 1.8rem; }
+    .modal_header {margin-bottom:20px;}
+    .modal_header, .intro_text { font-size:18px !important; }
     .base-accordion { padding: 16px 10px; }
     .policy_item_text { font-size: 16px; }
 }

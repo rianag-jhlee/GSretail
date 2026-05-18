@@ -41,6 +41,7 @@
                     
                     <!-- pageid:gsrin0102 -->
                     <section class="tab_content gsrin0102" v-if="CTabIdx === 1" :aria-label="t.Tabs1[1].item">
+                        <!-- 1. 이사회 구성 현황 -->
                         <div class="view-2">
                             <div class="sub-title">
                                 <div class="text-wrapper-3">{{ t.BoardSectionTitle1 }}</div>
@@ -48,17 +49,19 @@
                             </div>
 
                             <div class="view-3 res-swiper-container">
-                                <swiper
-                                    :slides-per-view="'1.1'"
+                                <!-- isMobile 상태에 따라 swiper 또는 div로 렌더링 -->
+                                <component 
+                                    :is="isMobile ? 'swiper' : 'div'"
+                                    :slides-per-view="'auto'"
                                     :space-between="20"
-                                    :breakpoints="{
-                                        768: {
-                                            allowTouchMove: false
-                                        }
-                                    }"
-                                    class="board-swiper"
+                                    class="board-swiper-wrapper"
                                 >
-                                    <swiper-slide v-for="(member, mIdx) in t.BoardMemberList" :key="'board-' + mIdx" class="div-2 res-slide-item">
+                                    <component 
+                                        :is="isMobile ? 'swiper-slide' : 'div'"
+                                        v-for="(member, mIdx) in t.BoardMemberList" 
+                                        :key="'board-' + mIdx" 
+                                        class="div-2 res-slide-item"
+                                    >
                                         <div class="view-4">
                                             <img class="img" :src="member.img" :alt="member.name" />
                                         </div>
@@ -82,26 +85,31 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-if="mIdx < t.BoardMemberList.length - 1" class="divider pc-only"></div>
-                                    </swiper-slide>
-                                </swiper>
+                                        <!-- PC 그리드 레이아웃 사용 시 구분선은 CSS gap으로 대체하므로 v-if="isMobile"일 때만 혹은 제거 권장 -->
+                                        <div v-if="!isMobile && mIdx < t.BoardMemberList.length - 1" class="divider pc-only"></div>
+                                    </component>
+                                </component>
                             </div>
                         </div>
+                        <!-- 2. 사외이사 및 위원회 구성 -->
                         <div class="view-2">
                             <div class="sub-title">
                                 <div class="text-wrapper-3">{{ t.BoardSectionTitleSub }}</div>
                                 <p class="p">{{ t.BoardSectionDescSub }}</p>
                             </div>
                             <div class="view-3 res-swiper-container" v-if="t">
-                                <swiper
-                                    :slides-per-view="'1.1'"
+                                <component 
+                                    :is="isMobile ? 'swiper' : 'div'"
+                                    :slides-per-view="'auto'"
                                     :space-between="20"
-                                    :breakpoints="{
-                                        768: {allowTouchMove: false}
-                                    }"
-                                    class="sub-member-swiper"
+                                    class="sub-member-swiper-wrapper"
                                 >
-                                    <swiper-slide v-for="(member, sIdx) in t.SubMemberList" :key="'sub-' + sIdx" class="div-2 res-slide-item">
+                                    <component 
+                                        :is="isMobile ? 'swiper-slide' : 'div'"
+                                        v-for="(member, sIdx) in t.SubMemberList" 
+                                        :key="'sub-' + sIdx" 
+                                        class="div-2 res-slide-item"
+                                    >
                                         <div class="view-4">
                                             <img class="img" :src="member.img" :alt="member.name" />
                                         </div>
@@ -131,50 +139,27 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div v-if="sIdx < t.SubMemberList.length - 1" class="divider pc-divider"></div>
-                                    </swiper-slide>
-                                </swiper>
+                                        <div v-if="!isMobile && sIdx < t.SubMemberList.length - 1" class="divider pc-divider"></div>
+                                    </component>
+                                </component>
                             </div>
                         </div>
+                        <!-- 이사회 역량 구성표 예시 (다른 영역도 동일한 방식으로 적용 가능) -->
                         <div class="view-2">
                             <div class="sub-title">
                                 <h3 class="text-wrapper-3">{{ t.BoardSectionTitle2 }}</h3>
                             </div>
-
-                            <!-- <div class="div-4">
-                                <div class="view-6">
-                                    <div v-for="(skill, idx) in t.SkillsList" :key="'skill-' + idx" class="frame-5">
-                                        <div class="frame-6">
-                                            <div class="div-6">
-                                                <div class="text-wrapper-10">{{ skill.type }}</div>
-                                                <div class="text-wrapper-11">{{ skill.name }}</div>
-                                            </div>
-                                            <div class="text-wrapper-12">{{ skill.appointDate }}</div>
-                                        </div>
-                                        <div class="frame-9">
-                                            <div v-for="(tag, tIdx) in skill.tags" :key="'tag-'+tIdx" :class="['TAG', tag.class]">
-                                                <div class="text-wrapper-13" :class="{'text-wrapper-14': tag.class === 'TAG-2', 'text-wrapper-15': tag.class === 'TAG-3', 'text-wrapper-18': tag.class === 'TAG-4'}">
-                                                    {{ tag.text }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
                             <div class="div-4">
                                 <div class="view-6 res-swiper-container">
-                                    <swiper
-                                        :slides-per-view="'1.1'"
-                                        :space-between="20"
-                                        :breakpoints="{
-                                            768: {
-                                                allowTouchMove: false
-                                            }
-                                        }"
-                                        class="skill-swiper"
+                                    <!-- 모바일일 때만 swiper, PC/태블릿은 div로 렌더링 -->
+                                    <component 
+                                        :is="isMobile ? 'swiper' : 'div'"
+                                        :slides-per-view="'auto'"
+                                        :space-between="16"
+                                        class="skill-swiper-wrapper"
                                     >
-                                        <swiper-slide 
+                                        <component 
+                                            :is="isMobile ? 'swiper-slide' : 'div'"
                                             v-for="(skill, idx) in t.SkillsList" 
                                             :key="'skill-' + idx" 
                                             class="frame-5 res-slide-item"
@@ -193,8 +178,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </swiper-slide>
-                                    </swiper>
+                                        </component>
+                                    </component>
                                 </div>
                             </div>
                             
@@ -223,9 +208,10 @@
                                 </template>
                             </div>
                             <div class="button-group">
-                                <button v-for="(btn, bIdx) in t.BoardDownloadBtns" :key="'btn-'+bIdx" class="BUTTON" @click="handleDownload(btn.link)">
-                                    <div class="view-9"><div class="text-wrapper-22">{{ btn.text }}</div></div>
-                                    <img class="download" src="/public/images/gsrin0102/download.png" />
+                                <button v-for="(btn, bIdx) in t.BoardDownloadBtns" :key="'btn-'+bIdx" class="btn_mid btn_icon_file after" @click="handleDownload(btn.link)">
+                                    <div class="view-9">
+                                        <div class="text-wrapper-22">{{ btn.text }}</div>
+                                    </div>
                                 </button>
                             </div>
                         </div>
@@ -241,7 +227,7 @@
                             <div class="policy_wrap">
                                 <table>
                                     <colgroup>
-                                        <col>
+                                        <col style="width: auto;">
                                         <col style="width: auto;">
                                     </colgroup>
                                     <tbody>
@@ -275,21 +261,21 @@
                                 </table>
                             </div>
                         </div>
-
+                        <!-- pageid:gsrin0103 이사회평가 활용 영역 -->
                         <div class="eval_item_group">
                             <div class="sub-title">
                                 <h3 class="text-wrapper-3" style="width:100%;">{{ t.EvalUsageTitle }}</h3>
                             </div>
                             <div class="res-swiper-container">
-                                <swiper
-                                    :slides-per-view="'1.1'"
+                                <!-- 스크립트에서 설정한 isMobile 상태에 따라 태그 전환 -->
+                                <component 
+                                    :is="isMobile ? 'swiper' : 'div'"
+                                    :slides-per-view="'auto'"
                                     :space-between="20"
-                                    :breakpoints="{
-                                        768: { allowTouchMove: false }
-                                    }"
-                                    class="eval-usage-swiper"
+                                    class="eval-usage-swiper-wrapper"
                                 >
-                                    <swiper-slide 
+                                    <component 
+                                        :is="isMobile ? 'swiper-slide' : 'div'"
                                         v-for="(card, cIdx) in t.EvalUsageCards" 
                                         :key="'usage-'+cIdx" 
                                         class="card_item res-slide-item"
@@ -302,8 +288,8 @@
                                         <div v-if="card.sub" class="body">
                                             <div class="text-wrapper-7">{{ card.sub }}</div>
                                         </div>
-                                    </swiper-slide>
-                                </swiper>
+                                    </component>
+                                </component>
                             </div>
                         </div>
                     </section>
@@ -356,6 +342,7 @@ export default {
         return {
             CTabIdx: 0,
             selectedFilter: "",
+            isMobile: false,
             langData: {
                 ko: {
                     MainTitle: "기업지배구조",
@@ -661,8 +648,19 @@ export default {
             }
         };
     },
+    mounted() {
+        this.checkResolution();
+        window.addEventListener('resize', this.checkResolution);
+    },
+    beforeUnmount() {
+        window.removeEventListener('resize', this.checkResolution);
+    },
     computed: { t() { return this.langData[this.lang] || this.langData.ko; } },
     methods: {
+        checkResolution() {
+            // 768px 미만일 때만 스와이퍼 활성화
+            this.isMobile = window.innerWidth < 768;
+        },
         onTabChange1(idx) {
             this.CTabIdx = idx;
             this.selectedFilter = "";
@@ -692,13 +690,12 @@ export default {
 .title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0101_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title {color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; display: block;}
 .visual-sub {margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center;}
-.cont_inner {width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom:200px;}
 .title-sub-text {width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4;}
 :deep(.title-sub-text br:not(:nth-of-type(2))) {display: none;}
 .subtit_wrap {width: 100%; padding: 60px 40px; background: #F0F3F5; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
 .gsrin0101 .section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align: center;}
 .section-date {margin-top: 15px; color: #666666; font-size: 1.8rem; text-align: center; display: block;}
-.gsrin0101 .policy_wrap {width: 100%; padding: 60px; text-align: left;}
+.gsrin0101 .policy_wrap {padding-top: 60px;}
 .gsrin0101 .policy_wrap dt {margin-top: 60px; color: #161618; font-size: 24px; font-weight: 700;}
 .policy_wrap dt:first-child {margin-top: 0;}
 .gsrin0101 .policy_wrap dd {margin-top: 20px; padding-bottom:32px; color: #444444; font-size: 1.8rem; line-height: 1.8; border-bottom:1px solid #D7D7DF;}
@@ -715,7 +712,8 @@ export default {
 .text-wrapper-3 {width: 100%; margin-top: -1.00px; padding: 0; color: #161618; font-size: 40px; font-weight: 700; font-style: normal; letter-spacing: -0.4px; line-height: 129.99999523162842%; position: relative; align-self: stretch;}
 .p {width: 100%; padding: 0; color: #242428; font-size: 24px; font-weight: 500; font-style: normal; letter-spacing: -0.24px; line-height: 150%; position: relative; align-self: stretch;}
 .view-3 {width: 100%; padding: 0; position: relative; display: flex; align-items: flex-start; gap: 28px; align-self: stretch; flex: 0 0 auto;}
-.div-2 {width: 21.97%; height:auto; padding: 0; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 32px;}
+
+.div-2 {height:auto; padding: 0; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 32px;}
 .view-4 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; align-self: stretch; flex: 0 0 auto;}
 .img {width: 100%; height:auto; position: relative; align-self: stretch;}
 .div-3 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; align-self: stretch; flex: 0 0 auto;}
@@ -735,14 +733,18 @@ export default {
 .frame-4 {padding: 0; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 0 0 auto;}
 .rectangle {width: 1px; height: 12px; background-color: #e5e5e9; position: relative;}
 .view-6 {width: 100%; padding: 0; position: relative; display: flex; flex-wrap:wrap; align-items: flex-start; justify-content: flex-start; gap: 12px; align-self: stretch; flex: 0 0 auto;}
-.frame-5 {max-width:452px; padding: 32px; border: 1px solid #e5e5e9; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; flex: 1; align-self: stretch; flex: 0 0 auto;}
+.frame-5 {width:100%; padding: 32px; border: 1px solid #e5e5e9; border-radius: 24px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; flex: 1; align-self: stretch; flex: 0 0 auto;}
 .frame-6 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
 .frame-6 .div-6 {display:flex; gap:8px;}
-:deep(.view-6.res-swiper-container) .swiper-wrapper {display: grid !important; grid-template-columns: repeat(3, 1fr);gap: 20px;}
+
+.skill-swiper-wrapper,.board-swiper-wrapper, .eval-usage-swiper-wrapper {display: grid; grid-template-columns: repeat(3, 1fr); gap:20px 20px;}
+.sub-member-swiper-wrapper {display: grid; grid-template-columns: repeat(4, 1fr); gap:20px 20px;}
+
 .text-wrapper-10 {width: fit-content; margin-top: -1.00px; padding: 0; color: #161618; font-size: 22px; font-weight: 400; letter-spacing: -0.24px; line-height: 36px; position: relative; white-space: nowrap;}
 .text-wrapper-11 {width: fit-content; padding: 0; color: #161618; font-size: 24px; font-weight: 700; font-style: normal; letter-spacing: -0.24px; line-height: 135.0000023841858%; position: relative; white-space: nowrap;}
 .text-wrapper-12 {padding: 0; color: #656565; font-size: 16px; font-weight: 400; font-style: normal; text-align: right; letter-spacing: -0.16px; line-height: 150%; position: relative; flex: 1;}
-.frame-9 {width: 100%; padding: 24px 0 0; border-top: 1px solid #f2f2f4; position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 8px; flex: 0 0 auto; align-self: stretch;}
+.frame-9 {width: 100%; padding: 24px 0 0; border-top: 1px solid #f2f2f4; position: rela
+    tive; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 8px; flex: 0 0 auto; align-self: stretch;}
 .TAG {padding: 8px 12px; color: #107af2; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 99px; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 0 0 auto;}
 .TAG-2 {min-width: 64px; background-color: #e7f2fe; border-color: #107af2;}
 .TAG-3 {background-color: #f2f2f4; border-color: #c4c4d0;}
@@ -760,7 +762,9 @@ export default {
 .text-wrapper-20 {width: fit-content; margin-top: -1.00px; padding: 0; color: #67676f; font-size: 1.8rem; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; white-space: nowrap;}
 .text-wrapper-21 {margin-top: -1.00px; padding: 0; color: #242428; font-size: 1.8rem; font-weight: 400; font-style: normal; text-align: right; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
 .divider-2 {width: 1px; background-color: #e5e5e9; position: relative; align-self: stretch;}
+
 .button-group {width: 100%; padding: 0; position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 12px; flex: 0 0 auto; align-self: stretch;}
+
 .BUTTON {padding: 10px 16px; background-color: #f2f2f4; border-radius: 8px; border: 0; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 24px; flex: 0 0 auto; cursor: pointer;}
 .view-9 {padding: 0; position: relative; display: inline-flex; align-items: center; gap: 2px; flex: 0 0 auto;}
 .text-wrapper-22 {width: fit-content; margin-top: -1.00px; padding: 0; color: #242428; font-size: 16px; font-weight: 400; font-style: normal; letter-spacing: -0.16px; line-height: 150%; position: relative; white-space: nowrap;}
@@ -769,6 +773,7 @@ export default {
 
 /* gsrin0103 이사회 평가 */
 .gsrin0103 .eval_item_group { display: flex; flex-direction: column; width: 100%; }
+.gsrin0103 .eval_item_group .sub-title {margin-bottom:32px;}
 .gsrin0103 .section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align:left;}
 .gsrin0103 .policy_wrap {padding-top:32px; padding-bottom:100px;}
 .gsrin0103 colgroup col:first-of-type {width:200px}
@@ -783,7 +788,7 @@ export default {
 .gsrin0103 .policy_wrap tbody tr td {border-right:0}
 .gsrin0103 .important { font-size: 1.8rem; font-weight: 700; color: #161616; text-decoration:none;}
 :deep(.eval-usage-swiper .swiper-wrapper) {display:grid !important; grid-template-columns:repeat(3, 1fr); gap:20px; transform:none;}
-.card_item.res-slide-item {width:100%; margin:0 !important;}
+.card_item.res-slide-item {width:100%;}
 .gsrin0103 .card_item { padding: 32px 32px 48px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; gap: 16px; min-height: 180px; }
 .gsrin0103 .text-wrapper-6 { font-size: 1.8rem; font-weight: 700; color: #107af2; }
 .gsrin0103 .element { font-size: 20px; font-weight: 700; color: #161618; line-height: 1.35; }
@@ -804,30 +809,37 @@ export default {
 
 /*:::::::::::::::::::::::::::::::Responsive Style :::::::::::::::::::::::::::::::*/
 
+
+/* @media screen and (min-width:1025px) {
+    .div-2 {width: 21.97% !important;}
+} */
+
+
 @media screen and (max-width:1024px) {
-    .cont_inner {padding: 0 20px;}
     .title-sub-text {padding: 60px 0; font-size: 36px;}
-    .view-3 {flex-wrap: wrap; justify-content:space-between; gap:0;}
-    .div-2 {width: calc(48% - 10px);} /* 2열 배치 */
-    :deep(.view-6.res-swiper-container) .swiper-wrapper {display: grid !important; grid-template-columns: repeat(2, 1fr); gap: 20px;}
-    .frame-5 { max-width:none;}
+    .view-3 {display:block;}
+    :deep(.view-6.res-swiper-container) .swiper-wrapper, :deep(.view-3.res-swiper-container) .swiper-wrapper {display: grid !important; grid-template-columns: repeat(2, 1fr); gap: 20px; transform:none;}
+    .frame-5 {max-width:none;}
     .view-6:last-of-type {width:100%;}
     .gsrin0104 .banner_text { font-size: 32px; }
     .gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 12px 15px; font-size: 16px; }
+    .skill-swiper-wrapper, .eval-usage-swiper-wrapper {grid-template-columns: repeat(2, 1fr);}
+    .sub-member-swiper-wrapper,.board-swiper-wrapper {display: grid; grid-template-columns: repeat(2, 1fr); gap:20px 20px;}
+
 }
 
 @media screen and (max-width: 767px) {
-    .cont_inner {padding:80px 20px 200px;}
+    .cont_inner {padding-top:80px;}
     .title_wrap {display:none;}
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
     .title-sub-text {padding: 60px 0 80px; font-size: 28px; line-height: 1.3; text-align:left;}
     :deep(.title-sub-text br) {display:block !important;}
     .view-3 {flex-direction: column; align-items: center; gap: 40px;}
-    .div-2 {max-width: 400px;} /* 1열 배치 및 최대너비 제한 */
+    .div-2 {max-width:312px; width:100%;} /* 1열 배치 및 최대너비 제한 */
     .view-6 {flex-direction: column; gap: 12px;}
     .view-6:last-of-type {width:100%;}
-    .frame-5 {width: 100%; max-width:none;} /* 역량 구성표 1열 */
+    .frame-5, .card_item.res-slide-item {width:90%;} /* 역량 구성표 1열 */
     .img {height: auto; aspect-ratio: 16 / 9;} /* 이미지 비율 유지 */
     .divider {display:none;} /* 구분선 가로로 변경 */
     .policy_wrap {padding: 30px 20px;}
@@ -853,15 +865,13 @@ export default {
     .gsrin0104 .policy_wrap { padding:0; overflow-x: auto; }
     .gsrin0104 .policy_wrap table { min-width: 700px; } /* 모바일에서는 가로 스크롤 허용 */
     .gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 10px; font-size: 14px; }
+    .skill-swiper-wrapper {display:flex;}
+    :deep(.view-6.res-swiper-container) .swiper-wrapper, :deep(.view-3.res-swiper-container) .swiper-wrapper, .eval-usage-swiper-wrapper {display:flex !important; gap:0px;}
 }
 
 /* swiper */
 .swiper {width:100%;}
 .swiper-slide { height:auto; position:relative;}
-/* .swiper-slide.div-2 {margin-right:28px; margin-left:28px}
-.swiper-slide.div-2:first-of-type {margin-left:0;}
-.swiper-slide.div-2:last-of-type::after {display:none;}
-.swiper-slide.div-2::after {content:''; width:1px; height:100%; background:#F2F2F4; display:block; position:absolute; top:0; right:-28px} */
 
 
 
@@ -887,4 +897,5 @@ export default {
     .gsrin0103 .sub-title {margin-bottom:32px;}
     .gsrin0103 colgroup col:first-of-type {width:80px}
 }
+
 </style>

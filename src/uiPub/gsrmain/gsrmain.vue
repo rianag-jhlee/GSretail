@@ -1168,6 +1168,11 @@ section {
 
 /* --- [Mobile: 768px 이하] --- */
 @media screen and (max-width: 768px) {
+    #container {
+        padding-top:0;
+        padding-bottom:0;
+    }
+
     h2 {
         font-size: 3.2rem;
         text-align: center;

@@ -393,14 +393,7 @@ export default {
 <style scoped>
 /* 1. Layout & Utils */
 .main-container { width: 100%; position: relative; background-color: #ffffff; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
-.ac { text-align: center; }
-.mt100 { margin-top: 100px; }
-.mb200 { margin-bottom: 200px; }
-.mb100 { margin-bottom: 100px; }
-.mb80 { margin-bottom: 80px; }
-.mb40 { margin-bottom: 40px; }
-.py80 { padding: 80px 0; }
+
 .tab_wrap {margin-left:-20px; margin-right:-20px;}
 .tab_wrap + div {margin-top:80px;}
 
@@ -494,7 +487,6 @@ figure img { width: 100%; height: 100%; object-fit: cover; }
 
 /* 7. Responsive */
 @media screen and (max-width: 1024px) {
-    .cont_inner { padding: 0 20px; }
     .mt100 { margin-top: 60px; }
     .key_features_grid { flex-wrap: wrap; }
     .key_features_grid li {width:100%; flex:0 auto;}

@@ -13,7 +13,7 @@ const cards = [
             "당신의 꿈을 현실로,<br><span class=\"franchise_card_title_point\">GS25</span>가 함께 걷겠습니다",
         desc:
             "혼자가 아닙니다.<br class=\"m_br\" />GS25가 여러분의 든든한 파트너가 되어<br /> 성공 창업의 첫걸음부터 끝까지<br class=\"m_br\" />함께하겠습니다",
-        link: "#none",
+        link: "/gsrst02010101",
     },
     {
         img: mainImg02,

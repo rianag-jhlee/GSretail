@@ -136,12 +136,12 @@
 
 <script>
 import modal from "@/assets/js/modal";
-import Buttons from "@/components/Buttons.vue";
+//import Buttons from "@/components/Buttons.vue";
 
 export default {
     name: "gsrsu04020301",
     components: {
-        Buttons
+        // Buttons
     },
     data() {
         return {

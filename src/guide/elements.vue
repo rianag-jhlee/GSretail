@@ -83,6 +83,8 @@
                     <Buttons btn-class="btn_border">border default(h:26px)</Buttons>
                     <Buttons btn-class="btn_big border">big(h:52px)</Buttons>
                     <Buttons btn-class="btn_xl border">xl(h:64px)</Buttons>
+
+                    <Buttons btn-class="btn_mid btn_icon_file after">mid(h:44px)</Buttons>
                 </div>
             </div>
 
@@ -111,7 +113,9 @@
 &lt;Buttons btn-class="btn_mid border"&gt;mid(h:44px)&lt;/Buttons&gt;
 &lt;Buttons btn-class="btn_border"&gt;border default(h:26px)&lt;/Buttons&gt;
 &lt;Buttons btn-class="btn_big border"&gt;big(h:52px)&lt;/Buttons&gt;
-&lt;Buttons btn-class="btn_xl border"&gt;xl(h:64px)&lt;/Buttons&gt;</code></pre>
+&lt;Buttons btn-class="btn_xl border"&gt;xl(h:64px)&lt;/Buttons&gt;
+
+&lt;Buttons btn-class="btn_mid btn_icon_file after"&gt;mid(h:44px)&lt;/Buttons&gt;</code></pre>
         </section>
 
         <section>

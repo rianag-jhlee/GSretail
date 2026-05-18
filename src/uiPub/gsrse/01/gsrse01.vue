@@ -13,26 +13,10 @@
                     :tab-slide="true"
                     @change="onMainTabChange"
                 />
-
-                <div class="sub_tab_wrap mt64 ac">
-                    <Tabs 
-                        v-model="SubTabIdx" 
-                        :tab-items="t.SubTabs" 
-                        tab-class="type_02" 
-                        :tab-slide="true"
-                        @change="onSubTabChange" 
-                        v-if="MainTabIdx === 0"
-                    />
-                </div>
-
                 <div class="tab_content_wrap mt100" v-if="MainTabIdx === 0">
-                    <div class="partnership_intro">
+                    <div class="partnership_intro mb100">
                         <h3 class="section-sub-title mb16">{{ t.IntroTitle }}</h3>
-                        <p class="intro_desc mb40">{{ t.IntroDesc }}</p>
-                        <div class="btn_group justify-center mb100">
-                            <button type="button" class="btn_big primary">{{ t.BtnApply }}</button>
-                            <button type="button" class="btn_big">{{ t.BtnCheck }}</button>
-                        </div>
+                        <p class="intro_desc">{{ t.IntroDesc }}</p>
                     </div>
 
                     <div class="guide_step_area mb100">
@@ -47,6 +31,18 @@
                         </ul>
                     </div>
 
+
+                    <div class="sub_tab_wrap ac mb40">
+                        <Tabs 
+                            v-model="SubTabIdx" 
+                            :tab-items="t.SubTabs" 
+                            tab-class="type_02" 
+                            :tab-slide="true"
+                            @change="onSubTabChange" 
+                            v-if="MainTabIdx === 0"
+                        />
+                    </div>
+
                     <!-- gsrse01 -->
                     <section class="notice_list_area mb100" v-if="SubTabIdx === 0">
                         <h4 class="guide_title mb40">{{ t.SubTabs[0].item }}</h4>
@@ -55,11 +51,11 @@
                                 <tbody>
                                     <tr v-for="(item, idx) in t.NoticeList" :key="'notice-'+idx">
                                         <td class="ac color_gray">{{ item.id }}</td>
-                                        <td class="al">
+                                        <td class="al title_cell">
                                             <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
                                         </td>
-                                        <td class="ac color_gray">{{ item.date }}</td>
-                                        <td class="ac color_gray">{{ t.ViewCountText }} {{ item.views }}</td>
+                                        <td class="ac color_gray date_cell">{{ item.date }}</td>
+                                        <td class="ac color_gray view_cell">{{ t.ViewCountText }} {{ item.views }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -127,6 +123,10 @@
 
                             <div class="auth_table_area mo">
                                 <h5 class="text-wrapper-2 mb24">{{ t.AuthTableTitle }}</h5>
+                                <div class="auth_header">
+                                    <span>{{t.AuthTableHeader_mo[0]}}</span>
+                                    <span>{{t.AuthTableHeader_mo[1]}}</span>
+                                </div>
                                 <div class="auth_card_list">
                                     <div class="auth_card_item" v-for="(row, rIdx) in t.AuthAgencies_mo" :key="'auth-mo-' + rIdx">
                                         <div class="auth_row">
@@ -139,7 +139,7 @@
                         </article>
 
                         <article class="guide_view mb100">
-                            <h4 class="text-wrapper-8 mb40">{{ t.RelatedSitesTitle }}</h4>
+                            <h4 class="text-wrapper mb40">{{ t.RelatedSitesTitle }}</h4>
                             <div class="card_grid">
                                 <div class="info_card" v-for="(card, cIdx) in t.RelatedSites" :key="'site-'+cIdx">
                                     <div class="card_head mb16">
@@ -171,8 +171,8 @@
                         </article>
                     </section>
 
-                    <!-- gsrst03 -->  
-                    <section class="gsrst03 mb100" v-if="SubTabIdx === 2">
+                    <!-- gsrse03 -->  
+                    <section class="gsrse03 mb100" v-if="SubTabIdx === 2">
                         <div class="faq_frame">
                             <h4 class="text-wrapper mb40">{{ t.SubTabs[2].item }}</h4>
                             
@@ -199,36 +199,369 @@
                             </div>
                         </div>
                     </section>
+
+                    <!-- gsrse04 -->
+                    <section class="gsrse04 mb100" v-if="SubTabIdx === 3">
+                        <article class="guide_view">
+                            <div class="guide_header mb40">
+                                <h4 class="text-wrapper mb12">{{ t.counselTitle }}</h4> 
+                            </div>
+                        </article>
+                        <section class="listening_form_area">
+                            <div class="consent_container">
+                                <article v-for="(consent, cIdx) in t.listening.Consents" :key="'consent-'+cIdx" class="consent_box">
+                                    <strong class="consent_tit">{{ consent.title }}</strong>
+                                    <ul class="consent_list">
+                                        <li v-for="(list, lIdx) in consent.items" :key="'list-'+lIdx">{{ list }}</li>
+                                    </ul>
+                                    <div class="consent_agree">
+                                        <p class="guide_text" v-html="consent.guide"></p>
+                                        <Inputs type="checkbox" text="동의합니다." v-model="formData.agreements[cIdx]" />
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+
+
+                        <div class="form_container">
+                            <article class="listening_form_wrap">
+                                <div class="form_section">
+                                    <div class="form_header">
+                                        <h5 class="form_title">{{ t.listening.InputWrapcont.part1.title }}</h5>
+                                        <span class="required_guide">{{ t.listening.InputWrapcont.part1.requiredText }}</span>
+                                    </div>
+                                    <div class="form_body">
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part1.nameLabel }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_item">
+                                                <Inputs type="text" v-model="formData.name" :placeholder="t.listening.InputWrapcont.part1.namePlaceholder" />
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part1.emailLabel }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_group email">
+                                                <div class="group_wrap">
+                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="이메일 아이디" /></div>
+                                                    <span class="unit">@</span>
+                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="도메인 입력" /></div>
+                                                </div>
+                                                <SelectBox :options="t.listening.InputWrapcont.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part1.telLabel }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_group">
+                                                <div class="input_flex_item">
+                                                    <SelectBox :options="t.listening.InputWrapcont.part1.telOptions" v-model="formData.tel1" initMsg="선택" />
+                                                </div>
+                                                <span class="unit">-</span>
+                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
+                                                <span class="unit">-</span>
+                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel3" /></div>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part1.companyname }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_group companyname">
+                                                <Inputs type="text" v-model="formData.emailId" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part1.department }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_group department">
+                                                <p>
+                                                    <em>{{ t.listening.InputWrapcont.part1.department_1 }}</em>
+                                                    <Inputs type="text" v-model="formData.emailId" placeholder="" />
+                                                </p>
+                                                <p>
+                                                    <em>{{ t.listening.InputWrapcont.part1.rank }}</em>
+                                                    <Inputs type="text" v-model="formData.emailId" placeholder="" />
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form_section">
+                                    <div class="form_header">
+                                        <h5 class="form_title">{{ t.listening.InputWrapcont.part2.title }}</h5>
+                                        <span class="required_guide">{{ t.listening.InputWrapcont.part1.requiredText }}</span>
+                                    </div>
+                                    <div class="form_body">
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.사업자등록번호 }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Search v-model="searchData" :search_opt="options" @search="handleSearch" :placeholder="t.listening.InputWrapcont.part2.placeholder_1" :useSelect="false" class="w428" />
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.회사명 }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.사업자구분 }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_complex">
+                                                <Inputs type="text" v-model="formData.storeName" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.대표자성명  }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.placeholder_2" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.업태 }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_complex">
+                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.업종 }}</span>
+                                            </div>
+                                            <div class="input_complex">
+                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.대표브랜드  }}</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.주소  }}</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <div class="input_wrap adress_wrap">
+                                                    <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.placeholder_3_1"/>
+                                                    <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.placeholder_3_2"/>
+                                                    <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.placeholder_3_3"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.설립일자 }}</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form_section">
+                                    <div class="form_header">
+                                        <h5 class="form_title">{{ t.listening.InputWrapcont.part3.title }}</h5>
+                                        <span class="required_guide">{{ t.listening.InputWrapcont.part1.requiredText }}</span>
+                                    </div>
+                                    <div class="form_body">
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.입점부문 }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_item radio_wrap">
+                                                <Inputs type="radio" text="GS25" name="입점부문" value="GS25" />
+                                                <Inputs type="radio" text="GS THE FRESH" name="입점부문" value="GSTHEFRESH"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.신청상품군 }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.storeName" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.신청상세품목 }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_complex">
+                                                <Inputs type="text" v-model="formData.storeName" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.상품명 }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.납품원가 }}</span>
+                                                <span class="required_mark">*</span>
+                                            </div>
+                                            <div class="input_complex">
+                                                <Inputs type="text" v-model="formData.storeName" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.판매희망가 }}</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.상품규격 }}</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <div class="input_wrap">
+                                                    <Inputs type="text" v-model="formData.subject" />
+                                                    <span>X</span>
+                                                    <Inputs type="text" v-model="formData.subject" />
+                                                    <span>X</span>
+                                                    <Inputs type="text" v-model="formData.subject" />
+                                                </div>
+                                                <p class="guide_msg">{{ t.listening.InputWrapcont.part3.상품규격상세 }}</p>
+
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.첨부파일 }}</span>
+                                                <p class="guide_msg">{{ t.listening.InputWrapcont.part3.첨부_desc }}</p>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="file" class="btn_file">{{ t.listening.InputWrapcont.part3.파일추가 }}</Inputs>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.입점제안서 }}</span>
+                                                <p class="guide_msg">{{ t.listening.InputWrapcont.part3.입점_desc }}</p>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="file" class="btn_file">{{ t.listening.InputWrapcont.part3.파일추가 }}</Inputs>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.신청제목 }}</span>
+                                            </div>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject" placeholder="제목을 입력해주세요" class="w428"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.신청내용 }}</span>
+                                            </div>
+                                            <div class="input_complex">
+                                                <Textarea v-model="formData.body" :placeholder="t.listening.InputWrapcont.part2.contentPlaceholder" :rows="6" :maxlength="500" />
+                                                <p class="guide_msg_multi" v-html="t.listening.InputWrapcont.part2.noticeText"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <div class="btn-wrap">
+                                <Buttons btn-class="btn_big primary"  @click="openModal" data-popid="gsrcu010101" data-type="small" data-cont="gsrcu010101">{{ t.listening.InputWrapcont.part3.btnSubmit }}</Buttons>
+                                <Buttons btn-class="btn_big gray" @click="closeModal">{{ t.listening.InputWrapcont.part3.btnCancel }}</Buttons>
+                            </div>
+                        </div>
+
+                    </section>
                 </div>
             </div>
         </section>
+
+
+        <!-- 상담신청완료 팝업 -->
+        <teleport to="body">
+            <div id="gsrcu010101" class="modal_wrap">
+                <div class="modal_container"></div>
+            </div>
+        </teleport>
     </div>
 </template>
 
 <script>
+import modal from "@/assets/js/modal";
 import Tabs from "@/components/Tabs.vue";
 import Pagination from "@/components/Pagination.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
+import Buttons from "@/components/Buttons.vue";
+import Inputs from "@/components/Inputs.vue";
+import SelectBox from "@/components/SelectBox.vue"; 
+import Textarea from "@/components/Textarea.vue";
+import Search from "@/components/Search.vue";
+
 
 export default {
     name: "gsrst01",
-    components: { Tabs, Pagination, Accordion, AccordionItem },
+    components: { Tabs, Pagination, Accordion, AccordionItem, Buttons, Inputs, SelectBox, Textarea, Search  },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
+            searchData: {
+                type: "all",    // select 초기 선택 value 값
+                keyword: ""     // input 초기 입력 값
+            },
             MainTabIdx: 0,
             SubTabIdx: 0,
             currentPage: 1,
+            formData: {
+                agreements: [false, false],
+                name: "", emailId: "", emailDomain: "", emailSelect: "",
+                tel1: "", tel2: "", tel3: "", category: "", storeName: "",
+                subject: "", body: "", replyType: ""
+            },
             langData: {
                 ko: {
                     MainTitle: "입점상담",
                     MainTabs: [{ item: "GS25/GS THE FRESH/지원부문" }, { item: "GS SHOP" }],
-                    SubTabs: [{ item: "공지사항" }, { item: "입점 안내" }, { item: "자주하는 질문 FAQ" }],
-                    IntroTitle: "입점상담 신청 및 결과 조회",
+                    SubTabs: [{ item: "공지사항" }, { item: "입점 안내" }, { item: "자주하는 질문 FAQ" }, { item: "상담 신청" }],
+                    IntroTitle: "입점상담 신청 ",
                     IntroDesc: "GS25/GS THE FRESH/지원부문 입점에 관한 상담을 신청하고 결과를 확인하세요.",
-                    BtnApply: "상담 신청",
-                    BtnCheck: "상담 결과 조회",
                     GuideTitle: "입점 상담 가이드",
                     StepList: [{ title: "신규업체 등록" }, { title: "입점상담 신청" }, { title: "담당MD 상담" }, { title: "입점계약 진행" }],
                     NoticeList: [
@@ -295,6 +628,80 @@ export default {
                             isOpen: false 
                         }
                     ],
+                    counselTitle:"상담 신청",
+                    listening: {
+                        Txt:"언제나 고객님의 입장이 되어<br/> 작은 소리에도 귀를 기울이겠습니다.",
+                        Title: "브랜드 매장 이용 관련 문의",
+                        Desc: "고객님이 매장을 이용하시며 느끼신 궁금증, 칭찬할 점, 불만인 점, 제안할 점 등에 대해 의견을 남겨주세요.",
+                        Consents: [
+
+                            {
+                                title: "개인정보 수집·이용 동의",
+                                items: [
+                                    "입력하신 정보는 입점 상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급 사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
+                                    "수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일",
+                                    "수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
+                                    "보유 및 이용기간: 접수 후 1년"
+                                ],
+                                guide: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br/> 문의 글 작성이 불가능합니다."
+                            }
+                        ],
+                        InputWrapcont: {
+                            part1: {
+                                title: "고객정보",
+                                requiredText: "* 필수 입력사항",
+                                nameLabel: "이름",
+                                namePlaceholder: "이름을 입력해주세요",
+                                emailLabel: "이메일",
+                                emailOptions: [{ value: 'naver.com', label: 'naver.com' }, { value: 'gmail.com', label: 'gmail.com' }],
+                                telLabel: "휴대폰",
+                                telOptions: [{ value: '010', label: '010' }, { value: '011', label: '011' }],
+                                companyname :"소속회사명",
+                                department:"부서명 / 직급",
+                                department_1:"부서",
+                                rank:"직급",
+                                
+
+                            },
+                            part2: {
+                                title: "사업자정보",
+                                사업자등록번호: "사업자등록번호",
+                                placeholder_1:" ‘-’없이 숫자 입력",
+                                회사명:"회사명 ",
+                                사업자구분: "사업자구분",
+                                대표자성명: "대표자 성명",
+                                placeholder_2:"대표자성명",
+                                업태: "업태",
+                                업종:"업종",
+                                대표브랜드:"대표브랜드",
+                                주소:"주소",
+                                placeholder_3_1:" 주소 1 란 (지역, 도로명)",
+                                placeholder_3_2:" 주소 2 란 (상세 주소)",
+                                placeholder_3_3:" 우편번호 란",
+                                설립일자:"설립일자"
+                            },
+                            part3: {
+                                title: "신청정보",
+                                입점부문: "입점부문",
+                                신청상품군:"신청상품군",
+                                신청상세품목: "신청상세품목",
+                                상품명: "상품명",
+                                납품원가: "납품 원가 (원)",
+                                판매희망가: "판매 희망가 (원)",
+                                상품규격 : "상품 규격 (단위 생략)",
+                                상품규격상세: "가로x세로x높이 cm, 무게 kg",
+                                첨부파일:"상품 이미지 첨부",
+                                첨부_desc:"(000x000 px)",
+                                입점제안서:"입점 제안서 첨부",
+                                입점_desc:"(최대 00MB)",
+                                신청제목:"신청제목",
+                                신청내용:"신청내용",
+                                파일추가:"파일추가",
+                                btnSubmit: "상담신청",
+                                btnCancel: "다시작성"
+                            }
+                        }
+                    },
                     ViewCountText: "조회",
                     ExternalMoveText: "GS SHOP 입점 상담 페이지로 이동 중입니다.",
                     SystemLinks: [
@@ -318,6 +725,14 @@ export default {
         window.removeEventListener('resize', this.checkMobile);
     },
     methods: {
+        closeModal(event) { modal.close(event.currentTarget); },
+        openModal(event) {
+            const el = event.currentTarget;
+            const popId = el.dataset.popid;
+            const type = el.dataset.type || "default"; // data-type 속성 읽기
+            const cont = el.dataset.cont; // data-cont 속성 읽기
+            modal.open(popId, type, el, cont); // 4개 인자 모두 전달
+        },
         checkMobile() {
             // 3. 모바일 기준값(767px) 체크 로직
             this.isMobile = window.innerWidth <= 767;
@@ -335,7 +750,10 @@ export default {
             }
         },
         onSubTabChange(idx) { this.SubTabIdx = idx; },
-        onPageChange(page) { this.currentPage = page; }
+        onPageChange(page) { this.currentPage = page; },
+        handleSearch(val) { //[검색] 버튼 클릭 시 실행 이벤트
+            console.log("검색 실행:", val);
+        }
     }
 };
 </script>
@@ -345,21 +763,8 @@ export default {
 .main-container { width: 100%; position: relative; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrst01_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; letter-spacing: -1.44px; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
 .mo {display:none;}
 .pc {display:block;}
-
-.ac { text-align: center; }
-.al { text-align: left; }
-.mt64 { margin-top: 64px; }
-.mt100 { margin-top: 100px; }
-.mb12 { margin-bottom: 12px; }
-.mb16 { margin-bottom: 16px; }
-.mb24 { margin-bottom: 24px; }
-.mb40 { margin-bottom: 40px; }
-.mb100 { margin-bottom: 100px; }
-.mt20 { margin-top: 20px; }
-.py80 { padding: 80px 0; }
 
 /* 2. 텍스트 스타일 가이드 */
 .section-sub-title { font-size: 40px; font-weight: 700; color: #161616; }
@@ -376,7 +781,7 @@ export default {
 .step_list li {padding: 56px 64px; background-color: #f8f8f8; border-radius: 8px;  flex: 1; display: flex; align-items: center; }
 .step_list li::before { content:''; width:40px; height:40px; margin-right:24px; background:red; display:inline-block; flex-shrink:0; } /* 아이콘 영역 */
 .step_info { display: flex; flex-direction: column; gap: 6px; }
-.step_label { font-size: 1.8rem; font-weight: 700; color: #107af2; }
+.step_label { font-size:18px; font-weight: 700; color: #107af2; }
 .step_text { font-size: 20px; font-weight: 700; color: #161616; }
 
 /* 4. 테이블 리스트 (공지사항 등) */
@@ -387,6 +792,7 @@ export default {
 .policy_wrap thead th { background-color: #F8F8F8; color: #161616; font-weight: 700; }
 .policy_wrap td { height: 82px; color: #161616; border-left: 0; border-right: 0; }
 .policy_wrap th { border-left: 0; border-right: 0; }
+.notice_list_area .policy_wrap tbody tr:first-of-type td {border-top:1px solid #161616;}
 
 /* 5. 입점 안내 상세 컨텐츠 (Table, Bullet, Card) */
 .full_img { width: 100%; height: auto; display: block; }
@@ -424,10 +830,11 @@ export default {
 .bottom_link_btns a::before, .bottom_link_btns a::after { content:''; width:40px; height:40px; background:red; display:inline-block; } /* 아이콘 가상요소 */
 .bottom_link_btns a::before { position:absolute; top:32px; left:50%; transform:translateX(-50%); }
 .bottom_link_btns a::after { width:16px; height:16px; margin-left:8px; }
-.bottom_link_btns a:hover { color:#fff; background:#107AF2; }
+.bottom_link_btns a:hover { color:#fff; background:#15B874; }
 
 /* 8. 버튼 및 FAQ 공통 */
 .board_type_toggle {border-top:1px solid #161616;}
+.board_type_toggle dt > a.acc_tit_btn {padding:20px !important;}
 .btn_group { display: flex; gap: 8px; }
 .faq_list_wrap { border-top: 1px solid #161616; }
 .faq_item { border-bottom: 1px solid #e5e5e9; }
@@ -441,25 +848,88 @@ export default {
 .a_text { font-size: 1.8rem; line-height: 1.6; color: #67676f; }
 .pagination_area { display: flex; justify-content: center; }
 
+/* 상담신청 */
+.radio_wrap {display:flex; gap:20px;}
+.input_wrap {display:flex; align-items:center; justify-content:flex-end; gap:8px;}
+.input_wrap.type-radio {justify-content:flex-start; flex:auto;}
+.listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
+.listening_form_area .consent_tit {margin-bottom: 24px; font-size: 24px; font-weight: 700; display: block; }
+.listening_form_area .consent_list {padding-bottom:24px;}
+.listening_form_area .consent_list li { font-size: 16px; color: #67676f; margin-bottom: 8px; padding-left: 12px; line-height:1.5; position: relative; }
+.listening_form_area .consent_list li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 1px; background-color: #67676f; }
+.listening_form_area .form_table { border-top: 1px solid #242428; }
+.listening_form_area .form_row { display: flex; align-items: center; }
+.listening_form_area .form_row .label { width: 134px; padding: 24px; font-size: 16px; color: #161616; }
+.listening_form_area .required { color: #fb6432; }
+.listening_form_area input, .listening_form_area textarea { width: 100%; padding: 14px 16px; border: 1px solid #c4c4d0; border-radius: 12px; font-size: 16px; }
+.listening_form_area textarea { height: 160px; resize: none; }
+.listening_form_area .consent_agree {padding-top:24px; border-top:1px solid #D7D7DF; display:flex; justify-content:space-between; align-items:center;}
+.listening_form_area .consent_agree p {font-size:16px; font-weight:700;}
+.listening_form_area article {margin-bottom:40px;}
+.listening_form_wrap .form_header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #242428; }
+.listening_form_wrap .form_title { font-size: 24px; font-weight: 700; color: #161616; }
+.listening_form_wrap .required_guide { font-size: 14px; color: #fb6432; }
+.form_section {margin-bottom:64px;}
+.listening_form_wrap .form_body {padding:10px 0 12px; border-bottom: 1px solid #e5e5e9; }
+.listening_form_wrap .form_row { display: flex; align-items: flex-start; gap: 8px; padding: 12px 0; }
+.listening_form_wrap .label_item {width: 150px; align-items: center; gap: 4px; padding-top: 14px; }
+.listening_form_wrap .label_text {color: #161616; font-size: 16px; display:inline-block; margin-right:5px; }
+.listening_form_wrap .required_mark { color: #fb6432; font-size: 16px; }
+.listening_form_wrap .input_group { display: flex; align-items: center; gap: 8px;}
+.listening_form_wrap .input_group .group_wrap { display: flex; align-items: center; gap: 8px;}
+.listening_form_wrap .input_flex_item { flex: 1; min-width: 0; }
+.listening_form_wrap .unit { color: #67676f; font-size: 16px; padding: 0 4px; }
+.listening_form_wrap .input_complex {width:calc(100% - 134px);  display: flex; flex-direction: column; gap: 8px;}
+.listening_form_wrap .input_complex .textarea_wrap {max-width:600px;}
+.listening_form_wrap .guide_msg {margin-top:5px; color: #67676f; font-size: 14px; }
+.listening_form_wrap .guide_msg_multi {width:90%; margin-top: 8px; color: #67676f; font-size: 14px; line-height:1.4; display:flex; flex-direction:column; }
+.listening_form_wrap :deep(.guide_msg_multi) span {padding-left:15px; line-height:1.4; display:inline-block; position:relative;}
+.listening_form_wrap :deep(.guide_msg_multi) span::before {content:'*'; position:absolute; top:0; left:0;}
+.listening_form_wrap .file_upload_group { display: flex; align-items: center; gap: 10px; }
+.listening_form_wrap .btn_file { height: 38px; padding: 0 12px; font-size: 16px; cursor: pointer; }
+.listening_form_wrap .file_name { font-size: 14px; color: #161616; }
+.listening_form_wrap .department {display:flex; gap:20px;}
+.listening_form_wrap .department p {display:flex; align-items:center; gap:10px;}
+.listening_form_wrap .department em { font-weight: 700; }
+.form_container .btn-wrap {display:flex; justify-content:flex-end; gap:8px;}
+.form_container .btn-wrap * {width:134px;}
+.input_wrap.type-radio {width:auto !important;}
+.w428 {width:428px; display:inline-block;}
+
 /* 9. 반응형 미디어 쿼리 */
 @media screen and (max-width: 1024px) {
     .step_list {flex-wrap:wrap;}
     .step_list li {width:50%; padding:40px 30px; flex: none;}
-    .cont_inner { padding: 0 20px; }
     .bottom_link_btns, .help_desk_area ul { flex-direction: column; grid-template-columns: 1fr; }
     .help_desk_area ul li { width:100%; padding:20px; flex-direction:column;}
     .policy_wrap th, .policy_wrap td, .policy_wrap td a {font-size: 16px !important; }
+    .listening_form_wrap .form_row {flex-direction:column;}
 }
 @media screen and (max-width: 767px) {
     .mo {display:block;}
     .pc {display:none;}
+    .cont_inner {padding-top: 80px;}
+    :deep(.tab_wrap) ul.type_02 {padding-left:0px !important;}
+    .text-wrapper { font-size: 24px;}
     .title_wrap  {display:none;}
     .section-sub-title, .guide_title {font-size:24px;}
     .intro_desc {font-size:18px;}
     .step_list {flex-direction: column; align-items: flex-start; padding:0; }
     .div_desc :deep(li), .bullet_01 li, .div_desc { font-size:18px;}
     .step_list li {width:100%;}
+    .step_text {font-size:18px;}
     .notice_list_area .base_table tbody tr td:first-of-type {display:none;}
+    /* 기존 테이블 레이아웃 해제 */
+    .notice_list_area .base_table tbody, .notice_list_area .base_table tr, .notice_list_area .base_table td {display: block; width: 100%; height:auto; border: 0;}
+    .notice_list_area .base_table tr {padding:12px 10px; border-bottom: 1px solid #EEE; display: flex; flex-wrap: wrap;}
+    /* 제목 셀: 상단 전체 너비 차지 */
+    .notice_list_area .policy_wrap tbody tr:first-of-type td {border-top:0;}
+    .notice_list_area .base_table {border-top:1px solid #161616;}
+    .notice_list_area .base_table .title_cell {padding: 0 0 8px 0; order: 1;}
+    .notice_list_area .base_table .title_cell .link_title {color: #161616; font-size:16px !important; font-weight: 500; line-height: 1.4;}
+    .notice_list_area .base_table .date_cell, .notice_list_area .base_table .view_cell {width: 50%; padding: 0; color: #999; font-size: 12px !important; text-align: left !important; order: 2;}
+    .notice_list_area .base_table .view_cell {color:#67676F; text-align:right !important; order: 3;}
+    .notice_list_area .base_table .view_cell::before {margin-right: 4px;}
     .help_desk_area ul li { width:100%; padding:20px; display:flex; flex-direction:row; gap:20px; align-items:center;}
     .help_desk_area ul li::before {width:100px; margin-right:0;}
     .help_desk_area .info .brand { font-size:14px;}
@@ -470,7 +940,31 @@ export default {
     .card_grid {flex-direction:column;}
     .card_grid .info_card {width:100%;}
     .policy_wrap th, .policy_wrap td, .policy_wrap td a {font-size: 16px !important; }
-    .mt100 {margin-top:60px !important;}
-    .mt64 {margin-top:16px !important;}
+
+
+    .input_item, .input_complex, .input_wrap, .w428 {width:100%;}
+    .p_desc {font-size:14px;}
+    .listening_form_area i {font-weight:700;}
+    :deep(.listening_form_area) i br {display:block;}
+    .listening_form_area .consent_box {margin-bottom:20px; padding:30px 20px;}
+    .listening_form_wrap .input_group.email {flex-direction:column; align-items:stretch;}
+    .consent_agree {flex-direction:column; align-items:flex-start; gap:15px;}
+    .guide_text + .input_wrap {justify-content:flex-start;}
+    .form_container .btn-wrap {display:flex; justify-content:flex-start; gap:8px;}
+    .form_container .btn-wrap * {width:50%;}
+    .form_body .form_row:first-of-type .label_item {padding-top: 0px;}
+    .consent_tit {font-size:18px !important;}
+    .consent_list li, .consent_agree p  {font-size:14px !important;}
+    :deep(.check) em {font-size:16px !important;}
+    :deep(.guide_text) br {display:none;}
+    .listening_form_wrap .guide_msg_multi {font-size:14px;}
+    :deep(.guide_msg_multi) span {margin-bottom:8px; display:block;}
+    :deep(.guide_msg_multi) span:last-of-type {margin-bottom:0;}
+    .listening_form_wrap .input_complex, .listening_form_wrap .input_complex .textarea_wrap {width:100%; max-width:100%;}
+    .listening_form_wrap .department {display:flex; flex-direction:column; gap:10px;}
+    .listening_form_wrap .department em {width:50px;}
+
+    /* 상담신청 */
+    .input_wrap.adress_wrap {flex-direction:column;}
 }
 </style>

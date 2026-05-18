@@ -15,7 +15,7 @@ defineProps({
                 <div v-if="showIcon" class="num_info_icon" aria-hidden="true"></div>
                 <div class="num_info_content">
                     <div class="num_info_title">
-                        <span class="num_info_num">{{ item.num }}</span>
+                        <span v-if="item.em || item.num" class="num_info_num">{{ item.em || item.num }}</span>
                         <strong>
                             {{ item.title }}
                             <a

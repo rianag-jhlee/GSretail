@@ -358,7 +358,6 @@ export default {
 <style scoped>
 /* 직접 값 적용 - Scoped */
 .gsrbr06 { width: 100%; position: relative; background-color: #ffffff; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
 .title_wrap {display:flex; flex-direction:column; align-items:flex-start; gap:12px;}
 h4 {color:#161616; font-size:32px; font-weight:700;}
 .group_desc {color:#161616; font-size:20px;}
@@ -372,7 +371,7 @@ h4 {color:#161616; font-size:32px; font-weight:700;}
 .text_box span { color: #ffffff; font-size: 72px; font-weight: 700; display: block; margin-bottom: 10px; }
 
 /* Body Area */
-.body_wrap { padding:200px 0; }
+.body_wrap { padding-top:200px; }
 .main_title { font-size: 48px; font-weight: 700; color: #161616; margin-bottom: 16px; }
 .main_desc { font-size: 24px; font-weight: 700; color: #161616; line-height: 1.35; }
 .intro_group {margin-bottom:200px;}
@@ -439,16 +438,6 @@ h5 + dl {margin-top:24px;}
 .sub_btn_group button:last-of-type {margin-right:0;}
 .sub_btn_group button::after {content:''; width:16px; height:16px; background:url('@/assets/images/common/icon_set_16.png') -856px -14px no-repeat; display:inline-flex;}
 
-/* Utils */
-.ac { text-align: center; }
-.al { text-align: left; }
-.mt40 { margin-top: 40px; }
-.mt64 { margin-top: 64px; }
-.mt100 { margin-top: 100px; }
-.mb24 { margin-bottom: 24px; }
-.mb40 { margin-bottom: 40px; }
-.mb100 { margin-bottom: 100px; }
-.mb120 { margin-bottom: 120px; }
 @media screen and (max-width: 1024px) {
     .pc {display:none;}
     .mo {display:flex;}
@@ -459,14 +448,13 @@ h5 + dl {margin-top:24px;}
 }
 
 @media screen and (max-width: 767px) {
-    .body_wrap { padding:60px 0 200px; }
+    .body_wrap { padding-top:60px; }
     .intro_group, .mb120 {margin-bottom:80px;}
     .text_box span { font-size:28px; text-align: center; }
     h4 {font-size:24px;}
     h5 {font-size:20px;}
     .group_desc, .brand_name {font-size:16px;}
     .notice_section .bullet_01 {margin-top:16px;}
-    .cont_inner {padding: 0 20px; }
     /* .notice_section {padding:32px;} */
     .note_box .note_title {font-size:18px;}
     .note_box .note_desc {font-size:16px; line-height:1.5;}

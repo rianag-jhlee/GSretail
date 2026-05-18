@@ -15,28 +15,27 @@
                     @change="onTabChange1" 
                 />
 
-                <div class="tab_content_wrap mt100">
-                    <div class="disclosure_info_head mb100" v-if="CTabIdx === 0">
+                <div class="tab_content_wrap"><!-- 26.05.13 edit 이종환 :  클래스 수정 -->
+                    <div class="disclosure_info_head" v-if="CTabIdx === 0"><!-- 26.05.13 edit 이종환 :  클래스 수정 -->
                         <h3 class="section-sub-title">{{ t.MainTitle }}</h3>
                         <p class="policy_desc" v-html="t.DartDesc"></p>
                         <div class="button-area mt16">
-                            <a :href="t.DartLink" target="_blank" class="btn_big primary btn_icon after">
+                            <a :href="t.DartLink" target="_blank" class="btn_big primary btn_icon_arrow after"><!-- 26.05.13 Edit 이종환 : 클래스 수정 -->
                                 {{ t.DartBtnText }}
                             </a>
                         </div>
                     </div>
 
                     <section class="tab_content gsrin0301" v-if="CTabIdx === 0">
-                        <h4 class="content_title mb40">{{ t.Tabs1[0].item }}</h4>
+                        <h4 class="content_title">{{ t.Tabs1[0].item }}</h4>
                         
-                        <div class="search_filter_area mb24">
+                        <div class="search_filter_area">
                             <div class="filter_group">
                                 <span class="filter_label">{{ t.YearSelectLabel }}</span>
                                 <SelectBox v-model="selectedYear1" :options="t.YearOptions" />
                             </div>
-                            <div class="search_group">
-                                <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
-                            </div>
+
+                            <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                         </div>
 
                         <div class="policy_wrap">
@@ -69,13 +68,13 @@
                     </section>
 
                     <section class="tab_content" v-if="CTabIdx === 1">
-                        <div class="inner_tabs_wrap mb40">
+                        <div class="inner_tabs_wrap">
                             <Tabs v-model="InnerTabIdx" :tab-items="t.InnerTabs" tab-class="type_02" />
                         </div>
                         <!-- gsrin030201 -->
                         <section class="tab_content gsrin030201" v-if="InnerTabIdx === 0">
-                            <h4 class="content_title mb40">{{ t.InnerTabs[0].item }}</h4>
-                            <div class="search_group mb24">
+                            <h4 class="content_title">{{ t.InnerTabs[0].item }}</h4>
+                            <div class="search_filter_area">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
                             <div class="policy_wrap">
@@ -103,8 +102,8 @@
                         </section>
                         <!-- gsrin030202 -->
                         <section class="tab_content gsrin030202" v-if="InnerTabIdx === 1">
-                            <h4 class="content_title mb40">{{ t.InnerTabs[1].item }}</h4>
-                            <div class="search_group mb24">
+                            <h4 class="content_title">{{ t.InnerTabs[1].item }}</h4>
+                            <div class="search_filter_area">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
                             <div class="policy_wrap">
@@ -132,8 +131,8 @@
                         </section>
                         <!-- gsrin030203 -->
                         <section class="tab_content gsrin030203" v-if="InnerTabIdx === 2">
-                            <h4 class="content_title mb40">{{ t.InnerTabs[2].item }}</h4>
-                            <div class="search_group mb24">
+                            <h4 class="content_title">{{ t.InnerTabs[2].item }}</h4>
+                            <div class="search_filter_area">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
                             <div class="policy_wrap">
@@ -163,28 +162,28 @@
 
                     <!-- gsrin0303 -->
                     <section class="tab_content gsrin0303" v-if="CTabIdx === 2">
-                        <h4 class="content_title mb40">
+                        <h4 class="content_title">
                             {{ t.Tabs1[2].item }}
+                            <!-- 26.05.13 Edit 이종환 : 클래스 수정 -->
                             <Buttons  
-                                class="btn_big primary btn_icon after" 
+                                class="btn_big primary btn_icon_arrow after"
                                 btn-class="btn_icon" 
                                 @click="openModal" 
-                                data-popid="ggsrin030301" 
+                                data-popid="gsrin030301" 
                                 data-type="lg" 
-                                data-cont="ggsrin030301"    
+                                data-cont="gsrin030301"    
                             >
                                 {{ t.GeneralText }}
                             </Buttons>
                         </h4>
 
-                        <div class="search_filter_area mb24">
+                        <div class="search_filter_area">
                             <div class="filter_group">
                                 <span class="filter_label">{{ t.YearSelectLabel }}</span>
                                 <SelectBox v-model="selectedYear3" :options="t.YearOptions2" />
                             </div>
-                            <div class="search_group">
-                                <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
-                            </div>
+
+                            <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                         </div>
                         
                         <div class="policy_wrap">
@@ -223,7 +222,7 @@
             </div>
         </section>
 
-        <div id="ggsrin030301" class="modal_wrap">
+        <div id="gsrin030301" class="modal_wrap">
             <div class="modal_container"></div>
         </div>
     </div>
@@ -317,22 +316,17 @@ export default {
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0301_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; letter-spacing: -1.44px; }
 .visual-sub { margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; }
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding-bottom: 200px; }
 
-.disclosure_info_head { text-align: left; }
-.section-sub-title { font-size: 40px; font-weight: 700; color: #161616; margin-bottom: 16px; }
+.disclosure_info_head {margin-bottom:100px; text-align: left; }
+.section-sub-title { font-size: 4rem; font-weight: 700; color: #161616; margin-bottom: 16px; }
 .policy_desc { font-size: 24px; color: #161616; line-height: 1.5; word-break: keep-all; }
 
-/* 검색 및 필터 */
-.search_filter_area { display: flex; justify-content: space-between; align-items: center; }
-.filter_group { display: flex; align-items: center; gap: 12px; }
-.filter_label { font-size: 16px; color: #161616; }
-.search_group :deep(.search_wrap) { display: flex; justify-content: flex-end; gap: 8px; }
-.search_group :deep(.input_search_wrap) { flex: none !important; width: 360px; }
-.search_group :deep(.select_box) { width: 160px !important; }
+.tab_content_wrap {margin-top:100px;}
+
+.inner_tabs_wrap {margin-bottom:40px;}
 
 /* 테이블 스타일 */
-.content_title { font-size: 40px; font-weight: 700; color: #161616; display:flex; align-items:center; justify-content:space-between;}
+.content_title {margin-bottom:40px; font-size: 4rem; font-weight: 700; color: #161616; display:flex; align-items:center; justify-content:space-between;}
 .content_title a {font-weight:normal;}
 .policy_wrap table { width: 100%; border-collapse: collapse; border-top: 2px solid #161616; }
 .policy_wrap th, .policy_wrap td { padding: 18px 24px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
@@ -342,40 +336,21 @@ export default {
 .policy_wrap td a { font-size: 1.8rem; color: #161616; text-decoration: none; }
 .policy_wrap td a:hover { text-decoration: underline; }
 
-
-.ac { text-align: center; }
-.al { text-align: left; }
-.mt100 { margin-top: 100px; }
-.mb100 { margin-bottom: 100px; }
-.mb40 { margin-bottom: 40px; }
-.mb24 { margin-bottom: 24px; }
-.mt16 { margin-top: 16px; }
-.py80 { padding: 80px 0; }
-.pagination_area { display: flex; justify-content: center; }
-
-@media screen and (max-width:1024px) {
-    .cont_inner { padding: 0 20px; }
-    .tab_content_wrap.mt100 {margin-top:60px;}
-}
-
-
 @media screen and (max-width: 767px) {
-    h3.section-sub-title, h4.content_title {font-size:24px !important;}
-    .policy_desc {font-size:18px;}
+    h3.section-sub-title, h4.content_title {font-size:2.4rem;}
+    .policy_desc {font-size:1.8rem;}
     .title_wrap { display: none; }
-    .cont_inner { padding: 0 20px; }
-    .tab_content_wrap.mt100 {margin-top:60px;}
+
+    .inner_tabs_wrap {margin-bottom:60px;}
+
+    .disclosure_info_head {margin-bottom:80px;}
+
     :deep(ul.type_02) {margin-top:-35px !important;}
-    .search_filter_area { flex-direction: column; height: auto; align-items: stretch; gap:8px; }
     .policy_wrap th:first-child, .policy_wrap td:first-child { display: none; }
     .policy_wrap thead {display:none;}
-    .filter_group {flex-direction:column; align-items:stretch;}
-    .search_group .search_wrap {flex-direction:column; align-items:stretch;}
-    .search_group :deep(.input_search_wrap) {width:100% !important;}
-    .gsrin0303 .content_title {flex-direction:column; align-items:flex-start; gap:12px}
+    .content_title {margin-bottom:32px; flex-direction:column; align-items:flex-start; gap:12px}
     .filter_label {display:none;}
     .btn_big {font-size:16px;}
-    .mb100 {margin-bottom:80px;}
     .policy_wrap td a {font-size:16px;}
 }
 </style>
