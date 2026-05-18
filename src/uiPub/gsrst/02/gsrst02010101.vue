@@ -16,7 +16,7 @@
             <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
 
             <!-- GS25 브랜드 소개 -->
-            <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 0">
+            <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
                 <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg2})` }">
                     <header>
                         <span class="tit">{{ brandIntro.badge }}</span>
@@ -69,7 +69,7 @@
             <!-- //GS25 브랜드 소개 -->
 
             <!-- 차별화된 경쟁력 -->
-            <div class="tab_page" v-if="activeD1 === 0 && activeD2 === 1">
+            <div class="panel" v-if="activeD1 === 0 && activeD2 === 1">
                 <section class="sec_overlap">
                     <header class="section_header ac no_desc">
                         <h2 v-html="competitivePanel.title"></h2>
@@ -192,7 +192,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <Buttons v-if="item.linkText" tag="a" href="#none" btn-class="btn_mid fill btn_icon after primary">{{ item.linkText }}</Buttons>
+                            <Buttons v-if="item.linkText" tag="a" href="#none" btn-class="btn_mid fill btn_icon after primary_green">{{ item.linkText }}</Buttons>
                         </article>
                     </div>
                     <div class="sub_block">
@@ -263,7 +263,7 @@
             <!-- //차별화된 경쟁력 -->
 
             <!-- 편의점 창업 이해 -->
-            <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 2">
+            <div class="panel" v-show="activeD1 === 0 && activeD2 === 2">
                 <section class="sec_diagram">
                     <header class="section_header ac">
                         <h2>{{ convenienceDefinePanel.title }}</h2>
@@ -415,7 +415,7 @@
             </div>
             <!-- //편의점 창업 이해 -->
             <!-- FAQ -->
-            <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 3">
+            <div class="panel" v-show="activeD1 === 0 && activeD2 === 3">
                 <section class="sec_startup_faq">
                     <header class="section_header ac no_desc">
                         <h2>{{ startupFaqPanel.title }}</h2>
@@ -489,7 +489,7 @@
             <!-- //FAQ -->
             <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
             <!-- 창업 절차 -->
-            <div class="tab_page" v-show="activeD1 === 1 && activeD2 === 0">
+            <div class="panel" v-show="activeD1 === 1 && activeD2 === 0">
                 <section class="sec_startup_process">
                     <header class="section_header ac txt_blue">
                         <h2>상담 신청부터 개점까지, <br />약 30일이면 나만의 GS25를 오픈할 수 있어요!</h2>
@@ -546,7 +546,7 @@
             </div>
             <!-- //창업 절차 -->
             <!-- 가맹타입 -->
-            <div class="tab_page" v-show="activeD1 === 1 && activeD2 === 1">
+            <div class="panel" v-show="activeD1 === 1 && activeD2 === 1">
                 <section class="sec_franchise_type">
                     <header class="section_header ac">
                         <h2>내 자금과 상황에 딱 맞게! <br />
@@ -713,8 +713,60 @@
                 </section>
             </div>
             <!-- //가맹타입 -->
-            <!-- 추천 점포 찾기 -->
-            <div class="tab_page" v-show="activeD1 === 1 && activeD2 === 2"></div>
+            <!-- 창업 혜택 -->
+            <div class="panel" v-show="activeD1 === 1 && activeD2 === 2">
+                <div class="wrap_tabs_type04">
+                    <Tabs
+                        v-model="activeD3"
+                        :tab-items="depth3TabsBenefit"
+                        tab-class="type_04"
+                        :tab-slide="true"
+                    />
+                </div>
+                <div v-show="activeD3 === 0" class="panel_third_depth" aria-label="탄탄한 점포">
+                    <section class="sec_benefit_store" data-figma-node="739:15327">
+                        <header class="section_header ac">
+                            <h2>{{ benefitStorePanel.title }}</h2>
+                            <p>{{ benefitStorePanel.desc }}</p>
+                        </header>
+                        <ul class="benefit_store_list">
+                            <li v-for="(item, i) in benefitStoreItems" :key="i">
+                                <article>
+                                    <span class="icon" aria-hidden="true"></span>
+                                    <div>
+                                        <dl v-if="item.lead">
+                                            <dt class="lead">{{ item.lead }}</dt>
+                                        </dl>
+                                        <dl>
+                                            <dt>{{ item.title }}</dt>
+                                            <dd>{{ item.desc }}</dd>
+                                        </dl>
+                                        <dl v-if="item.notes?.length" class="note_list">
+                                            <dt>유의사항</dt>
+                                            <dd v-for="(note, ni) in item.notes" :key="ni">* {{ note.label }}: {{ note.text }}</dd>
+                                        </dl>
+                                        <Buttons
+                                            v-if="item.link"
+                                            tag="a"
+                                            :href="item.link.url"
+                                            btn-class="btn_mid primary fill btn_icon after"
+                                        >{{ item.link.text }}</Buttons>
+                                        <button
+                                            v-else-if="item.hasMore"
+                                            type="button"
+                                            class="btn_more"
+                                            aria-label="상세 보기"
+                                        ></button>
+                                    </div>
+                                </article>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+                <div v-show="activeD3 === 1" class="panel_third_depth" aria-label="든든한 점포 운영"></div>
+                <div v-show="activeD3 === 2" class="panel_third_depth" aria-label="편안한 경영주 생활"></div>
+            </div>
+            <!-- //창업 혜택 -->
 
           
          
@@ -768,6 +820,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const activeD1 = ref(0);
 const activeD2 = ref(0);
+const activeD3 = ref(0);
 
 const mqMobile = window.matchMedia("(max-width: 768px)");
 const isMobileView = ref(mqMobile.matches);
@@ -822,6 +875,50 @@ const depth2TabsPrepare = [
     { item: "창업 절차" },
     { item: "가맹 타입" },
     { item: "창업 혜택" },
+];
+
+/** activeD1 === 1, activeD2 === 2 (창업 혜택) 3depth */
+const benefitStorePanel = {
+    title: "대상별 맞춤 창업 혜택을 드립니다.",
+    desc: "창업 준비 전 꼭 확인해보세요~!",
+};
+
+/** Figma 739:15327 — 탄탄한 점포 */
+const benefitStoreItems = [
+    {
+        title: "우수 근무자 할인 제도",
+        desc: "GS25에서 근무하는 우수 근무자 창업 시 본부 보증금 및 가맹비 일부 할인",
+        hasMore: false,
+    },
+    {
+        title: "청년 창업 제도",
+        desc: "투자비가 부족한 20대 청년들을 위한 본부 보증금 유예 및 창업활성화 지원금 300만원 제공",
+        notes: [
+            { label: "대상", text: "1997년~2007년생 (2026년 기준)" },
+            { label: "안내", text: "적용 가능 점포는 담당자에게 별도 문의" },
+        ],
+        link: {
+            text: "청년창업 혜택으로 오픈한 경영주님 성공기 보러가기",
+            url: "#none",
+        },
+    },
+    {
+        title: "다자녀 할인 제도",
+        desc: "만 18세 미만 자녀 2인 이상인 경우 가맹비 일부 할인",
+        hasMore: false,
+    },
+    {
+        lead: "각 100만 팔로워·구독자 돌파",
+        title: "다점포 할인 제도",
+        desc: "GS25 경영주님이 추가 점포 창업 시 가맹비 일부 할인",
+        hasMore: false,
+    },
+];
+
+const depth3TabsBenefit = [
+    { item: "탄탄한 점포" },
+    { item: "든든한 점포 운영" },
+    { item: "편안한 경영주 생활" },
 ];
 
 const brandIntro = {
@@ -1655,6 +1752,11 @@ const paginatedGs25FaqItems = computed(() => {
 
 watch(activeD1, () => {
     activeD2.value = 0;
+    activeD3.value = 0;
+});
+
+watch(activeD2, () => {
+    activeD3.value = 0;
 });
 
 watch(activeGs25FaqTab, () => {
@@ -1876,7 +1978,7 @@ onUnmounted(() => {
 img { width:100%; height:auto; object-fit: cover; display: block; }
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
-:deep(.primary){ background-color: #15B874; }
+:deep(.primary_green){ background-color: #15B874; }
 :deep(.txt_blue) { color: #107af2; }
 .wrap_gsrst { position: relative; overflow-x: clip; }
 
@@ -1886,7 +1988,7 @@ img { width:100%; height:auto; object-fit: cover; display: block; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
 
 header > .tit { width: fit-content; padding: 8px 16px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 99px; display: block; }
-header.ac > .tit { margin-left:auto; margin-right:auto; }
+header.ac > .tit { margin-left:auto; margin-right:auto; } 
 .sub_header{ margin-bottom:64px; }
 .sub_header > h3 { font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .sub_header > .tit { padding:4px 12px; }
@@ -1901,7 +2003,8 @@ header.ac > .tit { margin-left:auto; margin-right:auto; }
 .section_header > p { margin-top: 16px; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 section + section { padding-top: 100px; }
 section p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-.tab_page { padding: 100px 0 200px; }
+.panel_third_depth { padding-top: 80px; }
+.panel { padding: 100px 0 200px; }
 .list_dotted > li { padding-left: 12px; position: relative; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
 .list_dotted > li + li { margin-top: 8px }
 .list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #161616; border-radius: 100%; position: absolute; top: 11px; left: 0 }
@@ -2241,6 +2344,25 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .list_note > li > p > a{color:#107AF2; text-decoration: underline;}
 
 
+
+.sec_benefit_store { width: 100%; max-width: 1420px; margin: 0 auto; }
+.sec_benefit_store > .benefit_store_list { margin: 40px auto 0; padding: 0; list-style: none; max-width: 1200px; display: flex; flex-direction: column; gap: 17px; }
+.sec_benefit_store > .benefit_store_list > li > article { padding: 32px; background-color: #fff; border: 1px solid #e5e5e9; border-radius: 20px; display: flex; align-items: flex-start; gap: 20px; }
+.sec_benefit_store > .benefit_store_list > li > article > .icon { width: 80px; height: 80px; flex-shrink: 0; background-color: #f2f2f4; border-radius: 50%; display: block; }
+.sec_benefit_store > .benefit_store_list > li > article > div { min-width: 0; flex: 1 1 auto; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl { margin: 0; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl > dt { margin: 0; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl > dd { margin: 0; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl > dt.lead { color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl:not(.note_list) > dt { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl:not(.note_list) > dt + dd { margin-top: 8px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list { margin-top: 12px; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list > dt { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list > dd { color: #fb6432; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list > dd + dd { margin-top: 4px; }
+.sec_benefit_store > .benefit_store_list > li > article > div > .btn_mid { margin-top: 16px; }
+.sec_benefit_store > .benefit_store_list > li > article > div > .btn_more { width: 48px; height: 48px; margin-top: 16px; padding: 0; background-color: #f8f8f8; border: 0; border-radius: 50%; flex-shrink: 0; }
+
 .sec_franchise_compare .franchise_compare_table tbody .note { color: #67676F; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 
 .sec_startup_faq .section_header.ac, .sec_gs25_faq .section_header.ac { text-align: left !important; }
@@ -2307,7 +2429,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .page_header { display: none; }
 
     .sec_body { padding: 24px 0 40px; }
-    .tab_page { padding: 60px 20px 80px; }
+    .panel { padding: 60px 20px 80px; }
+    .panel_third_depth { padding-top: 32px; }
     .section_header, .sub_header { margin-bottom: 32px; }
     .section_header > .tit { margin-bottom: 12px; padding: 4px 12px; }
     .section_header > h2, .sub_header > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
@@ -2560,6 +2683,16 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .sec_franchise_compare .list_note { margin-top: 16px; }
+
+    .sec_benefit_store > .benefit_store_list { margin-top: 32px; gap: 12px; }
+    .sec_benefit_store > .benefit_store_list > li > article { padding: 20px 16px; gap: 12px; }
+    .sec_benefit_store > .benefit_store_list > li > article > .icon { width: 60px; height: 60px; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > dl:not(.note_list) > dt { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > dl:not(.note_list) > dt + dd { margin-top: 4px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > dl > dt.lead { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list > dd { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > .btn_more { width: 40px; height: 40px; margin-top: 12px; }
+
     .sec_franchise_compare .list_note > li > p { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
 
     .sec_diagram header{ margin-bottom:32px; }
