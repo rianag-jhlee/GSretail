@@ -107,7 +107,7 @@ img {
         top: 50%;
         right:16px;
         transform: translateY(-50%);
-        background-color: #e5e5e9;
+        background:url('@/assets/images/common/arrow_set_16.png') -56px -20px no-repeat;
     }
 }
 

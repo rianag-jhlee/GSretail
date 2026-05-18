@@ -1,6 +1,6 @@
 <template>
     <div class="main-container" v-if="t">
-        <div class="title_wrap ac">
+        <div class="title_wrap ac top_visual">
             <h2 class="page-title">{{ t.MainTitle }}</h2>
             <p class="visual-sub">{{ t.MainsubTitle }}</p>
         </div>
@@ -288,17 +288,17 @@
                                                 <h3 class="section_title_sub mb16">{{ t.BroadcastingSupport.PrepSupport.Title }}</h3>
                                                 <p class="p">{{ t.BroadcastingSupport.PrepSupport.Desc }}</p>
                                             </div>
-                                            <figure class="img_frame" style="width:100%; height:340px;">
+                                            <figure class="img_frame">
                                                 <img src="@/assets/images/sub/gsrsu03010101/img_01-02-05-01.png" :alt="t.BroadcastingSupport.PrepSupport.Title">
                                             </figure>
                                         </section>
 
-                                        <section class="support_item">
-                                            <figure class="img_frame mb60">
+                                        <section class="support_item small_business">
+                                            <figure class="img_frame">
                                                 <img src="@/assets/images/dummy/gsrsu0301010205_2.png" :alt="t.BroadcastingSupport.PrioritySupport.Title">
                                             </figure>
 
-                                            <div class="mt60">
+                                            <div>
                                                 <div 
                                                     v-for="(sub, idx) in t.BroadcastingSupport.PrioritySupport.SubItems" 
                                                     :key="'broad-sub-'+idx"
@@ -2700,7 +2700,7 @@ export default {
     .brand_grid { display: flex; gap: 20px; list-style: none; }
     .brand_grid li { flex: 1; text-align: center; }
     .brand_img_box { width: 100%; height: 240px; background: #F8F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .brand_img_box img { max-width: 168px; object-fit: contain; }
+    .brand_img_box img { max-width: 150px; object-fit: contain; }
     .brand_name  {text-align:left;}
     .brand_name strong { font-size: 20px; color: #161616; font-weight: 700; }
     .program_grid { display: flex; flex-wrap: wrap; gap: 80px 40px; }
@@ -2721,6 +2721,14 @@ export default {
     .competency_support .visual_wrap .img_frame img {width:auto; height:auto;}
     .competency_support .section_title_sub {margin-bottom: 16px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; letter-spacing: -0.4px;}
     .competency_support .p {color: #161616; font-size: 24px; font-weight: 400; line-height: 1.5; letter-spacing: -0.24px;}
+
+
+    /* 방송편성 */
+    .broadcasting_support .small_business {display:flex; gap:2.816%;}
+    .broadcasting_support .small_business figure {width:35.21%; height:auto;}
+    .broadcasting_support .small_business figure + div {width:61.97%;}
+    .broadcasting_support .small_business figure + div .sub_item {margin-bottom:40px;}
+    .broadcasting_support .small_business figure + div .sub_item:last-of-type {margin-bottom:0;}
 
     /* 소통제도 */
     .communication_support .support_item:last-of-type {margin-top:80px;}
@@ -3052,6 +3060,7 @@ export default {
 
     @media screen and (max-width: 767px) {
         h3, h4 { font-size:20px !important; }
+        h4 + p, .p {font-size:16px !important;}
         .sub_tab_content {margin-top:0px;}
         :deep(.text_summary) {padding: 60px 0 20px;}
         :deep(.text_summary) br {display:none;}
@@ -3059,7 +3068,7 @@ export default {
         .philosophy_box {padding:20px;}
         .philosophy_box .btn_icon {width:90%;}
         .item_wrap div {width:200px; height:200px;}
-        .item_wrap div p {font-size:16px;}
+        .item_wrap div p {font-size:16px !important;}
 
         .item_wrap div strong::before {width:40px; height:40px;}
         .item_wrap div strong {font-size:1.8rem;}
@@ -3069,7 +3078,7 @@ export default {
 
         .img_frame { width: 100%; flex: none; height: auto; aspect-ratio: 690/360; }
         .grid_column_2 { flex-direction: column; }
-        .brand_grid {gap:10px;}
+        /* .brand_grid {gap:10px;} */
         /* 프로그램 그리드: 모바일 1열 */
         .program_item { width: 100%; }
         .program_visual { height: auto; aspect-ratio: 16/9; }
@@ -3171,5 +3180,12 @@ export default {
         .support_item + .support_item {margin-top:80px;}
         .finance_support h3 {margin-bottom:20px;}
         .text_summary_sub {margin-bottom:40px; font-size:1.6rem; line-height:124%;}
+
+            /* 방송편성 */
+        .broadcasting_support .small_business {flex-direction:column;}
+        .broadcasting_support .small_business figure {width:100%; height:335px; margin-bottom:32px;}
+        .broadcasting_support .small_business figure + div {width:100%;}
+        .broadcasting_support .small_business figure + div .sub_item {margin-bottom:32px;}
+        .broadcasting_support .small_business figure + div .sub_item:last-of-type {margin-bottom:0;}
     }
 </style>
