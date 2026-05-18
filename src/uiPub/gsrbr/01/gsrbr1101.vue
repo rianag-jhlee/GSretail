@@ -385,7 +385,7 @@ export default {
                                 {title:`고객 경헝에 특화된 MD 구성`,desc:`갤러리, 카페, 식음, 소품 등 다양한 매장이 거리를 형성하고, 전통 문화 지역 특성을 준수하여 고객 경험에 특화된 MD 구성`},
                                 {title:`차별화된 시설`,desc:`상권 내 차별화된 시설(나인트리 호텔 숙박 연계 및 주차 공간 제공) 등 국내외 방문객의 장시간 체류 가능 (호캉스+몰캉스)`}
                             ], 
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall01.png"),
+                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.1734625641543!2d126.98088067587412!3d37.574532872036556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ef4127fbcd%3A0xdff366a8dbc227d6!2z7JWI64WV7J247IKs64-Z!5e0!3m2!1sko!2skr!4v1775627958896!5m2!1sko!2skr`,
                             contact: { phone: `02-6954-2991`, email1: `anyounginsadong@anyounginsadong.com`, email2:`ha3kim1@gsretail.com`,email3:`gsseri@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
                             type:`card_type`
@@ -482,8 +482,6 @@ export default {
 .principle_card_item .sub_desc {line-height: 1.4; color: #7c7c86; }
 .principle_card_item .bullet_text, .principle_card_item .sub_desc {font-size:16px;}
 .visual_section { width:100%; position: relative; overflow: hidden; }
-.visual_img { width: 100%; height: auto; }
-.visual_img img {width: 100%; display: block; }
 .visual_content {width: 100%; position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 2; }
 .text_box span {margin-bottom:10px; color:#fff; font-size:72px; font-weight:700; display: block;  }
 .body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
@@ -497,7 +495,7 @@ export default {
 .tab_content { width: 100%; display: block; }
 .inner_cont { width: 100%; position: relative; }
 .visual_img { width: 100%;}
-.visual_img img { width: 100%; height: 100%; object-fit: cover; }
+.visual_img img { width: 100%; height: 100%; object-fit: cover; display: block;  }
 .info_section { margin-bottom:100px; }
 .content_title { margin-bottom:16px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
 .sub_title { color: #161616; font-size: 24px; font-weight: 700; }
@@ -581,6 +579,7 @@ export default {
 @media screen and (max-width: 768px) {
     .pc {display:none;}
     .mo {display:block;}
+    
     .info_section { margin-bottom:40px; }
     .body_wrap .cont_area {padding:140px 0;}
     .body_wrap .cont_area .cont_inner ul li p {font-size:16px;}
@@ -590,6 +589,7 @@ export default {
     .text_box .title { font-size: 30px; letter-spacing: -0.5px; }
     .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b),.mall-type-2 .text_item, .mall-type-3 .text_item {font-size: 16px; }
     .map_section {flex-direction:column;}
+    .mall_content .visual_img {height:240px;}
     .mall_content .content_title {margin-bottom:60px; margin-left:0px; margin-top:16px; display:flex; flex-direction:column;}
     .mall_content .content_title a {margin-left:0px; margin-top:16px; font-size:14px;}
     .mall_content .contact_info_wrap {width:100%; order:1;}
