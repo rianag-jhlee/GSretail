@@ -488,7 +488,7 @@
             </div>
             <!-- //FAQ -->
             <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
-            <!-- 창업절차 -->
+            <!-- 창업 절차 -->
             <div class="tab_page" v-show="activeD1 === 1 && activeD2 === 0">
                 <section class="sec_startup_process">
                     <header class="section_header ac txt_blue">
@@ -544,12 +544,175 @@
                     </ol>
                 </section>
             </div>
-            <!-- 창업절차 -->
-            <!-- 창업 준비하기 · 창업 절차 -->
+            <!-- //창업 절차 -->
+            <!-- 가맹타입 -->
             <div class="tab_page" v-show="activeD1 === 1 && activeD2 === 1">
-
+                <section class="sec_franchise_type">
+                    <header class="section_header ac">
+                        <h2>내 자금과 상황에 딱 맞게! <br />
+                            GS25만의 3가지 맞춤형 가맹 타입을 만나보세요</h2>
+                    </header>
+                    <ul class="franchise_type_list">
+                        <li
+                            v-for="group in franchiseTypeGroups"
+                            :key="group.key"
+                            :class="group.themeClass"
+                        >
+                            <article>
+                                <header>
+                                    <span class="icon" aria-hidden="true"></span>
+                                    <div>
+                                        <h3>{{ group.title }}</h3>
+                                        <p>{{ group.desc }}</p>
+                                    </div>
+                                </header>
+                                <div class="franchise_type_body">
+                                    <div
+                                        v-for="(card, ci) in group.cards"
+                                        :key="ci"
+                                        class="type_card"
+                                        :class="card.cardClass"
+                                    >
+                                        <span class="badge">{{ card.badge }}</span>
+                                        <span class="card_icon" aria-hidden="true"></span>
+                                        <strong>{{ card.name }}</strong>
+                                        <p>{{ card.desc }}</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                    </ul>
+                </section>
+                <section class="sec_franchise_compare" data-figma-node="739:15141">
+                    <header class="section_header ac">
+                        <h2>한눈에 비교하고, 나에게 유리한 타입을 찾아보세요!</h2>
+                    </header>
+                    <div class="franchise_compare_wrap">
+                        <table class="franchise_compare_table">
+                            <colgroup>
+                                <col class="col_group" />
+                                <col class="col_label" />
+                                <col class="col_gs" />
+                                <col class="col_gs" />
+                                <col class="col_gs" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" scope="colgroup"><strong>구분</strong></th>
+                                    <td scope="col" class="is_gs1">
+                                        <strong>GS1</strong> 
+                                        <span>직접 임차하고, 수익 배분율이 가장 높아요</span>
+                                    </td>
+                                    <td scope="col" class="is_gs2">
+                                        <strong>GS2</strong>
+                                        <span>본사와 임차비용 공동 부담해요</span>
+                                    </td>
+                                    <td scope="col" class="is_gs3">
+                                        <strong>GS3</strong>
+                                        <span>임차비용 부담 없이 시작해요</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th rowspan="7" scope="rowgroup">투자 금액</th>
+                                    <th scope="row">상품 준비금</th>
+                                    <td colspan="3">1,400만원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">소모품 준비금</th>
+                                    <td colspan="3">100만원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">가맹비</th>
+                                    <td colspan="3">770만원(VAT포함)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">공통 투자금액 (상품+소모품+가맹비)</th>
+                                    <td colspan="3"><strong>2,270만원</strong></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">점포 임차비용</th>
+                                    <td>경영주 투자</td>
+                                    <td>본부 투자</td>
+                                    <td>본부 지원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">본부 보증금</th>
+                                    <td>-</td>
+                                    <td><span>전대보증금</span>최소 3,000만원</td>
+                                    <td><span>예치보증금</span>최소 3,000만원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">시설/인테리어</th>
+                                    <td>본부 지원<br /><span>(※ 수익추구 특약: 경영주 투자)</span></td>
+                                    <td>본부 지원</td>
+                                    <td>본부 지원</td>
+                                </tr>
+                                <tr class="row_total">
+                                    <th colspan="2" scope="row"><strong>총 투자금액</strong></th>
+                                    <td><strong class="txt_blue">점포 임차비용 + 공통 투자비 2,270만원</strong></td>
+                                    <td><strong class="txt_blue">최소 5,270만원<br /></strong><span>(전대보증금 + 공통 투자비)</span></td>
+                                    <td><strong class="txt_blue">최소 5,270만원<br /></strong><span>(예치보증금 + 공통 투자비)</span></td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="6" scope="rowgroup">계약<br class="m_br">조건</th>
+                                    <th scope="row"><strong>최종 경영주 수익 배분율</strong></th>
+                                    <td><strong class="txt_blue txt_emphasis">최대 71%</strong></td>
+                                    <td><strong class="txt_blue txt_emphasis">최대 65%</strong></td>
+                                    <td><strong class="txt_blue txt_emphasis">최대 46%</strong></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">경영주 수익 배분율</th>
+                                    <td>66%</td>
+                                    <td>60%</td>
+                                    <td>41%</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">24시간 영업장려금</th>
+                                    <td>5%</td>
+                                    <td>5%</td>
+                                    <td>5%</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">계약기간</th>
+                                    <td>5년</td>
+                                    <td>4년</td>
+                                    <td>4년</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">담보 설정</th>
+                                    <td>5,000만원</td>
+                                    <td>2,000만원</td>
+                                    <td>2,000만원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">각종지원제도</th>
+                                    <td colspan="3">상생 인센티브 / 상품 판매·발주 장려금 / 미오출 보상금</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">수익추구특약</th>
+                                    <td><strong>최대 81%</strong><br /><span>(※ GS1 수익배분율 71% + 10%)</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="list_note">
+                        <li>
+                            <p>* 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년</p>
+                        </li>
+                        <li>
+                            <p>* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다</p>
+                        </li>
+                        <li>
+                            <p class="txt_link">* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href="#">신선강화점 자세히 알아보기</a>)</p>
+                        </li>
+                    </ul>
+                </section>
             </div>
-          
+            <!-- //가맹타입 -->
             <!-- 추천 점포 찾기 -->
             <div class="tab_page" v-show="activeD1 === 1 && activeD2 === 2"></div>
 
@@ -566,7 +729,7 @@
             <li><button type="button">고객센터</button></li>
         </ul>
     </div>
-
+ 
 </template>
 
 <script setup>
@@ -584,7 +747,7 @@ import Pagination from "@/components/Pagination.vue";
 import imgBg from "@/assets/images/dummy/gsrst02010101_01.png";
 import imgBg2 from "@/assets/images/dummy/gsrst02010101_02.jpg";
 import imgStoreOpen from "@/assets/images/dummy/gsrst02010101_03.png";
-import imgProduct01 from "@/assets/images/dummy/gsrst02010101_p_01.png";
+import imgProduct01 from "@/assets/images/dummy/gsrst02010101_p_01.png"; 
 import imgProduct02 from "@/assets/images/dummy/gsrst02010101_p_02.png";
 import imgProduct03 from "@/assets/images/dummy/gsrst02010101_p_03.png";
 import imgProduct04 from "@/assets/images/dummy/gsrst02010101_p_04.png";
@@ -656,7 +819,7 @@ const depth2Tabs = [
 
 /** activeD1 === 1 (창업 준비하기) 2depth */
 const depth2TabsPrepare = [
-    { item: "창업 준비하기" },
+    { item: "창업 절차" },
     { item: "가맹 타입" },
     { item: "창업 혜택" },
 ];
@@ -834,6 +997,44 @@ const startupProcessSteps = [
         title: "드디어 개점! 축하합니다!",
         desc: "이제 GS25 경영주님으로 새로운 시작입니다. 앞으로도 GS25가 늘 곁에서 함께합니다!",
         moreLink: false,
+    },
+];
+
+/** Figma 739:15072 — 가맹 타입 비교 */
+const franchiseTypeGroups = [
+    {
+        key: "profit",
+        themeClass: "is_profit",
+        title: "수익 추구형",
+        desc: "보유한 자리로 높은 수익 배분을 누려보세요.",
+        cards: [
+            {
+                badge: "GS 1 Type",
+                cardClass: "is_gs1",
+                name: "일반가맹",
+                desc: "경영주가 직접 임차하여 운영",
+            },
+        ],
+    },
+    {
+        key: "stable",
+        themeClass: "is_stable",
+        title: "안정 추구형",
+        desc: "점포가 없어도 OK! 본부 임차로 안정적으로 시작해보세요",
+        cards: [
+            {
+                badge: "GS 2 Type",
+                cardClass: "is_gs2",
+                name: "전대가맹",
+                desc: "본사와 임차비용 공동 부담",
+            },
+            {
+                badge: "GS 3 Type",
+                cardClass: "is_gs3",
+                name: "위탁가맹",
+                desc: "임차비용 부담 없이 시작",
+            },
+        ],
     },
 ];
 
@@ -1699,6 +1900,7 @@ header.ac > .tit { margin-left:auto; margin-right:auto; }
 .section_header > h2 { font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .section_header > p { margin-top: 16px; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 section + section { padding-top: 100px; }
+section p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 .tab_page { padding: 100px 0 200px; }
 .list_dotted > li { padding-left: 12px; position: relative; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
 .list_dotted > li + li { margin-top: 8px }
@@ -1784,12 +1986,12 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .highlight_block > .highlight_body > div > ul > li article figcaption{ padding:24px; background-color:#fff; border-radius:0 0 12px 12px; }
 .sec_stack > .highlight_block > .highlight_body > div > ul > li article figcaption p{ color: #67676F;font-size: 1.2rem;line-height: 1.2; }
 .sec_stack > .highlight_block > .highlight_body > div > ul > li article figcaption strong{ margin-top:4px;font-size: 1.8rem;line-height: 1.5; display: block; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) { height: 100%; background-color: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure { width: 100%; height: 100%; margin: 0; display: flex; flex-direction: column; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure > img { width: 100%; height: 200px; object-fit: contain; display: block; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure > figcaption { padding: 20px 24px; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure > figcaption > p { color: #67676f; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; text-align: center; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure > figcaption > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; text-align: center; display: block; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article { height: 100%; background-color: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure { width: 100%; height: 100%; margin: 0; display: flex; flex-direction: column; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > img, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > img { width: 100%; height: 200px; object-fit: contain; display: block; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > figcaption, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption { padding: 20px 24px; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > figcaption > p, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > p { color: #67676f; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; text-align: center; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > figcaption > strong, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; text-align: center; display: block; }
 
 .sec_stack > .dual_panel { margin-top: 60px; display: flex; gap: 40px; }
 .sec_stack > .dual_panel > article { flex: 1; min-width: 0; padding: 64px; border: 1px solid #d7d7df; border-radius: 12px; }
@@ -1850,7 +2052,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_diagram > .diagram_shell > article.node_aside { width: clamp(200px, 16.25vw, 312px); flex: 0 1 auto; min-width: 0; text-align: center; }
 .sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: clamp(2.4rem, 2.08vw, 3.2rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_diagram > .diagram_shell > article.node_aside > p { margin-top: clamp(4px, 0.42vw, 8px); color: #fff; font-size: clamp(1.4rem, 0.83vw, 1.6rem); font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_diagram > .diagram_shell article :is(strong, span, p) { word-break: keep-all; }
+.sec_diagram > .diagram_shell article strong, .sec_diagram > .diagram_shell article span, .sec_diagram > .diagram_shell article p { word-break: keep-all; }
 
 .sec_franchise_define .franchise_define_card { padding: 64px 80px; background-color: #fff; border-radius: 12px; }
 .sec_franchise_define .franchise_define_card .sub_header{ margin-bottom:40px; }
@@ -1882,7 +2084,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_define .franchise_role_grid > article > ul > li { display: flex; align-items: center; gap: 12px; }
 .sec_franchise_define .franchise_role_grid > article > ul > li > span { width: 24px; height: 24px; flex-shrink: 0; background-color: #d0d0d8; display: block; }
 .sec_franchise_define .franchise_role_grid > article > ul > li > strong { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_franchise_define .franchise_role_grid :is(strong, p) { word-break: keep-all; }
+.sec_franchise_define .franchise_role_grid strong, .sec_franchise_define .franchise_role_grid p { word-break: keep-all; }
 
 .sec_region_counsel :deep(.tab_wrap ul.type_02){ justify-content: center; }
 .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item){ color:#161616;font-weight:400;font-size: 1.8rem;line-height: 1.4;background-color:#fff;border:1px solid #161616; }
@@ -1987,6 +2189,60 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { background-color: #fff; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article > div > h3 { color: #fff; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article > div > .desc { color: #fff; }
+
+.sec_franchise_type { width: 100%; max-width: 1420px; margin: 0 auto; }
+.sec_franchise_type > .franchise_type_list { display: flex; gap: 20px; align-items: stretch; }
+.sec_franchise_type > .franchise_type_list > li { flex: 1 1 0; min-width: 0; max-width: 700px; }
+.sec_franchise_type > .franchise_type_list > li > article { height: 100%; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px 20px 0 0; }
+.sec_franchise_type > .franchise_type_list > li > article > header { padding: 32px 40px 40px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.sec_franchise_type > .franchise_type_list > li > article > header > .icon { width: 80px; height: 80px; flex-shrink: 0; border-radius: 50%; display: block; }
+.sec_franchise_type > .franchise_type_list > li > article > header > div { width: 100%; text-align: center; }
+.sec_franchise_type > .franchise_type_list > li > article > header > div > h3 { margin: 0; color: #fff; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.sec_franchise_type > .franchise_type_list > li > article > header > div > p { margin: 4px 0  0; color: #fff; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > header { background-color: #fc835b; }
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > header > .icon { background-color: #fee0d6; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > header { background-color: #4095f5; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > header > .icon { background-color: #e7f2fe; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { flex: 1 1 auto; padding: 32px 40px; background-color: #fff; display: flex; gap: 20px;border-radius: 0 0 20px 20px;}
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > .franchise_type_body { border: 2px solid #fc835b; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > .franchise_type_body { border: 2px solid #4095f5; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { flex: 1 1 0; min-width: 0; padding: 32px 24px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 4px 16px; color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; border-radius: 99px; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .card_icon { width: 40px; height: 40px; margin-top: 20px; flex-shrink: 0; background-color: #d9d9d9; border-radius: 50%; display: block; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > strong { margin-top: 16px; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { margin: 4px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 { background-color: #f9f2ea; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 > .badge { background-color: #fc835b; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 { background-color: #e7f2fe; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 > .badge { background-color: #4095f5; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 { background-color: #e8f8f1; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 > .badge { background-color: #42c68f; }
+
+.sec_franchise_compare { width: 100%; max-width: 1420px; margin: 0 auto; }
+.sec_franchise_compare > .franchise_compare_wrap { margin-top: 40px; overflow-x: auto; }
+.sec_franchise_compare .franchise_compare_table { width: 100%; min-width: 1000px; border-collapse: collapse; table-layout: fixed; border-top: 1px solid #161616; }
+.sec_franchise_compare .franchise_compare_table col.col_group { width: 8.7%; }
+.sec_franchise_compare .franchise_compare_table col.col_label { width: 22.1%; }
+.sec_franchise_compare .franchise_compare_table col.col_gs { width: 23.1%; }
+.sec_franchise_compare .franchise_compare_table th, .sec_franchise_compare .franchise_compare_table td { padding: 16px 24px; border: 1px solid #e5e5e9; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; text-align: center; vertical-align: middle; word-break: keep-all; }
+.sec_franchise_compare .franchise_compare_table thead th { background-color: #f8f8f8; font-weight: 600; }
+.sec_franchise_compare .franchise_compare_table thead td.is_gs1 > strong { color: #fb6432; }
+.sec_franchise_compare .franchise_compare_table thead td.is_gs2 > strong { color: #107af2; }
+.sec_franchise_compare .franchise_compare_table thead td.is_gs3 > strong { color: #15b874; }
+.sec_franchise_compare .franchise_compare_table thead td > strong { display: block; font-size: 1.8rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { background-color: #f8f8f8; font-weight: 400; }
+.sec_franchise_compare .franchise_compare_table tbody th[scope="row"] { background-color: #f8f8f8; font-weight: 400; }
+.sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis{font-size: 2rem;}
+.sec_franchise_compare .franchise_compare_table td > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
+.list_note {margin-top:32px;}
+.list_note > li + li{margin-top:8px;}
+.list_note > li > p{color:#67676F}
+.list_note > li > p.txt_link{color:#161616}
+.list_note > li > p > a{color:#107AF2; text-decoration: underline;}
+
+
+.sec_franchise_compare .franchise_compare_table tbody .note { color: #67676F; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+
 .sec_startup_faq .section_header.ac, .sec_gs25_faq .section_header.ac { text-align: left !important; }
 
 :deep(.faq_acc.board_type_toggle.type_faq) { width: 100%; border-top: 1px solid #161616; }
@@ -2022,13 +2278,9 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 @media (max-width: 1024px) {
     .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
     .sec_band > .inner > .link_grid { flex-direction: column; }
-
     .sec_overlap .section_header h2 { font-size: 2.4rem; }
-
     .sec_stack > .dual_panel { flex-direction: column; }
-
     .sec_tri_grid > ul { grid-template-columns: 1fr; gap: 20px; }
-
     .sec_franchise_define .franchise_define_card { width: 100%; max-width: 100%; min-width: 0; padding: 40px 24px; box-sizing: border-box; }
     .sec_franchise_define .franchise_formula { display: grid; flex-wrap: unset; justify-content: unset; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-rows: auto auto auto; gap: 16px 8px; align-items: center; justify-items: stretch; width: 100%; max-width: 100%; min-width: 0; }
     .sec_franchise_define .franchise_formula > div:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: stretch; min-width: 0; }
@@ -2041,6 +2293,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_franchise_define .franchise_formula > div > span { width: 72px; height: 72px; }
     .sec_franchise_define .franchise_formula > div:nth-child(1) > p, .sec_franchise_define .franchise_formula > div:nth-child(3) > p { text-align: left; }
     .sec_franchise_define .franchise_role_grid { margin-top: 32px; }
+    .sec_franchise_type > .franchise_type_list { flex-direction: column; }
+    .sec_franchise_type > .franchise_type_list > li { max-width: none; }
 }
 
 @media (max-width: 768px) { :deep(.m_br) { display: block; }
@@ -2060,6 +2314,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .section_header > p, .sub_header > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .section_header > p { margin-top: 12px; }
     .section_header.no_desc { margin-bottom: 24px; }
+    section p{font-size: 1.4rem;line-height: 1.4;}
     :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 64px; padding: 8px 0 8px 40px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
     :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { left: 0; font-size: 1.8rem; line-height: 1.5; }
     :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
@@ -2140,7 +2395,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .highlight_block > .sub_header > p { margin-top: 5px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_stack > .dual_panel{ margin-top:32px; gap:32px; }
     .sec_stack > .dual_panel > article .sub_header{ margin-bottom:16px; }
-    .sec_stack > .dual_panel > article :is(.sub_header p, > ul > li){ font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em; }
+    .sec_stack > .dual_panel > article .sub_header p, .sec_stack > .dual_panel > article > ul > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_stack > .highlight_block > .highlight_body { width: 100%; gap: 40px; }
     .sec_stack > .highlight_block > .highlight_body > div { width: 100%; min-width: 0; }
     .sec_stack > .highlight_block > .highlight_body > div > h4 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
@@ -2276,6 +2531,36 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_startup_process .process_timeline > li[data-theme="dday"] > article { border-radius: 20px; gap: 12px; }
     .sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { display: block; width: 40px; height: 40px; }
+
+    .sec_franchise_type > .franchise_type_list { flex-direction: column; gap: 20px; }
+    .sec_franchise_type > .franchise_type_list > li { max-width: none; }
+    .sec_franchise_type > .franchise_type_list > li.is_profit { order: 1; }
+    .sec_franchise_type > .franchise_type_list > li.is_stable { order: 2; }
+    .sec_franchise_type > .franchise_type_list > li > article > header { padding: 24px; gap: 16px; }
+    .sec_franchise_type > .franchise_type_list > li > article > header > .icon { width: 60px; height: 60px; }
+    .sec_franchise_type > .franchise_type_list > li > article > header > div > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > header > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { padding: 24px; gap: 10px; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { padding:20px 12px; border-radius: 16px; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 4px 16px; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .card_icon { width: 32px; height: 32px; margin-top: 12px; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > strong { margin-top: 12px; font-size: 1.6rem; line-height: 1.24; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+
+    .sec_franchise_compare > .franchise_compare_wrap { margin-top: 32px; margin-left: -20px; margin-right: -20px; padding: 0 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .sec_franchise_compare .franchise_compare_table { min-width: 852px; }
+    .sec_franchise_compare .franchise_compare_table col.col_group { width: 7%; }
+    .sec_franchise_compare .franchise_compare_table col.col_label { width: 17.6%; }
+    .sec_franchise_compare .franchise_compare_table col.col_gs { width: 25.1%; }
+    .sec_franchise_compare .franchise_compare_table th,
+    .sec_franchise_compare .franchise_compare_table td { padding: 12px 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table thead th > strong { font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+    .sec_franchise_compare .franchise_compare_table thead td > span { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .sec_franchise_compare .list_note { margin-top: 16px; }
+    .sec_franchise_compare .list_note > li > p { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
 
     .sec_diagram header{ margin-bottom:32px; }
 
