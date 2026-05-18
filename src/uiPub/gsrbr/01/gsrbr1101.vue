@@ -443,6 +443,9 @@ export default {
     mounted() {
         this.checkMobile();
         window.addEventListener('resize', this.checkMobile);
+        const header = document.getElementById("header");
+
+        header.classList.add("head_black");
     },
     beforeUnmount() {
         window.removeEventListener('resize', this.checkMobile);
@@ -462,11 +465,6 @@ export default {
             this.isMobile = window.innerWidth < 768;
         },
     },
-    mounted() {
-        const header = document.getElementById("header");
-
-        header.classList.add("head_black");
-    }
 };
 </script>
 
