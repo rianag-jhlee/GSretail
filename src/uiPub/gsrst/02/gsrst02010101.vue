@@ -1117,8 +1117,12 @@
                                 </div>
                                 <div class="col_item">
                                     <div class="form_label">연락처 <span class="form_required">(필수 입력)</span></div>
-                                    <div class="form_field form_field_phone">             
-                                        <Inputs type="text" v-model="startupConsultForm.phone" />
+                                    <div class="form_field form_field_phone">
+                                        <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
+                                        <span class="form_sep">-</span>
+                                        <Inputs type="text" v-model="startupConsultForm.phone2" />
+                                        <span class="form_sep">-</span>
+                                        <Inputs type="text" v-model="startupConsultForm.phone3" />
                                     </div>
                                 </div>
                               
@@ -3326,9 +3330,10 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .consent_radio > input:checked::after { width: 10px; height: 10px; background-color: #ffffff; border-radius: 50%; position: absolute; top: 50%; left: 50%; content: ""; transform: translate(-50%, -50%); }
 .consent_radio > span { color: #161616; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
 .apply_form {border-top:1px solid #242428;}
-.apply_form .form_body {border-bottom:0;}
+.apply_form .form_body {padding-top:25px; padding-bottom:40px; border-bottom:0;}
 .apply_form .form_body .form_row { min-height: auto; padding: 12px 0; display: grid; grid-template-columns: 1fr; align-items: start; gap: 0; }
-.apply_form .form_body .form_row .form_label { margin-bottom: 12px; }
+.apply_form .button_area :deep(.primary){width:100%; max-width:100%;}
+.apply_form .form_body .form_row .form_ label { margin-bottom: 12px; }
 .apply_form .form_body .form_row .form_field { width: 100%; }
 .apply_form .form_body .form_row_radio, .apply_form .form_body .form_row_textarea,
 .apply_form .form_body .form_row_textarea .form_field,
@@ -3340,17 +3345,18 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .apply_form .form_body .form_row.col_02 .col_item .form_label { margin-bottom: 12px; }
 .apply_form .form_body .form_row.col_02 .col_item .form_field { width: 100%; }
 .apply_form .form_field { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.apply_form .form_field_phone .select{flex:1;}
 .apply_form .form_field_birth { flex-wrap: nowrap; }
 .apply_form .form_field_birth :deep(.select) { max-width:150px;flex: 1; min-width: 0; }
 .apply_form .form_field_open :deep(.input_wrap){max-width: 150px;}
 .apply_form .form_row_region :deep(.select){max-width:220px; flex: 1; min-width: 0; }
-.apply_form .form_field_experience { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+.apply_form .form_field_experience { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; }
 @media (min-width: 769px) {
     .apply_form .form_field_experience :deep(.input_wrap) { width: auto !important; max-width: none; flex: 0 0 auto; }
     .apply_form .form_field_experience :deep(.input_wrap .check) { min-height: 52px; padding: 13px 16px !important; display: inline-flex !important; align-items: center; gap: 8px; background-color: #ffffff; border: 1px solid #90909a; border-radius: 10px; box-sizing: border-box; cursor: pointer; position: relative; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]) { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
-    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label) { padding: 0 !important; display: inline-flex !important; align-items: center; gap: 4px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; white-space: nowrap; }
-    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::before) { content: "" !important; width: 20px !important; height: 20px !important; margin: 0 !important; background-color: #d9d9d9 !important; border: 0 !important; box-sizing: border-box !important; position: static !important; top: auto !important; left: auto !important; display: block !important; flex-shrink: 0; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label) { padding: 0 !important; display: inline-flex !important; align-items: center; gap: 8px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; white-space: nowrap; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::before) { content: "" !important; width: 20px !important; height: 20px !important; margin: 0 !important; background-color: #d9d9d9 !important; border: 0 !important; border-radius: 4px !important; box-sizing: border-box !important; position: static !important; top: auto !important; left: auto !important; display: block !important; flex-shrink: 0; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::after) { content: none !important; display: none !important; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::before) { background-color: #107af2 !important; }
     .apply_form .form_field_experience :deep(.input_wrap .check:has(input[type="checkbox"]:checked)) { border-color: #107af2; }
@@ -3711,8 +3717,33 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .consent_notice_area { margin-top: 16px; padding-top: 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
     .consent_notice_area > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .consent_radio > span { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .apply_form .form_field_experience :deep(.input_wrap) { flex: 1 1 100%; }
-    .apply_form .form_field_experience :deep(.check) { width: 100%; }
+    .apply_form .form_field_experience { gap: 20px; align-items: center; }
+    .apply_form .form_field_experience :deep(.input_wrap) { width: auto !important; flex: 0 0 auto; max-width: none; }
+    .apply_form .form_field_experience :deep(.input_wrap .check) { min-height: 24px; padding: 0 0 0 32px !important; margin: 0; border: 0; background-color: transparent; border-radius: 0; display: inline-block !important; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label) { padding: 0 !important; display: inline-block !important; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; white-space: nowrap; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::before) { content: "" !important; width: 24px !important; height: 24px !important; margin: 0 !important; background-color: #ffffff !important; border: 1px solid #c4c4d0 !important; border-radius: 8px !important; box-sizing: border-box !important; position: absolute !important; top: 0 !important; left: 0 !important; display: block !important; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::after) { width: 6px !important; height: 9px !important; border: 2px solid #ffffff !important; border-top: 0 !important; border-left: 0 !important; top: 5px !important; left: 9px !important; transform: rotate(45deg) !important; background: none !important; border-radius: 0 !important; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::before) { background-color: #107af2 !important; border-color: #107af2 !important; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::after) { content: "" !important; display: block !important; }
+    .sec_consult_startup { max-width: none; }
+    .apply_form .form_body{padding: 30px 0;}
+    .apply_form .form_body > .form_row:first-child > .col_item:first-child{padding:0 0 20px 0;}
+    .apply_form .form_body .form_row.col_02 { max-width: none; padding:0; grid-template-columns: 1fr; gap: 0; }
+    .apply_form .form_body .form_row .form_label { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .apply_form .form_body .form_row_calendar :deep(.consult_calendar),
+    .apply_form .form_body .form_row_calendar :deep(.consult_time_picker) { max-width: none; }
+    .apply_form .form_field :deep(.input_wrap),
+    .apply_form .form_field :deep(.select) { width: 100%; max-width: none; }
+    .apply_form .form_row_textarea .form_field :deep(.textarea_wrap) { width: 100%; max-width: none; }
+    .apply_form .form_field_birth :deep(.select) { max-width: none; flex: 1; min-width: 0; }
+    .apply_form .form_field_open :deep(.input_wrap) { max-width: none; flex: 1; min-width: 0; }
+    .apply_form .form_field_region { flex-direction: column; align-items: stretch; }
+    .apply_form .form_row_region :deep(.select) { max-width: none; flex: 1 1 100%; width: 100%; }
+    .apply_form .form_field_calendar :deep(.input_wrap) { max-width: none; }
+    .apply_form .consult_manager_card { max-width: none; margin-top: 0; padding: 16px; gap: 16px; }
+    .apply_form .consult_manager_photo { width: 50px; height: 50px; }
+    .apply_form .consult_manager_name { font-size: 1.6rem; line-height: 1.24; }
+    .apply_form .form_body .form_row.col_02 .col_item{padding:20px 0px;}
 
     /* 우측 하단 sticky 메뉴 */
     .quick_menu { display: none; }
