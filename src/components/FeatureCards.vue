@@ -31,7 +31,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <!-- PC / noSwipe 강제 리스트 -->
     <ul v-if="!isMobileView || noSwipe" class="feature_card_list" :class="{ 'no_swipe': noSwipe }">
         <li v-for="(item, i) in items" :key="i" class="feature_card_item">
             <em v-if="type === 'num'" class="feature_card_num">{{ item.num }}</em>
@@ -40,6 +39,7 @@ onUnmounted(() => {
             </figure>
             <em v-if="item.em" class="feature_card_em">{{ item.em }}</em>
             <strong class="feature_card_title" v-html="item.title"></strong>
+            
             <template v-if="item.desc">
                 <ul
                     v-if="Array.isArray(item.desc)"
@@ -52,12 +52,19 @@ onUnmounted(() => {
                 </ul>
                 <p v-else class="feature_card_desc" v-html="item.desc"></p>
             </template>
+
+            <ul v-if="item.subdesc && Array.isArray(item.subdesc)" class="feature_card_sub_list list_lined">
+                <li v-for="(subLine, si) in item.subdesc" :key="'sub-'+si">
+                    <p class="feature_card_desc" v-html="subLine"></p>
+                </li>
+            </ul>
+            
             <div v-if="$slots.action" class="feature_card_action">
                 <slot name="action" :item="item" :index="i"></slot>
             </div>
         </li>
     </ul>
-    <!-- Mobile: Swiper -->
+
     <Swiper
         v-else-if="!noSwipe"
         slides-per-view="auto"
@@ -73,6 +80,7 @@ onUnmounted(() => {
                 </figure>
                 <em v-if="item.em" class="feature_card_em">{{ item.em }}</em>
                 <strong class="feature_card_title" v-html="item.title"></strong>
+                
                 <template v-if="item.desc">
                     <ul
                         v-if="Array.isArray(item.desc)"
@@ -85,6 +93,13 @@ onUnmounted(() => {
                     </ul>
                     <p v-else class="feature_card_desc" v-html="item.desc"></p>
                 </template>
+
+                <ul v-if="item.subdesc && Array.isArray(item.subdesc)" class="feature_card_sub_list list_lined">
+                    <li v-for="(subLine, si) in item.subdesc" :key="'sub-'+si">
+                        <p class="feature_card_desc" v-html="subLine"></p>
+                    </li>
+                </ul>
+                
                 <div v-if="$slots.action" class="feature_card_action">
                     <slot name="action" :item="item" :index="i"></slot>
                 </div>
@@ -108,11 +123,10 @@ onUnmounted(() => {
 .feature_card_em { margin-bottom: 8px; color: #107af2; font-size: 1.8rem; font-weight: 700; font-style: normal; line-height: 1.5; letter-spacing: 0; display: block; }
 .feature_card_title { margin-bottom: 16px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 .feature_card_title:last-child { margin-bottom: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; white-space: pre-line; display: block; word-break: keep-all; }
-.feature_card_desc_list { flex: 1; }
+.feature_card_desc_list { flex: none; }
 .feature_card_desc { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 /* .feature_card_item > .feature_card_desc { flex: 1; } */
 .feature_card_action {flex-shrink: 0; }
-
 @media (max-width: 1024px) {
     .feature_card_item { flex: 1 1 calc((100% - 20px) / 2); }
 }

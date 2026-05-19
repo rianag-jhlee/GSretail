@@ -94,7 +94,7 @@ const wayItems = [
 
 const langData = {
     ko: {
-        MainTitle: "ABOUT GSR",
+        MainTitle: "회사소개",
         valueHeading: "GS Value",
         valueSub: "GS리테일 고유의 가치관",
         valueItems,

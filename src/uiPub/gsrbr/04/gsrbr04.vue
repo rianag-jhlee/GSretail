@@ -200,7 +200,7 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 .qr_download_area.mo a { display: flex; flex-direction: column; gap: 4px; padding-left: 60px; position: relative; text-decoration: none; }
 .qr_download_area.mo a::before { display: inline-block; position: absolute; top: -5px; left: 0; width: 48px; height: 48px; background: url('@/assets/images/dummy/gsrbr06_app_icon.png') no-repeat center / cover; content: ''; }
 .mo.qr_download_area a strong { display: flex; align-items: center; gap: 4px; color: #161616; font-size: 16px; font-weight: 700; }
-.mo.qr_download_area a strong::after { display: inline-block; width: 20px; height: 20px; background: red; content: ''; }
+.mo.qr_download_area a strong::after {content: ""; width: 24px; height: 24px; background-image: url(http://localhost:8080/img/icon_set_24.5b5c044c.png); background-repeat: no-repeat; background-size: auto 95px; background-position: -832px -15px; flex-shrink: 0; display: block;}
 
 /* Benefit Section */
 .benefit_list {padding-top:48px; display: flex; flex-wrap: wrap; gap:80px 20px;}

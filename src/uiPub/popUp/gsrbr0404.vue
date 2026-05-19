@@ -96,7 +96,7 @@ export default {
 h3 { margin-bottom: 60px; color: #161616; font-size: 32px; font-weight: 700; }
 h4 {margin-top:24px; color:#161616; font-size:32px; font-weight:700;}
 span {margin:8px 0; color:#161616; font-size:18px; font-weight:700; display:block;}
-span img {max-width:100%; object-fit:cover;}
+span img {max-width:100%; height:200px; object-fit:cover;}
 section > p {display:flex; flex-direction:column; gap:4px;}
 :deep(.gs25_event p em), :deep(.gsfresh_event p em) { color:#67676F; font-size:16px;}
 .event_icon_list { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; margin-top: 40px; margin-bottom: 24px; list-style: none; }

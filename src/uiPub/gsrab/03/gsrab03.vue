@@ -440,8 +440,12 @@ const langData = {
                     { period: "2010", details: [
                         { term: ["5월", "GS25"], desc: "해군PX 운영자로 선정" },
                         { term: ["4월", "GS리테일"], desc: "무안군-무안황토랑 유통공사와 MOU체결" },
-                        { term: ["3월", "GS리테일"], desc: "서울특별시와 '시민고객이 행복한 서울만들기' 협약체결" },
-                        { term: ["2월", "GS SHOP"], desc: "모바일 웹/앱 서비스 개시" },
+                        { term: ["3월"], subDetails:
+                            [
+                                { term: "GS리테일", desc: "서울특별시와 '시민고객이 행복한 서울만들기' 협약체결" },
+                                { term: "GS SHOP", desc: "모바일 웹/앱 서비스 개시" },
+                            ]
+                        },
                         { term: ["1월", "GS리테일"], desc: "농가에 상생매출 지원 통합 콜센터 오픈" },
                     ] },
                     { period: "2009", details: [
