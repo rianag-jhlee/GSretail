@@ -690,16 +690,16 @@ export default {
 .title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0101_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title {color: #FFFFFF; font-size: 72px; font-weight: 700; text-align: center; display: block;}
 .visual-sub {margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center;}
-.title-sub-text {width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4;}
+.title-sub-text {width: 100%; padding: 100px 0; color: #161616; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4;}
 :deep(.title-sub-text br:not(:nth-of-type(2))) {display: none;}
-.subtit_wrap {width: 100%; padding: 60px 40px; background: #F0F3F5; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
-.gsrin0101 .section-sub-title {color: #161618; font-size: 40px; font-weight: 700; text-align: center;}
-.section-date {margin-top: 15px; color: #666666; font-size: 1.8rem; text-align: center; display: block;}
+.subtit_wrap {width: 100%; padding: 60px 40px; background: #F2F2F4; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
+.gsrin0101 .section-sub-title {color: #161616; font-size: 40px; font-weight: 700; text-align: center;}
+.section-date {margin-top: 15px; color: #161616; font-size: 1.8rem; text-align: center; display: block;}
 .gsrin0101 .policy_wrap {padding-top: 60px;}
-.gsrin0101 .policy_wrap dt {margin-top: 60px; color: #161618; font-size: 24px; font-weight: 700;}
+.gsrin0101 .policy_wrap dt {margin-top: 60px; color: #161616; font-size: 24px; font-weight: 700;}
 .policy_wrap dt:first-child {margin-top: 0;}
 .gsrin0101 .policy_wrap dd {margin-top: 20px; padding-bottom:32px; color: #444444; font-size: 1.8rem; line-height: 1.8; border-bottom:1px solid #D7D7DF;}
-.bullet_title {margin-top:32px; color: #161618; font-size: 20px; font-weight: 700; display: block;}
+.bullet_title {margin-top:32px; color: #161616; font-size: 20px; font-weight: 700; display: block;}
 .bullet_01 li {font-size:18px;}
 .bullet_01 li.point {color:#242428}
 :deep(.gsrin0101) .policy_wrap dd .desc {font-size:16px;}

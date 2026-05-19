@@ -2013,9 +2013,10 @@ const langData = {
                         ],
                         purchaseTitle: "GS25 매장에서 유심 구매/사용 방법",
                         purchaseSteps: [
-                            { step: "Step 1", title: "간편하게 가입하는 요금제" },
-                            { step: "Step 2", title: "대한민국 최저가" },
-                            { step: "Step 3", title: "약정 조건/위약금 ZERO" },
+                            { step: "Step 1", title: "GS25 편의점에서\n 유심카드 구입" },
+                            { step: "Step 2", title: "GS25 편의점에서\n 유심카드 구입" },
+                            { step: "Step 3", title: "유심 일련번호 등록 후\n 개통 신청 (또는 전화로 개통 신청)" },
+                            { step: "Step 4", title: "해피콜/개통 완료 후\n 휴대폰에 유심을 장착하면 간편 개통 끝!" },
                         ],
                         benefitTitle: "GS25 요금제 혜택",
                         benefitCards: [
@@ -2114,6 +2115,7 @@ const langData = {
                                     "등록된 결제방식을 통해 자동 충전됨",
                                 ],
                             },
+                            
                         ],
                         hipassChargeTitle: "하이패스 카드 충전",
                         hipassChargeDesc: "하이플러스카드에서 출시한 모든 카드 충전가능 ('도로공사', 'EX' 기재된 카드 충전불가)",
@@ -2126,29 +2128,24 @@ const langData = {
                         label:   "고속도로 미납\n통행료 납부",
                         hero:    null,
                         heroAlt: "",
-                        title:   "고속도로 미납 통행료 납부",
+                        title:   "고속도로 미납통행료 조회\n/수납서비스",
                         desc:    "국내편의점 중 최초로 고속도로 미납통행료 실시간 조회 및 납부할 수 있는 서비스입니다.",
                         serviceTitle: "서비스 장점",
                         serviceAdvantages: [
                             {
                                 num:   "01",
-                                title: "보편성",
-                                desc:  "은행보다 많고 가까운 집 근처 편의점에서 24시간 결제 가능<br /><span class=\"txt_point\">전국 모든 GS25 점포에서 수납 대행</span><br />(실시간 입금확인, 대면 거래)",
+                                title: "전국 GS25 편의점에서\n 차량번호만으로 편리하게 납부 가능",
+                                desc:  "서비스 시행 : 2019.08.23부터",
                             },
                             {
                                 num:   "02",
-                                title: "경제성",
-                                desc:  "고객 수수료 별도 부담 없음<br />계좌이체, 무통장입금 발생되는 뱅킹 수수료 없음",
+                                title: "미납통행료\n 실시간 납부",
+                                desc:  "*법인 차량은 추후 서비스 예정",
                             },
                             {
                                 num:   "03",
-                                title: "편리성",
-                                desc:  "은행에 가지 않아도, 신용카드가 없어도, 온라인상점에서 주문하면 결제(입금)은 편의점에서 완료<br /><span class=\"txt_point\">거스름돈은 점포에서 바로 수령 가능</span>",
-                            },
-                            {
-                                num:   "04",
-                                title: "안전성",
-                                desc:  "복잡한 공인인증서나 보안 카드가 필요 없고, 결제정보 노출 방지<br />대면 거래에 따른 전자금융사고 (스미싱)<br />예방",
+                                title: "현금, 신용카드로\n 납부 가능",
+                                desc:  "현금이든 신용카드든  편의에 따라 납부 가능",
                             },
                         ],
                         unpaidTitle: "고속도로 미납통행료 납부 방법",
@@ -3094,7 +3091,7 @@ function goBack() {
   .chicken_panel :deep(.brand_panel_bg > img) { object-position: -385px center }
   .gopizza_panel :deep(.brand_panel_bg > img) { object-position: -591px bottom }
   .gopizza_panel :deep(.diff_bottom_row) { margin-top: 120px }
-  .sinsen_panel :deep(.brand_panel_bg > img) { object-position: -797px bottom }
+  .sinsen_panel :deep(.brand_panel_bg > img) { object-position: -395px bottom }
 }
 .sec_brand_visual { position: relative; height: calc(100vh + 800px) }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100vw; width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }

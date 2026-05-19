@@ -159,7 +159,7 @@
                                         </a>
                                     </h3>
                                     <div class="info_box">
-                                        <h4 class="sub_title">{{ t.Labels.mallIntro }}</h4>
+                                        <h4 class="sub_title" v-if="t.MallData[SUBTabIdx]?.type === 'card_type'">{{ t.Labels.mallIntro }}</h4>
                                         
                                         <div v-if="mall.type === 'card_type'" class="principles_card_container mall_intro_cards">
                                             <component 
@@ -212,6 +212,7 @@
                                             <div v-if="mall.contact.phone" class="info_item">
                                                 <span>{{ t.Labels.phoneNum }}</span>
                                                 <span class="val">{{ mall.contact.phone }}</span>
+                                                <span class="val">{{ mall.contact.phone1 }}</span>
                                             </div>
                                             <div v-if="mall.contact.email1 || mall.contact.email2 || mall.contact.email3" class="info_item">
                                                 <span>{{ t.Labels.email }}</span>
@@ -336,9 +337,8 @@ export default {
                             전화:"전화",
                             phone: `02-2006-3198`, 
                             이메일:"이메일",
-                            email1: `anyounginsadong@anyounginsadong.com` ,
-                            email2: `ha3kim1@gsretail.com` ,
-                            email3: `gsseri@gsretail.com` 
+                            email1: `hyungwook.lim@gsretail.com` ,
+                            email2: `gunbeom@gsretail.com` ,
                         },
                         conditions: [
                             {
@@ -346,7 +346,7 @@ export default {
                                 table: [
                                     { th: `월 임대료`, td: `업체 제안 방식` },
                                     { th: `임대 보증금`, td: `월 임대료 * 12개월` },
-                                    { th: `계약기간`, td: `1단계 : ~2026.12.31 / 2단계 : ~2028.08.15` },
+                                    { th: `계약기간`, td: `<p>1단계 : 2026년 12월 31일까지 가능</p><p>2단계 : 2028년 08월 15일까지 가능</p>` },
                                     { th: `면적`, td: `각 역사별 상이` },
                                     { th: `추천업종`, td: `의류, 편의서비스, 생활잡화, 디저트 등` }
                                 ]
@@ -403,7 +403,7 @@ export default {
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
-                            contact: { phone: `02-2008-3199`, email1: `masiaveve@gsretail.com`, instatxt:`g_valley`, blog:``, insta: `#`, homepage: `` },
+                            contact: { phone: `02-2006-3199`, email1: `masiaveve@gsretail.com`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
                             type:`card_type`
                         },
                         { 
@@ -411,12 +411,13 @@ export default {
                             name: `판교 파미어스몰`, contentTitle: `판교 파미어스몰`,
                             intro: [
                                 `<b>아이와 함께, 친구와 함께, 연인와 함께,<br/> 판교에서 따로, 또 같이 '파미어스몰'로 여러분을 초대합니다.</br>`,
-                                `국내 최고의 자족형 신도시, 판교에 다양한 라이프 스타일이 조화롭게 어우러진 복합 문화 상업 공간, '파미어스몰'`,
-                                `파미어스몰은 연면적 약 7만 7천평 규모의 복합시설로 315실의 '나인트리 호텔', 785세대의 '오피스텔', 5개기업의 오피스로 사용되고, 약 8,653평의 저층부에는 극장, 메디컬, 키즈, 쇼핑, 카페, 레스토랑 등 지역 주민들의 풍요로운 하루를 완성할 수 있는 다양한 상업 및 문화시설이 자리잡았습니다.`
+                                `국내 최고의 자족형 신도시, 판교에 다양한 라이프 스타일이 조화롭게 어우러진 복합 문화 상업 공간, '파미어스몰<br/>
+                                파미어스몰은 연면적 약 7만 7천평 규모의 복합시설로 315실의 '나인트리 호텔', 785세대의 '오피스텔', 5개기업의 오피스로 사용되고,<br/> 약 8,653평의 저층부에는 극장, 메디컬, 키즈, 쇼핑, 카페, 레스토랑 등 지역 주민들의 풍요로운 하루를 완성할 수 있는 다양한 상업 및 문화시설이 자리잡았습니다.
+                                '`,
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
-                            contact: { phone: `031-755-5878`, email1: `egg2bird@gsretail.com`, instatxt:`pameusmall`, blog:``, insta: `#`, homepage: `#` }
+                            contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `egg2bird@gsretail.com`, email2: `eskmika@gsretail.com`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
                         },
                         { 
                             홈페이지:'홈페이지',
@@ -427,7 +428,7 @@ export default {
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
-                            contact: { phone: `031-755-5878`, email1: `egg2bird@gsretail.com`, instatxt:`busan_foodhall`, blog:`blog.naver.com/busanfoodhall`, insta: `#`, homepage: `#` }
+                            contact: { phone: `051-722-8155`, email1: `egg2bird@gsretail.com`, email2: `kjk5774@gsretail.com`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `#` }
                         }
                     ],
                     backLabel : '목록으로 돌아가기'
@@ -567,6 +568,8 @@ export default {
     .sub_title { font-size: 20px; }
     .text_item { font-size: 1.8rem; line-height: 1.6; }
     .map_area { height: 400px; }
+    .map_section {flex-direction:column;}
+    .mall_content .contact_info_wrap {width:100%; order:1;}
     .contact_info_wrap { padding: 0; flex-direction: column; align-items: flex-start; gap: 24px; }
     .contact_left { flex-direction: column; gap: 12px; }
     .sns_right { width: 100%; margin-top: 10px; justify-content: flex-start; }
@@ -575,9 +578,9 @@ export default {
     .val_txt { font-size: 16px; word-break: keep-all; }
     .bottom_btns { margin-top: 60px; }
     .btn_list_back span { height: 50px; justify-content: center; }
-    .principles_swiper_wrapper { flex-direction: column; gap: 16px; }
+    /* .principles_swiper_wrapper { flex-direction: column; gap: 16px; } */
     .principle_card_item {height:auto; padding: 32px; display:block; flex:none;}
-    .mall-type-1 .principles_swiper_wrapper {display: grid; grid-template-columns: repeat(2, 1fr);}
+    .principles_swiper_wrapper, .mall-type-1 .principles_swiper_wrapper {display: grid; grid-template-columns: repeat(2, 1fr);}
 }
 @media screen and (max-width: 768px) {
     .pc {display:none;}
@@ -591,11 +594,9 @@ export default {
     .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .text_box .title { font-size: 30px; letter-spacing: -0.5px; }
     .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b),.mall-type-2 .text_item, .mall-type-3 .text_item {font-size: 16px; }
-    .map_section {flex-direction:column;}
     .mall_content .visual_img {height:240px;}
     .mall_content .content_title {margin-bottom:60px; margin-left:0px; margin-top:16px; display:flex; flex-direction:column;}
     .mall_content .content_title a {margin-left:0px; margin-top:16px; font-size:14px;}
-    .mall_content .contact_info_wrap {width:100%; order:1;}
     .mall-type-2 .text_item :deep(b br) , .mall-type-3 .text_item :deep(b br) {display:none;}
     .content_title { font-size: 24px; }
     .condition_grid {flex-direction:column;}
@@ -604,6 +605,6 @@ export default {
     .principle_card_item .bullet_text { font-size: 15px; }
     .lease_condition_section {margin-top:80px; }
     .lease_section .principles_card_container .principle_card_item {width:100%;}
-    .mall-type-1 .principles_swiper_wrapper {display:block;}
+    /* .mall-type-1 .principles_swiper_wrapper {display:block;} */
 }
 </style>

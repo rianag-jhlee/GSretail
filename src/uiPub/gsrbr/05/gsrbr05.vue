@@ -267,7 +267,7 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
 
 /* Mobile Responsive */
 @media screen and (max-width: 1024px) {
-    h4 {margin-bottom:24px; font-size:18px;}
+    h4 {margin-bottom:24px; font-size:20px;}
     .logo_flex li {width: calc((100% - 20px) / 2);}
     .benefit_row { flex-direction: column; }
     .step_box { flex-direction: column; padding:32px; }
@@ -289,7 +289,7 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
     .info .tit {font-size:18px;}
     .info::before {width:60px; height:60px;}
     .info::after {width:32px; height:32px; background-image:url('@/assets/images/sub/icon_cont_32.png'); top:14px; left:14px;}
-    .point_color, .point_color + p, .info .desc, .bullet_01 li, .brand_sub_txt {font-size:16px !important;}
+    .point_color, .point_color + p, .info .desc, .bullet_01 li, .brand_sub_txt {font-size:18px !important;}
     :deep(.point_color) + p br {display:none;}
     .benefit_row {padding-bottom:0; border-bottom:0; gap:40px}
     .benefit_row + .benefit_row {margin-top:40px;}

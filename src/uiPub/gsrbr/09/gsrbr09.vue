@@ -164,6 +164,7 @@ export default {
     .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:24px; font-weight:700;}
     .body_wrap .cont_area .cont_inner ul {display:flex; justify-content:space-between; align-items:flex-start;}
     .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:18px; font-weight:400; line-height:1.5;}
+    .body_wrap .cont_area .cont_inner ul li p:first-of-type {margin-bottom:20px;}
     .body_wrap .cont_inner:nth-of-type(2) {padding-top:80px; padding-bottom:80px;}
     .desc_section br {display:block;}
     .desc_section p span {font-size:18px !important; font-weight:400 !important;}

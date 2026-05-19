@@ -325,7 +325,7 @@ export default {
                         brands: [
                             { name: "GS25", list: ["구매일수는 하루에 여러번 구매해도 1일로 산정되며, 1,000원 이상 결제건만 인정됩니다.", "GS ALL 포인트는 일 최대 5회 적립 가능합니다.", "등급쿠폰은 오프라인 매장에서 사용 가능합니다."] },
                             { name: "GS THE FRESH", list: ["구매일수는 하루에 여러번 구매해도 1일로 산정되며, 포인트 적립대상금액 1,000원 이상 결제건만 인정됩니다.", "등급쿠폰은 오프라인 매장에서 사용 가능합니다."] },
-                            { name: "GS SHOP", list: ["모바일/인터넷에서 회원가입 후 본인인증 완료 즉시 혜택 사용 가능합니다.", "주문건수는 1회당 1만원 이상 결제한 주문만 인정됩니다(배송비 제외, 주문취소/반품시 제외)", "GS SHOP할인권은 지급일로부터 1개월 또는 3개월까지 사용 가능합니다. <br/><span style='color:#fb6432'>* 5%할인(=GS SHOP 할인권)은 지급일로부터 1개월 사용 가능합니다.</span><br/><span>* 결제금액 5% 이상 보유시에만 결제금액의 5% 할인 가능</span><span>* 타 사이트 경우 없이 www.gsshop.com 바로 방문시에만 사용 가능</span><br/><span>* 일부상품(저가 상품, 상품권, GS보험상품 등) 및 제휴사(할인/적립)혜택과 중복 적용 불가</span><br/><span>* 사용기한이 임박한 순부터 우선 적용</span><br/><span>- 비회원 및 본인인증 미완료 고객 등 일부 고객은 혜택지급 대상에서 제외됩니다.</span><br/><span>- 상품 구매로 인한 적립은 배송 완료시점에 적립됩니다.</span><br/><span>- 이벤트 프로모션 참여로 인한 적립은 사전 안내된 적립일자에 지급됩니다.</span><br/><span>- 1P단위로 사용 가능합니다.</span>"] },
+                            { name: "GS SHOP", list: ["모바일/인터넷에서 회원가입 후 본인인증 완료 즉시 혜택 사용 가능합니다.", "주문건수는 1회당 1만원 이상 결제한 주문만 인정됩니다(배송비 제외, 주문취소/반품시 제외)", "GS SHOP할인권은 지급일로부터 1개월 또는 3개월까지 사용 가능합니다. <br/><span style='color:#fb6432'>* 5%할인(=GS SHOP 할인권)은 지급일로부터 1개월 사용 가능합니다.</span><br/><span>* 결제금액 5% 이상 보유시에만 결제금액의 5% 할인 가능</span><br/><span>* 타 사이트 경우 없이 www.gsshop.com 바로 방문시에만 사용 가능</span><br/><span>* 일부상품(저가 상품, 상품권, GS보험상품 등) 및 제휴사(할인/적립)혜택과 중복 적용 불가</span><br/><span>* 사용기한이 임박한 순부터 우선 적용</span><br/><span>- 비회원 및 본인인증 미완료 고객 등 일부 고객은 혜택지급 대상에서 제외됩니다.</span><br/><span>- 상품 구매로 인한 적립은 배송 완료시점에 적립됩니다.</span><br/><span>- 이벤트 프로모션 참여로 인한 적립은 사전 안내된 적립일자에 지급됩니다.</span><br/><span>- 1P단위로 사용 가능합니다.</span>"] },
                             { name: "우리동네GS", list: ["GS25와 GS더프레시 배달/픽업, GS더프레시 사전예약 구매로 인한 적립은 상품 수령 및 배달 완료 시점에 적립됩니다.", "GS25 사전예약, 원플러스크론, 와인25 플러스 구매로 인한 적립은 결제완료 시점에 적립됩니다.", "상품권, 우리동네GS클럽 구독료, 담배(전자담배 포함)는 적립 대상에서 제외됩니다.", "포인트 사용은 최소 10P 이상 사용 가능합니다."] }
                         ]
                     },
@@ -389,12 +389,11 @@ h4 {color:#161616; font-size:32px; font-weight:700;}
 .qr_download_area.mo a {padding-left:60px; position:relative; display:flex; flex-direction:column; gap:4px;}
 .qr_download_area.mo a::before {content:''; width:48px; height:48px; background-image:url('@/assets/images/dummy/gsrbr06_app_icon.png'); background-size: cover; position:absolute; top:-5px; left:0; display:inline-block;}
 .qr_download_area.mo a strong {font-size:16px; display:flex; align-items:center; gap:4px;}
-.qr_download_area.mo a strong::after {content:''; width:20px; height:20px; background:red; display:inline-block;}
-
+.qr_download_area.mo a strong::after {content: ""; width: 24px; height: 24px; background-image: url(http://localhost:8080/img/icon_set_24.5b5c044c.png); background-repeat: no-repeat; background-size: auto 95px; background-position: -832px -15px; flex-shrink: 0; display: block;}
 
 /* policy_wrap 규칙 */
 .policy_wrap {overflow-x: auto; width: 100%; margin-bottom: 40px; }
-.policy_wrap table {margin-top:0px;}
+.policy_wrap table {min-width: 1100px; margin-top:0px;}
 .policy_wrap th, .policy_wrap td {border:0; border-bottom: 1px solid #E5E5E9;}
 .policy_wrap thead tr th:first-of-type, .policy_wrap tbody tr th {border-right:1px solid #E5E5E9; }
 .policy_wrap thead {border-top:1px solid #000;}
@@ -469,10 +468,11 @@ h5 + dl {margin-top:24px;}
     .bottom_btns {display:none;}
     .policy_wrap thead {border-top-color:#E5E5E9;}
     .base_table th, .base_table td {font-size:16px;}
-    .coupon_table, .point_table {min-width:auto;}
+    .coupon_table, .point_table {min-width:auto !important;}
     :deep(.policy_wrap) ul.bullet_01 li {font-size:16px !important;}
     .coupon_table tbody, .point_table tbody {border-top-color:#E5E5E9;}
     .mb40 {margin-bottom:24px;}
     .note_box .note_txt + p img {height:10px;}
+    .btn_big {width:100%;}
 }
 </style>
