@@ -20,12 +20,7 @@
             <!-- 비전&전략 -->
             <div v-show="CTabIdx === 0" class="panel panel_vision_strategy" :aria-label="t.Tabs1?.[0]?.item || ''">
                 <!-- green life together -->
-                <p class="tab_desc">
-                    GS리테일은 통합 GS리테일 출범 이후 지속가능한 기업의 가치창출을 위해
-                    ‘Green Life Together’라는 ESG비전을 수립하였습니다.<br/>
-                    이 중장기 비전이 실행될 수 있도록 환경과 사회의 세부전략 및 과제를 추진하고 있으며, <br/>
-                    이행현황과 지속가능한 경영의 성과를 이해관계자와 지속 소통해가겠습니다.
-                </p>
+                <p class="tab_desc">{{ t.MainDesc }}</p>
 
                 <div class="sec_vision_together" :aria-label="t.VisionTogetherAria">
                     <h3 class="vision_main_title">{{ t.VisionMainTitle }}</h3>
@@ -97,19 +92,19 @@
                     </header>
                     <div class="bnbp_wrapper">
                         <div class="bnbp_main">
-                            <div class="img_wrapper"><img :src="imgBnbpLogo" alt="기업과 생물다양성 플랫폼 이미지"></div>
+                            <div class="img_wrapper"><img :src="imgBnbpLogo" :alt="t.esgCommitteeDetailImageAlt"></div>
                             <div class="txt_box">
-                                <p>BNBP(Biz N Biodiversity Platform) 는 기업들로 하여금 생물다양성 보전 및 이용에 대한 산업계의 국제적, 사회적 책임이 있음을 인식하게 하고, 기업 활동 전반에서 생물다양성을 보전하며 이를 지속가능하게 이용할 수 있도록 지원하고자 지난 2016년 설립된 이니셔티브 입니다.</p>
-                                <br />
-                                <p>GS리테일은 BNBP 가입을 통해, 기업의 생물다양성 보전에 대한 사회적 책임을 인식하고 함께 어우러져 사는 삶을 영위하기 위한 노력을 지속하겠습니다.</p>
+                                <p v-for="(item, idx) in t.esgBnbpContents" :key="idx">
+                                    {{ item }}
+                                </p>
                             </div>
                         </div>
                         <div class="bnbp_sub">
-                            <h4>창원이니셔티브</h4>
+                            <h4>{{ t.esgChangwonTitle }}</h4>
                             <div class="txt_box">
-                                <p>2011년도 제10차 유엔사막화방지협약(United Nations Convention to Combat Desertification, UNCCD) 당사국 총회가 경상남도 창원에서 성공적으로 개최되었으며 성과 사업으로서 '창원 이니셔티브'가 출범하였습니다. 창원 이니셔티브는 UN 지속가능 발전 목표 (Sustainable Development Goal; SDG) 15.3에 해당하는 토지황폐화 중립에 기여하는데 중요한 역할을 하며 산림복원 사업의 추진을 지원하고 있습니다.</p>
-                                <br />
-                                <p>GS리테일은 '21년 10월 창원 이니셔티브 출범 10주년을 맞이하여, 토지황폐화 방지에 지지와 참여를 선언하였습니다. 뿐만 아니라 산림청 그리고 UNCCD 사무국과 업무협약을 체결하여 토지황폐화를 방지하기 위한 활동들에 참여하고 있습니다. 구체적으로 마을 공동숲 조성 등 황사와 가뭄을 억제하기 위한 지역사회 참여 프로그램을 실시했습니다. 정부, 기업, 국제기구 및 시민단체와의 파트너십을 통해 산림 복원 사업을 시행함으로써 보다 효과적으로 지역사회의 환경을 개선하고 생물다양성을 보전하는데 기여하고 있습니다.</p>
+                                <p v-for="(item, idx) in t.esgChangwonContents" :key="idx">
+                                    {{ item }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -121,8 +116,8 @@
                 <!-- Figma 431:12931 — 환경경영 자료 (IR/공시 리스트 패턴) -->
                 <div v-show="CTabIdxEsgArchive === 0" class="panel_inner" :aria-label="t.TabsEsgArchive?.[0]?.item || ''">
                     <header class="sub_header sub_header_center">
-                        <h3>GS리테일의 상생 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
-                        <p>본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br class="p_br" />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
+                        <h3>{{ t.tab2.stab1.title }}</h3>
+                        <p class="tab_desc">{{ t.tab2.stab1.desc }}</p>
                     </header>
                     <div class="table_wrap type1">
                         <table class="base_table">
@@ -155,8 +150,8 @@
                 </div>
                 <div v-show="CTabIdxEsgArchive === 1" class="panel_inner" :aria-label="t.TabsEsgArchive?.[1]?.item || ''">
                     <header class="sub_header sub_header_center">
-                        <h3>GS리테일의 환경 경영과 관련된 실적 자료들을 열람하실 수 있습니다.</h3>
-                        <p>본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br class="p_br" />용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.</p>
+                        <h3>{{ t.tab2.stab2.title }}</h3>
+                        <p class="tab_desc">{{ t.tab2.stab2.desc }}</p>
                     </header>
                     <div class="table_wrap type1">
                         <table class="base_table">
@@ -883,10 +878,7 @@ export default {
                 ko: {
                     MainTitle: "지속가능경영",
                     MainsubTitle: "Sustainable management",
-                    MainDesc: [
-                        "GS리테일은 통합 GS리테일 출범 이후 지속가능한 기업의 가치창출을 위해 ‘Green Life Together’라는 ESG비전을 수립하였습니다.<br/>이 중장기 비전이 실행될 수 있도록 환경과 사회의 세부전략 및 과제를 추진하고 있으며, 이행현황과 지속가능한 경영의 성과를 이해관계자와 지속 소통해가겠습니다",
-
-                    ],
+                    MainDesc: "GS리테일은 통합 GS리테일 출범 이후 지속가능한 기업의 가치창출을 위해\n‘Green Life Together’라는 ESG비전을 수립하였습니다.\n이 중장기 비전이 실행될 수 있도록 환경과 사회의 세부전략 및 과제를 추진하고 있으며,\n이행현황과 지속가능한 경영의 성과를 이해관계자와 지속 소통해가겠습니다.",
                     Tabs1: [{ item: "비전&전략" }, { item: "ESG 자료실" }, { item: "지속가능경영보고서" }],
                     TabsEsgArchive: [
                         { item: "환경경영 자료" },
@@ -894,6 +886,8 @@ export default {
                         { item: "ESG성과" },
                         { item: "사회공헌 수상내역" },
                     ],
+
+                    // [Tab 1] 비전&전략
                     VisionTogetherAria: "Green Life Together — 환경·사회",
                     VisionMainTitle: "Green Life Together.",
                     VisionEnvLabel: "환경",
@@ -1020,14 +1014,26 @@ export default {
                     bnbpTitle: "BNBP(Biz N Biodiversity Platform) 이니셔티브",
                     esgCommitteeDetailImageAlt: "BNBP 로고 이미지",
                     esgBnbpContents: [
-                        "BNBP(Biz N Biodiversity Platform)는 기업으로 하여금 생물다양성 관련 페이지 데이터 수집 및 성과 지표 관리를 체계적으로 진행할 수 있도록 지원하는 플랫폼입니다.",
-                        "GS리테일은 BNBP 가입을 통해, 기업의 생물다양성 보전에 대한 사회적 책임을 인지하고 함께 이행하는 생태 환경 문화에 기여하고 있습니다.",
+                        "BNBP(Biz N Biodiversity Platform) 는 기업들로 하여금 생물다양성 보전 및 이용에 대한 산업계의 국제적, 사회적 책임이 있음을 인식하게 하고, 기업 활동 전반에서 생물다양성을 보전하며 이를 지속가능하게 이용할 수 있도록 지원하고자 지난 2016년 설립된 이니셔티브 입니다.",
+                        "GS리테일은 BNBP 가입을 통해, 기업의 생물다양성 보전에 대한 사회적 책임을 인식하고 함께 어우러져 사는 삶을 영위하기 위한 노력을 지속하겠습니다.",
                     ],
                     esgChangwonTitle: "창원이니셔티브",
                     esgChangwonContents: [
-                        "2011년 제10차 유엔사막화방지협약(UNCCD) 총회에서 채택된 창원이니셔티브는 UN 지속가능발전목표(SDG 15.3) 이행을 촉진하기 위한 글로벌 협력 체계입니다.",
-                        "GS리테일은 2014년 10월 창원이니셔티브를 통해 10억 달러 조성을 목표로 추진되는 복원 프로젝트에 참여해 토지 황폐화 대응과 생물다양성 보전을 위한 실천 활동을 이어가고 있습니다.",
+                        "2011년도 제10차 유엔사막화방지협약(United Nations Convention to Combat Desertification, UNCCD) 당사국 총회가 경상남도 창원에서 성공적으로 개최되었으며 성과 사업으로서 ‘창원 이니셔티브’가 출범하였습니다. 창원 이니셔티브는 UN 지속가능 발전 목표 (Sustainable Development Goal; SDG) 15.3에 해당하는 토지황폐화 중립에 기여하는데 중요한 역할을 하며 산림복원 사업의 추진을 지원하고 있습니다.",
+                        "GS리테일은 ’21년 10월 창원 이니셔티브 출범 10주년을 맞이하여, 토지황폐화 방지에 지지와 참여를 선언하였습니다. 뿐만 아니라 산림청 그리고 UNCCD 사무국과 업무협약을 체결하여 토지황폐화를 방지하기 위한 활동들에 참여하고 있습니다. 구체적으로 마을 공동숲 조성 등 황사와 가뭄을 억제하기 위한 지역사회 참여 프로그램을 실시했습니다. 정부, 기업, 국제기구 및 시민단체와의 파트너십을 통해 산림 복원 사업을 시행함으로써 보다 효과적으로 지역사회의 환경을 개선하고 생물다양성을 보전하는데 기여하고 있습니다.",
                     ],
+
+                    // [Tab 2] ESG 자료실
+                    tab2: {
+                        stab1: {
+                            title: "GS리테일의 환경 경영과 관련된 실적 자료들을 열람하실 수 있습니다.",
+                            desc: "본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로\n용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.",
+                        },
+                        stab2: {
+                            title: "GS리테일의 상생 경영과 관련된 실적 자료들을 열람하실 수 있습니다.",
+                            desc: "본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로\n용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.",
+                        }
+                    },
                     EnvMgmtListData: [
                         { id: "5", title: "2025년 4분기 분기보고서", link: "#", fileType: "다운로드" },
                         { id: "4", title: "2025년 3분기 분기보고서", link: "#", fileType: "다운로드" },
@@ -1169,7 +1175,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .sub_header p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
 .sub_header_center h3 { text-align: center; }
 .sub_header_center p { text-align: center; }
-.tab_desc { padding: 20px 0; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
+.tab_desc { padding: 20px 0; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; text-align: center; white-space: pre-line; }
 .sec_vision_together { margin-top: 80px; }
 .vision_main_title { font-size: 7rem; font-weight: 700; line-height: 1.24; text-align: center; }
 .vision_two_col { width: 100%; margin-top: 24px; display: flex; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 50px; }
@@ -1183,7 +1189,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .vision_col_soc .vision_col_tit { color: #0D62C2; }
 .vision_col_soc .vision_col_sub { color: #0D62C2; }
 .vision_circle_list { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; align-items: center; }
-.vision_item { width: 300px; height: 300px; flex: 0 0 auto; padding: 0 32px; border-radius: 50%; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0.8; }
+.vision_item { width: 300px; height: 300px; flex: 0 0 auto; padding: 0 32px; border-radius: 50%; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0.8; white-space: pre-line;}
 .vision_item + .vision_item { margin-top: -6.7%; }
 .vision_col_soc .vision_item + .vision_item { margin-top: -30%; }
 .vision_col_env .vision_item { background: rgba(157, 226, 197, 1); }
@@ -1261,7 +1267,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 }
 @media screen and (max-width: 768px) {
     .p_br{display:none;}
-    .content { width: 100vw; max-width: 100%; padding: 0 20px 100px; }
+    .content { width: 100vw; max-width: 100%; padding: 60px 20px 100px; }
     .panel{padding-top: 48px;}
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
@@ -1308,16 +1314,17 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .tab_desc { padding: 0; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .sec_vision_together { margin-top: 56px; }
     .vision_main_title { font-size: 3.6rem; }
-    .vision_two_col { margin-top: 20px; flex-direction: column; align-items: center; gap: 24px; }
+    .vision_two_col { margin-top: 20px; align-items: center; gap: 24px; }
     .vision_col { width: 100%; max-width: 320px; padding: 30px 16px 24px; border-radius: 160px; }
     .vision_col_tit { font-size: 2.6rem; }
     .vision_col_sub { font-size: 1.6rem; }
     .vision_circle_list { width: 100%; margin-top: 16px; padding-top: 0; display: flex; align-items: center; }
-    .vision_item { width: min(236px, 70vw); height: min(236px, 70vw); padding: 0 18px; opacity: 1; }
-    .vision_item + .vision_item { margin-top: 12px; }
-    .vision_col_soc .vision_item + .vision_item { margin-top: 12px; }
+    .vision_item { width: clamp(100px, 100%, 236px); height: min(236px, 70vw); padding:0; border-radius: 1000px; }
+    .vision_col_env .vision_item { height: min(284px, 70vw); }
     .vision_item_tit { font-size: 1.8rem; line-height: 1.25; }
     .vision_item_desc { margin-top: 8px; padding: 0 8px; font-size: 1.4rem; line-height: 1.35; }
+    .vision_item + .vision_item { margin-top: -18px; }
+    .vision_col_soc .vision_item + .vision_item { margin-top: -42px; }
     .esg_process { margin-top: 28px; }
     .esg_flow_card { min-height: 0; padding: 18px 16px; border-radius: 20px; flex-direction: column; align-items: flex-start; }
     .esg_flow_card_head { width: 100%; min-height: 0; padding: 16px; border-radius: 14px; align-items: flex-start; text-align: left; }
@@ -1327,10 +1334,10 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .esg_flow_connector { padding: 14px 8px 18px; gap: 10px; }
     .esg_flow_connector_text { font-size: 1.4rem; line-height: 1.4; }
     .esg_flow_note { padding: 16px 0 0 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .esg_committee_table { overflow-x: auto; }
-    .esg_committee_table table { min-width: 640px; table-layout: fixed; }
-    .esg_committee_table thead th { height: 56px; padding: 0 24px; font-size: 1.8rem; white-space: nowrap; }
-    .esg_committee_table tbody td { padding: 14px 24px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; white-space: nowrap; }
+    .esg_committee_table thead th { height: 56px; padding: 0 24px; font-size: 1.6rem; white-space: nowrap; }
+    .esg_committee_table tbody td { padding: 6px; font-size: 1.4rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .esg_committee_table tbody tr:first-child td { padding-top: 18px; }
+    .esg_committee_table tbody tr:last-child td { padding-bottom: 18px; }
     .bnbp_main { margin-top: 24px; gap: 12px; }
     .img_wrapper { width: 100%; }
     .txt_box p { font-size: 1.6rem; line-height: 1.5; }
