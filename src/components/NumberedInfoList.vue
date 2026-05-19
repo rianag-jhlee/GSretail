@@ -46,7 +46,7 @@ defineProps({
 .num_info_item:nth-child(-n+2) { padding-top: 0; }
 .num_info_item:last-child, .num_info_item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
 .num_info_item > article { display: flex; gap: 24px; align-items: flex-start; }
-.num_info_icon { width: 80px; height: 80px; background-color: #f2f2f4; border-radius: 50%; flex-shrink: 0; }
+.num_info_icon { width: 80px; height: 80px; background-color: #f2f2f4; border-radius: 50%; flex-shrink: 0; position:relative;}
 .num_info_title { margin-bottom: 24px; }
 .num_info_num, .num_info_title > strong { font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .num_info_num { margin-bottom: 4px; color: #107af2; display:inline-block; }

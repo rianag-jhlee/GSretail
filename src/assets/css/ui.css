@@ -117,7 +117,7 @@ h5 {font-size:1.8rem;}
 .breadcrumb .is-open ul {height:auto; overflow:initial; display:block !important;}
 .breadcrumb a {white-space:nowrap;}
 
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
+.cont_inner { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px; }
 
 /* search */
 .search_wrap {display:flex; align-items:center; gap:8px;}

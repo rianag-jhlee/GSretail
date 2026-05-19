@@ -102,7 +102,7 @@ onUnmounted(() => {
 }
 .feature_card_icon { width: 48px; height: 48px; margin-bottom: 16px; background-color: #d7d7df; border-radius: 8px; }
 @media (max-width: 768px) {
-    .feature_card_icon { width: 40px; height: 40px; }
+    .feature_card_icon { width: 32px; height: 32px; }
 }
 .feature_card_icon > img { width: 100%; height: 100%; object-fit: contain; }
 .feature_card_em { margin-bottom: 8px; color: #107af2; font-size: 1.8rem; font-weight: 700; font-style: normal; line-height: 1.5; letter-spacing: 0; display: block; }
