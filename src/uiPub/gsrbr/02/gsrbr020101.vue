@@ -164,7 +164,7 @@
                                     <tbody>
                                         <tr v-for="(row, rIdx) in t.MouProducts" :key="rIdx">
                                             <th scope="row">{{ row.location }}</th>
-                                            <td>{{ row.products }}</td>
+                                            <td v-html="row.products"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -382,42 +382,42 @@ export default {
                             category: "과일",
                             summary: "달콤함이 가득한 제철의 정수, 전국 산지에서 갓 수확한 프리미엄 과일",
                             items: [
-                                { name: "영흥섬 포도", img: require("@/assets/images/dummy/tab_1_1.png") },
-                                { name: "제주 감귤", img: require("@/assets/images/dummy/tab_1_2.png") },
-                                { name: "하동 딸기", img: require("@/assets/images/dummy/tab_1_3.png") },
-                                { name: "안동 사과", img: require("@/assets/images/dummy/tab_1_4.png") }
+                                { name: "영흥섬 포도", img: require("@/assets/images/sub/gsrbr020101/tab_1_1.png") },
+                                { name: "제주 감귤", img: require("@/assets/images/sub/gsrbr020101/tab_1_2.png") },
+                                { name: "하동 딸기", img: require("@/assets/images/sub/gsrbr020101/tab_1_3.png") },
+                                { name: "안동 사과", img: require("@/assets/images/sub/gsrbr020101/tab_1_4.png") }
                             ]
                         },
                         {
                             category: "수산",
                             summary: "청정 해역의 신선함을 그대로, 산지 직송 수산물",
                             items: [
-                                { name: "부산 생물고등어", img: require("@/assets/images/dummy/tab_1_5.png") },
-                                { name: "대부도 바지락", img: require("@/assets/images/dummy/tab_1_6.png") },
+                                { name: "부산 생물고등어", img: require("@/assets/images/sub/gsrbr020101/tab_1_5.png") },
+                                { name: "대부도 바지락", img: require("@/assets/images/sub/gsrbr020101/tab_1_6.png") },
                                 { name: "제주도 갈치", img: require("@/assets/images/dummy/tab_1_7.png") },
-                                { name: "완도 전복", img: require("@/assets/images/dummy/tab_1_8.png") }
+                                { name: "완도 전복", img: require("@/assets/images/sub/gsrbr020101/tab_1_8.png") }
                             ]
                         },
                         {
                             category: "채소",
                             summary: "땅의 기운을 담은 신선한 채소, 건강한 밥상의 시작",
                             items: [
-                                { name: "금산 깻잎", img: require("@/assets/images/dummy/tab_1_9.png") },
-                                { name: "해남 고구마", img: require("@/assets/images/dummy/tab_1_10.png") },
-                                { name: "제주 깐마늘", img: require("@/assets/images/dummy/tab_1_11.png") },
-                                { name: "해남 절임배추", img: require("@/assets/images/dummy/tab_1_12.png") },
-                                { name: "참타리버섯", img: require("@/assets/images/dummy/tab_1_13.png") }
+                                { name: "금산 깻잎", img: require("@/assets/images/sub/gsrbr020101/tab_1_9.png") },
+                                { name: "해남 고구마", img: require("@/assets/images/sub/gsrbr020101/tab_1_10.png") },
+                                { name: "제주 깐마늘", img: require("@/assets/images/sub/gsrbr020101/tab_1_11.png") },
+                                { name: "해남 절임배추", img: require("@/assets/images/sub/gsrbr020101/tab_1_12.png") },
+                                { name: "참타리버섯", img: require("@/assets/images/sub/gsrbr020101/tab_1_13.png") }
                             ]
                         },
                         {
                             category: "양곡",
                             summary: "고슬고슬 밥맛 좋은 우리 곡식",
-                            items: [{ name: "당진 쌀", img: require("@/assets/images/dummy/tab_1_14.png") }]
+                            items: [{ name: "당진 쌀", img: require("@/assets/images/sub/gsrbr020101/tab_1_14.png") }]
                         },
                         {
                             category: "축산",
                             summary: "풍부한 육즙의 고품질 축산물",
-                            items: [{ name: "우월 한우", img: require("@/assets/images/dummy/tab_1_15.png") }]
+                            items: [{ name: "우월 한우", img: require("@/assets/images/sub/gsrbr020101/tab_1_15.png") }]
                         }
                     ],
                     PartnershipTitle: "함께하는 지자체",
@@ -443,8 +443,8 @@ export default {
                     MouTableCaption: "지자체별 MOU 체결 신선식품 정보",
                     MouProducts: [
                         { location: "충청남도", products: "상추, 깻잎, 부추, 딸기, 수박, 대추방울토마토, 메론, 사과, 배, 한우, 국산돈육, 계란, 꽃게" },
-                        { location: "전라남도", products: "강진군: 양곡, 돈육 / 나주시: 배, 오리 / 무안군: 양파 / 해남군: 고구마, 절임배추 / 완도군: 전복 / 영광군: 굴비 / 신안군: 김, 소금 / 진도군: 대파 / 장흥군: 블루베리, 오리" },
-                        { location: "경상남도", products: "밀양시: 상추, 깻잎, 표고버섯, 토마토, 메론, 수박, 사과, 단감, 딸기 / 통영시: 나물 / 산청군: 딸기, 계란, 생물" },
+                        { location: "전라남도", products: "<p>강진군: 양곡, 돈육</p><p>나주시: 배, 오리</p><p>무안군: 양파</p><p>해남군: 고구마, 절임배추</p><p>완도군: 전복</p><p>영광군: 굴비</p><p>신안군: 김, 소금</p><p>진도군: 대파</p><p>장흥군: 블루베리, 오리</p>" },
+                        { location: "경상남도", products: "<p>밀양시: 상추, 깻잎, 표고버섯, 토마토, 메론, 수박, 사과, 단감, 딸기</p><p>울릉도: 나물</p><p>산청군: 딸기, 계란, 생물</p>" },
                         { location: "전라북도", products: "고창군: 양곡" },
                         { location: "경기도", products: "안성시: 배, 한우, 돈육" },
                         { location: "제주도", products: "밀감, 한라봉, 키위, 갈치" },
@@ -716,7 +716,7 @@ export default {
 .mou_item { border-radius: 12px; text-align: center; }
 .mou_logo { width: 100%; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
 .mou_logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.mou_name { color: #161616; font-size: 1.8rem; font-weight: 700; }
+.mou_name { color: #161616; font-size: 1.8rem; font-weight: 700; text-align:left;}
 
 .mou_item.text_item { text-align: left; display: flex; flex-direction: column; justify-content: center; }
 .mou_logo.fipa_logo {margin-bottom:20px; justify-content: flex-start; }
@@ -781,9 +781,15 @@ export default {
 .tm-step-item { display: flex; flex-direction: column; gap: 20px; }
 .tm-step-icon { width: 40px; height: 40px; }
 .tm-step-num { font-size: 1.8rem; font-weight: 700; color: #107AF2; display: block; margin-bottom: 6px; }
-.tm-step-num::before {content:''; width:40px; height:40px; margin-bottom:20px; background:red; display:block;}
 .tm-step-tit {margin-bottom:16px; font-size: 20px; font-weight: 700; color: #161616; display: block; }
 .tm-step-text { font-size: 16px; color: #67676F; line-height: 1.5; }
+
+.tm-step-num::before {content:''; width:40px; height:40px; margin-bottom:20px; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat; display:block;}
+.tm-steps-grid .tm-step-item:nth-of-type(1) .tm-step-num:before {background-position:-20px -186px;}
+.tm-steps-grid .tm-step-item:nth-of-type(2) .tm-step-num:before {background-position:-180px -266px;}
+.tm-steps-grid .tm-step-item:nth-of-type(3) .tm-step-num:before {background-position:-1140px -104px;}
+.tm-steps-grid .tm-step-item:nth-of-type(4) .tm-step-num:before {background-position:-20px -20px;}
+.tm-steps-grid .tm-step-item:nth-of-type(5) .tm-step-num:before {background-position:-1060px -186px;}
 
 /* Principles */
 .tm-principle-card {width:calc((100% - 60px) / 4) !important; padding:32px; background-color:#F8F8F8; border-radius:12px; display:flex; flex-direction:column; gap:16px; position:relative; box-sizing:border-box;}

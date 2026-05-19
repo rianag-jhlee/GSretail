@@ -1163,11 +1163,9 @@ img{width:100%; height:auto; display:block; object-fit: cover;}
 .social_award_wrap :deep(dl dt > a.acc_tit_btn){padding:24px;font-weight: 700;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;
 background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .social_award_wrap :deep(dd.acc_panel > .acc_panel_inner > .acc_panel_cont > .table_wrap){border-top: 0;}
+
 .list_dotted {margin-top: 24px;}
-.list_dotted > li { padding-left: 12px; position: relative }
-.list_dotted > li + li { margin-top: 8px }
-.list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #67676F; border-radius: 50%; position: absolute; top: 11px; left: 0 }
-.list_dotted > li > p { margin: 0; color: #67676F; font-size: 1.8rem; line-height: 1.4 }
+
 /* 환경경영 자료 — gsrin0301 테이블·필터 패턴 (Figma 431:12931 대응) */
 .visual_sub {color: #FFFFFF; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;  text-align: center; position: relative; z-index: 2; }
 .panel.panel_vision_strategy > section { margin-top: 100px; }
@@ -1303,10 +1301,6 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .table_wrap.type1 th { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
     .table_wrap.type1 td { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
     .table_wrap td .link_title{font-size: 1.4rem;}
-    .list_dotted > li { padding-left: 6px }
-    .list_dotted > li::before { top: 9px; width:2px; height:2px }
-    .list_dotted > li + li { margin-top: 8px }
-    .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
     .sub_header h3 { font-size: 2.8rem; text-align: left; }
     .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .sub_header_center h3 { text-align: left; }

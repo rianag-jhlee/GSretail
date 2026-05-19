@@ -1379,7 +1379,8 @@ import imgHero8 from "@/assets/images/sub/gsrbr010101/brand_bg_09.png";
 import imgHero9 from "@/assets/images/sub/gsrbr010101/brand_bg_10.png"; 
 import imgHero10 from "@/assets/images/sub/gsrbr010101/brand_bg_11.png"; 
 import imgHero11 from "@/assets/images/sub/gsrbr010101/brand_bg_11-1.png"; 
-import imgHero12 from "@/assets/images/dummy/brand_bg_13.png"; 
+import imgHero11_1 from "@/assets/images/sub/gsrbr010101/brand_bg_11-2.png"; 
+import imgHero12 from "@/assets/images/sub/gsrbr010101/brand_bg_13.png"; 
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/sub/gsrbr010101/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
@@ -2636,7 +2637,7 @@ const langData = {
                 ],
             },
             {
-                hero: imgHero11,
+                hero: imgHero11_1,
                 heroAlt: "",
                 title: "참여제도",
                 desc: "GS25에서는 다양한 의견 수렴, 홍보, 콜센터 지원으로 경영주님에게 도움을 드리고 있습니다.",
@@ -2685,13 +2686,13 @@ const langData = {
                 title: "서비스 소개",
                 items: [
                     {
-                        img: "",
+                        img: require("@/assets/images/sub/gsrbr010101/img_mealbox.png"),
                         name: "밀박스25",
                         desc: "GS25에서 제공하는 기업/단체 대상 간편식 정기 제공 서비스 입니다.<br class=\"p_br\" />주식부터 디저트, 음료까지 매일 새로운 구성으로 운영 됩니다.<br class=\"p_br\" />HACCP 인증, 개별 포장으로 위생적이고 맛있는 한끼를 제공합니다.",
                         link: "#",
                     },
                     {
-                        img: "",
+                        img: require("@/assets/images/sub/gsrbr010101/img_snackbar.png"),
                         name: "스낵바",
                         desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다. 사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.",
                     },
@@ -2719,7 +2720,7 @@ const tab1 = langData.tabs[1];
 const tab2 = langData.tabs[2];
 const tab3 = langData.tabs[3];
 
-const depth1ActiveIdx = ref(3); // 26.05.18 : 1depth 활성화탭 선언
+const depth1ActiveIdx = ref(4); // 26.05.18 : 1depth 활성화탭 선언
 const depth1Tabs = langData.nav.depth1;
 const depth2Tabs = langData.nav.depth2;
 const storeTabs = langData.nav.depth2Store;
@@ -2727,7 +2728,7 @@ const winwinTabs = langData.nav.depth2Winwin;
 
 const storeActiveTab = ref(0); //매장/서비스 2Depth 활성화탭
 const winwinActiveTab = ref(0); //상생협력 2Depth 활성화탭
-const winwinServiceActiveTab = ref(3); //상생협력 3Depth 활성화탭
+const winwinServiceActiveTab = ref(0); //상생협력 3Depth 활성화탭
 const giftSwiperInst = ref(null);
 const onGiftSwiper = (swiper) => {
     giftSwiperInst.value = swiper;
@@ -3197,17 +3198,9 @@ function goBack() {
 @media (max-width: 768px) {
   .brand_panel_desc { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
 }
-.list_dotted > li { padding-left: 12px; position: relative }
-.list_dotted > li + li { margin-top: 8px }
-.list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #161616; border-radius: 50%; position: absolute; top: 11px; left: 0 }
-.list_dotted > li > p { margin: 0; color: #161616; font-size: 1.8rem; line-height: 1.4 }
-.list_dotted > li > p :deep(a) { color: #107af2; font-size: 1.8rem; line-height: 1.4; text-decoration: underline }
+
 .caution_note > p { color: #67676f }
 @media (max-width: 768px) {
-  .list_dotted > li { padding-left: 6px }
-  .list_dotted > li::before { top: 9px; width:2px; height:2px }
-  .list_dotted > li + li { margin-top: 8px }
-  .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
   .caution_note { margin-top: 8px }
   .caution_note > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
   .brand_panel_title .list_dotted { padding-right: 6px }
@@ -3482,6 +3475,30 @@ button { background-color: #fff }
 .winwin_panel .winwin_panel_3 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-260px -266px;}
 .winwin_panel .winwin_panel_3 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-740px -266px;}
 
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-820px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-900px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-980px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-1060px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(5) .num_info_icon:after) {background-position:-900px -186px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(6) .num_info_icon:after) {background-position:-1140px -266px;}
+
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-340px -20px;}
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-420px -20px;}
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-580px -266px;}
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-500px -20px;}
+
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-580px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-660px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-740px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-820px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(5) .num_info_icon:after) {background-position:-900px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(6) .num_info_icon:after) {background-position:-580px -103px;}
+
+.milbox_panel .milbox_feature :deep(.feature_card_item .feature_card_icon) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
+.milbox_panel .milbox_feature :deep(.feature_card_item:nth-of-type(1) .feature_card_icon) {background-position:-1060px -20px;}
+.milbox_panel .milbox_feature :deep(.feature_card_item:nth-of-type(2) .feature_card_icon) {background-position:-100px -186px;}
+.milbox_panel .milbox_feature :deep(.feature_card_item:nth-of-type(3) .feature_card_icon) {background-position:-1140px -20px;}
+
 @media (min-width: 769px) {
     .pop_card_swiper { overflow: visible }
     .pop_card_swiper :deep(.swiper-wrapper) { gap: 20px; transform: none !important }
@@ -3599,7 +3616,7 @@ button { background-color: #fff }
 @media (max-width: 768px) {
   .list_caution > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 }
-.imgcard_link { width: 20px; height: 20px; background-color: #d0d0d8; flex-shrink: 0; display: inline-block; vertical-align: middle; margin-left: 8px }
+.imgcard_link { width: 20px; height: 20px; background:url('@/assets/images/common/icon_set_20.png') -979px -24px no-repeat; flex-shrink: 0; display: inline-block; vertical-align: middle; margin-left: 8px }
 .sec_note { margin: 8px 0 0; color: #f95823; font-size: 1.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.02em }
 .milbox_feature :deep(.feature_card_item) { min-height: 171px; max-width: 340px }
 @media (max-width: 768px) {
@@ -3645,7 +3662,7 @@ button { background-color: #fff }
 .cash_table_cell { display: flex; align-items: flex-start; gap: 12px }
 .imgcard_list { display: flex; gap: 20px }
 .imgcard_item { overflow: hidden; display: flex; flex: 1; flex-direction: column }
-.imgcard_img { width: 100%; height: 340px; margin: 0; background-color: #c4c4c4; border-radius:12px; overflow: hidden }
+.imgcard_img { width: 100%; height: 340px; margin: 0; border-radius:12px; overflow: hidden }
 .imgcard_img > img { width: 100%; height: 100%; object-fit: cover }
 .imgcard_body { padding: 32px 0; flex: 1 }
 .imgcard_body > h4 { margin-bottom: 16px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }

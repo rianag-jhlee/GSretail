@@ -51,7 +51,8 @@ defineProps({
 .num_info_num, .num_info_title > strong { font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .num_info_num { margin-bottom: 4px; color: #107af2; display:inline-block; }
 .num_info_title > strong { color: #161616; display: flex; align-items: center; gap: 8px; }
-.num_info_link { width: 24px; height: 24px; background-color: #d0d0d8; border-radius: 4px; flex-shrink: 0; display: inline-block; }
+.num_info_link { width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0; display: inline-flex; align-items:center;}
+.num_info_link:after {width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -832px -15px no-repeat; content:''; display:block;}
 .num_info_body > p { color: #67676f; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .num_info_body > p.num_info_desc_light { font-weight: 400; }
 .num_info_body .list_dotted { margin-top: 16px; }

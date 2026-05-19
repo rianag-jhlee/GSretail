@@ -5,34 +5,34 @@
         "children": [
             {
                 "title": "CEO 인사말",
-                "path": "#",
+                "path": "gsrab01",
                 "children": []
             },
             {
                 "title": "회사 소개",
-                "path": "#",
+                "path": "gsrab02",
                 "children": []
             },
             {
                 "title": "연혁",
-                "path": "#",
+                "path": "gsrab03",
                 "children": []
             },
             {
                 "title": "CI/BI",
-                "path": "#",
+                "path": "gsrab04",
                 "children": []
             },
             {
                 "title": "위치",
-                "path": "#",
+                "path": "gsrab05",
                 "children": []
             }
         ]
     },
     {
         "title": "BRAND",
-        "path": "#none",
+        "path": "gsrbr_smain",
         "children": [
             {
                 "title": "GS25",

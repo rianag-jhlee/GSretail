@@ -112,11 +112,7 @@ onUnmounted(() => {
 .feature_card_desc { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 /* .feature_card_item > .feature_card_desc { flex: 1; } */
 .feature_card_action {flex-shrink: 0; }
-.list_dotted > li { padding-left: 12px; position: relative; }
-.list_dotted > li + li { margin-top: 8px; }
-.list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #67676f; border-radius: 50%; position: absolute; top: 11px; left: 0; }
-.list_dotted > li > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
-.list_dotted > li > p :deep(a) { color: #107af2; font-size: 1.8rem; line-height: 1.4; text-decoration: underline; }
+
 @media (max-width: 1024px) {
     .feature_card_item { flex: 1 1 calc((100% - 20px) / 2); }
 }
@@ -131,9 +127,5 @@ onUnmounted(() => {
     .feature_card_title { margin-bottom: 16px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .feature_card_desc { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .feature_card_desc_list > li + li { margin-top: 4px; }
-    .list_dotted > li { padding-left: 6px; }
-    .list_dotted > li::before { top: 9px; width: 2px; height: 2px; }
-    .list_dotted > li + li { margin-top: 8px; }
-    .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
 }
 </style>

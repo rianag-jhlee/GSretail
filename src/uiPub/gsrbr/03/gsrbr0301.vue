@@ -229,16 +229,16 @@ import imgBi08Mo from "@/assets/images/dummy/mo/gsrbr0301_08_mo.png";
 import imgCert01 from "@/assets/images/dummy/cert_logo_01.png";
 import imgCert02 from "@/assets/images/dummy/cert_logo_02.png";
 import imgCert03 from "@/assets/images/dummy/cert_logo_03.png";
-import imgCh01 from "@/assets/images/dummy/gsrbr0301_10.png";
-import imgCh02 from "@/assets/images/dummy/gsrbr0301_11.png";
-import imgCh03 from "@/assets/images/dummy/gsrbr0301_12.png";
-import imgCh04 from "@/assets/images/dummy/gsrbr0301_13.png";
-import imgPr01 from "@/assets/images/dummy/gsrbr0301_14.png";
-import imgPr02 from "@/assets/images/dummy/gsrbr0301_15.png";
-import imgPr03 from "@/assets/images/dummy/gsrbr0301_16.png";
-import imgPr04 from "@/assets/images/dummy/gsrbr0301_17.png";
-import imgPr05 from "@/assets/images/dummy/gsrbr0301_18.png";
-import imgPr06 from "@/assets/images/dummy/gsrbr0301_19.png";
+import imgCh01 from "@/assets/images/sub/gsrbr03/gsrbr0301_10.png";
+import imgCh02 from "@/assets/images/sub/gsrbr03/gsrbr0301_11.png";
+import imgCh03 from "@/assets/images/sub/gsrbr03/gsrbr0301_12.png";
+import imgCh04 from "@/assets/images/sub/gsrbr03/gsrbr0301_13.png";
+import imgPr01 from "@/assets/images/sub/gsrbr03/gsrbr0301_14.png";
+import imgPr02 from "@/assets/images/sub/gsrbr03/gsrbr0301_15.png";
+import imgPr03 from "@/assets/images/sub/gsrbr03/gsrbr0301_16.png";
+import imgPr04 from "@/assets/images/sub/gsrbr03/gsrbr0301_17.png";
+import imgPr05 from "@/assets/images/sub/gsrbr03/gsrbr0301_18.png";
+import imgPr06 from "@/assets/images/sub/gsrbr03/gsrbr0301_19.png";
 
 
 
@@ -523,7 +523,7 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 /* 100vw는 스크롤바 폭까지 포함해 가로 오버플로를 자주 냄 → 부모와 동일한 100% 사용 */
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/gs_shop_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/sub/gsrbr03/gs_shop_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
 .bg_wrap.active > .bg { transform: scale(1) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
 .bg_wrap > .bg::before { background-color: #00000066; z-index: 2 }

@@ -4357,15 +4357,7 @@ section + section { padding-top:120px; }
 .tab_header { margin-bottom:80px; padding: 20px 0; text-align: center; }
 .tab_header > h2 { font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em; }
 .tab_header > p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
-.list_dotted > li { padding-left: 12px; position: relative }
-.list_dotted > li + li { margin-top: 8px }
-.list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color:#67676F; border-radius: 50%; position: absolute; top: 11px; left: 0 }
-.list_dotted > li > p { margin: 0; color: #67676F; font-size: 1.8rem; line-height: 1.4 }
 @media (max-width: 768px) {
-    .list_dotted > li { padding-left: 6px }
-    .list_dotted > li::before { top: 9px; width:2px; height:2px }
-    .list_dotted > li + li { margin-top: 8px }
-    .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 }
 :deep(.feature_cards_grid.feature_card_list) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
 :deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); }

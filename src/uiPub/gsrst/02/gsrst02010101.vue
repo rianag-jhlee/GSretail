@@ -2005,9 +2005,6 @@ section + section { padding-top: 100px; }
 section p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 .panel_third_depth { padding-top: 80px; }
 .panel { padding: 100px 0 200px; }
-.list_dotted > li { padding-left: 12px; position: relative; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
-.list_dotted > li + li { margin-top: 8px }
-.list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #161616; border-radius: 100%; position: absolute; top: 11px; left: 0 }
 
 .sec_hero { min-height: 700px; padding: 97px 100px 77px; background-size: cover; background-position: center; border-radius: 20px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
 .sec_hero::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); content: ''; position: absolute; top: 0; left: 0; }
@@ -2422,9 +2419,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 @media (max-width: 768px) { :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
     section + section { padding-top: 80px; }
-    .list_dotted > li { padding-left: 6px }
-    .list_dotted > li::before { top: 9px; width:2px; height:2px }
-    .list_dotted > li + li { margin-top: 5px }
 
     .page_header { display: none; }
 
