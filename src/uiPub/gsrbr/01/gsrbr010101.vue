@@ -2720,7 +2720,7 @@ const tab1 = langData.tabs[1];
 const tab2 = langData.tabs[2];
 const tab3 = langData.tabs[3];
 
-const depth1ActiveIdx = ref(4); // 26.05.18 : 1depth 활성화탭 선언
+const depth1ActiveIdx = ref(0); // 26.05.18 : 1depth 활성화탭 선언
 const depth1Tabs = langData.nav.depth1;
 const depth2Tabs = langData.nav.depth2;
 const storeTabs = langData.nav.depth2Store;
