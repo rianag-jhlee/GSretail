@@ -208,8 +208,11 @@ function slideNext() {
 .calendar_selected { margin: 12px 0 0; padding-top: 24px; border-top: 1px solid #d7d7df; color: #107af2; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; text-align: center; }
 
 @media (max-width: 768px) {
-    .consult_calendar_inner { padding: 24px 20px; }
-    .calendar_day { min-height: 44px; font-size: 1.6rem; }
-    .calendar_weekdays > li { font-size: 1.6rem; }
+    .consult_calendar { max-width: none; }
+    .consult_calendar_inner { padding: 16px; border-radius: 12px; }
+    .consult_calendar_head { margin-bottom: 16px; }
+    .calendar_weekdays { padding: 12px 0; }
+    .calendar_day { min-height: 45px; }
+    .calendar_selected { margin-top: 0; padding-top: 16px; font-size: 1.6rem; line-height: 1.24; }
 }
 </style>
