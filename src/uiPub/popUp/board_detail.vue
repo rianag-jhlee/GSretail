@@ -1,34 +1,35 @@
 <template>
-    <div class="content">
+    <div class="modal_cont">
+        <div class="modal_header">
+            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+        </div>
 
-        <div class="board_detail_wrap">
-            <!-- board title -->
-            <div class="detail_title">
-                <strong class="tit">{{ t.title }}</strong>
-                <p class="info">
-                    <em>{{ t.cate }}</em>
-                    <span class="date">{{ t.date }}</span>
-                </p>
+        <div class="modal_content">
+
+            <div class="board_detail_wrap">
+                <!-- board title -->
+                <div class="detail_title">
+                    <strong class="tit">{{ t.title }}</strong>
+                    <p class="info">
+                        <em>{{ t.cate }}</em>
+                        <span class="date">{{ t.date }}</span>
+                    </p>
+                </div>
+                <!-- //board title -->
+
+                <!-- board body -->
+                <div class="board_detail_cont">
+
+                    <!-- editor 내용 노출 -->
+                    <p><img src="@/assets/images/dummy/sample_news_detail_01.png" /></p>
+
+                    <p>{{ t.detail }}</p>
+                    <!-- editor 내용 노출 -->
+
+                </div>
+                <!-- //board body -->
             </div>
-            <!-- //board title -->
-
-            <!-- board body -->
-            <div class="board_detail_cont">
-
-                <!-- editor 내용 노출 -->
-                <p><img src="@/assets/images/dummy/sample_news_detail_01.png" /></p>
-
-                <p>{{ t.detail }}</p>
-                <!-- editor 내용 노출 -->
-
-            </div>
-            <!-- //board body -->
-
-            <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
-            <div class="bottom_btns">
-                <button class="btn_back" @click="handleBack">{{ t.ListBack }}</button>
-            </div>
-            <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
+            
         </div>
 
     </div>
@@ -60,6 +61,7 @@ export default {
         } 
     },
     methods: {
+        closeModal(event) { modal.close(event.currentTarget); },
     },
     mounted() {
         const header = document.getElementById("header");
