@@ -128,18 +128,18 @@
                             </colgroup>
                             <tbody>
                                 <tr v-for="(item, idx) in t.EnvMgmtListData" :key="'env-doc-' + idx">
-                                    <td class="tac">{{ item.id }}</td>
-                                    <td class="tal">
+                                    <td class="ac">{{ item.id }}</td>
+                                    <td class="al">
                                         <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
                                     </td>
-                                    <td class="tac">
+                                    <td class="ac">
                                         <button type="button" class="btn_download_file" @click="handleEnvMgmtDownload(item.link)">
                                             <span class="file_type_text">{{ item.fileType || "PDF" }}</span>
                                         </button>
                                     </td>
                                 </tr>
                                 <tr v-if="!t.EnvMgmtListData || t.EnvMgmtListData.length === 0">
-                                    <td colspan="3" class="tac py80">{{ t.EnvMgmtNoDataText }}</td>
+                                    <td colspan="3" class="ac py80">{{ t.EnvMgmtNoDataText }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -162,18 +162,18 @@
                             </colgroup>
                             <tbody>
                                 <tr v-for="(item, idx) in t.EnvMgmtListData" :key="'env-doc-' + idx">
-                                    <td class="tac">{{ item.id }}</td>
-                                    <td class="tal">
+                                    <td class="ac">{{ item.id }}</td>
+                                    <td class="al">
                                         <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
                                     </td>
-                                    <td class="tac">
+                                    <td class="ac">
                                         <button type="button" class="btn_download_file" @click="handleEnvMgmtDownload(item.link)">
                                             <span class="file_type_text">{{ item.fileType || "PDF" }}</span>
                                         </button>
                                     </td>
                                 </tr>
                                 <tr v-if="!t.EnvMgmtListData || t.EnvMgmtListData.length === 0">
-                                    <td colspan="3" class="tac py80">{{ t.EnvMgmtNoDataText }}</td>
+                                    <td colspan="3" class="ac py80">{{ t.EnvMgmtNoDataText }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -181,8 +181,8 @@
                     <div class="pagination_area">
                         <Pagination v-model="envMgmtPage" :total-pages="envMgmtTotalPages" @change="onEnvMgmtPageChange" />
                     </div>
-                
                 </div>
+
                 <div v-show="CTabIdxEsgArchive === 2" class="panel_inner" :aria-label="t.TabsEsgArchive?.[2]?.item || ''">
                     <div class="table_wrap type2">
                         <table class="base_table">
@@ -192,74 +192,41 @@
                                 <col style="width: 245px;" />
                                 <col style="width: 245px;" />
                                 <col style="width: 245px;" />
-                                <col style="width: 220px;" />
+                                <col style="" />
                             </colgroup>
                             <thead>
-                                <tr>
-                                    <th scope="col" rowspan="2" class="tac bold th_item">항목</th>
-                                    <th scope="col" colspan="4" class="tac bold">KCGS</th>
-                                    <th scope="col" rowspan="2" class="tac bold th_sustin_best">서스틴 베스트</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col" class="tac">종합등급</th>
-                                    <th scope="col" class="tac">환경</th>
-                                    <th scope="col" class="tac">사회</th>
-                                    <th scope="col" class="tac">지배구조</th>
+                                <tr v-for="(item, idx) in t.tab2.stab3.tableTitle" :key="'ir-'+idx">
+                                    <th :class="item.class1" v-if="item.rs1 > 0" :rowspan="item.rs1" :colspan="item.cs1 || 1">{{ item.title1 }}</th>
+                                    <th :class="item.class2" v-if="item.rs2 > 0" :rowspan="item.rs2" :colspan="item.cs2 || 1">{{ item.title2 }}</th>
+                                    <th :class="item.class3" v-if="item.rs3 > 0" :rowspan="item.rs3" :colspan="item.cs3 || 1">{{ item.title3 }}</th>
+                                    <th :class="item.class4" v-if="item.rs4 > 0" :rowspan="item.rs4" :colspan="item.cs4 || 1">{{ item.title4 }}</th>
+                                    <th :class="item.class5" v-if="item.rs5 > 0" :rowspan="item.rs5" :colspan="item.cs5 || 1">{{ item.title5 }}</th>
+                                    <th :class="item.class6" v-if="item.rs6 > 0" :rowspan="item.rs6" :colspan="item.cs6 || 1">{{ item.title6 }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="tac"><strong>2025</strong></td>
-                                    <td class="tac">A+</td>
-                                    <td class="tac">A+</td>
-                                    <td class="tac">A+</td>
-                                    <td class="tac">A</td>
-                                    <td class="tac"><strong>AA</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="tac"><strong>2024</strong></td>
-                                    <td class="tac">A+</td>
-                                    <td class="tac">A+</td>
-                                    <td class="tac">A+</td>
-                                    <td class="tac">A</td>
-                                    <td class="tac"><strong>AA</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="tac"><strong>2023</strong></td>
-                                    <td class="tac">A</td>
-                                    <td class="tac">A+</td>
-                                    <td class="tac">A</td>
-                                    <td class="tac">A</td>
-                                    <td class="tac"><strong>A</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="tac"><strong>2022</strong></td>
-                                    <td class="tac">A</td>
-                                    <td class="tac">B</td>
-                                    <td class="tac">A</td>
-                                    <td class="tac">A</td>
-                                    <td class="tac"><strong>-</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="tac"><strong>2021</strong></td>
-                                    <td class="tac">A</td>
-                                    <td class="tac">A</td>
-                                    <td class="tac">A</td>
-                                    <td class="tac">A</td>
-                                    <td class="tac"><strong>-</strong></td>
+                                <tr v-for="(item, idx) in t.tab2.stab3.tableData" :key="'ir-'+idx">
+                                    <th class="ac bold">{{ item.title }}</th>
+                                    <td class="ac">{{ item.item1 }}</td>
+                                    <td class="ac">{{ item.item2 }}</td>
+                                    <td class="ac">{{ item.item3 }}</td>
+                                    <td class="ac">{{ item.item4 }}</td>
+                                    <td class="ac">{{ item.item5 }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <ul class="list_dotted">
-                        <li><p>평가기관: 한국기업지배구조원(Korea Corporate Governance Service, KCGS), 서스틴베스트(SUSTINVEST)</p></li>
-                        <li><p>EST 평가: 회사의 ESG 수준에 대한 직관적 정보 제공 및 투자 의사결정 활용 지원을 목적으로 하여, 매년 평가 실시함.</p></li>
+                        <li v-for="(item, idx) in t.tab2.stab3.listData" :key="'ir-'+idx">
+                            <p>{{ item.desc }}</p>
+                        </li>
                     </ul>
                 </div>
+
                 <div v-show="CTabIdxEsgArchive === 3" class="panel_inner" :aria-label="t.TabsEsgArchive?.[3]?.item || ''">
                     <header class="sub_header sub_header_center">
-                        <h3>구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 <br class="p_br"/>꾸준히 지역사회와 함께한 나눔 활동을 소개합니다.</h3>
-                        <p>2006년부터 구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 꾸준히 지역사회와 함께하며 <br class="p_br"/>나눔 활동을 지속적으로 함께하고 있습니다.<br />앞으로도 일상에서 함께하는 따뜻한 나눔을 실천, 마음을 나누겠습니다.</p>
+                        <h3>{{ t.tab2.stab4.title }}</h3>
+                        <p class="tab_desc">{{ t.tab2.stab4.desc }}</p>
                     </header>
                     <div class="social_award_wrap">
                         <div class="table_wrap type3">
@@ -269,111 +236,31 @@
                                     <col style="width: 150px;" />
                                     <col style="width: 470px;" />
                                     <col style="width: 300px;" />
-                                    <col style="width: 380px;" />
+                                    <col style="" />
                                 </colgroup>
                                 <thead>
-                                    <tr>
-                                        <th scope="col" class="tac bold">연도</th>
-                                        <th scope="col" class="tac bold">구분</th>
-                                        <th scope="col" class="tac bold">표창명</th>
-                                        <th scope="col" class="tac bold">대회</th>
-                                        <th scope="col" class="tac bold">소속</th>
+                                    <tr v-for="(item, idx) in t.tab2.stab4.tableTitle" :key="'ir-'+idx">
+                                        <th class="ac">{{ item.title1 }}</th>
+                                        <th class="ac">{{ item.title2 }}</th>
+                                        <th class="ac">{{ item.title3 }}</th>
+                                        <th class="ac">{{ item.title4 }}</th>
+                                        <th class="ac">{{ item.title5 }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="tac" rowspan="2"><strong>2025</strong></td>
-                                        <td class="tac">봉사</td>
-                                        <td class="tal">화성특례시의회 표창장</td>
-                                        <td class="tal">화성시남부종합사회복지관</td>
-                                        <td class="tal">편의점 3부문4지역 GS나누미</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">봉사</td>
-                                        <td class="tal">국회의원 표창장</td>
-                                        <td class="tal">2025년 창영복지인의 날</td>
-                                        <td class="tal">편의점 3부문4지역 GS나누미</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac" rowspan="4"><strong>2024</strong></td>
-                                        <td class="tac">기부</td>
-                                        <td class="tal">한림화상재단 감사패(몽짱소방관 희망나눔 달력 캠페인)</td>
-                                        <td class="tal">한림화상재단</td>
-                                        <td class="tal">GS리테일</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">봉사</td>
-                                        <td class="tal">우리모두복지재단 등촌9종합사회복지관 감사패</td>
-                                        <td class="tal"></td>
-                                        <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">기부</td>
-                                        <td class="tal">제4회 대한민국 착한 기부자상 국무총리 표창장</td>
-                                        <td class="tal">행정안전부 주최</td>
-                                        <td class="tal">GS리테일</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">봉사</td>
-                                        <td class="tal">사단법인 나눔과실천 표창장</td>
-                                        <td class="tal">화성시남부종합사회복지관</td>
-                                        <td class="tal">편의점 3부문4지역 GS나누미</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac" rowspan="8"><strong>2023</strong></td>
-                                        <td class="tac">그외</td>
-                                        <td class="tal">경상북도지사 표창(정신건강 및 자살예방 사업 참여, 생명존중 문화 확산 기여)</td>
-                                        <td class="tal"></td>
-                                        <td class="tal">편의점사업부 5부문(박서우)</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">그외</td>
-                                        <td class="tal">전주시장 표창(자살예방 사업 적극 참여, 생명존중 문화 확산 기여)</td>
-                                        <td class="tal"></td>
-                                        <td class="tal">편의점사업부 4부문</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">그외</td>
-                                        <td class="tal">강원특별자치도지사 표창(강원도정 발전 및 성공추진 공로)</td>
-                                        <td class="tal">강원도 유공</td>
-                                        <td class="tal">GS리테일(곽용구 상무)</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">기부</td>
-                                        <td class="tal">한림화상재단 감사패(몽짱소방관 희망나눔 달력 캠페인)</td>
-                                        <td class="tal">한림화상재단</td>
-                                        <td class="tal">GS리테일</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">기부</td>
-                                        <td class="tal">영등포구 감사패(영등포 2023 희망온돌 따뜻한 겨울나기)</td>
-                                        <td class="tal"></td>
-                                        <td class="tal">GS리테일</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">기부</td>
-                                        <td class="tal">강릉시 감사장(4월 강릉산불 구호물품 지원)</td>
-                                        <td class="tal"></td>
-                                        <td class="tal">GS리테일</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">봉사</td>
-                                        <td class="tal">경기도 김포시 국회의원 표창장</td>
-                                        <td class="tal">김포시 자원봉사자의 날</td>
-                                        <td class="tal">수퍼 김포권 연합 GS나누미</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tac">봉사</td>
-                                        <td class="tal">부평구노인복지관 관장 표창장</td>
-                                        <td class="tal">부평구노인복지관 자원봉사자의 날</td>
-                                        <td class="tal">수퍼 인천권 연합 GS나누미(부평)</td>
+                                    <tr v-for="(item, idx) in t.tab2.stab4.tableData" :key="'ir-'+idx">
+                                        <th class="ac" v-if="item.rs1 > 0" :rowspan="item.rs1">{{ item.title }}</th>
+                                        <td class="ac m_label">{{ item.item1 }}</td>
+                                        <td class="al">{{ item.item2 }}</td>
+                                        <td class="al">{{ item.item3 }}</td>
+                                        <td class="al">{{ item.item4 }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <Accordion :multiple="false" class="social_award_acc">
                             <AccordionItem item-key="social-award-1">
-                                <template #title>2022년 ~ 2018년</template>
+                                <template #title>{{ t.tab2.stab4.acctitle2 }}</template>
                                 <div class="table_wrap type3">
                                     <table class="base_table">
                                         <colgroup>
@@ -381,227 +268,22 @@
                                             <col style="width: 150px;" />
                                             <col style="width: 470px;" />
                                             <col style="width: 300px;" />
-                                            <col style="width: 380px;" />
+                                            <col style="" />
                                         </colgroup>
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" class="tac bold">연도</th>
-                                                <th scope="col" class="tac bold">구분</th>
-                                                <th scope="col" class="tac bold">표창명</th>
-                                                <th scope="col" class="tac bold">대회</th>
-                                                <th scope="col" class="tac bold">소속</th>
-                                            </tr>
-                                        </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="tac" rowspan="8"><strong>2022</strong></td>
-                                                <td class="tac">그외</td>
-                                                <td class="tal">경상북도지사 표창(소방 안전문화 확산 기여)</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">편의점사업부 5부문(김민호)</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">아름다운가게 20주년 감사헌정</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS리테일</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">영등포구 감사패(영등포 2022 희망온돌 따뜻한 겨울나기)</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS리테일</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">아름다운가게 감사장(물품 기부)</td>
-                                                <td class="tal">아름다운가게</td>
-                                                <td class="tal">편의점사업부 3부문</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">대한민국나눔대상 한국사회복지협의회 보건복지부장관상 표창</td>
-                                                <td class="tal">전국사회복지나눔대회</td>
-                                                <td class="tal">GS나누미 조직문화서비스팀 직할연합(김시연)</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">강남구청장 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">경기도 김포시 국회의원 표창장</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">수퍼 김포권 연합 GS나누미</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">우리모두복지재단 등촌9종합사회복지관 감사패</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="2"><strong>2021</strong></td>
-                                                <td class="tac">재해재난</td>
-                                                <td class="tal">대한적십자사 감사패(동해안 산불)</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS리테일</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">헌혈</td>
-                                                <td class="tal">대한적십자사 부산혈액원 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">편의점사업부 6부문(노준호)</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="2"><strong>2020</strong></td>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">서울특별시장 표창</td>
-                                                <td class="tal">소방의날 기념표창</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">재해재난</td>
-                                                <td class="tal">행정안전부장관상 표창(우한교민)</td>
-                                                <td class="tal">재난구호유공</td>
-                                                <td class="tal">GS나누미 MD본부(유영준)</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="9"><strong>2019</strong></td>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">서울시장상</td>
-                                                <td class="tal">민관협력 우수기관 표창</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">보건복지부장관상</td>
-                                                <td class="tal">보건복지부 유공자 표창</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">강남구청장 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 편의점 2부문1지역팀 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">한빛맹아원 감사패</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 편의점 2부문2지역팀</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">창원시 감사패 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 편의점 4부문3지역팀</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">경남종합사회복지관에서 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 편의점 4부문3지역팀</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">전주 사랑의 집 감사패</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 수퍼 2부문 영업6팀 전주권</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">서울YWCA 봉천종합사회복지관 감사패 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 H&B 북서울권 영업팀</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">재해재난</td>
-                                                <td class="tal">행정안전부장관상 표창(고성 속초 산불)</td>
-                                                <td class="tal">재난구호유공</td>
-                                                <td class="tal">GS나누미 강원(황호성)</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="12"><strong>2018</strong></td>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">TV홈쇼핑 부문 1위</td>
-                                                <td class="tal">재난구호유공</td>
-                                                <td class="tal">GS나누미 강원(황호성)</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">마산시장 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 수퍼 마산점</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">강남구장애인복지관 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 편의점 2부문1지역팀</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">김포시장 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 수퍼 1부문 NSC영업1팀 김포권 연합</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">물운대종합사회복지관 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 수퍼 3부문 영업3팀 다대점</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">사단법인 한국국제연합봉사단 아름다운 大韓國人상</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS리테일</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">보건복지부장관 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS리테일</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">(사)한국유엔봉사단 대한민국 봉사대상</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS리테일</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">물운대종합사회복지관 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 수퍼 3부문 영업3팀 다대점</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">사단법인 한국국제연합봉사단 아름다운 大韓國人상</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS리테일</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">보건복지부장관 표창</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS리테일</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">(사)한국유엔봉사단 대한민국 봉사대상</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS리테일</td>
+                                            <tr v-for="(item, idx) in t.tab2.stab4.tableData2" :key="'ir-'+idx">
+                                                <th class="ac" v-if="item.rs1 > 0" :rowspan="item.rs1">{{ item.title }}</th>
+                                                <td class="ac m_label">{{ item.item1 }}</td>
+                                                <td class="al">{{ item.item2 }}</td>
+                                                <td class="al">{{ item.item3 }}</td>
+                                                <td class="al">{{ item.item4 }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </AccordionItem>
                             <AccordionItem item-key="social-award-2">
-                                <template #title>2017년 ~ 2013년</template>
+                                <template #title>{{ t.tab2.stab4.acctitle2 }}</template>
                                 <div class="table_wrap type3">
                                     <table class="base_table">
                                         <colgroup>
@@ -609,83 +291,22 @@
                                             <col style="width: 150px;" />
                                             <col style="width: 470px;" />
                                             <col style="width: 300px;" />
-                                            <col style="width: 380px;" />
+                                            <col style="" />
                                         </colgroup>
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" class="tac bold">연도</th>
-                                                <th scope="col" class="tac bold">구분</th>
-                                                <th scope="col" class="tac bold">표창명</th>
-                                                <th scope="col" class="tac bold">대회</th>
-                                                <th scope="col" class="tac bold">소속</th>
-                                            </tr>
-                                        </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="tac" rowspan="3"><strong>2017</strong></td>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">우리모두복지재단 등촌9종합사회복지관 감사패</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">대한적십자사 부산혈액원 표창</td>
-                                                <td class="tal">제 18회 사회복지의 날 표창</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">재해재난</td>
-                                                <td class="tal">국무총리단체 표창(포항지진)</td>
-                                                <td class="tal">재난구호유공</td>
-                                                <td class="tal">GS나누미 대구경북(김영욱)</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="2"><strong>2016</strong></td>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">고용노동부 장관표창</td>
-                                                <td class="tal">사회적 기업육성</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">대한민국나눔대상 서울사회복지협의회 보건복지부장관상 표창</td>
-                                                <td class="tal">전국사회복지나눔대회</td>
-                                                <td class="tal">GS나누미 편의점 중부권경영주연합</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="1"><strong>2015</strong></td>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">대한민국나눔대상 서울사회복지협의회 보건복지부장관상 표창</td>
-                                                <td class="tal">전국사회복지나눔대회</td>
-                                                <td class="tal">GS나누미 건설부문</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="1"><strong>2014</strong></td>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">(사)대한노인회 강서지회 감사패</td>
-                                                <td class="tal"></td>
-                                                <td class="tal">GS나누미 조직문화서비스팀 직할 연합</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="2"><strong>2013</strong></td>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">대한민국나눔대상 제주도사회복지협의회 표창</td>
-                                                <td class="tal">전국사회복지나눔대회</td>
-                                                <td class="tal">GS나누미 편의점 영남권3지역/제주센타</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">대한민국나눔대상 한국사회복지협의회 표창</td>
-                                                <td class="tal">전국사회복지나눔대회</td>
-                                                <td class="tal">GS나누미 수퍼 당진점</td>
+                                            <tr v-for="(item, idx) in t.tab2.stab4.tableData3" :key="'ir-'+idx">
+                                                <th class="ac" v-if="item.rs1 > 0" :rowspan="item.rs1">{{ item.title }}</th>
+                                                <td class="ac m_label">{{ item.item1 }}</td>
+                                                <td class="al">{{ item.item2 }}</td>
+                                                <td class="al">{{ item.item3 }}</td>
+                                                <td class="al">{{ item.item4 }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </AccordionItem>
                             <AccordionItem item-key="social-award-3">
-                                <template #title>2012년 ~ 2005년</template>
+                                <template #title>{{ t.tab2.stab4.acctitle3 }}</template>
                                 <div class="table_wrap type3">
                                     <table class="base_table">
                                         <colgroup>
@@ -695,93 +316,13 @@
                                             <col style="width: 300px;" />
                                             <col style="width: 380px;" />
                                         </colgroup>
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" class="tac bold">연도</th>
-                                                <th scope="col" class="tac bold">구분</th>
-                                                <th scope="col" class="tac bold">표창명</th>
-                                                <th scope="col" class="tac bold">대회</th>
-                                                <th scope="col" class="tac bold">소속</th>
-                                            </tr>
-                                        </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="tac" rowspan="3"><strong>2012</strong></td>
-                                                <td class="tac">2012</td>
-                                                <td class="tal">중소기업청장 표창</td>
-                                                <td class="tal">대한민국 판로지원 종합대전</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">대한민국나눔대상 경기도사회복지협의회 표창</td>
-                                                <td class="tal">전국사회복지나눔대회</td>
-                                                <td class="tal">GS나누미 편의점 수도권3지역</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">대한민국나눔대상 경기도사회복지협의회 표창</td>
-                                                <td class="tal">전국사회복지나눔대회</td>
-                                                <td class="tal">GS나누미 수퍼 수도권3,4,5지역</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="4"><strong>2011</strong></td>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">아동복지부문 大賞</td>
-                                                <td class="tal">2011 사회공헌기업大賞</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">아동복지공헌부문大賞</td>
-                                                <td class="tal">2011 행복더함 사회공헌대상</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">기업부문</td>
-                                                <td class="tal">제1회SBS 희망나눔대상</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">봉사</td>
-                                                <td class="tal">보건복지부 장관상</td>
-                                                <td class="tal">이달의 나눔인‘기업 봉사 부문’</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="2"><strong>2010</strong></td>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">대통령 표창(사회 공헌 활동 우수 관리자)</td>
-                                                <td class="tal">2제11회 사회복지의 날기념 표창</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">아동복지부문 大賞</td>
-                                                <td class="tal">2010 사회공헌기업大賞</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="1"><strong>2009</strong></td>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">아동복지부문 大賞</td>
-                                                <td class="tal">2009사회공헌기업大賞</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="1"><strong>2007</strong></td>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">아동복지부문 대상</td>
-                                                <td class="tal">대한민국사회공헌기업대상</td>
-                                                <td class="tal">홈쇼핑BU</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="tac" rowspan="1"><strong>2005</strong></td>
-                                                <td class="tac">기부</td>
-                                                <td class="tal">아동.청소년복지부문 대상</td>
-                                                <td class="tal">한국사회공헌대상</td>
-                                                <td class="tal">홈쇼핑BU</td>
+                                            <tr v-for="(item, idx) in t.tab2.stab4.tableData4" :key="'ir-'+idx">
+                                                <th class="ac" v-if="item.rs1 > 0" :rowspan="item.rs1">{{ item.title }}</th>
+                                                <td class="ac m_label">{{ item.item1 }}</td>
+                                                <td class="al">{{ item.item2 }}</td>
+                                                <td class="al">{{ item.item3 }}</td>
+                                                <td class="al">{{ item.item4 }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -805,8 +346,8 @@
                         </header>
                         <p>{{ t.sustainReportHeroLead }}</p>
                         <div class="sustain_report_hero_actions" :aria-label="t.sustainReportHeroNavAria">
-                            <Buttons tag="a" :href="t.sustainReportHeroKoHref" btn-class="btn_icon btn_big after border">{{ t.sustainReportKoBtn }}</Buttons>
-                            <Buttons tag="a" :href="t.sustainReportHeroEnHref" btn-class="btn_icon btn_big after border">{{ t.sustainReportEnBtn }}</Buttons>
+                            <Buttons tag="a" :href="t.sustainReportHeroKoHref" btn-class="btn_icon btn_big after border download">{{ t.sustainReportKoBtn }}</Buttons>
+                            <Buttons tag="a" :href="t.sustainReportHeroEnHref" btn-class="btn_icon btn_big after border download">{{ t.sustainReportEnBtn }}</Buttons>
                         </div>
                     </article>
                 </section>
@@ -835,7 +376,7 @@
                                         </article>
                                     </td>
                                     <td>
-                                        <Buttons tag="a" :href="row.koHref" btn-class="btn_icon btn_big after border">{{ t.sustainReportKoBtn }}</Buttons>
+                                        <Buttons tag="a" :href="row.koHref" btn-class="btn_icon btn_big after border download">{{ t.sustainReportKoBtn }}</Buttons>
                                     </td>
                                 </tr>
                             </tbody>
@@ -1032,6 +573,108 @@ export default {
                         stab2: {
                             title: "GS리테일의 상생 경영과 관련된 실적 자료들을 열람하실 수 있습니다.",
                             desc: "본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로\n용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.",
+                        },
+                        stab3: {
+                            tableTitle: [
+                                { title1: "항목", title2: "KCGS", title3: "", title4: "", title5: "", title6: "서스틴 베스트", rs1: 2, cs1: 1, rs2: 1, cs2: 4, rs6: 2, cs6: 1, class1: "ac th_item", class2: "ac", class6: "ac th_sustin_best" },
+                                { title1: "", title2: "종합등급", title3: "환경", title4: "사회", title5: "지배구조", title6: "", rs2: 1, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1, rs5: 1, cs5: 1, class2: "ac normal", class3: "ac normal", class4: "ac normal", class5: "ac normal" },
+                            ],
+                            tableData: [
+                                { title: "2025", item1: "A+", item2: "A+", item3: "A+", item4: "A", item5: "AA" },
+                                { title: "2024", item1: "A+", item2: "A+", item3: "A+", item4: "A", item5: "AA" },
+                                { title: "2023", item1: "A", item2: "A+", item3: "A", item4: "A", item5: "A" },
+                                { title: "2022", item1: "A", item2: "B+", item3: "A", item4: "A", item5: "-" },
+                                { title: "2021", item1: "A", item2: "A", item3: "A", item4: "A", item5: "-" },
+                            ],
+                            listData: [
+                                { desc: "평가기관: 한국기업지배구조원(Korea Corporate Governance Service, KCGS), 서스틴베스트(SUSTINVEST)" },
+                                { desc: "EST 평가: 회사의 ESG 수준에 대한 직관적 정보 제공 및 투자 의사결정 활용 지원을 목적으로 하여, 매년 평가 실시함." },
+                            ],
+                        },
+                        stab4: {
+                            title: "구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해\n꾸준히 지역사회와 함께한 나눔 활동을 소개합니다.",
+                            desc: "2006년부터 구성원, 경영주, 고객과 함께 GS나누미 봉사활동, 기부 등을 통해 꾸준히 지역사회와 함께하며\n나눔 활동을 지속적으로 함께하고 있습니다.\n앞으로도 일상에서 함께하는 따뜻한 나눔을 실천, 마음을 나누겠습니다.",
+                            tableTitle: [
+                                { title1: "연도", title2: "구분", title3: "표창명", title4: "대회", title5: "소속" },
+                            ],
+                            tableData: [
+                                { title: "2025", item1: "봉사", item2: "화성특례시의회 표창장", item3: "화성시남부종합사회복지관", item4: "편의점 3부문4지역 GS나누미", rs1: 2,},
+                                { title: "", item1: "봉사", item2: "국회의원 표창장", item3: "2025년 창영복지인의 날", item4: "편의점 3부문4지역 GS나누미"},
+                                { title: "2024", item1: "기부", item2: "한림화상재단 감사패(몸짱소방관 희망나눔 달력 캠페인)", item3: "한림화상재단", item4: "GS리테일", rs1: 4},
+                                { title: "", item1: "봉사", item2: "우리모두복지재단 등촌9종합사회복지관 감사패", item3: "", item4: "GS나누미 조직문화서비스팀 직할 연합" },
+                                { title: "", item1: "기부", item2: "제4회 대한민국 착한 기부자상 국무총리 표창장", item3: "행정안전부 주최", item4: "GS리테일" },
+                                { title: "", item1: "봉사", item2: "사단법인 나눔과실천 표창장", item3: "화성시남부종합사회복지관", item4: "편의점 3부문4지역 GS나누미" },
+                                { title: "2023", item1: "그외", item2: "경상북도지사 표창(정신건강 및 자살예방 사업 참여, 생명존중 문화 확산 기여)", item3: "", item4: "편의점사업부 5부문(박서우)", rs1: 8 },
+                                { title: "", item1: "그외", item2: "전주시장 표창(자살예방 사업 적극 참여, 생명존중 문화 확산 기여)", item3: "", item4: "편의점사업부 4부문" },
+                                { title: "", item1: "그외", item2: "강원특별자치도지사 표창(강원도정 발전 및 성공추진 공로", item3: "강원도 유공", item4: "GS리테일(곽용구 상무)" },
+                                { title: "", item1: "기부", item2: "한림화상재단 감사패(몸짱소방관 희망나눔 달력 캠페인)", item3: "한림화상재단", item4: "GS리테일" },
+                                { title: "", item1: "기부", item2: "영등포구 감사패(영등포 2023 희망온돌 따뜻한 겨울나기)", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "기부", item2: "강릉시 감사장(4월 강릉산불 구호물품 지원)", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "봉사", item2: "경기도 김포시 국회의원 표창장", item3: "김포시 자원봉사자의 날", item4: "수퍼 김포권 연합 GS나누미" },
+                                { title: "", item1: "봉사", item2: "부평구노인복지관 관장 표창장", item3: "부평구노인복지관 자원봉사자의 날", item4: "수퍼 인천권 연합 GS나누미(부평)" },
+                            ],
+                            acctitle1: "2022년 ~ 2018년",
+                            tableData2: [
+                                { title: "2022", item1: "그외", item2: "화성특례시의회 표창장", item3: "화성시남부종합사회복지관", item4: "편의점 3부문4지역 GS나누미", rs1: 9 },
+                                { title: "", item1: "기부", item2: "국회의원 표창장", item3: "2025년 창영복지인의 날", item4: "편의점 3부문4지역 GS나누미" },
+                                { title: "", item1: "기부", item2: "한림화상재단 감사패(몸짱소방관 희망나눔 달력 캠페인)", item3: "한림화상재단", item4: "GS리테일" },
+                                { title: "", item1: "기부", item2: "우리모두복지재단 등촌9종합사회복지관 감사패", item3: "", item4: "GS나누미 조직문화서비스팀 직할 연합" },
+                                { title: "", item1: "기부", item2: "제4회 대한민국 착한 기부자상 국무총리 표창장", item3: "행정안전부 주최", item4: "GS리테일" },
+                                { title: "", item1: "봉사", item2: "사단법인 나눔과실천 표창장", item3: "화성시남부종합사회복지관", item4: "편의점 3부문4지역 GS나누미" },
+                                { title: "", item1: "봉사", item2: "경상북도지사 표창(정신건강 및 자살예방 사업 참여, 생명존중 문화 확산 기여)", item3: "", item4: "편의점사업부 5부문(박서우)" },
+                                { title: "", item1: "재해재난", item2: "전주시장 표창(자살예방 사업 적극 참여, 생명존중 문화 확산 기여)", item3: "", item4: "편의점사업부 4부문" },
+                                { title: "", item1: "헌혈", item2: "강원특별자치도지사 표창(강원도정 발전 및 성공추진 공로", item3: "강원도 유공", item4: "GS리테일(곽용구 상무)" },
+                                { title: "2020", item1: "기부", item2: "한림화상재단 감사패(몸짱소방관 희망나눔 달력 캠페인)", item3: "한림화상재단", item4: "GS리테일", rs1: 2 },
+                                { title: "", item1: "재해재난", item2: "영등포구 감사패(영등포 2023 희망온돌 따뜻한 겨울나기)", item3: "", item4: "GS리테일" },
+                                { title: "2019", item1: "기부", item2: "서울시장상", item3: "", item4: "홈쇼핑BU", rs1: 9 },
+                                { title: "", item1: "기부", item2: "보건복지부장관상", item3: "김포시 자원봉사자의 날", item4: "홈쇼핑BU" },
+                                { title: "", item1: "봉사", item2: "강남구청장 표창", item3: "부평구노인복지관 자원봉사자의 날", item4: "GS나누미 편의점 2부문1지역팀" },
+                                { title: "", item1: "봉사", item2: "한빛맹아원 감사패", item3: "김포시 자원봉사자의 날", item4: "GS나누미 편의점 2부문2지역팀" },
+                                { title: "", item1: "봉사", item2: "창원시 감사패 표창", item3: "부평구노인복지관 자원봉사자의 날", item4: "GS나누미 편의점 4부문3지역팀" },
+                                { title: "", item1: "봉사", item2: "경남종합사회복지관에서 표창", item3: "김포시 자원봉사자의 날", item4: "GS나누미 편의점 4부문3지역팀" },
+                                { title: "", item1: "봉사", item2: "전주 사랑의 집 감사패", item3: "", item4: "GS나누미 수퍼 2부문 영업6팀 전주권" },
+                                { title: "", item1: "봉사", item2: "서울YWCA 봉천종합사회복지관 감사패 표창", item3: "", item4: "GS나누미 H&B 북서울권 영업팀" },
+                                { title: "", item1: "재해재난", item2: "행정안전부장관상 표창(고성 속초 산불)", item3: "재난구호유공", item4: "GS나누미 강원(황호성)" },
+                                { title: "2018", item1: "기부", item2: "TV홈쇼핑 부문 1위", item3: "대한민국 사회적가치 우수기업", item4: "홈쇼핑BU", rs1: 12 },
+                                { title: "", item1: "봉사", item2: "마산시장 표창", item3: "", item4: "GS나누미 수퍼 마산점" },
+                                { title: "", item1: "봉사", item2: "강남구장애인복지관 표창", item3: "", item4: "GS나누미 편의점 2부문1지역팀" },
+                                { title: "", item1: "봉사", item2: "김포시장 표창", item3: "", item4: "GS나누미 수퍼 1부문 NSC영업1팀 김포권 연합" },
+                                { title: "", item1: "봉사", item2: "몰운대종합사회복지관 표창", item3: "", item4: "GS나누미 수퍼 3부문 영업3팀 다대점" },
+                                { title: "", item1: "봉사", item2: "사단법인 한국국제연합봉사단 아름다운 大韓國人상", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "봉사", item2: "보건복지부장관 표창", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "봉사", item2: "(사)한국유엔봉사단 대한민국 봉사대상", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "봉사", item2: "몰운대종합사회복지관 표창", item3: "", item4: "GS나누미 수퍼 3부문 영업3팀 다대점" },
+                                { title: "", item1: "봉사", item2: "사단법인 한국국제연합봉사단 아름다운 大韓國人상", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "봉사", item2: "보건복지부장관 표창", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "봉사", item2: "(사)한국유엔봉사단 대한민국 봉사대상", item3: "", item4: "GS리테일" },
+                            ],
+                            acctitle2: "2017년 ~ 2013년",
+                            tableData3: [
+                                { title: "2017", item1: "봉사", item2: "우리모두복지재단 등촌9종합사회복지관 감사패", item3: "", item4: "GS나누미 조직문화서비스팀 직할 연합", rs1: 3 },
+                                { title: "", item1: "봉사", item2: "보건복지부장관 표창", item3: "제 18회 사회복지의 날 표창", item4: "홈쇼핑BU" },
+                                { title: "", item1: "재해재난", item2: "국무총리단체 표창(포항지진)", item3: "재난구호유공", item4: "GS나누미 대구경북(김영욱)" },
+                                { title: "2016", item1: "기부", item2: "고용노동부 장관표창", item3: "사회적 기업육성", item4: "홈쇼핑BU", rs1: 2 },
+                                { title: "", item1: "기부", item2: "대한민국나눔대상 서울사회복지협의회 보건복지부장관상 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 편의점 중부권경영주연합" },
+                                { title: "2015", item1: "봉사", item2: "대한민국나눔대상 서울사회복지협의회 보건복지부장관상 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 건설부문", rs1: 1 },
+                                { title: "2014", item1: "봉사", item2: "(사)대한노인회 강서지회 감사패", item3: "", item4: "GS나누미 조직문화서비스팀 직할 연합", rs1: 1 },
+                                { title: "2013", item1: "봉사", item2: "대한민국나눔대상 제주도사회복지협의회 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 편의점 영남권3지역/제주센타", rs1: 2 },
+                                { title: "", item1: "봉사", item2: "대한민국나눔대상 한국사회복지협의회 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 수퍼 당진점" },
+                            ],
+                            acctitle3: "2012년 ~ 2005년",
+                            tableData4: [
+                                { title: "2012", item1: "기부", item2: "중소기업청장 표창", item3: "대한민국 판로지원 종합대전", item4: "홈쇼핑BU", rs1: 3 },
+                                { title: "", item1: "봉사", item2: "대한민국나눔대상 경기도사회복지협의회 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 편의점 수도권3지역", },
+                                { title: "", item1: "봉사", item2: "대한민국나눔대상 경기도사회복지협의회 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 수퍼 수도권3,4,5지역" },
+                                { title: "2011", item1: "기부", item2: "아동복지부문 大賞", item3: "2011 사회공헌기업大賞", item4: "홈쇼핑BU", rs1: 4 },
+                                { title: "", item1: "기부", item2: "아동복지공헌부문大賞", item3: "2011 행복더함 사회공헌대상", item4: "홈쇼핑BU" },
+                                { title: "", item1: "봉사", item2: "기업부문", item3: "제1회SBS 희망나눔대상", item4: "홈쇼핑BU)" },
+                                { title: "", item1: "봉사", item2: "보건복지부 장관상", item3: "부평구노인복지관 자원봉사자의 날", item4: "홈쇼핑BU" },
+                                { title: "2010", item1: "기부", item2: "대통령 표창(사회 공헌 활동 우수 관리자)", item3: "제11회 사회복지의 날기념 표창", item4: "홈쇼핑BU", rs1: 2 },
+                                { title: "", item1: "기부", item2: "아동복지부문 大賞", item3: "2010 사회공헌기업大賞", item4: "홈쇼핑BU" },
+                                { title: "2009", item1: "기부", item2: "아동복지부문 大賞", item3: "2009사회공헌기업大賞", item4: "홈쇼핑BU", rs1: 1 },
+                                { title: "2007", item1: "기부", item2: "아동복지부문 대상", item3: "대한민국사회공헌기업대상", item4: "홈쇼핑BU", rs1: 1 },
+                                { title: "2005", item1: "기부", item2: "아동.청소년복지부문 대상", item3: "한국사회공헌대상", item4: "홈쇼핑BU", rs1: 1 },
+                            ],
                         }
                     },
                     EnvMgmtListData: [
@@ -1126,34 +769,36 @@ export default {
 </script>
 
 <style scoped>
-.tac{text-align: center !important;}
-.tal{text-align: left !important;}
-.p_br{display:block;}
 .bold{font-weight: 700 !important;}
+.normal{font-weight: normal !important;}
 img{width:100%; height:auto; display:block; object-fit: cover;}
 .main-container { width: 100%; position: relative; display: block; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url(@/assets/images/dummy/gsrsu0101_bg.jpg) no-repeat center / cover; text-align: center; position: relative; display: block; }
 .title_wrap::after{content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1;}
 .page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2;}
-.content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
+.content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 0; position: relative; display: block; }
 .panel { padding-top: 80px; }
 .table_wrap {margin-top:0; border-top: 1px solid #161616;}
 .sub_header + .table_wrap {margin-top: 64px;}
 .table_wrap table { margin-top:0;width: 100%; border-collapse: collapse; }
-.table_wrap th { padding: 0 20px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
+.table_wrap th { padding: 0 20px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem;  font-weight: 700; vertical-align: middle; }
 .table_wrap td { padding: 0 20px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
 .table_wrap thead tr:nth-child(1) th {padding: 16px 24px;}
 .table_wrap thead tr:nth-child(2) th {padding: 12px 24px;}
-.table_wrap thead th { font-weight: 400; background-color: #F8F8F8; }
+.table_wrap thead th { background-color: #F8F8F8; }
 .table_wrap thead th.th_item { border-right: 1px solid #E5E5E9; }
 .table_wrap thead th.th_sustin_best { border-left: 1px solid #E5E5E9; }
+.table_wrap th,
 .table_wrap td{height: 82px; border-left: 0; border-right: 0;}
+.table_wrap th:not(:last-child),
 .table_wrap td:not(:last-child) { border-right: 1px solid #E5E5E9; }
 .table_wrap th { border-left: 0; border-right: 0; }
 .table_wrap td .link_title { font-size: 1.6rem; color: #161616; text-decoration: none; }
 .table_wrap td .link_title:hover { text-decoration: underline; }
 .table_wrap.type1 table td{border-left:0; border-right:0; }
 .table_wrap.type2 table td{ height: 70px; }
+.table_wrap.type3 { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table_wrap.type3 table { min-width: 1400px; }
 .table_wrap.type3 table th{font-weight: 600;font-size: 1.8rem;line-height: 1.4;letter-spacing: -0.01em;}
 .table_wrap.type3 table th:not(:last-child) { border-right: 1px solid #E5E5E9;}
 .table_wrap.type3 table td {height: auto; padding:16px 24px; font-size: 1.8rem;line-height:1.4; border-left: 0; border-right: 0; }
@@ -1171,7 +816,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 /* 환경경영 자료 — gsrin0301 테이블·필터 패턴 (Figma 431:12931 대응) */
 .visual_sub {color: #FFFFFF; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;  text-align: center; position: relative; z-index: 2; }
 .panel.panel_vision_strategy > section { margin-top: 100px; }
-.sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
+.sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; white-space: pre-line; }
 .sub_header p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
 .sub_header_center h3 { text-align: center; }
 .sub_header_center p { text-align: center; }
@@ -1244,15 +889,6 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .panel_sustainability_report .table_wrap.type_report tbody td article > h3 {font-weight: 700;font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
 .panel_sustainability_report .table_wrap.type_report tbody td article > p {margin-top: 12px;font-size: 1.8rem;line-height: 1.4;}
 .panel_sustainability_report .table_wrap.type_report tbody td:last-child {text-align: center;}
-.panel_sustainability_report :deep([class*="btn_"][class*="border"]) {
-    color: #161616;
-    border-color: #67676f;
-    background-color: #fff;
-}
-.panel_sustainability_report :deep([class*="btn_icon"][class*="after"]::after) {
-    background-color: #a4a4b0;
-    background-image: none;
-}
 @media screen and (max-width: 1024px) {
     .esg_flow_card { padding: 16px; }
     .esg_flow_card_head { width: 320px; min-height: 84px; padding: 0 12px; }
@@ -1264,10 +900,10 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .bnbp_main { gap: 32px; flex-direction: column; }
     .panel_sustainability_report .sec_sustain_report_hero {flex-wrap: wrap;flex-direction: column;align-items: center;gap: 40px;}
     .panel_sustainability_report .sec_sustain_report_hero > article {width: 100%;align-items: flex-start;}
+    .sub_header h3 {white-space: normal;}
 }
 @media screen and (max-width: 768px) {
-    .p_br{display:none;}
-    .content { width: 100vw; max-width: 100%; padding: 60px 20px 100px; }
+    .content { width: 100vw; max-width: 100%; padding: 0 20px 0; }
     .panel{padding-top: 48px;}
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
@@ -1277,25 +913,37 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .table_wrap th { font-size: 1.6rem; }
     .table_wrap td { font-size: 1.6rem; }
     .table_wrap.type2 table { min-width: 960px; }
-    .table_wrap.type3 table { min-width: 960px; }
-    .table_wrap.type3 table th { font-size: 1.6rem; }
-    .table_wrap.type3 table td { font-size: 1.6rem; }
+    .table_wrap.type3 table { min-width: 0; }
+    .table_wrap.type3 table * { display:block; }
+    .table_wrap.type3 table colgroup,
+    .table_wrap.type3 table thead { display:none; }
+    .table_wrap.type3 table tr { position: relative; border-bottom: 1px solid #d7d7df;}
+    .table_wrap.type3 table th { height:auto; padding: 12px 0; font-size: 1.8rem; background-color: #F8F8F8; }
+    .table_wrap.type3 table td { padding: 3px 10px 3px 51px; font-size: 1.6rem; border:0px;}
+    .table_wrap.type3 table td.m_label { position: absolute; top:12px; left:6px; padding: 3px 6px; color: #67676F; font-size: 14px; line-height:14px; border:0px; background-color: #F2F2F4;}
+    .table_wrap.type3 table td.m_label:nth-child(2) {top:62px}
+    .table_wrap.type3 table td:last-child { padding-bottom: 12px; color:#67676F; }
+    .table_wrap.type3 table td:nth-last-child(3) { padding-top: 12px; }
     .table_wrap.type1 { overflow-x: visible; }
     .table_wrap.type1 table { min-width: 0; table-layout: fixed; }
     /* 지속가능 보고서 목록 — 모바일 카드형(가로 스크롤 없음) */
+    .panel_sustainability_report .sec_sustain_report_hero > figure {width: 100%;}
+    .panel_sustainability_report .sec_sustain_report_hero > article > .sustain_report_hero_actions { flex-wrap: nowrap; }
+    .panel_sustainability_report .sec_sustain_report_hero > article > .sustain_report_hero_actions [class*="btn_"][class*="border"] { width:100% }
     .panel_sustainability_report .table_wrap.type_report { overflow-x: visible; }
     .panel_sustainability_report .table_wrap.type_report table { width: 100%; min-width: 0; display: block; }
     .panel_sustainability_report .table_wrap.type_report colgroup { display: none; }
     .panel_sustainability_report .table_wrap.type_report tbody { width: 100%; display: block; }
-    .panel_sustainability_report .table_wrap.type_report tbody tr { width: 100%; margin: 0 0 16px 0; padding: 20px 16px; display: block; background-color: #fff; border: 1px solid #d7d7df; border-radius: 12px; box-sizing: border-box; }
+    .panel_sustainability_report .table_wrap.type_report tbody tr { width: 100%; margin: 0 0 16px 0; padding: 20px 0; display: block; background-color: #fff; border-radius: 12px; box-sizing: border-box; }
     .panel_sustainability_report .table_wrap.type_report tbody tr:last-child { margin-bottom: 0; }
     .panel_sustainability_report .table_wrap.type_report tbody td { width: 100%; min-width: 0; height: auto; margin: 0; padding: 0; display: block; border: 0; border-bottom: 0; text-align: left; }
     .panel_sustainability_report .table_wrap.type_report tbody td + td { margin-top: 16px; }
     .panel_sustainability_report .table_wrap.type_report tbody td article { margin: 0; padding: 0; text-align: left; }
     .panel_sustainability_report .table_wrap.type_report tbody td article > h3 { margin: 0; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .panel_sustainability_report .table_wrap.type_report tbody td article > p { margin: 0; margin-top: 8px; color: #161616; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-    .panel_sustainability_report .table_wrap.type_report tbody td:last-child { margin-top: 20px; text-align: center; }
-    .panel_sustainability_report .table_wrap.type_report tbody td:last-child :deep([class*="btn_"]) { width: 100%; max-width: 100%; justify-content: center; box-sizing: border-box; }
+    .panel_sustainability_report .table_wrap.type_report tbody td figure { width: 100%;}
+    .panel_sustainability_report .table_wrap.type_report tbody td:last-child { margin-top: 20px; text-align: left; }
+    .panel_sustainability_report .table_wrap.type_report tbody td:last-child :deep([class*="btn_"]) { justify-content: center; box-sizing: border-box; }
     .panel_sustainability_report .sec_sustain_report_archive { margin-top: 48px; }
     .table_wrap.type1 colgroup col:nth-child(1) { width: 50px !important; }
     .table_wrap.type1 colgroup col:nth-child(2) { width: auto !important; }

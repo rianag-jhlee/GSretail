@@ -36,24 +36,31 @@
                         </section>
 
                         <section class="strategy_section mb100">
-                            <div class="title_area ac mb40">
-                                <h4>{{ t.StrategyTitle }}</h4>
-                                <p>{{ t.StrategyDesc }}</p>
+                            <div class="title_area ac">
+                                <h4 class="al">{{ t.StrategyTitle }}</h4>
+                                <p class="al">{{ t.StrategyDesc }}</p>
                             </div>
-                            <figure><img :src="t.Images.StrategyImg" :alt="t.StrategyTitle"></figure>
+                            
+                            <picture class="image_wrap">
+                                <source media="(max-width: 768px)" :srcset="t.Images.StrategyImgMo" />
+                                <img :src="t.Images.StrategyImg" :alt="t.StrategyTitle">
+                            </picture>
                         </section>
 
                         <section class="system_section">
-                            <div class="title_area ac mb40">
-                                <h4>{{ t.SystemTitle }}</h4>
-                                <p v-html="t.SystemDesc"></p>
+                            <div class="title_area ac">
+                                <h4 class="al">{{ t.SystemTitle }}</h4>
+                                <p class="al" v-html="t.SystemDesc"></p>
                             </div>
-                            <figure><img :src="t.Images.SystemImg" :alt="t.SystemTitle"></figure>
+                            <picture class="image_wrap">
+                                <source media="(max-width: 768px)" :srcset="t.Images.SystemImgMo" />
+                                <img :src="t.Images.SystemImg" :alt="t.SystemTitle">
+                            </picture>
                         </section>
                     </article>
 
                     <article v-if="CTabIdx === 1">
-                        <div class="inner_tabs_wrap mb40">
+                        <div class="inner_tabs_wrap">
                             <Tabs v-model="InnerTabIdx" :tab-items="t.InnerTabs" tab-class="type_02" />
                             <div v-if="InnerTabIdx === 0" class="green_value_chain">
                                 <div class="value_grid">
@@ -92,7 +99,7 @@
 
                                 <div class="system_detail_grid">
                                     <section v-for="(system, idx) in t.GreenStore.Systems" :key="'sys-'+idx" class="system_item">
-                                        <figure class="mask_group">
+                                        <figure class="image_wrap">
                                             <img :src="system.img" :alt="system.tit">
                                         </figure>
                                         <div class="sub_title_area mt32">
@@ -105,7 +112,7 @@
                             <div v-if="InnerTabIdx === 2" class="green_product"> 
                                 <ul>
                                     <li class="one_divide">
-                                        <figure><img :src="t.GreenProduct.greenSave.img" :alt="t.GreenProduct.greenSave.tit"></figure>
+                                        <figure class="image_wrap"><img :src="t.GreenProduct.greenSave.img" :alt="t.GreenProduct.greenSave.tit"></figure>
                                         <div>
                                             <h4>{{ t.GreenProduct.greenSave.tit }}</h4>
                                             <p>{{ t.GreenProduct.greenSave.sesc1 }}</p>
@@ -114,7 +121,7 @@
                                     </li>
                                     <li class="two_divide">
                                         <div>
-                                            <figure>
+                                            <figure class="image_wrap">
                                                 <img :src="t.GreenProduct.ecofriendly.img" :alt="t.GreenProduct.ecofriendly.tit">
                                             </figure>
                                             <div>
@@ -124,7 +131,7 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <figure>
+                                            <figure class="image_wrap">
                                                 <img :src="t.GreenProduct.originmana.img" :alt="t.GreenProduct.originmana.tit">
                                             </figure>
                                             <div>
@@ -134,7 +141,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <figure>
+                                        <figure class="image_wrap">
                                             <img :src="t.GreenProduct.procurementpolicy.img" :alt="t.GreenProduct.procurementpolicy.tit">
                                         </figure>
                                         <div>
@@ -155,7 +162,7 @@
                                         <li><strong>{{ t.GreenProduct.guideline.num4 }}</strong> <span>{{ t.GreenProduct.guideline.txt4 }}</span></li>
                                     </ul>
                                     <div class="ac">
-                                        <Buttons btn-class="btn_icon btn_xl border after" 
+                                        <Buttons btn-class="btn_icon btn_xl border after arr_r" 
                                             @click="openModal" 
                                             data-popid="gsrsu02010301" 
                                             data-type="mid" 
@@ -175,19 +182,19 @@
 
                         <div class="content_grid">
                             <section class="wide_card mb200">
-                                <figure><img :src="t.Images.SeaBreathImg" :alt="t.SeaBreathTitle"></figure>
+                                <figure class="image_wrap"><img :src="t.Images.SeaBreathImg" :alt="t.SeaBreathTitle"></figure>
                                 <div class="text_group">
                                     <div class="title_area">
                                         <h4>{{ t.SeaBreathTitle }}</h4>
                                         <p v-html="t.SeaBreathDesc"></p>
                                     </div>
-                                    <Buttons btn-class="btn_icon btn_xl after">자세히 보기</Buttons>
+                                    <Buttons btn-class="btn_icon btn_xl after arr_r">{{ t.MoreBtn }}</Buttons>
                                 </div>
                             </section>
 
                             <div class="sub_grid_container">
                                 <section v-for="(item, idx) in t.EcoProjects" :key="'eco-'+idx" class="grid_item">
-                                    <figure><img :src="item.img" :alt="item.tit"></figure>
+                                    <figure class="image_wrap"><img :src="item.img" :alt="item.tit"></figure>
                                     <div class="title_area">
                                         <h4>{{ item.tit }}</h4>
                                         <p v-html="item.desc"></p>
@@ -230,6 +237,8 @@ export default {
                         StrategyImg: require("@/assets/images/dummy/gsrsu0201_1.png"),
                         SystemImg: require("@/assets/images/dummy/gsrsu0201_2.png"),
                         SeaBreathImg: require("@/assets/images/dummy/gsrsu020104_1.png"),
+                        StrategyImgMo: require("@/assets/images/dummy/mo/gsrsu0201_1_mo.png"),
+                        SystemImgMo: require("@/assets/images/dummy/mo/gsrsu0201_2_mo.png"),
                     },
                     IntroTitle: "Green Together<br/>지구를 지키기 위한 노력을 함께 합니다.",
                     IntroDesc: "전 세계적으로 기후변화, 환경오염 등 환경관련 이슈가 확산되고 있습니다.<br/>이제 환경경영은 현재의 우리와 미래 후손들을 위해 기업이 사회적책임을 가져야 할 필수 경영활동이 되었습니다.<br/>GS리테일은 종합 유통플랫폼으로써 고객이 경험하는 모든 밸류체인 및 경영활동 전반에 걸친 환경영향도를 파악하고<br/>최소화하고자 최선의 노력을 다하겠습니다.",
@@ -394,7 +403,6 @@ export default {
 /* 1. Layout & Utils */
 .main-container { width: 100%; position: relative; background-color: #ffffff; }
 
-.tab_wrap {margin-left:-20px; margin-right:-20px;}
 .tab_wrap + div {margin-top:80px;}
 
 /* 2. Visual Area */
@@ -410,29 +418,31 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .climate_change .intro_view p { font-size: 32px; font-weight: 700; line-height: 1.3; }
 
 /* 4. Cards & Grid (시안 반영) */
-figure {max-width: 100%; display: flex; justify-content: center; background: #fff; border-radius: 20px; overflow: hidden; }
-figure img { width: 100%; height: 100%; object-fit: cover; }
-.strategy_section figure {width:39.16%; margin:0 auto;} 
-.system_section figure {width:55.20%; margin:0 auto;}
+.image_wrap {max-width: 100%; display: flex; justify-content: center; background: #fff; border-radius: 20px; overflow: hidden; }
+.image_wrap img { width: 100%; height: 100%; object-fit: cover; }
+.strategy_section .title_area {margin-bottom:80px;}
+.strategy_section .image_wrap {width: clamp(100px, 100%, 752px); margin:0 auto; padding:60px 0;} 
+.system_section .title_area {margin-bottom:80px;}
+.system_section .image_wrap {width: clamp(100px, 100%, 1060px); margin:0 auto;}
 
 /* Policy Card */
 .policy_card_box { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
 .policy_card_box h4 { font-size: 40px; }
 .policy_card_box .title_area p { font-size: 24px; }
 .policy_card_box ul { margin-top: 40px; list-style: none; }
-.policy_card_box li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 24px; }
+.policy_card_box li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 24px; letter-spacing: -1%; }
 .policy_card_box li strong { color: #161616; font-size: 20px; font-weight: 700; white-space: nowrap; }
 .policy_card_box li span { color: #161616; font-size: 20px; line-height: 1.35; }
 
 /* Wide Card (바다숨) */
 .wide_card { display: flex; align-items: flex-start; gap: 40px; padding: 60px; background: #F8F8F8; border-radius: 20px; }
-.wide_card figure { flex: 0 0 500px; height: 320px; }
+.wide_card .image_wrap { flex: 0 0 500px; height: 320px; }
 .wide_card .text_group { flex: 1; display: flex; flex-direction: column; gap: 40px; }
 
 /* 5. Sub Grid (2열 그리드 구현) */
 .sub_grid_container { display: flex; flex-wrap: wrap; gap: 80px 40px; }
 .grid_item { width: calc(50% - 20px); display: flex; flex-direction: column; gap: 32px; }
-.grid_item figure { height: 360px; }
+.grid_item .image_wrap { height: 360px; }
 .btn_icon.btn_xl.after {width:fit-content}
 
 /* [추가] 그린 밸류체인 (제공해주신 style.css 기반 레이아웃) */
@@ -459,6 +469,9 @@ figure img { width: 100%; height: 100%; object-fit: cover; }
 .key_features_grid { width: 100%; padding: 0; display: flex; gap: 20px; }
 .key_features_grid li { height: 300px; padding: 42px 32px 32px; background-color: #F8F8F8; border-radius: 12px; position:relative; display:flex; flex-direction:column; justify-content:space-between; align-items: flex-end; flex: 1; overflow: hidden;}
 .key_features_grid li::after {content:''; width:72px; height:72px; background:red; position:absolute; right:32px; bottom:32px}
+.key_features_grid li:first-child::after { background: url('/src/assets/images/dummy/icon_solar_panel.png') no-repeat center / contain; }
+.key_features_grid li:nth-child(2)::after { background: url('/src/assets/images/dummy/icon_recycle.png') no-repeat center / contain; }
+.key_features_grid li:nth-child(3)::after { background: url('/src/assets/images/dummy/icon_eco_design.png') no-repeat center / contain; }
 .card_content { width: 100%; display: flex; flex-direction: column; gap: 16px; text-align: left; }
 .card_content strong { font-size: 24px; font-weight: 700; color: #161616; line-height: 1.35; }
 .card_content p { font-size: 1.8rem; font-weight: 400; color: #67676f; line-height: 1.4; }
@@ -475,27 +488,30 @@ figure img { width: 100%; height: 100%; object-fit: cover; }
 .green_product { width: 100%; margin-top: 80px; }
 .green_product > ul {display: flex; flex-direction: column;}
 .green_product li.one_divide { display: flex; gap: 40px; align-items: flex-start; }
-.green_product li.one_divide figure { flex: 0 0 690px; height: auto; border-radius: 20px; overflow: hidden; }
+.green_product li.one_divide .image_wrap { flex: 0 0 690px; height: auto; border-radius: 20px; overflow: hidden; }
 .green_product li.one_divide div { flex: 1; }
 .green_product li.two_divide {margin-top:80px; display: flex; gap: 40px; align-items: flex-start; }
 .green_product li.two_divide > div { flex: 1; display: flex; flex-direction: column; gap: 32px; }
-.green_product li.two_divide figure { width: 100%; height: 360px; border-radius: 20px; overflow: hidden; }
+.green_product li.two_divide .image_wrap { width: 100%; height: 360px; border-radius: 20px; overflow: hidden; }
 .green_product > ul > li:last-of-type {margin-top:200px; margin-bottom:80px;}
 .green_product > ul > li:last-of-type h4 {margin-top:40px;}
 .green_product > ul li div h4 + p {margin-bottom:20px;}
-.green_product figure img { width: 100%; height: 100%; object-fit: cover;}
+.green_product .image_wrap img { width: 100%; height: 100%; object-fit: cover;}
 
 /* 7. Responsive */
 @media screen and (max-width: 1024px) {
     .mt100 { margin-top: 60px; }
-    .key_features_grid { flex-wrap: wrap; }
-    .key_features_grid li {width:100%; flex:0 auto;}
+    .key_features_grid { overflow-x: auto; }
+    .key_features_grid li {width: 300px; height: 240px; flex: none;}
     .key_features_grid li::after {content:''; width:36px; height:36px; background:red; position:absolute; right:32px; bottom:32px}
+    .key_features_grid li .card_content {gap: 18px;}
+    .key_features_grid li .card_content strong { font-size: 18px; }
+    .key_features_grid li .card_content p { font-size: 14px !important; }
     .card_content { flex: 0 0 100%; height: auto; gap: 24px; }
     .system_detail_grid { flex-direction: column; }
     .green_product li.one_divide,
     .green_product li.two_divide { flex-direction: column; gap: 32px; }
-    .green_product li.one_divide figure, .green_product li.two_divide figure { flex: 0 0 auto; width: 100%; height: auto;}
+    .green_product li.one_divide .image_wrap, .green_product li.two_divide .image_wrap { flex: 0 0 auto; width: 100%; height: auto;}
 }
 @media screen and (max-width: 767px) {
     h3, h4, .policy_card_box h4, .climate_change .intro_view p { font-size: 28px !important; }
@@ -506,10 +522,10 @@ figure img { width: 100%; height: 100%; object-fit: cover; }
     .policy_card_box { padding: 30px 20px; }
     .policy_card_box li { flex-direction: column; }
     .wide_card { flex-direction: column; padding: 30px 20px; }
-    .wide_card figure { flex: 0 0 auto; width: 100%; height: auto; }
+    .wide_card .image_wrap { flex: 0 0 auto; width: 100%; height: auto; }
     .sub_grid_container { gap: 40px; }
     .grid_item { width: 100%; }
-    .strategy_section figure, .system_section figure {width:100%; margin:0 auto;}
+    .strategy_section .image_wrap, .system_section .image_wrap {width:100%; margin:0 auto;}
     .mb200 {margin-bottom:80px;}
     .btn_icon.btn_xl.after {width:100%;}
     .green_value_chain { margin-top: 40px; }

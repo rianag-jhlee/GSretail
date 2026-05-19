@@ -58,9 +58,10 @@
                                     <section class="intro_section">
                                         <h4 class="section_title">{{ t.WinWinIntro.Strategy.Title }}</h4>
                                         <div class="strategy_box mt40">
-                                            <figure class="diagram_img mb40">
-                                                <img src="@/assets/images/dummy/gsrsu03010101_1.png" alt="동반성장 추진전략 다이어그램">
-                                            </figure>
+                                            <picture class="diagram_img_wrap mb40">
+                                                <source media="(max-width: 768px)" :srcset="t.WinWinIntro.Strategy.imgMo" />
+                                                <img :src="t.WinWinIntro.Strategy.img" :alt="t.WinWinIntro.Strategy.alt">
+                                            </picture>
                                             
                                             <ul class="card_grid">
                                                 <li v-for="(card, idx) in t.WinWinIntro.Strategy.Cards" :key="'card-'+idx" class="strategy_card">
@@ -1667,7 +1668,10 @@ export default {
                                 { num: "02", tit: "실질적 경영지원", list: ["금융지원 / 대금조기 지급", "업무역량 지원", "기타/복리후생 지원"] },
                                 { num: "03", tit: "지속적 성장추구", list: ["공동상품개발 확대", "브랜드마케팅 지원", "성과공유제 도입/운용"] },
                                 { num: "04", tit: "열린소통", list: ["정기적 간담회 운영", "문화교류 (Family-Day)", "파트너사 만족도 개선"] }
-                            ]
+                            ],
+                            img: require("@/assets/images/dummy/gsrsu03010101_1.png"),
+                            imgMo: require("@/assets/images/dummy/mo/gsrsu03010101_1_mo.png"),
+                            alt: "동반성장 추진전략 다이어그램"
                         },
                         Index: {
                             Title: "동반성장지수",
@@ -2623,7 +2627,6 @@ export default {
     :deep(.section_title_sub) br {display:none;}
     .date {font-size:16px;}
 
-    .support_item {border:1px solid red;}
     .support_item + .support_item {margin-top:120px;}
 
     .finance_support .process_container {margin-top:60px;}
@@ -2669,14 +2672,14 @@ export default {
     .index_box strong {margin-top:20px; font-size:2.8rem; font-weight:700; display:block;}
 
     /* 금융지원 */
-    .text_summary_sub { margin-bottom:80px; font-size: 28px; font-weight: 700; color: #90909A; border:1px solid green;}
+    .text_summary_sub { margin-bottom:80px; font-size: 28px; font-weight: 700; color: #90909A;}
     .section_title_sub {margin-bottom:16px; font-size: 40px; font-weight: 700; color: #161616; }
-    .wide_info_box { display: flex; gap: 40px; align-items: center; }
+    .wide_info_box { display: flex; gap: 40px; align-items: flex-start; }
     .img_frame {height: 360px; max-height:100%; border-radius: 12px; overflow: hidden; }
     .img_frame img { width: 100%; height: 100%; object-fit: cover; }
     .text_area { flex: 1; }
     .process_flow { display: flex; align-items: center; justify-content: center; background: #fff; padding: 60px 0; border-radius: 12px; gap:80px; }
-    .step_unit { position: relative; width: 220px; height:220px; padding:40px; background:#F8F8F8; border-radius:50%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .step_unit { position: relative; width: 220px; height:220px; padding:40px 0; background:#F8F8F8; border-radius:50%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
     .circle_icon { width: 100px; height: 100px; background: #F8F8F8; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .circle_icon img { width: 40px; }
     .step_desc { font-size: 16px; font-weight: 700; text-align: center; color: #000; line-height: 1.2; display:flex; align-items:center; flex-direction:column;}
@@ -2737,7 +2740,7 @@ export default {
     .notice_text {margin-top:20px; color:#67676F; font-size:16px;}
     .owner_card_layout {display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
     .owner_card_layout .strategy_card {min-width: auto; padding: 32px 32px 48px; height: 100%; display: flex; flex-direction: column;}
-    .diagram_img_wrap {margin:100px 0; text-align:center;}
+    .diagram_img_wrap {display: block; margin:100px 0; text-align:center;}
 
     /* 공급망 지속가능성 정책 한 줄 규칙 수정 */
     .policy_box_wrap { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
@@ -2997,7 +3000,7 @@ export default {
         .card_grid {flex-wrap:wrap;}
         :deep(.section_title_sub) br {display:block;}
         .strategy_card {width: calc(50% - 10px); flex: none;}
-        .wide_info_box { flex-direction: column; align-items: flex-start; }
+        .wide_info_box { flex-direction: column; }
         .process_flow {flex-direction:column; flex-wrap: wrap; gap: 80px 20px; }
         .arrow_next {right:auto; top:auto; bottom:-60px; transform:translateY(0) rotate(90deg);}
         .customer_satisfaction strong {font-size:20px;}
@@ -3064,7 +3067,8 @@ export default {
         .sub_tab_content {margin-top:0px;}
         :deep(.text_summary) {padding: 60px 0 20px;}
         :deep(.text_summary) br {display:none;}
-        .strategy_card {width: 100%; min-width:100%; flex-direction:column;}
+        .card_grid {flex-wrap:nowrap; overflow-x:auto;}
+        .strategy_card {width:335px;/*width:calc(100vw - 80px)*/ flex-direction:column;}
         .philosophy_box {padding:20px;}
         .philosophy_box .btn_icon {width:90%;}
         .item_wrap div {width:200px; height:200px;}
