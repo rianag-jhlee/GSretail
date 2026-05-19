@@ -65,7 +65,7 @@
                         </ul>
                     </div>
                 </section>
-            </div>
+            </div>  
             <!-- //GS25 브랜드 소개 -->
 
             <!-- 차별화된 경쟁력 -->
@@ -414,6 +414,7 @@
                 </section>
             </div>
             <!-- //편의점 창업 이해 -->
+
             <!-- FAQ -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 3">
                 <section class="sec_startup_faq">
@@ -488,6 +489,7 @@
             </div>
             <!-- //FAQ -->
             <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
+            <Tabs v-show="activeD1 === 3" :tab-items="depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
             <!-- 창업 절차 -->
             <div class="panel" v-show="activeD1 === 1 && activeD2 === 0">
                 <section class="sec_startup_process">
@@ -545,7 +547,7 @@
                 </section>
             </div>
             <!-- //창업 절차 -->
-            <!-- 가맹타입 -->
+            <!-- 가맹타입 --> 
             <div class="panel" v-show="activeD1 === 1 && activeD2 === 1">
                 <section class="sec_franchise_type">
                     <header class="section_header ac">
@@ -814,24 +816,451 @@
             </div>
             <!-- //창업 혜택 -->
 
-          
-         
+            <!-- 추천 점포 찾기 -->
+            <div class="panel pt_64" v-show="activeD1 === 2" aria-label="추천 점포 찾기">
+                <section class="sec_store">
+                    <p class="tab_intro">안정적인 수입이 기대되는 최적의 입지! 성공 확률을 높이는 GS25 추천 점포를 만나보세요</p>
+                    <div class="store_search">
+                        <!-- 지역 -->
+                        <div class="search_group">
+                            <span class="search_group_label">지역</span>
+                            <div class="chip_list">
+                                <button
+                                    type="button"
+                                    class="chip"
+                                    :class="{ active: filterRegion === '' }"
+                                    @click="filterRegion = ''"
+                                >전체</button>
+                                <button
+                                    v-for="r in storeRegions"
+                                    :key="r.value"
+                                    type="button"
+                                    class="chip"
+                                    :class="{ active: filterRegion === r.value }"
+                                    @click="filterRegion = r.value"
+                                >{{ r.label }}<template v-if="r.count != null"> {{ r.count }}</template></button>
+                            </div>
+                        </div>
+                        <!-- 구분선 -->
+                    
+                        <!-- 하단 row -->
+                        <div class="search_bottom_row">
+                            <!-- 가맹타입 -->
+                            <div class="search_group">
+                                <span class="search_group_label">가맹타입</span>
+                                <div class="chip_list">
+                                    <button
+                                        v-for="t in franchiseTypes"
+                                        :key="t.value"
+                                        type="button"
+                                        class="chip"
+                                        :class="{ active: filterFranchiseType === t.value }"
+                                        @click="filterFranchiseType = filterFranchiseType === t.value ? '' : t.value"
+                                    >{{ t.label }}</button>
+                                </div>
+                            </div>
+                            <!-- 점포유형/청년창업 -->
+                            <div class="search_group">
+                                <span class="search_group_label">점포유형/청년창업</span>
+                                <div class="chip_list">
+                                    <button
+                                        type="button"
+                                        class="chip"
+                                        :class="{ active: filterStoreType === '신규점' }"
+                                        @click="filterStoreType = filterStoreType === '신규점' ? '' : '신규점'"
+                                    >신규점</button>
+                                    <button
+                                        type="button"
+                                        class="chip"
+                                        :class="{ active: filterStoreType === '기존점' }"
+                                        @click="filterStoreType = filterStoreType === '기존점' ? '' : '기존점'"
+                                    >기존점</button>
+                                    <span class="chip_sep_v"></span>
+                                    <span class="chip_youth_wrap">
+                                        <button
+                                            type="button"
+                                            class="chip"
+                                            :class="{ active: filterYouth }"
+                                            @click="filterYouth = !filterYouth"
+                                        >청년창업</button>
+                                        <button
+                                            type="button"
+                                            class="youth_info_btn"
+                                            @click.stop="youthPopoverVisible = !youthPopoverVisible"
+                                            aria-label="청년창업 안내"
+                                        >?</button>
+                                        <div
+                                            v-if="youthPopoverVisible"
+                                            class="youth_popover"
+                                            role="tooltip"
+                                            @click.stop
+                                        >   
+                                            <strong>청년창업이란?</strong>
+                                            <p>20대 청년들을 위해서 투자비 일부를 할인해드리는 제도에요.</p>
+                                            <a href="#">청년창업 자세히 보러가기</a>
+                                            <button
+                                                type="button"
+                                                class="youth_popover_close"
+                                                @click="youthPopoverVisible = false"
+                                                aria-label="닫기"
+                                            ></button>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- 검색 -->
+                            <div class="search_group search_group_input">
+                                <span class="search_group_label">검색</span>
+                                <div class="store_search_input_wrap">
+                                    <input
+                                        type="text"
+                                        class="store_search_input"
+                                        placeholder="지역명, 태그...."
+                                        v-model="storeSearchQuery"
+                                    />
+                                    <button type="button" class="store_search_btn" aria-label="검색">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 필터 + 테이블 + 페이지네이션 -->
+                    <div class="store_list_wrap"> 
+                        <!-- 상단 바: 총 개수 + 정렬/뷰 토글 -->
+                        <div class="store_list_bar">
+                            <span class="store_count">총 <strong>{{ storeList.length }} </strong>개 점포</span>
+                            <div class="store_bar_right">
+                                <div class="store_sort_group">
+                                    <button
+                                        type="button"
+                                        class="sort_btn"
+                                        :class="{ active: storeSort === 'latest' }"
+                                        @click="storeSort = 'latest'"
+                                    >최신순</button>
+                                    <button
+                                        type="button"
+                                        class="sort_btn"
+                                        :class="{ active: storeSort === 'cost' }"
+                                        @click="storeSort = 'cost'"
+                                    >투자비 낮은순</button>
+                                </div>
+                                <div class="store_view_group">
+                                    <button
+                                        type="button"
+                                        class="view_btn"
+                                        :class="{ active: storeView === 'list' }"
+                                        @click="storeView = 'list'"
+                                        aria-label="목록형"
+                                    >
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="view_btn"
+                                        :class="{ active: storeView === 'grid' }"
+                                        @click="storeView = 'grid'"
+                                        aria-label="격자형"
+                                    >
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 테이블 뷰 -->
+                        <div v-show="storeView === 'list'" class="type_table_wrap type2">
+                            <table class="type_table">
+                                <colgroup>
+                                    <col class="col_region"/>
+                                    <col class="col_type"/>
+                                    <col class="col_form"/>
+                                    <col class="col_cost"/>
+                                    <col class="col_tag"/>
+                                    <col class="col_area"/>
+                                    <col class="col_date"/>
+                                    <col class="col_detail"/>
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>지역</th>
+                                        <th>타입</th>
+                                        <th>유형</th>
+                                        <th>투자비</th>
+                                        <th>해시태그</th>
+                                        <th>면적</th>
+                                        <th>등록일</th>
+                                        <th>상세</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template v-for="item in storeList" :key="item.id">
+                                        <tr :class="{ is_open: openTableId === item.id }">
+                                            <td>{{ item.region }}</td>
+                                            <td>
+                                                <span v-for="t in item.type" :key="t" class="type_badge" :class="getBadgeClass(t)">{{ t }}</span>
+                                            </td>
+                                            <td>{{ item.form }}</td>
+                                            <td>{{ item.cost }}</td>
+                                            <td class="td_tag">{{ item.tags }}</td>
+                                            <td>{{ item.area }}</td>
+                                            <td>{{ item.date }}</td>
+                                            <td>
+                                                <button
+                                                    type="button"
+                                                    class="detail_toggle_btn"
+                                                    @click="openTableId = openTableId === item.id ? null : item.id"
+                                                >
+                                                    {{ openTableId === item.id ? '접기' : '상세' }}
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <!-- 상세 패널 (292:7713) -->
+                                        <tr v-if="openTableId === item.id" class="detail_panel_row">
+                                            <td colspan="8" class="detail_panel_td">
+                                                <div class="detail_panel">
+                                                    <StoreCardDetail :item="item" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 모바일 아코디언 뷰 (목록형) -->
+                        <div class="store_accordion_list" v-show="storeView === 'list'">
+                            <Accordion class="store_acc">
+                                <AccordionItem
+                                    v-for="item in storeList"
+                                    :key="item.id"
+                                    :item-key="item.id"
+                                >
+                                    <template #title>
+                                        <div class="accordion_head_info">
+                                            <p class="accordion_region">{{ item.region }}</p>
+                                            <div class="accordion_badges">
+                                                <span v-for="t in item.type" :key="t" class="type_badge" :class="getBadgeClass(t)">{{ t }}</span>
+                                                <span class="type_badge badge_gray">{{ item.form }}</span>
+                                                <span v-if="item.isYouth" class="type_badge badge_gray">청년</span>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <StoreCardDetail :item="item" />
+                                </AccordionItem>
+                            </Accordion>
+                        </div>
+
+                        <!-- 카드 그리드 뷰 -->
+                        <div v-show="storeView === 'grid'" class="store_card_grid_wrap">
+                            <template v-for="(row, rowIdx) in storeCardRows" :key="rowIdx">
+                                <ul class="store_card_row">
+                                    <li
+                                        v-for="item in row"
+                                        :key="item.id"
+                                    >
+                                        <StoreCard
+                                            :item="item"
+                                            :is-open="openCardId === item.id"
+                                            @toggle="toggleCard(item.id)"
+                                        />
+                                    </li>
+                                </ul>
+                                <!-- 해당 행에 열린 카드가 있으면 detail 패널 표시 -->
+                                <div
+                                    v-if="openCardId && row.some(c => c.id === openCardId)"
+                                    class="store_card_detail_row"
+                                >
+                                    <StoreCardDetail :item="storeList.find(c => c.id === openCardId)" />
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- 페이지네이션 -->
+                        <div class="store_pagination">
+                            <Pagination v-model="storePage" :total-pages="storeTotalPages" :visible-pages="5" />
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- //추천 점포 찾기 -->
+
+            <!-- 상담 및 신청 -->
+            <div class="panel" v-show="activeD1 === 3 && activeD2 === 0" aria-label="창업 상담 신청">
+                 <section class="sec_consult_startup">
+                    <div class="consent_box" aria-label="개인정보 제공 동의">
+                        <h3>개인정보 제공 동의</h3>
+                        <ul v-if="startupConsentItems.length" class="consent_list">
+                            <li v-for="(item, idx) in startupConsentItems" :key="idx">
+                                <p v-html="item"></p>
+                            </li>
+                        </ul>
+
+                        <div class="consent_notice_area">
+                            <p>고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 상담 글 작성이 불가능합니다.</p>
+                            <label class="consent_radio">
+                                <input
+                                    type="checkbox"
+                                    :checked="startupConsentAgreed"
+                                    @change="onStartupConsentChange"
+                                />
+                                <span>동의합니다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="apply_form">
+                        <div class="form_body">
+                            <div class="form_row col_02">
+                                <div class="col_item">
+                                    <div class="form_label">이름 <span class="form_required">(필수 입력)</span></div>
+                                    <div class="form_field">
+                                        <Inputs type="text" v-model="startupConsultForm.name" />
+                                    </div>
+                                </div>
+                                <div class="col_item">
+                                    <div class="form_label">연락처 <span class="form_required">(필수 입력)</span></div>
+                                    <div class="form_field form_field_phone">             
+                                        <Inputs type="text" v-model="startupConsultForm.phone" />
+                                    </div>
+                                </div>
+                              
+                            </div> 
+                            <div class="form_row">
+                                <div class="form_label">생년월일 <span class="form_required">(필수 입력)</span></div>
+                                <div class="form_field form_field_birth">
+                                    <SelectBox :options="startupBirthYearOptions" v-model="startupConsultForm.birthYear" initMsg="년도" />
+                                    <SelectBox :options="startupBirthMonthOptions" v-model="startupConsultForm.birthMonth" initMsg="월" />
+                                    <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" initMsg="일" />
+                                </div>
+                            </div>
+                            <div class="form_row col_02">
+                                <div class="col_item">
+                                    <div class="form_label">점포 소유 및 임차 <span class="form_required">(필수 입력)</span></div>
+                                    <div class="form_field form_field_radio">
+                                        <Inputs
+                                            v-for="opt in startupStoreOwnershipOptions"
+                                            :key="opt.value"
+                                            type="radio"
+                                            name="startup_store_ownership"
+                                            :value="opt.value"
+                                            v-model="startupConsultForm.storeOwnership"
+                                            :text="opt.label"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col_item">
+                                    <div class="form_label">투자가능금액 (만원)</div>
+                                    <div class="form_field">
+                                        <Inputs type="text" v-model="startupConsultForm.investAmount" />
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="form_row">
+                                <div class="form_label">오픈 희망 시기</div>
+                                <div class="form_field form_field_open">
+                                    <Inputs type="text" v-model="startupConsultForm.openYear" />
+                                    <span class="form_unit">년</span>
+                                    <Inputs type="text" v-model="startupConsultForm.openMonth" />
+                                    <span class="form_unit">월</span>
+                                </div>
+                            </div>
+                            <div class="form_row form_row_radio">
+                                <div class="form_label">편의점 근무경험</div>
+                                <div class="form_field form_field_radio form_field_experience">
+                                    <Inputs
+                                        v-for="opt in startupCvsExperienceOptions"
+                                        :key="opt.value"
+                                        type="checkbox"
+                                        name="startup_cvs_experience"
+                                        :value="opt.value"
+                                        v-model="startupConsultForm.cvsExperience"
+                                        :text="opt.label"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form_row form_row_textarea">
+                                <div class="form_label">문의 내용</div>
+                                <div class="form_field">
+                                    <Textarea
+                                        v-model="startupConsultForm.inquiry"
+                                        placeholder="창업 관련 궁금한 사항을 입력해주세요."
+                                        :rows="6"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form_row form_row_region">
+                                <div class="form_label">
+                                    <span>관심 지역 <span class="form_required">(필수 입력)</span></span>
+                                    <p class="form_label_note">지역 선택 시 담당자가 배정되며, 담당자별로 예약 가능 시간이 다릅니다.</p>
+                                </div>
+                                <div class="form_field form_field_region">
+                                    <SelectBox :options="startupRegionSidoOptions" v-model="startupConsultForm.regionSido" initMsg="시/도 선택" @update:modelValue="startupConsultForm.regionSigungu = ''" />
+                                    <SelectBox :options="startupRegionSigunguOptions" v-model="startupConsultForm.regionSigungu" initMsg="구/시 선택" :disabled="!startupConsultForm.regionSido" />
+                                </div>
+                            </div>
+                            <div class="form_row form_row_calendar">
+                                <div class="form_label">상담 날짜 선택 <span class="form_required">(필수 입력)</span></div>
+                                <div class="form_field form_field_calendar">
+                                    <Inputs type="text" v-model="startupConsultForm.consultDate" :is-readonly="true" placeholder="먼저 관심 지역을 선택해주세요." />
+                                </div>
+                            </div>
+                            <div class="form_row form_row_calendar">
+                                <div class="form_label">상담 시간 선택 <span class="form_required">(필수 입력)</span></div>
+                                <div class="form_field form_field_calendar">
+                                    <Inputs type="text" v-model="startupConsultForm.consultTime" :is-readonly="true" placeholder="먼저 관심 지역을 선택해주세요." />
+                                </div>
+                            </div>
+                            <article class="consult_manager_card" aria-label="담당자 정보">
+                                <figure class="consult_manager_photo" aria-hidden="true"></figure>
+                                <div class="consult_manager_body">
+                                    <p class="consult_manager_name">{{ startupConsultManager.name }}</p>
+                                    <div class="consult_manager_office">
+                                        <span class="consult_manager_icon" aria-hidden="true"></span>
+                                        <div class="consult_manager_addr">
+                                            <p class="tit">{{ startupConsultManager.office }}</p>
+                                            <p class="addr">{{ startupConsultManager.address }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <div class="form_row form_row_calendar">
+                                <div class="form_label">상담 날짜 선택 <span class="form_required">(필수 입력)</span></div>
+                                <ConsultCalendar v-model="startupConsultForm.consultDate" />
+                            </div>
+                            <div class="form_row form_row_calendar">
+                                <div class="form_label">상담 시간 선택 <span class="form_required">(필수 입력)</span></div>
+                                <ConsultTimePicker v-model="startupConsultForm.consultTime" />
+                            </div>
+                        </div>
+                        <div class="button_area">
+                            <Buttons btn-class="btn_xl primary">상담 예약 신청하기</Buttons>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="panel" v-show="activeD1 === 3 && activeD2 === 1" aria-label="창업 설명회 신청">
+                <section class="sec_consult_seminar"></section>
+            </div>
+            <div class="panel" v-show="activeD1 === 3 && activeD2 === 2" aria-label="입점 제안/브랜드 전환 상담">
+                <section class="sec_consult_entry"></section>
+            </div>
+            <!-- //상담 및 신청 -->
+
         </div>
         <ul
-            ref="quickMenuRef"
+            ref="quickMenuRef" 
             class="quick_menu"
-            :aria-hidden="!showQuickMenu"
+            :aria-hidden="!showQuickMenu" 
         >
             <li><button type="button">창업안내</button></li>
             <li><button type="button">입점상담</button></li>
             <li><button type="button">고객센터</button></li>
         </ul>
     </div>
- 
+  
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
+import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -842,6 +1271,13 @@ import NumberedInfoList from "@/components/NumberedInfoList.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
 import Pagination from "@/components/Pagination.vue";
+import StoreCard from "@/components/StoreCard.vue";
+import StoreCardDetail from "@/components/StoreCardDetail.vue";
+import Inputs from "@/components/Inputs.vue";
+import SelectBox from "@/components/SelectBox.vue";
+import Textarea from "@/components/Textarea.vue";
+import ConsultCalendar from "@/components/ConsultCalendar.vue";
+import ConsultTimePicker from "@/components/ConsultTimePicker.vue";
 import imgBg from "@/assets/images/dummy/gsrst02010101_01.png";
 import imgBg2 from "@/assets/images/dummy/gsrst02010101_02.jpg";
 import imgStoreOpen from "@/assets/images/dummy/gsrst02010101_03.png";
@@ -869,7 +1305,9 @@ const activeD2 = ref(0);
 const activeD3 = ref(0);
 
 const mqMobile = window.matchMedia("(max-width: 768px)");
+const mqTablet = window.matchMedia("(max-width: 1024px)");
 const isMobileView = ref(mqMobile.matches);
+const isTabletView = ref(mqTablet.matches);
 const isCompetitiveTab = computed(() => activeD1.value === 0 && activeD2.value === 1);
 const conceptStoreSpaceBetween = computed(() => (isMobileView.value ? 10 : 20));
 const productHitSwiperInsts = ref([]);
@@ -888,6 +1326,7 @@ function refreshProductHitSwipers() {
 
 function syncMobileView() {
     isMobileView.value = mqMobile.matches;
+    isTabletView.value = mqTablet.matches;
     if (!mqMobile.matches) {
         productHitSwiperInsts.value = [];
     } else {
@@ -922,6 +1361,111 @@ const depth2TabsPrepare = [
     { item: "가맹 타입" },
     { item: "창업 혜택" },
 ];
+
+/** activeD1 === 3 (상담 및 신청) 2depth */
+const depth2TabsConsult = [
+    { item: "창업 상담 신청" },
+    { item: "창업 설명회 신청" },
+    { item: "입점 제안/브랜드 전환 상담" },
+];
+
+/** activeD1 === 3, activeD2 === 0 (창업 상담 신청) — 개인정보 동의 목록 */
+const startupConsentItems = [
+    "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
+    "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일,",
+    "- 수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용,",
+    "- 보유 및 이용기간: 접수 후 1년",
+];
+
+const startupConsentAgreed = ref(false);
+
+function onStartupConsentChange(event) {
+    startupConsentAgreed.value = event.target.checked;
+}
+
+const startupPhoneOptions = [
+    { value: "010", label: "010" },
+    { value: "011", label: "011" },
+    { value: "016", label: "016" },
+    { value: "017", label: "017" },
+    { value: "018", label: "018" },
+    { value: "019", label: "019" },
+];
+
+const startupStoreOwnershipOptions = [
+    { value: "yes", label: "있음" },
+    { value: "no", label: "없음" },
+];
+
+const startupCvsExperienceOptions = [
+    { value: "none", label: "없음" },
+    { value: "gs25_staff", label: "GS25 근무자" },
+    { value: "gs25_owner", label: "GS25 경영주" },
+    { value: "other_staff", label: "타사 근무자" },
+    { value: "other_owner", label: "타사 경영주" },
+];
+
+const startupRegionSidoOptions = [
+    { value: "서울", label: "서울" },
+    { value: "경기", label: "경기" },
+    { value: "인천", label: "인천" },
+    { value: "충청", label: "충청" },
+    { value: "강원", label: "강원" },
+    { value: "제주", label: "제주" },
+    { value: "전라", label: "전라" },
+    { value: "경상", label: "경상" },
+];
+
+const startupRegionSigunguMap = {
+    서울: [
+        { value: "마포구", label: "마포구" },
+        { value: "강남구", label: "강남구" },
+    ],
+    경기: [{ value: "수원시", label: "수원시" }],
+};
+
+const startupBirthYearOptions = Array.from({ length: 80 }, (_, i) => {
+    const year = new Date().getFullYear() - 18 - i;
+    return { value: String(year), label: String(year) };
+});
+
+const startupBirthMonthOptions = Array.from({ length: 12 }, (_, i) => {
+    const month = String(i + 1);
+    return { value: month, label: month };
+});
+
+const startupBirthDayOptions = Array.from({ length: 31 }, (_, i) => {
+    const day = String(i + 1);
+    return { value: day, label: day };
+});
+
+const startupConsultForm = reactive({
+    name: "",
+    phone1: "010",
+    phone2: "",
+    phone3: "",
+    storeOwnership: "",
+    investAmount: "",
+    openYear: "",
+    openMonth: "",
+    cvsExperience: [],
+    birthYear: "",
+    birthMonth: "",
+    birthDay: "",
+    inquiry: "",
+    regionSido: "",
+    regionSigungu: "",
+    consultDate: "",
+    consultTime: "",
+});
+
+const startupRegionSigunguOptions = computed(() => startupRegionSigunguMap[startupConsultForm.regionSido] || []);
+
+const startupConsultManager = {
+    name: "담당장 : 이은정(02-2006-3565)",
+    office: "GS25 서부사무소",
+    address: "서울특별시 마포구 월드컵북로 396",
+};
 
 /** activeD1 === 1, activeD2 === 2 (창업 혜택) */
 const depth3TabsBenefit = [
@@ -1697,7 +2241,7 @@ const franchiseFormula = {
     result: { title: "함께 성장", label: "GS25 Franchise" },
 };
 
-/** Figma 716:14559 — 역할 2열 카드 */
+/** 역할 2열 카드 */
 const franchiseRoleColumns = [
     {
         title: "점포 운영",
@@ -1721,7 +2265,7 @@ const franchiseRoleColumns = [
     },
 ];
 
-/** Figma 725:14684 — 창업 FAQ */
+/** 창업 FAQ */
 const startupFaqPanel = {
     title: "창업 FAQ TOP 5",
 };
@@ -1756,7 +2300,7 @@ const startupFaqItems = [
     
 ];
 
-/** Figma 725:14690 — GS25 답변 */
+/** GS25 답변 */
 const GS25_FAQ_PAGE_SIZE = 6;
 const activeGs25FaqTab = ref(0);
 const activeGs25FaqPage = ref(1);
@@ -1977,6 +2521,79 @@ watch(gs25FaqTotalPages, (total) => {
     if (activeGs25FaqPage.value > total) activeGs25FaqPage.value = total;
 });
 
+/** 추천 점포 찾기 */
+const filterRegion = ref("");
+const filterFranchiseType = ref("");
+const filterStoreType = ref("");
+const filterYouth = ref(false);
+const storeSearchQuery = ref("");
+const youthPopoverVisible = ref(false);
+
+const storeRegions = [
+    { value: "서울", label: "서울", count: 4 },
+    { value: "경기", label: "경기", count: 4 },
+    { value: "인천", label: "인천", count: 4 },
+    { value: "부산", label: "부산", count: 4 },
+    { value: "대구", label: "대구", count: 4 },
+    { value: "대전", label: "대전", count: 4 },
+    { value: "광주", label: "광주", count: 4 },
+    { value: "울산", label: "울산", count: 4 },
+    { value: "세종", label: "세종", count: 1 },
+    { value: "강원", label: "강원", count: 4 },
+    { value: "충북", label: "충북", count: 4 },
+    { value: "충남", label: "충남", count: 4 },
+    { value: "전북", label: "전북", count: 4 },
+    { value: "전남", label: "전남", count: 4 },
+    { value: "경북", label: "경북", count: 4 },
+    { value: "경남", label: "경남", count: 4 },
+    { value: "제주", label: "제주", count: 2 },
+];
+
+const franchiseTypes = [
+    { value: "GS1", label: "GS1 (경영주 임차)" },
+    { value: "GS2", label: "GS2 (임차 공동 부담)" },
+    { value: "GS3", label: "GS3 (임차 본부 부담)" },
+];
+
+const storeSort = ref("latest");
+const storeView = ref("list");
+const storePage = ref(1);
+const storeTotalPages = ref(5);
+
+const storeList = ref([
+    { id: 1, region: "대전 동구", type: ["GS1", "GS2"], form: "기존점", isYouth: false, cost: "7,200만원", tags: "#버스정류장 #대로변", area: "18평", date: "2025.12.24", feature: "신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다." },
+    { id: 2, region: "강원 원주시", type: ["GS2", "GS3"], form: "기존점", isYouth: true, cost: "10,500만원", tags: "#버스정류장 #대로변", area: "22평", date: "2025.12.24", feature: "대형 마트 인접 상권으로 유동 인구가 많아 안정적인 매출이 기대됩니다." },
+    { id: 3, region: "대구 서구", type: ["GS1"], form: "기존점", isYouth: true, cost: "5,000만원", tags: "#번화가 #버스정류장", area: "14평", date: "2025.09.21", feature: "지하철역 출구 인근에 위치하여 출퇴근 고객 수요가 풍부합니다." },
+    { id: 4, region: "대전 동구", type: ["GS3"], form: "기존점", isYouth: false, cost: "7,200만원", tags: "#버스정류장 #대로변", area: "18평", date: "2025.12.24", feature: "신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다." },
+    { id: 5, region: "인천 연수구", type: ["GS2"], form: "기존점", isYouth: false, cost: "8,000만원", tags: "#주택가 #초등학교인근", area: "20평", date: "2025.11.10", feature: "주거 밀집 지역 내 독점 상권으로 안정적인 고정 고객층이 형성되어 있습니다." },
+    { id: 6, region: "전북 익산시", type: ["GS1", "GS2"], form: "기존점", isYouth: true, cost: "4,500만원", tags: "#대로변 #유동인구많음", area: "15평", date: "2025.10.05", feature: "도심 중심 상가 위치로 다양한 연령층의 유동 고객이 상시 방문합니다." },
+]);
+
+function getBadgeClass(t) {
+    return /^GS\d/i.test(t) ? "badge_" + t.toLowerCase() : "badge_gray";
+}
+
+function closeYouthPopover() {
+    youthPopoverVisible.value = false;
+}
+
+const openCardId = ref(null);
+const openTableId = ref(null);
+
+const cardsPerRow = computed(() => (isMobileView.value ? 1 : isTabletView.value ? 3 : 4));
+
+const storeCardRows = computed(() => {
+    const rows = [];
+    for (let i = 0; i < storeList.value.length; i += cardsPerRow.value) {
+        rows.push(storeList.value.slice(i, i + cardsPerRow.value));
+    }
+    return rows;
+});
+
+function toggleCard(id) {
+    openCardId.value = openCardId.value === id ? null : id;
+}
+
 const regionCounselPanel = {
     title: "지금 바로 상담을 받고 싶으신가요?",
     lead: "지도에서 원하시는 지역을 클릭하시면 해당 지역 담당자 정보를 바로 확인하실 수 있습니다.",
@@ -2160,13 +2777,17 @@ function onWindowResize() {
 }
 
 onMounted(() => {
+    document.addEventListener("click", closeYouthPopover);
     syncMobileView();
     mqMobile.addEventListener("change", syncMobileView);
+    mqTablet.addEventListener("change", syncMobileView);
     window.addEventListener("resize", onWindowResize);
 });
 onUnmounted(() => {
+    document.removeEventListener("click", closeYouthPopover);
     cancelAnimationFrame(productHitRefreshFrame);
     mqMobile.removeEventListener("change", syncMobileView);
+    mqTablet.removeEventListener("change", syncMobileView);
     window.removeEventListener("resize", onWindowResize);
     if (quickMenuResizeTimer) {
         window.clearTimeout(quickMenuResizeTimer);
@@ -2193,7 +2814,6 @@ img { width: 100%; height: auto; display: block; object-fit: cover; }
 .wrap_gsrst { position: relative; overflow-x: clip; }
 
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
-.page_header::before { width: 100%; height: 100%; position: absolute; top: 0; left: 0; content: ''; }
 .header_inner { text-align: center; position: relative; z-index: 1; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; line-height: 1.24; letter-spacing: -0.02em; }
 
@@ -2215,6 +2835,7 @@ section + section { padding-top: 100px; }
 section p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .panel_third_depth { padding-top: 80px; }
 .panel { padding: 100px 0 200px; }
+.panel.pt_64 { padding-top: 64px;}
 .list_dotted > li { padding-left: 12px; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; position: relative; }
 .list_dotted > li + li { margin-top: 8px; }
 .list_dotted > li::before { width: 4px; height: 4px; background-color: #161616; border-radius: 100%; position: absolute; top: 11px; left: 0; content: ""; }
@@ -2472,7 +3093,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li[data-theme="start"] > article > div > .lead { color: #107af2; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .day { color: #42c68f; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .step_track > .num { background-color: #42c68f; }
-/* .sec_startup_process .process_timeline > li[data-theme="d30"] > article { border-color: #42c68f; } */
+
 .sec_startup_process .process_timeline > li[data-theme="d30"] > article > .icon { background-color: #e8f8f1; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > article > div > .lead { color: #15b874; }
 .sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .day { color: #15b874; }
@@ -2552,9 +3173,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .list_note > li > p { margin: 0; color: #67676F; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
 .list_note > li > p.txt_link { color: #161616; }
 .list_note > li > p > a { color: #107AF2; text-decoration: underline; }
-
-
-
 .sec_operation .section_header, .sec_life .section_header { margin-bottom: 80px; }
 .icon_card_row:first-child .icon_card_list.type_02 > li > article { padding: 0 0 72px; }
 .icon_card_list.type_02 { border-bottom: 1px solid #E5E5E9; }
@@ -2576,6 +3194,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .icon_card_list > li > article > div > dl > dt + dd { margin-top: 8px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.02em; }
 .icon_card_list > li > article > div > ul.list_note { margin: 18px 0 0; }
 .icon_card_list > li > article > div > ul.list_note > li > p {  color: #fb6432; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.button_area{display:flex; justify-content: center;}
 .icon_card_list > li > article > div > .button_area .btn_mid { margin-top: 18px; }
 
 .sec_franchise_compare .franchise_compare_table tbody .note { color: #67676F; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
@@ -2612,7 +3231,144 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .quick_menu li button { width: 100%; height: clamp(48px, 3.125vw, 60px); padding: clamp(12px, 0.9375vw, 18px) 0; font-size: clamp(1.3rem, 0.8333vw, 1.6rem); font-weight: 700; letter-spacing: -0.01em; background: none; background-color: #f2f2f4; border: 0; border-radius: 99px; text-align: center; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 0.5208vw, 10px); }
 .quick_menu li button::before { width: clamp(16px, 1.0417vw, 20px); height: clamp(19px, 1.25vw, 24px); background-color: #161616; display: block; content: ''; }
 
-@media (max-width: 1024px) { .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
+/* 추천 점포 찾기 */
+.sec_store :deep(.detail_card) { --color-brand-primary: #107AF2; }
+.sec_store :deep(.store_card) { --color-brand-primary: #107AF2; }
+.sec_store :deep(.detail_card [class*="btn_"][class*="fill"][class*="primary"]) { color: #fff; background-color: #107AF2; }
+.tab_intro { margin-bottom: 64px; font-size: 2.4rem; color: #161616; line-height: 1.5; letter-spacing: -0.01em; }
+.tab_intro span { color: #11935D; }
+.store_search { padding: 48px 42px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; gap: 0; }
+.search_group { display: flex; flex-direction: column; gap: 12px; }
+.search_group_label { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; }
+.chip_list { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip { min-width: 78px; height: 40px; padding: 0 18px; color: #161616; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; background-color: transparent; border: 1px solid #161616; border-radius: 99px; white-space: nowrap; cursor: pointer; transition: background-color 0.15s, border-color 0.15s, color 0.15s; }
+.chip.active { color: #107af2; background-color: #e7f2fe; border-color: #107af2; }
+.search_bottom_row { margin-top: 24px; padding-top: 24px; border-top: 1px solid #D7D7DF; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 32px; }
+.chip_sep_v { width: 1px; height: 24px; background-color: #c4c4d0; flex-shrink: 0; align-self: center; display: inline-block; }
+.chip_youth_wrap { position: relative; display: inline-flex; align-items: center; }
+.youth_info_btn { width: 18px; height: 18px; color: #000; font-size: 1.3rem; font-weight: 500; line-height: 1; background-color: #fff; border: 1.4px solid #242428; border-radius: 50%; flex-shrink: 0; position: absolute; top: -11px; right: -12px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.youth_popover { padding: 32px; background-color: #fff; border: 1px solid #C6C6C6; border-radius: 16px; position: absolute; top: calc(100% + 8px); left: -119px; right: -166px; z-index: 10; }
+.youth_popover > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; }
+.youth_popover > p { margin-top: 24px; color: #161616; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.youth_popover > a { margin-top: 16px; color: #107AF2; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; text-decoration: underline; display: block; }
+.youth_popover_close { width: 20px; height: 20px; background: none; background-color: red; border: none; position: absolute; top: 32px; right: 32px; cursor: pointer; }
+.search_group_input { min-width: 280px; flex: 1; }
+.store_search_input_wrap { position: relative; }
+.store_search_input { width: 100%; height: 40px; padding: 0 16px; color: #161616; font-size: 1.6rem; letter-spacing: -0.01em; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 12px; box-sizing: border-box; outline: none; }
+.store_search_input::placeholder { color: #a4a4b0; }
+.store_search_input:focus { border-color: #107AF2; }
+.store_search_btn { width: 20px; height: 20px; padding: 0; background: none; border: none; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.type_table_wrap { margin-top: 20px; border-top: 1px solid #161616; overflow-x: auto; }
+.type_table { width: 100%; border-collapse: collapse; }
+.type_table thead th { padding: 28px 24px; font-size: 1.8rem; line-height: 1.4; text-align: center; background-color: #f8f8f8; border: 1px solid #e5e5e9; }
+.type_table tbody td { padding: 12px 24px; font-size: 1.8rem; line-height: 1.4; text-align: center; border-bottom: 1px solid #e5e5e9; }
+.type_table_wrap.type2 .type_table thead th { padding: 18px 20px; line-height: 1.5; border: 0; }
+.type_table_wrap.type2 .type_table colgroup col { width: 12.5%; }
+.type_table_wrap.type2 .type_table tbody td { height: 82px; padding: 0 13px; }
+.td_tag { font-size: 1.6rem; word-break: break-all; }
+.store_list_wrap { margin-top: 32px; }
+.store_list_bar { height: 40px; display: flex; align-items: center; justify-content: space-between; }
+.store_count { color: #67676f; font-size: 1.6rem; letter-spacing: -0.01em; }
+.store_count > strong { font-weight: 700; }
+.store_bar_right { display: flex; align-items: center; gap: 8px; }
+.store_sort_group { display: flex; align-items: center; }
+.sort_btn { height: 40px; margin-left: -1px; padding: 0 12px; color: #90909a; font-size: 1.4rem; font-weight: 700; background: #fff; border: 1px solid #90909a; white-space: nowrap; position: relative; z-index: 0; cursor: pointer; }
+.sort_btn:first-child { margin-left: 0; border-radius: 8px 0 0 8px; }
+.sort_btn:last-child { border-radius: 0 8px 8px 0; }
+.sort_btn.active { color: #107af2; border-color: #107af2; z-index: 1; }
+.store_view_group { display: flex; gap: 8px; }
+.view_btn { width: 40px; height: 40px; color: #107af2; background: #fff; border: 1px solid #90909a; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.view_btn::before { width: 20px; height: 20px; background: red; display: inline-block; content: ""; }
+.view_btn.active { color: #107af2; border-color: #107af2; }
+.type_badge { padding: 3px 6px; font-size: 1.4rem; border-radius: 4px; display: inline-block; }
+.type_badge + .type_badge { margin-left: 4px; }
+.badge_gs1 { color: #15b874; background: #e8f8f1; }
+.badge_gs2 { color: #fb6432; background: #f9f2ea; }
+.badge_gs3 { color: #ed3030; background: #faeeee; }
+.type_badge.badge_gray { color: #67676f; background: #f2f2f4; }
+.detail_toggle_btn { color: #161616; font-size: 2rem; letter-spacing: -0.01em; background: none; border: none; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+.detail_toggle_btn::after { width: 20px; height: 20px; background: red; transform: rotate(0deg); transform-origin: center; transition: transform 0.2s ease; display: inline-block; content: ""; }
+.type_table_wrap.type2 .type_table tbody tr.is_open .detail_toggle_btn::after { transform: rotate(180deg); }
+.detail_panel_td { padding: 0 !important; height: auto !important; border: none !important; }
+.detail_panel { padding: 40px; background: #f8f8f8; border-bottom: 1px solid #D7D7DF; }
+.detail_panel :deep(.detail_card) { border: 0; }
+.store_accordion_list { display: none; }
+.store_accordion_list :deep(.board_type_toggle) { border-top: 1px solid #d7d7df; }
+.store_accordion_list :deep(dt > a.acc_tit_btn) { min-height: auto; padding: 16px 20px; font-size: inherit; font-weight: inherit; border-bottom: 1px solid #d7d7df; }
+.store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open) { border: 1px solid #161616; border-bottom: none; }
+.store_accordion_list :deep(dt > a.acc_tit_btn::after) { width: 24px; height: 24px; background-color: #161616; transform: rotate(0deg); transform-origin: center; transition: transform 0.2s ease; }
+.store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open::after) { transform: rotate(180deg); }
+.store_accordion_list :deep(dd.acc_panel.acc_show) { border: 1px solid #161616; border-top: none; }
+.store_accordion_list :deep(.acc_panel_cont) { padding: 0; }
+.accordion_head_info { min-width: 0; flex: 1; }
+.accordion_region { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.accordion_badges { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.store_card_grid_wrap { margin-top: 16px; display: flex; flex-direction: column; gap: 20px; }
+.store_card_row { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
+.store_card_row > li { display: flex; flex-direction: column; }
+.store_pagination { margin-top: 24px; display: flex; justify-content: center; }
+
+
+/* 상담 및 신청 */
+.sec_consult_startup{max-width:1000px; margin: 0 auto;}
+.consent_box { width: 100%; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
+.consent_box + .consent_box { margin-top: 40px; }
+.consent_box > h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.consent_list { margin-top: 24px; }
+.consent_list > li { padding-left: 10px; position: relative; }
+.consent_list > li + li { margin-top: 8px; }
+.consent_list > li > p { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consent_notice_area { margin-top: 24px; padding-top: 24px; border-top: 1px solid #d7d7df; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.consent_notice_area > p { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+.consent_radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.consent_radio > input { width: 24px; height: 24px; margin: 0; padding: 0; background-color: #ffffff; border: 1px solid #c4c4d0; border-radius: 8px; position: relative; appearance: none; }
+.consent_radio > input:checked { background-color: #107af2; border-color: #107af2; }
+.consent_radio > input:checked::after { width: 10px; height: 10px; background-color: #ffffff; border-radius: 50%; position: absolute; top: 50%; left: 50%; content: ""; transform: translate(-50%, -50%); }
+.consent_radio > span { color: #161616; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+.apply_form {border-top:1px solid #242428;}
+.apply_form .form_body {border-bottom:0;}
+.apply_form .form_body .form_row { min-height: auto; padding: 12px 0; display: grid; grid-template-columns: 1fr; align-items: start; gap: 0; }
+.apply_form .form_body .form_row .form_label { margin-bottom: 12px; }
+.apply_form .form_body .form_row .form_field { width: 100%; }
+.apply_form .form_body .form_row_radio, .apply_form .form_body .form_row_textarea,
+.apply_form .form_body .form_row_textarea .form_field,
+.apply_form .form_body .form_row_calendar :deep(.consult_calendar),
+.apply_form .form_body .form_row_calendar :deep(.consult_time_picker) { width: 100%; max-width: 1000px; }
+.apply_form .form_body .form_row_textarea .form_field :deep(Textarea){resize:none;}
+.apply_form .form_body .form_row.col_02 { width: 100%; max-width:720px;  padding: 12px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));  gap: 20px; align-items: start; }
+.apply_form .form_body .form_row.col_02 .col_item { min-width: 0; }
+.apply_form .form_body .form_row.col_02 .col_item .form_label { margin-bottom: 12px; }
+.apply_form .form_body .form_row.col_02 .col_item .form_field { width: 100%; }
+.apply_form .form_field { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.apply_form .form_field_birth { flex-wrap: nowrap; }
+.apply_form .form_field_birth :deep(.select) { max-width:150px;flex: 1; min-width: 0; }
+.apply_form .form_field_open :deep(.input_wrap){max-width: 150px;}
+.apply_form .form_row_region :deep(.select){max-width:220px; flex: 1; min-width: 0; }
+.apply_form .form_field_experience { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+@media (min-width: 769px) {
+    .apply_form .form_field_experience :deep(.input_wrap) { width: auto !important; max-width: none; flex: 0 0 auto; }
+    .apply_form .form_field_experience :deep(.input_wrap .check) { min-height: 52px; padding: 13px 16px !important; display: inline-flex !important; align-items: center; gap: 8px; background-color: #ffffff; border: 1px solid #90909a; border-radius: 10px; box-sizing: border-box; cursor: pointer; position: relative; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]) { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label) { padding: 0 !important; display: inline-flex !important; align-items: center; gap: 4px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; white-space: nowrap; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::before) { content: "" !important; width: 20px !important; height: 20px !important; margin: 0 !important; background-color: #d9d9d9 !important; border: 0 !important; box-sizing: border-box !important; position: static !important; top: auto !important; left: auto !important; display: block !important; flex-shrink: 0; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::after) { content: none !important; display: none !important; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::before) { background-color: #107af2 !important; }
+    .apply_form .form_field_experience :deep(.input_wrap .check:has(input[type="checkbox"]:checked)) { border-color: #107af2; }
+}
+.apply_form .form_field_calendar :deep(.input_wrap){max-width:700px;}
+.form_label_note { margin-top: 4px; color: #67676f; font-size: 1.2rem; line-height: 1.2; }
+.apply_form .consult_manager_card { width: 100%; max-width: 740px; margin: 12px 0; padding: 40px; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 12px; display: flex; align-items: center; gap: 32px; box-sizing: border-box; }
+.apply_form .consult_manager_photo { width: 80px; height: 80px; margin: 0; background-color: #c4c4d0; border-radius: 50%; flex-shrink: 0; }
+.apply_form .consult_manager_body { min-width: 0; flex: 1; }
+.apply_form .consult_manager_name { margin: 0; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
+.apply_form .consult_manager_office { margin-top: 8px; display: flex; align-items: flex-start; gap: 4px; }
+.apply_form .consult_manager_icon { width: 16px; height: 16px; margin-top: 2px; background-color: #161616; border-radius: 2px; flex-shrink: 0; }
+.apply_form .consult_manager_addr { min-width: 0; }
+.apply_form .consult_manager_addr > .tit { margin: 0; color: #161616; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+.apply_form .consult_manager_addr > .addr { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+@media (max-width: 1024px) { 
+    .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
+    .store_card_row { grid-template-columns: repeat(3, 1fr); }
     .sec_band > .inner > .link_grid { flex-direction: column; }
     .sec_overlap .section_header h2 { font-size: 2.4rem; }
     .sec_stack > .dual_panel { flex-direction: column; }
@@ -2645,6 +3401,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 
     .sec_body { padding: 24px 0 40px; }
     .panel { padding: 60px 20px 80px; }
+    .panel.pt_64 { padding-top: 60px;}
     .panel_third_depth { padding-top: 32px; }
     .section_header, .sub_header { margin-bottom: 32px; }
     .section_header > .tit { margin-bottom: 12px; padding: 4px 12px; }
@@ -2915,9 +3672,49 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .icon_card_row:first-child .icon_card_list.type_02 > li > article { padding: 24px 0; }
     .icon_card_row:first-child .icon_card_list.type_02 > li:first-child > article:first-child { padding: 0 0 24px; }
     .icon_card_row .icon_card_list.type_02 > li > article { padding: 24px 0; border: 0; border-bottom: 1px solid #E5E5E9; border-radius: 0; }
-    
+
+    .store_list_wrap { margin-top: 60px; }
+    .tab_intro { margin-bottom: 60px; font-size: 1.8rem; line-height: 1.4; }
+    .store_count { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .store_count > strong { font-weight: 400; }
+    .store_search { padding: 30px 20px; }
+    .search_bottom_row { margin-top: 24px; padding-top: 24px; border-top: 1px solid #D7D7DF; flex-direction: column; gap: 50px; }
+    .search_group_input { width: 100%; }
+    .store_search_input { height: 52px; }
+    .youth_popover { width: calc(100vw - 40px); max-width: 335px; top: calc(100% + 8px); right: auto; left: -20px; transform: none; }
+    .chip_list { position: relative; }
+    .chip_youth_wrap { position: static; }
+    .store_list_bar { height: auto; margin-bottom: 16px; align-items: flex-end; gap: 12px; }
+    .store_bar_right { justify-content: flex-end; }
+    .sort_btn { height: 32px; padding: 0 10px; font-size: 1.3rem; }
+    .view_btn { width: 32px; height: 32px; }
+    .type_table_wrap.type2 { display: none; }
+    .store_accordion_list { margin: 0 -20px; display: block; }
+    .store_card_grid_wrap { gap: 8px; }
+    .store_card_row { grid-template-columns: 1fr; }
+    .detail_panel { padding: 16px; }
+    .store_card_detail_row { margin-top: 0; }
+    .store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open), .store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_btn) { border: 0; }
+    .store_accordion_list :deep(.board_type_toggle) { border-top: 1px solid #161616; }
+    .store_accordion_list :deep(.detail_card) { padding: 20px; border: 0; border-radius: 12px; }
+    .store_accordion_list :deep(dd.acc_panel > .acc_panel_inner > .acc_panel_cont) { padding: 30px 20px !important; background-color: #F8F8F8 !important; }
+    .store_accordion_list :deep(dd.acc_panel.acc_show) { border: 0; }
+    .accordion_badges { margin-top: 6px; }
     .sec_diagram header { margin-bottom: 32px; }
 
+
+    /* 상담 및 신청청 */
+    .consent_box { padding: 24px 20px; }
+    .consent_box > h3 { font-size: 2rem; line-height: 1.35; }
+    .consent_list { margin-top: 16px; }
+    .consent_list > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .consent_notice_area { margin-top: 16px; padding-top: 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .consent_notice_area > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .consent_radio > span { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .apply_form .form_field_experience :deep(.input_wrap) { flex: 1 1 100%; }
+    .apply_form .form_field_experience :deep(.check) { width: 100%; }
+
+    /* 우측 하단 sticky 메뉴 */
     .quick_menu { display: none; }
 }
 </style>
