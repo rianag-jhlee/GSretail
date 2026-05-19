@@ -16,8 +16,8 @@
             <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
 
             <!-- GS25 브랜드 소개 -->
-            <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 0">
-                <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg})` }">
+            <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
+                <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg2})` }">
                     <header>
                         <span class="tit">{{ brandIntro.badge }}</span>
                         <h3>{{ brandIntro.title }}</h3>
@@ -69,9 +69,9 @@
             <!-- //GS25 브랜드 소개 -->
 
             <!-- 차별화된 경쟁력 -->
-            <div class="tab_page" v-if="activeD1 === 0 && activeD2 === 1">
+            <div class="panel" v-if="activeD1 === 0 && activeD2 === 1">
                 <section class="sec_overlap">
-                    <header class="section_header ac">
+                    <header class="section_header ac no_desc">
                         <h2 v-html="competitivePanel.title"></h2>
                     </header>
                     <ul class="overlap_grid">
@@ -192,7 +192,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <Buttons v-if="item.linkText" tag="a" href="#none" btn-class="btn_mid fill btn_icon after primary">{{ item.linkText }}</Buttons>
+                            <Buttons v-if="item.linkText" tag="a" href="#none" btn-class="btn_mid fill btn_icon after primary_green">{{ item.linkText }}</Buttons>
                         </article>
                     </div>
                     <div class="sub_block">
@@ -263,7 +263,7 @@
             <!-- //차별화된 경쟁력 -->
 
             <!-- 편의점 창업 이해 -->
-            <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 2">
+            <div class="panel" v-show="activeD1 === 0 && activeD2 === 2">
                 <section class="sec_diagram">
                     <header class="section_header ac">
                         <h2>{{ convenienceDefinePanel.title }}</h2>
@@ -296,15 +296,480 @@
                         </article>
                     </div>
                 </section>
+                <!-- 프랜차이즈란 -->
+                <section class="sec_franchise_define" >
+                    <div class="inner">
+                        <header class="section_header ac">
+                            <span v-show="isMobileView" class="tit">{{ franchiseDefinePanel.badge }}</span>
+                            <h2>{{ franchiseDefinePanel.title }}</h2>
+                            <p>{{ franchiseDefinePanel.desc }}</p>
+                        </header>
+                        <article class="franchise_define_card">
+                            <header class="sub_header ac">
+
+                                <span class="tit">{{ franchiseDefineCard.chip }}</span>
+                                <h3>{{ franchiseDefineCard.title }}</h3>
+                                <p>{{ franchiseDefineCard.desc }}</p>
+                            </header>
+                            <div class="franchise_formula" role="group" aria-label="프랜차이즈 성공 공식">
+                                <div>
+                                    <span aria-hidden="true"></span>
+                                    <p>
+                                        <strong v-html="franchiseFormula.franchisee.title"></strong>
+                                        <span v-html="franchiseFormula.franchisee.label"></span>
+                                    </p>
+                                </div>
+                                <span aria-hidden="true">+</span>
+                                <div>
+                                    <span aria-hidden="true"></span>
+                                    <p>
+                                        <strong v-html="franchiseFormula.franchisor.title"></strong>
+                                        <span v-html="franchiseFormula.franchisor.label"></span>
+                                    </p>
+                                </div>
+                                <span aria-hidden="true">=</span>
+                                <div>
+                                    <span aria-hidden="true"></span>
+                                    <p>
+                                        <strong>{{ franchiseFormula.result.title }}</strong>
+                                        <span>{{ franchiseFormula.result.label }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="franchise_role_grid">
+                                <article v-for="(column, cIdx) in franchiseRoleColumns" :key="cIdx">
+                                    <header>
+                                        <span aria-hidden="true"></span>
+                                        <div>
+                                            <h4>{{ column.title }}</h4>
+                                            <p v-html="column.label"></p>
+                                        </div>
+                                    </header>
+                                    <ul>
+                                        <li v-for="(line, lIdx) in column.lines" :key="lIdx">
+                                            <span aria-hidden="true"></span>
+                                            <strong>{{ line }}</strong>
+                                        </li>
+                                    </ul>
+                                </article>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+                <!-- 상담 받고 싶은 지역 -->
+                <section class="sec_region_counsel" >
+                    <header class="section_header ac">
+                        <h2>{{ regionCounselPanel.title }}</h2>
+                        <p>{{ regionCounselPanel.lead }}</p>
+                    </header>
+                    <Tabs
+                        :tab-items="regionCounselTabs"
+                        tab-class="type_02"
+                        v-model="activeRegionTab"
+                        :tab-slide="true"
+                    />
+                    <!-- 지역 선택: 담당자 목록 닫기 시 region_counsel_panel. 지도 API 연동 후 onRegionCounselMapStubClick 제거 -->
+                    <div class="region_counsel_board" :class="{ is_staff: regionCounselBoardIsStaff }">
+                        <div
+                            class="region_counsel_map"
+                            role="region"
+                            aria-label="지도 연동 예정 영역"
+                            :tabindex="regionCounselBoardIsStaff ? -1 : 0"
+                            @click="onRegionCounselMapStubClick"
+                            @keydown.enter.prevent="onRegionCounselMapStubClick"
+                            @keydown.space.prevent="onRegionCounselMapStubClick"
+                        ></div>
+                        <div class="region_counsel_side">
+                            <aside v-show="!regionCounselBoardIsStaff" class="region_counsel_panel">
+                                <span class="icon"></span>
+                                <p class="tit">{{ regionCounselEmpty.title }}</p>
+                                <p class="desc" v-html="regionCounselEmpty.desc"></p>
+                                <p class="hint">{{ regionCounselEmpty.hint }}</p>
+                            </aside>
+                            <div v-show="regionCounselBoardIsStaff" class="region_counsel_staff_body">
+                                <header>
+                                    <span class="ico_pin" aria-hidden="true"></span>
+                                    <h3>{{ regionCounselStaff.regionName }}</h3>
+                                    <span class="badge">{{ regionCounselStaff.countLabel }}</span>
+                                    <button type="button" class="btn_close" aria-label="닫기" @click="closeRegionCounselStaff">닫기</button>
+                                </header>
+                                <ul>
+                                    <li v-for="(manager, mi) in regionCounselStaff.managers" :key="mi">
+                                        <article>
+                                            <span class="photo" aria-hidden="true"></span>
+                                            <div>
+                                                <p class="name">{{ manager.name }}</p>
+                                                <p class="area">{{ manager.area }}</p>
+                                                <p class="phone">
+                                                    <span class="ico_phone" aria-hidden="true"></span>
+                                                    <a :href="`tel:${manager.phoneDial}`">{{ manager.phone }}</a>
+                                                </p>
+                                            </div>
+                                        </article>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
             <!-- //편의점 창업 이해 -->
-            <div class="tab_page" v-show="activeD1 === 1"></div>
+            <!-- FAQ -->
+            <div class="panel" v-show="activeD1 === 0 && activeD2 === 3">
+                <section class="sec_startup_faq">
+                    <header class="section_header ac no_desc">
+                        <h2>{{ startupFaqPanel.title }}</h2>
+                    </header>
+                    <Accordion class="type_faq faq_acc">
+                        <AccordionItem
+                            v-for="(item, idx) in startupFaqItems"
+                            :key="idx"
+                            :item-key="`startup-faq-${idx}`"
+                        >
+                            <template #title>{{ item.question }}</template>
+                            <p>{{ item.answer || startupFaqDummyAnswer }}</p>
+                        </AccordionItem>
+                    </Accordion>
+                </section>
+                <section class="sec_gs25_faq">
+                    <header class="section_header ac no_desc">
+                        <h2>{{ gs25FaqPanel.title }}</h2>
+                    </header>
+                    <Tabs
+                        :tab-items="gs25FaqTabs"
+                        tab-class="type_01"
+                        v-model="activeGs25FaqTab"
+                        :tab-slide="true"
+                    />
+                    <Accordion class="type_faq faq_acc faq_acc_badge">
+                        <AccordionItem
+                            v-for="(item, idx) in paginatedGs25FaqItems"
+                            :key="`${activeGs25FaqTab}-${activeGs25FaqPage}-${idx}-${item.question}`"
+                            :item-key="`gs25-faq-${activeGs25FaqTab}-${activeGs25FaqPage}-${idx}`"
+                        >
+                            <template #title>
+                                <span class="badge">{{ item.category }}</span>
+                                <span class="txt">{{ item.question }}</span>
+                            </template>
+                            <p v-if="item.answer">{{ item.answer }}</p>
+                            <p v-else>{{ startupFaqDummyAnswer }}</p>
+                            <div v-if="item.answerTable" class="policy_wrap">
+                                <p>* 타입별/기간별 개월 수</p>
+                                <table>
+                                    <colgroup>
+                                        <col class="col_label" />
+                                        <col class="col_data" />
+                                        <col class="col_data" />
+                                        <col class="col_data" />
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th v-for="col in item.answerTable.headers" :key="col" scope="col">{{ col }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="row in item.answerTable.rows" :key="row.label">
+                                            <th scope="row">{{ row.label }}</th>
+                                            <td v-for="(cell, ci) in row.cells" :key="ci">{{ cell }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </AccordionItem>
+                    </Accordion>
+                    <Pagination
+                        v-if="gs25FaqTotalPages > 1"
+                        v-model="activeGs25FaqPage"
+                        :total-pages="gs25FaqTotalPages"
+                        :visible-pages="gs25FaqTotalPages"
+                        :show-ellipsis="false"
+                    />
+                </section>
+            </div>
+            <!-- //FAQ -->
+            <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
+            <!-- 창업 절차 -->
+            <div class="panel" v-show="activeD1 === 1 && activeD2 === 0">
+                <section class="sec_startup_process">
+                    <header class="section_header ac txt_blue">
+                        <h2>상담 신청부터 개점까지, <br />약 30일이면 나만의 GS25를 오픈할 수 있어요!</h2>
+                    </header>
+                    <ol class="process_timeline">
+                        <li
+                            v-for="(step, idx) in startupProcessSteps"
+                            :key="idx"
+                            :data-theme="step.theme"
+                        >
+                            <div class="step_meta">
+                                <span class="day">{{ step.dayLabel }}</span>
+                                <div class="step_track">
+                                    <span class="num" aria-hidden="true">{{ step.num }}</span>
+                                    <span
+                                        v-if="idx < startupProcessSteps.length - 1"
+                                        class="step_line"
+                                        aria-hidden="true"
+                                    ></span>
+                                </div>
+                            </div>
+                            <article>
+                                <span class="icon" aria-hidden="true"></span>
+                                <div>
+                                    <p v-if="step.lead" class="lead">{{ step.lead }}</p>
+                                    <h3>{{ step.title }}</h3>
+                                    <p class="desc">{{ step.desc }}</p>
+                                    <button
+                                        v-if="hasProcessMore(step)"
+                                        href="#none"
+                                        class="link_more"
+                                        :class="{ is_open: openProcessMoreIdx === idx }"
+                                        :aria-expanded="openProcessMoreIdx === idx ? 'true' : 'false'"
+                                        @click.prevent="toggleProcessMore(idx)"
+                                    >{{ openProcessMoreIdx === idx ? "접기" : "더 알아보기" }}</button>
+                                    <div
+                                        v-if="getProcessMoreList(step).length"
+                                        :ref="(el) => setProcessMoreRef(el, idx)"
+                                        class="process_more acc_panel"
+                                    >
+                                        <div class="acc_panel_inner">
+                                            <div class="acc_panel_cont">
+                                                <ul class="list_dotted">
+                                                    <li v-for="(text, mi) in getProcessMoreList(step)" :key="mi">{{ text }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                    </ol>
+                </section>
+            </div>
+            <!-- //창업 절차 -->
+            <!-- 가맹타입 -->
+            <div class="panel" v-show="activeD1 === 1 && activeD2 === 1">
+                <section class="sec_franchise_type">
+                    <header class="section_header ac">
+                        <h2>내 자금과 상황에 딱 맞게! <br />
+                            GS25만의 3가지 맞춤형 가맹 타입을 만나보세요</h2>
+                    </header>
+                    <ul class="franchise_type_list">
+                        <li
+                            v-for="group in franchiseTypeGroups"
+                            :key="group.key"
+                            :class="group.themeClass"
+                        >
+                            <article>
+                                <header>
+                                    <span class="icon" aria-hidden="true"></span>
+                                    <div>
+                                        <h3>{{ group.title }}</h3>
+                                        <p>{{ group.desc }}</p>
+                                    </div>
+                                </header>
+                                <div class="franchise_type_body">
+                                    <div
+                                        v-for="(card, ci) in group.cards"
+                                        :key="ci"
+                                        class="type_card"
+                                        :class="card.cardClass"
+                                    >
+                                        <span class="badge">{{ card.badge }}</span>
+                                        <span class="card_icon" aria-hidden="true"></span>
+                                        <strong>{{ card.name }}</strong>
+                                        <p>{{ card.desc }}</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                    </ul>
+                </section>
+                <section class="sec_franchise_compare" data-figma-node="739:15141">
+                    <header class="section_header ac">
+                        <h2>한눈에 비교하고, 나에게 유리한 타입을 찾아보세요!</h2>
+                    </header>
+                    <div class="franchise_compare_wrap">
+                        <table class="franchise_compare_table">
+                            <colgroup>
+                                <col class="col_group" />
+                                <col class="col_label" />
+                                <col class="col_gs" />
+                                <col class="col_gs" />
+                                <col class="col_gs" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" scope="colgroup"><strong>구분</strong></th>
+                                    <td scope="col" class="is_gs1">
+                                        <strong>GS1</strong> 
+                                        <span>직접 임차하고, 수익 배분율이 가장 높아요</span>
+                                    </td>
+                                    <td scope="col" class="is_gs2">
+                                        <strong>GS2</strong>
+                                        <span>본사와 임차비용 공동 부담해요</span>
+                                    </td>
+                                    <td scope="col" class="is_gs3">
+                                        <strong>GS3</strong>
+                                        <span>임차비용 부담 없이 시작해요</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th rowspan="7" scope="rowgroup">투자 금액</th>
+                                    <th scope="row">상품 준비금</th>
+                                    <td colspan="3">1,400만원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">소모품 준비금</th>
+                                    <td colspan="3">100만원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">가맹비</th>
+                                    <td colspan="3">770만원(VAT포함)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">공통 투자금액 (상품+소모품+가맹비)</th>
+                                    <td colspan="3"><strong>2,270만원</strong></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">점포 임차비용</th>
+                                    <td>경영주 투자</td>
+                                    <td>본부 투자</td>
+                                    <td>본부 지원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">본부 보증금</th>
+                                    <td>-</td>
+                                    <td><span>전대보증금</span>최소 3,000만원</td>
+                                    <td><span>예치보증금</span>최소 3,000만원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">시설/인테리어</th>
+                                    <td>본부 지원<br /><span>(※ 수익추구 특약: 경영주 투자)</span></td>
+                                    <td>본부 지원</td>
+                                    <td>본부 지원</td>
+                                </tr>
+                                <tr class="row_total">
+                                    <th colspan="2" scope="row"><strong>총 투자금액</strong></th>
+                                    <td><strong class="txt_blue">점포 임차비용 + 공통 투자비 2,270만원</strong></td>
+                                    <td><strong class="txt_blue">최소 5,270만원<br /></strong><span>(전대보증금 + 공통 투자비)</span></td>
+                                    <td><strong class="txt_blue">최소 5,270만원<br /></strong><span>(예치보증금 + 공통 투자비)</span></td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="6" scope="rowgroup">계약<br class="m_br">조건</th>
+                                    <th scope="row"><strong>최종 경영주 수익 배분율</strong></th>
+                                    <td><strong class="txt_blue txt_emphasis">최대 71%</strong></td>
+                                    <td><strong class="txt_blue txt_emphasis">최대 65%</strong></td>
+                                    <td><strong class="txt_blue txt_emphasis">최대 46%</strong></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">경영주 수익 배분율</th>
+                                    <td>66%</td>
+                                    <td>60%</td>
+                                    <td>41%</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">24시간 영업장려금</th>
+                                    <td>5%</td>
+                                    <td>5%</td>
+                                    <td>5%</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">계약기간</th>
+                                    <td>5년</td>
+                                    <td>4년</td>
+                                    <td>4년</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">담보 설정</th>
+                                    <td>5,000만원</td>
+                                    <td>2,000만원</td>
+                                    <td>2,000만원</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">각종지원제도</th>
+                                    <td colspan="3">상생 인센티브 / 상품 판매·발주 장려금 / 미오출 보상금</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">수익추구특약</th>
+                                    <td><strong>최대 81%</strong><br /><span>(※ GS1 수익배분율 71% + 10%)</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="list_note">
+                        <li>
+                            <p>* 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년</p>
+                        </li>
+                        <li>
+                            <p>* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다</p>
+                        </li>
+                        <li>
+                            <p class="txt_link">* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href="#">신선강화점 자세히 알아보기</a>)</p>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <!-- //가맹타입 -->
+            <!-- 창업 혜택 -->
+            <div class="panel" v-show="activeD1 === 1 && activeD2 === 2">
+                <div class="wrap_tabs_type04">
+                    <Tabs
+                        v-model="activeD3"
+                        :tab-items="depth3TabsBenefit"
+                        tab-class="type_04"
+                        :tab-slide="true"
+                    />
+                </div>
+                <div v-show="activeD3 === 0" class="panel_third_depth" aria-label="탄탄한 점포">
+                    <section class="sec_benefit_store" data-figma-node="739:15327">
+                        <header class="section_header ac">
+                            <h2>{{ benefitStorePanel.title }}</h2>
+                            <p>{{ benefitStorePanel.desc }}</p>
+                        </header>
+                        <ul class="benefit_store_list">
+                            <li v-for="(item, i) in benefitStoreItems" :key="i">
+                                <article>
+                                    <span class="icon" aria-hidden="true"></span>
+                                    <div>
+                                        <dl v-if="item.lead">
+                                            <dt class="lead">{{ item.lead }}</dt>
+                                        </dl>
+                                        <dl>
+                                            <dt>{{ item.title }}</dt>
+                                            <dd>{{ item.desc }}</dd>
+                                        </dl>
+                                        <dl v-if="item.notes?.length" class="note_list">
+                                            <dt>유의사항</dt>
+                                            <dd v-for="(note, ni) in item.notes" :key="ni">* {{ note.label }}: {{ note.text }}</dd>
+                                        </dl>
+                                        <Buttons
+                                            v-if="item.link"
+                                            tag="a"
+                                            :href="item.link.url"
+                                            btn-class="btn_mid primary fill btn_icon after"
+                                        >{{ item.link.text }}</Buttons>
+                                        <button
+                                            v-else-if="item.hasMore"
+                                            type="button"
+                                            class="btn_more"
+                                            aria-label="상세 보기"
+                                        ></button>
+                                    </div>
+                                </article>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+                <div v-show="activeD3 === 1" class="panel_third_depth" aria-label="든든한 점포 운영"></div>
+                <div v-show="activeD3 === 2" class="panel_third_depth" aria-label="편안한 경영주 생활"></div>
+            </div>
+            <!-- //창업 혜택 -->
 
-            <div class="tab_page" v-show="activeD1 === 2"></div>
-
-            <div class="tab_page" v-show="activeD1 === 3"></div>
-
-            <div class="tab_page" v-show="activeD1 === 4"></div>
+          
+         
         </div>
         <ul
             ref="quickMenuRef"
@@ -316,7 +781,7 @@
             <li><button type="button">고객센터</button></li>
         </ul>
     </div>
-
+ 
 </template>
 
 <script setup>
@@ -328,9 +793,13 @@ import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
 import NumberedInfoList from "@/components/NumberedInfoList.vue";
-import imgBg from "@/assets/images/dummy/gsrst02010101_01.jpg";
-import imgStoreOpen from "@/assets/images/dummy/gsrst02010101_02.png";
-import imgProduct01 from "@/assets/images/dummy/gsrst02010101_p_01.png";
+import Accordion from "@/components/Accordion.vue";
+import AccordionItem from "@/components/AccordionItem.vue";
+import Pagination from "@/components/Pagination.vue";
+import imgBg from "@/assets/images/dummy/gsrst02010101_01.png";
+import imgBg2 from "@/assets/images/dummy/gsrst02010101_02.jpg";
+import imgStoreOpen from "@/assets/images/dummy/gsrst02010101_03.png";
+import imgProduct01 from "@/assets/images/dummy/gsrst02010101_p_01.png"; 
 import imgProduct02 from "@/assets/images/dummy/gsrst02010101_p_02.png";
 import imgProduct03 from "@/assets/images/dummy/gsrst02010101_p_03.png";
 import imgProduct04 from "@/assets/images/dummy/gsrst02010101_p_04.png";
@@ -351,6 +820,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const activeD1 = ref(0);
 const activeD2 = ref(0);
+const activeD3 = ref(0);
 
 const mqMobile = window.matchMedia("(max-width: 768px)");
 const isMobileView = ref(mqMobile.matches);
@@ -398,6 +868,57 @@ const depth2Tabs = [
     { item: "차별화된 경쟁력" },
     { item: "편의점 창업 이해" },
     { item: "FAQ" },
+];
+
+/** activeD1 === 1 (창업 준비하기) 2depth */
+const depth2TabsPrepare = [
+    { item: "창업 절차" },
+    { item: "가맹 타입" },
+    { item: "창업 혜택" },
+];
+
+/** activeD1 === 1, activeD2 === 2 (창업 혜택) 3depth */
+const benefitStorePanel = {
+    title: "대상별 맞춤 창업 혜택을 드립니다.",
+    desc: "창업 준비 전 꼭 확인해보세요~!",
+};
+
+/** Figma 739:15327 — 탄탄한 점포 */
+const benefitStoreItems = [
+    {
+        title: "우수 근무자 할인 제도",
+        desc: "GS25에서 근무하는 우수 근무자 창업 시 본부 보증금 및 가맹비 일부 할인",
+        hasMore: false,
+    },
+    {
+        title: "청년 창업 제도",
+        desc: "투자비가 부족한 20대 청년들을 위한 본부 보증금 유예 및 창업활성화 지원금 300만원 제공",
+        notes: [
+            { label: "대상", text: "1997년~2007년생 (2026년 기준)" },
+            { label: "안내", text: "적용 가능 점포는 담당자에게 별도 문의" },
+        ],
+        link: {
+            text: "청년창업 혜택으로 오픈한 경영주님 성공기 보러가기",
+            url: "#none",
+        },
+    },
+    {
+        title: "다자녀 할인 제도",
+        desc: "만 18세 미만 자녀 2인 이상인 경우 가맹비 일부 할인",
+        hasMore: false,
+    },
+    {
+        lead: "각 100만 팔로워·구독자 돌파",
+        title: "다점포 할인 제도",
+        desc: "GS25 경영주님이 추가 점포 창업 시 가맹비 일부 할인",
+        hasMore: false,
+    },
+];
+
+const depth3TabsBenefit = [
+    { item: "탄탄한 점포" },
+    { item: "든든한 점포 운영" },
+    { item: "편안한 경영주 생활" },
 ];
 
 const brandIntro = {
@@ -481,6 +1002,257 @@ const brandSolutionCards = [
         url: "#none",
     },
 ];
+
+/** Figma 725:14786 — 창업 절차 타임라인 */
+const startupProcessSteps = [
+    {
+        theme: "start",
+        dayLabel: "Start",
+        num: 1,
+        lead: "여정의 시작! 가볍게 문 두드려 보세요.",
+        title: "창업 설명회 & 상담 신청",
+        desc: "창업 컨설턴트와 1:1 맞춤상담을 받으실 수 있어요",
+        moreLink: true,
+        moreList: ["'창업 상담신청' 메뉴에서 지역별 담당자와 연락처를 바로 확인할 수 있어요."],
+    },
+    {
+        theme: "d30",
+        dayLabel: "D-30",
+        num: 2,
+        lead: "함께 할 준비가 되셨군요!",
+        title: "예비경영주 사전 인터뷰",
+        desc: "본사 리더들과 사전 면담을 통해 GS25 창업에 대한 이해도를 확인하고 편의점 운영에 대한 궁금증을 해결해요.",
+        moreLink: false,
+    },
+    {
+        theme: "d29",
+        dayLabel: "D-29",
+        num: 3,
+        lead: "내 점포를 함께 찾아볼까요?",
+        title: "점포소개 & 점포 상권 분석",
+        desc: "희망지역과 투자조건에 맞는 최적의 자리를 찾아드려요.",
+        moreLink: false,
+    },
+    {
+        theme: "d28",
+        dayLabel: "D-28",
+        num: 4,
+        lead: "투명하게 모든 정보를 공개합니다.",
+        title: "계약 준비 & 정보 공개서 교부",
+        desc: "점포가 선정되었다면, 가맹본부에 대한 모든 정보를 미리 확인하실 수 있어요.",
+        moreLink: true,
+        moreList: ["법률에 따라 정보공개서 서명 후 14일이 지나야 계약이 가능해요."],
+    },
+    {
+        theme: "d14",
+        dayLabel: "D-14",
+        num: 5,
+        lead: "공식적인 파트너가 되는 순간!",
+        title: "계약 체결 & 투자금 납입",
+        desc: "가맹계약 담당자와 본 계약을 진행하고, 신규점은 착공 준비에 들어가요",
+        moreLink: true,
+        moreList: ["계약을 위해 본인 명의 휴대폰, 신분증, 투자비 등을 사전에 준비합니다."],
+    },
+    {
+        theme: "d14_7",
+        dayLabel: "D-14~7",
+        num: 6,
+        lead: "GS25의 노하우, 여기서 다 배워요!",
+        title: "신규 경영주 교육",
+        desc: "총 7일(영업일 기준) 코스로 온라인 강의부터 매장 실습까지, 점포 운영에 필요한 모든 것을 배워요",
+        moreLink: true,
+        moreList: ["전국의 교육장에서 교육 전문가와 함께 수업이 진행돼요"],
+    },
+    {
+        theme: "d11",
+        dayLabel: "D-11",
+        num: 7,
+        lead: "내 점포가 만들어지고 있어요!",
+        title: "신규 점포 공사 & 인허가",
+        desc: "평균 9일이면 공사 끝! 각 분야 전문가가 함께 해요.",
+        moreLink: true,
+        moreList: [
+            "시설 공사부터 인테리어까지 전문 담당자가 지원합니다.",
+            "사업자 등록증, 담배 소매인 등 점포 운영에 필요한 인허가도 함께 진행해요",
+        ],
+    },
+    {
+        theme: "d2_1",
+        dayLabel: "D-2~1",
+        num: 8,
+        lead: "거의 다 왔어요, 마지막 점검!",
+        title: "진열 & 최종 검수",
+        desc: "경영주님이 검수한 상품을 전문 진열팀이 예쁘게 배치해요",
+        moreLink: true,
+        moreList: ["개점 하루 전 경영주님의 최종 검수가 진행됩니다."],
+    },
+    {
+        theme: "dday",
+        dayLabel: "D-Day",
+        num: 9,
+        lead: "",
+        title: "드디어 개점! 축하합니다!",
+        desc: "이제 GS25 경영주님으로 새로운 시작입니다. 앞으로도 GS25가 늘 곁에서 함께합니다!",
+        moreLink: false,
+    },
+];
+
+/** Figma 739:15072 — 가맹 타입 비교 */
+const franchiseTypeGroups = [
+    {
+        key: "profit",
+        themeClass: "is_profit",
+        title: "수익 추구형",
+        desc: "보유한 자리로 높은 수익 배분을 누려보세요.",
+        cards: [
+            {
+                badge: "GS 1 Type",
+                cardClass: "is_gs1",
+                name: "일반가맹",
+                desc: "경영주가 직접 임차하여 운영",
+            },
+        ],
+    },
+    {
+        key: "stable",
+        themeClass: "is_stable",
+        title: "안정 추구형",
+        desc: "점포가 없어도 OK! 본부 임차로 안정적으로 시작해보세요",
+        cards: [
+            {
+                badge: "GS 2 Type",
+                cardClass: "is_gs2",
+                name: "전대가맹",
+                desc: "본사와 임차비용 공동 부담",
+            },
+            {
+                badge: "GS 3 Type",
+                cardClass: "is_gs3",
+                name: "위탁가맹",
+                desc: "임차비용 부담 없이 시작",
+            },
+        ],
+    },
+];
+
+/** moreLink: true(버튼만) | moreList(펼침 목록) — 배열/문자열을 moreLink에 넣은 경우도 호환 */
+function getProcessMoreList(step) {
+    if (step.moreList?.length) return step.moreList;
+    if (Array.isArray(step.moreLink)) return step.moreLink;
+    if (typeof step.moreLink === "string") return [step.moreLink];
+    return [];
+}
+
+function hasProcessMore(step) {
+    return step.moreLink === true || getProcessMoreList(step).length > 0;
+}
+
+const openProcessMoreIdx = ref(null);
+const processMoreRefs = {};
+const processMoreTokens = {};
+
+function setProcessMoreRef(el, idx) {
+    if (el) processMoreRefs[idx] = el;
+    else delete processMoreRefs[idx];
+}
+
+function nextProcessMoreToken(idx) {
+    processMoreTokens[idx] = (processMoreTokens[idx] || 0) + 1;
+    return processMoreTokens[idx];
+}
+
+function expandProcessMore(el, myToken, idx) {
+    if (el.classList.contains("acc_show") && el.style.height === "auto") return;
+
+    el.classList.add("acc_animating", "acc_show");
+    el.style.height = "auto";
+    const heightPx = `${el.scrollHeight}px`;
+    el.style.height = "0px";
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            if (myToken !== processMoreTokens[idx]) return;
+            el.style.height = heightPx;
+        });
+    });
+
+    const onEnd = (e) => {
+        if (e.target !== el || e.propertyName !== "height") return;
+        if (myToken !== processMoreTokens[idx]) {
+            if (openProcessMoreIdx.value !== idx) {
+                el.classList.remove("acc_show", "acc_animating");
+                el.style.height = "";
+            }
+            return;
+        }
+        el.style.height = "auto";
+        el.classList.remove("acc_animating");
+    };
+    el.addEventListener("transitionend", onEnd, { once: true });
+}
+
+function collapseProcessMore(el, myToken, idx) {
+    if (!el.classList.contains("acc_show")) return;
+
+    el.classList.add("acc_animating");
+    const h = el.scrollHeight;
+    if (h === 0) {
+        el.classList.remove("acc_show", "acc_animating");
+        el.style.height = "";
+        return;
+    }
+    el.style.height = `${h}px`;
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            if (myToken !== processMoreTokens[idx]) return;
+            el.style.height = "0px";
+        });
+    });
+
+    const onEnd = (e) => {
+        if (e.target !== el || e.propertyName !== "height") return;
+        if (myToken !== processMoreTokens[idx]) {
+            if (openProcessMoreIdx.value !== idx) {
+                el.classList.remove("acc_show", "acc_animating");
+                el.style.height = "";
+            }
+            return;
+        }
+        el.classList.remove("acc_show", "acc_animating");
+        el.style.height = "";
+    };
+    el.addEventListener("transitionend", onEnd, { once: true });
+}
+
+function toggleProcessMore(idx) {
+    const isOpen = openProcessMoreIdx.value === idx;
+    const el = processMoreRefs[idx];
+
+    if (isOpen) {
+        openProcessMoreIdx.value = null;
+        if (!el) return;
+        const myToken = nextProcessMoreToken(idx);
+        nextTick(() => collapseProcessMore(el, myToken, idx));
+        return;
+    }
+
+    const prevIdx = openProcessMoreIdx.value;
+    openProcessMoreIdx.value = idx;
+
+    if (prevIdx !== null && prevIdx !== idx) {
+        const prevEl = processMoreRefs[prevIdx];
+        if (prevEl) {
+            collapseProcessMore(prevEl, nextProcessMoreToken(prevIdx), prevIdx);
+        }
+    }
+
+    nextTick(() => {
+        const panel = processMoreRefs[idx];
+        if (!panel) return;
+        expandProcessMore(panel, nextProcessMoreToken(idx), idx);
+    });
+}
 
 const competitivePanel = {
     title: "수익성 중심 점포 오픈부터 스마트한 시스템과 밀착 지원까지<br /><span class='txt_blue'>1등 브랜드로 창업을 시작하세요.</span>",
@@ -696,6 +1468,344 @@ const convenienceEvolutionStages = [
     },
 ];
 
+/**  프랜차이즈란 */
+const franchiseDefinePanel = {
+    badge:"점포개발",
+    title: "프랜차이즈란?",
+    desc: "쉽게 말해, 본부와 가맹점이 서로 힘을 합쳐 함께 성장하는 파트너십이에요. 혼자가 아니라 함께이기 때문에 더 든든합니다.",
+};
+
+const franchiseDefineCard = {
+    chip: "GS25 Franchise",
+    title: "프랜차이즈의 성공",
+    desc: "가맹본부와 가맹점이 함께 만드는 상생의 파트너십",
+};
+
+const franchiseFormula = {
+    franchisee: { title: "성실한 운영", label: "가맹점 (Franchisee)" },
+    franchisor: { title: "체계적 지원", label: "가맹본부 (Franchisor)" },
+    result: { title: "함께 성장", label: "GS25 Franchise" },
+};
+
+/** Figma 716:14559 — 역할 2열 카드 */
+const franchiseRoleColumns = [
+    {
+        title: "점포 운영",
+        label: "가맹점<br class='m_br' />(Franchisee)",
+        lines: [
+            "내 가게를 책임감 있게 운영해요",
+            "고객에게 친절한 점포를 만들어요",
+            "GS25 브랜드 가치를 함께 지켜요",
+            "상품 관리와 진열을 신경 써요",
+        ],
+    },
+    {
+        title: "운영 지원",
+        label: "가맹본부<br class='m_br' />(Franchisor)",
+        lines: [
+            "성공 창업을 위한 전략을 세워요",
+            "교육과 노하우를 아낌없이 전해요",
+            "설비 설치와 상품 공급을 책임져요",
+            "매출 올리는 마케팅을 지원해요",
+        ],
+    },
+];
+
+/** Figma 725:14684 — 창업 FAQ */
+const startupFaqPanel = {
+    title: "창업 FAQ TOP 5",
+};
+const startupFaqDummyAnswer =
+    "답변 내용이 들어오는 부분입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다.";
+const startupFaqItems = [
+    {
+        question: "편의점 자리는 직접 알아봐야 하나요?",
+        answer:
+            "직접 알아보시는 경우도 있고, 회사가 추천해 드리기도 해요!\n가맹 희망자분이 개점 희망하는 후보지가 있는 경우 점포개발 담당자를 통해 검토가 가능합니다.\n희망하시는 위치가 없는 경우 경영주님의 희망 조건에 따라 점포를 추천해드립니다.",
+    },
+    {
+        question: "편의점 운영해본 경험이 없는데, 창업이 가능할까요?",
+        answer:
+            "물론이죠! 점포 오픈 전, 점포 운영 전반에 대한 이론 및 실습 교육을 체계적으로 진행하여 안정적인 운영 기반을 마련해 드립니다.\n오픈 이후에도 개점 담당 직원이 일정 기간 점포에 동행 근무하며 초기 운영 적응을 지원해 드리므로, 신규 경영주님도 안심하고 점포를 운영하실 수 있어요.\n 또한, 본사 영업 전문가(OFC)가 정기적으로 점포를 방문하여 매출 향상, 운영 개선 등 전반적인 점포 운영을 지속적으로 지원하고 있습니다.",
+    },
+    {
+        question: "점포 유형에 신규점과 기존점 차이는 무엇인가요?",
+        answer:
+            "신규점은 현재 GS25 매장이 없는 곳에서 새로 오픈하여 운영하는 점포를 의미해요.\n기존점은 기존 GS25 매장을 새로운 경영주님께서 인수하여 운영하는 매장을 의미합니다.",
+    },
+    {
+        question: "24시간 영업은 필수인가요?",
+        answer:
+            "계약을 맺기 전에는 점포 상황에 따라 영업시간을 서로 협의할 수 있어요.\n다만, 오픈 후부터는 최초 계약 체결시 합의된 영업 시간은 준수해 주셔야 합니다.\n또한 계약 기간 중이라도, 부득이한 사정이 있거나 심야 시간대 매출이 너무 적어 손해가 계속되는 경우에는 경영주님이 회사에 요청하고,\n회사가 동의하면 24시간 운영을 하지 않을 수도 있습니다.\n단, 24시간 운영을 하지 않는 경우에는 24시간 운영 점포에 지급되는 장려금(지원금)은 받을 수 없습니다.",
+    },
+    {
+        question: "근무자 채용은 직접 해야하나요?",
+        answer:
+            "가맹점은 경영주님이 직접 운영하는 독립된 사업장입니다.\n따라서 점포 운영에 대한 권한과 책임은 경영주님께 있습니다.\n직원 채용, 근무 스케줄 관리, 급여 지급 등도 모두 경영주님의 역할입니다.\n다만, 채용을 쉽고 빠르게 할 수 있도록 알바몬d 사이트를 지원해드리고 있습니다. 해당 비용은 본부에서 부담하고 있으며 무료로 이용 가능합니다.",
+    }
+    
+];
+
+/** Figma 725:14690 — GS25 답변 */
+const GS25_FAQ_PAGE_SIZE = 6;
+const activeGs25FaqTab = ref(0);
+const activeGs25FaqPage = ref(1);
+const gs25FaqTabFilters = [null, "가맹조건", "창업문의", "운영문의", "폐점,계약해지"];
+
+const gs25FaqPanel = {
+    title: "편의점 창업에 대한 모든 궁금증, GS25가 명쾌하게 답변해 드립니다.",
+};
+const gs25FaqTabs = [
+    { item: "전체" },
+    { item: "가맹조건" },
+    { item: "창업문의" },
+    { item: "운영문의" },
+    { item: "폐점,계약해지" },
+];
+const gs25FaqItems = [
+    {
+        category: "가맹조건",
+        question: "담보는 무엇인가요?",
+        answer: "GS25는 가맹계약에 따라 점포에 상품을 먼저 공급해 드리고 있어요.\n경영주님이 상품을 판매한 뒤, 그 매출을 회사에 보내 정산하고 수익을 나누는 구조입니다.\n만약 매출을 보내지 못하는 상황이 생기면, 이미 공급된 상품 대금은 회사의 손실로 남게 됩니다. 그래서 이런 상황에 대비해 ‘담보’를 설정하게 됩니다.\n쉽게 말해, 혹시 모를 상황에 대비한 안전장치라고 생각하시면 됩니다.",
+    },
+    {
+        category: "가맹조건",
+        question: "담보의 종류는 어떻게 되나요? 꼭 현금이 있어야 할까요?",
+        answer:
+            "담보 설정 방법은 크게 3가지입니다. 3가지 중에 가능한 방법으로 선택하시면 돼요!\n\n1️⃣ 근저당\n→ 집이나 건물 같은 부동산에 담보를 설정하는 방식입니다.\n(해당 부동산에 충분한 가치가 있어야 가능합니다.)\n\n2️⃣ 질권\n→ 은행 예금에 담보를 설정하는 방식입니다.\n(예금을 담보로 묶어두는 개념입니다.)\n\n3️⃣ 보증보험\n→ 보증보험사에 일정 수수료를 내면, 보증보험사가 약정 금액에 대해 일정 기간 대신 보증을 서주는 방식입니다.",
+    },
+    {
+        category: "창업문의",
+        question: "편의점 자리는 직접 알아봐야 하나요?",
+        answer:
+            "직접 알아보시는 경우도 있고, 회사가 추천해 드리기도 해요!\n가맹 희망자분이 개점 희망하는 후보지가 있는 경우 점포개발 담당자를 통해 검토가 가능합니다.\n희망하시는 위치가 없는 경우 경영주님의 희망 조건에 따라 점포를 추천해드립니다.",
+    },
+    {
+        category: "창업문의",
+        question: "편의점 운영해본 경험이 없는데, 창업이 가능할까요?",
+        answer: "물론이죠! 점포 오픈 전, 점포 운영 전반에 대한 이론 및 실습 교육을 체계적으로 진행하여 안정적인 운영 기반을 마련해 드립니다.\n오픈 이후에도 개점 담당 직원이 일정 기간 점포에 동행 근무하며 초기 운영 적응을 지원해 드리므로, 신규 경영주님도 안심하고 점포를 운영하실 수 있어요.\n또한, 본사 영업 전문가(OFC)가 정기적으로 점포를 방문하여 매출 향상, 운영 개선 등 전반적인 점포 운영을 지속적으로 지원하고 있습니다.",
+    },
+    {
+        category: "창업문의",
+        question: "외국인도 창업이 가능한가요?",
+        answer: "네! 외국인분도 본인 명의 휴대폰이 있으면 창업이 가능합니다\n다만, 가지고 계신 비자로 사업자 등록이 가능한지 유무를 사전에 꼭 확인하셔야 하며, 각 지역 세무서에 문의해 주세요.",
+    },
+    {
+        category: "창업문의",
+        question: "수익이 보장되나요?",
+        answer: "모든 점포는 계약 조건, 매출 등이 다르므로 경영주님의 수익(정산금)은 점포마다 상이합니다.\n수익배분율과 기타 가맹계약 조건을 기준으로 최종 수익이 산정되므로 수익을 보장하지는 않습니다.\n점포의 매출이 상승하면 경영주님 수익도 상승하게 됩니다.",
+    },
+    {
+        category: "창업문의",
+        question: "점포 유형에 신규점과 기존점 차이는 무엇인가요?",
+        answer: "신규점은 현재 GS25 매장이 없는 곳에서 새로 오픈하여 운영하는 점포를 의미해요.\n기존점은 기존 GS25 매장을 새로운 경영주님께서 인수하여 운영하는 매장을 의미합니다.",
+    },
+    {
+        category: "창업문의",
+        question: "창업할 때 대출을 지원해주는 제도가 있나요?",
+        answer: "신규 경영주님께 지원되는 대출 제도는 운영하고 있지 않습니다.\n다만, 점포 운영 중인 경영주님들을 대상으로 GS25 점포를 추가 창업 시, 우리은행과 연계하여 우대금리를 적용하는 상생대출 제도를 지원하고 있습니다.",
+    },
+    {
+        category: "창업문의",
+        question: "신규 경영주 교육은 꼭 들어야 하나요?",
+        answer: "네. GS25 점포 운영이 처음이신 경우, 신규 경영주 입문과정(이론 및 실습 교육)을 필수로 이수하셔야 해요.\n총 2주간의 창업 교육(영업일 기준 7일 코스)을 수료하고, 최종 테스트까지 완료하셔야 오픈이 가능합니다.",
+    },
+    {
+        category: "창업문의",
+        question: "가맹계약자와 실운영자가 달라도 괜찮은가요?",
+        answer: "네, 가능합니다! 가맹계약자와 실운영자가 다른 경우, 계약 시 점포운영 위임 합의서를 통해 가맹계약자와 실운영자의 합의가 이루어짐을 확인하고 운영할 수 있습니다.",
+    },
+    {
+        category: "창업문의",
+        question: "교육은 경영주만 참석 가능한가요?",
+        answer: "아닙니다! 조력자 포함하여 최대 3인까지 신청하실 수 있어요. 다만, 교육장 수용 인원이 한정적이므로, 교육 차수에 따라 참가 가능 인원이 조정될 수 있습니다. 이 경우 조력자는 입과하지 못하고, 경영주만 입과할 수도 있습니다.",
+    },
+    {
+        category: "창업문의",
+        question: "가맹비를 할인받을 수 있는 방법은 없나요?",
+        answer: "다양한 가맹비 할인 제도가 있습니다! 예를 들어 미성년자 자녀 2명 이상이 있다면 다자녀 할인으로, GS25 근무 경험이 있으시면 우수근무자 추천 제도로 가맹비 할인이 가능합니다. 창업혜택 – ‘대상별 창업혜택’에서 확인하실 수 있어요.",
+    },
+    {
+        category: "가맹조건",
+        question: "소모품비는 뭐예요?",
+        answer: "점포 오픈 시, 점포운영에 필요한 종이봉투, 쓰레기통, 유니폼 등의 소모품을 뜻합니다.",
+    },
+    {
+        category: "폐점,계약해지",
+        question: "가맹 계약이 종료되면 회수 가능한 금액은 얼마인가요?",
+        answer: "본부임차점의 경우 본부 보증금으로 최초 납부한 금액(전대/예치보증금) 전액과 상품대 일부 회수가 가능하며, 가맹비는 소멸되는 비용입니다.",
+    },
+    {
+        category: "운영문의",
+        question: "영업비가 뭐예요? 회사가 부담하는 비용인가요?",
+        answer: "편의점을 영업하는데 제반되는 모든 비용을 말합니다. 폐기 금액, 전기료, 관리비, 인건비 등이 있으며 사용하시는 만큼 비용으로 지출되는 경영주님 부담입니다.",
+    },
+    {
+        category: "운영문의",
+        question: "세금은 얼마 나오나요?",
+        answer: "점포마다 발생하는 매출액이 상이하며 개인별로 상황이 다르기 때문에 정확한 금액을 예측하기는 어렵습니다. 다만, 점포별로 본부 세무대리인을 연결해드리고 있습니다. 개인의 상황에 맞는 세무 관련 상담을 받으실 수 있어요.",
+    },
+    {
+        category: "운영문의",
+        question: "GS25를 운영하면서 다른 브랜드의 편의점을 또 운영할 수 있나요?",
+        answer: "신의성실에 입각하여 동일 업종에 종사하지 못하십니다. 단, 회사의 동의를 얻은 경우는 예외로 합니다.",
+    },
+    {
+        category: "운영문의",
+        question: "GS25 점포를 2개 이상 운영할 수 있나요? 별도의 혜택이 있나요?",
+        answer: "네 가능합니다! 타업종 대비 낮은 투자비와 안정적인 창업이 가능하다는 점에서 다점포(2개 이상)를 운영하시는 경영주님들이 많이 계십니다.\n기존 GS25를 운영하고 계시는 경영주님이 추가 점포를 운영할 경우 가맹비 770만원(VAT 포함) 중 330만원(VAT포함)을 할인해드립니다.",
+    },
+    {
+        category: "운영문의",
+        question: "유통기한이 지난 상품은 어떻게 하나요?",
+        answer: "상품은 크게 반품이 가능한 상품과 점포에서 직접 폐기해야 하는 상품으로 나뒝니다.\n먼저 도시락·김밥·샌드위치 같은 신선식품(F/F 상품)은 유통기한이 지나면 반품이 되지 않으며, 점포에서 폐기하셔야 합니다.\n다만, 품 종류에 따라 회사에서 폐기 비용의 일부를 지원해 드리는 경우도 있습니다.\n그리고 과자·라면·음료 같은 일반 상품은 대부분 반품이 가능합니다.\n(단, 주류 등 일부 상품은 제외됩니다.)",
+    },
+    {
+        category: "운영문의",
+        question: "상품 주문은 회사가 대신해주나요?",
+        answer: "상품 주문(발주)의 권한은 경영주님에게 있습니다.\n각 점포의 상황이나 경영주님의 선택에 따라 상품 주문, 재고 관리 등이 이루어집니다.",
+    },
+    {
+        category: "운영문의",
+        question: "GS25점포 인근에 또 GS25가 출점할 수 있나요?",
+        answer: "도보거리 250m 이내에는 출점하지 않습니다.\n단, 예외 조항에 한하여 경영주님에게 동의를 득한 후 출점하거나, 기존 점포의 타입변경 등 몇가지 사안에서는 동의 없이도 출점하는 경우가 있습니다.",
+    },
+    {
+        category: "운영문의",
+        question: "24시간 영업은 필수인가요?",
+        answer: "계약을 맺기 전에는 점포 상황에 따라 영업시간을 서로 협의할 수 있어요.\n다만, 오픈 후부터는 최초 계약 체결시 합의된 영업 시간은 준수해 주셔야 합니다.\n또한 계약 기간 중이라도, 부득이한 사정이 있거나 심야 시간대 매출이 너무 적어 손해가 계속되는 경우에는 경영주님이 회사에 요청하고, 회사가 동의하면\n24시간 운영을 하지 않을 수도 있습니다.\n단, 24시간 운영을 하지 않는 경우에는 24시간 운영 점포에 지급되는 장려금(지원금)은 받을 수 없습니다.",
+    },
+    {
+        category: "운영문의",
+        question: "근무자 채용은 직접 해야하나요?",
+        answer: "가맹점은 경영주님이 직접 운영하는 독립된 사업장입니다.\n따라서 점포 운영에 대한 권한과 책임은 경영주님께 있습니다.\n직원 채용, 근무 스케줄 관리, 급여 지급 등도 모두 경영주님의 역할입니다.\n다만, 채용을 쉽고 빠르게 할 수 있도록 알바몬d 사이트를 지원해드리고 있습니다. 해당 비용은 본부에서 부담하고 있으며 무료로 이용 가능합니다.",
+    },
+    {
+        category: "운영문의",
+        question: "경영주가 꼭 근무를 해야 하나요?",
+        answer: "경영주님의 근무 여부와 근무 시간은 상황에 맞게 직접 정하실 수 있어요.\n다만, 경영주님이 매장에 자주 나오실수록 서비스와 매장 관리(청결, 진열 등)가 더 좋아지는 경우가 많습니다.\n그만큼 고객 만족도가 높아지고, 매출에도 긍정적인 영향을 줄 수 있습니다.",
+    },
+    {
+        category: "폐점,계약해지",
+        question: "가맹계약이 종료되면 점포의 시설 및 집기는 '경영주' 소유인가요?",
+        answer: "아닙니다.\n가맹계약이 종료되면, 매장에 설치된 집기·설비 등 모든 시설은 회사에 반납하셔야 합니다.\n가맹계약 기간 동안에는 해당 설비를 무상으로 대여해 드립니다.\n다만, GS1타입(수익추구 특약)의 경우에는 유상 대여 방식이 적용됩니다.",
+    },
+    {
+        category: "폐점,계약해지",
+        question: "가맹계약 중 가맹계약 해지가 가능한가요?", 
+        answer: "네, 중도 해지는 가능합니다.\n다만, 계약을 종료하려면 최소 90일 전에 서면(문서)으로 회사에 미리 알려주셔야 해요.\n또한 계약을 중도에 해지할 경우에는\n해약 수수료, 시설 잔여 금액(감가상각 후 남은 금액), 폐점 수수료 등의 비용이 발생할 수 있습니다.\n※ 발생 비용은 계약 타입에 따라 다를 수 있어요.",
+    },
+    {
+        category: "폐점,계약해지",
+        question: "가맹계약 중도 해지시 위약금은 어떻게 산정되나요?",
+        answer: "계약 타입과 운영 년수에 따라 해약 수수료가 산정됩니다.\n* 해약수수료 산정 방식\nGS1 타입: 직전 1년간의(영업기간 1년 미만일 경우에는 그 영업기간 중) 평균 월 매출총이익의 가맹수수료율 x 타입별/기간별 개월 수\nGS2, GS3 타입: 직전 1년간의(영업기간 1년 미만일 경우에는 그 영업기간 중) 평균 월 매출총이익의 35% x 타입별/기간별 개월 수",
+        answerTable: {
+            headers: ["구분", "개점 후 3년 미만", "3년 ~ 4년", "4년 ~ 5년"],
+            rows: [
+                { label: "GS1", cells: ["6개월", "4개월", "2개월"] },
+                { label: "GS2", cells: ["4개월", "2개월", "—"] },
+                { label: "GS3", cells: ["4개월", "2개월", "—"] },
+            ],
+        },
+    },
+    {
+        category: "가맹조건",
+        question: "안심운영 제도가 뭐에요?",
+        answer: "쉽게 정리하면\n'지켜 운영했는데 수입이 일정 기준보다 부족하면 회사가 일부 보전해주는 제도이지만, 순이익을 보장해주는 제도는 아니다'라고 이해하시면 됩니다.\n계약 내용을 잘 지키고, 연중무휴로 하루 18시간 이상 매장을 운영하시면\n회사에서 최소 운영비 기준을 정해 경영주님의 수입이 그 기준에 못 미칠 경우, 부족한 금액을 일정 부분 지원해드립니다.\n다만, 이 지원금은 임차료(GS1), 전대료(GS2타입,회사와 계약된 매장 사용료), 인건비, 전기료, 관리비 등을 빼기 전 금액을 기준으로 계산합니다.\n즉, 경영주님의 순이익을 보장하는 제도는 아닙니다.\n또한, 상생 인센티브는 안심 운영 지원 계산에 포함되지 않습니다.",
+    },
+    {
+        category: "가맹조건",
+        question: "계약기간은 몇 년인가요?",
+        answer: "기본 계약기간은 GS1타입 5년, GS2,GS3타입 4년이며,\nGS1타입 수익추구특약은 7년 계약인 대신, 추가혜택(수익배분율 10%)을 지급하고 있습니다.\n그리고 기본 계약기간이 끝나면, 다시 계약을 맺으면서 계약 조건을 협의하게 됩니다.",
+    },
+    {
+        category: "가맹조건",
+        question: "경영주의 수익은 어떻게 산정되나요?",
+        answer: "경영주님의 수익 정산은 매달 이루어집니다.\n한 달 총 매출에서 상품 매출 원가와 가맹본부 수수료를 제외하면, 경영주님의 기본 수입이 됩니다.\n여기에 본부에서 주는 24시간 운영 지원금(24시간 운영점만 5% 지급)과 상생 인센티브 등 추가 지원금을 더하면 경영주님의 총수입이 됩니다.\n총수입에서 임차료, 인건비, 전기료, 관리비 등 점포 영업비를 빼면 경영주님의 최종 순수익이 됩니다.\n가맹본부 수수료는 가맹 타입별로 다르게 책정됩니다.",
+    },
+    {
+        category: "창업문의",
+        question: "정보 공개서가 무엇인가요?",
+        answer: "정보공개서는 가맹본부의 사업 현황, 영업 조건, 본부의 지원 등에 관한 정보를 담은 문서입니다.\nGS25 가맹본부는 「가맹사업거래의 공정화에 관한 법률」에 따라, 가맹계약을 체결하기 전에 경영주님께 정보공개서를 제공합니다.\n정보공개서를 확인한 날로부터 14일이 지나야 가맹계약을 체결할 수 있습니다.\n단, 가맹거래사나 변호사의 자문을 받은 경우에는 7일로 단축됩니다.",
+    },
+    {
+        category: "가맹조건",
+        question: "점포 소개나 경영주 소개시 혜택이 있나요?",
+        answer: "GS25 경영주님이 새로운 입지나 신규 경영주를 소개하여 점포가 오픈되면, 감사의 마음으로 소정의 소개비를 드립니다.",
+    }
+];
+
+const filteredGs25FaqItems = computed(() => {
+    const filter = gs25FaqTabFilters[activeGs25FaqTab.value];
+    if (!filter) return gs25FaqItems;
+    return gs25FaqItems.filter((item) => item.category === filter);
+});
+
+const gs25FaqTotalPages = computed(() =>
+    Math.max(1, Math.ceil(filteredGs25FaqItems.value.length / GS25_FAQ_PAGE_SIZE))
+);
+
+const paginatedGs25FaqItems = computed(() => {
+    const start = (activeGs25FaqPage.value - 1) * GS25_FAQ_PAGE_SIZE;
+    return filteredGs25FaqItems.value.slice(start, start + GS25_FAQ_PAGE_SIZE);
+});
+
+watch(activeD1, () => {
+    activeD2.value = 0;
+    activeD3.value = 0;
+});
+
+watch(activeD2, () => {
+    activeD3.value = 0;
+});
+
+watch(activeGs25FaqTab, () => {
+    activeGs25FaqPage.value = 1;
+});
+
+watch(gs25FaqTotalPages, (total) => {
+    if (activeGs25FaqPage.value > total) activeGs25FaqPage.value = total;
+});
+
+const regionCounselPanel = {
+    title: "지금 바로 상담을 받고 싶으신가요?",
+    lead: "지도에서 원하시는 지역을 클릭하시면 해당 지역 담당자 정보를 바로 확인하실 수 있습니다.",
+};
+const regionCounselEmpty = {
+    title: "지역을 선택해주세요",
+    desc: "지도에서 점포를 오픈하고 싶은 지역을 클릭하면<br class='p_br'/>해당 지역 담당자 정보를 확인하실 수 있습니다.",
+    hint: "(서울/경기는 상단의 '수도권 상세' 탭 또는 지도에서 클릭하세요)",
+};
+const regionCounselTabs = [
+    { item: "전국" },
+    { item: "수도권 상세 - 서울" },
+    { item: "수도권 상세 - 경기" },
+];
+const activeRegionTab = ref(0);
+/** true: region_counsel_side에 담당자 목록 / false: 지역 선택 전 안내 패널 */
+const regionCounselBoardIsStaff = ref(false);
+
+function closeRegionCounselStaff() {
+    regionCounselBoardIsStaff.value = false;
+}
+/** 지도 API 연동 전 퍼블용: 지도 영역 클릭 시 담당자 UI 표시(API 연동 시 삭제·지도 콜백으로 대체) */
+function onRegionCounselMapStubClick() {
+    if (regionCounselBoardIsStaff.value) return;
+    regionCounselBoardIsStaff.value = true;
+}
+
+/** 지역 선택 후 담당자 목록(샘플) */
+const regionCounselStaff = {
+    regionName: "서울",
+    countLabel: "6명",
+    managers: [
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+    ],
+};
+
 
 const QUICK_MENU_REVEAL_PX = 100;
 const QUICK_MENU_VIEWPORT_BOTTOM_PX = 60;
@@ -865,39 +1975,40 @@ onUnmounted(() => {
 
 
 <style scoped>
-/* 공통 */
-img {width:100%; height:auto; object-fit: cover; display: block;}
+img { width:100%; height:auto; object-fit: cover; display: block; }
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
-:deep(.primary){background-color: #15B874;}
+:deep(.primary_green){ background-color: #15B874; }
 :deep(.txt_blue) { color: #107af2; }
 .wrap_gsrst { position: relative; overflow-x: clip; }
-/* page_header */
+
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
-.page_header::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); content: ''; position: absolute; top: 0; left: 0; }
+.page_header::before { width: 100%; height: 100%; content: ''; position: absolute; top: 0; left: 0; }
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
-/* sec_body · 탭 · 공통 헤더 */
+
 header > .tit { width: fit-content; padding: 8px 16px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 99px; display: block; }
-header.ac > .tit {margin-left:auto; margin-right:auto;}
-.sub_header{margin-bottom:64px;}
+header.ac > .tit { margin-left:auto; margin-right:auto; } 
+.sub_header{ margin-bottom:64px; }
 .sub_header > h3 { font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.sub_header > .tit {padding:4px 12px;}
-.sub_header > .tit + h3{ margin-top:16px;}
-.sub_header > strong{margin-top:16px; display:block;}
+.sub_header > .tit { padding:4px 12px; }
+.sub_header > .tit + h3{ margin-top:16px; }
+.sub_header > strong{ margin-top:16px; display:block; }
 .sub_header> p { margin-top: 16px; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; }
 .section_header { margin-bottom: 64px; }
 .section_header.ac { text-align: center; }
 .section_header > .tit + h2 { margin-top: 16px; }
-.section_header > h2 {  font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.section_header > p { margin-top: 16px;  font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.section_header > h2 { font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.section_header > p { margin-top: 16px; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 section + section { padding-top: 100px; }
-.tab_page { padding: 64px 0 200px; }
-.list_dotted > li { padding-left: 12px; position: relative; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0;}
+section p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+.panel_third_depth { padding-top: 80px; }
+.panel { padding: 100px 0 200px; }
+.list_dotted > li { padding-left: 12px; position: relative; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
 .list_dotted > li + li { margin-top: 8px }
 .list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #161616; border-radius: 100%; position: absolute; top: 11px; left: 0 }
-/* sec_hero */
+
 .sec_hero { min-height: 700px; padding: 97px 100px 77px; background-size: cover; background-position: center; border-radius: 20px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
 .sec_hero::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); content: ''; position: absolute; top: 0; left: 0; }
 .sec_hero > header, .sec_hero > .action_list, .sec_hero > .metric_list { position: relative; z-index: 1; }
@@ -905,7 +2016,7 @@ section + section { padding-top: 100px; }
 .sec_hero > header > h3 { margin: 8px 0 0; color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .sec_hero > header > .desc { color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
 .sec_hero > .action_list { width: 100%; max-width: 540px; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
-.sec_hero > .action_list > li > a { width: 100%; min-height: 51px; padding: 12px 20px; background-color: rgba(16,122,242,0.8); border-radius: 12px; color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.sec_hero > .action_list > li > a { width: 100%; min-height: 51px; padding: 12px 20px; background-color: rgba(16,122,242,0.8); border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .sec_hero > .action_list > li:last-child > a { min-height: 64px; align-items: center; }
 .sec_hero > .action_list > li > a > strong { flex: 0 0 114px; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
 .sec_hero > .action_list > li:last-child > a > strong { flex-basis: 114px; font-size: 1.6rem; line-height: 1.24; }
@@ -915,7 +2026,7 @@ section + section { padding-top: 100px; }
 .sec_hero > .metric_list > li { flex: 1; min-width: 0; min-height: 95px; padding: 20px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-align: center; }
 .sec_hero > .metric_list > li > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_hero > .metric_list > li > span { color: rgba(255,255,255,0.8); font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-/* sec_num_list */
+
 .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; }
 .sec_num_list :deep(.num_info_item) { padding: 0; border-bottom: 0; }
 .sec_num_list :deep(.num_info_num) { margin-bottom: 8px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
@@ -924,25 +2035,25 @@ section + section { padding-top: 100px; }
 .sec_num_list :deep(.num_info_title) { margin-bottom: 8px; }
 .sec_num_list :deep(.num_info_title > strong) { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_num_list :deep(.num_info_body > p) { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-/* sec_band */
+
 section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50%); background-color: #f8f8f8; }
 .sec_band > .inner > .link_grid { display: flex; align-items: stretch; gap: 20px; }
 .sec_band > .inner > .link_grid > li { flex: 1; min-width: 0; display: flex; }
-.sec_band > .inner > .link_grid > li > a { width: 100%; min-height: 144px; padding: 32px 24px; background-color: #fff; border-radius: 12px; text-decoration: none; display: flex; align-items: center; gap: 20px; }
+.sec_band > .inner > .link_grid > li > a { width: 100%; min-height: 144px; padding: 32px 24px; background-color: #fff; border-radius: 12px; display: flex; align-items: center; gap: 20px; }
 .sec_band > .inner > .link_grid > li > a > .thumb { width: 80px; height: 80px; flex-shrink: 0; background-color: #f8f8f8; border-radius: 12px; }
 .sec_band > .inner > .link_grid > li > a > .txt { flex: 1; min-width: 0; }
-.sec_band > .inner > .link_grid > li > a > .txt > strong {  font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_band > .inner > .link_grid > li > a > .txt > strong { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_band > .inner > .link_grid > li > a > .txt > .desc { margin-top: 6px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
 .sec_band > .inner > .link_grid > li > a::after { content: ''; width: 24px; height: 24px; flex-shrink: 0; background-color: #161616; }
-/* sec_overlap */
-.sec_overlap > .overlap_grid { display: flex;  justify-content: center; width: 100%; max-width: 1040px; margin: 0 auto; }
-.sec_overlap > .overlap_grid > li { position: relative; flex: 0 1 260px;  max-width: 100%; min-width: 0; }
+
+.sec_overlap > .overlap_grid { display: flex; justify-content: center; width: 100%; max-width: 1040px; margin: 0 auto; }
+.sec_overlap > .overlap_grid > li { position: relative; flex: 0 1 260px; max-width: 100%; min-width: 0; }
 .sec_overlap > .overlap_grid > li + li { margin-left: -30px; }
 .sec_overlap > .overlap_grid > li:nth-child(1) { z-index: 1; }
 .sec_overlap > .overlap_grid > li:nth-child(2) { z-index: 2; }
 .sec_overlap > .overlap_grid > li:nth-child(3) { z-index: 3; }
 .sec_overlap > .overlap_grid > li:nth-child(4) { z-index: 4; }
-.sec_overlap > .overlap_grid > li > article { width: 100%; height: auto; aspect-ratio: 1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center;  }
+.sec_overlap > .overlap_grid > li > article { width: 100%; height: auto; aspect-ratio: 1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; }
 .sec_overlap > .overlap_grid > li > article > .icon { width: 40px; max-width: 100%; height: auto; aspect-ratio: 1; background-color: #d0d0d8; }
 .sec_overlap > .overlap_grid > li > article > strong { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_overlap > .overlap_grid > li:nth-child(1) > article { background-color: rgba(255,118,48,0.12); }
@@ -953,50 +2064,53 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_overlap > .overlap_grid > li:nth-child(3) > article > strong { color: #1550f4; }
 .sec_overlap > .overlap_grid > li:nth-child(4) > article { background-color: rgba(16,158,105,0.12); }
 .sec_overlap > .overlap_grid > li:nth-child(4) > article > strong { color: #099762; }
-/* sec_split */
+
 .sec_split > .inner > .split_layout { display: flex; align-items: center; justify-content: center; gap: 40px; }
 .sec_split > .inner > .split_layout > .info_card { width: 100%; max-width: 500px; min-height: 164px; margin: 0; padding: 32px 24px; background-color: #fff; border-radius: 20px; }
 .sec_split > .inner > .split_layout > .info_card > dt { display: flex; align-items: center; gap: 8px; }
 .sec_split > .inner > .split_layout > .info_card > dt > .icon { width: 32px; height: 32px; flex-shrink: 0; background-color: #d0d0d8; }
-.sec_split > .inner > .split_layout > .info_card > dt > strong {  font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_split > .inner > .split_layout > .info_card > dt > strong { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_split > .inner > .split_layout > .info_card > dd { margin: 20px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_split > .inner > .split_layout > .info_card.is_end > dt { justify-content: flex-end; }
 .sec_split > .inner > .split_layout > .info_card.is_end > dd { text-align: right; }
 .sec_split > .inner > .split_layout > .info_card.is_start > dt { justify-content: flex-start; }
 .sec_split > .inner > .split_layout > .info_card.is_start > dd { text-align: left; }
 .sec_split > .inner > .split_layout > .split_media { width:100%; max-width: 340px; aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
-/* sec_stack */
-/* highlight_block */
-.sec_stack > .highlight_block { padding: 64px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start;  }
+
+.sec_stack > .highlight_block { padding: 64px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; }
 .sec_stack > .highlight_block > .sub_header { width: 100%; max-width: 296px; flex-shrink: 0; }
-.sec_stack > .highlight_block > .sub_header strong{font-size: 1.8rem;line-height: 1.5;letter-spacing: -0.01em;}
-.sec_stack > .highlight_block > .sub_header p{color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+.sec_stack > .highlight_block > .sub_header strong{ font-size: 1.8rem;line-height: 1.5;letter-spacing: -0.01em; }
+.sec_stack > .highlight_block > .sub_header p{ color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em; }
 .sec_stack > .highlight_block > .highlight_body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 56px; }
-.sec_stack > .highlight_block > .highlight_body > div > h4 { margin-bottom: 24px;  font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_stack > .highlight_block > .highlight_body > div > h4 { margin-bottom: 24px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_stack > .highlight_block > .highlight_body > div > ul { margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 20px; }
 .sec_stack > .highlight_block > .highlight_body > div > ul > li { flex: 0 0 234px; min-width: 0; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) { height: 100%; background-color: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure { width: 100%; height: 100%; margin: 0; display: flex; flex-direction: column; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure > img { width: 100%; height: 200px; object-fit: contain; display: block; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure > figcaption { padding: 20px 24px; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure > figcaption > p { color: #67676f; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; text-align: center; }
-.sec_stack > .highlight_block > .highlight_body > div > :is(ul > li > article, .highlight_swiper :deep(.swiper-slide) > article) > figure > figcaption > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; text-align: center; display: block; }
-/* sec_stack · dual_panel */
+.sec_stack > .highlight_block > .highlight_body > div > ul > li article figure img{ border-radius:12px 12px 0 0; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li article figcaption{ padding:24px; background-color:#fff; border-radius:0 0 12px 12px; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li article figcaption p{ color: #67676F;font-size: 1.2rem;line-height: 1.2; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li article figcaption strong{ margin-top:4px;font-size: 1.8rem;line-height: 1.5; display: block; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article { height: 100%; background-color: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure { width: 100%; height: 100%; margin: 0; display: flex; flex-direction: column; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > img, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > img { width: 100%; height: 200px; object-fit: contain; display: block; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > figcaption, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption { padding: 20px 24px; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > figcaption > p, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > p { color: #67676f; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; text-align: center; }
+.sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > figcaption > strong, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; text-align: center; display: block; }
+
 .sec_stack > .dual_panel { margin-top: 60px; display: flex; gap: 40px; }
 .sec_stack > .dual_panel > article { flex: 1; min-width: 0; padding: 64px; border: 1px solid #d7d7df; border-radius: 12px; }
-.sec_stack > .dual_panel > article .sub_header {margin-bottom:32px;}
-.sec_stack > .dual_panel > article .sub_header h3{margin-top:8px;}
-.sec_stack > .dual_panel > article .sub_header p{margin-top:8px;color:#67676F;font-size: 1.8rem;line-height: 1.4;letter-spacing: 0;}
+.sec_stack > .dual_panel > article .sub_header { margin-bottom:32px; }
+.sec_stack > .dual_panel > article .sub_header h3{ margin-top:8px; }
+.sec_stack > .dual_panel > article .sub_header p{ margin-top:8px;color:#67676F;font-size: 1.8rem;line-height: 1.4;letter-spacing: 0; }
 .sec_stack > .dual_panel > article > .media_pair { margin-top: 24px; display: flex; gap: 20px; }
 .sec_stack > .dual_panel > article > .media_pair > figure { flex: 1; min-width: 0; aspect-ratio: 271 / 212; margin: 0; border-radius: 12px; overflow: hidden; background-color: #d9d9d9; background-repeat: no-repeat; background-position: center; background-size: cover; }
 .sec_stack > .dual_panel > article > .stack_list { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
 .sec_stack > .dual_panel > article > .stack_list > li { padding: 20px 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; gap: 20px; }
 .sec_stack > .dual_panel > article > .stack_list > li > .thumb { width: 77px; height: 77px; flex-shrink: 0; background-color: #d9d9d9; background-repeat: no-repeat; background-position: center; background-size: cover; border-radius: 12px; }
 .sec_stack > .dual_panel > article > .stack_list > li > div { flex: 1; min-width: 0; }
-.sec_stack > .dual_panel > article > .stack_list > li > div > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0;}
-.sec_stack > .dual_panel > article > .stack_list > li > div > p { margin-top: 2px;  font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_stack > .dual_panel > article > .stack_list > li > div > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
+.sec_stack > .dual_panel > article > .stack_list > li > div > p { margin-top: 2px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_stack > .dual_panel > article > .btn_mid { margin-top: 24px; }
-/* sec_stack · sub_block */
+
 .sec_stack > .sub_block { margin-top: 60px; }
 .sec_stack > .sub_block > .sub_swiper { margin-top: 40px; overflow: hidden; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-wrapper) { align-items: stretch; }
@@ -1004,8 +2118,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > figure { width: 100%; aspect-ratio: 360/240;margin: 0; border-radius: 12px; overflow: hidden; background-repeat: no-repeat; background-position: center; background-size: cover; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { width: fit-content; margin-top: 16px; padding: 3px 6px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 4px; display: inline-block; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong { margin-top: 6px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
-/* sec_icon_grid */
-.sec_icon_grid > .inner > .icon_grid { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; list-style: none; align-items: stretch; }
+
+.sec_icon_grid > .inner > .icon_grid { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
 .sec_icon_grid > .inner > .icon_grid > li { height: 100%; }
 .sec_icon_grid > .inner > .icon_grid > li > article { min-height: 157px; height: 100%; padding: 32px; background-color: #fff; border-radius: 20px; display: grid; grid-template-columns: 80px 1fr; column-gap: 20px; align-content: start; }
 .sec_icon_grid > .inner > .icon_grid > li > article > .icon { width: 80px; height: 80px; background-color: #f2f2f4; border-radius: 50%; grid-column: 1; grid-row: 1; }
@@ -1013,8 +2127,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_icon_grid > .inner > .icon_grid > li > article > div > em { margin: 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; font-style: normal; }
 .sec_icon_grid > .inner > .icon_grid > li > article > div > strong { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_icon_grid > .inner > .icon_grid > li > article > div > p { margin-top: 8px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
-/* sec_tri_grid */
-.sec_tri_grid > ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; list-style: none; align-items: stretch; }
+
+.sec_tri_grid > ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
 .sec_tri_grid > ul > li { height: 100%; padding: 60px 40px; border: 1px solid #D7D7DF; border-radius: 12px; }
 .sec_tri_grid > ul > li > h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_tri_grid > ul > li > dl { margin: 40px 0 0; }
@@ -1022,69 +2136,334 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_tri_grid > ul > li > dl > dt > .icon { width: 24px; height: 24px; flex-shrink: 0; background-color: #d9d9d9; }
 .sec_tri_grid > ul > li > dl > dd { margin: 4px 0 0; padding-left: 32px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_tri_grid > ul > li > dl > dd + dt { margin-top: 56px; }
-/* sec_diagram */
-.sec_diagram > .diagram_shell { display: flex; align-items: center; gap: 60px; padding: 32px; border: 1px solid #d7d7df; border-radius: 999px; background-color: #107af2; }
-.sec_diagram > .diagram_shell > .diagram_track { flex: 1; min-width: 0; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring { display: flex; align-items: center; border-radius: 999px; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer { width: 100%; max-width: 940px; min-height: 245px; padding: 16px 32px; background-color: #9fcafa; gap: 24px; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid { flex: 1; max-width: 555px; min-height: 181px; padding: 16px 24px; background-color: #cfe4fc; gap: 20px; border-radius: 999px;}
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner { flex-shrink: 0; width: 220px; min-height: 117px; padding: 16px 20px; background-color: #fff; border-radius: 999px; }
+
+.sec_diagram > .diagram_shell { display: flex; align-items: center; gap: clamp(24px, 3.125vw, 60px); padding: clamp(16px, 1.667vw, 32px); border: 1px solid #d7d7df; border-radius: 9999px; background-color: #107af2; min-width: 0; }
+.sec_diagram > .diagram_shell > .diagram_track { width: 100%; min-width: 0; flex: 1 1 0; }
+.sec_diagram > .diagram_shell > .diagram_track .diagram_ring { min-width: 0; border-radius: clamp(20px, 8vw, 999px); display: flex; justify-content: center; align-items: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer { container-type: inline-size; width: 100%; max-width: min(100%, 940px); min-width: 0; min-height: clamp(140px, 12.76vw, 245px); padding: clamp(14px, 1.667vw, 32px); background-color: #9fcafa; border-radius: 999px; display: flex; justify-content: center; align-items: center; gap: clamp(12px, 1.25vw, 24px); flex-wrap: wrap; align-content: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid { container-type: inline-size; width: min(100%, 59.04cqw); max-width: 100%; min-width: 0; min-height: clamp(110px, 9.43vw, 181px); padding: clamp(12px, 1.667vw, 32px); background-color: #cfe4fc; border-radius: 999px; display: flex; justify-content: center; align-items: center; gap: clamp(10px, 1.042vw, 20px); flex-wrap: wrap; align-content: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner { width: min(100%, 39.64cqw); max-width: 100%; min-width: 0; min-height: clamp(88px, 6.09vw, 117px); padding: clamp(12px, 1.667vw, 32px); background-color: #fff; border-radius: 999px; display: flex; justify-content: center; align-items: center; }
 .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article { width: 100%; text-align: center; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > strong { color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > span { color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested { flex: 1; min-width: 0; text-align: center; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > strong { color: #107af2; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > p { margin-top: 2px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring { flex: 1; min-width: 0; text-align: center; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > strong { color: #0a4991; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
-.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > p { margin-top: 2px; color: #0a4991; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_diagram > .diagram_shell > article.node_aside { width: 312px; flex-shrink: 0; text-align: center; }
-.sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: 3.2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
-.sec_diagram > .diagram_shell > article.node_aside > p { margin-top: 8px; color: #fff; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-/* quick_menu */
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > strong { color: #67676f; font-size: clamp(1.4rem, 1.05vw, 1.8rem); font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > span { color: #67676f; font-size: clamp(1.2rem, 0.73vw, 1.4rem); font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested { flex: 1 1 clamp(120px, 12vw, 200px); min-width: 0; max-width: 100%; text-align: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > strong { color: #107af2; font-size: clamp(1.4rem, 1.05vw, 1.8rem); font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > p { margin-top: 2px; color: #107af2; font-size: clamp(1.2rem, 0.73vw, 1.4rem); font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring { flex: 1 1 clamp(140px, 14vw, 240px); min-width: 0; max-width: 100%; text-align: center; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > strong { color: #0a4991; font-size: clamp(2rem, 1.67vw, 2.4rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > p { margin-top: 2px; color: #0a4991; font-size: clamp(1.4rem, 0.83vw, 1.6rem); font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_diagram > .diagram_shell > article.node_aside { width: clamp(200px, 16.25vw, 312px); flex: 0 1 auto; min-width: 0; text-align: center; }
+.sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: clamp(2.4rem, 2.08vw, 3.2rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_diagram > .diagram_shell > article.node_aside > p { margin-top: clamp(4px, 0.42vw, 8px); color: #fff; font-size: clamp(1.4rem, 0.83vw, 1.6rem); font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_diagram > .diagram_shell article strong, .sec_diagram > .diagram_shell article span, .sec_diagram > .diagram_shell article p { word-break: keep-all; }
+
+.sec_franchise_define .franchise_define_card { padding: 64px 80px; background-color: #fff; border-radius: 12px; }
+.sec_franchise_define .franchise_define_card .sub_header{ margin-bottom:40px; }
+.sec_franchise_define .franchise_define_card .sub_header .tit + h3{ margin-top: 8px; }
+.sec_franchise_define .franchise_define_card .sub_header h3 + p{ margin-top: 8px;color:#67676F;font-size: 1.8rem;line-height: 1.4; }
+
+.sec_franchise_define .franchise_formula { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px; }
+.sec_franchise_define .franchise_formula > div { width: 320px; height: 136px; padding: 0 28px; border-radius: 999px; display: flex; align-items: center; justify-content: flex-start; gap: 16px; flex-shrink: 0; }
+.sec_franchise_define .franchise_formula > div:nth-child(1), .sec_franchise_define .franchise_formula > div:nth-child(3) { background-color: #cfe4fc; }
+.sec_franchise_define .franchise_formula > div:nth-child(5) { background-color: #107af2; }
+.sec_franchise_define .franchise_formula > div > span { width: 72px; height: 72px; flex-shrink: 0; background-color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+.sec_franchise_define .franchise_formula > div > p { min-width: 0; margin: 0; text-align: left; }
+.sec_franchise_define .franchise_formula > div:nth-child(1) > p > strong, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > strong { color: #0d62c2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_franchise_define .franchise_formula > div:nth-child(1) > p > span, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > span { margin-top: 4px; color: #0d62c2; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
+.sec_franchise_define .franchise_formula > div:nth-child(5) > p > strong { color: #fff; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_franchise_define .franchise_formula > div:nth-child(5) > p > span { margin-top: 4px; color: #fff; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
+.sec_franchise_define .franchise_formula > span { color: #107af2; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex-shrink: 0; }
+.sec_franchise_define .franchise_role_grid { margin: 40px auto 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.sec_franchise_define .franchise_role_grid > article { padding: 32px; background-color: #f8f8f8; border-radius: 20px; }
+.sec_franchise_define .franchise_role_grid > article > header { padding: 0 0 34px; border-bottom: 1px solid #e5e5e9; display: flex; align-items: center; gap: 20px; }
+.sec_franchise_define .franchise_role_grid > article > header > span { width: 60px; height: 60px; flex-shrink: 0; border-radius: 50%; display: block; }
+.sec_franchise_define .franchise_role_grid > article:nth-child(1) > header > span { background-color: #107af2; }
+.sec_franchise_define .franchise_role_grid > article:nth-child(2) > header > span { background-color: #15b874; }
+.sec_franchise_define .franchise_role_grid > article > header > div { min-width: 0; flex: 1 1 auto; }
+.sec_franchise_define .franchise_role_grid > article > header > div > h4 { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_franchise_define .franchise_role_grid > article > header > div > p { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_franchise_define .franchise_role_grid > article > ul { padding:32px 24px; display: flex; flex-direction: column; gap: 24px; }
+.sec_franchise_define .franchise_role_grid > article > ul > li { display: flex; align-items: center; gap: 12px; }
+.sec_franchise_define .franchise_role_grid > article > ul > li > span { width: 24px; height: 24px; flex-shrink: 0; background-color: #d0d0d8; display: block; }
+.sec_franchise_define .franchise_role_grid > article > ul > li > strong { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_franchise_define .franchise_role_grid strong, .sec_franchise_define .franchise_role_grid p { word-break: keep-all; }
+
+.sec_region_counsel :deep(.tab_wrap ul.type_02){ justify-content: center; }
+.sec_region_counsel :deep(.tab_wrap ul.type_02 li .item){ color:#161616;font-weight:400;font-size: 1.8rem;line-height: 1.4;background-color:#fff;border:1px solid #161616; }
+.sec_region_counsel :deep(.tab_wrap ul.type_02 li.current .item){ color:#fff;background-color:#161616; }
+
+.sec_region_counsel > .section_header { margin: 0 0 40px; }
+.sec_region_counsel :deep(.tab_wrap) { margin: 0 0 64px; }
+.sec_region_counsel .region_counsel_note { margin: 0 0 28px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; display: flex; align-items: flex-start; gap: 4px; }
+.sec_region_counsel .region_counsel_note > span { flex-shrink: 0; }
+.sec_region_counsel .region_counsel_board { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
+.sec_region_counsel .region_counsel_board > .region_counsel_map, .sec_region_counsel .region_counsel_board > .region_counsel_side { width: 100%; min-width: 0; height: 620px; min-height: 620px; overflow: hidden; border-radius: 12px; border: 1px solid #d7d7df; box-sizing: border-box; }
+.sec_region_counsel .region_counsel_board:not(.is_staff) .region_counsel_map { cursor: pointer; }
+.sec_region_counsel .region_counsel_map { background-color: #f2f8fd; }
+.sec_region_counsel .region_counsel_side { min-width: 0; min-height: 0; padding: 40px; display: flex; flex-direction: column; }
+.sec_region_counsel .region_counsel_panel { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 0; }
+.sec_region_counsel .region_counsel_panel > span.icon{ width:40px; height:40px;background-color:#67676f; display:block; }
+.sec_region_counsel .region_counsel_panel > p.tit { margin: 24px 0 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_panel > p.desc { margin: 8px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_panel > p.hint { margin: 8px 0 0; color: #107af2; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+.sec_region_counsel .region_counsel_staff_body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.sec_region_counsel .region_counsel_staff_body > header { margin: 0 0 32px; flex-shrink: 0; display: flex; align-items: center; gap: 8px; }
+.sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; flex-shrink: 0; background-color: #161616; display: block; }
+.sec_region_counsel .region_counsel_staff_body > header > h3 { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_staff_body > header > .badge { padding: 2px 10px; color: #107af2; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border-radius: 99px; display: inline-block; }
+.sec_region_counsel .region_counsel_staff_body > header > .btn_close { width:20px; height: 20px; margin-left:auto;background-color:#161616; border-radius:0; text-indent: -9999px; }
+.sec_region_counsel .region_counsel_staff_body > ul { flex: 1 1 auto; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.sec_region_counsel .region_counsel_staff_body > ul > li > article { padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; gap: 24px; }
+.sec_region_counsel .region_counsel_staff_body > ul > li > article > div { min-width: 0; flex: 1 1 auto; }
+.sec_region_counsel .region_counsel_staff_body .photo { width: 90px; height: 90px; flex-shrink: 0; background-color: #d7d7df; border-radius: 50%; display: block; }
+.sec_region_counsel .region_counsel_staff_body .name { margin: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_staff_body .area { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_staff_body .phone { margin: 8px 0 0; display: flex; align-items: center; gap: 8px; }
+.sec_region_counsel .region_counsel_staff_body .ico_phone { width: 16px; height: 16px; flex-shrink: 0; background-color: #a8c8ee; display: block; }
+.sec_region_counsel .region_counsel_staff_body .phone a { color: #107af2; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+
+.sec_diagram header{ margin-bottom:40px; }
+.sec_startup_process { width: 100%; max-width: 1420px; margin: 0 auto; }
+.sec_startup_process .section_header.txt_blue > h2 { color: #107af2; }
+.sec_startup_process .process_timeline { display: flex; flex-direction: column; gap: 40px; align-items: center; }
+.sec_startup_process .process_timeline > li { width: 100%; position: relative; display: flex; align-items: stretch; justify-content: center; gap: 80px; }
+.sec_startup_process .process_timeline > li > .step_meta { width: 174px; flex-shrink: 0; align-self: stretch; display: flex; justify-content: flex-end; gap: 16px; transform: translateY(71.5px);}
+.sec_startup_process .process_timeline > li > .step_meta > .day { height: 48px; min-width: 110px; flex-shrink: 0; color: #107af2; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 48px; text-align: right; background: #fff; z-index: 2; }
+.sec_startup_process .process_timeline > li > .step_meta > .step_track { width: 48px; flex-shrink: 0; align-self: stretch; margin-bottom: -40px;  display: flex; flex-direction: column; align-items: center; }
+.sec_startup_process .process_timeline > li > .step_meta > .step_track > .num { width: 48px; height: 48px; flex-shrink: 0; position: relative; z-index: 1; color: #fff; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; background-color: #107af2; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.sec_startup_process .process_timeline > li > .step_meta > .step_track > .step_line { width: 1px; flex: 1 1 auto; min-height: 0; background-color: #c4c4d0; }
+.sec_startup_process .process_timeline > li > article { flex: 0 1 700px; width: 100%; max-width: 700px; padding: 32px 40px; background-color: #fff; border: 1px solid #e5e5e9; border-radius: 20px; box-shadow: none; display: flex; align-items: flex-start; gap: 12px; transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+.sec_startup_process .process_timeline > li > article > .icon { width: 60px; height: 60px; flex-shrink: 0; background-color: #e7f2fe; border-radius: 50%; display: block; }
+.sec_startup_process .process_timeline > li > article > div { min-width: 0; flex: 1 1 auto; }
+.sec_startup_process .process_timeline > li > article > div > .lead { margin: 0 0 2px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_startup_process .process_timeline > li > article > div > h3 { margin: 0 0 2px; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_startup_process .process_timeline > li > article > div > .desc { margin: 0; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
+.sec_startup_process .process_timeline > li > article >  div > .link_more { margin-top: 12px; color: #107af2; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 4px; background:transparent }
+.sec_startup_process .process_timeline > li > article > div > .link_more::after { content: ''; width: 16px; height: 16px; flex-shrink: 0; background: url('@/assets/images/common/ico_arrow.png') no-repeat ; display: block; transition: transform 0.2s ease; }
+.sec_startup_process .process_timeline > li > article > div > .link_more.is_open::after { transform: rotate(180deg); }
+.sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel { overflow: hidden; height: 0; transition: height 0.35s ease; box-sizing: border-box; }
+.sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont { margin-top: 12px; padding: 10px 16px; background-color: #f8f8f8; border-radius: 12px; }
+.sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li { padding-left: 12px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li + li { margin-top: 4px; }
+.sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li::before { width: 4px; height: 4px; top: 9px; background-color: #666; }
+.sec_startup_process .process_timeline > li:not([data-theme="dday"]) > article:hover { box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.25); }
+.sec_startup_process .process_timeline > li[data-theme="start"] > article:hover { border-color: #107af2; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > article:hover { border-color: #42c68f; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > article:hover { border-color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d28"] > article:hover { border-color: #11935d; }
+.sec_startup_process .process_timeline > li[data-theme="d14"] > article:hover { border-color: #4095f5; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > article:hover { border-color: #107af2; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > article:hover { border-color: #0d62c2; }
+.sec_startup_process .process_timeline > li[data-theme="d2_1"] > article:hover { border-color: #15b874; } 
+
+.sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .day { color: #107af2; }
+.sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .step_track > .num { background-color: #107af2; }
+.sec_startup_process .process_timeline > li[data-theme="start"] > article > div > .lead { color: #107af2; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .day { color: #42c68f; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .step_track > .num { background-color: #42c68f; }
+/* .sec_startup_process .process_timeline > li[data-theme="d30"] > article { border-color: #42c68f; } */
+.sec_startup_process .process_timeline > li[data-theme="d30"] > article > .icon { background-color: #e8f8f1; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > article > div > .lead { color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .day { color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .step_track > .num { background-color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > article > .icon { background-color: #e8f8f1; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > article > div > .lead { color: #11935d; }
+.sec_startup_process .process_timeline > li[data-theme="d28"] > .step_meta > .day { color: #11935d; }
+.sec_startup_process .process_timeline > li[data-theme="d28"] > .step_meta > .step_track > .num { background-color: #11935d; }
+.sec_startup_process .process_timeline > li[data-theme="d28"] > article > .icon { background-color: #e8f8f1; }
+.sec_startup_process .process_timeline > li[data-theme="d28"] > article > div > .lead { color: #0d6e46; }
+.sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .day { color: #4095f5; }
+.sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .step_track > .num { background-color: #4095f5; }
+.sec_startup_process .process_timeline > li[data-theme="d14"] > article > div > .lead { color: #107af2; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .day { color: #107af2; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .step_track > .num { background-color: #107af2; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > article > div > .lead { color: #0d62c2; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > .step_meta > .day { color: #0d62c2; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > .step_meta > .step_track > .num { background-color: #0d62c2; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > article > div > .lead { color: #0a4991; }
+.sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .day { color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .step_track > .num { background-color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d2_1"] > article > .icon { background-color: #e8f8f1; }
+.sec_startup_process .process_timeline > li[data-theme="d2_1"] > article > div > .lead { color: #11935d; }
+.sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { color: #fb6432; font-size: 2.4rem; line-height: 1.35; }
+.sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .step_track > .num { background-color: #fb6432; }
+.sec_startup_process .process_timeline > li[data-theme="dday"] > article { background-color: #fb6432; border-color: #fb6432; }
+.sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { background-color: #fff; }
+.sec_startup_process .process_timeline > li[data-theme="dday"] > article > div > h3 { color: #fff; }
+.sec_startup_process .process_timeline > li[data-theme="dday"] > article > div > .desc { color: #fff; }
+
+.sec_franchise_type { width: 100%; max-width: 1420px; margin: 0 auto; }
+.sec_franchise_type > .franchise_type_list { display: flex; gap: 20px; align-items: stretch; }
+.sec_franchise_type > .franchise_type_list > li { flex: 1 1 0; min-width: 0; max-width: 700px; }
+.sec_franchise_type > .franchise_type_list > li > article { height: 100%; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px 20px 0 0; }
+.sec_franchise_type > .franchise_type_list > li > article > header { padding: 32px 40px 40px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.sec_franchise_type > .franchise_type_list > li > article > header > .icon { width: 80px; height: 80px; flex-shrink: 0; border-radius: 50%; display: block; }
+.sec_franchise_type > .franchise_type_list > li > article > header > div { width: 100%; text-align: center; }
+.sec_franchise_type > .franchise_type_list > li > article > header > div > h3 { margin: 0; color: #fff; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.sec_franchise_type > .franchise_type_list > li > article > header > div > p { margin: 4px 0  0; color: #fff; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > header { background-color: #fc835b; }
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > header > .icon { background-color: #fee0d6; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > header { background-color: #4095f5; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > header > .icon { background-color: #e7f2fe; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { flex: 1 1 auto; padding: 32px 40px; background-color: #fff; display: flex; gap: 20px;border-radius: 0 0 20px 20px;}
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > .franchise_type_body { border: 2px solid #fc835b; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > .franchise_type_body { border: 2px solid #4095f5; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { flex: 1 1 0; min-width: 0; padding: 32px 24px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 4px 16px; color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; border-radius: 99px; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .card_icon { width: 40px; height: 40px; margin-top: 20px; flex-shrink: 0; background-color: #d9d9d9; border-radius: 50%; display: block; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > strong { margin-top: 16px; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { margin: 4px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 { background-color: #f9f2ea; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 > .badge { background-color: #fc835b; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 { background-color: #e7f2fe; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 > .badge { background-color: #4095f5; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 { background-color: #e8f8f1; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 > .badge { background-color: #42c68f; }
+
+.sec_franchise_compare { width: 100%; max-width: 1420px; margin: 0 auto; }
+.sec_franchise_compare > .franchise_compare_wrap { margin-top: 40px; overflow-x: auto; }
+.sec_franchise_compare .franchise_compare_table { width: 100%; min-width: 1000px; border-collapse: collapse; table-layout: fixed; border-top: 1px solid #161616; }
+.sec_franchise_compare .franchise_compare_table col.col_group { width: 8.7%; }
+.sec_franchise_compare .franchise_compare_table col.col_label { width: 22.1%; }
+.sec_franchise_compare .franchise_compare_table col.col_gs { width: 23.1%; }
+.sec_franchise_compare .franchise_compare_table th, .sec_franchise_compare .franchise_compare_table td { padding: 16px 24px; border: 1px solid #e5e5e9; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; text-align: center; vertical-align: middle; word-break: keep-all; }
+.sec_franchise_compare .franchise_compare_table thead th { background-color: #f8f8f8; font-weight: 600; }
+.sec_franchise_compare .franchise_compare_table thead td.is_gs1 > strong { color: #fb6432; }
+.sec_franchise_compare .franchise_compare_table thead td.is_gs2 > strong { color: #107af2; }
+.sec_franchise_compare .franchise_compare_table thead td.is_gs3 > strong { color: #15b874; }
+.sec_franchise_compare .franchise_compare_table thead td > strong { display: block; font-size: 1.8rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { background-color: #f8f8f8; font-weight: 400; }
+.sec_franchise_compare .franchise_compare_table tbody th[scope="row"] { background-color: #f8f8f8; font-weight: 400; }
+.sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis{font-size: 2rem;}
+.sec_franchise_compare .franchise_compare_table td > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
+.list_note {margin-top:32px;}
+.list_note > li + li{margin-top:8px;}
+.list_note > li > p{color:#67676F}
+.list_note > li > p.txt_link{color:#161616}
+.list_note > li > p > a{color:#107AF2; text-decoration: underline;}
+
+
+
+.sec_benefit_store { width: 100%; max-width: 1420px; margin: 0 auto; }
+.sec_benefit_store > .benefit_store_list { margin: 40px auto 0; padding: 0; list-style: none; max-width: 1200px; display: flex; flex-direction: column; gap: 17px; }
+.sec_benefit_store > .benefit_store_list > li > article { padding: 32px; background-color: #fff; border: 1px solid #e5e5e9; border-radius: 20px; display: flex; align-items: flex-start; gap: 20px; }
+.sec_benefit_store > .benefit_store_list > li > article > .icon { width: 80px; height: 80px; flex-shrink: 0; background-color: #f2f2f4; border-radius: 50%; display: block; }
+.sec_benefit_store > .benefit_store_list > li > article > div { min-width: 0; flex: 1 1 auto; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl { margin: 0; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl > dt { margin: 0; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl > dd { margin: 0; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl > dt.lead { color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl:not(.note_list) > dt { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl:not(.note_list) > dt + dd { margin-top: 8px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list { margin-top: 12px; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list > dt { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list > dd { color: #fb6432; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list > dd + dd { margin-top: 4px; }
+.sec_benefit_store > .benefit_store_list > li > article > div > .btn_mid { margin-top: 16px; }
+.sec_benefit_store > .benefit_store_list > li > article > div > .btn_more { width: 48px; height: 48px; margin-top: 16px; padding: 0; background-color: #f8f8f8; border: 0; border-radius: 50%; flex-shrink: 0; }
+
+.sec_franchise_compare .franchise_compare_table tbody .note { color: #67676F; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+
+.sec_startup_faq .section_header.ac, .sec_gs25_faq .section_header.ac { text-align: left !important; }
+
+:deep(.faq_acc.board_type_toggle.type_faq) { width: 100%; border-top: 1px solid #161616; }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 20px 24px 60px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; border-bottom: 1px solid #d7d7df; }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { top: 50%; left: 20px; width: 32px; height: 32px; font-size: 1.8rem; font-weight: 400; line-height: 1.5; transform: translateY(-50%); }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
+:deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 16px 32px 40px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+:deep(.faq_acc.board_type_toggle.type_faq > dd.acc_panel:last-of-type.acc_show) { border-bottom: 1px solid #D7D7DF; }
+:deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont p) { margin: 0; white-space: pre-line; }
+
+:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn) { display: flex; align-items: center; gap: 8px; }
+:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { flex-shrink: 0; padding: 4px 12px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 99px; }
+:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .txt) { flex: 1; min-width: 0; }
+
+.sec_gs25_faq :deep(.tab_wrap) { margin-bottom: 24px; overflow: hidden; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01) { padding-left: 0; gap: 0; flex-wrap: nowrap; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li) { border-bottom: 0; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li .item) { min-height: 60px; padding: 17px 12px; color: #90909a; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; text-align: center; background-color: #fff; border: 1px solid #c4c4d0; border-left: 0; display: flex; align-items: center; justify-content: center; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li:first-child .item) { border-left: 1px solid #c4c4d0; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current) { border-bottom: 0; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current .item) { color: #fff; background-color: #107af2; border-color: #107af2; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap) { margin-top: 24px; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap > p) { margin: 0 0 12px; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; white-space: normal; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_label) { width: auto; min-width: 120px; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_data) { width: 33.3333%; }
+
 .quick_menu { position: fixed; bottom: 60px; right: clamp(24px, 4.5313vw, 87px); width: clamp(104px, 6.8229vw, 131px); z-index: 100; display: flex; flex-direction: column; gap: clamp(8px, 0.5208vw, 10px); opacity: 0; pointer-events: none; }
 .quick_menu li { position: relative; width: 100%; }
-.quick_menu li button { width: 100%; height: clamp(48px, 3.125vw, 60px); padding: clamp(12px, 0.9375vw, 18px) 0;  font-size: clamp(1.3rem, 0.8333vw, 1.6rem); font-weight: 700; letter-spacing: -0.01em; background: none; background-color: #f2f2f4; border: 0; border-radius: 99px; text-align: center; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 0.5208vw, 10px); }
+.quick_menu li button { width: 100%; height: clamp(48px, 3.125vw, 60px); padding: clamp(12px, 0.9375vw, 18px) 0; font-size: clamp(1.3rem, 0.8333vw, 1.6rem); font-weight: 700; letter-spacing: -0.01em; background: none; background-color: #f2f2f4; border: 0; border-radius: 99px; text-align: center; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 0.5208vw, 10px); }
 .quick_menu li button::before { content: ''; width: clamp(16px, 1.0417vw, 20px); height: clamp(19px, 1.25vw, 24px); background-color: #161616; display: block; }
-/* Tablet */
+
 @media (max-width: 1024px) {
-    /* sec_num_list */
     .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
-    /* sec_band */
     .sec_band > .inner > .link_grid { flex-direction: column; }
-    /* sec_overlap */
-    .sec_overlap .section_header h2{font-size: 2.4rem;}
-    /* sec_stack */
-    .sec_stack > .dual_panel{flex-direction: column;}
-    /* sec_tri_grid */
+    .sec_overlap .section_header h2 { font-size: 2.4rem; }
+    .sec_stack > .dual_panel { flex-direction: column; }
     .sec_tri_grid > ul { grid-template-columns: 1fr; gap: 20px; }
-    /* sec_diagram */
-    .sec_diagram > .diagram_shell { gap: 40px; padding: 24px; }
-    .sec_diagram > .diagram_shell > article.node_aside { width: 260px; }
+    .sec_franchise_define .franchise_define_card { width: 100%; max-width: 100%; min-width: 0; padding: 40px 24px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula { display: grid; flex-wrap: unset; justify-content: unset; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-rows: auto auto auto; gap: 16px 8px; align-items: center; justify-items: stretch; width: 100%; max-width: 100%; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: stretch; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(2) { grid-column: 2; grid-row: 1; justify-self: center; align-self: center; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(3) { grid-column: 3; grid-row: 1; justify-self: stretch; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(4) { grid-column: 1 / -1; grid-row: 2; justify-self: center; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) { grid-column: 1 / -1; grid-row: 3; justify-self: stretch; width: 100%; max-width: none; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div { width: 100%; max-width: 100%; height: 136px; min-height: 136px; padding: 0 28px; flex-shrink: unset; flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) { max-width: none; }
+    .sec_franchise_define .franchise_formula > div > span { width: 72px; height: 72px; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p, .sec_franchise_define .franchise_formula > div:nth-child(3) > p { text-align: left; }
+    .sec_franchise_define .franchise_role_grid { margin-top: 32px; }
+    .sec_franchise_type > .franchise_type_list { flex-direction: column; }
+    .sec_franchise_type > .franchise_type_list > li { max-width: none; }
 }
-/* Mobile */
-@media (max-width: 768px) {
-    /* 공통 */
-    :deep(.m_br) { display: block; }
+
+@media (max-width: 768px) { :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
     section + section { padding-top: 80px; }
     .list_dotted > li { padding-left: 6px }
     .list_dotted > li::before { top: 9px; width:2px; height:2px }
     .list_dotted > li + li { margin-top: 5px }
-    /* page_header */
+
     .page_header { display: none; }
-    /* sec_body · 탭 · 공통 헤더 */
+
     .sec_body { padding: 24px 0 40px; }
-    .tab_page { padding: 60px 20px 80px; }
+    .panel { padding: 60px 20px 80px; }
+    .panel_third_depth { padding-top: 32px; }
     .section_header, .sub_header { margin-bottom: 32px; }
     .section_header > .tit { margin-bottom: 12px; padding: 4px 12px; }
     .section_header > h2, .sub_header > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
     .section_header > p, .sub_header > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .section_header > p { margin-top: 12px; }
-    section > .inner{padding-top:40px; padding-bottom: 40px;}
-    /* sec_hero */
+    .section_header.no_desc { margin-bottom: 24px; }
+    section p{font-size: 1.4rem;line-height: 1.4;}
+    :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 64px; padding: 8px 0 8px 40px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+    :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { left: 0; font-size: 1.8rem; line-height: 1.5; }
+    :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
+    :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
+    :deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 12px 12px 24px 20px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+
+    .sec_gs25_faq :deep(.tab_wrap) { margin-bottom: 24px; overflow: visible; }
+    .sec_gs25_faq :deep(.tab_wrap.tabSlide) { overflow: visible; }
+    .sec_gs25_faq :deep(.tab_wrap.tabSlide ul.type_01) { flex-wrap: wrap; gap: 10px 8px; padding-left: 0; transform: none !important; transition: none; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01) { flex-wrap: wrap; gap: 10px 8px; padding-left: 0; justify-content: flex-start; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01::after) { display: none; content: none; min-width: 0; }
+    .sec_gs25_faq :deep(.tab_wrap)::after { display: none; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li) { flex: 0 0 auto; border-bottom: 0; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current) { border-bottom: 0; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li .item) { min-height: 40px; height: 40px; padding: 8px 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 24px; letter-spacing: -0.01em; text-align: center; white-space: nowrap; background-color: #fff; border: 1px solid #161616; border-radius: 99px; border-left: 1px solid #161616; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li:first-child .item) { border-left: 1px solid #161616; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current .item) { color: #107af2; background-color: #e7f2fe; border-color: #107af2; }
+    :deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { padding: 4px 8px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_gs25_faq :deep(.pagination) { margin-top: 40px; }
+    section > .inner{ padding-top:40px; padding-bottom: 40px; }
+    .sec_region_counsel :deep(.tab_wrap ul.type_02){ padding-left:0;justify-content: flex-start; }
+    .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item){ font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item)::after{ min-width:0; }
+
     .sec_hero { max-height: none; min-height: 640px; padding: 50px 20px; border-radius: 20px; gap: 0; }
-    .sec_hero > header { text-align: center; } 
+    .sec_hero > header { text-align: center; }
     .sec_hero > header > .tit { margin: 0 auto; padding: 8px 16px; font-size: 1.2rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_hero > header > h3 { margin: 8px 0 0; font-size: 3rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
     .sec_hero > header > .desc { margin-top: 4px; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
@@ -1099,7 +2478,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_hero > .metric_list > li { flex: 1; min-width: 0; min-height: 103px; padding: 16px 10px; gap: 3px; }
     .sec_hero > .metric_list > li > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
     .sec_hero > .metric_list > li > span { font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
-    /* sec_num_list */
+
     .sec_num_list .section_header > h2 + p { color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .sec_num_list :deep(.num_info_list) { grid-template-columns: 1fr; gap: 40px; }
     .sec_num_list :deep(.num_info_item > article) { flex-direction: row; align-items: flex-start; gap: 16px; }
@@ -1109,21 +2488,21 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_num_list :deep(.num_info_title) { margin-bottom: 6px; }
     .sec_num_list :deep(.num_info_title > strong) { font-size: 2rem; line-height: 1.35; }
     .sec_num_list :deep(.num_info_body > p) { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    /* sec_band */
+
     .sec_band > .inner { padding: 40px 20px; }
     .sec_band > .inner > .link_grid { margin-top: 32px; gap: 10px; }
     .sec_band > .inner > .link_grid > li > a { min-height: 0; padding: 16px; gap: 16px; }
     .sec_band > .inner > .link_grid > li > a > .thumb { width: 64px; height: 64px; }
     .sec_band > .inner > .link_grid > li > a > .txt > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .sec_band > .inner > .link_grid > li > a > .txt > .desc { font-size: 1.4rem; line-height: 1.4; }
-    /* sec_overlap */
+
     .sec_overlap > .overlap_grid { max-width: 335px; width: 100%; margin: 0 auto; flex-wrap:wrap; justify-content: flex-start; align-content: flex-start; gap: 0; }
     .sec_overlap > .overlap_grid > li { flex: 0 1 calc((100% + 25px) / 2); width: auto; }
     .sec_overlap > .overlap_grid > li + li { margin-left: 0; }
     .sec_overlap > .overlap_grid > li:nth-child(even) { margin-left: -25px; }
     .sec_overlap > .overlap_grid > li:nth-child(n+3) { margin-top: -20px; }
     .sec_overlap > .overlap_grid > li > article > strong { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-    /* sec_split */
+
     .sec_split > .inner > .split_layout { flex-direction: column; align-items: center; gap: 20px; }
     .sec_split > .inner > .split_layout > .info_card { width: 100%; max-width: none; min-height: 0; padding: 24px 16px; border-radius: 20px; }
     .sec_split > .inner > .split_layout > .info_card > dt { justify-content: flex-start !important; }
@@ -1132,31 +2511,37 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_split > .inner > .split_layout > .info_card > dd { margin: 12px 0 0; text-align: left !important; }
     .sec_split > .inner > .split_layout > .split_media { width: 220px; max-width: 100%; aspect-ratio: 1; }
     .sec_split > .inner > .split_layout > .split_media > img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    /* sec_stack */
+
     .sec_stack > .highlight_block { flex-direction: column; padding: 32px 20px; }
     .sec_stack > .highlight_block > .sub_header { width: 100%; max-width: none; }
     .sec_stack > .highlight_block > .sub_header > strong { margin-top: 16px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .sec_stack > .highlight_block > .sub_header > p { margin-top: 5px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_stack > .dual_panel{margin-top:32px; gap:32px;}
-    .sec_stack > .dual_panel > article .sub_header{margin-bottom:16px;}
-    .sec_stack > .dual_panel > article :is(.sub_header p, > ul > li){font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .sec_stack > .dual_panel{ margin-top:32px; gap:32px; }
+    .sec_stack > .dual_panel > article .sub_header{ margin-bottom:16px; }
+    .sec_stack > .dual_panel > article .sub_header p, .sec_stack > .dual_panel > article > ul > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_stack > .highlight_block > .highlight_body { width: 100%; gap: 40px; }
     .sec_stack > .highlight_block > .highlight_body > div { width: 100%; min-width: 0; }
     .sec_stack > .highlight_block > .highlight_body > div > h4 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_stack .swiper_edge { width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px; }
     .sec_stack > .highlight_block .swiper_edge { overflow: hidden; touch-action: pan-x; }
+
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-wrapper) { align-items: stretch; }
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) { width: 62.4vw; height: auto; flex-shrink: 0; }
-    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > strong { margin-top: 4px; }
-    .sec_stack > .dual_panel > article{padding: 32px 20px;}
-    /* sec_icon_grid */
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article { width: 100%; min-height: 285px; background-color: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure { width: 100%; margin: 0; display: flex; flex-direction: column; background-color: #fff; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > img { width: 100%; height: 200px; object-fit: contain; background-color: #fff; border-radius: 12px 12px 0 0; display: block; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption { min-height: 85px; padding: 20px 24px; box-sizing: border-box; background-color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > p { margin: 0; color: #67676f; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > strong { margin-top: 4px; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
+    .sec_stack > .dual_panel > article{ padding: 32px 20px; }
+
     .sec_icon_grid > .inner > .icon_grid { grid-template-columns: 1fr; gap: 10px; }
     .sec_icon_grid > .inner > .icon_grid > li { height: auto; }
     .sec_icon_grid > .inner > .icon_grid > li > article { min-height: 0; height: auto; padding: 16px; border-radius: 12px; grid-template-columns: 60px 1fr; column-gap: 12px; }
     .sec_icon_grid > .inner > .icon_grid > li > article > .icon { width: 60px; height: 60px; }
     .sec_icon_grid > .inner > .icon_grid > li > article > div > strong { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_icon_grid > .inner > .icon_grid > li > article > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    /* sec_tri_grid */
+
     .sec_tri_grid > ul { gap: 10px; }
     .sec_tri_grid > ul > li { height: auto; padding: 24px 16px; }
     .sec_tri_grid > ul > li > h3 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
@@ -1164,31 +2549,154 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_tri_grid > ul > li > dl > dt { font-size: 1.6rem; line-height: 1.24; }
     .sec_tri_grid > ul > li > dl > dd { font-size: 1.4rem; line-height: 1.4; }
     .sec_tri_grid > ul > li > dl > dd + dt { margin-top: 32px; }
-    /* sec_diagram */
-    .sec_diagram > .diagram_shell { flex-direction: column; align-items: stretch; gap: 24px; padding: 20px; border-radius: 20px; }
-    .sec_diagram > .diagram_shell > .diagram_track { width: 100%; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer { max-width: none; min-height: 0; padding: 16px; flex-direction: column; align-items: stretch; gap: 16px; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid { max-width: none; min-height: 0; padding: 16px; flex-direction: column; align-items: stretch; gap: 16px; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner { width: 100%; min-height: 0; padding: 16px; }
-    .sec_diagram > .diagram_shell > article.node_aside { width: 100%; }
-    .sec_diagram > .diagram_shell > article.node_aside > strong { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_diagram > .diagram_shell > article.node_aside > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > strong { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    /* sec_stack · dual_panel */
-    .sec_stack > .dual_panel > article > .btn_mid {width:100%; height:44px;}
-    .sec_stack > .dual_panel > article > .stack_list{gap:12px;}
-    .sec_stack > .dual_panel > article > .stack_list > li{padding: 16px;gap:12px;}
-    .sec_stack > .dual_panel > article > .stack_list > li > .thumb{width:60px; height:60px;}
-    .sec_stack > .dual_panel > article > .stack_list > li > div > strong{font-size: 1.6rem;line-height: 1.24;}
-    .sec_stack > .dual_panel > article > .stack_list > li > div > p{margin-top:2px;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
-    .sec_stack > .dual_panel > article > .media_pair > figure{aspect-ratio: 141/111;}
-    /* sec_stack · sub_block */
-    .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > figure{aspect-ratio:320/213;}
+
+    .sec_diagram .section_header p{ color:#67676F; }
+    .sec_diagram > .diagram_shell { max-width: 335px; width: 100%; margin: 0 auto; padding: 100px 24px 24px; gap: 24px; border-radius: 999px; flex-direction: column; align-items: stretch; }
+    .sec_diagram > .diagram_shell > .diagram_track { order: 1; flex: 0 0 auto; width: 100%; min-width: 0; }
+    .sec_diagram > .diagram_shell > .diagram_track .diagram_ring { border-radius: 999px; }
+    .sec_diagram > .diagram_shell > article.node_aside { order: 0; width: 100%; max-width: none; flex: 0 0 auto; text-align: center; }
+    .sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.24px; display: block; }
+    .sec_diagram > .diagram_shell > article.node_aside > p { margin-top: 6px; color: #fff; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.14px; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer { container-type: normal; max-width: none; width: 100%; min-height: 541px; padding: 50px 24px 24px; border-radius: 999px; flex-direction: column; flex-wrap: nowrap; align-items: center; align-content: center; gap: 24px; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring { order: 0; width: 100%; max-width: 239px; flex: 0 0 auto; text-align: center; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > strong { color: #0a4991; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.24px; display: block; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > p { margin-top: 6px; color: #0a4991; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.16px; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid { container-type: normal; order: 1; width: 100%; max-width: 239px; min-height: 381px; padding: 50px 24 24px; border-radius: 999px; flex-direction: column; flex-wrap: nowrap; align-items: center; gap: 24px; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner { width: 100%; max-width: 191px; min-height: 210px; padding: 24px; border-radius: 999px; order:2; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > strong { color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > .diagram_ring.layer_inner > article > span { margin-top:6px;color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.14px; display: block; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested { width: 100%; max-width: 191px; flex: 0 0 auto; text-align: center; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > strong { color: #107af2; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
+    .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > p { margin-top: 6px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.14px; }
+
+    .sec_franchise_define .franchise_define_card { padding: 24px 16px; border-radius: 12px; }
+    .sec_franchise_define .franchise_define_card .sub_header { margin-bottom: 20px; }
+    .sec_franchise_define .franchise_define_card .sub_header > .tit { min-height: 28px; padding: 4px 12px; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_define_card .sub_header > .tit + h3 { margin-top: 8px; }
+    .sec_franchise_define .franchise_define_card .sub_header > h3 + p { margin-top: 8px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+
+    .sec_franchise_define .franchise_formula { display: grid; flex-wrap: unset; justify-content: unset; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-rows: auto auto auto; row-gap: 0; column-gap: 1.5px; align-items: center; justify-items: stretch; width: 100%; max-width: 100%; min-width: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: stretch; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(2) { grid-column: 2; grid-row: 1; justify-self: center; align-self: center; min-width: 0; color: #107af2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula > div:nth-child(3) { grid-column: 3; grid-row: 1; justify-self: stretch; min-width: 0; }
+    .sec_franchise_define .franchise_formula > span:nth-child(4) { grid-column: 1 / -1; grid-row: 2; justify-self: center; min-width: 0; margin-top: 12px; color: #107af2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) { grid-column: 1 / -1; grid-row: 3; justify-self: stretch; width: 100%; max-width: none; min-width: 0; min-height: 88px; height: auto; padding: 12px 16px; flex-direction: row; align-items: center; justify-content: center; gap: 16px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1), .sec_franchise_define .franchise_formula > div:nth-child(3) { width: 100%; max-width: none; height: auto; aspect-ratio: 1 / 1; padding: 8px; flex-shrink: unset; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div > span { width: 40px; height: 40px; flex-shrink: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > span { width: 50px; height: 50px; border-radius: 99px; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p, .sec_franchise_define .franchise_formula > div:nth-child(3) > p { text-align: center; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p > strong, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(1) > p > span, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > span { margin-top: 0; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > p { text-align: left; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > p > strong { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) > p > span { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_define .franchise_role_grid { width: 100%; max-width: none; margin: 20px auto 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+    .sec_franchise_define .franchise_role_grid > article { padding: 20px 10px; }
+    .sec_franchise_define .franchise_role_grid > article > header { padding: 0 0 24px; gap: 8px; align-items: flex-start; }
+    .sec_franchise_define .franchise_role_grid > article > header > span { width: 32px; height: 32px; }
+    .sec_franchise_define .franchise_role_grid > article > header > div > h4 { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .sec_franchise_define .franchise_role_grid > article > header > div > p { margin-top: 0; color: #67676f; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_franchise_define .franchise_role_grid > article > ul { padding: 24px 0 0; gap: 24px; }
+    .sec_franchise_define .franchise_role_grid > article > ul > li { align-items: center; gap: 8px; }
+    .sec_franchise_define .franchise_role_grid > article > ul > li > span { width: 20px; height: 20px; }
+    .sec_franchise_define .franchise_role_grid > article > ul > li > strong { color: #161616; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+    .sec_stack > .dual_panel > article > .btn_mid { width:100%; height:44px; }
+    .sec_stack > .dual_panel > article > .stack_list{ gap:12px; }
+    .sec_stack > .dual_panel > article > .stack_list > li{ padding: 16px;gap:12px; }
+    .sec_stack > .dual_panel > article > .stack_list > li > .thumb{ width:60px; height:60px; }
+    .sec_stack > .dual_panel > article > .stack_list > li > div > strong{ font-size: 1.6rem;line-height: 1.24; }
+    .sec_stack > .dual_panel > article > .stack_list > li > div > p{ margin-top:2px;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em; }
+    .sec_stack > .dual_panel > article > .media_pair > figure{ aspect-ratio: 141/111; }
+
+    .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > figure{ aspect-ratio:320/213; }
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide)  { width: 85.333vw; height: auto; flex-shrink: 0; }
-    .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong{margin-top:4px;font-size: 2rem;line-height: 1.325;letter-spacing: -0.01em;}
-    .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span {padding:6px;font-size: 1.2rem;line-height: 1.2;}
-    /* quick_menu */
+    .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong{ margin-top:4px;font-size: 2rem;line-height: 1.325;letter-spacing: -0.01em; }
+    .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { padding:6px;font-size: 1.2rem;line-height: 1.2; }
+
+    .sec_region_counsel > .section_header { margin-bottom: 24px; }
+    .sec_region_counsel :deep(.tab_wrap) { margin-bottom: 32px; }
+    .sec_region_counsel .region_counsel_board { grid-template-columns: 1fr; gap: 10px; }
+    .sec_region_counsel .region_counsel_board > .region_counsel_map { height: auto; min-height: 297px; max-height: none; overflow: hidden; }
+    .sec_region_counsel .region_counsel_board > .region_counsel_side { height: auto; min-height: 297px; max-width: none; padding: 20px; box-sizing: border-box; }
+    .sec_region_counsel .region_counsel_board.is_staff > .region_counsel_side { min-height: 506px; padding: 20px 0 0; border:0;overflow: hidden; display: flex; flex-direction: column; }
+    .sec_region_counsel .region_counsel_panel > span.icon { width: 32px; height: 32px; }
+    .sec_region_counsel .region_counsel_panel > p.tit { margin-top: 16px; font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_panel > p.desc { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_staff_body { flex: 1 1 auto; min-height: 0; }
+    .sec_region_counsel .region_counsel_staff_body > header { margin: 0 0 24px; padding: 0 20px; flex-shrink: 0; gap: 8px; }
+    .sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; }
+    .sec_region_counsel .region_counsel_staff_body > header > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_staff_body > header > .badge { padding: 2px 10px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_staff_body > header > .btn_close { width: 20px; height: 20px; }
+    .sec_region_counsel .region_counsel_staff_body > ul { flex: 1 1 auto; min-height: 0; max-height: 430px; padding: 0; gap: 10px; overflow-y: auto; }
+    .sec_region_counsel .region_counsel_staff_body > ul > li > article { padding: 16px; border-radius: 12px; align-items: center; gap: 12px; }
+    .sec_region_counsel .region_counsel_staff_body .photo { width: 60px; height: 60px; }
+    .sec_region_counsel .region_counsel_staff_body .name { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+    .sec_region_counsel .region_counsel_staff_body .area { margin-top: 2px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_region_counsel .region_counsel_staff_body .phone { margin-top: 6px; gap: 8px; }
+    .sec_region_counsel .region_counsel_staff_body .phone a { font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+
+    .sec_startup_process .process_timeline { gap: 20px; align-items: stretch; }
+    .sec_startup_process .process_timeline > li { align-items: stretch; justify-content: flex-start; gap: 10px; }
+    .sec_startup_process .process_timeline > li > .step_meta { width: 60px; align-self: stretch; position: relative; flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px; transform: translateY(10px); }
+    .sec_startup_process .process_timeline > li > .step_meta > .day { order: 2; min-width: 0; width: 100%; height: auto; flex-shrink: 0; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; text-align: center; background: #fff; z-index: 2; }
+    .sec_startup_process .process_timeline > li > .step_meta > .step_track { order: 1; width: 100%; flex: 0 0 auto; margin-bottom: 0; padding-bottom: 0; }
+    .sec_startup_process .process_timeline > li > .step_meta > .step_track > .num { width: 32px; height: 32px; font-size: 2rem; line-height: 1.35; }
+    .sec_startup_process .process_timeline > li > .step_meta > .step_track > .step_line { position: absolute; top: 32px; left: 50%; bottom: -20px; width: 1px; height: auto; flex: none; transform: translateX(-50%); background-color: #c4c4d0; }
+    .sec_startup_process .process_timeline > li > article { flex: 1 1 auto; width: auto; max-width: none; min-width: 0; padding: 24px 16px; gap: 0; border-radius: 16px; }
+    .sec_startup_process .process_timeline > li > article > .icon { display: none; }
+    .sec_startup_process .process_timeline > li > article > div > .lead { margin-bottom:4px;font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_startup_process .process_timeline > li > article > div > h3 { margin-bottom: 4px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_startup_process .process_timeline > li > article > div > .desc { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_startup_process .process_timeline > li > article > div > .link_more { margin-top: 12px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li { padding-left: 9px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li::before { width: 3px; height: 3px; top: 8px; }
+    .sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_startup_process .process_timeline > li[data-theme="dday"] > article { border-radius: 20px; gap: 12px; }
+    .sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { display: block; width: 40px; height: 40px; }
+
+    .sec_franchise_type > .franchise_type_list { flex-direction: column; gap: 20px; }
+    .sec_franchise_type > .franchise_type_list > li { max-width: none; }
+    .sec_franchise_type > .franchise_type_list > li.is_profit { order: 1; }
+    .sec_franchise_type > .franchise_type_list > li.is_stable { order: 2; }
+    .sec_franchise_type > .franchise_type_list > li > article > header { padding: 24px; gap: 16px; }
+    .sec_franchise_type > .franchise_type_list > li > article > header > .icon { width: 60px; height: 60px; }
+    .sec_franchise_type > .franchise_type_list > li > article > header > div > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > header > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { padding: 24px; gap: 10px; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { padding:20px 12px; border-radius: 16px; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 4px 16px; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .card_icon { width: 32px; height: 32px; margin-top: 12px; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > strong { margin-top: 12px; font-size: 1.6rem; line-height: 1.24; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+
+    .sec_franchise_compare > .franchise_compare_wrap { margin-top: 32px; margin-left: -20px; margin-right: -20px; padding: 0 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .sec_franchise_compare .franchise_compare_table { min-width: 852px; }
+    .sec_franchise_compare .franchise_compare_table col.col_group { width: 7%; }
+    .sec_franchise_compare .franchise_compare_table col.col_label { width: 17.6%; }
+    .sec_franchise_compare .franchise_compare_table col.col_gs { width: 25.1%; }
+    .sec_franchise_compare .franchise_compare_table th,
+    .sec_franchise_compare .franchise_compare_table td { padding: 12px 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table thead th > strong { font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+    .sec_franchise_compare .franchise_compare_table thead td > span { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .sec_franchise_compare .list_note { margin-top: 16px; }
+
+    .sec_benefit_store > .benefit_store_list { margin-top: 32px; gap: 12px; }
+    .sec_benefit_store > .benefit_store_list > li > article { padding: 20px 16px; gap: 12px; }
+    .sec_benefit_store > .benefit_store_list > li > article > .icon { width: 60px; height: 60px; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > dl:not(.note_list) > dt { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > dl:not(.note_list) > dt + dd { margin-top: 4px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > dl > dt.lead { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > dl.note_list > dd { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_benefit_store > .benefit_store_list > li > article > div > .btn_more { width: 40px; height: 40px; margin-top: 12px; }
+
+    .sec_franchise_compare .list_note > li > p { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+
+    .sec_diagram header{ margin-bottom:32px; }
+
     .quick_menu { display: none; }
 }
 </style>

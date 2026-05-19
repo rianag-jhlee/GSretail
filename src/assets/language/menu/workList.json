@@ -1169,6 +1169,16 @@
         "status": "com",
         "note": "gsrst01010101 ~ gsrst010201 포함"
     },
+        {
+        "depth1": "", "depth2": "GS25 ", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrst/02/gsrst02010101",
+        "link": "/gsrst02010101",
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": ""
+    },
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "", "depth5": "GSF1타입", "depth6": "",
         "type": "tab",
@@ -1272,7 +1282,7 @@
     {
         "depth1": "", "depth2": "", "depth3": "상담 및 신청", "depth4": "가맹 및 창업상담", "depth5": "점포있음", "depth6": "",
         "type": "tab",
-        "path": "gsrst/01/gsrst0103",
+        "path": "gsrst/02/gsrst0103",
         "link": "/gsrst0103",
         "startDate": "",
         "endDate": "",
