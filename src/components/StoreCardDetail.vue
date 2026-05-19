@@ -57,11 +57,11 @@ defineProps({
 /* 담당자 */
 .detail_manager { display: flex; align-items: center; gap: 28px; }
 .manager_photo { width: 103px; height: 103px; background: #e5e5e9; border-radius: 50%; flex-shrink: 0; }
-.manager_info { min-width: 300px; }
+.manager_info { min-width: 300px; text-align: left;}
 .manager_label { color: #161616; font-size: 1.6rem; font-weight: 700; }
 .manager_name { margin-top: 2px; color: #161616; font-size: 2.8rem; font-weight: 700; letter-spacing: -0.01em; }
-.manager_tel { margin-top: 16px; color: #15b874; font-size: 2rem; letter-spacing: -0.01em; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; }
-.manager_tel::before { content: ''; width: 16px; height: 16px; background-color: #15b874; display: inline-block; }
+.manager_tel { margin-top: 16px; color:  var(--color-brand-primary); font-size: 2rem; letter-spacing: -0.01em; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; }
+.manager_tel::before { content: ''; width: 16px; height: 16px; background-color: var(--color-brand-primary); display: inline-block; }
 .detail_manager :deep([class*="btn_"]) { flex-shrink: 0; }
 
 /* 상세 정보 */
@@ -70,7 +70,7 @@ defineProps({
 .detail_info_list > li > span { color: #67676f; font-size: 1.8rem; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; }
 .detail_info_list > li > span::before { content: ''; width: 24px; height: 24px; background-color: red; display: inline-block; }
 .detail_info_list > li > strong { color: #161616; font-size: 1.8rem; font-weight: 700; }
-.detail_info_list > li.cell_full { flex: 1 0 100%; flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 24px; }
+.detail_info_list > li.cell_full { flex: 1 0 100%; flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 24px; border-top: 1px solid #E5E5E9;}
 .detail_info_list > li.cell_full > p { color: #161616; font-size: 1.8rem; line-height: 1.4; }
 
 @media (max-width: 768px) {
@@ -80,7 +80,7 @@ defineProps({
     .manager_info { min-width: 0; }
     .manager_label { color: #161616; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
     .manager_name { font-size: 1.8rem; line-height: 1.35; }
-    .manager_tel { margin-top: 12px; color: #15b874; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .manager_tel { margin-top: 12px; color:var(--color-brand-primary); font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .detail_manager :deep([class*="btn_"]) { width: 100%; height: 44px; margin-left: 0; font-size: 1.6rem; }
     .detail_info_list { border-top: 0; }
     .detail_info_list > li { flex: 1 0 100%; min-height: 56px; padding: 18px 0; gap: 10px; border-top: 1px solid #e5e5e9; }
