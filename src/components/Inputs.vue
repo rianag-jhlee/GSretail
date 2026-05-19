@@ -8,7 +8,7 @@
         <div v-else class="label_wrap">
             <label class="input" :class="{ 'is_search': type === 'search' }">
                 <i v-if="showPlaceholder">{{ placeholder }}</i>
-                <input ref="inputRef" :id="id" :name="name" :type="currentType" v-model="model" :readonly="isReadonly" :disabled="isDisabled" @focus="isFocused = true" @blur="isFocused = false" />
+                 <input ref="inputRef" :id="id" :name="name" :type="currentType" v-model="model" :readonly="inputReadonly" :disabled="isDisabled" @focus="isFocused = true" @blur="isFocused = false" />
                 
                 <Buttons v-if="showClear" btn-class="icon_del" :class="{ active: hasValue }" @click.prevent="clear">전체삭제</Buttons>
 
@@ -23,7 +23,7 @@
 <script>
 import Buttons from "@/components/Buttons.vue";
 
-export default {
+export default { 
     name: "Inputs",
     components: {
         Buttons
@@ -33,12 +33,13 @@ export default {
         name: { type: String, default: "" },
         type: { type: String, default: "text" },
         value: { type: [String, Number, Boolean], default: null },
-        modelValue: { type: [String, Number, Boolean], default: "" },
+        modelValue: { type: [String, Number, Boolean, Array], default: "" },
         text: { type: String, default: "" },
         placeholder: { type: String, default: "" },
         errText: { type: String, default: "" },
         isError: { type: Boolean, default: false },
         isReadonly: { type: Boolean, default: false },
+        readonly: { type: Boolean, default: false },
         isDisabled: { type: Boolean, default: false },
         isswitch: { type: Boolean, default: false }
     },
@@ -62,8 +63,9 @@ export default {
             return this.showPassword ? "text" : "password";
         },
         hasValue() { return this.model !== null && this.model !== ""; },
-        showPlaceholder() { return this.placeholder && !this.hasValue && !this.isFocused; },
-        showClear() { return !this.isPassword && this.type !== 'search' && this.hasValue && !this.isReadonly; },
+        showPlaceholder() { return Boolean(this.placeholder && !this.hasValue && (!this.isFocused || this.inputReadonly)); },
+        inputReadonly() { return this.isReadonly || this.readonly; },
+        showClear() { return !this.isPassword && this.type !== 'search' && this.hasValue && !this.inputReadonly; },
         passwordClass() { return this.showPassword ? "icon_text" : "icon_pass"; }
     },
     methods: {
