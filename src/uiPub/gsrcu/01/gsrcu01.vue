@@ -101,7 +101,7 @@ export default {
                             id: "gs25", name: "GS25", tel: "080-999-5425", hours: "· 평일 9:00~18:00",
                             buttons: [
                                 { label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" },
-                                { label: "창업안내", type: "link", target: "/franchise/gs25" }
+                                { label: "창업안내", type: "link", target: "/gsrst02010101" }
                             ]
                         },
                         {

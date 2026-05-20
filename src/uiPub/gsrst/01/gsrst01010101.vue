@@ -1128,7 +1128,7 @@ function toggleCard(id) {
 .tab_type > button.active { background-color: var(--color-brand-primary); color: #fff; border: 0; }
 
 /* 탭 페이지 공통 */
-.tab_page { padding: 64px 0 200px; }
+.tab_page { padding-top:64px; }
 .tab_content_wrap { padding-top: 40px; }
 
 /* type_info_bar */
@@ -1227,7 +1227,7 @@ function toggleCard(id) {
     .sec_body { padding: 24px 0 40px; }
     .header_title { font-size: 3.6rem; }
     /* ul::after 20px spacer, tab_wrap::after 32px 그라데이션은 common.css에서 전역 처리 */
-    .tab_page { padding: 60px 20px 80px; }
+    .tab_page { padding-top: 60px; }
     .sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
     .tab_content_wrap { padding-top: 40px; }
     .tab_type > button { height: 48px; font-size: 1.4rem; }
