@@ -8,7 +8,7 @@
         </header>
 
         <!-- BODY -->
-        <div class="sec_body">
+        <div class="cont_inner">
             <!-- Depth 1: 페이지 탭 (type_01: 하단 보더 언더라인) -->
             <Tabs  :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
 
@@ -1313,7 +1313,7 @@
                                 </article>
                             </li>
                         </ul>
-                        <div v-if="seminarAppliedSlotKey" class="seminar_wrap">
+                        <div v-if="seminarAppliedSlotKey" ref="seminarWrapRef" class="seminar_wrap">
                             <article class="manager_card type_02" aria-label="담당자 정보">
                                 <div class="manager_header">
                                     <p>선택한 설명회</p>
@@ -1836,6 +1836,7 @@ const seminarMonthAtEnd = computed(() => seminarMonthSlideIndex.value >= seminar
 const seminarActiveMonthCards = computed(() => seminarMonthSlides[seminarMonthSlideIndex.value]?.cards ?? []);
 
 const seminarAppliedSlotKey = ref(null);
+const seminarWrapRef = ref(null);
 const seminarCurrentMonthId = computed(() => seminarMonthSlides[seminarMonthSlideIndex.value]?.id ?? "");
 
 function seminarApplySlotKey(monthId, cardId, si) {
@@ -1847,9 +1848,11 @@ function isSeminarApplyPicked(monthId, cardId, si) {
     return seminarAppliedSlotKey.value === seminarApplySlotKey(monthId, cardId, si);
 }
 
-function onSeminarApplyClick(monthId, cardId, si) {
+async function onSeminarApplyClick(monthId, cardId, si) {
     if (!monthId) return;
     seminarAppliedSlotKey.value = seminarApplySlotKey(monthId, cardId, si);
+    await nextTick();
+    seminarWrapRef.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function seminarMonthSyncFromSwiper(swiper) {
@@ -3349,7 +3352,7 @@ header.ac > .tit { margin-right: auto; margin-left: auto; }
 .sub_header > .tit + h3 { margin-top: 16px; }
 .sub_header > strong { margin-top: 16px; display: block; }
 .sub_header> p { margin-top: 16px; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; }
+/* .sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; } */
 .section_header { margin-bottom: 64px; }
 .section_header.ac { text-align: center; }
 .section_header > .tit + h2 { margin-top: 16px; }
@@ -3832,7 +3835,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 
 /* 상담 및 신청 */
 .sec_consult_startup, .sec_consult_entry{max-width:1000px; margin: 0 auto;}
-.seminar_wrap{max-width:1000px; margin:80px auto 0;  }
+.seminar_wrap{max-width:1000px; margin:80px auto 0; scroll-margin-top: 24px; box-sizing:border-box;}
 .consent_box { width: 100%; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
 .consent_box + .consent_box { margin-top: 40px; }
 .consent_box > h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
@@ -3999,8 +4002,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .list_note li >  p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .page_header { display: none; }
 
-    .sec_body { padding: 24px 0 40px; }
-    .panel { padding: 60px 20px 80px; }
+    /* .sec_body { padding: 24px 0 40px; } */
+    .panel { padding: 60px 0 80px; }
     .panel.pt_64 { padding-top: 60px;}
     .panel_third_depth { padding-top: 32px; }
     .section_header, .sub_header { margin-bottom: 32px; }
@@ -4361,7 +4364,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .apply_form .form_body .form_row.col_02 .col_item{padding:20px 0px;}
     /* .apply_form .button_area{ padding-top:40px; border-top:1px solid #E5E5E9; } */
     .apply_form .button_area :deep(.primary){width:100%; max-width:100%; }
-    .seminar_wrap{margin-top:40px;}
+    .seminar_wrap{margin-top:40px; scroll-margin-top:20px;}
     .manager_card .manager_header > p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .manager_card .manager_header > strong{font-size: 1.8rem;line-height: 1.5 ;letter-spacing: 0%;}
     .seminar_region_pick > .seminar_region_list { grid-template-columns: 1fr; }
