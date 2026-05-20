@@ -3,6 +3,7 @@ import { defineEmits, defineProps } from "vue";
 
 defineProps({
     items: { type: Array, default: () => [] },
+    required: String,
     modelValue: { type: Boolean, default: false },
 });
 
@@ -15,7 +16,7 @@ const onAgreeChange = (event) => {
 
 <template>
     <div class="consent_box" aria-label="개인정보 제공 동의">
-        <h3>개인정보 제공 동의</h3>
+        <h3>{{ required }} 개인정보 제공 동의</h3>
 
         <ul v-if="items && items.length" class="consent_list">
             <li v-for="(item, idx) in items" :key="idx">
@@ -26,7 +27,7 @@ const onAgreeChange = (event) => {
         <div class="consent_notice_area">
             <p>
                 고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br />
-                정보가 확인해야 하는 문의에 대해 정확하고 신속한 답변을 받으시는데 어려움이 있습니다.
+                확인해야 하는 문의에 대해 정확하고 신속한 답변을 받으시는데 어려움이 있습니다.
             </p>
             <label class="consent_radio">
                 <input
