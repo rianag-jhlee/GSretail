@@ -138,8 +138,8 @@ function onInput(e) {
     font-family: inherit;
     resize: vertical;
     background-color: #fff;
-    border: 1px solid #e8e5e2;
-    border-radius: 6px;
+    border: 1px solid #c4c4d0;
+    border-radius: 12px;
     box-sizing: border-box;
     -webkit-appearance: none;
     appearance: none;
