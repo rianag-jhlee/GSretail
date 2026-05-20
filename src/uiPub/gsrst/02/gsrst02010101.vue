@@ -3342,7 +3342,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .apply_form .form_body .form_row_textarea .form_field :deep(Textarea){resize:none;}
 .apply_form .form_body .form_row.col_02 { width: 100%; max-width:720px;  padding: 12px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));  gap: 20px; align-items: start; }
 .apply_form .form_body .form_row.col_02 .col_item { min-width: 0; }
-.apply_form .form_body .form_row.col_02 .col_item .form_label { margin-bottom: 12px; }
+.apply_form .form_body .form_label { margin-bottom: 12px; }
 .apply_form .form_body .form_row.col_02 .col_item .form_field { width: 100%; }
 .apply_form .form_field { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
 .apply_form .form_field_phone .select{flex:1;}
