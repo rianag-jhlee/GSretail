@@ -350,116 +350,113 @@
 
             <!-- 추천 점포 찾기 (activeD1 === 2) -->
             <section class="sec_store tab_page" v-show="activeD1 === 2">
-                <div class="inner">
-                    <p class="tab_intro">철저한 상권 조사를 바탕으로 가맹/창업을 위한 최적의 점포를 소개합니다.</p>
-                    <div class="store_search">
-                        <!-- 지역 -->
+                <p class="tab_intro">철저한 상권 조사를 바탕으로 가맹/창업을 위한 최적의 점포를 소개합니다.</p>
+                <div class="store_search">
+                    <!-- 지역 -->
+                    <div class="search_group">
+                        <span class="search_group_label">지역</span>
+                        <div class="chip_list">
+                            <button
+                                type="button"
+                                class="chip"
+                                :class="{ active: filterRegion === '' }"
+                                @click="filterRegion = ''"
+                            >전체</button>
+                            <button
+                                v-for="r in storeRegions"
+                                :key="r.value"
+                                type="button"
+                                class="chip"
+                                :class="{ active: filterRegion === r.value }"
+                                @click="filterRegion = r.value"
+                            >{{ r.label }}<template v-if="r.count != null"> {{ r.count }}</template></button>
+                        </div>
+                    </div>
+                    <!-- 구분선 -->
+                 
+                    <!-- 하단 row -->
+                    <div class="search_bottom_row">
+                        <!-- 가맹타입 -->
                         <div class="search_group">
-                            <span class="search_group_label">지역</span>
+                            <span class="search_group_label">가맹타입</span>
+                            <div class="chip_list">
+                                <button
+                                    v-for="t in franchiseTypes"
+                                    :key="t.value"
+                                    type="button"
+                                    class="chip"
+                                    :class="{ active: filterFranchiseType === t.value }"
+                                    @click="filterFranchiseType = filterFranchiseType === t.value ? '' : t.value"
+                                >{{ t.label }}</button>
+                            </div>
+                        </div>
+                        <!-- 점포유형/청년창업 -->
+                        <div class="search_group">
+                            <span class="search_group_label">점포유형/청년창업</span>
                             <div class="chip_list">
                                 <button
                                     type="button"
                                     class="chip"
-                                    :class="{ active: filterRegion === '' }"
-                                    @click="filterRegion = ''"
-                                >전체</button>
+                                    :class="{ active: filterStoreType === '신규점' }"
+                                    @click="filterStoreType = filterStoreType === '신규점' ? '' : '신규점'"
+                                >신규점</button>
                                 <button
-                                    v-for="r in storeRegions"
-                                    :key="r.value"
                                     type="button"
                                     class="chip"
-                                    :class="{ active: filterRegion === r.value }"
-                                    @click="filterRegion = r.value"
-                                >{{ r.label }}<template v-if="r.count != null"> {{ r.count }}</template></button>
+                                    :class="{ active: filterStoreType === '기존점' }"
+                                    @click="filterStoreType = filterStoreType === '기존점' ? '' : '기존점'"
+                                >기존점</button>
+                                <span class="chip_sep_v"></span>
+                                <span class="chip_youth_wrap">
+                                    <button
+                                        type="button"
+                                        class="chip"
+                                        :class="{ active: filterYouth }"
+                                        @click="filterYouth = !filterYouth"
+                                    >청년창업</button>
+                                    <button
+                                        type="button"
+                                        class="youth_info_btn"
+                                        @click.stop="youthPopoverVisible = !youthPopoverVisible"
+                                        aria-label="청년창업 안내"
+                                    >?</button>
+                                    <div
+                                        v-if="youthPopoverVisible"
+                                        class="youth_popover"
+                                        role="tooltip"
+                                        @click.stop
+                                    >   
+                                        <strong>청년창업이란?</strong>
+                                        <p>20대 청년들을 위해서 투자비 일부를 할인해드리는 제도에요.</p>
+                                        <a href="#">청년창업 자세히 보러가기</a>
+                                        <button
+                                            type="button"
+                                            class="youth_popover_close"
+                                            @click="youthPopoverVisible = false"
+                                            aria-label="닫기"
+                                        ></button>
+                                    </div>
+                                </span>
                             </div>
                         </div>
-                        <!-- 구분선 -->
-                     
-                        <!-- 하단 row -->
-                        <div class="search_bottom_row">
-                            <!-- 가맹타입 -->
-                            <div class="search_group">
-                                <span class="search_group_label">가맹타입</span>
-                                <div class="chip_list">
-                                    <button
-                                        v-for="t in franchiseTypes"
-                                        :key="t.value"
-                                        type="button"
-                                        class="chip"
-                                        :class="{ active: filterFranchiseType === t.value }"
-                                        @click="filterFranchiseType = filterFranchiseType === t.value ? '' : t.value"
-                                    >{{ t.label }}</button>
-                                </div>
-                            </div>
-                            <!-- 점포유형/청년창업 -->
-                            <div class="search_group">
-                                <span class="search_group_label">점포유형/청년창업</span>
-                                <div class="chip_list">
-                                    <button
-                                        type="button"
-                                        class="chip"
-                                        :class="{ active: filterStoreType === '신규점' }"
-                                        @click="filterStoreType = filterStoreType === '신규점' ? '' : '신규점'"
-                                    >신규점</button>
-                                    <button
-                                        type="button"
-                                        class="chip"
-                                        :class="{ active: filterStoreType === '기존점' }"
-                                        @click="filterStoreType = filterStoreType === '기존점' ? '' : '기존점'"
-                                    >기존점</button>
-                                    <span class="chip_sep_v"></span>
-                                    <span class="chip_youth_wrap">
-                                        <button
-                                            type="button"
-                                            class="chip"
-                                            :class="{ active: filterYouth }"
-                                            @click="filterYouth = !filterYouth"
-                                        >청년창업</button>
-                                        <button
-                                            type="button"
-                                            class="youth_info_btn"
-                                            @click.stop="youthPopoverVisible = !youthPopoverVisible"
-                                            aria-label="청년창업 안내"
-                                        >?</button>
-                                        <div
-                                            v-if="youthPopoverVisible"
-                                            class="youth_popover"
-                                            role="tooltip"
-                                            @click.stop
-                                        >   
-                                            <strong>청년창업이란?</strong>
-                                            <p>20대 청년들을 위해서 투자비 일부를 할인해드리는 제도에요.</p>
-                                            <a href="#">청년창업 자세히 보러가기</a>
-                                            <button
-                                                type="button"
-                                                class="youth_popover_close"
-                                                @click="youthPopoverVisible = false"
-                                                aria-label="닫기"
-                                            ></button>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                            <!-- 검색 -->
-                            <div class="search_group search_group_input">
-                                <span class="search_group_label">검색</span>
-                                <div class="store_search_input_wrap">
-                                    <input
-                                        type="text"
-                                        class="store_search_input"
-                                        placeholder="지역명, 태그...."
-                                        v-model="storeSearchQuery"
-                                    />
-                                    <button type="button" class="store_search_btn" aria-label="검색">
-                                    </button>
-                                </div>
+                        <!-- 검색 -->
+                        <div class="search_group search_group_input">
+                            <span class="search_group_label">검색</span>
+                            <div class="store_search_input_wrap">
+                                <input
+                                    type="text"
+                                    class="store_search_input"
+                                    placeholder="지역명, 태그...."
+                                    v-model="storeSearchQuery"
+                                />
+                                <button type="button" class="store_search_btn" aria-label="검색">
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- 필터 + 테이블 + 페이지네이션 -->
-                <div class="inner store_list_wrap"> 
+                <div class="store_list_wrap"> 
                     <!-- 상단 바: 총 개수 + 정렬/뷰 토글 -->
                     <div class="store_list_bar">
                         <span class="store_count">총 <strong>{{ storeList.length }} </strong>개 점포</span>
@@ -1116,7 +1113,6 @@ function toggleCard(id) {
 
 /* HEADER */
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
-.page_header::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); content: ''; position: absolute; top: 0; left: 0; }
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
 

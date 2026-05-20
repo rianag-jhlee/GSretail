@@ -38,12 +38,13 @@ defineEmits(['toggle']);
 
 <style scoped>
 /* 카드 */
+.store_card { --color-brand-primary: #15b874; }
 .store_card { padding: 24px; background: #fff; border: 1px solid #d7d7df; border-radius: 12px; display: flex; flex-direction: column; flex: 1; box-sizing: border-box; transition: border-color 0.15s; }
 .store_card.is_open { border-color: var(--color-brand-primary); }
 
 /* 상단 뱃지 + 날짜 */
 .card_head { display: flex; align-items: center; justify-content: space-between; }
-.card_badges { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+/* .card_badges { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; } */
 .type_badge { padding: 3px 6px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; border-radius: 4px; display: inline-block; }
 .type_badge + .type_badge { margin-left: 4px; }
 .badge_gs1 { color: #15b874; background: #e8f8f1; }
