@@ -1,5 +1,5 @@
 <template>
-    <div class="input_wrap" :class="[`type-${type}`, { err: isError, disabled: isDisabled }]">
+    <div class="input_wrap" :class="[wrapperTypeClass, $attrs.class]" :style="$attrs.style">
         <label v-if="isCheckType" :class="['check', { check_ani: isswitch }]">
             <input :id="id" :name="name" :type="type" :value="value" v-model="model" :disabled="isDisabled" />
             <em class="label">{{ text }}</em>
@@ -8,7 +8,7 @@
         <div v-else class="label_wrap">
             <label class="input" :class="{ 'is_search': type === 'search' }">
                 <i v-if="showPlaceholder">{{ placeholder }}</i>
-                 <input ref="inputRef" :id="id" :name="name" :type="currentType" v-model="model" :readonly="inputReadonly" :disabled="isDisabled" @focus="isFocused = true" @blur="isFocused = false" />
+                <input ref="inputRef" v-bind="inputRestAttrs" :id="id" :name="name" :type="currentType" v-model="model" :readonly="inputReadonly" :disabled="isDisabled" @focus="isFocused = true" @blur="isFocused = false" />
                 
                 <Buttons v-if="showClear" btn-class="icon_del" :class="{ active: hasValue }" @click.prevent="clear">전체삭제</Buttons>
 
@@ -25,6 +25,7 @@ import Buttons from "@/components/Buttons.vue";
 
 export default { 
     name: "Inputs",
+    inheritAttrs: false,
     components: {
         Buttons
     },
@@ -40,6 +41,7 @@ export default {
         isError: { type: Boolean, default: false },
         isReadonly: { type: Boolean, default: false },
         readonly: { type: Boolean, default: false },
+        readOnly: { type: Boolean, default: false },
         isDisabled: { type: Boolean, default: false },
         isswitch: { type: Boolean, default: false }
     },
@@ -56,6 +58,13 @@ export default {
         modelValue(v) { this.model = v; }
     },
     computed: {
+        wrapperTypeClass() { return [`type-${this.type}`, { err: this.isError, disabled: this.isDisabled }]; },
+        inputRestAttrs() {
+            const rest = { ...this.$attrs };
+            delete rest.class;
+            delete rest.style;
+            return rest;
+        },
         isPassword() { return this.type === "password"; },
         isCheckType() { return this.type === "checkbox" || this.type === "radio"; },
         currentType() {
@@ -64,7 +73,11 @@ export default {
         },
         hasValue() { return this.model !== null && this.model !== ""; },
         showPlaceholder() { return Boolean(this.placeholder && !this.hasValue && (!this.isFocused || this.inputReadonly)); },
-        inputReadonly() { return this.isReadonly || this.readonly; },
+        inputReadonly() {
+            if (this.isReadonly || this.readonly || this.readOnly) return true;
+            const roAttr = this.$attrs.readonly;
+            return roAttr === true || roAttr === "";
+        },
         showClear() { return !this.isPassword && this.type !== 'search' && this.hasValue && !this.inputReadonly; },
         passwordClass() { return this.showPassword ? "icon_text" : "icon_pass"; }
     },
