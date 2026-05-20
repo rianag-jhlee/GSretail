@@ -152,11 +152,11 @@ h5 {font-size:1.8rem;}
 
 /* 2. 헤더와 바닥글은 크기를 유지(flex-shrink: 0)합니다. */
 .modal_header { flex-shrink: 0; margin-bottom: 40px; font-size: 4rem; font-weight: 700; line-height:130%; letter-spacing:-0.01em; position: relative; }
-.modal_header .btn_close { width: 40px; height: 40px; font-size: 0; position: absolute; top: 6px; right: 0; display:block;}
+.modal_header .btn_close { width: 40px; height: 40px; font-size: 0; background-color:transparent; position: absolute; top: 6px; right: 0; display:block;}
 .modal_header .btn_close:before {width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -640px -15px no-repeat; content:''; position:absolute; top:50%; left:50%; display:block; transform:translate(-50%, -50%);}
 
 /* 3. 핵심: 콘텐츠 영역이 남은 공간을 다 차지하고 스크롤이 생기도록 설정합니다. */
-.modal_content { flex: 1; overflow-y: auto; }
+.modal_content {position:relative; flex: 1; overflow-y: auto; }
 .modal_cont{ display: flex; flex-direction: column; height: 100%; max-height: 80vh; background-color: #ffffff; box-sizing: border-box; }
 .modal_wrap .modal_container .board_detail_wrap {padding-top:0;}
 
