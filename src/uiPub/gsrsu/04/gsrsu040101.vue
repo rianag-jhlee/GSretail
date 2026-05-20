@@ -59,7 +59,7 @@
                             <h3>GS리테일 윤리규범</h3>
                             <p>GS리테일은 상호 신뢰와 협력을 토대로 모든 이해관계자와 공동의 이익을 추구함으로써 모두가 선망하는 Value No.1 기업으로 발전하기 위해 올바른 행동과 가치 판단의 기준으로 윤리규범을 제정하고 정도경영의 길을 걷습니다.</p>
                         </header>
-                        <div class="button_area"><Buttons tag="a" href="#none" btn-class="btn_icon btn_xl after border">㈜GS리테일 윤리규범</Buttons></div>
+                        <div class="button_area"><Buttons tag="a" href="#none" btn-class="btn_icon_arrow btn_xl after border">㈜GS리테일 윤리규범</Buttons></div>
                     </section>
                     <section class="sec_ethics_cards">
                         <ul class="card_list" role="list">
@@ -131,10 +131,10 @@
                                 <strong>{{ row.title }}</strong>
                                 <p v-html="row.desc"></p>
                                 <div v-if="row.key === 'wg-04'" class="button_area">
-                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon after" @click="goToWhistleTab(1)">
+                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon_arrow after" @click="goToWhistleTab(1)">
                                         제보자 포상제도
                                     </Buttons>
-                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon after" @click="goToWhistleTab(2)">
+                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon_arrow after" @click="goToWhistleTab(2)">
                                         제보자 보호제도
                                     </Buttons>
                                 </div>
@@ -149,7 +149,7 @@
                                     </div>
                                 </template>
                                 <div v-if="row.key === 'wg-06'" class="button_area">
-                                    <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon after">제보하기</Buttons>
+                                    <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon_arrow after">제보하기</Buttons>
                                 </div>
                             </li>
                         </ol>
@@ -188,7 +188,7 @@
                             </li>
                         </ol>
                         <div class="button_area reward_report_btn">
-                            <Buttons tag="a" href="#none" btn-class="btn_xl primary btn_icon after">제보하기</Buttons>
+                            <Buttons tag="a" href="#none" btn-class="btn_xl primary btn_icon_arrow after">제보하기</Buttons>
                         </div>
                     </div>
                     <div v-show="CTabIdxEsgSystem === 2" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[2]?.item || ''">
@@ -228,12 +228,12 @@
                                                     v-if="item.key === 'ethics'"
                                                     tag="button"
                                                     type="button"
-                                                    btn-class="btn_xl border btn_icon after"
+                                                    btn-class="btn_xl border btn_icon_arrow after"
                                                     @click="openEthicsInquiry"
                                                 >
                                                     {{ item.btnText }}
                                                 </Buttons>
-                                                <Buttons v-else tag="a" href="#none" btn-class="btn_xl border btn_icon after">{{ item.btnText }}</Buttons>
+                                                <Buttons v-else tag="a" href="#none" btn-class="btn_xl border btn_icon_arrow after">{{ item.btnText }}</Buttons>
                                             </div>
                                         </div>
                                     </article>
@@ -551,7 +551,7 @@
                             :no-swipe="true"
                         >
                             <template #action="{item}">
-                                <Buttons btn-class="btn_xl border btn_icon after"
+                                <Buttons btn-class="btn_xl border btn_icon_arrow after"
                                     @click="openModal" 
                                     :data-popid="item.popContId" 
                                     data-type="lg" 
@@ -4482,12 +4482,11 @@ section + section { padding-top:120px; }
     .report_form_wrap .apply_form .form_row_content .form_label { padding-top: 0; }
 }
 .sec_history { position: relative; }
-.history_list { padding-left:48px;position:relative; }
+.history_list { padding-left:48px;position:relative;}
 .history_item { display: flex; gap: 32px; position: relative; }
 .history_item::before { content: ""; width: 8px; height: 8px; background-color: #107af2; border: 8px solid #cfe4fc; border-radius: 50%; position: absolute; top: 11px; left: -48px; z-index: 5; }
 .history_item:not(:last-child)::after { content: ""; width: 1px;height:100%; background-color: #107af2; position: absolute; top: 12px; bottom: 0; left: -36px; }
 .history_period { width: 300px; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex-shrink: 0; display: block; }
-.history_body { width: 100%; padding-bottom: 100px; }
 .history_summary { font-size: 1.6rem;line-height: 1.5; letter-spacing: -0.01em; }
 .history_detail_list { display: grid; grid-template-columns: 103px minmax(0, 1fr); row-gap: 0; column-gap: 20px; align-items: start; }
 .history_detail_list > dt { padding:14px 0; color:#90909A; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; grid-column: 1; }
@@ -4634,7 +4633,6 @@ section + section { padding-top:120px; }
     .history_item:not(:last-child)::after { top: 16px; left: -12px; }
     .history_item:last-child .history_body { padding-bottom: 0; }
     .history_period { width: 100%; font-size: 2rem; line-height: 1.35; }
-    .history_body { margin-top:6px;padding-bottom: 42px; }
     .history_summary { font-size: 1.4rem; line-height: 1.4; }
     .history_detail_list { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 6px; column-gap: 0; }
     .history_detail_list > dt { padding: 6px 0; font-size: 1.6rem; line-height: 1.4; grid-column: 1; }
