@@ -1315,9 +1315,9 @@
                                                             </div>
                                                             <div class="input_group email">
                                                                 <div class="group_wrap">
-                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="이메일 아이디" /></div>
+                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="" /></div>
                                                                     <span class="unit">@</span>
-                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="도메인 입력" /></div>
+                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="" /></div>
                                                                 </div>
                                                                 <SelectBox :options="lp.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
                                                             </div>
@@ -1328,9 +1328,7 @@
                                                                 <span class="required_mark">*</span>
                                                             </div>
                                                             <div class="input_group">
-                                                                <div class="input_flex_item">
-                                                                    <SelectBox :options="lp.part1.telOptions" v-model="formData.tel1" initMsg="선택" />
-                                                                </div>
+                                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel1" is-disabled="true" /></div>
                                                                 <span class="unit">-</span>
                                                                 <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
                                                                 <span class="unit">-</span>
@@ -1358,10 +1356,9 @@
                                                         <div class="form_row">
                                                             <div class="label_item">
                                                                 <span class="label_text">{{ lp.part2.storeLabel }}</span>
-                                                                <span class="required_mark">*</span>
                                                             </div>
                                                             <div class="input_complex">
-                                                                <Inputs type="text" v-model="formData.storeName" placeholder="매장명을 입력해주세요" class="w428"/>
+                                                                <Inputs type="text" v-model="formData.storeName" placeholder="" class="w428"/>
                                                                 <p class="guide_msg">{{ lp.part2.storeGuide }}</p>
                                                             </div>
                                                         </div>
@@ -1371,7 +1368,7 @@
                                                                 <span class="required_mark">*</span>
                                                             </div>
                                                             <div class="input_item full">
-                                                                <Inputs type="text" v-model="formData.subject" placeholder="제목을 입력해주세요" class="w428"/>
+                                                                <Inputs type="text" v-model="formData.subject" placeholder="" class="w428"/>
                                                             </div>
                                                         </div>
                                                         <div class="form_row">
@@ -1582,7 +1579,7 @@ export default {
                 emailId: "",
                 emailDomain: "",
                 emailSelect: "",
-                tel1: "",
+                tel1: "010",
                 tel2: "",
                 tel3: "",
                 category: "",
@@ -1722,7 +1719,7 @@ export default {
                     },
                     MarketSupport: {
                         Marketing: {
-                            Summary: "파트너사의 지속성장 기반 강화를 위한<br/> 다양한 자금 지원 프로그램을 운영하고 있습니다.",
+                            Summary: "파트너사의 국내·외 판로 개척을 위한<br/>다양한 지원 프로그램을 운영하고 있습니다.",
                             Title: "마케팅 지원",
                             Desc: "인기 맛집, TV프로그램, 유명연예인 등 고객들에게 소구력이 높은 브랜드를 GS리테일이 자체적으로 유치하고, 해당 브랜드를 파트너사가 공급하는 상품의 브랜드 경쟁력을 높일 수 있도록 무상 사용을 지원하는 제도입니다.",
                             Brands: [
@@ -1766,7 +1763,7 @@ export default {
                                     { name: "안전/위생 교육", period: "반기 1회", desc: "식품 협력사의 품질관리 능력 향상을 위해 식품위생법, 원산지 관리법 등의 교육을 지원합니다." },
                                     { name: "HACCP 아카데미", period: "년 1회", desc: "중소 PB파트너사 대상으로 HACCP 운영 역량 향상을 위해 관련 위생관리 및 법규 교육을 지원함으로써 상생과 안전한 상품 공급을 위한 지원 제도" },
                                     { name: "파트너사 품질/위생 점검", period: "년 1회", desc: "당사에 상품을 납품하는 파트너사 대상으로 사전 위생 심사를 통해 미흡사항에 대한 개선 및 코칭과 컨설팅을 진행합니다." },
-                                    { name: "선도·위생관리 코칭 및 지원", period: "상시", desc: "-" }
+                                    { name: "선도·위생관리 코칭 및 지원", period: "상시", desc: "당사에 상품을 납품하는 파트너사 대상으로 사전 위생 심사를 통해 미흡사항에 대한 개선 및 코칭과 컨설팅을 진행하고 있으며, 입점 이후에도 지속 방문하여 선도·위생관리에 대한 사후 지원활동을 수행 '20년 선도 관련 262개 업체, 위생관련 237개 업체 방문 교육 실시" }
                                 ]
                             },
                             alt: "교육지원 프로세스 다이어그램",
@@ -1873,7 +1870,7 @@ export default {
                                 },
                                 {
                                     tit: "복리후생",
-                                    desc: "경조사 발생시(가맹점 실경영주 기준 결혼 또는 조위 ) 경조금 및 화환 등을 지급하고 있습니다.",
+                                    desc: "경조사 발생시(가맹점 실경영주 기준 결혼 또는 조위) 경조금 및 화환 등을 지급하고 있습니다.",
                                     img: require("@/assets/images/dummy/gsrsu03010103_1_3.png")
                                 },
                                 {
@@ -1965,7 +1962,7 @@ export default {
                                         "에코크리에이터(2019~)",
                                         "사랑의 떡국 기부(2019)",
                                         "GS25 늘봄스토어 오픈 (장애인훈련형 점포, 2017~ )",
-                                        "GS25 내일스토어 오픈 (사회공헌형 편의점, 2017~)",
+                                        "GS25 내일스토어 오픈 (취업이 어려운 이웃을 지원하는 사회공헌형 편의점, 2017~)",
                                         "독립군 알리기 도시락 (2017~)",
                                         "GS아동안전지킴이 / GS안전지킴이 심폐소생술교육(2017~)",
                                         "에코소셜임팩트(2017~)",
@@ -1974,7 +1971,7 @@ export default {
                                         "사랑의 연탄 기부(2016~2024)",
                                         "저소득 화상환자 지원(2015~)",
                                         "나눔매장 물품 지원(2013~)",
-                                        "사랑의 김장기부(2013~)",
+                                        "사랑의 김장 기부(2013~)",
                                         "사회적기업 판로지원 사업(2013~2023)",
                                         "FC서울 다문화가정 아동 축구교실 지원(2013~)",
                                         "북드림 도서기부캠페인(2012~2024)"
@@ -2087,9 +2084,9 @@ export default {
                                     { name: "등촌9종합사회복지관", img: require("@/assets/images/dummy/gsrsu030203_logo_1.png") },
                                     { name: "서울SOS어린이마을", img: require("@/assets/images/dummy/gsrsu030203_logo_10.png") },
                                     { name: "홀트일산복지타운/요양원", img: require("@/assets/images/dummy/gsrsu030203_logo_3.png") },
-                                    { name: "외 26개 복지관 등등", img: require("@/assets/images/dummy/gsrsu030203_logo_4.png") },
+                                    { name: "외 26개 복지관 등", img: require("@/assets/images/dummy/gsrsu030203_logo_4.png") },
                                     { name: "푸드뱅크", img: require("@/assets/images/dummy/gsrsu030203_logo_5.png") },
-                                    { name: "대한적집자사", img: require("@/assets/images/dummy/gsrsu030203_logo_6.png") },
+                                    { name: "대한적십자사", img: require("@/assets/images/dummy/gsrsu030203_logo_6.png") },
                                     { name: "thanksgive", img: require("@/assets/images/dummy/gsrsu030203_logo_7.png") },
                                     { name: "아름다운가게", img: require("@/assets/images/dummy/gsrsu030203_logo_8.png") },
                                     { name: "(주)한국백혈병소아암협회", img: require("@/assets/images/dummy/gsrsu030203_logo_9.png") }
@@ -2175,12 +2172,12 @@ export default {
                                 BtnText: "전문보기"
                             },
                             Goals: {
-                                Title: "일하기 좋은 직장만들기, 임직원 인권 목표",
+                                Title: "일하기 좋은 직장 만들기, 임직원 인권 목표",
                                 Items: [
                                     { num: "01", desc: "즐겁고 보람된 일터를 만들어 갑니다." },
-                                    { num: "02", desc: "누구나 차별없이 존중받는 근무 환경을 만들어 갑니다." },
+                                    { num: "02", desc: "누구나 차별없이 존중 받는 근무 환경을 만들어 갑니다." },
                                     { num: "03", desc: "장애인, 취약근로자, 여성 및 임산부 근로자들의 행복하고, 일할 수 있는 근로환경을 제공합니다." },
-                                    { num: "04", desc: "GS리테일은 수평적 조직 문화를 통해 누구나 소신있는 발언과 의견을 존중합니다." }
+                                    { num: "04", desc: "GS리테일은 수평적 조직 문화를 통해 누구나 소신 있는 발언과 의견을 존중합니다." }
                                 ]
                             },
                             Programs: {
@@ -2462,7 +2459,7 @@ export default {
                             },
                             listening : {
                                 Title: "안전·보건 의견 청취함",
-                                Desc: "건전한 제보는 회사의 발전과 안전보건 경영을 위한 소중한 밑거름이 됩니다.",
+                                Desc: "GS리테일은 안전 및 보건에 관한 사항에 대해 구성원의 의견을 성실히 청취합니다.<br/>건전한 제보는 회사의 발전과 안전보건 경영을 위한 소중한 밑거름이 됩니다.",
                                 items: [
                                     "안전·보건 의견 청취함은 시민 및 구성원의 안전과 보건에 대하여 의견 및 제보를 받습니다.",
                                     "안전과 보건에 관한 사항 이외에는 별도 답변이나 조치 등을 하지 않을 수 있습니다.",
@@ -2482,7 +2479,7 @@ export default {
                                     {
                                         title: "개인정보 수집·이용 동의",
                                         items: [
-                                            "수집이용 및 목적: 문의사항 확인 및 답변 활용",
+                                            "수집·이용 및 목적: 문의사항 확인 및 답변 활용",
                                             "수집하는 개인정보 항목: 이름, 연락처, 이메일",
                                             "보유 및 이용기간: 접수 후 1년"
                                         ],
@@ -2503,17 +2500,14 @@ export default {
                                         title: "제보자 정보",
                                         requiredText: "* 필수 입력사항",
                                         nameLabel: "이름",
-                                        namePlaceholder: "이름을 입력해주세요",
+                                        namePlaceholder: "",
                                         emailLabel: "이메일",
                                         emailOptions: [
                                             { value: 'naver.com', label: 'naver.com' },
                                             { value: 'gmail.com', label: 'gmail.com' }
                                         ],
                                         telLabel: "연락처",
-                                        telOptions: [
-                                            { value: '010', label: '010' },
-                                            { value: '011', label: '011' }
-                                        ]
+                                        telOptions: '010',
                                     },
                                     part2: {
                                         title: "상담내용",
@@ -2571,9 +2565,9 @@ export default {
                                     { tit: "ISMS-P 인증", desc: "정보보호 및 개인정보보호 관리체계(ISMS-P) 인증을 유지하기 위해 관리,기술적 통제항목 등 다양한 정보보호 감사를 주기적으로 실시하고 있으며, 공신력 있는 기관을 통해 ISMS-P 인증심사를 수검 받고 있습니다." },
                                     { tit: "서비스 보안 검토", desc: "신규 및 변경되는 서비스에 대하여 개발보안 프로세스를 운영하고 있습니다. 서비스 기획 단계에서 중요도평가를 통해 보안요구사항을 정의하고 이를 프로젝트 각 단계에 반영하고 있으며, 오픈 전 보안요구사항에 맞도록 개인정보생명주기, 개발보안, 어플리케이션 보안, 소스코드 및 인프라점검, 웹/앱 취약점 점검 등 전반적인 보안점검을 수행하고 식별된 취약점에 대한 조치를 진행하고 있습니다." },
                                     { tit: "정보보호 교육", desc: "전사 임직원을 대상으로 개인정보보호 교육과, 정보보호 교육을 실시하고 있으며, 위치정보 및 다량의 개인정보를 취급하는 임직원 대상으로 별도의 심화교육을 실시하고 있습니다." },
-                                    { tit: "정보호호 인식제고", desc: "임직원의 정보보호 인식을 향상시키기 위해 개인정보보호의 날·정보보호의 날 캠페인을 운영하며, 꼭 지켜야 하는 사항 등에 대해 정기 메일링을 진행하고 있습니다." },
-                                    { tit: "모의훈련", desc: "임직원 대상으로 악성메일 모의훈련을 실시하여, 악성메일에 대한 보안인식을 향상시키고 있습니다.<br/>또한, 개인정보 유 노출 사고에 대한 모의훈련을 실시하여, 실제 사고 발생 시 고객분들께 발생하는 개인정보침해를 줄이기 위해 노력하고 있습니다." },
-                                    { tit: "위험관리", desc: "정보자산(인프라 등) 및 프로세스 등에서 발행사는 위험을 관리하기 위해 매년 취약점 점검 및 위험평가를 실시하고 있으며, 도출된 위험에 대해 관리할 수 있는 계획을 수립하여 운영하고 있습니다." }
+                                    { tit: "정보보호 인식제고", desc: "임직원의 정보보호 인식을 향상시키기 위해 개인정보보호의 날·정보보호의 날 캠페인을 운영하며, 꼭 지켜야 하는 사항 등에 대해 정기 메일링을 진행하고 있습니다." },
+                                    { tit: "모의훈련", desc: "임직원 대상으로 악성메일 모의훈련을 실시하여, 악성메일에 대한 보안인식을 향상시키고 있습니다.<br/>또한, 개인정보 유·노출 사고에 대한 모의훈련을 실시하여, 실제 사고 발생 시 고객분들께 발생하는 개인정보침해를 줄이기 위해 노력하고 있습니다." },
+                                    { tit: "위험관리", desc: "정보자산(인프라 등) 및 프로세스 등에서 발생하는 위험을 관리하기 위해 매년 취약점 점검 및 위험평가를 실시하고 있으며, 도출된 위험에 대해 관리할 수 있는 계획을 수립하여 운영하고 있습니다." }
                                 ],
                                 BtnText: "정보보호 공시 바로가기"
                             },
@@ -3004,7 +2998,7 @@ export default {
     .listening_form_wrap .input_complex { display: flex; flex-direction: column; gap: 8px;}
     .listening_form_wrap .input_complex .textarea_wrap {max-width:600px;}
     .listening_form_wrap .guide_msg { font-size: 14px; color: #67676f; }
-    .listening_form_wrap :deep(.guide_msg_multi) span { font-size: 12px; color: #67676f; line-height: 18px; margin-top: 8px; }
+    .listening_form_wrap :deep(.guide_msg_multi) span { display:block; font-size: 12px; color: #67676f; line-height: 18px; margin-top: 8px; }
     .listening_form_wrap .file_upload_group { display: flex; align-items: center; gap: 10px; }
     .listening_form_wrap .btn_file { height: 38px; padding: 0 12px; font-size: 16px; cursor: pointer; }
     .listening_form_wrap .file_name { font-size: 14px; color: #161616; }
