@@ -162,7 +162,7 @@
                                         <li><strong>{{ t.GreenProduct.guideline.num4 }}</strong> <span>{{ t.GreenProduct.guideline.txt4 }}</span></li>
                                     </ul>
                                     <div class="ac">
-                                        <Buttons btn-class="btn_icon btn_xl border after arr_r" 
+                                        <Buttons btn-class="btn_icon btn_xl border after after" 
                                             @click="openModal" 
                                             data-popid="gsrsu02010301" 
                                             data-type="mid" 
@@ -188,7 +188,7 @@
                                         <h4>{{ t.SeaBreathTitle }}</h4>
                                         <p v-html="t.SeaBreathDesc"></p>
                                     </div>
-                                    <Buttons btn-class="btn_icon btn_xl after arr_r">{{ t.MoreBtn }}</Buttons>
+                                    <Buttons btn-class="btn_icon btn_xl after after">{{ t.MoreBtn }}</Buttons>
                                 </div>
                             </section>
 
@@ -438,6 +438,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .wide_card { display: flex; align-items: flex-start; gap: 40px; padding: 60px; background: #F8F8F8; border-radius: 20px; }
 .wide_card .image_wrap { flex: 0 0 500px; height: 320px; }
 .wide_card .text_group { flex: 1; display: flex; flex-direction: column; gap: 40px; }
+.wide_card .text_group .title_area { margin-bottom:40px }
 
 /* 5. Sub Grid (2열 그리드 구현) */
 .sub_grid_container { display: flex; flex-wrap: wrap; gap: 80px 40px; }
@@ -469,9 +470,9 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .key_features_grid { width: 100%; padding: 0; display: flex; gap: 20px; }
 .key_features_grid li { height: 300px; padding: 42px 32px 32px; background-color: #F8F8F8; border-radius: 12px; position:relative; display:flex; flex-direction:column; justify-content:space-between; align-items: flex-end; flex: 1; overflow: hidden;}
 .key_features_grid li::after {content:''; width:72px; height:72px; background:red; position:absolute; right:32px; bottom:32px}
-.key_features_grid li:first-child::after { background: url('/src/assets/images/dummy/icon_solar_panel.png') no-repeat center / contain; }
-.key_features_grid li:nth-child(2)::after { background: url('/src/assets/images/dummy/icon_recycle.png') no-repeat center / contain; }
-.key_features_grid li:nth-child(3)::after { background: url('/src/assets/images/dummy/icon_eco_design.png') no-repeat center / contain; }
+.key_features_grid li:first-child::after { background: url('/src/assets/images/sub/icon_solar_panel.png') no-repeat center / contain; }
+.key_features_grid li:nth-child(2)::after { background: url('/src/assets/images/sub/icon_recycle.png') no-repeat center / contain; }
+.key_features_grid li:nth-child(3)::after { background: url('/src/assets/images/sub/icon_eco_design.png') no-repeat center / contain; }
 .card_content { width: 100%; display: flex; flex-direction: column; gap: 16px; text-align: left; }
 .card_content strong { font-size: 24px; font-weight: 700; color: #161616; line-height: 1.35; }
 .card_content p { font-size: 1.8rem; font-weight: 400; color: #67676f; line-height: 1.4; }
@@ -522,11 +523,12 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .policy_card_box { padding: 30px 20px; }
     .policy_card_box li { flex-direction: column; }
     .wide_card { flex-direction: column; padding: 30px 20px; }
+    .wide_card .text_group button { width:100% }
     .wide_card .image_wrap { flex: 0 0 auto; width: 100%; height: auto; }
     .sub_grid_container { gap: 40px; }
     .grid_item { width: 100%; }
     .strategy_section .image_wrap, .system_section .image_wrap {width:100%; margin:0 auto;}
-    .mb200 {margin-bottom:80px;}
+    .mb200 {margin-bottom:80px !important;}
     .btn_icon.btn_xl.after {width:100%;}
     .green_value_chain { margin-top: 40px; }
     .value_grid { gap: 40px; }

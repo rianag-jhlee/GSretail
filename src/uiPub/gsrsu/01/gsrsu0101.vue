@@ -346,8 +346,8 @@
                         </header>
                         <p>{{ t.sustainReportHeroLead }}</p>
                         <div class="sustain_report_hero_actions" :aria-label="t.sustainReportHeroNavAria">
-                            <Buttons tag="a" :href="t.sustainReportHeroKoHref" btn-class="btn_icon btn_big after border download">{{ t.sustainReportKoBtn }}</Buttons>
-                            <Buttons tag="a" :href="t.sustainReportHeroEnHref" btn-class="btn_icon btn_big after border download">{{ t.sustainReportEnBtn }}</Buttons>
+                            <Buttons tag="a" :href="t.sustainReportHeroKoHref" btn-class="btn_icon btn_big after border btn_download_file">{{ t.sustainReportKoBtn }}</Buttons>
+                            <Buttons tag="a" :href="t.sustainReportHeroEnHref" btn-class="btn_icon btn_big after border btn_download_file">{{ t.sustainReportEnBtn }}</Buttons>
                         </div>
                     </article>
                 </section>
@@ -376,7 +376,7 @@
                                         </article>
                                     </td>
                                     <td>
-                                        <Buttons tag="a" :href="row.koHref" btn-class="btn_icon btn_big after border download">{{ t.sustainReportKoBtn }}</Buttons>
+                                        <Buttons tag="a" :href="row.koHref" btn-class="btn_icon btn_big after border btn_download_file">{{ t.sustainReportKoBtn }}</Buttons>
                                     </td>
                                 </tr>
                             </tbody>
