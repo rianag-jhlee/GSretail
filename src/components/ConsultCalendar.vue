@@ -194,8 +194,8 @@ function slideNext() {
 .calendar_weekdays > li { color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; text-align: center; }
 .calendar_weekdays > li.is_sun { color: #ed3030; }
 .calendar_weekdays > li.is_sat { color: #107af2; }
-.calendar_grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
-.calendar_day { width: 100%; min-height: 50px; margin: 0; padding: 0; background: none; border: 0; border-radius: 99px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.calendar_grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px 0; }
+.calendar_day { width: 100%; min-height: 50px; margin: 0; padding: 0; background: none; border: 0; border-radius: 99px; color: #161616; font-size: 1.8rem; font-weight: 400 !important; line-height: 1.39; letter-spacing: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .calendar_day.is_empty { color: #a4a4b0; pointer-events: none; cursor: default; }
 .calendar_day.is_empty.is_sun, .calendar_day.is_empty.is_sat { color: #a4a4b0; }
 .calendar_day.is_empty.is_today { background-color: transparent; }
@@ -209,10 +209,14 @@ function slideNext() {
 
 @media (max-width: 768px) {
     .consult_calendar { max-width: none; }
+    .calendar_grid { margin-top: 12px; gap: 8px 0;}
     .consult_calendar_inner { padding: 16px; border-radius: 12px; }
-    .consult_calendar_head { margin-bottom: 16px; }
-    .calendar_weekdays { padding: 12px 0; }
-    .calendar_day { min-height: 45px; }
+    .consult_calendar_head { margin-bottom: 12px; }
+    .calendar_weekdays { padding: 10px 0; }
+    .calendar_day { width: 100%; min-height: unset; aspect-ratio: 1; align-self: center; border-radius: 10px; }
+    .calendar_day.is_empty { border-radius: 10px; }
+    .calendar_day.is_selected { border-radius: 50%; }
+    .calendar_day.is_today:not(.is_selected):not(.is_empty) { border-radius: 50%; }
     .calendar_selected { margin-top: 0; padding-top: 16px; font-size: 1.6rem; line-height: 1.24; }
 }
 </style>

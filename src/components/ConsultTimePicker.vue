@@ -67,12 +67,12 @@ function selectSlot(slot) {
 </script>
 
 <style scoped>
-.consult_time_picker { width: 100%; max-width: 1000px; }
-.consult_time_picker_inner { padding: 32px 40px; border: 1px solid #d7d7df; border-radius: 20px; box-sizing: border-box; }
-.time_slot_grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 10px; }
+.consult_time_picker { width: 100%; max-width: min(1000px, 100%); min-width: 0; box-sizing: border-box; }
+.consult_time_picker_inner { width: 100%; min-width: 0; padding: 32px 40px; border: 1px solid #d7d7df; border-radius: 20px; box-sizing: border-box; }
+.time_slot_grid { width: 100%; min-width: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 10px; }
 .time_slot_grid > li { min-width: 0; }
-.time_slot { width: 100%; min-height: 50px; margin: 0; padding: 0 8px; background-color: #ffffff; border: 1px solid #e5e5e9; border-radius: 12px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; text-align: center; cursor: pointer; box-sizing: border-box; }
-.time_slot.is_unavailable { background-color: #f8f8f8; color: #a4a4b0; cursor: not-allowed; }
+.time_slot { width: 100%; min-width: 0; min-height: 50px; margin: 0; padding: 0 8px; background-color: #ffffff; border: 1px solid #e5e5e9; border-radius: 12px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; text-align: center; cursor: pointer; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+.time_slot.is_unavailable { background-color: #f8f8f8; color: #a4a4b0; cursor: not-allowed; text-decoration: line-through; text-decoration-color: currentColor; text-decoration-thickness: 1px; }
 .time_slot.is_selected { background-color: #107af2; border-color: #107af2; color: #ffffff; font-weight: 700; }
 .time_slot:disabled { cursor: not-allowed; }
 .time_slot_legend { margin: 12px 0 0; padding: 10px 0 0; border:0; display: flex; align-items: center; gap: 8px; }

@@ -103,7 +103,7 @@ function onInput(e) {
     gap: 4px;
     width: 100%;
     max-width: 100%;
-    box-sizing: border-box;
+    
 }
 
 .textarea_wrap.disabled {
@@ -120,9 +120,7 @@ function onInput(e) {
 }
 
 .textarea_field {
-    padding: 4px;
-    border-radius: 8px;
-    box-sizing: border-box;
+    border-radius: 12px;
 }
 
 .textarea_field > textarea {
@@ -134,13 +132,11 @@ function onInput(e) {
     padding: 12px 15px;
     font-size: 16px;
     line-height: 1.4;
-    color: #222;
-    font-family: inherit;
     resize: vertical;
     background-color: #fff;
-    border: 1px solid #c4c4d0;
+    border: 1px solid #C4C4D0;
     border-radius: 12px;
-    box-sizing: border-box;
+    
     -webkit-appearance: none;
     appearance: none;
 }
@@ -177,7 +173,7 @@ function onInput(e) {
     justify-content: space-between;
     gap: 8px 16px;
     width: 100%;
-    box-sizing: border-box;
+    
 }
 
 .textarea_meta > div {

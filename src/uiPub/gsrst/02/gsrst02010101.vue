@@ -8,12 +8,14 @@
         </header>
 
         <!-- BODY -->
-        <div class="sec_body">
+        <div class="cont_inner">
             <!-- Depth 1: 페이지 탭 (type_01: 하단 보더 언더라인) -->
-            <Tabs :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
+            <Tabs  :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
 
             <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) -->
             <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
+            <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
+            <Tabs v-show="activeD1 === 3" :tab-items="depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
 
             <!-- GS25 브랜드 소개 -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
@@ -488,8 +490,7 @@
                 </section>
             </div>
             <!-- //FAQ -->
-            <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
-            <Tabs v-show="activeD1 === 3" :tab-items="depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
+
             <!-- 창업 절차 -->
             <div class="panel" v-show="activeD1 === 1 && activeD2 === 0">
                 <section class="sec_startup_process">
@@ -758,7 +759,7 @@
                         </ul>
                     </section>
                 </div>
-                <div v-show="activeD3 === 1" class="panel_third_depth" aria-label="든든한 점포 운영">
+                <div v-show="activeD3 === 1" class="panel_third_depth" aria-label="든든한 점포 운영"> 
                     <section class="sec_operation">
                         <header class="section_header ac">
                             <h2>{{ benefitOperationPanel.title }}</h2>
@@ -1084,9 +1085,9 @@
 
             <!-- 상담 및 신청 -->
             <div class="panel" v-show="activeD1 === 3 && activeD2 === 0" aria-label="창업 상담 신청">
-                 <section class="sec_consult_startup">
-                    <div class="consent_box" aria-label="개인정보 제공 동의">
-                        <h3>개인정보 제공 동의</h3>
+                <section class="sec_consult_startup">
+                    <div class="consent_box" aria-label="개인정보 수집·이용 동의">
+                        <h3>개개인정보 수집·이용 동의</h3>
                         <ul v-if="startupConsentItems.length" class="consent_list">
                             <li v-for="(item, idx) in startupConsentItems" :key="idx">
                                 <p v-html="item"></p>
@@ -1105,7 +1106,7 @@
                             </label>
                         </div>
                     </div>
-
+                   
                     <div class="apply_form">
                         <div class="form_body">
                             <div class="form_row col_02">
@@ -1125,7 +1126,7 @@
                                         <Inputs type="text" v-model="startupConsultForm.phone3" />
                                     </div>
                                 </div>
-                              
+                            
                             </div> 
                             <div class="form_row">
                                 <div class="form_label">생년월일 <span class="form_required">(필수 입력)</span></div>
@@ -1156,7 +1157,7 @@
                                         <Inputs type="text" v-model="startupConsultForm.investAmount" />
                                     </div>
                                 </div>
-                              
+                            
                             </div>
                             <div class="form_row">
                                 <div class="form_label">오픈 희망 시기</div>
@@ -1213,13 +1214,13 @@
                                     <Inputs type="text" v-model="startupConsultForm.consultTime" :is-readonly="true" placeholder="먼저 관심 지역을 선택해주세요." />
                                 </div>
                             </div>
-                            <article class="consult_manager_card" aria-label="담당자 정보">
+                            <article class="manager_card" aria-label="담당자 정보">
                                 <figure class="consult_manager_photo" aria-hidden="true"></figure>
-                                <div class="consult_manager_body">
-                                    <p class="consult_manager_name">{{ startupConsultManager.name }}</p>
-                                    <div class="consult_manager_office">
-                                        <span class="consult_manager_icon" aria-hidden="true"></span>
-                                        <div class="consult_manager_addr">
+                                <div class="manager_body">
+                                    <p class="manager_name">{{ startupConsultManager.name }}</p>
+                                    <div class="manager_office">
+                                        <span class="manager_icon" aria-hidden="true"></span>
+                                        <div class="manager_addr">
                                             <p class="tit">{{ startupConsultManager.office }}</p>
                                             <p class="addr">{{ startupConsultManager.address }}</p>
                                         </div>
@@ -1239,13 +1240,326 @@
                             <Buttons btn-class="btn_xl primary">상담 예약 신청하기</Buttons>
                         </div>
                     </div>
+                  
                 </section>
             </div>
             <div class="panel" v-show="activeD1 === 3 && activeD2 === 1" aria-label="창업 설명회 신청">
-                <section class="sec_consult_seminar"></section>
+                <section class="sec_consult_seminar">
+                    <div class="seminar_region_pick" aria-label="지역 선택">
+                        <div ref="seminarMonthSizerRef" class="seminar_month_sizer" aria-hidden="true">
+                            <p v-for="slide in seminarMonthSlides" :key="'sz-' + slide.id" class="seminar_month_title">{{ slide.label }}</p>
+                        </div>
+                        <header class="seminar_month_head">
+                            <button type="button" class="seminar_nav_btn seminar_nav_prev" aria-label="이전 달" :disabled="seminarMonthAtStart" @click.prevent="seminarMonthPrev">
+                                <span class="seminar_nav_chevron" aria-hidden="true"></span>
+                            </button>
+                            <Swiper
+                                class="seminar_month_swiper"
+                                :style="{ width: `${seminarMonthSwiperPx}px` }"
+                                :slides-per-view="1"
+                                :space-between="0"
+                                @swiper="onSeminarMonthSwiperInit"
+                                @slide-change="onSeminarMonthSlideChange"
+                            >
+                                <SwiperSlide v-for="slide in seminarMonthSlides" :key="slide.id" tag="div">
+                                    <p class="seminar_month_title">{{ slide.label }}</p>
+                                </SwiperSlide>
+                            </Swiper>
+                            <button type="button" class="seminar_nav_btn seminar_nav_next" aria-label="다음 달" :disabled="seminarMonthAtEnd" @click.prevent="seminarMonthNext">
+                                <span class="seminar_nav_chevron" aria-hidden="true"></span>
+                            </button>
+                        </header>
+                        <ul class="seminar_region_list">
+                            <li v-for="card in seminarActiveMonthCards" :key="card.id">
+                                <article class="seminar_region_card">
+                                    <header class="seminar_region_card_head">
+                                        <p class="seminar_region_name">{{ card.regionName }}</p>
+                                        <p class="seminar_region_addr">
+                                            <span class="seminar_ic_pin" aria-hidden="true"></span>
+                                            {{ card.address }}
+                                        </p>
+                                    </header>
+                                    <div class="seminar_slot_list">
+                                        <div v-for="(slot, si) in card.slots" :key="si" class="seminar_slot_row" :class="{ is_muted: slot.muted }">
+                                            <span class="seminar_ic_time" aria-hidden="true"></span>
+                                            <time class="seminar_slot_time" :datetime="slot.datetime">{{ slot.timeLabel }}</time>
+                                            <button
+                                                v-if="slot.badge && slot.badge.variant === 'closed'"
+                                                type="button"
+                                                disabled
+                                                class="seminar_slot_badge is_closed"
+                                            >
+                                                {{ slot.badge.label }}
+                                            </button>
+                                            <button
+                                                v-else-if="slot.badge && slot.badge.variant === 'apply' && !isSeminarApplyPicked(seminarCurrentMonthId, card.id, si)"
+                                                type="button"
+                                                class="seminar_slot_badge is_apply"
+                                                @click.prevent="onSeminarApplyClick(seminarCurrentMonthId, card.id, si)"
+                                            >
+                                                신청
+                                            </button>
+                                            <button
+                                                v-else-if="slot.badge && slot.badge.variant === 'apply' && isSeminarApplyPicked(seminarCurrentMonthId, card.id, si)"
+                                                type="button"
+                                                disabled
+                                                class="seminar_slot_badge is_picked"
+                                                aria-pressed="true"
+                                            >
+                                                선택됨
+                                            </button>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                        </ul>
+                        <div v-if="seminarAppliedSlotKey" ref="seminarWrapRef" class="seminar_wrap">
+                            <article class="manager_card type_02" aria-label="담당자 정보">
+                                <div class="manager_header">
+                                    <p>선택한 설명회</p>
+                                    <strong>부산 영남권 · 2/19(목) 15:00</strong>
+                                </div>
+                                <button type="button" class="btn_close" aria-label="닫기">닫기</button>
+                            </article>
+                            <div class="consent_box" aria-label="개인정보 수집·이용 동의">
+                                <h3>개인정보 수집·이용 동의</h3>
+                                <ul v-if="seminarConsentItems.length" class="consent_list">
+                                    <li v-for="(item, idx) in seminarConsentItems" :key="idx">
+                                        <p v-html="item"></p>
+                                    </li>
+                                </ul>
+
+                                <div class="consent_notice_area">
+                                    <p>동의하지 않으실 경우 상담 글 작성이 불가능합니다.</p>
+                                    <label class="consent_radio">
+                                        <input
+                                            type="checkbox"
+                                            :checked="startupConsentAgreed"
+                                            @change="onStartupConsentChange"
+                                        />
+                                        <span>동의합니다.</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="apply_form">
+                                <div class="form_body">
+                                    <div class="form_row col_02">
+                                        <div class="col_item">
+                                            <div class="form_label">이름 <span class="form_required">(필수 입력)</span></div>
+                                            <div class="form_field">
+                                                <Inputs type="text" v-model="startupConsultForm.name" />
+                                            </div>
+                                        </div>
+                                        <div class="col_item">
+                                            <div class="form_label">연락처 <span class="form_required">(필수 입력)</span></div>
+                                            <div class="form_field form_field_phone">
+                                                <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
+                                                <span class="form_sep">-</span>
+                                                <Inputs type="text" v-model="startupConsultForm.phone2" />
+                                                <span class="form_sep">-</span>
+                                                <Inputs type="text" v-model="startupConsultForm.phone3" />
+                                            </div>
+                                        </div>
+                                    
+                                    </div> 
+                                    <div class="form_row">
+                                        <div class="form_label">생년월일 <span class="form_required">(필수 입력)</span></div>
+                                        <div class="form_field form_field_birth">
+                                            <SelectBox :options="startupBirthYearOptions" v-model="startupConsultForm.birthYear" initMsg="년도" />
+                                            <SelectBox :options="startupBirthMonthOptions" v-model="startupConsultForm.birthMonth" initMsg="월" />
+                                            <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" initMsg="일" />
+                                        </div>
+                                    </div>
+                                    <div class="form_row col_02">
+                                        <div class="col_item">
+                                            <div class="form_label">점포 소유 및 임차 <span class="form_required">(필수 입력)</span></div>
+                                            <div class="form_field form_field_radio">
+                                                <Inputs
+                                                    v-for="opt in startupStoreOwnershipOptions"
+                                                    :key="opt.value"
+                                                    type="radio"
+                                                    name="startup_store_ownership"
+                                                    :value="opt.value"
+                                                    v-model="startupConsultForm.storeOwnership"
+                                                    :text="opt.label"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col_item">
+                                            <div class="form_label">투자가능금액 (만원)</div>
+                                            <div class="form_field">
+                                                <Inputs type="text" v-model="startupConsultForm.investAmount" />
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                    <div class="form_row">
+                                        <div class="form_label">오픈 희망 시기</div>
+                                        <div class="form_field form_field_open">
+                                            <Inputs type="text" v-model="startupConsultForm.openYear" />
+                                            <span class="form_unit">년</span>
+                                            <Inputs type="text" v-model="startupConsultForm.openMonth" />
+                                            <span class="form_unit">월</span>
+                                        </div>
+                                    </div>
+                                    <div class="form_row form_row_radio">
+                                        <div class="form_label">편의점 근무경험</div>
+                                        <div class="form_field form_field_radio form_field_experience">
+                                            <Inputs
+                                                v-for="opt in startupCvsExperienceOptions"
+                                                :key="opt.value"
+                                                type="checkbox"
+                                                name="startup_cvs_experience"
+                                                :value="opt.value"
+                                                v-model="startupConsultForm.cvsExperience"
+                                                :text="opt.label"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form_row form_row_textarea">
+                                        <div class="form_label">문의 내용</div>
+                                        <div class="form_field">
+                                            <Textarea
+                                                v-model="startupConsultForm.inquiry"
+                                                placeholder="창업 관련 궁금한 사항을 입력해주세요."
+                                                :rows="6"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="button_area">
+                                    <Buttons btn-class="btn_xl primary">상담 예약 신청하기</Buttons>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </section>
             </div>
             <div class="panel" v-show="activeD1 === 3 && activeD2 === 2" aria-label="입점 제안/브랜드 전환 상담">
-                <section class="sec_consult_entry"></section>
+                <section class="sec_consult_entry">
+                    <header class="section_header">
+                        <h2 class="section_title">{{ consultEntryPanel.title }}</h2>
+                        <p>{{ consultEntryPanel.desc }}</p>
+                    </header>
+                    <div class="consent_box" aria-label="개인정보 수집·이용 동의">
+                        <h3>개인정보 수집·이용 동의</h3>
+                        <ul v-if="counselConsentItems.length" class="consent_list">
+                            <li v-for="(item, idx) in counselConsentItems" :key="idx">
+                                <p v-html="item"></p>
+                            </li>
+                        </ul>
+                        <div class="consent_notice_area">
+                            <p>고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 입지제안 신청 글 작성이 불가능합니다.</p>
+                            <label class="consent_radio">
+                                <input
+                                    type="checkbox"
+                                    :checked="startupConsentAgreed"
+                                    @change="onStartupConsentChange"
+                                />
+                                <span>동의합니다.</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="apply_form row_layout">
+                        <div class="form_body">
+                            <article>
+                                <h3>고객정보 <span class="form_required">* 필수 입력사항</span></h3>
+                                <div class="form_row">
+                                    <div class="form_label">이름 <span class="form_required">*</span></div>
+                                    <div class="form_field form_name_field">
+                                        <Inputs type="text" v-model="startupConsultForm.name" />
+                                    </div>
+                                </div> 
+                                <div class="form_row">
+                                    <div class="form_label">휴대폰 <span class="form_required">*</span></div>
+                                    <div class="form_field form_field_phone">
+                                        <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
+                                        <span class="form_sep">-</span>
+                                        <Inputs type="text" v-model="startupConsultForm.phone2" />
+                                        <span class="form_sep">-</span>
+                                        <Inputs type="text" v-model="startupConsultForm.phone3" />
+                                    </div>    
+                                </div>
+                                <div class="form_row">
+                                    <div class="form_label">상담 형태 <span class="form_required">*</span></div>
+                                    <div class="form_field form_field_radio">
+                                        <Inputs
+                                            v-for="opt in consultTypeOptions"
+                                            :key="opt.value"
+                                            type="radio"
+                                            name="consult_type"
+                                            :value="opt.value"
+                                            v-model="startupConsultForm.consultType"
+                                            :text="opt.label"
+                                        />
+                                    </div>    
+                                </div>
+                            </article>
+                            <article>
+                                <h3>브랜드 전환 상담 <span class="form_required">* 필수 입력사항</span></h3>
+                                <div class="form_row cb_rs">
+                                    <div class="form_label">추천점포 소재지 <span class="form_required">*</span></div>
+                                    <div class="form_field cb_faddr">
+                                        <div class="cb_zip">
+                                            <Inputs type="text" v-model="startupConsultForm.brandConsultZipCode" />
+                                            <Buttons type="button" btn-class="btn_big border" @click.prevent="onBrandConsultZipSearch">우편번호 찾기</Buttons>
+                                        </div>
+                                        <div class="cb_ast">
+                                            <div class="cb_a1">
+                                                <Inputs type="text" v-model="startupConsultForm.brandConsultAddrBasic" />
+                                            </div>
+                                            <div class="cb_a2">
+                                                <Inputs type="text" v-model="startupConsultForm.brandConsultAddrDetail1" />
+                                                <Inputs type="text" v-model="startupConsultForm.brandConsultAddrDetail2"  />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="form_label">추천 점포 면적</div>
+                                    <div class="form_field cb_area">
+                                        <div class="cb_area_item">
+                                            <span>계약면적</span>
+                                            <Inputs type="text" v-model="startupConsultForm.brandConsultAreaContract" />
+                                            <span class="form_unit">평</span>
+                                        </div>
+                                        <div class="cb_area_item">
+                                            <span>전용면적</span>
+                                            <Inputs type="text" v-model="startupConsultForm.brandConsultAreaPrivate" />
+                                            <span class="form_unit">평</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="form_label">점포 상호</div>
+                                    <div class="form_field cb_store">
+                                        <Inputs type="text" v-model="startupConsultForm.brandConsultStoreName" />
+                                    </div>
+                                </div>
+                                <div class="form_row form_row_textarea cb_feat">
+                                    <div class="form_label">상권 특징</div>
+                                    <div class="form_field">
+                                        <Textarea
+                                            v-model="startupConsultForm.brandConsultCommercialFeature"
+                                            name="brand_consult_feature"
+                                            placeholder="상권 특징을 입력해 주세요."
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form_row form_row_body_last">
+                                    <div class="form_label">건물주와의 관계</div>
+                                    <div class="form_field cb_rel">
+                                        <Inputs type="text" v-model="startupConsultForm.brandConsultLandlordRelation" />
+                                    </div>
+                                </div>
+                            </article>
+
+                        </div>
+                        <div class="button_area">
+                            <Buttons btn-class="btn_xl primary">상담 예약 신청하기</Buttons>
+                        </div>
+                    </div>
+                </section>
             </div>
             <!-- //상담 및 신청 -->
 
@@ -1253,7 +1567,7 @@
         <ul
             ref="quickMenuRef" 
             class="quick_menu"
-            :aria-hidden="!showQuickMenu" 
+            :aria-hidden="!showQuickMenu"  
         >
             <li><button type="button">창업안내</button></li>
             <li><button type="button">입점상담</button></li>
@@ -1381,13 +1695,202 @@ const startupConsentItems = [
     "- 보유 및 이용기간: 접수 후 1년",
 ];
 
+const seminarConsentItems =[
+    "- 입력하신 정보는 창업상담을 위해서만 사용합니다.",
+    "- 수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호, 자택주소(시, 구/군)",
+    "- 수집 및 목적: 본인 식별 및 문의사항 확인 및 답변",
+    "- 보유 및 이용기간: 접수 후 1년",
+]
+
+const counselConsentItems =[
+    "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
+    "- 수집하는 개인정보 항목: 이름, 휴대폰번호",
+    "- 수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
+    "- 보유 및 이용기간: 접수 후 1년",
+]
+
 const startupConsentAgreed = ref(false);
 
 function onStartupConsentChange(event) {
     startupConsentAgreed.value = event.target.checked;
 }
 
-const startupPhoneOptions = [
+/** 브랜드 전환 상담 · 우편번호 (763:17115 · 퍼블만, 레이어 연동 시 교체) */
+function onBrandConsultZipSearch() {
+    // 우편번호 팝업/다음 도로명 API 등 연결
+}
+
+/** 창업 설명회 신청 탭 · 월별 지역 카드(Figma node 763:16835) */
+const seminarDummyAddress = "서울특별시 강남구 논현로 636, 이디야 빌딩 3층";
+const seminarMonthSlides = [
+    {
+        id: "seminar-m-202602",
+        label: "2026년 2월",
+        cards: [
+            {
+                id: "seminar-card-seoul-gb",
+                regionName: "서울 수도권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-busan-yeongnam",
+                regionName: "부산 영남권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-daegu-yeongnam",
+                regionName: "대구 영남권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-gwangju-honam",
+                regionName: "광주 호남권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+        ],
+    },
+    {
+        id: "seminar-m-202603",
+        label: "2026년 3월",
+        cards: [
+            {
+                id: "seminar-card-incheon-gb",
+                regionName: "인천 수도권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "3/5(목) 10:30", datetime: "2026-03-05T10:30", muted: false, badge: { label: "신청", variant: "apply" } },
+                    { timeLabel: "3/12(목) 15:00", datetime: "2026-03-12T15:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                ],
+            },
+            {
+                id: "seminar-card-daejeon-chung",
+                regionName: "대전 충청권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "3/8(일) 11:00", datetime: "2026-03-08T11:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                    { timeLabel: "3/15(일) 11:00", datetime: "2026-03-15T11:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-gangwon",
+                regionName: "강원 춘천·원주",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "3/18(수) 14:00", datetime: "2026-03-18T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                    { timeLabel: "3/25(수) 14:00", datetime: "2026-03-25T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-jeju",
+                regionName: "제주 특별자치도",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "3/21(토) 10:00", datetime: "2026-03-21T10:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                    { timeLabel: "3/28(토) 10:00", datetime: "2026-03-28T10:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+        ],
+    },
+];
+
+const seminarMonthSwiperInst = ref(null);
+const seminarMonthSlideIndex = ref(0);
+const seminarMonthSizerRef = ref(null);
+const seminarMonthSwiperPx = ref(201);
+
+function seminarMonthMeasureSwiperWidth() {
+    nextTick(() => {
+        const root = seminarMonthSizerRef.value;
+        if (!root) return;
+        const titles = root.querySelectorAll(".seminar_month_title");
+        let maxW = 0;
+        titles.forEach((node) => {
+            maxW = Math.max(maxW, Math.ceil(node.getBoundingClientRect().width));
+        });
+        if (maxW > 0) seminarMonthSwiperPx.value = maxW;
+        const s = seminarMonthSwiperInst.value;
+        s?.update?.();
+        if (s) seminarMonthSyncFromSwiper(s);
+    });
+}
+
+const seminarMonthAtStart = computed(() => seminarMonthSlideIndex.value <= 0);
+const seminarMonthAtEnd = computed(() => seminarMonthSlideIndex.value >= seminarMonthSlides.length - 1);
+
+const seminarActiveMonthCards = computed(() => seminarMonthSlides[seminarMonthSlideIndex.value]?.cards ?? []);
+
+const seminarAppliedSlotKey = ref(null);
+const seminarWrapRef = ref(null);
+const seminarCurrentMonthId = computed(() => seminarMonthSlides[seminarMonthSlideIndex.value]?.id ?? "");
+
+function seminarApplySlotKey(monthId, cardId, si) {
+    return `${monthId}::${cardId}::${si}`;
+}
+
+function isSeminarApplyPicked(monthId, cardId, si) {
+    if (!monthId) return false;
+    return seminarAppliedSlotKey.value === seminarApplySlotKey(monthId, cardId, si);
+}
+
+async function onSeminarApplyClick(monthId, cardId, si) {
+    if (!monthId) return;
+    seminarAppliedSlotKey.value = seminarApplySlotKey(monthId, cardId, si);
+    await nextTick();
+    seminarWrapRef.value?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function seminarMonthSyncFromSwiper(swiper) {
+    if (!swiper || typeof swiper.activeIndex !== "number") return;
+    seminarMonthSlideIndex.value = swiper.activeIndex;
+}
+
+function onSeminarMonthSwiperInit(swiper) {
+    seminarMonthSwiperInst.value = swiper;
+    seminarMonthSyncFromSwiper(swiper);
+    seminarMonthMeasureSwiperWidth();
+}
+
+function onSeminarMonthSlideChange(swiper) {
+    seminarMonthSyncFromSwiper(swiper);
+}
+
+function seminarMonthPrev() {
+    seminarMonthSwiperInst.value?.slidePrev?.();
+}
+
+function seminarMonthNext() {
+    seminarMonthSwiperInst.value?.slideNext?.();
+}
+
+watch(seminarMonthSlideIndex, (n, prev) => {
+    if (prev !== undefined && n !== prev) seminarAppliedSlotKey.value = null;
+});
+
+watch(
+    () => [activeD1.value, activeD2.value],
+    ([d1, d2]) => {
+        if (d1 !== 3 || d2 !== 1) seminarAppliedSlotKey.value = null;
+        else seminarMonthMeasureSwiperWidth();
+    }
+);
+
+const phoneOptions = [
     { value: "010", label: "010" },
     { value: "011", label: "011" },
     { value: "016", label: "016" },
@@ -1443,11 +1946,26 @@ const startupBirthDayOptions = Array.from({ length: 31 }, (_, i) => {
     return { value: day, label: day };
 });
 
+const consultTypeOptions = [
+    { value: "brand_transition", label: "브랜드 전환 상담" },
+    { value: "store_entry_proposal", label: "입점 제안" },
+];
+
 const startupConsultForm = reactive({
     name: "",
     phone1: "010",
     phone2: "",
     phone3: "",
+    consultType: "",
+    brandConsultZipCode: "",
+    brandConsultAddrBasic: "",
+    brandConsultAddrDetail1: "",
+    brandConsultAddrDetail2: "",
+    brandConsultAreaContract: "",
+    brandConsultAreaPrivate: "",
+    brandConsultStoreName: "",
+    brandConsultCommercialFeature: "",
+    brandConsultLandlordRelation: "",
     storeOwnership: "",
     investAmount: "",
     openYear: "",
@@ -1893,6 +2411,11 @@ const franchiseTypeGroups = [
     },
 ];
 
+
+const consultEntryPanel = {
+    title: "입지에 대한 지역별 최고의 전문가들이 1:1 맞춤 상담해 드립니다.",
+    desc: "주말/공휴일에는 즉시 응답이 어려울 수 있는 점 양해 부탁드립니다.", 
+}
 /** moreLink: true(버튼만) | moreList(펼침 목록) — 배열/문자열을 moreLink에 넣은 경우도 호환 */
 function getProcessMoreList(step) {
     if (step.moreList?.length) return step.moreList;
@@ -2829,7 +3352,7 @@ header.ac > .tit { margin-right: auto; margin-left: auto; }
 .sub_header > .tit + h3 { margin-top: 16px; }
 .sub_header > strong { margin-top: 16px; display: block; }
 .sub_header> p { margin-top: 16px; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; }
+/* .sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; } */
 .section_header { margin-bottom: 64px; }
 .section_header.ac { text-align: center; }
 .section_header > .tit + h2 { margin-top: 16px; }
@@ -3030,7 +3553,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_region_counsel .region_counsel_note { margin: 0 0 28px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; display: flex; align-items: flex-start; gap: 4px; }
 .sec_region_counsel .region_counsel_note > span { flex-shrink: 0; }
 .sec_region_counsel .region_counsel_board { width: 100%; display: grid; align-items: stretch; grid-template-columns: 1fr 1fr; gap: 20px; }
-.sec_region_counsel .region_counsel_board > .region_counsel_map, .sec_region_counsel .region_counsel_board > .region_counsel_side { width: 100%; height: 620px; min-width: 0; min-height: 620px; border: 1px solid #d7d7df; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+.sec_region_counsel .region_counsel_board > .region_counsel_map, .sec_region_counsel .region_counsel_board > .region_counsel_side { width: 100%; height: 620px; min-width: 0; min-height: 620px; border: 1px solid #d7d7df; border-radius: 12px; overflow: hidden;  }
 .sec_region_counsel .region_counsel_board:not(.is_staff) .region_counsel_map { cursor: pointer; }
 .sec_region_counsel .region_counsel_map { background-color: #f2f8fd; }
 .sec_region_counsel .region_counsel_side { min-width: 0; min-height: 0; padding: 40px; display: flex; flex-direction: column; }
@@ -3074,7 +3597,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li > article >  div > .link_more { margin-top: 12px; color: #107af2; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; background: transparent; display: inline-flex; align-items: center; gap: 4px; }
 .sec_startup_process .process_timeline > li > article > div > .link_more::after { width: 16px; height: 16px; flex-shrink: 0; background: url('@/assets/images/common/ico_arrow.png') no-repeat; display: block; transition: transform 0.2s ease; content: ''; }
 .sec_startup_process .process_timeline > li > article > div > .link_more.is_open::after { transform: rotate(180deg); }
-.sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel { height: 0; overflow: hidden; transition: height 0.35s ease; box-sizing: border-box; }
+.sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel { height: 0; overflow: hidden; transition: height 0.35s ease;  }
 .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont { margin-top: 12px; padding: 10px 16px; background-color: #f8f8f8; border-radius: 12px; }
 .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li { padding-left: 12px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li + li { margin-top: 4px; }
@@ -3255,7 +3778,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .youth_popover_close { width: 20px; height: 20px; background: none; background-color: red; border: none; position: absolute; top: 32px; right: 32px; cursor: pointer; }
 .search_group_input { min-width: 280px; flex: 1; }
 .store_search_input_wrap { position: relative; }
-.store_search_input { width: 100%; height: 40px; padding: 0 16px; color: #161616; font-size: 1.6rem; letter-spacing: -0.01em; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 12px; box-sizing: border-box; outline: none; }
+.store_search_input { width: 100%; height: 40px; padding: 0 16px; color: #161616; font-size: 1.6rem; letter-spacing: -0.01em; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 12px;  outline: none; }
 .store_search_input::placeholder { color: #a4a4b0; }
 .store_search_input:focus { border-color: #107AF2; }
 .store_search_btn { width: 20px; height: 20px; padding: 0; background: none; border: none; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; cursor: pointer; }
@@ -3311,7 +3834,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 
 
 /* 상담 및 신청 */
-.sec_consult_startup{max-width:1000px; margin: 0 auto;}
+.sec_consult_startup, .sec_consult_entry{max-width:1000px; margin: 0 auto;}
+.seminar_wrap{max-width:1000px; margin:80px auto 0; scroll-margin-top: 24px; box-sizing:border-box;}
 .consent_box { width: 100%; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
 .consent_box + .consent_box { margin-top: 40px; }
 .consent_box > h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
@@ -3327,10 +3851,44 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .consent_radio > input:checked::after { width: 10px; height: 10px; background-color: #ffffff; border-radius: 50%; position: absolute; top: 50%; left: 50%; content: ""; transform: translate(-50%, -50%); }
 .consent_radio > span { color: #161616; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
 .apply_form {border-top:1px solid #242428;}
-.apply_form .form_body {padding-top:25px; padding-bottom:40px; border-bottom:0;}
-.apply_form .form_body .form_row { min-height: auto; padding: 12px 0; display: grid; grid-template-columns: 1fr; align-items: start; gap: 0; }
-.apply_form .button_area :deep(.primary){width:100%; max-width:100%;}
-.apply_form .form_body .form_row .form_ label { margin-bottom: 12px; }
+.apply_form .form_body {padding-top:12px; border-bottom: 1px solid #E5E5E9;}
+.apply_form .form_body .form_row { min-height: auto; padding: 12px 0; display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
+.apply_form .form_body + .button_area{margin-top:40px;}
+.row_layout.apply_form{border:0;}
+.row_layout.apply_form article{border-bottom:1px solid #E5E5E9;}
+.row_layout.apply_form article + article{margin-top:40px;}
+.row_layout.apply_form article .form_row:first-of-type{padding-top:24px;}
+.row_layout.apply_form article .form_row:last-of-type{padding-bottom:24px;}
+.row_layout.apply_form .form_body{padding:0; border:0;}
+.row_layout.apply_form .form_body .form_row {  grid-template-columns: 134px 1fr; align-items: center; gap: 0 8px; }
+.row_layout.apply_form .form_body .form_row .form_label { margin-bottom: 0; }
+.row_layout.apply_form .form_body .form_row .form_name_field{max-width:448px;}
+.row_layout.apply_form .form_body .form_row .form_field_phone :deep(label.select),
+.row_layout.apply_form .form_body .form_row .form_field_phone :deep(.input_wrap){max-width:134px;}
+.row_layout.apply_form .form_body h3{margin-bottom:16px; font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;display: flex; align-items:center;}
+.row_layout.apply_form .form_body h3 + .form_row{border-top:1px solid #242428;}
+.row_layout.apply_form .form_body .form_required{margin-left:auto; font-weight: 400;font-size: 1.4rem;line-height: 1.4;}
+.row_layout.apply_form .form_body .cb_rs { align-items: flex-start;  }
+.row_layout.apply_form .form_body .cb_faddr { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;  }
+.row_layout.apply_form .form_body .cb_zip { width: 100%; max-width: 400px; display: flex; align-items: center; gap: 8px;  }
+.row_layout.apply_form .form_body .cb_zip :deep(.input_wrap) { width: 100%; max-width: 207px; flex: 0 0 auto;  }
+.row_layout.apply_form .form_body .cb_ast { width: 100%; max-width: 757px; display: flex; flex-direction: column; gap: 8px; align-items: stretch;  }
+
+.row_layout.apply_form .form_body .cb_ast .cb_a2 { width: 100%;  display: flex; align-items: center; gap: 8px;  }
+.row_layout.apply_form .form_body .cb_ast .cb_a2 :deep(.input_wrap) { width: 100%; max-width: none; flex: 1 1 calc(50% - 4px); min-width: 0;  }
+.row_layout.apply_form .form_body .cb_area { display: flex; flex-wrap: wrap; align-items: center; gap: 24px;  }
+.row_layout.apply_form .form_body .cb_area .cb_area_item { display: flex; align-items: center; gap: 8px; flex: 0 1 auto; min-width: 0; box-sizing: border-box; }
+.row_layout.apply_form .form_body .cb_area .cb_area_item > span { flex-shrink: 0; white-space: nowrap; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+.row_layout.apply_form .form_body .cb_area :deep(.input_wrap) { max-width: 150px; flex: 0 0 auto; min-width: 0; box-sizing: border-box; }
+.row_layout.apply_form .form_body .cb_area .form_field_note { flex-basis: 100%; width: 100%; max-width: 600px;  }
+.row_layout.apply_form .form_body .cb_store :deep(.input_wrap) { width: 100%; max-width: 448px;  }
+.row_layout.apply_form .form_body .cb_feat .form_field :deep(.textarea_wrap) { width: 100%; max-width: 600px;  }
+.row_layout.apply_form .form_body .cb_rel :deep(.input_wrap) { width: 100%; max-width: 448px;  }
+
+/* .row_layout.apply_form .form_body .form_row:last-of-type { border-bottom: 1px solid #E5E5E9;  } */
+
+.apply_form .button_area :deep(.primary){width:100%; max-width:250px;}
+.apply_form .form_body .form_row .form_label { margin-bottom: 12px; font-weight:400}
 .apply_form .form_body .form_row .form_field { width: 100%; }
 .apply_form .form_body .form_row_radio, .apply_form .form_body .form_row_textarea,
 .apply_form .form_body .form_row_textarea .form_field,
@@ -3341,8 +3899,11 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .apply_form .form_body .form_row.col_02 .col_item { min-width: 0; }
 .apply_form .form_body .form_label { margin-bottom: 12px; }
 .apply_form .form_body .form_row.col_02 .col_item .form_field { width: 100%; }
+.apply_form .form_body .form_row.col_02 .col_item .forn_field_radio{padding:12px 0;}
 .apply_form .form_field { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
 .apply_form .form_field_phone .select{flex:1;}
+.form_field_phone label.select select,
+.form_field_phone label.select .input_wrap {max-width:134px;}
 .apply_form .form_field_birth { flex-wrap: nowrap; }
 .apply_form .form_field_birth :deep(.select) { max-width:150px;flex: 1; min-width: 0; }
 .apply_form .form_field_open :deep(.input_wrap){max-width: 150px;}
@@ -3350,7 +3911,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .apply_form .form_field_experience { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; }
 @media (min-width: 769px) {
     .apply_form .form_field_experience :deep(.input_wrap) { width: auto !important; max-width: none; flex: 0 0 auto; }
-    .apply_form .form_field_experience :deep(.input_wrap .check) { min-height: 52px; padding: 13px 16px !important; display: inline-flex !important; align-items: center; gap: 8px; background-color: #ffffff; border: 1px solid #90909a; border-radius: 10px; box-sizing: border-box; cursor: pointer; position: relative; }
+    .apply_form .form_field_experience :deep(.input_wrap .check) { min-height: 52px; padding: 13px 16px !important; display: inline-flex !important; align-items: center; gap: 8px; background-color: #ffffff; border: 1px solid #90909a; border-radius: 10px;  cursor: pointer; position: relative; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]) { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label) { padding: 0 !important; display: inline-flex !important; align-items: center; gap: 8px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; white-space: nowrap; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::before) { content: "" !important; width: 20px !important; height: 20px !important; margin: 0 !important; background-color: #d9d9d9 !important; border: 0 !important; border-radius: 4px !important; box-sizing: border-box !important; position: static !important; top: auto !important; left: auto !important; display: block !important; flex-shrink: 0; }
@@ -3360,15 +3921,54 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 }
 .apply_form .form_field_calendar :deep(.input_wrap){max-width:700px;}
 .form_label_note { margin-top: 4px; color: #67676f; font-size: 1.2rem; line-height: 1.2; }
-.apply_form .consult_manager_card { width: 100%; max-width: 740px; margin: 12px 0; padding: 40px; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 12px; display: flex; align-items: center; gap: 32px; box-sizing: border-box; }
-.apply_form .consult_manager_photo { width: 80px; height: 80px; margin: 0; background-color: #c4c4d0; border-radius: 50%; flex-shrink: 0; }
-.apply_form .consult_manager_body { min-width: 0; flex: 1; }
-.apply_form .consult_manager_name { margin: 0; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
-.apply_form .consult_manager_office { margin-top: 8px; display: flex; align-items: flex-start; gap: 4px; }
-.apply_form .consult_manager_icon { width: 16px; height: 16px; margin-top: 2px; background-color: #161616; border-radius: 2px; flex-shrink: 0; }
-.apply_form .consult_manager_addr { min-width: 0; }
-.apply_form .consult_manager_addr > .tit { margin: 0; color: #161616; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
-.apply_form .consult_manager_addr > .addr { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.manager_card { width: 100%; max-width: 740px; margin: 12px 0; padding: 40px; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 12px; display: flex; align-items: center; gap: 32px;  }
+.manager_card.type_02{max-width:100%;display:flex; justify-content: space-between;}
+.manager_card .manager_header > p{color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+.manager_card .manager_header > strong{margin-top:2px; font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;display:block;}
+.manager_card .manager_header + .btn_close{width:20px; height:20px; text-indent:-9999px;background-color:#161616}
+.consult_manager_photo { width: 80px; height: 80px; margin: 0; background-color: #c4c4d0; border-radius: 50%; flex-shrink: 0; }
+.manager_body { min-width: 0; flex: 1; }
+.manager_name { margin: 0; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
+.manager_office { margin-top: 8px; display: flex; align-items: flex-start; gap: 4px; }
+.manager_icon { width: 16px; height: 16px; margin-top: 2px; background-color: #161616; border-radius: 2px; flex-shrink: 0; }
+.manager_addr { min-width: 0; }
+.manager_addr > .tit { margin: 0; color: #161616; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+.manager_addr > .addr { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+
+/* 창업 설명회 신청 · 지역 선택 (763:16835) */
+.seminar_region_pick { position: relative; }
+.seminar_month_sizer { margin: 0; padding: 0; position: absolute; left: -99999px; top: 0; pointer-events: none; visibility: visible; white-space: nowrap; display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+.seminar_month_sizer .seminar_month_title { flex-shrink: 0; white-space: nowrap; }
+.seminar_region_pick > .seminar_month_head { width: 100%; margin: 0 0 40px 0; display: flex; align-items: center; justify-content: center; gap:40px; }
+.seminar_month_head > .seminar_nav_btn { width: 44px; height: 44px; margin: 0; padding: 0; border: 1px solid #d7d7df; border-radius: 999px; background: #ffffff; cursor: pointer; flex-shrink: 0;  display: inline-flex; align-items: center; justify-content: center; opacity: 1; }
+.seminar_month_head > .seminar_nav_btn:not(:disabled):hover { border-color: #161616; }
+.seminar_month_head > .seminar_nav_btn:disabled { opacity: 0.35; }
+.seminar_nav_chevron {width:20px; height:20px; background-color:#161616;}
+.seminar_month_head > .seminar_month_swiper { max-width: calc(100% - 168px); margin: 0; flex: 0 0 auto; min-width: 0; overflow: hidden;  }
+.seminar_month_swiper :deep(.swiper-slide) { display: flex; align-items: center; justify-content: center;  }
+.seminar_month_title { margin: 0; color: #161616; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.025em; text-align: center; overflow-wrap: anywhere; word-break: keep-all; }
+.seminar_region_pick > .seminar_region_list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+.seminar_region_list > li { min-width: 0;  }
+@media (max-width: 1419px) {
+    .seminar_region_pick > .seminar_region_list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.seminar_region_card { width: 100%; max-width: 100%; min-height: 246px; padding: 24px; border: 1px solid #d7d7df; border-radius: 12px; background: #ffffff; display: flex; flex-direction: column; gap: 24px;  }
+.seminar_region_card_head > .seminar_region_name { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.seminar_region_card_head > .seminar_region_addr { margin: 8px 0 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: flex; align-items: center; gap: 4px; }
+.seminar_ic_pin { width: 16px; height: 16px;background-color:#000; }
+.seminar_slot_list { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.seminar_slot_row { height: 52px; padding:12px 16px; border-radius: 12px; background-color: #f8f8f8;  display: flex; align-items: center; gap: 4px; }
+.seminar_ic_time { width: 16px; height: 16px;background-color:#000; }
+.seminar_slot_row > .seminar_slot_time { margin:0; color: inherit; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; flex: 0 1 auto; min-width: 0; }
+.seminar_slot_row > button.seminar_slot_badge { width: auto; height: auto; margin: 0 0 0 auto; padding: 4px 12px; color: inherit; font-family: inherit; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; border: none; border-radius: 999px; background: transparent; appearance: none; flex-shrink: 0; cursor: pointer;  display: inline-flex; align-items: center; justify-content: center; }
+.seminar_slot_row > button.seminar_slot_badge:disabled { cursor: default; }
+.seminar_slot_row > .seminar_slot_badge.is_closed { background: #e5e5e9; color: #67676f; }
+.seminar_slot_row > .seminar_slot_badge.is_apply { background: #107af2; color: #ffffff; }
+.seminar_slot_row > .seminar_slot_badge.is_picked { background: #15b874; color: #ffffff; }
+.seminar_slot_row:not(.is_muted) > .seminar_slot_time { color: #161616; }
+.seminar_slot_row:not(.is_muted) > .seminar_ic_time { color: #67676f; opacity: 0.9; }
+.seminar_slot_row.is_muted > .seminar_ic_time,
+.seminar_slot_row.is_muted > .seminar_slot_time { color: #67676f; text-decoration: line-through; }
 @media (max-width: 1024px) { 
     .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
@@ -3376,14 +3976,14 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_overlap .section_header h2 { font-size: 2.4rem; }
     .sec_stack > .dual_panel { flex-direction: column; }
     .sec_tri_grid > ul { grid-template-columns: 1fr; gap: 20px; }
-    .sec_franchise_define .franchise_define_card { width: 100%; max-width: 100%; min-width: 0; padding: 40px 24px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_define_card { width: 100%; max-width: 100%; min-width: 0; padding: 40px 24px;  }
     .sec_franchise_define .franchise_formula { width: 100%; max-width: 100%; min-width: 0; display: grid; flex-wrap: unset; align-items: center; justify-content: unset; justify-items: stretch; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-rows: auto auto auto; gap: 16px 8px; }
     .sec_franchise_define .franchise_formula > div:nth-child(1) { min-width: 0; justify-self: stretch; grid-column: 1; grid-row: 1; }
     .sec_franchise_define .franchise_formula > span:nth-child(2) { min-width: 0; align-self: center; justify-self: center; grid-column: 2; grid-row: 1; }
     .sec_franchise_define .franchise_formula > div:nth-child(3) { min-width: 0; justify-self: stretch; grid-column: 3; grid-row: 1; }
     .sec_franchise_define .franchise_formula > span:nth-child(4) { min-width: 0; justify-self: center; grid-column: 1 / -1; grid-row: 2; }
     .sec_franchise_define .franchise_formula > div:nth-child(5) { width: 100%; max-width: none; min-width: 0; justify-self: stretch; grid-column: 1 / -1; grid-row: 3; }
-    .sec_franchise_define .franchise_formula > div { width: 100%; height: 136px; max-width: 100%; min-height: 136px; flex-shrink: unset; padding: 0 28px; flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div { width: 100%; height: 136px; max-width: 100%; min-height: 136px; flex-shrink: unset; padding: 0 28px; flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px;  }
     .sec_franchise_define .franchise_formula > div:nth-child(5) { max-width: none; }
     .sec_franchise_define .franchise_formula > div > span { width: 72px; height: 72px; }
     .sec_franchise_define .franchise_formula > div:nth-child(1) > p, .sec_franchise_define .franchise_formula > div:nth-child(3) > p { text-align: left; }
@@ -3402,8 +4002,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .list_note li >  p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .page_header { display: none; }
 
-    .sec_body { padding: 24px 0 40px; }
-    .panel { padding: 60px 20px 80px; }
+    /* .sec_body { padding: 24px 0 40px; } */
+    .panel { padding: 60px 0 80px; }
     .panel.pt_64 { padding-top: 60px;}
     .panel_third_depth { padding-top: 32px; }
     .section_header, .sub_header { margin-bottom: 32px; }
@@ -3427,7 +4027,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_gs25_faq :deep(.tab_wrap)::after { display: none; }
     .sec_gs25_faq :deep(.tab_wrap ul.type_01 li) { flex: 0 0 auto; border-bottom: 0; }
     .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current) { border-bottom: 0; }
-    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li .item) { height: 40px; min-height: 40px; padding: 8px 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 24px; letter-spacing: -0.01em; white-space: nowrap; background-color: #fff; border: 1px solid #161616; border-left: 1px solid #161616; border-radius: 99px; text-align: center; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+    .sec_gs25_faq :deep(.tab_wrap ul.type_01 li .item) { height: 40px; min-height: 40px; padding: 8px 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 24px; letter-spacing: -0.01em; white-space: nowrap; background-color: #fff; border: 1px solid #161616; border-left: 1px solid #161616; border-radius: 99px; text-align: center; display: inline-flex; align-items: center; justify-content: center;  }
     .sec_gs25_faq :deep(.tab_wrap ul.type_01 li:first-child .item) { border-left: 1px solid #161616; }
     .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current .item) { color: #107af2; background-color: #e7f2fe; border-color: #107af2; }
     :deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { padding: 4px 8px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
@@ -3505,7 +4105,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article { width: 100%; min-height: 285px; background-color: #fff; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; }
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure { width: 100%; margin: 0; background-color: #fff; display: flex; flex-direction: column; }
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > img { width: 100%; height: 200px; background-color: #fff; border-radius: 12px 12px 0 0; display: block; object-fit: contain; }
-    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption { min-height: 85px; padding: 20px 24px; background-color: #fff; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; }
+    .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption { min-height: 85px; padding: 20px 24px; background-color: #fff; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;  }
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > p { margin: 0; color: #67676f; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > strong { margin-top: 4px; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
     .sec_stack > .dual_panel > article { padding: 32px 20px; }
@@ -3555,8 +4155,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_franchise_define .franchise_formula > span:nth-child(2) { min-width: 0; color: #107af2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; align-self: center; justify-self: center; grid-column: 2; grid-row: 1; }
     .sec_franchise_define .franchise_formula > div:nth-child(3) { min-width: 0; justify-self: stretch; grid-column: 3; grid-row: 1; }
     .sec_franchise_define .franchise_formula > span:nth-child(4) { min-width: 0; margin-top: 12px; color: #107af2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; justify-self: center; grid-column: 1 / -1; grid-row: 2; }
-    .sec_franchise_define .franchise_formula > div:nth-child(5) { width: 100%; height: auto; max-width: none; min-width: 0; min-height: 88px; padding: 12px 16px; flex-direction: row; align-items: center; justify-content: center; justify-self: stretch; grid-column: 1 / -1; grid-row: 3; gap: 16px; box-sizing: border-box; }
-    .sec_franchise_define .franchise_formula > div:nth-child(1), .sec_franchise_define .franchise_formula > div:nth-child(3) { width: 100%; height: auto; max-width: none; aspect-ratio: 1 / 1; flex-shrink: unset; padding: 8px; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; }
+    .sec_franchise_define .franchise_formula > div:nth-child(5) { width: 100%; height: auto; max-width: none; min-width: 0; min-height: 88px; padding: 12px 16px; flex-direction: row; align-items: center; justify-content: center; justify-self: stretch; grid-column: 1 / -1; grid-row: 3; gap: 16px;  }
+    .sec_franchise_define .franchise_formula > div:nth-child(1), .sec_franchise_define .franchise_formula > div:nth-child(3) { width: 100%; height: auto; max-width: none; aspect-ratio: 1 / 1; flex-shrink: unset; padding: 8px; flex-direction: column; align-items: center; justify-content: center; gap: 8px;  }
     .sec_franchise_define .franchise_formula > div > span { width: 40px; height: 40px; flex-shrink: 0; }
     .sec_franchise_define .franchise_formula > div:nth-child(5) > span { width: 50px; height: 50px; border-radius: 99px; }
     .sec_franchise_define .franchise_formula > div:nth-child(1) > p, .sec_franchise_define .franchise_formula > div:nth-child(3) > p { text-align: center; }
@@ -3592,7 +4192,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_region_counsel :deep(.tab_wrap) { margin-bottom: 32px; }
     .sec_region_counsel .region_counsel_board { grid-template-columns: 1fr; gap: 10px; }
     .sec_region_counsel .region_counsel_board > .region_counsel_map { height: auto; max-height: none; min-height: 297px; overflow: hidden; }
-    .sec_region_counsel .region_counsel_board > .region_counsel_side { height: auto; max-width: none; min-height: 297px; padding: 20px; box-sizing: border-box; }
+    .sec_region_counsel .region_counsel_board > .region_counsel_side { height: auto; max-width: none; min-height: 297px; padding: 20px;  }
     .sec_region_counsel .region_counsel_board.is_staff > .region_counsel_side { min-height: 506px; padding: 20px 0 0; border: 0; display: flex; flex-direction: column; overflow: hidden; }
     .sec_region_counsel .region_counsel_panel > span.icon { width: 32px; height: 32px; }
     .sec_region_counsel .region_counsel_panel > p.tit { margin-top: 16px; font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
@@ -3723,8 +4323,9 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::before) { background-color: #107af2 !important; border-color: #107af2 !important; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::after) { content: "" !important; display: block !important; }
     .sec_consult_startup { max-width: none; }
-    .apply_form .form_body{padding: 30px 0;}
+    .apply_form .form_body{margin-bottom:40px;padding: 30px 0 10px; }
     .apply_form .form_body > .form_row:first-child > .col_item:first-child{padding:0 0 20px 0;}
+    .apply_form .form_body .form_row.col_02 .col_item .forn_field_radio{padding:0;}
     .apply_form .form_body .form_row.col_02 { max-width: none; padding:0; grid-template-columns: 1fr; gap: 0; }
     .apply_form .form_body .form_row .form_label { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .apply_form .form_body .form_row_calendar :deep(.consult_calendar),
@@ -3737,11 +4338,48 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .apply_form .form_field_region { flex-direction: column; align-items: stretch; }
     .apply_form .form_row_region :deep(.select) { max-width: none; flex: 1 1 100%; width: 100%; }
     .apply_form .form_field_calendar :deep(.input_wrap) { max-width: none; }
-    .apply_form .consult_manager_card { max-width: none; margin-top: 0; padding: 16px; gap: 16px; }
-    .apply_form .consult_manager_photo { width: 50px; height: 50px; }
-    .apply_form .consult_manager_name { font-size: 1.6rem; line-height: 1.24; }
+    .manager_card { max-width: none; margin-top: 0; padding: 16px; gap: 16px; }
+    .consult_manager_photo { width: 50px; height: 50px; }
+    .manager_name { font-size: 1.6rem; line-height: 1.24; }
+    .row_layout.apply_form .form_body{padding:40px 0 0; }
+    .row_layout.apply_form .form_body .form_row { min-height: auto; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
+    .row_layout.apply_form .form_body .form_row .form_label { margin-bottom: 16px; }
+    .row_layout.apply_form .form_body .cb_area{gap:8px;}
+    .row_layout.apply_form .form_body .cb_area .cb_area_item { flex: 1 1 0; min-width: 0; max-width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; box-sizing: border-box; }
+    .row_layout.apply_form .form_body .cb_area .cb_area_item > span { flex-shrink: 0; white-space: nowrap; }
+    .row_layout.apply_form .form_body .cb_faddr,
+    .row_layout.apply_form .form_body .cb_zip,
+    .row_layout.apply_form .form_body .cb_ast,
+    .row_layout.apply_form .form_body .cb_a1,
+    .row_layout.apply_form .form_body .cb_a1 :deep(.input_wrap),
+    .row_layout.apply_form .form_body .cb_a2,
+    .row_layout.apply_form .form_body .cb_a2 :deep(.input_wrap),
+    .row_layout.apply_form .form_body .cb_area,
+    .row_layout.apply_form .form_body .cb_store :deep(.input_wrap),
+    .row_layout.apply_form .form_body .cb_feat .form_field :deep(.textarea_wrap),
+    .row_layout.apply_form .form_body .cb_rel :deep(.input_wrap) { max-width: none; }
+    .row_layout.apply_form .form_body .cb_area .cb_area_item :deep(.input_wrap) { flex: 1; max-width: none; width: 100%; min-width: 0; box-sizing: border-box; }
+    .apply_form .form_body .form_row{padding:20px 0;}
+    .row_layout.apply_form article + article{margin-top:60px;}
     .apply_form .form_body .form_row.col_02 .col_item{padding:20px 0px;}
-
+    /* .apply_form .button_area{ padding-top:40px; border-top:1px solid #E5E5E9; } */
+    .apply_form .button_area :deep(.primary){width:100%; max-width:100%; }
+    .seminar_wrap{margin-top:40px; scroll-margin-top:20px;}
+    .manager_card .manager_header > p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .manager_card .manager_header > strong{font-size: 1.8rem;line-height: 1.5 ;letter-spacing: 0%;}
+    .seminar_region_pick > .seminar_region_list { grid-template-columns: 1fr; }
+    .seminar_region_card { width: 100%; max-width: 100%; }
+    .seminar_month_title{font-size: 2.4rem;line-height: 1.35;}
+    .seminar_region_pick > .seminar_month_head{margin: 0 0 24px 0;}
+    .seminar_month_head > .seminar_nav_btn{width:40px; height:40px;}
+    .seminar_region_card{padding:16px;}
+    .seminar_region_card_head > .seminar_region_name{font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
+    .seminar_region_card_head > .seminar_region_addr{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .row_layout.apply_form .form_body h3{ font-size: 2.4rem;line-height: 1.35;}
+    .row_layout.apply_form article .form_row:first-of-type{padding-top:30px;}
+    .row_layout.apply_form article .form_row:last-of-type{padding-bottom:30px;}
+    :deep(.check em){font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    /* .apply_form .form_field{gap:8px;} */
     /* 우측 하단 sticky 메뉴 */
     .quick_menu { display: none; }
 }
