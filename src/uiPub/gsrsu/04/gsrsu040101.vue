@@ -59,7 +59,7 @@
                             <h3>GS리테일 윤리규범</h3>
                             <p>GS리테일은 상호 신뢰와 협력을 토대로 모든 이해관계자와 공동의 이익을 추구함으로써 모두가 선망하는 Value No.1 기업으로 발전하기 위해 올바른 행동과 가치 판단의 기준으로 윤리규범을 제정하고 정도경영의 길을 걷습니다.</p>
                         </header>
-                        <div class="button_area"><Buttons tag="a" href="#none" btn-class="btn_icon btn_xl after border">㈜GS리테일 윤리규범</Buttons></div>
+                        <div class="button_area"><Buttons tag="a" href="#none" btn-class="btn_icon_arrow btn_xl after border">㈜GS리테일 윤리규범</Buttons></div>
                     </section>
                     <section class="sec_ethics_cards">
                         <ul class="card_list" role="list">
@@ -131,10 +131,10 @@
                                 <strong>{{ row.title }}</strong>
                                 <p v-html="row.desc"></p>
                                 <div v-if="row.key === 'wg-04'" class="button_area">
-                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon after" @click="goToWhistleTab(1)">
+                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon_arrow after" @click="goToWhistleTab(1)">
                                         제보자 포상제도
                                     </Buttons>
-                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon after" @click="goToWhistleTab(2)">
+                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon_arrow after" @click="goToWhistleTab(2)">
                                         제보자 보호제도
                                     </Buttons>
                                 </div>
@@ -149,7 +149,7 @@
                                     </div>
                                 </template>
                                 <div v-if="row.key === 'wg-06'" class="button_area">
-                                    <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon after">제보하기</Buttons>
+                                    <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon_arrow after">제보하기</Buttons>
                                 </div>
                             </li>
                         </ol>
@@ -228,12 +228,12 @@
                                                     v-if="item.key === 'ethics'"
                                                     tag="button"
                                                     type="button"
-                                                    btn-class="btn_xl border btn_icon after"
+                                                    btn-class="btn_xl border btn_icon_arrow after"
                                                     @click="openEthicsInquiry"
                                                 >
                                                     {{ item.btnText }}
                                                 </Buttons>
-                                                <Buttons v-else tag="a" href="#none" btn-class="btn_xl border btn_icon after">{{ item.btnText }}</Buttons>
+                                                <Buttons v-else tag="a" href="#none" btn-class="btn_xl border btn_icon_arrow after">{{ item.btnText }}</Buttons>
                                             </div>
                                         </div>
                                     </article>
@@ -551,7 +551,7 @@
                             :no-swipe="true"
                         >
                             <template #action="{item}">
-                                <Buttons btn-class="btn_xl border btn_icon after"
+                                <Buttons btn-class="btn_xl border btn_icon_arrow after"
                                     @click="openModal" 
                                     :data-popid="item.popContId" 
                                     data-type="lg" 
@@ -1243,22 +1243,26 @@ const langData = {
             {
                 num: "01",
                 title: "파트너사 선정, 운영 가이드 라인",
+                desc: "",
                 popContId: "gsrsu04020301"
             },
             {
                 num: "02",
                 title: "서면 발급, 보존 가이드 라인",
+                desc: "",
                 popContId: "gsrsu04020302"
             
             },
             {
                 num: "03",
                 title: "하도급 거래 심의위원회 운영 규정",
+                desc: "",
                 popContId: "gsrsu04020303"
             },
             {
                 num: "04", 
                 title: "계약 체결가이드 라인",
+                desc: "",
                 popContId: "gsrsu04020304"
             },
        
@@ -4426,6 +4430,13 @@ section + section { padding-top:120px; }
 .ethics_target_list :deep(.num_info_num) { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
 .ethics_target_list :deep(.num_info_title > strong) { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .ethics_target_list :deep(.num_info_body > p) { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+.ethics_target_list :deep(.num_info_icon)::before {content: ''; width: 40px; height: 40px; display: block; background: url(@/assets/images/sub/icon_cont_40.png) no-repeat; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);}
+:deep(.ethics_target_list.num_info_list) li:first-child .num_info_icon::before {background: url(@/assets/images/sub/icon_gsrsu040104_01.png) no-repeat center;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(2) .num_info_icon::before {background-position: -20px -266px;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(3) .num_info_icon::before {background: url(@/assets/images/sub/icon_gsrsu040104_03.png) no-repeat center;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(4) .num_info_icon::before {background: url(@/assets/images/sub/icon_gsrsu040104_04.png) no-repeat center;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(5) .num_info_icon::before {background-position: -660px -186px;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(6) .num_info_icon::before {background-position: -740px -104px;}
 .report_form_wrap .apply_form .form_field > :deep(.select), .report_form_wrap .apply_form .form_field > :deep(.input_wrap) { width: 428px; max-width: 428px; }
 .report_form_wrap .apply_form .form_field_phone label.select, .report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap) { width: 134px; max-width: 134px; }
 .report_form_wrap .apply_form .form_field_name > :deep(.input_wrap) { width: 205px; max-width: 205px; }
@@ -4442,12 +4453,16 @@ section + section { padding-top:120px; }
     .purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 6px; font-size: 1.8rem; line-height: 1.5; }
     .purpose_feature_cards :deep(.feature_card_desc) { color: #161616; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 }
+@media screen and (max-width: 1200px) {
+    .cp_manager_banner {padding-left: 60px; padding-right: 60px; background-position: -90px 0;}
+}
 @media screen and (max-width: 1024px) {
     :deep(.ethics_target_list.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
+    .cp_manager_banner figcaption {max-width: 300px;}
 }
 @media screen and (max-width: 768px) {
-    :deep(.feature_cards_grid.feature_card_list) { grid-template-columns: 1fr; }
-    :deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: 1fr; }
+    :deep(.feature_cards_grid.feature_card_list) { grid-template-columns: none; grid-auto-columns: 300px; grid-auto-flow: column; gap: 12px; white-space: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    :deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: none; }
     .ft_acc_wrap :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 10px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0 }
     .ft_sec_list { padding:0; }
@@ -4480,6 +4495,7 @@ section + section { padding-top:120px; }
     .report_form_wrap .apply_form .form_field > :deep(.input_wrap), .report_form_wrap .apply_form .form_field_phone label.select, .report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap), .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(1)), .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(3)), .report_form_wrap .apply_form .form_field_email label.select { width: 100%; max-width: 100%; }
     .report_form_wrap .apply_form .form_field_content > textarea { width: 100%; }
     .report_form_wrap .apply_form .form_row_content .form_label { padding-top: 0; }
+    :deep(.ethics_target_list.num_info_list) { grid-template-columns: 1fr; }
 }
 .sec_history { position: relative; }
 .history_list { padding-left:48px;position:relative; }
@@ -4626,7 +4642,6 @@ section + section { padding-top:120px; }
     section + section { padding-top:80px; }
     .gray_box { padding: 40px; }
     .gray_box p { margin-top: 32px; }
-    :deep(.feature_cards_grid.feature_card_list) { gap: 12px; }
     .button_area [class*="btn_"] { width:auto; flex:1 1 auto; }
     .history_list { padding-left: 20px; }
     .history_item { gap: 8px; flex-direction: column; }
@@ -4671,8 +4686,9 @@ section + section { padding-top:120px; }
     .base_item .gray_box .process_flow { flex-direction: column; gap: 12px; }
     .base_item .gray_box .process_flow p { flex: 1 1 auto; width: 100%; max-width: none; }
     .cp_appoint_board .process_flow { flex-direction: column; }
-    .cp_manager_banner { padding: 40px 20px;justify-content: flex-start; }
-    .cp_manager_banner > figcaption { width: 100%; max-width: none; min-width: 0; }
+    .cp_manager_banner { display: block; padding: 0; background:#F2F2F4; border-radius: 12px; overflow: hidden; }
+    .cp_manager_banner:before { content:''; display:block; width:100%; height:338px; background: url(@/assets/images/dummy/gsrsu040101_10.png) no-repeat 0 0 / cover; }
+    .cp_manager_banner > figcaption { width: 100%; max-width: none; min-width: 0; padding: 32px; }
     .cp_manager_banner > figcaption > strong { font-size: 2.4rem; }
     .cp_manager_banner > figcaption > p { font-size: 1.6rem; }
     .cp_manager_banner > figcaption > p + p { margin-top: 12px; font-size: 1.6rem; }
