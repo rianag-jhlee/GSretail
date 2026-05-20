@@ -1105,9 +1105,9 @@
                                                 <p class="desc" v-html="t.protect.customer.Recommend.Desc"></p>
                                             </div>
                                             <!-- '서비스 우수 직원 추천하기' 버튼 -->
-                                            <Buttons btn-class="btn_icon_arrow btn_xl border after">
+                                            <a class="btn_icon_arrow btn_xl border after" :href="t.protect.customer.Recommend.link" target="_blank">
                                                 {{ t.protect.customer.Recommend.BtnText }}
-                                            </Buttons>
+                                            </a>
                                         </div>
                                     </div>
                                 </section>
@@ -2386,7 +2386,8 @@ export default {
                                 Title: "서비스 우수 직원 추천",
                                 PointTit: "진심어린 서비스",
                                 Desc: "나의 마음(心)을 담아, 고객입장에서 기대에 앞서가는 서비스를 지속적으로 제공하는 것입니다.<br/>고객(동료)에게 진심어린 서비스를 실천한 서비스 우수 직원을 추천해주세요.",
-                                BtnText: "서비스 우수 직원 추천하기"
+                                BtnText: "서비스 우수 직원 추천하기",
+                                link: "https://forms.office.com/pages/responsepage.aspx?id=XMJFRnWXd02nNnAPq3ZhFvCl7ccQQtpLvT4o0ubaQFFUOEVXQzJNMkg3U1NWT1VONklWUUhSREc1NC4u&route=shorturl"
                             },
                             Safety: {
                                 Title: "제품과 서비스 안전을 위한<br/> 제도 운영",
