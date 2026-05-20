@@ -32,10 +32,10 @@
                                         :data-popid="btn.popId" 
                                         :data-cont="btn.cont"
                                         data-type="lg" 
-                                        btn-class="btn_mid border btn_icon after">
+                                        btn-class="btn_base border btn_icon_arrow after">
                                         {{ btn.label }}
                                     </Buttons>
-                                    <Buttons v-else @click="handleLink(btn.target)" btn-class="btn_mid border btn_icon after">
+                                    <Buttons v-else @click="handleLink(btn.target)" btn-class="btn_base border btn_icon_arrow after">
                                         {{ btn.label }}
                                     </Buttons>
                                 </template>
@@ -55,10 +55,10 @@
                                 :data-popid="link.popId" 
                                 :data-cont="link.cont" 
                                 data-type="lg" 
-                                btn-class="btn_mid gray btn_icon after">
+                                btn-class="btn_mid gray btn_icon_arrow after">
                                 {{ link.btnLabel }}
                             </Buttons>
-                            <Buttons v-else @click="handleLink(link.target)" btn-class="btn_mid gray btn_icon after">
+                            <Buttons v-else @click="handleLink(link.target)" btn-class="btn_mid gray btn_icon_arrow after">
                                 {{ link.btnLabel }}
                             </Buttons>
                         </div>
@@ -164,18 +164,31 @@ h3 {color:#161616; font-size:32px; font-weight:700; line-height:1.3; letter-spac
 h3 :deep(.point-blue) {color:#107af2;}
 .intro-summary p {margin-top:16px; color:#67676f; font-size:16px; font-weight:400; line-height:1.5; letter-spacing:-0.16px;}
 em {margin-top:12px; color:#67676f; font-size:14px; font-weight:400; line-height:1.4; letter-spacing:-0.14px; display:block;}
+
 .brand-card-group {width:100%; display:flex; gap:30px; overflow:hidden; list-style:none;}
 .brand-card-group li {width:100%; padding:172px 32px 32px; background-color:#ffffff; border-radius:12px; position:relative; display:flex; flex-direction:column; justify-content:space-between; align-items:center;}
-.brand-card-group li::before {content:''; width:100px; height:100px; background:red; position:absolute; top:32px; left:50%; display:block; transform:translateX(-50%);}
+.brand-card-group li::before {content:''; width:100px; height:100px; background-color:#F8F8F8; background-position:50% 50%; background-repeat:no-repeat; border-radius:50%; position:absolute; top:32px; left:50%; display:block; transform:translateX(-50%);}
+
+.brand-card-group li:nth-of-type(1)::before {background-image:url('@/assets/images/sub/gsrcu/logo_cu01_01.png');}
+.brand-card-group li:nth-of-type(2)::before {background-image:url('@/assets/images/sub/gsrcu/logo_cu01_02.png');}
+.brand-card-group li:nth-of-type(3)::before {background-image:url('@/assets/images/sub/gsrcu/logo_cu01_03.png');}
+
 .brand-info-box {width:100%; padding-top:24px; margin-bottom:24px;}
+
 h4 {margin-bottom:24px; color:#161616; font-size:20px; font-weight:700; line-height:1.35; letter-spacing:-0.2px;}
 .tel-number {padding-top:24px; margin-bottom:6px; color:#161616; font-size:28px; font-weight:700; line-height:1.35; letter-spacing:-0.28px; border-top:1px solid #E5E5E9;}
 .brand-btn-group {width:100%; display:flex; gap:8px;}
-.service-link-list {width:100%; padding:100px 64px; display:flex; gap:20px; list-style:none;}
+.service-link-list {width:100%; padding:100px 64px 0; display:flex; gap:20px; list-style:none;}
 .service-link-list li {width:100%; display:flex; flex-direction:column; gap:20px;}
 .service-icon-box img {width:40px; height:40px;}
+
 .service-link-list li > div {width:100%; padding-top:60px; position:relative; display:flex; flex-direction:column; gap:30px;}
-.service-link-list li > div::before {content:''; width:40px; height:40px; background:red; position:absolute; top:0; left:0; display:block;}
+.service-link-list li > div::before {content:''; width:40px; height:40px; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat; position:absolute; top:0; left:0; display:block;}
+.service-link-list li:nth-of-type(1) > div::before {background-position:-580px -342.86px;}
+.service-link-list li:nth-of-type(2) > div::before {background-position:-20px -20px;}
+.service-link-list li:nth-of-type(3) > div::before {background-position:-100px -266px;}
+.service-link-list li:nth-of-type(4) > div::before {background-position:-900px -186px;}
+
 h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
 .service-link-list p {min-height:3em; color:#161616; font-size:16px; font-weight:400; line-height:1.5; letter-spacing:-0.16px;}
 .brand-card-group .btn_mid {padding:0 9px; border-radius:4px;}
@@ -191,9 +204,9 @@ h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
     h4 {font-size:18px;}
     .tel-number {font-size:24px;}
     .cont_inner article {padding:40px 24px; background:transparent; display:flex; flex-direction:column; gap:40px;}
-    .intro-summary {width:100%; padding-top:15%;}
+    .intro-summary {width:100%;}
     .brand-card-group {width:100%; padding:30px 24px; background-color: #f8f8f8; border-radius:8px; display:flex; flex-direction:column; gap:20px;}
-    .service-link-list {padding:40px 20px; display:flex; flex-direction:column; gap:48px;}
+    .service-link-list {padding:40px 20px 0; display:flex; flex-direction:column; gap:48px;}
     .service-link-list li {width:100%; display:flex; flex-direction:row; gap:16px; align-items:flex-start;}
     .service-link-list li > div {width:100%; padding-top:0; padding-left:80px; display:flex; flex-direction:column; align-items: baseline; gap:16px;}
     .service-link-list li > div::before {left:20px;}
