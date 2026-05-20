@@ -437,7 +437,8 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 /* Wide Card (바다숨) */
 .wide_card { display: flex; align-items: flex-start; gap: 40px; padding: 60px; background: #F8F8F8; border-radius: 20px; }
 .wide_card .image_wrap { flex: 0 0 500px; height: 320px; }
-.wide_card .text_group .title_area { margin-bottom:28px }
+.wide_card .text_group { flex: 1; display: flex; flex-direction: column; gap: 40px; }
+.wide_card .btn_icon_arrow {width:170px;}
 
 /* 5. Sub Grid (2열 그리드 구현) */
 .sub_grid_container { display: flex; flex-wrap: wrap; gap: 80px 40px; }
@@ -514,6 +515,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .green_product li.one_divide .image_wrap, .green_product li.two_divide .image_wrap { flex: 0 0 auto; width: 100%; height: auto;}
 }
 @media screen and (max-width: 767px) {
+    .title_wrap {display:none;}
     h3, h4, .policy_card_box h4, .climate_change .intro_view p { font-size: 28px !important; }
     p, .policy_card_box p, .intro_view p { font-size: 18px !important; }
     .title_wrap { height: auto; padding: 60px 20px; }
@@ -524,6 +526,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .wide_card { flex-direction: column; padding: 30px 20px; }
     .wide_card .text_group button { width:100% }
     .wide_card .image_wrap { flex: 0 0 auto; width: 100%; height: auto; }
+    .wide_card .btn_icon_arrow {width:100%;}
     .sub_grid_container { gap: 40px; }
     .grid_item { width: 100%; }
     .strategy_section .image_wrap, .system_section .image_wrap {width:100%; margin:0 auto;}

@@ -40,7 +40,7 @@
                 </ul>
                 <article class="notice_box">
                     <header class="notice_head">
-                        <span class="notice_ico" aria-hidden="true">!</span>
+                        <span class="notice_ico" aria-hidden="true"></span>
                         <h4>{{ pageData.ciBi.noticeTitle }}</h4>
                     </header>
                     <p>{{ pageData.ciBi.noticeLead }}</p>
@@ -238,7 +238,7 @@ const colorRegList = [
     .notice_box { width: 100%; margin: 40px 0 0; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
     .notice_head { margin: 0 0 24px; display: flex; align-items: center; gap: 8px; }
     .notice_box > p { margin: 0 0 8px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
-    .notice_head > .notice_ico { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; background-color: red; }
+    .notice_head > .notice_ico { width: 24px; height: 24px; background:url('@/assets/images/common/icon_set_24.png') -496px -56px no-repeat; display: inline-flex; align-items: center; justify-content: center;}
     .notice_head > h4 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .notice_list { display: flex; flex-direction: column; gap: 8px;  }
     .notice_list > li { position: relative; padding-left: 12px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
@@ -270,6 +270,7 @@ const colorRegList = [
     .spec_table tbody th[scope="row"] .spec_cell_lead > span:last-child { white-space: nowrap; }
     .spec_table tbody td { text-align: center; word-break: keep-all; }
     .sr_only { width: 1px; height: 1px; margin: -1px; position: absolute; overflow: hidden; border: 0; clip: rect(0, 0, 0, 0); }
+    [class*="btn_icon"][class*="after"]::after {background:url('@/assets/images/common/down_wh.png');}
     @media screen and (max-width: 1024px) {
         .sec_color_reg .reg_card { flex-direction: column; flex-wrap: nowrap; gap: 0; padding: 48px 40px; align-items: stretch; }
         .sec_color_reg .reg_card > header { flex: none; max-width: none; width: 100%; padding: 0 0 28px; }

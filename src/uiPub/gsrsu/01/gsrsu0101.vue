@@ -770,6 +770,7 @@ export default {
 
 <style scoped>
 .bold{font-weight: 700 !important;}
+.btn_icon.btn_big.after.download::after {background:url('@/assets/images/common/icon_set_20.png') -1067px -24px no-repeat; display:inline-block; } /* 아이콘 가상요소 */
 .normal{font-weight: normal !important;}
 img{width:100%; height:auto; display:block; object-fit: cover;}
 .main-container { width: 100%; position: relative; display: block; }
@@ -852,9 +853,9 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .esg_flow_connector_text { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; display: flex; align-items: center; gap: 12px; }
 .esg_flow_connector > p:first-child > span { justify-content: flex-end; }
 .esg_flow_connector > p:last-child > span { justify-content: flex-start; }
-.esg_flow_connector_text::after { content: ''; display: block; width: 20px; height: 20px; background: #15B874; }
+.esg_flow_connector_text::after { content: ''; display: block; width: 24px; height: 24px; background:url('@/assets/images/common/arrow_green.png'); transform:rotate(90deg); }
 .esg_flow_connector > p:last-child > span::after { content: none; }
-.esg_flow_connector > p:last-child > span::before { content: ''; display: block; width: 20px; height: 20px; background: #107AF2; }
+.esg_flow_connector > p:last-child > span::before { content: ''; display: block; width: 24px; height: 24px; background:url('@/assets/images/common/arrow_blue.png'); transform:rotate(270deg); }
 .esg_flow_note { margin-top: 0; padding: 24px 0 0 24px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; color: #67676f; }
 .esg_committee_table { width: 100%; margin-top: 60px; }
 .esg_committee_table table { width: 100%; border-collapse: collapse; border: 1px solid #E5E5E9; }
@@ -893,8 +894,8 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .esg_flow_card_desc { margin-left: 20px; }
     .esg_flow_connector { width: 100%; height: auto; padding: 20px 16px; gap: 16px; }
     .esg_flow_connector_text { gap: 8px; }
-    .esg_flow_connector_text::after { width: 14px; height: 14px; }
-    .esg_flow_connector > p:last-child > span::before { width: 14px; height: 14px; }
+    .esg_flow_connector_text::after { width: 14px; height: 14px; background-size:14px; }
+    .esg_flow_connector > p:last-child > span::before { width: 14px; height: 14px; background-size:14px; }
     .bnbp_main { gap: 32px; flex-direction: column; }
     .panel_sustainability_report .sec_sustain_report_hero {flex-wrap: wrap;flex-direction: column;align-items: center;gap: 40px;}
     .panel_sustainability_report .sec_sustain_report_hero > article {width: 100%;align-items: flex-start;}
@@ -924,6 +925,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .table_wrap.type3 table td:nth-last-child(3) { padding-top: 12px; }
     .table_wrap.type1 { overflow-x: visible; }
     .table_wrap.type1 table { min-width: 0; table-layout: fixed; }
+    .content .tab_wrap {margin-top:24px}
     /* 지속가능 보고서 목록 — 모바일 카드형(가로 스크롤 없음) */
     .panel_sustainability_report .sec_sustain_report_hero > figure {width: 100%;}
     .panel_sustainability_report .sec_sustain_report_hero > article > .sustain_report_hero_actions { flex-wrap: nowrap; }
