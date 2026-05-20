@@ -17,7 +17,11 @@
                         <em>{{ t.icontxt[idx] }}</em>
                     </li>
                 </ul>
-                <i>{{t.app_desc}}</i>
+                
+                <div class="notice_bar">
+                    <p>{{ t.app_desc }}</p>
+                </div>
+                <!-- <i>{{t.app_desc}}</i> -->
             </section>
             <section class="gsfresh_event">
                 <span><img :src="isMobile ? t.sub2.imgMo : t.sub2.img" :alt="t.sub2.alt"></span>
@@ -50,7 +54,7 @@ export default {
                         alt:`GS25 우리동네GS'에서만 만나볼 수 있는 파격 혜택!`
                     },
                     sub2 : {
-                        img: require("@/assets/images/dummy/gsrbr0404_2.png"),
+                        img: require("@/assets/images/sub/gsrbr04/gsrbr0404_2.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr0404_2_mo.png"),
                         alt:`GS THE FRESH 매주 달라지는 행사 미리보기`
                     },
@@ -92,7 +96,7 @@ export default {
 h3 { margin-bottom: 60px; color: #161616; font-size: 32px; font-weight: 700; }
 h4 {margin-top:24px; color:#161616; font-size:32px; font-weight:700;}
 span {margin:8px 0; color:#161616; font-size:18px; font-weight:700; display:block;}
-span img {max-width:100%; object-fit:cover;}
+span img {max-width:100%; height:200px; object-fit:cover;}
 section > p {display:flex; flex-direction:column; gap:4px;}
 :deep(.gs25_event p em), :deep(.gsfresh_event p em) { color:#67676F; font-size:16px;}
 .event_icon_list { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; margin-top: 40px; margin-bottom: 24px; list-style: none; }
@@ -100,9 +104,14 @@ section > p {display:flex; flex-direction:column; gap:4px;}
 .event_icon_list li .img_box { display: flex; align-items: center; justify-content: center; width: 100%; height: 142px; padding: 20px; background: #F8F8F8; border-radius: 12px; text-align: center; }
 .event_icon_list li .img_box img { max-width: 64px; max-height: 64px; object-fit: contain; }
 .event_icon_list li em { margin-top: 8px; color: #67676F; font-size: 16px; font-style: normal; }
-i {padding:16px 16px 16px 42px; color:#161616; font-size:16px; background:#F8F8F8; border-radius:6px; display:flex; position:relative;}
-i::before {content:''; width:20px; height:20px; background:red; position:absolute; top:50%; left:16px; display:inline-block; transform:translateY(-50%);}
+/* i {padding:16px 16px 16px 42px; color:#161616; font-size:16px; background:#F8F8F8; border-radius:6px; display:flex; position:relative;}
+i::before {content:''; width:20px; height:20px; background:red; position:absolute; top:50%; left:16px; display:inline-block; transform:translateY(-50%);} */
 section.gsfresh_event {margin-top:80px;}
+
+/* Notice Bar */
+.notice_bar { padding: 16px !important; background: #f8f8f8; border-radius: 6px;  display: flex; align-items: center; gap: 6px;}
+.notice_bar p {margin-bottom:0px !important; padding-left: 26px; color: #161616; font-size: 16px; position: relative; }
+.notice_bar p::before { content: ''; display: inline-block; position: absolute; top: 0; left: 0; width: 20px; height: 20px; background: url('@/assets/images/common/icon_set_20.png') -935px -24px no-repeat; }
 
 /* 반응형 */
 
@@ -121,6 +130,7 @@ section.gsfresh_event {margin-top:80px;}
     h4 {margin-top:24px; color:#161616; font-size:24px; font-weight:700;}
     span {margin:8px 0; color:#161616; font-size:18px; font-weight:700; display:block;}
     :deep(.gs25_event p em), :deep(.gsfresh_event p em) {line-height:1.5;}
-    i {font-size:12px;}
+    .notice_bar p {font-size:12px !important; font-weight:400 !important;}
+    .notice_bar p::before {top:-2px;}
 }
 </style>

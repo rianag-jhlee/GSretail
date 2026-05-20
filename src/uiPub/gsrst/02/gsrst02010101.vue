@@ -2840,9 +2840,6 @@ section p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .panel_third_depth { padding-top: 80px; }
 .panel { padding: 100px 0 200px; }
 .panel.pt_64 { padding-top: 64px;}
-.list_dotted > li { padding-left: 12px; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; position: relative; }
-.list_dotted > li + li { margin-top: 8px; }
-.list_dotted > li::before { width: 4px; height: 4px; background-color: #161616; border-radius: 100%; position: absolute; top: 11px; left: 0; content: ""; }
 
 .sec_hero { min-height: 700px; padding: 97px 100px 77px; background-size: cover; background-position: center; border-radius: 20px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
 .sec_hero::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); position: absolute; top: 0; left: 0; content: ''; }

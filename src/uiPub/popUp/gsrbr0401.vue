@@ -57,9 +57,18 @@
                         </AccordionItem>
                         <AccordionItem item-key="child-food-receive">
                             <template #title>{{ t.AccTitle_2 }}</template>
-                            <div class="receive_info">
+                            <!-- <div class="receive_info">
                                 <p>주문하신 상품은 선택하신 GS25 매장에서 아동급식카드 실물 또는 모바일 앱 바코드를 제시하여 수령하실 수 있습니다.</p>
-                            </div>
+                            </div> -->
+                            <ul class="how_to_grid">
+                                <li v-for="(step, idx) in t.Steps_2" :key="idx">
+                                    <div class="card_tit">
+                                        <span class="num">{{ step.num }}</span>
+                                        <strong v-html="step.text"></strong>
+                                    </div>
+                                    <figure><img :src="step.img" alt="step image"></figure>
+                                </li>
+                            </ul>
                         </AccordionItem>
                     </Accordion>
                 </div>
@@ -128,7 +137,13 @@ export default {
                     ],
                     AccTitle_2: "아동급식 사전예약 수령방법",
                     FreshTitle: "사전예약으로 더 알뜰한 장보기!",
-                    FreshDesc: "산지의 신선함을 집 앞까지 배송하는 사전예약 서비스는 제철 상품을 합리적인 가격으로 제공하여 많은 사랑을 받고 있습니다. 주문한 상품을 매장에서 수령할 수 있고, 주문 방법이 어렵다면 매장으로 문의 바랍니다."
+                    // FreshDesc: "산지의 신선함을 집 앞까지 배송하는 사전예약 서비스는 제철 상품을 합리적인 가격으로 제공하여 많은 사랑을 받고 있습니다. 주문한 상품을 매장에서 수령할 수 있고, 주문 방법이 어렵다면 매장으로 문의 바랍니다."
+                    Steps_2: [
+                        { num: "01", text: "우리동네GS 접속 후<br/>'나만의 냉장고' 또는 '주문내역' 선택", img: require("@/assets/images/dummy/gsrbr0401_1.png") },
+                        { num: "02", text: "나만의 냉장고 선택 시, '아동급식 사전예약 상품' 선택", img: require("@/assets/images/dummy/gsrbr0401_2.png") },
+                        { num: "03", text: "주문내역 선택 시, '픽업 바코드 보기'버튼 선택", img: require("@/assets/images/dummy/gsrbr0401_3.png") },
+                        { num: "04", text: "점원에게 바코드 제시", img: require("@/assets/images/dummy/gsrbr0401_4.png") }
+                    ]
                 }
             }
         };
@@ -160,13 +175,21 @@ section { padding-bottom: 80px; }
 .tip_section h3 { margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 .tip_section ul { display: flex; gap: 8px; list-style: none; }
 .tip_section li { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.tip_section li::before { content: ''; display: inline-block; width: 64px; height: 61px; background: red; border-radius: 50%; }
+.tip_section li::before { content: ''; display: inline-block; width: 64px; height: 64px; background: #F8F8F8; border-radius: 50%; }
 .tip_section li p { color: #161616; font-size: 16px; line-height: 1.3; text-align: center; }
+
+.tip_section li::after {width:24px; height:24px; background-position:50% 50%; background-repeat:no-repeat; background-size:cover; content:''; position:absolute; top:20px; left:50%; transform:translateX(-50%);}
+.tip_section li:nth-of-type(1)::after {background-image:url('@/assets/images/sub/gsrbr04/icon_tip_01.png');}
+.tip_section li:nth-of-type(2)::after {background-image:url('@/assets/images/sub/gsrbr04/icon_tip_02.png');}
+.tip_section li:nth-of-type(3)::after {background-image:url('@/assets/images/sub/gsrbr04/icon_tip_03.png');}
+.tip_section li:nth-of-type(4)::after {background-image:url('@/assets/images/sub/gsrbr04/icon_tip_04.png');}
+.tip_section li:nth-of-type(5)::after {background-image:url('@/assets/images/sub/gsrbr04/icon_tip_05.png');}
+.tip_section li:nth-of-type(6)::after {background-image:url('@/assets/images/sub/gsrbr04/icon_tip_06.png');}
 
 /* Brand Header Area */
 .brand_intro_section div { display: block; padding-bottom: 0; margin-bottom: 24px; }
 .brand_intro_section h4 {margin-bottom: 8px; color: #161616; font-size: 24px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;}
-.brand_intro_section div p:nth-of-type(1) { margin-bottom: 8px; color: #161616; font-size: 1.8rem; font-weight: 700; }
+.brand_intro_section div p:nth-of-type(1) { margin-bottom: 8px; color: #161616; font-size: 1.8rem;}
 .brand_intro_section div p:nth-of-type(2) { color: #67676f; font-size: 16px; line-height: 1.5; }
 
 /* Product Category */
@@ -178,8 +201,8 @@ section { padding-bottom: 80px; }
 
 /* Notice Bar */
 .notice_bar { padding: 16px !important; background: #f8f8f8; border-radius: 6px;  display: flex; align-items: center; gap: 6px;}
-.notice_bar p {margin-bottom:0px !important; padding-left: 20px; color: #161616; font-size: 16px; position: relative; }
-.notice_bar p::before { content: ''; display: inline-block; position: absolute; top: 2px; left: 0; width: 16px; height: 16px; background: red; }
+.notice_bar p {margin-bottom:0px !important; padding-left: 26px; color: #161616; font-size: 16px; position: relative; }
+.notice_bar p::before { content: ''; display: inline-block; position: absolute; top: 0; left: 0; width: 20px; height: 20px; background: url('@/assets/images/common/icon_set_20.png') -935px -24px no-repeat; }
 
 /* Child Food Section */
 .child_food_section div { display: block; padding-bottom: 0; }
@@ -212,6 +235,7 @@ section { padding-bottom: 80px; }
 @media screen and (max-width: 767px) {
     .modal_header { font-size: 1.8rem; padding-bottom: 24px; }
     .notice_bar p {font-size:12px !important; font-weight:400 !important;}
+    .notice_bar p::before {top:-2px;}
     section { padding-bottom:60px; }
     .tip_section h3 { font-size: 28px; }
     .tip_section ul { flex-wrap: wrap; gap: 20px 8px; }
@@ -220,7 +244,6 @@ section { padding-bottom: 80px; }
     .product_category li { flex: 0 0 calc(50% - 10px); }
     .how_to_grid { grid-template-columns: 1fr; }
     .product_category figure img {width:50%;}
-    .notice_bar p::before {top:-2px;}
     .child_food_section h4 {margin-bottom:12px;}
 }
 </style>

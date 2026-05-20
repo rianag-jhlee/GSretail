@@ -47,17 +47,18 @@
                 <div class="detail_content">
                     <section v-if="CTabIdx === 0 && t?.SubwayData" class="tab_content subway_content">
                         <div class="inner_cont">
-
                             <div class="info_section">
-                                <h3 class="content_title">{{ t.SubwayData.title }}</h3>
-                                <div class="contact_left">
+                                <h3 class="content_title" v-html="t.SubwayData.title"></h3>
+                                <div class="contact_left pc">
                                     <div class="info_item">
-                                        <em>전화</em>
+                                        <em>{{ t.Labels.phone }}</em>
                                         <span class="val">{{ t.SubwayData.contact.phone }}</span>
                                     </div>
                                     <div class="info_item">
-                                        <em>이메일</em>
-                                        <span class="val">{{ t.SubwayData.contact.email }}</span>
+                                        <em>{{ t.Labels.email }}</em>
+                                        <span class="val">{{ t.SubwayData.contact.email1 }}</span>
+                                        <span class="val">{{ t.SubwayData.contact.email2 }}</span>
+                                        <span class="val">{{ t.SubwayData.contact.email3 }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -65,37 +66,62 @@
                                 <img :src="isMobile ? t.SubwayData.imgMo : t.SubwayData.img" :alt="t.SubwayData.alt" />
                             </div>
 
-                            <div class="tm-principles-container res-swiper-container">
-                                <swiper
-                                    :slides-per-view="'auto'"
-                                    :space-between="0"
-                                    :breakpoints="{
-                                        768: {
-                                            allowTouchMove: false
-                                        }
-                                    }"
-                                    class="tm-principles-swiper"
+                            <div class="principles_card_container">
+                                <component 
+                                    :is="isMobile ? 'swiper' : 'div'"
+                                    :slides-per-view="isMobile ? '1.1' : undefined"
+                                    :space-between="isMobile ? 20 : 0"
+                                    :breakpoints="{ 768: { allowTouchMove: false } }"
+                                    class="principles_swiper_wrapper"
                                 >
-                                    <swiper-slide 
+                                    <component 
+                                        :is="isMobile ? 'swiper-slide' : 'div'"
                                         v-for="(p, pIdx) in t.SubwayData.principles" 
                                         :key="'principle-' + pIdx" 
-                                        class="tm-principle-card res-slide-item"
+                                        class="principle_card_item"
+                                        :class="{ 'swiper-slide': isMobile }"
                                     >
-                                        <div class="tm-card-header">
-                                            <span class="tm-card-num">0{{ pIdx + 1 }}</span>
-                                            <strong class="tm-card-tit">{{ p.title }}</strong>
+                                        <div class="card_header">
+                                            <span class="card_num">0{{ pIdx + 1 }}</span>
+                                            <strong class="card_title">{{ p.subTitle }}</strong>
                                         </div>
-                                        <div class="tm-card-body">
-                                            <p class="tm-card-main-text">{{ p.desc }}</p>
-                                            <p class="tm-card-sub-text">{{ p.subDesc }}</p>
+                                        
+                                        <div class="card_body">
+                                            <ul class="bullet_01">
+                                                <li v-for="(descText, dIdx) in p.desc" :key="'desc-'+dIdx">
+                                                    <p class="bullet_text" v-html="descText"></p>
+                                                    
+                                                    <div v-if="p.txt && p.txt[dIdx]" class="sub_text_box">
+                                                        <div class="sub_line">
+                                                            <span class="sub_dash"></span>
+                                                            <p class="sub_desc" v-html="p.txt[dIdx]"></p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <div v-if="pIdx < t.SubwayData.principles.length - 1" class="divider pc-only"></div>
-                                    </swiper-slide>
-                                </swiper>
+                                    </component>
+                                </component>
+                            </div>
+
+                            <div class="tell_area mo">
+                                <h3 class="content_title">{{ t.SubwayData.contact.연락처 }}</h3>
+                                <ul>
+                                    <li>
+                                        <strong>{{ t.SubwayData.contact.전화 }}</strong>
+                                        <p>{{ t.SubwayData.contact.phone }}</p>
+                                    </li>
+                                    <li>
+                                        <strong>{{ t.SubwayData.contact.이메일 }}</strong>
+                                        <p>{{ t.SubwayData.contact.email1 }}</p>
+                                        <p>{{ t.SubwayData.contact.email2 }}</p>
+                                        <p>{{ t.SubwayData.contact.email3 }}</p>
+                                    </li>
+                                </ul>
                             </div>
 
                             <div class="lease_condition_section">
-                                <h3 class="content_title">임대조건 안내</h3>
+                                <h3 class="content_title">{{ t.Labels.conditionInfo }}</h3>
                                 <div class="condition_grid">
                                     <div v-for="(cond, cIdx) in t.SubwayData.conditions" :key="cIdx" class="condition_item">
                                         <div class="visual_img_small">
@@ -126,40 +152,86 @@
                                 </div>
 
                                 <div class="info_section">
-                                    <h3 class="content_title">{{ mall.contentTitle }}</h3>
+                                    <h3 class="content_title">
+                                        {{ mall.contentTitle }}
+                                        <a :href="mall.contact.homepage" target="_blank" v-if="mall.contact.homepage">
+                                            {{ mall.홈페이지 }}
+                                        </a>
+                                    </h3>
                                     <div class="info_box">
-                                        <h4 class="sub_title">상업시설 소개</h4>
-                                        <div class="text_list ">
+                                        <h4 class="sub_title" v-if="t.MallData[SUBTabIdx]?.type === 'card_type'">{{ t.Labels.mallIntro }}</h4>
+                                        
+                                        <div v-if="mall.type === 'card_type'" class="principles_card_container mall_intro_cards">
+                                            <component 
+                                                :is="isMobile ? 'swiper' : 'div'"
+                                                :slides-per-view="isMobile ? '1.1' : undefined"
+                                                :space-between="isMobile ? 20 : 0"
+                                                :breakpoints="{ 768: { allowTouchMove: false } }"
+                                                class="principles_swiper_wrapper"
+                                            >
+                                                <component 
+                                                    :is="isMobile ? 'swiper-slide' : 'div'"
+                                                    v-for="(introItem, idx) in mall.intro" 
+                                                    :key="'intro-card-' + idx" 
+                                                    class="principle_card_item"
+                                                    :class="{ 'swiper-slide': isMobile }"
+                                                >
+                                                    <div class="card_header">
+                                                        <span class="card_num">0{{ idx + 1 }}</span>
+                                                        <strong class="card_title" v-html="introItem.title"></strong>
+                                                    </div>
+                                                    <div v-if="introItem.desc" class="card_body_sub">
+                                                        <p class="desc_sub_text" v-html="introItem.desc"></p>
+                                                    </div>
+                                                </component>
+                                            </component>
+                                        </div>
+
+                                        <div v-else class="text_list">
                                             <p class="text_item" v-for="(txt, idx) in mall.intro" :key="idx" v-html="txt"></p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="map_section">
-                                    <div class="map_area">
-                                        <iframe :src="mall.mapUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                    </div>
                                     <div class="contact_info_wrap">
                                         <div class="contact_left">
+                                            <strong>{{ t.mall_txt }}</strong>
+                                            <div class="info_item">
+                                                <span>{{ t.Labels.sns }}</span>
+                                                <span class="val">{{ mall.contact.instatxt }}</span>
+                                                <a v-if="mall.contact.insta" :href="mall.contact.insta" target="_blank" class="btn_sns small ico_insta"> 
+                                                </a>
+                                            </div>
+                                            <div v-if="mall.contact.blog" class="info_item">
+                                                <span>{{ t.Labels.blog }}</span>
+                                                <a v-if="mall.contact.blog" :href="mall.contact.blog" target="_blank"> 
+                                                    {{ mall.contact.blog }}
+                                                </a>
+                                            </div>
                                             <div v-if="mall.contact.phone" class="info_item">
-                                                <span>전화번호</span>
+                                                <span>{{ t.Labels.phoneNum }}</span>
                                                 <span class="val">{{ mall.contact.phone }}</span>
+                                                <span class="val">{{ mall.contact.phone1 }}</span>
                                             </div>
-                                            <div v-if="mall.contact.email" class="info_item">
-                                                <span>이메일</span>
-                                                <span class="val">{{ mall.contact.email }}</span>
+                                            <div v-if="mall.contact.email1 || mall.contact.email2 || mall.contact.email3" class="info_item">
+                                                <span>{{ t.Labels.email }}</span>
+                                                <span class="val">
+                                                    <template v-if="mall.contact.email1">
+                                                        <a :href="`mailto:${mall.contact.email1}`" class="email_link">{{ mall.contact.email1 }}</a>
+                                                    </template>
+                                                    <template v-if="mall.contact.email2">
+                                                        <a :href="`mailto:${mall.contact.email2}`" class="email_link">{{ mall.contact.email2 }}</a>
+                                                    </template>
+                                                    <template v-if="mall.contact.email3">
+                                                        <a :href="`mailto:${mall.contact.email3}`" class="email_link">{{ mall.contact.email3 }}</a>
+                                                    </template>
+                                                </span>
                                             </div>
                                         </div>
-                                        <div class="sns_right">
-                                            <!-- 26.05.11 Edit 이종환 : small 클래스 추가 -->
-                                            <a v-if="mall.contact.insta" :href="mall.contact.insta" target="_blank" class="btn_sns small ico_insta">
-                                                <span class="blind">인스타그램 바로가기</span>
-                                            </a>
-                                            <a v-if="mall.contact.homepage" :href="mall.contact.homepage" target="_blank" class="btn_sns small ico_home">
-                                                <span class="blind">홈페이지 바로가기</span>
-                                            </a>
-                                            <!-- //26.05.11 Edit 이종환 : small 클래스 추가 -->
-                                        </div>
+                                    </div>
+                                    <div class="map_area">
+                                        <iframe :src="mall.mapUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </div>
                                 </div>
                             </div>
@@ -169,30 +241,43 @@
 
                 <div class="lease_section">
                     <h4 class="sub_title">{{ t.lease_subtitle }}</h4>
-                    <ul class="bullet_01 ">
-                        <li>{{ t.lease_subtitle_desc_1 }}</li>
-                        <li>{{ t.lease_subtitle_desc_2 }}</li>
-                    </ul>
+                    <div class="principles_card_container">
+                        <component 
+                            :is="isMobile ? 'swiper' : 'div'"
+                            :slides-per-view="'1.1'"
+                            :space-between="isMobile ? 20 : 0"
+                            :breakpoints="{ 768: { allowTouchMove: false } }"
+                            class="principles_swiper_wrapper"
+                        >
+                            <component 
+                                :is="isMobile ? 'swiper-slide' : 'div'"
+                                v-for="(p, pIdx) in t.lease_subtitle_desc.principles" 
+                                :key="'principle-' + pIdx" 
+                                class="principle_card_item"
+                            >
+                                <div class="card_header">
+                                    <span class="card_num">0{{ pIdx + 1 }}</span>
+                                    <strong class="card_title">{{ p.subTitle }}</strong>
+                                </div>
+                                
+                                <div v-if="p.subtxt" class="card_body_sub">
+                                    <p class="desc_sub_text">{{ p.subtxt }}</p>
+                                </div>
+                            </component>
+                        </component>
+                    </div>
+
                     <div class="fee_tip_box">
-                        <div class="ic_percent">%</div>
-                        <div class="tip_txt">
-                            <strong class="blue_label">{{ t.fee_tip_title }}</strong>
-                            <p class="val_txt">
-                                {{ t.fee_tip_desc_1 }}
-                            </p>
-                            <p class="val_txt">
-                                {{ t.fee_tip_desc_2 }}
-                            </p>
+                        <div>
+                            <strong>{{ t.fee_tip_title }}</strong>
+                            <p>{{ t.fee_tip_desc_1 }}</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
                 <div class="bottom_btns">
                     <button class="btn_back" @click="handleBack">{{ t.backLabel }}</button>
                 </div>
-                <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
-
             </div>
         </div>
     </div>
@@ -200,10 +285,12 @@
 
 <script>
 import Tabs from "@/components/Tabs.vue";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
 
 export default {
     name: "gsrbr1101",
-    components: { Tabs },
+    components: { Tabs, Swiper, SwiperSlide },
     props: {
         lang: { type: String, default: "ko" }
     },
@@ -214,7 +301,16 @@ export default {
             isMobile: false,
             langData: {
                 ko: {
-                    Visual: { // 대문자 유지
+                    Labels: {
+                        phone: "전화",
+                        email: "이메일",
+                        conditionInfo: "임대조건 안내",
+                        mallIntro: "상업시설 소개",
+                        sns: "SNS",
+                        blog: "블로그",
+                        phoneNum: "전화번호"
+                    },
+                    Visual: { 
                         img: require("@/assets/images/dummy/gsrbr1101.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr1101_mo.png"),
                         alt: "GS THE FRESH 메인 비주얼",
@@ -229,26 +325,28 @@ export default {
                     SubwayData: {
                         img: require("@/assets/images/dummy/gsrbr1101_subway.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr1101_subway_mo.png"),
-                        title: `신분당선 1, 2단계 임대상가 모집`,
-                        introList: [
-                            { subTitle: `최단시간 강남접근`, desc: [`01. 강남역 ~ 정자역 16분대 운행 (기존 분당선 대비 약 30분 단축)`, `02. 광역버스 및 자가용 이용 통근자의 교통 체증 난(難) 해소`] },
-                            { subTitle: `풍부한 유동성`, desc: [`01. 총 6개역 중 4개 역사가 환승역사 (강남, 양재, 판교, 정자)`, `02. 강남 최고의 오피스/상업 밀집지인 강남역 연결 (일 유동객 35만명)`] },
-                            { subTitle: `최적화된 역사 환경`, desc: [`01. 현대적 감각의 인테리어 구현 및 높은 층고(3.6M)로 개방감 확보`] }
-                        ],
+                        title: `신분당선 1, 2단계 <br/> 임대상가 모집`,
                         principles: [
-                            { title: "최단시간 강남접근", desc: [`강남역 ~ 정자역 16분대 운행 (기존 분당선 대비 약 30분 단축)`, `광역버스 및 자가용 이용 통근자의 교통 체증 난(難) 해소`] },
-                            { title: "풍부한 유동성", desc:[`총 6개역 중 4개 역사가 환승역사 (강남, 양재, 판교, 정자)`, `강남 최고의 오피스/상업 밀집지인 강남역 연결 (일 유동객 35만명)`] },
-                            { title: "최적화된 역사 환경", desc: [`현대적 감각의 인테리어 구현 및 높은 층고(3.6M)로 개방감 확보`]},
+                            { subTitle: `최단시간 강남접근`, desc: [`강남역 ~ 정자역 16분대 운행 (기존 분당선 대비 약 30분 단축)`, `광역버스 및 자가용 이용 통근자의 교통 체증 난(難) 해소`] },
+                            { subTitle: `풍부한 유동성`, desc: [`총 6개역 중 4개 역사가 환승역사`, `강남 최고의 오피스/상업 밀집지인 강남역 연결`], txt:[`강남(2호선), 양재(3호선), 판교, 정자(분당선)`,`강남(2호선), 양재(3호선), 판교, 정자(분당선)`] },
+                            { subTitle: `최적화된 역사 환경`, desc: [`현대적 감각의 인테리어 구현 및 높은 층고(3.6M)로 개방감 확보`] }
                         ],
                         routeMapImg: require("@/assets/images/dummy/gsrbr1101_subway.png"),
-                        contact: { phone: `02-2006-3198`, email: `hyungwook.lim@gsretail.com / gunbeom@gsretail.com` },
+                        contact: { 
+                            연락처:"연락처",
+                            전화:"전화",
+                            phone: `02-2006-3198`, 
+                            이메일:"이메일",
+                            email1: `hyungwook.lim@gsretail.com` ,
+                            email2: `gunbeom@gsretail.com` ,
+                        },
                         conditions: [
                             {
                                 name: `임대상가`, img: require("@/assets/images/dummy/subway_shop.png"),
                                 table: [
                                     { th: `월 임대료`, td: `업체 제안 방식` },
                                     { th: `임대 보증금`, td: `월 임대료 * 12개월` },
-                                    { th: `계약기간`, td: `1단계 : ~2026.12.31 / 2단계 : ~2028.08.15` },
+                                    { th: `계약기간`, td: `<p>1단계 : 2026년 12월 31일까지 가능</p><p>2단계 : 2028년 08월 15일까지 가능</p>` },
                                     { th: `면적`, td: `각 역사별 상이` },
                                     { th: `추천업종`, td: `의류, 편의서비스, 생활잡화, 디저트 등` }
                                 ]
@@ -265,51 +363,64 @@ export default {
                             }
                         ],
                     },
-                    lease_subtitle: `임대차 방식`,
+                    lease_subtitle: `임대차방식`,
                     lease_subtitle_desc_1: `보증금/고정 월세`,
-                    lease_subtitle_desc_2: `보증금/변동 월세 (수수료 방식)`,
+                    lease_subtitle_desc_2: `보증금/변동 월세`,
+                    lease_subtitle_desc:{
+                        principles: [
+                            { subTitle: `보증금/고정 월세`},
+                            { subTitle: '보증금/변동 월세 (수수료 방식)', subtxt: '(수수료 방식)' }
+                        ],
+                    },
                     fee_tip_title: `수수료방식이란?`, 
-                    fee_tip_desc_1: `월 순매출의 일정 비율을 임대인에게 임대료로 지급하는 방식>예) 월 순매출금액 x 수수료율 (VAT별도)`,    
-                    fee_tip_desc_2: `예) 월 순매출금액 x 수수료율 (VAT별도)`,    
+                    fee_tip_desc_1: `월 순매출의 일정 비율을 임대인에게 임대로로 지급하는 방식. 예) 월 순매출금액 x 수수료율 (VAT별도)`,    
+                    mall_txt:'연락처',
                     MallData: [
                         { 
+                            홈페이지:'홈페이지',
                             name: `안녕인사동`, contentTitle: `안녕인사동 복합상업시설`,
                             intro: [
-                                `01. 인사동 쌈지길 맞은편에 위치한 복합문화상업시설로 2019년 10월 그랜드 오픈 후 인사동의 랜드마크로 자리매김함`,
-                                `02. 직장인/외국인/가족나들이/관광객 등이 상시 밀집하며, 인사동-익선동으로 이어지는 우수한 도보 접근성 및 신비로운 건물 가시성`,
-                                `03. 갤러리, 카페, 식음, 소품 등 다양한 매장이 거리를 형성하고, 전통 문화 지역 특성을 준수하여 고객 경험에 특화된 MD 구성`,
-                                `04. 상권 내 차별화된 시설(나인트리 호텔 숙박 연계 및 주차 공간 제공) 등 국내외 방문객의 장시간 체류 가능 (호캉스+몰캉스)`
+                                {title:`인사동 랜드마크`,desc:`인사동 쌈지길 맞은편에 위치한 복합문화상업시설로 2019년 10월 그랜드 오픈 후 인사동의 랜드마크로 자리매김함`},
+                                {title:`상시밀집 지역`,desc:`직장인/외국인/가족나들이/관광객 등이 상시 밀집하며, 인사동-익선동으로 이어지는 우수한 도보 접근성 및 신비로운 건물 가시성`},
+                                {title:`고객 경헝에 특화된 MD 구성`,desc:`갤러리, 카페, 식음, 소품 등 다양한 매장이 거리를 형성하고, 전통 문화 지역 특성을 준수하여 고객 경험에 특화된 MD 구성`},
+                                {title:`차별화된 시설`,desc:`상권 내 차별화된 시설(나인트리 호텔 숙박 연계 및 주차 공간 제공) 등 국내외 방문객의 장시간 체류 가능 (호캉스+몰캉스)`}
                             ], 
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall01.png"),
+                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.1734625641543!2d126.98088067587412!3d37.574532872036556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ef4127fbcd%3A0xdff366a8dbc227d6!2z7JWI64WV7J247IKs64-Z!5e0!3m2!1sko!2skr!4v1775627958896!5m2!1sko!2skr`,
-                            contact: { phone: `02-6954-2991`, email: `anyounginsadong@anyounginsadong.com / ha3kim1@gsretail.com / gsseri@gsretail.com`, insta: `#`, homepage: `` }
+                            contact: { phone: `02-6954-2991`, email1: `anyounginsadong@anyounginsadong.com`, email2:`ha3kim1@gsretail.com`,email3:`gsseri@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
+                            type:`card_type`
                         },
                         { 
+                            홈페이지:'홈페이지',
                             name: `구로 지밸리몰`, contentTitle: `구로 지밸리 비즈플라자 지밸리몰`,
                             intro: [
-                                `01. 구로에서 만나는 최신 트렌드의 HOT 브랜드`,
-                                `02. 구로디지털단지 최대 규모의 랜드마크 식음몰`,
-                                `03. 가족모임 / 커뮤니티 / 비즈니스 다이닝`,
-                                `04. 문화 공연 / 전시 / 커뮤니티가 있는 공간`,
-                                `05. 넉넉한 주차, 전면 테라스형 쾌적한 휴식공간`,
-                                `06. 생활편의(클리닉, 편의점, 플라워샵) / 리테일 매장 완비`
+                                {title:`구로에서 만나는<br/> 최신 트렌드의 HOT브랜드`},
+                                {title:`구로디지털단지 최대 규모의<br/> 랜드마크 식음몰`},
+                                {title:`가족모임/ 커뮤니티/ 비즈니스<br/> 다이닝`},
+                                {title:`문화 공연/ 전시/ 커뮤니티가 있는<br/> 공간`},
+                                {title:`넉넉한 주차, 전면 테리스형<br/> 쾌적한 휴식공간`},
+                                {title:`생활편의(클리닉, 편의점, 플라워샵)/ 리테일 매장 완비`}
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
-                            contact: { phone: `02-2008-3199`, email: `masiaveve@gsretail.com`, insta: `#`, homepage: `` }
+                            contact: { phone: `02-2006-3199`, email1: `masiaveve@gsretail.com`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
+                            type:`card_type`
                         },
                         { 
+                            홈페이지:'홈페이지',
                             name: `판교 파미어스몰`, contentTitle: `판교 파미어스몰`,
                             intro: [
                                 `<b>아이와 함께, 친구와 함께, 연인와 함께,<br/> 판교에서 따로, 또 같이 '파미어스몰'로 여러분을 초대합니다.</br>`,
-                                `국내 최고의 자족형 신도시, 판교에 다양한 라이프 스타일이 조화롭게 어우러진 복합 문화 상업 공간, '파미어스몰'`,
-                                `파미어스몰은 연면적 약 7만 7천평 규모의 복합시설로 315실의 '나인트리 호텔', 785세대의 '오피스텔', 5개기업의 오피스로 사용되고, 약 8,653평의 저층부에는 극장, 메디컬, 키즈, 쇼핑, 카페, 레스토랑 등 지역 주민들의 풍요로운 하루를 완성할 수 있는 다양한 상업 및 문화시설이 자리잡았습니다.`
+                                `국내 최고의 자족형 신도시, 판교에 다양한 라이프 스타일이 조화롭게 어우러진 복합 문화 상업 공간, '파미어스몰<br/>
+                                파미어스몰은 연면적 약 7만 7천평 규모의 복합시설로 315실의 '나인트리 호텔', 785세대의 '오피스텔', 5개기업의 오피스로 사용되고,<br/> 약 8,653평의 저층부에는 극장, 메디컬, 키즈, 쇼핑, 카페, 레스토랑 등 지역 주민들의 풍요로운 하루를 완성할 수 있는 다양한 상업 및 문화시설이 자리잡았습니다.
+                                '`,
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
-                            contact: { phone: `031-755-5878`, email: `egg2bird@gsretail.com`, insta: `#`, homepage: `#` }
+                            contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `egg2bird@gsretail.com`, email2: `eskmika@gsretail.com`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
                         },
                         { 
+                            홈페이지:'홈페이지',
                             name: `동부산 미식일상`, contentTitle: `동부산 미식일상`,
                             intro: [
                                 `<b>'푸드홀 부산 미식일상'은 동부산 '오시리아 관광단지' 중심에 위치해 있는 F&B Mall로써,<br/> 테마파크 단지 내방객의 휴식을 제공하기 위해 만들어진 시설입니다.</b>`,
@@ -317,10 +428,10 @@ export default {
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
-                            contact: { phone: `031-755-5878`, email: `egg2bird@gsretail.com`, insta: `#`, homepage: `#` }
+                            contact: { phone: `051-722-8155`, email1: `egg2bird@gsretail.com`, email2: `kjk5774@gsretail.com`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `#` }
                         }
                     ],
-                    backLabel : '목록으로 돌아가기' //26.05.11 add
+                    backLabel : '목록으로 돌아가기'
                 },
             }
         };
@@ -333,6 +444,9 @@ export default {
     mounted() {
         this.checkMobile();
         window.addEventListener('resize', this.checkMobile);
+        const header = document.getElementById("header");
+
+        header.classList.add("head_black");
     },
     beforeUnmount() {
         window.removeEventListener('resize', this.checkMobile);
@@ -352,28 +466,28 @@ export default {
             this.isMobile = window.innerWidth < 768;
         },
     },
-    mounted() {
-        const header = document.getElementById("header");
-
-        header.classList.add("head_black");
-    }
 };
 </script>
 
 <style scoped>
-/* 1. 넓이 2. 외부여백 3. 내부여백 4. 폰트 5. 배경 6. 테두리 7. 정렬 8. 위치 9. 블록 10. 변형 */
-
 .gsrbr1101 { width: 100%; position: relative; display: block; }
-
-
-/* Visual Section */
+.mo {display:none;}
+.principles_card_container { width: 100%; margin-top:40px; }
+.principles_swiper_wrapper { display: flex; gap: 20px; width: 100%; }
+.principle_card_item { flex: 1; display: flex; flex-direction: column; gap: 24px; padding: 40px 32px 48px; background-color: #f8f8f8; border-radius: 12px; box-sizing: border-box; position: relative; }
+.principle_card_item .card_header { display: flex; flex-direction: column; gap: 12px; }
+.principle_card_item .card_num { font-size: 18px; font-weight: 700; color: #107af2; }
+.principle_card_item .card_title { font-size: 24px; font-weight: 700; color: #161616; }
+.principle_card_item .card_body { display: flex; flex-direction: column; gap: 16px; }
+.principle_card_item .sub_text_box { display: flex; flex-direction: column; gap: 8px;}
+.principle_card_item .sub_line { display: flex; align-items: flex-start; gap: 6px; }
+.principle_card_item .sub_dash { font-size: 14px; color: #7c7c86; flex-shrink: 0; }
+.principle_card_item .sub_dash::before { content: '-'; }
+.principle_card_item .sub_desc {line-height: 1.4; color: #7c7c86; }
+.principle_card_item .bullet_text, .principle_card_item .sub_desc {font-size:16px;}
 .visual_section { width:100%; position: relative; overflow: hidden; }
-.visual_img { width: 100%; height: auto; }
-.visual_img img {width: 100%; display: block; }
 .visual_content {width: 100%; position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 2; }
 .text_box span {margin-bottom:10px; color:#fff; font-size:72px; font-weight:700; display: block;  }
-
-/* body_wrap Section */
 .body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
 .body_wrap .cont_area .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
 .body_wrap .cont_area .cont_inner ul {display:flex; justify-content:space-between; align-items:flex-end;}
@@ -381,36 +495,21 @@ export default {
 .body_wrap :deep(.cont_area) .cont_inner ul li p br {display:none;}
 .body_wrap .cont_area .cont_inner ul li a {color:#161616; font-size:18px; display:flex; align-items:center;}
 .sub_tabs { margin-top: 24px; }
-
-/* Content Section */
 .detail_content { margin-top:64px; }
 .tab_content { width: 100%; display: block; }
 .inner_cont { width: 100%; position: relative; }
-
 .visual_img { width: 100%;}
-.visual_img img { width: 100%; height: 100%; object-fit: cover; }
-
+.visual_img img { width: 100%; height: 100%; object-fit: cover; display: block;  }
 .info_section { margin-bottom:100px; }
 .content_title { margin-bottom:16px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
-.info_box { margin-top: 16px; }
 .sub_title { color: #161616; font-size: 24px; font-weight: 700; }
 .text_list { margin-top: 16px; }
-.text_item {width: 100%; padding-left: 24px; color: #67676f; font-size: 24px; line-height: 1.6; text-indent: -24px;}
-.mall-type-2 .text_item, .mall-type-3 .text_item {padding-left:0px; text-indent:0px;}
-.mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b) {font-size:24px; font-weight:700;}
-
-/* Route Map Area (Subway) */
-.route_map_wrap { width: 100%; margin-top: 64px; background-color: #f8f8f8; border-radius: 8px; }
-.route_map_wrap img {width:100%;}
-.stage_labels { width: 100%; margin-bottom: 20px; display: flex; justify-content: space-around; color: #7c7c86; font-size: 16px; font-weight: 700; }
-.line_container { width: 100%; display: flex; align-items: center; }
-.line_bar { height: 2px; background-color: #af252c; flex: 1; }
-.line_bar.gray { background-color: #ccc; }
-.station_item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.station_item .badge { width: 40px; height: 40px; color: #fff; font-size: 20px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.station_item .name { color: #7c7c86; font-size: 14px; white-space: nowrap; }
-
-/* Lease Condition Section (Subway) */
+.text_item {width: 100%; margin-bottom:16px; padding-left: 24px; color: #161616; font-size: 28px; line-height: 1.6; text-indent: -24px;}
+.mall_content .content_title {margin-top:40px; margin-bottom:100px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
+.mall_content .content_title a {margin-left:16px; font-size:18px; font-weight:500; display:inline-flex; gap:8px; align-items:center;}
+.mall_content .content_title a::before {content: ''; display: inline-block; width:24px; height:24px; background:url('@/assets/images/common/icon_set_20.png') -454px -112px no-repeat;}
+.mall-type-2 .text_item, .mall-type-3 .text_item {padding-left:0px; color:#90909A; font-size:18px; text-indent:0px;}
+.mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b) {color:#161616; font-size:24px; font-weight:700;}
 .lease_condition_section { width: 100%; margin-top: 120px; }
 .condition_grid { width: 100%; margin-top: 40px; display: flex; gap: 20px; }
 .condition_item { flex: 1; }
@@ -420,38 +519,44 @@ export default {
 .policy_wrap table { width: 100%; margin-top: 16px; border-top: 1px solid #e5e5e9; }
 .policy_wrap table th { padding: 18px 24px; color: #161616; font-size: 1.8rem; font-weight: 700; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; border-top:0; border-left:0; border-right:0; text-align:left; }
 .policy_wrap table td { padding: 18px 24px; color: #161616; font-size: 1.8rem; border-bottom: 1px solid #e5e5e9; border-left:0; border-right:0;}
-
-/* Map & Contact Area (Mall) */
-.map_section { margin-top: 40px; }
+.map_section {display:flex; gap:60px;}
 .map_area { width: 100%; height: 600px; background-color: #f0f0f0; border: 1px solid #e5e5e9; border-radius: 12px; overflow: hidden; }
-.contact_info_wrap { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; }
 .contact_left { display: flex; gap: 40px; }
+.mall_content .contact_info_wrap {width:calc(100% - 940px);}
+.mall_content .contact_left {flex-direction:column; align-items:flex-start; gap:0px}
+.mall_content .contact_left strong {margin-bottom:24px; color:#000; font-size:28px; font-weight:700;}
+.mall_content .contact_left .info_item {width:100%; padding-top:16px; padding-bottom:16px; border-bottom:1px solid #E5E5E9; position:relative; display: flex; flex-direction:column; align-items:flex-start; gap:4px;}
+.btn_sns.ico_insta {width:24px; height:24px; background:url('@/assets/images/common/icon_set_16.png') -855px -14px no-repeat; position:absolute; top:50%; right:0; display:inline-flex; transform:translateY(-50%);}
+.mall_content .contact_left .info_item span {color:#161616; font-size:18px; font-weight:700;}
+.mall_content .contact_left .info_item .val {color:#67676F; font-size:18px; font-weight:400; line-height:1.4; display:flex; flex-direction:column; gap:4px;}
+.mall_content .contact_left .info_item a {color:#67676F; font-size:18px; font-weight:400; line-height:1.4;}
 .info_item { display: flex; align-items: center; gap: 8px; }
 .info_item em {color:#67676F; font-size:18px; font-weight:700;}
 .info_item span {color:#67676F; font-size:16px;}
 .sns_right { display: flex; gap: 10px; }
-/* common.css로 이동
-.btn_sns { width: 40px; height: 40px; background-color: #f8f8f8; background-size: 24px; background-repeat: no-repeat; background-position: center; border-radius: 50%; display: block; }
-*/
-
-/* Lease Section (Common) */
-.lease_section { width: 100%; margin-top: 80px; }
-.bullet_01 {margin-top:16px;}
-.bullet_01 li { padding-left: 15px; color: #67676f; font-size: 20px; line-height: 1.6; position: relative; }
-.bullet_01 li::before { width: 4px; height: 4px; background-color: #67676f; border-radius: 50%; content: ""; position: absolute; top: 12px; left: 0; }
-.fee_tip_box { width: 100%; margin-top: 40px; padding: 40px 64px; background-color: #f8f8f8; border-radius: 8px; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
-.ic_percent { width: 40px; height: 40px; color: #90909a; font-size: 1.8rem; font-weight: 600; border: 2px solid #90909a; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.blue_label { color: #107af2; font-size: 16px; font-weight: 700; display: block; }
-.val_txt { margin-top: 6px; color: #161616; font-size: 20px; font-weight: 700; line-height: 1.4; }
-
-/* Bottom Buttons */
+.tell_area.mo {margin-top:40px;}
+.tell_area.mo h3 {margin-bottom:24px;}
+.tell_area.mo ul li:first-of-type {padding:16px 0; border-top:1px solid #E5E5E9; border-bottom:1px solid #E5E5E9;}
+.tell_area.mo ul li:first-of-type + li {padding-top:16px;}
+.tell_area.mo ul li * {font-size:16px;}
+.tell_area.mo ul li p {margin-top:4px; color:#67676F; line-height:1.5;}
+.mall_intro_cards .desc_sub_text {color:#67676F; font-size:16px; line-height:1.5;}
+.mall-type-1 .principles_swiper_wrapper {display: grid; grid-template-columns: repeat(3, 1fr);}
+.lease_section { width: 100%; margin-top:120px; }
+.fee_tip_box {margin-top:40px;}
+.fee_tip_box strong {margin-bottom:8px; padding-left:32px; color:#67676F; font-size:18px; font-weight:700; display:block; position:relative;}
+.fee_tip_box strong::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_20.png') -930px -23px no-repeat; display:inline-flex; position:absolute; left:0; top:50%; transform:translateY(-50%);}
+.fee_tip_box p {color:#67676F; font-size:16px; font-weight:400; line-height:1.5;}
+.lease_section .principles_card_container .principle_card_item {width:340px; flex:none;}
 .bottom_btns { width: 100%; margin-top: 100px; text-align: left; }
 .btn_list_back { background: transparent; padding: 0; border: 0; cursor: pointer; }
 .btn_list_back span { color: #161616; font-size: 20px; display: flex; align-items: center; gap: 12px; }
-.btn_list_back span::before { width: 16px; height: 16px; background-color: red; content: ''; display: inline-block; }
+.btn_list_back span::before {content: ''; width: 16px; height: 16px; background:url('@/assets/images/common/icon_set_16.png') -856px -14px no-repeat; display:inline-flex;}
 .ac { text-align: center; }
 
-/* Responsive Media Queries */
+@media screen and (min-width: 1024px) {
+    :deep(.subway_content) .content_title br {display:none;}
+}
 @media screen and (max-width: 1024px) {
     .visual_wrap { padding: 80px 0; }
     .intro_content { flex-direction: column; align-items: flex-start; gap: 40px; }
@@ -459,31 +564,47 @@ export default {
     .text_box .desc_box { margin-top: 24px; }
     .text_box .summary, .text_box .desc { font-size: 1.8rem; line-height: 1.5; }
     .detail_content { margin-top: 60px; }
-    .content_title { font-size: 28px; }
+    .content_title {font-size: 28px !important; }
     .sub_title { font-size: 20px; }
     .text_item { font-size: 1.8rem; line-height: 1.6; }
     .map_area { height: 400px; }
+    .map_section {flex-direction:column;}
+    .mall_content .contact_info_wrap {width:100%; order:1;}
     .contact_info_wrap { padding: 0; flex-direction: column; align-items: flex-start; gap: 24px; }
     .contact_left { flex-direction: column; gap: 12px; }
     .sns_right { width: 100%; margin-top: 10px; justify-content: flex-start; }
     .lease_section { margin-top: 60px; }
-    .fee_tip_box { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .fee_tip_box {flex-direction: column; align-items: flex-start; gap: 16px; }
     .val_txt { font-size: 16px; word-break: keep-all; }
     .bottom_btns { margin-top: 60px; }
     .btn_list_back span { height: 50px; justify-content: center; }
+    /* .principles_swiper_wrapper { flex-direction: column; gap: 16px; } */
+    .principle_card_item {height:auto; padding: 32px; display:block; flex:none;}
+    .principles_swiper_wrapper, .mall-type-1 .principles_swiper_wrapper {display: grid; grid-template-columns: repeat(2, 1fr);}
 }
-
 @media screen and (max-width: 768px) {
+    .pc {display:none;}
+    .mo {display:block;}
+    
+    .info_section { margin-bottom:40px; }
     .body_wrap .cont_area {padding:140px 0;}
     .body_wrap .cont_area .cont_inner ul li p {font-size:16px;}
     .body_wrap .cont_area .cont_inner ul li p {margin-bottom:20px;}
     .body_wrap :deep(.cont_area) .cont_inner ul li p br {display:none;}
     .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .text_box .title { font-size: 30px; letter-spacing: -0.5px; }
-    .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b) { font-size: 16px; }
+    .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b),.mall-type-2 .text_item, .mall-type-3 .text_item {font-size: 16px; }
+    .mall_content .visual_img {height:240px;}
+    .mall_content .content_title {margin-bottom:60px; margin-left:0px; margin-top:16px; display:flex; flex-direction:column;}
+    .mall_content .content_title a {margin-left:0px; margin-top:16px; font-size:14px;}
     .mall-type-2 .text_item :deep(b br) , .mall-type-3 .text_item :deep(b br) {display:none;}
     .content_title { font-size: 24px; }
     .condition_grid {flex-direction:column;}
-
+    .principles_card_container { margin-top: 40px; }
+    .principle_card_item .card_title {margin-bottom:16px; font-size: 20px; }
+    .principle_card_item .bullet_text { font-size: 15px; }
+    .lease_condition_section {margin-top:80px; }
+    .lease_section .principles_card_container .principle_card_item {width:100%;}
+    /* .mall-type-1 .principles_swiper_wrapper {display:block;} */
 }
 </style>

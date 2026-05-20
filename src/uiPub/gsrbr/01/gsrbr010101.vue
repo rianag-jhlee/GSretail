@@ -875,7 +875,7 @@
                         </ul>
                     </section>
 
-                    <section>
+                    <section class="usim_use">
                         <SectionHeader :title="tab.purchaseTitle" steps-below />
                         <Steps type="2" :items="tab.purchaseSteps" />
                     </section>
@@ -900,7 +900,7 @@
                             <li>* 하이패스카드(자동충전) 및 단말기를 구매하실 수 있습니다.</li>
                         </ul>
                     </PanelHeader>
-                    <section>
+                    <section class="hi_pass">
                         <SectionHeader :title="tab.hipassStepTitle" steps-below />
                         <Steps type="2" :items="tab.hipassSteps" />
                     </section>
@@ -976,7 +976,7 @@
         </div>
 
         <!-- 택배&픽업 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel delivery_panel">
             <nav class="service_tab_wrap" ref="deliveryWrapEl" role="tablist" aria-label="택배&픽업 서비스">
                 <div class="service_tab_list" ref="deliveryListEl" :style="deliveryTransformStyle"
                     @touchstart.passive="deliveryOnTouchStart" @touchmove.passive="deliveryOnTouchMove"
@@ -998,7 +998,7 @@
             </nav>
             <div>
                 <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
-                    <div v-show="deliveryActiveTab === i" class="service_panel">
+                    <div v-show="deliveryActiveTab === i" :class="['service_panel', `delivery_panel_${i+1}`]">
                         <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc">
                             <ul v-if="tab.notes && tab.notes.length" class="list_dotted">
                                 <li v-for="(note, ni) in tab.notes" :key="ni">
@@ -1105,7 +1105,7 @@
                             <Steps type="2" :items="tab.pickupItems" />
                         </section>
                         <div v-if="tab.partnerBtnText" class="link_wrap">
-                            <a href="#" class="btn_pickup">{{ tab.partnerBtnText }}</a>
+                            <a href="#" class="btn_big primary btn_icon_arrow after">{{ tab.partnerBtnText }}</a>
                         </div>
                             <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 -->     
                         <!-- <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
@@ -1209,7 +1209,7 @@
             </section>
         </div>
         <!-- 상생협력: 운영지원제도 -->
-        <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 0" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 0" class="brand_panel winwin_panel">
             <!-- 3depth 탭 네비 -->
             <nav class="service_tab_wrap" ref="winwinWrapEl" role="tablist" aria-label="운영지원제도">
                 <div class="service_tab_list" ref="winwinListEl" :style="winwinTransformStyle"
@@ -1236,7 +1236,7 @@
                 v-for="(tab, i) in winwin.tabs[0].serviceTabs"
                 :key="i"
                 v-show="winwinServiceActiveTab === i"
-                class="service_panel"
+                :class="['service_panel', `winwin_panel_${i+1}`]"
             >
                 <PanelHeader :title="tab.title">
                     <ul v-if="tab.notes && tab.notes.length" class="list_caution">
@@ -1375,11 +1375,12 @@ import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
 import imgHero5 from "@/assets/images/sub/gsrbr010101/brand_bg_06.png";
 import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";
 import imgHero7 from "@/assets/images/dummy/brand_bg_08.png"; 
-import imgHero8 from "@/assets/images/dummy/brand_bg_09.png"; 
-import imgHero9 from "@/assets/images/dummy/brand_bg_10.png"; 
-import imgHero10 from "@/assets/images/dummy/brand_bg_11.png"; 
-import imgHero11 from "@/assets/images/dummy/brand_bg_12.png"; 
-import imgHero12 from "@/assets/images/dummy/brand_bg_13.png"; 
+import imgHero8 from "@/assets/images/sub/gsrbr010101/brand_bg_09.png"; 
+import imgHero9 from "@/assets/images/sub/gsrbr010101/brand_bg_10.png"; 
+import imgHero10 from "@/assets/images/sub/gsrbr010101/brand_bg_11.png"; 
+import imgHero11 from "@/assets/images/sub/gsrbr010101/brand_bg_11-1.png"; 
+import imgHero11_1 from "@/assets/images/sub/gsrbr010101/brand_bg_11-2.png"; 
+import imgHero12 from "@/assets/images/sub/gsrbr010101/brand_bg_13.png"; 
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
 import imgPopCard2 from "@/assets/images/sub/gsrbr010101/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
@@ -1419,7 +1420,7 @@ import imgGiftCard5 from "@/assets/images/dummy/gift_card_05.png";
 import imgGiftCard6 from "@/assets/images/dummy/gift_card_06.png";
 import imgGiftPurchase from "@/assets/images/dummy/gift_purchase_bg.png";
 import imgRateBenefit1 from "@/assets/images/dummy/rate_benefit_01.png";
-import imgRateBenefit2 from "@/assets/images/dummy/rate_benefit_02.png";
+import imgRateBenefit2 from "@/assets/images/sub/gsrbr010101/rate_benefit_02.png";
 import imgHipassTerminal    from "@/assets/images/dummy/hipass_terminal.png";
 import imgServiceDesc01    from "@/assets/images/dummy/service_desc_01.png";
 import imgServiceDesc02    from "@/assets/images/dummy/service_desc_02.png";
@@ -2013,9 +2014,10 @@ const langData = {
                         ],
                         purchaseTitle: "GS25 매장에서 유심 구매/사용 방법",
                         purchaseSteps: [
-                            { step: "Step 1", title: "간편하게 가입하는 요금제" },
-                            { step: "Step 2", title: "대한민국 최저가" },
-                            { step: "Step 3", title: "약정 조건/위약금 ZERO" },
+                            { step: "Step 1", title: "GS25 편의점에서\n 유심카드 구입" },
+                            { step: "Step 2", title: "GS25 편의점에서\n 유심카드 구입" },
+                            { step: "Step 3", title: "유심 일련번호 등록 후\n 개통 신청 (또는 전화로 개통 신청)" },
+                            { step: "Step 4", title: "해피콜/개통 완료 후\n 휴대폰에 유심을 장착하면 간편 개통 끝!" },
                         ],
                         benefitTitle: "GS25 요금제 혜택",
                         benefitCards: [
@@ -2114,6 +2116,7 @@ const langData = {
                                     "등록된 결제방식을 통해 자동 충전됨",
                                 ],
                             },
+                            
                         ],
                         hipassChargeTitle: "하이패스 카드 충전",
                         hipassChargeDesc: "하이플러스카드에서 출시한 모든 카드 충전가능 ('도로공사', 'EX' 기재된 카드 충전불가)",
@@ -2126,34 +2129,34 @@ const langData = {
                         label:   "고속도로 미납\n통행료 납부",
                         hero:    null,
                         heroAlt: "",
-                        title:   "고속도로 미납 통행료 납부",
+                        title:   "고속도로 미납통행료 조회\n/수납서비스",
                         desc:    "국내편의점 중 최초로 고속도로 미납통행료 실시간 조회 및 납부할 수 있는 서비스입니다.",
                         serviceTitle: "서비스 장점",
                         serviceAdvantages: [
                             {
                                 num:   "01",
-                                title: "보편성",
-                                desc:  "은행보다 많고 가까운 집 근처 편의점에서 24시간 결제 가능<br /><span class=\"txt_point\">전국 모든 GS25 점포에서 수납 대행</span><br />(실시간 입금확인, 대면 거래)",
+                                title: "전국 GS25 편의점에서\n 차량번호만으로 편리하게 납부 가능",
+                                desc:  "서비스 시행 : 2019.08.23부터",
                             },
                             {
                                 num:   "02",
-                                title: "경제성",
-                                desc:  "고객 수수료 별도 부담 없음<br />계좌이체, 무통장입금 발생되는 뱅킹 수수료 없음",
+                                title: "미납통행료\n 실시간 납부",
+                                desc:  "*법인 차량은 추후 서비스 예정",
                             },
                             {
                                 num:   "03",
-                                title: "편리성",
-                                desc:  "은행에 가지 않아도, 신용카드가 없어도, 온라인상점에서 주문하면 결제(입금)은 편의점에서 완료<br /><span class=\"txt_point\">거스름돈은 점포에서 바로 수령 가능</span>",
-                            },
-                            {
-                                num:   "04",
-                                title: "안전성",
-                                desc:  "복잡한 공인인증서나 보안 카드가 필요 없고, 결제정보 노출 방지<br />대면 거래에 따른 전자금융사고 (스미싱)<br />예방",
+                                title: "현금, 신용카드로\n 납부 가능",
+                                desc:  "현금이든 신용카드든  편의에 따라 납부 가능",
                             },
                         ],
                         unpaidTitle: "고속도로 미납통행료 납부 방법",
                         unpaidSteps: [
-                            { step: "Step 1", title: "GS25 편의점에게<br />납부요청" },
+                            { step: "Step 1", title: "GS25 편의점에게<br />납부요청",
+                                bullets: [
+                                    "가까운 GS25에서 하이패스 카드 구매",
+                                    "카드 구입비: 5,000원",
+                                ],
+                             },
                             { step: "Step 2", title: "차량번호 입력" },
                             { step: "Step 3", title: "개인정보제공동의" },
                             { step: "Step 4", title: "생년월일 입력" },
@@ -2191,7 +2194,12 @@ const langData = {
                         ],
                         mallPaymentTitle: "편의점 결제 이용 방법",
                         mallPaymentSteps: [
-                            { step: "Step 1", title: "온라인몰에서<br />상품/서비스 구매" },
+                            { step: "Step 1", title: "온라인몰에서<br />상품/서비스 구매",
+                                bullets: [
+                                    "가까운 GS25에서 하이패스 카드 구매",
+                                    "카드 구입비: 5,000원",
+                                ],
+                             },
                             { step: "Step 2", title: "온라인몰에서<br />상품/서비스 구매" },
                             { step: "Step 3", title: "가까운 GS25에서<br />24시간 결제" },
                             { step: "Step 4", title: "집으로 상품 배송<br />(캐시충전)" },
@@ -2234,7 +2242,7 @@ const langData = {
                                 text: "GS포스트박스 회원으로 접수 시 다양한 이벤트에 참여 가능하며, 사용량에 따라 등급 별 혜택을 제공합니다.",
                             },
                         ],
-                        stepTitle: "국내택배 서비스",
+                        stepTitle: "국내택배 이용방법",
                         steps: [
                             { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약" },
                             { step: "Step 2", title: "홈페이지/모바일APP<br />택배접수 예약" },
@@ -2305,9 +2313,9 @@ const langData = {
                         stepTitle: "반값택배 이용 방법",
                         steps: [
                             { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약", bullets: ["수령점포 선택 입력"] },
-                            { step: "Step 2", title: "물품 포장 후<br />GS25 방문", bullets: ["세부 내용 작성", "세부 내용 작성", "<span style=\"color: #fb6432;\">특이사항 기재시 컬러</span>"] },
+                            { step: "Step 2", title: "물품 포장 후<br />GS25 방문" },
                             { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" }, 
-                            { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관" },
+                            { step: "Step 4", title: "카운터에서 결제 후<br/> 근무자에게 전달" },
                         ],
                         priceTable: {
                             title: "반값택배 이용요금",
@@ -2377,7 +2385,7 @@ const langData = {
                         noticeTitle:"국제택배 이용방법",
                         noticeItems: [
                             { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약", bullets: ["회원, 영문작성"] },
-                            { step: "Step 2", title: "물품 포장 후<br />GS25 방문",          bullets: ["세부 내용 작성", "세부 내용 작성", "<span style=\"color: #fb6432;\">특이사항 기재시 컬러</span>"] },
+                            { step: "Step 2", title: "물품 포장 후<br />GS25 방문", },
                             { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)"},
                             { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관"},
                         ],
@@ -2420,7 +2428,7 @@ const langData = {
                     },
                     {
                         label:   "쇼핑몰거래",
-                        hero:    imgHero10,
+                        hero:    imgHero11,
                         heroAlt: "",
                         title:   "쇼핑몰 거래 서비스",
                         desc:    "홈쇼핑 반품, 오픈마켓, 온라인 쇼핑몰 등 편리하게 이용하실 수 있는 서비스입니다.",
@@ -2625,7 +2633,7 @@ const langData = {
                 ],
             },
             {
-                hero: imgHero11,
+                hero: imgHero11_1,
                 heroAlt: "",
                 title: "참여제도",
                 desc: "GS25에서는 다양한 의견 수렴, 홍보, 콜센터 지원으로 경영주님에게 도움을 드리고 있습니다.",
@@ -2674,13 +2682,13 @@ const langData = {
                 title: "서비스 소개",
                 items: [
                     {
-                        img: "",
+                        img: require("@/assets/images/sub/gsrbr010101/img_mealbox.png"),
                         name: "밀박스25",
                         desc: "GS25에서 제공하는 기업/단체 대상 간편식 정기 제공 서비스 입니다.<br class=\"p_br\" />주식부터 디저트, 음료까지 매일 새로운 구성으로 운영 됩니다.<br class=\"p_br\" />HACCP 인증, 개별 포장으로 위생적이고 맛있는 한끼를 제공합니다.",
                         link: "#",
                     },
                     {
-                        img: "",
+                        img: require("@/assets/images/sub/gsrbr010101/img_snackbar.png"),
                         name: "스낵바",
                         desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다. 사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.",
                     },
@@ -2708,21 +2716,21 @@ const tab1 = langData.tabs[1];
 const tab2 = langData.tabs[2];
 const tab3 = langData.tabs[3];
 
-const depth1ActiveIdx = ref(0);
+const depth1ActiveIdx = ref(0); // 26.05.18 : 1depth 활성화탭 선언
 const depth1Tabs = langData.nav.depth1;
 const depth2Tabs = langData.nav.depth2;
 const storeTabs = langData.nav.depth2Store;
 const winwinTabs = langData.nav.depth2Winwin;
 
-const storeActiveTab = ref(0);
-const winwinActiveTab = ref(0);
-const winwinServiceActiveTab = ref(0);
+const storeActiveTab = ref(0); //매장/서비스 2Depth 활성화탭
+const winwinActiveTab = ref(0); //상생협력 2Depth 활성화탭
+const winwinServiceActiveTab = ref(0); //상생협력 3Depth 활성화탭
 const giftSwiperInst = ref(null);
 const onGiftSwiper = (swiper) => {
     giftSwiperInst.value = swiper;
 };
 const serviceActiveTab  = ref(0);
-const deliveryActiveTab = ref(0);
+const deliveryActiveTab = ref(4);  // 26.05.18 : 매장/서비스 > 택배&픽업 3depth 활성화탭 선언
 
 /* ── service_tab_wrap 슬라이드 (Tabs tabSlide 동일 방식) ── */
 function useTabSlide() {
@@ -3094,7 +3102,7 @@ function goBack() {
   .chicken_panel :deep(.brand_panel_bg > img) { object-position: -385px center }
   .gopizza_panel :deep(.brand_panel_bg > img) { object-position: -591px bottom }
   .gopizza_panel :deep(.diff_bottom_row) { margin-top: 120px }
-  .sinsen_panel :deep(.brand_panel_bg > img) { object-position: -797px bottom }
+  .sinsen_panel :deep(.brand_panel_bg > img) { object-position: -395px bottom }
 }
 .sec_brand_visual { position: relative; height: calc(100vh + 800px) }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100vw; width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
@@ -3186,17 +3194,9 @@ function goBack() {
 @media (max-width: 768px) {
   .brand_panel_desc { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
 }
-.list_dotted > li { padding-left: 12px; position: relative }
-.list_dotted > li + li { margin-top: 8px }
-.list_dotted > li::before { content: ""; width: 4px; height: 4px; background-color: #161616; border-radius: 50%; position: absolute; top: 11px; left: 0 }
-.list_dotted > li > p { margin: 0; color: #161616; font-size: 1.8rem; line-height: 1.4 }
-.list_dotted > li > p :deep(a) { color: #107af2; font-size: 1.8rem; line-height: 1.4; text-decoration: underline }
+
 .caution_note > p { color: #67676f }
 @media (max-width: 768px) {
-  .list_dotted > li { padding-left: 6px }
-  .list_dotted > li::before { top: 9px; width:2px; height:2px }
-  .list_dotted > li + li { margin-top: 8px }
-  .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
   .caution_note { margin-top: 8px }
   .caution_note > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
   .brand_panel_title .list_dotted { padding-right: 6px }
@@ -3207,7 +3207,7 @@ button { background-color: #fff }
 @media (max-width: 768px) {
   .usage_select_box { width: 100%; font-size: 1.4rem; line-height: 1.4 }
 }
-.brand_panel { padding-top: 64px; margin-bottom: 100px }
+.brand_panel { padding-top: 64px; margin-bottom: 100px ;}
 .brand_panel section { padding-bottom: 120px }
 @media (max-width: 768px) {
   .brand_panel section { padding: 64px 0 80px }
@@ -3345,9 +3345,17 @@ button { background-color: #fff }
 .service_tab_item { background-color: transparent; border: none; cursor: pointer; border-radius: 12px; flex: 0 0 calc(100% / 8); aspect-ratio: 89 / 83; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px }
 
 /* 26.05.15 Edit 이종환 : 아아콘 적용으로 수정 (on / off 포지션은 동일) */
-.pop_panel .service_tab_icon { width: 32px; height: 32px; background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_off.png'); background-repeat:no-repeat; border-radius: 8px; display: block; flex-shrink: 0 }
-.pop_panel .service_tab_item.is_active .service_tab_icon { background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_on.png'); }
+.brand_panel .service_tab_icon { width: 32px; height: 32px; background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_off.png'); background-repeat:no-repeat; border-radius: 8px; display: block; flex-shrink: 0 ;}
+.brand_panel .service_tab_item.is_active .service_tab_icon { background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_on.png'); }
 
+.service_tab_label { color: #7c7c86; font-size: 1.8rem; font-weight: 700; line-height: 1.5; text-align: center; white-space: pre-line }
+.service_tab_item.is_active .service_tab_label { color: #107af2 }
+.service_panel { min-height: 200px }
+.service_panel section:has(> header:only-child) :deep(header) { margin-bottom: 0; padding: 0 }
+.pop_exclude { margin-top: 8px; color: #f95823; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
+.pop_card_item { overflow: hidden; display: flex; flex-direction: column }
+
+/* 매장/서비스 > 생활 서비스 탭 아이콘 */
 .pop_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-34px -24px;}
 .pop_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-134px -24px;}
 .pop_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-234px -24px;}
@@ -3358,22 +3366,160 @@ button { background-color: #fff }
 .pop_panel .service_tab_list .service_tab_item:nth-child(8) .service_tab_icon {background-position:-734px -24px;}
 /* //26.05.15 Edit 이종환 : 아아콘 적용으로 수정 */
 
-.service_tab_label { color: #7c7c86; font-size: 1.8rem; font-weight: 700; line-height: 1.5; text-align: center; white-space: pre-line }
-.service_tab_item.is_active .service_tab_label { color: #107af2 }
-.service_panel { min-height: 200px }
-.service_panel section:has(> header:only-child) :deep(header) { margin-bottom: 0; padding: 0 }
-.pop_exclude { margin-top: 8px; color: #f95823; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
-.pop_card_item { overflow: hidden; display: flex; flex-direction: column }
+/* 매장/서비스 > 택배&픽업 탭 아이콘 */
+.delivery_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-834px -24px;}
+.delivery_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-934px -24px;}
+.delivery_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-1034px -24px;}
+.delivery_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-1134px -24px;}
+.delivery_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-1234px -24px;}
+
+/* 상생협력 > 운영지원제도 탭 아이콘 */
+.winwin_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-1434px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-1334px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-1534px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-1634px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-1734px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(6) .service_tab_icon {background-position:-1834px -24px;}
+
+
+/* step 아이콘 */
+.gift_usage_wrap .gift_usage_group :deep(.step_list .step_item) {align-items:center; flex-direction:row;}
+.gift_usage_wrap .gift_usage_group :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
+
+.gift_usage_wrap .gift_usage_group:nth-of-type(1) :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-260px -103px;}
+.gift_usage_wrap .gift_usage_group:nth-of-type(1) :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-100px -103px;}
+.gift_usage_wrap .gift_usage_group:nth-of-type(1) :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-180px -103px;}
+.gift_usage_wrap .gift_usage_group:nth-of-type(1) :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-100px -103px;}
+.gift_usage_wrap .gift_usage_group:nth-of-type(1) :deep(.step_list .step_item:nth-of-type(5) span) {background-position:-20px -103px;}
+
+.gift_usage_wrap .gift_usage_group:nth-of-type(2) :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-20px -20px;}
+.gift_usage_wrap .gift_usage_group:nth-of-type(2) :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-100px -20px;}
+.gift_usage_wrap .gift_usage_group:nth-of-type(2) :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-180px -20px;}
+.gift_usage_wrap .gift_usage_group:nth-of-type(2) :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-260px -20px;}
+
+
+.usim_use :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
+.usim_use :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-20px -20px;}
+.usim_use :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-260px -103px;}
+.usim_use :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-20px -103px;}
+.usim_use :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-340px -103px;}
+
+
+.hi_pass :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
+.hi_pass :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-180px -20px;}
+.hi_pass :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-180px -103px;}
+.hi_pass :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-420px -103px;}
+
+.sec_unpaid_method :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
+.sec_unpaid_method :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-500px -103px;}
+.sec_unpaid_method :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-580px -103px;}
+.sec_unpaid_method :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-660px -103px;}
+.sec_unpaid_method :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-260px -186px;}
+.sec_unpaid_method :deep(.step_list .step_item:nth-of-type(5) span) {background-position:-180px -20px;}
+
+.sec_mall_payment_method :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
+.sec_mall_payment_method :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-500px -186px;}
+.sec_mall_payment_method :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-20px -20px;}
+.sec_mall_payment_method :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-180px -20px;}
+.sec_mall_payment_method :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-580px -186px;}
+
+.delivery_panel :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
+
+.delivery_panel .service_panel.delivery_panel_1 :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-500px -186px;}
+.delivery_panel .service_panel.delivery_panel_1 :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-580px -186px;}
+.delivery_panel .service_panel.delivery_panel_1 :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-660px -186px;}
+.delivery_panel .service_panel.delivery_panel_1 :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-180px -20px;}
+.delivery_panel .service_panel.delivery_panel_2 :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-500px -186px;}
+.delivery_panel .service_panel.delivery_panel_2 :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-580px -186px;}
+.delivery_panel .service_panel.delivery_panel_2 :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-660px -186px;}
+.delivery_panel .service_panel.delivery_panel_2 :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-900px -104px;}
+.delivery_panel .service_panel.delivery_panel_3 :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-500px -186px;}
+.delivery_panel .service_panel.delivery_panel_3 :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-580px -186px;}
+.delivery_panel .service_panel.delivery_panel_3 :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-660px -186px;}
+.delivery_panel .service_panel.delivery_panel_3 :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-180px -20px;}
+.delivery_panel .service_panel.delivery_panel_4 :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-1060px -104px;}
+.delivery_panel .service_panel.delivery_panel_4 :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-20px -20px;}
+.delivery_panel .service_panel.delivery_panel_4 :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-980px -104px;}
+.delivery_panel .service_panel.delivery_panel_5 :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-20px -20px;}
+.delivery_panel .service_panel.delivery_panel_5 :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-20px -103px;}
+.delivery_panel .service_panel.delivery_panel_5 :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-660px -186px;}
+
+.delivery_panel :deep(.feature_card_item .feature_card_icon) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
+
+.delivery_panel .service_panel.delivery_panel_1 :deep(.feature_card_item:nth-of-type(1) .feature_card_icon) {background-position:-420px -186px;}
+.delivery_panel .service_panel.delivery_panel_1 :deep(.feature_card_item:nth-of-type(2) .feature_card_icon) {background-position:-340px -186px;}
+.delivery_panel .service_panel.delivery_panel_1 :deep(.feature_card_item:nth-of-type(3) .feature_card_icon) {background-position:-100px -103px;}
+
+.delivery_panel .service_panel.delivery_panel_2 :deep(.feature_card_item:nth-of-type(1) .feature_card_icon) {background-position:-740px -186px;}
+.delivery_panel .service_panel.delivery_panel_2 :deep(.feature_card_item:nth-of-type(2) .feature_card_icon) {background-position:-420px -186px;}
+.delivery_panel .service_panel.delivery_panel_2 :deep(.feature_card_item:nth-of-type(3) .feature_card_icon) {background-position:-340px -186px;}
+.delivery_panel .service_panel.delivery_panel_2 :deep(.feature_card_item:nth-of-type(4) .feature_card_icon) {background-position:-100px -103px;}
+
+.winwin_panel :deep(.num_info_icon:after) {width:40px; height:40px; background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat; content:''; position:absolute; top:20px; left:20px; display:block;}
+.winwin_panel .winwin_panel_1 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-980px -20px;}
+.winwin_panel .winwin_panel_1 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-20px -266px;}
+.winwin_panel .winwin_panel_1 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-100px -266px;}
+.winwin_panel .winwin_panel_1 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-180px -266px;}
+.winwin_panel .winwin_panel_1 :deep(.num_info_item:nth-of-type(5) .num_info_icon:after) {background-position:-260px -266px;}
+
+.winwin_panel .winwin_panel_2 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-340px -266px;}
+.winwin_panel .winwin_panel_2 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-420px -266px;}
+.winwin_panel .winwin_panel_2 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-500px -266px;}
+.winwin_panel .winwin_panel_2 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-580px -266px;}
+
+.winwin_panel .winwin_panel_3 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-660px -266px;}
+.winwin_panel .winwin_panel_3 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-260px -266px;}
+.winwin_panel .winwin_panel_3 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-740px -266px;}
+
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-820px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-900px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-980px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-1060px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(5) .num_info_icon:after) {background-position:-900px -186px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(6) .num_info_icon:after) {background-position:-1140px -266px;}
+
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-340px -20px;}
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-420px -20px;}
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-580px -266px;}
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-500px -20px;}
+
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-580px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-660px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-740px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-820px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(5) .num_info_icon:after) {background-position:-900px -20px;}
+.winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(6) .num_info_icon:after) {background-position:-580px -103px;}
+
+.milbox_panel .milbox_feature :deep(.feature_card_item .feature_card_icon) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
+.milbox_panel .milbox_feature :deep(.feature_card_item:nth-of-type(1) .feature_card_icon) {background-position:-1060px -20px;}
+.milbox_panel .milbox_feature :deep(.feature_card_item:nth-of-type(2) .feature_card_icon) {background-position:-100px -186px;}
+.milbox_panel .milbox_feature :deep(.feature_card_item:nth-of-type(3) .feature_card_icon) {background-position:-1140px -20px;}
+
 @media (min-width: 769px) {
-  .pop_card_swiper { overflow: visible }
-  .pop_card_swiper :deep(.swiper-wrapper) { gap: 20px; transform: none !important }
-  .pop_card_swiper :deep(.swiper-slide) { width: auto !important; height: auto !important; flex: 1 }
+    .pop_card_swiper { overflow: visible }
+    .pop_card_swiper :deep(.swiper-wrapper) { gap: 20px; transform: none !important }
+    .pop_card_swiper :deep(.swiper-slide) { width: auto !important; height: auto !important; flex: 1 }
 }
 .pop_card_thumb { width: 100%; display: block }
 .pop_card_thumb img { width: auto; height: auto }
 .pop_card_body { padding-top: 24px; display: flex; flex-direction: column; flex: 1 }
+
 @media (max-width: 768px) {
-  .pop_card_body { min-height: 196px; padding-right: 8px }
+    .pop_card_body { min-height: 196px; padding-right: 8px }
+
+    .delivery_panel :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
+
+    .delivery_panel .service_panel :deep(.feature_card_item .feature_card_icon) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
+    .delivery_panel .service_panel.delivery_panel_1 :deep(.swiper-slide:nth-of-type(1) .feature_card_icon) {background-position:-420px -186px;}
+    .delivery_panel .service_panel.delivery_panel_1 :deep(.swiper-slide:nth-of-type(2) .feature_card_icon) {background-position:-340px -186px;}
+    .delivery_panel .service_panel.delivery_panel_1 :deep(.swiper-slide:nth-of-type(3) .feature_card_icon) {background-position:-100px -103px;}
+
+    .delivery_panel .service_panel.delivery_panel_2 :deep(.swiper-slide:nth-of-type(1) .feature_card_icon) {background-position:-740px -186px;}
+    .delivery_panel .service_panel.delivery_panel_2 :deep(.swiper-slide:nth-of-type(2) .feature_card_icon) {background-position:-420px -186px;}
+    .delivery_panel .service_panel.delivery_panel_2 :deep(.swiper-slide:nth-of-type(3) .feature_card_icon) {background-position:-340px -186px;}
+    .delivery_panel .service_panel.delivery_panel_2 :deep(.swiper-slide:nth-of-type(4) .feature_card_icon) {background-position:-100px -103px;}
+
+    .winwin_panel :deep(.num_info_icon:after) {width:32px; height:32px; background-image:url('@/assets/images/sub/icon_cont_32.png'); top:14px; left:14px;}
 }
 .pop_card_name { margin-bottom: 12px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block }
 @media (max-width: 768px) {
@@ -3466,7 +3612,7 @@ button { background-color: #fff }
 @media (max-width: 768px) {
   .list_caution > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 }
-.imgcard_link { width: 20px; height: 20px; background-color: #d0d0d8; flex-shrink: 0; display: inline-block; vertical-align: middle; margin-left: 8px }
+.imgcard_link { width: 20px; height: 20px; background:url('@/assets/images/common/icon_set_20.png') -979px -24px no-repeat; flex-shrink: 0; display: inline-block; vertical-align: middle; margin-left: 8px }
 .sec_note { margin: 8px 0 0; color: #f95823; font-size: 1.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.02em }
 .milbox_feature :deep(.feature_card_item) { min-height: 171px; max-width: 340px }
 @media (max-width: 768px) {
@@ -3511,8 +3657,8 @@ button { background-color: #fff }
 }
 .cash_table_cell { display: flex; align-items: flex-start; gap: 12px }
 .imgcard_list { display: flex; gap: 20px }
-.imgcard_item { overflow: hidden; border-radius: 12px; display: flex; flex: 1; flex-direction: column }
-.imgcard_img { width: 100%; height: 340px; margin: 0; background-color: #c4c4c4; overflow: hidden }
+.imgcard_item { overflow: hidden; display: flex; flex: 1; flex-direction: column }
+.imgcard_img { width: 100%; height: 340px; margin: 0; border-radius:12px; overflow: hidden }
 .imgcard_img > img { width: 100%; height: 100%; object-fit: cover }
 .imgcard_body { padding: 32px 0; flex: 1 }
 .imgcard_body > h4 { margin-bottom: 16px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }
@@ -3560,8 +3706,16 @@ button { background-color: #fff }
 .gift_advantage_cards :deep(.feature_card_item) { min-height: 271px }
 .gift_usage_wrap { display: flex; flex-direction: column; gap: 40px }
 .gift_usage_group > h3 { margin-bottom: 24px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }
+
 @media (max-width: 768px) {
-  .gift_usage_group > h3 { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
+    .gift_usage_group > h3 { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
+    .gift_usage_wrap .gift_usage_group :deep(.step_list .step_item) {align-items:flex-start; flex-direction:row;}
+    .gift_usage_wrap .gift_usage_group :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
+
+    .usim_use :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
+    .hi_pass :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
+    .sec_unpaid_method :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
+    .sec_mall_payment_method :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
 }
 .gift_purchase_wrap { display: flex; gap: 40px; align-items: flex-start }
 .gift_purchase_img { width: calc(50% - 10px); margin: 0; padding: 0; border-radius: 12px; flex-shrink: 0; overflow: hidden }

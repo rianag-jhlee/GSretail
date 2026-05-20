@@ -3,13 +3,13 @@
 #skip_menu a:focus {height:auto; padding:4px 10px;}
 
 /* header */
-#header {position:fixed; top:0; right:0; left:0; z-index:100; transition:background 0.25s, transform 0.25s ease-in-out;}
+#header {position:fixed; top:0; right:0; left:0; z-index:99; transition:background 0.25s, transform 0.25s ease-in-out;}
 #header.hide {transform:translateY(-100%);}
 
 #header .inner {width:100%; max-width:1720px; margin:0 auto; padding:46px 20px 0; display:flex; align-items:flex-start; justify-content:space-between;}
 #header nav {position:relative; display:flex; align-items:center;}
 #header nav ul.depth1 {display:flex;}
-#header nav ul.depth1 > li > a {padding:0 28px 46px; color:#fff; font-size:2rem; font-weight:600; line-height:140%; letter-spacing:0.02em; display:flex;}
+#header nav ul.depth1 > li > a {padding:0 45px 46px; color:#fff; font-size:2rem; font-weight:600; line-height:140%; letter-spacing:0.02em; display:flex;}
 
 #header nav .depth2_wrap {width:100vw; height:0; background-color:#fff; overflow:hidden; position:absolute; top:74px; left:0; display:flex;}
 #header nav .depth2_wrap:after {background-color:#fff; border-top:1px solid #E5E5E9; position:absolute; top:-1px; right:-10000%; bottom:0; left:-1000%; z-index:-1; content:'';}
@@ -87,7 +87,7 @@ footer nav dd a, footer nav dd a:visited {width:calc(100vw / 6.5); max-width:184
 
 footer .quick {margin-top:40px; padding-top:19px; padding-bottom:20px; border-top:1px solid #E5E5E9; border-bottom:1px solid #E5E5E9; overflow:hidden;}
 footer .quick ul {display:flex; align-items:center; flex-wrap:nowrap;}
-footer .quick a {height:21px; padding:0 16px; color:#000; font-size:1.4rem; font-weight:700; letter-spacing:-0.02em; line-height:21px; white-space:nowrap; display:block;}
+footer .quick a, footer .quick button {height:21px; padding:0 16px; color:#000; font-size:1.4rem; font-weight:700; letter-spacing:-0.02em; line-height:21px; white-space:nowrap; background:transparent; display:block;}
 footer .quick li:hover a {font-weight:600;}
 footer .quick li:first-child a {padding-left:0;}
 
@@ -117,7 +117,7 @@ h5 {font-size:1.8rem;}
 .breadcrumb .is-open ul {height:auto; overflow:initial; display:block !important;}
 .breadcrumb a {white-space:nowrap;}
 
-.cont_inner { width: 100%; max-width: 1420px; margin: 0 auto; padding: 0 20px; }
+.cont_inner { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px; }
 
 /* search */
 .search_wrap {display:flex; align-items:center; gap:8px;}
@@ -158,6 +158,7 @@ h5 {font-size:1.8rem;}
 /* 3. 핵심: 콘텐츠 영역이 남은 공간을 다 차지하고 스크롤이 생기도록 설정합니다. */
 .modal_content { flex: 1; overflow-y: auto; }
 .modal_cont{ display: flex; flex-direction: column; height: 100%; max-height: 80vh; background-color: #ffffff; box-sizing: border-box; }
+.modal_wrap .modal_container .board_detail_wrap {padding-top:0;}
 
 .modal_bottom { flex-shrink: 0; margin-top: 20px; padding:0 20px 20px; display: flex; align-items: center; justify-content: flex-end; }
 .modal_bottom.center {justify-content:center;}
@@ -209,6 +210,19 @@ h5 {font-size:1.8rem;}
 /* .board_type_toggle.type_faq dd.acc_show {border-bottom:1px solid #d7d7df;} */
 
 .tab_wrap + .type_gallery {margin-top:24px;}
+
+/* 게시물 상세 */
+.board_detail_wrap {max-width:1460px; margin:0 auto; padding:240px 20px 0;}
+.board_detail_wrap .detail_title {padding-bottom:40px; border-bottom:1px solid #E5E5E9;}
+.board_detail_wrap .tit {color:#161616; font-size:3.2rem; line-height:130%; letter-spacing:-0.01em; display:block;}
+.board_detail_wrap .tit .cate {color:#107AF2; font-size:3.2rem; font-weight:700; display:inline-flex; align-items:center;}
+.board_detail_wrap .tit .cate:after {height:22px; margin:0 11px 0 16px; border-left:1px solid #d7d7df; content:''; display:block;}
+.board_detail_wrap .info {margin-top:12px; display:flex; gap:8px;}
+.board_detail_wrap .info em {padding:3px 6px; color:#67676f; font-style:normal; line-height:140%; letter-spacing:-0.01em; background-color:#F2F2F4; border-radius:4px; display:block;}
+.board_detail_wrap .info .date {color:#67676F; font-size:1.8rem; line-height:140%; letter-spacing:0;}
+
+.board_detail_wrap .board_detail_cont {padding-top:48px;}
+.board_detail_wrap .board_detail_cont img {max-width:100%;}
 
 @media screen and (max-width:1300px){
     #header nav ul.depth1 > li > a {padding-right:20px; padding-left:20px; font-size:1.8rem;}
@@ -320,4 +334,10 @@ h5 {font-size:1.8rem;}
     .search_filter_area .search_wrap .select, .search_filter_area .search_wrap .input_search_wrap {width:100%;}
 
     .search_filter_area .filter_group, .search_filter_area .filter_group .select {width:100%;}
+
+    /* 게시물 상세 */
+    .board_detail_wrap .detail_title {padding-bottom:24px;}
+    .board_detail_wrap .tit {font-size:2.4rem; line-height:135%;}
+
+    .board_detail_wrap .board_detail_cont {padding-top:40px;}
 }

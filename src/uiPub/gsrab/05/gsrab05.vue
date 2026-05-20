@@ -24,7 +24,9 @@
                             <p><span class="bus_tag_reg">{{ pageData.location.busExpressLabel }}</span> {{ pageData.location.busExpressRoutes }}</p>
                         </div>
                     </div>
-                    <div class="map_area" role="img" :aria-label="pageData.location.mapAriaLabel"></div>
+                    <div class="map_area" role="map" :aria-label="pageData.location.mapAriaLabel">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.2584135599163!2d127.03451977629449!3d37.50182292783558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3fee398641d%3A0x237e08643e54191d!2zR1Mg7YOA7JuM!5e0!3m2!1sko!2skr!4v1779151657505!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </article>
             </section>
             <section class="sec_location">
@@ -64,8 +66,12 @@
                         </div>
                     </div>
                     <div class="map_stack">
-                        <div class="map_area" role="img" :aria-label="pageData.location2.mapAriaLabel1"></div>
-                        <div class="map_area" role="img" :aria-label="pageData.location2.mapAriaLabel2"></div>
+                        <div class="map_area" role="map" :aria-label="pageData.location2.mapAriaLabel1">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101262.58408041636!2d126.73666359726565!3d37.52075259999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e8cae0efbf5%3A0xa6a88cc52747434a!2zR1PqsJXshJztg4Dsm4w!5e0!3m2!1sko!2skr!4v1779151880978!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="map_area" role="map" :aria-label="pageData.location2.mapAriaLabel2">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.4355804119828!2d126.88768577629516!3d37.52122822672419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9ef339ed8173%3A0x58fcaf41d3848615!2zR1PqsJXshJxO7YOA7JuM!5e0!3m2!1sko!2skr!4v1779151949828!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </article>
             </section>
@@ -143,6 +149,7 @@ const pageData = {
     .sec_location .location_info .route_list > li > p > span { margin-right: 8px; font-weight: 700; display: block; flex: 0 0 auto; }
     .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { flex: 0 1 700px; min-width: 0; align-self: flex-start; }
     .sec_location .map_area { width: 100%; max-width: 700px; aspect-ratio: 700 / 440; height: auto; border-radius: 12px; background-color: #e5e5e9; background-repeat: no-repeat; background-position: center; background-size: contain; box-sizing: border-box; }
+    .sec_location .map_area iframe { width: 100%;}
     .map_stack { width: 100%; max-width: 700px; min-width: 0; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; }
     .sec_location .location_info strong.txt_blue { margin-bottom: 8px; color: #107af2; font-weight: 700; font-size: 1.8rem; line-height: 1.24; letter-spacing: 0; display: block; }
     @media screen and (max-width: 1024px) {
@@ -160,7 +167,8 @@ const pageData = {
         .sec_location { gap: 30px; }
         .sec_location > .location_panel { padding: 30px 0 36px; flex-direction: column; flex-wrap: nowrap; gap: 0; align-items: stretch; border-top: 1px solid #e5e5e9; }
         .sec_location .location_info { order: 2; flex: none; padding-top: 30px; gap: 36px; }
-        .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { order: 1; max-width: 100%; }
+        .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { order: 1; max-width: 100%;}
+        .sec_location .map_area iframe {height:100%;}
         .sec_location .map_area { aspect-ratio: 335 / 211; }
         .map_stack { gap: 24px; }
         .sec_location .location_info > div h4 { font-size: 2rem; }

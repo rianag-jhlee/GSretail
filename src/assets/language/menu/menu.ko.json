@@ -1,38 +1,38 @@
 [
     {
-        "title": "ABOUT",
+        "title": "회사소개",
         "path": "#none",
         "children": [
             {
                 "title": "CEO 인사말",
-                "path": "#",
+                "path": "gsrab01",
                 "children": []
             },
             {
                 "title": "회사 소개",
-                "path": "#",
+                "path": "gsrab02",
                 "children": []
             },
             {
                 "title": "연혁",
-                "path": "#",
+                "path": "gsrab03",
                 "children": []
             },
             {
                 "title": "CI/BI",
-                "path": "#",
+                "path": "gsrab04",
                 "children": []
             },
             {
                 "title": "위치",
-                "path": "#",
+                "path": "gsrab05",
                 "children": []
             }
         ]
     },
     {
-        "title": "BRAND",
-        "path": "#none",
+        "title": "사업소개",
+        "path": "gsrbr_smain",
         "children": [
             {
                 "title": "GS25",
@@ -109,33 +109,7 @@
         ]
     },
     {
-        "title": "INVESTORS",
-        "path": "#none",
-        "children": [
-            {
-                "title": "기업지배구조",
-                "path": "gsrin0101",
-                "children": []
-            },
-            {
-                "title": "경영성과",
-                "path": "gsrin0201",
-                "children": []
-            },
-            {
-                "title": "공시정보",
-                "path": "gsrin0301",
-                "children": []
-            },
-            {
-                "title": "IR자료실",
-                "path": "gsrin04",
-                "children": []
-            }
-        ]
-    },
-    {
-        "title": "SUSTAINABILITY",
+        "title": "지속가능경영",
         "path": "#none",
         "children": [
             {
@@ -161,7 +135,33 @@
         ]
     },
     {
-        "title": "GS NEWS",
+        "title": "투자정보",
+        "path": "#none",
+        "children": [
+            {
+                "title": "기업지배구조",
+                "path": "gsrin0101",
+                "children": []
+            },
+            {
+                "title": "경영성과",
+                "path": "gsrin0201",
+                "children": []
+            },
+            {
+                "title": "공시정보",
+                "path": "gsrin0301",
+                "children": []
+            },
+            {
+                "title": "IR자료실",
+                "path": "gsrin04",
+                "children": []
+            }
+        ]
+    },
+    {
+        "title": "미디어",
         "path": "#none",
         "children": [
             {

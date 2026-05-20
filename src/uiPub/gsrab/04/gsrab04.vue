@@ -209,12 +209,12 @@ const colorRegList = [
     section { display: flex; flex-direction: column; gap: 64px; }
     .header h3 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
     .header p { margin: 16px 0 0; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_color_reg > .header p { color: #67676f; font-weight: 400; }
+    .sec_color_reg > .header p {  color: #161616; font-weight: 700; }
     .header.center h3, .header.center p { text-align: center; }
     .cont_box { width: 100%; padding: 56px 64px; border: 1px solid #e5e5e9; border-radius: 12px; }
     .cont_box_row { width: 100%; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
     .cont_box_row > .sub_title { flex-shrink: 0; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; white-space: nowrap; }
-    .cont_box_row > .desc { flex: 1 1 auto; min-width: 0; color: #67676f; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .cont_box_row > .desc { flex: 1 1 auto; min-width: 0; color: #67676f; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; text-align:right;}
     .cont_box_row + .gray_box { margin-top: 40px; }
     .gray_box { width: 100%; padding: 70px 0; display: flex; justify-content: center; align-items: center; background-color: #f8f8f8; border-radius: 12px; }
     .gray_box > .img_wrap { height: 120px; }
@@ -282,10 +282,11 @@ const colorRegList = [
         .header h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; text-align: left; }
         .header p { margin: 12px 0 0; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
         .header.center h3, .header.center p { text-align: left; }
+        .sec_color_reg > .header p {margin-bottom:64px; font-weight:400;}
         .cont_box { padding: 36px 20px; }
         .cont_box_row { display: flex; flex-direction: column; gap: 12px; }
         .cont_box_row > .sub_title { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-        .cont_box_row > .desc { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+        .cont_box_row > .desc { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; text-align:left;}
         .gray_box { min-height: 260px; padding: 70px 20px; }
         .gray_box > .img_wrap { padding: 16px 32px; }
         .color_cards { margin-top: 24px; grid-template-columns: minmax(0, 1fr); gap: 0; }
@@ -300,7 +301,7 @@ const colorRegList = [
         .notice_list > li { padding-left: 14px; font-size: 1.4rem; line-height: 1.4; }
         .notice_list > li::before { top: 8px; }
         .sec_color_reg .color_reg_list_wrap { padding: 0 0 40px; }
-        .sec_color_reg .reg_card { max-width: 100%; margin: 0; padding: 36px 20px; flex-direction: column; align-items: stretch; gap: 0; border: none; border-radius: 0; background-color: transparent; }
+        .sec_color_reg .reg_card { max-width: 100%; margin: 0; padding:0 20px 36px; flex-direction: column; align-items: stretch; }
         .sec_color_reg .reg_card > header { width: 100%; padding: 36px 0 20px; }
         .sec_color_reg .reg_card > header > h4 { margin: 0 0 20px; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
         .sec_color_reg .reg_card > .color_list { width: 100%; grid-template-columns: minmax(0, 1fr); }

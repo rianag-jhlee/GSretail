@@ -43,8 +43,8 @@
                         />
                     </div>
 
-                    <!-- gsrse01 -->
-                    <section class="notice_list_area mb100" v-if="SubTabIdx === 0">
+                    <!-- gsrse01 공지사항 -->
+                    <section class="notice_list_area" v-if="SubTabIdx === 0">
                         <h4 class="guide_title mb40">{{ t.SubTabs[0].item }}</h4>
                         <div class="policy_wrap">
                             <table class="base_table">
@@ -52,7 +52,9 @@
                                     <tr v-for="(item, idx) in t.NoticeList" :key="'notice-'+idx">
                                         <td class="ac color_gray">{{ item.id }}</td>
                                         <td class="al title_cell">
-                                            <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
+                                            <!-- 26.05.19 Edit 이종환 : 공지사항 상세 팝업 -->
+                                            <a href="javascript:void(0);" @click="openModal" data-popid="modal01" data-type="lg" data-cont="board_detail" class="link_title">{{ item.title }}</a>
+                                            <!-- //26.05.19 Edit 이종환 : 공지사항 상세 팝업 -->
                                         </td>
                                         <td class="ac color_gray date_cell">{{ item.date }}</td>
                                         <td class="ac color_gray view_cell">{{ t.ViewCountText }} {{ item.views }}</td>
@@ -503,7 +505,7 @@
                                 </div>
                             </article>
                             <div class="btn-wrap">
-                                <Buttons btn-class="btn_big primary"  @click="openModal" data-popid="gsrcu010101" data-type="small" data-cont="gsrcu010101">{{ t.listening.InputWrapcont.part3.btnSubmit }}</Buttons>
+                                <Buttons btn-class="btn_big primary" @click="openModal" data-popid="gsrcu010101" data-type="small" data-cont="gsrcu010101">{{ t.listening.InputWrapcont.part3.btnSubmit }}</Buttons>
                                 <Buttons btn-class="btn_big gray" @click="closeModal">{{ t.listening.InputWrapcont.part3.btnCancel }}</Buttons>
                             </div>
                         </div>
@@ -514,12 +516,12 @@
         </section>
 
 
-        <!-- 상담신청완료 팝업 -->
-        <teleport to="body">
-            <div id="gsrcu010101" class="modal_wrap">
-                <div class="modal_container"></div>
-            </div>
-        </teleport>
+        <!-- 26.05.19 Add 이종환 : 게시물 상세 팝업 -->
+        <div id="modal01" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+        <!-- //26.05.19 Add 이종환 : 게시물 상세 팝업 -->
+
     </div>
 </template>
 

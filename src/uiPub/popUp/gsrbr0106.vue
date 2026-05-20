@@ -79,13 +79,27 @@
             </div>
 
             <div class="sf_map_canvas">
-                <iframe
+                <!-- 26.05.19 Del iframe 제거 <iframe
                     class="sf_map_iframe"
                     src=""
                     title="매장 위치 지도"
                     frameborder="0"
                     allowfullscreen
-                ></iframe>
+                ></iframe> -->
+                <div class="inner">
+                    <div class="store_list">
+                        <dl class="item">
+                            <dt></dt>
+                            <dd>
+                                <p></p>
+                                <ul>
+                                    <li></li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="map_canvas"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -126,6 +140,15 @@ const CHIP_DEF = [
     { id: "c20", label: "무신사 스탠다드 EXPRESS", selected: false, icon: icoChip04 },
     { id: "c21", label: "대한항공 POSA",           selected: false, icon: icoChip05 },
 ];
+
+const store = [
+    {name:"GS25LG사이언스파크점", address:"서울 강서구 마곡중앙10로10, 지하1층 (마곡동 770, 엘지사이언스파크)",
+        key: ["의약품","택배","군고구마","붕어빵"]
+    },
+    {name:"GS25S9가양역점", address:"서울 강서구 양천로지하 485 (가양동 14-61)",
+        key: ["양주/와인","배달서비스","현금출금기(CD기)","택배","ATM 현금 입/출금"]
+    }
+]
 
 export default {
     name: "StoreFindModal",
@@ -402,14 +425,14 @@ export default {
     position: relative;
 }
 
-.sf_map_iframe {
+/* .sf_map_iframe {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    border: none;
+    border: 2px solid red;
     display: block;
-}
+} */
 
 @media (max-width: 768px) {
     .store_find_modal.modal_cont {

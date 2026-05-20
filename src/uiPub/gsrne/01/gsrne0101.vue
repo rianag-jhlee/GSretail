@@ -70,18 +70,6 @@ export default {
 </script>
 
 <style scoped>
-img {max-width:100%;}
-
-.content {max-width:1460px; margin:0 auto; padding:200px 20px;}
-.board_detail_wrap {padding:40px 0 60px;}
-.board_detail_wrap .detail_title {padding-bottom:40px; border-bottom:1px solid #E5E5E9;}
-.board_detail_wrap .tit {color:#161616; font-size:3.2rem; line-height:130%; letter-spacing:-0.01em; display:block;}
-.board_detail_wrap .info {margin-top:12px; display:flex; gap:8px;}
-.board_detail_wrap .info em {padding:3px 6px; color:#67676f; font-style:normal; line-height:140%; letter-spacing:-0.01em; background-color:#F2F2F4; border-radius:4px; display:block;}
-.board_detail_wrap .info .date {color:#67676F; font-size:1.8rem; line-height:140%; letter-spacing:0;}
-
-.board_detail_wrap .board_detail_cont {padding-top:48px;}
-
 .btnSection.bottom {margin-top:20px; display:flex; justify-content:space-between;}
 .btnSection.bottom .btn_icon_back {height:auto; padding:4px; color:#161616; font-size:2rem; line-height:135%; letter-spacing:-0.01em; background-color:#fff; display:inline-flex; align-items:center;}
 .btnSection.bottom .btn_icon_back:before {width:16px; height:27px; margin-right:12px; background-color:red; content:''; display:block;}
@@ -89,9 +77,5 @@ img {max-width:100%;}
 @media screen and (max-width: 1024px) {
 }
 @media screen and (max-width: 767px) {
-    .board_detail_wrap .detail_title {padding-bottom:24px;}
-    .board_detail_wrap .tit {font-size:2.4rem; line-height:135%;}
-
-    .board_detail_wrap .board_detail_cont {padding-top:40px;}
 }
 </style>

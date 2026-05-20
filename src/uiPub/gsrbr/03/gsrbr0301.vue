@@ -150,7 +150,7 @@
             </div>
         </section>
         <section class="sec_brand_channel str_inner" aria-label="판매 채널 소개">
-            <header class="str_header str_header_channel">
+            <header class="str_header str_header_channel"> 
                 <h2>판매 채널 소개</h2>
                 <p>TV, 온라인, 모바일 등 고객이 있는 접점에서 GS SHOP만의 쇼핑 경험을 제공합니다.</p>
             </header>
@@ -229,16 +229,16 @@ import imgBi08Mo from "@/assets/images/dummy/mo/gsrbr0301_08_mo.png";
 import imgCert01 from "@/assets/images/dummy/cert_logo_01.png";
 import imgCert02 from "@/assets/images/dummy/cert_logo_02.png";
 import imgCert03 from "@/assets/images/dummy/cert_logo_03.png";
-import imgCh01 from "@/assets/images/dummy/gsrbr0301_10.png";
-import imgCh02 from "@/assets/images/dummy/gsrbr0301_11.png";
-import imgCh03 from "@/assets/images/dummy/gsrbr0301_12.png";
-import imgCh04 from "@/assets/images/dummy/gsrbr0301_13.png";
-import imgPr01 from "@/assets/images/dummy/gsrbr0301_14.png";
-import imgPr02 from "@/assets/images/dummy/gsrbr0301_15.png";
-import imgPr03 from "@/assets/images/dummy/gsrbr0301_16.png";
-import imgPr04 from "@/assets/images/dummy/gsrbr0301_17.png";
-import imgPr05 from "@/assets/images/dummy/gsrbr0301_18.png";
-import imgPr06 from "@/assets/images/dummy/gsrbr0301_19.png";
+import imgCh01 from "@/assets/images/sub/gsrbr03/gsrbr0301_10.png";
+import imgCh02 from "@/assets/images/sub/gsrbr03/gsrbr0301_11.png";
+import imgCh03 from "@/assets/images/sub/gsrbr03/gsrbr0301_12.png";
+import imgCh04 from "@/assets/images/sub/gsrbr03/gsrbr0301_13.png";
+import imgPr01 from "@/assets/images/sub/gsrbr03/gsrbr0301_14.png";
+import imgPr02 from "@/assets/images/sub/gsrbr03/gsrbr0301_15.png";
+import imgPr03 from "@/assets/images/sub/gsrbr03/gsrbr0301_16.png";
+import imgPr04 from "@/assets/images/sub/gsrbr03/gsrbr0301_17.png";
+import imgPr05 from "@/assets/images/sub/gsrbr03/gsrbr0301_18.png";
+import imgPr06 from "@/assets/images/sub/gsrbr03/gsrbr0301_19.png";
 
 
 
@@ -301,6 +301,10 @@ const ccmFeatureItems = [
             "고객의 라이프 스타일을 반영한 서비스 시행",
 
         ],
+        subdesc:[
+            "'라이브(LIVE) 배송 서비스', '안심택배 서비스', '편의점 픽업/반품 서비스' 등 고객 Needs에 부합하는 다양한 배송 서비스 실시",
+            "GS Pay 등 다양한 결제 수단 도입, 결제 편의성 개선 등"
+        ]
     },
 ];
 
@@ -311,23 +315,23 @@ const channelCardList = [
         imgAlt: "TV 홈쇼핑",
         em: "01",
         title: "TV 홈쇼핑",
-        desc: "라이브 방송과 전담 상담으로 상품을 소개하고 주문까지 이어지는 대표 판매 채널입니다.",
+        desc: "국내 최초로 홈쇼핑 방송을 선보인 GS SHOP은 최초 홈쇼핑 채널만의 콘텐츠 제작 역량을 바탕으로 24시간 고객에게 차별화된 쇼핑 경험을 제공하고 있습니다.",
     },
     {
         key: "ch-online",
         image: imgCh02,
-        imgAlt: "온라인 쇼핑몰",
+        imgAlt: "데이터 홈쇼핑",
         em: "02",
-        title: "온라인 쇼핑몰",
-        desc: "웹에서 상품 검색·결제·배송 조회까지 한 번에 이용할 수 있습니다.",
+        title: "데이터 홈쇼핑",
+        desc: "고객이 원할 때 리모콘으로 필요한 상품을 직접 선택, 구매할 수 있는 양방향 데이터 쇼핑으로 GS SHOP의 홈쇼핑 노하우를 그대로 담아 IPTV 플랫폼에 맞게 운영하고 있습니다.",
     },
     {
         key: "ch-mobile",
         image: imgCh03,
-        imgAlt: "모바일 앱",
+        imgAlt: "모바일 & 인터넷몰",
         em: "03",
-        title: "모바일 앱",
-        desc: "우리동네GS 앱 등 모바일 환경에 맞춘 쇼핑과 혜택을 제공합니다.",
+        title: "모바일 & 인터넷몰",
+        desc: "GS SHOP은 정교한 고객 DATA 분석을 통해 고객 맞춤형 상품과 매장을 선보이고 있으며 TV쇼핑과 지속적인 시너지를 유지하고 있습니다.",
     },
     {
         key: "ch-commerce",
@@ -523,7 +527,7 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 /* 100vw는 스크롤바 폭까지 포함해 가로 오버플로를 자주 냄 → 부모와 동일한 100% 사용 */
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/gs_shop_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/sub/gsrbr03/gs_shop_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
 .bg_wrap.active > .bg { transform: scale(1) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
 .bg_wrap > .bg::before { background-color: #00000066; z-index: 2 }
@@ -621,7 +625,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
   .sec_brand_visual { height: 100vh }
   .sticky { height: 100vh; top: 0 }
-  .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(@/assets/images/dummy/gs_shop_bg.png); background-position: 46% 17px }
+  .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(@/assets/images/dummy/gs_shop_bg.png); background-position: 10% 17px }
   .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
   .txt_area > p { margin-bottom: 0 }
   .txt_area > p > span { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; }
@@ -638,7 +642,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   .str_header p{margin-top:12px; }
   .str_bi_header{margin-bottom:20px; flex-direction: column; gap:8px; justify-content: flex-start;}
   .str_bi_tit { font-family: Pretendard, sans-serif; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-  .str_header .str_actions { gap:14px; flex: none; justify-content: flex-start }
+  .str_header .str_actions { margin-left:0; gap:14px; flex: none; justify-content: flex-start }
   .str_bi_fig:nth-child(2){padding:0 46px;}
   .str_bi_fig:nth-child(1) > img {min-height: 80px;}
   .str_bi_fig:nth-child(2) > img {width: 100%;} 
