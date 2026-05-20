@@ -188,7 +188,7 @@
                                         <h4>{{ t.SeaBreathTitle }}</h4>
                                         <p v-html="t.SeaBreathDesc"></p>
                                     </div>
-                                    <Buttons btn-class="btn_icon_arrow btn_xl after">{{ t.MoreBtn }}</Buttons>
+                                    <Buttons btn-class="btn_icon_arrow btn_xl border after">{{ t.MoreBtn }}</Buttons>
                                 </div>
                             </section>
 
@@ -438,6 +438,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .wide_card { display: flex; align-items: flex-start; gap: 40px; padding: 60px; background: #F8F8F8; border-radius: 20px; }
 .wide_card .image_wrap { flex: 0 0 500px; height: 320px; }
 .wide_card .text_group { flex: 1; display: flex; flex-direction: column; gap: 40px; }
+.wide_card .btn_icon_arrow {width:170px;}
 
 /* 5. Sub Grid (2열 그리드 구현) */
 .sub_grid_container { display: flex; flex-wrap: wrap; gap: 80px 40px; }
@@ -524,6 +525,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .policy_card_box li { flex-direction: column; }
     .wide_card { flex-direction: column; padding: 30px 20px; }
     .wide_card .image_wrap { flex: 0 0 auto; width: 100%; height: auto; }
+    .wide_card .btn_icon_arrow {width:100%;}
     .sub_grid_container { gap: 40px; }
     .grid_item { width: 100%; }
     .strategy_section .image_wrap, .system_section .image_wrap {width:100%; margin:0 auto;}
