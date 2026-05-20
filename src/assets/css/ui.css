@@ -206,7 +206,7 @@ h5 {font-size:1.8rem;}
 .board_type_toggle.type_faq dt > a.acc_tit_btn:before  {width:32px; height:32px; font-size:1.8rem; font-weight:700; content:'Q'; position:absolute; top:16px; left:20px; display:flex; align-items:center; justify-content:center;}
 .board_type_toggle.type_faq dt > a.acc_tit_open {border-bottom:0;}
 .board_type_toggle.type_faq dd .acc_panel_cont {padding:12px 32px 24px;}
-.board_type_toggle.type_faq dd.acc_show {border-bottom:1px solid #d7d7df;}
+/* .board_type_toggle.type_faq dd.acc_show {border-bottom:1px solid #d7d7df;} */
 
 .tab_wrap + .type_gallery {margin-top:24px;}
 
@@ -293,11 +293,11 @@ h5 {font-size:1.8rem;}
     .modal_wrap .modal_container {max-width:100vw;width:100vw;padding:0 20px;border-radius:0; max-height: 100dvh; height:100dvh;left:0;top:0;right:0;bottom:0;transform: translate(0, 0);}
 
     .board_type_toggle {box-sizing: border-box;}
-    .board_type_toggle dd + dt {margin: 0;border-bottom:0;border-top: 1px solid #d7d7df;}
+    .board_type_toggle dd + dt {margin: 0;border-bottom:0;}
     .board_type_toggle dd.acc_panel > .acc_panel_inner > .acc_panel_cont {padding:0;}
     .board_type_toggle dt > a.acc_tit_btn {min-height: 64px; padding:0 20px; font-weight: 700; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0%;}
     .board_type_toggle dd.acc_panel > .acc_panel_inner > .acc_panel_cont {padding-right: 0; font-size: 1.5rem;}
-    .board_type_toggle dd.acc_panel:last-child{border-bottom:1px solid #D7D7DF;}
+    /* .board_type_toggle dd.acc_panel:last-child{border-bottom:1px solid #D7D7DF;} */
 }
 
 @media screen and (max-width:767px) {
