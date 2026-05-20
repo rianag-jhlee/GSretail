@@ -82,8 +82,9 @@ function selectSlot(slot) {
 .time_slot_legend .legend_dot.is_selected { background-color: #107af2; }
 
 @media (max-width: 768px) {
-    .consult_time_picker { max-width: none; }
+    .consult_time_picker { max-width: none; } 
     .consult_time_picker_inner { padding: 16px; border-radius: 12px; }
     .time_slot { min-height: 50px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .time_slot_grid{gap:10px;}
 }
 </style>

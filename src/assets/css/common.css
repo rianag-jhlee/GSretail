@@ -216,7 +216,9 @@ label.select select.changed {color:#222;}
 label.select > em {margin-top:5px; color:#F24F39; font-size:1.2rem; line-height:18px; display:none;}
 label.select.err > em {display:block;}
 .form_field_phone label.select select{color:#161616;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-
+.form_field_radio .input_wrap { width: auto !important; flex: 0 0 auto; }
+.form_field_radio .check{ gap: 8px; white-space: nowrap; cursor: pointer; }
+.form_field_radio .label { font-size: 1.8rem; color: #161616; }
 /* table */
 .policy_wrap {font-size:14px;}
 .policy_wrap  * {margin:0; padding:0; list-style:none;}
