@@ -270,6 +270,7 @@ const colorRegList = [
     .spec_table tbody th[scope="row"] .spec_cell_lead > span:last-child { white-space: nowrap; }
     .spec_table tbody td { text-align: center; word-break: keep-all; }
     .sr_only { width: 1px; height: 1px; margin: -1px; position: absolute; overflow: hidden; border: 0; clip: rect(0, 0, 0, 0); }
+    [class*="btn_icon"][class*="after"]::after {background:url('@/assets/images/common/down_wh.png');}
     @media screen and (max-width: 1024px) {
         .sec_color_reg .reg_card { flex-direction: column; flex-wrap: nowrap; gap: 0; padding: 48px 40px; align-items: stretch; }
         .sec_color_reg .reg_card > header { flex: none; max-width: none; width: 100%; padding: 0 0 28px; }

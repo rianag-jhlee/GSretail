@@ -833,10 +833,13 @@ export default {
 /* 7. 하단 공통 배너 (사용자 수정 CSS 반영) */
 .bottom_link_btns { margin-top: 60px; display: flex; gap: 20px; }
 .bottom_link_btns a { padding: 94px 32px 32px; color:#161616; font-size:18px; font-weight:700; background-color: #f8f8f8; border-radius: 10px; text-decoration: none; transition: background-color 0.2s; position:relative; flex: 1; display: flex; align-items: center; justify-content: center; }
-.bottom_link_btns a::before, .bottom_link_btns a::after { content:''; width:40px; height:40px; background:red; display:inline-block; } /* 아이콘 가상요소 */
-.bottom_link_btns a::after { background:url('@/assets/images/common/icon_set_20.png') -324px -25px no-repeat; display:inline-block; } /* 아이콘 가상요소 */
+.bottom_link_btns a:first-of-type::before { content:''; width:40px; height:40px; background-image:url('@/assets/images/common/system.png'); } /* 아이콘 가상요소 */
+.bottom_link_btns a:last-of-type::before { content:''; width:40px; height:40px; background-image:url('@/assets/images/common/system2.png'); } /* 아이콘 가상요소 */
+.bottom_link_btns a:hover:first-of-type::before { content:''; width:40px; height:40px; background-image:url('@/assets/images/common/system_wh.png'); } /* 아이콘 가상요소 */
+.bottom_link_btns a:hover:last-of-type::before { content:''; width:40px; height:40px; background-image:url('@/assets/images/common/system2_wh.png'); } /* 아이콘 가상요소 */
+.bottom_link_btns a::after {content:''; width:20px; height:20px; margin-left:8px; background:url('@/assets/images/common/icon_set_20.png') -324px -25px no-repeat; display:inline-block; } /* 아이콘 가상요소 */
+.bottom_link_btns a:hover::after {background:url('@/assets/images/common/arrow_wh.png')} /* 아이콘 가상요소 */
 .bottom_link_btns a::before { position:absolute; top:32px; left:50%; transform:translateX(-50%); }
-.bottom_link_btns a::after { width:16px; height:16px; margin-left:8px; }
 .bottom_link_btns a:hover { color:#fff; background:#15B874; }
 
 /* 8. 버튼 및 FAQ 공통 */
