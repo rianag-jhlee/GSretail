@@ -162,7 +162,7 @@
                                         <li><strong>{{ t.GreenProduct.guideline.num4 }}</strong> <span>{{ t.GreenProduct.guideline.txt4 }}</span></li>
                                     </ul>
                                     <div class="ac">
-                                        <Buttons btn-class="btn_icon btn_xl border after arr_r" 
+                                        <Buttons btn-class="btn_icon_arrow btn_xl border after" 
                                             @click="openModal" 
                                             data-popid="gsrsu02010301" 
                                             data-type="mid" 
@@ -188,7 +188,7 @@
                                         <h4>{{ t.SeaBreathTitle }}</h4>
                                         <p v-html="t.SeaBreathDesc"></p>
                                     </div>
-                                    <Buttons btn-class="btn_icon btn_xl after arr_r">{{ t.MoreBtn }}</Buttons>
+                                    <Buttons btn-class="btn_icon_arrow btn_xl after">{{ t.MoreBtn }}</Buttons>
                                 </div>
                             </section>
 
@@ -514,6 +514,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .green_product li.one_divide .image_wrap, .green_product li.two_divide .image_wrap { flex: 0 0 auto; width: 100%; height: auto;}
 }
 @media screen and (max-width: 767px) {
+    .title_wrap {display:none;}
     h3, h4, .policy_card_box h4, .climate_change .intro_view p { font-size: 28px !important; }
     p, .policy_card_box p, .intro_view p { font-size: 18px !important; }
     .title_wrap { height: auto; padding: 60px 20px; }

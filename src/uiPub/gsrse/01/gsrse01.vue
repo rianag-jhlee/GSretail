@@ -164,7 +164,7 @@
                                         <span class="brand">{{ help.brand }}</span>
                                         <strong class="tel">{{ help.tel }}</strong>
                                         <p class="note">※ {{ help.note }}</p>
-                                        <a :href="help.link" class="btn_big border btn_icon after mt20">
+                                        <a :href="help.link" class="btn_big border btn_icon_arrow after mt20" target="_blank">
                                             {{ t.BtnGoDetail }}
                                         </a>
                                     </div>
@@ -599,8 +599,8 @@ export default {
                     HelpDeskTitle: "HELP DESK",
                     HelpDeskDesc: "협력사 상담 지원센터 관련하여 궁금하거나 불편한 사항이 있으면 아래 연락처로 연락 주시면 친절하게 안내해 드리겠습니다.",
                     HelpDeskItems: [
-                        { brand: "GS25", tel: "1644-5425", note: "GS25 창업상담 문의", link: "#", imgName: "gsrst01_gs25.png" },
-                        { brand: "GS THE FRESH (GS수퍼마켓)", tel: "1833-9779", note: "GS THE FRESH 가맹상담 문의", link: "#", imgName: "gsrst01_fresh.png" }
+                        { brand: "GS25", tel: "1644-5425", note: "GS25 창업상담 문의", link: "/gsrst02010101", imgName: "gsrst01_gs25.png" },
+                        { brand: "GS THE FRESH (GS수퍼마켓)", tel: "1833-9779", note: "GS THE FRESH 가맹상담 문의", link: "/gsrst01010101", imgName: "gsrst01_fresh.png" }
                     ],
                     BtnGoDetail: "바로가기",
                     FaqList: [
@@ -783,7 +783,7 @@ export default {
 .step_list li {padding: 56px 64px; background-color: #f8f8f8; border-radius: 8px;  flex: 1; display: flex; align-items: center; }
 .step_list li::before { content:''; width:40px; height:40px; margin-right:24px; background:red; display:inline-block; flex-shrink:0; } /* 아이콘 영역 */
 .step_info { display: flex; flex-direction: column; gap: 6px; }
-.step_label { font-size:18px; font-weight: 700; color: #107af2; }
+.step_label { font-size:18px; font-weight: 700; color:#15B874; }
 .step_text { font-size: 20px; font-weight: 700; color: #161616; }
 
 /* 4. 테이블 리스트 (공지사항 등) */
@@ -807,7 +807,7 @@ export default {
 
 .card_grid {display:flex; gap:20px}
 .info_card {width:340px; padding: 32px 32px 56px; background: #f8f8f8; border-radius: 12px; }
-.card_num { font-size: 1.8rem; font-weight: 700; color: #107af2; display: block; margin-bottom: 4px; }
+.card_num { font-size: 1.8rem; font-weight: 700; color: #15B874; display: block; margin-bottom: 4px; }
 .card_name { font-size: 20px; font-weight: 700; color: #161616; }
 .card_desc { font-size: 16px; line-height: 1.5; color: #67676f; margin-top: 12px; }
 
@@ -841,7 +841,7 @@ export default {
 .faq_list_wrap { border-top: 1px solid #161616; }
 .faq_item { border-bottom: 1px solid #e5e5e9; }
 .faq_q { padding: 24px 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; }
-.q_mark { font-size: 24px; font-weight: 700; color: #107af2; }
+.q_mark { font-size: 24px; font-weight: 700; color: #15B874; }
 .q_box {font-size:18px; display:flex;}
 .q_box::before {content:'Q'; margin-right:16px;}
 .q_text { font-size: 1.8rem; font-weight: 700; color: #161616; }
@@ -942,6 +942,18 @@ export default {
     .card_grid {flex-direction:column;}
     .card_grid .info_card {width:100%;}
     .policy_wrap th, .policy_wrap td, .policy_wrap td a {font-size: 16px !important; }
+
+    /* 입점안내 */
+    .auth_table_area.mo { width: 100%; display: flex; flex-direction: column; box-sizing: border-box; }
+    .auth_table_area.mo .text-wrapper-2.mb24 { margin-bottom: 24px; color: #161616; font-size: 18px; font-weight: 700; }
+    .auth_table_area.mo .auth_header { display: flex; width: 100%; background-color: #f8f8f8; border-top:1px solid #161616; border-bottom: 1px solid #e5e5e9; }
+    .auth_table_area.mo .auth_header span { flex: 1; padding: 18px 0; color: #161616; font-size: 16px; font-weight: 700; text-align: center; }
+    .auth_table_area.mo .auth_card_list { display: flex; flex-direction: column; width: 100%; }
+    .auth_table_area.mo .auth_card_item { display: flex; width: 100%; border-bottom: 1px solid #e5e5e9; }
+    .auth_table_area.mo .auth_row { display: flex; width: 100%; align-items: center; }
+    .auth_table_area.mo .agency_name { flex: 1; padding: 20px 24px; color: #161616; font-size: 16px; font-weight: 400; text-align: left; }
+    .auth_table_area.mo .btn_go_link { flex: 1; padding: 20px 0; color: #107af2; font-size: 16px; font-weight: 400; text-align: center; text-decoration: underline; cursor: pointer; }
+    .auth_table_area.mo .btn_go_link:hover { color: #0056b3; }
 
 
     .input_item, .input_complex, .input_wrap, .w428 {width:100%;}
