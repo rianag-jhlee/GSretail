@@ -321,7 +321,6 @@ label.select.err > em {display:block;}
     .form_row:last-child {padding-bottom:0;}
     .form_field_region {flex-wrap:wrap;}
     .form_field_phone {display:flex; align-items:center; gap:8px;}
-    .form_field_phone .form_sep {display:none;}
     .form_field_phone .select, .form_field_phone > .input_wrap {flex:0 0 calc((100% - 16px) / 3); max-width:calc((100% - 16px) / 3);}
     .form_label {margin-bottom:16px; font-weight:700; font-size:1.6rem; line-height:1.24;}
     .form_sub_group {width:100%; flex-direction:column; gap:12px; align-items:flex-start;}
