@@ -781,7 +781,11 @@ export default {
 .guide_title { font-size: 28px; font-weight: 700; color: #161616; }
 .step_list { display: flex; align-items: center;}
 .step_list li {padding: 56px 64px; background-color: #f8f8f8; border-radius: 8px;  flex: 1; display: flex; align-items: center; }
-.step_list li::before { content:''; width:40px; height:40px; margin-right:24px; background:red; display:inline-block; flex-shrink:0; } /* 아이콘 영역 */
+.step_list li::before { content:''; width:40px; height:40px; margin-right:24px; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;  display:inline-block; flex-shrink:0; } /* 아이콘 영역 */
+.step_list li:first-of-type::before {background-position:-100px -266px;} /* 아이콘 영역 */
+.step_list li:nth-of-type(2)::before {background-position:-900px -186px;} /* 아이콘 영역 */
+.step_list li:nth-of-type(3)::before {background-position:-1140px -266px;} /* 아이콘 영역 */
+.step_list li:last-of-type::before {background-position:-660px -103px;} /* 아이콘 영역 */
 .step_info { display: flex; flex-direction: column; gap: 6px; }
 .step_label { font-size:18px; font-weight: 700; color:#15B874; }
 .step_text { font-size: 20px; font-weight: 700; color: #161616; }
@@ -830,6 +834,7 @@ export default {
 .bottom_link_btns { margin-top: 60px; display: flex; gap: 20px; }
 .bottom_link_btns a { padding: 94px 32px 32px; color:#161616; font-size:18px; font-weight:700; background-color: #f8f8f8; border-radius: 10px; text-decoration: none; transition: background-color 0.2s; position:relative; flex: 1; display: flex; align-items: center; justify-content: center; }
 .bottom_link_btns a::before, .bottom_link_btns a::after { content:''; width:40px; height:40px; background:red; display:inline-block; } /* 아이콘 가상요소 */
+.bottom_link_btns a::after { background:url('@/assets/images/common/icon_set_20.png') -324px -25px no-repeat; display:inline-block; } /* 아이콘 가상요소 */
 .bottom_link_btns a::before { position:absolute; top:32px; left:50%; transform:translateX(-50%); }
 .bottom_link_btns a::after { width:16px; height:16px; margin-left:8px; }
 .bottom_link_btns a:hover { color:#fff; background:#15B874; }
