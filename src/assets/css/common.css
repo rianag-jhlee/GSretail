@@ -56,7 +56,7 @@ select {width:100%; height:52px; padding:12px 40px 12px 12px; font-size:1.4rem; 
 [class*="btn_"] {height:26px; padding:0 10px; font-size:1.6rem; border-radius:10px; display:inline-flex; align-items:center;justify-content: center;}
 
 /* button size */
-.btn_xl {height:64px; padding:0 32px;}
+.btn_xl {height:64px; padding:0 32px; font-size:1.8rem; font-weight:700;}
 .btn_big {height:52px; padding:0 16px; }
 .btn_mid {height:44px; padding:0 16px; }
 .btn_base {height:38px; padding:0 12px; }
@@ -80,6 +80,8 @@ select {width:100%; height:52px; padding:12px 40px 12px 12px; font-size:1.4rem; 
 [class*="btn_icon"][class*="after"]::after  {content:''; width:20px; height:20px; margin-left:10px; background:red; display:inline-block;}
 .btn_download_file { display: inline-flex; align-items: center; gap: 12px; background: none; border: 0; cursor: pointer; }
 .btn_download_file::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -832px -56px no-repeat; display:inline-block;}
+.btn_download_file.after::before {display:none}
+.btn_download_file.after:after {content:''; width:24px; height:24px; margin-left:0; background:url('@/assets/images/common/icon_set_24.png') -832px -56px no-repeat; display:inline-block;}
 
 .btn_mid.btn_download_file {gap:8px;}
 .btn_mid.btn_download_file::before {content:''; width:20px; height:20px; background:url('@/assets/images/common/icon_set_20.png') -1067px -24px no-repeat; display:inline-block;}

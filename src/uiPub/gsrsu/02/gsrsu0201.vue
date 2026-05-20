@@ -162,10 +162,10 @@
                                         <li><strong>{{ t.GreenProduct.guideline.num4 }}</strong> <span>{{ t.GreenProduct.guideline.txt4 }}</span></li>
                                     </ul>
                                     <div class="ac">
-                                        <Buttons btn-class="btn_icon btn_xl border after after" 
+                                        <Buttons btn-class="btn_icon_arrow btn_xl border after" 
                                             @click="openModal" 
                                             data-popid="gsrsu02010301" 
-                                            data-type="mid" 
+                                            data-type="lg" 
                                             data-cont="gsrsu02010301"
                                         >{{ t.GreenProduct.guideline.btn_txt }}</Buttons>
                                     </div>
@@ -188,7 +188,7 @@
                                         <h4>{{ t.SeaBreathTitle }}</h4>
                                         <p v-html="t.SeaBreathDesc"></p>
                                     </div>
-                                    <Buttons btn-class="btn_icon btn_xl after after">{{ t.MoreBtn }}</Buttons>
+                                    <Buttons btn-class="btn_icon_arrow btn_xl border after">{{ t.MoreBtn }}</Buttons>
                                 </div>
                             </section>
 
@@ -437,8 +437,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 /* Wide Card (바다숨) */
 .wide_card { display: flex; align-items: flex-start; gap: 40px; padding: 60px; background: #F8F8F8; border-radius: 20px; }
 .wide_card .image_wrap { flex: 0 0 500px; height: 320px; }
-.wide_card .text_group { flex: 1; display: flex; flex-direction: column; gap: 40px; }
-.wide_card .text_group .title_area { margin-bottom:40px }
+.wide_card .text_group .title_area { margin-bottom:28px }
 
 /* 5. Sub Grid (2열 그리드 구현) */
 .sub_grid_container { display: flex; flex-wrap: wrap; gap: 80px 40px; }
