@@ -7,11 +7,10 @@
                     <div class="visual_inner">
                         <div class="txt_area">
                             <p ref="textParaRef">
-                                <span>일상생활의 중심</span>
-                                <span>하루의 시작<em class="m_gs25"> GS25</em></span>
+                                <span v-for="(line, vi) in t.brand.visual.lines" :key="vi" v-html="line"></span>
                             </p>
                             <div ref="logoWrapRef" class="logo_wrap">
-                                <img :src="imgLogo" alt="GS25" />
+                                <img :src="imgLogo" :alt="t.brand.visual.logoAlt" />
                             </div>
                         </div>
                     </div>
@@ -23,15 +22,8 @@
 
         <section ref="aboutSectionRef" class="sec_brand_about">
             <div class="about_inner">
-                <div class="about_txt">
-                    <p><span>대한민국 토종 브랜드의 <br class="m_br" />자존심을 지키고 있는 GS25는</span></p>
-                    <p><span>'수익을 낼 수 있는 가맹점을 늘린다'는 <br class="m_br" />프랜차이즈 사업의 대원칙을</span></p>
-                    <p><span>변함없이 지켜온 결과, <br class="m_br" />개발점 수익성이 가장 높은 국내 최고의<br class="m_br" /> 편의점 브랜드로 <br class="p_br" />자리매김하였습니다.</span></p>
-                </div>
-                <div class="about_txt">
-                    <p><span>이는 <br class="m_br" />'한국에서 가장 존경받는 기업' 16년 연속 1위,</span></p>
-                    <p><span>한국서비스 품질지수(KS-SQI) 1위 <br class="m_br" />총 19회 수상 등 공신력 있는 대외 기관의</span></p>
-                    <p><span>평가 결과로 이어지고 있습니다.</span></p>
+                <div v-for="(block, bi) in t.brand.about" :key="bi" class="about_txt">
+                    <p v-for="(line, li) in block" :key="li"><span v-html="line"></span></p>
                 </div>
             </div>
         </section>
@@ -39,7 +31,7 @@
         <section class="sec_brand_str">
             <div class="str_inner">
                 <header class="str_header">
-                    <h2>당신 곁에는 언제나<br />GS25가 있습니다.</h2>
+                    <h2 v-html="t.brand.str.title"></h2>
                     <div class="str_actions">
                         <a
                             href="#"
@@ -48,10 +40,10 @@
                             data-type="lg"
                             data-cont="gsrbr0106"
                             @click.prevent="openModal"
-                        >매장 찾기</a>
+                        >{{ t.brand.str.storeFind }}</a>
                         <div class="sns_wrap">
-                            <a href="#" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
-                            <a href="#" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
+                            <a href="#" class="btn_sns btn_sns_insta" :aria-label="t.brand.str.snsInstaAria"></a>
+                            <a href="#" class="btn_sns btn_sns_yt" :aria-label="t.brand.str.snsYtAria"></a>
                         </div>
                     </div>
                 </header>
@@ -656,9 +648,9 @@
                                             <select
                                                 class="usage_select_box"
                                                 v-model="trafficSelectVal"
-                                                aria-label="교통 사용처 선택"
+                                                :aria-label="t.common.trafficSelectAria"
                                             >
-                                                <option value="" disabled>선택하세요</option>
+                                                <option value="" disabled>{{ t.common.selectPlaceholder }}</option>
                                                 <option v-for="o in tab.trafficSelectOptions" :key="o.value" :value="o.value">{{ o.label }}</option>
                                             </select>
                                         </div>
@@ -693,9 +685,9 @@
                                             <select
                                                 class="usage_select_box"
                                                 v-model="retailSelectVal"
-                                                aria-label="유통 사용처 선택"
+                                                :aria-label="t.common.retailSelectAria"
                                             >
-                                                <option value="" disabled>선택하세요</option>
+                                                <option value="" disabled>{{ t.common.selectPlaceholder }}</option>
                                                 <option v-for="o in tab.retailSelectOptions" :key="o.value" :value="o.value">{{ o.label }}</option>
                                             </select>
                                         </div>
@@ -743,7 +735,7 @@
                     <section class="sec_gift_brand">
                         <SectionHeader :title="tab.brandTitle" />
                         <div class="gift_brand_slider">
-                            <button type="button" class="gift_brand_nav gift_brand_prev" aria-label="이전">
+                            <button type="button" class="gift_brand_nav gift_brand_prev" :aria-label="t.common.prevAria">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </button>
                             <Swiper
@@ -768,7 +760,7 @@
                                     </figure>
                                 </SwiperSlide>
                             </Swiper>
-                            <button type="button" class="gift_brand_nav gift_brand_next" aria-label="다음">
+                            <button type="button" class="gift_brand_nav gift_brand_next" :aria-label="t.common.nextAria">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </button>
                         </div>
@@ -824,17 +816,17 @@
                             <table class="usim_plan_table">
                                 <thead>
                                     <tr>
-                                        <th rowspan="2" scope="col">상품명</th>
-                                        <th colspan="3" scope="col">제공량</th>
-                                        <th rowspan="2" scope="col">정상 요금</th>
-                                        <th rowspan="2" scope="col">프로모션 할인</th>
-                                        <th rowspan="2" scope="col">월 기본요금<br />(제휴카드 이용 시)</th>
-                                        <th rowspan="2" scope="col">타사 유사<br />요금제</th>
+                                        <th rowspan="2" scope="col">{{ tab.planTable.productName }}</th>
+                                        <th colspan="3" scope="col">{{ tab.planTable.provision }}</th>
+                                        <th rowspan="2" scope="col">{{ tab.planTable.normalPrice }}</th>
+                                        <th rowspan="2" scope="col">{{ tab.planTable.promoDiscount }}</th>
+                                        <th rowspan="2" scope="col" v-html="tab.planTable.monthlyFee"></th>
+                                        <th rowspan="2" scope="col" v-html="tab.planTable.competitor"></th>
                                     </tr>
                                     <tr>
-                                        <th scope="col">데이터</th>
-                                        <th scope="col">음성</th>
-                                        <th scope="col">문자</th>
+                                        <th scope="col">{{ tab.planTable.data }}</th>
+                                        <th scope="col">{{ tab.planTable.voice }}</th>
+                                        <th scope="col">{{ tab.planTable.sms }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1129,16 +1121,10 @@
                 :title="store.tabs[2].title"
                 :desc="store.tabs[2].subtitle"
             >
-                <p class="brand_panel_desc">지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에 서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.
-                    <br class="m_br" />
-                    <br class="m_br" />
-                    기존지로 납부 외 휴대폰을 통한 모바일수납도 가능하며,납부공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부가능합니다.</p>
-                    <ul class="list_dotted">
-                        <li>
-                            <p>접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.</p>
-                        </li>
-                        <li>
-                            <p>GS포스트박스 회원으로 접수 시 다양한 이벤트에 참여 가능하며, 사용량에 따라 등급 별 혜택을 제공합니다.</p>
+                <p v-if="store.tabs[2].panelExtra" class="brand_panel_desc" v-html="store.tabs[2].panelExtra.desc"></p>
+                    <ul v-if="store.tabs[2].panelExtra?.bullets?.length" class="list_dotted">
+                        <li v-for="(bullet, bi) in store.tabs[2].panelExtra.bullets" :key="bi">
+                            <p>{{ bullet }}</p>
                         </li>
                     </ul>
                 </PanelHeader>
@@ -1295,7 +1281,7 @@
 
         <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
         <div class="bottom_btns">
-            <button class="btn_back" @click="handleBack">{{ langData.backLabel }}</button>
+            <button class="btn_back" @click="handleBack">{{ t.backLabel }}</button>
         </div>
         <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
     </div>
@@ -1306,7 +1292,7 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, watch, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, defineProps, nextTick, watch, onMounted, onBeforeUnmount } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRouter } from "vue-router";
@@ -1446,6 +1432,7 @@ const activeTab = ref(0);
 const ph = (n) => Array.from({ length: n }, () => ({ brand: "", logo: null }));
 
 const langData = {
+    ko: {
     nav: {
         depth1: [
             { item: "차별화 상품" },
@@ -2045,6 +2032,17 @@ const langData = {
                             },
                         ],
                         introTitle: "GS25 요금제 소개",
+                        planTable: {
+                            productName: "상품명",
+                            provision: "제공량",
+                            data: "데이터",
+                            voice: "음성",
+                            sms: "문자",
+                            normalPrice: "정상 요금",
+                            promoDiscount: "프로모션 할인",
+                            monthlyFee: "월 기본요금<br />(제휴카드 이용 시)",
+                            competitor: "타사 유사<br />요금제",
+                        },
                         plans: [
                             {
                                 name:         "GS25(15GB+/100분)",
@@ -2462,6 +2460,13 @@ const langData = {
                 subtitle: "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
                 desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.",
                 sections: [],
+                panelExtra: {
+                    desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에 서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.<br class=\"m_br\" /><br class=\"m_br\" />기존지로 납부 외 휴대폰을 통한 모바일수납도 가능하며,납부공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부가능합니다.",
+                    bullets: [
+                        "접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.",
+                        "GS포스트박스 회원으로 접수 시 다양한 이벤트에 참여 가능하며, 사용량에 따라 등급 별 혜택을 제공합니다.",
+                    ],
+                },
                 taxTitle: "납부가능 세금 및 공과금",
                 taxGroups: [
                     {
@@ -2712,23 +2717,84 @@ const langData = {
             },
         ],
     },
+    brand: {
+        visual: {
+            lines: [
+                "일상생활의 중심",
+                '하루의 시작<em class="m_gs25"> GS25</em>',
+            ],
+            logoAlt: "GS25",
+        },
+        about: [
+            [
+                '대한민국 토종 브랜드의 <br class="m_br" />자존심을 지키고 있는 GS25는',
+                "'수익을 낼 수 있는 가맹점을 늘린다'는 <br class=\"m_br\" />프랜차이즈 사업의 대원칙을",
+                '변함없이 지켜온 결과, <br class="m_br" />개발점 수익성이 가장 높은 국내 최고의<br class="m_br" /> 편의점 브랜드로 <br class="p_br" />자리매김하였습니다.',
+            ],
+            [
+                "'한국에서 가장 존경받는 기업' 16년 연속 1위,",
+                '한국서비스 품질지수(KS-SQI) 1위 <br class="m_br" />총 19회 수상 등 공신력 있는 대외 기관의',
+                "평가 결과로 이어지고 있습니다.",
+            ],
+        ],
+        str: {
+            title: "당신 곁에는 언제나<br />GS25가 있습니다.",
+            storeFind: "매장 찾기",
+            snsInstaAria: "인스타그램",
+            snsYtAria: "유튜브",
+            items: [
+                {
+                    title: "업계 최고<br />점포 당 매출액 달성",
+                    desc: '점포 경쟁력을<br class="m_br" />강화하고 고객중심의 상품서비스 제공을 통해<br />편의점 업계 최고의 매출액을 달성하고 있습니다.',
+                },
+                {
+                    title: 'GS25만의 차별화된<br class="p_br" /> 상품과<br class="m_br" />서비스 제공',
+                    desc: '안전하고 맛있는 후레쉬푸드 상품 등 고품질의 먹거리 상품 개발과<br class="p_br" />좋은 품질, 합리적 가격의 PB브랜드 \'YOUUS\',<br class="p_br" />GS리테일의 전용 어플리케이션 우리동네GS 등 차별화된 상품과 서비스를 통해 고객에게 새로운 가치를 제공하고 있습니다.',
+                },
+                {
+                    title: '경영주와의 끊임없는 소통과<br class="m_br" />협력을 통한 <br class="p_br" />단단한 파트너십',
+                    desc: "경영주와 본부의 파트너십 구축을 위해 다양한 소통창구와 상생제도를 도입하여 운영중에 있습니다. Refresh 휴가지원, GS25 20's Club 등을 업계 최초로 개발하여 경영주의 만족과 자부심을 높이고 있습니다.",
+                },
+            ],
+        },
+    },
+    common: {
+        selectPlaceholder: "선택하세요",
+        trafficSelectAria: "교통 사용처 선택",
+        retailSelectAria: "유통 사용처 선택",
+        prevAria: "이전",
+        nextAria: "다음",
+    },
     backLabel: "목록으로 돌아가기",
+    },
+    en: {
+        
+    }
 };
 
-const sinsen = langData.sinsen;
-const store = langData.store;
-const winwin = langData.winwin;
-const milbox = langData.milbox;
-const tab0 = langData.tabs[0];
-const tab1 = langData.tabs[1];
-const tab2 = langData.tabs[2];
-const tab3 = langData.tabs[3];
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
+    },
+});
+
+const t = computed(() => langData[props.lang] || langData.ko);
+
+const sinsen = computed(() => t.value.sinsen);
+const store = computed(() => t.value.store);
+const winwin = computed(() => t.value.winwin);
+const milbox = computed(() => t.value.milbox);
+const tab0 = computed(() => t.value.tabs[0]);
+const tab1 = computed(() => t.value.tabs[1]);
+const tab2 = computed(() => t.value.tabs[2]);
+const tab3 = computed(() => t.value.tabs[3]);
 
 const depth1ActiveIdx = ref(0); // 26.05.18 : 1depth 활성화탭 선언
-const depth1Tabs = langData.nav.depth1;
-const depth2Tabs = langData.nav.depth2;
-const storeTabs = langData.nav.depth2Store;
-const winwinTabs = langData.nav.depth2Winwin;
+const depth1Tabs = computed(() => t.value.nav.depth1);
+const depth2Tabs = computed(() => t.value.nav.depth2);
+const storeTabs = computed(() => t.value.nav.depth2Store);
+const winwinTabs = computed(() => t.value.nav.depth2Winwin);
 
 const storeActiveTab = ref(0); //매장/서비스 2Depth 활성화탭
 const winwinActiveTab = ref(0); //상생협력 2Depth 활성화탭
@@ -2983,28 +3049,18 @@ const textParaRef = ref(null);
 const logoWrapRef = ref(null);
 const aboutSectionRef = ref(null);
 
-const strItems = [
-    {
-        title: "업계 최고<br />점포 당 매출액 달성",
-        desc: "점포 경쟁력을<br class=\"m_br\" />강화하고 고객중심의 상품서비스 제공을 통해<br />편의점 업계 최고의 매출액을 달성하고 있습니다.",
-        img: imgAcc01,
-    },
-    {
-        title: "GS25만의 차별화된<br class=\"p_br\" /> 상품과<br class=\"m_br\" />서비스 제공",
-        desc: "안전하고 맛있는 후레쉬푸드 상품 등 고품질의 먹거리 상품 개발과<br class=\"p_br\" />좋은 품질, 합리적 가격의 PB브랜드 'YOUUS',<br class=\"p_br\" />GS리테일의 전용 어플리케이션 우리동네GS 등 차별화된 상품과 서비스를 통해 고객에게 새로운 가치를 제공하고 있습니다.",
-        img: imgAcc02,
-    },
-    {
-        title: "경영주와의 끊임없는 소통과<br class=\"m_br\" />협력을 통한 <br class=\"p_br\" />단단한 파트너십",
-        desc: "경영주와 본부의 파트너십 구축을 위해 다양한 소통창구와 상생제도를 도입하여 운영중에 있습니다. Refresh 휴가지원, GS25 20's Club 등을 업계 최초로 개발하여 경영주의 만족과 자부심을 높이고 있습니다.",
-        img: imgAcc03,
-    },
-];
+const strItemImgs = [imgAcc01, imgAcc02, imgAcc03];
+const strItems = computed(() =>
+    (t.value.brand?.str?.items || []).map((item, i) => ({
+        ...item,
+        img: strItemImgs[i],
+    })),
+);
 
 const openAcc = ref(-1);
 const descRefs = [];
 const imgRefs = [];
-const tokens = strItems.map(() => 0);
+const accTokens = ref([0, 0, 0]);
 
 function _animateOpen(el, myToken, index) {
     if (el.classList.contains("acc_show") && el.style.height === "auto") return;
@@ -3014,14 +3070,14 @@ function _animateOpen(el, myToken, index) {
     el.style.height = "0px";
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-            if (myToken !== tokens[index]) return;
+            if (myToken !== accTokens.value[index]) return;
             el.style.height = heightPx;
         });
     });
     el.addEventListener("transitionend", function onEnd(e) {
         if (e.target !== el || e.propertyName !== "height") return;
         el.removeEventListener("transitionend", onEnd);
-        if (myToken !== tokens[index]) return;
+        if (myToken !== accTokens.value[index]) return;
         el.style.height = "auto";
         el.classList.remove("acc_animating");
     });
@@ -3039,14 +3095,14 @@ function _animateClose(el, myToken, index) {
     el.style.height = `${h}px`;
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-            if (myToken !== tokens[index]) return;
+            if (myToken !== accTokens.value[index]) return;
             el.style.height = "0px";
         });
     });
     el.addEventListener("transitionend", function onEnd(e) {
         if (e.target !== el || e.propertyName !== "height") return;
         el.removeEventListener("transitionend", onEnd);
-        if (myToken !== tokens[index]) return;
+        if (myToken !== accTokens.value[index]) return;
         el.classList.remove("acc_show", "acc_animating");
         el.style.height = "";
     });
@@ -3056,22 +3112,22 @@ function toggleAcc(index) {
     const prev = openAcc.value;
     if (prev === index) {
         openAcc.value = -1;
-        const t = ++tokens[index];
-        _animateClose(descRefs[index], t, index);
-        _animateClose(imgRefs[index], t, index);
+        const token = ++accTokens.value[index];
+        _animateClose(descRefs[index], token, index);
+        _animateClose(imgRefs[index], token, index);
         return;
     }
     if (prev !== -1) {
-        const t = ++tokens[prev];
-        _animateClose(descRefs[prev], t, prev);
-        _animateClose(imgRefs[prev], t, prev);
+        const token = ++accTokens.value[prev];
+        _animateClose(descRefs[prev], token, prev);
+        _animateClose(imgRefs[prev], token, prev);
     }
     openAcc.value = index;
-    const t = ++tokens[index];
-    _animateOpen(descRefs[index], t, index);
+    const token = ++accTokens.value[index];
+    _animateOpen(descRefs[index], token, index);
     // DOM에 is_open 클래스가 적용된 후 이미지 높이를 측정해야 scrollHeight가 올바르게 반환됨
     nextTick(() => {
-        _animateOpen(imgRefs[index], t, index);
+        _animateOpen(imgRefs[index], token, index);
     });
 }
 
