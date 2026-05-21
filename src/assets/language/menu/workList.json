@@ -1150,6 +1150,17 @@
     },
 
     {
+        "depth1": "공지사항", "depth2": "", "depth3": "목록", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrne/01/gsrnotice",
+        "link": "/gsrnotice",
+        "startDate": "26-05-21",
+        "endDate": "26-05-21",
+        "status": "com",
+        "note": " "
+    },
+
+    {
         "depth1": "점포창업안내", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "page",
         "path": "gsrst/gsrst_smain",

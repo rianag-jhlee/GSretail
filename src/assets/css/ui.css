@@ -211,6 +211,15 @@ h5 {font-size:1.8rem;}
 
 .tab_wrap + .type_gallery {margin-top:24px;}
 
+/* 게시판 목록 */
+.board_wrap table.type_list { width: 100%; border-collapse: collapse; border-top:1px solid #161616;}
+.board_wrap table.type_list th {border-top-color: #E5E5E9;}
+.board_wrap table.type_list th, .board_wrap table.type_list td { padding: 18px 24px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
+.board_wrap table.type_list td a {font-size:18px;}
+.board_wrap table.type_list thead th { background-color: #F8F8F8; color: #161616; font-weight: 700; }
+.board_wrap table.type_list td { height: 82px; color: #161616; border-left: 0; border-right: 0; }
+.board_wrap table.type_list th { border-left: 0; border-right: 0; }
+
 /* 게시물 상세 */
 .board_detail_wrap {max-width:1460px; margin:0 auto; padding:240px 20px 0;}
 .board_detail_wrap .detail_title {padding-bottom:40px; border-bottom:1px solid #E5E5E9;}
@@ -334,6 +343,18 @@ h5 {font-size:1.8rem;}
     .search_filter_area .search_wrap .select, .search_filter_area .search_wrap .input_search_wrap {width:100%;}
 
     .search_filter_area .filter_group, .search_filter_area .filter_group .select {width:100%;}
+
+    .board_wrap table.type_list tbody tr td:first-of-type {display:none;}
+    /* 기존 테이블 레이아웃 해제 */
+    .board_wrap table.type_list tbody, .board_wrap table.type_list tr, .board_wrap table.type_list td {display: block; width: 100%; height:auto; border: 0;}
+    .board_wrap table.type_list tr {padding:12px 10px; border-bottom: 1px solid #EEE; display: flex; flex-wrap: wrap;}
+    /* 제목 셀: 상단 전체 너비 차지 */
+    .board_wrap table.type_list {border-top:1px solid #161616;}
+    .board_wrap table.type_list .title_cell {padding: 0 0 8px 0; order: 1;}
+    .board_wrap table.type_list .title_cell .link_title {color: #161616; font-size:16px !important; font-weight: 500; line-height: 1.4;}
+    .board_wrap table.type_list .date_cell, .board_wrap table.type_list .view_cell {width: 50%; padding: 0; color: #999; font-size: 12px !important; text-align: left !important; order: 2;}
+    .board_wrap table.type_list .view_cell {color:#67676F; text-align:right !important; order: 3;}
+    .board_wrap table.type_list .view_cell::before {margin-right: 4px;}
 
     /* 게시물 상세 */
     .board_detail_wrap .detail_title {padding-bottom:24px;}
