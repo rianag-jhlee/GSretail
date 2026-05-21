@@ -1,7 +1,7 @@
 <template>
     <div class="wrap_gsrst">
         <!-- HEADER -->
-        <header class="page_header" :style="{ backgroundImage: `url(${imgBg})` }">
+        <header class="page_header top_visual" :style="{ backgroundImage: `url(${imgBg})` }">
             <div class="header_inner">
                 <h2 class="header_title">GS25 창업안내</h2>
             </div>
@@ -9,15 +9,15 @@
 
         <!-- BODY -->
         <div class="cont_inner">
-            <!-- Depth 1: 페이지 탭 (type_01: 하단 보더 언더라인) -->
-            <Tabs  :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
+            <!-- Depth 1-->
+            <Tabs :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
 
-            <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) -->
-            <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
+            <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) --> 
+            <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
             <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
             <Tabs v-show="activeD1 === 3" :tab-items="depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
 
-            <!-- GS25 브랜드 소개 -->
+            <!-- GS25 브랜드 소개 (D2=0) -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
                 <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg2})` }">
                     <header>
@@ -67,11 +67,10 @@
                         </ul>
                     </div>
                 </section>
-            </div>  
-            <!-- //GS25 브랜드 소개 -->
+            </div><!-- /panel D2=0 -->
 
             <!-- 차별화된 경쟁력 -->
-            <div class="panel" v-if="activeD1 === 0 && activeD2 === 1">
+            <div class="panel sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <section class="sec_overlap">
                     <header class="section_header ac no_desc">
                         <h2 v-html="competitivePanel.title"></h2>
@@ -262,8 +261,7 @@
                     </ul>
                 </section>
             </div>
-            <!-- //차별화된 경쟁력 -->
-
+ 
             <!-- 편의점 창업 이해 -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 2">
                 <section class="sec_diagram">
@@ -415,7 +413,6 @@
                     </div>
                 </section>
             </div>
-            <!-- //편의점 창업 이해 -->
 
             <!-- FAQ -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 3">
@@ -489,7 +486,6 @@
                     />
                 </section>
             </div>
-            <!-- //FAQ -->
 
             <!-- 창업 절차 -->
             <div class="panel" v-show="activeD1 === 1 && activeD2 === 0">
@@ -815,7 +811,6 @@
                     </section>
                 </div>
             </div>
-            <!-- //창업 혜택 -->
 
             <!-- 추천 점포 찾기 -->
             <div class="panel pt_64" v-show="activeD1 === 2" aria-label="추천 점포 찾기">
@@ -1564,20 +1559,25 @@
             <!-- //상담 및 신청 -->
 
         </div>
+        <!-- [quick_menu · 템플릿] .wrap_gsrst 직하위(cont_inner 밖)에 둠. 푸터는 App.vue router-view 밖이므로 도킹 계산 시 wrap 기준 사용 -->
         <ul
-            ref="quickMenuRef" 
+            ref="quickMenuRef"
             class="quick_menu"
-            :aria-hidden="!showQuickMenu"  
+            :class="{ is_visible: showQuickMenu }"
+            :aria-hidden="!showQuickMenu"
         >
             <li><button type="button">창업안내</button></li>
             <li><button type="button">입점상담</button></li>
             <li><button type="button">고객센터</button></li>
         </ul>
+        <!-- //[quick_menu · 템플릿] -->
     </div>
-  
+
+
+
 </template>
 
-<script setup>
+<script setup> 
 import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -1615,9 +1615,6 @@ import imgStore01 from "@/assets/images/dummy/gsrst02010101_store_01.png";
 import imgStore02 from "@/assets/images/dummy/gsrst02010101_store_02.png";
 import imgStore03 from "@/assets/images/dummy/gsrst02010101_store_03.png";
 import imgStore04 from "@/assets/images/dummy/gsrst02010101_store_04.png";
-
-gsap.registerPlugin(ScrollTrigger);
-
 const activeD1 = ref(0);
 const activeD2 = ref(0);
 const activeD3 = ref(0);
@@ -1642,15 +1639,20 @@ function refreshProductHitSwipers() {
     });
 }
 
+const isMobile = ref(mqMobile.matches);
+const isTablet = ref(mqTablet.matches);
+function onMqTabletChange(e) { isTablet.value = e.matches; }
+
 function syncMobileView() {
     isMobileView.value = mqMobile.matches;
     isTabletView.value = mqTablet.matches;
+    isMobile.value = mqMobile.matches;
+    isTablet.value = mqTablet.matches;
     if (!mqMobile.matches) {
         productHitSwiperInsts.value = [];
     } else {
         refreshProductHitSwipers();
     }
-    nextTick(manageQuickMenuAnimation);
 }
 
 function onProductHitSwiper(swiper, index) {
@@ -1665,7 +1667,7 @@ const depth1Tabs = [
     { item: "상담 및 신청" },
     { item: "가맹계약시스템" },
 ];
-
+ 
 const depth2Tabs = [
     { item: "GS25 브랜드 소개" },
     { item: "차별화된 경쟁력" },
@@ -1679,523 +1681,6 @@ const depth2TabsPrepare = [
     { item: "가맹 타입" },
     { item: "창업 혜택" },
 ];
-
-/** activeD1 === 3 (상담 및 신청) 2depth */
-const depth2TabsConsult = [
-    { item: "창업 상담 신청" },
-    { item: "창업 설명회 신청" },
-    { item: "입점 제안/브랜드 전환 상담" },
-];
-
-/** activeD1 === 3, activeD2 === 0 (창업 상담 신청) — 개인정보 동의 목록 */
-const startupConsentItems = [
-    "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
-    "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일,",
-    "- 수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용,",
-    "- 보유 및 이용기간: 접수 후 1년",
-];
-
-const seminarConsentItems =[
-    "- 입력하신 정보는 창업상담을 위해서만 사용합니다.",
-    "- 수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호, 자택주소(시, 구/군)",
-    "- 수집 및 목적: 본인 식별 및 문의사항 확인 및 답변",
-    "- 보유 및 이용기간: 접수 후 1년",
-]
-
-const counselConsentItems =[
-    "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
-    "- 수집하는 개인정보 항목: 이름, 휴대폰번호",
-    "- 수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
-    "- 보유 및 이용기간: 접수 후 1년",
-]
-
-const startupConsentAgreed = ref(false);
-
-function onStartupConsentChange(event) {
-    startupConsentAgreed.value = event.target.checked;
-}
-
-/** 브랜드 전환 상담 · 우편번호 (763:17115 · 퍼블만, 레이어 연동 시 교체) */
-function onBrandConsultZipSearch() {
-    // 우편번호 팝업/다음 도로명 API 등 연결
-}
-
-/** 창업 설명회 신청 탭 · 월별 지역 카드(Figma node 763:16835) */
-const seminarDummyAddress = "서울특별시 강남구 논현로 636, 이디야 빌딩 3층";
-const seminarMonthSlides = [
-    {
-        id: "seminar-m-202602",
-        label: "2026년 2월",
-        cards: [
-            {
-                id: "seminar-card-seoul-gb",
-                regionName: "서울 수도권",
-                address: seminarDummyAddress,
-                slots: [
-                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
-                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                ],
-            },
-            {
-                id: "seminar-card-busan-yeongnam",
-                regionName: "부산 영남권",
-                address: seminarDummyAddress,
-                slots: [
-                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
-                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                ],
-            },
-            {
-                id: "seminar-card-daegu-yeongnam",
-                regionName: "대구 영남권",
-                address: seminarDummyAddress,
-                slots: [
-                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                ],
-            },
-            {
-                id: "seminar-card-gwangju-honam",
-                regionName: "광주 호남권",
-                address: seminarDummyAddress,
-                slots: [
-                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
-                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                ],
-            },
-        ],
-    },
-    {
-        id: "seminar-m-202603",
-        label: "2026년 3월",
-        cards: [
-            {
-                id: "seminar-card-incheon-gb",
-                regionName: "인천 수도권",
-                address: seminarDummyAddress,
-                slots: [
-                    { timeLabel: "3/5(목) 10:30", datetime: "2026-03-05T10:30", muted: false, badge: { label: "신청", variant: "apply" } },
-                    { timeLabel: "3/12(목) 15:00", datetime: "2026-03-12T15:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
-                ],
-            },
-            {
-                id: "seminar-card-daejeon-chung",
-                regionName: "대전 충청권",
-                address: seminarDummyAddress,
-                slots: [
-                    { timeLabel: "3/8(일) 11:00", datetime: "2026-03-08T11:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                    { timeLabel: "3/15(일) 11:00", datetime: "2026-03-15T11:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                ],
-            },
-            {
-                id: "seminar-card-gangwon",
-                regionName: "강원 춘천·원주",
-                address: seminarDummyAddress,
-                slots: [
-                    { timeLabel: "3/18(수) 14:00", datetime: "2026-03-18T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
-                    { timeLabel: "3/25(수) 14:00", datetime: "2026-03-25T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                ],
-            },
-            {
-                id: "seminar-card-jeju",
-                regionName: "제주 특별자치도",
-                address: seminarDummyAddress,
-                slots: [
-                    { timeLabel: "3/21(토) 10:00", datetime: "2026-03-21T10:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                    { timeLabel: "3/28(토) 10:00", datetime: "2026-03-28T10:00", muted: false, badge: { label: "신청", variant: "apply" } },
-                ],
-            },
-        ],
-    },
-];
-
-const seminarMonthSwiperInst = ref(null);
-const seminarMonthSlideIndex = ref(0);
-const seminarMonthSizerRef = ref(null);
-const seminarMonthSwiperPx = ref(201);
-
-function seminarMonthMeasureSwiperWidth() {
-    nextTick(() => {
-        const root = seminarMonthSizerRef.value;
-        if (!root) return;
-        const titles = root.querySelectorAll(".seminar_month_title");
-        let maxW = 0;
-        titles.forEach((node) => {
-            maxW = Math.max(maxW, Math.ceil(node.getBoundingClientRect().width));
-        });
-        if (maxW > 0) seminarMonthSwiperPx.value = maxW;
-        const s = seminarMonthSwiperInst.value;
-        s?.update?.();
-        if (s) seminarMonthSyncFromSwiper(s);
-    });
-}
-
-const seminarMonthAtStart = computed(() => seminarMonthSlideIndex.value <= 0);
-const seminarMonthAtEnd = computed(() => seminarMonthSlideIndex.value >= seminarMonthSlides.length - 1);
-
-const seminarActiveMonthCards = computed(() => seminarMonthSlides[seminarMonthSlideIndex.value]?.cards ?? []);
-
-const seminarAppliedSlotKey = ref(null);
-const seminarWrapRef = ref(null);
-const seminarCurrentMonthId = computed(() => seminarMonthSlides[seminarMonthSlideIndex.value]?.id ?? "");
-
-function seminarApplySlotKey(monthId, cardId, si) {
-    return `${monthId}::${cardId}::${si}`;
-}
-
-function isSeminarApplyPicked(monthId, cardId, si) {
-    if (!monthId) return false;
-    return seminarAppliedSlotKey.value === seminarApplySlotKey(monthId, cardId, si);
-}
-
-async function onSeminarApplyClick(monthId, cardId, si) {
-    if (!monthId) return;
-    seminarAppliedSlotKey.value = seminarApplySlotKey(monthId, cardId, si);
-    await nextTick();
-    seminarWrapRef.value?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function seminarMonthSyncFromSwiper(swiper) {
-    if (!swiper || typeof swiper.activeIndex !== "number") return;
-    seminarMonthSlideIndex.value = swiper.activeIndex;
-}
-
-function onSeminarMonthSwiperInit(swiper) {
-    seminarMonthSwiperInst.value = swiper;
-    seminarMonthSyncFromSwiper(swiper);
-    seminarMonthMeasureSwiperWidth();
-}
-
-function onSeminarMonthSlideChange(swiper) {
-    seminarMonthSyncFromSwiper(swiper);
-}
-
-function seminarMonthPrev() {
-    seminarMonthSwiperInst.value?.slidePrev?.();
-}
-
-function seminarMonthNext() {
-    seminarMonthSwiperInst.value?.slideNext?.();
-}
-
-watch(seminarMonthSlideIndex, (n, prev) => {
-    if (prev !== undefined && n !== prev) seminarAppliedSlotKey.value = null;
-});
-
-watch(
-    () => [activeD1.value, activeD2.value],
-    ([d1, d2]) => {
-        if (d1 !== 3 || d2 !== 1) seminarAppliedSlotKey.value = null;
-        else seminarMonthMeasureSwiperWidth();
-    }
-);
-
-const phoneOptions = [
-    { value: "010", label: "010" },
-    { value: "011", label: "011" },
-    { value: "016", label: "016" },
-    { value: "017", label: "017" },
-    { value: "018", label: "018" },
-    { value: "019", label: "019" },
-];
-
-const startupStoreOwnershipOptions = [
-    { value: "yes", label: "있음" },
-    { value: "no", label: "없음" },
-];
-
-const startupCvsExperienceOptions = [
-    { value: "none", label: "없음" },
-    { value: "gs25_staff", label: "GS25 근무자" },
-    { value: "gs25_owner", label: "GS25 경영주" },
-    { value: "other_staff", label: "타사 근무자" },
-    { value: "other_owner", label: "타사 경영주" },
-];
-
-const startupRegionSidoOptions = [
-    { value: "서울", label: "서울" },
-    { value: "경기", label: "경기" },
-    { value: "인천", label: "인천" },
-    { value: "충청", label: "충청" },
-    { value: "강원", label: "강원" },
-    { value: "제주", label: "제주" },
-    { value: "전라", label: "전라" },
-    { value: "경상", label: "경상" },
-];
-
-const startupRegionSigunguMap = {
-    서울: [
-        { value: "마포구", label: "마포구" },
-        { value: "강남구", label: "강남구" },
-    ],
-    경기: [{ value: "수원시", label: "수원시" }],
-};
-
-const startupBirthYearOptions = Array.from({ length: 80 }, (_, i) => {
-    const year = new Date().getFullYear() - 18 - i;
-    return { value: String(year), label: String(year) };
-});
-
-const startupBirthMonthOptions = Array.from({ length: 12 }, (_, i) => {
-    const month = String(i + 1);
-    return { value: month, label: month };
-});
-
-const startupBirthDayOptions = Array.from({ length: 31 }, (_, i) => {
-    const day = String(i + 1);
-    return { value: day, label: day };
-});
-
-const consultTypeOptions = [
-    { value: "brand_transition", label: "브랜드 전환 상담" },
-    { value: "store_entry_proposal", label: "입점 제안" },
-];
-
-const startupConsultForm = reactive({
-    name: "",
-    phone1: "010",
-    phone2: "",
-    phone3: "",
-    consultType: "",
-    brandConsultZipCode: "",
-    brandConsultAddrBasic: "",
-    brandConsultAddrDetail1: "",
-    brandConsultAddrDetail2: "",
-    brandConsultAreaContract: "",
-    brandConsultAreaPrivate: "",
-    brandConsultStoreName: "",
-    brandConsultCommercialFeature: "",
-    brandConsultLandlordRelation: "",
-    storeOwnership: "",
-    investAmount: "",
-    openYear: "",
-    openMonth: "",
-    cvsExperience: [],
-    birthYear: "",
-    birthMonth: "",
-    birthDay: "",
-    inquiry: "",
-    regionSido: "",
-    regionSigungu: "",
-    consultDate: "",
-    consultTime: "",
-});
-
-const startupRegionSigunguOptions = computed(() => startupRegionSigunguMap[startupConsultForm.regionSido] || []);
-
-const startupConsultManager = {
-    name: "담당장 : 이은정(02-2006-3565)",
-    office: "GS25 서부사무소",
-    address: "서울특별시 마포구 월드컵북로 396",
-};
-
-/** activeD1 === 1, activeD2 === 2 (창업 혜택) */
-const depth3TabsBenefit = [
-    { item: "탄탄한 점포" },
-    { item: "든든한 점포 운영" },
-    { item: "편안한 경영주 생활" },
-];
-
-/** 탄탄한 점포 */
-const benefitStorePanel = {
-    title: "대상별 맞춤 창업 혜택을 드립니다.",
-    desc: "창업 준비 전 꼭 확인해보세요~!",
-};
-
-const benefitStoreItems = [
-    {
-        title: "우수 근무자 할인 제도",
-        desc: "GS25에서 근무하는 우수 근무자 창업 시 본부 보증금 및 가맹비 일부 할인",
-    },
-    {
-        title: "청년 창업 제도",
-        desc: "투자비가 부족한 20대 청년들을 위한 본부 보증금 유예 및 창업활성화 지원금 300만원 제공",
-        notes: [
-            { label: "대상", text: "1997년~2007년생 (2026년 기준)" },
-            { label: "안내", text: "적용 가능 점포는 담당자에게 별도 문의" },
-        ],
-        link: {
-            text: "청년창업 혜택으로 오픈한 경영주님 성공기 보러가기",
-            url: "#none",
-        },
-    },
-    {
-        title: "다자녀 할인 제도",
-        desc: "만 18세 미만 자녀 2인 이상인 경우 가맹비 일부 할인",
-    },
-    {
-        title: "다점포 할인 제도",
-        desc: "GS25 경영주님이 추가 점포 창업 시 가맹비 일부 할인",
-    },
-];
-
-/** 든든한 점포 운영 */
-const benefitOperationPanel = {
-    title: "업계 최고 수준의 GS25 경영주 상생 혜택",
-    desc: "보험, 노무, 인센티브, 채용까지! 경영주님이 운영에만 집중할 수 있도록 GS25가 도와드려요.",
-};
-
-const benefitOperationGroups = [
-    {
-        title: "인센티브 제도",
-        desc: "성과가 곧 보상으로! 점포 수익을 극대화할 수 있도록 성과에 따른 인센티브를 지급해요",
-        cols: 2,
-        items: [
-            {
-                title: "판매이익 인센티브 제도",
-                desc: "FF, FF간편식, 신선, 치킨25 카테고리 수익 활성화를 위해 판매이익의 최대 +10% 본부 지원금 지급",
-            },
-            {
-                title: "구색 강화 인센티브 제도",
-                desc: "핵신상품 및 신상품 취급 확대에 따른 본부 지원금 지급",
-            },
-            {
-                title: "수익 개선 인센티브 제도",
-                desc: "점포 수익 개선 활동에 따른 본부 지원금 지급",
-            },
-            {
-                title: "서비스 진단 제도",
-                desc: "서비스 모니터링 등 진단 우수점 혜택 제공",
-            },
-        ],
-    },
-    {
-        title: "보험/경조 지원",
-        desc: "예기치 못한 순간에도 GS25가 함께해요",
-        cols: 3,
-        items: [
-            {
-                title: "경조사 지원",
-                desc: "경조금 지급, 장례용품 지급, 점포운영지원금 지급, 출산용품 지급",
-            },
-            {
-                title: "추석 선물 지급",
-                desc: "경영주님 직접 선택 가능한 선택형 추석 선물 지급",
-            },
-            {
-                title: "상생지원 보험",
-                desc: "단체 안심상해 보험, 횡령, 택배도난, 현금도난, 재산종합 무상 가입",
-            },
-        ],
-    },
-    {
-        title: "장기운영 혜택",
-        desc: "오래 함께한 경영주님에게 더 큰 감사를 전해요",
-        cols: 3,
-        items: [
-            {
-                title: "10주년 혜택",
-                desc: "기념패, 건강검진권",
-            },
-            {
-                title: "20주년 혜택",
-                desc: "기념패, 여행상품권, 건강검진",
-            },
-            {
-                title: "30주년 혜택",
-                desc: "기념패, 30주년 행사 지원, 여행상품권, 건강검진권",
-            },
-        ],
-    },
-    {
-        title: "카운터FF 운영 지원",
-        desc: "치킨25, 카페25 운영을 위한 실질적인 지원을 받아보세요",
-        cols: 3,
-        items: [
-            {
-                title: "치킨25 운영 지원",
-                desc: "판매이익 인센티브 및 통신비용/튀김기름/냄새제거필터/튀김기 청소 일부 지원",
-            },
-            {
-                title: "카페25 운영 지원",
-                desc: "부품 수리비 일부 지원",
-            },
-            {
-                title: "위생등급제 우수점 지원",
-                desc: "위생등급제도 '매우 우수' 및 '우수' 취득 시 정수필터 비용 전액 또는 일부 지원",
-            },
-        ],
-    },
-    {
-        title: "노무/법률 지원",
-        desc: "채용부터 법률까지, 복잡한 인사노무 문제를 함께 해결해요",
-        cols: 2,
-        items: [
-            {
-                title: "노무상담 콜센터 운영",
-                desc: "채용, 4대보험 등 노무 전반에 대한 상담 콜센터 서비스 제공",
-            },
-            {
-                title: "노무 프리미엄 서비스",
-                desc: "가맹점 전문 노무법인 제휴 할인 혜택 제공",
-            },
-            {
-                title: "무료 법률 상담",
-                desc: "민사, 형사, 가사, 행정 등 생활 법률 관련 상담 서비스 제공",
-            },
-            {
-                title: "알바몬 제휴",
-                desc: "스토어매니저 빠른 채용을 위한 알바몬 제휴",
-            },
-        ],
-    },
-    {
-        title: "기타 운영 지원",
-        desc: "안정적인 점포 운영을 위해 다양한 부가 지원 혜택을 준비했어요",
-        cols: 3,
-        items: [
-            {
-                title: "모바일 성인인증 지원",
-                desc: "모바일 성인인증 서비스 이용료 지원",
-            },
-            {
-                title: "가맹점 상생대출",
-                desc: "우리은행 연계 추가 우대 금리 적용",
-            },
-            {
-                title: "화재예방 소화기 지원",
-                desc: "점포 인근 화재 발생 시 점포 소화기 공유를 통해 사용 후 교환 지원",
-            },
-            {
-                title: "자연재해 피해 위로금 지원",
-                desc: "가옥/전/답 자연재해 피해 시 점포 위로금 지원",
-            },
-            {
-                title: "우수점포 경영주 포상",
-                desc: "우수점포 대상 혜택 지급",
-            },
-            {
-                title: "GS히어로상",
-                desc: "사회적 귀감이 되는 경영주, 스토어매니저 포상",
-            },
-        ],
-    },
-];
-
-/** 편안한 경영주 생활 */
-const benefitLifePanel = {
-    title: "일할 때도, 쉴 때도 든든한 혜택",
-    desc: "건강, 복지, 여가까지! 점포 밖에서도 GS25가 함께합니다.",
-};
-
-const benefitLifeItems = [
-    { title: "경영주 건강 & 심리 헬스케어 서비스", desc: "경영주님 및 직계가족 대상 건강과 심리 등 헬스케어 서비스 제공" },
-    { title: "경영주 종합건강검진 할인 (KMI)", desc: "전국 대형 건강 검진센터(KMI) 기업 제휴가 할인 제공" },
-    { title: "세이프닥 의료 제휴 할인", desc: "비급여 의료 항목에 대해 기업 제휴 할인 제공" },
-    { title: "GS25 경영주 복지몰", desc: "가맹점 경영주님 대상 기업형 복지몰 제공" },
-    { title: "삼성전자 소상공인몰", desc: "삼성전자 소상공인몰 제휴 할인혜택 등 제공" },
-    { title: "엔젤 리조트", desc: "엔젤리조트 회원가 제공" },
-    { title: "LG U+ 인터넷(와이파이) 할인", desc: "점포 매장 설치용 개별 인터넷(와이파이) 할인 혜택 제공" },
-    { title: "기타 제휴 할인 혜택", desc: "렌터카, 라식/라섹, 레지던스 숙박 등 제휴업체 할인 혜택 제공" },
-];
-
-const benefitLifeNote =
-    "* 해당 제도는 '26년에 한하며, 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제 될 수 있습니다.";
-
-const benefitLifeRows = Array.from(
-    { length: Math.ceil(benefitLifeItems.length / 2) },
-    (_, index) => benefitLifeItems.slice(index * 2, index * 2 + 2),
-);
 
 const brandIntro = {
     badge: "4년 연속, 편의점 매출 1위 브랜드 (22년~25년)",
@@ -2534,6 +2019,214 @@ function toggleProcessMore(idx) {
         expandProcessMore(panel, nextProcessMoreToken(idx), idx);
     });
 }
+
+/** activeD1 === 1, activeD2 === 2 (창업 혜택) */
+const depth3TabsBenefit = [
+    { item: "탄탄한 점포" },
+    { item: "든든한 점포 운영" },
+    { item: "편안한 경영주 생활" },
+];
+
+/** 탄탄한 점포 */
+const benefitStorePanel = {
+    title: "대상별 맞춤 창업 혜택을 드립니다.",
+    desc: "창업 준비 전 꼭 확인해보세요~!",
+};
+
+const benefitStoreItems = [
+    {
+        title: "우수 근무자 할인 제도",
+        desc: "GS25에서 근무하는 우수 근무자 창업 시 본부 보증금 및 가맹비 일부 할인",
+    },
+    {
+        title: "청년 창업 제도",
+        desc: "투자비가 부족한 20대 청년들을 위한 본부 보증금 유예 및 창업활성화 지원금 300만원 제공",
+        notes: [
+            { label: "대상", text: "1997년~2007년생 (2026년 기준)" },
+            { label: "안내", text: "적용 가능 점포는 담당자에게 별도 문의" },
+        ],
+        link: {
+            text: "청년창업 혜택으로 오픈한 경영주님 성공기 보러가기",
+            url: "#none",
+        },
+    },
+    {
+        title: "다자녀 할인 제도",
+        desc: "만 18세 미만 자녀 2인 이상인 경우 가맹비 일부 할인",
+    },
+    {
+        title: "다점포 할인 제도",
+        desc: "GS25 경영주님이 추가 점포 창업 시 가맹비 일부 할인",
+    },
+];
+
+/** 든든한 점포 운영 */
+const benefitOperationPanel = {
+    title: "업계 최고 수준의 GS25 경영주 상생 혜택",
+    desc: "보험, 노무, 인센티브, 채용까지! 경영주님이 운영에만 집중할 수 있도록 GS25가 도와드려요.",
+};
+
+const benefitOperationGroups = [
+    {
+        title: "인센티브 제도",
+        desc: "성과가 곧 보상으로! 점포 수익을 극대화할 수 있도록 성과에 따른 인센티브를 지급해요",
+        cols: 2,
+        items: [
+            {
+                title: "판매이익 인센티브 제도",
+                desc: "FF, FF간편식, 신선, 치킨25 카테고리 수익 활성화를 위해 판매이익의 최대 +10% 본부 지원금 지급",
+            },
+            {
+                title: "구색 강화 인센티브 제도",
+                desc: "핵신상품 및 신상품 취급 확대에 따른 본부 지원금 지급",
+            },
+            {
+                title: "수익 개선 인센티브 제도",
+                desc: "점포 수익 개선 활동에 따른 본부 지원금 지급",
+            },
+            {
+                title: "서비스 진단 제도",
+                desc: "서비스 모니터링 등 진단 우수점 혜택 제공",
+            },
+        ],
+    },
+    {
+        title: "보험/경조 지원",
+        desc: "예기치 못한 순간에도 GS25가 함께해요",
+        cols: 3,
+        items: [
+            {
+                title: "경조사 지원",
+                desc: "경조금 지급, 장례용품 지급, 점포운영지원금 지급, 출산용품 지급",
+            },
+            {
+                title: "추석 선물 지급",
+                desc: "경영주님 직접 선택 가능한 선택형 추석 선물 지급",
+            },
+            {
+                title: "상생지원 보험",
+                desc: "단체 안심상해 보험, 횡령, 택배도난, 현금도난, 재산종합 무상 가입",
+            },
+        ],
+    },
+    {
+        title: "장기운영 혜택",
+        desc: "오래 함께한 경영주님에게 더 큰 감사를 전해요",
+        cols: 3,
+        items: [
+            {
+                title: "10주년 혜택",
+                desc: "기념패, 건강검진권",
+            },
+            {
+                title: "20주년 혜택",
+                desc: "기념패, 여행상품권, 건강검진",
+            },
+            {
+                title: "30주년 혜택",
+                desc: "기념패, 30주년 행사 지원, 여행상품권, 건강검진권",
+            },
+        ],
+    },
+    {
+        title: "카운터FF 운영 지원",
+        desc: "치킨25, 카페25 운영을 위한 실질적인 지원을 받아보세요",
+        cols: 3,
+        items: [
+            {
+                title: "치킨25 운영 지원",
+                desc: "판매이익 인센티브 및 통신비용/튀김기름/냄새제거필터/튀김기 청소 일부 지원",
+            },
+            {
+                title: "카페25 운영 지원",
+                desc: "부품 수리비 일부 지원",
+            },
+            {
+                title: "위생등급제 우수점 지원",
+                desc: "위생등급제도 '매우 우수' 및 '우수' 취득 시 정수필터 비용 전액 또는 일부 지원",
+            },
+        ],
+    },
+    {
+        title: "노무/법률 지원",
+        desc: "채용부터 법률까지, 복잡한 인사노무 문제를 함께 해결해요",
+        cols: 2,
+        items: [
+            {
+                title: "노무상담 콜센터 운영",
+                desc: "채용, 4대보험 등 노무 전반에 대한 상담 콜센터 서비스 제공",
+            },
+            {
+                title: "노무 프리미엄 서비스",
+                desc: "가맹점 전문 노무법인 제휴 할인 혜택 제공",
+            },
+            {
+                title: "무료 법률 상담",
+                desc: "민사, 형사, 가사, 행정 등 생활 법률 관련 상담 서비스 제공",
+            },
+            {
+                title: "알바몬 제휴",
+                desc: "스토어매니저 빠른 채용을 위한 알바몬 제휴",
+            },
+        ],
+    },
+    {
+        title: "기타 운영 지원",
+        desc: "안정적인 점포 운영을 위해 다양한 부가 지원 혜택을 준비했어요",
+        cols: 3,
+        items: [
+            {
+                title: "모바일 성인인증 지원",
+                desc: "모바일 성인인증 서비스 이용료 지원",
+            },
+            {
+                title: "가맹점 상생대출",
+                desc: "우리은행 연계 추가 우대 금리 적용",
+            },
+            {
+                title: "화재예방 소화기 지원",
+                desc: "점포 인근 화재 발생 시 점포 소화기 공유를 통해 사용 후 교환 지원",
+            },
+            {
+                title: "자연재해 피해 위로금 지원",
+                desc: "가옥/전/답 자연재해 피해 시 점포 위로금 지원",
+            },
+            {
+                title: "우수점포 경영주 포상",
+                desc: "우수점포 대상 혜택 지급",
+            },
+            {
+                title: "GS히어로상",
+                desc: "사회적 귀감이 되는 경영주, 스토어매니저 포상",
+            },
+        ],
+    },
+];
+
+/** 편안한 경영주 생활 */
+const benefitLifePanel = {
+    title: "일할 때도, 쉴 때도 든든한 혜택",
+    desc: "건강, 복지, 여가까지! 점포 밖에서도 GS25가 함께합니다.",
+};
+
+const benefitLifeItems = [
+    { title: "경영주 건강 & 심리 헬스케어 서비스", desc: "경영주님 및 직계가족 대상 건강과 심리 등 헬스케어 서비스 제공" },
+    { title: "경영주 종합건강검진 할인 (KMI)", desc: "전국 대형 건강 검진센터(KMI) 기업 제휴가 할인 제공" },
+    { title: "세이프닥 의료 제휴 할인", desc: "비급여 의료 항목에 대해 기업 제휴 할인 제공" },
+    { title: "GS25 경영주 복지몰", desc: "가맹점 경영주님 대상 기업형 복지몰 제공" },
+    { title: "삼성전자 소상공인몰", desc: "삼성전자 소상공인몰 제휴 할인혜택 등 제공" },
+    { title: "엔젤 리조트", desc: "엔젤리조트 회원가 제공" },
+    { title: "LG U+ 인터넷(와이파이) 할인", desc: "점포 매장 설치용 개별 인터넷(와이파이) 할인 혜택 제공" },
+    { title: "기타 제휴 할인 혜택", desc: "렌터카, 라식/라섹, 레지던스 숙박 등 제휴업체 할인 혜택 제공" },
+];
+
+const benefitLifeNote =
+    "* 해당 제도는 '26년에 한하며, 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제 될 수 있습니다.";
+
+const benefitLifeRows = Array.from(
+    { length: Math.ceil(benefitLifeItems.length / 2) },
+    (_, index) => benefitLifeItems.slice(index * 2, index * 2 + 2),
+);
 
 const competitivePanel = {
     title: "수익성 중심 점포 오픈부터 스마트한 시스템과 밀착 지원까지<br /><span class='txt_blue'>1등 브랜드로 창업을 시작하세요.</span>",
@@ -3034,6 +2727,10 @@ const paginatedGs25FaqItems = computed(() => {
 watch(activeD1, () => {
     activeD2.value = 0;
     activeD3.value = 0;
+    nextTick(() => {
+        window.scrollTo(0, 0);
+        nextTick(() => refreshQuickMenu());
+    });
 });
 
 watch(activeD2, () => {
@@ -3047,6 +2744,45 @@ watch(activeGs25FaqTab, () => {
 watch(gs25FaqTotalPages, (total) => {
     if (activeGs25FaqPage.value > total) activeGs25FaqPage.value = total;
 });
+
+const regionCounselPanel = {
+    title: "지금 바로 상담을 받고 싶으신가요?",
+    lead: "지도에서 원하시는 지역을 클릭하시면 해당 지역 담당자 정보를 바로 확인하실 수 있습니다.",
+};
+const regionCounselEmpty = {
+    title: "지역을 선택해주세요",
+    desc: "지도에서 점포를 오픈하고 싶은 지역을 클릭하면<br class='p_br'/>해당 지역 담당자 정보를 확인하실 수 있습니다.",
+    hint: "(서울/경기는 상단의 '수도권 상세' 탭 또는 지도에서 클릭하세요)",
+};
+const regionCounselTabs = [
+    { item: "전국" },
+    { item: "수도권 상세 - 서울" },
+    { item: "수도권 상세 - 경기" },
+];
+const activeRegionTab = ref(0);
+/** true: region_counsel_side에 담당자 목록 / false: 지역 선택 전 안내 패널 */
+const regionCounselBoardIsStaff = ref(false);
+
+function closeRegionCounselStaff() {
+    regionCounselBoardIsStaff.value = false;
+}
+/** 지도 API 연동 전 퍼블용: 지도 영역 클릭 시 담당자 UI 표시(API 연동 시 삭제·지도 콜백으로 대체) */
+function onRegionCounselMapStubClick() {
+    if (regionCounselBoardIsStaff.value) return;
+    regionCounselBoardIsStaff.value = true;
+}
+
+/** 지역 선택 후 담당자 목록(샘플) */
+const regionCounselStaff = {
+    regionName: "서울",
+    countLabel: "6명",
+    managers: [
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+    ],
+};
 
 /** 추천 점포 찾기 */
 const filterRegion = ref("");
@@ -3121,216 +2857,459 @@ function toggleCard(id) {
     openCardId.value = openCardId.value === id ? null : id;
 }
 
-const regionCounselPanel = {
-    title: "지금 바로 상담을 받고 싶으신가요?",
-    lead: "지도에서 원하시는 지역을 클릭하시면 해당 지역 담당자 정보를 바로 확인하실 수 있습니다.",
-};
-const regionCounselEmpty = {
-    title: "지역을 선택해주세요",
-    desc: "지도에서 점포를 오픈하고 싶은 지역을 클릭하면<br class='p_br'/>해당 지역 담당자 정보를 확인하실 수 있습니다.",
-    hint: "(서울/경기는 상단의 '수도권 상세' 탭 또는 지도에서 클릭하세요)",
-};
-const regionCounselTabs = [
-    { item: "전국" },
-    { item: "수도권 상세 - 서울" },
-    { item: "수도권 상세 - 경기" },
+/** activeD1 === 3 (상담 및 신청) 2depth */
+const depth2TabsConsult = [
+    { item: "창업 상담 신청" },
+    { item: "창업 설명회 신청" },
+    { item: "입점 제안/브랜드 전환 상담" },
 ];
-const activeRegionTab = ref(0);
-/** true: region_counsel_side에 담당자 목록 / false: 지역 선택 전 안내 패널 */
-const regionCounselBoardIsStaff = ref(false);
 
-function closeRegionCounselStaff() {
-    regionCounselBoardIsStaff.value = false;
-}
-/** 지도 API 연동 전 퍼블용: 지도 영역 클릭 시 담당자 UI 표시(API 연동 시 삭제·지도 콜백으로 대체) */
-function onRegionCounselMapStubClick() {
-    if (regionCounselBoardIsStaff.value) return;
-    regionCounselBoardIsStaff.value = true;
+/** activeD1 === 3, activeD2 === 0 (창업 상담 신청) — 개인정보 동의 목록 */
+const startupConsentItems = [
+    "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
+    "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일,",
+    "- 수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용,",
+    "- 보유 및 이용기간: 접수 후 1년",
+];
+
+const seminarConsentItems =[
+    "- 입력하신 정보는 창업상담을 위해서만 사용합니다.",
+    "- 수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호, 자택주소(시, 구/군)",
+    "- 수집 및 목적: 본인 식별 및 문의사항 확인 및 답변",
+    "- 보유 및 이용기간: 접수 후 1년",
+]
+
+const counselConsentItems =[
+    "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
+    "- 수집하는 개인정보 항목: 이름, 휴대폰번호",
+    "- 수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
+    "- 보유 및 이용기간: 접수 후 1년",
+]
+
+const startupConsentAgreed = ref(false);
+
+function onStartupConsentChange(event) {
+    startupConsentAgreed.value = event.target.checked;
 }
 
-/** 지역 선택 후 담당자 목록(샘플) */
-const regionCounselStaff = {
-    regionName: "서울",
-    countLabel: "6명",
-    managers: [
-        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
-        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
-        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
-        { name: "신윤정", area: "강북구, 노원구, 도봉구, 동대문구, 성북구", phone: "02-488-9605", phoneDial: "024889605" },
+/** 브랜드 전환 상담 · 우편번호 (763:17115 · 퍼블만, 레이어 연동 시 교체) */
+function onBrandConsultZipSearch() {
+    // 우편번호 팝업/다음 도로명 API 등 연결
+}
+
+/** 창업 설명회 신청 탭 · 월별 지역 카드(Figma node 763:16835) */
+const seminarDummyAddress = "서울특별시 강남구 논현로 636, 이디야 빌딩 3층";
+const seminarMonthSlides = [
+    {
+        id: "seminar-m-202602",
+        label: "2026년 2월",
+        cards: [
+            {
+                id: "seminar-card-seoul-gb",
+                regionName: "서울 수도권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-busan-yeongnam",
+                regionName: "부산 영남권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-daegu-yeongnam",
+                regionName: "대구 영남권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-gwangju-honam",
+                regionName: "광주 호남권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                    { timeLabel: "2/10(화) 14:00", datetime: "2026-02-10T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+        ],
+    },
+    {
+        id: "seminar-m-202603",
+        label: "2026년 3월",
+        cards: [
+            {
+                id: "seminar-card-incheon-gb",
+                regionName: "인천 수도권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "3/5(목) 10:30", datetime: "2026-03-05T10:30", muted: false, badge: { label: "신청", variant: "apply" } },
+                    { timeLabel: "3/12(목) 15:00", datetime: "2026-03-12T15:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                ],
+            },
+            {
+                id: "seminar-card-daejeon-chung",
+                regionName: "대전 충청권",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "3/8(일) 11:00", datetime: "2026-03-08T11:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                    { timeLabel: "3/15(일) 11:00", datetime: "2026-03-15T11:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-gangwon",
+                regionName: "강원 춘천·원주",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "3/18(수) 14:00", datetime: "2026-03-18T14:00", muted: true, badge: { label: "신청 마감", variant: "closed" } },
+                    { timeLabel: "3/25(수) 14:00", datetime: "2026-03-25T14:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+            {
+                id: "seminar-card-jeju",
+                regionName: "제주 특별자치도",
+                address: seminarDummyAddress,
+                slots: [
+                    { timeLabel: "3/21(토) 10:00", datetime: "2026-03-21T10:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                    { timeLabel: "3/28(토) 10:00", datetime: "2026-03-28T10:00", muted: false, badge: { label: "신청", variant: "apply" } },
+                ],
+            },
+        ],
+    },
+];
+
+const seminarMonthSwiperInst = ref(null);
+const seminarMonthSlideIndex = ref(0);
+const seminarMonthSizerRef = ref(null);
+const seminarMonthSwiperPx = ref(201);
+
+function seminarMonthMeasureSwiperWidth() {
+    nextTick(() => {
+        const root = seminarMonthSizerRef.value;
+        if (!root) return;
+        const titles = root.querySelectorAll(".seminar_month_title");
+        let maxW = 0;
+        titles.forEach((node) => {
+            maxW = Math.max(maxW, Math.ceil(node.getBoundingClientRect().width));
+        });
+        if (maxW > 0) seminarMonthSwiperPx.value = maxW;
+        const s = seminarMonthSwiperInst.value;
+        s?.update?.();
+        if (s) seminarMonthSyncFromSwiper(s);
+    });
+}
+
+const seminarMonthAtStart = computed(() => seminarMonthSlideIndex.value <= 0);
+const seminarMonthAtEnd = computed(() => seminarMonthSlideIndex.value >= seminarMonthSlides.length - 1);
+
+const seminarActiveMonthCards = computed(() => seminarMonthSlides[seminarMonthSlideIndex.value]?.cards ?? []);
+
+const seminarAppliedSlotKey = ref(null);
+const seminarWrapRef = ref(null);
+const seminarCurrentMonthId = computed(() => seminarMonthSlides[seminarMonthSlideIndex.value]?.id ?? "");
+
+function seminarApplySlotKey(monthId, cardId, si) {
+    return `${monthId}::${cardId}::${si}`;
+}
+
+function isSeminarApplyPicked(monthId, cardId, si) {
+    if (!monthId) return false;
+    return seminarAppliedSlotKey.value === seminarApplySlotKey(monthId, cardId, si);
+}
+
+async function onSeminarApplyClick(monthId, cardId, si) {
+    if (!monthId) return;
+    seminarAppliedSlotKey.value = seminarApplySlotKey(monthId, cardId, si);
+    await nextTick();
+    seminarWrapRef.value?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function seminarMonthSyncFromSwiper(swiper) {
+    if (!swiper || typeof swiper.activeIndex !== "number") return;
+    seminarMonthSlideIndex.value = swiper.activeIndex;
+}
+
+function onSeminarMonthSwiperInit(swiper) {
+    seminarMonthSwiperInst.value = swiper;
+    seminarMonthSyncFromSwiper(swiper);
+    seminarMonthMeasureSwiperWidth();
+}
+
+function onSeminarMonthSlideChange(swiper) {
+    seminarMonthSyncFromSwiper(swiper);
+}
+
+function seminarMonthPrev() {
+    seminarMonthSwiperInst.value?.slidePrev?.();
+}
+
+function seminarMonthNext() {
+    seminarMonthSwiperInst.value?.slideNext?.();
+}
+
+watch(seminarMonthSlideIndex, (n, prev) => {
+    if (prev !== undefined && n !== prev) seminarAppliedSlotKey.value = null;
+});
+
+watch(
+    () => [activeD1.value, activeD2.value],
+    ([d1, d2]) => {
+        if (d1 !== 3 || d2 !== 1) seminarAppliedSlotKey.value = null;
+        else seminarMonthMeasureSwiperWidth();
+    }
+);
+
+const phoneOptions = [
+    { value: "010", label: "010" },
+    { value: "011", label: "011" },
+    { value: "016", label: "016" },
+    { value: "017", label: "017" },
+    { value: "018", label: "018" },
+    { value: "019", label: "019" },
+];
+
+const startupStoreOwnershipOptions = [
+    { value: "yes", label: "있음" },
+    { value: "no", label: "없음" },
+];
+
+const startupCvsExperienceOptions = [
+    { value: "none", label: "없음" },
+    { value: "gs25_staff", label: "GS25 근무자" },
+    { value: "gs25_owner", label: "GS25 경영주" },
+    { value: "other_staff", label: "타사 근무자" },
+    { value: "other_owner", label: "타사 경영주" },
+];
+
+const startupRegionSidoOptions = [
+    { value: "서울", label: "서울" },
+    { value: "경기", label: "경기" },
+    { value: "인천", label: "인천" },
+    { value: "충청", label: "충청" },
+    { value: "강원", label: "강원" },
+    { value: "제주", label: "제주" },
+    { value: "전라", label: "전라" },
+    { value: "경상", label: "경상" },
+];
+
+const startupRegionSigunguMap = {
+    서울: [
+        { value: "마포구", label: "마포구" },
+        { value: "강남구", label: "강남구" },
     ],
+    경기: [{ value: "수원시", label: "수원시" }],
 };
 
+const startupBirthYearOptions = Array.from({ length: 80 }, (_, i) => {
+    const year = new Date().getFullYear() - 18 - i;
+    return { value: String(year), label: String(year) };
+});
+
+const startupBirthMonthOptions = Array.from({ length: 12 }, (_, i) => {
+    const month = String(i + 1);
+    return { value: month, label: month };
+});
+
+const startupBirthDayOptions = Array.from({ length: 31 }, (_, i) => {
+    const day = String(i + 1);
+    return { value: day, label: day };
+});
+
+const consultTypeOptions = [
+    { value: "brand_transition", label: "브랜드 전환 상담" },
+    { value: "store_entry_proposal", label: "입점 제안" },
+];
+
+const startupConsultForm = reactive({
+    name: "",
+    phone1: "010",
+    phone2: "",
+    phone3: "",
+    consultType: "",
+    brandConsultZipCode: "",
+    brandConsultAddrBasic: "",
+    brandConsultAddrDetail1: "",
+    brandConsultAddrDetail2: "",
+    brandConsultAreaContract: "",
+    brandConsultAreaPrivate: "",
+    brandConsultStoreName: "",
+    brandConsultCommercialFeature: "",
+    brandConsultLandlordRelation: "",
+    storeOwnership: "",
+    investAmount: "",
+    openYear: "",
+    openMonth: "",
+    cvsExperience: [],
+    birthYear: "",
+    birthMonth: "",
+    birthDay: "",
+    inquiry: "",
+    regionSido: "",
+    regionSigungu: "",
+    consultDate: "",
+    consultTime: "",
+});
+
+const startupRegionSigunguOptions = computed(() => startupRegionSigunguMap[startupConsultForm.regionSido] || []);
+
+const startupConsultManager = {
+    name: "담당장 : 이은정(02-2006-3565)",
+    office: "GS25 서부사무소",
+    address: "서울특별시 마포구 월드컵북로 396",
+};
+
+/* ────────────── [quick_menu · script] scroll + fixed(bottom) · 푸터 상단 60px ────────────── */
 
 const QUICK_MENU_REVEAL_PX = 100;
 const QUICK_MENU_VIEWPORT_BOTTOM_PX = 60;
 const QUICK_MENU_FOOTER_GAP_PX = 60;
 const showQuickMenu = ref(false);
 const quickMenuRef = ref(null);
-let quickMenuGsapCtx = null;
 let quickMenuFooterEl = null;
-let quickMenuWrapEl = null;
 let quickMenuLastBottomPx = null;
-let quickMenuLastTopPx = null;
-let quickMenuFooterZone = false;
-let quickMenuResizeTimer = null;
+let quickMenuRefreshTimer = null;
 
-function updateQuickMenuBottom(quickMenu) {
-    if (!quickMenu) return;
-    if (!quickMenuFooterEl) {
-        quickMenuFooterEl = document.querySelector("footer");
-    }
-    if (!quickMenuWrapEl) {
-        quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
-    }
-    const footer = quickMenuFooterEl;
-    const wrap = quickMenuWrapEl;
-    if (!footer || !wrap) {
-        if (quickMenuLastBottomPx !== QUICK_MENU_VIEWPORT_BOTTOM_PX) {
-            gsap.set(quickMenu, { position: "fixed", top: "auto", bottom: QUICK_MENU_VIEWPORT_BOTTOM_PX });
-            quickMenuLastBottomPx = QUICK_MENU_VIEWPORT_BOTTOM_PX;
-            quickMenuLastTopPx = null;
-            quickMenuFooterZone = false;
-        }
-        return;
-    }
-    const rect = footer.getBoundingClientRect();
-    const vh = window.innerHeight;
-    const gap = QUICK_MENU_FOOTER_GAP_PX;
-    const scrollY = window.scrollY ?? document.documentElement.scrollTop;
-    const footerTopDoc = rect.top + scrollY;
-    const wrapTopDoc = wrap.getBoundingClientRect().top + scrollY;
-    const quickMenuHeight = quickMenu.offsetHeight;
-    const fixedBottomDoc = scrollY + vh - QUICK_MENU_VIEWPORT_BOTTOM_PX;
-    const footerLimitDoc = footerTopDoc - gap;
-    const shouldDockToFooter = fixedBottomDoc >= footerLimitDoc;
-
-    if (shouldDockToFooter) {
-        const absoluteTopPx = Math.round(footerTopDoc - gap - quickMenuHeight - wrapTopDoc);
-        if (!quickMenuFooterZone) {
-            gsap.set(quickMenu, { clearProps: "transform" });
-            quickMenuFooterZone = true;
-        }
-        if (quickMenuLastTopPx !== absoluteTopPx) {
-            gsap.set(quickMenu, { position: "absolute", top: absoluteTopPx, bottom: "auto" });
-            quickMenuLastTopPx = absoluteTopPx;
-            quickMenuLastBottomPx = null;
-        }
-        return;
-    }
-
-    if (quickMenuFooterZone) {
-        quickMenuFooterZone = false;
-    }
-    if (quickMenuLastBottomPx !== QUICK_MENU_VIEWPORT_BOTTOM_PX) {
-        gsap.set(quickMenu, { position: "fixed", top: "auto", bottom: QUICK_MENU_VIEWPORT_BOTTOM_PX });
-        quickMenuLastBottomPx = QUICK_MENU_VIEWPORT_BOTTOM_PX;
-        quickMenuLastTopPx = null;
-    }
+/** App.vue #wrap 직하위 사이트 푸터만 (ConsultTimePicker legend 등 폼 내 footer 제외) */
+function getQuickMenuSiteFooter() {
+    return document.querySelector("#wrap > footer");
 }
 
-function refreshQuickMenuScrollTrigger() {
-    if (quickMenuResizeTimer) {
-        window.clearTimeout(quickMenuResizeTimer);
-    }
-    quickMenuResizeTimer = window.setTimeout(() => {
-        ScrollTrigger.refresh();
-        if (quickMenuRef.value) {
-            quickMenuLastBottomPx = null;
-            quickMenuLastTopPx = null;
-            updateQuickMenuBottom(quickMenuRef.value);
-        }
-    }, 120);
+function setQuickMenuFixed(menu, bottomPx) {
+    menu.style.position = "fixed";
+    menu.style.top = "auto";
+    menu.style.left = "auto";
+    menu.style.right = "";
+    menu.style.bottom = `${bottomPx}px`;
+    menu.style.transform = "";
 }
 
-function initQuickMenuGsap() {
-    const quickMenu = quickMenuRef.value;
-    if (!quickMenu) return;
-    quickMenuFooterEl = document.querySelector("footer");
-    quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
-    quickMenuLastBottomPx = null;
-    quickMenuLastTopPx = null;
-    quickMenuFooterZone = false;
-
-    quickMenuGsapCtx = gsap.context(() => {
-        gsap.fromTo(
-            quickMenu,
-            { opacity: 0, pointerEvents: "none" },
-            {
-                opacity: 1,
-                pointerEvents: "auto",
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: "body",
-                    start: `${QUICK_MENU_REVEAL_PX}px top`,
-                    toggleActions: "play reverse play reverse",
-                    onUpdate: () => {
-                        const y = window.scrollY ?? document.documentElement.scrollTop;
-                        showQuickMenu.value = y >= QUICK_MENU_REVEAL_PX;
-                    }
-                }
-            }
-        );
-
-        ScrollTrigger.create({
-            trigger: "body",
-            start: "top top",
-            end: "max",
-            onUpdate: () => {
-                updateQuickMenuBottom(quickMenu);
-            }
-        });
-    });
-    ScrollTrigger.refresh();
-    const y0 = window.scrollY ?? document.documentElement.scrollTop;
-    showQuickMenu.value = y0 >= QUICK_MENU_REVEAL_PX;
-    updateQuickMenuBottom(quickMenu);
-}
-
-function manageQuickMenuAnimation() {
-    if (isMobileView.value) {
-        quickMenuGsapCtx?.revert();
-        quickMenuGsapCtx = null;
+function updateQuickMenuVisibility() {
+    if (mqMobile.matches) {
         showQuickMenu.value = false;
         return;
     }
-    if (!quickMenuGsapCtx) {
-        initQuickMenuGsap();
+    const y = window.scrollY ?? document.documentElement.scrollTop;
+    showQuickMenu.value = y >= QUICK_MENU_REVEAL_PX;
+}
+
+/** 평소 bottom 60px · 푸터가 뷰포트에 들어오면 푸터 상단 + 60px 간격으로 bottom 상향 (항상 fixed) */
+function updateQuickMenuBottom(quickMenu) {
+    if (!quickMenu || mqMobile.matches) return;
+    if (!quickMenuFooterEl) {
+        quickMenuFooterEl = getQuickMenuSiteFooter();
+    }
+    const vh = window.innerHeight;
+    const gap = QUICK_MENU_FOOTER_GAP_PX;
+    let bottomPx = QUICK_MENU_VIEWPORT_BOTTOM_PX;
+
+    if (quickMenuFooterEl) {
+        const footerTop = quickMenuFooterEl.getBoundingClientRect().top;
+        if (footerTop < vh) {
+            bottomPx = Math.round(vh - footerTop + gap);
+            const menuH = quickMenu.offsetHeight || 0;
+            const maxBottom = Math.max(QUICK_MENU_VIEWPORT_BOTTOM_PX, vh - menuH);
+            bottomPx = Math.min(bottomPx, maxBottom);
+        }
+    }
+
+    if (quickMenuLastBottomPx !== bottomPx) {
+        setQuickMenuFixed(quickMenu, bottomPx);
+        quickMenuLastBottomPx = bottomPx;
     }
 }
 
+function onQuickMenuScroll() {
+    updateQuickMenuVisibility();
+    if (quickMenuRef.value) {
+        updateQuickMenuBottom(quickMenuRef.value);
+    }
+}
+
+function refreshQuickMenu() {
+    if (quickMenuRefreshTimer) {
+        window.clearTimeout(quickMenuRefreshTimer);
+    }
+    quickMenuRefreshTimer = window.setTimeout(() => {
+        quickMenuFooterEl = null;
+        quickMenuLastBottomPx = null;
+        onQuickMenuScroll();
+    }, 120);
+}
+
+function resetQuickMenuState() {
+    quickMenuFooterEl = null;
+    quickMenuLastBottomPx = null;
+    showQuickMenu.value = false;
+}
+
+function initQuickMenu() {
+    if (mqMobile.matches) return;
+    const quickMenu = quickMenuRef.value;
+    if (!quickMenu) return;
+    quickMenuFooterEl = getQuickMenuSiteFooter();
+    quickMenuLastBottomPx = null;
+    onQuickMenuScroll();
+}
+
+function onMqMobileChangeWithQuickMenu(e) {
+    isMobile.value = e.matches;
+    if (e.matches) {
+        resetQuickMenuState();
+    } else {
+        nextTick(() => initQuickMenu());
+    }
+}
+
+/* ────────────── [quick_menu · script] 끝 ────────────── */
+
+watch([activeD1, activeD2], () => {
+    refreshQuickMenu();
+});
+
 function onWindowResize() {
+    syncMobileView();
     refreshProductHitSwipers();
-    refreshQuickMenuScrollTrigger();
+    seminarMonthMeasureSwiperWidth();
 }
 
 onMounted(() => {
     document.addEventListener("click", closeYouthPopover);
+    isMobile.value = mqMobile.matches;
+    isTablet.value = mqTablet.matches;
     syncMobileView();
+    mqMobile.addEventListener("change", onMqMobileChangeWithQuickMenu);
     mqMobile.addEventListener("change", syncMobileView);
-    mqTablet.addEventListener("change", syncMobileView);
+    mqTablet.addEventListener("change", onMqTabletChange);
     window.addEventListener("resize", onWindowResize);
+    window.addEventListener("resize", refreshQuickMenu);
+    window.addEventListener("scroll", onQuickMenuScroll, { passive: true });
+    nextTick(() => initQuickMenu());
 });
 onUnmounted(() => {
     document.removeEventListener("click", closeYouthPopover);
     cancelAnimationFrame(productHitRefreshFrame);
+    mqMobile.removeEventListener("change", onMqMobileChangeWithQuickMenu);
     mqMobile.removeEventListener("change", syncMobileView);
-    mqTablet.removeEventListener("change", syncMobileView);
+    mqTablet.removeEventListener("change", onMqTabletChange);
     window.removeEventListener("resize", onWindowResize);
-    if (quickMenuResizeTimer) {
-        window.clearTimeout(quickMenuResizeTimer);
-        quickMenuResizeTimer = null;
+    window.removeEventListener("resize", refreshQuickMenu);
+    window.removeEventListener("scroll", onQuickMenuScroll);
+    if (quickMenuRefreshTimer) {
+        window.clearTimeout(quickMenuRefreshTimer);
+        quickMenuRefreshTimer = null;
     }
-    quickMenuGsapCtx?.revert();
-    quickMenuGsapCtx = null;
-    quickMenuFooterEl = null;
-    quickMenuWrapEl = null;
-    quickMenuLastBottomPx = null;
-    quickMenuLastTopPx = null;
-    quickMenuFooterZone = false;
-    showQuickMenu.value = false;
+    resetQuickMenuState();
 });
-</script>
 
+</script>
 
 <style scoped>
 img { width: 100%; height: auto; display: block; object-fit: cover; }
@@ -3750,10 +3729,12 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_label) { width: auto; min-width: 120px; }
 .sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_data) { width: 33.3333%; }
 
-.quick_menu { width: clamp(104px, 6.8229vw, 131px); position: fixed; right: clamp(24px, 4.5313vw, 87px); bottom: 60px; z-index: 100; display: flex; flex-direction: column; gap: clamp(8px, 0.5208vw, 10px); pointer-events: none; opacity: 0; }
-.quick_menu li { width: 100%; position: relative; }
-.quick_menu li button { width: 100%; height: clamp(48px, 3.125vw, 60px); padding: clamp(12px, 0.9375vw, 18px) 0; font-size: clamp(1.3rem, 0.8333vw, 1.6rem); font-weight: 700; letter-spacing: -0.01em; background: none; background-color: #f2f2f4; border: 0; border-radius: 99px; text-align: center; display: flex; align-items: center; justify-content: center; gap: clamp(8px, 0.5208vw, 10px); }
-.quick_menu li button::before { width: clamp(16px, 1.0417vw, 20px); height: clamp(19px, 1.25vw, 24px); background-color: #161616; display: block; content: ''; }
+/* quick menu */
+.quick_menu{position:fixed; bottom:60px; right:clamp(24px, 4.5313vw, 87px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none; transition:opacity 0.35s ease;}
+.quick_menu.is_visible{opacity:1; pointer-events:auto;}
+.quick_menu li{position:relative; width:100%;}
+.quick_menu li button{width:100%; height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 0; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:700; letter-spacing:-0.01em; background:none; background-color:#F2F2F4; border:0; border-radius:99px; text-align:center; display:flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px);}
+.quick_menu li button::before{content:''; width:clamp(16px, 1.0417vw, 20px); height:clamp(19px, 1.25vw, 24px); background-color:#161616; display:block;}
 
 /* 추천 점포 찾기 */
 .sec_store :deep(.detail_card) { --color-brand-primary: #107AF2; }
@@ -4384,3 +4365,4 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .quick_menu { display: none; }
 }
 </style>
+
