@@ -56,7 +56,7 @@ const cards = [
                         <Buttons
                             tag="a"
                             :href="card.link"
-                            btn-class="btn_icon btn_xl after"
+                            btn-class="btn_icon_arrow btn_xl after"
                         >
                             바로가기
                         </Buttons>

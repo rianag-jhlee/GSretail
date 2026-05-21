@@ -3162,8 +3162,8 @@ const regionCounselStaff = {
 
 
 const QUICK_MENU_REVEAL_PX = 100;
-const QUICK_MENU_VIEWPORT_BOTTOM_PX = 60;
-const QUICK_MENU_FOOTER_GAP_PX = 60;
+const QUICK_MENU_VIEWPORT_BOTTOM_PX = 100;
+const QUICK_MENU_FOOTER_GAP_PX = 100;
 const showQuickMenu = ref(false);
 const quickMenuRef = ref(null);
 let quickMenuGsapCtx = null;
