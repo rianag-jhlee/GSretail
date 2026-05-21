@@ -8,7 +8,7 @@
         </header>
 
         <!-- BODY -->
-        <div class="sec_body">
+        <div class="cont_inner">
             <!-- Depth 1: 페이지 탭 (type_01: 하단 보더 언더라인) -->
             <Tabs :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
 
@@ -16,7 +16,7 @@
             <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
 
             <!-- 가맹 조건 안내 (D2=0) -->
-            <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 0">
+            <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
                 <!-- Depth 3: 타입 탭 -->
                 <div class="tab_d3_wrap">
                     <div class="inner">
@@ -311,10 +311,10 @@
                     </div>
                 </div>
 
-            </div><!-- /tab_page D2=0 -->
+            </div><!-- /panel D2=0 -->
 
             <!-- 가맹/창업 절차 -->
-            <div class="tab_page sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
+            <div class="panel sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
                 <div class="link_wrap">
                     <Buttons tag="a" href="#none" btn-class="btn_icon btn_xl">설명회신청 바로가기</Buttons>
@@ -322,7 +322,7 @@
             </div>
  
             <!-- 창업 전 필수 확인사항 -->
-            <div class="tab_page" v-show="activeD1 === 0 && activeD2 === 2">
+            <div class="panel" v-show="activeD1 === 0 && activeD2 === 2">
                 <section class="sec_precaution">
                     <h3 class="precaution_title mo_only">가맹 해약<br class="p_br">수수료</h3>
                     <div class="sec_precaution_inner">
@@ -349,7 +349,7 @@
             </div>
 
             <!-- 추천 점포 찾기 (activeD1 === 2) -->
-            <section class="sec_store tab_page" v-show="activeD1 === 2">
+            <section class="sec_store panel" v-show="activeD1 === 2">
                 <p class="tab_intro">철저한 상권 조사를 바탕으로 가맹/창업을 위한 최적의 점포를 소개합니다.</p>
                 <div class="store_search">
                     <!-- 지역 -->
@@ -612,7 +612,7 @@
             </section>
 
             <!-- 사업설명회 (activeD1 === 1) -->
-            <section class="sec_seminar tab_page" v-show="activeD1 === 1">
+            <section class="sec_seminar panel" v-show="activeD1 === 1">
                 <div class="seminar_head">
                     <p>GS THE FRESH(GS수퍼마켓) 가맹 사업에 대한<br class="p_br">자세하고 다양한 정보를 얻을 수 있는 사업설명회에 참여해 보세요.</p>
                     <Buttons btn-class="btn_big fill primary btn_icon after" data-popid="modal_gsrst_seminar" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">사업 설명회 신청</Buttons>
@@ -647,7 +647,7 @@
 
             
             <!-- 경영주 지원제도 (activeD1 === 3) -->
-            <section class="sec_owner_support tab_page" v-show="activeD1 === 3">
+            <section class="sec_owner_support panel" v-show="activeD1 === 3">
                 <p class="tab_intro">GS THE FRESH는 <br class="m_br"/><span>경영주와의 공동의 발전</span>을 위해 <br />
                     다양한 상생 제도를 운영하고 있습니다.</p>
                 <PanelHeader
@@ -660,7 +660,7 @@
                 
                 
             <!-- 상담 및 신청 (activeD1 === 4) -->
-            <section class="sec_consult tab_page"  v-show="activeD1 === 4">
+            <section class="sec_consult panel"  v-show="activeD1 === 4">
                 <PanelHeader
                     :hero=null
                     title="컨설턴트와 1:1 상담"
@@ -698,15 +698,18 @@
                 </div>
             </section>
         </div>
+        <!-- [quick_menu · 템플릿] .wrap_gsrst 직하위(cont_inner 밖)에 둠. 푸터는 App.vue router-view 밖이므로 도킹 계산 시 wrap 기준 사용 -->
         <ul
             ref="quickMenuRef"
             class="quick_menu"
+            :class="{ is_visible: showQuickMenu }"
             :aria-hidden="!showQuickMenu"
         >
             <li><button type="button">창업안내</button></li>
             <li><button type="button">입점상담</button></li>
             <li><button type="button">고객센터</button></li>
         </ul>
+        <!-- //[quick_menu · 템플릿] -->
     </div>
 
     <!-- 사업설명회 신청 모달 -->
@@ -724,9 +727,7 @@
 </template>
 
 <script setup> 
-import { ref, computed, onMounted, onUnmounted, nextTick } from "vue";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import Pagination from "@/components/Pagination.vue";
 import Steps from "@/components/Steps.vue";
@@ -917,29 +918,52 @@ const isMobile = ref(false);
 const isTablet = ref(false);
 const mqMobile = window.matchMedia("(max-width: 768px)");
 const mqTablet = window.matchMedia("(max-width: 1024px)");
-function onMqMobileChange(e) { isMobile.value = e.matches; }
 function onMqTabletChange(e) { isTablet.value = e.matches; }
 
-/** 퀵메뉴: 등장 scroll(px), 뷰포트 하단·푸터 사이 60px 유지(푸터에 붙이면 그 이상은 따라가지 않음) */
+/* ────────────── [quick_menu · script] GSAP 없이 scroll + fixed/absolute 도킹 ────────────── */
+
 const QUICK_MENU_REVEAL_PX = 100;
 const QUICK_MENU_VIEWPORT_BOTTOM_PX = 60;
 const QUICK_MENU_FOOTER_GAP_PX = 60;
 const showQuickMenu = ref(false);
 const quickMenuRef = ref(null);
-let quickMenuGsapCtx = null;
 let quickMenuFooterEl = null;
 let quickMenuWrapEl = null;
 let quickMenuLastBottomPx = null;
 let quickMenuLastTopPx = null;
 let quickMenuFooterZone = false;
-let quickMenuResizeTimer = null;
+let quickMenuRefreshTimer = null;
 
-/**
- * 뷰포트 기준 bottom 60 → 푸터가 닿기 시작하면 푸터 상단에서 60px 위로 고정.
- * 위치는 bottom만 사용(translate 등 transform은 쓰지 않음, 등장 tweens의 y와 충돌 방지).
- */
+function setQuickMenuFixed(menu, bottomPx) {
+    menu.style.position = "fixed";
+    menu.style.top = "auto";
+    menu.style.left = "auto";
+    menu.style.right = "";
+    menu.style.bottom = `${bottomPx}px`;
+    menu.style.transform = "";
+}
+
+function setQuickMenuAbsolute(menu, topPx) {
+    menu.style.position = "absolute";
+    menu.style.top = `${topPx}px`;
+    menu.style.bottom = "auto";
+    menu.style.left = "auto";
+    menu.style.right = "";
+    menu.style.transform = "";
+}
+
+function updateQuickMenuVisibility() {
+    if (mqMobile.matches) {
+        showQuickMenu.value = false;
+        return;
+    }
+    const y = window.scrollY ?? document.documentElement.scrollTop;
+    showQuickMenu.value = y >= QUICK_MENU_REVEAL_PX;
+}
+
+/** 평소 fixed bottom 60 · 푸터 접근 시 wrap 기준 absolute top (GSAP set과 동일 계산) */
 function updateQuickMenuBottom(quickMenu) {
-    if (!quickMenu) return;
+    if (!quickMenu || mqMobile.matches) return;
     if (!quickMenuFooterEl) {
         quickMenuFooterEl = document.querySelector("footer");
     }
@@ -950,7 +974,7 @@ function updateQuickMenuBottom(quickMenu) {
     const wrap = quickMenuWrapEl;
     if (!footer || !wrap) {
         if (quickMenuLastBottomPx !== QUICK_MENU_VIEWPORT_BOTTOM_PX) {
-            gsap.set(quickMenu, { position: "fixed", top: "auto", bottom: QUICK_MENU_VIEWPORT_BOTTOM_PX });
+            setQuickMenuFixed(quickMenu, QUICK_MENU_VIEWPORT_BOTTOM_PX);
             quickMenuLastBottomPx = QUICK_MENU_VIEWPORT_BOTTOM_PX;
             quickMenuLastTopPx = null;
             quickMenuFooterZone = false;
@@ -970,117 +994,96 @@ function updateQuickMenuBottom(quickMenu) {
 
     if (shouldDockToFooter) {
         const absoluteTopPx = Math.round(footerTopDoc - gap - quickMenuHeight - wrapTopDoc);
-        if (!quickMenuFooterZone) {
-            gsap.set(quickMenu, { clearProps: "transform" });
-            quickMenuFooterZone = true;
-        }
+        quickMenuFooterZone = true;
         if (quickMenuLastTopPx !== absoluteTopPx) {
-            gsap.set(quickMenu, { position: "absolute", top: absoluteTopPx, bottom: "auto" });
+            setQuickMenuAbsolute(quickMenu, absoluteTopPx);
             quickMenuLastTopPx = absoluteTopPx;
             quickMenuLastBottomPx = null;
         }
         return;
     }
 
-    if (quickMenuFooterZone) {
-        quickMenuFooterZone = false;
-    }
+    quickMenuFooterZone = false;
     if (quickMenuLastBottomPx !== QUICK_MENU_VIEWPORT_BOTTOM_PX) {
-        gsap.set(quickMenu, { position: "fixed", top: "auto", bottom: QUICK_MENU_VIEWPORT_BOTTOM_PX });
+        setQuickMenuFixed(quickMenu, QUICK_MENU_VIEWPORT_BOTTOM_PX);
         quickMenuLastBottomPx = QUICK_MENU_VIEWPORT_BOTTOM_PX;
         quickMenuLastTopPx = null;
     }
 }
 
-function refreshQuickMenuScrollTrigger() {
-    if (quickMenuResizeTimer) {
-        window.clearTimeout(quickMenuResizeTimer);
+function onQuickMenuScroll() {
+    updateQuickMenuVisibility();
+    if (quickMenuRef.value) {
+        updateQuickMenuBottom(quickMenuRef.value);
     }
-    quickMenuResizeTimer = window.setTimeout(() => {
-        ScrollTrigger.refresh();
-        if (quickMenuRef.value) {
-            quickMenuLastBottomPx = null;
-            quickMenuLastTopPx = null;
-            updateQuickMenuBottom(quickMenuRef.value);
-        }
+}
+
+function refreshQuickMenu() {
+    if (quickMenuRefreshTimer) {
+        window.clearTimeout(quickMenuRefreshTimer);
+    }
+    quickMenuRefreshTimer = window.setTimeout(() => {
+        quickMenuLastBottomPx = null;
+        quickMenuLastTopPx = null;
+        onQuickMenuScroll();
     }, 120);
 }
 
-function initQuickMenuGsap() {
-    if (mqMobile.matches) return;
-    const quickMenu = quickMenuRef.value;
-    if (!quickMenu) return;
-    quickMenuFooterEl = document.querySelector("footer");
-    quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
-    quickMenuLastBottomPx = null;
-    quickMenuLastTopPx = null;
-    quickMenuFooterZone = false;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    quickMenuGsapCtx = gsap.context(() => {
-        gsap.fromTo(
-            quickMenu,
-            { opacity: 0, pointerEvents: "none" },
-            {
-                opacity: 1,
-                pointerEvents: "auto",
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: "body",
-                    start: `${QUICK_MENU_REVEAL_PX}px top`,
-                    toggleActions: "play reverse play reverse",
-                    onUpdate: () => {
-                        const y = window.scrollY ?? document.documentElement.scrollTop;
-                        showQuickMenu.value = y >= QUICK_MENU_REVEAL_PX;
-                    }
-                }
-            }
-        );
-
-        ScrollTrigger.create({
-            trigger: "body",
-            start: "top top",
-            end: "max",
-            onUpdate: () => {
-                updateQuickMenuBottom(quickMenu);
-            }
-        });
-    });
-    ScrollTrigger.refresh();
-    const y0 = window.scrollY ?? document.documentElement.scrollTop;
-    showQuickMenu.value = y0 >= QUICK_MENU_REVEAL_PX;
-    updateQuickMenuBottom(quickMenu);
-}
-
-onMounted(() => {
-    document.addEventListener("click", closeYouthPopover);
-    isMobile.value = mqMobile.matches;
-    isTablet.value = mqTablet.matches;
-    mqMobile.addEventListener("change", onMqMobileChange);
-    mqTablet.addEventListener("change", onMqTabletChange);
-    window.addEventListener("resize", refreshQuickMenuScrollTrigger);
-    nextTick(() => {
-        initQuickMenuGsap();
-    });
-});
-onUnmounted(() => {
-    document.removeEventListener("click", closeYouthPopover);
-    mqMobile.removeEventListener("change", onMqMobileChange);
-    mqTablet.removeEventListener("change", onMqTabletChange);
-    window.removeEventListener("resize", refreshQuickMenuScrollTrigger);
-    if (quickMenuResizeTimer) {
-        window.clearTimeout(quickMenuResizeTimer);
-        quickMenuResizeTimer = null;
-    }
-    quickMenuGsapCtx?.revert();
-    quickMenuGsapCtx = null;
+function resetQuickMenuState() {
     quickMenuFooterEl = null;
     quickMenuWrapEl = null;
     quickMenuLastBottomPx = null;
     quickMenuLastTopPx = null;
     quickMenuFooterZone = false;
     showQuickMenu.value = false;
+}
+
+function initQuickMenu() {
+    if (mqMobile.matches) return;
+    const quickMenu = quickMenuRef.value;
+    if (!quickMenu) return;
+    resetQuickMenuState();
+    quickMenuFooterEl = document.querySelector("footer");
+    quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
+    onQuickMenuScroll();
+}
+
+function onMqMobileChangeWithQuickMenu(e) {
+    isMobile.value = e.matches;
+    if (e.matches) {
+        resetQuickMenuState();
+    } else {
+        nextTick(() => initQuickMenu());
+    }
+}
+
+/* ────────────── [quick_menu · script] 끝 ────────────── */
+
+watch([activeD1, activeD2], () => {
+    refreshQuickMenu();
+});
+
+onMounted(() => {
+    document.addEventListener("click", closeYouthPopover);
+    isMobile.value = mqMobile.matches;
+    isTablet.value = mqTablet.matches;
+    mqMobile.addEventListener("change", onMqMobileChangeWithQuickMenu);
+    mqTablet.addEventListener("change", onMqTabletChange);
+    window.addEventListener("resize", refreshQuickMenu);
+    window.addEventListener("scroll", onQuickMenuScroll, { passive: true });
+    nextTick(() => initQuickMenu());
+});
+onUnmounted(() => {
+    document.removeEventListener("click", closeYouthPopover);
+    mqMobile.removeEventListener("change", onMqMobileChangeWithQuickMenu);
+    mqTablet.removeEventListener("change", onMqTabletChange);
+    window.removeEventListener("resize", refreshQuickMenu);
+    window.removeEventListener("scroll", onQuickMenuScroll);
+    if (quickMenuRefreshTimer) {
+        window.clearTimeout(quickMenuRefreshTimer);
+        quickMenuRefreshTimer = null;
+    }
+    resetQuickMenuState();
 });
 
 /* ── 카드 그리드 뷰 ── */
@@ -1117,7 +1120,7 @@ function toggleCard(id) {
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
 
 /* BODY — PC: 좌우 20px / 모바일: 가로 패딩은 tab_page·Tabs 등에서 (아래 모바일 미디어쿼리 참고) */
-.sec_body { max-width: 1460px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+.cont_inner { max-width: 1460px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
 /* .sec_body > :deep(.tab_wrap) { padding-left: 20px; padding-right: 20px; box-sizing: border-box; } */
 
 /* depth3 탭 */
@@ -1128,7 +1131,7 @@ function toggleCard(id) {
 .tab_type > button.active { background-color: var(--color-brand-primary); color: #fff; border: 0; }
 
 /* 탭 페이지 공통 */
-.tab_page { padding: 64px 0 200px; }
+.panel { padding: 64px 0 0; }
 .tab_content_wrap { padding-top: 40px; }
 
 /* type_info_bar */
@@ -1227,8 +1230,8 @@ function toggleCard(id) {
     .sec_body { padding: 24px 0 40px; }
     .header_title { font-size: 3.6rem; }
     /* ul::after 20px spacer, tab_wrap::after 32px 그라데이션은 common.css에서 전역 처리 */
-    .tab_page { padding: 60px 20px 80px; }
-    .sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
+    .panel { padding: 60px 20px 80px; }
+    .sec_owner_support.panel { padding-left: 0; padding-right: 0; }
     .tab_content_wrap { padding-top: 40px; }
     .tab_type > button { height: 48px; font-size: 1.4rem; }
     .type_info_bar { height: auto; min-height: 48px; padding: 20px 24px; font-size: 1.4rem; }
@@ -1427,7 +1430,7 @@ function toggleCard(id) {
 }
 
 /* 경영주 지원제도 — 가로 패딩 없음(Swiper), 텍스트·패널만 20px */
-.sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
+.sec_owner_support.panel { padding-left: 0; padding-right: 0; }
 .sec_owner_support .tab_intro { margin-bottom: 24px; padding-left: 20px; padding-right: 20px; box-sizing: border-box; }
 .sec_owner_support :deep(.brand_panel_title) { padding: 0 20px 64px; box-sizing: border-box; }
 
@@ -1468,7 +1471,8 @@ function toggleCard(id) {
 .sec_consult :deep(.brand_panel_title h2::after){content:''; display:block; width:40px; height:40px; background-color:#D7D7DF; }
 
 /* quick menu */
-.quick_menu{position:fixed; bottom:60px; right:clamp(24px, 4.5313vw, 87px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none;}
+.quick_menu{position:fixed; bottom:60px; right:clamp(24px, 4.5313vw, 87px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none; transition:opacity 0.35s ease;}
+.quick_menu.is_visible{opacity:1; pointer-events:auto;}
 .quick_menu li{position:relative; width:100%;}
 .quick_menu li button{width:100%; height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 0; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:700; letter-spacing:-0.01em; background:none; background-color:#F2F2F4; border:0; border-radius:99px; text-align:center; display:flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px);}
 .quick_menu li button::before{content:''; width:clamp(16px, 1.0417vw, 20px); height:clamp(19px, 1.25vw, 24px); background-color:#161616; display:block;}
