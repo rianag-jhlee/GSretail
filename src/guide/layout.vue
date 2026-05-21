@@ -29,6 +29,52 @@ export default {
         return { lang, setLang };
     }
 };
+&lt;/script&gt;
+
+
+================ type : setup===============
+&lt;template&gt;
+    &lt;div v-for="item in t.sample"&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+    import { ref, computed } from "vue";
+
+    const props = defineProps({
+        lang: {
+            type: String,
+            default: "ko",
+        },
+    });
+
+    const langData = {
+        ko: {
+            sample: [
+                { title: "개인정보처리방침", path: "#none" },
+                { title: "채용안내", path: "https://gsretail.recruiter.co.kr/career/home", blank: true },
+                { title: "입점상담", path: "gsrse01" },
+                { title: "멤버십/홈페이지문의", path: "#none" },
+                { title: "입지제안", path: "gsrbr0204", pop:true, popId:"gsrbr0204", popType:'lg' },
+                { title: "임대상가안내", path: "#none" },
+                { title: "정도경영제보", path: "#none" },
+                { title: "고객센터", path: "gsrcu01" },
+                { title: "GS SHOP 시청자 관련", path: "#none" }
+            ]
+        },
+        en: {
+            sample: [
+                { title: "Privacy Policy", path: "#none" },
+                { title: "Store Franchise", path: "#none" },
+                { title: "Partnership", path: "#none" },
+                { title: "Customer Center", path: "#none" }
+            ]
+        }
+    };
+
+    // =====================
+    // computed
+    // =====================
+    const t = computed(() =&gt; langData[props.lang] || langData.ko);
 &lt;/script&gt;</code></pre>
         </section>
 
