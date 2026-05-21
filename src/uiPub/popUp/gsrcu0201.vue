@@ -304,7 +304,7 @@ section {padding-bottom:80px;}
 .section_title_area .p_desc { font-size:16px; font-weight: 400; color: #161616; line-height: 1.5; word-break: keep-all; }
 .noti_non_member {padding:24px; background:#F9F2EA; border-radius:12px;}
 .noti_non_member span {margin-bottom:12px; padding-left:34px; font-size:18px; position:relative; display:block;}
-.noti_non_member span::before {content:''; width:24px; height:24px; background:red; display:inline-block; position:absolute; top:0; left:0px;}
+.noti_non_member span::before {content:''; width:24px; height:24px; background: url(http://localhost:8080/img/icon_set_24.5b5c044c.png) -160px -56px no-repeat; display:inline-block; position:absolute; top:0; left:0px;}
 .noti_non_member ul {padding-left:34px;}
 .noti_non_member ul li {font-size:16px;}
 .listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}

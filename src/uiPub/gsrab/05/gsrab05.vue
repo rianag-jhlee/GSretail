@@ -1,64 +1,65 @@
 <template>
     <div class="main-container">
         <header class="title_wrap ac">
-            <h2 class="page_title">{{ pageData.pageTitle }}</h2>
+            <h2 class="page_title">{{ t.pageTitle }}</h2>
         </header>
         <main class="content">
             <section class="sec_location">
                 <header class="header">
-                    <h3>{{ pageData.location.title }}</h3>
+                    <h3>{{ t.location.title }}</h3>
                 </header>
                 <article class="location_panel">
                     <div class="location_info">
                         <div>
-                            <h4>{{ pageData.location.addressLabel }}</h4>
-                            <p>{{ pageData.location.address }}</p>
+                            <h4>{{ t.location.addressLabel }}</h4>
+                            <p>{{ t.location.address }}</p>
                         </div>
                         <div>
-                            <h4>{{ pageData.location.subwayLabel }}</h4>
-                            <p>{{ pageData.location.subwayDesc }}</p>
+                            <h4>{{ t.location.subwayLabel }}</h4>
+                            <p>{{ t.location.subwayDesc }}</p>
                         </div>
                         <div>
-                            <h4>{{ pageData.location.busLabel }}</h4>
-                            <p><span class="bus_tag_reg">{{ pageData.location.busMainLabel }}</span> {{ pageData.location.busMainRoutes }}</p>
-                            <p><span class="bus_tag_reg">{{ pageData.location.busExpressLabel }}</span> {{ pageData.location.busExpressRoutes }}</p>
+                            <h4>{{ t.location.busLabel }}</h4>
+                            <p><span class="bus_tag_reg">{{ t.location.busMainLabel }}</span> {{ t.location.busMainRoutes }}</p>
+                            <p><span class="bus_tag_reg">{{ t.location.busExpressLabel }}</span> {{ t.location.busExpressRoutes }}</p>
                         </div>
                     </div>
-                    <div class="map_area" role="map" :aria-label="pageData.location.mapAriaLabel">
+                    <div class="map_area" role="map" :aria-label="t.location.mapAriaLabel">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.2584135599163!2d127.03451977629449!3d37.50182292783558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3fee398641d%3A0x237e08643e54191d!2zR1Mg7YOA7JuM!5e0!3m2!1sko!2skr!4v1779151657505!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </article>
             </section>
+
             <section class="sec_location">
                 <header class="header">
-                    <h3>{{ pageData.location2.title }}</h3>
+                    <h3>{{ t.location2.title }}</h3>
                 </header>
                 <article class="location_panel">
                     <div class="location_info">
                         <div>
-                            <h4>{{ pageData.location2.addressLabel }}</h4>
-                            <p><span>{{ pageData.location2.addressLine1Label }}</span> {{ pageData.location2.addressLine1 }}</p>
-                            <p><span>{{ pageData.location2.addressLine2Label }}</span> {{ pageData.location2.addressLine2 }}</p>
+                            <h4>{{ t.location2.addressLabel }}</h4>
+                            <p><span>{{ t.location2.addressLine1Label }}</span> {{ t.location2.addressLine1 }}</p>
+                            <p><span>{{ t.location2.addressLine2Label }}</span> {{ t.location2.addressLine2 }}</p>
                         </div>
                         <div>
-                            <h4>{{ pageData.location2.subwayLabel }}</h4>
-                            <p>{{ pageData.location2.subwayLine1 }}</p>
-                            <p>{{ pageData.location2.subwayLine2 }}</p>
+                            <h4>{{ t.location2.subwayLabel }}</h4>
+                            <p>{{ t.location2.subwayLine1 }}</p>
+                            <p>{{ t.location2.subwayLine2 }}</p>
                         </div>
                         <div>
-                            <h4>{{ pageData.location2.busLabel }}</h4>
+                            <h4>{{ t.location2.busLabel }}</h4>
                             <ul class="route_list">
-                                <li v-for="(item, idx) in pageData.location2.busItems" :key="'bus-' + idx">
+                                <li v-for="(item, idx) in t.location2.busItems" :key="'bus-' + idx">
                                     <strong class="txt_blue">{{ item.stop }}</strong>
-                                    <p><span>{{ pageData.location2.busGanLabel }}</span> {{ pageData.location2.busGanNums }}</p>
-                                    <p><span>{{ pageData.location2.busExpressLabel }}</span> {{ item.express }}</p>
+                                    <p><span>{{ t.location2.busGanLabel }}</span> {{ t.location2.busGanNums }}</p>
+                                    <p><span>{{ t.location2.busExpressLabel }}</span> {{ item.express }}</p>
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h4>{{ pageData.location2.carLabel }}</h4>
+                            <h4>{{ t.location2.carLabel }}</h4>
                             <ul class="route_list">
-                                <li v-for="(item, idx) in pageData.location2.carItems" :key="'car-' + idx">
+                                <li v-for="(item, idx) in t.location2.carItems" :key="'car-' + idx">
                                     <strong class="txt_blue">{{ item.route }}</strong>
                                     <p>{{ item.desc }}</p>
                                 </li>
@@ -66,10 +67,10 @@
                         </div>
                     </div>
                     <div class="map_stack">
-                        <div class="map_area" role="map" :aria-label="pageData.location2.mapAriaLabel1">
+                        <div class="map_area" role="map" :aria-label="t.location2.mapAriaLabel1">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101262.58408041636!2d126.73666359726565!3d37.52075259999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e8cae0efbf5%3A0xa6a88cc52747434a!2zR1PqsJXshJztg4Dsm4w!5e0!3m2!1sko!2skr!4v1779151880978!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
-                        <div class="map_area" role="map" :aria-label="pageData.location2.mapAriaLabel2">
+                        <div class="map_area" role="map" :aria-label="t.location2.mapAriaLabel2">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.4355804119828!2d126.88768577629516!3d37.52122822672419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9ef339ed8173%3A0x58fcaf41d3848615!2zR1PqsJXshJxO7YOA7JuM!5e0!3m2!1sko!2skr!4v1779151949828!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
@@ -80,49 +81,65 @@
 </template>
 
 <script setup>
-const pageData = {
-    pageTitle: "위치",
-    location: {
-        title: "GS타워",
-        addressLabel: "주소",
-        address: "서울시 강남구 논현로 508 (역삼동 679번지 GS타워)",
-        subwayLabel: "지하철 이용시",
-        subwayDesc: "2호선 역삼역 7번 출구 (GS타워 지하 연결통로 이용)",
-        busLabel: "버스 이용시",
-        busMainLabel: "간선/순환",
-        busMainRoutes: "146, 147, 341, 360, 740, 41",
-        busExpressLabel: "직행/급행",
-        busExpressRoutes: "1100, 1700, 2000, 7007, 8001",
-        mapAriaLabel: "GS타워 위치 지도 영역(퍼블용 이미지)",
+import { ref, computed } from "vue";
+
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
     },
-    location2: {
-        title: "GS강서타워/GS강서N타워",
-        addressLabel: "주소",
-        addressLine1Label: "강서타워",
-        addressLine2Label: "강서N타워",
-        addressLine1: "서울특별시 영등포구 선유로 75 GS강서타워",
-        addressLine2: "서울특별시 영등포구 선유로 82 GS강서N타워",
-        subwayLabel: "지하철 이용시",
-        subwayLine1: "2호선 문래역 3번 출구 (출구방향 도보 7분)",
-        subwayLine2: "5호선 양평역 2번 출구 (출구방향 도보 15분)",
-        busLabel: "버스 이용시",
-        busGanLabel: "간선",
-        busGanNums: "640, 650",
-        busExpressLabel: "직행/급행",
-        busItems: [
-            { stop: "영등포기계상가 정류장(영등포역 방향 운행)", express: "6211, 6628, 6629, 6625, 6640, 6630, 5012" },
-            { stop: "영등포기계상가(오목교역 방향 운행)", express: "5616, 6211, 6628, 6629, 6625, 6640, 6630, 5012" },
-            { stop: "양남동로타리", express: "5616, 6211, 6628, 6629, 6640, 6630, 5012" },
-        ],
-        carLabel: "자동차 운전시",
-        carItems: [
-            { route: "올림픽대로", desc: "양화대교 남단에서 문래동 사거리 방향으로 직진, 약 10분 소요" },
-            { route: "강변북로", desc: "영등포 시장에서 오목교 방향으로 직진, 양남사거리에서 좌회전 후 50m 직진" },
-        ],
-        mapAriaLabel1: "GS강서타워 위치 지도 영역(퍼블용 이미지)",
-        mapAriaLabel2: "GS강서N타워 위치 지도 영역(퍼블용 이미지)",
+});
+
+const langData = {
+    ko: {
+        pageTitle: "위치",
+        location: {
+            title: "GS타워",
+            addressLabel: "주소",
+            address: "서울시 강남구 논현로 508 (역삼동 679번지 GS타워)",
+            subwayLabel: "지하철 이용시",
+            subwayDesc: "2호선 역삼역 7번 출구 (GS타워 지하 연결통로 이용)",
+            busLabel: "버스 이용시",
+            busMainLabel: "간선/순환",
+            busMainRoutes: "146, 147, 341, 360, 740, 41",
+            busExpressLabel: "직행/급행",
+            busExpressRoutes: "1100, 1700, 2000, 7007, 8001",
+            mapAriaLabel: "GS타워 위치 지도 영역(퍼블용 이미지)",
+        },
+        location2: {
+            title: "GS강서타워/GS강서N타워",
+            addressLabel: "주소",
+            addressLine1Label: "강서타워",
+            addressLine2Label: "강서N타워",
+            addressLine1: "서울특별시 영등포구 선유로 75 GS강서타워",
+            addressLine2: "서울특별시 영등포구 선유로 82 GS강서N타워",
+            subwayLabel: "지하철 이용시",
+            subwayLine1: "2호선 문래역 3번 출구 (출구방향 도보 7분)",
+            subwayLine2: "5호선 양평역 2번 출구 (출구방향 도보 15분)",
+            busLabel: "버스 이용시",
+            busGanLabel: "간선",
+            busGanNums: "640, 650",
+            busExpressLabel: "직행/급행",
+            busItems: [
+                { stop: "영등포기계상가 정류장(영등포역 방향 운행)", express: "6211, 6628, 6629, 6625, 6640, 6630, 5012" },
+                { stop: "영등포기계상가(오목교역 방향 운행)", express: "5616, 6211, 6628, 6629, 6625, 6640, 6630, 5012" },
+                { stop: "양남동로타리", express: "5616, 6211, 6628, 6629, 6640, 6630, 5012" },
+            ],
+            carLabel: "자동차 운전시",
+            carItems: [
+                { route: "올림픽대로", desc: "양화대교 남단에서 문래동 사거리 방향으로 직진, 약 10분 소요" },
+                { route: "강변북로", desc: "영등포 시장에서 오목교 방향으로 직진, 양남사거리에서 좌회전 후 50m 직진" },
+            ],
+            mapAriaLabel1: "GS강서타워 위치 지도 영역(퍼블용 이미지)",
+            mapAriaLabel2: "GS강서N타워 위치 지도 영역(퍼블용 이미지)",
+        },
     },
+    en: {
+
+    }
 };
+
+const t = computed(() => langData[props.lang] || langData.ko);
 </script>
 
 <style scoped>
@@ -144,7 +161,6 @@ const pageData = {
     .sec_location .location_info .route_list > li > p + p{ margin-top: 6px; }
     .sec_location .location_info > div > p > span { margin-right: 8px; font-weight: 700; display: block; flex: 0 0 auto; letter-spacing: -0.02em; }
     .sec_location .location_info .route_list { display: flex; flex-direction: column; gap: 16px; }
-
     .sec_location .location_info .route_list > li > p { letter-spacing: -0.02em; }
     .sec_location .location_info .route_list > li > p > span { margin-right: 8px; font-weight: 700; display: block; flex: 0 0 auto; }
     .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { flex: 0 1 700px; min-width: 0; align-self: flex-start; }
@@ -152,6 +168,7 @@ const pageData = {
     .sec_location .map_area iframe { width: 100%;}
     .map_stack { width: 100%; max-width: 700px; min-width: 0; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; }
     .sec_location .location_info strong.txt_blue { margin-bottom: 8px; color: #107af2; font-weight: 700; font-size: 1.8rem; line-height: 1.24; letter-spacing: 0; display: block; }
+
     @media screen and (max-width: 1024px) {
         .sec_location > .location_panel { flex-wrap: wrap; padding: 40px 0 32px; }
         .sec_location .location_info { flex: 1 1 100%; max-width: none; min-width: 0; order: 2; }

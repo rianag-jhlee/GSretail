@@ -6,8 +6,8 @@
         <div class="content">
             <section class="sec_vision">
                 <header class="header center">
-                    <h3>Our Vision</h3>
-                    <p>고객의 모든 경험을 연결하고, 데이터로 공감하며, 상품과 서비스로 신뢰받는 플랫폼</p>
+                    <h3>{{ t.SubTitle }}</h3>
+                    <p>{{t.VisionSub}}</p>
                 </header>
                 <div class="img_wrap">
                     <picture>
@@ -56,12 +56,21 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
+
+// 이미지 자원 임포트
 import imgVision from "@/assets/images/dummy/gsrab02_02.png";
 import imgVisionMo from "@/assets/images/dummy/mo/gsrab02_02_mo.png";
 import imgValue1 from "@/assets/images/dummy/gsrab02_03.png";
 import imgValue2 from "@/assets/images/dummy/gsrab02_04.png";
 import imgValue3 from "@/assets/images/dummy/gsrab02_05.png";
 import imgValue4 from "@/assets/images/dummy/gsrab02_06.png";
+
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
+    },
+});
 
 const MOBILE_BREAKPOINT = 768;
 const getIsMobile = () => window.innerWidth <= MOBILE_BREAKPOINT;
@@ -78,33 +87,38 @@ onUnmounted(() => {
 });
 
 const valueThumbs = [imgValue1, imgValue2, imgValue3, imgValue4];
-const valueItems = [
-    { title: "Fair", desc: "공정함을 지키고\n사회와 환경에 기여합니다." },
-    { title: "Friendly", desc: "다양성을 인정하고\n서로를 존중합니다." },
-    { title: "Fresh", desc: "창의와 도전을 장려하여\n회사와 개인이 함께 성장합니다." },
-    { title: "Fun", desc: "유연하고 자율적인 환경에서\n즐겁게 일합니다." },
-].map((item, idx) => ({ ...item, thumb: valueThumbs[idx] }));
 
-const wayItems = [
-    { title: "01 고객 최우선", desc: "# 업무의 시작과 끝을 고객으로 연결합니다.\n# 고객을 위해, '되는 방법'을 먼저 찾습니다." },
-    { title: "02 성장 마인드", desc: "# 작고 빠르게 시도하며 성공 경험을 만듭니다.\n# 매일의 성장과 변화를 추구합니다." },
-    { title: "03 열린 소통", desc: "# 명확한 목표와 과정 공유로 눈높이를 맞춥니다.\n# 치열하게 논의하고, One Team으로 해냅니다." },
-    { title: "04 AX 실행력", desc: "# 설득과 결정 모두 데이터가 기준입니다.\n# 디지털/AI 툴로 업무 방식을 개선합니다." },
-];
-
+// 다국어 데이터셋 객체로 완전 통합
 const langData = {
     ko: {
         MainTitle: "회사소개",
+        SubTitle:'Our Vision',
+        VisionSub: "고객의 모든 경험을 연결하고, 데이터로 공감하며, 상품과 서비스로 신뢰받는 플랫폼",
+        VisionAlt: "연결, 공감, 신뢰를 표현한 GS리테일 비전 다이어그램",
         valueHeading: "GS Value",
         valueSub: "GS리테일 고유의 가치관",
-        valueItems,
+        valueItems: [
+            { title: "Fair", desc: "공정함을 지키고\n사회와 환경에 기여합니다." },
+            { title: "Friendly", desc: "다양성을 인정하고\n서로를 존중합니다." },
+            { title: "Fresh", desc: "창의와 도전을 장려하여\n회사와 개인이 함께 성장합니다." },
+            { title: "Fun", desc: "유연하고 자율적인 환경에서\n즐겁게 일합니다." },
+        ].map((item, idx) => ({ ...item, thumb: valueThumbs[idx] })),
         wayHeading: "GS Way",
         waySub: "GS리테일의 일하는 방식",
-        wayItems,
+        wayItems: [
+            { title: "01 고객 최우선", desc: "# 업무의 시작과 끝을 고객으로 연결합니다.\n# 고객을 위해, '되는 방법'을 먼저 찾습니다." },
+            { title: "02 성장 마인드", desc: "# 작고 빠르게 시도하며 성공 경험을 만듭니다.\n# 매일의 성장과 변화를 추구합니다." },
+            { title: "03 열린 소통", desc: "# 명확한 목표와 과정 공유로 눈높이를 맞춥니다.\n# 치열하게 논의하고, One Team으로 해냅니다." },
+            { title: "04 AX 실행력", desc: "# 설득과 결정 모두 데이터가 기준입니다.\n# 디지털/AI 툴로 업무 방식을 개선합니다." },
+        ],
     },
+    en: {
+
+    }
 };
-const locale = ref("ko");
-const t = computed(() => langData[locale.value]);
+
+const locale = computed(() => props.lang); // 외부 props 언어 바인딩 동기화
+const t = computed(() => langData[locale.value] || langData.ko);
 </script>
 <style scoped>
 img { width: 100%; height: auto; object-fit: cover; display: block;  }

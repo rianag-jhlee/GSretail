@@ -188,7 +188,7 @@
                                         <h4>{{ t.SeaBreathTitle }}</h4>
                                         <p v-html="t.SeaBreathDesc"></p>
                                     </div>
-                                    <Buttons btn-class="btn_icon_arrow btn_xl border after">{{ t.MoreBtn }}</Buttons>
+                                    <a class="btn_icon_arrow btn_xl border after" :href="t.sealink" target="_blank">{{ t.MoreBtn }}</a>
                                 </div>
                             </section>
 
@@ -233,6 +233,7 @@ export default {
                     Tabs1: [{ item: "환경경영" }, { item: "친환경 활동" }, { item: "함께하는 기후변화 대응" }],
                     InnerTabs: [{ item: "그린 밸류체인" }, { item: "그린 스토어" }, { item: "그린 프로덕트" }],
                     MoreBtn: "자세히 보기",
+                    sealink:`https://www.badasoom.com/`,
                     Images: {
                         StrategyImg: require("@/assets/images/dummy/gsrsu0201_1.png"),
                         SystemImg: require("@/assets/images/dummy/gsrsu0201_2.png"),
@@ -438,7 +439,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .wide_card { display: flex; align-items: flex-start; gap: 40px; padding: 60px; background: #F8F8F8; border-radius: 20px; }
 .wide_card .image_wrap { flex: 0 0 500px; height: 320px; }
 .wide_card .text_group { flex: 1; display: flex; flex-direction: column; gap: 40px; }
-.wide_card .btn_icon_arrow {width:170px;}
+.wide_card .btn_icon_arrow {width:175px;}
 
 /* 5. Sub Grid (2열 그리드 구현) */
 .sub_grid_container { display: flex; flex-wrap: wrap; gap: 80px 40px; }

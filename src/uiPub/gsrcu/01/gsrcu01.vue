@@ -18,9 +18,9 @@
                             <div class="brand-info-box">
                                 <h4>{{ brand.name }}</h4>
                                 <dl>
-                                    <dt class="blind">전화번호</dt>
+                                    <dt class="blind">{{t.전화번호}}</dt>
                                     <dd class="tel-number">{{ brand.tel }}</dd>
-                                    <dt class="blind">운영시간</dt>
+                                    <dt class="blind">{{t.운영시간}}</dt>
                                     <dd class="working-hours" v-html="brand.hours"></dd>
                                 </dl>
                             </div>
@@ -55,12 +55,17 @@
                                 :data-popid="link.popId" 
                                 :data-cont="link.cont" 
                                 data-type="lg" 
-                                btn-class="btn_mid gray btn_icon_arrow after">
+                                btn-class="btn_mid gray btn_icon_arrow after"
+                            >
                                 {{ link.btnLabel }}
                             </Buttons>
-                            <Buttons v-else @click="handleLink(link.target)" btn-class="btn_mid gray btn_icon_arrow after">
+                            <a 
+                                v-else 
+                                @click.stop.prevent="handleLink(link.target)" 
+                                class="btn_mid gray btn_icon_arrow after"
+                            >
                                 {{ link.btnLabel }}
-                            </Buttons>
+                            </a>
                         </div>
                     </li>
                 </ul>
@@ -121,7 +126,9 @@ export default {
                         { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
                         { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
                         { title: "제휴/협력문의", btnLabel: "제휴/협력문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0201", cont: "gsrcu0201" }
-                    ]
+                    ],
+                    전화번호:'전화번호',
+                    운영시간:'운영시간'
                 }
             }
         };
@@ -144,9 +151,15 @@ export default {
             const cont = el.dataset.cont; // data-cont 속성 읽기
             modal.open(popId, type, el, cont); // 4개 인자 모두 전달
         },
+
         handleLink(url) {
-            if (url.startsWith('http')) window.open(url, '_blank');
-            else this.$router.push(url);
+            if (!url) return;
+            // 외부 링크 스크린 아웃 후 즉시 종료 조치
+            if (url.startsWith('http')) {
+                window.open(url, '_blank');
+                return;
+            }
+            this.$router.push(url);
         }
     }
 };
