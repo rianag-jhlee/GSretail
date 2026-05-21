@@ -582,7 +582,7 @@
                         </li>
                     </ul>
                 </section>
-                <section class="sec_franchise_compare" data-figma-node="739:15141">
+                <section class="sec_franchise_compare">
                     <header class="section_header ac">
                         <h2>한눈에 비교하고, 나에게 유리한 타입을 찾아보세요!</h2>
                     </header>
@@ -1615,19 +1615,29 @@ import imgStore01 from "@/assets/images/dummy/gsrst02010101_store_01.png";
 import imgStore02 from "@/assets/images/dummy/gsrst02010101_store_02.png";
 import imgStore03 from "@/assets/images/dummy/gsrst02010101_store_03.png";
 import imgStore04 from "@/assets/images/dummy/gsrst02010101_store_04.png";
+
+/* ── 탭 상태 (activeD1 / activeD2 / activeD3) ──
+ * D1: 0=알아보기 · 1=준비하기 · 2=추천점포 · 3=상담신청 · 4=가맹계약(미구현)
+ * D1=0 D2: 0=브랜드소개 · 1=경쟁력 · 2=창업이해 · 3=FAQ
+ * D1=1 D2: 0=창업절차 · 1=가맹타입 · 2=창업혜택(→ activeD3 3depth)
+ * D1=3 D2: 0=창업상담 · 1=설명회 · 2=입점/브랜드전환
+ * ── */
 const activeD1 = ref(0);
 const activeD2 = ref(0);
 const activeD3 = ref(0);
 
+/* ── [공통] 반응형 뷰포트 ── */
 const mqMobile = window.matchMedia("(max-width: 768px)");
 const mqTablet = window.matchMedia("(max-width: 1024px)");
 const isMobileView = ref(mqMobile.matches);
 const isTabletView = ref(mqTablet.matches);
+/* D1=0 D2=1 차별화 경쟁력 탭 여부 (Swiper 갱신용) */
 const isCompetitiveTab = computed(() => activeD1.value === 0 && activeD2.value === 1);
 const conceptStoreSpaceBetween = computed(() => (isMobileView.value ? 10 : 20));
 const productHitSwiperInsts = ref([]);
 let productHitRefreshFrame = 0;
 
+/* [D1=0 D2=1] 메가히트 상품 Swiper — 모바일에서 슬라이드 폭·위치 재계산 */
 function refreshProductHitSwipers() {
     cancelAnimationFrame(productHitRefreshFrame);
     productHitRefreshFrame = requestAnimationFrame(() => {
@@ -1643,6 +1653,7 @@ const isMobile = ref(mqMobile.matches);
 const isTablet = ref(mqTablet.matches);
 function onMqTabletChange(e) { isTablet.value = e.matches; }
 
+/* [공통] 모바일/태블릿 전환 시 Swiper·뷰 상태 동기화 */
 function syncMobileView() {
     isMobileView.value = mqMobile.matches;
     isTabletView.value = mqTablet.matches;
@@ -1660,6 +1671,7 @@ function onProductHitSwiper(swiper, index) {
     refreshProductHitSwipers();
 }
 
+/* ── [공통] 1depth / 2depth 탭 라벨 ── */
 const depth1Tabs = [
     { item: "GS25 창업 알아보기" },
     { item: "창업 준비하기" },
@@ -1668,6 +1680,7 @@ const depth1Tabs = [
     { item: "가맹계약시스템" },
 ];
  
+/* D1=0 2depth */
 const depth2Tabs = [
     { item: "GS25 브랜드 소개" },
     { item: "차별화된 경쟁력" },
@@ -1675,13 +1688,14 @@ const depth2Tabs = [
     { item: "FAQ" },
 ];
 
-/** activeD1 === 1 (창업 준비하기) 2depth */
+/* D1=1 2depth */
 const depth2TabsPrepare = [
     { item: "창업 절차" },
     { item: "가맹 타입" },
     { item: "창업 혜택" },
 ];
 
+/* ── [D1=0 D2=0] GS25 브랜드 소개 ── */
 const brandIntro = {
     badge: "4년 연속, 편의점 매출 1위 브랜드 (22년~25년)",
     title: "비교할수록 결국, GS25.",
@@ -1764,7 +1778,7 @@ const brandSolutionCards = [
     },
 ];
 
-/** Figma 725:14786 — 창업 절차 타임라인 */
+/* ── [D1=1 D2=0] 창업 절차 타임라인 ── */
 const startupProcessSteps = [
     {
         theme: "start",
@@ -1858,7 +1872,7 @@ const startupProcessSteps = [
     },
 ];
 
-/** Figma 739:15072 — 가맹 타입 비교 */
+/* ── [D1=1 D2=1] 가맹 타입 비교  ── */
 const franchiseTypeGroups = [
     {
         key: "profit",
@@ -1897,11 +1911,12 @@ const franchiseTypeGroups = [
 ];
 
 
+/* [D1=3 D2=2] 입점 제안/브랜드 전환 — 상단 안내 */
 const consultEntryPanel = {
     title: "입지에 대한 지역별 최고의 전문가들이 1:1 맞춤 상담해 드립니다.",
     desc: "주말/공휴일에는 즉시 응답이 어려울 수 있는 점 양해 부탁드립니다.", 
 }
-/** moreLink: true(버튼만) | moreList(펼침 목록) — 배열/문자열을 moreLink에 넣은 경우도 호환 */
+/* [D1=1 D2=0] 창업 절차 — 타임라인 '더보기' 아코디언(GSAP height 애니메이션) */
 function getProcessMoreList(step) {
     if (step.moreList?.length) return step.moreList;
     if (Array.isArray(step.moreLink)) return step.moreLink;
@@ -2020,7 +2035,7 @@ function toggleProcessMore(idx) {
     });
 }
 
-/** activeD1 === 1, activeD2 === 2 (창업 혜택) */
+/* ── [D1=1 D2=2] 창업 혜택 3depth ── */
 const depth3TabsBenefit = [
     { item: "탄탄한 점포" },
     { item: "든든한 점포 운영" },
@@ -2060,7 +2075,7 @@ const benefitStoreItems = [
     },
 ];
 
-/** 든든한 점포 운영 */
+/* activeD3=1 든든한 점포 운영 */
 const benefitOperationPanel = {
     title: "업계 최고 수준의 GS25 경영주 상생 혜택",
     desc: "보험, 노무, 인센티브, 채용까지! 경영주님이 운영에만 집중할 수 있도록 GS25가 도와드려요.",
@@ -2203,7 +2218,7 @@ const benefitOperationGroups = [
     },
 ];
 
-/** 편안한 경영주 생활 */
+/* activeD3=2 편안한 경영주 생활 */
 const benefitLifePanel = {
     title: "일할 때도, 쉴 때도 든든한 혜택",
     desc: "건강, 복지, 여가까지! 점포 밖에서도 GS25가 함께합니다.",
@@ -2338,6 +2353,7 @@ const conceptStoreCards = [
 
 const conceptStoreSwiperInst = ref(null);
 
+/* [D1=0 D2=1] 상권 맞춤 컨셉 스토어 Swiper */
 function onConceptStoreSwiper(swiper) {
     conceptStoreSwiperInst.value = swiper;
 }
@@ -2417,6 +2433,7 @@ const operationSupportCards = [
     },
 ];
 
+/* ── [D1=0 D2=2] 편의점 창업 이해 ── */
 const convenienceDefinePanel = {
     title: "편의점이란?",
     desc: "편의점은 단순한 소매점이 아니에요. 동네 아지트이자 생활 인프라로, 해마다 꾸준히 성장하고 있는 든든한 사업입니다.",
@@ -2442,7 +2459,7 @@ const convenienceEvolutionStages = [
     },
 ];
 
-/**  프랜차이즈란 */
+/* 프랜차이즈 정의 */
 const franchiseDefinePanel = {
     badge:"점포개발",
     title: "프랜차이즈란?",
@@ -2461,7 +2478,7 @@ const franchiseFormula = {
     result: { title: "함께 성장", label: "GS25 Franchise" },
 };
 
-/** 역할 2열 카드 */
+/* 가맹점/본부 역할 2열 카드 */
 const franchiseRoleColumns = [
     {
         title: "점포 운영",
@@ -2485,7 +2502,7 @@ const franchiseRoleColumns = [
     },
 ];
 
-/** 창업 FAQ */
+/* ── [D1=0 D2=3] FAQ ── */
 const startupFaqPanel = {
     title: "창업 FAQ TOP 5",
 };
@@ -2520,7 +2537,7 @@ const startupFaqItems = [
     
 ];
 
-/** GS25 답변 */
+/* GS25 FAQ — 카테고리 탭·페이지네이션 */
 const GS25_FAQ_PAGE_SIZE = 6;
 const activeGs25FaqTab = ref(0);
 const activeGs25FaqPage = ref(1);
@@ -2724,6 +2741,7 @@ const paginatedGs25FaqItems = computed(() => {
     return filteredGs25FaqItems.value.slice(start, start + GS25_FAQ_PAGE_SIZE);
 });
 
+/* [공통] 1depth 탭 변경 시 2·3depth 초기화 + 스크롤 상단 + quick_menu 재계산 */
 watch(activeD1, () => {
     activeD2.value = 0;
     activeD3.value = 0;
@@ -2733,6 +2751,7 @@ watch(activeD1, () => {
     });
 });
 
+/* [공통] 2depth 탭 변경 시 3depth 초기화 */
 watch(activeD2, () => {
     activeD3.value = 0;
 });
@@ -2745,6 +2764,7 @@ watch(gs25FaqTotalPages, (total) => {
     if (activeGs25FaqPage.value > total) activeGs25FaqPage.value = total;
 });
 
+/* ── [D1=2] 추천 점포 찾기 — 지역별 창업 상담(지도) ── */
 const regionCounselPanel = {
     title: "지금 바로 상담을 받고 싶으신가요?",
     lead: "지도에서 원하시는 지역을 클릭하시면 해당 지역 담당자 정보를 바로 확인하실 수 있습니다.",
@@ -2760,19 +2780,18 @@ const regionCounselTabs = [
     { item: "수도권 상세 - 경기" },
 ];
 const activeRegionTab = ref(0);
-/** true: region_counsel_side에 담당자 목록 / false: 지역 선택 전 안내 패널 */
+/* true: 담당자 목록 / false: 지역 선택 전 안내 */
 const regionCounselBoardIsStaff = ref(false);
 
 function closeRegionCounselStaff() {
     regionCounselBoardIsStaff.value = false;
 }
-/** 지도 API 연동 전 퍼블용: 지도 영역 클릭 시 담당자 UI 표시(API 연동 시 삭제·지도 콜백으로 대체) */
+/* 지도 API 연동 전 퍼블 스텁 — 지도 클릭 시 담당자 패널 표시 */
 function onRegionCounselMapStubClick() {
     if (regionCounselBoardIsStaff.value) return;
     regionCounselBoardIsStaff.value = true;
 }
 
-/** 지역 선택 후 담당자 목록(샘플) */
 const regionCounselStaff = {
     regionName: "서울",
     countLabel: "6명",
@@ -2784,7 +2803,7 @@ const regionCounselStaff = {
     ],
 };
 
-/** 추천 점포 찾기 */
+/* 점포 검색·필터·목록 */
 const filterRegion = ref("");
 const filterFranchiseType = ref("");
 const filterStoreType = ref("");
@@ -2836,6 +2855,7 @@ function getBadgeClass(t) {
     return /^GS\d/i.test(t) ? "badge_" + t.toLowerCase() : "badge_gray";
 }
 
+/* 청년창업 안내 팝오버 닫기 */
 function closeYouthPopover() {
     youthPopoverVisible.value = false;
 }
@@ -2843,6 +2863,7 @@ function closeYouthPopover() {
 const openCardId = ref(null);
 const openTableId = ref(null);
 
+/* 반응형 카드 그리드 행 분할 */
 const cardsPerRow = computed(() => (isMobileView.value ? 1 : isTabletView.value ? 3 : 4));
 
 const storeCardRows = computed(() => {
@@ -2857,14 +2878,14 @@ function toggleCard(id) {
     openCardId.value = openCardId.value === id ? null : id;
 }
 
-/** activeD1 === 3 (상담 및 신청) 2depth */
+/* ── [D1=3] 상담 및 신청 ── */
 const depth2TabsConsult = [
     { item: "창업 상담 신청" },
     { item: "창업 설명회 신청" },
     { item: "입점 제안/브랜드 전환 상담" },
 ];
 
-/** activeD1 === 3, activeD2 === 0 (창업 상담 신청) — 개인정보 동의 목록 */
+/* D2=0 창업 상담 — 개인정보 동의 문구 */
 const startupConsentItems = [
     "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
     "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일,",
@@ -2892,12 +2913,12 @@ function onStartupConsentChange(event) {
     startupConsentAgreed.value = event.target.checked;
 }
 
-/** 브랜드 전환 상담 · 우편번호 (763:17115 · 퍼블만, 레이어 연동 시 교체) */
+/* D2=2 입점/브랜드 전환 — 우편번호 검색(퍼블 스텁, API 연동 시 교체) */
 function onBrandConsultZipSearch() {
     // 우편번호 팝업/다음 도로명 API 등 연결
 }
 
-/** 창업 설명회 신청 탭 · 월별 지역 카드(Figma node 763:16835) */
+/* D2=1 창업 설명회 — 월별 Swiper·지역 카드·슬롯 신청 */
 const seminarDummyAddress = "서울특별시 강남구 논현로 636, 이디야 빌딩 3층";
 const seminarMonthSlides = [
     {
@@ -2991,6 +3012,7 @@ const seminarMonthSlideIndex = ref(0);
 const seminarMonthSizerRef = ref(null);
 const seminarMonthSwiperPx = ref(201);
 
+/* 설명회 월 타이틀 너비 측정 → Swiper slideWidth 동기화 */
 function seminarMonthMeasureSwiperWidth() {
     nextTick(() => {
         const root = seminarMonthSizerRef.value;
@@ -3067,6 +3089,7 @@ watch(
     }
 );
 
+/* D1=3 상담 폼 — 셀렉트/옵션 공통 */
 const phoneOptions = [
     { value: "010", label: "010" },
     { value: "011", label: "011" },
@@ -3128,6 +3151,7 @@ const consultTypeOptions = [
     { value: "store_entry_proposal", label: "입점 제안" },
 ];
 
+/* D2=0 창업 상담 신청 폼 상태 */
 const startupConsultForm = reactive({
     name: "",
     phone1: "010",
@@ -3274,12 +3298,14 @@ watch([activeD1, activeD2], () => {
     refreshQuickMenu();
 });
 
+/* [공통] 리사이즈 — 반응형·Swiper·설명회 월 Swiper */
 function onWindowResize() {
     syncMobileView();
     refreshProductHitSwipers();
     seminarMonthMeasureSwiperWidth();
 }
 
+/* [공통] 마운트 — 이벤트·quick_menu·미디어쿼리 */
 onMounted(() => {
     document.addEventListener("click", closeYouthPopover);
     isMobile.value = mqMobile.matches;
@@ -3293,6 +3319,7 @@ onMounted(() => {
     window.addEventListener("scroll", onQuickMenuScroll, { passive: true });
     nextTick(() => initQuickMenu());
 });
+/* [공통] 언마운트 — 리스너·quick_menu 정리 */
 onUnmounted(() => {
     document.removeEventListener("click", closeYouthPopover);
     cancelAnimationFrame(productHitRefreshFrame);
@@ -3312,6 +3339,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* ========== 공통 (전 탭·레이아웃) ========== */
 img { width: 100%; height: auto; display: block; object-fit: cover; }
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
@@ -3341,8 +3369,13 @@ section + section { padding-top: 100px; }
 section p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .panel_third_depth { padding-top: 80px; }
 .panel { padding: 100px 0 200px; }
-.panel.pt_64 { padding-top: 64px;}
+.panel.pt_64 { padding-top: 64px; }
+section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50%); background-color: #f8f8f8; }
 
+
+
+/* ========== D1=0 · GS25 창업 알아보기 (activeD1 === 0) ========== */
+/* --- D2=0 · GS25 브랜드 소개 (activeD2 === 0) --- */
 .sec_hero { min-height: 700px; padding: 97px 100px 77px; background-size: cover; background-position: center; border-radius: 20px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
 .sec_hero::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); position: absolute; top: 0; left: 0; content: ''; }
 .sec_hero > header, .sec_hero > .action_list, .sec_hero > .metric_list { position: relative; z-index: 1; }
@@ -3360,7 +3393,6 @@ section p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_hero > .metric_list > li { min-width: 0; min-height: 95px; flex: 1; padding: 20px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
 .sec_hero > .metric_list > li > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_hero > .metric_list > li > span { color: rgba(255,255,255,0.8); font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-
 .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; }
 .sec_num_list :deep(.num_info_item) { padding: 0; border-bottom: 0; }
 .sec_num_list :deep(.num_info_num) { margin-bottom: 8px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
@@ -3369,8 +3401,6 @@ section p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_num_list :deep(.num_info_title) { margin-bottom: 8px; }
 .sec_num_list :deep(.num_info_title > strong) { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_num_list :deep(.num_info_body > p) { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-
-section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50%); background-color: #f8f8f8; }
 .sec_band > .inner > .link_grid { display: flex; align-items: stretch; gap: 20px; }
 .sec_band > .inner > .link_grid > li { min-width: 0; flex: 1; display: flex; }
 .sec_band > .inner > .link_grid > li > a { width: 100%; min-height: 144px; padding: 32px 24px; background-color: #fff; border-radius: 12px; display: flex; align-items: center; gap: 20px; }
@@ -3379,7 +3409,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_band > .inner > .link_grid > li > a > .txt > strong { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_band > .inner > .link_grid > li > a > .txt > .desc { margin-top: 6px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
 .sec_band > .inner > .link_grid > li > a::after { width: 24px; height: 24px; flex-shrink: 0; background-color: #161616; content: ''; }
-
 .sec_overlap > .overlap_grid { width: 100%; max-width: 1040px; margin: 0 auto; display: flex; justify-content: center; }
 .sec_overlap > .overlap_grid > li { max-width: 100%; min-width: 0; flex: 0 1 260px; position: relative; }
 .sec_overlap > .overlap_grid > li + li { margin-left: -30px; }
@@ -3398,7 +3427,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_overlap > .overlap_grid > li:nth-child(3) > article > strong { color: #1550f4; }
 .sec_overlap > .overlap_grid > li:nth-child(4) > article { background-color: rgba(16,158,105,0.12); }
 .sec_overlap > .overlap_grid > li:nth-child(4) > article > strong { color: #099762; }
-
 .sec_split > .inner > .split_layout { display: flex; align-items: center; justify-content: center; gap: 40px; }
 .sec_split > .inner > .split_layout > .info_card { width: 100%; max-width: 500px; min-height: 164px; margin: 0; padding: 32px 24px; background-color: #fff; border-radius: 20px; }
 .sec_split > .inner > .split_layout > .info_card > dt { display: flex; align-items: center; gap: 8px; }
@@ -3410,7 +3438,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_split > .inner > .split_layout > .info_card.is_start > dt { justify-content: flex-start; }
 .sec_split > .inner > .split_layout > .info_card.is_start > dd { text-align: left; }
 .sec_split > .inner > .split_layout > .split_media { width: 100%; max-width: 340px; aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
-
 .sec_stack > .highlight_block { padding: 64px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; }
 .sec_stack > .highlight_block > .sub_header { width: 100%; max-width: 296px; flex-shrink: 0; }
 .sec_stack > .highlight_block > .sub_header strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
@@ -3429,7 +3456,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > figcaption, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption { padding: 20px 24px; }
 .sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > figcaption > p, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > p { color: #67676f; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; text-align: center; }
 .sec_stack > .highlight_block > .highlight_body > div > ul > li > article > figure > figcaption > strong, .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; text-align: center; display: block; }
-
 .sec_stack > .dual_panel { margin-top: 60px; display: flex; gap: 40px; }
 .sec_stack > .dual_panel > article { min-width: 0; flex: 1; padding: 64px; border: 1px solid #d7d7df; border-radius: 12px; }
 .sec_stack > .dual_panel > article .sub_header { margin-bottom: 32px; }
@@ -3444,7 +3470,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .dual_panel > article > .stack_list > li > div > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
 .sec_stack > .dual_panel > article > .stack_list > li > div > p { margin-top: 2px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_stack > .dual_panel > article > .btn_mid { margin-top: 24px; }
-
 .sec_stack > .sub_block { margin-top: 60px; }
 .sec_stack > .sub_block > .sub_swiper { margin-top: 40px; overflow: hidden; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-wrapper) { align-items: stretch; }
@@ -3452,7 +3477,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > figure { width: 100%; aspect-ratio: 360/240; margin: 0; background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 12px; overflow: hidden; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { width: fit-content; margin-top: 16px; padding: 3px 6px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 4px; display: inline-block; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong { margin-top: 6px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
-
 .sec_icon_grid > .inner > .icon_grid { margin: 0; padding: 0; display: grid; align-items: stretch; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .sec_icon_grid > .inner > .icon_grid > li { height: 100%; }
 .sec_icon_grid > .inner > .icon_grid > li > article { height: 100%; min-height: 157px; padding: 32px; background-color: #fff; border-radius: 20px; display: grid; align-content: start; grid-template-columns: 80px 1fr; column-gap: 20px; }
@@ -3461,7 +3485,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_icon_grid > .inner > .icon_grid > li > article > div > em { margin: 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; font-style: normal; }
 .sec_icon_grid > .inner > .icon_grid > li > article > div > strong { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_icon_grid > .inner > .icon_grid > li > article > div > p { margin-top: 8px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
-
 .sec_tri_grid > ul { display: grid; align-items: stretch; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .sec_tri_grid > ul > li { height: 100%; padding: 60px 40px; border: 1px solid #D7D7DF; border-radius: 12px; }
 .sec_tri_grid > ul > li > h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
@@ -3470,7 +3493,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_tri_grid > ul > li > dl > dt > .icon { width: 24px; height: 24px; flex-shrink: 0; background-color: #d9d9d9; }
 .sec_tri_grid > ul > li > dl > dd { margin: 4px 0 0; padding-left: 32px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_tri_grid > ul > li > dl > dd + dt { margin-top: 56px; }
-
 .sec_diagram > .diagram_shell { min-width: 0; padding: clamp(16px, 1.667vw, 32px); background-color: #107af2; border: 1px solid #d7d7df; border-radius: 9999px; display: flex; align-items: center; gap: clamp(24px, 3.125vw, 60px); }
 .sec_diagram > .diagram_shell > .diagram_track { width: 100%; min-width: 0; flex: 1 1 0; }
 .sec_diagram > .diagram_shell > .diagram_track .diagram_ring { min-width: 0; border-radius: clamp(20px, 8vw, 999px); display: flex; align-items: center; justify-content: center; }
@@ -3490,18 +3512,18 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: clamp(2.4rem, 2.08vw, 3.2rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_diagram > .diagram_shell > article.node_aside > p { margin-top: clamp(4px, 0.42vw, 8px); color: #fff; font-size: clamp(1.4rem, 0.83vw, 1.6rem); font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_diagram > .diagram_shell article strong, .sec_diagram > .diagram_shell article span, .sec_diagram > .diagram_shell article p { word-break: keep-all; }
-
+.sec_diagram header { margin-bottom: 40px; }
+/* --- D2=1 · 차별화된 경쟁력 (activeD2 === 1) --- */
+/* --- D2=2 · 편의점 창업 이해 (activeD2 === 2) --- */
 .sec_franchise_define .franchise_define_card { padding: 64px 80px; background-color: #fff; border-radius: 12px; }
 .sec_franchise_define .franchise_define_card .sub_header { margin-bottom: 40px; }
 .sec_franchise_define .franchise_define_card .sub_header .tit + h3 { margin-top: 8px; }
 .sec_franchise_define .franchise_define_card .sub_header h3 + p { margin-top: 8px; color: #67676F; font-size: 1.8rem; line-height: 1.4; }
-
 .sec_franchise_define .franchise_formula { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px; }
 .sec_franchise_define .franchise_formula > div { width: 320px; height: 136px; flex-shrink: 0; padding: 0 28px; border-radius: 999px; display: flex; align-items: center; justify-content: flex-start; gap: 16px; }
 .sec_franchise_define .franchise_formula > div:nth-child(1), .sec_franchise_define .franchise_formula > div:nth-child(3) { background-color: #cfe4fc; }
 .sec_franchise_define .franchise_formula > div:nth-child(5) { background-color: #107af2; }
 .sec_franchise_define .franchise_formula > div > span { width: 72px; height: 72px; flex-shrink: 0; background-color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-
 .sec_franchise_define .franchise_formula > div > p { min-width: 0; margin: 0; text-align: left; }
 .sec_franchise_define .franchise_formula > div:nth-child(1) > p > strong, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > strong { color: #0d62c2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_franchise_define .franchise_formula > div:nth-child(1) > p > span, .sec_franchise_define .franchise_formula > div:nth-child(3) > p > span { margin-top: 4px; color: #0d62c2; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
@@ -3522,42 +3544,33 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_define .franchise_role_grid > article > ul > li > span { width: 24px; height: 24px; flex-shrink: 0; background-color: #d0d0d8; display: block; }
 .sec_franchise_define .franchise_role_grid > article > ul > li > strong { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_franchise_define .franchise_role_grid strong, .sec_franchise_define .franchise_role_grid p { word-break: keep-all; }
+/* --- D2=3 · FAQ (activeD2 === 3) --- */
+.sec_startup_faq .section_header.ac, .sec_gs25_faq .section_header.ac { text-align: left !important; }
+:deep(.faq_acc.board_type_toggle.type_faq) { width: 100%; border-top: 1px solid #161616; }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 20px 24px 60px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; border-bottom: 1px solid #d7d7df; }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { width: 32px; height: 32px; font-size: 1.8rem; font-weight: 400; line-height: 1.5; top: 50%; left: 20px; transform: translateY(-50%); }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
+:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
+:deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 16px 32px 40px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+:deep(.faq_acc.board_type_toggle.type_faq > dd.acc_panel:last-of-type.acc_show) { border-bottom: 1px solid #D7D7DF; }
+:deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont p) { margin: 0; white-space: pre-line; }
+:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn) { display: flex; align-items: center; gap: 8px; }
+:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { flex-shrink: 0; padding: 4px 12px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 99px; }
+:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .txt) { min-width: 0; flex: 1; }
+.sec_gs25_faq :deep(.tab_wrap) { margin-bottom: 24px; overflow: hidden; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01) { padding-left: 0; flex-wrap: nowrap; gap: 0; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li) { border-bottom: 0; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li .item) { min-height: 60px; padding: 17px 12px; color: #90909a; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; background-color: #fff; border: 1px solid #c4c4d0; border-left: 0; text-align: center; display: flex; align-items: center; justify-content: center; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li:first-child .item) { border-left: 1px solid #c4c4d0; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current) { border-bottom: 0; }
+.sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current .item) { color: #fff; background-color: #107af2; border-color: #107af2; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap) { margin-top: 24px; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap > p) { margin: 0 0 12px; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; white-space: normal; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_label) { width: auto; min-width: 120px; }
+.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_data) { width: 33.3333%; }
 
-.sec_region_counsel :deep(.tab_wrap ul.type_02) { justify-content: center; }
-.sec_region_counsel :deep(.tab_wrap ul.type_02 li .item) { color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; background-color: #fff; border: 1px solid #161616; }
-.sec_region_counsel :deep(.tab_wrap ul.type_02 li.current .item) { color: #fff; background-color: #161616; }
-
-.sec_region_counsel > .section_header { margin: 0 0 40px; }
-.sec_region_counsel :deep(.tab_wrap) { margin: 0 0 64px; }
-.sec_region_counsel .region_counsel_note { margin: 0 0 28px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; display: flex; align-items: flex-start; gap: 4px; }
-.sec_region_counsel .region_counsel_note > span { flex-shrink: 0; }
-.sec_region_counsel .region_counsel_board { width: 100%; display: grid; align-items: stretch; grid-template-columns: 1fr 1fr; gap: 20px; }
-.sec_region_counsel .region_counsel_board > .region_counsel_map, .sec_region_counsel .region_counsel_board > .region_counsel_side { width: 100%; height: 620px; min-width: 0; min-height: 620px; border: 1px solid #d7d7df; border-radius: 12px; overflow: hidden;  }
-.sec_region_counsel .region_counsel_board:not(.is_staff) .region_counsel_map { cursor: pointer; }
-.sec_region_counsel .region_counsel_map { background-color: #f2f8fd; }
-.sec_region_counsel .region_counsel_side { min-width: 0; min-height: 0; padding: 40px; display: flex; flex-direction: column; }
-.sec_region_counsel .region_counsel_panel { min-height: 0; flex: 1 1 auto; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.sec_region_counsel .region_counsel_panel > span.icon { width: 40px; height: 40px; background-color: #67676f; display: block; }
-.sec_region_counsel .region_counsel_panel > p.tit { margin: 24px 0 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_region_counsel .region_counsel_panel > p.desc { margin: 8px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_region_counsel .region_counsel_panel > p.hint { margin: 8px 0 0; color: #107af2; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
-.sec_region_counsel .region_counsel_staff_body { min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; overflow: hidden; }
-.sec_region_counsel .region_counsel_staff_body > header { flex-shrink: 0; margin: 0 0 32px; display: flex; align-items: center; gap: 8px; }
-.sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; flex-shrink: 0; background-color: #161616; display: block; }
-.sec_region_counsel .region_counsel_staff_body > header > h3 { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_region_counsel .region_counsel_staff_body > header > .badge { padding: 2px 10px; color: #107af2; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border-radius: 99px; display: inline-block; }
-.sec_region_counsel .region_counsel_staff_body > header > .btn_close { width: 20px; height: 20px; margin-left: auto; text-indent: -9999px; background-color: #161616; border-radius: 0; }
-.sec_region_counsel .region_counsel_staff_body > ul { min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
-.sec_region_counsel .region_counsel_staff_body > ul > li > article { padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; gap: 24px; }
-.sec_region_counsel .region_counsel_staff_body > ul > li > article > div { min-width: 0; flex: 1 1 auto; }
-.sec_region_counsel .region_counsel_staff_body .photo { width: 90px; height: 90px; flex-shrink: 0; background-color: #d7d7df; border-radius: 50%; display: block; }
-.sec_region_counsel .region_counsel_staff_body .name { margin: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_region_counsel .region_counsel_staff_body .area { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-.sec_region_counsel .region_counsel_staff_body .phone { margin: 8px 0 0; display: flex; align-items: center; gap: 8px; }
-.sec_region_counsel .region_counsel_staff_body .ico_phone { width: 16px; height: 16px; flex-shrink: 0; background-color: #a8c8ee; display: block; }
-.sec_region_counsel .region_counsel_staff_body .phone a { color: #107af2; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
-
-.sec_diagram header { margin-bottom: 40px; }
+/* ========== D1=1 · 창업 준비하기 (activeD1 === 1) ========== */
+/* --- D2=0 · 창업 절차 (activeD2 === 0) --- */
 .sec_startup_process { width: 100%; max-width: 1420px; margin: 0 auto; }
 .sec_startup_process .section_header.txt_blue > h2 { color: #107af2; }
 .sec_startup_process .process_timeline { display: flex; flex-direction: column; align-items: center; gap: 40px; }
@@ -3590,13 +3603,11 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li[data-theme="d14_7"] > article:hover { border-color: #107af2; }
 .sec_startup_process .process_timeline > li[data-theme="d11"] > article:hover { border-color: #0d62c2; }
 .sec_startup_process .process_timeline > li[data-theme="d2_1"] > article:hover { border-color: #15b874; }
-
 .sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .day { color: #107af2; }
 .sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .step_track > .num { background-color: #107af2; }
 .sec_startup_process .process_timeline > li[data-theme="start"] > article > div > .lead { color: #107af2; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .day { color: #42c68f; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .step_track > .num { background-color: #42c68f; }
-
 .sec_startup_process .process_timeline > li[data-theme="d30"] > article > .icon { background-color: #e8f8f1; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > article > div > .lead { color: #15b874; }
 .sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .day { color: #15b874; }
@@ -3626,7 +3637,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { background-color: #fff; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article > div > h3 { color: #fff; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article > div > .desc { color: #fff; }
-
+/* --- D2=1 · 가맹 타입 (activeD2 === 1) --- */
 .sec_franchise_type { width: 100%; max-width: 1420px; margin: 0 auto; }
 .sec_franchise_type > .franchise_type_list { display: flex; align-items: stretch; gap: 20px; }
 .sec_franchise_type > .franchise_type_list > li { max-width: 700px; min-width: 0; flex: 1 1 0; }
@@ -3654,7 +3665,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 > .badge { background-color: #4095f5; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 { background-color: #e8f8f1; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 > .badge { background-color: #42c68f; }
-
+/* --- D2=2 · 창업 혜택 (activeD2 === 2 · activeD3 3depth) --- */
+.button_area{display:flex; justify-content: center;}
 .sec_franchise_compare { width: 100%; max-width: 1420px; margin: 0 auto; }
 .sec_franchise_compare > .franchise_compare_wrap { margin-top: 40px; overflow-x: auto; }
 .sec_franchise_compare .franchise_compare_table { width: 100%; min-width: 1000px; border-top: 1px solid #161616; border-collapse: collapse; table-layout: fixed; }
@@ -3697,46 +3709,44 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .icon_card_list > li > article > div > dl > dt + dd { margin-top: 8px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.02em; }
 .icon_card_list > li > article > div > ul.list_note { margin: 18px 0 0; }
 .icon_card_list > li > article > div > ul.list_note > li > p {  color: #fb6432; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-.button_area{display:flex; justify-content: center;}
 .icon_card_list > li > article > div > .button_area .btn_mid { margin-top: 18px; }
-
 .sec_franchise_compare .franchise_compare_table tbody .note { color: #67676F; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 
-.sec_startup_faq .section_header.ac, .sec_gs25_faq .section_header.ac { text-align: left !important; }
-
-:deep(.faq_acc.board_type_toggle.type_faq) { width: 100%; border-top: 1px solid #161616; }
-:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 20px 24px 60px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; border-bottom: 1px solid #d7d7df; }
-:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { width: 32px; height: 32px; font-size: 1.8rem; font-weight: 400; line-height: 1.5; top: 50%; left: 20px; transform: translateY(-50%); }
-:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
-:deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
-:deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 16px 32px 40px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
-:deep(.faq_acc.board_type_toggle.type_faq > dd.acc_panel:last-of-type.acc_show) { border-bottom: 1px solid #D7D7DF; }
-:deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont p) { margin: 0; white-space: pre-line; }
-
-:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn) { display: flex; align-items: center; gap: 8px; }
-:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { flex-shrink: 0; padding: 4px 12px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 99px; }
-:deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .txt) { min-width: 0; flex: 1; }
-
-.sec_gs25_faq :deep(.tab_wrap) { margin-bottom: 24px; overflow: hidden; }
-.sec_gs25_faq :deep(.tab_wrap ul.type_01) { padding-left: 0; flex-wrap: nowrap; gap: 0; }
-.sec_gs25_faq :deep(.tab_wrap ul.type_01 li) { border-bottom: 0; }
-.sec_gs25_faq :deep(.tab_wrap ul.type_01 li .item) { min-height: 60px; padding: 17px 12px; color: #90909a; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; background-color: #fff; border: 1px solid #c4c4d0; border-left: 0; text-align: center; display: flex; align-items: center; justify-content: center; }
-.sec_gs25_faq :deep(.tab_wrap ul.type_01 li:first-child .item) { border-left: 1px solid #c4c4d0; }
-.sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current) { border-bottom: 0; }
-.sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current .item) { color: #fff; background-color: #107af2; border-color: #107af2; }
-.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap) { margin-top: 24px; }
-.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap > p) { margin: 0 0 12px; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; white-space: normal; }
-.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_label) { width: auto; min-width: 120px; }
-.sec_gs25_faq :deep(.faq_acc dd.acc_panel .acc_panel_cont .policy_wrap table colgroup > col.col_data) { width: 33.3333%; }
-
-/* quick menu */
-.quick_menu{position:fixed; bottom:60px; right:clamp(24px, 4.5313vw, 87px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none; transition:opacity 0.35s ease;}
-.quick_menu.is_visible{opacity:1; pointer-events:auto;}
-.quick_menu li{position:relative; width:100%;}
-.quick_menu li button{width:100%; height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 0; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:700; letter-spacing:-0.01em; background:none; background-color:#F2F2F4; border:0; border-radius:99px; text-align:center; display:flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px);}
-.quick_menu li button::before{content:''; width:clamp(16px, 1.0417vw, 20px); height:clamp(19px, 1.25vw, 24px); background-color:#161616; display:block;}
-
-/* 추천 점포 찾기 */
+/* ========== D1=2 · 추천 점포 찾기 (activeD1 === 2) ========== */
+/* --- 지역별 창업 상담 (지도·담당자) --- */
+.sec_region_counsel :deep(.tab_wrap ul.type_02) { justify-content: center; }
+.sec_region_counsel :deep(.tab_wrap ul.type_02 li .item) { color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; background-color: #fff; border: 1px solid #161616; }
+.sec_region_counsel :deep(.tab_wrap ul.type_02 li.current .item) { color: #fff; background-color: #161616; }
+.sec_region_counsel > .section_header { margin: 0 0 40px; }
+.sec_region_counsel :deep(.tab_wrap) { margin: 0 0 64px; }
+.sec_region_counsel .region_counsel_note { margin: 0 0 28px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; display: flex; align-items: flex-start; gap: 4px; }
+.sec_region_counsel .region_counsel_note > span { flex-shrink: 0; }
+.sec_region_counsel .region_counsel_board { width: 100%; display: grid; align-items: stretch; grid-template-columns: 1fr 1fr; gap: 20px; }
+.sec_region_counsel .region_counsel_board > .region_counsel_map, .sec_region_counsel .region_counsel_board > .region_counsel_side { width: 100%; height: 620px; min-width: 0; min-height: 620px; border: 1px solid #d7d7df; border-radius: 12px; overflow: hidden;  }
+.sec_region_counsel .region_counsel_board:not(.is_staff) .region_counsel_map { cursor: pointer; }
+.sec_region_counsel .region_counsel_map { background-color: #f2f8fd; }
+.sec_region_counsel .region_counsel_side { min-width: 0; min-height: 0; padding: 40px; display: flex; flex-direction: column; }
+.sec_region_counsel .region_counsel_panel { min-height: 0; flex: 1 1 auto; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.sec_region_counsel .region_counsel_panel > span.icon { width: 40px; height: 40px; background-color: #67676f; display: block; }
+.sec_region_counsel .region_counsel_panel > p.tit { margin: 24px 0 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_panel > p.desc { margin: 8px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_panel > p.hint { margin: 8px 0 0; color: #107af2; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+.sec_region_counsel .region_counsel_staff_body { min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; overflow: hidden; }
+.sec_region_counsel .region_counsel_staff_body > header { flex-shrink: 0; margin: 0 0 32px; display: flex; align-items: center; gap: 8px; }
+.sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; flex-shrink: 0; background-color: #161616; display: block; }
+.sec_region_counsel .region_counsel_staff_body > header > h3 { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_staff_body > header > .badge { padding: 2px 10px; color: #107af2; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border-radius: 99px; display: inline-block; }
+.sec_region_counsel .region_counsel_staff_body > header > .btn_close { width: 20px; height: 20px; margin-left: auto; text-indent: -9999px; background-color: #161616; border-radius: 0; }
+.sec_region_counsel .region_counsel_staff_body > ul { min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+.sec_region_counsel .region_counsel_staff_body > ul > li > article { padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; gap: 24px; }
+.sec_region_counsel .region_counsel_staff_body > ul > li > article > div { min-width: 0; flex: 1 1 auto; }
+.sec_region_counsel .region_counsel_staff_body .photo { width: 90px; height: 90px; flex-shrink: 0; background-color: #d7d7df; border-radius: 50%; display: block; }
+.sec_region_counsel .region_counsel_staff_body .name { margin: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_staff_body .area { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_region_counsel .region_counsel_staff_body .phone { margin: 8px 0 0; display: flex; align-items: center; gap: 8px; }
+.sec_region_counsel .region_counsel_staff_body .ico_phone { width: 16px; height: 16px; flex-shrink: 0; background-color: #a8c8ee; display: block; }
+.sec_region_counsel .region_counsel_staff_body .phone a { color: #107af2; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+/* --- 점포 검색·목록·카드 --- */
 .sec_store :deep(.detail_card) { --color-brand-primary: #107AF2; }
 .sec_store :deep(.store_card) { --color-brand-primary: #107AF2; }
 .sec_store :deep(.detail_card [class*="btn_"][class*="fill"][class*="primary"]) { color: #fff; background-color: #107AF2; }
@@ -3813,8 +3823,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .store_card_row > li { display: flex; flex-direction: column; }
 .store_pagination { margin-top: 24px; display: flex; justify-content: center; }
 
-
-/* 상담 및 신청 */
+/* ========== D1=3 · 상담 및 신청 (activeD1 === 3) ========== */
+/* --- D2=0 · 창업 상담 신청 (activeD2 === 0) --- */
 .sec_consult_startup, .sec_consult_entry{max-width:1000px; margin: 0 auto;}
 .seminar_wrap{max-width:1000px; margin:80px auto 0; scroll-margin-top: 24px; box-sizing:border-box;}
 .consent_box { width: 100%; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
@@ -3835,6 +3845,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .apply_form .form_body {padding-top:12px; border-bottom: 1px solid #E5E5E9;}
 .apply_form .form_body .form_row { min-height: auto; padding: 12px 0; display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
 .apply_form .form_body + .button_area{margin-top:40px;}
+/* --- D2=2 · 입점 제안/브랜드 전환 상담 (activeD2 === 2) --- */
 .row_layout.apply_form{border:0;}
 .row_layout.apply_form article{border-bottom:1px solid #E5E5E9;}
 .row_layout.apply_form article + article{margin-top:40px;}
@@ -3854,7 +3865,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .row_layout.apply_form .form_body .cb_zip { width: 100%; max-width: 400px; display: flex; align-items: center; gap: 8px;  }
 .row_layout.apply_form .form_body .cb_zip :deep(.input_wrap) { width: 100%; max-width: 207px; flex: 0 0 auto;  }
 .row_layout.apply_form .form_body .cb_ast { width: 100%; max-width: 757px; display: flex; flex-direction: column; gap: 8px; align-items: stretch;  }
-
 .row_layout.apply_form .form_body .cb_ast .cb_a2 { width: 100%;  display: flex; align-items: center; gap: 8px;  }
 .row_layout.apply_form .form_body .cb_ast .cb_a2 :deep(.input_wrap) { width: 100%; max-width: none; flex: 1 1 calc(50% - 4px); min-width: 0;  }
 .row_layout.apply_form .form_body .cb_area { display: flex; flex-wrap: wrap; align-items: center; gap: 24px;  }
@@ -3865,9 +3875,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .row_layout.apply_form .form_body .cb_store :deep(.input_wrap) { width: 100%; max-width: 448px;  }
 .row_layout.apply_form .form_body .cb_feat .form_field :deep(.textarea_wrap) { width: 100%; max-width: 600px;  }
 .row_layout.apply_form .form_body .cb_rel :deep(.input_wrap) { width: 100%; max-width: 448px;  }
-
 /* .row_layout.apply_form .form_body .form_row:last-of-type { border-bottom: 1px solid #E5E5E9;  } */
-
 .apply_form .button_area :deep(.primary){width:100%; max-width:250px;}
 .apply_form .form_body .form_row .form_label { margin-bottom: 12px; font-weight:400}
 .apply_form .form_body .form_row .form_field { width: 100%; }
@@ -3890,16 +3898,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .apply_form .form_field_open :deep(.input_wrap){max-width: 150px;}
 .apply_form .form_row_region :deep(.select){max-width:220px; flex: 1; min-width: 0; }
 .apply_form .form_field_experience { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; }
-@media (min-width: 769px) {
-    .apply_form .form_field_experience :deep(.input_wrap) { width: auto !important; max-width: none; flex: 0 0 auto; }
-    .apply_form .form_field_experience :deep(.input_wrap .check) { min-height: 52px; padding: 13px 16px !important; display: inline-flex !important; align-items: center; gap: 8px; background-color: #ffffff; border: 1px solid #90909a; border-radius: 10px;  cursor: pointer; position: relative; }
-    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]) { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
-    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label) { padding: 0 !important; display: inline-flex !important; align-items: center; gap: 8px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; white-space: nowrap; }
-    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::before) { content: "" !important; width: 20px !important; height: 20px !important; margin: 0 !important; background-color: #d9d9d9 !important; border: 0 !important; border-radius: 4px !important; box-sizing: border-box !important; position: static !important; top: auto !important; left: auto !important; display: block !important; flex-shrink: 0; }
-    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::after) { content: none !important; display: none !important; }
-    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::before) { background-color: #107af2 !important; }
-    .apply_form .form_field_experience :deep(.input_wrap .check:has(input[type="checkbox"]:checked)) { border-color: #107af2; }
-}
 .apply_form .form_field_calendar :deep(.input_wrap){max-width:700px;}
 .form_label_note { margin-top: 4px; color: #67676f; font-size: 1.2rem; line-height: 1.2; }
 .manager_card { width: 100%; max-width: 740px; margin: 12px 0; padding: 40px; background-color: #e7f2fe; border: 1px solid #107af2; border-radius: 12px; display: flex; align-items: center; gap: 32px;  }
@@ -3915,8 +3913,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .manager_addr { min-width: 0; }
 .manager_addr > .tit { margin: 0; color: #161616; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
 .manager_addr > .addr { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-
-/* 창업 설명회 신청 · 지역 선택 (763:16835) */
+/* --- D2=1 · 창업 설명회 신청 (activeD2 === 1) --- */
 .seminar_region_pick { position: relative; }
 .seminar_month_sizer { margin: 0; padding: 0; position: absolute; left: -99999px; top: 0; pointer-events: none; visibility: visible; white-space: nowrap; display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
 .seminar_month_sizer .seminar_month_title { flex-shrink: 0; white-space: nowrap; }
@@ -3930,9 +3927,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .seminar_month_title { margin: 0; color: #161616; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.025em; text-align: center; overflow-wrap: anywhere; word-break: keep-all; }
 .seminar_region_pick > .seminar_region_list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
 .seminar_region_list > li { min-width: 0;  }
-@media (max-width: 1419px) {
-    .seminar_region_pick > .seminar_region_list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 .seminar_region_card { width: 100%; max-width: 100%; min-height: 246px; padding: 24px; border: 1px solid #d7d7df; border-radius: 12px; background: #ffffff; display: flex; flex-direction: column; gap: 24px;  }
 .seminar_region_card_head > .seminar_region_name { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .seminar_region_card_head > .seminar_region_addr { margin: 8px 0 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: flex; align-items: center; gap: 4px; }
@@ -3950,6 +3944,28 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .seminar_slot_row:not(.is_muted) > .seminar_ic_time { color: #67676f; opacity: 0.9; }
 .seminar_slot_row.is_muted > .seminar_ic_time,
 .seminar_slot_row.is_muted > .seminar_slot_time { color: #67676f; text-decoration: line-through; }
+/* ========== quick menu (전 탭 · PC/태블릿 고정) ========== */
+.quick_menu{position:fixed; bottom:60px; right:clamp(24px, 4.5313vw, 87px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none; transition:opacity 0.35s ease;}
+.quick_menu.is_visible{opacity:1; pointer-events:auto;}
+.quick_menu li{position:relative; width:100%;}
+.quick_menu li button{width:100%; height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 0; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:700; letter-spacing:-0.01em; background:none; background-color:#F2F2F4; border:0; border-radius:99px; text-align:center; display:flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px);}
+.quick_menu li button::before{content:''; width:clamp(16px, 1.0417vw, 20px); height:clamp(19px, 1.25vw, 24px); background-color:#161616; display:block;}
+/* --- D1=3 · 창업 상담 신청 · PC 체크박스 UI (769px+) --- */
+@media (min-width: 769px) {
+    .apply_form .form_field_experience :deep(.input_wrap) { width: auto !important; max-width: none; flex: 0 0 auto; }
+    .apply_form .form_field_experience :deep(.input_wrap .check) { min-height: 52px; padding: 13px 16px !important; display: inline-flex !important; align-items: center; gap: 8px; background-color: #ffffff; border: 1px solid #90909a; border-radius: 10px;  cursor: pointer; position: relative; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]) { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label) { padding: 0 !important; display: inline-flex !important; align-items: center; gap: 8px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; white-space: nowrap; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::before) { content: "" !important; width: 20px !important; height: 20px !important; margin: 0 !important; background-color: #d9d9d9 !important; border: 0 !important; border-radius: 4px !important; box-sizing: border-box !important; position: static !important; top: auto !important; left: auto !important; display: block !important; flex-shrink: 0; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::after) { content: none !important; display: none !important; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::before) { background-color: #107af2 !important; }
+    .apply_form .form_field_experience :deep(.input_wrap .check:has(input[type="checkbox"]:checked)) { border-color: #107af2; }
+}
+/* --- D1=3 · 설명회 지역 카드 그리드 (1419px 이하) --- */
+@media (max-width: 1419px) {
+    .seminar_region_pick > .seminar_region_list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* ========== Tablet 1024px 이하 ========== */
 @media (max-width: 1024px) { 
     .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
@@ -3976,18 +3992,16 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
-
+/* ========== Mobile 768px 이하 ========== */
 @media (max-width: 768px) { :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
     section + section { padding-top: 80px; }
     .list_dotted > li { padding-left: 6px; }
     .list_dotted > li::before { width: 2px; height: 2px; top: 9px; }
     .list_dotted > li + li { margin-top: 5px; }
-    .list_note{margin-top: 16px;}
-    .list_note li >  p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .page_header { display: none; }
 
-    /* .sec_body { padding: 24px 0 40px; } */
+    /* D1=0 · GS25 창업 알아보기 */
     .panel { padding: 60px 0 80px; }
     .panel.pt_64 { padding-top: 60px;}
     .panel_third_depth { padding-top: 32px; }
@@ -3998,12 +4012,18 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .section_header > p { margin-top: 12px; }
     .section_header.no_desc { margin-bottom: 24px; }
     section p { font-size: 1.4rem; line-height: 1.4; }
+    section > .inner { padding-top: 40px; padding-bottom: 40px; }
+    .search_bottom_row { margin-top: 24px; padding-top: 24px; border-top: 1px solid #D7D7DF; flex-direction: column; gap: 50px; }
+    .search_group_input { width: 100%; }
+    .chip_list { position: relative; }
+
+
+    :deep(.check em){font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
     :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 64px; padding: 8px 0 8px 40px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
     :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn::before) { font-size: 1.8rem; line-height: 1.5; left: 0; }
     :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open) { font-weight: 700; border-bottom: 0; }
     :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_open::before) { font-weight: 700; }
     :deep(.faq_acc.board_type_toggle.type_faq dd.acc_panel .acc_panel_cont) { padding: 12px 12px 24px 20px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-
     .sec_gs25_faq :deep(.tab_wrap) { margin-bottom: 24px; overflow: visible; }
     .sec_gs25_faq :deep(.tab_wrap.tabSlide) { overflow: visible; }
     .sec_gs25_faq :deep(.tab_wrap.tabSlide ul.type_01) { padding-left: 0; flex-wrap: wrap; gap: 10px 8px; transform: none !important; transition: none; }
@@ -4017,11 +4037,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current .item) { color: #107af2; background-color: #e7f2fe; border-color: #107af2; }
     :deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { padding: 4px 8px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_gs25_faq :deep(.pagination) { margin-top: 40px; }
-    section > .inner { padding-top: 40px; padding-bottom: 40px; }
-    .sec_region_counsel :deep(.tab_wrap ul.type_02) { padding-left: 0; justify-content: flex-start; }
-    .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item) { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item)::after { min-width: 0; }
-
     .sec_hero { max-height: none; min-height: 640px; padding: 50px 20px; border-radius: 20px; gap: 0; }
     .sec_hero > header { text-align: center; }
     .sec_hero > header > .tit { margin: 0 auto; padding: 8px 16px; font-size: 1.2rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; }
@@ -4038,7 +4053,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_hero > .metric_list > li { min-width: 0; min-height: 103px; flex: 1; padding: 16px 10px; gap: 3px; }
     .sec_hero > .metric_list > li > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
     .sec_hero > .metric_list > li > span { font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
-
     .sec_num_list .section_header > h2 + p { color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .sec_num_list :deep(.num_info_list) { grid-template-columns: 1fr; gap: 40px; }
     .sec_num_list :deep(.num_info_item > article) { flex-direction: row; align-items: flex-start; gap: 16px; }
@@ -4048,21 +4062,18 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_num_list :deep(.num_info_title) { margin-bottom: 6px; }
     .sec_num_list :deep(.num_info_title > strong) { font-size: 2rem; line-height: 1.35; }
     .sec_num_list :deep(.num_info_body > p) { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-
     .sec_band > .inner { padding: 40px 20px; }
     .sec_band > .inner > .link_grid { margin-top: 32px; gap: 10px; }
     .sec_band > .inner > .link_grid > li > a { min-height: 0; padding: 16px; gap: 16px; }
     .sec_band > .inner > .link_grid > li > a > .thumb { width: 64px; height: 64px; }
     .sec_band > .inner > .link_grid > li > a > .txt > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .sec_band > .inner > .link_grid > li > a > .txt > .desc { font-size: 1.4rem; line-height: 1.4; }
-
     .sec_overlap > .overlap_grid { width: 100%; max-width: 335px; margin: 0 auto; flex-wrap: wrap; align-content: flex-start; justify-content: flex-start; gap: 0; }
     .sec_overlap > .overlap_grid > li { width: auto; flex: 0 1 calc((100% + 25px) / 2); }
     .sec_overlap > .overlap_grid > li + li { margin-left: 0; }
     .sec_overlap > .overlap_grid > li:nth-child(even) { margin-left: -25px; }
     .sec_overlap > .overlap_grid > li:nth-child(n+3) { margin-top: -20px; }
     .sec_overlap > .overlap_grid > li > article > strong { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-
     .sec_split > .inner > .split_layout { flex-direction: column; align-items: center; gap: 20px; }
     .sec_split > .inner > .split_layout > .info_card { width: 100%; max-width: none; min-height: 0; padding: 24px 16px; border-radius: 20px; }
     .sec_split > .inner > .split_layout > .info_card > dt { justify-content: flex-start !important; }
@@ -4071,7 +4082,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_split > .inner > .split_layout > .info_card > dd { margin: 12px 0 0; text-align: left !important; }
     .sec_split > .inner > .split_layout > .split_media { width: 220px; max-width: 100%; aspect-ratio: 1; }
     .sec_split > .inner > .split_layout > .split_media > img { width: 100%; height: 100%; display: block; object-fit: cover; }
-
     .sec_stack > .highlight_block { padding: 32px 20px; flex-direction: column; }
     .sec_stack > .highlight_block > .sub_header { width: 100%; max-width: none; }
     .sec_stack > .highlight_block > .sub_header > strong { margin-top: 16px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
@@ -4084,7 +4094,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .highlight_block > .highlight_body > div > h4 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_stack .swiper_edge { width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px; }
     .sec_stack > .highlight_block .swiper_edge { overflow: hidden; touch-action: pan-x; }
-
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-wrapper) { align-items: stretch; }
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) { width: 62.4vw; height: auto; flex-shrink: 0; }
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article { width: 100%; min-height: 285px; background-color: #fff; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; }
@@ -4094,14 +4103,12 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > p { margin: 0; color: #67676f; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
     .sec_stack > .highlight_block > .highlight_body > div > .highlight_swiper :deep(.swiper-slide) > article > figure > figcaption > strong { margin-top: 4px; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
     .sec_stack > .dual_panel > article { padding: 32px 20px; }
-
     .sec_icon_grid > .inner > .icon_grid { grid-template-columns: 1fr; gap: 10px; }
     .sec_icon_grid > .inner > .icon_grid > li { height: auto; }
     .sec_icon_grid > .inner > .icon_grid > li > article { height: auto; min-height: 0; padding: 16px; border-radius: 12px; grid-template-columns: 60px 1fr; column-gap: 12px; }
     .sec_icon_grid > .inner > .icon_grid > li > article > .icon { width: 60px; height: 60px; }
     .sec_icon_grid > .inner > .icon_grid > li > article > div > strong { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_icon_grid > .inner > .icon_grid > li > article > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-
     .sec_tri_grid > ul { gap: 10px; }
     .sec_tri_grid > ul > li { height: auto; padding: 24px 16px; }
     .sec_tri_grid > ul > li > h3 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
@@ -4109,7 +4116,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_tri_grid > ul > li > dl > dt { font-size: 1.6rem; line-height: 1.24; }
     .sec_tri_grid > ul > li > dl > dd { font-size: 1.4rem; line-height: 1.4; }
     .sec_tri_grid > ul > li > dl > dd + dt { margin-top: 32px; }
-
     .sec_diagram .section_header p { color: #67676F; }
     .sec_diagram > .diagram_shell { width: 100%; max-width: 335px; margin: 0 auto; padding: 100px 24px 24px; border-radius: 999px; flex-direction: column; align-items: stretch; gap: 24px; }
     .sec_diagram > .diagram_shell > .diagram_track { width: 100%; min-width: 0; flex: 0 0 auto; order: 1; }
@@ -4128,13 +4134,11 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested { width: 100%; max-width: 191px; flex: 0 0 auto; text-align: center; }
     .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > strong { color: #107af2; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; display: block; }
     .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > .diagram_ring.layer_mid > article.node_nested > p { margin-top: 6px; color: #107af2; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.14px; }
-
     .sec_franchise_define .franchise_define_card { padding: 24px 16px; border-radius: 12px; }
     .sec_franchise_define .franchise_define_card .sub_header { margin-bottom: 20px; }
     .sec_franchise_define .franchise_define_card .sub_header > .tit { min-height: 28px; padding: 4px 12px; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_define .franchise_define_card .sub_header > .tit + h3 { margin-top: 8px; }
     .sec_franchise_define .franchise_define_card .sub_header > h3 + p { margin-top: 8px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-
     .sec_franchise_define .franchise_formula { width: 100%; max-width: 100%; min-width: 0; display: grid; flex-wrap: unset; align-items: center; justify-content: unset; justify-items: stretch; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-rows: auto auto auto; column-gap: 1.5px; row-gap: 0; }
     .sec_franchise_define .franchise_formula > div:nth-child(1) { min-width: 0; justify-self: stretch; grid-column: 1; grid-row: 1; }
     .sec_franchise_define .franchise_formula > span:nth-child(2) { min-width: 0; color: #107af2; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; align-self: center; justify-self: center; grid-column: 2; grid-row: 1; }
@@ -4167,12 +4171,78 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .dual_panel > article > .stack_list > li > div > strong { font-size: 1.6rem; line-height: 1.24; }
     .sec_stack > .dual_panel > article > .stack_list > li > div > p { margin-top: 2px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_stack > .dual_panel > article > .media_pair > figure { aspect-ratio: 141/111; }
-
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > figure { aspect-ratio: 320/213; }
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) { width: 85.333vw; height: auto; flex-shrink: 0; }
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong { margin-top: 4px; font-size: 2rem; line-height: 1.325; letter-spacing: -0.01em; }
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { padding: 6px; font-size: 1.2rem; line-height: 1.2; }
-
+    .sec_diagram header { margin-bottom: 32px; }
+    .list_note{margin-top: 16px;}
+    .list_note li >  p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    /* D1=1 · 창업 준비하기 */
+    .sec_startup_process .process_timeline { align-items: stretch; gap: 20px; }
+    .sec_startup_process .process_timeline > li { align-items: stretch; justify-content: flex-start; gap: 10px; }
+    .sec_startup_process .process_timeline > li > .step_meta { width: 60px; position: relative; flex-direction: column; align-items: center; align-self: stretch; justify-content: flex-start; gap: 4px; transform: translateY(10px); }
+    .sec_startup_process .process_timeline > li > .step_meta > .day { width: 100%; height: auto; min-width: 0; flex-shrink: 0; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; background: #fff; text-align: center; z-index: 2; order: 2; }
+    .sec_startup_process .process_timeline > li > .step_meta > .step_track { width: 100%; flex: 0 0 auto; margin-bottom: 0; padding-bottom: 0; order: 1; }
+    .sec_startup_process .process_timeline > li > .step_meta > .step_track > .num { width: 32px; height: 32px; font-size: 2rem; line-height: 1.35; }
+    .sec_startup_process .process_timeline > li > .step_meta > .step_track > .step_line { width: 1px; height: auto; flex: none; background-color: #c4c4d0; position: absolute; top: 32px; bottom: -20px; left: 50%; transform: translateX(-50%); }
+    .sec_startup_process .process_timeline > li > article { width: auto; max-width: none; min-width: 0; flex: 1 1 auto; padding: 24px 16px; border-radius: 16px; gap: 0; }
+    .sec_startup_process .process_timeline > li > article > .icon { display: none; }
+    .sec_startup_process .process_timeline > li > article > div > .lead { margin-bottom: 4px; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .sec_startup_process .process_timeline > li > article > div > h3 { margin-bottom: 4px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_startup_process .process_timeline > li > article > div > .desc { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_startup_process .process_timeline > li > article > div > .link_more { margin-top: 12px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li { padding-left: 9px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li::before { width: 3px; height: 3px; top: 8px; }
+    .sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_startup_process .process_timeline > li[data-theme="dday"] > article { border-radius: 20px; gap: 12px; }
+    .sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { width: 40px; height: 40px; display: block; }
+    .sec_franchise_type > .franchise_type_list { flex-direction: column; gap: 20px; }
+    .sec_franchise_type > .franchise_type_list > li { max-width: none; }
+    .sec_franchise_type > .franchise_type_list > li.is_profit { order: 1; }
+    .sec_franchise_type > .franchise_type_list > li.is_stable { order: 2; }
+    .sec_franchise_type > .franchise_type_list > li > article > header { padding: 24px; gap: 16px; }
+    .sec_franchise_type > .franchise_type_list > li > article > header > .icon { width: 60px; height: 60px; }
+    .sec_franchise_type > .franchise_type_list > li > article > header > div > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > header > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { padding: 24px; gap: 10px; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { padding: 20px 12px; border-radius: 16px; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 4px 16px; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .card_icon { width: 32px; height: 32px; margin-top: 12px; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > strong { margin-top: 12px; font-size: 1.6rem; line-height: 1.24; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare > .franchise_compare_wrap { margin-top: 32px; margin-right: -20px; margin-left: -20px; padding: 0 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .sec_franchise_compare .franchise_compare_table { min-width: 852px; }
+    .sec_franchise_compare .franchise_compare_table col.col_group { width: 7%; }
+    .sec_franchise_compare .franchise_compare_table col.col_label { width: 17.6%; }
+    .sec_franchise_compare .franchise_compare_table col.col_gs { width: 25.1%; }
+    .sec_franchise_compare .franchise_compare_table th,
+    .sec_franchise_compare .franchise_compare_table td { padding: 12px 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table thead th > strong { font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+    .sec_franchise_compare .franchise_compare_table thead td > span { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .sec_operation .section_header, .sec_life .section_header { margin-bottom: 60px; }
+    .sec_life .icon_card_list.col_02 { gap: 0; }
+    .icon_card_topic .sub_header { margin-bottom: 24px; }
+    .icon_card_topic + .icon_card_topic { margin-top: 60px; }
+    .icon_card_list { gap: 10px; }
+    .icon_card_list.col_02, .icon_card_list.col_03 { grid-template-columns: 1fr; }
+    .icon_card_list > li > article { padding: 16px; border-radius: 12px; gap: 12px; }
+    .icon_card_list > li > article > .icon { width: 60px; height: 60px; }
+    .icon_card_list > li > article > div > dl > dt { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .icon_card_list > li > article > div > dl > dt + dd { margin-top: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .icon_card_list > li > article > div > ul.list_note > li > p {  font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .icon_card_list > li > article > div > .button_area { display: flex; justify-content: flex-end; }
+    .icon_card_list > li > article > div > .button_area .btn_mid { width: 230px; height: 62px; margin-top: 16px; margin-left: auto; padding: 7px 12px; justify-content: flex-end; }
+    .icon_card_list.type_02 { border: 0; }
+    .icon_card_row:first-child .icon_card_list.type_02 > li > article { padding: 24px 0; }
+    .icon_card_row:first-child .icon_card_list.type_02 > li:first-child > article:first-child { padding: 0 0 24px; }
+    .icon_card_row .icon_card_list.type_02 > li > article { padding: 24px 0; border: 0; border-bottom: 1px solid #E5E5E9; border-radius: 0; }
+    .sec_region_counsel :deep(.tab_wrap ul.type_02) { padding-left: 0; justify-content: flex-start; }
+    .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item) { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sec_region_counsel :deep(.tab_wrap ul.type_02 li .item)::after { min-width: 0; }
     .sec_region_counsel > .section_header { margin-bottom: 24px; }
     .sec_region_counsel :deep(.tab_wrap) { margin-bottom: 32px; }
     .sec_region_counsel .region_counsel_board { grid-template-columns: 1fr; gap: 10px; }
@@ -4195,82 +4265,14 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_region_counsel .region_counsel_staff_body .area { margin-top: 2px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_region_counsel .region_counsel_staff_body .phone { margin-top: 6px; gap: 8px; }
     .sec_region_counsel .region_counsel_staff_body .phone a { font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-
-    .sec_startup_process .process_timeline { align-items: stretch; gap: 20px; }
-    .sec_startup_process .process_timeline > li { align-items: stretch; justify-content: flex-start; gap: 10px; }
-    .sec_startup_process .process_timeline > li > .step_meta { width: 60px; position: relative; flex-direction: column; align-items: center; align-self: stretch; justify-content: flex-start; gap: 4px; transform: translateY(10px); }
-    .sec_startup_process .process_timeline > li > .step_meta > .day { width: 100%; height: auto; min-width: 0; flex-shrink: 0; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; background: #fff; text-align: center; z-index: 2; order: 2; }
-    .sec_startup_process .process_timeline > li > .step_meta > .step_track { width: 100%; flex: 0 0 auto; margin-bottom: 0; padding-bottom: 0; order: 1; }
-    .sec_startup_process .process_timeline > li > .step_meta > .step_track > .num { width: 32px; height: 32px; font-size: 2rem; line-height: 1.35; }
-    .sec_startup_process .process_timeline > li > .step_meta > .step_track > .step_line { width: 1px; height: auto; flex: none; background-color: #c4c4d0; position: absolute; top: 32px; bottom: -20px; left: 50%; transform: translateX(-50%); }
-    .sec_startup_process .process_timeline > li > article { width: auto; max-width: none; min-width: 0; flex: 1 1 auto; padding: 24px 16px; border-radius: 16px; gap: 0; }
-    .sec_startup_process .process_timeline > li > article > .icon { display: none; }
-    .sec_startup_process .process_timeline > li > article > div > .lead { margin-bottom: 4px; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
-    .sec_startup_process .process_timeline > li > article > div > h3 { margin-bottom: 4px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-    .sec_startup_process .process_timeline > li > article > div > .desc { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_startup_process .process_timeline > li > article > div > .link_more { margin-top: 12px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li { padding-left: 9px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li::before { width: 3px; height: 3px; top: 8px; }
-    .sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_startup_process .process_timeline > li[data-theme="dday"] > article { border-radius: 20px; gap: 12px; }
-    .sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { width: 40px; height: 40px; display: block; }
-
-    .sec_franchise_type > .franchise_type_list { flex-direction: column; gap: 20px; }
-    .sec_franchise_type > .franchise_type_list > li { max-width: none; }
-    .sec_franchise_type > .franchise_type_list > li.is_profit { order: 1; }
-    .sec_franchise_type > .franchise_type_list > li.is_stable { order: 2; }
-    .sec_franchise_type > .franchise_type_list > li > article > header { padding: 24px; gap: 16px; }
-    .sec_franchise_type > .franchise_type_list > li > article > header > .icon { width: 60px; height: 60px; }
-    .sec_franchise_type > .franchise_type_list > li > article > header > div > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .sec_franchise_type > .franchise_type_list > li > article > header > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { padding: 24px; gap: 10px; }
-    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { padding: 20px 12px; border-radius: 16px; }
-    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 4px 16px; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; }
-    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .card_icon { width: 32px; height: 32px; margin-top: 12px; }
-    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > strong { margin-top: 12px; font-size: 1.6rem; line-height: 1.24; }
-    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-
-    .sec_franchise_compare > .franchise_compare_wrap { margin-top: 32px; margin-right: -20px; margin-left: -20px; padding: 0 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .sec_franchise_compare .franchise_compare_table { min-width: 852px; }
-    .sec_franchise_compare .franchise_compare_table col.col_group { width: 7%; }
-    .sec_franchise_compare .franchise_compare_table col.col_label { width: 17.6%; }
-    .sec_franchise_compare .franchise_compare_table col.col_gs { width: 25.1%; }
-    .sec_franchise_compare .franchise_compare_table th,
-    .sec_franchise_compare .franchise_compare_table td { padding: 12px 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_franchise_compare .franchise_compare_table thead th > strong { font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
-    .sec_franchise_compare .franchise_compare_table thead td > span { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-
-    .sec_operation .section_header, .sec_life .section_header { margin-bottom: 60px; }
-    .sec_life .icon_card_list.col_02 { gap: 0; }
-    .icon_card_topic .sub_header { margin-bottom: 24px; }
-    .icon_card_topic + .icon_card_topic { margin-top: 60px; }
-    .icon_card_list { gap: 10px; }
-    .icon_card_list.col_02, .icon_card_list.col_03 { grid-template-columns: 1fr; }
-    .icon_card_list > li > article { padding: 16px; border-radius: 12px; gap: 12px; }
-    .icon_card_list > li > article > .icon { width: 60px; height: 60px; }
-    .icon_card_list > li > article > div > dl > dt { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-    .icon_card_list > li > article > div > dl > dt + dd { margin-top: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .icon_card_list > li > article > div > ul.list_note > li > p {  font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
-    .icon_card_list > li > article > div > .button_area { display: flex; justify-content: flex-end; }
-    .icon_card_list > li > article > div > .button_area .btn_mid { width: 230px; height: 62px; margin-top: 16px; margin-left: auto; padding: 7px 12px; justify-content: flex-end; }
-    .icon_card_list.type_02 { border: 0; }
-    .icon_card_row:first-child .icon_card_list.type_02 > li > article { padding: 24px 0; }
-    .icon_card_row:first-child .icon_card_list.type_02 > li:first-child > article:first-child { padding: 0 0 24px; }
-    .icon_card_row .icon_card_list.type_02 > li > article { padding: 24px 0; border: 0; border-bottom: 1px solid #E5E5E9; border-radius: 0; }
-
+    /* D1=2 · 추천 점포 찾기 */
     .store_list_wrap { margin-top: 60px; }
     .tab_intro { margin-bottom: 60px; font-size: 1.8rem; line-height: 1.4; }
     .store_count { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .store_count > strong { font-weight: 400; }
     .store_search { padding: 30px 20px; }
-    .search_bottom_row { margin-top: 24px; padding-top: 24px; border-top: 1px solid #D7D7DF; flex-direction: column; gap: 50px; }
-    .search_group_input { width: 100%; }
     .store_search_input { height: 52px; }
     .youth_popover { width: calc(100vw - 40px); max-width: 335px; top: calc(100% + 8px); right: auto; left: -20px; transform: none; }
-    .chip_list { position: relative; }
     .chip_youth_wrap { position: static; }
     .store_list_bar { height: auto; margin-bottom: 16px; align-items: flex-end; gap: 12px; }
     .store_bar_right { justify-content: flex-end; }
@@ -4288,10 +4290,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .store_accordion_list :deep(dd.acc_panel > .acc_panel_inner > .acc_panel_cont) { padding: 30px 20px !important; background-color: #F8F8F8 !important; }
     .store_accordion_list :deep(dd.acc_panel.acc_show) { border: 0; }
     .accordion_badges { margin-top: 6px; }
-    .sec_diagram header { margin-bottom: 32px; }
-
-
-    /* 상담 및 신청청 */
+    /* D1=3 · 상담 및 신청 */
     .consent_box { padding: 24px 20px; }
     .consent_box > h3 { font-size: 2rem; line-height: 1.35; }
     .consent_list { margin-top: 16px; }
@@ -4347,7 +4346,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .apply_form .form_body .form_row{padding:20px 0;}
     .row_layout.apply_form article + article{margin-top:60px;}
     .apply_form .form_body .form_row.col_02 .col_item{padding:20px 0px;}
-    /* .apply_form .button_area{ padding-top:40px; border-top:1px solid #E5E5E9; } */
     .apply_form .button_area :deep(.primary){width:100%; max-width:100%; }
     .seminar_wrap{margin-top:40px; scroll-margin-top:20px;}
     .manager_card .manager_header > p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
@@ -4363,8 +4361,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .row_layout.apply_form .form_body h3{ font-size: 2.4rem;line-height: 1.35;}
     .row_layout.apply_form article .form_row:first-of-type{padding-top:30px;}
     .row_layout.apply_form article .form_row:last-of-type{padding-bottom:30px;}
-    :deep(.check em){font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-    /* .apply_form .form_field{gap:8px;} */
+    
     /* 우측 하단 sticky 메뉴 */
     .quick_menu { display: none; }
 }
