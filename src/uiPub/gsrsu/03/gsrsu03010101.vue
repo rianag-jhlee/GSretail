@@ -1153,7 +1153,7 @@
                                             </div>
                                         </div>
                                         <div class="btn-wrap ac mt40">
-                                            <Buttons btn-class="btn_icon btn_xl primary after">
+                                            <Buttons btn-class="btn_icon_arrow btn_xl primary after">
                                                 {{ t.protect.customer.Compensation.BtnText }}
                                             </Buttons>
                                         </div>
@@ -3130,7 +3130,7 @@ export default {
         .card_grid {flex-wrap:nowrap; overflow-x:auto;}
         .strategy_card {width:335px;/*width:calc(100vw - 80px)*/ flex-direction:column;}
         .philosophy_box {padding:20px;}
-        .philosophy_box .btn_icon {width:90%;}
+        .philosophy_box .btn_icon {width:90%;}.btn_icon_arrow.after:after
         .item_wrap div {width:200px; height:200px;}
         .item_wrap div p {font-size:16px !important;}
 

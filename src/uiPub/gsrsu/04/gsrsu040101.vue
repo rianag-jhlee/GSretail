@@ -4419,7 +4419,7 @@ section + section { padding-top:120px; }
 .cp_manager_banner_content dl dt, .cp_manager_banner_content dl dd { font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em; }
 .cp_manager_banner_content dl dd strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; }
 .cp_manager_banner_content >div { flex: 0 1 auto; }
-.cp_appoint_board .process_flow { display: flex; gap: 20px; align-items: center; width: 100%; box-sizing: border-box; flex-wrap: wrap; }
+.cp_appoint_board .process_flow { display: flex; gap: 20px; align-items: center; width: 100%; box-sizing: border-box; flex-wrap: wrap; justify-content:center; }
 .cp_appoint_board .process_flow > article { flex: 0 1 220px; aspect-ratio: 1; min-width: 0; background-color: #f8f8f8; border-radius: 999px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
 .cp_appoint_board .process_flow > article > h4 { color: #000000; font-size:2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .cp_appoint_board .process_flow > article > h4 + p { margin: 12px 0 0; color: #000000; font-size:1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; word-break: keep-all; }
@@ -4666,6 +4666,7 @@ section + section { padding-top:120px; }
     .base_item > em { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0; }
     .base_item > strong { font-size: 1.6rem; line-height: 1.24;letter-spacing: 0; }
     .base_item p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .base_item .gray_box.type02 {padding: 20px;}
     .base_list.type02 { padding: 32px; border-radius: 12px; }
     .signature_box { margin-top: 24px; padding: 24px 20px; border-radius: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
     .signature_box p { font-size: 1.6rem; line-height: 1.5; }
