@@ -95,7 +95,7 @@ const langData = {
             { title: "정도경영제보", path: "#none" },
             { title: "고객센터", path: "gsrcu01" },
             { title: "GS SHOP 시청자 관련", path: "#none" },
-            { title: "공지사항", path: "gsrse01" }
+            { title: "공지사항", path: "gsrnotice" }
         ],
         info: {
             logo: "(주)GS리테일",
