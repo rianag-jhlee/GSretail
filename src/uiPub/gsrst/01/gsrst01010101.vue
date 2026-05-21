@@ -934,6 +934,11 @@ let quickMenuLastTopPx = null;
 let quickMenuFooterZone = false;
 let quickMenuRefreshTimer = null;
 
+/** App.vue #wrap 직하위 사이트 푸터만 (폼·컴포넌트 내 footer 태그 제외) */
+function getQuickMenuSiteFooter() {
+    return document.querySelector("#wrap > footer");
+}
+
 function setQuickMenuFixed(menu, bottomPx) {
     menu.style.position = "fixed";
     menu.style.top = "auto";
@@ -965,7 +970,7 @@ function updateQuickMenuVisibility() {
 function updateQuickMenuBottom(quickMenu) {
     if (!quickMenu || mqMobile.matches) return;
     if (!quickMenuFooterEl) {
-        quickMenuFooterEl = document.querySelector("footer");
+        quickMenuFooterEl = getQuickMenuSiteFooter();
     }
     if (!quickMenuWrapEl) {
         quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
@@ -1043,7 +1048,7 @@ function initQuickMenu() {
     const quickMenu = quickMenuRef.value;
     if (!quickMenu) return;
     resetQuickMenuState();
-    quickMenuFooterEl = document.querySelector("footer");
+    quickMenuFooterEl = getQuickMenuSiteFooter();
     quickMenuWrapEl = quickMenu.closest(".wrap_gsrst");
     onQuickMenuScroll();
 }
