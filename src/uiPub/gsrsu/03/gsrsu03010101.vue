@@ -1491,9 +1491,9 @@
                                         </div>
 
                                         <div class="btn-wrap ac mt40">
-                                            <Buttons btn-class="btn_icon_arrow btn_xl border after">
+                                            <a class="btn_icon_arrow btn_xl border after" :href="t.protect.informationprotection.Activities.link" target="_blank">
                                                 {{ t.protect.informationprotection.Activities.BtnText }}
-                                            </Buttons>
+                                            </a>
                                         </div>
                                     </section>
                                     <section class="award_section">
@@ -2570,7 +2570,8 @@ export default {
                                     { tit: "모의훈련", desc: "임직원 대상으로 악성메일 모의훈련을 실시하여, 악성메일에 대한 보안인식을 향상시키고 있습니다.<br/>또한, 개인정보 유·노출 사고에 대한 모의훈련을 실시하여, 실제 사고 발생 시 고객분들께 발생하는 개인정보침해를 줄이기 위해 노력하고 있습니다." },
                                     { tit: "위험관리", desc: "정보자산(인프라 등) 및 프로세스 등에서 발생하는 위험을 관리하기 위해 매년 취약점 점검 및 위험평가를 실시하고 있으며, 도출된 위험에 대해 관리할 수 있는 계획을 수립하여 운영하고 있습니다." }
                                 ],
-                                BtnText: "정보보호 공시 바로가기"
+                                BtnText: "정보보호 공시 바로가기",
+                                link:'https://isds.kisa.or.kr/kr/publish/list.do?pageNum=1&limit=10&type=ALL&keyword=%EC%A7%80%EC%97%90%EC%8A%A4%EB%A6%AC%ED%85%8C%EC%9D%BC&menuNo=204942'
                             },
                             Certification: {
                                 Img: require("@/assets/images/dummy/gsrsu030305_logo.png"),
