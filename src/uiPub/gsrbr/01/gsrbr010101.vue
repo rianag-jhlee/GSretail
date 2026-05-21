@@ -115,7 +115,13 @@
 
         <!-- 탭 0: 차별화 상품 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel">
-            <PanelHeader :hero="tab0.hero" :hero-alt="tab0.heroAlt" :title="tab0.title" :desc="tab0.subtitle" />
+            <figure v-if="tab0.hero" class="brand_panel_bg">
+                <img :src="tab0.hero" :alt="tab0.heroAlt || ''" width="1420" height="340" />
+            </figure>
+            <header v-if="tab0.title" class="brand_panel_title">
+                <h2 v-html="tab0.title"></h2>
+                <p v-if="tab0.subtitle" v-html="tab0.subtitle" />
+            </header>
 
             <ul v-if="tab0.cards && tab0.cards.length && !isMobileView" class="diff_card_grid" role="list">
                 <li v-for="(card, c) in tab0.cards" :key="c">
@@ -154,10 +160,22 @@
 
         <!-- 탭 1: CAFE25 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel cafe_panel">
-            <PanelHeader :hero="tab1.hero" :hero-alt="tab1.heroAlt" :title="tab1.title" :desc="tab1.subtitle" hero-bg="#fff" />
+            <figure v-if="tab1.hero" class="brand_panel_bg" :style="{ backgroundColor: '#fff' }">
+                <img :src="tab1.hero" :alt="tab1.heroAlt || ''" width="1420" height="340" />
+            </figure>
+            <header v-if="tab1.title" class="brand_panel_title">
+                <h2 v-html="tab1.title"></h2>
+                <p v-if="tab1.subtitle" v-html="tab1.subtitle" />
+            </header>
 
             <section v-for="(sec, i) in tab1.sections" :key="i">
-                <SectionHeader :title="sec.title" :desc="sec.desc" :source="sec.source" />
+                <header class="sec_header">
+
+                    <h3 v-html="sec.title"></h3>
+
+                    <p v-if="sec.desc || sec.source" class="sec_header_desc"><span v-if="sec.desc" v-html="sec.desc"></span><cite v-if="sec.source" class="sec_cite">{{ sec.source }}</cite></p>
+
+                </header>
 
                 <!-- 카드형 -->
                 <template v-if="sec.type === 'cards'">
@@ -266,10 +284,22 @@
 
         <!-- 탭 2: CHICKEN25 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel chicken_panel">
-            <PanelHeader :hero="tab2.hero" :hero-alt="tab2.heroAlt" :title="tab2.title" :desc="tab2.subtitle" />
+            <figure v-if="tab2.hero" class="brand_panel_bg">
+                <img :src="tab2.hero" :alt="tab2.heroAlt || ''" width="1420" height="340" />
+            </figure>
+            <header v-if="tab2.title" class="brand_panel_title">
+                <h2 v-html="tab2.title"></h2>
+                <p v-if="tab2.subtitle" v-html="tab2.subtitle" />
+            </header>
 
             <section v-for="(sec, i) in tab2.sections" :key="i">
-                <SectionHeader :title="sec.title" :desc="sec.desc" />
+                <header class="sec_header">
+
+                    <h3 v-html="sec.title"></h3>
+
+                    <p v-if="sec.desc" class="sec_header_desc" v-html="sec.desc" />
+
+                </header>
 
                 <FeatureCards v-if="sec.type === 'text_cards'" :items="sec.cards" type="text" />
             </section>
@@ -299,10 +329,22 @@
 
         <!-- 탭 3: GOPIZZA -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel gopizza_panel">
-            <PanelHeader :hero="tab3.hero" :hero-alt="tab3.heroAlt" :title="tab3.title" :desc="tab3.subtitle" />
+            <figure v-if="tab3.hero" class="brand_panel_bg">
+                <img :src="tab3.hero" :alt="tab3.heroAlt || ''" width="1420" height="340" />
+            </figure>
+            <header v-if="tab3.title" class="brand_panel_title">
+                <h2 v-html="tab3.title"></h2>
+                <p v-if="tab3.subtitle" v-html="tab3.subtitle" />
+            </header>
 
             <section v-for="(sec, i) in tab3.sections" :key="i">
-                <SectionHeader :title="sec.title" :desc="sec.desc" />
+                <header class="sec_header">
+
+                    <h3 v-html="sec.title"></h3>
+
+                    <p v-if="sec.desc" class="sec_header_desc" v-html="sec.desc" />
+
+                </header>
 
                 <!-- 이미지 2열 -->
                 <ul v-if="sec.type === 'img_grid' && !isMobileView" class="img_grid" role="list">
@@ -440,10 +482,24 @@
 
         <!-- depth1 = 1: 신선강화점 -->
         <div v-if="depth1ActiveIdx === 1" class="brand_panel sinsen_panel">
-            <PanelHeader :hero="sinsen.hero" :hero-alt="sinsen.heroAlt" :title="sinsen.title" :desc="sinsen.subtitle" />
+            <figure v-if="sinsen.hero" class="brand_panel_bg">
+                <img :src="sinsen.hero" :alt="sinsen.heroAlt || ''" width="1420" height="340" />
+            </figure>
+            <header v-if="sinsen.title" class="brand_panel_title">
+                <h2 v-html="sinsen.title"></h2>
+                <p v-if="sinsen.subtitle" v-html="sinsen.subtitle" />
+            </header>
 
             <section v-for="(sec, i) in sinsen.sections" :key="i">
-                <SectionHeader :title="sec.title" :desc="sec.desc" :mobile-desc="sec.mobileDesc" />
+                <header class="sec_header">
+
+                    <h3 v-html="sec.title"></h3>
+
+                    <p v-if="sec.desc" class="sec_header_desc" v-html="sec.desc" />
+
+                    <p v-if="sec.mobileDesc" class="sec_mobile_desc">{{ sec.mobileDesc }}</p>
+
+                </header>
 
                 <!-- 특징 카드 4열 -->
                 <FeatureCards v-if="sec.features" :items="sec.features" type="icon" no-pagination class="sinsen_feature" />
@@ -502,12 +558,13 @@
 
                 <!-- 26.05.15 Edit 이종환 : 그 외 패널: 기본 구조를 각 패널로 다시 분리 -->
                 <template v-if="i === 0">
-                        <PanelHeader
-                            :hero="tab.hero"
-                            :hero-alt="tab.heroAlt"
-                            :title="tab.title"
-                            :desc="tab.desc"
-                        />
+                        <figure v-if="tab.hero" class="brand_panel_bg">
+                            <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        </figure>
+                        <header v-if="tab.title" class="brand_panel_title">
+                            <h2 v-html="tab.title"></h2>
+                            <p v-if="tab.desc" v-html="tab.desc" />
+                        </header>
                     <section>
                         <div class="usage_group">
                             <h4 class="usage_group_title">{{ tab.sub_item.title }}</h4>
@@ -524,12 +581,13 @@
                 </template>
 
                 <template v-else-if="i === 1">
-                        <PanelHeader
-                            :hero="tab.hero"
-                            :hero-alt="tab.heroAlt"
-                            :title="tab.title"
-                            :desc="tab.desc"
-                        />
+                        <figure v-if="tab.hero" class="brand_panel_bg">
+                            <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        </figure>
+                        <header v-if="tab.title" class="brand_panel_title">
+                            <h2 v-html="tab.title"></h2>
+                            <p v-if="tab.desc" v-html="tab.desc" />
+                        </header>
                     <section>
                         <div v-if="tab.table" class="com_table_wrap">
                             <table class="com_table">
@@ -550,7 +608,10 @@
 
                 <!-- 교통카드 충전: LNB + 콘텐츠 2열 레이아웃 -->
                 <template v-else-if="i === 2">
-                    <PanelHeader :title="tab.pageTitle" :desc="tab.pageDesc" />
+                    <header v-if="tab.pageTitle" class="brand_panel_title">
+                        <h2 v-html="tab.pageTitle"></h2>
+                        <p v-if="tab.pageDesc" v-html="tab.pageDesc" />
+                    </header>
                     <div class="pop_wrap">
                         <nav class="pop_lnb" aria-label="팝카드 메뉴">
                             <ul>
@@ -569,9 +630,11 @@
                                 <AccordionItem item-key="pop0" @opened="onPopCard0Opened">
                                     <template #title>{{ tab.popTitle }}</template>
                                     <section id="pop-sec-0" data-pop-sec="0" class="pop_sec">
-                                        <SectionHeader :title="tab.popTitle" :desc="tab.popDesc">
+                                        <header class="sec_header">
+                                            <h3 v-html="tab.popTitle"></h3>
+                                            <p v-if="tab.popDesc" class="sec_header_desc" v-html="tab.popDesc" />
                                             <p class="pop_exclude">{{ tab.popExclude }}</p>
-                                        </SectionHeader>
+                                        </header>
                                         <Swiper
                                             class="pop_card_swiper"
                                             slides-per-view="auto"
@@ -612,7 +675,9 @@
                                 <AccordionItem item-key="pop-charging" @opened="onChargingOpened">
                                     <template #title>{{ tab.chargingTitle }}</template>
                                     <section class="pop_sec">
-                                        <SectionHeader :title="tab.chargingTitle" />
+                                        <header class="sec_header">
+                                            <h3 v-html="tab.chargingTitle"></h3>
+                                        </header>
                                         <!-- PC: 기존 flex 레이아웃 -->
                                         <ul class="charging_service_list">
                                             <li v-for="(item, ci) in tab.chargingItems" :key="ci" class="charging_service_item">
@@ -644,7 +709,11 @@
                                     <template #title>{{ tab.lnbItems[1] }}</template>
                                     <section id="pop-sec-1" data-pop-sec="1" class="pop_sec">
                                         <div class="usage_header">
-                                            <SectionHeader :title="tab.lnbItems[1]" />
+                                            <header class="sec_header">
+
+                                                <h3 v-html="tab.lnbItems[1]"></h3>
+
+                                            </header>
                                             <select
                                                 class="usage_select_box"
                                                 v-model="trafficSelectVal"
@@ -681,7 +750,11 @@
                                     <template #title>{{ tab.lnbItems[2] }}</template>
                                     <section id="pop-sec-2" data-pop-sec="2" class="pop_sec">
                                         <div class="usage_header">
-                                            <SectionHeader :title="tab.lnbItems[2]" />
+                                            <header class="sec_header">
+
+                                                <h3 v-html="tab.lnbItems[2]"></h3>
+
+                                            </header>
                                             <select
                                                 class="usage_select_box"
                                                 v-model="retailSelectVal"
@@ -724,16 +797,30 @@
 
                 <!-- 기프트카드 패널 -->
                 <template v-else-if="i === 3">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
+                    <figure v-if="tab.hero" class="brand_panel_bg">
+                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                    </figure>
+                    <header v-if="tab.title" class="brand_panel_title">
+                        <h2 v-html="tab.title"></h2>
+                        <p v-if="tab.desc" v-html="tab.desc" />
+                    </header>
                     <section>
-                        <SectionHeader :title="tab.advantageTitle" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.advantageTitle"></h3>
+
+                        </header>
                         <div class="gift_advantage_cards">
                             <FeatureCards :items="tab.advantages" />
                         </div>
                     </section>
 
                     <section class="sec_gift_brand">
-                        <SectionHeader :title="tab.brandTitle" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.brandTitle"></h3>
+
+                        </header>
                         <div class="gift_brand_slider">
                             <button type="button" class="gift_brand_nav gift_brand_prev" :aria-label="t.common.prevAria">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -767,7 +854,13 @@
                         <div class="gift_brand_pagination"></div>
                     </section>
                     <section>
-                        <SectionHeader :title="tab.purchaseTitle" :desc="tab.purchaseNote" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.purchaseTitle"></h3>
+
+                            <p v-if="tab.purchaseNote" class="sec_header_desc" v-html="tab.purchaseNote" />
+
+                        </header>
                         <div class="gift_purchase_wrap">
                             <figure class="gift_purchase_img">
                                 <img :src="tab.purchaseImg" alt="" />
@@ -784,12 +877,13 @@
                         </div>
                     </section>
                     <section>
-                        <SectionHeader
-                            :title="tab.usageTitle"
-                            :desc="tab.usageDesc"
-                            desc-tag="div"
-                            class="gift_usage_heading"
-                        />
+                        <header class="sec_header gift_usage_heading">
+
+                            <h3 v-html="tab.usageTitle"></h3>
+
+                            <div v-if="tab.usageDesc" class="sec_header_desc" v-html="tab.usageDesc" />
+
+                        </header>
                         <div class="gift_usage_wrap">
                             <div class="gift_usage_group">
                                 <h3>{{ tab.onlineLabel }}</h3>
@@ -805,13 +899,27 @@
 
                 <!-- GS25 유심 요금제 패널 -->
                 <template v-else-if="i === 4">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
+                    <figure v-if="tab.hero" class="brand_panel_bg">
+                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                    </figure>
+                    <header v-if="tab.title" class="brand_panel_title">
+                        <h2 v-html="tab.title"></h2>
+                        <p v-if="tab.desc" v-html="tab.desc" />
+                    </header>
                     <section>
-                        <SectionHeader :title="tab.advantageTitle" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.advantageTitle"></h3>
+
+                        </header>
                         <FeatureCards :items="tab.advantages" class="usim_advantage_cards" />
                     </section>
                     <section>
-                        <SectionHeader :title="tab.introTitle" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.introTitle"></h3>
+
+                        </header>
                         <div class="usim_plan_table_wrap">
                             <table class="usim_plan_table">
                                 <thead>
@@ -848,7 +956,11 @@
                         </div>
                     </section>
                     <section>
-                        <SectionHeader :title="tab.benefitTitle" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.benefitTitle"></h3>
+
+                        </header>
                         <ul class="imgcard_list">
                             <li v-for="(card, ci) in tab.benefitCards" :key="ci" class="imgcard_item">
                                 <figure class="imgcard_img">
@@ -868,12 +980,20 @@
                     </section>
 
                     <section class="usim_use">
-                        <SectionHeader :title="tab.purchaseTitle" steps-below />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.purchaseTitle" class="h3_steps"></h3>
+
+                        </header>
                         <Steps type="2" :items="tab.purchaseSteps" />
                     </section>
 
                     <section>
-                        <SectionHeader :title="tab.phoneTitle" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.phoneTitle"></h3>
+
+                        </header>
                         <dl class="usim_phone_list">
                             <template v-for="(phone, pi) in tab.phones" :key="pi">
                                 <dt>{{ phone.term }}</dt>
@@ -886,21 +1006,42 @@
 
                 <!-- 하이패스 카드/단말기 패널 -->
                 <template v-else-if="i === 5">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc">
+                    <figure v-if="tab.hero" class="brand_panel_bg">
+                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                    </figure>
+                    <header v-if="tab.title" class="brand_panel_title">
+                        <h2 v-html="tab.title"></h2>
+                        <p v-if="tab.desc" v-html="tab.desc" />
                         <ul class="list_caution">
                             <li>* 하이플러스카드에서 출시한 모든 카드를 충전하실 수 있습니다. (http://www.hipluscard.co.kr/)</li>
                             <li>* 하이패스카드(자동충전) 및 단말기를 구매하실 수 있습니다.</li>
                         </ul>
-                    </PanelHeader>
+                    </header>
                     <section class="hi_pass">
-                        <SectionHeader :title="tab.hipassStepTitle" steps-below />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.hipassStepTitle" class="h3_steps"></h3>
+
+                        </header>
                         <Steps type="2" :items="tab.hipassSteps" />
                     </section>
                     <section>
-                        <SectionHeader :title="tab.hipassChargeTitle" :desc="tab.hipassChargeDesc" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.hipassChargeTitle"></h3>
+
+                            <p v-if="tab.hipassChargeDesc" class="sec_header_desc" v-html="tab.hipassChargeDesc" />
+
+                        </header>
                     </section>
                     <section>
-                        <SectionHeader :title="tab.hipassTerminalTitle" :desc="tab.hipassTerminalDesc" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.hipassTerminalTitle"></h3>
+
+                            <p v-if="tab.hipassTerminalDesc" class="sec_header_desc" v-html="tab.hipassTerminalDesc" />
+
+                        </header>
                         <div class="hipass_terminal_img">
                             <img :src="tab.hipassTerminalImg" :alt="tab.hipassTerminalImgAlt" />
                         </div>
@@ -909,32 +1050,65 @@
 
                 <!-- 고속도로 미납 통행료 납부 패널 -->
                 <template v-else-if="i === 6">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
+                    <figure v-if="tab.hero" class="brand_panel_bg">
+                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                    </figure>
+                    <header v-if="tab.title" class="brand_panel_title">
+                        <h2 v-html="tab.title"></h2>
+                        <p v-if="tab.desc" v-html="tab.desc" />
+                    </header>
                     <section class="sec_unpaid_advantage">
-                        <SectionHeader :title="tab.serviceTitle" :desc="tab.serviceDesc" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.serviceTitle"></h3>
+
+                            <p v-if="tab.serviceDesc" class="sec_header_desc" v-html="tab.serviceDesc" />
+
+                        </header>
                         <FeatureCards :items="tab.serviceAdvantages" />
                     </section>
                     <section class="sec_unpaid_method">
-                        <SectionHeader :title="tab.unpaidTitle" steps-below />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.unpaidTitle" class="h3_steps"></h3>
+
+                        </header>
                         <Steps type="2" :items="tab.unpaidSteps" />
                     </section>
                 </template>
 
                 <!-- 온라인몰 편의점 결제 패널 (Figma 97:16410, 97:16422) -->
                 <template v-else-if="i === 7">
-                    <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc" />
+                    <figure v-if="tab.hero" class="brand_panel_bg">
+                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                    </figure>
+                    <header v-if="tab.title" class="brand_panel_title">
+                        <h2 v-html="tab.title"></h2>
+                        <p v-if="tab.desc" v-html="tab.desc" />
+                    </header>
                     <section class="sec_mall_payment_advantage">
-                        <SectionHeader :title="tab.serviceTitle" :desc="tab.serviceDesc" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.serviceTitle"></h3>
+
+                            <p v-if="tab.serviceDesc" class="sec_header_desc" v-html="tab.serviceDesc" />
+
+                        </header>
                         <FeatureCards :items="tab.serviceAdvantages" />
                     </section>
                     <section class="sec_mall_payment_method">
-                        <SectionHeader :title="tab.mallPaymentTitle" />
+                        <header class="sec_header">
+
+                            <h3 v-html="tab.mallPaymentTitle"></h3>
+
+                        </header>
                         <Steps type="2" :items="tab.mallPaymentSteps" />
                     </section>
                     <section class="sec_mall_sites">
-                        <SectionHeader :title="tab.mallSiteTitle">
+                        <header class="sec_header">
+                            <h3 v-html="tab.mallSiteTitle"></h3>
                             <p v-if="tab.mallSiteNote" class="mall_site_note">{{ tab.mallSiteNote }}</p>
-                        </SectionHeader>
+                        </header>
                         <!-- PC -->
                         <ul v-if="!isMobileView" class="mall_site_list">
                             <li v-for="(item, si) in tab.mallSiteItems" :key="si">
@@ -991,20 +1165,31 @@
             <div>
                 <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
                     <div v-show="deliveryActiveTab === i" :class="['service_panel', `delivery_panel_${i+1}`]">
-                        <PanelHeader :hero="tab.hero" :hero-alt="tab.heroAlt" :title="tab.title" :desc="tab.desc">
+                        <figure v-if="tab.hero" class="brand_panel_bg">
+                            <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        </figure>
+                        <header v-if="tab.title" class="brand_panel_title">
+                            <h2 v-html="tab.title"></h2>
+                            <p v-if="tab.desc" v-html="tab.desc" />
                             <ul v-if="tab.notes && tab.notes.length" class="list_dotted">
                                 <li v-for="(note, ni) in tab.notes" :key="ni">
                                     <p v-html="note.text"></p>
                                     <p v-if="note.sub" class="note_sub">{{ note.sub }}</p>
                                 </li>
                             </ul>
-                        </PanelHeader>
+                        </header>
                         <section v-if="tab.steps && tab.steps.length" class="sec_delivery_service">
-                            <SectionHeader :title="tab.stepTitle" steps-below />
+                            <header class="sec_header">
+                                <h3 v-html="tab.stepTitle" class="h3_steps"></h3>
+                            </header>
                             <Steps type="2" :items="tab.steps" />
                         </section>
                         <section v-if="tab.priceTable" class="sec_delivery_price_table">
-                            <SectionHeader :title="tab.priceTable.title" />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.priceTable.title"></h3>
+
+                            </header>
                             <div class="com_table_wrap">
                                 <table class="com_table com_table_col">
                                     <colgroup>
@@ -1024,7 +1209,11 @@
                             </div>
                         </section>
                         <section v-if="tab.infoTable" class="sec_delivery_info_table">
-                            <SectionHeader :title="tab.infoTable.title" />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.infoTable.title"></h3>
+
+                            </header>
                             <div class="com_table_wrap">
                                 <table class="com_table">
                                     <colgroup>
@@ -1048,7 +1237,11 @@
                             </div>
                         </section>
                         <section v-if="tab.priceItems && tab.priceItems.length" class="sec_delivery_price">
-                            <SectionHeader :title="tab.priceTitle" />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.priceTitle"></h3>
+
+                            </header>
                             <div class="info_card">
                                 <ul class="info_list">
                                     <li v-for="(item, pi) in tab.priceItems" :key="pi">
@@ -1061,11 +1254,19 @@
                             </div>
                         </section>
                         <section v-if="tab.cautionItems && tab.cautionItems.length" class="sec_delivery_caution">
-                            <SectionHeader :title="tab.cautionTitle" />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.cautionTitle"></h3>
+
+                            </header>
                             <FeatureCards type="icon" :items="tab.cautionItems" />
                         </section>
                         <section v-if="tab.periodItems && tab.periodItems.length" class="sec_delivery_period">
-                            <SectionHeader :title="tab.periodTitle" />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.periodTitle"></h3>
+
+                            </header>
                             <ul class="list_dotted">
                                 <li v-for="(item, pi) in tab.periodItems" :key="pi">
                                     <p>{{ item.text }}</p>
@@ -1073,11 +1274,19 @@
                             </ul>
                         </section>
                         <section v-if="tab.noticeItems && tab.noticeItems.length" class="sec_delivery_notice">
-                            <SectionHeader :title="tab.noticeTitle" steps-below />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.noticeTitle" class="h3_steps"></h3>
+
+                            </header>
                             <Steps type="2" :items="tab.noticeItems" />
                         </section>
                         <section v-if="tab.chargeItems && tab.chargeItems.length" class="sec_delivery_charge">
-                            <SectionHeader :title="tab.chargeTitle" />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.chargeTitle"></h3>
+
+                            </header>
                             <ul class="list_dotted">
                                 <li v-for="(item, ii) in tab.chargeItems" :key="ii">
                                     <p>{{ item.text }}</p>
@@ -1085,7 +1294,11 @@
                             </ul>
                         </section>
                         <section v-if="tab.methodItems && tab.methodItems.length" class="sec_delivery_method">
-                            <SectionHeader :title="tab.methodTitle" />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.methodTitle"></h3>
+
+                            </header>
                             <ul class="list_dotted">
                                 <li v-for="(item, ii) in tab.methodItems" :key="ii">
                                     <p>{{ item.text }}</p>
@@ -1093,7 +1306,11 @@
                             </ul>
                         </section>
                         <section v-if="tab.pickupItems && tab.pickupItems.length" class="sec_delivery_pickup">
-                            <SectionHeader :title="tab.pickupTitle" steps-below />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.pickupTitle" class="h3_steps"></h3>
+
+                            </header>
                             <Steps type="2" :items="tab.pickupItems" />
                         </section>
                         <div v-if="tab.partnerBtnText" class="link_wrap">
@@ -1101,7 +1318,11 @@
                         </div>
                             <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 -->     
                         <!-- <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
-                            <SectionHeader :title="tab.shoppingTitle" />
+                            <header class="sec_header">
+
+                                <h3 v-html="tab.shoppingTitle"></h3>
+
+                            </header>
                             <ul class="list_dotted">
                                 <li v-for="(item, ii) in tab.shoppingItems" :key="ii">
                                     <p v-html="item.text"></p>
@@ -1115,21 +1336,25 @@
 
         <!-- 공공요금수납 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel">
-            <PanelHeader
-                :hero="store.tabs[2].hero"
-                :hero-alt="store.tabs[2].heroAlt"
-                :title="store.tabs[2].title"
-                :desc="store.tabs[2].subtitle"
-            >
+            <figure v-if="store.tabs[2].hero" class="brand_panel_bg">
+                <img :src="store.tabs[2].hero" :alt="store.tabs[2].heroAlt || ''" width="1420" height="340" />
+            </figure>
+            <header v-if="store.tabs[2].title" class="brand_panel_title">
+                <h2 v-html="store.tabs[2].title"></h2>
+                <p v-if="store.tabs[2].subtitle" v-html="store.tabs[2].subtitle" />
                 <p v-if="store.tabs[2].panelExtra" class="brand_panel_desc" v-html="store.tabs[2].panelExtra.desc"></p>
-                    <ul v-if="store.tabs[2].panelExtra?.bullets?.length" class="list_dotted">
-                        <li v-for="(bullet, bi) in store.tabs[2].panelExtra.bullets" :key="bi">
-                            <p>{{ bullet }}</p>
-                        </li>
-                    </ul>
-                </PanelHeader>
+                <ul v-if="store.tabs[2].panelExtra?.bullets?.length" class="list_dotted">
+                    <li v-for="(bullet, bi) in store.tabs[2].panelExtra.bullets" :key="bi">
+                        <p>{{ bullet }}</p>
+                    </li>
+                </ul>
+            </header>
             <section v-if="store.tabs[2].taxGroups && store.tabs[2].taxGroups.length" class="sec_tax_list">
-                <SectionHeader :title="store.tabs[2].taxTitle" />
+                <header class="sec_header">
+
+                    <h3 v-html="store.tabs[2].taxTitle"></h3>
+
+                </header>
                 <dl class="tax_group_list">
                     <template v-for="(group, gi) in store.tabs[2].taxGroups" :key="gi">
                         <dt class="tax_group_subtitle">{{ group.subtitle }}</dt>
@@ -1147,14 +1372,19 @@
         </div>
         <!-- 상품권 판매 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
-            <PanelHeader
-                :hero="store.tabs[3].hero"
-                :hero-alt="store.tabs[3].heroAlt"
-                :title="store.tabs[3].subtitle"
-                :desc="store.tabs[3].desc"
-            />
+            <figure v-if="store.tabs[3].hero" class="brand_panel_bg">
+                <img :src="store.tabs[3].hero" :alt="store.tabs[3].heroAlt || ''" width="1420" height="340" />
+            </figure>
+            <header v-if="store.tabs[3].subtitle" class="brand_panel_title">
+                <h2 v-html="store.tabs[3].subtitle"></h2>
+                <p v-if="store.tabs[3].desc" v-html="store.tabs[3].desc" />
+            </header>
             <section v-if="store.tabs[3].voucherItems && store.tabs[3].voucherItems.length" class="sec_voucher">
-                <SectionHeader :title="store.tabs[3].voucherTitle" />
+                <header class="sec_header">
+
+                    <h3 v-html="store.tabs[3].voucherTitle"></h3>
+
+                </header>
                 <!-- PC -->
                 <ul v-if="!isMobileView" class="voucher_list">
                     <li v-for="(item, vi) in store.tabs[3].voucherItems" :key="vi" class="voucher_item">
@@ -1224,11 +1454,12 @@
                 v-show="winwinServiceActiveTab === i"
                 :class="['service_panel', `winwin_panel_${i+1}`]"
             >
-                <PanelHeader :title="tab.title">
+                <header v-if="tab.title" class="brand_panel_title">
+                    <h2 v-html="tab.title"></h2>
                     <ul v-if="tab.notes && tab.notes.length" class="list_caution">
                         <li v-for="(note, ni) in tab.notes" :key="ni">{{ note.text }}</li>
-                    </ul> 
-                </PanelHeader>
+                    </ul>
+                </header>
                 <section>
                     <NumberedInfoList :items="tab.items" :show-icon="true" />
                 </section>
@@ -1237,7 +1468,13 @@
 
         <!-- 상생협력: 참여제도 -->
         <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 1" class="brand_panel">
-            <PanelHeader :hero="winwin.tabs[1].hero" :hero-alt="winwin.tabs[1].heroAlt" :title="winwin.tabs[1].title" :desc="winwin.tabs[1].desc" />
+            <figure v-if="winwin.tabs[1].hero" class="brand_panel_bg">
+                <img :src="winwin.tabs[1].hero" :alt="winwin.tabs[1].heroAlt || ''" width="1420" height="340" />
+            </figure>
+            <header v-if="winwin.tabs[1].title" class="brand_panel_title">
+                <h2 v-html="winwin.tabs[1].title"></h2>
+                <p v-if="winwin.tabs[1].desc" v-html="winwin.tabs[1].desc" />
+            </header>
             <section>
                 <NumberedInfoList :items="winwin.tabs[1].items" desc-class="num_info_desc_light" />
             </section>
@@ -1245,11 +1482,18 @@
 
         <!-- depth1 = 4: 밀박스/스낵바 -->
         <div v-if="depth1ActiveIdx === 4" class="brand_panel milbox_panel">
-            <PanelHeader :hero="milbox.hero" :hero-alt="milbox.heroAlt" :title="milbox.title" />
+            <figure v-if="milbox.hero" class="brand_panel_bg">
+                <img :src="milbox.hero" :alt="milbox.heroAlt || ''" width="1420" height="340" />
+            </figure>
+            <header v-if="milbox.title" class="brand_panel_title">
+                <h2 v-html="milbox.title"></h2>
+            </header>
             <section v-for="(sec, si) in milbox.sections" :key="si">
-                <SectionHeader :title="sec.title" :desc="sec.desc">
+                <header class="sec_header">
+                    <h3 v-html="sec.title"></h3>
+                    <p v-if="sec.desc" class="sec_header_desc" v-html="sec.desc" />
                     <p v-if="sec.note" class="sec_note">{{ sec.note }}</p>
-                </SectionHeader>
+                </header>
                 <FeatureCards v-if="sec.type === 'feature' && sec.items && sec.items.length" :items="sec.items" type="icon" class="milbox_feature" />
                 <ul v-if="sec.type === 'imgcard' && sec.items && sec.items.length" class="imgcard_list">
                     <li v-for="(item, ii) in sec.items" :key="ii" class="imgcard_item">
@@ -1300,8 +1544,6 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
-import PanelHeader from "@/components/PanelHeader.vue";
-import SectionHeader from "@/components/SectionHeader.vue";
 import Buttons from "@/components/Buttons.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
 import imgQrMo from "@/assets/images/dummy/qr_app.png";
@@ -2768,7 +3010,7 @@ const langData = {
     backLabel: "목록으로 돌아가기",
     },
     en: {
-        
+
     }
 };
 
@@ -3151,23 +3393,49 @@ function goBack() {
 </script>
 
 <style scoped>
+.brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
+.brand_panel_bg > img { width: 100%; display: block; object-fit: cover; }
+.brand_panel_title { padding: 0 0 100px; }
+.brand_panel_title > h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.brand_panel_title > p { margin: 0; color: #161618; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_header { padding-bottom: 40px; }
+.sec_header > h3 { margin: 0 0 12px; color: #161618; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_header:not(:has(p)) > h3 { margin-bottom: 0; }
+.sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc { margin: 0; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; }
+.sec_header .sec_cite { margin-left: 16px; color: #67676f; font-size: 1.4rem; font-weight: 500; font-style: normal; letter-spacing: -0.01em; }
 @media (max-width: 768px) {
   .cafe25_split_img > img { width: 100% }
 }
-.cafe_panel :deep(.brand_panel_bg > img) { object-position: center bottom }
+.cafe_panel .brand_panel_bg > img { object-position: center bottom }
 .chicken_panel .img_grid_swiper { margin-top: 120px }
 @media (max-width: 768px) {
   .chicken_panel .img_grid_swiper { margin-top: 60px }
 }
 .gopizza_panel .img_grid, .gopizza_panel .img_grid_swiper { margin-top: 0; padding:0 }
-@media (max-width: 768px) {
-  :deep(.brand_panel_bg > img) { object-fit: none }
-  .cafe_panel :deep(.brand_panel_bg > img) { object-position: -348px center }
-  .chicken_panel :deep(.brand_panel_bg > img) { object-position: -385px center }
-  .gopizza_panel :deep(.brand_panel_bg > img) { object-position: -591px bottom }
-  .gopizza_panel :deep(.diff_bottom_row) { margin-top: 120px }
-  .sinsen_panel :deep(.brand_panel_bg > img) { object-position: -395px bottom }
+
+@media (max-width: 1024px) {
+  .brand_panel_title > h2 { font-size: 3.2rem; }
+  .brand_panel_title > p { font-size: 2rem; }
 }
+@media (max-width: 768px) {
+  .sec_header { padding-bottom: 24px; }
+  .sec_header:not(:has(p)) { padding-bottom: 0; }
+  .sec_header > h3, .sec_header:not(:has(p)) > h3 { margin-bottom: 12px; font-size: 2.4rem; }
+  .sec_header > h3.h3_steps, .sec_header:not(:has(p)) > h3.h3_steps { margin-bottom: 24px; }
+  .sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc { margin-bottom: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+  .sec_header .sec_cite { margin-top: 4px; margin-left: 0; display: block; }
+  .brand_panel_bg { margin: 0 0 24px; border-radius: 0; }
+  .brand_panel_title { padding: 0 0 64px; }
+  .brand_panel_bg > img { max-height: 245px; object-fit: none; }
+  .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
+  .brand_panel_title > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+  .cafe_panel .brand_panel_bg > img { object-position: -348px center; }
+  .chicken_panel .brand_panel_bg > img { object-position: -385px center; }
+  .gopizza_panel .brand_panel_bg > img { object-position: -591px bottom; }
+  .gopizza_panel .diff_bottom_row { margin-top: 120px; }
+  .sinsen_panel .brand_panel_bg > img { object-position: -395px bottom; }
+}
+
 .sec_brand_visual { position: relative; height: calc(100vh + 800px) }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100vw; width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
 @media (max-width: 768px) {
@@ -3208,6 +3476,7 @@ function goBack() {
 
 .brand_acc { margin: 0; padding: 0; background-color: #f8f8f8; border-radius: 12px; list-style: none; overflow: hidden }
 .acc_item { border-bottom: 1px solid #e5e5e9 }
+.acc_item:last-child{border-bottom:0;}
 .acc_inner { padding: 40px 64px; display: grid; grid-template-columns: 1fr 0; align-items: start }
 .acc_item.is_open .acc_inner { grid-template-columns: 1fr 1fr }
 .acc_body { min-width: 0 }
@@ -3274,7 +3543,7 @@ button { background-color: #fff }
 .brand_panel { padding-top: 64px; margin-bottom: 100px ;}
 .brand_panel section { padding-bottom: 120px }
 @media (max-width: 768px) {
-  .brand_panel section { padding: 64px 0 80px }
+  .brand_panel section { padding: 0 0 80px }
 }
 .brand_panel section:last-of-type { padding-bottom: 0 }
 .diff_card_grid { margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 460px)); gap: 20px }
@@ -3396,7 +3665,7 @@ button { background-color: #fff }
 }
 .sinsen_flow_img { width: 100%; margin-top: 24px; display: block; border-radius: 10px }
 @media (max-width: 768px) {
-  .sinsen_flow_img { height:130px }
+  .sinsen_flow_img { height:auto;min-height:147px }
 }
 .info_list > li { padding-bottom: 12px; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 8px }
 .info_list > li:last-child { padding-bottom: 0 }
@@ -3598,6 +3867,7 @@ button { background-color: #fff }
 .pop_card_logos { margin-top: auto; padding-top: 16px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap }
 @media (max-width: 768px) {
   .pop_card_logos { padding-top: 0 }
+  .pop_sec_acc :deep(dd.acc_panel) { border-bottom: 1px solid #D7D7DF; }
 }
 .pop_logo_thumb { width: auto; display: block }
 @media (min-width: 769px) {
@@ -3678,9 +3948,11 @@ button { background-color: #fff }
 }
 .imgcard_link { width: 20px; height: 20px; background:url('@/assets/images/common/icon_set_20.png') -979px -24px no-repeat; flex-shrink: 0; display: inline-block; vertical-align: middle; margin-left: 8px }
 .sec_note { margin: 8px 0 0; color: #f95823; font-size: 1.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.02em }
-.milbox_feature :deep(.feature_card_item) { min-height: 171px; max-width: 340px }
+.milbox_feature :deep(.feature_card_item) { min-height: 163px !important; max-width: 340px }
 @media (max-width: 768px) {
-  .milbox_feature :deep(.feature_card_item) { min-height: 163px; max-width: 100% }
+  .milbox_feature :deep(.feature_card_swiper .swiper-slide) { min-height: 171px; }
+  .milbox_feature :deep(.feature_card_swiper .swiper-slide) > .feature_card_item { min-height: 171px; }
+  .milbox_feature :deep(.feature_card_item) { min-height: 171px; max-width: 100%; }
 }
 .brand_panel_title .list_dotted { margin: 16px 0 0 }
 .brand_panel_title + section { padding-top: 0 }
@@ -3797,9 +4069,9 @@ button { background-color: #fff }
   .gift_step_num { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0 }
 }
 .gift_step_desc { margin: 0; padding-left: 38px; color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
-:deep(.gift_usage_heading .gift_usage_desc_emphasis) { color: #f95823; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em }
+.gift_usage_heading .gift_usage_desc_emphasis { color: #f95823; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; }
 @media (max-width: 768px) {
-  :deep(.gift_usage_heading .gift_usage_desc_emphasis) { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
+  .gift_usage_heading .gift_usage_desc_emphasis { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 }
 .gift_brand_slider { position: relative; width: 100%; display: flex; align-items: center; gap: 16px }
 @media (max-width: 768px) {
@@ -3846,26 +4118,29 @@ button { background-color: #fff }
   .usage_header { gap: 12px; margin-bottom: 24px }
   .usage_select_box { width: 160px }
 }
-@media (min-width: 769px) and (max-width: 1024px) {
-  .pop_wrap { gap: 24px }
-  .pop_card_swiper :deep(.swiper-wrapper) { gap: 16px }
-  .gift_brand_nav { width: 40px; height: 40px }
-  .gift_brand_slider { gap: 12px }
-}
+
 @media (max-width: 768px) {
   .service_tab_wrap { margin-bottom: 40px }
-  .service_tab_wrap::after { content:''; width:clamp(48px, 12.8vw, 64px); height:100%; background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); position:absolute; top:0; right:0; pointer-events:none; z-index:1 }
-  .service_tab_list { padding: 0 20px }
-  .service_tab_list::after { content:''; min-width:20px; flex-shrink:0 }
+  .service_tab_wrap::after { content:''; width:clamp(24px, 8.53vw, 32px); height:100%; background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); position:absolute; top:0; right:0; pointer-events:none; z-index:1 }
+  /* .service_tab_list { padding: 0 20px } */
+  /* .service_tab_list::after { content:''; min-width:20px; flex-shrink:0 } */
   .service_tab_item { gap: 10px }
   .service_tab_item.is_active { background-color: #F8F8F8 }
   .service_tab_item { flex: 0 0 clamp(100px, 26.67vw, 120px); aspect-ratio: 1 / 1.18 }
   .service_tab_icon { width: 32px; height: 32px }
   .service_tab_label { font-weight: 700; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0% }
 }
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .pop_wrap { gap: 24px }
+  .pop_card_swiper :deep(.swiper-wrapper) { gap: 16px }
+  .gift_brand_nav { width: 40px; height: 40px }
+  .gift_brand_slider { gap: 12px }
+}
+
 @media (max-width: 768px) {
   .cont_inner {overflow-x: clip;}
-  .diff_card_swiper { padding: 0 20px; overflow: visible }
+  .diff_card_swiper { overflow: visible }
   .diff_card > div { min-height: 163px; padding: 20px }
   .diff_card > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
   .diff_card > div > h3 { font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0%; margin-bottom: 8px }
@@ -3879,7 +4154,7 @@ button { background-color: #fff }
   .cafe25_split > div { width: 100% }
   .cafe25_split > img { width: 100% }
   .brand_panel:first-of-type section:not(:first-of-type) :deep(header) { padding-bottom: 40px }
-  .img_grid_swiper { padding: 0 20px; overflow: visible }
+  .img_grid_swiper {overflow: visible }
   .img_grid_swiper :deep(.swiper-slide) { width: 84vw }
   .img_grid_slide { width: 84vw; overflow: hidden; border-radius: 12px }
   .img_grid_slide > img { width: 100%; height: 100%; object-fit: cover; display: block }
@@ -3936,7 +4211,6 @@ button { background-color: #fff }
   .tax_group_subtitle { margin-bottom:12px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
   .brand_panel section.sec_voucher { padding: 0 !important }
   .brand_panel section.sec_voucher header { padding: 0 20px }
-  .sec_voucher .voucher_swiper { padding: 0 20px }
   .voucher_swiper .swiper-slide { width: 69.33vw }
 }
 .link_wrap { margin-top: 64px; display: flex; justify-content: center }
