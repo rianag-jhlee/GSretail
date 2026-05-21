@@ -931,8 +931,7 @@ let quickMenuFooterEl = null;
 let quickMenuWrapEl = null;
 let quickMenuLastBottomPx = null;
 let quickMenuLastTopPx = null;
-let quickMenuFooterZone = false;
-let quickMenuRefreshTimer = null;   
+let quickMenuRefreshTimer = null;
 
 /** App.vue #wrap 직하위 사이트 푸터만 (폼·컴포넌트 내 footer 태그 제외) */
 function getQuickMenuSiteFooter() {
@@ -982,7 +981,6 @@ function updateQuickMenuBottom(quickMenu) {
             setQuickMenuFixed(quickMenu, QUICK_MENU_VIEWPORT_BOTTOM_PX);
             quickMenuLastBottomPx = QUICK_MENU_VIEWPORT_BOTTOM_PX;
             quickMenuLastTopPx = null;
-            quickMenuFooterZone = false;
         }
         return;
     }
@@ -999,7 +997,6 @@ function updateQuickMenuBottom(quickMenu) {
 
     if (shouldDockToFooter) {
         const absoluteTopPx = Math.round(footerTopDoc - gap - quickMenuHeight - wrapTopDoc);
-        quickMenuFooterZone = true;
         if (quickMenuLastTopPx !== absoluteTopPx) {
             setQuickMenuAbsolute(quickMenu, absoluteTopPx);
             quickMenuLastTopPx = absoluteTopPx;
@@ -1008,7 +1005,6 @@ function updateQuickMenuBottom(quickMenu) {
         return;
     }
 
-    quickMenuFooterZone = false;
     if (quickMenuLastBottomPx !== QUICK_MENU_VIEWPORT_BOTTOM_PX) {
         setQuickMenuFixed(quickMenu, QUICK_MENU_VIEWPORT_BOTTOM_PX);
         quickMenuLastBottomPx = QUICK_MENU_VIEWPORT_BOTTOM_PX;
@@ -1039,7 +1035,6 @@ function resetQuickMenuState() {
     quickMenuWrapEl = null;
     quickMenuLastBottomPx = null;
     quickMenuLastTopPx = null;
-    quickMenuFooterZone = false;
     showQuickMenu.value = false;
 }
 
