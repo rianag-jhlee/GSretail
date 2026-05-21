@@ -52,6 +52,7 @@ const getDetailPairs = (detail) => {
 .history_item:not(:last-child)::after { content: ""; width: 1px; height: 100%; background-color: #107af2; position: absolute; top: 12px; bottom: 0; left: -36px; }
 .history_period { width: 300px; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex-shrink: 0; display: block; }
 .history_body { width: 100%; padding-bottom: 100px; }
+.history_item:last-child .history_body { padding-bottom: 0; }
 .history_summary { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .history_detail_list { display: flex; flex-direction: column;  }
 .history_detail_row { margin: 0; display: grid; grid-template-columns: 103px minmax(0, 1fr); column-gap: 20px; align-items: start; }

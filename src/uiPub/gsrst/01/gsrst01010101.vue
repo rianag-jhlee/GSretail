@@ -932,7 +932,7 @@ let quickMenuWrapEl = null;
 let quickMenuLastBottomPx = null;
 let quickMenuLastTopPx = null;
 let quickMenuFooterZone = false;
-let quickMenuRefreshTimer = null;
+let quickMenuRefreshTimer = null;   
 
 /** App.vue #wrap 직하위 사이트 푸터만 (폼·컴포넌트 내 footer 태그 제외) */
 function getQuickMenuSiteFooter() {

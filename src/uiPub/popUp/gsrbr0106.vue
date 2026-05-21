@@ -1,12 +1,12 @@
 <template>
     <!-- Figma node 198:26591 — popup 940×874, content 844 wide -->
     <div class="modal_cont store_find_modal">
-        <div class="sf_title_row">
-            <h2 class="sf_title">GS25 매장찾기</h2>
-            <button type="button" class="sf_close" aria-label="닫기" @click="closeModal"></button>
+        <div class="modal_header">
+            {{ t.title }}
+            <button type="button" class="btn_close" aria-label="닫기" @click="closeModal"></button>
         </div>
 
-        <div class="modal_content sf_body">
+        <div class="modal_content">
             <div class="sf_row sf_row_dd">
                 <select
                     v-model="selSido"
@@ -65,7 +65,7 @@
                 </button>
                 <div v-show="filterExpanded" class="sf_chip_wrap">
                     <button
-                        v-for="c in chips"
+                        v-for="c in t.chips"
                         :key="c.id"
                         type="button"
                         class="sf_chip"
@@ -88,161 +88,185 @@
                 ></iframe> -->
                 <div class="inner">
                     <div class="store_list">
-                        <dl class="item">
-                            <dt></dt>
+                        <!-- 검색결과 없음 -->
+                        <div class="no_result">
+                            <!-- 매장명 입력하여 검색 -->
+                            <p class="type_1" v-html="t.store.nodata_1"></p>
+
+                            <!-- 검색결과 없음 -->
+                            <p class="type_2" v-html="t.store.nodata_2"></p>
+                        </div>
+                        <!-- //검색결과 없음 -->
+
+                        <!-- 매장목록 -->
+                        <dl v-for="item_1 in t.store.list" :key="item_1" class="item">
+                            <dt>{{ item_1.name }}</dt>
                             <dd>
-                                <p></p>
+                                <p>{{ item_1.address }}</p>
                                 <ul>
-                                    <li></li>
+                                    <li v-for="item_2 in item_1.key" :key="item_2">
+                                        <em>{{item_2}}</em>
+                                    </li>
                                 </ul>
                             </dd>
                         </dl>
+                        <!-- //매장목록 -->
                     </div>
+                    <!-- 지도 영역 -->
                     <div class="map_canvas"></div>
+                    <!-- //지도 영역 -->
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
+import { computed, ref, reactive } from "vue";
+
 import modal from "@/assets/js/modal";
+
 import icoChip01 from "@/assets/images/dummy/mo/ico_chip_01.png";
 import icoChip02 from "@/assets/images/dummy/mo/ico_chip_02.png";
 import icoChip03 from "@/assets/images/dummy/mo/ico_chip_03.png";
 import icoChip04 from "@/assets/images/dummy/mo/ico_chip_04.png";
 import icoChip05 from "@/assets/images/dummy/mo/ico_chip_05.png";
 
-/* 26.05.11 Add Search */
+/* Search */
 import Search from "@/components/Search.vue";
 
-/** Figma 198:26612~26633 chip 텍스트·선택 상태 */
-const CHIP_DEF = [
-    { id: "c1",  label: "스포츠 토토",             selected: true  },
-    { id: "c2",  label: "CAFE25",                  selected: false },
-    { id: "c3",  label: "치킨25",                  selected: true  },
-    { id: "c4",  label: "의약품",                  selected: false },
-    { id: "c5",  label: "self25",                  selected: false },
-    { id: "c6",  label: "택배",                    selected: false, icon: icoChip01 },
-    { id: "c7",  label: "ATM 현금 입/출금",        selected: false },
-    { id: "c8",  label: "현금출금(CD기)",          selected: false },
-    { id: "c9",  label: "TAX REFUND",              selected: false },
-    { id: "c10", label: "SMART ATM",               selected: false },
-    { id: "c11", label: "셀프 조리기",             selected: false },
-    { id: "c12", label: "배달서비스",              selected: true  },
-    { id: "c13", label: "택배 픽업",               selected: false },
-    { id: "c14", label: "군고구마",                selected: true  },
-    { id: "c15", label: "심장재세동기",            selected: false },
-    { id: "c16", label: "붕어빵",                  selected: false, icon: icoChip02 },
-    { id: "c17", label: "GOPIZZA",                 selected: false, icon: icoChip03 },
-    { id: "c18", label: "양주/와인",               selected: false },
-    { id: "c19", label: "신선강화",                selected: false },
-    { id: "c20", label: "무신사 스탠다드 EXPRESS", selected: false, icon: icoChip04 },
-    { id: "c21", label: "대한항공 POSA",           selected: false, icon: icoChip05 },
-];
+// =====================
+// props
+// =====================
+const props = defineProps({
+    lang: { type: String, default: "ko" }
+});
 
-const store = [
-    {name:"GS25LG사이언스파크점", address:"서울 강서구 마곡중앙10로10, 지하1층 (마곡동 770, 엘지사이언스파크)",
-        key: ["의약품","택배","군고구마","붕어빵"]
-    },
-    {name:"GS25S9가양역점", address:"서울 강서구 양천로지하 485 (가양동 14-61)",
-        key: ["양주/와인","배달서비스","현금출금기(CD기)","택배","ATM 현금 입/출금"]
-    }
-]
+// =====================
+// language data
+// =====================
+const langData = {
+    ko: {
+        title: "GS25 매장찾기",
+        chips: [
+            { id: "c1", label: "스포츠 토토", selected: true },
+            { id: "c2", label: "CAFE25", selected: false },
+            { id: "c3", label: "치킨25", selected: true },
+            { id: "c4", label: "의약품", selected: false },
+            { id: "c5", label: "self25", selected: false },
+            { id: "c6", label: "택배", selected: false, icon: icoChip01 },
+            { id: "c7", label: "ATM 현금 입/출금", selected: false },
+            { id: "c8", label: "현금출금(CD기)", selected: false },
+            { id: "c9", label: "TAX REFUND", selected: false },
+            { id: "c10", label: "SMART ATM", selected: false },
+            { id: "c11", label: "셀프 조리기", selected: false },
+            { id: "c12", label: "배달서비스", selected: true },
+            { id: "c13", label: "택배 픽업", selected: false },
+            { id: "c14", label: "군고구마", selected: true },
+            { id: "c15", label: "심장재세동기", selected: false },
+            { id: "c16", label: "붕어빵", selected: false, icon: icoChip02 },
+            { id: "c17", label: "GOPIZZA", selected: false, icon: icoChip03 },
+            { id: "c18", label: "양주/와인", selected: false },
+            { id: "c19", label: "신선강화", selected: false },
+            { id: "c20", label: "무신사 스탠다드 EXPRESS", selected: false, icon: icoChip04 },
+            { id: "c21", label: "대한항공 POSA", selected: false, icon: icoChip05 }
+        ],
 
-export default {
-    name: "StoreFindModal",
-
-    components: {
-        Search,
-    },
-
-    data() {
-        return {
-            placeholder: "찾으시려는 매장명을 입력하세요.",
-
-            keyword: "",
-            filterExpanded: true,
-            selSido: "",
-            selSigungu: "",
-            selDong: "",
-            optionsSido: ["서울시", "경기도", "인천광역시"],
-            optionsSigungu: ["강남구", "서초구", "송파구"],
-            optionsDong: ["역삼동", "삼성동", "청담동"],
-            chips: CHIP_DEF.map((c) => ({ ...c })),
-        };
-    },
-
-    methods: {
-        closeModal(event) {
-            modal.close(event.currentTarget);
+        store: {
+            list : [
+                {
+                    name: "GS25LG사이언스파크점",
+                    address: "서울 강서구 마곡중앙10로10, 지하1층 (마곡동 770, 엘지사이언스파크)",
+                    key: ["의약품", "택배", "군고구마", "붕어빵"]
+                },
+                {
+                    name: "GS25S9가양역점",
+                    address: "서울 강서구 양천로지하 485 (가양동 14-61)",
+                    key: ["양주/와인", "배달서비스", "현금출금(CD기)", "택배", "ATM 현금 입/출금"]
+                },
+                {
+                    name: "GS25S9가양역점2",
+                    address: "서울 강서구 양천로지하 485 (가양동 14-61)",
+                    key: ["양주/와인", "배달서비스", "현금출금(CD기)", "택배", "ATM 현금 입/출금"]
+                },
+            ],
+            nodata_1: "매장명을 입력하여<br/> 검색해 주세요.",
+            nodata_2: "검색결과가 없습니다.",
         },
     },
+
+    en: {
+        chips: [
+            { id: "c1", label: "Sports Toto", selected: true },
+            { id: "c2", label: "CAFE25", selected: false },
+            { id: "c3", label: "Chicken25", selected: true },
+            { id: "c4", label: "Medicine", selected: false },
+            { id: "c5", label: "self25", selected: false },
+            { id: "c6", label: "Parcel Service", selected: false, icon: icoChip01 }
+        ],
+
+        store: {
+            list : [
+                {
+                    name: "GS25 LG Science Park",
+                    address: "B1F, 10 Magokjungang-ro 10, Gangseo-gu, Seoul",
+                    key: ["Medicine", "Parcel Service"]
+                }
+            ],
+            nodata_1: "Please enter a store name<br/> to search.",
+            nodata_2: "No matching results found.",
+        }
+    }
+};
+
+// =====================
+// computed
+// =====================
+// const t = computed(() => langData[props.lang] || langData.ko);
+const t = computed(() => {
+    const base = langData[props.lang] || langData.ko;
+
+    return {
+        ...base,
+        chips: [...base.chips],
+        store: {
+            ...base.store,
+            list: [...(base.store?.list || [])]
+        }
+    };
+});
+
+// =====================
+// state
+// =====================
+const placeholder = "찾으시려는 매장명을 입력하세요.";
+
+const searchData = ref("");
+const options = ref([]);
+
+const filterExpanded = ref(true);
+
+const selSido = ref("");
+const selSigungu = ref("");
+const selDong = ref("");
+
+const optionsSido = ["서울시", "경기도", "인천광역시"];
+const optionsSigungu = ["강남구", "서초구", "송파구"];
+const optionsDong = ["역삼동", "삼성동", "청담동"];
+
+// =====================
+// methods
+// =====================
+const closeModal = (event) => {
+    modal.close(event.currentTarget);
+};
+
+const handleSearch = () => {
+    console.log("search:", searchData.value);
 };
 </script>
 
 <style scoped>
-/* Figma 198:26591 */
-
-.store_find_modal.modal_cont {
-    width: 844px;
-    max-width: 100%;
-    min-height: 0;
-    box-sizing: border-box;
-}
-
-/* title FRAME h92 */
-.sf_title_row {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    min-height: 92px;
-    margin: 0;
-    padding: 0;
-}
-
-.sf_title {
-    margin: 0;
-    color: #161616;
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 52px;
-    letter-spacing: -0.4px;
-}
-
-.sf_close {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    margin-top: 6px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: transparent;
-    cursor: pointer;
-    position: relative;
-}
-
-.sf_close::before,
-.sf_close::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 0;
-    border-top: 2px solid #2d2d2d;
-    transform-origin: center;
-}
-
-.sf_close::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.sf_close::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
-}
-
 .sf_body {
     padding: 0;
     margin: 0;
@@ -420,10 +444,26 @@ export default {
     width: 100%;
     height: 320px;
     border-radius: 10px;
-    background-color: #e8e8ee;
     overflow: hidden;
-    position: relative;
 }
+
+.sf_map_canvas .inner {display:flex; gap:20px;}
+
+.sf_map_canvas .map_canvas {min-height:320px; background-color:#D7D7DF; border-radius:10px; flex:1;}
+
+.sf_map_canvas .store_list {max-height:320px; border-bottom:1px solid #D7D7DF; overflow-y:auto; flex:1;}
+.sf_map_canvas .store_list dl {padding:16px 20px; border-top:1px solid #D7D7DF;}
+.sf_map_canvas .store_list dt {color:#161616; font-size:2rem; font-weight:700; letter-spacing:-0.01em; line-height:135%;}
+.sf_map_canvas .store_list dd {margin-top:8px;}
+.sf_map_canvas .store_list dd p {color:#67676f; font-size:1.6rem; letter-spacing:-0.01em; line-height:150%;}
+.sf_map_canvas .store_list dd ul {margin-top:6px; display:flex; gap:4px; flex-wrap:wrap;}
+.sf_map_canvas .store_list dd ul em {padding:3px 6px; color:#107AF2; font-size:1.4rem; letter-spacing:-0.01em; line-height:140%; background-color:#E7F2FE; border-radius:4px; display:block;}
+
+.sf_map_canvas .store_list .no_result {min-height:100%; display:flex; flex-direction:column; justify-content:center;}
+.sf_map_canvas .store_list .no_result p {height:100%; color:#161616; font-size:1.8rem; font-weight:700; line-height:150%; text-align:center; display:flex; align-items:center; justify-content:center; flex-direction:column;}
+.sf_map_canvas .store_list .no_result p:before {width:40px; height:40px; margin-bottom:16px; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat; content:''; display:block;}
+.sf_map_canvas .store_list .no_result p.type_1:before {background-position:-20px -20px;}
+.sf_map_canvas .store_list .no_result p.type_2:before {background-position:-260px -346px;}
 
 /* .sf_map_iframe {
     position: absolute;
@@ -435,40 +475,28 @@ export default {
 } */
 
 @media (max-width: 768px) {
-    .store_find_modal.modal_cont {
-        width: 100%;
-    }
-
-    .sf_title {
-        font-size: 2.4rem;
-        line-height: 32px;
-    }
-
-    .sf_title_row {
-        min-height: auto;
-        margin-bottom: 20px;
-    }
-
-    .sf_close {
-        margin-top: 2px;
-    }
-
-    .sf_row_dd {
+    /* .sf_row_dd {
         flex-direction: column;
-    }
+    } */
+
+    .store_find_modal .modal_content {margin-top:-40px; padding-top:340px;}
 
     .sf_select {
         width: 100%;
         height: 48px;
     }
-
-
-    .sf_map_canvas {
-        height: 240px;
-    }
-
     .sf_chip_wrap {
         min-height: 0;
     }
+
+    .sf_map_canvas {overflow:initial;}
+
+    .sf_map_canvas .inner {
+        display:block;
+    }
+
+    .sf_map_canvas .store_list {max-height:initial;}
+
+    .sf_map_canvas .map_canvas {border-radius:0; position:fixed; top:61.2px; right:0; left:0;}
 }
 </style>

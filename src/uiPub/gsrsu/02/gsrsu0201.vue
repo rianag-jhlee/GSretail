@@ -162,10 +162,10 @@
                                         <li><strong>{{ t.GreenProduct.guideline.num4 }}</strong> <span>{{ t.GreenProduct.guideline.txt4 }}</span></li>
                                     </ul>
                                     <div class="ac">
-                                        <Buttons btn-class="btn_icon btn_xl border after arr_r" 
+                                        <Buttons btn-class="btn_icon_arrow btn_xl border after" 
                                             @click="openModal" 
                                             data-popid="gsrsu02010301" 
-                                            data-type="mid" 
+                                            data-type="lg" 
                                             data-cont="gsrsu02010301"
                                         >{{ t.GreenProduct.guideline.btn_txt }}</Buttons>
                                     </div>
@@ -188,7 +188,7 @@
                                         <h4>{{ t.SeaBreathTitle }}</h4>
                                         <p v-html="t.SeaBreathDesc"></p>
                                     </div>
-                                    <Buttons btn-class="btn_icon btn_xl after arr_r">{{ t.MoreBtn }}</Buttons>
+                                    <Buttons btn-class="btn_icon_arrow btn_xl border after">{{ t.MoreBtn }}</Buttons>
                                 </div>
                             </section>
 
@@ -282,14 +282,14 @@ export default {
                             desc: "GS리테일은 제조사로부터 물류센터를 거쳐 전국의 편의점과 수퍼마켓 등으로 상품을 운송하고 있습니다. 매일 배송차량들이 전국에 위치한 점포를 방문하고자 주행하는 거리는 하루에 지구를 10바퀴 돌 수 있는 정도입니다.<br/>물류단계에서 발생하는 환경 영향을 저감하고자 친환경 물류 시스템을 구축 및 운영하여 녹색물류 인증을 획득하였습니다."
                         },
                         {
-                            tit: "신지생에너지",
+                            tit: "신재생에너지",
                             img: require("@/assets/images/dummy/gsrsu020101_2.png"),
                             desc: "공주 및 진주 물류센터 유휴공간을 통해 태양광 발전설비를 착공하여, 전력 생산을 진행하고 있습니다.<br/>또한, 문래동 강서N타워에도 태양광발전설비를 설치하여 전력을 생산하고 있습니다."
                         },
                         {
                             tit: "사내 환경활동 – 페이퍼리스, 머그컵 사용 캠페인",
                             img: require("@/assets/images/dummy/gsrsu020101_3.png"),
-                            desc: "GS리테일은 2018년부터 문서관리 기준을 수립하고 내부 업무보고 등 업무진행 시 종이 인쇄를 지양하는 페이퍼리스 문화를 정착하고 있습니다.<br/>또한, 사무실에서 일회용컵 사용을 자제하고 다회용 머그컵을 사용할 수 있도록 머그컵 사용 시 무료 커피 제공 등의 캠패인을 진행하고 있습니다."
+                            desc: "GS리테일은 2018년부터 문서관리 기준을 수립하고 내부 업무보고 등 업무진행 시 종이 인쇄를 지양하는 페이퍼리스 문화를 정착하고 있습니다.<br/>또한, 사무실에서 일회용컵 사용을 자제하고 다회용 머그컵을 사용할 수 있도록 머그컵 사용 시 무료 커피 제공 등의 캠페인을 진행하고 있습니다."
                         },
                         {
                             tit: "임직원 환경교육",
@@ -438,6 +438,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .wide_card { display: flex; align-items: flex-start; gap: 40px; padding: 60px; background: #F8F8F8; border-radius: 20px; }
 .wide_card .image_wrap { flex: 0 0 500px; height: 320px; }
 .wide_card .text_group { flex: 1; display: flex; flex-direction: column; gap: 40px; }
+.wide_card .btn_icon_arrow {width:170px;}
 
 /* 5. Sub Grid (2열 그리드 구현) */
 .sub_grid_container { display: flex; flex-wrap: wrap; gap: 80px 40px; }
@@ -469,9 +470,9 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .key_features_grid { width: 100%; padding: 0; display: flex; gap: 20px; }
 .key_features_grid li { height: 300px; padding: 42px 32px 32px; background-color: #F8F8F8; border-radius: 12px; position:relative; display:flex; flex-direction:column; justify-content:space-between; align-items: flex-end; flex: 1; overflow: hidden;}
 .key_features_grid li::after {content:''; width:72px; height:72px; background:red; position:absolute; right:32px; bottom:32px}
-.key_features_grid li:first-child::after { background: url('/src/assets/images/dummy/icon_solar_panel.png') no-repeat center / contain; }
-.key_features_grid li:nth-child(2)::after { background: url('/src/assets/images/dummy/icon_recycle.png') no-repeat center / contain; }
-.key_features_grid li:nth-child(3)::after { background: url('/src/assets/images/dummy/icon_eco_design.png') no-repeat center / contain; }
+.key_features_grid li:first-child::after { background: url('/src/assets/images/sub/icon_solar_panel.png') no-repeat center / contain; }
+.key_features_grid li:nth-child(2)::after { background: url('/src/assets/images/sub/icon_recycle.png') no-repeat center / contain; }
+.key_features_grid li:nth-child(3)::after { background: url('/src/assets/images/sub/icon_eco_design.png') no-repeat center / contain; }
 .card_content { width: 100%; display: flex; flex-direction: column; gap: 16px; text-align: left; }
 .card_content strong { font-size: 24px; font-weight: 700; color: #161616; line-height: 1.35; }
 .card_content p { font-size: 1.8rem; font-weight: 400; color: #67676f; line-height: 1.4; }
@@ -514,6 +515,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .green_product li.one_divide .image_wrap, .green_product li.two_divide .image_wrap { flex: 0 0 auto; width: 100%; height: auto;}
 }
 @media screen and (max-width: 767px) {
+    .title_wrap {display:none;}
     h3, h4, .policy_card_box h4, .climate_change .intro_view p { font-size: 28px !important; }
     p, .policy_card_box p, .intro_view p { font-size: 18px !important; }
     .title_wrap { height: auto; padding: 60px 20px; }
@@ -522,11 +524,13 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .policy_card_box { padding: 30px 20px; }
     .policy_card_box li { flex-direction: column; }
     .wide_card { flex-direction: column; padding: 30px 20px; }
+    .wide_card .text_group button { width:100% }
     .wide_card .image_wrap { flex: 0 0 auto; width: 100%; height: auto; }
+    .wide_card .btn_icon_arrow {width:100%;}
     .sub_grid_container { gap: 40px; }
     .grid_item { width: 100%; }
     .strategy_section .image_wrap, .system_section .image_wrap {width:100%; margin:0 auto;}
-    .mb200 {margin-bottom:80px;}
+    .mb200 {margin-bottom:80px !important;}
     .btn_icon.btn_xl.after {width:100%;}
     .green_value_chain { margin-top: 40px; }
     .value_grid { gap: 40px; }

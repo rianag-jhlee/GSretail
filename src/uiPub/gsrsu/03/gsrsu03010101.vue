@@ -63,7 +63,7 @@
                                                 <img :src="t.WinWinIntro.Strategy.img" :alt="t.WinWinIntro.Strategy.alt">
                                             </picture>
                                             
-                                            <!-- <ul class="card_grid">
+                                            <ul class="card_grid">
                                                 <li v-for="(card, idx) in t.WinWinIntro.Strategy.Cards" :key="'card-'+idx" class="strategy_card">
                                                     <div class="card_head">
                                                         <span class="num">{{ card.num }}</span>
@@ -73,35 +73,7 @@
                                                         <li v-for="(li, lIdx) in card.list" :key="'li-'+lIdx">{{ li }}</li>
                                                     </ul>
                                                 </li>
-                                            </ul> -->
-
-                                            <div class="card_grid_container res-swiper-container">
-                                                <swiper
-                                                    :slides-per-view="'1.1'"
-                                                    :space-between="20"
-                                                    :breakpoints="{
-                                                        768: {
-                                                            allowTouchMove: false
-                                                        }
-                                                    }"
-                                                    class="card_grid_swiper"
-                                                >
-                                                    <swiper-slide 
-                                                        v-for="(card, idx) in t.WinWinIntro.Strategy.Cards" 
-                                                        :key="'card-'+idx" 
-                                                        tag="div"
-                                                        class="strategy_card res-slide-item"
-                                                    >
-                                                        <div class="card_head">
-                                                            <span class="num">{{ card.num }}</span>
-                                                            <strong>{{ card.tit }}</strong>
-                                                        </div>
-                                                        <ul class="bullet_01">
-                                                            <li v-for="(li, lIdx) in card.list" :key="'li-'+lIdx" v-html="li"></li>
-                                                        </ul>
-                                                    </swiper-slide>
-                                                </swiper>
-                                            </div>
+                                            </ul>
                                         </div>
                                     </section>
 
@@ -109,7 +81,7 @@
                                         <h3 class="section_title">{{ t.WinWinIntro.Index.Title }}</h3>
                                         <div class="index_box mt40">
                                             <figure class="index_visual">
-                                                <img :src="isMobile ? t.WinWinIntro.Index.imgMo : t.WinWinIntro.Index.img" alt="동반성장지수 최우수 등급" />
+                                                <img src="@/assets/images/dummy/gsrsu03010101_2.png" :alt="t.WinWinIntro.Index.alt">
                                             </figure>
                                             <strong>{{ t.WinWinIntro.Index.SubTitle }}</strong>
                                         </div>
@@ -176,6 +148,7 @@
                                                 <div class="text_area mt32">
                                                     <h4>{{ item.tit }}</h4>
                                                     <p v-html="item.desc"></p>
+                                                    <strong v-html="item.desc2"></strong>
                                                 </div>
                                             </div>
                                         </section>
@@ -244,7 +217,7 @@
                                             <ul>
                                                 <li>
                                                     <figure class="img_frame">
-                                                        <img src="@/assets/images/dummy/gsrsu0301010203_1.png" alt="교육지원 프로세스 다이어그램">
+                                                        <img src="@/assets/images/dummy/gsrsu0301010203_1.png" :alt="t.CompetencySupport.Education.alt">
                                                     </figure>
                                                     <figure class="img_frame">
                                                         <img src="@/assets/images/dummy/gsrsu0301010203_2.png" :alt="t.CompetencySupport.Program.Title">
@@ -415,7 +388,7 @@
                                                     <p class="card_desc">{{ item.desc }}</p>
                                                 </li>
                                             </ul>
-                                            <p class="notice_text pc">{{ t.OwnerSupport.part_1.Notice }}</p>
+                                            <p class="notice_text">{{ t.OwnerSupport.part_1.Notice }}</p>
                                         </section>
 
                                         <section class="support_item">
@@ -503,9 +476,10 @@
                                         <h4 class="section_title_sub">{{ t.community.Goal.Title }}</h4>
                                     </div>
 
-                                    <figure class="diagram_img_wrap">
-                                        <img :src="t.community.Goal.DiagramImg" alt="지역 사회 참여 정책의 목표 다이어그램">
-                                    </figure>
+                                    <picture class="diagram_img_wrap">
+                                        <source media="(max-width: 768px)" :srcset="t.community.Goal.DiagramImgMo" />
+                                        <img :src="t.community.Goal.DiagramImg" :alt="t.community.Goal.alt">
+                                    </picture>
 
                                     <ul class="card_grid owner_card_layout">
                                         <li v-for="(item, idx) in t.community.Goal.Items" :key="'goal-'+idx" class="strategy_card">
@@ -554,9 +528,10 @@
                                         <h4 class="section_title_sub">{{ t.supplychain.System.Title }}</h4>
                                     </div>
 
-                                    <figure class="diagram_img_wrap system_bg">
-                                        <img :src="t.supplychain.System.DiagramImg" alt="공급망 지속가능성 관리 체계 R&R 다이어그램">
-                                    </figure>
+                                    <picture class="diagram_img_wrap system_bg">
+                                        <source media="(max-width: 768px)" :srcset="t.supplychain.System.DiagramImgMo" />
+                                        <img :src="t.supplychain.System.DiagramImg" :alt="t.supplychain.System.alt">
+                                    </picture>
                                 </section>
                             </div>
                         </div>
@@ -580,29 +555,30 @@
                                 <section class="support_item">
                                     <div class="view_box">
                                         <div class="strategy_header mb40">
-                                            <h4 class="text_xl_bold">사회공헌 전략</h4>
+                                            <h4 class="text_xl_bold">{{ t.CSR.outline.Strategy.Title }}</h4>
                                         </div>
                                         
                                         <div class="strategy_grid ">
                                             <div class="strategy_info">
-                                                <span class="label_blue">비전</span>
+                                                <span class="label_blue">{{ t.CSR.outline.Strategy.VisionLabel }}</span>
                                                 <p class="text_l_bold">{{ t.CSR.outline.Strategy.Vision }}</p>
                                             </div>
                                             <div class="strategy_info">
-                                                <span class="label_blue">미션</span>
+                                                <span class="label_blue">{{ t.CSR.outline.Strategy.MissionLabel }}</span>
                                                 <p class="text_l_bold">{{ t.CSR.outline.Strategy.Mission }}</p>
                                             </div>
                                         </div>
 
-                                        <figure class="diagram_canvas ac">
-                                            <img :src="t.CSR.outline.Strategy.DiagramImg" alt="사회공헌 전략 다이어그램" class="strategy_main_img">
-                                        </figure>
+                                        <picture class="diagram_canvas ac">
+                                            <source media="(max-width: 768px)" :srcset="t.CSR.outline.Strategy.DiagramImgMo" />
+                                            <img :src="t.CSR.outline.Strategy.DiagramImg" :alt="t.CSR.outline.Strategy.alt" class="strategy_main_img">
+                                        </picture>
                                     </div>
                                 </section>
 
                                 <section class="support_item">
                                     <div class="strategy_header mb40">
-                                        <h4 class="text_xl_bold">발자취</h4>
+                                        <h4 class="text_xl_bold">{{ t.CSR.outline.HistoryTitle }}</h4>
                                     </div>
                                     
                                     <div class="timeline_wrapper">
@@ -834,7 +810,7 @@
                                     <div class="policy_box_wrap">
                                         <div class="wide_info_box">
                                             <figure class="img_frame">
-                                                <img :src="t.protect.humanrights.Assessment.img" alt="인권영향평가">
+                                                <img :src="t.protect.humanrights.Assessment.img" :alt="t.protect.humanrights.Assessment.alt">
                                             </figure>
                                             <div class="text_area">
                                                 <span>{{ t.protect.humanrights.Assessment.Title }}</span>
@@ -857,7 +833,7 @@
                                     <!-- gsrsu03030201 -->
                                     <div v-if="SubTabIdx2 === 0" class="talent_vision">
                                         <div class="intro_summary">
-                                            <h3 class="text_summary_sub">{{ t.protect.talentmanagement.part_1.Summary }}</h3>
+                                            <h3 class="text_summary_sub al">{{ t.protect.talentmanagement.part_1.Summary }}</h3>
                                         </div>
 
                                         <!-- 상단 핵심 가치 비주얼 (서클 레이아웃) -->
@@ -905,7 +881,7 @@
                                         <section class="dream_realization">
                                             <div class="wide_info_box type_bg">
                                                 <figure class="img_frame">
-                                                    <img src="@/assets/images/dummy/gsrsu03030201_2.png" alt="인재경영 회의">
+                                                    <img src="@/assets/images/dummy/gsrsu03030201_2.png" :alt="t.protect.talentmanagement.part_1.alt">
                                                 </figure>
                                                 <div class="text_area">
                                                     <h4 v-html="t.protect.talentmanagement.part_1.Description"></h4>
@@ -923,13 +899,13 @@
                                     <!-- gsrsu03030202: 인재육성체계 -->
                                     <div v-if="SubTabIdx2 === 1" class="talent_development">
                                         <div class="intro_summary">
-                                            <p class="text_summary_sub" v-html="t.protect.talentmanagement.part_2.Summary"></p>
+                                            <p class="text_summary_sub al" v-html="t.protect.talentmanagement.part_2.Summary"></p>
                                         </div>
 
                                         <section class="support_item">
                                             <!-- 상단 다이어그램 -->
                                             <figure class="diagram_img_wrap ac">
-                                                <img :src="t.protect.talentmanagement.part_2.DiagramImg" alt="GS 인재육성 체계 다이어그램">
+                                                <img :src="t.protect.talentmanagement.part_2.DiagramImg" :alt="t.protect.talentmanagement.part_2.DiagramAlt">
                                             </figure>
 
                                             <!-- 인재육성 카드 그리드 -->
@@ -961,7 +937,7 @@
                                     <!-- gsrsu03030203: 인재경영 지표 -->
                                     <div v-if="SubTabIdx2 === 2" class="talent_indicators">
                                         <div class="intro_summary">
-                                            <p class="text_summary_sub" v-html="t.protect.talentmanagement.part_3.Summary"></p>
+                                            <p class="text_summary_sub al" v-html="t.protect.talentmanagement.part_3.Summary"></p>
                                         </div>
 
                                         <!-- 복리후생 섹션 (Work, Engagement, Life, Leisure) -->
@@ -989,7 +965,7 @@
 
                                         <!-- 인재경영 관련 인증 및 대외 수상 이력 -->
                                         <section class="support_section award_section">
-                                            <h4 class="section_title_sub mb40">{{ t.protect.talentmanagement.part_3.Awards.Title }}</h4>
+                                            <h4 class="section_title_sub mb40 al">{{ t.protect.talentmanagement.part_3.Awards.Title }}</h4>
                                             
                                             <!-- 상단 리스트 영역 -->
                                             <div class="award_list">
@@ -1005,7 +981,7 @@
                                                 <ul class="brand_grid mt60">
                                                     <li>
                                                         <figure class="brand_img_box">
-                                                            <img :src="t.protect.talentmanagement.part_3.Awards.Highlight.Img" alt="GPTW 인증 로고">
+                                                            <img :src="t.protect.talentmanagement.part_3.Awards.Highlight.Img" :alt="t.protect.talentmanagement.part_3.Awards.Highlight.alt">
                                                         </figure>
                                                     </li>
                                                 </ul>
@@ -1019,7 +995,7 @@
 
                                     <!-- gsrsu03030204 -->
                                     <div v-if="SubTabIdx2 === 3" class="talent_performance_data">
-                                        <div class="intro_summary">
+                                        <div class="intro_summary al">
                                             <p class="text_summary_sub">{{ t.protect.talentmanagement.part_4.Summary }}</p>
                                             <p class="GS" v-html="t.protect.talentmanagement.part_4.Desc"></p>
                                         </div>
@@ -1129,9 +1105,9 @@
                                                 <p class="desc" v-html="t.protect.customer.Recommend.Desc"></p>
                                             </div>
                                             <!-- '서비스 우수 직원 추천하기' 버튼 -->
-                                            <Buttons btn-class="btn_icon_arrow btn_xl border after">
+                                            <a class="btn_icon_arrow btn_xl border after" :href="t.protect.customer.Recommend.link" target="_blank">
                                                 {{ t.protect.customer.Recommend.BtnText }}
-                                            </Buttons>
+                                            </a>
                                         </div>
                                     </div>
                                 </section>
@@ -1258,7 +1234,7 @@
                                         </div>
                                         <figure class="diagram_box_wrap">
                                             <div class="visual_area mb20">
-                                                <img :src="isMobile ? t.protect.safetymanagement.Governance.imgMo1 : t.protect.safetymanagement.Governance.img1" alt="플랫폼 BU 안전보건 조직도">
+                                                <img :src="isMobile ? t.protect.safetymanagement.Governance.imgMo1 : t.protect.safetymanagement.Governance.img1" :alt="t.protect.safetymanagement.Governance.alt">
                                             </div>
                                             <div class="notice_wrap mt20">
                                                 <p class="notice_text">{{ t.protect.safetymanagement.Governance.Notice }}</p>
@@ -1288,6 +1264,9 @@
                                         <div class="section_title_area mb40">
                                             <h4 class="section_title_sub">{{ t.protect.safetymanagement.listening.Title }}</h4>
                                             <p class="p_desc" v-html="t.protect.safetymanagement.listening.Desc"></p>
+                                            <ul class="bullet_01">
+                                                <li v-for="(list, lIdx) in t.protect.safetymanagement.listening.items" :key="'list-'+lIdx">{{ list }}</li>
+                                            </ul>
                                         </div>
                                         
                                         <!-- 개인정보 동의 영역 (반복) -->
@@ -1299,7 +1278,7 @@
                                                 </ul>
                                                 <div class="consent_agree">
                                                     <p class="guide_text" v-html="consent.guide"></p>
-                                                    <Inputs type="checkbox" text="동의합니다." />
+                                                    <Inputs type="checkbox" :text="consent.ConsentText" />
                                                 </div>
                                             </article>
                                         </div>
@@ -1336,9 +1315,9 @@
                                                             </div>
                                                             <div class="input_group email">
                                                                 <div class="group_wrap">
-                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="이메일 아이디" /></div>
+                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="" /></div>
                                                                     <span class="unit">@</span>
-                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="도메인 입력" /></div>
+                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="" /></div>
                                                                 </div>
                                                                 <SelectBox :options="lp.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
                                                             </div>
@@ -1349,9 +1328,7 @@
                                                                 <span class="required_mark">*</span>
                                                             </div>
                                                             <div class="input_group">
-                                                                <div class="input_flex_item">
-                                                                    <SelectBox :options="lp.part1.telOptions" v-model="formData.tel1" initMsg="선택" />
-                                                                </div>
+                                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel1" is-disabled="true" /></div>
                                                                 <span class="unit">-</span>
                                                                 <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
                                                                 <span class="unit">-</span>
@@ -1379,10 +1356,9 @@
                                                         <div class="form_row">
                                                             <div class="label_item">
                                                                 <span class="label_text">{{ lp.part2.storeLabel }}</span>
-                                                                <span class="required_mark">*</span>
                                                             </div>
                                                             <div class="input_complex">
-                                                                <Inputs type="text" v-model="formData.storeName" placeholder="매장명을 입력해주세요" class="w428"/>
+                                                                <Inputs type="text" v-model="formData.storeName" placeholder="" class="w428"/>
                                                                 <p class="guide_msg">{{ lp.part2.storeGuide }}</p>
                                                             </div>
                                                         </div>
@@ -1392,7 +1368,7 @@
                                                                 <span class="required_mark">*</span>
                                                             </div>
                                                             <div class="input_item full">
-                                                                <Inputs type="text" v-model="formData.subject" placeholder="제목을 입력해주세요" class="w428"/>
+                                                                <Inputs type="text" v-model="formData.subject" placeholder="" class="w428"/>
                                                             </div>
                                                         </div>
                                                         <div class="form_row">
@@ -1415,7 +1391,7 @@
                                                                 <span class="label_text">{{ lp.part2.fileLabel }}</span>
                                                             </div>
                                                             <div class="input_complex">
-                                                                <Inputs type="file" class="btn_file">파일선택</Inputs>
+                                                                <Inputs type="file" class="btn_file">{{ lp.part2.fileNotice }}</Inputs>
                                                                 <p class="guide_msg">{{ lp.part2.fileNotice }}</p>
                                                             </div>
                                                         </div>
@@ -1468,12 +1444,10 @@
                                                 <div class="visual_area scroll_wrap">
                                                     <img 
                                                         :src="isMobile ? t.protect.informationprotection.Committee.imgMo : t.protect.informationprotection.Committee.img" 
-                                                        alt="정보보호위원회 구성도"
+                                                        :alt="t.protect.informationprotection.Committee.Notice"
                                                     >
                                                 </div>
-                                                <div class="notice_wrap">
-                                                    <p class="notice_text">{{ t.protect.informationprotection.Committee.Notice }}</p>
-                                                </div>
+                                                <figcaption>{{ t.protect.informationprotection.Committee.Notice }}</figcaption>
                                             </figure>
                                         </div>
                                     </section>
@@ -1504,12 +1478,12 @@
                                             <table>
                                                 <caption class="blind">정보보호 활동 상세 리스트</caption>
                                                 <colgroup>
-                                                    <col style="width: auto;">
+                                                    <col style="width: 350px;">
                                                     <col style="width: auto;">
                                                 </colgroup>
                                                 <tbody>
                                                     <tr v-for="(item, idx) in t.protect.informationprotection.Activities.Table" :key="'activity-'+idx">
-                                                        <th scope="row" class="ac"><strong>{{ item.tit }}</strong></th>
+                                                        <th scope="row" class="al"><strong>{{ item.tit }}</strong></th>
                                                         <td class="al" v-html="item.desc"></td>
                                                     </tr>
                                                 </tbody>
@@ -1593,12 +1567,10 @@ import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue"; 
 import Textarea from "@/components/Textarea.vue";
 import modal from "@/assets/js/modal";
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/swiper-bundle.css';
 
 export default {
     name: "gsrsu03010101",
-    components: { Tabs, Buttons, Pagination, Inputs, SelectBox, Textarea, Swiper, SwiperSlide },
+    components: { Tabs, Buttons, Pagination, Inputs, SelectBox, Textarea },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
@@ -1607,7 +1579,7 @@ export default {
                 emailId: "",
                 emailDomain: "",
                 emailSelect: "",
-                tel1: "",
+                tel1: "010",
                 tel2: "",
                 tel3: "",
                 category: "",
@@ -1706,8 +1678,7 @@ export default {
                         Index: {
                             Title: "동반성장지수",
                             SubTitle: "동반성장부문 2023 최우수",
-                            img: require("@/assets/images/dummy/gsrsu03010101_2.png"),
-                            imgMo: require("@/assets/images/dummy/gsrsu03010101_2_mo.png"),
+                            alt: "동반성장지수 최우수 등급",
                         }
                     },
                     Partnersupport : {
@@ -1729,7 +1700,8 @@ export default {
                                 { 
                                     tit: "상생파트너론", 
                                     img: require("@/assets/images/dummy/gsrsu0301010201_2.png"),
-                                    desc: "파트너사에 상환청구권이 없는 외상매출채권 담보대출로 협력기업의 상환부담을 경감할 수 있는 제도 입니다.<br/>(GS리테일의 1,2,3차 협력기관 / 연 0.60%+가산금리)" 
+                                    desc: "파트너사에 상환청구권이 없는 외상매출채권 담보대출로 협력기업의 상환부담을 경감할 수 있는 제도 입니다.",
+                                    desc2: "GS리테일의 1,2,3차 협력기관<br>연 0.60%+가산금리" 
                                 },
                                 { 
                                     tit: "친환경농수산펀드/ 농식품창업 아이디어 펀드", 
@@ -1738,16 +1710,16 @@ export default {
                                 }
                             ],
                             Cards: [
-                                { tit: "네트워크론 / 패밀리론", desc: "기업은행과 협약을 맺고 파트너사와의 거래내역, 보증, 담보 등의 제공 또는 추천을 통해 저리 대출 제공" },
-                                { tit: "선급금 지급", desc: "FF 생산공장의 재료 수급과 공급의 안정성 및 설비 관리를 위한 단기자금 조달 등 지원을 위해 파트너사에 선급금 지원" },
-                                { tit: "명절 조기 지급 / 100% 현금결제", desc: "파트너사 및 경영주의 원활한 자금 유동성 확보를 위해 년 2회 명절에 물품대금 및 정산금을 조기지급" },
-                                { tit: "수수료 환급제도", desc: "GS SHOP은 분기별 목표 대비 실적이 기준에 미치지 못한 협력사를 대상으로 수취 수수료의 일부를 환급하는 제도를 운영" }
+                                { tit: "네트워크론<br/>/패밀리론", desc: "기업은행과 협약을 맺고 파트너사와의 거래내역, 보증, 담보 등의 제공 또는 추천을 통해 저리 대출 제공" },
+                                { tit: "선급금<br/>지급", desc: "FF 생산공장의 재료 수급과 공급의 안정성 및 설비 관리를 위한 단기자금 조달 등 지원을 위해 파트너사에 선급금 지원" },
+                                { tit: "명절 조기 지급<br/>/100% 현금결제", desc: "파트너사 및 경영주의 원활한 자금 유동성 확보를 위해 년 2회 명절에 물품대금 및 정산금을 조기지급" },
+                                { tit: "수수료<br/>환급제도", desc: "GS SHOP은 분기별 목표 대비 실적이 기준에 미치지 못한 협력사를 대상으로 수취 수수료의 일부를 환급하는 제도를 운영" }
                             ]
                         }
                     },
                     MarketSupport: {
                         Marketing: {
-                            Summary: "파트너사의 지속성장 기반 강화를 위한<br/> 다양한 자금 지원 프로그램을 운영하고 있습니다.",
+                            Summary: "파트너사의 국내·외 판로 개척을 위한<br/>다양한 지원 프로그램을 운영하고 있습니다.",
                             Title: "마케팅 지원",
                             Desc: "인기 맛집, TV프로그램, 유명연예인 등 고객들에게 소구력이 높은 브랜드를 GS리테일이 자체적으로 유치하고, 해당 브랜드를 파트너사가 공급하는 상품의 브랜드 경쟁력을 높일 수 있도록 무상 사용을 지원하는 제도입니다.",
                             Brands: [
@@ -1791,9 +1763,10 @@ export default {
                                     { name: "안전/위생 교육", period: "반기 1회", desc: "식품 협력사의 품질관리 능력 향상을 위해 식품위생법, 원산지 관리법 등의 교육을 지원합니다." },
                                     { name: "HACCP 아카데미", period: "년 1회", desc: "중소 PB파트너사 대상으로 HACCP 운영 역량 향상을 위해 관련 위생관리 및 법규 교육을 지원함으로써 상생과 안전한 상품 공급을 위한 지원 제도" },
                                     { name: "파트너사 품질/위생 점검", period: "년 1회", desc: "당사에 상품을 납품하는 파트너사 대상으로 사전 위생 심사를 통해 미흡사항에 대한 개선 및 코칭과 컨설팅을 진행합니다." },
-                                    { name: "선도·위생관리 코칭 및 지원", period: "상시", desc: "-" }
+                                    { name: "선도·위생관리 코칭 및 지원", period: "상시", desc: "당사에 상품을 납품하는 파트너사 대상으로 사전 위생 심사를 통해 미흡사항에 대한 개선 및 코칭과 컨설팅을 진행하고 있으며, 입점 이후에도 지속 방문하여 선도·위생관리에 대한 사후 지원활동을 수행 '20년 선도 관련 262개 업체, 위생관련 237개 업체 방문 교육 실시" }
                                 ]
-                            }
+                            },
+                            alt: "교육지원 프로세스 다이어그램",
                         },
                         Program: {
                             Title: "품질, 생산성 등 경쟁력 강화 지원 프로그램",
@@ -1897,7 +1870,7 @@ export default {
                                 },
                                 {
                                     tit: "복리후생",
-                                    desc: "경조사 발생시(가맹점 실경영주 기준 결혼 또는 조위 ) 경조금 및 화환 등을 지급하고 있습니다.",
+                                    desc: "경조사 발생시(가맹점 실경영주 기준 결혼 또는 조위) 경조금 및 화환 등을 지급하고 있습니다.",
                                     img: require("@/assets/images/dummy/gsrsu03010103_1_3.png")
                                 },
                                 {
@@ -1922,11 +1895,13 @@ export default {
                         Goal: {
                             Title: "지역 사회 참여 정책의 목표",
                             DiagramImg: require("@/assets/images/dummy/gsrsu03010104_diagram.png"),
+                            DiagramImgMo: require("@/assets/images/dummy/mo/gsrsu03010104_diagram_mo.png"),
                             Items: [
                                 { num: "01", desc: "고객의 동참을 이끌어내 선한 영향력을 확산한다." },
                                 { num: "02", desc: "지역사회의 문제에 공감하고 해결을 지원하기 위해 노력한다." },
                                 { num: "03", desc: "미래세대 투자를 고려한 프로그램을 개발한다." }
-                            ]
+                            ],
+                            alt: "지역 사회 참여 정책의 목표 다이어그램",
                         }
                     },
                     supplychain: {
@@ -1946,7 +1921,9 @@ export default {
                         // 공급망 지속가능성 관리 체계
                         System: {
                             Title: "공급망 지속가능성 관리 체계",
-                            DiagramImg: require("@/assets/images/dummy/gsrsu03010105.png") // 요청하신 파일명 적용
+                            DiagramImg: require("@/assets/images/dummy/gsrsu03010105.png"),// 요청하신 파일명 적용
+                            DiagramImgMo : require("@/assets/images/dummy/mo/gsrsu03010105_mo.png"),
+                            alt: "공급망 지속가능성 관리 체계 R&R 다이어그램"
                         }
                     },
                     CSR: {
@@ -1956,8 +1933,13 @@ export default {
                                 Title: "사회공헌 전략",
                                 Vision: "일상에서 함께하는 나눔 플랫폼, Give & Share",
                                 Mission: "유통 플랫폼을 통한 지속 가능한 사회적 가치창출",
-                                DiagramImg: require("@/assets/images/dummy/gsrsu030201.png")
+                                DiagramImg: require("@/assets/images/dummy/gsrsu030201.png"),
+                                DiagramImgMo: require("@/assets/images/dummy/mo/gsrsu030201_mo.png"),
+                                alt: "사회공헌 전략 다이어그램",
+                                VisionLabel:"비전",
+                                MissionLabel:"미션"
                             },
+                            HistoryTitle: "발자취",
                             History: [
                                 {
                                     year: "2025",
@@ -1969,9 +1951,9 @@ export default {
                                         "해피스타트 자립준비청년 지원사업 (2022~2024)",
                                         "GS25심장제세동기 설치 (2022)",
                                         "나눔키트 지원 (2020~)",
-                                        "수출업사이클링 친구캠페인 (2021~)",
+                                        "업사이클링 친구캠페인(2021~)",
                                         "사랑의 이불 기부 (2022)",
-                                        "사랑의 마스크 기부 (2022)"
+                                        "사랑의 마스크 기부(2020)"
                                     ]
                                 },
                                 {
@@ -1980,15 +1962,16 @@ export default {
                                         "에코크리에이터(2019~)",
                                         "사랑의 떡국 기부(2019)",
                                         "GS25 늘봄스토어 오픈 (장애인훈련형 점포, 2017~ )",
-                                        "GS25 내일스토어 오픈 (사회공헌형 편의점, 2017~)",
+                                        "GS25 내일스토어 오픈 (취업이 어려운 이웃을 지원하는 사회공헌형 편의점, 2017~)",
                                         "독립군 알리기 도시락 (2017~)",
                                         "GS아동안전지킴이 / GS안전지킴이 심폐소생술교육(2017~)",
+                                        "에코소셜임팩트(2017~)",
                                         "러브러브펀드 지역아동센터 식사지원(2016~)",
                                         "해외봉사(2016~2017)",
                                         "사랑의 연탄 기부(2016~2024)",
                                         "저소득 화상환자 지원(2015~)",
                                         "나눔매장 물품 지원(2013~)",
-                                        "사랑의 김장기부(2013~)",
+                                        "사랑의 김장 기부(2013~)",
                                         "사회적기업 판로지원 사업(2013~2023)",
                                         "FC서울 다문화가정 아동 축구교실 지원(2013~)",
                                         "북드림 도서기부캠페인(2012~2024)"
@@ -2075,22 +2058,22 @@ export default {
                                 },
                                 { 
                                     tit: "심폐소생술 교육 / 심장제세동기 지원", 
-                                    desc: "위급 상황 발생 시 소중한 생명을 지킬 수 있도록 임직원 심폐소생술 교육 참여 및 대한적십자사와 협업하여 심장제세동기 등을 지원합니다.",
+                                    desc: "위급 상황이 발생하였을 때 소중한 생명을 지킬 수 있도록 임직원들은 자발적으로 심폐소생술 교육에 참여, 대한적십자사와 협업하여 심장제세동기와 체험 교육 차량을 지원하였습니다.",
                                     img: require("@/assets/images/dummy/gsrsu030203_5.png") 
                                 },
                                 { 
                                     tit: "러브러브 펀드", 
-                                    desc: "임직원 기금과 회사의 매칭그랜트로 지역아동센터 어린이 식재료와 요기요 상품권 등을 지원합니다.",
+                                    desc: "임직원이 기부한 금액과 동일하게 회사에서 기부하는 매칭그랜트로 지역아동센터 어린이 식사를 위한 식재료와 요기요 상품권 등을 지원합니다.",
                                     img: require("@/assets/images/dummy/gsrsu030203_6.png") 
                                 },
                                 { 
                                     tit: "북드림캠페인 / 헌혈캠페인", 
-                                    desc: "기부받은 도서는 지역아동센터에 전달하고, 헌혈캠페인으로 백혈병 소아암 환아를 지원합니다.",
+                                    desc: "기부받은 도서는 지역아동센터 및 어려운 이웃을 위한 도서관에 전달하고 있으며 헌혈캠페인으로 백혈병, 소아암 환아에게 따뜻한 지원을 이어나가고 있습니다.",
                                     img: require("@/assets/images/dummy/gsrsu030203_7.png") 
                                 },
                                 { 
                                     tit: "재해재난 지원", 
-                                    desc: "재해재난 발생 시 이재민에게 긴급구호물품이 신속하게 전달될 수 있도록 물류 인프라를 지원합니다.",
+                                    desc: "재해재난이 일어난 경우 이재민이 긴급구호물품이 빠른 시간 내 전달받을 수 있게 하였습니다.",
                                     img: require("@/assets/images/dummy/gsrsu030203_8.png") 
                                 }
                             ],
@@ -2099,19 +2082,19 @@ export default {
                                 Title: "주요 협력기관",
                                 Items: [
                                     { name: "등촌9종합사회복지관", img: require("@/assets/images/dummy/gsrsu030203_logo_1.png") },
-                                    { name: "까리따스방배종합사회복지관", img: require("@/assets/images/dummy/gsrsu030203_logo_2.png") },
+                                    { name: "서울SOS어린이마을", img: require("@/assets/images/dummy/gsrsu030203_logo_10.png") },
                                     { name: "홀트일산복지타운/요양원", img: require("@/assets/images/dummy/gsrsu030203_logo_3.png") },
-                                    { name: "외 26개 복지관 등등", img: require("@/assets/images/dummy/gsrsu030203_logo_4.png") },
-                                    { name: "푸등뱅크", img: require("@/assets/images/dummy/gsrsu030203_logo_5.png") },
-                                    { name: "대한적집자사", img: require("@/assets/images/dummy/gsrsu030203_logo_6.png") },
-                                    { name: "thankgive", img: require("@/assets/images/dummy/gsrsu030203_logo_7.png") },
+                                    { name: "외 26개 복지관 등", img: require("@/assets/images/dummy/gsrsu030203_logo_4.png") },
+                                    { name: "푸드뱅크", img: require("@/assets/images/dummy/gsrsu030203_logo_5.png") },
+                                    { name: "대한적십자사", img: require("@/assets/images/dummy/gsrsu030203_logo_6.png") },
+                                    { name: "thanksgive", img: require("@/assets/images/dummy/gsrsu030203_logo_7.png") },
                                     { name: "아름다운가게", img: require("@/assets/images/dummy/gsrsu030203_logo_8.png") },
-                                    { name: "한국백혈병소아암협회", img: require("@/assets/images/dummy/gsrsu030203_logo_9.png") }
+                                    { name: "(주)한국백혈병소아암협회", img: require("@/assets/images/dummy/gsrsu030203_logo_9.png") }
                                 ]
                             }
                         },
                         broadcasting: {
-                            Summary: "방송 제작 인프라를 활용하여 미디어 소외 계층을 지원하고 <br/>관련 분야의 미래 인재를 육성합니다.",
+                            Summary: "미디어 접근 지원과 인재 육성을 통해 <br/>방송의 공공성과 책임 있는 미디어 문화를 이끌어냅니다.",
                             Projects: [
                                 { 
                                     tit: "미디어나눔버스 지원", 
@@ -2185,16 +2168,16 @@ export default {
                             Summary: "GS리테일은 임직원뿐만 아니라, 모든 이해관계자들의 인권을 존중하며 <br/>인간으로서의 가치와 존엄성을 보장하겠습니다.",
                             Policy: {
                                 Title: "GS리테일 인권경영정책",
-                                Desc: "GS리테일은 세계인권선언(Universal Declaration of Human Rights)과 UNGC 10대 원칙(UN Global Compact), 그리고 국내외 노동 및 인권 관련 표준과 가이드라인을 지지하고 준수하여 회사의 경영활동에서 발생할 수 있는 모든 인권 관련 문제에 대한 방지와 해결을 위해 최선의 노력을 다하겠습니다.<br/><br/>이를 위해, GS리테일 인권경영정책을 수립해 임직원 외 협력사를 포함한 모든 이해관계자의 인권 존중을 실천하고자 합니다.<br/>또한, 협력사의 경우 '협력사 행동강령'에 인권관련 사항 역시 포함하여 인권경영을 실천할 수 있도록 하고 있습니다.",
+                                Desc: "GS리테일은 세계인권선언(Universal Declaration of Human Rights)과 UNGC 10대 원칙(UN Global Compact),<br/>그리고 국내외 노동 및 인권 관련 표준과 가이드라인을 지지하고 준수하여 회사의 경영활동에서 발생할 수 있는 모든 인권 관련 문제에 대한 방지와 해결을 위해 최선의 노력을 다하겠습니다.<br/><br/>이를 위해, GS리테일 인권경영정책을 수립해 임직원 외 협력사를 포함한 모든 이해관계자의 인권 존중을 실천하고자 합니다.<br/>또한, 협력사의 경우 '협력사 행동강령'에 인권관련 사항 역시 포함하여 인권경영을 실천할 수 있도록 하고 있습니다.",
                                 BtnText: "전문보기"
                             },
                             Goals: {
-                                Title: "일하기 좋은 직장만들기, 임직원 인권 목표",
+                                Title: "일하기 좋은 직장 만들기, 임직원 인권 목표",
                                 Items: [
                                     { num: "01", desc: "즐겁고 보람된 일터를 만들어 갑니다." },
-                                    { num: "02", desc: "누구나 차별없이 존중받는 근무 환경을 만들어 갑니다." },
+                                    { num: "02", desc: "누구나 차별없이 존중 받는 근무 환경을 만들어 갑니다." },
                                     { num: "03", desc: "장애인, 취약근로자, 여성 및 임산부 근로자들의 행복하고, 일할 수 있는 근로환경을 제공합니다." },
-                                    { num: "04", desc: "GS리테일은 수평적 조직 문화를 통해 누구나 소신있는 발언과 의견을 존중합니다." }
+                                    { num: "04", desc: "GS리테일은 수평적 조직 문화를 통해 누구나 소신 있는 발언과 의견을 존중합니다." }
                                 ]
                             },
                             Programs: {
@@ -2213,7 +2196,8 @@ export default {
                             Assessment: {
                                 Title: "인권영향평가",
                                 Desc: "GS리테일은 2021년부터 임직원 대상 인권영향평가를 실시해, 현황 및 개선점을 도출하고 즉시 개선하고자 노력하고 있습니다.<br/><br/> 이외에도 인권 관련 임직원 교육을 실시하고, 인권영향평가 등이 이해관계자를 대상으로 확대될 수 있도록 협업을 계속해 나가겠습니다.",
-                                img: require("@/assets/images/dummy/gsrsu030301_2_1.png")
+                                img: require("@/assets/images/dummy/gsrsu030301_2_1.png"),
+                                alt: "인권영향평가"
                             }
                         },
                         talentmanagement: {
@@ -2229,10 +2213,10 @@ export default {
                                 },
                                 Details: {
                                     Value: [
-                                        { tit: "Fair", desc: "공정함을 지키고 사회와 환경에 기여합니다." },
-                                        { tit: "Friendly", desc: "다양성을 인정하고 서로를 존중합니다." },
-                                        { tit: "Fresh", desc: "창의와 도전을 장려하여 회사와 개인이 함께 성장합니다." },
-                                        { tit: "Fun", desc: "유연하고 자율적인 환경에서 즐겁게 일합니다." }
+                                        { tit: "Fair", desc: "공정함을 지키고\n사회와 환경에 기여합니다." },
+                                        { tit: "Friendly", desc: "다양성을 인정하고\n서로를 존중합니다." },
+                                        { tit: "Fresh", desc: "창의와 도전을 장려하여\n회사와 개인이 함께 성장합니다." },
+                                        { tit: "Fun", desc: "유연하고 자율적인 환경에서\n즐겁게 일합니다." }
                                     ],
                                     Way: [
                                         { tit: "고객 최우선", list: ["# 업무의 시작과 끝을 고객으로 연결합니다.", "# 고객을 위해 '되는 방법'을 먼저 찾습니다."] },
@@ -2246,19 +2230,19 @@ export default {
                                     "교육훈련프로그램을 통한 인재육성,",
                                     "인권 존중을 통한 배려와 선의의 경쟁,",
                                     "최고의 처우수준과 다양한 복리후생 지원을 통한 자긍심 함양 등<br/> 인재경영을 실현해 나아가고 있습니다."
-                                ]
-                                
-                            
+                                ],
+                                alt: "인재경영 회의", 
                             },
                             part_2:{
                                 Summary: "진심 어린 서비스와 창의적 사고로 고객에게 사랑받는 최고의 전문가 육성을 위하여<br/>핵심가치, 직무역량, 리더십 역량, 자기주도학습 프로그램을 운영하고 있습니다.",
                                 MainTitle: "GS 인재육성 체계",
                                 DiagramImg: require("@/assets/images/dummy/gsrsu03030202.png"),
+                                DiagramAlt: "GS 인재육성 체계 다이어그램",
                                 Cards: [
                                     {
                                         num: "01",
-                                        tit: "제도직무 역량",
-                                        desc: "직무 수행에 필요한 전문 지식과 실무 역량을 확장하여, <br/>개인의 직무 성장을 체계적으로 이루도록 돕습니다.",
+                                        tit: "직무 역량",
+                                        desc: "직무 수행에 필요한 전문 지식과 실무 역량을 확장하여, 개인의 직무 성장을 체계적으로 이루도록 돕습니다.",
                                         list: ["직무 Academy / GenAI Academy", "직무성장플랜(나의 성장계획 작성)"]
                                     },
                                     {
@@ -2266,14 +2250,14 @@ export default {
                                         tit: "리더십 역량",
                                         desc: "리더로서 구성원의 잠재력을 이해하고, 신뢰와 협력을 기반으로 함께 성장하는 리더십을 개발할 수 있도록 지원합니다.",
                                         list: [
-                                            "임원 교육, 신임부문장 온보딩 과정 / 팀장 리더십 스쿨 / 신임 팀장 온보딩과정 / BOLD Leader 과정 / BOLD Manager 과정 등",
+                                            "임원 교육, 신임부문장 온보딩 과정 / 팀장 리더십 스쿨 / 신임 팀장 온보딩 과정 / BOLD Leader 과정 / BOLD Manager 과정 등",
                                             "조직책임자 리더십 워크숍, 임원/팀장 리더십 진단 및 피드백"
                                         ]
                                     },
                                     {
                                         num: "03",
                                         tit: "GS Way 내재화",
-                                        desc: "직무 수행에 필요한 전문 지식과 실무 역량을 확장하여, <br/>개인의 직무 성장을 체계적으로 이루도록 돕습니다.",
+                                        desc: "GS리테일의 핵심가치를 공통의 기준으로 깊이 이해하고, 업무 전반에서 일관된 방식으로 실천할 수 있는 실행력을 학습합니다.",
                                         list: ["GS Way 내재화 교육 프로그램(리더·구성원)", "GS Way 현업 적용 학습(Post Learning) 및 업무 적용 워크숍"]
                                     },
                                     {
@@ -2356,13 +2340,14 @@ export default {
                                     Highlight: {
                                         Img: require("@/assets/images/dummy/gsrsu03030203.png"), // GPTW 로고 이미지
                                         Tit: "대한민국 일하기 좋은 기업 인증 획득<br/> (GPTW코리아)",
-                                        Date: "2023.02"
+                                        Date: "2023.02",
+                                        alt: "GPTW 인증 로고",
                                     }
                                 }
                             },
                             part_4: {
                                 Summary: "GS리테일의 인재 경영과 관련된 실적 자료들을 열람하실 수 있습니다.",
-                                Desc: "본 자료는 이해 관계자 및 기관, 주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br/>용도 외 활용, 불법 유출 시에는 법에 의해 처벌을 받으실 수 있습니다.",
+                                Desc: "본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로<br/>용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.",
                                 Table: {
                                     Tbody: [
                                         {num: 4, tit: "인권 교육 실적 자료", date: "2021.06.21", url: "/files/human_rights_edu_2021.pdf" },
@@ -2401,7 +2386,8 @@ export default {
                                 Title: "서비스 우수 직원 추천",
                                 PointTit: "진심어린 서비스",
                                 Desc: "나의 마음(心)을 담아, 고객입장에서 기대에 앞서가는 서비스를 지속적으로 제공하는 것입니다.<br/>고객(동료)에게 진심어린 서비스를 실천한 서비스 우수 직원을 추천해주세요.",
-                                BtnText: "서비스 우수 직원 추천하기"
+                                BtnText: "서비스 우수 직원 추천하기",
+                                link: "https://forms.office.com/pages/responsepage.aspx?id=XMJFRnWXd02nNnAPq3ZhFvCl7ccQQtpLvT4o0ubaQFFUOEVXQzJNMkg3U1NWT1VONklWUUhSREc1NC4u&route=shorturl"
                             },
                             Safety: {
                                 Title: "제품과 서비스 안전을 위한<br/> 제도 운영",
@@ -2453,9 +2439,10 @@ export default {
                             },
                             Governance: {
                                 Title: "안전보건 거버넌스",
-                                Desc: "안전보건에 대한 전문성 강화를 위해 편의점/수퍼 BU와 홈쇼핑 BU에 각각 안전보건경영책임자(CSO)를 선임하였으며,<br/> 안전보건경영책임자 산하에 안전보건에 관한 업무를 총괄 관리하는 전담조직인 안전보건팀과 안전보건파트를 운영하고 있습니다.<br/> 또한 사업장별 안전보건 관리책임자, 관리감독자를 선임하고 유해요인 조사, 위험성 평가 등을 실시하여 안전보건관리체계를 고도화하고 있습니다.",
+                                Desc: "안전보건에 대한 전문성 강화를 위해 플랫폼 BU와 홈쇼핑 BU에 각각 안전보건경영책임자(CSO)를 선임하였으며,<br/>안전보건경영책임자 산하에 안전보건에 관한 업무를 총괄 관리하는 전담조직인 안전보건팀과 안전보건파트를 운영하고 있습니다.<br class='m_br2x' />또한 사업장별 안전보건 관리책임자, 관리감독자를 선임하고 유해요인 조사, 위험성 평가 등을 실시하여 안전보건관리체계를 고도화하고 있습니다.",
                                 img1: require("@/assets/images/dummy/gsrsu030304_1.png"),
                                 imgMo1: require("@/assets/images/dummy/gsrsu030304_1_mo.png"),
+                                alt: "플랫폼 BU 안전보건 조직도",
                                 Notice: "※이사회(ESG위원회) 정기보고"
                             },
                             Safety: {
@@ -2473,7 +2460,12 @@ export default {
                             },
                             listening : {
                                 Title: "안전·보건 의견 청취함",
-                                Desc: "GS리테일은 안전 및 보건에 관한 사항에 대해 구성원의 의견을 성실히 청취합니다.",
+                                Desc: "GS리테일은 안전 및 보건에 관한 사항에 대해 구성원의 의견을 성실히 청취합니다.<br/>건전한 제보는 회사의 발전과 안전보건 경영을 위한 소중한 밑거름이 됩니다.",
+                                items: [
+                                    "안전·보건 의견 청취함은 시민 및 구성원의 안전과 보건에 대하여 의견 및 제보를 받습니다.",
+                                    "안전과 보건에 관한 사항 이외에는 별도 답변이나 조치 등을 하지 않을 수 있습니다.",
+                                    "의견 또는 제보에 대하여 어떤 불이익도 발생하지 않습니다."
+                                ],
                                 Consents: [
                                     {
                                         title: "개인정보 제공 동의",
@@ -2483,15 +2475,17 @@ export default {
                                             "개인정보의 보유 및 이용기간: 목적 달성 시 지체 없이 파기(최대 1년)"
                                         ],
                                         guide: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br/> 정보가 확인해야 하는 문의에 대해 정확하고 신속한 답변을 받으시는데 어려움이 있습니다.",
+                                        ConsentText: "동의합니다."
                                     },
                                     {
                                         title: "개인정보 수집·이용 동의",
                                         items: [
-                                            "수집이용 및 목적: 문의사항 확인 및 답변 활용",
+                                            "수집·이용 및 목적: 문의사항 확인 및 답변 활용",
                                             "수집하는 개인정보 항목: 이름, 연락처, 이메일",
                                             "보유 및 이용기간: 접수 후 1년"
                                         ],
                                         guide: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br/> 문의 글 작성이 불가능합니다.",
+                                        ConsentText: "동의합니다."
                                     }
                                 ],
                                 Nonmember : {
@@ -2507,17 +2501,14 @@ export default {
                                         title: "제보자 정보",
                                         requiredText: "* 필수 입력사항",
                                         nameLabel: "이름",
-                                        namePlaceholder: "이름을 입력해주세요",
+                                        namePlaceholder: "",
                                         emailLabel: "이메일",
                                         emailOptions: [
                                             { value: 'naver.com', label: 'naver.com' },
                                             { value: 'gmail.com', label: 'gmail.com' }
                                         ],
                                         telLabel: "연락처",
-                                        telOptions: [
-                                            { value: '010', label: '010' },
-                                            { value: '011', label: '011' }
-                                        ]
+                                        telOptions: '010',
                                     },
                                     part2: {
                                         title: "상담내용",
@@ -2553,7 +2544,7 @@ export default {
                                 Title: "정보보호 및 개인정보보호 거버넌스 체계",
                                 Desc: "GS리테일은 고객 개인정보 보호를 위해 CEO 직속의 거버넌스 체계를 운영하고 있습니다. CISO/CPO는 개인정보보호책임자 및 정보보호최고책임자로서 전사 개인정보 보호를 총괄하며, CISO/CPO 직속 조직을 통해 보안 전략 수립, 보안 기술 운영, 개인정보 보호 업무를 통합적으로 관리·수행하고 있습니다. 해당 조직은 보안전략, 보안기술, 개인정보보호의 3대 기능을 중심으로 전사 정보보호 및 개인정보 보호 체계를 일관되게 운영하고 있습니다.",
                                 img: require("@/assets/images/dummy/gsrsu030305_1.png"),
-                                imgMo: require("@/assets/images/dummy/gsrsu030305_1_mo.png"),
+                                imgMo: require("@/assets/images/dummy/mo/gsrsu030305_1_mo.png"),
                             },
                             Committee: {
                                 Desc: "GS리테일은 중요 이슈를 관리하기 위해 정보보호위원회를 운영하고 있습니다. <br/>본 위원회는 CEO를 중심으로 각 BU장(임원)으로 구성된 전사 정보보호 및 개인정보보호 거버넌스 기구입니다. 간사 위원으로 CISO/CPO, 준법지원실장이 참여하며, 실무그룹과 정보보안부문이 연계되어 전사 정보보호 및 개인정보보호 거버넌스의 체계적 운영과 의사결정을 지원합니다.",
@@ -2566,7 +2557,7 @@ export default {
                                 Title: "정보보호 및 개인정보보호 정책",
                                 Desc: "GS리테일은 정보보호 정책, 정보보호지침, 매뉴얼을 기반으로 개인정보보호 & 정보보안 활동을 정의하고 있으며, 이를 바탕으로 각종 활동을 수행합니다.<br/>사내 게시판 내 정책, 지침 및 매뉴얼을 게재하며, 매년 개인정보보호법 등 관련 법령의 개정을 확인하여 정책, 지침, 매뉴얼을 제·개정하고 있습니다. 또한 GS리테일은 홈페이지 내 ‘알기 쉬운 개인정보처리방침’을 게시하여, 고객의 정보를 보호하고 있는 당사의 방안을 투명하게 공개하고 있습니다.",
                                 img: require("@/assets/images/dummy/gsrsu030305_3.png"),
-                                imgMo: require("@/assets/images/dummy/gsrsu030305_3_mo.png"),
+                                imgMo: require("@/assets/images/dummy/mo/gsrsu030305_3_mo.png"),
                             },
                             Activities: {
                                 Title: "정보보호활동",
@@ -2575,9 +2566,9 @@ export default {
                                     { tit: "ISMS-P 인증", desc: "정보보호 및 개인정보보호 관리체계(ISMS-P) 인증을 유지하기 위해 관리,기술적 통제항목 등 다양한 정보보호 감사를 주기적으로 실시하고 있으며, 공신력 있는 기관을 통해 ISMS-P 인증심사를 수검 받고 있습니다." },
                                     { tit: "서비스 보안 검토", desc: "신규 및 변경되는 서비스에 대하여 개발보안 프로세스를 운영하고 있습니다. 서비스 기획 단계에서 중요도평가를 통해 보안요구사항을 정의하고 이를 프로젝트 각 단계에 반영하고 있으며, 오픈 전 보안요구사항에 맞도록 개인정보생명주기, 개발보안, 어플리케이션 보안, 소스코드 및 인프라점검, 웹/앱 취약점 점검 등 전반적인 보안점검을 수행하고 식별된 취약점에 대한 조치를 진행하고 있습니다." },
                                     { tit: "정보보호 교육", desc: "전사 임직원을 대상으로 개인정보보호 교육과, 정보보호 교육을 실시하고 있으며, 위치정보 및 다량의 개인정보를 취급하는 임직원 대상으로 별도의 심화교육을 실시하고 있습니다." },
-                                    { tit: "정보호호 인식제고", desc: "임직원의 정보보호 인식을 향상시키기 위해 개인정보보호의 날·정보보호의 날 캠페인을 운영하며, 꼭 지켜야 하는 사항 등에 대해 정기 메일링을 진행하고 있습니다." },
-                                    { tit: "모의훈련", desc: "임직원 대상으로 악성메일 모의훈련을 실시하여, 악성메일에 대한 보안인식을 향상시키고 있습니다.<br/>또한, 개인정보 유 노출 사고에 대한 모의훈련을 실시하여, 실제 사고 발생 시 고객분들께 발생하는 개인정보침해를 줄이기 위해 노력하고 있습니다." },
-                                    { tit: "위험관리", desc: "정보자산(인프라 등) 및 프로세스 등에서 발행사는 위험을 관리하기 위해 매년 취약점 점검 및 위험평가를 실시하고 있으며, 도출된 위험에 대해 관리할 수 있는 계획을 수립하여 운영하고 있습니다." }
+                                    { tit: "정보보호 인식제고", desc: "임직원의 정보보호 인식을 향상시키기 위해 개인정보보호의 날·정보보호의 날 캠페인을 운영하며, 꼭 지켜야 하는 사항 등에 대해 정기 메일링을 진행하고 있습니다." },
+                                    { tit: "모의훈련", desc: "임직원 대상으로 악성메일 모의훈련을 실시하여, 악성메일에 대한 보안인식을 향상시키고 있습니다.<br/>또한, 개인정보 유·노출 사고에 대한 모의훈련을 실시하여, 실제 사고 발생 시 고객분들께 발생하는 개인정보침해를 줄이기 위해 노력하고 있습니다." },
+                                    { tit: "위험관리", desc: "정보자산(인프라 등) 및 프로세스 등에서 발생하는 위험을 관리하기 위해 매년 취약점 점검 및 위험평가를 실시하고 있으며, 도출된 위험에 대해 관리할 수 있는 계획을 수립하여 운영하고 있습니다." }
                                 ],
                                 BtnText: "정보보호 공시 바로가기"
                             },
@@ -2663,6 +2654,7 @@ export default {
 
     .finance_support .process_container {margin-top:60px;}
     .finance_support h3 {margin-bottom:40px;}
+    .finance_support .text_area strong {display:block; margin-top:6px; line-height:1.45}
 
     /* 상생경영 개요 특화 스타일 */
     .text_summary { font-size: 32px; font-weight: 700; color: #161616; padding: 20px 0; }
@@ -2690,7 +2682,7 @@ export default {
     .card_head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
     .card_head .num { font-size: 1.8rem; font-weight: 700; color: #107AF2; }
     .card_head strong { font-size: 20px; color: #161616; }
-    .index_visual { position: relative; width: 100%; border-radius: 12px; overflow: hidden; }
+    .index_visual { position: relative; width: 100%; height: 340px; background: #F8F8F8; border-radius: 12px; overflow: hidden; }
     .index_visual img { width: 100%; height: 100%; object-fit: cover; }
     .index_badge { position: absolute; top: 65px; right: 50px; width: 210px; height: 210px; background: rgba(159, 202, 250, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .badge_inner { text-align: center; }
@@ -2702,8 +2694,6 @@ export default {
     .btn_xl {font-weight:700;}
     .bullet_01 li {font-size:16px;}
     .index_box strong {margin-top:20px; font-size:2.8rem; font-weight:700; display:block;}
-
-    .strategy_box figure.diagram_img {display:flex; justify-content:center;}
 
     /* 금융지원 */
     .text_summary_sub { margin-bottom:80px; font-size: 28px; font-weight: 700; color: #90909A;}
@@ -2782,7 +2772,7 @@ export default {
     .policy_item { display: flex; align-items: flex-start; gap: 12px; }
     .policy_item .label { font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; min-width: 60px; }
     .policy_item .desc { font-size: 20px; font-weight: 400; color: #161616; line-height: 1.45; }
-    .supplychain_policy .system_bg {margin-top:0; padding: 60px; background-color: #F8F8F8; border-radius: 12px; display: flex; justify-content: center; align-items: center; }
+    .supplychain_policy .system_bg {display: block; margin-top:0; padding: 60px; background-color: #F8F8F8; border-radius: 12px; display: flex; justify-content: center; align-items: center; }
     .supplychain_policy .system_bg img {padding:60px 95px; background:#fff;}
 
     /* 공통 폰트 및 컬러 변수 활용 */
@@ -2832,13 +2822,14 @@ export default {
     .human_rights_management strong  {font-size:20px; display:block;}
     .human_rights_management .text_area span {margin-bottom:12px; font-size:32px; font-weight:700; display:block;}
     .human_rights_management .owner_card_layout {grid-template-columns: repeat(4, 1fr);}
+    .human_rights_management .policy_box_wrap .img_frame { height: 300px; }
 
     /* 인재육성체계 */
     .p_desc {font-size:16px;}
 
     /* 인재경영실적자료 */
-    .talent_performance_data .text_summary_sub {margin-bottom:16px;}
-    .talent_performance_data .intro_summary .GS {color:#90909A; font-size: 20px; line-height: 1.5;}
+    .talent_performance_data .text_summary_sub {margin-bottom:16px; color:#161616;}
+    .talent_performance_data .intro_summary .GS {color:#161616; font-size: 20px; line-height: 1.5;}
     .talent_performance_data .policy_wrap table {border-top: 1px solid #161616;}
     .talent_performance_data .policy_wrap th {background-color: #fff; border-bottom: 1px solid #E5E5E5;}
     .talent_performance_data .policy_wrap td {border-right:0; border-left:0; border-bottom: 1px solid #E5E5E5; padding: 24px;}
@@ -2853,11 +2844,12 @@ export default {
     .talent_vision .circle_item strong { font-size: 44px; font-weight: 700; }
     .talent_vision .circle_item span { font-size: 1.8rem; margin-top: 8px; opacity: 0.9; }
     .value_detail_grid {width:100%; padding:40px 0; background:#fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display:flex; justify-content:space-evenly;}
+    .value_detail_grid .detail_card { width:100%; max-width:400px; }
     .card_title { font-size: 28px; font-weight: 700; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid #E5E5E9; }
     .value_list li, .way_list li { margin-bottom: 24px; display: flex; align-items: flex-start; }
     .way_list li {gap:30px;}
     .value_list strong, .way_list strong { min-width: 100px; font-size: 20px; font-weight: 700; color: #161616; }
-    .value_list p { font-size: 16px; color: #67676F; }
+    .value_list p { font-size: 16px; color: #67676F; white-space: pre-line; }
     .way_list .tags { display: flex; flex-direction: column; gap: 4px; }
     .way_list .tags span { font-size: 16px; color: #67676F; }
     .dream_realization {margin-top:120px;}
@@ -2926,21 +2918,30 @@ export default {
     .customer_satisfaction strong {margin-bottom:12px; font-size:32px; font-weight:700; display:inline-block;}
     .customer_satisfaction .sub_tit {margin-bottom:12px; font-size:20px; font-weight:700;}
     .customer_satisfaction .recommend_box {padding:60px; background:#E7F2FE; border-radius:20px; display:flex; align-items:center; justify-content:space-between;}
+    .customer_satisfaction .recommend_box .text_area {margin-top:0}
     .customer_satisfaction .safety_system_list {padding:60px 0px; border-radius:20px; display:flex; align-items:center; justify-content:space-between; gap:60px;}
     .customer_satisfaction .safety_system_list li {width:33.333%; padding-left:104px; position:relative;}
-    .customer_satisfaction .safety_system_list li::before {content:''; width:80px; height:80px; background:red; position:absolute; top:0; left:0;}
+    .customer_satisfaction .safety_system_list li::before{content: ''; width: 80px; height: 80px; background: #F2F2F4; border-radius: 50%; position: absolute; left: 0; top: 0;}
+    .customer_satisfaction .safety_system_list li::after {content:''; width:40px; height:40px; background:url('@/assets/images/sub/icon_cont_40.png') no-repeat; position:absolute; top:20px; left:20px; display:block;}
+    .customer_satisfaction .safety_system_list li:first-child:after {background-position:-1140px -103px;}
+    .customer_satisfaction .safety_system_list li:nth-child(2):after {background-position:-180px -266px;}
+    .customer_satisfaction .safety_system_list li:nth-child(3):after {background:red;}
     .customer_satisfaction .safety_system_list .num {color:#107AF2; font-size:2.8rem; font-weight:700; }
     .customer_satisfaction .safety_system_list .tit_wrap {margin-top:10px;}
-    .customer_satisfaction .safety_system_list .tit_wrap strong {font-size:24px; font-weight:700; position:relative;}
-    .customer_satisfaction .safety_system_list .tit_wrap strong button {width:24px; height:24px; background:red; position:absolute; right:-35px; top:50%; transform: translateY(-50%);}
-    .customer_satisfaction .safety_system_list .tit_wrap .desc {color:#67676F; font-size:16px; font-weight:700;}
+    .customer_satisfaction .safety_system_list .tit_wrap strong {margin-bottom:24px; font-size:24px; font-weight:700; position:relative;}
+    .customer_satisfaction .safety_system_list .tit_wrap strong button {width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -832px -15px no-repeat;  position:absolute; right:-35px; top:50%; transform: translateY(-50%);}
+    .customer_satisfaction .safety_system_list .desc {color:#67676F; font-size:16px; font-weight:600;}
     .customer_satisfaction .compensation_process_wrap .process_steps {padding:56px 64px; background:#F8F8F8; border-radius:12px; display:flex; gap:20px;}
-    .customer_satisfaction .compensation_process_wrap .process_steps .step_box {width:33.333%; padding-top:60px; position:relative;}
+    .customer_satisfaction .compensation_process_wrap .process_steps .step_box {width:33.333%; padding-top:56px; position:relative;}
     .customer_satisfaction .compensation_process_wrap .process_steps .step_info span {color:#107AF2; font-size:18px; font-weight:700; display:flex;}
-    .customer_satisfaction .compensation_process_wrap .process_steps .step_info span::before {content:''; width:40px; height:40px; display:inline-block; background:red; position:absolute; top:0; left:0;}
+    .customer_satisfaction .compensation_process_wrap .process_steps .step_info span::before {content:''; width:32px; height:32px; display:inline-block; background:url('@/assets/images/sub/icon_cont_32.png') no-repeat; position:absolute; top:0; left:0;}
+    .customer_satisfaction .compensation_process_wrap .process_steps .step_box:first-child .step_info span::before {background-position:-660px -186px;}
+    .customer_satisfaction .compensation_process_wrap .process_steps .step_box:nth-child(2) .step_info span::before {background-position:-180px -266px;}
+    .customer_satisfaction .compensation_process_wrap .process_steps .step_box:nth-child(3) .step_info span::before {background:red;}
     .customer_satisfaction .compensation_process_wrap .process_steps .step_info p {margin-top:8px; font-size:20px; font-weight:700;}
     .customer_satisfaction .award_section {display:flex; flex-wrap:wrap; gap: 40px 20px;}
     .customer_satisfaction .award_section .mark_item_group {width: calc(25% - 15px); box-sizing: border-box;}
+    .customer_satisfaction .award_row {padding: 9px 0}
 
 
     /* 안전경영 */
@@ -2966,7 +2967,7 @@ export default {
     .input_wrap {display:flex; align-items:center; justify-content:flex-end;}
     .noti_non_member {padding:24px; background:#F9F2EA; border-radius:12px;}
     .noti_non_member span {margin-bottom:12px; padding-left:34px; font-size:18px; position:relative; display:block;}
-    .noti_non_member span::before {content:''; width:24px; height:24px; background:red; display:inline-block; position:absolute; top:0; left:0px;}
+    .noti_non_member span::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') no-repeat -160px -56px; display:inline-block; position:absolute; top:0; left:0px;}
     .noti_non_member ul {padding-left:34px;}
     .listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
     .listening_form_area .consent_tit {margin-bottom: 24px; font-size: 24px; font-weight: 700; display: block; }
@@ -2998,7 +2999,7 @@ export default {
     .listening_form_wrap .input_complex { display: flex; flex-direction: column; gap: 8px;}
     .listening_form_wrap .input_complex .textarea_wrap {max-width:600px;}
     .listening_form_wrap .guide_msg { font-size: 14px; color: #67676f; }
-    .listening_form_wrap :deep(.guide_msg_multi) span { font-size: 12px; color: #67676f; line-height: 18px; margin-top: 8px; }
+    .listening_form_wrap :deep(.guide_msg_multi) span { display:block; font-size: 12px; color: #67676f; line-height: 18px; margin-top: 8px; }
     .listening_form_wrap .file_upload_group { display: flex; align-items: center; gap: 10px; }
     .listening_form_wrap .btn_file { height: 38px; padding: 0 12px; font-size: 16px; cursor: pointer; }
     .listening_form_wrap .file_name { font-size: 14px; color: #161616; }
@@ -3013,11 +3014,12 @@ export default {
     .information_protection_management .protection_section {display: flex; flex-direction: column; }
     .information_protection_management .section_title_sub {font-size: 40px; font-weight: 700; color: #161616; letter-spacing: -0.4px; line-height: 1.3; }
     .information_protection_management .p_desc {font-size: 24px; font-weight: 400; color: #161616; letter-spacing: -0.24px; line-height: 1.5; }
-    .information_protection_management .diagram_box_wrap { width: 100%; padding: 60px 0; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; }
-    .information_protection_management .diagram_box_wrap.scroll { width: 100%; max-width:100%; background:#fff; overflow: hidden; }
+    .information_protection_management .diagram_box_wrap { width: 100%; padding: 60px 80px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; }
+    .information_protection_management .diagram_box_wrap.scroll { width: 100%; max-width:100%; background-color: #f8f8f8; overflow: hidden; }
+    .information_protection_management .diagram_box_wrap figcaption {display:block; margin-top:20px; width: 100%; color: #67676F;}
     .information_protection_management .visual_area img { max-width: 100%; height: auto; }
     .information_protection_management .notice_text { font-size: 14px; color: #67676f; }
-    .information_protection_management .policy_wrap { width: 100%; border-top: 2px solid #161616; }
+    .information_protection_management .policy_wrap { width: 100%; margin-top: 0; border-top: 2px solid #161616; }
     .information_protection_management .policy_wrap table { margin-top:0; }
     .information_protection_management .policy_wrap th { border-top:0; }
     .information_protection_management table th { font-size: 1.8rem; font-weight: 700; color: #161616; padding: 24px;}
@@ -3061,6 +3063,7 @@ export default {
         .human_rights_management .owner_card_layout {grid-template-columns: repeat(2, 1fr);}
         .talent_vision .circle_item { width: 240px; height: 240px; } 
         .value_detail_grid {display:grid; grid-template-columns: 1fr; padding: 20px; }
+        .value_detail_grid .detail_card { max-width:100%; }
         .talent_vision .philosophy_box > div:first-of-type {flex-direction:column;}
         .talent_vision .circle_item strong { font-size: 32px; } 
         .talent_indicators .support_grid {grid-template-columns: 1fr; row-gap: 40px;}
@@ -3076,10 +3079,11 @@ export default {
         .customer_satisfaction .safety_system_list, .process_steps {flex-direction:column;}
         .customer_satisfaction .award_section .mark_item_group {width: calc(33.333% - 14px);}
         .customer_satisfaction .brand_img_box img {width: 100%; max-width: 160px; margin: 0 auto;}
+        .safety_management_wrap .diagram_box_wrap {padding: 20px;}
         .award_row .year, .award_row .month {width:60px;}
         .award_row .desc {width:calc(100% - 60px - 60px); display:inline-block;}
         .award_row .year,.award_row .month, .award_row .desc {font-size:14px;}
-        .information_protection_management .diagram_box_wrap {padding:20px 0;}
+        .information_protection_management .diagram_box_wrap {padding:20px;}
         .information_protection_management .text_summary { font-size: 26px; } 
         .information_protection_management .section_title_sub { font-size: 32px; } 
         .information_protection_management .p_desc { font-size:18px; } 
@@ -3091,14 +3095,15 @@ export default {
         .information_protection_management .brand_img_box { width: 100%; height: auto; padding: 40px 0; }
         .information_protection_management .notice_wrap {width:100%;}
         .information_protection_management .notice_text {margin-left:20px; margin-right:auto;}
+        .information_protection_management .mark_item_group .brand_grid li {width: calc(100vw - 40px);}
 
         .listening_form_wrap .form_row {flex-direction:column;}
     }
 
     @media screen and (max-width: 767px) {
-        .title_wrap {display:none;}
         h3, h4 { font-size:20px !important; }
         h4 + p, .p {font-size:16px !important;}
+        .m_br2x {margin-bottom:20px}
         .sub_tab_content {margin-top:0px;}
         :deep(.text_summary) {padding: 60px 0 20px;}
         :deep(.text_summary) br {display:none;}
@@ -3117,6 +3122,7 @@ export default {
 
         .img_frame { width: 100%; flex: none; height: auto; aspect-ratio: 690/360; }
         .grid_column_2 { flex-direction: column; }
+        .intro_summary { margin-bottom:60px }
         /* .brand_grid {gap:10px;} */
         /* 프로그램 그리드: 모바일 1열 */
         .program_item { width: 100%; }
@@ -3131,20 +3137,43 @@ export default {
         .wide_info_box { flex-direction: column; }
         .wide_info_box .img_frame { width: 100%; flex: none; }
         :deep(.sub_item) p br {display:none;}
-        .owner_card_layout { grid-template-columns: 1fr; }
-        .gs25_owner_support .program_item, .community_support_area .brand_grid li, .broadcasting_development .brand_grid li, .human_rights_management .program_grid .program_item { width: 100% !important; }
+        .owner_card_layout {grid-auto-flow: column; grid-auto-columns: 350px; }
+        .owner_card_layout .strategy_card {width:350px}
+        .gs25_owner_support .program_item, .broadcasting_development .brand_grid li { width: 100% !important; }
         .human_rights_management .program_visual {height: auto; aspect-ratio: 16/11;}
+        .human_rights_management .program_grid {gap: 32px 10px}
+        .human_rights_management .program_grid .program_item {width: calc(50% - 5px);}
         .policy_box_wrap { padding: 32px 20px; }
         .policy_item { flex-direction: column; gap: 4px; }
         .policy_item .label { font-size: 1.8rem; min-width: auto; }
         .policy_item .desc { font-size: 16px; }
         .supplychain_policy .system_bg { padding: 20px; }
+        .supplychain_policy .system_bg img {padding:0;}
+        .strategy_main_img { max-width: 295px; }
         .csr_outline .view_box { padding: 30px 20px; }
         .csr_outline .text_l_bold { font-size: 20px; white-space: normal; }
+        .history_row { flex-direction:column;}
         .history_item { font-size: 16px; line-height: 1.4; height: auto; padding: 0  0 12px 0; }
-        .history_year { font-size: 20px; line-height: 1.4; width: 50px; }
-        .vulnerable_support .brand_grid li {max-width:100%}
-        .community_support_area .brand_grid {gap:0px 20px;}
+        .history_year { font-size: 20px; line-height: 1.4; width: 50px; margin-left: 40px; }
+        .history_details { margin-left:40px; }
+        .vulnerable_support .brand_grid,
+        .community_support_area .brand_grid,
+        .broadcasting_development .brand_grid {gap:0px 20px; flex-wrap: nowrap; overflow-x: auto;}
+        .vulnerable_support .brand_grid li,
+        .community_support_area .brand_grid li,
+        .broadcasting_development .brand_grid li {width:162px !important; flex:none}
+        .vulnerable_support .brand_grid li .brand_img_box,
+        .community_support_area .brand_grid li .brand_img_box,
+        .broadcasting_development .brand_grid li .brand_img_box { height: 162px; }
+        .vulnerable_support .brand_grid li .brand_img_box img,
+        .community_support_area .brand_grid li .brand_img_box img,
+        .broadcasting_development .brand_grid li .brand_img_box img { max-width: 80%; }
+        .vulnerable_support .brand_grid li .brand_name,
+        .community_support_area .brand_grid li .brand_name,
+        .broadcasting_development .brand_grid li .brand_name { text-align: center; }
+        .vulnerable_support .brand_grid li .brand_name strong,
+        .community_support_area .brand_grid li .brand_name strong,
+        .vulnerable_support .brand_grid li .brand_name strong { font-size:16px; white-space: nowrap;}
         .human_rights_management .owner_card_layout {grid-template-columns: repeat(1, 1fr);}
         .talent_performance_data .policy_wrap table {min-width: 500px;}
         .talent_performance_data .intro_summary .GS {font-size: 16px;}
@@ -3190,15 +3219,16 @@ export default {
         :deep(.guide_msg_multi) span {margin-bottom:8px; display:block;}
         :deep(.guide_msg_multi) span:last-of-type {margin-bottom:0;}
         :deep(.check) em {font-size:16px !important;}
-        .guide_text + .input_wrap {justify-content:flex-start;}
+        .guide_text + .input_wrap {justify-content:flex-start; margin-top:16px;}
         .form_container .btn-wrap {display:flex; justify-content:flex-start; gap:8px;}
         .form_container .btn-wrap * {width:50%;}
-        .information_protection_management .visual_area.scroll_wrap {width: 100%; overflow-x: auto;  overflow-y: hidden; display: block; -webkit-overflow-scrolling: touch;}
+        .information_protection_management .diagram_box_wrap.scroll {padding:0; background-color: #fff; align-items: flex-start;}
+        .information_protection_management .visual_area.scroll_wrap {width: calc(100vw - 40px); overflow-x: auto;  overflow-y: hidden; display: block; -webkit-overflow-scrolling: touch;}
         .information_protection_management .visual_area.scroll_wrap img {min-width: 700px; width: auto;max-width: none;  display: block;}
-        .information_protection_management .diagram_box_wrap.scroll {max-width:335px;}
-        .noti_non_member span {font-size:14px;}
+        .noti_non_member span {font-size:14px; line-height:20px;}
         .noti_non_member ul {padding-left:0;}
         .noti_non_member ul li {font-size:12px;}
+        .competency_support .visual_wrap .img_frame {width:100%;}
 
 
         .index_box strong {font-size:2rem;}

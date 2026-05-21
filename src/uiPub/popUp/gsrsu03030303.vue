@@ -465,7 +465,7 @@ export default {
                         { item: "협력업체위생관리" },
                         { item: "FF공장위생관리" },
                         { item: "경기도청 식품안전관리 협약" },
-                        { item: "농산물 잔류농약검사" },
+                        { item: "농/수산물 안전성 검사" },
                         { item: "미생물검사" },
                         { item: "위해물질검사" }
                     ],
@@ -498,15 +498,15 @@ export default {
                     },
                     section15: {
                         title: '지원 기관',
-                        desc: 'GS리테일 환경위생센터 SGS코리아(공인인증기관)',
+                        desc: 'GS리테일 품질관리팀, SGS코리아(공인인증기관)',
                         image: {
                             src: require("@/assets/images/dummy/safe_fresh_img02.png"),
-                            alt: 'GS리테일 환경위생센터 SGS코리아'
+                            alt: 'GS리테일 품질관리팀, SGS코리아(공인인증기관)'
                         }
                     },
                     section21: {
                         title: '실시배경',
-                        desc: '환경위생센터에서는 FF공장 제조공정 전 과정에 대한 위생관리 및 현장 미생물검사와 사용 원재료, 반제품 등의 안전성 검사를 실시하고\n있으며, 편의점 FF공장 최초로 HACCP인증을 취득하여 체계적이고 효율적인 관리시스템을 도입하여 소비자들이 위생적이고 안전성이\n충분히 확보된 식품을 구입하여 안심하게 드실 수 있도록 선도적 역할을 수행하고 있습니다.'
+                        desc: 'GS리테일 품질관리팀에서는 FF공장 제조공정 전 과정에 대한 위생관리 및 현장 미생물검사와 사용 원재료, 반제품 등의 안전성 검사를 실시하고 있으며, 편의점 FF공장 최초로 HACCP인증을 취득하여 체계적이고 효율적인 관리시스템을 도입하여 소비자들이 위생적이고 안전성이 충분히 확보된 식품을 구입하여 안심하게 드실 수 있도록 선도적 역할을 수행하고 있습니다.'
                     },
                     section22: {
                         title: '위생관리 Process',
@@ -531,16 +531,16 @@ export default {
                     section25: {
                         title: '지원 기관',
                         activities: [
-                            { subject: 'GS리테일 환경위생센터' }
+                            { subject: 'GS리테일 품질관리팀' }
                         ],
                         image: {
                             src: require("@/assets/images/dummy/safe_fresh_img04.png"),
-                            alt: 'GS리테일 환경위생센터'
+                            alt: 'GS리테일 품질관리팀'
                         }
                     },
                     section31: {
                         title: '실시배경',
-                        desc: '경기도청과 협업하여 당사에서 취급하는 농축수산물에 대한 먹을거리 안정성(잔류농약, 항생제 등)을 검사하고\n검사성적서를 게시하여 고객에게 신뢰를 제공하고자 합니다.'
+                        desc: '경기도청 및 경남도청과 협업하여 당사에서 취급하는 농축수산물 먹거리 안전성(잔류농약, 중금속 등)검사를 진행하고 있으며, 유통단계에서 부적합 농축수산물을 차단하여 고객에게 안전한 먹거리를 제공하고 있습니다.'
                     },
                     section32: {
                         title: '위생관리 Process',
@@ -552,9 +552,9 @@ export default {
                     section33: {
                         title: '위생지원 항목',
                         activities: [
-                            { subject: '농산물 : 10품목(잔류농약 218종)' },
-                            { subject: '수산물 : 5품목(중금속 3종)' },
-                            { subject: '축산물 : 5품목(항생물질 48종, 합성향균제)' }
+                            { subject: '농산물 : 18품목(잔류농약 218종,중금속2종' },
+                            { subject: '수산물 : 4품목(중금속 3종)' },
+                            { subject: '축산물 : 4품목(잔류항생물질, 농약34종)' }
                         ],
                         image: {
                             src: require("@/assets/images/dummy/safe_fresh_img06.png"),
@@ -570,13 +570,13 @@ export default {
                     section35: {
                         title: '지원 기관',
                         activities: [
-                            { subject: '보건환경연구원(농/수산물)'},
-                            { subject: '축산위생연구소(축산물)' }
+                            { subject: '보건환경연구원(농/수)'},
+                            { subject: '동물 위생시험소(축)' }
                         ]
                     },
                     section41: {
                         title: '실시배경',
-                        desc: '환경위생센터에서는 과일, 채소 등의 1차 농산물을 대상으로 잔류 허용 기준의 준수 여부 확인을 위한 모니터링 분석을 하고 있으며,\n산지로 부터 안전한 농산물이 공급되는 체계를 마련하고자 물류센터 입고 시점부터 잔류농약검사 시스템을 운영하고 있습니다.'
+                        desc: '매월 지차체 협업 농산물 검사 이외에도 1차 농산물이 다소비 되는 시즌(설,추석 등) 식품 안전성 확보를 위해 공인 시험분석기관에 의뢰하여 기준 규격 준수 여부 확인을 위한 모니터링을 하고 있으며, 방사능 오염 이슈에 대응하고자 물류센터에서 다소비 수산물 대상 간이 방사능 검사를 실시하여 안전성이 검증된 수산물만 출하될 수 있는 프로세스를 운영하고 있습니다.'
                     },
                     section42: {
                         title: '위생관리 Process',
@@ -588,8 +588,9 @@ export default {
                     section43: {
                         title: '위생지원 항목',
                         activities: [
-                            { subject: '1. 농약정밀검사(245종)', content: '- 살충제 : 117종, 살균제 : 81종, 제초제 : 86종, 생장조정제 : 1' },
-                            { subject: '2. 농약속성검사(54종)' }
+                            { subject: '농산물 : 잔류농약 463종, 중금속2종' },
+                            { subject: '수산물 : 중금속, 벤조피렌, PCBs' },
+                            { subject: '축산물 : 식품첨가물, VBN' }
                         ],
                         image: {
                             src: require("@/assets/images/dummy/safe_fresh_img08.png"),
@@ -599,19 +600,19 @@ export default {
                     section44: {
                         title: '지원 주기',
                         activities: [
-                            { subject: '1. 농약정밀검사(SGS코리아 공인인증기관)', content: '- 상시' },
-                            { subject: '2. 농약속성검사(당사 물류센터) - 매주' }
+                            { subject: '1차 농산물 별 기준규격검사 (한국SGS 공인인증기관) - 시즌별' },
+                            { subject: '2. 수산물 간이 방사능검사(당사 물류센터) - 매주' }
                         ]
                     },
                     section45: {
                         title: '지원 기관',
                         activities: [
-                            { subject: 'SGS코리아(공인인증기관)' }
+                            { subject: '한국SGS(공인인증기관)' }
                         ]
                     },
                     section51: {
                         title: '실시배경',
-                        desc: '품질이 좋고 안전한 상품을 제공하는 것은 고객 만족을 넘어서 사회적 책임이라 할 수 있으며, 이를 만족시키고자\n환경위생센터에서는 상품이 최종적으로 판매되기 까지의 유통과정 전반에 걸친 사전 검사를 거쳐 안전/안심의 매장 분위기를 조성하고\n상품 안전성 확보를 통한 컴플레인 저감화를 위해 선도적 역할을 수행하고 있습니다.'
+                        desc: '품질이 좋고 안전한 상품을 제공하는 것은 고객 만족을 넘어서 사회적 책임이라 할 수 있으며, 이를 만족시키고자\nGS리테일 품질관리팀에서는 상품이 최종적으로 판매되기 까지의 유통과정 전반에 걸친 사전 검사를 거쳐 안전/안심의 매장 분위기를 조성하고\n상품 안전성 확보를 통한 컴플레인 저감화를 위해 선도적 역할을 수행하고 있습니다.'
                     },
                     section52: {
                         title: '위생관리 Process',
@@ -623,8 +624,7 @@ export default {
                     section53: {
                         title: '위생지원 항목',
                         activities: [
-                            { subject: '1. 법규관리 충족여부 확인', content: '- 식품위생법 등(품목제조보고, 영업신고 등)' },
-                            { subject: '2. 현장관리 확인', content: '- 위해요소' }
+                            { subject: '일반세균, 대장균군, 대장균\n식중독균(황색포도상구균, 살모넬라균 등)\n표면(Surface) 미생물 오염도 측정' }
                         ],
                         image: {
                             src: require("@/assets/images/dummy/safe_fresh_img10.png"),
@@ -641,12 +641,12 @@ export default {
                     section55: {
                         title: '지원 기관',
                         activities: [
-                            { subject: 'SGS코리아(공인인증기관)' }
+                            { subject: 'GS리테일 품질관리팀\n한국SGS(공인인증기관)' }
                         ]
                     },
                     section61: {
                         title: '실시배경',
-                        desc: '각종 식품 첨가물의 과다 사용 및 고도의 속임수 상품이 속출하여 먹을거리에 대한 불감증이 사회적 문제로 대두됨에 따라\n환경위생센터에서는멜라민, 보존료, 인공감미료 등의 위해물질 검사를 진행하고 있으며, 철저한 모니터링 활동을 통해\n부정/불량 상품의 유통 경로를 원천 봉쇄하기 위해 최선의 노력을 다하고 있습니다.'
+                        desc: '각종 식품 첨가물의 과다 사용 및 고도의 속임수 상품이 속출하여 먹을거리에 대한 불감증이 사회적 문제로 대두됨에 따라\nGS리테일 품질관리팀에서는멜라민, 보존료, 인공감미료 등의 위해물질 검사를 진행하고 있으며, 철저한 모니터링 활동을 통해\n부정/불량 상품의 유통 경로를 원천 봉쇄하기 위해 최선의 노력을 다하고 있습니다.'
                     },
                     section62: {
                         title: '위생관리 Process',
@@ -658,7 +658,7 @@ export default {
                     section63: {
                         title: '위생지원 항목',
                         activities: [
-                            { subject: '멜라민, 이산화황, 합성보존료, 타르색소, 항생제,\n증발잔류물,산가, 과산화물가, 인공감미료, 곰팡이독소 등' }
+                            { subject: '이산화황, 합성보존료, 타르색소, 항생제,\n증발잔류물,산가, 과산화물가, 인공감미료, 곰팡이독소 등' }
                         ],
                         image: {
                             src: require("@/assets/images/dummy/safe_fresh_img12.png"),
@@ -674,7 +674,7 @@ export default {
                     section65: {
                         title: '지원 기관',
                         activities: [
-                            { subject: 'SGS코리아(공인인증기관)' }
+                            { subject: '한국SGS(공인인증기관)' }
                         ]
                     }
                 }
@@ -699,7 +699,7 @@ export default {
 </script>
 
 <style scoped>
-.pop_space .intro_desc {color:#444; font-size:18px; line-height:26px;}
+.pop_space .intro_desc {margin-bottom:35px; color:#444; font-size:18px; line-height:26px;}
 .pop_space .title {display:block;font-size:18px;font-weight:700;padding-bottom:20px}
 .pop_space .title_b {display:block;font-size:18px;font-weight:normal;padding:25px 0 6px 0}
 .pop_space .activity_item:first-child .title_b {padding-top:0}

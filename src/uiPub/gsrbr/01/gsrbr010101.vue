@@ -1810,7 +1810,15 @@ const langData = {
                             { value: "etc",           label: "기타" },
                         ],
                         retailOptions: {
-                            convenience:   { title: "편의점",          items: ph(7) },
+                            convenience:   { title: "편의점", items: [
+                                { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_01.gif")},
+                                { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_02.png")},
+                                { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_03.png")},
+                                { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_04.png")},
+                                { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_05.png")},
+                                { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_06.png")},
+                                { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_07.jpg")},
+                            ]},//ph(7) },
                             mart:          { title: "대형마트/유통점",  note:"마트, 익스프레스의 일부 매장은 향후 서비스 도입 예정", items: ph(4) },
                             bakery:        { title: "베이커리", note:"마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: ph(3) },
                             coffee:        { title: "커피/아이스크림",  note: "마트, 백화점, 휴게소 등 일부 입점 매장 제외", items: [
@@ -2821,7 +2829,7 @@ watch(deliveryActiveTab,       (idx) => nextTick(() => adjustDeliverySlide(idx))
 watch(winwinServiceActiveTab,  (idx) => nextTick(() => adjustWinwinSlide(idx)));
 const popLnbActiveIdx = ref(0);
 const trafficSelectVal = ref("subway");
-const retailSelectVal = ref("coffee");
+const retailSelectVal = ref("convenience");
 
 /* 팝카드 Swiper — 아코디언 패널 오픈 완료 후 update() 호출 */
 const popCardSwiperInst = ref(null);

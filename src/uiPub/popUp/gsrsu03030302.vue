@@ -39,12 +39,13 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "맛, 선도 지킴이",
-                    intro: '녹색구매활동을 통한 ESG 경영을 적극적으로 실천하기 위해 아래 방침을 준수한다.',
+                    intro: '신선, 맛, NO.1을 위한 GS리테일의 선도 지킴이 활동을 확인해보세요.\nGS리테일은 가장 맛있고 신선하며 안전이 검증된, 차별화된 상품만을 엄선하여 고객님께 제공합니다.',
                     steps: [
-                        { title: '첫째,', content: '적극적인 녹색구매활동을 통해 환경경영을 정착하고 확대하여 친환경의 가치를 고객에게 제공하는 등 친환경 선도 기업으로 사회적 책임과 역할을 다한다.' },
-                        { title: '둘째,', content: '당사의 녹색구매방침을 파트너사/협력사에게 공유 및 장려한다.' },
-                        { title: '셋째,', content: '모든 구매활동은 녹색구매를 우선으로 검토한다. 단, 녹색구매가 불가능한 경우(공급불가, 품질저하, 친환경/녹색 제품 부재 등)는 예외로 한다.' },
-                        { title: '넷째,', content: '녹색구매활동에 대해 정기적인 모니터링 및 평가를 실시하며 개선필요 시 보완한다.' }
+                        { title: 'Step 01. 신선한 상품', content: '당사기준에 적합한 산지의 신선한 상품만을 공급합니다.' },
+                        { title: 'Step 02. 완벽한 검품', content: '물류센터에 상품이 입고되면 완벽한 검품 활동을 통해, 불량상품 입고를 원천봉쇄 합니다.' },
+                        { title: 'Step 03. 최적의 온도', content: '차량 내 할로겐과 냉장기를 통해 신선함을 유지할 수 있는 최적의 온도로 배송합니다.' },
+                        { title: 'Step 04. 점포 내 관리', content: '점포에서는 가장 신선한 상품을 고객에게 제공하기 위하여 점포별 선도지킴이를 운영하고 있으며 선도지킴이는 상품의 선도 및 판매기간을 수시로 확인하여 최고의 상품을 고객님께 제공하고 있습니다.' },
+                        { title: 'Step 05. 고객 만족', content: '산지, 물류센터를 거쳐 점포 및 고객님께 판매되기까지 완벽한 콜드체인시스템(Cold Chain System) 으로 고객님에게 산지의 맛과 신선함을 그대로 전달해드리고 있습니다.' }
                     ]
                 }
             }
@@ -64,8 +65,8 @@ export default {
 </script>
 
 <style scoped>
-.pop_space .intro_desc {color:#444; font-size:18px; line-height:26px;}
-.fresh_guide_list {margin-top:35px;}
+.pop_space .intro_desc {color:#444; font-size:18px; line-height:26px; white-space: pre-line;}
+.fresh_guide_list {margin-top:35px; white-space: pre-line;}
 .fresh_guide_list ol li{height:140px;padding-left:145px;border-top:1px solid #DFDFDF}
 .fresh_guide_list ol li:after{content:"";display:inline-block;height:100%;vertical-align:middle}
 .fresh_guide_list ol li:first-child{background-image:url('@/assets/images/dummy/fresh_guide_img01.png'); background-repeat:no-repeat; background-position:0 center}

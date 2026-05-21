@@ -93,7 +93,7 @@ const langData = {
             { title: "입지제안", path: "gsrbr0204", pop:true, popId:"gsrbr0204", popType:'lg' },
             { title: "임대상가안내", path: "#none" },
             { title: "정도경영제보", path: "#none" },
-            { title: "고객센터", path: "#none" },
+            { title: "고객센터", path: "gsrcu01" },
             { title: "GS SHOP 시청자 관련", path: "#none" }
         ],
         info: {

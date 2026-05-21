@@ -299,7 +299,6 @@ export default {
 .off {display:none;}
 .modal_header {width:100%; color:#161616; font-size:40px; font-weight:700; display:flex; align-items:center; justify-content:space-between; border-bottom:0 !important;}
 .modal_content {width:100%; overflow-y:auto; flex:1;}
-section {padding-bottom:80px;}
 .input_wrap {display:flex; align-items:center; justify-content:flex-end;}
 .listening_form_area i {margin-bottom:40px; font-size:20px; display:block;}
 :deep(.listening_form_area) i br {display:none;}
@@ -308,7 +307,7 @@ section {padding-bottom:80px;}
 .section_title_area .p_desc { font-size:16px; font-weight: 400; color: #161616; line-height: 1.5; word-break: keep-all; }
 .noti_non_member {padding:24px; background:#F9F2EA; border-radius:12px;}
 .noti_non_member span {margin-bottom:12px; padding-left:34px; font-size:18px; position:relative; display:block;}
-.noti_non_member span::before {content:''; width:24px; height:24px; background:red; display:inline-block; position:absolute; top:0; left:0px;}
+.noti_non_member span::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -160px -56px no-repeat; display:inline-block; position:absolute; top:0; left:0px;}
 .noti_non_member ul {padding-left:34px;}
 .noti_non_member ul li {font-size:16px;}
 .listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}

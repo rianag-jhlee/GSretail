@@ -477,8 +477,9 @@ export default {
 .principle_card_item { flex: 1; display: flex; flex-direction: column; gap: 24px; padding: 40px 32px 48px; background-color: #f8f8f8; border-radius: 12px; box-sizing: border-box; position: relative; }
 .principle_card_item .card_header { display: flex; flex-direction: column; gap: 12px; }
 .principle_card_item .card_num { font-size: 18px; font-weight: 700; color: #107af2; }
-.principle_card_item .card_title { font-size: 24px; font-weight: 700; color: #161616; }
-.principle_card_item .card_body { display: flex; flex-direction: column; gap: 16px; }
+.principle_card_item .card_title { font-size: 2rem; font-weight: 700; color: #161616; }
+.principle_card_item .card_body { display: flex; flex-direction: column; gap: 16px;}
+.principle_card_item .card_body_sub {font-size:1.6rem;}
 .principle_card_item .sub_text_box { display: flex; flex-direction: column; gap: 8px;}
 .principle_card_item .sub_line { display: flex; align-items: flex-start; gap: 6px; }
 .principle_card_item .sub_dash { font-size: 14px; color: #7c7c86; flex-shrink: 0; }

@@ -522,7 +522,7 @@ onBeforeUnmount(() => {
 :deep(.m_br) { display: none; }
 img { width: 100%; object-fit: cover; display: block; }
 p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-.brand { max-width: 100%; padding-bottom: 161px; overflow-x: clip; }
+.brand { max-width: 100%; overflow-x: clip; }
 .sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
 /* 100vw는 스크롤바 폭까지 포함해 가로 오버플로를 자주 냄 → 부모와 동일한 100% 사용 */
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }

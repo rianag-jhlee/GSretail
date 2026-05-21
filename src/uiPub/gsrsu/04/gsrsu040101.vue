@@ -28,7 +28,7 @@
                 <!-- 소개 -->
                 <div v-show="CTabIdxEsgArchive === 0" class="panel_inner" :aria-label="t.TabsEsgArchive?.[0]?.item || ''">
                     <header class="tab_header">
-                        <h2> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
+                        <h2>GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
                     </header>
                     <section>
                         <header class="sub_header">
@@ -59,7 +59,7 @@
                             <h3>GS리테일 윤리규범</h3>
                             <p>GS리테일은 상호 신뢰와 협력을 토대로 모든 이해관계자와 공동의 이익을 추구함으로써 모두가 선망하는 Value No.1 기업으로 발전하기 위해 올바른 행동과 가치 판단의 기준으로 윤리규범을 제정하고 정도경영의 길을 걷습니다.</p>
                         </header>
-                        <div class="button_area"><Buttons tag="a" href="#none" btn-class="btn_icon btn_xl after border">㈜GS리테일 윤리규범</Buttons></div>
+                        <div class="button_area"><Buttons tag="a" href="#none" btn-class="btn_icon_arrow btn_xl after border">㈜GS리테일 윤리규범</Buttons></div>
                     </section>
                     <section class="sec_ethics_cards">
                         <ul class="card_list" role="list">
@@ -73,12 +73,11 @@
                     </section>
                     <section>
                         <header class="sub_header">
-                            <h3>GS리테일실천지침</h3>
+                            <h3>GS리테일 실천지침</h3>
                             <p>본 내용은 정직과 공정의 신조직문화 창출을 위하여 GS리테일인으로서 지켜야 할 ‘임직원의 기본윤리’를 구체적으로 해설하고 실천에 용이하도록 제도화한 내용입니다.</p>
                         </header>
                         <!-- 세부실천지침 -->
                         <h4 class="practice_title">세부실천지침</h4>
-                        <p class="practice_desc">본 내용은 정직과 공정의 신조직문화 창출을 위하여 GS리테일인으로서 지켜야 할 ‘임직원의 기본윤리’를 구체적으로 해설하고 실천에 용이하도록 제도화한 내용입니다.</p>
                         <ol class="base_list">
                             <li v-for="(item, idx) in t.EthicsPracticeItems" :key="item.key" class="base_item">
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
@@ -96,7 +95,6 @@
                             <li v-for="(item, idx) in t.EthicsPracticeItems" :key="item.key" class="base_item">
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
                                 <strong>{{ item.title }}</strong>
-                                <p>{{ item.desc }}</p>
                             </li>
                         </ol>
                         <div class="signature_box">
@@ -133,10 +131,10 @@
                                 <strong>{{ row.title }}</strong>
                                 <p v-html="row.desc"></p>
                                 <div v-if="row.key === 'wg-04'" class="button_area">
-                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon after" @click="goToWhistleTab(1)">
+                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon_arrow after" @click="goToWhistleTab(1)">
                                         제보자 포상제도
                                     </Buttons>
-                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon after" @click="goToWhistleTab(2)">
+                                    <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon_arrow after" @click="goToWhistleTab(2)">
                                         제보자 보호제도
                                     </Buttons>
                                 </div>
@@ -151,7 +149,7 @@
                                     </div>
                                 </template>
                                 <div v-if="row.key === 'wg-06'" class="button_area">
-                                    <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon after">제보하기</Buttons>
+                                    <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon_arrow after">제보하기</Buttons>
                                 </div>
                             </li>
                         </ol>
@@ -190,7 +188,7 @@
                             </li>
                         </ol>
                         <div class="button_area reward_report_btn">
-                            <Buttons tag="a" href="#none" btn-class="btn_xl primary btn_icon after">제보하기</Buttons>
+                            <Buttons tag="a" href="#none" btn-class="btn_xl primary btn_icon_arrow after">제보하기</Buttons>
                         </div>
                     </div>
                     <div v-show="CTabIdxEsgSystem === 2" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[2]?.item || ''">
@@ -230,12 +228,12 @@
                                                     v-if="item.key === 'ethics'"
                                                     tag="button"
                                                     type="button"
-                                                    btn-class="btn_xl border btn_icon after"
+                                                    btn-class="btn_xl border btn_icon_arrow after"
                                                     @click="openEthicsInquiry"
                                                 >
                                                     {{ item.btnText }}
                                                 </Buttons>
-                                                <Buttons v-else tag="a" href="#none" btn-class="btn_xl border btn_icon after">{{ item.btnText }}</Buttons>
+                                                <Buttons v-else tag="a" href="#none" btn-class="btn_xl border btn_icon_arrow after">{{ item.btnText }}</Buttons>
                                             </div>
                                         </div>
                                     </article>
@@ -285,10 +283,12 @@
                         </section>
                         <section>
                             <ConsentInfoBox
+                                :required="t.EthicsConsentRequired"
                                 :items="t.EthicsConsentItems"
                                 v-model="isEthicsConsentAgreed"
                             />
                             <ConsentInfoBox
+                                :required="t.EthicsConsentRequired2"
                                 :items="t.EthicsConsentItems2"
                                 v-model="isEthicsConsentAgreed2"
                             />
@@ -323,13 +323,7 @@
                                         <div class="form_row">
                                             <div class="form_label">연락처<span class="form_required">*</span></div>
                                             <div class="form_field form_field_phone">
-                                                <label class="select">
-                                                    <div>
-                                                        <select v-model="ethicsReportForm.phonePrefix">
-                                                            <option v-for="opt in ethicsPhonePrefixOptions" :key="opt" :value="opt">{{ opt }}</option>
-                                                        </select>
-                                                    </div>
-                                                </label>
+                                                <Inputs type="text" v-model="ethicsReportForm.phonePrefix" is-disabled="true" />
                                                 <span class="form_sep">-</span>
                                                 <Inputs type="text" v-model="ethicsReportForm.phoneMid" />
                                                 <span class="form_sep">-</span>
@@ -463,7 +457,7 @@
                 <div v-show="CTabIdxCompliance === 1" class="panel_inner" :aria-label="t.TabsCompliance?.[1]?.item || ''">
                     <!-- 자율준수 관리자 안내 -->
                     <header class="tab_header">
-                        <h2>GS리테일은협력사와의 신뢰와 협력을 통해 공동의 발전 도모와 자율준수 프로그램의 <br />
+                        <h2>GS리테일은 협력사와의 신뢰와 협력을 통해 공동의 발전 도모와 자율준수 프로그램의 <br />
                             적극적 실천을 위해 기준과 절차에 따라 ‘자율준수관리자’를 임명하여 운영하고 있습니다.</h2>
                     </header>
                     <section>
@@ -557,7 +551,7 @@
                             :no-swipe="true"
                         >
                             <template #action="{item}">
-                                <Buttons btn-class="btn_xl border btn_icon after"
+                                <Buttons btn-class="btn_xl border btn_icon_arrow after"
                                     @click="openModal" 
                                     :data-popid="item.popContId" 
                                     data-type="lg" 
@@ -1142,7 +1136,6 @@ const isEthicsInquiryOpen = ref(false);
 const isEthicsConsentAgreed = ref(false);
 const isEthicsConsentAgreed2 = ref(false);
 const ethicsEmailDomainOptions = ["직접입력", "naver.com", "gmail.com", "hanmail.net"];
-const ethicsPhonePrefixOptions = ["010", "011", "016", "017", "018", "019"];
 const ethicsDivisionOptions = ["사업부 선택", "GS25", "GS THE FRESH", "GS SHOP", "기타"];
 const ethicsReportTypeOptions = ["제보구분 선택", "부정행위", "불공정거래", "인권침해", "기타"];
 const ethicsReplyTypeOptions = ["이메일", "전화"];
@@ -1250,22 +1243,26 @@ const langData = {
             {
                 num: "01",
                 title: "파트너사 선정, 운영 가이드 라인",
+                desc: "",
                 popContId: "gsrsu04020301"
             },
             {
                 num: "02",
                 title: "서면 발급, 보존 가이드 라인",
+                desc: "",
                 popContId: "gsrsu04020302"
             
             },
             {
                 num: "03",
                 title: "하도급 거래 심의위원회 운영 규정",
+                desc: "",
                 popContId: "gsrsu04020303"
             },
             {
                 num: "04", 
                 title: "계약 체결가이드 라인",
+                desc: "",
                 popContId: "gsrsu04020304"
             },
        
@@ -2998,9 +2995,7 @@ const langData = {
                             "3. GS그룹 계열사 관계자",
                         ],
                     },
-                    { num: "3", title: "“최저임금 인상, 원재료 가격 상승 등으로 납품하는 상품의 공급원가가 변동되어 납품가격 조정이 불가피한 경우에는 “파트너사”는 “회사”에 납품가격의 조정을 신청할 수 있다." },
-                    { num: "4", title: "“파트너사”는 “회사”의 담당MD가 불공정한 거래를 요구할 경우에는 “회사”의 홈페이지 내 정도경영 제보 페이지에 제보를 할 수 있다." },
-                    { num: "5", title: "“파트너사”에게 부당하게 재고 부담을 전가하는 판매분 매입 거래는 원칙적으로 금지된다. 다만, 상품의 특성, “파트너사”의 필요 등을 고려하여 “파트너사”에게 부당하게 재고부담을 전가하기 위한 목적이 아니라고 인정되는 경우에는 예외적으로 인정될 수 있다." },
+                    { num: "3", title: "“제1항에도 불구하고 “파트너사”와 이해 관계가 있는 임직원이 거래 단계에 관여를 하였을 경우 해당 거래는 공정한 절차에 따라 재검토하는 것으로 한다." },
                 ],
             },
             {
@@ -4053,12 +4048,12 @@ const langData = {
             {
                 key: "wr-06",
                 title: "신고자 기여도 결정 기준",
-                desc: "-증거자료의 신빙성 등 신고의 정확성<br />-피신고자의 부정행위가 신문, 방송 등 언론매체에 의하여 이미 공개된 것인지의 여부<br />-신고자가 신고와 관련한 불법행위를 행하였는지의 여부<br />-신고자가 부정행위를 신고할 의무를 가졌는지 또는 직무와 관련하여 부정부패를 신고하였는지 여부<br />그 밖에 신고자가 부정행위 사건의 해결에 기여한 정도",
+                desc: "-증거자료의 신빙성 등 신고의 정확성<br />-피신고자의 부정행위가 신문, 방송 등 언론매체에 의하여 이미 공개된 것인지의 여부<br />-신고자가 신고와 관련한 불법행위를 행하였는지의 여부<br />-신고자가 부정행위를 신고할 의무를 가졌는지 또는 직무와 관련하여 부정부패를 신고하였는지 여부<br />-그 밖에 신고자가 부정행위 사건의 해결에 기여한 정도",
             },
             {
                 key: "wr-07",
                 title: "제보사실 확인결과",
-                desc: "다음의 경우에는 포상을 실시하지 않음.<br />-제보 내용이 사실이 아닌 것으로 판명되거나 증거부족으로 인하여 사실여부 확인이 곤란한 경우<br />-외부 이해관계자와의 업무와 관련되지 않은 비 윤리행위 제보 시 (단, 공금횡령, 회사자산 절도 등 회사에 직접적인 손실을 끼치는 행위는 보상 가능)<br />-이미 제보된 사항이거나 경영진단팀 또는 기타 부서 또는 외부기관에서 이미 인지하여 조사가 진행중 이거나 징계절차 등이 진행 또는 완료된 사항<br />-언론보도 등에 의해 공개된 사항<br />-익명 또는 가명으로 제보하여 제보자가 누구인지 알 수 없는 경우<br />-단순 업무 개선과 관련된 사항<br />-조사관련 직무에 종사하는 경영진단팀 및 유사 부서 직원이 제보한 경우<br />기타 보상 심의 결과 보상이 부적절하다고 인정되는 경우",
+                desc: "다음의 경우에는 포상을 실시하지 않음.<br />-제보 내용이 사실이 아닌 것으로 판명되거나 증거부족으로 인하여 사실여부 확인이 곤란한 경우<br />-외부 이해관계자와의 업무와 관련되지 않은 비 윤리행위 제보 시 (단, 공금횡령, 회사자산 절도 등 회사에 직접적인 손실을 끼치는 행위는 보상 가능)<br />-이미 제보된 사항이거나 경영진단팀 또는 기타 부서 또는 외부기관에서 이미 인지하여 조사가 진행중 이거나 징계절차 등이 진행 또는 완료된 사항<br />-언론보도 등에 의해 공개된 사항<br />-익명 또는 가명으로 제보하여 제보자가 누구인지 알 수 없는 경우<br />-단순 업무 개선과 관련된 사항<br />-조사관련 직무에 종사하는 경영진단팀 및 유사 부서 직원이 제보한 경우<br />-기타 보상 심의 결과 보상이 부적절하다고 인정되는 경우",
             },
         ],
         WhistleProtectPageTitle: "제보자 보호제도",
@@ -4067,7 +4062,7 @@ const langData = {
             {
                 key: "wp-01",
                 title: "제보자 신분누설 및 색출행위 금지",
-                desc: "-제보와 관련된 사실을 확인하는 경영진단팀은 제보자 본인의 동의 없이 제보자 및 조사 협조자의 신분 공개 또는 암시를 금지함.<br />-직무상 또는 우연히 제보자의 신분을 인지한 임직원은 누구든지 제보자의 신분 누설을 금함.<br />-피제보자 또는 피제보자의 소속 부서 및 기타 관련부서에서 경영진단팀 등에 제보자의 신분에 대한 문의, 제보자를 알아내기 위한 탐문 활동 등 제보자의 신분노출이 가능한 모든 행위를 금지함.<br />-신분 보호 의무위반(인사상/거래상 불이익)시 관련자는 처벌함.(전사 윤리위원회에 상정함)<br />제보를 한 임직원 및 업체에 대한 아래와 같은 불이익 조치를 금지하며, 해당 불이익 조치를 행한 임직원에 대해서는 전사윤리위원회에 상정함.",
+                desc: "-제보와 관련된 사실을 확인하는 경영진단팀은 제보자 본인의 동의 없이 제보자 및 조사 협조자의 신분 공개 또는 암시를 금지함.<br />-직무상 또는 우연히 제보자의 신분을 인지한 임직원은 누구든지 제보자의 신분 누설을 금함.<br />-피제보자 또는 피제보자의 소속 부서 및 기타 관련부서에서 경영진단팀 등에 제보자의 신분에 대한 문의, 제보자를 알아내기 위한 탐문 활동 등 제보자의 신분노출이 가능한 모든 행위를 금지함.<br />-신분 보호 의무위반(인사상/거래상 불이익)시 관련자는 처벌함.(전사 윤리위원회에 상정함)<br />-제보를 한 임직원 및 업체에 대한 아래와 같은 불이익 조치를 금지하며, 해당 불이익 조치를 행한 임직원에 대해서는 전사윤리위원회에 상정함.",
                 grayBox: {
                     title: "불이익 조치 정의",
                     desc: "1)파면, 해임, 해고 그 밖에 신분 상실에 해당하는 신분상의 불이익 조치<br />2)징계,정직, 승진 제한, 그 밖에 부당한 인사조치<br />3)전보,전근, 직무 미 부여, 직무 재배치, 그 밖에 본인의 의사에 반하는 인사조치<br />4)주의 대상자 명단 작성 또는 그 명단의 공개, 집단 따돌림, 폭행 또는 폭언, 그 밖에 정신적, 신체적 손상을 가져오는 행위<br />5)물품계약 또는 용역계약의 해지, 그 밖에 경제적 불이익을 주는 조치",
@@ -4076,7 +4071,7 @@ const langData = {
             {
                 key: "wp-02",
                 title: "제보자 신분노출이 예상되는 경우",
-                desc: "-제보자 신분노출(예상)시, 당사자는 경영진단팀에 통보 경영진단팀은 신분노출 경로를 조사하여, 관련자를 전사 윤리위원회에 상정함.<br />-제보자 본인이 원할 경우, 경영진단팀 면담을 요청할 수 있으며, 이 경우 경영진단팀은 CEO 보고 후, 해당 색출시도 임직원에 대해 즉시 보직변경/이동 발령 등 인사조치 권고를 할 수 있음.",
+                desc: "-제보자 신분노출(예상)시, 당사자는 경영진단팀에 통보. 경영진단팀은 신분노출 경로를 조사하여, 관련자를 전사 윤리위원회에 상정함.<br />-제보자 본인이 원할 경우, 경영진단팀 면담을 요청할 수 있으며, 이 경우 경영진단팀은 CEO 보고 후, 해당 색출시도 임직원에 대해 즉시 보직변경/이동 발령 등 인사조치 권고를 할 수 있음.",
             },
         ],
         ReportIntroTitle: "GS리테일 임직원 및 파트너사의 <span class='txt_blue'>부정/불공정 행위 제보와 개선제안</span>에 대한 의견을 쓰는 곳입니다.",
@@ -4137,6 +4132,7 @@ const langData = {
                 desc: "",
             },
         ],
+        EthicsConsentRequired: "[선택]",
         EthicsConsentItems: [
             "- 입력하신 정보는 신속하고 정확한 처리를 위해 관련 부서(담당자)에게 전달되며 문의 및 컴플레인 응대를 위해서 사용됩니다.",
             "- 제공받는 자: 고객님이 문의 신청한 GS리테일 점포 관리자, GS리테일 자회사, GS리테일에 입점 된 상품 제조사의 관리자(처리자)",
@@ -4144,6 +4140,7 @@ const langData = {
             "- 개인정보 항목: 이름, 연락처, 이메일",
             "- 보유 및 이용기간: 접수 후 1년",
         ],
+        EthicsConsentRequired2: "[필수]",
         EthicsConsentItems2: [
             "- 입력하신 정보는 문의사항에 대한 확인을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
             "- 수집하는 개인정보 항목: 이름, 연락처, 이메일",
@@ -4197,33 +4194,48 @@ const langData = {
         EthicsPracticeItems: [
             {
                 key: "practice-01",
-                title: "고객에 대한 책임과 의무",
-                desc: "고객 중심의 가치 창출을 통해 고객으로부터 신뢰를 확보합니다.",
+                title: "이해관계자로부터 사례를 받는 행위",
+                desc: "이해관계자가 금품 등을 받아서는 안되며, 선물을 줄 경우에는 정중하게 거절하거나 되돌려 주어야 한다.",
             },
             {
                 key: "practice-02",
-                title: "공정한 경쟁",
-                desc: "관계법규를 준수하며 정당한 방법으로 경쟁 우위를 확보합니다.",
+                title: "이해관계자의 공동투자, 공동자산취득, 거래업체에 대한 부당 지분 참여",
+                desc: "임직원 및 그 가족은 이해관계자와(목적여하에 관계없이) 자금을 공동 투자하여 동산, 부동산을 공동으로 취득하는 경우에는 지분에 상당하는 금액을 이해관계자로부터 수취한 것으로 간주하며, 이해관계가 있는 거래업체의 상장·비상장 증권에 대한 부당한 지분 취득은 절대로 안된다.",
             },
             {
                 key: "practice-03",
-                title: "공정한 거래",
-                desc: "투명하고 공정한 거래를 통해 상호신뢰와 협력관계를 구축합니다.",
+                title: "회사 자산을 불법으로 사용하는 행위",
+                desc: "회사의 유·무형자산 및 기밀정보 등은 회사의 중요한 자산으로 이들 자산은 회사의 사업활동 및 승인된 목적으로만 사용되어야 하며, 임직원들은 자산의 분실, 오용 및 도난에 대비할 책임이 있다.​ 회사의 비용은 공금으로서 정해진 목적에 맞게 사용되어야 하며 회사의 기준을 준수하여야 한다.",
             },
             {
                 key: "practice-04",
-                title: "임직원의 기본윤리",
-                desc: "정직과 공정의 가치관으로 책임 있는 직무수행을 실천합니다.",
+                title: "불량한 직무수행",
+                desc: "임직원들은 선량한 관리자로서의 주의의무를 다하여야 하며 이를 위반함으로써 회사에 손실을 끼치거나 명예를 손상시키는 행위를 해서는 안된다.",
             },
             {
                 key: "practice-05",
-                title: "임직원에 대한 책임",
-                desc: "모든 임직원을 존중하고 능력과 업적에 따라 공정하게 대우합니다.",
+                title: "직무를 이용한 사리도모",
+                desc: "임직원은 직무를 이용하여 획득한 정보 또는 지식을 개인의 영리 목적으로 사용하면 안되며, 직무를 이용하여 업무상 영향력을 미치는 이해관계자에게 부당한 지시나 요구를 해서는 안된다.",
             },
             {
                 key: "practice-06",
-                title: "국가와 사회에 대한 책임",
-                desc: "건실한 기업 성장을 통해 사회발전과 공익 증진에 기여합니다.",
+                title: "문서 · 계수의 조작 및 허위보고",
+                desc: "고의로 사실과 다르게 문서, 계수의 조작 · 변조하거나 지시 또는 유도함으로써 상위자나 관련부서의 의사결정 및 판단을 흐리게 하거나 오판을 하게 하는 행위를 해서는 안되며, 모든정보의 기록과 보고는 정확하고 정직하게 이루어져야한다.",
+            },
+            {
+                key: "practice-07",
+                title: "성희롱 금지",
+                desc: "임직원은 개인의 인권을 침해하고 근무 분위기를 저해할 수 있는 일체의 성희롱 행위를 포함하여, 다른 사람에게 불쾌감을 주는 언어적, 육체적, 시각적 행위를 하지 않는다.",
+            },
+            {
+                key: "practice-08",
+                title: "직장 내 괴롭힘 금지​",
+                desc: "임직원은 직장에서의 지위 또는 관계 등의 우위를 이용하는 업무상 적정 범위를 넘어 다른 근로자에게 신체적 정신적 고통을 주거나 근무환경을 악화시키는 행위를 하여서는 안된다.",
+            },
+            {
+                key: "practice-09",
+                title: "회사의 명예를 실추시키는 행위​",
+                desc: "불량한 직무수행 및 개인의 이익을 위하여 대외적으로 회사의 명예를 실추시키는 행위를 해서는 안된다.",
             },
         ],
         EthicsPledgeText: "본인은 GS리테일 윤리규범 세부실천사항을 최선의 노력으로 실천할 것을 다짐하여 이에 서약합니다.",
@@ -4418,6 +4430,13 @@ section + section { padding-top:120px; }
 .ethics_target_list :deep(.num_info_num) { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
 .ethics_target_list :deep(.num_info_title > strong) { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .ethics_target_list :deep(.num_info_body > p) { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+.ethics_target_list :deep(.num_info_icon)::before {content: ''; width: 40px; height: 40px; display: block; background: url(@/assets/images/sub/icon_cont_40.png) no-repeat; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);}
+:deep(.ethics_target_list.num_info_list) li:first-child .num_info_icon::before {background: url(@/assets/images/sub/icon_gsrsu040104_01.png) no-repeat center;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(2) .num_info_icon::before {background-position: -20px -266px;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(3) .num_info_icon::before {background: url(@/assets/images/sub/icon_gsrsu040104_03.png) no-repeat center;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(4) .num_info_icon::before {background: url(@/assets/images/sub/icon_gsrsu040104_04.png) no-repeat center;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(5) .num_info_icon::before {background-position: -660px -186px;}
+:deep(.ethics_target_list.num_info_list) li:nth-child(6) .num_info_icon::before {background-position: -740px -104px;}
 .report_form_wrap .apply_form .form_field > :deep(.select), .report_form_wrap .apply_form .form_field > :deep(.input_wrap) { width: 428px; max-width: 428px; }
 .report_form_wrap .apply_form .form_field_phone label.select, .report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap) { width: 134px; max-width: 134px; }
 .report_form_wrap .apply_form .form_field_name > :deep(.input_wrap) { width: 205px; max-width: 205px; }
@@ -4434,12 +4453,16 @@ section + section { padding-top:120px; }
     .purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 6px; font-size: 1.8rem; line-height: 1.5; }
     .purpose_feature_cards :deep(.feature_card_desc) { color: #161616; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 }
+@media screen and (max-width: 1200px) {
+    .cp_manager_banner {padding-left: 60px; padding-right: 60px; background-position: -90px 0;}
+}
 @media screen and (max-width: 1024px) {
     :deep(.ethics_target_list.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
+    .cp_manager_banner figcaption {max-width: 300px;}
 }
 @media screen and (max-width: 768px) {
-    :deep(.feature_cards_grid.feature_card_list) { grid-template-columns: 1fr; }
-    :deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: 1fr; }
+    :deep(.feature_cards_grid.feature_card_list) { grid-template-columns: none; grid-auto-columns: 300px; grid-auto-flow: column; gap: 12px; white-space: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    :deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: none; }
     .ft_acc_wrap :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 10px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0 }
     .ft_sec_list { padding:0; }
@@ -4472,14 +4495,14 @@ section + section { padding-top:120px; }
     .report_form_wrap .apply_form .form_field > :deep(.input_wrap), .report_form_wrap .apply_form .form_field_phone label.select, .report_form_wrap .apply_form .form_field_phone > :deep(.input_wrap), .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(1)), .report_form_wrap .apply_form .form_field_email > :deep(.input_wrap:nth-child(3)), .report_form_wrap .apply_form .form_field_email label.select { width: 100%; max-width: 100%; }
     .report_form_wrap .apply_form .form_field_content > textarea { width: 100%; }
     .report_form_wrap .apply_form .form_row_content .form_label { padding-top: 0; }
+    :deep(.ethics_target_list.num_info_list) { grid-template-columns: 1fr; }
 }
 .sec_history { position: relative; }
-.history_list { padding-left:48px;position:relative; }
+.history_list { padding-left:48px;position:relative;}
 .history_item { display: flex; gap: 32px; position: relative; }
 .history_item::before { content: ""; width: 8px; height: 8px; background-color: #107af2; border: 8px solid #cfe4fc; border-radius: 50%; position: absolute; top: 11px; left: -48px; z-index: 5; }
 .history_item:not(:last-child)::after { content: ""; width: 1px;height:100%; background-color: #107af2; position: absolute; top: 12px; bottom: 0; left: -36px; }
 .history_period { width: 300px; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex-shrink: 0; display: block; }
-.history_body { width: 100%; padding-bottom: 100px; }
 .history_summary { font-size: 1.6rem;line-height: 1.5; letter-spacing: -0.01em; }
 .history_detail_list { display: grid; grid-template-columns: 103px minmax(0, 1fr); row-gap: 0; column-gap: 20px; align-items: start; }
 .history_detail_list > dt { padding:14px 0; color:#90909A; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; grid-column: 1; }
@@ -4618,7 +4641,6 @@ section + section { padding-top:120px; }
     section + section { padding-top:80px; }
     .gray_box { padding: 40px; }
     .gray_box p { margin-top: 32px; }
-    :deep(.feature_cards_grid.feature_card_list) { gap: 12px; }
     .button_area [class*="btn_"] { width:auto; flex:1 1 auto; }
     .history_list { padding-left: 20px; }
     .history_item { gap: 8px; flex-direction: column; }
@@ -4626,7 +4648,6 @@ section + section { padding-top:120px; }
     .history_item:not(:last-child)::after { top: 16px; left: -12px; }
     .history_item:last-child .history_body { padding-bottom: 0; }
     .history_period { width: 100%; font-size: 2rem; line-height: 1.35; }
-    .history_body { margin-top:6px;padding-bottom: 42px; }
     .history_summary { font-size: 1.4rem; line-height: 1.4; }
     .history_detail_list { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 6px; column-gap: 0; }
     .history_detail_list > dt { padding: 6px 0; font-size: 1.6rem; line-height: 1.4; grid-column: 1; }
@@ -4663,8 +4684,9 @@ section + section { padding-top:120px; }
     .base_item .gray_box .process_flow { flex-direction: column; gap: 12px; }
     .base_item .gray_box .process_flow p { flex: 1 1 auto; width: 100%; max-width: none; }
     .cp_appoint_board .process_flow { flex-direction: column; }
-    .cp_manager_banner { padding: 40px 20px;justify-content: flex-start; }
-    .cp_manager_banner > figcaption { width: 100%; max-width: none; min-width: 0; }
+    .cp_manager_banner { display: block; padding: 0; background:#F2F2F4; border-radius: 12px; overflow: hidden; }
+    .cp_manager_banner:before { content:''; display:block; width:100%; height:338px; background: url(@/assets/images/dummy/gsrsu040101_10.png) no-repeat 0 0 / cover; }
+    .cp_manager_banner > figcaption { width: 100%; max-width: none; min-width: 0; padding: 32px; }
     .cp_manager_banner > figcaption > strong { font-size: 2.4rem; }
     .cp_manager_banner > figcaption > p { font-size: 1.6rem; }
     .cp_manager_banner > figcaption > p + p { margin-top: 12px; font-size: 1.6rem; }
