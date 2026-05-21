@@ -260,7 +260,7 @@
                         </div>
                         <Accordion :multiple="false" class="social_award_acc">
                             <AccordionItem item-key="social-award-1">
-                                <template #title>{{ t.tab2.stab4.acctitle2 }}</template>
+                                <template #title>{{ t.tab2.stab4.acctitle1 }}</template>
                                 <div class="table_wrap type3">
                                     <table class="base_table">
                                         <colgroup>
