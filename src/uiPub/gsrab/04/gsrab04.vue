@@ -1,38 +1,39 @@
 <template>
     <div class="main-container">
         <header class="title_wrap ac">
-            <h2 class="page_title">{{ pageData.pageTitle }}</h2>
+            <h2 class="page_title">{{ t.pageTitle }}</h2>
         </header>
         <main class="content">
             <section class="sec_ci_intro">
                 <header class="header">
-                    <h3>{{ pageData.ciIntro.title }}</h3>
-                    <p>{{ pageData.ciIntro.lead }}</p>
+                    <h3>{{ t.ciIntro.title }}</h3>
+                    <p>{{ t.ciIntro.lead }}</p>
                 </header>
                 <article class="cont_box">
                     <div class="cont_box_row">
-                        <h4 class="sub_title">{{ pageData.ciIntro.symbolTitle }}</h4>
-                        <p class="desc" v-html="pageData.ciIntro.symbolDesc"></p>
+                        <h4 class="sub_title">{{ t.ciIntro.symbolTitle }}</h4>
+                        <p class="desc" v-html="t.ciIntro.symbolDesc"></p>
                     </div>
                     <figure class="gray_box">
                         <div class="img_wrap">
-                            <img :src="imgCiLogo" alt="GS CI 로고" />
+                            <img :src="imgCiLogo" :alt="t.ciIntro.logoAlt" />
                         </div>
                     </figure>
                     <ul class="color_cards">
-                        <li v-for="item in pageData.ciIntro.colors" :key="item.name" :class="item.className">
+                        <li v-for="item in t.ciIntro.colors" :key="item.name" :class="item.className">
                             <strong>{{ item.name }}</strong>
                             <p>{{ item.desc }}</p>
                         </li>
                     </ul>
                 </article>
             </section>
+
             <section class="sec_ci_bi">
                 <header class="header">
-                    <h3>{{ pageData.ciBi.title }}</h3>
+                    <h3>{{ t.ciBi.title }}</h3>
                 </header>
                 <ul class="ci_bi_cards">
-                    <li v-for="logo in ciBiLogos" :key="logo.alt" class="ci_bi_card">
+                    <li v-for="logo in t.ciBiLogos" :key="logo.alt" class="ci_bi_card">
                         <figure class="img_wrap">
                             <img :src="logo.src" :alt="logo.alt" />
                         </figure>
@@ -41,25 +42,26 @@
                 <article class="notice_box">
                     <header class="notice_head">
                         <span class="notice_ico" aria-hidden="true"></span>
-                        <h4>{{ pageData.ciBi.noticeTitle }}</h4>
+                        <h4>{{ t.ciBi.noticeTitle }}</h4>
                     </header>
-                    <p>{{ pageData.ciBi.noticeLead }}</p>
+                    <p>{{ t.ciBi.noticeLead }}</p>
                     <ul class="notice_list">
-                        <li v-for="(item, idx) in pageData.ciBi.noticeList" :key="'notice-' + idx" v-html="item"></li>
+                        <li v-for="(item, idx) in t.ciBi.noticeList" :key="'notice-' + idx" v-html="item"></li>
                     </ul>
                 </article>
                 <div class="button_wrap">
-                    <Buttons btn-class="btn_icon btn_xl primary after">{{ pageData.ciBi.downloadLabel }}</Buttons>
+                    <Buttons btn-class="btn_icon btn_xl primary after">{{ t.ciBi.downloadLabel }}</Buttons>
                 </div>
             </section>
+
             <section class="sec_color_reg">
                 <header class="header">
-                    <h3>{{ pageData.colorReg.title }}</h3>
-                    <p v-html="pageData.colorReg.desc"></p>
+                    <h3>{{ t.colorReg.title }}</h3>
+                    <p v-html="t.colorReg.desc"></p>
                 </header>
                 <div class="color_reg_list_wrap">
                     <ul class="reg_list">
-                        <li v-for="brand in colorRegList" :key="brand.name">
+                        <li v-for="brand in t.colorRegList" :key="brand.name">
                             <article class="reg_card">
                                 <header>
                                     <h4>{{ brand.name }}</h4>
@@ -78,7 +80,7 @@
                 </div>
                 <div class="table_scroll">
                     <table class="spec_table">
-                        <caption class="sr_only">{{ pageData.colorReg.tableCaption }}</caption>
+                        <caption class="sr_only">{{ t.colorReg.tableCaption }}</caption>
                         <colgroup>
                             <col class="col_gs_color" />
                             <col span="4" />
@@ -93,7 +95,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="row in colorSpecRows" :key="row.label">
+                            <tr v-for="row in t.colorSpecRows" :key="row.label">
                                 <th scope="row">
                                     <span class="spec_cell_lead">
                                         <span class="spec_swatch" :style="{ backgroundColor: row.swatch }" aria-hidden="true"></span>
@@ -114,88 +116,108 @@
 </template>
 
 <script setup>
+import { ref, computed } from "vue";
 import Buttons from "@/components/Buttons.vue";
+
+// 이미지 자원 선언부
 import imgCiLogo from "@/assets/images/dummy/gsrab04_02.png";
 import imgCiBiLogo1 from "@/assets/images/dummy/gsrab04_03.png";
 import imgCiBiLogo2 from "@/assets/images/dummy/gsrab04_04.png";
 import imgCiBiLogo3 from "@/assets/images/dummy/gsrab04_05.png";
 import imgCiBiLogo4 from "@/assets/images/dummy/gsrab04_06.png";
 
-const pageData = {
-    pageTitle: "CI/BI",
-    ciIntro: {
-        title: "CI 소개",
-        lead: "‘GS’는 특정 단어의 약자이거나 어떤 의미를 함축하는 것은 아니며 'GS' 자체로 존재합니다.",
-        symbolTitle: "GS심볼",
-        symbolDesc: "에너지 사업의 역동성과 유통 서비스 사업의 성장과 활력을 상징하며, 불타는 태양,<br />하늘과 바다, 푸른 대지를 아우르는 심플하면서도 역동적인 느낌을 표현합니다.",
-        colors: [
-            { className: "color_orange", name: "GS Orange", desc: "태양의 에너지와 열정" },
-            { className: "color_green", name: "GS Green", desc: "대지의 환경 그리고 무한한 가능성" },
-            { className: "color_blue", name: "GS Blue", desc: "하늘과 바다, 투명함과 창의성을 상징" },
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
+    },
+});
+
+const langData = {
+    ko: {
+        pageTitle: "CI/BI",
+        ciIntro: {
+            title: "CI 소개",
+            lead: "‘GS’는 특정 단어의 약자이거나 어떤 의미를 함축하는 것은 아니며 'GS' 자체로 존재합니다.",
+            symbolTitle: "GS심볼",
+            symbolDesc: "에너지 사업의 역동성과 유통 서비스 사업의 성장과 활력을 상징하며, 불타는 태양,<br />하늘과 바다, 푸른 대지를 아우르는 심플하면서도 역동적인 느낌을 표현합니다.",
+            logoAlt: "GS CI 로고",
+            colors: [
+                { className: "color_orange", name: "GS Orange", desc: "태양의 에너지와 열정" },
+                { className: "color_green", name: "GS Green", desc: "대지의 환경 그리고 무한한 가능성" },
+                { className: "color_blue", name: "GS Blue", desc: "하늘과 바다, 투명함과 창의성을 상징" },
+            ],
+        },
+        ciBi: {
+            title: "CI 및 BI",
+            noticeTitle: "주의",
+            noticeLead: "위 CI 및 BI를 도용하여 사용할 경우 상표법 제 93조에 의거하여 처벌받게 됩니다.",
+            noticeList: [
+                "CI (Corporate Identity) / BI (Brand Identity)<br />(참조) 상표법 제 93조 ~ 상표권 및 전용사용권의 침해행위를 한 자는 7년 이하의 징역 또는 1억원 이하의 벌금에 처한다. (개정 2001년 2월 3일)",
+            ],
+            downloadLabel: "CI 및 BI 다운로드(AI, JPG)",
+        },
+        ciBiLogos: [
+            { src: imgCiBiLogo1, alt: "GS리테일 로고" },
+            { src: imgCiBiLogo2, alt: "GS25 로고" },
+            { src: imgCiBiLogo3, alt: "GSSHOP 로고" },
+            { src: imgCiBiLogo4, alt: "GS THE FRESH 로고" },
+        ],
+        colorReg: {
+            title: "색상규정",
+            desc: "기본적으로 심볼의 4원색(Gradient Color)표현을 기본으로 Communication을 하나, GS그룹을 알리는 Accent Color로 Jade Green을 사용합니다.<br />Gradient Color표현이 힘든 Service Space나 기타 요소에 Accent Color로 적용할 수 있습니다.",
+            tableCaption: "GS 색상 규정 표",
+        },
+        colorRegList: [
+            {
+                name: "GS리테일",
+                pantones: [
+                    { name: "PANTONE <br />166 C", details: ["C 0", "M 65", "Y 100", "K 0"], bg: "#f47920" },
+                    { name: "PANTONE <br />300 C", details: ["C 100", "M 50", "Y 0", "K 0"], bg: "#0072bc" },
+                    { name: "PANTONE <br />7482 C", details: ["C 80", "M 0", "Y 75", "K 0"], bg: "#00b274" },
+                    { name: "PANTONE <br />COOL Gray <br />10C", details: ["C 0", "M 0", "Y 0", "K 50"], bg: "#939598" },
+                ],
+            },
+            {
+                name: "GS25",
+                pantones: [
+                    { name: "PANTONE <br />285 C", details: ["C 100", "M 39", "Y 0", "K 0"], bg: "#007ec6" },
+                    { name: "PANTONE <br />311 C", details: ["C 63", "M 0", "Y 10", "K 0"], bg: "#40c4e0" },
+                ],
+            },
+            {
+                name: "GS SHOP",
+                pantones: [
+                    { name: "PANTONE <br />2173 C", details: ["C 72", "M 27", "Y 0", "K 0"], bg: "#3698d4" },
+                ],
+            },
+            {
+                name: "GS THE FRESH",
+                pantones: [
+                    { name: "PANTONE <br />7484 C", details: ["C 91", "M 14", "Y 78", "K 60"], bg: "#005133" },
+                ],
+            },
+        ],
+        colorSpecRows: [
+            { label: "PANTONE 321C", swatch: "#009999", cmyk: "100/0/50/0", rgbDesktop: "0/153/153", rgbBroadcast: "0/153", hex: "009999" },
+            { label: "PANTONE 300C", swatch: "#3366CC", cmyk: "100/50/0/0", rgbDesktop: "51/102/204", rgbBroadcast: "20/102/204", hex: "3366CC" },
+            { label: "PANTONE 368C", swatch: "#99CC00", cmyk: "53/0/100/0", rgbDesktop: "153/204/0", rgbBroadcast: "600/200/10", hex: "99CC00" },
+            { label: "PANTONE 173C", swatch: "#CC6600", cmyk: "0/75/100/0", rgbDesktop: "204/102/0", rgbBroadcast: "20/102/1", hex: "CC6600" },
+            { label: "PANTONE COOL GRAY 10C", swatch: "#999999", cmyk: "0/0/0/75", rgbDesktop: "102/102/102", rgbBroadcast: "102/102/102", hex: "999999" },
+            { label: "PANTONE WARM GRAY 1C", swatch: "#ebebe3", cmyk: "0/0/3/8", rgbDesktop: "235/235/227", rgbBroadcast: "", hex: "EBEBE3" },
         ],
     },
-    ciBi: {
-        title: "CI 및 BI",
-        noticeTitle: "주의",
-        noticeLead: "위 CI 및 BI를 도용하여 사용할 경우 상표법 제 93조에 의거하여 처벌받게 됩니다.",
-        noticeList: [
-            "CI (Corporate Identity) / BI (Brand Identity)<br />(참조) 상표법 제 93조 ~ 상표권 및 전용사용권의 침해행위를 한 자는 7년 이하의 징역 또는 1억원 이하의 벌금에 처한다. (개정 2001년 2월 3일)",
-        ],
-        downloadLabel: "CI 및 BI 다운로드(AI, JPG)",
-    },
-    colorReg: {
-        title: "색상규정",
-        desc: "기본적으로 심볼의 4원색(Gradient Color)표현을 기본으로 Communication을 하나, GS그룹을 알리는 Accent Color로 Jade Green을 사용합니다.<br />Gradient Color표현이 힘든 Service Space나 기타 요소에 Accent Color로 적용할 수 있습니다.",
-        tableCaption: "GS 색상 규정 표",
-    },
+    en: {
+
+
+
+
+
+
+    }
 };
 
-const colorSpecRows = [
-    { label: "PANTONE 321C", swatch: "#009999", cmyk: "100/0/50/0", rgbDesktop: "0/153/153", rgbBroadcast: "0/153", hex: "009999" },
-    { label: "PANTONE 300C", swatch: "#3366CC", cmyk: "100/50/0/0", rgbDesktop: "51/102/204", rgbBroadcast: "20/102/204", hex: "3366CC" },
-    { label: "PANTONE 368C", swatch: "#99CC00", cmyk: "53/0/100/0", rgbDesktop: "153/204/0", rgbBroadcast: "600/200/10", hex: "99CC00" },
-    { label: "PANTONE 173C", swatch: "#CC6600", cmyk: "0/75/100/0", rgbDesktop: "204/102/0", rgbBroadcast: "20/102/1", hex: "CC6600" },
-    { label: "PANTONE COOL GRAY 10C", swatch: "#999999", cmyk: "0/0/0/75", rgbDesktop: "102/102/102", rgbBroadcast: "102/102/102", hex: "999999" },
-    { label: "PANTONE WARM GRAY 1C", swatch: "#ebebe3", cmyk: "0/0/3/8", rgbDesktop: "235/235/227", rgbBroadcast: "", hex: "EBEBE3" },
-];
-
-const ciBiLogos = [
-    { src: imgCiBiLogo1, alt: "GS리테일 로고" },
-    { src: imgCiBiLogo2, alt: "GS25 로고" },
-    { src: imgCiBiLogo3, alt: "GSSHOP 로고" },
-    { src: imgCiBiLogo4, alt: "GS THE FRESH 로고" },
-];
-
-const colorRegList = [
-    {
-        name: "GS리테일",
-        pantones: [
-            { name: "PANTONE <br />166 C", details: ["C 0", "M 65", "Y 100", "K 0"], bg: "#f47920" },
-            { name: "PANTONE <br />300 C", details: ["C 100", "M 50", "Y 0", "K 0"], bg: "#0072bc" },
-            { name: "PANTONE <br />7482 C", details: ["C 80", "M 0", "Y 75", "K 0"], bg: "#00b274" },
-            { name: "PANTONE <br />COOL Gray <br />10C", details: ["C 0", "M 0", "Y 0", "K 50"], bg: "#939598" },
-        ],
-    },
-    {
-        name: "GS25",
-        pantones: [
-            { name: "PANTONE <br />285 C", details: ["C 100", "M 39", "Y 0", "K 0"], bg: "#007ec6" },
-            { name: "PANTONE <br />311 C", details: ["C 63", "M 0", "Y 10", "K 0"], bg: "#40c4e0" },
-        ],
-    },
-    {
-        name: "GS SHOP",
-        pantones: [
-            { name: "PANTONE <br />2173 C", details: ["C 72", "M 27", "Y 0", "K 0"], bg: "#3698d4" },
-        ],
-    },
-    {
-        name: "GS THE FRESH",
-        pantones: [
-            { name: "PANTONE <br />7484 C", details: ["C 91", "M 14", "Y 78", "K 60"], bg: "#005133" },
-        ],
-    },
-];
+const t = computed(() => langData[props.lang] || langData.ko);
 </script>
 
 <style scoped>
@@ -278,6 +300,7 @@ const colorRegList = [
     }
     @media screen and (max-width: 768px) {
         .title_wrap { display: none; }
+        .visual_sub { font-size: 2rem; }
         section + section { padding: 60px 0 0; }
         .content { width: 100%; max-width: 100%; padding: 60px 20px 94px; }
         .header h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; text-align: left; }

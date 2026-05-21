@@ -55,12 +55,17 @@
                                 :data-popid="link.popId" 
                                 :data-cont="link.cont" 
                                 data-type="lg" 
-                                btn-class="btn_mid gray btn_icon_arrow after">
+                                btn-class="btn_mid gray btn_icon_arrow after"
+                            >
                                 {{ link.btnLabel }}
                             </Buttons>
-                            <Buttons v-else @click="handleLink(link.target)" btn-class="btn_mid gray btn_icon_arrow after">
+                            <a 
+                                v-else 
+                                @click.stop.prevent="handleLink(link.target)" 
+                                class="btn_mid gray btn_icon_arrow after"
+                            >
                                 {{ link.btnLabel }}
-                            </Buttons>
+                            </a>
                         </div>
                     </li>
                 </ul>
@@ -146,9 +151,15 @@ export default {
             const cont = el.dataset.cont; // data-cont 속성 읽기
             modal.open(popId, type, el, cont); // 4개 인자 모두 전달
         },
+
         handleLink(url) {
-            if (url.startsWith('http')) window.open(url, '_blank');
-            else this.$router.push(url);
+            if (!url) return;
+            // 외부 링크 스크린 아웃 후 즉시 종료 조치
+            if (url.startsWith('http')) {
+                window.open(url, '_blank');
+                return;
+            }
+            this.$router.push(url);
         }
     }
 };
