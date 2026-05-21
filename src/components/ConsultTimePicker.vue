@@ -16,10 +16,10 @@
                     </button>
                 </li>
             </ul>
-            <footer class="time_slot_legend">
+            <div class="time_slot_legend">
                 <p><span class="legend_dot is_unavailable" aria-hidden="true"></span> 예약불가</p>
                 <p><span class="legend_dot is_selected" aria-hidden="true"></span> 선택됨</p>
-            </footer>
+            </div>
         </div>
     </div>
 </template>
