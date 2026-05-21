@@ -62,8 +62,8 @@ defineEmits(['toggle']);
 .card_tags { color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
 
 /* 상세보기 버튼 */
-.card_detail_btn { width: 100%; height: 38px; margin-top: 16px; color: #161616; font-size: 1.6rem; letter-spacing: -0.01em; background: #f2f2f4; border: none; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer; transition: background-color 0.15s; }
-.card_detail_btn::after { content: ''; width: 16px; height: 16px; background-color: #90909a; flex-shrink: 0; transform-origin: center; transition: transform 0.2s ease; }
+.card_detail_btn { width: 100%; height: 38px; margin-top: 16px; color: #161616; font-size: 1.6rem; letter-spacing: -0.01em; border: none; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer; transition: background-color 0.15s; }
+.card_detail_btn::after { content: ''; width:20px; height:20px; background:url('@/assets/images/common/icon_set_20.png') no-repeat -191px -25px; flex-shrink: 0; transform-origin: center; transition: transform 0.2s ease; }
 .store_card.is_open .card_detail_btn::after { transform: rotate(180deg); }
 
 @media (max-width: 768px) {

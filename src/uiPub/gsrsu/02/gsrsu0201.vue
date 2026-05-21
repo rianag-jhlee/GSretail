@@ -439,7 +439,11 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .wide_card { display: flex; align-items: flex-start; gap: 40px; padding: 60px; background: #F8F8F8; border-radius: 20px; }
 .wide_card .image_wrap { flex: 0 0 500px; height: 320px; }
 .wide_card .text_group { flex: 1; display: flex; flex-direction: column; gap: 40px; }
+<<<<<<< HEAD
 .wide_card .btn_icon_arrow {width:175px;}
+=======
+.wide_card .btn_icon_arrow {width:180px;}
+>>>>>>> d2fffd87203bc7f0e8db2c73704fdc7e47b68bda
 
 /* 5. Sub Grid (2열 그리드 구현) */
 .sub_grid_container { display: flex; flex-wrap: wrap; gap: 80px 40px; }

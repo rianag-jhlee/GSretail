@@ -10,7 +10,7 @@
                     {{ item.managerTel || '053-67890123' }}
                 </a>
             </div>
-            <Buttons btn-class="btn_xl fill primary btn_icon after">무료 상담 신청하기</Buttons>
+            <Buttons btn-class="btn_xl fill primary btn_icon_arrow after">무료 상담 신청하기</Buttons>
         </div>
 
         <!-- 상세 정보 -->
@@ -61,14 +61,19 @@ defineProps({
 .manager_label { color: #161616; font-size: 1.6rem; font-weight: 700; }
 .manager_name { margin-top: 2px; color: #161616; font-size: 2.8rem; font-weight: 700; letter-spacing: -0.01em; }
 .manager_tel { margin-top: 16px; color:  var(--color-brand-primary); font-size: 2rem; letter-spacing: -0.01em; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; }
-.manager_tel::before { content: ''; width: 16px; height: 16px; background-color: var(--color-brand-primary); display: inline-block; }
+.manager_tel::before { content: ''; width: 16px; height: 16px; background:url('@/assets/images/sub/icon_tel.png') no-repeat 0 0; display: inline-block; }
 .detail_manager :deep([class*="btn_"]) { flex-shrink: 0; }
 
 /* 상세 정보 */
 .detail_info_list { list-style: none; margin: 0; padding: 0; border-top: 1px solid #e5e5e9; border-bottom: 1px solid #e5e5e9; display: flex; flex-wrap: wrap; }
 .detail_info_list > li { flex: 1; display: flex; align-items: center; gap: 26px; padding: 27px 24px; min-height: 80px; }
 .detail_info_list > li > span { color: #67676f; font-size: 1.8rem; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; }
-.detail_info_list > li > span::before { content: ''; width: 24px; height: 24px; background-color: red; display: inline-block; }
+.detail_info_list > li > span::before { content: ''; width: 24px; height: 24px; display: inline-block; }
+.detail_info_list > li:nth-of-type(1) > span::before { background:url('@/assets/images/sub/icon_gsrst0103_01.png') no-repeat 0 0 / contain; }
+.detail_info_list > li:nth-of-type(2) > span::before { background:url('@/assets/images/sub/icon_gsrst0103_02.png') no-repeat 0 0 / contain; }
+.detail_info_list > li:nth-of-type(3) > span::before { background:url('@/assets/images/sub/icon_gsrst0103_03.png') no-repeat 0 0 / contain; }
+.detail_info_list > li:nth-of-type(4) > span::before { background:url('@/assets/images/sub/icon_gsrst0103_04.png') no-repeat 0 0 / contain; }
+.detail_info_list > li:nth-of-type(5) > span::before { background:url('@/assets/images/sub/icon_gsrst0103_05.png') no-repeat 0 0 / contain; }
 .detail_info_list > li > strong { color: #161616; font-size: 1.8rem; font-weight: 700; }
 .detail_info_list > li.cell_full { flex: 1 0 100%; flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 24px; border-top: 1px solid #E5E5E9;}
 .detail_info_list > li.cell_full > p { color: #161616; font-size: 1.8rem; line-height: 1.4; }
