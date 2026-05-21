@@ -56,7 +56,7 @@
                                         </colgroup>
                                         <thead>
                                             <tr>
-                                                <th scope="col">기능/종류</th>
+                                                <th scope="col">{{t.기능종류}}</th>
                                                 <th scope="col" v-for="head in t.Chapter4.article13.tableHead" :key="head" v-html="head"></th>
                                             </tr>
                                         </thead>
@@ -97,7 +97,7 @@
 
         <div class="modal_bottom right">
             <div class="btnBox">
-                <Buttons btn-class="btn_big primary" @click="closeModal">확인</Buttons>
+                <Buttons btn-class="btn_big primary" @click="closeModal">{{t.check}}</Buttons>
             </div>
         </div>
     </div>
@@ -174,7 +174,11 @@ export default {
                         article: "부칙 제1조(효력 및 시행일)",
                         content: "이 약관은 2026년 01월 19일부터 시행합니다.",
                         copyright: "* 이 약관에 대한 저작권은 GS리테일에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다."
-                    }
+                    },
+                    check:'확인',
+                    기능종류:'기능/종류',
+
+
                 }
             }
         };

@@ -18,9 +18,9 @@
                             <div class="brand-info-box">
                                 <h4>{{ brand.name }}</h4>
                                 <dl>
-                                    <dt class="blind">전화번호</dt>
+                                    <dt class="blind">{{t.전화번호}}</dt>
                                     <dd class="tel-number">{{ brand.tel }}</dd>
-                                    <dt class="blind">운영시간</dt>
+                                    <dt class="blind">{{t.운영시간}}</dt>
                                     <dd class="working-hours" v-html="brand.hours"></dd>
                                 </dl>
                             </div>
@@ -121,7 +121,9 @@ export default {
                         { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
                         { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
                         { title: "제휴/협력문의", btnLabel: "제휴/협력문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0201", cont: "gsrcu0201" }
-                    ]
+                    ],
+                    전화번호:'전화번호',
+                    운영시간:'운영시간'
                 }
             }
         };
