@@ -302,13 +302,6 @@ function closeModal(event) {
 <style scoped>
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
-/* .smn_modal :deep([class*="btn_"][class*="primary"]) { color: #fff; } */
-.smn_title_row { display: flex; align-items: flex-start; justify-content: space-between; min-height: 92px; margin: 0; padding: 0; }
-.smn_title { color: #161616; font-size: 4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
-.smn_close { width: 40px; height: 40px; background: none; border: none; border-radius: 50%; cursor: pointer; flex-shrink: 0; position: relative; }
-.smn_close::before, .smn_close::after { width: 22px; border-top: 2px solid #161616; content: ""; position: absolute; top: 50%; left: 50%; }
-.smn_close::before { transform: translate(-50%, -50%) rotate(45deg); }
-.smn_close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .smn_intro strong { color: #161616; font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; }
 .smn_intro > p { margin-top: 16px; color: #161616; font-size: 2rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.35; }
 .consent_body { padding: 32px; }
@@ -346,7 +339,8 @@ function closeModal(event) {
 .form_field_region :deep(.select) { flex: 1; min-width: 0; max-width: 220px; }
 .form_field_region :deep(.select select) { width: 100%; font-size: 1.6rem; }
 .form_field_area .form_sub_input_wrap :deep(.input_wrap) { width: 160px; }
-.check_list :deep(.input_wrap) { width: auto; }
+.check_list :deep(.input_wrap) { width: auto; flex:none;}
+
 .check_etc .form_sub_label { min-width: 28px; }
 .check_etc :deep(.input_wrap) { flex: 1; max-width: 428px; }
 .form_sub_inputs :deep(.input_wrap) { width: 134px; }
@@ -357,11 +351,7 @@ function closeModal(event) {
 @media (max-width: 768px) {
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
-    .smn_modal { padding: 0 0 32px; }
     .modal_content { padding: 40px 0; }
-    .smn_title_row { min-height: 60px; margin: 0 -20px; padding: 17px 20px; border-bottom: 1px solid #c4c4d0; }
-    .smn_title { font-size: 1.8rem; line-height: 1.4; }
-    .smn_close { width: 24px; height: 24px; }
     .smn_intro > p { margin-top: 12px; }
     .consent_info { padding: 30px 20px; }
     .consent_info_list > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
