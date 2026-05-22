@@ -12,7 +12,7 @@
             <!-- Depth 1-->
             <Tabs :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
 
-            <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) --> 
+            <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) -->
             <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
             <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
             <Tabs v-show="activeD1 === 3" :tab-items="depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
@@ -261,7 +261,7 @@
                     </ul>
                 </section>
             </div>
- 
+
             <!-- 편의점 창업 이해 -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 2">
                 <section class="sec_diagram">
@@ -1577,7 +1577,7 @@
 
 </template>
 
-<script setup> 
+<script setup>
 import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -1679,7 +1679,7 @@ const depth1Tabs = [
     { item: "상담 및 신청" },
     { item: "가맹계약시스템" },
 ];
- 
+
 /* D1=0 2depth */
 const depth2Tabs = [
     { item: "GS25 브랜드 소개" },
@@ -3966,7 +3966,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .seminar_region_pick > .seminar_region_list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 /* ========== Tablet 1024px 이하 ========== */
-@media (max-width: 1024px) { 
+@media (max-width: 1024px) {
     .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
     .sec_band > .inner > .link_grid { flex-direction: column; }
