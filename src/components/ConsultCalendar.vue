@@ -186,9 +186,9 @@ function slideNext() {
 .consult_calendar_inner { padding: 32px 40px; border: 1px solid #d7d7df; border-radius: 20px; box-sizing: border-box; }
 .consult_calendar_head { display: flex; align-items: center; justify-content: center; gap: 24px; position: relative; margin-bottom: 12px; }
 .consult_calendar_head > .calendar_month { margin: 0; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; text-align: center; }
-.consult_calendar_head > .calendar_nav { width: 20px; height: 20px; background-color: #d9d9d9; border: 0; cursor: pointer; flex-shrink: 0;  }
-.consult_calendar_head > .calendar_nav.prev { left: 0; }
-.consult_calendar_head > .calendar_nav.next { right: 0; }
+.consult_calendar_head > .calendar_nav { width: 20px; height: 20px; background-color: #d9d9d9; border: 0; cursor: pointer; flex-shrink: 0; background: url(@/assets/images/common/icon_set_20.png) no-repeat; }
+.consult_calendar_head > .calendar_nav.prev { left: 0; background-position: -281px -24px;}
+.consult_calendar_head > .calendar_nav.next { right: 0; background-position: -324px -24px; }
 .calendar_month_swiper { width: 100%; overflow: hidden; }
 .calendar_weekdays { margin: 0; padding: 16px 0; list-style: none; display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; border-bottom: 1px solid #e5e5e9; }
 .calendar_weekdays > li { color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; text-align: center; }
