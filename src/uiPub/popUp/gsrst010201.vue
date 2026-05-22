@@ -1,11 +1,11 @@
 <template>
-    <div class="smn_modal">
-        <div class="smn_title_row">
-            <h2 class="smn_title">사업설명회 신청</h2>
-            <button type="button" class="smn_close" aria-label="닫기" @click="closeModal"></button>
+    <div class="modal_cont gsrst010201">
+        <div class="modal_header">
+            사업설명회 신청
+            <a href="#none" @click="closeModal" aria-label="닫기" class="btn_close">닫기</a>
         </div>
 
-        <div class="modal_content smn_body">
+        <div class="modal_content">
             <div class="smn_intro">
                 <p>사업설명회 신청을 하시려면 아래 내용을 입력해 주시기 바랍니다.</p>
             </div>
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <div class="smn_bottom">
+        <div class="modal_bototm">
             <Buttons btn-class="btn_big fill primary">신청</Buttons>
             <Buttons btn-class="btn_big gary" @click="closeModal">취소</Buttons>
         </div>
@@ -179,15 +179,9 @@ function closeModal(event) {
 </script>
 
 <style scoped>
-.smn_modal { --color-brand-primary: #15b874; }
-.smn_modal :deep([class*="btn_"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
+.gsrst010201 { --color-brand-primary: #15b874; }
+.gsrst010201 :deep([class*="btn_"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
 .modal_content { border-bottom: 1px solid #E5E5E9; }
-.smn_title_row { display: flex; align-items: flex-start; justify-content: space-between; min-height: 92px; margin: 0; padding: 0; }
-.smn_title { color: #161616; font-size: 4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
-.smn_close { width: 40px; height: 40px; background: none; border: none; border-radius: 50%; cursor: pointer; flex-shrink: 0; position: relative; }
-.smn_close::before, .smn_close::after { width: 22px; border-top: 2px solid #161616; content: ""; position: absolute; top: 50%; left: 50%; }
-.smn_close::before { transform: translate(-50%, -50%) rotate(45deg); }
-.smn_close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .smn_intro > p { color: #161616; font-size: 2rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.35; }
 .consent_box { margin-top: 40px; border-radius: 12px; background-color: #f8f8f8; overflow: hidden; }
 .consent_info { padding: 32px; }
@@ -231,14 +225,11 @@ function closeModal(event) {
 .form_field_radio :deep(.label) { font-size: 1.8rem; color: #161616; }
 .form_row_textarea .form_field { display: block; }
 .form_field > :deep(.textarea_wrap) { width: 100%; }
-.smn_bottom { margin-top: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
-.smn_bottom > :deep(.btn_big) { width: 134px; text-align: center; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.modal_bototm { margin-top: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.modal_bototm > :deep(.btn_big) { width: 134px; text-align: center; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 
 @media (max-width: 768px) {
     .modal_wrap .modal_container { padding-bottom: 32px; }
-    .smn_title_row { min-height: 60px; margin: 0 -20px; padding: 17px 20px; border-bottom: 1px solid #c4c4d0; }
-    .smn_title { font-size: 1.8rem; line-height: 1.4; }
-    .smn_close { width: 24px; height: 24px; }
     .smn_intro { display: none; }
     .consent_info { padding: 30px 20px; }
     .consent_info_list > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
@@ -262,7 +253,7 @@ function closeModal(event) {
     .consent_radio_text { font-size: 1.6rem; }
     .form_field_radio { flex-direction: column; gap: 20px; align-items: flex-start; }
     .form_field_radio :deep(.label) { font-size: 1.6rem; letter-spacing: -0.01em; line-height: 1.5; }
-    .smn_bottom { justify-content: center; }
-    .smn_bottom > :deep(.btn_big) { width: 100%; flex: 1; }
+    .modal_bototm { justify-content: center; }
+    .modal_bototm > :deep(.btn_big) { width: 100%; flex: 1; }
 }
 </style>
