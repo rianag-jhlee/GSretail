@@ -2,7 +2,7 @@
     <div class="modal_cont gsrst010201">
         <div class="modal_header">
             사업설명회 신청
-            <a href="#none" @click="closeModal" aria-label="닫기" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
         </div>
 
         <div class="modal_content">
@@ -21,10 +21,7 @@
                     </ul>
                     <div class="consent_notice">
                         <p class="consent_notice_text">고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br class="p_br">사업설명회 신청 글 작성이 불가능합니다.</p>
-                        <label class="consent_radio_label">
-                            <input type="radio" class="consent_radio" name="consent_agree" value="agree" v-model="consentAgree" @click="consentAgree = consentAgree === 'agree' ? '' : 'agree'" />
-                            <span class="consent_radio_text">동의합니다.</span>
-                        </label>
+                        <Inputs type="checkbox" text="동의합니다." v-model="consentAgree" />
                     </div>
                 </div>
             </div>
@@ -190,8 +187,9 @@ function closeModal(event) {
 .consent_info_list > li { padding-left: 10px; color: #67676f; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; position: relative; }
 .consent_info_list > li::before { content: ""; width: 4px; height: 1px; background-color: #67676f; position: absolute; left: 0; top: 0.5lh; }
 .consent_notice { margin-top: 24px; padding-top: 24px; border-top: 1px solid #d7d7df; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.consent_notice > :deep(.input_wrap) { width: auto !important; flex: 0 1 auto;}
 .consent_notice_text { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; }
-.consent_radio_label { display: flex; align-items: center; gap: 8px; flex-shrink: 0; cursor: pointer; white-space: nowrap; }
+.consent_notice :deep(.label) { font-size: 1.8rem; color: #161616; }
 .consent_radio { width: 24px; height: 24px; padding: 0; appearance: none; border: 0; border-radius: 8px; background-color: #fff; cursor: pointer; flex-shrink: 0; position: relative; transition: border-color 0.2s, background-color 0.2s; }
 .consent_radio:checked { border-color: #107af2; background-color: #107af2; }
 .consent_radio:checked::after { width: 13px; height: 8px; background-color: #fff; content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
@@ -251,6 +249,7 @@ function closeModal(event) {
     .form_label { margin-bottom: 12px; }
     .consent_radio { width: 20px; height: 20px; }
     .consent_radio_text { font-size: 1.6rem; }
+    .consent_notice :deep(.label) { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .form_field_radio { flex-direction: column; gap: 20px; align-items: flex-start; }
     .form_field_radio :deep(.label) { font-size: 1.6rem; letter-spacing: -0.01em; line-height: 1.5; }
     .modal_bototm { justify-content: center; }
