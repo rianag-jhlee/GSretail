@@ -95,9 +95,9 @@ const langData = {
                             { term: "GS리테일", desc: "ESG평가 2년 연속 'A+' 등급 획득" }
                         ] },
                         { term: ["10월", "GS25"], desc: "인스타그램 100만 팔로워 돌파" },
-                        { term: ["9월", "GS25"], desc: "시그니처 프로그램 '지금 백지연' 론칭 BI리뉴얼" },
+                        { term: ["9월", "GS SHOP"], desc: "시그니처 프로그램 '지금 백지연' 론칭 BI리뉴얼" },
                         { term: ["8월", "GS SHOP"], desc: "르네크루 리브랜딩 론칭" },
-                        { term: ["6월", "GS SHOP"], desc: "태국 방콕 'THAIFEX 2025' 박람회 참가" },
+                        { term: ["6월", "GS25"], desc: "태국 방콕 'THAIFEX 2025' 박람회 참가" },
                         { term: ["5월", "GS25"], desc: "PB·차별화 상품 일본 돈키호테 수출" },
                         { term: ["4월", "GS25"], desc: "FC서울 특화 매장 오픈" },
                         { term: ["3월"], subDetails: [
@@ -177,11 +177,11 @@ const langData = {
                         { term: ["10월", "달리살다"], desc: "유기농 전문몰 '달리살다' 오픈" },
                         { term: ["9월", "GS THE FRESH"], desc: "사회공헌형 슈퍼마켓 '내일스토어' 오픈" },
                         { term: ["8월", "GS리테일"], desc: "배달플랫폼 사업 '우딜' 론칭" },
-                        { term: ["7월", "GS25"], desc: "사회공헌형 슈퍼마켓 '내일스토어' 오픈" },
-                        { term: ["6월", "GS리테일"], desc: "주류 스마트오더 와인25 플러스 론칭" },
+                        { term: ["7월", "GS25"], desc: "주류 스마트오더 와인25 플러스 론칭" },
+                        { term: ["6월", "GS리테일"], desc: "업계 최초 드론 배송 시범서비스 진행" },
                         { term: ["4월"], subDetails: [
-                            { term: "GS리테일", desc: "업계 최초 드론 배송 시범서비스 진행" },
-                            { term: "GS SHOP", desc: "군포물류센터 오픈" }
+                            { term: "GS리테일", desc: "GS리테일 통합 멤버십 THE POP 출범" },
+                            { term: "GS SHOP", desc: "군포물류센터 오픈" },
                         ] },
                         { term: ["1월", "GS25"], desc: "미래형 편의점 GS25 을지스마트점 오픈" }
                     ] },
@@ -225,8 +225,8 @@ const langData = {
                             { term: "GS SHOP", desc: "글로벌 키친웨어 제조사 월드키친(코렐)에 2,500만불 투자" },
                         ] },
                         { term: ["6월"], subDetails: [
-                            { term: "GS25", desc: "편의점 업계 유일의 동반성장지수 '우수' 획득" },
                             { term: "GS리테일", desc: "보건복지부와 저소득층 일자리 창출 위한 업무 협약" },
+                            { term: "GS25", desc: "편의점 업계 유일의 동반성장지수 '우수' 획득" },
                         ] },
                         { term: ["1월", "GS25"], desc: "아시아태평양 유통산업 어워즈 수상" },
                     ] },
@@ -308,7 +308,7 @@ const langData = {
                         { term: ["12월", "GS SHOP"], desc: "2009년 공정거래 자율준수프로그램(CP) 등급평가 'AA' 등급 획득" },
                         { term: ["11월"], subDetails: [
                             { term: "GS리테일", desc: "고객만족 경영대상 종합대상 수상" },
-                            { term: "GS25", desc: "통합 브랜드 GS SHOP 출범" },
+                            { term: "GS SHOP", desc: "통합 브랜드 GS SHOP 출범" },
                         ] },
                         { term: ["9월", "GS리테일"], desc: "미스터도넛 가맹사업 실시" },
                         { term: ["6월", "GS리테일"], desc: "㈜후레쉬서브(FRESH SERVE) HACCP(식품위해요소중점관리기준) 획득" },
@@ -316,7 +316,7 @@ const langData = {
                     { period: "2008", details: [
                         { term: ["11월", "GS리테일"], desc: "지하철 9호선 상가운영자로 선정" },
                         { term: ["9월", "GS리테일"], desc: "㈜후레쉬서브(FRESH SERVE) 준공" },
-                        { term: ["8월", "GS리테일"], desc: "GS넷비전 출범" },
+                        { term: ["3월", "GS리테일"], desc: "GS넷비전 출범" },
                     ] },
                     { period: "2007", details: [
                         { term: ["9월", "GS SHOP"], desc: "부산 콜센터 개소" },
@@ -346,7 +346,7 @@ const langData = {
             },
             {
                 period: "2002-1999",
-                title: "새로운 유통업 <br />강자로의 발돋음",
+                title: "새로운 유통업 <br />강자로의 발돋움",
                 images: [
                     { period: "2000", entryIdx: 0, src: imgHistory17, alt: "2000년 GS리테일 연혁 이미지" },
                 ],
