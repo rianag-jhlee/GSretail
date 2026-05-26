@@ -1,12 +1,12 @@
 <template>
-    <div class="smn_modal">
+    <div class="modal_cont gsrst010301">
         <!-- 타이틀 -->
-        <div class="smn_title_row">
-            <h2 class="smn_title">사업설명회 신청</h2>
-            <button type="button" class="smn_close" aria-label="닫기" @click="closeModal"></button>
+        <div class="modal_header">
+            사업설명회 신청
+            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
         </div>
 
-        <div class="modal_content smn_body">
+        <div class="modal_content">
             <!-- 인트로 -->
             <div class="smn_intro">
                 <strong>안녕하세요!<br>GS THE FRESH 1:1 상담<br class="m_br">컨설턴트 윤경진 입니다.</strong>
@@ -50,10 +50,7 @@
                     </ul>
                     <div class="consent_notice">
                         <p class="consent_notice_text">고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br class="p_br">사업설명회 신청 글 작성이 불가능합니다.</p>
-                        <label class="consent_radio_label">
-                            <input type="radio" class="consent_radio" name="consent_agree" value="agree" v-model="consentAgree" @click="consentAgree = consentAgree === 'agree' ? '' : 'agree'" />
-                            <span class="consent_radio_text">동의합니다.</span>
-                        </label>
+                        <Inputs type="checkbox" text="동의합니다." v-model="consentAgree" />
                     </div>
                 </div>
             </div>
@@ -189,7 +186,7 @@
             <!-- 버튼 -->
         </div>
         
-        <div class="smn_bottom">
+        <div class="modal_bottom">
             <Buttons btn-class="btn_big primary">상담신청</Buttons>
             <Buttons btn-class="btn_big gary" @click="closeModal">다시작성</Buttons>
         </div>
@@ -204,7 +201,7 @@ import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import Buttons from "@/components/Buttons.vue";
 
-const consentAgree = ref("");
+const consentAgree = ref(false);
 const hasStore = ref(null); // null: 미선택 / true: 있다 / false: 없다
 
 const superItemOptions = [
@@ -305,15 +302,6 @@ function closeModal(event) {
 <style scoped>
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
-.smn_modal { --color-brand-primary: #15b874; }
-.smn_bottom :deep(.primary) { background-color: var(--color-brand-primary); }
-.smn_modal :deep([class*="btn_"][class*="primary"]) { color: #fff; }
-.smn_title_row { display: flex; align-items: flex-start; justify-content: space-between; min-height: 92px; margin: 0; padding: 0; }
-.smn_title { color: #161616; font-size: 4rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
-.smn_close { width: 40px; height: 40px; background: none; border: none; border-radius: 50%; cursor: pointer; flex-shrink: 0; position: relative; }
-.smn_close::before, .smn_close::after { width: 22px; border-top: 2px solid #161616; content: ""; position: absolute; top: 50%; left: 50%; }
-.smn_close::before { transform: translate(-50%, -50%) rotate(45deg); }
-.smn_close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .smn_intro strong { color: #161616; font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; }
 .smn_intro > p { margin-top: 16px; color: #161616; font-size: 2rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.35; }
 .consent_body { padding: 32px; }
@@ -335,11 +323,8 @@ function closeModal(event) {
 .consent_info_list > li::before { content: ""; width: 4px; height: 1px; background-color: #67676f; position: absolute; left: 0; top: 0.5lh; }
 .consent_notice { margin-top: 24px; padding-top: 24px; border-top: 1px solid #d7d7df; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .consent_notice_text { font-size: 1.6rem; font-weight: 700; line-height: 1.24; color: #161616; }
-.consent_radio_label { display: flex; align-items: center; gap: 8px; flex-shrink: 0; cursor: pointer; white-space: nowrap; }
-.consent_radio { width: 24px; height: 24px; padding: 0; appearance: none; border: 0; border-radius: 8px; background-color: #fff; cursor: pointer; flex-shrink: 0; position: relative; transition: border-color 0.2s, background-color 0.2s; }
-.consent_radio:checked { border-color: #107af2; background-color: #107af2; }
-.consent_radio:checked::after { width: 13px; height: 8px; background-color: #fff; content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-.consent_radio_text { font-size: 1.8rem; font-weight: 400; line-height: 1.4; color: #161616; }
+.consent_notice > :deep(.input_wrap) { width: auto !important; flex: 0 1 auto;}
+.consent_notice :deep(.label) { font-size: 1.8rem; color: #161616; }
 .middle_bts_wrap { margin-top: 40px; display: flex; gap: 8px; }
 .middle_bts_wrap > button { height: 52px; padding: 0 16px; background: #fff; border: 1px solid #90909a; border-radius: 10px; font-size: 1.8rem; font-weight: 700; cursor: pointer; transition: border-color 0.15s, color 0.15s; color: #161616; }
 .middle_bts_wrap > button:hover, .middle_bts_wrap > button.active { border-color: #107af2; color: #107af2; }
@@ -354,22 +339,19 @@ function closeModal(event) {
 .form_field_region :deep(.select) { flex: 1; min-width: 0; max-width: 220px; }
 .form_field_region :deep(.select select) { width: 100%; font-size: 1.6rem; }
 .form_field_area .form_sub_input_wrap :deep(.input_wrap) { width: 160px; }
-.check_list :deep(.input_wrap) { width: auto; }
+.check_list :deep(.input_wrap) { width: auto; flex:none;}
+
 .check_etc .form_sub_label { min-width: 28px; }
 .check_etc :deep(.input_wrap) { flex: 1; max-width: 428px; }
 .form_sub_inputs :deep(.input_wrap) { width: 134px; }
 .contract_rent .form_sub_input_wrap :deep(.input_wrap) { width: 134px; }
-.smn_bottom { margin-top: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
-.smn_bottom > :deep(.btn_big) { width: 134px; text-align: center; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.modal_bottom { margin-top: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.modal_bottom > :deep(.btn_big) { width: 134px; text-align: center; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 
 @media (max-width: 768px) {
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
-    .smn_modal { padding: 0 0 32px; }
     .modal_content { padding: 40px 0; }
-    .smn_title_row { min-height: 60px; margin: 0 -20px; padding: 17px 20px; border-bottom: 1px solid #c4c4d0; }
-    .smn_title { font-size: 1.8rem; line-height: 1.4; }
-    .smn_close { width: 24px; height: 24px; }
     .smn_intro > p { margin-top: 12px; }
     .consent_info { padding: 30px 20px; }
     .consent_info_list > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
@@ -381,11 +363,10 @@ function closeModal(event) {
     .form_field_email > :deep(.input_wrap:nth-child(3)) { flex: 1; min-width: 60px; }
     .form_field_email :deep(.select) { flex: 1 0 100%; width: 100%; }
     .form_field_region :deep(.select) { flex: 1 0 100%; width: 100%; max-width: 100%; }
-    .consent_radio { width: 20px; height: 20px; }
-    .consent_radio_text { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .smn_bottom { margin-top: 0; justify-content: center; }
-    .smn_bottom > :deep(.btn_big) { width: 100%; flex: 1; }
-    .smn_bottom :deep(.primary) { background-color: var(--color-brand-primary); }
+    .consent_notice :deep(.label) { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .modal_bottom { margin-top: 0; justify-content: center; }
+    .modal_bottom > :deep(.btn_big) { width: 100%; flex: 1; }
+    .modal_bottom :deep(.primary) { background-color: var(--color-brand-primary); }
     .smn_intro strong { font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
     .smn_intro > p { margin-top: 12px; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .gray_box { margin-top: 32px; }

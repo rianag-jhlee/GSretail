@@ -42,8 +42,8 @@
                             @click.prevent="openModal"
                         >{{ t.brand.str.storeFind }}</a>
                         <div class="sns_wrap">
-                            <a href="#" class="btn_sns btn_sns_insta" :aria-label="t.brand.str.snsInstaAria"></a>
-                            <a href="#" class="btn_sns btn_sns_yt" :aria-label="t.brand.str.snsYtAria"></a>
+                            <a href="https://www.instagram.com/gs25_official" class="btn_sns btn_sns_insta" :aria-label="t.brand.str.snsInstaAria" target="_blank"></a>
+                            <a href="https://www.youtube.com/gs25" class="btn_sns btn_sns_yt" :aria-label="t.brand.str.snsYtAria" target="_blank"></a>
                         </div>
                     </div>
                 </header>
@@ -155,7 +155,7 @@
                 </SwiperSlide>
             </Swiper>
 
-            <DiffQrRow v-if="tab0.qr" :title="tab0.qr.title" :desc="tab0.qr.desc" />
+            <!-- <DiffQrRow v-if="tab0.qr" :title="tab0.qr.title" :desc="tab0.qr.desc" /> -->
         </div>
 
         <!-- 탭 1: CAFE25 -->
@@ -339,11 +339,8 @@
 
             <section v-for="(sec, i) in tab3.sections" :key="i">
                 <header class="sec_header">
-
                     <h3 v-html="sec.title"></h3>
-
                     <p v-if="sec.desc" class="sec_header_desc" v-html="sec.desc" />
-
                 </header>
 
                 <!-- 이미지 2열 -->
@@ -1834,7 +1831,6 @@ const langData = {
                 {
                     type: "img_grid",
                     title: "GS25에만 있는 고븐미니 조리 시스템",
-                    desc: "매장에서 바로 구워내 더욱 바삭한 식감! 편의점에서 만나는 피자 전문점 퀄리티!<br />초소형, 초고온, 저전력의 고븐미니는 고온에서 짧은 시간의 조리를 할 수 있어 언제 어디서나 갓 구운 피자를 즐길 수 있습니다.",
                     images: [
                         { image: imgGoben1, alt: "" },
                         { image: imgGoben2, alt: "" },
@@ -1915,7 +1911,6 @@ const langData = {
         sections: [
             {
                 title: "신선강화점 특징",
-                mobileDesc: "매장에서 바로 구워내 더욱 바삭한 식감! 편의점에서 만나는 피자 전문점 퀄리티!\n초소형, 초고온, 저전력의 고븐미니는 고온에서 짧은 시간의 조리를 할 수 있어 언제 어디서나 갓 구운 피자를 즐길 수 있습니다.",
                 features: [
                     { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정 콜드체인 시스템 적용으로 신선도 유지" },
                     { title: "합리적인 가격", desc: "GS 더프레시와의 통합 구매를 통해 합리적인 가격에 판매" },
@@ -2198,7 +2193,8 @@ const langData = {
                             { step: "Step 1", title: "사이트 접속 및 로그인" },
                             { step: "Step 2", title: "캐시충전" },
                             { step: "Step 3", title: "결제수단 선택" },
-                            { step: "Step 4", title: "PIN번호 입력" },
+                            { step: "Step 4", title: "결제금액 선택" },
+                            { step: "Step 5", title: "PIN번호 입력" },
                         ],
                         offlineLabel: "오프라인 사용방법",
                         offlineSteps: [
@@ -2251,10 +2247,10 @@ const langData = {
                         ],
                         purchaseTitle: "GS25 매장에서 유심 구매/사용 방법",
                         purchaseSteps: [
-                            { step: "Step 1", title: "GS25 편의점에서\n 유심카드 구입" },
-                            { step: "Step 2", title: "GS25 편의점에서\n 유심카드 구입" },
-                            { step: "Step 3", title: "유심 일련번호 등록 후\n 개통 신청 (또는 전화로 개통 신청)" },
-                            { step: "Step 4", title: "해피콜/개통 완료 후\n 휴대폰에 유심을 장착하면 간편 개통 끝!" },
+                            { step: "Step 1", title: "GS25 편의점에서<br />유심카드 구입" },
+                            { step: "Step 2", title: "본 GS 25 요금제<br />전용 가입 사이트 접속" },
+                            { step: "Step 3", title: "유심 일련번호 등록 후<br />개통 신청 (또는 전화로 개통 신청)" },
+                            { step: "Step 4", title: "해피콜/개통 완료 후<br />휴대폰에 유심을 장착하면 간편 개통 끝!" },
                         ],
                         benefitTitle: "GS25 요금제 혜택",
                         benefitCards: [
@@ -2317,12 +2313,12 @@ const langData = {
                                 discount:     "12,500원",
                                 monthly:      "17,500원",
                                 monthlyDc:    "2,500원",
-                                competitor:   "45,250원",
+                                competitor:   "41,250원",
                             },
                             {
                                 name:         "GS25(3GB/150분)",
                                 data:         "3GB",
-                                voice:        "100분",
+                                voice:        "150분",
                                 sms:          "100건",
                                 normalPrice:  "20,900원",
                                 discount:     "12,100원",
@@ -2374,36 +2370,32 @@ const langData = {
                         hipassTerminalImgAlt: "하이패스 단말기(GPASS) 이미지",
                     },
                     {
-                        label:   "고속도로 미납\n통행료 납부",
+                        label:   "고속도로 미납 \n 통행료 납부",
                         hero:    null,
                         heroAlt: "",
-                        title:   "고속도로 미납통행료 조회\n/수납서비스",
+                        title:   "고속도로 미납통행료 조회/수납서비스",
                         desc:    "국내편의점 중 최초로 고속도로 미납통행료 실시간 조회 및 납부할 수 있는 서비스입니다.",
                         serviceTitle: "서비스 장점",
                         serviceAdvantages: [
                             {
                                 num:   "01",
-                                title: "전국 GS25 편의점에서\n 차량번호만으로 편리하게 납부 가능",
+                                title: "전국 GS25 편의점에서<br /> 차량번호만으로 편리하게 납부 가능",
                                 desc:  "서비스 시행 : 2019.08.23부터",
                             },
                             {
                                 num:   "02",
-                                title: "미납통행료\n 실시간 납부",
+                                title: "미납통행료<br /> 실시간 납부",
                                 desc:  "*법인 차량은 추후 서비스 예정",
                             },
                             {
                                 num:   "03",
-                                title: "현금, 신용카드로\n 납부 가능",
+                                title: "현금, 신용카드로<br /> 납부 가능",
                                 desc:  "현금이든 신용카드든  편의에 따라 납부 가능",
                             },
                         ],
                         unpaidTitle: "고속도로 미납통행료 납부 방법",
                         unpaidSteps: [
                             { step: "Step 1", title: "GS25 편의점에게<br />납부요청",
-                                bullets: [
-                                    "가까운 GS25에서 하이패스 카드 구매",
-                                    "카드 구입비: 5,000원",
-                                ],
                              },
                             { step: "Step 2", title: "차량번호 입력" },
                             { step: "Step 3", title: "개인정보제공동의" },
@@ -2443,12 +2435,8 @@ const langData = {
                         mallPaymentTitle: "편의점 결제 이용 방법",
                         mallPaymentSteps: [
                             { step: "Step 1", title: "온라인몰에서<br />상품/서비스 구매",
-                                bullets: [
-                                    "가까운 GS25에서 하이패스 카드 구매",
-                                    "카드 구입비: 5,000원",
-                                ],
                              },
-                            { step: "Step 2", title: "온라인몰에서<br />상품/서비스 구매" },
+                            { step: "Step 2", title: "'편의점결제' 선택" },
                             { step: "Step 3", title: "가까운 GS25에서<br />24시간 결제" },
                             { step: "Step 4", title: "집으로 상품 배송<br />(캐시충전)" },
                         ],
@@ -2493,7 +2481,7 @@ const langData = {
                         stepTitle: "국내택배 이용방법",
                         steps: [
                             { step: "Step 1", title: "홈페이지/모바일APP<br />택배접수 예약" },
-                            { step: "Step 2", title: "홈페이지/모바일APP<br />택배접수 예약" },
+                            { step: "Step 2", title: "물품 포장 후 GS25 방문" },
                             { step: "Step 3", title: "무인택배장비로 접수<br />(중량측정)" },
                             { step: "Step 4", title: "카운터에서 결제 후<br />물품보관함에 보관" },
                         ],
@@ -2518,7 +2506,7 @@ const langData = {
                                 icon:    null,
                                 iconAlt: "물품가액 아이콘",
                                 title:   "물품가액",
-                                desc:    "50만원 이하",
+                                desc:    "100만원 이하",
                             },
                         ],
                         priceTitle: "국내택배 이용요금",
@@ -2699,15 +2687,10 @@ const langData = {
                 hero: null,
                 heroAlt: "",
                 title: "공공요금수납 서비스",
-                subtitle: "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
                 desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.",
                 sections: [],
                 panelExtra: {
                     desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에 서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.<br class=\"m_br\" /><br class=\"m_br\" />기존지로 납부 외 휴대폰을 통한 모바일수납도 가능하며,납부공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부가능합니다.",
-                    bullets: [
-                        "접수시점부터 배달완료까지 배송단계 별 SMS 서비스를 제공합니다.",
-                        "GS포스트박스 회원으로 접수 시 다양한 이벤트에 참여 가능하며, 사용량에 따라 등급 별 혜택을 제공합니다.",
-                    ],
                 },
                 taxTitle: "납부가능 세금 및 공과금",
                 taxGroups: [
@@ -2788,14 +2771,14 @@ const langData = {
                         items: [
                             {
                                 num: "01",
-                                title: "인력 지원 제도",
+                                title: "인센티브 제도",
                                 desc: "매출 향상, 신상품 도입 등 점포 경쟁력 향상을 위해<br class=\"p_br\" />노력하시는 경영주님을 위한 인센티브 제도",
                             },
                             {
                                 num: "02",
                                 title: "카운터FF 운영 우수점 지원",
                                 desc: "카운터FF 매출 활성화 도모",
-                                bullets: ["치킨25 운영비 지원", "카페25 운영비 지원", "위생등급 취득 점포 점수 필터 지원"],
+                                bullets: ["치킨25 운영 지원제도", "카페25 운영 지원제도", "식품안심업소 취득 점포 점수 필터 지원"],
                             },
                             {
                                 num: "03",
@@ -2824,9 +2807,9 @@ const langData = {
                             { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
                         ],
                         items: [
-                            { num: "01", title: "10년차 장기운영 지원 혜택", desc: "10주년 운영 경영주님 예우",bullets: ["기념패", "건강검진"] },
-                            { num: "02", title: "20년차 장기운영 지원 혜택", desc: "20’s Clubf 가입", bullets: ["기념패", "여행상품권", "건강검진"] },
-                            { num: "03", title: "30년차 장기운영 지원 혜택", desc: "30주년 운영 경영주님 점포 세레머니 진행", bullets: ["기념패", "30주년 기념 행사", "여행상품권","건강검진"]},
+                            { num: "01", title: "10주년 장기운영 지원 혜택", desc: "10주년 운영 경영주님 지원",bullets: ["기념패", "건강검진 (1인권)"] },
+                            { num: "02", title: "20주년 장기운영 지원 혜택", desc: "20주년 운영 경영주님 지원", bullets: ["기념패", "건강검진(2인권)", "여행상품권"] },
+                            { num: "03", title: "30주년 장기운영 지원 혜택", desc: "30주년 운영 경영주님 지원", bullets: ["기념패", "건강검진(2인권)", "여행상품권","점포 세레머니 및 기념 행사"]},
                             { num: "04", title: "우수점포 경영주 포상", desc: null, bullets: ["우수점포 대상 혜택 지급"] },
                         ],
                     },
@@ -3716,9 +3699,9 @@ button { background-color: #fff }
 
 
 /* step 아이콘 */
-.gift_usage_wrap .gift_usage_group :deep(.step_list .step_item) {align-items:center; flex-direction:row;}
-.gift_usage_wrap .gift_usage_group :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
-
+.gift_usage_wrap .gift_usage_group :deep(.step_list .step_item) {gap:24px;align-items:center; flex-direction:row;}
+:deep(.step_list.step_type2){column-gap:16px;}
+:deep(.step_list .step_item > span){ width: 40px; height: 40px; background-color: transparent; background-image: url('@/assets/images/sub/icon_cont_40.png'); background-repeat: no-repeat; }
 .gift_usage_wrap .gift_usage_group:nth-of-type(1) :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-260px -103px;}
 .gift_usage_wrap .gift_usage_group:nth-of-type(1) :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-100px -103px;}
 .gift_usage_wrap .gift_usage_group:nth-of-type(1) :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-180px -103px;}
@@ -3729,35 +3712,22 @@ button { background-color: #fff }
 .gift_usage_wrap .gift_usage_group:nth-of-type(2) :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-100px -20px;}
 .gift_usage_wrap .gift_usage_group:nth-of-type(2) :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-180px -20px;}
 .gift_usage_wrap .gift_usage_group:nth-of-type(2) :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-260px -20px;}
-
-
-.usim_use :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
 .usim_use :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-20px -20px;}
 .usim_use :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-260px -103px;}
 .usim_use :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-20px -103px;}
 .usim_use :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-340px -103px;}
-
-
-.hi_pass :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
 .hi_pass :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-180px -20px;}
 .hi_pass :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-180px -103px;}
 .hi_pass :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-420px -103px;}
-
-.sec_unpaid_method :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
 .sec_unpaid_method :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-500px -103px;}
 .sec_unpaid_method :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-580px -103px;}
 .sec_unpaid_method :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-660px -103px;}
 .sec_unpaid_method :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-260px -186px;}
 .sec_unpaid_method :deep(.step_list .step_item:nth-of-type(5) span) {background-position:-180px -20px;}
-
-.sec_mall_payment_method :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
 .sec_mall_payment_method :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-500px -186px;}
 .sec_mall_payment_method :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-20px -20px;}
 .sec_mall_payment_method :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-180px -20px;}
 .sec_mall_payment_method :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-580px -186px;}
-
-.delivery_panel :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat;}
-
 .delivery_panel .service_panel.delivery_panel_1 :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-500px -186px;}
 .delivery_panel .service_panel.delivery_panel_1 :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-580px -186px;}
 .delivery_panel .service_panel.delivery_panel_1 :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-660px -186px;}
@@ -3839,8 +3809,6 @@ button { background-color: #fff }
 
 @media (max-width: 768px) {
     .pop_card_body { min-height: 196px; padding-right: 8px }
-
-    .delivery_panel :deep(.step_list .step_item > span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
 
     .delivery_panel .service_panel :deep(.feature_card_item .feature_card_icon) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
     .delivery_panel .service_panel.delivery_panel_1 :deep(.swiper-slide:nth-of-type(1) .feature_card_icon) {background-position:-420px -186px;}
@@ -4046,12 +4014,12 @@ button { background-color: #fff }
 @media (max-width: 768px) {
     .gift_usage_group > h3 { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
     .gift_usage_wrap .gift_usage_group :deep(.step_list .step_item) {align-items:flex-start; flex-direction:row;}
-    .gift_usage_wrap .gift_usage_group :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
-
-    .usim_use :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
-    .hi_pass :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
-    .sec_unpaid_method :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
-    .sec_mall_payment_method :deep(.step_list .step_item span) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
+    .gift_usage_wrap .gift_usage_group :deep(.step_list .step_item span),
+    .usim_use :deep(.step_list .step_item span),
+    .hi_pass :deep(.step_list .step_item span),
+    .sec_unpaid_method :deep(.step_list .step_item span),
+    .sec_mall_payment_method :deep(.step_list .step_item span),
+    .delivery_panel :deep(.step_list .step_item span) { background-color: transparent; background-image: url('@/assets/images/sub/icon_cont_32.png'); background-repeat: no-repeat; }
 }
 .gift_purchase_wrap { display: flex; gap: 40px; align-items: flex-start }
 .gift_purchase_img { width: calc(50% - 10px); margin: 0; padding: 0; border-radius: 12px; flex-shrink: 0; overflow: hidden }

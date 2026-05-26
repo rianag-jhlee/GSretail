@@ -615,7 +615,7 @@
             <section class="sec_seminar panel" v-show="activeD1 === 1">
                 <div class="seminar_head">
                     <p>GS THE FRESH(GS수퍼마켓) 가맹 사업에 대한<br class="p_br">자세하고 다양한 정보를 얻을 수 있는 사업설명회에 참여해 보세요.</p>
-                    <Buttons btn-class="btn_big fill primary btn_icon_arrow after" data-popid="modal_gsrst_seminar" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">사업 설명회 신청</Buttons>
+                    <Buttons btn-class="btn_big fill primary btn_icon_arrow after" data-popid="gsrst010201" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">사업 설명회 신청</Buttons>
                 </div>
                 <ul class="seminar_list">
                     <li v-for="(item, i) in seminarList" :key="i" class="seminar_item">
@@ -721,7 +721,7 @@
                             
                             <!--<button type="button" class="consult_tel_btn" @click="toggleConsultTel(i)">연락처 확인하기</button><p v-show="consultTelOpen[i]" class="consult_tel">{{ card.tel }}</p>-->
                             <div class="consult_foot">
-                                <Buttons btn-class="btn_big border btn_icon_arrow after" data-popid="modal_gsrst_consult" data-type="lg" data-cont="gsrst010301" @click.prevent="openModal">상담신청</Buttons>
+                                <Buttons btn-class="btn_big border btn_icon_arrow after" data-popid="gsrst010301" data-type="lg" data-cont="gsrst010301" @click.prevent="openModal">상담신청</Buttons>
                             </div>
                         </div>
                     </li>
@@ -747,13 +747,13 @@
         <!-- //[quick_menu · 템플릿] -->
     </div>
 
-    <!-- 사업설명회 신청 모달 -->
-    <div id="modal_gsrst_seminar" class="modal_wrap">
+    <!-- modal_wrap · 사업설명회 신청 -->
+    <div id="gsrst010201" class="modal_wrap">
         <div class="modal_container"></div>
     </div>
-    <!-- //사업설명회 신청 모달 -->
+    <!-- //modal_wrap -->
     <!-- 상담 신청 모달 -->
-    <div id="modal_gsrst_consult" class="modal_wrap">
+    <div id="gsrst010301" class="modal_wrap">
         <div class="modal_container"></div>
     </div>
     <!-- //상담 신청 모달 -->
@@ -883,7 +883,10 @@ const seminarList = [
 
 function openModal(event) {
     const el = event.currentTarget;
-    modal.open(el.dataset.popid, el.dataset.type || "default", el);
+    const popId = el.dataset.popid;
+    const type = el.dataset.type || "default";
+    if (!popId) return;
+    modal.open(popId, type, el);
 }
 
 /* ── 추천 점포 찾기 ── */
