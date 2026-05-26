@@ -3,7 +3,7 @@
         <!-- HEADER -->
         <header class="page_header top_visual" :style="{ backgroundImage: `url(${imgBg})` }">
             <div class="header_inner">
-                <h2 class="header_title">GS THE FRESH 창업안내</h2>
+                <h2 class="header_title">{{ t.headerTitle }}</h2>
             </div>
         </header>
 
@@ -20,7 +20,7 @@
                 <!-- Depth 3: 타입 탭 -->
                 <div class="tab_d3_wrap">
                     <div class="inner">
-                        <nav class="tab_type" role="tablist" aria-label="가맹 타입">
+                        <nav class="tab_type" role="tablist" :aria-label="t.franchise.tabAria">
                             <button
                                 v-for="(tab, i) in depth3Tabs"
                                 :key="i"
@@ -34,9 +34,8 @@
                     </div>
                 </div>
                 <div class="tab_content_wrap">
-                    <!-- GSF1타입 (228:18909) -->
-                    <div v-show="activeD3 === 0" class="tab_content" role="tabpanel">
-                        <p class="type_info_bar">GSF1타입 - 본부가 임차하여 경영주 운영</p>
+                    <div v-for="(guide, guideIndex) in franchiseGuideTypes" :key="guide.tab" v-show="activeD3 === guideIndex" class="tab_content" role="tabpanel">
+                        <p class="type_info_bar">{{ guide.infoBar }}</p>
                         <div class="type_table_wrap">
                             <table class="type_table">
                                 <colgroup>
@@ -46,268 +45,39 @@
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th colspan="2" scope="col">항목</th>
-                                        <th scope="col">비용</th>
+                                        <th colspan="2" scope="col">{{ t.franchise.tableHead.item }}</th>
+                                        <th scope="col">{{ t.franchise.tableHead.cost }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th rowspan="5" scope="rowgroup">투자 금액</th>
-                                        <th>가맹비</th>
-                                        <td>1,100만원 <br class="m_br">(부가세포함)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>초기 상품대</th>
-                                        <td>7,000만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>소모품</th>
-                                        <td>700만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>시설보증금</th>
-                                        <td>500만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>개점투자 계</th>
-                                        <td>9,300만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">임차비용 부담주체</th>
-                                        <td>본부</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">시설투자 부담주체</th>
-                                        <td>본부</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">예치보증금</th>
-                                        <td>10,000만원 (보증보험 또는 현금)</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">경영주 투자 합계</th>
-                                        <td>최소 19,300만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">가맹 수수료 <br class="m_br">(부가세별도)</th>
-                                        <td>57% 매출총이익 구간별 52% ~ 62%</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">계약기간 <br class="m_br">(최초/재계약)</th>
-                                        <td>3년 / 3년 단위</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">담보설정</th>
-                                        <td>없음</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">** 최저 <br class="m_br">수입 보조금</th>
-                                        <td>영업면적 200평  <br class="m_br">초과 : 18백만/월 영업면적 165평 이상~200평 이하 : 16백만/월 영업면적 165평 미만 : 13백만/월</td>
+                                    <tr v-for="(row, rowIndex) in guide.tableRows" :key="rowIndex">
+                                        <th v-if="row.main" :rowspan="row.mainRowspan" scope="rowgroup">{{ row.main }}</th>
+                                        <th :colspan="row.subColspan || 1" :scope="row.scope || 'row'" v-html="row.sub"></th>
+                                        <td v-html="row.cost"></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <ul class="list_caution">
-                                <li>
-                                    <p>*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)</p>
+                            <ul v-if="guide.cautions?.length" class="list_caution">
+                                <li v-for="(caution, cautionIndex) in guide.cautions" :key="cautionIndex">
+                                    <p v-html="caution.text"></p>
                                 </li>
                             </ul>
                         </div>
-                        <div class="type_graph_wrap">
-                            <strong>GSF1타입</strong>
+                        <div v-if="guide.graph" class="type_graph_wrap">
+                            <strong>{{ guide.graph.title }}</strong>
                             <ul class="type_graph_inner">
-                                <li class="type_graph_item">
-                                    <p>매출이익<br class="p_br" />배분율</p>
+                                <li v-for="(graphItem, graphIndex) in guide.graph.items" :key="graphIndex" class="type_graph_item">
+                                    <p v-html="graphItem.label"></p>
                                     <picture>
-                                        <source media="(max-width: 768px)" :srcset="imgGph01Mo" />
-                                        <img :src="imgGph01" alt="GSF1타입 매출이익 배분율" />
-                                    </picture>
-                                </li>
-                                <li class="type_graph_item">
-                                    <p>월매출<br class="p_br" />총 이익 구간</p>
-                                    <picture>
-                                        <source media="(max-width: 768px)" :srcset="imgGph02Mo" />
-                                        <img :src="imgGph02" alt="GSF1타입 월매출 총 이익 구간" />
+                                        <source media="(max-width: 768px)" :srcset="graphItem.imgMo" />
+                                        <img :src="graphItem.img" :alt="graphItem.alt" />
                                     </picture>
                                 </li>
                             </ul>
                         </div>
-                    </div>
-
-                    <!-- GSF2타입 / GSF3타입: 추후 구현 -->
-                    <div v-show="activeD3 === 1" class="tab_content" role="tabpanel">
-                        <p class="type_info_bar">GSF2타입 - 경영주가 총투자비의 51% 부담. 경영주 운영</p>
-                        <div class="type_table_wrap">
-                            <table class="type_table">
-                                <colgroup>
-                                    <col class="col_item_main" />
-                                    <col class="col_item_sub" />
-                                    <col class="col_cost" />
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th colspan="2" scope="col">항목</th>
-                                        <th scope="col">비용</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th rowspan="5" scope="rowgroup">투자 금액</th>
-                                        <th>가맹비</th>
-                                        <td>1,100만원 <br class="m_br">(부가세 포함)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>초기 상품대</th>
-                                        <td>7,000만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>소모품</th>
-                                        <td>700만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>시설보증금</th>
-                                        <td>500만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>개점투자 계</th>
-                                        <td>9,300만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">임차비용 부담주체</th>
-                                        <td>본부</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">시설투자 부담주체</th>
-                                        <td>본부</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">예치보증금</th>
-                                        <td>* 점포 총 투자비 X 51% ~ 9,300만원 (현금)</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">경영주 투자 합계</th>
-                                        <td>9,300만원 + 예치보증금</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">가맹 수수료 <br class="m_br">(부가세별도)</th>
-                                        <td>49% 매출총이익 구간별 49% ~ 55%</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">계약기간 <br class="m_br">(최초/재계약)</th>
-                                        <td>3년 / 3년 단위</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">담보설정</th>
-                                        <td>없음</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">** 최저 <br class="m_br">수입 보조금</th>
-                                        <td>영업면적 200평  <br class="m_br">초과 : 18백만/월 영업면적 165평 이상~200평 이하 : 16백만/월 영업면적 165평 미만 : 13백만/월</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <ul class="list_caution">
-                                <li><p>*점포 총 투자비는 임차비용, 시설투자비용, 개점투자비의 총 합산액.</p></li>
-                                <li><p>**경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)</p></li>
-                            </ul>
-                        </div>
-                        <div class="type_graph_wrap">
-                            <strong>GSF2타입</strong>
-                            <ul class="type_graph_inner">
-                                <li class="type_graph_item">
-                                    <p>매출이익<br class="p_br" />배분율</p>
-                                    <picture>
-                                        <source media="(max-width: 768px)" :srcset="imgGph03Mo" />
-                                        <img :src="imgGph03" alt="GSF1타입 매출이익 배분율" />
-                                    </picture>
-                                </li>
-                                <li class="type_graph_item">
-                                    <p>월매출<br class="p_br" />총 이익 구간</p>
-                                    <picture>
-                                        <source media="(max-width: 768px)" :srcset="imgGph04Mo" />
-                                        <img :src="imgGph04" alt="GSF1타입 월매출 총 이익 구간" /> 
-                                    </picture>
-                                </li>
-                            </ul>        
-                        </div>
-                        <ul class="list_caution">
-                            <li><p class="txt_warning">*가맹계약 체결 간 가맹점사업자와 가맹본부가 협의에 따라 가맹수수료는 달리 정할 수 있습니다</p></li>
+                        <ul v-if="guide.warning" class="list_caution">
+                            <li><p class="txt_warning">{{ guide.warning }}</p></li>
                         </ul>
-                    </div>
-                    <div v-show="activeD3 === 2" class="tab_content" role="tabpanel">
-                        <p class="type_info_bar">GSF3타입 - 경영주가 임차하여 경영주 운영</p>
-                        <div class="type_table_wrap">
-                            <table class="type_table">
-                                <colgroup>
-                                    <col class="col_item_main" />
-                                    <col class="col_item_sub" />
-                                    <col class="col_cost" />
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th colspan="2" scope="col">항목</th>
-                                        <th scope="col">비용</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th rowspan="5" scope="rowgroup">투자 금액</th>
-                                        <th>가맹비</th>
-                                        <td>1,100만원 <br class="m_br">(부가세 포함)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>초기 상품대</th>
-                                        <td>7,000만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>소모품</th>
-                                        <td>700만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>시설보증금</th>
-                                        <td>500만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>개점투자 계</th>
-                                        <td>9,300만원</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">임차비용 부담주체</th>
-                                        <td>경영주</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">시설투자 부담주체</th>
-                                        <td>본부</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">예치보증금</th>
-                                        <td>없음</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">경영주 투자 합계</th> 
-                                        <td>9,300만원 + 예치보증금</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">가맹 수수료 <br class="m_br">(부가세별도)</th>
-                                        <td>24%</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">계약기간 <br class="m_br">(최초/재계약)</th>
-                                        <td>5년 / 5년 단위%</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">담보설정</th>
-                                        <td>최소 2억 이상</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2" scope="row">** 최저 <br class="m_br">수입 보조금</th>
-                                        <td>해당사항 없음</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <ul class="list_caution">
-                                <li><p>*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. <br class="mo"/>(개점일로부터 최소 1년만 적용)</p></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
 
@@ -317,51 +87,49 @@
             <div class="panel sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
                 <div class="link_wrap">
-                    <Buttons tag="a" href="#none" btn-class="btn_icon btn_xl">설명회신청 바로가기</Buttons>
+                    <Buttons tag="a" :href="t.procedure.buttonHref" btn-class="btn_icon btn_xl">{{ t.procedure.buttonLabel }}</Buttons>
                 </div>
             </div>
  
             <!-- 창업 전 필수 확인사항 -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 2">
                 <section class="sec_precaution">
-                    <h3 class="precaution_title mo_only">가맹 해약<br class="p_br">수수료</h3>
+                    <h3 class="precaution_title mo_only" v-html="t.precaution.title"></h3>
                     <div class="sec_precaution_inner">
                         <aside class="precaution_intro">
-                            <h3 class="pc_only">가맹 해약<br>수수료</h3>
+                            <h3 class="pc_only" v-html="t.precaution.title"></h3>
                         </aside>
                         <div class="precaution_main">
                             <div class="precaution_block precaution_block_sm">
-                                <h4>GSF1, GSF2 타입</h4>
+                                <h4>{{ t.precaution.blockTitle1 }}</h4>
                                 <FeatureCards type="num" :items="precautionCards1" :no-swipe="true" />
                             </div>
                             <div class="precaution_block">
-                                <h4>GSF3 타입</h4>
+                                <h4>{{ t.precaution.blockTitle2 }}</h4>
                                 <FeatureCards type="num" :items="precautionCards2" :no-swipe="true" />
                             </div>
                         </div>
                     </div>
                     <ul class="list_caution">
-                        <li><p>가맹 본부 회계 기준, 감가상각 건으로 별도 보상</p></li>
-                        <li><p>* 손해 배상금 별도이며 과거 영업기간이 1년 이하인 경우 해당 영업기간을 적용함.</p></li>
-                        <li><p>* '과거 1년간'의 기간은 관리금 중도해약인 경우 중도해약 월로부터 가까운 기간으로 하고, 해지사유 발생인 경우에는 계약 해지 사유가 발생한 달의 직전월의 말일로부터 기 기산함.</p></li>
+                        <li v-for="(caution, cautionIndex) in t.precaution.cautions" :key="cautionIndex"><p>{{ caution }}</p></li>
                     </ul>
                 </section>
             </div>
 
             <!-- 추천 점포 찾기 (activeD1 === 2) -->
             <section class="sec_store panel" v-show="activeD1 === 2">
-                <p class="tab_intro">철저한 상권 조사를 바탕으로 가맹/창업을 위한 최적의 점포를 소개합니다.</p>
+                <p class="tab_intro">{{ t.store.intro }}</p>
                 <div class="store_search">
                     <!-- 지역 -->
                     <div class="search_group">
-                        <span class="search_group_label">지역</span>
+                        <span class="search_group_label">{{ t.store.regionLabel }}</span>
                         <div class="chip_list">
                             <button
                                 type="button"
                                 class="chip"
                                 :class="{ active: filterRegion === '' }"
                                 @click="filterRegion = ''"
-                            >전체</button>
+                            >{{ t.store.allLabel }}</button>
                             <button
                                 v-for="r in storeRegions"
                                 :key="r.value"
@@ -378,34 +146,30 @@
                     <div class="search_bottom_row">
                         <!-- 가맹타입 -->
                         <div class="search_group">
-                            <span class="search_group_label">가맹타입</span>
+                            <span class="search_group_label">{{ t.store.franchiseTypeLabel }}</span>
                             <div class="chip_list">
                                 <button
-                                    v-for="t in franchiseTypes"
-                                    :key="t.value"
+                                    v-for="typeItem in franchiseTypes"
+                                    :key="typeItem.value"
                                     type="button"
                                     class="chip"
-                                    :class="{ active: filterFranchiseType === t.value }"
-                                    @click="filterFranchiseType = filterFranchiseType === t.value ? '' : t.value"
-                                >{{ t.label }}</button>
+                                    :class="{ active: filterFranchiseType === typeItem.value }"
+                                    @click="filterFranchiseType = filterFranchiseType === typeItem.value ? '' : typeItem.value"
+                                >{{ typeItem.label }}</button>
                             </div>
                         </div>
                         <!-- 점포유형/청년창업 -->
                         <div class="search_group">
-                            <span class="search_group_label">점포유형/청년창업</span>
+                            <span class="search_group_label">{{ t.store.storeTypeLabel }}</span>
                             <div class="chip_list">
                                 <button
+                                    v-for="option in storeTypeOptions"
+                                    :key="option.value"
                                     type="button"
                                     class="chip"
-                                    :class="{ active: filterStoreType === '신규점' }"
-                                    @click="filterStoreType = filterStoreType === '신규점' ? '' : '신규점'"
-                                >신규점</button>
-                                <button
-                                    type="button"
-                                    class="chip"
-                                    :class="{ active: filterStoreType === '기존점' }"
-                                    @click="filterStoreType = filterStoreType === '기존점' ? '' : '기존점'"
-                                >기존점</button>
+                                    :class="{ active: filterStoreType === option.value }"
+                                    @click="filterStoreType = filterStoreType === option.value ? '' : option.value"
+                                >{{ option.label }}</button>
                                 <span class="chip_sep_v"></span>
                                 <span class="chip_youth_wrap">
                                     <button
@@ -413,12 +177,12 @@
                                         class="chip"
                                         :class="{ active: filterYouth }"
                                         @click="filterYouth = !filterYouth"
-                                    >청년창업</button>
+                                    >{{ t.store.youthLabel }}</button>
                                     <button
                                         type="button"
                                         class="youth_info_btn"
                                         @click.stop="youthPopoverVisible = !youthPopoverVisible"
-                                        aria-label="청년창업 안내"
+                                        :aria-label="t.store.youthInfoAria"
                                     >?</button>
                                     <div
                                         v-if="youthPopoverVisible"
@@ -426,14 +190,14 @@
                                         role="tooltip"
                                         @click.stop
                                     >   
-                                        <strong>청년창업이란?</strong>
-                                        <p>20대 청년들을 위해서 투자비 일부를 할인해드리는 제도에요.</p>
-                                        <a href="#">청년창업 자세히 보러가기</a>
+                                        <strong>{{ t.store.youthPopoverTitle }}</strong>
+                                        <p>{{ t.store.youthPopoverDesc }}</p>
+                                        <a :href="t.store.youthPopoverHref">{{ t.store.youthPopoverLinkLabel }}</a>
                                         <button
                                             type="button"
                                             class="layer_tooltip_close"
                                             @click="youthPopoverVisible = false"
-                                            aria-label="닫기"
+                                            :aria-label="t.store.closeAria"
                                         ></button>
                                     </div>
                                 </span>
@@ -441,15 +205,15 @@
                         </div>
                         <!-- 검색 -->
                         <div class="search_group search_group_input">
-                            <span class="search_group_label">검색</span>
+                            <span class="search_group_label">{{ t.store.searchLabel }}</span>
                             <div class="store_search_input_wrap">
                                 <input
                                     type="text"
                                     class="store_search_input"
-                                    placeholder="지역명, 태그...."
+                                    :placeholder="t.store.searchPlaceholder"
                                     v-model="storeSearchQuery"
                                 />
-                                <button type="button" class="store_search_btn" aria-label="검색">
+                                <button type="button" class="store_search_btn" :aria-label="t.store.searchAria">
                                 </button>
                             </div>
                         </div>
@@ -459,7 +223,7 @@
                 <div class="store_list_wrap"> 
                     <!-- 상단 바: 총 개수 + 정렬/뷰 토글 -->
                     <div class="store_list_bar">
-                        <span class="store_count">총 <strong>{{ storeList.length }} </strong>개 점포</span>
+                        <span class="store_count">{{ t.store.countPrefix }} <strong>{{ storeList.length }} </strong>{{ t.store.countSuffix }}</span>
                         <div class="store_bar_right">
                             <div class="store_sort_group">
                                 <button
@@ -467,13 +231,13 @@
                                     class="sort_btn"
                                     :class="{ active: storeSort === 'latest' }"
                                     @click="storeSort = 'latest'"
-                                >최신순</button>
+                                >{{ t.store.sortLatest }}</button>
                                 <button
                                     type="button"
                                     class="sort_btn"
                                     :class="{ active: storeSort === 'cost' }"
                                     @click="storeSort = 'cost'"
-                                >투자비 낮은순</button>
+                                >{{ t.store.sortCost }}</button>
                             </div>
                             <div class="store_view_group">
                                 <button
@@ -481,7 +245,7 @@
                                     class="view_btn"
                                     :class="{ active: storeView === 'list' }"
                                     @click="storeView = 'list'"
-                                    aria-label="목록형"
+                                    :aria-label="t.store.viewListAria"
                                 >
                                 </button>
                                 <button
@@ -489,7 +253,7 @@
                                     class="view_btn"
                                     :class="{ active: storeView === 'grid' }"
                                     @click="storeView = 'grid'"
-                                    aria-label="격자형"
+                                    :aria-label="t.store.viewGridAria"
                                 >
                                 </button>
                             </div>
@@ -511,14 +275,7 @@
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th>지역</th>
-                                    <th>타입</th>
-                                    <th>유형</th>
-                                    <th>투자비</th>
-                                    <th>해시태그</th>
-                                    <th>면적</th>
-                                    <th>등록일</th>
-                                    <th>상세</th>
+                                    <th v-for="header in t.store.tableHeaders" :key="header">{{ header }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -526,7 +283,7 @@
                                     <tr :class="{ is_open: openTableId === item.id }">
                                         <td>{{ item.region }}</td>
                                         <td>
-                                            <span v-for="t in item.type" :key="t" class="type_badge" :class="getBadgeClass(t)">{{ t }}</span>
+                                            <span v-for="badge in item.type" :key="badge" class="type_badge" :class="getBadgeClass(badge)">{{ badge }}</span>
                                         </td>
                                         <td>{{ item.form }}</td>
                                         <td>{{ item.cost }}</td>
@@ -539,7 +296,7 @@
                                                 class="detail_toggle_btn"
                                                 @click="openTableId = openTableId === item.id ? null : item.id"
                                             >
-                                                {{ openTableId === item.id ? '접기' : '상세' }}
+                                                {{ openTableId === item.id ? t.store.detailCloseLabel : t.store.detailOpenLabel }}
                                             </button>
                                         </td>
                                     </tr>
@@ -568,9 +325,9 @@
                                     <div class="accordion_head_info">
                                         <p class="accordion_region">{{ item.region }}</p>
                                         <div class="accordion_badges">
-                                            <span v-for="t in item.type" :key="t" class="type_badge" :class="getBadgeClass(t)">{{ t }}</span>
+                                            <span v-for="badge in item.type" :key="badge" class="type_badge" :class="getBadgeClass(badge)">{{ badge }}</span>
                                             <span class="type_badge badge_gray">{{ item.form }}</span>
-                                            <span v-if="item.isYouth" class="type_badge badge_gray">청년</span>
+                                            <span v-if="item.isYouth" class="type_badge badge_gray">{{ t.store.youthShortLabel }}</span>
                                         </div>
                                     </div>
                                 </template>
@@ -614,8 +371,8 @@
             <!-- 사업설명회 (activeD1 === 1) -->
             <section class="sec_seminar panel" v-show="activeD1 === 1">
                 <div class="seminar_head">
-                    <p>GS THE FRESH(GS수퍼마켓) 가맹 사업에 대한<br class="p_br">자세하고 다양한 정보를 얻을 수 있는 사업설명회에 참여해 보세요.</p>
-                    <Buttons btn-class="btn_big fill primary btn_icon_arrow after" data-popid="gsrst010201" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">사업 설명회 신청</Buttons>
+                    <p v-html="t.seminar.headDesc"></p>
+                    <Buttons btn-class="btn_big fill primary btn_icon_arrow after" data-popid="gsrst010201" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">{{ t.seminar.applyButtonLabel }}</Buttons>
                 </div>
                 <ul class="seminar_list">
                     <li v-for="(item, i) in seminarList" :key="i" class="seminar_item">
@@ -648,12 +405,11 @@
             
             <!-- 경영주 지원제도 (activeD1 === 3) -->
             <section class="sec_owner_support panel" v-show="activeD1 === 3">
-                <p class="tab_intro">GS THE FRESH는 <br class="m_br"/><span>경영주와의 공동의 발전</span>을 위해 <br />
-                    다양한 상생 제도를 운영하고 있습니다.</p>
+                <p class="tab_intro" v-html="t.support.intro"></p>
                 <PanelHeader
                     :hero="imgBg02"
-                    title="운영지원제도"
-                    desc="GS THE FRESH 경영주님의 원활한 점포 운영을 위한 지원 제도 입니다."
+                    :title="t.support.panelTitle"
+                    :desc="t.support.panelDesc"
                 />
                 <FeatureCards type="num" :items="supportCards" :swiper-space-between="0" />
             </section>
@@ -663,22 +419,22 @@
             <section class="sec_consult panel"  v-show="activeD1 === 4">
                 <PanelHeader
                     :hero=null
-                    title="컨설턴트와 1:1 상담"
-                    desc="가맹/창업 컨설턴트가 1:1로 상담해 드립니다. <br /> 가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.">
+                    :title="t.consult.panelTitle"
+                    :desc="t.consult.panelDesc">
                     <ul class="caution_list">
                         <li>
-                            <p>※ 주말 및 공휴일은 연락이 불가하며 평일 09:00~17:30 사이에 연락 부탁드립니다.</p>
+                            <p>{{ t.consult.caution }}</p>
                         </li>
                     </ul>
                 </PanelHeader>
                 <ul class="consult_card_list">
                     <li v-for="(card, i) in consultCards" :key="i" class="consult_card">
                         <div class="consult_thumb">
-                            <img :src="card.img" :alt="card.name + ' 컨설턴트'" />
+                            <img :src="card.img" :alt="`${card.name} ${t.consult.label}`" />
                         </div>
                         <div class="consult_body">
                             <div class="label_wrap">
-                                <p class="consult_label">컨설턴트</p>
+                                <p class="consult_label">{{ t.consult.label }}</p>
                                 <p class="consult_label">{{ card.name }}</p>
                             </div>
                             <p class="consult_label region">{{ card.region }}</p>
@@ -688,7 +444,7 @@
                                     type="button"
                                     class="consult_tel_btn"
                                     @click.stop="toggleTooltip(i)"
-                                >연락처 확인하기</button>
+                                >{{ t.consult.telButtonLabel }}</button>
 
                                 <div
                                     v-if="activeCardIndex === i"
@@ -696,55 +452,52 @@
                                     role="tooltip"
                                     @click.stop
                                 >   
-                                    <strong>연락처</strong>
+                                    <strong>{{ t.consult.tooltipTitle }}</strong>
                                     <div class="pop_space">
                                         <dl>
-                                            <dt>전화 번호</dt>
-                                            <dd>010-0000-0000</dd> 
-                                            <dt>카카오톡</dt>
+                                            <dt>{{ t.consult.phoneLabel }}</dt>
+                                            <dd>{{ card.tel }}</dd> 
+                                            <dt>{{ t.consult.kakaoLabel }}</dt>
                                             <dd>
                                                 <figure class="image_wrap">
-                                                    <img src="" alt="QR Code">
+                                                    <img src="" :alt="t.consult.qrAlt">
                                                 </figure>
                                             </dd>
-                                            <dd>* 카카오톡 상담 가능</dd>
+                                            <dd>{{ t.consult.kakaoNotice }}</dd>
                                         </dl>
                                     </div>
                                     <button
                                         type="button"
                                         class="layer_tooltip_close"
                                         @click="activeCardIndex = null"
-                                        aria-label="닫기"
+                                        :aria-label="t.consult.closeAria"
                                     ></button>
                                 </div>
                             </div>
                             
-                            <!--<button type="button" class="consult_tel_btn" @click="toggleConsultTel(i)">연락처 확인하기</button><p v-show="consultTelOpen[i]" class="consult_tel">{{ card.tel }}</p>-->
+                            
                             <div class="consult_foot">
-                                <Buttons btn-class="btn_big border btn_icon_arrow after" data-popid="gsrst010301" data-type="lg" data-cont="gsrst010301" @click.prevent="openModal">상담신청</Buttons>
+                                <Buttons btn-class="btn_big border btn_icon_arrow after" data-popid="gsrst010301" data-type="lg" data-cont="gsrst010301" @click.prevent="openModal">{{ t.consult.applyButtonLabel }}</Buttons>
                             </div>
                         </div>
                     </li>
                 </ul>
 
                 <div class="info_banner">
-                    <p>'입지' 및 '점포소유' 상담은 입지제안 사이트를 통해 확인 부탁드립니다.</p>
-                    <Buttons btn-class="btn_mid border btn_icon_arrow after">바로가기</Buttons>
+                    <p>{{ t.consult.infoBannerText }}</p>
+                    <Buttons btn-class="btn_mid border btn_icon_arrow after">{{ t.consult.infoBannerButtonLabel }}</Buttons>
                 </div>
             </section>
         </div>
-        <!-- [quick_menu · 템플릿] .wrap_gsrst 직하위(cont_inner 밖)에 둠. 푸터는 App.vue router-view 밖이므로 도킹 계산 시 wrap 기준 사용 -->
+        
         <ul
             ref="quickMenuRef"
             class="quick_menu"
             :class="{ is_visible: showQuickMenu }"
             :aria-hidden="!showQuickMenu"
         >
-            <li><button type="button">창업안내</button></li>
-            <li><button type="button">입점상담</button></li>
-            <li><button type="button">고객센터</button></li>
+            <li v-for="(label, index) in t.quickMenu" :key="index"><button type="button">{{ label }}</button></li>
         </ul>
-        <!-- //[quick_menu · 템플릿] -->
     </div>
 
     <!-- modal_wrap · 사업설명회 신청 -->
@@ -762,7 +515,7 @@
 </template>
 
 <script setup> 
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
+import { ref, computed, defineProps, watch, onMounted, onUnmounted, nextTick } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import Pagination from "@/components/Pagination.vue";
 import Steps from "@/components/Steps.vue";
@@ -784,102 +537,312 @@ import imgGph03 from "@/assets/images/dummy/gsrst01010101_gph_03.png";
 import imgGph03Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_03_mo.png";
 import imgGph04 from "@/assets/images/dummy/gsrst01010101_gph_04.png";
 import imgGph04Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_04_mo.png";
+
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
+    },
+});
+
+const langData = {
+    ko: {
+        headerTitle: "GS THE FRESH 창업안내",
+        depth1Tabs: [
+            { item: "GS THE FRESH 창업 알아보기" },
+            { item: "사업설명회" },
+            { item: "추천 점포 찾기" },
+            { item: "경영주 지원제도" },
+            { item: "상담 및 신청" },
+            { item: "가맹계약시스템" },
+        ],
+        depth2Tabs: [
+            { item: "가맹 조건 안내" },
+            { item: "가맹/창업 절차" },
+            { item: "창업 전 필수 확인사항" },
+        ],
+        franchise: {
+            tabAria: "가맹 타입",
+            tableHead: {
+                item: "항목",
+                cost: "비용",
+            },
+            guideTypes: [
+                {
+                    tab: "GSF1타입",
+                    infoBar: "GSF1타입 - 본부가 임차하여 경영주 운영",
+                    tableRows: [
+                        { main: "투자 금액", mainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세포함)" },
+                        { sub: "초기 상품대", cost: "7,000만원" },
+                        { sub: "소모품", cost: "700만원" },
+                        { sub: "시설보증금", cost: "500만원" },
+                        { sub: "개점투자 계", cost: "9,300만원" },
+                        { sub: "임차비용 부담주체", subColspan: 2, scope: "row", cost: "본부" },
+                        { sub: "시설투자 부담주체", subColspan: 2, scope: "row", cost: "본부" },
+                        { sub: "예치보증금", subColspan: 2, scope: "row", cost: "10,000만원 (보증보험 또는 현금)" },
+                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "최소 19,300만원" },
+                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 2, scope: "row", cost: "57% 매출총이익 구간별 52% ~ 62%" },
+                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 2, scope: "row", cost: "3년 / 3년 단위" },
+                        { sub: "담보설정", subColspan: 2, scope: "row", cost: "없음" },
+                        { sub: "** 최저 <br class=\"m_br\">수입 보조금", subColspan: 2, scope: "row", cost: "영업면적 200평  <br class=\"m_br\">초과 : 18백만/월 영업면적 165평 이상~200평 이하 : 16백만/월 영업면적 165평 미만 : 13백만/월" },
+                    ],
+                    cautions: [
+                        { text: "*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
+                    ],
+                    graph: {
+                        title: "GSF1타입",
+                        items: [
+                            { label: "매출이익<br class=\"p_br\" />배분율", img: imgGph01, imgMo: imgGph01Mo, alt: "GSF1타입 매출이익 배분율" },
+                            { label: "월매출<br class=\"p_br\" />총 이익 구간", img: imgGph02, imgMo: imgGph02Mo, alt: "GSF1타입 월매출 총 이익 구간" },
+                        ],
+                    },
+                },
+                {
+                    tab: "GSF2타입",
+                    infoBar: "GSF2타입 - 경영주가 총투자비의 51% 부담. 경영주 운영",
+                    tableRows: [
+                        { main: "투자 금액", mainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세 포함)" },
+                        { sub: "초기 상품대", cost: "7,000만원" },
+                        { sub: "소모품", cost: "700만원" },
+                        { sub: "시설보증금", cost: "500만원" },
+                        { sub: "개점투자 계", cost: "9,300만원" },
+                        { sub: "임차비용 부담주체", subColspan: 2, scope: "row", cost: "본부" },
+                        { sub: "시설투자 부담주체", subColspan: 2, scope: "row", cost: "본부" },
+                        { sub: "예치보증금", subColspan: 2, scope: "row", cost: "* 점포 총 투자비 X 51% ~ 9,300만원 (현금)" },
+                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금" },
+                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 2, scope: "row", cost: "49% 매출총이익 구간별 49% ~ 55%" },
+                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 2, scope: "row", cost: "3년 / 3년 단위" },
+                        { sub: "담보설정", subColspan: 2, scope: "row", cost: "없음" },
+                        { sub: "** 최저 <br class=\"m_br\">수입 보조금", subColspan: 2, scope: "row", cost: "영업면적 200평  <br class=\"m_br\">초과 : 18백만/월 영업면적 165평 이상~200평 이하 : 16백만/월 영업면적 165평 미만 : 13백만/월" },
+                    ],
+                    cautions: [
+                        { text: "*점포 총 투자비는 임차비용, 시설투자비용, 개점투자비의 총 합산액." },
+                        { text: "**경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
+                    ],
+                    graph: {
+                        title: "GSF2타입",
+                        items: [
+                            { label: "매출이익<br class=\"p_br\" />배분율", img: imgGph03, imgMo: imgGph03Mo, alt: "GSF2타입 매출이익 배분율" },
+                            { label: "월매출<br class=\"p_br\" />총 이익 구간", img: imgGph04, imgMo: imgGph04Mo, alt: "GSF2타입 월매출 총 이익 구간" },
+                        ],
+                    },
+                    warning: "*가맹계약 체결 간 가맹점사업자와 가맹본부가 협의에 따라 가맹수수료는 달리 정할 수 있습니다",
+                },
+                {
+                    tab: "GSF3타입",
+                    infoBar: "GSF3타입 - 경영주가 임차하여 경영주 운영",
+                    tableRows: [
+                        { main: "투자 금액", mainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세 포함)" },
+                        { sub: "초기 상품대", cost: "7,000만원" },
+                        { sub: "소모품", cost: "700만원" },
+                        { sub: "시설보증금", cost: "500만원" },
+                        { sub: "개점투자 계", cost: "9,300만원" },
+                        { sub: "임차비용 부담주체", subColspan: 2, scope: "row", cost: "경영주" },
+                        { sub: "시설투자 부담주체", subColspan: 2, scope: "row", cost: "본부" },
+                        { sub: "예치보증금", subColspan: 2, scope: "row", cost: "없음" },
+                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금" },
+                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 2, scope: "row", cost: "24%" },
+                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 2, scope: "row", cost: "5년 / 5년 단위%" },
+                        { sub: "담보설정", subColspan: 2, scope: "row", cost: "최소 2억 이상" },
+                        { sub: "** 최저 <br class=\"m_br\">수입 보조금", subColspan: 2, scope: "row", cost: "해당사항 없음" },
+                    ],
+                    cautions: [
+                        { text: "*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. <br class=\"mo\"/>(개점일로부터 최소 1년만 적용)" },
+                    ],
+                },
+            ],
+        },
+        procedure: {
+            buttonHref: "#none",
+            buttonLabel: "설명회신청 바로가기",
+            steps: [
+                { step: "Step 1", title: "사업설명회 참석", text: "GS THE FRESH 가맹 계약<br />조건안내 및 절차소개", numColor: "#15b874" },
+                { step: "Step 2", title: "정보공개서 확인", text: "가맹본부로부터 정보공개서를 제공받아 GS THE FRESH 사업성 검토", numColor: "#15b874" },
+                { step: "Step 3", title: "지원서 접수", text: "지원서 제출은 월~금요일 수시가능<br />(우편 접수 가능)", numColor: "#15b874" },
+                { step: "Step 4", title: "경영주 면담", text: "지원서를 토대로 면담 진행하여<br />사업 타당성 검토함", numColor: "#15b874" },
+                { step: "Step 5", title: "점포소개", text: "예비경영주 희망사항과<br />조건에 부합하는 점포를 소개함", numColor: "#15b874" },
+                { step: "Step 6", title: "가맹약정", text: "소개 점포의 운영의사 최종확인 및<br />약정금 지불", numColor: "#15b874" },
+                { step: "Step 7", title: "가맹 본 계약", text: "본계약금 최종 지불 및<br />본계약서 체결", numColor: "#15b874" },
+                { step: "Step 8", title: "경영주 교육 이수", text: "점포 현장 OJT,<br />입문 교육(이론/실습)", numColor: "#15b874" },
+                { step: "Step 9", title: "GRAND OPEN", text: "상품 재고조사 후 오픈", numColor: "#15b874" },
+                { step: "Step 10", title: "점포운영", text: "점포 영업 지원 담당 직원의<br />주기적인 방문 및 컨설팅", numColor: "#15b874" },
+            ],
+        },
+        precaution: {
+            title: "가맹 해약<br class=\"p_br\">수수료",
+            blockTitle1: "GSF1, GSF2 타입",
+            blockTitle2: "GSF3 타입",
+            cards1: [
+                { num: "01", title: "중도해약", desc: "· 과거 1년간의 월평균 매출 총이익 20% × 3개월" },
+                { num: "02", title: "해지 사유 발생 시", desc: "· 과거 1년간의 월평균 매출 총이익 20% × 6개월" },
+            ],
+            cards2: [
+                { num: "03", title: "기타 중도해약", desc: ["· 본부 산정", "· 개점일~ 3년 이내 : 76(74)%의 8개월", "· 3년~5년 이내 : 76(74)%의 4개월", "· 경영주 산정", "· 개점일~ 3년 이내 : 24(26)%의 8개월", "· 3년~5년 이내 : 24(26)%의 4개월"] },
+                { num: "04", title: "해지 사유 발생시", desc: ["· 영업의 침해/근무계약 위반, 본부 귀산 등", "· 본부 과태 시 : 76(74)%의 12개월 분", "· 경영주 과태시 : 24(26)%의 12개월"] },
+            ],
+            cautions: [
+                "가맹 본부 회계 기준, 감가상각 건으로 별도 보상",
+                "* 손해 배상금 별도이며 과거 영업기간이 1년 이하인 경우 해당 영업기간을 적용함.",
+                "* '과거 1년간'의 기간은 관리금 중도해약인 경우 중도해약 월로부터 가까운 기간으로 하고, 해지사유 발생인 경우에는 계약 해지 사유가 발생한 달의 직전월의 말일로부터 기 기산함.",
+            ],
+        },
+        seminar: {
+            headDesc: "GS THE FRESH(GS수퍼마켓) 가맹 사업에 대한<br class=\"p_br\">자세하고 다양한 정보를 얻을 수 있는 사업설명회에 참여해 보세요.",
+            applyButtonLabel: "사업 설명회 신청",
+            list: [
+                {
+                    title: "수도 사업설명회",
+                    rows: [
+                        { label: "일시", value: "매월 2회" },
+                        { label: "대상", value: "서울, 경기, 인천 GS THE FRESH 창업을 희망하는 분" },
+                        { label: "준비물", value: "필기도구" },
+                        { label: "장소", value: "서울 강남구 논현로508 GS타워 지하 1층" },
+                        { label: "기타", value: "문의 02-2006-2954,2933" },
+                    ],
+                },
+                {
+                    title: "중부 사업설명회",
+                    rows: [
+                        { label: "일시", value: "매월 1회" },
+                        { label: "대상", value: "충청, 강원, 제주 GS THE FRESH 창업을 희망하는 분" },
+                        { label: "준비물", value: "필기도구" },
+                        { label: "장소", value: "대전 유성구 엑스포로 107 대전컨벤션센터" },
+                        { label: "기타", value: "문의 010-2141-2816 (문자 OR 카톡)" },
+                    ],
+                },
+                {
+                    title: "영남/호남 사업설명회",
+                    rows: [
+                        { label: "일시", value: "매월 1회" },
+                        { label: "대상", value: "전라도, 경상도 GS THE FRESH 창업을 희망하는 분" },
+                        { label: "준비물", value: "필기도구" },
+                        { label: "장소", value: "부산 연제구 월드컵대로190 신현빌딩2층" },
+                        { label: "기타", value: "문의 02-2006-2363" },
+                    ],
+                },
+            ],
+        },
+        store: {
+            intro: "철저한 상권 조사를 바탕으로 가맹/창업을 위한 최적의 점포를 소개합니다.",
+            regionLabel: "지역",
+            allLabel: "전체",
+            franchiseTypeLabel: "가맹타입",
+            storeTypeLabel: "점포유형/청년창업",
+            storeTypeOptions: [
+                { value: "신규점", label: "신규점" },
+                { value: "기존점", label: "기존점" },
+            ],
+            youthLabel: "청년창업",
+            youthShortLabel: "청년",
+            youthInfoAria: "청년창업 안내",
+            youthPopoverTitle: "청년창업이란?",
+            youthPopoverDesc: "20대 청년들을 위해서 투자비 일부를 할인해드리는 제도에요.",
+            youthPopoverLinkLabel: "청년창업 자세히 보러가기",
+            youthPopoverHref: "#",
+            closeAria: "닫기",
+            searchLabel: "검색",
+            searchPlaceholder: "지역명, 태그....",
+            searchAria: "검색",
+            countPrefix: "총",
+            countSuffix: "개 점포",
+            sortLatest: "최신순",
+            sortCost: "투자비 낮은순",
+            viewListAria: "목록형",
+            viewGridAria: "격자형",
+            tableHeaders: ["지역", "타입", "유형", "투자비", "해시태그", "면적", "등록일", "상세"],
+            detailOpenLabel: "상세",
+            detailCloseLabel: "접기",
+            regions: [
+                { value: "서울", label: "서울", count: 4 },
+                { value: "경기", label: "경기", count: 4 },
+                { value: "인천", label: "인천", count: 4 },
+                { value: "부산", label: "부산", count: 4 },
+                { value: "대구", label: "대구", count: 4 },
+                { value: "대전", label: "대전", count: 4 },
+                { value: "광주", label: "광주", count: 4 },
+                { value: "울산", label: "울산", count: 4 },
+                { value: "세종", label: "세종", count: 1 },
+                { value: "강원", label: "강원", count: 4 },
+                { value: "충북", label: "충북", count: 4 },
+                { value: "충남", label: "충남", count: 4 },
+                { value: "전북", label: "전북", count: 4 },
+                { value: "전남", label: "전남", count: 4 },
+                { value: "경북", label: "경북", count: 4 },
+                { value: "경남", label: "경남", count: 4 },
+                { value: "제주", label: "제주", count: 2 },
+            ],
+            franchiseTypes: [
+                { value: "GS1", label: "GS1 (경영주 임차)" },
+                { value: "GS2", label: "GS2 (임차 공동 부담)" },
+                { value: "GS3", label: "GS3 (임차 본부 부담)" },
+            ],
+            list: [
+                { id: 1, region: "대전 동구", type: ["GS1", "GS2"], form: "기존점", isYouth: false, cost: "7,200만원", tags: "#버스정류장 #대로변", area: "18평", date: "2025.12.24", feature: "신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다." },
+                { id: 2, region: "강원 원주시", type: ["GS2", "GS3"], form: "기존점", isYouth: true, cost: "10,500만원", tags: "#버스정류장 #대로변", area: "22평", date: "2025.12.24", feature: "대형 마트 인접 상권으로 유동 인구가 많아 안정적인 매출이 기대됩니다." },
+                { id: 3, region: "대구 서구", type: ["GS1"], form: "기존점", isYouth: true, cost: "5,000만원", tags: "#번화가 #버스정류장", area: "14평", date: "2025.09.21", feature: "지하철역 출구 인근에 위치하여 출퇴근 고객 수요가 풍부합니다." },
+                { id: 4, region: "대전 동구", type: ["GS3"], form: "기존점", isYouth: false, cost: "7,200만원", tags: "#버스정류장 #대로변", area: "18평", date: "2025.12.24", feature: "신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다." },
+                { id: 5, region: "인천 연수구", type: ["GS2"], form: "기존점", isYouth: false, cost: "8,000만원", tags: "#주택가 #초등학교인근", area: "20평", date: "2025.11.10", feature: "주거 밀집 지역 내 독점 상권으로 안정적인 고정 고객층이 형성되어 있습니다." },
+                { id: 6, region: "전북 익산시", type: ["GS1", "GS2"], form: "기존점", isYouth: true, cost: "4,500만원", tags: "#대로변 #유동인구많음", area: "15평", date: "2025.10.05", feature: "도심 중심 상가 위치로 다양한 연령층의 유동 고객이 상시 방문합니다." },
+            ],
+        },
+        support: {
+            intro: "GS THE FRESH는 <br class=\"m_br\"/><span>경영주와의 공동의 발전</span>을 위해 <br />다양한 상생 제도를 운영하고 있습니다.",
+            panelTitle: "운영지원제도",
+            panelDesc: "GS THE FRESH 경영주님의 원활한 점포 운영을 위한 지원 제도 입니다.",
+            cards: [
+                { num: "01", title: "최소 운영 보조", desc: "계약양식 조건에 따라, 개점일로부터 정해진 기간에 한해 경영주 총수입을 기준으로 하여 일정 금액이 보장될 수 있도록 본부지원금을 통해 최소 운영 보조를 지원하고 있습니다." },
+                { num: "02", title: "복리후생", desc: "경조사 발생시(가맹점 실경영주 기준 결혼 또는 조위) 경조금 및 화환 등을 지급하고 있습니다." },
+                { num: "03", title: "스토어매니저(근무자) 구인사이트 지원", desc: "GS THE FRESH 전용 배너 업체(알바천국) 운영" },
+                { num: "04", title: "기타 운영지원 제도", desc: "부진 점포에 한해, 본사 지원 활동으로 '보전점 케어활동'을 진행하며, 상권 특성 및 각종 이슈 사항으로 경제적지원금이 필요한 경우 특정점에 한해 '신규점 조기 정착 지원금'을 운영합니다. 또한, 필요시 영수도점 매출 향상을 위한 지원금을 지급하고 매년 가맹지원제도를 수립 및 운영하고 있습니다." },
+            ],
+        },
+        consult: {
+            panelTitle: "컨설턴트와 1:1 상담",
+            panelDesc: "가맹/창업 컨설턴트가 1:1로 상담해 드립니다. <br /> 가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.",
+            caution: "※ 주말 및 공휴일은 연락이 불가하며 평일 09:00~17:30 사이에 연락 부탁드립니다.",
+            label: "컨설턴트",
+            telButtonLabel: "연락처 확인하기",
+            tooltipTitle: "연락처",
+            phoneLabel: "전화 번호",
+            kakaoLabel: "카카오톡",
+            qrAlt: "QR Code",
+            kakaoNotice: "* 카카오톡 상담 가능",
+            closeAria: "닫기",
+            applyButtonLabel: "상담신청",
+            infoBannerText: "'입지' 및 '점포소유' 상담은 입지제안 사이트를 통해 확인 부탁드립니다.",
+            infoBannerButtonLabel: "바로가기",
+            cards: [
+                { name: "윤경진", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_01.png"), link: "#none" },
+                { name: "이승현", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_02.png"), link: "#none" },
+                { name: "남창호", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_03.png"), link: "#none" },
+                { name: "남궁신영", region: "충북/강원권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_04.png"), link: "#none" },
+                { name: "김수진", region: "영남/호남권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_05.png"), link: "#none" },
+            ],
+        },
+        quickMenu: ["창업안내", "입점상담", "고객센터"],
+    },
+    en: {},
+};
+
+const t = computed(() => {
+    const selected = langData[props.lang];
+    return selected && Object.keys(selected).length ? selected : langData.ko;
+});
+
 const activeD1 = ref(0);
 const activeD2 = ref(0);
 const activeD3 = ref(0);
 
-const depth1Tabs = [
-    { item: "GS THE FRESH 창업 알아보기" },
-    { item: "사업설명회" },
-    { item: "추천 점포 찾기" },
-    { item: "경영주 지원제도" },
-    { item: "상담 및 신청" },
-    { item: "가맹계약시스템" },
-];
- 
-const depth2Tabs = [
-    { item: "가맹 조건 안내" },
-    { item: "가맹/창업 절차" },
-    { item: "창업 전 필수 확인사항" },
-];
-
-const depth3Tabs = [
-    { item: "GSF1타입" },
-    { item: "GSF2타입" },
-    { item: "GSF3타입" },
-];
-
-const procedureSteps = [
-    { step: "Step 1",  title: "사업설명회 참석",   text: "GS THE FRESH 가맹 계약<br />조건안내 및 절차소개",                          numColor: "#15b874" },
-    { step: "Step 2",  title: "정보공개서 확인",   text: "가맹본부로부터 정보공개서를 제공받아 GS THE FRESH 사업성 검토",         numColor: "#15b874" },
-    { step: "Step 3",  title: "지원서 접수",       text: "지원서 제출은 월~금요일 수시가능<br />(우편 접수 가능)",                    numColor: "#15b874" },
-    { step: "Step 4",  title: "경영주 면담",       text: "지원서를 토대로 면담 진행하여<br />사업 타당성 검토함",                     numColor: "#15b874" },
-    { step: "Step 5",  title: "점포소개",          text: "예비경영주 희망사항과<br />조건에 부합하는 점포를 소개함",                 numColor: "#15b874" },
-    { step: "Step 6",  title: "가맹약정",          text: "소개 점포의 운영의사 최종확인 및<br />약정금 지불",                        numColor: "#15b874" },
-    { step: "Step 7",  title: "가맹 본 계약",      text: "본계약금 최종 지불 및<br />본계약서 체결",                                 numColor: "#15b874" },
-    { step: "Step 8",  title: "경영주 교육 이수",  text: "점포 현장 OJT,<br />입문 교육(이론/실습)",                                numColor: "#15b874" },
-    { step: "Step 9",  title: "GRAND OPEN",       text: "상품 재고조사 후 오픈",                                             numColor: "#15b874" },
-    { step: "Step 10", title: "점포운영",          text: "점포 영업 지원 담당 직원의<br />주기적인 방문 및 컨설팅",                 numColor: "#15b874" },
-];
-
-const precautionCards1 = [
-    { num: "01", title: "중도해약",        desc: "· 과거 1년간의 월평균 매출 총이익 20% × 3개월" },
-    { num: "02", title: "해지 사유 발생 시", desc: "· 과거 1년간의 월평균 매출 총이익 20% × 6개월" },
-   
-];
-
-const precautionCards2 = [
-    { num: "03", title: "기타 중도해약", desc: ["· 본부 산정", "· 개점일~ 3년 이내 : 76(74)%의 8개월", "· 3년~5년 이내 : 76(74)%의 4개월", "· 경영주 산정", "· 개점일~ 3년 이내 : 24(26)%의 8개월", "· 3년~5년 이내 : 24(26)%의 4개월"] },
-    { num: "04", title: "해지 사유 발생시", desc: ["· 영업의 침해/근무계약 위반, 본부 귀산 등", "· 본부 과태 시 : 76(74)%의 12개월 분", "· 경영주 과태시 : 24(26)%의 12개월"] },
-];
-
-const supportCards = [
-    { num: "01", title: "최소 운영 보조", desc: "계약양식 조건에 따라, 개점일로부터 정해진 기간에 한해 경영주 총수입을 기준으로 하여 일정 금액이 보장될 수 있도록 본부지원금을 통해 최소 운영 보조를 지원하고 있습니다." },
-    { num: "02", title: "복리후생", desc: "경조사 발생시(가맹점 실경영주 기준 결혼 또는 조위) 경조금 및 화환 등을 지급하고 있습니다." },
-    { num: "03", title: "스토어매니저(근무자) 구인사이트 지원", desc: "GS THE FRESH 전용 배너 업체(알바천국) 운영" },
-    { num: "04", title: "기타 운영지원 제도", desc: "부진 점포에 한해, 본사 지원 활동으로 '보전점 케어활동'을 진행하며, 상권 특성 및 각종 이슈 사항으로 경제적지원금이 필요한 경우 특정점에 한해 '신규점 조기 정착 지원금'을 운영합니다. 또한, 필요시 영수도점 매출 향상을 위한 지원금을 지급하고 매년 가맹지원제도를 수립 및 운영하고 있습니다." },
-];
-
-const consultCards = [
-    { name: "윤경진", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000",  img: require("@/assets/images/dummy/gsrst01050101_01.png"), link: "#none", },
-    { name: "이승현", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_02.png"), link: "#none" , },
-    { name: "남창호", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_03.png"), link: "#none",},
-    { name: "남궁신영", region: "충북/강원권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_04.png"), link: "#none", },
-    { name: "김수진", region: "영남/호남권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_05.png"), link: "#none", },
-];
-
-const seminarList = [
-    {
-        title: "수도 사업설명회",
-        rows: [
-            { label: "일시",   value: "매월 2회" },
-            { label: "대상",   value: "서울, 경기, 인천 GS THE FRESH 창업을 희망하는 분" },
-            { label: "준비물", value: "필기도구" },
-            { label: "장소",   value: "서울 강남구 논현로508 GS타워 지하 1층" },
-            { label: "기타",   value: "문의 02-2006-2954,2933" },
-        ],
-    },
-    {
-        title: "중부 사업설명회",
-        rows: [
-            { label: "일시",   value: "매월 1회" },
-            { label: "대상",   value: "충청, 강원, 제주 GS THE FRESH 창업을 희망하는 분" },
-            { label: "준비물", value: "필기도구" },
-            { label: "장소",   value: "대전 유성구 엑스포로 107 대전컨벤션센터" },
-            { label: "기타",   value: "문의 010-2141-2816 (문자 OR 카톡)" },
-        ],
-    },
-    {
-        title: "영남/호남 사업설명회",
-        rows: [
-            { label: "일시",   value: "매월 1회" },
-            { label: "대상",   value: "전라도, 경상도 GS THE FRESH 창업을 희망하는 분" },
-            { label: "준비물", value: "필기도구" },
-            { label: "장소",   value: "부산 연제구 월드컵대로190 신현빌딩2층" },
-            { label: "기타",   value: "문의 02-2006-2363" },
-        ],
-    },
-];
+const depth1Tabs = computed(() => t.value.depth1Tabs);
+const depth2Tabs = computed(() => t.value.depth2Tabs);
+const franchiseGuideTypes = computed(() => t.value.franchise.guideTypes);
+const depth3Tabs = computed(() => franchiseGuideTypes.value.map((item) => ({ item: item.tab })));
+const procedureSteps = computed(() => t.value.procedure.steps);
+const precautionCards1 = computed(() => t.value.precaution.cards1);
+const precautionCards2 = computed(() => t.value.precaution.cards2);
+const supportCards = computed(() => t.value.support.cards);
+const consultCards = computed(() => t.value.consult.cards);
+const seminarList = computed(() => t.value.seminar.list);
 
 function openModal(event) {
     const el = event.currentTarget;
@@ -898,31 +861,9 @@ const storeSearchQuery = ref('');
 const youthPopoverVisible = ref(false);
 const activeCardIndex = ref(null);
 
-const storeRegions = [
-    { value: '서울', label: '서울', count: 4 },
-    { value: '경기', label: '경기', count: 4 },
-    { value: '인천', label: '인천', count: 4 },
-    { value: '부산', label: '부산', count: 4 },
-    { value: '대구', label: '대구', count: 4 },
-    { value: '대전', label: '대전', count: 4 },
-    { value: '광주', label: '광주', count: 4 },
-    { value: '울산', label: '울산', count: 4 },
-    { value: '세종', label: '세종', count: 1 },
-    { value: '강원', label: '강원', count: 4 },
-    { value: '충북', label: '충북', count: 4 },
-    { value: '충남', label: '충남', count: 4 },
-    { value: '전북', label: '전북', count: 4 },
-    { value: '전남', label: '전남', count: 4 },
-    { value: '경북', label: '경북', count: 4 },
-    { value: '경남', label: '경남', count: 4 },
-    { value: '제주', label: '제주', count: 2 },
-];
-
-const franchiseTypes = [
-    { value: 'GS1', label: 'GS1 (경영주 임차)' },
-    { value: 'GS2', label: 'GS2 (임차 공동 부담)' },
-    { value: 'GS3', label: 'GS3 (임차 본부 부담)' },
-];
+const storeRegions = computed(() => t.value.store.regions);
+const franchiseTypes = computed(() => t.value.store.franchiseTypes);
+const storeTypeOptions = computed(() => t.value.store.storeTypeOptions);
 
 /* ── 점포 리스트 ── */
 const storeSort = ref('latest');
@@ -930,14 +871,7 @@ const storeView = ref('list');
 const storePage = ref(1);
 const storeTotalPages = ref(5);
 
-const storeList = ref([
-    { id: 1, region: '대전 동구',   type: ['GS1','GS2'],        form: '기존점',  isYouth: false, cost: '7,200만원',  tags: '#버스정류장 #대로변',   area: '18평', date: '2025.12.24', feature: '신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다.' },
-    { id: 2, region: '강원 원주시', type: ['GS2', 'GS3'], form: '기존점',  isYouth: true,  cost: '10,500만원', tags: '#버스정류장 #대로변',   area: '22평', date: '2025.12.24', feature: '대형 마트 인접 상권으로 유동 인구가 많아 안정적인 매출이 기대됩니다.' },
-    { id: 3, region: '대구 서구',   type: ['GS1'],        form: '기존점',  isYouth: true,  cost: '5,000만원',  tags: '#번화가 #버스정류장',  area: '14평', date: '2025.09.21', feature: '지하철역 출구 인근에 위치하여 출퇴근 고객 수요가 풍부합니다.' },
-    { id: 4, region: '대전 동구',   type: ['GS3'],        form: '기존점',  isYouth: false, cost: '7,200만원',  tags: '#버스정류장 #대로변',   area: '18평', date: '2025.12.24', feature: '신축 아파트 단지 내 상가 1층에 위치하여 입주민 수요가 안정적입니다.' },
-    { id: 5, region: '인천 연수구', type: ['GS2'],        form: '기존점',  isYouth: false, cost: '8,000만원',  tags: '#주택가 #초등학교인근', area: '20평', date: '2025.11.10', feature: '주거 밀집 지역 내 독점 상권으로 안정적인 고정 고객층이 형성되어 있습니다.' },
-    { id: 6, region: '전북 익산시', type: ['GS1', 'GS2'], form: '기존점',  isYouth: true,  cost: '4,500만원',  tags: '#대로변 #유동인구많음', area: '15평', date: '2025.10.05', feature: '도심 중심 상가 위치로 다양한 연령층의 유동 고객이 상시 방문합니다.' },
-]);
+const storeList = computed(() => t.value.store.list);
 
 function getBadgeClass(t) {
     return /^GS\d/i.test(t) ? 'badge_' + t.toLowerCase() : 'badge_gray';
