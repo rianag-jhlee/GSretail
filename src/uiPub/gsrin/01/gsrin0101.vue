@@ -45,7 +45,7 @@
                         <div class="view-2">
                             <div class="sub-title">
                                 <div class="text-wrapper-3">{{ t.BoardSectionTitle1 }}</div>
-                                <p class="p">{{ t.BoardSectionDesc1 }}</p>
+                                <p class="p" v-html="t.BoardSectionDesc1"></p>
                             </div>
 
                             <div class="view-3 res-swiper-container">
@@ -79,8 +79,9 @@
                                                     <li v-for="(career, cIdx) in member.careers" 
                                                         :key="'career-' + cIdx" 
                                                         :class="career.class"
+                                                        v-html="career.text"
                                                     >
-                                                        {{ career.text }}
+                                                       
                                                     </li>
                                                 </ul>
                                             </div>
@@ -93,10 +94,6 @@
                         </div>
                         <!-- 2. 사외이사 및 위원회 구성 -->
                         <div class="view-2">
-                            <div class="sub-title">
-                                <div class="text-wrapper-3">{{ t.BoardSectionTitleSub }}</div>
-                                <p class="p">{{ t.BoardSectionDescSub }}</p>
-                            </div>
                             <div class="view-3 res-swiper-container" v-if="t">
                                 <component 
                                     :is="isMobile ? 'swiper' : 'div'"
@@ -133,8 +130,8 @@
                                                     <li v-for="(career, cIdx) in member.careers" 
                                                         :key="'sc-' + cIdx" 
                                                         :class="career.class"
+                                                        v-html="career.text"
                                                     >
-                                                        {{ career.text }}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -351,7 +348,7 @@ export default {
                         "GS리테일은<br/> 기업지배구조헌장에 의거, <br/>건전한 지배구조를 <br/>확립하고 있습니다",
                         "GS리테일은<br/> 투명한 경영 문화 정착을 위해,<br/>이사회 중심 경영을<br/> 실천하고 있습니다.",
                         "GS리테일은<br/> 이사회 운영 개선 및 지배구조 신뢰성 제고를 위하여<br/>2021년 12월 개최된 정기이사회에서<br/> 이사회 평가제도를 도입하였습니다.",
-                        "GS리테일은<br/> 지속가능한 경영을 위해,<br/> 지배구조건정성을 <br/>지속 개선해 나아가겠습니다."
+                        "GS리테일은<br/> 지속가능한 경영을 위해,<br/> 지배구조건전성을 <br/>지속 개선해 나아가겠습니다."
                     ],
                     Tabs1: [{ item: "지배구조헌장" }, { item: "이사회 및 위원회 구성" }, { item: "이사회 평가" }, { item: "지배구조 모범규준과의 차이" }],
                     
@@ -366,7 +363,7 @@ export default {
                             content: [
                                 { subTitle: "1. 주주의 권리", list: [
                                     "① 주주는 회사의 소유자이며, 이익 분배에 참여 할 수 있는 권리, 주주총회 참석 및 의결권을 행사 할 수 있는 권리, 주주총회의 목적사항을 제안할 수 있는 권리 등 관련 법령이 보장하는 기본적인 권리를 보장 받는다.",
-                                    "② 정관의 변경, 합병, 영업양수도 및 기업의 분할, 해산, 자본금의 감소 등 관련 법령이 정하는 사항 중 회사의 존립과 주주권에 중대한 변화를 가져오는 사항은 주주의 권리를 최대한 보장하여, 주주총회를 통해 결정한다.",
+                                    "② 정관의 변경, 합병, 영업양수도 및 기업의 분할, 해산, 자본금의 감소 등 관련 법령이 정하는 사항 중 회사의 존립과 주주권에 중대한 변화를 가져오는 사항은 주주의 권리를 최대한 보장하며, 주주총회를 통해 결정한다.",
                                     "③ 회사는 주주총회의 결의가 투명하고 공정한 절차에 따라 이루어지도록 노력하며, 주주에 대하여 주주총회 참석 전에 주주총회의 일시와 장소 및 의안 의결권의 행사 방법 등에 관하여 충분한 정보를 제공한다.",
                                     "④ 주주권의 행사는 주주의 자유로운 의사에 따라 행사되어야 한다."
                                 ]},
@@ -375,7 +372,7 @@ export default {
                                     "② 회사는 주주에게 필요한 정보를 적시에 충분히 이해할 수 있도록 쉽게 구성하여, 공평한 방법으로 제공한다. 또한 부당한 내부거래 및 자기거래로부터 주주가 보호될 수 있도록 노력한다."
                                 ]},
                                 { subTitle: "3. 주주의 책임", list: [
-                                    "① 주주는 회사의 발전과 이익을 위하여. 자신의 의결권을 적극적으로 행사하여야 한다.",
+                                    "① 주주는 회사의 발전과 이익을 위하여, 자신의 의결권을 적극적으로 행사하여야 한다.",
                                     "② 회사 경영에 영향력을 행사하는 지배주주는 회사와 다른 모든 주주의 이익을 고려하여 주주권을 행사하며, 그 지배권을 남용하여 다른 주주에게 손해가 발생하지 않도록 노력해야 한다."
                                 ]}
                             ]
@@ -394,7 +391,7 @@ export default {
                                 ]},
                                 { subTitle: "3. 이사의 선임", list: [
                                     "① 이사는 이사회 추천, 사외이사후보추천위원회 추천, 주주 추천 등의 방법을 통해 선정된 후보자에 대해, 주주총회 결의로 선임하며, 회사는 전문성이 충분히 검증된 후보자가 이사로 선임되어, 이사회 중심의 기업경영이 달성될 수 있도록 노력한다.",
-                                    "② 대표이사들은 주주총회에서 선임된 이사 중에서 이사회의 결의에 의하여 선임한다.",
+                                    "② 대표이사는 주주총회에서 선임된 이사 중에서 이사회의 결의에 의하여 선임한다.",
                                     "③ 이사회 의장은 주주총회에서 선임된 이사 중 이사회의 결의로 선임하되, 대표이사와의 겸직을 지양한다."
                                 ]},
                                 { subTitle: "4. 이사의 자격", list: [
@@ -413,7 +410,7 @@ export default {
                                 { subTitle: "7. 이사의 역할", list: [
                                     "① 이사는 선량한 관리자로서 그 책임을 다해, 이사회에 적극적으로 참여하며, 회사와 주주 및 이해관계자의 지속적인 이익 증진을 위해 최선의 의사 결정을 하여야 한다.",
                                     "② 이사는 전체 주주의 이익을 고려한 의사결정을 하며, 직무상 얻어진 정보를 외부에 누출하거나 개인의 이익을 위하여 사용하여서는 안되며, 이사가 법령이나 정관을 위배하여 그 임무를 소홀히 하여 손해가 발생한 경우, 이사는 회사 또는 제3자에 대하여 손해배상책임을 진다.",
-                                    "③ 회사는 유능한 인사를 유치하고 책임 주공의 실효성을 확보하기 위하여 회사의 비용으로 이사를 위한 손해배상책임보험에 가입할 수 있다."
+                                    "③ 회사는 유능한 인사를 유치하고 책임 추궁의 실효성을 확보하기 위하여 회사의 비용으로 이사를 위한 손해배상책임보험에 가입할 수 있다."
                                 ]},
                                 { subTitle: "8. 평가 및 보상", list: [
                                     "① 경영진의 경영활동을 공정하게 평가하여야 하며, 그 결과를 보수에 적정하게 반영한다. 이사의 보수는 주주총회에서 승인된 범위 내에서 적절한 심사를 거쳐 집행한다.",
@@ -463,7 +460,7 @@ export default {
                     ],
                     // [Tab 2] 이사회 구성 현황 데이터 (KO)
                     BoardSectionTitle1: `이사회 구성 현황`,
-                    BoardSectionDesc1: `대표이사, 사내이사, 기타 비상무 이사로 구성된 이사회 현황입니다.`,
+                    BoardSectionDesc1: `사내이사, 사외이사, 기타 비상무이사로 구성된 이사회 현황입니다.<br />독립성과 전문선을 갖춘 사외이사를 통해 투명성과 견제 기능을 강화하고 있습니다.`,
                     BoardSectionTitleSub: `사외이사 및 위원회 구성`,
                     BoardSectionDescSub: `독립성과 전문성을 갖춘 사외이사를 통해 경영 투명성과 견제 기능을 강화하고 있습니다.`,
                     BoardMemberList: [
@@ -513,17 +510,6 @@ export default {
                             ]
                         },
                         {
-                            pos: "사외이사", name: "이인무", 
-                            img: require("@/assets/images/dummy/gsrin0102_5.png"),
-                            term: "2024.03.21~2027.03.20", firstDate: "2021.07.01 최초선임",
-                            careers: [
-                                { text: "美 일리노이대", class: "" },
-                                { text: "2007년 디멘셔널 펀드 부사장", class: "" },
-                                { text: "2015년 한국은행 외화자산운용원 자문역", class: "" },
-                                { text: "現) 카이스트 경영대학 교수", class: "point" }
-                            ]
-                        },
-                        {
                             pos: "사외이사", name: "이상규", 
                             img: require("@/assets/images/dummy/gsrin0102_6.png"),
                             term: "2023.03.23~2026.03.22", firstDate: "2023.03.23 최초선임",
@@ -545,15 +531,29 @@ export default {
                                 { text: "2018년 국토안전관리원 비상임 이사", class: "" },
                                 { text: "現) 카이스트 건설 및 환경공학과 교수", class: "point" }
                             ]
-                        }
+                        },
+                        {
+                            pos: "사외이사", name: "안동현", 
+                            img: require("@/assets/images/dummy/gsrin0102_5.png"),
+                            term: "2026.3.19~2029.3.18", firstDate: "2026.3.19 최초선임",
+                            careers: [
+                                { text: "美 뉴욕대", class: "" },
+                                { text: "2015년 공적자금관리 위원회<br />매각위원장", class: "" },
+                                { text: "2016년 자본시장연구원 원장", class: "" },
+                                { text: "2022년 금융발전 심의위원회 위원장", class: "" },
+                                { text: "現) 서울대학교 경제학부 교수", class: "point" }
+                            ]
+                        },
+
+
                     ],
-                    BoardSectionTitle2: "이사회 역량 구성표",
+                    BoardSectionTitle2: "이사회 역량 구성표(Board Skills Matrix)로 표기",
                     SkillsList: [
                         { type: "사내이사/대표이사", name: "허서홍", appointDate: "2025.03 선임", tags: [{text: "경영·리더십", class:""}, {text: "리스크관리·ESG", class:""}] },
                         { type: "사내이사", name: "오진석", appointDate: "2024.03 선임", tags: [{text: "경영·리더십", class:""}, {text: "유통·관련산업", class:""}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:""}, {text: "보상위원회", class:"TAG-3"}] },
                         { type: "기타 비상무이사", name: "홍순기", appointDate: "2021.07 선임", tags: [{text: "경영·리더십", class:""}, {text: "재무·회계", class:""}, {text: "리스크관리·ESG", class:""}, {text: "ESG위원회", class:"TAG-3"}] },
                         { type: "사외이사", name: "이성락", appointDate: "2022.03 선임", tags: [{text: "경영·리더십", class:"TAG-2"}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:"TAG-2"}, {text: "독립성", class:"TAG-2"}, {text: "내부거래위", class:"TAG-4"}, {text: "사외이사추천위", class:"TAG-4"}, {text: "감사위원회", class:"TAG-4"}] },
-                        { type: "사외이사", name: "오인무", appointDate: "2021.07 선임", tags: [{text: "재무·회계", class:"TAG-2"}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:"TAG-2"}, {text: "독립성", class:"TAG-2"}, {text: "사외이사추천위", class:"TAG-4"}, {text: "감사위원회", class:"TAG-4"}, {text: "ESG위원회", class:"TAG-4"}, {text: "보상위원회", class:"TAG-4"}] },
+                        { type: "사외이사", name: "이인무", appointDate: "2021.07 선임", tags: [{text: "재무·회계", class:"TAG-2"}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:"TAG-2"}, {text: "독립성", class:"TAG-2"}, {text: "사외이사추천위", class:"TAG-4"}, {text: "감사위원회", class:"TAG-4"}, {text: "ESG위원회", class:"TAG-4"}, {text: "보상위원회", class:"TAG-4"}] },
                         { type: "사외이사", name: "이상규", appointDate: "2023.03 선임", tags: [{text: "유통·관련산업", class:""}, {text: "리스크관리·ESG", class:""}, {text: "독립성", class:"TAG-2"}, {text: "내부거래위", class:"TAG-3"}, {text: "사외이사추천위", class:"TAG-3"}, {text: "ESG위원회", class:"TAG-3"}] },
                         { type: "사외이사", name: "윤윤진", appointDate: "2025.03 선임", tags: [{text: "IT·디지털", class:""}, {text: "리스크관리·ESG", class:""}, {text: "독립성", class:""}, {text: "사외이사추천위", class:"TAG-3"}, {text: "감사위원회", class:"TAG-3"}, {text: "ESG위원회", class:"TAG-3"}, {text: "보상위원회", class:"TAG-3"}] }
                     ],
@@ -563,8 +563,8 @@ export default {
                         { title: "내부거래위원회", chair: "이상규", members: "이성락, 윤윤진" },
                         { title: "사외이사후보추천위원회", chair: "이상규", members: "이성락, 이인무" },
                         { title: "감사위원회", chair: "이인무", members: "이성락, 윤윤진" },
-                        { title: "ESG위원회", chair: "이상규", members: "이성락, 윤윤진" },
-                        { title: "보상위원회", chair: "이상규", members: "이성락, 윤윤진" }
+                        { title: "ESG위원회", chair: "이인무", members: "이상규, 윤윤진, 홍순기" },
+                        { title: "보상위원회", chair: "윤윤진", members: "이인무, 오진석" }
                     ],
                     // [Tab 2] BoardDownloadBtns 데이터 부분
                     BoardDownloadBtns: [
@@ -705,7 +705,7 @@ export default {
 :deep(.gsrin0101) .policy_wrap dd .desc {font-size:16px;}
 
 /* gsrin0102 전용 스타일 */
-.gsrin0102 > * {margin-top: 80px;}
+.gsrin0102 > * {margin-top: 100px;}
 .view {width: 100%; padding: 20px 0; position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
 .view-2 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 32px; align-self: stretch; flex: 0 0 auto;}
 .sub-title {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
