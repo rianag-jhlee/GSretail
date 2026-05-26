@@ -3983,7 +3983,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .seminar_month_head > .seminar_nav_btn { width: 44px; height: 44px; margin: 0; padding: 0; border: 1px solid #d7d7df; border-radius: 999px; background: #ffffff; cursor: pointer; flex-shrink: 0;  display: inline-flex; align-items: center; justify-content: center; opacity: 1; }
 .seminar_month_head > .seminar_nav_btn:not(:disabled):hover { border-color: #161616; }
 .seminar_month_head > .seminar_nav_btn:disabled { opacity: 0.35; }
-.seminar_nav_chevron {width:20px; height:20px; background: url(@/assets/images/common/icon_set_20.png) no-repeat;}
+.seminar_nav_chevron {width:20px; height:20px; background: url('@/assets/images/common/icon_set_20.png') no-repeat;}
 .seminar_nav_prev .seminar_nav_chevron { background-position: -281px -24px;}
 .seminar_nav_next .seminar_nav_chevron { background-position: -324px -24px; }
 .seminar_month_head > .seminar_month_swiper { max-width: calc(100% - 168px); margin: 0; flex: 0 0 auto; min-width: 0; overflow: hidden;  }
@@ -3997,7 +3997,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .seminar_ic_pin { width: 16px; height: 16px;background-color:#000; background: url(@/assets/images/sub/icon_map_16.png) no-repeat center / contain; }
 .seminar_slot_list { display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .seminar_slot_row { height: 52px; padding:12px 16px; border-radius: 12px; background-color: #f8f8f8;  display: flex; align-items: center; gap: 4px; }
-.seminar_ic_time { width: 16px; height: 16px; background: url(@/assets/images/sub/icon_clock_16.png) no-repeat center / contain; }
+.seminar_ic_time { width: 16px; height: 16px; background: url('@/assets/images/sub/icon_clock_16.png') no-repeat center / contain; }
 .seminar_slot_row > .seminar_slot_time { margin:0; color: inherit; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; flex: 0 1 auto; min-width: 0; }
 .seminar_slot_row > button.seminar_slot_badge { width: auto; height: auto; margin: 0 0 0 auto; padding: 4px 12px; color: inherit; font-family: inherit; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; border: none; border-radius: 999px; background: transparent; appearance: none; flex-shrink: 0; cursor: pointer;  display: inline-flex; align-items: center; justify-content: center; }
 .seminar_slot_row > button.seminar_slot_badge:disabled { cursor: default; }
