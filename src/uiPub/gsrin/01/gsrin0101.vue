@@ -834,6 +834,7 @@ export default {
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
     .title-sub-text {padding: 60px 0 80px; font-size: 28px; line-height: 1.3; text-align:left;}
+    .gsrin0102 > * {margin-top: 80px;}
     :deep(.title-sub-text br) {display:block !important;}
     .view-3 {flex-direction: column; align-items: center; gap: 40px;}
     .div-2 {max-width:312px; width:100%;} /* 1열 배치 및 최대너비 제한 */
@@ -867,6 +868,7 @@ export default {
     .gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 10px; font-size: 14px; }
     .skill-swiper-wrapper {display:flex;}
     :deep(.view-6.res-swiper-container) .swiper-wrapper, :deep(.view-3.res-swiper-container) .swiper-wrapper, .eval-usage-swiper-wrapper {display:flex !important; gap:0px;}
+
 }
 
 /* swiper */
