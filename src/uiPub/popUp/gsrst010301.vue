@@ -6,40 +6,62 @@
             <a href="#none" @click="closeModal" class="btn_close">닫기</a>
         </div>
 
-        <div class="modal_content">
+        <div class="modal_content smn_body">
             <!-- 인트로 -->
-            <div class="smn_intro">
+            <!-- <div class="smn_intro">
                 <strong>안녕하세요!<br>GS THE FRESH 1:1 상담<br class="m_br">컨설턴트 윤경진 입니다.</strong>
                 <p>아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다. <br />
                     담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.</p>
-            </div>
+            </div> -->
 
-            <!-- 컨설턴트와 1:1 상담 -->
-            <div class="gray_box consult_box">
-                <div class="consent_body">
-                    <div class="flex_wrap">
-                        <div class="consent_img_wrap">
-                            <!-- <img src="" alt=""> -->
+            <!-- <div class="modal_content smn_body"> -->
+                <!-- 인트로 -->
+                <div class="smn_intro">
+                    <strong>안녕하세요!<br>GS THE FRESH 1:1 상담<br class="m_br">컨설턴트 윤경진 입니다.</strong>
+                    <p>아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다. <br />
+                        담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.</p>
+                </div>
+
+                <!-- 컨설턴트와 1:1 상담 -->
+                <div class="gray_box consult_box">
+                    <div class="consent_body">
+                        <div class="flex_wrap">
+                            <div class="consent_img_wrap">
+                                <!-- <img src="" alt=""> -->
+                            </div>
+                            <div class="consent_info">
+                                <h3 class="consent_info_title">컨설턴트와 1:1 상담</h3>
+                                <p>가맹/창업 컨설턴트가 1:1로 상담해 드립니다.<br />
+                                    가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.</p>
+                                <button type="button">윤경진 컨설턴트</button>
+                            </div>
                         </div>
-                        <div class="consent_info">
-                            <h3 class="consent_info_title">컨설턴트와 1:1 상담</h3>
-                            <p>가맹/창업 컨설턴트가 1:1로 상담해 드립니다.<br />
-                                가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.</p>
-                            <button type="button">윤경진 컨설턴트</button>
+                        <div class="consent_notice">
+                            <ul class="list_caution">
+                                <li>
+                                    <p>※ 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.</p>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="consent_notice">
-                        <ul class="list_caution">
-                            <li>
-                                <p>※ 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.</p>
-                            </li>
+                </div>
+
+                <!-- 개인정보 동의 -->
+                <div class="gray_box consent_box">
+                    <div class="consent_info">
+                        <h3 class="consent_info_title">개인정보 수집·이용 동의</h3>
+                        <ul class="consent_info_list">
+                            <li>입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.</li>
+                            <li>수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호</li>
+                            <li>수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용</li>
+                            <li>보유 및 이용기간: 접수 후 1년</li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
 
             <!-- 개인정보 동의 -->
-            <div class="gray_box consent_box">
+            <!-- <div class="gray_box consent_box">
                 <div class="consent_info">
                     <h3 class="consent_info_title">개인정보 수집·이용 동의</h3>
                     <ul class="consent_info_list">
@@ -53,28 +75,28 @@
                         <Inputs type="checkbox" text="동의합니다." v-model="consentAgree" />
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="middle_bts_wrap">
+            <!-- <div class="middle_bts_wrap">
                 <button :class="{ active: hasStore === true }" @click="hasStore = true">내가 소유한 점포가 있다.</button>
                 <button :class="{ active: hasStore === false }" @click="hasStore = false">내가 소유한 점포가 없다.</button>
-            </div>
+            </div> -->
 
             <!-- 고객정보 폼 -->
-            <div class="apply_form">
+            <!-- <div class="apply_form">
                 <div class="form_head">
                     <h3 class="form_head_title">고객정보</h3>
                     <span class="form_required_note">* 필수 입력사항</span>
                 </div>
                 <div class="form_body">
-                    <!-- 이름 -->
+                    !-- 이름 --
                     <div class="form_row">
                         <div class="form_label">이름<span class="form_required">*</span></div>
                         <div class="form_field">
                             <Inputs type="text" />
                         </div>
                     </div>
-                    <!-- 이메일 -->
+                    !-- 이메일 --
                     <div class="form_row">
                         <div class="form_label">이메일</div>
                         <div class="form_field form_field_email">
@@ -85,7 +107,7 @@
                             <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain" />
                         </div>
                     </div>
-                    <!-- 연락처 -->
+                    !-- 연락처 --
                     <div class="form_row">
                         <div class="form_label">연락처<span class="form_required">*</span></div>
                         <div class="form_field form_field_phone">
@@ -97,93 +119,157 @@
                         </div>
                     </div>
 
-                    <!-- 개설희망지역 -->
+                    !-- 개설희망지역 --
                     <div class="form_row">
                         <div class="form_label">소유점포 주소 <br class="p_br"/>(과거, 현재 점포소유 <br class="p_br">신청자에 한함)<span class="form_required">*</span></div>
                         <div class="form_field form_field_region">
                             <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" initMsg="시/도 선택" @update:modelValue="consultForm.regionSigungu = ''" />
                             <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" initMsg="구/군 선택" :disabled="!consultForm.regionSido" />
+                        <div class="consent_notice">
+                            <p class="consent_notice_text">고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br class="p_br">사업설명회 신청 글 작성이 불가능합니다.</p>
+                            <label class="consent_radio_label">
+                                <input type="radio" class="consent_radio" name="consent_agree" value="agree" v-model="consentAgree" @click="consentAgree = consentAgree === 'agree' ? '' : 'agree'" />
+                                <span class="consent_radio_text">동의합니다.</span>
+                            </label>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> -->
 
-            <!-- 상담내용 폼 (점포 소유 시에만 표시) -->
-            <div class="apply_form" v-show="hasStore === true">
-                <div class="form_head">
-                    <h3 class="form_head_title">상담내용</h3>
-                    <span class="form_required_note">* 필수 입력사항</span>
+                <div class="middle_bts_wrap">
+                    <button :class="{ active: hasStore === true }" @click="hasStore = true">내가 소유한 점포가 있다.</button>
+                    <button :class="{ active: hasStore === false }" @click="hasStore = false">내가 소유한 점포가 없다.</button>
                 </div>
-                <div class="form_body">
-                    <!-- 소유점포 면적 -->
-                    <div class="form_row form_row_area">
-                        <div class="form_label">소유점포 면적</div>
-                        <div class="form_field form_field_area">
-                            <div class="form_sub_group">
-                                <span class="form_sub_label">계약면적</span>
-                                <div class="form_sub_input_wrap">
-                                    <Inputs type="text" v-model="consultForm.areaContract" />
-                                    <span class="form_sub_unit">m²</span>
-                                </div>
-                            </div>
-                            <div class="form_sub_group">
-                                <span class="form_sub_label">전용면적</span>
-                                <div class="form_sub_input_wrap">
-                                    <Inputs type="text" v-model="consultForm.areaExclusive" />
-                                    <span class="form_sub_unit">m²</span>
-                                </div>
-                            </div>
-                            <span class="area_note">* m² = (기준)평 x 3.3</span>
-                        </div>
-                    </div>
-                    <!-- 수퍼 운영자 일 경우 -->
-                    <div class="form_row check_row">
-                        <div class="form_label">수퍼 운영자 일 경우</div>
-                        <div class="form_field form_field_check">
-                            <div class="form_sub_group">
-                                <span class="form_sub_label">취급 품목 체크</span>
-                                <div class="check_list">
-                                    <Inputs v-for="opt in superItemOptions" :key="opt.value"
-                                            type="checkbox" :value="opt.value" v-model="consultForm.superItems" :text="opt.label" />
-                                </div>
-                            </div>
-                            <div class="check_etc">
-                                <span class="form_sub_label">기타</span>
-                                <Inputs type="text" v-model="consultForm.superItemEtc" />
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 계약조건 -->
-                    <div class="form_row contract_row">
-                        <div class="form_label">계약조건</div>
-                        <div class="form_field form_field_contract">
-                            <div class="form_sub_group">
-                                <span class="form_sub_label">계약 기간</span>
-                                <div class="form_sub_inputs">
-                                    <Inputs type="text" v-model="consultForm.contractStart"/>
-                                    <span class="form_sep">~</span>
-                                    <Inputs type="text" v-model="consultForm.contractEnd" />
-                                </div>
-                            </div>
-                            <div class="form_sub_group">
-                                <span class="form_sub_label">보증금/월임대료</span>
-                                <div class="contract_rent">
-                                    <div class="form_sub_input_wrap">
-                                        <Inputs type="text" v-model="consultForm.deposit" />
-                                        <span class="form_sub_unit">만원</span>
-                                    </div>
-                                    <div class="form_sub_input_wrap">
-                                        <Inputs type="text" v-model="consultForm.monthlyRent" />
-                                        <span class="form_sub_unit">만원</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- 버튼 -->
+                <!-- 고객정보 폼 -->
+                <div class="apply_form">
+                    <div class="form_head">
+                        <h3 class="form_head_title">고객정보</h3>
+                        <span class="form_required_note">* 필수 입력사항</span>
+                    </div>
+                    <div class="form_body">
+                        <!-- 이름 -->
+                        <div class="form_row">
+                            <div class="form_label">이름<span class="form_required">*</span></div>
+                            <div class="form_field">
+                                <Inputs type="text" />
+                            </div>
+                        </div>
+                        <!-- 이메일 -->
+                        <div class="form_row">
+                            <div class="form_label">이메일</div>
+                            <div class="form_field form_field_email">
+                                <Inputs type="text" v-model="consultForm.emailId" />
+                                <span class="form_sep">@</span>
+                                <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" placeholder="직접입력" />
+                                <Inputs v-else type="text" :model-value="consultForm.emailDomain" :is-readonly="true" />
+                                <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain" />
+                            </div>
+                        </div>
+                        <!-- 연락처 -->
+                        <div class="form_row">
+                            <div class="form_label">연락처<span class="form_required">*</span></div>
+                            <div class="form_field form_field_phone">
+                                <SelectBox :options="phoneOptions" v-model="consultForm.phone1" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone2" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone3" />
+                            </div>
+                        </div>
+
+                        <!-- 개설희망지역 -->
+                        <div class="form_row">
+                            <div class="form_label">소유점포 주소 <br class="p_br"/>(과거, 현재 점포소유 <br class="p_br">신청자에 한함)<span class="form_required">*</span></div>
+                            <div class="form_field form_field_region">
+                                <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" initMsg="시/도 선택" @update:modelValue="consultForm.regionSigungu = ''" />
+                                <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" initMsg="구/군 선택" :disabled="!consultForm.regionSido" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 상담내용 폼 (점포 소유 시에만 표시) -->
+                <div class="apply_form" v-show="hasStore === true">
+                    <div class="form_head">
+                        <h3 class="form_head_title">상담내용</h3>
+                        <span class="form_required_note">* 필수 입력사항</span>
+                    </div>
+                    <div class="form_body">
+                        <!-- 소유점포 면적 -->
+                        <div class="form_row form_row_area">
+                            <div class="form_label">소유점포 면적</div>
+                            <div class="form_field form_field_area">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">계약면적</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.areaContract" />
+                                        <span class="form_sub_unit">m²</span>
+                                    </div>
+                                </div>
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">전용면적</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.areaExclusive" />
+                                        <span class="form_sub_unit">m²</span>
+                                    </div>
+                                </div>
+                                <span class="area_note">* m² = (기준)평 x 3.3</span>
+                            </div>
+                        </div>
+                        <!-- 수퍼 운영자 일 경우 -->
+                        <div class="form_row check_row">
+                            <div class="form_label">수퍼 운영자 일 경우</div>
+                            <div class="form_field form_field_check">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">취급 품목 체크</span>
+                                    <div class="check_list">
+                                        <Inputs v-for="opt in superItemOptions" :key="opt.value"
+                                                type="checkbox" :value="opt.value" v-model="consultForm.superItems" :text="opt.label" />
+                                    </div>
+                                </div>
+                                <div class="check_etc">
+                                    <span class="form_sub_label">기타</span>
+                                    <Inputs type="text" v-model="consultForm.superItemEtc" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 계약조건 -->
+                        <div class="form_row contract_row">
+                            <div class="form_label">계약조건</div>
+                            <div class="form_field form_field_contract">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">계약 기간</span>
+                                    <div class="form_sub_inputs">
+                                        <Inputs type="text" v-model="consultForm.contractStart"/>
+                                        <span class="form_sep">~</span>
+                                        <Inputs type="text" v-model="consultForm.contractEnd" />
+                                    </div>
+                                </div>
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">보증금/월임대료</span>
+                                    <div class="contract_rent">
+                                        <div class="form_sub_input_wrap">
+                                            <Inputs type="text" v-model="consultForm.deposit" />
+                                            <span class="form_sub_unit">만원</span>
+                                        </div>
+                                        <div class="form_sub_input_wrap">
+                                            <Inputs type="text" v-model="consultForm.monthlyRent" />
+                                            <span class="form_sub_unit">만원</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 버튼 -->
+            <!-- </div> -->
+            
+            <!-- <div class="smn_bottom">
+                <Buttons btn-class="btn_big primary">상담신청</Buttons>
+                <Buttons btn-class="btn_big gary" @click="closeModal">다시작성</Buttons>
+            </div> -->
         </div>
         
         <div class="modal_bottom">

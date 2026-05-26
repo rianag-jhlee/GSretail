@@ -960,7 +960,7 @@ function onMqTabletChange(e) { isTablet.value = e.matches; }
 
 const QUICK_MENU_REVEAL_PX = 100;
 const QUICK_MENU_VIEWPORT_BOTTOM_PX = 100;
-const QUICK_MENU_FOOTER_GAP_PX = 100;
+const QUICK_MENU_FOOTER_GAP_PX = 60;
 const showQuickMenu = ref(false);
 const quickMenuRef = ref(null);
 let quickMenuFooterEl = null;
@@ -1113,7 +1113,7 @@ onMounted(() => {
 onUnmounted(() => {
     document.removeEventListener("click", closeYouthPopover);
     document.removeEventListener("click", closeAllTooltips);
-    mqMobile.removeEventListener("change", onMqMobileChange);
+    mqMobile.removeEventListener("change", onMqMobileChangeWithQuickMenu);
     mqTablet.removeEventListener("change", onMqTabletChange);
     window.removeEventListener("resize", refreshQuickMenu);
     window.removeEventListener("scroll", onQuickMenuScroll);
@@ -1386,7 +1386,8 @@ function toggleCard(id) {
 .sec_consult :deep(.brand_panel_title h2::after){content:''; display:block; width:40px; height:40px; background: url(@/assets/images/sub/icon_cont_40.png) no-repeat -740px -103px; }
 
 /* quick menu */
-.quick_menu{position:fixed; bottom:60px; right:clamp(24px, 4.5313vw, 87px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none;}
+.quick_menu{position:fixed; bottom:60px; right:clamp(24px, calc(50% - 1420px / 2 - 160px), 800px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none; transition:opacity 0.35s ease;}
+.quick_menu.is_visible{opacity:1; pointer-events:auto;}
 .quick_menu li{position:relative; width:100%;}
 .quick_menu li button{width:100%; height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 0; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:700; letter-spacing:-0.01em; background:none; background-color:#F2F2F4; border:0; border-radius:99px; text-align:center; display:flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px);}
 .quick_menu li button::before{content:''; width:20px; height:20px; background: url(@/assets/images/common/icon_set_20.png) no-repeat; display:block;}

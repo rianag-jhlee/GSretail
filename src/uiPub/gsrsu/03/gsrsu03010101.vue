@@ -2896,14 +2896,11 @@ export default {
     .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(7):after {background-position: -4px -1020px;}
     .talent_indicators .icon_wrap.support_section:nth-of-type(3) .support_item:nth-of-type(8):after {background-position: -4px -1080px;}
 
-    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(1):after {background-position: -4px -1140px;}
-    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(2):after {background-position: -4px -1200px;}
-    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(3):after {background-position: -4px -1260px;}
-    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(4):after {background-position: -4px -1320px;}
-    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(5):after {background-position: -4px -1380px;}
-    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(6):after {background-position: -4px -1440px;}
-    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(7):after {background-position: -4px -1500px;}
-    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(8):after {background-position: -4px -1560px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(1):after {background-position: 0px -1140px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(2):after {background-position: 0px -1200px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(3):after {background-position: 0px -1260px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(4):after {background-position: 0px -1320px;}
+    .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(5):after {width: 44px; background-position: 0px -1380px;}
     
     .talent_indicators .item_inner .tit_area { margin-bottom: 24px; }
     .talent_indicators .item_inner .num { display: block; margin-bottom:4px; color: #107AF2; font-size: 2.8rem; font-weight: 700; line-height:130% }
@@ -3312,7 +3309,6 @@ export default {
         .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(3):after {background-position: 1px -915px;}
         .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(4):after {background-position: 1px -958px;}
         .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(5):after {background-position: 1px -1002px;}
-        .talent_indicators .icon_wrap.support_section:nth-of-type(4) .support_item:nth-of-type(6):after {background-position: -4px -1032px;}
 
         .customer_satisfaction .safety_system_list li {padding-left:76px;}
         .customer_satisfaction .safety_system_list li:after {width: 32px; height: 32px; top: 14px; left: 14px;}
