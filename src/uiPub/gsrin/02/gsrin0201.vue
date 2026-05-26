@@ -288,7 +288,7 @@ export default {
                     MainsubTitle: "Business Performance",
                     MainDesc: ["투명한 GS리테일<br/> 경영성과 입니다.", "배당정책", "투명한 GS리테일<br/> 경영성과 입니다."],
                     Tabs1: [{ item: "재무현황" }, { item: "배당 정보" }, { item: "실적자료 등" }],
-                    UnitMillion: "(단위 : 백만원)",
+                    UnitMillion: "(단위 : 원, %)",
                     Recent5Years: "(최근 5개년 기준)",
                     SummaryYears: ["2023", "2024", "2025"],
                     TableTitle1: "요약 연결재무상태표",
