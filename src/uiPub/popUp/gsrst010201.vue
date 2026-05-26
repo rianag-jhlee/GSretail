@@ -25,74 +25,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="apply_form">
-                <div class="form_head">
-                    <h3 class="form_head_title">신청하기</h3>
-                    <span class="form_required_note">* 필수 입력사항</span>
-                </div>
-                <div class="form_body">
-                    <div class="form_row">
-                        <div class="form_label">이름<span class="form_required">*</span></div>
-                        <div class="form_field">
-                            <Inputs type="text" v-model="seminarForm.name" />
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_label">연락처<span class="form_required">*</span></div>
-                        <div class="form_field form_field_phone">
-                            <SelectBox :options="phoneOptions" v-model="seminarForm.phone1" />
-                            <span class="form_sep">-</span>
-                            <Inputs type="text" v-model="seminarForm.phone2" />
-                            <span class="form_sep">-</span>
-                            <Inputs type="text" v-model="seminarForm.phone3" />
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_label">이메일<span class="form_required">*</span></div>
-                        <div class="form_field form_field_email">
-                            <Inputs type="text" v-model="seminarForm.emailId" />
-                            <span class="form_sep">@</span>
-                            <Inputs v-if="seminarForm.emailDomain === ''" type="text" v-model="seminarForm.emailDomainCustom" placeholder="직접입력" />
-                            <Inputs v-else type="text" :model-value="seminarForm.emailDomain" :is-readonly="true" />
-                            <SelectBox :options="emailDomainOptions" v-model="seminarForm.emailDomain" initMsg="직접입력" />
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_label">개설희망지역<span class="form_required">*</span></div>
-                        <div class="form_field form_field_region">
-                            <SelectBox :options="regionSidoOptions" v-model="seminarForm.regionSido" initMsg="지역선택" />
-                            <SelectBox :options="[]" v-model="seminarForm.regionSigungu" initMsg="구/군 선택" />
-                        </div>
-                    </div>
-                    <div class="form_row">
-                        <div class="form_label">재직중인 과거직장</div>
-                        <div class="form_field">
-                            <Inputs type="text" v-model="seminarForm.prevJob" />
-                        </div>
-                    </div>
-                    <div class="form_row form_row_radio">
-                        <div class="form_label">사업 설명회 신청<br class="p_br">지역<span class="form_required">*</span></div>
-                        <div class="form_field form_field_radio">
-                            <Inputs
-                                v-for="opt in seminarRegionOptions"
-                                :key="opt.value"
-                                type="radio"
-                                name="seminar_region"
-                                :value="opt.value"
-                                v-model="seminarForm.seminarRegion"
-                                :text="opt.label"
-                            />
-                        </div>
-                    </div>
-                    <div class="form_row form_row_textarea">
-                        <div class="form_label">내용<span class="form_required">*</span></div>
-                        <div class="form_field">
-                            <Textarea v-model="seminarForm.content" :placeholder="contentPlaceholder" :rows="6" />
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="modal_bototm">
@@ -178,7 +110,7 @@ function closeModal(event) {
 <style scoped>
 .gsrst010201 { --color-brand-primary: #15b874; }
 .gsrst010201 :deep([class*="btn_"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
-.modal_content { border-bottom: 1px solid #E5E5E9; }
+
 .smn_intro > p { color: #161616; font-size: 2rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.35; }
 .consent_box { margin-top: 40px; border-radius: 12px; background-color: #f8f8f8; overflow: hidden; }
 .consent_info { padding: 32px; }
@@ -227,6 +159,7 @@ function closeModal(event) {
 .modal_bototm > :deep(.btn_big) { width: 134px; text-align: center; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 
 @media (max-width: 768px) {
+    .smn_modal { max-height: 100%; }
     .modal_wrap .modal_container { padding-bottom: 32px; }
     .smn_intro { display: none; }
     .consent_info { padding: 30px 20px; }

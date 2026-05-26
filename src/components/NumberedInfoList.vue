@@ -47,6 +47,11 @@ defineProps({
 .num_info_item:last-child, .num_info_item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
 .num_info_item > article { display: flex; gap: 24px; align-items: flex-start; }
 .num_info_icon { width: 80px; height: 80px; background-color: #f2f2f4; border-radius: 50%; flex-shrink: 0; position:relative;}
+.num_info_icon:before { content:''; width: 40px; height: 40px; background-image: url('@/assets/images/sub/icon_cont_40.png'); background-repeat: no-repeat; display: block; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); filter: brightness(0) saturate(100%) invert(28%) sepia(65%) saturate(2816%) hue-rotate(202deg) brightness(102%) contrast(90%);}
+.num_info_item:nth-of-type(1) .num_info_icon:before { background-position: -900px -267px; }
+.num_info_item:nth-of-type(2) .num_info_icon:before { background-position: -820px -267px; }
+.num_info_item:nth-of-type(3) .num_info_icon:before { background-position: -500px -344px; }
+.num_info_item:nth-of-type(4) .num_info_icon:before { background-position: -500px -344px; background: red; }
 .num_info_title { margin-bottom: 24px; }
 .num_info_num, .num_info_title > strong { font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .num_info_num { margin-bottom: 4px; color: #107af2; display:inline-block; }
@@ -59,7 +64,6 @@ defineProps({
 .num_info_body .list_dotted > li::before { background-color: #67676f; }
 .num_info_body .list_dotted > li + li { margin-top: 6px; }
 .num_info_body .list_dotted > li > p { color:#67676f; font-size: 1.8rem; line-height: 1.4; }
-
 @media (max-width: 768px) {
     .num_info_list { grid-template-columns: 1fr; gap: 40px; }
     .num_info_item { padding: 0; border: 0; }
@@ -72,5 +76,6 @@ defineProps({
     .num_info_body > p { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .num_info_body .list_dotted > li p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .num_info_body .list_dotted > li + li { margin-top: 4px; }
+    .num_info_icon:before { width: 32px; height: 32px; background-image: url('@/assets/images/sub/icon_cont_32.png');}
 }
 </style>
