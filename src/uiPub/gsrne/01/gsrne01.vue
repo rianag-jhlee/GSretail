@@ -2,7 +2,6 @@
     <div class="main-container">
         <div class="title_wrap">
             <h2 class="page-title">{{ t.MainTitle }}</h2>
-            <p class="visual-sub">{{ t.MainsubTitle }}</p>
         </div>
 
         <section class="section-investor">
@@ -27,7 +26,10 @@
                                         </a>
                                         <a href="#none" class="cont">
                                             <strong>{{ item.title }}</strong>
-                                            <p></p>
+                                            <div class="info">
+                                                <span class="cate">{{ item.cate }}</span>
+                                                <p class="date">{{ item.date }}</p> 
+                                            </div>
                                         </a>
                                     </div>
                                 </li>
@@ -70,7 +72,6 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "보도자료",
-                    MainsubTitle: "GS리테일의 최근 소식을 전달해 드립니다.",
 
                     /* Search 컴포넌트 전용 옵션 (props: search_opt) */
                     SearchOptions: [
@@ -83,10 +84,12 @@ export default {
 
                     /* 리스트 데이터 */
                     ListData: [
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-3.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-4.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-5.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-6.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
                     ]
                 }
             }
@@ -100,7 +103,6 @@ export default {
     methods: {
         /* [검색] 버튼 클릭 시 Search 컴포넌트에서 전달받은 값 처리 */
         handleSearch(val) { 
-            // val은 { type: "...", keyword: "..." } 형태입니다.
             console.log("검색 유형:", val.type);
             console.log("검색어:", val.keyword);
             
@@ -120,13 +122,17 @@ export default {
 </script>
 
 <style scoped>
-/* 제공해주신 CSS 그대로 유지 (수정 없음) */
+
 .main-container { width: 100%; position: relative; }
 .title_wrap { width: 100%; padding: 10.91% 0 0; text-align: center; position: relative; display: block; }
 .page-title { color: #111; font-size: 72px; font-weight: 700; line-height:124%; letter-spacing:-0.02em;}
 .visual-sub { margin-top: 10px; color: #111; font-size: 24px; font-weight: 400; line-height:150%; }
 
-/* board_wrap */
+.search_filter_area :deep(.search_wrap .select){min-width:160px;}
+.search_filter_area :deep(.search_wrap .select >div::after){width:20px; height:20px; margin:0;background:url('@/assets/images/common/icon_set_20.png') no-repeat -192px -25px; border:0; transform:translateY(-50%) rotate(0);}
+.search_filter_area :deep(.search_wrap .select select){padding:14px 16px;border:0;background-color:#F8F8F8;}
+.search_filter_area :deep(.input_search_wrap){min-width:360px; border:0;}
+.search_filter_area :deep(.input_search_wrap .input_wrap input){background-color:#F8F8F8;}
 .board_wrap.type_gallery .body {margin-top:-54px; margin-left:-50px; display:flex; flex-wrap:wrap;}
 .board_wrap.type_gallery .body > li {width:33.3333%; padding-top:54px; padding-left:50px;}
 .board_wrap.type_gallery .item {display:flex; flex-direction:column;}
@@ -135,12 +141,14 @@ export default {
 .board_wrap.type_gallery .item .thumb img {width:100%; height:100%; object-fit:cover; display:block;}
 .board_wrap.type_gallery .item .cont {margin-top:24px;}
 .board_wrap.type_gallery .item .cont strong {font-size:2rem; line-height:135%; letter-spacing:-0.01em; display:block;}
-
+.board_wrap.type_gallery .item .cont .info{margin-top:12px;}
+.board_wrap.type_gallery .item .cont .cate{margin-right:8px;padding:3px 6px; background-color:#F2F2F4;border-radius:4px; color:#67676F;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+.board_wrap.type_gallery .item .cont .date{color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;display:inline-block;}
 @media screen and (max-width: 767px) {
-    .title_wrap {margin-top:48px; padding:0 20px; text-align:initial;}
+    .title_wrap {display: none;}
     .title_wrap h2 {display:none;}
     .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
-
+    .search_filter_area{margin-top:0;}
     .board_wrap.type_gallery .body {margin-top:-48px;}
     .board_wrap.type_gallery .body > li {width:100%; padding-top:48px;}
     .board_wrap.type_gallery .item .thumb {padding-top:60.895522%;}
