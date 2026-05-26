@@ -1,45 +1,42 @@
 <template>
     <div class="modal_cont gsrst010201">
         <div class="modal_header">
-            사업설명회 신청
+            {{ t.title }}
             <a href="#none" @click="closeModal" class="btn_close">닫기</a>
         </div>
 
         <div class="modal_content">
             <div class="smn_intro">
-                <p>사업설명회 신청을 하시려면 아래 내용을 입력해 주시기 바랍니다.</p>
+                <p>{{ t.intro }}</p>
             </div>
 
             <div class="consent_box">
                 <div class="consent_info">
-                    <h3 class="consent_info_title">개인정보 수집·이용 동의</h3>
+                    <h3 class="consent_info_title">{{ t.consent.title }}</h3>
                     <ul class="consent_info_list">
-                        <li>입력하신 정보는 사업설명회에 의한 확인을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같습니다.<br>기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 취급방침"을 참고하시기 바랍니다.</li>
-                        <li>수집하는 개인정보 항목 : 이름, 연락처, E-mail, 지역</li>
-                        <li>수집이용 및 목적: 수집된 개인정보를 통한 사업 및 문의사항 확인 및 답변을 위하여 활용</li>
-                        <li>보유 및 이용기간: 개인정보 수집 및 이용 목적이 달성된 후에는 예외없이 정보를 파기 합니다.</li>
+                        <li v-for="(item, index) in t.consent.items" :key="index" v-html="item"></li>
                     </ul>
                     <div class="consent_notice">
-                        <p class="consent_notice_text">고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br class="p_br">사업설명회 신청 글 작성이 불가능합니다.</p>
-                        <Inputs type="checkbox" text="동의합니다." v-model="consentAgree" />
+                        <p class="consent_notice_text" v-html="t.consent.notice"></p>
+                        <Inputs type="checkbox" :text="t.consent.agreeLabel" v-model="consentAgree" />
                     </div>
                 </div>
             </div>
 
             <div class="apply_form">
                 <div class="form_head">
-                    <h3 class="form_head_title">신청하기</h3>
-                    <span class="form_required_note">* 필수 입력사항</span>
+                    <h3 class="form_head_title">{{ t.form.title }}</h3>
+                    <span class="form_required_note">{{ t.form.requiredNote }}</span>
                 </div>
                 <div class="form_body">
                     <div class="form_row">
-                        <div class="form_label">이름<span class="form_required">*</span></div>
+                        <div class="form_label">{{ t.form.nameLabel }}<span class="form_required">*</span></div>
                         <div class="form_field">
                             <Inputs type="text" v-model="seminarForm.name" />
                         </div>
                     </div>
                     <div class="form_row">
-                        <div class="form_label">연락처<span class="form_required">*</span></div>
+                        <div class="form_label">{{ t.form.phoneLabel }}<span class="form_required">*</span></div>
                         <div class="form_field form_field_phone">
                             <SelectBox :options="phoneOptions" v-model="seminarForm.phone1" />
                             <span class="form_sep">-</span>
@@ -49,30 +46,30 @@
                         </div>
                     </div>
                     <div class="form_row">
-                        <div class="form_label">이메일<span class="form_required">*</span></div>
+                        <div class="form_label">{{ t.form.emailLabel }}<span class="form_required">*</span></div>
                         <div class="form_field form_field_email">
                             <Inputs type="text" v-model="seminarForm.emailId" />
                             <span class="form_sep">@</span>
-                            <Inputs v-if="seminarForm.emailDomain === ''" type="text" v-model="seminarForm.emailDomainCustom" placeholder="직접입력" />
+                            <Inputs v-if="seminarForm.emailDomain === ''" type="text" v-model="seminarForm.emailDomainCustom" :placeholder="t.form.emailPlaceholder" />
                             <Inputs v-else type="text" :model-value="seminarForm.emailDomain" :is-readonly="true" />
-                            <SelectBox :options="emailDomainOptions" v-model="seminarForm.emailDomain" initMsg="직접입력" />
+                            <SelectBox :options="emailDomainOptions" v-model="seminarForm.emailDomain" :initMsg="t.form.emailPlaceholder" />
                         </div>
                     </div>
                     <div class="form_row">
-                        <div class="form_label">개설희망지역<span class="form_required">*</span></div>
+                        <div class="form_label">{{ t.form.regionLabel }}<span class="form_required">*</span></div>
                         <div class="form_field form_field_region">
-                            <SelectBox :options="regionSidoOptions" v-model="seminarForm.regionSido" initMsg="지역선택" />
-                            <SelectBox :options="[]" v-model="seminarForm.regionSigungu" initMsg="구/군 선택" />
+                            <SelectBox :options="regionSidoOptions" v-model="seminarForm.regionSido" :initMsg="t.form.regionInitMsg" />
+                            <SelectBox :options="[]" v-model="seminarForm.regionSigungu" :initMsg="t.form.sigunguInitMsg" />
                         </div>
                     </div>
                     <div class="form_row">
-                        <div class="form_label">재직중인 과거직장</div>
+                        <div class="form_label">{{ t.form.prevJobLabel }}</div>
                         <div class="form_field">
                             <Inputs type="text" v-model="seminarForm.prevJob" />
                         </div>
                     </div>
                     <div class="form_row form_row_radio">
-                        <div class="form_label">사업 설명회 신청<br class="p_br">지역<span class="form_required">*</span></div>
+                        <div class="form_label" v-html="t.form.seminarRegionLabel"></div>
                         <div class="form_field form_field_radio">
                             <Inputs
                                 v-for="opt in seminarRegionOptions"
@@ -86,7 +83,7 @@
                         </div>
                     </div>
                     <div class="form_row form_row_textarea">
-                        <div class="form_label">내용<span class="form_required">*</span></div>
+                        <div class="form_label">{{ t.form.contentLabel }}<span class="form_required">*</span></div>
                         <div class="form_field">
                             <Textarea v-model="seminarForm.content" :placeholder="contentPlaceholder" :rows="6" />
                         </div>
@@ -96,19 +93,83 @@
         </div>
 
         <div class="modal_bototm">
-            <Buttons btn-class="btn_big fill primary">신청</Buttons>
-            <Buttons btn-class="btn_big gary" @click="closeModal">취소</Buttons>
+            <Buttons btn-class="btn_big fill primary">{{ t.submitLabel }}</Buttons>
+            <Buttons btn-class="btn_big gary" @click="closeModal">{{ t.cancelLabel }}</Buttons>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, onUnmounted } from "vue";
+import { ref, reactive, computed, defineProps, onMounted, onUnmounted } from "vue";
 import modal from "@/assets/js/modal";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import Textarea from "@/components/Textarea.vue";
 import Buttons from "@/components/Buttons.vue";
+
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
+    },
+});
+
+const langData = {
+    ko: {
+        title: "사업설명회 신청",
+        intro: "사업설명회 신청을 하시려면 아래 내용을 입력해 주시기 바랍니다.",
+        consent: {
+            title: "개인정보 수집·이용 동의",
+            items: [
+                '입력하신 정보는 사업설명회에 의한 확인을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같습니다.<br>기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 취급방침"을 참고하시기 바랍니다.',
+                "수집하는 개인정보 항목 : 이름, 연락처, E-mail, 지역",
+                "수집이용 및 목적: 수집된 개인정보를 통한 사업 및 문의사항 확인 및 답변을 위하여 활용",
+                "보유 및 이용기간: 개인정보 수집 및 이용 목적이 달성된 후에는 예외없이 정보를 파기 합니다.",
+            ],
+            notice: '고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br class="p_br">사업설명회 신청 글 작성이 불가능합니다.',
+            agreeLabel: "동의합니다.",
+        },
+        form: {
+            title: "신청하기",
+            requiredNote: "* 필수 입력사항",
+            nameLabel: "이름",
+            phoneLabel: "연락처",
+            emailLabel: "이메일",
+            emailPlaceholder: "직접입력",
+            regionLabel: "개설희망지역",
+            regionInitMsg: "지역선택",
+            sigunguInitMsg: "구/군 선택",
+            prevJobLabel: "재직중인 과거직장",
+            seminarRegionLabel: '사업 설명회 신청<br class="p_br">지역<span class="form_required">*</span>',
+            contentLabel: "내용",
+            regionSidoOptions: [
+                { value: "서울", label: "서울" },
+                { value: "경기", label: "경기" },
+                { value: "인천", label: "인천" },
+                { value: "충청", label: "충청" },
+                { value: "강원", label: "강원" },
+                { value: "제주", label: "제주" },
+                { value: "전라", label: "전라" },
+                { value: "경상", label: "경상" },
+            ],
+            seminarRegionOptions: [
+                { value: "수도", label: "수도 (서울, 경기, 인천)" },
+                { value: "중부", label: "중부 (충청, 강원, 제주)" },
+                { value: "영남호남", label: "영남/호남 (전라, 경상)" },
+            ],
+        },
+        contentPlaceholderPc: "개설 희망 타입을 적어주세요. (타입 GSF1, GSF2, GSF3)",
+        contentPlaceholderMobile: "개설 희망 타입을 적어주세요.\n(타입 GSF1, GSF2, GSF3)",
+        submitLabel: "신청",
+        cancelLabel: "취소",
+    },
+    en: {},
+};
+
+const t = computed(() => {
+    const selected = langData[props.lang];
+    return selected && Object.keys(selected).length ? selected : langData.ko;
+});
 
 const consentAgree = ref("");
 
@@ -127,21 +188,8 @@ const emailDomainOptions = [
     { value: "kakao.com", label: "kakao.com" },
     { value: "hanmail.net", label: "hanmail.net" },
 ];
-const regionSidoOptions = [
-    { value: "서울", label: "서울" },
-    { value: "경기", label: "경기" },
-    { value: "인천", label: "인천" },
-    { value: "충청", label: "충청" },
-    { value: "강원", label: "강원" },
-    { value: "제주", label: "제주" },
-    { value: "전라", label: "전라" },
-    { value: "경상", label: "경상" },
-];
-const seminarRegionOptions = [
-    { value: "수도", label: "수도 (서울, 경기, 인천)" },
-    { value: "중부", label: "중부 (충청, 강원, 제주)" },
-    { value: "영남호남", label: "영남/호남 (전라, 경상)" },
-];
+const regionSidoOptions = computed(() => t.value.form.regionSidoOptions);
+const seminarRegionOptions = computed(() => t.value.form.seminarRegionOptions);
 
 const seminarForm = reactive({
     name: "",
@@ -166,8 +214,8 @@ onUnmounted(() => { mq.removeEventListener("change", onMqChange); });
 
 const contentPlaceholder = computed(() =>
     isMobile.value
-        ? "개설 희망 타입을 적어주세요.\n(타입 GSF1, GSF2, GSF3)"
-        : "개설 희망 타입을 적어주세요. (타입 GSF1, GSF2, GSF3)"
+        ? t.value.contentPlaceholderMobile
+        : t.value.contentPlaceholderPc
 );
 
 function closeModal(event) {
