@@ -254,6 +254,16 @@
         "status": "com",
         "note": "gsrbr_smain, gsrbr010101 ~ gsrbr0106 모두 포함됨"
     },
+    {
+        "depth1": "", "depth2": "GS25(영문번역)", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "",
+        "path": "gsrbr/01/gsrbr010101_en",
+        "link": "/gsrbr010101_en",
+        "startDate": "",
+        "endDate": "",
+        "status": "com",
+        "note": "gsrbr_smain, gsrbr010101 ~ gsrbr0106 모두 포함됨"
+    },
    
     {
         "depth1": "", "depth2": "GS THE FRESH", "depth3": "신선 산지 안내", "depth4": "전국 우수 산지", "depth5": "", "depth6": "",
