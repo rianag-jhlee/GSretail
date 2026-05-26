@@ -129,11 +129,7 @@ export default {
 .page-title { color: #111; font-size: 72px; font-weight: 700; line-height:124%; letter-spacing:-0.02em;}
 .visual-sub { margin-top: 10px; color: #111; font-size: 24px; font-weight: 400; line-height:150%; }
 
-.search_filter_area :deep(.search_wrap .select){min-width:160px;}
-.search_filter_area :deep(.search_wrap .select >div::after){width:20px; height:20px; margin:0;background:url('@/assets/images/common/icon_set_20.png') no-repeat -192px -25px; border:0; transform:translateY(-50%) rotate(0);}
-.search_filter_area :deep(.search_wrap .select select){padding:14px 16px;border:0;background-color:#F8F8F8;}
-.search_filter_area :deep(.input_search_wrap){min-width:360px; border:0;}
-.search_filter_area :deep(.input_search_wrap .input_wrap input){background-color:#F8F8F8;}
+
 .board_wrap.type_gallery .body {margin-top:-54px; margin-left:-50px; display:flex; flex-wrap:wrap;}
 .board_wrap.type_gallery .body > li {width:33.3333%; padding-top:54px; padding-left:50px;}
 .board_wrap.type_gallery .item {display:flex; flex-direction:column;}
