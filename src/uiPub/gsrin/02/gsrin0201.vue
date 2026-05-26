@@ -9,7 +9,7 @@
             <div class="cont_inner">
                 <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
                 
-                <p :class="['title-sub-text', { 'is_dividend': CTabIdx === 1 }]" v-html="t.MainDesc[CTabIdx]"></p>
+                <!-- <p :class="['title-sub-text', { 'is_dividend': CTabIdx === 1 }]" v-html="t.MainDesc[CTabIdx]"></p> -->
 
                 <div class="tab_content_wrap">
                     <!-- gsrin0201: 재무현황 -->
@@ -426,11 +426,11 @@ export default {
 .visual-sub { margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; text-align: center; }
 .title-sub-text { width: 100%; padding: 100px 0; color: #161618; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4; }
 .title-sub-text.is_dividend {padding-bottom: 16px; padding-top: 100px; text-align:left; }
-
+.tab_content_wrap{padding-top:100px;}
 /* Charts */
 .performance_charts { width: 100%; }
 .chart_grid { display: grid; grid-template-columns: repeat(2, 1fr); gap:100px 40px; }
-.chart_item { width: 100%; display: flex; flex-direction: column; gap: 40px; }
+.chart_item { width: 100%; display: flex; flex-direction: column; gap: 32px; }
 .chart_header { display: flex; align-items: flex-end; justify-content:space-between; }
 .chart_title { font-size: 40px; font-weight: 700; color: #161618; }
 .unit { font-size: 16px; color: #67676f; }
@@ -441,13 +441,13 @@ export default {
 
 /* 배당정책 설명 */
 .dividend_policy_info { width: 100%; text-align: left; }
-.section-sub-title { font-size: 48px; font-weight: 700; color: #161616; margin-bottom: 16px; letter-spacing: -0.48px; }
+.section-sub-title { font-size: 48px; font-weight: 700; color: #161616; letter-spacing: -0.48px; }
 .policy_desc { font-size: 24px; color: #161616; line-height: 1.5; letter-spacing: -0.24px; word-break: keep-all; }
 .table_info_group {margin-top:32px; margin-bottom:16px; display:flex; justify-content:space-between;}
 .gsrin0202 .policy_wrap {overflow-x:auto;}
 
 /* Table 스타일 */
-.policy_wrap table {width: 100%; margin-top:40px; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
+.policy_wrap table {width: 100%; margin-top:32px; border-collapse: collapse; border-top: 2px solid #161616; border-left: 0 !important; border-right: 0 !important; }
 .policy_wrap th, .policy_wrap td {padding: 18px 24px; border: 1px solid #e5e5e9; font-size: 1.8rem; line-height: 1.4; vertical-align: middle;}
 .policy_wrap th:first-child, .policy_wrap td:first-child { border-left: 0; }
 .policy_wrap th:last-child, .policy_wrap td:last-child { border-right: 0; }
@@ -488,6 +488,6 @@ tr.bold td, tr.bold th { font-weight: 700 !important; }
 
     .table_section {margin-top:80px;}
 
-    .policy_wrap table {margin-top:32px;}
+    .tab_content_wrap{padding-top:60px;}
 }
 </style>
