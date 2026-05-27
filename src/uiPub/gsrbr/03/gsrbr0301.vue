@@ -7,11 +7,10 @@
                     <div class="visual_inner">
                         <div class="txt_area">
                             <p ref="textParaRef">
-                                <span>고객의 모든 순간을</span>
-                                <span>가치 있게 만드는 중심</span>
+                                <span v-for="(line, index) in t.visual.lines" :key="index">{{ line }}</span>
                             </p>
                             <div ref="logoWrapRef" class="logo_wrap">
-                                <img :src="imgLogo" alt="GS SHOP" />
+                                <img :src="imgLogo" :alt="t.visual.logoAlt" />
                             </div>
                         </div>
                     </div>
@@ -21,15 +20,8 @@
         <section class="brand_kv"></section>
         <section ref="aboutSectionRef" class="sec_brand_about">
             <div class="about_inner">
-                <div class="about_txt">
-                    <p><span>GS SHOP은 고객의 라이프스타일을 깊이 이해하고, 소비의 기준을 만듭니다.</span></p>
-                    <p><span>데이터 분석과 AI 기술을 통한 인사이트를 바탕으로</span></p>
-                    <p><span>TV, 모바일 등 고객이 있는 모든 접점에서 다양하고</span></p>
-                    <p><span>차별화된 상품을 제공하고 있습니다.</span></p>
-                </div>
-                <div class="about_txt">
-                    <p><span>앞으로도 GS SHOP은 고객의 일상에 가장 적합한 선택을 제안하며,</span></p>
-                    <p><span> 소비의 가치를 높여가겠습니다.</span></p>
+                <div v-for="(block, blockIndex) in t.about" :key="blockIndex" class="about_txt">
+                    <p v-for="(line, lineIndex) in block" :key="lineIndex"><span>{{ line }}</span></p>
                 </div>
             </div>
         </section>
@@ -37,66 +29,61 @@
             <div class="str_inner">
                 <header class="str_header">
                     <div>
-                        <h2>브랜드 소개</h2>
-                        <p>GS SHOP은 TV쇼핑과 모바일/인터넷쇼핑몰 등에 개별적으로 사용되던 브랜드를 <br class="p_br"/>
-                            고객의 더 나은 쇼핑을 돕기 위해 하나로 통합한 브랜드입니다.</p>
+                        <h2>{{ t.str.title }}</h2>
+                        <p v-html="t.str.desc"></p>
                     </div>
                     <div class="str_actions">
                         <a
                             href="#"
                             class="btn_website"
-                        >홈페이지</a><!-- 26.05.11 Edit 이종환 : class 수정 -->
+                        >{{ t.str.websiteLabel }}</a><!-- 26.05.11 Edit 이종환 : class 수정 -->
                         <div class="sns_wrap">
-                            <a href="#" class="btn_sns btn_sns_insta" aria-label="인스타그램"></a>
-                            <a href="#" class="btn_sns btn_sns_yt" aria-label="유튜브"></a>
+                            <a href="#" class="btn_sns btn_sns_insta" :aria-label="t.str.snsInstaAria"></a>
+                            <a href="#" class="btn_sns btn_sns_yt" :aria-label="t.str.snsYtAria"></a>
                         </div>
                     </div>
                 </header>
                 <div class="str_bi">
                     <div class="str_bi_sec str_bi_sec_logo" aria-labelledby="str_bi_logo_tit">
                         <div class="str_bi_header">
-                            <h3 class="str_bi_tit">BI 로고</h3>
-                            <p class="str_bi_desc"> 
-                                GS SHOP이 지향하는 핵심가치인 ‘Real(진정성)’ 이 <br class="p_br"/>
-                                괄호 안에 담겨있음을 형상화한 것입니다. <br class="m_br"/><br class="m_br"/>GS SHOP은 가치가 있는 상품과 서비스에 진심을 담아,<br class="p_br"/>
-                                고객의 가장 좋은 선택을 만듭니다.
-                            </p>
+                            <h3 class="str_bi_tit">{{ t.bi.logoTitle }}</h3>
+                            <p class="str_bi_desc" v-html="t.bi.logoDesc"></p>
                         </div>
                         <div class="str_bi_logo_figs">
                             <figure class="str_bi_fig">
-                                <img :src="imgBi01" alt="GS SHOP BI 심볼" />
+                                <img :src="imgBi01" :alt="t.bi.logoSymbolAlt" />
                             </figure>
                             <figure class="str_bi_fig">
-                                <img :src="imgBi02" alt="GS SHOP BI 워드마크" />
+                                <img :src="imgBi02" :alt="t.bi.logoWordmarkAlt" />
                             </figure>
                         </div>
                     </div>
 
                     <div class="str_bi_sec str_bi_sec_color" aria-labelledby="str-bi-color-tit">
-                        <h3 class="str_bi_tit">BI 색상</h3>
+                        <h3 class="str_bi_tit">{{ t.bi.colorTitle }}</h3>
                         <div class="str_bi_color_figs">
-                            <h4 class="str_bi_caption">CORE COLORS</h4>
+                            <h4 class="str_bi_caption">{{ t.bi.coreColorsTitle }}</h4>
                             <ul class="str_color_core" role="list">
                                 <li>
-                                    <img :src="isBiColorMobile ? imgBi03Mo : imgBi03" alt="Dynamic Blue 핵심 색상" />
+                                    <img :src="isBiColorMobile ? imgBi03Mo : imgBi03" :alt="t.bi.coreColorAlt1" />
                                 </li>
                                 <li>
-                                    <img :src="isBiColorMobile ? imgBi04Mo : imgBi04" alt="Mist Gray 핵심 색상" />
+                                    <img :src="isBiColorMobile ? imgBi04Mo : imgBi04" :alt="t.bi.coreColorAlt2" />
                                 </li>
                             </ul>
-                            <h4 class="str_bi_caption">SUPPORTING COLORS</h4>
+                            <h4 class="str_bi_caption">{{ t.bi.supportingColorsTitle }}</h4>
                             <ul class="str_color_sup" role="list">
                                 <li>
-                                    <img :src="isBiColorMobile ? imgBi05Mo : imgBi05" alt="Bright Pink 보조 색상" />
+                                    <img :src="isBiColorMobile ? imgBi05Mo : imgBi05" :alt="t.bi.supportingColorAlt1" />
                                 </li>
                                 <li>
-                                    <img :src="isBiColorMobile ? imgBi06Mo : imgBi06" alt="Sunshine Orange 보조 색상" />
+                                    <img :src="isBiColorMobile ? imgBi06Mo : imgBi06" :alt="t.bi.supportingColorAlt2" />
                                 </li>
                                 <li>
-                                    <img :src="isBiColorMobile ? imgBi07Mo : imgBi07" alt="Forest Green 보조 색상" />
+                                    <img :src="isBiColorMobile ? imgBi07Mo : imgBi07" :alt="t.bi.supportingColorAlt3" />
                                 </li>
                                 <li>
-                                    <img :src="isBiColorMobile ? imgBi08Mo : imgBi08" alt="Ocean Navy 보조 색상" />
+                                    <img :src="isBiColorMobile ? imgBi08Mo : imgBi08" :alt="t.bi.supportingColorAlt4" />
                                 </li>
                             </ul>
                         </div>
@@ -107,22 +94,22 @@
         </section>
         <section class="sec_brand_competency str_inner">
             <header class="str_header">
-                <h2>GS SHOP의 비즈니스 핵심역량</h2>
+                <h2>{{ t.competency.title }}</h2>
             </header>
             <figure class="sec_brand_competency_fig">
-                <img :src="isBiCompetencyMobile ? imgBi09Mo : imgBi09" alt="GS SHOP의 비즈니스 핵심역량" />
+                <img :src="isBiCompetencyMobile ? imgBi09Mo : imgBi09" :alt="t.competency.imageAlt" />
             </figure>
         </section>
-        <section class="sec_brand_biz str_inner" aria-label="GS SHOP 비즈니스 핵심역량">
+        <section class="sec_brand_biz str_inner" :aria-label="t.biz.ariaLabel">
             <header class="str_header">
-                <h2>소비자중심경영(CCM)을 <br class="m_br"/>실천하는 <br class="p_br"/>GS SHOP</h2>
-                <p>GS SHOP은 소비자의 목소리를 가장 먼저 듣고, <br class="m_br"/> 나누고, 공감하는 CCM 인증기업입니다.</p>
+                <h2 v-html="t.biz.title"></h2>
+                <p v-html="t.biz.desc"></p>
             </header>
             <div class="str_biz_fig">
                 <div class="str_biz_fig_inner">
                     <div class="str_biz_fig_txt">
-                        <strong>CCM(Consumer<br class="m_br"/>Centered Management)<br class="m_br"/>인증이란?</strong>
-                        <p>기업이 수행하는 모든 활동을 소비자 관점에서 소비자 중심으로 구성하고 관련 경영활동을 지속적으로 개선하고 있는지를 평가하여 인증하는 제도</p>
+                        <strong v-html="t.biz.certTitle"></strong>
+                        <p>{{ t.biz.certDesc }}</p>
                         <dl v-if="!isMobileView" class="str_biz_fig_cert">
                             <template v-for="row in ccmCertDlItems" :key="row.term">
                                 <dt>{{ row.term }}</dt>
@@ -131,7 +118,7 @@
                         </dl>
                     </div>
                     <div class="str_biz_fig_img">
-                        <img :src="imgCert03" alt="소비자중심심" />
+                        <img :src="imgCert03" :alt="t.biz.certImageAlt" />
                     </div>
                 </div>
                 <dl v-if="isMobileView" class="str_biz_fig_cert">
@@ -142,17 +129,15 @@
                 </dl>
             </div>
             <div class="str_biz_block">
-                <h3 class="str_biz_subtit">CCM 도입, 운영 성과</h3>
-                <p>
-                    GS SHOP은 2009년 12월, 첫 인증을 받은 이후 고객을 먼저 생각하는 다양한 활동을 통해 CCM 재인증을 지속적으로 진행해왔습니다.
-                </p>
+                <h3 class="str_biz_subtit">{{ t.biz.performanceTitle }}</h3>
+                <p>{{ t.biz.performanceDesc }}</p>
                 <FeatureCards class="str_biz_feature_cards" type="text" :items="ccmFeatureItems" :swiper-space-between="8" />
             </div>
         </section>
-        <section class="sec_brand_channel str_inner" aria-label="판매 채널 소개">
+        <section class="sec_brand_channel str_inner" :aria-label="t.channel.ariaLabel">
             <header class="str_header str_header_channel"> 
-                <h2>판매 채널 소개</h2>
-                <p>TV, 온라인, 모바일 등 고객이 있는 접점에서 GS SHOP만의 쇼핑 경험을 제공합니다.</p>
+                <h2>{{ t.channel.title }}</h2>
+                <p>{{ t.channel.desc }}</p>
             </header>
             <ul class="card_list" role="list">
                 <li
@@ -170,9 +155,9 @@
                 </li>
             </ul>
         </section>
-        <section class="sec_brand_program str_inner" aria-label="대표 브랜드 프로그램 소개">
+        <section class="sec_brand_program str_inner" :aria-label="t.program.ariaLabel">
             <header class="str_header str_header_program">
-                <h2>대표 브랜드 프로그램 소개</h2>
+                <h2>{{ t.program.title }}</h2>
             </header>
             <ul class="card_list" role="list">
                 <li
@@ -202,13 +187,12 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, defineProps, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import FeatureCards from "@/components/FeatureCards.vue";
 import CardItem from "@/components/CardItem.vue";
-import Buttons from "@/components/Buttons.vue";
 import imgLogo from "@/assets/images/dummy/brand_gsshop_logo.png";
 import imgBi01 from "@/assets/images/dummy/gsrbr0301_01.png";
 import imgBi02 from "@/assets/images/dummy/gsrbr0301_02.png";
@@ -246,11 +230,195 @@ gsap.registerPlugin(ScrollTrigger);
 
 const router = useRouter();
 
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
+    },
+});
+
 const langData = {
-    ko: { backLabel: "목록으로 돌아가기" },
+    ko: {
+        visual: {
+            lines: ["고객의 모든 순간을", "가치 있게 만드는 중심"],
+            logoAlt: "GS SHOP",
+        },
+        about: [
+            [
+                "GS SHOP은 고객의 라이프스타일을 깊이 이해하고, 소비의 기준을 만듭니다.",
+                "데이터 분석과 AI 기술을 통한 인사이트를 바탕으로",
+                "TV, 모바일 등 고객이 있는 모든 접점에서 다양하고",
+                "차별화된 상품을 제공하고 있습니다.",
+            ],
+            [
+                "앞으로도 GS SHOP은 고객의 일상에 가장 적합한 선택을 제안하며,",
+                "소비의 가치를 높여가겠습니다.",
+            ],
+        ],
+        str: {
+            title: "브랜드 소개",
+            desc: "GS SHOP은 TV쇼핑과 모바일/인터넷쇼핑몰 등에 개별적으로 사용되던 브랜드를 <br class=\"p_br\"/>고객의 더 나은 쇼핑을 돕기 위해 하나로 통합한 브랜드입니다.",
+            websiteLabel: "홈페이지",
+            snsInstaAria: "인스타그램",
+            snsYtAria: "유튜브",
+        },
+        bi: {
+            logoTitle: "BI 로고",
+            logoDesc: "GS SHOP이 지향하는 핵심가치인 ‘Real(진정성)’ 이 <br class=\"p_br\"/>괄호 안에 담겨있음을 형상화한 것입니다. <br class=\"m_br\"/><br class=\"m_br\"/>GS SHOP은 가치가 있는 상품과 서비스에 진심을 담아,<br class=\"p_br\"/>고객의 가장 좋은 선택을 만듭니다.",
+            logoSymbolAlt: "GS SHOP BI 심볼",
+            logoWordmarkAlt: "GS SHOP BI 워드마크",
+            colorTitle: "BI 색상",
+            coreColorsTitle: "CORE COLORS",
+            supportingColorsTitle: "SUPPORTING COLORS",
+            coreColorAlt1: "Dynamic Blue 핵심 색상",
+            coreColorAlt2: "Mist Gray 핵심 색상",
+            supportingColorAlt1: "Bright Pink 보조 색상",
+            supportingColorAlt2: "Sunshine Orange 보조 색상",
+            supportingColorAlt3: "Forest Green 보조 색상",
+            supportingColorAlt4: "Ocean Navy 보조 색상",
+        },
+        competency: {
+            title: "GS SHOP의 비즈니스 핵심역량",
+            imageAlt: "GS SHOP의 비즈니스 핵심역량",
+        },
+        biz: {
+            ariaLabel: "GS SHOP 비즈니스 핵심역량",
+            title: "소비자중심경영(CCM)을 <br class=\"m_br\"/>실천하는 <br class=\"p_br\"/>GS SHOP",
+            desc: "GS SHOP은 소비자의 목소리를 가장 먼저 듣고, <br class=\"m_br\"/> 나누고, 공감하는 CCM 인증기업입니다.",
+            certTitle: "CCM(Consumer<br class=\"m_br\"/>Centered Management)<br class=\"m_br\"/>인증이란?",
+            certDesc: "기업이 수행하는 모든 활동을 소비자 관점에서 소비자 중심으로 구성하고 관련 경영활동을 지속적으로 개선하고 있는지를 평가하여 인증하는 제도",
+            certImageAlt: "소비자중심경영 인증 이미지",
+            certItems: [
+                { term: "인증기관", imgSrc: imgCert01, imgAlt: "공정거래위원회" },
+                { term: "운영기관", imgSrc: imgCert02, imgAlt: "한국소비자원" },
+            ],
+            performanceTitle: "CCM 도입, 운영 성과",
+            performanceDesc: "GS SHOP은 2009년 12월, 첫 인증을 받은 이후 고객을 먼저 생각하는 다양한 활동을 통해 CCM 재인증을 지속적으로 진행해왔습니다.",
+            featureItems: [
+                {
+                    title: "경영 전 과정에<br />CCM 도입",
+                    listDotted: true,
+                    desc: [
+                        "소비자중심경영 실천을 위해 경영 전 과정에 CCM의 가치와 철학을 반영",
+                        "고객불만 사전예방 시스템 체계를 구축하고 체계적인 CCM 관리지표 운영",
+                    ],
+                },
+                {
+                    title: "소비자<br />권익 증진 노력",
+                    listDotted: true,
+                    desc: [
+                        "'소비자분쟁해결기준'보다 소비자에게 유리한 'CS처리지침 및 고객서비스 정책’ 마련 ",
+                        "협력사와 상생경영을 통한 소비자 권익증진 협업시스템 운영",
+                    ],
+                },
+                {
+                    title: "소비자 효용을 증대한<br />우수한 서비스",
+                    listDotted: true,
+                    desc: [
+                        "고객의 라이프 스타일을 반영한 서비스 시행",
+                    ],
+                    subdesc: [
+                        "'라이브(LIVE) 배송 서비스', '안심택배 서비스', '편의점 픽업/반품 서비스' 등 고객 Needs에 부합하는 다양한 배송 서비스 실시",
+                        "GS Pay 등 다양한 결제 수단 도입, 결제 편의성 개선 등",
+                    ],
+                },
+            ],
+        },
+        channel: {
+            ariaLabel: "판매 채널 소개",
+            title: "판매 채널 소개",
+            desc: "TV, 온라인, 모바일 등 고객이 있는 접점에서 GS SHOP만의 쇼핑 경험을 제공합니다.",
+            cards: [
+                {
+                    key: "ch-tv",
+                    image: imgCh01,
+                    imgAlt: "TV 홈쇼핑",
+                    em: "01",
+                    title: "TV 홈쇼핑",
+                    desc: "국내 최초로 홈쇼핑 방송을 선보인 GS SHOP은 최초 홈쇼핑 채널만의 콘텐츠 제작 역량을 바탕으로 24시간 고객에게 차별화된 쇼핑 경험을 제공하고 있습니다.",
+                },
+                {
+                    key: "ch-online",
+                    image: imgCh02,
+                    imgAlt: "데이터 홈쇼핑",
+                    em: "02",
+                    title: "데이터 홈쇼핑",
+                    desc: "고객이 원할 때 리모콘으로 필요한 상품을 직접 선택, 구매할 수 있는 양방향 데이터 쇼핑으로 GS SHOP의 홈쇼핑 노하우를 그대로 담아 IPTV 플랫폼에 맞게 운영하고 있습니다.",
+                },
+                {
+                    key: "ch-mobile",
+                    image: imgCh03,
+                    imgAlt: "모바일 & 인터넷몰",
+                    em: "03",
+                    title: "모바일 & 인터넷몰",
+                    desc: "GS SHOP은 정교한 고객 DATA 분석을 통해 고객 맞춤형 상품과 매장을 선보이고 있으며 TV쇼핑과 지속적인 시너지를 유지하고 있습니다.",
+                },
+                {
+                    key: "ch-commerce",
+                    image: imgCh04,
+                    imgAlt: "라이브 커머스",
+                    em: "04",
+                    title: "라이브 커머스",
+                    desc: "GS SHOP에서 실시간 동영상 스트리밍으로 상품을 판매하는 '모바일 라이브'는 고객과 소통하며 상품에 대한 다양하고 생생한 정보를 제공합니다.",
+                },
+            ],
+        },
+        program: {
+            ariaLabel: "대표 브랜드 프로그램 소개",
+            title: "대표 브랜드 프로그램 소개",
+            cards: [
+                {
+                    key: "pr-01",
+                    image: imgPr01,
+                    imgAlt: "대표 브랜드 프로그램 1",
+                    title: "소유진쇼",
+                    desc: "차원이 다른 쇼핑<br />매주 금요일 저녁 8시 35분",
+                },
+                {
+                    key: "pr-02",
+                    image: imgPr02,
+                    imgAlt: "대표 브랜드 프로그램 3",
+                    title: "지금 백지연",
+                    desc: "프리미엄 큐레이션의 시작<br />매주 목요일 저녁 8시45분",
+                },
+                {
+                    key: "pr-03",
+                    image: imgPr03,
+                    imgAlt: "대표 브랜드 프로그램 3",
+                    title: "스타일나우",
+                    desc: "요즘 뜨는 스타일링<br />매주 화요일 오전",
+                },
+                {
+                    key: "pr-04",
+                    image: imgPr04,
+                    imgAlt: "대표 브랜드 프로그램 4",
+                    title: "더컬렉션",
+                    desc: "더 럭셔리 프리미엄 편집샵<br />매주 토요일 오전 9시 20분",
+                },
+                {
+                    key: "pr-05",
+                    image: imgPr05,
+                    imgAlt: "대표 브랜드 프로그램 5",
+                    title: "쇼미더트렌드",
+                    desc: "트렌드를 스타일링하다<br />매주 토요일 저녁 9시 35분",
+                },
+                {
+                    key: "pr-06",
+                    image: imgPr06,
+                    imgAlt: "대표 브랜드 프로그램 6",
+                    title: "신상뷰티찬스",
+                    desc: "화제의 뷰티템 이달의 신상<br />격주 토요일 낮 11시 50분",
+                },
+            ],
+        },
+        backLabel: "목록으로 돌아가기",
+    },
+    en: {},
 };
-const locale = ref("ko");
-const t = computed(() => langData[locale.value]);
+const t = computed(() => {
+    const selected = langData[props.lang];
+    return selected && Object.keys(selected).length ? selected : langData.ko;
+});
 
 const _getIsMobile = () => window.innerWidth <= 768;
 const isMobileView = ref(_getIsMobile());
@@ -261,132 +429,23 @@ const textParaRef = ref(null);
 const logoWrapRef = ref(null);
 const aboutSectionRef = ref(null);
 
-/** 768px 이하에서 BI 색상 이미지(_mo) 사용 — CSS 모바일 구간과 동일 */
+
 const isBiColorMobile = ref(false);
-/** 비즈니스 핵심역량 섹션 이미지도 동일 구간에서 _mo 사용 */
 const isBiCompetencyMobile = isBiColorMobile;
 let biColorMql = null;
 function onBiColorMqlChange(e) {
     isBiColorMobile.value = e.matches;
 }
 
-/** CCM 인증기관/운영기관 — PC: str_biz_fig_txt 내부, 모바일: str_biz_fig_inner 하단 */
-const ccmCertDlItems = [
-    { term: "인증기관", imgSrc: imgCert01, imgAlt: "공정거래위원회" },
-    { term: "운영기관", imgSrc: imgCert02, imgAlt: "한국소비자원" },
-];
 
-/** type="text" — num / icon 없이 feature_card_title + desc 배열만 */
-const ccmFeatureItems = [
-    {
-        title: "경영 전 과정에<br />CCM 도입",
-        listDotted: true,
-        desc: [
-            "소비자중심경영 실천을 위해 경영 전 과정에 CCM의 가치와 철학을 반영",
-            "고객불만 사전예방 시스템 체계를 구축하고 체계적인 CCM 관리지표 운영",
-        ],
-    },
-    {
-        title: "소비자<br />권익 증진 노력",
-        listDotted: true,
-        desc: [
-            "'소비자분쟁해결기준'보다 소비자에게 유리한 'CS처리지침 및 고객서비스 정책’ 마련 ",
-            "협력사와 상생경영을 통한 소비자 권익증진 협업시스템 운영",
-        ],
-    },
-    {
-        title: "소비자 효용을 증대한<br />우수한 서비스",
-        listDotted: true,
-        desc: [
-            "고객의 라이프 스타일을 반영한 서비스 시행",
+const ccmCertDlItems = computed(() => t.value.biz.certItems);
 
-        ],
-        subdesc:[
-            "'라이브(LIVE) 배송 서비스', '안심택배 서비스', '편의점 픽업/반품 서비스' 등 고객 Needs에 부합하는 다양한 배송 서비스 실시",
-            "GS Pay 등 다양한 결제 수단 도입, 결제 편의성 개선 등"
-        ]
-    },
-];
 
-const channelCardList = [
-    {
-        key: "ch-tv",
-        image: imgCh01,
-        imgAlt: "TV 홈쇼핑",
-        em: "01",
-        title: "TV 홈쇼핑",
-        desc: "국내 최초로 홈쇼핑 방송을 선보인 GS SHOP은 최초 홈쇼핑 채널만의 콘텐츠 제작 역량을 바탕으로 24시간 고객에게 차별화된 쇼핑 경험을 제공하고 있습니다.",
-    },
-    {
-        key: "ch-online",
-        image: imgCh02,
-        imgAlt: "데이터 홈쇼핑",
-        em: "02",
-        title: "데이터 홈쇼핑",
-        desc: "고객이 원할 때 리모콘으로 필요한 상품을 직접 선택, 구매할 수 있는 양방향 데이터 쇼핑으로 GS SHOP의 홈쇼핑 노하우를 그대로 담아 IPTV 플랫폼에 맞게 운영하고 있습니다.",
-    },
-    {
-        key: "ch-mobile",
-        image: imgCh03,
-        imgAlt: "모바일 & 인터넷몰",
-        em: "03",
-        title: "모바일 & 인터넷몰",
-        desc: "GS SHOP은 정교한 고객 DATA 분석을 통해 고객 맞춤형 상품과 매장을 선보이고 있으며 TV쇼핑과 지속적인 시너지를 유지하고 있습니다.",
-    },
-    {
-        key: "ch-commerce",
-        image: imgCh04,
-        imgAlt: "라이브 커머스",
-        em: "04",
-        title: "라이브 커머스",
-        desc: "GS SHOP에서 실시간 동영상 스트리밍으로 상품을 판매하는 '모바일 라이브'는 고객과 소통하며 상품에 대한 다양하고 생생한 정보를 제공합니다.",
-    },
-];
+const ccmFeatureItems = computed(() => t.value.biz.featureItems);
 
-const programCardList = [
-    {
-        key: "pr-01",
-        image: imgPr01,
-        imgAlt: "대표 브랜드 프로그램 1",
-        title: "소유진쇼",
-        desc: "차원이 다른 쇼핑<br />매주 금요일 저녁 8시 35분",
-    },
-    {
-        key: "pr-02",
-        image: imgPr02,
-        imgAlt: "대표 브랜드 프로그램 3",
-        title: "지금 백지연",
-        desc: "프리미엄 큐레이션의 시작<br />매주 목요일 저녁 8시45분",
-    },
-    {
-        key: "pr-03",
-        image: imgPr03,
-        imgAlt: "대표 브랜드 프로그램 3",
-        title: "스타일나우",
-        desc: "요즘 뜨는 스타일링<br />매주 화요일 오전",
-    },
-    {
-        key: "pr-04",
-        image: imgPr04,
-        imgAlt: "대표 브랜드 프로그램 4",
-        title: "더컬렉션",
-        desc: "더 럭셔리 프리미엄 편집샵<br />매주 토요일 오전 9시 20분",
-    },
-    {
-        key: "pr-05",
-        image: imgPr05,
-        imgAlt: "대표 브랜드 프로그램 5",
-        title: "쇼미더트렌드",
-        desc: "트렌드를 스타일링하다<br />매주 토요일 저녁 9시 35분",
-    },
-    {
-        key: "pr-06",
-        image: imgPr06,
-        imgAlt: "대표 브랜드 프로그램 6",
-        title: "신상뷰티찬스",
-        desc: "화제의 뷰티템 이달의 신상<br />격주 토요일 낮 11시 50분",
-    },
-];
+const channelCardList = computed(() => t.value.channel.cards);
+
+const programCardList = computed(() => t.value.program.cards);
 
 let gsapCtx = null;
 let _resizeTimer = null;
@@ -401,7 +460,7 @@ function onBrandResize() {
     }, 150);
 }
 
-function goBack() {
+function handleBack() {
     if (window.history.length > 1) {
         router.back();
     } else {
@@ -517,7 +576,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-/* PC first · 속성 순서: 넓이 → margin → padding → font → 배경 → 테두리 → 정렬 → 위치 → display/flex/grid → transform */
 :deep(.p_br) { display: block; }
 :deep(.m_br) { display: none; }
 img { width: 100%; object-fit: cover; display: block; }
@@ -571,19 +629,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .str_color_sup { width: 100%; margin: 12px 0 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px }
 .str_color_sup li { min-width: 0 }
 .str_color_sup img { width: 100%; height: auto; display: block; }
-
-/* common.css로 이동
-.btn_store_find { padding: 4px; color:#161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; text-decoration: none; display: flex; align-items: center; gap: 8px }
-.btn_store_find::before { content: ""; width: 24px; height: 24px; background-color: #aca9a9; flex-shrink: 0; display: block }
-*/
-
 .sns_wrap { display: flex; align-items: center; gap: 6px }
-
-/* common.css로 이동
-.btn_sns { width: 56px; height: 56px; background-color: red; border-radius: 100%; display: flex; align-items: center; justify-content: center }
-.btn_sns::before { content: ""; background-color: #161616; border-radius: 4px; display: block }
-*/
-
 .str_biz_fig { padding:32px; background-color: #F8F8F8; border-radius: 12px; }
 .str_biz_fig_inner{display: flex; align-items: center; justify-content: space-between;}
 .str_biz_fig strong{font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
@@ -655,18 +701,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
   .str_color_core { grid-template-columns: 1fr; }
   .str_color_core + .str_bi_caption { margin-top: 40px; }
   .str_color_sup { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px; }
-
-  /* common.css로 이동
-  .btn_store_find { font-weight: 500; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
-  .btn_store_find::before { width: 20px; height: 20px }
-  */
-
   .sns_wrap { gap: 16px }
-
-  /* common.css로 이동
-  .btn_sns { width: 40px; height: 40px }
-  */
-
   .str_biz_fig_img{min-width:60px; padding:0;}
   section.sec_brand_biz.str_inner .str_header p {font-weight: 700; line-height: 1.24; letter-spacing: 0; }
   .str_biz_fig_inner{gap:20px;}

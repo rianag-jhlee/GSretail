@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <div class="wrap_gsrst">
         <!-- HEADER -->
         <header class="page_header top_visual" :style="{ backgroundImage: `url(${imgBg})` }">
