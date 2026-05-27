@@ -85,6 +85,7 @@ footer nav dt a {color:#000; font-size:1.6rem; font-weight:600;}
 footer nav dd {margin-top:9px; display:flex;}
 footer nav dd a, footer nav dd a:visited {width:calc(100vw / 6.5); max-width:184px; padding:3px 0; color:#666;}
 
+footer .quick { display:flex; justify-content:space-between; }
 footer .quick {margin-top:40px; padding-top:19px; padding-bottom:20px; border-top:1px solid #E5E5E9; border-bottom:1px solid #E5E5E9; overflow:hidden;}
 footer .quick ul {display:flex; align-items:center; flex-wrap:nowrap;}
 footer .quick a, footer .quick button {height:21px; padding:0 16px; color:#000; font-size:1.4rem; font-weight:700; letter-spacing:-0.02em; line-height:21px; white-space:nowrap; background:transparent; display:block;}
@@ -98,6 +99,11 @@ footer .info div {display:flex; align-items:center; gap:0 32px; flex-wrap:wrap;}
 footer .info div * {padding:19px 0 20px;}
 footer .info div strong {font-weight:600;}
 footer .info {display:flex; align-items:center; justify-content:space-between;}
+footer .info label.select { position:absolute; right:20px; bottom:64px; }
+footer .info label.select select { position:relative; z-index:1; padding:0 50px 0 12px; border:0; font-size:1.6rem; color:#000; font-weight:700; }
+footer .info label.select > div:after { right:40px; z-index:0; width:16px; height:16px; margin-top:0; border:0; background:url('@/assets/images/common/arrow_set_16.png') -159px -20px no-repeat; transform: translateY(-50%); }
+footer .info label.select select option {  color: #000; font-weight:400 }
+footer .info label.select select option:first-child { display:none; }
 
 #container {padding-bottom:200px;}
 
@@ -237,6 +243,9 @@ h5 {font-size:1.8rem;}
     #header nav ul.depth1 > li > a {padding-right:20px; padding-left:20px; font-size:1.8rem;}
 
     #header nav .depth2_wrap {top:71px;}
+
+    footer .info { flex-wrap:wrap; }
+    footer .info label.select { position:relative; bottom:auto; right:auto; left:-12px; }
 }
 
 @media screen and (max-width:1180px) {
@@ -254,6 +263,7 @@ h5 {font-size:1.8rem;}
     footer .info {flex-wrap:wrap;}
     footer .info div {width:100%; padding-top:19px;}
     footer .info div strong {width:100%; padding:0;}
+    footer .info label.select div {padding-top:0;}
 
     footer .go_top.isStatic {margin-top:-40px;}
 }
@@ -307,6 +317,8 @@ h5 {font-size:1.8rem;}
     footer .info div span {margin-top:4px;}
     footer .info div span + span {margin-left:0;}
     footer .info p {margin-top:24px;}
+    footer .info label.select { margin-top:24px; margin-bottom:9px; }
+    footer .info label.select select { height:auto }
 
     footer .go_top {line-height:124%;}
     footer .go_top.isStatic {margin-top:-52px;}

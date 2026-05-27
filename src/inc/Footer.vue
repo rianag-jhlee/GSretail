@@ -27,6 +27,12 @@
             </div>
 
             <div class="info">
+                <SelectBox 
+                    @change="navigateToLink" 
+                    :options="t.familyOptions" 
+                    v-model="familySiteRef"
+                    initMsg="FAMILY SITE" 
+                />
                 <div>
                     <strong>{{ t.info.logo }}</strong>
                     <span>{{ t.info.address }}</span>
@@ -54,6 +60,7 @@ import menuEn from "@/assets/language/menu/menu.en.json";
 import menuKo from "@/assets/language/menu/menu.ko.json";
 
 import modal from "@/assets/js/modal";
+import SelectBox from "@/components/SelectBox.vue";
 
 // =====================
 // props
@@ -68,6 +75,7 @@ const props = defineProps({
 const footerEl = ref(null);
 const quickWrap = ref(null);
 const quickList = ref(null);
+const familySiteRef = ref("");
 
 // =====================
 // state
@@ -94,7 +102,7 @@ const langData = {
             { title: "임대상가안내", path: "#none" },
             { title: "정도경영제보", path: "#none" },
             { title: "고객센터", path: "gsrcu01" },
-            { title: "GS SHOP 시청자 관련", path: "#none" },
+            { title: "GS SHOP 시청자 관련", path: "gsrcm0401" },
             { title: "공지사항", path: "gsrnotice" }
         ],
         info: {
@@ -103,7 +111,18 @@ const langData = {
             ceo: "대표이사 허서홍",
             brn: "사업자등록번호 116-81-18746",
             copyright: "Copyright ⓒGS Retail. All rights reserved."
-        }
+        },
+        familyOptions: [
+            { value: 'https://www.gs.co.kr/ko/main', label: '(주)GS' }, 
+            { value: 'https://gsnws.co.kr/', label: 'GS네트웍스' }, 
+            { value: 'https://www.gscaltex.com/kr/', label: 'GS칼텍스(Kixx)' }, 
+            { value: 'https://www.gsnetvision.com/', label: 'GS넷비전' }, 
+            { value: 'https://www.gsmbiz.com/', label: 'GS엠비즈' }, 
+            { value: 'https://www.fcseoul.com/', label: 'GS스포츠' }, 
+            { value: 'https://www.gseps.com/kor/main/main.aspx', label: 'GS EPS' }, 
+            { value: 'https://www.gsenc.com/', label: 'GS건설' }, 
+            { value: 'https://www.elysian.co.kr/intro', label: '엘리시안강촌' }
+        ],
     },
     en: {
         quick: [
@@ -224,6 +243,18 @@ const initQuickSlide = () => {
     list.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
+};
+
+// =====================
+// family site
+// =====================
+const navigateToLink = (value) => {
+    if (value) {
+        window.open(value, '_blank');
+        nextTick(() => {
+            familySiteRef.value = "";
+        });
+    }
 };
 
 /* modal */
