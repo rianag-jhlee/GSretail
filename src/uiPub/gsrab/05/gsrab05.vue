@@ -3,7 +3,7 @@
         <header class="title_wrap ac">
             <h2 class="page_title">{{ t.pageTitle }}</h2>
         </header>
-        <main class="content">
+        <main class="cont_inner">
             <section class="sec_location">
                 <header class="header">
                     <h3>{{ t.location.title }}</h3>
@@ -92,14 +92,14 @@ const props = defineProps({
 
 const langData = {
     ko: {
-        pageTitle: "위치",
+        pageTitle: "오시는 길",
         location: {
             title: "GS타워",
             addressLabel: "주소",
             address: "서울시 강남구 논현로 508 (역삼동 679번지 GS타워)",
-            subwayLabel: "지하철 이용시",
+            subwayLabel: "지하철",
             subwayDesc: "2호선 역삼역 7번 출구 (GS타워 지하 연결통로 이용)",
-            busLabel: "버스 이용시",
+            busLabel: "버스",
             busMainLabel: "간선/순환",
             busMainRoutes: "146, 147, 341, 360, 740, 41",
             busExpressLabel: "직행/급행",
@@ -113,10 +113,10 @@ const langData = {
             addressLine2Label: "강서N타워",
             addressLine1: "서울특별시 영등포구 선유로 75 GS강서타워",
             addressLine2: "서울특별시 영등포구 선유로 82 GS강서N타워",
-            subwayLabel: "지하철 이용시",
+            subwayLabel: "지하철",
             subwayLine1: "2호선 문래역 3번 출구 (출구방향 도보 7분)",
             subwayLine2: "5호선 양평역 2번 출구 (출구방향 도보 15분)",
-            busLabel: "버스 이용시",
+            busLabel: "버스",
             busGanLabel: "간선",
             busGanNums: "640, 650",
             busExpressLabel: "직행/급행",
@@ -125,7 +125,7 @@ const langData = {
                 { stop: "영등포기계상가(오목교역 방향 운행)", express: "5616, 6211, 6628, 6629, 6625, 6640, 6630, 5012" },
                 { stop: "양남동로타리", express: "5616, 6211, 6628, 6629, 6640, 6630, 5012" },
             ],
-            carLabel: "자동차 운전시",
+            carLabel: "자동차",
             carItems: [
                 { route: "올림픽대로", desc: "양화대교 남단에서 문래동 사거리 방향으로 직진, 약 10분 소요" },
                 { route: "강변북로", desc: "영등포 시장에서 오목교 방향으로 직진, 양남사거리에서 좌회전 후 50m 직진" },
@@ -148,7 +148,6 @@ const t = computed(() => langData[props.lang] || langData.ko);
     .title_wrap::before { width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 0; content: ""; background-image: url("@/assets/images/dummy/gsrab_05_01.jpg"); background-repeat: no-repeat; background-position: 40% center; background-size: cover; transform-origin: center; }
     .title_wrap::after { width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 1; content: ""; background-color: rgba(0, 0, 0, 0.5); }
     .title_wrap > h2 { position: relative; z-index: 2; color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; }
-    .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 200px 20px; position: relative; display: block; }
     section + section { padding: 200px 0 0; }
     section { display: flex; flex-direction: column; gap: 64px; }
     .header h3 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
@@ -179,7 +178,6 @@ const t = computed(() => langData[props.lang] || langData.ko);
     @media screen and (max-width: 768px) {
         .title_wrap { display: none; }
         section + section { padding: 60px 0 0; }
-        .content { max-width: 100%; padding: 60px 20px 94px; }
         .header h3 { font-size: 2.4rem; line-height: 1.35; text-align: left; }
         .sec_location { gap: 30px; }
         .sec_location > .location_panel { padding: 30px 0 36px; flex-direction: column; flex-wrap: nowrap; gap: 0; align-items: stretch; border-top: 1px solid #e5e5e9; }

@@ -3,7 +3,7 @@
         <div class="title_wrap ac">
             <h2 class="page_title">{{ t.MainTitle }}</h2>
         </div>
-        <div class="content">
+        <div class="cont_inner">
             <Tabs v-model="MainTabIdx" :tab-items="t.MainTabs" tab-class="type_01" :tab-slide="true" />
             <div v-show="MainTabIdx <= 5" class="panel" :aria-label="t.MainTabs?.[MainTabIdx]?.item || ''">
                 <section ref="sectionRef" class="sec_history" :key="'history-tab-' + MainTabIdx">
@@ -12,11 +12,11 @@
                             <p>{{ currentHistoryTab.period }}</p>
                             <h3 v-html="currentHistoryTab.title"></h3>
                         </header>
-                        <ul ref="introImagesRef" class="history_intro_images">
+                        <!-- 26.05.26 Del 이종환 <ul ref="introImagesRef" class="history_intro_images">
                             <li v-for="(img, idx) in currentHistoryTab.images" :key="'history-img-' + MainTabIdx + '-' + idx" :style="{ top: (imagePositions[idx] || 0) + 'px' }">
                                 <img :src="img.src" :alt="img.alt" />
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                     <HistoryTimeline :items="currentHistoryTab.items" />
                 </section>
@@ -66,7 +66,7 @@ let resizeObserver = null;
 
 const langData = {
     ko: {
-        MainTitle: "연혁",
+        MainTitle: "기업 연혁",
         MainTabs: [
             { item: "현재 - 2019" },
             { item: "2018 - 2011" },
@@ -859,7 +859,6 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
 .title_wrap { width: 100%; max-height: 480px; padding: 10.91% 0 11.25%; text-align: center; position: relative; display: block; background-color: transparent; background-image: url("@/assets/images/dummy/gsrab02_01.png"); background-repeat: no-repeat; background-size: cover; background-position: center -90px; }
 .title_wrap::after { content: ""; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); position: absolute; left: 0; top: 0; z-index: 1; }
 .title_wrap > h2 { color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; position: relative; z-index: 2; }
-.content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 0 20px 200px; position: relative; display: block; }
 .panel { padding: 120px 0 0; }
 .sec_history { display: grid; grid-template-columns: clamp(280px, 32vw, 480px) minmax(0, 1fr); gap: 20px; align-items: start; }
 .history_intro > header { min-height: 230px; }
@@ -879,7 +878,6 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
 
 @media screen and (max-width: 768px) {
     .title_wrap { display: none; }
-    .content { width: 100%; max-width: 100%; padding: 60px 20px 135px; }
     .panel { padding: 60px 0 100px; }
     .sec_history { grid-template-columns: minmax(0, 1fr); gap: 60px; }
     .history_intro > header { min-height: 0; }

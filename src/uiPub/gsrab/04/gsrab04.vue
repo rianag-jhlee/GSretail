@@ -3,7 +3,7 @@
         <header class="title_wrap ac">
             <h2 class="page_title">{{ t.pageTitle }}</h2>
         </header>
-        <main class="content">
+        <main class="cont_inner">
             <section class="sec_ci_intro">
                 <header class="header">
                     <h3>{{ t.ciIntro.title }}</h3>
@@ -64,7 +64,7 @@
                         <li v-for="brand in t.colorRegList" :key="brand.name">
                             <article class="reg_card">
                                 <header>
-                                    <h4>{{ brand.name }}</h4>
+                                    <h4><img :src="brand.logo" :alt="brand.logo_alt" /><!--{{ brand.name }}--></h4>
                                 </header>
                                 <ol class="color_list">
                                     <li v-for="pantone in brand.pantones" :key="brand.name + '-' + pantone.name" :style="{ backgroundColor: pantone.bg }">
@@ -135,7 +135,7 @@ const props = defineProps({
 
 const langData = {
     ko: {
-        pageTitle: "CI/BI",
+        pageTitle: "기업 CI/BI",
         ciIntro: {
             title: "CI 소개",
             lead: "‘GS’는 특정 단어의 약자이거나 어떤 의미를 함축하는 것은 아니며 'GS' 자체로 존재합니다.",
@@ -170,7 +170,8 @@ const langData = {
         },
         colorRegList: [
             {
-                name: "GS리테일",
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_01.png"),
+                logo_alt:"GS리테일",
                 pantones: [
                     { name: "PANTONE <br />166 C", details: ["C 0", "M 65", "Y 100", "K 0"], bg: "#f47920" },
                     { name: "PANTONE <br />300 C", details: ["C 100", "M 50", "Y 0", "K 0"], bg: "#0072bc" },
@@ -179,20 +180,23 @@ const langData = {
                 ],
             },
             {
-                name: "GS25",
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_02.png"),
+                logo_alt:"GS25",
                 pantones: [
                     { name: "PANTONE <br />285 C", details: ["C 100", "M 39", "Y 0", "K 0"], bg: "#007ec6" },
                     { name: "PANTONE <br />311 C", details: ["C 63", "M 0", "Y 10", "K 0"], bg: "#40c4e0" },
                 ],
             },
             {
-                name: "GS SHOP",
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_03.png"),
+                logo_alt:"GS SHOP",
                 pantones: [
                     { name: "PANTONE <br />2173 C", details: ["C 72", "M 27", "Y 0", "K 0"], bg: "#3698d4" },
                 ],
             },
             {
-                name: "GS THE FRESH",
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_04.png"),
+                logo_alt:"GS THE FRESH",
                 pantones: [
                     { name: "PANTONE <br />7484 C", details: ["C 91", "M 14", "Y 78", "K 60"], bg: "#005133" },
                 ],
@@ -226,7 +230,6 @@ const t = computed(() => langData[props.lang] || langData.ko);
     .title_wrap::before { width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 0; content: ""; background-image: url("@/assets/images/dummy/gsrab04_01.jpg"); background-repeat: no-repeat; background-position: 60% 85%; background-size: 150% auto; transform: scaleX(-1); transform-origin: center; }
     .title_wrap::after { width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 1; content: ""; background-color: rgba(0, 0, 0, 0.5); }
     .title_wrap > h2 { position: relative; z-index: 2; color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; }
-    .content { width: 100%; max-width: 1460px; margin: 0 auto; padding: 200px 20px; position: relative; display: block; }
     section + section { padding: 200px 0 0; }
     section { display: flex; flex-direction: column; gap: 64px; }
     .header h3 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
@@ -236,7 +239,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
     .cont_box { width: 100%; padding: 56px 64px; border: 1px solid #e5e5e9; border-radius: 12px; }
     .cont_box_row { width: 100%; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
     .cont_box_row > .sub_title { flex-shrink: 0; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; white-space: nowrap; }
-    .cont_box_row > .desc { flex: 1 1 auto; min-width: 0; color: #67676f; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; text-align:right;}
+    .cont_box_row > .desc {min-width: 0; color: #67676f; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em;}
     .cont_box_row + .gray_box { margin-top: 40px; }
     .gray_box { width: 100%; padding: 70px 0; display: flex; justify-content: center; align-items: center; background-color: #f8f8f8; border-radius: 12px; }
     .gray_box > .img_wrap { height: 120px; }
@@ -257,7 +260,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
     .ci_bi_card > .img_wrap { width: 100%; max-width: 100%; min-width: 0; height: 100%; min-height: 0; margin: 0; display: flex; justify-content: center; align-items: center; }
     .ci_bi_card > .img_wrap img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; object-position: center; display: block; }
     .button_wrap { width: 100%; margin: 64px 0 0; display: flex; justify-content: center; }
-    .notice_box { width: 100%; margin: 40px 0 0; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
+    .notice_box { width: 100%; margin-top:-24px; padding: 32px; background-color: #f8f8f8; border-radius: 12px;}
     .notice_head { margin: 0 0 24px; display: flex; align-items: center; gap: 8px; }
     .notice_box > p { margin: 0 0 8px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
     .notice_head > .notice_ico { width: 24px; height: 24px; background:url('@/assets/images/common/icon_set_24.png') -496px -56px no-repeat; display: inline-flex; align-items: center; justify-content: center;}
@@ -265,7 +268,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
     .notice_list { display: flex; flex-direction: column; gap: 8px;  }
     .notice_list > li { position: relative; padding-left: 12px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
     .notice_list > li::before { width: 4px; height: 4px; position: absolute; left: 0; top: 11px; content: ""; border-radius: 50%; background-color: #67676f; }
-    .sec_color_reg .color_reg_list_wrap { width: 100%; padding: 0 0 64px; }
+    .sec_color_reg .color_reg_list_wrap { width: 100%;}
     .sec_color_reg .reg_list { width: 100%; display: flex; flex-direction: column; gap: 24px;  }
     .sec_color_reg .reg_card { width: 100%; max-width: 1420px; margin: 0 auto; padding: 56px 64px; display: flex; flex-wrap: nowrap; gap: 20px 32px; align-items: flex-start; justify-content: space-between; border: 1px solid #e5e5e9; border-radius: 12px; background-color: #fff; }
     .sec_color_reg .reg_card > header { flex: 0 0 clamp(112px, 14vw, 220px); min-width: 0; padding: 0 0 40px; }
@@ -302,7 +305,6 @@ const t = computed(() => langData[props.lang] || langData.ko);
         .title_wrap { display: none; }
         .visual_sub { font-size: 2rem; }
         section + section { padding: 60px 0 0; }
-        .content { width: 100%; max-width: 100%; padding: 60px 20px 94px; }
         .header h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; text-align: left; }
         .header p { margin: 12px 0 0; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
         .header.center h3, .header.center p { text-align: left; }
