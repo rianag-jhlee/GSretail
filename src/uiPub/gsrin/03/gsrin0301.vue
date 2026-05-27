@@ -35,7 +35,7 @@
                                 <SelectBox v-model="selectedYear1" :options="t.YearOptions" />
                             </div>
 
-                            <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
+                            <Search v-model="searchData" :search_opt="t.options" @search="handleSearch"  placeholder="검색어 입력"/>
                         </div>
 
                         <div class="policy_wrap">
@@ -68,6 +68,15 @@
                     </section>
 
                     <section class="tab_content" v-if="CTabIdx === 1">
+                        <div class="disclosure_info_head" v-if="CTabIdx === 1"><!-- 26.05.13 edit 이종환 :  클래스 수정 -->
+                            <h3 class="section-sub-title">{{ t.MainTitle }}</h3>
+                            <p class="policy_desc" v-html="t.DartDesc"></p>
+                            <div class="button-area mt16">
+                                <a :href="t.DartLink" target="_blank" class="btn_big primary btn_icon_arrow after"><!-- 26.05.13 Edit 이종환 : 클래스 수정 -->
+                                    {{ t.DartBtnText }}
+                                </a>
+                            </div>
+                        </div>
                         <div class="inner_tabs_wrap">
                             <Tabs v-model="InnerTabIdx" :tab-items="t.InnerTabs" tab-class="type_02" />
                         </div>
@@ -162,11 +171,12 @@
 
                     <!-- gsrin0303 -->
                     <section class="tab_content gsrin0303" v-if="CTabIdx === 2">
-                        <h4 class="content_title">
-                            {{ t.Tabs1[2].item }}
+                        <div class="disclosure_info_head">
+                            <h3 class="section-sub-title">{{ t.Tabs1[2].item }}</h3>
                             <!-- 26.05.13 Edit 이종환 : 클래스 수정 -->
+                            <p class="policy_desc">GS리테일의 공시자료는 금융감독원의 DART(전자공시시스템)를 통해 제공하고 있습니다.</p>
                             <Buttons  
-                                class="btn_big primary btn_icon_arrow after"
+                                class="btn_big primary btn_icon_arrow after mt16"
                                 btn-class="btn_icon" 
                                 @click="openModal" 
                                 data-popid="gsrin030301" 
@@ -175,7 +185,8 @@
                             >
                                 {{ t.GeneralText }}
                             </Buttons>
-                        </h4>
+                        </div>
+                       
 
                         <div class="search_filter_area">
                             <div class="filter_group">
@@ -253,11 +264,11 @@ export default {
                 ko: {
                     MainTitle: "공시정보",
                     MainsubTitle: "Disclosure Information",
-                    Tabs1: [{ item: "공고" }, { item: "사업/감사보고서" }, { item: "주주총회 공시" }],
-                    InnerTabs: [{ item: "사업보고서" }, { item: "감사보고서" }, { item: "분기보고서" }],
+                    Tabs1: [{ item: "공고" }, { item: "사업/감사보고서" }, { item: "공시정보" }],
+                    InnerTabs: [{ item: "분/반기보고서" }, { item: "사업보고서" }, { item: "감사보고서" }],
                     DartDesc: "GS리테일의 공시자료는 금융감독원의 DART(전자공시시스템)를 통해 제공하고 있습니다.",
                     DartBtnText: "공시자료 바로가기",
-                    GeneralText: "주주보호 정책 및 관련 제도 정보",
+                    GeneralText: "공시자료 바로가기",
                     DartLink: "https://dart.fss.or.kr/",
                     YearSelectLabel: "년도선택",
                     YearOptions: [
@@ -316,17 +327,17 @@ export default {
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0301_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; letter-spacing: -1.44px; }
 .visual-sub { margin-top: 10px; color: #FFFFFF; font-size: 32px; font-weight: 700; }
-
+.search_filter_area{margin-top:32px;}
 .disclosure_info_head {margin-bottom:100px; text-align: left; }
 .section-sub-title { font-size: 4rem; font-weight: 700; color: #161616; margin-bottom: 16px; }
 .policy_desc { font-size: 24px; color: #161616; line-height: 1.5; word-break: keep-all; }
-
 .tab_content_wrap {margin-top:100px;}
-
 .inner_tabs_wrap {margin-bottom:40px;}
+.inner_tabs_wrap + .tab_content {margin-top:100px;}
 
 /* 테이블 스타일 */
-.content_title {margin-bottom:40px; font-size: 4rem; font-weight: 700; color: #161616; display:flex; align-items:center; justify-content:space-between;}
+.content_title {margin-bottom:16px; font-size: 4rem; font-weight: 700; color: #161616; display:flex; align-items:center; justify-content:space-between;}
+.content_title .section-sub-title {margin-bottom:0;}
 .content_title a {font-weight:normal;}
 .policy_wrap table { width: 100%; border-collapse: collapse; border-top: 2px solid #161616; }
 .policy_wrap th, .policy_wrap td { padding: 18px 24px; border-bottom: 1px solid #E5E5E9; font-size: 1.8rem; vertical-align: middle; }
@@ -336,15 +347,12 @@ export default {
 .policy_wrap td a { font-size: 1.8rem; color: #161616; text-decoration: none; }
 .policy_wrap td a:hover { text-decoration: underline; }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     h3.section-sub-title, h4.content_title {font-size:2.4rem;}
     .policy_desc {font-size:1.8rem;}
     .title_wrap { display: none; }
-
     .inner_tabs_wrap {margin-bottom:60px;}
-
     .disclosure_info_head {margin-bottom:80px;}
-
     :deep(ul.type_02) {margin-top:-35px !important;}
     .policy_wrap th:first-child, .policy_wrap td:first-child { display: none; }
     .policy_wrap thead {display:none;}
@@ -352,5 +360,6 @@ export default {
     .filter_label {display:none;}
     .btn_big {font-size:16px;}
     .policy_wrap td a {font-size:16px;}
+    .inner_tabs_wrap + .tab_content{margin-top:80px;}
 }
 </style>
