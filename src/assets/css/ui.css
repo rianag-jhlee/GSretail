@@ -132,6 +132,10 @@ h5 {font-size:1.8rem;}
 .search_filter_area .search_wrap {margin-left:auto;}
 
 .search_filter_area .filter_group { display: flex; align-items: center; gap: 12px; }
+.search_filter_area .filter_group  .select{min-width:160px;}
+.search_filter_area .filter_group  .select select{padding: 14px 16px; border: 0;background-color: #F8F8F8;}
+.search_filter_area .filter_group  .select > div::after{width: 20px;height: 20px;margin: 0;background: url(http://localhost:8080/img/icon_set_20.30ac4abf.png) no-repeat -192px -25px;border: 0;transform: translateY(-50%) rotate(0);}
+
 .search_filter_area .filter_label { font-size: 16px; color: #161616; white-space: nowrap; }
 
 .search_filter_area + .tab_wrap {margin-top:24px;}
