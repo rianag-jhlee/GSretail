@@ -38,7 +38,7 @@
                             class="purpose_feature_cards feature_cards_grid"
                             type="text"
                             :items="t.PurposeFeatureItems"
-                            :no-swipe="true"
+                            :no-swipe="false"
                         />
                     </section>
                     <section class="sec_history" aria-label="정도경영 연혁">
@@ -122,9 +122,9 @@
                         />
                     </div>
                     <div v-show="CTabIdxEsgSystem === 0" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[0]?.item || ''">
-                        <header class="sub_header">
+                        <!-- <header class="sub_header">
                             <h3>제보이용안내</h3>
-                        </header>
+                        </header> -->
                         <ol class="base_list">
                             <li v-for="(row, idx) in t.WhistleGuideSections" :key="row.key" class="base_item">
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
@@ -155,9 +155,9 @@
                         </ol>
                     </div>
                     <div v-show="CTabIdxEsgSystem === 1" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[1]?.item || ''">
-                        <header class="sub_header">
+                        <!-- <header class="sub_header">
                             <h3>{{ t.WhistleRewardPageTitle }}</h3>
-                        </header>
+                        </header> -->
                         <ol class="base_list whistle_reward_list">
                             <li v-for="(row, idx) in t.WhistleRewardSections" :key="row.key" class="base_item">
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
@@ -193,7 +193,7 @@
                     </div>
                     <div v-show="CTabIdxEsgSystem === 2" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[2]?.item || ''">
                         <header class="sub_header">
-                            <h3>{{ t.WhistleProtectPageTitle }}</h3>
+                            <!-- <h3>{{ t.WhistleProtectPageTitle }}</h3> -->
                             <p>{{ t.WhistleProtectPageDesc }}</p>
                         </header>
                         <ol class="base_list">
@@ -436,7 +436,7 @@
                             class="law_feature_cards feature_cards_grid"
                             type="num"
                             :items="t.ComplianceProgramFeatureItems"
-                            :no-swipe="true"
+                            :no-swipe="false"
                         />
                     </section>
                     <div class="signature_box type02">
@@ -456,7 +456,7 @@
                 </div>
                 <div v-show="CTabIdxCompliance === 1" class="panel_inner" :aria-label="t.TabsCompliance?.[1]?.item || ''">
                     <!-- 자율준수 관리자 안내 -->
-                    <header class="tab_header">
+                    <header class="tab_header ac">
                         <h2>GS리테일은 협력사와의 신뢰와 협력을 통해 공동의 발전 도모와 자율준수 프로그램의 <br />
                             적극적 실천을 위해 기준과 절차에 따라 ‘자율준수관리자’를 임명하여 운영하고 있습니다.</h2>
                     </header>
@@ -468,7 +468,7 @@
                             class="law_feature_cards feature_cards_grid cp_manager_role_cards"
                             type="num"
                             :items="t.ComplianceManagerRoleFeatureItems"
-                            :no-swipe="true"
+                            :no-swipe="false"
                         />
                     </section>
                     <section>
@@ -1183,8 +1183,8 @@ const langData = {
         ],
         ComplianceProgramHeroTitle:
             "GS리테일은 책임을 바탕으로 한 자유경쟁의 원칙에 따라 상호 신뢰와 협력으로 <br class=\"p_br\" />공동의 발전을 도모하기 위해 자율적으로 공정거래를 실천하고 있습니다.",
-        ComplianceProgramLead:
-            "GS리테일은 자율적 공정거래를 적극 실천하기 위해 ‘자율준수 프로그램’을 운영하고 있습니다.",
+        // ComplianceProgramLead:
+        //     "GS리테일은 자율적 공정거래를 적극 실천하기 위해 ‘자율준수 프로그램’을 운영하고 있습니다.",
         ComplianceProgramFeatureItems: [
             {
                 num: "01",
@@ -1236,33 +1236,33 @@ const langData = {
             { key: "ap1", iconKey: "recommend", title: "자율준수 관리자<br />후보 추천", note: "제척/기피 요건" },
             { key: "ap2", iconKey: "verify", title: "자율준수 관리자<br />역량 검증", note: "반부패도 검증, 업무 역량 검증" },
             { key: "ap3", iconKey: "appoint", title: "선임, 임명", note: "임기 3년" },
-            { key: "ap4", iconKey: "notify", title: "임직원 안내", note: "임무 수행" },
+            { key: "ap4", iconKey: "notify", title: "임직원 안내<br />임무 수행" },
         ],
         FairTradeGuidelineDetailBtn: "자세히 보기",
         FairTradeGuidelineItems: [
             {
                 num: "01",
                 title: "파트너사 선정, 운영 가이드 라인",
-                desc: "",
+                desc: "파트너사의 공정한 선정 · 운영을 위한 실천사항",
                 popContId: "gsrsu04020301"
             },
             {
                 num: "02",
                 title: "서면 발급, 보존 가이드 라인",
-                desc: "",
+                desc: "하도급거래에서의 서면발급 및 보존에 관한 가이드라인",
                 popContId: "gsrsu04020302"
             
             },
             {
                 num: "03",
                 title: "하도급 거래 심의위원회 운영 규정",
-                desc: "",
+                desc: "GS리테일 하도급거래 내부 심의위원회 설치·운영을 위한 가이드라인",
                 popContId: "gsrsu04020303"
             },
             {
                 num: "04", 
                 title: "계약 체결가이드 라인",
-                desc: "",
+                desc: "대·중소기업간 상생협력을 위한 계약 체결 가이드라인",
                 popContId: "gsrsu04020304"
             },
        
@@ -4080,7 +4080,7 @@ const langData = {
             {
                 key: "voice",
                 title: "고객의 소리",
-                desc: "GS25/GS SHOP/GS THE FRESH/POP 이용 중<br />고객불만/불편/칭찬사항은 고객의 소리에 접수하시면 관련부서에서 신속히 처리가 됩니다.",
+                desc: "GS25/GS SHOP/GS THE FRESH/ 이용 중<br />고객불만/불편/칭찬사항은 고객의 소리에 접수하시면 관련부서에서 신속히 처리가 됩니다.",
                 btnText: "고객의 소리 바로가기",
             },
             {
@@ -4356,10 +4356,10 @@ img { width:100%; height:auto; display:block; object-fit: cover; }
 .main-container { width: 100%; position: relative; display: block; }
 .title_wrap { width: 100%; height: 480px; padding: 10.91% 0 11.25%; background: url(@/assets/images/dummy/gsrsu040101_bg.jpg) no-repeat center / cover; text-align: center; position: relative; display: block; }
 .title_wrap::after { content:'';width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);position:absolute;left: 0; top:0; z-index:1; }
-.page_title { color: #FFFFFF; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2; }
+.page_title { color: #fff; font-size: 7.2rem; font-weight: 700;line-height:1.24;letter-spacing: -0.02em; text-align: center; position: relative; display: block; z-index: 2; }
+.visual_sub { color:#fff;font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;text-align: center; position: relative; z-index: 2;}
 .panel { padding-top:80px; }
 .panel_third_depth { padding-top: 80px; }
-/* v-html 삽입 노드에는 scoped data 속성이 없으므로 :deep 필요 */
 :deep(.txt_blue) { color:#107AF2 !important; }
 :deep(.txt_red) { color:#FB6432 !important; }
 section + section { padding-top:120px; }
@@ -4369,14 +4369,15 @@ section + section { padding-top:120px; }
 .tab_header { margin-bottom:80px; padding: 20px 0; text-align: center; }
 .tab_header > h2 { font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em; }
 .tab_header > p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
-@media (max-width: 768px) {
-}
+
 :deep(.feature_cards_grid.feature_card_list) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
 :deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 :deep(.feature_cards_grid.ft_gd_cards.feature_card_list .feature_card_item) { min-height:288px; }
 .ft_gd_cards :deep(.feature_card_action) { margin-top: 40px; }
-.feature_cards_grid :deep(.feature_card_item) { width: 100%; min-width: 0; }
-.law_feature_cards :deep(.feature_card_num), .law_feature_cards :deep(.feature_card_title) { margin-bottom:6px; }
+/* :deep(.feature_cards_grid .feature_card_item) {  min-width: 0; } */
+:deep(.law_feature_cards .feature_card_item){width: 100%; min-height:140px;}
+:deep(.law_feature_cards .feature_card_num), .law_feature_cards :deep(.feature_card_title) { margin-bottom:6px; }
+
 .purpose_feature_cards :deep(.feature_card_desc), .law_feature_cards :deep(.feature_card_desc) { color:#161616; }
 .cp_manager_role_cards :deep(.feature_card_item) { min-height: 140px; }
 .ft_acc_wrap :deep(dl.board_type_toggle) { border-top: 1px solid #161616; }
@@ -4384,30 +4385,7 @@ section + section { padding-top:120px; }
 .ft_acc_wrap :deep(dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 20px; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: inline-flex; align-items: center; }
 .ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_num) { margin-right: 8px; padding:2px 9px; font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-/* .ft_sec_list { margin: 0; padding: 16px 32px 40px; display:flex; flex-direction:column; gap:32px; }
-.ft_sec_list > li { list-style: none; }
-.ft_sec_list > li > article { display: flex; flex-direction: column; gap: 16px; }
-.ft_sec_list > li > article > h4 { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.ft_stack { padding-left: 24px; }
-.ft_stack p { margin: 0 0 16px; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
-.ft_sec_list > li > article.gray_box { padding: 20px 40px; border-radius: 0; }
-.ft_sec_list > li > article.gray_box p { margin: 0; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing:-0.01em; }
-.num_list { padding: 0; list-style: none; counter-reset: standard-item; }
-.num_list > li { margin-left: 0; padding-left: 32px; color: #67676f; font-size: 1.8rem; line-height: 1.5; position: relative; counter-increment: standard-item; }
-.num_list > li::before { content: counter(standard-item); width: 20px; height: 20px; border: 1px solid #67676f; border-radius: 50%; color: #67676f; font-size: 1.2rem; line-height: 1; text-align: center; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 4px; left: 0; box-sizing: border-box; }
-.num_list > li + li { margin-top: 8px; }
-.num_list > li > ul { margin-top: 8px; }
-.sub_txt { padding-left: 24px; }
-.num_list > li > ul > li > ul { padding-left:24px; }
-.ft_kvs { border:0; }
-.ft_kvs > dt { margin-top: 16px; }
-.ft_kvs > dd { margin: 0; border:0; }
-.ft_kvs dd + dt { margin-top: 16px; }
-.ft_kvs > dd > ul { padding-left:24px; }
-.ft_kvs > dd > ul > li > ul { padding-left:24px; }
-.ft_kvs > dd > p { margin: 0; }
-.ft_note_ul { margin: 0; padding: 0; }
-.ft_note_ul > li { list-style: none; } */
+
 
 .cp_manager_banner { width: 100%; min-height: 588px; padding:67px 130px; background: url(@/assets/images/dummy/gsrsu040101_10.png) no-repeat center center / cover; display: flex; justify-content: flex-end; align-items: center; }
 .cp_manager_banner figcaption { max-width:621px; margin-left:auto; }
@@ -4419,7 +4397,7 @@ section + section { padding-top:120px; }
 .cp_manager_banner_content dl dd strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; }
 .cp_manager_banner_content >div { flex: 0 1 auto; }
 .cp_appoint_board .process_flow { display: flex; gap: 20px; align-items: center; width: 100%; box-sizing: border-box; flex-wrap: wrap; justify-content:center; }
-.cp_appoint_board .process_flow > article { flex: 0 1 220px; aspect-ratio: 1; min-width: 0; background-color: #f8f8f8; border-radius: 999px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
+.cp_appoint_board .process_flow > article { flex: 0 1 200px; aspect-ratio: 1; min-width: 0; background-color: #f8f8f8; border-radius: 999px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
 .cp_appoint_board .process_flow > article > h4 { color: #000000; font-size:2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .cp_appoint_board .process_flow > article > h4 + p { margin: 12px 0 0; color: #000000; font-size:1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; word-break: keep-all; }
 .purpose_feature_cards :deep(.feature_card_title) { color: #107af2; }
@@ -4447,10 +4425,10 @@ section + section { padding-top:120px; }
 .report_form_wrap .apply_form .form_row_content .form_label { padding-top: 68px; }
 .report_form_wrap .apply_form .form_field_file .file_row { display: flex; align-items: center; gap: 10px; }
 .report_form_wrap .apply_form .form_field_file .file_row > span { color: #161616; font-size: 1.4rem; line-height: 1.4; }
+.purpose_feature_cards :deep(.feature_card_item) { min-height: 194px; padding: 32px; }
+.purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 6px; font-size: 1.8rem; line-height: 1.5; }
+.purpose_feature_cards :deep(.feature_card_desc) { color: #161616; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 @media screen and (min-width: 769px) {
-    .purpose_feature_cards :deep(.feature_card_item) { min-height: 194px; padding: 32px; }
-    .purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 6px; font-size: 1.8rem; line-height: 1.5; }
-    .purpose_feature_cards :deep(.feature_card_desc) { color: #161616; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 }
 @media screen and (max-width: 1200px) {
     .cp_manager_banner {padding-left: 60px; padding-right: 60px; background-position: -90px 0;}
@@ -4460,32 +4438,16 @@ section + section { padding-top:120px; }
     .cp_manager_banner figcaption {max-width: 300px;}
 }
 @media screen and (max-width: 768px) {
-    :deep(.feature_cards_grid.feature_card_list) { grid-template-columns: none; grid-auto-columns: 300px; grid-auto-flow: column; gap: 12px; white-space: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    :deep(.feature_cards_grid.feature_card_swiper) { width: calc(100% + 40px); padding: 0 20px; margin: 0 -20px; }
+    .purpose_feature_cards :deep(.feature_card_item) { padding:32px 20px; min-height: 171px !important; }
+    :deep(.purpose_feature_cards.feature_card_swiper .swiper-slide) { width: 80vw; box-sizing: border-box; }
+    :deep(.purpose_feature_cards .feature_card_item){min-height: 171px;}
+    :deep(.feature_card_desc) {color:#161616;font-size: 1.6rem;line-height: 1.5;}
+    .purpose_feature_cards :deep(.feature_card_desc) {font-size: 1.8rem;letter-spacing: 0%;}
+    /* :deep(.feature_cards_grid.feature_card_list) { grid-template-columns: none; grid-auto-columns: 300px; grid-auto-flow: column; gap: 12px; white-space: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; } */
     :deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: none; }
     .ft_acc_wrap :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 10px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0 }
-    /* .ft_sec_list { padding:0; }
-    .ft_sec_list > li > article { gap: 20px; }
-    .ft_sec_list > li > article > h4 { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .ft_stack { padding-left: 0; }
-    .ft_stack { gap: 20px; }
-    .ft_stack p { margin-bottom: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .ft_stack > p + ul { margin-top:16px; }
-    .ft_sec_list > li > article.gray_box { padding: 20px; }
-    .ft_sec_list > li > article.gray_box p { font-size: 1.2rem; line-height: 1.2; }
-    .ft_kvs { padding-left:24px; }
-    .num_list > li { padding-left: 28px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .num_list > li::before { font-size: 1.2rem; }
-    .num_list > li > strong { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .num_list > li > ul { padding-left:8px; }
-    .plain_list { padding-left: 0; }
-    .plain_list > li { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .plain_list > li > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .ft_kvs > dd > ul { padding:0; }
-    .ft_kvs > dt { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-    .ft_kvs > dd { margin-top:8px;font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-    .ft_kvs > dd > p { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-    .ft_note_ul > li { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; } */
     .ethics_target_list :deep(.num_info_icon) { width: 60px; height: 60px; }
     .ethics_target_list :deep(.num_info_title) { margin-bottom: 6px; }
     .ethics_target_list :deep(.num_info_num) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
@@ -4495,6 +4457,10 @@ section + section { padding-top:120px; }
     .report_form_wrap .apply_form .form_field_content > textarea { width: 100%; }
     .report_form_wrap .apply_form .form_row_content .form_label { padding-top: 0; }
     :deep(.ethics_target_list.num_info_list) { grid-template-columns: 1fr; }
+    :deep(.feature_cards_grid.ft_gd_cards.feature_card_list .feature_card_item) { min-height:233px; }
+    .ft_gd_cards :deep(.feature_card_action) { margin-top: 32px; }
+    .ft_gd_cards :deep(.feature_card_action > button) { width:100%; }
+    :deep(.law_feature_cards .feature_card_item){min-height:151px !important;}
 }
 .sec_history { position: relative; }
 .history_list { padding-left:48px;position:relative;}
@@ -4541,6 +4507,7 @@ section + section { padding-top:120px; }
 .signature_box span { color:#C4C4D0; font-size: 1.8rem; font-weight: 700; line-height: 1.5; }
 /* 정도경영 > 제도 — type_03 (Figma TAB_3, node 470:17025) */
 .wrap_tabs_type03 { width: 100%; }
+.wrap_tabs_type03 .tab_wrap{margin:0;}
 .wrap_tabs_type03 :deep(.tab_wrap ul.type_03) { width: 100%; gap: 0; }
 .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li) { flex: 1; min-width: 0; }
 .wrap_tabs_type03 :deep(.tab_wrap ul.type_03 li .item) { width: 100%; height: 60px; padding: 0 16px; color: #90909a; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; text-align: center; background-color: #ffffff; border: 1px solid #c4c4d0; border-radius: 0; display: flex; align-items: center; justify-content: center; }
@@ -4631,10 +4598,10 @@ section + section { padding-top:120px; }
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
     .visual_sub { font-size: 2rem; }
-    .tab_header { margin-bottom:56px; padding: 0; text-align: left; }
-    .tab_header > h2 { font-size: 1.8rem; line-height: 1.4; text-align: left; }
+    .tab_header { margin-bottom:60px; padding: 0;  }
+    .tab_header > h2 { font-size: 1.8rem; line-height: 1.4; }
     .tab_header > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .sub_header { margin-bottom:32px; }
+    .sub_header { margin-bottom:16px; }
     .sub_header h3 { font-size: 2.4rem; text-align: left; }
     .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     section + section { padding-top:80px; }
@@ -4702,9 +4669,9 @@ section + section { padding-top:120px; }
     .base_list .gray_box > p { margin-top: 12px; font-size: 1.4rem; }
     .report_intro_desc { margin-top: -44px; margin-bottom: 40px; font-size: 1.6rem; text-align: left; }
     .report_channel_card { padding: 24px 0; flex-direction: column; gap: 20px; }
-    .report_channel_thumb { width: 100%; min-width: 0; height: 190px; }
+    .report_channel_thumb { width: 100%; min-width: 0; height:auto; min-height: 174px; aspect-ratio: 335 / 174; }
     .report_channel_body { width: 100%; }
-    .report_channel_body h3 { font-size: 2.4rem; }
+    .report_channel_body h3 { font-size: 2rem; }
     .report_channel_body > p { margin-top: 12px; font-size: 1.6rem; }
     .report_channel_body .button_area { margin-top: 16px; }
     .ft_sec_list .common_table td { padding: 12px 10px; }
