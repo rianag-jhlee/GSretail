@@ -12,7 +12,7 @@
             <!-- Depth 1-->
             <Tabs :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
 
-            <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) -->
+            <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) --> 
             <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
             <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
             <Tabs v-show="activeD1 === 3" :tab-items="depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
@@ -227,7 +227,7 @@
                         </Swiper>
                     </div>
                 </section>
-                <section class="sec_icon_grid">
+                <!--<section class="sec_icon_grid">
                     <div class="inner">
                         <header class="section_header ac">
                             <span class="tit">{{ marketingPanel.badge }}</span>
@@ -248,7 +248,7 @@
                             </li>
                         </ul>
                     </div>
-                </section>
+                </section>-->
                 <section class="sec_tri_grid">
                     <header class="section_header ac">
                         <span class="tit">{{ operationSupportPanel.badge }}</span>
@@ -271,7 +271,7 @@
                     </ul>
                 </section>
             </div>
-
+ 
             <!-- 편의점 창업 이해 -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 2">
                 <section class="sec_diagram">
@@ -406,7 +406,9 @@
                                 <ul>
                                     <li v-for="(manager, mi) in regionCounselStaff.managers" :key="mi">
                                         <article>
-                                            <span class="photo" aria-hidden="true"></span>
+                                            <figure class="photo" aria-hidden="true">
+                                                <img src="@/assets/images/dummy/gsrst01050101_01.png" alt="" />
+                                            </figure>
                                             <div>
                                                 <p class="name">{{ manager.name }}</p>
                                                 <p class="area">{{ manager.area }}</p>
@@ -501,7 +503,7 @@
             <div class="panel" v-show="activeD1 === 1 && activeD2 === 0">
                 <section class="sec_startup_process">
                     <header class="section_header ac txt_blue">
-                        <h2>상담 신청부터 개점까지, <br />약 30일이면 나만의 GS25를 오픈할 수 있어요!</h2>
+                        <h2>상담 신청부터 개점까지, <br />최소 30일이면 나만의 GS25를 오픈할 수 있어요!</h2>
                     </header>
                     <ol class="process_timeline">
                         <li
@@ -583,7 +585,6 @@
                                         :class="card.cardClass"
                                     >
                                         <span class="badge">{{ card.badge }}</span>
-                                        <span class="card_icon" aria-hidden="true"></span>
                                         <strong>{{ card.name }}</strong>
                                         <p>{{ card.desc }}</p>
                                     </div>
@@ -600,6 +601,7 @@
                         <table class="franchise_compare_table">
                             <colgroup>
                                 <col class="col_group" />
+                                <col class="col_group2" />
                                 <col class="col_label" />
                                 <col class="col_gs" />
                                 <col class="col_gs" />
@@ -607,7 +609,7 @@
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th colspan="2" scope="colgroup"><strong>구분</strong></th>
+                                    <th colspan="3" scope="colgroup"><strong>가맹타입</strong></th>
                                     <td scope="col" class="is_gs1">
                                         <strong>GS1</strong> 
                                         <span>직접 임차하고, 수익 배분율이 가장 높아요</span>
@@ -625,98 +627,109 @@
                             <tbody>
                                 <tr>
                                     <th rowspan="7" scope="rowgroup">투자 금액</th>
+                                    <th rowspan="4" scope="rowgroup">공<br />통<br />투<br />자<br />금<br />액</th>
                                     <th scope="row">상품 준비금</th>
                                     <td colspan="3">1,400만원</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">소모품 준비금</th>
-                                    <td colspan="3">100만원</td>
+                                    <td colspan="3">100만원</td>                        
                                 </tr>
                                 <tr>
                                     <th scope="row">가맹비</th>
                                     <td colspan="3">770만원(VAT포함)</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">공통 투자금액 (상품+소모품+가맹비)</th>
+                                    <th scope="row"><strong>상품 + 소모품 + 가맹비</strong></th>
                                     <td colspan="3"><strong>2,270만원</strong></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">점포 임차비용</th>
+                                    <th scope="row" colspan="2">점포 임차비용</th>
                                     <td>경영주 투자</td>
                                     <td>본부 투자</td>
                                     <td>본부 지원</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">본부 보증금</th>
+                                    <th scope="row" colspan="2">본부 보증금</th>
                                     <td>-</td>
                                     <td><span>전대보증금</span>최소 3,000만원</td>
                                     <td><span>예치보증금</span>최소 3,000만원</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">시설/인테리어</th>
+                                    <th scope="row" colspan="2">시설/인테리어</th>
                                     <td>본부 지원<br /><span>(※ 수익추구 특약: 경영주 투자)</span></td>
                                     <td>본부 지원</td>
                                     <td>본부 지원</td>
                                 </tr>
                                 <tr class="row_total">
-                                    <th colspan="2" scope="row"><strong>총 투자금액</strong></th>
+                                    <th colspan="3" scope="row"><strong>총 투자금액</strong></th>
                                     <td><strong class="txt_blue">점포 임차비용 + 공통 투자비 2,270만원</strong></td>
                                     <td><strong class="txt_blue">최소 5,270만원<br /></strong><span>(전대보증금 + 공통 투자비)</span></td>
                                     <td><strong class="txt_blue">최소 5,270만원<br /></strong><span>(예치보증금 + 공통 투자비)</span></td>
                                 </tr>
                                 <tr>
-                                    <th rowspan="6" scope="rowgroup">계약<br class="m_br">조건</th>
-                                    <th scope="row"><strong>최종 경영주 수익 배분율</strong></th>
+                                    <th rowspan="8" scope="rowgroup">계약<br class="m_br">조건</th>
+                                    <th scope="row" colspan="2"><strong>최종 경영주 수익 배분율</strong></th>
                                     <td><strong class="txt_blue txt_emphasis">최대 71%</strong></td>
                                     <td><strong class="txt_blue txt_emphasis">최대 65%</strong></td>
                                     <td><strong class="txt_blue txt_emphasis">최대 46%</strong></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">경영주 수익 배분율</th>
+                                    <th scope="row" colspan="2">경영주 수익 배분율</th>
                                     <td>66%</td>
                                     <td>60%</td>
                                     <td>41%</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">24시간 영업장려금</th>
+                                    <th scope="row" colspan="2">24시간 영업장려금</th>
                                     <td>5%</td>
                                     <td>5%</td>
                                     <td>5%</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">계약기간</th>
+                                    <th scope="row" colspan="2">계약기간</th>
                                     <td>5년</td>
                                     <td>4년</td>
                                     <td>4년</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">담보 설정</th>
+                                    <th scope="row" colspan="2">담보 설정</th>
                                     <td>5,000만원</td>
                                     <td>2,000만원</td>
                                     <td>2,000만원</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">각종지원제도</th>
+                                    <th scope="row" colspan="2">각종지원제도</th>
                                     <td colspan="3">상생 인센티브 / 상품 판매·발주 장려금 / 미오출 보상금</td>
                                 </tr>
                                 <tr>
                                     <th colspan="2" scope="row">수익추구특약</th>
-                                    <td><strong>최대 81%</strong><br /><span>(※ GS1 수익배분율 71% + 10%)</span></td>
+                                    <td><strong>최대 81%</strong><br /><span>(※ GS1 수익배분율 71% + 특약 10%)</span></td>
                                     <td>-</td>
                                     <td>-</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" scope="row">안심운영지원 기준금액<span>(지원기간: 1년)</span></th>
+                                    <td>24시간 운영: 月 최대 800만원<br />18시간 운영: 月 최대 550만원</td>
+                                    <td>24시간 운영: 月 최대 750만원<br />18시간 운영: 月 최대 500만원</td>
+                                    <td>24시간 운영: 月 최대 700만원<br />18시간 운영: 月 최대 450만원</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <ul class="list_note">
                         <li>
-                            <p>* 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년</p>
+                            <p>* GS1 Type 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년</p>
                         </li>
                         <li>
                             <p>* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다</p>
                         </li>
                         <li>
                             <p class="txt_link">* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href="#">신선강화점 자세히 알아보기</a>)</p>
+                        </li>
+                        <li>
+                            <p class="txt_link">* 안심운영제도란? 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우,<br/>
+                         경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. (<a href="#">안심운영제도 자세히 알아보기</a>)</p>
                         </li>
                     </ul>
                 </section>
@@ -756,11 +769,16 @@
                                             <Buttons
                                                 tag="a"
                                                 :href="item.link.url"
-                                                btn-class="btn_mid primary fill btn_icon after"
+                                                btn-class="btn_mid primary fill btn_icon_arrow after"
                                             >{{ item.link.text }}</Buttons>
                                         </div>
                                     </div>
                                 </article>
+                            </li>
+                        </ul>
+                        <ul class="list_note">
+                            <li>
+                                <p>* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.</p>
                             </li>
                         </ul>
                     </section>
@@ -1092,7 +1110,7 @@
             <div class="panel" v-show="activeD1 === 3 && activeD2 === 0" aria-label="창업 상담 신청">
                 <section class="sec_consult_startup">
                     <div class="consent_box" aria-label="개인정보 수집·이용 동의">
-                        <h3>개개인정보 수집·이용 동의</h3>
+                        <h3>개인정보 수집·이용 동의</h3>
                         <ul v-if="startupConsentItems.length" class="consent_list">
                             <li v-for="(item, idx) in startupConsentItems" :key="idx">
                                 <p v-html="item"></p>
@@ -1445,8 +1463,9 @@
             <div class="panel" v-show="activeD1 === 3 && activeD2 === 2" aria-label="입점 제안/브랜드 전환 상담">
                 <section class="sec_consult_entry">
                     <header class="section_header">
-                        <h2 class="section_title">{{ consultEntryPanel.title }}</h2>
-                        <p>{{ consultEntryPanel.desc }}</p>
+                        <h2 class="section_title ac" v-html="consultEntryPanel.title "></h2>
+                        <p class="stit"><strong>{{ consultEntryPanel.desc }}</strong></p>
+                        <p>{{ consultEntryPanel.desc2 }}</p>
                     </header>
                     <div class="consent_box" aria-label="개인정보 수집·이용 동의">
                         <h3>개인정보 수집·이용 동의</h3>
@@ -1478,6 +1497,16 @@
                                     </div>
                                 </div> 
                                 <div class="form_row">
+                                    <div class="form_label">이메일 <span class="form_required">*</span></div>
+                                    <div class="form_field form_field_email">
+                                        <Inputs type="text" v-model="startupConsultForm.emailId" />
+                                        <span class="form_sep">@</span>
+                                        <Inputs v-if="startupConsultForm.emailDomain === ''" type="text" v-model="startupConsultForm.emailDomainCustom" placeholder="직접입력" />
+                                        <Inputs v-else type="text" :model-value="startupConsultForm.emailDomain" :is-readonly="true" />
+                                        <SelectBox :options="emailDomainOptions" v-model="startupConsultForm.emailDomain" />
+                                    </div>
+                                </div>
+                                <div class="form_row">
                                     <div class="form_label">휴대폰 <span class="form_required">*</span></div>
                                     <div class="form_field form_field_phone">
                                         <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
@@ -1503,7 +1532,7 @@
                                 </div>
                             </article>
                             <article>
-                                <h3>브랜드 전환 상담 <span class="form_required">* 필수 입력사항</span></h3>
+                                <h3>입점 제안/브랜드 전환 상담 <span class="form_required">* 필수 입력사항</span></h3>
                                 <div class="form_row cb_rs">
                                     <div class="form_label">추천점포 소재지 <span class="form_required">*</span></div>
                                     <div class="form_field cb_faddr">
@@ -1589,7 +1618,7 @@
 
 </template>
 
-<script setup>
+<script setup> 
 import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -1691,7 +1720,7 @@ const depth1Tabs = [
     { item: "상담 및 신청" },
     { item: "가맹계약시스템" },
 ];
-
+ 
 /* D1=0 2depth */
 const depth2Tabs = [
     { item: "GS25 브랜드 소개" },
@@ -1748,7 +1777,7 @@ const successPointCards = [
     {
         em: "수익성 분석",
         title: "수익성 중심의 신규 점포 오픈",
-        desc: "점포 개발 전문가의 데이터와 현장 분석을 통해 수익성이 보이는 점포만 오픈합니다.",
+        desc: "점포 개발 전문가의 현장분석과 데이터를 기반으로 수익성이 보이는 점포만 오픈합니다.",
     },
     {
         em: "스마트 운영",
@@ -1760,15 +1789,10 @@ const successPointCards = [
         title: "경쟁력 있는 상품/컨셉",
         desc: "메가히트 상품부터 신선강화형 매장까지 GS25만의 차별화 컨셉으로 매출이 올라갑니다.",
     },
-    {
-        em: "히트 상품",
-        title: "압도적인 마케팅",
-        desc: "단골 고객을 만드는 마케팅과 멤버십 ‘우리동네 GS’ 앱부터 100만 구독자 SNS 채널까지, 고객이 다시 찾는 이유를 만듭니다.",
-    },
 ];
 
 const brandSolutionPanel = {
-    title: "저도 창업 가능한가요? <br class='m_br'/><span class='txt_blue'>그럼요!</span>",
+    title: "처음이어도 창업 가능한가요? <br class='m_br'/><span class='txt_blue'>그럼요!</span>",
     desc: "경영주님 상황에 맞는 맞춤 솔루션을 찾아드립니다.",
 };
 
@@ -1780,7 +1804,7 @@ const brandSolutionCards = [
     },
     {
         title: "창업 절차 안내",
-        desc: "30일이면 창업 완료!",
+        desc: "내 점포 오픈까지, 최소 30일!",
         url: "#none",
     },
     {
@@ -1803,8 +1827,8 @@ const startupProcessSteps = [
         moreList: ["'창업 상담신청' 메뉴에서 지역별 담당자와 연락처를 바로 확인할 수 있어요."],
     },
     {
-        theme: "d30",
-        dayLabel: "D-30",
+        theme: "none",
+        dayLabel: "",
         num: 2,
         lead: "함께 할 준비가 되셨군요!",
         title: "예비경영주 사전 인터뷰",
@@ -1812,8 +1836,8 @@ const startupProcessSteps = [
         moreLink: false,
     },
     {
-        theme: "d29",
-        dayLabel: "D-29",
+        theme: "d30",
+        dayLabel: "D-30",
         num: 3,
         lead: "내 점포를 함께 찾아볼까요?",
         title: "점포소개 & 점포 상권 분석",
@@ -1821,11 +1845,11 @@ const startupProcessSteps = [
         moreLink: false,
     },
     {
-        theme: "d28",
-        dayLabel: "D-28",
+        theme: "d29",
+        dayLabel: "D-29",
         num: 4,
         lead: "투명하게 모든 정보를 공개합니다.",
-        title: "계약 준비 & 정보 공개서 교부",
+        title: "계약 준비 & 사전제공서류 교부",
         desc: "점포가 선정되었다면, 가맹본부에 대한 모든 정보를 미리 확인하실 수 있어요.",
         moreLink: true,
         moreList: ["법률에 따라 정보공개서 서명 후 14일이 지나야 계약이 가능해요."],
@@ -1889,13 +1913,12 @@ const franchiseTypeGroups = [
     {
         key: "profit",
         themeClass: "is_profit",
-        title: "수익 추구형",
-        desc: "보유한 자리로 높은 수익 배분을 누려보세요.",
+        title: "경영주 임차형",
+        desc: "직접 임차한 점포에서 더 높은 수익배분 혜택을 누려보세요.",
         cards: [
             {
                 badge: "GS 1 Type",
                 cardClass: "is_gs1",
-                name: "일반가맹",
                 desc: "경영주가 직접 임차하여 운영",
             },
         ],
@@ -1903,19 +1926,17 @@ const franchiseTypeGroups = [
     {
         key: "stable",
         themeClass: "is_stable",
-        title: "안정 추구형",
-        desc: "점포가 없어도 OK! 본부 임차로 안정적으로 시작해보세요",
+        title: "본부 임차형",
+        desc: "본부가 임차한 점포에서 합리적인 투자금으로 시작해보세요.",
         cards: [
             {
                 badge: "GS 2 Type",
                 cardClass: "is_gs2",
-                name: "전대가맹",
                 desc: "본사와 임차비용 공동 부담",
             },
             {
                 badge: "GS 3 Type",
                 cardClass: "is_gs3",
-                name: "위탁가맹",
                 desc: "임차비용 부담 없이 시작",
             },
         ],
@@ -1925,8 +1946,9 @@ const franchiseTypeGroups = [
 
 /* [D1=3 D2=2] 입점 제안/브랜드 전환 — 상단 안내 */
 const consultEntryPanel = {
-    title: "입지에 대한 지역별 최고의 전문가들이 1:1 맞춤 상담해 드립니다.",
-    desc: "주말/공휴일에는 즉시 응답이 어려울 수 있는 점 양해 부탁드립니다.", 
+    title: "추천하고 싶은 편의점 자리가 있거나,<br/>운영 중인 점포를 GS25로 변경하고 싶다면 신청해주세요.",
+    desc: "입지에 대한 지역별 최고의 전문가들이 1:1 맞춤 상담해 드립니다.",
+    desc2: "주말/공휴일에는 즉시 응답이 어려울 수 있는 점 양해 부탁드립니다.", 
 }
 /* [D1=1 D2=0] 창업 절차 — 타임라인 '더보기' 아코디언(GSAP height 애니메이션) */
 function getProcessMoreList(step) {
@@ -2049,9 +2071,9 @@ function toggleProcessMore(idx) {
 
 /* ── [D1=1 D2=2] 창업 혜택 3depth ── */
 const depth3TabsBenefit = [
-    { item: "탄탄한 점포" },
-    { item: "든든한 점포 운영" },
-    { item: "편안한 경영주 생활" },
+    { item: "대상별 창업 혜택" },
+    { item: "상생 지원제도" },
+    { item: "경영주님들을 위한 일상생활 지원" },
 ];
 
 /** 탄탄한 점포 */
@@ -2089,50 +2111,46 @@ const benefitStoreItems = [
 
 /* activeD3=1 든든한 점포 운영 */
 const benefitOperationPanel = {
-    title: "업계 최고 수준의 GS25 경영주 상생 혜택",
-    desc: "보험, 노무, 인센티브, 채용까지! 경영주님이 운영에만 집중할 수 있도록 GS25가 도와드려요.",
+    title: "업계 최고 수준의 GS25 상생 지원제도",
+    desc: "인센티브, 경조/보험, 노무/법률, 스토어매니저 채용까지! 경영주님이 점포 운영에만 집중할 수 있도록 GS25가 지원해드려요.",
 };
 
 const benefitOperationGroups = [
     {
         title: "인센티브 제도",
-        desc: "성과가 곧 보상으로! 점포 수익을 극대화할 수 있도록 성과에 따른 인센티브를 지급해요",
-        cols: 2,
+        desc: "매출 향상 및 신상품 도입 등 점포 경쟁력 향상을 위해 노력하는 경영주님에게 인센티브를 지급해요.",
+        cols: 3,
         items: [
             {
-                title: "판매이익 인센티브 제도",
+                title: "판매이익 인센티브",
                 desc: "FF, FF간편식, 신선, 치킨25 카테고리 수익 활성화를 위해 판매이익의 최대 +10% 본부 지원금 지급",
             },
             {
-                title: "구색 강화 인센티브 제도",
-                desc: "핵신상품 및 신상품 취급 확대에 따른 본부 지원금 지급",
+                title: "구색 강화 인센티브",
+                desc: "핵심신상품 및 신상품 취급 활동에 따른 본부 지원금 지급",
             },
             {
-                title: "수익 개선 인센티브 제도",
+                title: "수익 개선 인센티브",
                 desc: "점포 수익 개선 활동에 따른 본부 지원금 지급",
-            },
-            {
-                title: "서비스 진단 제도",
-                desc: "서비스 모니터링 등 진단 우수점 혜택 제공",
             },
         ],
     },
     {
-        title: "보험/경조 지원",
+        title: "경조/보험 지원",
         desc: "예기치 못한 순간에도 GS25가 함께해요",
         cols: 3,
         items: [
             {
                 title: "경조사 지원",
-                desc: "경조금 지급, 장례용품 지급, 점포운영지원금 지급, 출산용품 지급",
+                desc: "경조금, 점포운영지원금, 장례용품, 경조화환,출산용품 지급",
             },
             {
                 title: "추석 선물 지급",
-                desc: "경영주님 직접 선택 가능한 선택형 추석 선물 지급",
+                desc: "직접 선택 가능한 추석 선물 지급",
             },
             {
                 title: "상생지원 보험",
-                desc: "단체 안심상해 보험, 횡령, 택배도난, 현금도난, 재산종합 무상 가입",
+                desc: "횡령, 택배도난, 현금도난, 재산종합 보험 무상 가입",
             },
         ],
     },
@@ -2147,7 +2165,7 @@ const benefitOperationGroups = [
             },
             {
                 title: "20주년 혜택",
-                desc: "기념패, 여행상품권, 건강검진",
+                desc: "건강검진권",
             },
             {
                 title: "30주년 혜택",
@@ -2162,15 +2180,15 @@ const benefitOperationGroups = [
         items: [
             {
                 title: "치킨25 운영 지원",
-                desc: "판매이익 인센티브 및 통신비용/튀김기름/냄새제거필터/튀김기 청소 일부 지원",
+                desc: "판매이익 인센티브 및 통수비용/튀김기름/필터 등 지원",
             },
             {
                 title: "카페25 운영 지원",
                 desc: "부품 수리비 일부 지원",
             },
             {
-                title: "위생등급제 우수점 지원",
-                desc: "위생등급제도 '매우 우수' 및 '우수' 취득 시 정수필터 비용 전액 또는 일부 지원",
+                title: "식품안심업소 취득 지원",
+                desc: "식품안심업소 취득 시 정수필터 비용 지원",
             },
         ],
     },
@@ -2192,7 +2210,7 @@ const benefitOperationGroups = [
                 desc: "민사, 형사, 가사, 행정 등 생활 법률 관련 상담 서비스 제공",
             },
             {
-                title: "알바몬 제휴",
+                title: "채용플랫폼 제휴",
                 desc: "스토어매니저 빠른 채용을 위한 알바몬 제휴",
             },
         ],
@@ -2232,15 +2250,14 @@ const benefitOperationGroups = [
 
 /* activeD3=2 편안한 경영주 생활 */
 const benefitLifePanel = {
-    title: "일할 때도, 쉴 때도 든든한 혜택",
+    title: "경영주님들을 위한 다양한 제휴 혜택",
     desc: "건강, 복지, 여가까지! 점포 밖에서도 GS25가 함께합니다.",
 };
 
 const benefitLifeItems = [
-    { title: "경영주 건강 & 심리 헬스케어 서비스", desc: "경영주님 및 직계가족 대상 건강과 심리 등 헬스케어 서비스 제공" },
     { title: "경영주 종합건강검진 할인 (KMI)", desc: "전국 대형 건강 검진센터(KMI) 기업 제휴가 할인 제공" },
     { title: "세이프닥 의료 제휴 할인", desc: "비급여 의료 항목에 대해 기업 제휴 할인 제공" },
-    { title: "GS25 경영주 복지몰", desc: "가맹점 경영주님 대상 기업형 복지몰 제공" },
+    { title: "경영주님들을 위한 일상생활 지원", desc: "가맹점 경영주님 대상 기업형 복지몰 제공" },
     { title: "삼성전자 소상공인몰", desc: "삼성전자 소상공인몰 제휴 할인혜택 등 제공" },
     { title: "엔젤 리조트", desc: "엔젤리조트 회원가 제공" },
     { title: "LG U+ 인터넷(와이파이) 할인", desc: "점포 매장 설치용 개별 인터넷(와이파이) 할인 혜택 제공" },
@@ -2248,7 +2265,7 @@ const benefitLifeItems = [
 ];
 
 const benefitLifeNote =
-    "* 해당 제도는 '26년에 한하며, 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제 될 수 있습니다.";
+    "* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.";
 
 const benefitLifeRows = Array.from(
     { length: Math.ceil(benefitLifeItems.length / 2) },
@@ -2262,7 +2279,6 @@ const competitivePanel = {
 const competitiveCards = [
     { title: "수익성 중심의<br />점포 오픈" },
     { title: "고객에게 사랑받는<br />상품/컨셉" },
-    { title: "압도적인<br />마케팅 & 멤버십" },
     { title: "스마트한 시스템과<br />밀착 지원" },
 ];
 
@@ -2286,7 +2302,7 @@ const storeOpenCards = [
 const productConceptPanel = {
     badge: "상품 & 컨셉",
     title: "경쟁력 있는 상품과 차별화 컨셉",
-    desc: "신선강화 매장부터 뷰티·주류 특화 매장까지, GS25만의 차별화된 컨셉으로 점포 수익성을 강화합니다.",
+    desc: "메가 히트 상품부터 신선강화 매장까지 GS25만의 차별화된 컨셉으로 점포 수익성을 강화합니다.",
 };
 
 const megaHitPanel = {
@@ -2308,9 +2324,9 @@ const megaHitGroups = [
     {
         title: "SNS 인기 상품",
         items: [
-            { label: "가성비 도시락의 상징", title: "흑백요리사 협업,모찌롤", image: imgProduct05 },
-            { label: "누적 판매량 1억개 돌파", title: "아이스브릴레 시리즈", image: imgProduct06 },
-            { label: "GS25 전용 브랜드에서 해외 진출까지", title: "맛삼촌 딸기 샌드위치", image: imgProduct07 },
+            { label: "", title: "모찌롤", image: imgProduct05 },
+            { label: "", title: "아이스브릴레 시리즈", image: imgProduct06 },
+            { label: "", title: "맛삼촌 딸기 샌드위치", image: imgProduct07 },
         ],
     },
 ];
@@ -2357,10 +2373,10 @@ const conceptStorePanel = {
 };
 
 const conceptStoreCards = [
-    { badge: "#리조트특화 #주류특화", title: "GS25 전주본점", image: imgStore01 },
-    { badge: "#리조트특화 #주류특화", title: "GS25 전주본점", image: imgStore02 },
-    { badge: "#리조트특화 #주류특화", title: "GS25 전주본점", image: imgStore03 },
-    { badge: "#리조트특화 #주류특화", title: "GS25 전주본점", image: imgStore04 },
+    { badge: "#전통형 플래그십 스토어", title: "GS25 수원행리단길점", image: imgStore01 },
+    { badge: "#디지털 솔루션 특화", title: "GS25 DXLAB점", image: imgStore02 },
+    { badge: "#한화이글스 협업 #스포츠 특화", title: "GS25 한화생명볼파크", image: imgStore03 },
+    { badge: "#LG 트윈스 협업 #스포츠 특화", title: "GS25 잠실타워점", image: imgStore04 },
 ];
 
 const conceptStoreSwiperInst = ref(null);
@@ -2448,7 +2464,7 @@ const operationSupportCards = [
 /* ── [D1=0 D2=2] 편의점 창업 이해 ── */
 const convenienceDefinePanel = {
     title: "편의점이란?",
-    desc: "편의점은 단순한 소매점이 아니에요. 동네 아지트이자 생활 인프라로, 해마다 꾸준히 성장하고 있는 든든한 사업입니다.",
+    desc: "편의점은 단순한 소매점이 아니에요. 고객과 가장 가까운 생활 플랫폼으로, 꾸준히 성장하고 있는 든든한 사업입니다.",
 };
 
 const convenienceEvolutionCore = {
@@ -2467,7 +2483,7 @@ const convenienceEvolutionStages = [
     },
     {
         title: "라이프스타일 플랫폼",
-        desc: "커피구독 서비스, 전동킥보드/전기차 충전,<br />아동/여성안전 지킴이, 우리 동네GS APP",
+        desc: "커피구독 서비스, 전기차 충전,<br />아동/여성안전 지킴이, 우리 동네GS APP",
     },
 ];
 
@@ -2914,7 +2930,7 @@ const seminarConsentItems =[
 
 const counselConsentItems =[
     "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
-    "- 수집하는 개인정보 항목: 이름, 휴대폰번호",
+    "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 이메일",
     "- 수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
     "- 보유 및 이용기간: 접수 후 1년",
 ]
@@ -3111,6 +3127,14 @@ const phoneOptions = [
     { value: "019", label: "019" },
 ];
 
+const emailDomainOptions = [
+    { value: "naver.com", label: "naver.com" },
+    { value: "gmail.com", label: "gmail.com" },
+    { value: "daum.net",  label: "daum.net" },
+    { value: "kakao.com", label: "kakao.com" },
+    { value: "hanmail.net", label: "hanmail.net" },
+];
+
 const startupStoreOwnershipOptions = [
     { value: "yes", label: "있음" },
     { value: "no", label: "없음" },
@@ -3169,6 +3193,9 @@ const startupConsultForm = reactive({
     phone1: "010",
     phone2: "",
     phone3: "",
+    emailId: "",
+    emailDomain: "",
+    emailDomainCustom: "",
     consultType: "",
     brandConsultZipCode: "",
     brandConsultAddrBasic: "",
@@ -3404,7 +3431,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_hero > .metric_list > li { min-width: 0; min-height: 95px; flex: 1; padding: 20px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
 .sec_hero > .metric_list > li > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_hero > .metric_list > li > span { color: rgba(255,255,255,0.8); font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
-.sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; }
+.sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
 .sec_num_list :deep(.num_info_item) { padding: 0; border-bottom: 0; }
 .sec_num_list :deep(.num_info_num) { margin-bottom: 8px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
 .sec_num_list :deep(.num_info_item article) { display: flex; flex-direction: column; gap: 24px; }
@@ -3431,22 +3458,18 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_overlap > .overlap_grid > li:nth-child(1) { z-index: 1; }
 .sec_overlap > .overlap_grid > li:nth-child(2) { z-index: 2; }
 .sec_overlap > .overlap_grid > li:nth-child(3) { z-index: 3; }
-.sec_overlap > .overlap_grid > li:nth-child(4) { z-index: 4; }
 .sec_overlap > .overlap_grid > li > article { width: 100%; height: auto; aspect-ratio: 1; border-radius: 50%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
 .sec_overlap > .overlap_grid > li > article > .icon { width: 40px; height: auto; max-width: 100%; aspect-ratio: 1; }
 .sec_overlap > .overlap_grid > li:nth-of-type(1) > article > .icon { background: url('@/assets/images/sub/icon_cont_40.png') no-repeat -20px -20px; filter: brightness(0) saturate(100%) invert(57%) sepia(41%) saturate(4411%) hue-rotate(326deg) brightness(99%) contrast(90%); }
 .sec_overlap > .overlap_grid > li:nth-of-type(2) > article > .icon { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0102_sc1_02.png') no-repeat 0 0; }
-.sec_overlap > .overlap_grid > li:nth-of-type(3) > article > .icon {  background: red;}
-.sec_overlap > .overlap_grid > li:nth-of-type(4) > article > .icon { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0102_sc1_04.png') no-repeat 0 0; }
+.sec_overlap > .overlap_grid > li:nth-of-type(3) > article > .icon { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0102_sc1_04.png') no-repeat 0 0; }
 .sec_overlap > .overlap_grid > li > article > strong { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_overlap > .overlap_grid > li:nth-child(1) > article { background-color: rgba(255,118,48,0.12); }
 .sec_overlap > .overlap_grid > li:nth-child(1) > article > strong { color: #f6671e; }
 .sec_overlap > .overlap_grid > li:nth-child(2) > article { background-color: rgba(139,144,148,0.18); }
 .sec_overlap > .overlap_grid > li:nth-child(2) > article > strong { color: #5a6670; }
-.sec_overlap > .overlap_grid > li:nth-child(3) > article { background-color: rgba(21,80,244,0.11); }
-.sec_overlap > .overlap_grid > li:nth-child(3) > article > strong { color: #1550f4; }
-.sec_overlap > .overlap_grid > li:nth-child(4) > article { background-color: rgba(16,158,105,0.12); }
-.sec_overlap > .overlap_grid > li:nth-child(4) > article > strong { color: #099762; }
+.sec_overlap > .overlap_grid > li:nth-child(3) > article { background-color: rgba(16,158,105,0.12); }
+.sec_overlap > .overlap_grid > li:nth-child(3) > article > strong { color: #099762; }
 .sec_split > .inner > .split_layout { display: flex; align-items: center; justify-content: center; gap: 40px; }
 .sec_split > .inner > .split_layout > .info_card { width: 100%; max-width: 500px; min-height: 164px; margin: 0; padding: 32px 24px; background-color: #fff; border-radius: 20px; }
 .sec_split > .inner > .split_layout > .info_card > dt { display: flex; align-items: center; gap: 8px; }
@@ -3492,6 +3515,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .dual_panel > article > .stack_list > li > div > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
 .sec_stack > .dual_panel > article > .stack_list > li > div > p { margin-top: 2px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_stack > .dual_panel > article > .btn_mid { margin-top: 24px; }
+.sec_stack > .dual_panel > article > ul > li { font-size: 1.8rem }
 .sec_stack > .sub_block { margin-top: 60px; }
 .sec_stack > .sub_block > .sub_swiper { margin-top: 40px; overflow: hidden; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-wrapper) { align-items: stretch; }
@@ -3654,44 +3678,43 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li::before { width: 4px; height: 4px; background-color: #666; top: 9px; }
 .sec_startup_process .process_timeline > li:not([data-theme="dday"]) > article:hover { box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.25); }
 .sec_startup_process .process_timeline > li[data-theme="start"] > article:hover { border-color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > article:hover { border-color: #42c68f; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > article:hover { border-color: #15b874; }
-.sec_startup_process .process_timeline > li[data-theme="d28"] > article:hover { border-color: #11935d; }
+.sec_startup_process .process_timeline > li[data-theme="none"] > article:hover { border-color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > article:hover { border-color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > article:hover { border-color: #11935d; }
 .sec_startup_process .process_timeline > li[data-theme="d14"] > article:hover { border-color: #4095f5; }
 .sec_startup_process .process_timeline > li[data-theme="d14_7"] > article:hover { border-color: #107af2; }
 .sec_startup_process .process_timeline > li[data-theme="d11"] > article:hover { border-color: #0d62c2; }
 .sec_startup_process .process_timeline > li[data-theme="d2_1"] > article:hover { border-color: #15b874; }
-.sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .day { color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .step_track > .num { background-color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="start"] > article > div > .lead { color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .day { color: #42c68f; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .step_track > .num { background-color: #42c68f; }
+.sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .day { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .step_track > .num { background-color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="start"] > article > div > .lead { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="none"] > .step_meta > .step_track > .num { background-color: #00D4EA; }
+.sec_startup_process .process_timeline > li[data-theme="none"] > article > .icon { background-color: #e8f8f1; }
+.sec_startup_process .process_timeline > li[data-theme="none"] > article > div > .lead { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .day { color: #01C1EF; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .step_track > .num { background-color: #01C1EF; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > article > .icon { background-color: #e8f8f1; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > article > div > .lead { color: #15b874; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .day { color: #15b874; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .step_track > .num { background-color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > article > div > .lead { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .day { color: #01B3F2; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .step_track > .num { background-color: #01B3F2; }
 .sec_startup_process .process_timeline > li[data-theme="d29"] > article > .icon { background-color: #e8f8f1; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > article > div > .lead { color: #11935d; }
-.sec_startup_process .process_timeline > li[data-theme="d28"] > .step_meta > .day { color: #11935d; }
-.sec_startup_process .process_timeline > li[data-theme="d28"] > .step_meta > .step_track > .num { background-color: #11935d; }
-.sec_startup_process .process_timeline > li[data-theme="d28"] > article > .icon { background-color: #e8f8f1; }
-.sec_startup_process .process_timeline > li[data-theme="d28"] > article > div > .lead { color: #0d6e46; }
-.sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .day { color: #4095f5; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > article > div > .lead { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .day { color: #01A9F5; }
 .sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .step_track > .num { background-color: #4095f5; }
 .sec_startup_process .process_timeline > li[data-theme="d14"] > article > div > .lead { color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .day { color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .step_track > .num { background-color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="d14_7"] > article > div > .lead { color: #0d62c2; }
-.sec_startup_process .process_timeline > li[data-theme="d11"] > .step_meta > .day { color: #0d62c2; }
-.sec_startup_process .process_timeline > li[data-theme="d11"] > .step_meta > .step_track > .num { background-color: #0d62c2; }
-.sec_startup_process .process_timeline > li[data-theme="d11"] > article > div > .lead { color: #0a4991; }
-.sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .day { color: #15b874; }
-.sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .step_track > .num { background-color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .day { color: #009EF7; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .step_track > .num { background-color: #01A9F5; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > article > div > .lead { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > .step_meta > .day { color: #0093F9; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > .step_meta > .step_track > .num { background-color: #009EF7; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > article > div > .lead { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .day { color: #008BFB; }
+.sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .step_track > .num { background-color: #008BFB; }
 .sec_startup_process .process_timeline > li[data-theme="d2_1"] > article > .icon { background-color: #e8f8f1; }
-.sec_startup_process .process_timeline > li[data-theme="d2_1"] > article > div > .lead { color: #11935d; }
-.sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { color: #fb6432; font-size: 2.4rem; line-height: 1.35; }
-.sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .step_track > .num { background-color: #fb6432; }
-.sec_startup_process .process_timeline > li[data-theme="dday"] > article { background-color: #fb6432; border-color: #fb6432; }
+.sec_startup_process .process_timeline > li[data-theme="d2_1"] > article > div > .lead { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { color: #107AF2; font-size: 2.4rem; line-height: 1.35; }
+.sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .step_track > .num { background-color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="dday"] > article { background-color: #107AF2; border-color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { background-color: #fff; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article > div > h3 { color: #fff; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article > div > .desc { color: #fff; }
@@ -3705,40 +3728,44 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_type > .franchise_type_list > li > article > header > div { width: 100%; text-align: center; }
 .sec_franchise_type > .franchise_type_list > li > article > header > div > h3 { margin: 0; color: #fff; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .sec_franchise_type > .franchise_type_list > li > article > header > div > p { margin: 4px 0  0; color: #fff; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
-.sec_franchise_type > .franchise_type_list > li.is_profit > article > header { background-color: #fc835b; }
-.sec_franchise_type > .franchise_type_list > li.is_profit > article > header > .icon { background-color: #fee0d6; }
-.sec_franchise_type > .franchise_type_list > li.is_stable > article > header { background-color: #4095f5; }
-.sec_franchise_type > .franchise_type_list > li.is_stable > article > header > .icon { background-color: #e7f2fe; }
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > header { background-color: #01C1EF; }
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > header > .icon { position: relative; background-color: #fff; }
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > header > .icon:before { content: ''; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; transform: translateX(-50%) translateY(-50%); background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0202_01.png') no-repeat center / contain; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > header { background-color: #107AF2; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > header > .icon { position: relative; background-color: #fff; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > header > .icon:before { content: ''; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; transform: translateX(-50%) translateY(-50%); background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0202_02.png') no-repeat center / contain; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { flex: 1 1 auto; padding: 32px 40px; background-color: #fff; border-radius: 0 0 20px 20px; display: flex; gap: 20px; }
-.sec_franchise_type > .franchise_type_list > li.is_profit > article > .franchise_type_body { border: 2px solid #fc835b; }
-.sec_franchise_type > .franchise_type_list > li.is_stable > article > .franchise_type_body { border: 2px solid #4095f5; }
+.sec_franchise_type > .franchise_type_list > li.is_profit > article > .franchise_type_body { border: 2px solid #01C1EF; }
+.sec_franchise_type > .franchise_type_list > li.is_stable > article > .franchise_type_body { border: 2px solid #107AF2; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { min-width: 0; flex: 1 1 0; padding: 32px 24px; border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 4px 16px; color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; border-radius: 99px; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .card_icon { width: 40px; height: 40px; flex-shrink: 0; margin-top: 20px; background-color: #d9d9d9; border-radius: 50%; display: block; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > strong { margin-top: 16px; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { margin: 4px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 { background-color: #f9f2ea; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 > .badge { background-color: #fc835b; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 { background-color: #e7f2fe; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 > .badge { background-color: #4095f5; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 { background-color: #e8f8f1; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 > .badge { background-color: #42c68f; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { margin: 4px 0 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 { background-color: #E8F8F1; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 > .badge { background-color: #01C1EF; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 { background-color: #E8F8F1; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 > .badge { background-color: #4095F5; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 { background-color: #E8F8F1; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 > .badge { background-color: #42C68F; }
 /* --- D2=2 · 창업 혜택 (activeD2 === 2 · activeD3 3depth) --- */
 .button_area{display:flex; justify-content: center;}
 .sec_franchise_compare { width: 100%; max-width: 1420px; margin: 0 auto; }
 .sec_franchise_compare > .franchise_compare_wrap { margin-top: 40px; overflow-x: auto; }
 .sec_franchise_compare .franchise_compare_table { width: 100%; min-width: 1000px; border-top: 1px solid #161616; border-collapse: collapse; table-layout: fixed; }
 .sec_franchise_compare .franchise_compare_table col.col_group { width: 8.7%; }
-.sec_franchise_compare .franchise_compare_table col.col_label { width: 22.1%; }
-.sec_franchise_compare .franchise_compare_table col.col_gs { width: 23.1%; }
+.sec_franchise_compare .franchise_compare_table col.col_group2 { width: 66px; }
+.sec_franchise_compare .franchise_compare_table col.col_label { width: auto; }
+.sec_franchise_compare .franchise_compare_table col.col_gs { width: 23%; }
 .sec_franchise_compare .franchise_compare_table th, .sec_franchise_compare .franchise_compare_table td { padding: 16px 24px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; word-break: keep-all; border: 1px solid #e5e5e9; text-align: center; vertical-align: middle; }
-.sec_franchise_compare .franchise_compare_table thead th { font-weight: 600; background-color: #f8f8f8; }
-.sec_franchise_compare .franchise_compare_table thead td.is_gs1 > strong { color: #fb6432; }
-.sec_franchise_compare .franchise_compare_table thead td.is_gs2 > strong { color: #107af2; }
-.sec_franchise_compare .franchise_compare_table thead td.is_gs3 > strong { color: #15b874; }
+.sec_franchise_compare .franchise_compare_table thead th { font-weight: 600; background-color: #F8F8F8; }
+.sec_franchise_compare .franchise_compare_table thead td.is_gs1 > strong { color: #01C1EF; }
+.sec_franchise_compare .franchise_compare_table thead td.is_gs2 > strong { color: #107AF2; }
+.sec_franchise_compare .franchise_compare_table thead td.is_gs3 > strong { color: #15B874; }
 .sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 1.8rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.01em; display: block; }
 .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-weight: 400; background-color: #f8f8f8; }
 .sec_franchise_compare .franchise_compare_table tbody th[scope="row"] { font-weight: 400; background-color: #f8f8f8; }
+.sec_franchise_compare .franchise_compare_table tbody th > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
 .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 2rem; }
 .sec_franchise_compare .franchise_compare_table td > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
 .list_note { margin-top: 32px; }
@@ -3758,7 +3785,41 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .icon_card_list.col_02 > li, .icon_card_list.col_03 > li { min-width: 0; }
 .icon_card_list.col_02 > li > article, .icon_card_list.col_03 > li > article { height: 100%; }
 .icon_card_list > li > article { padding: 32px; background-color: #fff; border: 1px solid #e5e5e9; border-radius: 20px; display: flex; align-items: flex-start; gap: 20px; }
-.icon_card_list > li > article > .icon { width: 80px; height: 80px; flex-shrink: 0; background-color: #f2f2f4; border-radius: 50%; display: block; }
+.icon_card_list > li > article > .icon { position: relative; width: 80px; height: 80px; flex-shrink: 0; background-color: #f2f2f4; border-radius: 50%; display: block; }
+.icon_card_list > li > article > .icon:before { content: ''; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; transform: translateX(-50%) translateY(-50%); }
+.panel_third_depth:nth-child(2) .icon_card_list > li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020301_01.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(2) .icon_card_list > li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020301_02.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(2) .icon_card_list > li:nth-of-type(3) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020301_03.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(2) .icon_card_list > li:nth-of-type(4) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020301_04.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(1) .icon_card_list > li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_01.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(1) .icon_card_list > li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_02.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(1) .icon_card_list > li:nth-of-type(3) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_03.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(2) .icon_card_list > li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_04.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(2) .icon_card_list > li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_05.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(2) .icon_card_list > li:nth-of-type(3) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_06.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(3) .icon_card_list > li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_07.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(3) .icon_card_list > li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_08.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(3) .icon_card_list > li:nth-of-type(3) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_09.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(4) .icon_card_list > li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_10.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(4) .icon_card_list > li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_11.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(4) .icon_card_list > li:nth-of-type(3) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_12.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(5) .icon_card_list > li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_13.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(5) .icon_card_list > li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_14.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(5) .icon_card_list > li:nth-of-type(3) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_15.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(5) .icon_card_list > li:nth-of-type(4) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_16.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(6) .icon_card_list > li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_17.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(6) .icon_card_list > li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_18.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(6) .icon_card_list > li:nth-of-type(3) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_19.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(6) .icon_card_list > li:nth-of-type(4) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_20.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(6) .icon_card_list > li:nth-of-type(5) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_21.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(3) .icon_card_topic:nth-of-type(6) .icon_card_list > li:nth-of-type(6) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020302_22.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(4) .icon_card_row:nth-of-type(1) li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020303_01.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(4) .icon_card_row:nth-of-type(1) li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020303_02.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(4) .icon_card_row:nth-of-type(2) li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020303_03.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(4) .icon_card_row:nth-of-type(2) li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020303_04.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(4) .icon_card_row:nth-of-type(3) li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020303_05.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(4) .icon_card_row:nth-of-type(3) li:nth-of-type(2) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020303_06.png') no-repeat center / contain; }
+.panel_third_depth:nth-child(4) .icon_card_row:nth-of-type(4) li:nth-of-type(1) > article > .icon:before { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr020303_07.png') no-repeat center / contain; }
 .icon_card_list > li > article > div { min-width: 0; flex: 1 1 auto; }
 .icon_card_list > li > article > div > dl { margin: 0; }
 .icon_card_list > li > article > div > dl > dt { margin: 0; }
@@ -3791,18 +3852,18 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_region_counsel .region_counsel_panel > p.hint { margin: 8px 0 0; color: #107af2; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
 .sec_region_counsel .region_counsel_staff_body { min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; overflow: hidden; }
 .sec_region_counsel .region_counsel_staff_body > header { flex-shrink: 0; margin: 0 0 32px; display: flex; align-items: center; gap: 8px; }
-.sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; flex-shrink: 0; background-color: #161616; display: block; }
+.sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 40px; height: 40px; flex-shrink: 0; background: url(@/assets/images/sub/icon_cont_40.png) no-repeat -978px -186px; display: block; }
 .sec_region_counsel .region_counsel_staff_body > header > h3 { margin: 0; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_region_counsel .region_counsel_staff_body > header > .badge { padding: 2px 10px; color: #107af2; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; background-color: #e7f2fe; border-radius: 99px; display: inline-block; }
-.sec_region_counsel .region_counsel_staff_body > header > .btn_close { width: 20px; height: 20px; margin-left: auto; text-indent: -9999px; background-color: #161616; border-radius: 0; }
+.sec_region_counsel .region_counsel_staff_body > header > .btn_close { width: 20px; height: 20px; margin-left: auto; text-indent: -9999px; background: url(@/assets/images/common/icon_set_20.png) no-repeat -627px -24px; border-radius: 0; }
 .sec_region_counsel .region_counsel_staff_body > ul { min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
 .sec_region_counsel .region_counsel_staff_body > ul > li > article { padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; gap: 24px; }
 .sec_region_counsel .region_counsel_staff_body > ul > li > article > div { min-width: 0; flex: 1 1 auto; }
-.sec_region_counsel .region_counsel_staff_body .photo { width: 90px; height: 90px; flex-shrink: 0; background-color: #d7d7df; border-radius: 50%; display: block; }
+.sec_region_counsel .region_counsel_staff_body .photo { width: 90px; height: 90px; flex-shrink: 0; background-color: #d7d7df; border-radius: 50%; display: block; overflow: hidden; }
 .sec_region_counsel .region_counsel_staff_body .name { margin: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_region_counsel .region_counsel_staff_body .area { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 .sec_region_counsel .region_counsel_staff_body .phone { margin: 8px 0 0; display: flex; align-items: center; gap: 8px; }
-.sec_region_counsel .region_counsel_staff_body .ico_phone { width: 16px; height: 16px; flex-shrink: 0; background-color: #a8c8ee; display: block; }
+.sec_region_counsel .region_counsel_staff_body .ico_phone { width: 16px; height: 16px; flex-shrink: 0; background: url(@/assets/images/sub/icon_tel.png) no-repeat 0 0; display: block; filter: brightness(0) saturate(100%) invert(31%) sepia(99%) saturate(2480%) hue-rotate(202deg) brightness(98%) contrast(94%); }
 .sec_region_counsel .region_counsel_staff_body .phone a { color: #107af2; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
 /* --- 점포 검색·목록·카드 --- */
 .sec_store :deep(.detail_card) { --color-brand-primary: #107AF2; }
@@ -3873,7 +3934,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .store_accordion_list :deep(.board_type_toggle) { border-top: 1px solid #d7d7df; }
 .store_accordion_list :deep(dt > a.acc_tit_btn) { min-height: auto; padding: 16px 20px; font-size: inherit; font-weight: inherit; border-bottom: 1px solid #d7d7df; }
 .store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open) { border: 1px solid #161616; border-bottom: none; }
-.store_accordion_list :deep(dt > a.acc_tit_btn::after) { width: 24px; height: 24px; background-color: #161616; transform: rotate(0deg); transform-origin: center; transition: transform 0.2s ease; }
+.store_accordion_list :deep(dt > a.acc_tit_btn::after) { width: 24px; height: 24px; transform: rotate(0deg); transform-origin: center; transition: transform 0.2s ease; }
 .store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open::after) { transform: rotate(180deg); }
 .store_accordion_list :deep(dd.acc_panel.acc_show) { border: 1px solid #161616; border-top: none; }
 .store_accordion_list :deep(.acc_panel_cont) { padding: 0; }
@@ -3888,6 +3949,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 /* ========== D1=3 · 상담 및 신청 (activeD1 === 3) ========== */
 /* --- D2=0 · 창업 상담 신청 (activeD2 === 0) --- */
 .sec_consult_startup, .sec_consult_entry{max-width:1000px; margin: 0 auto;}
+.sec_consult_entry .section_header > p.stit { margin-top: 64px; font-size: 3.2rem; line-height: 1.5; letter-spacing: -0.01em; }
 .seminar_wrap{max-width:1000px; margin:80px auto 0; scroll-margin-top: 24px; box-sizing:border-box;}
 .consent_box { width: 100%; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
 .consent_box + .consent_box { margin-top: 40px; }
@@ -3983,7 +4045,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .seminar_month_head > .seminar_nav_btn { width: 44px; height: 44px; margin: 0; padding: 0; border: 1px solid #d7d7df; border-radius: 999px; background: #ffffff; cursor: pointer; flex-shrink: 0;  display: inline-flex; align-items: center; justify-content: center; opacity: 1; }
 .seminar_month_head > .seminar_nav_btn:not(:disabled):hover { border-color: #161616; }
 .seminar_month_head > .seminar_nav_btn:disabled { opacity: 0.35; }
-.seminar_nav_chevron {width:20px; height:20px; background: url('@/assets/images/common/icon_set_20.png') no-repeat;}
+.seminar_nav_chevron {width:20px; height:20px; background: url(@/assets/images/common/icon_set_20.png) no-repeat;}
 .seminar_nav_prev .seminar_nav_chevron { background-position: -281px -24px;}
 .seminar_nav_next .seminar_nav_chevron { background-position: -324px -24px; }
 .seminar_month_head > .seminar_month_swiper { max-width: calc(100% - 168px); margin: 0; flex: 0 0 auto; min-width: 0; overflow: hidden;  }
@@ -3997,7 +4059,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .seminar_ic_pin { width: 16px; height: 16px;background-color:#000; background: url(@/assets/images/sub/icon_map_16.png) no-repeat center / contain; }
 .seminar_slot_list { display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .seminar_slot_row { height: 52px; padding:12px 16px; border-radius: 12px; background-color: #f8f8f8;  display: flex; align-items: center; gap: 4px; }
-.seminar_ic_time { width: 16px; height: 16px; background: url('@/assets/images/sub/icon_clock_16.png') no-repeat center / contain; }
+.seminar_ic_time { width: 16px; height: 16px; background: url(@/assets/images/sub/icon_clock_16.png) no-repeat center / contain; }
 .seminar_slot_row > .seminar_slot_time { margin:0; color: inherit; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; flex: 0 1 auto; min-width: 0; }
 .seminar_slot_row > button.seminar_slot_badge { width: auto; height: auto; margin: 0 0 0 auto; padding: 4px 12px; color: inherit; font-family: inherit; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; border: none; border-radius: 999px; background: transparent; appearance: none; flex-shrink: 0; cursor: pointer;  display: inline-flex; align-items: center; justify-content: center; }
 .seminar_slot_row > button.seminar_slot_badge:disabled { cursor: default; }
@@ -4034,7 +4096,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .seminar_region_pick > .seminar_region_list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 /* ========== Tablet 1024px 이하 ========== */
-@media (max-width: 1024px) {
+@media (max-width: 1024px) { 
     .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
     .sec_band > .inner > .link_grid { flex-direction: column; }
@@ -4146,7 +4208,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_overlap > .overlap_grid > li { width: auto; flex: 0 1 calc((100% + 25px) / 2); }
     .sec_overlap > .overlap_grid > li + li { margin-left: 0; }
     .sec_overlap > .overlap_grid > li:nth-child(even) { margin-left: -25px; }
-    .sec_overlap > .overlap_grid > li:nth-child(n+3) { margin-top: -20px; }
+    .sec_overlap > .overlap_grid > li:nth-child(n+3) { margin-top: -46px; margin-left: 50%; transform: translateX(-50%); }
     .sec_overlap > .overlap_grid > li > article > strong { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .sec_split > .inner > .split_layout { flex-direction: column; align-items: center; gap: 20px; }
     .sec_split > .inner > .split_layout > .info_card { width: 100%; max-width: none; min-height: 0; padding: 24px 16px; border-radius: 20px; }
@@ -4262,19 +4324,19 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_startup_process .process_timeline > li > .step_meta > .step_track { width: 100%; flex: 0 0 auto; margin-bottom: 0; padding-bottom: 0; order: 1; }
     .sec_startup_process .process_timeline > li > .step_meta > .step_track > .num { width: 32px; height: 32px; font-size: 2rem; line-height: 1.35; }
     .sec_startup_process .process_timeline > li > .step_meta > .step_track > .step_line { width: 1px; height: auto; flex: none; background-color: #c4c4d0; position: absolute; top: 32px; bottom: -20px; left: 50%; transform: translateX(-50%); }
-    .sec_startup_process .process_timeline > li > article { width: auto; max-width: none; min-width: 0; flex: 1 1 auto; padding: 24px 16px; border-radius: 16px; gap: 0; }
-    .sec_startup_process .process_timeline > li > article > .icon { display:none }
-    /*.sec_startup_process .process_timeline > li > article > .icon { background: none; border-radius: 0; width: 20px; height: 20px; }
-    .sec_startup_process .process_timeline > li > article > .icon:before { width: 20px; height: 20px; }*/
+    .sec_startup_process .process_timeline > li > article {  width: auto; max-width: none; min-width: 0; flex: 1 1 auto; padding: 24px 16px; border-radius: 16px; gap: 0; }
+    .sec_startup_process .process_timeline > li > article > .icon { position: absolute; top: 48px; background: none !important; border-radius: 0; width: 20px; height: 20px; }
+    .sec_startup_process .process_timeline > li > article > .icon:before { width: 20px; height: 20px; }
     .sec_startup_process .process_timeline > li > article > div > .lead { margin-bottom: 4px; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
-    .sec_startup_process .process_timeline > li > article > div > h3 { margin-bottom: 4px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_startup_process .process_timeline > li > article > div > h3 { margin-bottom: 4px; padding-left: 30px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .sec_startup_process .process_timeline > li > article > div > .desc { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_startup_process .process_timeline > li > article > div > .link_more { margin-top: 12px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li { padding-left: 9px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li::before { width: 3px; height: 3px; top: 8px; }
     .sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_startup_process .process_timeline > li[data-theme="dday"] > article { border-radius: 20px; gap: 12px; }
-    .sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { width: 40px; height: 40px; display: block; }
+    .sec_startup_process .process_timeline > li[data-theme="dday"] > article > .icon { width: 40px; height: 40px; display: block; position: relative; top: 0; background: #fff !important; border-radius: 50%; }
+    .sec_startup_process .process_timeline > li[data-theme="dday"] > article > div > h3 { padding-left: 0; }
     .sec_franchise_type > .franchise_type_list { flex-direction: column; gap: 20px; }
     .sec_franchise_type > .franchise_type_list > li { max-width: none; }
     .sec_franchise_type > .franchise_type_list > li.is_profit { order: 1; }
@@ -4309,6 +4371,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .icon_card_list.col_02, .icon_card_list.col_03 { grid-template-columns: 1fr; }
     .icon_card_list > li > article { padding: 16px; border-radius: 12px; gap: 12px; }
     .icon_card_list > li > article > .icon { width: 60px; height: 60px; }
+    .icon_card_list > li > article > .icon:before { width: 32px; height: 32px; }
     .icon_card_list > li > article > div > dl > dt { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .icon_card_list > li > article > div > dl > dt + dd { margin-top: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .icon_card_list > li > article > div > ul.list_note > li > p {  font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
@@ -4331,10 +4394,9 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_region_counsel .region_counsel_panel > p.desc { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_region_counsel .region_counsel_staff_body { min-height: 0; flex: 1 1 auto; }
     .sec_region_counsel .region_counsel_staff_body > header { flex-shrink: 0; margin: 0 0 24px; padding: 0 20px; gap: 8px; }
-    .sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; }
+    .sec_region_counsel .region_counsel_staff_body > header > .ico_pin { width: 32px; height: 32px; background-image: url(@/assets/images/sub/icon_cont_32.png); }
     .sec_region_counsel .region_counsel_staff_body > header > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_region_counsel .region_counsel_staff_body > header > .badge { padding: 2px 10px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_region_counsel .region_counsel_staff_body > header > .btn_close { width: 20px; height: 20px; }
     .sec_region_counsel .region_counsel_staff_body > ul {  min-height: 0; flex: 1 1 auto; padding: 0; gap: 10px; overflow-y: auto; }
     .sec_region_counsel .region_counsel_staff_body > ul > li > article { padding: 16px; border-radius: 12px; align-items: center; gap: 12px; }
     .sec_region_counsel .region_counsel_staff_body .photo { width: 60px; height: 60px; }
