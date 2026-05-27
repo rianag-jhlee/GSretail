@@ -18,8 +18,8 @@
                 <article class="cont_inner">
                     <h3>{{ t.SubTitle }}</h3>
                     <div class="intro_text">
-                        <p>{{ t.SubContent_1 }}</p>
-                        <p>{{ t.SubContent_2 }}</p>
+                        <p v-html="t.SubContent_1"></p>
+                        <!-- 26.05.27 Del 이종환 <p>{{ t.SubContent_2 }}</p> -->
                     </div>
                     <ul>
                         <li class="bi_section">
@@ -111,8 +111,8 @@ export default {
                         subContent_3: "우리동네GS",
                     },
                     SubTitle: "브랜드 소개",
-                    SubContent_1: "전국 GS25·GS 더프레시의 재고 확인, 통합 검색, 배달·픽업까지 일상을 연결하고,",
-                    SubContent_2: "증정품 보관 '나만의 냉장고'·주류 스마트오더 '와인25플러스'로, 편의점의 경계를 넘는 생활을 제안합니다.",
+                    SubContent_1: "편의점도, 수퍼마켓도, 이제 하나의 ‘우리동네GS’ 앱으로.<br/> 전국 GS25 · GS THE FRESH의 재고확인, 배달, 픽업부터<br/> 증정품 보관 '나만의 냉장고’, 주류 스마트오더 '와인25플러스’까지.<br/><br class='m_br'/> 가까운 매장이 더 가깝게, 매장 안팎의 경계 없이, 더 가까운 일상을 제안합니다.",
+                    // SubContent_2: "증정품 보관 '나만의 냉장고'·주류 스마트오더 '와인25플러스'로, 편의점의 경계를 넘는 생활을 제안합니다.",
                     Bi: {
                         title: "우리동네GS App",
                         sub_desc: `<span>가까운 매장 재고 확인부터 배달·픽업은 물론</span><span>증정품 보관과 택배 예약까지 한 번에!</span><span>우리동네GS 앱 하나로 필요한 모든 것을 해결하세요.</span>`,
@@ -131,7 +131,7 @@ export default {
                             { title: "재고찾기/검색", desc: "전국 매장별 실시간 상품 재고 현황 및 잔여 수량을 간편하게 확인할 수 있습니다.", popId: "gsrbr0403", popType: "lg", popCont: "gsrbr0403"},
                             { title: "나만의 냉장고", desc: "GS25에서 받은 증정품이나 경품, GS THE FRESH의 사전예약 상품을 보관하고 원하는 때에 찾아갈 수 있습니다." },
                             { title: "배달/픽업", desc: "GS25,GS THE FRESH의 인기상품을 배달/픽업으로 간편하게 만나보세요!", popId: "gsrbr0401", popType: "lg", popCont: "gsrbr0401"},
-                            { title: "사전 예약", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다." },
+                            { title: "사전예약", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다." },
                             { title: "와인25플러스", desc: "5천여 종의 와인과 다양한 주류를 주문하고 전국 편의점/수퍼 매장에서 손 쉽게 수령할 수 있습니다.", popId: "gsrbr0402", popType: "lg", popCont: "gsrbr0402" },
                             { title: "간편결제, 간편 로그인", desc: "다양한 수단으로 간편결제 및 간편 로그인 서비스를 지원합니다." },
                             { title: "멤버십 혜택", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다." },
@@ -169,6 +169,9 @@ export default {
 </script>
 
 <style scoped>
+:deep(.p_br) { display: block; }
+:deep(.m_br) { display: none; }
+
 .gsrbr04 { position: relative; width: 100%; }
 .benefit_section { padding-top: 200px; }
 img { display: block; width: 100%; }
@@ -248,6 +251,9 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 }
 
 @media screen and (max-width: 767px) {
+    :deep(.p_br) { display: none; }
+    :deep(.m_br) { display: block; }
+
     h3 {font-size:24px;}
     .intro_text { margin-bottom: 40px; }
     .intro_text p { font-size: 16px; font-weight: 400; line-height: 1.5; }

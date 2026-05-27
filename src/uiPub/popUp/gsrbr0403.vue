@@ -27,8 +27,8 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "재고찾기",
-                    sub_Title1: "헛걸음 방지! 재고 찾기 서비스",
-                    sub_desc1:"원하는 상품의 재고가 얼마나 있는지 실시간으로 간편하게 확인할 수 있습니다.",
+                    sub_Title1: "품절 걱정 끝! 전국 매장 실시간 재고 확인",
+                    sub_desc1:"전국 GS25 · GS THE FRESH 매장별,\n 원하는 상품의 실시간 재고 현황 및 잔여 수량을 간편하게 확인할 수 있습니다.",
                     sub1 : {
                         img: require("@/assets/images/dummy/gsrbr0403.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr0403_mo.png"),
@@ -59,7 +59,7 @@ export default {
 .modal_header { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding-bottom: 40px; font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 40px; color: #161616; border-bottom: 0; }
 .modal_content { flex: 1; overflow-y: auto; padding-right: 10px; }
 h4 {color:#161616; font-size:32px; font-weight:700;}
-span {margin:16px 0 40px; color:#161616; font-size:18px; display:block;}
+span {margin:16px 0 40px; color:#161616; font-size:18px; white-space:pre-line; display:block;}
 span img {max-width:100%; object-fit:cover;}
 
 

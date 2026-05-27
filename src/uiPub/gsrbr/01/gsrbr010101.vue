@@ -502,11 +502,16 @@
                 <FeatureCards v-if="sec.features" :items="sec.features" type="icon" no-pagination class="sinsen_feature" />
 
                 <!-- 배송 흐름도 -->
-                <div v-if="sec.flow" class="info_card info_card_flow">
-                    <strong v-if="sec.flowTitle">{{ sec.flowTitle }}</strong>
-                    <p v-if="sec.flowNote">{{ sec.flowNote }}</p>
-                    <img :src="isMobileView ? imgFlowMo : imgFlow" alt="" class="sinsen_flow_img" />
+                <!-- 26.05.27 Edit 이종환 : 타사 신선 배송 방식 추가 -->
+                <div v-if="sec.flow" class="info_card_flow">
+                    <div class="info_card" v-for="item in sec.flow_cont" :key="item">
+                        <strong v-if="item.flowTitle">{{ item.flowTitle }}</strong>
+                        <p v-if="item.flowNote">{{ item.flowNote }}</p>
+                        <img :src="isMobileView ? item.mo_img : item.img" alt="" class="sinsen_flow_img" />
+                        <p v-if="item.flowNote2">{{ item.flowNote2 }}</p>
+                    </div>
                 </div>
+                <!-- //26.05.27 Edit 이종환 : 타사 신선 배송 방식 추가 -->
 
                 <!-- 운영 장점 체크리스트 카드 -->
                 <div v-if="sec.advantages" class="info_card">
@@ -523,8 +528,12 @@
         </div>
 
         <!-- depth1 = 2: 매장/서비스 -->
+        <!-- 우리동네GS -->
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 0" class="brand_panel pop_panel"></div>
+        <!-- //우리동네GS -->
+
         <!-- 생활 서비스 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 0" class="brand_panel pop_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel pop_panel">
             <!-- 3depth 탭 네비 -->
             <nav class="service_tab_wrap" ref="serviceWrapEl" role="tablist" aria-label="생활 서비스">
                 <div class="service_tab_list" ref="serviceListEl" :style="serviceTransformStyle"
@@ -1139,7 +1148,7 @@
         </div>
 
         <!-- 택배&픽업 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel delivery_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel delivery_panel">
             <nav class="service_tab_wrap" ref="deliveryWrapEl" role="tablist" aria-label="택배&픽업 서비스">
                 <div class="service_tab_list" ref="deliveryListEl" :style="deliveryTransformStyle"
                     @touchstart.passive="deliveryOnTouchStart" @touchmove.passive="deliveryOnTouchMove"
@@ -1332,7 +1341,7 @@
         </div>
 
         <!-- 공공요금수납 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
             <figure v-if="store.tabs[2].hero" class="brand_panel_bg">
                 <img :src="store.tabs[2].hero" :alt="store.tabs[2].heroAlt || ''" width="1420" height="340" />
             </figure>
@@ -1367,8 +1376,9 @@
                 </dl>
             </section>
         </div>
+
         <!-- 상품권 판매 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 4" class="brand_panel">
             <figure v-if="store.tabs[3].hero" class="brand_panel_bg">
                 <img :src="store.tabs[3].hero" :alt="store.tabs[3].heroAlt || ''" width="1420" height="340" />
             </figure>
@@ -1687,6 +1697,7 @@ const langData = {
                 { item: "고피자" },
             ],
             depth2Store: [
+                { item: "우리동네GS" }, //26.05.27 Add 이종환
                 { item: "생활 서비스" },
                 { item: "택배&픽업" },
                 { item: "공공요금수납" },
@@ -1910,20 +1921,23 @@ const langData = {
             subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br /><br class=\"m_br\" />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
             sections: [
                 {
-                    title: "신선강화점 특징",
+                    title: "GS25 신선상품 특징",
+                    desc: "GS더프레시와 통합 구매를 통해 상품 경쟁력을 확보 하여 타 편의점 대비 다양한 신선상품을 운영합니다.",
                     features: [
                         { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정 콜드체인 시스템 적용으로 신선도 유지" },
                         { title: "합리적인 가격", desc: "GS 더프레시와의 통합 구매를 통해 합리적인 가격에 판매" },
-                        { title: "소용량 소포장", desc: "1인가구 및 2~3인 가구에 적합한 <br />소용량·소포장 상품 구성" },
-                        { title: "전용 상품 브랜드", desc: "신선식품 전문 브랜드 <br />신선특별시 운영" },
+                        { title: "소용량 소포장", desc: "1인가구 및 2~3인 가구에 적합한<br/> 소용량·소포장 상품 구성" },
+                        { title: "전용 상품 브랜드", desc: "신선식품 전문 브랜드<br/> 신선특별시 운영" },
                     ],
                 },
                 {
                     title: "왜 GS25 신선강화점인가?",
-                    desc: "GSTHEFRESH 통합 구매를 통한 상품 경쟁력을 확보하여 타 편의점 대비 다양한 신선·장보기 상품을 운영합니다. <br /><br class=\"m_br\" />업계 유일의 신선상품 전용 물류센터를 운영중이며, 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
+                    desc: "업계 유일의 신선식품 전용 물류센터를 운영중이며,<br/> 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
                     flow: true,
-                    flowTitle: "GS25 신선 배송 방식",
-                    flowNote: "*신선센터를 거치지 않는 운영 구조에서는 상품 검품, 물류비, 신선도 관리 방식에 차이가 발생할 수 있습니다.",
+                    flow_cont:[
+                        {flowTitle: "GS25 신선 배송 방식", flowNote: "*신선센터를 거치지 않는 운영 구조에서는 상품 검품, 물류비, 신선도 관리 방식에 차이가 발생할 수 있습니다.", flowNote2:"파트너사 → 단일 센터 입고로 물류비 절감 → 원가 경쟁력↑. 신선 단일센터 검품 관리로 점포 입고 전 1차 선도관리 진행", img:require("@/assets/images/sub/gsrbr010101/sinsen_flow.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow_mo.png"), alt:""},
+                        {flowTitle: "타사 신선 배송 방식", flowNote: "신선 전용 물류센터를 거치지 않는 운영 구조", img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2_mo.png"), alt:""}
+                    ],
                 },
                 {
                     title: "신선강화점 운영의 장점",
@@ -1932,10 +1946,10 @@ const langData = {
                             { text: "전용상품을 통한 다양한 상품 구색(약 400SKU)" },
                             { text: "신선강화점 전용 행사 운영 (신선 & 가공)" },
                             { text: "신선식품에 신선함을 더해주는 전용 장비 운영" },
-                            { text: "전자가격표시기를 활용한 신선 가격 대응 자동화" },
+                            { text: "전자가격표시기(ESL)를 활용한 신선 가격대응 자동화" },
                             { text: "마감할인 라벨프린터 운영으로 폐기 최소화" },
                             { text: "내/외부 전용 홍보물을 통한 홍보 강화" },
-                            { text: "기존 일반점 → 신선강화점 변경 시 효과성 검증", note: "\u201C도입 후 일평균 매출 기존대비 약 12.6% 증가, 일평균 고객 수 21명 증가\u201D" },
+                            { text: "기존 GS25 → 신선강화 컨셉 도입 시 효과성 검증!", note: "\u201C도입 후 일평균 매출 기존대비 약 12.6% 증가, 일평균 고객 수 21명 증가\u201D" },
                         ],
                     },
                 },
@@ -2639,7 +2653,7 @@ const langData = {
                             ],
                         },
                         {
-                            label: "픽업",
+                            label: "배달 픽업", //26.05.27 Edit 이종환
                             hero: imgHero10,
                             heroAlt: "",
                             title: "픽업 서비스",
@@ -2772,13 +2786,13 @@ const langData = {
                                 {
                                     num: "01",
                                     title: "인센티브 제도",
-                                    desc: "매출 향상, 신상품 도입 등 점포 경쟁력 향상을 위해<br class=\"p_br\" />노력하시는 경영주님을 위한 인센티브 제도",
+                                    desc: "매출 향상, 신상품 도입 등 점포 경쟁력 향상을 위해<br class=\"p_br\" /> 노력하시는 경영주님을 위한 인센티브 제도",
                                 },
                                 {
                                     num: "02",
                                     title: "카운터FF 운영 우수점 지원",
                                     desc: "카운터FF 매출 활성화 도모",
-                                    bullets: ["치킨25 운영 지원제도", "카페25 운영 지원제도", "식품안심업소 취득 점포 점수 필터 지원"],
+                                    bullets: ["치킨25 운영 지원 제도", "카페25 운영 지원 제도", "식품안심업소 취득 점포 점수 필터 지원"],
                                 },
                                 {
                                     num: "03",
@@ -2814,8 +2828,8 @@ const langData = {
                             ],
                         },
                         {
-                            label: "점포\n소원 지원",
-                            title: "점포 소원 지원",
+                            label: "점포\n소통 지원", //26.05.27 Edit 이종환
+                            title: "점포 소통 지원",
                             notes: [
                                 { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
                             ],
@@ -2834,10 +2848,11 @@ const langData = {
                             items: [
                                 { num: "01", title: "GS25 챗봇조이", desc: "GS25 근무 지원을 위한 카카오톡 챗봇 서비스" , bullets: ["365일 24시간 응답", "재고 / 물류 조회", "점포 운영 매뉴얼", "모바일 해피콜 등록"], link: "https://pf.kakao.com/_xmTxexcb?from=qr" },
                                 { num: "02", title: "모바일 점포경영", desc: "경영주와 스토어매니저 간 점포 운영 업무에 대한 소통 지원 APP", bullets: ["경영주/스토어매니저 전용 앱", "서비스 체크타임", "소비기한 관리","오늘의 업무 관리", "공지 전달"] },
-                                { num: "03", title: "온라인 열린아카데미", desc: "경영주 역량 강화", bullets: ["매월 2회 라이브 교육", "다양한 컨텐츠","사내/외 전문강사"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F"},
-                                { num: "04", title: "우수점 연구소", desc: "GS25 온라인 소식지", bullets: ["이달의 우수 경영주","성공 사례 안내","운영 Tip 소개"] },
+                                { num: "03", title: "경영주 열린아카데미", desc: "경영주 역량 강화", bullets: ["월 2회 실시간 라이브 교육 운영", "다시보기 영상 제공","점포 운영에 필요한 실무 중심 콘텐츠 교육\n (노무, 세무, 가맹정산, 판촉노하우 등)"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F"},
+                                { num: "04", title: "GS클래스", desc: "언제든 학습 가능한 경영주 전용 교육 사이트", bullets: ["점포 운영에 필요한 양질의 교육 콘텐츠\n (매뉴얼, 운영 노하우, 강의 다시보기 등)","온라인 라이브 교육","우수점 연구소(우수경영주, 성공사례, 팁)"] },
                                 { num: "05", title: "신규 경영주 입문교육", desc: null, bullets: ["운영 교육(POS, 점포경영, 시스템","서비스 교육","온라인 교육과정(GS클래스)"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F" },
                                 { num: "06", title: "스토어매니저 클래스", desc: "근무자 교육 지원", bullets: ["POS 교육","청결 교육","접객서비스 교육"] , link: "http://hpimg.gsretail.com/images/gs25/winwin/web/store_manager_map.html" },
+                                { num: "07", title: "벤치마킹 교육", desc: "경영주 역량 강화", bullets: ["우수 가맹점 현장 방문 교육","우수 가맹점별 특화된 교육 콘텐츠","우수 경영주 노하우 공유"] },
                             ],
                         },
                         {
@@ -2847,10 +2862,10 @@ const langData = {
                                 { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
                             ],
                             items: [
-                                { num: "01", title: "상생나눔 플랫폼 운영", desc: "사회적 약자를 위한 사회공헌형 점포 운영", bullets: ["내일스토어", "시니어스토어", "늘봄스토어"] },
-                                { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
-                                { num: "03", title: "GS 히어로상", desc: "사회적으로 귀감이 되는 경영주,근무자에게 지원", bullets: ["모범상","귀감상","나눔상"] },
-                                { num: "04", title: "화재예방 소화기 공유", desc: "점포 인근 화재발생 시 소화기 공유를 통한 화재예방", bullets: ["점포인근 화재발생 시 점포 소화기 공유", "사용 후 교환 지원"] },
+                                { num: "01", title: "상생나눔 플랫폼 운영", desc: "사회적 약자를 위한 사회공헌형 점포 운영", bullets: ["사회취약계층 자활을 위한 내일스토어", "노인 계층 일자리를 위한 시니어스토어", "장애인의 취업과 자활을 지원하는 늘봄스토어"] },
+                                // 26.05.27 Del 이종환 { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
+                                { num: "02", title: "GS 히어로상", desc: "사회적으로 귀감이 되는 경영주,근무자에게 지원", bullets: ["모범상","귀감상","나눔상"] },
+                                { num: "03", title: "화재예방 소화기 공유", desc: "점포 인근 화재발생 시 소화기 공유를 통한 화재예방", bullets: ["점포인근 화재발생 시 점포 소화기 공유", "사용 후 교환 지원"] },
                             ],
                         },
                         {
@@ -2860,7 +2875,7 @@ const langData = {
                                 { text: "※ 해당 혜택 및 제도는 상황에 따라 변경/폐지/추가 될 수 있습니다." },
                             ],
                             items: [
-                                { num: "01", title: "경조사 지원", desc: "경조금 및 용품 지원", bullets:["경조금 지급", "점포 운영 지원금 지급","장례 용품 지급", "출산 용품 지급"] },
+                                { num: "01", title: "경조사 지원", desc: "경조금 및 용품 지원", bullets:["경조금 지급", "점포 운영 지원금 지급","장례 용품 지급", "출산 용품 지급","자연재해 위로금 지급"] },
                                 { num: "02", title: "명절 및 경조사 자율휴무", desc: "자율 휴무 진행", bullets: ["명절 휴점 및 단축 영업","경조사 휴점 및 단축 영업"] },
                                 { num: "03", title: "경영주 복지몰 운영", desc: "경영주 전용 복지몰", bullets: ["합리적 가격", "단독상품", "기획 특가전"] },
                                 { num: "04", title: "종합 건강검진 할인", desc: "제휴 건강검진 센터 종합 건강검진 할인가 이용", bullets: ["KMI 센터","협력 병원"] },
@@ -2874,25 +2889,25 @@ const langData = {
                     hero: imgHero11_1,
                     heroAlt: "",
                     title: "참여제도",
-                    desc: "GS25에서는 다양한 의견 수렴, 홍보, 콜센터 지원으로 경영주님에게 도움을 드리고 있습니다.",
+                    desc: "GS25에서는 다양한 의견 수렴, 제안 검토 및 반영하는 등 경영주님께서 참여할 수 있는 제도가 마련되어 있습니다.",
                     items: [
                         {
                             num: "01",
                             title: "경영주 협의회",
-                            desc: "지역별 정기 간담회(격월, 분기별)를 통하여 각종 제도제안 및 이슈사항 협의",
+                            desc: "지역별 경영주협의회 정기 간담회 진행",
                         },
                         {
                             num: "02",
                             title: "자율분쟁조정위원회",
                             desc: "가맹본부와 경영주 간의 분쟁이 발생 시, 위원장(외부 전문가), 경영주/본부 대표가 자율적 해결/조정안 마련",
                         },
+                        // 26.05.27 Del 이종환 {
+                        //     num: "03",
+                        //     title: "24시간 통합 콜센터 운영",
+                        //     desc: "점포 운영의 불편사항에 대한 접수<br />및 상담 창구 운영(24시간 운영)",
+                        // },
                         {
                             num: "03",
-                            title: "24시간 통합 콜센터 운영",
-                            desc: "점포 운영의 불편사항에 대한 접수<br />및 상담 창구 운영(24시간 운영)",
-                        },
-                        {
-                            num: "04",
                             title: "경영주 열린제안",
                             desc: "경영주님의 다양한 제안과 아이디어 접수를 통해 생생한 현장의 목소리를 청취하여 점포 운영 및 본부 정책에 개선 반영하고 있습니다.",
                         },
@@ -2903,7 +2918,7 @@ const langData = {
         milbox: {
             hero: imgHero12,
             heroAlt: "",
-            title: "기업/단체 정기 서비스",
+            title: "밀박스/스낵바 (기업 정기 서비스) <a href='#none'>홈페이지</a>",
             sections: [
                 {
                     type: "feature",
@@ -3021,7 +3036,7 @@ const depth2Tabs = computed(() => t.value.nav.depth2);
 const storeTabs = computed(() => t.value.nav.depth2Store);
 const winwinTabs = computed(() => t.value.nav.depth2Winwin);
 
-const storeActiveTab = ref(0); //매장/서비스 2Depth 활성화탭
+const storeActiveTab = ref(1); //매장/서비스 2Depth 활성화탭
 const winwinActiveTab = ref(0); //상생협력 2Depth 활성화탭
 const winwinServiceActiveTab = ref(0); //상생협력 3Depth 활성화탭
 const giftSwiperInst = ref(null);
@@ -3378,8 +3393,12 @@ function goBack() {
 <style scoped>
 .brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
 .brand_panel_bg > img { width: 100%; display: block; object-fit: cover; }
-.brand_panel_title { padding: 0 0 100px; }
-.brand_panel_title > h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.brand_panel_title { padding: 0 0 100px;}
+.brand_panel_title > h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; display:flex; align-items:center;}
+
+.brand_panel_title > h2 :deep(a) {margin-left:16px; padding:4px; font-size:1.8rem; font-weight:400; letter-spacing:-0.01em; line-height:160%; display:flex; align-items:center;}
+.brand_panel_title > h2 :deep(a:before) {width:24px; height:24px; margin-right:8px; background:url('@/assets/images/common/icon_set_24.png') -1168px -56px no-repeat; content:''; display:block;}
+
 .brand_panel_title > p { margin: 0; color: #161618; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_header { padding-bottom: 40px; }
 .sec_header > h3 { margin: 0 0 12px; color: #161618; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
@@ -3424,6 +3443,8 @@ function goBack() {
 .btn_sns { width: 56px; height: 56px; background-color: #F8F8F8; border-radius: 100%; display: flex; align-items: center; justify-content: center }
 .btn_sns::before { content: ""; background-color: #161616; border-radius: 4px; display: block }
 */
+
+:deep(.tab_wrap ul.type_01 li .item) {height:100%; padding:8px 20px; white-space:pre-line; display:flex; align-items:center; justify-content:center;}
 
 .brand_acc { margin: 0; padding: 0; background-color: #f8f8f8; border-radius: 12px; list-style: none; overflow: hidden }
 .acc_item { border-bottom: 1px solid #e5e5e9 }
@@ -3534,13 +3555,17 @@ button { background-color: #fff }
 .sinsen_feature :deep(.feature_card_item:nth-child(3) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_03.png');}
 .sinsen_feature :deep(.feature_card_item:nth-child(4) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_04.png');}
 
+.info_card_flow {display:flex; gap:20px;}
+
 
 .info_card { max-width: 940px; padding: 32px; background-color: #f8f8f8; border-radius: 12px }
+.info_card + .info_card {flex:1;}
 .info_card strong { margin-bottom:8px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
 
 .info_card span { font-size: 1.8rem; line-height: 1.4 }
 
-.info_card > p { margin-bottom: 32px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em }
+.info_card > p {margin-top:14px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em }
+.info_card > strong + p {margin-top:0; margin-bottom:32px;}
 .sinsen_flow_img { width: 100%; margin-top: 24px; display: block; border-radius: 10px }
 
 .info_list > li { padding-bottom: 12px; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 8px }
@@ -3651,6 +3676,8 @@ button { background-color: #fff }
 .delivery_panel .service_panel.delivery_panel_2 :deep(.feature_card_item:nth-of-type(3) .feature_card_icon) {background-position:-340px -186px;}
 .delivery_panel .service_panel.delivery_panel_2 :deep(.feature_card_item:nth-of-type(4) .feature_card_icon) {background-position:-100px -103px;}
 
+.winwin_panel :deep(.num_info_icon:before) {display:none;}
+
 .winwin_panel :deep(.num_info_icon:after) {width:40px; height:40px; background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat; content:''; position:absolute; top:20px; left:20px; display:block;}
 .winwin_panel .winwin_panel_1 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-980px -20px;}
 .winwin_panel .winwin_panel_1 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-20px -266px;}
@@ -3670,14 +3697,15 @@ button { background-color: #fff }
 .winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-820px -266px;}
 .winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-900px -266px;}
 .winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-980px -266px;}
-.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-1060px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-664px -345.57px;}
 .winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(5) .num_info_icon:after) {background-position:-900px -186px;}
 .winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(6) .num_info_icon:after) {background-position:-1140px -266px;}
+.winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(7) .num_info_icon:after) {background-position:-1060px -266px;}
 
 .winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-340px -20px;}
-.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-420px -20px;}
-.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-580px -266px;}
-.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-500px -20px;}
+/* .winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-420px -20px;} */
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-580px -266px;}
+.winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-500px -20px;}
 
 .winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-580px -20px;}
 .winwin_panel .winwin_panel_6 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-660px -20px;}
@@ -3715,7 +3743,11 @@ button { background-color: #fff }
   .brand_panel_bg { margin: 0 0 24px; border-radius: 0; }
   .brand_panel_title { padding: 0 0 64px; }
   .brand_panel_bg > img { max-height: 245px; object-fit: none; }
-  .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
+  .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display:block;}
+
+  .brand_panel_title > h2 :deep(a) {margin-top:16px; margin-left:0; font-size:1.4rem; font-weight:500; line-height:140%;}
+  .brand_panel_title > h2 :deep(a:before) {width:20px; height:20px; background-image:url('@/assets/images/common/icon_set_20.png'); background-position:-454px -115px;}
+
   .brand_panel_title > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
   .cafe_panel .brand_panel_bg > img { object-position: -348px center; }
   .chicken_panel .brand_panel_bg > img { object-position: -385px center; }
@@ -3791,6 +3823,10 @@ button { background-color: #fff }
   .info_card > p { margin-bottom:12px }
   
   .sinsen_flow_img { height:auto;min-height:147px }
+
+  :deep(.tab_wrap ul.type_01 li .item) {white-space:nowrap;}
+
+  .info_card_flow {flex-direction:column;}
 }
 
 
@@ -3833,6 +3869,8 @@ button { background-color: #fff }
     .delivery_panel .service_panel.delivery_panel_2 :deep(.swiper-slide:nth-of-type(4) .feature_card_icon) {background-position:-100px -103px;}
 
     .winwin_panel :deep(.num_info_icon:after) {width:32px; height:32px; background-image:url('@/assets/images/sub/icon_cont_32.png'); top:14px; left:14px;}
+
+    .winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(4) .num_info_icon:after) {background-position:-738.5px -347.23px;}
 
     .pop_card_name { margin-bottom: 12px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0 }
     
@@ -4069,7 +4107,7 @@ button { background-color: #fff }
   .gopizza_menu { flex-direction: column }
   .logo_list { grid-template-columns: repeat(3, 1fr) }
   .gift_brand_card > figcaption { font-size: 1.4rem }
-  .brand_panel { padding-top: 48px; padding-bottom: 80px }
+  .brand_panel { padding-top: 48px; }
   /* 26.05.15 Del 이종환 .brand_panel section { padding-bottom: 0 } */
   .service_tab_item { flex: 0 0 clamp(140px, 18.23vw, 175px); gap: 12px }
   .service_tab_item.is_active { background-color: #F8F8F8 }

@@ -318,7 +318,7 @@ const langData = {
                         "고객의 라이프 스타일을 반영한 서비스 시행",
                     ],
                     subdesc: [
-                        "'라이브(LIVE) 배송 서비스', '안심택배 서비스', '편의점 픽업/반품 서비스' 등 고객 Needs에 부합하는 다양한 배송 서비스 실시",
+                        "'도착일/수거일 선택 서비스', '안심택배 서비스', '편의점 픽업/반품 서비스' 등 고객 Needs에 부합하는 다양한 배송 서비스 실시",
                         "GS Pay 등 다양한 결제 수단 도입, 결제 편의성 개선 등",
                     ],
                 },
@@ -368,11 +368,32 @@ const langData = {
             title: "대표 브랜드 프로그램 소개",
             cards: [
                 {
+                    key: "pr-05",
+                    image: imgPr05,
+                    imgAlt: "대표 브랜드 프로그램 5",
+                    title: "쇼미더트렌드",
+                    desc: "트렌드를 스타일링하다<br />매주 토요일 저녁 9시 35분",
+                },
+                {
+                    key: "pr-04",
+                    image: imgPr04,
+                    imgAlt: "대표 브랜드 프로그램 4",
+                    title: "더컬렉션",
+                    desc: "더 럭셔리 프리미엄 편집샵<br />매주 토요일 오전 9시 20분",
+                },
+                {
                     key: "pr-01",
                     image: imgPr01,
                     imgAlt: "대표 브랜드 프로그램 1",
                     title: "소유진쇼",
                     desc: "차원이 다른 쇼핑<br />매주 금요일 저녁 8시 35분",
+                },
+                {
+                    key: "pr-06",
+                    image: imgPr06,
+                    imgAlt: "대표 브랜드 프로그램 6",
+                    title: "신상뷰티찬스",
+                    desc: "화제의 뷰티템 이달의 신상<br />격주 토요일 낮 11시 50분",
                 },
                 {
                     key: "pr-02",
@@ -385,29 +406,8 @@ const langData = {
                     key: "pr-03",
                     image: imgPr03,
                     imgAlt: "대표 브랜드 프로그램 3",
-                    title: "스타일나우",
-                    desc: "요즘 뜨는 스타일링<br />매주 화요일 오전",
-                },
-                {
-                    key: "pr-04",
-                    image: imgPr04,
-                    imgAlt: "대표 브랜드 프로그램 4",
-                    title: "더컬렉션",
-                    desc: "더 럭셔리 프리미엄 편집샵<br />매주 토요일 오전 9시 20분",
-                },
-                {
-                    key: "pr-05",
-                    image: imgPr05,
-                    imgAlt: "대표 브랜드 프로그램 5",
-                    title: "쇼미더트렌드",
-                    desc: "트렌드를 스타일링하다<br />매주 토요일 저녁 9시 35분",
-                },
-                {
-                    key: "pr-06",
-                    image: imgPr06,
-                    imgAlt: "대표 브랜드 프로그램 6",
-                    title: "신상뷰티찬스",
-                    desc: "화제의 뷰티템 이달의 신상<br />격주 토요일 낮 11시 50분",
+                    title: "스타일나우; 더 김동은",
+                    desc: "지금, 더 나다워지는 순간<br/> 매주 화요일 오전 8시 15분",
                 },
             ],
         },
@@ -665,76 +665,85 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 
 .diff_actions { width: 100%; max-width: 1460px; margin: 0 auto; padding: 100px 20px 0; box-sizing: border-box; }
 
+:deep(.feature_card_sub_list) {margin-top:12px;}
+:deep(.feature_card_sub_list li + li) {margin-top:8px;}
+:deep(.feature_card_sub_list .feature_card_desc) {padding-left:22px; position:relative;}
+:deep(.feature_card_sub_list .feature_card_desc:before) {width:4px; border-top:1px solid #67676F; content:''; position:absolute; top:11px; left:10px;}
+
 @media (max-width: 768px) {
-  :deep(.p_br) { display: none; }
-  :deep(.m_br) { display: block; }
-  p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-  .sec_brand_visual { height: 100vh }
-  .sticky { height: 100vh; top: 0 }
-  .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(@/assets/images/dummy/gs_shop_bg.png); background-position: 10% 17px }
-  .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
-  .txt_area > p { margin-bottom: 0 }
-  .txt_area > p > span { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; }
-  .txt_area > .logo_wrap { max-width: 219px; margin:10px auto 0; }
-  .txt_area > p > span:first-child::after { content: "," }
-  .sec_brand_about { padding: 140px 0; }
-  .sec_brand_about > .about_inner { width: 100%; padding: 0 20px; }
-  .sec_brand_about > .about_inner > .about_txt > p > span { display: block; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-  .sec_brand_str{padding: 60px 0;}
-  section.str_inner { padding: 80px 20px 0;}
-  
-  .str_header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px }
-  .str_header h2 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em }
-  .str_header p{margin-top:12px; }
-  .str_bi_header{margin-bottom:20px; flex-direction: column; gap:8px; justify-content: flex-start;}
-  .str_bi_tit { font-family: Pretendard, sans-serif; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-  .str_header .str_actions { margin-left:0; gap:14px; flex: none; justify-content: flex-start }
-  .str_bi_fig:nth-child(2){padding:0 46px;}
-  .str_bi_fig:nth-child(1) > img {min-height: 80px;}
-  .str_bi_fig:nth-child(2) > img {width: 100%;} 
-  .str_bi_sec{padding:32px}
-  .str_bi_sec + .str_bi_sec { margin-top: 48px }
-  .str_bi_logo_figs { gap: 20px }
-  .str_bi_sec_color .str_bi_tit { margin-bottom: 24px }
-  .str_bi_color_figs { display: flex; flex-direction: column; align-items: stretch }
-  .str_bi_caption { font-size: 1.6rem; line-height: 1.42; letter-spacing: 0; }
-  .str_color_core { grid-template-columns: 1fr; }
-  .str_color_core + .str_bi_caption { margin-top: 40px; }
-  .str_color_sup { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px; }
-  .sns_wrap { gap: 16px }
-  .str_biz_fig_img{min-width:60px; padding:0;}
-  section.sec_brand_biz.str_inner .str_header p {font-weight: 700; line-height: 1.24; letter-spacing: 0; }
-  .str_biz_fig_inner{gap:20px;}
-  .str_biz_fig strong { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-  .str_biz_fig p { margin-top: 12px; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
-  .str_biz_fig_cert { margin-top: 20px; gap: 10px; }
-  .str_biz_fig_cert > dt { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
-  .str_biz_fig_cert > dd + dt { padding-left: 10px; }
-  .str_biz_block { margin-top: 40px }
-  .str_biz_subtit { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-  .str_biz_block p { margin-top: 8px; }
-  .str_biz_block :deep(.swiper-wrapper) { margin-top: 24px }
-  .str_biz_block :deep(.feature_card_item) { height: 312px; }
-  .str_biz_feature_cards {--fc-swiper-slide-w: 84.53vw;}
+    :deep(.p_br) { display: none; }
+    :deep(.m_br) { display: block; }
+    p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sec_brand_visual { height: 100vh }
+    .sticky { height: 100vh; top: 0 }
+    .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(@/assets/images/dummy/gs_shop_bg.png); background-position: 10% 17px }
+    .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
+    .txt_area > p { margin-bottom: 0 }
+    .txt_area > p > span { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; }
+    .txt_area > .logo_wrap { max-width: 219px; margin:10px auto 0; }
+    .txt_area > p > span:first-child::after { content: "," }
+    .sec_brand_about { padding: 140px 0; }
+    .sec_brand_about > .about_inner { width: 100%; padding: 0 20px; }
+    .sec_brand_about > .about_inner > .about_txt > p > span { display: block; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .sec_brand_str{padding: 60px 0;}
+    section.str_inner { padding: 80px 20px 0;}
 
-  /* 채널 */
-  .sec_brand_channel .card_list { grid-template-columns: minmax(0, 1fr); gap: 40px }
-  .sec_brand_channel .str_header_channel { margin-bottom: 40px }
-  .sec_brand_channel .card_list :deep(.card_thumb) { aspect-ratio: 335 / 190;}
-  .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 20px; display: block;}
-  .sec_brand_channel .card_list :deep(.card_item .card_body .card_num),
-  .sec_brand_channel .card_list :deep(.card_item .card_body .card_tit) { display: inline-block; margin: 0 0 0 5px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-  .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 16px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    .str_header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px }
+    .str_header h2 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em }
+    .str_header p{margin-top:12px; }
+    .str_bi_header{margin-bottom:20px; flex-direction: column; gap:8px; justify-content: flex-start;}
+    .str_bi_tit { font-family: Pretendard, sans-serif; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .str_header .str_actions { margin-left:0; gap:14px; flex: none; justify-content: flex-start }
+    .str_bi_fig:nth-child(2){padding:0 46px;}
+    .str_bi_fig:nth-child(1) > img {min-height: 80px;}
+    .str_bi_fig:nth-child(2) > img {width: 100%;} 
+    .str_bi_sec{padding:32px}
+    .str_bi_sec + .str_bi_sec { margin-top: 48px }
+    .str_bi_logo_figs { gap: 20px }
+    .str_bi_sec_color .str_bi_tit { margin-bottom: 24px }
+    .str_bi_color_figs { display: flex; flex-direction: column; align-items: stretch }
+    .str_bi_caption { font-size: 1.6rem; line-height: 1.42; letter-spacing: 0; }
+    .str_color_core { grid-template-columns: 1fr; }
+    .str_color_core + .str_bi_caption { margin-top: 40px; }
+    .str_color_sup { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px; }
+    .sns_wrap { gap: 16px }
+    .str_biz_fig_img{min-width:60px; padding:0;}
+    section.sec_brand_biz.str_inner .str_header p {font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+    .str_biz_fig_inner{gap:20px;}
+    .str_biz_fig strong { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .str_biz_fig p { margin-top: 12px; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .str_biz_fig_cert { margin-top: 20px; gap: 10px; }
+    .str_biz_fig_cert > dt { font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
+    .str_biz_fig_cert > dd + dt { padding-left: 10px; }
+    .str_biz_block { margin-top: 40px }
+    .str_biz_subtit { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .str_biz_block p { margin-top: 8px; }
+    .str_biz_block :deep(.swiper-wrapper) { margin-top: 24px }
+    .str_biz_block :deep(.feature_card_item) { height: 312px; }
+    .str_biz_feature_cards {--fc-swiper-slide-w: 84.53vw;}
 
-  /* 프로그램 */
-  .sec_brand_program .str_header_program { margin-bottom: 40px }
-  .sec_brand_program .card_list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 10px }
-  .sec_brand_program .card_list :deep(.card_thumb) {aspect-ratio: 162 / 114;}
-  .sec_brand_program .card_list :deep(.card_item .card_body) { padding-top: 20px; }
-  .sec_brand_program .card_list :deep(.card_desc) { margin-top: 8px; }
-  .sec_brand_program .card_list :deep(.card_desc p) { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
-  .diff_actions { max-width: 100%; padding: 80px 20px 0; }
-  .diff_actions :deep(.btn_back) { width: 100%; height: 52px; border: 1px solid #67676f; border-radius: 10px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-  .diff_actions :deep(.btn_back)::before { display: none; }
+    /* 채널 */
+    .sec_brand_channel .card_list { grid-template-columns: minmax(0, 1fr); gap: 40px }
+    .sec_brand_channel .str_header_channel { margin-bottom: 40px }
+    .sec_brand_channel .card_list :deep(.card_thumb) { aspect-ratio: 335 / 190;}
+    .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 20px; display: block;}
+    .sec_brand_channel .card_list :deep(.card_item .card_body .card_num),
+    .sec_brand_channel .card_list :deep(.card_item .card_body .card_tit) { display: inline-block; margin: 0 0 0 5px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 16px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+
+    /* 프로그램 */
+    .sec_brand_program .str_header_program { margin-bottom: 40px }
+    .sec_brand_program .card_list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 10px }
+    .sec_brand_program .card_list :deep(.card_thumb) {aspect-ratio: 162 / 114;}
+    .sec_brand_program .card_list :deep(.card_item .card_body) { padding-top: 20px; }
+    .sec_brand_program .card_list :deep(.card_desc) { margin-top: 8px; }
+    .sec_brand_program .card_list :deep(.card_desc p) { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .diff_actions { max-width: 100%; padding: 80px 20px 0; }
+    .diff_actions :deep(.btn_back) { width: 100%; height: 52px; border: 1px solid #67676f; border-radius: 10px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .diff_actions :deep(.btn_back)::before { display: none; }
+
+    :deep(.feature_card_sub_list) {margin-top:6px;}
+    :deep(.feature_card_sub_list .feature_card_desc) {padding-left:17px; position:relative;}
+    :deep(.feature_card_sub_list .feature_card_desc:before) {width:3px;}
 }
 </style>

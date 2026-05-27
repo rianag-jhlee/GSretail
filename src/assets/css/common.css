@@ -307,7 +307,7 @@ label.select.err > em {display:block;}
     .tab_wrap:has(ul.type_02) {margin-top:16px;}
     /* .tab_wrap ul.type_01, .tab_wrap ul.type_02{padding-left: 20px;} 
     .tab_wrap ul.type_01::after, .tab_wrap ul.type_02::after{content:''; min-width:20px; flex-shrink:0;}  */
-    .tab_wrap ul.type_01 li .item{padding:16px 12px;font-size: 1.8rem; line-height: 1.5;letter-spacing: 0%;text-align: center;}
+    .tab_wrap ul.type_01 li .item{padding:16px 12px;font-size: 1.8rem; line-height: 1.5;letter-spacing: 0;text-align: center;}
     .tab_wrap ul.type_02 li .item{padding:8px 18px;font-weight: 400;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .tab_wrap:has(ul.type_01)::after{content:''; width:8.53vw; height:100%; background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); position:absolute; top:0; right:0; pointer-events:none;}
     .tab_wrap ul.type_04 li .item {font-size:14px;}

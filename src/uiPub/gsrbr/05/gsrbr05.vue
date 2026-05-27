@@ -18,7 +18,7 @@
                 <article class="cont_inner">
                     <h3>{{ t.SubTitle }}</h3>
                     <div class="intro_text">
-                        <p>{{ t.SubContent_1 }}</p>
+                        <p v-html="t.SubContent_1"></p>
                         <p v-html="t.SubContent_2"></p>
                     </div>
                     <ul>
@@ -112,22 +112,22 @@ export default {
             langData: {
                 ko: {
                     Visual: {
-                        img: require("@/assets/images/dummy/gsrbr05.png"),
-                        imgMo: require("@/assets/images/dummy/gsrbr05_mo.png"),
+                        img: require("@/assets/images/sub/gsrbr05/gsrbr05.png"),
+                        imgMo: require("@/assets/images/sub/gsrbr05/gsrbr05_mo.png"),
                         alt: "빠르고 안전한 통합 간편결제 서비스 GS Pay",
                         subContent_1: "빠르고 안전한",
                         subContent_2: "통합 간편결제 서비스",
                         subContent_3: "GS Pay",
                     },
                     SubTitle: "브랜드 소개",
-                    SubContent_1: "GS Pay는 GS리테일의 모든 브랜드에서 사용 가능한 통합 간편결제 서비스입니다.",
+                    SubContent_1: "GS Pay는 GS리테일의 모든 브랜드에서 사용 가능한 GS리테일만의 통합 간편결제 서비스입니다.<br/><br class='m_br'/> 오프라인에서는 QR코드 스캔 한 번으로 온라인에서는 클릭 한 번으로 빠르고 안전하게 결제할 수 있습니다.<br/> 결제할 때마다 포인트까지 적립되어 더욱 더 알뜰한 소비가 가능합니다.",
                     Bi: {
                         title: "BI 로고",
                         img: require("@/assets/images/dummy/gsrbr05_bi.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr05_bi_mo.png"),
                         alt: "GS Pay BI 로고"
                     },
-                    SubContent_2: "QR코드 스캔 한 번으로 빠르고 안전하게 결제한 수 있습니다. 결제할 때마다 포인트가 적립되어 더욱 알뜰한 소비가 가능합니다.",
+                    // SubContent_2: "QR코드 스캔 한 번으로 빠르고 안전하게 결제한 수 있습니다. 결제할 때마다 포인트가 적립되어 더욱 알뜰한 소비가 가능합니다.",
                     BenefitTitle: "쉽고 간편한 GS Pay",
                     BenefitRows: [
                         [
@@ -135,8 +135,8 @@ export default {
                             { num: "02", title: "오직 GS Pay만!", desc: "GS 더프레시와의 통합 구매를 통해 합리적인 가격에 판매", bullets: ["행사 상품 및 참여 브랜드는 매월 상이"] }
                         ],
                         [
-                            { num: "03", title: "절대 놓칠 일 없는 혜택", desc: "포인트, 쿠폰, 통신사 할인, 팝카드 최대 10% 할인까지!<br/>간편하게 한 번에 혜택 받아요", bullets: ["오프라인 결제 시"] },
-                            { num: "04", title: "안전하고 빠르게!", desc: "원클릭 결제 설정 한번이면 추가 인증없이 바로 결제할 수 있어요." }
+                            { num: "03", title: "절대 놓칠 일 없는 혜택", desc: "포인트, 쿠폰, 통신사 할인 까지!<br/> 간편하게 한 번에 혜택 받아요", bullets: ["오프라인 결제 시"] },
+                            { num: "04", title: "안전하고 빠르게!", desc: "원클릭 결제 설정 한번이면 추가 인증없이<br/> 바로 결제할 수 있어요.", bullets: ["카드 결제 시"]  }
                         ]
                     ],
                     BrandTitle: "결제 가능 브랜드",
@@ -193,6 +193,9 @@ export default {
 </script>
 
 <style scoped>
+:deep(.p_br) { display: block; }
+:deep(.m_br) { display: none; }
+
 .gsrbr05 { width: 100%; position: relative; }
 img { width: 100%; display: block; }
 h3 { margin-bottom:16px; color: #161616; font-size: 48px; font-weight: 700; }
@@ -272,6 +275,10 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
     .benefit_row { flex-direction: column; }
     .step_box { flex-direction: column; padding:32px; }
     .bi_section {padding:0px;}
+}
+@media screen and (max-width:768px){
+    :deep(.p_br) { display: none; }
+    :deep(.m_br) { display: block; }
 }
 @media screen and (max-width: 767px) {
     .intro_text {margin-bottom:40px;}

@@ -29,8 +29,8 @@
                         <h3 class="title_text" v-html="t.ValueTitle"></h3>
                         <div class="btn_group">
                             <div class="links">
-                                <button type="button" class="btn_link ico_location">{{ t.Buttons.proposal }}</button>
-                                <button type="button" class="btn_link btn_store_find">{{ t.Buttons.findStore }}</button><!-- 26.05.11 Edit 이종환 : class -->
+                                <button type="button" class="btn_link ico_location" @click="openModal" data-popid="gsrbr0204" data-type="lg" data-cont="gsrbr0204">{{ t.Buttons.proposal }}</button>
+                                <button type="button" class="btn_link btn_store_find" @click.prevent="openModal" data-popid="pop_store_find" data-type="lg" data-cont="gsrbr0106">{{ t.Buttons.findStore }}</button><!-- 26.05.11 Edit 이종환 : class -->
 
                                 <!-- 26.05.11 Edit 이종환 : sns 버튼 통일 -->
                                 <a href="#" class="btn_sns btn_sns_insta" :aria-label="t.Sns.insta"></a>
@@ -302,6 +302,10 @@
             <div class="modal_container"></div>
         </div>
 
+        <div id="pop_store_find" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
     </div>
 </template>
 
@@ -361,12 +365,12 @@ export default {
                         {
                             title: "신선, 맛, 서비스 대한민국 NO.1을 약속합니다.",
                             desc: "전국의 우수 산지에서 가장 신선하고 맛있는 상품만을 선별하고, <br/>GS더프레시만의 엄격한 추가 검품과정을 통해 최고의 상품 서비스를 제공하고 있습니다.<br/><br/>또한 고객중심의 차별화된 서비스로 한국서비스품질지수(KS-SQI) 10년 <br/>연속 1위를 수상하는 등 고객을 위한 매장을 만들어 가고 있습니다.",
-                            img: require("@/assets/images/dummy/gsrbr020101_3.png")
+                            img: require("@/assets/images/sub/gsrbr020101/gsrbr020101_3.png")
                         },
                         {
                             title: "GS더프레시만의 차별화된 컨텐츠로 업계를 선도합니다.",
                             desc: "상품성을 갖춘 우수중소업체의 상품을 발굴해<br/>일반상품 가격의 7~80%수준 가격으로 판매하는 '리얼프라이스'와<br/>우수산지에서 선도, 당도를 엄선한 신선식품 전용 브랜드 '신선특별시' 등<br/>차별화된 상품과 서비스로 국내 수퍼마켓 업계를 선도하고 있습니다.",
-                            img: require("@/assets/images/dummy/gsrbr020101_4.png")
+                            img: require("@/assets/images/sub/gsrbr020101/gsrbr020101_4.png")
                         }
                     ],
                     OriginTabs1: [{ item: "신선 산지 안내" }, { item: "맛/선도 관리" }],

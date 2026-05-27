@@ -5,7 +5,7 @@
             <p v-html="t.ceo"></p>
         </section>
 
-        <section class="about">
+        <!-- 26.05.26 Del 이종환 <section class="about">
             <div class="inner">
                 <header class="header">
                     <h2 v-html="t.AboutTitle"></h2>
@@ -15,7 +15,7 @@
                     <img :src="imgVisual" width="1180" height="640" alt="" />
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <section class="prepare">
             <div class="inner">

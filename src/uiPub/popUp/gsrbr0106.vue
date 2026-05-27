@@ -65,7 +65,7 @@
                 </button>
                 <div v-show="filterExpanded" class="sf_chip_wrap">
                     <button
-                        v-for="c in t.chips"
+                        v-for="c in chips"
                         :key="c.id"
                         type="button"
                         class="sf_chip"
@@ -228,13 +228,19 @@ const t = computed(() => {
 
     return {
         ...base,
-        chips: [...base.chips],
+        // chips: [...base.chips],
         store: {
             ...base.store,
             list: [...(base.store?.list || [])]
         }
     };
 });
+
+const chips = ref(
+    structuredClone(
+        (langData[props.lang] || langData.ko).chips
+    )
+);
 
 // =====================
 // state
@@ -284,10 +290,6 @@ const handleSearch = () => {
     margin-bottom: 16px;
 }
 
-.sf_row_input {
-    margin-bottom: 0;
-}
-
 .sf_select {
     min-width: 0;
     height: 52px;
@@ -316,10 +318,6 @@ const handleSearch = () => {
     color: #161616;
 }
 
-.sf_input_wrap {
-    position: relative;
-}
-
 .sf_input {
     width: 100%;
     height: 52px;
@@ -341,19 +339,6 @@ const handleSearch = () => {
 
 .sf_input:focus {
     border-color: #107af2;
-}
-
-/* 검색 아이콘 */
-.sf_input_trailing {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    transform: translateY(-50%);
-    background-color: red;
-    pointer-events: none;
-    box-sizing: border-box;
 }
 
 /* Filter y gap: input 끝 + 12px */
