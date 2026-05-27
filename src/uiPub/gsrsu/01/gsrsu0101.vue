@@ -19,32 +19,14 @@
         
             <!-- 비전&전략 -->
             <div v-show="CTabIdx === 0" class="panel panel_vision_strategy" :aria-label="t.Tabs1?.[0]?.item || ''">
-                <!-- green life together -->
+              
                 <p class="tab_desc">{{ t.MainDesc }}</p>
-
-                <div class="sec_vision_together" :aria-label="t.VisionTogetherAria">
-                    <h3 class="vision_main_title">{{ t.VisionMainTitle }}</h3>
-                    <div class="vision_two_col">
-                        <div class="vision_col vision_col_env">
-                            <strong class="vision_col_tit">{{ t.VisionEnvLabel }}</strong>
-                            <span class="vision_col_sub">{{ t.VisionEnvSub }}</span>
-                            <ul class="vision_circle_list">
-                                <li v-for="(item, idx) in t.VisionEnvItems" :key="'env-' + idx" class="vision_item">
-                                    <p class="vision_item_tit">{{ item.title }}</p>
-                                    <p class="vision_item_desc">{{ item.desc }}</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="vision_col vision_col_soc">
-                            <strong class="vision_col_tit">{{ t.VisionSocLabel }}</strong>
-                            <span class="vision_col_sub">{{ t.VisionSocSub }}</span>
-                            <ul class="vision_circle_list">
-                                <li v-for="(item, idx) in t.VisionSocItems" :key="'soc-' + idx" class="vision_item">
-                                    <p class="vision_item_tit">{{ item.title }}</p>
-                                    <p class="vision_item_desc">{{ item.desc }}</p>
-                                </li>
-                            </ul>
-                        </div>
+                <div class="sec_vision_together">
+                    <div class="img_wrapper">
+                        <picture>
+                            <source media="(max-width: 768px)" :srcset="imgSr01Mo" />
+                            <img :src="imgSr01" :alt="t.VisionMainTitle" />
+                        </picture>
                     </div>
                 </div>
                 <section>
@@ -394,6 +376,8 @@ import Pagination from "@/components/Pagination.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
 import Buttons from "@/components/Buttons.vue";
+import imgSr01 from "@/assets/images/dummy/gsrsu0101_01.png";
+import imgSr01Mo from "@/assets/images/dummy/mo/gsrsu0101_01_mo.png";
 import imgBnbpLogo from "@/assets/images/dummy/gsrsu0101_02.png";
 import imgSr03 from "@/assets/images/dummy/gsrsu0101_03.png";
 import imgSr04 from "@/assets/images/dummy/gsrsu0101_04.png";
@@ -413,6 +397,8 @@ export default {
             CTabIdxEsgArchive: 0,
             envMgmtPage: 1,
             envMgmtTotalPages: 5,
+            imgSr01,
+            imgSr01Mo,
             imgBnbpLogo,
             imgSr07,
             langData: {
@@ -431,21 +417,6 @@ export default {
                     // [Tab 1] 비전&전략
                     VisionTogetherAria: "Green Life Together — 환경·사회",
                     VisionMainTitle: "Green Life Together.",
-                    VisionEnvLabel: "환경",
-                    VisionEnvSub: "Green Together",
-                    VisionSocLabel: "사회",
-                    VisionSocSub: "Life Together",
-                    VisionEnvItems: [
-                        { title: "Green Product", desc: "지속가능한 제품 확대\n책임 있는 원재료 조달" },
-                        { title: "Green Store", desc: "친환경 매장 확대\n자원 가치 재창출" },
-                        { title: "Green Value-chain", desc: "환경경영 기반 강화\n기후변화 대응" },
-                    ],
-                    VisionSocItems: [
-                        { title: "Together with Employees", desc: "함께 성장하는 조직문화 조성\n인권경영 기반 확대" },
-                        { title: "Together with Partners", desc: "공정거래 관리체계 강화\n지속가능한 공급망 운영" },
-                        { title: "Together with Customers", desc: "진심을 담은 마케팅 실천\n고객 만족 극대화" },
-                        { title: "Together with Communities", desc: "지역사회 상생발전 도모\n사회공헌 성과 관리체계 구축" },
-                    ],
 
                     // [Tab 1] 지배구조헌장 전체 데이터 (KO)
                     CharterTitle: "Green Life Together!", 
@@ -567,7 +538,7 @@ export default {
                     // [Tab 2] ESG 자료실
                     tab2: {
                         stab1: {
-                            title: "GS리테일의 환경 경영과 관련된 실적 자료들을 열람하실 수 있습니다.",
+                            title: "GS리테일의 환경 경영과 관련된 실적 자료를 열람하실 수 있습니다.",
                             desc: "본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로\n용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.",
                         },
                         stab2: {
@@ -588,7 +559,7 @@ export default {
                             ],
                             listData: [
                                 { desc: "평가기관: 한국기업지배구조원(Korea Corporate Governance Service, KCGS), 서스틴베스트(SUSTINVEST)" },
-                                { desc: "EST 평가: 회사의 ESG 수준에 대한 직관적 정보 제공 및 투자 의사결정 활용 지원을 목적으로 하여, 매년 평가 실시함." },
+                                { desc: "ESG 평가: 회사의 ESG 수준에 대한 직관적 정보 제공 및 투자 의사결정 활용 지원을 목적으로 하여, 매년 평가 실시함." },
                             ],
                         },
                         stab4: {
@@ -615,23 +586,23 @@ export default {
                             ],
                             acctitle1: "2022년 ~ 2018년",
                             tableData2: [
-                                { title: "2022", item1: "그외", item2: "화성특례시의회 표창장", item3: "화성시남부종합사회복지관", item4: "편의점 3부문4지역 GS나누미", rs1: 9 },
-                                { title: "", item1: "기부", item2: "국회의원 표창장", item3: "2025년 창영복지인의 날", item4: "편의점 3부문4지역 GS나누미" },
-                                { title: "", item1: "기부", item2: "한림화상재단 감사패(몸짱소방관 희망나눔 달력 캠페인)", item3: "한림화상재단", item4: "GS리테일" },
-                                { title: "", item1: "기부", item2: "우리모두복지재단 등촌9종합사회복지관 감사패", item3: "", item4: "GS나누미 조직문화서비스팀 직할 연합" },
-                                { title: "", item1: "기부", item2: "제4회 대한민국 착한 기부자상 국무총리 표창장", item3: "행정안전부 주최", item4: "GS리테일" },
-                                { title: "", item1: "봉사", item2: "사단법인 나눔과실천 표창장", item3: "화성시남부종합사회복지관", item4: "편의점 3부문4지역 GS나누미" },
-                                { title: "", item1: "봉사", item2: "경상북도지사 표창(정신건강 및 자살예방 사업 참여, 생명존중 문화 확산 기여)", item3: "", item4: "편의점사업부 5부문(박서우)" },
-                                { title: "", item1: "재해재난", item2: "전주시장 표창(자살예방 사업 적극 참여, 생명존중 문화 확산 기여)", item3: "", item4: "편의점사업부 4부문" },
-                                { title: "", item1: "헌혈", item2: "강원특별자치도지사 표창(강원도정 발전 및 성공추진 공로", item3: "강원도 유공", item4: "GS리테일(곽용구 상무)" },
-                                { title: "2020", item1: "기부", item2: "한림화상재단 감사패(몸짱소방관 희망나눔 달력 캠페인)", item3: "한림화상재단", item4: "GS리테일", rs1: 2 },
-                                { title: "", item1: "재해재난", item2: "영등포구 감사패(영등포 2023 희망온돌 따뜻한 겨울나기)", item3: "", item4: "GS리테일" },
-                                { title: "2019", item1: "기부", item2: "서울시장상", item3: "", item4: "홈쇼핑BU", rs1: 9 },
-                                { title: "", item1: "기부", item2: "보건복지부장관상", item3: "김포시 자원봉사자의 날", item4: "홈쇼핑BU" },
-                                { title: "", item1: "봉사", item2: "강남구청장 표창", item3: "부평구노인복지관 자원봉사자의 날", item4: "GS나누미 편의점 2부문1지역팀" },
-                                { title: "", item1: "봉사", item2: "한빛맹아원 감사패", item3: "김포시 자원봉사자의 날", item4: "GS나누미 편의점 2부문2지역팀" },
-                                { title: "", item1: "봉사", item2: "창원시 감사패 표창", item3: "부평구노인복지관 자원봉사자의 날", item4: "GS나누미 편의점 4부문3지역팀" },
-                                { title: "", item1: "봉사", item2: "경남종합사회복지관에서 표창", item3: "김포시 자원봉사자의 날", item4: "GS나누미 편의점 4부문3지역팀" },
+                                { title: "2022", item1: "그외", item2: "경상북도지사 표창(소방 안전문화 확산 기여)", item3: "", item4: "편의점사업부 5부문(김민호)", rs1: 9 },
+                                { title: "", item1: "기부", item2: "아름다운가게 20주년 감사헌정", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "기부", item2: "영등포구 감사패(영등포 2022 희망온돌 따뜻한 겨울나기)", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "기부", item2: "아름다운가게 감사장(물품 기부)", item3: "아름다운가게", item4: "편의점사업부 3부문" },
+                                { title: "", item1: "봉사", item2: "대한민국나눔대상 한국사회복지협의회 보건복지부장관상 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 조직문화서비스팀 직할연합(김시연)" },
+                                { title: "", item1: "봉사", item2: "강남구청장 표창", item3: "", item4: "GS나누미 편의점 3부문2지역팀" },
+                                { title: "", item1: "봉사", item2: "우리모두복지재단 등촌9종합사회복지관 감사패", item3: "", item4: "GS나누미 조직문화서비스팀 직할 연합" },
+                                { title: "", item1: "재해재난", item2: "대한적십자사 감사패(동해안 산불)", item3: "", item4: "GS리테일" },
+                                { title: "", item1: "헌혈", item2: "대한적십자사 부산혈액원 표창", item3: "", item4: "편의점사업부 6부문(노준호)" },
+                                { title: "2020", item1: "기부", item2: "서울특별시장 표창", item3: "소방의날 기념표창", item4: "홈쇼핑BU", rs1: 2 },
+                                { title: "", item1: "재해재난", item2: "행정안전부장관상 표창(우한교민)", item3: "재난구호유공", item4: "GS나누미 MD본부(유영준)" },
+                                { title: "2019", item1: "기부", item2: "서울시장상", item3: "민관협력 우수기관 표창", item4: "홈쇼핑BU", rs1: 9 },
+                                { title: "", item1: "기부", item2: "보건복지부장관상", item3: "보건복지부 유공자 표창", item4: "홈쇼핑BU" },
+                                { title: "", item1: "봉사", item2: "강남구청장 표창", item3: "", item4: "GS나누미 편의점 2부문1지역팀" },
+                                { title: "", item1: "봉사", item2: "한빛맹아원 감사패", item3: "", item4: "GS나누미 편의점 2부문2지역팀" },
+                                { title: "", item1: "봉사", item2: "창원시 감사패 표창", item3: "", item4: "GS나누미 편의점 4부문3지역팀" },
+                                { title: "", item1: "봉사", item2: "경남종합사회복지관에서 표창", item3: "", item4: "GS나누미 편의점 4부문3지역팀" },
                                 { title: "", item1: "봉사", item2: "전주 사랑의 집 감사패", item3: "", item4: "GS나누미 수퍼 2부문 영업6팀 전주권" },
                                 { title: "", item1: "봉사", item2: "서울YWCA 봉천종합사회복지관 감사패 표창", item3: "", item4: "GS나누미 H&B 북서울권 영업팀" },
                                 { title: "", item1: "재해재난", item2: "행정안전부장관상 표창(고성 속초 산불)", item3: "재난구호유공", item4: "GS나누미 강원(황호성)" },
@@ -654,7 +625,7 @@ export default {
                                 { title: "", item1: "봉사", item2: "보건복지부장관 표창", item3: "제 18회 사회복지의 날 표창", item4: "홈쇼핑BU" },
                                 { title: "", item1: "재해재난", item2: "국무총리단체 표창(포항지진)", item3: "재난구호유공", item4: "GS나누미 대구경북(김영욱)" },
                                 { title: "2016", item1: "기부", item2: "고용노동부 장관표창", item3: "사회적 기업육성", item4: "홈쇼핑BU", rs1: 2 },
-                                { title: "", item1: "기부", item2: "대한민국나눔대상 서울사회복지협의회 보건복지부장관상 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 편의점 중부권경영주연합" },
+                                { title: "", item1: "봉사", item2: "대한민국나눔대상 서울사회복지협의회 보건복지부장관상 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 편의점 중부권경영주연합" },
                                 { title: "2015", item1: "봉사", item2: "대한민국나눔대상 서울사회복지협의회 보건복지부장관상 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 건설부문", rs1: 1 },
                                 { title: "2014", item1: "봉사", item2: "(사)대한노인회 강서지회 감사패", item3: "", item4: "GS나누미 조직문화서비스팀 직할 연합", rs1: 1 },
                                 { title: "2013", item1: "봉사", item2: "대한민국나눔대상 제주도사회복지협의회 표창", item3: "전국사회복지나눔대회", item4: "GS나누미 편의점 영남권3지역/제주센타", rs1: 2 },
@@ -668,7 +639,7 @@ export default {
                                 { title: "2011", item1: "기부", item2: "아동복지부문 大賞", item3: "2011 사회공헌기업大賞", item4: "홈쇼핑BU", rs1: 4 },
                                 { title: "", item1: "기부", item2: "아동복지공헌부문大賞", item3: "2011 행복더함 사회공헌대상", item4: "홈쇼핑BU" },
                                 { title: "", item1: "봉사", item2: "기업부문", item3: "제1회SBS 희망나눔대상", item4: "홈쇼핑BU)" },
-                                { title: "", item1: "봉사", item2: "보건복지부 장관상", item3: "부평구노인복지관 자원봉사자의 날", item4: "홈쇼핑BU" },
+                                { title: "", item1: "봉사", item2: "보건복지부 장관상", item3: "이달의 나눔인‘기업 봉사 부문’", item4: "홈쇼핑BU" },
                                 { title: "2010", item1: "기부", item2: "대통령 표창(사회 공헌 활동 우수 관리자)", item3: "제11회 사회복지의 날기념 표창", item4: "홈쇼핑BU", rs1: 2 },
                                 { title: "", item1: "기부", item2: "아동복지부문 大賞", item3: "2010 사회공헌기업大賞", item4: "홈쇼핑BU" },
                                 { title: "2009", item1: "기부", item2: "아동복지부문 大賞", item3: "2009사회공헌기업大賞", item4: "홈쇼핑BU", rs1: 1 },
@@ -821,25 +792,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .sub_header_center p { text-align: center; }
 .tab_desc { padding: 20px 0; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; text-align: center; white-space: pre-line; }
 .sec_vision_together { margin-top: 80px; }
-.vision_main_title { font-size: 7rem; font-weight: 700; line-height: 1.24; text-align: center; }
-.vision_two_col { width: 100%; margin-top: 24px; display: flex; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 50px; }
-.vision_col { width: calc((100% - 50px) / 2); max-width: 400px; padding: 64px 50px; text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; border-radius: 270px; border: 2px dashed; }
-.vision_col_env { border-color: #11935D; }
-.vision_col_soc { border-color: #0D62C2; }
-.vision_col_tit { font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.vision_col_sub { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-.vision_col_env .vision_col_tit { color: #11935D; }
-.vision_col_env .vision_col_sub { color: #11935D; }
-.vision_col_soc .vision_col_tit { color: #0D62C2; }
-.vision_col_soc .vision_col_sub { color: #0D62C2; }
-.vision_circle_list { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; align-items: center; }
-.vision_item { width: 300px; height: 300px; flex: 0 0 auto; padding: 0 32px; border-radius: 50%; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0.8; white-space: pre-line;}
-.vision_item + .vision_item { margin-top: -6.7%; }
-.vision_col_soc .vision_item + .vision_item { margin-top: -30%; }
-.vision_col_env .vision_item { background: rgba(157, 226, 197, 1); }
-.vision_col_soc .vision_item { background: rgba(161, 196, 255, 1); }
-.vision_item_tit { font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-.vision_item_desc { margin-top: 12px; padding: 0 24px; font-size: 1.6rem; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_vision_together > .img_wrapper{width:100%;max-width:1010px;margin: 0 auto; }
 .esg_process { margin-top: 40px; }
 .esg_flow { margin-top: 0; }
 .esg_flow_card { width: 100%; min-height: 120px; padding: 20px; background: #E7F2FE; border-radius: 99px; display: flex; align-items: center; }
@@ -865,7 +818,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .esg_committee_table tbody tr:last-child td { padding-bottom: 24px; }
 .bnbp_main { margin-top: 32px; display: flex; align-items: flex-start; gap: 60px; }
 .img_wrapper { width: 428px; max-width: 100%; flex: 0 0 auto; }
-.img_wrapper img { width: 100%; display: block; object-fit: contain; }
+.img_wrapper img { width: 100%; display: block; }
 .txt_box p { font-size: 1.8rem; line-height: 1.6; letter-spacing: -0.01em; }
 .txt_box p + p { margin-top: 20px; }
 .bnbp_sub { margin-top: 60px; }
@@ -907,6 +860,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
     .visual_sub { font-size: 2rem; }
+    .sec_vision_together > .img_wrapper{max-width:100%;}
     .table_wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .table_wrap table { min-width: 960px; }
     .table_wrap th { font-size: 1.6rem; }
@@ -957,18 +911,6 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .sub_header_center p { text-align: left; }
     .tab_desc { padding: 0; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .sec_vision_together { margin-top: 56px; }
-    .vision_main_title { font-size: 3.6rem; }
-    .vision_two_col { margin-top: 20px; align-items: center; gap: 24px; }
-    .vision_col { width: 100%; max-width: 320px; padding: 30px 16px 24px; border-radius: 160px; }
-    .vision_col_tit { font-size: 2.6rem; }
-    .vision_col_sub { font-size: 1.6rem; }
-    .vision_circle_list { width: 100%; margin-top: 16px; padding-top: 0; display: flex; align-items: center; }
-    .vision_item { width: clamp(100px, 100%, 236px); height: min(236px, 70vw); padding:0; border-radius: 1000px; }
-    .vision_col_env .vision_item { height: min(284px, 70vw); }
-    .vision_item_tit { font-size: 1.8rem; line-height: 1.25; }
-    .vision_item_desc { margin-top: 8px; padding: 0 8px; font-size: 1.4rem; line-height: 1.35; }
-    .vision_item + .vision_item { margin-top: -18px; }
-    .vision_col_soc .vision_item + .vision_item { margin-top: -42px; }
     .esg_process { margin-top: 28px; }
     .esg_flow_card { min-height: 0; padding: 18px 16px; border-radius: 20px; flex-direction: column; align-items: flex-start; }
     .esg_flow_card_head { width: 100%; min-height: 0; padding: 16px; border-radius: 14px; align-items: flex-start; text-align: left; }
