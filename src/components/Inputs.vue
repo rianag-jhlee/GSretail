@@ -100,4 +100,8 @@ input[type="search"] {position:relative;}
 .is_search input { padding-right: 48px; }
 .err_txt { display: block; margin-top: 8px; color: #fb6432; font-size: 14px; }
 .disabled { opacity: 0.5; pointer-events: none; }
+
+@media (max-width: 768px) {
+    .check em {font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+}
 </style>

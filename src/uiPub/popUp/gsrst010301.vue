@@ -2,114 +2,80 @@
     <div class="modal_cont gsrst010301">
         <!-- 타이틀 -->
         <div class="modal_header">
-            사업설명회 신청
+            {{ t.title }}
             <a href="#none" @click="closeModal" class="btn_close">닫기</a>
         </div>
 
         <div class="modal_content smn_body">
             <!-- 인트로 -->
-            <!-- <div class="smn_intro">
-                <strong>안녕하세요!<br>GS THE FRESH 1:1 상담<br class="m_br">컨설턴트 윤경진 입니다.</strong>
-                <p>아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다. <br />
-                    담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.</p>
-            </div> -->
-
-            <!-- <div class="modal_content smn_body"> -->
-                <!-- 인트로 -->
-                <div class="smn_intro">
-                    <strong>안녕하세요!<br>GS THE FRESH 1:1 상담<br class="m_br">컨설턴트 윤경진 입니다.</strong>
-                    <p>아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다. <br />
-                        담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.</p>
-                </div>
-
-                <!-- 컨설턴트와 1:1 상담 -->
-                <div class="gray_box consult_box">
-                    <div class="consent_body">
-                        <div class="flex_wrap">
-                            <div class="consent_img_wrap">
-                                <!-- <img src="" alt=""> -->
-                            </div>
-                            <div class="consent_info">
-                                <h3 class="consent_info_title">컨설턴트와 1:1 상담</h3>
-                                <p>가맹/창업 컨설턴트가 1:1로 상담해 드립니다.<br />
-                                    가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.</p>
-                                <button type="button">윤경진 컨설턴트</button>
-                            </div>
+            <div class="smn_intro">
+                <strong v-html="t.intro.title"></strong>
+                <p v-html="t.intro.desc"></p>
+            </div>
+            <!-- 컨설턴트와 1:1 상담 -->
+            <div class="gray_box consult_box">
+                <div class="consent_body">
+                    <div class="flex_wrap">
+                        <div class="consent_img_wrap">
                         </div>
-                        <div class="consent_notice">
-                            <ul class="list_caution">
-                                <li>
-                                    <p>※ 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.</p>
-                                </li>
-                            </ul>
+                        <div class="consent_info">
+                            <h3 class="consent_info_title">{{ t.consultBox.title }}</h3>
+                            <p v-html="t.consultBox.desc"></p>
+                            <button type="button">{{ t.consultBox.consultantName }}</button>
                         </div>
                     </div>
-                </div>
-
-                <!-- 개인정보 동의 -->
-                <div class="gray_box consent_box">
-                    <div class="consent_info">
-                        <h3 class="consent_info_title">개인정보 수집·이용 동의</h3>
-                        <ul class="consent_info_list">
-                            <li>입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.</li>
-                            <li>수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호</li>
-                            <li>수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용</li>
-                            <li>보유 및 이용기간: 접수 후 1년</li>
+                    <div class="consent_notice">
+                        <ul class="list_caution">
+                            <li>
+                                <p>{{ t.consultBox.notice }}</p>
+                            </li>
                         </ul>
                     </div>
                 </div>
-            <!-- </div> -->
-
+            </div>
             <!-- 개인정보 동의 -->
-            <!-- <div class="gray_box consent_box">
+            <div class="gray_box consent_box">
                 <div class="consent_info">
-                    <h3 class="consent_info_title">개인정보 수집·이용 동의</h3>
+                    <h3 class="consent_info_title">{{ t.consent.title }}</h3>
                     <ul class="consent_info_list">
-                        <li>입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.</li>
-                        <li>수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호</li>
-                        <li>수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용</li>
-                        <li>보유 및 이용기간: 접수 후 1년</li>
+                        <li v-for="(item, index) in t.consent.items" :key="index">{{ item }}</li>
                     </ul>
-                    <div class="consent_notice">
-                        <p class="consent_notice_text">고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br class="p_br">사업설명회 신청 글 작성이 불가능합니다.</p>
-                        <Inputs type="checkbox" text="동의합니다." v-model="consentAgree" />
-                    </div>
                 </div>
-            </div> -->
+            </div>
 
-            <!-- <div class="middle_bts_wrap">
-                <button :class="{ active: hasStore === true }" @click="hasStore = true">내가 소유한 점포가 있다.</button>
-                <button :class="{ active: hasStore === false }" @click="hasStore = false">내가 소유한 점포가 없다.</button>
-            </div> -->
+            <div class="middle_bts_wrap">
+                <button :class="{ active: hasStore === true }" @click="hasStore = true">{{ t.storeButtons.hasStore }}</button>
+                <button :class="{ active: hasStore === false }" @click="hasStore = false">{{ t.storeButtons.noStore }}</button>
+            </div>
 
             <!-- 고객정보 폼 -->
-            <!-- <div class="apply_form">
+            <div class="apply_form">
                 <div class="form_head">
-                    <h3 class="form_head_title">고객정보</h3>
-                    <span class="form_required_note">* 필수 입력사항</span>
+                    <h3 class="form_head_title">{{ t.customerForm.title }}</h3>
+                    <span class="form_required_note">{{ t.requiredNote }}</span>
                 </div>
                 <div class="form_body">
-                    !-- 이름 --
+                    <!-- 이름 -->
                     <div class="form_row">
-                        <div class="form_label">이름<span class="form_required">*</span></div>
+                        <div class="form_label">{{ t.customerForm.nameLabel }}<span class="form_required">*</span></div>
                         <div class="form_field">
                             <Inputs type="text" />
                         </div>
                     </div>
-                    !-- 이메일 --
+                    <!-- 이메일 -->
                     <div class="form_row">
-                        <div class="form_label">이메일</div>
+                        <div class="form_label">{{ t.customerForm.emailLabel }}</div>
                         <div class="form_field form_field_email">
                             <Inputs type="text" v-model="consultForm.emailId" />
                             <span class="form_sep">@</span>
-                            <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" placeholder="직접입력" />
+                            <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" :placeholder="t.customerForm.emailPlaceholder" />
                             <Inputs v-else type="text" :model-value="consultForm.emailDomain" :is-readonly="true" />
                             <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain" />
                         </div>
                     </div>
-                    !-- 연락처 --
+                    <!-- 연락처 -->
                     <div class="form_row">
-                        <div class="form_label">연락처<span class="form_required">*</span></div>
+                        <div class="form_label">{{ t.customerForm.phoneLabel }}<span class="form_required">*</span></div>
                         <div class="form_field form_field_phone">
                             <SelectBox :options="phoneOptions" v-model="consultForm.phone1" />
                             <span class="form_sep">-</span>
@@ -119,227 +85,231 @@
                         </div>
                     </div>
 
-                    !-- 개설희망지역 --
+                    <!-- 개설희망지역 -->
                     <div class="form_row">
-                        <div class="form_label">소유점포 주소 <br class="p_br"/>(과거, 현재 점포소유 <br class="p_br">신청자에 한함)<span class="form_required">*</span></div>
+                        <div class="form_label" v-html="t.customerForm.addressLabel"></div>
                         <div class="form_field form_field_region">
-                            <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" initMsg="시/도 선택" @update:modelValue="consultForm.regionSigungu = ''" />
-                            <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" initMsg="구/군 선택" :disabled="!consultForm.regionSido" />
-                        <div class="consent_notice">
-                            <p class="consent_notice_text">고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br class="p_br">사업설명회 신청 글 작성이 불가능합니다.</p>
-                            <label class="consent_radio_label">
-                                <input type="radio" class="consent_radio" name="consent_agree" value="agree" v-model="consentAgree" @click="consentAgree = consentAgree === 'agree' ? '' : 'agree'" />
-                                <span class="consent_radio_text">동의합니다.</span>
-                            </label>
-                        </div>
-                    </div>
-                </div> -->
-
-                <div class="middle_bts_wrap">
-                    <button :class="{ active: hasStore === true }" @click="hasStore = true">내가 소유한 점포가 있다.</button>
-                    <button :class="{ active: hasStore === false }" @click="hasStore = false">내가 소유한 점포가 없다.</button>
-                </div>
-
-                <!-- 고객정보 폼 -->
-                <div class="apply_form">
-                    <div class="form_head">
-                        <h3 class="form_head_title">고객정보</h3>
-                        <span class="form_required_note">* 필수 입력사항</span>
-                    </div>
-                    <div class="form_body">
-                        <!-- 이름 -->
-                        <div class="form_row">
-                            <div class="form_label">이름<span class="form_required">*</span></div>
-                            <div class="form_field">
-                                <Inputs type="text" />
-                            </div>
-                        </div>
-                        <!-- 이메일 -->
-                        <div class="form_row">
-                            <div class="form_label">이메일</div>
-                            <div class="form_field form_field_email">
-                                <Inputs type="text" v-model="consultForm.emailId" />
-                                <span class="form_sep">@</span>
-                                <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" placeholder="직접입력" />
-                                <Inputs v-else type="text" :model-value="consultForm.emailDomain" :is-readonly="true" />
-                                <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain" />
-                            </div>
-                        </div>
-                        <!-- 연락처 -->
-                        <div class="form_row">
-                            <div class="form_label">연락처<span class="form_required">*</span></div>
-                            <div class="form_field form_field_phone">
-                                <SelectBox :options="phoneOptions" v-model="consultForm.phone1" />
-                                <span class="form_sep">-</span>
-                                <Inputs type="text" v-model="consultForm.phone2" />
-                                <span class="form_sep">-</span>
-                                <Inputs type="text" v-model="consultForm.phone3" />
-                            </div>
-                        </div>
-
-                        <!-- 개설희망지역 -->
-                        <div class="form_row">
-                            <div class="form_label">소유점포 주소 <br class="p_br"/>(과거, 현재 점포소유 <br class="p_br">신청자에 한함)<span class="form_required">*</span></div>
-                            <div class="form_field form_field_region">
-                                <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" initMsg="시/도 선택" @update:modelValue="consultForm.regionSigungu = ''" />
-                                <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" initMsg="구/군 선택" :disabled="!consultForm.regionSido" />
-                            </div>
+                            <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" :initMsg="t.customerForm.sidoInitMsg" @update:modelValue="consultForm.regionSigungu = ''" />
+                            <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" :initMsg="t.customerForm.sigunguInitMsg" :disabled="!consultForm.regionSido" />
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- 상담내용 폼 (점포 소유 시에만 표시) -->
-                <div class="apply_form" v-show="hasStore === true">
-                    <div class="form_head">
-                        <h3 class="form_head_title">상담내용</h3>
-                        <span class="form_required_note">* 필수 입력사항</span>
+            <!-- 상담내용 폼 (점포 소유 시에만 표시) -->
+            <div class="apply_form" v-show="hasStore === true">
+                <div class="form_head">
+                    <h3 class="form_head_title">{{ t.consultForm.title }}</h3>
+                    <span class="form_required_note">{{ t.requiredNote }}</span>
+                </div>
+                <div class="form_body">
+                    <!-- 소유점포 면적 -->
+                    <div class="form_row form_row_area">
+                        <div class="form_label">{{ t.consultForm.areaLabel }}</div>
+                        <div class="form_field form_field_area">
+                            <div class="form_sub_group">
+                                <span class="form_sub_label">{{ t.consultForm.contractAreaLabel }}</span>
+                                <div class="form_sub_input_wrap">
+                                    <Inputs type="text" v-model="consultForm.areaContract" />
+                                    <span class="form_sub_unit">m²</span>
+                                </div>
+                            </div>
+                            <div class="form_sub_group">
+                                <span class="form_sub_label">{{ t.consultForm.exclusiveAreaLabel }}</span>
+                                <div class="form_sub_input_wrap">
+                                    <Inputs type="text" v-model="consultForm.areaExclusive" />
+                                    <span class="form_sub_unit">m²</span>
+                                </div>
+                            </div>
+                            <span class="area_note">{{ t.consultForm.areaNote }}</span>
+                        </div>
                     </div>
-                    <div class="form_body">
-                        <!-- 소유점포 면적 -->
-                        <div class="form_row form_row_area">
-                            <div class="form_label">소유점포 면적</div>
-                            <div class="form_field form_field_area">
-                                <div class="form_sub_group">
-                                    <span class="form_sub_label">계약면적</span>
+                    <!-- 수퍼 운영자 일 경우 -->
+                    <div class="form_row check_row">
+                        <div class="form_label">{{ t.consultForm.superOperatorLabel }}</div>
+                        <div class="form_field form_field_check">
+                            <div class="form_sub_group">
+                                <span class="form_sub_label">{{ t.consultForm.itemCheckLabel }}</span>
+                                <div class="check_list">
+                                    <Inputs v-for="opt in superItemOptions" :key="opt.value"
+                                            type="checkbox" :value="opt.value" v-model="consultForm.superItems" :text="opt.label" />
+                                </div>
+                            </div>
+                            <div class="check_etc">
+                                <span class="form_sub_label">{{ t.consultForm.etcLabel }}</span>
+                                <Inputs type="text" v-model="consultForm.superItemEtc" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 계약조건 -->
+                    <div class="form_row contract_row">
+                        <div class="form_label">{{ t.consultForm.contractLabel }}</div>
+                        <div class="form_field form_field_contract">
+                            <div class="form_sub_group">
+                                <span class="form_sub_label">{{ t.consultForm.contractPeriodLabel }}</span>
+                                <div class="form_sub_inputs">
+                                    <Inputs type="text" v-model="consultForm.contractStart"/>
+                                    <span class="form_sep">~</span>
+                                    <Inputs type="text" v-model="consultForm.contractEnd" />
+                                </div>
+                            </div>
+                            <div class="form_sub_group">
+                                <span class="form_sub_label">{{ t.consultForm.depositRentLabel }}</span>
+                                <div class="contract_rent">
                                     <div class="form_sub_input_wrap">
-                                        <Inputs type="text" v-model="consultForm.areaContract" />
-                                        <span class="form_sub_unit">m²</span>
+                                        <Inputs type="text" v-model="consultForm.deposit" />
+                                        <span class="form_sub_unit">만원</span>
                                     </div>
-                                </div>
-                                <div class="form_sub_group">
-                                    <span class="form_sub_label">전용면적</span>
                                     <div class="form_sub_input_wrap">
-                                        <Inputs type="text" v-model="consultForm.areaExclusive" />
-                                        <span class="form_sub_unit">m²</span>
-                                    </div>
-                                </div>
-                                <span class="area_note">* m² = (기준)평 x 3.3</span>
-                            </div>
-                        </div>
-                        <!-- 수퍼 운영자 일 경우 -->
-                        <div class="form_row check_row">
-                            <div class="form_label">수퍼 운영자 일 경우</div>
-                            <div class="form_field form_field_check">
-                                <div class="form_sub_group">
-                                    <span class="form_sub_label">취급 품목 체크</span>
-                                    <div class="check_list">
-                                        <Inputs v-for="opt in superItemOptions" :key="opt.value"
-                                                type="checkbox" :value="opt.value" v-model="consultForm.superItems" :text="opt.label" />
-                                    </div>
-                                </div>
-                                <div class="check_etc">
-                                    <span class="form_sub_label">기타</span>
-                                    <Inputs type="text" v-model="consultForm.superItemEtc" />
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 계약조건 -->
-                        <div class="form_row contract_row">
-                            <div class="form_label">계약조건</div>
-                            <div class="form_field form_field_contract">
-                                <div class="form_sub_group">
-                                    <span class="form_sub_label">계약 기간</span>
-                                    <div class="form_sub_inputs">
-                                        <Inputs type="text" v-model="consultForm.contractStart"/>
-                                        <span class="form_sep">~</span>
-                                        <Inputs type="text" v-model="consultForm.contractEnd" />
-                                    </div>
-                                </div>
-                                <div class="form_sub_group">
-                                    <span class="form_sub_label">보증금/월임대료</span>
-                                    <div class="contract_rent">
-                                        <div class="form_sub_input_wrap">
-                                            <Inputs type="text" v-model="consultForm.deposit" />
-                                            <span class="form_sub_unit">만원</span>
-                                        </div>
-                                        <div class="form_sub_input_wrap">
-                                            <Inputs type="text" v-model="consultForm.monthlyRent" />
-                                            <span class="form_sub_unit">만원</span>
-                                        </div>
+                                        <Inputs type="text" v-model="consultForm.monthlyRent" />
+                                        <span class="form_sub_unit">만원</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- 버튼 -->
-            <!-- </div> -->
-            
-            <!-- <div class="smn_bottom">
-                <Buttons btn-class="btn_big primary">상담신청</Buttons>
-                <Buttons btn-class="btn_big gary" @click="closeModal">다시작성</Buttons>
-            </div> -->
+            </div>
         </div>
         
         <div class="modal_bottom">
-            <Buttons btn-class="btn_big primary">상담신청</Buttons>
-            <Buttons btn-class="btn_big gary" @click="closeModal">다시작성</Buttons>
+            <Buttons btn-class="btn_big primary">{{ t.submitLabel }}</Buttons>
+            <Buttons btn-class="btn_big gary" @click="closeModal">{{ t.resetLabel }}</Buttons>
         </div>
 
     </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, defineProps } from "vue";
 import modal from "@/assets/js/modal";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import Buttons from "@/components/Buttons.vue";
 
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
+    },
+});
+
+const langData = {
+    ko: {
+        title: "사업설명회 신청",
+        intro: {
+            title: "안녕하세요!<br>GS THE FRESH 1:1 상담<br class=\"m_br\">컨설턴트 윤경진 입니다.",
+            desc: "아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다. <br />담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.",
+        },
+        consultBox: {
+            title: "컨설턴트와 1:1 상담",
+            desc: "가맹/창업 컨설턴트가 1:1로 상담해 드립니다.<br />가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.",
+            consultantName: "윤경진 컨설턴트",
+            notice: '※ 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.',
+        },
+        consent: {
+            title: "개인정보 수집·이용 동의",
+            items: [
+                '입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 "개인정보 처리방침"을 참고하시기 바랍니다.',
+                "수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호",
+                "수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
+                "보유 및 이용기간: 접수 후 1년",
+            ],
+        },
+        storeButtons: {
+            hasStore: "내가 소유한 점포가 있다.",
+            noStore: "내가 소유한 점포가 없다.",
+        },
+        requiredNote: "* 필수 입력사항",
+        customerForm: {
+            title: "고객정보",
+            nameLabel: "이름",
+            emailLabel: "이메일",
+            emailPlaceholder: "직접입력",
+            phoneLabel: "연락처",
+            addressLabel: '소유점포 주소 <br class="p_br"/>(과거, 현재 점포소유 <br class="p_br">신청자에 한함)<span class="form_required">*</span>',
+            sidoInitMsg: "시/도 선택",
+            sigunguInitMsg: "구/군 선택",
+        },
+        consultForm: {
+            title: "상담내용",
+            areaLabel: "소유점포 면적",
+            contractAreaLabel: "계약면적",
+            exclusiveAreaLabel: "전용면적",
+            areaNote: "* m² = (기준)평 x 3.3",
+            superOperatorLabel: "수퍼 운영자 일 경우",
+            itemCheckLabel: "취급 품목 체크",
+            etcLabel: "기타",
+            contractLabel: "계약조건",
+            contractPeriodLabel: "계약 기간",
+            depositRentLabel: "보증금/월임대료",
+            superItemOptions: [
+                { value: "농산", label: "농산" },
+                { value: "축산", label: "축산" },
+                { value: "수산", label: "수산" },
+                { value: "공산품", label: "공산품" },
+                { value: "조리", label: "조리" },
+            ],
+            sidoOptions: [
+                { value: "서울", label: "서울특별시" },
+                { value: "부산", label: "부산광역시" },
+                { value: "대구", label: "대구광역시" },
+                { value: "인천", label: "인천광역시" },
+                { value: "광주", label: "광주광역시" },
+                { value: "대전", label: "대전광역시" },
+                { value: "울산", label: "울산광역시" },
+                { value: "세종", label: "세종특별자치시" },
+                { value: "경기", label: "경기도" },
+                { value: "강원", label: "강원특별자치도" },
+                { value: "충북", label: "충청북도" },
+                { value: "충남", label: "충청남도" },
+                { value: "전북", label: "전북특별자치도" },
+                { value: "전남", label: "전라남도" },
+                { value: "경북", label: "경상북도" },
+                { value: "경남", label: "경상남도" },
+                { value: "제주", label: "제주특별자치도" },
+            ],
+            sigunguMap: {
+                서울: ["종로구","중구","용산구","성동구","광진구","동대문구","중랑구","성북구","강북구","도봉구","노원구","은평구","서대문구","마포구","양천구","강서구","구로구","금천구","영등포구","동작구","관악구","서초구","강남구","송파구","강동구"],
+                부산: ["중구","서구","동구","영도구","부산진구","동래구","남구","북구","해운대구","사하구","금정구","강서구","연제구","수영구","사상구","기장군"],
+                대구: ["중구","동구","서구","남구","북구","수성구","달서구","달성군","군위군"],
+                인천: ["중구","동구","미추홀구","연수구","남동구","부평구","계양구","서구","강화군","옹진군"],
+                광주: ["동구","서구","남구","북구","광산구"],
+                대전: ["동구","중구","서구","유성구","대덕구"],
+                울산: ["중구","남구","동구","북구","울주군"],
+                세종: ["세종시"],
+                경기: ["수원시","성남시","의정부시","안양시","부천시","광명시","평택시","동두천시","안산시","고양시","과천시","구리시","남양주시","오산시","시흥시","군포시","의왕시","하남시","용인시","파주시","이천시","안성시","김포시","화성시","광주시","양주시","포천시","여주시","연천군","가평군","양평군"],
+                강원: ["춘천시","원주시","강릉시","동해시","태백시","속초시","삼척시","홍천군","횡성군","영월군","평창군","정선군","철원군","화천군","양구군","인제군","고성군","양양군"],
+                충북: ["청주시","충주시","제천시","보은군","옥천군","영동군","증평군","진천군","괴산군","음성군","단양군"],
+                충남: ["천안시","공주시","보령시","아산시","서산시","논산시","계룡시","당진시","금산군","부여군","서천군","청양군","홍성군","예산군","태안군"],
+                전북: ["전주시","군산시","익산시","정읍시","남원시","김제시","완주군","진안군","무주군","장수군","임실군","순창군","고창군","부안군"],
+                전남: ["목포시","여수시","순천시","나주시","광양시","담양군","곡성군","구례군","고흥군","보성군","화순군","장흥군","강진군","해남군","영암군","무안군","함평군","영광군","장성군","완도군","진도군","신안군"],
+                경북: ["포항시","경주시","김천시","안동시","구미시","영주시","영천시","상주시","문경시","경산시","군위군","의성군","청송군","영양군","영덕군","청도군","고령군","성주군","칠곡군","예천군","봉화군","울진군","울릉군"],
+                경남: ["창원시","진주시","통영시","사천시","김해시","밀양시","거제시","양산시","의령군","함안군","창녕군","고성군","남해군","하동군","산청군","함양군","거창군","합천군"],
+                제주: ["제주시","서귀포시"],
+            },
+        },
+        submitLabel: "상담신청",
+        resetLabel: "다시작성",
+    },
+    en: {},
+};
+
+const t = computed(() => {
+    const selected = langData[props.lang];
+    return selected && Object.keys(selected).length ? selected : langData.ko;
+});
+
 const consentAgree = ref(false);
 const hasStore = ref(null); // null: 미선택 / true: 있다 / false: 없다
 
-const superItemOptions = [
-    { value: "농산", label: "농산" },
-    { value: "축산", label: "축산" },
-    { value: "수산", label: "수산" },
-    { value: "공산품", label: "공산품" },
-    { value: "조리", label: "조리" },
-];
+const superItemOptions = computed(() => t.value.consultForm.superItemOptions);
+const sidoOptions = computed(() => t.value.consultForm.sidoOptions);
 
-const sidoOptions = [
-    { value: "서울", label: "서울특별시" },
-    { value: "부산", label: "부산광역시" },
-    { value: "대구", label: "대구광역시" },
-    { value: "인천", label: "인천광역시" },
-    { value: "광주", label: "광주광역시" },
-    { value: "대전", label: "대전광역시" },
-    { value: "울산", label: "울산광역시" },
-    { value: "세종", label: "세종특별자치시" },
-    { value: "경기", label: "경기도" },
-    { value: "강원", label: "강원특별자치도" },
-    { value: "충북", label: "충청북도" },
-    { value: "충남", label: "충청남도" },
-    { value: "전북", label: "전북특별자치도" },
-    { value: "전남", label: "전라남도" },
-    { value: "경북", label: "경상북도" },
-    { value: "경남", label: "경상남도" },
-    { value: "제주", label: "제주특별자치도" },
-];
-
-const sigunguMap = {
-    서울: ["종로구","중구","용산구","성동구","광진구","동대문구","중랑구","성북구","강북구","도봉구","노원구","은평구","서대문구","마포구","양천구","강서구","구로구","금천구","영등포구","동작구","관악구","서초구","강남구","송파구","강동구"],
-    부산: ["중구","서구","동구","영도구","부산진구","동래구","남구","북구","해운대구","사하구","금정구","강서구","연제구","수영구","사상구","기장군"],
-    대구: ["중구","동구","서구","남구","북구","수성구","달서구","달성군","군위군"],
-    인천: ["중구","동구","미추홀구","연수구","남동구","부평구","계양구","서구","강화군","옹진군"],
-    광주: ["동구","서구","남구","북구","광산구"],
-    대전: ["동구","중구","서구","유성구","대덕구"],
-    울산: ["중구","남구","동구","북구","울주군"],
-    세종: ["세종시"],
-    경기: ["수원시","성남시","의정부시","안양시","부천시","광명시","평택시","동두천시","안산시","고양시","과천시","구리시","남양주시","오산시","시흥시","군포시","의왕시","하남시","용인시","파주시","이천시","안성시","김포시","화성시","광주시","양주시","포천시","여주시","연천군","가평군","양평군"],
-    강원: ["춘천시","원주시","강릉시","동해시","태백시","속초시","삼척시","홍천군","횡성군","영월군","평창군","정선군","철원군","화천군","양구군","인제군","고성군","양양군"],
-    충북: ["청주시","충주시","제천시","보은군","옥천군","영동군","증평군","진천군","괴산군","음성군","단양군"],
-    충남: ["천안시","공주시","보령시","아산시","서산시","논산시","계룡시","당진시","금산군","부여군","서천군","청양군","홍성군","예산군","태안군"],
-    전북: ["전주시","군산시","익산시","정읍시","남원시","김제시","완주군","진안군","무주군","장수군","임실군","순창군","고창군","부안군"],
-    전남: ["목포시","여수시","순천시","나주시","광양시","담양군","곡성군","구례군","고흥군","보성군","화순군","장흥군","강진군","해남군","영암군","무안군","함평군","영광군","장성군","완도군","진도군","신안군"],
-    경북: ["포항시","경주시","김천시","안동시","구미시","영주시","영천시","상주시","문경시","경산시","군위군","의성군","청송군","영양군","영덕군","청도군","고령군","성주군","칠곡군","예천군","봉화군","울진군","울릉군"],
-    경남: ["창원시","진주시","통영시","사천시","김해시","밀양시","거제시","양산시","의령군","함안군","창녕군","고성군","남해군","하동군","산청군","함양군","거창군","합천군"],
-    제주: ["제주시","서귀포시"],
-};
+const sigunguMap = computed(() => t.value.consultForm.sigunguMap);
 
 const sigunguOptions = computed(() => {
-    const list = sigunguMap[consultForm.regionSido] || [];
+    const list = sigunguMap.value[consultForm.regionSido] || [];
     return list.map(v => ({ value: v, label: v }));
 });
 

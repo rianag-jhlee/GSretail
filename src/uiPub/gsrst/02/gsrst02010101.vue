@@ -3,7 +3,7 @@
         <!-- HEADER -->
         <header class="page_header top_visual" :style="{ backgroundImage: `url(${imgBg})` }">
             <div class="header_inner">
-                <h2 class="header_title">GS25 창업안내</h2>
+                <h2 class="header_title">{{ t.pageHeaderTitle }}</h2>
             </div>
         </header>
 
@@ -52,9 +52,9 @@
                     <div>
                         <picture class="image_wrap">
                             <source media="(max-width: 768px)" srcset="@/assets/images/dummy/mo/gsrst02010101_04_mo.png" />
-                            <img src="@/assets/images/dummy/gsrst02010101_04.png" alt="점포 이미지">
+                            <img src="@/assets/images/dummy/gsrst02010101_04.png" :alt="t.brandBannerImageAlt">
                         </picture>
-                        <Buttons type="button" btn-class="btn_icon_arrow btn_mid after border">GS25만의 경쟁력 더 알아보기</Buttons>
+                        <Buttons type="button" btn-class="btn_icon_arrow btn_mid after border">{{ t.brandMoreButton }}</Buttons>
                     </div>
                 </section>
                 <section class="sec_band">
@@ -321,7 +321,7 @@
                                 <h3>{{ franchiseDefineCard.title }}</h3>
                                 <p>{{ franchiseDefineCard.desc }}</p>
                             </header>
-                            <div class="franchise_formula" role="group" aria-label="프랜차이즈 성공 공식">
+                            <div class="franchise_formula" role="group" :aria-label="t.franchiseFormulaAriaLabel">
                                 <div>
                                     <span aria-hidden="true"></span>
                                     <p>
@@ -383,7 +383,7 @@
                         <div
                             class="region_counsel_map"
                             role="region"
-                            aria-label="지도 연동 예정 영역"
+                            :aria-label="t.regionCounselMapAriaLabel"
                             :tabindex="regionCounselBoardIsStaff ? -1 : 0"
                             @click="onRegionCounselMapStubClick"
                             @keydown.enter.prevent="onRegionCounselMapStubClick"
@@ -401,7 +401,7 @@
                                     <span class="ico_pin" aria-hidden="true"></span>
                                     <h3>{{ regionCounselStaff.regionName }}</h3>
                                     <span class="badge">{{ regionCounselStaff.countLabel }}</span>
-                                    <button type="button" class="btn_close" aria-label="닫기" @click="closeRegionCounselStaff">닫기</button>
+                                    <button type="button" class="btn_close" @click="closeRegionCounselStaff">{{ t.closeLabel }}</button>
                                 </header>
                                 <ul>
                                     <li v-for="(manager, mi) in regionCounselStaff.managers" :key="mi">
@@ -503,7 +503,7 @@
             <div class="panel" v-show="activeD1 === 1 && activeD2 === 0">
                 <section class="sec_startup_process">
                     <header class="section_header ac txt_blue">
-                        <h2>상담 신청부터 개점까지, <br />최소 30일이면 나만의 GS25를 오픈할 수 있어요!</h2>
+                        <h2 v-html="t.startupProcessTitle"></h2>
                     </header>
                     <ol class="process_timeline">
                         <li
@@ -535,7 +535,7 @@
                                         :class="{ is_open: openProcessMoreIdx === idx }"
                                         :aria-expanded="openProcessMoreIdx === idx ? 'true' : 'false'"
                                         @click.prevent="toggleProcessMore(idx)"
-                                    >{{ openProcessMoreIdx === idx ? "접기" : "더 알아보기" }}</button>
+                                    >{{ openProcessMoreIdx === idx ? t.processMoreCloseLabel : t.processMoreOpenLabel }}</button>
                                     <div
                                         v-if="getProcessMoreList(step).length"
                                         :ref="(el) => setProcessMoreRef(el, idx)"
@@ -560,8 +560,7 @@
             <div class="panel" v-show="activeD1 === 1 && activeD2 === 1">
                 <section class="sec_franchise_type">
                     <header class="section_header ac">
-                        <h2>내 자금과 상황에 딱 맞게! <br />
-                            GS25만의 3가지 맞춤형 가맹 타입을 만나보세요</h2>
+                        <h2 v-html="t.franchiseTypeTitle"></h2>
                     </header>
                     <ul class="franchise_type_list">
                         <li
@@ -595,7 +594,7 @@
                 </section>
                 <section class="sec_franchise_compare">
                     <header class="section_header ac">
-                        <h2>한눈에 비교하고, 나에게 유리한 타입을 찾아보세요!</h2>
+                        <h2>{{ t.franchiseCompareTitle }}</h2>
                     </header>
                     <div class="franchise_compare_wrap">
                         <table class="franchise_compare_table">
@@ -745,7 +744,7 @@
                         :tab-slide="true"
                     />
                 </div>
-                <div v-show="activeD3 === 0" class="panel_third_depth" aria-label="탄탄한 점포">
+                <div v-show="activeD3 === 0" class="panel_third_depth" :aria-label="t.benefitPanelAria.store">
                     <section>
                         <header class="section_header ac">
                             <h2>{{ benefitStorePanel.title }}</h2>
@@ -783,7 +782,7 @@
                         </ul>
                     </section>
                 </div>
-                <div v-show="activeD3 === 1" class="panel_third_depth" aria-label="든든한 점포 운영"> 
+                <div v-show="activeD3 === 1" class="panel_third_depth" :aria-label="t.benefitPanelAria.operation"> 
                     <section class="sec_operation">
                         <header class="section_header ac">
                             <h2>{{ benefitOperationPanel.title }}</h2>
@@ -810,7 +809,7 @@
                         </div>
                     </section>
                 </div>
-                <div v-show="activeD3 === 2" class="panel_third_depth" aria-label="편안한 경영주 생활">
+                <div v-show="activeD3 === 2" class="panel_third_depth" :aria-label="t.benefitPanelAria.life">
                     <section class="sec_life">
                         <header class="section_header ac">
                             <h2>{{ benefitLifePanel.title }}</h2>
@@ -841,20 +840,20 @@
             </div>
 
             <!-- 추천 점포 찾기 -->
-            <div class="panel pt_64" v-show="activeD1 === 2" aria-label="추천 점포 찾기">
+            <div class="panel pt_64" v-show="activeD1 === 2" :aria-label="t.storeSectionAriaLabel">
                 <section class="sec_store">
-                    <p class="tab_intro">안정적인 수입이 기대되는 최적의 입지! 성공 확률을 높이는 GS25 추천 점포를 만나보세요</p>
+                    <p class="tab_intro">{{ t.storeIntro }}</p>
                     <div class="store_search">
                         <!-- 지역 -->
                         <div class="search_group">
-                            <span class="search_group_label">지역</span>
+                            <span class="search_group_label">{{ t.storeSearch.regionLabel }}</span>
                             <div class="chip_list">
                                 <button
                                     type="button"
                                     class="chip"
                                     :class="{ active: filterRegion === '' }"
                                     @click="filterRegion = ''"
-                                >전체</button>
+                                >{{ t.storeSearch.allLabel }}</button>
                                 <button
                                     v-for="r in storeRegions"
                                     :key="r.value"
@@ -871,7 +870,7 @@
                         <div class="search_bottom_row">
                             <!-- 가맹타입 -->
                             <div class="search_group">
-                                <span class="search_group_label">가맹타입</span>
+                                <span class="search_group_label">{{ t.storeSearch.franchiseTypeLabel }}</span>
                                 <div class="chip_list">
                                     <button
                                         v-for="t in franchiseTypes"
@@ -885,20 +884,20 @@
                             </div>
                             <!-- 점포유형/청년창업 -->
                             <div class="search_group">
-                                <span class="search_group_label">점포유형/청년창업</span>
+                                <span class="search_group_label">{{ t.storeSearch.storeTypeYouthLabel }}</span>
                                 <div class="chip_list">
                                     <button
                                         type="button"
                                         class="chip"
                                         :class="{ active: filterStoreType === '신규점' }"
                                         @click="filterStoreType = filterStoreType === '신규점' ? '' : '신규점'"
-                                    >신규점</button>
+                                    >{{ t.storeSearch.newStoreLabel }}</button>
                                     <button
                                         type="button"
                                         class="chip"
                                         :class="{ active: filterStoreType === '기존점' }"
                                         @click="filterStoreType = filterStoreType === '기존점' ? '' : '기존점'"
-                                    >기존점</button>
+                                    >{{ t.storeSearch.existingStoreLabel }}</button>
                                     <span class="chip_sep_v"></span>
                                     <span class="chip_youth_wrap">
                                         <button
@@ -906,12 +905,12 @@
                                             class="chip"
                                             :class="{ active: filterYouth }"
                                             @click="filterYouth = !filterYouth"
-                                        >청년창업</button>
+                                        >{{ t.storeSearch.youthStartupLabel }}</button>
                                         <button
                                             type="button"
                                             class="youth_info_btn"
                                             @click.stop="youthPopoverVisible = !youthPopoverVisible"
-                                            aria-label="청년창업 안내"
+                                            :aria-label="t.storeSearch.youthStartupInfoAriaLabel"
                                         >?</button>
                                         <div
                                             v-if="youthPopoverVisible"
@@ -919,14 +918,14 @@
                                             role="tooltip"
                                             @click.stop
                                         >   
-                                            <strong>청년창업이란?</strong>
-                                            <p>20대 청년들을 위해서 투자비 일부를 할인해드리는 제도에요.</p>
-                                            <a href="#">청년창업 자세히 보러가기</a>
+                                            <strong>{{ t.storeSearch.youthStartupTitle }}</strong>
+                                            <p>{{ t.storeSearch.youthStartupDesc }}</p>
+                                            <a href="#">{{ t.storeSearch.youthStartupLinkText }}</a>
                                             <button
                                                 type="button"
                                                 class="layer_tooltip_close"
                                                 @click="youthPopoverVisible = false"
-                                                aria-label="닫기"
+                                                :aria-label="t.closeLabel"
                                             ></button>
                                         </div>
                                     </span>
@@ -934,15 +933,15 @@
                             </div>
                             <!-- 검색 -->
                             <div class="search_group search_group_input">
-                                <span class="search_group_label">검색</span>
+                                <span class="search_group_label">{{ t.storeSearch.searchLabel }}</span>
                                 <div class="store_search_input_wrap">
                                     <input
                                         type="text"
                                         class="store_search_input"
-                                        placeholder="지역명, 태그...."
+                                        :placeholder="t.storeSearch.searchPlaceholder"
                                         v-model="storeSearchQuery"
                                     />
-                                    <button type="button" class="store_search_btn" aria-label="검색">
+                                    <button type="button" class="store_search_btn" :aria-label="t.storeSearch.searchButtonAriaLabel">
                                     </button>
                                 </div>
                             </div>
@@ -952,7 +951,7 @@
                     <div class="store_list_wrap"> 
                         <!-- 상단 바: 총 개수 + 정렬/뷰 토글 -->
                         <div class="store_list_bar">
-                            <span class="store_count">총 <strong>{{ storeList.length }} </strong>개 점포</span>
+                            <span class="store_count">{{ t.storeListBar.countPrefix }} <strong>{{ storeList.length }} </strong>{{ t.storeListBar.countSuffix }}</span>
                             <div class="store_bar_right">
                                 <div class="store_sort_group">
                                     <button
@@ -960,13 +959,13 @@
                                         class="sort_btn"
                                         :class="{ active: storeSort === 'latest' }"
                                         @click="storeSort = 'latest'"
-                                    >최신순</button>
+                                    >{{ t.storeListBar.latestSortLabel }}</button>
                                     <button
                                         type="button"
                                         class="sort_btn"
                                         :class="{ active: storeSort === 'cost' }"
                                         @click="storeSort = 'cost'"
-                                    >투자비 낮은순</button>
+                                    >{{ t.storeListBar.lowCostSortLabel }}</button>
                                 </div>
                                 <div class="store_view_group">
                                     <button
@@ -974,7 +973,7 @@
                                         class="view_btn"
                                         :class="{ active: storeView === 'list' }"
                                         @click="storeView = 'list'"
-                                        aria-label="목록형"
+                                        :aria-label="t.storeListBar.listViewAriaLabel"
                                     >
                                     </button>
                                     <button
@@ -982,7 +981,7 @@
                                         class="view_btn"
                                         :class="{ active: storeView === 'grid' }"
                                         @click="storeView = 'grid'"
-                                        aria-label="격자형"
+                                        :aria-label="t.storeListBar.gridViewAriaLabel"
                                     >
                                     </button>
                                 </div>
@@ -1618,10 +1617,8 @@
 
 </template>
 
-<script setup> 
-import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+<script setup>
+import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick, defineProps } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
@@ -1656,6 +1653,13 @@ import imgStore01 from "@/assets/images/dummy/gsrst02010101_store_01.png";
 import imgStore02 from "@/assets/images/dummy/gsrst02010101_store_02.png";
 import imgStore03 from "@/assets/images/dummy/gsrst02010101_store_03.png";
 import imgStore04 from "@/assets/images/dummy/gsrst02010101_store_04.png";
+
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
+    },
+});
 
 /* ── 탭 상태 (activeD1 / activeD2 / activeD3) ──
  * D1: 0=알아보기 · 1=준비하기 · 2=추천점포 · 3=상담신청 · 4=가맹계약(미구현)
@@ -3228,6 +3232,126 @@ const startupConsultManager = {
     office: "GS25 서부사무소",
     address: "서울특별시 마포구 월드컵북로 396",
 };
+
+const langData = {
+    ko: {
+        pageHeaderTitle: "GS25 창업안내",
+        brandBannerImageAlt: "점포 이미지",
+        brandMoreButton: "GS25만의 경쟁력 더 알아보기",
+        franchiseFormulaAriaLabel: "프랜차이즈 성공 공식",
+        regionCounselMapAriaLabel: "지도 연동 예정 영역",
+        closeLabel: "닫기",
+        startupProcessTitle: "상담 신청부터 개점까지, <br />약 30일이면 나만의 GS25를 오픈할 수 있어요!",
+        processMoreOpenLabel: "더 알아보기",
+        processMoreCloseLabel: "접기",
+        franchiseTypeTitle: "내 자금과 상황에 딱 맞게! <br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요",
+        franchiseCompareTitle: "한눈에 비교하고, 나에게 유리한 타입을 찾아보세요!",
+        benefitPanelAria: {
+            store: "탄탄한 점포",
+            operation: "든든한 점포 운영",
+            life: "편안한 경영주 생활",
+        },
+        storeSectionAriaLabel: "추천 점포 찾기",
+        storeIntro: "안정적인 수입이 기대되는 최적의 입지! 성공 확률을 높이는 GS25 추천 점포를 만나보세요",
+        storeSearch: {
+            regionLabel: "지역",
+            allLabel: "전체",
+            franchiseTypeLabel: "가맹타입",
+            storeTypeYouthLabel: "점포유형/청년창업",
+            newStoreLabel: "신규점",
+            existingStoreLabel: "기존점",
+            youthStartupLabel: "청년창업",
+            youthStartupInfoAriaLabel: "청년창업 안내",
+            youthStartupTitle: "청년창업이란?",
+            youthStartupDesc: "20대 청년들을 위해서 투자비 일부를 할인해드리는 제도에요.",
+            youthStartupLinkText: "청년창업 자세히 보러가기",
+            searchLabel: "검색",
+            searchPlaceholder: "지역명, 태그....",
+            searchButtonAriaLabel: "검색",
+        },
+        storeListBar: {
+            countPrefix: "총",
+            countSuffix: "개 점포",
+            latestSortLabel: "최신순",
+            lowCostSortLabel: "투자비 낮은순",
+            listViewAriaLabel: "목록형",
+            gridViewAriaLabel: "격자형",
+        },
+        depth1Tabs,
+        depth2Tabs,
+        depth2TabsPrepare,
+        brandIntro,
+        brandApplyLinks,
+        brandStats,
+        successPointPanel,
+        successPointCards,
+        brandSolutionPanel,
+        brandSolutionCards,
+        startupProcessSteps,
+        franchiseTypeGroups,
+        consultEntryPanel,
+        depth3TabsBenefit,
+        benefitStorePanel,
+        benefitStoreItems,
+        benefitOperationPanel,
+        benefitOperationGroups,
+        benefitLifePanel,
+        benefitLifeItems,
+        benefitLifeNote,
+        competitivePanel,
+        competitiveCards,
+        storeOpenPanel,
+        storeOpenCards,
+        productConceptPanel,
+        megaHitPanel,
+        megaHitGroups,
+        freshFfCards,
+        conceptStorePanel,
+        conceptStoreCards,
+        marketingPanel,
+        marketingCards,
+        operationSupportPanel,
+        operationSupportCards,
+        convenienceDefinePanel,
+        convenienceEvolutionCore,
+        convenienceEvolutionStages,
+        franchiseDefinePanel,
+        franchiseDefineCard,
+        franchiseFormula,
+        franchiseRoleColumns,
+        startupFaqPanel,
+        startupFaqDummyAnswer,
+        startupFaqItems,
+        gs25FaqPanel,
+        gs25FaqTabs,
+        gs25FaqItems,
+        regionCounselPanel,
+        regionCounselEmpty,
+        regionCounselTabs,
+        regionCounselStaff,
+        storeRegions,
+        franchiseTypes,
+        depth2TabsConsult,
+        startupConsentItems,
+        seminarConsentItems,
+        counselConsentItems,
+        seminarDummyAddress,
+        seminarMonthSlides,
+        phoneOptions,
+        startupStoreOwnershipOptions,
+        startupCvsExperienceOptions,
+        startupRegionSidoOptions,
+        startupRegionSigunguMap,
+        consultTypeOptions,
+        startupConsultManager,
+    },
+    en: {},
+};
+
+const t = computed(() => {
+    const current = langData[props.lang];
+    return current && Object.keys(current).length ? current : langData.ko;
+});
 
 /* ────────────── [quick_menu · script] scroll + fixed(bottom) · 푸터 상단 60px ────────────── */
 

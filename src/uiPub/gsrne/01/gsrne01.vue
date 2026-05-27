@@ -2,7 +2,6 @@
     <div class="main-container">
         <div class="title_wrap">
             <h2 class="page-title">{{ t.MainTitle }}</h2>
-            <p class="visual-sub">{{ t.MainsubTitle }}</p>
         </div>
 
         <section class="section-investor">
@@ -27,7 +26,10 @@
                                         </a>
                                         <a href="#none" class="cont">
                                             <strong>{{ item.title }}</strong>
-                                            <p></p>
+                                            <p class="info">
+                                                <em>{{ item.cate }}</em>
+                                                <span class="date">{{ item.date }}</span> 
+                                            </p>
                                         </a>
                                     </div>
                                 </li>
@@ -47,86 +49,87 @@
 </template>
 
 <script>
-import SelectBox from "@/components/SelectBox.vue";
+import { ref, computed, onMounted } from "vue";
+import { useRoute } from "vue-router";
 import Search from "@/components/Search.vue";
 import Pagination from "@/components/Pagination.vue";
 
 export default {
     name: "gsrin04",
-    components: { SelectBox, Search, Pagination },
-    props: { lang: { type: String, default: "ko" } },
-    data() {
-        return {
-            /* 2. Search 컴포넌트와 v-model로 연결될 데이터 구조 */
-            searchData: {
-                type: "all",    // Search 컴포넌트 내 select의 초기값
-                keyword: ""     // Search 컴포넌트 내 input의 초기값
-            },
+    components: { Search, Pagination },
+    setup() {
+        const route = useRoute();
+        const isGuide = computed(() => route.path.startsWith("/guide"));
 
-            /* 3. 페이지네이션 현재 페이지 */
-            currentPage: 1,
+        const lang = ref("ko");
 
-            /* 4. 언어별 텍스트 데이터 */
-            langData: {
-                ko: {
-                    MainTitle: "보도자료",
-                    MainsubTitle: "GS리테일의 최근 소식을 전달해 드립니다.",
-
-                    /* Search 컴포넌트 전용 옵션 (props: search_opt) */
-                    SearchOptions: [
-                        { value: "all", label: "전체" },
-                        { value: "title", label: "제목" },
-                        { value: "content", label: "내용" }
-                    ],
-
-                    placeholder: "검색어 입력",
-
-                    /* 리스트 데이터 */
-                    ListData: [
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강" },
-                    ]
-                }
-            }
+        const setLang = (value) => {
+            lang.value = value;
         };
-    },
-    computed: { 
-        t() { 
-            return this.langData[this.lang] || this.langData.ko; 
-        } 
-    },
-    methods: {
+
+        const searchData = ref({
+            type: "all",
+            keyword: "",
+        });
+
+        const currentPage = ref(1);
+
+        const langData = {
+            ko: {
+                MainTitle: "보도자료",
+                SearchOptions: [
+                    { value: "all", label: "전체" },
+                    { value: "title", label: "제목" },
+                    { value: "content", label: "내용" },
+                ],
+                placeholder: "검색어 입력",
+                ListData: [
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-3.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-4.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-5.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-6.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                ],
+            },
+            en: {},
+        };
+
+        const t = computed(() => {
+            const current = langData[lang.value];
+            return current && Object.keys(current).length ? current : langData.ko;
+        });
+
         /* [검색] 버튼 클릭 시 Search 컴포넌트에서 전달받은 값 처리 */
-        handleSearch(val) { 
-            // val은 { type: "...", keyword: "..." } 형태입니다.
+        const handleSearch = (val) => {
             console.log("검색 유형:", val.type);
             console.log("검색어:", val.keyword);
-            
-            // 여기서 실제 API 호출 등의 로직을 수행합니다.
-            this.currentPage = 1; // 검색 시 1페이지로 초기화
-        },
-        onPageChange(page) { 
-            this.currentPage = page;
-        },
-    },
-    mounted() {
-        const header = document.getElementById("header");
 
-        header.classList.add("head_black");
-    }
+            currentPage.value = 1;
+        };
+
+        const onPageChange = (page) => {
+            currentPage.value = page;
+        };
+
+        onMounted(() => {
+            const header = document.getElementById("header");
+            header?.classList.add("head_black");
+        });
+
+        return { isGuide, lang, setLang, searchData, currentPage, t, handleSearch, onPageChange };
+    },
 };
 </script>
 
 <style scoped>
-/* 제공해주신 CSS 그대로 유지 (수정 없음) */
+
 .main-container { width: 100%; position: relative; }
 .title_wrap { width: 100%; padding: 10.91% 0 0; text-align: center; position: relative; display: block; }
 .page-title { color: #111; font-size: 72px; font-weight: 700; line-height:124%; letter-spacing:-0.02em;}
 .visual-sub { margin-top: 10px; color: #111; font-size: 24px; font-weight: 400; line-height:150%; }
 
-/* board_wrap */
+
 .board_wrap.type_gallery .body {margin-top:-54px; margin-left:-50px; display:flex; flex-wrap:wrap;}
 .board_wrap.type_gallery .body > li {width:33.3333%; padding-top:54px; padding-left:50px;}
 .board_wrap.type_gallery .item {display:flex; flex-direction:column;}
@@ -137,10 +140,10 @@ export default {
 .board_wrap.type_gallery .item .cont strong {font-size:2rem; line-height:135%; letter-spacing:-0.01em; display:block;}
 
 @media screen and (max-width: 767px) {
-    .title_wrap {margin-top:48px; padding:0 20px; text-align:initial;}
+    .title_wrap {display: none;}
     .title_wrap h2 {display:none;}
     .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
-
+    .search_filter_area{margin-top:0;}
     .board_wrap.type_gallery .body {margin-top:-48px;}
     .board_wrap.type_gallery .body > li {width:100%; padding-top:48px;}
     .board_wrap.type_gallery .item .thumb {padding-top:60.895522%;}
