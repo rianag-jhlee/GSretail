@@ -16,52 +16,54 @@
                 />
 
                 <div class="tab_content_wrap">
-                    <article v-if="CTabIdx === 0" class="env_management mt100">
-                        <div class="intro_view ac mb100">
-                            <h3 v-html="t.IntroTitle"></h3>
-                            <p v-html="t.IntroDesc"></p>
+                    <article v-if="CTabIdx === 0" class="env_management">
+                        <div class="panel">
+                            <div class="intro_view ac">
+                                <h3 v-html="t.IntroTitle"></h3>
+                                <p v-html="t.IntroDesc"></p>
+                            </div>
+    
+                            <section class="policy_card_box mb80">
+                                <div class="title_area">
+                                    <h4>{{ t.PolicyTitle }}</h4>
+                                    <p>{{ t.PolicySub }}</p>
+                                </div>
+                                <ul>
+                                    <li v-for="(item, idx) in t.PolicyItems" :key="'policy-'+idx">
+                                        <strong>{{ item.tit }}</strong>
+                                        <span>{{ item.desc }}</span>
+                                    </li>
+                                </ul>
+                            </section>
+    
+                            <section class="strategy_section mb100">
+                                <div class="title_area ac">
+                                    <h4 class="al">{{ t.StrategyTitle }}</h4>
+                                    <p class="al">{{ t.StrategyDesc }}</p>
+                                </div>
+                                
+                                <picture class="image_wrap">
+                                    <source media="(max-width: 768px)" :srcset="t.Images.StrategyImgMo" />
+                                    <img :src="t.Images.StrategyImg" :alt="t.StrategyTitle">
+                                </picture>
+                            </section>
+    
+                            <section class="system_section">
+                                <div class="title_area ac">
+                                    <h4 class="al">{{ t.SystemTitle }}</h4>
+                                    <p class="al" v-html="t.SystemDesc"></p>
+                                </div>
+                                <picture class="image_wrap">
+                                    <source media="(max-width: 768px)" :srcset="t.Images.SystemImgMo" />
+                                    <img :src="t.Images.SystemImg" :alt="t.SystemTitle">
+                                </picture>
+                            </section>
                         </div>
-
-                        <section class="policy_card_box mb80">
-                            <div class="title_area">
-                                <h4>{{ t.PolicyTitle }}</h4>
-                                <p>{{ t.PolicySub }}</p>
-                            </div>
-                            <ul>
-                                <li v-for="(item, idx) in t.PolicyItems" :key="'policy-'+idx">
-                                    <strong>{{ item.tit }}</strong>
-                                    <span>{{ item.desc }}</span>
-                                </li>
-                            </ul>
-                        </section>
-
-                        <section class="strategy_section mb100">
-                            <div class="title_area ac">
-                                <h4 class="al">{{ t.StrategyTitle }}</h4>
-                                <p class="al">{{ t.StrategyDesc }}</p>
-                            </div>
-                            
-                            <picture class="image_wrap">
-                                <source media="(max-width: 768px)" :srcset="t.Images.StrategyImgMo" />
-                                <img :src="t.Images.StrategyImg" :alt="t.StrategyTitle">
-                            </picture>
-                        </section>
-
-                        <section class="system_section">
-                            <div class="title_area ac">
-                                <h4 class="al">{{ t.SystemTitle }}</h4>
-                                <p class="al" v-html="t.SystemDesc"></p>
-                            </div>
-                            <picture class="image_wrap">
-                                <source media="(max-width: 768px)" :srcset="t.Images.SystemImgMo" />
-                                <img :src="t.Images.SystemImg" :alt="t.SystemTitle">
-                            </picture>
-                        </section>
                     </article>
 
                     <article v-if="CTabIdx === 1">
-                        <div class="inner_tabs_wrap">
-                            <Tabs v-model="InnerTabIdx" :tab-items="t.InnerTabs" tab-class="type_02" />
+                        <Tabs v-model="InnerTabIdx" :tab-items="t.InnerTabs" tab-class="type_02" />
+                        <div class="panel">
                             <div v-if="InnerTabIdx === 0" class="green_value_chain">
                                 <div class="value_grid">
                                     <div v-for="(item, idx) in t.GreenValueChain" :key="'gvc-'+idx" class="value_item">
@@ -76,7 +78,7 @@
                                 </div>
                             </div>
                             <div v-if="InnerTabIdx === 1" class="green_store">
-                                <section class="intro_section mb80">
+                                <section class="intro_section">
                                     <figure class="main_frame">
                                         <img :src="t.GreenStore.IntroImg" :alt="t.GreenStore.Title">
                                     </figure>
@@ -112,7 +114,6 @@
                             <div v-if="InnerTabIdx === 2" class="green_product"> 
                                 <ul>
                                     <li class="one_divide">
-                                        <figure class="image_wrap"><img :src="t.GreenProduct.greenSave.img" :alt="t.GreenProduct.greenSave.tit"></figure>
                                         <div>
                                             <h4>{{ t.GreenProduct.greenSave.tit }}</h4>
                                             <p>{{ t.GreenProduct.greenSave.sesc1 }}</p>
@@ -175,31 +176,32 @@
                         </div>
                     </article>
 
-                    <article v-if="CTabIdx === 2" class="climate_change mt100">
-                        <div class="intro_view ac mb100">
-                            <p v-html="t.ClimateIntro"></p>
-                        </div>
-
-                        <div class="content_grid">
-                            <section class="wide_card mb200">
-                                <figure class="image_wrap"><img :src="t.Images.SeaBreathImg" :alt="t.SeaBreathTitle"></figure>
-                                <div class="text_group">
-                                    <div class="title_area">
-                                        <h4>{{ t.SeaBreathTitle }}</h4>
-                                        <p v-html="t.SeaBreathDesc"></p>
-                                    </div>
-                                    <a class="btn_icon_arrow btn_xl border after" :href="t.sealink" target="_blank">{{ t.MoreBtn }}</a>
-                                </div>
-                            </section>
-
-                            <div class="sub_grid_container">
-                                <section v-for="(item, idx) in t.EcoProjects" :key="'eco-'+idx" class="grid_item">
-                                    <figure class="image_wrap"><img :src="item.img" :alt="item.tit"></figure>
-                                    <div class="title_area">
-                                        <h4>{{ item.tit }}</h4>
-                                        <p v-html="item.desc"></p>
+                    <article v-if="CTabIdx === 2" class="climate_change">
+                        <div class="panel">
+                            <div class="intro_view ac">
+                                <p v-html="t.ClimateIntro"></p>
+                            </div>
+                            <div class="content_grid">
+                                <section class="wide_card">
+                                    <figure class="image_wrap"><img :src="t.Images.SeaBreathImg" :alt="t.SeaBreathTitle"></figure>
+                                    <div class="text_group">
+                                        <div class="title_area">
+                                            <h4>{{ t.SeaBreathTitle }}</h4>
+                                            <p v-html="t.SeaBreathDesc"></p>
+                                        </div>
+                                        <a class="btn_icon_arrow btn_xl border after" :href="t.sealink" target="_blank">{{ t.MoreBtn }}</a>
                                     </div>
                                 </section>
+    
+                                <div class="sub_grid_container">
+                                    <section v-for="(item, idx) in t.EcoProjects" :key="'eco-'+idx" class="grid_item">
+                                        <figure class="image_wrap"><img :src="item.img" :alt="item.tit"></figure>
+                                        <div class="title_area">
+                                            <h4>{{ item.tit }}</h4>
+                                            <p v-html="item.desc"></p>
+                                        </div>
+                                    </section>
+                                </div>
                             </div>
                         </div>
                     </article>
@@ -260,20 +262,25 @@ export default {
                     SeaBreathTitle: "바다숨 프로젝트",
                     SeaBreathDesc: "바다숨 프로젝트는 바다거북의 이동 경로를 따라 해양 쓰레기를 수거하며 해양 생태계 보전의 중요성을 알리는 GS리테일의 환경 보호 활동입니다.<br/><br/>해양 폐기물로 위협받는 바다거북과 바다의 생명을 지키기 위해 임직원과 지역사회가 함께 참여하는 현장 중심의 생태 보전 활동을 이어가고 있습니다. GS리테일은 바다와 공존하는 지속가능한 미래를 만들어가고자 합니다.",
                     EcoProjects: [
-                        {
-                            tit: "에코 크리에이터: 환경영상제작지원",
-                            img: require("@/assets/images/dummy/gsrsu020104_2.png"),
-                            desc: "환경재단과 협업하여 영상미디어 컨텐츠 분야의 ESG활동을 실천하고 청소년 및 일반 시민들의 환경 영상 제작 지원을 위해 멘토링, 전문가 강연 등 다양한 기회를 제공하고 있습니다.<br/>2020년 부터 현재까지 18억을 지원하여 460명의 에코크리에이터를 양성하였으며, 10만 명 이상의 지역사회 시민과 친환경 캠페인을 진행해 환경부 우수환경 프로그램으로도 지정되었습니다.<br/><br/>또한 서울시교육청과 연계한 전국 17개 시·도교육청에 환경교육을 진행하였고 서대문 자연사박물관 외 지역사회 환경활동에도 기여하였습니다."
-                        },
-                        {
-                            tit: "에코 소셜임팩트: 환경분야 제조 소셜벤처 창업지원",
-                            img: require("@/assets/images/dummy/gsrsu020104_3.png"),
-                            desc: "지속 가능한 에코제조 분야의 소셜벤처를 양성하기 위해 창업팀을 발굴하고 사업화를 위한 맞춤 성장을 지원하고 있습니다. 2018년부터 현재까지 20억 5천만원을 기부하고 65개의 5년 미만 창업기업에 맞춤형 창업교육, 시제품 제작 지원금, GS리테일 임직원 및 전문가 멘토링 코칭 등을 제공하여 소규모 에코 제조 기업의 브랜드 정체성 확립, 판로 확대 및 라인업 확장에 기여하였습니다.<br/><br/>또한 참여기업간 협업과 네트워킹, 멘토링 지원과 상품품평회 등을 통해 차별화된 GS리테일의 연계형 인큐베이팅 및 유통 판로의 개척을 지원하고 있습니다."
-                        },
+                        // {
+                        //     tit: "에코 크리에이터: 환경영상제작지원",
+                        //     img: require("@/assets/images/dummy/gsrsu020104_2.png"),
+                        //     desc: "환경재단과 협업하여 영상미디어 컨텐츠 분야의 ESG활동을 실천하고 청소년 및 일반 시민들의 환경 영상 제작 지원을 위해 멘토링, 전문가 강연 등 다양한 기회를 제공하고 있습니다.<br/>2020년 부터 현재까지 18억을 지원하여 460명의 에코크리에이터를 양성하였으며, 10만 명 이상의 지역사회 시민과 친환경 캠페인을 진행해 환경부 우수환경 프로그램으로도 지정되었습니다.<br/><br/>또한 서울시교육청과 연계한 전국 17개 시·도교육청에 환경교육을 진행하였고 서대문 자연사박물관 외 지역사회 환경활동에도 기여하였습니다."
+                        // },
+                        // {
+                        //     tit: "에코 소셜임팩트: 환경분야 제조 소셜벤처 창업지원",
+                        //     img: require("@/assets/images/dummy/gsrsu020104_3.png"),
+                        //     desc: "지속 가능한 에코제조 분야의 소셜벤처를 양성하기 위해 창업팀을 발굴하고 사업화를 위한 맞춤 성장을 지원하고 있습니다. 2018년부터 현재까지 20억 5천만원을 기부하고 65개의 5년 미만 창업기업에 맞춤형 창업교육, 시제품 제작 지원금, GS리테일 임직원 및 전문가 멘토링 코칭 등을 제공하여 소규모 에코 제조 기업의 브랜드 정체성 확립, 판로 확대 및 라인업 확장에 기여하였습니다.<br/><br/>또한 참여기업간 협업과 네트워킹, 멘토링 지원과 상품품평회 등을 통해 차별화된 GS리테일의 연계형 인큐베이팅 및 유통 판로의 개척을 지원하고 있습니다."
+                        // },
                         {
                             tit: "Upcycling 친구 캠페인 : 고객 참여 물품기부",
                             img: require("@/assets/images/dummy/gsrsu020104_4.png"),
                             desc: "GS리테일 임직원 및 고객이 직접 물품을 기부하면 업사이클링 환경교육키트로 제작하여 취약계층 아동에게 전달하는 ‘친환경으로 지구 구하기’ 캠페인을 진행하고 있습니다.<br/><br/>2024년 GS리테일은 총 1,704명으로부터 46,789개의 물품을 기부 받아 331명의 아동에게 환경교육 자료를 전달하였습니다. 이를 통해 소나무 967그루를 심은 효과를 창출했습니다."
+                        },
+                        {
+                            tit: "자원순환의 날 행사: 임직원 참여 폐가전 수거 캠페인",
+                            img: require("@/assets/images/dummy/gsrsu020104_5.png"),
+                            desc: "GS리테일은 2024년부터 매년 자원순환의 날을 맞아 임직원이 참여하는 폐가전 수거 캠페인을 진행하고 있습니다. 편의점 매장에서 발생되는 폐가전을 E-순환거버넌스가 수거하고, 이 과정에서 조성된 기금을 기부하는 자원순환 활동을 진행하고 있습니다.<br /><br /> 폐가전 수거캠페인을 통해 임직원을 대상으로 자원순환에 대한 내재화를 지원하고 있습니다.  "
                         }
                     ],
                     GreenValueChain: [
@@ -403,9 +410,9 @@ export default {
 <style scoped>
 /* 1. Layout & Utils */
 .main-container { width: 100%; position: relative; background-color: #ffffff; }
+.tab_wrap :deep(ul.type_02){margin-top:24px;}
 
-.tab_wrap + div {margin-top:80px;}
-
+.panel{margin-top:80px;}
 /* 2. Visual Area */
 .title_wrap { display: block; width: 100%; height: 480px; padding: 160px 0; background: url('/src/assets/images/dummy/gsrsu0201_bg.png') no-repeat center / cover; position: relative; }
 .page-title { color: #FFFFFF; font-size: 72px; font-weight: 700; letter-spacing: -1.44px; text-align: center; }
@@ -415,28 +422,31 @@ export default {
 h3 { color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
 h4 { color: #161616; font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; }
 p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
-.intro_view p { margin-top: 16px; font-size: 24px; font-weight: 400; line-height: 1.5; }
+/* .intro_view{margin-bottom:40px;} */
+.intro_view p {font-size: 24px; font-weight: 400; line-height: 1.5; }
 .climate_change .intro_view p { font-size: 32px; font-weight: 700; line-height: 1.3; }
 
 /* 4. Cards & Grid (시안 반영) */
 .image_wrap {max-width: 100%; display: flex; justify-content: center; background: #fff; border-radius: 20px; overflow: hidden; }
 .image_wrap img { width: 100%; height: 100%; object-fit: cover; }
 .strategy_section .title_area {margin-bottom:80px;}
-.strategy_section .image_wrap {width: clamp(100px, 100%, 752px); margin:0 auto; padding:60px 0;} 
-.system_section .title_area {margin-bottom:80px;}
+.strategy_section .image_wrap {width: clamp(100px, 100%, 752px); margin:0 auto; } 
+.system_section .title_area {margin-bottom:32px;}
 .system_section .image_wrap {width: clamp(100px, 100%, 1060px); margin:0 auto;}
+.intro_view{margin-bottom:80px;}
+
 
 /* Policy Card */
-.policy_card_box { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
+.policy_card_box {padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
 .policy_card_box h4 { font-size: 40px; }
 .policy_card_box .title_area p { font-size: 24px; }
-.policy_card_box ul { margin-top: 40px; list-style: none; }
+.policy_card_box ul { margin-top: 24px;  }
 .policy_card_box li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 24px; letter-spacing: -1%; }
 .policy_card_box li strong { color: #161616; font-size: 20px; font-weight: 700; white-space: nowrap; }
 .policy_card_box li span { color: #161616; font-size: 20px; line-height: 1.35; }
 
 /* Wide Card (바다숨) */
-.wide_card { display: flex; align-items: flex-start; gap: 40px; padding: 60px; background: #F8F8F8; border-radius: 20px; }
+.wide_card {margin-bottom:120px; padding: 60px; background: #F8F8F8; border-radius: 20px; display: flex; align-items: flex-start; gap: 40px;  }
 .wide_card .image_wrap { flex: 0 0 500px; height: 320px; }
 .wide_card .text_group { flex: 1; display: flex; flex-direction: column; gap: 40px; }
 .wide_card .btn_icon_arrow {width:180px;}
@@ -448,7 +458,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .btn_icon.btn_xl.after {width:fit-content}
 
 /* [추가] 그린 밸류체인 (제공해주신 style.css 기반 레이아웃) */
-.green_value_chain { width: 100%; margin-top: 80px; }
+
 .value_grid { display: flex; flex-wrap: wrap; gap: 80px 40px; }
 .value_item { width: calc(50% - 20px); display: flex; flex-direction: column; gap: 32px; }
 .mask_group { width: 100%; height: 360px; border-radius: 20px; overflow: hidden; background: #f8f8f8; }
@@ -463,6 +473,7 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 .green_store h4 {margin-top:32px;}
 
 /* Intro */
+.intro_section{margin-bottom:80px;}
 .main_frame { width: 100%; height: 340px; border-radius: 20px; overflow: hidden; }
 .main_frame img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -489,13 +500,11 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
 /* 그린 프로덕트 컨테이너 */
 .green_product { width: 100%; margin-top: 80px; }
 .green_product > ul {display: flex; flex-direction: column;}
-.green_product li.one_divide { display: flex; gap: 40px; align-items: flex-start; }
-.green_product li.one_divide .image_wrap { flex: 0 0 690px; height: auto; border-radius: 20px; overflow: hidden; }
-.green_product li.one_divide div { flex: 1; }
 .green_product li.two_divide {margin-top:80px; display: flex; gap: 40px; align-items: flex-start; }
 .green_product li.two_divide > div { flex: 1; display: flex; flex-direction: column; gap: 32px; }
+.green_product li.two_divide + li{margin-top:120px;}
 .green_product li.two_divide .image_wrap { width: 100%; height: 360px; border-radius: 20px; overflow: hidden; }
-.green_product > ul > li:last-of-type {margin-top:200px; margin-bottom:80px;}
+
 .green_product > ul > li:last-of-type h4 {margin-top:40px;}
 .green_product > ul li div h4 + p {margin-bottom:20px;}
 .green_product .image_wrap img { width: 100%; height: 100%; object-fit: cover;}
@@ -511,20 +520,25 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .key_features_grid li .card_content p { font-size: 14px !important; }
     .card_content { flex: 0 0 100%; height: auto; gap: 24px; }
     .system_detail_grid { flex-direction: column; }
-    .green_product li.one_divide,
+ 
     .green_product li.two_divide { flex-direction: column; gap: 32px; }
     .green_product li.one_divide .image_wrap, .green_product li.two_divide .image_wrap { flex: 0 0 auto; width: 100%; height: auto;}
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     .title_wrap {display:none;}
-    h3, h4, .policy_card_box h4, .climate_change .intro_view p { font-size: 28px !important; }
-    p, .policy_card_box p, .intro_view p { font-size: 18px !important; }
+    .tab_wrap :deep(ul.type_02){margin-top:16px;}
+    .panel{margin-top:60px;}
+    h3, h4, .policy_card_box h4, .climate_change .intro_view p { font-size: 2.4rem !important;}
+    .intro_view {margin-bottom:40px;}
+    p, .policy_card_box p, .intro_view p { font-size: 16px !important; }
     .title_wrap { height: auto; padding: 60px 20px; }
     .page-title { font-size: 40px; }
     .visual-sub { font-size: 20px; }
+    .intro_view{margin-bottom:40px;}
+    .intro_section{margin-bottom:40px;}
     .policy_card_box { padding: 30px 20px; }
     .policy_card_box li { flex-direction: column; }
-    .wide_card { flex-direction: column; padding: 30px 20px; }
+    .wide_card {margin-bottom:80px; flex-direction: column; padding: 30px 20px; }
     .wide_card .text_group button { width:100% }
     .wide_card .image_wrap { flex: 0 0 auto; width: 100%; height: auto; }
     .wide_card .btn_icon_arrow {width:100%;}
@@ -532,14 +546,13 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .grid_item { width: 100%; }
     .strategy_section .image_wrap, .system_section .image_wrap {width:100%; margin:0 auto;}
     .mb200 {margin-bottom:80px !important;}
-    .btn_icon.btn_xl.after {width:100%;}
-    .green_value_chain { margin-top: 40px; }
+    .btn_icon.btn_xl.after, .green_product .policy_card_box .ac .btn_icon_arrow.btn_xl { width: 100%; }
     .value_grid { gap: 40px; }
     .text_wrapper { font-size: 24px !important; }
     .desc_p { font-size: 16px !important; }
-    .value_item {width:100%;}
+    .value_item {width:100%; gap:16px;}
     .green_store { margin-top: 40px; }
-    .main_frame { height: 200px; }
+    .main_frame { height: 178px; }
     .feature_card strong { font-size: 20px; }
     .feature_card p { font-size: 16px; }
     .system_item h4 { font-size: 24px !important; }
@@ -548,5 +561,11 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .green_product p { font-size: 16px !important; }
     .green_product > ul > li:last-of-type, .green_product li.two_divide {margin-top:40px;}
     .modal_wrap .modal_container {padding:20px;}
+    .strategy_section .title_area{margin-bottom:32px;}
+    .policy_card_box li{margin-bottom:16px;}
+    .policy_card_box li strong{font-size: 1.6rem;line-height: 1.24}
+    .policy_card_box li span{font-size: 1.4rem;line-height: 1.4;}
+    .mask_group, .grid_item .image_wrap{height:auto;}
+    .sub_title_area{gap:0px;}
 }
 </style>
