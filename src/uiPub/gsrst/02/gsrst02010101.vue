@@ -3653,7 +3653,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li > .step_meta > .step_track > .num { width: 48px; height: 48px; flex-shrink: 0; color: #fff; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; background-color: #107af2; border-radius: 50%; position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 .sec_startup_process .process_timeline > li > .step_meta > .step_track > .step_line { width: 1px; min-height: 0; flex: 1 1 auto; background-color: #c4c4d0; }
 .sec_startup_process .process_timeline > li > article { width: 100%; max-width: 700px; flex: 0 1 700px; padding: 32px 40px; background-color: #fff; border: 1px solid #e5e5e9; border-radius: 20px; display: flex; align-items: flex-start; gap: 12px; transition: border-color 0.25s ease, box-shadow 0.25s ease; box-shadow: none; }
-.sec_startup_process .process_timeline > li > article > .icon { position:relative; width: 60px; height: 60px; flex-shrink: 0; background-color: #e7f2fe; border-radius: 50%; display: block; }
+.sec_startup_process .process_timeline > li > article > .icon { position:relative; width: 60px; height: 60px; flex-shrink: 0; background-color: #E7F2FE; border-radius: 50%; display: block; }
 .sec_startup_process .process_timeline > li > article > .icon:before { content:''; position: absolute; top: 50%; left: 50%; width: 32px; height: 32px; transform: translateX(-50%) translateY(-50%); }
 .sec_startup_process .process_timeline > li:nth-of-type(1) > article > .icon:before {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0201_01.png') no-repeat center / contain;}
 .sec_startup_process .process_timeline > li:nth-of-type(2) > article > .icon:before {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0201_02.png') no-repeat center / contain;}
@@ -3678,26 +3678,23 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li::before { width: 4px; height: 4px; background-color: #666; top: 9px; }
 .sec_startup_process .process_timeline > li:not([data-theme="dday"]) > article:hover { box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.25); }
 .sec_startup_process .process_timeline > li[data-theme="start"] > article:hover { border-color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="none"] > article:hover { border-color: #107AF2; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > article:hover { border-color: #15b874; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > article:hover { border-color: #11935d; }
+.sec_startup_process .process_timeline > li[data-theme="none"] > article:hover { border-color: #00D4EA; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > article:hover { border-color: #01C1EF; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > article:hover { border-color: #01B3F2; }
 .sec_startup_process .process_timeline > li[data-theme="d14"] > article:hover { border-color: #4095f5; }
-.sec_startup_process .process_timeline > li[data-theme="d14_7"] > article:hover { border-color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="d11"] > article:hover { border-color: #0d62c2; }
-.sec_startup_process .process_timeline > li[data-theme="d2_1"] > article:hover { border-color: #15b874; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > article:hover { border-color: #01A9F5; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > article:hover { border-color: #009EF7; }
+.sec_startup_process .process_timeline > li[data-theme="d2_1"] > article:hover { border-color: #008BFB; }
 .sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .day { color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .step_track > .num { background-color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="start"] > article > div > .lead { color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="none"] > .step_meta > .step_track > .num { background-color: #00D4EA; }
-.sec_startup_process .process_timeline > li[data-theme="none"] > article > .icon { background-color: #e8f8f1; }
 .sec_startup_process .process_timeline > li[data-theme="none"] > article > div > .lead { color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .day { color: #01C1EF; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .step_track > .num { background-color: #01C1EF; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > article > .icon { background-color: #e8f8f1; }
 .sec_startup_process .process_timeline > li[data-theme="d30"] > article > div > .lead { color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .day { color: #01B3F2; }
 .sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .step_track > .num { background-color: #01B3F2; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > article > .icon { background-color: #e8f8f1; }
 .sec_startup_process .process_timeline > li[data-theme="d29"] > article > div > .lead { color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .day { color: #01A9F5; }
 .sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .step_track > .num { background-color: #4095f5; }
@@ -3710,7 +3707,6 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li[data-theme="d11"] > article > div > .lead { color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .day { color: #008BFB; }
 .sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .step_track > .num { background-color: #008BFB; }
-.sec_startup_process .process_timeline > li[data-theme="d2_1"] > article > .icon { background-color: #e8f8f1; }
 .sec_startup_process .process_timeline > li[data-theme="d2_1"] > article > div > .lead { color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { color: #107AF2; font-size: 2.4rem; line-height: 1.35; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .step_track > .num { background-color: #107AF2; }

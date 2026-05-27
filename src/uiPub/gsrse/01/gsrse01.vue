@@ -563,7 +563,7 @@ export default {
                     MainTabs: [{ item: "GS25/GS THE FRESH/지원부문" }, { item: "GS SHOP" }],
                     SubTabs: [{ item: "공지사항" }, { item: "입점 안내" }, { item: "자주하는 질문 FAQ" }, { item: "상담 신청" }],
                     IntroTitle: "입점상담 신청 ",
-                    IntroDesc: "GS25/GS THE FRESH/지원부문 입점에 관한 상담을 신청하고 결과를 확인하세요.",
+                    IntroDesc: "GS25/GS THE FRESH/지원부문 입점에 관한 상담을 신청하시면 담당자가 확인 후 연락드립니다.",
                     GuideTitle: "입점 상담 가이드",
                     StepList: [{ title: "신규업체 등록" }, { title: "입점상담 신청" }, { title: "담당MD 상담" }, { title: "입점계약 진행" }],
                     NoticeList: [

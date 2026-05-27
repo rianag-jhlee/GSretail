@@ -430,7 +430,7 @@ export default {
 
                     // [Tab 1] 비전&전략
                     VisionTogetherAria: "Green Life Together — 환경·사회",
-                    VisionMainTitle: "Green Life Together.",
+                    VisionMainTitle: "Green Life Together",
                     VisionEnvLabel: "환경",
                     VisionEnvSub: "Green Together",
                     VisionSocLabel: "사회",
