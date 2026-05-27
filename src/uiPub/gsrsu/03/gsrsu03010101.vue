@@ -58,7 +58,7 @@
                                     <section class="intro_section">
                                         <h4 class="section_title">{{ t.WinWinIntro.Strategy.Title }}</h4>
                                         <div class="strategy_box">
-                                            <picture class="diagram_img_wrap mb40">
+                                            <picture class="diagram_img_wrap">
                                                 <source media="(max-width: 768px)" :srcset="t.WinWinIntro.Strategy.imgMo" />
                                                 <img :src="t.WinWinIntro.Strategy.img" :alt="t.WinWinIntro.Strategy.alt">
                                             </picture>
@@ -372,7 +372,7 @@
                                     <!-- gsrsu03010103 -->
                                     <div v-if="SubTabIdx2 === 0 && t.OwnerSupport" class="gs25_owner_support">
                                             
-                                        <p class="text_summary_sub" v-html="t.OwnerSupport.Summary"></p>
+                                        <p class="text_summary_sub" v-html="t.OwnerSupport.part_1.Summary"></p>
 
                                         <section class="support_item">
                                             <div class="div mb40">
@@ -476,11 +476,6 @@
                                         <h4 class="section_title_sub">{{ t.community.Goal.Title }}</h4>
                                     </div>
 
-                                    <picture class="diagram_img_wrap">
-                                        <source media="(max-width: 768px)" :srcset="t.community.Goal.DiagramImgMo" />
-                                        <img :src="t.community.Goal.DiagramImg" :alt="t.community.Goal.alt">
-                                    </picture>
-
                                     <ul class="card_grid owner_card_layout">
                                         <li v-for="(item, idx) in t.community.Goal.Items" :key="'goal-'+idx" class="strategy_card">
                                             <div class="card_head">
@@ -489,6 +484,11 @@
                                             <p class="p" style="font-weight:700; font-size:20px;" v-html="item.desc"></p>
                                         </li>
                                     </ul>
+
+                                    <picture class="diagram_img_wrap">
+                                        <source media="(max-width: 768px)" :srcset="t.community.Goal.DiagramImgMo" />
+                                        <img :src="t.community.Goal.DiagramImg" :alt="t.community.Goal.alt">
+                                    </picture>
                                 </section>
                             </div>
 
@@ -775,7 +775,7 @@
 
                                 <!-- 임직원 인권 목표 -->
                                 <section class="support_item">
-                                    <div class="div mb40 ac">
+                                    <div class="div mb40">
                                         <h4 class="section_title_sub">{{ t.protect.humanrights.Goals.Title }}</h4>
                                     </div>
                                     <ul class="card_grid owner_card_layout">
@@ -1816,9 +1816,10 @@ export default {
                         }
                     },
                     OwnerSupport: {
-                        Summary: "GS25 경영주님의 원활한 점포 운영을 위한 <br/>지원 제도 입니다.",
+                        Summary: "GS리테일은 경영주와의 공동의 발전을 위해<br/>아래와 같은 다양한 상생 제도를 운영하고 있습니다.",
                         // 모든 본문 콘텐츠를 part_1으로 통합
                         part_1: {
+                            Summary: "GS25 경영주님의 원활한 점포 운영을 위한<br/>지원 제도 입니다.",
                             MainTitle: "GS25 경영주 지원제도",
                             // 인센티브 카드 데이터
                             Features: [
@@ -2002,18 +2003,18 @@ export default {
                             // 주요 사업 리스트 (2열 그리드 활용)
                             Projects: [
                                 { 
-                                    tit: "저소득/학대 아동 및 가족 심리 지원", 
-                                    desc: "저소득, 학대 아동 및 가족을 위한 심리 치료와 전문가 교육으로 아동이 건강하게 자랄 수 있도록 노력합니다.",
+                                    tit: "무지개 상자 오케스트라", 
+                                    desc: "음악교육을 통해 취약계층 아동의 문화 격차 해소 및 정서적 지지와 자존감 향상을 위한 다양한 활동을 지원하고 있습니다.",
                                     img: require("@/assets/images/dummy/gsrsu030202_1.png")
                                 },
                                 { 
-                                    tit: "무지개 상자 오케스트라", 
-                                    desc: "악기와 음악 교육으로 정서 함양을 지원하고 있습니다.",
+                                    tit: "백혈병소아암환아지원", 
+                                    desc: "백혈병, 소아암 환아와 가족의 지원을 위해 “드림온“ 활동을 지원합니다. 치료비 지원(드림온 케어), 새출발 축하선물 지원(드림온 스텝), 환아와 가족을 위한 심리 정서 회복 지원(드림온데이) 소아암 환아의  치료, 회복, 희망의 여정을 함께 동행하는 회복 지원 활동입니다.",
                                     img: require("@/assets/images/dummy/gsrsu030202_2.png")
                                 },
                                 { 
-                                    tit: "몸짱 소방관 달력", 
-                                    desc: "몸짱 소방관들의 모습을 담은 달력판매 수익으로 화상 환자를 위한 치료비를 지원합니다.",
+                                    tit: "소방관 희망나눔 달력", 
+                                    desc: "건강한 소방관들의 모습을 담은 달력을 판매하고 수익금으로 화상 환자의 일상회복을 위한 치료비를 지원하고 있습니다.",
                                     img: require("@/assets/images/dummy/gsrsu030202_3.png")
                                 },
                                 { 
@@ -2084,10 +2085,9 @@ export default {
                                     { name: "등촌9종합사회복지관", img: require("@/assets/images/dummy/gsrsu030203_logo_1.png") },
                                     { name: "서울SOS어린이마을", img: require("@/assets/images/dummy/gsrsu030203_logo_10.png") },
                                     { name: "홀트일산복지타운/요양원", img: require("@/assets/images/dummy/gsrsu030203_logo_3.png") },
-                                    { name: "외 26개 복지관 등", img: require("@/assets/images/dummy/gsrsu030203_logo_4.png") },
+                                    { name: "", img: require("@/assets/images/dummy/gsrsu030203_logo_4.png") },
                                     { name: "푸드뱅크", img: require("@/assets/images/dummy/gsrsu030203_logo_5.png") },
                                     { name: "대한적십자사", img: require("@/assets/images/dummy/gsrsu030203_logo_6.png") },
-                                    { name: "thanksgive", img: require("@/assets/images/dummy/gsrsu030203_logo_7.png") },
                                     { name: "아름다운가게", img: require("@/assets/images/dummy/gsrsu030203_logo_8.png") },
                                     { name: "(주)한국백혈병소아암협회", img: require("@/assets/images/dummy/gsrsu030203_logo_9.png") }
                                 ]
@@ -2695,6 +2695,7 @@ export default {
     .btn_xl {font-weight:700;}
     .bullet_01 li {font-size:16px;}
     .index_box strong {margin-top:20px; font-size:2.8rem; font-weight:700; display:block;}
+    .strategy_box .diagram_img_wrap {margin:0;}
 
     /* 금융지원 */
     .text_summary_sub { margin-bottom:80px; font-size: 28px; font-weight: 700; color: #90909A;}
@@ -2722,7 +2723,7 @@ export default {
     .process_flow .step_unit:nth-child(4) .step_desc:before {background:url('@/assets/images/sub/icon_su03_01-02-04_80.png') 0 0;}
 
     /* 하단 카드 보정 */
-    .card_desc { font-size: 16px; color: #67676F; line-height: 1.5; margin-top: 8px; }
+    .card_desc { font-size: 16px; color: #67676F; line-height: 1.5; letter-spacing: -1%; margin-top: 8px; }
 
     /* 판로지원 전용 스타일 */
     .brand_grid { display: flex; gap: 20px; list-style: none; }
@@ -3131,6 +3132,7 @@ export default {
         .philosophy_box .btn_icon {width:90%;}.btn_icon_arrow.after:after
         .item_wrap div {width:200px; height:200px;}
         .item_wrap div p {font-size:16px !important;}
+        .tab_wrap.tabSlide.mb40 {margin-bottom:0 !important}
 
         .item_wrap div strong::before {width:40px; height:40px;}
         .item_wrap div strong {font-size:1.8rem;}
@@ -3140,7 +3142,11 @@ export default {
 
         .img_frame { width: 100%; flex: none; height: auto; aspect-ratio: 690/360; }
         .grid_column_2 { flex-direction: column; }
-        .intro_summary { margin-bottom:60px }
+        .intro_summary { margin-bottom:40px }
+        .strategy_box .diagram_img_wrap {margin:24px 0 40px;}
+        .market_support .support_item .text_area.mt40 {margin-top:16px !important;}
+        .market_support .support_item {gap:40px;}
+
         /* .brand_grid {gap:10px;} */
         /* 프로그램 그리드: 모바일 1열 */
         .program_item { width: 100%; }
@@ -3149,7 +3155,18 @@ export default {
         .policy_wrap table { min-width: 600px; }
         .policy_wrap th, .policy_wrap td { font-size: 16px; padding: 12px 16px; }
         .competency_support ul li {flex-direction:column;}
-        .dream_realization .type_bg {padding:32px 20px;}
+        .competency_support .policy_wrap col:first-child { width:100px !important; }
+        .competency_support .policy_wrap col:nth-child(2) { width:90px !important; }
+        .competency_support .policy_wrap table { min-width:0 }
+
+        .communication_support .support_item div.mb40 {margin-bottom:0 !important}
+        .communication_support .policy_wrap { margin-top:0; }
+        .communication_support .policy_wrap col:first-child { width:100px !important; }
+        .communication_support .policy_wrap col:nth-child(2) { width:90px !important; }
+        .communication_support .policy_wrap table { min-width:0 }
+        .dream_realization {margin-top:80px}
+        .dream_realization .type_bg {padding:0; background:#Fff;}
+        .dream_realization .effort_item .desc br {display:none}
         .talent_indicators .support_grid {gap:20;}
         .talent_indicators .support_grid {min-height: 100px;}
         
@@ -3159,7 +3176,12 @@ export default {
         :deep(.sub_item) p br {display:none;}
         .owner_card_layout {grid-auto-flow: column; grid-auto-columns: 350px; }
         .owner_card_layout .strategy_card {width:350px}
-        .gs25_owner_support .program_item, .broadcasting_development .brand_grid li { width: 100% !important; }
+        .supplychain_policy .policy_box_wrap { padding: 32px 20px; }
+        .supplychain_policy .policy_box_wrap .btn-wrap.mt60 { margin-top:24px !important }
+        .supplychain_policy .policy_box_wrap .btn-wrap.mt60 [class*="btn_"] { width:100% }
+        .gs25_owner_support .program_item { width: 100% !important; }
+        .human_rights_management .policy_box_wrap .btn-wrap.mt60 { margin-top:24px !important }
+        .human_rights_management .policy_box_wrap .btn-wrap [class*="btn_"] { width:100% }
         .human_rights_management .program_visual {height: auto; aspect-ratio: 16/11;}
         .human_rights_management .program_grid {gap: 32px 10px}
         .human_rights_management .program_grid .program_item {width: calc(50% - 5px);}
@@ -3176,12 +3198,16 @@ export default {
         .history_item { font-size: 16px; line-height: 1.4; height: auto; padding: 0  0 12px 0; }
         .history_year { font-size: 20px; line-height: 1.4; width: 50px; margin-left: 40px; }
         .history_details { margin-left:40px; }
-        .vulnerable_support .brand_grid,
-        .community_support_area .brand_grid,
+        .vulnerable_support .text_area.mt40,
+        .community_support_area .text_area.mt40,
+        .broadcasting_development .text_area.mt40,
+        .sharing_angel .text_area.mt40 {margin-top:16px !important;}
+        .community_support_area .program_grid,
+        .broadcasting_development .program_grid,
+        .sharing_angel .program_grid {gap:40px;}
         .broadcasting_development .brand_grid {gap:0px 20px; flex-wrap: nowrap; overflow-x: auto;}
-        .vulnerable_support .brand_grid li,
         .community_support_area .brand_grid li,
-        .broadcasting_development .brand_grid li {width:162px !important; flex:none}
+        .broadcasting_development .brand_grid li {width:calc(50% - 10px); margin-bottom:0 !important; flex:none}
         .vulnerable_support .brand_grid li .brand_img_box,
         .community_support_area .brand_grid li .brand_img_box,
         .broadcasting_development .brand_grid li .brand_img_box { height: 162px; }
@@ -3191,9 +3217,10 @@ export default {
         .vulnerable_support .brand_grid li .brand_name,
         .community_support_area .brand_grid li .brand_name,
         .broadcasting_development .brand_grid li .brand_name { text-align: center; }
-        .vulnerable_support .brand_grid li .brand_name strong,
         .community_support_area .brand_grid li .brand_name strong,
-        .vulnerable_support .brand_grid li .brand_name strong { font-size:16px; white-space: nowrap;}
+        .broadcasting_development .brand_grid li .brand_name strong { font-size:16px; white-space: nowrap;}
+        .vulnerable_support .brand_grid li .brand_name strong { word-break: keep-all; }
+        .community_support_area div.mb40 { margin-bottom:24px; }
         .human_rights_management .owner_card_layout {grid-template-columns: repeat(1, 1fr);}
         .talent_performance_data .policy_wrap table {min-width: 500px;}
         .talent_performance_data .intro_summary .GS {font-size: 16px;}
@@ -3267,6 +3294,8 @@ export default {
 
         .support_item + .support_item {margin-top:80px;}
         .finance_support h3 {margin-bottom:20px;}
+        .finance_support .card_grid {flex-wrap:wrap;}
+        .finance_support .card_grid .strategy_card {width:100%; padding:32px;}
         .text_summary_sub {margin-bottom:40px; font-size:1.6rem; line-height:124%;}
 
             /* 방송편성 */
