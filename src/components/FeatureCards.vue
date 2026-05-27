@@ -122,7 +122,7 @@ onUnmounted(() => {
 .feature_card_icon > img { width: 100%; height: 100%; object-fit: contain; }
 .feature_card_em { margin-bottom: 8px; color: #107af2; font-size: 1.8rem; font-weight: 700; font-style: normal; line-height: 1.5; letter-spacing: 0; display: block; }
 .feature_card_title { margin-bottom: 16px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-.feature_card_title:last-child { margin-bottom: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; white-space: pre-line; display: block; word-break: keep-all; }
+/* .feature_card_title:last-child { margin-bottom: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; white-space: pre-line; display: block; word-break: keep-all; } */
 .feature_card_desc_list { flex: none; }
 .feature_card_desc { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 /* .feature_card_item > .feature_card_desc { flex: 1; } */
@@ -133,7 +133,7 @@ onUnmounted(() => {
 @media (max-width: 768px) {
     .feature_card_list.no_swipe { flex-direction: column; }
     .feature_card_list.no_swipe .feature_card_item { flex: none; width: 100%; }
-    .feature_card_swiper { overflow: visible; }
+    .feature_card_swiper { overflow: hidden; }
     .feature_card_swiper :deep(.swiper-wrapper) { align-items: stretch; }
     .feature_card_swiper :deep(.swiper-slide) { width: 84vw; height: auto; display: flex; }
     .feature_card_swiper :deep(.swiper-slide) > .feature_card_item { flex: 1; width: 100%; min-height: 0; }
