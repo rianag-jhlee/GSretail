@@ -4384,7 +4384,7 @@ section + section { padding-top:120px; }
 .ft_acc_wrap :deep(dt > a.acc_tit_btn) { min-height: 80px; padding: 24px 20px; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: inline-flex; align-items: center; }
 .ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_num) { margin-right: 8px; padding:2px 9px; font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-.ft_sec_list { margin: 0; padding: 16px 32px 40px; display:flex; flex-direction:column; gap:32px; }
+/* .ft_sec_list { margin: 0; padding: 16px 32px 40px; display:flex; flex-direction:column; gap:32px; }
 .ft_sec_list > li { list-style: none; }
 .ft_sec_list > li > article { display: flex; flex-direction: column; gap: 16px; }
 .ft_sec_list > li > article > h4 { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
@@ -4407,9 +4407,8 @@ section + section { padding-top:120px; }
 .ft_kvs > dd > ul > li > ul { padding-left:24px; }
 .ft_kvs > dd > p { margin: 0; }
 .ft_note_ul { margin: 0; padding: 0; }
-.ft_note_ul > li { list-style: none; }
-/* 준법경영 > 자율준수 관리자 선임절차: width=height clamp로 원형 고정(PC~태블릿), 768 이하 세로 */
-/* 준법경영 > 자율준수 관리자 배너 (Figma 491:13873) */
+.ft_note_ul > li { list-style: none; } */
+
 .cp_manager_banner { width: 100%; min-height: 588px; padding:67px 130px; background: url(@/assets/images/dummy/gsrsu040101_10.png) no-repeat center center / cover; display: flex; justify-content: flex-end; align-items: center; }
 .cp_manager_banner figcaption { max-width:621px; margin-left:auto; }
 .cp_manager_banner figcaption > strong { font-size: 4rem;line-height: 1.3;letter-spacing: -0.01em; }
@@ -4465,7 +4464,7 @@ section + section { padding-top:120px; }
     :deep(.feature_cards_grid.ft_gd_cards.feature_card_list) { grid-template-columns: none; }
     .ft_acc_wrap :deep(dt > a.acc_tit_btn) { min-height: 64px; padding: 0 10px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .ft_acc_wrap :deep(dt > a.acc_tit_btn .acc_tit_txt) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0 }
-    .ft_sec_list { padding:0; }
+    /* .ft_sec_list { padding:0; }
     .ft_sec_list > li > article { gap: 20px; }
     .ft_sec_list > li > article > h4 { font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
     .ft_stack { padding-left: 0; }
@@ -4486,7 +4485,7 @@ section + section { padding-top:120px; }
     .ft_kvs > dt { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
     .ft_kvs > dd { margin-top:8px;font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
     .ft_kvs > dd > p { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
-    .ft_note_ul > li { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; }
+    .ft_note_ul > li { font-size: 1.6rem; line-height: 1.4; letter-spacing: 0; } */
     .ethics_target_list :deep(.num_info_icon) { width: 60px; height: 60px; }
     .ethics_target_list :deep(.num_info_title) { margin-bottom: 6px; }
     .ethics_target_list :deep(.num_info_num) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
