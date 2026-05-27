@@ -39,10 +39,10 @@
                             <li v-for="(item, idx) in t.esgFlowItems" :key="'flow-' + idx" class="esg_flow_step">
                                 <div class="esg_flow_card" :class="{ final: idx === t.esgFlowItems.length - 1 }">
                                     <header class="esg_flow_card_head">
-                                        <strong class="esg_flow_card_title">{{ item.title }}</strong>
+                                        <strong class="esg_flow_card_title" v-html="item.title"></strong>
                                         <p v-if="item.meta" class="esg_flow_card_meta">{{ item.meta }}</p>
                                     </header>
-                                    <p class="esg_flow_card_desc">{{ item.desc }}</p>
+                                    <p class="esg_flow_card_desc" v-html="item.desc"></p>
                                 </div>
                                 <div v-if="idx < t.esgFlowItems.length - 1" class="esg_flow_connector" aria-hidden="true">
                                     <p><span class="esg_flow_connector_text">{{ item.connectorLeft }}</span></p>
@@ -193,7 +193,7 @@
                                     <td class="ac">{{ item.item2 }}</td>
                                     <td class="ac">{{ item.item3 }}</td>
                                     <td class="ac">{{ item.item4 }}</td>
-                                    <td class="ac">{{ item.item5 }}</td>
+                                    <td class="ac bold">{{ item.item5 }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -348,7 +348,10 @@
                                 <tr v-for="row in sustainReportPastRowsWithThumbs" :key="row.key">
                                     <td>
                                         <figure>
-                                            <img :src="row.thumbSrc" :alt="row.coverAlt" width="196" height="140" />
+                                            <picture>
+                                                <source media="(max-width: 768px)" :srcset="row.thumbSrcMo" />
+                                                <img :src="row.thumbSrc" :alt="row.coverAlt" />
+                                            </picture>
                                         </figure>
                                     </td>
                                     <td>
@@ -380,12 +383,17 @@ import imgSr01 from "@/assets/images/dummy/gsrsu0101_01.png";
 import imgSr01Mo from "@/assets/images/dummy/mo/gsrsu0101_01_mo.png";
 import imgBnbpLogo from "@/assets/images/dummy/gsrsu0101_02.png";
 import imgSr03 from "@/assets/images/dummy/gsrsu0101_03.png";
-import imgSr04 from "@/assets/images/dummy/gsrsu0101_04.png";
+import imgSr04 from "@/assets/images/dummy/gsrsu0101_04.png"; 
 import imgSr05 from "@/assets/images/dummy/gsrsu0101_05.png";
-import imgSr06 from "@/assets/images/dummy/gsrsu0101_06.png";
+import imgSr06  from "@/assets/images/dummy/gsrsu0101_06.png";
+import imgSr03Mo from "@/assets/images/dummy/mo/gsrsu0101_03_mo.png";
+import imgSr04Mo from "@/assets/images/dummy/mo/gsrsu0101_04_mo.png"; 
+import imgSr05Mo from "@/assets/images/dummy/mo/gsrsu0101_05_mo.png";
+import imgSr06Mo  from "@/assets/images/dummy/mo/gsrsu0101_06_mo.png";
 import imgSr07 from "@/assets/images/dummy/gsrsu0101_07.png";
 
 const sustainReportThumbByRow = [imgSr03, imgSr04, imgSr05, imgSr06];
+const sustainReportThumbMoByRow = [imgSr03Mo, imgSr04Mo, imgSr05Mo, imgSr06Mo];
 
 export default {
     name: "gsrsu0101",
@@ -478,7 +486,7 @@ export default {
                         {
                             title: "ESG위원회",
                             meta: "이사회內",
-                            desc: "이사회 산하 ESG위원회를 통해 ESG 관련 주요 안건 승인",
+                            desc: "이사회 산하 ESG위원회를 통해 <br class='m_br'>ESG 관련 주요 안건 승인",
                             connectorLeft: "승인",
                             connectorRight: "보고",
                         },
@@ -504,7 +512,7 @@ export default {
                             connectorRight: "과제협의/실행점검",
                         },
                         {
-                            title: "BU별 ESG 자주연*",
+                            title: "BU별 ESG<br class='m_br'>자주연*",
                             meta: "",
                             desc: "ESG 과제 실행 조직 (과제 수립 및 실행)",
                             connectorLeft: "",
@@ -542,7 +550,7 @@ export default {
                             desc: "본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로\n용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.",
                         },
                         stab2: {
-                            title: "GS리테일의 상생 경영과 관련된 실적 자료들을 열람하실 수 있습니다.",
+                            title: "GS리테일의 상생 경영과 관련된 실적 자료를 열람하실 수 있습니다.",
                             desc: "본 자료는 이해 관계자 및 기관,주주들을 위해 공개된 GS리테일의 정보자산, 구성원들의 정보가 포함되어 있으므로\n용도 외 활용, 불법 유출시에는 법에 의해 처벌을 받으실 수 있습니다.",
                         },
                         stab3: {
@@ -718,6 +726,7 @@ export default {
             return rows.map((row, idx) => ({
                 ...row,
                 thumbSrc: sustainReportThumbByRow[idx] || sustainReportThumbByRow[0],
+                thumbSrcMo: sustainReportThumbMoByRow[idx] || sustainReportThumbMoByRow[0],
             }));
         },
     },
@@ -765,7 +774,7 @@ img{width:100%; height:auto; display:block; object-fit: cover;}
 .table_wrap th:not(:last-child),
 .table_wrap td:not(:last-child) { border-right: 1px solid #E5E5E9; }
 .table_wrap th { border-left: 0; border-right: 0; }
-.table_wrap td .link_title { font-size: 1.6rem; color: #161616; text-decoration: none; }
+.table_wrap td .link_title { font-size: 1.8rem; color: #161616; text-decoration: none; }
 .table_wrap td .link_title:hover { text-decoration: underline; }
 .table_wrap.type1 table td{border-left:0; border-right:0; }
 .table_wrap.type2 table td{ height: 70px; }
@@ -792,7 +801,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .sub_header_center p { text-align: center; }
 .tab_desc { padding: 20px 0; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; text-align: center; white-space: pre-line; }
 .sec_vision_together { margin-top: 80px; }
-.sec_vision_together > .img_wrapper{width:100%;max-width:1010px;margin: 0 auto; }
+.sec_vision_together > .img_wrapper{width:100%;max-width:100%;margin: 0 auto; }
 .esg_process { margin-top: 40px; }
 .esg_flow { margin-top: 0; }
 .esg_flow_card { width: 100%; min-height: 120px; padding: 20px; background: #E7F2FE; border-radius: 99px; display: flex; align-items: center; }
@@ -837,7 +846,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
 .panel_sustainability_report .table_wrap.type_report tbody td { height: auto; padding: 27px 20px; vertical-align: middle; border-bottom: 1px solid #D7D7DF; border-right: 0; }
 .panel_sustainability_report .table_wrap.type_report tbody td:last-child { border-right: 0; }
 .panel_sustainability_report .table_wrap.type_report tbody td figure { width: 196px; max-width: 100%; margin: 0 auto; }
-.panel_sustainability_report .table_wrap.type_report tbody td figure > img { border-radius: 12px; }
+.panel_sustainability_report .table_wrap.type_report tbody td figure img { width: 100%; display: block; border-radius: 12px; }
 .panel_sustainability_report .table_wrap.type_report tbody td article > h3 {font-weight: 700;font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
 .panel_sustainability_report .table_wrap.type_report tbody td article > p {margin-top: 12px;font-size: 1.8rem;line-height: 1.4;}
 .panel_sustainability_report .table_wrap.type_report tbody td:last-child {text-align: center;}
@@ -860,6 +869,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .title_wrap { display: none; }
     .page_title { font-size: 4rem; }
     .visual_sub { font-size: 2rem; }
+    .panel.panel_vision_strategy > section{margin-top:80px;}
     .sec_vision_together > .img_wrapper{max-width:100%;}
     .table_wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .table_wrap table { min-width: 960px; }
@@ -905,21 +915,21 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .table_wrap.type1 th { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
     .table_wrap.type1 td { padding: 0 10px; line-height: 1.4; word-break: keep-all; }
     .table_wrap td .link_title{font-size: 1.4rem;}
-    .sub_header h3 { font-size: 2.8rem; text-align: left; }
-    .sub_header p { margin-top: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sub_header h3 { font-size: 2.4rem; text-align: left; }
+    .sub_header p { margin-top: 16px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .sub_header_center h3 { text-align: left; }
     .sub_header_center p { text-align: left; }
     .tab_desc { padding: 0; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
-    .sec_vision_together { margin-top: 56px; }
+    .sec_vision_together { margin-top: 50px; }
     .esg_process { margin-top: 28px; }
-    .esg_flow_card { min-height: 0; padding: 18px 16px; border-radius: 20px; flex-direction: column; align-items: flex-start; }
-    .esg_flow_card_head { width: 100%; min-height: 0; padding: 16px; border-radius: 14px; align-items: flex-start; text-align: left; }
-    .esg_flow_card_title { font-size: 1.8rem; line-height: 1.35; }
-    .esg_flow_card_meta { margin-top: 2px; font-size: 1.4rem; }
-    .esg_flow_card_desc { margin-top: 14px; margin-left: 0; font-size: 1.6rem; line-height: 1.5; }
-    .esg_flow_connector { padding: 14px 8px 18px; gap: 10px; }
+    .esg_flow_card { min-height: 102px; padding: 16px;  gap:16px;}
+    .esg_flow_card_head { width: 120px; min-height: 0; padding: 15px; text-align: center;}
+    .esg_flow_card_title { font-size: 1.4rem; line-height: 1.4; }
+    .esg_flow_card_meta { margin-top: 4px; font-size: 1.2rem;  line-height: 1.2;}
+    .esg_flow_card_desc {  margin-left: 0; font-size: 1.3rem; line-height: 1.4; }
+    .esg_flow_connector { padding: 12px 0; gap: 10px; }
     .esg_flow_connector_text { font-size: 1.4rem; line-height: 1.4; }
-    .esg_flow_note { padding: 16px 0 0 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .esg_flow_note { padding: 16px 0 0 24px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .esg_committee_table thead th { height: 56px; padding: 0 24px; font-size: 1.6rem; white-space: nowrap; }
     .esg_committee_table tbody td { padding: 6px; font-size: 1.4rem; line-height: 1.5; letter-spacing: -0.01em; }
     .esg_committee_table tbody tr:first-child td { padding-top: 18px; }
