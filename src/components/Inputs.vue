@@ -1,6 +1,6 @@
 <template>
     <div class="input_wrap" :class="[wrapperTypeClass, $attrs.class]" :style="$attrs.style">
-        <label v-if="isCheckType" :class="['check', { check_ani: isswitch }]">
+        <label v-if="isCheckType" :class="['check', { check_ani: isswitch, is_checked: isChecked }]">
             <input :id="id" :name="name" :type="type" :value="value" v-model="model" :disabled="isDisabled" />
             <em class="label">{{ text }}</em>
         </label>
@@ -67,6 +67,14 @@ export default {
         },
         isPassword() { return this.type === "password"; },
         isCheckType() { return this.type === "checkbox" || this.type === "radio"; },
+        isChecked() {
+            if (!this.isCheckType) return false;
+            if (this.type === "radio") return this.model === this.value;
+            if (Array.isArray(this.model)) return this.model.includes(this.value);
+            if (typeof this.model === "boolean") return this.model;
+            if (this.value !== null) return this.model === this.value;
+            return Boolean(this.model);
+        },
         currentType() {
             if (!this.isPassword) return this.type;
             return this.showPassword ? "text" : "password";
