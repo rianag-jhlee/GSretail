@@ -18,8 +18,8 @@
                 <div class="cont_inner">
                     <h3>{{ t.SubTitle }}</h3>
                     <div>
-                        <p>{{ t.SubContent_1 }}</p>
-                        <p v-html="t.SubContent_2"></p>
+                        <p v-html="t.SubContent_1"></p>
+                        <!-- <p v-html="t.SubContent_2"></p> -->
                         <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a><!-- 26.05.12 Edit 이종환 : 클래스 추가 -->
                     </div>
                     <ul>
@@ -31,13 +31,13 @@
                 </div>
             </div>
 
-            <div class="cont_inner">
+            <!-- <div class="cont_inner"> -->
                 <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
                 <div class="bottom_btns">
                     <button class="btn_back" @click="handleBack">{{ t.ListBack }}</button>
                 </div>
                 <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
-            </div>
+            <!-- </div> -->
         </section>
     </div>
 </template>
@@ -63,9 +63,9 @@ export default {
                     },
                     HopageLink: `https://www.gsrbr.com/`,
                     HopageText: `홈페이지`,
-                    SubTitle: `브랜드 소개`,
-                    SubContent_1: `결제, 교통, 포인트 적립을 하나의 카드로 간편하게. `,
-                    SubContent_2: `다양한 결제 수단과 결합된 팝카드만의 차별화된 혜택으로 더 크게 적립하고,<br/> 더 합리적으로 소비하세요.`,
+                    SubTitle: `멤버십팝카드 소개`,
+                    SubContent_1: `GS ALL 멤버십(GS ALL 포인트)카드와 팝카드가 결합되어 GS25, GS THE FRESH에서 결제와 동시에<br/> 포인트가 적립되고 800여 온라인 사용처(쇼핑, 게임 등)에서 결제가<br/> 가능한 혜택이 많은 선불카드입니다.<br/> (교통기능은 없으며, 회원등록을 하셔야 적립된 포인트 사용이 가능합니다.) `,
+                    // SubContent_2: `다양한 결제 수단과 결합된 팝카드만의 차별화된 혜택으로 더 크게 적립하고,<br/> 더 합리적으로 소비하세요.`,
                     Bi: {
                         txt: `BI 로고`,
                         img: require("@/assets/images/dummy/gsrbr07_bi.png"),
@@ -114,7 +114,7 @@ h4 {margin-bottom:40px; font-size:32px;}
 .text_box span {margin-bottom:10px; color:#fff; font-size:72px; font-weight:700; display: block;  }
 
 /* body_wrap Section */
-.body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
+.body_wrap .cont_area {padding:10.41% 0; background:#F8F8F8;}
 .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
 .body_wrap .cont_area .cont_inner ul {margin-bottom:40px; padding:50px; background:#fff; border-radius:12px;}
 .body_wrap .cont_area .cont_inner h3 + div {margin-bottom:60px; position:relative;}
@@ -129,7 +129,7 @@ ul li strong br {display:none;}
 
 
 /* Bottom Buttons */
-.bottom_btns { width: 100%; margin-top: 100px; text-align: left;}
+.bottom_btns { max-width: 1460px; margin: 100px auto 0; padding:0 20px; text-align: left;}
 
 @media screen and (max-width: 1024px) {
     .body_wrap .cont_area {padding:10.41% 20px;}
@@ -151,7 +151,7 @@ ul li strong br {display:none;}
     .body_wrap .cont_area .cont_inner h3 + div {margin-bottom:80px;}
     .body_wrap .cont_area .cont_inner h3 + div p {font-size:16px; font-weight:400; line-height:1.3;}
     .body_wrap .cont_area :deep(.cont_inner) h3 + div p br {display:none;}
-    .body_wrap .cont_area .cont_inner h3 + div a {right:auto; left:0; bottom:-40px;}
+    .body_wrap .cont_area .cont_inner h3 + div a {font-size:1.4rem; right:auto; left:0; bottom:-40px;}
     ul li strong {font-size:16px;}
     ul li strong br {display:block !important;}
     .btn_list_back span {font-size:16px;}

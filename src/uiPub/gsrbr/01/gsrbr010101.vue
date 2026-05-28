@@ -3030,7 +3030,7 @@ const tab1 = computed(() => t.value.tabs[1]);
 const tab2 = computed(() => t.value.tabs[2]);
 const tab3 = computed(() => t.value.tabs[3]);
 
-const depth1ActiveIdx = ref(0); // 26.05.18 : 1depth 활성화탭 선언
+const depth1ActiveIdx = ref(2); // 26.05.18 : 1depth 활성화탭 선언
 const depth1Tabs = computed(() => t.value.nav.depth1);
 const depth2Tabs = computed(() => t.value.nav.depth2);
 const storeTabs = computed(() => t.value.nav.depth2Store);
@@ -3044,7 +3044,7 @@ const onGiftSwiper = (swiper) => {
     giftSwiperInst.value = swiper;
 };
 const serviceActiveTab  = ref(0);
-const deliveryActiveTab = ref(4);  // 26.05.18 : 매장/서비스 > 택배&픽업 3depth 활성화탭 선언
+const deliveryActiveTab = ref(0);  // 26.05.18 : 매장/서비스 > 택배&픽업 3depth 활성화탭 선언
 
 /* ── service_tab_wrap 슬라이드 (Tabs tabSlide 동일 방식) ── */
 function useTabSlide() {
@@ -3579,8 +3579,8 @@ button { background-color: #fff }
 .service_tab_item { background-color: transparent; border: none; cursor: pointer; border-radius: 12px; flex: 0 0 calc(100% / 8); aspect-ratio: 89 / 83; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px }
 
 /* 26.05.15 Edit 이종환 : 아아콘 적용으로 수정 (on / off 포지션은 동일) */
-.brand_panel .service_tab_icon { width: 32px; height: 32px; background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_off.png'); background-repeat:no-repeat; border-radius: 8px; display: block; flex-shrink: 0 ;}
-.brand_panel .service_tab_item.is_active .service_tab_icon { background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_on.png'); }
+.brand_panel .service_tab_icon { width: 48px; height: 48px; background-image:url('@/assets/images/sub/gsrbr010101/icon_pc_set_storetab_off.png'); background-repeat:no-repeat; border-radius: 8px; display: block; flex-shrink: 0 ;}
+.brand_panel .service_tab_item.is_active .service_tab_icon { background-image:url('@/assets/images/sub/gsrbr010101/icon_pc_set_storetab_on.png'); }
 
 .service_tab_label { color: #7c7c86; font-size: 1.8rem; font-weight: 700; line-height: 1.5; text-align: center; white-space: pre-line }
 .service_tab_item.is_active .service_tab_label { color: #107af2 }
@@ -3590,30 +3590,30 @@ button { background-color: #fff }
 .pop_card_item { overflow: hidden; display: flex; flex-direction: column }
 
 /* 매장/서비스 > 생활 서비스 탭 아이콘 */
-.pop_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-34px -24px;}
-.pop_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-134px -24px;}
-.pop_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-234px -24px;}
-.pop_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-334px -24px;}
-.pop_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-434px -24px;}
-.pop_panel .service_tab_list .service_tab_item:nth-child(6) .service_tab_icon {background-position:-534px -24px;}
-.pop_panel .service_tab_list .service_tab_item:nth-child(7) .service_tab_icon {background-position:-634px -24px;}
-.pop_panel .service_tab_list .service_tab_item:nth-child(8) .service_tab_icon {background-position:-734px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-65px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-243px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-421px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-599px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-777px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(6) .service_tab_icon {background-position:-955px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(7) .service_tab_icon {background-position:-1133px -24px;}
+.pop_panel .service_tab_list .service_tab_item:nth-child(8) .service_tab_icon {background-position:-1311px -24px;}
 /* //26.05.15 Edit 이종환 : 아아콘 적용으로 수정 */
 
 /* 매장/서비스 > 택배&픽업 탭 아이콘 */
-.delivery_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-834px -24px;}
-.delivery_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-934px -24px;}
-.delivery_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-1034px -24px;}
-.delivery_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-1134px -24px;}
-.delivery_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-1234px -24px;}
+.delivery_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-1489px -24px;}
+.delivery_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-1667px -24px;}
+.delivery_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-1845px -24px;}
+.delivery_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-2023px -24px;}
+.delivery_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-2201px -24px;}
 
 /* 상생협력 > 운영지원제도 탭 아이콘 */
-.winwin_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-1434px -24px;}
-.winwin_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-1334px -24px;}
-.winwin_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-1534px -24px;}
-.winwin_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-1634px -24px;}
-.winwin_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-1734px -24px;}
-.winwin_panel .service_tab_list .service_tab_item:nth-child(6) .service_tab_icon {background-position:-1834px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-2379px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-2557px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-2735px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-2913px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-3091px -24px;}
+.winwin_panel .service_tab_list .service_tab_item:nth-child(6) .service_tab_icon {background-position:-3269px -24px;}
 
 
 /* step 아이콘 */
@@ -4111,7 +4111,6 @@ button { background-color: #fff }
   /* 26.05.15 Del 이종환 .brand_panel section { padding-bottom: 0 } */
   .service_tab_item { flex: 0 0 clamp(140px, 18.23vw, 175px); gap: 12px }
   .service_tab_item.is_active { background-color: #F8F8F8 }
-  .service_tab_icon { width: 40px; height: 40px }
   .service_tab_label { font-size: 1.6rem }
   .service_tab_wrap::after { content:''; width:clamp(64px, 8vw, 88px); height:100%; background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); position:absolute; top:0; right:0; pointer-events:none; z-index:1 }
   .pop_lnb { width: 160px }
@@ -4122,15 +4121,43 @@ button { background-color: #fff }
 }
 
 @media (max-width: 768px) {
-  .service_tab_wrap { margin-bottom: 40px }
-  .service_tab_wrap::after { content:''; width:clamp(24px, 8.53vw, 32px); height:100%; background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); position:absolute; top:0; right:0; pointer-events:none; z-index:1 }
-  /* .service_tab_list { padding: 0 20px } */
-  /* .service_tab_list::after { content:''; min-width:20px; flex-shrink:0 } */
-  .service_tab_item { gap: 10px }
-  .service_tab_item.is_active { background-color: #F8F8F8 }
-  .service_tab_item { flex: 0 0 clamp(100px, 26.67vw, 120px); aspect-ratio: 1 / 1.18 }
-  .service_tab_icon { width: 32px; height: 32px }
-  .service_tab_label { font-weight: 700; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0% }
+    .service_tab_wrap { margin-bottom: 40px }
+    .service_tab_wrap::after { content:''; width:clamp(24px, 8.53vw, 32px); height:100%; background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); position:absolute; top:0; right:0; pointer-events:none; z-index:1 }
+    /* .service_tab_list { padding: 0 20px } */
+    /* .service_tab_list::after { content:''; min-width:20px; flex-shrink:0 } */
+
+    .service_tab_item { gap: 10px }
+    .service_tab_item.is_active { background-color: #F8F8F8 }
+    .service_tab_item { flex: 0 0 clamp(100px, 26.67vw, 120px); aspect-ratio: 1 / 1.18 }
+    .brand_panel .service_tab_icon { width: 32px; height: 32px; background-image:url('@/assets/images/sub/gsrbr010101/icon_mo_set_storetab_off.png'); background-repeat:no-repeat; border-radius: 8px; display: block; flex-shrink: 0 ;}
+    .brand_panel .service_tab_item.is_active .service_tab_icon { background-image:url('@/assets/images/sub/gsrbr010101/icon_mo_set_storetab_on.png');}
+    .service_tab_label { font-weight: 700; font-size: 1.2rem; line-height: 1.2; letter-spacing: 0% }
+
+    /* 매장/서비스 > 생활 서비스 탭 아이콘 */
+    .pop_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-34px -24px;}
+    .pop_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-134px -24px;}
+    .pop_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-234px -24px;}
+    .pop_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-334px -24px;}
+    .pop_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-434px -24px;}
+    .pop_panel .service_tab_list .service_tab_item:nth-child(6) .service_tab_icon {background-position:-534px -24px;}
+    .pop_panel .service_tab_list .service_tab_item:nth-child(7) .service_tab_icon {background-position:-634px -24px;}
+    .pop_panel .service_tab_list .service_tab_item:nth-child(8) .service_tab_icon {background-position:-734px -24px;}
+    /* //26.05.15 Edit 이종환 : 아아콘 적용으로 수정 */
+
+    /* 매장/서비스 > 택배&픽업 탭 아이콘 */
+    .delivery_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-834px -24px;}
+    .delivery_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-934px -24px;}
+    .delivery_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-1034px -24px;}
+    .delivery_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-1134px -24px;}
+    .delivery_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-1234px -24px;}
+
+    /* 상생협력 > 운영지원제도 탭 아이콘 */
+    .winwin_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-1434px -24px;}
+    .winwin_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-1334px -24px;}
+    .winwin_panel .service_tab_list .service_tab_item:nth-child(3) .service_tab_icon {background-position:-1534px -24px;}
+    .winwin_panel .service_tab_list .service_tab_item:nth-child(4) .service_tab_icon {background-position:-1634px -24px;}
+    .winwin_panel .service_tab_list .service_tab_item:nth-child(5) .service_tab_icon {background-position:-1734px -24px;}
+    .winwin_panel .service_tab_list .service_tab_item:nth-child(6) .service_tab_icon {background-position:-1834px -24px;}
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {

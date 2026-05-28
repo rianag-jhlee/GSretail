@@ -5010,8 +5010,8 @@ button { background-color: #fff }
 .service_tab_item { background-color: transparent; border: none; cursor: pointer; border-radius: 12px; flex: 0 0 calc(100% / 8); aspect-ratio: 89 / 83; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px }
 
 /* 26.05.15 Edit 이종환 : 아아콘 적용으로 수정 (on / off 포지션은 동일) */
-.brand_panel .service_tab_icon { width: 32px; height: 32px; background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_off.png'); background-repeat:no-repeat; border-radius: 8px; display: block; flex-shrink: 0 ;}
-.brand_panel .service_tab_item.is_active .service_tab_icon { background-image:url('@/assets/images/sub/gsrbr010101/icon_set_storetab_on.png'); }
+.brand_panel .service_tab_icon { width: 32px; height: 32px; background-image:url('@/assets/images/sub/gsrbr010101/icon_pc_set_storetab_off.png'); background-repeat:no-repeat; border-radius: 8px; display: block; flex-shrink: 0 ;}
+.brand_panel .service_tab_item.is_active .service_tab_icon { background-image:url('@/assets/images/sub/gsrbr010101/icon_pc_set_storetab_on.png'); }
 
 .service_tab_label { color: #7c7c86; font-size: 1.8rem; font-weight: 700; line-height: 1.5; text-align: center; white-space: pre-line }
 .service_tab_item.is_active .service_tab_label { color: #107af2 }
