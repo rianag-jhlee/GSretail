@@ -1,15 +1,18 @@
 <template>
     <div class="file_upload">
-        <!-- PC: 드래그앤드롭 영역 -->
+        <!-- PC: 드래그앤드롭 영역 - 파일 없을 때만 -->
+        <!-- 파일추가 후 파일추가 영역 삭제 v-if="!files.length" -->
         <div
             class="drop_zone"
-            :class="{ 'is-dragging': isDragging }"
+            :class="{ 'is_dragging': isDragging }"
             @dragover.prevent="onDragOver"
             @dragleave="onDragLeave"
             @drop.prevent="onDrop"
             @click="triggerInput"
         >
-            <span class="drop_zone_icon" aria-hidden="true"><img src="@/assets/images/sub/icon_file_32.png" alt="file"></span>
+            <span class="drop_zone_icon" aria-hidden="true">
+                <img src="@/assets/images/sub/icon_file_32.png" alt="file">
+            </span>
             <p class="drop_zone_text" v-html="t.dropZoneDesc"></p>
             <button type="button" class="btn_mid btn_icon_more after" @click.stop="triggerInput">
                 {{ t.dropZoneBtnLabel }}
@@ -17,8 +20,8 @@
         </div>
 
         <!-- Mobile: 파일찾기 인풋 스타일 -->
-        <div class="file_input_row" @click="triggerInput">
-            <span class="file_input_row_name">{{ fileName }}</span>
+        <div class="file_input_row" :class="{ has_error: showSizeError }" @click="triggerInput">
+            <span class="file_input_row_name">{{ t.emptyMsg }}</span>
             <button type="button" class="btn_small" @click.stop="triggerInput">{{ t.dropZoneBtnLabel2 }}</button>
         </div>
 
@@ -32,20 +35,30 @@
             @change="onFileChange"
         />
 
+
         <!-- 선택된 파일 목록 -->
-        <ul v-if="files.length" class="file_list">
-            <li v-for="(file, i) in files" :key="i" class="file_list_item">
-                <span class="file_list_name">{{ file.name }}</span>
-                <span class="file_list_size">{{ formatSize(file.size) }}</span>
-                <button type="button" class="file_list_remove" @click="removeFile(i)">✕</button>
-            </li>
-        </ul>
+        <div v-if="files.length" class="file_list_wrap">
+            <div v-if="files.length" class="file_list_inner">
+                <div class="file_list_header">
+                    <span class="file_count"><em>{{ files.length }}</em>/{{ maxCount }}{{ t.countUnit }}</span>
+                    <button type="button" class="btn_clear" @click="clearAll">
+                        <span class="icon_x" aria-hidden="true">✕</span> {{ t.clearAll }}
+                    </button>
+                </div>
 
-        <!-- 용량 초과 알림 -->
-        <p v-if="showSizeError" class="file_error_msg">{{ t.overSizeMsg }}</p>
-
-        <!-- 파일 없음 안내 
-        <p v-else class="file_empty_msg">{{ t.emptyMsg }}</p>-->
+                <ul class="file_list">
+                    <li v-for="(file, i) in files" :key="i" class="file_list_item">
+                        <span class="file_list_name">
+                            {{ file.name }}
+                            <em class="file_meta">[{{ getExt(file.name) }}, {{ formatSize(file.size) }}]</em>
+                        </span>
+                        <button type="button" class="file_list_remove" @click="removeFile(i)" :aria-label="t.removeLabel">✕</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- 용량 초과 메시지 
+        <p v-if="showSizeError" class="file_error_msg">{{ t.overSizeMsg }}</p>-->
     </div>
 </template>
 
@@ -56,7 +69,8 @@ export default {
         lang: { type: String, default: "ko" },
         multiple: { type: Boolean, default: true },
         accept: { type: String, default: '*' },
-        maxSize: { type: Number, default: 20 * 1024 * 1024 } // 20MB
+        maxSize: { type: Number, default: 20 * 1024 * 1024 },
+        maxCount: { type: Number, default: 10 }
     },
 
     emits: ['update:files'],
@@ -65,28 +79,26 @@ export default {
         return {
             files: [],
             isDragging: false,
+            showSizeError: false,
             langData: {
                 ko: {
                     dropZoneDesc: "'파일추가' 버튼을 클릭하거나 파일을 마우스로 끌어서 등록 해 주세요.",
                     dropZoneBtnLabel: "파일추가",
                     dropZoneBtnLabel2: "파일찾기",
-                    emptyMsg: "선택된 파일이 없습니다.",
+                    emptyMsg: "선택된 파일 없음",
+                    countUnit: "개",
+                    clearAll: "전체파일 삭제",
+                    removeLabel: "파일 삭제",
                     overSizeMsg: "* 파일 총 용량이 20MB를 초과합니다. 파일을 삭제 후 다시 업로드해 주세요."
                 }
             },
         };
     },
+
     computed: {
         t() { return this.langData[this.lang] || this.langData.ko; },
-        fileName() {
-            return this.files.length
-                ? this.files.map(f => f.name).join(', ')
-                : '선택된 파일 없음';
-        },
-        totalSize() {
-            return this.files.reduce((sum, f) => sum + f.size, 0);
-        },
     },
+
     methods: {
         triggerInput() {
             this.$refs.inputRef?.click();
@@ -96,7 +108,6 @@ export default {
             const arr = Array.from(newFiles);
             const merged = this.multiple ? [...this.files, ...arr] : arr;
             const totalSize = merged.reduce((sum, f) => sum + f.size, 0);
-
             this.files = merged;
             this.showSizeError = totalSize > this.maxSize;
             this.$emit('update:files', this.files);
@@ -104,6 +115,7 @@ export default {
 
         onFileChange(e) {
             this.addFiles(e.target.files);
+            e.target.value = '';
         },
 
         onDragOver() { this.isDragging = true; },
@@ -120,100 +132,237 @@ export default {
             this.$emit('update:files', this.files);
         },
 
+        clearAll() {
+            this.files = [];
+            this.showSizeError = false;
+            this.$emit('update:files', this.files);
+        },
+
+        getExt(name) {
+            const parts = name.split('.');
+            return parts.length > 1 ? parts.pop().toUpperCase() : '파일';
+        },
+
         formatSize(bytes) {
-            if (bytes < 1024) return bytes + ' B';
-            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+            if (bytes < 1024) return bytes + 'B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + 'KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + 'MB';
         }
     }
 };
 </script>
 
 <style scoped>
-.hidden_input { display: none; }
-.file_upload { min-width: 600px; }
+.hidden_input { 
+    display: none; 
+}
+.file_upload { 
+    width: 100%; 
+}
 
+/* ========================
+   PC: 드래그앤드롭 영역
+======================== */
 .drop_zone {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    width: 600px;
     padding: 53px 20px;
     border: 1px solid #E5E5E9;
     border-radius: 16px;
     background: #F8F8F8;
     cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
 }
-.drop_zone.is_dragging { border-color: #666; background: #f0f0f0; }
-.drop_zone_icon svg { width: 40px; height: 40px; color: #aaa; }
-.drop_zone_text { font-size: 18px; color: #4C4C53; text-align: center; }
-.btn_icon_more { margin-top: 16px; background: #D7D7DF; }
+.drop_zone:hover {
+    background: #E7F2FE;
+}
+.drop_zone.is_dragging { 
+    border-color: #666; 
+    background: #f0f0f0; 
+}
+.drop_zone_text { 
+    font-size: 18px; 
+    color: #4C4C53; 
+    text-align: center; 
+}
+.btn_icon_more { 
+    margin-top: 16px; 
+    background: #D7D7DF; 
+}
 .btn_icon_more:after {
-    width: 16px; height: 16px;
+    width: 16px; 
+    height: 16px;
     background: url('@/assets/images/common/icon_set_16.png') no-repeat -336px -13px;
 }
 
+/* ========================
+   Mobile: 파일찾기 인풋
+======================== */
 .file_input_row {
     display: none;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 12px 10px 16px;
-    border: 1.5px solid #ccc;
-    border-radius: 8px;
+    padding: 18px 16px;
+    border: 1px solid #E5E5E9;
+    border-radius: 12px;
     background: #fff;
     cursor: pointer;
 }
+.file_input_row.has_error {
+    border-color: #fb6432;
+    background: #fff5f2;
+}
 .file_input_row_name {
-    font-size: 14px; color: #aaa; flex: 1;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size: 16px; 
+    color: #9999a6; 
+    flex: 1;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
 }
 .btn_small {
-    flex-shrink: 0; height: 28px; border-radius: 6px;
-    font-size: 14px; color: #161616; cursor: pointer;
+    flex-shrink: 0; 
+    padding: 6px 16px; 
+    height: 36px;
+    border: 1px solid #c4c4d0; 
+    border-radius: 8px;
+    font-size: 14px; 
+    color: #161616; 
+    cursor: pointer; 
+    background: #fff;
 }
 
-/* 파일 없음 안내 */
-.file_empty_msg {
-    margin-top: 12px;
-    font-size: 14px;
-    color: #9999a6;
-    text-align: center;
-    padding: 16px 0;
-}
+/* ========================
+   용량 초과 메시지
+======================== */
+.file_error_msg { 
+    margin-top: 8px; 
+    font-size: 13px; 
+    color: #fb6432; }
 
-/* 용량 초과 알림 */
-.file_error_msg {
+/* ========================
+   파일 목록
+======================== */
+.file_list_wrap { 
+    width: 600px;
+    height: 240px;
     margin-top: 8px;
-    font-size: 13px;
-    color: #fb6432;
+    padding: 16px;
+    border: 1px solid #E5E5E9;
+    border-radius: 16px;
+    background: #F8F8F8;
+}
+.file_list_inner {
+    height: 208px;
+    overflow-y: auto;
+}
+.file_list_header {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    margin-bottom: 8px; 
+    padding: 0 4px;
+}
+.file_count { 
+    font-size: 14px; 
+    color: #1d1d1d; }
+.file_count em { 
+    font-style: normal; 
+    color: #107AF2; 
+}
+.btn_clear {
+    display: flex; 
+    align-items: center; 
+    gap: 4px;
+    border: none; 
+    background: none; 
+    font-size: 14px;
+    color: #161616; 
+    cursor: pointer; 
+    padding: 0;
+}
+.btn_clear:hover { 
+    color: #161616;
+ }
+.icon_x { 
+    margin-right: 5px;
+    font-size: 14px;
+    color: #242428;
 }
 
-/* 파일 목록 */
-.file_list {
-    margin-top: 12px; list-style: none; padding: 0;
-    display: flex; flex-direction: column; gap: 6px;
+.file_list { 
+    list-style: none; 
+    padding: 0; 
+    display: flex; 
+    flex-direction: 
+    column; gap: 6px; 
 }
 .file_list_item {
-    display: flex; align-items: center; gap: 8px;
-    padding: 8px 12px; border: 1px solid #e5e5e5;
-    border-radius: 6px; background: #fff; font-size: 13px;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 8px; 
+    padding: 16px 20px;
+    border: 1px solid #E5E5E9; 
+    border-radius: 12px;
+    background: #fff; 
+    font-size: 15px;
 }
 .file_list_name {
-    flex: 1; overflow: hidden; text-overflow: ellipsis;
-    white-space: nowrap; color: #333;
+    flex: 1; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    color: #161616;
+    display: flex; 
+    align-items: center; 
+    gap: 6px;
 }
-.file_list_size { color: #999; white-space: nowrap; }
-.file_list_size.over { color: #fb6432; font-weight: 700; }
 .file_list_remove {
-    border: none; background: none; color: #aaa;
-    cursor: pointer; font-size: 12px; padding: 2px 4px; line-height: 1;
+    flex-shrink: 0; 
+    border: none; 
+    background: none;
+    color: #242428; 
+    cursor: pointer; 
+    font-size: 20px; 
+    padding: 0; 
+    line-height: 1;
 }
-.file_list_remove:hover { color: #333; }
+.file_list_remove:hover { 
+    color: #161616; 
+}
 
+/* ========================
+   반응형
+======================== */
 @media (max-width: 768px) {
-    .drop_zone { display: none; }
-    .file_input_row { display: flex; }
-    .file_upload { min-width: 100%; }
+    .drop_zone { 
+        display: none; 
+    }
+    .file_input_row { 
+        display: flex; 
+    }
+    .file_list_wrap { 
+        margin-top: 12px; 
+    }
+    .file_list_wrap { 
+        width: 100%;
+        height: auto;
+        margin-top: 8px;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: none;
+    }
+    .file_list_inner {
+        height: auto;
+    }
+    .file_list_item { 
+        padding: 14px 16px; 
+    }
 }
 </style>
