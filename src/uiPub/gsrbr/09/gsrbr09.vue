@@ -66,7 +66,7 @@ export default {
                         img: require("@/assets/images/dummy/gsrbr09.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr09_mo.png"),
                         alt: "GS THE FRESH 메인 비주얼",
-                        subContent_1: "가격 이상의 가치,",
+                        subContent_1: "가격 그 이상의 가치,",
                         subContent_2: "리얼 프라이스",
                     },
                     SubTitle: `브랜드 소개`,
@@ -153,7 +153,9 @@ export default {
     .body_wrap .cont_inner:nth-of-type(2) ul li img {width:100%; display:block;}
     .bi_section {padding:30px;}
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
+    .visual_img{height:100vh;}
+    .visual_img img{height:100%; object-position: center; }
     .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .body_wrap .cont_area {padding:60px 0px;}
     .bi_section {padding:30px;}
