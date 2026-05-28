@@ -421,7 +421,7 @@
                 
                 
             <!-- 상담 및 신청 (activeD1 === 4) -->
-            <section class="sec_consult panel"  v-show="activeD1 === 4">
+            <section class="sec_consult panel" v-show="activeD1 === 4 && !showConsultApplyPage">
                 <header class="brand_panel_title flex">
                     <div>
                         <h2 v-html="t.consult.panelTitle"></h2>
@@ -483,7 +483,7 @@
                             <p class="consult_note">{{ card.note }}</p>
                         </div>
                         <div class="consult_foot">
-                            <Buttons btn-class="btn_big border btn_icon_arrow after" data-popid="gsrst010301" data-type="lg" data-cont="gsrst010301" @click.prevent="openModal">{{ t.consult.applyButtonLabel }}</Buttons>
+                            <Buttons btn-class="btn_big border btn_icon_arrow after" @click.prevent="showConsultApplyPage = true">{{ t.consult.applyButtonLabel }}</Buttons>
                         </div>
                     </li>
                 </ul>
@@ -493,6 +493,196 @@
                     <Buttons btn-class="btn_mid border btn_icon_arrow after">{{ t.consult.infoBannerButtonLabel }}</Buttons>
                 </div>
             </section>
+
+            <section class="sec_consult_apply panel" v-show="activeD1 === 4 && showConsultApplyPage">
+                <!-- 컨설턴트와 1:1 상담 -->
+                <div class="consult_box">
+                    <div class="consult_intro">
+                        <div class="consult_img_wrap"></div>
+                        <div class="consult_intro_txt">
+                            <h3 v-html="t.consultBox.title"></h3>
+                            <p v-html="t.consultBox.desc"></p>
+                        </div>
+                    </div>
+                    <div class="consult_selector_wrap">
+                        <SelectBox :options="[t.consultBox.consultantName]" v-model="consultForm.consultantName" :initMsg="t.consultBox.consultantName" />
+                    </div>
+                </div>
+                <!-- 점포 소유 여부 선택 -->
+                <div class="middle_bts_wrap">
+                    <button :class="{ active: hasStore === true }" @click="hasStore = true">{{ t.storeButtons.hasStore }}</button>
+                    <button :class="{ active: hasStore === false }" @click="hasStore = false">{{ t.storeButtons.noStore }}</button>
+                </div>
+                <!-- 개인정보 동의 -->
+                <ConsentInfoBox title="개인정보 수집·이용 동의" :items="t.consent.items" :notice-html="t.consent.noticeHtml" />
+                <!-- 고객정보 폼 -->
+                <div class="apply_form">
+                    <div class="form_head">
+                        <h3 class="form_head_title">{{ t.customerForm.title }}</h3>
+                        <span class="form_required_note">{{ t.requiredNote }}</span>
+                    </div>
+                    <div class="form_body">
+                        <div class="form_row form_row_name">
+                            <div class="form_label">{{ t.customerForm.nameLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field">
+                                <Inputs type="text" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.customerForm.emailLabel }}</div>
+                            <div class="form_field form_field_email">
+                                <Inputs type="text" v-model="consultForm.emailId" />
+                                <span class="form_sep">@</span>
+                                <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" :placeholder="t.customerForm.emailPlaceholder" />
+                                <Inputs v-else type="text" :model-value="consultForm.emailDomain" :is-readonly="true" />
+                                <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.customerForm.phoneLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_phone">
+                                <SelectBox :options="phoneOptions" v-model="consultForm.phone1" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone2" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone3" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label" v-html="t.customerForm.addressLabel"></div>
+                            <div class="form_field form_field_region">
+                                <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" :initMsg="t.customerForm.sidoInitMsg" @update:modelValue="consultForm.regionSigungu = ''" />
+                                <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" :initMsg="t.customerForm.sigunguInitMsg" :disabled="!consultForm.regionSido" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 상담내용 폼 (점포 소유 시에만 표시) -->
+                <div class="apply_form" v-show="hasStore === true">
+                    <div class="form_head">
+                        <h3 class="form_head_title">{{ t.consultForm.title }}</h3>
+                        <span class="form_required_note">{{ t.requiredNote }}</span>
+                    </div>
+                    <div class="form_body">
+                        <div class="form_row form_row_area">
+                            <div class="form_label">{{ t.consultForm.areaLabel }}</div>
+                            <div class="form_field form_field_area">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.contractAreaLabel }}</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.areaContract" />
+                                        <span class="form_sub_unit">m²</span>
+                                    </div>
+                                </div>
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.exclusiveAreaLabel }}</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.areaExclusive" />
+                                        <span class="form_sub_unit">m²</span>
+                                    </div>
+                                </div>
+                                <span class="area_note">{{ t.consultForm.areaNote }}</span>
+                            </div>
+                        </div>
+                        <div class="form_row check_row">
+                            <div class="form_label">{{ t.consultForm.superOperatorLabel }}</div>
+                            <div class="form_field form_field_check">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.itemCheckLabel }}</span>
+                                    <div class="check_list">
+                                        <Inputs v-for="opt in superItemOptions" :key="opt.value" type="checkbox" :value="opt.value" v-model="consultForm.superItems" :text="opt.label" />
+                                    </div>
+                                </div>
+                                <div class="check_etc">
+                                    <span class="form_sub_label">{{ t.consultForm.etcLabel }}</span>
+                                    <Inputs type="text" v-model="consultForm.superItemEtc" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_row contract_row">
+                            <div class="form_label">{{ t.consultForm.contractLabel }}</div>
+                            <div class="form_field form_field_contract">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.contractPeriodLabel }}</span>
+                                    <div class="form_sub_inputs">
+                                        <Inputs type="text" v-model="consultForm.contractStart" />
+                                        <span class="form_sep">~</span>
+                                        <Inputs type="text" v-model="consultForm.contractEnd" />
+                                    </div>
+                                </div>
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.depositRentLabel }}</span>
+                                    <div class="contract_rent">
+                                        <div class="form_sub_input_wrap">
+                                            <Inputs type="text" v-model="consultForm.deposit" />
+                                            <span class="form_sub_unit">만원</span>
+                                        </div>
+                                        <div class="form_sub_input_wrap">
+                                            <Inputs type="text" v-model="consultForm.monthlyRent" />
+                                            <span class="form_sub_unit">만원</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="apply_form" v-show="hasStore === false">
+                    <div class="form_head">
+                        <h3 class="form_head_title">{{ t.consultFormNoStore.title }}</h3>
+                        <span class="form_required_note">{{ t.requiredNote }}</span>
+                    </div>
+                    <div class="form_body">
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.investmentLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_select_220">
+                                <SelectBox :options="t.consultFormNoStore.investmentOptions" v-model="consultForm.investmentAmount" initMsg="3000만원 이하" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.incomeLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_select_220">
+                                <SelectBox :options="t.consultFormNoStore.incomeOptions" v-model="consultForm.expectedIncome" initMsg="150~200만원"/>
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.openRegionLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_region">
+                                <SelectBox :options="sidoOptions" v-model="consultForm.openRegionSido" :initMsg="t.customerForm.sidoInitMsg" @update:modelValue="consultForm.openRegionSigungu = ''" />
+                                <SelectBox :options="openSigunguOptions" v-model="consultForm.openRegionSigungu" :initMsg="t.customerForm.sigunguInitMsg" :disabled="!consultForm.openRegionSido" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.openTimeLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_region">
+                                <SelectBox :options="t.consultFormNoStore.openYearOptions" v-model="consultForm.openYear" initMsg="2026년" />
+                                <SelectBox :options="t.consultFormNoStore.openMonthOptions" v-model="consultForm.openMonth" initMsg="01월"/>
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.typeLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_franchise">
+                                <div class="franchise_type_item" v-for="opt in t.consultFormNoStore.franchiseTypeOptions" :key="opt.value">
+                                    <Inputs type="radio" :name="'franchiseType'" :value="opt.value" v-model="consultForm.franchiseType" :text="opt.label" />
+                                    <Buttons btn-class="btn_mid border" data-popid="gsrst01010101_view" data-type="lg" data-cont="gsrst01010101_view" @click.prevent="openModal">{{ t.consultFormNoStore.viewLabel }}</Buttons>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.inquiryLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field">
+                                <textarea v-model="consultForm.inquiry" :placeholder="t.consultFormNoStore.inquiryPlaceholder"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 하단 버튼 -->
+                <div class="button_wrap">
+                    <Buttons btn-class="btn_big primary">{{ t.consultForm.submitLabel }}</Buttons>
+                    <Buttons btn-class="btn_big gary">{{ t.consultForm.resetLabel }}</Buttons>
+                </div>
+            </section>
+            
         </div>
         
         <ul
@@ -510,22 +700,21 @@
         <div class="modal_container"></div>
     </div>
     <!-- //modal_wrap -->
-    <!-- 상담 신청 모달 -->
-    <div id="gsrst010301" class="modal_wrap">
+    <div id="gsrst01010101_view" class="modal_wrap">
         <div class="modal_container"></div>
     </div>
-    <!-- //상담 신청 모달 -->
-
-
 </template>
 
 <script setup> 
-import { ref, computed, defineProps, watch, onMounted, onUnmounted, nextTick } from "vue";
+import { ref, reactive, computed, defineProps, watch, onMounted, onUnmounted, nextTick } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import Pagination from "@/components/Pagination.vue";
 import Steps from "@/components/Steps.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
 import Buttons from "@/components/Buttons.vue";
+import Inputs from "@/components/Inputs.vue";
+import SelectBox from "@/components/SelectBox.vue";
+import ConsentInfoBox from "@/components/ConsentInfoBox.vue";
 import StoreCard from "@/components/StoreCard.vue";
 import StoreCardDetail from "@/components/StoreCardDetail.vue";
 import Accordion from "@/components/Accordion.vue";
@@ -825,6 +1014,120 @@ const langData = {
                 { name: "김수진", region: "영남/호남권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_05.png"), link: "#none" },
             ],
         },
+        intro: {
+            title: "안녕하세요!<br>GS THE FRESH 1:1 상담<br class=\"m_br\">컨설턴트 윤경진 입니다.",
+            desc: "아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다. <br />담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.",
+        },
+        consultBox: {
+            title: "안녕하세요!<br />GS THE FRESH 1:1 상담 컨설턴트 윤경진 입니다.",
+            desc: "아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다.<br />담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.",
+            consultantName: "윤경진 컨설턴트",
+        },
+        consent: {
+            title: "개인정보 수집·이용 동의",
+            items: [
+                "- 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 \"개인정보 처리방침\"을 참고하시기 바랍니다.",
+                "-수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호, 소유점포주소(시, 구/군)",
+                "- 수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
+                "- 보유 및 이용기간: 접수 후 1년",
+            ],
+            noticeHtml: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 <br />사업설명회 신청 글 작성이 불가능합니다.",
+        },
+        storeButtons: {
+            hasStore: "내가 소유한 점포가 있다.",
+            noStore: "내가 소유한 점포가 없다.",
+        },
+        requiredNote: "* 필수 입력사항",
+        customerForm: {
+            title: "고객정보",
+            nameLabel: "이름",
+            emailLabel: "이메일",
+            emailPlaceholder: "직접입력",
+            phoneLabel: "연락처",
+            addressLabel: "소유점포 주소 <br class=\"p_br\"/>(과거, 현재 점포소유 <br class=\"p_br\">신청자에 한함)<span class=\"form_required\">*</span>",
+            sidoInitMsg: "지역선택",
+            sigunguInitMsg: "구/군 선택",
+        },
+        consultForm: {
+            title: "상담내용",
+            areaLabel: "소유점포 면적",
+            contractAreaLabel: "계약면적",
+            exclusiveAreaLabel: "전용면적",
+            areaNote: "* m² = (기준)평 x 3.3",
+            superOperatorLabel: "수퍼 운영자 일 경우",
+            itemCheckLabel: "취급 품목 체크",
+            etcLabel: "기타",
+            contractLabel: "계약조건",
+            contractPeriodLabel: "계약 기간",
+            depositRentLabel: "보증금/월임대료",
+            superItemOptions: [
+                { value: "농산", label: "농산" },
+                { value: "축산", label: "축산" },
+                { value: "수산", label: "수산" },
+                { value: "공산품", label: "공산품" },
+                { value: "조리", label: "조리" },
+            ],
+            sidoOptions: [
+                { value: "서울", label: "서울특별시" },
+                { value: "부산", label: "부산광역시" },
+                { value: "대구", label: "대구광역시" },
+                { value: "인천", label: "인천광역시" },
+                { value: "광주", label: "광주광역시" },
+                { value: "대전", label: "대전광역시" },
+                { value: "울산", label: "울산광역시" },
+                { value: "세종", label: "세종특별자치시" },
+                { value: "경기", label: "경기도" },
+                { value: "강원", label: "강원특별자치도" },
+                { value: "충북", label: "충청북도" },
+                { value: "충남", label: "충청남도" },
+                { value: "전북", label: "전북특별자치도" },
+                { value: "전남", label: "전라남도" },
+                { value: "경북", label: "경상북도" },
+                { value: "경남", label: "경상남도" },
+                { value: "제주", label: "제주특별자치도" },
+            ],
+            sigunguMap: {
+                서울: ["종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"],
+                부산: ["중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"],
+                대구: ["중구", "동구", "서구", "남구", "북구", "수성구", "달서구", "달성군", "군위군"],
+                인천: ["중구", "동구", "미추홀구", "연수구", "남동구", "부평구", "계양구", "서구", "강화군", "옹진군"],
+                광주: ["동구", "서구", "남구", "북구", "광산구"],
+                대전: ["동구", "중구", "서구", "유성구", "대덕구"],
+                울산: ["중구", "남구", "동구", "북구", "울주군"],
+                세종: ["세종시"],
+                경기: ["수원시", "성남시", "의정부시", "안양시", "부천시", "광명시", "평택시", "동두천시", "안산시", "고양시", "과천시", "구리시", "남양주시", "오산시", "시흥시", "군포시", "의왕시", "하남시", "용인시", "파주시", "이천시", "안성시", "김포시", "화성시", "광주시", "양주시", "포천시", "여주시", "연천군", "가평군", "양평군"],
+                강원: ["춘천시", "원주시", "강릉시", "동해시", "태백시", "속초시", "삼척시", "홍천군", "횡성군", "영월군", "평창군", "정선군", "철원군", "화천군", "양구군", "인제군", "고성군", "양양군"],
+                충북: ["청주시", "충주시", "제천시", "보은군", "옥천군", "영동군", "증평군", "진천군", "괴산군", "음성군", "단양군"],
+                충남: ["천안시", "공주시", "보령시", "아산시", "서산시", "논산시", "계룡시", "당진시", "금산군", "부여군", "서천군", "청양군", "홍성군", "예산군", "태안군"],
+                전북: ["전주시", "군산시", "익산시", "정읍시", "남원시", "김제시", "완주군", "진안군", "무주군", "장수군", "임실군", "순창군", "고창군", "부안군"],
+                전남: ["목포시", "여수시", "순천시", "나주시", "광양시", "담양군", "곡성군", "구례군", "고흥군", "보성군", "화순군", "장흥군", "강진군", "해남군", "영암군", "무안군", "함평군", "영광군", "장성군", "완도군", "진도군", "신안군"],
+                경북: ["포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시", "문경시", "경산시", "군위군", "의성군", "청송군", "영양군", "영덕군", "청도군", "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군"],
+                경남: ["창원시", "진주시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"],
+                제주: ["제주시", "서귀포시"],
+            },
+            submitLabel: "상담신청",
+            resetLabel: "다시작성",
+        },
+        consultFormNoStore: {
+            title: "상담내용",
+            investmentLabel: "투자 가능금액",
+            investmentOptions: ["3000만원 이하", "3000만원~5000만원", "5000만원 이상"],
+            incomeLabel: "기대 소득",
+            incomeOptions: ["150~200만원", "200~300만원", "300만원 이상"],
+            openRegionLabel: "개설 희망지역",
+            openTimeLabel: "개설 희망시기",
+            openYearOptions: ["2026년", "2027년", "2028년"],
+            openMonthOptions: ["01월", "02월", "03월", "04월", "05월", "06월", "07월", "08월", "09월", "10월", "11월", "12월"],
+            typeLabel: "개설희망 가맹타입",
+            franchiseTypeOptions: [
+                { value: "GSF1", label: "GSF1 타입" },
+                { value: "GSF2", label: "GSF2 타입" },
+                { value: "GSF3", label: "GSF3타입" },
+            ],
+            viewLabel: "보기",
+            inquiryLabel: "문의내용",
+            inquiryPlaceholder: "문의내용을 입력해주세요.",
+        },
         quickMenu: ["창업안내", "입점상담", "고객센터"],
     },
     en: {},
@@ -838,6 +1141,7 @@ const t = computed(() => {
 const activeD1 = ref(0);
 const activeD2 = ref(0);
 const activeD3 = ref(0);
+const showConsultApplyPage = ref(false);
 
 const depth1Tabs = computed(() => t.value.depth1Tabs);
 const depth2Tabs = computed(() => t.value.depth2Tabs);
@@ -849,6 +1153,61 @@ const precautionCards2 = computed(() => t.value.precaution.cards2);
 const supportCards = computed(() => t.value.support.cards);
 const consultCards = computed(() => t.value.consult.cards);
 const seminarList = computed(() => t.value.seminar.list);
+const hasStore = ref(null);
+const superItemOptions = computed(() => t.value.consultForm.superItemOptions);
+const sidoOptions = computed(() => t.value.consultForm.sidoOptions);
+const sigunguMap = computed(() => t.value.consultForm.sigunguMap);
+const sigunguOptions = computed(() => {
+    const list = sigunguMap.value[consultForm.regionSido] || [];
+    return list.map((v) => ({ value: v, label: v }));
+});
+const openSigunguOptions = computed(() => {
+    const list = sigunguMap.value[consultForm.openRegionSido] || [];
+    return list.map((v) => ({ value: v, label: v }));
+});
+const consultForm = reactive({
+    consultantName: "",
+    name: "",
+    phone1: "010",
+    phone2: "",
+    phone3: "",
+    emailId: "",
+    emailDomain: "",
+    emailDomainCustom: "",
+    regionSido: "",
+    regionSigungu: "",
+    investmentAmount: "",
+    expectedIncome: "",
+    openRegionSido: "",
+    openRegionSigungu: "",
+    openYear: "",
+    openMonth: "",
+    franchiseType: "",
+    inquiry: "",
+    areaContract: "",
+    areaExclusive: "",
+    superItems: [],
+    superItemEtc: "",
+    contractStart: "",
+    contractEnd: "",
+    deposit: "",
+    monthlyRent: "",
+});
+const phoneOptions = [
+    { value: "010", label: "010" },
+    { value: "011", label: "011" },
+    { value: "016", label: "016" },
+    { value: "017", label: "017" },
+    { value: "018", label: "018" },
+    { value: "019", label: "019" },
+];
+const emailDomainOptions = [
+    { value: "naver.com", label: "naver.com" },
+    { value: "gmail.com", label: "gmail.com" },
+    { value: "daum.net", label: "daum.net" },
+    { value: "kakao.com", label: "kakao.com" },
+    { value: "hanmail.net", label: "hanmail.net" },
+];
 
 function openModal(event) {
     const el = event.currentTarget;
@@ -1037,6 +1396,11 @@ function onMqMobileChangeWithQuickMenu(e) {
 
 watch([activeD1, activeD2], () => {
     refreshQuickMenu();
+});
+watch(activeD1, (value) => {
+    if (value !== 4) {
+        showConsultApplyPage.value = false;
+    }
 });
 
 onMounted(() => {
@@ -1303,12 +1667,49 @@ function toggleCard(id) {
 .consult_tel .layer_tooltip_close { top: 32px; right: 32px; }
 .consult_foot { margin-top: 0; flex: 0 0 auto; }
 .consult_foot button{width:164px;}
-/* .consult_foot :deep([class*="btn_"]) { width: 100%; max-width: 113px;;} */
+
+/* 가맹/창업 상담 상담 폼폼 */
+.consult_box { padding: 56px 40px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; }
+.consult_intro { flex: 1; min-width: 0; display: flex; align-items: flex-start; gap: 20px; }
+.consult_img_wrap { width: 114px; height: 152px; border: 1px solid #000; flex-shrink: 0; overflow: hidden; }
+.consult_intro_txt { flex: 1; min-width: 0; }
+.consult_intro_txt > h3 { color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.consult_intro_txt > p { margin-top: 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_selector_wrap { width: 360px; flex: 0 0 360px; }
+.consult_selector_wrap :deep(.select) { width: 100%; }
+.consult_selector_wrap :deep(.select select) { width: 100%; height: 62px; padding: 0 56px 0 20px; border: 1px solid #c4c4d0; border-radius: 14px; color: #a4a4b0; font-size: 1.8rem; font-weight: 400; line-height: 1.4; background-color: #fff; }
+.consult_selector_hint { margin-top: 8px; padding-left: 24px; color: #4c4c53; font-size: 1.4rem; font-weight: 400; line-height: 1.4; position: relative; }
+.consult_selector_hint::before { width: 20px; height: 20px; content: ""; background: url("@/assets/images/common/icon_set_20.png") no-repeat -1155px -69px; position: absolute; top: 0; left: 0; }
+.list_caution { list-style: none; margin: 0; padding: 0; }
+.list_caution > li > p { color: #67676f; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
+.middle_bts_wrap { margin-top: 40px; display: flex; gap: 8px; }
+.middle_bts_wrap > button { height: 52px; padding: 0 16px; background: #fff; border: 1px solid #90909a; border-radius: 10px; font-size: 1.8rem; font-weight: 700; cursor: pointer; transition: border-color 0.15s, color 0.15s; color: #161616; }
+.middle_bts_wrap > button:hover, .middle_bts_wrap > button.active { border-color: #107af2; color: #107af2; }
+.middle_bts_wrap + :deep(.consent_box){margin-top:30px;}
 .info_banner { margin-top: 64px; padding: 34px 24px; background-color: #F9F2EA; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap:wrap;}
 .info_banner > p { display: flex; align-items: flex-start; gap: 12px; font-size: 1.8rem; line-height: 1.4; }
 .info_banner > p::before { content: ''; width: 27px; height: 27px; flex-shrink: 0; background: url('@/assets/images/common/icon_set_24.png') no-repeat -160px -56px;  display: block; }
-
-/* 경영주 지원제도 — 가로 패딩 없음(Swiper), 텍스트·패널만 20px */
+.button_wrap { margin-top: 40px; display: flex; gap: 8px; justify-content: flex-end;}
+.button_wrap :deep(button){ width:134px;}
+.button_wrap :deep(button.primary){ background-color:#15B874; }
+.form_row_name .form_field :deep(.input_wrap){max-width:205px;}
+.check_list { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.check_list :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
+.form_field_email :deep(.input_wrap){max-width:205px;}
+.form_field_email :deep(.input_wrap + label.select){width:100%; max-width:180px;}
+.form_field_phone :deep(.input_wrap){max-width:134px;}
+.form_field_select_220 :deep(label.select){width:100%; max-width:220px;}
+.form_field_region :deep(label.select){width:100%; max-width:220px;}
+.form_field_area :deep(.input_wrap){max-width:134px;}
+.form_field_franchise { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+.franchise_type_item { display: inline-flex; align-items: center; gap: 8px; }
+.franchise_type_item :deep(.input_wrap) { margin: 0; }
+.franchise_type_item :deep(button) { min-width: 56px; }
+.apply_form textarea { width: 100%; height: 120px; padding: 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 10px; resize: vertical; box-sizing: border-box; }
+.apply_form textarea::placeholder { color: #a4a4b0; }
+.form_field_check .check_etc :deep(.input_wrap){max-width:428px;}
+.form_sub_inputs :deep(.input_wrap){max-width:134px;}
+.contract_rent :deep(.input_wrap){max-width:134px;}
 .brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
 .brand_panel_bg > img { width: 100%; display: block; object-fit: cover; }
 .brand_panel_title { padding: 0 0 100px; }
@@ -1439,6 +1840,15 @@ function toggleCard(id) {
     .caution_list li p{font-size: 1.4rem;}
     .consult_caution_pc { display: none; }
     .consult_caution_mo { display: block; margin-top: 0; margin-bottom: 20px; padding: 0 20px; }
+    .consult_box { padding: 30px 20px; display: block; }
+    .consult_intro { display: block; }
+    .consult_img_wrap { width: 90px; height: 120px; }
+    .consult_intro_txt { margin-top: 16px; }
+    .consult_intro_txt > h3 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .consult_intro_txt > p { margin-top: 12px; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+    .consult_selector_wrap { width: 100%; margin-top: 20px; }
+    .consult_selector_wrap :deep(.select select) { height: 52px; padding-right: 48px; font-size: 1.6rem; }
+    .consult_selector_hint { margin-top: 6px; }
     .consult_card{min-height:auto; padding:20px; flex-direction:column; gap:18px; align-items: flex-start;}
     .consult_card_list { grid-template-columns: 1fr; gap: 20px; }
     .consult_note { order: 1; }
@@ -1496,6 +1906,8 @@ function toggleCard(id) {
     .consult_body p.consult_note{margin-top:2px;color:#67676F;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .consult_foot :deep([class*="btn_"]) {height:38px;}
     .sec_consult :deep(.brand_panel_title){padding-bottom:16px;} 
+    /* .consult_apply_inline { margin-top: 32px; }
+    .consult_apply_inline :deep(.gray_box + .gray_box) { margin-top: 32px; } */
     /* .sec_consult :deep(button){width:100%;} */
     .quick_menu{display: none;}
     .sec_consult :deep(.brand_panel_title h2::after){width:32px; height:32px; background-image: url(@/assets/images/sub/icon_cont_32.png); background-position: -740px -103px;}
