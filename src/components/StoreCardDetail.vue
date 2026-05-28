@@ -6,8 +6,8 @@
             <div class="manager_info">
                 <span class="manager_label">담당자</span>
                 <p class="manager_name">{{ item.managerName || '한승희 창업지원담당' }}</p>
-                <a :href="'tel:' + (item.managerTel || '053-67890123')" class="manager_tel">
-                    {{ item.managerTel || '053-67890123' }}
+                <a :href="'tel:' + (item.managerTel || '053-6789-0123')" class="manager_tel">
+                    {{ item.managerTel || '053-6789-0123' }}
                 </a>
             </div>
             <Buttons btn-class="btn_xl fill primary btn_icon_arrow after">무료 상담 신청하기</Buttons>
