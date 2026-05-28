@@ -277,7 +277,8 @@ function closeModal(event) {
 @media (max-width: 768px) {
     .smn_modal { max-height: 100%; }
     .modal_wrap .modal_container { padding-bottom: 32px; }
-    .smn_intro { display: none; }
+    /* .smn_intro { display: none; } */
+    .smn_intro > p { font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .consent_info { padding: 30px 20px; }
     .consent_info_list > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .consent_info_title { font-weight: 700; font-size: 1.8rem; line-height: 1.5; }
