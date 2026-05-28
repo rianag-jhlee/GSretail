@@ -8,10 +8,6 @@
         <div class="modal_content">
             <section class="listening_form_area">
                 <i v-html="t.listening.Txt"></i>
-                <div class="section_title_area">
-                    <h4 class="section_title_sub">{{ t.listening.Title }}</h4>
-                    <p class="p_desc" v-html="t.listening.Desc"></p>
-                </div>
                 
                 <div class="consent_container">
                     <article v-for="(consent, cIdx) in t.listening.Consents" :key="'consent-'+cIdx" class="consent_box">
@@ -30,7 +26,7 @@
                 <article class="noti_non_member">
                     <span>{{ t.listening.Nonmember.title }}</span>
                     <ul class="bullet_01">
-                        <li v-for="(list, lIdx) in t.listening.Nonmember.items" :key="'list-'+lIdx">{{ list }}</li>
+                        <li v-for="(list, lIdx) in t.listening.Nonmember.items" :key="'list-'+lIdx" v-html="list"></li>
                     </ul>
                 </article>
 
@@ -198,11 +194,9 @@ export default {
                     MainTitle: "고객의 소리",
                     listening: {
                         Txt:"언제나 고객님의 입장이 되어<br/> 작은 소리에도 귀를 기울이겠습니다.",
-                        Title: "브랜드 매장 이용 관련 문의",
-                        Desc: "고객님이 매장을 이용하시며 느끼신 궁금증, 칭찬할 점, 불만인 점, 제안할 점 등에 대해 의견을 남겨주세요.",
                         Consents: [
                             {
-                                title: "개인정보 제3자 제공 동의",
+                                title: "(선택) 개인정보 제3자 제공 동의",
                                 items: [
                                     "입력하신 정보는 신속하고 정확한 처리를 위해 해당 점포 경영주에게 전달되며 문의 및 컴플레인 응대를 위해서 사용됩니다.",
                                     "제공받는 자: 고객님이 문의 신청한 GS25 관리자와 GS25에 입점 된 상품의 제조사/유통사(수입사)",
@@ -224,11 +218,9 @@ export default {
                             }
                         ],
                         Nonmember: {
-                            title: "고객님께서는 현재 비회원(비로그인)으로 문의를 접수 중이십니다.",
                             items: [
-                                "비회원 문의를 하신 경우 답변은 '등록하신 연락처(문자,전화) 또는 이메일을 통해서만' 확인하실 수 있습니다.",
-                                "연락처를 정확하게 입력해주세요. (홈페이지 내에서 이전 문의이력 확인 불가)",
-                                "로그인 후 고객문의를 접수하시면, 마이페이지에서 문의/답변 내역 확인이 가능합니다.(단,정도경영 제외)"
+                                "비회원 문의를 하신 경우 답변은 '등록하신 연락처(문자,전화) 또는 이메일을 통해서만' 확인하실 수 있습니다.<br/>연락처를 정확하게 입력해주세요. (홈페이지 내에서 이전 문의이력 확인 불가)",
+                                "입력하신 연락처(문자, 전화) 또는 이메일’을 통해서만 답변 확인이 가능하오니 정확하게 입력 부탁드립니다."
                             ]
                         },
                         InputWrapcont: {
@@ -306,8 +298,8 @@ export default {
 .section_title_area h4 {margin-bottom:8px; font-size:24px;}
 .section_title_area .p_desc { font-size:16px; font-weight: 400; color: #161616; line-height: 1.5; word-break: keep-all; }
 .noti_non_member {padding:24px; background:#F9F2EA; border-radius:12px;}
-.noti_non_member span {margin-bottom:12px; padding-left:34px; font-size:18px; position:relative; display:block;}
-.noti_non_member span::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -160px -56px no-repeat; display:inline-block; position:absolute; top:0; left:0px;}
+.noti_non_member span {font-size:18px; position:absolute; top:50%; display:block; transform:translateY(-50%);}
+.noti_non_member span::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -160px -56px no-repeat; display:inline-block; }
 .noti_non_member ul {padding-left:34px;}
 .noti_non_member ul li {font-size:16px;}
 .listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
@@ -324,6 +316,8 @@ export default {
 .listening_form_area .consent_agree {padding-top:24px; border-top:1px solid #D7D7DF; display:flex; justify-content:space-between; align-items:center;}
 .listening_form_area .consent_agree p {font-size:16px; font-weight:700;}
 .listening_form_area article {margin-bottom:40px;}
+.listening_form_area article.noti_non_member {position:relative;}
+.listening_form_area article.noti_non_member span { }
 .listening_form_wrap .form_header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #242428; }
 .listening_form_wrap .form_title { font-size: 24px; font-weight: 700; color: #161616; }
 .listening_form_wrap .required_guide { font-size: 14px; color: #fb6432; }
@@ -373,8 +367,7 @@ export default {
     .consent_list li, .consent_agree p  {font-size:14px !important;}
     :deep(.check) em {font-size:16px !important;}
     :deep(.guide_text) br {display:none;}
-    .noti_non_member span {font-size:14px;}
-    .noti_non_member ul {padding-left:0;}
+    .noti_non_member span {font-size:14px; top:40px;}
     .noti_non_member ul li {font-size:12px;}
     .listening_form_wrap .guide_msg_multi {font-size:14px;}
     :deep(.guide_msg_multi) span {margin-bottom:8px; display:block;}
