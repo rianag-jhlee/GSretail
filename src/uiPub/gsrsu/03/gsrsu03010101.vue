@@ -1402,7 +1402,7 @@
                                                                     <span class="label_text">{{ lp.part2.fileLabel }}</span>
                                                                 </div>
                                                                 <div class="input_complex">
-                                                                    <Inputs type="file" class="btn_file">{{ lp.part2.fileNotice }}</Inputs>
+                                                                    <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
                                                                     <p class="guide_msg">{{ lp.part2.fileNotice }}</p>
                                                                 </div>
                                                             </div>
@@ -1578,10 +1578,11 @@ import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue"; 
 import Textarea from "@/components/Textarea.vue";
 import modal from "@/assets/js/modal";
+import FileUpload from "@/components/FileUpload.vue";
 
 export default {
     name: "gsrsu03010101",
-    components: { Tabs, Buttons, Pagination, Inputs, SelectBox, Textarea },
+    components: { Tabs, Buttons, Pagination, Inputs, SelectBox, Textarea, FileUpload },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {

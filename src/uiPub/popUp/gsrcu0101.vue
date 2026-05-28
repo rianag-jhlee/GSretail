@@ -137,7 +137,7 @@
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.fileLabel }}</span>
                                     </div>
                                     <div class="input_complex">
-                                        <Inputs type="file" class="btn_file">파일선택</Inputs>
+                                        <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
                                         <p class="guide_msg">{{ t.listening.InputWrapcont.part2.fileNotice }}</p>
                                     </div>
                                 </div>
@@ -175,10 +175,11 @@ import Buttons from "@/components/Buttons.vue";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue"; 
 import Textarea from "@/components/Textarea.vue";
+import FileUpload from "@/components/FileUpload.vue";
 
 export default {
     name: "gsrcu0101",
-    components: { Buttons, Inputs, SelectBox, Textarea },
+    components: { Buttons, Inputs, SelectBox, Textarea, FileUpload },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {

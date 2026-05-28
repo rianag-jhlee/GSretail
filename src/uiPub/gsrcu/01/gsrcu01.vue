@@ -112,12 +112,12 @@ export default {
                         },
                         {
                             id: "gsshop", name: "GS SHOP", tel: "080-414-4545", hours: "· 24시간 콜센터",
-                            buttons: [{ label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" }]
+                            buttons: [{ label: "1:1 상담", type: "popup", popId: "gsrcu0201", cont: "gsrcu0201" }]
                         },
                         {
                             id: "gsthefresh", name: "GS THE FRESH", tel: "080-345-7700", hours: "· 평일, 주말, 공휴일 10:00~19:00<br/>&nbsp;&nbsp;(명절 당일은 휴무)",
                             buttons: [
-                                { label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" },
+                                { label: "1:1 상담", type: "popup", popId: "gsrcu0301", cont: "gsrcu0301" },
                                 { label: "창업안내", type: "link", target: "/gsrst01010101" }
                             ]
                         }

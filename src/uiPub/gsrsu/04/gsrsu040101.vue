@@ -388,10 +388,7 @@
                                         <div class="form_row">
                                             <div class="form_label">파일첨부</div>
                                             <div class="form_field form_field_file">
-                                                <div class="file_row">
-                                                    <button type="button" class="btn_file">파일선택</button>
-                                                    <span>선택된 파일 없음</span>
-                                                </div>
+                                                <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
                                                 <p class="form_field_note">* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)</p>
                                             </div>
                                         </div>
@@ -926,6 +923,7 @@ import imgEthics04 from "@/assets/images/dummy/gsrsu040101_04.png";
 import imgEthics05 from "@/assets/images/dummy/gsrsu040101_05.png";
 import imgEthics06 from "@/assets/images/dummy/gsrsu040101_06.png";
 import modal from "@/assets/js/modal";
+import FileUpload from "@/components/FileUpload.vue";
 
 const props = defineProps({
     lang: {

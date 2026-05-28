@@ -468,7 +468,8 @@
                                                 <p class="guide_msg">{{ t.listening.InputWrapcont.part3.첨부_desc }}</p>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="file" class="btn_file">{{ t.listening.InputWrapcont.part3.파일추가 }}</Inputs>
+                                                <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
+                                                <p class="guide_msg">* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)</p>
                                             </div>
                                         </div>
                                         <div class="form_row">
@@ -477,7 +478,8 @@
                                                 <p class="guide_msg">{{ t.listening.InputWrapcont.part3.입점_desc }}</p>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="file" class="btn_file">{{ t.listening.InputWrapcont.part3.파일추가 }}</Inputs>
+                                                <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
+                                                <p class="guide_msg">* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)</p>
                                             </div>
                                         </div>
                                         <div class="form_row">
@@ -532,11 +534,12 @@ import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue"; 
 import Textarea from "@/components/Textarea.vue";
 import Search from "@/components/Search.vue";
+import FileUpload from "@/components/FileUpload.vue";
 
 
 export default {
     name: "gsrst01",
-    components: { Tabs, Pagination, Accordion, AccordionItem, Buttons, Inputs, SelectBox, Textarea, Search  },
+    components: { Tabs, Pagination, Accordion, AccordionItem, Buttons, Inputs, SelectBox, Textarea, Search, FileUpload  },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
