@@ -8,7 +8,6 @@
                 <div class="text_box cont_inner">
                     <span>{{ t.Visual.subContent_1 }}</span>
                     <span>{{ t.Visual.subContent_2 }}</span>
-                    <span>{{ t.Visual.subContent_3 }}</span>
                 </div>
             </div>
         </section>
@@ -19,9 +18,9 @@
                     <h3>{{ t.SubTitle }}</h3>
                     <ul>
                         <li>
-                            <p>{{ t.SubContent_1 }}</p>
-                            <p v-html="t.SubContent_2"></p>
-                            <p>{{ t.SubContent_3 }}</p>
+                            <p v-html="t.SubContent_1"></p>
+                            <!-- <p v-html="t.SubContent_2"></p>
+                            <p>{{ t.SubContent_3 }}</p> -->
                         </li>
                         <li class="bi_section">
                             <h4 class="">{{ t.Bi.txt }}</h4>
@@ -68,12 +67,10 @@ export default {
                         imgMo: require("@/assets/images/dummy/gsrbr09_mo.png"),
                         alt: "GS THE FRESH 메인 비주얼",
                         subContent_1: "가격 이상의 가치,",
-                        subContent_2: "GS THE FRESH PB브랜드",
-                        subContent_3: "리얼 프라이스",
+                        subContent_2: "리얼 프라이스",
                     },
                     SubTitle: `브랜드 소개`,
-                    SubContent_1: `우수 제조처 발굴 및 GS THE FRESH의 상품 개발 노하우를 접목한 GS THE FRESH PB브랜드 ‘리얼 프라이스’`,
-                    SubContent_2: `리얼프라이스는 우수 제조사 발굴 역량과 축적된 상품 개발 노하우를 바탕으로, <br/> 검증된 품질의 상품을 합리적인 가격에 제공하는 GS리테일만의 PB 브랜드 입니다.`,
+                    SubContent_1: `리얼프라이스는 우수 제조사 발굴 역량과 상품 개발 노하우를 바탕으로<br/>검증된 품질의 상품을 합리적인 가격으로 선보이는 GS리테일만의 PB 브랜드입니다.’`,
                     Bi: {
                         txt: `BI 로고`,
                         img: require("@/assets/images/dummy/gsrbr09_real_bi.png"),
