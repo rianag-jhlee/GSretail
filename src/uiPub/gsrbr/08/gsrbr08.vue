@@ -233,7 +233,7 @@ ul li strong br {display:none;}
 }
 @media screen and (max-width: 768px) {
     .visual_img{height:100vh;}
-    .visual_img img{height:calc(100vh - 60px); object-fit:cover; transform:scale(1.18); transform-origin:center;}
+    .visual_img img{height:100%; object-fit:cover; transform:scale(1.03); transform-origin:center;}
     .visual_content { top: 50%; }
     h4 {margin-bottom:30px; font-size:18px;}
     .text_box span { color:#fff; font-size:3.2rem; line-height:1.3; letter-spacing: -0.01em; font-weight:700; text-align:center; display: block;  }
