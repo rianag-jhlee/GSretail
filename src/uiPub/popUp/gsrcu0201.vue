@@ -131,7 +131,6 @@
                                     </div>
                                     <div class="input_complex">
                                         <Textarea v-model="formData.body" :placeholder="t.listening.InputWrapcont.part2.contentPlaceholder" :rows="6" :maxlength="500" />
-                                        <p class="guide_msg_multi" v-html="t.listening.InputWrapcont.part2.noticeText"></p>
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -139,7 +138,7 @@
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.fileLabel }}</span>
                                     </div>
                                     <div class="input_complex">
-                                        <Inputs type="file" class="btn_file">파일선택</Inputs>
+                                        <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
                                         <p class="guide_msg">{{ t.listening.InputWrapcont.part2.fileNotice }}</p>
                                     </div>
                                 </div>
@@ -177,10 +176,11 @@ import Buttons from "@/components/Buttons.vue";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue"; 
 import Textarea from "@/components/Textarea.vue";
+import FileUpload from "@/components/FileUpload.vue";
 
 export default {
     name: "gsrcu0101",
-    components: { Buttons, Inputs, SelectBox, Textarea },
+    components: { Buttons, Inputs, SelectBox, Textarea, FileUpload },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
@@ -252,7 +252,6 @@ export default {
                                 subjectLabel: "제목",
                                 contentLabel: "내용",
                                 contentPlaceholder: "입점 관련 궁금한 사항을 입력 해 주세요",
-                                noticeText: "<span>※ 매장 관련 제보내용은 정확한 점포명을 작성해 주셔야 보다 원할한 답변을 받아보실수 있습니다.</span><span>※ 내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.</span><span>※ 제보내용에 욕설이나 비속어가 포함되어 있으면 답변 되지 않을 수 있습니다.</span>",
                                 fileLabel: "파일첨부",
                                 fileNotice: "* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)",
                                 replyLabel: "회신방법",

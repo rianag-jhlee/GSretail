@@ -26,6 +26,7 @@
                                 <div class="step_info">
                                     <span class="step_label">Step {{ idx + 1 }}</span>
                                     <strong class="step_text">{{ step.title }}</strong>
+                                    <p class="step_desc mo" v-html="step.desc"></p>
                                 </div>
                             </li>
                         </ul>
@@ -85,13 +86,10 @@
                                 <h4 class="text-wrapper mb12">{{ t.ProcessTitle }}</h4>
                                 <ul class="div_desc" v-html="t.ProcessDesc"></ul>
                             </div>
-                            <div class="img_box">
-                                <img 
-                                    :src="isMobile ? require('@/assets/images/dummy/gsrse01_01_mo.png') : require('@/assets/images/dummy/gsrse01_01.png')" 
-                                    :alt="t.ProcessTitle" 
-                                    class="full_img" 
-                                />
-                            </div>
+                            <picture class="img_box">
+                                <source media="(max-width: 768px)" srcset="@/assets/images/dummy/gsrse01_01_mo.png" style="max-width:336px" />
+                                <img class="full_img" src="@/assets/images/dummy/gsrse01_01.png" :alt="t.ProcessTitle">
+                            </picture>
                         </article>
 
                         <article class="guide_view mb100">
@@ -262,9 +260,7 @@
                                                 <span class="required_mark">*</span>
                                             </div>
                                             <div class="input_group">
-                                                <div class="input_flex_item">
-                                                    <SelectBox :options="t.listening.InputWrapcont.part1.telOptions" v-model="formData.tel1" initMsg="선택" />
-                                                </div>
+                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel1" :isDisabled="true" /></div>
                                                 <span class="unit">-</span>
                                                 <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
                                                 <span class="unit">-</span>
@@ -472,7 +468,8 @@
                                                 <p class="guide_msg">{{ t.listening.InputWrapcont.part3.첨부_desc }}</p>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="file" class="btn_file">{{ t.listening.InputWrapcont.part3.파일추가 }}</Inputs>
+                                                <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
+                                                <p class="guide_msg">* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)</p>
                                             </div>
                                         </div>
                                         <div class="form_row">
@@ -481,7 +478,8 @@
                                                 <p class="guide_msg">{{ t.listening.InputWrapcont.part3.입점_desc }}</p>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="file" class="btn_file">{{ t.listening.InputWrapcont.part3.파일추가 }}</Inputs>
+                                                <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
+                                                <p class="guide_msg">* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)</p>
                                             </div>
                                         </div>
                                         <div class="form_row">
@@ -536,11 +534,12 @@ import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue"; 
 import Textarea from "@/components/Textarea.vue";
 import Search from "@/components/Search.vue";
+import FileUpload from "@/components/FileUpload.vue";
 
 
 export default {
     name: "gsrst01",
-    components: { Tabs, Pagination, Accordion, AccordionItem, Buttons, Inputs, SelectBox, Textarea, Search  },
+    components: { Tabs, Pagination, Accordion, AccordionItem, Buttons, Inputs, SelectBox, Textarea, Search, FileUpload  },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
@@ -554,7 +553,7 @@ export default {
             formData: {
                 agreements: [false, false],
                 name: "", emailId: "", emailDomain: "", emailSelect: "",
-                tel1: "", tel2: "", tel3: "", category: "", storeName: "",
+                tel1: "010", tel2: "", tel3: "", category: "", storeName: "",
                 subject: "", body: "", replyType: ""
             },
             langData: {
@@ -563,9 +562,9 @@ export default {
                     MainTabs: [{ item: "GS25/GS THE FRESH/지원부문" }, { item: "GS SHOP" }],
                     SubTabs: [{ item: "공지사항" }, { item: "입점 안내" }, { item: "자주하는 질문 FAQ" }, { item: "상담 신청" }],
                     IntroTitle: "입점상담 신청 ",
-                    IntroDesc: "GS25/GS THE FRESH/지원부문 입점에 관한 상담을 신청하시면 담당자가 확인 후 연락드립니다.",
+                    IntroDesc: "GS25/GS THE FRESH/지원부문 입점에 관한 상담을 신청하고 결과를 확인하세요.",
                     GuideTitle: "입점 상담 가이드",
-                    StepList: [{ title: "신규업체 등록" }, { title: "입점상담 신청" }, { title: "담당MD 상담" }, { title: "입점계약 진행" }],
+                    StepList: [{ title: "신규업체 등록", desc: "GS THE FRESH 가맹 계약<br/>조건안내 및 절차소개" }, { title: "입점상담 신청", desc: "가맹본부로부터 정보공개서를 제공받아<br/>GS THE FRESH 사업성 검토" }, { title: "담당MD 상담", desc: "지원서 제출은 월~금요일 수시가능<br/>(우편 접수 가능)" }, { title: "입점계약 진행", desc: "지원서를 토대로 면담 진행하여<br/>사업 타당성 검토함" }],
                     NoticeList: [
                         { id: 1, title: "2026년 GS25 입점 상담 안내", date: "2026.02.10", views: "1234" },
                         { id: 2, title: "GS THE FRESH 신규 입점 지역 안내", date: "2026.02.10", views: "1234" }
@@ -657,7 +656,6 @@ export default {
                                 emailLabel: "이메일",
                                 emailOptions: [{ value: 'naver.com', label: 'naver.com' }, { value: 'gmail.com', label: 'gmail.com' }],
                                 telLabel: "휴대폰",
-                                telOptions: [{ value: '010', label: '010' }, { value: '011', label: '011' }],
                                 companyname :"소속회사명",
                                 department:"부서명 / 직급",
                                 department_1:"부서",
@@ -845,6 +843,7 @@ export default {
 /* 8. 버튼 및 FAQ 공통 */
 .board_type_toggle {border-top:1px solid #161616;}
 .board_type_toggle dt > a.acc_tit_btn {padding:20px !important;}
+.board_type_toggle dd + dt {border-top:1px solid #D7D7DF;}
 .btn_group { display: flex; gap: 8px; }
 .faq_list_wrap { border-top: 1px solid #161616; }
 .faq_item { border-bottom: 1px solid #e5e5e9; }
@@ -857,6 +856,9 @@ export default {
 .faq_a { padding: 0 20px 24px 52px; background: #fafafa; }
 .a_text { font-size: 1.8rem; line-height: 1.6; color: #67676f; }
 .pagination_area { display: flex; justify-content: center; }
+
+/* 입점안내 */
+.gsrse02 .img_box {display:block; text-align:center;}
 
 /* 상담신청 */
 .radio_wrap {display:flex; gap:20px;}
@@ -918,16 +920,21 @@ export default {
 @media screen and (max-width: 767px) {
     .mo {display:block;}
     .pc {display:none;}
-    .cont_inner {padding-top: 80px;}
+    .mt100 {margin-top:60px !important}
+    .mb100 {margin-bottom:60px !important}
     :deep(.tab_wrap) ul.type_02 {padding-left:0px !important;}
     .text-wrapper { font-size: 24px;}
     .title_wrap  {display:none;}
     .section-sub-title, .guide_title {font-size:24px;}
     .intro_desc {font-size:18px;}
     .step_list {flex-direction: column; align-items: flex-start; padding:0; }
-    .div_desc :deep(li), .bullet_01 li, .div_desc { font-size:18px;}
-    .step_list li {width:100%;}
+    .div_desc :deep(li), .bullet_01 li, .div_desc { font-size:18px; margin-top:12px; }
+    .step_list {padding:40px 30px; gap:24px; background-color:#f8f8f8; border-radius:8px}
+    .step_list li {width:100%; padding:0}
     .step_text {font-size:18px;}
+    .step_desc { font-size:14px; font-weight:400; color: #67676F; }
+    .sub_tab_wrap.mb40,
+    .guide_title.mb40 {margin-bottom:24px !important}
     .notice_list_area .base_table tbody tr td:first-of-type {display:none;}
     /* 기존 테이블 레이아웃 해제 */
     .notice_list_area .base_table tbody, .notice_list_area .base_table tr, .notice_list_area .base_table td {display: block; width: 100%; height:auto; border: 0;}
@@ -947,11 +954,12 @@ export default {
     .help_desk_area .info .note { font-size:12px;}
     .help_desk_area .info .btn_big {height:38px; font-size:16px;}
     .faq_a { padding-left: 20px; }
-    .card_grid {flex-direction:column;}
-    .card_grid .info_card {width:100%;}
+    .card_grid {overflow-x:auto; flex-wrap:nowrap;}
+    .card_grid .info_card {width:324px; flex:none;}
     .policy_wrap th, .policy_wrap td, .policy_wrap td a {font-size: 16px !important; }
 
     /* 입점안내 */
+    .gsrse02 .img_box .full_img {max-width:336px; display:inline-block;}
     .auth_table_area.mo { width: 100%; display: flex; flex-direction: column; box-sizing: border-box; }
     .auth_table_area.mo .text-wrapper-2.mb24 { margin-bottom: 24px; color: #161616; font-size: 18px; font-weight: 700; }
     .auth_table_area.mo .auth_header { display: flex; width: 100%; background-color: #f8f8f8; border-top:1px solid #161616; border-bottom: 1px solid #e5e5e9; }
@@ -988,5 +996,12 @@ export default {
 
     /* 상담신청 */
     .input_wrap.adress_wrap {flex-direction:column;}
+    
+    /* 7. 하단 공통 배너 */
+    .bottom_link_btns a {padding:20px 32px; justify-content:flex-start; gap:12px;}
+    .bottom_link_btns a::before {position:static; transform:none;}
+    .bottom_link_btns a::after {margin-left:0;}
+
+    .pagination_area.mt64 {margin-top:0px !important}
 }
 </style>

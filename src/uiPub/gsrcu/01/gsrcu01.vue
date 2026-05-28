@@ -22,6 +22,7 @@
                                     <dd class="tel-number">{{ brand.tel }}</dd>
                                     <dt class="blind">{{t.운영시간}}</dt>
                                     <dd class="working-hours" v-html="brand.hours"></dd>
+                                    <dd class="working-hours" v-html="brand.hours2"></dd>
                                 </dl>
                             </div>
                             <div class="brand-btn-group">
@@ -77,9 +78,6 @@
         <div id="gsrcu0101" class="modal_wrap">
             <div class="modal_container"></div>
         </div>
-        <div id="gsrcu0201" class="modal_wrap">
-            <div class="modal_container"></div>
-        </div>
 
     </div>
 </template>
@@ -103,7 +101,7 @@ export default {
                     CallCenterGuide: "※ 고객센터 대표전화 (무료)",
                     Brands: [
                         {
-                            id: "gs25", name: "GS25", tel: "080-999-5425", hours: "· 평일 9:00~18:00",
+                            id: "gs25", name: "GS25", tel: "080-999-5425", hours: "· 평일 9:00~18:00", hours2: "· 픽업/배달 문의 10:00~23:00<br />&nbsp;&nbsp;(연중무휴)",
                             buttons: [
                                 { label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" },
                                 { label: "창업안내", type: "link", target: "/gsrst02010101" }
@@ -114,7 +112,7 @@ export default {
                             buttons: [{ label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" }]
                         },
                         {
-                            id: "gsthefresh", name: "GS THE FRESH", tel: "080-345-7700", hours: "· 평일, 주말, 공휴일 10:00~19:00<br/>(명절 당일은 휴무)",
+                            id: "gsthefresh", name: "GS THE FRESH", tel: "080-345-7700", hours: "· 평일, 주말, 공휴일 10:00~19:00<br/>&nbsp;&nbsp;(명절 당일은 휴무)",
                             buttons: [
                                 { label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" },
                                 { label: "창업안내", type: "link", target: "/gsrst01010101" }
@@ -124,8 +122,7 @@ export default {
                     BottomLinks: [
                         { title: "정도경영목소리", btnLabel: "정도경영목소리", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target:"/gsrsu040101" },
                         { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
-                        { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
-                        { title: "제휴/협력문의", btnLabel: "제휴/협력문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0201", cont: "gsrcu0201" }
+                        { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" }
                     ],
                     전화번호:'전화번호',
                     운영시간:'운영시간'
@@ -190,6 +187,8 @@ em {margin-top:12px; color:#67676f; font-size:14px; font-weight:400; line-height
 
 h4 {margin-bottom:24px; color:#161616; font-size:20px; font-weight:700; line-height:1.35; letter-spacing:-0.2px;}
 .tel-number {padding-top:24px; margin-bottom:6px; color:#161616; font-size:28px; font-weight:700; line-height:1.35; letter-spacing:-0.28px; border-top:1px solid #E5E5E9;}
+.working-hours {font-size:14px; color:#67676F; line-height:1.5}
+.working-hours + .working-hours {margin-top:6px;}
 .brand-btn-group {width:100%; display:flex; gap:8px;}
 .service-link-list {width:100%; padding:100px 64px 0; display:flex; gap:20px; list-style:none;}
 .service-link-list li {width:100%; display:flex; flex-direction:column; gap:20px;}

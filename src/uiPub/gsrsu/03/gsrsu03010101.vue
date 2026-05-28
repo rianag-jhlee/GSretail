@@ -1197,222 +1197,233 @@
 
                             <!-- gsrsu030304 -->
                             <section v-if="SubTabIdx1 === 3 && t.protect.safetymanagement" class="safety_management_wrap">
-                                <div class="intro_summary">
-                                    <h3 class="text_summary" v-html="t.protect.safetymanagement.Summary"></h3>
-                                </div>
+                                <Tabs 
+                                    v-model="SubTabIdx2" 
+                                    :tab-items="t.Tabs3_4" 
+                                    tab-class="type_04" 
+                                    class="mb80" 
+                                    :tab-slide="true" 
+                                />
+                                <!-- 1. 안전·보건 경영방침 -->
+                                <div v-if="SubTabIdx2 === 0" class="">
+                                    <div class="intro_summary">
+                                        <h3 class="text_summary" v-html="t.protect.safetymanagement.Summary"></h3>
+                                    </div>
 
-                                <div class="contents">
-                                    <!-- 1. 안전·보건 경영방침 -->
-                                    <section class="protection_section mb120">
-                                        <div class="policy_card_box">
-                                            <div class="section_title_area mb40">
-                                                <h4 class="section_title_sub">{{ t.protect.safetymanagement.Policy.Title }}</h4>
+                                    <div class="contents">
+                                        <section class="protection_section mb120">
+                                            <div class="policy_card_box">
+                                                <div class="section_title_area mb40">
+                                                    <h4 class="section_title_sub">{{ t.protect.safetymanagement.Policy.Title }}</h4>
+                                                </div>
+                                                <ul class="policy_list_wrap">
+                                                    <li v-for="(item, idx) in t.protect.safetymanagement.Policy.Items" :key="'policy-'+idx" class="policy_item">
+                                                        <strong class="item_label">{{ item.label }}</strong>
+                                                        <p class="item_text">{{ item.text }}</p>
+                                                    </li>
+                                                </ul>
+                                                <div class="btn-wrap ac mt40">
+                                                    <button type="button" class="btn_icon_arrow btn_xl border after" 
+                                                        @click="openModal" 
+                                                        data-popid="gsrsu03030401" 
+                                                        data-type="lg" 
+                                                        data-cont="gsrsu03030401">
+                                                        {{ t.protect.safetymanagement.Policy.BtnText }}
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <ul class="policy_list_wrap">
-                                                <li v-for="(item, idx) in t.protect.safetymanagement.Policy.Items" :key="'policy-'+idx" class="policy_item">
-                                                    <strong class="item_label">{{ item.label }}</strong>
-                                                    <p class="item_text">{{ item.text }}</p>
+                                        </section>
+
+                                        <!-- 2. 안전보건 거버넌스 -->
+                                        <section class="protection_section mb120">
+                                            <div class="section_title_area mb40">
+                                                <h4 class="section_title_sub">{{ t.protect.safetymanagement.Governance.Title }}</h4>
+                                                <p class="p_desc" v-html="t.protect.safetymanagement.Governance.Desc"></p>
+                                            </div>
+                                            <figure class="diagram_box_wrap">
+                                                <div class="visual_area mb20">
+                                                    <img :src="isMobile ? t.protect.safetymanagement.Governance.imgMo1 : t.protect.safetymanagement.Governance.img1" :alt="t.protect.safetymanagement.Governance.alt">
+                                                    <p class="notice_text">{{ t.protect.safetymanagement.Governance.Notice }}</p>
+                                                </div>
+                                            </figure>
+                                        </section>
+
+                                        <!-- 3. 안전보건 교육 및 관리 체계 -->
+                                        <section class="protection_section mb120">
+                                            <div class="section_title_area mb40">
+                                                <h4 class="section_title_sub">{{ t.protect.safetymanagement.Safety.Title }}</h4>
+                                                <p class="p_desc" v-html="t.protect.safetymanagement.Safety.Desc"></p>
+                                            </div>
+                                            <ul class="safety_system_grid">
+                                                <li v-for="(item, idx) in t.protect.safetymanagement.Safety.Systems" :key="'system-'+idx" class="system_item">
+                                                    <div class="text_box">
+                                                        <span class="num">{{ item.num }}</span>
+                                                        <strong class="tit">{{ item.tit }}</strong>
+                                                        <span v-if="item.sub" class="sub">{{ item.sub }}</span>
+                                                    </div>
                                                 </li>
                                             </ul>
-                                            <div class="btn-wrap ac mt40">
-                                                <button type="button" class="btn_icon_arrow btn_xl border after" 
-                                                    @click="openModal" 
-                                                    data-popid="gsrsu03030401" 
-                                                    data-type="lg" 
-                                                    data-cont="gsrsu03030401">
-                                                    {{ t.protect.safetymanagement.Policy.BtnText }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </section>
+                                        </section>
+                                    </div>
+                                </div>
 
-                                    <!-- 2. 안전보건 거버넌스 -->
-                                    <section class="protection_section mb120">
-                                        <div class="section_title_area mb40">
-                                            <h4 class="section_title_sub">{{ t.protect.safetymanagement.Governance.Title }}</h4>
-                                            <p class="p_desc" v-html="t.protect.safetymanagement.Governance.Desc"></p>
-                                        </div>
-                                        <figure class="diagram_box_wrap">
-                                            <div class="visual_area mb20">
-                                                <img :src="isMobile ? t.protect.safetymanagement.Governance.imgMo1 : t.protect.safetymanagement.Governance.img1" :alt="t.protect.safetymanagement.Governance.alt">
-                                            </div>
-                                            <div class="notice_wrap mt20">
-                                                <p class="notice_text">{{ t.protect.safetymanagement.Governance.Notice }}</p>
-                                            </div>
-                                        </figure>
-                                    </section>
+                                <!-- 4. 안전·보건 의견 청취함 (문의 폼) -->
+                                <div v-if="SubTabIdx2 === 1" class="">
 
-                                    <!-- 3. 안전보건 교육 및 관리 체계 -->
-                                    <section class="protection_section mb120">
-                                        <div class="section_title_area mb40">
-                                            <h4 class="section_title_sub">{{ t.protect.safetymanagement.Safety.Title }}</h4>
-                                            <p class="p_desc" v-html="t.protect.safetymanagement.Safety.Desc"></p>
-                                        </div>
-                                        <ul class="safety_system_grid">
-                                            <li v-for="(item, idx) in t.protect.safetymanagement.Safety.Systems" :key="'system-'+idx" class="system_item">
-                                                <div class="text_box">
-                                                    <span class="num">{{ item.num }}</span>
-                                                    <strong class="tit">{{ item.tit }}</strong>
-                                                    <span v-if="item.sub" class="sub">{{ item.sub }}</span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </section>
-
-                                    <!-- 4. 안전·보건 의견 청취함 (문의 폼) -->
-                                    <section class="listening_form_area">
-                                        <div class="section_title_area mb40">
-                                            <h4 class="section_title_sub">{{ t.protect.safetymanagement.listening.Title }}</h4>
-                                            <p class="p_desc" v-html="t.protect.safetymanagement.listening.Desc"></p>
-                                            <ul class="bullet_01">
-                                                <li v-for="(list, lIdx) in t.protect.safetymanagement.listening.items" :key="'list-'+lIdx">{{ list }}</li>
-                                            </ul>
-                                        </div>
-                                        
-                                        <!-- 개인정보 동의 영역 (반복) -->
-                                        <div class="consent_container mb40">
-                                            <article v-for="(consent, cIdx) in t.protect.safetymanagement.listening.Consents" :key="'consent-'+cIdx" class="consent_box">
-                                                <strong class="consent_tit">{{ consent.title }}</strong>
-                                                <ul class="consent_list">
-                                                    <li v-for="(list, lIdx) in consent.items" :key="'list-'+lIdx">{{ list }}</li>
+                                    <div class="contents">
+                                        <section class="listening_form_area">
+                                            <div class="section_title_area mb40">
+                                                <h4 class="section_title_sub">{{ t.protect.safetymanagement.listening.Title }}</h4>
+                                                <p class="p_desc" v-html="t.protect.safetymanagement.listening.Desc"></p>
+                                                <ul class="bullet_01">
+                                                    <li v-for="(list, lIdx) in t.protect.safetymanagement.listening.items" :key="'list-'+lIdx">{{ list }}</li>
                                                 </ul>
-                                                <div class="consent_agree">
-                                                    <p class="guide_text" v-html="consent.guide"></p>
-                                                    <Inputs type="checkbox" :text="consent.ConsentText" />
-                                                </div>
-                                            </article>
-                                        </div>
-
-                                        <article class="noti_non_member">
-                                            <span>{{ t.protect.safetymanagement.listening.Nonmember.title }}</span>
-                                            <ul class="bullet_01">
-                                                <li v-for="(list, lIdx) in t.protect.safetymanagement.listening.Nonmember.items" :key="'list-'+lIdx">{{ list }}</li>
-                                            </ul>
-                                        </article>
-
-                                        <!-- 문의 폼 입력 영역 (필수 요소만 유지) -->
-                                        <div class="form_container">
-                                            <article class="listening_form_wrap">
-                                                <div class="form_section">
-                                                    <div class="form_header">
-                                                        <h5 class="form_title">{{ lp.part1.title }}</h5>
-                                                        <span class="required_guide">{{ lp.part1.requiredText }}</span>
-                                                    </div>
-                                                    <div class="form_body">
-                                                        <div class="form_row">
-                                                            <div class="label_item">
-                                                                <span class="label_text">{{ lp.part1.nameLabel }}</span>
-                                                                <span class="required_mark">*</span>
-                                                            </div>
-                                                            <div class="input_item">
-                                                                <Inputs type="text" v-model="formData.name" :placeholder="lp.part1.namePlaceholder" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form_row">
-                                                            <div class="label_item">
-                                                                <span class="label_text">{{ lp.part1.emailLabel }}</span>
-                                                                <span class="required_mark">*</span>
-                                                            </div>
-                                                            <div class="input_group email">
-                                                                <div class="group_wrap">
-                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="" /></div>
-                                                                    <span class="unit">@</span>
-                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="" /></div>
-                                                                </div>
-                                                                <SelectBox :options="lp.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form_row">
-                                                            <div class="label_item">
-                                                                <span class="label_text">{{ lp.part1.telLabel }}</span>
-                                                                <span class="required_mark">*</span>
-                                                            </div>
-                                                            <div class="input_group">
-                                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel1" is-disabled="true" /></div>
-                                                                <span class="unit">-</span>
-                                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
-                                                                <span class="unit">-</span>
-                                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel3" /></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form_section">
-                                                    <div class="form_header">
-                                                        <h5 class="form_title">{{ lp.part2.title }}</h5>
-                                                        <span class="required_guide">{{ lp.part1.requiredText }}</span>
-                                                    </div>
-                                                    <div class="form_body">
-                                                        <div class="form_row">
-                                                            <div class="label_item">
-                                                                <span class="label_text">{{ lp.part2.categoryLabel }}</span>
-                                                                <span class="required_mark">*</span>
-                                                            </div>
-                                                            <div class="input_item full">
-                                                                <SelectBox :options="lp.part2.categoryOptions" v-model="formData.category" initMsg="사업장 선택" class="w428" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form_row">
-                                                            <div class="label_item">
-                                                                <span class="label_text">{{ lp.part2.storeLabel }}</span>
-                                                            </div>
-                                                            <div class="input_complex">
-                                                                <Inputs type="text" v-model="formData.storeName" placeholder="" class="w428"/>
-                                                                <p class="guide_msg">{{ lp.part2.storeGuide }}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form_row">
-                                                            <div class="label_item">
-                                                                <span class="label_text">{{ lp.part2.subjectLabel }}</span>
-                                                                <span class="required_mark">*</span>
-                                                            </div>
-                                                            <div class="input_item full">
-                                                                <Inputs type="text" v-model="formData.subject" placeholder="" class="w428"/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form_row">
-                                                            <div class="label_item">
-                                                                <span class="label_text">{{ lp.part2.contentLabel }}</span>
-                                                                <span class="required_mark">*</span>
-                                                            </div>
-                                                            <div class="input_complex">
-                                                                <Textarea
-                                                                    v-model="formData.body"
-                                                                    :placeholder="lp.part2.contentPlaceholder"
-                                                                    :rows="6"
-                                                                    :maxlength="500"
-                                                                />
-                                                                <p class="guide_msg_multi" v-html="lp.part2.noticeText"></p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form_row">
-                                                            <div class="label_item">
-                                                                <span class="label_text">{{ lp.part2.fileLabel }}</span>
-                                                            </div>
-                                                            <div class="input_complex">
-                                                                <Inputs type="file" class="btn_file">{{ lp.part2.fileNotice }}</Inputs>
-                                                                <p class="guide_msg">{{ lp.part2.fileNotice }}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form_row">
-                                                            <div class="label_item">
-                                                                <span class="label_text">{{ lp.part2.replyLabel }}</span>
-                                                            </div>
-                                                            <div class="input_item full">
-                                                                <SelectBox :options="lp.part2.replyOptions" v-model="formData.replyType" initMsg="회신방법 선택" class="w428"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                            <div class="btn-wrap">
-                                                <Buttons btn-class="btn_big primary">{{ lp.part2.btnSubmit }}</Buttons>
-                                                <Buttons btn-class="btn_big gray">{{ lp.part2.btnCancel }}</Buttons>
                                             </div>
-                                        </div>
-                                        
-                                    </section>
+                                            
+                                            <!-- 개인정보 동의 영역 (반복) -->
+                                            <div class="consent_container mb40">
+                                                <article v-for="(consent, cIdx) in t.protect.safetymanagement.listening.Consents" :key="'consent-'+cIdx" class="consent_box">
+                                                    <strong class="consent_tit">{{ consent.title }}</strong>
+                                                    <ul class="consent_list">
+                                                        <li v-for="(list, lIdx) in consent.items" :key="'list-'+lIdx">{{ list }}</li>
+                                                    </ul>
+                                                    <div class="consent_agree">
+                                                        <p class="guide_text" v-html="consent.guide"></p>
+                                                        <Inputs type="checkbox" :text="consent.ConsentText" />
+                                                    </div>
+                                                </article>
+                                            </div>
+
+                                            <article class="noti_non_member">
+                                                <span>{{ t.protect.safetymanagement.listening.Nonmember.title }}</span>
+                                                <ul class="bullet_01">
+                                                    <li v-for="(list, lIdx) in t.protect.safetymanagement.listening.Nonmember.items" :key="'list-'+lIdx">{{ list }}</li>
+                                                </ul>
+                                            </article>
+
+                                            <!-- 문의 폼 입력 영역 (필수 요소만 유지) -->
+                                            <div class="form_container">
+                                                <article class="listening_form_wrap">
+                                                    <div class="form_section">
+                                                        <div class="form_header">
+                                                            <h5 class="form_title">{{ lp.part1.title }}</h5>
+                                                            <span class="required_guide">{{ lp.part1.requiredText }}</span>
+                                                        </div>
+                                                        <div class="form_body">
+                                                            <div class="form_row">
+                                                                <div class="label_item">
+                                                                    <span class="label_text">{{ lp.part1.nameLabel }}</span>
+                                                                    <span class="required_mark">*</span>
+                                                                </div>
+                                                                <div class="input_item">
+                                                                    <Inputs type="text" v-model="formData.name" :placeholder="lp.part1.namePlaceholder" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form_row">
+                                                                <div class="label_item">
+                                                                    <span class="label_text">{{ lp.part1.emailLabel }}</span>
+                                                                    <span class="required_mark">*</span>
+                                                                </div>
+                                                                <div class="input_group email">
+                                                                    <div class="group_wrap">
+                                                                        <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="" /></div>
+                                                                        <span class="unit">@</span>
+                                                                        <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="" /></div>
+                                                                    </div>
+                                                                    <SelectBox :options="lp.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form_row">
+                                                                <div class="label_item">
+                                                                    <span class="label_text">{{ lp.part1.telLabel }}</span>
+                                                                    <span class="required_mark">*</span>
+                                                                </div>
+                                                                <div class="input_group">
+                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.tel1" is-disabled="true" /></div>
+                                                                    <span class="unit">-</span>
+                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
+                                                                    <span class="unit">-</span>
+                                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.tel3" /></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form_section">
+                                                        <div class="form_header">
+                                                            <h5 class="form_title">{{ lp.part2.title }}</h5>
+                                                            <span class="required_guide">{{ lp.part1.requiredText }}</span>
+                                                        </div>
+                                                        <div class="form_body">
+                                                            <div class="form_row">
+                                                                <div class="label_item">
+                                                                    <span class="label_text">{{ lp.part2.categoryLabel }}</span>
+                                                                    <span class="required_mark">*</span>
+                                                                </div>
+                                                                <div class="input_item full">
+                                                                    <SelectBox :options="lp.part2.categoryOptions" v-model="formData.category" initMsg="사업장 선택" class="w428" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form_row">
+                                                                <div class="label_item">
+                                                                    <span class="label_text">{{ lp.part2.storeLabel }}</span>
+                                                                </div>
+                                                                <div class="input_complex">
+                                                                    <Inputs type="text" v-model="formData.storeName" placeholder="" class="w428"/>
+                                                                    <p class="guide_msg">{{ lp.part2.storeGuide }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form_row">
+                                                                <div class="label_item">
+                                                                    <span class="label_text">{{ lp.part2.subjectLabel }}</span>
+                                                                    <span class="required_mark">*</span>
+                                                                </div>
+                                                                <div class="input_item full">
+                                                                    <Inputs type="text" v-model="formData.subject" placeholder="" class="w428"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form_row">
+                                                                <div class="label_item">
+                                                                    <span class="label_text">{{ lp.part2.contentLabel }}</span>
+                                                                    <span class="required_mark">*</span>
+                                                                </div>
+                                                                <div class="input_complex">
+                                                                    <Textarea
+                                                                        v-model="formData.body"
+                                                                        :placeholder="lp.part2.contentPlaceholder"
+                                                                        :rows="6"
+                                                                        :maxlength="500"
+                                                                    />
+                                                                    <p class="guide_msg_multi" v-html="lp.part2.noticeText"></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form_row">
+                                                                <div class="label_item">
+                                                                    <span class="label_text">{{ lp.part2.fileLabel }}</span>
+                                                                </div>
+                                                                <div class="input_complex">
+                                                                    <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
+                                                                    <p class="guide_msg">{{ lp.part2.fileNotice }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form_row">
+                                                                <div class="label_item">
+                                                                    <span class="label_text">{{ lp.part2.replyLabel }}</span>
+                                                                </div>
+                                                                <div class="input_item full">
+                                                                    <SelectBox :options="lp.part2.replyOptions" v-model="formData.replyType" initMsg="회신방법 선택" class="w428"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                                <div class="btn-wrap">
+                                                    <Buttons btn-class="btn_big primary">{{ lp.part2.btnSubmit }}</Buttons>
+                                                    <Buttons btn-class="btn_big gray">{{ lp.part2.btnCancel }}</Buttons>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
                                 </div>
                             </section>
 
@@ -1567,10 +1578,11 @@ import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue"; 
 import Textarea from "@/components/Textarea.vue";
 import modal from "@/assets/js/modal";
+import FileUpload from "@/components/FileUpload.vue";
 
 export default {
     name: "gsrsu03010101",
-    components: { Tabs, Buttons, Pagination, Inputs, SelectBox, Textarea },
+    components: { Tabs, Buttons, Pagination, Inputs, SelectBox, Textarea, FileUpload },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
@@ -1651,6 +1663,11 @@ export default {
                         { item: "인재육성체계" }, 
                         { item: "인재경영 지표" }, 
                         { item: "인재경영 실적자료" }
+                    ],
+                    // 3depth (안전경영 하위)
+                    Tabs3_4: [
+                        { item: "안전경영 소개" }, 
+                        { item: "안전보건 의견 청취함" }, 
                     ],
                     WinWinIntro: {
                         Summary: "GS리테일의 동반성장 철학과 추진전략을 확인하실 수 있습니다.",
@@ -1911,11 +1928,11 @@ export default {
                         Policy: {
                             Title: "공급망 지속가능성 관리 방침",
                             Items: [
-                                { label: "첫째", desc: "공정거래를 준수하여 공정하고 투명한 거래를 하겠습니다." },
-                                { label: "둘째", desc: "공급망의 지속가능성 향상을 위해 ESG 교육 및 컨설팅을 비롯한 동반성장 프로그램 지원을 통한 공급망 역량강화를 위해 노력하겠습니다." },
-                                { label: "셋째", desc: "공급망 구매 경쟁력 강화를 위해 녹색구매정책에 기반한 녹색구매를 강화하고, 지속적으로 우수 공급사를 발굴하겠습니다." },
-                                { label: "넷째", desc: "정기적으로 공급망에 대한 지속가능성을 평가하고, 가이드라인 제공을 통해 공급망을 지원 및 리스크를 관리하겠습니다." },
-                                { label: "다섯째", desc: "공급망과의 원활한 소통을 위한 협력사간담회 및 익명제보채널 운영 등을 통해 소통을 강화하겠습니다." }
+                                { label: "하나", desc: "공정거래를 준수하여 공정하고 투명한 거래를 하겠습니다." },
+                                { label: "둘", desc: "공급망의 지속가능성 향상을 위해 ESG 교육 및 컨설팅을 비롯한 동반성장 프로그램 지원을 통한 공급망 역량강화를 위해 노력하겠습니다." },
+                                { label: "셋", desc: "공급망 구매 경쟁력 강화를 위해 녹색구매정책에 기반한 녹색구매를 강화하고, 지속적으로 우수 공급사를 발굴하겠습니다." },
+                                { label: "넷", desc: "정기적으로 공급망에 대한 지속가능성을 평가하고, 가이드라인 제공을 통해 공급망을 지원 및 리스크를 관리하겠습니다." },
+                                { label: "다섯", desc: "공급망과의 원활한 소통을 위한 협력사간담회 및 익명제보채널 운영 등을 통해 소통을 강화하겠습니다." }
                             ],
                             BtnText: "전문보기"
                         },
@@ -2234,7 +2251,7 @@ export default {
                                 alt: "인재경영 회의", 
                             },
                             part_2:{
-                                Summary: "진심 어린 서비스와 창의적 사고로 고객에게 사랑받는 최고의 전문가 육성을 위하여<br/>핵심가치, 직무역량, 리더십 역량, 자기주도학습 프로그램을 운영하고 있습니다.",
+                                Summary: "GS리테일은 핵심역량(직무·리더십·GS Way·온보딩)을 체계적으로 강화하고,<br/>구성원의 성장을 지원하는 인재육성체계를 운영하고 있습니다.",
                                 MainTitle: "GS 인재육성 체계",
                                 DiagramImg: require("@/assets/images/dummy/gsrsu03030202.png"),
                                 DiagramAlt: "GS 인재육성 체계 다이어그램",
@@ -2242,7 +2259,7 @@ export default {
                                     {
                                         num: "01",
                                         tit: "직무 역량",
-                                        desc: "직무 수행에 필요한 전문 지식과 실무 역량을 확장하여, 개인의 직무 성장을 체계적으로 이루도록 돕습니다.",
+                                        desc: "직무 수행에 필요한 전문 지식과 실무 역량을 확장하여,<br/>개인의 직무 성장을 체계적으로 이루도록 돕습니다.",
                                         list: ["직무 Academy / GenAI Academy", "직무성장플랜(나의 성장계획 작성)"]
                                     },
                                     {
@@ -2250,7 +2267,8 @@ export default {
                                         tit: "리더십 역량",
                                         desc: "리더로서 구성원의 잠재력을 이해하고, 신뢰와 협력을 기반으로 함께 성장하는 리더십을 개발할 수 있도록 지원합니다.",
                                         list: [
-                                            "임원 교육, 신임부문장 온보딩 과정 / 팀장 리더십 스쿨 / 신임 팀장 온보딩 과정 / BOLD Leader 과정 / BOLD Manager 과정 등",
+                                            "팀장 리더십 스쿨",
+                                            "BOLD Leader / BOLD Manager 과정",
                                             "조직책임자 리더십 워크숍, 임원/팀장 리더십 진단 및 피드백"
                                         ]
                                     },
@@ -2263,7 +2281,7 @@ export default {
                                     {
                                         num: "04",
                                         tit: "온보딩",
-                                        desc: "각 직책 · 경력 단계별 구성원이 조직과 역할을 이해하고, 성장의 출발점을 형성할 수 있도록 지원합니다.",
+                                        desc: "각 직책 · 경력 단계별 구성원이 조직과 역할을 이해하고,<br/>성장의 출발점을 형성할 수 있도록 지원합니다.",
                                         list: [
                                             "신임임원/신임팀장/신입사원/경력사원 온보딩 프로그램",
                                             "신입사원/경력사원 리텐션 프로그램",
@@ -2273,13 +2291,13 @@ export default {
                                     {
                                         num: "05",
                                         tit: "자기주도 학습",
-                                        desc: "구성원이 스스로 학습하고 지속적으로 성장할 수 있도록, 학습 인프라와 제도적 지원을 제공합니다.",
+                                        desc: "구성원이 스스로 학습하고 지속적으로 성장할 수 있도록,<br/>학습 인프라와 제도적 지원을 제공합니다.",
                                         list: ["내일On (온라인 연수원) / 전사 인사이트 특강", "자기주도학습 / 어학 / 자격증 / 사외과정 지원제도"]
                                     }
                                 ]
                             },
                             part_3: {
-                                Summary: "GS리테일은 인재의 가치를 소중히 여기고 있으며, 인재를 위한 다양한 제도를 운영하고 있습니다.",
+                                Summary: "GS리테일은 인재의 가치를 소중히 여기고 있으며, 인재를 위한<br/>다양한 제도를 운영하고 있습니다.",
                                 Sections: [
                                     {
                                         title: "Work",
@@ -2366,11 +2384,11 @@ export default {
                                 Desc: "GS리테일의 모든 임직원은 소비자의 권익 보호를 위해<br/>이로운 상품과 서비스를 제공하여 신뢰받는 GS리테일이 되고자 다음의 정책을 실천하고 있습니다.",
                                 BtnText: "전문보기",
                                 Items: [
-                                    { label: "첫째", text: "소비자의 합리적인 소비를 위해 충분하고 정확한 정보를 제공하겠습니다." },
-                                    { label: "둘째", text: "소비자에게 적합한 상품과 최상의 서비스를 제공하여 고객의 편익을 증진을 위해 노력하겠습니다." },
-                                    { label: "셋째", text: "소비자의 권익을 침해하는 불공정 거래행위를 근절하겠습니다." },
-                                    { label: "넷째", text: "소비자의 개인정보는 동의절차를 거치며 그 목적에 부합하는 최소한의 정보만 수집하겠습니다." },
-                                    { label: "다섯째", text: "소비자의 소리에 귀 기울이고 불편사항은 즉시 시정하여 최상의 상품을 제공하기 위해 노력하겠습니다." }
+                                    { label: "하나", text: "소비자의 합리적인 소비를 위해 충분하고 정확한 정보를 제공하겠습니다." },
+                                    { label: "둘", text: "소비자에게 적합한 상품과 최상의 서비스를 제공하여 고객의 편익을 증진을 위해 노력하겠습니다." },
+                                    { label: "셋", text: "소비자의 권익을 침해하는 불공정 거래행위를 근절하겠습니다." },
+                                    { label: "넷", text: "소비자의 개인정보는 동의절차를 거치며 그 목적에 부합하는 최소한의 정보만 수집하겠습니다." },
+                                    { label: "다섯", text: "소비자의 소리에 귀 기울이고 불편사항은 즉시 시정하여 최상의 상품을 제공하기 위해 노력하겠습니다." }
                                 ]
                             },
                             Activities: {
@@ -2410,16 +2428,16 @@ export default {
                                 Title: "제품과 서비스 인증 및<br/> 대외 수상 이력",
                                 History: [
                                     { year: "2019", month: "12월", desc: "대한민국브랜드 대상(산업통상자원부)" },
-                                    { year: "", month: "7월", desc: "GS리테일, 한국서비스대상 종합유통부문 최초 명예의 전당 헌액" },
-                                    { year: "", month: "6월", desc: "국가서비스대상 신선식품 쇼핑몰 부분 대상" },
-                                    { year: "2016", month: "9월", desc: "GS리테일, 한국의 경영대상 명예의 전당 헌액" }
+                                    { year: "", month: "7월", desc: "GS리테일, 한국서비스대상 종합유통부문 최초 명예의 전당 헌액 (한국표준협회)" },
+                                    { year: "", month: "6월", desc: "국가서비스대상 신선식품 쇼핑몰 부분 대상 (산업정책연구원)" },
+                                    { year: "2016", month: "9월", desc: "GS리테일, 한국의 경영대상 명예의 전당 헌액 (한국능률협회)" }
                                 ],
                                 Marks: [
                                     { img: require("@/assets/images/dummy/gsrsu030303_logo1.png"), tit: "ISO9001 인증획득 <br/>(한국기업인증원)", date: "2021. 05" },
                                     { img: require("@/assets/images/dummy/gsrsu030303_logo2.png"), tit: "대한민국브랜드 대상 <br/>(산업통상자원부)", date: "2019. 12" },
-                                    { img: require("@/assets/images/dummy/gsrsu030303_logo3.png"), tit: "GS리테일, 한국서비스대상 <br/>최초 명예의 전당 헌액", date: "2019. 07" },
-                                    { img: require("@/assets/images/dummy/gsrsu030303_logo4.png"), tit: "국가서비스대상 <br/>신선식품 쇼핑몰 부분 대상", date: "2019. 06" },
-                                    { img: require("@/assets/images/dummy/gsrsu030303_logo5.png"), tit: "GS리테일, 한국의경영대상 <br/>명예의 전당 헌액", date: "2016. 09" }
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo3.png"), tit: "GS리테일, 한국서비스대상 종합유통부문 최초 명예의 전당 헌액 (한국표준협회)", date: "2019. 07" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo4.png"), tit: "국가서비스대상 신선식품 쇼핑몰 부분 대상 (산업정책연구원)", date: "2019. 06" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo5.png"), tit: "GS리테일, 한국의 경영대상 명예의 전당 헌액 (한국능률협회)", date: "2016. 09" }
                                 ]
                             }
                         },
@@ -2429,12 +2447,12 @@ export default {
                                 Title: "안전·보건 경영방침",
                                 BtnText: "안전·보건 경영방침",
                                 Items: [
-                                    { label: "첫째", text: "회사는 산업안전보건법과 안전보건관리규정 등 관련 법규를 준수한다." },
-                                    { label: "둘째", text: "회사는 안전중심의 경영의지와 실적이 최고 수준에 도달하도록 노력한다." },
-                                    { label: "셋째", text: "회사는 안전보건업무를 경영의 한 요소로 인식하여 필요한 자원과 기술을 제공하고 안전·보건활동을 지속적으로 전개한다." },
-                                    { label: "넷째", text: "회사는 구성원(임직원, 협력사), 시민(고객, 일반시민)의 참여 및 의견을 적극 반영하고 불안전한 행동, 환경 등 사업장의 유해·위험 요소를 지속적으로 점검·제거하여 사고 및 재해를 예방하기 위해 노력한다." },
-                                    { label: "다섯째", text: "회사는 매년 사업장의 안전·보건 관련 법규 준수 상태를 확인하고 필요한 인력, 예산 등을 편성하여 집행한다." },
-                                    { label: "여섯째", text: "회사의 전 구성원은 본부의 안전·보건 활동 계획과 안전·보건 매뉴얼을 준수하여 중대재해 및 산업재해 예방활동에 적극 동참한다." }
+                                    { label: "하나", text: "회사는 산업안전보건법과 안전보건관리규정 등 관련 법규를 준수한다." },
+                                    { label: "둘", text: "회사는 안전중심의 경영의지와 실적이 최고 수준에 도달하도록 노력한다." },
+                                    { label: "셋", text: "회사는 안전보건업무를 경영의 한 요소로 인식하여 필요한 자원과 기술을 제공하고 안전·보건활동을 지속적으로 전개한다." },
+                                    { label: "넷", text: "회사는 구성원(임직원, 협력사), 시민(고객, 일반시민)의 참여 및 의견을 적극 반영하고 불안전한 행동, 환경 등 사업장의 유해·위험 요소를 지속적으로 점검·제거하여 사고 및 재해를 예방하기 위해 노력한다." },
+                                    { label: "다섯", text: "회사는 매년 사업장의 안전·보건 관련 법규 준수 상태를 확인하고 필요한 인력, 예산 등을 편성하여 집행한다." },
+                                    { label: "여섯", text: "회사의 전 구성원은 본부의 안전·보건 활동 계획과 안전·보건 매뉴얼을 준수하여 중대재해 및 산업재해 예방활동에 적극 동참한다." }
                                 ]
                             },
                             Governance: {
@@ -2443,7 +2461,7 @@ export default {
                                 img1: require("@/assets/images/dummy/gsrsu030304_1.png"),
                                 imgMo1: require("@/assets/images/dummy/gsrsu030304_1_mo.png"),
                                 alt: "플랫폼 BU 안전보건 조직도",
-                                Notice: "※이사회(ESG위원회) 정기보고"
+                                Notice: "1) 강서, N타워, 군포 물류센터, 이천 물류센터"
                             },
                             Safety: {
                                 Title: "안전보건 교육 및 관리 체계",
@@ -2772,7 +2790,7 @@ export default {
     .policy_box_wrap { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
     .policy_list { display: flex; flex-direction: column; gap: 24px; }
     .policy_item { display: flex; align-items: flex-start; gap: 12px; }
-    .policy_item .label { font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; min-width: 60px; }
+    .policy_item .label { font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; line-height: 1.45; }
     .policy_item .desc { font-size: 20px; font-weight: 400; color: #161616; line-height: 1.45; }
     .supplychain_policy .system_bg {display: block; margin-top:0; padding: 60px; background-color: #F8F8F8; border-radius: 12px; display: flex; justify-content: center; align-items: center; }
     .supplychain_policy .system_bg img {padding:60px 95px; background:#fff;}
@@ -2866,8 +2884,10 @@ export default {
     .talent_indicators .support_section .section_head {margin-bottom:40px;}
     .talent_indicators .support_section + .support_section {margin-top:100px;}
     .talent_indicators .section_title_sub { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+    .talent_indicators .support_section.award_section .award_row {padding: 9px 0;}
     /* 2열 그리드 레이아웃 */
-    .talent_indicators .support_grid {display: grid; grid-template-columns: repeat(2, 1fr); row-gap: 64px;}
+    .talent_indicators .support_grid {position:relative; display: grid; grid-template-columns: repeat(2, 1fr); row-gap: 64px;}
+    .talent_indicators .support_grid:after {content:''; position:absolute; left:0; right:0; bottom:0; border-bottom: 1px solid #E5E5E5;}
     .talent_indicators .support_item {min-height: 80px; padding-left: 100px; padding-bottom:64px; border-bottom:1px solid #E5E5E9; position: relative; }
     .talent_indicators .support_item + .support_item {margin-top:0;}
     /* .talent_indicators .support_item:nth-last-child(-n+2) {border-bottom: 0; padding-bottom: 0;} */
@@ -3088,33 +3108,38 @@ export default {
         .talent_indicators .support_grid {grid-template-columns: 1fr; row-gap: 40px;}
         .talent_indicators .support_item {padding-bottom:0px;}
         .award_section .brand_grid li {width:100%; max-width:100%;}
-        .customer_satisfaction .recommend_box {padding:20px; flex-direction:column;}
+        .customer_satisfaction .recommend_box {padding:20px; flex-direction:column; gap:24px}
         .btn_icon {width:100%;}
         .customer_satisfaction .recommend_box .btn_icon {margin-top:40px; display:block;}
+        .customer_satisfaction .recommend_box [class*="btn_"] {width:100%}
         .customer_satisfaction .safety_system_list{padding:0;}
         .customer_satisfaction .safety_system_list li, .customer_satisfaction .compensation_process_wrap .process_steps .step_box {width:100%;}
         .customer_satisfaction .safety_system_list li::before {width:60px; height:60px;}
         .customer_satisfaction .safety_system_list .tit_wrap strong {font-size:18px;}
         .customer_satisfaction .safety_system_list, .process_steps {flex-direction:column;}
         .customer_satisfaction .award_section .mark_item_group {width: calc(33.333% - 14px);}
+        .customer_satisfaction .award_section .mark_item_group .brand_grid.mt60 {margin-top:0px !important}
         .customer_satisfaction .brand_img_box img {width: 100%; max-width: 160px; margin: 0 auto;}
         .safety_management_wrap .diagram_box_wrap {padding: 20px;}
         .award_row .year, .award_row .month {width:60px;}
         .award_row .desc {width:calc(100% - 60px - 60px); display:inline-block;}
         .award_row .year,.award_row .month, .award_row .desc {font-size:14px;}
         .information_protection_management .diagram_box_wrap {padding:20px;}
+        .information_protection_management .protection_section.mb120 {margin-bottom:80px !important}
         .information_protection_management .text_summary { font-size: 26px; } 
         .information_protection_management .section_title_sub { font-size: 32px; } 
         .information_protection_management .p_desc { font-size:18px; } 
-        .information_protection_management th strong { font-size:18px; } 
+        .information_protection_management th strong { font-size:16px; font-weight:700; } 
         .information_protection_management td { font-size:16px !important; } 
         .information_protection_management .policy_wrap table {min-width:auto !important;}
         .information_protection_management .policy_wrap colgroup col:first-child { width: 100px !important; } 
+        .information_protection_management .policy_wrap + .btn-wrap [class*="btn_"] {width:100%}
         .information_protection_management .mark_item_group { flex-direction: column; align-items: flex-start; gap: 20px; } 
         .information_protection_management .brand_img_box { width: 100%; height: auto; padding: 40px 0; }
         .information_protection_management .notice_wrap {width:100%;}
         .information_protection_management .notice_text {margin-left:20px; margin-right:auto;}
         .information_protection_management .mark_item_group .brand_grid li {width: calc(100vw - 40px);}
+        .information_protection_management .mark_item_group .brand_grid.mt60 {margin-top:0px !important}
 
         .listening_form_wrap .form_row {flex-direction:column;}
     }
@@ -3186,9 +3211,11 @@ export default {
         .human_rights_management .program_grid {gap: 32px 10px}
         .human_rights_management .program_grid .program_item {width: calc(50% - 5px);}
         .policy_box_wrap { padding: 32px 20px; }
-        .policy_item { flex-direction: column; gap: 4px; }
-        .policy_item .label { font-size: 1.8rem; min-width: auto; }
+        .policy_list {gap:20px}
+        .policy_list_container.mt40 {margin-top:8px !important}
+        .policy_item .label { font-size: 1.8rem; }
         .policy_item .desc { font-size: 16px; }
+        .policy_list_container + .btn-wrap.mt60 {margin-top:40px !important}
         .supplychain_policy .system_bg { padding: 20px; }
         .supplychain_policy .system_bg img {padding:0;}
         .strategy_main_img { max-width: 295px; }
@@ -3225,25 +3252,40 @@ export default {
         .talent_performance_data .policy_wrap table {min-width: 500px;}
         .talent_performance_data .intro_summary .GS {font-size: 16px;}
         .talent_performance_data .intro_summary :deep(.GS) br {display:none;}
-        .talent_performance_data .policy_wrap tr td:last-of-type {display:none;}
-        .talent_performance_data .policy_wrap table colgroup col:last-of-type {display:none;}
+        .talent_performance_data .policy_wrap.mt60 {margin-top:40px !important; border-top:1px solid #161616;}
+        .talent_performance_data .policy_wrap *:not(button) {all:unset}
+        .talent_performance_data .policy_wrap thead {display:none}
+        .talent_performance_data .policy_wrap tr {position:relative; display:flex; justify-content:space-between; align-items:center; padding:13px 10px; border-bottom:1px solid #E5E5E5;}
+        .talent_performance_data .policy_wrap tr td {padding:0; border:0;}
+        .talent_performance_data .policy_wrap tr td:nth-of-type(1) {display:none;}
+        .talent_performance_data .policy_wrap tr td:nth-of-type(2) {padding-bottom:20px; font-size:16px;}
+        .talent_performance_data .policy_wrap tr td:last-of-type {position:absolute; left:10px; bottom:13px; font-size:12px; color:#67676F }
+        .talent_performance_data .policy_wrap tr td .btn_download_file span {display:none;}
         .value_detail_grid { padding: 0;} 
         .detail_card { padding: 24px; }
         .customer_satisfaction .award_section .mark_item_group {width: calc(50% - 10px);}
+        .customer_satisfaction .award_section {gap:32px 10px}
+        .customer_satisfaction .award_section .info_box {gap:6px}
+        .customer_satisfaction .award_section .info_box .tit {margin-bottom:0;}
+        .customer_satisfaction .brand_img_box {height:162px;}
         .customer_satisfaction .brand_img_box img {width:50%;}
+        .customer_satisfaction .policy_box_wrap .btn-wrap [class*="btn_"] {width:100%;}
         .award_section .info_box .tit {font-size:16px; text-align:center;}
         :deep(.award_section) .info_box .tit br {display:none;}
-        .award_section .info_box .date {font-size:14px; text-align:center;}
+        .award_section .info_box .date {font-size:14px; color:#67676F; text-align:center;}
         .customer_satisfaction .compensation_process_wrap .process_steps {padding:40px;}
         .customer_satisfaction .compensation_process_wrap .process_steps .step_box {padding-top:0; padding-left:60px;}
         .information_protection_management .award_section .info_box .tit, .information_protection_management .award_section .info_box .date  {text-align:left;}
         .information_protection_management .award_section .info_box .tit span {font-size:16px; font-weight:700;}
         .information_protection_management .award_section .info_box .tit {font-size:14px; font-weight:400; display:flex; flex-direction:column;}
+        .customer_satisfaction .compensation_process_wrap .process_steps + .btn-wrap [class*="btn_"] {width:100%;}
         .input_item, .input_complex, .input_wrap, .w428 {width:100%;}
         .form_body .form_row:first-of-type {padding-top:0px;}
         .listening_form_area .consent_box {padding:30px 20px;}
         .listening_form_wrap .input_group.email {flex-direction:column;}
         .listening_form_wrap .input_group.email .select {width:100%;}
+        .safety_management_wrap .tab_wrap.mb80 {margin-bottom:32px !important;}
+        .safety_management_wrap .text_summary {padding-top:0px;}
         .safety_management_wrap .system_item {width:100%;}
         .safety_management_wrap .system_item {padding: 24px 0 24px 76px;}
         .safety_management_wrap .text_box::before {width:60px; height:60px; top:50%; transform:translateY(-50%);}
@@ -3262,6 +3304,8 @@ export default {
         .safety_management_wrap .item_text { font-size:16px;}
         .safety_management_wrap .p_desc, .safety_management_wrap .consent_tit {font-size:18px;}
         .safety_management_wrap .consent_list li, .safety_management_wrap .consent_agree p, .listening_form_wrap .guide_msg_multi {font-size:14px;}
+        .safety_management_wrap .policy_card_box .btn-wrap [class*="btn_"] {width:100%;}
+        .safety_management_wrap .protection_section.mb120 {margin-bottom:80px !important;}
         .listening_form_wrap .input_complex .textarea_wrap {max-width:600px;}
         :deep(.guide_msg_multi) span {margin-bottom:8px; display:block;}
         :deep(.guide_msg_multi) span:last-of-type {margin-bottom:0;}
@@ -3355,5 +3399,11 @@ export default {
         .safety_management_wrap .system_item:nth-of-type(5) .text_box:after {background-position: -1px -653px;}
         .safety_management_wrap .system_item:nth-of-type(6) .text_box:after {background-position: -1px -697px;}
         .safety_management_wrap .system_item:nth-of-type(7) .text_box:after {background-position: -1px -740px;}
+
+        /* 인재경영지표 */
+        .talent_indicators .support_section.award_section .award_list + div {width:340px;}
+        .talent_indicators .support_section.award_section .info_box .tit,
+        .talent_indicators .support_section.award_section .info_box .date {text-align: left;}
+        .talent_indicators :deep(.award_section) .info_box .tit br {display: block;}
     }
 </style>
