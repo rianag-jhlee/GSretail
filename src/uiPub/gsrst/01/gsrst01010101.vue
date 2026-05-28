@@ -14,6 +14,7 @@
 
             <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) --> 
             <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
+            <Tabs v-show="activeD1 === 4" :tab-items="consultDepth2Tabs" tab-class="type_02" v-model="activeConsultD2" :tab-slide="true" />
 
             <!-- 가맹 조건 안내 (D2=0) -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
@@ -420,23 +421,23 @@
             </section>
                 
                 
-            <!-- 상담 및 신청 (activeD1 === 4) -->
-            <section class="sec_consult panel" v-show="activeD1 === 4 && !showConsultApplyPage">
+            <!-- 상담 및 신청 > 가맹/창업 상담 -->
+            <section class="sec_consult panel" v-show="activeD1 === 4 && activeConsultD2 === 0 && !showConsultApplyPage">
                 <header class="brand_panel_title flex">
                     <div>
                         <h2 v-html="t.consult.panelTitle"></h2>
                         <p v-if="t.consult.panelDesc" v-html="t.consult.panelDesc"></p>
                         <ul class="caution_list consult_caution_pc">
-                            <li>
-                                <p>{{ t.consult.caution }}</p>
+                            <li v-for="(item, index) in t.consult.caution" :key="`consult-caution-pc-${index}`">
+                                <p>{{ item }}</p>
                             </li>
                         </ul>
                     </div>
                     <Buttons btn-class="btn_icon fill btn_xl primary after" href="http://gsthefresh.gsretail.com/thefresh/ko/franchise-info/one-on-ones-consult/offer-location" target="_blank">입지상담 바로가기</Buttons>
                 </header>
                 <ul class="caution_list consult_caution_mo">
-                    <li>
-                        <p>{{ t.consult.caution }}</p>
+                    <li v-for="(item, index) in t.consult.caution" :key="`consult-caution-mo-${index}`">
+                        <p>{{ item }}</p>
                     </li>
                 </ul>
                 <ul class="consult_card_list">
@@ -491,6 +492,23 @@
                 <div class="info_banner">
                     <p>{{ t.consult.infoBannerText }}</p>
                     <Buttons btn-class="btn_mid border btn_icon_arrow after">{{ t.consult.infoBannerButtonLabel }}</Buttons>
+                </div>
+            </section>
+
+            <!-- 상담 및 신청 > 입지제안 상담 -->
+            <section class="sec_consult panel" v-show="activeD1 === 4 && activeConsultD2 === 1 && !showConsultApplyPage">
+                <div class="consult_box">
+                    <div class="consult_intro">
+                        <div class="consult_intro_txt">
+                            <h3 v-html="t.consultBox.title"></h3>
+                            <p v-html="t.consultBox.desc"></p>
+                            <ul class="caution_list">
+                                <li v-for="(item, index) in t.intro.caution" :key="`consult-caution-box-${index}`">
+                                    <p>{{ item }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -992,9 +1010,10 @@ const langData = {
             ],
         },
         consult: {
+            depth2Tabs: [{ item: "가맹/창업 상담" }, { item: "입지제안 상담" }],
             panelTitle: "컨설턴트와 1:1 상담",
             panelDesc: "가맹/창업 컨설턴트가 1:1로 상담해 드립니다. <br /> 가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.",
-            caution: "※ 주말 및 공휴일은 연락이 불가하며 평일 09:00~17:30 사이에 연락 부탁드립니다.",
+            caution: ["※ 주말 및 공휴일은 연락이 불가하며 평일 09:00~17:30 사이에 연락 부탁드립니다."],
             label: "컨설턴트",
             telButtonLabel: "연락처 확인하기",
             tooltipTitle: "연락처",
@@ -1006,6 +1025,10 @@ const langData = {
             applyButtonLabel: "상담신청",
             infoBannerText: "'입지' 및 '점포소유' 상담은 입지제안 사이트를 통해 확인 부탁드립니다.",
             infoBannerButtonLabel: "바로가기",
+            proposalPanelTitle: "입지제안 상담",
+            proposalPanelDesc: "점포 소유 및 입지 관련 상담은 입지제안 상담으로 안내해 드립니다.",
+            proposalCaution: "※ 입지제안 상담은 입지제안 사이트를 통해 접수 가능합니다.",
+            proposalButtonLabel: "입지상담 바로가기",
             cards: [
                 { name: "윤경진", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_01.png"), link: "#none" },
                 { name: "이승현", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_02.png"), link: "#none" },
@@ -1013,14 +1036,20 @@ const langData = {
                 { name: "남궁신영", region: "충북/강원권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_04.png"), link: "#none" },
                 { name: "김수진", region: "영남/호남권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_05.png"), link: "#none" },
             ],
+            proposalCards: [
+                { name: "입지상담 접수", region: "전국", note: "* 점포 소유 및 입지제안 상담" },
+                { name: "입지검토 신청", region: "전국", note: "* 상권/입지 검토 상담" },
+                { name: "점포제안 문의", region: "전국", note: "* 입지제안 관련 문의" },
+            ],
         },
         intro: {
             title: "안녕하세요!<br>GS THE FRESH 1:1 상담<br class=\"m_br\">컨설턴트 윤경진 입니다.",
             desc: "아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다. <br />담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.",
+            caution:["※ 규모: 전용면적 60평 이상", "※※ 주말/연휴에는 즉시 응답이 어려울 수 있는 점 양해 부탁드립니다."]
         },
         consultBox: {
-            title: "안녕하세요!<br />GS THE FRESH 1:1 상담 컨설턴트 윤경진 입니다.",
-            desc: "아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다.<br />담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.",
+            title: "입지제안 및 점포소유 상담",
+            desc: "GS더프레시 입지에 대한 상담을 지역별 담당자들이 1:1 맞춤 상담 해드립니다. <br />상담신청을 남겨주시면 담당자가 확인 후 연락드립니다.",
             consultantName: "윤경진 컨설턴트",
         },
         consent: {
@@ -1141,6 +1170,7 @@ const t = computed(() => {
 const activeD1 = ref(0);
 const activeD2 = ref(0);
 const activeD3 = ref(0);
+const activeConsultD2 = ref(0);
 const showConsultApplyPage = ref(false);
 
 const depth1Tabs = computed(() => t.value.depth1Tabs);
@@ -1152,6 +1182,7 @@ const precautionCards1 = computed(() => t.value.precaution.cards1);
 const precautionCards2 = computed(() => t.value.precaution.cards2);
 const supportCards = computed(() => t.value.support.cards);
 const consultCards = computed(() => t.value.consult.cards);
+const consultDepth2Tabs = computed(() => t.value.consult.depth2Tabs);
 const seminarList = computed(() => t.value.seminar.list);
 const hasStore = ref(null);
 const superItemOptions = computed(() => t.value.consultForm.superItemOptions);
@@ -1400,6 +1431,7 @@ watch([activeD1, activeD2], () => {
 watch(activeD1, (value) => {
     if (value !== 4) {
         showConsultApplyPage.value = false;
+        activeConsultD2.value = 0;
     }
 });
 
