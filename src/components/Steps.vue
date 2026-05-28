@@ -104,32 +104,32 @@ onUnmounted(() => {
     background-position: -660px -186px;
 }
 .step_type2 .step_item:nth-of-type(2) .step_icon {
-    background-position: -900px -104px;
-}
-.step_type2 .step_item:nth-of-type(3) .step_icon {
     background-position: -260px -20px;
 }
-.step_type2 .step_item:nth-of-type(4) .step_icon {
+.step_type2 .step_item:nth-of-type(3) .step_icon {
     background-position: -740px -103px;
 }
-.step_type2 .step_item:nth-of-type(5) .step_icon {
+.step_type2 .step_item:nth-of-type(4) .step_icon {
     background-position: -20px -20px;
 }
-.step_type2 .step_item:nth-of-type(6) .step_icon {
+.step_type2 .step_item:nth-of-type(5) .step_icon {
     background-position: -100px -104px;
 }
-.step_type2 .step_item:nth-of-type(7) .step_icon {
+.step_type2 .step_item:nth-of-type(6) .step_icon {
     background-position: -660px -102px;
 }
-.step_type2 .step_item:nth-of-type(8) .step_icon {
+.step_type2 .step_item:nth-of-type(7) .step_icon {
     background-position: -900px -186px;
 }
-.step_type2 .step_item:nth-of-type(9) .step_icon {
+.step_type2 .step_item:nth-of-type(8) .step_icon {
     background-position: -180px -186px;
 }
-.step_type2 .step_item:nth-of-type(10) .step_icon {
+.step_type2 .step_item:nth-of-type(9) .step_icon {
     background-position: -740px -103px;
 }
+/* .step_type2 .step_item:nth-of-type(10) .step_icon {
+    background-position: -740px -103px;
+} */
 /* ── 공통 텍스트 ── */
 .step_num {
     color: #107af2;
