@@ -10,10 +10,10 @@
         <!-- BODY -->
         <div class="cont_inner">
             <!-- Depth 1-->
-            <Tabs :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
+            <Tabs :tab-items="t.depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
 
             <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) --> 
-            <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
+            <Tabs v-show="activeD1 === 0" :tab-items="t.depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
             <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
             <Tabs v-show="activeD1 === 3" :tab-items="depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
 
@@ -1717,13 +1717,13 @@ function onProductHitSwiper(swiper, index) {
 }
 
 /* ── [공통] 1depth / 2depth 탭 라벨 ── */
-const depth1Tabs = [
-    { item: "GS25 창업 알아보기" },
-    { item: "창업 준비하기" },
-    { item: "추천 점포 찾기" },
-    { item: "상담 및 신청" },
-    { item: "가맹계약시스템" },
-];
+// const depth1Tabs = [
+//     { item: "GS25 창업 알아보기" },
+//     { item: "창업 준비하기" },
+//     { item: "추천 점포 찾기" },
+//     { item: "상담 및 신청" },
+//     { item: "가맹계약시스템" },
+// ];
  
 /* D1=0 2depth */
 const depth2Tabs = [
@@ -3277,7 +3277,135 @@ const langData = {
             listViewAriaLabel: "목록형",
             gridViewAriaLabel: "격자형",
         },
-        depth1Tabs,
+        depth1Tabs: [
+            { item: "GS25 창업 알아보기" },
+            { item: "창업 준비하기" },
+            { item: "추천 점포 찾기" },
+            { item: "상담 및 신청" },
+            { item: "가맹계약시스템" }
+        ],
+        depth2Tabs: [
+            { item: "GS25 브랜드 소개" },
+            { item: "차별화된 경쟁력" },
+            { item: "편의점 창업 이해" },
+            { item: "FAQ" },
+        ],
+        depth2TabsPrepare,
+        brandIntro,
+        brandApplyLinks,
+        brandStats,
+        successPointPanel,
+        successPointCards,
+        brandSolutionPanel,
+        brandSolutionCards,
+        startupProcessSteps,
+        franchiseTypeGroups,
+        consultEntryPanel,
+        depth3TabsBenefit,
+        benefitStorePanel,
+        benefitStoreItems,
+        benefitOperationPanel,
+        benefitOperationGroups,
+        benefitLifePanel,
+        benefitLifeItems,
+        benefitLifeNote,
+        competitivePanel,
+        competitiveCards,
+        storeOpenPanel,
+        storeOpenCards,
+        productConceptPanel,
+        megaHitPanel,
+        megaHitGroups,
+        freshFfCards,
+        conceptStorePanel,
+        conceptStoreCards,
+        marketingPanel,
+        marketingCards,
+        operationSupportPanel,
+        operationSupportCards,
+        convenienceDefinePanel,
+        convenienceEvolutionCore,
+        convenienceEvolutionStages,
+        franchiseDefinePanel,
+        franchiseDefineCard,
+        franchiseFormula,
+        franchiseRoleColumns,
+        startupFaqPanel,
+        startupFaqDummyAnswer,
+        startupFaqItems,
+        gs25FaqPanel,
+        gs25FaqTabs,
+        gs25FaqItems,
+        regionCounselPanel,
+        regionCounselEmpty,
+        regionCounselTabs,
+        regionCounselStaff,
+        storeRegions,
+        franchiseTypes,
+        depth2TabsConsult,
+        startupConsentItems,
+        seminarConsentItems,
+        counselConsentItems,
+        seminarDummyAddress,
+        seminarMonthSlides,
+        phoneOptions,
+        startupStoreOwnershipOptions,
+        startupCvsExperienceOptions,
+        startupRegionSidoOptions,
+        startupRegionSigunguMap,
+        consultTypeOptions,
+        startupConsultManager,
+    },
+    en: {
+        pageHeaderTitle: "EN - GS25 창업안내",
+        brandBannerImageAlt: "점포 이미지",
+        brandMoreButton: "GS25만의 경쟁력 더 알아보기",
+        franchiseFormulaAriaLabel: "프랜차이즈 성공 공식",
+        regionCounselMapAriaLabel: "지도 연동 예정 영역",
+        closeLabel: "닫기",
+        startupProcessTitle: "상담 신청부터 개점까지, <br />약 30일이면 나만의 GS25를 오픈할 수 있어요!",
+        processMoreOpenLabel: "더 알아보기",
+        processMoreCloseLabel: "접기",
+        franchiseTypeTitle: "내 자금과 상황에 딱 맞게! <br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요",
+        franchiseCompareTitle: "한눈에 비교하고, 나에게 유리한 타입을 찾아보세요!",
+        benefitPanelAria: {
+            store: "탄탄한 점포",
+            operation: "든든한 점포 운영",
+            life: "편안한 경영주 생활",
+        },
+        storeSectionAriaLabel: "추천 점포 찾기",
+        storeIntro: "안정적인 수입이 기대되는 최적의 입지! 성공 확률을 높이는 GS25 추천 점포를 만나보세요",
+        storeSearch: {
+            regionLabel: "지역",
+            allLabel: "전체",
+            franchiseTypeLabel: "가맹타입",
+            storeTypeYouthLabel: "점포유형/청년창업",
+            newStoreLabel: "신규점",
+            existingStoreLabel: "기존점",
+            youthStartupLabel: "청년창업",
+            youthStartupInfoAriaLabel: "청년창업 안내",
+            youthStartupTitle: "청년창업이란?",
+            youthStartupDesc: "20대 청년들을 위해서 투자비 일부를 할인해드리는 제도에요.",
+            youthStartupLinkText: "청년창업 자세히 보러가기",
+            searchLabel: "검색",
+            searchPlaceholder: "지역명, 태그....",
+            searchButtonAriaLabel: "검색",
+        },
+        storeListBar: {
+            countPrefix: "총",
+            countSuffix: "개 점포",
+            latestSortLabel: "최신순",
+            lowCostSortLabel: "투자비 낮은순",
+            listViewAriaLabel: "목록형",
+            gridViewAriaLabel: "격자형",
+        },
+        depth1Tabs: [
+            { item: "EN - GS25 창업 알아보기" },
+            { item: "창업 준비하기" },
+            { item: "추천 점포 찾기" },
+            { item: "상담 및 신청" },
+            { item: "가맹계약시스템" }
+        ],
         depth2Tabs,
         depth2TabsPrepare,
         brandIntro,
@@ -3345,7 +3473,6 @@ const langData = {
         consultTypeOptions,
         startupConsultManager,
     },
-    en: {},
 };
 
 const t = computed(() => {
