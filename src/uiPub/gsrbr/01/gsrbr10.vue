@@ -117,7 +117,7 @@ export default {
 @media screen and (max-width: 1024px) {}
 @media screen and (max-width: 768px) {
     .visual_img{height:100vh;}
-    .visual_img img{height:calc(100vh - 60px); object-fit:cover; object-position:65% center; transform:scale(1.18); transform-origin:center;}
+    .visual_img img{height:100%; object-fit:cover; object-position:65% center; transform:scale(1.18); transform-origin:center;}
     .text_box span {color:#fff; font-size:32px; font-weight:700; text-align:center; display: block;  }
     .body_wrap .cont_area {padding:140px 0px;}
     .body_wrap .cont_area .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:24px; font-weight:700;}
