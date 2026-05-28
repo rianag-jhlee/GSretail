@@ -135,7 +135,6 @@ export default {
 .content_section > dl > dt > span { display: inline-block; }
 .content_section > dl > dd { margin-top: 24px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; word-break: keep-all; }
 .content_section > dl > dd + dd { margin-top: 16px; }
-.bottom_btns{margin-top:60px;}
 @media screen and (max-width: 1024px) {
     .summary_box { padding: 40px; }
 }
