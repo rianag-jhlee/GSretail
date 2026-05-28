@@ -40,18 +40,20 @@
                             <table class="type_table">
                                 <colgroup>
                                     <col class="col_item_main" />
+                                    <col class="col_item_main" />
                                     <col class="col_item_sub" />
                                     <col class="col_cost" />
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th colspan="2" scope="col">{{ t.franchise.tableHead.item }}</th>
+                                        <th colspan="3" scope="col">{{ t.franchise.tableHead.item }}</th>
                                         <th scope="col">{{ t.franchise.tableHead.cost }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(row, rowIndex) in guide.tableRows" :key="rowIndex">
+                                    <tr v-for="(row, rowIndex) in guide.tableRows" :key="rowIndex" :class="{ is_gray: row.isGray }">
                                         <th v-if="row.main" :rowspan="row.mainRowspan" scope="rowgroup">{{ row.main }}</th>
+                                        <th v-if="row.subMain" :rowspan="row.subMainRowspan" scope="rowgroup">{{ row.subMain }}</th>
                                         <th :colspan="row.subColspan || 1" :scope="row.scope || 'row'" v-html="row.sub"></th>
                                         <td v-html="row.cost"></td>
                                     </tr>
@@ -106,6 +108,7 @@
                             </div>
                             <div class="precaution_block">
                                 <h4>{{ t.precaution.blockTitle2 }}</h4>
+                                <p v-if="t.precaution.blockTitle2Desc" class="block_desc">{{ t.precaution.blockTitle2Desc }}</p>
                                 <FeatureCards type="num" :items="precautionCards2" :no-swipe="true" />
                             </div>
                         </div>
@@ -406,39 +409,44 @@
             <!-- 경영주 지원제도 (activeD1 === 3) -->
             <section class="sec_owner_support panel" v-show="activeD1 === 3">
                 <p class="tab_intro" v-html="t.support.intro"></p>
-                <PanelHeader
-                    :hero="imgBg02"
-                    :title="t.support.panelTitle"
-                    :desc="t.support.panelDesc"
-                />
+                <figure class="brand_panel_bg">
+                    <img :src="imgBg02" alt="" width="1420" height="340" />
+                </figure>
+                <header class="brand_panel_title">
+                    <h2 v-html="t.support.panelTitle"></h2>
+                    <p v-if="t.support.panelDesc" v-html="t.support.panelDesc"></p>
+                </header>
                 <FeatureCards type="num" :items="supportCards" :swiper-space-between="0" />
             </section>
                 
                 
             <!-- 상담 및 신청 (activeD1 === 4) -->
             <section class="sec_consult panel"  v-show="activeD1 === 4">
-                <PanelHeader
-                    :hero=null
-                    :title="t.consult.panelTitle"
-                    :desc="t.consult.panelDesc">
-                    <ul class="caution_list">
-                        <li>
-                            <p>{{ t.consult.caution }}</p>
-                        </li>
-                    </ul>
-                </PanelHeader>
+                <header class="brand_panel_title flex">
+                    <div>
+                        <h2 v-html="t.consult.panelTitle"></h2>
+                        <p v-if="t.consult.panelDesc" v-html="t.consult.panelDesc"></p>
+                        <ul class="caution_list consult_caution_pc">
+                            <li>
+                                <p>{{ t.consult.caution }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <Buttons btn-class="btn_icon fill btn_xl primary after" href="http://gsthefresh.gsretail.com/thefresh/ko/franchise-info/one-on-ones-consult/offer-location" target="_blank">입지상담 바로가기</Buttons>
+                </header>
+                <ul class="caution_list consult_caution_mo">
+                    <li>
+                        <p>{{ t.consult.caution }}</p>
+                    </li>
+                </ul>
                 <ul class="consult_card_list">
                     <li v-for="(card, i) in consultCards" :key="i" class="consult_card">
-                        <div class="consult_thumb">
-                            <img :src="card.img" :alt="`${card.name} ${t.consult.label}`" />
-                        </div>
                         <div class="consult_body">
                             <div class="label_wrap">
                                 <p class="consult_label">{{ t.consult.label }}</p>
                                 <p class="consult_label">{{ card.name }}</p>
                             </div>
                             <p class="consult_label region">{{ card.region }}</p>
-                            <p class="consult_note">{{ card.note }}</p>
                             <div class="consult_tel_wrap">
                                 <button
                                     type="button"
@@ -452,19 +460,17 @@
                                     role="tooltip"
                                     @click.stop
                                 >   
-                                    <strong>{{ t.consult.tooltipTitle }}</strong>
-                                    <div class="pop_space">
-                                        <dl>
-                                            <dt>{{ t.consult.phoneLabel }}</dt>
-                                            <dd>{{ card.tel }}</dd> 
-                                            <dt>{{ t.consult.kakaoLabel }}</dt>
-                                            <dd>
-                                                <figure class="image_wrap">
-                                                    <img src="" :alt="t.consult.qrAlt">
-                                                </figure>
-                                            </dd>
-                                            <dd>{{ t.consult.kakaoNotice }}</dd>
-                                        </dl>
+                                    <strong class="consult_tel_title">{{ t.consult.tooltipTitle }}</strong>
+                                    <div class="consult_tel_content">
+                                        <p class="consult_tel_phone">
+                                            {{ t.consult.phoneLabel }}<br />
+                                            {{ card.tel }}
+                                        </p>
+                                        <p class="consult_tel_kakao">{{ t.consult.kakaoLabel }}</p>
+                                        <figure class="consult_tel_qr">
+                                            <span>QR 이미지</span>
+                                        </figure>
+                                        <p class="consult_tel_notice">{{ t.consult.kakaoNotice }}</p>
                                     </div>
                                     <button
                                         type="button"
@@ -474,11 +480,10 @@
                                     ></button>
                                 </div>
                             </div>
-                            
-                            
-                            <div class="consult_foot">
-                                <Buttons btn-class="btn_big border btn_icon_arrow after" data-popid="gsrst010301" data-type="lg" data-cont="gsrst010301" @click.prevent="openModal">{{ t.consult.applyButtonLabel }}</Buttons>
-                            </div>
+                            <p class="consult_note">{{ card.note }}</p>
+                        </div>
+                        <div class="consult_foot">
+                            <Buttons btn-class="btn_big border btn_icon_arrow after" data-popid="gsrst010301" data-type="lg" data-cont="gsrst010301" @click.prevent="openModal">{{ t.consult.applyButtonLabel }}</Buttons>
                         </div>
                     </li>
                 </ul>
@@ -525,7 +530,6 @@ import StoreCard from "@/components/StoreCard.vue";
 import StoreCardDetail from "@/components/StoreCardDetail.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
-import PanelHeader from "@/components/PanelHeader.vue";
 import modal from "@/assets/js/modal";
 import imgBg from "@/assets/images/dummy/gsrst01010101_bg.png";
 import imgBg02 from "@/assets/images/dummy/gsrst01010101_bg_02.png";
@@ -570,9 +574,10 @@ const langData = {
             guideTypes: [
                 {
                     tab: "GSF1타입",
+                    hasSubMainCol: true,
                     infoBar: "GSF1타입 - 본부가 임차하여 경영주 운영",
                     tableRows: [
-                        { main: "투자 금액", mainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세포함)" },
+                        { main: "투자 금액", mainRowspan: 9, subMain: "개점 투자", subMainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세포함)" },
                         { sub: "초기 상품대", cost: "7,000만원" },
                         { sub: "소모품", cost: "700만원" },
                         { sub: "시설보증금", cost: "500만원" },
@@ -580,14 +585,14 @@ const langData = {
                         { sub: "임차비용 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "시설투자 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "예치보증금", subColspan: 2, scope: "row", cost: "10,000만원 (보증보험 또는 현금)" },
-                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "최소 19,300만원" },
-                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 2, scope: "row", cost: "57% 매출총이익 구간별 52% ~ 62%" },
-                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 2, scope: "row", cost: "3년 / 3년 단위" },
-                        { sub: "담보설정", subColspan: 2, scope: "row", cost: "없음" },
-                        { sub: "** 최저 <br class=\"m_br\">수입 보조금", subColspan: 2, scope: "row", cost: "영업면적 200평  <br class=\"m_br\">초과 : 18백만/월 영업면적 165평 이상~200평 이하 : 16백만/월 영업면적 165평 미만 : 13백만/월" },
+                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금", isGray: true },
+                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 3, scope: "row", cost: "매출 총이익의52%(구간별 52% ~ 62%)" },
+                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 3, scope: "row", cost: "3년이상 / 3년 단위" },
+                        { sub: "담보설정", subColspan: 3, scope: "row", cost: "없음" },
+                        { sub: "운영비 최소보조", subColspan: 3, scope: "row", cost: "영업면적 200㎡ (60평)초과 : 18백만/월<br />영업면적 165㎡(50~60평) 이상~200㎡ 이하 : 16백만/월<br />영업면적 165㎡(50평) 미만 : 13백만/월    *적용기간 : 최초 1년" },
                     ],
                     cautions: [
-                        { text: "*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
+                        { text: "* 경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
                     ],
                     graph: {
                         title: "GSF1타입",
@@ -601,7 +606,7 @@ const langData = {
                     tab: "GSF2타입",
                     infoBar: "GSF2타입 - 경영주가 총투자비의 51% 부담. 경영주 운영",
                     tableRows: [
-                        { main: "투자 금액", mainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세 포함)" },
+                        { main: "투자 금액", mainRowspan: 9, subMain: "개점 투자", subMainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세포함)" },
                         { sub: "초기 상품대", cost: "7,000만원" },
                         { sub: "소모품", cost: "700만원" },
                         { sub: "시설보증금", cost: "500만원" },
@@ -609,15 +614,16 @@ const langData = {
                         { sub: "임차비용 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "시설투자 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "예치보증금", subColspan: 2, scope: "row", cost: "* 점포 총 투자비 X 51% ~ 9,300만원 (현금)" },
-                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금" },
-                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 2, scope: "row", cost: "49% 매출총이익 구간별 49% ~ 55%" },
-                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 2, scope: "row", cost: "3년 / 3년 단위" },
-                        { sub: "담보설정", subColspan: 2, scope: "row", cost: "없음" },
-                        { sub: "** 최저 <br class=\"m_br\">수입 보조금", subColspan: 2, scope: "row", cost: "영업면적 200평  <br class=\"m_br\">초과 : 18백만/월 영업면적 165평 이상~200평 이하 : 16백만/월 영업면적 165평 미만 : 13백만/월" },
+                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금", },
+                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 3, scope: "row", cost: "매출 총이익의49%(구간별 49% ~ 55%)", isGray: true },
+                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 3, scope: "row", cost: "3년 / 3년 단위" },
+                        { sub: "담보설정", subColspan: 3, scope: "row", cost: "5천만원 (보증보험 가능)" },
+                        { sub: "** 최저 수입 보조금", subColspan: 3, scope: "row", cost: "영업면적 200㎡ (60평)초과 : 18백만/월<br />영업면적 165㎡(50~60평) 이상~200㎡ 이하 : 16백만/월<br />영업면적 165㎡(50평) 미만 : 13백만/월    *적용기간 : 최초 1년" },
                     ],
                     cautions: [
-                        { text: "*점포 총 투자비는 임차비용, 시설투자비용, 개점투자비의 총 합산액." },
-                        { text: "**경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
+                        { text: "* 점포 총 투자비는 임차비용, 시설투자비용, 개점투자비의 총 합산액." },
+                        { text: "** 경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
+                        { text: "** 운영비 최소보조는 경영주 총수입 ( 경영주 월매출총이익 + 본부지원금 ) 기준이며, 인건비 등 영업비용 차감 전 입니다.(개점일로부터 최초 1년간 적용)" },
                     ],
                     graph: {
                         title: "GSF2타입",
@@ -632,7 +638,7 @@ const langData = {
                     tab: "GSF3타입",
                     infoBar: "GSF3타입 - 경영주가 임차하여 경영주 운영",
                     tableRows: [
-                        { main: "투자 금액", mainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세 포함)" },
+                        { main: "투자 금액", mainRowspan: 9, subMain: "개점 투자", subMainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세포함)" },
                         { sub: "초기 상품대", cost: "7,000만원" },
                         { sub: "소모품", cost: "700만원" },
                         { sub: "시설보증금", cost: "500만원" },
@@ -640,14 +646,15 @@ const langData = {
                         { sub: "임차비용 부담주체", subColspan: 2, scope: "row", cost: "경영주" },
                         { sub: "시설투자 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "예치보증금", subColspan: 2, scope: "row", cost: "없음" },
-                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금" },
-                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 2, scope: "row", cost: "24%" },
-                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 2, scope: "row", cost: "5년 / 5년 단위%" },
-                        { sub: "담보설정", subColspan: 2, scope: "row", cost: "최소 2억 이상" },
-                        { sub: "** 최저 <br class=\"m_br\">수입 보조금", subColspan: 2, scope: "row", cost: "해당사항 없음" },
+                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 임차비용", isGray:true},
+                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 3, scope: "row", cost: "24%" },
+                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 3, scope: "row", cost: "5년이상 / 3년 단위" },
+                        { sub: "담보설정", subColspan: 3, scope: "row", cost: "2억원이상 (보증보험 가능)" },
+                        { sub: "** 최저 수입 보조금", subColspan: 3, scope: "row", cost: "2억 6000만원 / 年 ( 약 2,167만원 / 月)" },
                     ],
                     cautions: [
-                        { text: "*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. <br class=\"mo\"/>(개점일로부터 최소 1년만 적용)" },
+                        { text: "* 경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. <br class=\"m_br\"/>(개점일로부터 최소 1년만 적용)" },
+                        { text: "* 운영비 최소보조는 경영주 총수입 ( 경영주 월매출총이익 + 본부지원금 ) 기준이며, 인건비 등 영업비용 차감 전 입니다.(개점일로부터 최초 1년간 적용)" },
                     ],
                 },
             ],
@@ -657,31 +664,30 @@ const langData = {
             buttonLabel: "설명회신청 바로가기",
             steps: [
                 { step: "Step 1", title: "사업설명회 참석", text: "GS THE FRESH 가맹 계약<br />조건안내 및 절차소개", numColor: "#15b874" },
-                { step: "Step 2", title: "정보공개서 확인", text: "가맹본부로부터 정보공개서를 제공받아 GS THE FRESH 사업성 검토", numColor: "#15b874" },
-                { step: "Step 3", title: "지원서 접수", text: "지원서 제출은 월~금요일 수시가능<br />(우편 접수 가능)", numColor: "#15b874" },
-                { step: "Step 4", title: "경영주 면담", text: "지원서를 토대로 면담 진행하여<br />사업 타당성 검토함", numColor: "#15b874" },
-                { step: "Step 5", title: "점포소개", text: "예비경영주 희망사항과<br />조건에 부합하는 점포를 소개함", numColor: "#15b874" },
-                { step: "Step 6", title: "가맹약정", text: "소개 점포의 운영의사 최종확인 및<br />약정금 지불", numColor: "#15b874" },
-                { step: "Step 7", title: "가맹 본 계약", text: "본계약금 최종 지불 및<br />본계약서 체결", numColor: "#15b874" },
-                { step: "Step 8", title: "경영주 교육 이수", text: "점포 현장 OJT,<br />입문 교육(이론/실습)", numColor: "#15b874" },
-                { step: "Step 9", title: "GRAND OPEN", text: "상품 재고조사 후 오픈", numColor: "#15b874" },
-                { step: "Step 10", title: "점포운영", text: "점포 영업 지원 담당 직원의<br />주기적인 방문 및 컨설팅", numColor: "#15b874" },
+                { step: "Step 2", title: "지원서 접수", text: "지원서 제출은 월~금요일 수시가능", numColor: "#15b874" },
+                { step: "Step 3", title: "경영주 면접", text: "지원서를 토대로 면담 진행하여<br />사업 타당성 검토함", numColor: "#15b874" },
+                { step: "Step 4", title: "점포소개", text: "예비경영주 희망사항과<br />조건에 부합하는 점포를 소개함", numColor: "#15b874" },
+                { step: "Step 5", title: "가맹약정(필요시)", text: "소개 점포의 운영의사 최종확인 및<br />약정금 지불", numColor: "#15b874" },
+                { step: "Step 6", title: "가맹 본 계약", text: "본계약금 최종 지불 및<br />본계약서 체결", numColor: "#15b874" },
+                { step: "Step 7", title: "경영주 교육 이수", text: "점포 현장 OJT,<br />입문 교육(이론/실습)", numColor: "#15b874" },
+                { step: "Step 8", title: "GRAND OPEN", text: "상품 재고조사 후 오픈", numColor: "#15b874" },
+                { step: "Step 9", title: "점포운영", text: "점포 영업 지원 담당 직원의<br />주기적인 방문 및 컨설팅", numColor: "#15b874" },
             ],
         },
         precaution: {
             title: "가맹 해약<br class=\"p_br\">수수료",
             blockTitle1: "GSF1, GSF2 타입",
             blockTitle2: "GSF3 타입",
+            blockTitle2Desc: "가맹본부 회계기준, 감가상각잔존가액 별도 보상",
             cards1: [
-                { num: "01", title: "중도해약", desc: "· 과거 1년간의 월평균 매출 총이익 20% × 3개월" },
-                { num: "02", title: "해지 사유 발생 시", desc: "· 과거 1년간의 월평균 매출 총이익 20% × 6개월" },
+                { num: "01", title: "중도 계약 해지", desc: "· 과거 1년간의 월 평균 매출 총이익 20% X 3개월 (3배)" },
+                { num: "02", title: "즉시 계약 해지사유 발생시", desc: "· 과거 1년간의 월 평균 매출 총이익 20% X 6개월 (6배)" },
             ],
             cards2: [
-                { num: "03", title: "기타 중도해약", desc: ["· 본부 산정", "· 개점일~ 3년 이내 : 76(74)%의 8개월", "· 3년~5년 이내 : 76(74)%의 4개월", "· 경영주 산정", "· 개점일~ 3년 이내 : 24(26)%의 8개월", "· 3년~5년 이내 : 24(26)%의 4개월"] },
-                { num: "04", title: "해지 사유 발생시", desc: ["· 영업의 침해/근무계약 위반, 본부 귀산 등", "· 본부 과태 시 : 76(74)%의 12개월 분", "· 경영주 과태시 : 24(26)%의 12개월"] },
+                { num: "01", title: "중도 계약 해지", desc: ["· 3년 미만 : 과거 1년간의 월 평균 매출 총이익 24% X 8개월 (8배) + 시설잔존", "· 3년~5년 이내 : 76(74)%의 4개월", "· 경영주 산정", "· 3년 이상 : 과거 1년간의 월 평균 매출 총이익 24% X 4개월 (4배) + 시설잔존"] },
+                { num: "02", title: "즉시 계약 해지사유 발생시", desc: ["· 운영기간 무관 과거 1년간의 월 평균 매출 총이익 24% X 12개월 (12배) + 시설잔"] },
             ],
             cautions: [
-                "가맹 본부 회계 기준, 감가상각 건으로 별도 보상",
                 "* 손해 배상금 별도이며 과거 영업기간이 1년 이하인 경우 해당 영업기간을 적용함.",
                 "* '과거 1년간'의 기간은 관리금 중도해약인 경우 중도해약 월로부터 가까운 기간으로 하고, 해지사유 발생인 경우에는 계약 해지 사유가 발생한 달의 직전월의 말일로부터 기 기산함.",
             ],
@@ -706,7 +712,7 @@ const langData = {
                         { label: "일시", value: "매월 1회" },
                         { label: "대상", value: "충청, 강원, 제주 GS THE FRESH 창업을 희망하는 분" },
                         { label: "준비물", value: "필기도구" },
-                        { label: "장소", value: "대전 유성구 엑스포로 107 대전컨벤션센터" },
+                        { label: "장소", value: "대전 중구 대종로167 모임공간 국보 3층" },
                         { label: "기타", value: "문의 010-2141-2816 (문자 OR 카톡)" },
                     ],
                 },
@@ -786,7 +792,7 @@ const langData = {
             ],
         },
         support: {
-            intro: "GS THE FRESH는 <br class=\"m_br\"/><span>경영주와의 공동의 발전</span>을 위해 <br />다양한 상생 제도를 운영하고 있습니다.",
+            intro: "GS THE FRESH는 <br class=\"m_br\"/><span class='txt_green'>경영주와의 공동의 발전</span>을 위해 <br />다양한 상생 제도를 운영하고 있습니다.",
             panelTitle: "운영지원제도",
             panelDesc: "GS THE FRESH 경영주님의 원활한 점포 운영을 위한 지원 제도 입니다.",
             cards: [
@@ -1080,9 +1086,9 @@ function toggleCard(id) {
 <style scoped>
 /* 브랜드 색 */
 .wrap_gsrst { --color-brand-primary: #15b874; position: relative; }
-
 .wrap_gsrst :deep([class*="btn_"][class*="fill"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
 .txt_warning { color: #ED3030 !important; }
+:deep(.txt_green){color:#11935D}
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
 
@@ -1112,12 +1118,13 @@ function toggleCard(id) {
 /* type_table */
 .type_table_wrap { margin-top: 20px; overflow-x: auto; border-top: 1px solid #161616; }
 .type_table { width: 100%; border-collapse: collapse; }
-.type_table .col_item_main { width: 177px; }
-.type_table .col_item_sub { width: 177px; }
+.type_table .col_item_main { width: 80px; }
+.type_table .col_item_sub { width: 195px; }
 .type_table .col_cost { width: auto; }
 .type_table thead th { padding: 28px 24px; background-color: #f8f8f8; border: 1px solid #e5e5e9; font-size: 1.8rem; text-align: center; line-height: 1.4; }
-.type_table tbody th { padding: 12px 24px; background-color: #f8f8f8; border: 1px solid #e5e5e9; font-size: 1.8rem; font-weight: 400; text-align: left; line-height: 1.4; }
+.type_table tbody th { padding: 12px 24px; background-color: #f8f8f8; border: 1px solid #e5e5e9; font-size: 1.8rem; font-weight: 400; text-align: left; line-height: 1.4; word-break: keep-all;}
 .type_table tbody td { border-bottom: 1px solid #e5e5e9; font-size: 1.8rem; text-align: center; padding: 12px 24px; line-height: 1.4; }
+.type_table tbody tr.is_gray > td { background-color: #f8f8f8; }
 .type_table_wrap.type2 .type_table thead th { padding: 18px 20px; line-height: 1.5; border: 0; }
 .type_table_wrap.type2 .type_table colgroup col { width: 12.5%; }
 .type_table_wrap.type2 .type_table tbody td { height: 82px; padding: 0 13px; }
@@ -1152,7 +1159,9 @@ function toggleCard(id) {
 .precaution_intro > p { color: #67676f; font-size: 1.8rem; line-height: 1.6; letter-spacing: -0.01em; }
 .precaution_main { flex: 1; min-width: 0; }
 .precaution_block + .precaution_block { margin-top: 56px; }
-.precaution_block > h4 { margin-bottom: 40px; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.precaution_block > h4 { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.precaution_block > .block_desc { margin-top:6px;color: #67676F; font-size: 1.8rem; line-height: 1.6;letter-spacing: -0.01em;}
+.sec_precaution :deep(.feature_card_list){margin-top: 40px;}
 .sec_precaution :deep(.feature_card_item) { background-color: #fff; min-height: 0; }
 .precaution_block_sm :deep(.feature_card_item) { min-height: 180px; }
 .sec_precaution :deep(.feature_card_num) { color: #15b874; }
@@ -1262,7 +1271,7 @@ function toggleCard(id) {
 
 /* 카드 그리드 뷰 */
 .store_card_grid_wrap { margin-top: 16px; display: flex; flex-direction: column; gap: 20px; }
-.store_card_row { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
+.store_card_row { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
 .store_card_row > li { display: flex; flex-direction: column; }
 
 /* 페이지네이션 */
@@ -1271,33 +1280,41 @@ function toggleCard(id) {
 /* 상담 및 신청 */
 .caution_list { margin-top: 16px; }
 .caution_list li p { color: #67676F; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
-.consult_card_list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.consult_card { padding: 32px 24px; background: #F8F8F8; border-radius: 12px; display: flex; gap: 32px; min-width: 0; }
-.consult_thumb { flex: 1 0 0; min-height: 120px; background-color: #D7D7DF;}
-.consult_thumb > img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.consult_body { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
-.consult_body p  { font-family: Pretendard;font-size: 1.8rem;line-height: 1.4;word-break: keep-all; }
-.consult_body p.region{margin-top:2px;}
-.consult_note { margin-top:2px;color:#67676F;}
+.consult_caution_mo { display: none; }
+.consult_card_list { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.consult_card { min-height: 239px; padding: 32px; background: #F8F8F8; border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; min-width: 0; }
+.consult_body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.consult_body p  {font-size: 1.6rem;line-height: 1.5;word-break: keep-all; }
+.consult_body p.consult_label { font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+.label_wrap .consult_label + .consult_label { margin-top:2px; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.consult_body p.region { margin-top: 2px; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
+.consult_note { margin-top: 2px; color:#67676F; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .consult_tel_wrap { position: relative; }
 .consult_tel_btn { margin-top: 32px; padding: 4px; background: none; border: 0; font-size: 1.6rem; font-weight: 500; color: #15B874; letter-spacing: -0.01em; line-height: 1.5; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; white-space: nowrap; }
 .consult_tel_btn::after { content: ""; width: 16px; height: 16px; background:url('@/assets/images/sub/icon_tel.png') no-repeat; flex-shrink: 0; display: inline-block; }
-.consult_tel { top: calc(100% + 8px); left: -119px; right: 0; }
-.consult_tel .pop_space {margin-top:24px;}
-.consult_tel .pop_space dt { font-size: 1.6rem; line-height: 150%;}
-.consult_tel .pop_space dd { font-size: 1.6rem; line-height: 150%;}
-.consult_tel .pop_space dd + dt {margin-top:16px;}
-.consult_tel .pop_space dd .image_wrap {margin:16px 0;width:120px; height:120px;}
-.consult_tel .pop_space dd .image_wrap img {width:100%; height:100%;}
-.consult_tel { margin-top: 4px; font-size: 1.4rem; font-weight: 500; color: #161616; letter-spacing: -0.01em; }
-.consult_foot { margin-top: 18px;  }
-.consult_foot button{max-width:123px;}
+.consult_tel { width: 300px; height: 372px; padding: 32px; border: 1px solid #c6c6c6; border-radius: 16px; background-color: #ffffff; position: absolute; top: 100%; left: 0; right: auto; z-index: 20;  }
+.consult_tel_title { color: #1d1d1d; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; display: block; }
+.consult_tel_content { margin-top: 24px; }
+.consult_tel_phone { color: #1d1d1d; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_tel_kakao { margin-top: 16px; color: #1d1d1d; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_tel_qr { width: 120px; height: 120px; margin-top: 16px; background-color: #d9d9d9; display: flex; align-items: center; justify-content: center; }
+.consult_tel_qr > span { color: #000000; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_tel_notice { margin-top: 16px; color: #1d1d1d; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_tel .layer_tooltip_close { top: 32px; right: 32px; }
+.consult_foot { margin-top: 0; flex: 0 0 auto; }
+.consult_foot button{width:164px;}
 /* .consult_foot :deep([class*="btn_"]) { width: 100%; max-width: 113px;;} */
 .info_banner { margin-top: 64px; padding: 34px 24px; background-color: #F9F2EA; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap:wrap;}
 .info_banner > p { display: flex; align-items: flex-start; gap: 12px; font-size: 1.8rem; line-height: 1.4; }
 .info_banner > p::before { content: ''; width: 27px; height: 27px; flex-shrink: 0; background: url('@/assets/images/common/icon_set_24.png') no-repeat -160px -56px;  display: block; }
 
 /* 경영주 지원제도 — 가로 패딩 없음(Swiper), 텍스트·패널만 20px */
+.brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
+.brand_panel_bg > img { width: 100%; display: block; object-fit: cover; }
+.brand_panel_title { padding: 0 0 100px; }
+.brand_panel_title.flex{display: flex;justify-content: space-between; align-items: center;}
+.brand_panel_title h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.brand_panel_title p { margin: 0; color: #161618; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
 .sec_owner_support .tab_intro { margin-bottom: 24px; padding-left: 20px; padding-right: 20px; box-sizing: border-box; }
 .sec_owner_support :deep(.brand_panel_title) { padding: 0 20px 64px; box-sizing: border-box; }
@@ -1312,7 +1329,7 @@ function toggleCard(id) {
 .sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(3) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_03.png"); }
 .sec_owner_support :deep(.feature_card_list > .feature_card_item:nth-child(4)),
 .sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(4) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_04.png"); }
-.label_wrap{display:flex; flex-direction:column; gap:2px; }
+/* .label_wrap{display:flex; flex-direction:column; gap:2px; } */
 .consult_tel_btn{margin-top:20px;}
 /* 상담 및신청 */
 .sec_consult :deep(.brand_panel_title) {padding-bottom:64px;}
@@ -1349,11 +1366,13 @@ function toggleCard(id) {
     .sec_precaution_inner { flex-direction: column; padding: 48px; gap: 32px; }
     .precaution_intro { width: 100%; }
     .precaution_intro > p { font-size: 1.6rem; }
-    .precaution_block > h4 { font-size: 2.4rem; margin-bottom: 24px; }
+    .precaution_block > h4 { font-size: 2.4rem;}
     .precaution_block + .precaution_block { margin-top: 40px; }
     .seminar_head > h3 { font-size: 3.2rem; }
     .seminar_head > p { font-size: 2rem; }
     .seminar_table thead th, .seminar_table tbody th, .seminar_table tbody td { font-size: 1.6rem; }
+    .brand_panel_title > h2 { font-size: 3.2rem; }
+    .brand_panel_title > p { font-size: 2rem; }
 
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
 }
@@ -1366,8 +1385,15 @@ function toggleCard(id) {
     .sec_body { padding: 24px 0 40px; }
     .header_title { font-size: 3.6rem; }
     /* ul::after 20px spacer, tab_wrap::after 32px 그라데이션은 common.css에서 전역 처리 */
-    .panel { padding: 60px 20px 80px; }
+    .panel { padding: 60px 0 80px; }
     .sec_owner_support.panel { padding-left: 0; padding-right: 0; }
+    .brand_panel_bg { margin: 0 0 24px; border-radius: 0; }
+    .brand_panel_bg > img { max-height: 245px; }
+    .brand_panel_title { padding: 0 0 64px; }
+    .brand_panel_title h2 {margin-bottom: 12px;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
+    .brand_panel_title p {font-size: 1.8rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .brand_panel_title.flex{flex-direction: column; align-items: flex-start; gap:16px;}
+    .brand_panel_title.flex > div + :deep(button){width:100%;}
     .tab_content_wrap { padding-top: 40px; }
     .tab_type > button { height: 48px; font-size: 1.4rem; }
     .type_info_bar { height: auto; min-height: 48px; padding: 20px 24px; font-size: 1.4rem; }
@@ -1390,7 +1416,9 @@ function toggleCard(id) {
     .sec_precaution_inner { margin-top: 32px; padding: 30px 20px; gap: 40px; display: block; }
     .precaution_intro { display: none; }
     .precaution_intro > p { font-size: 1.4rem; }
-    .precaution_block > h4 { font-size: 2rem; margin-bottom: 24px; }
+    .precaution_block > h4 { font-size: 2rem; }
+    .precaution_block > .block_desc{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .sec_precaution :deep(.feature_card_list){margin-top: 24px;}
     .sec_precaution :deep(.feature_card_title) { font-size: 1.8rem; }
     .seminar_info { padding-bottom: 18px; }
     .seminar_head > h3 { font-size: 2.8rem; }
@@ -1409,11 +1437,16 @@ function toggleCard(id) {
     .info_banner > p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .info_banner > p::before{width:24px; height:24px;}
     .caution_list li p{font-size: 1.4rem;}
-    .consult_card{padding:30px 20px;gap:20px;}
+    .consult_caution_pc { display: none; }
+    .consult_caution_mo { display: block; margin-top: 0; margin-bottom: 20px; padding: 0 20px; }
+    .consult_card{min-height:auto; padding:20px; flex-direction:column; gap:18px; align-items: flex-start;}
     .consult_card_list { grid-template-columns: 1fr; gap: 20px; }
-    .consult_thumb { flex: 0 0 135px; max-height: 180px; }
+    .consult_note { order: 1; }
+    .consult_tel_wrap { order: 2; }
+    .consult_tel_btn{margin-top:12px;}
+    .consult_foot{width:100%;}
+    .consult_foot :deep(button){width:100%;border-radius:4px; }
     .consult_name { font-size: 1.6rem; }
-    .consult_foot button{max-width :100%;}
 
     .store_list_wrap { margin-top: 60px; }
     .tab_intro { margin-bottom:60px; font-size: 1.8rem; line-height: 1.4;}
@@ -1424,8 +1457,8 @@ function toggleCard(id) {
     .search_group_input { width: 100%; }
     .store_search_input { height: 52px; }
     .layer_tooltip { left: -20px; right: auto; transform: none; width: calc(100vw - 40px); max-width: 335px; }
-    .youth_popover { top: calc(100% + 8px); }
-    .consult_tel { left: -155px; }
+    /* .youth_popover { top: calc(100% + 8px); } */
+    /* .consult_tel { left: -155px; } */
     .chip_list { position: relative; }
     .chip_youth_wrap { position: static; }
     .store_list_bar { margin-bottom: 16px; align-items: flex-end; gap: 12px; height: auto; }
@@ -1455,15 +1488,16 @@ function toggleCard(id) {
     .sec_owner_support :deep(.feature_card_swiper .swiper-slide) { width: 85.333vw; box-sizing: border-box; }
     .sec_owner_support :deep(.feature_card_swiper .feature_card_item) { width: 100%; min-width: 0; min-height: 420px !important; box-sizing: border-box; }
     .sec_owner_support :deep(.feature_card_swiper .swiper-slide:not(:last-child)) { margin-right: 20px; }
-    .label_wrap{display:flex; flex-direction:row; align-items: center; gap:0;}
-    .label_wrap .consult_label + .consult_label{font-weight:700; gap:0;}
+    .label_wrap{display:flex; flex-direction:row; align-items: flex-end; gap:0;}
+    .consult_body p.consult_label{font-weight: 400;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    .label_wrap .consult_label + .consult_label{font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;gap:0;}
     .consult_body p{font-size: 1.6rem;}
     .consult_body p.consult_label.region{margin-top:6px;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .consult_body p.consult_note{margin-top:2px;color:#67676F;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .consult_foot :deep([class*="btn_"]) {height:38px;}
-    .sec_consult :deep(.brand_panel_title){padding-bottom:32px !important;} 
-
+    .sec_consult :deep(.brand_panel_title){padding-bottom:16px;} 
+    /* .sec_consult :deep(button){width:100%;} */
     .quick_menu{display: none;}
-    
+    .sec_consult :deep(.brand_panel_title h2::after){width:32px; height:32px; background-image: url(@/assets/images/sub/icon_cont_32.png); background-position: -740px -103px;}
 }
 </style>
