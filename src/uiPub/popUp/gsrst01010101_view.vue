@@ -129,7 +129,7 @@ function closeModal(event) {
 @media (max-width: 768px) {
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
-    .modal_content { padding: 40px 0; }
+    .modal_content { padding: 0 20px; }
     .type_table_wrap { margin-top: 24px; }
     .type_table .col_item_main { width: 42px; }
     .type_table .col_item_sub { width: 120px; }
