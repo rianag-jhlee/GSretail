@@ -1,7 +1,7 @@
 <template>
     <div class="modal_cont gsrst010301">
         <!-- 타이틀 -->
-        <div class="modal_header">
+        <div v-if="!inlineMode" class="modal_header">
             {{ t.title }}
             <a href="#none" @click="closeModal" class="btn_close">닫기</a>
         </div>
@@ -170,18 +170,67 @@
                     </div>
                 </div>
             </div>
+            <div class="apply_form" v-show="hasStore === false">
+                <div class="form_head">
+                    <h3 class="form_head_title">{{ t.consultFormNoStore.title }}</h3>
+                    <span class="form_required_note">{{ t.requiredNote }}</span>
+                </div>
+                <div class="form_body">
+                    <div class="form_row">
+                        <div class="form_label">{{ t.consultFormNoStore.investmentLabel }}<span class="form_required">*</span></div>
+                        <div class="form_field">
+                            <SelectBox :options="t.consultFormNoStore.investmentOptions" v-model="consultForm.investmentAmount" />
+                        </div>
+                    </div>
+                    <div class="form_row">
+                        <div class="form_label">{{ t.consultFormNoStore.incomeLabel }}<span class="form_required">*</span></div>
+                        <div class="form_field">
+                            <SelectBox :options="t.consultFormNoStore.incomeOptions" v-model="consultForm.expectedIncome" />
+                        </div>
+                    </div>
+                    <div class="form_row">
+                        <div class="form_label">{{ t.consultFormNoStore.openRegionLabel }}<span class="form_required">*</span></div>
+                        <div class="form_field form_field_region">
+                            <SelectBox :options="sidoOptions" v-model="consultForm.openRegionSido" :initMsg="t.customerForm.sidoInitMsg" @update:modelValue="consultForm.openRegionSigungu = ''" />
+                            <SelectBox :options="openSigunguOptions" v-model="consultForm.openRegionSigungu" :initMsg="t.customerForm.sigunguInitMsg" :disabled="!consultForm.openRegionSido" />
+                        </div>
+                    </div>
+                    <div class="form_row">
+                        <div class="form_label">{{ t.consultFormNoStore.openTimeLabel }}<span class="form_required">*</span></div>
+                        <div class="form_field form_field_region">
+                            <SelectBox :options="t.consultFormNoStore.openYearOptions" v-model="consultForm.openYear" />
+                            <SelectBox :options="t.consultFormNoStore.openMonthOptions" v-model="consultForm.openMonth" />
+                        </div>
+                    </div>
+                    <div class="form_row">
+                        <div class="form_label">{{ t.consultFormNoStore.typeLabel }}<span class="form_required">*</span></div>
+                        <div class="form_field form_field_franchise">
+                            <div class="franchise_type_item" v-for="opt in t.consultFormNoStore.franchiseTypeOptions" :key="opt.value">
+                                <Inputs type="radio" :name="'franchiseType'" :value="opt.value" v-model="consultForm.franchiseType" :text="opt.label" />
+                                <Buttons btn-class="btn_small border">{{ t.consultFormNoStore.viewLabel }}</Buttons>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_row">
+                        <div class="form_label">{{ t.consultFormNoStore.inquiryLabel }}<span class="form_required">*</span></div>
+                        <div class="form_field">
+                            <textarea v-model="consultForm.inquiry" :placeholder="t.consultFormNoStore.inquiryPlaceholder"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="modal_bottom">
             <Buttons btn-class="btn_big primary">{{ t.submitLabel }}</Buttons>
-            <Buttons btn-class="btn_big gary" @click="closeModal">{{ t.resetLabel }}</Buttons>
+            <Buttons btn-class="btn_big gary" @click="closeModal">{{ inlineMode ? t.closeLabel : t.resetLabel }}</Buttons>
         </div>
 
     </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed, defineProps } from "vue";
+import { ref, reactive, computed, defineProps, defineEmits } from "vue";
 import modal from "@/assets/js/modal";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
@@ -192,7 +241,12 @@ const props = defineProps({
         type: String,
         default: "ko",
     },
+    inlineMode: {
+        type: Boolean,
+        default: false,
+    },
 });
+const emit = defineEmits(["close"]);
 
 const langData = {
     ko: {
@@ -289,8 +343,29 @@ const langData = {
                 제주: ["제주시","서귀포시"],
             },
         },
+        consultFormNoStore: {
+            title: "상담내용",
+            investmentLabel: "투자 가능금액",
+            investmentOptions: ["3000만원 이하", "3000만원~5000만원", "5000만원 이상"],
+            incomeLabel: "기대 소득",
+            incomeOptions: ["150~200만원", "200~300만원", "300만원 이상"],
+            openRegionLabel: "개설 희망지역",
+            openTimeLabel: "개설 희망시기",
+            openYearOptions: ["2026년", "2027년", "2028년"],
+            openMonthOptions: ["01월", "02월", "03월", "04월", "05월", "06월", "07월", "08월", "09월", "10월", "11월", "12월"],
+            typeLabel: "개설희망 가맹타입",
+            franchiseTypeOptions: [
+                { value: "GSF1", label: "GSF1 타입" },
+                { value: "GSF2", label: "GSF2 타입" },
+                { value: "GSF3", label: "GSF3타입" },
+            ],
+            viewLabel: "보기",
+            inquiryLabel: "문의내용",
+            inquiryPlaceholder: "문의내용을 입력해주세요.",
+        },
         submitLabel: "상담신청",
         resetLabel: "다시작성",
+        closeLabel: "닫기",
     },
     en: {},
 };
@@ -300,7 +375,6 @@ const t = computed(() => {
     return selected && Object.keys(selected).length ? selected : langData.ko;
 });
 
-const consentAgree = ref(false);
 const hasStore = ref(null); // null: 미선택 / true: 있다 / false: 없다
 
 const superItemOptions = computed(() => t.value.consultForm.superItemOptions);
@@ -310,6 +384,10 @@ const sigunguMap = computed(() => t.value.consultForm.sigunguMap);
 
 const sigunguOptions = computed(() => {
     const list = sigunguMap.value[consultForm.regionSido] || [];
+    return list.map(v => ({ value: v, label: v }));
+});
+const openSigunguOptions = computed(() => {
+    const list = sigunguMap.value[consultForm.openRegionSido] || [];
     return list.map(v => ({ value: v, label: v }));
 });
 
@@ -323,6 +401,14 @@ const consultForm = reactive({
     emailDomainCustom: "",
     regionSido: "",
     regionSigungu: "",
+    investmentAmount: "",
+    expectedIncome: "",
+    openRegionSido: "",
+    openRegionSigungu: "",
+    openYear: "",
+    openMonth: "",
+    franchiseType: "",
+    inquiry: "",
     prevJob: "",
     areaContract: "",
     areaExclusive: "",
@@ -351,6 +437,10 @@ const emailDomainOptions = [
 ];
 
 function closeModal(event) {
+    if (props.inlineMode) {
+        emit("close");
+        return;
+    }
     modal.close(event.currentTarget);
 }
 </script>
@@ -395,12 +485,18 @@ function closeModal(event) {
 .form_field_region :deep(.select) { flex: 1; min-width: 0; max-width: 220px; }
 .form_field_region :deep(.select select) { width: 100%; font-size: 1.6rem; }
 .form_field_area .form_sub_input_wrap :deep(.input_wrap) { width: 160px; }
-.check_list :deep(.input_wrap) { width: auto; flex:none;}
+.check_list :deep(.input_wrap) { width: auto !important; flex:none !important;}
 
 .check_etc .form_sub_label { min-width: 28px; }
 .check_etc :deep(.input_wrap) { flex: 1; max-width: 428px; }
 .form_sub_inputs :deep(.input_wrap) { width: 134px; }
 .contract_rent .form_sub_input_wrap :deep(.input_wrap) { width: 134px; }
+.form_field_franchise { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+.franchise_type_item { display: inline-flex; align-items: center; gap: 8px; }
+.franchise_type_item :deep(.input_wrap) { width: auto; }
+.franchise_type_item :deep(.btn_small) { min-width: 60px; height: 44px; }
+.form_field > textarea { width: 100%; min-height: 160px; padding: 14px 16px; border: 1px solid #c4c4d0; border-radius: 12px; color: #161616; font-size: 1.6rem; line-height: 1.5; resize: vertical; box-sizing: border-box; }
+.form_field > textarea::placeholder { color: #a4a4b0; }
 .modal_bottom { margin-top: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
 .modal_bottom > :deep(.btn_big) { width: 134px; text-align: center; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 
@@ -442,5 +538,7 @@ function closeModal(event) {
     .form_field_area .form_sub_input_wrap :deep(.input_wrap) { width: 100%; }
     .form_field > :deep(.input_wrap) { max-width: 100%; }
     .form_sub_inputs :deep(.input_wrap) { width: 100%; }
+    .form_field_franchise { gap: 8px 12px; }
+    .franchise_type_item :deep(.btn_small) { height: 38px; }
 }
 </style>
