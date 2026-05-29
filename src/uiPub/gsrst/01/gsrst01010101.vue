@@ -510,6 +510,113 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="form_row">
+                    <div class="form_label">{{ t.proposalForm.regionLabel }}<span class="form_required">*</span></div>
+                    <div class="form_field form_field_region">
+                        <SelectBox :options="sidoOptions" v-model="consultForm.openRegionSido" :initMsg="t.proposalForm.sidoInitMsg" @update:modelValue="consultForm.openRegionSigungu = ''" />
+                        <SelectBox :options="openSigunguOptions" v-model="consultForm.openRegionSigungu" :initMsg="t.proposalForm.sigunguInitMsg" :disabled="!consultForm.openRegionSido" />
+                    </div>
+                </div>
+                <ConsentInfoBox title="개인정보 수집·이용 동의" :items="t.consent2.items" :notice-html="t.consent2.noticeHtml" />
+                <!-- 고객정보 폼 -->
+                <div class="apply_form">
+                    <div class="form_head">
+                        <h3 class="form_head_title">{{ t.proposalCustomerForm.title }}</h3>
+                        <span class="form_required_note">{{ t.requiredNote }}</span>
+                    </div>
+                    <div class="form_body">
+                        <div class="form_row form_row_name">
+                            <div class="form_label">{{ t.proposalCustomerForm.nameLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field">
+                                <Inputs type="text" v-model="consultForm.name" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.proposalCustomerForm.emailLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_email">
+                                <Inputs type="text" v-model="consultForm.emailId" />
+                                <span class="form_sep">@</span>
+                                <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" :placeholder="t.proposalCustomerForm.emailPlaceholder" />
+                                <Inputs v-else type="text" :model-value="consultForm.emailDomain" :is-readonly="true" />
+                                <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.proposalCustomerForm.phoneLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_phone">
+                                <SelectBox :options="phoneOptions" v-model="consultForm.phone1" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone2" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone3" />
+                            </div>
+                        </div>
+                        <div class="form_row form_row_address">
+                            <div class="form_label">{{ t.proposalCustomerForm.storeAddressLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_address">
+                                <div class="form_zip_row">
+                                    <Inputs type="text" v-model="consultForm.proposalZipCode" />
+                                    <Buttons type="button" btn-class="btn_big border" @click.prevent="onProposalZipSearch">{{ t.proposalCustomerForm.zipButtonLabel }}</Buttons>
+                                </div>
+                                <!-- <div class="form_addr_group">
+                                    <Inputs type="text" v-model="consultForm.proposalAddrBasic" :is-disabled="true" />
+                                    <div class="form_addr_detail">
+                                        <Inputs type="text" v-model="consultForm.proposalAddrDetail1" />
+                                        <Inputs type="text" v-model="consultForm.proposalAddrDetail2" />
+                                    </div>
+                                </div> -->
+                             
+                            </div>
+                        </div>
+                        <div class="form_row form_row_area">
+                            <div class="form_label">{{ t.proposalCustomerForm.storeAreaLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_area">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.proposalCustomerForm.contractAreaLabel }}</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.proposalAreaContract" />
+                                        <span class="form_sub_unit">{{ t.proposalCustomerForm.areaUnit }}</span>
+                                    </div>
+                                </div>
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.proposalCustomerForm.exclusiveAreaLabel }}</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.proposalAreaExclusive" />
+                                        <span class="form_sub_unit">{{ t.proposalCustomerForm.areaUnit }}</span>
+                                        <span class="area_note">{{ t.proposalCustomerForm.areaNote }}</span>
+                                        <p class="form_field_note" v-html="t.proposalCustomerForm.addressNote"></p>
+                                    </div>
+                                </div>
+                             
+                                <p class="form_field_note">{{ t.proposalCustomerForm.legalNotice }}</p>
+                                 
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.proposalCustomerForm.storeNameLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_store">
+                                <Inputs type="text" v-model="consultForm.proposalStoreName" />
+                            </div>
+                        </div>
+                        <div class="form_row form_row_textarea">
+                            <div class="form_label">{{ t.proposalCustomerForm.commercialFeatureLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field">
+                                <Textarea v-model="consultForm.proposalCommercialFeature" name="proposal_commercial_feature" :placeholder="t.proposalCustomerForm.commercialFeaturePlaceholder" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.proposalCustomerForm.ownerRelationLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_store">
+                                <Inputs type="text" v-model="consultForm.proposalOwnerRelation" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button_wrap">
+                    <Buttons btn-class="btn_big primary">{{ t.consultForm.submitLabel }}</Buttons>
+                    <Buttons btn-class="btn_big gary">{{ t.consultForm.resetLabel }}</Buttons>
+                </div>
             </section>
 
             <section class="sec_consult_apply panel" v-show="activeD1 === 4 && showConsultApplyPage">
@@ -543,7 +650,7 @@
                         <div class="form_row form_row_name">
                             <div class="form_label">{{ t.customerForm.nameLabel }}<span class="form_required">*</span></div>
                             <div class="form_field">
-                                <Inputs type="text" />
+                                <Inputs type="text" v-model="consultForm.name" />
                             </div>
                         </div>
                         <div class="form_row">
@@ -733,6 +840,7 @@ import Buttons from "@/components/Buttons.vue";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import ConsentInfoBox from "@/components/ConsentInfoBox.vue";
+import Textarea from "@/components/Textarea.vue";
 import StoreCard from "@/components/StoreCard.vue";
 import StoreCardDetail from "@/components/StoreCardDetail.vue";
 import Accordion from "@/components/Accordion.vue";
@@ -1052,6 +1160,31 @@ const langData = {
             desc: "GS더프레시 입지에 대한 상담을 지역별 담당자들이 1:1 맞춤 상담 해드립니다. <br />상담신청을 남겨주시면 담당자가 확인 후 연락드립니다.",
             consultantName: "윤경진 컨설턴트",
         },
+        proposalForm: {
+            regionLabel: "입지제안 지역 선택",
+            sidoInitMsg: "지역선택",
+            sigunguInitMsg: "구/군 선택",
+        },
+        proposalCustomerForm: {
+            title: "고객정보",
+            nameLabel: "이름",
+            emailLabel: "이메일",
+            emailPlaceholder: "직접입력",
+            phoneLabel: "휴대폰",
+            storeAddressLabel: "추천점포 소재지",
+            zipButtonLabel: "우편번호 찾기",
+            addressNote: "<span class=\"form_required\">*</span> 추천점포 소재지는 필수입력 사항입니다.",
+            storeAreaLabel: "추천점포 면적",
+            contractAreaLabel: "계약면적",
+            exclusiveAreaLabel: "전용면적",
+            areaUnit: "평",
+            areaNote: "* 평 = (기준)평 x 3.3",
+            legalNotice: "* 법정도량은 계약면적을 기준으로 합니다.",
+            storeNameLabel: "점포상호",
+            commercialFeatureLabel: "상권특징",
+            commercialFeaturePlaceholder: "용을 입력해주세요.",
+            ownerRelationLabel: "건물주와의 관계",
+        },
         consent: {
             title: "개인정보 수집·이용 동의",
             items: [
@@ -1061,6 +1194,16 @@ const langData = {
                 "- 보유 및 이용기간: 접수 후 1년",
             ],
             noticeHtml: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 <br />사업설명회 신청 글 작성이 불가능합니다.",
+        },
+
+        consent2: {
+            items: [
+                "- 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 \"개인정보 처리방침\"을 참고하시기 바랍니다.",
+                "- 수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호",
+                "- 수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
+                "- 보유 및 이용기간: 접수 후 1년",
+            ],
+            noticeHtml: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br />입지제안 신청 글 작성이 불가능합니다.",
         },
         storeButtons: {
             hasStore: "내가 소유한 점포가 있다.",
@@ -1223,7 +1366,20 @@ const consultForm = reactive({
     contractEnd: "",
     deposit: "",
     monthlyRent: "",
+    proposalZipCode: "",
+    proposalAddrBasic: "",
+    proposalAddrDetail1: "",
+    proposalAddrDetail2: "",
+    proposalAreaContract: "",
+    proposalAreaExclusive: "",
+    proposalStoreName: "",
+    proposalCommercialFeature: "",
+    proposalOwnerRelation: "",
 });
+
+function onProposalZipSearch() {
+    // 우편번호 팝업/다음 도로명 API 등 연결
+}
 const phoneOptions = [
     { value: "010", label: "010" },
     { value: "011", label: "011" },
@@ -1490,6 +1646,7 @@ function toggleCard(id) {
 
 /* HEADER */
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
+.page_header::after{content:'';width: 100px;height:100%;position:absolute;left:0;right:0;top:0;bottom:0; background-color: rgba(0, 0, 0, 0.6);}
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
 
@@ -1725,6 +1882,7 @@ function toggleCard(id) {
 .button_wrap :deep(button){ width:134px;}
 .button_wrap :deep(button.primary){ background-color:#15B874; }
 .form_row_name .form_field :deep(.input_wrap){max-width:205px;}
+.consult_box + .form_row, .form_row + .consent_box{margin-top:64px}
 .check_list { display: flex; flex-wrap: wrap; gap: 8px 20px; }
 .check_list :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
 .form_field_email :deep(.input_wrap){max-width:205px;}
@@ -1733,6 +1891,30 @@ function toggleCard(id) {
 .form_field_select_220 :deep(label.select){width:100%; max-width:220px;}
 .form_field_region :deep(label.select){width:100%; max-width:220px;}
 .form_field_area :deep(.input_wrap){max-width:134px;}
+.form_field_area .form_sub_input_wrap { flex-wrap: nowrap; align-items: center; gap: 8px; max-width: 100%; }
+.form_field_area .form_sub_input_wrap :deep(.input_wrap) { flex: 0 0 auto; max-width: 134px; min-width: 134px; }
+.form_field_area .form_sub_input_wrap .form_sub_unit { flex-shrink: 0; }
+.form_field_area .form_sub_input_wrap .area_note { flex: 0 0 auto; flex-shrink: 0; white-space: nowrap; }
+.form_field_area .form_sub_input_wrap .form_field_note { flex: 0 0 auto; flex-basis: auto; flex-shrink: 0; width: auto; max-width: none; margin: 0; color: #161616; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; white-space: nowrap; }
+.form_field_area > .form_field_note { color: #161616 !important;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;flex-basis: 100%; width: 100%; max-width: 100%; }
+.form_field_address { flex-direction: column; align-items: flex-start; gap: 8px; }
+.form_sub_input_wrap .area_note,
+.form_sub_input_wrap .form_field_note{margin-left:16px;}
+
+/* .form_field_address :deep(.input_wrap){max-width:305px;} */
+.form_zip_row :deep(.input_wrap){max-width:305px; flex: 0 0 auto;}
+.form_zip_row { width: 100%; display: flex; align-items: center; gap: 8px; }
+.form_zip_row :deep(button){width:134px; flex:0 0 134px;}
+.form_zip_row .form_field_note { color: #161616; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; flex: 0 1 auto; }
+.form_addr_group { width: 100%; max-width: 757px; display: flex; flex-direction: column; gap: 8px; }
+.form_addr_detail { width: 100%; display: flex; align-items: center; gap: 8px; }
+.form_addr_detail :deep(.input_wrap) { flex: 1 1 calc(50% - 4px); max-width: none; min-width: 0; }
+.form_field_store :deep(.input_wrap) { max-width: 448px; }
+.form_row_textarea .form_field :deep(.textarea_wrap) { width: 100%;}
+.form_row_textarea .form_field :deep(.textarea_field){width:100%; max-width:100%;}
+.form_row_textarea .form_field :deep(.textarea_field > textarea) { width:100%; max-width:100%; resize: none; }
+.form_row_area{align-items: flex-start;}
+.form_row_area > .form_label{height: 52px; line-height: 52px;}
 .form_field_franchise { display: flex; flex-wrap: wrap; gap: 12px 20px; }
 .franchise_type_item { display: inline-flex; align-items: center; gap: 8px; }
 .franchise_type_item :deep(.input_wrap) { margin: 0; }
@@ -1808,6 +1990,12 @@ function toggleCard(id) {
     .brand_panel_title > p { font-size: 2rem; }
 
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
+    .apply_form .form_field_email { flex-wrap: wrap; }
+    .apply_form .form_field_area .form_sub_input_wrap { flex-wrap: wrap; }
+    .apply_form .form_field_area .form_sub_input_wrap :deep(.input_wrap) { min-width: 0; max-width: 100%; }
+    .apply_form .form_field_area .form_sub_input_wrap .area_note,
+    .apply_form .form_field_area .form_sub_input_wrap .form_field_note { white-space: normal; }
+    .apply_form .form_zip_row { flex-wrap: wrap; max-width: 100%; min-width: 0; }
 }
 
 /* Mobile */
@@ -1943,5 +2131,96 @@ function toggleCard(id) {
     /* .sec_consult :deep(button){width:100%;} */
     .quick_menu{display: none;}
     .sec_consult :deep(.brand_panel_title h2::after){width:32px; height:32px; background-image: url(@/assets/images/sub/icon_cont_32.png); background-position: -740px -103px;}
+    .sec_consult.panel,
+    .sec_consult_apply.panel { overflow-x: hidden; max-width: 100%; min-width: 0; }
+    .sec_consult > .form_row { min-width: 0; max-width: 100%; padding: 20px 0; grid-template-columns: 1fr; gap: 0; align-items: flex-start; }
+    .sec_consult > .form_row .form_label { margin-bottom: 16px; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; }
+    .sec_consult > .form_row .form_field { width: 100%; min-width: 0; max-width: 100%; flex-direction: column; align-items: stretch; gap: 12px; }
+    .sec_consult > .form_row .form_field_region :deep(label.select) { width: 100%; max-width: none; min-width: 0; }
+    .sec_consult :deep(.consent_box),
+    .sec_consult_apply :deep(.consent_box) { max-width: 100%; min-width: 0; box-sizing: border-box; }
+    .sec_consult :deep(.consent_list > li > p),
+    .sec_consult_apply :deep(.consent_list > li > p) { word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form { margin-top: 32px; max-width: 100%; min-width: 0; overflow-x: clip; box-sizing: border-box; }
+    .apply_form + .apply_form { margin-top: 40px; }
+    .apply_form .form_head { height: auto; padding-bottom: 16px; flex-wrap: wrap; gap: 8px; min-width: 0; max-width: 100%; }
+    .apply_form .form_head_title { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form .form_required_note { font-size: 1.4rem; line-height: 1.4; flex-shrink: 0; }
+    .apply_form .form_body { padding: 30px 0; min-width: 0; max-width: 100%; }
+    .apply_form .form_row { padding: 20px 0; grid-template-columns: 1fr; gap: 0; align-items: flex-start; min-width: 0; max-width: 100%; }
+    .apply_form .form_row:first-child { padding-top: 0; }
+    .apply_form .form_row:last-child { padding-bottom: 0; }
+    .apply_form .form_label { margin-bottom: 16px; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form .form_field { width: 100%; min-width: 0; max-width: 100%; align-items: stretch; gap: 12px; flex-wrap: wrap; box-sizing: border-box; }
+    .apply_form .form_row_name .form_field :deep(.input_wrap),
+    .apply_form .form_field_store :deep(.input_wrap),
+    .apply_form .form_field_select_220 :deep(label.select),
+    .apply_form .form_field :deep(.input_wrap),
+    .apply_form .form_field :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; box-sizing: border-box; }
+    .apply_form .form_field :deep(input),
+    .apply_form .form_field :deep(select) { max-width: 100%; box-sizing: border-box; }
+    .apply_form .form_field_email { flex-direction: column; align-items: stretch; gap: 12px; }
+    .apply_form .form_field_email .form_sep { display: none; }
+    .apply_form .form_field_email :deep(.input_wrap),
+    .apply_form .form_field_email :deep(.input_wrap + label.select),
+    .apply_form .form_field_email :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; }
+    .apply_form .form_field_phone { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; align-items: center; }
+    .apply_form .form_field_phone .form_sep { display: none; }
+    .apply_form .form_field_phone :deep(label.select),
+    .apply_form .form_field_phone :deep(.input_wrap) { width: 100%; max-width: 100%; min-width: 0; flex: none; }
+    .apply_form .form_field_region { flex-direction: column; flex-wrap: wrap; }
+    .apply_form .form_field_region :deep(label.select) { width: 100%; max-width: 100%; min-width: 0; }
+    .apply_form .form_field_address { width: 100%; min-width: 0; max-width: 100%; }
+    .apply_form .form_zip_row { flex-wrap: wrap; max-width: 100%; gap: 12px; min-width: 0; }
+    .apply_form .form_zip_row :deep(.input_wrap) { flex: 1 1 100%; max-width: 100%; min-width: 0; width: 100%; }
+    .apply_form .form_zip_row :deep(button) { width: 100%; flex: 1 1 100%; max-width: 100%; min-width: 0; }
+    .apply_form .form_zip_row .form_field_note { flex: 1 1 100%; width: 100%; max-width: 100%; font-size: 1.4rem; line-height: 1.4; word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form .form_addr_group,
+    .apply_form .form_addr_detail { max-width: 100%; min-width: 0; }
+    .apply_form .form_addr_detail { flex-direction: column; }
+    .apply_form .form_addr_detail :deep(.input_wrap) { flex: 1 1 100%; width: 100%; max-width: 100%; min-width: 0; }
+    .apply_form .form_row_area { align-items: flex-start; }
+    .apply_form .form_row_area > .form_label { height: auto; line-height: 1.24; }
+    .apply_form .form_field_area { flex-direction: column; align-items: stretch; gap: 16px; min-width: 0; max-width: 100%; }
+    .apply_form .form_field_area .form_sub_group { width: 100%; min-width: 0; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .apply_form .form_field_area .form_sub_input_wrap { flex-wrap: wrap; align-items: center; width: 100%; min-width: 0; max-width: 100%; gap: 8px; }
+    .apply_form .form_field_area .form_sub_input_wrap :deep(.input_wrap) { flex: 1 1 0; min-width: 0; max-width: 100%; width: auto; }
+    .apply_form .form_field_area .form_sub_input_wrap .form_sub_unit { flex: 0 0 auto; flex-shrink: 0; }
+    .apply_form .form_sub_input_wrap .area_note,
+    .apply_form .form_sub_input_wrap .form_field_note { margin-left: 0; }
+    .apply_form .form_field_area .form_sub_input_wrap .area_note,
+    .apply_form .form_field_area .form_sub_input_wrap .form_field_note { flex: 1 1 100%; width: 100%; max-width: 100%; min-width: 0; white-space: normal; word-break: keep-all; overflow-wrap: anywhere; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .apply_form .form_field_area > .area_note { width: 100%; max-width: 100%; font-size: 1.4rem; line-height: 1.4; white-space: normal; word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form .form_field_area > .form_field_note { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; max-width: 100%; min-width: 0; }
+    .apply_form .form_field_check,
+    .apply_form .form_field_contract { width: 100%; min-width: 0; max-width: 100%; }
+    .apply_form .form_field_check .form_sub_group,
+    .apply_form .form_field_contract .form_sub_group { width: 100%; min-width: 0; }
+    .apply_form .form_field_check .check_etc { width: 100%; min-width: 0; }
+    .apply_form .form_field_check .check_etc :deep(.input_wrap) { max-width: 100%; width: 100%; min-width: 0; }
+    .apply_form .check_list { gap: 8px 12px; max-width: 100%; min-width: 0; }
+    .apply_form .check_list :deep(.input_wrap) { max-width: 100%; min-width: 0; }
+    .apply_form .form_sub_inputs { width: 100%; min-width: 0; flex-wrap: wrap; }
+    .apply_form .form_sub_inputs :deep(.input_wrap) { flex: 1 1 calc(50% - 4px); max-width: 100%; min-width: 0; }
+    .apply_form .contract_rent { width: 100%; min-width: 0; flex-direction: column; align-items: stretch; gap: 12px; }
+    .apply_form .contract_rent :deep(.input_wrap) { flex: 1 1 100%; max-width: 100%; width: 100%; min-width: 0; }
+    .apply_form .form_field_franchise { flex-direction: column; align-items: stretch; gap: 12px; min-width: 0; max-width: 100%; }
+    .apply_form .franchise_type_item { width: 100%; min-width: 0;  gap: 8px; }
+    .apply_form .franchise_type_item :deep(.input_wrap){width:auto;flex:0 1 auto;}
+    .apply_form .franchise_type_item :deep(button) { min-width: 0; flex-shrink: 1; }
+    .apply_form .form_row_textarea .form_field { min-width: 0; max-width: 100%; }
+    .apply_form .form_row_textarea .form_field :deep(.textarea_wrap),
+    .apply_form .form_row_textarea .form_field :deep(.textarea_field),
+    .apply_form .form_row_textarea .form_field :deep(.textarea_field > textarea) { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }
+    .apply_form textarea { height: 160px; max-width: 100%; box-sizing: border-box; }
+    .apply_form .check_row,
+    .apply_form .contract_row { align-items: flex-start; }
+    .middle_bts_wrap { margin-top: 32px; flex-direction: column; gap: 12px; max-width: 100%; min-width: 0; }
+    .middle_bts_wrap > button { width: 100%; height: auto; min-height: 48px; padding: 12px 16px; font-size: 1.6rem; line-height: 1.4; white-space: normal; word-break: keep-all; }
+    .middle_bts_wrap + :deep(.consent_box) { margin-top: 24px; }
+    .consult_box + .form_row,
+    .form_row + .consent_box { margin-top: 32px; }
+    .button_wrap { margin-top: 32px; justify-content: center; gap: 8px; max-width: 100%; min-width: 0; }
+    .button_wrap :deep(button) { width: calc(50% - 4px); flex: 1 1 auto; min-width: 0; max-width: calc(50% - 4px); box-sizing: border-box; }
 }
 </style>
