@@ -14,19 +14,19 @@
 
             <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) --> 
             <Tabs v-show="activeD1 === 0" :tab-items="t.depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
-            <Tabs v-show="activeD1 === 1" :tab-items="depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
-            <Tabs v-show="activeD1 === 3" :tab-items="depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
+            <Tabs v-show="activeD1 === 1" :tab-items="t.depth2TabsPrepare" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
+            <Tabs v-show="activeD1 === 3" :tab-items="t.depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
 
             <!-- GS25 브랜드 소개 (D2=0) -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
                 <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg2})` }">
                     <header>
-                        <span class="tit">{{ brandIntro.badge }}</span>
-                        <h3>{{ brandIntro.title }}</h3>
-                        <p class="desc" v-html="brandIntro.desc"></p>
+                        <span class="tit">{{ t.brandIntro.badge }}</span>
+                        <h3>{{ t.brandIntro.title }}</h3>
+                        <p class="desc" v-html="t.brandIntro.desc"></p>
                     </header>
                     <ul class="action_list">
-                        <li v-for="(item, i) in brandApplyLinks" :key="i">
+                        <li v-for="(item, i) in t.brandApplyLinks" :key="i">
                             <a :href="item.url" class="btn_icon_arrow primary after">
                                 <strong v-html="item.title"></strong>
                                 <span v-html="item.desc"></span>
@@ -34,7 +34,7 @@
                         </li>
                     </ul>
                     <ul class="metric_list">
-                        <li v-for="(item, i) in brandStats" :key="i">
+                        <li v-for="(item, i) in t.brandStats" :key="i">
                             <strong>{{ item.value }}</strong>
                             <span>{{ item.label }}</span>
                         </li>
@@ -42,11 +42,11 @@
                 </section>
                 <section class="sec_num_list">
                     <header class="section_header">
-                        <span class="tit">{{ successPointPanel.badge }}</span>
-                        <h2 v-html="successPointPanel.title"></h2>
-                        <p>{{ successPointPanel.desc }}</p>
+                        <span class="tit">{{ t.successPointPanel.badge }}</span>
+                        <h2 v-html="t.successPointPanel.title"></h2>
+                        <p>{{ t.successPointPanel.desc }}</p>
                     </header>
-                    <NumberedInfoList :items="successPointCards" :show-icon="true" desc-class="num_info_desc_light" />
+                    <NumberedInfoList :items="t.successPointCards" :show-icon="true" desc-class="num_info_desc_light" />
                 </section>
                 <section class="sec_img_banner">
                     <div>
@@ -1110,8 +1110,8 @@
                 <section class="sec_consult_startup">
                     <div class="consent_box" aria-label="개인정보 수집·이용 동의">
                         <h3>개인정보 수집·이용 동의</h3>
-                        <ul v-if="startupConsentItems.length" class="consent_list">
-                            <li v-for="(item, idx) in startupConsentItems" :key="idx">
+                        <ul v-if="t.startupConsentItems.length" class="consent_list">
+                            <li v-for="(item, idx) in t.startupConsentItems" :key="idx">
                                 <p v-html="item"></p>
                             </li>
                         </ul>
@@ -1726,74 +1726,74 @@ function onProductHitSwiper(swiper, index) {
 // ];
  
 /* D1=0 2depth */
-const depth2Tabs = [
-    { item: "GS25 브랜드 소개" },
-    { item: "차별화된 경쟁력" },
-    { item: "편의점 창업 이해" },
-    { item: "FAQ" },
-];
+// const depth2Tabs = [
+//     { item: "GS25 브랜드 소개" },
+//     { item: "차별화된 경쟁력" },
+//     { item: "편의점 창업 이해" },
+//     { item: "FAQ" },
+// ];
 
 /* D1=1 2depth */
-const depth2TabsPrepare = [
-    { item: "창업 절차" },
-    { item: "가맹 타입" },
-    { item: "창업 혜택" },
-];
+// const depth2TabsPrepare = [
+//     { item: "창업 절차1" },
+//     { item: "가맹 타입" },
+//     { item: "창업 혜택" },
+// ];
 
 /* ── [D1=0 D2=0] GS25 브랜드 소개 ── */
-const brandIntro = {
-    badge: "4년 연속, 편의점 매출 1위 브랜드 (22년~25년)",
-    title: "비교할수록 결국, GS25.",
-    desc: "점포당 매출 1위 브랜드<br class='p_br'/>함께 성장하기 위해, 점포의 숫자보다 경영주님의 수익을 먼저<br class='m_br'/>생각합니다.",
-};
+// const brandIntro = {
+//     badge: "4년 연속, 편의점 매출 1위 브랜드 (22년~25년)",
+//     title: "비교할수록 결국, GS25.",
+//     desc: "점포당 매출 1위 브랜드<br class='p_br'/>함께 성장하기 위해, 점포의 숫자보다 경영주님의 수익을 먼저<br class='m_br'/>생각합니다.",
+// };
 
-const brandApplyLinks = [
-    {
-        title: "창업설명회 신청",
-        desc: "창업 전반에 대한 정보를 한 번에 안내드려요",
-        url: "#none",
-    },
-    {
-        title: "창업상담 신청",
-        desc: "창업에 대한 궁금증을 1:1 상담해 드려요",
-        url: "#none",
-    },
-    {
-        title: "입점 제안/<br class='p_br'/>브랜드 전환 문의",
-        desc: "보유 자리 입점 제안 또는 브랜드 전환을<br class='m_br'/>상담해드려요",
-        url: "#none",
-    },
-];
+// const brandApplyLinks = [
+//     {
+//         title: "창업설명회 신청",
+//         desc: "창업 전반에 대한 정보를 한 번에 안내드려요",
+//         url: "#none",
+//     },
+//     {
+//         title: "창업상담 신청",
+//         desc: "창업에 대한 궁금증을 1:1 상담해 드려요",
+//         url: "#none",
+//     },
+//     {
+//         title: "입점 제안/<br class='p_br'/>브랜드 전환 문의",
+//         desc: "보유 자리 입점 제안 또는 브랜드 전환을<br class='m_br'/>상담해드려요",
+//         url: "#none",
+//     },
+// ];
 
-const brandStats = [
-    { value: "18,000+", label: "전국 점포수" },
-    { value: "편의점 매출 1위", label: "점포당 연매출 6.4억+" },
-    { value: "460만명", label: "전국 일평균 방문 고객" },
-];
+// const brandStats = [
+//     { value: "18,000+", label: "전국 점포수" },
+//     { value: "편의점 매출 1위", label: "점포당 연매출 6.4억+" },
+//     { value: "460만명", label: "전국 일평균 방문 고객" },
+// ];
 
-const successPointPanel = {
-    badge: "SUCCESS POINT",
-    title: "경영주님이 편한 GS25<br /><span class='txt_blue'>창업 성공 포인트</span>",
-    desc: "GS25와 함께라면, 성공적인 창업이 가능합니다.",
-};
+// const successPointPanel = {
+//     badge: "SUCCESS POINT",
+//     title: "경영주님이 편한 GS25<br /><span class='txt_blue'>창업 성공 포인트</span>",
+//     desc: "GS25와 함께라면, 성공적인 창업이 가능합니다.",
+// };
 
-const successPointCards = [
-    {
-        em: "수익성 분석",
-        title: "수익성 중심의 신규 점포 오픈",
-        desc: "점포 개발 전문가의 현장분석과 데이터를 기반으로 수익성이 보이는 점포만 오픈합니다.",
-    },
-    {
-        em: "스마트 운영",
-        title: "든든하고 편리한 지원시스템",
-        desc: "스마트 운영 시스템과 영업 전문가의 1:1 맞춤관리까지, 첫창업이어도 걱정 마세요",
-    },
-    {
-        em: "차별화 컨셉",
-        title: "경쟁력 있는 상품/컨셉",
-        desc: "메가히트 상품부터 신선강화형 매장까지 GS25만의 차별화 컨셉으로 매출이 올라갑니다.",
-    },
-];
+// const successPointCards = [
+//     {
+//         em: "수익성 분석",
+//         title: "수익성 중심의 신규 점포 오픈",
+//         desc: "점포 개발 전문가의 현장분석과 데이터를 기반으로 수익성이 보이는 점포만 오픈합니다.",
+//     },
+//     {
+//         em: "스마트 운영",
+//         title: "든든하고 편리한 지원시스템",
+//         desc: "스마트 운영 시스템과 영업 전문가의 1:1 맞춤관리까지, 첫창업이어도 걱정 마세요",
+//     },
+//     {
+//         em: "차별화 컨셉",
+//         title: "경쟁력 있는 상품/컨셉",
+//         desc: "메가히트 상품부터 신선강화형 매장까지 GS25만의 차별화 컨셉으로 매출이 올라갑니다.",
+//     },
+// ];
 
 const brandSolutionPanel = {
     title: "처음이어도 창업 가능한가요? <br class='m_br'/><span class='txt_blue'>그럼요!</span>",
@@ -2911,19 +2911,19 @@ function toggleCard(id) {
 }
 
 /* ── [D1=3] 상담 및 신청 ── */
-const depth2TabsConsult = [
-    { item: "창업 상담 신청" },
-    { item: "창업 설명회 신청" },
-    { item: "입점 제안/브랜드 전환 상담" },
-];
+// const depth2TabsConsult = [
+//     { item: "창업 상담 신청" },
+//     { item: "창업 설명회 신청" },
+//     { item: "입점 제안/브랜드 전환 상담" },
+// ];
 
 /* D2=0 창업 상담 — 개인정보 동의 문구 */
-const startupConsentItems = [
-    "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
-    "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일,",
-    "- 수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용,",
-    "- 보유 및 이용기간: 접수 후 1년",
-];
+// const startupConsentItems = [
+//     "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
+//     "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일,",
+//     "- 수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용,",
+//     "- 보유 및 이용기간: 접수 후 1년",
+// ];
 
 const seminarConsentItems =[
     "- 입력하신 정보는 창업상담을 위해서만 사용합니다.",
@@ -3290,12 +3290,60 @@ const langData = {
             { item: "편의점 창업 이해" },
             { item: "FAQ" },
         ],
-        depth2TabsPrepare,
-        brandIntro,
-        brandApplyLinks,
-        brandStats,
-        successPointPanel,
-        successPointCards,
+        depth2TabsPrepare: [
+            { item: "창업 절차" },
+            { item: "가맹 타입" },
+            { item: "창업 혜택" },
+        ],
+        brandIntro: {
+            badge: "4년 연속, 편의점 매출 1위 브랜드 (22년~25년)",
+            title: "비교할수록 결국, GS25.",
+            desc: "점포당 매출 1위 브랜드<br class='p_br'/>함께 성장하기 위해, 점포의 숫자보다 경영주님의 수익을 먼저<br class='m_br'/>생각합니다.",
+        },
+        brandApplyLinks:[
+            {
+                title: "창업설명회 신청",
+                desc: "창업 전반에 대한 정보를 한 번에 안내드려요",
+                url: "#none",
+            },
+            {
+                title: "창업상담 신청",
+                desc: "창업에 대한 궁금증을 1:1 상담해 드려요",
+                url: "#none",
+            },
+            {
+                title: "입점 제안/<br class='p_br'/>브랜드 전환 문의",
+                desc: "보유 자리 입점 제안 또는 브랜드 전환을<br class='m_br'/>상담해드려요",
+                url: "#none",
+            },
+        ],
+        brandStats:[
+            { value: "18,000+", label: "전국 점포수" },
+            { value: "편의점 매출 1위", label: "점포당 연매출 6.4억+" },
+            { value: "460만명", label: "전국 일평균 방문 고객" },
+        ],
+        successPointPanel: {
+            badge: "SUCCESS POINT",
+            title: "경영주님이 편한 GS25<br /><span class='txt_blue'>창업 성공 포인트</span>",
+            desc: "GS25와 함께라면, 성공적인 창업이 가능합니다.",
+        },
+        successPointCards: [
+            {
+                em: "수익성 분석",
+                title: "수익성 중심의 신규 점포 오픈",
+                desc: "점포 개발 전문가의 현장분석과 데이터를 기반으로 수익성이 보이는 점포만 오픈합니다.",
+            },
+            {
+                em: "스마트 운영",
+                title: "든든하고 편리한 지원시스템",
+                desc: "스마트 운영 시스템과 영업 전문가의 1:1 맞춤관리까지, 첫창업이어도 걱정 마세요",
+            },
+            {
+                em: "차별화 컨셉",
+                title: "경쟁력 있는 상품/컨셉",
+                desc: "메가히트 상품부터 신선강화형 매장까지 GS25만의 차별화 컨셉으로 매출이 올라갑니다.",
+            },
+        ],
         brandSolutionPanel,
         brandSolutionCards,
         startupProcessSteps,
@@ -3342,8 +3390,17 @@ const langData = {
         regionCounselStaff,
         storeRegions,
         franchiseTypes,
-        depth2TabsConsult,
-        startupConsentItems,
+        depth2TabsConsult: [
+            { item: "창업 상담 신청" },
+            { item: "창업 설명회 신청" },
+            { item: "입점 제안/브랜드 전환 상담" }
+        ],
+        startupConsentItems: [
+            "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
+            "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일,",
+            "- 수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용,",
+            "- 보유 및 이용기간: 접수 후 1년",
+        ],
         seminarConsentItems,
         counselConsentItems,
         seminarDummyAddress,
@@ -3357,121 +3414,6 @@ const langData = {
         startupConsultManager,
     },
     en: {
-        pageHeaderTitle: "EN - GS25 창업안내",
-        brandBannerImageAlt: "점포 이미지",
-        brandMoreButton: "GS25만의 경쟁력 더 알아보기",
-        franchiseFormulaAriaLabel: "프랜차이즈 성공 공식",
-        regionCounselMapAriaLabel: "지도 연동 예정 영역",
-        closeLabel: "닫기",
-        startupProcessTitle: "상담 신청부터 개점까지, <br />약 30일이면 나만의 GS25를 오픈할 수 있어요!",
-        processMoreOpenLabel: "더 알아보기",
-        processMoreCloseLabel: "접기",
-        franchiseTypeTitle: "내 자금과 상황에 딱 맞게! <br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요",
-        franchiseCompareTitle: "한눈에 비교하고, 나에게 유리한 타입을 찾아보세요!",
-        benefitPanelAria: {
-            store: "탄탄한 점포",
-            operation: "든든한 점포 운영",
-            life: "편안한 경영주 생활",
-        },
-        storeSectionAriaLabel: "추천 점포 찾기",
-        storeIntro: "안정적인 수입이 기대되는 최적의 입지! 성공 확률을 높이는 GS25 추천 점포를 만나보세요",
-        storeSearch: {
-            regionLabel: "지역",
-            allLabel: "전체",
-            franchiseTypeLabel: "가맹타입",
-            storeTypeYouthLabel: "점포유형/청년창업",
-            newStoreLabel: "신규점",
-            existingStoreLabel: "기존점",
-            youthStartupLabel: "청년창업",
-            youthStartupInfoAriaLabel: "청년창업 안내",
-            youthStartupTitle: "청년창업이란?",
-            youthStartupDesc: "20대 청년들을 위해서 투자비 일부를 할인해드리는 제도에요.",
-            youthStartupLinkText: "청년창업 자세히 보러가기",
-            searchLabel: "검색",
-            searchPlaceholder: "지역명, 태그....",
-            searchButtonAriaLabel: "검색",
-        },
-        storeListBar: {
-            countPrefix: "총",
-            countSuffix: "개 점포",
-            latestSortLabel: "최신순",
-            lowCostSortLabel: "투자비 낮은순",
-            listViewAriaLabel: "목록형",
-            gridViewAriaLabel: "격자형",
-        },
-        depth1Tabs: [
-            { item: "EN - GS25 창업 알아보기" },
-            { item: "창업 준비하기" },
-            { item: "추천 점포 찾기" },
-            { item: "상담 및 신청" },
-            { item: "가맹계약시스템" }
-        ],
-        depth2Tabs,
-        depth2TabsPrepare,
-        brandIntro,
-        brandApplyLinks,
-        brandStats,
-        successPointPanel,
-        successPointCards,
-        brandSolutionPanel,
-        brandSolutionCards,
-        startupProcessSteps,
-        franchiseTypeGroups,
-        consultEntryPanel,
-        depth3TabsBenefit,
-        benefitStorePanel,
-        benefitStoreItems,
-        benefitOperationPanel,
-        benefitOperationGroups,
-        benefitLifePanel,
-        benefitLifeItems,
-        benefitLifeNote,
-        competitivePanel,
-        competitiveCards,
-        storeOpenPanel,
-        storeOpenCards,
-        productConceptPanel,
-        megaHitPanel,
-        megaHitGroups,
-        freshFfCards,
-        conceptStorePanel,
-        conceptStoreCards,
-        marketingPanel,
-        marketingCards,
-        operationSupportPanel,
-        operationSupportCards,
-        convenienceDefinePanel,
-        convenienceEvolutionCore,
-        convenienceEvolutionStages,
-        franchiseDefinePanel,
-        franchiseDefineCard,
-        franchiseFormula,
-        franchiseRoleColumns,
-        startupFaqPanel,
-        startupFaqDummyAnswer,
-        startupFaqItems,
-        gs25FaqPanel,
-        gs25FaqTabs,
-        gs25FaqItems,
-        regionCounselPanel,
-        regionCounselEmpty,
-        regionCounselTabs,
-        regionCounselStaff,
-        storeRegions,
-        franchiseTypes,
-        depth2TabsConsult,
-        startupConsentItems,
-        seminarConsentItems,
-        counselConsentItems,
-        seminarDummyAddress,
-        seminarMonthSlides,
-        phoneOptions,
-        startupStoreOwnershipOptions,
-        startupCvsExperienceOptions,
-        startupRegionSidoOptions,
-        startupRegionSigunguMap,
-        consultTypeOptions,
-        startupConsultManager,
     },
 };
 
