@@ -433,7 +433,7 @@
                             </li>
                         </ul>
                     </div>
-                    <Buttons btn-class="btn_icon fill btn_xl primary after" href="http://gsthefresh.gsretail.com/thefresh/ko/franchise-info/one-on-ones-consult/offer-location" target="_blank">입지상담 바로가기</Buttons>
+                    <Buttons btn-class="btn_icon fill btn_xl primary after" :href="t.consult.locationConsultHref" target="_blank">{{ t.consult.proposalButtonLabel }}</Buttons>
                 </header>
                 <ul class="caution_list consult_caution_mo">
                     <li v-for="(item, index) in t.consult.caution" :key="`consult-caution-mo-${index}`">
@@ -469,7 +469,7 @@
                                         </p>
                                         <p class="consult_tel_kakao">{{ t.consult.kakaoLabel }}</p>
                                         <figure class="consult_tel_qr">
-                                            <span>QR 이미지</span>
+                                            <span>{{ t.consult.qrImageLabel }}</span>
                                         </figure>
                                         <p class="consult_tel_notice">{{ t.consult.kakaoNotice }}</p>
                                     </div>
@@ -518,7 +518,7 @@
                         <SelectBox :options="openSigunguOptions" v-model="consultForm.openRegionSigungu" :initMsg="t.proposalForm.sigunguInitMsg" :disabled="!consultForm.openRegionSido" />
                     </div>
                 </div>
-                <ConsentInfoBox title="개인정보 수집·이용 동의" :items="t.consent2.items" :notice-html="t.consent2.noticeHtml" />
+                <ConsentInfoBox :title="t.consent2.title" :items="t.consent2.items" :notice-html="t.consent2.noticeHtml" />
                 <!-- 고객정보 폼 -->
                 <div class="apply_form">
                     <div class="form_head">
@@ -639,7 +639,7 @@
                     <button :class="{ active: hasStore === false }" @click="hasStore = false">{{ t.storeButtons.noStore }}</button>
                 </div>
                 <!-- 개인정보 동의 -->
-                <ConsentInfoBox title="개인정보 수집·이용 동의" :items="t.consent.items" :notice-html="t.consent.noticeHtml" />
+                <ConsentInfoBox :title="t.consent.title" :items="t.consent.items" :notice-html="t.consent.noticeHtml" />
                 <!-- 고객정보 폼 -->
                 <div class="apply_form">
                     <div class="form_head">
@@ -696,14 +696,14 @@
                                     <span class="form_sub_label">{{ t.consultForm.contractAreaLabel }}</span>
                                     <div class="form_sub_input_wrap">
                                         <Inputs type="text" v-model="consultForm.areaContract" />
-                                        <span class="form_sub_unit">m²</span>
+                                        <span class="form_sub_unit">{{ t.consultForm.areaUnit }}</span>
                                     </div>
                                 </div>
                                 <div class="form_sub_group">
                                     <span class="form_sub_label">{{ t.consultForm.exclusiveAreaLabel }}</span>
                                     <div class="form_sub_input_wrap">
                                         <Inputs type="text" v-model="consultForm.areaExclusive" />
-                                        <span class="form_sub_unit">m²</span>
+                                        <span class="form_sub_unit">{{ t.consultForm.areaUnit }}</span>
                                     </div>
                                 </div>
                                 <span class="area_note">{{ t.consultForm.areaNote }}</span>
@@ -740,11 +740,11 @@
                                     <div class="contract_rent">
                                         <div class="form_sub_input_wrap">
                                             <Inputs type="text" v-model="consultForm.deposit" />
-                                            <span class="form_sub_unit">만원</span>
+                                            <span class="form_sub_unit">{{ t.consultForm.rentUnit }}</span>
                                         </div>
                                         <div class="form_sub_input_wrap">
                                             <Inputs type="text" v-model="consultForm.monthlyRent" />
-                                            <span class="form_sub_unit">만원</span>
+                                            <span class="form_sub_unit">{{ t.consultForm.rentUnit }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -761,13 +761,13 @@
                         <div class="form_row">
                             <div class="form_label">{{ t.consultFormNoStore.investmentLabel }}<span class="form_required">*</span></div>
                             <div class="form_field form_field_select_220">
-                                <SelectBox :options="t.consultFormNoStore.investmentOptions" v-model="consultForm.investmentAmount" initMsg="3000만원 이하" />
+                                <SelectBox :options="t.consultFormNoStore.investmentOptions" v-model="consultForm.investmentAmount" :initMsg="t.consultFormNoStore.investmentInitMsg" />
                             </div>
                         </div>
                         <div class="form_row">
                             <div class="form_label">{{ t.consultFormNoStore.incomeLabel }}<span class="form_required">*</span></div>
                             <div class="form_field form_field_select_220">
-                                <SelectBox :options="t.consultFormNoStore.incomeOptions" v-model="consultForm.expectedIncome" initMsg="150~200만원"/>
+                                <SelectBox :options="t.consultFormNoStore.incomeOptions" v-model="consultForm.expectedIncome" :initMsg="t.consultFormNoStore.incomeInitMsg" />
                             </div>
                         </div>
                         <div class="form_row">
@@ -780,8 +780,8 @@
                         <div class="form_row">
                             <div class="form_label">{{ t.consultFormNoStore.openTimeLabel }}<span class="form_required">*</span></div>
                             <div class="form_field form_field_region">
-                                <SelectBox :options="t.consultFormNoStore.openYearOptions" v-model="consultForm.openYear" initMsg="2026년" />
-                                <SelectBox :options="t.consultFormNoStore.openMonthOptions" v-model="consultForm.openMonth" initMsg="01월"/>
+                                <SelectBox :options="t.consultFormNoStore.openYearOptions" v-model="consultForm.openYear" :initMsg="t.consultFormNoStore.openYearInitMsg" />
+                                <SelectBox :options="t.consultFormNoStore.openMonthOptions" v-model="consultForm.openMonth" :initMsg="t.consultFormNoStore.openMonthInitMsg" />
                             </div>
                         </div>
                         <div class="form_row">
@@ -1137,6 +1137,8 @@ const langData = {
             proposalPanelDesc: "점포 소유 및 입지 관련 상담은 입지제안 상담으로 안내해 드립니다.",
             proposalCaution: "※ 입지제안 상담은 입지제안 사이트를 통해 접수 가능합니다.",
             proposalButtonLabel: "입지상담 바로가기",
+            locationConsultHref: "http://gsthefresh.gsretail.com/thefresh/ko/franchise-info/one-on-ones-consult/offer-location",
+            qrImageLabel: "QR 이미지",
             cards: [
                 { name: "윤경진", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_01.png"), link: "#none" },
                 { name: "이승현", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_02.png"), link: "#none" },
@@ -1182,7 +1184,7 @@ const langData = {
             legalNotice: "* 법정도량은 계약면적을 기준으로 합니다.",
             storeNameLabel: "점포상호",
             commercialFeatureLabel: "상권특징",
-            commercialFeaturePlaceholder: "용을 입력해주세요.",
+            commercialFeaturePlaceholder: "상권 특징을 입력해 주세요.",
             ownerRelationLabel: "건물주와의 관계",
         },
         consent: {
@@ -1197,6 +1199,7 @@ const langData = {
         },
 
         consent2: {
+            title: "개인정보 수집·이용 동의",
             items: [
                 "- 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 \"개인정보 처리방침\"을 참고하시기 바랍니다.",
                 "- 수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호",
@@ -1225,6 +1228,7 @@ const langData = {
             areaLabel: "소유점포 면적",
             contractAreaLabel: "계약면적",
             exclusiveAreaLabel: "전용면적",
+            areaUnit: "m²",
             areaNote: "* m² = (기준)평 x 3.3",
             superOperatorLabel: "수퍼 운영자 일 경우",
             itemCheckLabel: "취급 품목 체크",
@@ -1232,6 +1236,7 @@ const langData = {
             contractLabel: "계약조건",
             contractPeriodLabel: "계약 기간",
             depositRentLabel: "보증금/월임대료",
+            rentUnit: "만원",
             superItemOptions: [
                 { value: "농산", label: "농산" },
                 { value: "축산", label: "축산" },
@@ -1284,12 +1289,16 @@ const langData = {
             title: "상담내용",
             investmentLabel: "투자 가능금액",
             investmentOptions: ["3000만원 이하", "3000만원~5000만원", "5000만원 이상"],
+            investmentInitMsg: "3000만원 이하",
             incomeLabel: "기대 소득",
             incomeOptions: ["150~200만원", "200~300만원", "300만원 이상"],
+            incomeInitMsg: "150~200만원",
             openRegionLabel: "개설 희망지역",
             openTimeLabel: "개설 희망시기",
             openYearOptions: ["2026년", "2027년", "2028년"],
+            openYearInitMsg: "2026년",
             openMonthOptions: ["01월", "02월", "03월", "04월", "05월", "06월", "07월", "08월", "09월", "10월", "11월", "12월"],
+            openMonthInitMsg: "01월",
             typeLabel: "개설희망 가맹타입",
             franchiseTypeOptions: [
                 { value: "GSF1", label: "GSF1 타입" },
@@ -1305,6 +1314,9 @@ const langData = {
     en: {},
 };
 
+// =====================
+// computed
+// =====================
 const t = computed(() => {
     const selected = langData[props.lang];
     return selected && Object.keys(selected).length ? selected : langData.ko;
