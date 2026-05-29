@@ -1,23 +1,26 @@
 <script setup>
-import { defineEmits, defineProps } from "vue";
+import { defineProps } from "vue";
 import Inputs from "@/components/Inputs.vue";
 
 defineProps({
     items: { type: Array, default: () => [] },
     required: String,
+    title: {
+        type: String,
+        default: "개인정보 제공 동의",
+    },
     modelValue: { type: Boolean, default: false },
+    noticeHtml: {
+        type: String,
+        default: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br />확인해야 하는 문의에 대해 정확하고 신속한 답변을 받으시는데 어려움이 있습니다.",
+    },
 });
 
-const emit = defineEmits(["update:modelValue"]);
-
-const onAgreeChange = (event) => {
-    emit("update:modelValue", event.target.checked);
-};
 </script>
 
 <template>
     <div class="consent_box" aria-label="개인정보 제공 동의">
-        <h3>{{ required }} 개인정보 제공 동의</h3>
+        <h3>{{ required }} {{ title }}</h3>
 
         <ul v-if="items && items.length" class="consent_list">
             <li v-for="(item, idx) in items" :key="idx">
@@ -26,10 +29,7 @@ const onAgreeChange = (event) => {
         </ul>
 
         <div class="consent_notice_area">
-            <p>
-                고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br />
-                확인해야 하는 문의에 대해 정확하고 신속한 답변을 받으시는데 어려움이 있습니다.
-            </p>
+            <p v-html="noticeHtml"></p>
             <Inputs type="checkbox" text="동의합니다."  />
         </div>
     </div>

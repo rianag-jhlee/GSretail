@@ -124,9 +124,9 @@
                                 <h3 class="content_title">{{ t.Labels.conditionInfo }}</h3>
                                 <div class="condition_grid">
                                     <div v-for="(cond, cIdx) in t.SubwayData.conditions" :key="cIdx" class="condition_item">
-                                        <div class="visual_img_small">
+                                        <!-- <div class="visual_img_small">
                                             <img :src="cond.img" :alt="cond.name" />
-                                        </div>
+                                        </div> -->
                                         <h4 class="sub_title">{{ cond.name }}</h4>
                                         <div class="policy_wrap">
                                             <table>
@@ -198,7 +198,7 @@
                                         <div class="contact_left">
                                             <strong>{{ t.mall_txt }}</strong>
                                             <div class="info_item">
-                                                <span>{{ t.Labels.sns }}</span>
+                                                <span>{{ mall.contact.snsLabel || t.Labels.sns }}</span>
                                                 <span class="val">{{ mall.contact.instatxt }}</span>
                                                 <a v-if="mall.contact.insta" :href="mall.contact.insta" target="_blank" class="btn_sns small ico_insta"> 
                                                 </a>
@@ -306,7 +306,7 @@ export default {
                         email: "이메일",
                         conditionInfo: "임대조건 안내",
                         mallIntro: "상업시설 소개",
-                        sns: "SNS",
+                        sns: "인스타그램",
                         blog: "블로그",
                         phoneNum: "전화번호"
                     },
@@ -338,7 +338,7 @@ export default {
                             phone: `02-2006-3198`, 
                             이메일:"이메일",
                             email1: `hyungwook.lim@gsretail.com` ,
-                            email2: `gunbeom@gsretail.com` ,
+                            email2: `masiaeve@gsretail.com` ,
                         },
                         conditions: [
                             {
@@ -387,7 +387,7 @@ export default {
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.1734625641543!2d126.98088067587412!3d37.574532872036556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ef4127fbcd%3A0xdff366a8dbc227d6!2z7JWI64WV7J247IKs64-Z!5e0!3m2!1sko!2skr!4v1775627958896!5m2!1sko!2skr`,
-                            contact: { phone: `02-6954-2991`, email1: `anyounginsadong@anyounginsadong.com`, email2:`ha3kim1@gsretail.com`,email3:`gsseri@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
+                            contact: { phone: `02-6954-2991`, email1: `anyounginsadong@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
                             type:`card_type`
                         },
                         { 
@@ -395,15 +395,15 @@ export default {
                             name: `구로 지밸리몰`, contentTitle: `구로 지밸리 비즈플라자 지밸리몰`,
                             intro: [
                                 {title:`구로에서 만나는<br/> 최신 트렌드의 HOT브랜드`},
-                                {title:`구로디지털단지 최대 규모의<br/> 랜드마크 식음몰`},
-                                {title:`가족모임/ 커뮤니티/ 비즈니스<br/> 다이닝`},
+                                {title:`구로디지털단지 최대 규모의<br/> 아케이드몰`},
+                                {title:`가족모임/커뮤니티/비즈니스<br/> 다이닝/병,의원/헬스케어`},
                                 {title:`문화 공연/ 전시/ 커뮤니티가 있는<br/> 공간`},
                                 {title:`넉넉한 주차, 전면 테리스형<br/> 쾌적한 휴식공간`},
-                                {title:`생활편의(클리닉, 편의점, 플라워샵)/ 리테일 매장 완비`}
+                                {title:`생활편의(클리닉, 편의점)<br />리테일 매장 완비`}
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
-                            contact: { phone: `02-2006-3199`, email1: `masiaveve@gsretail.com`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
+                            contact: { phone: `02-2006-3199`, email1: `sigar11@gsretail.com`, snsLabel: `SNS`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
                             type:`card_type`
                         },
                         { 
@@ -417,18 +417,18 @@ export default {
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
-                            contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `egg2bird@gsretail.com`, email2: `eskmika@gsretail.com`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
+                            contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
                         },
                         { 
                             홈페이지:'홈페이지',
                             name: `동부산 미식일상`, contentTitle: `동부산 미식일상`,
                             intro: [
-                                `<b>'푸드홀 부산 미식일상'은 동부산 '오시리아 관광단지' 중심에 위치해 있는 F&B Mall로써,<br/> 테마파크 단지 내방객의 휴식을 제공하기 위해 만들어진 시설입니다.</b>`,
-                                `오시리아 관광단지는 연간 방문객 1,060만명이 예상되는 사계절 체류형 해양 복합리조트로써, 제 2의 롯데월드와 전 세계 최대 규모의 스카이라인 루지(luge), 아쿠아월드, 호텔, 골프장, 해동용궁사 등으로 이루어져 있습니다. 상업시설은 당사의 미식일상 및 한국 최초의 프리미엄 전문리빙관으로 오픈한 메종 동부산 롯데몰 루지 상업시설로 이루어져 있습니다.`
+                                `<b>미식일상은 오시리아 관광단지 중심부에 위치한 약 3,000평 규모의 복합문화시설로,<br />2021년 6월 준공 이후 F&B와 다채로운 체험 콘텐츠가 결합된 독보적인 '문화복합시설'로의 재도약을 준비중입니다.</b>`,
+                                `오시리아 관광단지는 연간 약 4천만 명 방문하는 지역으로 차량 1시간 이내의 근거리 방문객으로 구성되어 있어,<br />일회성 관광객을 넘어 높은 재방문율과 지속적인 소비력을 갖춘 ‘안정적인 배후 수요 상권’ 입니다.<br />특히, 미식일상은 롯데아울렛〮롯데월드〮루지〮바운스유니버스 사이에 위치하여 주변 시설을 연결하는 집객력과 확장성을 보유하고 있는 시설입니다.`
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
-                            contact: { phone: `051-722-8155`, email1: `egg2bird@gsretail.com`, email2: `kjk5774@gsretail.com`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `#` }
+                            contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `#` }
                         }
                     ],
                     backLabel : '목록으로 돌아가기'
@@ -543,7 +543,7 @@ export default {
 .tell_area.mo ul li p {margin-top:4px; color:#67676F; line-height:1.5;}
 .mall_intro_cards .desc_sub_text {color:#67676F; font-size:16px; line-height:1.5;}
 .mall-type-1 .principles_swiper_wrapper {display: grid; grid-template-columns: repeat(3, 1fr);}
-.lease_section { width: 100%; margin-top:120px; }
+.lease_section { width: 100%; margin-top:40px; }
 .fee_tip_box {margin-top:40px;}
 .fee_tip_box strong {margin-bottom:8px; padding-left:32px; color:#67676F; font-size:18px; font-weight:700; display:block; position:relative;}
 .fee_tip_box strong::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_20.png') -930px -23px no-repeat; display:inline-flex; position:absolute; left:0; top:50%; transform:translateY(-50%);}
@@ -574,7 +574,7 @@ export default {
     .contact_info_wrap { padding: 0; flex-direction: column; align-items: flex-start; gap: 24px; }
     .contact_left { flex-direction: column; gap: 12px; }
     .sns_right { width: 100%; margin-top: 10px; justify-content: flex-start; }
-    .lease_section { margin-top: 60px; }
+    .lease_section { margin-top: 24px; }
     .fee_tip_box {flex-direction: column; align-items: flex-start; gap: 16px; }
     .val_txt { font-size: 16px; word-break: keep-all; }
     .bottom_btns { margin-top: 60px; }
@@ -600,7 +600,7 @@ export default {
     .mall_content .content_title a {margin-left:0px; margin-top:16px; font-size:14px;}
     .mall-type-2 .text_item :deep(b br) , .mall-type-3 .text_item :deep(b br) {display:none;}
     .content_title { font-size: 24px; }
-    .condition_grid {flex-direction:column;}
+    .condition_grid {flex-direction:column; margin-top:24px;}
     .principles_card_container { margin-top: 40px; }
     .principle_card_item .card_title {margin-bottom:16px; font-size: 20px; }
     .principle_card_item .bullet_text { font-size: 15px; }

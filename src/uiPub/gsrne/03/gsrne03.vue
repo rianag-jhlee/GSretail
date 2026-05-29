@@ -8,7 +8,7 @@
         <section>
             <div class="cont_inner">
 
-                <Tabs @change="onTabChange1" v-model="t.TabIdx" :tab-items="t.tabs" tab-class="type_02 ac" :tab-slide="false" />
+                <!-- <Tabs @change="onTabChange1" v-model="t.TabIdx" :tab-items="t.tabs" tab-class="type_02 ac" :tab-slide="false" /> -->
                 
                 
                 <section>
@@ -22,40 +22,25 @@
                             />
                         </div>
 
-                        <Tabs @change="onTabChange1" v-model="t.sTabIdx" :tab-items="t.subTabs" tab-class="type_full" :tab-slide="true" />
+                        <Tabs v-model="t.sTabIdx" :tab-items="t.subTabs" tab-class="type_full" :tab-slide="true" />
 
-                        <!-- <div v-if="t.TabIdx === 0"> -->
-                            <div class="board_wrap type_gallery" v-if="t.TabIdx === 0">
-                                <ul class="body">
-                                    <li v-for="item in t.ListData" :key="item">
-                                        <div class="item">
-                                            <a href="/gsrne0301">
-                                                <span class="thumb"><em><img :src="item.thumb" /></em></span>
-                                            </a>
-                                            <a href="#none" class="cont">
-                                                <strong>{{ item.title }}</strong>
-                                                <p>
-                                                    <em class="cate">{{ item.cate }}</em>
-                                                    <span>{{ item.date }}</span>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        <!-- </div> -->
-
-                        <div v-if="t.TabIdx === 1">
-                            <Accordion :multiple="true" class="type_faq"><!-- 26.05.14 edit 이종환 : 공통화로 class 수정 -->
-                                <AccordionItem item-key="a">
-                                    <template #title>입점비용은 얼마인가요?</template>
-                                    <p>답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다.</p>
-                                </AccordionItem>
-                                <AccordionItem item-key="b">
-                                    <template #title>기존 매장 리뉴얼도 가능한가요?</template>
-                                    <p>답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다.</p>
-                                </AccordionItem>
-                            </Accordion>
+                        <div class="board_wrap type_gallery">
+                            <ul class="body">
+                                <li v-for="item in t.ListData" :key="item">
+                                    <div class="item">
+                                        <a href="/gsrne0301">
+                                            <span class="thumb"><em><img :src="item.thumb" /></em></span>
+                                        </a>
+                                        <a href="#none" class="cont">
+                                            <strong>{{ item.title }}</strong>
+                                            <p>
+                                                <em class="cate">{{ item.cate }}</em>
+                                                <span>{{ item.date }}</span>
+                                            </p>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </section>
@@ -78,12 +63,9 @@ import Search from "@/components/Search.vue";
 import Pagination from "@/components/Pagination.vue";
 import Tabs from "@/components/Tabs.vue";
 
-import Accordion from "@/components/Accordion.vue";
-import AccordionItem from "@/components/AccordionItem.vue";
-
 export default {
     name: "gsrin04",
-    components: { Search, Pagination, Tabs, Accordion, AccordionItem },
+    components: { Search, Pagination, Tabs },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
@@ -102,12 +84,7 @@ export default {
                     MainTitle: "GS리테일 Factbook",
                     MainsubTitle: "궁금했던 GS리테일의 모든 것, 이제 여기저기 찾지 마세요.<br/> 여러분이 가장 많이 묻는 질문에 대한 정답을 한눈에 보기 쉽게 정리했습니다.",
 
-                    TabIdx: 0, //최초 선택된 탭 index
                     sTabIdx: 0, //최초 선택된 탭 index
-                    tabs: [ //탭 아이템 배열
-                        { item: "Factbook M" },
-                        { item: "Factbook Q" }
-                    ],
                     subTabs: [ //탭 아이템 배열
                         { item: "전체" },
                         { item: "카테고리1" },
@@ -161,12 +138,6 @@ export default {
         },
         onPageChange(page) { 
             this.currentPage = page;
-        },
-
-        onTabChange(idx) {
-            // [수정 핵심] 상위 탭 변경 시 하위 탭 인덱스를 0으로 초기화
-            this.TabIdx = 0;
-            console.log('Main Tab:', idx);
         },
     },
     mounted() {

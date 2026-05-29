@@ -5,7 +5,6 @@
             <!-- board title -->
             <div class="detail_title">
                 <strong class="tit">
-                    <span class="cate">{{ t.newsCate }}</span>
                     {{ t.title }}
                 </strong>
                 <p class="info">
@@ -17,13 +16,27 @@
 
             <!-- board body -->
             <div class="board_detail_cont">
+                <section class="summary_box">
+                    <p class="summary_text">{{ t.summaryText }}</p>
+                    <ul class="summary_list">
+                        <li v-for="(item, idx) in t.summaryList" :key="'summary-' + idx">{{ item }}</li>
+                    </ul>
+                </section>
 
-                <!-- editor 내용 노출 -->
-                <p><img src="@/assets/images/dummy/sample_news_detail_01.png" /></p>
+                <section class="toc_section">
+                    <h3>{{ t.tocTitle }}</h3>
+                    <ul class="toc_list">
+                        <li v-for="(item, idx) in t.tocList" :key="'toc-' + idx">{{ item }}</li>
+                    </ul>
+                </section>
 
-                <p>{{ t.detail }}</p>
-                <!-- editor 내용 노출 -->
-
+                <section class="content_section" v-for="(item, idx) in t.contentSections" :key="'section-' + idx">
+                    <dl>
+                        <dt><span>{{ idx + 1 }}.</span>{{ item.title }}</dt>
+                        <dd>{{ item.text1 }}</dd>
+                        <dd>{{ item.text2 }}</dd>
+                    </dl>
+                </section>
             </div>
             <!-- //board body -->
 
@@ -49,10 +62,37 @@ export default {
             langData: {
                 ko: {
                     title: "GS샵 분트로이, AI 모델 입은 S/S 컬렉션 공개. 출근복과 일상복의 경계 허문다",
-                    newsCate: "FACTBOOK M",
                     cate: "GS SHOP",
                     date: "2026.02.05",
-                    detail: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 ‘퍼포먼스 워크웨어’ 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트 GS샵 자체 패션 브랜드 중 남성 라인 첫  정식 론칭하고, AI 남성 모델로 콘텐츠 일괄 제작 18일(수) 21시 45분 방송서 아스킨 니트, 플렉슈라 재킷∙팬츠, 카프리 팬츠 등 선보일 예정",
+                    summaryText: "전체 컨텐츠에 대한 요약 정리 내용이 나오는 부분입니다.",
+                    summaryList: [
+                        "이런 항목 리스트가 나올 수도 있을 것 같습니다.",
+                        "이런 항목 리스트가 나올 수도 있을 것 같습니다."
+                    ],
+                    tocTitle: "목차",
+                    tocList: ["목차 리스트 제목 1", "목차 리스트 제목 2", "목차 리스트 제목 3", "목차 리스트 제목 4"],
+                    contentSections: [
+                        {
+                            title: "목차 리스트 제목 1번이 나오는 부분입니다.",
+                            text1: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 퍼포먼스 워크웨어를 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트 GS샵 자체 패션 브랜드 중 남성 라인 첫 정식 론칭하고, AI 남성 모델로 콘텐츠 일괄 제작한 내용입니다.",
+                            text2: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 퍼포먼스 워크웨어를 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트입니다."
+                        },
+                        {
+                            title: "목차 리스트 제목 2번이 나오는 부분입니다.",
+                            text1: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 퍼포먼스 워크웨어를 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트 GS샵 자체 패션 브랜드 중 남성 라인 첫 정식 론칭하고, AI 남성 모델로 콘텐츠 일괄 제작한 내용입니다.",
+                            text2: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 퍼포먼스 워크웨어를 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트입니다."
+                        },
+                        {
+                            title: "목차 리스트 제목 3번이 나오는 부분입니다.",
+                            text1: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 퍼포먼스 워크웨어를 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트 GS샵 자체 패션 브랜드 중 남성 라인 첫 정식 론칭하고, AI 남성 모델로 콘텐츠 일괄 제작한 내용입니다.",
+                            text2: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 퍼포먼스 워크웨어를 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트입니다."
+                        },
+                        {
+                            title: "목차 리스트 제목 4번이 나오는 부분입니다.",
+                            text1: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 퍼포먼스 워크웨어를 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트 GS샵 자체 패션 브랜드 중 남성 라인 첫 정식 론칭하고, AI 남성 모델로 콘텐츠 일괄 제작한 내용입니다.",
+                            text2: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 퍼포먼스 워크웨어를 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트입니다."
+                        }
+                    ],
                     ListBack: "목록으로 돌아가기"
                 }
             }
@@ -74,12 +114,45 @@ export default {
 </script>
 
 <style scoped>
-.btnSection.bottom {margin-top:20px; display:flex; justify-content:space-between;}
-.btnSection.bottom .btn_icon_back {height:auto; padding:4px; color:#161616; font-size:2rem; line-height:135%; letter-spacing:-0.01em; background-color:#fff; display:inline-flex; align-items:center;}
-.btnSection.bottom .btn_icon_back:before {width:16px; height:27px; margin-right:12px; background-color:red; content:''; display:block;}
+/* .board_detail_cont { width: 100%; } */
+.summary_box { padding: 48px 60px; background: #f2f2f4; border-radius: 16px; }
+.summary_text { color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.5; }
+.summary_list { margin-top: 16px; }
+.summary_list > li { position: relative; margin-top: 8px; padding-left: 13px; color: #161616; font-size: 2rem; font-weight: 400; line-height: 1.35; }
+.summary_list > li::before { position: absolute; top: 12px; left: 0; width: 3px; height: 3px; background: #67676f; border-radius: 50%; content: ""; }
+.summary_list > li:first-child { margin-top: 0; }
 
+.toc_section { margin-top: 48px; }
+.toc_section > h3 { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; }
+.toc_list { margin-top: 8px; }
+.toc_list > li { position: relative; margin-top: 8px; padding-left: 13px; color: #161616; font-size: 2rem; font-weight: 400; line-height: 1.35; }
+.toc_list > li::before { position: absolute; top: 12px; left: 0; width: 3px; height: 3px; background: #67676f; border-radius: 50%; content: ""; }
+.toc_list > li:first-child { margin-top: 0; }
+
+.content_section { padding: 40px 0; border-top: 1px solid #e5e5e9; }
+.toc_section + .content_section { margin-top: 48px; }
+.content_section > dl > dt { display: flex; align-items: center; gap: 8px; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; }
+.content_section > dl > dt > span { display: inline-block; }
+.content_section > dl > dd { margin-top: 24px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; word-break: keep-all; }
+.content_section > dl > dd + dd { margin-top: 16px; }
 @media screen and (max-width: 1024px) {
+    .summary_box { padding: 40px; }
 }
 @media screen and (max-width: 767px) {
+    .summary_box { padding: 24px 20px; border-radius: 12px; }
+    .summary_text { font-size: 1.8rem; line-height: 1.44; text-align: left; }
+    .summary_list { margin-top: 12px; }
+    .summary_list > li { margin-top: 6px; font-size: 1.6rem; line-height: 1.5; }
+    .summary_list > li::before { top: 10px; }
+    .toc_section { margin-top: 32px; }
+    .toc_section > h3 { font-size: 1.8rem; line-height: 1.44; }
+    .toc_list { margin-top: 10px; }
+    .toc_list > li { margin-top: 6px; font-size: 1.6rem; line-height: 1.5; }
+    .toc_list > li::before { top: 10px; }
+    .toc_section + .content_section { margin-top: 32px; }
+    .content_section { padding: 24px 0; }
+    .content_section > dl > dt { font-size: 1.8rem; line-height: 1.44; }
+    .content_section > dl > dd { margin-top: 16px; font-size: 1.6rem; line-height: 1.5; }
+    .content_section > dl > dd + dd { margin-top: 12px; }
 }
 </style>

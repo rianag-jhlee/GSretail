@@ -2,7 +2,7 @@
     <div class="gsrbr08" v-if="t">
         <section class="visual_section top_visual" ref="visualSection">
             <div class="visual_img" ref="visualImg">
-                <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
+                <img :src="t.Visual.img" :alt="t.Visual.alt" />
             </div>
             <div class="visual_content">
                 <div class="text_box cont_inner">
@@ -100,15 +100,15 @@ export default {
                         img: require("@/assets/images/dummy/gsrbr08.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr08_mo.png"),
                         alt: "고객의 일상을 더욱 특별하고 재미있게 유어스",
-                        subContent_1: "고객의 일상을 ,",
+                        subContent_1: "고객의 일상을",
                         subContent_2: "더욱 특별하고 재미있게",
                         subContent_3: "유어스",
                     },
                     HopageLink: `https://www.gsrbr.com/`,
                     HopageText: `홈페이지`,
                     SubTitle: `브랜드 소개`,
-                    SubContent_1: `함께 더 재미있는 유어스는 좋은 품질과 합리적인 가치를 기본으로 하며,`,
-                    SubContent_2: `오직 GS리테일에서만 만날 수 있는 라이프스타일 PB 브랜드입니다.`,
+                    SubContent_1: `유어스는 우수한 품질의 상품을 기반으로 일상 속 작은 즐거움과 새로운 라이프스타일을`,
+                    SubContent_2: `제안하는 GS리테일만의 라이프스타일 PB 브랜드입니다.`,
                     Bi: {
                         txt: `BI 로고`,
                         img: require("@/assets/images/dummy/gsrbr08_bi_logo_1.png"),
@@ -116,13 +116,13 @@ export default {
                         alt: "Real price BI 이미지"
                     },
                     brand_mark_1: {
-                        txt: `기본형<br/> 브랜드마크`,
+                        txt: `기본형 브랜드마크`,
                         img: require("@/assets/images/dummy/gsrbr08_bi_logo_2.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr08_bi_logo_2_mo.png"),
                         alt: "Real price BI 이미지"
                     },
                     brand_mark_2: {
-                        txt: `프리미엄<br/> 브랜드마크`,
+                        txt: `프리미엄 브랜드마크`,
                         img: require("@/assets/images/dummy/gsrbr08_bi_logo_3.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr08_bi_logo_3_mo.png"),
                         alt: "Real price BI 이미지"
@@ -182,8 +182,10 @@ h4 {margin-bottom:40px; font-size:32px;}
 .visual_section { width:100%; position: relative; overflow: hidden; }
 .visual_img { width: 100%; height: auto; }
 .visual_img img { width: 100%; display: block; }
-.visual_content { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 100%; z-index: 2; }
-.text_box span {margin-bottom:10px; color:#fff; font-size:72px; font-weight:700; display: block;  }
+
+
+.visual_content { position: absolute; top: calc(50% + 50px); left: 0; transform: translateY(-50%); width: 100%; z-index: 2; }
+.text_box span { color:#fff; font-size:72px; font-weight:700; display: block;  }
 
 /* body_wrap Section */
 .body_wrap .cont_area {padding:10.41% 0; background:#F8F8F8;}
@@ -197,13 +199,15 @@ h4 {margin-bottom:40px; font-size:32px;}
 .bi_section span {widows:100%; display:block;}
 .bi_section span img {width:100%; display:block; object-fit:cover;}
 .brand_mark {display:flex; gap:20px;}
+
 ul li strong {margin-bottom:12px; color:#A4A4B0; font-size:20px; font-weight:700; display:block;}
 ul li strong br {display:none;}
 .bi_color  div {display:flex; justify-content:space-between; gap:10px}
 .bi_color  div dl {width:calc(100% / 2 - 10px); padding:24px; background:#FF4D00; border-radius:10px;}
 .bi_color  div dl:last-of-type {background:#FFC600;}
-.bi_color  div dl dt {margin-bottom:20px; color:#fff; font-size:20px; font-weight:700;}
-:deep(.bi_color) div dl dd p {color:#fff !important; font-size:16px;}
+.bi_color div dl dt {margin-bottom:26px; color:#fff; font-weight: 600;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
+:deep(.bi_color) div dl dd p {color:#E5E5E9;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+:deep(.bi_color) div dl:last-of-type dd p{color:#fff;}
 .supp_color {margin-top:60px;}
 .supp_color div {display:flex; gap:10px;}
 .supp_color div dl {width:calc(100% / 4 - 10px);}
@@ -227,9 +231,12 @@ ul li strong br {display:none;}
     .bi_section {padding:0px;}
     .brand_mark div {width:calc(100% / 2 - 10px);}
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
+    .visual_img{height:100vh;}
+    .visual_img img{height:100%; object-fit:cover; transform:scale(1.03); transform-origin:center;}
+    .visual_content { top: 50%; }
     h4 {margin-bottom:30px; font-size:18px;}
-    .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
+    .text_box span { color:#fff; font-size:3.2rem; line-height:1.3; letter-spacing: -0.01em; font-weight:700; text-align:center; display: block;  }
     .body_wrap .cont_area {padding:60px 0px;}
     .bi_section {padding:0px;}
     :deep(.desc_section h3 br) {display:block !important;}

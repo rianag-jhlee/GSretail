@@ -14,6 +14,7 @@
 
             <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) --> 
             <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
+            <Tabs v-show="activeD1 === 4" :tab-items="consultDepth2Tabs" tab-class="type_02" v-model="activeConsultD2" :tab-slide="true" />
 
             <!-- 가맹 조건 안내 (D2=0) -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
@@ -40,18 +41,20 @@
                             <table class="type_table">
                                 <colgroup>
                                     <col class="col_item_main" />
+                                    <col class="col_item_main" />
                                     <col class="col_item_sub" />
                                     <col class="col_cost" />
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th colspan="2" scope="col">{{ t.franchise.tableHead.item }}</th>
+                                        <th colspan="3" scope="col">{{ t.franchise.tableHead.item }}</th>
                                         <th scope="col">{{ t.franchise.tableHead.cost }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(row, rowIndex) in guide.tableRows" :key="rowIndex">
+                                    <tr v-for="(row, rowIndex) in guide.tableRows" :key="rowIndex" :class="{ is_gray: row.isGray }">
                                         <th v-if="row.main" :rowspan="row.mainRowspan" scope="rowgroup">{{ row.main }}</th>
+                                        <th v-if="row.subMain" :rowspan="row.subMainRowspan" scope="rowgroup">{{ row.subMain }}</th>
                                         <th :colspan="row.subColspan || 1" :scope="row.scope || 'row'" v-html="row.sub"></th>
                                         <td v-html="row.cost"></td>
                                     </tr>
@@ -106,6 +109,7 @@
                             </div>
                             <div class="precaution_block">
                                 <h4>{{ t.precaution.blockTitle2 }}</h4>
+                                <p v-if="t.precaution.blockTitle2Desc" class="block_desc">{{ t.precaution.blockTitle2Desc }}</p>
                                 <FeatureCards type="num" :items="precautionCards2" :no-swipe="true" />
                             </div>
                         </div>
@@ -300,7 +304,7 @@
                                             </button>
                                         </td>
                                     </tr>
-                                    <!-- 상세 패널 (292:7713) -->
+                                    <!-- 상세 패널 -->
                                     <tr v-if="openTableId === item.id" class="detail_panel_row">
                                         <td colspan="8" class="detail_panel_td">
                                             <div class="detail_panel">
@@ -406,39 +410,44 @@
             <!-- 경영주 지원제도 (activeD1 === 3) -->
             <section class="sec_owner_support panel" v-show="activeD1 === 3">
                 <p class="tab_intro" v-html="t.support.intro"></p>
-                <PanelHeader
-                    :hero="imgBg02"
-                    :title="t.support.panelTitle"
-                    :desc="t.support.panelDesc"
-                />
+                <figure class="brand_panel_bg">
+                    <img :src="imgBg02" alt="" width="1420" height="340" />
+                </figure>
+                <header class="brand_panel_title">
+                    <h2 v-html="t.support.panelTitle"></h2>
+                    <p v-if="t.support.panelDesc" v-html="t.support.panelDesc"></p>
+                </header>
                 <FeatureCards type="num" :items="supportCards" :swiper-space-between="0" />
             </section>
                 
                 
-            <!-- 상담 및 신청 (activeD1 === 4) -->
-            <section class="sec_consult panel"  v-show="activeD1 === 4">
-                <PanelHeader
-                    :hero=null
-                    :title="t.consult.panelTitle"
-                    :desc="t.consult.panelDesc">
-                    <ul class="caution_list">
-                        <li>
-                            <p>{{ t.consult.caution }}</p>
-                        </li>
-                    </ul>
-                </PanelHeader>
+            <!-- 상담 및 신청 > 가맹/창업 상담 -->
+            <section class="sec_consult panel" v-show="activeD1 === 4 && activeConsultD2 === 0 && !showConsultApplyPage">
+                <header class="brand_panel_title flex">
+                    <div>
+                        <h2 v-html="t.consult.panelTitle"></h2>
+                        <p v-if="t.consult.panelDesc" v-html="t.consult.panelDesc"></p>
+                        <ul class="caution_list consult_caution_pc">
+                            <li v-for="(item, index) in t.consult.caution" :key="`consult-caution-pc-${index}`">
+                                <p>{{ item }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <Buttons btn-class="btn_icon fill btn_xl primary after" :href="t.consult.locationConsultHref" target="_blank">{{ t.consult.proposalButtonLabel }}</Buttons>
+                </header>
+                <ul class="caution_list consult_caution_mo">
+                    <li v-for="(item, index) in t.consult.caution" :key="`consult-caution-mo-${index}`">
+                        <p>{{ item }}</p>
+                    </li>
+                </ul>
                 <ul class="consult_card_list">
                     <li v-for="(card, i) in consultCards" :key="i" class="consult_card">
-                        <div class="consult_thumb">
-                            <img :src="card.img" :alt="`${card.name} ${t.consult.label}`" />
-                        </div>
                         <div class="consult_body">
                             <div class="label_wrap">
                                 <p class="consult_label">{{ t.consult.label }}</p>
                                 <p class="consult_label">{{ card.name }}</p>
                             </div>
                             <p class="consult_label region">{{ card.region }}</p>
-                            <p class="consult_note">{{ card.note }}</p>
                             <div class="consult_tel_wrap">
                                 <button
                                     type="button"
@@ -452,19 +461,17 @@
                                     role="tooltip"
                                     @click.stop
                                 >   
-                                    <strong>{{ t.consult.tooltipTitle }}</strong>
-                                    <div class="pop_space">
-                                        <dl>
-                                            <dt>{{ t.consult.phoneLabel }}</dt>
-                                            <dd>{{ card.tel }}</dd> 
-                                            <dt>{{ t.consult.kakaoLabel }}</dt>
-                                            <dd>
-                                                <figure class="image_wrap">
-                                                    <img src="" :alt="t.consult.qrAlt">
-                                                </figure>
-                                            </dd>
-                                            <dd>{{ t.consult.kakaoNotice }}</dd>
-                                        </dl>
+                                    <strong class="consult_tel_title">{{ t.consult.tooltipTitle }}</strong>
+                                    <div class="consult_tel_content">
+                                        <p class="consult_tel_phone">
+                                            {{ t.consult.phoneLabel }}<br />
+                                            {{ card.tel }}
+                                        </p>
+                                        <p class="consult_tel_kakao">{{ t.consult.kakaoLabel }}</p>
+                                        <figure class="consult_tel_qr">
+                                            <span>{{ t.consult.qrImageLabel }}</span>
+                                        </figure>
+                                        <p class="consult_tel_notice">{{ t.consult.kakaoNotice }}</p>
                                     </div>
                                     <button
                                         type="button"
@@ -474,11 +481,10 @@
                                     ></button>
                                 </div>
                             </div>
-                            
-                            
-                            <div class="consult_foot">
-                                <Buttons btn-class="btn_big border btn_icon_arrow after" data-popid="gsrst010301" data-type="lg" data-cont="gsrst010301" @click.prevent="openModal">{{ t.consult.applyButtonLabel }}</Buttons>
-                            </div>
+                            <p class="consult_note">{{ card.note }}</p>
+                        </div>
+                        <div class="consult_foot">
+                            <Buttons btn-class="btn_big border btn_icon_arrow after" @click.prevent="showConsultApplyPage = true">{{ t.consult.applyButtonLabel }}</Buttons>
                         </div>
                     </li>
                 </ul>
@@ -488,6 +494,312 @@
                     <Buttons btn-class="btn_mid border btn_icon_arrow after">{{ t.consult.infoBannerButtonLabel }}</Buttons>
                 </div>
             </section>
+
+            <!-- 상담 및 신청 > 입지제안 상담 -->
+            <section class="sec_consult panel" v-show="activeD1 === 4 && activeConsultD2 === 1 && !showConsultApplyPage">
+                <div class="consult_box">
+                    <div class="consult_intro">
+                        <div class="consult_intro_txt">
+                            <h3 v-html="t.proposalConsultBox.title"></h3>
+                            <p v-html="t.proposalConsultBox.desc"></p>
+                            <ul class="caution_list">
+                                <li v-for="(item, index) in t.proposalConsultBox.caution" :key="`consult-caution-box-${index}`">
+                                    <p>{{ item }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_row">
+                    <div class="form_label">{{ t.proposalForm.regionLabel }}<span class="form_required">*</span></div>
+                    <div class="form_field form_field_region">
+                        <SelectBox :options="sidoOptions" v-model="consultForm.openRegionSido" :initMsg="t.proposalForm.sidoInitMsg" @update:modelValue="consultForm.openRegionSigungu = ''" />
+                        <SelectBox :options="openSigunguOptions" v-model="consultForm.openRegionSigungu" :initMsg="t.proposalForm.sigunguInitMsg" :disabled="!consultForm.openRegionSido" />
+                    </div>
+                </div>
+                <ConsentInfoBox :title="t.consent2.title" :items="t.consent2.items" :notice-html="t.consent2.noticeHtml" />
+                <!-- 고객정보 폼 -->
+                <div class="apply_form">
+                    <div class="form_head">
+                        <h3 class="form_head_title">{{ t.proposalCustomerForm.title }}</h3>
+                        <span class="form_required_note">{{ t.requiredNote }}</span>
+                    </div>
+                    <div class="form_body">
+                        <div class="form_row form_row_name">
+                            <div class="form_label">{{ t.proposalCustomerForm.nameLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field">
+                                <Inputs type="text" v-model="consultForm.name" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.proposalCustomerForm.emailLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_email">
+                                <Inputs type="text" v-model="consultForm.emailId" />
+                                <span class="form_sep">@</span>
+                                <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" :placeholder="t.proposalCustomerForm.emailPlaceholder" />
+                                <Inputs v-else type="text" :model-value="consultForm.emailDomain" :is-readonly="true" />
+                                <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.proposalCustomerForm.phoneLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_phone">
+                                <SelectBox :options="phoneOptions" v-model="consultForm.phone1" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone2" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone3" />
+                            </div>
+                        </div>
+                        <div class="form_row form_row_address">
+                            <div class="form_label">{{ t.proposalCustomerForm.storeAddressLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_address">
+                                <div class="form_zip_row">
+                                    <Inputs type="text" v-model="consultForm.proposalZipCode" />
+                                    <Buttons type="button" btn-class="btn_big border" @click.prevent="onProposalZipSearch">{{ t.proposalCustomerForm.zipButtonLabel }}</Buttons>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_row form_row_area">
+                            <div class="form_label">{{ t.proposalCustomerForm.storeAreaLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_area">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.proposalCustomerForm.contractAreaLabel }}</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.proposalAreaContract" />
+                                        <span class="form_sub_unit">{{ t.proposalCustomerForm.areaUnit }}</span>
+                                    </div>
+                                </div>
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.proposalCustomerForm.exclusiveAreaLabel }}</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.proposalAreaExclusive" />
+                                        <span class="form_sub_unit">{{ t.proposalCustomerForm.areaUnit }}</span>
+                                        <span class="area_note">{{ t.proposalCustomerForm.areaNote }}</span>
+                                        <p class="form_field_note" v-html="t.proposalCustomerForm.addressNote"></p>
+                                    </div>
+                                </div>
+                             
+                                <p class="form_field_note">{{ t.proposalCustomerForm.legalNotice }}</p>
+                                 
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.proposalCustomerForm.storeNameLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_store">
+                                <Inputs type="text" v-model="consultForm.proposalStoreName" />
+                            </div>
+                        </div>
+                        <div class="form_row form_row_textarea">
+                            <div class="form_label">{{ t.proposalCustomerForm.commercialFeatureLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field">
+                                <Textarea v-model="consultForm.proposalCommercialFeature" name="proposal_commercial_feature" :placeholder="t.proposalCustomerForm.commercialFeaturePlaceholder" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.proposalCustomerForm.ownerRelationLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_store">
+                                <Inputs type="text" v-model="consultForm.proposalOwnerRelation" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button_wrap">
+                    <Buttons btn-class="btn_big primary">{{ t.consultForm.submitLabel }}</Buttons>
+                    <Buttons btn-class="btn_big gary">{{ t.consultForm.resetLabel }}</Buttons>
+                </div>
+            </section>
+
+            <section class="sec_consult_apply panel" v-show="activeD1 === 4 && activeConsultD2 === 0 && showConsultApplyPage">
+                <!-- 컨설턴트와 1:1 상담 -->
+                <div class="consult_box consult_box_apply">
+                    <div class="consult_selector_wrap">
+                        <SelectBox :options="[t.consultBox.consultantName]" v-model="consultForm.consultantName" :initMsg="t.consultBox.consultantName" />
+                    </div>
+                    <div class="consult_intro">
+                        <div class="consult_head">
+                            <div class="consult_img_wrap"></div>
+                            <h3 v-html="t.consultBox.title"></h3>
+                        </div>
+                        <p v-html="t.consultBox.desc"></p>
+                    </div>
+                </div>
+                <!-- 점포 소유 여부 선택 -->
+                <div class="middle_bts_wrap">
+                    <button :class="{ active: hasStore === true }" @click="hasStore = true">{{ t.storeButtons.hasStore }}</button>
+                    <button :class="{ active: hasStore === false }" @click="hasStore = false">{{ t.storeButtons.noStore }}</button>
+                </div>
+                <!-- 개인정보 동의 -->
+                <ConsentInfoBox :title="t.consent.title" :items="t.consent.items" :notice-html="t.consent.noticeHtml" />
+                <!-- 고객정보 폼 -->
+                <div class="apply_form">
+                    <div class="form_head">
+                        <h3 class="form_head_title">{{ t.customerForm.title }}</h3>
+                        <span class="form_required_note">{{ t.requiredNote }}</span>
+                    </div>
+                    <div class="form_body">
+                        <div class="form_row form_row_name">
+                            <div class="form_label">{{ t.customerForm.nameLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field">
+                                <Inputs type="text" v-model="consultForm.name" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.customerForm.emailLabel }}</div>
+                            <div class="form_field form_field_email">
+                                <Inputs type="text" v-model="consultForm.emailId" />
+                                <span class="form_sep">@</span>
+                                <Inputs v-if="consultForm.emailDomain === ''" type="text" v-model="consultForm.emailDomainCustom" :placeholder="t.customerForm.emailPlaceholder" />
+                                <Inputs v-else type="text" :model-value="consultForm.emailDomain" :is-readonly="true" />
+                                <SelectBox :options="emailDomainOptions" v-model="consultForm.emailDomain" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.customerForm.phoneLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_phone">
+                                <SelectBox :options="phoneOptions" v-model="consultForm.phone1" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone2" />
+                                <span class="form_sep">-</span>
+                                <Inputs type="text" v-model="consultForm.phone3" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label" v-html="t.customerForm.addressLabel"></div>
+                            <div class="form_field form_field_region">
+                                <SelectBox :options="sidoOptions" v-model="consultForm.regionSido" :initMsg="t.customerForm.sidoInitMsg" @update:modelValue="consultForm.regionSigungu = ''" />
+                                <SelectBox :options="sigunguOptions" v-model="consultForm.regionSigungu" :initMsg="t.customerForm.sigunguInitMsg" :disabled="!consultForm.regionSido" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 상담내용 폼 (점포 소유 시에만 표시) -->
+                <div class="apply_form" v-show="hasStore === true">
+                    <div class="form_head">
+                        <h3 class="form_head_title">{{ t.consultForm.title }}</h3>
+                        <span class="form_required_note">{{ t.requiredNote }}</span>
+                    </div>
+                    <div class="form_body">
+                        <div class="form_row form_row_area">
+                            <div class="form_label">{{ t.consultForm.areaLabel }}</div>
+                            <div class="form_field form_field_area">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.contractAreaLabel }}</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.areaContract" />
+                                        <span class="form_sub_unit">{{ t.consultForm.areaUnit }}</span>
+                                    </div>
+                                </div>
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.exclusiveAreaLabel }}</span>
+                                    <div class="form_sub_input_wrap">
+                                        <Inputs type="text" v-model="consultForm.areaExclusive" />
+                                        <span class="form_sub_unit">{{ t.consultForm.areaUnit }}</span>
+                                    </div>
+                                </div>
+                                <span class="area_note">{{ t.consultForm.areaNote }}</span>
+                            </div>
+                        </div>
+                        <div class="form_row check_row">
+                            <div class="form_label">{{ t.consultForm.superOperatorLabel }}</div>
+                            <div class="form_field form_field_check">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.itemCheckLabel }}</span>
+                                    <div class="check_list">
+                                        <Inputs v-for="opt in superItemOptions" :key="opt.value" type="checkbox" :value="opt.value" v-model="consultForm.superItems" :text="opt.label" />
+                                    </div>
+                                </div>
+                                <div class="check_etc">
+                                    <span class="form_sub_label">{{ t.consultForm.etcLabel }}</span>
+                                    <Inputs type="text" v-model="consultForm.superItemEtc" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_row contract_row">
+                            <div class="form_label">{{ t.consultForm.contractLabel }}</div>
+                            <div class="form_field form_field_contract">
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.contractPeriodLabel }}</span>
+                                    <div class="form_sub_inputs">
+                                        <Inputs type="text" v-model="consultForm.contractStart" />
+                                        <span class="form_sep">~</span>
+                                        <Inputs type="text" v-model="consultForm.contractEnd" />
+                                    </div>
+                                </div>
+                                <div class="form_sub_group">
+                                    <span class="form_sub_label">{{ t.consultForm.depositRentLabel }}</span>
+                                    <div class="contract_rent">
+                                        <div class="form_sub_input_wrap">
+                                            <Inputs type="text" v-model="consultForm.deposit" />
+                                            <span class="form_sub_unit">{{ t.consultForm.rentUnit }}</span>
+                                        </div>
+                                        <div class="form_sub_input_wrap">
+                                            <Inputs type="text" v-model="consultForm.monthlyRent" />
+                                            <span class="form_sub_unit">{{ t.consultForm.rentUnit }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="apply_form" v-show="hasStore === false">
+                    <div class="form_head">
+                        <h3 class="form_head_title">{{ t.consultFormNoStore.title }}</h3>
+                        <span class="form_required_note">{{ t.requiredNote }}</span>
+                    </div>
+                    <div class="form_body">
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.investmentLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_select_220">
+                                <SelectBox :options="t.consultFormNoStore.investmentOptions" v-model="consultForm.investmentAmount" :initMsg="t.consultFormNoStore.investmentInitMsg" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.incomeLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_select_220">
+                                <SelectBox :options="t.consultFormNoStore.incomeOptions" v-model="consultForm.expectedIncome" :initMsg="t.consultFormNoStore.incomeInitMsg" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.openRegionLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_region">
+                                <SelectBox :options="sidoOptions" v-model="consultForm.openRegionSido" :initMsg="t.customerForm.sidoInitMsg" @update:modelValue="consultForm.openRegionSigungu = ''" />
+                                <SelectBox :options="openSigunguOptions" v-model="consultForm.openRegionSigungu" :initMsg="t.customerForm.sigunguInitMsg" :disabled="!consultForm.openRegionSido" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.openTimeLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_region">
+                                <SelectBox :options="t.consultFormNoStore.openYearOptions" v-model="consultForm.openYear" :initMsg="t.consultFormNoStore.openYearInitMsg" />
+                                <SelectBox :options="t.consultFormNoStore.openMonthOptions" v-model="consultForm.openMonth" :initMsg="t.consultFormNoStore.openMonthInitMsg" />
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.typeLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_franchise">
+                                <div class="franchise_type_item" v-for="opt in t.consultFormNoStore.franchiseTypeOptions" :key="opt.value">
+                                    <Inputs type="radio" :name="'franchiseType'" :value="opt.value" v-model="consultForm.franchiseType" :text="opt.label" />
+                                    <Buttons btn-class="btn_mid border" data-popid="gsrst01010101_view" data-type="lg" data-cont="gsrst01010101_view" @click.prevent="openModal">{{ t.consultFormNoStore.viewLabel }}</Buttons>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.inquiryLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field">
+                                <textarea v-model="consultForm.inquiry" :placeholder="t.consultFormNoStore.inquiryPlaceholder"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 하단 버튼 -->
+                <div class="button_wrap">
+                    <Buttons btn-class="btn_big primary">{{ t.consultForm.submitLabel }}</Buttons>
+                    <Buttons btn-class="btn_big gary">{{ t.consultForm.resetLabel }}</Buttons>
+                </div>
+            </section>
+            
         </div>
         
         <ul
@@ -505,27 +817,26 @@
         <div class="modal_container"></div>
     </div>
     <!-- //modal_wrap -->
-    <!-- 상담 신청 모달 -->
-    <div id="gsrst010301" class="modal_wrap">
+    <div id="gsrst01010101_view" class="modal_wrap">
         <div class="modal_container"></div>
     </div>
-    <!-- //상담 신청 모달 -->
-
-
 </template>
 
 <script setup> 
-import { ref, computed, defineProps, watch, onMounted, onUnmounted, nextTick } from "vue";
+import { ref, reactive, computed, defineProps, watch, onMounted, onUnmounted, nextTick } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import Pagination from "@/components/Pagination.vue";
 import Steps from "@/components/Steps.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
 import Buttons from "@/components/Buttons.vue";
+import Inputs from "@/components/Inputs.vue";
+import SelectBox from "@/components/SelectBox.vue";
+import ConsentInfoBox from "@/components/ConsentInfoBox.vue";
+import Textarea from "@/components/Textarea.vue";
 import StoreCard from "@/components/StoreCard.vue";
 import StoreCardDetail from "@/components/StoreCardDetail.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
-import PanelHeader from "@/components/PanelHeader.vue";
 import modal from "@/assets/js/modal";
 import imgBg from "@/assets/images/dummy/gsrst01010101_bg.png";
 import imgBg02 from "@/assets/images/dummy/gsrst01010101_bg_02.png";
@@ -545,7 +856,7 @@ const props = defineProps({
     },
 });
 
-const langData = {
+const langData = { 
     ko: {
         headerTitle: "GS THE FRESH 창업안내",
         depth1Tabs: [
@@ -570,9 +881,10 @@ const langData = {
             guideTypes: [
                 {
                     tab: "GSF1타입",
+                    hasSubMainCol: true,
                     infoBar: "GSF1타입 - 본부가 임차하여 경영주 운영",
                     tableRows: [
-                        { main: "투자 금액", mainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세포함)" },
+                        { main: "투자 금액", mainRowspan: 9, subMain: "개점 투자", subMainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세포함)" },
                         { sub: "초기 상품대", cost: "7,000만원" },
                         { sub: "소모품", cost: "700만원" },
                         { sub: "시설보증금", cost: "500만원" },
@@ -580,14 +892,14 @@ const langData = {
                         { sub: "임차비용 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "시설투자 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "예치보증금", subColspan: 2, scope: "row", cost: "10,000만원 (보증보험 또는 현금)" },
-                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "최소 19,300만원" },
-                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 2, scope: "row", cost: "57% 매출총이익 구간별 52% ~ 62%" },
-                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 2, scope: "row", cost: "3년 / 3년 단위" },
-                        { sub: "담보설정", subColspan: 2, scope: "row", cost: "없음" },
-                        { sub: "** 최저 <br class=\"m_br\">수입 보조금", subColspan: 2, scope: "row", cost: "영업면적 200평  <br class=\"m_br\">초과 : 18백만/월 영업면적 165평 이상~200평 이하 : 16백만/월 영업면적 165평 미만 : 13백만/월" },
+                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금", isGray: true },
+                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 3, scope: "row", cost: "매출 총이익의52%(구간별 52% ~ 62%)" },
+                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 3, scope: "row", cost: "3년이상 / 3년 단위" },
+                        { sub: "담보설정", subColspan: 3, scope: "row", cost: "없음" },
+                        { sub: "운영비 최소보조", subColspan: 3, scope: "row", cost: "영업면적 200㎡ (60평)초과 : 18백만/월<br />영업면적 165㎡(50~60평) 이상~200㎡ 이하 : 16백만/월<br />영업면적 165㎡(50평) 미만 : 13백만/월    *적용기간 : 최초 1년" },
                     ],
                     cautions: [
-                        { text: "*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
+                        { text: "* 경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
                     ],
                     graph: {
                         title: "GSF1타입",
@@ -601,7 +913,7 @@ const langData = {
                     tab: "GSF2타입",
                     infoBar: "GSF2타입 - 경영주가 총투자비의 51% 부담. 경영주 운영",
                     tableRows: [
-                        { main: "투자 금액", mainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세 포함)" },
+                        { main: "투자 금액", mainRowspan: 9, subMain: "개점 투자", subMainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세포함)" },
                         { sub: "초기 상품대", cost: "7,000만원" },
                         { sub: "소모품", cost: "700만원" },
                         { sub: "시설보증금", cost: "500만원" },
@@ -609,15 +921,16 @@ const langData = {
                         { sub: "임차비용 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "시설투자 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "예치보증금", subColspan: 2, scope: "row", cost: "* 점포 총 투자비 X 51% ~ 9,300만원 (현금)" },
-                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금" },
-                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 2, scope: "row", cost: "49% 매출총이익 구간별 49% ~ 55%" },
-                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 2, scope: "row", cost: "3년 / 3년 단위" },
-                        { sub: "담보설정", subColspan: 2, scope: "row", cost: "없음" },
-                        { sub: "** 최저 <br class=\"m_br\">수입 보조금", subColspan: 2, scope: "row", cost: "영업면적 200평  <br class=\"m_br\">초과 : 18백만/월 영업면적 165평 이상~200평 이하 : 16백만/월 영업면적 165평 미만 : 13백만/월" },
+                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금", },
+                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 3, scope: "row", cost: "매출 총이익의49%(구간별 49% ~ 55%)", isGray: true },
+                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 3, scope: "row", cost: "3년 / 3년 단위" },
+                        { sub: "담보설정", subColspan: 3, scope: "row", cost: "5천만원 (보증보험 가능)" },
+                        { sub: "** 최저 수입 보조금", subColspan: 3, scope: "row", cost: "영업면적 200㎡ (60평)초과 : 18백만/월<br />영업면적 165㎡(50~60평) 이상~200㎡ 이하 : 16백만/월<br />영업면적 165㎡(50평) 미만 : 13백만/월    *적용기간 : 최초 1년" },
                     ],
                     cautions: [
-                        { text: "*점포 총 투자비는 임차비용, 시설투자비용, 개점투자비의 총 합산액." },
-                        { text: "**경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
+                        { text: "* 점포 총 투자비는 임차비용, 시설투자비용, 개점투자비의 총 합산액." },
+                        { text: "** 경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. (개점일로부터 최소 1년만 적용)" },
+                        { text: "** 운영비 최소보조는 경영주 총수입 ( 경영주 월매출총이익 + 본부지원금 ) 기준이며, 인건비 등 영업비용 차감 전 입니다.(개점일로부터 최초 1년간 적용)" },
                     ],
                     graph: {
                         title: "GSF2타입",
@@ -632,7 +945,7 @@ const langData = {
                     tab: "GSF3타입",
                     infoBar: "GSF3타입 - 경영주가 임차하여 경영주 운영",
                     tableRows: [
-                        { main: "투자 금액", mainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세 포함)" },
+                        { main: "투자 금액", mainRowspan: 9, subMain: "개점 투자", subMainRowspan: 5, sub: "가맹비", cost: "1,100만원 <br class=\"m_br\">(부가세포함)" },
                         { sub: "초기 상품대", cost: "7,000만원" },
                         { sub: "소모품", cost: "700만원" },
                         { sub: "시설보증금", cost: "500만원" },
@@ -640,14 +953,15 @@ const langData = {
                         { sub: "임차비용 부담주체", subColspan: 2, scope: "row", cost: "경영주" },
                         { sub: "시설투자 부담주체", subColspan: 2, scope: "row", cost: "본부" },
                         { sub: "예치보증금", subColspan: 2, scope: "row", cost: "없음" },
-                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 예치보증금" },
-                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 2, scope: "row", cost: "24%" },
-                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 2, scope: "row", cost: "5년 / 5년 단위%" },
-                        { sub: "담보설정", subColspan: 2, scope: "row", cost: "최소 2억 이상" },
-                        { sub: "** 최저 <br class=\"m_br\">수입 보조금", subColspan: 2, scope: "row", cost: "해당사항 없음" },
+                        { sub: "경영주 투자 합계", subColspan: 2, scope: "row", cost: "9,300만원 + 임차비용", isGray:true},
+                        { sub: "가맹 수수료 <br class=\"m_br\">(부가세별도)", subColspan: 3, scope: "row", cost: "24%" },
+                        { sub: "계약기간 <br class=\"m_br\">(최초/재계약)", subColspan: 3, scope: "row", cost: "5년이상 / 3년 단위" },
+                        { sub: "담보설정", subColspan: 3, scope: "row", cost: "2억원이상 (보증보험 가능)" },
+                        { sub: "** 최저 수입 보조금", subColspan: 3, scope: "row", cost: "2억 6000만원 / 年 ( 약 2,167만원 / 月)" },
                     ],
                     cautions: [
-                        { text: "*경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. <br class=\"mo\"/>(개점일로부터 최소 1년만 적용)" },
+                        { text: "* 경영주 총수입(경영주 월매출총이익 + 본부지원금) 기준이며, 인건비 등 영업비용 차감 전 입니다. <br class=\"m_br\"/>(개점일로부터 최소 1년만 적용)" },
+                        { text: "* 운영비 최소보조는 경영주 총수입 ( 경영주 월매출총이익 + 본부지원금 ) 기준이며, 인건비 등 영업비용 차감 전 입니다.(개점일로부터 최초 1년간 적용)" },
                     ],
                 },
             ],
@@ -657,31 +971,30 @@ const langData = {
             buttonLabel: "설명회신청 바로가기",
             steps: [
                 { step: "Step 1", title: "사업설명회 참석", text: "GS THE FRESH 가맹 계약<br />조건안내 및 절차소개", numColor: "#15b874" },
-                { step: "Step 2", title: "정보공개서 확인", text: "가맹본부로부터 정보공개서를 제공받아 GS THE FRESH 사업성 검토", numColor: "#15b874" },
-                { step: "Step 3", title: "지원서 접수", text: "지원서 제출은 월~금요일 수시가능<br />(우편 접수 가능)", numColor: "#15b874" },
-                { step: "Step 4", title: "경영주 면담", text: "지원서를 토대로 면담 진행하여<br />사업 타당성 검토함", numColor: "#15b874" },
-                { step: "Step 5", title: "점포소개", text: "예비경영주 희망사항과<br />조건에 부합하는 점포를 소개함", numColor: "#15b874" },
-                { step: "Step 6", title: "가맹약정", text: "소개 점포의 운영의사 최종확인 및<br />약정금 지불", numColor: "#15b874" },
-                { step: "Step 7", title: "가맹 본 계약", text: "본계약금 최종 지불 및<br />본계약서 체결", numColor: "#15b874" },
-                { step: "Step 8", title: "경영주 교육 이수", text: "점포 현장 OJT,<br />입문 교육(이론/실습)", numColor: "#15b874" },
-                { step: "Step 9", title: "GRAND OPEN", text: "상품 재고조사 후 오픈", numColor: "#15b874" },
-                { step: "Step 10", title: "점포운영", text: "점포 영업 지원 담당 직원의<br />주기적인 방문 및 컨설팅", numColor: "#15b874" },
+                { step: "Step 2", title: "지원서 접수", text: "지원서 제출은 월~금요일 수시가능", numColor: "#15b874" },
+                { step: "Step 3", title: "경영주 면접", text: "지원서를 토대로 면담 진행하여<br />사업 타당성 검토함", numColor: "#15b874" },
+                { step: "Step 4", title: "점포소개", text: "예비경영주 희망사항과<br />조건에 부합하는 점포를 소개함", numColor: "#15b874" },
+                { step: "Step 5", title: "가맹약정(필요시)", text: "소개 점포의 운영의사 최종확인 및<br />약정금 지불", numColor: "#15b874" },
+                { step: "Step 6", title: "가맹 본 계약", text: "본계약금 최종 지불 및<br />본계약서 체결", numColor: "#15b874" },
+                { step: "Step 7", title: "경영주 교육 이수", text: "점포 현장 OJT,<br />입문 교육(이론/실습)", numColor: "#15b874" },
+                { step: "Step 8", title: "GRAND OPEN", text: "상품 재고조사 후 오픈", numColor: "#15b874" },
+                { step: "Step 9", title: "점포운영", text: "점포 영업 지원 담당 직원의<br />주기적인 방문 및 컨설팅", numColor: "#15b874" },
             ],
         },
         precaution: {
             title: "가맹 해약<br class=\"p_br\">수수료",
             blockTitle1: "GSF1, GSF2 타입",
             blockTitle2: "GSF3 타입",
+            blockTitle2Desc: "가맹본부 회계기준, 감가상각잔존가액 별도 보상",
             cards1: [
-                { num: "01", title: "중도해약", desc: "· 과거 1년간의 월평균 매출 총이익 20% × 3개월" },
-                { num: "02", title: "해지 사유 발생 시", desc: "· 과거 1년간의 월평균 매출 총이익 20% × 6개월" },
+                { num: "01", title: "중도 계약 해지", desc: "· 과거 1년간의 월 평균 매출 총이익 20% X 3개월 (3배)" },
+                { num: "02", title: "즉시 계약 해지사유 발생시", desc: "· 과거 1년간의 월 평균 매출 총이익 20% X 6개월 (6배)" },
             ],
             cards2: [
-                { num: "03", title: "기타 중도해약", desc: ["· 본부 산정", "· 개점일~ 3년 이내 : 76(74)%의 8개월", "· 3년~5년 이내 : 76(74)%의 4개월", "· 경영주 산정", "· 개점일~ 3년 이내 : 24(26)%의 8개월", "· 3년~5년 이내 : 24(26)%의 4개월"] },
-                { num: "04", title: "해지 사유 발생시", desc: ["· 영업의 침해/근무계약 위반, 본부 귀산 등", "· 본부 과태 시 : 76(74)%의 12개월 분", "· 경영주 과태시 : 24(26)%의 12개월"] },
+                { num: "01", title: "중도 계약 해지", desc: ["· 3년 미만 : 과거 1년간의 월 평균 매출 총이익 24% X 8개월 (8배) + 시설잔존", "· 3년~5년 이내 : 76(74)%의 4개월", "· 경영주 산정", "· 3년 이상 : 과거 1년간의 월 평균 매출 총이익 24% X 4개월 (4배) + 시설잔존"] },
+                { num: "02", title: "즉시 계약 해지사유 발생시", desc: ["· 운영기간 무관 과거 1년간의 월 평균 매출 총이익 24% X 12개월 (12배) + 시설잔"] },
             ],
             cautions: [
-                "가맹 본부 회계 기준, 감가상각 건으로 별도 보상",
                 "* 손해 배상금 별도이며 과거 영업기간이 1년 이하인 경우 해당 영업기간을 적용함.",
                 "* '과거 1년간'의 기간은 관리금 중도해약인 경우 중도해약 월로부터 가까운 기간으로 하고, 해지사유 발생인 경우에는 계약 해지 사유가 발생한 달의 직전월의 말일로부터 기 기산함.",
             ],
@@ -706,7 +1019,7 @@ const langData = {
                         { label: "일시", value: "매월 1회" },
                         { label: "대상", value: "충청, 강원, 제주 GS THE FRESH 창업을 희망하는 분" },
                         { label: "준비물", value: "필기도구" },
-                        { label: "장소", value: "대전 유성구 엑스포로 107 대전컨벤션센터" },
+                        { label: "장소", value: "대전 중구 대종로167 모임공간 국보 3층" },
                         { label: "기타", value: "문의 010-2141-2816 (문자 OR 카톡)" },
                     ],
                 },
@@ -786,7 +1099,7 @@ const langData = {
             ],
         },
         support: {
-            intro: "GS THE FRESH는 <br class=\"m_br\"/><span>경영주와의 공동의 발전</span>을 위해 <br />다양한 상생 제도를 운영하고 있습니다.",
+            intro: "GS THE FRESH는 <br class=\"m_br\"/><span class='txt_green'>경영주와의 공동의 발전</span>을 위해 <br />다양한 상생 제도를 운영하고 있습니다.",
             panelTitle: "운영지원제도",
             panelDesc: "GS THE FRESH 경영주님의 원활한 점포 운영을 위한 지원 제도 입니다.",
             cards: [
@@ -797,9 +1110,10 @@ const langData = {
             ],
         },
         consult: {
+            depth2Tabs: [{ item: "가맹/창업 상담" }, { item: "입지제안 상담" }],
             panelTitle: "컨설턴트와 1:1 상담",
             panelDesc: "가맹/창업 컨설턴트가 1:1로 상담해 드립니다. <br /> 가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.",
-            caution: "※ 주말 및 공휴일은 연락이 불가하며 평일 09:00~17:30 사이에 연락 부탁드립니다.",
+            caution: ["※ 주말 및 공휴일은 연락이 불가하며 평일 09:00~17:30 사이에 연락 부탁드립니다."],
             label: "컨설턴트",
             telButtonLabel: "연락처 확인하기",
             tooltipTitle: "연락처",
@@ -811,6 +1125,12 @@ const langData = {
             applyButtonLabel: "상담신청",
             infoBannerText: "'입지' 및 '점포소유' 상담은 입지제안 사이트를 통해 확인 부탁드립니다.",
             infoBannerButtonLabel: "바로가기",
+            proposalPanelTitle: "입지제안 상담",
+            proposalPanelDesc: "점포 소유 및 입지 관련 상담은 입지제안 상담으로 안내해 드립니다.",
+            proposalCaution: "※ 입지제안 상담은 입지제안 사이트를 통해 접수 가능합니다.",
+            proposalButtonLabel: "입지상담 바로가기",
+            locationConsultHref: "http://gsthefresh.gsretail.com/thefresh/ko/franchise-info/one-on-ones-consult/offer-location",
+            qrImageLabel: "QR 이미지",
             cards: [
                 { name: "윤경진", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_01.png"), link: "#none" },
                 { name: "이승현", region: "수도권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_02.png"), link: "#none" },
@@ -818,12 +1138,182 @@ const langData = {
                 { name: "남궁신영", region: "충북/강원권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_04.png"), link: "#none" },
                 { name: "김수진", region: "영남/호남권", note: "*설명회 및 창업문의", tel: "010-0000-0000", img: require("@/assets/images/dummy/gsrst01050101_05.png"), link: "#none" },
             ],
+            proposalCards: [
+                { name: "입지상담 접수", region: "전국", note: "* 점포 소유 및 입지제안 상담" },
+                { name: "입지검토 신청", region: "전국", note: "* 상권/입지 검토 상담" },
+                { name: "점포제안 문의", region: "전국", note: "* 입지제안 관련 문의" },
+            ],
+        },
+        intro: {
+            title: "안녕하세요!<br>GS THE FRESH 1:1 상담<br class=\"m_br\">컨설턴트 윤경진 입니다.",
+            desc: "아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다. <br />담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.",
+            caution:["※ 규모: 전용면적 60평 이상", "※※ 주말/연휴에는 즉시 응답이 어려울 수 있는 점 양해 부탁드립니다."]
+        },
+        consultBox: {
+            title: "안녕하세요!<br />GS THE FRESH 1:1 상담<br class=\"m_br\">컨설턴트 윤경진 입니다.",
+            desc: "아래의 상담 신청서를 작성하시면 귀하만의 창업 상담을 받아 보실 수있습니다.<br />담당자와 통화가 원활하지 않는 경우 상담신청 부탁 드립니다. 담당자가 확인 후 연락 드리겠습니다.",
+            consultantName: "윤경진 컨설턴트",
+        },
+        proposalConsultBox: {
+            title: "입지제안 및 점포소유 상담",
+            desc: "GS더프레시 입지에 대한 상담을 지역별 담당자들이 1:1 맞춤 상담 해드립니다.<br />상담신청을 남겨주시면 담당자가 확인 후 연락드립니다.",
+            caution: ["※ 규모: 전용면적 60평 이상", "※※ 주말/연휴에는 즉시 응답이 어려울 수 있는 점 양해 부탁드립니다."],
+        },
+        proposalForm: {
+            regionLabel: "입지제안 지역 선택",
+            sidoInitMsg: "지역선택",
+            sigunguInitMsg: "구/군 선택",
+        },
+        proposalCustomerForm: {
+            title: "고객정보",
+            nameLabel: "이름",
+            emailLabel: "이메일",
+            emailPlaceholder: "직접입력",
+            phoneLabel: "휴대폰",
+            storeAddressLabel: "추천점포 소재지",
+            zipButtonLabel: "우편번호 찾기",
+            addressNote: "<span class=\"form_required\">*</span> 추천점포 소재지는 필수입력 사항입니다.",
+            storeAreaLabel: "추천점포 면적",
+            contractAreaLabel: "계약면적",
+            exclusiveAreaLabel: "전용면적",
+            areaUnit: "평",
+            areaNote: "* 평 = (기준)평 x 3.3",
+            legalNotice: "* 법정도량은 계약면적을 기준으로 합니다.",
+            storeNameLabel: "점포상호",
+            commercialFeatureLabel: "상권특징",
+            commercialFeaturePlaceholder: "상권 특징을 입력해 주세요.",
+            ownerRelationLabel: "건물주와의 관계",
+        },
+        consent: {
+            title: "개인정보 수집·이용 동의",
+            items: [
+                "- 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 \"개인정보 처리방침\"을 참고하시기 바랍니다.",
+                "-수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호, 소유점포주소(시, 구/군)",
+                "- 수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
+                "- 보유 및 이용기간: 접수 후 1년",
+            ],
+            noticeHtml: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 <br />사업설명회 신청 글 작성이 불가능합니다.",
+        },
+
+        consent2: {
+            title: "개인정보 수집·이용 동의",
+            items: [
+                "- 입력하신 정보는 입지상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며,기타 개인정보 취급사항은 홈페이지 하단의 \"개인정보 처리방침\"을 참고하시기 바랍니다.",
+                "- 수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호",
+                "- 수집이용 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
+                "- 보유 및 이용기간: 접수 후 1년",
+            ],
+            noticeHtml: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br />입지제안 신청 글 작성이 불가능합니다.",
+        },
+        storeButtons: {
+            hasStore: "내가 소유한 점포가 있다.",
+            noStore: "내가 소유한 점포가 없다.",
+        },
+        requiredNote: "* 필수 입력사항",
+        customerForm: {
+            title: "고객정보",
+            nameLabel: "이름",
+            emailLabel: "이메일",
+            emailPlaceholder: "직접입력",
+            phoneLabel: "연락처",
+            addressLabel: "소유점포 주소 <br class=\"p_br\"/>(과거, 현재 점포소유 <br class=\"p_br\">신청자에 한함)<span class=\"form_required\">*</span>",
+            sidoInitMsg: "지역선택",
+            sigunguInitMsg: "구/군 선택",
+        },
+        consultForm: {
+            title: "상담내용",
+            areaLabel: "소유점포 면적",
+            contractAreaLabel: "계약면적",
+            exclusiveAreaLabel: "전용면적",
+            areaUnit: "m²",
+            areaNote: "* m² = (기준)평 x 3.3",
+            superOperatorLabel: "수퍼 운영자 일 경우",
+            itemCheckLabel: "취급 품목 체크",
+            etcLabel: "기타",
+            contractLabel: "계약조건",
+            contractPeriodLabel: "계약 기간",
+            depositRentLabel: "보증금/월임대료",
+            rentUnit: "만원",
+            superItemOptions: [
+                { value: "농산", label: "농산" },
+                { value: "축산", label: "축산" },
+                { value: "수산", label: "수산" },
+                { value: "공산품", label: "공산품" },
+                { value: "조리", label: "조리" },
+            ],
+            sidoOptions: [
+                { value: "서울", label: "서울특별시" },
+                { value: "부산", label: "부산광역시" },
+                { value: "대구", label: "대구광역시" },
+                { value: "인천", label: "인천광역시" },
+                { value: "광주", label: "광주광역시" },
+                { value: "대전", label: "대전광역시" },
+                { value: "울산", label: "울산광역시" },
+                { value: "세종", label: "세종특별자치시" },
+                { value: "경기", label: "경기도" },
+                { value: "강원", label: "강원특별자치도" },
+                { value: "충북", label: "충청북도" },
+                { value: "충남", label: "충청남도" },
+                { value: "전북", label: "전북특별자치도" },
+                { value: "전남", label: "전라남도" },
+                { value: "경북", label: "경상북도" },
+                { value: "경남", label: "경상남도" },
+                { value: "제주", label: "제주특별자치도" },
+            ],
+            sigunguMap: {
+                서울: ["종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구", "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구"],
+                부산: ["중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"],
+                대구: ["중구", "동구", "서구", "남구", "북구", "수성구", "달서구", "달성군", "군위군"],
+                인천: ["중구", "동구", "미추홀구", "연수구", "남동구", "부평구", "계양구", "서구", "강화군", "옹진군"],
+                광주: ["동구", "서구", "남구", "북구", "광산구"],
+                대전: ["동구", "중구", "서구", "유성구", "대덕구"],
+                울산: ["중구", "남구", "동구", "북구", "울주군"],
+                세종: ["세종시"],
+                경기: ["수원시", "성남시", "의정부시", "안양시", "부천시", "광명시", "평택시", "동두천시", "안산시", "고양시", "과천시", "구리시", "남양주시", "오산시", "시흥시", "군포시", "의왕시", "하남시", "용인시", "파주시", "이천시", "안성시", "김포시", "화성시", "광주시", "양주시", "포천시", "여주시", "연천군", "가평군", "양평군"],
+                강원: ["춘천시", "원주시", "강릉시", "동해시", "태백시", "속초시", "삼척시", "홍천군", "횡성군", "영월군", "평창군", "정선군", "철원군", "화천군", "양구군", "인제군", "고성군", "양양군"],
+                충북: ["청주시", "충주시", "제천시", "보은군", "옥천군", "영동군", "증평군", "진천군", "괴산군", "음성군", "단양군"],
+                충남: ["천안시", "공주시", "보령시", "아산시", "서산시", "논산시", "계룡시", "당진시", "금산군", "부여군", "서천군", "청양군", "홍성군", "예산군", "태안군"],
+                전북: ["전주시", "군산시", "익산시", "정읍시", "남원시", "김제시", "완주군", "진안군", "무주군", "장수군", "임실군", "순창군", "고창군", "부안군"],
+                전남: ["목포시", "여수시", "순천시", "나주시", "광양시", "담양군", "곡성군", "구례군", "고흥군", "보성군", "화순군", "장흥군", "강진군", "해남군", "영암군", "무안군", "함평군", "영광군", "장성군", "완도군", "진도군", "신안군"],
+                경북: ["포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시", "문경시", "경산시", "군위군", "의성군", "청송군", "영양군", "영덕군", "청도군", "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군"],
+                경남: ["창원시", "진주시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"],
+                제주: ["제주시", "서귀포시"],
+            },
+            submitLabel: "상담신청",
+            resetLabel: "다시작성",
+        },
+        consultFormNoStore: {
+            title: "상담내용",
+            investmentLabel: "투자 가능금액",
+            investmentOptions: ["3000만원 이하", "3000만원~5000만원", "5000만원 이상"],
+            investmentInitMsg: "3000만원 이하",
+            incomeLabel: "기대 소득",
+            incomeOptions: ["150~200만원", "200~300만원", "300만원 이상"],
+            incomeInitMsg: "150~200만원",
+            openRegionLabel: "개설 희망지역",
+            openTimeLabel: "개설 희망시기",
+            openYearOptions: ["2026년", "2027년", "2028년"],
+            openYearInitMsg: "2026년",
+            openMonthOptions: ["01월", "02월", "03월", "04월", "05월", "06월", "07월", "08월", "09월", "10월", "11월", "12월"],
+            openMonthInitMsg: "01월",
+            typeLabel: "개설희망 가맹타입",
+            franchiseTypeOptions: [
+                { value: "GSF1", label: "GSF1 타입" },
+                { value: "GSF2", label: "GSF2 타입" },
+                { value: "GSF3", label: "GSF3타입" },
+            ],
+            viewLabel: "보기",
+            inquiryLabel: "문의내용",
+            inquiryPlaceholder: "문의내용을 입력해주세요.",
         },
         quickMenu: ["창업안내", "입점상담", "고객센터"],
     },
     en: {},
 };
 
+// =====================
+// computed
+// =====================
 const t = computed(() => {
     const selected = langData[props.lang];
     return selected && Object.keys(selected).length ? selected : langData.ko;
@@ -832,6 +1322,8 @@ const t = computed(() => {
 const activeD1 = ref(0);
 const activeD2 = ref(0);
 const activeD3 = ref(0);
+const activeConsultD2 = ref(0);
+const showConsultApplyPage = ref(false);
 
 const depth1Tabs = computed(() => t.value.depth1Tabs);
 const depth2Tabs = computed(() => t.value.depth2Tabs);
@@ -842,7 +1334,73 @@ const precautionCards1 = computed(() => t.value.precaution.cards1);
 const precautionCards2 = computed(() => t.value.precaution.cards2);
 const supportCards = computed(() => t.value.support.cards);
 const consultCards = computed(() => t.value.consult.cards);
+const consultDepth2Tabs = computed(() => t.value.consult.depth2Tabs);
 const seminarList = computed(() => t.value.seminar.list);
+const hasStore = ref(null);
+const superItemOptions = computed(() => t.value.consultForm.superItemOptions);
+const sidoOptions = computed(() => t.value.consultForm.sidoOptions);
+const sigunguMap = computed(() => t.value.consultForm.sigunguMap);
+const sigunguOptions = computed(() => {
+    const list = sigunguMap.value[consultForm.regionSido] || [];
+    return list.map((v) => ({ value: v, label: v }));
+});
+const openSigunguOptions = computed(() => {
+    const list = sigunguMap.value[consultForm.openRegionSido] || [];
+    return list.map((v) => ({ value: v, label: v }));
+});
+const consultForm = reactive({
+    consultantName: "",
+    name: "",
+    phone1: "010",
+    phone2: "",
+    phone3: "",
+    emailId: "",
+    emailDomain: "",
+    emailDomainCustom: "",
+    regionSido: "",
+    regionSigungu: "",
+    investmentAmount: "",
+    expectedIncome: "",
+    openRegionSido: "",
+    openRegionSigungu: "",
+    openYear: "",
+    openMonth: "",
+    franchiseType: "",
+    inquiry: "",
+    areaContract: "",
+    areaExclusive: "",
+    superItems: [],
+    superItemEtc: "",
+    contractStart: "",
+    contractEnd: "",
+    deposit: "",
+    monthlyRent: "",
+    proposalZipCode: "",
+    proposalAreaContract: "",
+    proposalAreaExclusive: "",
+    proposalStoreName: "",
+    proposalCommercialFeature: "",
+    proposalOwnerRelation: "",
+});
+
+function onProposalZipSearch() {
+    // 우편번호 팝업/다음 도로명 API 등 연결
+}
+const phoneOptions = [
+    { value: "010", label: "010" },
+    { value: "011", label: "011" },
+    { value: "016", label: "016" },
+    { value: "017", label: "017" },
+    { value: "018", label: "018" },
+    { value: "019", label: "019" },
+];
+const emailDomainOptions = [
+    { value: "naver.com", label: "naver.com" },
+    { value: "gmail.com", label: "gmail.com" },
+    { value: "daum.net", label: "daum.net" },
+    { value: "kakao.com", label: "kakao.com" },
+    { value: "hanmail.net", label: "hanmail.net" },
+];
 
 function openModal(event) {
     const el = event.currentTarget;
@@ -1032,6 +1590,15 @@ function onMqMobileChangeWithQuickMenu(e) {
 watch([activeD1, activeD2], () => {
     refreshQuickMenu();
 });
+watch(activeD1, (value) => {
+    if (value !== 4) {
+        showConsultApplyPage.value = false;
+        activeConsultD2.value = 0;
+    }
+});
+watch(activeConsultD2, () => {
+    showConsultApplyPage.value = false;
+});
 
 onMounted(() => {
     document.addEventListener("click", closeYouthPopover);
@@ -1080,14 +1647,15 @@ function toggleCard(id) {
 <style scoped>
 /* 브랜드 색 */
 .wrap_gsrst { --color-brand-primary: #15b874; position: relative; }
-
 .wrap_gsrst :deep([class*="btn_"][class*="fill"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
 .txt_warning { color: #ED3030 !important; }
+:deep(.txt_green){color:#11935D}
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
 
 /* HEADER */
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
+.page_header::after{content:'';width: 100%;height:100%;position:absolute;left:0;right:0;top:0;bottom:0; background-color: rgba(0, 0, 0, 0.6);}
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
 
@@ -1112,12 +1680,13 @@ function toggleCard(id) {
 /* type_table */
 .type_table_wrap { margin-top: 20px; overflow-x: auto; border-top: 1px solid #161616; }
 .type_table { width: 100%; border-collapse: collapse; }
-.type_table .col_item_main { width: 177px; }
-.type_table .col_item_sub { width: 177px; }
+.type_table .col_item_main { width: 80px; }
+.type_table .col_item_sub { width: 195px; }
 .type_table .col_cost { width: auto; }
 .type_table thead th { padding: 28px 24px; background-color: #f8f8f8; border: 1px solid #e5e5e9; font-size: 1.8rem; text-align: center; line-height: 1.4; }
-.type_table tbody th { padding: 12px 24px; background-color: #f8f8f8; border: 1px solid #e5e5e9; font-size: 1.8rem; font-weight: 400; text-align: left; line-height: 1.4; }
+.type_table tbody th { padding: 12px 24px; background-color: #f8f8f8; border: 1px solid #e5e5e9; font-size: 1.8rem; font-weight: 400; text-align: left; line-height: 1.4; word-break: keep-all;}
 .type_table tbody td { border-bottom: 1px solid #e5e5e9; font-size: 1.8rem; text-align: center; padding: 12px 24px; line-height: 1.4; }
+.type_table tbody tr.is_gray > td { background-color: #f8f8f8; }
 .type_table_wrap.type2 .type_table thead th { padding: 18px 20px; line-height: 1.5; border: 0; }
 .type_table_wrap.type2 .type_table colgroup col { width: 12.5%; }
 .type_table_wrap.type2 .type_table tbody td { height: 82px; padding: 0 13px; }
@@ -1152,7 +1721,9 @@ function toggleCard(id) {
 .precaution_intro > p { color: #67676f; font-size: 1.8rem; line-height: 1.6; letter-spacing: -0.01em; }
 .precaution_main { flex: 1; min-width: 0; }
 .precaution_block + .precaution_block { margin-top: 56px; }
-.precaution_block > h4 { margin-bottom: 40px; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.precaution_block > h4 { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.precaution_block > .block_desc { margin-top:6px;color: #67676F; font-size: 1.8rem; line-height: 1.6;letter-spacing: -0.01em;}
+.sec_precaution :deep(.feature_card_list){margin-top: 40px;}
 .sec_precaution :deep(.feature_card_item) { background-color: #fff; min-height: 0; }
 .precaution_block_sm :deep(.feature_card_item) { min-height: 180px; }
 .sec_precaution :deep(.feature_card_num) { color: #15b874; }
@@ -1262,7 +1833,7 @@ function toggleCard(id) {
 
 /* 카드 그리드 뷰 */
 .store_card_grid_wrap { margin-top: 16px; display: flex; flex-direction: column; gap: 20px; }
-.store_card_row { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
+.store_card_row { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
 .store_card_row > li { display: flex; flex-direction: column; }
 
 /* 페이지네이션 */
@@ -1271,35 +1842,108 @@ function toggleCard(id) {
 /* 상담 및 신청 */
 .caution_list { margin-top: 16px; }
 .caution_list li p { color: #67676F; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; }
-.consult_card_list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.consult_card { padding: 32px 24px; background: #F8F8F8; border-radius: 12px; display: flex; gap: 32px; min-width: 0; }
-.consult_thumb { flex: 1 0 0; min-height: 120px; background-color: #D7D7DF;}
-.consult_thumb > img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.consult_body { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
-.consult_body p  { font-family: Pretendard;font-size: 1.8rem;line-height: 1.4;word-break: keep-all; }
-.consult_body p.region{margin-top:2px;}
-.consult_note { margin-top:2px;color:#67676F;}
+.consult_caution_mo { display: none; }
+.consult_card_list { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.consult_card { min-height: 239px; padding: 32px; background: #F8F8F8; border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; min-width: 0; }
+.consult_body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.consult_body p  {font-size: 1.6rem;line-height: 1.5;word-break: keep-all; }
+.consult_body p.consult_label { font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+.label_wrap .consult_label + .consult_label { margin-top:2px; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.consult_body p.region { margin-top: 2px; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
+.consult_note { margin-top: 2px; color:#67676F; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .consult_tel_wrap { position: relative; }
 .consult_tel_btn { margin-top: 32px; padding: 4px; background: none; border: 0; font-size: 1.6rem; font-weight: 500; color: #15B874; letter-spacing: -0.01em; line-height: 1.5; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; white-space: nowrap; }
 .consult_tel_btn::after { content: ""; width: 16px; height: 16px; background:url('@/assets/images/sub/icon_tel.png') no-repeat; flex-shrink: 0; display: inline-block; }
-.consult_tel { top: calc(100% + 8px); left: -119px; right: 0; }
-.consult_tel .pop_space {margin-top:24px;}
-.consult_tel .pop_space dt { font-size: 1.6rem; line-height: 150%;}
-.consult_tel .pop_space dd { font-size: 1.6rem; line-height: 150%;}
-.consult_tel .pop_space dd + dt {margin-top:16px;}
-.consult_tel .pop_space dd .image_wrap {margin:16px 0;width:120px; height:120px;}
-.consult_tel .pop_space dd .image_wrap img {width:100%; height:100%;}
-.consult_tel { margin-top: 4px; font-size: 1.4rem; font-weight: 500; color: #161616; letter-spacing: -0.01em; }
-.consult_foot { margin-top: 18px;  }
-.consult_foot button{max-width:123px;}
-/* .consult_foot :deep([class*="btn_"]) { width: 100%; max-width: 113px;;} */
+.consult_tel { width: 300px; height: 372px; padding: 32px; border: 1px solid #c6c6c6; border-radius: 16px; background-color: #ffffff; position: absolute; top: 100%; left: 0; right: auto; z-index: 20;  }
+.consult_tel_title { color: #1d1d1d; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; display: block; }
+.consult_tel_content { margin-top: 24px; }
+.consult_tel_phone { color: #1d1d1d; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_tel_kakao { margin-top: 16px; color: #1d1d1d; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_tel_qr { width: 120px; height: 120px; margin-top: 16px; background-color: #d9d9d9; display: flex; align-items: center; justify-content: center; }
+.consult_tel_qr > span { color: #000000; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_tel_notice { margin-top: 16px; color: #1d1d1d; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_tel .layer_tooltip_close { top: 32px; right: 32px; }
+.consult_foot { margin-top: 0; flex: 0 0 auto; }
+.consult_foot button{width:164px;}
+
+/* 가맹/창업 상담 상담 폼 */
+.consult_box { padding: 56px 40px; background-color: #f8f8f8; border-radius: 12px; }
+.consult_box_apply { display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 40px; }
+.consult_box_apply .consult_intro { flex: 1; min-width: 0; order: 1; }
+.consult_box_apply .consult_selector_wrap { width: 360px; flex: 0 0 360px; order: 2; }
+.consult_box_apply .consult_head { display: flex; align-items: flex-start; gap: 20px; }
+.consult_box_apply .consult_head > h3 { flex: 1; min-width: 0; margin: 0; color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.consult_box_apply .consult_intro > p { margin: 16px 0 0; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_intro { min-width: 0; }
+.consult_img_wrap { width: 114px; height: 152px; border: 1px solid #000; flex-shrink: 0; overflow: hidden; }
+.consult_intro_txt { flex: 1; min-width: 0; }
+.consult_intro_txt > h3 { color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.consult_intro_txt > p { margin-top: 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.consult_selector_wrap { width: 100%; }
+.consult_selector_wrap :deep(.select) { width: 100%; }
+.consult_selector_wrap :deep(.select select) { width: 100%; height: 62px; padding: 0 56px 0 20px; border: 1px solid #c4c4d0; border-radius: 14px; color: #a4a4b0; font-size: 1.8rem; font-weight: 400; line-height: 1.4; background-color: #fff; }
+.consult_selector_hint { margin-top: 8px; padding-left: 24px; color: #4c4c53; font-size: 1.4rem; font-weight: 400; line-height: 1.4; position: relative; }
+.consult_selector_hint::before { width: 20px; height: 20px; content: ""; background: url("@/assets/images/common/icon_set_20.png") no-repeat -1155px -69px; position: absolute; top: 0; left: 0; }
+.list_caution { list-style: none; margin: 0; padding: 0; }
+.list_caution > li > p { color: #67676f; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
+.middle_bts_wrap { margin-top: 40px; display: flex; gap: 8px; }
+.middle_bts_wrap > button { height: 52px; padding: 0 16px; background: #fff; border: 1px solid #90909a; border-radius: 10px; font-size: 1.8rem; font-weight: 700; cursor: pointer; transition: border-color 0.15s, color 0.15s; color: #161616; }
+.middle_bts_wrap > button:hover, .middle_bts_wrap > button.active { border-color: #107af2; color: #107af2; }
+.middle_bts_wrap + :deep(.consent_box){margin-top:30px;}
 .info_banner { margin-top: 64px; padding: 34px 24px; background-color: #F9F2EA; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap:wrap;}
 .info_banner > p { display: flex; align-items: flex-start; gap: 12px; font-size: 1.8rem; line-height: 1.4; }
 .info_banner > p::before { content: ''; width: 27px; height: 27px; flex-shrink: 0; background: url('@/assets/images/common/icon_set_24.png') no-repeat -160px -56px;  display: block; }
+.button_wrap { margin-top: 40px; display: flex; gap: 8px; justify-content: flex-end;}
+.button_wrap :deep(button){ width:134px;}
+.button_wrap :deep(button.primary){ background-color:#15B874; }
+.form_row_name .form_field :deep(.input_wrap){max-width:205px;}
+.consult_box + .form_row, .form_row + .consent_box{margin-top:64px}
+.check_list { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.check_list :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
+.form_field_email :deep(.input_wrap){max-width:205px;}
+.form_field_email :deep(.input_wrap + label.select){width:100%; max-width:180px;}
+.form_field_phone :deep(.input_wrap){max-width:134px;}
+.form_field_select_220 :deep(label.select){width:100%; max-width:220px;}
+.form_field_region :deep(label.select){width:100%; max-width:220px;}
+.form_field_area :deep(.input_wrap){max-width:134px;}
+.form_field_area .form_sub_input_wrap { flex-wrap: nowrap; align-items: center; gap: 8px; max-width: 100%; }
+.form_field_area .form_sub_input_wrap :deep(.input_wrap) { flex: 0 0 auto; max-width: 134px; min-width: 134px; }
+.form_field_area .form_sub_input_wrap .form_sub_unit { flex-shrink: 0; }
+.form_field_area .form_sub_input_wrap .area_note { flex: 0 0 auto; flex-shrink: 0; white-space: nowrap; }
+.form_field_area .form_sub_input_wrap .form_field_note { flex: 0 0 auto; flex-basis: auto; flex-shrink: 0; width: auto; max-width: none; margin: 0; color: #161616; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; white-space: nowrap; }
+.form_field_area > .form_field_note { color: #161616 !important;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;flex-basis: 100%; width: 100%; max-width: 100%; }
+.form_field_address { flex-direction: column; align-items: flex-start; gap: 8px; }
+.form_sub_input_wrap .area_note,
+.form_sub_input_wrap .form_field_note{margin-left:16px;}
 
-/* 경영주 지원제도 — 가로 패딩 없음(Swiper), 텍스트·패널만 20px */
+/* .form_field_address :deep(.input_wrap){max-width:305px;} */
+.form_zip_row :deep(.input_wrap){max-width:305px; flex: 0 0 auto;}
+.form_zip_row { width: 100%; display: flex; align-items: center; gap: 8px; }
+.form_zip_row :deep(button){width:134px; flex:0 0 134px;}
+.form_zip_row .form_field_note { color: #161616; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; flex: 0 1 auto; }
+.form_field_store :deep(.input_wrap) { max-width: 448px; }
+.form_row_textarea .form_field :deep(.textarea_wrap) { width: 100%;}
+.form_row_textarea .form_field :deep(.textarea_field){width:100%; max-width:100%;}
+.form_row_textarea .form_field :deep(.textarea_field > textarea) { width:100%; max-width:100%; resize: none; }
+.form_row_area{align-items: flex-start;}
+.form_row_area > .form_label{height: 52px; line-height: 52px;}
+.form_field_franchise { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+.franchise_type_item { display: inline-flex; align-items: center; gap: 8px; }
+.franchise_type_item :deep(.input_wrap) { margin: 0; }
+.franchise_type_item :deep(button) { min-width: 56px; }
+.apply_form textarea { width: 100%; height: 120px; padding: 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 10px; resize: vertical; box-sizing: border-box; }
+.apply_form textarea::placeholder { color: #a4a4b0; }
+.form_field_check .check_etc :deep(.input_wrap){max-width:428px;}
+.form_sub_inputs :deep(.input_wrap){max-width:134px;}
+.contract_rent :deep(.input_wrap){max-width:134px;}
+.brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
+.brand_panel_bg > img { width: 100%; display: block; object-fit: cover; }
+.brand_panel_title { padding: 0 0 100px; }
+.brand_panel_title.flex{display: flex;justify-content: space-between; align-items: center;}
+.brand_panel_title h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.brand_panel_title p { margin: 0; color: #161618; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
-.sec_owner_support .tab_intro { margin-bottom: 24px; padding-left: 20px; padding-right: 20px; box-sizing: border-box; }
+.sec_owner_support .tab_intro { margin-bottom: 24px; }
 .sec_owner_support :deep(.brand_panel_title) { padding: 0 20px 64px; box-sizing: border-box; }
 
 .sec_owner_support :deep(.feature_card_item) { min-height: 480px; background-repeat: no-repeat; background-position: left 32px bottom 32px; background-size: auto; }
@@ -1312,7 +1956,7 @@ function toggleCard(id) {
 .sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(3) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_03.png"); }
 .sec_owner_support :deep(.feature_card_list > .feature_card_item:nth-child(4)),
 .sec_owner_support :deep(.feature_card_swiper .swiper-slide:nth-child(4) .feature_card_item) { background-image: url("@/assets/images/dummy/gsrst_info_04.png"); }
-.label_wrap{display:flex; flex-direction:column; gap:2px; }
+/* .label_wrap{display:flex; flex-direction:column; gap:2px; } */
 .consult_tel_btn{margin-top:20px;}
 /* 상담 및신청 */
 .sec_consult :deep(.brand_panel_title) {padding-bottom:64px;}
@@ -1340,7 +1984,7 @@ function toggleCard(id) {
     .header_title { font-size: 5.2rem; }
     .tab_type > button { font-size: 1.6rem; }
     .type_info_bar { font-size: 1.6rem; }
-    .type_table thead th, .type_table tbody th, .type_table tbody td { font-size: 1.6rem; }
+    .type_table thead th, .type_table tbody th, .type_table tbody td { font-size: 1.6rem;}
     .type_graph_wrap { padding: 48px; }
     .type_graph_wrap > strong { font-size: 2.8rem; }
     .type_graph_item { gap: 32px; }
@@ -1349,13 +1993,21 @@ function toggleCard(id) {
     .sec_precaution_inner { flex-direction: column; padding: 48px; gap: 32px; }
     .precaution_intro { width: 100%; }
     .precaution_intro > p { font-size: 1.6rem; }
-    .precaution_block > h4 { font-size: 2.4rem; margin-bottom: 24px; }
+    .precaution_block > h4 { font-size: 2.4rem;}
     .precaution_block + .precaution_block { margin-top: 40px; }
     .seminar_head > h3 { font-size: 3.2rem; }
     .seminar_head > p { font-size: 2rem; }
     .seminar_table thead th, .seminar_table tbody th, .seminar_table tbody td { font-size: 1.6rem; }
+    .brand_panel_title > h2 { font-size: 3.2rem; }
+    .brand_panel_title > p { font-size: 2rem; }
 
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
+    .apply_form .form_field_email { flex-wrap: wrap; }
+    .apply_form .form_field_area .form_sub_input_wrap { flex-wrap: wrap; }
+    .apply_form .form_field_area .form_sub_input_wrap :deep(.input_wrap) { min-width: 0; max-width: 100%; }
+    .apply_form .form_field_area .form_sub_input_wrap .area_note,
+    .apply_form .form_field_area .form_sub_input_wrap .form_field_note { white-space: normal; }
+    .apply_form .form_zip_row { flex-wrap: wrap; max-width: 100%; min-width: 0; }
 }
 
 /* Mobile */
@@ -1365,18 +2017,25 @@ function toggleCard(id) {
     .page_header { display: none; }
     .sec_body { padding: 24px 0 40px; }
     .header_title { font-size: 3.6rem; }
-    /* ul::after 20px spacer, tab_wrap::after 32px 그라데이션은 common.css에서 전역 처리 */
-    .panel { padding: 60px 20px 80px; }
+    .panel { padding: 60px 0 80px; }
     .sec_owner_support.panel { padding-left: 0; padding-right: 0; }
+    .brand_panel_bg { margin: 0 0 24px; border-radius: 0; }
+    .brand_panel_bg > img { max-height: 245px; }
+    .brand_panel_title { padding: 0 0 64px; }
+    .brand_panel_title h2 {margin-bottom: 12px;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
+    .brand_panel_title p {font-size: 1.8rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .brand_panel_title.flex{flex-direction: column; align-items: flex-start; gap:16px;}
+    .brand_panel_title.flex > div + :deep(button){width:100%;}
     .tab_content_wrap { padding-top: 40px; }
     .tab_type > button { height: 48px; font-size: 1.4rem; }
     .type_info_bar { height: auto; min-height: 48px; padding: 20px 24px; font-size: 1.4rem; }
     .list_caution { margin-top: 16px; }
     .type_table_wrap { margin-top: 24px; }
-    .type_table .col_item_main { width: 42px; }
-    .type_table .col_item_sub { width: 120px; }
-    .type_table thead th { padding: 18px 0; font-size: 1.6rem; line-height: 1.24; }
-    .type_table tbody th, .type_table tbody td { padding: 15px 24px; font-size: 1.6rem; line-height: 1.5; }
+    .type_table .col_item_main { width: 35px; }
+    .type_table .col_item_sub { width: 102px; }
+    .type_table thead th { padding: 18px 0; font-size: 1.4rem; line-height: 1.24;  }
+    .type_table tbody th, .type_table tbody td { padding: 15px 24px; font-size: 1.4rem; line-height: 1.5;}
+    .type_table tbody th{padding: 0 11px; word-break: break-all;}
     .type_table tbody th:first-child { padding-left: 14px; padding-right: 14px; }
     .type_graph_wrap { margin-top: 80px; padding: 40px 20px; }
     .type_graph_wrap > strong { font-size: 2rem; line-height: 1.32; letter-spacing: -0.01em; }
@@ -1390,7 +2049,9 @@ function toggleCard(id) {
     .sec_precaution_inner { margin-top: 32px; padding: 30px 20px; gap: 40px; display: block; }
     .precaution_intro { display: none; }
     .precaution_intro > p { font-size: 1.4rem; }
-    .precaution_block > h4 { font-size: 2rem; margin-bottom: 24px; }
+    .precaution_block > h4 { font-size: 2rem; }
+    .precaution_block > .block_desc{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .sec_precaution :deep(.feature_card_list){margin-top: 24px;}
     .sec_precaution :deep(.feature_card_title) { font-size: 1.8rem; }
     .seminar_info { padding-bottom: 18px; }
     .seminar_head > h3 { font-size: 2.8rem; }
@@ -1409,11 +2070,32 @@ function toggleCard(id) {
     .info_banner > p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .info_banner > p::before{width:24px; height:24px;}
     .caution_list li p{font-size: 1.4rem;}
-    .consult_card{padding:30px 20px;gap:20px;}
+    .consult_caution_pc { display: none; }
+    .consult_caution_mo { display: block; margin-top: 0; margin-bottom: 20px; padding: 0 20px; }
+    .consult_box { padding:0; background-color: #fff; }
+    .consult_box_apply { padding:0;display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+    .consult_box_apply .consult_selector_wrap { order: 1; width: 100%; flex: none; margin: 0 0 20px; }
+    .consult_box_apply .consult_selector_wrap :deep(.select select) { height: 52px; padding: 0 48px 0 16px; font-size: 1.6rem; border-radius: 12px; }
+    .consult_box_apply .consult_intro { order: 2; display: block; }
+    .consult_box_apply .consult_head { display: flex; align-items: center; gap: 16px; }
+    .consult_box_apply .consult_img_wrap { width: 90px; height: 120px; }
+    .consult_box_apply .consult_head > h3 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .consult_box_apply .consult_intro > p { margin: 12px 0 0; font-size: 1.6rem; line-height: 1.5; }
+    .consult_intro { display: block; }
+    .consult_img_wrap { width: 90px; height: 120px; }
+    .consult_intro_txt { margin-top: 0; }
+    .consult_intro_txt > h3 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .consult_intro_txt > p { margin-top: 12px; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+    .consult_selector_wrap :deep(.select select) { height: 52px; padding-right: 48px; font-size: 1.6rem; }
+    .consult_selector_hint { margin-top: 6px; }
+    .consult_card{min-height:auto; padding:20px; flex-direction:column; gap:18px; align-items: flex-start;}
     .consult_card_list { grid-template-columns: 1fr; gap: 20px; }
-    .consult_thumb { flex: 0 0 135px; max-height: 180px; }
+    .consult_note { order: 1; }
+    .consult_tel_wrap { order: 2; }
+    .consult_tel_btn{margin-top:12px;}
+    .consult_foot{width:100%;}
+    .consult_foot :deep(button){width:100%;border-radius:4px; }
     .consult_name { font-size: 1.6rem; }
-    .consult_foot button{max-width :100%;}
 
     .store_list_wrap { margin-top: 60px; }
     .tab_intro { margin-bottom:60px; font-size: 1.8rem; line-height: 1.4;}
@@ -1424,8 +2106,8 @@ function toggleCard(id) {
     .search_group_input { width: 100%; }
     .store_search_input { height: 52px; }
     .layer_tooltip { left: -20px; right: auto; transform: none; width: calc(100vw - 40px); max-width: 335px; }
-    .youth_popover { top: calc(100% + 8px); }
-    .consult_tel { left: -155px; }
+    /* .youth_popover { top: calc(100% + 8px); } */
+    /* .consult_tel { left: -155px; } */
     .chip_list { position: relative; }
     .chip_youth_wrap { position: static; }
     .store_list_bar { margin-bottom: 16px; align-items: flex-end; gap: 12px; height: auto; }
@@ -1446,24 +2128,109 @@ function toggleCard(id) {
     .store_accordion_list :deep(dd.acc_panel.acc_show) { border: 0; }
     .accordion_badges { margin-top: 6px; }
 
-    /* 가로 스크롤 방지: 네거티브 마진·Swiper overflow·슬라이드·카드 너비 불일치 대응 */
-    .sec_owner_support { overflow-x: hidden; }
-    /* sec_body/tab_page에 좌우 20px 없음 → 히어로는 네거티브 마진 불필요 */
+    /* Swiper: cont_inner 좌우 20px 패딩 상쇄 — sec_owner_support에 overflow-x:hidden 주면 margin -20px 확장이 잘림 */
     .sec_owner_support :deep(.brand_panel_bg) { margin: 0 0 80px; }
-    .sec_owner_support :deep(.brand_panel_title) { padding: 0 20px 32px; }
-    .sec_owner_support :deep(.feature_card_swiper) { padding: 0 20px;overflow: hidden; }
+    .sec_owner_support :deep(.brand_panel_title) { padding: 0 0 32px; }
+    .sec_owner_support :deep(.feature_card_swiper) { width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px; overflow: hidden; box-sizing: border-box; }
     .sec_owner_support :deep(.feature_card_swiper .swiper-slide) { width: 85.333vw; box-sizing: border-box; }
     .sec_owner_support :deep(.feature_card_swiper .feature_card_item) { width: 100%; min-width: 0; min-height: 420px !important; box-sizing: border-box; }
-    .sec_owner_support :deep(.feature_card_swiper .swiper-slide:not(:last-child)) { margin-right: 20px; }
-    .label_wrap{display:flex; flex-direction:row; align-items: center; gap:0;}
-    .label_wrap .consult_label + .consult_label{font-weight:700; gap:0;}
+    .sec_owner_support :deep(.feature_card_swiper .swiper-slide:not(:last-child)) { margin-right: 10px; }
+    .label_wrap{display:flex; flex-direction:row; align-items: flex-end; gap:0;}
+    .consult_body p.consult_label{font-weight: 400;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    .label_wrap .consult_label + .consult_label{font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;gap:0;}
     .consult_body p{font-size: 1.6rem;}
     .consult_body p.consult_label.region{margin-top:6px;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .consult_body p.consult_note{margin-top:2px;color:#67676F;font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .consult_foot :deep([class*="btn_"]) {height:38px;}
-    .sec_consult :deep(.brand_panel_title){padding-bottom:32px !important;} 
-
+    .sec_consult :deep(.brand_panel_title){padding-bottom:16px;} 
     .quick_menu{display: none;}
-    
+    .sec_consult :deep(.brand_panel_title h2::after){width:32px; height:32px; background-image: url(@/assets/images/sub/icon_cont_32.png); background-position: -740px -103px;}
+    .sec_consult.panel,
+    .sec_consult_apply.panel { overflow-x: hidden; max-width: 100%; min-width: 0; }
+    .sec_consult > .form_row { min-width: 0; max-width: 100%; padding: 20px 0; grid-template-columns: 1fr; gap: 0; align-items: flex-start; }
+    .sec_consult > .form_row .form_label { margin-bottom: 16px; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; }
+    .sec_consult > .form_row .form_field { width: 100%; min-width: 0; max-width: 100%; flex-direction: column; align-items: stretch; gap: 12px; }
+    .sec_consult > .form_row .form_field_region :deep(label.select) { width: 100%; max-width: none; min-width: 0; }
+    .sec_consult :deep(.consent_box),
+    .sec_consult_apply :deep(.consent_box) { max-width: 100%; min-width: 0; box-sizing: border-box; }
+    .sec_consult :deep(.consent_list > li > p),
+    .sec_consult_apply :deep(.consent_list > li > p) { word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form { margin-top: 32px; max-width: 100%; min-width: 0; overflow-x: clip; box-sizing: border-box; }
+    .apply_form + .apply_form { margin-top: 40px; }
+    .apply_form .form_head { height: auto; padding-bottom: 16px; flex-wrap: wrap; gap: 8px; min-width: 0; max-width: 100%; }
+    .apply_form .form_head_title { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form .form_required_note { font-size: 1.4rem; line-height: 1.4; flex-shrink: 0; }
+    .apply_form .form_body { padding: 30px 0; min-width: 0; max-width: 100%; }
+    .apply_form .form_row { padding: 20px 0; grid-template-columns: 1fr; gap: 0; align-items: flex-start; min-width: 0; max-width: 100%; }
+    .apply_form .form_row:first-child { padding-top: 0; }
+    .apply_form .form_row:last-child { padding-bottom: 0; }
+    .apply_form .form_label { margin-bottom: 16px; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form .form_field { width: 100%; min-width: 0; max-width: 100%; align-items: stretch; gap: 12px; flex-wrap: wrap; box-sizing: border-box; }
+    .apply_form .form_row_name .form_field :deep(.input_wrap),
+    .apply_form .form_field_store :deep(.input_wrap),
+    .apply_form .form_field_select_220 :deep(label.select),
+    .apply_form .form_field :deep(.input_wrap),
+    .apply_form .form_field :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; box-sizing: border-box; }
+    .apply_form .form_field :deep(input),
+    .apply_form .form_field :deep(select) { max-width: 100%; box-sizing: border-box; }
+    .apply_form .form_field_email { flex-direction: column; align-items: stretch; gap: 12px; }
+    .apply_form .form_field_email .form_sep { display: none; }
+    .apply_form .form_field_email :deep(.input_wrap),
+    .apply_form .form_field_email :deep(.input_wrap + label.select),
+    .apply_form .form_field_email :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; }
+    .apply_form .form_field_phone { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; align-items: center; }
+    .apply_form .form_field_phone .form_sep { display: none; }
+    .apply_form .form_field_phone :deep(label.select),
+    .apply_form .form_field_phone :deep(.input_wrap) { width: 100%; max-width: 100%; min-width: 0; flex: none; }
+    .apply_form .form_field_region { flex-direction: column; flex-wrap: wrap; }
+    .apply_form .form_field_region :deep(label.select) { width: 100%; max-width: 100%; min-width: 0; }
+    .apply_form .form_field_address { width: 100%; min-width: 0; max-width: 100%; }
+    .apply_form .form_zip_row { flex-wrap: wrap; max-width: 100%; gap: 12px; min-width: 0; }
+    .apply_form .form_zip_row :deep(.input_wrap) { flex: 1 1 100%; max-width: 100%; min-width: 0; width: 100%; }
+    .apply_form .form_zip_row :deep(button) { width: 100%; flex: 1 1 100%; max-width: 100%; min-width: 0; }
+    .apply_form .form_zip_row .form_field_note { flex: 1 1 100%; width: 100%; max-width: 100%; font-size: 1.4rem; line-height: 1.4; word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form .form_row_area { align-items: flex-start; }
+    .apply_form .form_row_area > .form_label { height: auto; line-height: 1.24; }
+    .apply_form .form_field_area { flex-direction: column; align-items: stretch; gap: 16px; min-width: 0; max-width: 100%; }
+    .apply_form .form_field_area .form_sub_group { width: 100%; min-width: 0; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .apply_form .form_field_area .form_sub_input_wrap { flex-wrap: wrap; align-items: center; width: 100%; min-width: 0; max-width: 100%; gap: 8px; }
+    .apply_form .form_field_area .form_sub_input_wrap :deep(.input_wrap) { flex: 1 1 0; min-width: 0; max-width: 100%; width: auto; }
+    .apply_form .form_field_area .form_sub_input_wrap .form_sub_unit { flex: 0 0 auto; flex-shrink: 0; }
+    .apply_form .form_sub_input_wrap .area_note,
+    .apply_form .form_sub_input_wrap .form_field_note { margin-left: 0; }
+    .apply_form .form_field_area .form_sub_input_wrap .area_note,
+    .apply_form .form_field_area .form_sub_input_wrap .form_field_note { flex: 1 1 100%; width: 100%; max-width: 100%; min-width: 0; white-space: normal; word-break: keep-all; overflow-wrap: anywhere; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .apply_form .form_field_area > .area_note { width: 100%; max-width: 100%; font-size: 1.4rem; line-height: 1.4; white-space: normal; word-break: keep-all; overflow-wrap: anywhere; }
+    .apply_form .form_field_area > .form_field_note { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; max-width: 100%; min-width: 0; }
+    .apply_form .form_field_check,
+    .apply_form .form_field_contract { width: 100%; min-width: 0; max-width: 100%; }
+    .apply_form .form_field_check .form_sub_group,
+    .apply_form .form_field_contract .form_sub_group { width: 100%; min-width: 0; }
+    .apply_form .form_field_check .check_etc { width: 100%; min-width: 0; }
+    .apply_form .form_field_check .check_etc :deep(.input_wrap) { max-width: 100%; width: 100%; min-width: 0; }
+    .apply_form .check_list { gap: 8px 12px; max-width: 100%; min-width: 0; }
+    .apply_form .check_list :deep(.input_wrap) { max-width: 100%; min-width: 0; }
+    .apply_form .form_sub_inputs { width: 100%; min-width: 0; flex-wrap: wrap; }
+    .apply_form .form_sub_inputs :deep(.input_wrap) { flex: 1 1 calc(50% - 4px); max-width: 100%; min-width: 0; }
+    .apply_form .contract_rent { width: 100%; min-width: 0; flex-direction: column; align-items: stretch; gap: 12px; }
+    .apply_form .contract_rent :deep(.input_wrap) { flex: 1 1 100%; max-width: 100%; width: 100%; min-width: 0; }
+    .apply_form .form_field_franchise { flex-direction: column; align-items: stretch; gap: 12px; min-width: 0; max-width: 100%; }
+    .apply_form .franchise_type_item { width: 100%; min-width: 0;  gap: 8px; }
+    .apply_form .franchise_type_item :deep(.input_wrap){width:auto;flex:0 1 auto;}
+    .apply_form .franchise_type_item :deep(button) { min-width: 0; flex-shrink: 1; }
+    .apply_form .form_row_textarea .form_field { min-width: 0; max-width: 100%; }
+    .apply_form .form_row_textarea .form_field :deep(.textarea_wrap),
+    .apply_form .form_row_textarea .form_field :deep(.textarea_field),
+    .apply_form .form_row_textarea .form_field :deep(.textarea_field > textarea) { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }
+    .apply_form textarea { height: 160px; max-width: 100%; box-sizing: border-box; }
+    .apply_form .check_row,
+    .apply_form .contract_row { align-items: flex-start; }
+    .middle_bts_wrap { margin-top: 60px; gap: 8px; max-width: 100%; min-width: 0; }
+    .middle_bts_wrap > button { width: 100%; height: auto; min-height: 48px; padding: 12px 16px; font-size: 1.6rem; line-height: 1.4; white-space: normal; word-break: keep-all; }
+    .middle_bts_wrap + :deep(.consent_box) { margin-top: 24px; }
+    .consult_box + .form_row,
+    .form_row + .consent_box { margin-top: 32px; }
+    .button_wrap { margin-top: 32px; justify-content: center; gap: 8px; max-width: 100%; min-width: 0; }
+    .button_wrap :deep(button) { width: calc(50% - 4px); flex: 1 1 auto; min-width: 0; max-width: calc(50% - 4px); box-sizing: border-box; }
 }
 </style>

@@ -646,7 +646,7 @@
                                     <th scope="row" colspan="2">점포 임차비용</th>
                                     <td>경영주 투자</td>
                                     <td>본부 투자</td>
-                                    <td>본부 지원</td>
+                                    <td>본부 투자</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" colspan="2">본부 보증금</th>
@@ -1118,14 +1118,9 @@
 
                         <div class="consent_notice_area">
                             <p>고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 상담 글 작성이 불가능합니다.</p>
-                            <label class="consent_radio">
-                                <input
-                                    type="checkbox"
-                                    :checked="startupConsentAgreed"
-                                    @change="onStartupConsentChange"
-                                />
-                                <span>동의합니다.</span>
-                            </label>
+                            <div class="consent_radio">
+                                <Inputs type="checkbox" v-model="startupConsentAgreed" text="동의합니다." />
+                            </div>
                         </div>
                     </div>
                    
@@ -1355,14 +1350,9 @@
 
                                 <div class="consent_notice_area">
                                     <p>동의하지 않으실 경우 상담 글 작성이 불가능합니다.</p>
-                                    <label class="consent_radio">
-                                        <input
-                                            type="checkbox"
-                                            :checked="startupConsentAgreed"
-                                            @change="onStartupConsentChange"
-                                        />
-                                        <span>동의합니다.</span>
-                                    </label>
+                                    <div class="consent_radio">
+                                        <Inputs type="checkbox" v-model="startupConsentAgreed" text="동의합니다." />
+                                    </div>
                                 </div>
                             </div>
                             <div class="apply_form">
@@ -1475,14 +1465,9 @@
                         </ul>
                         <div class="consent_notice_area">
                             <p>고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 입지제안 신청 글 작성이 불가능합니다.</p>
-                            <label class="consent_radio">
-                                <input
-                                    type="checkbox"
-                                    :checked="startupConsentAgreed"
-                                    @change="onStartupConsentChange"
-                                />
-                                <span>동의합니다.</span>
-                            </label>
+                            <div class="consent_radio">
+                                <Inputs type="checkbox" v-model="startupConsentAgreed" text="동의합니다." />
+                            </div>
                         </div>
                     </div>
                     <div class="apply_form row_layout">
@@ -1760,7 +1745,7 @@ function onProductHitSwiper(swiper, index) {
 //     },
 //     {
 //         title: "입점 제안/<br class='p_br'/>브랜드 전환 문의",
-//         desc: "보유 자리 입점 제안 또는 브랜드 전환을<br class='m_br'/>상담해드려요",
+//         desc: "보유 자리 입점 제안 또는 브랜드 전환을 <br class='m_br'/>상담해드려요",
 //         url: "#none",
 //     },
 // ];
@@ -1768,7 +1753,7 @@ function onProductHitSwiper(swiper, index) {
 // const brandStats = [
 //     { value: "18,000+", label: "전국 점포수" },
 //     { value: "편의점 매출 1위", label: "점포당 연매출 6.4억+" },
-//     { value: "460만명", label: "전국 일평균 방문 고객" },
+//     { value: "470만명", label: "전국 일평균 방문 고객" },
 // ];
 
 // const successPointPanel = {
@@ -2941,10 +2926,6 @@ const counselConsentItems =[
 
 const startupConsentAgreed = ref(false);
 
-function onStartupConsentChange(event) {
-    startupConsentAgreed.value = event.target.checked;
-}
-
 /* D2=2 입점/브랜드 전환 — 우편번호 검색(퍼블 스텁, API 연동 시 교체) */
 function onBrandConsultZipSearch() {
     // 우편번호 팝업/다음 도로명 API 등 연결
@@ -3300,7 +3281,7 @@ const langData = {
             title: "비교할수록 결국, GS25.",
             desc: "점포당 매출 1위 브랜드<br class='p_br'/>함께 성장하기 위해, 점포의 숫자보다 경영주님의 수익을 먼저<br class='m_br'/>생각합니다.",
         },
-        brandApplyLinks:[
+        brandApplyLinks: [
             {
                 title: "창업설명회 신청",
                 desc: "창업 전반에 대한 정보를 한 번에 안내드려요",
@@ -3313,14 +3294,14 @@ const langData = {
             },
             {
                 title: "입점 제안/<br class='p_br'/>브랜드 전환 문의",
-                desc: "보유 자리 입점 제안 또는 브랜드 전환을<br class='m_br'/>상담해드려요",
+                desc: "보유 자리 입점 제안 또는 브랜드 전환을 <br class='m_br'/>상담해드려요",
                 url: "#none",
             },
         ],
-        brandStats:[
+        brandStats: [
             { value: "18,000+", label: "전국 점포수" },
             { value: "편의점 매출 1위", label: "점포당 연매출 6.4억+" },
-            { value: "460만명", label: "전국 일평균 방문 고객" },
+            { value: "470만명", label: "전국 일평균 방문 고객" },
         ],
         successPointPanel: {
             badge: "SUCCESS POINT",
@@ -4150,9 +4131,10 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .consent_notice_area { margin-top: 24px; padding-top: 24px; border-top: 1px solid #d7d7df; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .consent_notice_area > p { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
 .consent_radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
-.consent_radio > input { width: 24px; height: 24px; margin: 0; padding: 0; background-color: #ffffff; border: 1px solid #c4c4d0; border-radius: 8px; position: relative; appearance: none; }
+.consent_radio :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
+/* .consent_radio > input { width: 24px; height: 24px; margin: 0; padding: 0; background-color: #ffffff; border: 1px solid #c4c4d0; border-radius: 8px; position: relative; appearance: none; }
 .consent_radio > input:checked { background-color: #107af2; border-color: #107af2; }
-.consent_radio > input:checked::after { width: 10px; height: 10px; background-color: #ffffff; border-radius: 50%; position: absolute; top: 50%; left: 50%; content: ""; transform: translate(-50%, -50%); }
+.consent_radio > input:checked::after { width: 10px; height: 10px; background-color: #ffffff; border-radius: 50%; position: absolute; top: 50%; left: 50%; content: ""; transform: translate(-50%, -50%); } */
 .consent_radio > span { color: #161616; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
 .apply_form {border-top:1px solid #242428;}
 .apply_form .form_body {padding-top:12px; border-bottom: 1px solid #E5E5E9;}
@@ -4217,7 +4199,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .manager_card.type_02{max-width:100%;display:flex; justify-content: space-between;}
 .manager_card .manager_header > p{color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 .manager_card .manager_header > strong{margin-top:2px; font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;display:block;}
-.manager_card .manager_header + .btn_close{width:20px; height:20px; text-indent:-9999px;background-color:#161616}
+.manager_card .manager_header + .btn_close{width:20px; height:20px; text-indent:-9999px; background:url('@/assets/images/common/icon_set_20.png') no-repeat -627px -24px; }
 .consult_manager_photo { width: 80px; height: 80px; margin: 0; background-color: #c4c4d0; border-radius: 50%; flex-shrink: 0; }
 .manager_body { min-width: 0; flex: 1; }
 .manager_name { margin: 0; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
@@ -4275,10 +4257,11 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .apply_form .form_field_experience :deep(.input_wrap .check) { min-height: 52px; padding: 13px 16px !important; display: inline-flex !important; align-items: center; gap: 8px; background-color: #ffffff; border: 1px solid #90909a; border-radius: 10px;  cursor: pointer; position: relative; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]) { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label) { padding: 0 !important; display: inline-flex !important; align-items: center; gap: 8px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; white-space: nowrap; }
-    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::before) { content: "" !important; margin: 0 !important; background-color: #d9d9d9 !important; border: 0 !important; border-radius: 4px !important; box-sizing: border-box !important; position: static !important; top: auto !important; left: auto !important; display: block !important; flex-shrink: 0; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::before) { content: "" !important; margin: 0 !important; background-image: url(@/assets/images/common/chk_02.svg);background-position:center; border: 0 !important; position: static !important; top: auto !important; left: auto !important; display: block !important; flex-shrink: 0; }
     .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"] + .label::after) { content: none !important; display: none !important; }
-    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::before) { background-color: #107af2 !important; }
-    .apply_form .form_field_experience :deep(.input_wrap .check:has(input[type="checkbox"]:checked)) { border-color: #107af2; }
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label){color: #107af2;}
+    .apply_form .form_field_experience :deep(.input_wrap .check input[type="checkbox"]:checked + .label::before) {  background-image: url(@/assets/images/common/chk_02_active.svg) !important; }
+    .apply_form .form_field_experience :deep(.input_wrap .check.is_checked) { border-color: #107af2; }
 }
 /* --- D1=3 · 설명회 지역 카드 그리드 (1419px 이하) --- */
 @media (max-width: 1419px) {

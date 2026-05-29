@@ -2,7 +2,7 @@
     <div class="gsrbr10" v-if="t">
         <section class="visual_section top_visual" ref="visualSection">
             <div class="visual_img" ref="visualImg">
-                <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
+                <img :src="t.Visual.img" :alt="t.Visual.alt" />
             </div>
             <div class="visual_content">
                 <div class="text_box cont_inner">
@@ -59,9 +59,9 @@ export default {
                         subContent_2: "돈버는 즐거움",
                         subContent_3: "우리동네 딜리버리",
                     },
-                    SubTitle: `누구나 가볍게 참여 쉬운<br/> 배달 서비스`,
-                    SubContent_1: `별도의 장비 없이, 청년부터 어르신까지 손쉽게 시작할 수 있는 도보 배달 서비스.`,
-                    SubContent_2: `내가 원하는 시간에, 내가 아는 동네에서, 가볍게 배달하고 수입을 만들어보세요.`,
+                    SubTitle: `브랜드소개`,
+                    SubContent_1: `우리동네 GS25, GS THE FRESH의 상품과 식품, 맛집 배달까지`,
+                    SubContent_2: `별도의 장비 없이 성인이라면 누구나 손쉽게 배달 가능한 서비스입니다.`,
                     HopageLink: `https://www.gsrbr.com/`,
                     HopageText: `홈페이지`,
                     ListBack:`목록으로 돌아가기`
@@ -102,7 +102,7 @@ export default {
 .visual_img { width: 100%; height: auto; }
 .visual_img img { width: 100%; display: block; }
 .visual_content { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 100%; z-index: 2; }
-.text_box span {margin-bottom:10px; color:#fff; font-size:72px; font-weight:700; display: block;  }
+.text_box span { color:#fff; font-size:72px; font-weight:700; display: block;  }
 
 /* body_wrap Section */
 .body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
@@ -115,8 +115,10 @@ export default {
     .body_wrap .cont_area .cont_inner ul {flex-direction:column; align-items:flex-start; gap:16px}
 }
 @media screen and (max-width: 1024px) {}
-@media screen and (max-width: 767px) {
-    .text_box span {margin-bottom:10px; color:#fff; font-size:32px; font-weight:700; text-align:center; display: block;  }
+@media screen and (max-width: 768px) {
+    .visual_img{height:100vh;}
+    .visual_img img{height:100%; object-fit:cover; object-position:65% center; transform:scale(1.18); transform-origin:center;}
+    .text_box span {color:#fff; font-size:32px; font-weight:700; text-align:center; display: block;  }
     .body_wrap .cont_area {padding:140px 0px;}
     .body_wrap .cont_area .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:24px; font-weight:700;}
     .body_wrap .cont_area .cont_inner ul {display:flex; justify-content:space-between; align-items:flex-start;}

@@ -194,7 +194,7 @@ function slideNext() {
 .calendar_weekdays > li { color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.39; letter-spacing: 0; text-align: center; }
 .calendar_weekdays > li.is_sun { color: #ed3030; }
 .calendar_weekdays > li.is_sat { color: #107af2; }
-.calendar_grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px 0; }
+.calendar_grid {margin-top: 12px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px 0; }
 .calendar_day { width: 100%; min-height: 50px; margin: 0; padding: 0; background: none; border: 0; border-radius: 99px; color: #161616; font-size: 1.8rem; font-weight: 400 !important; line-height: 1.39; letter-spacing: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .calendar_day.is_empty { color: #a4a4b0; pointer-events: none; cursor: default; }
 .calendar_day.is_empty.is_sun, .calendar_day.is_empty.is_sat { color: #a4a4b0; }
