@@ -619,7 +619,7 @@
                 </div>
             </section>
 
-            <section class="sec_consult_apply panel" v-show="activeD1 === 4 && showConsultApplyPage">
+            <section class="sec_consult_apply panel" v-show="activeD1 === 4 && activeConsultD2 === 0 && showConsultApplyPage">
                 <!-- 컨설턴트와 1:1 상담 -->
                 <div class="consult_box">
                     <div class="consult_intro">
@@ -1590,6 +1590,9 @@ watch(activeD1, (value) => {
         activeConsultD2.value = 0;
     }
 });
+watch(activeConsultD2, () => {
+    showConsultApplyPage.value = false;
+});
 
 onMounted(() => {
     document.addEventListener("click", closeYouthPopover);
@@ -1646,7 +1649,7 @@ function toggleCard(id) {
 
 /* HEADER */
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
-.page_header::after{content:'';width: 100px;height:100%;position:absolute;left:0;right:0;top:0;bottom:0; background-color: rgba(0, 0, 0, 0.6);}
+.page_header::after{content:'';width: 100%;height:100%;position:absolute;left:0;right:0;top:0;bottom:0; background-color: rgba(0, 0, 0, 0.6);}
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
 
