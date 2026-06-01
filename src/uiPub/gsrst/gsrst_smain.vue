@@ -66,7 +66,7 @@ const cards = [
 
 <style scoped>
 :deep(.m_br) { display: none; }
-.sec_franchise { padding: 120px 0 200px; }
+.sec_franchise { padding: 120px 0 0; }
 .sec_inner { max-width: 1460px; margin: 0 auto; padding: 0 20px; }
 .sec_franchise_head { margin-bottom: 80px; text-align: center; }
 .sec_franchise_head > h2 { color: #000; font-size: 6.4rem; font-weight: 700; line-height: 1.24; letter-spacing: -0.02em; }
@@ -87,7 +87,7 @@ const cards = [
 
 @media (max-width: 768px) {
     :deep(.m_br) { display: block; }
-    .sec_franchise { padding: 60px 0; overflow-x: hidden; }
+    .sec_franchise { padding: 60px 0 0; overflow-x: hidden; }
     .sec_inner { padding: 0 20px; }
     .sec_franchise_head {margin-bottom:40px; padding: 0;  }
     .sec_franchise_head > h2 { display: none; }
