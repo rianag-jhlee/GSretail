@@ -797,7 +797,7 @@ export default {
 .gsrin0103 .card_item {padding:32px; background-color:#f8f8f8; border-radius:12px; display:flex; flex-direction:column; gap:16px; min-height:180px; box-sizing:border-box;}
 
 /* gsrin0104 전용 스타일 */
-.gsrin0104 { display: flex; flex-direction: column; width: 100%; padding-bottom: 200px; }
+.gsrin0104 { display: flex; flex-direction: column; width: 100%; }
 .gsrin0104 .top_visual_banner { width: 100%; padding: 60px 0; display: flex; align-items: center; justify-content: center; background-color: #ffffff; }
 .gsrin0104 .banner_text { font-size: 48px; font-weight: 700; color: #161616; text-align: center; line-height: 1.3; letter-spacing: -0.48px; }
 .gsrin0104 .diff_table_wrap { width: 100%; }

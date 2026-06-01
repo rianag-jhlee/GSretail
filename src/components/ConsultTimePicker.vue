@@ -75,7 +75,7 @@ function selectSlot(slot) {
 .time_slot.is_unavailable { background-color: #f8f8f8; color: #a4a4b0; cursor: not-allowed; text-decoration: line-through; text-decoration-color: currentColor; text-decoration-thickness: 1px; }
 .time_slot.is_selected { background-color: #107af2; border-color: #107af2; color: #ffffff; font-weight: 700; }
 .time_slot:disabled { cursor: not-allowed; }
-.time_slot_legend { margin: 12px 0 0; padding: 10px 0 0; border:0; display: flex; align-items: center; gap: 8px; }
+.time_slot_legend { margin: 10px 0 0; padding: 10px 0 0; border:0; display: flex; align-items: center; gap: 8px; }
 .time_slot_legend > p { margin: 0; display: inline-flex; align-items: center; gap: 8px; color: #161616; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
 .time_slot_legend .legend_dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
 .time_slot_legend .legend_dot.is_unavailable { background-color: #d9d9d9; }

@@ -212,10 +212,10 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
 .body_wrap .cont_area { padding: 200px 0; background: #F8F8F8; }
 .intro_text {margin-bottom:64px;}
 .intro_text p { color: #161616; font-size: 24px; font-weight: 700; line-height: 1.35; }
-.body_wrap .cont_area .cont_inner .intro_text + ul {margin-bottom:40px; padding:50px; background:#fff;}
+.body_wrap .cont_area .cont_inner .intro_text + ul {margin-bottom:40px; padding:50px; background:#fff; border-radius: 12px;}
 .bi_section {margin-top:0px !important;}
 .bi_section {width:100%; margin-top:60px;}
-.bi_section span {widows:100%; display:block;}
+.bi_section span {width:100%; display:block;}
 .bi_section span img {width:100%; display:block; object-fit:cover;}
 
 /* Benefits */
