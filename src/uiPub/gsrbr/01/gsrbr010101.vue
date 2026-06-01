@@ -3429,8 +3429,8 @@ function goBack() {
 .txt_area > .logo_wrap { overflow: hidden }
 .txt_area > .logo_wrap > img { width: auto; margin: 0 auto; display: block }
 .m_gs25 { font-style: normal; display: none }
-.sec_brand_about { padding: 200px 0; background-color: #f8f8f8 }
-.sec_brand_about > .about_inner { width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
+.sec_brand_about { padding: 200px 20px; background-color: #f8f8f8 }
+.sec_brand_about > .about_inner { width:100%; max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
 .sec_brand_about > .about_inner > .about_txt > p  { overflow: hidden }
 .sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
 .sec_brand_str > .str_inner { max-width: 1460px; margin: 0 auto; padding: 200px 20px; }
@@ -3722,9 +3722,7 @@ button { background-color: #fff }
 @media (max-width: 1024px) {
   .brand_panel_title > h2 { font-size: 3.2rem; }
   .brand_panel_title > p { font-size: 2rem; }
-
-  .sec_brand_about > .about_inner { width: 100%; padding: 0 40px; box-sizing: border-box }
-  .sec_brand_str > .str_inner { width: 100%; padding: 100px 40px; box-sizing: border-box }
+  .sec_brand_str > .str_inner { width: 100%; padding: 140px 20px; }
   .acc_inner { padding: 28px 40px }
   .acc_item.is_open .acc_inner { grid-template-columns: 1fr 280px; column-gap: 28px }
   .acc_img_wrap > img { width: 100% }
@@ -3766,11 +3764,11 @@ button { background-color: #fff }
   .txt_area > .logo_wrap { display: none }
   .m_gs25 { display: inline }
   .txt_area > p > span:first-child::after { content: "," }
+  .sec_brand_about > .about_inner { gap: 40px }
   .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
-  .sec_brand_about { padding: 140px 0 }
-  .sec_brand_about > .about_inner { padding: 0 20px; gap: 40px }
-  .sec_brand_str { padding: 140px 0 }
-  .sec_brand_str > .str_inner { padding: 0 20px }
+  .sec_brand_about { padding: 140px 20px;}
+  /* .sec_brand_str { padding: 140px 20px } */
+  /* .sec_brand_str > .str_inner { padding: 0 20px } */
   .str_header { flex-direction: column; align-items: flex-start; gap: 16px; padding-bottom: 40px }
   .str_header > h2 { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em }
   .str_header > .str_actions { gap:14px; flex: none; justify-content: flex-start }
