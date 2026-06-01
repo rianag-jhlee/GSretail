@@ -354,7 +354,7 @@ export default {
                     brand: {
                         visual: {
                             lines: [
-                                "신선한 행복을 주는 브랜드",
+                                "신선한 행복을<br class=\"m_br\" />주는 브랜드",
                             ],
                             logoAlt:  "GS THE FRESH 메인 비주얼",
                         },
@@ -766,6 +766,8 @@ export default {
 .gsrbr020101 { width: 100%; position: relative; display: block; overflow-x: clip; }
 
 /* sec_brand_visual */
+:deep(.p_br) { display: block }
+:deep(.m_br) { display: none }
 .sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden; }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px); }
@@ -777,8 +779,10 @@ export default {
 .bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible; }
 .bg_wrap > .visual_inner { width: 100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
 .bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center; }
-.logo_wrap { margin: 0 auto; }
-.logo_wrap > img { width: auto; margin: 0 auto; display: block }
+.logo_wrap { width:100%; margin: 0 auto; padding:0 60px;}
+.logo_wrap > img { width: 100%; margin: 0 auto; display: block }
+
+
 .txt_area > p { width: 100%; margin-bottom: 48px; overflow: hidden; }
 .txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block; }
 .txt_area > p > span :deep(strong) { color: #fff; font-weight: 800; }
@@ -959,17 +963,22 @@ export default {
 
 /* 모바일 반응형 (767px 이하) */
 @media screen and (max-width: 768px) {
+    :deep(.p_br) { display: none }
+    :deep(.m_br) { display: inline  }
+
     .sec_brand_visual { height: 100vh; }
     .sticky { height: 100vh; top: 0; }
-    .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("@/assets/images/dummy/gsrbr020101_main_mo.png"); background-position: center; }
+    .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("@/assets/images/dummy/gsrbr020101_main.png"); background-position: center;transform: scale(1.55);background-position: 91% -66px;}
     .txt_area > p > span { font-size: 3.2rem; }
-    .sec_brand_about { padding: 100px 20px; }
-    .sec_brand_about > .about_inner > .about_txt > p > span { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
+    /* .sec_brand_about { padding: 100px 20px; } */
+    .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
 }
 
 @media screen and (max-width: 767px) {
     .brand_value_section { padding: 100px 0; }
     .title_text { font-size: 24px; }
+    /* .logo_wrap{width:100%;padding:0 60px;}
+    .logo_wrap > img{width:100%;} */
     .acc_btn { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
     .acc_inner { padding: 24px; }
     .acc_desc { font-size: 1.6rem; line-height: 1.5; }
