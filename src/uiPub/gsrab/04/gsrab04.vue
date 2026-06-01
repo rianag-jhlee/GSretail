@@ -231,7 +231,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
     .title_wrap::after { width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 1; content: ""; background-color: rgba(0, 0, 0, 0.5); }
     .title_wrap > h2 { position: relative; z-index: 2; color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; }
     section + section { padding: 200px 0 0; }
-    section { display: flex; flex-direction: column; gap: 64px; }
+    section { padding: 120px 0 0;display: flex; flex-direction: column; gap: 64px; }
     .header h3 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
     .header p { margin: 16px 0 0; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_color_reg > .header p {  color: #161616; font-weight: 700; }
@@ -259,7 +259,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
     .ci_bi_card { min-width: 0; height: 230px; padding: 0 clamp(16px, 3.6vw, 36px); display: flex; justify-content: center; align-items: center; overflow: hidden; border: 1px solid #e5e5e9; border-radius: 12px; box-sizing: border-box; }
     .ci_bi_card > .img_wrap { width: 100%; max-width: 100%; min-width: 0; height: 100%; min-height: 0; margin: 0; display: flex; justify-content: center; align-items: center; }
     .ci_bi_card > .img_wrap img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; object-position: center; display: block; }
-    .button_wrap { width: 100%; margin: 64px 0 0; display: flex; justify-content: center; }
+    .button_wrap { width: 100%; display: flex; justify-content: center; }
     .notice_box { width: 100%; margin-top:-24px; padding: 32px; background-color: #f8f8f8; border-radius: 12px;}
     .notice_head { margin: 0 0 24px; display: flex; align-items: center; gap: 8px; }
     .notice_box > p { margin: 0 0 8px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
@@ -304,6 +304,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
     @media screen and (max-width: 768px) {
         .title_wrap { display: none; }
         .visual_sub { font-size: 2rem; }
+        section{padding: 60px 0 0;}
         section + section { padding: 60px 0 0; }
         .header h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; text-align: left; }
         .header p { margin: 12px 0 0; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
