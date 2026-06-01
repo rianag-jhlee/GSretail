@@ -42,9 +42,19 @@
                 <p>{{ t.info.copyright }}</p>
             </div>
 
-            <button class="go_top" :class="{ hide: isTop, isStatic: isFooterVisible }" @click="scrollTop">Go to
-                top</button>
+            <button class="go_top" :class="{ hide: isTop, isStatic: isFooterVisible }" @click="scrollTop">Go to top</button>
         </div>
+
+        <!-- 26.06.01 Add 이종환 : sky quick 공통처리 -->
+        <ul
+            class="quick_menu is_visible" :class="{ istop: isTop, isStatic: isFooterVisible }"
+            :aria-hidden="!showQuickMenu"
+        >
+            <li v-for="item in t.skybanner" :key="item"><a :href="item.link">{{ item.txt }}</a></li>
+            <!-- <li><button type="button">입점상담</button></li>
+            <li><button type="button">고객센터</button></li> -->
+        </ul>
+        <!-- //26.06.01 Add 이종환 : sky quick 공통처리 -->
     </footer>
 
     <!-- 입지제안 팝업 -->
@@ -76,6 +86,8 @@ const footerEl = ref(null);
 const quickWrap = ref(null);
 const quickList = ref(null);
 const familySiteRef = ref("");
+
+const showQuickMenu = ref(true); //26.06.01 Add 이종환 : 
 
 // =====================
 // state
@@ -123,6 +135,11 @@ const langData = {
             { value: 'https://www.gsenc.com/', label: 'GS건설' }, 
             { value: 'https://www.elysian.co.kr/intro', label: '엘리시안강촌' }
         ],
+        skybanner: [
+            { txt:'창업안내', link:"#none" },
+            { txt:'입점상담', link:"#none" },
+            { txt:'고객센터', link:"#none" }
+        ]
     },
     en: {
         quick: [
@@ -170,6 +187,10 @@ const chunk = (arr = [], size = 6) => {
 // =====================
 const handleScroll = () => {
     isTop.value = window.scrollY < 50;
+
+    if(window.innerWidth > 768){
+        isTop.value = window.scrollY < 50;
+    }
 };
 
 const scrollTop = () => {

@@ -1585,7 +1585,7 @@
 
         </div>
         <!-- [quick_menu · 템플릿] .wrap_gsrst 직하위(cont_inner 밖)에 둠. 푸터는 App.vue router-view 밖이므로 도킹 계산 시 wrap 기준 사용 -->
-        <ul
+        <!-- <ul
             ref="quickMenuRef"
             class="quick_menu"
             :class="{ is_visible: showQuickMenu }"
@@ -1594,7 +1594,7 @@
             <li><button type="button">창업안내</button></li>
             <li><button type="button">입점상담</button></li>
             <li><button type="button">고객센터</button></li>
-        </ul>
+        </ul> -->
         <!-- //[quick_menu · 템플릿] -->
     </div>
 
@@ -4241,15 +4241,17 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .seminar_slot_row:not(.is_muted) > .seminar_ic_time { color: #67676f; opacity: 0.9; }
 .seminar_slot_row.is_muted > .seminar_ic_time,
 .seminar_slot_row.is_muted > .seminar_slot_time { color: #67676f; text-decoration: line-through; }
-/* ========== quick menu (전 탭 · PC/태블릿 고정) ========== */
-.quick_menu{position:fixed; bottom:60px; right: clamp(24px, calc(50% - 1420px / 2 - 160px), 800px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none; transition:opacity 0.35s ease;}
+
+/* ========== quick menu (전 탭 · PC/태블릿 고정) : 26.06.01 Del 이종환 : 공통화 처리 ========== */
+/* .quick_menu{position:fixed; bottom:60px; right: clamp(24px, calc(50% - 1420px / 2 - 160px), 800px); width:clamp(104px, 6.8229vw, 131px); z-index:100; display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); opacity:0; pointer-events:none; transition:opacity 0.35s ease;}
 .quick_menu.is_visible{opacity:1; pointer-events:auto;}
+
 .quick_menu li{position:relative; width:100%;}
 .quick_menu li button{width:100%; height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 0; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:700; letter-spacing:-0.01em; background:none; background-color:#F2F2F4; border:0; border-radius:99px; text-align:center; display:flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px);}
 .quick_menu li button::before{content:''; width:20px; height:20px; background: url(@/assets/images/common/icon_set_20.png) no-repeat; display:block;}
 .quick_menu li:nth-of-type(1) button::before {background-position: -1155px -70px;}
 .quick_menu li:nth-of-type(2) button::before {background-position: -15px -114px;}
-.quick_menu li:nth-of-type(3) button::before {background: url(@/assets/images/sub/icon_quick3.png) no-repeat 0 0;}
+.quick_menu li:nth-of-type(3) button::before {background: url(@/assets/images/sub/icon_quick3.png) no-repeat 0 0;} */
 
 /* --- D1=3 · 창업 상담 신청 · PC 체크박스 UI (769px+) --- */
 @media (min-width: 769px) {
@@ -4675,7 +4677,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .row_layout.apply_form article .form_row:last-of-type{padding-bottom:30px;}
     
     /* 우측 하단 sticky 메뉴 */
-    .quick_menu { display: none; }
+    /* .quick_menu { display: none; } */
 }
 </style>
 

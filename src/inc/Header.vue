@@ -8,7 +8,17 @@
                     <li v-for="item1 in chunkedMenuList" :key="item1.title" @focusin="setFocus($event)"
                         @focusout="removeFocus($event)" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
 
-                        <a :href="getLink(item1)" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a>
+                        <!-- <a :href="getLink(item1)" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a> -->
+                        <!-- 26.06.01 Edit 이종환 : 모바일에서 depth1에 하위메뉴가 있으면 링크 없애고 하위메뉴 펼침닫힘 기능 -->
+                        <a
+                            :href="!isDesktop() && item1.chunkedChildren?.length
+                                ? '#'
+                                : getLink(item1)"
+                            :target="item1.blank ? '_blank' : null"
+                            @click="!isDesktop() && item1.chunkedChildren?.length ? toggleMenu($event) : null"
+                        >
+                            {{ item1.title }}
+                        </a>
 
                         <div class="depth2_wrap" v-if="item1.chunkedChildren && item1.chunkedChildren.length">
                             <ul class="depth2" v-for="(group, idx) in item1.chunkedChildren" :key="idx">
@@ -100,7 +110,10 @@ export default {
         };
 
         // ✅ PC 여부 체크 함수 (768px 초과 시 true)
-        const isDesktop = () => window.innerWidth > 768;
+        /* 26.06.01 Add 이종환 : 반응형으로 리사이징 isDesktop 체크 */
+        const windowWidth = ref(window.innerWidth);
+        const isDesktop = () => windowWidth.value > 768;
+        /* //26.06.01 Add 이종환 : 반응형으로 리사이징 isDesktop 체크 */
 
         // 기존 hover/focus 기능
         const handleMouseEnter = (e) => {
@@ -296,6 +309,8 @@ export default {
             const gnbNav = document.getElementById("gnb_nav");
             const quickWrap = document.querySelector(".quick_wrap");
 
+            windowWidth.value = window.innerWidth; //26.06.01 Add 이종환 : 반응형으로 리사이징 isDesktop 체크
+
             // 중복 방지를 위해 이미 복제된 요소가 있는지 체크
             const clonedQuick = gnbNav?.querySelector(".quick_wrap.is-cloned");
 
@@ -367,6 +382,8 @@ export default {
             chunkedMenuList, // 템플릿에서 사용할 새로운 변수
             mo_menuToggle,
             handleResize,
+
+            isDesktop
         };
     },
 };
