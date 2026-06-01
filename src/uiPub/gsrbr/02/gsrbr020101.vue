@@ -819,7 +819,7 @@ export default {
 .acc_img_wrap > img { width: auto; margin-left: auto; border-radius: 12px; display: block; object-fit: cover; }
 
 /* Origin Section & Tabs */
-.origin_section { width: 100%; padding: 0 0 200px; position: relative; display: block; }
+.origin_section { width: 100%; position: relative; display: block; }
 .mt40 { margin-top: 40px; }
 .origin_tabs_2depth { width: 100%; margin: 60px 0 0; }
 .empty_cont { padding: 100px 0; text-align: center; color: #67676f; font-size: 20px; background-color: #f8f8f8; border-radius: 12px; }
@@ -888,6 +888,7 @@ export default {
 
 /* Node Sections */
 .tm-node-section { width: 100%; margin-bottom: 120px; display: flex; flex-direction: column; gap: 40px; }
+.tm-node-section:last-of-type {margin-bottom:0;}
 .tm-section-title { font-size: 28px; font-weight: 700; color: #161616; letter-spacing: -0.28px; }
 .tm-section-subtext { font-size: 20px; color: #161616; margin-top: 12px; }
 
