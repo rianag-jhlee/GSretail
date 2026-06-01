@@ -187,7 +187,7 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 /* .body_wrap {padding-bottom:200px;} */
 .body_wrap .cont_area { padding: 200px 0; background: #F8F8F8; }
 .intro_text p { color: #161616; font-size: 24px; font-weight:600; line-height: 1.35; }
-.body_wrap .cont_area .cont_inner .intro_text + ul { margin-top: 65px; margin-bottom: 40px; padding: 50px; background: #fff; list-style: none; }
+.body_wrap .cont_area .cont_inner .intro_text + ul { margin-top: 65px; margin-bottom: 40px; padding: 50px; background: #fff; border-radius: 12px; }
 
 .bi_section { position: relative; width: 100%; margin-top: 0 !important; }
 .bi_section span { display: block; width: 100%; }
@@ -265,7 +265,7 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
     .benefit_list li { width: calc((100% - 10px) / 2); }
     .bottom_btns + .btn_big.border { display: flex; justify-content: center; margin-top: 100px; margin-bottom: 80px; }
     .bi_section h4 {flex-direction:column;}
-    .body_wrap .cont_area .cont_inner .intro_text + ul {margin-top:40px; margin-bottom:0; padding:32px; border-radius:12px;}
+    .body_wrap .cont_area .cont_inner .intro_text + ul {margin-top:40px; margin-bottom:0; padding:32px;}
     .bi_section h4 p {width:100%; margin-top:8px; font-size:16px; line-height:1.5; flex-direction:column;}
 }
 </style>
