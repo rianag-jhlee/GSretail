@@ -464,7 +464,15 @@
             </section>
 
             <div class="diff_bottom_row">
-                <DiffQrRow v-if="tab3.qr" :title="tab3.qr.title" :desc="tab3.qr.desc" />
+                <div v-if="tab3.qr" class="diff_qr_row">
+                    <figure aria-hidden="true">
+                        <img :src="isMobileView ? imgQrMo : imgQrPc" alt="앱 다운로드 QR코드" width="74" height="74" />
+                    </figure>
+                    <div>
+                        <strong>{{ tab3.qr.title }}</strong>
+                        <p v-html="isMobileView && tab3.qr.descMo ? tab3.qr.descMo : tab3.qr.desc"></p>
+                    </div>
+                </div>
                 <a v-if="tab3.link" :href="tab3.link.url" class="gopizza_link" target="_blank" rel="noopener noreferrer">
                     <figure aria-hidden="true">
                         <img v-if="isMobileView" :src="imgQrMo" alt="" />
@@ -1554,6 +1562,7 @@ import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
 import imgQrMo from "@/assets/images/dummy/qr_app.png";
+import imgQrPc from "@/assets/images/dummy/qr-app-download.svg";
 import Steps from "@/components/Steps.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
 import NumberedInfoList from "@/components/NumberedInfoList.vue";
@@ -1905,6 +1914,7 @@ const langData = {
                 qr: {
                     title: "우리동네GS 앱 다운로드",
                     desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+                    descMo: "GS25의 다양한 이벤트와 차별화 상품",
                 },
                 link: {
                     title: "GOPIZZA 홈페이지 바로가기",
@@ -2201,7 +2211,7 @@ const langData = {
                             ],
                             usageTitle:   "POSA 기프트카드 사용방법",
                             usageDesc:
-                                '<span class="gift_usage_desc_emphasis">기프트카드별로 사용방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용방법을 참고</span>하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.',
+                                '<span class="txt_warn">기프트카드별로 사용방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용방법을 참고</span>하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.',
                             onlineLabel:  "온라인 사용방법",
                             onlineSteps: [
                                 { step: "Step 1", title: "사이트 접속 및 로그인" },
@@ -3392,7 +3402,7 @@ function goBack() {
 
 <style scoped>
 .brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
-.brand_panel_bg > img { width: 100%; display: block; object-fit: cover; }
+.brand_panel_bg > img { width: 100%; max-height:340px; display: block; object-fit: cover; }
 .brand_panel_title { padding: 0 0 100px;}
 .brand_panel_title > h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; display:flex; align-items:center;}
 
@@ -3470,11 +3480,11 @@ img { display: block }
 button { background-color: #fff }
 .usage_select_box { width: 180px; padding: 11px 44px 11px 16px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; background-color: #F8F8F8; border: 0; border-radius: 6px; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7.5L10 12.5L15 7.5' stroke='%23111111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 20px 20px; cursor: pointer }
 
-.brand_panel { padding-top: 64px; margin-bottom: 100px ;}
+.brand_panel { padding-top: 64px;}
 .brand_panel section { padding-bottom: 120px }
 
 .brand_panel section:last-of-type { padding-bottom: 0 }
-.diff_card_grid { margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 460px)); gap: 20px }
+.diff_card_grid { padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 460px)); gap: 20px }
 .diff_card { margin: 0; padding: 0; background-color: #fff; border-radius: 12px; overflow: hidden }
 .diff_card > figure { margin: 0; padding: 0; background-color: #e8e8ec; overflow: hidden }
 
@@ -3537,7 +3547,7 @@ button { background-color: #fff }
 
 .gopizza_menu_name { display: flex; align-items: center; gap: 6px }
 .gopizza_badge_best { padding: 2px 6px; color: #fb4516; font-size: 1.1rem; font-weight: 600; font-style: normal; letter-spacing: -0.02em; background-color: #ffe9e3; border-radius: 4px }
-.diff_bottom_row { display: flex; gap: 32px }
+.diff_bottom_row { margin-top:40px;display: flex; gap: 32px }
 .diff_bottom_row > .diff_qr_row { flex: 1 }
 .gopizza_link { min-width: 0; display: flex; align-items: center; flex: 1; gap: 20px; text-decoration: none }
 .gopizza_link > figure { width: 90px; height: 90px; margin: 0; padding: 8px; background-color: #fff; border: 1px solid #e5e5e9; border-radius: 10px; flex-shrink: 0; display: none }
@@ -3738,9 +3748,9 @@ button { background-color: #fff }
   .sec_header > h3.h3_steps, .sec_header:not(:has(p)) > h3.h3_steps { margin-bottom: 24px; }
   .sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc { margin-bottom: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
   .sec_header .sec_cite { margin-top: 4px; margin-left: 0; display: block; }
-  .brand_panel_bg { margin: 0 0 24px; border-radius: 0; }
+  .brand_panel_bg { width: calc(100% + 40px);margin: 0 -20px 24px; border-radius: 0; }
   .brand_panel_title { padding: 0 0 64px; }
-  .brand_panel_bg > img { max-height: 245px; object-fit: none; }
+  .brand_panel_bg > img { max-height: 245px;  }
   .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display:block;}
 
   .brand_panel_title > h2 :deep(a) {margin-top:16px; margin-left:0; font-size:1.4rem; font-weight:500; line-height:140%;}
@@ -3748,10 +3758,11 @@ button { background-color: #fff }
 
   .brand_panel_title > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
   .cafe_panel .brand_panel_bg > img { object-position: -348px center; }
-  .chicken_panel .brand_panel_bg > img { object-position: -385px center; }
-  .gopizza_panel .brand_panel_bg > img { object-position: -591px bottom; }
+  .chicken_panel .brand_panel_bg > img { object-position: 34% top; transform: scale(1.35);  }
+  .gopizza_panel .brand_panel_bg > img { object-position: center bottom; }
   .gopizza_panel .diff_bottom_row { margin-top: 120px; }
   .sinsen_panel .brand_panel_bg > img { object-position: -395px bottom; }
+  .delivery_panel_3 .brand_panel_bg > img{ object-position: 70% bottom; }
   
   .sec_brand_visual { height: 100vh }
   .sticky { height: 100vh; top: 0 }
@@ -4069,9 +4080,9 @@ button { background-color: #fff }
   .gift_step_num { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0 }
 }
 .gift_step_desc { margin: 0; padding-left: 38px; color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
-.gift_usage_heading .gift_usage_desc_emphasis { color: #f95823; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; }
+.gift_usage_heading :deep(.txt_warn) { color: #f95823 !important;  }
 @media (max-width: 768px) {
-  .gift_usage_heading .gift_usage_desc_emphasis { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+  .gift_usage_heading .txt_warn { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 }
 .gift_brand_slider { position: relative; width: 100%; display: flex; align-items: center; gap: 16px }
 @media (max-width: 768px) {
