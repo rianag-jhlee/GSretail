@@ -1211,7 +1211,7 @@
                                     </div>
 
                                     <div class="contents">
-                                        <section class="protection_section mb120">
+                                        <section class="protection_section">
                                             <div class="policy_card_box">
                                                 <div class="section_title_area mb40">
                                                     <h4 class="section_title_sub">{{ t.protect.safetymanagement.Policy.Title }}</h4>
@@ -1235,7 +1235,7 @@
                                         </section>
 
                                         <!-- 2. 안전보건 거버넌스 -->
-                                        <section class="protection_section mb120">
+                                        <section class="protection_section">
                                             <div class="section_title_area mb40">
                                                 <h4 class="section_title_sub">{{ t.protect.safetymanagement.Governance.Title }}</h4>
                                                 <p class="p_desc" v-html="t.protect.safetymanagement.Governance.Desc"></p>
@@ -1249,7 +1249,7 @@
                                         </section>
 
                                         <!-- 3. 안전보건 교육 및 관리 체계 -->
-                                        <section class="protection_section mb120">
+                                        <section class="protection_section">
                                             <div class="section_title_area mb40">
                                                 <h4 class="section_title_sub">{{ t.protect.safetymanagement.Safety.Title }}</h4>
                                                 <p class="p_desc" v-html="t.protect.safetymanagement.Safety.Desc"></p>
@@ -1434,7 +1434,7 @@
                                 </div>
 
                                 <div class="contents">
-                                    <section class="protection_section mb120">
+                                    <section class="protection_section ">
                                         <div class="section_title_area mb40">
                                             <h4 class="section_title_sub">{{ t.protect.informationprotection.Governance.Title }}</h4>
                                             <p class="p_desc" v-html="t.protect.informationprotection.Governance.Desc"></p>
@@ -1463,7 +1463,7 @@
                                         </div>
                                     </section>
 
-                                    <section class="protection_section mb120">
+                                    <section class="protection_section">
                                         <div class="section_title_area mb40">
                                             <h4 class="section_title_sub">{{ t.protect.informationprotection.Policy.Title }}</h4>
                                             <p class="p_desc" v-html="t.protect.informationprotection.Policy.Desc"></p>
@@ -1479,7 +1479,7 @@
                                         </figure>
                                     </section>
 
-                                    <section class="protection_section mb120">
+                                    <section class="protection_section">
                                         <div class="section_title_area mb40">
                                             <h4 class="section_title_sub">{{ t.protect.informationprotection.Activities.Title }}</h4>
                                             <p class="p_desc">{{ t.protect.informationprotection.Activities.Desc }}</p>
@@ -2784,7 +2784,7 @@ export default {
     .notice_text {margin-top:20px; color:#67676F; font-size:16px;}
     .owner_card_layout {display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
     .owner_card_layout .strategy_card {min-width: auto; padding: 32px 32px 48px; height: 100%; display: flex; flex-direction: column;}
-    .diagram_img_wrap {display: block; margin:100px 0; text-align:center;}
+    .diagram_img_wrap {display: block; margin:100px 0 0; text-align:center;}
 
     /* 공급망 지속가능성 정책 한 줄 규칙 수정 */
     .policy_box_wrap { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
@@ -3050,6 +3050,7 @@ export default {
     .blind { position: absolute; width: 1px; height: 1px; clip: rect(0, 0, 0, 0); overflow: hidden; }
     .information_protection_management .text_summary {font-size: 32px; font-weight: 700; color: #161616; letter-spacing: -0.32px; line-height: 1.3; }
     .information_protection_management .contents { width: 100%; display: flex; flex-direction: column; align-items: flex-start; }
+    .contents .protection_section + .protection_section {margin-top:120px;}
     .information_protection_management .protection_section {display: flex; flex-direction: column; }
     .information_protection_management .section_title_sub {font-size: 40px; font-weight: 700; color: #161616; letter-spacing: -0.4px; line-height: 1.3; }
     .information_protection_management .p_desc {font-size: 24px; font-weight: 400; color: #161616; letter-spacing: -0.24px; line-height: 1.5; }
