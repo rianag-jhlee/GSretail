@@ -149,7 +149,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
     .title_wrap::after { width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 1; content: ""; background-color: rgba(0, 0, 0, 0.5); }
     .title_wrap > h2 { position: relative; z-index: 2; color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; }
     section + section { padding: 200px 0 0; }
-    section { display: flex; flex-direction: column; gap: 64px; }
+    section { padding:120px 0 0;display: flex; flex-direction: column; gap: 64px; }
     .header h3 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
     .header p { margin: 16px 0 0; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_location > .location_panel { width: 100%; padding: 40px 0; border-top: 1px solid #e5e5e9; display: flex; flex-wrap: nowrap; gap: 20px; justify-content: space-between; }
@@ -177,6 +177,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
     }
     @media screen and (max-width: 768px) {
         .title_wrap { display: none; }
+        section{padding:60px 0 0;}
         section + section { padding: 60px 0 0; }
         .header h3 { font-size: 2.4rem; line-height: 1.35; text-align: left; }
         .sec_location { gap: 30px; }

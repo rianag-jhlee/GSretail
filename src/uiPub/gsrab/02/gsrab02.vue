@@ -5,7 +5,7 @@
         </div>
         <div class="cont_inner">
             <section class="sec_vision">
-                <header class="header al">
+                <header class="header">
                     <h3>{{ t.SubTitle }}</h3>
                     <p>{{t.VisionSub}}</p>
                 </header>
@@ -136,6 +136,7 @@ section > header{margin-bottom:100px;}
 .header h3 { margin: 0; font-weight: 700; font-size: 4.8rem; line-height: 1.3; letter-spacing: -0.01em; }
 .header p { margin: 16px 0 0; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 /* .sec_vision .img_wrap { margin-top: 100px;  } */
+
 .sec_vision .img_wrap picture { width: 100%; position: relative; display: block; }
 .sec_vision .img_wrap picture img { margin: 0 auto; object-fit: contain; }
 /* .sec_value {display: flex; flex-wrap: wrap; gap:20px; align-items: flex-start; justify-content: space-between; } */
@@ -176,6 +177,7 @@ section > header{margin-bottom:100px;}
     .sec_vision .img_wrap picture img{max-width: 335px;}
     .swiper{width: calc(100% + 40px); margin: 0 -20px;padding: 0 20px;}
     .sec_value :deep(.value_swiper .swiper-slide) { width: 84.53vw; }
+    .sec_vision header{text-align:left;}
     /* .sec_vision .img_wrap { margin-top: 60px; } */
     /* .sec_value { flex-direction: column; gap: 24px; }
     .sec_value > .header { width: 100%; }
