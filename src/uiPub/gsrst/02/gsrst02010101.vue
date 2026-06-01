@@ -3581,7 +3581,7 @@ header.ac > .tit { margin-right: auto; margin-left: auto; }
 section + section { padding-top: 100px; }
 section p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
 .panel_third_depth { padding-top: 80px; }
-.panel { padding: 100px 0 200px; }
+.panel { padding: 100px 0 0; }
 .panel.pt_64 { padding-top: 64px; }
 section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50%); background-color: #f8f8f8; }
 
@@ -4304,7 +4304,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .page_header { display: none; }
 
     /* D1=0 · GS25 창업 알아보기 */
-    .panel { padding: 60px 0 80px; }
+    .panel { padding: 60px 0 0; }
     .panel.pt_64 { padding-top: 60px;}
     .panel_third_depth { padding-top: 32px; }
     .section_header, .sub_header { margin-bottom: 32px; }
