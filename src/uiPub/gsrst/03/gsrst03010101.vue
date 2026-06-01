@@ -1079,7 +1079,7 @@
 
         </div>
         <!-- [quick_menu · 템플릿] .wrap_gsrst 직하위(cont_inner 밖)에 둠. 푸터는 App.vue router-view 밖이므로 도킹 계산 시 wrap 기준 사용 -->
-        <ul
+        <!-- 26.06.01 Del 이종환 : 공통처리로 footer로 이동 <ul
             ref="quickMenuRef"
             class="quick_menu"
             :class="{ is_visible: showQuickMenu }"
@@ -1088,7 +1088,7 @@
             <li><button type="button">창업안내</button></li>
             <li><button type="button">입점상담</button></li>
             <li><button type="button">고객센터</button></li>
-        </ul>
+        </ul> -->
         <!-- //[quick_menu · 템플릿] -->
     </div>
 
