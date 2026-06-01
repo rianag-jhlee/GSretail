@@ -33,16 +33,15 @@
                     </li>
                 </ul>
                 <!-- mo swiper -->
-                <Swiper v-else slides-per-view="auto" :space-between="8" class="value_swiper">
-                    <SwiperSlide v-for="item in t.valueItems" :key="item.title">
-                        <article class="value_slide">
-                            <span class="thumb"><em><img :src="item.img" /></em></span>
-                            <!-- <div class="value_thumb" :style="{ backgroundImage: `url(${item.thumb})` }" aria-hidden="true"></div> -->
+                <Swiper v-else slides-per-view="auto" :space-between="8" wrapper-tag="ul" class="value_swiper">
+                    <SwiperSlide v-for="item in t.valueItems" :key="item.title" tag="li">
+                        <div class="item">
+                            <span class="thumb"><em><img :src="item.img" :alt="item.title" /></em></span>
                             <p>
                                 <strong>{{ item.title }}</strong>
                                 <span>{{ item.desc }}</span>
                             </p>
-                        </article>
+                        </div>
                     </SwiperSlide>
                 </Swiper>
                 <!-- //mo swiper -->
@@ -130,18 +129,19 @@ img { width: 100%; height: auto; object-fit: cover; display: block;  }
 .title_wrap { width: 100%; max-height: 480px; padding: 10.91% 0 11.25%; text-align: center; position: relative; display: block; background-color: transparent; background-image: url("@/assets/images/dummy/gsrab02_01.png"); background-repeat: no-repeat; background-size: cover; background-position: center -90px; }
 .title_wrap::after { content: ""; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); position: absolute; left: 0; top: 0; z-index: 1; }
 .title_wrap > h2 { color: #fff; font-weight: 700; font-size: 7.2rem; line-height: 1.24; letter-spacing: -0.02em; position: relative; z-index: 2; }
-/* section { padding-top: 200px; } */
-section+section{padding:200px 0 0; }
+section { padding-top: 200px; }
+section > header{margin-bottom:100px;}
+/* section+section{padding:200px 0 0; } */
 .header { text-align: center;}
 .header h3 { margin: 0; font-weight: 700; font-size: 4.8rem; line-height: 1.3; letter-spacing: -0.01em; }
 .header p { margin: 16px 0 0; font-weight: 700; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_vision .img_wrap { margin-top: 100px;  }
+/* .sec_vision .img_wrap { margin-top: 100px;  } */
 .sec_vision .img_wrap picture { width: 100%; position: relative; display: block; }
 .sec_vision .img_wrap picture img { margin: 0 auto; object-fit: contain; }
 /* .sec_value {display: flex; flex-wrap: wrap; gap:20px; align-items: flex-start; justify-content: space-between; } */
 /* .sec_value > .header { width: 320px; max-width: 100%; flex-shrink: 0; } */
 /* .sec_value > .value_list { width: 1100px; max-width: 100%; flex: 1 1 700px; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
-.sec_value > .value_list > li { margin: 0; padding: 56px; min-height: 500px; border-radius: 12px; background-color: #f5f5f5; background-repeat: no-repeat; background-position: center; background-size: cover; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; box-sizing: border-box; }
+.sec_value > .value_list > li { margin: 0; padding: 56px; min-height: 500px; border-radius: 12px; background-color: #f5f5f5; background-repeat: no-repeat; background-position: center; background-size: cover; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;  }
 .sec_value > .value_list > li > strong { margin: 0; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .sec_value > .value_list > li > p { margin: 12px 0 0; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; white-space: pre-line; }
 .sec_value > .value_list > li:nth-child(1) { background-image: url("@/assets/images/dummy/gsrab02_03.png"); }
@@ -157,8 +157,8 @@ section+section{padding:200px 0 0; }
 .sec_value .value_list .item p strong {font-size:4rem; letter-spacing:-0.01em; line-height:130%;}
 .sec_value .value_list .item p span {font-size:2rem; letter-spacing:-0.01em; line-height:135%; white-space:pre-line;}
 
-.sec_way > .way_list { margin: 100px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-.sec_way > .way_list > li {padding: 56px; min-height: 400px; border-radius: 12px; background-repeat: no-repeat; background-position: center; background-size: cover; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; }
+.sec_way > .way_list { padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.sec_way > .way_list > li {padding: 56px; min-height: 400px; border-radius: 12px; background-repeat: no-repeat; background-position: center; background-size: cover; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; }
 .sec_way > .way_list > li > strong { font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .sec_way > .way_list > li > p { margin: 8px 0 0; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; white-space: pre-line; }
 .sec_way > .way_list > li:nth-child(1) { background-image: url("@/assets/images/dummy/gsrab02_07.png"); }
@@ -169,28 +169,28 @@ section+section{padding:200px 0 0; }
 @media screen and (max-width: 768px) {
     .title_wrap { display: none; }
     .visual_sub { font-size: 2rem; }
-    section+section{padding:60px 0 0; }
+    section{padding:60px 0 0; }
     .header {margin-bottom:24px;}
     .header h3 { font-size: 2.4rem; }
     .header p { margin-top: 12px; font-weight: 400; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .sec_vision .img_wrap { margin-top: 60px; }
     .sec_vision .img_wrap picture img{max-width: 335px;}
+    .swiper{width: calc(100% + 40px); margin: 0 -20px;padding: 0 20px;}
+    .sec_value :deep(.value_swiper .swiper-slide) { width: 84.53vw; }
+    /* .sec_vision .img_wrap { margin-top: 60px; } */
     /* .sec_value { flex-direction: column; gap: 24px; }
     .sec_value > .header { width: 100%; }
-    .sec_value > .value_swiper { width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px; overflow: hidden; box-sizing: border-box; }
+    .sec_value > .value_swiper { width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px; overflow: hidden; }
     .sec_value :deep(.value_swiper .swiper-slide) { width: 84.53vw; }
     .sec_value :deep(.value_swiper .swiper-wrapper) { align-items: stretch; }
     .sec_value .value_slide { width: 100%; display: flex; flex-direction: column; gap: 8px; }
     .sec_value .value_slide > strong { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_value .value_slide > p { margin: 0; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; white-space: pre-line; }
     .sec_value .value_thumb { width: 100%;aspect-ratio: 317 / 210; border-radius: 12px; background-repeat: no-repeat; background-position: center; background-size: cover; } */
-
-    .sec_value .value_slide .thumb img {border-radius:12px;}
-    .sec_value .value_slide p {margin-top:8px; display:flex; flex-direction:column; gap:8px;}
-    .sec_value .value_slide p strong {font-size:2rem; letter-spacing:-0.01em; line-height:135%;}
-    .sec_value .value_slide p span {font-size:1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; white-space: pre-line;}
-
-    .sec_way > .way_list {margin-top:0; grid-template-columns: 1fr; }
+    .sec_value .value_swiper .item .thumb img { aspect-ratio: 317 / 210; border-radius: 12px; }
+    .sec_value .value_swiper .item p { margin-top: 8px; display: flex; flex-direction: column; gap: 8px; }
+    .sec_value .value_swiper .item p strong { font-size: 2rem; letter-spacing: -0.01em; line-height: 135%; }
+    .sec_value .value_swiper .item p span { font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; white-space: pre-line; }
+    .sec_way > .way_list { grid-template-columns: 1fr; }
     .sec_way > .way_list > li { min-height: 240px; padding: 56px 20px; }
     .sec_way > .way_list > li > strong { font-size: 2.4rem; line-height: 1.35; }
     .sec_way > .way_list > li > p { margin-top: 8px; font-size: 1.6rem; line-height: 1.5; }
