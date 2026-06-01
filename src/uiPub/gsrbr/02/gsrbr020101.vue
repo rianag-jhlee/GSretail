@@ -1,23 +1,29 @@
 <template>
     <div class="gsrbr020101" v-if="t">
-        <section class="top_visual">
-            <div class="visual_section" ref="visualSection">
-                <div class="visual_img" ref="visualImg">
-                    <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
-                </div>
-                <div class="visual_content">
-                    <div class="text_box">
-                        <span class="ani_text">{{ t.Visual.subTitle }}</span>
-                        <p class="ani_text" v-html="t.Visual.mainTitle"></p>
+        <section ref="sectionRef" class="sec_brand_visual top_visual">
+            <div class="sticky">
+                <div ref="bgWrapRef" class="bg_wrap">
+                    <div class="bg"></div>
+                    <div class="visual_inner">
+                        <div class="txt_area">
+                            <p ref="textParaRef">
+                                <span v-for="(line, vi) in t.brand.visual.lines" :key="vi" v-html="line"></span>
+                            </p>
+                            <div ref="logoWrapRef" class="logo_wrap">
+                                <img :src="imgLogo" :alt="t.brand.visual.logoAlt" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="brand_intro_section">
-            <div class="cont_inner">
-                <div class="history_box">
-                    <p class="history_text" v-for="(text, idx) in t.History" :key="idx" v-html="text"></p>
+        <section class="brand_kv"></section>
+
+        <section ref="aboutSectionRef" class="sec_brand_about">
+            <div class="about_inner">
+                <div v-for="(block, bi) in t.brand.about" :key="bi" class="about_txt">
+                    <p v-for="(line, li) in block" :key="li"><span v-html="line"></span></p>
                 </div>
             </div>
         </section>
@@ -40,27 +46,38 @@
                         </div>
                     </div>
 
-                    <div class="accordion_list">
-                        <div 
-                            v-for="(item, idx) in t.AccordionList" 
-                            :key="idx" 
-                            class="accordion_item" 
-                            :class="{ active: activeIdx === idx }"
+                    <ul class="brand_acc">
+                        <li
+                            v-for="(item, i) in t.AccordionList"
+                            :key="i"
+                            class="acc_item"
+                            :class="{ is_open: openAcc === i }"
                         >
-                            <button type="button" class="accordion_header" @click="toggleAccordion(idx)">
-                                <span class="header_text">{{ item.title }}</span>
-                                <i class="ico_arrow"></i>
-                            </button>
-                            <div v-if="activeIdx === idx" class="accordion_body">
-                                <div class="body_content">
-                                    <p class="desc_text" v-html="item.desc"></p>
-                                    <div class="content_img">
-                                        <img :src="item.img" :alt="item.title" />
+                            <div class="acc_inner">
+                                <div class="acc_body">
+                                    <button
+                                        type="button"
+                                        class="acc_btn"
+                                        :aria-expanded="openAcc === i"
+                                        @click="toggleAcc(i)"
+                                        v-html="item.title"
+                                    ></button>
+                                    <div
+                                        :ref="el => { if (el) descRefs[i] = el }"
+                                        class="acc_desc_wrap"
+                                    >
+                                        <p class="acc_desc" v-html="item.desc"></p>
                                     </div>
                                 </div>
+                                <div
+                                    :ref="el => { if (el) imgRefs[i] = el }"
+                                    class="acc_img_wrap"
+                                >
+                                    <img :src="item.img" :alt="item.title" />
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -277,14 +294,6 @@
 
                 <div class="bottom_btns">
                     <button type="button" class="btn_back" @click="handleBack">{{ t.Buttons.backToList }}</button>
-                    <!-- gsrbr0203 ~ gsrbr020401 팝업 아이디만 변경해서 요청하면 됨 -->
-                    <!-- <Buttons 
-                        btn-class="btn_icon" 
-                        @click="openModal" 
-                        data-popid="gsrbr0203" 
-                        data-type="lg" 
-                        data-cont="gsrbr0203"
-                    >테스트</Buttons> -->
                 </div>
                 <a class="btn_big border">{{ t.Buttons.backToList}}</a>
             </div>
@@ -311,12 +320,12 @@
 
 <script>
 import Tabs from "@/components/Tabs.vue";
-import Buttons from "@/components/Buttons.vue";
 import modal from "@/assets/js/modal";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
+import imgLogo from "@/assets/images/dummy/brand_fresh_logo.png";
 
 // GSAP 플러그인 등록
 gsap.registerPlugin(ScrollTrigger);
@@ -325,32 +334,50 @@ export default {
     name: "GsTheFreshBrand",
     components: {
         Tabs,
-        Buttons,
         Swiper,
         SwiperSlide
     },
     data() {
         return {
-            isMobile: false, // 모바일 여부 체크 변수
-            activeIdx: 0,
+            openAcc: -1,
+            descRefs: [],
+            imgRefs: [],
+            accTokens: [0, 0],
             originTabIdx1: 0,
             originTabIdx2: 0,
             currentCat: 0,
             currentTasteCat: 0,
+            gsapCtx: null,
+            imgLogo,
             langData: {
                 ko: {
-                    Visual: {
-                        img: require("@/assets/images/dummy/gsrbr020101_main.png"),
-                        imgMo: require("@/assets/images/dummy/gsrbr020101_main_mo.png"),
-                        alt: "GS THE FRESH 메인 비주얼",
-                        subTitle: "신선한 행복을 주는 브랜드",
-                        mainTitle: "<strong>GS</strong> THE FRESH"
+                    brand: {
+                        visual: {
+                            lines: [
+                                "신선한 행복을 주는 브랜드",
+                            ],
+                            logoAlt:  "GS THE FRESH 메인 비주얼",
+                        },
+                        about: [
+                            [
+                                '1974년 럭키수퍼체인(주)로 출범한 LG수퍼마켓은',
+                                "GS그룹의 출범에 따라 GS수퍼마켓으로 변경되고,",
+                                "이후 2019년 '삶의 가치를 누리는 라이프 스타일 마켓' 으로의 변화를 위해",
+                                '"GS THE FRESH"로 새롭게 태어나게 되었습니다.',
+                            ],
+                            [
+                                '새롭게 태어난 GS THE FRESH은 Friendly, Fresh, Fun 가치와 함께',
+                                '고객의 생활에 늘 가까이 있는 점포로서',
+                                '신선하고 다양한 상품을 제공함과 동시에 더욱 친근한 서비스를 바탕으로',
+                                '고객과 함께하는 친근하고, 신속하며, 편리하고 즐거운 쇼핑문화를 지향합니다.'
+                            ],
+                            [
+                                '새로운 이름으로 고객님과 다시 만나는 GS THE FRESH은',
+                                '신선한 행복을 주는 쇼핑문화의 장을 펼칠 것이며,',
+                                '고객님께 더 큰 만족을 드릴 것을 약속합니다.'
+                            ]
+                        ],
                     },
-                    History: [
-                        `1974년 럭키수퍼체인(주)로 출범한 LG수퍼마켓은<br/>GS그룹의 출범에 따라 GS수퍼마켓으로 변경되고,<br/>이후 2019년 '삶의 가치를 누리는 라이프 스타일 마켓' 으로의 변화를 위해<br/>"GS THE FRESH"로 새롭게 태어나게 되었습니다.`,
-                        `새롭게 태어난 GS THE FRESH은 Friendly, Fresh, Fun 가치와 함께<br/>고객의 생활에 늘 가까이 있는 점포로서<br/>신선하고 다양한 상품을 제공함과 동시에 더욱 친근한 서비스를 바탕으로<br/>고객과 함께하는 친근하고, 신속하며, 편리하고 즐거운 쇼핑문화를 지향합니다.`,
-                        `새로운 이름으로 고객님과 다시 만나는 GS THE FRESH은<br/>신선한 행복을 주는 쇼핑문화의 장을 펼칠 것이며,<br/>고객님께 더 큰 만족을 드릴 것을 약속합니다.`
-                    ],
                     ValueTitle: "가족과 함께하는 행복<br/>쇼핑 산지의 신선함 그대로 가정으로 배달합니다.",
                     Buttons: {
                         proposal: "입지 제안",
@@ -537,8 +564,6 @@ export default {
         }
     },
     mounted() {
-        this.checkMobile();
-        window.addEventListener('resize', this.checkMobile);
         this.$nextTick(() => {
             setTimeout(() => {
                 this.initVisualInteraction();
@@ -546,12 +571,12 @@ export default {
         });
     },
     beforeUnmount() {
-        window.removeEventListener('resize', this.checkMobile);
+        if (this.gsapCtx) {
+            this.gsapCtx.revert();
+            this.gsapCtx = null;
+        }
     },
     methods: {
-        checkMobile() {
-            this.isMobile = window.innerWidth <= 767;
-        },
         onTabChange1(idx) {
             this.originTabIdx1 = idx;
             this.originTabIdx2 = 0;
@@ -573,8 +598,70 @@ export default {
                 targets[idx].scrollIntoView({ behavior: "smooth", block: "start" });
             }
         },
-        toggleAccordion(idx) {
-            this.activeIdx = (this.activeIdx === idx) ? null : idx;
+        _animateOpen(el, myToken, index) {
+            if (!el || (el.classList.contains("acc_show") && el.style.height === "auto")) return;
+            el.classList.add("acc_animating", "acc_show");
+            el.style.height = "auto";
+            const heightPx = `${el.scrollHeight}px`;
+            el.style.height = "0px";
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    if (myToken !== this.accTokens[index]) return;
+                    el.style.height = heightPx;
+                });
+            });
+            el.addEventListener("transitionend", function onEnd(e) {
+                if (e.target !== el || e.propertyName !== "height") return;
+                el.removeEventListener("transitionend", onEnd);
+                if (myToken !== this.accTokens[index]) return;
+                el.style.height = "auto";
+                el.classList.remove("acc_animating");
+            }.bind(this));
+        },
+        _animateClose(el, myToken, index) {
+            if (!el || !el.classList.contains("acc_show")) return;
+            el.classList.add("acc_animating");
+            const h = el.scrollHeight;
+            if (h === 0) {
+                el.classList.remove("acc_show", "acc_animating");
+                el.style.height = "";
+                return;
+            }
+            el.style.height = `${h}px`;
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    if (myToken !== this.accTokens[index]) return;
+                    el.style.height = "0px";
+                });
+            });
+            el.addEventListener("transitionend", function onEnd(e) {
+                if (e.target !== el || e.propertyName !== "height") return;
+                el.removeEventListener("transitionend", onEnd);
+                if (myToken !== this.accTokens[index]) return;
+                el.classList.remove("acc_show", "acc_animating");
+                el.style.height = "";
+            }.bind(this));
+        },
+        toggleAcc(index) {
+            const prev = this.openAcc;
+            if (prev === index) {
+                this.openAcc = -1;
+                const token = ++this.accTokens[index];
+                this._animateClose(this.descRefs[index], token, index);
+                this._animateClose(this.imgRefs[index], token, index);
+                return;
+            }
+            if (prev !== -1) {
+                const token = ++this.accTokens[prev];
+                this._animateClose(this.descRefs[prev], token, prev);
+                this._animateClose(this.imgRefs[prev], token, prev);
+            }
+            this.openAcc = index;
+            const token = ++this.accTokens[index];
+            this._animateOpen(this.descRefs[index], token, index);
+            this.$nextTick(() => {
+                this._animateOpen(this.imgRefs[index], token, index);
+            });
         },
         handleBack() {
             this.$router.back();
@@ -587,67 +674,86 @@ export default {
             modal.open(popId, type, el, cont);
         },
         initVisualInteraction() {
-            const section = this.$refs.visualSection;
-            const imgBox = this.$refs.visualImg;
-            const texts = section.querySelectorAll(".ani_text");
+            const section = this.$refs.sectionRef;
+            const bgWrap = this.$refs.bgWrapRef;
+            const textPara = this.$refs.textParaRef;
+            const logoWrap = this.$refs.logoWrapRef;
+            const aboutSection = this.$refs.aboutSectionRef;
 
-            if (!section || !imgBox) return;
+            if (!section || !bgWrap || !textPara || !logoWrap || !aboutSection) return;
 
-            ScrollTrigger.matchMedia({
-                // 데스크탑: 처음에는 무조건 꽉 찬 이미지(from 100%) -> 스크롤 시 90%로 축소
-                "(min-width: 768px)": () => {
-                    const tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top top",
-                            end: "+=150%",
-                            pin: true,
-                            scrub: 1.2,
-                            anticipatePin: 1,
-                            invalidateOnRefresh: true
-                        }
+            this.gsapCtx = gsap.context(() => {
+                const mm = gsap.matchMedia();
+                mm.add("(min-width: 1025px)", () => {
+                    const spans = textPara.querySelectorAll("span");
+                    const PHASE1_PX = 400;
+
+                    ScrollTrigger.create({
+                        trigger: section,
+                        start: "top top",
+                        end: `+=${PHASE1_PX}`,
+                        scrub: 1.5,
+                        onUpdate(self) {
+                            const p = self.progress;
+                            const bw = bgWrap.offsetWidth;
+                            const bh = bgWrap.offsetHeight;
+                            const hInset = p * Math.max(0, (bw - 1420) / 2);
+                            const vInset = p * Math.max(0, (bh - 799) / 2);
+                            const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
+                            bgWrap.style.clipPath = clip;
+                            bgWrap.style.webkitClipPath = clip;
+                            bgWrap.classList.toggle("active", p >= 1);
+                        },
                     });
 
-                    tl.fromTo(imgBox, 
-                        { 
-                            width: "100%", 
-                            height: "100%", 
-                            borderRadius: "0px", 
-                            filter: "blur(0px) brightness(1)" 
-                        },
-                        { 
-                            width: "90%", 
-                            height: "75%", 
-                            borderRadius: "40px", 
-                            filter: "blur(10px) brightness(0.6)", 
-                            duration: 2, 
-                            ease: "none" 
-                        }
-                    )
-                    .fromTo(texts, 
-                        { 
-                            opacity: 0, 
-                            y: 50 
-                        }, 
-                        { 
-                            opacity: 1, 
-                            y: 0, 
-                            stagger: 0.3, 
-                            duration: 1, 
-                            ease: "power2.out" 
-                        }, 
-                        "-=1.5"
-                    );
+                    gsap.set([...spans, logoWrap], { opacity: 0, y: 40 });
 
-                    return () => {
-                        if (tl) tl.kill();
-                    };
-                },
-                // 모바일: 인터렉션 제거 및 스타일 초기화
-                "(max-width: 767px)": () => {
-                   gsap.set([imgBox, texts], { clearProps: "all" });
-                }
-            });
+                    const textTl = gsap.timeline({ paused: true });
+                    textTl
+                        .to(spans, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            stagger: 0.2,
+                            ease: "power2.out",
+                        })
+                        .to(logoWrap, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                        }, "-=0.3");
+
+                    ScrollTrigger.create({
+                        trigger: section,
+                        start: `top+=${PHASE1_PX} top`,
+                        once: false,
+                        onEnter: () => textTl.play(),
+                        onLeaveBack: () => textTl.reverse(),
+                    });
+
+                    const aboutSpans = aboutSection.querySelectorAll("span");
+                    gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
+
+                    ScrollTrigger.create({
+                        trigger: aboutSection,
+                        start: "top 75%",
+                        once: true,
+                        onEnter: () => {
+                            gsap.to(aboutSpans, {
+                                y: 0,
+                                opacity: 1,
+                                duration: 0.8,
+                                stagger: 0.1,
+                                ease: "power3.out",
+                                onComplete() {
+                                    gsap.set(aboutSpans, { willChange: "auto" });
+                                },
+                            });
+                        },
+                    });
+                });
+            }, this.$el);
         }
     }
 };
@@ -657,29 +763,31 @@ export default {
 <style scoped>
 /* 1.넓이 2.외부여백 3.내부여백 4.폰트 5.배경 6.테두리 7.정렬 8.위치 9.블록 10.변형 */
 
-.gsrbr020101 { width: 100%; position: relative; display: block; }
+.gsrbr020101 { width: 100%; position: relative; display: block; overflow-x: clip; }
 
-/* Visual Section 최적화 */
-.visual_section { width: 100%; height: 100vh; background-color: #fff; display: flex; position: relative;  align-items: center; justify-content: center; overflow: hidden; }
-.visual_img {width: 100%; height: 100%; transform: translate(-50%, -50%); position: absolute; top: 50%; left: 50%; z-index: 1;  overflow: hidden; will-change: width, height, border-radius; /* 성능 최적화 */}
-.visual_img img { width: 100%; height: 100%; object-fit: cover; }
-.visual_content { position: relative; z-index: 2; width: 100%; text-align: center; }
-.text_box { display: flex; flex-direction: column; justify-content: center; }
-.text_box span { display: block; margin-bottom: 20px; color: #fff; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; }
-.visual_content .text_box p { color: #fff; font-size: 100px; font-weight: 300; line-height: 1.1; }
-.visual_content .text_box p :deep(strong) { color: #fff; font-size: 100px; font-weight: 800; }
+/* sec_brand_visual */
+.sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
+.sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden; }
+.bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px); }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url("@/assets/images/dummy/gsrbr020101_main.png"); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out; }
+.bg_wrap.active > .bg { transform: scale(1); }
+.bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s; }
+.bg_wrap > .bg::before { background-color: #00000066; z-index: 2; }
+.bg_wrap > .bg::after { background: linear-gradient(180deg, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .3) 48.27%, rgba(0, 0, 0, 0) 90.33%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1; }
+.bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible; }
+.bg_wrap > .visual_inner { width: 100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
+.bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center; }
+.logo_wrap { margin: 0 auto; }
+.logo_wrap > img { width: auto; margin: 0 auto; display: block }
+.txt_area > p { width: 100%; margin-bottom: 48px; overflow: hidden; }
+.txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block; }
+.txt_area > p > span :deep(strong) { color: #fff; font-weight: 800; }
+.sec_brand_about { padding: 200px 20px; background-color: #f8f8f8; }
+.sec_brand_about > .about_inner { max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+.sec_brand_about > .about_inner > .about_txt > p { overflow: hidden; }
+.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block; }
 
-/* 하단 섹션들 */
-.brand_intro_section {width: 100%; padding: 200px 0; background-color: #f8f8f8; position: relative; display: block; }
-.history_text { color: #161616; font-size: 28px; font-weight: 700; line-height: 1.6; }
-.history_text + .history_text { margin-top: 40px; }
-
-/* Brand Intro */
-.brand_intro_section { width: 100%; padding: 200px 0; background-color: #f8f8f8; position: relative; display: block; }
-.history_text { color: #161616; font-size: 28px; font-weight: 700; line-height: 1.6; }
-.history_text + .history_text { margin-top: 40px; }
-
-/* Brand Value & Accordion */
+/* Brand Value */
 .brand_value_section { width: 100%; padding: 200px 0; position: relative; display: block; }
 .value_title { width: 100%; margin-bottom: 64px; display: flex; align-items: flex-end; justify-content: space-between; }
 .title_text { color: #161616; font-size: 48px; font-weight: 700; line-height: 1.3; }
@@ -691,20 +799,20 @@ export default {
 .btn_sns { width: 56px; height: 56px; background-color: #f8f8f8; border: 1px solid #e5e5e9; border-radius: 99px; display: flex; align-items: center; justify-content: center; }
 */
 
-.accordion_list { width: 100%; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; position: relative; }
-.accordion_item { width: 100%; border-bottom: 1px solid #e5e5e3; position: relative; }
-.accordion_item:last-child { border-bottom: 0; }
-.accordion_header { width: 100%; padding: 32px 64px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border: 0; background: none; }
-.accordion_header:after { content: ''; width: 24px; height: 24px; background:url('@/assets/images/common/icon_set_24.png') -592px -15px no-repeat; }
-.accordion_item.active .accordion_header { padding:64px 64px 16px; }
-.accordion_item.active .accordion_header:after { display: none; }
-.header_text { color: #161616; font-size: 28px; font-weight: 700; }
-
-.accordion_body { width: 100%; padding: 0 64px 110px; position: relative; }
-.body_content { display: flex; justify-content: space-between; gap: 40px; }
-.desc_text { flex: 1; color: #67676f; font-size: 20px; line-height: 1.6; }
-.content_img { width: 400px; height: 260px; border-radius: 12px; overflow: hidden; position: absolute; top: -64px; right: 64px; }
-.content_img img { width: 100%; height: 100%; object-fit: cover; }
+.brand_acc { margin: 0; padding: 0; background-color: #f8f8f8; border-radius: 12px; list-style: none; overflow: hidden; }
+.acc_item { border-bottom: 1px solid #e5e5e9; }
+.acc_item:last-child { border-bottom: 0; }
+.acc_inner { padding: 40px 64px; display: grid; grid-template-columns: 1fr 0; align-items: start; }
+.acc_item.is_open .acc_inner { grid-template-columns: 1fr 1fr; }
+.acc_body { min-width: 0; }
+.acc_btn { width: 100%; padding: 0; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; background: transparent; border: none; cursor: pointer; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.acc_btn:focus-visible { outline: 2px solid #111; outline-offset: 2px; }
+.acc_btn::after { content: ""; width: 20px; height: 20px; flex-shrink: 0; background: url('@/assets/images/common/icon_set_20.png') -539px -24px no-repeat; background-size: auto 159px; display: block; }
+.acc_item.is_open .acc_btn::after { opacity: 0; }
+.acc_desc_wrap { overflow: hidden; height: 0; box-sizing: border-box; transition: height 0.35s ease; }
+.acc_desc { padding-top: 16px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.acc_img_wrap { overflow: hidden; height: 0; transition: height 0.65s ease; }
+.acc_img_wrap > img { width: auto; margin-left: auto; border-radius: 12px; display: block; object-fit: cover; }
 
 /* Origin Section & Tabs */
 .origin_section { width: 100%; padding: 0 0 200px; position: relative; display: block; }
@@ -824,17 +932,11 @@ export default {
 
 
 @media screen and (max-width: 1024px) {
-    .visual_img { height: 600px; }
-    .text_box span { font-size: 24px; }
-    .visual_content .text_box p { font-size: 70px; }
-    .history_text { font-size: 22px; }
     .value_title { flex-direction: column; align-items: flex-start; gap: 30px; }
     .title_text { font-size: 32px; }
-    .accordion_header { padding: 24px 30px; }
-    .header_text { font-size: 20px; }
-    .accordion_body { padding: 0 30px 30px; }
-    .body_content { flex-direction: column; gap: 20px; }
-    .content_img { position: static; width: 100%; height: auto; margin-top: 20px; }
+    .acc_inner { padding: 28px 40px; }
+    .acc_item.is_open .acc_inner { grid-template-columns: 1fr 280px; column-gap: 28px; }
+    .acc_img_wrap > img { width: 100%; }
     .origin_list_box {width:100%;}
     .origin_intro .title { font-size: 32px; }
     .origin_intro .text_box p { font-size: 1.8rem; }
@@ -856,21 +958,23 @@ export default {
 }
 
 /* 모바일 반응형 (767px 이하) */
+@media screen and (max-width: 768px) {
+    .sec_brand_visual { height: 100vh; }
+    .sticky { height: 100vh; top: 0; }
+    .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("@/assets/images/dummy/gsrbr020101_main_mo.png"); background-position: center; }
+    .txt_area > p > span { font-size: 3.2rem; }
+    .sec_brand_about { padding: 100px 20px; }
+    .sec_brand_about > .about_inner > .about_txt > p > span { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
+}
+
 @media screen and (max-width: 767px) {
-    .visual_img { height: 400px; }
-    .text_box span { font-size: 1.8rem; }
-    .visual_content .text_box p, .visual_content .text_box p :deep(strong) { font-size: 48px; }
-    .visual_img { height: 100%; }
-    .brand_intro_section { padding: 100px 0; }
-    .history_text { font-size: 1.8rem; }
-    .history_text :deep(br) {display:none;}
     .brand_value_section { padding: 100px 0; }
     .title_text { font-size: 24px; }
-    .accordion_header, .accordion_item.active .accordion_header { padding: 24px 80px 24px 24px; position:relative; }
-    .header_text { font-size: 1.8rem; text-align:left;}
-    .accordion_body { padding: 0 20px 20px; }
-    .desc_text { font-size: 16px; }
-    :deep(.desc_text) br:first-of-type, :deep(.desc_text) br:last-of-type {display:none !important;}
+    .acc_btn { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .acc_inner { padding: 24px; }
+    .acc_desc { font-size: 1.6rem; line-height: 1.5; }
+    .acc_item.is_open .acc_inner { grid-template-columns: 1fr; column-gap: 0; row-gap: 40px; }
+    :deep(.acc_desc) br:first-of-type, :deep(.acc_desc) br:last-of-type { display: none !important; }
     .origin_group { padding-top:40px;}
     .origin_lnb {display:none;}
     .origin_intro {padding-top:20px;}
@@ -907,11 +1011,9 @@ export default {
     .mou_logo {justify-content:flex-start;}
     .mou_logo img {width:100%;}
     .mou_logo.fipa_logo {justify-content:center;}
-    .visual_content {display:none;}
     .btn_link {font-size:14px;}
     .btn_sns { width:40px; height:40px;}
     .btn_link::before {width:20px; height:20px;} 
-    .accordion_header:after {width:40px; height:40px; position:absolute; top:24px; right:24px;}
     .origin_tabs_2depth {margin:0px;}
     .bottom_btns {display:none;}
     .bottom_btns + .btn_big.border {margin-top:80px; display:flex !important; justify-content: center;}
