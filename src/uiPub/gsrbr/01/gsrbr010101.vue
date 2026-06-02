@@ -1178,7 +1178,7 @@
                 <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
                     <div v-show="deliveryActiveTab === i" :class="['service_panel', `delivery_panel_${i+1}`]">
                         <figure v-if="tab.hero" class="brand_panel_bg">
-                            <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                            <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" /> //26.06.02 Edit 정다희
                         </figure>
                         <header v-if="tab.title" class="brand_panel_title">
                             <h2 v-html="tab.title"></h2>
@@ -2663,7 +2663,7 @@ const langData = {
                         {
                             label: "배달 픽업", //26.05.27 Edit 이종환
                             hero: imgHero10,
-                            heroMo: imgHero10Mo,
+                            heroMo: imgHero10Mo, //26.06.02 Edit 정다희
                             heroAlt: "",
                             title: "픽업 서비스",
                             desc: "쇼핑몰에서 상품주문 후, 가까운 GS25에서 물건을 찾아가세요.",
@@ -2688,7 +2688,7 @@ const langData = {
                         {
                             label:   "쇼핑몰거래",
                             hero:    imgHero11,
-                            heroMo: imgHero11Mo,
+                            heroMo: imgHero11Mo, //26.06.02 Edit 정다희
                             heroAlt: "",
                             title:   "쇼핑몰 거래 서비스",
                             desc:    "홈쇼핑 반품, 오픈마켓, 온라인 쇼핑몰 등 편리하게 이용하실 수 있는 서비스입니다.",
