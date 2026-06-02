@@ -466,7 +466,7 @@
                             <p v-if="item.answer">{{ item.answer }}</p>
                             <p v-else>{{ startupFaqDummyAnswer }}</p>
                             <div v-if="item.answerTable" class="policy_wrap">
-                                <p>* 타입별/기간별 개월 수</p>
+                                <p>{{ t.consultFormTexts.faqTypePeriodNote }}</p>
                                 <table>
                                     <colgroup>
                                         <col class="col_label" />
@@ -608,127 +608,126 @@
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th colspan="3" scope="colgroup"><strong>가맹타입</strong></th>
+                                    <th colspan="3" scope="colgroup"><strong>{{ t.consultFormTexts.compareTypeHeader }}</strong></th>
                                     <td scope="col" class="is_gs1">
                                         <strong>GS1</strong> 
-                                        <span>직접 임차하고, 수익 배분율이 가장 높아요</span>
+                                        <span>{{ t.consultFormTexts.compareGs1Desc }}</span>
                                     </td>
                                     <td scope="col" class="is_gs2">
                                         <strong>GS2</strong>
-                                        <span>본사와 임차비용 공동 부담해요</span>
+                                        <span>{{ t.consultFormTexts.compareGs2Desc }}</span>
                                     </td>
                                     <td scope="col" class="is_gs3">
                                         <strong>GS3</strong>
-                                        <span>임차비용 부담 없이 시작해요</span>
+                                        <span>{{ t.consultFormTexts.compareGs3Desc }}</span>
                                     </td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th rowspan="7" scope="rowgroup">투자 금액</th>
-                                    <th rowspan="4" scope="rowgroup">공<br />통<br />투<br />자<br />금<br />액</th>
-                                    <th scope="row">상품 준비금</th>
-                                    <td colspan="3">1,400만원</td>
+                                    <th rowspan="7" scope="rowgroup">{{ t.consultFormTexts.compareInvestAmount }}</th>
+                                    <th rowspan="4" scope="rowgroup" v-html="t.consultFormTexts.compareCommonInvestAmount"></th>
+                                    <th scope="row">{{ t.consultFormTexts.compareProductPrep }}</th>
+                                    <td colspan="3">{{ t.consultFormTexts.compareAmount1400 }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">소모품 준비금</th>
-                                    <td colspan="3">100만원</td>                        
+                                    <th scope="row">{{ t.consultFormTexts.compareSupplyPrep }}</th>
+                                    <td colspan="3">{{ t.consultFormTexts.compareAmount100 }}</td>                        
                                 </tr>
                                 <tr>
-                                    <th scope="row">가맹비</th>
-                                    <td colspan="3">770만원(VAT포함)</td>
+                                    <th scope="row">{{ t.consultFormTexts.compareFranchiseFee }}</th>
+                                    <td colspan="3">{{ t.consultFormTexts.compareAmount770Vat }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><strong>상품 + 소모품 + 가맹비</strong></th>
-                                    <td colspan="3"><strong>2,270만원</strong></td>
+                                    <th scope="row"><strong>{{ t.consultFormTexts.compareSubtotal }}</strong></th>
+                                    <td colspan="3"><strong>{{ t.consultFormTexts.compareAmount2270 }}</strong></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="2">점포 임차비용</th>
-                                    <td>경영주 투자</td>
-                                    <td>본부 투자</td>
-                                    <td>본부 투자</td>
+                                    <th scope="row" colspan="2">{{ t.consultFormTexts.compareRentCost }}</th>
+                                    <td>{{ t.consultFormTexts.compareOwnerInvest }}</td>
+                                    <td>{{ t.consultFormTexts.compareHeadInvest }}</td>
+                                    <td>{{ t.consultFormTexts.compareHeadInvest }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="2">본부 보증금</th>
+                                    <th scope="row" colspan="2">{{ t.consultFormTexts.compareHeadDeposit }}</th>
                                     <td>-</td>
-                                    <td><span>전대보증금</span>최소 3,000만원</td>
-                                    <td><span>예치보증금</span>최소 3,000만원</td>
+                                    <td><span>{{ t.consultFormTexts.compareSubleaseDeposit }}</span>{{ t.consultFormTexts.compareMin3000 }}</td>
+                                    <td><span>{{ t.consultFormTexts.compareEscrowDeposit }}</span>{{ t.consultFormTexts.compareMin3000 }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="2">시설/인테리어</th>
-                                    <td>본부 지원<br /><span>(※ 수익추구 특약: 경영주 투자)</span></td>
-                                    <td>본부 지원</td>
-                                    <td>본부 지원</td>
+                                    <th scope="row" colspan="2">{{ t.consultFormTexts.compareFacilityInterior }}</th>
+                                    <td>{{ t.consultFormTexts.compareHeadSupport }}<br /><span>{{ t.consultFormTexts.compareSpecialNote }}</span></td>
+                                    <td>{{ t.consultFormTexts.compareHeadSupport }}</td>
+                                    <td>{{ t.consultFormTexts.compareHeadSupport }}</td>
                                 </tr>
                                 <tr class="row_total">
-                                    <th colspan="3" scope="row"><strong>총 투자금액</strong></th>
-                                    <td><strong class="txt_blue">점포 임차비용 + 공통 투자비 2,270만원</strong></td>
-                                    <td><strong class="txt_blue">최소 5,270만원<br /></strong><span>(전대보증금 + 공통 투자비)</span></td>
-                                    <td><strong class="txt_blue">최소 5,270만원<br /></strong><span>(예치보증금 + 공통 투자비)</span></td>
+                                    <th colspan="3" scope="row"><strong>{{ t.consultFormTexts.compareTotalInvest }}</strong></th>
+                                    <td><strong class="txt_blue">{{ t.consultFormTexts.compareTotalGs1 }}</strong></td>
+                                    <td><strong class="txt_blue">{{ t.consultFormTexts.compareTotalGs2Main }}<br /></strong><span>{{ t.consultFormTexts.compareTotalGs2Sub }}</span></td>
+                                    <td><strong class="txt_blue">{{ t.consultFormTexts.compareTotalGs3Main }}<br /></strong><span>{{ t.consultFormTexts.compareTotalGs3Sub }}</span></td>
                                 </tr>
                                 <tr>
-                                    <th rowspan="8" scope="rowgroup">계약<br class="m_br">조건</th>
-                                    <th scope="row" colspan="2"><strong>최종 경영주 수익 배분율</strong></th>
-                                    <td><strong class="txt_blue txt_emphasis">최대 71%</strong></td>
-                                    <td><strong class="txt_blue txt_emphasis">최대 65%</strong></td>
-                                    <td><strong class="txt_blue txt_emphasis">최대 46%</strong></td>
+                                    <th rowspan="8" scope="rowgroup">{{ t.consultFormTexts.compareContract }}<br class="m_br">{{ t.consultFormTexts.compareCondition }}</th>
+                                    <th scope="row" colspan="2"><strong>{{ t.consultFormTexts.compareFinalProfitShare }}</strong></th>
+                                    <td><strong class="txt_blue txt_emphasis">{{ t.consultFormTexts.compareMax71 }}</strong></td>
+                                    <td><strong class="txt_blue txt_emphasis">{{ t.consultFormTexts.compareMax65 }}</strong></td>
+                                    <td><strong class="txt_blue txt_emphasis">{{ t.consultFormTexts.compareMax46 }}</strong></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="2">경영주 수익 배분율</th>
+                                    <th scope="row" colspan="2">{{ t.consultFormTexts.compareProfitShare }}</th>
                                     <td>66%</td>
                                     <td>60%</td>
                                     <td>41%</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="2">24시간 영업장려금</th>
+                                    <th scope="row" colspan="2">{{ t.consultFormTexts.compare24hSupport }}</th>
                                     <td>5%</td>
                                     <td>5%</td>
                                     <td>5%</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="2">계약기간</th>
-                                    <td>5년</td>
-                                    <td>4년</td>
-                                    <td>4년</td>
+                                    <th scope="row" colspan="2">{{ t.consultFormTexts.compareContractPeriod }}</th>
+                                    <td>{{ t.consultFormTexts.comparePeriod5y }}</td>
+                                    <td>{{ t.consultFormTexts.comparePeriod4y }}</td>
+                                    <td>{{ t.consultFormTexts.comparePeriod4y }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="2">담보 설정</th>
-                                    <td>5,000만원</td>
-                                    <td>2,000만원</td>
-                                    <td>2,000만원</td>
+                                    <th scope="row" colspan="2">{{ t.consultFormTexts.compareCollateral }}</th>
+                                    <td>{{ t.consultFormTexts.compareCollateral5000 }}</td>
+                                    <td>{{ t.consultFormTexts.compareCollateral2000 }}</td>
+                                    <td>{{ t.consultFormTexts.compareCollateral2000 }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="2">각종지원제도</th>
-                                    <td colspan="3">상생 인센티브 / 상품 판매·발주 장려금 / 미오출 보상금</td>
+                                    <th scope="row" colspan="2">{{ t.consultFormTexts.compareSupportSystem }}</th>
+                                    <td colspan="3">{{ t.consultFormTexts.compareSupportSystemDesc }}</td>
                                 </tr>
                                 <tr>
-                                    <th colspan="2" scope="row">수익추구특약</th>
-                                    <td><strong>최대 81%</strong><br /><span>(※ GS1 수익배분율 71% + 특약 10%)</span></td>
+                                    <th colspan="2" scope="row">{{ t.consultFormTexts.compareProfitSpecial }}</th>
+                                    <td><strong>{{ t.consultFormTexts.compareMax81 }}</strong><br /><span>{{ t.consultFormTexts.compareSpecialPercentNote }}</span></td>
                                     <td>-</td>
                                     <td>-</td>
                                 </tr>
                                 <tr>
-                                    <th colspan="2" scope="row">안심운영지원 기준금액<span>(지원기간: 1년)</span></th>
-                                    <td>24시간 운영: 月 최대 800만원<br />18시간 운영: 月 최대 550만원</td>
-                                    <td>24시간 운영: 月 최대 750만원<br />18시간 운영: 月 최대 500만원</td>
-                                    <td>24시간 운영: 月 최대 700만원<br />18시간 운영: 月 최대 450만원</td>
+                                    <th colspan="2" scope="row">{{ t.consultFormTexts.compareSafeOpAmount }}<span>{{ t.consultFormTexts.compareSupportPeriod }}</span></th>
+                                    <td v-html="t.consultFormTexts.compareSafeOpGs1"></td>
+                                    <td v-html="t.consultFormTexts.compareSafeOpGs2"></td>
+                                    <td v-html="t.consultFormTexts.compareSafeOpGs3"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <ul class="list_note">
                         <li>
-                            <p>* GS1 Type 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년</p>
+                            <p>{{ t.consultFormTexts.compareNote1 }}</p>
                         </li>
                         <li>
-                            <p>* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다</p>
+                            <p>{{ t.consultFormTexts.compareNote2 }}</p>
                         </li>
                         <li>
-                            <p class="txt_link">* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href="#">신선강화점 자세히 알아보기</a>)</p>
+                            <p class="txt_link" v-html="t.consultFormTexts.compareNote3"></p>
                         </li>
                         <li>
-                            <p class="txt_link">* 안심운영제도란? 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우,<br/>
-                                경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. (<a href="#">안심운영제도 자세히 알아보기</a>)</p>
+                            <p class="txt_link" v-html="t.consultFormTexts.compareNote4"></p>
                         </li>
                     </ul>
                 </section>
@@ -777,7 +776,7 @@
                         </ul>
                         <ul class="list_note">
                             <li>
-                                <p>* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.</p>
+                                <p>{{ t.consultFormTexts.benefitPolicyNote }}</p>
                             </li>
                         </ul>
                     </section>
@@ -1003,14 +1002,14 @@
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>지역</th>
-                                        <th>타입</th>
-                                        <th>유형</th>
-                                        <th>투자비</th>
-                                        <th>해시태그</th>
-                                        <th>면적</th>
-                                        <th>등록일</th>
-                                        <th>상세</th>
+                                        <th>{{ t.consultFormTexts.storeTableRegion }}</th>
+                                        <th>{{ t.consultFormTexts.storeTableType }}</th>
+                                        <th>{{ t.consultFormTexts.storeTableCategory }}</th>
+                                        <th>{{ t.consultFormTexts.storeTableInvestment }}</th>
+                                        <th>{{ t.consultFormTexts.storeTableHashtag }}</th>
+                                        <th>{{ t.consultFormTexts.storeTableArea }}</th>
+                                        <th>{{ t.consultFormTexts.storeTableDate }}</th>
+                                        <th>{{ t.consultFormTexts.storeTableDetail }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1062,7 +1061,7 @@
                                             <div class="accordion_badges">
                                                 <span v-for="t in item.type" :key="t" class="type_badge" :class="getBadgeClass(t)">{{ t }}</span>
                                                 <span class="type_badge badge_gray">{{ item.form }}</span>
-                                                <span v-if="item.isYouth" class="type_badge badge_gray">청년</span>
+                                                <span v-if="item.isYouth" class="type_badge badge_gray">{{ t.consultFormTexts.youthBadge }}</span>
                                             </div>
                                         </div>
                                     </template>
@@ -1106,10 +1105,10 @@
             <!-- //추천 점포 찾기 -->
 
             <!-- 상담 및 신청 -->
-            <div class="panel" v-show="activeD1 === 3 && activeD2 === 0" aria-label="창업 상담 신청">
+            <div class="panel" v-show="activeD1 === 3 && activeD2 === 0" :aria-label="t.consultFormTexts.startupPanelAria">
                 <section class="sec_consult_startup">
-                    <div class="consent_box" aria-label="개인정보 수집·이용 동의">
-                        <h3>개인정보 수집·이용 동의</h3>
+                    <div class="consent_box" :aria-label="t.consultFormTexts.privacyConsentTitle">
+                        <h3>{{ t.consultFormTexts.privacyConsentTitle }}</h3>
                         <ul v-if="t.startupConsentItems.length" class="consent_list">
                             <li v-for="(item, idx) in t.startupConsentItems" :key="idx">
                                 <p v-html="item"></p>
@@ -1117,9 +1116,9 @@
                         </ul>
 
                         <div class="consent_notice_area">
-                            <p>고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 상담 글 작성이 불가능합니다.</p>
+                            <p>{{ t.consultFormTexts.startupConsentNotice }}</p>
                             <div class="consent_radio">
-                                <Inputs type="checkbox" v-model="startupConsentAgreed" text="동의합니다." />
+                                <Inputs type="checkbox" v-model="startupConsentAgreed" :text="t.consultFormTexts.agreeText" />
                             </div>
                         </div>
                     </div>
@@ -1128,13 +1127,13 @@
                         <div class="form_body">
                             <div class="form_row col_02">
                                 <div class="col_item">
-                                    <div class="form_label">이름 <span class="form_required">(필수 입력)</span></div>
+                                    <div class="form_label">{{ t.consultFormTexts.nameLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                     <div class="form_field">
                                         <Inputs type="text" v-model="startupConsultForm.name" />
                                     </div>
                                 </div>
                                 <div class="col_item">
-                                    <div class="form_label">연락처 <span class="form_required">(필수 입력)</span></div>
+                                    <div class="form_label">{{ t.consultFormTexts.contactLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                     <div class="form_field form_field_phone">
                                         <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
                                         <span class="form_sep">-</span>
@@ -1146,16 +1145,16 @@
                             
                             </div> 
                             <div class="form_row">
-                                <div class="form_label">생년월일 <span class="form_required">(필수 입력)</span></div>
+                                <div class="form_label">{{ t.consultFormTexts.birthLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                 <div class="form_field form_field_birth">
-                                    <SelectBox :options="startupBirthYearOptions" v-model="startupConsultForm.birthYear" initMsg="년도" />
-                                    <SelectBox :options="startupBirthMonthOptions" v-model="startupConsultForm.birthMonth" initMsg="월" />
-                                    <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" initMsg="일" />
+                                    <SelectBox :options="startupBirthYearOptions" v-model="startupConsultForm.birthYear" :initMsg="t.consultFormTexts.yearInit" />
+                                    <SelectBox :options="startupBirthMonthOptions" v-model="startupConsultForm.birthMonth" :initMsg="t.consultFormTexts.monthInit" />
+                                    <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" :initMsg="t.consultFormTexts.dayInit" />
                                 </div>
                             </div>
                             <div class="form_row col_02">
                                 <div class="col_item">
-                                    <div class="form_label">점포 소유 및 임차 <span class="form_required">(필수 입력)</span></div>
+                                    <div class="form_label">{{ t.consultFormTexts.storeOwnershipLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                     <div class="form_field form_field_radio">
                                         <Inputs
                                             v-for="opt in startupStoreOwnershipOptions"
@@ -1169,7 +1168,7 @@
                                     </div>
                                 </div>
                                 <div class="col_item">
-                                    <div class="form_label">투자가능금액 (만원)</div>
+                                    <div class="form_label">{{ t.consultFormTexts.investAmountLabel }}</div>
                                     <div class="form_field">
                                         <Inputs type="text" v-model="startupConsultForm.investAmount" />
                                     </div>
@@ -1177,16 +1176,16 @@
                             
                             </div>
                             <div class="form_row">
-                                <div class="form_label">오픈 희망 시기</div>
+                                <div class="form_label">{{ t.consultFormTexts.openScheduleLabel }}</div>
                                 <div class="form_field form_field_open">
                                     <Inputs type="text" v-model="startupConsultForm.openYear" />
-                                    <span class="form_unit">년</span>
+                                    <span class="form_unit">{{ t.consultFormTexts.yearUnit }}</span>
                                     <Inputs type="text" v-model="startupConsultForm.openMonth" />
-                                    <span class="form_unit">월</span>
+                                    <span class="form_unit">{{ t.consultFormTexts.monthUnit }}</span>
                                 </div>
                             </div>
                             <div class="form_row form_row_radio">
-                                <div class="form_label">편의점 근무경험</div>
+                                <div class="form_label">{{ t.consultFormTexts.cvsExperienceLabel }}</div>
                                 <div class="form_field form_field_radio form_field_checkbox_card">
                                     <Inputs
                                         v-for="opt in startupCvsExperienceOptions"
@@ -1201,40 +1200,40 @@
                                 </div>
                             </div>
                             <div class="form_row form_row_textarea">
-                                <div class="form_label">문의 내용</div>
+                                <div class="form_label">{{ t.consultFormTexts.inquiryLabel }}</div>
                                 <div class="form_field">
                                     <Textarea
                                         v-model="startupConsultForm.inquiry"
-                                        placeholder="창업 관련 궁금한 사항을 입력해주세요."
+                                        :placeholder="t.consultFormTexts.startupInquiryPlaceholder"
                                         :rows="6"
                                     />
                                 </div>
                             </div>
                             <div class="form_row form_row_region">
                                 <div class="form_label">
-                                    <span>관심 지역 <span class="form_required">(필수 입력)</span></span>
-                                    <p class="form_label_note">지역 선택 시 담당자가 배정되며, 담당자별로 예약 가능 시간이 다릅니다.</p>
+                                    <span>{{ t.consultFormTexts.interestRegionLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></span>
+                                    <p class="form_label_note">{{ t.consultFormTexts.interestRegionNote }}</p>
                                 </div>
                                 <div class="form_field form_field_region">
-                                    <SelectBox :options="startupRegionSidoOptions" v-model="startupConsultForm.regionSido" initMsg="시/도 선택" @update:modelValue="startupConsultForm.regionSigungu = ''" />
-                                    <SelectBox :options="startupRegionSigunguOptions" v-model="startupConsultForm.regionSigungu" initMsg="구/시 선택" :disabled="!startupConsultForm.regionSido" />
+                                    <SelectBox :options="startupRegionSidoOptions" v-model="startupConsultForm.regionSido" :initMsg="t.consultFormTexts.sidoInit" @update:modelValue="startupConsultForm.regionSigungu = ''" />
+                                    <SelectBox :options="startupRegionSigunguOptions" v-model="startupConsultForm.regionSigungu" :initMsg="t.consultFormTexts.sigunguInit" :disabled="!startupConsultForm.regionSido" />
                                 </div>
                             </div>
                             <div class="form_row form_row_calendar">
-                                <div class="form_label">상담 날짜 선택 <span class="form_required">(필수 입력)</span></div>
+                                <div class="form_label">{{ t.consultFormTexts.consultDateLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                 <div class="form_field form_field_calendar">
-                                    <Inputs type="text" v-model="startupConsultForm.consultDate" :is-readonly="true" placeholder="먼저 관심 지역을 선택해주세요." />
+                                    <Inputs type="text" v-model="startupConsultForm.consultDate" :is-readonly="true" :placeholder="t.consultFormTexts.selectRegionFirstPlaceholder" />
                                 </div>
                             </div>
                             <div class="form_row form_row_calendar">
-                                <div class="form_label">상담 시간 선택 <span class="form_required">(필수 입력)</span></div>
+                                <div class="form_label">{{ t.consultFormTexts.consultTimeLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                 <div class="form_field form_field_calendar">
-                                    <Inputs type="text" v-model="startupConsultForm.consultTime" :is-readonly="true" placeholder="먼저 관심 지역을 선택해주세요." />
+                                    <Inputs type="text" v-model="startupConsultForm.consultTime" :is-readonly="true" :placeholder="t.consultFormTexts.selectRegionFirstPlaceholder" />
                                 </div>
                             </div>
-                            <article class="manager_card" aria-label="담당자 정보">
+                            <article class="manager_card" :aria-label="t.consultFormTexts.managerInfoAria">
                                 <figure class="consult_manager_photo" aria-hidden="true">
-                                    <img src="@/assets/images/sub/gsrst02010101/img_gs25fr0401_01.png" :alt="담당자">
+                                    <img src="@/assets/images/sub/gsrst02010101/img_gs25fr0401_01.png" :alt="t.consultFormTexts.managerAlt">
                                 </figure>
                                 <div class="manager_body">
                                     <p class="manager_name">{{ startupConsultManager.name }}</p>
@@ -1248,30 +1247,30 @@
                                 </div>
                             </article>
                             <div class="form_row form_row_calendar">
-                                <div class="form_label">상담 날짜 선택 <span class="form_required">(필수 입력)</span></div>
+                                <div class="form_label">{{ t.consultFormTexts.consultDateLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                 <ConsultCalendar v-model="startupConsultForm.consultDate" />
                             </div>
                             <div class="form_row form_row_calendar">
-                                <div class="form_label">상담 시간 선택 <span class="form_required">(필수 입력)</span></div>
+                                <div class="form_label">{{ t.consultFormTexts.consultTimeLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                 <ConsultTimePicker v-model="startupConsultForm.consultTime" />
                             </div>
                         </div>
                         <div class="button_area">
-                            <Buttons btn-class="btn_xl primary">상담 예약 신청하기</Buttons>
+                            <Buttons btn-class="btn_xl primary">{{ t.consultFormTexts.reserveButton }}</Buttons>
                         </div>
                     </div>
                   
                 </section>
             </div>
-            <div class="panel" v-show="activeD1 === 3 && activeD2 === 1" aria-label="창업 설명회 신청">
+            <div class="panel" v-show="activeD1 === 3 && activeD2 === 1" :aria-label="t.consultFormTexts.seminarPanelAria">
                 <section class="sec_consult_seminar">
                     <div class="consult_search_box">
-                        <strong class="ac">GS25 창업설명회는 정기설명회 및 컨설턴트 상담으로 운영되며, 각 지역 사무소에서 진행됩니다. <br />지역별 창업설명회 일정이 상이하므로 확인 후 신청해 주세요.</strong>
+                        <strong class="ac" v-html="t.consultFormTexts.seminarGuide"></strong>
                         <div>
-                            <p>창업 설명회 개설 지역을 선택해 주세요.</p>
+                            <p>{{ t.consultFormTexts.seminarSelectRegionGuide }}</p>
                             <div class="flex">
-                                <SelectBox :options="consultEntryRegionOptions" v-model="startupConsultForm.seminarEntryRegion" initMsg="지역선택" @update:modelValue="startupConsultForm.seminarEntryConsultant = ''" />
-                                <Buttons btn-class="btn_big primary">조회</Buttons> 
+                                <SelectBox :options="consultEntryRegionOptions" v-model="startupConsultForm.seminarEntryRegion" :initMsg="t.consultFormTexts.regionSelectInit" @update:modelValue="startupConsultForm.seminarEntryConsultant = ''" />
+                                <Buttons btn-class="btn_big primary">{{ t.consultFormTexts.searchButton }}</Buttons>
                             </div>
                         </div>
                     </div>
@@ -1295,7 +1294,7 @@
                                                 <td scope="row">{{ row.label }}</td>
                                                 <td>
                                                     <p>{{ row.value }}</p>
-                                                    <Buttons v-if="row.applyButton" btn-class="btn_mid fill primary">신청</Buttons>
+                                                    <Buttons v-if="row.applyButton" btn-class="btn_mid fill primary">{{ t.consultFormTexts.applyButton }}</Buttons>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1304,17 +1303,17 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="seminar_region_pick" aria-label="지역 선택">
+                    <div class="seminar_region_pick" :aria-label="t.consultFormTexts.regionSelectAria">
                         <div ref="seminarWrapRef" class="seminar_wrap">
-                            <article class="manager_card type_02" aria-label="담당자 정보">
+                            <article class="manager_card type_02" :aria-label="t.consultFormTexts.managerInfoAria">
                                 <div class="manager_header">
-                                    <p>선택한 설명회</p>
-                                    <strong>부산 영남권 · 2/19(목) 15:00</strong>
+                                    <p>{{ t.consultFormTexts.selectedSeminarLabel }}</p>
+                                    <strong>{{ t.consultFormTexts.selectedSeminarValue }}</strong>
                                 </div>
-                                <button type="button" class="btn_close" aria-label="닫기">닫기</button>
+                                <button type="button" class="btn_close" :aria-label="t.consultFormTexts.closeButton">{{ t.consultFormTexts.closeButton }}</button>
                             </article>
-                            <div class="consent_box" aria-label="개인정보 수집·이용 동의">
-                                <h3>개인정보 수집·이용 동의</h3>
+                            <div class="consent_box" :aria-label="t.consultFormTexts.privacyConsentTitle">
+                                <h3>{{ t.consultFormTexts.privacyConsentTitle }}</h3>
                                 <ul v-if="seminarConsentItems.length" class="consent_list">
                                     <li v-for="(item, idx) in seminarConsentItems" :key="idx">
                                         <p v-html="item"></p>
@@ -1322,9 +1321,9 @@
                                 </ul>
 
                                 <div class="consent_notice_area">
-                                    <p>동의하지 않으실 경우 상담 글 작성이 불가능합니다.</p>
+                                    <p>{{ t.consultFormTexts.seminarConsentNotice }}</p>
                                     <div class="consent_radio">
-                                        <Inputs type="checkbox" v-model="startupConsentAgreed" text="동의합니다." />
+                                        <Inputs type="checkbox" v-model="startupConsentAgreed" :text="t.consultFormTexts.agreeText" />
                                     </div>
                                 </div>
                             </div>
@@ -1332,13 +1331,13 @@
                                 <div class="form_body">
                                     <div class="form_row col_02">
                                         <div class="col_item">
-                                            <div class="form_label">이름 <span class="form_required">(필수 입력)</span></div>
+                                            <div class="form_label">{{ t.consultFormTexts.nameLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                             <div class="form_field">
                                                 <Inputs type="text" v-model="startupConsultForm.name" />
                                             </div>
                                         </div>
                                         <div class="col_item">
-                                            <div class="form_label">연락처 <span class="form_required">(필수 입력)</span></div>
+                                            <div class="form_label">{{ t.consultFormTexts.contactLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                             <div class="form_field form_field_phone">
                                                 <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
                                                 <span class="form_sep">-</span>
@@ -1350,16 +1349,16 @@
                                     
                                     </div> 
                                     <div class="form_row">
-                                        <div class="form_label">생년월일 <span class="form_required">(필수 입력)</span></div>
+                                        <div class="form_label">{{ t.consultFormTexts.birthLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                         <div class="form_field form_field_birth">
-                                            <SelectBox :options="startupBirthYearOptions" v-model="startupConsultForm.birthYear" initMsg="년도" />
-                                            <SelectBox :options="startupBirthMonthOptions" v-model="startupConsultForm.birthMonth" initMsg="월" />
-                                            <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" initMsg="일" />
+                                            <SelectBox :options="startupBirthYearOptions" v-model="startupConsultForm.birthYear" :initMsg="t.consultFormTexts.yearInit" />
+                                            <SelectBox :options="startupBirthMonthOptions" v-model="startupConsultForm.birthMonth" :initMsg="t.consultFormTexts.monthInit" />
+                                            <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" :initMsg="t.consultFormTexts.dayInit" />
                                         </div>
                                     </div>
                                     <div class="form_row col_02">
                                         <div class="col_item">
-                                            <div class="form_label">점포 소유 및 임차 <span class="form_required">(필수 입력)</span></div>
+                                            <div class="form_label">{{ t.consultFormTexts.storeOwnershipLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
                                             <div class="form_field form_field_radio">
                                                 <Inputs
                                                     v-for="opt in startupStoreOwnershipOptions"
@@ -1373,7 +1372,7 @@
                                             </div>
                                         </div>
                                         <div class="col_item">
-                                            <div class="form_label">투자가능금액 (만원)</div>
+                                            <div class="form_label">{{ t.consultFormTexts.investAmountLabel }}</div>
                                             <div class="form_field">
                                                 <Inputs type="text" v-model="startupConsultForm.investAmount" />
                                             </div>
@@ -1381,16 +1380,16 @@
                                     
                                     </div>
                                     <div class="form_row">
-                                        <div class="form_label">오픈 희망 시기</div>
+                                        <div class="form_label">{{ t.consultFormTexts.openScheduleLabel }}</div>
                                         <div class="form_field form_field_open">
                                             <Inputs type="text" v-model="startupConsultForm.openYear" />
-                                            <span class="form_unit">년</span>
+                                            <span class="form_unit">{{ t.consultFormTexts.yearUnit }}</span>
                                             <Inputs type="text" v-model="startupConsultForm.openMonth" />
-                                            <span class="form_unit">월</span>
+                                            <span class="form_unit">{{ t.consultFormTexts.monthUnit }}</span>
                                         </div>
                                     </div>
                                     <div class="form_row form_row_radio">
-                                        <div class="form_label">편의점 근무경험</div>
+                                        <div class="form_label">{{ t.consultFormTexts.cvsExperienceLabel }}</div>
                                         <div class="form_field form_field_radio form_field_checkbox_card">
                                             <Inputs
                                                 v-for="opt in startupCvsExperienceOptions"
@@ -1405,42 +1404,42 @@
                                         </div>
                                     </div>
                                     <div class="form_row form_row_textarea">
-                                        <div class="form_label">문의 내용</div>
+                                        <div class="form_label">{{ t.consultFormTexts.inquiryLabel }}</div>
                                         <div class="form_field">
                                             <Textarea
                                                 v-model="startupConsultForm.inquiry"
-                                                placeholder="창업 관련 궁금한 사항을 입력해주세요."
+                                                :placeholder="t.consultFormTexts.startupInquiryPlaceholder"
                                                 :rows="6"
                                             />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="button_area">
-                                    <Buttons btn-class="btn_xl primary">상담 예약 신청하기</Buttons>
+                                    <Buttons btn-class="btn_xl primary">{{ t.consultFormTexts.reserveButton }}</Buttons>
                                 </div>
                             </div>
                         </div> 
                     </div>
                 </section>
             </div>
-            <div class="panel" v-show="activeD1 === 3 && activeD2 === 2" aria-label="입점 제안/브랜드 전환 상담">
+            <div class="panel" v-show="activeD1 === 3 && activeD2 === 2" :aria-label="t.consultFormTexts.entryPanelAria">
                 <section class="sec_consult_entry">
                     <header class="section_header">
                         <h2 class="section_title ac" v-html="consultEntryPanel.title "></h2>
                         <strong class="stit">{{ consultEntryPanel.desc }}</strong>
                         <p>{{ consultEntryPanel.desc2 }}</p>
                     </header>
-                    <div class="consent_box" aria-label="개인정보 수집·이용 동의">
-                        <h3>개인정보 수집·이용 동의</h3>
+                    <div class="consent_box" :aria-label="t.consultFormTexts.privacyConsentTitle">
+                        <h3>{{ t.consultFormTexts.privacyConsentTitle }}</h3>
                         <ul v-if="counselConsentItems.length" class="consent_list">
                             <li v-for="(item, idx) in counselConsentItems" :key="idx">
                                 <p v-html="item"></p>
                             </li>
                         </ul>
                         <div class="consent_notice_area">
-                            <p>고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 입지제안 신청 글 작성이 불가능합니다.</p>
+                            <p>{{ t.consultFormTexts.entryConsentNotice }}</p>
                             <div class="consent_radio">
-                                <Inputs type="checkbox" v-model="startupConsentAgreed" text="동의합니다." />
+                                <Inputs type="checkbox" v-model="startupConsentAgreed" :text="t.consultFormTexts.agreeText" />
                             </div>
                         </div>
                     </div>
@@ -1448,46 +1447,45 @@
                         <div class="form_body">
                             <!-- 26.06.02 edit add: 정다희 -->
                             <article>
-                                <h3>지역 및 컨설턴트 선택 <span class="form_required">* 필수 입력사항</span></h3>
+                                <h3>{{ t.consultFormTexts.regionConsultantTitle }} <span class="form_required">{{ t.consultFormTexts.requiredLabel }}</span></h3>
                                 <div class="form_row">
-                                    <div class="form_label">지역/컨설턴트 <span class="form_required">*</span></div>
+                                    <div class="form_label">{{ t.consultFormTexts.regionConsultantLabel }} <span class="form_required">*</span></div>
                                     <div class="form_field form_field_consult_entry">
                                         <SelectBox
                                             :options="consultEntryRegionOptions"
                                             v-model="startupConsultForm.entryRegion"
-                                            initMsg="지역선택"
+                                            :initMsg="t.consultFormTexts.regionSelectInit"
                                             @update:modelValue="startupConsultForm.entryConsultant = ''"
                                         />
                                         <SelectBox
                                             :options="consultEntryConsultantOptions"
                                             v-model="startupConsultForm.entryConsultant"
-                                            initMsg="컨설턴트 선택"
+                                            :initMsg="t.consultFormTexts.consultantSelectInit"
                                             :disabled="!startupConsultForm.entryRegion"
                                         />
                                     </div>
-                                </div> 
-                                .form_+
+                                </div>
                             </article>
                             <article>
-                                <h3>고객정보 <span class="form_required">* 필수 입력사항</span></h3>
+                                <h3>{{ t.consultFormTexts.customerInfoTitle }} <span class="form_required">{{ t.consultFormTexts.requiredLabel }}</span></h3>
                                 <div class="form_row">
-                                    <div class="form_label">이름 <span class="form_required">*</span></div>
+                                    <div class="form_label">{{ t.consultFormTexts.nameLabel }} <span class="form_required">*</span></div>
                                     <div class="form_field form_name_field">
                                         <Inputs type="text" v-model="startupConsultForm.name" />
                                     </div>
                                 </div> 
                                 <div class="form_row">
-                                    <div class="form_label">이메일 <span class="form_required">*</span></div>
+                                    <div class="form_label">{{ t.consultFormTexts.emailLabel }} <span class="form_required">*</span></div>
                                     <div class="form_field form_field_email">
                                         <Inputs type="text" v-model="startupConsultForm.emailId" />
                                         <span class="form_sep">@</span>
-                                        <Inputs v-if="startupConsultForm.emailDomain === ''" type="text" v-model="startupConsultForm.emailDomainCustom" placeholder="직접입력" />
+                                        <Inputs v-if="startupConsultForm.emailDomain === ''" type="text" v-model="startupConsultForm.emailDomainCustom" :placeholder="t.consultFormTexts.directInputPlaceholder" />
                                         <Inputs v-else type="text" :model-value="startupConsultForm.emailDomain" :is-readonly="true" />
                                         <SelectBox :options="emailDomainOptions" v-model="startupConsultForm.emailDomain" />
                                     </div>
                                 </div>
                                 <div class="form_row">
-                                    <div class="form_label">휴대폰 <span class="form_required">*</span></div>
+                                    <div class="form_label">{{ t.consultFormTexts.mobileLabel }} <span class="form_required">*</span></div>
                                     <div class="form_field form_field_phone">
                                         <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
                                         <span class="form_sep">-</span>
@@ -1497,7 +1495,7 @@
                                     </div>    
                                 </div>
                                 <div class="form_row">
-                                    <div class="form_label">상담 형태 <span class="form_required">*</span></div>
+                                    <div class="form_label">{{ t.consultFormTexts.consultTypeLabel }} <span class="form_required">*</span></div>
                                     <div class="form_field form_field_radio">
                                         <Inputs
                                             v-for="opt in consultTypeOptions"
@@ -1512,13 +1510,13 @@
                                 </div>
                             </article>
                             <article>
-                                <h3>입점 제안/브랜드 전환 상담 <span class="form_required">* 필수 입력사항</span></h3>
+                                <h3>{{ t.consultFormTexts.entryConsultTitle }} <span class="form_required">{{ t.consultFormTexts.requiredLabel }}</span></h3>
                                 <div class="form_row cb_rs">
-                                    <div class="form_label">추천점포 소재지 <span class="form_required">*</span></div>
+                                    <div class="form_label">{{ t.consultFormTexts.recommendedStoreLocationLabel }} <span class="form_required">*</span></div>
                                     <div class="form_field cb_faddr">
                                         <div class="cb_zip">
                                             <Inputs type="text" v-model="startupConsultForm.brandConsultZipCode" />
-                                            <Buttons type="button" btn-class="btn_big border" @click.prevent="onBrandConsultZipSearch">우편번호 찾기</Buttons>
+                                            <Buttons type="button" btn-class="btn_big border" @click.prevent="onBrandConsultZipSearch">{{ t.consultFormTexts.findZipButton }}</Buttons>
                                         </div>
                                         <div class="cb_ast">
                                             <div class="cb_a1">
@@ -1532,38 +1530,38 @@
                                     </div>
                                 </div>
                                 <div class="form_row">
-                                    <div class="form_label">추천 점포 면적</div>
+                                    <div class="form_label">{{ t.consultFormTexts.recommendedStoreAreaLabel }}</div>
                                     <div class="form_field cb_area">
                                         <div class="cb_area_item">
-                                            <span>계약면적</span>
+                                            <span>{{ t.consultFormTexts.contractAreaLabel }}</span>
                                             <Inputs type="text" v-model="startupConsultForm.brandConsultAreaContract" />
-                                            <span class="form_unit">평</span>
+                                            <span class="form_unit">{{ t.consultFormTexts.areaUnit }}</span>
                                         </div>
                                         <div class="cb_area_item">
-                                            <span>전용면적</span>
+                                            <span>{{ t.consultFormTexts.privateAreaLabel }}</span>
                                             <Inputs type="text" v-model="startupConsultForm.brandConsultAreaPrivate" />
-                                            <span class="form_unit">평</span>
+                                            <span class="form_unit">{{ t.consultFormTexts.areaUnit }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form_row">
-                                    <div class="form_label">점포 상호</div>
+                                    <div class="form_label">{{ t.consultFormTexts.storeNameLabel }}</div>
                                     <div class="form_field cb_store">
                                         <Inputs type="text" v-model="startupConsultForm.brandConsultStoreName" />
                                     </div>
                                 </div>
                                 <div class="form_row form_row_textarea cb_feat">
-                                    <div class="form_label">상권 특징</div>
+                                    <div class="form_label">{{ t.consultFormTexts.commercialFeatureLabel }}</div>
                                     <div class="form_field">
                                         <Textarea
                                             v-model="startupConsultForm.brandConsultCommercialFeature"
                                             name="brand_consult_feature"
-                                            placeholder="상권 특징을 입력해 주세요."
+                                            :placeholder="t.consultFormTexts.commercialFeaturePlaceholder"
                                         />
                                     </div>
                                 </div>
                                 <div class="form_row form_row_body_last">
-                                    <div class="form_label">건물주와의 관계</div>
+                                    <div class="form_label">{{ t.consultFormTexts.landlordRelationLabel }}</div>
                                     <div class="form_field cb_rel">
                                         <Inputs type="text" v-model="startupConsultForm.brandConsultLandlordRelation" />
                                     </div>
@@ -1572,7 +1570,7 @@
 
                         </div>
                         <div class="button_area">
-                            <Buttons btn-class="btn_xl primary">상담 예약 신청하기</Buttons>
+                            <Buttons btn-class="btn_xl primary">{{ t.consultFormTexts.reserveButton }}</Buttons>
                         </div>
                     </div>
                 </section>
@@ -3246,6 +3244,139 @@ const langData = {
             { item: "창업 설명회 신청" },
             { item: "입점 제안/브랜드 전환 상담" }
         ],
+        consultFormTexts: {
+            startupPanelAria: "창업 상담 신청",
+            seminarPanelAria: "창업 설명회 신청",
+            entryPanelAria: "입점 제안/브랜드 전환 상담",
+            requiredLabel: "* 필수 입력사항",
+            requiredInput: "(필수 입력)",
+            faqTypePeriodNote: "* 타입별/기간별 개월 수",
+            compareTypeHeader: "가맹타입",
+            compareGs1Desc: "직접 임차하고, 수익 배분율이 가장 높아요",
+            compareGs2Desc: "본사와 임차비용 공동 부담해요",
+            compareGs3Desc: "임차비용 부담 없이 시작해요",
+            compareInvestAmount: "투자 금액",
+            compareCommonInvestAmount: "공<br />통<br />투<br />자<br />금<br />액",
+            compareProductPrep: "상품 준비금",
+            compareSupplyPrep: "소모품 준비금",
+            compareFranchiseFee: "가맹비",
+            compareSubtotal: "상품 + 소모품 + 가맹비",
+            compareAmount1400: "1,400만원",
+            compareAmount100: "100만원",
+            compareAmount770Vat: "770만원(VAT포함)",
+            compareAmount2270: "2,270만원",
+            compareRentCost: "점포 임차비용",
+            compareOwnerInvest: "경영주 투자",
+            compareHeadInvest: "본부 투자",
+            compareHeadDeposit: "본부 보증금",
+            compareSubleaseDeposit: "전대보증금",
+            compareEscrowDeposit: "예치보증금",
+            compareMin3000: "최소 3,000만원",
+            compareFacilityInterior: "시설/인테리어",
+            compareHeadSupport: "본부 지원",
+            compareSpecialNote: "(※ 수익추구 특약: 경영주 투자)",
+            compareTotalInvest: "총 투자금액",
+            compareTotalGs1: "점포 임차비용 + 공통 투자비 2,270만원",
+            compareTotalGs2Main: "최소 5,270만원",
+            compareTotalGs2Sub: "(전대보증금 + 공통 투자비)",
+            compareTotalGs3Main: "최소 5,270만원",
+            compareTotalGs3Sub: "(예치보증금 + 공통 투자비)",
+            compareContract: "계약",
+            compareCondition: "조건",
+            compareFinalProfitShare: "최종 경영주 수익 배분율",
+            compareMax71: "최대 71%",
+            compareMax65: "최대 65%",
+            compareMax46: "최대 46%",
+            compareProfitShare: "경영주 수익 배분율",
+            compare24hSupport: "24시간 영업장려금",
+            compareContractPeriod: "계약기간",
+            comparePeriod5y: "5년",
+            comparePeriod4y: "4년",
+            compareCollateral: "담보 설정",
+            compareCollateral5000: "5,000만원",
+            compareCollateral2000: "2,000만원",
+            compareSupportSystem: "각종지원제도",
+            compareSupportSystemDesc: "상생 인센티브 / 상품 판매·발주 장려금 / 미오출 보상금",
+            compareProfitSpecial: "수익추구특약",
+            compareMax81: "최대 81%",
+            compareSpecialPercentNote: "(※ GS1 수익배분율 71% + 특약 10%)",
+            compareSafeOpAmount: "안심운영지원 기준금액",
+            compareSupportPeriod: "(지원기간: 1년)",
+            compareSafeOpGs1: "24시간 운영: 月 최대 800만원<br />18시간 운영: 月 최대 550만원",
+            compareSafeOpGs2: "24시간 운영: 月 최대 750만원<br />18시간 운영: 月 최대 500만원",
+            compareSafeOpGs3: "24시간 운영: 月 최대 700만원<br />18시간 운영: 月 최대 450만원",
+            compareNote1: "* GS1 Type 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년",
+            compareNote2: "* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다",
+            compareNote3: "* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href=\"#\">신선강화점 자세히 알아보기</a>)",
+            compareNote4: "* 안심운영제도란? 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우,<br/>경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. (<a href=\"#\">안심운영제도 자세히 알아보기</a>)",
+            benefitPolicyNote: "* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.",
+            storeTableRegion: "지역",
+            storeTableType: "타입",
+            storeTableCategory: "유형",
+            storeTableInvestment: "투자비",
+            storeTableHashtag: "해시태그",
+            storeTableArea: "면적",
+            storeTableDate: "등록일",
+            storeTableDetail: "상세",
+            youthBadge: "청년",
+            privacyConsentTitle: "개인정보 수집·이용 동의",
+            startupConsentNotice: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 상담 글 작성이 불가능합니다.",
+            seminarConsentNotice: "동의하지 않으실 경우 상담 글 작성이 불가능합니다.",
+            entryConsentNotice: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 입지제안 신청 글 작성이 불가능합니다.",
+            agreeText: "동의합니다.",
+            reserveButton: "상담 예약 신청하기",
+            seminarGuide: "GS25 창업설명회는 정기설명회 및 컨설턴트 상담으로 운영되며, 각 지역 사무소에서 진행됩니다. <br />지역별 창업설명회 일정이 상이하므로 확인 후 신청해 주세요.",
+            seminarSelectRegionGuide: "창업 설명회 개설 지역을 선택해 주세요.",
+            regionConsultantTitle: "지역 및 컨설턴트 선택",
+            regionConsultantLabel: "지역/컨설턴트",
+            customerInfoTitle: "고객정보",
+            nameLabel: "이름",
+            contactLabel: "연락처",
+            birthLabel: "생년월일",
+            emailLabel: "이메일",
+            mobileLabel: "휴대폰",
+            consultTypeLabel: "상담 형태",
+            storeOwnershipLabel: "점포 소유 및 임차",
+            investAmountLabel: "투자가능금액 (만원)",
+            openScheduleLabel: "오픈 희망 시기",
+            yearInit: "년도",
+            monthInit: "월",
+            dayInit: "일",
+            yearUnit: "년",
+            monthUnit: "월",
+            cvsExperienceLabel: "편의점 근무경험",
+            inquiryLabel: "문의 내용",
+            startupInquiryPlaceholder: "창업 관련 궁금한 사항을 입력해주세요.",
+            interestRegionLabel: "관심 지역",
+            interestRegionNote: "지역 선택 시 담당자가 배정되며, 담당자별로 예약 가능 시간이 다릅니다.",
+            sidoInit: "시/도 선택",
+            sigunguInit: "구/시 선택",
+            consultDateLabel: "상담 날짜 선택",
+            consultTimeLabel: "상담 시간 선택",
+            selectRegionFirstPlaceholder: "먼저 관심 지역을 선택해주세요.",
+            managerInfoAria: "담당자 정보",
+            managerAlt: "담당자",
+            regionSelectAria: "지역 선택",
+            selectedSeminarLabel: "선택한 설명회",
+            selectedSeminarValue: "부산 영남권 · 2/19(목) 15:00",
+            closeButton: "닫기",
+            entryConsultTitle: "입점 제안/브랜드 전환 상담",
+            recommendedStoreLocationLabel: "추천점포 소재지",
+            recommendedStoreAreaLabel: "추천 점포 면적",
+            contractAreaLabel: "계약면적",
+            privateAreaLabel: "전용면적",
+            areaUnit: "평",
+            storeNameLabel: "점포 상호",
+            commercialFeatureLabel: "상권 특징",
+            landlordRelationLabel: "건물주와의 관계",
+            regionSelectInit: "지역선택",
+            consultantSelectInit: "컨설턴트 선택",
+            searchButton: "조회",
+            applyButton: "신청",
+            directInputPlaceholder: "직접입력",
+            findZipButton: "우편번호 찾기",
+            commercialFeaturePlaceholder: "상권 특징을 입력해 주세요.",
+        },
         startupConsentItems: [
             "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
             "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일,",
