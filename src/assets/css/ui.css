@@ -2,8 +2,6 @@
 #skip_menu a {height:1px; overflow:hidden; display:block;}
 #skip_menu a:focus {height:auto; padding:4px 10px;}
 
-#wrap {overflow:hidden;}
-
 /* header */
 #header {position:fixed; top:0; right:0; left:0; z-index:99;/* transition:background 0.25s, transform 0.25s ease-in-out;*/}
 #header.hide {transform:translateY(-100%);}
@@ -393,8 +391,9 @@ h5 {font-size:1.8rem;}
 
     .sky_quick {padding-right:20px; right:0;}
     .sky_quick.istop {bottom:30px;}
-    .sky_quick .quick_menu {position:absolute; bottom:65px; right:-150px; transition:right 0.18s ease-in-out;}
+    .sky_quick .quick_menu {padding-right:20px; overflow:hidden; position:absolute; bottom:65px; right:0; transition:right 0.18s ease-in-out;}
     .sky_quick > .btn_toggle {margin-top:15px; display:block;}
+    .sky_quick .quick_menu li {margin-right:-180px; transition:margin 0.18s ease-in-out;}
     .sky_quick .quick_menu li > * {padding:14.5px 15px; white-space:nowrap; gap:5px;}
     .sky_quick .quick_menu li > *:before {filter:initial;}
     .sky_quick .quick_menu li:nth-of-type(1) > *::before {background:url('@/assets/images/common/icon_mo_skyquick_01.png') 0 0 no-repeat;}
@@ -403,7 +402,7 @@ h5 {font-size:1.8rem;}
 
     .sky_quick.istop > .btn_toggle {display:none;}
     .sky_quick.istop .quick_menu {bottom:0;}
-    .sky_quick.istop .quick_menu, .sky_quick.active .quick_menu {right:24px;}
+    .sky_quick.istop .quick_menu > li, .sky_quick.active .quick_menu > li {margin-right:0;}
     .sky_quick.active > .btn_toggle:before {transform:rotate(45deg);}
 
     #container {padding-top:60px; padding-bottom:100px;}

@@ -4,11 +4,18 @@
             <div class="swiper mainSwiper" ref="mainSwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="item in t.mainVisual.items" :key="item.img">
-                        <div class="slide" :style="{ backgroundImage: 'url(' + item.img + ')' }">
+                        <div class="slide"><!-- 26.06.02 Del 이종환 :style="{ backgroundImage: 'url(' + item.img + ')' }"> -->
                             <!-- 26.05.28 Del 이종환 <p class="main_copy">
                                 <strong v-html="item.title"></strong>
                                 <span>{{ item.sub }}</span>
                             </p> -->
+                            <!-- 26.06.02 Add 이종환 : 영상 추가 -->
+                            <div class="video_wrap">
+                                <video autoplay muted playsinline>
+                                    <source :src="item.vod" type="video/mp4">
+                                </video>
+                            </div>
+                            <!-- //26.06.02 Add 이종환 : 영상 추가 -->
                         </div>
                     </div>
                 </div>
@@ -110,18 +117,20 @@ export default {
                             {
                                 title: "Every Life.<br/> One Platform.",
                                 sub: "GS리테일",
-                                img: require("@/assets/images/dummy/main_visual_01.png")
+                                img: require("@/assets/images/dummy/main_visual_01.png"),
+                                vod: require("@/assets/images/main/vod_visual_01.mp4")
+
                             },
-                            {
-                                title: "Every Life.<br/> One Platform.",
-                                sub: "GS리테일",
-                                img: require("@/assets/images/dummy/main_visual_02.png")
-                            },
-                            {
-                                title: "Every Life.<br/> One Platform.",
-                                sub: "GS리테일",
-                                img: require("@/assets/images/dummy/main_visual_03.png")
-                            }
+                            // {
+                            //     title: "Every Life.<br/> One Platform.",
+                            //     sub: "GS리테일",
+                            //     img: require("@/assets/images/dummy/main_visual_02.png")
+                            // },
+                            // {
+                            //     title: "Every Life.<br/> One Platform.",
+                            //     sub: "GS리테일",
+                            //     img: require("@/assets/images/dummy/main_visual_03.png")
+                            // }
                         ]
                     },
 
@@ -421,8 +430,17 @@ h2+.explain {
     padding: 60px 120px;
     background-position: 50%;
     background-size: cover;
+    position:relative;
     display: flex;
     align-items: center;
+}
+
+.main_visual .slide .video_wrap {
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
 }
 
 .main_copy strong {

@@ -96,7 +96,7 @@
                                 <Tabs 
                                     v-model="SubTabIdx2" 
                                     :tab-items="t.Tabs3_1" 
-                                    tab-class="type_04" 
+                                    tab-class="type_04 col_3" 
                                     class="mb40" 
                                     :tab-slide="true" 
                                 />
@@ -180,11 +180,13 @@
                                             
                                             <ul class="brand_grid">
                                                 <li v-for="(brand, idx) in t.MarketSupport.Marketing.Brands" :key="'brand-'+idx">
-                                                    <figure class="brand_img_box">
-                                                        <img :src="brand.img" :alt="brand.name">
-                                                    </figure>
-                                                    <div class="brand_name mt16">
-                                                        <strong>{{ brand.name }}</strong>
+                                                    <div class="marketing_item">
+                                                        <figure class="brand_img_box">
+                                                            <img :src="brand.img" :alt="brand.name">
+                                                        </figure>
+                                                        <div class="brand_name mt16">
+                                                            <strong>{{ brand.name }}</strong>
+                                                        </div>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -363,7 +365,7 @@
                                 <Tabs 
                                     v-model="SubTabIdx2" 
                                     :tab-items="t.Tabs3_2" 
-                                    tab-class="type_04" 
+                                    tab-class="type_04 col_2" 
                                     class="mb40" 
                                     :tab-slide="true" 
                                 />
@@ -538,7 +540,8 @@
                     </article>
 
                     <article v-if="CTabIdx === 1">
-                        <Tabs 
+                        <Tabs
+                            :class="class_test" 
                             v-model="SubTabIdx1" 
                             :tab-items="t.Tabs2_2" 
                             tab-class="type_02" 
@@ -825,7 +828,7 @@
                                 <Tabs 
                                     v-model="SubTabIdx2" 
                                     :tab-items="t.Tabs3_3" 
-                                    tab-class="type_04" 
+                                    tab-class="type_04 col_2" 
                                     class="mb40" 
                                     :tab-slide="true" 
                                 />
@@ -1200,7 +1203,7 @@
                                 <Tabs 
                                     v-model="SubTabIdx2" 
                                     :tab-items="t.Tabs3_4" 
-                                    tab-class="type_04" 
+                                    tab-class="type_04 col_2" 
                                     class="mb80" 
                                     :tab-slide="true" 
                                 />
@@ -1689,7 +1692,7 @@ export default {
                                 { num: "04", tit: "열린소통", list: ["정기적 간담회 운영", "문화교류 (Family-Day)", "파트너사 만족도 개선"] }
                             ],
                             img: require("@/assets/images/dummy/gsrsu03010101_1.png"),
-                            imgMo: require("@/assets/images/dummy/mo/gsrsu03010101_1_mo.png"),
+                            imgMo: require("@/assets/images/sub/gsrsu/gsrsu03010101_1_mo.png"),
                             alt: "동반성장 추진전략 다이어그램"
                         },
                         Index: {
@@ -2744,7 +2747,7 @@ export default {
     .card_desc { font-size: 16px; color: #67676F; line-height: 1.5; letter-spacing: -1%; margin-top: 8px; }
 
     /* 판로지원 전용 스타일 */
-    .brand_grid { display: flex; gap: 20px; list-style: none; }
+    .brand_grid { display: flex; gap: 10px; list-style: none; }
     .brand_grid li { flex: 1; text-align: center; }
     .brand_img_box { width: 100%; height: 240px; background: #F8F8F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .brand_img_box img { max-width: 150px; object-fit: contain; }
@@ -2754,6 +2757,9 @@ export default {
     .program_item { width: calc(50% - 20px); }
     .program_visual { width: 100%; height: 340px; border-radius: 12px; overflow: hidden; }
     .program_visual img { width: 100%; height: 100%; object-fit: cover; }
+
+    .marketing_item {height:260px; padding:20px; background-color:#F8F8F8; border-radius:12px; display:flex; flex-direction:column; align-items:center;}
+    .marketing_item .brand_img_box {height:auto; flex:1;}
 
     /* 테이블 공통 스타일 */
     .policy_wrap { width: 100%; margin-top:40px; overflow-x: auto;}
@@ -3143,6 +3149,14 @@ export default {
         .information_protection_management .mark_item_group .brand_grid.mt60 {margin-top:0px !important}
 
         .listening_form_wrap .form_row {flex-direction:column;}
+    }
+
+    @media screen and (max-width:768px){
+        .title_wrap {display:none;}
+        .type_02 {margin-right:-20px; margin-left:-20px; padding:0 20px;}
+
+        .marketing_item {height:200px;}
+        .marketing_item .brand_name strong {font-size:1.8rem;}
     }
 
     @media screen and (max-width: 767px) {
