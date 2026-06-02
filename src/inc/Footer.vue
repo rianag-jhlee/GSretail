@@ -112,8 +112,8 @@ const langData = {
             { title: "입점상담", path: "gsrse01" },
             { title: "멤버십/홈페이지문의", path: "#none" },
             { title: "입지제안", path: "gsrbr0204", pop:true, popId:"gsrbr0204", popType:'lg' },
-            { title: "임대상가안내", path: "#none" },
-            { title: "정도경영제보", path: "#none" },
+            { title: "임대상가안내", path: "gsrbr1101" },
+            { title: "정도경영제보", path: "gsrsu040101" },
             { title: "고객센터", path: "gsrcu01" },
             { title: "GS SHOP 시청자 관련", path: "gsrcm0401" },
             { title: "공지사항", path: "gsrnotice" }

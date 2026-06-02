@@ -62,7 +62,7 @@ export default {
                     SubTitle: `브랜드소개`,
                     SubContent_1: `우리동네 GS25, GS THE FRESH의 상품과 식품, 맛집 배달까지`,
                     SubContent_2: `별도의 장비 없이 성인이라면 누구나 손쉽게 배달 가능한 서비스입니다.`,
-                    HopageLink: `https://www.gsrbr.com/`,
+                    HopageLink: `http://woodel.co.kr/#page1`,
                     HopageText: `홈페이지`,
                     ListBack:`목록으로 돌아가기`
                 }

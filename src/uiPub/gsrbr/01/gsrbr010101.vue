@@ -1328,7 +1328,7 @@
                             <Steps type="2" :items="tab.pickupItems" />
                         </section>
                         <div v-if="tab.partnerBtnText" class="link_wrap">
-                            <a href="#" class="btn_big primary btn_icon_arrow after">{{ tab.partnerBtnText }}</a>
+                            <a :href="tab.partnerBtnText_link" target="_blank" class="btn_big primary btn_icon_arrow after">{{ tab.partnerBtnText }}</a>
                         </div>
                             <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 -->     
                         <!-- <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
@@ -2685,6 +2685,7 @@ const langData = {
                             shoppingTitle: "픽업서비스 제휴쇼핑몰",
                             shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
                             partnerBtnText: "픽업 제휴쇼핑몰 확인하기",
+                            partnerBtnText_link: "https://www.cvsnet.co.kr"
                         },
                         {
                             label:   "쇼핑몰거래",
@@ -2704,6 +2705,7 @@ const langData = {
                             shoppingTitle: "이용가능 제휴처",
                             shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
                             partnerBtnText: "이용가능 제휴처 확인하기",
+                            partnerBtnText_link: "https://www.cvsnet.co.kr"
                         },
                     ],
                 },
@@ -2928,7 +2930,7 @@ const langData = {
         milbox: {
             hero: imgHero12,
             heroAlt: "",
-            title: "밀박스/스낵바 (기업 정기 서비스) <a href='#none'>홈페이지</a>",
+            title: "밀박스/스낵바 (기업 정기 서비스) <a href='https://www.mealbox25.com/' target='_blank'>홈페이지</a>",
             sections: [
                 {
                     type: "feature",
@@ -2948,7 +2950,7 @@ const langData = {
                             img: require("@/assets/images/sub/gsrbr010101/img_mealbox.png"),
                             name: "밀박스25",
                             desc: "GS25에서 제공하는 기업/단체 대상 간편식 정기 제공 서비스 입니다.<br class=\"p_br\" />주식부터 디저트, 음료까지 매일 새로운 구성으로 운영 됩니다.<br class=\"p_br\" />HACCP 인증, 개별 포장으로 위생적이고 맛있는 한끼를 제공합니다.",
-                            link: "#",
+                            link: "https://www.mealbox25.com/mealbox25-introduce",
                         },
                         {
                             img: require("@/assets/images/sub/gsrbr010101/img_snackbar.png"),

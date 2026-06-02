@@ -75,13 +75,14 @@
                     </div>
 
                     <div class="btn-group mt64">
-                        <Buttons 
+                        <a :href="btn.link"
                             v-for="(btn, bIdx) in t.AppButtons" 
                             :key="bIdx"
-                            btn-class="btn_big primary"
+                            class="btn_big primary"
+                            target="_blank"
                         >
-                            {{ btn }}
-                        </Buttons>
+                            {{ btn.txt }}
+                        </a>
                     </div>
                 </section>
 
@@ -169,7 +170,10 @@ export default {
                             ]
                         }
                     ],
-                    AppButtons: ["우리동네GS앱(매장)에서 이용하기", "GS SHOP에서 이용하기"],
+                    AppButtons: [
+                        {txt:"우리동네GS앱(매장)에서 이용하기", link:"http://gs25.gsretail.com/gscvs/ko/store-services/woodongs"},
+                        {txt:"GS SHOP에서 이용하기", link:"https://www.gsshop.com/index.gs"}
+                    ],
                     ListBack: "목록으로 돌아가기"
                 }
             }
@@ -258,7 +262,7 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
 
 /* Buttons Area */
 .btn-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-.btn-group button {width:320px;}
+.btn-group > * {width:320px;}
 .btn_list_back { background: transparent; padding: 0; border: 0; cursor: pointer; }
 .btn_list_back span { color: #161616; font-size: 20px; display: flex; align-items: center; gap: 12px; }
 .btn_list_back span::before { width: 16px; height: 16px; background-color: red; content: ''; display: inline-block; }
@@ -305,7 +309,7 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
     .unit_img { height: 280px; }
     .unit_info + img {width:80%; margin:0 auto;}
     .step_box {gap:40px;}
-    .btn-group button {width:100%;}
+    .btn-group > * {width:100%;}
     .bottom_btns + .btn_big.border {margin-top:0px; margin-bottom:80px; display:flex; justify-content: center;}
     .step_group {margin-bottom:40px;}
     .step_group:last-of-type {margin-bottom:0px;}

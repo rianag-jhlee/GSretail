@@ -1,8 +1,8 @@
 [
     {
         "title": "CAREERS",
-        "path": "#none",
-        "blank": false,
+        "path": "https://gsretail.recruiter.co.kr/career/home",
+        "blank": true,
         "children": []
     }
 ]

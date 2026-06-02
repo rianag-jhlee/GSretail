@@ -34,12 +34,12 @@
                     </div>
                     <div class="str_actions">
                         <a
-                            href="#"
+                            href="https://www.gsshop.com/index.gs?utm_source=google.adwords&utm_campaign=SA_GS_Brand_Term&utm_medium=paid_search&opps=gsshop&_emk_keyword=gsshop&no_key_encode=1&media=LLs&gad_source=1&gad_campaignid=22373782952&gbraid=0AAAAACg8DCHe7RxcksZXWK6j5Z-rcJodl&gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBjgmSBvjeDxKecu1j6gkkxhNWAr0Xo165HEdCyKMpbJxi9AJ5BsKMaAi-5EALw_wcB&fromWith=Y"
                             class="btn_website"
-                        >{{ t.str.websiteLabel }}</a><!-- 26.05.11 Edit 이종환 : class 수정 -->
+                         target="_blank">{{ t.str.websiteLabel }}</a><!-- 26.05.11 Edit 이종환 : class 수정 -->
                         <div class="sns_wrap">
-                            <a href="#" class="btn_sns btn_sns_insta" :aria-label="t.str.snsInstaAria"></a>
-                            <a href="#" class="btn_sns btn_sns_yt" :aria-label="t.str.snsYtAria"></a>
+                            <a href="https://www.youtube.com/channel/UCFR22SdPEC3XmU7nIygGjXw" class="btn_sns btn_sns_insta" :aria-label="t.str.snsInstaAria" target="_blank"></a>
+                            <a href="https://www.instagram.com/gsshop_story/" class="btn_sns btn_sns_yt" :aria-label="t.str.snsYtAria" target="_blank"></a>
                         </div>
                     </div>
                 </header>

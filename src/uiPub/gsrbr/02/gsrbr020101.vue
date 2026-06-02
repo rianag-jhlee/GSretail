@@ -39,8 +39,8 @@
                                 <button type="button" class="btn_link btn_store_find" @click.prevent="openModal" data-popid="pop_store_find" data-type="lg" data-cont="gsrbr0106">{{ t.Buttons.findStore }}</button><!-- 26.05.11 Edit 이종환 : class -->
 
                                 <!-- 26.05.11 Edit 이종환 : sns 버튼 통일 -->
-                                <a href="#" class="btn_sns btn_sns_insta" :aria-label="t.Sns.insta"></a>
-                                <a href="#" class="btn_sns btn_sns_yt" :aria-label="t.Sns.facebook"></a>
+                                <a href="https://www.instagram.com/gsthefresh" class="btn_sns btn_sns_insta" :aria-label="t.Sns.insta" target="_blank"></a>
+                                <a href="https://www.youtube.com/gsthefresh" class="btn_sns btn_sns_yt" :aria-label="t.Sns.facebook" target="_blank"></a>
                                 <!-- //26.05.11 Edit 이종환 : sns 버튼 통일 -->
                             </div>
                         </div>

@@ -61,7 +61,7 @@ export default {
                         subContent_2: "GS 브랜드를 더 편리하게",
                         subContent_3: "결제하세요!",
                     },
-                    HopageLink: `https://www.gsrbr.com/`,
+                    HopageLink: `http://www.popcard.co.kr/popcard/ko/main`,
                     HopageText: `홈페이지`,
                     SubTitle: `멤버십팝카드 소개`,
                     SubContent_1: `GS ALL 멤버십(GS ALL 포인트)카드와 팝카드가 결합되어 GS25, GS THE FRESH에서 결제와 동시에<br/> 포인트가 적립되고 800여 온라인 사용처(쇼핑, 게임 등)에서 결제가<br/> 가능한 혜택이 많은 선불카드입니다.<br/> (교통기능은 없으며, 회원등록을 하셔야 적립된 포인트 사용이 가능합니다.) `,
