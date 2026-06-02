@@ -769,6 +769,22 @@
                                 <SelectBox :options="openSigunguOptions" v-model="consultForm.openRegionSigungu" :initMsg="t.customerForm.sigunguInitMsg" :disabled="!consultForm.openRegionSido" />
                             </div>
                         </div>
+                        <!-- 26.06.02 edit 정다희 : 추가 -->
+                        <div class="form_row">
+                            <div class="form_label">{{ t.consultFormNoStore.superExperienceLabel }}<span class="form_required">*</span></div>
+                            <div class="form_field form_field_radio form_field_checkbox_card">
+                                <Inputs
+                                    v-for="opt in superExperienceOptions"
+                                    :key="opt.value"
+                                    class="checkbox_card"
+                                    type="checkbox"
+                                    name="super_experience"
+                                    :value="opt.value"
+                                    v-model="consultForm.superExperience"
+                                    :text="opt.label"
+                                />
+                            </div>
+                        </div>
                         <div class="form_row">
                             <div class="form_label">{{ t.consultFormNoStore.openTimeLabel }}<span class="form_required">*</span></div>
                             <div class="form_field form_field_region">
@@ -1293,6 +1309,14 @@ const langData = {
             incomeOptions: ["150~200만원", "200~300만원", "300만원 이상"],
             incomeInitMsg: "150~200만원",
             openRegionLabel: "개설 희망지역",
+            superExperienceLabel: "수퍼 근무경험",
+            superExperienceOptions: [
+                { value: "none", label: "없음" },
+                { value: "fresh_staff", label: "GS THE FRESH 근무자" },
+                { value: "ssm_staff", label: "SSM 근무자" },
+                { value: "ssm_owner", label: "SSM 경영주" },
+                { value: "personal_super", label: "개인수퍼" },
+            ],
             openTimeLabel: "개설 희망시기",
             openYearOptions: ["2026년", "2027년", "2028년"],
             openYearInitMsg: "2026년",
@@ -1350,6 +1374,7 @@ const openSigunguOptions = computed(() => {
     const list = sigunguMap.value[consultForm.openRegionSido] || [];
     return list.map((v) => ({ value: v, label: v }));
 });
+const superExperienceOptions = computed(() => t.value.consultFormNoStore.superExperienceOptions);
 const consultForm = reactive({
     consultantName: "",
     name: "",
@@ -1365,6 +1390,7 @@ const consultForm = reactive({
     expectedIncome: "",
     openRegionSido: "",
     openRegionSigungu: "",
+    superExperience: [],
     openYear: "",
     openMonth: "",
     franchiseType: "",
@@ -2168,11 +2194,11 @@ function toggleCard(id) {
     .apply_form .form_row:last-child { padding-bottom: 0; }
     .apply_form .form_label { margin-bottom: 16px; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; }
     .apply_form .form_field { width: 100%; min-width: 0; max-width: 100%; align-items: stretch; gap: 12px; flex-wrap: wrap; box-sizing: border-box; }
-    .apply_form .form_row_name .form_field :deep(.input_wrap),
+    /* .apply_form .form_row_name .form_field :deep(.input_wrap),
     .apply_form .form_field_store :deep(.input_wrap),
     .apply_form .form_field_select_220 :deep(label.select),
     .apply_form .form_field :deep(.input_wrap),
-    .apply_form .form_field :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; box-sizing: border-box; }
+    .apply_form .form_field :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; box-sizing: border-box; } */
     .apply_form .form_field :deep(input),
     .apply_form .form_field :deep(select) { max-width: 100%; box-sizing: border-box; }
     .apply_form .form_field_email { flex-direction: column; align-items: stretch; gap: 12px; }
