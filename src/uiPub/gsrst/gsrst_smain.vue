@@ -1,41 +1,56 @@
 <script setup>
+import { computed, defineProps } from "vue";
 import mainImg01 from "@/assets/images/dummy/gsrst_smain_01.png";
 import mainImg02 from "@/assets/images/dummy/gsrst_smain_02.jpg";
 import Buttons from "@/components/Buttons.vue";
 
-const cards = [
-    {
-        img: mainImg01,
-        cls: "gs25",
-        badgeColor: "rgba(16, 122, 242, 0.9)",
-        title:
-            "<span class=\"franchise_card_title_point\">GS25</span>와 함께<br />새로운 시작을 응원합니다.",
-        link: "/gsrst02010101",
+const props = defineProps({
+    lang: {
+        type: String,
+        default: "ko",
     },
-    {
-        img: mainImg02,
-        cls: "fresh",
-        badgeColor: "rgba(21, 184, 116, 0.9)",
-        title:
-            "<span class=\"franchise_card_title_point\">GS THE FRESH</span>와 함께<br />새로운 시작을 응원합니다.",
-        link: "/gsrst01010101",
+});
+
+const langData = {
+    ko: {
+        pageTitle: "창업안내",
+        pageDesc: "더 나은 미래를 향한 동행,<br />GS리테일이 당신의 성공 창업을 응원합니다.",
+        cards: [
+            {
+                img: mainImg01,
+                cls: "gs25",
+                title: "<span class=\"franchise_card_title_point\">GS25</span>와 함께<br />새로운 시작을 응원합니다.",
+                link: "/gsrst02010101",
+                linkText: "바로가기",
+            },
+            {
+                img: mainImg02,
+                cls: "fresh",
+                title: "<span class=\"franchise_card_title_point\">GS THE FRESH</span>와 함께<br />새로운 시작을 응원합니다.",
+                link: "/gsrst01010101",
+                linkText: "바로가기",
+            },
+        ],
     },
-];
+    en: {},
+};
+
+const t = computed(() => {
+    const currentLang = langData[props.lang];
+    return currentLang && currentLang.cards ? currentLang : langData.ko;
+});
 </script>
 
 <template>
     <section class="sec_franchise">
         <div class="sec_inner">
             <header class="sec_franchise_head">
-                <h2>창업안내</h2>
-                <p>
-                    더 나은 미래를 향한 동행,<br class="m_br" />
-                    GS리테일이 당신의 성공 창업을 응원합니다.
-                </p>
+                <h2>{{ t.pageTitle }}</h2>
+                <p v-html="t.pageDesc" />
             </header>
 
             <ul class="franchise_list">
-                <li v-for="(card, i) in cards" :key="card.cls + '-' + i">
+                <li v-for="(card, i) in t.cards" :key="card.cls + '-' + i">
                     <article
                         class="franchise_card"
                         :class="card.cls"
@@ -49,7 +64,7 @@ const cards = [
                             :href="card.link"
                             btn-class="btn_icon_arrow btn_xl after"
                         >
-                            바로가기
+                            {{ card.linkText }}
                         </Buttons>
                     </article>
                 </li>
