@@ -164,40 +164,40 @@
                         <!-- case: 멤머십 및 홈페이지 문의 시 26.06.02 add 정다희 -->
                         <div class="form_section">
                             <div class="form_header">
-                                <h5 class="form_title">{{ t.listening.membershipForm.title }}</h5>
-                                <span class="required_guide">{{ t.listening.membershipForm.requiredText }}</span>
+                                <h5 class="form_title">{{ t.listening.InputWrapcont.membershipForm.title }}</h5>
+                                <span class="required_guide">{{ t.listening.InputWrapcont.membershipForm.requiredText }}</span>
                             </div>
                             <div class="form_body">
                                 <div class="form_row">
                                     <div class="label_item">
-                                        <span class="label_text">{{ t.listening.membershipForm.inquiryTypeLabel }}</span>
+                                        <span class="label_text">{{ t.listening.InputWrapcont.membershipForm.inquiryTypeLabel }}</span>
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
-                                        <SelectBox :options="t.listening.membershipForm.inquiryTypeOptions" v-model="formData.category" :initMsg="t.listening.membershipForm.inquiryTypeInitMsg" class="w428" />
+                                        <SelectBox :options="t.listening.InputWrapcont.membershipForm.inquiryTypeOptions" v-model="formData.category" :initMsg="t.listening.InputWrapcont.membershipForm.inquiryTypeInitMsg" class="w428" />
                                     </div>
                                 </div>
                                 <div class="form_row">
                                     <div class="label_item">
-                                        <span class="label_text">{{ t.listening.membershipForm.divisionLabel }}</span>
+                                        <span class="label_text">{{ t.listening.InputWrapcont.membershipForm.divisionLabel }}</span>
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
-                                        <SelectBox :options="t.listening.membershipForm.divisionOptions" v-model="formData.category" :initMsg="t.listening.membershipForm.divisionInitMsg" class="w428" />
+                                        <SelectBox :options="t.listening.InputWrapcont.membershipForm.divisionOptions" v-model="formData.category" :initMsg="t.listening.InputWrapcont.membershipForm.divisionInitMsg" class="w428" />
                                     </div>
                                 </div>
                                 <div class="form_row">
                                     <div class="label_item">
-                                        <span class="label_text">{{ t.listening.membershipForm.consultingLabel }}</span>
+                                        <span class="label_text">{{ t.listening.InputWrapcont.membershipForm.consultingLabel }}</span>
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
-                                        <SelectBox :options="t.listening.membershipForm.consultingOptions" v-model="formData.replyType" :initMsg="t.listening.membershipForm.consultingInitMsg" class="w428" />
+                                        <SelectBox :options="t.listening.InputWrapcont.membershipForm.consultingOptions" v-model="formData.replyType" :initMsg="t.listening.InputWrapcont.membershipForm.consultingInitMsg" class="w428" />
                                     </div>
                                 </div>
                                 <div class="form_row">
                                     <div class="label_item">
-                                        <span class="label_text">{{ t.listening.membershipForm.subjectLabel }}</span>
+                                        <span class="label_text">{{ t.listening.InputWrapcont.membershipForm.subjectLabel }}</span>
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
@@ -206,28 +206,28 @@
                                 </div>
                                 <div class="form_row">
                                     <div class="label_item">
-                                        <span class="label_text">{{ t.listening.membershipForm.contentLabel }}</span>
+                                        <span class="label_text">{{ t.listening.InputWrapcont.membershipForm.contentLabel }}</span>
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_complex">
-                                        <Textarea v-model="formData.body" :placeholder="t.listening.membershipForm.contentPlaceholder" />
+                                        <Textarea v-model="formData.body" :placeholder="t.listening.InputWrapcont.membershipForm.contentPlaceholder" />
                                     </div>
                                 </div>
                                 <div class="form_row">
                                     <div class="label_item">
-                                        <span class="label_text">{{ t.listening.membershipForm.fileLabel }}</span>
+                                        <span class="label_text">{{ t.listening.InputWrapcont.membershipForm.fileLabel }}</span>
                                     </div>
                                     <div class="input_complex">
                                         <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
-                                        <p class="guide_msg">{{ t.listening.membershipForm.fileGuide }}</p>
+                                        <p class="guide_msg">{{ t.listening.InputWrapcont.membershipForm.fileGuide }}</p>
                                     </div>
                                 </div>
                                 <div class="form_row">
                                     <div class="label_item">
-                                        <span class="label_text">{{ t.listening.membershipForm.replyLabel }}</span>
+                                        <span class="label_text">{{ t.listening.InputWrapcont.membershipForm.replyLabel }}</span>
                                     </div>
                                     <div class="input_item full">
-                                        <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" :initMsg="t.listening.membershipForm.replyInitMsg" class="w428" />
+                                        <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" :initMsg="t.listening.InputWrapcont.membershipForm.replyInitMsg" class="w428" />
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +270,7 @@ export default {
                 agreements: [false, false],
                 name: "", emailId: "", emailDomain: "", emailSelect: "",
                 tel1: "", tel2: "", tel3: "", category: "", storeName: "",
-                subject: "", body: "", replyType: ""
+                subject: "", body: "", replyType: "", files: []
             },
             langData: {
                 ko: {
@@ -383,7 +383,10 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() {
+            const currentLang = this.langData[this.lang];
+            return currentLang && currentLang.common && currentLang.listening ? currentLang : this.langData.ko;
+        }
     },
     mounted() {
         this.checkMobile();
@@ -396,6 +399,7 @@ export default {
         checkMobile() { this.isMobile = window.innerWidth < 768; },
         closeModal(event) { modal.close(event.currentTarget); },
         submitForm() { console.log("Form Data:", this.formData); },
+        onFiles(files) { this.formData.files = files; },
         openModal(event) {
             const el = event.currentTarget;
             const popId = el.dataset.popid;

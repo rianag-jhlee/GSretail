@@ -101,7 +101,7 @@ export default {
                     CallCenterGuide: "※ 고객센터 대표전화 (무료)",
                     Brands: [
                         {
-                            id: "gs25", name: "GS25", tel: "080-999-5425", hours: "· 평일 9:00~18:00", hours2: "· 픽업/배달 문의 10:00~23:00<br />&nbsp;&nbsp;(연중무휴)",
+                            id: "gs25", name: "GS25", tel: "080-999-5425", hours: "· 평일 9:00~18:00 (공휴일 휴무)", hours2: "· 픽업/배달 문의 10:00~23:00<br />&nbsp;&nbsp;(연중무휴)",
                             buttons: [
                                 { label: "1:1 상담", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" },
                                 { label: "창업안내", type: "link", target: "/gsrst02010101" }
@@ -122,7 +122,8 @@ export default {
                     BottomLinks: [
                         { title: "정도경영목소리", btnLabel: "정도경영목소리", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target:"/gsrsu040101" },
                         { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
-                        { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" }
+                        { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
+                        { title: "멤버십/홈페이지문의", btnLabel: "멤버십/홈페이지문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target: "https://with.gsshop.com/cust/custCent/main.gs?lseq=380732-1&dseq=0&gsid=gnb-AU380732-AU380732-1" }
                     ],
                     전화번호:'전화번호',
                     운영시간:'운영시간'
@@ -190,7 +191,7 @@ h4 {margin-bottom:24px; color:#161616; font-size:20px; font-weight:700; line-hei
 .working-hours {font-size:14px; color:#67676F; line-height:1.5}
 .working-hours + .working-hours {margin-top:6px;}
 .brand-btn-group {width:100%; display:flex; gap:8px;}
-.service-link-list {width:100%; padding:100px 64px 0; display:flex; gap:20px; list-style:none;}
+.service-link-list {width:100%; padding:100px 0 0; display:flex; gap:20px; list-style:none;}
 .service-link-list li {width:100%; display:flex; flex-direction:column; gap:20px;}
 .service-icon-box img {width:40px; height:40px;}
 
@@ -204,7 +205,8 @@ h4 {margin-bottom:24px; color:#161616; font-size:20px; font-weight:700; line-hei
 h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
 .service-link-list p {min-height:3em; color:#161616; font-size:16px; font-weight:400; line-height:1.5; letter-spacing:-0.16px;}
 .brand-card-group .btn_mid {padding:0 9px; border-radius:4px;}
-.btn_mid.gray {width:160px;}
+.service-link-list a.btn_mid.gray {width:fit-content;}
+.service-link-list :deep(button.btn_mid.gray) {width:fit-content;}
 
 @media screen and (max-width: 1200px) {
     .cont_inner article {padding:60px 40px; flex-direction:column;}
