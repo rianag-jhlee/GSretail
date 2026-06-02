@@ -330,6 +330,9 @@ import imgLogo from "@/assets/images/dummy/brand_fresh_logo.png";
 // GSAP 플러그인 등록
 gsap.registerPlugin(ScrollTrigger);
 
+let resizeTimer = null; // 26.06.02 Edit 정다희
+let syncVisualClip = null;
+
 export default {
     name: "GsTheFreshBrand",
     components: {
@@ -564,6 +567,8 @@ export default {
         }
     },
     mounted() {
+        // 26.06.02 Edit 정다희
+        window.addEventListener("resize", this._onResize);
         this.$nextTick(() => {
             setTimeout(() => {
                 this.initVisualInteraction();
@@ -571,6 +576,9 @@ export default {
         });
     },
     beforeUnmount() {
+        window.removeEventListener("resize", this._onResize);
+        // 26.06.02 Edit 정다희
+        syncVisualClip = null;
         if (this.gsapCtx) {
             this.gsapCtx.revert();
             this.gsapCtx = null;
@@ -682,79 +690,113 @@ export default {
 
             if (!section || !bgWrap || !textPara || !logoWrap || !aboutSection) return;
 
+            // 26.06.02 Edit 정다희
             this.gsapCtx = gsap.context(() => {
-                const mm = gsap.matchMedia();
-                mm.add("(min-width: 1025px)", () => {
-                    const spans = textPara.querySelectorAll("span");
-                    const PHASE1_PX = 400;
+                const spans = textPara.querySelectorAll("span");
+                const PHASE1_PX = 400;
+                const DESIGN_W = 1920;
+                const DESIGN_H = 1080;
+                const INSET_X = 250;
+                const INSET_Y = 140;
+                const TABLET_BP = 1024;
+                const TABLET_CLIP_V = 35;
+                const TABLET_CLIP_H = 20;
+                const TABLET_CLIP_RADIUS = 8;
 
-                    ScrollTrigger.create({
-                        trigger: section,
-                        start: "top top",
-                        end: `+=${PHASE1_PX}`,
-                        scrub: 1.5,
-                        onUpdate(self) {
-                            const p = self.progress;
-                            const bw = bgWrap.offsetWidth;
-                            const bh = bgWrap.offsetHeight;
-                            const hInset = p * Math.max(0, (bw - 1420) / 2);
-                            const vInset = p * Math.max(0, (bh - 799) / 2);
-                            const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
-                            bgWrap.style.clipPath = clip;
-                            bgWrap.style.webkitClipPath = clip;
-                            bgWrap.classList.toggle("active", p >= 1);
-                        },
-                    });
+                const applyBgClip = (p) => {
+                    if (window.innerWidth <= TABLET_BP) {
+                        bgWrap.style.setProperty("--bgClip", `${p * TABLET_CLIP_V}px ${p * TABLET_CLIP_H}px round ${p * TABLET_CLIP_RADIUS}px`);
+                        bgWrap.style.clipPath = "";
+                        bgWrap.style.webkitClipPath = "";
+                    } else {
+                        bgWrap.style.removeProperty("--bgClip");
+                        const bw = bgWrap.offsetWidth;
+                        const bh = bgWrap.offsetHeight;
+                        const hInset = p * (bw * INSET_X) / DESIGN_W;
+                        const vInset = p * (bh * INSET_Y) / DESIGN_H;
+                        const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
+                        bgWrap.style.clipPath = clip;
+                        bgWrap.style.webkitClipPath = clip;
+                    }
+                    bgWrap.classList.toggle("active", p >= 1);
+                };
 
-                    gsap.set([...spans, logoWrap], { opacity: 0, y: 40 });
+                const visualSt = ScrollTrigger.create({
+                    trigger: section,
+                    start: "top top",
+                    end: `+=${PHASE1_PX}`,
+                    scrub: 1.5,
+                    onUpdate(self) {
+                        applyBgClip(self.progress);
+                    },
+                });
+                syncVisualClip = () => {
+                    visualSt.update();
+                    applyBgClip(visualSt.progress);
+                };
+                applyBgClip(visualSt.progress);
+                // 26.06.02 Edit 정다희
+                gsap.set([...spans, logoWrap], { opacity: 0, y: 40 });
 
-                    const textTl = gsap.timeline({ paused: true });
-                    textTl
-                        .to(spans, {
-                            opacity: 1,
+                const textTl = gsap.timeline({ paused: true });
+                textTl
+                    .to(spans, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        stagger: 0.2,
+                        ease: "power2.out",
+                    })
+                    .to(logoWrap, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power2.out",
+                    }, "-=0.3");
+
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: `top+=${PHASE1_PX} top`,
+                    once: false,
+                    onEnter: () => textTl.play(),
+                    onLeaveBack: () => textTl.reverse(),
+                });
+
+                const aboutSpans = aboutSection.querySelectorAll("span");
+                gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
+
+                ScrollTrigger.create({
+                    trigger: aboutSection,
+                    start: "top 75%",
+                    once: true,
+                    onEnter: () => {
+                        gsap.to(aboutSpans, {
                             y: 0,
-                            duration: 0.6,
-                            stagger: 0.2,
-                            ease: "power2.out",
-                        })
-                        .to(logoWrap, {
                             opacity: 1,
-                            y: 0,
-                            duration: 0.6,
-                            ease: "power2.out",
-                        }, "-=0.3");
-
-                    ScrollTrigger.create({
-                        trigger: section,
-                        start: `top+=${PHASE1_PX} top`,
-                        once: false,
-                        onEnter: () => textTl.play(),
-                        onLeaveBack: () => textTl.reverse(),
-                    });
-
-                    const aboutSpans = aboutSection.querySelectorAll("span");
-                    gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
-
-                    ScrollTrigger.create({
-                        trigger: aboutSection,
-                        start: "top 75%",
-                        once: true,
-                        onEnter: () => {
-                            gsap.to(aboutSpans, {
-                                y: 0,
-                                opacity: 1,
-                                duration: 0.8,
-                                stagger: 0.1,
-                                ease: "power3.out",
-                                onComplete() {
-                                    gsap.set(aboutSpans, { willChange: "auto" });
-                                },
-                            });
-                        },
-                    });
+                            duration: 0.8,
+                            stagger: 0.1,
+                            ease: "power3.out",
+                            onComplete() {
+                                gsap.set(aboutSpans, { willChange: "auto" });
+                            },
+                        });
+                    },
                 });
             }, this.$el);
-        }
+        },
+        // 26.06.02 Edit 정다희
+        _onResize() {
+            const syncClip = () => {
+                if (typeof syncVisualClip === "function") syncVisualClip();
+            };
+            syncClip();
+            requestAnimationFrame(syncClip);
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                ScrollTrigger.refresh();
+                syncClip();
+            }, 150);
+        },
     }
 };
 </script>
@@ -771,6 +813,10 @@ export default {
 .sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden; }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px); }
+/* 26.06.02 Edit 정다희 */
+@media (max-width: 1024px) {
+.sec_brand_visual{height:200vh}
+.sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
 .bg_wrap > .bg { width: 100%; height: 100%; background-image: url("@/assets/images/dummy/gsrbr020101_main.png"); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out; }
 .bg_wrap.active > .bg { transform: scale(1); }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s; }
@@ -966,8 +1012,7 @@ export default {
 @media screen and (max-width: 768px) {
     :deep(.p_br) { display: none }
     :deep(.m_br) { display: inline  }
-
-    .sec_brand_visual { height: 100vh; }
+/* .sec_brand_visual { height: 100vh; } */
     .sticky { height: 100vh; top: 0; }
     .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("@/assets/images/dummy/gsrbr020101_main.png"); background-position: center;transform: scale(1.55);background-position: 91% -66px;}
     .txt_area > p > span { font-size: 3.2rem; }
