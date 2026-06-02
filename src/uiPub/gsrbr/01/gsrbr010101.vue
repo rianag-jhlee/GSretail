@@ -487,9 +487,7 @@
 
         <!-- depth1 = 1: 신선강화점 -->
         <div v-if="depth1ActiveIdx === 1" class="brand_panel sinsen_panel">
-            <figure v-if="sinsen.hero" class="brand_panel_bg">
-                <img :src="sinsen.hero" :alt="sinsen.heroAlt || ''" width="1420" height="340" />
-            </figure>
+            <figure class="brand_panel_bg" role="img" :aria-label="sinsen.heroAlt"></figure>
             <header v-if="sinsen.title" class="brand_panel_title">
                 <h2 v-html="sinsen.title"></h2>
                 <p v-if="sinsen.subtitle" v-html="sinsen.subtitle" />
@@ -1180,7 +1178,7 @@
                 <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
                     <div v-show="deliveryActiveTab === i" :class="['service_panel', `delivery_panel_${i+1}`]">
                         <figure v-if="tab.hero" class="brand_panel_bg">
-                            <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                            <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
                         </figure>
                         <header v-if="tab.title" class="brand_panel_title">
                             <h2 v-html="tab.title"></h2>
@@ -1611,7 +1609,6 @@ import imgPhone1 from "@/assets/images/dummy/gopizza_phone_01.png";
 import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 
 /* 신선강화점 이미지 */
-import imgHero4 from "@/assets/images/sub/gsrbr010101/brand_bg_05.png";
 import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
 
@@ -1622,7 +1619,9 @@ import imgHero7 from "@/assets/images/dummy/brand_bg_08.png";
 import imgHero8 from "@/assets/images/sub/gsrbr010101/brand_bg_09.png"; 
 import imgHero9 from "@/assets/images/sub/gsrbr010101/brand_bg_10.png"; 
 import imgHero10 from "@/assets/images/sub/gsrbr010101/brand_bg_11.png"; 
+import imgHero10Mo from "@/assets/images/sub/gsrbr010101/brand_bg_11_mo.png"; 
 import imgHero11 from "@/assets/images/sub/gsrbr010101/brand_bg_11-1.png"; 
+import imgHero11Mo from "@/assets/images/sub/gsrbr010101/brand_bg_11-1_mo.png"; 
 import imgHero11_1 from "@/assets/images/sub/gsrbr010101/brand_bg_11-2.png"; 
 import imgHero12 from "@/assets/images/sub/gsrbr010101/brand_bg_13.png"; 
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
@@ -1925,7 +1924,6 @@ const langData = {
             },
         ],
         sinsen: {
-            hero: imgHero4,
             heroAlt: "신선강화점",
             title: "신선강화점",
             subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br /><br class=\"m_br\" />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
@@ -2665,6 +2663,7 @@ const langData = {
                         {
                             label: "배달 픽업", //26.05.27 Edit 이종환
                             hero: imgHero10,
+                            heroMo: imgHero10Mo,
                             heroAlt: "",
                             title: "픽업 서비스",
                             desc: "쇼핑몰에서 상품주문 후, 가까운 GS25에서 물건을 찾아가세요.",
@@ -2689,6 +2688,7 @@ const langData = {
                         {
                             label:   "쇼핑몰거래",
                             hero:    imgHero11,
+                            heroMo: imgHero11Mo,
                             heroAlt: "",
                             title:   "쇼핑몰 거래 서비스",
                             desc:    "홈쇼핑 반품, 오픈마켓, 온라인 쇼핑몰 등 편리하게 이용하실 수 있는 서비스입니다.",
@@ -3402,6 +3402,7 @@ function goBack() {
 
 <style scoped>
 .brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
+.sinsen_panel > .brand_panel_bg { min-height: 340px; background-color: #b3b3b3; }
 .brand_panel_bg > img { width: 100%; max-height:340px; display: block; object-fit: cover; }
 .brand_panel_title { padding: 0 0 100px;}
 .brand_panel_title > h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; display:flex; align-items:center;}
@@ -3750,7 +3751,7 @@ button { background-color: #fff }
   .sec_header .sec_cite { margin-top: 4px; margin-left: 0; display: block; }
   .brand_panel_bg { width: calc(100% + 40px);margin: 0 -20px 24px; border-radius: 0; }
   .brand_panel_title { padding: 0 0 64px; }
-  .brand_panel_bg > img { max-height: 245px;  }
+  .brand_panel_bg > img { max-height: 240px;  }
   .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display:block;}
 
   .brand_panel_title > h2 :deep(a) {margin-top:16px; margin-left:0; font-size:1.4rem; font-weight:500; line-height:140%;}
@@ -3761,7 +3762,7 @@ button { background-color: #fff }
   .chicken_panel .brand_panel_bg > img { object-position: 34% top; transform: scale(1.35);  }
   .gopizza_panel .brand_panel_bg > img { object-position: center bottom; }
   .gopizza_panel .diff_bottom_row { margin-top: 120px; }
-  .sinsen_panel .brand_panel_bg > img { object-position: -395px bottom; }
+  .sinsen_panel > .brand_panel_bg { min-height: 245px; background-color: #b3b3b3; }
   .delivery_panel_3 .brand_panel_bg > img{ object-position: 70% bottom; }
   
   .sec_brand_visual { height: 100vh }
@@ -4130,7 +4131,7 @@ button { background-color: #fff }
 }
 
 @media (max-width: 768px) {
-    .service_tab_wrap { margin-bottom: 40px }
+    .service_tab_wrap { width: calc(100% + 20px); margin-bottom: 40px }
     .service_tab_wrap::after { content:''; width:clamp(24px, 8.53vw, 32px); height:100%; background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); position:absolute; top:0; right:0; pointer-events:none; z-index:1 }
     /* .service_tab_list { padding: 0 20px } */
     /* .service_tab_list::after { content:''; min-width:20px; flex-shrink:0 } */
