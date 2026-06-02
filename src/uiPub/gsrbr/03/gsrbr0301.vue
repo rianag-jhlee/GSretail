@@ -448,15 +448,21 @@ const channelCardList = computed(() => t.value.channel.cards);
 const programCardList = computed(() => t.value.program.cards);
 
 let gsapCtx = null;
-let _resizeTimer = null;
+let resizeTimer = null; // 26.06.02 Edit 정다희
+let syncVisualClip = null;
 
+// 26.06.02 Edit 정다희
 function onBrandResize() {
     isMobileView.value = _getIsMobile();
-    if (_resizeTimer) {
-        clearTimeout(_resizeTimer);
-    }
-    _resizeTimer = setTimeout(() => {
+    const syncClip = () => {
+        if (typeof syncVisualClip === "function") syncVisualClip();
+    };
+    syncClip();
+    requestAnimationFrame(syncClip);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
         ScrollTrigger.refresh();
+        syncClip();
     }, 150);
 }
 
@@ -472,77 +478,99 @@ function initBrandGsap() {
     if (!sectionRef.value || !bgWrapRef.value || !textParaRef.value || !logoWrapRef.value || !aboutSectionRef.value) {
         return;
     }
+    // 26.06.02 Edit 정다희
     gsapCtx = gsap.context(() => {
-        const mm = gsap.matchMedia();
-        mm.add("(min-width: 1025px)", () => {
-            const spans = textParaRef.value.querySelectorAll("span");
-            const PHASE1_PX = 400;
+        const spans = textParaRef.value.querySelectorAll("span");
+        const PHASE1_PX = 400;
+        const DESIGN_W = 1920;
+        const DESIGN_H = 1080;
+        const INSET_X = 250;
+        const INSET_Y = 140;
+        const TABLET_BP = 1024;
+        const TABLET_CLIP_V = 35;
+        const TABLET_CLIP_H = 20;
+        const TABLET_CLIP_RADIUS = 8;
 
-            ScrollTrigger.create({
-                trigger: sectionRef.value,
-                start: "top top",
-                end: `+=${PHASE1_PX}`,
-                scrub: 1.5,
-                onUpdate(self) {
-                    const p = self.progress;
-                    const bw = bgWrapRef.value.offsetWidth;
-                    const bh = bgWrapRef.value.offsetHeight;
-                    const hInset = p * Math.max(0, (bw - 1420) / 2);
-                    const vInset = p * Math.max(0, (bh - 799) / 2);
-                    const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
-                    bgWrapRef.value.style.clipPath = clip;
-                    bgWrapRef.value.style.webkitClipPath = clip;
-                    bgWrapRef.value.classList.toggle("active", p >= 1);
-                },
-            });
+        const applyBgClip = (p) => {
+            const el = bgWrapRef.value;
+            if (window.innerWidth <= TABLET_BP) {
+                el.style.setProperty("--bgClip", `${p * TABLET_CLIP_V}px ${p * TABLET_CLIP_H}px round ${p * TABLET_CLIP_RADIUS}px`);
+                el.style.clipPath = "";
+                el.style.webkitClipPath = "";
+            } else {
+                el.style.removeProperty("--bgClip");
+                const bw = el.offsetWidth;
+                const bh = el.offsetHeight;
+                const hInset = p * (bw * INSET_X) / DESIGN_W;
+                const vInset = p * (bh * INSET_Y) / DESIGN_H;
+                const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
+                el.style.clipPath = clip;
+                el.style.webkitClipPath = clip;
+            }
+            el.classList.toggle("active", p >= 1);
+        };
 
-            gsap.set([...spans, logoWrapRef.value], { opacity: 0, y: 40 });
+        const visualSt = ScrollTrigger.create({
+            trigger: sectionRef.value,
+            start: "top top",
+            end: `+=${PHASE1_PX}`,
+            scrub: 1.5,
+            onUpdate(self) {
+                applyBgClip(self.progress);
+            },
+        });
+        syncVisualClip = () => {
+            visualSt.update();
+            applyBgClip(visualSt.progress);
+        };
+        applyBgClip(visualSt.progress);
+        // 26.06.02 Edit 정다희
+        gsap.set([...spans, logoWrapRef.value], { opacity: 0, y: 40 });
 
-            const textTl = gsap.timeline({ paused: true });
-            textTl
-                .to(spans, {
-                    opacity: 1,
+        const textTl = gsap.timeline({ paused: true });
+        textTl
+            .to(spans, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.2,
+                ease: "power2.out",
+            })
+            .to(logoWrapRef.value, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: "power2.out",
+            }, "-=0.3");
+
+        ScrollTrigger.create({
+            trigger: sectionRef.value,
+            start: `top+=${PHASE1_PX} top`,
+            once: false,
+            onEnter: () => textTl.play(),
+            onLeaveBack: () => textTl.reverse(),
+        });
+
+        const aboutSpans = aboutSectionRef.value.querySelectorAll("span");
+
+        gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
+
+        ScrollTrigger.create({
+            trigger: aboutSectionRef.value,
+            start: "top 75%",
+            once: true,
+            onEnter: () => {
+                gsap.to(aboutSpans, {
                     y: 0,
-                    duration: 0.6,
-                    stagger: 0.2,
-                    ease: "power2.out",
-                })
-                .to(logoWrapRef.value, {
                     opacity: 1,
-                    y: 0,
-                    duration: 0.6,
-                    ease: "power2.out",
-                }, "-=0.3");
-
-            ScrollTrigger.create({
-                trigger: sectionRef.value,
-                start: `top+=${PHASE1_PX} top`,
-                once: false,
-                onEnter: () => textTl.play(),
-                onLeaveBack: () => textTl.reverse(),
-            });
-
-            const aboutSpans = aboutSectionRef.value.querySelectorAll("span");
-
-            gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
-
-            ScrollTrigger.create({
-                trigger: aboutSectionRef.value,
-                start: "top 75%",
-                once: true,
-                onEnter: () => {
-                    gsap.to(aboutSpans, {
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.8,
-                        stagger: 0.1,
-                        ease: "power3.out",
-                        onComplete() {
-                            gsap.set(aboutSpans, { willChange: "auto" });
-                        },
-                    });
-                },
-            });
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    onComplete() {
+                        gsap.set(aboutSpans, { willChange: "auto" });
+                    },
+                });
+            },
         });
     });
 }
@@ -552,6 +580,7 @@ onMounted(() => {
     biColorMql = window.matchMedia("(max-width: 768px)");
     isBiColorMobile.value = biColorMql.matches;
     biColorMql.addEventListener("change", onBiColorMqlChange);
+    // 26.06.02 Edit 정다희
     window.addEventListener("resize", onBrandResize);
     nextTick(() => {
         initBrandGsap();
@@ -564,9 +593,11 @@ onBeforeUnmount(() => {
         biColorMql = null;
     }
     window.removeEventListener("resize", onBrandResize);
-    if (_resizeTimer) {
-        clearTimeout(_resizeTimer);
-        _resizeTimer = null;
+    // 26.06.02 Edit 정다희
+    syncVisualClip = null;
+    if (resizeTimer) {
+        clearTimeout(resizeTimer);
+        resizeTimer = null;
     }
     if (gsapCtx) {
         gsapCtx.revert();
@@ -585,6 +616,10 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 /* 100vw는 스크롤바 폭까지 포함해 가로 오버플로를 자주 냄 → 부모와 동일한 100% 사용 */
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
+/* 26.06.02 Edit 정다희 */
+@media (max-width: 1024px) {
+.sec_brand_visual { height: 200vh }
+.sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
 .bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/sub/gsrbr03/gs_shop_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
 .bg_wrap.active > .bg { transform: scale(1) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
@@ -596,6 +631,8 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .logo_wrap{max-width: 382px; margin:0 auto;}
 .txt_area > p { width: 100%; margin-bottom: 48px; overflow: hidden }
 .txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block }
+/* .txt_area > .logo_wrap { overflow: hidden }
+.txt_area > .logo_wrap > img { width: auto; margin: 0 auto; display: block } */
 .sec_brand_about { padding: 200px 20px; }
 .sec_brand_about > .about_inner { max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
 .sec_brand_about > .about_inner > .about_txt > p { overflow: hidden }
@@ -674,7 +711,8 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
     :deep(.p_br) { display: none; }
     :deep(.m_br) { display: block; }
     p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .sec_brand_visual { height: 100vh }
+    /* 26.06.02 Edit 정다희 */
+    /* .sec_brand_visual { height: 100vh } */
     .sticky { height: 100vh; top: 0 }
     .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(@/assets/images/dummy/gs_shop_bg.png); background-position: 10% 17px }
     .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }

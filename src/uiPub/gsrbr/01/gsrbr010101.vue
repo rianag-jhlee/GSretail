@@ -487,9 +487,7 @@
 
         <!-- depth1 = 1: 신선강화점 -->
         <div v-if="depth1ActiveIdx === 1" class="brand_panel sinsen_panel">
-            <figure v-if="sinsen.hero" class="brand_panel_bg">
-                <img :src="sinsen.hero" :alt="sinsen.heroAlt || ''" width="1420" height="340" />
-            </figure>
+            <figure class="brand_panel_bg" role="img" :aria-label="sinsen.heroAlt"></figure>
             <header v-if="sinsen.title" class="brand_panel_title">
                 <h2 v-html="sinsen.title"></h2>
                 <p v-if="sinsen.subtitle" v-html="sinsen.subtitle" />
@@ -1180,7 +1178,7 @@
                 <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
                     <div v-show="deliveryActiveTab === i" :class="['service_panel', `delivery_panel_${i+1}`]">
                         <figure v-if="tab.hero" class="brand_panel_bg">
-                            <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                            <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" /> //26.06.02 Edit 정다희
                         </figure>
                         <header v-if="tab.title" class="brand_panel_title">
                             <h2 v-html="tab.title"></h2>
@@ -1611,7 +1609,6 @@ import imgPhone1 from "@/assets/images/dummy/gopizza_phone_01.png";
 import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 
 /* 신선강화점 이미지 */
-import imgHero4 from "@/assets/images/sub/gsrbr010101/brand_bg_05.png";
 import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
 
@@ -1622,7 +1619,9 @@ import imgHero7 from "@/assets/images/dummy/brand_bg_08.png";
 import imgHero8 from "@/assets/images/sub/gsrbr010101/brand_bg_09.png"; 
 import imgHero9 from "@/assets/images/sub/gsrbr010101/brand_bg_10.png"; 
 import imgHero10 from "@/assets/images/sub/gsrbr010101/brand_bg_11.png"; 
+import imgHero10Mo from "@/assets/images/sub/gsrbr010101/brand_bg_11_mo.png"; 
 import imgHero11 from "@/assets/images/sub/gsrbr010101/brand_bg_11-1.png"; 
+import imgHero11Mo from "@/assets/images/sub/gsrbr010101/brand_bg_11-1_mo.png"; 
 import imgHero11_1 from "@/assets/images/sub/gsrbr010101/brand_bg_11-2.png"; 
 import imgHero12 from "@/assets/images/sub/gsrbr010101/brand_bg_13.png"; 
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
@@ -1925,7 +1924,6 @@ const langData = {
             },
         ],
         sinsen: {
-            hero: imgHero4,
             heroAlt: "신선강화점",
             title: "신선강화점",
             subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br /><br class=\"m_br\" />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
@@ -2665,6 +2663,7 @@ const langData = {
                         {
                             label: "배달 픽업", //26.05.27 Edit 이종환
                             hero: imgHero10,
+                            heroMo: imgHero10Mo, //26.06.02 Edit 정다희
                             heroAlt: "",
                             title: "픽업 서비스",
                             desc: "쇼핑몰에서 상품주문 후, 가까운 GS25에서 물건을 찾아가세요.",
@@ -2690,6 +2689,7 @@ const langData = {
                         {
                             label:   "쇼핑몰거래",
                             hero:    imgHero11,
+                            heroMo: imgHero11Mo, //26.06.02 Edit 정다희
                             heroAlt: "",
                             title:   "쇼핑몰 거래 서비스",
                             desc:    "홈쇼핑 반품, 오픈마켓, 온라인 쇼핑몰 등 편리하게 이용하실 수 있는 서비스입니다.",
@@ -3189,100 +3189,134 @@ const isMobileView = ref(_getIsMobile());
 let _resizeTimer = null;
 const _onResize = () => {
     isMobileView.value = _getIsMobile();
+    const syncClip = () => {
+        if (typeof _syncVisualClip === "function") _syncVisualClip();
+    };
+    syncClip();
+    requestAnimationFrame(syncClip);
     clearTimeout(_resizeTimer);
-    _resizeTimer = setTimeout(() => { ScrollTrigger.refresh(); }, 150);
+    _resizeTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+        syncClip();
+    }, 150);
 };
 
 let popSecObserver = null;
+let _syncVisualClip = null;
 onMounted(() => {
     isMobileView.value = _getIsMobile();
     window.addEventListener("resize", _onResize);
 
     const targets = document.querySelectorAll("[data-pop-sec]");
-    if (!targets.length) return;
-    popSecObserver = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    popLnbActiveIdx.value = Number(entry.target.dataset.popSec);
-                }
-            });
-        },
-        { threshold: 0.3 }
-    );
-    targets.forEach((el) => popSecObserver.observe(el));
+    if (targets.length) {
+        popSecObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        popLnbActiveIdx.value = Number(entry.target.dataset.popSec);
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+        targets.forEach((el) => popSecObserver.observe(el));
+    }
+
+    // 26.06.02 Edit 정다희
+    if (!sectionRef.value || !bgWrapRef.value || !textParaRef.value || !logoWrapRef.value || !aboutSectionRef.value) return;
 
     gsapCtx = gsap.context(() => {
-        const mm = gsap.matchMedia();
-        mm.add("(min-width: 1025px)", () => {
-            const spans = textParaRef.value.querySelectorAll("span");
-            const PHASE1_PX = 400;
+        const spans = textParaRef.value.querySelectorAll("span");
+        const PHASE1_PX = 400;
+        const DESIGN_W = 1920;
+        const DESIGN_H = 1080;
+        const INSET_X = 250;
+        const INSET_Y = 140;
+        const TABLET_BP = 1024;
+        const TABLET_CLIP_V = 35;
+        const TABLET_CLIP_H = 20;
+        const TABLET_CLIP_RADIUS = 8;
 
-            ScrollTrigger.create({
-                trigger: sectionRef.value,
-                start: "top top",
-                end: `+=${PHASE1_PX}`,
-                scrub: 1.5,
-                onUpdate(self) {
-                    const p = self.progress;
-                    const bw = bgWrapRef.value.offsetWidth;
-                    const bh = bgWrapRef.value.offsetHeight;
-                    const hInset = p * Math.max(0, (bw - 1420) / 2);
-                    const vInset = p * Math.max(0, (bh - 799) / 2);
-                    const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
-                    bgWrapRef.value.style.clipPath = clip;
-                    bgWrapRef.value.style.webkitClipPath = clip;
-                    bgWrapRef.value.classList.toggle("active", p >= 1);
-                },
-            }); 
+        const applyBgClip = (p) => {
+            const el = bgWrapRef.value;
+            if (window.innerWidth <= TABLET_BP) {
+                el.style.setProperty("--bgClip", `${p * TABLET_CLIP_V}px ${p * TABLET_CLIP_H}px round ${p * TABLET_CLIP_RADIUS}px`);
+                el.style.clipPath = "";
+                el.style.webkitClipPath = "";
+            } else {
+                el.style.removeProperty("--bgClip");
+                const bw = el.offsetWidth;
+                const bh = el.offsetHeight;
+                const hInset = p * (bw * INSET_X) / DESIGN_W;
+                const vInset = p * (bh * INSET_Y) / DESIGN_H;
+                const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
+                el.style.clipPath = clip;
+                el.style.webkitClipPath = clip; 
+            }
+            el.classList.toggle("active", p >= 1);
+        };
 
-            gsap.set([...spans, logoWrapRef.value], { opacity: 0, y: 40 });
+        const visualSt = ScrollTrigger.create({
+            trigger: sectionRef.value,
+            start: "top top",
+            end: `+=${PHASE1_PX}`,
+            scrub: 1.5,
+            onUpdate(self) {
+                applyBgClip(self.progress);
+            },
+        });
+        _syncVisualClip = () => {
+            visualSt.update();
+            applyBgClip(visualSt.progress);
+        };
+        applyBgClip(visualSt.progress);
+        // 26.06.02 Edit 정다희
+        gsap.set([...spans, logoWrapRef.value], { opacity: 0, y: 40 });
 
-            const textTl = gsap.timeline({ paused: true });
-            textTl
-                .to(spans, {
-                    opacity: 1,
+        const textTl = gsap.timeline({ paused: true });
+        textTl
+            .to(spans, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.2,
+                ease: "power2.out",
+            })
+            .to(logoWrapRef.value, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: "power2.out",
+            }, "-=0.3");
+
+        ScrollTrigger.create({
+            trigger: sectionRef.value,
+            start: `top+=${PHASE1_PX} top`,
+            once: false,
+            onEnter: () => textTl.play(),
+            onLeaveBack: () => textTl.reverse(),
+        });
+
+        const aboutSpans = aboutSectionRef.value.querySelectorAll("span");
+
+        gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
+
+        ScrollTrigger.create({
+            trigger: aboutSectionRef.value,
+            start: "top 75%",
+            once: true,
+            onEnter: () => {
+                gsap.to(aboutSpans, {
                     y: 0,
-                    duration: 0.6,
-                    stagger: 0.2,
-                    ease: "power2.out",
-                })
-                .to(logoWrapRef.value, {
                     opacity: 1,
-                    y: 0,
-                    duration: 0.6,
-                    ease: "power2.out",
-                }, "-=0.3");
-
-            ScrollTrigger.create({
-                trigger: sectionRef.value,
-                start: `top+=${PHASE1_PX} top`,
-                once: false,
-                onEnter: () => textTl.play(),
-                onLeaveBack: () => textTl.reverse(),
-            });
-
-            const aboutSpans = aboutSectionRef.value.querySelectorAll("span");
-
-            gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
-
-            ScrollTrigger.create({
-                trigger: aboutSectionRef.value,
-                start: "top 75%",
-                once: true,
-                onEnter: () => {
-                    gsap.to(aboutSpans, {
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.8,
-                        stagger: 0.1,
-                        ease: "power3.out",
-                        onComplete() {
-                            gsap.set(aboutSpans, { willChange: "auto" });
-                        },
-                    });
-                },
-            });
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    onComplete() {
+                        gsap.set(aboutSpans, { willChange: "auto" });
+                    },
+                });
+            },
         });
     });
 });
@@ -3290,6 +3324,8 @@ onBeforeUnmount(() => {
     window.removeEventListener("resize", _onResize);
     if (popSecObserver) popSecObserver.disconnect();
     if (gsapCtx) gsapCtx.revert();
+    // 26.06.02 Edit 정다희
+    _syncVisualClip = null;
 });
 
 /* =====================
@@ -3404,6 +3440,7 @@ function goBack() {
 
 <style scoped>
 .brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
+.sinsen_panel > .brand_panel_bg { min-height: 340px; background-color: #b3b3b3; }
 .brand_panel_bg > img { width: 100%; max-height:340px; display: block; object-fit: cover; }
 .brand_panel_title { padding: 0 0 100px;}
 .brand_panel_title > h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; display:flex; align-items:center;}
@@ -3427,6 +3464,9 @@ function goBack() {
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100vw; width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
 
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
+@media (max-width: 1024px) {
+.sec_brand_visual{height:200vh}
+.sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
 .bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.jpg); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
 
 .bg_wrap.active > .bg { transform: scale(1) }
@@ -3451,10 +3491,6 @@ function goBack() {
 .str_header > .str_actions { display: flex; align-items: center; gap: 24px }
 .sns_wrap { display: flex; align-items: center; gap: 6px }
 
-/* common.css로 이동
-.btn_sns { width: 56px; height: 56px; background-color: #F8F8F8; border-radius: 100%; display: flex; align-items: center; justify-content: center }
-.btn_sns::before { content: ""; background-color: #161616; border-radius: 4px; display: block }
-*/
 
 :deep(.tab_wrap ul.type_01 li .item) {height:100%; padding:8px 20px; white-space:pre-line; display:flex; align-items:center; justify-content:center;}
 
@@ -3752,7 +3788,7 @@ button { background-color: #fff }
   .sec_header .sec_cite { margin-top: 4px; margin-left: 0; display: block; }
   .brand_panel_bg { width: calc(100% + 40px);margin: 0 -20px 24px; border-radius: 0; }
   .brand_panel_title { padding: 0 0 64px; }
-  .brand_panel_bg > img { max-height: 245px;  }
+  .brand_panel_bg > img { max-height: 240px;  }
   .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display:block;}
 
   .brand_panel_title > h2 :deep(a) {margin-top:16px; margin-left:0; font-size:1.4rem; font-weight:500; line-height:140%;}
@@ -3763,10 +3799,10 @@ button { background-color: #fff }
   .chicken_panel .brand_panel_bg > img { object-position: 34% top; transform: scale(1.35);  }
   .gopizza_panel .brand_panel_bg > img { object-position: center bottom; }
   .gopizza_panel .diff_bottom_row { margin-top: 120px; }
-  .sinsen_panel .brand_panel_bg > img { object-position: -395px bottom; }
+  .sinsen_panel > .brand_panel_bg { min-height: 245px; background-color: #b3b3b3; }
   .delivery_panel_3 .brand_panel_bg > img{ object-position: 70% bottom; }
   
-  .sec_brand_visual { height: 100vh }
+  /* .sec_brand_visual { height: 100vh } */
   .sticky { height: 100vh; top: 0 }
 
   .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(@/assets/images/dummy/brand_main_bg.jpg); transform: scale(1.25); background-position: 54% 50px }
@@ -4132,7 +4168,7 @@ button { background-color: #fff }
 }
 
 @media (max-width: 768px) {
-    .service_tab_wrap { margin-bottom: 40px }
+    .service_tab_wrap { width: calc(100% + 20px); margin-bottom: 40px }
     .service_tab_wrap::after { content:''; width:clamp(24px, 8.53vw, 32px); height:100%; background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); position:absolute; top:0; right:0; pointer-events:none; z-index:1 }
     /* .service_tab_list { padding: 0 20px } */
     /* .service_tab_list::after { content:''; min-width:20px; flex-shrink:0 } */
