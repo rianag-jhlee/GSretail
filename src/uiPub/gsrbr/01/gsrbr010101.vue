@@ -3187,100 +3187,134 @@ const isMobileView = ref(_getIsMobile());
 let _resizeTimer = null;
 const _onResize = () => {
     isMobileView.value = _getIsMobile();
+    const syncClip = () => {
+        if (typeof _syncVisualClip === "function") _syncVisualClip();
+    };
+    syncClip();
+    requestAnimationFrame(syncClip);
     clearTimeout(_resizeTimer);
-    _resizeTimer = setTimeout(() => { ScrollTrigger.refresh(); }, 150);
+    _resizeTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+        syncClip();
+    }, 150);
 };
 
 let popSecObserver = null;
+let _syncVisualClip = null;
 onMounted(() => {
     isMobileView.value = _getIsMobile();
     window.addEventListener("resize", _onResize);
 
     const targets = document.querySelectorAll("[data-pop-sec]");
-    if (!targets.length) return;
-    popSecObserver = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    popLnbActiveIdx.value = Number(entry.target.dataset.popSec);
-                }
-            });
-        },
-        { threshold: 0.3 }
-    );
-    targets.forEach((el) => popSecObserver.observe(el));
+    if (targets.length) {
+        popSecObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        popLnbActiveIdx.value = Number(entry.target.dataset.popSec);
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+        targets.forEach((el) => popSecObserver.observe(el));
+    }
+
+    // 26.06.02 Edit 정다희
+    if (!sectionRef.value || !bgWrapRef.value || !textParaRef.value || !logoWrapRef.value || !aboutSectionRef.value) return;
 
     gsapCtx = gsap.context(() => {
-        const mm = gsap.matchMedia();
-        mm.add("(min-width: 1025px)", () => {
-            const spans = textParaRef.value.querySelectorAll("span");
-            const PHASE1_PX = 400;
+        const spans = textParaRef.value.querySelectorAll("span");
+        const PHASE1_PX = 400;
+        const DESIGN_W = 1920;
+        const DESIGN_H = 1080;
+        const INSET_X = 250;
+        const INSET_Y = 140;
+        const TABLET_BP = 1024;
+        const TABLET_CLIP_V = 35;
+        const TABLET_CLIP_H = 20;
+        const TABLET_CLIP_RADIUS = 8;
 
-            ScrollTrigger.create({
-                trigger: sectionRef.value,
-                start: "top top",
-                end: `+=${PHASE1_PX}`,
-                scrub: 1.5,
-                onUpdate(self) {
-                    const p = self.progress;
-                    const bw = bgWrapRef.value.offsetWidth;
-                    const bh = bgWrapRef.value.offsetHeight;
-                    const hInset = p * Math.max(0, (bw - 1420) / 2);
-                    const vInset = p * Math.max(0, (bh - 799) / 2);
-                    const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
-                    bgWrapRef.value.style.clipPath = clip;
-                    bgWrapRef.value.style.webkitClipPath = clip;
-                    bgWrapRef.value.classList.toggle("active", p >= 1);
-                },
-            }); 
+        const applyBgClip = (p) => {
+            const el = bgWrapRef.value;
+            if (window.innerWidth <= TABLET_BP) {
+                el.style.setProperty("--bgClip", `${p * TABLET_CLIP_V}px ${p * TABLET_CLIP_H}px round ${p * TABLET_CLIP_RADIUS}px`);
+                el.style.clipPath = "";
+                el.style.webkitClipPath = "";
+            } else {
+                el.style.removeProperty("--bgClip");
+                const bw = el.offsetWidth;
+                const bh = el.offsetHeight;
+                const hInset = p * (bw * INSET_X) / DESIGN_W;
+                const vInset = p * (bh * INSET_Y) / DESIGN_H;
+                const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
+                el.style.clipPath = clip;
+                el.style.webkitClipPath = clip; 
+            }
+            el.classList.toggle("active", p >= 1);
+        };
 
-            gsap.set([...spans, logoWrapRef.value], { opacity: 0, y: 40 });
+        const visualSt = ScrollTrigger.create({
+            trigger: sectionRef.value,
+            start: "top top",
+            end: `+=${PHASE1_PX}`,
+            scrub: 1.5,
+            onUpdate(self) {
+                applyBgClip(self.progress);
+            },
+        });
+        _syncVisualClip = () => {
+            visualSt.update();
+            applyBgClip(visualSt.progress);
+        };
+        applyBgClip(visualSt.progress);
+        // 26.06.02 Edit 정다희
+        gsap.set([...spans, logoWrapRef.value], { opacity: 0, y: 40 });
 
-            const textTl = gsap.timeline({ paused: true });
-            textTl
-                .to(spans, {
-                    opacity: 1,
+        const textTl = gsap.timeline({ paused: true });
+        textTl
+            .to(spans, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.2,
+                ease: "power2.out",
+            })
+            .to(logoWrapRef.value, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: "power2.out",
+            }, "-=0.3");
+
+        ScrollTrigger.create({
+            trigger: sectionRef.value,
+            start: `top+=${PHASE1_PX} top`,
+            once: false,
+            onEnter: () => textTl.play(),
+            onLeaveBack: () => textTl.reverse(),
+        });
+
+        const aboutSpans = aboutSectionRef.value.querySelectorAll("span");
+
+        gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
+
+        ScrollTrigger.create({
+            trigger: aboutSectionRef.value,
+            start: "top 75%",
+            once: true,
+            onEnter: () => {
+                gsap.to(aboutSpans, {
                     y: 0,
-                    duration: 0.6,
-                    stagger: 0.2,
-                    ease: "power2.out",
-                })
-                .to(logoWrapRef.value, {
                     opacity: 1,
-                    y: 0,
-                    duration: 0.6,
-                    ease: "power2.out",
-                }, "-=0.3");
-
-            ScrollTrigger.create({
-                trigger: sectionRef.value,
-                start: `top+=${PHASE1_PX} top`,
-                once: false,
-                onEnter: () => textTl.play(),
-                onLeaveBack: () => textTl.reverse(),
-            });
-
-            const aboutSpans = aboutSectionRef.value.querySelectorAll("span");
-
-            gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
-
-            ScrollTrigger.create({
-                trigger: aboutSectionRef.value,
-                start: "top 75%",
-                once: true,
-                onEnter: () => {
-                    gsap.to(aboutSpans, {
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.8,
-                        stagger: 0.1,
-                        ease: "power3.out",
-                        onComplete() {
-                            gsap.set(aboutSpans, { willChange: "auto" });
-                        },
-                    });
-                },
-            });
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    onComplete() {
+                        gsap.set(aboutSpans, { willChange: "auto" });
+                    },
+                });
+            },
         });
     });
 });
@@ -3288,6 +3322,8 @@ onBeforeUnmount(() => {
     window.removeEventListener("resize", _onResize);
     if (popSecObserver) popSecObserver.disconnect();
     if (gsapCtx) gsapCtx.revert();
+    // 26.06.02 Edit 정다희
+    _syncVisualClip = null;
 });
 
 /* =====================
@@ -3426,6 +3462,9 @@ function goBack() {
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100vw; width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
 
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
+@media (max-width: 1024px) {
+.sec_brand_visual{height:200vh}
+.sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
 .bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.jpg); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
 
 .bg_wrap.active > .bg { transform: scale(1) }
@@ -3450,10 +3489,6 @@ function goBack() {
 .str_header > .str_actions { display: flex; align-items: center; gap: 24px }
 .sns_wrap { display: flex; align-items: center; gap: 6px }
 
-/* common.css로 이동
-.btn_sns { width: 56px; height: 56px; background-color: #F8F8F8; border-radius: 100%; display: flex; align-items: center; justify-content: center }
-.btn_sns::before { content: ""; background-color: #161616; border-radius: 4px; display: block }
-*/
 
 :deep(.tab_wrap ul.type_01 li .item) {height:100%; padding:8px 20px; white-space:pre-line; display:flex; align-items:center; justify-content:center;}
 
@@ -3765,7 +3800,7 @@ button { background-color: #fff }
   .sinsen_panel > .brand_panel_bg { min-height: 245px; background-color: #b3b3b3; }
   .delivery_panel_3 .brand_panel_bg > img{ object-position: 70% bottom; }
   
-  .sec_brand_visual { height: 100vh }
+  /* .sec_brand_visual { height: 100vh } */
   .sticky { height: 100vh; top: 0 }
 
   .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(@/assets/images/dummy/brand_main_bg.jpg); transform: scale(1.25); background-position: 54% 50px }
