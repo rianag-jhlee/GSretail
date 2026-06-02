@@ -2,13 +2,18 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.common.close }}</a>
         </div>
 
         <div class="modal_content">
             <section class="listening_form_area">
                 <i v-html="t.listening.Txt"></i>
-                
+                <!-- case: 멤머십 및 홈페이지 문의 시 26.06.02 add 정다희 -->
+                <div class="section_title_area">
+                    <h4>{{ t.listening.membershipTitle }}</h4>
+                    <p class="p_desc">{{ t.listening.membershipDesc }}</p>
+                </div>
+                <!-- //case: 멤머십 및 홈페이지 문의 시 26.06.02 add 정다희 -->
                 <div class="consent_container">
                     <article v-for="(consent, cIdx) in t.listening.Consents" :key="'consent-'+cIdx" class="consent_box">
                         <strong class="consent_tit">{{ consent.title }}</strong>
@@ -17,14 +22,17 @@
                         </ul>
                         <div class="consent_agree">
                             <p class="guide_text" v-html="consent.guide"></p>
-                            <Inputs type="checkbox" text="동의합니다." v-model="formData.agreements[cIdx]" />
+                            <Inputs type="checkbox" :text="t.common.agree" v-model="formData.agreements[cIdx]" />
                         </div>
                     </article>
                 </div>
 
                 <!-- 260508: hgkim: class="off" 추가시 displya:none 처리됨 -->
-                <article class="noti_non_member">
-                    <span>{{ t.listening.Nonmember.title }}</span>
+                <article class="notion_member">
+                    <p class="noti_title">
+                        <i class="noti_icon" aria-hidden="true"></i>
+                        <span>{{ t.listening.Nonmember.title }}</span>
+                    </p>
                     <ul class="bullet_01">
                         <li v-for="(list, lIdx) in t.listening.Nonmember.items" :key="'list-'+lIdx" v-html="list"></li>
                     </ul>
@@ -54,11 +62,11 @@
                                     </div>
                                     <div class="input_group email">
                                         <div class="group_wrap">
-                                            <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="이메일 아이디" /></div>
+                                            <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" :placeholder="t.listening.InputWrapcont.part1.emailIdPlaceholder" /></div>
                                             <span class="unit">@</span>
-                                            <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="도메인 입력" /></div>
+                                            <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" :placeholder="t.listening.InputWrapcont.part1.emailDomainPlaceholder" /></div>
                                         </div>
-                                        <SelectBox :options="t.listening.InputWrapcont.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
+                                        <SelectBox :options="t.listening.InputWrapcont.part1.emailOptions" v-model="formData.emailSelect" :initMsg="t.listening.InputWrapcont.part1.emailInitMsg" />
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -68,7 +76,7 @@
                                     </div>
                                     <div class="input_group">
                                         <div class="input_flex_item">
-                                            <SelectBox :options="t.listening.InputWrapcont.part1.telOptions" v-model="formData.tel1" initMsg="선택" />
+                                            <SelectBox :options="t.listening.InputWrapcont.part1.telOptions" v-model="formData.tel1" :initMsg="t.listening.InputWrapcont.part1.telInitMsg" />
                                         </div>
                                         <span class="unit">-</span>
                                         <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
@@ -78,7 +86,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!-- case: 1:1 상담 / 상담/비회원 시 26.06.02 add 정다희 -->
                         <div class="form_section">
                             <div class="form_header">
                                 <h5 class="form_title">{{ t.listening.InputWrapcont.part2.title }}</h5>
@@ -90,8 +98,8 @@
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.categoryLabel }}</span>
                                         <span class="required_mark">*</span>
                                     </div>
-                                    <div class="input_item full">
-                                        <span></span>
+                                    <div class="input_item full input_item_txt">
+                                        <span>GS25</span>
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -100,7 +108,7 @@
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
-                                        <SelectBox :options="t.listening.InputWrapcont.part2.categoryOptions" v-model="formData.category" initMsg="상담구분 선택" class="w428" />
+                                        <SelectBox :options="t.listening.InputWrapcont.part2.categoryOptions" v-model="formData.category" :initMsg="t.listening.InputWrapcont.part2.consultingInitMsg" class="w428" />
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -109,7 +117,7 @@
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_complex">
-                                        <Inputs type="text" v-model="formData.storeName" placeholder="매장명을 입력해주세요" class="w428"/>
+                                        <Inputs type="text" v-model="formData.storeName" :placeholder="t.listening.InputWrapcont.part2.storePlaceholder" class="w428"/>
                                         <p class="guide_msg">{{ t.listening.InputWrapcont.part2.storeGuide }}</p>
                                     </div>
                                 </div>
@@ -119,7 +127,7 @@
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
-                                        <Inputs type="text" v-model="formData.subject" placeholder="제목을 입력해주세요" class="w428"/>
+                                        <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.subjectPlaceholder" class="w428"/>
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -128,7 +136,7 @@
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_complex">
-                                        <Textarea v-model="formData.body" :placeholder="t.listening.InputWrapcont.part2.contentPlaceholder" :rows="6" :maxlength="500" />
+                                        <Textarea v-model="formData.body" :placeholder="t.listening.InputWrapcont.part2.contentPlaceholder" />
                                         <p class="guide_msg_multi" v-html="t.listening.InputWrapcont.part2.noticeText"></p>
                                     </div>
                                 </div>
@@ -146,11 +154,85 @@
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.replyLabel }}</span>
                                     </div>
                                     <div class="input_item full">
-                                        <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" initMsg="회신방법 선택" class="w428"/>
+                                        <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" :initMsg="t.listening.InputWrapcont.part2.replyInitMsg" class="w428"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- //case: 1:1 상담/ 상담/비회원 시 26.06.02 add 정다희 -->
+
+                        <!-- case: 멤머십 및 홈페이지 문의 시 26.06.02 add 정다희 -->
+                        <div class="form_section">
+                            <div class="form_header">
+                                <h5 class="form_title">{{ t.listening.membershipForm.title }}</h5>
+                                <span class="required_guide">{{ t.listening.membershipForm.requiredText }}</span>
+                            </div>
+                            <div class="form_body">
+                                <div class="form_row">
+                                    <div class="label_item">
+                                        <span class="label_text">{{ t.listening.membershipForm.inquiryTypeLabel }}</span>
+                                        <span class="required_mark">*</span>
+                                    </div>
+                                    <div class="input_item full">
+                                        <SelectBox :options="t.listening.membershipForm.inquiryTypeOptions" v-model="formData.category" :initMsg="t.listening.membershipForm.inquiryTypeInitMsg" class="w428" />
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="label_item">
+                                        <span class="label_text">{{ t.listening.membershipForm.divisionLabel }}</span>
+                                        <span class="required_mark">*</span>
+                                    </div>
+                                    <div class="input_item full">
+                                        <SelectBox :options="t.listening.membershipForm.divisionOptions" v-model="formData.category" :initMsg="t.listening.membershipForm.divisionInitMsg" class="w428" />
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="label_item">
+                                        <span class="label_text">{{ t.listening.membershipForm.consultingLabel }}</span>
+                                        <span class="required_mark">*</span>
+                                    </div>
+                                    <div class="input_item full">
+                                        <SelectBox :options="t.listening.membershipForm.consultingOptions" v-model="formData.replyType" :initMsg="t.listening.membershipForm.consultingInitMsg" class="w428" />
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="label_item">
+                                        <span class="label_text">{{ t.listening.membershipForm.subjectLabel }}</span>
+                                        <span class="required_mark">*</span>
+                                    </div>
+                                    <div class="input_item full">
+                                        <Inputs type="text" v-model="formData.subject" class="w428" />
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="label_item">
+                                        <span class="label_text">{{ t.listening.membershipForm.contentLabel }}</span>
+                                        <span class="required_mark">*</span>
+                                    </div>
+                                    <div class="input_complex">
+                                        <Textarea v-model="formData.body" :placeholder="t.listening.membershipForm.contentPlaceholder" />
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="label_item">
+                                        <span class="label_text">{{ t.listening.membershipForm.fileLabel }}</span>
+                                    </div>
+                                    <div class="input_complex">
+                                        <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
+                                        <p class="guide_msg">{{ t.listening.membershipForm.fileGuide }}</p>
+                                    </div>
+                                </div>
+                                <div class="form_row">
+                                    <div class="label_item">
+                                        <span class="label_text">{{ t.listening.membershipForm.replyLabel }}</span>
+                                    </div>
+                                    <div class="input_item full">
+                                        <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" :initMsg="t.listening.membershipForm.replyInitMsg" class="w428" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- case: 멤머십 및 홈페이지 문의 시 26.06.02 add 정다희 -->
                     </article>
                     <div class="btn-wrap">
                         <Buttons btn-class="btn_big primary"  @click="openModal" data-popid="gsrcu010101" data-type="small" data-cont="gsrcu010101">{{ t.listening.InputWrapcont.part2.btnSubmit }}</Buttons>
@@ -193,8 +275,14 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "고객의 소리",
+                    common: {
+                        close: "닫기",
+                        agree: "동의합니다.",
+                    },
                     listening: {
                         Txt:"언제나 고객님의 입장이 되어<br/> 작은 소리에도 귀를 기울이겠습니다.",
+                        membershipTitle: "멤버십 및 홈페이지 문의",
+                        membershipDesc: "멤버십 및 홈페이지 문의 또는, 제안할 점 등에 대해 의견을 남겨주세요.",
                         Consents: [
                             {
                                 title: "(선택) 개인정보 제3자 제공 동의",
@@ -219,9 +307,9 @@ export default {
                             }
                         ],
                         Nonmember: {
+                            title: "고객정보의 연락처를 확인해 주세요.",
                             items: [
-                                "비회원 문의를 하신 경우 답변은 '등록하신 연락처(문자,전화) 또는 이메일을 통해서만' 확인하실 수 있습니다.<br/>연락처를 정확하게 입력해주세요. (홈페이지 내에서 이전 문의이력 확인 불가)",
-                                "입력하신 연락처(문자, 전화) 또는 이메일’을 통해서만 답변 확인이 가능하오니 정확하게 입력 부탁드립니다."
+                                "문의에 대한 답변은 ‘등록하신 연락처(문자, 전화) 또는 이메일을 통해서만’ 확인하실 수 있습니다. 연락처를 정확하게 입력해주세요. <br/>(홈페이지 내에서 이전 문의이력 확인 불가)",
                             ]
                         },
                         InputWrapcont: {
@@ -231,18 +319,25 @@ export default {
                                 nameLabel: "이름",
                                 namePlaceholder: "이름을 입력해주세요",
                                 emailLabel: "이메일",
+                                emailIdPlaceholder: "이메일 아이디",
+                                emailDomainPlaceholder: "도메인 입력",
+                                emailInitMsg: "직접입력",
                                 emailOptions: [{ value: 'naver.com', label: 'naver.com' }, { value: 'gmail.com', label: 'gmail.com' }],
                                 telLabel: "연락처",
+                                telInitMsg: "선택",
                                 telOptions: [{ value: '010', label: '010' }, { value: '011', label: '011' }]
                             },
                             part2: {
                                 title: "상담내용",
                                 categoryLabel: "구분",
                                 Consulting:"상담구분 선택",
+                                consultingInitMsg: "상담구분 선택",
                                 categoryOptions: [{ value: 'store', label: '편의점/수퍼' }, { value: 'home', label: '홈쇼핑' }],
                                 storeLabel: "매장명",
+                                storePlaceholder: "매장명을 입력해주세요",
                                 storeGuide: "* 단, 점포명을 모르시는 경우 점포위치를 적어주세요",
                                 subjectLabel: "제목",
+                                subjectPlaceholder: "제목을 입력해주세요",
                                 contentLabel: "내용",
                                 contentPlaceholder: "입점 관련 궁금한 사항을 입력 해 주세요",
                                 noticeText: `
@@ -253,12 +348,36 @@ export default {
                                 fileLabel: "파일첨부",
                                 fileNotice: "* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)",
                                 replyLabel: "회신방법",
+                                replyInitMsg: "회신방법 선택",
                                 replyOptions: [{ value: 'email', label: '이메일' }, { value: 'sms', label: 'SMS' }],
                                 btnSubmit: "신청",
                                 btnCancel: "취소"
-                            }
+                            },
+                            membershipForm: {
+                                title: "상담내용",
+                                requiredText: "* 필수 입력사항",
+                                inquiryTypeLabel: "문의유형",
+                                inquiryTypeInitMsg: "문의유형 선택",
+                                inquiryTypeOptions: [{ value: 'membership', label: '멤버십/홈페이지' }],
+                                divisionLabel: "구분",
+                                divisionInitMsg: "상담구분 선택",
+                                divisionOptions: [{ value: 'consult', label: '상담구분' }],
+                                consultingLabel: "상담구분 선택",
+                                consultingInitMsg: "GS리테일",
+                                consultingOptions: [{ value: 'gsretail', label: 'GS리테일' }],
+                                subjectLabel: "제목",
+                                contentLabel: "내용",
+                                contentPlaceholder: "내용 입력시",
+                                fileLabel: "파일첨부",
+                                fileGuide: "* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)",
+                                replyLabel: "회신방법",
+                                replyInitMsg: "이메일",
+                            },
                         }
                     }
+                },
+                en: {
+                    
                 }
             }
         };
@@ -293,16 +412,17 @@ export default {
 .modal_header {width:100%; color:#161616; font-size:40px; font-weight:700; display:flex; align-items:center; justify-content:space-between; border-bottom:0 !important;}
 .modal_content {width:100%; overflow-y:auto; flex:1;}
 .input_wrap {display:flex; align-items:center; justify-content:flex-end;}
-.listening_form_area i {margin-bottom:40px; font-size:20px; display:block;}
+.listening_form_area i {margin-bottom:40px;font-size:20px; display:block;}
 :deep(.listening_form_area) i br {display:none;}
+:deep(.listening_form_area textarea){resize:none;}
 .section_title_area {margin-bottom:40px;}
 .section_title_area h4 {margin-bottom:8px; font-size:24px;}
 .section_title_area .p_desc { font-size:16px; font-weight: 400; color: #161616; line-height: 1.5; word-break: keep-all; }
-.noti_non_member {padding:24px; background:#F9F2EA; border-radius:12px;}
-.noti_non_member span {font-size:18px; position:absolute; top:50%; display:block; transform:translateY(-50%);}
-.noti_non_member span::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -160px -56px no-repeat; display:inline-block; }
-.noti_non_member ul {padding-left:34px;}
-.noti_non_member ul li {font-size:16px;}
+.notion_member {padding:24px; background:#F9F2EA; border-radius:12px;}
+.notion_member .noti_title {margin:0; color:#161616; font-size:1.8rem; line-height:1.4; letter-spacing:0; display:flex; align-items:center; gap:8px;}
+.notion_member .noti_icon {width:24px; height:24px; margin-bottom:0 !important; background:url('@/assets/images/common/icon_set_24.png') -160px -56px no-repeat; flex-shrink:0; display:block;}
+.notion_member ul {margin-top:10px; padding-left:0;}
+.notion_member ul li {font-size:1.6rem; letter-spacing: -0.01em;}
 .listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
 .listening_form_area .consent_tit {margin-bottom: 24px; font-size: 24px; font-weight: 700; display: block; }
 .listening_form_area .consent_list {padding-bottom:24px;}
@@ -316,16 +436,15 @@ export default {
 .listening_form_area textarea { height: 160px; resize: none; }
 .listening_form_area .consent_agree {padding-top:24px; border-top:1px solid #D7D7DF; display:flex; justify-content:space-between; align-items:center;}
 .listening_form_area .consent_agree p {font-size:16px; font-weight:700;}
-.listening_form_area article {margin-bottom:40px;}
-.listening_form_area article.noti_non_member {position:relative;}
-.listening_form_area article.noti_non_member span { }
+.listening_form_area article {margin-top:40px;}
+.listening_form_area article.notion_member {position:relative;}
 .listening_form_wrap .form_header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #242428; }
 .listening_form_wrap .form_title { font-size: 24px; font-weight: 700; color: #161616; }
 .listening_form_wrap .required_guide { font-size: 14px; color: #fb6432; }
 .form_section:first-of-type {margin-bottom:64px;}
 .listening_form_wrap .form_body {padding:10px 0 12px; border-bottom: 1px solid #e5e5e9; }
-.listening_form_wrap .form_row { display: flex; align-items: flex-start; gap: 8px; padding: 12px 0; }
-.listening_form_wrap .label_item { display: flex; width: 134px; align-items: center; gap: 4px; padding-top: 14px; }
+.listening_form_wrap .form_row { display: flex; align-items: center; gap: 8px; padding: 12px 0; }
+.listening_form_wrap .label_item { display: flex; width: 134px; align-items: center; gap: 4px;}
 .listening_form_wrap .label_text { font-size: 16px; color: #161616; }
 .listening_form_wrap .required_mark { color: #fb6432; font-size: 16px; }
 .listening_form_wrap .input_group { display: flex; align-items: center; gap: 8px;}
@@ -341,7 +460,7 @@ export default {
 .listening_form_wrap .file_upload_group { display: flex; align-items: center; gap: 10px; }
 .listening_form_wrap .btn_file { height: 38px; padding: 0 12px; font-size: 16px; cursor: pointer; }
 .listening_form_wrap .file_name { font-size: 14px; color: #161616; }
-.form_container .btn-wrap {display:flex; justify-content:flex-end; gap:8px;}
+.form_container .btn-wrap {margin-top:40px;display:flex; justify-content:flex-end; gap:8px;}
 .form_container .btn-wrap * {width:134px;}
 .w428 {width:428px; display:inline-block;}
 
@@ -350,14 +469,19 @@ export default {
     .listening_form_wrap .form_row {flex-direction:column;}
     .w428 {width:100%;}
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     .modal_header {font-size:18px;}
     .input_item, .input_complex, .input_wrap, .w428 {width:100%;}
     .section_title_sub {font-size:16px !important;}
     .p_desc {font-size:14px;}
     .listening_form_area i {font-weight:700;}
+    .section_title_area{margin-bottom:60px;}
+    .input_item.input_item_txt span{font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
     :deep(.listening_form_area) i br {display:block;}
-    .listening_form_area .consent_box {margin-bottom:20px; padding:30px 20px;}
+    .section_title_area h4{font-size: 1.6rem;line-height: 1.24;letter-spacing: 0%;}
+    .listening_form_wrap .form_row{gap:12px;align-items: flex-start;}
+    .listening_form_area .consent_box {padding:30px 20px;}
+    .listening_form_area article{margin-top:20px;}
     .listening_form_wrap .input_group.email {flex-direction:column; align-items:stretch;}
     .consent_agree {flex-direction:column; align-items:flex-start; gap:15px;}
     .guide_text + .input_wrap {justify-content:flex-start;}
@@ -368,8 +492,8 @@ export default {
     .consent_list li, .consent_agree p  {font-size:14px !important;}
     :deep(.check) em {font-size:16px !important;}
     :deep(.guide_text) br {display:none;}
-    .noti_non_member span {font-size:14px; top:40px;}
-    .noti_non_member ul li {font-size:12px;}
+    .notion_member .noti_title {font-size:1.4rem; line-height:1.4; letter-spacing:-0.01em;}
+    .notion_member ul li {font-size:1.2rem;}
     .listening_form_wrap .guide_msg_multi {font-size:14px;}
     :deep(.guide_msg_multi) span {margin-bottom:8px; display:block;}
     :deep(.guide_msg_multi) span:last-of-type {margin-bottom:0;}
