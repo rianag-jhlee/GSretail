@@ -45,16 +45,16 @@
             <button class="go_top" :class="{ hide: isTop, isStatic: isFooterVisible }" @click="scrollTop">Go to top</button>
         </div>
 
-        <!-- 26.06.01 Add 이종환 : sky quick 공통처리 -->
-        <ul
-            class="quick_menu is_visible" :class="{ istop: isTop, isStatic: isFooterVisible }"
-            :aria-hidden="!showQuickMenu"
-        >
-            <li v-for="item in t.skybanner" :key="item"><a :href="item.link">{{ item.txt }}</a></li>
-            <!-- <li><button type="button">입점상담</button></li>
-            <li><button type="button">고객센터</button></li> -->
-        </ul>
-        <!-- //26.06.01 Add 이종환 : sky quick 공통처리 -->
+        <!-- 26.06.02 Add 이종환 : sky quick 공통처리 및 수정 -->
+        <div class="sky_quick" :class="{ istop: isTop, isStatic: isFooterVisible , active: isActive}">
+            <ul class="quick_menu">
+                <li v-for="item in t.skybanner" :key="item"><a :href="item.link">{{ item.txt }}</a></li>
+                <!-- <li><button type="button">입점상담</button></li>
+                <li><button type="button">고객센터</button></li> -->
+            </ul>
+            <button class="btn_toggle" @click="isActive = !isActive"></button>
+        </div>
+        <!-- //26.06.02 Add 이종환 : sky quick 공통처리 및 수정 -->
     </footer>
 
     <!-- 입지제안 팝업 -->
@@ -88,6 +88,7 @@ const quickList = ref(null);
 const familySiteRef = ref("");
 
 const showQuickMenu = ref(true); //26.06.01 Add 이종환 : 
+const isActive = ref(false); //26.06.02 Add 이종환 : 
 
 // =====================
 // state

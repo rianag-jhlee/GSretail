@@ -54,7 +54,7 @@
                 <div class="swiper" ref="sec04Swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" v-for="(item, i) in t.sec04.items" :key="i">
-                            <div class="slide">
+                            <a :href="item.link" class="slide">
                                 <span class="thumb">
                                     <em><img :src="item.img" /></em>
                                 </span>
@@ -68,7 +68,7 @@
 
                                     <p v-html="item.title"></p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -165,7 +165,8 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: '01GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"'
+                                title: '01GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                link:'/gsrne0101'
                             },
                             {
                                 img: require("@/assets/images/dummy/main_news_00.png"),
@@ -173,7 +174,8 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: '02GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"'
+                                title: '02GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                link:'/gsrne0101'
                             },
                             {
                                 img: require("@/assets/images/dummy/main_news_00.png"),
@@ -181,7 +183,8 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: '03GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"'
+                                title: '03GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                link:'/gsrne0101'
                             },
                             {
                                 img: require("@/assets/images/dummy/main_news_00.png"),
@@ -189,7 +192,8 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: '04GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"'
+                                title: '04GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                link:'/gsrne0101'
                             },
                             {
                                 img: require("@/assets/images/dummy/main_news_00.png"),
@@ -197,7 +201,8 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: '05GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"'
+                                title: '05GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                link:'/gsrne0101'
                             },
                             {
                                 img: require("@/assets/images/dummy/main_news_00.png"),
@@ -205,7 +210,8 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: '06GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"'
+                                title: '06GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                link:'/gsrne0101'
                             },
                             {
                                 img: require("@/assets/images/dummy/main_news_00.png"),
@@ -213,7 +219,8 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: '07GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"'
+                                title: '07GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                link:'/gsrne0101'
                             },
                         ]
                     }
