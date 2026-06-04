@@ -376,9 +376,9 @@ export default {
             }
 
             /* 26.06.04 Add 이종환 : mo header 상단 비주얼 확인하여 head_black 클래스 추가/제거 */
-            const windowWidth = ref(window.innerWidth);
+            const width = window.innerWidth;
 
-            if(windowWidth <= 768){
+            if(width <= 768){
                 setTimeout(() => {
                     const header = document.getElementById("header");
                     const visual = document.querySelector(".top_visual");
@@ -398,6 +398,7 @@ export default {
                     console.log("isVisible:", isVisible);
                     console.log("isSubPage:", isSubPage.value);
                 }, 100);
+                console.log('mo');
             }
             /* //26.06.04 Add 이종환 : mo header 상단 비주얼 확인하여 head_black 클래스 추가/제거 */
         });
