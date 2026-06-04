@@ -618,7 +618,7 @@ export default {
                                     "수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
                                     "보유 및 이용기간: 접수 후 1년"
                                 ],
-                                guide: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br/> 문의 글 작성이 불가능합니다."
+                                guide: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 문의 글 작성이 불가능합니다."
                             }
                         ],
                         InputWrapcont: {
@@ -813,7 +813,7 @@ export default {
 
 /* 상담신청 */
 .radio_wrap {display:flex; gap:20px;}
-.input_wrap.type-radio {justify-content:flex-start; flex:auto;}
+.input_wrap.type-radio {width: auto !important;flex: 0 1 auto;}
 .listening_form_area .consent_box { background-color: #f8f8f8; padding: 32px; border-radius: 12px;}
 .listening_form_area .consent_tit {margin-bottom: 24px; font-size: 2.4rem; font-weight: 700; display: block; }
 .listening_form_area .consent_list {padding-bottom:24px;}
@@ -871,7 +871,7 @@ export default {
 .listening_form_wrap .department em { font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 .form_container .btn-wrap {display:flex; justify-content:flex-end; gap:8px;}
 .form_container .btn-wrap * {width:134px;}
-.input_wrap.type-radio {width:auto !important;}
+
 
 /* 9. 반응형 미디어 쿼리 */
 @media screen and (max-width: 1024px) {
@@ -888,7 +888,6 @@ export default {
     .mt100 {margin-top:60px !important}
     .mb100 {margin-bottom:60px !important}
     :deep(.tab_wrap) ul.type_02 {padding-left:0px !important;}
-    .input_wrap.type-radio {width: auto !important;flex: 0 1 auto;}
     .text-wrapper { font-size: 2.4rem;}
     .title_wrap  {display:none;}
     .section-sub-title, .guide_title {font-size: 2.4rem;}
