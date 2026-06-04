@@ -31,7 +31,7 @@
                     <Buttons
                         v-for="(btn, bIdx) in t.committee.downloadBtns"
                         :key="'dl-' + bIdx"
-                        btn-class="btn_icon btn_big gray after"
+                        btn-class="btn_icon_arrow btn_big gray after"
                         @click="handleDownload(btn.link)"
                     >
                         {{ btn.text }}
