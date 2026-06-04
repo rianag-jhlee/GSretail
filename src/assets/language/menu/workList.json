@@ -1534,7 +1534,7 @@
     {
         "depth1": "", "depth2": "", "depth3": "", "depth4": "제보", "depth5": "", "depth6": "",
         "type": "TAB",
-        "path": "gsrsu/04/gsrsu040104",
+        "path": "gsrsu/04/gsrsu040104", 
         "link": "/gsrsu040104" ,
         "startDate": "",
         "endDate": "",
@@ -1572,13 +1572,23 @@
         "note": "gsrsu040101에서서 확인"
     },
     {
+        "depth1": "개인정보처리방침", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrcm/01/gsrcm01",
+        "link": "/gsrcm01" ,
+        "startDate": "",
+        "endDate": "",
+        "status": "ing",
+        "note": ""
+    },
+    {
         "depth1": "GS SHOP 시청자 관련", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
         "type": "TAB",
         "path": "gsrcm/04/gsrcm0401",
         "link": "/gsrcm0401" ,
         "startDate": "",
         "endDate": "",
-        "status": "ing",
+        "status": "com",
         "note": ""
     },
     {
