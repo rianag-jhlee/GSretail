@@ -59,9 +59,65 @@
             </section>
         </div>
 
-        <div v-show="cTabIdx === 1" class="panel" :aria-label="t.tabs[1].item"></div>
+        <div v-show="cTabIdx === 1" class="panel" :aria-label="t.tabs[1].item">
+            <section class="sec_viewer">
+                <h3 class="tit ac">{{ t.meeting.introTitle }}</h3>
+                <div class="policy_wrap">
+                    <table class="base_table">
+                        <tbody>
+                            <tr v-for="(item, idx) in t.meeting.list" :key="'meeting-' + idx">
+                                <td class="ac color_gray">{{ item.id }}</td>
+                                <td class="al title_cell">
+                                    <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
+                                </td>
+                                <td class="ac">
+                                    <button type="button" class="btn_download_file" @click="handleDownload(item.link)">
+                                        <span class="file_type_text">PDF</span>
+                                    </button>
+                                </td>
+                                <td class="ac color_gray date_cell">{{ item.year }}</td>
+                            </tr>
+                            <tr v-if="t.meeting.list.length === 0">
+                                <td colspan="4" class="ac py80">{{ t.noDataText }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <div class="pagination_area">
+                <Pagination v-model="meetingPage" :total-pages="5" @change="onMeetingPageChange" />
+            </div>
+        </div>
 
-        <div v-show="cTabIdx === 2" class="panel" :aria-label="t.tabs[2].item"></div>
+        <div v-show="cTabIdx === 2" class="panel" :aria-label="t.tabs[2].item">
+            <section class="sec_viewer">
+                <h3 class="tit ac">{{ t.opinions.introTitle }}</h3>
+                <div class="policy_wrap">
+                    <table class="base_table">
+                        <tbody>
+                            <tr v-for="(item, idx) in t.opinions.list" :key="'opinion-' + idx">
+                                <td class="ac color_gray">{{ item.id }}</td>
+                                <td class="al title_cell">
+                                    <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
+                                </td>
+                                <td class="ac">
+                                    <button type="button" class="btn_download_file" @click="handleDownload(item.link)">
+                                        <span class="file_type_text">PDF</span>
+                                    </button>
+                                </td>
+                                <td class="ac color_gray date_cell">{{ item.year }}</td>
+                            </tr>
+                            <tr v-if="t.opinions.list.length === 0">
+                                <td colspan="4" class="ac py80">{{ t.noDataText }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <div class="pagination_area">
+                <Pagination v-model="opinionPage" :total-pages="5" @change="onOpinionPageChange" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -69,6 +125,7 @@
 import { ref, computed, defineProps } from "vue";
 import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
+import Pagination from "@/components/Pagination.vue";
 
 const props = defineProps({
     lang: { type: String, default: "ko" },
@@ -116,12 +173,39 @@ const langData = {
                 { role: "위원", name: "김현호", org: "법무법인 이제", position: "변호사" },
             ],
         },
+        meeting: {
+            introTitle: "GS SHOP의 시청자위원회 자료들을 열람하실 수 있습니다.",
+            list: [
+                { id: "60", title: "1월 GS리테일(GSSHOP) 시청자위원회 운영실적 보고서", link: "#", year: "2026-02-17" },
+                { id: "59", title: "12월 GS리테일(GSSHOP) 시청자위원회 운영실적 보고서", link: "#", year: "2026-02-17" },
+                { id: "58", title: "11월 GS리테일(GSSHOP) 시청자위원회 운영실적 보고서", link: "#", year: "2026-02-17" },
+            ],
+        },
+        opinions: {
+            introTitle: "GS SHOP의 시청자의견 반영 결과보고 자료들을 열람하실 수 있습니다.",
+            list: [
+                { id: "60", title: "2025년 12월 소비자 실무위원회 결과보고서", link: "#", year: "2026-02-17" },
+                { id: "59", title: "2025년 12월 시청자 의견 반영 결과 보고서", link: "#", year: "2026-02-17" },
+                { id: "58", title: "2025년 11월 소비자 실무위원회 결과보고서", link: "#", year: "2026-02-17" },
+            ],
+        },
+        noDataText: "조회된 데이터가 없습니다.",
     },
 };
 
 const cTabIdx = ref(0);
+const meetingPage = ref(1);
+const opinionPage = ref(1);
 
 const t = computed(() => langData[props.lang] || langData.ko);
+
+function onMeetingPageChange(page) {
+    meetingPage.value = page;
+}
+
+function onOpinionPageChange(page) {
+    opinionPage.value = page;
+}
 
 function handleDownload(link) {
     if (link && link !== "#none") {
@@ -133,6 +217,7 @@ function handleDownload(link) {
 <style scoped>
 .title_wrap { padding: 200px 0 100px; display: flex; flex-direction: column; }
 .title_wrap > h2 { color: #161616; font-size: 7.2rem; font-weight: 700; line-height: 1.24; letter-spacing: -0.02em; text-align: center; }
+:deep(.tab_wrap){margin-bottom:0;}
 .panel { padding-top: 80px; }
 .sec_viewer + .sec_viewer { margin-top: 100px; }
 .sec_viewer > h3.tit { margin: 0 0 16px; color: #161616; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
@@ -153,12 +238,26 @@ function handleDownload(link) {
 .sec_roster > ul > li > article > .info > strong { margin: 2px 0 0; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_roster > ul > li > article > .info > p.org { margin: 16px 0 0; color: #242428; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_roster > ul > li > article > .info > p.org + p.position { margin: 0; color: #242428; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.policy_wrap { margin-top: 100px; }
+.policy_wrap table { width: 100%; border-collapse: collapse; border-top: 0; }
+.policy_wrap td { height: 82px; padding: 18px 24px; color: #161616; font-size: 1.8rem; vertical-align: middle; border-bottom: 1px solid #E5E5E9; border-left: 0; border-right: 0; }
+.policy_wrap td a { font-size: 1.8rem; color: #161616; text-decoration: none; }
+.policy_wrap td a:hover { text-decoration: underline; }
+.policy_wrap tbody tr:first-of-type td { border-top: 1px solid #161616; }
+.color_gray { color: #67676f; }
+.file_type_text { font-size: 18px; color: #161616; }
+.btn_download_file { display: inline-flex; align-items: center; gap: 12px; background: none; border: 0; cursor: pointer; }
+.btn_download_file::before { content: ""; width: 24px; height: 24px; background: url("@/assets/images/common/icon_set_24.png") -832px -56px no-repeat; display: inline-block; }
+
+
 @media screen and (max-width: 1024px) {
+    .policy_wrap td, .policy_wrap td a { font-size: 1.6rem !important; }
     .sec_roster > ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .sec_roster > ul > li { padding-right: 28px; border-right: 1px solid #f2f2f4; }
     .sec_roster > ul > li:nth-child(4n) { padding-right: 28px; border-right: 1px solid #f2f2f4; }
     .sec_roster > ul > li:nth-child(2n) { padding-right: 0; border-right: none; }
 }
+
 @media screen and (max-width: 768px) {
     .title_wrap { display: none;}
     .panel { padding-top:60px; }
@@ -168,8 +267,7 @@ function handleDownload(link) {
     .sec_duty > ul { padding: 32px; gap: 4px; }
     .sec_duty > ul > li { padding-left:20px; font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .sec_viewer > .button_wrap { margin-top: 24px; }
-    .sec_viewer > .button_wrap :deep(.btn_big) { }
-    
+    .policy_wrap{margin-top:80px;}
     .sec_roster > ul { grid-template-columns: 1fr; row-gap: 20px; }
     .sec_roster > ul > li { padding-right: 0; border-right: none; }
     .sec_roster > ul > li > article { min-height: 160px; flex-direction: row; align-items:flex-end; gap: 32px; }
@@ -179,5 +277,17 @@ function handleDownload(link) {
     .sec_roster > ul > li > article > .info > strong { margin: 3px 0 0; font-size: 2.8rem; line-height: 1.35; }
     .sec_roster > ul > li > article > .info > p.org { margin: 3px 0 0; color: #242428; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .sec_roster > ul > li > article > .info > p.org + p.position { margin: 0; color: #242428; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .base_table tbody tr td:first-of-type { display: none; }
+    .base_table tbody,.base_table tr,.base_table td { display: block; width: 100%; height: auto; border: 0; }
+    .base_table tr { padding: 12px 10px; border-bottom: 1px solid #EEE; display: flex; flex-wrap: wrap; align-items: center; }
+    .policy_wrap tbody tr:first-of-type td { border-top: 0; }
+    .base_table { border-top: 1px solid #161616; }
+    .base_table .title_cell { padding: 0 0 8px 0; order: 1; }
+    .base_table .title_cell .link_title { color: #161616; font-size: 1.6rem !important; font-weight: 500; line-height: 1.4; }
+    .base_table .date_cell { width: 50%; height: auto; padding: 0; color: #999; font-size: 1.2rem !important; text-align: left !important; order: 2; display: flex; align-items: center; }
+    .base_table tr > td:nth-child(3) { width: 50%; height: auto; padding: 0; text-align: right !important; order: 3; border: 0; display: flex; align-items: center; justify-content: flex-end; }
+    .base_table tr > td:nth-child(3) .btn_download_file { margin-left: 0; }
+    .base_table tr > td:nth-child(3) .file_type_text { display: none; }
+    .policy_wrap td, .policy_wrap td a { font-size: 1.6rem !important; }
 }
 </style>
