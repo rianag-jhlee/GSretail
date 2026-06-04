@@ -579,7 +579,7 @@
                         </header>
                     <section>
                         <div class="usage_group">
-                            <h4 class="usage_group_title">{{ tab.sub_item.title }}</h4>
+                            <h4 class="usage_group_title is_compact">{{ tab.sub_item.title }}</h4>
                             <p class="explain" v-html="tab.sub_item.explain"></p>
                             <p class="retail_note" v-html="tab.sub_item.retail_note"></p>
 
@@ -778,7 +778,7 @@
                                         </div>
 
                                         <div v-if="retailSelectVal && tab.retailOptions[retailSelectVal]" class="usage_group">
-                                            <h4 class="usage_group_title">{{ tab.retailOptions[retailSelectVal].title }}</h4>
+                                            <h4 class="usage_group_title" :class="{ is_compact: tab.retailOptions[retailSelectVal].note }">{{ tab.retailOptions[retailSelectVal].title }}</h4>
                                             <p v-if="tab.retailOptions[retailSelectVal].note" class="retail_note">{{ tab.retailOptions[retailSelectVal].note }}</p>
                                             <!-- 로고 그리드 -->
                                             <ul v-if="tab.retailOptions[retailSelectVal].items" class="logo_list">
@@ -1037,7 +1037,7 @@
                         </header>
                         <Steps type="2" :items="tab.hipassSteps" />
                     </section>
-                    <section>
+                    <section class="sec_header_only">
                         <header class="sec_header">
 
                             <h3 v-html="tab.hipassChargeTitle"></h3>
@@ -3450,9 +3450,12 @@ function goBack() {
 
 .brand_panel_title > p { margin: 0; color: #161618; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_header { padding-bottom: 40px; }
-.sec_header > h3 { margin: 0 0 12px; color: #161618; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_header:not(:has(p)) > h3 { margin-bottom: 0; }
-.sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc { margin: 0; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; }
+.sec_header > h3 { margin: 0; color: #161618; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_header > h3 + p,
+.sec_header > h3 + .sec_header_desc,
+.sec_header > h3 + .sec_note,
+.sec_header > h3 + .pop_exclude { margin-top: 12px; }
+.sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc {font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
 .sec_header .sec_cite { margin-left: 16px; color: #67676f; font-size: 1.4rem; font-weight: 500; font-style: normal; letter-spacing: -0.01em; }
 
 .cafe_panel .brand_panel_bg > img { object-position: center bottom }
@@ -3464,6 +3467,7 @@ function goBack() {
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100vw; width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
 
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
+.brand_panel_title > p{font-weight: 700;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;}
 @media (max-width: 1024px) {
 .sec_brand_visual{height:200vh}
 .sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
@@ -3631,7 +3635,7 @@ button { background-color: #fff }
 .service_tab_label { color: #7c7c86; font-size: 1.8rem; font-weight: 700; line-height: 1.5; text-align: center; white-space: pre-line }
 .service_tab_item.is_active .service_tab_label { color: #107af2 }
 .service_panel { min-height: 200px }
-.service_panel section:has(> header:only-child) :deep(header) { margin-bottom: 0; padding: 0 }
+.service_panel .sec_header_only > .sec_header { margin-bottom: 0; padding: 0; }
 .pop_exclude { margin-top: 8px; color: #f95823; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 .pop_card_item { overflow: hidden; display: flex; flex-direction: column }
 
@@ -3777,10 +3781,12 @@ button { background-color: #fff }
   .cafe25_split_img > img { width: 100% }
   .chicken_panel .img_grid_swiper { margin-top: 60px }
 
-  .sec_header { padding-bottom: 24px; }
-  .sec_header:not(:has(p)) { padding-bottom: 0; }
-  .sec_header > h3, .sec_header:not(:has(p)) > h3 { margin-bottom: 12px; font-size: 2.4rem; }
-  .sec_header > h3.h3_steps, .sec_header:not(:has(p)) > h3.h3_steps { margin-bottom: 24px; }
+  .sec_header { padding-bottom: 0; }
+  .sec_header > p,
+  .sec_header > .sec_header_desc,
+  .sec_header > .sec_note { margin-bottom: 24px; }
+  .sec_header > h3 { margin-bottom: 12px; font-size: 2.4rem; }
+  .sec_header > h3.h3_steps { margin-bottom: 24px; }
   .sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc { margin-bottom: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
   .sec_header .sec_cite { margin-top: 4px; margin-left: 0; display: block; }
   .brand_panel_bg { width: calc(100% + 40px);margin: 0 -20px 24px; border-radius: 0; }
@@ -3955,7 +3961,7 @@ button { background-color: #fff }
 .usage_group_title { margin: 0 0 8px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }
 @media (max-width: 768px) {
   .usage_group_title { margin-bottom: 24px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
-  .usage_group_title:has(+ .retail_note) { margin-bottom: 8px }
+  .usage_group_title.is_compact { margin-bottom: 8px; }
 }
 .retail_footnote { margin: 6px 0 0; color: #fb6432; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em }
 .usage_def_list { margin: 0; padding: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px }
