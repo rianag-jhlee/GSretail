@@ -1178,7 +1178,7 @@
                 <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
                     <div v-show="deliveryActiveTab === i" :class="['service_panel', `delivery_panel_${i+1}`]">
                         <figure v-if="tab.hero" class="brand_panel_bg">
-                            <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" /> //26.06.02 Edit 정다희
+                            <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" /> 
                         </figure>
                         <header v-if="tab.title" class="brand_panel_title">
                             <h2 v-html="tab.title"></h2>
@@ -1510,7 +1510,7 @@
                 <FeatureCards v-if="sec.type === 'feature' && sec.items && sec.items.length" :items="sec.items" type="icon" class="milbox_feature" />
                 <ul v-if="sec.type === 'imgcard' && sec.items && sec.items.length" class="imgcard_list">
                     <li v-for="(item, ii) in sec.items" :key="ii" class="imgcard_item">
-                        <figure class="imgcard_img">
+                        <figure class="imgcard_img" :style="item.bgColor ? { backgroundColor: item.bgColor } : null">
                             <img v-if="item.img" :src="item.img" :alt="item.name" />
                         </figure>
                         <div class="imgcard_body">
@@ -2661,9 +2661,9 @@ const langData = {
                             ],
                         },
                         {
-                            label: "배달 픽업", //26.05.27 Edit 이종환
+                            label: "배달 픽업",
                             hero: imgHero10,
-                            heroMo: imgHero10Mo, //26.06.02 Edit 정다희
+                            heroMo: imgHero10Mo, 
                             heroAlt: "",
                             title: "픽업 서비스",
                             desc: "쇼핑몰에서 상품주문 후, 가까운 GS25에서 물건을 찾아가세요.",
@@ -2689,7 +2689,7 @@ const langData = {
                         {
                             label:   "쇼핑몰거래",
                             hero:    imgHero11,
-                            heroMo: imgHero11Mo, //26.06.02 Edit 정다희
+                            heroMo: imgHero11Mo, 
                             heroAlt: "",
                             title:   "쇼핑몰 거래 서비스",
                             desc:    "홈쇼핑 반품, 오픈마켓, 온라인 쇼핑몰 등 편리하게 이용하실 수 있는 서비스입니다.",
@@ -2947,13 +2947,13 @@ const langData = {
                     title: "서비스 소개",
                     items: [
                         {
-                            img: require("@/assets/images/sub/gsrbr010101/img_mealbox.png"),
+                            bgColor: "#C7C7C7",
                             name: "밀박스25",
                             desc: "GS25에서 제공하는 기업/단체 대상 간편식 정기 제공 서비스 입니다.<br class=\"p_br\" />주식부터 디저트, 음료까지 매일 새로운 구성으로 운영 됩니다.<br class=\"p_br\" />HACCP 인증, 개별 포장으로 위생적이고 맛있는 한끼를 제공합니다.",
                             link: "https://www.mealbox25.com/mealbox25-introduce",
                         },
                         {
-                            img: require("@/assets/images/sub/gsrbr010101/img_snackbar.png"),
+                            bgColor: "#C7C7C7",
                             name: "스낵바",
                             desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다. 사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.",
                         },
@@ -3604,17 +3604,15 @@ button { background-color: #fff }
 .sinsen_feature :deep(.feature_card_item:nth-child(4) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_04.png');}
 
 .info_card_flow {display:flex; gap:20px;}
+.info_card_flow .info_card:nth-child(1){flex:0 1 794px; }
+.info_card_flow .info_card:nth-child(2){flex:0 1 606px; }
 
-
-.info_card { max-width: 940px; padding: 32px; background-color: #f8f8f8; border-radius: 12px }
-.info_card + .info_card {flex:1;}
+.info_card { padding: 32px; background-color: #f8f8f8; border-radius: 12px }
 .info_card strong { margin-bottom:8px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
-
 .info_card span { font-size: 1.8rem; line-height: 1.4 }
-
 .info_card > p {margin-top:14px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em }
 .info_card > strong + p {margin-top:0; margin-bottom:32px;}
-.sinsen_flow_img { width: 100%; margin-top: 24px; display: block; border-radius: 10px }
+.sinsen_flow_img { width: 100%; max-height:372px; margin-top: 24px; display: block; border-radius: 10px }
 
 .info_list > li { padding-bottom: 12px; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 8px }
 .info_list > li:last-child { padding-bottom: 0 }
@@ -3751,7 +3749,6 @@ button { background-color: #fff }
 .winwin_panel .winwin_panel_4 :deep(.num_info_item:nth-of-type(7) .num_info_icon:after) {background-position:-1060px -266px;}
 
 .winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(1) .num_info_icon:after) {background-position:-340px -20px;}
-/* .winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-420px -20px;} */
 .winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(2) .num_info_icon:after) {background-position:-580px -266px;}
 .winwin_panel .winwin_panel_5 :deep(.num_info_item:nth-of-type(3) .num_info_icon:after) {background-position:-500px -20px;}
 
@@ -3801,7 +3798,8 @@ button { background-color: #fff }
   .gopizza_panel .diff_bottom_row { margin-top: 120px; }
   .sinsen_panel > .brand_panel_bg { min-height: 245px; background-color: #b3b3b3; }
   .delivery_panel_3 .brand_panel_bg > img{ object-position: 70% bottom; }
-  
+  .info_card_flow .info_card:nth-child(1){flex:0 0 auto; }
+  .info_card_flow .info_card:nth-child(2){flex:0 0 auto; }
   /* .sec_brand_visual { height: 100vh } */
   .sticky { height: 100vh; top: 0 }
 
@@ -3816,15 +3814,12 @@ button { background-color: #fff }
   .sec_brand_about > .about_inner { gap: 40px }
   .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
   .sec_brand_about { padding: 140px 20px;}
-  /* .sec_brand_str { padding: 140px 20px } */
-  /* .sec_brand_str > .str_inner { padding: 0 20px } */
+
   .str_header { flex-direction: column; align-items: flex-start; gap: 16px; padding-bottom: 40px }
   .str_header > h2 { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em }
   .str_header > .str_actions { gap:14px; flex: none; justify-content: flex-start }
   .sns_wrap { gap: 16px }
-  /* common.css로 이동
-  .btn_sns { width: 40px; height: 40px }
-  */
+
   .acc_btn { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0 }
   .acc_inner { padding: 24px }
   .acc_desc { font-size: 1.6rem; line-height: 1.5 }
@@ -3854,22 +3849,19 @@ button { background-color: #fff }
   
   .gopizza_menu_title { gap:4px; flex-direction: column; align-items: flex-start }
   .gopizza_menu_title > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
-  
+
   .com_table th, .com_table td { font-size: 1.6rem; line-height: 1.24 }
   .com_table td { padding: 14px 20px; font-size: 1.4rem; letter-spacing: 0.01em }
   .com_table thead th { padding: 14px 0 }
   .com_table tbody th { padding: 14px 24px }
   .com_table_col td { padding: 11px 13px; font-size: 1.4rem }
-  
   .info_card strong { font-size: 1.8rem; line-height: 150%; letter-spacing: 0% }
-  
   .sinsen_feature :deep(.feature_card_item) { min-height: 227px }
-  
   .info_card span { font-size: 1.4rem; letter-spacing: -0.01em }
-  
   .info_card > p { margin-bottom:12px }
   
-  .sinsen_flow_img { height:auto;min-height:147px }
+  .sinsen_flow_img {aspect-ratio: 287/147; }
+  .info_card:nth-child(2) .sinsen_flow_img{ aspect-ratio:287/169;}
 
   :deep(.tab_wrap ul.type_01 li .item) {white-space:nowrap;}
 
