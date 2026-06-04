@@ -39,14 +39,19 @@
                     </li>
                 </ul>
             </aside>
-
-            <article v-for="(block, bIdx) in t.sections" :key="'sec-' + bIdx" class="sec_block">
-                <header>
-                    <h3 class="tit_md">{{ block.title }}</h3>
-                </header>
-                <p class="desc">{{ block.desc }}</p>
-                <figure class="img_box" :class="{ is_sm: block.imgSm }" :style="{ backgroundImage: `url(${sectionImgs[bIdx]})` }"></figure>
-            </article>
+            <div class="sec_block_wrap">
+                <article v-for="(block, bIdx) in t.sections" :key="'sec-' + bIdx" class="sec_block">
+                    <header v-if="block.title">
+                        <h3 class="tit_md">{{ block.title }}</h3>
+                    </header>
+                    <p v-for="(line, dIdx) in block.desc" :key="'desc-' + dIdx" class="desc">{{ line }}</p>
+                    <figure class="img_box" :class="{ is_sm: block.imgSm }" :style="{ backgroundImage: `url(${sectionImgs[block.img]})` }"></figure>
+                    <div v-for="(sub, sIdx) in block.subs || []" :key="'sub-' + sIdx" class="sec_sub">
+                        <p class="desc">{{ sub.desc }}</p>
+                        <figure class="img_box" :class="{ is_sm: sub.imgSm }" :style="{ backgroundImage: `url(${sectionImgs[sub.img]})` }"></figure>
+                    </div>
+                </article>
+            </div>
         </section>
     </div>
 </template>
@@ -103,17 +108,27 @@ const langData = {
         sections: [
             {
                 title: "1. 개인정보의 처리목적, 처리항목, 처리 및 보유기간",
-                desc: "회사는 「개인정보 보호법」 에 따라 서비스 제공을 위해 필요 최소한의 범위에서 개인정보를 수집•이용합니다.\n\n1) 정보주체의 동의를 받아 처리하는 개인정보 항목\n• 법적 근거: 「개인정보 보호법」 제15조 제1항 제1호 (동의)",
+                desc: [
+                    "회사는 「개인정보 보호법」 에 따라 서비스 제공을 위해 필요 최소한의 범위에서 개인정보를 수집•이용합니다.",
+                    "1) 정보주체의 동의를 받아 처리하는 개인정보 항목",
+                    "• 법적 근거: 「개인정보 보호법」 제15조 제1항 제1호 (동의)",
+                ],
+                img: 0,
                 imgSm: false,
-            },
-            {
-                title: "2) 정보주체의 동의를 받지 않고 처리하는 개인정보 항목",
-                desc: "",
-                imgSm: true,
+                subs: [
+                    {
+                        desc: "2) 정보주체의 동의를 받지 않고 처리하는 개인정보 항목",
+                        img: 1,
+                        imgSm: true,
+                    },
+                ],
             },
             {
                 title: "2. 개인정보의 제3자 제공",
-                desc: "회사는 원활한 서비스 제공을 위해 다음의 경우 「개인정보 보호법」 제17조제1항제1호에 따라 정보주체의 동의를 얻어 필요 최소한의 범위로만 제공합니다.",
+                desc: [
+                    "회사는 원활한 서비스 제공을 위해 다음의 경우 「개인정보 보호법」 제17조제1항제1호에 따라 정보주체의 동의를 얻어 필요 최소한의 범위로만 제공합니다.",
+                ],
+                img: 2,
                 imgSm: false,
             },
         ],
@@ -136,27 +151,35 @@ function handleQuickLink(link) {
 .title_wrap { padding: 200px 0 100px; display: flex; flex-direction: column; }
 .title_wrap > h2 { color: #161616; font-size: 7.2rem; font-weight: 700; line-height: 1.24; letter-spacing: -0.02em; text-align: center; }
 .panel { padding-top: 80px; }
-.button_wrap { width: 100%; margin: 0 0 24px; padding: 0; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
-.sec_policy { width: 100%; margin: 0; padding: 60px 0 0; border-top: 1px solid #242428; }
-.policy_head { width: 100%; margin: 0 0 40px; padding: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
-.policy_head > h3.tit { margin: 0; color: #161616; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex: 1; min-width: 0; }
-.filter_wrap { margin: 0; padding: 0; display: flex; flex-shrink: 0; gap: 8px; }
+.button_wrap { width: 100%; margin-bottom: 24px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.sec_policy { width: 100%; padding: 60px 0 0; border-top: 1px solid #242428; }
+.policy_head { width: 100%; margin-bottom: 40px; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.policy_head > h3.tit { color: #161616; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex: 1; min-width: 0; }
+.filter_wrap { display: flex; flex-shrink: 0; gap: 8px; }
 .filter_year { width: 160px; }
 .filter_version { width: 200px; }
-.sec_policy > p.lead { margin: 0 0 60px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.toc_box { width: 100%; margin: 0 0 60px; padding: 40px 64px; background-color: #f8f8f8; border-radius: 12px; }
-.toc_box > h4.toc_tit { margin: 0 0 16px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.toc_box > ul { width: 100%; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; row-gap: 16px; }
+.filter_wrap :deep(label.select) { width: 100%; display: block; }
+.filter_wrap :deep(label.select > div) { display: block; }
+.filter_wrap :deep(label.select > div::after) { width: 20px; height: 20px; margin-top: 0; border: 0; background: url('@/assets/images/common/icon_set_20.png') no-repeat -192px -25px; right: 16px; transform: translateY(-50%); }
+.filter_wrap :deep(label.select select) { width: 100%; height: 52px; padding: 14px 44px 14px 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; background-color: #f8f8f8; border: 0; border-radius: 12px; -webkit-appearance: none; appearance: none; cursor: pointer; }
+.filter_wrap :deep(label.select select.changed) { color: #161616; }
+.sec_policy > p.lead { margin-bottom: 60px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.toc_box { width: 100%; margin-bottom: 60px; padding: 40px 64px; background-color: #f8f8f8; border-radius: 12px; }
+.toc_box > h4.toc_tit { margin-bottom: 16px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.toc_box > ul { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; row-gap: 16px; }
 .toc_box > ul > li { display: flex; align-items: flex-start; gap: 8px; }
 .toc_box > ul > li > span.num { color: #107af2; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; flex-shrink: 0; }
 .toc_box > ul > li > span.txt { color: #161616; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_block_wrap{padding-top:60px;border-top:1px solid #E5E5E9;}
 .sec_block + .sec_block { margin-top: 100px; }
-.sec_block > header > h3.tit_md { margin: 0 0 40px; padding-left:42px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; position: relative;}
+.sec_block > .sec_sub { margin-top: 40px; }
+.sec_block > header > h3.tit_md { margin-bottom: 40px; padding-left: 42px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; position: relative; }
 .sec_block > header > h3.tit_md::before { content: ''; width: 32px; height: 32px; position: absolute; top: 0; left: 0; background-image: url('@/assets/images/sub/icon_cont_32.png'); background-repeat: no-repeat; }
-.sec_policy > .sec_block:nth-of-type(1) > header > h3.tit_md::before { background-position: -900px -104px; }
-.sec_block > p.desc { margin: 0 0 24px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; white-space: pre-line; }
-.sec_block > figure.img_box { width: 100%; max-width: 961px; height: 670px; margin: 0; padding: 0; background-color: #e5e5e9; background-repeat: no-repeat; background-position: center top; background-size: 100% auto; border-radius: 12px; }
-.sec_block > figure.img_box.is_sm { height: 152px; }
+.sec_block:nth-of-type(1) > header > h3.tit_md::before { background-position: -900px -104px; }
+.sec_block:nth-of-type(2) > header > h3.tit_md::before { background-position: -100px -266px; }
+.sec_block > p.desc, .sec_block > .sec_sub > p.desc { margin-bottom: 24px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
+.sec_block > figure.img_box, .sec_block > .sec_sub > figure.img_box { width: 100%; max-width: 961px; height: 670px; background-color: #e5e5e9; background-repeat: no-repeat; background-position: center top; background-size: 100% auto; border-radius: 12px; }
+.sec_block > figure.img_box.is_sm, .sec_block > .sec_sub > figure.img_box.is_sm { height: 152px; }
 @media screen and (max-width: 1024px) {
     .toc_box > ul { grid-template-columns: 1fr; }
 }
@@ -168,16 +191,17 @@ function handleQuickLink(link) {
     .sec_policy { padding-top: 40px; }
     .policy_head { margin-bottom: 24px; flex-direction: column; align-items: stretch; }
     .policy_head > h3.tit { font-size: 2.4rem; }
-    .filter_wrap { width: 100%; }
+    .filter_wrap { width: 100%; flex-wrap: wrap; }
     .filter_year, .filter_version { width: 100%; }
     .sec_policy > p.lead { margin-bottom: 40px; font-size: 1.8rem; line-height: 1.4; }
     .toc_box { margin-bottom: 40px; padding: 32px 20px; }
     .toc_box > h4.toc_tit { margin-bottom: 12px; font-size: 2rem; }
     .toc_box > ul > li > span.num, .toc_box > ul > li > span.txt { font-size: 1.6rem; }
     .sec_block + .sec_block { margin-top: 80px; }
+    .sec_block > .sec_sub { margin-top: 24px; }
     .sec_block > header > h3.tit_md { margin-bottom: 16px; font-size: 2rem; }
-    .sec_block > p.desc { font-size: 1.6rem; }
-    .sec_block > figure.img_box { max-width: 100%; height: clamp(140px, 56vw, 670px); }
-    .sec_block > figure.img_box.is_sm { height: clamp(120px, 40.53vw, 152px); }
+    .sec_block > p.desc, .sec_block > .sec_sub > p.desc { font-size: 1.6rem; }
+    .sec_block > figure.img_box, .sec_block > .sec_sub > figure.img_box { max-width: 100%; height: clamp(140px, 56vw, 670px); }
+    .sec_block > figure.img_box.is_sm, .sec_block > .sec_sub > figure.img_box.is_sm { height: clamp(120px, 40.53vw, 152px); }
 }
 </style>
