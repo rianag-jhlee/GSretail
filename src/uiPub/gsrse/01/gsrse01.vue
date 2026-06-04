@@ -236,7 +236,7 @@
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part1.nameLabel }}</span>
                                                 <span class="required_mark">*</span>
                                             </div>
-                                            <div class="input_item">
+                                            <div class="input_item name" >
                                                 <Inputs type="text" v-model="formData.name" :placeholder="t.listening.InputWrapcont.part1.namePlaceholder" />
                                             </div>
                                         </div>
@@ -247,9 +247,9 @@
                                             </div>
                                             <div class="input_group email">
                                                 <div class="group_wrap">
-                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="이메일 아이디" /></div>
+                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" /></div>
                                                     <span class="unit">@</span>
-                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="도메인 입력" /></div>
+                                                    <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" /></div>
                                                 </div>
                                                 <SelectBox :options="t.listening.InputWrapcont.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
                                             </div>
@@ -259,8 +259,8 @@
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part1.telLabel }}</span>
                                                 <span class="required_mark">*</span>
                                             </div>
-                                            <div class="input_group">
-                                                <div class="input_flex_item"><Inputs type="text" v-model="formData.tel1" :isDisabled="true" /></div>
+                                            <div class="input_group phone">
+                                                <SelectBox :options="phoneOptions" v-model="formData.tel1" />
                                                 <span class="unit">-</span>
                                                 <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
                                                 <span class="unit">-</span>
@@ -308,7 +308,7 @@
                                                 <span class="required_mark">*</span>
                                             </div>
                                             <div class="input_item full">
-                                                <Search v-model="searchData" :search_opt="options" @search="handleSearch" :placeholder="t.listening.InputWrapcont.part2.placeholder_1" :useSelect="false" class="w428" />
+                                                <Inputs type="text" v-model="formData.bizNo" />
                                             </div>
                                         </div>
                                         <div class="form_row">
@@ -316,17 +316,18 @@
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part2.회사명 }}</span>
                                                 <span class="required_mark">*</span>
                                             </div>
-                                            <div class="input_item full">
-                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                            <div class="input_item company_search full">
+                                                <Inputs type="text" v-model="formData.subject"/>
+                                                <Buttons btn-class="btn_big gray">조회/검색</Buttons>
                                             </div>
                                         </div>
                                         <div class="form_row">
-                                            <div class="label_item">
+                                            <div class="label_item full">
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part2.사업자구분 }}</span>
                                                 <span class="required_mark">*</span>
                                             </div>
-                                            <div class="input_complex">
-                                                <Inputs type="text" v-model="formData.storeName" class="w428"/>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.storeName" :is-readonly="true"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
@@ -335,7 +336,7 @@
                                                 <span class="required_mark">*</span>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.placeholder_2" class="w428"/>
+                                                <Inputs type="text" v-model="formData.subject" :is-readonly="true"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
@@ -343,16 +344,17 @@
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part2.업태 }}</span>
                                                 <span class="required_mark">*</span>
                                             </div>
-                                            <div class="input_complex">
-                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject" :is-readonly="true"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part2.업종 }}</span>
+                                                <span class="required_mark">*</span>
                                             </div>
-                                            <div class="input_complex">
-                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject" :is-readonly="true"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
@@ -360,41 +362,37 @@
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part2.대표브랜드  }}</span>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                                <Inputs type="text" v-model="formData.subject"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part2.주소  }}</span>
+                                                <span class="required_mark">*</span>
                                             </div>
-                                            <div class="input_item full">
-                                                <div class="input_wrap adress_wrap">
-                                                    <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.placeholder_3_1"/>
-                                                    <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.placeholder_3_2"/>
-                                                    <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.placeholder_3_3"/>
+                                            <div class="input_complex address_field">
+                                                <div class="address_top">
+                                                    <Inputs type="text" v-model="formData.bizZipCode" />
+                                                    <Buttons btn-class="btn_big gray">조회/검색</Buttons>
+                                                </div>
+                                                <div class="address_bottom">
+                                                    <Inputs type="text" v-model="formData.bizAddress1" :placeholder="t.listening.InputWrapcont.part2.placeholder_3_1" />
+                                                    <Inputs type="text" v-model="formData.bizAddress2" :placeholder="t.listening.InputWrapcont.part2.placeholder_3_2" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part2.설립일자 }}</span>
+                                                <span class="required_mark">*</span>
                                             </div>
                                             <div class="input_item full">
                                                 <Inputs type="text" v-model="formData.subject"/>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="form_section">
-                                    <div class="form_header">
-                                        <h5 class="form_title">{{ t.listening.InputWrapcont.part3.title }}</h5>
-                                        <span class="required_guide">{{ t.listening.InputWrapcont.part1.requiredText }}</span>
-                                    </div>
-                                    <div class="form_body">
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.입점부문 }}</span>
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.입점부문 }}</span>
                                                 <span class="required_mark">*</span>
                                             </div>
                                             <div class="input_item radio_wrap">
@@ -404,68 +402,71 @@
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.신청상품군 }}</span>
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.신청상품군 }}</span>
                                                 <span class="required_mark">*</span>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="text" v-model="formData.storeName" class="w428"/>
+                                                <Inputs type="text" v-model="formData.storeName"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.신청상세품목 }}</span>
-                                                <span class="required_mark">*</span>
-                                            </div>
-                                            <div class="input_complex">
-                                                <Inputs type="text" v-model="formData.storeName" class="w428"/>
-                                            </div>
-                                        </div>
-                                        <div class="form_row">
-                                            <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.상품명 }}</span>
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.신청상세품목 }}</span>
                                                 <span class="required_mark">*</span>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                                <Inputs type="text" v-model="formData.storeName"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.납품원가 }}</span>
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.상품명 }}</span>
                                                 <span class="required_mark">*</span>
                                             </div>
-                                            <div class="input_complex">
-                                                <Inputs type="text" v-model="formData.storeName" class="w428"/>
+                                            <div class="input_item full">
+                                                <Inputs type="text" v-model="formData.subject"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.판매희망가 }}</span>
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.납품원가 }}</span>
+                                                <span class="required_mark">*</span>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="text" v-model="formData.subject" class="w428"/>
+                                                <Inputs type="text" v-model="formData.storeName"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.상품규격 }}</span>
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.판매희망가 }}</span>
+                                                <span class="required_mark">*</span>
                                             </div>
                                             <div class="input_item full">
-                                                <div class="input_wrap">
-                                                    <Inputs type="text" v-model="formData.subject" />
-                                                    <span>X</span>
-                                                    <Inputs type="text" v-model="formData.subject" />
-                                                    <span>X</span>
-                                                    <Inputs type="text" v-model="formData.subject" />
+                                                <Inputs type="text" v-model="formData.subject"/>
+                                            </div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="label_item">
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.상품규격 }}</span>
+                                            </div>
+                                            <div class="input_item product_spec_field">
+                                                <div class="product_spec_wrap">
+                                                    <Inputs type="text" v-model="formData.productSpec1" />
+                                                    <span class="unit">X</span>
+                                                    <Inputs type="text" v-model="formData.productSpec2" />
+                                                    <span class="unit">X</span>
+                                                    <Inputs type="text" v-model="formData.productSpec3" />
+                                                    <div class="product_spec_area">
+                                                        <Inputs type="text" v-model="formData.productSpecArea" />
+                                                        <p class="guide_msg">{{ t.listening.InputWrapcont.part2.상품규격상세 }}</p>
+                                                    </div>
                                                 </div>
-                                                <p class="guide_msg">{{ t.listening.InputWrapcont.part3.상품규격상세 }}</p>
-
                                             </div>
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.첨부파일 }}</span>
-                                                <p class="guide_msg">{{ t.listening.InputWrapcont.part3.첨부_desc }}</p>
+                                                <span class="label_text" v-html="t.listening.InputWrapcont.part2.첨부파일"></span>
+                                                <!-- <p class="guide_msg">{{ t.listening.InputWrapcont.part2.첨부_desc }}</p> -->
                                             </div>
                                             <div class="input_item full">
                                                 <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
@@ -474,8 +475,7 @@
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.입점제안서 }}</span>
-                                                <p class="guide_msg">{{ t.listening.InputWrapcont.part3.입점_desc }}</p>
+                                                <span class="label_text" v-html="t.listening.InputWrapcont.part2.입점제안서"></span>
                                             </div>
                                             <div class="input_item full">
                                                 <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
@@ -484,27 +484,27 @@
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.신청제목 }}</span>
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.신청제목 }}</span>
                                             </div>
                                             <div class="input_item full">
-                                                <Inputs type="text" v-model="formData.subject" placeholder="제목을 입력해주세요" class="w428"/>
+                                                <Inputs type="text" v-model="formData.subject"/>
                                             </div>
                                         </div>
                                         <div class="form_row">
                                             <div class="label_item">
-                                                <span class="label_text">{{ t.listening.InputWrapcont.part3.신청내용 }}</span>
+                                                <span class="label_text">{{ t.listening.InputWrapcont.part2.신청내용 }}</span>
                                             </div>
-                                            <div class="input_complex">
-                                                <Textarea v-model="formData.body" :placeholder="t.listening.InputWrapcont.part2.contentPlaceholder" :rows="6" :maxlength="500" />
-                                                <p class="guide_msg_multi" v-html="t.listening.InputWrapcont.part2.noticeText"></p>
+                                            <div class="input_item full_textarea">
+                                                <Textarea v-model="formData.body" :placeholder="t.listening.InputWrapcont.part2.contentPlaceholder" />
+                                                <!-- <p class="guide_msg_multi" v-html="t.listening.InputWrapcont.part2.noticeText"></p> -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </article>
                             <div class="btn-wrap">
-                                <Buttons btn-class="btn_big primary" @click="openModal" data-popid="gsrcu010101" data-type="small" data-cont="gsrcu010101">{{ t.listening.InputWrapcont.part3.btnSubmit }}</Buttons>
-                                <Buttons btn-class="btn_big gray" @click="closeModal">{{ t.listening.InputWrapcont.part3.btnCancel }}</Buttons>
+                                <Buttons btn-class="btn_big primary" @click="openModal" data-popid="gsrcu010101" data-type="small" data-cont="gsrcu010101">{{ t.listening.InputWrapcont.part2.btnSubmit }}</Buttons>
+                                <Buttons btn-class="btn_big gray" @click="closeModal">{{ t.listening.InputWrapcont.part2.btnCancel }}</Buttons>
                             </div>
                         </div>
 
@@ -533,20 +533,15 @@ import Buttons from "@/components/Buttons.vue";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue"; 
 import Textarea from "@/components/Textarea.vue";
-import Search from "@/components/Search.vue";
 import FileUpload from "@/components/FileUpload.vue";
 
 
 export default {
     name: "gsrst01",
-    components: { Tabs, Pagination, Accordion, AccordionItem, Buttons, Inputs, SelectBox, Textarea, Search, FileUpload  },
+    components: { Tabs, Pagination, Accordion, AccordionItem, Buttons, Inputs, SelectBox, Textarea, FileUpload  },
     props: { lang: { type: String, default: "ko" } },
     data() {
         return {
-            searchData: {
-                type: "all",    // select 초기 선택 value 값
-                keyword: ""     // input 초기 입력 값
-            },
             MainTabIdx: 0,
             SubTabIdx: 0,
             currentPage: 1,
@@ -554,6 +549,8 @@ export default {
                 agreements: [false, false],
                 name: "", emailId: "", emailDomain: "", emailSelect: "",
                 tel1: "010", tel2: "", tel3: "", category: "", storeName: "",
+                bizNo: "", bizZipCode: "", bizAddress1: "", bizAddress2: "",
+                productSpec1: "", productSpec2: "", productSpec3: "", productSpecArea: "",
                 subject: "", body: "", replyType: ""
             },
             langData: {
@@ -652,7 +649,6 @@ export default {
                                 title: "고객정보",
                                 requiredText: "* 필수 입력사항",
                                 nameLabel: "이름",
-                                namePlaceholder: "이름을 입력해주세요",
                                 emailLabel: "이메일",
                                 emailOptions: [{ value: 'naver.com', label: 'naver.com' }, { value: 'gmail.com', label: 'gmail.com' }],
                                 telLabel: "휴대폰",
@@ -666,22 +662,14 @@ export default {
                             part2: {
                                 title: "사업자정보",
                                 사업자등록번호: "사업자등록번호",
-                                placeholder_1:" ‘-’없이 숫자 입력",
                                 회사명:"회사명 ",
                                 사업자구분: "사업자구분",
                                 대표자성명: "대표자 성명",
-                                placeholder_2:"대표자성명",
                                 업태: "업태",
                                 업종:"업종",
                                 대표브랜드:"대표브랜드",
                                 주소:"주소",
-                                placeholder_3_1:" 주소 1 란 (지역, 도로명)",
-                                placeholder_3_2:" 주소 2 란 (상세 주소)",
-                                placeholder_3_3:" 우편번호 란",
-                                설립일자:"설립일자"
-                            },
-                            part3: {
-                                title: "신청정보",
+                                설립일자:"설립일자",
                                 입점부문: "입점부문",
                                 신청상품군:"신청상품군",
                                 신청상세품목: "신청상세품목",
@@ -689,14 +677,13 @@ export default {
                                 납품원가: "납품 원가 (원)",
                                 판매희망가: "판매 희망가 (원)",
                                 상품규격 : "상품 규격 (단위 생략)",
-                                상품규격상세: "가로x세로x높이 cm, 무게 kg",
-                                첨부파일:"상품 이미지 첨부",
-                                첨부_desc:"(000x000 px)",
-                                입점제안서:"입점 제안서 첨부",
-                                입점_desc:"(최대 00MB)",
+                                상품규격상세: "가로X세로X높이cm, 무게kg",
+                                첨부파일:"상품 이미지 첨부 <br />(000 X 000 px)",
+                                입점제안서:"입점 제안서 첨부<br />(최대 00MB)",
                                 신청제목:"신청제목",
                                 신청내용:"신청내용",
                                 파일추가:"파일추가",
+                                contentPlaceholder: "내용을 입력해주세요.",
                                 btnSubmit: "상담신청",
                                 btnCancel: "다시작성"
                             }
@@ -751,9 +738,6 @@ export default {
         },
         onSubTabChange(idx) { this.SubTabIdx = idx; },
         onPageChange(page) { this.currentPage = page; },
-        handleSearch(val) { //[검색] 버튼 클릭 시 실행 이벤트
-            console.log("검색 실행:", val);
-        }
     }
 };
 </script>
@@ -856,6 +840,7 @@ export default {
 .faq_a { padding: 0 20px 24px 52px; background: #fafafa; }
 .a_text { font-size: 1.8rem; line-height: 1.6; color: #67676f; }
 .pagination_area { display: flex; justify-content: center; }
+:deep(.primary){background-color:#15B874}
 
 /* 입점안내 */
 .gsrse02 .img_box {display:block; text-align:center;}
@@ -874,7 +859,7 @@ export default {
 .listening_form_area .form_row .label { width: 134px; padding: 24px; font-size: 16px; color: #161616; }
 .listening_form_area .required { color: #fb6432; }
 .listening_form_area input, .listening_form_area textarea { width: 100%; padding: 14px 16px; border: 1px solid #c4c4d0; border-radius: 12px; font-size: 16px; }
-.listening_form_area textarea { height: 160px; resize: none; }
+
 .listening_form_area .consent_agree {padding-top:24px; border-top:1px solid #D7D7DF; display:flex; justify-content:space-between; align-items:center;}
 .listening_form_area .consent_agree p {font-size:16px; font-weight:700;}
 .listening_form_area article {margin-bottom:40px;}
@@ -888,11 +873,33 @@ export default {
 .listening_form_wrap .label_text {color: #161616; font-size: 16px; display:inline-block; margin-right:5px; }
 .listening_form_wrap .required_mark { color: #fb6432; font-size: 16px; }
 .listening_form_wrap .input_group { display: flex; align-items: center; gap: 8px;}
+.listening_form_wrap .input_item.company_search{display:flex;gap:8px;align-items: center;}
+.listening_form_wrap .input_item.company_search:deep(button){width:134px;}
+.listening_form_wrap .input_item.full{width:100%; max-width:400px;}
+.listening_form_wrap .input_item.full_textarea{width:100%; max-width:886px;}
+.listening_form_wrap .input_item.full_textarea :deep(.textarea_field > textarea) {height:160px; min-height:160px; resize:none;}
+.listening_form_wrap .input_item.name {width:100%; max-width:205px;}
+.listening_form_wrap .input_group.email .input_flex_item{max-width:205px;}
+.listening_form_wrap .input_group.email .select{width:205px;}
+.listening_form_wrap .input_group.phone .select {width:134px;}
+.listening_form_wrap .input_group.phone .input_flex_item {max-width:134px;}
+.listening_form_wrap .input_group.companyname {width:100%;max-width:447px;}
 .listening_form_wrap .input_group .group_wrap { display: flex; align-items: center; gap: 8px;}
 .listening_form_wrap .input_flex_item { flex: 1; min-width: 0; }
 .listening_form_wrap .unit { color: #67676f; font-size: 16px; padding: 0 4px; }
 .listening_form_wrap .input_complex {width:calc(100% - 134px);  display: flex; flex-direction: column; gap: 8px;}
 .listening_form_wrap .input_complex .textarea_wrap {max-width:600px;}
+.listening_form_wrap .product_spec_wrap {display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.listening_form_wrap .product_spec_wrap .product_spec_area {margin-left:16px; display:flex; align-items:center; gap:24px;}
+.listening_form_wrap .product_spec_wrap :deep(.input_wrap) {width:100%; max-width:134px; flex:0 0 auto;}
+.listening_form_wrap .product_spec_wrap .unit {color:#67676f; font-size:16px; flex:0 0 auto;}
+.listening_form_wrap .product_spec_wrap .guide_msg {margin-top:0; color:#67676f; font-size:14px;}
+.listening_form_wrap .input_complex.address_field {width:100%; max-width:757px; gap:8px;}
+.listening_form_wrap .address_top {display:flex; align-items:center; gap:8px;}
+.listening_form_wrap .address_top :deep(.input_wrap) {width:100%; max-width:207px;}
+.listening_form_wrap .address_top :deep(button) {width:134px; flex-shrink:0;}
+.listening_form_wrap .address_bottom {display:flex; align-items:center; gap:8px; width:100%;}
+.listening_form_wrap .address_bottom :deep(.input_wrap) {flex:1; min-width:0;}
 .listening_form_wrap .guide_msg {margin-top:5px; color: #67676f; font-size: 14px; }
 .listening_form_wrap .guide_msg_multi {width:90%; margin-top: 8px; color: #67676f; font-size: 14px; line-height:1.4; display:flex; flex-direction:column; }
 .listening_form_wrap :deep(.guide_msg_multi) span {padding-left:15px; line-height:1.4; display:inline-block; position:relative;}
@@ -902,7 +909,7 @@ export default {
 .listening_form_wrap .file_name { font-size: 14px; color: #161616; }
 .listening_form_wrap .department {display:flex; gap:20px;}
 .listening_form_wrap .department p {display:flex; align-items:center; gap:10px;}
-.listening_form_wrap .department em { font-weight: 700; }
+.listening_form_wrap .department em { font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 .form_container .btn-wrap {display:flex; justify-content:flex-end; gap:8px;}
 .form_container .btn-wrap * {width:134px;}
 .input_wrap.type-radio {width:auto !important;}
@@ -995,7 +1002,9 @@ export default {
     .listening_form_wrap .department em {width:50px;}
 
     /* 상담신청 */
-    .input_wrap.adress_wrap {flex-direction:column;}
+    .listening_form_wrap .address_top {flex-direction:column; align-items:stretch;}
+    .listening_form_wrap .address_top :deep(.input_wrap), .listening_form_wrap .address_top :deep(button) {width:100%; max-width:100%;}
+    .listening_form_wrap .address_bottom {flex-direction:column; align-items:stretch;}
     
     /* 7. 하단 공통 배너 */
     .bottom_link_btns a {padding:20px 32px; justify-content:flex-start; gap:12px;}
