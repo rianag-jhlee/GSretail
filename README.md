@@ -18,5 +18,3 @@ npm run serve
 }
 
 npm run lint -- --fix
-
-=== test edit ceojk ===
