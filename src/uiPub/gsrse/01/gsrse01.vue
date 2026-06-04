@@ -139,7 +139,7 @@
                         </article>
 
                         <article class="guide_view mb100">
-                            <h4 class="text-wrapper mb40">{{ t.RelatedSitesTitle }}</h4>
+                            <h4 class="guide_header">{{ t.RelatedSitesTitle }}</h4>
                             <div class="card_grid">
                                 <div class="info_card" v-for="(card, cIdx) in t.RelatedSites" :key="'site-'+cIdx">
                                     <div class="card_head mb16">
@@ -482,6 +482,11 @@
                                                 <p class="guide_msg">{{ t.listening.InputWrapcont.part2.fileNotice }}</p>
                                             </div>
                                         </div>
+
+
+
+
+
                                         <div class="form_row">
                                             <div class="label_item">
                                                 <span class="label_text">{{ t.listening.InputWrapcont.part2.applyTitleLabel }}</span>
@@ -742,6 +747,7 @@ export default {
 .div_desc :deep(li) { font-size: 2rem; line-height: 1.4; color: #161616; }
 
 /* 3. 가이드 Step 리스트 (ul/li 최적화) */
+.guide_header{margin-bottom:40px;}
 .guide_title { font-size: 2.8rem; font-weight: 700; color: #161616; }
 .step_list { display: flex; align-items: center;}
 .step_list li {padding: 56px 64px; background-color: #f8f8f8; border-radius: 8px;  flex: 1; display: flex; align-items: center; }
