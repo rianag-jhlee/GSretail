@@ -152,8 +152,8 @@ function handleQuickLink(link) {
 .toc_box > ul > li > span.txt { color: #161616; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_block + .sec_block { margin-top: 100px; }
 .sec_block > header > h3.tit_md { margin: 0 0 40px; padding-left:42px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; position: relative;}
-.sec_block > header > h3.tit_md::before{content:''; width:32px; height:32px; background-repeat: no-repeat;  background: url('@/assets/images/sub/icon_cont_32.png') no-repeat; }
-.sec_block:nth-child(1) > header > h3.tit_md::before{background-position: -900px -104px;}
+.sec_block > header > h3.tit_md::before { content: ''; width: 32px; height: 32px; position: absolute; top: 0; left: 0; background-image: url('@/assets/images/sub/icon_cont_32.png'); background-repeat: no-repeat; }
+.sec_policy > .sec_block:nth-of-type(1) > header > h3.tit_md::before { background-position: -900px -104px; }
 .sec_block > p.desc { margin: 0 0 24px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; white-space: pre-line; }
 .sec_block > figure.img_box { width: 100%; max-width: 961px; height: 670px; margin: 0; padding: 0; background-color: #e5e5e9; background-repeat: no-repeat; background-position: center top; background-size: 100% auto; border-radius: 12px; }
 .sec_block > figure.img_box.is_sm { height: 152px; }
