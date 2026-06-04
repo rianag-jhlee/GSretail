@@ -590,7 +590,7 @@ export default {
                     Buttons: {
                         proposal: "Location Inquiry",
                         findStore: "Find a Store",
-                        backToList: "← Back to Brand List"
+                        backToList: "Back to Brand List"
                     },
                     Sns: {
                         insta: "Instagram"/* 260604 번역 */,

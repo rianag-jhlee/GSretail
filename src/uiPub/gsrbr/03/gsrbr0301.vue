@@ -586,7 +586,7 @@ const langData = {
                 },
             ],
         },
-        backLabel: "← Back to Brand List",
+        backLabel: "Back to Brand List",
     },
 };
 const t = computed(() => {

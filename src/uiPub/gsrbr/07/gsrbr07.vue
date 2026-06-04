@@ -94,7 +94,7 @@ export default {
                         imgMo: require("@/assets/images/dummy/gsrbr07_bi_mo.png"),
                         alt: "REAL price BI Image"/* 260604 번역 */
                     },
-                    ListBack:`← Back to Brand List`
+                    ListBack:`Back to Brand List`
                 }
             }
         };

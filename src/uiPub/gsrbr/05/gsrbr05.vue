@@ -239,7 +239,7 @@ export default {
                         {txt:"Use in Our Neighborhood GS App (In-Store) >", link:"http://gs25.gsretail.com/gscvs/ko/store-services/woodongs"},
                         {txt:"Use at GS SHOP >", link:"https://www.gsshop.com/index.gs"}
                     ],
-                    ListBack: "← Back to Brand List"
+                    ListBack: "Back to Brand List"
                 }
             }
         };

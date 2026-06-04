@@ -109,7 +109,7 @@ export default {
                         img_1: require("@/assets/images/dummy/gsrbr09_1.png"),
                         img_2: require("@/assets/images/dummy/gsrbr09_2.png")
                     },
-                    ListBack:`← Back to Brand List`
+                    ListBack:`Back to Brand List`
                 }
             }
         };

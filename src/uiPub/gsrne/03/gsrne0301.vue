@@ -128,7 +128,7 @@ export default {
                             text2: "Buntroy showcases performance workwear for the S/S season with enhanced durability and mobility added to its existing concept. Overcoming spatial constraints to broaden customer choice, with a made-to-order approach offering more reasonable prices as a key highlight."/* 260604 번역 */
                         }
                     ],
-                    ListBack: "← Back to Brand List"
+                    ListBack: "Back to Brand List"
                 }
             }
         };

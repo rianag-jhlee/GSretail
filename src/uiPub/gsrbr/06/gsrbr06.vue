@@ -439,7 +439,7 @@ export default {
                         ]
                     },
                     CommonLabels: { faqBtn: "Membership FAQ", termsBtn: "GS ALL Membership Terms and Conditions", nonMemberBtn: "GS25 Non-Member Points Service User Guide" },
-                    ListBack: "← Back to Brand List"
+                    ListBack: "Back to Brand List"
                 }
             }
         };

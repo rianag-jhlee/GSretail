@@ -562,7 +562,7 @@ export default {
                             contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` }
                         }
                     ],
-                    backLabel : '← Back to Brand List'
+                    backLabel : 'Back to Brand List'
                 }
             }
         };

@@ -179,7 +179,7 @@ export default {
                             { title: "Events & Promotions", desc: "Easy payment and login are available through a variety of methods.", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" }
                         ]
                     ],
-                    ListBack: "← Back to Brand List"
+                    ListBack: "Back to Brand List"
                 }
             }
         };

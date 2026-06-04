@@ -195,7 +195,7 @@ export default {
                         supp_desc2:`<p>CMYK  15/18/54/5</p><p>RGB 255/118/48</p><p>#CFBC81</p><p>PANTONE 4004 C</p>`,
                         supp_desc3:`<p>CMYK  0/0/0/100</p><p>RGB 0/0/0</p><p>#000000</p>`,
                     },
-                    ListBack:`← Back to Brand List`
+                    ListBack:`Back to Brand List`
                 }
             }
         };

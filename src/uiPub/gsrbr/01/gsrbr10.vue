@@ -80,7 +80,7 @@ export default {
                     SubContent_2: `It is a service that any adult can easily deliver with no special equipment.`/* 260604 번역 */,
                     HopageLink: `http://woodel.co.kr/#page1`,
                     HopageText: `Homepage`,
-                    ListBack:`← Back to Brand List`
+                    ListBack:`Back to Brand List`
                 }
             }
         };

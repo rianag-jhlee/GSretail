@@ -160,7 +160,7 @@ export default {
                         ],
                     },
                 ],
-                ListBack: "← Back to Brand List",
+                ListBack: "Back to Brand List",
             },
         };
 
