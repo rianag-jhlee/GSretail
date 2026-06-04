@@ -34,6 +34,9 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "연락처",
+                },
+                en: {
+                    MainTitle: "Contact",
                 }
             }
         };

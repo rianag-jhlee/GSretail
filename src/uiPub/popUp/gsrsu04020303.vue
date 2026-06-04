@@ -160,6 +160,61 @@ export default {
                         article: "제 1조[시행일]",
                         lines: ["- 이 지침은 2020년 4월 1일부터 시행한다.", "- 이 지침은 2021년 4월 1일부터 시행한다."]
                     }
+                },
+                en: {
+                    MainTitle: "Operating Regulations of the Subcontracting Transaction Review Committee"/* 260604 번역 */,
+                    intro: 'April 2021\nGS Retail\n\n GS Retail Guidelines for the Establishment and Operation of an Internal Deliberation Committee for Subcontract Transactions'/* 260604 번역 */,
+                    section1: {
+                        title: "Article 1 (Purpose)",
+                        desc: 'The purpose of these regulations is to contribute to the establishment of a fair subcontracting transaction order by having GS Retail (hereinafter the "Company") establish an internal subcontracting transaction review committee (hereinafter the "Committee") to deliberate in advance, on its own, on the fairness and legality of subcontracting transactions above a certain scale.'/* 260604 번역 */
+                    },
+                    section2: {
+                        title: "Article 2 Responsibilities and Authority",
+                        desc: "The committee deliberates on and resolves major matters related to the company's subcontracting transactions."/* 260604 번역 */,
+                    },
+                    section3: {
+                        title: "Article 3 Composition of the Committee",
+                        desc: "The internal review committee shall be composed of three or more executives and employees, including the executive in charge of subcontracting-related affairs."/* 260604 번역 */,
+                    },
+                    section4: {
+                        title: "Article 4 Committee Meetings",
+                        desc: "The committee may be convened at any time when a pending issue arises, and where there is no separate agenda item, no separate records shall be kept."/* 260604 번역 */,
+                    },
+                    section5: {
+                        title: "Article 5 Matters for Deliberation",
+                        items: [
+                            { content: '1. The Committee shall deliberate in advance on the appropriateness of the criteria and procedures for partner company registration/cancellation.'/* 260604 번역 */ },
+                            { content: '2. The Committee shall deliberate on objections to the cancellation of partner company registration.'/* 260604 번역 */ },
+                            { content: '3. The Committee shall deliberate, in advance and ex post, on the subcontract transaction amount and on the legality of contract conclusion with partner companies and of relevant laws such as the Subcontracting Act, etc.; the subject thereof shall be subcontracts of KRW 500 million or more per year.'/* 260604 번역 */ }
+                        ],
+                        rows: [
+                            "Compliance with the obligation to issue written contracts",
+                            "Compliance with the prohibition on unfair determination of subcontracting prices",
+                            "Compliance with the prohibition on forcing purchase of goods, etc.",
+                            "Compliance with the prohibition on improper demand for economic benefits, etc."
+                        ],
+                    },
+                    section6: {
+                        title: "Article 6 Hearing of Opinions",
+                        desc: "The committee may, where necessary, hear the opinions of Partner Companies, and in such cases, the anonymity of the Partner Companies shall be guaranteed."/* 260604 번역 */,
+                    },
+                    section7: {
+                        title: "Article 7 Corrective Measures and Sanctions",
+                        desc: "Where the results of deliberation indicate a possibility of violating relevant laws and regulations such as the Subcontracting Act, the committee shall correct it on its own, and where there is intent or gross negligence on the part of the relevant executives or employees, it shall take sanctions corresponding to the degree of violation (such as personnel disadvantages)."/* 260604 번역 */,
+                    },
+                    section8: {
+                        title: "Article 8 Notification of Deliberation Results and Document Retention",
+                        desc: "The committee shall retain related documents, such as the results of deliberation and the results of measures, for at least three years from the date of completion of deliberation."/* 260604 번역 */,
+                    },
+                    section9: {
+                        title: "Article 9 Committee Organization Operations",
+                        desc: "The operation of the company's standing review committee is carried out by the MD Platform TFT of the MD Division, and the hearing of opinions on issues, corrective/sanction measures, and notification of deliberation results are carried out by the Management Diagnosis Office"/* 260604 번역 */,
+                    },
+                    addendum: {
+                        title: "Supplementary Provisions",
+                        article: "Article 1 (Effective Date)",
+                        lines: ["These guidelines shall take effect from April 1, 2020.", "These guidelines shall take effect from April 1, 2021."]
+                    }
                 }
             }
         };

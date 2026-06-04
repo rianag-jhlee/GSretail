@@ -703,6 +703,361 @@ export default {
                         article: "제 1조[시행일]",
                         lines: ["- 이 지침은 2020년 4월 1일부터 시행한다.", "- 이 지침은 2021년 4월 1일부터 시행한다."]
                     }
+                },
+                en: {
+                    MainTitle: "Guidelines for Issuance and Retention of Written Documents"/* 260604 번역 */,
+                    intro: 'April 2021\nGS Retail\n\n GS Retail Guidelines for Contract Conclusion for Win-Win Cooperation between Large and Small/Medium Enterprises'/* 260604 번역 */,
+                    section1: {
+                        title: "Purpose",
+                        items: [
+                            { content: `- These practice items, in accordance with the Fair Trade Commission's "Guidelines for Contract Conclusion for Win-Win Cooperation between Large and Small/Medium Enterprises," are intended to ensure that the interests of small and medium-sized partner companies are duly reflected in contract conclusion between GS Retail (hereinafter the “Company”) and small and medium-sized partner companies.`/* 260604 번역 */ },
+                            { content: "- The Company seeks to prevent the abuse of superior bargaining power that undermines the principle of freedom of contract in transactions with small and medium-sized partner companies, and to establish and practice reasonable and fair trade practices in contract conclusion between the Company and small and medium-sized partner companies."/* 260604 번역 */ },
+                        ]
+                    },
+                    section2: {
+                        title: "II. Structure of the Practices",
+                        items: [
+                            { content: '- These practice items consist of the "contract-conclusion infrastructure" that the Company must establish before contract conclusion, the "contract conclusion with guaranteed self-determination" presenting desirable matters that contracting parties should include under conditions in which self-determination is guaranteed, and the "contract performance faithful to the contract and relevant laws" presenting matters to be observed in performing the contract.'/* 260604 번역 */ },
+                        ]
+                    },
+                    section3: {
+                        title: "III. Establishment of Contract Conclusion Infrastructure",
+                        step1: {
+                            title: "Criteria for Selecting Contract Conclusion Method",
+                            items: [
+                                { content: '- The Company selects the contract conclusion method according to certain criteria, taking into account its transactional position and influence in the market. It selects and concludes the contract conclusion method by considering the importance of the goods, the number of possible counterparties, transaction experience, and the standard relative to the total transaction amount, etc.'/* 260604 번역 */ },
+                            ],
+                            TableHeader: { col1: "Contract Method", col2: "Requirements" },
+                            IRListData: [
+                                { title: "Negotiated Contract", content: "When competitive bidding cannot be conducted due to a sudden surge in raw material prices or similar circumstances", span: 4 },
+                                { title: "", content: "Where competition is virtually impossible\n- Construction using patented methods or new technology\n- Where having goods manufactured or purchasing goods that are patented, registered as a utility model, or registered as a design"/* 260604 번역 */, span: 0 },
+                                { title: "", content: "Where there is no choice but to contract with the current trading counterparty\n- Where the person who manufactured and supplied the relevant goods directly installs, assembles, or maintains those goods\n- Where receiving manufacture and supply from a person other than the one who manufactured and supplied the relevant goods would result in incompatibility"/* 260604 번역 */, span: 0 },
+                                { title: "", content: "Other cases where competition is not possible due to a specific party's special technology or services, or specific location, structure, quality, performance, efficiency, or similar factors", span: 0 },
+                                { title: "General Competitive Bidding", content: "Selected by considering the type and importance of goods, the number of potential counterparties, etc.", span: 1 },
+                                { title: "Restricted Competitive Bidding", content: "Manufacturing contracts for goods requiring special facilities or technology", span: 4 },
+                                { title: "", content: "Purchase contracts for goods requiring special performance or quality", span: 0 },
+                                { title: "", content: "Service contracts requiring special technology", span: 0 },
+                                { title: "", content: "When necessary to prevent inadequate contract performance, the financial standing of competitive bidders may be considered ※ When restricting the qualifications of competitive bidders, the restrictions and criteria shall be specified in the bid announcement", span: 0 },
+                                { title: "Designated Competitive Bidding", content: "When only a party with special facilities, technology, materials, goods, or performance can achieve the purpose of the contract given its nature or objective, and there are no more than 5 prospective bidders", span: 2 },
+                                { title: "", content: "When purchasing products with certified quality marks or products with environmental certification", span: 0 },
+                            ],
+                        },
+                        step2: {
+                            title: "2. Partner Company Collaboration System and Support Organization Operations",
+                            items: [
+                                { content: '- Through the sourcing portal system, the Company provides information necessary for transactions with partner companies and new companies, and promotes win-win cooperation.'/* 260604 번역 */ },
+                                { content: `- A new company wishing to do business may propose its intent to trade through the Company's sourcing portal or the Company's customer center.`/* 260604 번역 */ },
+                                { content: '- The Company operates a support organization responsible for technical support, financial support, education, the suggestion system, etc. for partner companies.'/* 260604 번역 */ }
+                            ],
+                        }
+                    },
+                    section4: {
+                        title: "III. Guidelines for the Selection and Operation of Partner Companies",
+                        step1: {
+                            title: "1. Partner company selection criteria and procedures"/* 260604 번역 */,
+                            partA: {
+                                label: "Prior Issuance of Written Documents",
+                                items: [
+                                    { content: '① As a general rule, a contract shall be concluded in advance, and at a minimum, a contract bearing a name and seal shall be concluded before commencing work for supply, etc.'/* 260604 번역 */ },
+                                    { content: '② The contract must include the content of the subcontracting contract, such as the subcontract payment and its method of payment, as well as the matters prescribed in the Enforcement Decree, such as the requirements, methods, and procedures for adjusting the subcontract payment in accordance with changes in raw material prices.'/* 260604 번역 */ },
+                                    { content: '③ Where changes in volume are clearly anticipated due to minor and frequent additional work, a settlement agreement shall be issued immediately after the completion of supply, etc.'/* 260604 번역 */ },
+                                    { content: '④ Where an additional request is made within a period significantly shorter than the usually permitted period, the principal matters shall be agreed upon in writing in advance.'/* 260604 번역 */ },
+                                ],
+                            },
+                            partB: {
+                                label: "Unit Price Determination Based on a Reasonable Calculation Method",
+                                items: [
+                                    { content: '① The unit price of parts shall be determined through consultation in accordance with a reasonable calculation method that takes into account quantity, quality, specifications, delivery deadline, payment method, material prices, labor costs, or market price trends, with appropriate management costs and profit added.'/* 260604 번역 */ },
+                                    { content: '② Where a cause for changing the initial unit price arises during the contract period, the Partner Company may file a request for unit price adjustment with the Company, in which case the parties shall mutually consult and re-determine it within 30 days (extendable by 30 days) from the date of the request.'/* 260604 번역 */ },
+                                    { content: '③ Where the determination of the unit price is delayed for special reasons, a provisional unit price determined through consultation shall be applied; in such case, the difference between the provisional unit price and the final unit price shall be settled retroactively when the final unit price is determined.'/* 260604 번역 */ },
+                                    { content: `④ The wage rate that serves as the basis for cost calculation shall be periodically surveyed to present a unit price that reflects reality; and the wage rate shall be set according to each company's characteristics, such as working conditions, Partner Company size, and technical level, taking into account labor costs in the same industry.`/* 260604 번역 */ },
+                                    { content: '⑤ The criteria and procedures by which the parties may consult when the initially determined unit price is changed shall be stipulated in the contract.'/* 260604 번역 */ },
+                                    { content: '⑥ Specific matters such as the reasons for the unit price change (changes in prices, raw material prices, exchange rates, etc.), the consultation period, and the payment terms shall be specified.'/* 260604 번역 */ },
+                                ],
+                            },
+                            partC: {
+                                label: "Clear Delivery Date",
+                                items: [
+                                    { content: '① A delivery deadline suitable to the characteristics of each industry and normal practice shall be determined through sufficient agreement with the Partner Company.'/* 260604 번역 */ },
+                                    { content: '② The delivery deadline shall be set at the time of concluding the contract and clarified if it is changed; and where a shorter-than-usual delivery deadline is set under the pretext of an urgent order, etc., it shall be agreed upon through consultation with the Partner Company.'/* 260604 번역 */ },
+                                    { content: '③ Where the Partner Company suffers damage due to an unfair delay in or refusal of receipt, despite the absence of any cause attributable to the Partner Company, such damage shall be compensated.'/* 260604 번역 */ },
+                                ],
+                            },
+                            partD: {
+                                label: "Objective Inspection Standards",
+                                items: [
+                                    { content: '① In inspecting supplies, etc., the Company shall, in consultation with the Partner Company, set objective, fair, and reasonable inspection criteria and methods.'/* 260604 번역 */ },
+                                    { content: '② When supply, etc. takes place, a receipt shall be issued immediately even before inspection, and the inspection shall be carried out promptly in accordance with predetermined inspection rules and procedures.'/* 260604 번역 */ },
+                                    { content: '③ Except where there are justifiable grounds, the inspection results shall be notified within 10 days from the date of receiving the supplies from the Partner Company.'/* 260604 번역 */ },
+                                    { content: '④ Ordered parts shall be managed with the care of a good manager before inspection or during the inspection period.'/* 260604 번역 */ },
+                                ],
+                            },
+                            partE: {
+                                label: "Determination of a Reasonable Payment Due Date",
+                                items: [
+                                    { content: '② Where the Company has consigned manufacturing, etc. to the Partner Company and receives completion payment, etc. from the ordering party upon completion of the manufacturing, repair, construction, or performance of services, the Company shall pay the amount within 15 days from the date of receiving such payment (or by the payment due date if the payment due date arrives before then).'/* 260604 번역 */ },
+                                    { content: '③ Where progress payment, etc. is received in accordance with the progress of manufacturing, repair, construction, or performance of services, the amount corresponding to the portion of manufacturing, repair, construction, or performance of services carried out by the Partner Company shall be paid to the Partner Company within 15 days from the date of receiving such payment (or by the payment due date if the payment due date arrives before then).'/* 260604 번역 */ },
+                                    { content: '④ In paying the Partner Company, payment shall be made at a cash ratio equal to or higher than the cash ratio received from the ordering party in connection with the relevant consignment of manufacturing, etc.'/* 260604 번역 */ },
+                                    { content: '⑤ Where the payment is made by bill, a bill within the payment period (from the issue date to the maturity date) of the bill received from the ordering party in connection with the relevant consignment of manufacturing, etc. shall be delivered.'/* 260604 번역 */ },
+                                    { content: '⑥ Where the payment is made by bill, such bill must be discountable at a financial institution established under the law, and the discount fee (the discount rate determined and announced by the Fair Trade Commission) for the period from the date the bill is delivered to the maturity date of the bill shall be paid on the date the bill is delivered.'/* 260604 번역 */ },
+                                    { content: '⑦ Where a bill is delivered within 60 days from the date of receiving the supplies, etc., the discount fee for the period from the day exceeding 60 days from the date of receiving the supplies, etc. until the maturity date shall be paid within 60 days from the date of receiving the supplies, etc.'/* 260604 번역 */ },
+                                    { content: '⑧ Where the payment is made using a bill-substitute payment method, the fee (including loan interest) for the period from the payment date (in the case of a corporate purchase card, the card payment approval date; in the case of an accounts receivable-secured loan, the date of transmitting the supply details, etc.; and in the case of a purchase loan, the purchase fund settlement date) until the subcontract payment repayment date shall be paid on the payment date.'/* 260604 번역 */ },
+                                    { content: '⑨ Where the payment is made using a bill-substitute payment method within 60 days from the date of receiving the supplies, etc., the fee for the period from the day exceeding 60 days from the date of receiving the objects, etc. until the subcontract payment repayment date shall be paid to the Partner Company within 60 days from the date of receiving the supplies, etc.'/* 260604 번역 */ },
+                                    { content: '⑩ Where the payment is made more than 60 days after the date of receiving the supplies, etc., interest at the rate determined and announced by the Fair Trade Commission shall be paid for such excess period.'/* 260604 번역 */ },
+                                ],
+                            },
+                            partF: {
+                                label: "Reasonable Return Processing for Defects Discovered after Delivery, Etc.",
+                                items: [
+                                    { content: '- The subject responsible for identifying the cause of the defect, the type of defect cause, and the corresponding ratio of responsibility shall be stipulated, and returns shall be processed by mutual agreement between the parties.'/* 260604 번역 */ },
+                                ],
+                            },
+                            partG: {
+                                label: "Contract Cancellation and Termination",
+                                items: [
+                                    { content: `① The grounds shall be determined by agreement between the contracting parties, distinguishing between 'cases possible without a demand for performance' and 'cases requiring a demand for performance'; and where grounds for cancellation or termination arise, notification shall be given in writing without delay.`/* 260604 번역 */ },
+                                ],
+                                label2: "② The cases in which cancellation or termination is possible without a demand for performance are as set out in each of the following subparagraphs."/* 260604 번역 */,
+                                rows: [
+                                    "- Where the counterparty has been subject to a suspension of transactions by a financial institution, or to a disposition such as business cancellation or business suspension by a supervisory authority"/* 260604 번역 */,
+                                    "- Where both parties acknowledge that performance of the basic contract or individual contract is difficult because the counterparty has resolved upon dissolution, transfer of business, or merger into another company, or due to disaster or other causes"/* 260604 번역 */
+                                ],
+                                label3: "③ The cases requiring a demand for performance are as set out in each of the following subparagraphs; in such cases, the counterparty shall be given a period of at least one month to demand performance, and cancellation or termination may be made if performance is not rendered within that period."/* 260604 번역 */,
+                                rows2: [
+                                    "- Where the counterparty has violated material terms of this contract or an individual contract, or where the company receiving the delivery, etc. has delayed, without justifiable reason, the performance of matters necessary for manufacturing the ordered parts, thereby hindering the partner company's work"/* 260604 번역 */,
+                                    "- Where it is found that delivery, etc. within the delivery deadline is difficult because the counterparty has refused, without justifiable reason, to manufacture the ordered parts or has delayed commencement thereof"/* 260604 번역 */,
+                                    "- Where there are substantial grounds to find that the counterparty cannot smoothly perform the contract due to a lack of technical, production, or quality control capability"/* 260604 번역 */
+                                ],
+                            },
+                        },
+                        step2: {
+                            title: "2. Matters to avoid at the time of contract conclusion"/* 260604 번역 */,
+                            partA: {
+                                label: "a. Failing to issue or retain documents"/* 260604 번역 */,
+                                items: [
+                                    { content: '① Without justifiable grounds, issuing a document that does not state matters difficult to finalize at the time of consignment, while failing to state the reason why such matters have not been determined and the scheduled date on which such matters will be determined'/* 260604 번역 */ },
+                                    { content: '② After issuing a document that omits some matters, delaying or failing to issue a new document to the Partner Company even though such matters have been finalized'/* 260604 번역 */ },
+                                    { content: '③ Failing to reply in writing within 15 days, expressing an intention to acknowledge or deny, after being requested by the Partner Company to confirm the consignment content of an orally consigned (ordered) matter, such as the content of the consigned work, the subcontract payment, and the date and time of consignment'/* 260604 번역 */ },
+                                    { content: `④ In replying with an intention to acknowledge or deny the consignment content of an orally consigned (ordered) matter, failing to provide the signature or name and seal of the principal business operator (the company's contract officer, such as the executive in charge of contracts)`/* 260604 번역 */ },
+                                    { content: '⑤ Failing to issue a specific additional contract or work order, etc. even though the scope of the additional work is distinguishable and the amount is substantial'/* 260604 번역 */ },
+                                    { content: `⑥ Failing to retain statutory documents for three years and arbitrarily destroying them within three years in accordance with the principal business operator's rules, etc.`/* 260604 번역 */ },
+                                    { content: '⑦ Retaining documents (records) for three years from the transaction termination date, but where they are false documents (records), or subsequently preparing and retaining documents with false content'/* 260604 번역 */ },
+                                    { content: '⑧ Failing to retain documents related to the determination of the subcontract payment, such as the bid specification, the successful bidder determination approval document, the quotation, and, in the case of construction consignment, the site description and the specification'/* 260604 번역 */ },
+                                ],
+                            },
+                            partB: {
+                                label: "Acts of Unfair Determination of Subcontracting Price",
+                                items: [
+                                    { content: '① Determining the subcontract payment by reducing unit prices at a uniform rate without justifiable reason'/* 260604 번역 */ },
+                                    { content: '② Regardless of the pretext, such as a request for cooperation, unilaterally allocating a certain amount and then determining the subcontract payment by deducting such amount'/* 260604 번역 */ },
+                                    { content: '③ Without justifiable reason, determining the payment by discriminating against a particular Partner Company, or unilaterally determining the payment at a low unit price without agreement with the Partner Company'/* 260604 번역 */ },
+                                    { content: `④ Deceiving the Partner Company by causing a mistake regarding transaction conditions such as the order quantity, or by showing another business operator's quotation or a false quotation, and exploiting this to determine the payment`/* 260604 번역 */ },
+                                    { content: '⑤ In concluding a contract by private contract, determining the payment at an amount lower than the sum of the direct construction cost items without justifiable grounds'/* 260604 번역 */ },
+                                    { content: '⑥ In concluding a contract by competitive bidding, determining the payment at an amount lower than the lowest bid amount without justifiable grounds'/* 260604 번역 */ },
+                                    { content: '⑦ Determining the payment by uniformly reducing the unit price without an objectively valid reason for the unit price reduction, such as a decline in material prices or wages'/* 260604 번역 */ },
+                                    { content: '⑧ Determining a lower payment by discriminating against a particular Partner Company even though there is no difference in payment terms, transaction quantity, difficulty of work, or the like'/* 260604 번역 */ },
+                                    { content: '⑨ Having a quotation made on the premise of a large-volume order, but then actually placing a small-volume order while determining the payment based on that quotation price'/* 260604 번역 */ },
+                                    { content: '⑩ After consigning manufacturing, etc. without determining the payment, determining the payment below the usually paid consideration without consultation with the counterparty'/* 260604 번역 */ },
+                                    { content: `⑪ Requesting and receiving supply-related technical data, etc., then providing it to another business operator and reducing the payment based on that other operator's quotation price, etc.`/* 260604 번역 */ },
+                                    { content: '⑫ Preparing an execution budget significantly lower than the prime contract amount and determining a lower payment on the grounds that construction must be performed within the same execution budget'/* 260604 번역 */ },
+                                    { content: '⑬ Determining the payment significantly below the usually paid consideration on grounds such as export, discount special sales, premiums, or sample use'/* 260604 번역 */ },
+                                    { content: '⑭ Coercing the counterparty to supply at a price significantly lower than the usual supply price in order to hold a special sales event such as a discount sale or bargain sale'/* 260604 번역 */ },
+                                ],
+                            },
+                            partC: {
+                                label: "Act of Requesting Proposal Presentation or Development Request Verbally",
+                                items: [
+                                    { content: '- The act of cancelling development after completion of equipment or production preparation, or demanding a reduction of the unit price presented, by verbal request'/* 260604 번역 */ },
+                                ],
+                            },
+                            partD: {
+                                label: "Acts of Improper Management Interference",
+                                items: [
+                                    { content: `① Interfering in personnel matters by requiring the Company's direction or approval for the appointment or dismissal of the Partner Company's executives and employees, or by causing the hiring of a specific person against the Partner Company's will`/* 260604 번역 */ },
+                                    { content: '② Restricting the content of re-subcontracting transactions, such as the selection of re-subcontractors or the setting of contract terms, irrespective of the purpose of the subcontracting transaction such as maintaining the quality of the consigned supplies and whether delivery is made within the deadline'/* 260604 번역 */ },
+                                    { content: `③ Mobilizing on-site workers against the Partner Company's will to carry out construction even though construction is being properly performed`/* 260604 번역 */ },
+                                    { content: `Restricting the partner company's production items or facility scale, or preventing the partner company from transacting with competitors of the Company or its affiliated companies` },
+                                    { content: '⑤ Requiring the Partner Company to provide supply-related technical data, etc. by demanding it without justifiable reason'/* 260604 번역 */ },
+                                    { content: '⑥ Coercing the Partner Company to participate in special sales events such as premium sales or discount sales, or coercing it to purchase products or gift certificates, etc.'/* 260604 번역 */ },
+                                ],
+                            },
+                            partE: {
+                                label: "Failure to Adjust Subcontracting Price in Response to Raw Material Price Changes",
+                                items: [
+                                    { content: '① Failing to respond to a request for consultation, or, after notifying that consultation will commence, failing to proceed with substantive consultation procedures such as holding meetings, exchanging opinions, or presenting a unit price adjustment proposal'/* 260604 번역 */ },
+                                    { content: '② Despite the lapse of 30 days after a consultation was requested, the person in charge who holds actual authority over unit price adjustments failing to engage in the consultation'/* 260604 번역 */ },
+                                    { content: '③ Repeatedly presenting a price unacceptable to the counterparty without objective grounds such as market research or cost calculation for unit price adjustment'/* 260604 번역 */ },
+                                ],
+                            },
+                            partF: {
+                                label: "Acts of Requesting Exclusive Transactions",
+                                items: [
+                                    { content: '- The act of preventing a partner company from doing business with the Company and the companies designated by the Company (excluding cases where exclusive transactions with the partner company are agreed upon on the grounds of conducting joint technology development with the counterparty)'/* 260604 번역 */ },
+                                ],
+                            },
+                            partG: {
+                                label: "Acts of Unilaterally Shifting the Burden of Civil Complaints",
+                                items: [
+                                    { content: '- The act of bearing all economic and administrative responsibility for various civil complaints arising during construction, and, where a complaint remains unresolved and the potential for dispute continues, the Company handling the complaint and then deducting all related costs from the completed-work payment'/* 260604 번역 */ },
+                                ],
+                            },
+                            partH: {
+                                label: "Improper Special Agreement Acts",
+                                items: [
+                                    { content: '① Setting contract terms that unfairly infringe upon or restrict the interests of the Partner Company'/* 260604 번역 */ },
+                                    { content: '② Setting an agreement that imposes on the Partner Company the costs arising from demanding matters not stated in the contract'/* 260604 번역 */ },
+                                    { content: '③ Setting an agreement that imposes on the Partner Company the costs related to complaint handling, industrial accidents, etc. that should be borne by the Company'/* 260604 번역 */ },
+                                    { content: '④ Setting an agreement that imposes on the Partner Company the costs arising from demanding matters not included in the bid specifications'/* 260604 번역 */ },
+                                ],
+                            },
+                        },
+                    },
+                    section5: {
+                        title: "Faithful Contract Performance in Accordance with the Contract and Applicable Laws",
+                        step1: {
+                            title: "Matters to be Observed in Contract Performance",
+                            partA: {
+                                label: "Compliance with Relevant Laws Including the Civil Code",
+                                items: [
+                                    { content: '- Comply with relevant laws such as the principle of good faith, the Subcontracting Act, and the Fair Trade Act, and resolve disputes, when they arise, based on written materials.'/* 260604 번역 */ },
+                                ],
+                            },
+                            partB: {
+                                label: "Sufficient Advance Agreement and Written Issuance at the Time of Unit Price Reduction",
+                                items: [
+                                    { content: '- In the case of a unit-price reduction on grounds of a decline in raw material prices, an increase in volume, etc., a reasonable basis for the extent of the unit-price reduction corresponding to the volume increase shall be presented.'/* 260604 번역 */ },
+                                ],
+                            },
+                            partC: {
+                                label: "Price Adjustment Due to Contract Changes",
+                                items: [
+                                    { content: '- Where additional costs are incurred due to a contract change, such as additional specification requirements, the corresponding price shall be paid and resolved.'/* 260604 번역 */ },
+                                ],
+                            },
+                        },
+                        step2: {
+                            title: "Matters to be Avoided in Contract Performance",
+                            partA: {
+                                label: "Acts of Improper Refusal to Accept Delivery",
+                                items: [
+                                    { content: '① Refusing receipt despite the difficulty of determining whether the content of the supplied or constructed goods differs from the consignment content because the consignment content is unclear'/* 260604 번역 */ },
+                                    { content: '② Refusing receipt of already consigned goods on grounds such as claims from the ordering party, foreign importer, or customer, or poor sales'/* 260604 번역 */ },
+                                    { content: '③ Refusing receipt on the grounds of delayed delivery, even though delivery or construction within the delivery or construction deadline is impossible due to the late supply of raw materials or building materials, etc. that were to be supplied'/* 260604 번역 */ },
+                                    { content: '④ Applying a standard higher than the ordinary standard even without having set inspection criteria'/* 260604 번역 */ },
+                                    { content: '⑤ Refusing receipt by applying a standard whose content is unclear, even if inspection criteria were set, or higher than the inspection criteria stipulated in the original contract'/* 260604 번역 */ },
+                                    { content: '⑥ Refusing receipt without justifiable reason, such as a lack of storage space, even though the partner company has requested receipt of the supply, etc.'/* 260604 번역 */ },
+                                    { content: `⑦ Arbitrarily refusing receipt of already ordered goods on the judgment that stable supply is difficult due to the partner company's insolvency, etc.`/* 260604 번역 */ },
+                                    { content: `⑧ Consigning the manufacture of multiple items and refusing receipt of other items on the grounds of defects in some items, or refusing receipt on grounds such as the ordering party's cancellation or suspension of orders`/* 260604 번역 */ },
+                                ],
+                            },
+                            partB: {
+                                label: "Acts of Improper Return",
+                                items: [
+                                    { content: '① Returning goods on grounds such as the cancellation of orders by the counterparty or changes in economic conditions'/* 260604 번역 */ },
+                                    { content: '② Unfairly determining goods to have failed inspection and returning them by setting the inspection criteria and methods ambiguously'/* 260604 번역 */ },
+                                    { content: '③ Returning goods even though they were determined to be defective due to the poor quality of the raw materials supplied'/* 260604 번역 */ },
+                                    { content: '④ Returning goods on the grounds of a delivery delay even though the delivery delay was caused by a delay in the supply of raw materials'/* 260604 번역 */ },
+                                    { content: '⑤ Returning already received goods on grounds such as claims from the ordering party, foreign importer, or customer, or poor sales'/* 260604 번역 */ },
+                                    { content: `⑥ Where inspection has been consigned to a third party other than the transacting company, returning goods even though the Partner Company supplied them after passing the third party's inspection`/* 260604 번역 */ },
+                                    { content: `⑦ Where there was a delay in the partner company's delivery or construction deadline but there was an objective fact that it was tolerated, returning the goods after receiving them on the grounds of the delivery or construction delay`/* 260604 번역 */ },
+                                ],
+                            },
+                            partC: {
+                                label: "Acts of Improper Price Reduction",
+                                items: [
+                                    { content: '① Reducing the payment, without specifying at the time of consignment the conditions under which the payment may be reduced, by citing unreasonable grounds after consignment such as a request for cooperation, cancellation of orders by the counterparty, or changes in economic conditions'/* 260604 번역 */ },
+                                    { content: '② Where an agreement on a unit price reduction has been reached, reducing the payment by unilaterally applying it retroactively even to portions consigned before the agreement was reached'/* 260604 번역 */ },
+                                    { content: '③ Excessively reducing the payment on the grounds of paying in cash or before the payment due date'/* 260604 번역 */ },
+                                    { content: '④ Unilaterally reducing the payment on the grounds of a minor fault of the Partner Company that has no substantial effect on the occurrence of damage'/* 260604 번역 */ },
+                                    { content: `Deducting from the payment an amount in excess of the appropriate purchase price or usage fee in cases where partner companies are required to purchase goods from the Company or use the Company's equipment in the manufacturing, repair, construction, or service performance` },
+                                    { content: '⑥ Reducing the payment on the grounds that prices or material costs, etc. at the time of payment have fallen compared with those at the time of supply, etc.'/* 260604 번역 */ },
+                                    { content: '⑦ Unfairly reducing the payment for unreasonable reasons such as a management deficit or a reduction in the selling price'/* 260604 번역 */ },
+                                    { content: '⑧ Reducing indirect labor costs, general administrative expenses, profit, value-added tax, etc. contrary to the original contract content'/* 260604 번역 */ },
+                                    { content: '⑨ Imposing on the partner company the employment insurance premiums, occupational safety and health management expenses, and other costs, etc. that the Company must bear under the Act on the Collection of Insurance Premiums for Employment Insurance and Industrial Accident Compensation Insurance, the Occupational Safety and Health Act, and the like'/* 260604 번역 */ },
+                                    { content: '⑩ Where materials and equipment, etc. were to be supplied, supplying them late or, having set in effect an unreasonable delivery or construction deadline, reducing the payment on the grounds of failure to deliver or complete within that period'/* 260604 번역 */ },
+                                    { content: '⑪ Reducing the already finalized subcontract payment on the grounds of continued orders, or reducing it on the grounds of the specific details of manufacturing or construction after contracting on a lump-sum basis'/* 260604 번역 */ },
+                                    { content: '⑫ Reducing the payment contrary to the original contract on grounds such as having won the order for the supplies, etc. at a low price'/* 260604 번역 */ },
+                                    { content: '⑬ Reducing the payment as a result by amending the contract, etc., even though there is no change in the consignment content and conditions'/* 260604 번역 */ },
+                                    { content: '⑭ Reducing the payment by shifting foreign exchange losses, etc. onto the partner company contrary to the original contract conditions'/* 260604 번역 */ },
+
+                                ],
+                            },
+                            partD: {
+                                label: "d. Act of unjustly demanding economic benefits"/* 260604 번역 */,
+                                items: [
+                                    { content: '① Demanding economic benefits such as sponsorship money, incentives, or subsidies on the condition of commencing a transaction or conducting large-volume transactions'/* 260604 번역 */ },
+                                    { content: '② Demanding economic benefits such as sponsorship money, incentives, or subsidies for unreasonable reasons such as deteriorating profits or business conditions'/* 260604 번역 */ },
+                                    { content: '③ Otherwise demanding economic benefits such as sponsorship money, incentives, or subsidies even though the partner company has no legal obligation to bear them'/* 260604 번역 */ },
+                                ],
+                            },
+                            partE: {
+                                label: "e. Act of passing on costs attributable to one's own causes"/* 260604 번역 */,
+                                items: [
+                                    { content: `- The act of passing on to the partner company costs arising from the Company's wage increases or delays in its internal approval procedures. F. Unfair payment-in-kind acts`/* 260604 번역 */ },
+                                    { content: `- The act of, contrary to the original contract and against the partner company's will, paying the agreed price in goods and demanding that the partner company accept this`/* 260604 번역 */ },
+                                ],
+                            },
+                           /*partF: {
+                                label: "바. ",
+                                items: [
+                                    { content: '' },
+                                ],
+                            },*/
+                            partG: {
+                                label: "g. Act of retaliation"/* 260604 번역 */,
+                                items: [
+                                    { content: '- The act of restricting order opportunities, suspending transactions, or imposing other disadvantages on a partner company on the grounds that it reported a violation of the Subcontracting Act to the Fair Trade Commission'/* 260604 번역 */ },
+                                ],
+                            },
+                            partH: {
+                                label: "h. Act of evading the law"/* 260604 번역 */,
+                                items: [
+                                    { content: '① Attempting, in connection with a subcontracting transaction, to substantively evade the application of the Subcontracting Act through indirect means'/* 260604 번역 */ },
+                                    { content: '② Recovering payments, etc. paid to the Partner Company pursuant to a corrective measure by the Fair Trade Commission, or recouping them by means such as deducting them from supply payments'/* 260604 번역 */ },
+                                    { content: '③ After paying bill discount fees, delay interest, etc. to the Partner Company, uniformly reducing the unit price by an amount corresponding thereto'/* 260604 번역 */ },
+                                ],
+                            },
+                            partI: {
+                                label: "i. Act of compelling the purchase of goods, etc."/* 260604 번역 */,
+                                items: [
+                                    { content: 'Forcing partner companies to sell or use products or services of the Company, its affiliates, or specific companies without justifiable reason' },
+                                    { content: '② Without justifiable grounds, unfairly compelling the Partner Company to purchase materials used at the construction site against its will, or coercing it to purchase or use goods or equipment designated by the Company'/* 260604 번역 */ },
+                                    { content: '③ Without justifiable grounds, repeatedly requesting a purchase even though the Partner Company has indicated that it has no intention to purchase, or even where no such indication has been made, it is clearly recognized that there is no intention to purchase'/* 260604 번역 */ },
+                                ],
+                            },
+                            partJ: {
+                                label: "j. Act of unjustly claiming payment for the purchase of goods, etc."/* 260604 번역 */,
+                                items: [
+                                    { content: `① Having the partner company purchase from the Company goods, etc. necessary for supply, etc., or use the Company's equipment, etc., and causing the partner company to pay all or part of the purchase price or usage fee prior to the payment due date`/* 260604 번역 */ },
+                                    { content: `② Having the Partner Company purchase from the Company goods, etc. necessary for supply, etc., or use the Company's equipment, etc., and requiring payment on terms significantly more unfavorable than those on which the Company purchases, uses, or supplies to a third party`/* 260604 번역 */ },
+                                ],
+                            },
+                            partK: {
+                                label: "k. Act of prohibited coercion to provide technical data"/* 260604 번역 */,
+                                label2: "① Coercing the Partner Company, without justifiable grounds, to provide the following technical data to the Company or a third party"/* 260604 번역 */,
+                                rows: [
+                                    "- Data on methods of manufacturing, repair, construction, or service performance that have been maintained as confidential through substantial effort"/* 260604 번역 */,
+                                    "- Information related to intellectual property rights such as patent rights, utility model rights, design rights, and copyrights"/* 260604 번역 */,
+                                    "- Other technical or managerial information that is useful for business activities and has independent economic value"/* 260604 번역 */
+                                ],
+                                items: [
+                                    { content: '② Misappropriating technical data acquired from a partner company for the benefit of the Company or a third party'/* 260604 번역 */ },
+                                ],
+                            },
+                        },
+                    },
+                    section6: {
+                        title: "VI. System Operation"/* 260604 번역 */,
+                        items: [
+                            { content: '1. The partner company collaboration system refers to store-opening consultation on the website, and'/* 260604 번역 */ },
+                            { content: '2. The support organization is operated by the relevant business department suited to the nature of the work (technical support, education, etc.).'/* 260604 번역 */ },
+                        ]
+                    },
+                    addendum: {
+                        title: "Supplementary Provisions",
+                        article: "Article 1 (Effective Date)",
+                        lines: ["These guidelines shall take effect from April 1, 2020.", "These guidelines shall take effect from April 1, 2021."]
+                    }
                 }
             }
         };

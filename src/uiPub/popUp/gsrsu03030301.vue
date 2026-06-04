@@ -162,6 +162,65 @@ export default {
                         ],
                         desc2: '1) GS리테일의 책임 확인 시 사업부 기준에 따른 보상조치 실시 & GS리테일의 책임 확인 불가 시, 설득 등을 통해 소비자 분쟁을 조속히 해결하기 위해 노력',
                     }
+                },
+                en: {
+                    MainTitle: "GS Retail Consumer Rights Protection Policy",
+                    section1: {
+                        title: 'Purpose of Establishment',
+                        desc: 'Under its customer satisfaction vision of being a platform that earns customer trust and affection, GS Retail has set the customer satisfaction management objective of managing customer satisfaction in accordance with the management indicators of each business. In addition, GS Retail pursues three customer satisfaction management strategies: customer satisfaction management, service quality management, and cultivation of pride. To protect consumer rights and interests that may be affected in the course of business activities, all employees of GS Retail have established and implemented a consumer rights protection policy, aiming to become a trusted GS Retail by providing beneficial products and services.'/* 260604 번역 */
+                    },
+                    section2: {
+                        title: 'Scope of Application',
+                        desc: `The scope of application of the Consumer Rights Protection Policy covers consumers (customers) who use GS Retail's products and services. GS Retail executives and employees shall be familiar with the Consumer Rights Protection Policy in order to protect consumer rights, and shall encourage partner companies doing business with the Company to respect this Consumer Rights Protection Policy.`/* 260604 번역 */
+                    },
+                    section3: {
+                        title: 'Basic Principles',
+                        desc: 'Community engagement activities consist of activities for the growth of the local community. Activities related to social contribution are organized by the Social Contribution Part, and the development of sales channels related to local specialty products is handled by the MD and Broadcasting Business Support Team.'/* 260604 번역 */,
+                        items: [
+                            { label: 'Article 1'/* 260604 번역 */, content: 'We will provide sufficient and accurate information for the rational consumption of consumers.'/* 260604 번역 */ },
+                            { label: 'Article 2'/* 260604 번역 */, content: 'We will strive to enhance customer benefits by providing products suitable for consumers and the best service.'/* 260604 번역 */ },
+                            { label: 'Article 3'/* 260604 번역 */, content: 'We will eradicate unfair trade practices that infringe upon consumer rights and interests.'/* 260604 번역 */ },
+                            { label: 'Article 4'/* 260604 번역 */, content: `We will collect consumers' personal information only to the minimum extent consistent with its purpose, through a consent procedure.`/* 260604 번역 */ },
+                            { label: 'Article 5'/* 260604 번역 */, content: 'We will listen to the voice of consumers and immediately correct any inconveniences, striving to provide the best products.'/* 260604 번역 */ }
+                        ]
+                    },
+                    section4: {
+                        title: 'Consumer Rights Protection Activities',
+                        desc: 'GS Retail carries out the following activities to protect consumer rights and interests.'/* 260604 번역 */,
+                        activities: [
+                            { subject: 'Quality Enhancement', content: 'GS Retail has obtained ISO 9001 quality management system certification and conducts various inspection activities, including freshness and hygiene inspections, to ensure product safety.'/* 260604 번역 */ },
+                            { subject: 'Fair Trade Support', content: `GS Retail does its utmost to ensure fair transactions at every stage leading up to the consumer's purchase decision and provides accurate product information.`/* 260604 번역 */ },
+                            { subject: 'Personal Data Protection and Security', content: `We collect consumers' personal information only to the minimum extent appropriate to its purpose through a consent procedure, and we use it only for the agreed-upon period of use, after which it is destroyed.`/* 260604 번역 */ },
+                            { subject: 'Implementing a Sincere Marketing Policy', content: `GS Retail has established six 'Sincere Marketing Policies' and conducts training for marketing-related departments.`/* 260604 번역 */ }
+                        ],
+                        subject: '[Sincere Marketing Policy]',
+                        policies: [
+                            { num: '1.', content: 'We will fulfill our responsibilities based on the laws related to promotion and sales and the policies set by the state, such as the protection of consumer rights and interests.'/* 260604 번역 */ },
+                            { num: '2.', content: 'In all processes where we meet customers, such as product purchases and services, we provide accurate and consistent information and use easy-to-understand words.'/* 260604 번역 */ },
+                            { num: '3.', content: 'We will comply with the principles of fair competition and provide a balanced perspective on products/services.'/* 260604 번역 */ },
+                            { num: '4.', content: 'We will take care not to engage in marketing that causes physical or psychological harm to consumers, especially infants, children, and adolescents.'/* 260604 번역 */ },
+                            { num: '5.', content: 'We will conduct marketing that respects human rights, without being biased toward a particular group or fostering conflict.'/* 260604 번역 */ },
+                            { num: '6.', content: 'We will periodically conduct training on sincere marketing policies for marketing-related departments.'/* 260604 번역 */ }
+                        ]
+                    },
+                    section5: {
+                        title: 'Consumer Rights Violation Risk Identification and Damage Response',
+                        desc: 'GS Retail identifies the risk of harm to consumer rights and interests through various internal and external channels, and responds in accordance with the operational process and harm response procedures set out below. In addition, when a risk of harm to consumer rights and interests arises, GS Retail implements improvement measures to mitigate the risk and continuously supplements them through effectiveness evaluations.'/* 260604 번역 */,
+                        processTitle: "VOC Operating Process",
+                        image: {
+                            src: require("@/assets/images/dummy/smp_img04.jpg"),
+                            alt: 'VOC Operating Process'
+                        },
+                        stepTitle: "Damage Response Procedure",
+                        steps: [
+                            { id: '01', title: 'Step 1<br />Receipt', details: [] },
+                            { id: '02', title: 'Step 2<br />Customer Notification on <br />Received Complaint', details: ['Customer\nreconfirmation of the received content'/* 260604 번역 */,'Notification of expected response time'] },
+                            { id: '03', title: 'Step 3<br>Customer Notification on<br>Identification/analysis'/* 260604 번역 */, details: ['* Verification of the received complaint by the relevant department'] },
+                            { id: '04', title: 'Step 4<br>Content of the damage analysis<br>Received Complaint'/* 260604 번역 */, details: ['* Verification of facts, causes, and attributable grounds based on the Consumer Protection Act'] },
+                            { id: '05', title: 'Stage 5<br>Customer Information<sup>1)</sup>'/* 260604 번역 */, details: [] }
+                        ],
+                        desc2: `Damage Response Procedure<br />1) When GS Retail's responsibility is confirmed: implement compensation measures according to business unit standards. When GS Retail's responsibility cannot be confirmed: make efforts to promptly resolve consumer disputes through persuasion and other means.`,
+                    }
                 }
             }
         };

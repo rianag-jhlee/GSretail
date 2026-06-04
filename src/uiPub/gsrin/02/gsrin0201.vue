@@ -398,6 +398,122 @@ export default {
                         { value: "title", label: "제목" },
                         { value: "content", label: "내용" }
                     ]
+                },
+                en: {
+                    MainTitle: "Financial Performance",
+                    MainsubTitle: "Business Performance",
+                    MainDesc: ["Transparent GS Retail<br/> These are the business results."/* 260604 번역 */, "Dividend Policy"/* 260604 번역 */, "Transparent GS Retail<br/> These are the business results."/* 260604 번역 */],
+                    Tabs1: [{ item: "Financial Status"/* 260604 번역 */ }, { item: "Dividend Information"/* 260604 번역 */ }, { item: "Performance Materials, etc."/* 260604 번역 */ }],
+                    UnitMillion: "(Unit: KRW, %)"/* 260604 번역 */,
+                    Recent5Years: "(Based on the last 5 years)"/* 260604 번역 */,
+                    SummaryYears: ["2023", "2024", "2025"],
+                    TableTitle1: "Summary Consolidated Statement of Financial Position"/* 260604 번역 */,
+                    TableTitle2: "Summary Consolidated Income Statement"/* 260604 번역 */,
+                    TableTitle3: "These are the transparent business results of GS Retail."/* 260604 번역 */,
+                    
+                    // 추출된 텍스트 라벨들
+                    Labels: {
+                        Common: {
+                            Category: "Category"
+                        },
+                        Finance: {
+                            Asset: "Assets"/* 260604 번역 */,
+                            CurrentAsset: "Current Assets"/* 260604 번역 */,
+                            NonCurrentAsset: "Non-current Assets"/* 260604 번역 */,
+                            TotalAsset: "Total Assets"/* 260604 번역 */,
+                            Debt: "Liabilities"/* 260604 번역 */,
+                            CurrentDebt: "Current Liabilities"/* 260604 번역 */,
+                            NonCurrentDebt: "Non-current Liabilities"/* 260604 번역 */,
+                            TotalDebt: "Total Liabilities"/* 260604 번역 */,
+                            Capital: "Equity"/* 260604 번역 */,
+                            BaseCapital: "Capital Stock"/* 260604 번역 */,
+                            ProfitCapital: "Retained Earnings, etc."/* 260604 번역 */,
+                            TotalCapital: "Total Equity"/* 260604 번역 */,
+                            Sales: "Revenue"/* 260604 번역 */,
+                            GrossProfit: "Gross Profit"/* 260604 번역 */,
+                            SGA: "Selling and Administrative Expenses, etc."/* 260604 번역 */,
+                            OperatingIncome: "Operating Profit"/* 260604 번역 */,
+                            OtherIncome: "Other Income and Expenses"/* 260604 번역 */,
+                            FinancialIncome: "Financial Income and Expenses"/* 260604 번역 */,
+                            EquityMethod: "Equity-Method Gains and Losses"/* 260604 번역 */,
+                            IncomeBeforeTax: "Income Before Income Tax"/* 260604 번역 */,
+                            NetIncome: "Net Income for the Period"/* 260604 번역 */
+                        },
+                        Dividend: {
+                            Year: "Year"/* 260604 번역 */,
+                            TotalAmount: "2025",
+                            Type: "2024",
+                            PerShare: "2023",
+                            Propensity: "2022",
+                            Yield: "2021"
+                        },
+                        Board: {
+                            Num: "Category",
+                            Title: "Title",
+                            Download: "Download ↓"
+                        }
+                    },
+
+                    FSD: {
+                        Asset: {
+                            Current: ["1,857,062", "1,481,155", "1,797,888"],
+                            NonCurrent: ["8,184,954", "6,100,488", "5,685,209"],
+                            Total: ["10,042,016", "7,581,643", "7,483,097"]
+                        },
+                        Debt: {
+                            Current: ["2,688,039", "1,898,446", "1,995,791"],
+                            NonCurrent: ["2,920,238", "2,501,679", "2,211,212"],
+                            Total: ["5,608,277", "4,400,125", "4,207,003"]
+                        },
+                        Capital: {
+                            Base: ["104,718", "83,607", "83,607"],
+                            Profit: ["4,329,021", "3,097,911", "3,192,488"],
+                            Total: ["4,433,739", "3,181,518", "3,276,095"]
+                        }
+                    },
+                    ISD: {
+                        Sales: ["11,080,326", "11,579,430", "11,957,422"],
+                        GrossProfit: ["2,829,457", "2,879,228", "2,911,663"],
+                        SGA: ["2,515,001", "2,623,102", "2,619,543"],
+                        OperatingIncome: ["314,456", "256,126", "292,120"],
+                        OtherIncome: ["-7,522", "-52,690", "-62,857"],
+                        FinancialIncome: ["-67,586", "-122,055", "-38,128"],
+                        EquityMethod: ["-154,794", "-40,445", "-101,903"],
+                        IncomeBeforeTax: ["84,554", "40,935", "89,231"],
+                        NetIncome: ["22,148", "9,792", "50,239"]
+                    },
+                    PerformanceCharts: [
+                        { title: "Revenue"/* 260604 번역 */, unit: "(Unit: KRW 100 million)"/* 260604 번역 */, imgName: "gsrin0201_chat_1" },
+                        { title: "Operating Profit"/* 260604 번역 */, unit: "(Unit: KRW 100 million)"/* 260604 번역 */, imgName: "gsrin0201_chat_2" },
+                        { title: "Net Income for the Period"/* 260604 번역 */, unit: "(Unit: KRW 100 million)"/* 260604 번역 */, imgName: "gsrin0201_chat_3" },
+                        { title: "Total Assets"/* 260604 번역 */, unit: "(Unit: KRW 100 million)"/* 260604 번역 */, imgName: "gsrin0201_chat_4" }
+                    ],
+                    DividendPolicyDesc: "We have continuously paid dividends to enhance shareholder value, and the dividend amount is determined by comprehensively considering investments for the company's continued growth, business performance, and cash-flow conditions.<br/><br/>We have determined that it is appropriate to set dividends at around 40% of consolidated net income (controlling interest), excluding non-recurring gains and losses, and we plan to maintain a payout ratio of around 40% going forward."/* 260604 번역 */,
+                    DividendYears: ["Total Dividends"/* 260604 번역 */, "Dividend Type"/* 260604 번역 */, "Dividend per Share"/* 260604 번역 */, "Dividend Payout Ratio"/* 260604 번역 */, "Dividend Yield"/* 260604 번역 */],
+                    DividendData: {
+                        TotalAmount: ["50,139,354,000", "Cash"/* 260604 번역 */, "600", "115.4", "2.7"],
+                        Type: ["41,782,795,000", "Cash"/* 260604 번역 */, "500", "1,639.8", "3.3"],
+                        PerShare: ["51,719,128,000", "Cash"/* 260604 번역 */, "500", "292.6", "2.1"],
+                        Propensity: ["43,937,410,750", "Cash"/* 260604 번역 */, "430", "108.7", "1.5"],
+                        Yield: ["122,616,030,000", "Cash"/* 260604 번역 */, "1,200", "15.0", "3.9"]
+                    },
+                    IRListData: [
+                        { id: "60", title: "Q4 2025 Business Results"/* 260604 번역 */, fileUrl: "#" },
+                        { id: "59", title: "Q3 2025 Business Results"/* 260604 번역 */, fileUrl: "#" },
+                        { id: "58", title: "Q2 2025 Business Results"/* 260604 번역 */, fileUrl: "#" },
+                        { id: "57", title: "Q1 2025 Business Results"/* 260604 번역 */, fileUrl: "#" },
+                        { id: "56", title: "Q4 2024 Business Results"/* 260604 번역 */, fileUrl: "#" },
+                        { id: "55", title: "Q3 2024 Business Results"/* 260604 번역 */, fileUrl: "#" },
+                        { id: "54", title: "Q2 2024 Business Results"/* 260604 번역 */, fileUrl: "#" },
+                        { id: "53", title: "GS Retail Spin-off Briefing Materials"/* 260604 번역 */, fileUrl: "#" },
+                        { id: "52", title: "Q1 2024 Business Results"/* 260604 번역 */, fileUrl: "#" },
+                        { id: "51", title: "Q4 2023 Business Results"/* 260604 번역 */, fileUrl: "#" }
+                    ],
+                    options: [
+                        { value: "all", label: "All" },
+                        { value: "title", label: "Title" },
+                        { value: "content", label: "Details" }
+                    ]
                 }
             }
         };

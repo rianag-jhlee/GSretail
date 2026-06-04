@@ -4300,6 +4300,3153 @@ const langData = {
                 ],
             },
         ],
+    },
+    en: {
+        MainTitle: "Compliance",
+        MainsubTitle: "Compliance",
+        Tabs1: [{ item: "Ethics Management" }, { item: "Legal Compliance" }],
+        TabsEsgArchive: [
+            { item: "Introduction" },
+            { item: "Guidelines" },
+            { item: "Systems" },
+            { item: "Reporting" },
+        ],
+        TabsEsgSystem: [
+            { item: "Reporting Usage Guide" },
+            { item: "Reporter Reward Program" },
+            { item: "Reporter Protection Program" },
+        ],
+        TabsCompliance: [
+            { item: "Compliance Program" },
+            { item: "Compliance Manager Information" },
+            { item: "Four Major Fair Trade Guidelines" },
+            { item: "Fair Trade Work Standards" },
+        ],
+        TabsFairTradeBiz: [
+            { item: "Supermarket, CVS, Specialty" },
+            { item: "TV Home Shopping" },
+        ],
+        ComplianceProgramHeroTitle:
+            "GS Retail voluntarily upholds fair trade to promote mutual growth through trust and cooperation, in accordance with the principle of responsible free competition.",
+        // ComplianceProgramLead:
+        //     "GS리테일은 자율적 공정거래를 적극 실천하기 위해 ‘자율준수 프로그램’을 운영하고 있습니다.",
+        ComplianceProgramFeatureItems: [
+            {
+                num: "01",
+                title: "Establishment and implementation of CP criteria and procedures"/* 260604 번역 */,
+                desc: "Establishment and Implementation of CP Standards and Procedures",
+            },
+            {
+                num: "02",
+                title: "The CEO's commitment to and support for compliance"/* 260604 번역 */,
+                desc: "CEO's Commitment to and Support for Voluntary Compliance<br />The CEO publicly expresses the commitment to voluntary compliance in a manner easily recognizable by all members, customers, and stakeholders of the Company, and actively supports CP operations.",
+            },
+            {
+                num: "03",
+                title: "Appointment of a compliance officer responsible for operating the CP"/* 260604 번역 */,
+                desc: "Appointment of a Compliance Manager Responsible for CP Operations<br />A compliance manager is appointed within the organization by the highest decision-making body such as the Board of Directors, with responsibility and authority granted for effective CP operations.",
+            },
+            {
+                num: "04",
+                title: "Production and use of the compliance manual"/* 260604 번역 */,
+                desc: "Development and Utilization of the Compliance Manual",
+            },
+            {
+                num: "05",
+                title: "Conducting continuous and systematic compliance training"/* 260604 번역 */,
+                desc: "Continuous and Systematic Compliance Training<br />Effective training on matters related to fair trade law compliance is conducted regularly for all members, including the CEO.",
+            },
+            {
+                num: "06",
+                title: "Establishment of an internal monitoring system"/* 260604 번역 */,
+                desc: "Establishment of Internal Monitoring System<br />Vulnerabilities are identified through an internal monitoring system, and a transparent fair trade environment is being built through institutional improvement.",
+            },
+            {
+                num: "07",
+                title: "Sanctions against employees who violate fair trade-related laws and regulations"/* 260604 번역 */,
+                desc: "Sanctions against Employees Who Violate Fair Trade Laws and Regulations<br />The Company operates internal regulations specifying sanctions commensurate with the degree of fair trade law violations; when violations are identified, the Company responds actively and conducts preventive activities to avoid recurrence of similar acts.",
+            },
+            {
+                num: "08",
+                title: "Effectiveness evaluation and improvement measures"/* 260604 번역 */,
+                desc: "Effectiveness Evaluation and Improvement Measures<br />To enable CP to operate effectively and continuously, reviews and evaluations of CP standards, procedures, and operations are conducted, and institutional improvement measures are implemented accordingly.",
+            },
+        ],
+        ComplianceManagerRoleFeatureItems: [
+            { num: "01", title: "- Conducts supervision and audits on legal compliance." },
+            { num: "02", title: "- Develops and operates the compliance manual." },
+            { num: "03", title: "- Directs and supervises compliance training." },
+        ],
+        ComplianceAppointmentSteps: [
+            { key: "ap1", iconKey: "recommend", title: "Compliance Manager<br />Candidate Recommendation", note: "Disqualification and Recusal Requirements" },
+            { key: "ap2", iconKey: "verify", title: "Compliance Manager<br />Capability Verification", note: "Anti-corruption verification and job capability verification" },
+            { key: "ap3", iconKey: "appoint", title: "Appointment", note: "Term: 3 years" },
+            { key: "ap4", iconKey: "notify", title: "Employee Notification<br />Execution of Duties" },
+        ],
+        FairTradeGuidelineDetailBtn: "Learn More",
+        FairTradeGuidelineItems: [
+            {
+                num: "01",
+                title: "Partner Company Selection and Operation Guidelines"/* 260604 번역 */,
+                desc: "Guidelines for the Fair Selection and Operation of Partner Companies",
+                popContId: "gsrsu04020301"
+            },
+            {
+                num: "02",
+                title: "Guidelines for Issuance and Retention of Written Documents"/* 260604 번역 */,
+                desc: "Guidelines for the Issuance and Retention of Written Documents in Subcontracting Transactions",
+                popContId: "gsrsu04020302"
+            
+            },
+            {
+                num: "03",
+                title: "Operating Regulations of the Subcontracting Transaction Review Committee"/* 260604 번역 */,
+                desc: "GS Retail Guidelines for the Establishment and Operation of an Internal Deliberation Committee for Subcontract Transactions"/* 260604 번역 */,
+                popContId: "gsrsu04020303"
+            },
+            {
+                num: "04", 
+                title: "Large and Small and Medium-Sized Enterprises",
+                desc: "Guidelines for Concluding Contracts for Win-Win Cooperation between Large and Small and Medium-sized Enterprises"/* 260604 번역 */,
+                popContId: "gsrsu04020304"
+            },
+       
+        ],
+        FairTradeWorkStandardAccordionItems: [
+            {
+                key: "01",
+                title: "<span class='acc_num'>1.</span>Partner Company Selection and Operation Criteria"/* 260604 번역 */,             
+            },
+            {
+                key: "02",
+                title: "2. Standards for Determining and Changing Sales Incentives",              
+            },
+            {
+                key: "03",
+                title: "3. Standards and Procedures for Conducting Sales Promotion Events and Cost Sharing",              
+            },
+            {
+                key: "04",
+                title: "4. Standards for Sharing Costs for Interior and Promotional Materials",  
+            },
+            {
+                key: "05",
+                title: "5. Standards for Requesting Management Information from Partner Companies",
+            },
+            {
+                key: "06",
+                title: "6. Standards for Dispatching Partner Company Employees",
+            },
+            {
+                key: "07",
+                title: "7. Standards for Partner Company Special Purchase Transactions",
+            },
+            {
+                key: "08", 
+                title: "8. Partner Company Return-Related Standards",
+            },
+        ],
+        FairTradeHomeShoppingAccordionItems: [
+            { key: "01", title: "1. Standards and Procedures for Fair Trade with Partner Companies" },
+            { key: "02", title: "2. Standards and Procedures for Determining Transaction Conditions" },
+            { key: "03", title: "3. Standards and Procedures for Fixed-Commission Broadcast Operations" },
+            { key: "04", title: "4. Standards and Procedures for Conducting Sales Promotion Events" },
+            { key: "05", title: "5. Standards and Procedures for Sharing Broadcast Production Costs" },
+            { key: "06", title: "6. Standards and Procedures for Returns of Directly Purchased Products" },
+            { key: "07", title: "7. Standards for Prohibition on Demanding Management Information" },
+            { key: "08", title: "8. Standards for Compliance with Guidelines for Reviewing the Illegality of Unfair Trade Practices in Home Shopping" },
+            { key: "09", title: "9. Standards and Procedures for Product Selection and Broadcast Scheduling" },
+            { key: "10", title: "10. Standards and Procedures for Intangible Product Selection" },
+            { key: "11", title: "11. Standards for Prohibition on Coercive Acts of Linked Scheduling" },
+            { key: "12", title: "12. Standards for Compensation for Partner Company Damage Due to Unfair Trade Practices" },
+        ],
+        // 1. 협력사와의 공정거래를 위한 기준과 절차
+        FairTradeHomeShoppingCooperationSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These standards govern the trade process between GS Retail Co., Ltd. (hereinafter "GS SHOP") and Partner Companies for TV home shopping and data home shopping broadcasts (hereinafter collectively "broadcasts"), setting forth standards and procedures for the Company to conduct business with Partner Companies in a transparent, fair, and lawful manner.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "GS SHOP employees must always be familiar with and comply with these Standards during consultations or transactions with Partner Companies." },
+                    { num: "2", title: `In addition to these Standards, GS SHOP employees must also strictly comply with the provisions of the Monopoly Regulation and Fair Trade Act, the Act on Fair Transactions in Large-Scale Retail Business, and other fair trade-related laws and regulations (hereinafter collectively "Fair Trade-Related Laws and Regulations") in transactions with Partner Companies.` },
+                    { num: "3", title: "These Standards and subsidiary guidelines shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "These Standards shall in principle be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) bulletin board, and shall also be disclosed during individual consultation with Partner Companies for their listing for GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share these Standards through Partner Company training." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Product and Partner Company Selection",
+                definitions: [
+                    { term: "1", desc: "GS SHOP selects products and Partner Companies through fair and transparent procedures in response to proposals received from Partner Companies online or offline." },
+                    { term: "2", desc: `The specific standards and procedures for complying with paragraph ① shall be set forth in the separate standard "Standards and Procedures for Product Selection and Broadcast Scheduling."` },
+                ],
+            },
+            {
+                no: "04",
+                title: "Determination of Sales Commission",
+                items:[
+                    {num:"1", title:"The product sales commission must be calculated according to fair and transparent standards in accordance with the principle of mutual trust with Partner Companies."},
+                    {num:"2", title:"Where GS SHOP intends to set the sales commission conditions with a partner company in the form of a fixed-fee commission, the target products and scheduling ratio must be operated restrictively, and protective measures for small and medium-sized enterprise Partner Companies must be established."},
+                    {num:"3", title:"The specific standards and procedures for complying with paragraphs ① and ② shall be set forth in a separate guideline."},
+                ]
+            },
+            {
+                no: "05",
+                title: "Conduct of Promotional Events and Cost Sharing",
+                items: [
+                    { num: "1", title: "Promotional events must be conducted after prior mutual agreement with Partner Companies, and must comply with fair trade-related laws and regulations when conducted." },
+                    { num: "2", title: "The specific standards and procedures for complying with paragraph ① shall be set forth in a separate guideline." },
+                ],
+            },
+            {
+                no: "06",
+                title: "Sharing of Broadcast Production Costs",
+                items: [
+                    { num: "1", title: "As a general rule, GS SHOP shall bear the entire production cost of product sales broadcasts. However, where, at the request of a partner company, additional use is made of sales experts, models, or self-produced videos prepared in advance by the partner company, the costs incurred may be shared through prior agreement."/* 260604 번역 */ },
+                    { num: "2", title: "The specific standards and procedures for complying with paragraph ① shall be set forth in a separate guideline." },
+                ],
+            },
+            {
+                no: "07",
+                title: "Prohibition of Unfair Trade Practices",
+                items: [
+                    {
+                        num: "1",
+                        title: "In the course of transacting with Partner Companies, GS SHOP shall comply with the following items and shall not engage in acts that abuse its superior position over Partner Companies to impose unfair coercion or other unfair trade practices. The specific standards for such unfair trade practices shall be governed by the provisions of fair trade-related laws and regulations.",
+                        details: [
+                            "1. Obligation to conclude, provide, and retain written contracts",    
+                            "2. Prohibition on reduction of product payment",
+                            "3. Obligation to pay product sales proceeds",
+                            "4. Prohibition on unfair refusal or delay of product receipt",
+                            "5. Prohibition on improper return of goods",
+                            "6. Prohibition on unfair coercion of promotional costs and similar",
+                            "7. Prohibition on coercion of exclusive transactions",
+                            "8. Prohibition on requesting management information",
+                            "9. Prohibition on unfair demand and receipt of economic benefits",
+                            "10. Prohibition on unfair changes to contracts and provision of other disadvantages",
+                            "11. Prohibition on retaliatory measures",
+                            "12. Prohibition on interference in business activities",
+                        ],
+                    },
+                    { num: "2", title: "The specific standards for complying with subparagraph 5 of paragraph ① shall be set forth in a separate guideline." },
+                    { num: "3", title: "The specific standards for complying with subparagraph 8 of paragraph ① shall be set forth in a separate guideline." },
+                    { num: "4", title: "The specific standards for complying with the content of the guidelines on the illegality review of specific unfair trade practices in the home shopping broadcast transaction sector stipulated by the Fair Trade Commission, in addition to the content of paragraph ①, shall be set forth in a separate guideline." },
+                ],
+            },
+            {
+                no: "08",
+                title: "Exclusion of Transactions with Conflicted Parties",
+                items: [
+                    { num: "1", title: "If employees or officers of a Partner Company are direct family members, relatives, or other interested parties of GS SHOP employees, GS SHOP shall prohibit the relevant employees from directly or indirectly participating in procedures for selecting that Partner Company's products or determining transaction conditions." },
+                    {
+                        num: "2",
+                        title: "The standards for interested parties under paragraph ① are as follows:",
+                        details: [
+                            {
+                                text: "1. Relatives pursuant to Article 777 of the Civil Act",
+                                children: [
+                                    "a. Blood relatives within 8 degrees",
+                                    "b. Relatives by affinity within the 4th degree (the scope of relatives by affinity follows Article 769 of the Civil Act)",
+                                    "c. Spouses",
+                                ],
+                            },
+                            "2. Persons who have previously worked at GS SHOP",
+                            "3. Persons associated with GS Group affiliates",
+                        ],
+                    },
+                    { num: "3", title: "Notwithstanding paragraph ①, if an employee with an interested party relationship with a Partner Company's employee is found to have been involved in the procedures for selecting that Partner Company's products or determining transaction conditions shall be re-examined with the relevant employee excluded." },
+                ],
+            },
+            {
+                no: "09",
+                title: "Prevention of Monopolization by Specific Partner Companies",
+                items: [
+                    {
+                        num: "1",
+                        title: `GS SHOP in principle requires direct supply from manufacturers in order to protect small and medium-sized enterprises by reducing distribution stages.① GS SHOP in principle requires direct supply from manufacturers in order to protect small and medium-sized enterprises by reducing distribution stages. However, if the manufacturer does not have the capability to perform acts ordinarily necessary for supply such as logistics, A/S reception and handling, and therefore wishes to list through a Partner Company acting on its behalf (hereinafter "Acting Partner Company"), an exception shall apply.`,
+                    },
+                    { 
+                        num: "2", 
+                        title: "In connection with the proviso of paragraph ①, GS SHOP shall ensure that no specific Acting Partner Company monopolizes the supply, and if there are proposals from multiple Acting Partner Companies for the same product, Partner Companies shall be selected through fair and transparent competition in accordance with the standards for Partner Company selection." 
+                    },
+                ],
+            },
+            {
+                no: "10",
+                title: "Standards for Suspension of Product Sales, etc.",
+                items: [
+                    { num: "1", title: "Where GS SHOP intends to suspend the sale of a Partner Company's products, or to suspend or terminate transactions with a Partner Company, the reasons and procedures therefor must be clearly defined and adhered to, and GS SHOP must endeavor to ensure that no unfair damage is caused to the Partner Company in the process." },
+                    { num: "2", title: `The specific reasons and procedures under paragraph ① shall be set forth in the separate standard "Standards and Procedures for Product Selection and Broadcast Scheduling."` },
+                ],
+            },
+            {
+                no: "11",
+                title: "Receipt and Processing of Complaints and Reports",
+                items: [
+                    { num: "1", title: "GS SHOP shall make every effort to resolve complaints and grievances of Partner Companies arising in the course of transactions with Partner Companies, and shall endeavor to prevent recurrence." },
+                    { num: "2", title: "If a Partner Company finds that a GS SHOP employee has violated these Standards or subsidiary guidelines, or if a complaint arises due to unfair treatment in the course of transactions with GS SHOP, the Partner Company may report the violation or submit the complaint through reporting channels (Red Whistle, etc.) provided on the official website or the Transparent Trading System." },
+                    { num: "3", title: `GS SHOP shall promptly confirm the facts of reports received pursuant to paragraph ② through investigation and audit by GS SHOP's audit department, legal affairs or compliance department, or similar (hereinafter "Audit Department, etc.").` },
+                    { num: "4", title: "Upon completion of the factual investigation, GS SHOP must notify the relevant Partner Company of the results of the report handling, including the confirmed facts, disciplinary measures taken against the relevant employees, measures to remedy Partner Company damages, and recurrence prevention measures." },
+                    { num: "5", title: "Both during and after the process of handling Partner Company reports pursuant to this Article, GS SHOP shall protect the information and personal details of the Partner Company and related parties as confidential information, and shall ensure that the Partner Company does not suffer unfair discriminatory treatment or retaliatory measures such as suspension of transactions as a result of the report." },
+                ],
+            },
+            {
+                no: "12",
+                title: "Sanctions",
+                items: [
+                    { num: "1", title: "Where the Audit Department, etc. of GS SHOP becomes aware, through a Partner Company's report or on its own initiative, that a GS SHOP employee has violated these Standards, fair trade-related laws and regulations, the Code of Ethics and Implementation Guidelines, or other internal regulations, the Audit Department, etc. must immediately investigate the relevant employee's violation, and if confirmed to be true, must report to the Ethics Committee, which shall make the final decision on whether and to what extent the relevant employee shall be sanctioned." },
+                    { num: "2", title: "Where a GS SHOP employee's violation involves fraud, embezzlement, breach of trust, bribery, improper solicitation and receipt of money or valuables, or similar conduct requiring criminal liability, GS SHOP may file a criminal complaint against the relevant employee with investigative authorities for the purpose of conducting an objective factual investigation and preventing recurrence." },
+                ],
+            },
+            {
+                no: "",
+                title: "Supplementary Provisions",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />Article 1 (Effective Date)<br />① These Standards were enacted and entered into force on May 9, 2016.<br />② These Standards were amended and entered into force on January 1, 2017.<br />③ These Standards were amended and entered into force on August 2, 2018.<br />④ These Standards were amended and entered into force on December 30, 2020.<br />⑤ These Standards were amended and entered into force on November 15, 2021.<br />⑥ These Standards were amended and entered into force on August 1, 2025.",
+            },
+        ],
+        // 2. 거래조건 결정 기준과 절차
+        FairTradeHomeShoppingTermsSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `This Guideline presents detailed compliance requirements concerning the standards and procedures for determining transaction conditions with Partner Companies, as set forth in the higher-level standard "Standards and Procedures for Fair Transactions with Partner Companies," in order to enable Partner Companies to receive a fair and equitable trading environment from GS Retail Co., Ltd. (hereinafter "GS SHOP") in the process of determining transaction conditions such as sales commissions, and to build a relationship of continuous mutual cooperation between GS SHOP and Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "GS SHOP employees must always be familiar with and comply with this Guideline during consultations or transactions with Partner Companies." },
+                    { num: "2", title: "In addition to this Guideline, GS SHOP employees must also strictly comply with the provisions of the Monopoly Regulation and Fair Trade Act, the Act on Fair Transactions in Large-scale Distribution Business, and other fair trade-related laws and regulations in transactions with Partner Companies." },
+                    { num: "3", title: "This Guideline shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "This Guideline shall in principle be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) bulletin board, and shall also be disclosed during individual consultation with Partner Companies for their listing for GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share this Guideline through Partner Company training." },
+                    { num: "6", title: "GS SHOP shall not apply any differential treatment in transaction conditions including sales commissions to Partner Companies in the same product category on the grounds that the Partner Company is a large corporation or a small and medium-sized enterprise." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Consultation Procedures",
+                items: [
+                    { num: "1", title: `GS SHOP selects products for its broadcasts in accordance with the separate standard "Standards and Procedures for Product Selection and Broadcast Scheduling" in response to proposals received from Partner Companies online or offline.` },
+                    { num: "2", title: "Products that meet the standards under paragraph ① must undergo quality inspection in accordance with guidelines established by product category through the quality and safety department." },
+                    { num: "3", title: "After passing quality inspection, specific consultation must be conducted with the Partner Company regarding product composition, selling price, and other sales conditions for the broadcast target product." },
+                    { num: "4", title: "Ten to five days before the broadcast, the Partner Company, GS SHOP's MD, and PD must share product information and specifically discuss transaction conditions such as the mutual sales commission and supply quantity." },
+                    { num: "5", title: "No later than five days before the broadcast, the Partner Company, GS SHOP's MD, and PD shall meet to discuss the broadcast concept and similar matters, and finalize transaction conditions such as the final sales commission and supply quantity." },
+                    { num: "6", title: "The responsible MD and others shall report in accordance with internal approval regulations regarding the final agreed content with the Partner Company and obtain final approval." },
+                    { num: "7", title: "With respect to sales commissions and similar, sufficient consultation procedures must be conducted with the Partner Company so as to be mutually beneficial, and they must be reasonably calculated; transaction conditions such as the sales commission determined must not be unilaterally altered in an unfair manner or changed without justifiable reason." },
+                ],
+            },
+            {
+                no: "04",
+                title: "Contract Conclusion Procedures",
+                definitions: [
+                    { term: "1", desc: "Even before concluding a contract, GS SHOP must comply with mutually agreed-upon matters in accordance with the principle of mutual trust. However, GS SHOP shall not require the Partner Company to manufacture or order products, or prepare facilities or equipment for products to be supplied, before concluding the contract and providing the written document." },
+                    { term: "2", desc: "GS SHOP shall conclude an agreement on broadcast conditions in electronic contract form, specifying the mutually finalized transaction conditions such as sales commissions, and shall provide it through the Transparent Trading System. Conclusion and provision of the contract must in principle be completed at least three days before the broadcast date, and provision of the agreement must be carried out immediately upon contract conclusion." },
+                    { term: "3", desc: "Notwithstanding paragraph ②, where there is an unavoidable reason such as a significant change in market conditions, the contract terms may be changed before the broadcast, but this must be agreed upon with the Partner Company in advance, and a written application must be obtained from the Partner Company to confirm their intention and reason for the change." },
+                    { term: "4", desc: "When changing contract terms pursuant to paragraph ③, the responsible MD must report the change and its reasons to the department head before concluding the change agreement, the department head must review the validity of the reason and the change procedure, and the changed agreement must be provided to the Partner Company immediately upon conclusion of the changed contract." },
+                    { term: "5", desc: "The content of the contract must include the following items that may be subject to dispute in connection with the transaction:",
+                      details:[
+                            "1. Transaction form, transaction items and consignment sales quantity, transaction price, transaction period, delivery conditions, payment method, payment settlement period, whether and on what conditions promotional costs are borne, return conditions, sales commission, and whether and on what conditions sales incentives are borne"/* 260604 번역 */,
+                            "2. The sales broadcast schedule, broadcast production costs, whether product experts/models, etc. appear, the schedule and whether and on what conditions appearance costs are borne, delivery conditions for products ordered and returned by consumers, processing conditions for consumers' purchase cancellations and returned products, etc."/* 260604 번역 */
+                        ]
+                    },
+                    { term: "6", desc: "GS SHOP shall retain documents relating to transactions between the parties for five years from the date the contract with the Partner Company ends." },
+                ],
+            },
+            {
+                no: "05",
+                title: "Contract Performance Procedures",
+                items: [
+                    { num: "1", title: "GS SHOP confirms the Partner Company's agreement to the contract and then proceeds with the broadcast and sales in accordance with the agreed transaction conditions." },
+                    { num: "2", title: "The MD must confirm without fail whether the payment was settled in accordance with the contract terms after the broadcast. If the payment was settled differently from the original contract terms, the relevant MD must promptly notify the Partner Company and perform a corrective settlement in accordance with the contract terms." },
+                    { num: "3", title: "GS SHOP shall comply with the sales commission rate and transaction conditions set forth in the contract, and under no circumstances shall it change transaction conditions during or after the broadcast or apply them retroactively." },
+                    { num: "4", title: "GS SHOP shall not demand or impose any commissions or costs of any name not agreed upon in advance with the Partner Company or not specified in the contract, and shall not transfer any other economic disadvantages to the Partner Company." },
+                ],
+            },
+            {
+                no: "06",
+                title: "Determination of Sales Commission",
+                items: [
+                    { num: "1", title: "GS SHOP shall discuss and determine the sales commission for Partner Company products with the Partner Company in consideration of the following items:",
+                      details:[
+                            "1. Quality",
+                            "2. Average sales commission rate for similar products (category)",
+                            "3. Partner Company's sales trends, market conditions by product category, and competitive situation within the distribution channel",
+                            "4. Expected sales performance and contribution to GS SHOP's overall sales",
+                            "5. Related costs such as A/S and delivery (including installation costs in the case of installed products)",
+                            "6. Stability and reliability of transaction performance",
+                            "7. Brand awareness",
+                            "8. Market potential",
+                            "9. Differentiation from existing products",
+                            "10. Other considerations based on the characteristics of the product"
+                        ]
+                    },
+                    { num: "2", title: "The sales commission shall be calculated through fair and transparent procedures based on the principle of mutual trust with the Partner Company." },
+                    { num: "3", title: "In principle, the interests of the Partner Company shall be given priority consideration where the relevant product falls under any of the following items, in connection with win-win cooperation such as fair trade agreements with Partner Companies:",
+                        details:[
+                            "1. Products manufactured, supplied, or sold by small and medium-sized enterprises pursuant to Article 2 of the Framework Act on Small and Medium Enterprises and Article 3 of the Enforcement Decree thereof",
+                            "2. Products supplied by socially marginalized groups such as persons with disabilities or the elderly, or products primarily targeting such vulnerable groups",
+                            "3. Products for which farmers, fishermen, or livestock farmers are the final producers, or products directly supplied by farmers, fishermen, or livestock farmers"
+                        ]
+                    },
+                ],
+            },
+            {
+                no: "07",
+                title: "Fixed-Fee Commission Operations",
+                items: [
+                    { num: "1", title: `"Fixed-fee commission" refers, as stipulated in Annex Table 2-3 of the Enforcement Decree of the Broadcasting Act, to a revenue-sharing method unrelated to product sales proceeds (including revenue-sharing methods that combine a method unrelated to product sales proceeds with other revenue-sharing methods).` },
+                    { num: "2", title: "The specific operational standards for fixed-fee commission broadcasts, including the types of products to which fixed-fee commissions apply, scheduling time and ratio, and measures to prevent harm to small and medium-sized enterprise Partner Companies from fixed-fee commissions, shall be set forth in a separate guideline." },
+                ],
+            },
+            {
+                no: "08",
+                title: "Prohibition of Unfair Trade Practices",
+                lead: "In determining transaction conditions with Partner Companies, GS SHOP shall not engage in acts of abusing its superior position in the transaction to disadvantage Partner Companies or otherwise coerce unfair trade conditions, even if such acts are not explicitly stated as mandatory or prohibited under this Guideline."
+            },
+            {
+                no: "09",
+                title: "Receipt and Processing of Complaints and Reports",
+                lead: `Where a Partner Company finds that GS SHOP has violated this Guideline in the process of consulting and determining transaction conditions with Partner Companies, or if a complaint arises in connection with the determination of transaction conditions by GS SHOP, the Partner Company may report the violation or submit the complaint to GS SHOP, and in such cases GS SHOP must handle the report in accordance with the procedures set forth in the higher-level standard "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "10",
+                title: "Sanctions",
+                lead: `If a GS SHOP employee is confirmed to have violated the provisions set forth in these guidelines, sanction proceedings shall be initiated against the relevant employee in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />Article 1 (Effective Date)<br />① These Standards were enacted and entered into force on May 9, 2016.<br />② These Standards were amended and entered into force on January 1, 2017.<br />③ These Standards were amended and entered into force on August 2, 2018.<br />④ These Standards were amended and entered into force on December 30, 2020.<br />⑤ These Standards were amended and entered into force on November 15, 2021.<br />⑥ These Standards were amended and entered into force on August 1, 2025.",
+            },
+        ],
+        // 3. 정액수수료 방송 운영기준과 절차
+        FairTradeHomeShoppingFixedCommissionSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These guidelines are prepared to present detailed compliance requirements regarding the standards and procedures for fixed-commission broadcast operations, as specified in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies," in order to ensure that Partner Companies receive a fair and equitable trading environment from GS Retail Co., Ltd. (hereinafter "GS SHOP") in the course of fixed-commission broadcast operations, and to build a relationship of continuous mutual cooperation between GS SHOP and its Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "GS SHOP employees must always be familiar with and comply with this Guideline during consultations or transactions with Partner Companies." },
+                    { num: "2", title: "In addition to this Guideline, GS SHOP employees must also strictly comply with the provisions of the Monopoly Regulation and Fair Trade Act, the Act on Fair Transactions in Large-scale Distribution Business, and other fair trade-related laws and regulations in transactions with Partner Companies." },
+                    { num: "3", title: "This Guideline shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "This Guideline shall in principle be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) bulletin board, and shall also be disclosed during individual consultation with Partner Companies for their listing for GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share this Guideline through Partner Company training." },
+                    { num: "6", title: "GS SHOP shall operate fixed-commission broadcasts with Partner Companies in accordance with fair and transparent principles." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Target Products for Fixed-Commission Broadcasts", 
+                usePlainList: true,
+                lead:"The types of products to which fixed commissions apply are as follows:",
+                items: [
+                    { num: "1", title: "1. Products intended for inventory clearance" },
+                    { num: "2", title: "2. New products intended for market response testing" },
+                    { num: "3", title: "3. Products intended for securing distribution channels, maintaining stable inventory management, reducing promotional costs, etc." },
+                    { num: "4", title: "4. Products desired by Partner Companies for other reasons" },
+                ],
+            },
+            {
+                no: "04",
+                title: "Fixed-Commission Broadcast Scheduling Time and Ratio",
+                definitions: [
+                    { term: "1", desc: "Fixed-commission broadcast products shall, in principle, be scheduled during live broadcast time slots; however, they may also be scheduled outside of live broadcast time slots if the Partner Company desires." },
+                    { term: "2", desc: "The scheduling ratio of fixed-commission broadcasts for SME products shall be operated at a minimum level in accordance with the demand of interested Partner Companies, market conditions, and operational strategies." },
+                ],
+            },
+            {
+                no: "05",
+                title: "Fixed-Commission Broadcast Consultation and Contract Execution Procedure",
+                items: [
+                    { num: "1", title: `GS SHOP shall, in accordance with the provisions of the "Standards and Procedures for Determining Transaction Conditions," conduct sufficient consultation procedures to ensure mutual benefit with Partner Companies prior to broadcasting, and shall calculate fixed commissions rationally.` },
+                    { num: "2", title: "GS SHOP shall not unilaterally determine fixed commissions in an unreasonable manner, nor — on the grounds that a Partner Company has not accepted fixed-commission or mixed-commission broadcast conditions as a condition of scheduling — engage in any of the following acts:",
+                        details:[
+                            "1. Determining broadcast dates, times, or airtime significantly less favorably than for other Partner Companies",
+                            "2. Canceling already-decided broadcast dates, times, or airtime",
+                            "3. Changing already-decided broadcast dates, times, or airtime significantly less favorably than for other Partner Companies"
+                        ]
+
+                    },
+                    { num: "3", title: "GS SHOP shall execute an agreement on fixed broadcast conditions containing the finally agreed-upon fixed commission conditions, etc., in the form of an electronic contract, and deliver it through the Transparent Trading System. Contract execution and delivery shall, in principle, be completed at least three days prior to the broadcast date, and delivery of the agreement shall be carried out immediately upon contract execution." },
+                    { num: "4", title: "Notwithstanding paragraph ③, if there are unavoidable circumstances such as a significant change in market conditions, contract matters may be changed prior to broadcast, provided that prior agreement with the Partner Company is required, and the amended agreement shall be delivered to the Partner Company immediately upon execution of the amendment." },
+                    { num: "5", title: "GS SHOP shall retain documents relating to transactions between the parties for five years from the date the contract with the Partner Company ends."}
+                ],
+            },
+            {
+                no: "06",
+                title: "Prior Disclosure System for Fixed-Commission Broadcast Risks",
+                items: [
+                    { num: "1", title: "Since fixed-commission broadcasts operate on a revenue-sharing basis unrelated to product sales amounts, losses may occur to Partner Companies if broadcast sales performance is poor. Accordingly, Partner Companies must be sufficiently aware of the risks of fixed-commission broadcasts, and shall determine whether to proceed with fixed-commission broadcasts based on their own free and independent judgment and responsibility, taking into account their past sales performance, expected total sales amount, etc."},
+                    { num: "2", title: "GS SHOP shall notify Partner Companies in advance of the risks of fixed-commission broadcasts specified in paragraph ①." },
+                    { num: "3", title: "At the onboarding stage, GS SHOP shall fully explain the risks of fixed-commission broadcasts in the 'Broadcast Sales Product Supply Agreement' concluded with Partner Companies, notify Partner Companies of the contents of such agreement through the Transparent Trading System, and verify Partner Company confirmation by means of mutual electronic signatures on the agreement."},
+                ],
+            },
+            {
+                no: "07",
+                title: "Provision of Inventory Clearance Opportunity for Fixed-Commission Broadcasts",
+                lead: "GS SHOP shall endeavor to alleviate the burden on SME Partner Companies by providing inventory clearance opportunities when sales are poor as a result of fixed-commission broadcasts conducted by SME Partner Companies¹)."
+            },
+            {
+                no: "08",
+                title: "Operation of Fee Refund System for Fixed-Commission Broadcasts",
+                items: [
+                    { num: "1", title: "GS SHOP shall endeavor to alleviate the burden on SME Partner Companies by operating a fee refund system when sales are poor as a result of fixed-commission broadcasts conducted by SME Partner Companies."},
+                    { num: "2", title: "The specific criteria for operating the refund system shall be as set forth in Appendix 1, and may be adjusted in consideration of market conditions at the time of refund, GS SHOP's management status, and available financial resources." },
+                ],
+            },
+            {
+                no: "09",
+                title: "Prohibition of Unfair Trade Practices",
+                lead: "In handling matters related to fixed-commission broadcast operations, GS SHOP shall not, even if not explicitly stipulated as an obligation or prohibition in these guidelines, engage in any act of abusing its trading position to cause disadvantage to Partner Companies or to impose other unfair trading conditions."
+            },
+            {
+                no: "10",
+                title: "Receipt and Processing of Complaints and Reports",
+                lead: `If a Partner Company finds that GS SHOP has violated these guidelines in the course of consulting or deciding on fixed-commission-related conditions with the Partner Company, or if the Partner Company otherwise has a complaint related to the determination of fixed-commission conditions, the Partner Company may report the violation to GS SHOP or file a complaint, and in such case GS SHOP shall process the matter in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "11",
+                title: "Sanctions",
+                lead: `If a GS SHOP employee is confirmed to have violated the provisions set forth in these guidelines, sanction proceedings shall be initiated against the relevant employee in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "12",
+                title: "Appendix",
+                appendixTitle: "[Appendix 1] Criteria for Operating the Fixed-Commission Broadcast Fee Refund System",
+                commonTables: [
+                    {
+                        tableClass:"quality_standards",
+                        cols: ["Category", "Details"],
+                        rows: [
+                            [
+                                { label: "Refund Criteria", style: "text-align: center;" },
+                                [
+                                    "Where the performance against the target for each fixed-fee broadcast of small and medium-sized enterprise products is less than 30%, 10% of the fixed fee for that broadcast shall be refunded"/* 260604 번역 */,
+                                    "* For broadcasts in which both a fixed-amount commission and a percentage-based commission were paid, only the fixed-amount commission portion shall be refunded."/* 260604 번역 */,
+                                ],
+                            ],
+                            [
+                                { label: "Refund Procedure", style: "text-align: center;" },
+                                [
+                                    "Refund after verifying performance each quarter"/* 260604 번역 */,
+                                    "· Performance is verified each quarter, after which refund is made. ※ For fairness, the refund may be processed after verification by an external institution.",
+                                ],
+                            ],
+                            [
+                                { label: "Exclusions", style: "text-align: center;" },
+                                {
+                                    numList: [
+                                        "Large enterprises, mid-sized enterprises, and imported products"/* 260604 번역 */,
+                                        "Broadcasts whose purpose is the introduction of intangible products such as travel, rentals, and mobile phones"/* 260604 번역 */,
+                                        "Broadcasts of partner companies that scheduled fixed-fee broadcasts four or more times in the previous year"/* 260604 번역 */,
+                                        "Broadcasts of partner companies that received refunds four or more times in the relevant year <br />(* Where there are four or more broadcast programs eligible for refund in the relevant year)"/* 260604 번역 */,
+                                        "Broadcasts of partner companies conducted with fixed-fee support received through the government, local governments, public institutions, and the like"/* 260604 번역 */,
+                                    ],
+                                },
+                            ],
+                        ],
+                    },
+                ],
+                cautionItems: [
+                    "* Whether a product qualifies as an SME product shall be determined in accordance with the government-established 'Criteria for SME Products of Home Shopping Operators.'"/* 260604 번역 */,
+                    "* The scale of the refund may be increased or decreased in consideration of market conditions at the time of refund, the management status of GS SHOP, available financial resources, and other factors."/* 260604 번역 */,
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />Article 1 (Effective Date)<br />① These Standards were enacted and entered into force on May 9, 2016.<br />② These Standards were amended and entered into force on January 1, 2017.<br />③ These Standards were amended and entered into force on August 2, 2018.<br />④ These Standards were amended and entered into force on December 30, 2020.<br />⑤ These Standards were amended and entered into force on November 15, 2021.<br />⑥ These Standards were amended and entered into force on August 1, 2025.",
+            },
+        ],
+        // 4. 판매촉진행사 진행 기준과 절차
+        FairTradeHomeShoppingPromotionSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These guidelines are prepared to present detailed compliance requirements regarding the standards and procedures for conducting sales promotion events, as specified in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies," in order to ensure that Partner Companies receive a fair and equitable trading environment from GS Retail Co., Ltd. (hereinafter "GS SHOP") in the course of conducting sales promotion events, and to build a relationship of continuous mutual cooperation between GS SHOP and its Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "GS SHOP employees must always be familiar with and comply with this Guideline during consultations or transactions with Partner Companies." },
+                    { num: "2", title: "In addition to this Guideline, GS SHOP employees must also strictly comply with the provisions of the Monopoly Regulation and Fair Trade Act, the Act on Fair Transactions in Large-scale Distribution Business, and other fair trade-related laws and regulations in transactions with Partner Companies." },
+                    { num: "3", title: "This Guideline shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "This Guideline shall in principle be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) bulletin board, and shall also be disclosed during individual consultation with Partner Companies for their listing for GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share this Guideline through Partner Company training." },
+                    { num: "6", title: "GS SHOP shall conduct sales promotion events with Partner Companies in accordance with fair and transparent principles." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Consultation Procedures", 
+                lead:"The types of products to which fixed commissions apply are as follows:",
+                items: [
+                    { num: "1", title: `GS SHOP selects products for its broadcasts in accordance with the separate standard "Standards and Procedures for Product Selection and Broadcast Scheduling" in response to proposals received from Partner Companies online or offline.` },
+                    { num: "2", title: "Products that meet the standards under paragraph ① must undergo quality inspection in accordance with guidelines established by product category through the quality and safety department." },
+                    { num: "3", title: "After passing quality inspection, the Partner Company and GS SHOP shall consult on transaction conditions such as product composition and selling price, and simultaneously consult on whether to conduct sales promotion events." },
+                    { num: "4", title: "Ten to five days prior to broadcast, the Partner Company's and GS SHOP's MD and PD shall consult specifically on the target products for the sales promotion event, the mutual cost-sharing ratio conditions, and other details." },
+                    { num: "5", title: "At least five days prior to broadcast, the Partner Company's and GS SHOP's MD and PD shall meet to consult on broadcast concepts, etc., and finalize sales promotion event conditions." },
+                    { num: "6", title: "The responsible MD and others shall report in accordance with internal approval regulations regarding the final agreed content with the Partner Company and obtain final approval." },
+                    { num: "7", title: "Whether to conduct the sales promotion event and the mutual cost-sharing ratio shall be rationally calculated through sufficient consultation procedures with Partner Companies for mutual benefit, and shall not be unilaterally and unreasonably determined by one party or changed without justifiable cause." },
+                ],
+            },
+            {
+                no: "04",
+                title: "Contract Conclusion Procedures",
+                items: [
+                    { num: "1", title: "The finally agreed-upon sales promotion event conditions, etc., shall be concluded in the form of an electronic contract as an agreement concerning the sales promotion event, and delivered through the Transparent Trading System. Contract execution and delivery shall, in principle, be completed at least three days prior to the broadcast date, and delivery of the agreement shall be carried out immediately upon contract execution. However, if there are unavoidable circumstances such as a significant change in market conditions, contract matters may be changed prior to broadcast, but even in such cases prior agreement with the Partner Company is required, and the amended agreement shall be delivered to the Partner Company immediately upon execution." },
+                    { num: "2", title: "The contract shall include the event content, period, cost-sharing ratio, and other matters related to the sales promotion event." },
+                    { num: "3", title: "Even prior to contract execution, matters mutually agreed upon shall be complied with in accordance with the principle of mutual trust." },
+                    { num: "4", title: "GS SHOP shall retain documents related to the sales promotion event agreement with the Partner Company and documents relating to the implementation of the sales promotion event for five years from the date the contract with the Partner Company ends." },
+                ],
+               
+            },
+            {
+                no: "05",
+                title: "Contract Performance Procedures",
+                items: [
+                    { num: "1", title: "GS SHOP shall confirm whether the Partner Company has agreed to the sales promotion event and then conduct the event in accordance with the agreed-upon transaction conditions." },
+                    { num: "2", title: "The MD must verify without fail whether the sales promotion event was carried out in accordance with the contract contents after the event. If the event was carried out differently from the original contract contents, the relevant MD must promptly notify the Partner Company and take follow-up measures to prevent any damage to the Partner Company, and if damage to the Partner Company has occurred, the Partner Company's damages must be compensated immediately in accordance with relevant legal provisions."},
+                    { num: "3", title: "GS SHOP shall comply with the sales promotion event-related transaction conditions stated in the contract and shall not, under any circumstances, change or retroactively apply transaction conditions during or after the broadcast." },
+                    { num: "4", title: "GS SHOP shall not demand from or impose on Partner Companies any sales promotion event costs or costs in the name of various promotional activities not agreed upon in advance or not stipulated in the contract, and shall not otherwise transfer economic disadvantages." },
+                ],
+            },
+            {
+                no: "06",
+                title: "Cost-Sharing Determination Criteria",
+                items: [
+                    { num: "1", title: "The responsible MD consulting with the Partner Company shall determine the cost-sharing amount for sales promotion event costs in consideration of the following items:",
+                        details:[
+                            "1. The ratio shall be determined according to the ratio of economic benefits the partner company and GS SHOP are expected to directly obtain from the sales promotion event; where the ratio of expected benefits between the partner company and GS SHOP cannot be calculated, the expected benefits of the partner company and GS SHOP shall be presumed to be equal."/* 260604 번역 */,
+                            "2. The partner company's share ratio of sales promotion event costs may not exceed 50/100 of the total sales promotion event costs."/* 260604 번역 */,
+                            "3. Where the partner company voluntarily requests GS SHOP to conduct a sales promotion event differentiated from other partner companies, GS SHOP may determine the share ratio of the sales promotion event costs by mutual agreement with the partner company."/* 260604 번역 */
+                        ]
+                    },
+                    { num: "2", title: "In accordance with the principle of mutual trust with partner companies, GS SHOP determines the share ratio of sales promotion event costs based on fair and transparent criteria."/* 260604 번역 */ },
+                ],
+            },
+            {
+                no: "07",
+                title: "Prohibition of Unfair Trade Practices",
+                lead: "In consulting and conducting sales promotion events with Partner Companies, GS SHOP shall not, even if not explicitly stipulated as an obligation or prohibition in these guidelines, engage in any act of abusing its trading position to cause disadvantage to Partner Companies, impose other unfair trading conditions, or cause Partner Companies to participate in promotional activities against their will without justifiable cause."
+            },
+            {
+                no: "08",
+                title: "Receipt and Processing of Complaints and Reports",
+                lead: `If a Partner Company finds that GS SHOP has violated these guidelines in the course of consulting or deciding on sales promotion event-related transaction conditions with the Partner Company, or if the Partner Company otherwise has a complaint related to the determination of sales promotion event-related conditions, the Partner Company may report the violation to GS SHOP or file a complaint, and in such case GS SHOP shall process the matter in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "09",
+                title: "Sanctions",
+                lead: `If a GS SHOP employee is confirmed to have violated the provisions set forth in these guidelines, sanction proceedings shall be initiated against the relevant employee in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />Article 1 (Effective Date)<br />① These Standards were enacted and entered into force on May 9, 2016.<br />② These Standards were amended and entered into force on January 1, 2017.<br />③ These Standards were amended and entered into force on August 2, 2018.<br />④ These Standards were amended and entered into force on December 30, 2020.<br />⑤ These Standards were amended and entered into force on November 15, 2021.<br />⑥ These Standards were amended and entered into force on August 1, 2025.",
+            },
+        ],
+        // 5. 방송제작비 등 분담 기준과 절차
+        FairTradeHomeShoppingProductionCostSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These guidelines are prepared to present detailed compliance requirements regarding the standards and procedures for sharing broadcast production costs, etc., as specified in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies," in order to ensure that Partner Companies receive fair and equitable treatment from GS Retail Co., Ltd. (hereinafter "GS SHOP") in the process of sharing broadcast production costs, etc., and to build a relationship of continuous mutual cooperation between GS SHOP and its Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "① GS SHOP employees must always be familiar with and comply with this Guideline during consultations or transactions with Partner Companies." },
+                    { num: "2", title: "In addition to this Guideline, GS SHOP employees must also strictly comply with the provisions of the Monopoly Regulation and Fair Trade Act, the Act on Fair Transactions in Large-scale Distribution Business, and other fair trade-related laws and regulations in transactions with Partner Companies." },
+                    { num: "3", title: "This Guideline shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "These guidelines shall, in principle, be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) board, and shall also be disclosed during individual onboarding consultations for Partner Companies' GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share this Guideline through Partner Company training."},
+                    { num: "6", title: "GS SHOP shall share broadcast production costs, etc., with Partner Companies in accordance with fair and transparent principles."}
+                ],
+            },
+            {
+                no: "03",
+                title: "Consultation Procedure and Criteria for Sharing Broadcast Production Costs", 
+                items: [
+                    { num: "1", title: "GS SHOP shall produce and conduct broadcasts after consulting in advance with Partner Companies on broadcast content and product composition, etc., for products on which it has agreed to conduct sales broadcasts with the Partner Company. In this case, the costs required for broadcast production shall, in principle, be borne by GS SHOP." },
+                    { num: "2", title: "On the condition of broadcast scheduling, GS SHOP shall not unfairly pass on all or part of the broadcast production costs to a partner company, such as by having the partner company bear the pre-production costs of the broadcast or pay the appearance fees of sales experts, supporting performers (celebrities, product experts, models), or studio audiences (hereinafter 'sales experts, etc.')."/* 260604 번역 */ },
+                    { num: "3", title: "Notwithstanding the latter part of paragraph (1), where a partner company requests from GS SHOP any matter falling under any of the following items in order to maintain and enhance its brand value, increase advertising effects through home shopping broadcasts, increase sales, and the like, GS SHOP may, through prior consultation with the partner company, determine the cost-sharing ratio."/* 260604 번역 */,
+                        details:[
+                            "1. Appearance of sales experts, etc. recruited by the partner company"/* 260604 번역 */,
+                            "2. Use of pre-produced video content separately produced or held by the partner company for the home shopping broadcast (including use after editing it to be suitable for GS SHOP's broadcast)"/* 260604 번역 */,
+                            "3. Addition or change of the broadcast set (stage equipment, facilities, etc.) prepared by GS SHOP"/* 260604 번역 */,
+                            "4. Use of props prepared or brought by the partner company"/* 260604 번역 */
+                        ]
+                    },
+                    { num: "4", title: "Where GS SHOP reflects the partner company's requests under paragraph 3 in producing and conducting the broadcast, it shall reach a prior written agreement with the partner company on the additional costs arising therefrom, in accordance with the criteria and procedures of Articles 4 and 5."/* 260604 번역 */ },
+                ],
+            },
+            {
+                no: "04",
+                title: "Criteria for Sharing Pre-Produced Video Content Production Costs",
+                items: [
+                    { num: "1", title: "If GS SHOP pre-produces video content for a sales broadcast, the production costs shall, in principle, be borne by GS SHOP." },
+                    { num: "2", title: "Where a partner company so requests, GS SHOP may receive and use pre-produced video content held or produced by the partner company, and the costs therefor shall be determined by separate agreement between GS SHOP and the partner company."/* 260604 번역 */ },
+                    { num: "3", title: "Notwithstanding paragraph (2), where GS SHOP, while selling goods directly purchased from a partner company in a TV home shopping broadcast, uses pre-produced video material provided by that partner company, it shall pay the partner company costs in accordance with the following criteria."/* 260604 번역 */,
+                      details:[
+                            "1. Where the product supplied by the partner company is a licensed product (a product manufactured using a trademark right licensed by GS SHOP to the partner company): KRW 200,000"/* 260604 번역 */,
+                            "2. Where the product supplied by the partner company is a general product not falling under the item 1 product: KRW 100,000"/* 260604 번역 */,
+                            "3. No additional usage fee shall be paid even where the number of the partner company's pre-produced video contents used in the relevant broadcast program is two or more."/* 260604 번역 */,
+                            "4. Where the partner company broadcasts/sells multiple products in one program, the usage fee shall be paid by brand unit."/* 260604 번역 */,
+                            "5. The partner company's pre-produced video content usage fee shall be paid per broadcast program; however, no usage fee shall be paid where it is used in a rebroadcast program conducted for reasons such as late-night time slots, holiday periods, or emergency scheduling."/* 260604 번역 */,
+                            "6. The partner company's advertising video (CF) is not included in the pre-produced video content under this Article and is excluded from the subject of usage fee payment."/* 260604 번역 */
+                        ]
+                    },
+                    { num: "4", title: "Notwithstanding paragraph (2), where GS SHOP, while selling goods directly purchased from a partner company in a data home shopping broadcast, uses pre-produced video material provided by that partner company, it shall pay the partner company costs in accordance with the following criteria."/* 260604 번역 */,
+                      details:[
+                            "1. A usage fee shall be paid only where the directly purchased product under this clause falls under products of small and medium-sized enterprises. Whether a product is an SME product shall be determined in accordance with the 「Criteria for SME Products of Home Shopping Operators」 prepared by the Ministry of Science and ICT."/* 260604 번역 */,
+                            "2. A usage fee shall be paid for the new first-run broadcast (initial scheduled broadcast) program of a product using the partner company's pre-produced video content, and no usage fee shall be paid from the rebroadcast (scheduled broadcasts after the first) of the same product onward."/* 260604 번역 */,
+                            "3. In addition, the payment criteria of items 1 through 4 and item 6 of paragraph 3 regarding TV home shopping broadcasts shall apply equally to the data home shopping broadcasts under this clause."/* 260604 번역 */
+                        ]
+                    },
+                ],
+               
+            },
+            {
+                no: "05",
+                title: "Contract Conclusion Procedures",
+                items: [
+                    { num: "1", title: "Even prior to contract execution, matters mutually agreed upon shall be complied with in accordance with the principle of mutual trust." },
+                    { num: "2", title: "If there are costs to be borne by the Partner Company among broadcast production costs, an agreement on broadcast conditions or a direct-purchase transaction-related contract shall be executed in the form of an electronic contract and delivered through the Transparent Trading System. Contract execution and delivery shall be carried out immediately upon execution; however, an agreement on broadcast conditions shall, in principle, be executed at least three days prior to the broadcast date. However, if there are unavoidable circumstances such as a significant change in market conditions, contract matters may be changed and delivered prior to broadcast, but even in such cases prior agreement with the Partner Company is required, and the amended agreement shall be delivered to the Partner Company immediately upon execution."},
+                    { num: "3", title: "The contract shall include broadcast schedule (for transactions where an agreement on broadcast conditions is executed with the Partner Company), the number of appearances and appearance fee-sharing conditions for sales professionals, etc., usage fee-sharing conditions for pre-produced video content, and cost-sharing conditions for additions or changes to the broadcast set." },
+                ],
+            },
+            {
+                no: "06",
+                title: "Prohibition of Unfair Trade Practices",
+                lead: "In consulting and deciding on broadcast production costs with Partner Companies, GS SHOP shall not, even if not explicitly stipulated as an obligation or prohibition in these guidelines, engage in any act of abusing its trading position to cause disadvantage to Partner Companies or to impose other unfair trading conditions."
+            },
+            {
+                no: "07",
+                title: "Receipt and Processing of Complaints and Reports",
+                lead: `If a Partner Company finds that GS SHOP has violated these guidelines in the course of consulting or deciding on broadcast production cost conditions with the Partner Company, or if the Partner Company otherwise has a complaint related to the determination of broadcast production cost conditions, the Partner Company may report the violation to GS SHOP or file a complaint, and in such case GS SHOP shall process the matter in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "08",
+                title: "Sanctions",
+                lead: `If a GS SHOP employee is confirmed to have violated the provisions set forth in these guidelines, sanction proceedings shall be initiated against the relevant employee in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />Article 1 (Effective Date)<br />① These Standards were enacted and entered into force on May 9, 2016.<br />② These Standards were amended and entered into force on January 1, 2017.<br />③ These Standards were amended and entered into force on August 2, 2018.<br />④ These Standards were amended and entered into force on December 30, 2020.<br />⑤ These Standards were amended and entered into force on November 15, 2021.<br />⑥ These Standards were amended and entered into force on August 1, 2025.",
+            },
+        ],
+        // 6. 직매입 상품 등의 반품 기준과 절차
+        FairTradeHomeShoppingReturnSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These guidelines are prepared to present detailed compliance requirements regarding the standards and procedures for returns of directly purchased products, etc., as specified in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies," in order to establish rational and legitimate return criteria in the process of returning products received through transactions (including direct-purchase transactions, special-purchase transactions, consignment transactions, and all other forms, hereinafter collectively "transactions") by GS Retail Co., Ltd. (hereinafter "GS SHOP") with Partner Companies, to comply with related laws, and to establish a fair trading relationship with Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "GS SHOP employees must always be familiar with and comply with this Guideline during consultations or transactions with Partner Companies." },
+                    { num: "2", title: `In addition to these guidelines, GS SHOP shall strictly comply with the provisions of fair trade-related laws and regulations in transactions with Partner Companies, including the Monopoly Regulation and Fair Trade Act (hereinafter "Fair Trade Act"), Article 10 (Prohibition on Return of Products) of the Act on Fair Transactions in Large-Scale Distribution Industries (hereinafter "Large-Scale Retail Business Act"), and the Guidelines for Reviewing the Illegality of Return Acts by Large-Scale Distributors.` },
+                    { num: "3", title: "This Guideline shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "This Guideline shall in principle be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) bulletin board, and shall also be disclosed during individual consultation with Partner Companies for their listing for GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share this Guideline through Partner Company training."},
+                ],
+            },
+            {
+                no: "03",
+                title: "Prohibition on Return of Products", 
+                lead:"GS SHOP shall not return all or part of products received from Partner Companies without justifiable cause. However, if the matter falls under any one of the following items where return is exceptionally permitted under Article 10 of the Large-Scale Distribution Industries Act, and the return is made within a period recognized as reasonable in the relevant trading sector, justifiable cause for return is presumed:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. For special-purchase transactions: cases where specific return conditions are agreed upon at the time of contract execution and a written document stating the return conditions is provided to the Partner Company" },
+                    { num: "2", title: "2. For consignment transactions" },
+                    { num: "3", title: "3. Cases where the products received are damaged, defaced, or defective due to reasons attributable to the Partner Company"},
+                    { num: "4", title: "4. Cases where the products received differ from the contracted products" },
+                    { num: "5", title: "5. Cases where GS SHOP bears the losses arising from the return itself and obtains the Partner Company's consent to the return" },
+                    { num: "6", title: `6. For direct-purchase transactions: cases involving seasonal products (products sold intensively during a certain period or season; excluding fresh agricultural, fishery, and livestock products; hereinafter "seasonal products") where specific return conditions are agreed upon at the time of contract execution and a written document stating the return conditions is provided to the Partner Company` },
+                    { num: "7", title: "7. For direct-purchase transactions: cases where the Partner Company voluntarily requests a return prior to the return date, accompanied by a written document with objective supporting evidence that the return is directly beneficial to the Partner Company",},
+                    { num: "8", title: "8. For other direct-purchase transactions: cases where there is justifiable cause equivalent to items 3 through 7" },
+                ],
+            },
+            {
+                no: "04",
+                title: "Detailed Criteria for Returns with Justifiable Cause",
+                items: [
+                    { num: "1", title: "For special-purchase transactions, if GS SHOP specifically agrees on return conditions in advance and provides a written document stating the return conditions to the Partner Company, justifiable cause for the return is presumed. In this case, the specific return conditions shall include the method and procedure for specifying the products subject to return, the timing of return, and the return procedure." },
+                    { num: "2", title: "In the case of a consignment transaction, because ownership of the goods rests with the consignor partner company, even if GS SHOP returns the inventory goods to the partner company without separate restrictions, the return shall be presumed to have a justifiable ground unless there are special circumstances."/* 260604 번역 */ },
+                    { num: "3", title: "Where a partner company delivers a soiled/damaged product or a defective product, GS SHOP presumes that there is justifiable reason for the return. However, this shall not apply where the product was soiled/damaged due to GS SHOP's intent or negligence after the partner company delivered it to GS SHOP's warehouse or a location designated by GS SHOP."/* 260604 번역 */},
+                    { num: "4", title: "Where a product delivered to GS SHOP differs from the contracted product, it is presumed that there is justifiable reason for the return. This includes not only cases where the product delivered by the partner company differs from the contracted product, but also cases where important product characteristics significant to achieving the purpose of the contract—such as the country of origin, expiration date, or size—differ from the originally contracted content."/* 260604 번역 */},
+                    { num: "5", title: "Where GS SHOP itself bears the loss arising from returning a product it has already received, it is presumed that there is justifiable reason for the return, since, absent special circumstances, this does not harm the partner company's interests or cause it loss. Here, the scope of loss means all costs additionally incurred by the partner company due to the return, including the direct costs required for the return, the costs additionally required for the partner company to use and profit from the returned product, such as by reselling it, and, where the value of the product has declined compared to the time of delivery, the difference therein, etc."/* 260604 번역 */ },
+                    { num: "6", title: "In the case of a direct purchase transaction of seasonal products, where GS SHOP specifically agrees with the partner company on the return conditions from the time of concluding the contract and provides in advance a written contract specifying those return conditions, the return shall be presumed to have a justifiable ground. Whether a given product falls under this is determined by comprehensively considering the monthly and quarterly sales volume and inventory volume of the product, consumer perception of the product, and the like. Cases that may be deemed seasonal products are as follows."/* 260604 번역 */,
+                      details:[
+                            "1. Anniversary products: Valentine's Day chocolates, White Day candies, Pepero Day snacks, Children's Day toys, Parents' Day or Teachers' Day gifts, Christmas trees, etc."/* 260604 번역 */,
+                            "2. Holiday products: Chuseok gift sets, Seollal (Lunar New Year) gift sets, ancestral rite supplies, ritual vessels, etc."/* 260604 번역 */,
+                            "3. New semester/graduation season items: bags, pencils, notebooks, indoor shoes, school uniforms, bouquets, etc.",
+                            "4. Vacation-season items: swimsuits, water-play items such as tubes, ski wear, ski items such as goggles, etc."/* 260604 번역 */,
+                            "5. Seasonal items: air conditioners, dehumidifiers, electric fans, heaters, etc."/* 260604 번역 */
+                        ]
+                    },
+                    { num: "7", title: "In the case of a direct purchase transaction, where a partner company voluntarily requests a return from GS SHOP before the return date, together with grounds that can objectively prove that the return is to its own benefit, the return shall be presumed to have a justifiable ground. Specific cases are as follows."/* 260604 번역 */,
+                      details:[
+                            "1. Where the partner company, upon learning of a report that a harmful substance has been added to its product, judges that promptly accepting the return to reduce consumer harm is also in its own interest, and requests a return from GS SHOP while submitting objective supporting documents"/* 260604 번역 */,
+                            "2. Where the partner company, upon launching a new product, judges that recovering the previously delivered product from the store is more helpful for enhancing its brand image, and requests a return from GS SHOP while submitting objective supporting documents"/* 260604 번역 */,
+                        ]
+                    },
+                    { num: "8", title: "Even where there is no ground directly falling under Article 10 (1) 3 through 7 of the Act on Fair Transactions in Large Retail Business, where there is a ground equivalent thereto, the return may be presumed to have a justifiable ground."/* 260604 번역 */,}
+                ]
+            },
+            {
+                no: "05",
+                title: "Basic Principles of Return Procedure",
+                items: [
+                    { num: "1", title: "All returns shall be processed after reaching prior agreement on conditions with the Partner Company and obtaining approval from the relevant department head." },
+                    { num: "2", title: "For returns of directly purchased products in cases where products are damaged, defaced, or defective, or where products different from the contracted products have been delivered, the Partner Company shall be promptly notified, the relevant facts shall be mutually confirmed, and then the return procedure shall be carried out."},
+                    { num: "3", title: "If, as a result of confirmation under paragraph ②, the damage or defacement was caused by GS SHOP's intent or negligence, the return may not be made. However, even in such case, it is permissible if GS SHOP bears all losses incurred by the Partner Company due to the product damage/defacement and return, and obtains the Partner Company's consent." },
+                ],
+            },
+            {
+                no: "06",
+                title: "Detailed Return Procedures",
+                items: [
+                    { num: "1", title: "For special-purchase or consignment transactions, unsold products after the close of product sales shall be returned to the Partner Company within a certain period agreed upon with the Partner Company (e.g., 10 business days)." },
+                    { num: "2", title: "When returning products that are damaged, defaced, or defective, once a defect, etc., is discovered in the product, the cause of the defect, etc., shall be confirmed through objective evidence to determine whether GS SHOP or the Partner Company is responsible, and the return shall be made only if the Partner Company bears the attributable cause."},
+                    { num: "3", title: "If the products received differ from the contracted products, the Partner Company shall be immediately notified, and the return shall be made after mutually confirming with the Partner Company that the products differ from the contracted products." },
+                    { num: "4", title: "If GS SHOP intends to make a return after bearing all losses incurred by the Partner Company due to the return and obtaining the Partner Company's consent, the parties shall consult in advance on the loss amount, obtain approval from the relevant department head, and then proceed with the return." },
+                    { num: "5", title: "If seasonal products are to be returned in accordance with the return conditions agreed upon at the time of contract execution, prior approval from the relevant department head shall be obtained before proceeding with the return."},
+                    { num: "6", title: "For direct-purchase transactions where the Partner Company voluntarily requests a return prior to the return date accompanied by objective supporting evidence that the return is beneficial to the Partner Company, the responsible MD shall make a prior inquiry to the legal affairs department and the fair trade affairs department regarding the evidence presented by the Partner Company proving that the return is beneficial to the Partner Company, obtain approval confirming that the evidence presented by the Partner Company is legitimate, and then obtain approval from the department head before returning the relevant products. In this case, the Partner Company must directly register in the return request system the supporting documents objectively proving that the return is beneficial to itself." },
+                    { num: "7", title: "Even if a case does not directly fall under items 3 through 7 of Article 10, paragraph 1 of the Large-Scale Distribution Industries Act, if there is equivalent cause to warrant a return, prior approval from the legal affairs department and the fair trade affairs department shall be obtained, followed by approval from the relevant department head, before proceeding with the return." },
+                ],
+               
+            },
+            {
+                no: "07",
+                title: "Written Statement of Return Conditions, etc.",
+                items: [
+                    { num: "1", title: "If GS SHOP agrees with a Partner Company on product return conditions, GS SHOP shall provide the Partner Company with a written document (including electronic documents pursuant to the Framework Act on Electronic Transactions) stating the matters set forth in the following items. The written document shall be signed or sealed by both GS SHOP and the Partner Company:",
+                        details:[
+                            "1. Return conditions"/* 260604 번역 */,
+                            "2. List of returned products"/* 260604 번역 */,
+                            "3. Quantity of returned products"/* 260604 번역 */,
+                            "4. Transaction form of the returned product (direct purchase/special-contract purchase/consignment transaction, etc.)"/* 260604 번역 */,
+                            "5. Return date of the returned product"/* 260604 번역 */,
+                            "6. Delivery payment related to the returned product"/* 260604 번역 */,
+                            "7. Reason for return of the returned product"/* 260604 번역 */,
+                            "8. Where the partner company requests a return from GS SHOP in writing while submitting objective supporting data proving the fact that the relevant return is directly beneficial to it: the written document and supporting data submitted by the partner company"/* 260604 번역 */
+                        ]
+                    },
+                    { num: "2", title: "GS SHOP shall not make returns to a partner company before delivering to the partner company a written document stating the return conditions."/* 260604 번역 */},
+                  
+                ],
+            },
+            {
+                no: "08",
+                title: "Retention of Written Documents on Return Conditions, etc.",
+                lead: "GS SHOP shall retain the return condition-related agreement under Article 7, paragraph 1, and related supporting documents for five years from the date the contract with the Partner Company ends."
+            },
+            {
+                no: "09",
+                title: "Prohibition of Unfair Trade Practices",
+                lead: "In handling return-related matters with Partner Companies, GS SHOP shall not, even if not explicitly stipulated as an obligation or prohibition in these guidelines, engage in any act of abusing its trading position to cause disadvantage to Partner Companies or to impose other unfair trading conditions."
+            },
+            {
+                no: "10",
+                title: "Receipt and Processing of Complaints and Reports",
+                lead: `If a Partner Company finds that GS SHOP has violated these guidelines in the course of consulting or deciding on return conditions with the Partner Company, or if the Partner Company otherwise has a complaint related to the determination of return conditions, the Partner Company may report the violation to GS SHOP or file a complaint, and in such case GS SHOP shall process the matter in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "11",
+                title: "Sanctions",
+                lead: `If a GS SHOP employee is confirmed to have violated the provisions set forth in these guidelines, sanction proceedings shall be initiated against the relevant employee in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions<br />Article 1 (Effective Date)<br />① These guidelines are enacted and take effect on August 2, 2018.<br />② These guidelines are amended and take effect on December 30, 2020.<br />③ These guidelines are amended and take effect on November 15, 2021.<br />④ These guidelines are enacted and take effect on August 1, 2025.",
+            },
+
+        ],
+        // 7. 경영정보 제공 요구 금지 기준
+        FairTradeHomeShoppingManagementInfoSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These guidelines are prepared, based on the contents of the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies," to present detailed compliance requirements to ensure that GS Retail Co., Ltd. (hereinafter "GS SHOP") appropriately protects the management information of Partner Companies, enhances the transparency and trust of transactions, and complies with related laws and regulations, thereby establishing a fair trading relationship based on mutual respect with Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "GS SHOP employees must always be familiar with and comply with this Guideline during consultations or transactions with Partner Companies." },
+                    { num: "2", title: `In addition to these guidelines, GS SHOP shall strictly comply with the provisions of fair trade-related laws and regulations in transactions with Partner Companies, including the Monopoly Regulation and Fair Trade Act (hereinafter "Fair Trade Act") and Article 14 (Prohibition on Demanding Management Information) of the Act on Fair Transactions in Large-Scale Distribution Industries (hereinafter "Large-Scale Retail Business Act").` },
+                    { num: "3", title: "This Guideline shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "This Guideline shall in principle be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) bulletin board, and shall also be disclosed during individual consultation with Partner Companies for their listing for GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share this Guideline through Partner Company training."},
+                ],
+            },
+            {
+                no: "03",
+                title: "Prohibited Items", 
+                lead:"GS SHOP shall not unreasonably demand from Partner Companies information falling under any one of the following items:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. Information on the supply conditions of products that the Partner Company supplies to other businesses (supply price, supply volume, supply timing and method, payment timing and method, return conditions, etc.)" },
+                    { num: "2", title: "2. Information on the cost of products supplied or sold by the Partner Company" },
+                    { num: "3", title: "3. Sales-related information on products sold by the Partner Company to other businesses (sales amounts by customer, sales volumes by period, etc.)"},
+                    { num: "4", title: "4. Information on sales promotion events conducted by the Partner Company with other businesses (timing, frequency, event content, and transaction conditions of sales promotion events by customer, etc.)" },
+                    { num: "5", title: "5. Information for accessing computer networks used by the Partner Company in transactions with other businesses (IDs, passwords, etc., for accessing computer networks used in transactions with other businesses)" },
+                    { num: "6", title: "6. Management information equivalent to items 1 through 5 that could disadvantage the Partner Company in the course of transactions with GS SHOP" },
+                ],
+            },
+            {
+                no: "04",
+                title: "Exceptions",
+                items: [
+                    { num: "1", title: "Notwithstanding Article 3, GS SHOP may demand the provision of management information from Partner Companies if GS SHOP provides the Partner Company with a written document in which the following items are entered and each item is signed and sealed:",
+                      details:[
+                          "1. Purpose of requesting the provision of business information",
+                          "2. Matters relating to confidentiality of the requested information, such as confidentiality methods, and matters relating to damages in case of breach of confidentiality",
+                          "3. The date of demand for management information, date of provision, and method of provision",
+                          "4. Matters that can objectively demonstrate the inevitability of the demand for business information"
+                      ]
+                    },
+                    { num: "2", title: "The following information is considered to be publicly available or information necessary for the initiation or maintenance of transactions with Partner Companies, and may in principle be demanded from Partner Companies:",
+                        details:[
+                            "1. General status of the Partner Company that is publicly available (representative's educational background, number of employees, names of handled products, etc.)",
+                            "2. The Partner Company's financial statements",
+                            "3. The Partner Company's total annual sales (however, sales by customer and by channel are excluded)",
+                            "4. Information equivalent to items 1 through 3 that, even if provided, has no possibility of being used unfavorably in the course of transactions or negotiations with GS SHOP",
+                        ]
+                    },
+                    { num: "3", title: "Even when GS SHOP demands management information from a Partner Company through legitimate procedures, GS SHOP shall demand only to the minimum extent necessary for the purpose of the demand, and the management information received shall be used only within the scope of the purpose of the demand." },
+                  
+                ]
+            },
+            {
+                no: "05",
+                title: "Prohibition on Other Unfair Trade Practices",
+                lead: "In demanding management information, etc., from Partner Companies, GS SHOP shall not, even if not explicitly stipulated as an obligation or prohibition in these guidelines, demand management information from Partner Companies in an unreasonable manner, or engage in unfair trade practices such as disadvantaging Partner Companies on the grounds that they do not provide management information, etc., or obstructing the business activities of Partner Companies."
+            },
+            {
+                no: "06",
+                title: "Receipt and Processing of Complaints and Reports",
+                lead: `If a Partner Company finds that GS SHOP has violated these guidelines in the course of transactions with the Partner Company, or if the Partner Company otherwise has a complaint related to demands for management information, the Partner Company may report the violation to GS SHOP or file a complaint, and in such case GS SHOP shall process the matter in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "07",
+                title: "Sanctions",
+                lead: `If a GS SHOP employee is confirmed to have violated the provisions set forth in these guidelines, sanction proceedings shall be initiated against the relevant employee in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions<br />Article 1 (Effective Date)<br />① These guidelines are enacted and take effect on June 1, 2015.<br />② These guidelines are amended and take effect on August 2, 2018.<br />③ These guidelines are amended and take effect on December 30, 2020.<br />④ These Standards were amended and entered into force on December 30, 2020.<br />⑤ These guidelines are amended and take effect on November 15, 2021.<br />⑥ These Standards were amended and entered into force on August 1, 2025.",
+            },
+        ],
+        // 8. 홈쇼핑 불공정거래행위에 대한 위법성 심사지침 준수 기준
+        FairTradeHomeShoppingGuidelineComplianceSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These guidelines are prepared to present detailed requirements regarding the Fair Trade Commission's standards for reviewing the illegality of unfair trade practices in the home shopping business sector, as specified in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies," in order to ensure that GS Retail Co., Ltd. (hereinafter "GS SHOP") faithfully complies with related laws and regulations, and establishes a healthy trading culture based on mutual trust with Partner Companies by ensuring fairness and transparency in the course of transactions with Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: `These guidelines are created based on the "Guidelines for Reviewing the Illegality of Specific Unfair Trade Practices by TV Home Shopping Operators," enacted pursuant to the Act on Fair Transactions in Large-Scale Distribution Industries (hereinafter "Large-Scale Retail Business Act"), to enable GS SHOP employees to easily understand and apply the stipulated matters in their work; accordingly, employees must always familiarize themselves with and comply with these guidelines in the course of consultations or transactions with Partner Companies.` },
+                    { num: "2", title: "This Guideline shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "3", title: "This Guideline shall in principle be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) bulletin board, and shall also be disclosed during individual consultation with Partner Companies for their listing for GS SHOP broadcasts." },
+                    { num: "4", title: "GS SHOP shall continuously notify and share this Guideline through Partner Company training." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Prohibited Items", 
+                lead:"GS SHOP employees shall not engage in unfair trade practices in the course of transactions with Partner Companies, and shall comply with the following:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. Execute a contract in writing immediately upon conclusion of a contract with a Partner Company, provide a copy to the Partner Company, and do not place verbal orders without a formal written contract." },
+                    { num: "2", title: "2. Do not induce Partner Companies to deliver products through intermediary distributors (vendors) without justifiable cause, even when it is possible to trade directly with the Partner Company." },
+                    { num: "3", title: "3. Do not conduct sales-on-consignment transactions except in special circumstances."},
+                    { num: "4", title: "4. Do not transfer to Partner Companies more than 50% of sales promotion event costs such as gift item costs." },
+                    { num: "5", title: "5. Do not transfer to Partner Companies more than 50% of price discount costs arising from ARS, lump-sum, and interest-free installment payments, etc." },
+                    { num: "6", title: "6. Do not demand or collect additional commissions, or change transaction conditions such as sales commission calculation methods, on the grounds of failing to achieve sales targets, etc." },
+                    { num: "7", title: "7. Do not conduct promotional events (promotions, etc.) where Partner Companies bear the costs in direct-purchase transactions." },
+                    { num: "8", title: "8. Do not unreasonably transfer to Partner Companies the pre-production costs of broadcasts as a condition of broadcast scheduling." },
+                    { num: "9", title: "9. Do not guarantee sales volumes or number of broadcasts prior to conclusion of contracts with Partner Companies." },
+                    { num: "10", title: "10. Do not cancel broadcasts or change scheduling times, content, etc., without prior agreement with Partner Companies." },
+                    { num: "11", title: "11. Do not coerce the use of a specific company when Partner Companies select courier companies, pre-broadcast production companies, etc." },
+                    { num: "12", title: "12. Do not coerce Partner Companies to purchase products in order to achieve high efficiency when launching new products." },
+                    { num: "13", title: "13. Do not return directly purchased products to Partner Companies or request exchanges for new products without justifiable cause such as product damage or defacement."},
+                    { num: "14", title: "14. Do not obstruct transactions between Partner Companies and competing businesses." },
+                    { num: "15", title: "15. Do not demand the provision of Partner Company management information other than information necessary for transactions during onboarding consultations (general status materials, materials necessary for checking financial condition and credit, etc.)." },
+                    { num: "16", title: "16. Do not demand the provision of management information such as transaction performance with competing businesses during transactions with Partner Companies." },
+                    { num: "17", title: "17. Do not impose disadvantages on Partner Companies on the grounds of reporting unfair practices, etc." },
+                    { num: "18", title: "18. Do not delay payment of product sales proceeds." },
+                    { num: "19", title: "19. Do not receive or demand money, entertainment, free goods, etc., from Partner Companies." },
+                ],
+            },
+            {
+                no: "04",
+                title: "Prohibition on Other Unfair Trade Practices",
+                lead: "In transactions with Partner Companies, GS SHOP shall not, even if not explicitly stipulated as an obligation or prohibition in these guidelines, engage in unfair trade practices equivalent thereto that disadvantage Partner Companies or restrict competition."
+            },
+            {
+                no: "05",
+                title: "Receipt and Processing of Complaints and Reports",
+                lead: `If a Partner Company finds that GS SHOP has violated these guidelines in the course of transactions with the Partner Company, or if the Partner Company has a complaint regarding GS SHOP, the Partner Company may report the violation to GS SHOP or file a complaint, and in such case GS SHOP shall process the matter in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "06",
+                title: "Sanctions",
+                lead: `If a GS SHOP employee is confirmed to have violated the provisions set forth in these guidelines, sanction proceedings shall be initiated against the relevant employee in accordance with the procedures stipulated in the higher-level standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions<br />Article 1 (Effective Date)<br />① These guidelines are enacted and take effect on April 28, 2017.<br />② These guidelines are amended and take effect on August 2, 2018.<br />③ These guidelines are amended and take effect on December 30, 2020.<br />④ These guidelines are amended and take effect on November 15, 2021.<br />⑤ These guidelines are amended and take effect on August 1, 2025.",
+            },
+        ],
+        // 9.상품선정 및 방송편성 기준과 절차
+        FairTradeHomeShoppingProductSelectionSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These Standards are prepared to regulate the matters that GS SHOP employees must comply with in order to fairly and transparently select new products and Partner Companies for GS Retail Co., Ltd.'s (hereinafter "GS SHOP") TV home shopping and data home shopping broadcasts (hereinafter collectively "broadcasts"), to schedule broadcasts based on objective indicators, and thereby strengthen the fairness and objectivity of the product selection and broadcast scheduling process, fostering a sound competitive environment among operators, protecting SMEs and customers, and fulfilling the public service role of broadcasting and GS SHOP's public responsibilities as a broadcasting operator.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "GS SHOP employees must always be familiar with and comply with these Standards during consultations or transactions with Partner Companies." },
+                    { num: "2", title: "In addition to these Standards, GS SHOP employees must strictly comply with the provisions of fair trade-related laws and regulations in transactions with Partner Companies, including the Monopoly Regulation and Fair Trade Act, the Act on Fair Transactions in Large-Scale Distribution Industries, and the Broadcasting Act." },
+                    { num: "3", title: "These Standards and subsidiary guidelines shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "These Standards shall, in principle, be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) board, and shall also be disclosed during individual onboarding consultations for Partner Companies' GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share these Standards through Partner Company training." },
+                    { num: "6", title: "If a product handled by a Partner Company transacting with GS SHOP is an intangible product, the selection criteria and procedures for such intangible products shall be governed by a separate guideline." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Partner Company Evaluation Criteria", 
+                lead:"When selecting Partner Companies for GS SHOP broadcasts, in order to prevent and minimize customer damage in advance, Partner Company reliability shall be evaluated according to the following criteria:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. To measure a Partner Company's past business performance, financial soundness, and stability, only Partner Companies that have received a credit rating above a certain level for each product category, as determined by credit rating agencies, shall be permitted to enter as broadcast partners. The specific criteria for credit ratings are set forth in Appendix 1." },
+                    { num: "2", title: "2. In preparation for customer complaints or A/S requests regarding products, the Partner Company's A/S performance capability shall be confirmed, and if it is determined that the Partner Company's A/S performance capability is insufficient, the onboarding proposal may be rejected for customer protection purposes." },
+                ],
+            },
+            {
+                no: "04",
+                title: "Product Application Procedure",
+                items: [
+                    { num: "1", title: "Products for GS SHOP broadcasts shall be selected fairly by evaluating products proposed by Partner Companies through the New Product Evaluation Committee." },
+                    { num: "2", title: "Products that meet the criteria through paragraph ① must pass quality inspection and review procedures conducted in accordance with the guidelines established for each product category through the quality and safety department and the review department." },
+                    { num: "3", title: "Partner Companies may check the progress of the selection procedure for products they have proposed for onboarding online, and may also confirm the status of proposals that have been rejected." },
+                ],
+            },
+            {
+                no: "05",
+                title: "Composition of the New Product Evaluation Committee",
+                items: [
+                    { num: "1", title: "The New Product Evaluation Committee shall consist of 2 to 5 internal evaluators from GS SHOP and 12 to 16 external evaluators." },
+                    { num: "2", title: "The internal evaluators of the New Product Evaluation Committee shall consist of staff from the product planning and strategy department, product PDs, review staff, and quality and safety staff." },
+                    { num: "3", title: "External evaluators of the New Product Evaluation Committee shall be selected from GS SHOP's customers. The method of recruiting external evaluators shall, in principle, be open recruitment through the official website announcement, posting, and similar methods." },
+                ],
+            },
+            {
+                no: "06",
+                title: "Operation and Functions of the New Product Evaluation Committee",
+                items: [
+                    { num: "1", title: "The New Product Evaluation Committee shall, in principle, operate on a regular weekly basis, and may also operate when requested by evaluators or when deemed necessary." },
+                    { num: "2", title: "The New Product Evaluation Committee shall evaluate fairly through transparent and objective criteria and procedures in selecting products to be sold at GS SHOP." }
+                ],
+            },
+            {
+                no: "07",
+                title: "Product Evaluation Criteria",
+                items: [
+                    { num: "1", title: "The New Product Evaluation Committee shall assess the commerciality of products proposed by Partner Companies through item-by-item evaluation and evaluation incorporating final weighting, and products shall be approved in principle if the overall average score across 13 items is 3 or above (out of a maximum of 5 points per item). The evaluation items and detailed evaluation criteria are set forth in Appendix 2." },
+                    { num: "2", title: "If the relevant product meets the criteria in paragraph ①, products meeting the following criteria shall, in principle, be given priority selection under identical conditions. The detailed priority selection criteria are set forth in Appendix 3:",
+                      details:[
+                            "1. Products supplied by SME manufacturers or distributors as defined under Article 2 of the Framework Act on Small and Medium Enterprises and Article 3 of the Enforcement Decree thereof",
+                            "2. Products supplied by socially marginalized groups such as persons with disabilities and the elderly, or products intended for such groups",
+                            "3. Products where farmers, livestock farmers, or fishermen are the final manufacturer, or products directly supplied by farmers, livestock farmers, or fishermen",
+                        ]
+                    },
+                    { num: "3", title: "Notwithstanding paragraphs ① and ②, products that fall under Article 64 (Prohibited Broadcasts) of the Regulations on the Review of Product Introduction and Sales Broadcasts, or products where there are concerns of violation of broadcast review standards or infringement of laws related to intellectual property rights such as the Patent Act and Trademark Act, may be rejected for onboarding or product selection, and the reason shall be notified to the Partner Company." },
+                ],
+            },
+            {
+                no: "08",
+                title: "New Product Showcase",
+                items: [
+                    { num: "1", title: "The responsible MD or relevant team for products selected through the criteria specified in Article 7 may hold a new product showcase to transparently share with employees the results selected through the New Product Evaluation Committee." },
+                    { num: "2", title: "The new product showcase shall be held once a month under the auspices of the product planning and strategy department. Employees may freely express opinions on products, and the supervising department and relevant teams may reflect employees' opinions in new product sales plans, etc."},
+                ],
+            },
+            {
+                no: "09",
+                title: "Quality Inspection Criteria and Procedures",
+                items: [
+                    { num: "1", title: "When selecting products and Partner Companies for GS SHOP broadcasts, proposed products must undergo the quality approval procedure of GS SHOP's quality and safety department, including quality inspection, process control, and pre-delivery inspection, and products that receive a quality non-conformance determination may be rejected for onboarding or product selection for customer protection purposes." },
+                    { num: "2", title: "Quality inspection comprehensively evaluates legal standards, safety, function and performance, packaging condition, etc., through document inspection of various product-related documents, physical inspection, functional/performance testing, and process due diligence, as shown in the table below. The workflow, sample submission method, and quality documents for quality inspection differ by product category and media, and detailed contents are separately posted on the Transparent Trading System for Partner Companies to confirm at any time."},
+                ],
+                commonTables: [
+                    {
+                       
+                        cols: ["Category", { label: "Detailed Inspection Items", colspan: 2 }],
+                        rows: [
+                            [
+                                { label: "Document Inspection", style: "text-align: center;" },
+                                "· Confirmation of product and Partner Company license and permission documents · Confirmation of product function and performance related content",
+                                "· Confirmation of all product-related documents",
+                            ],
+                            [
+                                { label: "Physical Inspection", style: "text-align: center;" },
+                                "· Product safety and whether there are any external defects · Product specifications, labeling, configuration confirmation · Confirmation of suitability of packaging condition",
+                                "· Confirmation of overall product status before delivery to customers",
+                            ],
+                            [
+                                { label: "Performance Inspection", style: "text-align: center;" },
+                                "· Product function/performance check and durability confirmation through testing",
+                                "· Product durability and function/performance check",
+                            ],
+                        ],
+                    },
+                ],
+            },
+            {
+                no: "10",
+                title: "Quality Approval",
+                items: [
+                    { num: "1", title: "Partner Companies must submit samples and related quality documents to GS SHOP's quality and safety staff for quality approval." },
+                    { num: "2", title: "When submitting samples, Partner Companies must submit them in the packaging form delivered to customers, and the samples must comply with GS SHOP's packaging standards by product."},
+                    { num: "3", title: "GS SHOP must return samples to Partner Companies through courier delivery or other methods in accordance with established procedures after completing sample inspection."},
+                ],
+            },
+            {
+                no: "11",
+                title: "Broadcast Scheduling and Operation Principles",
+                items: [
+                    { num: "1", title: "GS SHOP shall establish quantified and measurable evaluation indicators each year, and shall schedule broadcasts fairly and transparently based on objective indicators that differentiate the value by time slot according to customers' viewing patterns, etc." },
+                    { num: "2", title: "GS SHOP shall, in scheduling, consider season, time slot, day of the week, time interval from the previous broadcast, etc., and shall avoid consecutively scheduling the same product in the same time slot."},
+                    { num: "3", title: "For new products from SMEs, GS SHOP shall, absent special circumstances, provide at least 3 scheduling opportunities, including the launch. However, exceptions shall apply if requested by the Partner Company or if reasons for scheduling disqualification specified in Article 13 apply."},
+                    { num: "4", title: "GS SHOP shall not coerce Partner Companies into unreasonable linked scheduling, etc., as a condition of broadcast scheduling." },
+                    { num: "5", title: "Specific criteria for complying with paragraph ④ and types of prohibited acts shall be governed by a separate guideline."},
+                ],
+            },
+            {
+                no: "12",
+                title: "Scheduling Procedure",
+                items: [
+                    { num: "1", title: "GS SHOP shall establish and operate a dedicated scheduling department for fair and independent broadcast scheduling, and schedule broadcasts through a Scheduling Committee that operates independently and separately from the product selection procedure." },
+                    { num: "2", title: "The Scheduling Committee shall have the dedicated scheduling department as the supervising department, and shall consist of scheduling professionals from each department, and shall deliberate for fair and transparent scheduling 10 to 15 days prior to broadcast."},
+                    { num: "3", title: "Once scheduling is confirmed by the Scheduling Committee, GS SHOP shall notify Partner Companies of the scheduling results and execute a written contract with Partner Companies for the mutually agreed scheduling results."},
+                    { num: "4", title: "To ensure the independence of scheduling, GS SHOP shall confirm all scheduling solely through the Scheduling Committee, and the Scheduling Committee's procedure may not be omitted except in cases requiring urgent scheduling due to force majeure circumstances preventing normal broadcasts (such as responding to transmission accidents)." },
+                    { num: "5", title: "If the scheduling is to be cancelled or the scheduling date and time changed, the dedicated scheduling department must confirm in advance that the Partner Company has agreed, and must review the validity of the reason before proceeding."},
+                ],
+            },
+            {
+                no: "13",
+                title: "Grounds for Scheduling Disqualification",
+                lead: "GS SHOP may change or cancel all or part of the scheduling in any of the following cases in order to respond swiftly to changes in the broadcasting environment and provide a satisfying shopping environment for customers. However, in such cases, each reason must be clearly verified and confirmed, and GS SHOP shall give consideration to minimizing the disadvantage to Partner Companies:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. Issues with product quality, safety, etc." },
+                    { num: "2", title: "2. Social issues such as customer complaints"},
+                    { num: "3", title: "3. Infringement or anticipated infringement of intellectual property rights such as patents and trademarks"},
+                    { num: "4", title: "4. Unresolved major customer claims from the previous broadcast" },
+                    { num: "5", title: "5. Scheduling disqualification due to Partner Company's inadequate preparation, etc."},
+                    { num: "6", title: "6. Other cases similar to the above where it is determined that smooth broadcasting, etc., is severely impossible"},
+                ],
+            },
+            {
+                no: "14",
+                title: "Scheduling Preference",
+                lead: "GS SHOP shall comply with the following when scheduling broadcasts in order to protect SMEs and customers, ensure the public service function of broadcasting, and fulfill its public responsibilities as a broadcasting operator:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. SME products shall be given preferential scheduling at a certain ratio or more among product sales broadcasts" },
+                    { num: "2", title: "2. Free sales broadcasts for SMEs, farmers, livestock farmers, and fishermen, and socially marginalized groups such as persons with disabilities and the elderly"},
+                    { num: "3", title: "3. Public interest advertisements, ombudsman programs, and viewer information programs for public purposes"},
+                    { num: "4", title: "4. Provision of viewing support services for persons with disabilities to guarantee viewing rights, including closed captions, sign language broadcasts, and audio description" },
+                    { num: "5", title: "5. Prohibition on sales of harmful products for the protection of youth"},
+                ],
+            },
+            {
+                no: "15",
+                title: "Suspension of Product Sales",
+                lead: "GS SHOP may suspend sales of a product if any of the following circumstances arise in relation to products delivered by Partner Companies or the content of their advertisements. In such cases, GS SHOP shall immediately notify Partner Companies of the specific details related to the sales suspension, including the reason for and period of suspension, and the method, timing, and procedure of sales suspension shall, in principle, be determined through prior consultation with Partner Companies taking into account urgency and importance, except in unavoidable cases:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. Receipt of a warning from a third party regarding infringement of intellectual property rights, etc." },
+                    { num: "2", title: "2. Initiation of an investigation by a government agency, etc. (including investigative agencies such as the police and prosecution, and consumer organizations) or receipt of a request for attendance or submission of materials on the grounds of violation of related laws, etc."},
+                    { num: "3", title: "3. Cases where it is objectively determined that the Partner Company is unable to conduct normal sales of the relevant product or normal A/S of sold products due to third-party provisional/permanent seizure, provisional/permanent disposition, or debt collection by coercive execution against the Partner Company's major assets"},
+                    { num: "4", title: "4. Cases where it is objectively determined that the Partner Company is unable to conduct normal sales of the relevant product, normal A/S of sold products, or customer complaint handling due to the Partner Company's dishonor, bankruptcy, business transfer, closure, or significant deterioration of financial condition" },
+                    { num: "5", title: "5. Cases where normal sales and business activities are difficult due to license or permit cancellation, business suspension orders, etc., from supervisory authorities"},
+                    { num: "6", title: "6. Cases where customers who purchased the product have applied for collective dispute mediation to the Korea Consumer Agency or filed a consumer group lawsuit in court, or a consumer organization has requested mass exchange, refund, or compensation from GS SHOP for the relevant product, in connection with violations of various product-related standards required by law (safety, hygiene, labeling/advertising, etc.) or issues with product quality, performance, and stability (including accessories) (however, this shall not apply if it is objectively confirmed that the aforementioned standards have not been violated and there are no quality, performance, or stability issues)" },
+                    { num: "7", title: "7. Cases where multiple customer claims regarding the relevant product arise due to media reports related to items 1 through 6 (including broadcast previews), resulting in or objectively expected to result in damage to GS SHOP"},
+                    { num: "8", title: "8. Cases where the Partner Company refuses without justifiable cause to provide the collateral requested by GS SHOP, or fails to renew it, and the value of the collateral is lost during the contract period"},
+                    { num: "9", title: "9. Cases where it is objectively difficult to expect profitability, such as no sales whatsoever occurring for a period of three months for the relevant product" },
+                    { num: "10", title: "10. Cases where there are objective circumstances recognizing that smooth supply or delivery of the product is difficult to expect, such as three or more delivery delays (for direct delivery or delegated direct delivery only) occurring within the most recent six months (provided, however, that this shall not apply if the Partner Company demonstrates that there were justifiable reasons for the delivery delay)"},
+                ],
+            },
+            {
+                no: "16",
+                title: "Grounds for Trade Termination",
+                lead: "GS SHOP may request trade suspension and termination from Partner Companies if Partner Companies fall under any of the following criteria, and GS SHOP shall continuously share such criteria with Partner Companies through the Transparent Trading System and Partner Company training:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. Errors in country of origin labeling" },
+                    { num: "2", title: "2. Intentional submission of false documents related to quality, advertising, or review"},
+                    { num: "3", title: "3. Intentional false or exaggerated advertising" },
+                    { num: "4", title: "4. Intentional false orders" },
+                    { num: "5", title: "5. Occurrence of grounds for contract cancellation or termination specified in the basic transaction agreement, etc., concluded with Partner Companies"},
+                ],
+            },
+            {
+                no: "17",
+                title: "Transaction Termination Procedure",
+                lead: "GS SHOP may request trade suspension and termination from Partner Companies if Partner Companies fall under any of the following criteria, and GS SHOP shall continuously share such criteria with Partner Companies through the Transparent Trading System and Partner Company training:",
+                items: [
+                    { num: "1", title: "If GS SHOP intends to terminate transactions with a Partner Company, GS SHOP shall clearly state the termination date and reason in writing and deliver it to the Partner Company." },
+                    { num: "2", title: "If the reason for trade termination with a Partner Company is due to the Partner Company's violation of laws, these Standards, or contract provisions, the Partner Company shall be given an opportunity to explain."},
+                    { num: "3", title: "GS SHOP shall faithfully fulfill the follow-up procedures arising from trade termination (settlement of payments, return of products, return of Partner Company materials, etc.)." },
+                ],
+            },
+            {
+                no: "18",
+                title: "Prohibition on Other Unfair Trade Practices",
+                lead: "In handling product selection and broadcast scheduling-related matters, GS SHOP shall not, even if not explicitly stipulated as an obligation or prohibition in these Standards, engage in any act of abusing its trading position to cause disadvantage to Partner Companies or to impose other unfair trading conditions.",
+            },
+            {
+                no: "19",
+                title: "Receipt and Processing of Complaints and Reports",
+                lead: `If a Partner Company finds that GS SHOP has violated these Standards in the course of consulting or deciding on transaction conditions with the Partner Company, or if the Partner Company otherwise has a complaint related to the determination of transaction conditions, the Partner Company may report the violation to GS SHOP or file a complaint, and in such case GS SHOP shall process the matter in accordance with the procedures stipulated in the separate standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`,
+            },
+            {
+                no: "20",
+                title: "Sanctions",
+                lead: `If a GS SHOP employee is confirmed to have violated the provisions set forth in these Standards, sanction proceedings shall be initiated against the relevant employee in accordance with the procedures stipulated in the separate standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`,
+            },
+            {
+                no: "21",
+                title: "Subsidiary Guidelines",
+                usePlainList:true,
+                items:[
+                    { num: "1", title: "Guideline 1. Standards and Procedures for Intangible Product Selection" },
+                    { num: "2", title: "Guideline 2. Guideline for Prohibition on Coercive Acts of Linked Scheduling" },
+                ]
+            },
+            {
+                no: "22",
+                title: "Appendix",
+                usePlainList: true,
+                items: [
+                    { num: "1", title: "1. Partner Company Evaluation Criteria" },
+                    { num: "2", title: "New Product Evaluation Criteria" },
+                    { num: "3", title: "New Product Priority Selection Criteria" },
+                ],
+                commonTables: [
+                    {
+                        appendixTitle: "Partner Company Evaluation Criteria",
+                        tableClass: "tbl_dual_grid",
+                        cols: [
+                            "Category",
+                            "Product Group (Primary)",
+                            "Credit Rating",
+                            "Product Group (Primary)",
+                            "Credit Rating",
+                        ],
+                        rows: [
+                            [{ html: 'TV Home Shopping<br class="p_br" />Partner Company</span><span class="m_txt">TV Home Shopping Partner Companies</span>'/* 260604 번역 */, rowspan: 10, style:"text-align: center !important;", txt_verticle: true }, "Digital Devices/Mobile Phones", "B", "Sports/Leisure/Automotive Products", "CCC"],
+                            ["Computers/Gaming Consoles/Software", "B", "Furniture/Interior", "CCC"],
+                            ["Large Appliances", "B", "Clothing", "CCC"],
+                            ["Home/Small Appliances", "B", "Fashion Accessories", "CCC"],
+                            ["Home Health Products", "B", "Underwear", "CCC"],
+                            ["Health Foods", "B", "Jewelry/Watches/Accessories/Ornaments", "CCC"],
+                            ["General Foods", "B", "Bedding/Curtains", "CCC"],
+                            ["Kitchen Appliances", "B", "Baby/Infant/Children", "CCC"],
+                            ["Kitchen Utensils", "B", "Musical Instruments/Hobbies/Culture/Pets", "CCC"],
+                            ["Cosmetics/Beauty Devices/Perfume", "B", "Travel/Services/Gift Vouchers", "CCC"],
+                        ],
+                    },
+                    {
+                        appendixTitle: "[Appendix 2] New Product Evaluation Criteria (Related to Article 7, Paragraph 1)",
+                        tableClass: "type_02",
+                        theadRows: [
+                            [
+                                { label: "Category", rowspan: 2 },
+                                { label: "Evaluator", rowspan: 2 },
+                                { label: "Evaluation Item", rowspan: 2 },
+                                { label: "Detailed Evaluation Criteria", colspan: 5 },
+                            ],
+                            ["5 Points", "4 Points", "3 Points", "2 Points", "1 Point"],
+                        ],
+                        rows: [
+                            [{ html: '<span class="p_txt">Internal Assessment Team</span><span class="m_txt">Internal Assessment Team</span>'/* 260604 번역 */, rowspan: 8, style:"text-align: center !important;", txt_verticle: true }, { html: "PD", rowspan: 2 }, "Differentiation of Appeal Points", "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            ["Product Saleability", "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            [{ html: "Quality & Safety", rowspan: 2 }, "Legal Compliance", "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            ["Usage Safety", "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            [{ html: "Review", rowspan: 2 }, "Review Suitability", "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            ["External Issue Status (Low Risk)", "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            [{ html: "Product Strategy", rowspan: 2 }, "Price Competitiveness", "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            ["Commission Rate Appropriateness", "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            [{ html: '<span class="p_txt">External Assessment Team</span><span class="m_txt">External Assessment Team</span>'/* 260604 번역 */, rowspan: 5, style:"text-align: center !important;", txt_verticle: true }, { html: "Design Excellence", colspan: 2 }, "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            [{ html: "Purchase Intent", colspan: 2 }, "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            [{ html: "Price Competitiveness", colspan: 2 }, "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            [{ html: "Functionality", colspan: 2 }, "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                            [{ html: "Market Trend", colspan: 2 }, "Excellent", "Good", "Average", "Insufficient", "Poor"],
+                        ],
+                    },
+                    {
+                        appendixTitle: "[Appendix 3] New Product Priority Selection Criteria (Related to Article 7, Paragraph 2)",
+                        tableClass: "appendix_new_product_priority",
+                        cols: [
+                            "Evaluation Content",
+                            { label: "Detailed Evaluation Criteria", colspan: 2 },
+                        ],
+                        rows: [
+                            [{ label: "SME", style: "text-align: center;" },
+                             "Cases where the manufacturer or Partner Company qualifies as an SME pursuant to the Framework Act on Small and Medium Enterprises", "Product MD confirms size of the enterprise through Korea Credit Information after verifying business registration certificate"],
+                            [{ label: "Disadvantaged Groups", style: "text-align: center;" },
+                             "Products supplied by socially marginalized groups such as persons with disabilities and the elderly, or products intended for such groups", "Product MD receives relevant supporting documents through the trading partner and submits to the product planning and strategy department"],
+                            [ { label: "Agricultural/Livestock/Fishery Foods", style: "text-align: center;" },
+                              "Products where farmers, livestock farmers, or fishermen are the final manufacturer or directly supply the product", "Applicable only to food-related business units; product MD obtains approval from food team leader"],
+                        ],
+                    },
+                ],
+                cautionItems: [
+                    "Maximum 5 points per item; approved if overall average is 3 or above",
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Article 1 (Effective Date)<br />① These Standards are enacted and take effect on May 9, 2016.<br />② These Standards are amended and take effect on January 1, 2017.<br />③ These Standards are amended and take effect on August 2, 2018.<br />④ These Standards are amended and take effect on December 30, 2020.<br />⑤ These Standards are amended and take effect on November 15, 2021.<br />⑥ These Standards are amended and take effect on August 1, 2025.",
+            },
+        ],
+        // 10.무형상품 선정 기준과 절차
+        FairTradeHomeShoppingIntangibleProductSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These guidelines set out detailed criteria and procedures for selecting intangible products introduced and sold in the TV home shopping and data home shopping broadcasts (hereinafter collectively "broadcasts") operated by GS Retail Co., Ltd. (hereinafter "GS SHOP"), as specified in the higher-level standard, the "Standards and Procedures for Product Selection and Broadcast Scheduling," with the purpose of enabling GS SHOP to select intangible products objectively and fairly so as to protect consumers and fulfill the public responsibilities of broadcasting.`,
+            },
+            {
+                no: "02",
+                title: "Definitions and Basic Principles",
+                items: [
+                    { num: "1", title: "The definitions of key terms used in these guidelines are as follows:",
+                        details: [
+                            "1. “Intangible product” means a product that has no fixed form—such as travel products, construction products, or car rentals—or for which, even if a tangible item is involved, the right to use or the provision of a service constitutes the essence of the transaction."/* 260604 번역 */,
+                            "2. “Partner Company” means, among the ‘suppliers’ under Article 2, item 2 of the 「Act on Fair Transactions in Large Retail Business (hereinafter the ‘Large Retail Business Act’)」, a party that has concluded a basic transaction contract (store-opening contract) with GS SHOP."/* 260604 번역 */,
+                            "3. “Consumer” means a person who purchases an intangible product from GS SHOP to consume, use, or utilize it."/* 260604 번역 */
+                        ],
+                    },
+                    { num: "2", title: "In addition to these guidelines, GS SHOP executives and employees must strictly comply, in transactions with partner companies, with the fair trade-related laws such as the 「Monopoly Regulation and Fair Trade Act (hereinafter the ‘Fair Trade Act’)」 and the Large Retail Business Act, as well as the matters stipulated in the 「Broadcasting Act」."/* 260604 번역 */ },
+                    { num: "3", title: "This Guideline shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "These guidelines shall, in principle, be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) board, and shall also be disclosed during individual onboarding consultations for Partner Companies' GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share this Guideline through Partner Company training." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Scope of Exclusion", 
+                lead:"For intangible products under Article 2, paragraph 1, item 1 that are sold by GS SHOP in the capacity of an agent (dealer) after concluding a sales agency agreement with a Partner Company, if the relevant Partner Company and its products satisfy all qualification requirements for manufacturing and sales required by law, these guidelines shall not separately apply.",
+            },
+            {
+                no: "04",
+                title: "Partner Company Selection Procedure and Criteria",
+                items: [
+                    { num: "1", title: `When a specific company requests new onboarding, GS SHOP shall evaluate whether the company meets Partner Company qualifications, etc., through the review of GS SHOP's internal Pre-Risk Review Committee (hereinafter "Risk Review Committee"), and then select the Partner Company.` },
+                    { num: "2", title: "Companies that have proposed onboarding may check online the progress of their onboarding proposal and the status of proposals that have been rejected." },
+                    { num: "3", title: "When selecting partner companies, GS SHOP selects them by considering the following factors. In this case, the detailed criteria for item 1 shall be as set forth in Appendix 1."/* 260604 번역 */,
+                      details:[
+                          "1. The company's credit rating"/* 260604 번역 */,
+                          "2. Whether the company holds the licenses/permits required under the laws related to the intangible product"/* 260604 번역 */,
+                          "3. In the case of travel products, whether guarantee insurance under the Tourism Promotion Act has been subscribed to"/* 260604 번역 */,
+                          "4. Whether guarantee insurance under other laws related to the intangible product has been subscribed to"/* 260604 번역 */,
+                          "5. Whether the consumer protection mechanisms for the intangible product proposed by the company are in place"/* 260604 번역 */,
+                      ]
+                    },
+                    { num: "4", title: "When selecting partner companies, GS SHOP may exclude from partner company selection, or request supplementation through measures such as increasing guarantee insurance, any company falling under any of the following grounds."/* 260604 번역 */,
+                      details:[
+                          "1. Where it is determined that the risk of the company's closure or bankruptcy is very high upon comprehensive review of management-related data such as financial statements voluntarily provided by the company, or objectively obtainable external information such as credit ratings"/* 260604 번역 */,
+                          "2. Where the company fails to appropriately provide and maintain the means of securing performance of the intangible product supply contract to GS SHOP and customers"/* 260604 번역 */,
+                          "3. Where it is judged that the company lacks the ability to perform the intangible product after-sales service agreement"/* 260604 번역 */,
+                          "4. Where it is judged that the company's intangible product falls under Article 64 (Prohibition of Broadcast) of the 「Regulations on the Deliberation of Product Introduction and Sales Broadcasts」, or that there is otherwise room for it to be problematic—such as room for violation of other deliberation rules, or conflict with intellectual property-related laws such as the Patent Act or Trademark Act, etc."/* 260604 번역 */
+                      ]
+                    }
+                ],
+            },
+            {
+                no: "05",
+                title: "Intangible Product Selection Procedure and Criteria",
+                items: [
+                    { num: "1", title: "GS SHOP shall select products after evaluating the eligibility of the intangible products proposed by Partner Companies through the Risk Review Committee, and in doing so, GS SHOP may simultaneously evaluate and select the intangible products of a new company together with the Partner Company selection procedure. However, after new onboarding, if there are no changes to the requirements specified in Article 4, paragraphs 3 and 4, such as the Partner Company's credit rating and consumer protection mechanisms, the relevant intangible product business division may operate without a separate evaluation by the Risk Review Committee." },
+                    { num: "2", title: "Even if an intangible product has been reviewed by the Risk Review Committee, it must be re-reviewed if the scope of services provided to consumers changes thereafter."},
+                    { num: "3", title: "Intangible products evaluated by the Risk Review Committee must undergo quality inspection and broadcast review procedures conducted in accordance with the guidelines established for each product category through the quality and safety department and the review department."},
+                    { num: "4", title: "GS SHOP shall evaluate intangible products by considering the following elements when selecting them:",
+                        details:[
+                          "1. Price and composition of the product",
+                          "2. Differentiation of the product",
+                          "3. Competitiveness of the product",
+                          "4. Whether stable service provision is possible (e.g., if the seller and manufacturer of the intangible product are different, confirmation of the contractual relationship between the two parties)",
+                          "5. Whether consumer protection mechanisms are in place (e.g., withdrawal period, notification methods, etc.)"
+                        ]
+                    },
+                ],
+            },
+            {
+                no: "06",
+                title: "Composition of the Risk Review Committee",
+                items: [
+                    { num: "1", title: "The Risk Review Committee shall consist of approximately 6 evaluators." },
+                    { num: "2", title: "The evaluators of the Risk Review Committee shall consist of GS SHOP product planning and strategy business staff, financial and accounting business staff, legal affairs or compliance business staff, consumer protection business staff, review staff, etc., and may be varied depending on the type of risk." }
+                ],
+            },
+            {
+                no: "07",
+                title: "Convening, Operation, and Functions of the Risk Review Committee",
+                items: [
+                    { num: "1", title: "The Risk Review Committee shall operate online to promptly evaluate proposals from Partner Companies." },
+                    { num: "2", title: "The operation of the Risk Review Committee shall be administered by the consumer protection affairs department." },
+                    { num: "3", title: "The Risk Review Committee shall fairly and transparently review and evaluate intangible product risks in accordance with the procedures and criteria of Article 5." },
+                ],
+            },
+            {
+                no: "08",
+                title: "Consumer Protection Standards",
+                items: [
+                    { num: "1", title: `GS SHOP and Partner Companies, in selling products to consumers, shall comply with the Consumer Protection Act (hereinafter "Consumer Protection Act"), the Act on the Consumer Protection in Electronic Commerce (hereinafter "Electronic Commerce Act"), the Regulations on Broadcast Review, and the Regulations on the Review of Product Introduction and Sales Broadcasts, and shall endeavor to protect and promote consumers' rights and interests.` },
+                    { num: "2", title: "GS SHOP and Partner Companies shall provide consumers with accurate information on products sold, including the identity of the service provider, the method of withdrawal, and whether the product is covered by liability insurance."},
+                    { num: "3", title: "GS SHOP and Partner Companies shall faithfully fulfill the obligations of business operators pursuant to Article 19 of the Consumer Protection Act."},
+                    { num: "4", title: "If GS SHOP sells consulting or introduced products pursuant to a Partner Company's consignment for sales, GS SHOP shall notify consumers in a manner recognizable pursuant to the Electronic Commerce Act that GS SHOP is not the contracting party for product sales."},
+                    { num: "5", title: "If a consumer is damaged in the process of purchasing, using, or obtaining a refund for a product through GS SHOP, GS SHOP shall bear the responsibility pursuant to the Electronic Commerce Act and related laws, and if GS SHOP bears direct liability for compensation to consumers pursuant to related laws, the specific method of damage relief and dispute resolution procedure shall follow related laws and the Consumer Dispute Resolution Standards."},
+                ],
+            },
+            {
+                no: "09",
+                title: "Scheduling Procedure",
+                items: [
+                    { num: "1", title: "GS SHOP shall establish and operate a dedicated scheduling department for fair and independent broadcast scheduling, and schedule broadcasts through a Scheduling Committee that operates independently and separately from the product selection procedure." },
+                    { num: "2", title: "The Scheduling Committee shall have the dedicated scheduling department as the supervising department, and shall consist of scheduling professionals from each department, and shall deliberate for fair and transparent scheduling within the period from 10 to 15 days prior to broadcast."},
+                    { num: "3", title: "Once scheduling is confirmed by the Scheduling Committee, GS SHOP shall notify Partner Companies of the scheduling results and execute a written contract with Partner Companies for the mutually agreed scheduling results." },
+                    { num: "4", title: "To ensure the independence of scheduling, GS SHOP shall confirm all scheduling solely through the Scheduling Committee, and the Scheduling Committee's procedure may not be omitted except in cases requiring urgent scheduling due to force majeure circumstances preventing normal broadcasts (such as responding to transmission accidents)."},
+                ],
+            },
+            {
+                no: "10",
+                title: "Grounds for Scheduling Disqualification",
+                lead: "GS SHOP may change or cancel all or part of the scheduling in any of the following cases in order to respond swiftly to changes in the broadcasting environment and provide a satisfying shopping environment for customers. However, in such cases, each reason must be clearly verified and confirmed, and GS SHOP shall give consideration to minimizing the disadvantage to Partner Companies:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. Issues with product quality, safety, etc." },
+                    { num: "2", title: "2. Social issues such as customer complaints"},
+                    { num: "3", title: "3. Infringement or anticipated infringement of intellectual property rights such as patents and trademarks"},
+                    { num: "4", title: "4. Unresolved major customer claims from the previous broadcast" },
+                    { num: "5", title: "5. Scheduling disqualification due to Partner Company's inadequate preparation, etc."},
+                    { num: "6", title: "6. Other cases similar to the above where it is determined that smooth broadcasting, etc., is severely impossible"},
+                ],
+            },
+            {
+                no: "11",
+                title: "Criteria for Trade Suspension and Exit",
+                lead: `The criteria for trade suspension and exit with Partner Companies shall follow the provisions of Chapter 7 (Criteria for Trade Suspension and Exit) of GS SHOP's "Standards and Procedures for Product Selection and Broadcast Scheduling."`
+            },
+            {
+                no: "12",
+                title: "Prohibition on Other Unfair Trade Practices",
+                lead: "In handling intangible product selection-related matters, GS SHOP shall not, even if not explicitly stipulated as an obligation or prohibition in these guidelines, engage in any act of abusing its trading position to cause disadvantage to Partner Companies or to impose other unfair trading conditions."
+            },
+            {
+                no: "13",
+                title: "Receipt and Processing of Complaints and Reports",
+                lead: `If a Partner Company finds that GS SHOP has violated these guidelines in the course of consulting or deciding on intangible product-related transaction conditions with the Partner Company, or if the Partner Company otherwise has a complaint related to the determination of transaction conditions, the Partner Company may report the violation to GS SHOP or file a complaint, and in such case GS SHOP shall process the matter in accordance with the procedures stipulated in the separate standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`,
+            },
+            {
+                no: "14",
+                title: "Sanctions",
+                lead: `If a GS SHOP employee is confirmed to have violated the provisions set forth in these guidelines, sanction proceedings shall be initiated against the relevant employee in accordance with the procedures stipulated in the separate standard, the "Standards and Procedures for Fair Transactions with Partner Companies."`,
+            },
+            {
+                no: "15",
+                title: "Appendix",
+                lead: "1. Partner Company Credit Rating Criteria",
+                commonTables: [
+                    {
+                        appendixTitle: "1. Partner Company Credit Rating Criteria<br />[Appendix 1] Partner Company Credit Rating Criteria (Related to Article 4, Paragraph 3, Item 1)",
+                        tableClass: "tbl_dual_grid",
+                        cols: [
+                            "Category",
+                            "Product Group (Primary)",
+                            "Credit Rating",
+                            "Product Group (Primary)",
+                            "Credit Rating",
+                        ],
+                        rows: [
+                            [{ html: 'TV Home Shopping<br class="p_br" />Partner Company</span><span class="m_txt">TV Home Shopping Partner Companies</span>'/* 260604 번역 */, rowspan: 10, style:"text-align: center !important;", txt_verticle: true }, "Digital Devices/Mobile Phones", "B", "Sports/Leisure/Automotive Products", "CCC"],
+                            ["Computers/Gaming Consoles/Software", "B", "Furniture/Interior", "CCC"],
+                            ["Large Appliances", "B", "Clothing", "CCC"],
+                            ["Home/Small Appliances", "B", "Fashion Accessories", "CCC"],
+                            ["Home Health Products", "B", "Underwear", "CCC"],
+                            ["Health Foods", "B", "Jewelry/Watches/Accessories/Ornaments", "CCC"],
+                            ["General Foods", "B", "Bedding/Curtains", "CCC"],
+                            ["Kitchen Appliances", "B", "Baby/Infant/Children", "CCC"],
+                            ["Kitchen Utensils", "B", "Musical Instruments/Hobbies/Culture/Pets", "CCC"],
+                            ["Cosmetics/Beauty Devices/Perfume", "B", "Travel/Services/Gift Vouchers", "CCC"],
+                        ],
+                    },
+                ],
+                cautionItems: [
+                    "※ To support the distribution channels of new SME Partner Companies, if a company has not received a credit rating from a credit rating agency within 3 years of business registration, or does not meet the above credit rating criteria, the credit rating may be substituted through measures such as increasing liability insurance coverage.",
+                ],
+                
+            },
+            {
+                no: "",
+                title: "Supplementary Provisions",
+                addendumText: "Supplementary Provisions<br />Article 1 (Effective Date)<br />① These guidelines are enacted and take effect on January 1, 2019.<br />② These guidelines are amended and take effect on December 30, 2020.<br />③ These guidelines are amended and take effect on November 15, 2021.<br />④ These guidelines are amended and take effect on August 1, 2025.",
+            },
+        ],
+        // 11. 연계편성의 부당한 강요행위 금지 기준
+        FairTradeHomeShoppingLinkedProgrammingSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These guidelines set out detailed requirements regarding the prohibition on coercive acts of unjust linked scheduling, as specified in the higher-level standard, the "Standards and Procedures for Product Selection and Broadcast Scheduling," in order to ensure that Partner Companies are guaranteed autonomy and fair opportunities related to broadcast scheduling, etc., from GS Retail Co., Ltd. (hereinafter "GS SHOP"), and that GS SHOP and Partner Companies maintain a relationship of continuous cooperation.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "GS SHOP employees must familiarize themselves with and comply with these guidelines when consulting with Partner Companies for broadcasts."},
+                    { num: "2", title: `In addition to these guidelines, GS SHOP employees must strictly comply with the provisions of fair trade-related laws and regulations in transactions with Partner Companies, including the Monopoly Regulation and Fair Trade Act, the Act on Fair Transactions in Large-Scale Distribution Industries, and related fair trade laws and regulations (hereinafter collectively "fair trade-related laws and regulations") and the Broadcasting Act.` },
+                    { num: "3", title: "This Guideline shall apply only to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." },
+                    { num: "4", title: "This Guideline shall in principle be announced through the official website (http://www.gsretail.com) or the GS SHOP Transparent Trading System (http://withgs.gsshop.com) bulletin board, and shall also be disclosed during individual consultation with Partner Companies for their listing for GS SHOP broadcasts." },
+                    { num: "5", title: "GS SHOP shall continuously notify and share this Guideline through Partner Company training." },
+                    { num: "6", title: "GS SHOP shall prepare for and conduct sales broadcasts in accordance with fair and transparent principles." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Definition of Terms", 
+                items: [
+                    { num: "1", title: `"Sponsorship" refers to a party not involved in the production of a broadcast program providing, directly or indirectly, expenses, goods, services, personnel, or locations necessary for the production of the broadcast program.`},
+                    { num: "2", title: `"Linked Scheduling" refers to scheduling the same product on a program on a channel other than the home shopping channel at a time similar to the home shopping channel and having it introduced through sponsorship.` },
+                    { num: "3", title: `"Coercion" refers to an act of compelling a trading counterpart to perform a certain act or make a certain decision against the trading counterpart's will by exploiting a superior trading relationship, etc., even though the trading counterpart has no intention of performing the act or paying the costs.` },
+                ],
+                
+            },
+            {
+                no: "04",
+                title: "Prohibition on Determination, Cancellation, and Change of Scheduling Based on Presence or Absence of Linked Scheduling",
+                items: [
+                    { num: "1", title: "GS SHOP shall not unfairly determine, cancel, or change the date, time, duration, and production costs of product sales broadcasts on the condition of linked scheduling by Partner Companies." },
+                    { num: "2", title: `GS SHOP's scheduling supervisors and scheduling staff shall comply with the scheduling principles of Article 4 (Broadcast Scheduling and Operation Principles) of GS SHOP's "Standards and Procedures for Product Selection and Broadcast Scheduling," and shall not unfairly determine, cancel, or change scheduling due to the direct or indirect influence of whether Partner Company products are linked-scheduled on terrestrial or general programming channels (hereinafter "general programming channels").` },
+                ],
+            },
+            {
+                no: "05",
+                title: "Prohibition on Coercion of Sponsorship and Linked Scheduling Planning and Production",
+                items: [
+                    { num: "1", title: "GS SHOP shall not coerce Partner Companies to engage in advertising for their products, such as by requesting that Partner Companies provide sponsorship to other broadcasting operators or independent production companies." },
+                    { num: "2", title: "GS SHOP's product planners (MDs) shall not use the fact that a Partner Company's products are currently sponsoring or plan to sponsor a terrestrial or general programming channel program as a basis for determining the onboarding or sales of the Partner Company's products, and shall not require Partner Companies to provide information on the current status or plans for sponsorship of products during the review process."},
+                ],
+            },
+            {
+                no: "06",
+                title: "Prohibition on Involvement in the Planning and Preparation Stage of Linked Scheduling",
+                items: [
+                    { num: "1", title: "When a Partner Company conducts product sales broadcasts through GS SHOP and proceeds with sponsorship, linked scheduling (advertising activities), etc., through other broadcasting companies for the purpose of advertising the relevant products, such acts are within the scope of the Partner Company's own judgment and execution, and GS SHOP shall not be involved in any part of the entire process related to the Partner Company's linked scheduling." },
+                    { num: "2", title: "Since a Partner Company's sponsorship or linked scheduling (advertising activities) through other broadcasting companies other than GS SHOP is entirely unrelated to the preparation and conduct of GS SHOP's product sales broadcasts, the Partner Company may not ask GS SHOP's opinion on the execution thereof, nor shall GS SHOP present any opinions or benefits related to the Partner Company's linked scheduling. It is hereby clarified that the decision-making and execution responsibility for such acts is entirely within the Partner Company's own domain. Furthermore, GS SHOP shall not demand information from Partner Companies regarding such acts." }
+                ],
+            },
+            {
+                no: "07",
+                title: "Prohibition on Sharing Sponsorship and Linked Scheduling Production Costs",
+                items: [
+                    { num: "1", title: "It is hereby mutually confirmed that a Partner Company's sponsorship or advertising activities are not promotional activities utilized in GS SHOP's product sales broadcasts." },
+                    { num: "2", title: "GS SHOP shall bear all costs related to program production required for product sales broadcasts, and matters additionally requested by Partner Companies shall be separately determined by mutual agreement in accordance with the Broadcasting Act and fair trade-related laws and regulations. GS SHOP shall not bear any costs whatsoever incurred for a Partner Company's sponsorship, linked scheduling (advertising activities), etc., through other broadcasting companies that are not directly related to GS SHOP's product sales broadcasts." },
+                ],
+            },
+            {
+                no: "08",
+                title: "Prohibition on Other Unfair Trade Practices",
+                lead: "In transactions with Partner Companies, GS SHOP shall not, even if not explicitly stipulated as an obligation or prohibition in these guidelines, engage in unfair trade practices equivalent thereto that disadvantage Partner Companies or restrict competition."
+            },
+            {
+                no: "09",
+                title: "Receipt and Processing of Complaints and Reports",
+                items: [
+                    { num: "1", title: "If a Partner Company finds that a GS SHOP employee has violated these guidelines or has a complaint due to unfair treatment, etc., in the course of transactions with GS SHOP, the Partner Company may report the violation or file a complaint through channels such as Red Whistle on the GS SHOP website or Transparent Trading System." },
+                    { num: "2", title: `GS SHOP shall confirm the facts through due diligence and auditing by GS SHOP's audit affairs department, legal affairs or compliance affairs department, etc. (hereinafter "audit affairs department, etc.") regarding reports received under paragraph ①, and shall notify the relevant Partner Company of the results of the report processing, including the facts investigated, sanctions taken against the relevant employees, remedies for Partner Company damage, and recurrence prevention measures.`},
+                    { num: "3", title: "GS SHOP shall protect the information and personal details of Partner Companies and their related parties as confidential information in the process of handling Partner Company reports under this Article and thereafter, and shall ensure that Partner Companies do not receive unfair differential treatment or suffer retaliatory measures such as trade suspension due to reporting." },
+                    { num: "4", title: "GS SHOP shall make every effort to resolve complaints and grievances of Partner Companies arising in the course of transactions with Partner Companies, and shall endeavor to prevent recurrence."},
+                ],
+            },
+            {
+                no: "10",
+                title: "Sanctions",
+                items: [
+                    { num: "1", title: "If GS SHOP's audit affairs department, etc., becomes aware — through a Partner Company's report or ex officio — that a GS SHOP employee has violated these guidelines, fair trade-related laws and regulations, the ethics code of conduct guidelines, or other company regulations, GS SHOP shall immediately investigate the relevant employee's violation, and if confirmed as fact, shall report to the Ethics Committee, which shall make the final decision on whether and to what extent to sanction the relevant employee." },
+                    { num: "2", title: "If a GS SHOP employee's violation constitutes fraud, embezzlement, breach of trust, bribery, improper solicitation and acceptance of money and valuables, etc., requiring criminal liability, GS SHOP may file a criminal complaint against the relevant employee with investigative authorities for objective fact-finding and recurrence prevention."},
+                ],
+            },
+            {
+                no: "11",
+                title: "Supervising and Responsible Departments",
+                items: [
+                    { num: "1", title: "The supervising department of these guidelines shall be the broadcast business support affairs department. The supervising department shall oversee the interpretation of these guidelines and, when necessary, the coordination of work among teams related to the relevant matter." },
+                    { num: "2", title: "The responsible department of these guidelines shall be the food product group sales department. The responsible department shall manage compliance with these guidelines and the management of established standards in consultation with related departments including the scheduling department, sales strategy department, and product planning and strategy department."},
+                ],
+               
+            },
+            {
+                no: "",
+                title: "Supplementary Provisions",
+                addendumText: "Supplementary Provisions<br />Article 1 (Effective Date)<br />① These guidelines are enacted and take effect on January 1, 2021.<br />② These guidelines are amended and take effect on November 15, 2021.<br />③ These guidelines are amended and take effect on August 1, 2025.",
+            },
+        ], 
+        //12. 불공정거래행위로 인한 협력사 피해 보상 기준
+        FairTradeHomeShoppingDamageCompensationSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These Standards are prepared to set out the details concerning Partner Company damage compensation procedures, and the composition and operation of the Damage Compensation Council (hereinafter "Council"), in cases where GS Retail Co., Ltd. (hereinafter "GS SHOP") violates prohibited act provisions under fair trade-related laws and regulations, including the Monopoly Regulation and Fair Trade Act and the Act on Fair Transactions in Large-Scale Distribution Industries (hereinafter collectively "fair trade-related laws and regulations"), in the course of transactions for TV home shopping and data home shopping broadcasts (hereinafter collectively "broadcasts") with Partner Companies, thereby causing damage to Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "If a Partner Company suffers damage due to GS SHOP's unfair trade practices, GS SHOP shall make its best efforts to compensate for the Partner Company's damage through objective and transparent procedures."},
+                    { num: "2", title: "These Standards apply exclusively to Partner Companies conducting broadcasts through GS SHOP and transactions with such Partner Companies." }, 
+                ],
+            },
+            {
+                no: "03",
+                title: "Subjects of Damage Compensation", 
+                items: [
+                    { num: "1", title: "The subject of damage compensation under these Standards shall be Partner Companies that have suffered damage due to GS SHOP's violation of prohibited act provisions under fair trade-related laws and regulations in the course of transactions with GS SHOP, where the relevant damaged Partner Company has reported the damage through GS SHOP's unfair trade practice reporting channel (Red Whistle, etc.) and applied for compensation."},
+                    { num: "2", title: "The Council may dismiss a Partner Company's damage compensation application if it is evident that the Partner Company's reported case does not constitute a violation of prohibited acts under fair trade-related laws and regulations, or if the causal relationship with the damage suffered by the Partner Company is unclear, or if it is impossible to identify what damage has occurred to the Partner Company." },
+                ],
+                
+            },
+            {
+                no: "04",
+                title: "Case Investigation",
+                items: [
+                    { num: "1", title: "If a Partner Company's reported case received through the reporting channel falls under the subject of damage compensation under these Standards, the Council shall immediately conduct an investigation of GS SHOP's unfair trade practices and the scale of damage suffered by the Partner Company, targeting GS SHOP employees and the relevant Partner Company, for fact-finding purposes." },
+                    { num: "2", title: "The Council may delegate the fact-finding duties under paragraph ① to the internal audit affairs department for objective and transparent investigation." },
+                    { num: "3", title: "The Council may refer to related enforcement decrees, public notices, and guidelines in addition to fair trade-related laws and regulations in order to determine whether specific acts constitute legal violations." },
+                ],
+            },
+            {
+                no: "05",
+                title: "General Assembly",
+                items: [
+                    { num: "1", title: "Upon completion of the case investigation under Article 4, the audit affairs department shall immediately report the investigation results to the Council. If the Council determines that there are errors or deficiencies in the investigation results, the Council may request re-investigation or additional investigation." },
+                    { num: "2", title: "If the Council determines that the case investigation is complete, the Council shall convene a General Assembly to deliberate and resolve on compensation plans, etc., for the damaged Partner Company."},
+                    { num: "3", title: "The matters under the jurisdiction of the General Assembly are as follows:",
+                      details:[
+                          "1. Deliberation on compensation plans for damage compensation application cases",
+                          "2. Resolution on compensation plans for damage compensation application cases",
+                          "3. Decision on dismissal if it is evident that the damage compensation application case does not fall under the subject of damage compensation under these Standards",
+                      ]
+                    },
+                ],
+            },
+            {
+                no: "06",
+                title: "Presentation of Compensation Plan",
+                items: [
+                    { num: "1", title: "In principle, the Council shall notify Partner Companies of compensation plans resolved at the General Assembly within 14 days from the date of resolution." },
+                    { num: "2", title: "If the Partner Company notified of the compensation plan under paragraph ① accepts it, GS SHOP shall without delay consult with the Partner Company on the specific compensation plan, procedure, etc." },
+                    { num: "3", title: "If the Partner Company notified of the compensation plan under paragraph ① refuses it, the Council shall convene a General Assembly once more to re-deliberate and re-resolve the compensation plan." }
+                ],
+            },
+            {
+                no: "07",
+                title: "Termination of Procedure",
+                lead: "The Council shall terminate the damage compensation procedure in any of the following cases:",
+                usePlainList: true,
+                items: [
+                    { num: "1", title: "1. If the damaged Partner Company accepts the Council's compensation plan" },
+                    { num: "2", title: "2. If the damaged Partner Company withdraws the report on its own or requests termination of the procedure" },
+                    { num: "3", title: "3. If the damaged Partner Company refuses the Council's final compensation plan under Article 6" },
+                    { num: "4", title: "4. If the damaged Partner Company files a report with the Fair Trade Commission, etc., applies for mediation through the Korea Fair Trade Mediation Agency, etc., or files a lawsuit in court with respect to the relevant case, separately from the report through GS SHOP's reporting channel" },
+                ],
+            },
+            {
+                no: "08",
+                title: "Composition of the Council",
+                items: [
+                    { num: "1", title: "The chairperson of the Council shall be designated as the fair trade Voluntary Compliance manager. The chairperson shall oversee all Council affairs as the representative of the Council and preside over meetings." },
+                    { num: "2", title: "The members of the Council shall consist of department heads in the compliance, legal affairs, audit, and external relations fields, one person from among practitioners in fair trade or ethical management, and one person from among practitioners in sales or business strategy; and an external legal expert may be included as necessary for objectivity and fairness." },
+                    { num: "3", title: "The external legal expert shall participate in the damage compensation procedures of Chapter 3 and provide the Council with opinions on the illegality of the damage facts and the validity of the compensation plan." },
+                    { num: "4", title: "The chairperson may add or exclude members as deemed necessary for rational decision-making." },
+                ],
+            },
+            {
+                no: "09",
+                title: "Meeting Proceedings and Resolutions of the Council",
+                lead: "The General Assembly shall be presided over by the chairperson, and shall be convened with the attendance of a majority of incumbent members, and resolutions shall be adopted with the approval of a majority of attending members."
+            },
+            {
+                no: "10",
+                title: "Referral to the Ethics Committee",
+                lead: "If the Council confirms, in connection with a Partner Company's damage compensation application case, that a GS SHOP employee has violated applicable laws, internal standards, or ethical norms, etc., the Council shall refer the relevant case and employee to the Ethics Committee."
+            },
+            {
+                no: "11",
+                title: "Recurrence Prevention",
+                items: [
+                    { num: "1", title: "If the Council confirms GS SHOP's unfair trade practices in connection with a Partner Company's damage compensation application case, the Council shall immediately request the relevant departments to prevent recurrence and to formulate a specific plan for doing so." },
+                    { num: "2", title: "The relevant department that receives the request under paragraph ① from the Council shall formulate a recurrence prevention plan and report it to the Council, and shall report the results immediately upon completion of recurrence prevention measures."},
+                ],
+               
+            },
+            {
+                no: "",
+                title: "Supplementary Provisions",
+                addendumText: "Supplementary Provisions<br />Article 1 (Effective Date)<br />① These Standards are enacted on December 26, 2016 and take effect on January 1, 2017.<br />② These Standards are amended and take effect on December 30, 2020.<br />③ These Standards are amended and take effect on November 15, 2021.<br />④ These Standards are amended and take effect on November 30, 2022.<br />⑤ These Standards are amended and take effect on August 1, 2025.",
+            },
+        ],
+
+        // 1. 파트너사 선정 및 운용기준
+        FairTradePartnerStandardSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These standards aim to enhance transparency and fairness in the process of selecting and operating partner companies (hereinafter "Partner Company") in partnership with GS Retail Co., Ltd. (hereinafter "the Company"), to establish a rational and fair trade order, and to fulfill social responsibility in providing safe products to customers.`,
+            },
+            {
+                no: "02",
+                title: "Compliance Obligation",
+                items: [
+                    { num: "1", title: "The Company's employees must strictly comply with relevant laws and regulations, including the Monopoly Regulation and Fair Trade Act and the Act on Fair Transactions in Large-Scale Retail Business, in addition to these standards when transacting with Partner Companies." },
+                    { num: "2", title: "These standards shall be posted on the Company's website, etc. for Partner Companies to check at any time, and internal employees shall be regularly trained to comply with them." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Definition of Terms",
+                definitions: [
+                    { term: "1", desc: `"Partner Company" refers to a business entity that is expected to be or is currently engaged in product supply transactions, etc. with the Company.` },
+                    { term: "2", desc: `"Partner Company Pool" refers to the group of Partner Companies registered in the master system and managed and operated according to the standards set by the Company.` },
+                    { term: "3", desc: `"Selection of Partner Company" means registration in the Company's Partner Company Pool.` },
+                    { term: "4", desc: `"Operation of Partner Company" means the management of the Partner Company Pool according to certain standards, including granting the opportunity to commence transactions with companies selected and registered as Partner Companies, and cancellation of registration.` },
+                ],
+            },
+            {
+                no: "04",
+                title: "Partner Company Selection Criteria",
+                lead: "The Company must ensure fairness in the selection criteria for commencing transactions when selecting Partner Companies, and shall select Partner Companies based on the following criteria to secure trust and soundness with customers and third parties.",
+                criteria: [
+                    { term: "Expertise", details: ["Product development capability", "Price competitiveness", "Promotional capability", "Years in business"] },
+                    { term: "Credibility", details: ["Credit rating", "Cash flow", "Collateral capability", "Transaction record"] },
+                    { term: "ESG Criteria", details: ["Environment", "Safety and health", "Labor and human rights", "Code of ethics", "Anti-corruption and legal compliance"] },
+                    { term: "Other criteria based on product characteristics (hygiene, certification, delivery capability, etc.)", desc: "" },
+                ],
+            },
+            {
+                no: "05",
+                title: "Partner Company Application Procedure",
+                lead: "The Partner Company selection procedure shall proceed fairly and transparently in the following order:",
+                usePlainList:true,
+                items: [
+                    { num: "1", title: "1. Application for consultation by attaching documents such as the partnership application form, company profile, and product proposal through the Business Inquiry page on the Company's website (www.gsretail.com)" },
+                    { num: "2", title: "2. Notification of document review results within 10 business days from the consultation application receipt date" },
+                    { num: "3", title: "3. If document review is passed, a consultation is scheduled and conducted" },
+                    { num: "4", title: "4. Final partnership decision made through fair quantitative evaluation of submitted documents, consultation results, and other factors" },
+                    { num: "5", title: "5. Notification to the approved Partner Company of the necessary matters, procedures, and schedule for concluding a transaction agreement" },
+                    { num: "6", title: "6. Contract concluded through mutual consultation" },
+                ],
+            },
+            {
+                no: "06",
+                title: "Commencement of Transactions",
+                items: [
+                    { num: "1", title: "To commence fair transactions with a Partner Company, a product supply contract must be concluded after sufficient mutual consultation on all transaction-related matters." },
+                    { num: "2", title: "Transactions commence when the product supply contract is signed (including electronic signatures) with a name and seal or signature, and the written document (including electronic documents) is provided to the Partner Company." },
+                    { num: "3", title: "The Company does not change transaction terms during the contract period." },
+                    { num: "4", title: "The Company does not place verbal orders." },
+                ],
+            },
+            {
+                no: "07",
+                title: "Prohibition of Unfair Trade Practices",
+                items: [
+                    {
+                        num: "1",
+                        title: "The Company shall comply with the following matters when transacting with Partner Companies, and shall not force Partner Companies into unfair transactions by exploiting a superior position. These standards follow the provisions of fair trade-related laws and regulations.",
+                        details: [
+                            "1. Obligation to conclude written contracts",    
+                            "2. Prohibition on price reduction of goods",
+                            "3. Obligation to pay product sales proceeds",
+                            "4. Prohibition on improper refusal or delay in receiving goods",
+                            "5. Prohibition on improper return of goods",
+                            "6. Prohibition on improper coercion of promotional costs, etc.",
+                            "7. Prohibition on coercion of exclusive transactions",
+                            "8. Prohibition on requesting management information",
+                            "9. Prohibition on interference in management activities",
+                            "10. Prohibition on improper receipt of economic benefits",
+                            "11. Prohibition on provision of disadvantages such as improper contract changes",
+                            "12. Prohibition on requiring Partner Companies to transact through specific vendors",
+                            "13. Prohibition on imposing disadvantages on Partner Companies for not using specific vendors",
+                        ],
+                    },
+                    { num: "2", title: "The Company, except in unavoidable circumstances of the Partner Company, shall in principle conduct direct purchases." },
+                    { num: "3", title: "When the supply cost of delivered products changes due to minimum wage increases, rising raw material prices, etc., making adjustment of the delivery price unavoidable, the Partner Company may request the Company to adjust the delivery price." },
+                    { num: "4", title: "If the Company's MD in charge requests unfair transactions, the Partner Company may submit a report through the Ethics Management reporting page on the Company's website." },
+                    { num: "5", title: "Sales-volume-based purchase transactions that unfairly transfer inventory burden to Partner Companies are in principle prohibited. However, exceptions may be recognized when, taking into account the characteristics of the product and the needs of the Partner Company, it is recognized that the purpose is not to unfairly transfer inventory burden to the Partner Company." },
+                ],
+            },
+            {
+                no: "08",
+                title: "Exclusion of Transactions with Conflicted Parties",
+                items: [
+                    { num: "1", title: "If executives or employees of Partner Companies are persons with an interest relationship, such as relatives of the Company's employees, the Company shall exclude the relevant employees from directly or indirectly participating in the process of product selection and trade condition negotiations with the relevant Partner Company." },
+                    {
+                        num: "2",
+                        title: "The criteria for the persons with an interest relationship in paragraph 1 are as follows:",
+                        details: [
+                            {
+                                text: "1. Relatives under Article 777 of the Civil Code, including the following:",
+                                children: [
+                                    "a. Blood relatives within 8 degrees",
+                                    "b. Relatives by marriage within 4 degrees (the scope of relatives by marriage follows Article 769 of the Civil Code)",
+                                    "c. Spouses",
+                                ],
+                            },
+                            "2. Former employees with work history at the Company",
+                            "3. Persons associated with GS Group affiliates",
+                        ],
+                    },
+                    { num: "3", title: "③ Notwithstanding paragraph 1, if an employee with an interest relationship with a Partner Company has participated in a transaction stage, the relevant transaction shall be re-reviewed through a fair procedure." },
+                ],
+            },
+            {
+                no: "09",
+                title: "Transaction Termination",
+                items: [
+                    {
+                        num: "1",
+                        title: "The Company and Partner Companies may suspend or terminate the product supply contract in any of the following cases:",
+                        details: [
+                            "1. Where there is a written agreement between both parties"/* 260604 번역 */,
+                            "2. Where a bill or check issued by the “Company” or the “Partner Company” is dishonored, or where an application for rehabilitation or bankruptcy proceedings is filed by the “Company” or the “Partner Company” itself, or such proceedings are commenced upon a creditor's application"/* 260604 번역 */,
+                            "3. Where the company is judged to be a company showing signs of insolvency under the Corporate Restructuring Promotion Act and the relevant procedures have been commenced"/* 260604 번역 */,
+                            "4. Where compulsory auction, etc. is enforced against the major assets of the “Company” or the “Partner Company” (including the delivery payment claim that the “Partner Company” holds against the “Company” under this contract), making further performance of this contract difficult"/* 260604 번역 */,
+                            "5. Where the company has been subject to a disposition such as business suspension or business license cancellation by a related agency"/* 260604 번역 */,
+                            "6. Where the product delivered by the “Partner Company” conflicts with relevant laws, or where delivery or sale of the relevant product becomes impossible because the license contract concluded between the “Partner Company” and the license holder has terminated"/* 260604 번역 */,
+                            "7. Where production of the brand or transaction item specified in the goods supply contract has been discontinued or terminated"/* 260604 번역 */,
+                            {
+                                text: "8. Where other grounds significantly hindering smooth contract performance arise, as exemplified in each of the following items"/* 260604 번역 */,
+                                children: [
+                                    "When production of the supplied product is suspended or terminated for an extended period",
+                                    "b. In the case of an error in the indication of country of origin"/* 260604 번역 */,
+                                    "c. Where quality defects caused by the Partner Company's negligence in management are detected three or more times"/* 260604 번역 */,
+                                    "d. Where the sales performance of the goods is markedly poor"/* 260604 번역 */,
+                                    "e. Where the Company or the Partner Company violates a material matter of the goods supply contract, and the other party requests correction within a period of 14 days or more, but the correction is not made"/* 260604 번역 */,
+                                    "f. Where it falls under other grounds for termination or rescission of the contract stated in the goods supply contract"/* 260604 번역 */,
+                                ],
+                            },
+                        ],
+                    },
+                    { num: "2", title: "Even where the transaction has been suspended or terminated pursuant to paragraph (1), goods supplied by the Partner Company shall not be returned. However, cases falling under grounds for return permitted by laws and regulations shall be exceptions."/* 260604 번역 */ },
+                ],
+            },
+            {
+                no: "10",
+                title: "Transaction Termination Procedure",
+                items: [
+                    { num: "1", title: "When the Company terminates its transaction with a Partner Company, it must clearly state the reason for termination in writing and deliver it; in the case of transaction termination due to contract expiration, the reason for refusing contract renewal must be specifically stated in writing and notified at least 30 days before the contract expiration date." },
+                    { num: "2", title: "When the Company terminates a transaction due to grounds attributable to the Partner Company, the Partner Company must be given an opportunity to explain." },
+                    { num: "3", title: "The Company and Partner Companies shall faithfully perform procedures such as payment settlement arising from transaction termination." },
+                ],
+            },
+            {
+                no: "11",
+                title: "Receipt and Processing of Reports of Unfair Acts",
+                items: [
+                    { num: "1", title: "If a Partner Company suffers a disadvantage due to unfair treatment resulting from the Company's employees violating these standards, it may submit a report through the Ethics Management reporting page on the Company's website, and the Company must process the reported content through the prescribed procedure." },
+                    { num: "2", title: "In the course of processing the Partner Company's report, the Company shall protect the Partner Company's related information and personal details, and shall ensure that the Partner Company does not receive unfair discriminatory treatment or transaction suspension as a result of the report." },
+                    { num: "3", title: "The Company shall make its best efforts to prevent recurrence of all civil complaint matters arising during transactions with Partner Companies." },
+                ],
+            },
+            {
+                no: "12",
+                title: "Sanctions",
+                items: [
+                    { num: "1", title: "The Company's employees must comply with these standards in performing their duties; if a party is confirmed to have violated these standards intentionally or through gross negligence, sanctions shall be imposed in accordance with the Company's Code of Ethics, etc." },
+                    { num: "2", title: "If a Company employee is found to have committed fraud, embezzlement, breach of trust, receipt of money, improper solicitation, or similar offenses the Company may file a criminal complaint against the relevant employee." },
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />These standards are enacted and take effect on April 1, 2018.<br />Supplementary Provisions (June 11, 2024)<br />These standards are revised and take effect on June 11, 2024.",
+            },
+        ],
+        // 2. 판매장려금 결정, 변경에 대한 기준
+        FairTradeSalesIncentiveSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These standards aim to clarify the criteria for the reasonable recognized scope of sales incentives in the transaction relationship between GS Retail Co., Ltd. (hereinafter "the Company") and partner companies (hereinafter "Partner Company"), thereby preventing unfair acts and establishing fair trade relations with Partner Companies in compliance with relevant laws and regulations.`,
+            },
+            {
+                no: "02",
+                title: "Compliance Obligation",
+                items: [
+                    { num: "1", title: "The Company's employees must strictly comply with relevant laws and regulations, including the Act on Fair Transactions in Large-Scale Retail Business and the Guidelines for Review of Unfairness of Sales Incentives in the Large-Scale Retail Business Sector, in addition to these standards when transacting with Partner Companies." },
+                    { num: "2", title: "These standards shall be posted on the Company's website, etc. for Partner Companies to check at any time, and internal employees shall be regularly trained to comply with them." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "Sales incentives shall be based on the principle that Partner Companies pay sales incentives to the Company to increase consumer demand for products and promote sales, thereby sharing in the profits of sales performance." },
+                    { num: "2", title: "Sales incentive agreements must contribute to the benefit of both the Company and Partner Companies, and there must be a reasonable proportional relationship between the sales incentive amount received by the Company during the incentive payment target period and the profit resulting from the increase in the Partner Company's delivery volume during the same period." },
+                ],
+            },
+            {
+                no: "04",
+                title: "Definition of Terms",
+                definitions: [
+                    { term: "1", desc: `"Sales Incentive" refers to the economic benefit paid by Partner Companies to the Company under the conditions specified in the annual transaction product supply contract for the purpose of promoting sales of products in direct purchase transactions.` },
+                    { term: "2", desc: `② "Performance Incentive" refers to a type of sales incentive paid by Partner Companies to the Company when a delivery volume growth target (delivery unit price × delivery quantity) compared to the same period of the previous year, agreed upon between the Company and the Partner Company, is achieved.` },
+                    { term: "3", desc: `"New Product Incentive" refers to a type of sales incentive received by the Company from Partner Companies in exchange for displaying the Partner Company's new products in the store. In this case, whether a product is a new product shall in principle be based on products launched within 6 months, taking into account industry trade practices; renewed products where only the product code has changed from an existing product shall not be considered new products.` },
+                    { term: "4", desc: `"Display Incentive" refers to a type of sales incentive received by the Company from Partner Companies as compensation for the service of displaying the Partner Company's products on shelving units with high sales potential` },
+                ],
+            },
+            {
+                no: "05",
+                title: "Disallowed Sales Incentives",
+                lead: "In direct purchase transactions, the Company acquires ownership of products received from Partner Companies, has the right to sell products, and simultaneously bears responsibility for inventory arising from poor sales; therefore, the following types of incentives shall not be permitted as sales incentives:",
+                items: [
+                    { num: "1", title: `"Base Incentive" refers to an incentive in which the Company receives from Partner Companies a fixed percentage or fixed amount of the purchase price of products, regardless of whether the Partner Company's sales increase.` },
+                    { num: "2", title: `"No-Return Incentive" refers to an incentive received by the Company from Partner Companies on the condition that directly purchased products will not be returned.` },
+                    { num: "3", title: `"Market Price Response Incentive" refers to an incentive received by the Company from Partner Companies for the purpose of reducing the selling price of products already received from Partner Companies.` },
+                    { num: "4", title: `"Inventory Clearance Incentive" refers to an incentive in which the Company receives from Partner Companies an amount corresponding to a certain percentage of inventory in order to clear inventory of directly purchased products.` },
+                    { num: "5", title: `"Store Closure Incentive" refers to an incentive received by the Company from Partner Companies to cover costs incurred in the process of clearing remaining products through dumping, price discounts, etc. upon store closure.` },
+                ],
+            },
+            {
+                no: "06",
+                title: "Determination and Change of Sales Incentives",
+                items: [
+                    { num: "1", title: "The Company may receive sales incentives from Partner Companies in accordance with a product supply contract fairly concluded with the Partner Company for the purpose of sales promotion." },
+                    { num: "2", title: "Sales incentives shall be determined through consultation between the Company and Partner Companies based on criteria consistent with the purpose of payment, using product supply contracts and individual agreement forms." },
+                    { num: "3", title: "If the Company and Partner Companies have an agreement to do so, or at the Partner Company's request, due to reasons such as an unexpected sharp increase or decrease in sales or changes in market conditions, the sales incentive items in the product supply contract may be changed or abolished, or the payment conditions of existing sales incentives may be changed. In such cases, changes shall be made in the same manner as the determination procedure in paragraph 2." },
+                ],
+            },
+            {
+                no: "07",
+                title: "Procedural Requirements for Sales Incentives",
+                items: [
+                    {
+                        num: "1",
+                        title: "When the Company receives sales incentives from Partner Companies, the following agreed matters shall be provided in writing to the Partner Company before contract conclusion and sufficiently discussed in advance:",
+                        details: [
+                            "1. Type and name of the sales incentive",    
+                            "2. Purpose, payment timing, and payment frequency of the sales incentive",
+                            "3. Ratio or amount of the sales incentive",
+                            "4. Criteria and procedure for determining the sales incentive",
+                            "5. Grounds, criteria, and procedure for changing the sales incentive",
+                        ],
+                    },
+                    { num: "2", title: "The Company and Partner Companies shall conclude an agreement on sales incentives through free mutual agreement rather than coercion." },
+                    { num: "3", title: "The Company and Partner Companies shall include the sales incentive agreement in the annual transaction master contract and immediately deliver the contract document after sealing." },
+                ],
+            },
+            {
+                no: "08",
+                title: "Prohibited Acts",
+                items: [
+                    { num: "1", title: "The Company receiving sales incentives from Partner Companies beyond what has been agreed upon or exceeding the agreed scope in the annual transaction product supply contract" },
+                    { num: "2", title: "The Company comprehensively stipulating that individual sales incentive agreements may be concluded later without specifically stating the type and name, payment purpose, timing, and frequency, and ratio or amount of the sales incentive, and then sporadically receiving sales incentives" },
+                    { num: "3", title: "The Company unilaterally increasing the sales incentive rate or amount during the contract period without regard to the Partner Company's wishes" },
+                    { num: "4", title: "The Company unilaterally determining and notifying the sales incentive items and ratios without a consultation process when concluding the annual transaction master contract, and then receiving sales incentives" },
+                    { num: "5", title: "The Company receiving sales incentives unilaterally according to its own regulations without clearly and specifically stipulating in advance the location and period of display for the Partner Company's products related to display incentives, and the sales incentive rate or amount per location, etc." },
+                    { num: "6", title: "Concluding a sales incentive agreement in a state where the Partner Company's autonomous will is restricted, such as directly or indirectly implying that the Partner Company may suffer disadvantages such as trade suspension if it does not accept the Company's proposed content" },
+                ],
+            },
+            {
+                no: "09",
+                title: "Receipt and Processing of Reports of Unfair Acts",
+                items: [
+                    { num: "1", title: "If a Partner Company suffers a disadvantage due to unfair treatment resulting from the Company's employees violating these standards, it may submit a report through the Ethics Management reporting page on the Company's website, and the Company must process the reported content through the prescribed procedure." },
+                    { num: "2", title: "In the course of processing the Partner Company's report, the Company shall protect the Partner Company's related information and personal details, and shall ensure that the Partner Company does not receive unfair discriminatory treatment or transaction suspension as a result of the report." },
+                    { num: "3", title: "The Company shall make its best efforts to prevent recurrence of all civil complaint matters arising during transactions with Partner Companies." },
+                ],
+            },
+            {
+                no: "10",
+                title: "Sanctions",
+                items: [
+                    { num: "1", title: "The Company's employees must comply with these standards in performing their duties; if a party is confirmed to have violated these standards intentionally or through gross negligence, sanctions shall be imposed in accordance with the Company's Code of Ethics, etc." },
+                    { num: "2", title: "If a Company employee is found to have committed fraud, embezzlement, breach of trust, receipt of money, improper solicitation, or similar offenses the Company may file a criminal complaint against the relevant employee." },
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />These standards are enacted and take effect on April 1, 2018.<br />Supplementary Provisions (June 11, 2024)<br />These standards are revised and take effect on June 11, 2024.",
+            },
+        ],
+        // 3. 판매촉진행사 진행 및 비용분담 기준
+        FairTradePromotionCostSharingSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: "These standards aim to prevent unfair acts that may arise in conducting sales promotion events with Partner Companies in partnership with GS Retail Co., Ltd., and to establish fair trade relations with Partner Companies in compliance with relevant laws and regulations.",
+            },
+            {
+                no: "02",
+                title: "Compliance Obligation",
+                items: [
+                    { num: "1", title: `The Company's employees must strictly comply with relevant laws and regulations, including the Monopoly Regulation and Fair Trade Act (hereinafter "Fair Trade Act") and the Act on Fair Transactions in Large-Scale Retail Business (hereinafter "Large-Scale Retail Business Act"), in addition to these standards when transacting with Partner Companies.` },
+                    { num: "2", title: "These standards shall be posted on the Company's website, etc. for Partner Companies to check at any time, and internal employees shall be regularly trained to comply with them." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Definition of Terms",
+                definitions: [
+                    { term: "1", desc: `"Promotional Event" means an event or activity conducted for the purpose of increasing demand for products and boosting sales, with the specific purposes set forth in the following subparagraphs:`, details: ["1. Promotion of new products and newly listed products, and expansion of sales", "2. Expansion of sales by offering additional benefits that differentiate from competing products of competitors", "3. Increase of sales and expansion of market share (MS) through promotional activities within the relevant product category during the applicable period"] },
+                    { term: "2", desc: `② "Agreement" means a document in which the Company and the Partner Company have recorded mutually agreed-upon terms in writing.` },
+                    { term: "3", desc: `③ "Promotional Cost-Sharing Ratio" means the ratio in which the Company and the Partner Company share the costs required for a promotional event.` },
+                ],
+            },
+            {
+                no: "04",
+                title: "Requirements for Conducting Promotional Events",
+                items: [
+                    { num: "1", title: "When planning to conduct a promotional event, the Company must obtain a proposal from the Partner Company before the event begins." },
+                    { num: "2", title: "Both parties shall complete consultations at least 15 days before the start of the event in order to carry out a promotional event." },
+                    { num: "3", title: "Both parties shall sufficiently discuss the concept, category, period, methods, and other matters when planning a promotional event, and neither party shall unilaterally change the terms of the promotional event agreed upon through mutual consultation without justifiable reason." },
+                ],
+            },
+            {
+                no: "05",
+                title: "Procedure for Conducting Promotional Events",
+                items: [
+                    {
+                        num: "1",
+                        title: "Before conducting a promotional event, both parties shall enter into a written agreement signed or sealed by each party covering the following items, and shall each receive one copy of such written agreement immediately upon signing or sealing:",
+                        details: [
+                            "1. Name, nature, and period of the promotional event",
+                            "2. Items of products to be sold through the promotional event",
+                            "3. Estimated scale and breakdown of costs required for the promotional event",
+                            "4. Ratio of economic benefits expected to be directly gained by the Company and the Partner Company through the promotional event",
+                            "5. Ratio or amount of all costs to be shared for the promotional event",
+                        ],
+                    },
+                    { num: "2", title: "The decision on whether to proceed with a promotional event and the mutual cost-sharing ratio shall be reasonably determined through sufficient consultation with the Partner Company so as to be mutually beneficial, and shall not be unilaterally decided in an unfair manner or changed without justifiable reason." },
+                    { num: "3", title: "The Company must retain all documents related to promotional events for five (5) years after the termination of the transaction with the Partner Company." },
+                ],
+            },
+            {
+                no: "06",
+                title: "Procedures for Fulfilling Promotional Event Agreements",
+                items: [
+                    { num: "1", title: "After a promotional event agreement is reached, the Company's responsible MD is obligated to verify whether the promotional event is being carried out in accordance with the agreed terms." },
+                    { num: "2", title: "If the promotional event is not being carried out in accordance with the agreed terms, the Partner Company must be notified, appropriate measures must be taken to prevent harm to the Partner Company, and if the Partner Company suffers damages, compensation shall be provided in accordance with applicable laws and regulations." },
+                    { num: "3", title: "The Company shall not transfer to the Partner Company any promotional event costs or economic disadvantages under a name not previously agreed upon with the Partner Company or not specified in the contract." },
+                ],
+            },
+            {
+                no: "07",
+                title: "Cost Sharing",
+                items: [
+                    { num: "1", title: "The Company and the Partner Company shall determine the cost-sharing ratio for promotional expenses in proportion to the ratio of economic benefits expected to be directly gained through the promotional event." },
+                    { num: "2", title: "If the Company and the Partner Company are unable to calculate the expected economic benefits, the expected benefits of both parties shall be presumed to be equal." },
+                    { num: "3", title: "The Partner Company's share of promotional costs shall not exceed 50%. However, if a promotional event that is differentiated from other Partner Companies is conducted at the voluntary request of the Partner Company, the sharing ratio may be determined through mutual consultation." },
+                    { num: "4", title: "Even if the Company plans the promotional event, including the event period, theme, publicity, and customer support measures, if participating companies are publicly recruited and the Partner Company independently decides whether to participate and determines on its own the discounted items and discount levels for its products, the requirements of the proviso to paragraph ③ shall be deemed satisfied." },
+                    { num: "5", title: "Promotional costs shall be settled on the payment date of the purchase price in the month following the sales closing date of the month in which the promotional event ends. As a general rule, the settlement method shall involve deducting the Partner Company's share of promotional costs from the purchase price paid by the Company to the Partner Company. In such cases, the Company shall notify the Partner Company in writing of the deduction details no later than one day before payment." },
+                ],
+            },
+            {
+                no: "08",
+                title: "Prohibition of Unfair Trade Practices",
+                items: [
+                    {
+                        num: "1",
+                        title: "With respect to promotional costs, the Company shall not engage in any of the following acts:",
+                        details: [
+                            "1. Conducting a promotional event without entering into a written agreement",
+                            "2. Transferring promotional costs to the Partner Company without a prior agreement",
+                            "3. Requiring the Partner Company to bear promotional costs without agreeing on a sharing ratio",
+                        ],
+                    },
+                    { num: "2", title: "In negotiating and conducting promotional events with the Partner Company, even if an act is not explicitly stated as mandatory or prohibited under these Standards, the Company shall not abuse its superior position in the trade to disadvantage the Partner Company, impose other unfair trade conditions, or cause the Partner Company to participate in a promotional event against its will without justifiable reason." },
+                ],
+            },
+            {
+                no: "09",
+                title: "Receipt and Processing of Reports of Unfair Acts",
+                items: [
+                    { num: "1", title: "If a Partner Company suffers a disadvantage due to unfair treatment resulting from the Company's employees violating these standards, it may submit a report through the Ethics Management reporting page on the Company's website, and the Company must process the reported content through the prescribed procedure." },
+                    { num: "2", title: "In the course of processing the Partner Company's report, the Company shall protect the Partner Company's related information and personal details, and shall ensure that the Partner Company does not receive unfair discriminatory treatment or transaction suspension as a result of the report." },
+                    { num: "3", title: "The Company shall make its best efforts to prevent recurrence of all civil complaint matters arising during transactions with Partner Companies." },
+                ],
+            },
+            {
+                no: "10",
+                title: "Sanctions",
+                items: [
+                    { num: "1", title: "The Company's employees must comply with these standards in performing their duties; if a party is confirmed to have violated these standards intentionally or through gross negligence, sanctions shall be imposed in accordance with the Company's Code of Ethics, etc." },
+                    { num: "2", title: "If a Company employee is found to have committed fraud, embezzlement, breach of trust, receipt of money, improper solicitation, or similar offenses the Company may file a criminal complaint against the relevant employee." },
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />These standards are enacted and take effect on April 1, 2018.<br />Supplementary Provisions (June 11, 2024)<br />These standards are revised and take effect on June 11, 2024.",
+            },
+        ],
+        // 4. 인테리어 및 홍보물 비용분담 기준
+        FairInteriorAndPromotionCostSharingSections:[
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `The purpose of these Standards is to prevent unfair acts that may arise in the process of producing store interiors and promotional materials in transactions between GS Retail Co., Ltd. (hereinafter "the Company") and Partner Companies (hereinafter "Partner Company"), to comply with relevant laws and regulations, and to establish fair trade relations with Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Compliance Obligation",
+                items: [
+                    { num: "1", title: `Employees of the Company must strictly comply with relevant laws and regulations, including the Monopoly Regulation and Fair Trade Act (hereinafter "Fair Trade Act") and the Act on Fair Transactions in Large-Scale Retail Business (hereinafter "Large-Scale Retail Business Act"), in addition to these Standards when transacting with Partner Companies.` },
+                    { num: "2", title: "These standards shall be posted on the Company's website, etc. for Partner Companies to check at any time, and internal employees shall be regularly trained to comply with them." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Definition of Terms",
+                definitions: [
+                    { term: "1", desc: `"Store Interior" refers to all costs incurred by a Partner Company for installing, improving, or upgrading interior fixtures and equipment in its store within the Company's premises, as well as all costs for setting up facilities necessary for retail sales of products in that store.`},
+                    { term: "2", desc: `"Promotional Materials" refers to materials produced by the Company and the Partner Company for the promotion of products.` },
+                    { term: "3", desc: `"Cost Sharing" refers to the sharing of costs required for the Company and the Partner Company to produce store interiors, promotional materials, and similar items.` },
+                ],
+            },
+            {
+                no: "04",
+                title: "Requirements and Procedures for Store Interiors",
+                items: [
+                    { num: "1", title: "Store interior costs must be expenses incurred by the Partner Company for facilities in its store within the premises." },
+                    { num: "2", title: "Under Article 16 of the 'Act on Fair Transactions in Large-Scale Retail Business,' the store facility cost compensation system shall be intended to protect the expected profits, during the contract period, of a 'Partner Company' that has incurred initial costs in order to transact with the 'Company.'"/* 260604 번역 */ },
+                    {
+                        num: "3",
+                        title: "The requirements for the compensation obligation are as set forth in the following subparagraphs:",
+                        details: [
+                            "1. Where the “Company” requests the “Partner Company” to refuse or suspend transactions during the contract period. However, this shall not apply to contract termination due to the “Partner Company's” default or grounds attributable to it."/* 260604 번역 */,
+                            "2. Where the contract is terminated by agreement of both parties or due to grounds attributable to both parties."/* 260604 번역 */,
+                            "3. Where, during the contract period, the “Company” carries out a renewal or changes the location, area, or facilities of the store according to its needs."/* 260604 번역 */,
+                            "4. Where the transaction is suspended due to force majeure such as a natural disaster, no obligation to compensate arises."/* 260604 번역 */,
+                            "5. The formula for compensation is as follows."/* 260604 번역 */,
+                            " Total store facility cost expenditure of the 'Partner Company'* X [(Last day of the contract period – Date on which the transaction was suspended, etc.) / Contract period]"/* 260604 번역 */,
+                            " * Subject to the matters stated in the documents prepared upon mutual consultation between the “Company” and the “Partner Company” at the time of contract conclusion"/* 260604 번역 */,
+                        ],
+                    },
+                ],
+            },
+            {
+                no: "05",
+                title: "Requirements and Procedures for Promotional Materials",
+                items: [
+                    {num: "1", title: "Promotional materials shall be produced for the purpose of promoting sales.",},
+                    {num: "2", title: "In principle, the Company shall bear the costs of promotional materials. However, if the Partner Company requests a format other than the Company's standard promotional material format, the Partner Company may bear the additional costs." },
+                ],
+            },
+            {
+                no: "06",
+                title: "Receipt and Processing of Reports of Unfair Acts",
+                items: [
+                    {num:"1", title: "If a Partner Company suffers a disadvantage due to unfair treatment resulting from the Company's employees violating these standards, it may submit a report through the Ethics Management reporting page on the Company's website, and the Company must process the reported content through the prescribed procedure."},
+                    {num:"2", title: "In the course of processing the Partner Company's report, the Company shall protect the Partner Company's related information and personal details, and shall ensure that the Partner Company does not receive unfair discriminatory treatment or transaction suspension as a result of the report."},
+                    {num:"3", title: "③ The Company shall make its best efforts to prevent recurrence of all civil complaint matters arising during transactions with Partner Companies."}
+                ]
+            },
+            {
+                no: "07",
+                title: "Sanctions",
+                items: [
+                    { num: "1", title: "The Company's employees must comply with these standards in performing their duties; if a party is confirmed to have violated these standards intentionally or through gross negligence, sanctions shall be imposed in accordance with the Company's Code of Ethics, etc." },
+                    { num: "2", title: "If a Company employee is found to have committed fraud, embezzlement, breach of trust, receipt of money, improper solicitation, or similar offenses the Company may file a criminal complaint against the relevant employee." },
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />These standards are enacted and take effect on April 1, 2018.<br />Supplementary Provisions (June 11, 2024)<br />These standards are revised and take effect on June 11, 2024.",
+            },
+        ],
+        //5. 파트너사 경영정보요구 기준
+        FairPartnerCompanyManagementSections:[
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These standards aim to prohibit unfair requests for management information from Partner Companies in the course of transactions (including all types of transactions such as direct purchase, special purchase, and consignment/commission transactions) between GS Retail Co., Ltd. (hereinafter "the Company") and Partner Companies (hereinafter "Partner Company"), and to establish fair trade relations with Partner Companies in compliance with relevant laws and regulations.<br />02 | Basic Principles | ▲`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: "The Company's employees must strictly comply with relevant laws and regulations, including the Monopoly Regulation and Fair Trade Act and the Act on Fair Transactions in Large-Scale Retail Business, in addition to these standards when transacting with Partner Companies." },
+                    { num: "2", title: "These standards shall be posted on the Company's website, etc. for Partner Companies to check at any time, and internal employees shall be regularly trained to comply with them." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Definition of Terms",
+                definitions: [
+                    { term: "1", desc: `"Partner Company" refers to a business entity that provides the Company with product supply transactions, goods delivery transactions, services, and similar, regardless of the form of transaction, and includes not only suppliers but also general counterparties.`},
+                    { term: "2", desc: `"Business Information" includes information on the supply conditions of products that the Partner Company supplies to other businesses, conditions for entering the stores of other businesses, and information about the Partner Company or the Partner Company's counterparties.` },
+                ],
+            },
+            {
+                no: "04",
+                title: "Prohibition on Demanding Business Information",
+                lead: "The Company shall not unfairly demand from a Partner Company any of the following categories of business information, whether before or after the commencement of a transaction:",
+                usePlainList: true,
+                items: [
+                    { num: "1", title: "1. Information on the supply conditions under which the Partner Company supplies products to other businesses (supply price, supply volume, timing and method of supply, timing and method of payment, return conditions, etc.)" },
+                    { num: "2", title: "2. Information on the cost of products supplied or sold by the Partner Company" },
+                    { num: "3", title: "3. Sales-related information on products sold by the Partner Company to other businesses (sales amounts by customer, sales volumes by period, etc.)" },
+                    { num: "4", title: "4. Information on promotional events conducted by the Partner Company with other businesses (timing, frequency, event content, and trade conditions of promotional events by customer, etc.)" },
+                    { num: "5", title: "5. Information needed to access computer networks used by the Partner Company in transactions with other businesses (IDs, passwords, etc. used to access computer networks used in transactions with other businesses)" },
+                    { num: "6", title: "6. Other business information equivalent to any of the above subparagraphs that may disadvantage the Partner Company" },
+                ],
+            },
+            {
+                no: "05",
+                title: "Exceptions",
+                items: [
+                    {
+                        num: "1",
+                        title: "Notwithstanding Article 4, the Company may request the provision of business information from the Partner Company through legitimate procedures if the Company has provided a document bearing the signatures or seals of both the Company and the Partner Company, stating each of the following matters:",
+                        details: [
+                            "1. Purpose of requesting the provision of business information",
+                            "2. Matters relating to confidentiality of the requested information, such as confidentiality methods, and matters relating to damages in case of breach of confidentiality",
+                            "3. Date of demand, date of provision, and method of provision of business information",
+                            "4. Matters that can objectively demonstrate the inevitability of the demand for business information",
+                        ],
+                    },
+                    {
+                        num: "2",
+                        title: "The following information is considered publicly available or necessary for the commencement or maintenance of transactions with the Partner Company, and in principle may be requested from the Partner Company:",
+                        details: [
+                            "1. General information on the Partner Company that is publicly disclosed (background of representative, number of employees, names of handled products, etc.)",
+                            "2. Financial statements of the Partner Company",
+                            "3. Total annual sales of the Partner Company (excluding sales by customer or by channel)",
+                            "4. Information equivalent to items 1 through 3 above that has no possibility of disadvantaging the Partner Company",
+                        ],
+                    },
+                    { num: "3", title: "Even where the Company requests business information from the Partner Company through legitimate procedures, the request must be limited to the minimum scope necessary, and the business information received must be used only within the scope of the stated purpose." },
+                ],
+            },
+            {
+                no: "06",
+                title: "Prohibition of Other Unfair Trade Practices",
+                lead: "In demanding business information or similar from Partner Companies, even if an act is not explicitly stated as mandatory or prohibited under these Standards, the Company shall not engage in unfair trade practices such as disadvantaging or obstructing the business activities of a Partner Company on the grounds that the Partner Company has refused to provide business information.",
+            },
+            {
+                no: "07",
+                title: "Receipt and Processing of Reports of Unfair Acts",
+                items: [
+                    { num: "1", title: "If a Partner Company suffers a disadvantage due to unfair treatment resulting from the Company's employees violating these standards, it may submit a report through the Ethics Management reporting page on the Company's website, and the Company must process the reported content through the prescribed procedure." },
+                    { num: "2", title: "In the course of processing the Partner Company's report, the Company shall protect the Partner Company's related information and personal details, and shall ensure that the Partner Company does not receive unfair discriminatory treatment or transaction suspension as a result of the report." },
+                    { num: "3", title: "The Company shall make its best efforts to prevent recurrence of all civil complaint matters arising during transactions with Partner Companies." },
+                ],
+            },
+            {
+                no: "08",
+                title: "Sanctions",
+                items: [
+                    { num: "1", title: "The Company's employees must comply with these standards in performing their duties; if a party is confirmed to have violated these standards intentionally or through gross negligence, sanctions shall be imposed in accordance with the Company's Code of Ethics, etc." },
+                    { num: "2", title: "② If a Company employee is found to have committed fraud, embezzlement, breach of trust, receipt of money, improper solicitation, or similar offenses the Company may file a criminal complaint against the relevant employee." },
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />These standards are enacted and take effect on April 1, 2018.<br />Supplementary Provisions (June 11, 2024)<br />These standards are revised and take effect on June 11, 2024.",
+            },
+
+        ],
+        // 6. 파트너사 종업원 파견 기준
+        FairPartnerEmployeeDispatchSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `These standards aim to prevent unfair acts in the process of the Company receiving employees or other personnel employed by Partner Companies (hereinafter "Partner Company") to work in the Company's stores, in compliance with relevant laws and regulations, and to establish fair trade relations with Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Compliance Obligation",
+                items: [
+                    { num: "1", title: `Employees of the Company must strictly comply with relevant laws and regulations, including the Act on Fair Transactions in Large-Scale Retail Business (hereinafter "Large-Scale Retail Business Act") and the Guidelines on Dispatch and Use of Employees of Suppliers in the Large-Scale Retail Business Sector, in addition to these Standards when transacting with Partner Companies.` },
+                    { num: "2", title: "These standards shall be posted on the Company's website, etc. for Partner Companies to check at any time, and internal employees shall be regularly trained to comply with them." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Definition of Terms",
+                definitions: [
+                    { term: "1", desc: `"Partner company" refers to a business entity that is expected to be or is currently engaged in product supply transactions, goods delivery transactions, etc. with the Company, including not only suppliers but also general transaction counterparties.`},
+                    { term: "2", desc: `"Consignment purchase transaction" refers to a form of transaction in which the Company purchases products on credit from a supplier on the condition that unsold products may be returned, and after selling the products, pays the supplier the product sales proceeds minus a fixed percentage or fixed amount of sales revenue.` },
+                    { term: "3", desc: `"Sales incentive" refers, regardless of its name, to economic benefits paid by a supplier to the Company in direct purchase transactions for the purpose of promoting product sales, in accordance with conditions specified in the annual basic transaction agreement.` },
+                ],
+            },
+            {
+                no: "04",
+                title: "Dispatch of Employees",
+                items: [
+                    { num: "1", title: "The Company in principle prohibits receiving dispatched employees from Partner Companies and having them work at the Company's stores." },
+                    {
+                        num: "2",
+                        title: "However, this shall not apply where the case falls under any of the following items and the dispatch conditions are agreed upon in writing with the Partner Company in advance, and the dispatched employees are engaged in the sale and management of goods delivered by the Partner Company that employs such employees."/* 260604 번역 */,
+                        details: [
+                            "1. Where the “Company” bears the personnel costs of the dispatched employees as well as various actual expenses such as meal costs and transportation costs, and other costs incurred by the dispatched employees in engaging in product sales and related work at the “Company's” store"/* 260604 번역 */,
+                            "2. Where the “Partner Company” voluntarily requests the “Company” to dispatch employees it has hired, in accordance with a written document that objectively and specifically sets forth the breakdown and calculation basis of the expected benefits and costs arising from the employee dispatch"/* 260604 번역 */,
+                            "3. Where skilled employees with special sales techniques or abilities are dispatched"/* 260604 번역 */,
+                            "4. Where, in operating in the form of a store that permanently operates the products of a “Partner Company” engaged in a special-contract purchase transaction, employees are dispatched to sell and manage product categories that the Fair Trade Commission designates and announces as ones for which expertise is important due to the nature of the relevant products"/* 260604 번역 */,
+                        ],
+                    },
+                    {
+                        num: "3",
+                        title: "An act falling under any of the following items shall not be included in the grounds for permitting dispatch."/* 260604 번역 */,
+                        details: [
+                            "1. The act of, having received a dispatch on the condition of bearing the dispatch costs, demanding a reduction of the product purchase cost from the “Partner Company” on the grounds of bearing the costs paid to the dispatched personnel, or additionally collecting sales incentives or advertising costs"/* 260604 번역 */,
+                            "2. The act of, having received a dispatch on the condition of bearing the dispatch costs, imposing on the “Partner Company” some of the costs that the “Company” should bear—such as the installation costs of display stands, etc. and sample product costs incurred in performing the sales activities stated in the agreement"/* 260604 번역 */,
+                            "3. The act of, prior to the “Partner Company's” voluntary request, informally requesting the dispatch of employees verbally, by phone, or by email under the pretext of a request for cooperation, etc., and subsequently having the “Partner Company” submit a dispatch request form"/* 260604 번역 */,
+                            "4. Where, while requesting the “Partner Company” to dispatch employees, a disadvantage such as refusal to commence transactions or suspension of continued transactions is imposed or implied if it refuses, such that the “Partner Company” has no choice but to comply with the request"/* 260604 번역 */,
+                            "5. The act of dispatching employees to perform simple product sales work that is feasible with only prescribed training related to the product characteristics or sales work, even though the case does not fall under one in which the Company bears all attendant dispatch costs or the “Partner Company” voluntarily requests the dispatch"/* 260604 번역 */,
+                            "6. The act of requesting skilled employees and receiving a dispatch of promotional staff for simple promotional work at the level of raising customer interest, which requires no special skills"/* 260604 번역 */,
+                            "7. The act of requesting skilled employees and receiving a dispatch for simple sales-assistance work, such as receiving sales proceeds, unrelated to special sales techniques or abilities"/* 260604 번역 */,
+                            "8. Where, during the “Company”-level promotional event period, additional temporary event staff are requested and dispatched to perform event-assistance work"/* 260604 번역 */,
+                        ],
+                    },
+                ],
+            },
+            {
+                no: "05",
+                title: "Written Agreement",
+                items: [
+                    {
+                        num: "1",
+                        title: "When the Company receives dispatched employees from a Partner Company, the dispatch conditions must be agreed upon in advance in writing, and both the Company and the Partner Company must sign or affix their seals to the document.",
+                    },
+                    {
+                        num: "2",
+                        title: "The matters that must be included in the written document under paragraph (1) are as follows."/* 260604 번역 */,
+                        details: [
+                            "1. The number of employees"/* 260604 번역 */,
+                            "2. The employees' work period and working hours"/* 260604 번역 */,
+                            "3. The content of the work in which the employees will engage"/* 260604 번역 */,
+                            "4. Whether and on what conditions the employees' personnel costs are shared"/* 260604 번역 */,
+                        ],
+                    },
+                    {
+                        num: "3",
+                        title: "A case falling under any of the following items shall be deemed a violation of the Act on Fair Transactions in Large Retail Business."/* 260604 번역 */,
+                        details: [
+                            {
+                                text: "1. Where a written agreement is made after receiving the dispatched employees"/* 260604 번역 */,
+                                children: [
+                                    "a. Where, on the grounds that it is a short-term promotional event, the Company additionally requests the 'Partner Company' to dispatch promotional staff without a written agreement, and subsequently obtains a dispatch request and a written agreement (including a name and seal) from the 'Partner Company'"/* 260604 번역 */,
+                                    "b. Where the time at which employees were first dispatched differs from the time of the agreement, and the agreement is applied retroactively from a period prior to the agreement, or the agreement date is altered to be entered as a date prior to the time of the first dispatch"/* 260604 번역 */,
+                                    "c. Where the agreement on dispatch conditions, such as the number of dispatched employees, is deferred to a later time"/* 260604 번역 */,
+                                    "d. Where the preparation of the written document specifying the dispatch conditions was made before the dispatch of employees, but the signature or affixing of name and seal of one party or both parties was made after the dispatch"/* 260604 번역 */,
+                                ],
+                            },
+                            {
+                                text: "2. Where no agreement has been concluded on some or all of the matters required to be included in the written document"/* 260604 번역 */,
+                                children: [
+                                    "a. Where employees are dispatched by requesting their dispatch orally, by email, through a dispatch request document, or the like, without agreeing on the dispatch conditions in writing in advance"/* 260604 번역 */,
+                                    "b. Where a written agreement is not concluded in advance on the grounds that the 'Partner Company' voluntarily requested the dispatch of employees"/* 260604 번역 */,
+                                    "c. Where the working hours, work period, and job content of employees are clearly agreed upon, but the number of employees is not specified in the agreement on the grounds that it is difficult to predict"/* 260604 번역 */,
+                                ],
+                            },
+                            {
+                                text: "3. Where some or all of the matters required to be included in the written document are agreed upon unclearly"/* 260604 번역 */,
+                                children: [
+                                    "a. Where regular sales staff, whose dispatch conditions are foreseeable, are dispatched without clearly agreeing on the number of dispatched personnel and working hours, etc."/* 260604 번역 */,
+                                    "b. Where, even when the number of required employees can be anticipated to be a maximum of 10, etc. due to fluctuations in product sales or a short-term promotional event, the agreement is made in broad terms such as '5 to 30 persons' or '30 persons or fewer'"/* 260604 번역 */,
+                                    `c. Where the work period of employees is vaguely defined as "during the first half of the year" or "during the third quarter," etc., making it difficult for the Partner Company to predict the dispatch period`/* 260604 번역 */,
+                                    "d. Where the Partner Company merely signs or affixes its name and seal to a written document in which specific dispatch conditions are not stated, and the specific dispatch conditions are entered unilaterally by the Company at a later time"/* 260604 번역 */,
+                                ],
+                            },
+                            {
+                                text: "4. Where the agreed written document is incomplete"/* 260604 번역 */,
+                                children: [
+                                    "a. Where a document specifying the dispatch conditions has been prepared, but the signature or name and seal of one party or both parties is omitted"/* 260604 번역 */,
+                                    "b. Where, when concluding an agreement through an electronic document, the Company retains the Partner Company's signature and enters it into the agreement"/* 260604 번역 */,
+                                ],
+                            },
+                            "5. Where the agreed written document is not delivered to the “Partner Company”"/* 260604 번역 */
+                        ],
+                    },
+                    { 
+                        num:"4",
+                        title:"A document in which the 'Company' and the 'Partner Company' have agreed upon the conditions for the dispatch of employees shall be delivered to the 'Partner Company' immediately upon conclusion, and such document shall be retained for five years from the date on which the agreement ends."/* 260604 번역 */
+                    }
+                ],
+            },
+            {
+                no: "06",
+                title: "Scope of Duties of Dispatched Employees",
+                items: [
+                    { num: "1", title: "Dispatched employees shall engage only in the sale and management of products supplied by the Partner Company that employs them." },
+                    { num: "2", title: "An act falling under any of the following items shall not fall within the scope of work of dispatched employees."/* 260604 번역 */,
+                        details: [
+                            "1. The act of having dispatched employees engage in cash-handling assistance at the checkout counter, packaging work, etc."/* 260604 번역 */,
+                            "2. The act of instructing dispatched employees to clean shared store spaces such as passageways and restrooms, or to perform store-wide customer service and guidance in shared store spaces, etc."/* 260604 번역 */,
+                            "3. The act of having dispatched employees engage in product unloading, warehouse-receiving work, shopping cart recovery/arrangement, parking lot management, and parking assistance work"/* 260604 번역 */,
+                            "4. The act of assigning dispatched employees not only the sale of the “Partner Company's” own products but also the sale, inventory checking and management, display work, etc. of products delivered by other “Partner Companies”"/* 260604 번역 */,
+                            "5. The act of having dispatched employees check the inventory of the “Partner Company's” own products in order to smoothly perform regular inventory inspection work, etc. carried out as part of the “Company's” intrinsic duties"/* 260604 번역 */,
+                        ],
+                    },
+                ],
+            },
+            {
+                no: "07",
+                title: "Partner Company's Employee Dispatch Request",
+                lead: "If a Partner Company, judging from the Partner Company's perspective that dispatching its employees to the Company would be beneficial in terms of promoting and increasing sales of products in accordance with Article 4, paragraph 2, subparagraph 2, wishes to request the dispatch of the Partner Company's employees to the Company, the Partner Company must submit to the Company an employee dispatch request form that objectively and specifically states the expected benefits and cost breakdown of the employee dispatch, prior to concluding the product contract.",
+            },
+            {
+                no: "08",
+                title: "Receipt and Processing of Reports of Unfair Acts",
+                items: [
+                    { num: "1", title: "If a Partner Company suffers a disadvantage due to unfair treatment resulting from the Company's employees violating these standards, it may submit a report through the Ethics Management reporting page on the Company's website, and the Company must process the reported content through the prescribed procedure." },
+                    { num: "2", title: "In the course of processing the Partner Company's report, the Company shall protect the Partner Company's related information and personal details, and shall ensure that the Partner Company does not receive unfair discriminatory treatment or transaction suspension as a result of the report." },
+                    { num: "3", title: "The Company shall make its best efforts to prevent recurrence of all civil complaint matters arising during transactions with Partner Companies." },
+                ],
+            },
+            {
+                no: "09",
+                title: "Sanctions",
+                items: [
+                    { num: "1", title: "The Company's employees must comply with these standards in performing their duties; if a party is confirmed to have violated these standards intentionally or through gross negligence, sanctions shall be imposed in accordance with the Company's Code of Ethics, etc." },
+                    { num: "2", title: "If a Company employee is found to have committed fraud, embezzlement, breach of trust, receipt of money, improper solicitation, or similar offenses the Company may file a criminal complaint against the relevant employee." },
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />These standards are enacted and take effect on April 1, 2018.<br />Supplementary Provisions (June 11, 2024)<br />These standards are revised and take effect on June 11, 2024.",
+            },
+        ],
+        // 7. 파트너사 특약매입거래 기준
+        FairPartnerSpecialPurchaseSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `The purpose of these Standards is to establish clear standards for cost sharing that may arise in the consignment purchase transaction process between GS Retail Co., Ltd. (hereinafter "the Company") and Partner Companies (hereinafter "Partner Company"), to prevent unfair trade practices that may arise in the course of conducting related promotional events, and to comply with relevant laws and regulations, thereby establishing fair trade relations with Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: `Employees of the Company must strictly comply with relevant laws and regulations, including the Act on Fair Transactions in Large-Scale Retail Business (hereinafter "Large-Scale Retail Business Act") and the Guidelines for Reviewing Unfairness of Consignment Purchase Transactions in the Large-Scale Retail Business Sector, in addition to these Standards when transacting with Partner Companies.` },
+                    { num: "2", title: "These standards shall be posted on the Company's website, etc. for Partner Companies to check at any time, and internal employees shall be regularly trained to comply with them." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Definition of Terms",
+                definitions: [
+                    { term: "1", desc: `"Partner company" refers to a business entity that is expected to be or is currently engaged in product supply transactions, goods delivery transactions, etc. with the Company, including not only suppliers but also general transaction counterparties.`},
+                    { term: "2", desc: `"Consignment purchase transaction" refers to a form of transaction in which the Company purchases products on credit from a supplier on the condition that unsold products may be returned, and after selling the products, pays the supplier the product sales proceeds minus a fixed percentage or fixed amount of sales revenue.` },
+                    { term: "3", desc: `"Promotional Event," regardless of its name or form, refers to all events or activities conducted for the purpose of increasing demand for products and boosting sales, with the specific purposes set forth in the following subparagraphs:`,
+                      details:[
+                          "1. Promotion of new products and newly listed products, and expansion of sales",
+                          "2. Expansion of sales by offering additional benefits that differentiate from competing products of competitors",
+                          "3. Increase of sales and expansion of market share (MS) through promotional activities within the relevant product category during the applicable period"
+                      ]
+                    },
+                ],
+            },
+            {
+                no: "04",
+                title: "Transaction Process",
+                items: [
+                    { num: "1", title: "Upon concluding a consignment purchase transaction agreement with a Partner Company, the Company must immediately provide the Partner Company with a written document specifying the terms of the agreement, and both the Company and the Partner Company must each sign or affix their seals to the document." },
+                    { num: "2",title: "The Company shall not cause the manufacture or ordering of products to be supplied until the written document under paragraph ① has been provided to the Partner Company."},
+                    { num: "3", title: "In consignment purchase transactions, the sales commission, return conditions, promotional costs, and other terms must be specifically agreed upon through consultation between the Company and the Partner Company at the time of contract execution and must be stated in the contract."},
+                    { num: "4", title: "If unexpected costs arise after the conclusion of a consignment purchase transaction, the additional costs shall be determined through consultation between the Company and the Partner Company."},
+                ],
+            },
+            {
+                no: "05",
+                title: "Role Division",
+                items: [
+                    {
+                        num: "1",
+                        title: "The Company acquires ownership of products supplied through the Partner Company, and after receiving the sales proceeds in the Company's name, tabulates monthly sales revenue and pays the Partner Company the amount after deducting the sales commission agreed upon in advance.",
+                    },
+                    {
+                        num: "2",
+                        title: "The Company carries out activities such as advertising, publicity, and planning of promotional events at the level of the entire store for the purpose of attracting customers and creating demand.",
+                    },
+                    {
+                        num: "3",
+                        title: "The Partner Company dispatches promotional staff within the store to promote sales of supplied products and performs duties related to selling, displaying, and storing those products within the store.",
+                    },
+                    { 
+                        num:"4",
+                        title:"In this process, the Partner Company manages the inventory of the relevant Partner Company's products and, in consultation with the Company, retrieves (returns) unsold products."
+                    }
+                ],
+            },
+            {
+                no: "06",
+                title: "Cost Sharing",
+                lead: "The standards for sharing costs arising in the course of consignment purchase transactions between the Company and the Partner Company are as follows:",
+                usePlainList: true,
+                items: [
+                    {
+                        num: "1",
+                        title: "1. Product Receiving and Management Stage",
+                        criteria: [
+                            {
+                                details: [
+                                    {
+                                        text: "a. Property Protection Insurance Costs for Products",
+                                        desc: "The cost of property protection insurance taken out to cover damage to held products due to natural disasters such as fire and floods, or due to theft, shall be borne by the Company.",
+                                    },
+                                    {
+                                        text: "b. Product Storage Costs",
+                                        desc: "Costs incurred for storing products in warehouses or other facilities after product inspection and acceptance shall be borne by the Company.",
+                                    },
+                                    {
+                                        text: "c. Costs of Product Loss or Damage",
+                                        desc: "Where delivered goods are lost or damaged after the Company's inspection and acceptance, the Company shall, as a general rule, bear the costs incurred. However, where there is a clear cause attributable to the Partner Company or to sales promotion staff dispatched by the Partner Company, the Partner Company shall bear the costs of the loss or damage of the goods."/* 260604 번역 */,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        num: "2",
+                        title: "2. Store operation and management stage"/* 260604 번역 */,
+                        criteria: [
+                            {
+                                details: [
+                                    {
+                                        text: "a. Store interior costs"/* 260604 번역 */,
+                                        desc: "The interior costs incurred when replacing store fixtures and the like shall be borne by the Company"/* 260604 번역 */,
+                                    },
+                                    {
+                                        text: "b. Cost and scale of sales promotion staff"/* 260604 번역 */,
+                                        desc: "The labor costs of dispatched sales promotion staff, actual expenses such as meal and transportation costs, and the costs of engaging in product sales and related work shall be shared by the Company and the Partner Company through consultation, and the scale of sales promotion staff to be dispatched to the store shall be determined autonomously by the Partner Company."/* 260604 번역 */,
+                                    },
+                                    {
+                                        text: "c. Store management costs"/* 260604 번역 */,
+                                        desc: "Various management costs incurred in the course of selling products supplied by the 'Partner Company,' such as electricity charges and fees for the use of payment processing equipment, shall be borne by the 'Company.'"/* 260604 번역 */,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        num: "3",
+                        title: "3. Advertising and sales promotion activity stage"/* 260604 번역 */,
+                        criteria: [
+                            {
+                                details: [
+                                    {
+                                        text: "a. Advertising costs at the store level"/* 260604 번역 */,
+                                        children:[
+                                            "1) The “Company” shall bear the advertising costs for enhancing the brand image of the “Company.”"/* 260604 번역 */,
+                                            "2) The “Company” shall bear advertising costs such as flyers for attracting customers at the store level."/* 260604 번역 */,
+                                            "3) The “Company” shall bear the costs of promotional/advertising decorations and production materials, such as POP and posters, that the “Company” uniformly arranges on a store-wide basis."/* 260604 번역 */  ]
+                                    },
+                                    {
+                                        text: "b. Sales promotion event costs at the store level"/* 260604 번역 */,
+                                        desc:"The costs incurred for sales promotion events conducted by the 'Company' as the principal party at the level of all stores or individual stores shall be borne by the 'Company.'"/* 260604 번역 */
+                                    },
+                                    {
+                                        text: "c. Cost of joint sales promotion events between the Company and the Partner Company"/* 260604 번역 */,
+                                        desc:"The costs incurred for sales promotion events conducted jointly by the 'Company' and the 'Partner Company' shall be shared in proportion to the directly expected profits; provided, however, that where such proportion cannot be calculated, the expected profits of the 'Company' and the 'Partner Company' shall be presumed to be equal. However, the share borne by the 'Partner Company' shall not exceed 50%."/* 260604 번역 */
+                                    },
+                                    {
+                                        text: "d. Cost of the Partner Company's voluntary sales promotion events"/* 260604 번역 */,
+                                        desc:"Where the 'Partner Company' voluntarily requests the 'Company' to conduct a sales promotion event differentiated from those of other businesses, the costs incurred shall be shared by the 'Company' and the 'Partner Company' through mutual consultation."/* 260604 번역 */
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                no: "07",
+                title: "Scope of Promotional Staff Duties",
+                items: [
+                    {num: "1", title: "Promotional staff dispatched by the Partner Company shall work during the business hours of the Company's store."},
+                    {num: "2", title: "Promotional staff shall engage only in the sale and management of products supplied by the Partner Company that employs them, and shall not be made to engage in the sale and management of products supplied by other Partner Companies, or in the Company's inherent duties such as assisting with cash handling, parking support, and similar tasks."},
+                    {num: "3", title: "Promotional staff shall endeavor to maintain a quality of service at or above the level that customers would normally expect to receive."}
+                ]
+            },
+            {
+                no: "08",
+                title: "Participation in Promotional Events",
+                items: [
+                    { num: "1", title: "The Company shall not compulsorily involve Partner Companies in promotional events against their will." },
+                    { num: "2", title: "Whether participation in a promotional event is compulsory shall be determined by comprehensively considering the following matters:",
+                        details:[
+                            "1. The genuine and voluntary intention of the Partner Company to participate",
+                            "2. Whether sanctions or disadvantages exist in the event of non-participation in the promotional event",
+                            "3. The nature of the promotional event and the degree of superior position in the transaction",
+                            "4. The Partner Company's degree of trade dependence",
+                            "5. The continuity of the trade relationship between the Company and the Partner Company",
+                            "6. Characteristics of the traded products",
+                        ]
+                    },
+                ],
+            },
+            {
+                no: "09",
+                title: "Receipt and Processing of Reports of Unfair Acts",
+                items: [
+                    { num: "1", title: "If a Partner Company suffers a disadvantage due to unfair treatment resulting from the Company's employees violating these standards, it may submit a report through the Ethics Management reporting page on the Company's website, and the Company must process the reported content through the prescribed procedure." },
+                    { num: "2", title: "In the course of processing the Partner Company's report, the Company shall protect the Partner Company's related information and personal details, and shall ensure that the Partner Company does not receive unfair discriminatory treatment or transaction suspension as a result of the report." },
+                    { num: "3", title: "The Company shall make its best efforts to prevent recurrence of all civil complaint matters arising during transactions with Partner Companies." },
+                ],
+            },
+            {
+                no: "10",
+                title: "Receipt and Processing of Reports of Unfair Acts",
+                items: [
+                    { num: "1", title: "Employees of the Company must comply with these Standards in carrying out their duties. If it is confirmed that a party has intentionally or with gross negligence violated these Standards, disciplinary action shall be taken in accordance with the Company's ethical norms and other regulations." },
+                    { num: "2", title: "If a Company employee is found to have committed fraud, embezzlement, breach of trust, receipt of money, improper solicitation, or similar offenses the Company may file a criminal complaint against the relevant employee." },
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />These standards are enacted and take effect on April 1, 2018.<br />Supplementary Provisions (June 11, 2024)<br />These standards are revised and take effect on June 11, 2024.",
+            },
+        ],
+        // 8. 파트너사 반품관련 기준
+        FairPartnerReturnRelatedSections: [
+            {
+                no: "01",
+                title: "Purpose",
+                lead: `The purpose of these Standards is to clearly set out standards for the handling of returns in transactions between GS Retail Co., Ltd. (hereinafter "the Company") and Partner Companies (hereinafter "Partner Company"), to prevent unfair trade practices that may arise in the course of returns, to comply with relevant laws and regulations, and thereby establish fair trade relations with Partner Companies.`,
+            },
+            {
+                no: "02",
+                title: "Basic Principles",
+                items: [
+                    { num: "1", title: `Employees of the Company must strictly comply with relevant laws and regulations, including the Act on Fair Transactions in Large-Scale Retail Business (hereinafter "Large-Scale Retail Business Act") and the Guidelines for Reviewing Illegality of Return Practices by Large-Scale Distributors, in addition to these Standards when transacting with Partner Companies.` },
+                    { num: "2", title: "These standards shall be posted on the Company's website, etc. for Partner Companies to check at any time, and internal employees shall be regularly trained to comply with them." },
+                ],
+            },
+            {
+                no: "03",
+                title: "Definition of Terms",
+                definitions: [
+                    { term: "1", desc: `"Supply" refers to the act of supplying products to the Company for sale, regardless of the form of transaction. The act of a Partner Company directly supplying products already sold by the Company to consumers shall also be deemed a supply in the relationship between the Company and the Partner Company.`},
+                    { term: "2", desc: `"Return" refers to all acts by which the Company substantively returns products received from a Partner Company back to the Partner Company. Even if the transaction takes the form of exchanging for other products of the Partner Company while returning the originally supplied products, or any other form, if the originally supplied products are returned to the Partner Company, it shall be deemed a return regardless of the form.` },
+                    { term: "3", desc: `"Direct purchase transaction" refers to a form of transaction in which the Company purchases products from a Partner Company. The inventory of purchased products not sold to consumers shall be borne by the Company.`},
+                    { term: "4", desc: `"Consignment purchase transaction" refers to a form of transaction in which the Company purchases products from a Partner Company on credit on the condition that products not sold to consumers may be returned. After selling the products, the Company pays the Partner Company the product sales proceeds minus a fixed percentage or fixed amount of sales revenue.`},
+                    { term: "5", desc: `"Consignment sale transaction" refers to a form of transaction in which the Company sells products received from a Partner Company under the Company's own name, and after selling the products, pays the Partner Company the product sales proceeds minus a fixed percentage or fixed amount of commission.` },
+                ],
+            },
+            {
+                no: "04",
+                title: "Conditions for Returns",
+                items: [
+                    { num: "1", title: "The Company shall not return all or part of the products received from a Partner Company without justifiable reason." },
+                    { num: "2",title: "Notwithstanding paragraph (1), returns may be made exceptionally in cases falling under any of the following items."/* 260604 번역 */, 
+                      details:[
+                          "1. In the case of a special-contract purchase transaction, where the return conditions are specifically agreed upon at the time of contract conclusion and a written document specifying those return conditions is given to the “Partner Company,” returns may be made if they fall under those return conditions. The “Company” may reflect specific return conditions in the “Company's” standard goods supply contract (special-contract purchase) and utilize them."/* 260604 번역 */,
+                          "2. In the case of a consignment transaction, the remaining inventory products after sale may be returned without separate restriction."/* 260604 번역 */,
+                          "3. Where the delivered product has been soiled or damaged due to grounds attributable to the “Partner Company,” or has a defect, the product may be returned."/* 260604 번역 */,
+                          "4. Where the delivered product differs from the contracted product—that is, where important product characteristics such as the country of origin, expiration date, or size differ from the originally contracted content—the product may be returned."/* 260604 번역 */,
+                          "5. Where the “Company” itself bears the loss arising from the return and obtains the consent of the relevant “Partner Company” for the return, the product may be returned."/* 260604 번역 */,
+                          "6. In the case of a direct purchase transaction, for products sold intensively during a certain period or season (hereinafter “seasonal products”), where the return conditions are specifically agreed upon at the time of contract conclusion and a written document specifying those return conditions is given to the “Partner Company,” the products may be returned."/* 260604 번역 */,
+                          "7. In the case of a direct purchase transaction, where the “Partner Company” voluntarily requests a return before the return date by a written document attaching objective supporting data showing that the return is directly beneficial to it, the product may be returned."/* 260604 번역 */,
+                          "8. For products returned to the “Company” by a franchisee that has gone out of business, the “Company” may return them to the “Partner Company” again. In this case, products that cannot be resold may not be returned."/* 260604 번역 */,
+                          "9. In other cases of direct purchase transactions where there is justifiable reason, the product may be returned. In such cases, the determination of justifiable reason shall be made individually and specifically, comprehensively considering the form and characteristics of the delivery transaction, the intent and purpose of the return, the effect on the “Partner Company,” etc."/* 260604 번역 */
+
+                      ]},
+                    { num: "3", title: "The return under paragraph (2) must be made within a period recognized as reasonable in the relevant field of transactions, and the following cases shall be presumed to be a period recognized as reasonable in the relevant field of transactions."/* 260604 번역 */,
+                        details:[
+                          "1. For the cases under items 3 and 4 of paragraph 2, within 10 business days from the delivery date. However, where there is a reasonable ground that the cause falling under items 3 and 4 of paragraph 2 cannot be immediately discovered by external appearance on the delivery date, the period may be extended by separate mutual agreement."/* 260604 번역 */,
+                          "2. Where the product under items 3 and 4 of paragraph 2 is an agricultural, marine, or livestock product, within 2 days from the time of delivery"/* 260604 번역 */,
+                          "3. For the case under item 6 of paragraph 2, within 30 days from the end of the sales season. However, where it is expected to exceed 30 days due to grounds attributable to the “Company” or the “Partner Company,” the period may be extended by mutual written agreement at least 15 days before the end of the sales season."/* 260604 번역 */]
+                    },
+                ],
+            },
+            {
+                no: "05",
+                title: "Detailed Return Procedures",
+                items: [
+                    {
+                        num: "1",
+                        title: "In the case of returns of products in direct purchase transactions for soiling, damage, or defects, or for supply of products different from those contracted, the Partner Company must be immediately notified and the relevant facts mutually confirmed before proceeding with return procedures.",
+                    },
+                    {
+                        num: "2",
+                        title: "If, as a result of confirmation under paragraph ①, the soiling or damage to the product was caused by the intentional act or negligence of the Company, the return may not be made. However, even in such cases, a return may be made if the Company bears all losses of the Partner Company arising from the soiling, damage, and return of the product, and obtains the Partner Company's consent.",
+                    },
+                    {
+                        num: "3",
+                        title: "In the case of consignment purchase transactions or consignment sale transactions, after the sales period has closed, unsold products must be returned to the Partner Company within the period agreed upon with the Partner Company.",
+                    },
+                    { 
+                        num:"4",
+                        title:"When returning products that have been soiled, damaged, or are defective, upon discovery of such defects, the party to whom the cause of the defect is attributable, whether the Company or the Partner Company, must be mutually confirmed through objective evidence, and the return must be made only when the attributable cause lies with the Partner Company."
+                    },
+                    { 
+                        num:"5",
+                        title:"Where products received differ from contracted products, the Partner Company must be immediately notified of the fact, and the difference from the contracted products must be mutually confirmed with the Partner Company before the return is made."
+                    },
+                    { 
+                        num:"6",
+                        title:"⑥ Where the Company intends to return products while bearing all losses incurred by the Partner Company as a result of the return and having obtained the Partner Company's consent, the Company must consult with the Partner Company in advance on the amount of losses before proceeding with the return."
+                    }
+                ],
+            },
+            {
+                no: "06",
+                title: "Document Exchange and Retention",
+                items: [
+                    {
+                        num: "1",
+                        title: "Where the Company and the Partner Company mutually agree on the return conditions of goods, the Company shall give the Partner Company a written document setting forth such conditions, and the written document shall be signed or sealed by the Company and the Partner Company respectively."/* 260604 번역 */,
+                    },
+                    {
+                        num: "2",
+                        title: "The agreement document may be issued in the form of an electronic document under the Framework Act on Electronic Documents and Transactions, and it is also possible to sign it with a certified electronic signature, etc., under the Digital Signature Act."/* 260604 번역 */,
+                    },
+                    {
+                        num: "3",
+                        title: "As a general rule, the 'Company' shall not have the 'Partner Company' manufacture or order products until it has issued to the supplier a document stating the return conditions. However, even before issuing a document stating the return conditions, the 'Company' may request the manufacture or ordering of products by means of a document signed or affixed with a name and seal by the 'Company.'"/* 260604 번역 */,
+                    },
+                    {
+                        num: "4",
+                        title: "The 'Company' shall retain documents stating the following matters for five years from the date on which the contract with the 'Partner Company' ends."/* 260604 번역 */,
+                        details:[
+                            "1. Return conditions"/* 260604 번역 */,
+                            "2. List of returned products"/* 260604 번역 */,
+                            "3. Quantity of returned products"/* 260604 번역 */,
+                            "4. Transaction form of the returned product (direct purchase, special-contract purchase, consignment transaction)"/* 260604 번역 */,
+                            "5. Return date of the returned product"/* 260604 번역 */,
+                            "6. Delivery payment related to the returned product"/* 260604 번역 */,
+                            "7. Reason for return of the returned product"/* 260604 번역 */,
+                            "8. Where the “Partner Company” requests a return from the “Company” in writing while submitting objective supporting data proving the fact that the relevant return is directly beneficial to it: the written document and supporting data submitted by the “Partner Company”"/* 260604 번역 */,
+                        ]
+                    },
+
+                ],
+            },
+            {
+                no: "07",
+                title: "Prohibition of Other Unfair Trade Practices",
+                lead: "In processing return-related duties with Partner Companies, even if an act is not explicitly stated as mandatory or prohibited under these Standards, the Company shall not abuse its superior position in the trade to disadvantage Partner Companies or impose other unfair trade conditions.",
+            },
+            {
+                no: "08",
+                title: "Receipt and Processing of Reports of Unfair Acts",
+                items: [
+                    { num: "1", title: "If a Partner Company suffers a disadvantage due to unfair treatment resulting from the Company's employees violating these standards, it may submit a report through the Ethics Management reporting page on the Company's website, and the Company must process the reported content through the prescribed procedure." },
+                    { num: "2", title: "In the course of processing the Partner Company's report, the Company shall protect the Partner Company's related information and personal details, and shall ensure that the Partner Company does not receive unfair discriminatory treatment or transaction suspension as a result of the report."},
+                    { num: "3", title: "The Company shall make its best efforts to prevent recurrence of all civil complaint matters arising during transactions with Partner Companies."},
+                ],
+            },
+            {
+                no: "09",
+                title: "Sanctions",
+                items: [
+                    { num: "1", title: "The Company's employees must comply with these standards in performing their duties; if a party is confirmed to have violated these standards intentionally or through gross negligence, sanctions shall be imposed in accordance with the Company's Code of Ethics, etc." },
+                    { num: "2", title: "If a Company employee is found to have committed fraud, embezzlement, breach of trust, receipt of money, improper solicitation, or similar offenses the Company may file a criminal complaint against the relevant employee." },
+                ],
+            },
+            {
+                no: "Supplementary Provisions",
+                title: "",
+                addendumText: "Supplementary Provisions (April 1, 2018)<br />These standards are enacted and take effect on April 1, 2018.<br />Supplementary Provisions (June 11, 2024)<br />These standards are revised and take effect on June 11, 2024.",
+            },
+        ],
+        ComplianceManagerBannerP1:
+            "The compliance manager is appointed by the highest decision-making body, such as the board of directors, for the effective operation of the Fair Trade Compliance Program (CP)."/* 260604 번역 */,
+        ComplianceManagerBannerP2:
+            "The appointed manager supports the compliance of all members with laws and regulations in accordance with the CP standards and procedures, and performs a role to ensure that voluntary compliance activities are realized in the field."/* 260604 번역 */,
+        ComplianceManualTitle: "Fair Trade Voluntary Compliance Handbook"/* 260604 번역 */,
+        ComplianceManualMeta: "(Revised December 2024)",
+        ComplianceManualBtnEbook: "View Fair Trade Compliance Manual e-Book",
+        ComplianceManualBtnDownload: "Download ↓",
+        WhistleGuideSections: [
+            {
+                key: "wg-01",
+                title: "Reporting Usage Guide",
+                desc: "GS Retail strives to uphold its Code of Ethics and Practice Guidelines as the standard of proper conduct and value judgment that all employees must observe.<br />The establishment of a culture of free and safe raising of issues and reporting ensures the sustainable growth of GS Retail."/* 260604 번역 */,
+            },
+            {
+                key: "wg-02",
+                title: "Reporting Operations Policy",
+                desc: "We operate various reporting methods so that all executives and employees, stakeholders, and customers of the company can report any matter that violates or is feared to violate the company's code of ethics and related regulations."/* 260604 번역 */,
+            },
+            {
+                key: "wg-03",
+                title: "Scope of Reporting",
+                desc: "We receive reports of cases of ethical management violations by executives, employees, and Partner Companies (acceptance of money and valuables, entertainment/hospitality, other improper conduct, etc.), unfair transactions and unjust acts, violations of laws and regulations and accounting fraud, and human rights violations such as sexual harassment and rude conduct by executives and employees, as well as other good suggestions for integrity management."/* 260604 번역 */,
+            },
+            {
+                key: "wg-04",
+                title: "Reporting Policy",
+                desc: "The Company thoroughly protects the identity and confidentiality of whistleblowers and protects them from any discrimination, disadvantage, or the like in connection with their report. In addition, a reward may be paid in accordance with the reward policy for whistleblowers."/* 260604 번역 */,
+            },
+            {
+                key: "wg-05",
+                title: "5. Report Processing Procedure",
+                desc: "Reports will be investigated after securing objective evidence, and appropriate follow-up measures will be taken.",
+            },
+            {
+                key: "wg-06",
+                title: "6. Reporting Methods",
+                desc: "Online submission, phone, and email",
+            },
+        ],
+        WhistleProcessSteps: ["Submission of Report", "Receipt and Investigation", "Action against Reported Party"],
+        WhistleRewardPageTitle: "Reporter Reward Program",
+        WhistleRewardSections: [
+            {
+                key: "wr-01",
+                title: "1. Reportable Content",
+                desc: "Reports on fraudulent and unfair acts by the Company's employees<br />Fraudulent and unfair acts by partner companies, etc.",
+            },
+            {
+                key: "wr-02",
+                title: "Reward Eligibility",
+                desc: "Whistleblower: executives and employees and outside members of the public (partner companies/partner company staff/third parties)"/* 260604 번역 */,
+            },
+            {
+                key: "wr-03",
+                title: "Reward Criteria",
+                criteriaTables: [
+                    {
+                        sectionLead:
+                            "Voluntary Self-Reporting<br />&nbsp;&nbsp; The partner company is guaranteed 「transactional benefits by the CEO」."/* 260604 번역 */,
+                        cols: ["Employees", "Partner Companies"],
+                        cells: [
+                            {
+                                sub: "Exemption from or reduction of penalty for voluntary self-reporting within the deadline (within one month of the occurrence); cases where money was demanded first are excluded from eligibility",
+                                desc: "Exemption from or reduction of penalty for voluntary self-reporting within the deadline (within one month of the occurrence); cases where money was demanded first are excluded from eligibility",
+                            },
+                            {
+                                sub: "Guarantee of business-related benefits; the CEO guarantees business-related benefits. The specific benefits are determined through the Company's internal review.",
+                                desc: "Guarantee of business-related benefits; the CEO guarantees business-related benefits. The specific benefits are determined through the Company's internal review.",
+                            },
+                        ],
+                    },
+                    {
+                        sectionLead: "(2) Report by Third Party<br />&nbsp;&nbsp; Rewards of up to 「KRW 100 million」 are granted."/* 260604 번역 */,
+                        cols: ["Monetizable", "Non-monetizable"],
+                        cells: [
+                            {
+                                sub: "If the report can be monetized and contributes to establishing ethical management at the Company, up to KRW 100 million may be paid based on internal standards, taking into account the amount of loss reduction (revenue increase)",
+                                desc: "If the report can be monetized and contributes to establishing ethical management at the Company, up to KRW 100 million may be paid based on internal standards, taking into account the amount of loss reduction (revenue increase)",
+                            },
+                            {
+                                sub: "If the report cannot be monetized and contributes to establishing ethical management at the Company, a fixed amount of KRW 500,000 is paid",
+                                desc: "If the report cannot be monetized and contributes to establishing ethical management at the Company, a fixed amount of KRW 500,000 is paid",
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                key: "wr-04",
+                title: "4. Selection of Reward",
+                desc: "- The content of the report must be verified as fact by the secretariat of the Company's Ethics Committee (Management Diagnosis Team).<br />- The determination and finalization of the reward details (amount or transactional benefit) shall be decided after deliberation by the Company.<br />- Where grounds for reward arise in duplicate, the largest amount or benefit shall be used as the basis."/* 260604 번역 */,
+            },
+            {
+                key: "wr-05",
+                title: "Reward Payment Criteria",
+                desc: "- The commendation money shall be determined by considering the reporter's contribution to detecting and handling the misconduct through their report.<br />- Where two or more reporters report the same misconduct of the same reported person, no reward or commendation money shall be paid to the reporter who reported later.<br />&nbsp;&nbsp;(An exception applies where a later-filed report is used as decisive material in resolving a misconduct case.)<br />- Where two or more persons jointly report the same misconduct of the same reported person, the commendation money shall be paid in equal shares within the scope of the payment criteria."/* 260604 번역 */,
+            },
+            {
+                key: "wr-06",
+                title: "Criteria for Determining Reporter's Contribution",
+                desc: "Accuracy of the report, including credibility of evidence<br />- Whether the reported person's misconduct has already been disclosed by media outlets such as newspapers and broadcasts<br />Whether the reporter engaged in illegal acts related to the report<br />- Whether the reporter was under an obligation to report the misconduct, or whether they reported corruption in connection with their duties<br />The extent to which the reporter contributed to resolving the misconduct case"/* 260604 번역 */,
+            },
+            {
+                key: "wr-07",
+                title: "Results of Report Verification",
+                desc: "Rewards will not be given in the following cases:<br />- Where the content of the report is found to be untrue, or where it is difficult to verify its truth due to insufficient evidence<br />- For reports of unethical conduct not related to work involving external stakeholders (however, acts that cause direct loss to the Company, such as embezzlement of public funds or theft of company assets, are eligible for reward)<br />- Matters already reported, or matters already recognized by the Management Diagnosis Team or other departments or external agencies and currently under investigation, or for which disciplinary procedures, etc. are in progress or have been completed<br />When the matter has been disclosed through media coverage or similar means<br />- Where a report is made anonymously or under a pseudonym such that the reporter's identity cannot be ascertained<br />When the matter is solely related to business process improvement<br />- Where the report is made by an employee of the Management Diagnosis Team or a similar department engaged in investigation-related duties<br />When the reward review determines that compensation is inappropriate for any other reason"/* 260604 번역 */,
+            },
+        ],
+        WhistleProtectPageTitle: "Reporter Protection Program",
+        WhistleProtectPageDesc: "By establishing new employee conduct standards and providing employee training, the Company strengthens confidentiality protections for reporters as follows:",
+        WhistleProtectSections: [
+            {
+                key: "wp-01",
+                title: "Prohibition of revealing and investigating the reporter's identity",
+                desc: "By establishing new employee conduct standards and providing employee training, the Company strengthens confidentiality protections for reporters as follows:<br />1. Prohibition of revealing and investigating the reporter's identity<br />The Management Audit Team, which verifies facts related to reports, is prohibited from disclosing or hinting at the identity of reporters and investigation cooperators without the consent of the reporter.<br />Any employee who becomes aware of a reporter's identity, whether through their duties or by chance, is prohibited from disclosing that identity.<br />Any acts by the reported party, the reported party's department, or other related departments that could expose the reporter's identity, including inquiries to the Management Audit Team about the reporter's identity or investigative activities to identify the reporter, are strictly prohibited.<br />Relevant parties who violate the obligation to protect identity (personnel or business disadvantage) shall be subject to disciplinary action. (Referred to the company-wide Ethics Committee.)<br />The following disadvantageous measures against employees and companies that have submitted reports are prohibited, and employees who impose such disadvantageous measures shall be referred to the company-wide Ethics Committee.",
+                grayBox: {
+                    title: "Definition of Disadvantageous Measures",
+                    desc: "1) Personnel disadvantages amounting to loss of status, such as dismissal, removal from office, discharge, or other loss of status<br />Disciplinary action, suspension, promotion restrictions, or other improper personnel measures<br />3) Personnel measures against one's will, such as transfer, relocation, non-assignment of duties, reassignment of duties, etc.<br />4) Acts that cause mental or physical harm, such as preparing a list of persons subject to caution or disclosing such a list, collective ostracism, assault or abusive language, etc.<br />5) Termination of a goods contract or service contract, or other measures that impose economic disadvantage"/* 260604 번역 */,
+                },
+            },
+            {
+                key: "wp-02",
+                title: "2. When the Reporter's Identity Is at Risk of Exposure",
+                desc: "2. When the Reporter's Identity Is at Risk of Exposure<br />If the reporter's identity is at risk of exposure, the party concerned shall notify the Management Audit Team; the Management Audit Team shall investigate how the identity was exposed and refer the relevant parties to the company-wide Ethics Committee.<br />If the reporter so wishes, they may request a meeting with the Management Audit Team; in such a case, the Management Audit Team may, after reporting to the CEO, recommend immediate personnel measures, such as reassignment or relocation, for the employee who attempted to identify the reporter.",
+            },
+        ],
+        ReportIntroTitle: "This is where you can submit reports of fraudulent or unfair acts by GS Retail employees and partner companies, as well as improvement suggestions.",
+        ReportIntroDesc: "Please refer to the guidance for each menu below when writing your submission.",
+        ReportChannelItems: [
+            {
+                key: "voice",
+                title: "Customer Feedback",
+                desc: "For complaints, inconveniences, or compliments regarding GS25, GS SHOP, GS THE FRESH, or POP, please submit them through the Customer Feedback channel, where the relevant department will respond promptly.",
+                btnText: "Go to Customer Feedback >",
+            },
+            {
+                key: "ethics",
+                title: "Ethics Hotline",
+                desc: "Reports of fraudulent or unfair acts by employees and partner companies → Submit to the investigation department (Management Audit Team)",
+                btnText: "Contact Us >",
+            },
+            {
+                key: "redwhistle",
+                title: "Red Whistle (External Reporting Channel)",
+                desc: "Reports of unfair acts and ethics violations related to GS Retail's Ethics Management<br />⇒ An anonymous reporting system operated by an external organization, with strict protection of anonymity and confidentiality",
+                btnText: "Contact Us >",
+            },
+        ],
+        ReportNotice: [
+            "※ Other reporting methods: GS Retail Management Audit Team (+82-2-2006-2088 / singo@gsretail.com)",
+            "※ GS Retail operates a Reporter Reward Program and a Reporter Protection Program.",
+        ],
+        EthicsReportTargetItems: [
+            {
+                num: "01",
+                title: "Poor Performance of Duties",
+                desc: "Poor Performance of Duties<br />Neglect/insufficiency of duties and concurrent employment (second jobs, etc.)<br />Violation of standards",
+            },
+            {
+                num: "02",
+                title: "Receipt of Money or Gifts and Entertainment",
+                desc: "Receipt of Money or Gifts and Entertainment<br />Acts of giving or receiving money, gifts, or other valuables, or providing entertainment involving the Company's employees",
+            },
+            {
+                num: "03",
+                title: "Financial Transactions and Joint Investment",
+                desc: "Financial Transactions and Joint Investment<br />Acts by the Company's employees involving financial transactions, etc.",
+            },
+            {
+                num: "04",
+                title: "Unfair Trade and Improper Solicitation",
+                desc: "Unfair Trade and Improper Solicitation<br />Non-compliance with standards and unfair acts when opening new stores",
+            },
+            {
+                num: "05",
+                title: "Proposals to improve unreasonable work practices/systems"/* 260604 번역 */,
+                desc: "Request for improvement of unnecessary work"/* 260604 번역 */,
+            },
+            {
+                num: "06",
+                title: "Sexual Harassment and Workplace Bullying",
+                desc: "",
+            },
+        ],
+        EthicsConsentRequired: "[Optional]"/* 260604 번역 */,
+        EthicsConsentItems: [
+            "The information you enter will be transmitted to the relevant department (person in charge) for prompt and accurate processing and will be used to respond to inquiries and complaints.",
+            "- Recipients: the manager of the GS Retail store to which you submitted your inquiry, GS Retail subsidiaries, and the manager (handler) of the manufacturer of products carried by GS Retail"/* 260604 번역 */,
+            "Purpose of Use: Used for confirming inquiries and providing responses",
+            "Personal Information Items: Name, contact number, email address",
+            "- Retention and Use Period: One year after receipt",
+        ],
+        EthicsConsentRequired2: "[Required]"/* 260604 번역 */,
+        EthicsConsentItems2: [
+            "- The information you enter is used solely to verify your inquiry. The items collected, the use and purpose, and the retention and use period are as follows. For other matters concerning the handling of personal information, please refer to the 'Privacy Policy' at the bottom of the website."/* 260604 번역 */,
+            "Items of personal information collected: Name, contact number, email",
+            "- Collection, use, and purpose: Use of the collected personal information to identify the individual and to verify and respond to inquiries"/* 260604 번역 */,
+            "- Retention and Use Period: One year after receipt",
+        ],
+        EthicsCardItems: [
+            {
+                key: "ethics-01",
+                image: imgEthics01,
+                imgAlt: "1. Image related to responsibility and obligations toward customers"/* 260604 번역 */,
+                title: "1. Responsibilities and Obligations to Customers",
+                desc: "1. Responsibilities and Obligations to Customers<br />Under the belief that customers are the foundation of business, the Company respects customer opinions and creates and delivers value that benefits customers, thereby earning customer trust.",
+            },
+            {
+                key: "ethics-02",
+                image: imgEthics02,
+                imgAlt: "2. Image related to fair competition"/* 260604 번역 */,
+                title: "2. Fair Competition",
+                desc: "2. Fair Competition<br />In all business activities worldwide, the Company complies with applicable local laws and regulations and secures a competitive advantage through legitimate means.",
+            },
+            {
+                key: "ethics-03",
+                image: imgEthics03,
+                imgAlt: "3. Image related to fair trade"/* 260604 번역 */,
+                title: "3. Fair Trade",
+                desc: "3. Fair Trade<br />All transactions are conducted on the basis of free competition, with equal participation opportunities guaranteed, and mutual trust and cooperative relationships are built through transparent and fair trade, thereby pursuing mutual growth from a long-term perspective.",
+            },
+            {
+                key: "ethics-04",
+                image: imgEthics04,
+                imgAlt: "4. Image related to the basic ethics of executives and employees"/* 260604 번역 */,
+                title: "4. Basic ethics of executives and employees"/* 260604 번역 */,
+                desc: "4. Basic Ethics of Employees<br />Employees shall establish sound values grounded in honesty and fairness, and fulfill their given mission through continuous self-development and fair execution of duties.",
+            },
+            {
+                key: "ethics-05",
+                image: imgEthics05,
+                imgAlt: "5. Image related to responsibility toward executives and employees"/* 260604 번역 */,
+                title: "5. Responsibility toward executives and employees"/* 260604 번역 */,
+                desc: "5. Responsibilities toward Employees<br />The Company respects all employees as human beings and treats them fairly based on their capabilities and achievements, and endeavors to enable employees to fully express their creativity.",
+            },
+            {
+                key: "ethics-06",
+                image: imgEthics06,
+                imgAlt: "6. Image related to responsibility toward the nation and society"/* 260604 번역 */,
+                title: "6. Responsibilities toward the Nation and Society",
+                desc: "6. Responsibilities toward the Nation and Society<br />Through sound business development, the Company grows into a healthy enterprise that protects shareholder interests and contributes to the prosperity of the people and the advancement of society.",
+            },
+        ],
+        EthicsPracticeItems: [
+            {
+                key: "practice-01",
+                title: "01. Accepting remuneration from stakeholders",
+                desc: "No money, valuables, or the like shall be received from a stakeholder, and when a gift is given, it must be politely declined or returned."/* 260604 번역 */,
+            },
+            {
+                key: "practice-02",
+                title: "02. Joint investment with stakeholders, joint acquisition of assets, and improper equity participation in business partners",
+                desc: "Where executives, employees, and their families jointly invest funds with a stakeholder (regardless of purpose) to jointly acquire movable or immovable property, the amount equivalent to their share shall be deemed to have been received from the stakeholder, and the unjust acquisition of equity in the listed or unlisted securities of a trading company with which there is a conflict of interest is absolutely prohibited."/* 260604 번역 */,
+            },
+            {
+                key: "practice-03",
+                title: "Illegal use of company assets",
+                desc: "The company's tangible and intangible assets, confidential information, and the like are important assets of the company, and these assets must be used only for the company's business activities and approved purposes, and executives and employees are responsible for guarding against the loss, misuse, and theft of assets.​ The company's expenses, as public funds, must be used in accordance with their designated purposes and must comply with the company's standards."/* 260604 번역 */,
+            },
+            {
+                key: "practice-04",
+                title: "Poor Performance of Duties",
+                desc: "Executives and employees shall fulfill their duty of care as a good manager, and shall not commit any act that causes loss to the company or damages its reputation by violating this duty."/* 260604 번역 */,
+            },
+            {
+                key: "practice-05",
+                title: "05. Using one's position for personal gain",
+                desc: "Executives and employees shall not use information or knowledge acquired through their duties for personal profit, and shall not give unjust instructions or make unjust demands to stakeholders over whom they exert business influence by means of their duties."/* 260604 번역 */,
+            },
+            {
+                key: "practice-06",
+                title: "06. Manipulation of documents and figures and false reporting",
+                desc: "No one shall, by intentionally manipulating or falsifying documents or figures contrary to the facts, or by directing or inducing such acts, cloud the decision-making and judgment of a superior or relevant department or cause a misjudgment; and all information shall be recorded and reported accurately and honestly."/* 260604 번역 */,
+            },
+            {
+                key: "practice-07",
+                title: "Prohibition of sexual harassment",
+                desc: "Executives and employees shall not engage in any verbal, physical, or visual conduct that causes offense to others, including any act of sexual harassment that may infringe upon an individual's human rights and undermine the working atmosphere."/* 260604 번역 */,
+            },
+            {
+                key: "practice-08",
+                title: "08. Prohibition of workplace bullying",
+                desc: "Executives and employees shall not, by taking advantage of superiority such as their position or relationships in the workplace and exceeding the appropriate scope of work, commit any act that causes physical or mental suffering to other workers or worsens the working environment."/* 260604 번역 */,
+            },
+            {
+                key: "practice-09",
+                title: "09. Acts that damage the Company's reputation",
+                desc: "No act shall be committed that damages the company's reputation externally through poor job performance or for personal gain."/* 260604 번역 */,
+            },
+        ],
+        EthicsPledgeText: "I hereby pledge to make every effort to uphold the detailed provisions of GS Retail's Code of Ethics.",
+        EthicsPledgeMeta: "20**. 01. 01",
+        EthicsPledgeCompany: "***** Division *** Points *********"/* 260604 번역 */,
+        EthicsPledgeName: "Hong Gil-dong (signature)"/* 260604 번역 */,
+        PurposeFeatureItems: [
+            {
+                title: "Gaining Legitimacy",
+                desc: "Gaining Legitimacy<br />To establish a foundation for gaining social legitimacy regarding the company's reason for existence.",
+            },
+            {
+                title: "Enhancement of Competitiveness",
+                desc: "Enhancement of Competitiveness<br />To enhance the competitiveness of the company and the nation over the long term.",
+            },
+            {
+                title: "Resolution of Friction and Conflicts",
+                desc: "Resolution of Friction and Conflicts<br />By establishing clear behavioral standards, friction and conflicts among members can be effectively resolved.",
+            },
+        ],
+        HistoryItems: [
+            {
+                period: "2016 ~ Present",
+                summary: null,
+                details: [
+                    { term: "Key Company Activities", desc: "- Introduction of a continuous monitoring system" },
+                    { term: null, desc: "- Fair DNA campaign conducted" },
+                    { term: null, desc: "- Support for ethical management activities of subsidiaries" },
+                    { term: null, desc: "- Establishment of Code of Ethics and Integrity Regulations (July 2021)" },
+                    { term: null, desc: "- Reflection of ethical management items in evaluations for all position holders company-wide (2021~)" },
+                ],
+            },
+            {
+                period: "2003 ~ 2015",
+                summary: "Continuous Implementation",
+                details: [
+                    { term: "Key Group Activities", desc: "Launch of Ethics Management TFT (April 2003)" },
+                    { term: null, desc: "Implementation of Code of Ethics and strengthening of fairness and transparency audits at affiliate companies" },
+                    { term: "Key Company Activities", desc: "Transition from fraud investigation audits to pre-emptive business diagnosis" },
+                    { term: null, desc: "Establishment of Ethics Management website (July 2003)" },
+                    { term: null, desc: "GS Retail Forbes Management Quality Grand Prize, 1st place in the Ethical Management category (August 2007)"/* 260604 번역 */ },
+                ],
+            },
+            {
+                period: "2002 ~ 2003",
+                summary: "Establishing the Foundation for Code of Ethics Implementation",
+                details: [
+                    { term: "Key Group Activities", desc: "Operation of a performance-linked evaluation system" },
+                    { term: null, desc: "Verification audits on Code of Ethics compliance" },
+                    { term: "Key Company Activities", desc: "Following the merger of the three companies in July 2002, the Tax Practice Guidelines for the Code of Ethics were established and promulgated (August 2002)."/* 260604 번역 */ },
+                    { term: null, desc: "All employees signed the Code of Ethics Pledge" },
+                    { term: null, desc: "Continued Code of Ethics training for new and experienced hires" },
+                ],
+            },
+            {
+                period: "1995 ~ 2001",
+                summary: "Establishing the Foundation for Code of Ethics Implementation",
+                details: [
+                    { term: "Key Group Activities", desc: "1993: Fairness, honesty, and integrity report" },
+                    { term: null, desc: "1995: Establishment and proclamation of Code of Ethics; completion of fair trade system" },
+                    { term: "Key Company Activities", desc: "Code of Ethics implementation department: Audit Team (1996)" },
+                    { term: null, desc: "April 1996: Code of Ethics training and pledge of commitment to its practice: company-wide, assistant manager level and above"/* 260604 번역 */ },
+                    { term: null, desc: "Operation of unfair practices reporting center; continued internal audit related to fraud and corruption" },
+                ],
+            },
+        ],
     }
 };
 const t = computed(() => {

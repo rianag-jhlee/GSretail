@@ -338,6 +338,108 @@ export default {
                     },
                     CommonLabels: { faqBtn: "멤버십 FAQ", termsBtn: "GS ALL 멤버십 회원약관", nonMemberBtn: "GS25 비회원 적립 서비스 이용 안내서" },
                     ListBack: "목록으로 돌아가기"
+                },
+                en: {
+                    Visual: {
+                        img: require("@/assets/images/sub/gsrbr06/gsrbr06.png"),
+                        imgMo: require("@/assets/images/sub/gsrbr06/gsrbr06_mo.png"),
+                        alt: "GS ALL Membership Main Visual"/* 260604 번역 */,
+                        subContent_1: "Points accumulate automatically"/* 260604 번역 */,
+                        subContent_2: "GS Retail Integrated Membership Service"/* 260604 번역 */,
+                        subContent_3: "GS ALL Membership",
+                    },
+                    Intro: {
+                        title: "GS ALL Membership",
+                        desc: "GS ALL Membership is GS Retail's integrated membership service offering benefits across GS25, GS SHOP, and GS THE FRESH. <br />Achieve VVIP or VIP status at just one brand and enjoy that tier's benefits across all brands — challenge yourself to reach VVIP or VIP!",
+                        noteTitle: "GS ALL Points",
+                        noteDesc: "GS ALL Points is an integrated points program that can be earned and used across all GS Retail brands. Points are automatically accumulated with every purchase at GS25, GS THE FRESH, GS SHOP, and more. Accumulated points can be used like cash at any GS Retail brand location.",
+                        qrTitle: "Download the Our Neighborhood GS app"/* 260604 번역 */,
+                        qrDesc: "Download the Our Neighborhood GS app and discover a variety of events and exclusive products.<br/>Scanning the QR code takes you to the app download page."/* 260604 번역 */,
+                        qrDesc_mo:"GS25's diverse events and distinctive products"/* 260604 번역 */,
+                        
+                    },
+                    MemberGrade: {
+                        title: "1. Membership Tier Guide",
+                        desc: "Your final membership tier is determined by whichever criterion you meet at the highest level.",
+                        tableHeader: ["VVIP", "VIP", "DIAMOND", "GOLD"],
+                        tableRows: [
+                            { brand: "GS25", cells: ["60+ purchase days OR KRW 600,000+ in purchases", "30+ purchase days OR KRW 300,000+ in purchases", "-", "-"] },
+                            { brand: "GS THE FRESH", cells: ["24+ purchase days OR KRW 900,000+ in purchases", "18+ purchase days OR KRW 600,000+ in purchases", "-", "-"] },
+                            { brand: "GS SHOP", cells: ["10+ orders + KRW 200,000+ in purchases", "5+ orders + KRW 150,000+ in purchases", "3+ orders + KRW 100,000+ in purchases", "1+ order + KRW 50,000+ in purchases"] },
+                            { brand: "All Brands Combined", cells: ["2+ brands + KRW 900,000+ in purchases", "2+ brands + KRW 600,000+ in purchases", "-", "-"] },
+                            { brand: "GS ALL Family", cells: ["Tier determined by combining the purchase records of all family group members", "-", "-", "-"] }
+                        ],
+                        guides: [
+                            { label: "· Tier Calculation Example", list: ["- If purchases were made at GS25 for 60 or more days in the previous 3 months, VVIP tier is assigned and VVIP benefits apply across all brands"] },
+                            { label: "· Tier Calculation Period", list: ["- GS25, GS THE FRESH, All Brands: 26th of 3 months prior to 25th of the previous month", "- GS SHOP: 26th of 6 months prior to 25th of the previous month"] },
+                            { label: "· Detailed Tier Calculation Criteria", list: ["- Purchase Days (GS25 / GS THE FRESH): Purchases of KRW 1,000 or more count as 1 day (multiple purchases on the same day are counted as 1 day)", "- Purchase Amount: Excludes tobacco and service products", "- Purchase Count (GS SHOP): Only orders with a payment of KRW 10,000 or more per order number are counted (excluding shipping fees; cancelled or returned orders are excluded)"] }
+                        ]
+                    },
+                    MemberBenefit: {
+                        title: "2. Membership Benefits Guide",
+                        tableRows: [
+                            { brand: "GS25", cells: [
+                                {text:"KRW 3,000 discount coupon (on purchases of KRW 10,000+)"}, {text:"KRW 2,000 discount coupon (on purchases of KRW 10,000+)"}, {text:"-"},{text:"-"}] },
+                            { brand: "GS THE FRESH", cells: [{text:"8 product-specific discount coupons"}, {text:"6 product-specific discount coupons"}, {text:"-"}, {text:"-"}] },
+                            { brand: "GS SHOP", cells: [
+                                {text:"- 5% discount (up to KRW 100,000/month)<br />- TV product GS Pay 5% discount (up to KRW 100,000/month)<br />- Membership Day GS Pay 10% points earned (up to KRW 100,000/month)<br />- Free shipping coupon<br />- VIP exclusive: TV product premium outlet / Wine25+ VIP lounge / VVIP chat support (mobile) / VIP 1:1 chat (PC)<br />- Attendance Check / Happy Tester", isTop: true},
+                                {text:"- 5% discount (up to KRW 50,000/month)<br />- TV product GS Pay 4% discount (up to KRW 80,000/month)<br />- Membership Day GS Pay 8% earned (up to KRW 80,000/month)<br />- VIP exclusive: TV product premium outlet / Wine25+ VIP lounge / VVIP chat support (mobile) / VIP 1:1 chat (PC)<br />- Attendance check / Happy Tester", isTop: true},
+                                {text:"- 5% discount (up to KRW 40,000/month)<br />- TV product GS Pay 3% discount (up to KRW 60,000/month)<br />- Membership Day GS Pay 6% earned (up to KRW 60,000/month)<br />- Attendance check / Happy Tester", isTop: true},
+                                {text:"- 5% discount (up to KRW 30,000/month)<br />- TV product GS Pay 2% discount (up to KRW 40,000/month)<br />- Membership Day GS Pay 4% earned (up to KRW 40,000/month)<br />- Attendance check / Happy Tester", isTop: true}
+                            ] }
+                        ]
+                    },
+                    CouponGuide: {
+                        title: "3. How to Use Tier Coupons",
+                        rows: [
+                            { brand: "GS25", desc: "Redeem via QR code or coupon wallet in the Our Neighborhood GS app (excludes tobacco, alcohol, and service products)" },
+                            { brand: "GS THE FRESH", desc: "Redeem via QR code or coupon wallet in the Our Neighborhood GS app" },
+                            { brand: "GS SHOP", desc: "Redeemable at GS SHOP online and on mobile" }
+                        ]
+                    },
+                    PointGuide: {
+                        title: "4. GS ALL Points Information",
+                        label: "GS ALL Points",
+                        list: [
+                            "Redeemable at GS Retail and GS ALL Points partner affiliates",
+                            "Earning: 0.1% of the amount spent at GS Retail"/* 260604 번역 */,
+                            "Usage: When paying at GS Retail online/offline stores, you can pay at a rate of 10P = 10 KRW"/* 260604 번역 */
+                        ]
+                    },
+                    Notice: {
+                        title: "! Important Notices",
+                        list: [
+                            "· Membership tiers are renewed on the 1st of each month and are valid until the last day of that month.",
+                            "· Meeting the criteria for just one brand is enough to qualify for that tier and its benefits.",
+                            "· New members receive a Welcome tier for their enrollment month, with performance-based tier assignment beginning the following month.",
+                            "Tier Calculation Period <br/>- GS25, GS THE FRESH: Based on order performance over the most recent 3 months (from the 26th of 3 months prior to the 25th of the previous month)<br/>- GS SHOP: Based on order performance over the most recent 6 months (from the 26th of 6 months prior to the 25th of the previous month)"/* 260604 번역 */,
+                            "· Tier benefits are distributed sequentially from the 1st of each month and are valid until the last day of that month.",
+                            "To receive benefits across all brands, members must agree to the GS ALL Membership Terms and Conditions revised in August 2021.",
+                            "· Coupons, card promotion discounts, points, and shipping fees are excluded from tier calculations.",
+                            "· Payments made with a GS Prime Card will be earned as GS&POINT.",
+                            "Tier coupons and GS SHOP discount vouchers cannot have their validity period extended and will automatically expire if unused.<br/> <span style='color:#fb6432'>* Delivery fee coupons and 5% discounts (= GS SHOP discount vouchers) cannot have their validity period extended and will automatically expire if unused.</span>"/* 260604 번역 */,
+                            "· Membership tiers and provided benefits may be changed or discontinued without prior notice at the company's discretion.",
+                            "· Membership tiers obtained through improper means may be adjusted following a post-review."
+                        ]
+                    },
+                    NoticeBrand: {
+                        title: "! Brand-Specific Notices",
+                        brands: [
+                            { name: "GS25", list: ["The number of purchase days is counted as one day even with multiple purchases in a single day, and only transactions of 1,000 KRW or more are recognized."/* 260604 번역 */, "- GS ALL Points can be earned up to 5 times per day.", `
+                            "Tier Coupon Notes<br/>
+                                : Coupons are issued once per month. To receive a coupon, tap the coupon box in the Our Neighborhood GS app. (Coupons are not issued automatically.)<br/>
+                                : Please apply your mobile carrier discount before scanning the coupon barcode.<br/>
+                                : Can be used at offline stores when the payment amount is 10,000 KRW or more.<br/>
+                                : Cannot be combined with other discount coupons.<br/>
+                                : Cannot be used for purchases of tobacco, alcohol, and certain products (volume-based trash bags, over-the-counter emergency medicines, etc.)."
+                            `/* 260604 번역 */] },
+                            { name: "GS THE FRESH", list: ["- Multiple purchases made on the same day count as 1 purchase day, and only transactions of KRW 1,000 or more qualifying for point accumulation are recognized.", "- Tier coupons are redeemable at offline stores."] },
+                            { name: "GS SHOP", list: ["- Benefits are available immediately upon completing identity verification after signing up via mobile or the website.", "- Only orders with a payment of KRW 10,000 or more are counted (excluding shipping fees, cancelled orders, and returns).", "· GS SHOP<br />- Benefits are available immediately upon completing identity verification after signing up via mobile or the website.<br />- Only orders with a payment of KRW 10,000 or more are counted (excluding shipping fees, cancelled orders, and returns).<br />- GS SHOP discount vouchers are valid for 1 month or 3 months from the date of issuance.<br />▶ The 5% discount voucher (= GS SHOP discount voucher) is valid for 1 month from the date of issuance.<br />: Available only when the voucher balance is 5% or more of the payment amount.<br />: Only applicable when visiting www.gsshop.com directly.<br />: Cannot be combined with partner affiliate discounts or point accumulation, or applied to certain products (low-priced items, gift certificates, GS insurance products, etc.).<br />: Applied in order of soonest expiry.<br />- Some customers (non-members, those without completed identity verification, etc.) are excluded from benefit eligibility.<br />- Points from product purchases are accumulated upon delivery completion.<br />- Points from event promotion participation are distributed on the pre-announced accumulation date.<br />- Redeemable in increments of 1P."] },
+                            { name: "Our Neighborhood GS", list: ["- Points from GS25 and GS THE FRESH delivery and pick-up purchases, and GS THE FRESH pre-orders, are earned upon receipt or delivery completion.", "- Points from GS25 pre-orders, One Plus Con, and Wine25 Plus purchases are earned upon payment completion.", "- Gift certificates, Our Neighborhood GS Club subscription fees, and tobacco (including e-cigarettes) are excluded from point accumulation.", "- A minimum of 10P is required for point redemption."] }
+                        ]
+                    },
+                    CommonLabels: { faqBtn: "Membership FAQ", termsBtn: "GS ALL Membership Terms and Conditions", nonMemberBtn: "GS25 Non-Member Points Service User Guide" },
+                    ListBack: "← Back to Brand List"
                 }
             }
         };

@@ -117,6 +117,44 @@ export default {
                         { thumb:  require("@/assets/images/dummy/thumb_news_02-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", sub: "GS리테일의 2025년 하반기 주요 경영성과와 사업부문별 성장 전략을 영상으로 만나보세요." },
                         { thumb:  require("@/assets/images/dummy/thumb_news_02-3.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", sub: "GS리테일의 2025년 하반기 주요 경영성과와 사업부문별 성장 전략을 영상으로 만나보세요." },
                     ]
+                },
+                en: {
+                    MainTitle: "GS Retail Factbook",
+                    MainsubTitle: "Everything you were curious about GS Retail — no need to search here and there anymore.<br/> We have organized clear answers to the questions you ask most often in an easy-to-read format."/* 260604 번역 */,
+
+                    sTabIdx: 0, //최초 선택된 탭 index
+                    subTabs: [ //탭 아이템 배열
+                        { item: "All" },
+                        { item: "Category 1"/* 260604 번역 */ },
+                        { item: "Category 2"/* 260604 번역 */ },
+                        { item: "Category 3"/* 260604 번역 */ },
+                        { item: "Category 4"/* 260604 번역 */ },
+                        { item: "Category 5"/* 260604 번역 */ },
+                        { item: "Category 6"/* 260604 번역 */ },
+                        { item: "Category 7"/* 260604 번역 */ }
+                    ],
+
+                    /* Search 컴포넌트 전용 옵션 (props: search_opt) */
+                    SearchOptions: [
+                        { value: "all", label: "All" },
+                        { value: "title", label: "Title" },
+                        { value: "content", label: "Details" }
+                    ],
+
+                    placeholder: "Enter search term"/* 260604 번역 */,
+
+                    /* 리스트 데이터 */
+                    ListData: [
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS Shop strengthens its premium fashion competitiveness with 'Style NOW The Kim Dong-eun'"/* 260604 번역 */, cate: "GS SHOP", date: "2026.00.00" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS Shop strengthens its premium fashion competitiveness with 'Style NOW The Kim Dong-eun'"/* 260604 번역 */, cate: "GS SHOP", date: "2026.00.00" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS Shop strengthens its premium fashion competitiveness with 'Style NOW The Kim Dong-eun'"/* 260604 번역 */, cate: "GS SHOP", date: "2026.00.00" },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS Shop strengthens its premium fashion competitiveness with 'Style NOW The Kim Dong-eun'"/* 260604 번역 */, cate: "GS SHOP", date: "2026.00.00" },
+                    ],
+                    ListData2: [
+                        { thumb:  require("@/assets/images/dummy/thumb_news_02-1.png"), title: "GS Shop strengthens its premium fashion competitiveness with 'Style NOW The Kim Dong-eun'"/* 260604 번역 */, sub: "Watch a video on GS Retail's key management performance in the second half of 2025 and its growth strategies by business division."/* 260604 번역 */ },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_02-2.png"), title: "GS Shop strengthens its premium fashion competitiveness with 'Style NOW The Kim Dong-eun'"/* 260604 번역 */, sub: "Watch a video on GS Retail's key management performance in the second half of 2025 and its growth strategies by business division."/* 260604 번역 */ },
+                        { thumb:  require("@/assets/images/dummy/thumb_news_02-3.png"), title: "GS Shop strengthens its premium fashion competitiveness with 'Style NOW The Kim Dong-eun'"/* 260604 번역 */, sub: "Watch a video on GS Retail's key management performance in the second half of 2025 and its growth strategies by business division."/* 260604 번역 */ },
+                    ]
                 }
             }
         };

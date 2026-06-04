@@ -433,6 +433,137 @@ export default {
                     ],
                     backLabel : '목록으로 돌아가기'
                 },
+                en: {
+                    Labels: {
+                        phone: "Phone",
+                        email: "Email",
+                        conditionInfo: "Leasing Terms",
+                        mallIntro: "About our commercial facilities"/* 260604 번역 */,
+                        sns: "Instagram"/* 260604 번역 */,
+                        blog: "Blog",
+                        phoneNum: "Phone Number"
+                    },
+                    Visual: { 
+                        img: require("@/assets/images/dummy/gsrbr1101.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr1101_mo.png"),
+                        alt: "GS THE FRESH Main Visual"/* 260604 번역 */,
+                        subContent_1: "Real Estate"/* 260604 번역 */,
+                        subContent_2: "Development and Leasing"/* 260604 번역 */,
+                    },
+                    SubContent_1: `GS Retail's real estate development and leasing division. We provide end-to-end solutions covering commercial real estate development, leasing, and management, while conducting optimal location analysis and building high-yield real estate portfolios.`,
+                    SubContent_2: `From commercial real estate development to leasing and management<br/> We provide a total solution.`/* 260604 번역 */,
+                    SubContent_3: `Optimal location analysis and<br/> We build a highly profitable real estate portfolio.`/* 260604 번역 */,
+                    Tabs1: [{ item: "Subway" }, { item: "Shopping Mall" }],
+                    Tabs2_Mall: [{ item: "Anyoung Insadong" }, { item: "Guro G-Valley Mall" }, { item: "Pangyo Pameus Mall" }, { item: "East Busan Misik Ilsang" }],
+                    SubwayData: {
+                        img: require("@/assets/images/dummy/gsrbr1101_subway.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr1101_subway_mo.png"),
+                        title: `Sinbundang Line Phase 1 & 2 Retail Space Leasing`,
+                        principles: [
+                            { subTitle: `Fastest Access to Gangnam`, desc: [`01. Gangnam Station to Jeongja Station in approximately 16 minutes (approximately 30 minutes faster than the existing Bundang Line)`, `02. Relieves traffic congestion for commuters using express buses and private vehicles`] },
+                            { subTitle: `High Foot Traffic`, desc: [`01. 4 out of 6 stations are transfer stations`, `02. Connected to Gangnam Station, the top office and commercial hub in Gangnam`], txt:[`Gangnam (Line 2), Yangjae (Line 3), Pangyo, Jeongja (Bundang Line)`,`Gangnam (Line 2), Yangjae (Line 3), Pangyo, Jeongja (Bundang Line)`] },
+                            { subTitle: `Optimized Station Environment`, desc: [`01. Modern interior design with high ceilings (3.6m) for a spacious, open feel`] }
+                        ],
+                        routeMapImg: require("@/assets/images/dummy/gsrbr1101_subway.png"),
+                        contact: { 
+                            연락처:"Contact",
+                            전화:"Phone",
+                            phone: `02-2006-3198`, 
+                            이메일:"Email",
+                            email1: `hyungwook.lim@gsretail.com` ,
+                            email2: `masiaeve@gsretail.com` ,
+                        },
+                        conditions: [
+                            {
+                                name: `Retail Space`, img: require("@/assets/images/dummy/subway_shop.png"),
+                                table: [
+                                    { th: `Monthly Rent`, td: `Proposed by tenant` },
+                                    { th: `Lease Deposit`, td: `Monthly rent × 12 months` },
+                                    { th: `Contract Period`, td: `Phase 1: Until December 31, 2026 / Phase 2: Until August 15, 2028` },
+                                    { th: `Area`, td: `Varies by station` },
+                                    { th: `Recommended Business Types`, td: `Apparel, convenience services, daily goods, desserts, etc.` }
+                                ]
+                            },
+                            {
+                                name: `Kiosk`, img: require("@/assets/images/dummy/subway_kiosk.png"),
+                                table: [
+                                    { th: `Monthly Equipment Usage Fee`, td: `Proposed by tenant` },
+                                    { th: `Payment Method`, td: `6-month prepayment` },
+                                    { th: `Contract Period`, td: `6-month units` },
+                                    { th: `Security Deposit`, td: `3 months' usage fee` },
+                                    { th: `Recommended Business Types`, td: `Accessories, general goods, etc.` }
+                                ]
+                            }
+                        ],
+                    },
+                    lease_subtitle: `Lease Type`,
+                    lease_subtitle_desc_1: `- Security deposit / Fixed monthly rent`,
+                    lease_subtitle_desc_2: `Deposit/Variable Monthly Rent`/* 260604 번역 */,
+                    lease_subtitle_desc:{
+                        principles: [
+                            { subTitle: `- Security deposit / Fixed monthly rent`},
+                            { subTitle: '- Security deposit / Variable monthly rent (commission-based)', subtxt: '(Commission-based)'/* 260604 번역 */ }
+                        ],
+                    },
+                    fee_tip_title: `What is the Commission-Based Lease?`, 
+                    fee_tip_desc_1: `A method of paying the landlord rent as a set percentage of monthly net sales. e.g., monthly net sales x commission rate (VAT excluded)`/* 260604 번역 */,    
+                    mall_txt:'Contact',
+                    MallData: [
+                        { 
+                            홈페이지:'Homepage',
+                            name: `Anyoung Insadong`, contentTitle: `Anyoung Insadong Mixed-Use Commercial Complex`,
+                            intro: [
+                                {title:`Insadong landmark`/* 260604 번역 */,desc:`01. A mixed-use cultural and commercial complex located across from Ssamziegil in Insadong. Since its grand opening in October 2019, it has established itself as a landmark of Insadong.`},
+                                {title:`Constantly crowded area`/* 260604 번역 */,desc:`02. Consistently frequented by office workers, international visitors, families on outings, and tourists, with excellent walkability along the Insadong–Ikseon-dong corridor and a distinctive building presence.`},
+                                {title:`MD lineup specialized for the customer experience`/* 260604 번역 */,desc:`03. A diverse mix of galleries, cafes, dining, and specialty stores creates a vibrant streetscape, with tenant mix curated to reflect the area's traditional cultural character and enhance customer experience.`},
+                                {title:`Differentiated facilities`/* 260604 번역 */,desc:`04. Distinctive facilities including a Nine Tree Hotel stay package and parking, enabling extended visits by domestic and international guests (staycation + mallcation)`}
+                            ], 
+                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
+                            mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.1734625641543!2d126.98088067587412!3d37.574532872036556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ef4127fbcd%3A0xdff366a8dbc227d6!2z7JWI64WV7J247IKs64-Z!5e0!3m2!1sko!2skr!4v1775627958896!5m2!1sko!2skr`,
+                            contact: { phone: `02-6954-2991`, email1: `anyounginsadong@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
+                            type:`card_type`
+                        },
+                        { 
+                            홈페이지:'Homepage',
+                            name: `Guro G-Valley Mall`, contentTitle: `Guro G-Valley Biz Plaza — G-Valley Mall`,
+                            intro: [
+                                {title:`01. The hottest trending brands in Guro`},
+                                {title:`The largest in Guro Digital Complex<br/> Arcade mall`/* 260604 번역 */},
+                                {title:`Family Gatherings/Community/Business<br/> Dining/Clinics & Hospitals/Healthcare`/* 260604 번역 */},
+                                {title:`04. A space for cultural performances, exhibitions, and community events`},
+                                {title:`05. Ample parking and a comfortable front terrace for relaxation`},
+                                {title:`Lifestyle conveniences (clinics, convenience stores)<br />Fully equipped with retail stores`/* 260604 번역 */}
+                            ], 
+                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
+                            mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
+                            contact: { phone: `02-2006-3199`, email1: `sigar11@gsretail.com`, snsLabel: `SNS`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
+                            type:`card_type`
+                        },
+                        { 
+                            홈페이지:'Homepage',
+                            name: `Pangyo Pameus Mall`, contentTitle: `Pangyo Pameus Mall`,
+                            intro: [
+                                `With your children, with friends, with your partner — <br />we invite you to Pameus Mall in Pangyo, where you can enjoy it your own way or all together.`,
+                                `South Korea's premier self-sufficient new town of Pangyo is home to 'PAMEUS MALL' — a mixed-use cultural and commercial space where diverse lifestyles harmoniously converge. PAMEUS MALL is part of a complex spanning approximately 254,545㎡ of total floor area, encompassing a 315-room Nine Tree Hotel, 785 serviced apartments, and offices for five companies. The lower floors, spanning approximately 28,596㎡, house a rich variety of commercial and cultural facilities including a cinema, medical center, kids' zone, shopping, cafes, and restaurants — offering everything local residents need for a fulfilling day.`,
+                            ], 
+                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"),
+                            mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
+                            contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
+                        },
+                        { 
+                            홈페이지:'Homepage',
+                            name: `East Busan Misik Ilsang`, contentTitle: `East Busan Misik Ilsang`,
+                            intro: [
+                                `<b>Misik Ilsang is a cultural complex of approximately 3,000 pyeong located at the center of the Osiria Tourism Complex,<br />Since its completion in June 2021, it has been preparing to take a new leap forward as an unrivaled 'cultural complex' that combines F&B with diverse experiential content.</b>`/* 260604 번역 */,
+                                `The Osiria Tourism Complex draws approximately 40 million visitors annually, made up largely of nearby visitors who arrive within an hour by car,<br />It is a 'stable backbone demand commercial area' that goes beyond one-time tourists, with a high revisit rate and sustained spending power.<br />In particular, Misik Ilsang is situated among Lotte Outlets, Lotte World, the Luge, and Bounce Universe, giving it the drawing power and scalability to connect the surrounding facilities.`/* 260604 번역 */
+                            ], 
+                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"),
+                            mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
+                            contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` }
+                        }
+                    ],
+                    backLabel : '← Back to Brand List'
+                }
             }
         };
     },

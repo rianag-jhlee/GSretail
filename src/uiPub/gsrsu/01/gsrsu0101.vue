@@ -706,6 +706,302 @@ export default {
                         },
                     ],
                 },
+                en: {
+                    MainTitle: "Sustainability Management",
+                    MainsubTitle: "Sustainable management",
+                    MainDesc: "Following the launch of the integrated GS Retail, the Company established the ESG vision 'Green Life Together' to create sustainable corporate value.\nTo realize this mid-to-long-term vision, we are pursuing detailed environmental and social strategies and initiatives,\nand we will continue to communicate our implementation status and sustainable management performance with our stakeholders."/* 260604 번역 */,
+                    Tabs1: [{ item: "Vision and Strategy" }, { item: "ESG Resource Center" }, { item: "Sustainability Report" }],
+                    TabsEsgArchive: [
+                        { item: "Environmental Management Resources" },
+                        { item: "Mutual Growth Management Resources" },
+                        { item: "ESG Performance" },
+                        { item: "Social Contribution Awards" },
+                    ],
+
+                    // [Tab 1] 비전&전략
+                    VisionTogetherAria: "Green Life Together — Environment & Society"/* 260604 번역 */,
+                    VisionMainTitle: "Green Life Together.",
+
+                    // [Tab 1] 지배구조헌장 전체 데이터 (KO)
+                    CharterTitle: "Green Life Together!", 
+                    PolicyIntroTitle: "Preamble",
+                    PolicyIntroDesc: "GS Retail Co., Ltd. (hereinafter the 'Company') aspires to build trust with all stakeholders on the foundation of a sound corporate governance structure, and to rise as a company that leads customer Life Innovation through relentless challenge. To achieve this vision, this Corporate Governance Charter is hereby enacted. In accordance with this Charter, the Company shall establish a sound governance structure, including the protection of shareholder rights, the roles and responsibilities of the Board of Directors, and the independent operation of professional audit bodies, to pursue fair and transparent management practices and continuously advance the rights and interests of all stakeholders, including shareholders, customers, and employees.",
+                    PolicySections: [
+                        {
+                            title: "I. Shareholders",
+                            content: [
+                                { subTitle: "1. Shareholder Rights", list: [
+                                    "① Shareholders are the owners of the Company and are guaranteed the basic rights protected by relevant statutes, including the right to participate in profit distribution, the right to attend the general meeting of shareholders and exercise voting rights, and the right to propose agenda items for the general meeting of shareholders."/* 260604 번역 */,
+                                    "② Among matters prescribed by relevant statutes, such as amendment of the Articles of Incorporation, mergers, transfer or acquisition of business, corporate division, dissolution, and capital reduction, those that bring about material changes to the Company's existence and shareholders' rights shall be decided at the general meeting of shareholders, guaranteeing shareholders' rights to the greatest extent."/* 260604 번역 */,
+                                    "③ The Company strives to ensure that resolutions of the general meeting of shareholders are made through transparent and fair procedures, and provides shareholders, before they attend the general meeting, with sufficient information regarding the date, time, and place of the meeting, the agenda items, and the methods of exercising voting rights."/* 260604 번역 */,
+                                    "④ The exercise of shareholder rights shall be carried out in accordance with the free will of the shareholders."/* 260604 번역 */
+                                ]},
+                                { subTitle: "2. Equal Treatment of Shareholders", list: [
+                                    "① Shareholders are guaranteed their rights in accordance with the principle of one vote per share. However, where the voting rights of a particular shareholder are restricted pursuant to statutes, the relevant statutes shall apply. The Company treats shareholders equitably in accordance with the standards prescribed by the Commercial Act and relevant statutes, so that the essential rights of shareholders are not impaired."/* 260604 번역 */,
+                                    "② The Company provides shareholders with the information they need in a timely manner, organized in an easily understandable way, and through an equitable method. The Company also strives to protect shareholders from unfair related-party transactions and self-dealing."/* 260604 번역 */
+                                ]},
+                                { subTitle: "3. Shareholder Responsibilities", list: [
+                                    "① Shareholders shall actively exercise their voting rights for the development and benefit of the Company."/* 260604 번역 */,
+                                    "② A controlling shareholder who exercises influence over the Company's management shall exercise its shareholder rights in consideration of the interests of the Company and all other shareholders, and shall endeavor not to cause harm to other shareholders by abusing its controlling power."/* 260604 번역 */
+                                ]}
+                            ]
+                        },
+                        {
+                            title: "II. Board of Directors",
+                            content: [
+                                { subTitle: "1. Functions of the Board of Directors", list: [
+                                    "① The Board of Directors holds comprehensive authority over management pursuant to the relevant statutes, determines the Company's basic management objectives for the benefit of the Company and its shareholders, and deliberates and resolves on the Company's major decision-making matters as prescribed by relevant rules such as statutes, the Articles of Incorporation, and the Board of Directors Regulations."/* 260604 번역 */,
+                                    "② The Board of Directors supervises the activities of management to ensure transparent and fair conduct of the Company's business and to prevent the impairment of shareholder value."/* 260604 번역 */,
+                                    "③ The Board of Directors may delegate authority to the Representative Director or to a committee within the Board, except for major matters for which delegation is not permitted under relevant statutes, the Articles of Incorporation, or the Board of Directors Regulations."/* 260604 번역 */
+                                ]},
+                                { subTitle: "2. Board Composition", list: [
+                                    "① The Company composes the Board of Directors of six or more directors to enable diverse discussions and efficient decision-making at the Board, and, to ensure the independence of the Board, outside directors shall constitute a majority of the total number of Board members."/* 260604 번역 */,
+                                    "② To strengthen its supervisory function over the Company's transparent management, the Board of Directors establishes an Audit Committee, and may establish committees within the Board, as prescribed by other statutes and the Articles of Incorporation, for the objective and expert deliberation of each agenda item submitted."/* 260604 번역 */
+                                ]},
+                                { subTitle: "3. Director Appointment", list: [
+                                    "① Directors shall be appointed by resolution of the general meeting of shareholders from among candidates selected through methods such as recommendation by the Board of Directors, recommendation by the Outside Director Candidate Recommendation Committee, or recommendation by shareholders; and the Company strives to ensure that candidates whose expertise has been sufficiently verified are appointed as directors, so that Board-centered corporate management can be achieved."/* 260604 번역 */,
+                                    "② The Representative Director shall be appointed by resolution of the Board of Directors from among the directors appointed at the general meeting of shareholders."/* 260604 번역 */,
+                                    "③ The Chairperson of the Board of Directors shall be appointed by resolution of the Board from among the directors appointed at the general meeting of shareholders, and concurrent service as the Representative Director shall be avoided."/* 260604 번역 */
+                                ]},
+                                { subTitle: "4. Director Qualifications", list: [
+                                    "① Internal directors shall possess abundant experience and expertise related to the Company's business and shall be able to contribute to the Company's development and the enhancement of shareholder value."/* 260604 번역 */,
+                                    "② Outside directors shall be persons with sufficient knowledge and expertise in fields such as law, finance, accounting, new business, IT-Tech, and the public sector, who have no material interest in the Company and whose independence has been verified."/* 260604 번역 */
+                                ]},
+                                { subTitle: "5. Board Operations", list: [
+                                    "① The Board of Directors operates as regular Board meetings and extraordinary Board meetings convened as necessary; and for the smooth operation of the Board, the Company enacts and operates Board of Directors Regulations that specifically prescribe the authority, responsibilities, and operating procedures of the Board."/* 260604 번역 */,
+                                    "② For the smooth operation of the committees within the Board of Directors, the Company enacts and operates committee regulations that specifically prescribe the authority, responsibilities, and operating procedures of the committees."/* 260604 번역 */,
+                                    "③ The Company shall prepare and retain minutes recording the proceedings of Board of Directors meetings and the substance of important deliberations."/* 260604 번역 */
+                                ]},
+                            ]
+                        },
+
+                    ],
+                    esgTitle: "ESG Governance"/* 260604 번역 */,
+                    esgDesc: "GS Retail has established and operates an ESG governance structure encompassing practical working organizations, including the ESG Self-Directed Research Group (ESG-Jajuyeon), as well as the ESG Committee within the Board of Directors, to ensure actionable ESG management.",
+                    esgFlowItems: [
+                        {
+                            title: "ESG Committee",
+                            meta: "Within the Board of Directors",
+                            desc: "Approval of major ESG-related agenda items through the ESG Committee under the Board of Directors",
+                            connectorLeft: "Approval",
+                            connectorRight: "Report",
+                        },
+                        {
+                            title: "ESG Promotion Council",
+                            meta: "CEO and 8 C-Level Executives",
+                            desc: "Decision-making on ESG-related matters through a quarterly CEO-led Promotion Council",
+                            connectorLeft: "Decision-Making",
+                            connectorRight: "Agenda Submission",
+                        },
+                        {
+                            title: "ESG General Secretariat",
+                            meta: "Sustainability Management Division / ESG Team",
+                            desc: "Dedicated ESG Implementation Departments",
+                            connectorLeft: "Results Sharing",
+                            connectorRight: "Task collection",
+                        },
+                        {
+                            title: "ESG Working Group",
+                            meta: "",
+                            desc: "Quick consultation on ESG implementation progress and emerging issues",
+                            connectorLeft: "Results Sharing",
+                            connectorRight: "Task coordination and implementation review",
+                        },
+                        {
+                            title: "BU-Level ESG Self-Directed Research Group (ESG-Jajuyeon)",
+                            meta: "",
+                            desc: "ESG task implementation teams (task planning and execution)",
+                            connectorLeft: "",
+                            connectorRight: "",
+                        },
+                    ],
+                    esgFlowNote: "* Jajuyeon: Self-Directed Research Group",
+                    esgTableHeader: "Key Sector Committees and Councils",
+                    esgTableLeftItems: [
+                        "[Environment] Environmental Impact Assessment Committee [Employees] Labor-Management-Government Council [Store Owners] Store Owner Council",
+                        "[Employees] Labor-Management-Government Council"/* 260604 번역 */,
+                        "Store Owner Council",
+                    ],
+                    esgTableRightItems: [
+                        "[Partners] Partner Briefing Session [Personal Data] Information Security Council [Social Contribution] Social Contribution Review Committee",
+                        "[Personal Information] Information Security Countermeasures Committee"/* 260604 번역 */,
+                        "[Social Contribution] Social Contribution Review Committee"/* 260604 번역 */,
+                    ],
+                    bnbpTitle: "BNBP (Biz N Biodiversity Platform) Initiative",
+                    esgCommitteeDetailImageAlt: "BNBP logo image"/* 260604 번역 */,
+                    esgBnbpContents: [
+                        "BNBP (Biz N Biodiversity Platform) is an initiative established in 2016 to help companies recognize their international and social responsibilities regarding the conservation and sustainable use of biodiversity, and to support the integration of biodiversity protection into all aspects of business operations.",
+                        "Through its participation in the BNBP, GS Retail recognizes its corporate social responsibility for biodiversity conservation and will continue its efforts to lead a life of coexistence and harmony."/* 260604 번역 */,
+                    ],
+                    esgChangwonTitle: "Changwon Initiative",
+                    esgChangwonContents: [
+                        "In 2011, the 10th Conference of the Parties (COP10) to the United Nations Convention to Combat Desertification (UNCCD) was successfully held in Changwon, South Gyeongsang Province, and the 'Changwon Initiative' was launched as a key outcome. The Changwon Initiative plays a significant role in contributing to Land Degradation Neutrality (LDN), corresponding to SDG 15.3, and supports forest restoration efforts.",
+                        "In 2011, the 10th Conference of the Parties (COP10) to the United Nations Convention to Combat Desertification (UNCCD) was successfully held in Changwon, South Gyeongsang Province, and the 'Changwon Initiative' was launched as a key outcome. The Changwon Initiative plays a significant role in contributing to Land Degradation Neutrality (LDN), corresponding to SDG 15.3, and supports forest restoration efforts.<br />In October 2021, on the occasion of the 10th anniversary of the Changwon Initiative, GS Retail declared its support for and participation in efforts to prevent land degradation. In addition, the Company signed MOUs with the Korea Forest Service and the UNCCD Secretariat, actively participating in activities to prevent land degradation. Specifically, GS Retail implemented community participation programs to mitigate yellow dust and drought, including the creation of communal village forests. Through partnerships with governments, corporations, international organizations, and civil society groups, the Company has implemented forest restoration projects, contributing more effectively to environmental improvement and biodiversity conservation in local communities.",
+                    ],
+
+                    // [Tab 2] ESG 자료실
+                    tab2: {
+                        stab1: {
+                            title: "You can view performance data related to GS Retail's environmental management.",
+                            desc: "This document contains GS Retail's information assets and employee information disclosed for stakeholders, institutions, and shareholders. Any unauthorized use or illegal disclosure may be subject to legal penalties.",
+                        },
+                        stab2: {
+                            title: "You can view performance data related to GS Retail's mutual growth management.",
+                            desc: "This document contains GS Retail's information assets and employee information disclosed for stakeholders, institutions, and shareholders. Any unauthorized use or illegal disclosure may be subject to legal penalties.",
+                        },
+                        stab3: {
+                            tableTitle: [
+                                { title1: "Item"/* 260604 번역 */, title2: "KCGS", title3: "", title4: "", title5: "", title6: "SUSTINVEST", rs1: 2, cs1: 1, rs2: 1, cs2: 4, rs6: 2, cs6: 1, class1: "ac th_item", class2: "ac", class6: "ac th_sustin_best" },
+                                { title1: "", title2: "Overall Rating", title3: "Environment", title4: "Social", title5: "Governance", title6: "", rs2: 1, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1, rs5: 1, cs5: 1, class2: "ac normal", class3: "ac normal", class4: "ac normal", class5: "ac normal" },
+                            ],
+                            tableData: [
+                                { title: "2025", item1: "A+", item2: "A+", item3: "A+", item4: "A", item5: "AA" },
+                                { title: "2024", item1: "A+", item2: "A+", item3: "A+", item4: "A", item5: "AA" },
+                                { title: "2023", item1: "A", item2: "A+", item3: "A", item4: "A", item5: "A" },
+                                { title: "2022", item1: "A", item2: "B+", item3: "A", item4: "A", item5: "-" },
+                                { title: "2021", item1: "A", item2: "A", item3: "A", item4: "A", item5: "-" },
+                            ],
+                            listData: [
+                                { desc: "Evaluation Bodies: Korea Corporate Governance Service (KCGS), SUSTINVEST" },
+                                { desc: "ESG Evaluation: Conducted annually for the purpose of providing intuitive information on the Company's ESG level and supporting its use in investment decision-making."/* 260604 번역 */ },
+                            ],
+                        },
+                        stab4: {
+                            title: "Here, we highlight the community sharing activities GS Retail has consistently carried out with its employees, store owners, and customers through GS Nanumi volunteering, donations, and more.",
+                            desc: "Since 2006, GS Retail has been consistently engaging with local communities through GS Nanumi volunteering, donations, and other sharing activities together with its employees, store owners, and customers.\nWe continue to take part in these sharing activities together.\nGoing forward, we will continue to practice warm, everyday sharing and share our hearts with others."/* 260604 번역 */,
+                            tableTitle: [
+                                { title1: "Year"/* 260604 번역 */, title2: "Category", title3: "Award Name", title4: "Competition"/* 260604 번역 */, title5: "Department" },
+                            ],
+                            tableData: [
+                                { title: "2025", item1: "Volunteering", item2: "Hwaseong Special City Council Commendation", item3: "Hwaseong City Southern General Social Welfare Center", item4: "CVS Division 3 Region 4 GS Nanumi", rs1: 2,},
+                                { title: "", item1: "Volunteering", item2: "Member of the National Assembly Commendation", item3: "2025 Changyeong Welfare Day", item4: "CVS Division 3 Region 4 GS Nanumi"},
+                                { title: "2024", item1: "Donation", item2: "Hallym Burn Foundation Certificate of Appreciation (Muscular Firefighter Hope Sharing Calendar Campaign)", item3: "Hallym Burn Foundation", item4: "GS Retail", rs1: 4},
+                                { title: "", item1: "Volunteering", item2: "Woorimodu Welfare Foundation Deungchon 9 General Social Welfare Center Certificate of Appreciation", item3: "", item4: "GS Nanumi Organizational Culture Service Team Direct Chapter" },
+                                { title: "", item1: "Donation", item2: "4th Korea Good Donor Award – Prime Minister's Commendation", item3: "Hosted by Ministry of the Interior and Safety", item4: "GS Retail" },
+                                { title: "", item1: "Volunteering", item2: "Korea Association of Sharing and Practice Commendation", item3: "Hwaseong City Southern General Social Welfare Center", item4: "CVS Division 3 Region 4 GS Nanumi" },
+                                { title: "2023", item1: "Other", item2: "Gyeongsangbuk-do Governor's Commendation (Participation in mental health and suicide prevention initiatives, contribution to promoting a culture of respect for life)", item3: "", item4: "CVS Division 5 (Park Seo-woo)", rs1: 8 },
+                                { title: "", item1: "Other", item2: "Jeonju Mayor's Commendation (Active participation in suicide prevention initiatives, contribution to spreading life-respect culture)", item3: "", item4: "CVS Division 4" },
+                                { title: "", item1: "Other", item2: "Gangwon Special Self-Governing Province Governor's Commendation (Contribution to the advancement and successful development of Gangwon Province)", item3: "Gangwon Province Merit", item4: "GS Retail (Executive Director Kwak Yong-gu)" },
+                                { title: "", item1: "Donation", item2: "Hallym Burn Foundation Certificate of Appreciation (Muscular Firefighter Hope Sharing Calendar Campaign)", item3: "Hallym Burn Foundation", item4: "GS Retail" },
+                                { title: "", item1: "Donation", item2: "Yeongdeungpo-gu Certificate of Appreciation (Yeongdeungpo 2023 Hope Ondol Warm Winter Campaign)", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Donation", item2: "Gangneung City Certificate of Appreciation (April Gangneung Wildfire Relief Supply Support)", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Volunteering", item2: "Gyeonggi-do Gimpo City Member of the National Assembly Commendation", item3: "Gimpo City Volunteer Day", item4: "GS Nanumi Supermarket Gimpo Area Chapter" },
+                                { title: "", item1: "Volunteering", item2: "Bupyeong Senior Welfare Center Director's Commendation", item3: "Bupyeong Senior Welfare Center Volunteer Day", item4: "GS Nanumi Supermarket Incheon Area Chapter (Bupyeong)" },
+                            ],
+                            acctitle1: "2018–2022 |  | ▲",
+                            tableData2: [
+                                { title: "2022", item1: "Other", item2: "Gyeongsangbuk-do Governor's Commendation (Contribution to fire safety culture promotion)", item3: "", item4: "CVS Division 5 (Min-ho Kim)", rs1: 9 },
+                                { title: "", item1: "Donation", item2: "Beautiful Store 20th Anniversary Certificate of Gratitude", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Donation", item2: "Yeongdeungpo-gu Certificate of Appreciation (Yeongdeungpo 2022 Hope Ondol Warm Winter Campaign)", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Donation", item2: "Beautiful Store Certificate of Appreciation (Goods Donation)", item3: "Beautiful Store", item4: "CVS Division 3" },
+                                { title: "", item1: "Volunteering", item2: "Korea National Sharing Award, Minister of Health and Welfare Commendation (Korea Council on Social Welfare)", item3: "National Social Welfare Sharing Convention", item4: "GS Nanumi Organizational Culture Service Team Direct Chapter (Si-yeon Kim)" },
+                                { title: "", item1: "Volunteering", item2: "Gangnam-gu Mayor's Commendation", item3: "", item4: "GS Nanumi CVS Division 3 Region 2 Team" },
+                                { title: "", item1: "Volunteering", item2: "Woorimodu Welfare Foundation Deungchon 9 General Social Welfare Center Certificate of Appreciation", item3: "", item4: "GS Nanumi Organizational Culture Service Team Direct Chapter" },
+                                { title: "", item1: "Disaster and Emergency Relief", item2: "Korean Red Cross Certificate of Appreciation (East Coast Wildfires)", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Blood Donation", item2: "Korean Red Cross Busan Blood Center Commendation", item3: "", item4: "CVS Division 6 (Jun-ho Noh)" },
+                                { title: "2020", item1: "Donation", item2: "Seoul Metropolitan Government Mayor's Commendation", item3: "Fire Safety Day Memorial Commendation", item4: "Home Shopping BU", rs1: 2 },
+                                { title: "", item1: "Disaster and Emergency Relief", item2: "Minister of the Interior and Safety Award (Wuhan Evacuees)", item3: "Disaster Relief Merit", item4: "GS Nanumi MD Headquarters (Young-jun Yoo)" },
+                                { title: "2019", item1: "Donation", item2: "Seoul Mayor's Award", item3: "Outstanding Public-Private Partnership Institution", item4: "Home Shopping BU", rs1: 9 },
+                                { title: "", item1: "Donation", item2: "Minister of Health and Welfare Award", item3: "Ministry of Health and Welfare Merit Commendation", item4: "Home Shopping BU" },
+                                { title: "", item1: "Volunteering", item2: "Gangnam-gu Mayor's Commendation", item3: "", item4: "GS Nanumi CVS Division 2 Region 1 Team" },
+                                { title: "", item1: "Volunteering", item2: "Hanbit School for the Blind Certificate of Appreciation", item3: "", item4: "GS Nanumi CVS Division 2 Region 2 Team" },
+                                { title: "", item1: "Volunteering", item2: "Changwon City Certificate of Appreciation", item3: "", item4: "GS Nanumi CVS Division 4 Region 3 Team" },
+                                { title: "", item1: "Volunteering", item2: "Gyeongnam General Social Welfare Center Commendation", item3: "", item4: "GS Nanumi CVS Division 4 Region 3 Team" },
+                                { title: "", item1: "Volunteering", item2: "Jeonju House of Love Certificate of Appreciation", item3: "", item4: "GS Nanumi Supermarket Division 2 Sales Team 6, Jeonju Area" },
+                                { title: "", item1: "Volunteering", item2: "Seoul YWCA Bongcheon General Social Welfare Center Certificate of Appreciation", item3: "", item4: "GS Nanumi H&B Northwest Seoul Sales Team" },
+                                { title: "", item1: "Disaster and Emergency Relief", item2: "Minister of the Interior and Safety Award (Goseong-Sokcho Wildfire)", item3: "Disaster Relief Merit", item4: "GS Nanumi Gangwon Area (Ho-seong Hwang)" },
+                                { title: "2018", item1: "Donation", item2: "TV Home Shopping Category No. 1", item3: "Korea Social Value Outstanding Company Award", item4: "Home Shopping BU", rs1: 12 },
+                                { title: "", item1: "Volunteering", item2: "Masan Mayor's Commendation", item3: "", item4: "GS Nanumi Supermarket Masan Branch" },
+                                { title: "", item1: "Volunteering", item2: "Gangnam-gu Disability Welfare Center Commendation", item3: "", item4: "GS Nanumi CVS Division 2 Region 1 Team" },
+                                { title: "", item1: "Volunteering", item2: "Gimpo Mayor's Commendation", item3: "", item4: "GS Nanumi Supermarket Division 1 NSC Sales Team 1, Gimpo Area Chapter" },
+                                { title: "", item1: "Volunteering", item2: "Molundae General Social Welfare Center Commendation", item3: "", item4: "GS Nanumi Supermarket Division 3 Sales Team 3, Dadae Branch" },
+                                { title: "", item1: "Volunteering", item2: "Korea UN Volunteers Grand Korean Award", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Volunteering", item2: "Minister of Health and Welfare Commendation", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Volunteering", item2: "Korea UN Volunteers Korea Volunteer Grand Award", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Volunteering", item2: "Molundae General Social Welfare Center Commendation", item3: "", item4: "GS Nanumi Supermarket Division 3 Sales Team 3, Dadae Branch" },
+                                { title: "", item1: "Volunteering", item2: "Korea UN Volunteers Grand Korean Award", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Volunteering", item2: "Minister of Health and Welfare Commendation", item3: "", item4: "GS Retail" },
+                                { title: "", item1: "Volunteering", item2: "Korea UN Volunteers Korea Volunteer Grand Award", item3: "", item4: "GS Retail" },
+                            ],
+                            acctitle2: "2013–2017 |  | ▲",
+                            tableData3: [
+                                { title: "2017", item1: "Volunteering", item2: "Woorimodu Welfare Foundation Deungchon 9 General Social Welfare Center Certificate of Appreciation", item3: "", item4: "GS Nanumi Organizational Culture Service Team Direct Chapter", rs1: 3 },
+                                { title: "", item1: "Volunteering", item2: "Minister of Health and Welfare Commendation", item3: "Commendation at the 18th Social Welfare Day", item4: "Home Shopping BU" },
+                                { title: "", item1: "Disaster and Emergency Relief", item2: "Prime Minister's Group Commendation (Pohang Earthquake)", item3: "Disaster Relief Merit", item4: "GS Nanumi Daegu/Gyeongbuk (Kim Young-wook)" },
+                                { title: "2016", item1: "Donation", item2: "Commendation from the Minister of Employment and Labor", item3: "Social Enterprise Development", item4: "Home Shopping BU", rs1: 2 },
+                                { title: "", item1: "Volunteering", item2: "Korea National Sharing Award, Minister of Health and Welfare Commendation (Seoul Social Welfare Council)", item3: "National Social Welfare Sharing Convention", item4: "GS Nanumi CVS Central Region Franchise Chapter" },
+                                { title: "2015", item1: "Volunteering", item2: "Korea National Sharing Award, Minister of Health and Welfare Commendation (Seoul Social Welfare Council)", item3: "National Social Welfare Sharing Convention", item4: "GS Nanumi Construction Division", rs1: 1 },
+                                { title: "2014", item1: "Volunteering", item2: "Korean Senior Citizens Association Gangseo Branch Certificate of Appreciation", item3: "", item4: "GS Nanumi Organizational Culture Service Team Direct Chapter", rs1: 1 },
+                                { title: "2013", item1: "Volunteering", item2: "Grand Award for Sharing in Korea – Jeju Social Welfare Council Commendation", item3: "National Social Welfare Sharing Convention", item4: "GS Nanumi CVS Yeongnam Region 3 Area and Jeju Center", rs1: 2 },
+                                { title: "", item1: "Volunteering", item2: "Grand Award for Sharing in Korea – Korea Social Welfare Council Commendation", item3: "National Social Welfare Sharing Convention", item4: "GS Nanumi Supermarket Dangjin Branch" },
+                            ],
+                            acctitle3: "2012–2005",
+                            tableData4: [
+                                { title: "2012", item1: "Donation", item2: "Commissioner of the Small and Medium Business Administration Commendation", item3: "Korea Sales Support Grand Exhibition", item4: "Home Shopping BU", rs1: 3 },
+                                { title: "", item1: "Volunteering", item2: "Korea National Sharing Award, Gyeonggi-do Council on Social Welfare Commendation", item3: "National Social Welfare Sharing Convention", item4: "GS Nanumi CVS Capital Area Region 3", },
+                                { title: "", item1: "Volunteering", item2: "Korea National Sharing Award, Gyeonggi-do Council on Social Welfare Commendation", item3: "National Social Welfare Sharing Convention", item4: "GS Nanumi Supermarket Capital Area Regions 3, 4, and 5" },
+                                { title: "2011", item1: "Donation", item2: "Children's Welfare Grand Prize", item3: "2011 Corporate Social Contribution Grand Prize", item4: "Home Shopping BU", rs1: 4 },
+                                { title: "", item1: "Donation", item2: "Children's Welfare Contribution Grand Prize", item3: "2011 Happiness Sharing Social Contribution Award", item4: "Home Shopping BU" },
+                                { title: "", item1: "Volunteering", item2: "Corporate Category", item3: "1st SBS Hope Sharing Grand Award", item4: "Home Shopping BU" },
+                                { title: "", item1: "Volunteering", item2: "Minister of Health and Welfare Award", item3: "'Volunteer of the Month' – Corporate Volunteering Category", item4: "Home Shopping BU" },
+                                { title: "2010", item1: "Donation", item2: "Presidential Commendation (Outstanding Social Contribution Activity Manager)", item3: "11th Social Welfare Day Memorial Commendation", item4: "Home Shopping BU", rs1: 2 },
+                                { title: "", item1: "Donation", item2: "Children's Welfare Grand Prize", item3: "2010 Corporate Social Contribution Grand Prize", item4: "Home Shopping BU" },
+                                { title: "2009", item1: "Donation", item2: "Children's Welfare Grand Prize", item3: "2009 Corporate Social Contribution Grand Prize", item4: "Home Shopping BU", rs1: 1 },
+                                { title: "2007", item1: "Donation", item2: "Children's Welfare Grand Prize", item3: "Korea Corporate Social Contribution Grand Prize", item4: "Home Shopping BU", rs1: 1 },
+                                { title: "2005", item1: "Donation", item2: "Children's and Youth Welfare Category Grand Prize", item3: "Korea Social Contribution Grand Prize", item4: "Home Shopping BU", rs1: 1 },
+                            ],
+                        }
+                    },
+                    EnvMgmtListData: [
+                        { id: "5", title: "Q4 2025 Quarterly Report"/* 260604 번역 */, link: "#", fileType: "Download ↓" },
+                        { id: "4", title: "Q3 2025 Quarterly Report"/* 260604 번역 */, link: "#", fileType: "Download ↓" },
+                        { id: "3", title: "Q2 2025 Quarterly Report"/* 260604 번역 */, link: "#", fileType: "Download ↓" },
+                        { id: "2", title: "Q1 2025 Quarterly Report"/* 260604 번역 */, link: "#", fileType: "Download ↓" },
+                        { id: "1", title: "Q4 2024 Quarterly Report"/* 260604 번역 */, link: "#", fileType: "Download ↓" },
+                    ],
+                    EnvMgmtNoDataText: "There is no data found."/* 260604 번역 */,
+                    sustainReportHeroCoverAlt: "2024 Sustainability Report",
+                    sustainReportHeroTitle: "2024 Sustainability Report",
+                    sustainReportHeroPeriod: "(Reporting Period: January 1, 2024 – December 31, 2024)",
+                    sustainReportHeroLead:
+                        "GS Retail's 2024 Sustainability Report captures the journey of sustainability co-created with customers, society, and diverse stakeholders, as well as GS Retail's ESG performance achievements.",
+                    sustainReportHeroKoHref: "#none",
+                    sustainReportHeroEnHref: "#none",
+                    sustainReportHeroNavAria: "Download 2024 Report"/* 260604 번역 */,
+                    sustainReportKoBtn: "Korean Report ↓",
+                    sustainReportEnBtn: "English Report ↓",
+                    sustainReportArchiveTitle: "Previous Sustainability Reports",
+                    sustainReportPastRows: [
+                        {
+                            key: "2023",
+                            title: "2023 Sustainability Report",
+                            period: "(Reporting Period: January 1, 2023 – December 31, 2023)",
+                            coverAlt: "2023 Sustainability Report",
+                            koHref: "#none",
+                        },
+                        {
+                            key: "2022",
+                            title: "2022 Sustainability Report",
+                            period: "(Reporting Period: January 1, 2022 – December 31, 2022)",
+                            coverAlt: "2022 Sustainability Report",
+                            koHref: "#none",
+                        },
+                        {
+                            key: "2021",
+                            title: "2021 Sustainability Report",
+                            period: "(Reporting Period: January 1, 2021 – December 31, 2021)",
+                            coverAlt: "2021 Sustainability Report",
+                            koHref: "#none",
+                        },
+                        {
+                            key: "2020",
+                            title: "2020 Sustainability Report",
+                            period: "(Reporting Period: January 1, 2020 – December 31, 2020)",
+                            coverAlt: "2020 Sustainability Report",
+                            koHref: "#none",
+                        },
+                    ],
+                }
               
             }
         };

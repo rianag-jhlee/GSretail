@@ -32,7 +32,26 @@ const langData = {
             },
         ],
     },
-    en: {},
+    en: {
+        pageTitle: "Franchising Guide",
+        pageDesc: "Together toward a better future,<br />GS Retail cheers for your successful startup."/* 260604 번역 */,
+        cards: [
+            {
+                img: mainImg01,
+                cls: "gs25",
+                title: `<span class=\"franchise_card_title_point\">GS25</span>together with<br />We support your new beginning.`/* 260604 번역 */,
+                link: "/gsrst02010101",
+                linkText: "Go >",
+            },
+            {
+                img: mainImg02,
+                cls: "fresh",
+                title: `<span class=\"franchise_card_title_point\">GS THE FRESH</span>together with<br />We support your new beginning.`/* 260604 번역 */,
+                link: "/gsrst01010101",
+                linkText: "Go >",
+            },
+        ],
+    },
 };
 
 const t = computed(() => {

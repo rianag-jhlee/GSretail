@@ -185,6 +185,33 @@ export default {
                     RelationOptions: [{ value: "본인", label: "본인 소유" }, { value: "임차인", label: "임차인" }],
                     StoreOptions: [{ value: "", label: "선택하세요" }, { value: "store01", label: "상호A" }],
                     FeatureOptions: [{ value: "", label: "선택하세요" }, { value: "feat01", label: "상권A" }]
+                },
+                en: {
+                    MainTitle: "Location Inquiry",
+                    Greeting: "Hello!<br/>I am a GS THE FRESH location consultation representative."/* 260604 번역 */,
+                    SubDesc: "Fill out the consultation request form below to receive a consultation tailored just for you.<br/>Once you submit your consultation request, our representative will review it and contact you."/* 260604 번역 */,
+                    ConsentTitle: "Consent to Collection and Use of Personal Information",
+                    ConsentItems: [
+                        "The information you provide is used solely for location consultation. The items collected, the use and purpose, and the retention and use period are as follows. For other matters regarding the handling of personal information, please refer to the 'Privacy Policy' at the bottom of the website."/* 260604 번역 */,
+                        "Personal information items collected: name, email, mobile phone number"/* 260604 번역 */,
+                        "Collection, Use, and Purpose: The collected personal information is used for identity verification and to verify and respond to inquiries."/* 260604 번역 */,
+                        "- Retention and Use Period: One year after receipt"
+                    ],
+                    RefuseNotice: "You have the right to refuse this consent; however, <br/>If you do not agree, you will not be able to submit a location proposal application."/* 260604 번역 */,
+                    AgreeLabel: "I agree.",
+                    SectionCustomer: "Customer Information",
+                    SectionConsult: "Consultation Content",
+                    RequiredGuide: "* Required fields",
+                    LabelName: "Name", LabelEmail: "Email", LabelPhone: "Mobile phone"/* 260604 번역 */,
+                    LabelAddress: "Recommended store location"/* 260604 번역 */, LabelArea: "Recommended store area"/* 260604 번역 */, LabelStoreName: "Store name"/* 260604 번역 */, LabelFeature: "Commercial Area Characteristics"/* 260604 번역 */, LabelRelation: "Relationship with the Building Owner"/* 260604 번역 */,
+                    BtnZip: "Find postal code"/* 260604 번역 */, BtnSubmit: "Consultation Request"/* 260604 번역 */, BtnReset: "Rewrite"/* 260604 번역 */,
+                    PlaceholderAddrBasic: "Base Address"/* 260604 번역 */, PlaceholderAddrDetail: "Detailed address"/* 260604 번역 */, PlaceholderRelation: "e.g., owner-occupied, tenant, etc."/* 260604 번역 */,
+                    AreaGuide: "* m² = (standard) pyeong x 3.3"/* 260604 번역 */,
+                    EmailOptions: [{ value: "", label: "Enter directly" }, { value: "naver.com", label: "naver.com" }, { value: "gmail.com", label: "gmail.com" }],
+                    PhoneOptions: [{ value: "010", label: "010" }, { value: "011", label: "011" }],
+                    RelationOptions: [{ value: "Self"/* 260604 번역 */, label: "Owned by Self"/* 260604 번역 */ }, { value: "Tenant"/* 260604 번역 */, label: "Tenant"/* 260604 번역 */ }],
+                    StoreOptions: [{ value: "", label: "Please select"/* 260604 번역 */ }, { value: "store01", label: "Business Name A"/* 260604 번역 */ }],
+                    FeatureOptions: [{ value: "", label: "Please select"/* 260604 번역 */ }, { value: "feat01", label: "Commercial Area A"/* 260604 번역 */ }]
                 }
             }
         };

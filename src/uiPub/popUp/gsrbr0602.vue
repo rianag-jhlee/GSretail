@@ -179,6 +179,68 @@ export default {
                     기능종류:'기능/종류',
 
 
+                },
+                en: {
+                    MainTitle: "GS ALL Membership Terms and Conditions",
+                    Greeting: "Notice of Revised Edition: January 19, 2026",
+                    numIcons: ["①", "②", "③", "④", "⑤"],
+                    yearOptions: [{ value: "2025", label: "2025" }],
+                    versionOptions: [{ value: "v1", label: "Notice of Revised Edition: February 26, 2025" }],
+                    Chapter1: {
+                        title: "Chapter 1: General Provisions",
+                        items: [
+                            { 
+                                article: "Article 1 (Purpose)", 
+                                // 백틱을 제거하고 일반 따옴표로 연결하여 줄바꿈/공백 오류 방지
+                                content: `These Terms and Conditions govern the rights, obligations, and other necessary matters between GS Retail Co., Ltd. (hereinafter "GS Retail") and its members in connection with the use of the GS ALL Membership Service, POP Card Service, and other GS Retail-related services.` 
+                            },
+                            { 
+                                article: "Article 2 (Definitions)", 
+                                content: [
+                                    `① A \"Member\" refers to a person who has agreed to these Terms in order to use the services provided by GS Retail and has been granted the right to use the services by providing personal information in accordance with the methods and procedures established by GS Retail. A \"Non-Member\" who has not signed up as a member or an \"Unverified Member\" whose identity verification has not been completed may use only some of the services provided by GS Retail.`/* 260604 번역 */,
+                                    `② \"Member Tier\" refers to the tier that GS Retail assigns to a member based on the results of purchasing GS Retail goods, in accordance with the criteria established by GS Retail.`/* 260604 번역 */,
+                                    `③ \"Service\" refers to GS Retail services provided to members and all services related to GS Retail. 1. The \"GS ALL Membership Service\" (hereinafter the \"Membership Service\") is a service provided by GS Retail for members, the overview of which is as described in Article 7. 2. The \"POP Card Service\" is a service provided by GS Retail for members, which offers benefits such as discounts and giveaways when a member pays for goods, services, etc. with a POP Card at GS25, GS THE FRESH, Our Neighborhood GS, and so on. Details are as described in Chapter 4.`/* 260604 번역 */,
+                                    `④ \"POP Card\" refers to a card (including a mobile card) issued by GS Retail and affiliated merchants to enable members to use the Membership Service and POP Card Service.`/* 260604 번역 */,
+                                    `⑤ \"Affiliated Merchant\" refers to a company (transit agency, distributor, bank, card company, etc.) or business (including tenants within GS Retail stores) that has entered into a merchant agreement or partnership agreement with GS Retail to jointly operate the respective service in connection with the Membership Service or POP Card Service. The services provided to members may vary depending on the terms of each merchant agreement or partnership agreement.`/* 260604 번역 */
+                                ] 
+                            }
+                        ]
+                    },
+                    Chapter4: {
+                        title: "Chapter 4: POP Card Services",
+                        article13: {
+                            title: "Article 13 (Types and Functions of POP Cards)",
+                            desc: "The types and functions of POP Cards eligible for the POP Card Service provided by GS Retail are as follows.",
+                            content: "① Overview of Card Functions",
+                            tableHead: ["POP Cashbee (Standard)", "POP T-money (Standard)", "POP T-money (Financial)", "Membership POP", "POP Check/Credit"],
+                            tableRows: [
+                                { label: "Common Features"/* 260604 번역 */, data: ["O", "O", "O", "O", "O"] },
+                                { label: "Transit Card", data: ["Prepaid", "Prepaid", "Prepaid", "X", "Postpaid (optional)"] },
+                                { label: "Rechargeable Prepaid Payment", data: ["O", "O", "O", "O", "X"] },
+                                { label: "Debit/Credit Card", data: ["X", "X", "O", "X", "O"] },
+                                { label: "T-Mileage", data: ["X", "X", "O", "X", "O"] },
+                                { label: "T-Affiliated Merchant"/* 260604 번역 */, data: ["X", "O", "O", "X", "X"] },
+                                { label: "Partner Affiliates", data: ["eZL Co., Ltd.", "T-money Co., Ltd.", "Woori Card / Nonghyup Bank / KB Card", "Korea Prepaid Card / BC Card", "Shinhan Card / NH Card / Hana Bank / KB Card / Hana Card / BC Card / K Bank / Samsung Card"] },
+                            ]
+                        },
+                        article14: {
+                            title: "Article 14 (Contents of POP Card Services)",
+                            content: [
+                                "Members may purchase goods and services and receive discounts and gift items at GS Retail and partner affiliates using their POP Card. Discount rates and gift items may vary depending on GS Retail's sales policies.",
+                                "① Members may purchase goods and services and receive discounts and gift items at GS Retail and partner affiliates using their POP Card. Discount rates and gift items may vary depending on GS Retail's sales policies.<br />② Depending on the type of POP Card or for technical reasons (system maintenance, terminal malfunction, communication line failure, stabilization work for new cards or terminals, etc.), certain POP Cards may be restricted from use at certain partner affiliates. In such cases, GS Retail shall notify customers via posting on its website or other appropriate means."
+                            ]
+                        }
+                    },
+                    Appendix: {
+                        title: "Supplementary Provisions",
+                        article: "Addendum Article 1 (Effect and Effective Date)"/* 260604 번역 */,
+                        content: "These Terms and Conditions shall take effect from January 19, 2026.",
+                        copyright: "Supplementary Provisions<br />Article 1 of Supplementary Provisions (Effective Date of Terms and Conditions)<br />These Terms and Conditions shall take effect from January 19, 2026.<br />* The copyright to these Terms and Conditions belongs to GS Retail. Unauthorized reproduction, distribution, transmission, or any other infringement of copyright is strictly prohibited."
+                    },
+                    check:'Confirm',
+                    기능종류:'Function / Type',
+
+
                 }
             }
         };

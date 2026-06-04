@@ -644,6 +644,306 @@ export default {
                     ]
                 },
                 en: {
+                    MainTitle: "Corporate Governance",
+                    MainsubTitle: "CORPORATE GOVERNANCE",
+                    MainDesc: [
+                        "GS Retail establishes a sound corporate governance structure in accordance with its Corporate Governance Charter.",
+                        "GS Retail is committed to board-centric management to foster a culture of transparent governance.",
+                        "To improve board operations and enhance governance credibility, GS Retail introduced a board evaluation system at the regular board meeting held in December 2021.",
+                        "GS Retail is committed to continuously strengthening its corporate governance in pursuit of sustainable management."
+                    ],
+                    Tabs1: [{ item: "Corporate Governance Charter" }, { item: "Board and Committee Composition" }, { item: "Board Evaluation" }, { item: "Differences from Governance Best Practice Guidelines" }],
+                    
+                    // [Tab 1] 지배구조헌장 전체 데이터 (KO)
+                    CharterTitle: "GS Retail Corporate Governance Charter", 
+                    CharterDate: "Enacted: February 8, 2021",
+                    PolicyIntroTitle: "Preamble",
+                    PolicyIntroDesc: "GS Retail Co., Ltd. (hereinafter the 'Company') aspires to build trust with all stakeholders on the foundation of a sound corporate governance structure, and to rise as a company that leads customer Life Innovation through relentless challenge. To achieve this vision, this Corporate Governance Charter is hereby enacted. In accordance with this Charter, the Company shall establish a sound governance structure, including the protection of shareholder rights, the roles and responsibilities of the Board of Directors, and the independent operation of professional audit bodies, to pursue fair and transparent management practices and continuously advance the rights and interests of all stakeholders, including shareholders, customers, and employees.",
+                    PolicySections: [
+                        {
+                            title: "I. Shareholders",
+                            content: [
+                                { subTitle: "1. Shareholder Rights", list: [
+                                    "① Shareholders are the owners of the Company and are guaranteed the basic rights protected by relevant statutes, including the right to participate in profit distribution, the right to attend the general meeting of shareholders and exercise voting rights, and the right to propose agenda items for the general meeting of shareholders."/* 260604 번역 */,
+                                    "② Matters that bring about significant changes to the company's existence and shareholder rights—among those prescribed by relevant laws, such as amendment of the articles of incorporation, merger, transfer of business, company division, dissolution, and capital reduction—shall be decided at the general meeting of shareholders, maximizing the protection of shareholder rights."/* 260604 번역 */,
+                                    "③ The Company strives to ensure that resolutions of the general meeting of shareholders are made through transparent and fair procedures, and provides shareholders, before they attend the general meeting, with sufficient information regarding the date, time, and place of the meeting, the agenda items, and the methods of exercising voting rights."/* 260604 번역 */,
+                                    "④ The exercise of shareholder rights shall be carried out in accordance with the free will of the shareholders."/* 260604 번역 */
+                                ]},
+                                { subTitle: "2. Equal Treatment of Shareholders", list: [
+                                    "① Shareholders are guaranteed their rights in accordance with the principle of one vote per share. However, where the voting rights of a particular shareholder are restricted pursuant to statutes, the relevant statutes shall apply. The Company treats shareholders equitably in accordance with the standards prescribed by the Commercial Act and relevant statutes, so that the essential rights of shareholders are not impaired."/* 260604 번역 */,
+                                    "② The Company provides shareholders with the information they need in a timely manner, organized in an easily understandable way, and through an equitable method. The Company also strives to protect shareholders from unfair related-party transactions and self-dealing."/* 260604 번역 */
+                                ]},
+                                { subTitle: "3. Shareholder Responsibilities", list: [
+                                    "① Shareholders shall actively exercise their voting rights for the development and benefit of the company."/* 260604 번역 */,
+                                    "② A controlling shareholder who exercises influence over the Company's management shall exercise its shareholder rights in consideration of the interests of the Company and all other shareholders, and shall endeavor not to cause harm to other shareholders by abusing its controlling power."/* 260604 번역 */
+                                ]}
+                            ]
+                        },
+                        {
+                            title: "II. Board of Directors",
+                            content: [
+                                { subTitle: "1. Functions of the Board of Directors", list: [
+                                    "① The Board of Directors holds comprehensive authority over management pursuant to the relevant statutes, determines the Company's basic management objectives for the benefit of the Company and its shareholders, and deliberates and resolves on the Company's major decision-making matters as prescribed by relevant rules such as statutes, the Articles of Incorporation, and the Board of Directors Regulations."/* 260604 번역 */,
+                                    "② The Board of Directors supervises the activities of management to ensure transparent and fair conduct of the Company's business and to prevent the impairment of shareholder value."/* 260604 번역 */,
+                                    "③ The Board of Directors may delegate authority to the Representative Director or to a committee within the Board, except for major matters for which delegation is not permitted under relevant statutes, the Articles of Incorporation, or the Board of Directors Regulations."/* 260604 번역 */
+                                ]},
+                                { subTitle: "2. Board Composition", list: [
+                                    "① The Company composes the Board of Directors of six or more directors to enable diverse discussions and efficient decision-making at the Board, and, to ensure the independence of the Board, outside directors shall constitute a majority of the total number of Board members."/* 260604 번역 */,
+                                    "② To strengthen its supervisory function over the Company's transparent management, the Board of Directors establishes an Audit Committee, and may establish committees within the Board, as prescribed by other statutes and the Articles of Incorporation, for the objective and expert deliberation of each agenda item submitted."/* 260604 번역 */
+                                ]},
+                                { subTitle: "3. Director Appointment", list: [
+                                    "① Directors shall be appointed by resolution of the general meeting of shareholders from among candidates selected through methods such as recommendation by the Board of Directors, recommendation by the Outside Director Candidate Recommendation Committee, or recommendation by shareholders; and the Company strives to ensure that candidates whose expertise has been sufficiently verified are appointed as directors, so that Board-centered corporate management can be achieved."/* 260604 번역 */,
+                                    "② The Representative Director shall be appointed by resolution of the Board of Directors from among the directors appointed at the general meeting of shareholders."/* 260604 번역 */,
+                                    "③ The Chairperson of the Board of Directors shall be appointed by resolution of the Board from among the directors appointed at the general meeting of shareholders, and concurrent service as the Representative Director shall be avoided."/* 260604 번역 */
+                                ]},
+                                { subTitle: "4. Director Qualifications", list: [
+                                    "① Internal directors shall possess abundant experience and expertise related to the Company's business and shall be able to contribute to the Company's development and the enhancement of shareholder value."/* 260604 번역 */,
+                                    "② Outside directors shall be persons with sufficient knowledge and expertise in fields such as law, finance, accounting, new business, IT-Tech, and the public sector, who have no material interest in the Company and whose independence has been verified."/* 260604 번역 */
+                                ]},
+                                { subTitle: "5. Board Operations", list: [
+                                    "① The Board of Directors operates as regular Board meetings and extraordinary Board meetings convened as necessary; and for the smooth operation of the Board, the Company enacts and operates Board of Directors Regulations that specifically prescribe the authority, responsibilities, and operating procedures of the Board."/* 260604 번역 */,
+                                    "② For the smooth operation of the committees within the Board of Directors, the Company enacts and operates committee regulations that specifically prescribe the authority, responsibilities, and operating procedures of the committees."/* 260604 번역 */,
+                                    "③ The Company shall prepare and retain minutes recording the proceedings of Board of Directors meetings and the substance of important deliberations."/* 260604 번역 */
+                                ]},
+                                { subTitle: "6. Role of Outside Directors", list: [
+                                    "① Outside directors participate in important management policy decisions based on their independence and supervise management based on their expertise, thereby supporting the company in conducting its business soundly."/* 260604 번역 */,
+                                    "② The company promptly provides outside directors with the information necessary for performing their duties so that they can accurately understand the company's management status and current situation, and outside directors may request the company to provide information necessary for performing their duties. In addition, outside directors may receive assistance from external experts when necessary, and the company supports the costs incurred."/* 260604 번역 */
+                                ]},
+                                { subTitle: "7. Role of Directors", list: [
+                                    "① As a prudent manager, a director shall fulfill their responsibilities, actively participate in the board of directors, and make the best decisions to continuously enhance the interests of the company, its shareholders, and stakeholders."/* 260604 번역 */,
+                                    "② Directors shall make decisions considering the interests of all shareholders, and shall not leak information obtained in the course of their duties externally or use it for personal gain. If a director neglects their duties in violation of laws or the articles of incorporation, causing damage, the director shall be liable for damages to the company or third parties."/* 260604 번역 */,
+                                    "③ To attract competent personnel and ensure the effectiveness of accountability, the company may take out directors' liability insurance at the company's expense."/* 260604 번역 */
+                                ]},
+                                { subTitle: "8. Evaluation and Compensation", list: [
+                                    "The management activities of executives shall be evaluated fairly, and the results shall be appropriately reflected in compensation. Directors' compensation shall be executed within the scope approved by the General Meeting of Shareholders after appropriate review.",
+                                    "The activities of outside directors shall be fairly evaluated by the Outside Director Candidate Nomination Committee, and the evaluation results may be reflected in decisions regarding re-appointment."
+                                ]},
+                                { subTitle: "9. Director Training", list: [
+                                    "The Company may provide directors with opportunities for training and capability development necessary for the performance of their duties at the Company's expense, in order to enhance the expertise of the Board of Directors."
+                                ]}
+                            ]
+                        },
+                        {
+                            title: "III. Audit Bodies",
+                            content: [
+                                { subTitle: "1. Audit Committee", list: [
+                                    "① The Audit Committee shall be composed of three or more directors, with at least two-thirds being outside directors, and shall include at least one accounting or financial expert."/* 260604 번역 */,
+                                    "② In accordance with laws and the articles of incorporation, the Audit Committee independently performs duties such as legality audits of the execution of duties by directors and management, review of the soundness of financial activities and the accuracy of financial reporting, review of the validity of changes to important accounting standards or accounting estimates, approval of the appointment and dismissal of the external auditor, and evaluation of the external auditor's audit activities."/* 260604 번역 */,
+                                    "③ Audit Committee meetings are held at least once per quarter and may be held at any time as needed."/* 260604 번역 */
+                                ]},
+                                { subTitle: "2. External Auditor", list: [
+                                    "① The external auditor shall perform audit duties fairly and from a position independent of the company, management, and specific shareholders."/* 260604 번역 */,
+                                    "② The external auditor reports important matters identified during external audit activities to the Audit Committee."/* 260604 번역 */,
+                                    "③ If a shareholder has a question about the audit report at the general meeting of shareholders, the external auditor shall attend and provide a sufficient explanation."/* 260604 번역 */
+                                ]}
+                            ]
+                        },
+                        {
+                            title: "IV. Stakeholders",
+                            content: [
+                                { subTitle: "(1) The Company shall faithfully fulfill its social responsibility to protect the rights of all stakeholders, including customers, shareholders, and employees.", list: [] },
+                                { subTitle: "(2) The Company shall diligently comply with labor-related laws including the Labor Standards Act and shall endeavor to maintain and improve working conditions.", list: [] },
+                                { subTitle: "(3) The Company shall provide information necessary for the protection of stakeholders' rights within the scope permitted by law, and shall support stakeholders' access to relevant information.", list: [] }
+                            ]
+                        },
+                        {
+                            title: "V. Disclosure",
+                            content: [
+                                { subTitle: "(1) The Company shall regularly prepare and disclose business reports, quarterly reports, and semi-annual reports, and shall promptly and accurately disclose matters required by law and matters that may have a significant impact on shareholders and stakeholders.", list: [] },
+                                { subTitle: "(2) The Company shall not give preferential or discriminatory treatment to specific individuals regarding the scope or timing of disclosure of important corporate information, and shall disclose information so that all stakeholders can access it simultaneously.", list: [] }
+                            ]
+                        },
+                        {
+                            title: "Supplementary Provisions (2021.2.8)",
+                            content: [
+                                { subTitle: "Supplementary Provisions (2021.2.8)<br />Article 1 (Effective Date) This Charter shall take effect from February 8, 2021.", list: [] }
+                            ]
+                        }
+                    ],
+                    // [Tab 2] 이사회 구성 현황 데이터 (KO)
+                    BoardSectionTitle1: `Board Composition`,
+                    BoardSectionDesc1: `The board of directors is composed of executive directors, outside directors, and other non-executive directors.<br />We strengthen transparency and checks-and-balances through outside directors with independence and expertise.`/* 260604 번역 */,
+                    BoardSectionTitleSub: `Outside Directors and Committee Composition`,
+                    BoardSectionDescSub: `Outside directors with independence and expertise reinforce management transparency and oversight.`,
+                    BoardMemberList: [
+                        {
+                            pos: "CEO", name: "Suh-hong Hur", 
+                            img: require("@/assets/images/dummy/gsrin0102_1.png"),
+                            term: "2025.03.20~2028.03.19", firstDate: "First appointed Mar. 20, 2025"/* 260604 번역 */,
+                            careers: [
+                                { text: "Stanford University (USA)", class: "" },
+                                { text: "2022: Future Business Team Leader, GS Co., Ltd.", class: "" },
+                                { text: "2024 Head of Management Strategy Service Unit, GS Retail Co., Ltd."/* 260604 번역 */, class: "" },
+                                { text: "Current: CEO, GS Retail Co., Ltd.", class: "point" }
+                            ]
+                        },
+                        {
+                            pos: "Executive Director", name: "Jin-seok Oh", 
+                            img: require("@/assets/images/dummy/gsrin0102_2.png"),
+                            term: "2024.03.21~2027.03.20", firstDate: "First appointed Mar. 21, 2024"/* 260604 번역 */,
+                            careers: [
+                                { text: "Sogang University", class: "" },
+                                { text: "2014: Management Support Division Head, GS Retail Co., Ltd.", class: "" },
+                                { text: "2021: Strategy Division Head, GS Retail Co., Ltd.", class: "" },
+                                { text: "Current: Platform BU Head, GS Retail Co., Ltd.", class: "point" }
+                            ]
+                        },
+                        {
+                            pos: "Other Non-Executive Director", name: "Soon-gi Hong", 
+                            img: require("@/assets/images/dummy/gsrin0102_3.png"),
+                            term: "2025.03.21~2027.03.20", firstDate: "First appointed Jul. 1, 2021"/* 260604 번역 */,
+                            careers: [
+                                { text: "Yonsei University", class: "" },
+                                { text: "2017: Finance Team Leader, GS Co., Ltd.", class: "" },
+                                { text: "Current: CEO, GS Co., Ltd.", class: "point" }
+                            ]
+                        }
+                    ],
+                    SubMemberList: [
+                        {
+                            pos: "Seong-rak Lee (Outside Director) *Board Chairman", name: "Lee Seong-rak"/* 260604 번역 */, 
+                            img: require("@/assets/images/dummy/gsrin0102_4.png"),
+                            term: "2025.03.20~2028.03.19", firstDate: "First appointed Mar. 25, 2023"/* 260604 번역 */,
+                            careers: [
+                                { text: "Konkuk University", class: "" },
+                                { text: "2009: Deputy President, Shinhan Bank", class: "" },
+                                { text: "2013: President, Shinhan Life Insurance", class: "" },
+                                { text: "2017: CEO, Gordon & Partners Co., Ltd.", class: "" }
+                            ]
+                        },
+                        {
+                            pos: "Outside Director", name: "Sang-gyu Lee", 
+                            img: require("@/assets/images/dummy/gsrin0102_6.png"),
+                            term: "2023.03.23~2026.03.22", firstDate: "First appointed Mar. 23, 2023"/* 260604 번역 */,
+                            careers: [
+                                { text: "University of Washington (USA)", class: "" },
+                                { text: "2012: Korea B2C Group Head, LG Electronics", class: "" },
+                                { text: "2016: Korea Mobile Group Head, LG Electronics", class: "" },
+                                { text: "2021: Korea Sales Division Head & President, LG Electronics", class: "" },
+                                { text: "Current: Chair Professor, Sookmyung Women's University", class: "point" }
+                            ]
+                        },
+                        {
+                            pos: "Outside Director", name: "Yun-jin Yoon", 
+                            img: require("@/assets/images/dummy/gsrin0102_7.png"),
+                            term: "2025.03.20~2028.03.19", firstDate: "First appointed Mar. 20, 2025"/* 260604 번역 */,
+                            careers: [
+                                { text: "UC Berkeley (USA)", class: "" },
+                                { text: "2009: Researcher, Stanford SRI International AI Research Center", class: "" },
+                                { text: "2018: Non-Executive Director, Korea Infrastructure Safety & Technology Institute", class: "" },
+                                { text: "Current: Professor, KAIST Dept. of Civil & Environmental Engineering", class: "point" }
+                            ]
+                        },
+                        {
+                            pos: "Outside Director", name: "Ahn Dong-hyun"/* 260604 번역 */, 
+                            img: require("@/assets/images/dummy/gsrin0102_5.png"),
+                            term: "2026.3.19~2029.3.18", firstDate: "First appointed Mar. 19, 2026"/* 260604 번역 */,
+                            careers: [
+                                { text: "New York University, USA"/* 260604 번역 */, class: "" },
+                                { text: "2015 Public Fund Oversight Committee<br />Sale Committee Chairperson"/* 260604 번역 */, class: "" },
+                                { text: "2016 Director of the Korea Capital Market Institute"/* 260604 번역 */, class: "" },
+                                { text: "2022 Chairperson of the Financial Development Deliberation Committee"/* 260604 번역 */, class: "" },
+                                { text: "Current: Professor, Department of Economics, Seoul National University"/* 260604 번역 */, class: "point" }
+                            ]
+                        },
+
+
+                    ],
+                    BoardSectionTitle2: "Board Skills Matrix",
+                    SkillsList: [
+                        { type: "Executive Director, CEO", name: "Suh-hong Hur", appointDate: "Appointed Mar. 2025"/* 260604 번역 */, tags: [{text: "Management & Leadership", class:""}, {text: "Risk Management & ESG", class:""}] },
+                        { type: "Executive Director", name: "Jin-seok Oh", appointDate: "Appointed Mar. 2024"/* 260604 번역 */, tags: [{text: "Management & Leadership", class:""}, {text: "Distribution & Related Industries", class:""}, {text: "Finance", class:"TAG-2"}, {text: "Risk Management & ESG", class:""}, {text: "Compensation Committee", class:"TAG-3"}] },
+                        { type: "Other Non-Executive Director", name: "Soon-gi Hong", appointDate: "Appointed Jul. 2021"/* 260604 번역 */, tags: [{text: "Management & Leadership", class:""}, {text: "Finance & Accounting", class:""}, {text: "Risk Management & ESG", class:""}, {text: "ESG Committee", class:"TAG-3"}] },
+                        { type: "Outside Director", name: "Lee Seong-rak"/* 260604 번역 */, appointDate: "Appointed Mar. 2022"/* 260604 번역 */, tags: [{text: "Management & Leadership", class:"TAG-2"}, {text: "Finance", class:"TAG-2"}, {text: "Risk Management & ESG", class:"TAG-2"}, {text: "Independence", class:"TAG-2"}, {text: "Related-Party Transactions Committee", class:"TAG-4"}, {text: "Outside Director Nomination Committee", class:"TAG-4"}, {text: "Audit Committee", class:"TAG-4"}] },
+                        { type: "Outside Director", name: "Lee In-moo"/* 260604 번역 */, appointDate: "Appointed Jul. 2021"/* 260604 번역 */, tags: [{text: "Finance & Accounting", class:"TAG-2"}, {text: "Finance", class:"TAG-2"}, {text: "Risk Management & ESG", class:"TAG-2"}, {text: "Independence", class:"TAG-2"}, {text: "Outside Director Nomination Committee", class:"TAG-4"}, {text: "Audit Committee", class:"TAG-4"}, {text: "ESG Committee", class:"TAG-4"}, {text: "Compensation Committee", class:"TAG-4"}] },
+                        { type: "Outside Director", name: "Sang-gyu Lee", appointDate: "Appointed Mar. 2023"/* 260604 번역 */, tags: [{text: "Distribution & Related Industries", class:""}, {text: "Risk Management & ESG", class:""}, {text: "Independence", class:"TAG-2"}, {text: "Related-Party Transactions Committee", class:"TAG-3"}, {text: "Outside Director Nomination Committee", class:"TAG-3"}, {text: "ESG Committee", class:"TAG-3"}] },
+                        { type: "Outside Director", name: "Yun-jin Yoon", appointDate: "Appointed Mar. 2025"/* 260604 번역 */, tags: [{text: "IT & Digital", class:""}, {text: "Risk Management & ESG", class:""}, {text: "Independence", class:""}, {text: "Outside Director Nomination Committee", class:"TAG-3"}, {text: "Audit Committee", class:"TAG-3"}, {text: "ESG Committee", class:"TAG-3"}, {text: "Compensation Committee", class:"TAG-3"}] }
+                    ],
+                    BoardSectionTitle3: "Board Committee Composition",
+                    ChairLabel: "Chairperson", MemberLabel: "Member"/* 260604 번역 */,
+                    CommitteeTable: [
+                        { title: "Related-Party Transactions Committee", chair: "Sang-gyu Lee", members: "Lee Seong-rak, Yoon Yoon-jin"/* 260604 번역 */ },
+                        { title: "Outside Director Nomination Committee", chair: "Sang-gyu Lee", members: "Lee Seong-rak, Lee In-moo"/* 260604 번역 */ },
+                        { title: "Audit Committee", chair: "Lee In-moo"/* 260604 번역 */, members: "Lee Seong-rak, Yoon Yoon-jin"/* 260604 번역 */ },
+                        { title: "ESG Committee", chair: "Lee In-moo"/* 260604 번역 */, members: "Chair: In-mu Lee / Members: Sang-gyu Lee, Yun-jin Yoon, Soon-gi Hong" },
+                        { title: "Compensation Committee", chair: "Yun-jin Yoon", members: "Lee In-moo, Oh Jin-seok"/* 260604 번역 */ }
+                    ],
+                    // [Tab 2] BoardDownloadBtns 데이터 부분
+                    BoardDownloadBtns: [
+                        { 
+                            text: "GS Retail Co., Ltd. Articles of Incorporation", 
+                            link: require("@/assets/download/gsr_incorporation_1.pdf").default || require("@/assets/download/gsr_incorporation_1.pdf") 
+                        },
+                        { 
+                            text: "Board of Directors Regulations", 
+                            link: require("@/assets/download/boardCharter_2.pdf").default || require("@/assets/download/boardCharter_2.pdf") 
+                        },
+                        { 
+                            text: "Audit Committee Regulations", 
+                            link: require("@/assets/download/directors_audit_committee_3.pdf").default || require("@/assets/download/directors_audit_committee_3.pdf") 
+                        },
+                        { 
+                            text: "Outside Director Candidate Nomination Committee Regulations", 
+                            link: require("@/assets/download/Outside_Director_4.pdf").default || require("@/assets/download/Outside_Director_4.pdf") 
+                        },
+                        { 
+                            text: "Related-Party Transactions Committee Operating Regulations", 
+                            link: require("@/assets/download/internal_trade_commission_rule_5.pdf").default || require("@/assets/download/internal_trade_commission_rule_5.pdf") 
+                        },
+                        { 
+                            text: "ESG Committee Operating Regulations", 
+                            link: require("@/assets/download/ESG_6.pdf").default || require("@/assets/download/ESG_6.pdf") 
+                        },
+                        { 
+                            text: "Compensation Committee Operating Regulations", 
+                            link: require("@/assets/download/compensation_7.pdf").default || require("@/assets/download/compensation_7.pdf") 
+                        }
+                    ],
+                    SelectMsg: "Select Committee"/* 260604 번역 */, SelectOptions: [{value:'', label:'Select Committee'/* 260604 번역 */}, {value:'0', label:'Audit Committee'}, {value:'1', label:'ESG Committee'}],
+                    BtnConfirm: "View List"/* 260604 번역 */,
+                    EvalSystemTitle: "Board Evaluation System",
+                    EvalSystemTable: [
+                        { label: "*Evaluation Frequency", content: "Once per fiscal year" },
+                        { label: "Evaluation Item", content: "1. Board Operational Efficiency 2. Board Performance 3. Board Committee Activities 4. Outside Director Self-Evaluation" },
+                        { label: "*Evaluation Items", content: "Relevant systems and operating standards, etc." },
+                        { label: "*Evaluation Method", content: "Self-evaluation by members" },
+                        { label: "*Evaluation Participants", content: "All Board members (7 members) ※ Outside Director self-evaluation targets outside directors (4 outside directors)" }
+                    ],
+                    EvalResultTitle: "2025 Board Evaluation Results",
+                    EvalResultHeader: { col1: "Category", col2: "Evaluation Result" }, // 추가
+                    EvalResultData: [
+                        { category: "Board Performance", score: "/ 5.0" },
+                        { category: "Board Operational Efficiency", score: "/ 5.0" },
+                        { category: "Committee Activities", score: "/ 5.0" },
+                        { category: "Outside Director Self-Evaluation", score: "/ 5.0" }
+                    ],
+                    EvalUsageTitle: "Utilization of Evaluation Results",
+                    EvalUsageCards: [
+                        { num: "01", title: "Report Evaluation Results<br />to the Board" },
+                        { num: "02", title: "Board Chairman and Outside Directors<br/>Review Evaluation Results", sub: "(via separate in-person interviews)" },
+                        { num: "03", title: "Identify areas for improvement <br />and incorporate findings into board operations" },
+                        { num: "04", title: "Improve board operations <br />and enhance governance credibility" },
+                        { num: "05", title: "Disclose board evaluation results <br />via the Sustainability Report and website" }
+                    ],
+                    DiffTableHeader: { col1: "Corporate Governance Best Practice Recommendations", col2: "Adopted", col3: "Remarks" },
+                    DiffTableData: [
+                        { recommendation: "Adoption of Corporate Governance Charter", status: "O", note: "-" },
+                        { recommendation: "Board Composition Requirements", status: "O", note: "Majority (57.1%) outside directors" },
+                        { recommendation: "Separation of Board Chairman and CEO", status: "O", note: "Outside director serving as Chairman" },
+                        { recommendation: "Independence of Outside Directors", status: "O", note: "-" },
+                        { recommendation: "Formation of Outside Director Nomination Committee", status: "O", note: "-" },
+                        { recommendation: "Formation of Compensation Committee", status: "O", note: "-" },
+                        { recommendation: "Establishment of Operating Regulations for the Board and Board Committees", status: "O", note: "-" },
+                        { recommendation: "Disclosure of Board and Board Committee Activities and Voting on Key Agenda Items", status: "O", note: "-" },
+                        { recommendation: "Board Evaluation", status: "O", note: "-" },
+                        { recommendation: "Advance provision of information to directors prior to board meetings", status: "O", note: "-" },
+                        { recommendation: "Formation of Audit Committee", status: "O", note: "Composed entirely of outside directors" },
+                        { recommendation: "Adoption of Cumulative Voting System", status: "X", note: "-" },
+                        { recommendation: "Certification of Accuracy and Completeness of Financial Reporting by CEO and CFO", status: "O", note: "-" },
+                        { recommendation: "Directors' Liability Insurance at Company's Expense", status: "O", note: "Officers' liability insurance maintained" },
+                        { recommendation: "Adoption and Disclosure of Employee Code of Ethics", status: "O", note: "-" },
+                        { recommendation: "Explanation of differences from Best Practice Guidelines", status: "O", note: "-" }
+                    ]
                 }
             }
         };

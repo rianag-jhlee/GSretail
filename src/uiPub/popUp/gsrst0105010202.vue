@@ -83,6 +83,25 @@ export default {
                         { title: "담보설정", item1: "", item2: "", fee: "5천만원", rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
                         { title: "* 최저 수입 보조금", item1: "", item2: "", fee: "영업면적 200㎡ 초과 : 18백만/월\n영업면적 165㎡ 이상~200㎡ 이하 : 16백만/월\n영업면적 165㎡ 미만 : 13백만/월", rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
                     ]
+                },
+                en: {
+                    MainTitle: "GSF2 Type"/* 260604 번역 */,
+                    intro: 'Store owner bears 51% of total investment cost. Store owner operates'/* 260604 번역 */,
+                    IRListData: [
+                        { title: "Investment amount"/* 260604 번역 */, item1: "Opening Investment"/* 260604 번역 */, item2: "Franchise Fee"/* 260604 번역 */, fee: "11 million won (VAT included)"/* 260604 번역 */, rs1: 9, cs1: 1, rs2: 5, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "", item2: "Initial merchandise cost"/* 260604 번역 */, fee: "70 million won"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 0, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "", item2: "Consumables", fee: "7 million won"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 0, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "", item2: "Facility Deposit"/* 260604 번역 */, fee: "5 million won"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 0, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "", item2: "Opening Investment Total"/* 260604 번역 */, fee: "93 million won"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 0, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "Party responsible for lease costs"/* 260604 번역 */, item2: "", fee: "Headquarters"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 1, cs2: 2, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "", item1: "Party Bearing Facility Investment"/* 260604 번역 */, item2: "", fee: "Headquarters"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 1, cs2: 2, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "", item1: "Security Deposit", item2: "", fee: "* Total store investment cost X 51% - 93 million won\n(cash)"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 1, cs2: 2, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "", item1: "Total Store Owner Investment"/* 260604 번역 */, item2: "", fee: "93 million won + deposit"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 1, cs2: 2, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "Franchise Fee (VAT not included)"/* 260604 번역 */, item1: "", item2: "", fee: "49%\nby gross sales profit bracket\n49% ~ 55%"/* 260604 번역 */, rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "Contract Period", item1: "", item2: "", fee: "3 years / in 3-year units"/* 260604 번역 */, rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "Collateral Setup"/* 260604 번역 */, item1: "", item2: "", fee: "50 million won"/* 260604 번역 */, rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "* Minimum income subsidy"/* 260604 번역 */, item1: "", item2: "", fee: "Sales area over 200㎡: 18 million/month\nSales area 165㎡ or more to 200㎡ or less: 16 million/month\nSales area under 165㎡: 13 million/month"/* 260604 번역 */, rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                    ]
                 }
             }
         };

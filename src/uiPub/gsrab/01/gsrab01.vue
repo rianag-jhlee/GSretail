@@ -122,7 +122,29 @@ const langData = {
         CeoName: "허서홍"
     },
     en: {
-
+        VisualTitle: `A company that makes everyday life better,<br />a company that always puts customers first:<br />that is the GS Retail we strive to be.`,
+        ceo:`<span>CEO</span><strong>Suh-hong Hur</strong><em><img src="${require('@/assets/images/sub/gsrab/img_ceo_signature.png')}" /></em>`,
+        AboutTitle: `GS Retail is Korea's leading<br />Lifestyle Platform.`,
+        AboutDesc: `GS Retail leads the way in everyday living by operating platforms<br />deeply embedded in daily life.`,
+        PrepareTitle: `GS Retail goes one step further<br />for customer delight.`,
+        PrepareDesc1: `Since its founding in 1971, GS Retail has made customer satisfaction its top priority,<br class="p_br"/>delivering the best products and services.`,
+        PrepareDesc2: `We will continue to go the extra mile to make our customers' lives<br class="p_br"/>more convenient and meaningful.`,
+        prepare_photos:[
+            {img: require("@/assets/images/sub/gsrab/prepare_photos_01.png"), alt:""},
+            {img: require("@/assets/images/sub/gsrab/prepare_photos_02.png"), alt:""},
+            {img: require("@/assets/images/sub/gsrab/prepare_photos_03.png"), alt:""},
+            {img: require("@/assets/images/sub/gsrab/prepare_photos_04.png"), alt:""},
+            {img: require("@/assets/images/sub/gsrab/prepare_photos_05.png"), alt:""},
+        ],
+        SustainTitle: `GS Retail is committed to<br />sustainable business practices.`,
+        SustainDesc1: `We are expanding our eco-friendly product lineup and advancing a circular economy,<br class="p_br"/>implementing environmental management.`,
+        SustainDesc2: `We also run various programs and initiatives to grow alongside our store owners, employees, partners, and local communities.<br class="m_br"/>Through active ESG leadership,<br class="p_br"/>we will build a sustainable future<br class="m_br"/>and earn the trust of all our stakeholders.`,
+        GrowthRow1: "GS Retail",
+        GrowthRow2: "will grow alongside our customers",
+        GrowthRow3: "and create<br />a better future together.",
+        GrowthDesc: `We will always listen to our customers, <br class="m_br"/>create value through innovation,<br />and be a company that lives up to its social responsibilities.`,
+        CeoRole: "CEO",
+        CeoName: "Suh-hong Hur"
     }
 };
 

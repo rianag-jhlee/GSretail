@@ -130,6 +130,47 @@ export default {
                         { no: "52", title: "2025년 2분기 경영실적", fileType: "PDF", link: "/files/report_52.pdf" },
                         { no: "51", title: "감사보고서 제출", fileType: "PDF", link: "/files/report_51.pdf" }
                     ]
+                },
+                en: {
+                    MainTitle: "IR Library",
+                    MainsubTitle: "IR Library",
+                    YearSelectLabel: "Select Year"/* 260604 번역 */,
+
+                    /* SelectBox 컴포넌트용 옵션 */
+                    YearOptions: [
+                        { value: "All", label: "All" },
+                        { value: "2026", label: "2026" },
+                        { value: "2025", label: "2025" },
+                        { value: "2024", label: "2024" }
+                    ],
+
+                    /* Search 컴포넌트 전용 옵션 (props: search_opt) */
+                    SearchOptions: [
+                        { value: "all", label: "All" },
+                        { value: "title", label: "Title" },
+                        { value: "content", label: "Details" }
+                    ],
+
+                    /* 테이블 헤더 */
+                    TableHeader: { 
+                        col1: "No.", 
+                        col2: "Title", 
+                        col3: "Download ↓" 
+                    },
+
+                    /* 리스트 데이터 */
+                    IRListData: [
+                        { no: "60", title: "2026 Business Results Presentation Materials"/* 260604 번역 */, fileType: "PDF", link: "/files/report_60.pdf" },
+                        { no: "59", title: "Notice of Convocation of the 55th Annual General Meeting of Shareholders"/* 260604 번역 */, fileType: "PDF", link: "/files/report_59.pdf" },
+                        { no: "58", title: "Q4 2025 IR Report"/* 260604 번역 */, fileType: "PDF", link: "/files/report_58.pdf" },
+                        { no: "57", title: "Corporate Value-up Plan Disclosure"/* 260604 번역 */, fileType: "PDF", link: "/files/report_57.pdf" },
+                        { no: "56", title: "Operating Results Based on Consolidated Financial Statements"/* 260604 번역 */, fileType: "PDF", link: "/files/report_56.pdf" },
+                        { no: "55", title: "Q3 2025 Performance Materials"/* 260604 번역 */, fileType: "PDF", link: "/files/report_55.pdf" },
+                        { no: "54", title: "ESG Report 2025"/* 260604 번역 */, fileType: "PDF", link: "/files/report_54.pdf" },
+                        { no: "53", title: "New Facility Investment Decision Notice"/* 260604 번역 */, fileType: "PDF", link: "/files/report_53.pdf" },
+                        { no: "52", title: "Q2 2025 Business Results"/* 260604 번역 */, fileType: "PDF", link: "/files/report_52.pdf" },
+                        { no: "51", title: "Submission of Audit Report"/* 260604 번역 */, fileType: "PDF", link: "/files/report_51.pdf" }
+                    ]
                 }
             }
         };

@@ -57,6 +57,26 @@ export default {
                         "지배구조 5개년 등급 공개",
                         "배당금 증가 ('18년 650원, '19년 750원, '20년 900원, '21년 1200원)"
                     ]
+                },
+                en: {
+                    MainTitle: "Shareholder Protection Policies and Related System Information"/* 260604 번역 */,
+                    IntroText: "As a leading retail platform company representing Korea, GS Retail continuously seeks new growth engines and strives to maximize shareholder investment returns by securing a transparent and sound governance structure that reflects stakeholders' opinions."/* 260604 번역 */,
+                    PolicyList: [
+                        "Providing shareholders with various means of exercising voting rights, such as electronic voting and solicitation of proxy voting"/* 260604 번역 */,
+                        "Introduction of a shareholder recommendation system for the appointment of outside directors and auditors"/* 260604 번역 */,
+                        "Separate Election of Outside Director Candidates"/* 260604 번역 */,
+                        "Stipulation in the articles of incorporation of the maximum term for the reappointment of outside directors"/* 260604 번역 */,
+                        "Stipulation in the articles of incorporation of the board meeting convocation notice period"/* 260604 번역 */,
+                        "Separation of the Representative Director and the Board Chairperson"/* 260604 번역 */,
+                        "Disclosure of Board and Standing Committee Regulations"/* 260604 번역 */,
+                        "Operation of an Internal Transactions Committee within the board to review transactions among affiliates"/* 260604 번역 */,
+                        "Operation of an Outside Director Candidate Recommendation Committee within the board that verifies and recommends outside director candidates"/* 260604 번역 */,
+                        "The Audit Committee is composed entirely of outside directors, including accounting experts"/* 260604 번역 */,
+                        "Establishment of an Employee Code of Ethics and a Corporate Governance Charter"/* 260604 번역 */,
+                        "Disclosure of Differences from Corporate Governance Best Practice Standards"/* 260604 번역 */,
+                        "Disclosure of 5-Year Governance Ratings"/* 260604 번역 */,
+                        "Dividend increase (KRW 650 in '18, KRW 750 in '19, KRW 900 in '20, KRW 1,200 in '21)"/* 260604 번역 */
+                    ]
                 }
             }
         };

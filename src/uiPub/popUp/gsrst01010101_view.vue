@@ -89,7 +89,31 @@ const langData = {
         closeLabel: "닫기",
     },
     en: {
-      
+        title: "GSF1 Type"/* 260604 번역 */,
+        intro: "Headquarters leases and the store owner operates"/* 260604 번역 */,
+        tableHead: {
+            item: "Item"/* 260604 번역 */,
+            cost: "Cost"/* 260604 번역 */,
+        },
+        tableRows: [
+            { main: "Investment amount"/* 260604 번역 */, mainRowspan: 5, sub: "Franchise Fee"/* 260604 번역 */, cost: "11 million won (VAT included)"/* 260604 번역 */ },
+            { sub: "Initial merchandise cost"/* 260604 번역 */, cost: "70 million won"/* 260604 번역 */ },
+            { sub: "Consumables", cost: "7 million won"/* 260604 번역 */ },
+            { sub: "Facility Deposit"/* 260604 번역 */, cost: "5 million won"/* 260604 번역 */ },
+            { sub: "Opening Investment Total"/* 260604 번역 */, cost: "93 million won"/* 260604 번역 */ },
+            { sub: "Party responsible for lease costs"/* 260604 번역 */, subColspan: 2, cost: "Headquarters"/* 260604 번역 */ },
+            { sub: "Party Bearing Facility Investment"/* 260604 번역 */, subColspan: 2, cost: "Headquarters"/* 260604 번역 */ },
+            { sub: "Security Deposit", subColspan: 2, cost: "100 million won (guarantee insurance or cash)"/* 260604 번역 */ },
+            { sub: "Total Store Owner Investment"/* 260604 번역 */, subColspan: 2, cost: "Minimum 193 million won"/* 260604 번역 */ },
+            { sub: "Franchise Fee (VAT not included)"/* 260604 번역 */, subColspan: 2, cost: "57%, by gross sales profit bracket 52% ~ 62%"/* 260604 번역 */ },
+            { sub: "Contract Period", subColspan: 2, cost: "3 years / in 3-year units"/* 260604 번역 */ },
+            { sub: "Collateral Setup"/* 260604 번역 */, subColspan: 2, cost: "None"/* 260604 번역 */ },
+            { sub: "** Minimum income subsidy"/* 260604 번역 */, subColspan: 2, cost: "Sales area over 200 pyeong: 18 million/month<br />Sales area 165 pyeong or more to 200 pyeong or less: 16 million/month<br />Sales area under 165 pyeong: 13 million/month"/* 260604 번역 */ },
+        ],
+        warningText: "Based on the store owner's total income (store owner's monthly gross sales profit + headquarters support funds), before deducting operating expenses such as labor costs. (Applies for the first 1 year from the opening date only)"/* 260604 번역 */,
+        submitLabel: "Confirm",
+        printLabel: "Print"/* 260604 번역 */,
+        closeLabel: "Close"/* 260604 번역 */,
     },
 };
 

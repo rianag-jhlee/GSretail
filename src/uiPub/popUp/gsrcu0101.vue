@@ -377,7 +377,107 @@ export default {
                     }
                 },
                 en: {
-                    
+                    MainTitle: "Customer Feedback",
+                    common: {
+                        close: "Close"/* 260604 번역 */,
+                        agree: "I agree.",
+                    },
+                    listening: {
+                        Txt:"We will always put ourselves in our customers' shoes and listen even to the smallest voice.",
+                        membershipTitle: "Membership/Website Inquiry",
+                        membershipDesc: "Please leave your feedback or suggestions regarding membership and the website."/* 260604 번역 */,
+                        Consents: [
+                            {
+                                title: "Consent to Third-Party Provision of Personal Information",
+                                items: [
+                                    "The information you enter will be forwarded to the owner of the relevant store for prompt and accurate handling, and will be used to respond to inquiries and complaints.",
+                                    "Recipients: The GS25 administrator you submitted your inquiry to, and the manufacturer/distributor (importer) of the products stocked at GS25"/* 260604 번역 */,
+                                    "Purpose of use: Used to confirm inquiries and conduct responses and satisfaction surveys."/* 260604 번역 */,
+                                    "Personal Information Items: Name, contact number, email",
+                                    "- Retention and Use Period: One year after receipt"
+                                ],
+                                guide: "※ You have the right to refuse this consent; however, if you do not consent, you may experience difficulty receiving prompt and accurate responses to inquiries that require verification."
+                            },
+                            {
+                                title: "Consent to Collection and Use of Personal Information",
+                                items: [
+                                    "The information you enter is used solely to address your inquiry. The collected items, use and purpose, and retention and use period are as follows. For other personal information handling matters, please refer to the 'Privacy Policy' at the bottom of the website."/* 260604 번역 */,
+                                    "Items of personal information collected: Name, contact number, email",
+                                    "Collection, use, and purpose: The collected personal information is used for identity verification, inquiry confirmation, responses and satisfaction surveys, and statistical analysis for service improvement."/* 260604 번역 */,
+                                    "- Retention and Use Period: One year after receipt"
+                                ],
+                                guide: "You have the right to refuse this consent; however, if you do not consent,<br/> Writing an inquiry is not possible."/* 260604 번역 */
+                            }
+                        ],
+                        Nonmember: {
+                            title: "Please verify the contact information in your customer details."/* 260604 번역 */,
+                            items: [
+                                "Responses to inquiries can only be checked through the contact information (SMS, phone) or email you registered. Please enter your contact information accurately. <br/>(Previous inquiry history cannot be checked on the website)"/* 260604 번역 */,
+                            ]
+                        },
+                        InputWrapcont: {
+                            part1: {
+                                title: "Customer Information",
+                                requiredText: "* Required fields",
+                                nameLabel: "Name",
+                                namePlaceholder: "Please enter your name"/* 260604 번역 */,
+                                emailLabel: "Email",
+                                emailIdPlaceholder: "Email ID"/* 260604 번역 */,
+                                emailDomainPlaceholder: "Enter domain"/* 260604 번역 */,
+                                emailInitMsg: "Enter directly",
+                                emailOptions: [{ value: 'naver.com', label: 'naver.com' }, { value: 'gmail.com', label: 'gmail.com' }],
+                                telLabel: "Contact",
+                                telInitMsg: "Select"/* 260604 번역 */,
+                                telOptions: [{ value: '010', label: '010' }, { value: '011', label: '011' }]
+                            },
+                            part2: {
+                                title: "Consultation Content",
+                                categoryLabel: "Category",
+                                Consulting:"Select Consultation Category",
+                                consultingInitMsg: "Select Consultation Category",
+                                categoryOptions: [{ value: 'store', label: 'Convenience store/supermarket'/* 260604 번역 */ }, { value: 'home', label: 'Home Shopping' }],
+                                storeLabel: "Store Name",
+                                storePlaceholder: "Please enter the store name"/* 260604 번역 */,
+                                storeGuide: "If you do not know the store name, please write the store location.",
+                                subjectLabel: "Title",
+                                subjectPlaceholder: "Please enter a title"/* 260604 번역 */,
+                                contentLabel: "Details",
+                                contentPlaceholder: "Please enter any questions related to store onboarding",
+                                noticeText: `
+                                    <span>For inquiries about GS25 stores, please include the exact store name and the date and time of your visit (purchase) so we can provide a smoother response.</span>
+                                    <span>When entering your content, please be careful not to include personal information such as contact numbers or addresses to protect your privacy.</span>
+                                    <span>If the consultation content contains profanity or abusive language, it may not be answered.</span>
+                                    <span>Regardless of the consultation content (including attachments), posting content that causes sexual shame or disgust may be punishable under the Act on Special Cases Concerning the Punishment of Sexual Crimes.</span>`/* 260604 번역 */,
+                                fileLabel: "File Attachment",
+                                fileNotice: "* When uploading multiple files, please compress them into a zip file (* File size limit: 20MB)",
+                                replyLabel: "Reply Method",
+                                replyInitMsg: "Select reply method"/* 260604 번역 */,
+                                replyOptions: [{ value: 'email', label: 'Email' }, { value: 'sms', label: 'SMS' }],
+                                btnSubmit: "Apply"/* 260604 번역 */,
+                                btnCancel: "Cancel"
+                            },
+                            membershipForm: {
+                                title: "Consultation Content",
+                                requiredText: "* Required fields",
+                                inquiryTypeLabel: "Inquiry Type",
+                                inquiryTypeInitMsg: "Select inquiry type"/* 260604 번역 */,
+                                inquiryTypeOptions: [{ value: 'membership', label: 'Membership/Website Inquiry' }],
+                                divisionLabel: "Category",
+                                divisionInitMsg: "Select Consultation Category",
+                                divisionOptions: [{ value: 'consult', label: 'Consultation Category' }],
+                                consultingLabel: "Select Consultation Category",
+                                consultingInitMsg: "GS Retail",
+                                consultingOptions: [{ value: 'gsretail', label: 'GS Retail' }],
+                                subjectLabel: "Title",
+                                contentLabel: "Details",
+                                contentPlaceholder: "When entering content",
+                                fileLabel: "File Attachment",
+                                fileGuide: "* When uploading multiple files, please compress them into a zip file (* File size limit: 20MB)",
+                                replyLabel: "Reply Method",
+                                replyInitMsg: "Email",
+                            },
+                        }
+                    }
                 }
             }
         };

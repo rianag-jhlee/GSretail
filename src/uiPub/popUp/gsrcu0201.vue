@@ -261,6 +261,76 @@ export default {
                             }
                         }
                     }
+                },
+                en: {
+                    MainTitle: "Customer Feedback",
+                    listening: {
+                        Txt:"We will always put ourselves in our customers' shoes and listen even to the smallest voice.",
+                        Title: "Partnership and Collaboration Inquiry",
+                        Desc: "Please leave your comments, suggestions, etc., regarding partnerships and collaborations.",
+                        Consents: [
+                            {
+                                title: "Consent to Third-Party Provision of Personal Information",
+                                items: [
+                                    "The information you enter will be forwarded to the owner of the relevant store for prompt and accurate handling, and will be used to respond to inquiries and complaints.",
+                                    "Recipients: The GS25 administrator you submitted your inquiry to, and the manufacturer/distributor (importer) of the products stocked at GS25"/* 260604 번역 */,
+                                    "Purpose of use: Used to confirm inquiries and conduct responses and satisfaction surveys."/* 260604 번역 */,
+                                    "Personal Information Items: Name, contact number, email",
+                                    "- Retention and Use Period: One year after receipt"
+                                ],
+                                guide: "※ You have the right to refuse this consent; however, if you do not consent, you may experience difficulty receiving prompt and accurate responses to inquiries that require verification."
+                            },
+                            {
+                                title: "Consent to Collection and Use of Personal Information",
+                                items: [
+                                    "The information you enter is used solely to address your inquiry. The collected items, use and purpose, and retention and use period are as follows. For other personal information handling matters, please refer to the 'Privacy Policy' at the bottom of the website."/* 260604 번역 */,
+                                    "Items of personal information collected: Name, contact number, email",
+                                    "Collection, use, and purpose: The collected personal information is used for identity verification, inquiry confirmation, responses and satisfaction surveys, and statistical analysis for service improvement."/* 260604 번역 */,
+                                    "- Retention and Use Period: One year after receipt"
+                                ],
+                                guide: "You have the right to refuse this consent; however, if you do not consent,<br/> Writing an inquiry is not possible."/* 260604 번역 */
+                            }
+                        ],
+                        Nonmember: {
+                            title: "You are currently submitting your inquiry as a non-member (not logged in)."/* 260604 번역 */,
+                            items: [
+                                "If you make an inquiry as a non-member, the response can be checked 'only through the contact information you registered (text message, phone call) or email.'"/* 260604 번역 */,
+                                "Please enter your contact information accurately. (Previous inquiry history cannot be checked within the website.)"/* 260604 번역 */,
+                                "If you submit a customer inquiry after logging in, you can check the inquiry/response history on My Page. (Except for Integrity Management)"/* 260604 번역 */
+                            ]
+                        },
+                        InputWrapcont: {
+                            part1: {
+                                title: "Customer Information",
+                                requiredText: "* Required fields",
+                                nameLabel: "Name",
+                                namePlaceholder: "Please enter your name"/* 260604 번역 */,
+                                emailLabel: "Email",
+                                emailOptions: [{ value: 'naver.com', label: 'naver.com' }, { value: 'gmail.com', label: 'gmail.com' }],
+                                telLabel: "Contact",
+                                telOptions: [{ value: '010', label: '010' }, { value: '011', label: '011' }]
+                            },
+                            part2: {
+                                title: "Consultation Content",
+                                Inquirytype:'Inquiry Type',
+                                categoryLabel: "Category",
+                                categoryOptions: [{ value: 'store', label: 'Convenience store/supermarket'/* 260604 번역 */ }, { value: 'home', label: 'Home Shopping' }],
+                                Consulting:"Select Consultation Category",
+                                ConsultingyOptions: [{ value: 'store', label: 'Convenience store/supermarket'/* 260604 번역 */ }, { value: 'home', label: 'Home Shopping' }],
+                                storeLabel: "Store Name",
+                                storeGuide: "If you do not know the store name, please write the store location.",
+                                subjectLabel: "Title",
+                                contentLabel: "Details",
+                                contentPlaceholder: "Please enter any questions related to store onboarding",
+                                fileLabel: "File Attachment",
+                                fileNotice: "* When uploading multiple files, please compress them into a zip file (* File size limit: 20MB)",
+                                replyLabel: "Reply Method",
+                                replyOptions: [{ value: 'email', label: 'Email' }, { value: 'sms', label: 'SMS' }],
+                                btnSubmit: "Apply"/* 260604 번역 */,
+                                btnCancel: "Cancel"
+                            }
+                        }
+                    }
                 }
             }
         };

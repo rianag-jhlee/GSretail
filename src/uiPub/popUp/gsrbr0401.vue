@@ -144,6 +144,48 @@ export default {
                         { num: "03", text: "주문내역 선택 시, '픽업 바코드 보기'버튼 선택", img: require("@/assets/images/dummy/gsrbr0401_3.png") },
                         { num: "04", text: "점원에게 바코드 제시", img: require("@/assets/images/dummy/gsrbr0401_4.png") }
                     ]
+                },
+                en: {
+                    MainTitle: "Delivery & Pickup",
+                    TipTitle: "Our Neighborhood GS Delivery & Pickup Tips",
+                    Tips: [
+                        { text: "KT and LG U+ <br />Carrier Discounts" },
+                        { text: "GS ALL Points<br />Earning & Redemption" },
+                        { text: "Exclusive GS Pay <br />Discounts and Gifts" },
+                        { text: "Additional Discount<br />When Paying with<br />Mobile POP" },
+                        { text: "Buy-One-Get-One, 2+1, <br />and More Promotions" },
+                        { text: "Exclusive Discount Coupons <br />for the Our Neighborhood GS App" }
+                    ],
+                    Gs25Title: "Lunchboxes, sandwiches, and more — <br />pick them up at your preferred store at your chosen time.",
+                    Gs25Desc: "A pre-order service that lets you collect your items at your preferred store and time through the Our Neighborhood GS app.",
+                    Gs25Categories: [
+                        { name: "Lunchbox and Gimbap", img: require("@/assets/images/dummy/gsrbr0401_food1.png") },
+                        { name: "Burger", img: require("@/assets/images/dummy/gsrbr0401_food2.png") },
+                        { name: "Sandwich", img: require("@/assets/images/dummy/gsrbr0401_food3.png") },
+                        { name: "Ready-to-Eat Noodles", img: require("@/assets/images/dummy/gsrbr0401_food4.png") },
+                        { name: "Cooking / side dishes"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrbr0401_food5.png") },
+                        { name: "Salad", img: require("@/assets/images/dummy/gsrbr0401_food6.png") }
+                    ],
+                    NoticeTxt: "Stay up to date on pre-order special events and parcel delivery promotions!"/* 260604 번역 */,
+                    ChildFoodTitle: "Children's Meal Card Pre-Order",
+                    ChildFoodDesc: "This service lets you purchase items at a 20% discount when paying with a Children's Meal Card for pre-ordered in-store pickup through the Our Neighborhood GS app.<br/>Available to children and youth under 18 who have been issued a Children's Meal Card by one of the local governments listed below."/* 260604 번역 */,
+                    ChildFoodNotice: "* Local governments serviced by Shinhan Card: Seoul, Incheon, Busan, Chuncheon, Wonju, Sokcho\n* Local governments serviced by NH Bank: Gyeonggi-do, Gyeongsangbuk-do, Gyeongsangnam-do, Chungcheongbuk-do, Chungcheongnam-do, Daejeon, Ulsan, Jeju Special Self-Governing Province"/* 260604 번역 */,
+                    AccTitle: "How to Use the Children's Meal Card Pre-Order Service",
+                    Steps: [
+                        { num: "01", text: "Open Our Neighborhood GS<br />and select the 'Children's Meal' icon", img: require("@/assets/images/dummy/gsrbr0401_1.png") },
+                        { num: "02", text: "Set a GS25 store in your Children's Meal Card area <br />as your pickup store", img: require("@/assets/images/dummy/gsrbr0401_2.png") },
+                        { num: "03", text: "Select your items<br />and enter pickup information", img: require("@/assets/images/dummy/gsrbr0401_3.png") },
+                        { num: "04", text: "Enter your Children's Meal Card number<br />and expiry date, then complete payment", img: require("@/assets/images/dummy/gsrbr0401_4.png") }
+                    ],
+                    AccTitle_2: "How to Collect Children's Meal Card Pre-Orders",
+                    FreshTitle: "Smarter Grocery Shopping with Pre-Orders!",
+                    // FreshDesc: "산지의 신선함을 집 앞까지 배송하는 사전예약 서비스는 제철 상품을 합리적인 가격으로 제공하여 많은 사랑을 받고 있습니다. 주문한 상품을 매장에서 수령할 수 있고, 주문 방법이 어렵다면 매장으로 문의 바랍니다."
+                    Steps_2: [
+                        { num: "01", text: "Open Our Neighborhood GS<br />and select 'My Fridge' or 'Order History'", img: require("@/assets/images/dummy/gsrbr0401_1.png") },
+                        { num: "02", text: "When selecting 'My Fridge',<br />choose your pre-ordered Children's Meal item", img: require("@/assets/images/dummy/gsrbr0401_2.png") },
+                        { num: "03", text: "When selecting 'Order History',<br />tap the 'View Pickup Barcode' button", img: require("@/assets/images/dummy/gsrbr0401_3.png") },
+                        { num: "04", text: "Present the barcode to the store staff", img: require("@/assets/images/dummy/gsrbr0401_4.png") }
+                    ]
                 }
             }
         };

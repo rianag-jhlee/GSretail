@@ -120,7 +120,48 @@ export default {
                 ],
                 ListBack: "목록으로 돌아가기",
             },
-            en: {},
+            en: {
+                title: "GS샵 분트로이, AI 모델 입은 S/S 컬렉션 공개. 출근복과 일상복의 경계 허문다",
+                cate: "GS SHOP",
+                date: "2026.02.05",
+                subTitle: "소제목이 들어가는 영역입니다",
+                summaryTitle: "요약 정보가 들어가는 영역입니다",
+                summaryList: [
+                    "2009: Deputy President, Shinhan Bank",
+                    "2009: Deputy President, Shinhan Bank",
+                    "2009: Deputy President, Shinhan Bank",
+                    "2009: Deputy President, Shinhan Bank",
+                ],
+                detailImageAlt: "",
+                detail: "분트로이, 기존 콘셉트에 내구성과 활동성 강화한 S/S 시즌 ‘퍼포먼스 워크웨어’ 선보여 공간 제약 극복해 고객 선택폭 확대, 주문 방식으로 보다 합리적인 가격도 주목 포인트 GS샵 자체 패션 브랜드 중 남성 라인 첫  정식 론칭하고, AI 남성 모델로 콘텐츠 일괄 제작 18일(수) 21시 45분 방송서 아스킨 니트, 플렉슈라 재킷∙팬츠, 카프리 팬츠 등 선보일 예정",
+                faqTitle: "FAQ",
+                faqList: [
+                    {
+                        title: "1. Shareholder Rights",
+                        items: [
+                            "1. Shareholder Rights<br />(1) Shareholders are the owners of the Company and are guaranteed fundamental rights protected by applicable laws, including the right to participate in profit distribution, the right to attend and vote at General Meetings of Shareholders, and the right to propose agenda items at General Meetings of Shareholders.",
+                            "정관의 변경, 합병, 영업양수도 및 기업의 분할, 해산, 자본금의 감소 등 관련 법령이 정하는 사항 중 회사의 존립과 주주권에 중대한 변화를 가져오는 사항은 주주의 권리를 최대한 보장하여, 주주총회를 통해 결정한다.",
+                            "회사는 주주총회의 결의가 투명하고 공정한 절차에 따라 이루어지도록 노력하며, 주주에 대하여 주주총회 참석 전에 주주총회의 일시와 장소 및 의안 의결권의 행사 방법 등에 관하여 충분한 정보를 제공한다.",
+                            "주주권의 행사는 주주의 자유로운 의사에 따라 행사되어야 한다.",
+                        ],
+                    },
+                    {
+                        title: "2. Equal Treatment of Shareholders",
+                        items: [
+                            "주주는 1주 1의결권 원칙에 따라 권리를 보장 받는다. 단, 법령에 의거하여, 특정 주주의 의결권이 제한되는 경우, 관련 법령을 따른다. 회사는 상법 및 관련 법령이 정하는 기준에 따라 주주의 본질적인 권리가 훼손되지 않도록 공평하게 대우한다.",
+                            "회사는 주주에게 필요한 정보를 적시에 충분히 이해할 수 있도록 쉽게 구성하여, 공평한 방법으로 제공한다. 또한 부당한 내부거래 및 자기거래로부터 주주가 보호될 수 있도록 노력한다.",
+                        ],
+                    },
+                    {
+                        title: "3. Shareholder Responsibilities",
+                        items: [
+                            "주주는 회사의 발전과 이익을 위하여. 자신의 의결권을 적극적으로 행사하여야 한다.",
+                            "회사 경영에 영향력을 행사하는 지배주주는 회사와 다른 모든 주주의 이익을 고려하여 주주권을 행사하며, 그 지배권을 남용하여 다른 주주에게 손해가 발생하지 않도록 노력해야 한다.",
+                        ],
+                    },
+                ],
+                ListBack: "← Back to Brand List",
+            },
         };
 
         const t = computed(() => {

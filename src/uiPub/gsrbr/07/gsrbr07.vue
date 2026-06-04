@@ -73,6 +73,28 @@ export default {
                         alt: "Real price BI 이미지"
                     },
                     ListBack:`목록으로 돌아가기`
+                },
+                en: {
+                    Visual: { // 대문자 유지
+                        img: require("@/assets/images/dummy/gsrbr07.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr07_mo.png"),
+                        alt: "Pay more conveniently across GS brands with Mobile POP!"/* 260604 번역 */,
+                        subContent_1: "With Mobile POP"/* 260604 번역 */,
+                        subContent_2: "GS brands made more convenient"/* 260604 번역 */,
+                        subContent_3: "Make your payment!"/* 260604 번역 */,
+                    },
+                    HopageLink: `http://www.popcard.co.kr/popcard/ko/main`,
+                    HopageText: `Homepage`,
+                    SubTitle: `Membership POP Card Introduction`/* 260604 번역 */,
+                    SubContent_1: `The GS ALL Membership (GS ALL Points) card and POP Card are combined so that at GS25 and GS THE FRESH, simultaneously with payment<br/> Points are earned, and payment can be made at over 800 online merchants (shopping, games, etc.)<br/> It is a prepaid card with many available benefits.<br/> (There is no transit function, and you must register as a member to use accumulated points.) `/* 260604 번역 */,
+                    // SubContent_2: `다양한 결제 수단과 결합된 팝카드만의 차별화된 혜택으로 더 크게 적립하고,<br/> 더 합리적으로 소비하세요.`,
+                    Bi: {
+                        txt: `BI Logo`/* 260604 번역 */,
+                        img: require("@/assets/images/dummy/gsrbr07_bi.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr07_bi_mo.png"),
+                        alt: "REAL price BI Image"/* 260604 번역 */
+                    },
+                    ListBack:`← Back to Brand List`
                 }
             }
         };

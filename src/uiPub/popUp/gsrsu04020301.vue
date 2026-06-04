@@ -233,6 +233,94 @@ export default {
                         article: "제 1조[시행일]",
                         lines: ["- 이 지침은 2020년 4월 1일부터 시행한다.", "- 이 지침은 2021년 4월 1일부터 시행한다."]
                     }
+                },
+                en: {
+                    MainTitle: "Partner Company Selection and Operation Guidelines"/* 260604 번역 */,
+                    intro: '2021.04.\nGS Retail\n\nGuidelines for the Fair Selection and Operation of Partner Companies',
+                    section1: {
+                        title: "Purpose",
+                        desc: `- These practice items, in accordance with the Fair Trade Commission's "Practice Items for the Fair Selection and Operation of Partner Companies," are intended to enhance transparency and fairness in the partner company selection and operation processes of GS Retail (hereinafter the “Company”), thereby contributing to the establishment of a fair subcontract transaction order and setting forth general matters for the advance prevention of violations of the Subcontracting Act.`/* 260604 번역 */
+                    },
+                    section2: {
+                        title: "II. Definition of Terms",
+                        items: [
+                            { content: "1. “Partner Company” refers to a business operator that is expected to be, or is currently, a counterparty in the Company's manufacturing, construction, or service consignment transactions, etc., and includes not only partner companies as defined under the Subcontracting Act but also general consignees."/* 260604 번역 */ },
+                            { content: "2. “Partner Company Pool” means the group of partner companies that the Company registers, manages, and operates according to certain criteria."/* 260604 번역 */ },
+                            { content: "3. “Partner Company Selection” means registration in the Company's partner company pool."/* 260604 번역 */ },
+                            { content: "4. “Partner Company Operation” means the Company managing the partner company pool according to certain criteria—such as granting opportunities to commence transactions to companies selected and registered as partner companies, and cancelling registration."/* 260604 번역 */ }
+                        ]
+                    },
+                    section3: {
+                        title: "III. Guidelines for the Selection and Operation of Partner Companies",
+                        step1: {
+                            title: "1. Partner company selection criteria and procedures"/* 260604 번역 */,
+                            partA: {
+                                label: "a. Disclosure of the criteria, procedures, and results for selecting Partner Companies"/* 260604 번역 */,
+                                rows: [
+                                    "① Matters concerning the criteria and procedures for selecting Partner Companies shall be disclosed for at least 15 days at business premises, on electronic media, or through similar means, either 30 days before the expiration of the Partner Company's registration validity period or 30 days before the commencement of registration (including renewal registration) review."/* 260604 번역 */,
+                                    "② Where the criteria for selecting Partner Companies are changed, the companies subject to renewal registration shall be individually notified of such matters in writing (including electronic documents; the same applies hereinafter) 45 days in advance."/* 260604 번역 */,
+                                    "③ The results shall be individually notified in writing within 15 days from the Partner Company selection date, and non-selected companies shall be notified in writing with the reasons stated."/* 260604 번역 */
+                                ]
+                            },
+                            partB: {
+                                label: "Specificity and Clarity of Selection Standards",
+                                desc: "- The Company shall make the partner company selection criteria specific and clear so that there is no risk of arbitrary interpretation."/* 260604 번역 */
+                            },
+                            partC: {
+                                label: "Fairness of Selection Standards and Procedures",
+                                desc1: "(1) The criteria for the partner company selection procedure are as follows."/* 260604 번역 */,
+                                tit: "▶ Selection Procedure"/* 260604 번역 */,
+                                image: {
+                                    src: require("@/assets/images/dummy/pop_guide_step.png"),
+                                    alt: 'Selection procedure'/* 260604 번역 */
+                                },
+                                tit2: "▶ Selection Criteria"/* 260604 번역 */,
+                                rows: [
+                                    "① A credit rating of B or higher from a credit rating agency"/* 260604 번역 */,
+                                    "② In the case of food manufacturing, an HACCP-certified company"/* 260604 번역 */
+                                ],
+                                desc2: "(2) The application and receipt period for partner company registration shall be at least 15 days.\n(3) For companies that consider themselves to have been excluded from partner company selection due to grounds attributable to the Company, an opportunity to file an objection shall be granted for a period of at least 15 days from the date of receipt of the non-selection notice.\n(4) No discrimination in selection criteria shall be made between existing registered companies and newly registered companies without justifiable reason."/* 260604 번역 */
+                            },
+                            partD: {
+                                label: "d. Granting of fair opportunities to commence transactions"/* 260604 번역 */,
+                                desc: "- For business operators selected and registered as partner companies, opportunities such as participation in bidding for the commencement of transactions shall not be restricted or discriminated against without justifiable reason."/* 260604 번역 */
+                            },
+                            partE: {
+                                label: "e. Openness of the criteria and procedures for cancellation of Partner Company registration"/* 260604 번역 */,
+                                desc: "- Disclose the partner company selection criteria and procedures on business premises, electronic media, etc. for at least 15 days."/* 260604 번역 */
+                            },
+                            partF: {
+                                label: "f. Specificity and clarity of the criteria for cancellation of Partner Company registration"/* 260604 번역 */,
+                                desc: "- The Company shall make the criteria for cancellation of partner company registration specific and clear so that there is no risk of arbitrary interpretation."/* 260604 번역 */
+                            },
+                            partG: {
+                                label: "g. Fairness of the criteria and procedures for cancellation of Partner Company registration"/* 260604 번역 */,
+                                desc: "(1) The criteria for cancellation of partner company registration may be applied to cancel registration based on objective and appropriate grounds."/* 260604 번역 */,
+                                cancelLabel: "[Criteria for Cancellation of Registration of Partner Companies Currently Doing Business with the Company]"/* 260604 번역 */,
+                                cancelRows: [
+                                    "① Where a serious and clear cause attributable to the Partner Company has arisen in connection with the relevant subcontracting transaction"/* 260604 번역 */,
+                                    "HACCP-certified company in the case of food manufacturing businesses",
+                                    "When relevant laws and regulations such as the Subcontracting Act have been violated",
+                                    "When a license required by relevant laws and regulations has been revoked",
+                                    "When the partner company falls under the category of a poor-performing company according to the Company's evaluation standards"
+                                ],
+                                unfairLabel: "[Unfair Cancellation of Registration of Partner Companies Currently Doing Business with the Company]"/* 260604 번역 */,
+                                unfairRows: [
+                                    "① Cancelling registration on the grounds of non-cooperation with matters unilaterally proposed by the Company, such as cost reduction plans or requests to lower supply unit prices"/* 260604 번역 */,
+                                    "Canceling registration on the grounds of being also registered as a partner company of a competitor",
+                                    "③ Cancelling registration on the grounds that there is no transaction record because the Company placed no orders or made no consignments, even though there is no cause attributable to the Partner Company"/* 260604 번역 */,
+                                    "④ Cancelling registration on the grounds of non-compliance with the principal business operator's directions regarding personnel matters concerning the Partner Company's executives and employees"/* 260604 번역 */
+                                ],
+                                finalDesc: "(2) When cancelling a partner company's registration, the Company shall notify the company in writing, stating the grounds therefor, and the relevant business operator may file an objection within a period of at least 15 days from the date of receipt of the notice. Where the registration was cancelled due to grounds attributable to the Company, re-registration shall be effected immediately."/* 260604 번역 */
+                            }
+                        },
+                        finalNote: "h. Where an executive or employee fails to comply with the action items through intent or gross negligence, the company shall take corresponding sanctions."/* 260604 번역 */
+                    },
+                    addendum: {
+                        title: "Supplementary Provisions",
+                        article: "Article 1 (Effective Date)",
+                        lines: ["These guidelines shall take effect from April 1, 2020.", "These guidelines shall take effect from April 1, 2021."]
+                    }
                 }
             }
         };

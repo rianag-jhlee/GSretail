@@ -34,6 +34,16 @@ export default {
                         imgMo: require("@/assets/images/dummy/gsrbr0403_mo.png"),
                         alt:`재고찾기 헛걸음 방지! 재고 찾기 서비스`
                     },
+                },
+                en: {
+                    MainTitle: "Stock Finder",
+                    sub_Title1: "No more worrying about sold-out items! Real-time stock checks at stores nationwide"/* 260604 번역 */,
+                    sub_desc1:"For each GS25 and GS THE FRESH store nationwide,\n you can easily check the real-time stock status and remaining quantity of the products you want."/* 260604 번역 */,
+                    sub1 : {
+                        img: require("@/assets/images/dummy/gsrbr0403.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr0403_mo.png"),
+                        alt:`No more wasted trips checking for stock! The Find Stock service`/* 260604 번역 */
+                    },
                 }
             }
         };

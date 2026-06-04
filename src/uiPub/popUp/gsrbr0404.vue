@@ -69,6 +69,33 @@ export default {
                     sub_desc2:"매주 달라지는 행사 미리보기",
                     sub_detail_2:`<em>단골 매장에서 진행하는 주간 행사와 추천 상품을 확인할 수 있습니다.</em>`,
                     app_desc:`온라인앱 전용 행사 상품들도 발 빠르게 확인하세요!`
+                },
+                en: {
+                    MainTitle: "Events & Promotions",
+                    sub_Title1: "GS25",
+                    sub_desc1:"Exclusive Deals Available Only on Our Neighborhood GS!",
+                    sub_detail_1:`Buy-One-Get-One, 2+1, bonus gifts, and POP discount items are now available on the Our Neighborhood GS app. Check out app-exclusive promotions before they sell out!`,
+                    sub1 : {
+                        img: require("@/assets/images/dummy/gsrbr0404_1.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr0404_1_mo.png"),
+                        alt:`Exclusive benefits available only at GS25 Our Neighborhood GS!`/* 260604 번역 */
+                    },
+                    sub2 : {
+                        img: require("@/assets/images/sub/gsrbr04/gsrbr0404_2.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr0404_2_mo.png"),
+                        alt:`Preview GS THE FRESH's weekly changing promotions`/* 260604 번역 */
+                    },
+                    iconsrc:[
+                        require("@/assets/images/dummy/gsrbr0404_icon_1.png"),
+                        require("@/assets/images/dummy/gsrbr0404_icon_2.png"),
+                        require("@/assets/images/dummy/gsrbr0404_icon_3.png"),
+                        require("@/assets/images/dummy/gsrbr0404_icon_4.png"),
+                    ],
+                    icontxt: [`1+1`, `2+1`, `Bonus Gift`, `Price Discount`],
+                    sub_title2: "GS THE FRESH",
+                    sub_desc2:"Weekly Promotions Preview",
+                    sub_detail_2:`Check out the weekly promotions and recommended products at your regular store.`,
+                    app_desc:`Stay up to date on online app-exclusive promotional products, too!`/* 260604 번역 */
                 }
             }
         };

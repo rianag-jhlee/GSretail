@@ -2604,6 +2604,1001 @@ export default {
 
 
                     },
+                },
+                en: {
+                    MainTitle: "Social Responsibility",
+                    MainsubTitle: "Social responsibility",
+                    // 1depth
+                    Tabs1: [
+                        { item: "Mutual Growth Management" }, 
+                        { item: "Philanthropy Management" }, 
+                        { item: "Rights and Interests Protection" }
+                    ],
+                    
+                    // 2depth (상생경영 하위)
+                    Tabs2_1: [
+                        { item: "Overview" }, 
+                        { item: "Partner Support Programs" }, 
+                        { item: "Store Owner Support Programs" }, 
+                        { item: "Community Participation Policy" },
+                        { item: "Supply Chain Sustainability Management Policy" }
+                    ],
+                    // 3depth (파트너사 지원제도 하위)
+                    Tabs3_1: [
+                        { item: "Financial Support" }, 
+                        { item: "Sales Channel Support" }, 
+                        { item: "Competitiveness Enhancement Support" }, 
+                        { item: "Welfare Programs" }, 
+                        { item: "Broadcast Scheduling" }, 
+                        { item: "Communication Programs" }
+                    ],
+                    // 3depth (경영주 지원제도 하위 - 신규 추가)
+                    Tabs3_2: [
+                        { item: "GS25 Store Owner Support Programs" }, 
+                        { item: "GS THE FRESH Store Owner Support Programs" }
+                    ],
+
+                    // 2depth (나눔경영 하위)
+                    Tabs2_2: [
+                        { item: "Overview" }, 
+                        { item: "Children and Socially Vulnerable Group Support" }, 
+                        { item: "Community Support" }, 
+                        { item: "Broadcasting Development" }, 
+                        { item: "Hidden Sharing Angel" }
+                    ],
+
+                    // 2depth (권익보호 하위)
+                    Tabs2_3: [
+                        { item: "Human Rights Management" }, 
+                        { item: "Talent Management" }, 
+                        { item: "Customer Satisfaction Management" }, 
+                        { item: "Safety Management" },
+                        { item: "Information Security" }
+                    ],
+                    // 3depth (인재경영 하위)
+                    Tabs3_3: [
+                        { item: "Talent Model" }, 
+                        { item: "Talent Development System" }, 
+                        { item: "HR Management Indicators" }, 
+                        { item: "HR Management Performance Data" }
+                    ],
+                    // 3depth (안전경영 하위)
+                    Tabs3_4: [
+                        { item: "Introduction to Safety Management"/* 260604 번역 */ }, 
+                        { item: "Safety and Health Feedback Box" }, 
+                    ],
+                    WinWinIntro: {
+                        Summary: "Here, you can learn about GS Retail's co-growth philosophy and implementation strategy.",
+                        Philosophy: {
+                            Title: "Co-Growth Philosophy",
+                            Btn: "View Co-Growth Activities",
+                            Items: [
+                                { tit: "Win-Win", desc: "Win-Win<br />Building a cooperative framework that benefits all parties, <br />not at the expense of any one" },
+                                { tit: "Trust", desc: "Trust<br />Built on trust through constant <br />communication and active listening"},
+                                { tit: "Future-Oriented", desc: "Future-Oriented<br />Pursuing sustainable growth <br />over short-term, one-off gains"}
+                            ]
+                        },
+                        Strategy: {
+                            Title: "Implementation Strategy",
+                            Cards: [
+                                { num: "01", tit: "1. Establishing a Fair Trade Culture", list: ["- Compliance with fair trade laws and regulations", "- Proactive unfair trade prevention system", "- Provision of fair trading opportunities"] },
+                                { num: "02", tit: "Substantive<br />Business Support", list: ["- Financial support and early payment of fees", "- Operational capability support", "- Other welfare and benefits support"] },
+                                { num: "03", tit: "Pursuit of<br />Continuous Growth", list: ["- Expansion of joint product development", "- Brand marketing support", "- Introduction and operation of profit-sharing programs"] },
+                                { num: "04", tit: "Open Communication", list: ["- Regular roundtable meetings", "- Cultural exchange (Family Day)", "- Partner satisfaction improvement"] }
+                            ],
+                            img: require("@/assets/images/dummy/gsrsu03010101_1.png"),
+                            imgMo: require("@/assets/images/sub/gsrsu/gsrsu03010101_1_mo.png"),
+                            alt: "Diagram of the Win-Win Growth Promotion Strategy"/* 260604 번역 */
+                        },
+                        Index: {
+                            Title: "Win-Win Index",
+                            SubTitle: "2023 Best in the Win-Win Growth Category"/* 260604 번역 */,
+                            alt: "Highest grade in the Win-Win Growth Index"/* 260604 번역 */,
+                        }
+                    },
+                    Partnersupport : {
+                        Summary :"GS Retail fosters mutual growth with its partners through mutual growth management.<br />To this end, the following programs are in place.",
+                        FinanceSupport: {
+                            Summary: "GS Retail operates various financial support programs to strengthen the foundation for sustainable growth of its partners.",
+                            Fund: {
+                                Title: "Mutual Growth Fund",
+                                Desc: "Mutual Growth Fund<br />A program that allows partners to obtain low-interest loans through the Mutual Growth Fund when they need emergency funds for business or operational purposes.",
+                                ProcessTitle: "Application Procedure",
+                                Steps: [
+                                    { tit: "Referral Request<br />(Partner → MD)" },
+                                    { tit: "Referral Letter Preparation<br />(MD)" },
+                                    { tit: "Loan Application<br />(GS Retail → Bank)" },
+                                    { tit: "Loan Support<br />(Loan executed after bank review)"}
+                                ]
+                            },
+                            SubFunds: [
+                                { 
+                                    tit: "Mutual Growth Partner Loan", 
+                                    img: require("@/assets/images/dummy/gsrsu0301010201_2.png"),
+                                    desc: "This is a program that can ease the repayment burden of partner companies through a non-recourse accounts receivable-secured loan to the Partner Company."/* 260604 번역 */,
+                                    desc2: "GS Retail's 1st, 2nd, and 3rd-tier partner companies<br>Annual rate: 0.60% + additional rate" 
+                                },
+                                { 
+                                    tit: "Eco-Friendly Agriculture and Fishery Fund and Agri-Food Startup Idea Fund", 
+                                    img: require("@/assets/images/dummy/gsrsu0301010201_3.png"),
+                                    desc: "A program to support the agriculture and fishery food industry through financial assistance to startups and SMEs located in South Jeolla Province, following an MOU on eco-friendly agriculture and fishery loan support with the Jeonnam Centers for Creative Economy & Innovation." 
+                                }
+                            ],
+                            Cards: [
+                                { tit: "Network Loan and Family Loan", desc: "Network Loan and Family Loan<br />Low-interest loans provided through an agreement with IBK Industrial Bank, using transaction records with partners, guarantees, and collateral as support or referrals" },
+                                { tit: "Advance Payment", desc: "Advance Payment<br />Advance payments provided to partners to support material procurement, supply stability, and equipment management at FF production facilities, including short-term financing" },
+                                { tit: "Holiday Early Payment and 100% Cash Settlement<br/>/100% cash payment"/* 260604 번역 */, desc: "Holiday Early Payment and 100% Cash Settlement<br />Early payment of goods fees and settlement amounts is made twice a year at major holidays to ensure smooth cash flow for partners and store owners" },
+                                { tit: "Commission Refund Program", desc: "Commission Refund Program<br />GS SHOP operates a program that refunds a portion of commissions collected from partner companies that fall short of quarterly performance targets" }
+                            ]
+                        }
+                    },
+                    MarketSupport: {
+                        Marketing: {
+                            Summary: "GS Retail operates various support programs to develop domestic and international sales channels for its partners.",
+                            Title: "Marketing Support",
+                            Desc: "Marketing Support<br />GS Retail independently secures brands with strong customer appeal, such as popular restaurants, TV programs, and celebrities, and provides free licensing of these brands to help enhance the competitiveness of products supplied by partner companies.",
+                            Brands: [
+                                { name: "Kim Hye-ja Lunch Box", img: require("@/assets/images/dummy/gsrsu0301010202_1.png") },
+                                { name: "Omori", img: require("@/assets/images/dummy/gsrsu0301010202_2.png") },
+                                { name: "YOUUS", img: require("@/assets/images/dummy/gsrsu0301010202_3.png") },
+                                { name: "REAL Price", img: require("@/assets/images/dummy/gsrsu0301010202_4.png") }
+                            ]
+                        },
+                        Programs: [
+                            { 
+                                tit: "Overseas Export Support", 
+                                img: require("@/assets/images/dummy/gsrsu0301010202_2_1.png"),
+                                desc: "Overseas Export Support<br />GS Retail supports its partner companies in expanding overseas exports through its global infrastructure and expertise. Exports range from GS Retail's own private-brand products to convenience store facilities and fixtures, earning the '3 Million Dollar Export Tower' award at the 2020 Trade Day ceremony." 
+                            },
+                            { 
+                                tit: "Local Government MOU", 
+                                img: require("@/assets/images/dummy/gsrsu0301010202_2_2.png"),
+                                desc: "Local Government MOU<br />In pursuit of mutual growth with local farms, fishermen, and small and medium-sized partners, GS Retail has signed MOUs with various local governments including South Chungcheong Province, South Jeolla Province (13 cities and counties), and Miryang City, providing purchase commitments and sales channels for local agricultural, livestock, and fishery products." 
+                            },
+                            { 
+                                tit: "Designated Farm and Regional Agricultural Products Promotional Events", 
+                                img: require("@/assets/images/dummy/gsrsu0301010202_2_3.png"),
+                                desc: "Designated Farm and Regional Agricultural Products Promotional Events<br />Through the operation of designated farms, farms receive a stable sales channel through GS Retail's established distribution network and can focus solely on cultivation and raising, while GS Retail is able to provide customers with more competitive products.<br />GS Retail supports mutual growth loans to reduce investment costs for designated farms, provides hygiene training, and regularly holds regional specialty product sales and promotional events to support and revitalize local farms." 
+                            },
+                            { 
+                                tit: "Reduced Commission Broadcasts", 
+                                img: require("@/assets/images/dummy/gsrsu0301010202_2_4.png"),
+                                desc: "Reduced Commission Broadcasts<br />(TV Home Shopping and DATA Home Shopping)<br />GS SHOP supports new item pilot tests and inventory clearance of existing broadcast products through the 'I Love SMEs' program. Additionally, the 'Dream Store' program provides opportunities for new small business owners and micro-enterprises involved in mobile and internet sales to enter the home shopping market." 
+                            }
+                        ]
+                    },
+                    CompetencySupport: {
+                        Summary: "GS Retail operates professional training programs and regular seminars to strengthen the competitiveness of its partner companies.",
+                        Education: {
+                            Title: "Training Support",
+                            Desc: "Training Support<br />A program in which external training institutions and GS Retail's specialized departments regularly provide various training programs to enhance the job competencies of partner company employees.",
+                            Table: {
+                                Thead: ["Program Name", "Timing", "Key Content"],
+                                Tbody: [
+                                    { name: "Safety and Hygiene Training", period: "Semi-annually", desc: "Training on food hygiene law and origin management law to improve the quality management capabilities of food partner companies." },
+                                    { name: "HACCP Academy", period: "Annually", desc: "A support program to enhance HACCP operational capabilities for small and medium PB partner companies through hygiene management and regulatory training, in support of mutual growth and safe product supply." },
+                                    { name: "Partner Quality and Hygiene Inspection", period: "Annually", desc: "Pre-hygiene assessment conducted for partner companies supplying products to the Company, providing improvement coaching and consulting for identified deficiencies." },
+                                    { name: "Freshness/Hygiene Management Coaching and Support", period: "At all times"/* 260604 번역 */, desc: "For Partner Companies that deliver goods to us, we conduct prior hygiene assessments to provide improvement, coaching, and consulting on deficiencies, and we continue to visit them even after they begin operations to carry out follow-up support activities related to freshness and hygiene management. In 2020, we conducted on-site training at 262 companies regarding freshness and 237 companies regarding hygiene."/* 260604 번역 */ }
+                                ]
+                            },
+                            alt: "Training Support Process Diagram"/* 260604 번역 */,
+                        },
+                        Program: {
+                            Title: "Quality and Productivity Competitiveness Enhancement Program",
+                            Desc: "Quality and Productivity Competitiveness Enhancement Program<br />GS SHOP supports small and medium partner companies in strengthening their competitiveness in quality and productivity through test and analysis cost support, innovation partnership programs, industrial innovation activities, and CCM certification consulting support."
+                        }
+                    },
+                    WelfareSupport: {
+                        Summary: "We support welfare and benefit programs for Partner Companies."/* 260604 번역 */,
+                        Football: {
+                            Title: "Complimentary FC Seoul Football Match Tickets",
+                            Desc: "Complimentary FC Seoul Football Match Tickets<br />A program that allows partner company employees to watch FC Seoul home games (Sangam Stadium) free of charge for team-building events or family outings. Up to 4 general admission tickets per person are available, limited to 20 tickets per game on a first-come, first-served basis.<br />Applications can be made through the responsible MD at least one week prior to the match."
+                        }
+                    },
+                    BroadcastingSupport: {
+                        Summary: "GS SHOP operates broadcast scheduling support programs for partner companies.",
+                        PrepSupport: {
+                            Title: "Broadcast Preparation Support",
+                            Desc: "Broadcast Preparation Support<br />A program designed to ease the burden on partner companies that outsource broadcast preparation due to lack of experience, or that must prepare samples, displays, and other materials for every broadcast.<br />GS SHOP's experts support everything from product styling to display and panel production, helping to relieve the stress of broadcast preparation and contribute to sales growth."
+                        },
+                        PrioritySupport: {
+                            SubItems: [
+                                {
+                                    Title: "SME Broadcast Scheduling Priority",
+                                    Desc: "SME Broadcast Scheduling Priority<br />GS SHOP prioritizes SMEs in broadcast scheduling across all programming to support their stable growth.<br />Across both TV home shopping and data home shopping, the proportion of SME products in the broadcast lineup is expanded to support continuous channel access and sales growth.<br />GS SHOP also operates a program that gives priority scheduling to SME products during prime time, when customer traffic is highest, providing SME products with more effective exposure to customers. This helps strengthen SME market competitiveness and foster mutual growth."
+                                },
+                                {
+                                    Title: "Free Sales Broadcasts for SMEs",
+                                    Desc: "Free Sales Broadcasts for SMEs<br />GS SHOP operates free sales broadcasts to support smooth market entry and sales channel expansion for SMEs.<br />By alleviating the burden of broadcast production and scheduling, GS SHOP provides SME products with opportunities to be introduced to customers, thereby supporting the establishment of a stable growth foundation for SMEs."
+                                },
+                                {
+                                    Title: "Insert Video Production Support",
+                                    Desc: "Insert Video Production Support<br />To lower the barriers for SMEs entering home shopping, GS SHOP covers insert video production costs for new SME partner companies."
+                                }
+                            ]
+                        }
+                    },
+                    CommunicationSupport: {
+                        Summary: "GS Retail operates communication programs that create diverse forums for dialogue and exchange, gathering and actively addressing the concerns and suggestions of small and medium-sized partner companies.",
+                        Title: "Key Programs",
+                        Table: {
+                            Thead: ["Program Name", "Timing", "Key Content"],
+                            Tbody: [
+                                { name: "Partner Roundtable", period: "Quarterly", desc: "A communication program in which the MD team leader facilitates discussions on product policy directions, tailored to the issues of each period and industry sector" },
+                                { name: "YOUUS Day", period: "Annually", desc: "A cultural exchange program where all GS Retail MDs and partner company employees engage in outdoor group activities to foster harmony and unity" },
+                                { name: "Best Partner Company Award Ceremony", period: "Annually", desc: "A program recognizing partner companies that have cooperated and grown alongside GS Retail throughout the year, expressing gratitude and celebrating their efforts" }
+                            ]
+                        }
+                    },
+                    OwnerSupport: {
+                        Summary: "GS Retail operates various mutual growth programs for mutual development with store owners.",
+                        // 모든 본문 콘텐츠를 part_1으로 통합
+                        part_1: {
+                            Summary: "These are support programs to facilitate smooth store operations for GS25 store owners.",
+                            MainTitle: "GS25 Store Owner Support Programs",
+                            // 인센티브 카드 데이터
+                            Features: [
+                                { num: "01", tit: "Sales Profit Incentive Program", desc: "Fresh Food / FF Convenience Meals / Fresh / Chicken25" },
+                                { num: "02", tit: "Competitiveness Enhancement Incentive Program", desc: "Assortment enhancement incentives, profit improvement incentives, and service enhancement incentives"/* 260604 번역 */ },
+                                { num: "03", tit: "Congratulations and Condolences Support Program", desc: "Congratulatory and condolence money, store operation support funds, funeral supplies, childbirth supplies, and discretionary leave for family events"/* 260604 번역 */ },
+                                { num: "04", tit: "Win-Win Support Insurance", desc: "Safety Accident Insurance, Embezzlement Insurance, Delivery Theft Insurance, Cash Theft Insurance, Property Comprehensive Insurance" },
+                                { num: "05", tit: "Long-Term Operation Benefits", desc: "10-Year, 20-Year, 30-Year" },
+                                { num: "06", tit: "Outstanding Store Owner Awards", desc: "- Benefits for Outstanding Stores" },
+                                { num: "07", tit: "Free Legal and Labor Consultation", desc: "Free legal consultation with an attorney, labor consultation call center operation" },
+                                { num: "08", tit: "Store Owner Welfare and Partnership Benefits", desc: "Win-Win Loans, store owner welfare mall, comprehensive health checkup discounts, Angel Resort, Angel Rent-a-Car (long-term/used cars)"/* 260604 번역 */ }
+                            ],
+                            Notice: "※ The above benefits and programs are subject to change, discontinuation, or addition without prior notice.",
+                            
+                            // 기타 상세 제도 데이터
+                            OtherTitle: "Other Programs",
+                            OtherItems: [
+                                {
+                                    tit: "Store Owner Benefits Portal",
+                                    desc: "The Store Owner Benefits Portal is a benefits platform for GS25 store owners, offering daily necessities at prices lower than Korea's top five online shopping platforms.<br />Additional discounts on travel, accommodation, and more are also available through affiliated partners.",
+                                    img: require("@/assets/images/dummy/gsrsu03010103_1.png")
+                                },
+                                {
+                                    tit: "Welfare and Benefits",
+                                    desc: "Support programs are available for funeral supplies and health screenings at discounted prices, along with Congratulations and Condolences support, to provide comprehensive welfare and benefit coverage for store owners.",
+                                    img: require("@/assets/images/dummy/gsrsu03010103_2.png")
+                                },
+                                {
+                                    tit: "Store Owner Open Suggestion",
+                                    desc: "By accepting various suggestions and ideas from store owners, GS Retail listens to real on-site voices and reflects improvements in store operations and headquarters policies.",
+                                    img: require("@/assets/images/dummy/gsrsu03010103_3.png")
+                                }
+                            ]
+                        },
+                        // GS THE FRESH 데이터 (part_2로 신규 추가)
+                        part_2: {
+                            Summary: "These are support programs to facilitate smooth store operations for GS THE FRESH store owners.",
+                            MainTitle: "GS THE FRESH Store Owner Support Programs",
+                            Items: [
+                                {
+                                    tit: "Minimum Revenue Guarantee",
+                                    desc: "Based on the conditions at the time of the contract, the Company provides a minimum revenue guarantee through headquarters support funds to guarantee a minimum income to store owners for a set period from the opening date.",
+                                    img: require("@/assets/images/dummy/gsrsu03010103_1_1.png")
+                                },
+                                {
+                                    tit: "Other Operational Support Programs",
+                                    desc: "For underperforming stores, the headquarters carries out 'underperforming store care activities', and where settlement support is needed due to trade area characteristics or various issues, a 'new store early settlement support fund' is operated for specific stores. Additionally, where necessary, support funds are provided to improve sales at transferred stores, and an annual franchise support program is established and operated.",
+                                    img: require("@/assets/images/dummy/gsrsu03010103_1_2.png")
+                                },
+                                {
+                                    tit: "Welfare and Benefits",
+                                    desc: "Upon a life event (marriage or bereavement of the actual franchise store owner), Congratulations and Condolences allowances and flower wreaths are provided.",
+                                    img: require("@/assets/images/dummy/gsrsu03010103_1_3.png")
+                                },
+                                {
+                                    tit: "Store Manager (Staff)<br />Job Posting Insight Support",
+                                    desc: "Dedicated Banner Service for GS THE FRESH (Albachunguk)",
+                                    img: require("@/assets/images/dummy/gsrsu03010103_1_4.png")
+                                }
+                            ]
+                        }
+                    },
+                    community: {
+                        Summary: "GS Retail has established guidelines aimed at revitalizing local economies and laying the foundation for community growth.",
+                        Purpose: {
+                            Title: "Purpose of the Community Participation Policy",
+                            Items: [
+                                { num: "01", desc: "01. Building a cooperative model through community-linked activities" },
+                                { num: "02", desc: "02. Strengthening relationships with diverse stakeholders, including local SMEs, startups, and small markets" },
+                                { num: "03", desc: "03. Supporting the resolution of key community issues" }
+                            ],
+                            BtnText: "View Full Text >"
+                        },
+                        Goal: {
+                            Title: "Goals of the Community Participation Policy",
+                            DiagramImg: require("@/assets/images/dummy/gsrsu03010104_diagram.png"),
+                            DiagramImgMo: require("@/assets/images/dummy/mo/gsrsu03010104_diagram_mo.png"),
+                            Items: [
+                                { num: "01", desc: "01. Inspire customer participation and spread a positive influence." },
+                                { num: "02", desc: "02. Engage with community issues and strive to support their resolution." },
+                                { num: "03", desc: "03. Develop programs with investment in future generations in mind." }
+                            ],
+                            alt: "Diagram of the objectives of the Community Engagement Policy"/* 260604 번역 */,
+                        }
+                    },
+                    supplychain: {
+                        Summary: "GS Retail has established and is implementing a Supply Chain Sustainability Management Policy to improve the ESG capabilities and competitiveness of the supply chain, as well as to manage sustainability-related risks and opportunities.",
+                        // 공급망 지속가능성 관리 방침
+                        Policy: {
+                            Title: "Supply Chain Sustainability Management Policy",
+                            Items: [
+                                { label: "One"/* 260604 번역 */, desc: "We will comply with fair trade principles to conduct fair and transparent transactions."/* 260604 번역 */ },
+                                { label: "Two"/* 260604 번역 */, desc: "To enhance the sustainability of the supply chain, we will strive to strengthen supply chain capabilities through support for shared growth programs, including ESG education and consulting."/* 260604 번역 */ },
+                                { label: "Three"/* 260604 번역 */, desc: "To strengthen supply chain procurement competitiveness, we will reinforce green purchasing based on our green purchasing policy and continuously identify excellent suppliers."/* 260604 번역 */ },
+                                { label: "Four"/* 260604 번역 */, desc: "We will regularly assess the sustainability of our supply chain and, by providing guidelines, support the supply chain and manage risks."/* 260604 번역 */ },
+                                { label: "Five"/* 260604 번역 */, desc: "We will strengthen communication through measures such as holding Partner Company meetings and operating an anonymous reporting channel for smooth communication with the supply chain."/* 260604 번역 */ }
+                            ],
+                            BtnText: "View Full Text >"
+                        },
+                        // 공급망 지속가능성 관리 체계
+                        System: {
+                            Title: "Supply Chain Sustainability Management System",
+                            DiagramImg: require("@/assets/images/dummy/gsrsu03010105.png"),// 요청하신 파일명 적용
+                            DiagramImgMo : require("@/assets/images/dummy/mo/gsrsu03010105_mo.png"),
+                            alt: "Supply Chain Sustainability Management System R&R Diagram"/* 260604 번역 */
+                        }
+                    },
+                    CSR: {
+                        outline: {
+                            Summary: "GS Retail fulfills its social responsibilities and fosters a culture of everyday sharing through ongoing goals that contribute to the community and the environment.",
+                            Strategy: {
+                                Title: "Social Contribution Strategy",
+                                Vision: "Vision: Give & Share, An Everyday Sharing Platform",
+                                Mission: "Mission: Creating Sustainable Social Value through the Retail Platform",
+                                DiagramImg: require("@/assets/images/dummy/gsrsu030201.png"),
+                                DiagramImgMo: require("@/assets/images/dummy/mo/gsrsu030201_mo.png"),
+                                alt: "Diagram of the Social Contribution Strategy"/* 260604 번역 */,
+                                VisionLabel:"Vision"/* 260604 번역 */,
+                                MissionLabel:"Mission"/* 260604 번역 */
+                            },
+                            HistoryTitle: "Milestones",
+                            History: [
+                                {
+                                    year: "2025",
+                                    items: [
+                                        "Leukemia and childhood cancer patient treatment support program (2025~)",
+                                        "Food supply support for food desert areas (2024~)",
+                                        "Support program for children of migrant backgrounds (2024~)",
+                                        "Family Psychological Support Project for Low-Income Abused Children (2022–2024)"/* 260604 번역 */,
+                                        "Happy Start Support Project for Youth Preparing for Independence (2022–2024)"/* 260604 번역 */,
+                                        "GS25 AED (Automated External Defibrillator) installation (2022)",
+                                        "Sharing Kit support (2020~)",
+                                        "Upcycling Friend Campaign (2021~)",
+                                        "Blanket of Love donation (2022)",
+                                        "Mask of Love donation (2020)"
+                                    ]
+                                },
+                                {
+                                    year: "2019",
+                                    items: [
+                                        "- Eco Creator (2019~)",
+                                        "- Rice Cake Soup of Love donation (2019)",
+                                        "- GS25 Neulbom Store opening (disability training-type store, 2017~)",
+                                        "- GS25 Naeil Store opening (community-serving convenience store supporting neighbors who have difficulty finding employment, 2017~)",
+                                        "- Independence Army Awareness Lunchbox (2017~)",
+                                        "- GS Child Safety Guardian and GS Safety Guardian CPR education",
+                                        "- Eco Social Impact (2017~)",
+                                        "- Love Love Fund community children's center meal support (2016~)",
+                                        "- Overseas volunteering (2016~2017)",
+                                        "- Coal Briquette of Love donation (2016~2024)",
+                                        "- Low-income burn patient support (2015~)",
+                                        "- Sharing Store goods support (2013~)",
+                                        "- Kimchi of Love donation (2013~)",
+                                        "- Social enterprise distribution channel support project (2013~2023)",
+                                        "- FC Seoul multicultural family children's soccer school support (2013~)",
+                                        "- Book Dream book donation campaign (2012~2024)"
+                                    ]
+                                },
+                                {
+                                    year: "2011",
+                                    items: [
+                                        "- Blood donation certificate leukemia and childhood cancer patient support",
+                                        "- Food bank donation (2011~)",
+                                        "- Taean oil spill accident support (2008)",
+                                        "- Scholarship and kit support (2007~)"
+                                    ]
+                                },
+                                {
+                                    year: "2006",
+                                    items: [
+                                        "- GS Nanumi Volunteer Corps established (2006~)",
+                                        "- Rainbow Box children's music education program (2006~)",
+                                        "- Disaster and Emergency Relief support process established",
+                                        "- Korean Red Cross blood donation agreement signed"
+                                    ]
+                                }
+                            ]
+                        },
+                        vulnerable: {
+                            Summary: "GS Retail supports the self-reliance of children, youth, people with disabilities, and elderly people living alone, while fulfilling its role as a safety platform.",
+                            // 주요 사업 리스트 (2열 그리드 활용)
+                            Projects: [
+                                { 
+                                    tit: "Rainbow Box Orchestra", 
+                                    desc: "Through music education, we support various activities to bridge the cultural gap for children from vulnerable groups and to enhance their emotional support and self-esteem."/* 260604 번역 */,
+                                    img: require("@/assets/images/dummy/gsrsu030202_1.png")
+                                },
+                                { 
+                                    tit: "Support for children with leukemia and childhood cancer"/* 260604 번역 */, 
+                                    desc: `We support "Dream On" activities to assist children with leukemia and childhood cancer and their families. These include medical expense support (Dream On Care), congratulatory gifts for a fresh start (Dream On Step), and psychological and emotional recovery support for children and their families (Dream On Day). These are recovery support activities that accompany children with childhood cancer on their journey of treatment, recovery, and hope.`/* 260604 번역 */,
+                                    img: require("@/assets/images/dummy/gsrsu030202_2.png")
+                                },
+                                { 
+                                    tit: "Firefighters' Hope-Sharing Calendar"/* 260604 번역 */, 
+                                    desc: "We sell a calendar featuring images of healthy firefighters and use the proceeds to support treatment costs for the recovery of daily life of burn patients."/* 260604 번역 */,
+                                    img: require("@/assets/images/dummy/gsrsu030202_3.png")
+                                },
+                                { 
+                                    tit: "FC Seoul Multicultural Family Children's Soccer School", 
+                                    desc: "FC Seoul Multicultural Family Children's Soccer School<br />GS Retail carries out various support activities, including a soccer school and meal support, to help children from multicultural families grow up in a healthy environment.",
+                                    img: require("@/assets/images/dummy/gsrsu030202_4.png")
+                                }
+                            ],
+                            // 주요 협력기관 (3열 그리드 활용)
+                            Partners: {
+                                Title: "Key Partner Organizations",
+                                Items: [
+                                    { name: "Korea Food for the Hungry International"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030202_logo_1.png") },
+                                    { name: "Seoul Metropolitan Fire and Disaster Headquarters"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030202_logo_2.png") },
+                                    { name: "Hallym Burn Foundation (Social Welfare Corporation)"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030202_logo_3.png") }
+                                ]
+                            }
+                        },
+                        communitysupport: {
+                            Summary: "GS Retail fosters a culture of sharing through community volunteering, donations, and social enterprise support.",
+                            // 2열 그리드 활용 (기존 program_grid 스타일 재활용)
+                            Projects: [
+                                { 
+                                    tit: "Executive Volunteer Service at National Cemetery", 
+                                    desc: "Image",
+                                    img: require("@/assets/images/dummy/gsrsu030203_1.png") 
+                                },
+                                { 
+                                    tit: "Every year-end, volunteer groups across the country take part in relay volunteering to share a united spirit of warmth for the winter season.", 
+                                    desc: "Food Bank Donation",
+                                    img: require("@/assets/images/dummy/gsrsu030203_2.png") 
+                                },
+                                { 
+                                    tit: "GS Retail fosters a culture of sharing through community volunteering, donations, and social enterprise support.", 
+                                    desc: "Mutual Growth Management",
+                                    img: require("@/assets/images/dummy/gsrsu030203_3.png") 
+                                },
+                                { 
+                                    tit: "Rights and Interests Protection", 
+                                    desc: "Children and Socially Vulnerable Group Support",
+                                    img: require("@/assets/images/dummy/gsrsu030203_4.png") 
+                                },
+                                { 
+                                    tit: "CPR Training and AED Support", 
+                                    desc: "CPR Training and AED Support<br />To protect precious lives in emergency situations, employees voluntarily participate in CPR training and, in collaboration with the Korean Red Cross, provide AED units and experiential education vehicles.",
+                                    img: require("@/assets/images/dummy/gsrsu030203_5.png") 
+                                },
+                                { 
+                                    tit: "Love Love Fund", 
+                                    desc: "Love Love Fund<br />A matching grant program in which the Company contributes an equal amount to what employees donate, providing food ingredients and Yogiyo gift vouchers for meals at community children's centers.",
+                                    img: require("@/assets/images/dummy/gsrsu030203_6.png") 
+                                },
+                                { 
+                                    tit: "Book Dream Campaign and Blood Donation Campaign", 
+                                    desc: "Book Dream Campaign and Blood Donation Campaign<br />GS Retail delivers donated books to community children's centers and libraries for those in need, while the blood donation campaign provides warm support to leukemia and childhood cancer patients.",
+                                    img: require("@/assets/images/dummy/gsrsu030203_7.png") 
+                                },
+                                { 
+                                    tit: "Disaster and Emergency Relief Support", 
+                                    desc: "Disaster and Emergency Relief Support<br />In the event of a disaster or emergency, GS Retail ensures that emergency relief supplies are delivered to affected residents as quickly as possible.",
+                                    img: require("@/assets/images/dummy/gsrsu030203_8.png") 
+                                }
+                            ],
+                            // 주요 협력기관 (brand_grid 스타일 재활용)
+                            Partners: {
+                                Title: "Key Partner Organizations",
+                                Items: [
+                                    { name: "Deungchon 9 Community Welfare Center"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030203_logo_1.png") },
+                                    { name: "Seoul SOS Children's Village"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030203_logo_10.png") },
+                                    { name: "Holt Ilsan Welfare Town/Nursing Home"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030203_logo_3.png") },
+                                    { name: "", img: require("@/assets/images/dummy/gsrsu030203_logo_4.png") },
+                                    { name: "Food Bank"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030203_logo_5.png") },
+                                    { name: "Korean Red Cross"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030203_logo_6.png") },
+                                    { name: "Beautiful Store", img: require("@/assets/images/dummy/gsrsu030203_logo_8.png") },
+                                    { name: "Korea Childhood Leukemia & Cancer Association"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030203_logo_9.png") }
+                                ]
+                            }
+                        },
+                        broadcasting: {
+                            Summary: "Through media access support and talent development, GS Retail leads public service broadcasting and a responsible media culture.",
+                            Projects: [
+                                { 
+                                    tit: "Media Sharing Bus Outreach Program", 
+                                    desc: `Media Sharing Bus Outreach Program<br />GS Retail supports the operation of the "Media Sharing Bus Outreach," a mobile studio vehicle equipped with broadcast production facilities and equipment, to provide media education for residents of remote island and mountainous areas, as well as vulnerable groups including the elderly and people with disabilities.`,
+                                    img: require("@/assets/images/dummy/gsrsu030204_1.png")
+                                },
+                                { 
+                                    tit: "Content Leader Scholarship and Consumer Leader Scholarship Support", 
+                                    desc: "Content Leader Scholarship and Consumer Leader Scholarship Support<br />GS SHOP provides Content Leader Scholarships and Consumer Leader Scholarships to support the development of future talent who will be active in the broadcasting sector and in the field of consumer rights protection.",
+                                    img: require("@/assets/images/dummy/gsrsu030204_2.png")
+                                }
+                            ],
+                            Partners: {
+                                Title: "Key Partner Organizations",
+                                Items: [
+                                    { name: "Korea Communications Agency (Viewer Media Foundation)"/* 260604 번역 */, img: require("@/assets/images/dummy/gsrsu030204_logo_1.png") },
+                                    { name: "KCOP", img: require("@/assets/images/dummy/gsrsu030204_logo_2.png") }
+                                ]
+                            }
+                        },
+                        sharing: {
+                            Summary: "Here, we share the warm stories of GS Retail's Hidden Sharing Angels.",
+                            List: [
+                                {
+                                    tit: "Woo-jeong Park, Store Manager at GS25 Myeongnyun Anam Branch",
+                                    desc: "Woo-jeong Park, Store Manager at GS25 Myeongnyun Anam Branch<br />Introducing Woo-jeong Park, Store Manager at GS25 Myeongnyun Anam Branch, who saved a life through quick judgment and decisive action.",
+                                    date: "2026.02.22",
+                                    badge: "GS25",
+                                    img: require("@/assets/images/dummy/gsrsu030205_1.png")
+                                },
+                                {
+                                    tit: "GS THE FRESH Sanggye Store, Manager Kim Jun-young"/* 260604 번역 */,
+                                    desc: "Jun-young Kim, Manager at GS THE FRESH Sanggye Branch<br />Introducing Jun-young Kim, Manager at GS THE FRESH Sanggye Branch, who saved a life through quick judgment and decisive action.",
+                                    date: "2026.02.22",
+                                    badge: "GS THE FRESH",
+                                    img: require("@/assets/images/dummy/gsrsu030205_2.png")
+                                },
+                                {
+                                    tit: "Chan-yong Woo, Team Leader, CVS Division 1 Region 4 Development Team 2",
+                                    desc: "Introducing Chan-yong Woo, Team Leader at CVS Division 1 Region 4 Development Team 2, who carried out two acts of goodwill through courageous action.",
+                                    date: "2026.02.22",
+                                    badge: "GS25",
+                                    img: require("@/assets/images/dummy/gsrsu030205_3.png")
+                                },
+                                {
+                                    tit: "Dong-heum Oh, Team Leader, Supermarket Business Division Franchise Team 4",
+                                    desc: "Dong-heum Oh, Team Leader, Supermarket Business Division Franchise Team 4<br />Introducing Dong-heum Oh, Team Leader at Supermarket Business Division Franchise Team 4, who rescued an elderly person trapped at home in sweltering heat for an extended period.",
+                                    date: "2026.02.22",
+                                    badge: "GS THE FRESH",
+                                    img: require("@/assets/images/dummy/gsrsu030205_4.png")
+                                },
+                                {
+                                    tit: "Seung-yong Yang, Deputy Branch Manager at GS THE FRESH Anyang Megatria Branch",
+                                    desc: "Seung-yong Yang, Deputy Branch Manager at GS THE FRESH Anyang Megatria Branch<br />Introducing Seung-yong Yang, Deputy Branch Manager at GS THE FRESH Anyang Megatria Branch (Supermarket Business Division Direct Operations Team 3), who saved a life through quick judgment and decisive action.",
+                                    date: "2026.02.22",
+                                    badge: "GS THE FRESH",
+                                    img: require("@/assets/images/dummy/gsrsu030205_5.png")
+                                },
+                                {
+                                    tit: "Seung-yong Yang, Deputy Branch Manager at GS THE FRESH Anyang Megatria Branch",
+                                    desc: "Seung-yong Yang, Deputy Branch Manager at GS THE FRESH Anyang Megatria Branch<br />Introducing Seung-yong Yang, Deputy Branch Manager at GS THE FRESH Anyang Megatria Branch (Supermarket Business Division Direct Operations Team 3), who saved a life through quick judgment and decisive action.",
+                                    date: "2026.02.22",
+                                    badge: "GS THE FRESH",
+                                    img: require("@/assets/images/dummy/gsrsu030205_6.png")
+                                }
+                            ]
+                        }
+                    },
+                    protect: {
+                        humanrights: {
+                            Summary: "GS Retail will respect the human rights of not only its employees but also all stakeholders, guaranteeing the value and dignity of every person.",
+                            Policy: {
+                                Title: "GS Retail Human Rights Management Policy",
+                                Desc: `GS Retail Human Rights Management Policy<br />GS Retail supports and complies with the Universal Declaration of Human Rights, the 10 Principles of the UN Global Compact (UNGC), and domestic and international labor and human rights standards and guidelines, and will make every effort to prevent and address all human rights-related issues that may arise in the course of the Company's business operations.<br />To this end, GS Retail has established a Human Rights Management Policy to practice respect for the human rights of all stakeholders, including not only employees but also partner companies.<br />In addition, for partner companies, human rights-related matters are incorporated into the "Partner Company Code of Conduct" to enable them to advance human rights management.`,
+                                BtnText: "View Full Text >"
+                            },
+                            Goals: {
+                                Title: "Creating a Great Place to Work: Employee Human Rights Goals",
+                                Items: [
+                                    { num: "01", desc: "1. We create a joyful and fulfilling workplace." },
+                                    { num: "02", desc: "2. We create a work environment where everyone is respected without discrimination." },
+                                    { num: "03", desc: "3. We provide a supportive and inclusive working environment for employees with disabilities, vulnerable workers, and female and pregnant workers." },
+                                    { num: "04", desc: "4. Through a flat organizational culture, GS Retail respects everyone's right to speak up and share their opinions." }
+                                ]
+                            },
+                            Programs: {
+                                Title: "Human Rights Violation Prevention Programs",
+                                Items: [
+                                    { tit: "Internal Reporting System (Anonymous Reporting)", img: require("@/assets/images/dummy/gsrsu030301_1.png") },
+                                    { tit: "Grievance Counseling Center", img: require("@/assets/images/dummy/gsrsu030301_2.png") },
+                                    { tit: "Disability Vocational Training Store", img: require("@/assets/images/dummy/gsrsu030301_3.png") },
+                                    { tit: "Organizational Capability Survey", img: require("@/assets/images/dummy/gsrsu030301_4.png") },
+                                    { tit: "Blind Recruitment", img: require("@/assets/images/dummy/gsrsu030301_5.png") },
+                                    { tit: "Prohibition of Child Employment (Labor)", img: require("@/assets/images/dummy/gsrsu030301_6.png") },
+                                    { tit: "Small Love Sharing Society", img: require("@/assets/images/dummy/gsrsu030301_7.png") },
+                                    { tit: "Psychological Counseling (EAP)", img: require("@/assets/images/dummy/gsrsu030301_8.png") }
+                                ]
+                            },
+                            Assessment: {
+                                Title: "Human Rights Impact Assessment",
+                                Desc: "GS Retail has been conducting human rights impact assessments for employees since 2021, identifying the current status and areas for improvement, and striving to implement immediate improvements.<br />In addition, GS Retail provides human rights-related employee training and will continue to collaborate to expand human rights impact assessments to cover all stakeholders.",
+                                img: require("@/assets/images/dummy/gsrsu030301_2_1.png"),
+                                alt: "Human Rights Impact Assessment"
+                            }
+                        },
+                        talentmanagement: {
+                            part_1:{
+                                Summary: "Value No.1: This is the profile of the talent GS Retail seeks to work alongside.",
+                                MainTitle:`"Talent Who Excels at Embodying GS Values and Ways"`,
+                                Description: "the profile of the talent who will join GS Retail, and<br/> In order to realize the dreams of our employees, we are realizing talent management."/* 260604 번역 */,
+                                Philosophy: {
+                                    Items: [
+                                        { tit: "GS Value", sub: "Our Values"/* 260604 번역 */, desc: "Fair, Friendly, Fresh, Fun" },
+                                        { tit: "GS Way", sub: "Our Way of Working"/* 260604 번역 */, desc: "Customer First, Growth Mindset, Open Communication, and AX Execution Capability"/* 260604 번역 */ }
+                                    ]
+                                },
+                                Details: {
+                                    Value: [
+                                        { tit: "Fair", desc: "We uphold fairness and\ncontribute to society and the environment."/* 260604 번역 */ },
+                                        { tit: "Friendly", desc: "We recognize diversity and\nrespect one another."/* 260604 번역 */ },
+                                        { tit: "Fresh", desc: "By encouraging creativity and challenge,\nthe company and individuals grow together."/* 260604 번역 */ },
+                                        { tit: "Fun", desc: "Fun – We enjoy our work in a flexible and autonomous environment" }
+                                    ],
+                                    Way: [
+                                        { tit: "Customer First", list: ["# Every aspect of our work begins and ends with the customer.", "# For our customers, we always look for a way to make it work."] },
+                                        { tit: "Growth Mindset", list: ["# We start small, move fast, and build on every success.", "# We pursue growth and continuous improvement every day."] },
+                                        { tit: "Open Communication", list: ["# We get on the same page by sharing clear goals and progress.", "# We debate passionately and deliver as One Team."] },
+                                        { tit: "AX Execution", list: ["# We let data guide both our reasoning and our decisions.", "# We continuously improve how we work through digital and AI tools."] }
+                                    ]
+                                },
+                                Efforts: [
+                                    "Employee safety and health are the top priority,",
+                                    "Talent development through training programs,",
+                                    "Mutual consideration and healthy competition grounded in respect for human rights,",
+                                    "Fostering pride through the highest level of treatment and various welfare and benefit support, etc.<br/> We are realizing talent management."/* 260604 번역 */
+                                ],
+                                alt: "Talent Management Meeting"/* 260604 번역 */, 
+                            },
+                            part_2:{
+                                Summary: "GS Retail systematically strengthens core competencies (job skills, leadership, the GS Way, and onboarding), and<br/>We operate a talent development system that supports the growth of our members."/* 260604 번역 */,
+                                MainTitle: "GS Talent Development System"/* 260604 번역 */,
+                                DiagramImg: require("@/assets/images/dummy/gsrsu03030202.png"),
+                                DiagramAlt: "GS Talent Development System Diagram"/* 260604 번역 */,
+                                Cards: [
+                                    {
+                                        num: "01",
+                                        tit: "1. Job Competency",
+                                        desc: "By expanding the expertise and practical capabilities necessary for performing duties,<br/>and helps individuals achieve systematic growth in their job competencies."/* 260604 번역 */,
+                                        list: ["Job Academy and GenAI Academy", "Job Growth Plan (My Growth Plan preparation)"]
+                                    },
+                                    {
+                                        num: "02",
+                                        tit: "2. Leadership Competency",
+                                        desc: "We support leaders in understanding the potential of their members and in developing leadership that grows together based on trust and cooperation."/* 260604 번역 */,
+                                        list: [
+                                            "Team Leader Leadership School"/* 260604 번역 */,
+                                            "BOLD Leader / BOLD Manager Program"/* 260604 번역 */,
+                                            "Organizational leader leadership workshops, executive/team leader leadership diagnosis and feedback"/* 260604 번역 */
+                                        ]
+                                    },
+                                    {
+                                        num: "03",
+                                        tit: "GS Way Internalization",
+                                        desc: "Employees gain a deep understanding of GS Retail's core values as a common standard and learn the execution capabilities to practice them consistently across their work."/* 260604 번역 */,
+                                        list: ["GS Way Internalization Training Program (leaders and members)", "GS Way On-the-Job Application Learning (Post Learning) and Work Application Workshop"/* 260604 번역 */]
+                                    },
+                                    {
+                                        num: "04",
+                                        tit: "Onboarding",
+                                        desc: "members at each position and career stage understand the organization and their roles, and<br/>We provide support so that a starting point for growth can be formed."/* 260604 번역 */,
+                                        list: [
+                                            "Onboarding programs for new executives/new team leaders/new employees/experienced hires"/* 260604 번역 */,
+                                            "New employee and experienced hire retention programs",
+                                            "GS Group new employee program"
+                                        ]
+                                    },
+                                    {
+                                        num: "05",
+                                        tit: "Self-Directed Learning",
+                                        desc: "so that members can learn on their own and continuously grow,<br/>We provide learning infrastructure and institutional support."/* 260604 번역 */,
+                                        list: ["Naeil-On (online training academy) / Company-wide insight special lectures", "Self-directed learning, language, certification, and external course support programs"]
+                                    }
+                                ]
+                            },
+                            part_3: {
+                                Summary: "GS Retail values its talent and operates a variety of programs for its people.",
+                                Sections: [
+                                    {
+                                        title: "Work",
+                                        desc: "GS Retail provides the best environment and resources to enable all members to fully focus on work and growth.",
+                                        items: [
+                                            { num: "01", tit: "Language support"/* 260604 번역 */, desc: "We support language learning costs for our members' self-development."/* 260604 번역 */ },
+                                            { num: "02", tit: "Certification support"/* 260604 번역 */, desc: "In order to cultivate job experts, we support the costs incurred in studying for certifications."/* 260604 번역 */ },
+                                            { num: "03", tit: "Operation of shuttle/commuter buses"/* 260604 번역 */, desc: "We support a safe and convenient commute for our members."/* 260604 번역 */ },
+                                            { num: "04", tit: "Long-distance allowance"/* 260604 번역 */, desc: "Where the actual work location is more than a certain distance from one's hometown, we provide a portion of housing expenses."/* 260604 번역 */ },
+                                            { num: "05", tit: "Mobile communication expense support"/* 260604 번역 */, desc: "We support mobile communication expenses for members who frequently make business calls."/* 260604 번역 */ },
+                                            { num: "06", tit: "Staggered working hours system"/* 260604 번역 */, desc: "For work engagement and work-life balance, we flexibly adjust commuting hours."/* 260604 번역 */ }
+                                        ]
+                                    },
+                                    {
+                                        title: "Engagement",
+                                        desc: "GS Retail provides unwavering support so that all members can work with pride and demonstrate their capabilities.",
+                                        items: [
+                                            { num: "01", tit: "Employee Discount: Exclusive employee discounts are offered at GS Home Shopping and GS THE FRESH for all members.", desc: "Employee Discount: Exclusive employee discounts are offered at GS Home Shopping and GS THE FRESH for all members." },
+                                            { num: "02", tit: "Congratulatory Gifts: Birth celebration gifts and multi-child birth congratulatory allowances are provided.", desc: "Congratulatory Gifts: Birth celebration gifts and multi-child birth congratulatory allowances are provided." },
+                                            { num: "03", tit: "Holiday Gifts: GS Retail provides generous support to help members enjoy a plentiful and happy holiday season.", desc: "Holiday Gifts: GS Retail provides generous support to help members enjoy a plentiful and happy holiday season." },
+                                            { num: "04", tit: "Psychological Counseling Support: Employee psychological counseling is provided to support members' mental wellness.", desc: "Psychological Counseling Support: Employee psychological counseling is provided to support members' mental wellness." },
+                                            { num: "05", tit: "Long-Service Award: Awards and leave are provided to long-serving members as a token of appreciation.", desc: "Long-Service Award: Awards and leave are provided to long-serving members as a token of appreciation." }
+                                        ]
+                                    },
+                                    {
+                                        title: "Life",
+                                        desc: "GS Retail supports a better tomorrow for members to achieve work-life harmony and enjoy a fulfilling life.",
+                                        items: [
+                                            { num: "01", tit: "Childcare and Kindergarten Subsidy, Children's Tuition Support: The children of our members are our future. GS Retail cares for and supports them together.", desc: "Childcare and Kindergarten Subsidy, Children's Tuition Support: The children of our members are our future. GS Retail cares for and supports them together." },
+                                            { num: "02", tit: "IIn-House Daycare Center: Daycare centers are operated at GS Gangseo Tower and GS Gangnam Tower.", desc: "IIn-House Daycare Center: Daycare centers are operated at GS Gangseo Tower and GS Gangnam Tower." },
+                                            { num: "03", tit: "Disaster Support: GS Retail stands by its members even in the face of unexpected disasters.", desc: "Disaster Support: GS Retail stands by its members even in the face of unexpected disasters." },
+                                            { num: "04", tit: "Medical and Health Screening Support: GS Retail carefully supports members' health from prevention to treatment.", desc: "Medical and Health Screening Support: GS Retail carefully supports members' health from prevention to treatment." },
+                                            { num: "05", tit: "Childcare Leave: GS Retail respects the precious time members spend with their children.", desc: "Childcare Leave: GS Retail respects the precious time members spend with their children." },
+                                            { num: "06", tit: "Children's School Entrance Gift: GS Retail celebrates employees' children's new chapter with school entrance gifts.", desc: "Children's School Entrance Gift: GS Retail celebrates employees' children's new chapter with school entrance gifts." },
+                                            { num: "07", tit: "Congratulations and Condolences Support: When life events occur, GS Retail shares in members' joy and sorrow with leave and financial support.", desc: "Congratulations and Condolences Support: When life events occur, GS Retail shares in members' joy and sorrow with leave and financial support." },
+                                            { num: "08", tit: "Small Love Sharing Society: A mutual growth support program that rallies together when members face sudden difficulties.", desc: "Small Love Sharing Society: A mutual growth support program that rallies together when members face sudden difficulties." },
+                                        ]
+                                    },
+                                    {
+                                        title: "Leisure",
+                                        desc: "With the belief that an enjoyable leisure life drives the best performance, GS Retail also provides opportunities for rest and recharging.",
+                                        items: [
+                                            { num: "01", tit: "Recreation Facility Support: Discounts on recreation facilities are provided to help members enjoy a happy getaway.", desc: "Recreation Facility Support: Discounts on recreation facilities are provided to help members enjoy a happy getaway." },
+                                            { num: "02", tit: "Additional Summer Vacation Support: An extra summer vacation beyond statutory annual leave — GS Retail cheers on everyday happiness!", desc: "Additional Summer Vacation Support: An extra summer vacation beyond statutory annual leave — GS Retail cheers on everyday happiness!" },
+                                            { num: "03", tit: "Leave (Annual) Compensation: Partial compensation of 1.5x is provided for unused remaining annual leave.", desc: "Leave (Annual) Compensation: Partial compensation of 1.5x is provided for unused remaining annual leave." },
+                                            { num: "04", tit: "Sports Ticket Support: Football, baseball, volleyball — generous support to enjoy your favorite sport.", desc: "Sports Ticket Support: Football, baseball, volleyball — generous support to enjoy your favorite sport." },
+                                            { num: "05", tit: "Informal Groups (In-House Clubs): GS Retail supports mutual understanding and social bonding among members.", desc: "Informal Groups (In-House Clubs): GS Retail supports mutual understanding and social bonding among members." }
+                                        ]
+                                    }
+                                ],
+                                Awards: {
+                                    Title: "HR Management-Related Certifications and External Awards",
+                                    List: [
+                                        { year: "2025", month: "April"/* 260604 번역 */, desc: "2025. 04 Selected as Outstanding Company for Employment of People with Disabilities (Gangnam-gu Office)" },
+                                        { year: "2024", month: "November"/* 260604 번역 */, desc: "2024. 11 Minister's Award for Outstanding Fair Recruitment Company (Ministry of Employment and Labor)" },
+                                        { year: "2023", month: "February"/* 260604 번역 */, desc: "Korea Great Place<br />to Work Certification<br />(GPTW Korea)" }
+                                    ],
+                                    Highlight: {
+                                        Img: require("@/assets/images/dummy/gsrsu03030203.png"), // GPTW 로고 이미지
+                                        Tit: "Korea Great Place<br />to Work Certification<br />(GPTW Korea)",
+                                        Date: "2023.02",
+                                        alt: "GPTW Certification Logo"/* 260604 번역 */,
+                                    }
+                                }
+                            },
+                            part_4: {
+                                Summary: "Here, you can view performance data related to GS Retail's talent management.",
+                                Desc: "This document contains GS Retail's information assets and employee information disclosed for stakeholders, institutions, and shareholders. Any unauthorized use or illegal disclosure may be subject to legal penalties.",
+                                Table: {
+                                    Tbody: [
+                                        {num: 4, tit: "Human Rights Training Performance Data", date: "2021.06.21", url: "/files/human_rights_edu_2021.pdf" },
+                                        {num: 3, tit: "Retiree Support Program (Startup and Re-Employment)", date: "2021.02.19", url: "/files/retirement_support.pdf" },
+                                        {num: 2, tit: "Headcount, Wages, and Training Cost Status", date: "2021.02.19", url: "/files/salary_status.pdf" },
+                                        {num: 1, tit: "Occupational Safety and Health Training Data", date: "2021.02.19", url: "/files/safety_edu.pdf" }
+                                    ]
+                                },
+                                txt:'Download ↓'
+                            },
+                        },
+                        customer: {
+                            Summary: "The satisfaction of every single customer is GS Retail's mission and reason for existence.<br />For GS Retail, customer satisfaction management is a way of life and culture.",
+                            Policy: {
+                                Title: "Consumer Rights Protection Policy",
+                                Desc: "To protect consumer rights and interests, all employees of GS Retail<br/>In order to become a trusted GS Retail by providing beneficial products and services, we practice the following policies."/* 260604 번역 */,
+                                BtnText: "View Full Text >",
+                                Items: [
+                                    { label: "One"/* 260604 번역 */, text: "We will provide sufficient and accurate information for the rational consumption of consumers."/* 260604 번역 */ },
+                                    { label: "Two"/* 260604 번역 */, text: "We will strive to enhance customer benefits by providing products suitable for consumers and the best service."/* 260604 번역 */ },
+                                    { label: "Three"/* 260604 번역 */, text: "We will eradicate unfair trade practices that infringe upon consumer rights and interests."/* 260604 번역 */ },
+                                    { label: "Four"/* 260604 번역 */, text: "We will collect consumers' personal information only to the minimum extent consistent with its purpose, through a consent procedure."/* 260604 번역 */ },
+                                    { label: "Five"/* 260604 번역 */, text: "We will listen to the voice of consumers and immediately correct any inconveniences, striving to provide the best products."/* 260604 번역 */ }
+                                ]
+                            },
+                            Activities: {
+                                Title: "Key Customer Satisfaction Management Activities",
+                                Items: [
+                                    { img: require("@/assets/images/dummy/gsrsu030303_1.png"), tit: "TOTAL Service", subTit: "Fundamental problem-solving through customer relationship management"/* 260604 번역 */, desc: "GS Retail carries out activities to meet customer expectations at each stage of the value chain from store entry to exit, and continually improves based on Customer Feedback." },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_2.png"), tit: "Value Sharing and Communication", subTit: "Establishing Value Sharing and an Open Communication Culture", desc: "Establishing Value Sharing and an Open Communication Culture<br />All leaders at GS Retail hold a weekly Morning Talk and a monthly Connecting Day with their members." },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_3.png"), tit: "Service Boom-Up Activities", subTit: "Conducting various service programs involving the participation of customers and employees"/* 260604 번역 */, desc: "Under the philosophy that satisfied employees deliver exceptional service, various pride-building programs are conducted." },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_4.png"), tit: "Internal Employee Satisfaction", subTit: "Various Pride-Building Projects", desc: "Under the philosophy that satisfied employees deliver exceptional service, various pride-building programs are conducted." }
+                                ]
+                            },
+                            Recommend: {
+                                Title: "Recommendation of Service Excellence Employees",
+                                PointTit: "Sincere Service",
+                                Desc: "It is about continuously providing service that goes beyond customer expectations, putting your whole heart into it.<br />Please recommend an employee who has demonstrated sincere service to customers (or colleagues).",
+                                BtnText: "Recommend a Service Excellence Employee",
+                                link: "https://forms.office.com/pages/responsepage.aspx?id=XMJFRnWXd02nNnAPq3ZhFvCl7ccQQtpLvT4o0ubaQFFUOEVXQzJNMkg3U1NWT1VONklWUUhSREc1NC4u&route=shorturl"
+                            },
+                            Safety: {
+                                Title: "Product and Service Safety Programs",
+                                Items: [
+                                    { step: "01", tit: "Taste and Freshness Guardian Information", desc: "Discover GS Retail's Freshness Guardian program, dedicated to being No. 1 in freshness, taste, and quality. GS Retail carefully selects only the most delicious, fresh, and safety-verified products for our customers.", popContId: "gsrsu03030302"},
+                                    { step: "02", tit: "Safety and Hygiene Management System", desc: "Explore GS Retail's safety and hygiene management programs.", popContId: "gsrsu03030303"},
+                                    { step: "03", tit: "Hazardous Product Blocking System", desc: "To provide safe products, we participate in the Hazardous Product Blocking System."/* 260604 번역 */, popContId: "gsrsu03030304"}
+                                ]
+                            },
+                            Compensation: {
+                                Title: "Product and Customer Service Damage Compensation Programs",
+                                BtnText: "View Consumer Compensation Manual >",
+                                Steps: [
+                                    {label: "Step 1", desc: "Receipt of Product Defects <br />and Service Complaints" },
+                                    { label: "Step 2", desc: "Fact Verification" },
+                                    { label: "Step 3", desc: "Application of Compensation Policy<br />Based on Defect Determination" }
+                                ]
+                            },
+                            Awards: {
+                                Title: "Product and Service Certifications and External Award History",
+                                History: [
+                                    { year: "2019", month: "December"/* 260604 번역 */, desc: "Korea Brand Award (Ministry of Trade, Industry and Energy)"/* 260604 번역 */ },
+                                    { year: "", month: "July"/* 260604 번역 */, desc: "GS Retail Inducted into the Hall of Fame in the Comprehensive Distribution Category at the Korea Service Awards for the First Time (Korean Standards Association)"/* 260604 번역 */ },
+                                    { year: "", month: "June"/* 260604 번역 */, desc: "Grand Prize in the Fresh Food Shopping Mall Category at the National Service Awards (Institute for Industrial Policy Studies)"/* 260604 번역 */ },
+                                    { year: "2016", month: "September"/* 260604 번역 */, desc: "GS Retail Inducted into the Korea Management Awards Hall of Fame (Korea Management Association)"/* 260604 번역 */ }
+                                ],
+                                Marks: [
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo1.png"), tit: "ISO 9001 Certification Obtained <br/>(Korea Management Registrar Inc.)"/* 260604 번역 */, date: "2021. 05" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo2.png"), tit: "Korea Brand Award <br/>(Ministry of Trade, Industry and Energy)"/* 260604 번역 */, date: "2019. 12" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo3.png"), tit: "GS Retail Inducted into the Hall of Fame in the Comprehensive Distribution Category at the Korea Service Awards for the First Time (Korean Standards Association)"/* 260604 번역 */, date: "2019. 07" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo4.png"), tit: "Grand Prize in the Fresh Food Shopping Mall Category at the National Service Awards (Institute for Industrial Policy Studies)"/* 260604 번역 */, date: "2019. 06" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo5.png"), tit: "GS Retail Inducted into the Korea Management Awards Hall of Fame (Korea Management Association)"/* 260604 번역 */, date: "2016. 09" }
+                                ]
+                            }
+                        },
+                        safetymanagement: {
+                            Summary: "GS Retail is actively implementing its management policy to create a safe working environment, prevent accidents and disasters, and improve the quality of life and health of all members (employees and partner companies) and citizens (customers and the genal public).",
+                            Policy: {
+                                Title: "Safety and Health Management Policy",
+                                BtnText: "Safety and Health Management Policy",
+                                Items: [
+                                    { label: "One"/* 260604 번역 */, text: "The Company shall comply with the Occupational Safety and Health Act, safety and health management regulations, and other relevant laws and regulations." },
+                                    { label: "Two"/* 260604 번역 */, text: "The Company shall strive to achieve the highest standards in its commitment to safety-centered management and performance." },
+                                    { label: "Three"/* 260604 번역 */, text: "The Company shall recognize safety and health duties as an element of management, provide the necessary resources and technology, and continuously conduct safety and health activities." },
+                                    { label: "Four"/* 260604 번역 */, text: "The Company shall actively reflect the participation and opinions of its members (employees and partner companies) and citizens (customers and the general public), and shall continuously inspect and eliminate hazardous and risk factors at workplaces, including unsafe behaviors and environmental conditions, in order to prevent accidents and disasters." },
+                                    { label: "Five"/* 260604 번역 */, text: "The Company shall annually verify compliance with workplace safety and health-related laws and regulations, and allocate and execute the necessary personnel and budget." },
+                                    { label: "Six"/* 260604 번역 */, text: "All members of the Company shall comply with the headquarters' safety and health activity plans and safety and health manuals, and shall actively participate in activities to prevent serious accidents and industrial accidents." }
+                                ]
+                            },
+                            Governance: {
+                                Title: "Safety and Health Governance"/* 260604 번역 */,
+                                Desc: "To strengthen expertise in safety and health, a Chief Safety Officer (CSO) has been appointed for each of the Platform BU and Home Shopping BU, and a dedicated Safety and Health Team and Safety and Health Division, responsible for overseeing all safety and health-related matters, operate under the CSO.<br />In addition, GS Retail appoints safety and health management officers and supervisors at each workplace, and hazard factor investigations and risk assessments are conducted to advance the safety and health management system.",
+                                img1: require("@/assets/images/dummy/gsrsu030304_1.png"),
+                                imgMo1: require("@/assets/images/dummy/gsrsu030304_1_mo.png"),
+                                alt: "Platform BU Safety and Health Organizational Chart"/* 260604 번역 */,
+                                Notice: "1) Gangseo, N Tower, Gunpo, and Icheon Distribution Centers"
+                            },
+                            Safety: {
+                                Title: "Safety and Health Education and Management System",
+                                Desc: "GS Retail conducts safety and health education to maintain the highest level of safety and health for its employees, and proactively prevents accidents through various health management activities.",
+                                Systems: [
+                                    { num: "01", tit: "Musculoskeletal Exercise (Daily, during Vision Meeting)", sub: "(at each daily vision meeting)"/* 260604 번역 */ },
+                                    { num: "02", tit: "Psychological Counseling Service (Stress Management)", sub: "(Stress Management)"/* 260604 번역 */},
+                                    { num: "03", tit: "Health Target Index Management"},
+                                    { num: "04", tit: "Regular and Ad-hoc Daily Safety Diagnosis"},
+                                    { num: "05", tit: "Comprehensive Health Screening",},
+                                    { num: "06", tit: "Smoking Cessation Support",},
+                                    { num: "07", tit: "Risk Assessment Safety Education Activities",}
+                                ]
+                            },
+                            listening : {
+                                Title: "Safety and Health Feedback Box",
+                                Desc: "GS Retail sincerely listens to the opinions of its members on matters related to safety and health.<br/>Sound reporting serves as a valuable foundation for the Company's development and its safety and health management."/* 260604 번역 */,
+                                items: [
+                                    "The Safety and Health Suggestion Box receives opinions and reports regarding the safety and health of citizens and members."/* 260604 번역 */,
+                                    "We may not provide a separate response or take action on matters other than those concerning safety and health."/* 260604 번역 */,
+                                    "No disadvantage shall arise as a result of an opinion or report."/* 260604 번역 */
+                                ],
+                                Consents: [
+                                    {
+                                        title: "Consent to personal data sharing",
+                                        items: [
+                                            "The personal information you enter will be transmitted only to the safety management department for prompt and accurate processing, and will be used for confirming and responding to inquiries.",
+                                            "Personal information items collected: name, email, mobile phone number"/* 260604 번역 */,
+                                            "Retention and use period of personal information: Destroyed without delay upon achievement of the purpose (up to 1 year)"/* 260604 번역 */
+                                        ],
+                                        guide: "※ You have the right to refuse this consent; however, if you do not consent, you may experience difficulty receiving prompt and accurate responses to inquiries that require verification.",
+                                        ConsentText: "I agree."
+                                    },
+                                    {
+                                        title: "Consent to Collection and Use of Personal Information",
+                                        items: [
+                                            "- Purpose of Collection and Use: Confirmation of inquiries and use in responses",
+                                            "Items of personal information collected: Name, contact number, email",
+                                            "- Retention and Use Period: One year after receipt"
+                                        ],
+                                        guide: "You have the right to refuse this consent; however, if you do not consent,<br/> Writing an inquiry is not possible."/* 260604 번역 */,
+                                        ConsentText: "I agree."
+                                    }
+                                ],
+                                Nonmember : {
+                                    title:"You are currently submitting your inquiry as a non-member (not logged in)."/* 260604 번역 */,
+                                    items: [
+                                        "If you make an inquiry as a non-member, the response can be checked 'only through the contact information you registered (text message, phone call) or email.'"/* 260604 번역 */,
+                                        "Please enter your contact information accurately. (Previous inquiry history cannot be checked within the website.)"/* 260604 번역 */,
+                                        "If you submit a customer inquiry after logging in, you can check the inquiry/response history on My Page. (Except for Integrity Management)"/* 260604 번역 */
+                                    ],
+                                },
+                                InputWrapcont: {
+                                    part1: {
+                                        title: "Reporter Information",
+                                        requiredText: "* Required fields",
+                                        nameLabel: "Name",
+                                        namePlaceholder: "",
+                                        emailLabel: "Email",
+                                        emailOptions: [
+                                            { value: 'naver.com', label: 'naver.com' },
+                                            { value: 'gmail.com', label: 'gmail.com' }
+                                        ],
+                                        telLabel: "Contact",
+                                        telOptions: '010',
+                                    },
+                                    part2: {
+                                        title: "Consultation Content",
+                                        categoryLabel: "Category",
+                                        categoryOptions: [
+                                            { value: 'store', label: 'Convenience store/supermarket'/* 260604 번역 */ },
+                                            { value: 'home', label: 'Home Shopping' }
+                                        ],
+                                        storeLabel: "Store Name",
+                                        storeGuide: "If you do not know the store name, please write the store location.",
+                                        subjectLabel: "Title",
+                                        contentLabel: "Details",
+                                        contentPlaceholder: "Please enter any questions related to store onboarding",
+                                        noticeText: "※ For store-related reports, please provide the exact store name to receive a more accurate response.<br />※ When entering content, please refrain from including personal information such as contact numbers and addresses to protect your privacy.<br />※ Reports containing abusive or offensive language may not receive a response.",
+                                        fileLabel: "File Attachment",
+                                        fileNotice: "* When uploading multiple files, please compress them into a zip file (* File size limit: 20MB)",
+                                        replyLabel: "Reply Method",
+                                        replyOptions: [
+                                            { value: 'email', label: 'Email' },
+                                            { value: 'sms', label: 'SMS' }
+                                        ],
+                                        btnSubmit: "Apply"/* 260604 번역 */,
+                                        btnCancel: "Cancel"
+                                    }
+                                }
+                                
+                            }
+                        },
+                        // data() 리턴 객체 내 langData.ko.protect.informationprotection 섹션
+                        informationprotection: {
+                            Summary: "GS Retail places the utmost importance on information security and personal data protection.<br />The Company has established and operates a company-wide information security governance framework, and continually strives to provide customers with safe and reliable services through this framework.",
+                            Governance: {
+                                Title: "Information Security and Personal Data Protection Governance Framework",
+                                Desc: "GS Retail operates a governance framework directly under the CEO to protect customer personal data. The CISO/CPO, serving as both Chief Privacy Officer and Chief Information Security Officer, oversees company-wide personal data protection and, through the organization directly under the CISO/CPO, comprehensively manages and oversees security strategy development, security technology operations, and personal data protection. This organization consistently operates the company-wide information security and personal data protection framework, centered on three core functions: security strategy, security technology, and personal data protection.",
+                                img: require("@/assets/images/dummy/gsrsu030305_1.png"),
+                                imgMo: require("@/assets/images/dummy/mo/gsrsu030305_1_mo.png"),
+                            },
+                            Committee: {
+                                Desc: "GS Retail operates an Information Security Committee to manage critical issues. This committee is a company-wide information security and personal data protection governance body composed of the CEO and heads of each BU (executives). The CISO/CPO and head of the Legal Compliance Office participate as secretary members, and the working group and information security division are linked to support the systematic operation and decision-making of the company-wide information security and personal data protection governance.",
+                                img: require("@/assets/images/dummy/gsrsu030305_2.png"),
+                                imgMo: require("@/assets/images/dummy/gsrsu030305_2_mo.png"),
+                                CommitteeImg: "gsrsu030305_2",
+                                Notice: "* Regular reporting to the Board of Directors (ESG Committee)"/* 260604 번역 */
+                            },
+                            Policy: {
+                                Title: "Information Security and Personal Data Protection Policy",
+                                Desc: "GS Retail defines its personal data protection and information security activities based on its information security policies, guidelines, and manuals, and carries out various activities accordingly.<br />Policies, guidelines, and manuals are posted on the company's internal bulletin board and are reviewed and revised annually in line with amendments to relevant laws such as the Personal Information Protection Act. In addition, GS Retail transparently discloses its personal data protection measures by posting an 'Easy-to-Understand Personal Data Processing Policy' on its website.",
+                                img: require("@/assets/images/dummy/gsrsu030305_3.png"),
+                                imgMo: require("@/assets/images/dummy/mo/gsrsu030305_3_mo.png"),
+                            },
+                            Activities: {
+                                Title: "Information Security Activities",
+                                Desc: "GS Retail conducts a variety of information security activities in line with its information security management system, and communicates these activities through its information security disclosure.",
+                                Table: [
+                                    { tit: "ISMS-P Certification", desc: "In order to maintain the Information Security and Personal Data Protection Management System (ISMS-P) certification, various information security audits, including management and technical control items, are conducted on a regular basis, and ISMS-P certification assessments are conducted by accredited organizations." },
+                                    { tit: "Service Security Review", desc: "A development security process is operated for new and modified services. Security requirements are defined through a criticality assessment at the service planning stage and reflected in each phase of the project; prior to launch, comprehensive security inspections are conducted in line with the security requirements, including personal data lifecycle, development security, application security, source code and infrastructure inspection, and web and app vulnerabilirequirements, and any identified vulnerabilities are remediated." },
+                                    { tit: "Information Security Training", desc: "Information security education and personal data protection training are conducted for all employees company-wide, and advanced training is provided separately for employees who handle location information and large volumes of personal data." },
+                                    { tit: "Information Security Awareness Enhancement", desc: "To enhance employees' Information Security Awareness Enhancement, GS Retail operates Personal Data Protection Day and Information Security Day campaigns, and GS Retail sends regular mailings regarding key compliance matters." },
+                                    { tit: "Simulation Drills", desc: "Malicious email simulation drills are conducted for employees to improve security awareness regarding malicious emails. In addition, simulation drills for personal data leakage and exposure incidents are conducted to reduce personal data breaches that may affect customers in the event of an actual incident." },
+                                    { tit: "Risk Management", desc: "Vulnerability assessments and risk evaluations are conducted annually to manage risks arising from information assets (including infrastructure) and processes, and plans are established and operated to manage identified risks." }
+                                ],
+                                BtnText: "Go to Information Security Disclosure >",
+                                link:'https://isds.kisa.or.kr/kr/publish/list.do?pageNum=1&limit=10&type=ALL&keyword=%EC%A7%80%EC%97%90%EC%8A%A4%EB%A6%AC%ED%85%8C%EC%9D%BC&menuNo=204942'
+                            },
+                            Certification: {
+                                Img: require("@/assets/images/dummy/gsrsu030305_logo.png"),
+                                Title: "GS Retail Online Services",
+                                date:"(2025.06.18 ~ 2028.06.17)",
+                                Desc: "In order to objectively demonstrate the adequacy and appropriateness of the information security management system and information security activities, GS Retail has obtained and operates the Personal information & Information Security Management System (ISMS-P) certification."
+                            }
+                        }
+
+
+                    },
                 }
             }
         };

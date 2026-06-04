@@ -119,6 +119,48 @@ export default {
                             "<span>마이페이지 내 승급 가이드를 통해 다음 등급까지 필요한 조건이 표시됩니다.</span>"
                         ]
                     }
+                },
+                en: {
+                    MainTitle: "Membership FAQ",
+                    Greeting: "We're here to answer all your questions about membership points.",
+                    sub_title: "Top FAQs",
+                    info_text: "· Couldn't find what you were looking for? Try our Customer Feedback section.",
+                    btn_customer: "Customer Feedback",
+                    default_desc: "A detailed answer is being prepared."/* 260604 번역 */,
+                    faq_1: {
+                        title: [
+                            "What is GS ALL Membership?",
+                            "I have legally changed my name. What should I do?",
+                            "What is GS ALL Family?",
+                            "How can I update my mobile phone number?",
+                            "How do I register my GS ALL Membership card?",
+                            "What is identity verification? Is it mandatory?",
+                            "I'm having trouble with identity verification. What should I do?"
+                        ],
+                        desc: [
+                            "GS ALL Membership is the integrated membership program across GS Retail's three brands: GS25, GS SHOP, and GS THE FRESH. Achieving the required tier at just one brand grants tier benefits across all three brands. For more details, please visit My Page in each brand's app.",
+                            "<span>If you have legally changed your name, please first update your real-name verification information with your mobile carrier, then re-verify your identity in the Edit Personal Information menu within the app.</span>"/* 260604 번역 */,
+                            "<span>It is a sharing service that lets you combine and use points together with family or friends.</span>"/* 260604 번역 */,
+                            "<span>Log in with your existing number, then use the 'Change Mobile Number' menu in My Page.</span>"/* 260604 번역 */,
+                            "<span>You can register the barcode number of a physical card or issue a mobile card.</span>"/* 260604 번역 */
+                        ]
+                    },
+                    faq_2: {
+                        title: [
+                            "What are the criteria for determining my GS ALL Membership tier?",
+                            "Where can I check my tier benefits and current tier status?",
+                            "How much more do I need to spend to be promoted to the next tier?",
+                            "Do I need to apply separately to use GS ALL Membership?",
+                            "How long does my membership tier last?",
+                            "What is GS ALL Family?",
+                            "I'm having trouble with identity verification. What should I do?"
+                        ],
+                        desc: [
+                            "<span>It is calculated based on your usage record (amount/number of times) over the previous three months.</span>"/* 260604 번역 */,
+                            "<span>You can view details by tapping the tier display area at the top of My Page in each brand's app.</span>"/* 260604 번역 */,
+                            "<span>The promotion guide in My Page shows the conditions required to reach the next tier.</span>"/* 260604 번역 */
+                        ]
+                    }
                 }
             }
         };

@@ -108,6 +108,42 @@ export default {
                             { subject: '중소기업 홈쇼핑 방송을 통한 유통판로 확대', content: 'GS리테일은 상대적으로 판로 기회가 적은 지역 중소기업에게 ‘전국 중소기업 특별전’이란 프로그램을 개설하여 유통 판로 확대를 지원했습니다. 해당 프로그램은 판매수수료가 없는 무료 판매 방송이었으며, 수도권을 제외한 지역 중소기업 공산품, 특산품 위주로 구성하였습니다. 또한, 지방 특산물을 브랜드화하여 성장을 지원하였습니다.' }
                         ]
                     }
+                },
+                en: {
+                    MainTitle: "GS Retail Community Engagement Policy",
+                    intro: 'GS Retail carries out community support activities with the aim of revitalizing the local economy and laying the foundation for community growth. In particular, we are building a culture of mutual growth through various sales channel support activities that leverage the characteristics of the distribution industry.'/* 260604 번역 */,
+                    section1: {
+                        title: 'Purpose of Establishment',
+                        desc: 'To fulfill its corporate social responsibility, GS Retail seeks to carry out community engagement activities, including social contribution initiatives. We also strive to encourage customer participation in these activities to spread positive influence. This is because bringing about positive change in society requires the joint efforts of not only GS Retail but also our customers and employees. Therefore, we aim to continuously create opportunities to contribute to local communities together. We will develop programs that take investment in future generations into account. Future generations are one of the key reasons we must build a sustainable society. By identifying community engagement programs needed by future generations, we will work toward a healthy future for local communities.'/* 260604 번역 */
+                    },
+                    section2: {
+                        title: 'Policy Direction',
+                        desc: 'The directions of the Community Engagement Policy are as follows:',
+                        items: [
+                            { label: 'One'/* 260604 번역 */, content: 'This is the implementation of a cooperation model through linkage activities with the local community. Through product development with local startups, support for product placement, and the like, we seek to expand a business model that grows together.'/* 260604 번역 */ },
+                            { label: 'Two'/* 260604 번역 */, content: 'This is the strengthening of relationships with various stakeholders such as local small and medium-sized enterprises, local traditional markets, and startups. We will strive to maintain healthy relationships with the various stakeholders of our society and to continue active exchange, so as to promote the revitalization of the local economy together.'/* 260604 번역 */ },
+                            { label: 'Three'/* 260604 번역 */, content: 'This is support for resolving important issues in the local community. As members of the local community, we seek solutions together and actively provide support in order to resolve the problems we face.'/* 260604 번역 */ }
+                        ]
+                    },
+                    section3: {
+                        title: 'Community Engagement Policy Governance',
+                        desc: 'Community engagement activities consist of activities for the growth of the local community. Activities related to social contribution are organized by the Social Contribution Part, and the development of sales channels related to local specialty products is handled by the MD and Broadcasting Business Support Team.'/* 260604 번역 */
+                    },
+                    section4: {
+                        title: 'Key Activities Related to Community Engagement Policy',
+                        desc: 'GS Retail empathizes with the concerns of local communities and provides continuous support to address them. Leveraging its distribution competitiveness, GS Retail is building a virtuous cycle for community growth. The main community-related activities are as follows.'/* 260604 번역 */,
+                        image: {
+                            src: require("@/assets/images/dummy/gsrsu03010104_diagram.png"),
+                            alt: 'Key Activities Related to Community Engagement Policy'
+                        },
+                        activities: [
+                            { subject: 'Local Tourism Product Development', content: 'GS Retail has developed domestic travel products connected to local regions and sold them via home shopping broadcasts. We aim not only to diversify existing regional tourism products but also to develop one to two new products each year. In addition, in partnership with regional agricultural cooperatives and traditional markets, we are diversifying course offerings, including local festivals, food, hands-on experiences, and visits to regional agricultural cooperatives and traditional markets.'/* 260604 번역 */ },
+                            { subject: 'Local Food Product Development', content: 'GS Retail signs business agreements with local governments to pursue projects that discover signature food products, and contributes to community growth through various forms of support by launching products and strengthening collaboration with local governments.'/* 260604 번역 */ },
+                            { subject: 'Emergency Community Disaster Relief', content: 'GS Retail conducts emergency disaster relief activities every year for residents affected by natural disasters and other calamities, providing emergency supplies and other assistance to local disaster victims.'/* 260604 번역 */ },
+                            { subject: 'Revitalizing Agricultural, Livestock, and Fishery Distribution through Local Cooperative Partnerships', content: 'In addition to existing partnerships with the National Agricultural Cooperative Federation, the National Federation of Fisheries Cooperatives, and farming associations, GS Retail has signed product sales support agreements with regional cooperatives and the Ministry of Economy and Finance to brand and nurture regional specialty products.'/* 260604 번역 */ },
+                            { subject: 'Expanding Distribution Channels through SME Home Shopping Broadcasts', content: `GS Retail launched a program called the 'National Small and Medium-Sized Enterprise Special Exhibition' to support the expansion of distribution channels for regional small and medium-sized enterprises that have relatively limited sales opportunities. This program consisted of free sales broadcasts with no sales commission and was organized primarily around manufactured goods and specialty products from regional SMEs outside the Seoul metropolitan area. In addition, GS Retail supported growth by branding regional specialty products.`/* 260604 번역 */ }
+                        ]
+                    }
                 }
             }
         };

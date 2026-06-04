@@ -55,6 +55,14 @@ export default {
                         { imgSrc: img02, alt: "GS THE FRESH 로고", tit: "추천기준", desc: "지역 : 전국<br/>규모: 전용면적 50평 이상", Btn:"입지제안 바로가기" },
                     ],
                     check: "확인",
+                },
+                en: {
+                    MainTitle: "Location Inquiry",
+                    cards: [
+                        { imgSrc: img01, alt: "GS25 Logo"/* 260604 번역 */, tit: "Recommendation criteria"/* 260604 번역 */, desc: "Region: Nationwide<br/>Size: Leased store with a business area of 10 pyeong or more"/* 260604 번역 */, Btn:"Go to location proposal"/* 260604 번역 */ },
+                        { imgSrc: img02, alt: "GS THE FRESH Logo"/* 260604 번역 */, tit: "Recommendation criteria"/* 260604 번역 */, desc: "Region: Nationwide<br/>Size: Exclusive area of 50 pyeong or more"/* 260604 번역 */, Btn:"Go to location proposal"/* 260604 번역 */ },
+                    ],
+                    check: "Confirm",
                 }
             }
         };

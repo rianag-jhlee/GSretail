@@ -557,6 +557,211 @@ export default {
                         ]
                     }
                     
+                },
+                en: {
+                    brand: {
+                        visual: {
+                            lines: [
+                                "A brand that brings freshness and happiness",
+                            ],
+                            logoAlt:  "GS THE FRESH Main Visual"/* 260604 번역 */,
+                        },
+                        about: [
+                            [
+                                'LG Supermarket, which launched in 1974 as Lucky Super Chain Co., Ltd.,'/* 260604 번역 */,
+                                "With the launch of the GS Group, it was renamed GS Supermarket,"/* 260604 번역 */,
+                                "Later, in 2019, to transform into a 'lifestyle market where you enjoy life's value,'"/* 260604 번역 */,
+                                'Reborn anew as "GS THE FRESH."'/* 260604 번역 */,
+                            ],
+                            [
+                                'The newly reborn GS THE FRESH, embracing the values of Friendly, Fresh, and Fun,'/* 260604 번역 */,
+                                `As a store that is always close to customers' lives,`/* 260604 번역 */,
+                                'While offering fresh and diverse products and providing even friendlier service,'/* 260604 번역 */,
+                                'We strive for a friendly, fast, convenient, and enjoyable shopping culture together with our customers.'/* 260604 번역 */
+                            ],
+                            [
+                                'GS THE FRESH, meeting customers again under a new name,'/* 260604 번역 */,
+                                'we will create a shopping culture that brings fresh happiness,'/* 260604 번역 */,
+                                'We promise to bring even greater satisfaction to our customers.'/* 260604 번역 */
+                            ]
+                        ],
+                    },
+                    ValueTitle: "Happy family shopping, with farm-fresh products delivered straight to your door.",
+                    Buttons: {
+                        proposal: "Location Inquiry",
+                        findStore: "Find a Store",
+                        backToList: "← Back to Brand List"
+                    },
+                    Sns: {
+                        insta: "Instagram"/* 260604 번역 */,
+                        facebook: "Facebook"/* 260604 번역 */
+                    },
+                    AccordionList: [
+                        {
+                            title: "We promise to be Korea's No. 1 in freshness, taste, and service.",
+                            desc: "We carefully select only the freshest and most flavorful products from top-quality production regions nationwide, <br />putting each through GS THE FRESH's rigorous inspection process to deliver the very best. <br />With a commitment to customer-centered service, we have ranked No. 1 for 10 consecutive years in the Korean Service Quality Index (KS-SQI), and we continue to build a store our customers love.",
+                            img: require("@/assets/images/sub/gsrbr020101/gsrbr020101_3.png")
+                        },
+                        {
+                            title: "GS THE FRESH leads the industry with its own distinctive offerings.",
+                            desc: "We discover marketable products from outstanding small and medium-sized businesses<br/>'REAL price,' which sells products at around 70–80% of regular prices, and<br/>Brands such as 'Sinseon Special City,' a dedicated fresh-food brand sourcing carefully selected freshness and sweetness from premium regions,<br/>We lead Korea's supermarket industry with differentiated products and services."/* 260604 번역 */,
+                            img: require("@/assets/images/sub/gsrbr020101/gsrbr020101_4.png")
+                        }
+                    ],
+                    OriginTabs1: [{ item: "Fresh Growing Region Guide" }, { item: "Taste and Freshness Management" }],
+                    OriginTabs2: [{ item: "Premium Growing Regions Nationwide" }, { item: "Partner Local Governments" }],
+                    OriginContent: {
+                        title: "Premium Growing Regions Nationwide",
+                        desc: "GS Retail is committed to always providing customers with fresh, high-quality products.",
+                        desc1: "Through ongoing sourcing efforts and support, we partner with premium growing regions to bring the finest products straight to our customers."
+                    },
+                    OriginCategories: ["Fruit", "Seafood", "Vegetables", "Grains", "Livestock"],
+                    OriginData: [
+                        {
+                            category: "Fruit",
+                            summary: "Sweet, seasonal perfection: premium fruit freshly harvested from growing regions across the country",
+                            items: [
+                                { name: "Yeongheung Island grapes"/* 260604 번역 */, img: require("@/assets/images/sub/gsrbr020101/tab_1_1.png") },
+                                { name: "Jeju Tangerines", img: require("@/assets/images/sub/gsrbr020101/tab_1_2.png") },
+                                { name: "Hadong Strawberries", img: require("@/assets/images/sub/gsrbr020101/tab_1_3.png") },
+                                { name: "Andong Apples", img: require("@/assets/images/sub/gsrbr020101/tab_1_4.png") }
+                            ]
+                        },
+                        {
+                            category: "Seafood",
+                            summary: "The freshness of pristine waters, delivered straight from the source: fresh seafood",
+                            items: [
+                                { name: "Busan Fresh Mackerel", img: require("@/assets/images/sub/gsrbr020101/tab_1_5.png") },
+                                { name: "Daebudo Clams", img: require("@/assets/images/sub/gsrbr020101/tab_1_6.png") },
+                                { name: "Jeju Island hairtail"/* 260604 번역 */, img: require("@/assets/images/dummy/tab_1_7.png") },
+                                { name: "Wando Abalone", img: require("@/assets/images/sub/gsrbr020101/tab_1_8.png") }
+                            ]
+                        },
+                        {
+                            category: "Vegetables",
+                            summary: "Fresh vegetables infused with the vitality of the earth: the start of a healthy meal",
+                            items: [
+                                { name: "Geumsan Perilla Leaves", img: require("@/assets/images/sub/gsrbr020101/tab_1_9.png") },
+                                { name: "Haenam Sweet Potatoes", img: require("@/assets/images/sub/gsrbr020101/tab_1_10.png") },
+                                { name: "Jeju Peeled Garlic", img: require("@/assets/images/sub/gsrbr020101/tab_1_11.png") },
+                                { name: "Haenam Salted Cabbage", img: require("@/assets/images/sub/gsrbr020101/tab_1_12.png") },
+                                { name: "Chamtari mushrooms"/* 260604 번역 */, img: require("@/assets/images/sub/gsrbr020101/tab_1_13.png") }
+                            ]
+                        },
+                        {
+                            category: "Grains",
+                            summary: "Our wholesome grains: firm, plump, and full of flavor",
+                            items: [{ name: "Dangjin Rice", img: require("@/assets/images/sub/gsrbr020101/tab_1_14.png") }]
+                        },
+                        {
+                            category: "Livestock",
+                            summary: "High-quality livestock products with rich, succulent flavor",
+                            items: [{ name: "Yeongwol Hanwoo", img: require("@/assets/images/sub/gsrbr020101/tab_1_15.png") }]
+                        }
+                    ],
+                    PartnershipTitle: "Partner Local Governments",
+                    PartnershipDesc: `GS Retail is leading the way in revitalizing local economies through collaborative activities (MOUs) with local governments.
+                    <span>* Signed MOUs (Memorandums of Understanding) with 7 metropolitan/provincial governments, 13 local governments, and 1 fisheries cooperative (Wando Suhyup).</span>`/* 260604 번역 */,
+                    MouStatusTitle: "Local Government MOU Status",
+                    MouList: [
+                        { name: "MOU Signed with Jindo County", img: require("@/assets/images/dummy/tab_1_2_1.png"), isTextType: false },
+                        { name: "MOU Signed with Miryang City", img: require("@/assets/images/dummy/tab_1_2_2.png"), isTextType: false },
+                        { name: "MOU Signed with Gochang County", img: require("@/assets/images/dummy/tab_1_2_3.png"), isTextType: false },
+                        { name: "MOU Signed with South Jeolla Province", img: require("@/assets/images/dummy/tab_1_2_4.png"), isTextType: false },
+                        { name: "MOU signed with Busan Metropolitan City"/* 260604 번역 */, img: require("@/assets/images/dummy/tab_1_2_5.png"), isTextType: false },
+                        { name: "MOU Signed with South Chungcheong Province", img: require("@/assets/images/dummy/tab_1_2_6.png"), isTextType: false },
+                        { name: "MOU Signed with Wando County", img: require("@/assets/images/dummy/tab_1_2_7.png"), isTextType: false },
+                        { 
+                            name: "Business agreement signed"/* 260604 번역 */, 
+                            img: require("@/assets/images/dummy/tab_1_2_8.png"), 
+                            info: "MOU Signed with South Gyeongsang Province Young Fishers Association, Korea Fisheries Infrastructure Public Agency, and South Gyeongsang Province",
+                            isTextType: true 
+                        }
+                    ],
+                    MouProductsTitle: "Fresh food through MOU partnerships"/* 260604 번역 */,
+                    MouTableCaption: "Fresh food information from MOUs signed with local governments"/* 260604 번역 */,
+                    MouProducts: [
+                        { location: "South Chungcheong Province", products: "Lettuce, perilla leaves, chives, strawberries, watermelon, cherry tomatoes, melon, apples, pears, Korean beef (Hanwoo), domestic pork, eggs, blue crabs" },
+                        { location: "South Jeolla Province", products: "* Gangjin County: grains, pork | * Naju City: pears, duck | * Muan County: onions | * * Haenam County: sweet potatoes, salted cabbage | * Wando County: abalone | * Yeonggwang County: dried yellow corvina | * Sinan County: dried seaweed, salt | * Jindo County: green onions | * Jangheung County: blueberries, duck" },
+                        { location: "South Gyeongsang Province", products: "* Miryang City: lettuce, perilla leaves, shiitake mushrooms, tomatoes, melon, watermelon, apples, persimmons, strawberries | * Ulleungdo: wild herbs | * Sancheong County: strawberries, eggs, fresh catch" },
+                        { location: "North Jeolla Province", products: "* Gochang County: grains" },
+                        { location: "Gyeonggi Province", products: "* Anseong City: pears, Korean beef (Hanwoo), pork" },
+                        { location: "Jeju Island", products: "Tangerines, Hallabong (Jeju citrus), kiwi, hairtail" },
+                        { location: "Busan City", products: "Daejeo Tomatoes" }
+                    ],
+                    TasteManagement: {
+                        title: "Taste & Freshness Guardian",
+                        desc: "Discover GS Retail's Freshness Guardian program, dedicated to being No. 1 in freshness, taste, and quality. GS Retail carefully selects only the most delicious, fresh, and safety-verified products for our customers.",
+                        processTitle: "Expertise in managing taste and freshness"/* 260604 번역 */,
+                        steps: [
+                            { title: "Fresh Products", desc: "We supply only fresh products from growing regions that meet our sourcing standards."},
+                            { title: "Thorough Inspection", desc: "When products arrive at the distribution center, thorough inspection procedures are carried out to block all defective products from entering."},
+                            { title: "Optimal Temperature", desc: "Products are delivered at optimal temperatures using in-vehicle halogen heaters and refrigeration units to maintain freshness."},
+                            { title: "In-Store Management", desc: "Each store operates a designated Freshness Guardian to provide customers with the freshest products possible. The Freshness Guardian regularly monitors product freshness and remaining shelf life to ensure only the finest products reach our customers."},
+                            { title: "Customer Satisfaction", desc: "From growing regions through distribution centers to stores and into your hands, our complete Cold Chain System delivers the original taste and freshness straight from the source."}
+                        ],
+                        principleTitle: "Taste and Freshness Management Policy",
+                        principleSub: "Learn about GS Retail's food promise and rigorous freshness management standards.",
+                        principles: [
+                            { title: "1. Direct Trade with Producers", desc: "We bring the crispness of field-fresh vegetables straight to your table.", subDesc: "Through careful cultivation and harvest timing, we always supply only the finest products." },
+                            { title: "The finest sweetness"/* 260604 번역 */, desc: "The taste of the orchard! We harvest only fruit that has fully ripened on the tree.", subDesc: "While most produce is harvested early to allow for distribution time, GS fruit is left to ripen fully on the tree, resulting in exceptionally high sugar content and outstanding flavor." },
+                            { title: "3. Tender and Juicy!", desc: "Light and tender flavor! Only products that have undergone a post-production aging process and are within their optimal consumption period are stocked.", subDesc: "To preserve the rich, juicy flavor of Korean beef (Hanwoo), we have refined our refrigerated delivery system and freshness-maintenance know-how over 34 years." },
+                            { title: "Direct-from-sea delivery system"/* 260604 번역 */, desc: "The taste of seafood straight from the sea! Freshly caught seafood is delivered via air freight and early morning direct delivery.", subDesc: "With freshly caught seafood delivered via air freight and early morning direct delivery, you can enjoy the taste of seafood as if you were right by the sea." }
+                        ],
+                        categories: ["Delicious Meat", "Fresh Fruit", "Fresh Vegetables", "Fresh Seafood"],
+                        productGroups: [
+                            {
+                                category: "Delicious Meat",
+                                items: [
+                                    { name: "Beef Short Ribs", img: require("@/assets/images/dummy/tab_2_1.png") },
+                                    { name: "Beef for Soup", img: require("@/assets/images/dummy/tab_2_2.png") },
+                                    { name: "Hanwoo Tenderloin", img: require("@/assets/images/dummy/tab_2_3.png") },
+                                    { name: "Pork Belly", img: require("@/assets/images/dummy/tab_2_4.png") },
+                                    { name: "Eggs"/* 260604 번역 */, img: require("@/assets/images/dummy/tab_2_5.png") },
+                                    { name: "Chicken", img: require("@/assets/images/dummy/tab_2_6.png") },
+                                    { name: "Hanwoo Sirloin", img: require("@/assets/images/dummy/tab_2_7.png") },
+                                    { name: "Beef for Bulgogi", img: require("@/assets/images/dummy/tab_2_8.png") },
+                                    { name: "Pork Shoulder (Neck)", img: require("@/assets/images/dummy/tab_2_9.png") }
+                                ]
+                            },
+                            {
+                                category: "Fresh Fruit",
+                                items: [
+                                    { name: "Geochang Apple Strawberries", img: require("@/assets/images/dummy/tab_2_10.png") },
+                                    { name: "Strawberries", img: require("@/assets/images/dummy/tab_2_11.png") },
+                                    { name: "Watermelon", img: require("@/assets/images/dummy/tab_2_12.png") },
+                                    { name: "Kiwi", img: require("@/assets/images/dummy/tab_2_13.png") },
+                                    { name: "Tangerines", img: require("@/assets/images/dummy/tab_2_14.png") },
+                                    { name: "Tomatoes", img: require("@/assets/images/dummy/tab_2_15.png") },
+                                    { name: "Korean Melon", img: require("@/assets/images/dummy/tab_2_16.png") },
+                                    { name: "Melon", img: require("@/assets/images/dummy/tab_2_17.png") },
+                                    { name: "Apples", img: require("@/assets/images/dummy/tab_2_18.png") },
+                                    { name: "Pears", img: require("@/assets/images/dummy/tab_2_19.png") }
+                                ]
+                            },
+                            {
+                                category: "Fresh Vegetables",
+                                items: [
+                                    { name: "Daikon Radish", img: require("@/assets/images/dummy/tab_2_20.png") },
+                                    { name: "Bell Peppers", img: require("@/assets/images/dummy/tab_2_21.png") },
+                                    { name: "Onions", img: require("@/assets/images/dummy/tab_2_22.png") },
+                                    { name: "Napa Cabbage", img: require("@/assets/images/dummy/tab_2_29.png") },
+                                    { name: "Sweet Potatoes", img: require("@/assets/images/dummy/tab_2_23.png") },
+                                    { name: "King Oyster Mushrooms", img: require("@/assets/images/dummy/tab_2_24.png") },
+                                ]
+                            },
+                            {
+                                category: "Fresh Seafood",
+                                items: [
+                                    { name: "Dried Seaweed (Gim/Nori)", img: require("@/assets/images/dummy/tab_2_25.png") },
+                                    { name: "Dried Squid", img: require("@/assets/images/dummy/tab_2_26.png") },
+                                    { name: "Anchovies", img: require("@/assets/images/dummy/tab_2_27.png") },
+                                    { name: "Squid", img: require("@/assets/images/dummy/tab_2_28.png") },
+                                ]
+                            }
+                        ]
+                    }
+                    
                 }
             }
         };

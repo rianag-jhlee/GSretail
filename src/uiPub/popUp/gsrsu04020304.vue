@@ -447,6 +447,185 @@ export default {
                         article: "제 1조[시행일]",
                         lines: ["- 이 지침은 2020년 4월 1일부터 시행한다.", "- 이 지침은 2021년 4월 1일부터 시행한다."]
                     }
+                },
+                en: {
+                    MainTitle: "Guidelines for Contract Conclusion for Mutual Growth between\nLarge and Small and Medium-Sized Enterprises",
+                    intro: '2021.04.\nGS Retail\n\nGuidelines for the Issuance and Retention of Written Documents in Subcontracting Transactions',
+                    section1: {
+                        title: "Purpose",
+                        desc: `- These practice items, in accordance with the Fair Trade Commission's "Guidelines on the Issuance and Preservation of Written Documents in Subcontract Transactions," are intended to enable the Company (hereinafter the “Company”, i.e., GS Retail) and its partner companies to clearly understand the matters concerning the issuance of written documents under the Fair Transactions in Subcontracting Act (hereinafter the "Subcontracting Act"), and thereby to facilitate the exercise of rights and performance of obligations accordingly.`/* 260604 번역 */
+                    },
+                    section2: {
+                        title: "III. Guidelines for the Selection and Operation of Partner Companies",  
+                        desc: '- The Company shall issue written documents in the course of concluding and performing subcontract transaction contracts as set forth below. The written documents subject to issuance are as shown in Table 1 below.'/* 260604 번역 */, 
+                        desc2: '[Table 1: Written Documents Subject to Issuance]',
+                        TableHeader: { col1: "No.", col2: "Document Subject to Issuance", col3: "Remarks" },
+                        IRListData: [
+                            { num: "1", title: "Master contract (including addendum and change contracts)", etc: "Article 3 of the Subcontracting Act" },
+                            { num: "2", title: "Subcontracting contract confirmation document", etc: "Article 3(6) of the Subcontracting Act" },
+                            { num: "3", title: "Price reduction document", etc: "Article 11 of the Subcontracting Act" },
+                            { num: "4", title: "Technical data provision request document", etc: "Article 12-3 of the Subcontracting Act" },
+                            { num: "5", title: "Receipt confirmation of deliverables, etc.", etc: "Article 8 of the Subcontracting Act" },
+                            { num: "6", title: "Inspection result notification", etc: "Article 9 of the Subcontracting Act" },
+                            { num: "7", title: "Contract change details notification", etc: "Article 16 of the Subcontracting Act" }
+                        ],
+                        step1: {
+                            title: "1. Issuance of Subcontracting Agreements",
+                            partA: {
+                                label: "a. Disclosure of the criteria, procedures, and results for selecting Partner Companies"/* 260604 번역 */,
+                                items: [
+                                    { content: "① Where the Company consigns to a Partner Company the manufacturing, repair, construction, or performance of services for objects, etc. under the Subcontracting Act (hereinafter referred to as 'manufacturing, etc.'), the Company shall, after agreeing upon and determining with the Partner Company the principal terms of the contract such as the content of the consigned objects, etc. and the quantity and unit price, issue a written subcontracting contract."/* 260604 번역 */ },
+                                    { content: "② Where the original contract content is changed due to a design modification or the consignment of additional construction, etc., the Company shall, absent extraordinary circumstances, prepare and issue an addendum or amendment document."/* 260604 번역 */ }
+                                ],
+                            },
+                            partB: {
+                                label: "Specificity and Clarity of Selection Standards",
+                                desc: "- The subcontract written document shall reflect contents consistent with the facts of the actual transaction and shall, in principle, state the matters in each of the following items."/* 260604 번역 */,
+                                items: [
+                                    { content: "① The consignment date; the content of the consigned objects, etc.; the quantity and unit price; the time and place for supplying, delivering, or providing the objects, etc.; the method and timing of inspection of the objects, etc.; and the subcontract payment and the method and date of payment"/* 260604 번역 */ },
+                                    { content: "② Where the Company intends to provide the Partner Company with raw materials, etc. required for the manufacturing, etc. of the objects, etc., the name, quantity, and provision date of such raw materials, etc., and the method and date of payment of consideration"/* 260604 번역 */ },
+                                    { content: "③ The requirements, methods, and procedures for adjusting the subcontract payment in accordance with changes in the prices of raw materials, etc. after the manufacturing, etc. of the objects, etc. has been consigned"/* 260604 번역 */ },
+                                ],
+                            },
+                            partC: {
+                                label: "c. Timing of issuance of the written document"/* 260604 번역 */,
+                                items: [
+                                    { content: "① As a general rule, after agreeing upon and determining the principal terms of the consignment contract with the partner company, the Company issues a written contract without delay."/* 260604 번역 */ },
+                                    { content: "② Even where there are circumstances that make it difficult for the Company to deliver a written contract to the partner company without delay, the Company shall, absent special grounds, issue the contract in writing at least by the deadline corresponding to each of the following subparagraphs."/* 260604 번역 */ }
+                                ],
+                                rows: [
+                                    "- Manufacturing consignment: before the partner company begins the work for product delivery, etc."/* 260604 번역 */,
+                                    "- Service consignment: before the partner company begins the contracted service performance"/* 260604 번역 */
+                                ],
+                            },
+                            partD: {
+                                label: "d. Method of issuance of the written document"/* 260604 번역 */,
+                                items: [
+                                    { content: "① The Company shall issue to the Partner Company a contract signed (including a certified electronic signature under Article 2, subparagraph 3 of the Digital Signature Act) or affixed with the name and seal of the Company or its representative."/* 260604 번역 */ },
+                                    { content: "② Where a document is issued without the signature or name and seal of the contracting party in the subcontracting transaction, it constitutes a failure to issue a document."/* 260604 번역 */ },
+                                    { content: "③ A document may be issued through the provision of electronic records as follows."/* 260604 번역 */ }
+                                ],
+                                rows: [
+                                    "- The method of transmitting via telecommunications lines and recording in a file provided in the electronic recording device used by the partner company (e.g., email)"/* 260604 번역 */,
+                                    "- The method of providing for the partner company's viewing via telecommunications lines and recording in a file provided in the electronic recording device used by said partner company (e.g., web)"/* 260604 번역 */,
+                                    "- Methods such as delivering electronic records to the partner company via USB, CD-ROM, etc."/* 260604 번역 */
+                                ],
+                            },
+                            partE: {
+                                label: "A method of providing electronic records such as USB, CD-ROM, etc. to the partner company",
+                                desc: "- Where a written document has been issued in a reasonable manner consistent with the actual practice of subcontract transactions, as exemplified below, the obligation to issue a written document may be performed in a manner that differs from the above written-document particulars and the time of issuance."/* 260604 번역 */,
+                                items: [
+                                    { content: "When there are justifiable grounds for matters that are difficult to determine at the time of outsourcing; however, the Company may issue a document without stating such items only when there are justifiable grounds for matters that are difficult to determine at the time of outsourcing.\n* Provided, however, that even in such cases, the reason why the relevant matters have not been determined and the scheduled date on which such matters will be determined shall be specified, and when such matters are finalized, a document stating such matters shall be issued without delay."/* 260604 번역 */ },
+                                    { content: "② Where frequent transactions exist in the actual practice of subcontracting transactions and there is no significant problem with the formation and maintenance of the contract in light of the characteristics or realities of the industry\n* Where a basic contract has been delivered and the order was placed by facsimile (fax) or other electrical or electronic form, and the order content is objectively clear\n* Where some statutorily required items are omitted from the contract, but the omitted items can be ascertained from the quantity sheet, work order, or the like provided at the time of each order\n* Where a basic contract has been sent and, in manufacturing goods for export, the offer sheets submitted by the Partner Company to the Company may substitute for an individual contract"/* 260604 번역 */ },
+                                ],
+                            },
+                            partF: {
+                                label: "Special Provisions",
+                                desc: "Presumption of Subcontracting Contract",
+                                items: [
+                                    { content: "① Where the Company, in consigning manufacturing, etc., fails to issue a written subcontracting contract stating the matters set out in Article 3(2) of the Subcontracting Act (including cases where a document omitting some matters is issued pursuant to paragraph (3)), the Partner Company may request confirmation by notifying the Company in writing of the content of the consigned work, the subcontract payment, the date and time of consignment, the business names and addresses of the Company and the Partner Company, and other content consigned by the Company."/* 260604 번역 */ },
+                                    { content: "② The Company shall, within 15 days after being notified by the Partner Company of the above request document for confirmation of the consignment content, reply in writing to the Partner Company expressing its intention to acknowledge or deny such content."/* 260604 번역 */ },
+                                    { content: "③ If the Company does not dispatch a reply within 15 days, the consignment shall be presumed to have been made as notified by the Partner Company, except where the reply is impossible due to a natural disaster or other incident."/* 260604 번역 */ },
+                                    { content: "④ The above written notice requesting confirmation of the consignment content and the written reply to the request for confirmation of the consignment content shall be sent to the addresses of the Company and the Partner Company, and shall be made by certified mail or another method (excluding email) by which the content of the notice and reply and whether they were received can be objectively confirmed."/* 260604 번역 */ },
+                                ],
+                                desc2: "In the Case of Joint Contract",
+                                item2: [
+                                    { content: "- In the case of a joint contract under the joint-performance method, all joint contractors shall jointly conclude the subcontract and issue the written document, or each shall individually conclude a subcontract for its respective allotted portion, or the representative company shall conclude the subcontract on behalf of the joint venture and issue the written document."/* 260604 번역 */ },
+                                ],
+                            },
+                        },
+                        step2: {
+                            title: "Issuance of Written Document for Subcontracting Price Reduction",
+                            partA: {
+                                label: "Obligation to Issue Written Documents (Article 11 of the Subcontracting Act)",
+                                items: [
+                                    { content: "① Where the Company intends to pay an amount reduced from the subcontract payment determined 'at the time of consigning' manufacturing, etc. to the Partner Company, rather than paying it in full, the Company shall issue a reduction document to the Partner Company."/* 260604 번역 */ },
+                                    { content: "② Where, due to frequent transactions at the time of concluding a subcontracting contract, general matters related to transaction conditions such as payment, transportation, inspection, and returns, as well as specifications, materials, and manufacturing processes, are set out in the basic contract, while matters related to the subcontract payment such as unit price and quantity are delegated to a special agreement or purchase order, and the payment is determined based on such separate special agreement or order content, the point at which such special agreement or order content is notified to the Partner Company shall be deemed the 'time of consignment.'"/* 260604 번역 */ }
+                                ],
+                            },
+                            partB: {
+                                label: "Written Statement Items",
+                                desc: "- The written document the Company must deliver when it intends to reduce the subcontract payment shall state the grounds and criteria for the reduction, the volume of the subject matter, etc. subject to reduction, the reduction amount, the reduction method such as deduction, and other matters proving the legitimacy of the reduction. C. Time of written-document issuance"/* 260604 번역 */,
+                            },
+                            partC: {
+                                label: "c. Timing of issuance of the written document"/* 260604 번역 */,
+                                desc: "- When the Company intends to make a reduction, it shall issue a written reduction document to the partner company in advance, before making the reduction."/* 260604 번역 */,
+                            },
+                            partD: {
+                                label: "When the Company intends to make a reduction, the price reduction document shall be issued to the partner company in advance before making the reduction.",
+                                items: [
+                                    { content: "① Where the Company requests in writing a reduction of the subcontract payment from the Partner Company, it shall deliver a document signed (including a certified electronic signature under Article 2, subparagraph 3 of the Digital Signature Act) or affixed with the name and seal of the Company or its representative."/* 260604 번역 */ },
+                                    { content: "② Where the Company intends to reduce the subcontract payment, it shall do so in writing."/* 260604 번역 */ },
+                                    { content: "When the Company intends to reduce the subcontracting price, it shall do so in writing." }
+                                ],
+                                rows: [
+                                    "- The method of transmitting via telecommunications lines and recording in a file provided in the electronic recording device used by the partner company (e.g., email)"/* 260604 번역 */,
+                                    "- The method of providing for the partner company's viewing via telecommunications lines and recording in a file provided in the electronic recording device used by said partner company (e.g., web)"/* 260604 번역 */,
+                                    "- Methods such as delivering electronic records to the partner company via USB, CD-ROM, etc."/* 260604 번역 */
+                                ],
+                            },
+                            partE: {
+                                label: "A method of providing electronic records such as USB, CD-ROM, etc. to the partner company",
+                                desc: "- For matters that are difficult to finalize at the time the Company issues the written reduction document, the Company may issue a written document that does not state such matters, only where there is justifiable reason. Even in such cases, however, the reason such matters have not been determined and the expected date on which they will be determined shall be specified, and when such matters are finalized, a written document stating those matters shall be issued without delay."/* 260604 번역 */,
+                            },
+                        },
+                        step3: {
+                            title: "A document without certain items may be issued only when there are justifiable grounds for matters that are difficult to determine at the time the Company issues the price reduction document. However, even in such cases, the reason why the item has not been determined and the scheduled date for its determination must be stated, and when the item is confirmed, a document stating the item must be issued without delay.",
+                            partA: {
+                                label: "Issuance of Written Document for Technical Data Provision Request",
+                                desc: "- Where the following justifiable grounds exist and the Company requests the provision of technical data from a partner company, it shall issue a written request to the partner company."/* 260604 번역 */,
+                                items: [
+                                    { content: "① Where technical data is requested in the course of concluding a subcontracting agreement through a private contract, competitive bidding (open competition, limited competition, designated competition, etc.), or similar means, for purposes such as evaluating the partner company's technical capabilities, establishing the standard price of ordered goods, reviewing proposals, joint technology development, or meeting the requirements of the ordering party's Request for Proposal (RFP)"/* 260604 번역 */ },
+                                    { content: "② Where the Company, during a subcontracting transaction, requests the Partner Company's technical data under the pretext of technical guidance, quality control, performance testing, joint patent applications, patent application support, joint technology development, or requests for cost data to adjust supply unit prices"/* 260604 번역 */ },
+                                    { content: "③ Where, with respect to technology for which a technology escrow agreement has been concluded, the delivery conditions under the escrow agreement arise and the Company requests the Partner Company to provide the technical data; or"/* 260604 번역 */ }
+                                ],
+                            },
+                            partB: {
+                                label: "Written Statement Items",
+                                desc: "- The written request for the provision of technical data shall include the name and scope of the technical data, the purpose of the request and matters concerning confidentiality under each of the following items, the attribution of rights and the consideration for the technical data, the request date, the delivery date, the delivery method, and other matters that can prove the legitimacy of the Company's request for the provision of technical data."/* 260604 번역 */,
+                                items: [
+                                    { content: "Matters relating to confidentiality: Specify which portions of the technical data are to be kept confidential, and if a mutual non-disclosure agreement or similar has been concluded, attach it" },
+                                    { content: "② Allocation of rights: the current holder of the rights to the technical data requested by the Company, whether a technology transfer agreement has been concluded between the parties, whether the requested technology is jointly developed technology, matters mutually agreed regarding the allocation of rights after the technical data is provided, and the like"/* 260604 번역 */ },
+                                ],
+                            },
+                            partC: {
+                                label: "c. Timing of issuance of the written document"/* 260604 번역 */,
+                                desc: "- Where the Company requests the provision of technical data, it shall, in principle, determine the name and scope of the technical data, the purpose, request date, delivery date, delivery method, matters concerning confidentiality, attribution of rights, and consideration for the technical data, etc. by prior consultation with the partner company, and then issue a written document to the partner company without delay."/* 260604 번역 */,
+                            },
+                            partD: {
+                                label: "d. Method of issuance of the written document"/* 260604 번역 */,
+                                items: [
+                                    { content: "① The Company shall issue to the Partner Company a technical data provision request document signed (including a certified electronic signature under Article 2, subparagraph 3 of the Digital Signature Act) or affixed with the name and seal of the Company or its representative."/* 260604 번역 */ },
+                                    { content: "② Where the Company requests the Partner Company's technical data in writing, it shall, to the extent possible, use the standard technical data request form [Annex 4]."/* 260604 번역 */ },
+                                    { content: "③ In addition to the above standard form, the Company may request the provision of technical data by means of a separate contract document such as a special agreement. However, the separate contract document must include the items set out in 2.b. above."/* 260604 번역 */ },
+                                    { content: "④ A document may be issued through the provision of electronic records as follows."/* 260604 번역 */ },
+                                ],
+                                rows: [
+                                    { content: "- The method of transmitting via telecommunications lines and recording in a file provided in the electronic recording device used by the partner company (e.g., email)"/* 260604 번역 */ },
+                                    { content: "- The method of providing for the partner company's viewing via telecommunications lines and recording in a file provided in the electronic recording device used by said partner company (e.g., web)"/* 260604 번역 */ },
+                                    { content: "- Methods such as delivering electronic records to the partner company via USB, CD-ROM, etc."/* 260604 번역 */ },
+                                ],
+                            },
+                        },
+                    },
+                    section3: {
+                        title: "III. Matters Concerning the Retention of Documents"/* 260604 번역 */,
+                        items: [
+                            { content: "① Both the Company and the subcontractor shall retain the documents listed in II. above and the other documents set out in each subparagraph of Article 6(1) (Retention of Documents) of the Enforcement Decree of the Subcontracting Act. The documents that must be retained are as set out in Table 2 below."/* 260604 번역 */ },
+                            { content: "② Documents that must be retained shall be retained in the original state as of the time the document was used for issuance, approval, or other purposes. The same applies to documents prepared, transmitted, received, or stored in electronic form by a device with information processing capability such as a computer."/* 260604 번역 */ },
+                            { content: "③ The Company and the subcontractor shall retain the above documents for three years from the date on which the subcontracting transaction between the parties ended. Here, the date on which the subcontracting transaction ended means the dates set out in each of the following subparagraphs."/* 260604 번역 */ }
+                        ],
+                        rows: [
+                            "- Manufacturing consignment, repair consignment, and consignment for the creation of knowledge/information work products within service consignment: the date on which the partner company delivers or hands over the subject matter consigned by the Company"/* 260604 번역 */,
+                            "- Supply consignment of services within service consignment: the date on which the partner company completes the supply of services consigned by the Company"/* 260604 번역 */,
+                            "- Where the subcontract is terminated midway or the transaction is suspended: the date of termination or suspension"/* 260604 번역 */
+                        ]
+                    },
+                    addendum: {
+                        title: "Supplementary Provisions",
+                        article: "Article 1 (Effective Date)",
+                        lines: ["These guidelines shall take effect from April 1, 2020.", "These guidelines shall take effect from April 1, 2021."]
+                    }
                 }
             }
         };

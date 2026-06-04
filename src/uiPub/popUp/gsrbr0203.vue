@@ -108,6 +108,19 @@ export default {
                         { name: "가경아이파크점", time: "10:00 ~ 23:00", offDay: "02월 11일 / 02월 25일", address: "충북 청주시 흥덕구 서현로 60, 상가 1층 (가경동 2270)", tel: "043-231-8012", mapImg: require("@/assets/images/dummy/gsrbr0203_map.png") },
                         { name: "가정루원시티점", time: "10:00 ~ 23:00", offDay: "02월 08일 / 02월 22일", address: "인천 서구 봉오재3로 66, 루원시티프라디움2동106호 (가정동 610-1)", tel: "032-569-6227", mapImg: require("@/assets/images/dummy/gsrbr0203_map.png") }
                     ]
+                },
+                en: {
+                    MainTitle: "Find a GS THE FRESH Store",
+                    IntroText: "Find your nearest GS THE FRESH (GS Supermarket) quickly and easily!",
+                    CityOptions: [{ value: "Seoul", label: "Seoul" }, { value: "Gyeonggi Province", label: "Gyeonggi Province" }],
+                    DistrictOptions: [{ value: "", label: "Select City/County" }],
+                    SearchPlaceholder: "Enter a neighborhood, street, or store name",
+                    BtnSearch: "Search", BtnReset: "Refresh", BtnLeaflet: "View Promotional Flyer",
+                    LabelTime: "Business hours"/* 260604 번역 */, LabelOffDay: "Closed days"/* 260604 번역 */, LabelAddress: "Address", LabelTel: "Phone",
+                    storeData: [
+                        { name: "Gagyeong iPark Branch", time: "10:00 ~ 23:00", offDay: "Closed: February 11 and February 25", address: "Address: 60 Seohyeon-ro, Heungdeok-gu, Cheongju-si, Chungcheongbuk-do, 1F (Gagyeong-dong 2270)", tel: "043-231-8012", mapImg: require("@/assets/images/dummy/gsrbr0203_map.png") },
+                        { name: "Gajeong Rouen City Branch", time: "10:00 ~ 23:00", offDay: "Closed: February 8 and February 22", address: "Address: 66, Bongojae 3-ro, Seo-gu, Incheon, Rouen City Pradium Building 2, Unit 106 (Gajeong-dong 610-1)", tel: "032-569-6227", mapImg: require("@/assets/images/dummy/gsrbr0203_map.png") }
+                    ]
                 }
             }
         };

@@ -65,6 +65,22 @@ export default {
                     HopageLink: `http://woodel.co.kr/#page1`,
                     HopageText: `홈페이지`,
                     ListBack:`목록으로 돌아가기`
+                },
+                en: {
+                    Visual: { // 대문자 유지
+                        img: require("@/assets/images/dummy/gsrbr10.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr10_mo.png"),
+                        alt: "GS THE FRESH Main Visual"/* 260604 번역 */,
+                        subContent_1: "While taking a walk"/* 260604 번역 */,
+                        subContent_2: "The joy of making money"/* 260604 번역 */,
+                        subContent_3: "Our Neighborhood Delivery"/* 260604 번역 */,
+                    },
+                    SubTitle: `About the Brand`,
+                    SubContent_1: `From the products and food of your neighborhood GS25 and GS THE FRESH to restaurant delivery`/* 260604 번역 */,
+                    SubContent_2: `It is a service that any adult can easily deliver with no special equipment.`/* 260604 번역 */,
+                    HopageLink: `http://woodel.co.kr/#page1`,
+                    HopageText: `Homepage`,
+                    ListBack:`← Back to Brand List`
                 }
             }
         };

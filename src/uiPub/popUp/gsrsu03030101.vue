@@ -122,6 +122,49 @@ export default {
                             alt: '인권 고충 처리 프로세스'
                         }
                     }
+                },
+                en: {
+                    MainTitle: "GS Retail Human Rights Management Policy",
+                    section1: {
+                        title: 'Purpose of Establishment',
+                        desc: `GS Retail respects human rights, guarantees human value and dignity, and declares this Human Rights Management Policy to identify and prevent human rights-related risks.\nGS Retail supports and complies with the Universal Declaration of Human Rights, the Ten Principles of the UN Global Compact (UNGC), and domestic and international labor and human rights standards and guidelines, and will make every effort to prevent and resolve all human rights-related issues that may arise in the Company's business activities.`/* 260604 번역 */
+                    },
+                    section2: {
+                        title: 'Scope of Application',
+                        desc: 'The scope of application of the Human Rights Management Policy covers the executives and employees of GS Retail and includes all executives and employees of affiliated companies. GS Retail executives and employees shall follow this Human Rights Management Policy when dealing with all stakeholders they encounter through products, services, and management activities, and shall encourage partner companies doing business with the Company to respect this Human Rights Management Policy.'/* 260604 번역 */
+                    },
+                    section3: {
+                        title: 'Basic Principles',
+                        desc: 'Community engagement activities consist of activities for the growth of the local community. Activities related to social contribution are organized by the Social Contribution Part, and the development of sales channels related to local specialty products is handled by the MD and Broadcasting Business Support Team.'/* 260604 번역 */,
+                        activities: [
+                            { subject: 'Article 1. Prohibition of Forced Labor', content: 'All types of forced labor (debt bondage, slave labor, etc.) against the free will of executives and employees are prohibited.'/* 260604 번역 */ },
+                            { subject: 'Article 2. Prohibition of Child Labor', content: `We comply with the minimum employment age set by each country's labor-related laws and regulations and prohibit child labor as a general rule. In addition, when employing adolescents under the age of 18, we do not assign work that is hazardous to safety and health.`/* 260604 번역 */ },
+                            { subject: 'Article 3. Prohibition of Discrimination', content: 'We do not discriminate in recruitment, compensation, promotion, training, wages, and the like on the grounds of race, nationality, gender, age, disability, religion, pregnancy, union membership, marital status, sexual orientation, social status, or the like.'/* 260604 번역 */ },
+                            { subject: 'Article 4. Guarantee of Freedom of Association', content: 'We provide opportunities for free communication between the company and all workers, and furthermore guarantee freedom of association. In addition, we do not impose any disadvantage on workers on the grounds of joining or forming a labor union, or the like.'/* 260604 번역 */ },
+                            { subject: 'Article 5. Compliance with Working Conditions', content: `We comply with the minimum wage, payment of overtime allowances, enrollment in social insurance, and rest/leave specified in each country's labor-related laws and regulations, and do our utmost to improve the quality of life and working conditions of all employees.`/* 260604 번역 */ },
+                            { subject: 'Article 6. Guarantee of Health and Occupational Safety', content: `We provide executives and employees with a safe and clean working environment, and we inspect and manage it regularly. We strive to prevent safety accidents, including by implementing preemptive preventive measures against physical and mental risks that may arise during executives' and employees' work.`/* 260604 번역 */ }
+                        ]
+                    },
+                    section4: {
+                        title: 'Human Rights Risk Due Diligence Process',
+                        desc: 'To identify human rights-related risks and implement mitigation measures, we conduct a human rights impact assessment regularly once a year, and this assessment is carried out by the ER Team and the Home Shopping BP Team of the HR and General Affairs Division. The human rights risk due diligence process proceeds in the following order: selection of assessment targets > identification of human rights risk items > risk assessment and mitigation measures such as improvement > monitoring. In addition, we ensure that an evaluation of the effectiveness of improvements is conducted following monitoring.\nApart from this, in order to identify and improve human rights risks at all times, human rights-related grievances can be submitted anonymously at any time through the website, and where an actual risk is found in this process, on-site due diligence is conducted and appropriate measures to mitigate it are implemented.'/* 260604 번역 */,
+                        steps: [
+                            { id: '01', title: 'Step 1<br>Selection of Assessment Targets', details: ['Human rights-related vulnerable groups, etc.\nSelection of Assessment Targets'/* 260604 번역 */] },
+                            { id: '02', title: 'Step 2<br>Identification of human rights risks'/* 260604 번역 */, details: ['Identification of human rights risks by stakeholder'/* 260604 번역 */] },
+                            { id: '03', title: 'Step 3<br>Risk Assessment and Due Diligence', details: ['Annual assessment of employees','Risk identification through ongoing reporting channels','On-site due diligence for identified risks','Mitigation measures'] },
+                            { id: '04', title: 'Step 4<br>Monitoring', details: ['In addition to the assessment, a monitoring survey is conducted for all executives and employees'/* 260604 번역 */, 'Evaluation of the effectiveness of mitigation measures'/* 260604 번역 */] }
+                        ]
+                    },
+                    section5: {
+                        title: '5. Human Rights Grievance Processing Channels',
+                        desc: `We receive human rights-related grievances at all times through the Integrity Management Voice and Speak to the CEO sections within the website and the internal anonymous reporting channels (Dongsu, Ari), and we disclose the items subject to reporting through the website. Human rights grievances can be reported anonymously, and the disclosure of a whistleblower's identity and acts of seeking them out are prohibited; executives and employees who take such disadvantageous measures are referred to the company-wide Ethics Committee, thereby protecting whistleblowers.`/* 260604 번역 */,
+                        desc2: 'Human rights grievances are handled through the process below. In particular, for cases of workplace harassment and sexual harassment, upon receipt, the matter is immediately reported directly to the CEO and conveyed to the crisis response council (Communication Team, Legal Team, Organizational Culture Service Team), and fact-finding is conducted through the Organizational Culture Service Team. Thereafter, the Ethics Committee determines whether to impose disciplinary action, and to prevent such matters from occurring, training is also conducted once a year for executives and employees.'/* 260604 번역 */,
+                        processTitle: "Human Rights Grievance Handling Process",
+                        image: {
+                            src: require("@/assets/images/dummy/human_mana_pop_img02.jpg"),
+                            alt: 'Human Rights Grievance Handling Process'
+                        }
+                    }
                 }
             }
         };

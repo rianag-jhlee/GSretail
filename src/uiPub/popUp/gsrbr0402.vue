@@ -80,6 +80,27 @@ export default {
                         { num: "05", text: "결제 완료 후,<br/>수령 QR 보기", img: require("@/assets/images/dummy/gsrbr0402_step_5.png") },
                         { num: "06", text: "수령할 매장에서 <br/>QR코드로 픽업", img: require("@/assets/images/dummy/gsrbr0402_step_6.png"), hasGradient: true }
                     ]
+                },
+                en: {
+                    MainTitle: "Wine25Plus",
+                    IntroTitle: "Wine25Plus: Your Personal Alcohol Platform, Right at Your Fingertips",
+                    IntroDesc: "Reserve and pick up wine, spirits, beer, traditional and other liquors, and food pairings (snacks) at your preferred store on your chosen date<br /> — available at GS25 and GS THE FRESH locations nationwide.",
+                    IntroNotice: "※ Wine25Plus service may not be available at all store locations.",
+                    Features: [
+                        { img: require("@/assets/images/dummy/gsrbr0402_1.png"), text: "Over 5,000 Varieties of <br />Alcoholic Beverages" },
+                        { img: require("@/assets/images/dummy/gsrbr0402_2.png"), text: "My Winery: <br />Manage Your Purchases and <br />Mileage All in One Place" },
+                        { img: require("@/assets/images/dummy/gsrbr0402_3.png"), text: "In-Store Pickup Service<br />Available Nationwide, Anytime" }
+                    ],
+                    GuideTitle: "In-Store Pickup Service Guide",
+                    GuideDesc: "Simply pay for your desired items in the app anytime, anywhere, then pick them up at your saved store.",
+                    Steps: [
+                        { num: "01", text: "Set Your Preferred Pickup Store", img: require("@/assets/images/dummy/gsrbr0402_step_1.png") },
+                        { num: "02", text: "Select Your Preferred Alcohol Category", img: require("@/assets/images/dummy/gsrbr0402_step_2.png"), hasGradient: true },
+                        { num: "03", text: "Select your item, <br />then tap 'Reserve and Order'", img: require("@/assets/images/dummy/gsrbr0402_step_3.png") },
+                        { num: "04", text: "Enter pickup information,<br />then tap 'Reserve Now'", img: require("@/assets/images/dummy/gsrbr0402_step_4.png") },
+                        { num: "05", text: "After payment is complete,<br />view your pickup QR code", img: require("@/assets/images/dummy/gsrbr0402_step_5.png") },
+                        { num: "06", text: "Collect your order at the designated store<br />using the QR code", img: require("@/assets/images/dummy/gsrbr0402_step_6.png"), hasGradient: true }
+                    ]
                 }
             }
         };

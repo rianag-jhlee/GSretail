@@ -83,6 +83,25 @@ export default {
                         { title: "담보설정", item1: "", item2: "", fee: "최소 2억 이상", rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
                         { title: "* 최저 수입 보조금", item1: "", item2: "", fee: "해당사항 없음", rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
                     ]
+                },
+                en: {
+                    MainTitle: "GSF3 Type"/* 260604 번역 */,
+                    intro: 'Store owner leases and store owner operates'/* 260604 번역 */,
+                    IRListData: [
+                        { title: "Investment amount"/* 260604 번역 */, item1: "Opening Investment"/* 260604 번역 */, item2: "Franchise Fee"/* 260604 번역 */, fee: "11 million won (VAT included)"/* 260604 번역 */, rs1: 9, cs1: 1, rs2: 5, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "", item2: "Initial merchandise cost"/* 260604 번역 */, fee: "70 million won"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 0, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "", item2: "Consumables", fee: "7 million won"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 0, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "", item2: "Facility Deposit"/* 260604 번역 */, fee: "5 million won"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 0, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "", item2: "Opening Investment Total"/* 260604 번역 */, fee: "93 million won"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 0, cs2: 1, rs3: 1, cs3: 1, rs4: 1, cs4: 1 },
+                        { title: "", item1: "Party responsible for lease costs"/* 260604 번역 */, item2: "", fee: "Store Owner"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 1, cs2: 2, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "", item1: "Party Bearing Facility Investment"/* 260604 번역 */, item2: "", fee: "Headquarters"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 1, cs2: 2, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "", item1: "Security Deposit", item2: "", fee: "None"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 1, cs2: 2, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "", item1: "Total Store Owner Investment"/* 260604 번역 */, item2: "", fee: "93 million won + leasing cost"/* 260604 번역 */, rs1: 0, cs1: 1, rs2: 1, cs2: 2, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "Franchise Fee (VAT not included)"/* 260604 번역 */, item1: "", item2: "", fee: "24%", rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "Contract Period", item1: "", item2: "", fee: "5 years / in 5-year units"/* 260604 번역 */, rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "Collateral Setup"/* 260604 번역 */, item1: "", item2: "", fee: "Minimum 200 million won or more"/* 260604 번역 */, rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                        { title: "* Minimum income subsidy"/* 260604 번역 */, item1: "", item2: "", fee: "Not applicable"/* 260604 번역 */, rs1: 1, cs1: 3, rs2: 0, cs2: 0, rs3: 0, cs3: 0, rs4: 1, cs4: 1 },
+                    ]
                 }
             }
         };

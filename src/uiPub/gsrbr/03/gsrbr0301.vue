@@ -413,7 +413,181 @@ const langData = {
         },
         backLabel: "목록으로 돌아가기",
     },
-    en: {},
+    en: {
+        visual: {
+            lines: ["Every moment of the customer"/* 260604 번역 */, "The core that creates value"/* 260604 번역 */],
+            logoAlt: "GS SHOP",
+        },
+        about: [
+            [
+                "GS SHOP deeply understands customers' lifestyles and sets the standard for smarter consumption. Powered by insights from data analysis and AI technology, we offer a wide range of distinctive products across all customer touchpoints, including TV and mobile. GS SHOP will continue to recommend the best choices for customers' everyday lives and elevate the value of every purchase.",
+                "Based on insights from data analysis and AI technology,"/* 260604 번역 */,
+                "Across all touchpoints where customers are, such as TV and mobile, we offer diverse and"/* 260604 번역 */,
+                "We provide differentiated products."/* 260604 번역 */,
+            ],
+            [
+                "GS SHOP will continue to suggest the best choices for customers' everyday lives,"/* 260604 번역 */,
+                "We will continue to enhance the value of consumption."/* 260604 번역 */,
+            ],
+        ],
+        str: {
+            title: "About the Brand",
+            desc: "GS SHOP is a unified brand that brings together what were previously separate brands for TV shopping and mobile and internet shopping, to provide customers with a better shopping experience.",
+            websiteLabel: "Homepage",
+            snsInstaAria: "Instagram"/* 260604 번역 */,
+            snsYtAria: "YouTube"/* 260604 번역 */,
+        },
+        bi: {
+            logoTitle: "BI Logo"/* 260604 번역 */,
+            logoDesc: "This represents GS SHOP's core value of 'Real (authenticity),' symbolized by the parentheses in the logo. GS SHOP puts genuine heart into products and services of real value, guiding customers to their best choice.",
+            logoSymbolAlt: "GS SHOP BI Symbol"/* 260604 번역 */,
+            logoWordmarkAlt: "GS SHOP BI Wordmark"/* 260604 번역 */,
+            colorTitle: "BI Color"/* 260604 번역 */,
+            coreColorsTitle: "CORE COLORS",
+            supportingColorsTitle: "SUPPORTING COLORS",
+            coreColorAlt1: "Dynamic Blue Primary Color"/* 260604 번역 */,
+            coreColorAlt2: "Mist Gray Primary Color"/* 260604 번역 */,
+            supportingColorAlt1: "Bright Pink Secondary Color"/* 260604 번역 */,
+            supportingColorAlt2: "Sunshine Orange Secondary Color"/* 260604 번역 */,
+            supportingColorAlt3: "Forest Green Secondary Color"/* 260604 번역 */,
+            supportingColorAlt4: "Ocean Navy Secondary Color"/* 260604 번역 */,
+        },
+        competency: {
+            title: "GS SHOP's Core Business Competencies"/* 260604 번역 */,
+            imageAlt: "GS SHOP's Core Business Competencies"/* 260604 번역 */,
+        },
+        biz: {
+            ariaLabel: "GS SHOP Core Business Competencies"/* 260604 번역 */,
+            title: `Consumer-Centered Management (CCM) <br class=\"m_br\"/>Putting into practice <br class=\"p_br\"/>GS SHOP`/* 260604 번역 */,
+            desc: "GS SHOP is a CCM-certified company that puts consumers first — listening to, sharing, and empathizing with their voices.",
+            certTitle: "What Is CCM (Consumer Centered Management) Certification?",
+            certDesc: "A certification program that evaluates whether a company organizes all its activities from a consumer-centered perspective and continuously improves its related management practices",
+            certImageAlt: "Consumer-Centered Management certification image"/* 260604 번역 */,
+            certItems: [
+                { term: "Certifying Agency", imgSrc: imgCert01, imgAlt: "Korea Fair Trade Commission" },
+                { term: "Operating Agency", imgSrc: imgCert02, imgAlt: "Korea Consumer Agency" },
+            ],
+            performanceTitle: "GS SHOP CCM Implementation and Performance",
+            performanceDesc: "Since receiving its first certification in December 2009, GS SHOP has continuously renewed its CCM certification through a variety of customer-first activities.",
+            featureItems: [
+                {
+                    title: "CCM Integrated Across All Management Processes",
+                    listDotted: true,
+                    desc: [
+                        "•Reflecting CCM values and philosophy throughout all management processes to practice Consumer-Centered Management",
+                        "•Establishing a proactive customer complaint prevention system and operating systematic CCM management indicators",
+                    ],
+                },
+                {
+                    title: "Efforts to Enhance Consumer Rights and Interests",
+                    listDotted: true,
+                    desc: [
+                        "•Establishing 'CS Processing Guidelines and Customer Service Policies' that are more favorable to consumers than the 'Consumer Dispute Resolution Standards'",
+                        "•Operating a collaborative system with partner companies to enhance consumer rights through mutual growth management",
+                    ],
+                },
+                {
+                    title: "Outstanding Services That Enhance Consumer Benefits",
+                    listDotted: true,
+                    desc: [
+                        "•Services designed around customers' lifestyles",
+                    ],
+                    subdesc: [
+                        "We offer a variety of delivery services tailored to customer needs, including the 'Delivery/Pickup Date Selection Service,' 'Safe Delivery Service,' and 'Convenience Store Pickup/Return Service.'"/* 260604 번역 */,
+                        "•- Introduction of diverse payment methods including GS Pay, and improvements to payment convenience",
+                    ],
+                },
+            ],
+        },
+        channel: {
+            ariaLabel: "Sales Channel",
+            title: "Sales Channel",
+            desc: "We provide GS SHOP's unique shopping experience at every touchpoint where customers are, including TV, online, and mobile."/* 260604 번역 */,
+            cards: [
+                {
+                    key: "ch-tv",
+                    image: imgCh01,
+                    imgAlt: "TV Home Shopping",
+                    em: "01",
+                    title: "TV Home Shopping",
+                    desc: "As Korea's first home shopping broadcaster, GS SHOP provides customers with a distinctive shopping experience around the clock, drawing on the unique content production capabilities that come with being first in the industry.",
+                },
+                {
+                    key: "ch-online",
+                    image: imgCh02,
+                    imgAlt: "Data Home Shopping",
+                    em: "02",
+                    title: "Data Home Shopping",
+                    desc: "An interactive data shopping service that lets customers select and purchase products via remote control at any time, bringing GS SHOP's full home shopping expertise to the IPTV platform.",
+                },
+                {
+                    key: "ch-mobile",
+                    image: imgCh03,
+                    imgAlt: "Mobile & Internet Mall",
+                    em: "03",
+                    title: "Mobile & Internet Mall",
+                    desc: "GS SHOP leverages sophisticated customer data analysis to present personalized products and storefronts, while maintaining continuous synergy with TV shopping.",
+                },
+                {
+                    key: "ch-commerce",
+                    image: imgCh04,
+                    imgAlt: "Live Commerce",
+                    em: "04",
+                    title: "Live Commerce",
+                    desc: "Mobile Live' sells products through real-time video streaming on GS SHOP, engaging with customers and delivering rich, firsthand product information.",
+                },
+            ],
+        },
+        program: {
+            ariaLabel: "Flagship Brand Programs",
+            title: "Flagship Brand Programs",
+            cards: [
+                {
+                    key: "pr-05",
+                    image: imgPr05,
+                    imgAlt: "Flagship Brand Program 5"/* 260604 번역 */,
+                    title: "Show Me the Trend",
+                    desc: "Styling the Trend<br />Every Saturday at 9:35 PM",
+                },
+                {
+                    key: "pr-04",
+                    image: imgPr04,
+                    imgAlt: "Flagship Brand Program 4"/* 260604 번역 */,
+                    title: "The Collection",
+                    desc: "The Luxury Premium Edit<br />Every Saturday at 9:20 AM",
+                },
+                {
+                    key: "pr-01",
+                    image: imgPr01,
+                    imgAlt: "Flagship Brand Program 1"/* 260604 번역 */,
+                    title: "The So Yoo-Jin Show",
+                    desc: "A Shopping Experience Like No Other <br />Every Friday at 8:35 PM",
+                },
+                {
+                    key: "pr-06",
+                    image: imgPr06,
+                    imgAlt: "Flagship Brand Program 6"/* 260604 번역 */,
+                    title: "New Beauty Chance",
+                    desc: "This Month's Hottest New Beauty Picks <br />Every Other Saturday at 11:50 AM",
+                },
+                {
+                    key: "pr-02",
+                    image: imgPr02,
+                    imgAlt: "Flagship Brand Program 3"/* 260604 번역 */,
+                    title: "Baek Ji-Yeon Now",
+                    desc: "Where Premium Curation Begins <br />Every Thursday at 8:45 PM",
+                },
+                {
+                    key: "pr-03",
+                    image: imgPr03,
+                    imgAlt: "Flagship Brand Program 3"/* 260604 번역 */,
+                    title: "Style Now; The Kim Dong-eun"/* 260604 번역 */,
+                    desc: "Now, the moment you become more yourself<br/> Every Tuesday at 8:15 AM"/* 260604 번역 */,
+                },
+            ],
+        },
+        backLabel: "← Back to Brand List",
+    },
 };
 const t = computed(() => {
     const selected = langData[props.lang];

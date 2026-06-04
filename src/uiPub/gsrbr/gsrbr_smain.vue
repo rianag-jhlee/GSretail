@@ -57,6 +57,23 @@ export default {
                         {name:"리얼프라이스", explain:"합리적인 가격의 PB 브랜드", link:"/gsrbr09", img: require("@/assets/images/sub/gsrbr/img_main_thumb_10.png")},
                         {name:"개발/임대 사업", explain:"부동산 개발 및 임대", link:"/gsrbr1101", img: require("@/assets/images/sub/gsrbr/img_main_thumb_11.png")}
                     ]
+                },
+                en: {
+                    h2: "Our Brands",
+                    h2_explain: "Bringing everyday life closer, making every moment more meaningful. Discover GS Retail's diverse brands.",
+                    brand: [
+                        {name:"GS25", explain:"No. 1 Convenience Store in Korea", link:"/gsrbr010101", img: require("@/assets/images/sub/gsrbr/img_main_thumb_01.png")},//, img: require("@/assets/images/dummy/main_visual_01.png"),}
+                        {name:"GS THE FRESH", explain:"A brand that brings freshness and happiness", link:"/gsrbr020101", img: require("@/assets/images/sub/gsrbr/img_main_thumb_02.png")},
+                        {name:"GS SHOP", explain:"Home Shopping & E-Commerce", link:"/gsrbr0301", img: require("@/assets/images/sub/gsrbr/img_main_thumb_03.png")},
+                        {name:"Our Neighborhood GS", explain:"GS Retail All-in-One App", link:"/gsrbr04", img: require("@/assets/images/sub/gsrbr/img_main_thumb_04.png")},
+                        {name:"Our Neighborhood Delivery", explain:"Social Commerce Platform", link:"/gsrbr10", img: require("@/assets/images/sub/gsrbr/img_main_thumb_05.png")},
+                        {name:"GS Pay", explain:"Easy Payment Service", link:"/gsrbr05", img: require("@/assets/images/sub/gsrbr/img_main_thumb_06.png")},
+                        {name:"GS ALL", explain:"Integrated Membership Program", link:"/gsrbr06", img: require("@/assets/images/sub/gsrbr/img_main_thumb_07.png")},
+                        {name:"POP", explain:"Daily Essentials Brand", link:"/gsrbr07", img: require("@/assets/images/sub/gsrbr/img_main_thumb_08.png")},
+                        {name:"YOUUS", explain:"Daily Life Convenience Service", link:"/gsrbr08", img: require("@/assets/images/sub/gsrbr/img_main_thumb_09.png")},
+                        {name:"REAL Price", explain:"An affordable PB brand", link:"/gsrbr09", img: require("@/assets/images/sub/gsrbr/img_main_thumb_10.png")},
+                        {name:"Development/Leasing Business", explain:"Real estate development and leasing", link:"/gsrbr1101", img: require("@/assets/images/sub/gsrbr/img_main_thumb_11.png")}
+                    ]
                 }
             }
         };

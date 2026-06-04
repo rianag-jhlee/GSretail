@@ -41,6 +41,12 @@ export default {
                     desc2: "빠른 시일 내에 회신 드리도록 하겠습니다.",
                     desc3:"(평균 1~2일 이내)",
                     check:"확인"
+                },
+                en: {
+                    desc1: "Your partnership and collaboration inquiry has been completed.",
+                    desc2: "We will reply as soon as possible.",
+                    desc3:"(Average: within 1–2 business days)",
+                    check:"Confirm"
                 }
             }
         };

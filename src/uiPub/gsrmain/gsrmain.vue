@@ -233,6 +233,129 @@ export default {
                             },
                         ]
                     }
+                },
+                en: {
+                    mainVisual: {
+                        items: [
+                            {
+                                title: "Every Life.<br/> One Platform.",
+                                sub: "GS Retail",
+                                img: require("@/assets/images/dummy/main_visual_01.png"),
+                                vod: require("@/assets/images/main/vod_visual_01.mp4")
+
+                            },
+                            // {
+                            //     title: "Every Life.<br/> One Platform.",
+                            //     sub: "GS리테일",
+                            //     img: require("@/assets/images/dummy/main_visual_02.png")
+                            // },
+                            // {
+                            //     title: "Every Life.<br/> One Platform.",
+                            //     sub: "GS리테일",
+                            //     img: require("@/assets/images/dummy/main_visual_03.png")
+                            // }
+                        ]
+                    },
+
+                    sec03: {
+                        title: "GS Retail's<br/> Introducing our businesses."/* 260604 번역 */,
+
+                        items: [
+                            {
+                                img: require("@/assets/images/main/main_sec03_01.png"),
+                                sub: require("@/assets/images/main/main_sec03_01-1.png"),
+                                brand: "GS25",
+                                txt: "The center of daily life, the start of the day"/* 260604 번역 */
+                            },
+                            {
+                                img: require("@/assets/images/main/main_sec03_02.png"),
+                                sub: require("@/assets/images/main/main_sec03_02-1.png"),
+                                brand: "GS THE FRESH",
+                                txt: "Meet Fresh Happiness"/* 260604 번역 */
+                            },
+                            {
+                                img: require("@/assets/images/main/main_sec03_03.png"),
+                                sub: require("@/assets/images/main/main_sec03_03-1.png"),
+                                brand: "GS SHOP",
+                                txt: "Adding value to customers' lifestyles"/* 260604 번역 */
+                            },
+                        ]
+                    },
+
+                    sec04: {
+                        title: "GS Retail's<br/> Sharing our news."/* 260604 번역 */,
+
+                        quick: [
+                            { link: "#none", txt: "Press Releases" },
+                            { link: "#none", txt: "GS Retail Newsroom" },
+                        ],
+
+                        items: [
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "Press Releases" }
+                                ],
+                                title: '01 GS Retail Launches First-Half Open Recruitment…<br/> "Paving the Way for Youth Employment!"'/* 260604 번역 */,
+                                link:'/gsrne0101'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "Press Releases" }
+                                ],
+                                title: '02 GS Retail Launches First-Half Open Recruitment…<br/> "Paving the Way for Youth Employment!"'/* 260604 번역 */,
+                                link:'/gsrne0101'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "Press Releases" }
+                                ],
+                                title: '03 GS Retail Launches First-Half Open Recruitment…<br/> "Paving the Way for Youth Employment!"'/* 260604 번역 */,
+                                link:'/gsrne0101'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "Press Releases" }
+                                ],
+                                title: '04 GS Retail Launches First-Half Open Recruitment…<br/> "Paving the Way for Youth Employment!"'/* 260604 번역 */,
+                                link:'/gsrne0101'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "Press Releases" }
+                                ],
+                                title: '05 GS Retail Launches First-Half Open Recruitment…<br/> "Paving the Way for Youth Employment!"'/* 260604 번역 */,
+                                link:'/gsrne0101'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "Press Releases" }
+                                ],
+                                title: '06 GS Retail Launches First-Half Open Recruitment…<br/> "Paving the Way for Youth Employment!"'/* 260604 번역 */,
+                                link:'/gsrne0101'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "Press Releases" }
+                                ],
+                                title: '07 GS Retail Launches First-Half Open Recruitment…<br/> "Paving the Way for Youth Employment!"'/* 260604 번역 */,
+                                link:'/gsrne0101'
+                            },
+                        ]
+                    }
                 }
             }
         };

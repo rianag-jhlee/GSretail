@@ -145,6 +145,57 @@ export default {
                         supp_desc3:`<p>CMYK  0/0/0/100</p><p>RGB 0/0/0</p><p>#000000</p>`,
                     },
                     ListBack:`목록으로 돌아가기`
+                },
+                en: {
+                    Visual: { // 대문자 유지
+                        img: require("@/assets/images/dummy/gsrbr08.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr08_mo.png"),
+                        alt: "YOUUS, making customers' everyday lives more special and fun"/* 260604 번역 */,
+                        subContent_1: "The customer's everyday life"/* 260604 번역 */,
+                        subContent_2: "Even more special and fun"/* 260604 번역 */,
+                        subContent_3: "YOUUS",
+                    },
+                    HopageLink: `https://www.gsrbr.com/`,
+                    HopageText: `Homepage`,
+                    SubTitle: `About the Brand`,
+                    SubContent_1: `Based on high-quality products, YOUUS offers small everyday joys and a new lifestyle`/* 260604 번역 */,
+                    SubContent_2: `It is GS Retail's own lifestyle private brand.`/* 260604 번역 */,
+                    Bi: {
+                        txt: `BI Logo`/* 260604 번역 */,
+                        img: require("@/assets/images/dummy/gsrbr08_bi_logo_1.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr08_bi_logo_1_mo.png"),
+                        alt: "REAL price BI Image"/* 260604 번역 */
+                    },
+                    brand_mark_1: {
+                        txt: `Standard Brand Mark`,
+                        img: require("@/assets/images/dummy/gsrbr08_bi_logo_2.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr08_bi_logo_2_mo.png"),
+                        alt: "REAL price BI Image"/* 260604 번역 */
+                    },
+                    brand_mark_2: {
+                        txt: `Premium Brand Mark`,
+                        img: require("@/assets/images/dummy/gsrbr08_bi_logo_3.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr08_bi_logo_3_mo.png"),
+                        alt: "REAL price BI Image"/* 260604 번역 */
+                    },
+                    Color: {
+                        title: `BI Color`/* 260604 번역 */,
+                        sub_txt_1: `CORE COLORS`,
+                        sub_desc_1: `YOUUS<br/> DEEP ORANGE`,
+                        sub_desc_1_1 :`<p>PANTONE 7548 C</p><p>C 0 M 82 Y 100 K 0</p><p>R 255 G 77 B 0</p><p>#FF4D00</p>`,
+                        sub_desc_2: `YOUUS<br/> LIGHT ORANGE`,
+                        sub_desc_2_1 :`<p>PANTONE Orange 1655 C</p><p>C 0 M 20 Y 100 K 0</p><p>R 255 G 198 B 0</p><p>#FFC600</p>`,
+                    },
+                    Supporting_color: {
+                        title: `SUPPORTING COLORS`,
+                        supp_tit1: `YOUUS WHITE`,
+                        supp_tit2: `YOUUS GOLD`,
+                        supp_tit3: `YOUUS BLACK`,
+                        supp_desc1:`<p>CMYK  0/0/0/0</p><p>RGB 255/255/255</p><p>#FFFFFF</p>`,
+                        supp_desc2:`<p>CMYK  15/18/54/5</p><p>RGB 255/118/48</p><p>#CFBC81</p><p>PANTONE 4004 C</p>`,
+                        supp_desc3:`<p>CMYK  0/0/0/100</p><p>RGB 0/0/0</p><p>#000000</p>`,
+                    },
+                    ListBack:`← Back to Brand List`
                 }
             }
         };

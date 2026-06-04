@@ -212,12 +212,81 @@ const langData = {
         ],
     },
     en: {
-
-
-
-
-
-
+        pageTitle: "Corporate CI/BI"/* 260604 번역 */,
+        ciIntro: {
+            title: "CI Introduction"/* 260604 번역 */,
+            lead: "'GS' is not an abbreviation of any particular word nor does it imply any specific meaning; 'GS' exists as itself."/* 260604 번역 */,
+            symbolTitle: "GS Symbol",
+            symbolDesc: "Symbolizing the dynamism of the energy business and the growth and vitality of the retail services business, the symbol captures a simple yet dynamic essence encompassing the blazing sun, the sky and sea, and the verdant earth",
+            logoAlt: "GS CI Logo"/* 260604 번역 */,
+            colors: [
+                { className: "color_orange", name: "GS Orange", desc: "The energy and passion of the sun" },
+                { className: "color_green", name: "GS Green", desc: "The earth, the environment, and infinite possibilities" },
+                { className: "color_blue", name: "GS Blue", desc: "Symbolizing the sky and sea: transparency and creativity" },
+            ],
+        },
+        ciBi: {
+            title: "CI and BI",
+            noticeTitle: "Notice",
+            noticeLead: "Any unauthorized use of the above CI and BI will be subject to punishment pursuant to Article 93 of the Trademark Act.",
+            noticeList: [
+                "CI (Corporate Identity) / BI (Brand Identity)<br />(Reference) Article 93 of the Trademark Act – Any person who infringes upon a trademark right or exclusive license shall be subject to imprisonment of up to seven (7) years or a fine of up to KRW 100 million. (Amended February 3, 2001)",
+            ],
+            downloadLabel: "Download CI and BI (AI, JPG)",
+        },
+        ciBiLogos: [
+            { src: imgCiBiLogo1, alt: "GS Retail Logo"/* 260604 번역 */ },
+            { src: imgCiBiLogo2, alt: "GS25 Logo"/* 260604 번역 */ },
+            { src: imgCiBiLogo3, alt: "GS SHOP Logo"/* 260604 번역 */ },
+            { src: imgCiBiLogo4, alt: "GS THE FRESH Logo"/* 260604 번역 */ },
+        ],
+        colorReg: {
+            title: "Color Guidelines",
+            desc: "The primary communication approach uses the symbol's four-color gradient (Gradient Color) representation, with Jade Green used as the Accent Color for the GS Group.<br />The Accent Color may be applied to service spaces or other elements where Gradient Color representation is difficult.",
+            tableCaption: "GS Color Guidelines Table"/* 260604 번역 */,
+        },
+        colorRegList: [
+            {
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_01.png"),
+                logo_alt:"GS Retail",
+                pantones: [
+                    { name: "PANTONE <br />166 C", details: ["C 0", "M 65", "Y 100", "K 0"], bg: "#f47920" },
+                    { name: "PANTONE <br />300 C", details: ["C 100", "M 50", "Y 0", "K 0"], bg: "#0072bc" },
+                    { name: "PANTONE <br />7482 C", details: ["C 80", "M 0", "Y 75", "K 0"], bg: "#00b274" },
+                    { name: "PANTONE <br />COOL Gray <br />10C", details: ["C 0", "M 0", "Y 0", "K 50"], bg: "#939598" },
+                ],
+            },
+            {
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_02.png"),
+                logo_alt:"GS25",
+                pantones: [
+                    { name: "PANTONE <br />285 C", details: ["C 100", "M 39", "Y 0", "K 0"], bg: "#007ec6" },
+                    { name: "PANTONE <br />311 C", details: ["C 63", "M 0", "Y 10", "K 0"], bg: "#40c4e0" },
+                ],
+            },
+            {
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_03.png"),
+                logo_alt:"GS SHOP",
+                pantones: [
+                    { name: "PANTONE <br />2173 C", details: ["C 72", "M 27", "Y 0", "K 0"], bg: "#3698d4" },
+                ],
+            },
+            {
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_04.png"),
+                logo_alt:"GS THE FRESH",
+                pantones: [
+                    { name: "PANTONE <br />7484 C", details: ["C 91", "M 14", "Y 78", "K 60"], bg: "#005133" },
+                ],
+            },
+        ],
+        colorSpecRows: [
+            { label: "PANTONE 321C", swatch: "#009999", cmyk: "100/0/50/0", rgbDesktop: "0/153/153", rgbBroadcast: "0/153", hex: "009999" },
+            { label: "PANTONE 300C", swatch: "#3366CC", cmyk: "100/50/0/0", rgbDesktop: "51/102/204", rgbBroadcast: "20/102/204", hex: "3366CC" },
+            { label: "PANTONE 368C", swatch: "#99CC00", cmyk: "53/0/100/0", rgbDesktop: "153/204/0", rgbBroadcast: "600/200/10", hex: "99CC00" },
+            { label: "PANTONE 173C", swatch: "#CC6600", cmyk: "0/75/100/0", rgbDesktop: "204/102/0", rgbBroadcast: "20/102/1", hex: "CC6600" },
+            { label: "PANTONE COOL GRAY 10C", swatch: "#999999", cmyk: "0/0/0/75", rgbDesktop: "102/102/102", rgbBroadcast: "102/102/102", hex: "999999" },
+            { label: "PANTONE WARM GRAY 1C", swatch: "#ebebe3", cmyk: "0/0/3/8", rgbDesktop: "235/235/227", rgbBroadcast: "", hex: "EBEBE3" },
+        ],
     }
 };
 

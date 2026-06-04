@@ -47,6 +47,17 @@ export default {
                         { title: 'Step 04. 점포 내 관리', content: '점포에서는 가장 신선한 상품을 고객에게 제공하기 위하여 점포별 선도지킴이를 운영하고 있으며 선도지킴이는 상품의 선도 및 판매기간을 수시로 확인하여 최고의 상품을 고객님께 제공하고 있습니다.' },
                         { title: 'Step 05. 고객 만족', content: '산지, 물류센터를 거쳐 점포 및 고객님께 판매되기까지 완벽한 콜드체인시스템(Cold Chain System) 으로 고객님에게 산지의 맛과 신선함을 그대로 전달해드리고 있습니다.' }
                     ]
+                },
+                en: {
+                    MainTitle: "Guardian of Taste and Freshness"/* 260604 번역 */,
+                    intro: `Discover GS Retail's Freshness Guardian program, dedicated to being No. 1 in freshness, taste, and quality. GS Retail carefully selects only the most delicious, fresh, and safety-verified products for our customers.`,
+                    steps: [
+                        { title: 'Step 01. Fresh Products', content: 'Only fresh products from producing regions that meet our standards are supplied.' },
+                        { title: 'Step 02. Thorough Quality Inspection', content: 'When products arrive at the distribution center, thorough inspection procedures are carried out to block all defective products from entering.' },
+                        { title: 'Step 03. Optimal Temperature', content: 'Products are delivered at optimal temperatures using in-vehicle halogen heaters and refrigeration units to maintain freshness.' },
+                        { title: 'Step 04. In-Store Management', content: 'Each store operates a designated Freshness Guardian to provide customers with the freshest products possible. The Freshness Guardian regularly monitors product freshness and remaining shelf life to ensure only the finest products reach our customers.' },
+                        { title: 'Step 05. Customer Satisfaction', content: 'From growing regions through distribution centers to stores and into your hands, our complete Cold Chain System delivers the original taste and freshness straight from the source.' }
+                    ]
                 }
             }
         };

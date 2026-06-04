@@ -49,6 +49,19 @@ export default {
                             alt: '위해상품 차단 절차안내'
                         }
                     }
+                },
+                en: {
+                    MainTitle: "Hazardous Product Blocking System",
+                    intro: 'To provide safe products, we participate in the Hazardous Product Blocking System.'/* 260604 번역 */,
+                    section1: {
+                        title: 'Guide to the Hazardous Product Blocking Procedure'/* 260604 번역 */,
+                        desc: 'In 2009, sales accidents involving hazardous products, such as the melamine scandal, occurred one after another, heightening public concern over product safety.\nHowever, as the transmission of information to retail outlets and the recovery of hazardous products were not carried out smoothly, the government established the “Hazardous Product Blocking System” so that, upon discovery of a hazardous product, its sale is immediately blocked and it is removed early. The Company has participated in this system since the early stage of its operation.'/* 260604 번역 */,
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img13.png"),
+                            srcMo: require("@/assets/images/dummy/mo/safe_fresh_img13_mo.png"),
+                            alt: 'Guide to the Hazardous Product Blocking Procedure'/* 260604 번역 */
+                        }
+                    }
                 }
             }
         };

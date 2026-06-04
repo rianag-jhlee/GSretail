@@ -60,6 +60,24 @@ export default {
                         desc: '24년 3월 5일\n㈜ GS리테일 플랫폼 BU/개발사업 CSO 오 진 석\n홈쇼핑 BU CSO 주 운 석',
                     }
                     
+                },
+                en: {
+                    MainTitle: "Safety and Health Management Policy",
+                    intro: 'GS Retail is actively implementing its management policy to create a safe working environment, prevent accidents and disasters, and improve the quality of life and health of all members (employees and partner companies) and citizens (customers and the genal public).',
+                    section1: {
+                        policies: [
+                            { num: '1.', content: 'The Company shall comply with the Occupational Safety and Health Act, safety and health management regulations, and other relevant laws and regulations.' },
+                            { num: '2.', content: 'The Company shall strive to achieve the highest standards in its commitment to safety-centered management and performance.' },
+                            { num: '3.', content: 'The Company shall recognize safety and health duties as an element of management, provide the necessary resources and technology, and continuously conduct safety and health activities.' },
+                            { num: '4.', content: 'The Company shall actively reflect the participation and opinions of its members (employees and partner companies) and citizens (customers and the general public), and shall continuously inspect and eliminate hazardous and risk factors at workplaces, including unsafe behaviors and environmental conditions, in order to prevent accidents and disasters.' },
+                            { num: '5.', content: 'The Company shall annually verify compliance with workplace safety and health-related laws and regulations, and allocate and execute the necessary personnel and budget.' },
+                            { num: '6.', content: `All members of the Company shall comply with the headquarters' safety and health activity plans and safety and health manuals, and shall actively participate in activities to prevent serious accidents and industrial accidents.` }
+                        ],
+                    },
+                    section2: {
+                        desc: 'March 5, 2024\nGS Retail Co., Ltd. Platform BU/Development Business CSO Oh Jin-seok\nHome Shopping BU CSO Joo Woon-seok'/* 260604 번역 */,
+                    }
+                    
                 }
             }
         };

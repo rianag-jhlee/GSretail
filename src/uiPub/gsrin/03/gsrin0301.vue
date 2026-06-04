@@ -296,6 +296,42 @@ export default {
                     ],
                     MeetingListData: [],
                     NoDataText: "조회된 데이터가 없습니다."
+                },
+                en: {
+                    MainTitle: "Disclosure",
+                    MainsubTitle: "Disclosure Information",
+                    Tabs1: [{ item: "Announcement"/* 260604 번역 */ }, { item: "Business/Audit Report"/* 260604 번역 */ }, { item: "Disclosure" }],
+                    InnerTabs: [{ item: "Quarterly/Semi-annual Report"/* 260604 번역 */ }, { item: "Business Report"/* 260604 번역 */ }, { item: "Audit Report"/* 260604 번역 */ }],
+                    DartDesc: "GS Retail's disclosure materials are provided through the Financial Supervisory Service's DART (Data Analysis, Retrieval and Transfer System)."/* 260604 번역 */,
+                    DartBtnText: "Go to Disclosure Materials"/* 260604 번역 */,
+                    GeneralText: "Go to Disclosure Materials"/* 260604 번역 */,
+                    DartLink: "https://dart.fss.or.kr/",
+                    YearSelectLabel: "Select Year"/* 260604 번역 */,
+                    YearOptions: [
+                        { value: "All", label: "All" },
+                        { value: "2026", label: "2026" },
+                        { value: "2025", label: "2025" }
+                    ],
+                    YearOptions2: [
+                        { value: "All", label: "All" },
+                        { value: "2026", label: "2026" },
+                        { value: "2025", label: "2025" }
+                    ],
+                    options: [
+                        { value: "all", label: "All" },
+                        { value: "title", label: "Title" },
+                        { value: "content", label: "Details" }
+                    ],
+                    TableHeader: { col1: "Category", col2: "Title", col3: "Download ↓" },
+                    IRListData: [
+                        { id: "60", title: "FY2025 Financial Statements Settlement Announcement"/* 260604 번역 */, link: "#" },
+                        { id: "59", title: "Notice of Setting the Dividend Record Date for the 55th Fiscal Year"/* 260604 번역 */, link: "#" },
+                        { id: "58", title: "FY2024 Financial Statements Settlement Announcement"/* 260604 번역 */, link: "#" },
+                        { id: "57", title: "Notice of Setting the Dividend Record Date for the 54th Fiscal Year"/* 260604 번역 */, link: "#" },
+                        { id: "56", title: "Notice of External Audit Contract Conclusion"/* 260604 번역 */, link: "#" }
+                    ],
+                    MeetingListData: [],
+                    NoDataText: "There is no data found."/* 260604 번역 */
                 }
             }
         };

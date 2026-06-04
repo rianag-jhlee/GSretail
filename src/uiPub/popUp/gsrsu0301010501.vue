@@ -122,6 +122,48 @@ export default {
                             { id: '04', title: '4단계<br>모니터링', details: ['위험 개선에 대한 모니터링', '상시 공급망 고충 확인/모니터링'] }
                         ]
                     }
+                },
+                en: {
+                    MainTitle: "GS Retail Supply Chain Sustainability Management Policy",
+                    intro: `GS Retail has established and implemented a supply chain sustainability management policy to enhance the ESG capabilities and competitiveness of Partner Companies within its supply chain, as well as to manage sustainability-related risks and opportunities. In addition, to support Partner Companies' implementation of ESG management, GS Retail has established an ESG Code of Conduct covering labor/human rights, safety and health, environmental protection, ethical management, and management systems, and provides guidance through the Partner Company website and other channels.`/* 260604 번역 */,
+                    section1: {
+                        title: 'Supply Chain Sustainability Management Declaration',
+                        desc: 'This policy aims for GS Retail to take the lead in creating a sound corporate ecosystem by building a sustainable supply chain with its Partner Companies, and to realize win-win growth with its Partner Companies.'/* 260604 번역 */,
+                        declarations: [
+                            { number: "One"/* 260604 번역 */, description: "We will comply with fair trade principles to conduct fair and transparent transactions."/* 260604 번역 */ },
+                            { number: "Two"/* 260604 번역 */, description: "To enhance the sustainability of the supply chain, we will strive to strengthen supply chain capabilities through support for shared growth programs, including ESG education and consulting."/* 260604 번역 */ },
+                            { number: "Three"/* 260604 번역 */, description: "To strengthen supply chain procurement competitiveness, we will reinforce green purchasing based on our green purchasing policy and continuously identify excellent suppliers."/* 260604 번역 */ },
+                            { number: "Four"/* 260604 번역 */, description: "We will regularly assess the sustainability of our supply chain and, by providing guidelines, support the supply chain and manage risks."/* 260604 번역 */ },
+                            { number: "Five"/* 260604 번역 */, description: "We will strengthen communication through measures such as holding Partner Company meetings and operating an anonymous reporting channel for smooth communication with the supply chain."/* 260604 번역 */ }
+                        ]
+                    },
+                    section2: {
+                        title: 'Policy Objectives',
+                        desc: "This policy applies to all supply chain-related stakeholders who may be affected in the process of distributing the company's products and services, including stakeholders such as suppliers and subcontractors that do business with GS Retail, as well as workers. In addition, this policy recommends that Partner Companies doing business with GS Retail comply with policies at a level similar to this policy."/* 260604 번역 */,
+                    },
+                    section3: {
+                        title: 'Scope of Application',
+                        desc: 'Community engagement activities consist of activities for the growth of the local community. Activities related to social contribution are organized by the Social Contribution Part, and the development of sales channels related to local specialty products is handled by the MD and Broadcasting Business Support Team.'/* 260604 번역 */
+                    },
+                    section4: {
+                        title: 'Supply Chain Sustainability Management System',
+                        desc: 'To manage the sustainability of the supply chain, we have established the following management system covering Partner Company sourcing and contracting, Partner Company support, quality control, and fair trade.'/* 260604 번역 */,
+                        image: {
+                            src: require("@/assets/images/dummy/gsrsu03010105.png"),
+                            alt: 'Supply Chain Sustainability Management System'
+                        }
+                    },
+                    section5: {
+                        title: '5. Supply Chain Risk Identification and Management Process',
+                        desc: 'To identify and manage supply chain risks, we conduct supply chain diagnostic assessments at the time of contracting with Partner Companies and during the course of transactions. ESG diagnostic assessments are carried out by the MD Planning Team of each business, with the Policy Support Team supporting the design of risk items and other tasks. The supply chain due diligence process proceeds through the selection of assessment targets > identification of risk items > risk assessment > due diligence > implementation of improvements. Among these, to manage quality-related risks during supply chain diagnosis, the Quality Control Team conducts risk assessments and on-site verification due diligence, provides guidance on improvement measures, and carries out effectiveness evaluations to confirm whether improvements have been made. The team also monitors whether the improvements have been implemented. In addition, to identify supply chain risks at all times, Partner Company grievances can be submitted anonymously at any time through our website; and where a substantive risk is identified in this process, we conduct on-site due diligence and appropriately implement measures to mitigate it.'/* 260604 번역 */,
+                        processTitle: "Supply Chain Risk Due Diligence Process",
+                        steps: [
+                            { id: '01', title: 'Step 1<br>Selection of Assessment Targets', details: ['(new and existing partner companies)'] },
+                            { id: '02', title: 'Step 2<br>Supply Chain Risk Identification', details: ['Identification of supply chain risk factors'] },
+                            { id: '03', title: 'Step 3<br>Risk Assessment and Due Diligence', details: ['Conduct risk assessment','Conduct due diligence when risks are identified','ESG training and consulting support'] },
+                            { id: '04', title: 'Step 4<br>Monitoring', details: ['Monitoring of risk improvements', 'Ongoing partner grievance verification and monitoring'] }
+                        ]
+                    }
                 }
             }
         };

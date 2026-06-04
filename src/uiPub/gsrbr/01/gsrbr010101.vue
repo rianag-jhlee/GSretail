@@ -3020,7 +3020,1334 @@ const langData = {
         backLabel: "목록으로 돌아가기",
     },
     en: {
-
+        nav: {
+            depth1: [
+                { item: "Differentiated Products" },
+                { item: "Fresh Concept Store" },
+                { item: "Stores/Services" },
+                { item: "Win-Win Partnership" },
+                { item: "Meal Box/Snack Bar\n (Corporate Subscription Service)"/* 260604 번역 */ }, //26.05.15 Edit 이종환
+            ],
+            depth2: [
+                { item: "Differentiated Products" },
+                { item: "CAFE25" },
+                { item: "Chicken25" },
+                { item: "GoPizza" },
+            ],
+            depth2Store: [
+                { item: "Our Neighborhood GS" }, //26.05.27 Add 이종환
+                { item: "Everyday Services" },
+                { item: "Delivery & Pickup" },
+                { item: "Bill and Tax Payment" },
+                { item: "Gift Voucher Sales" },
+            ],
+            depth2Winwin: [
+                { item: "Operations Support Programs" },
+                { item: "Partner Programs" },
+            ],
+        },
+        tabs: [
+            {
+                hero: imgHero0,
+                heroAlt: "",
+                title: "Differentiated Products",
+                subtitle: "From reasonable prices and reliable quality to new products that enhance the value of life, we are always with you so you can enjoy the joys of everyday living."/* 260604 번역 */,
+                cards: [
+                    {
+                        image: imgCard1,
+                        alt: "",
+                        title: "Kim Hye-ja Lunch Box",
+                        desc: "A premium lunch box line crafted for a heartfelt, wholesome meal, the Kim Hye-ja Lunch Box is GS25's signature exclusive product, beloved for its consistently high customer satisfaction.",
+                    },
+                    {
+                        image: imgCard2,
+                        alt: "",
+                        title: "YOUUS",
+                        desc: "YOUUS is built on great quality and honest value, offering the kind of fun and delight you can only find at GS Retail.",
+                    },
+                ],
+                qr: {
+                    title: "Download the Our Neighborhood GS app"/* 260604 번역 */,
+                    desc: "Download the Our Neighborhood GS app and discover GS25's various events and exclusive products. Scan the QR code to go to the app download page."/* 260604 번역 */,
+                },
+            },
+            {
+                hero: imgHero1,
+                heroAlt: "",
+                title: "CAFE25",
+                subtitle: "It is GS25's distinctive specialty coffee zone, using top-of-the-line coffee machines and specialty blended beans to offer the finest coffee at a reasonable price."/* 260604 번역 */,
+                sections: [
+                    {
+                        type: "cards",
+                        title: "Coffee Machine",
+                        desc: "We use the Franke machine, a Swiss luxury coffee brand priced at approximately KRW 13 million for consumers.",
+                        cards: [
+                            { image: imgCoffeeMachine01, alt: "" },
+                            { image: imgCoffeeMachine02, alt: "" },
+                            { image: imgCoffeeMachine03, alt: "" },
+                        ],
+                    },
+                    {
+                        type: "table",
+                        title: "Coffee Beans",
+                        desc: "Specialty blended beans from Dongsuh Foods, Korea's No. 1 roaster. (A blend of 5 premium bean varieties from top coffee-producing countries including Brazil, Guatemala, and Colombia)",
+                        columns: [
+                            { key: "country", label: "Origin",  width: 200, align: "left" },
+                            { key: "ratio",   label: "Blend Ratio",  width: 160, align: "center" },
+                            { key: "process", label: "Processing Method", width: 289, align: "center" },
+                            { key: "feature", label: "Bean Characteristics", width: 289, align: "left" },
+                        ],
+                        rows: [
+                            { flag: imgFlagBrazil,    country: "Brazil",      ratio: "35%", process: "Natural", feature: "Well-balanced flavor" },
+                            { flag: imgFlagGuatemala, country: "Guatemala",     ratio: "30%", process: "Washed",  feature: "Rich, full body" },
+                            { flag: imgFlagColombia,  country: "Colombia",     ratio: "25%", process: "Washed",  feature: "Nutty richness" },
+                            { flag: imgFlagEthiopia,  country: "Ethiopia",   ratio: "5%",  process: "Washed",  feature: "Bright and lively acidity" },
+                            { flag: imgFlagPapua,     country: "Papua New Guinea", ratio: "5%",  process: "Washed",  feature: "Floral and herbal aroma" },
+                        ],
+                    },
+                    {
+                        type: "image",
+                        title: "CAFE25: Better Than Specialty Cafés",
+                        desc: "Evaluated by the Barista Association and found to match the quality of top coffee shop chains.",
+                        source: "Korea Coffee Association Sensory Evaluation Results (May 2023)",
+                        image: imgCafe25Graph,
+                        imageAlt: "Coffee taste comparison graph - a bar chart showing that GS25 coffee matches specialty coffee shop quality"/* 260604 번역 */,
+                    },
+                    {
+                        type: "split",
+                        title: "Menu",
+                        image: imgCafeMenu,
+                        imageMo: imgCafeMenuMo,
+                        imageAlt: "CAFE25 Menu Image"/* 260604 번역 */,
+                        columns: [
+                            { key: "menu",     label: "Category",           width: 260, align: "left" },
+                            { key: "volume",   label: "Serving Size (mL)", width: 220, align: "center" },
+                            { key: "caffeine", label: "Caffeine Content (mg)", width: 220, align: "center" },
+                        ],
+                        rows: [
+                            { menu: "Espresso",            volume: "35",  caffeine: "137" },
+                            { menu: "Cacao Espresso",       volume: "43",  caffeine: "127" },
+                            { menu: "Americano",             volume: "200", caffeine: "121" },
+                            { menu: "Americano (Large)",        volume: "245", caffeine: "132" },
+                            { menu: "Iced Americano",       volume: "380", caffeine: "144" },
+                            { menu: "Iced Americano",  volume: "480", caffeine: "140" },
+                            { menu: "Iced Americano",  volume: "780", caffeine: "180" },
+                        ],
+                    },
+                ],
+            },
+            {
+                hero: imgHero2,
+                heroAlt: "",
+                title: "CHICKEN25",
+                subtitle: `It is GS25's distinctive food offering, serving freshly fried foods made with the finest ingredients at a reasonable price. <br class=\"p_br\" />Now you can enjoy specialty-shop-quality chicken with CHICKEN25 at convenience stores, too.`/* 260604 번역 */,
+                sections: [
+                    {
+                        type: "text_cards",
+                        title: "Carefully selected premium ingredients, taste you can trust",
+                        desc: "We offer high-quality fried chicken made with the finest ingredients, so you can enjoy every bite with complete confidence.",
+                        cards: [
+                            {
+                                title: "Crispier, tastier fried food with clean oil",
+                                desc: "Using carefully maintained clean oil, we serve chicken that is crispier and more delicious. With rigorous hygiene standards, every bite is one you can enjoy with complete peace of mind.",
+                            },
+                            {
+                                title: "A wide selection of menu items, the joy of choosing",
+                                desc: "With an even wider selection than specialty restaurants, there's something for everyone to enjoy.<br />(Whole chicken, half chicken, drumstick, wings, bone-in pieces, skewers, hot dogs, fried dumplings, etc.)",
+                            },
+                            {
+                                title: "Always fresh, always nearby",
+                                desc: "Fresh, crispy fried chicken is always just around the corner at your nearest GS25.<br />Order delivery or pickup through the Our Neighborhood GS app for an even more convenient experience at your nearby GS25.",
+                            },
+                        ],
+                    },
+                ],
+                imgGrid: [
+                    { image: imgChickenLeft, alt: "" },
+                    { image: imgChickenRight, alt: "" },
+                ],
+                qr: {
+                    title: "Download the Our Neighborhood GS app"/* 260604 번역 */,
+                    desc: "Download the Our Neighborhood GS app and discover GS25's various events and exclusive products.<br />Scanning the QR code takes you to the app download page."/* 260604 번역 */,
+                },
+            },
+            {
+                hero: imgHero3,
+                heroAlt: "",
+                title: "GOPIZZA",
+                subtitle: "The joy of a whole pizza! The convenience of one hand! GOPIZZA, the leading brand in single-serve pizza, serves fast and delicious pizza.<br />Now you can enjoy GOPIZZA's signature menu at your nearby GS25, too."/* 260604 번역 */,
+                sections: [
+                    {
+                        type: "img_grid",
+                        title: "The GOVEN MINI cooking system, exclusive to GS25",
+                        images: [
+                            { image: imgGoben1, alt: "" },
+                            { image: imgGoben2, alt: "" },
+                        ],
+                    },
+                    {
+                        type: "image",
+                        title: "Signature Dough",
+                        desc: `Made with par-baked dough aged for 24 hours at a low temperature of 9°C for a crispy outside and chewy inside!<br class=\"p_br\" />GoPizza's par-baked dough, crafted with years of culinary expertise, goes through a low-temperature fermentation process to achieve the perfect balance of crispiness and chewiness.`/* 260604 번역 */,
+                        image: imgDough,
+                        imageAlt: "",
+                    },
+                    {
+                        type: "menu",
+                        title: "Menu",
+                        desc: `From GoPizza's bestsellers to exciting new additions, enjoy your favorites at GS25 in REGULAR and GRAB sizes!<br class=\"p_br\" />For the REGULAR size, the pizza is cut into 5 pieces in a W shape, so you can easily enjoy it one slice at a time.`/* 260604 번역 */,
+                        panels: [
+                            {
+                                image: imgMenu1,
+                                size: "REGULAR (27cm)",
+                                tags: ["Meal replacement"/* 260604 번역 */, "Equivalent to 4 slices of a regular pizza"/* 260604 번역 */],
+                                columns: [
+                                    { key: "name",  label: "Menu Name"/* 260604 번역 */,       align: "left"  },
+                                    { key: "price", label: "Amount (KRW)"/* 260604 번역 */,      align: "right" },
+                                    { key: "kcal",  label: "Calories (kcal)"/* 260604 번역 */, align: "right" },
+                                ],
+                                rows: [
+                                    { name: "Potato & Bacon"/* 260604 번역 */, price: "7,900", kcal: "922",   badge: "BEST" },
+                                    { name: "Cheddar Pepperoni"/* 260604 번역 */,   price: "7,900", kcal: "1,017" },
+                                    { name: "Meat Cheese"/* 260604 번역 */,        price: "7,900", kcal: "945"   },
+                                    { name: "Triple Cheese"/* 260604 번역 */,      price: "8,500", kcal: "1,009" },
+                                ],
+                            },
+                            {
+                                image: imgMenu2,
+                                size: "GRAB (20cm)",
+                                tags: ["For snacks"/* 260604 번역 */, "Equivalent to 2 slices of a regular pizza"/* 260604 번역 */],
+                                columns: [
+                                    { key: "name",  label: "Menu Name"/* 260604 번역 */,       align: "left"  },
+                                    { key: "price", label: "Amount (KRW)"/* 260604 번역 */,      align: "right" },
+                                    { key: "kcal",  label: "Calories (kcal)"/* 260604 번역 */, align: "right" },
+                                ],
+                                rows: [
+                                    { name: "Potato & Bacon"/* 260604 번역 */, price: "3,500", kcal: "357",  badge: "BEST" },
+                                    { name: "Cheddar Pepperoni"/* 260604 번역 */,   price: "3,500", kcal: "355"  },
+                                    { name: "Meat Cheese"/* 260604 번역 */,        price: "3,500", kcal: "341"  },
+                                    { name: "Triple Cheese"/* 260604 번역 */,      price: "3,500", kcal: "349"  },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        type: "phone_grid",
+                        title: `On the Our Neighborhood GS app, you get fast delivery,<br class=\"m_br\" /> Pickup available`/* 260604 번역 */,
+                        items: [
+                            { image: imgPhone1, alt: "" },
+                            { image: imgPhone2, alt: "" },
+                        ],
+                    },
+                ],
+                qr: {
+                    title: "Download the Our Neighborhood GS app"/* 260604 번역 */,
+                    desc: "Download the Our Neighborhood GS app and discover GS25's various events and exclusive products.<br />Scanning the QR code takes you to the app download page."/* 260604 번역 */,
+                    descMo: "GS25's diverse events and distinctive products"/* 260604 번역 */,
+                },
+                link: {
+                    title: "Go to GOPIZZA Website"/* 260604 번역 */,
+                    desc: "Find a store near you on the GOPIZZA website and experience reasonable prices and a distinctive taste.<br />Clicking the button takes you to the relevant website."/* 260604 번역 */,
+                    descMo: "Reasonable prices and distinctive taste—GOPIZZA"/* 260604 번역 */,
+                    url: "https://gopizza.kr",
+                },
+            },
+        ],
+        sinsen: {
+            heroAlt: "Fresh Concept Store",
+            title: "Fresh Concept Store",
+            subtitle: "Fresh Concept Stores are designed for the growing trend of single- and two-person households and convenient, small-quantity shopping, offering one-stop grocery shopping 24 hours a day, 365 days a year. Combining the convenience of a convenience store with the freshness of a supermarket, this distinctive concept delivers fresh products (fruits, vegetables, meat, and seafood) every single day.",
+            sections: [
+                {
+                    title: "GS25 Fresh Product Features"/* 260604 번역 */,
+                    desc: "Through integrated purchasing with GS THE FRESH, we secure product competitiveness and offer a wider variety of fresh products than other convenience stores."/* 260604 번역 */,
+                    features: [
+                        { title: "Fresh Products",   desc: "Cold chain maintained from logistics all the way to the shelf, keeping every product fresh" },
+                        { title: "Affordable Prices", desc: "Offered at affordable prices through joint purchasing with GS THE FRESH" },
+                        { title: "Small-Quantity, Small-Portion", desc: "A small-quantity, small-portion product lineup tailored for one- to three-person households" },
+                        { title: "Exclusive Product Brand", desc: "Operating fresh food specialty brand 'Sinseon Teukbyeolsi'" },
+                    ],
+                },
+                {
+                    title: "Why GS25 Fresh Concept Store?",
+                    desc: "We operate the industry's only dedicated fresh product logistics center, maintaining freshness through end-to-end temperature management across the entire supply chain from suppliers to stores.",
+                    flow: true,
+                    flow_cont:[
+                        {flowTitle: "GS25 Fresh Delivery System", flowNote: "In operations that bypass the fresh center, <br />differences may arise <br />in product inspection, logistics costs, <br />and freshness management.", flowNote2:"Partner companies → reduced logistics costs through single-center receiving → higher cost competitiveness. Initial freshness management is carried out before in-store delivery through quality inspection at the single fresh-food center."/* 260604 번역 */, img:require("@/assets/images/sub/gsrbr010101/sinsen_flow.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow_mo.png"), alt:""},
+                        {flowTitle: "Other companies' fresh-delivery method"/* 260604 번역 */, flowNote: "An operating structure that does not go through a dedicated fresh-food distribution center"/* 260604 번역 */, img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2_mo.png"), alt:""}
+                    ],
+                },
+                {
+                    title: "Advantages of Operating Fresh Concept Stores",
+                    advantages: {
+                        items: [
+                            { text: "A diverse product assortment through exclusive items (approx. 400 SKUs)" },
+                            { text: "Exclusive Fresh Concept Store promotions (fresh and processed)" },
+                            { text: "Dedicated equipment to keep fresh products at peak freshness" },
+                            { text: "Real-time fresh product price management using electronic shelf labels" },
+                            { text: "Waste minimized through end-of-day discount label printing" },
+                            { text: "Enhanced visibility through dedicated in-store and external promotional materials" },
+                            { text: "Verifying effectiveness when introducing the fresh-enhanced concept to an existing GS25!"/* 260604 번역 */, note: "\u201CAfter adoption, average daily sales increased by approximately 12.6% compared to before, and the average number of daily customers increased by 21.\u201D"/* 260604 번역 */ },
+                        ],
+                    },
+                },
+            ],
+        },
+        store: {
+            tabs: [
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "Everyday Services",
+                    subtitle: "",
+                    sections: [],
+                    serviceTabs: [
+                        {
+                            label:   "ATM Services",
+                            hero:    imgHero5,
+                            heroAlt: "",
+                            title:   "ATM Services",
+                            desc:    "In addition to financial services such as cash withdrawals and account transfers, you can also issue regular-season tickets for professional sports (baseball, soccer, volleyball, basketball) for immediate entry, as well as Everland day passes.<br />In addition, we provide various everyday convenience services such as Hi-Pass recharge (credit card payment) and budget mobile (MVNO) sales."/* 260604 번역 */,
+                            sub_item: {
+                                title: "Fee-Free Cash Withdrawal Service",
+                                explain: "Zero fees on cash withdrawals from Shinhan Bank / KB Kookmin Bank / Woori Bank / Kakaobank / K bank / Toss Bank / SC First Bank / Kwangju Bank / SB Savings Bank / Samsung Securities / NH Investment & Securities accounts!"/* 260604 번역 */,
+                                retail_note: "*Please note that fees may apply outside of bank business hours depending on the bank's terms. For savings banks, the fee waiver applies to withdrawals only.",
+                                bank: [
+                                    {name:"Shinhan Bank"/* 260604 번역 */, logo: require("@/assets/images/sub/gsrbr010101/bank_shinhan.png")},
+                                    {name:"KB Kookmin Bank"/* 260604 번역 */, logo: require("@/assets/images/sub/gsrbr010101/bank_kookmin.png")},
+                                    {name:"Woori Bank"/* 260604 번역 */, logo: require("@/assets/images/sub/gsrbr010101/bank_woori.png")},
+                                    {name:"kakaobank", logo: require("@/assets/images/sub/gsrbr010101/bank_kakao.png")},
+                                    {name:"Kbank", logo: require("@/assets/images/sub/gsrbr010101/bank_kbank.png")},
+                                    {name:"toss bank", logo: require("@/assets/images/sub/gsrbr010101/bank_toss.png")},
+                                    {name:"Standard Chartered SC Bank Korea"/* 260604 번역 */, logo: require("@/assets/images/sub/gsrbr010101/bank_sc.png")},
+                                    {name:"Gwangju Bank"/* 260604 번역 */, logo: require("@/assets/images/sub/gsrbr010101/bank_gwangju.png")},
+                                    {name:"Savings bank"/* 260604 번역 */, logo: require("@/assets/images/sub/gsrbr010101/bank_sb.png")},
+                                    {name:"Samsung Securities"/* 260604 번역 */, logo: require("@/assets/images/sub/gsrbr010101/bank_samsung.png")},
+                                    {name:"NH Investment & Securities"/* 260604 번역 */, logo: require("@/assets/images/sub/gsrbr010101/bank_nh.png")}
+                                ]
+                            }
+                        },
+                        {
+                            label:   "Convenience Store Cash Purchase/Reload",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "Convenience Store Cash Purchase/Reload Service",
+                            desc:    "Convenience Store Cash is a service that lets you purchase or reload online content, shopping mall credits, game cash, and international calling cards at any GS25.",
+                            table: {
+                                rows: [
+                                    { head: "Games · Gift Vouchers · Telecommunications", text: "Purchase and reload a wide range of services in real time at GS25, including budget phone, international calling, and mobile data. Receipt-type PIN purchases and international calling card reloads are available, along with real-time balance reloading via smartphone app." },
+                                    { head: "Game Cash",         text: "N Coin (NCSoft), Nexon, World of Warcraft, League of Legends, Teen Cash, HanGame, Funny Card, HanbitSoft, etc." },
+                                    { head: "Gift Vouchers",           text: "Culture Gift Voucher, Smart Culture Gift Voucher, Happy Money Gift Voucher, Book Culture Gift Voucher, etc." },
+                                    { head: "Smartphone App Reload", text: "Nexon Play, Cultureland" },
+                                    { head: "Budget Mobile",           text: "EG CARD, 7mobile, Eyes, Mobing, M-Mobile, free C/T, Iyagi Mobile, etc." },
+                                    { head: "International Calling Cards",     text: "LG U+, Naray, SK broadband" },
+                                    { head: "Mobile Data & Other", text: "Olleh WiFi, T Data Coupon, KT LTE Data Coupon, Daum Cash" },
+                                ],
+                            },
+                        },
+                        {
+                            label:    "Transit Card\nRecharge"/* 260604 번역 */,
+                            hero:     null,
+                            heroAlt:  "",
+                            title:    "",
+                            desc:     "",
+                            lnbItems: ["What is POP Card?", "Transit Usage Guide", "Retail Usage Guide"],
+                            trafficSelectOptions: [
+                                { value: "subway",  label: "Subway" },
+                                { value: "bus",     label: "Bus" },
+                                { value: "express", label: "Express Bus" },
+                                { value: "inter",   label: "Intercity Bus" },
+                            ],
+                            trafficOptions: {
+                                express: {
+                                    title: "Express Bus",
+                                    bullets: ["Kumho Express"/* 260604 번역 */, "Dongbu Express"/* 260604 번역 */, "Dongyang Express"/* 260604 번역 */, "Songnisan Express"/* 260604 번역 */, "Jungang Express Co., Ltd."/* 260604 번역 */, "Samhwa Express"/* 260604 번역 */, "Cheonil Express"/* 260604 번역 */, "Hanil Express"/* 260604 번역 */],
+                                    logos: [imgBus1, imgBus2, imgBus3, imgBus4, imgBus5, imgBus6, imgBus7, imgBus8],
+                                },
+                                subway: { title: "Subway", bullets: ["• Metropolitan area (Lines 1–9, Suin Line, Gyeongchun Line, Gyeongui Line, Jungang Line, Uijeongbu Light Rail, Bundang Line, Shinbundang Line, Airport Railroad, Incheon)", "• Daejeon (Line 1)", "• Daegu (Lines 1–2)", "• Busan (Lines 1–4, Busan-Gimhae Light Rail Transit)"] },
+                                bus:    { title: "Bus",   bullets: ["• Metropolitan Area","• Daejeon Metropolitan City, Sejong City", "• Chungnam, Chungbuk (Chungju, Yeongdong, Cheongju, Okcheon, Danyang, Jecheon, Jincheon, Cheongwon, Goesan, Boeun, Eumseong)", "• Gangwon (Wonju, Hoengseong, Chuncheon, Gangneung)", "• Busan Metropolitan City, Daegu Metropolitan City, Ulsan Metropolitan City","• Gyeongnam (Changwon, Tongyeong, Geoje, Miryang, Yangsan, Haman, Sacheon, Masan, Jinhae, Jinju)","• Gyeongbuk (Pohang, Gumi, Gyeongju, Andong, Sangju, Mungyeong, Yeongju, Gimcheon, Gyeongsan, Yecheon)", "• Jeonnam (Mokpo, Yeosu, Gwangyang, Suncheon, Hwasun, Naju, Jangseong, Hampyeong, Damyang, Boseong, Yeongam, Haenam)","• Jeonbuk (Jeonju, Iksan, Gunsan, Gimje, Namwon, Gochang, Jeongeup, Jinan, Imsil, Buan)","Jeju"] },
+                                inter:  { title: "Intercity Bus", bullets: ["• Metropolitan Area (excluding Seoul City Airport Bus)","South Chungcheong","• Gangwon (excluding Wonju)"] },
+                            },
+                            retailSelectOptions: [
+                                { value: "convenience",   label: "Convenience Stores" },
+                                { value: "mart",          label: "Large Marts/Retail Stores" },
+                                { value: "bakery",        label: "Bakeries" },
+                                { value: "coffee",        label: "Coffee/Ice Cream" },
+                                { value: "fastfood",      label: "Fast Food" },
+                                { value: "restaurant",    label: "Restaurants & Dining" },
+                                { value: "cosmetics",     label: "Cosmetics" },
+                                { value: "entertainment", label: "Entertainment" },
+                                { value: "pcroom",        label: "PC Cafés (PC Bangs)" },
+                                { value: "university",    label: "Universities" },
+                                { value: "public",        label: "Public Facilities" },
+                                { value: "tourism",       label: "Tourism" },
+                                { value: "parking",       label: "Parking Lots" },
+                                { value: "kiosk",         label: "Self-service kiosks" },
+                                { value: "etc",           label: "Other" },
+                            ],
+                            retailOptions: {
+                                convenience:   { title: "Convenience Stores", items: [
+                                    { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_01.gif")},
+                                    { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_02.png")},
+                                    { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_03.png")},
+                                    { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_04.png")},
+                                    { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_05.png")},
+                                    { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_06.png")},
+                                    { brand: "GS25", logo: require("@/assets/images/sub/gsrbr010101/logo_convenience_07.jpg")},
+                                ]},//ph(7) },
+                                mart:          { title: "Large Marts/Retail Stores",  note:"* Service coming soon to select mart and express locations", items: ph(4) },
+                                bakery:        { title: "Bakeries", note:"* Excluding some stores located inside marts, department stores, and rest stops", items: ph(3) },
+                                coffee:        { title: "Coffee/Ice Cream",  note: "* Excluding some stores located inside marts, department stores, and rest stops", items: [
+                                    { brand: "Starbucks"/* 260604 번역 */,   logo: imgBrandUsage1 },
+                                    { brand: "Pascucci"/* 260604 번역 */,   logo: imgBrandUsage2 },
+                                    { brand: "Baskin Robbins"/* 260604 번역 */,       logo: imgBrandUsage3 },
+                                    { brand: "Jamba Juice"/* 260604 번역 */,   logo: imgBrandUsage4 },
+                                    { brand: "Angel-in-us"/* 260604 번역 */, logo: imgBrandUsage5 },
+                                    { brand: "Caffe Tiamo"/* 260604 번역 */, logo: imgBrandUsage6 },
+                                    { brand: "Java City"/* 260604 번역 */,   logo: imgBrandUsage7 },
+                                    { brand: "Coffee Bay"/* 260604 번역 */,   logo: imgBrandUsage8 },
+                                    { brand: "Yogerpresso"/* 260604 번역 */, logo: imgBrandUsage9 },
+                                ]},
+                                fastfood:      { title: "Fast Food", note:"* Excluding some stores located inside marts, department stores, and rest stops", items: ph(3) },
+                                restaurant:    { title: "Restaurants & Dining", note:"* Excluding some stores located inside marts, department stores, and rest stops", items: ph(3) },
+                                cosmetics:     { title: "Cosmetics", note:"* Excluding some stores located inside marts, department stores, and rest stops", items: ph(6) },
+                                entertainment: { title: "Entertainment", note:"* LOTTE CINEMA (Piccadilly), MEGABOX (Ansan), SK Wyverns (Annual Pass)", items: ph(3) },
+                                pcroom:        { title: "PC Cafés (PC Bangs)",       bullets: ["• T-money PC Café"], footnote: "• Children's cards are not accepted" },
+                                university: {
+                                    title: "Universities",
+                                    bullets: [
+                                        { dt: "Campus Cafeterias", dd: "• Chungnam National University" },
+                                        { dt: "Campus Stores", dd: "• Dongguk University, Baekseok University, Jeongeui Girls' Middle & High School, Konkuk Affiliated High School, Dongduk Women's University" },
+                                        { dt: "Office Equipment (OA)", dd: "• Dongguk University, Seoul National University of Science and Technology, Hanyang University, Ewha Womans University, Incheon National University" },
+                                        { dt: "Shuttle Bus", dd: "• Ajou University, Sungkyunkwan University" },
+                                        { dt: "Other", dd: "• Vending machines (Chung-Ang University, Konyang University, Ajou University, Myongji University, etc.)<br />• Self-service lockers (Yonsei University, Kyonggi University, Myongji University, etc.)" },
+                                    ],
+                                },
+                                public:       { title: "Public Facilities", bullets: [
+                                    "• Cycling/Motorboat Racing Venues (Korea Sports Promotion Foundation)",
+                                    "• Horse Racing Tracks (Korea Racing Authority)",
+                                    "• Seocho-gu Office AVANCE hall meal payments",  
+                                    "• Seoul City Hall Dasan Plaza civil service issuance fees",
+                                    "• All Seoul City District Office civil service payments",
+                                    "• Jongno-gu Community Centers, 19 locations (Gahoe-dong, Samcheong-dong, etc.)",
+                                    "• Central Post Office (restaurant payments)",
+                                    "• Daejeon City public bike-share 'Tashu' payments",
+                                    "• Gwacheon Science Museum meals, shops, cafés, and more",
+                                    "• Pohang City Hall Tax Division civil service payments (32 locations including City Hall, District Offices, and Eup/Myeon/Dong offices)",
+                                    "• Food waste volume-rate billing: Gunpo-si, Uijeongbu-si, Incheon Nam-gu, Incheon Seo-gu, Wonju-si, Pohang-si, Jeju-si, Seogwipo-si, Songpa-gu, Sunchang-gun",
+                                ] },
+                                tourism:       { title: "Tourism",        bullets: ["• Han River Water Taxi","• City Tour Bus (5% fare discount when paying with T-money)"] },
+                                parking:       { title: "Parking Lots", bullets: [
+                                    "• Seoul Metropolitan Government public parking lots",
+                                    "• Gangnam Facility Management Corporation off-street parking lots, Seoul (9 locations): Tancheon, Gangnam-gu Office, Gangnam Education Center, Eonbuk Elementary School, Poi Elementary School, Gaepo Public, Yeoksam 1-ro, Yeoksam 10, Daechi 3-dong Cultural Center",
+                                    "• Seoul Facility Management Corporation park-and-ride lots (parking discount available when entering with T-money subway fare): Jamsil Station, Changdong Station, Guro Digital Complex Station, Gaehwasan Station, Suseo Station, Dobongsan Station, Bonghwasan Station, Suraksan Station, Hangangjin Station, Hwarangdae Station, World Cup Stadium Parking Lot",
+                                    "• Seoul Sports Facility Management Office Parking Lot (Jamsil Sports Complex)",
+                                    "• Seoul Dream Forest, Incheon Airport",
+                                    "• Suwon Facility Management Corporation Parking Lots: City Hall 1st Ground, City Hall 2nd Ground, Seonkyeong, Yeongtong-gu Office, Yeongtong Public, Gwonseon Public, Ingye Public, Yulcheon Public, Terminal Public, Daehwanggyo Freight, Hwaseo Transfer, Sungdae Transfer, Kkotmoe Transfer, Seoryu Station Transfer, Gwanggyo Public, Manseok Park, Baekseol Public, Yeonghwa-dong, Seoryu 2-dong, Ingye-dong, Maegyo-dong, Tap-dong, Gokbanjeong-dong 1 & 2",
+                                    "• Seongnam Facility Management Corporation Parking Lots: Geumgok-dong, Seohyeon-dong, Jeongja Transfer, Ori Transfer, Yatap 1st, Jungbu Elementary School, Haeoruem, Daewoncheon, Dandae Park, Bokjeong-dong, Sinheung, Taepyeong, Araesutgol, etc. (44 locations)",
+                                    "• Paju Facility Management Corporation Parking Lots: Geumchon 2 Public, Geumchon 2-8 Public, Geumchon 3 Public",
+                                    "• KTX Railway Station Parking Lots (Gwangmyeong Station, Cheonan/Asan Station, etc.)",
+                                    "• Hi Parking lots: Chuncheon Underground, Daegu Duryu 1-banga Underground, Sujin Station Transfer, Jukjeon IOne Plaza",
+                                    "• Other: World Cup Stadium, Mokdong Street, Eungbong-dong (Building), Samseong-dong Oakwood, Gangbuk Samsung Hospital, SH Corporation Parking Lot, Nuri Dream Square Parking Lot, Seoul Forest Park Parking Lot, Seoul Trade Exhibition Center Parking Lot, Dongwon Industries Building Underground Parking Lot, Incheon Economic Promotion Agency Parking Lot, GS Park24 Seoul Design High School Parking Lot",
+                                    "Self-service kiosks",
+                                ] },
+                                kiosk:         { title: "Self-service kiosks",    bullets: ["• KTL public payphones","• Subway self-service lockers, beverage/snack vending machines, book vending machines, self-service photo booths","• Post Office self-service postal counters: Seoul Regional Postal Service, Gyeongin Regional Postal Service, Chungcheong Regional Postal Service, Gyeongbuk Regional Postal Service, Busan Regional Postal Service"] },
+                                etc:           { title: "Other",        bullets: ["• Expressway rest stops: Jinyeong Rest Stop, Yeongcheon Rest Stop", "• Gagstory Mart (select locations)","• Stationery store Saekgyeonpil (select locations)", "• Video rental store Yeongwha Village (select locations)"] },
+                            },
+                            pageTitle: "Transit Card Reload Service (POP T-money, MYbi, Cashbee (EZL), HanPay)",
+                            pageDesc:  "GS25 offers a transit card reload service for customers who use public transportation.<br />Your transit card can also be used to purchase products at GS25, making it a convenient all-in-one payment option. (Excludes some items such as lottery tickets, lotto, sports toto, and delivery services)",
+                            popTitle:   "What is POP Card?",
+                            popDesc:    "Now, go POP!<br />Link your POP card with various payment methods to enjoy greater rewards, smarter spending, and a more convenient experience.",
+                            popExclude: "(* POP card not accepted at the following locations: D Mall, Yeongpung Bookstore Jongno, SaveZone Bucheon, Dongdaemun Hyundai City Outlet, NC Seomyeon, Hyundai City Mall Garden Five, NC Moran, Daegu E-World, Donga Shopping NC Daegu, NC Icheon, NC Dong-Suwon, NC Yatap)",
+                            chargingTitle: "Transit Card Reload Service",
+                            chargingItems: [
+                                { name: "T-money",     img: imgTransService1 },
+                                { name: "Cashbee (EZL)", img: imgTransService2 },
+                                { name: "HanPay",      img: imgTransService3 },
+                                { name: "iM UPay"/* 260604 번역 */,   img: imgTransService4 },
+                            ],
+                            chargingNote: {
+                                label: "Areas where charging and payment are available"/* 260604 번역 */,
+                                text:  "T-money/Cashbee (EZL): all GS25 stores / Hanpay: Jeolla-do, Gwangju Metropolitan City / iM Upay: Gyeongsangbuk-do, Daegu Metropolitan City"/* 260604 번역 */,
+                            },
+                            popCards: [
+                                {
+                                    img:   imgPopCard1,
+                                    imgMo: imgPopCard1Mo,
+                                    name:  "POP T-money",
+                                    desc:  "Plus the benefits of multi-membership managed with a single card!\nPOP T-money is a distinctive service that lets you use the functions of\nT-money and POP Card at the same time."/* 260604 번역 */,
+                                    logos: [
+                                        { src: imgPoint1, w: 28, h: 36 },
+                                        { src: imgPoint2, w: 44, h: 24 },
+                                        { src: imgPoint3, w: 29, h: 36 },
+                                        { src: imgPoint4, w: 32, h: 32 },
+                                    ],
+                                },
+                                {
+                                    img:      imgPopCard2,
+                                    imgMo:    imgPopCard2Mo,
+                                    name:     "Membership POP Card",
+                                    desc:     "The Membership POP Card combines GS ALL Points and the POP Card, earning points the moment you pay at GS25 and GS THE FRESH. It is a benefit-rich prepaid card that can be used for payments at over 600 online shopping sites, games, and more."/* 260604 번역 */,
+                                    note:     "* No transit function"/* 260604 번역 */,
+                                    noteWarn: true,
+                                    logos:    [{ src: imgPoint2, w: 44, h: 24 }],
+                                },
+                                {
+                                    img:   imgPopCard3,
+                                    imgMo: imgPopCard3Mo,
+                                    name:  "POP Credit/Debit Card",
+                                    desc:  "The POP Credit/Debit Card brings the benefits and features of POP card to your everyday spending.",
+                                    logos: [],
+                                },
+                            ],
+                        },
+                        {
+                            label:          "Gift\nCard"/* 260604 번역 */,
+                            hero:           imgHero6,
+                            heroAlt:        "",
+                            title:          "Gift Cards",
+                            desc:           "GS25 offers gift cards that can be reloaded and used at any location nationwide. Choose from a wide variety of gift cards for the cherished friends, family, and loved ones in your life. (Note: reloading and use may not be available at select stores.)",
+                            brandTitle: "Featured POSA Gift Card Brands",
+                            brands: [
+                                { img: imgGiftCard1, name: "Google Play" },
+                                { img: imgGiftCard2, name: "KT Wi-Fi" },
+                                { img: imgGiftCard3, name: "TeenCash" },
+                                { img: imgGiftCard4, name: "EggMoney" },
+                                { img: imgGiftCard5, name: "T-Data Coupon" },
+                                { img: imgGiftCard6, name: "HappyMoney" },
+                                { img: imgGiftCard1, name: "Culture Gift Voucher"/* 260604 번역 */ },
+                                { img: imgGiftCard2, name: "Smart Culture Gift Certificate"/* 260604 번역 */ },
+                                { img: imgGiftCard3, name: "Book & Culture Gift Voucher"/* 260604 번역 */ },
+                                { img: imgGiftCard4, name: "Nexon Cash"/* 260604 번역 */ },
+                                { img: imgGiftCard5, name: "NCSoft" },
+                                { img: imgGiftCard6, name: "Hangame" },
+                                { img: imgGiftCard1, name: "Cultureland"/* 260604 번역 */ },
+                                { img: imgGiftCard2, name: "Funny Card"/* 260604 번역 */ },
+                                { img: imgGiftCard3, name: "Burger King"/* 260604 번역 */ },
+                                { img: imgGiftCard4, name: "CGV" },
+                                { img: imgGiftCard5, name: "Starbucks"/* 260604 번역 */ },
+                                { img: imgGiftCard6, name: "Olleh WiFi"/* 260604 번역 */ },
+                            ],
+                            purchaseTitle: "How to Purchase POSA Gift Card",
+                            purchaseNote:  "As usage instructions vary by gift card, please refer to the instructions on the back of the card and card carrier. For further assistance, please contact the customer service number printed on your card.",
+                            purchaseImg:   imgGiftPurchase,
+                            purchaseSteps: [
+                                { num: "01", title: "Visit a Retailer",    desc: "Visit your nearest GS25!" },
+                                { num: "02", title: "Select a Gift Card", desc: "Select a gift card from the brand you want."/* 260604 번역 */ },
+                                { num: "03", title: "View Usage Instructions"/* 260604 번역 */,   desc: "Please read the instructions on the back of your card carefully before use." },
+                                { num: "04", title: "Payment",           desc: "Once payment is completed at the checkout, your card will be activated and ready to use." },
+                            ],
+                            usageTitle:   "How to Use POSA Gift Card",
+                            usageDesc:
+                                'As usage instructions vary by gift card, please refer to the instructions on the back of the card and card carrier. For further assistance, please contact the customer service number printed on your card.',
+                            onlineLabel:  "How to Use Online",
+                            onlineSteps: [
+                                { step: "Step 1", title: "Site access and login"/* 260604 번역 */ },
+                                { step: "Step 2", title: "Cash Reload" },
+                                { step: "Step 3", title: "Select Payment Method" },
+                                { step: "Step 4", title: "Select Payment Amount" },
+                                { step: "Step 5", title: "Enter the PIN" },
+                            ],
+                            offlineLabel: "How to Use In-Store",
+                            offlineSteps: [
+                                { step: "Step 1", title: "Visit a Store" },
+                                { step: "Step 2", title: "Select Your Items" },
+                                { step: "Step 3", title: "Present Your Gift Card" },
+                                { step: "Step 4", title: "Payment Complete" },
+                            ],
+                            advantageTitle: "Advantages of POSA Gift Card",
+                            advantages: [
+                                {
+                                    num:   "01",
+                                    title: "Along with your credit card,\nFits right in your wallet!"/* 260604 번역 */,
+                                    desc:  "Its credit card-sized design makes it easy to store in your wallet, and since it must be activated at the point of sale before use, it reduces the management burden on retailers.",
+                                },
+                                {
+                                    num:   "02",
+                                    title: "Offering a wide range of brands\nonline and offline"/* 260604 번역 */,
+                                    desc:  "With a wide range of brands across dining, gaming, leisure, movies, coffee, and books, both in-store and online, you can find the perfect gift for anyone.",
+                                },
+                                {
+                                    num:   "03",
+                                    title: "Your choice, for those who know value\nA premium-design gift card"/* 260604 번역 */,
+                                    desc:  "Unlike cash or conventional gift vouchers, its premium design makes the gift and the giver feel truly special.",
+                                },
+                                {
+                                    num:   "04",
+                                    title: "In-Store Pickup Service\nConvenient Shopping"/* 260604 번역 */,
+                                    desc:  "As we expand to large supermarkets, major bookstores, convenience stores, and well-known franchise brands across Korea, you'll always be able to find one close by.",
+                                },
+                            ],
+                        },
+                        {
+                            label:          "USIM\nplan"/* 260604 번역 */,
+                            hero:           null,
+                            heroAlt:        "",
+                            title:          "SIM Card Plans",
+                            desc:           "A groundbreaking low-cost mobile plan brought to you by U+ Budget Mobile and GS25, with SIM cards available at GS25 stores and online.",
+                            advantageTitle: "Advantages of GS25 Plans",
+                            advantages: [
+                                { num: "01", title: "An easy-to-sign-up plan"/* 260604 번역 */, desc: "Available at your nearest GS25 and sign up easily on our dedicated website" },
+                                { num: "02", title: "The lowest prices in Korea"/* 260604 번역 */,          desc: "Korea's most affordable plan: unlimited data, no limits!" },
+                                { num: "03", title: "ZERO contract terms / cancellation fees"/* 260604 번역 */,    desc: "Keep your number and phone. No contracts, no cancellation fees." },
+                            ],
+                            phoneTitle: "Compatible Devices",
+                            phones: [
+                                { term: "LG U+ Mobile Phone"/* 260604 번역 */,    desc: "• LG U+ phones: All LTE phones originally activated on LG U+" },
+                                { term: "SKT/KT Mobile Phone"/* 260604 번역 */,  desc: "• SKT/KT phones: LTE phones released after August 2014 (Galaxy Note 4, AKA, and later)" },
+                                { term: "Foreign-made phones"/* 260604 번역 */,      desc: "Phones released after the iPhone 6, as well as other models supporting the 850 (Band 5), 2100 (Band 1), and 2600 (Band 7) frequencies. Frequencies (LTE bands) can be verified through the manufacturer."/* 260604 번역 */ },
+                            ],
+                            purchaseTitle: "How to Purchase and Activate a SIM Card at GS25",
+                            purchaseSteps: [
+                                { step: "Step 1", title: "Purchase your SIM card at a GS25 store" },
+                                { step: "Step 2", title: "Visit the dedicated sign-up website <br />for this GS25 plan" },
+                                { step: "Step 3", title: "Register your SIM serial number <br />and apply for activation (or call to activate)" },
+                                { step: "Step 4", title: "Once your Happy Call (confirmation call from the provider) and activation are complete, insert the SIM into your phone and you're all set!" },
+                            ],
+                            benefitTitle: "GS25 Plan Benefits",
+                            benefitCards: [
+                                {
+                                    img:   imgRateBenefit1,
+                                    imgAlt: "",
+                                    title: "Get more value on your phone bill!",
+                                    desc:  "Available at your nearest GS25 and sign up easily on our dedicated website",
+                                    items: ["No sign-up fee", "Maximum discount on phone bills", "No contract, no cancellation fees"],
+                                },
+                                {
+                                    img:   imgRateBenefit2,
+                                    imgAlt: "",
+                                    title: "4 add-on services included for free",
+                                    desc:  "Available at your nearest GS25 and sign up easily on our dedicated website",
+                                    items: ["Internet access via U+ Zone Wi-Fi", "U+Box<br />Store your files<br />in the cloud", "Manner Call<br />Get notified of <br />missed calls by text", "mVOIP<br />VoiceTalk<br />Free voice calls"],
+                                },
+                            ],
+                            introTitle: "GS25 Mobile Plan Overview",
+                            planTable: {
+                                productName: "Plan Name",
+                                provision: "Data Allowance",
+                                data: "Data",
+                                voice: "Negative",
+                                sms: "SMS",
+                                normalPrice: "Standard Fee",
+                                promoDiscount: "Promotional Discount",
+                                monthlyFee: "Monthly Base Fee (with affiliated card)",
+                                competitor: "Comparable Plans from Other Providers",
+                            },
+                            plans: [
+                                {
+                                    name:         "GS25 (15GB+/100 min)",
+                                    data:         "15GB (continues at 3Mbps after data is used up)",
+                                    voice:        "100 min",
+                                    sms:          "100 SMS",
+                                    normalPrice:  "KRW 47,300",
+                                    discount:     "KRW 19,800",
+                                    monthly:      "KRW 27,500 (KRW 12,500)",
+                                    monthlyDc:    "KRW 12,500",
+                                    competitor:   "KRW 65,890",
+                                },
+                                {
+                                    name:         "GS25 (10GB/100 min)",
+                                    data:         "10GB",
+                                    voice:        "100 min",
+                                    sms:          "100 SMS",
+                                    normalPrice:  "KRW 41,800",
+                                    discount:     "KRW 20,900",
+                                    monthly:      "KRW 20,900",
+                                    monthlyDc:    "KRW 20,900",
+                                    competitor:   "KRW 45,650",
+                                },
+                                {
+                                    name:         "GS25 (6GB/100 min)",
+                                    data:         "6GB",
+                                    voice:        "100 min",
+                                    sms:          "100 SMS",
+                                    normalPrice:  "KRW 30,000",
+                                    discount:     "KRW 12,500",
+                                    monthly:      "KRW 27,500 (KRW 12,500)",
+                                    monthlyDc:    "KRW 27,500 (KRW 12,500)",
+                                    competitor:   "KRW 41,250",
+                                },
+                                {
+                                    name:         "GS25 (3GB/150 min)",
+                                    data:         "3GB",
+                                    voice:        "150 min",
+                                    sms:          "100 SMS",
+                                    normalPrice:  "KRW 20,900",
+                                    discount:     "KRW 12,100",
+                                    monthly:      "KRW 12,100",
+                                    monthlyDc:    "0 KRW"/* 260604 번역 */,
+                                    competitor:   "KRW 41,800",
+                                },
+                            ],
+                        },
+                        {
+                            label:          "Hi-Pass Card/Terminal",
+                            hero:           null,
+                            heroAlt:        "",
+                            title:          "Hi-Pass Service",
+                            desc:           "Purchase or recharge your Hi-Pass card at GS25, 24 hours a day.",
+                            hipassStepTitle:    "Hi-Pass Card (Self-Service Auto-Reload)",
+                            hipassSteps: [
+                                {
+                                    step:    "Step 1",
+                                    title:   "Purchase a Self-Service Auto-Reload Card",
+                                    bullets: [
+                                        "- Purchase Hi-Pass card at your nearest GS25",
+                                        "- Card purchase price: KRW 5,000",
+                                    ],
+                                },
+                                {
+                                    step:    "Step 2",
+                                    title:   "Register Your Card and Payment Details",
+                                    bullets: [
+                                        "Register your card number and payment details on the website",
+                                        "- Card is ready to use 24 hours after registration",
+                                    ],
+                                },
+                                {
+                                    step:    "Step 3",
+                                    title:   "How to Use Your Hi-Pass Card",
+                                    bullets: [
+                                        "Insert into your Hi-Pass terminal to use",
+                                        "Automatically recharged via the registered payment method"/* 260604 번역 */,
+                                    ],
+                                },
+                                
+                            ],
+                            hipassChargeTitle: "Hi-Pass Card Reload",
+                            hipassChargeDesc: "All cards issued by Hi Plus Card can be reloaded (cards marked 'Korea Expressway Corporation' or 'EX' are not eligible)",
+                            hipassTerminalTitle: "Hi-Pass Terminal Sales",
+                            hipassTerminalDesc: "The 'GPASS' terminal, certified by Korea Expressway Corporation and ranked No. 1 in the Korean Standard Quality Excellence Index for two consecutive years",
+                            hipassTerminalImg:    imgHipassTerminal,
+                            hipassTerminalImgAlt: "Hi-Pass terminal (GPASS) image"/* 260604 번역 */,
+                        },
+                        {
+                            label:   "Unpaid Expressway Toll Payment",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "Expressway Unpaid Toll Inquiry and Payment Service",
+                            desc:    "The first service among Korean convenience stores to offer real-time inquiry and payment of unpaid expressway tolls.",
+                            serviceTitle: "Service Benefits",
+                            serviceAdvantages: [
+                                {
+                                    num:   "01",
+                                    title: "• Pay conveniently at any GS25 nationwide using your vehicle registration number only",
+                                    desc:  "• Service launched: August 23, 2019",
+                                },
+                                {
+                                    num:   "02",
+                                    title: "Unpaid Tolls<br /> Real-time payment"/* 260604 번역 */,
+                                    desc:  "• Real-time unpaid toll payment (corporate vehicles to be supported at a later date)",
+                                },
+                                {
+                                    num:   "03",
+                                    title: "• Accepts cash and credit card payments",
+                                    desc:  "Pay by cash or credit card, whichever is more convenient"/* 260604 번역 */,
+                                },
+                            ],
+                            unpaidTitle: "How to Pay Your Unpaid Expressway Tolls",
+                            unpaidSteps: [
+                                { step: "Step 1", title: "Ask a GS25 staff member to process your payment",
+                                },
+                                { step: "Step 2", title: "Enter your vehicle registration number" },
+                                { step: "Step 3", title: "Consent to personal data sharing" },
+                                { step: "Step 4", title: "Enter your date of birth" },
+                                { step: "Step 5", title: "Pay (cash or credit card)" },
+                            ],
+                        },
+                        {
+                            label:   "Online Shopping In-Store Payment",
+                            hero:    null,
+                            heroAlt: "",
+                            title:   "Online Shopping In-Store Payment",
+                            desc:    "Select 'Convenience Store Payment' when shopping online (shopping, gaming, airlines, and more), receive a payment number or barcode via text, and pay in cash at GS25.",
+                            serviceTitle: "Advantages of Convenience Store Payment",
+                            serviceAdvantages: [
+                                {
+                                    num:   "01",
+                                    title: "Accessibility",
+                                    desc:  `Pay 24 hours a day at a neighborhood convenience store, which is closer and more plentiful than banks<br /><span class=\"txt_point\">Bill payment service available at all GS25 stores nationwide</span><br />(Real-time deposit confirmation, in-person transaction)`/* 260604 번역 */,
+                                },
+                                {
+                                    num:   "02",
+                                    title: "Cost-Effectiveness",
+                                    desc:  "No separate fee charged to customers<br />No banking fees for account transfers or direct deposits"/* 260604 번역 */,
+                                },
+                                {
+                                    num:   "03",
+                                    title: "Convenience",
+                                    desc:  `No need to visit a bank or have a credit card—order at an online store and complete payment (deposit) at a convenience store<br /><span class=\"txt_point\">Change can be received directly at the store</span>`/* 260604 번역 */,
+                                },
+                                {
+                                    num:   "04",
+                                    title: "Security",
+                                    desc:  "No need for complicated digital certificates or security cards, and it prevents exposure of payment information<br />Electronic financial fraud from in-person transactions (smishing)<br />Prevention"/* 260604 번역 */,
+                                },
+                            ],
+                            mallPaymentTitle: "How to Use Convenience Store Payment",
+                            mallPaymentSteps: [
+                                { step: "Step 1", title: "Purchase products or services at an online mall",
+                                },
+                                { step: "Step 2", title: "Select 'Convenience Store Payment'" },
+                                { step: "Step 3", title: "Pay at your nearest GS25, any time of day" },
+                                { step: "Step 4", title: "Product delivered to your home (cash reload)" },
+                            ],
+                            mallSiteTitle: "Available online and mobile sites"/* 260604 번역 */,
+                            mallSiteNote:  "* To be continuously expanded going forward"/* 260604 번역 */,
+                            mallSiteItems: [
+                                { name: "11st",                  img: imgServiceDesc01 },
+                                { name: "StyleShare",              img: imgServiceDesc02 },
+                                { name: "NCSoft",                img: imgServiceDesc03 },
+                                { name: "PowerCall Air & Shopping",        img: imgServiceDesc04 },
+                                { name: "T'way Air",              img: imgServiceDesc05 },
+                                { name: "Unicomz (LG U+ Budget Provider)", img: imgServiceDesc06 },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    hero:     null,
+                    heroAlt:  "",
+                    title:    "Delivery & Pickup",
+                    subtitle: "",
+                    sections: [],
+                    serviceTabs: [
+                        {
+                            label:   "Domestic Delivery",
+                            hero:  imgHero7,
+                            heroAlt: "",
+                            title:   "Domestic Delivery Service",
+                            desc:    "Delivery services are available 365 days a year, 24 hours a day at your nearest GS25.",
+                            notes: [
+                                {
+                                    text: `We provide reasonable shipping rates based on weight measurement.<br class=\"m_br\" />(From 3,400 KRW)`/* 260604 번역 */,
+                                    sub:  "* Effective April 1, 2025"/* 260604 번역 */,
+                                },
+                                {
+                                    text: "* SMS updates provided at every stage of delivery, from drop-off to completion.",
+                                },
+                                {
+                                    text: "* GS Postbox members can participate in exclusive events and enjoy tier-based rewards based on usage.",
+                                },
+                            ],
+                            stepTitle: "How to Use Domestic Delivery",
+                            steps: [
+                                { step: "Step 1", title: "Reserve your drop-off via the website or mobile app" },
+                                { step: "Step 2", title: "Package your item and visit your nearest GS25" },
+                                { step: "Step 3", title: "Drop off at the self-service kiosk (weight measured automatically)" },
+                                { step: "Step 4", title: "Pay at the counter and store your package in the locker" },
+                            ],
+                            cautionTitle: "Domestic Delivery Precautions",
+                            cautionItems: [
+                                {
+                                    // icon: imgCautionSize,
+                                    icon:    null,
+                                    iconAlt: "Size icon"/* 260604 번역 */,
+                                    title:   "Size"/* 260604 번역 */,
+                                    desc:    "Total dimensions (L + W + H) within 160 cm<br />No single side exceeding 1 m",
+                                },
+                                {
+                                    // icon: imgCautionWeight,
+                                    icon:    null,
+                                    iconAlt: "Weight icon"/* 260604 번역 */,
+                                    title:   "Weight"/* 260604 번역 */,
+                                    desc:    "Up to 20 kg"/* 260604 번역 */,
+                                },
+                                {
+                                    // icon: imgCautionPrice,
+                                    icon:    null,
+                                    iconAlt: "Item Value Icon"/* 260604 번역 */,
+                                    title:   "Item Value"/* 260604 번역 */,
+                                    desc:    "Up to 1 million KRW"/* 260604 번역 */,
+                                },
+                            ],
+                            priceTitle: "Domestic Delivery Rates",
+                            priceItems: [
+                                {
+                                    text: "Starting from a minimum of 3,400 won, with rates applied based on weight and distance"/* 260604 번역 */,
+                                    subs: [
+                                        "Varies depending on same region/other region/Jeju region"/* 260604 번역 */,
+                                        "(For letters and documents, rates are calculated in accordance with postal law regulations)",
+                                    ],
+                                },
+                                { text: "- Cash-on-delivery (COD) surcharge: KRW 300" },
+                                { text: "- Island and remote area delivery surcharge: KRW 4,000" },
+                                { text: "- High-value items (over KRW 500,000) surcharge: KRW 2,500" },
+                            ],
+                            periodTitle: "Domestic Delivery Usage Period"/* 260604 번역 */,
+                            periodItems: [
+                                { text: "- Drop off by 5 PM on weekdays (3 PM for select city, county, and district areas and parts of Gyeonggi) or by 12 PM on Saturdays for next-day delivery" },
+                                { text: "- Drop-off only on Sundays and public holidays" },
+                                { text: "- Cut-off times may vary by store" },
+                            ],
+                        },
+                        {
+                            label: "Half-Price Delivery",
+                            hero: imgHero8,
+                            heroAlt: "",
+                            title: "Half-Price Delivery Service",
+                            desc: "First in the convenience store industry! Korea's only public holiday delivery service! Send from GS25, receive at GS25 — at the lowest price.",
+                            notes: [
+                                {
+                                    text: "* A convenience store first! Drop off and pick up at any convenience store.",
+                                },
+                                {
+                                    text: "* Rates based on weight only, regardless of distance.",
+                                },
+                                {
+                                    text: "* SMS updates provided at every stage of delivery, from drop-off to completion.",
+                                },
+                            ],
+                            stepTitle: "How to Use Half-Price Delivery",
+                            steps: [
+                                { step: "Step 1", title: "Reserve your drop-off via the website or mobile app", bullets: ["Select and enter a pickup store"/* 260604 번역 */] },
+                                { step: "Step 2", title: "Package your item and visit your nearest GS25" },
+                                { step: "Step 3", title: "Drop off at the self-service kiosk (weight measured automatically)" }, 
+                                { step: "Step 4", title: "After payment at counter, hand over to staff" },
+                            ],
+                            priceTable: {
+                                title: "Half-Price Delivery Rates",
+                                desc:  "Prepayment only",
+                                note:  "Planned for continued expansion in the future"/* 260604 번역 */,
+                                columns: [
+                                    { label: "Category" },
+                                    { label: "Inland↔Inland / Jeju↔Jeju", labelMo: "Inland↔Inland / Jeju↔Jeju" },
+                                    { label: "Jeju↔Inland / Inland↔Island", labelMo: "Jeju↔Inland / Inland↔Island" },
+                                ],
+                                colWidths: ["18.87%", "40.56%", "40.56%"],
+                                rows: [
+                                    {
+                                        cells: [
+                                            "Rates",
+                                            "~500g: KRW 1,900 / ~1kg: KRW 2,300 / ~5kg: KRW 2,700",
+                                            "~500g: KRW 3,600 / ~1kg: KRW 4,000 / ~5kg: KRW 4,400",
+                                        ],
+                                    },
+                                ],
+                            },
+                            infoTable: {
+                                title: "Half-Price Delivery Guide",
+                                colWidths: ["136px", "auto"],
+                                rows: [
+                                    { head: "How to Reserve",    text: "When making a Half-Price Delivery reservation, select a GS25 store as the destination" },
+                                    { head: "Service Area", text: "GS25 ↔ GS25" },
+                                    { head: "How to Pick Up",    text: "Present the QR code received via KakaoTalk to store staff" },
+                                    { head: "Delivery Time",
+                                        items: [
+                                            "Mainland-to-mainland, Jeju-to-Jeju: within 4 days including the day of receipt; within the same region, 2-3 days"/* 260604 번역 */,
+                                            "Jeju ↔ mainland: within 5–7 days including the receipt date"/* 260604 번역 */,
+                                        ],
+                                        note: [
+                                            "* Delivery available on weekends/holidays"/* 260604 번역 */,
+                                            "* Half-Price Delivery between the mainland and Jeju is completed within 7 days, including the day of receipt."/* 260604 번역 */,
+                                            "* Delivery times may be extended if ferry operations are suspended due to weather conditions or if the ferry schedule changes."/* 260604 번역 */,
+                                        ],
+                                    },
+                                ],
+                            },
+                            cautionTitle: "Half-Price Delivery Precautions",
+                            cautionItems: [
+                                { icon: null, iconAlt: "Closing Time Icon"/* 260604 번역 */,   title: "Closing Time"/* 260604 번역 */,          desc: "Same-day pickup cut-off time<br />9:00 AM" },
+                                { icon: null, iconAlt: "Specification Icon"/* 260604 번역 */,       title: "Oversized items cannot be collected", desc: "Sum of three sides within 80 cm"/* 260604 번역 */ },
+                                { icon: null, iconAlt: "Weight icon"/* 260604 번역 */,       title: "Weight"/* 260604 번역 */,              desc: "Up to 5 kg"/* 260604 번역 */ },
+                                { icon: null, iconAlt: "Item Value Icon"/* 260604 번역 */,   title: "Item Value"/* 260604 번역 */,          desc: "Up to 500,000 KRW"/* 260604 번역 */ },
+                            ],
+                        },
+                        {
+                            label: "International Delivery",
+                            hero:    imgHero9,
+                            heroAlt: "",
+                            title: "International Delivery Service",
+                            desc: "Drop off your international deliveries at your nearest GS25, 24 hours a day, 365 days a year. (SF Express, EMS, DHL)",
+                            notes: [
+                                {
+                                    text: "* International delivery reservations and drop-offs are available 24 hours a day at any GS25.",
+                                },
+                                {
+                                    text: "* Choose your courier provider (SF Express, EMS, or DHL) when making your reservation.",
+                                },
+                                {
+                                    text: "* SMS updates provided at every stage of delivery, from drop-off to completion.",
+                                },
+                            ],
+                            noticeTitle:"How to Use International Delivery",
+                            noticeItems: [
+                                { step: "Step 1", title: "Reserve your drop-off via the website or mobile app", bullets: ["Member, written in English"/* 260604 번역 */] },
+                                { step: "Step 2", title: "Package your item and visit your nearest GS25", },
+                                { step: "Step 3", title: "Drop off at the self-service kiosk (weight measured automatically)"},
+                                { step: "Step 4", title: "Pay at the counter and store your package in the locker"},
+                            ],
+                            chargeTitle: "International Delivery Rates and Available Destinations",
+                            chargeItems: [
+                                { text: "Rates and available destinations vary by courier provider. Check rates when making a reservation via the website or mobile app." },
+                                { text: "Prepayment only" },
+                                { text: "- Cut-off times may vary by store" },
+                            ],
+                            methodTitle: "International Delivery Process",
+                            methodItems: [
+                                { text: "- Drop off by 5 PM on weekdays (3 PM for select city, county, and district areas and parts of Gyeonggi) or by 12 PM on Saturdays. Packages are collected by CJ Logistics and handed off to your chosen courier provider the next day for overseas dispatch." },
+                                { text: "- Drop-off only on Sundays and public holidays" },
+                                { text: "- Cut-off times may vary by store" },
+                            ],
+                        },
+                        {
+                            label: "Delivery & Pickup", //26.05.27 Edit 이종환
+                            hero: imgHero10,
+                            heroMo: imgHero10Mo, //26.06.02 Edit 정다희
+                            heroAlt: "",
+                            title: "Pick-up Service",
+                            desc: "After ordering products from an online shopping mall, pick them up at your nearest GS25.",
+                            notes: [
+                                {
+                                    text: "* Pick up at your chosen store at your own convenience, with no risk of missed delivery.",
+                                },
+                                {
+                                    text: "* Receive an SMS notification when your item is ready for pickup.",
+                                },
+                            ],
+                            pickupTitle: "How to use pickup"/* 260604 번역 */,
+                            pickupItems: [
+                                { step: "Step 1", title: "Select 'Convenience Store Pick-up' as your delivery method", bullets: ["Member, written in English"/* 260604 번역 */] },
+                                { step: "Step 2", title: "Select your nearest GS25"},
+                                { step: "Step 3", title: "Receive your arrival SMS and visit your GS25 to collect"},
+                            ],
+                            shoppingTitle: "Pick-up Service Partner Malls",
+                            shoppingItems: [ { text: "View partner malls at www.cvsnet.co.kr" } ],
+                            partnerBtnText: "View Pick-up Partner Malls >",
+                            partnerBtnText_link: "https://www.cvsnet.co.kr"
+                        },
+                        {
+                            label:   "Online Shopping Payment",
+                            hero:    imgHero11,
+                            heroMo: imgHero11Mo, //26.06.02 Edit 정다희
+                            heroAlt: "",
+                            title:   "Online Shopping Service",
+                            desc:    "A convenient service for home shopping returns, open marketplace purchases, and online shopping mall transactions.",
+                            notes: [
+                                { text: "*Available 365 days a year, 24 hours a day. Simply visit your nearest GS25 at a time that suits you." },
+                            ],
+                            pickupTitle: "How to Use",
+                            pickupItems: [
+                                { step: "Step 1", title: "Obtain an approval number from the partner company and visit your nearest GS25", bullets: ["Member, written in English"/* 260604 번역 */]},
+                                { step: "Step 2", title: "Enter the approval number at the self-service kiosk" },
+                                { step: "Step 3", title: "Print your shipping label and submit" },
+                            ],
+                            shoppingTitle: "Available Partner Companies",
+                            shoppingItems: [ { text: "View partner malls at www.cvsnet.co.kr" } ],
+                            partnerBtnText: "View All Partner Companies >",
+                            partnerBtnText_link: "https://www.cvsnet.co.kr"
+                        },
+                    ],
+                },
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "Bill and Tax Payment Service",
+                    desc: "If your giro bill has a convenience store payment barcode, this service lets you conveniently pay taxes, four major insurance premiums, and utility bills at GS25 convenience stores 24 hours a day, 365 days a year."/* 260604 번역 */,
+                    sections: [],
+                    panelExtra: {
+                        desc: "If your Giro (billing notice) includes a convenience store payment barcode, you can pay taxes, four major insurance premiums, and utility bills at any GS25, 24 hours a day, 365 days a year. Mobile payments via smartphone are also available in addition to standard Giro payments, with cash, bank transfer, and credit card accepted depending on the type of bill.",
+                    },
+                    taxTitle: "Payable Taxes and Utility Bills",
+                    taxGroups: [
+                        {
+                            subtitle: "Taxes",
+                            isList: true,
+                            items: [
+                                "National taxes (income tax, corporate tax, VAT, inheritance tax, gift tax, individual consumption tax, comprehensive real estate tax)",
+                                "Seoul and Busan local taxes (acquisition tax, registration tax, property tax, vehicle tax, resident tax, water and sewage charges, bus-only lane violation fines, etc.)",
+                                "Other local taxes (Seongnam, Anyang, Yongin, Ansan, Goyang, Uijeongbu, Gwacheon, Yangju, Dongducheon, Paju, Chuncheon, Jecheon, Boryeong, and Eumseong County — acquisition tax, registration tax, property tax, resident tax, vehicle tax, etc.)",
+                            ],
+                        },
+                        {
+                            subtitle: "Four Major Insurance Premiums",
+                            items: [
+                                "National Health Insurance, National Pension, Employment Insurance, and Industrial Accident Compensation Insurance (four major integrated social insurance premiums)",
+                            ],
+                        },
+                        {
+                            subtitle: "Utility Bills",
+                            items: [
+                                "Electricity bills, city gas charges (Seoul Gas, Samchully, Seorabeol, Incheon Gas, Gyeongnam Gas, Kyungdong City Gas), telecommunications charges (KT, LG U+, SKT), cable TV charges (HCN, T-broad, C&M, CMB, SkyLife, Areum Broadcasting, Chungbuk Broadcasting, Nam-Incheon Broadcasting, Geumgang Broadcasting, Pureun Broadcasting, etc.), newspaper bills (Chosun Ilbo, Maeil Business Newspaper), Korea Expressway Corporation fines, etc.",
+                            ],
+                        },
+                    ],
+                },
+                {
+                    hero: null,
+                    heroAlt: "",
+                    title: "Gift Voucher Sales",
+                    subtitle: "Gift Card Sales",
+                    desc: "Culture Gift Cards, Kumkang Shoe gift cards, GS Caltex gift cards, and more are available.",
+                    sections: [],
+                    voucherTitle: "Gift certificate types"/* 260604 번역 */,
+                    voucherItems: [
+                        {
+                            img: imgGiftCerti01,
+                            name: "Culture Gift Voucher"/* 260604 번역 */,
+                            tags: [
+                                { text: "5,000 KRW voucher"/* 260604 번역 */, type: "blue" },
+                                { text: "10,000 KRW voucher"/* 260604 번역 */, type: "green" },
+                            ],
+                            desc: "Redeemable for books and music, movie tickets, dining (select locations), and online services (gaming and portals)",
+                        },
+                        {
+                            img: imgGiftCerti02,
+                            name: "Kumkang Shoes Gift Voucher"/* 260604 번역 */,
+                            tags: [
+                                { text: "50,000 KRW voucher"/* 260604 번역 */, type: "orange" },
+                                { text: "100,000 KRW voucher"/* 260604 번역 */, type: "orange" },
+                            ],
+                            desc: "A great-value gift card accepted at over 4,000 stores across 1,300+ cities nationwide (KRW 50,000 and KRW 100,000 denominations), redeemable at Kumkang, Buffalo, PGA, LPGA, Kumkang Handbag, and more",
+                        },
+                        {
+                            img: imgGiftCerti03,
+                            name: "GS Caltex Gift Voucher"/* 260604 번역 */,
+                            tags: [
+                                { text: "10,000 KRW voucher"/* 260604 번역 */, type: "green" },
+                                { text: "50,000 KRW voucher"/* 260604 번역 */, type: "orange" },
+                                { text: "100,000 KRW voucher"/* 260604 번역 */, type: "orange" },
+                            ],
+                            desc: "Redeemable at gas stations, department stores, restaurants, supermarkets, hotels, travel agencies, and more",
+                        },
+                    ],
+                },
+            ],
+        },
+        winwin: {
+            tabs: [
+                {
+                    serviceTabs: [
+                        { 
+                            label: "Store Operations Support Benefits",
+                            title: "Store Operations Support Benefits",
+                            notes: [
+                                { text: "※ The above benefits and programs are subject to change, discontinuation, or addition without prior notice." },
+                            ],
+                            items: [
+                                {
+                                    num: "01",
+                                    title: "Incentive program"/* 260604 번역 */,
+                                    desc: "An incentive program for store owners committed to improving store competitiveness through sales growth, new product introductions, and more",
+                                },
+                                {
+                                    num: "02",
+                                    title: "Outstanding Counter FF Store Support",
+                                    desc: "Driving Counter FF Sales Growth",
+                                    bullets: ["CHICKEN25 operation support program"/* 260604 번역 */, "CAFE25 operation support program"/* 260604 번역 */, "Filter support for stores that have obtained Food Safety Store certification"/* 260604 번역 */],
+                                },
+                                {
+                                    num: "03",
+                                    title: "Recruitment Platform Support",
+                                    desc: "Staff Recruitment Support for Store Managers",
+                                    bullets: ["Albamon Support", "Partner Platform Support"],
+                                },
+                                {
+                                    num: "04",
+                                    title: "Win-Win Support Insurance",
+                                    desc: "An industry-leading comprehensive insurance support program",
+                                    bullets: ["Personal Injury and Embezzlement Insurance", "Delivery Theft and Cash Theft Insurance"],
+                                },
+                                {
+                                    num: "05",
+                                    title: "Franchisee Win-Win Loan",
+                                    desc: "Preferential interest rate available for credit and collateral loans",
+                                    bullets: ["Woori Bank Partnership Loan", "Additional preferential interest rate available"],
+                                },
+                            ],
+                        },
+                        {
+                            label: "Long-Term and Outstanding Store Benefits",
+                            title: "Long-Term and Outstanding Store Benefits",
+                            notes: [
+                                { text: "※ The above benefits and programs are subject to change, discontinuation, or addition without prior notice." },
+                            ],
+                            items: [
+                                { num: "01", title: "10-Year Long-Term Operation Support Benefits"/* 260604 번역 */, desc: "Support for Owners Operating for 10 Years"/* 260604 번역 */,bullets: ["Commemorative Plaque", "Health Checkup"] },
+                                { num: "02", title: "20-Year Long-Term Operation Support Benefits"/* 260604 번역 */, desc: "Support for Owners Operating for 20 Years"/* 260604 번역 */, bullets: ["Commemorative Plaque", "Health Checkup", "Travel Gift Voucher"] },
+                                { num: "03", title: "30-Year Long-Term Operation Support Benefits"/* 260604 번역 */, desc: "Support for Owners Operating for 30 Years"/* 260604 번역 */, bullets: ["Commemorative Plaque", "Health Checkup", "Travel Gift Voucher","Store ceremonies and commemorative events"/* 260604 번역 */]},
+                                { num: "04", title: "Outstanding Store Owner Awards", desc: null, bullets: ["- Benefits for Outstanding Stores"] },
+                            ],
+                        },
+                        {
+                            label: "Store\ncommunication support"/* 260604 번역 */, //26.05.27 Edit 이종환
+                            title: "Store communication support"/* 260604 번역 */,
+                            notes: [
+                                { text: "※ The above benefits and programs are subject to change, discontinuation, or addition without prior notice." },
+                            ],
+                            items: [
+                                { num: "01", title: "Happy Call Center Operations (24/7)", desc: "24-Hour Communication Channel" , bullets: ["Facilities"/* 260604 번역 */, "IT systems"/* 260604 번역 */, "Suggestions", "Other Inquiries"]},
+                                { num: "02", title: "Free Legal Consultation Service", desc: "Free Legal Consultation with a Licensed Attorney", bullets: ["Civil and Criminal", "Family and Administrative"] },
+                                { num: "03", title: "Labor Consultation Hotline", desc: "Comprehensive labor consultation services available", bullets: ["Careers"/* 260604 번역 */,"Four Major Insurance Premiums","Overall Labor Relations"] },
+                            ],
+                        },
+                        {
+                            label: "Competency Development Support (Store Owners and Store Managers)",
+                            title: "Competency Development Support (Store Owners and Store Managers)",
+                            notes: [
+                                { text: "※ The above benefits and programs are subject to change, discontinuation, or addition without prior notice." },
+                            ],
+                            items: [
+                                { num: "01", title: "GS25 Chatbot Joy", desc: "A KakaoTalk chatbot service <br />for GS25 operations support" , bullets: ["24/7 response", "Inventory and logistics inquiry", "Store operations manual", "Mobile Happy Call registration"], link: "https://pf.kakao.com/_xmTxexcb?from=qr" },
+                                { num: "02", title: "Mobile Store Management", desc: "A communication app supporting store operations <br />between store owners and store managers", bullets: ["Exclusive app for store owners and store managers", "Service check time", "Expiration date management","Daily task management", "Notifications"] },
+                                { num: "03", title: "Owners' Open Academy"/* 260604 번역 */, desc: "Store Owner Professional Development", bullets: ["Hosting real-time live training twice a month"/* 260604 번역 */, "Replay videos provided"/* 260604 번역 */,"Practical, hands-on training content needed for store operations\n (labor, taxation, franchise settlement, promotion know-how, etc.)"/* 260604 번역 */] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F"},
+                                { num: "04", title: "GS Class"/* 260604 번역 */, desc: "A dedicated training site for store owners, available to learn anytime"/* 260604 번역 */, bullets: ["High-quality training content needed for store operations\n (manuals, operational know-how, lecture replays, etc.)"/* 260604 번역 */,"Online live training"/* 260604 번역 */,"Outstanding Store Lab"] },
+                                { num: "05", title: "Onboarding Training for New Store Owners", desc: null, bullets: ["- Operations Training (POS, Store Management, Systems)","- Service Training","- Online courses (GS Class)"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F" },
+                                { num: "06", title: "Store Manager Class", desc: "Staff Training Support", bullets: ["POS Training","Cleanliness Training","Customer Service Training"] , link: "http://hpimg.gsretail.com/images/gs25/winwin/web/store_manager_map.html" },
+                                { num: "07", title: "Benchmarking Training"/* 260604 번역 */, desc: "Store Owner Professional Development", bullets: ["On-site visit training for outstanding franchise stores"/* 260604 번역 */,"Specialized training content tailored to each outstanding franchise store"/* 260604 번역 */,"Sharing the know-how of outstanding store owners"/* 260604 번역 */] },
+                            ],
+                        },
+                        {
+                            label: "Social Contribution\nSupport"/* 260604 번역 */,
+                            title: "Community Contribution Support", 
+                            notes: [
+                                { text: "※ The above benefits and programs are subject to change, discontinuation, or addition without prior notice." },
+                            ],
+                            items: [
+                                { num: "01", title: "Mutual Growth & Sharing Platform Operations", desc: "Community-serving stores <br />for the socially vulnerable", bullets: ["Naeil Store, supporting the self-reliance of socially vulnerable groups"/* 260604 번역 */, "Senior Stores providing jobs for the elderly"/* 260604 번역 */, "Neulbom Store, supporting the employment and self-reliance of people with disabilities"/* 260604 번역 */] },
+                                // 26.05.27 Del 이종환 { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
+                                { num: "02", title: "GS Hero Award", desc: "Recognition and support for store owners and staff <br />who serve as community role models", bullets: ["Exemplary Award","Role Model Award","Community Spirit Award"] },
+                                { num: "03", title: "Fire Prevention: Fire Extinguisher Sharing", desc: "Fire prevention through fire extinguisher sharing <br />when fires break out near the store", bullets: ["Fire extinguisher sharing when a fire breaks out near the store", "Replacement support after use"] },
+                            ],
+                        },
+                        {
+                            label: "Store Owner Benefits and Welfare",
+                            title: "Store Owner Benefits and Welfare",
+                            notes: [
+                                { text: "※ The above benefits and programs are subject to change, discontinuation, or addition without prior notice." },
+                            ],
+                            items: [
+                                { num: "01", title: "Congratulations & Condolences Support", desc: "Congratulations & Condolences Allowances and Supplies", bullets:["- Congratulations & Condolences allowance", "- Store operation subsidy","- Funeral supplies", "- Maternity supplies","Provision of natural disaster relief funds"/* 260604 번역 */] },
+                                { num: "02", title: "Voluntary Leave for Holidays and Congratulations & Condolences", desc: "Voluntary leave available", bullets: ["- Holiday closure and reduced hours","- Congratulations & Condolences closure and reduced hours"] },
+                                { num: "03", title: "Store Owner Welfare Mall", desc: "Welfare mall exclusively for store owners", bullets: ["Competitive prices", "Exclusive products", "Special deals"] },
+                                { num: "04", title: "Comprehensive Health Checkup Discount", desc: "Discounted comprehensive health checkup <br />at affiliate health checkup centers", bullets: ["KMI Center","Affiliate Hospitals"] },
+                                { num: "05", title: "Angel Resort", desc: "Angel Resort member rates available", bullets: ["Hanwha Resort", "ELYSIAN Resort GANGCHON"] },
+                                { num: "06", title: "Exclusively for GS25 Store Owners", desc: "Angel Rental Car (Long-Term / Used Vehicles)<br />Exclusively for GS25 Store Owners", bullets: ["Affiliate rate quotes available", "Fast delivery across all vehicle types","Dedicated consultation channel"] },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    hero: imgHero11_1,
+                    heroAlt: "",
+                    title: "Partner Programs",
+                    desc: "GS25 has systems in place that allow owners to participate, such as gathering diverse opinions and reviewing and reflecting suggestions."/* 260604 번역 */,
+                    items: [
+                        {
+                            num: "01",
+                            title: "Store Owner Council",
+                            desc: "Holding regular meetings of regional store owners' councils"/* 260604 번역 */,
+                        },
+                        {
+                            num: "02",
+                            title: "Independent Dispute Resolution Committee",
+                            desc: "- In the event of a dispute between the franchisor and store owners, the chairperson (an external expert) and representatives from both parties work together to reach an independent resolution or mediation",
+                        },
+                        // 26.05.27 Del 이종환 {
+                        //     num: "03",
+                        //     title: "24시간 통합 콜센터 운영",
+                        //     desc: "점포 운영의 불편사항에 대한 접수<br />및 상담 창구 운영(24시간 운영)",
+                        // },
+                        {
+                            num: "03",
+                            title: "Store Owner Open Suggestion",
+                            desc: "By accepting various suggestions and ideas from store owners, GS Retail listens to real on-site voices and reflects improvements in store operations and headquarters policies.",
+                        },
+                    ],
+                },
+            ],
+        },
+        milbox: {
+            hero: imgHero12,
+            heroAlt: "",
+            title: "Meal Box/Snack Bar (Corporate Subscription Service) <a href='https://www.mealbox25.com/' target='_blank'>Website</a>"/* 260604 번역 */,
+            sections: [
+                {
+                    type: "feature",
+                    title: "What Is the GS25 Corporate and Group Regular Delivery Service?",
+                    desc: "A regular breakfast and snack delivery service for corporations and groups, powered by the unique strengths of GS25, Korea's leading convenience store.<br />If you have no in-house cafeteria or are considering introducing snack benefits, check out the services below."/* 260604 번역 */,
+                    items: [
+                        { title: "Trendy products"/* 260604 번역 */ },
+                        { title: "Affordable Prices" },
+                        { title: "Used by approximately 1,200 companies"/* 260604 번역 */ },
+                    ],
+                },
+                {
+                    type: "imgcard",
+                    title: "About the service"/* 260604 번역 */,
+                    items: [
+                        {
+                            img: require("@/assets/images/sub/gsrbr010101/img_mealbox.png"),
+                            name: "Meal Box 25",
+                            desc: "A regular meal delivery service for corporations and groups, provided by GS25. Featuring a fresh new lineup every day, from staple dishes to desserts and beverages. With HACCP certification and individual packaging, every meal is hygienic and delicious.",
+                            link: "https://www.mealbox25.com/mealbox25-introduce",
+                        },
+                        {
+                            img: require("@/assets/images/sub/gsrbr010101/img_snackbar.png"),
+                            name: "Snack bar"/* 260604 번역 */,
+                            desc: "A curated snack service that regularly delivers on-trend GS25 products to corporations and groups. Bring GS25 to your office and elevate your employee welfare benefits.",
+                        },
+                    ],
+                    advantages: {
+                        title: "Recommended for:",
+                        items: [
+                            { text: "Those who need a regular breakfast or snack service / Those looking for a cost-effective employee welfare benefit / Those without cafeteria infrastructure who need a regular meal supply" },
+                            { text: "When you need welfare services at a reasonable price"/* 260604 번역 */ },
+                            { text: "When you have no catering infrastructure and need a regular supply of convenient meals"/* 260604 번역 */ },
+                        ],
+                    },
+                },
+            ],
+        },
+        brand: {
+            visual: {
+                lines: [
+                    "The center of everyday life"/* 260604 번역 */,
+                    'At the Center of Daily Life, Where Your Day Begins – GS25',
+                ],
+                logoAlt: "GS25",
+            },
+            about: [
+                [
+                    'of a homegrown Korean brand <br class="m_br" />GS25, which upholds its pride,'/* 260604 번역 */,
+                    `of 'increasing the number of profitable franchise stores' <br class=\"m_br\" />the fundamental principles of the franchise business`/* 260604 번역 */,
+                    `As a result of upholding it without change, <br class="m_br" />Korea's leading company with the highest profitability for newly developed stores<br class="m_br" /> as a convenience store brand <br class="p_br" />has established itself.`/* 260604 번역 */,
+                ],
+                [
+                    "Ranked No. 1 as 'Korea's Most Admired Company' for 16 consecutive years,"/* 260604 번역 */,
+                    'No. 1 in the Korean Service Quality Index (KS-SQI) <br class="m_br" />from credible external organizations, including a total of 19 awards,'/* 260604 번역 */,
+                    "leading to these evaluation results."/* 260604 번역 */,
+                ],
+            ],
+            str: {
+                title: "GS25 is always by your side.",
+                storeFind: "Find a Store",
+                snsInstaAria: "Instagram"/* 260604 번역 */,
+                snsYtAria: "YouTube"/* 260604 번역 */,
+                items: [
+                    {
+                        title: "The industry's best<br />Achieving sales per store"/* 260604 번역 */,
+                        desc: 'By enhancing store competitiveness and providing customer-centric products and services, we achieve the highest revenue per store in the convenience store industry.',
+                    },
+                    {
+                        title: `GS25's distinctive<br class="p_br" /> Products and<br class="m_br" />Service provision`/* 260604 번역 */,
+                        desc: 'We deliver new value to customers through distinctive products and services, including high-quality fresh food items, our private brand YOUUS offering great quality at a reasonable price, and Our Neighborhood GS, the GS Retail exclusive app.',
+                    },
+                    {
+                        title: 'Through continuous communication with owners and<br class="m_br" />Through cooperation <br class="p_br" />A solid partnership'/* 260604 번역 */,
+                        desc: "To build a strong partnership between store owners and headquarters, we have introduced various communication channels and win-win growth programs. Industry-first initiatives such as the Refresh Vacation Support program and the GS25 20's Club continue to enhance store owner satisfaction and pride.",
+                    },
+                ],
+            },
+        },
+        common: {
+            selectPlaceholder: "Please select"/* 260604 번역 */,
+            trafficSelectAria: "Select Transit Usage Location"/* 260604 번역 */,
+            retailSelectAria: "Select a retail point of use"/* 260604 번역 */,
+            prevAria: "Previous"/* 260604 번역 */,
+            nextAria: "Next"/* 260604 번역 */,
+        },
+        backLabel: "← Back to Brand List",
     }
 };
 

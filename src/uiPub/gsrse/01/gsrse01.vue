@@ -709,6 +709,159 @@ export default {
                         { title: "GS리테일 협력업체 포털", url: "https://gs.escm21.net/escm21/home/index.jsp" }
                     ],
                     GsShopUrl: "https://withgs.gsshop.com/sug/suggest"
+                },
+                en: {
+                    MainTitle: "Business Inquiry",
+                    MainTabs: [{ item: "GS25/GS THE FRESH/Support Division"/* 260604 번역 */ }, { item: "GS SHOP" }],
+                    SubTabs: [{ item: "Notices"/* 260604 번역 */ }, { item: "Partnership Guide"/* 260604 번역 */ }, { item: "Frequently Asked Questions (FAQ)"/* 260604 번역 */ }, { item: "Consultation Application"/* 260604 번역 */ }],
+                    IntroTitle: "Apply for Partnership Consultation "/* 260604 번역 */,
+                    IntroDesc: "Apply for a consultation on partnership with GS25/GS THE FRESH/Support Division and check the results."/* 260604 번역 */,
+                    GuideTitle: "Partnership Consultation Guide"/* 260604 번역 */,
+                    StepList: [{ title: "New Company Registration"/* 260604 번역 */, desc: "GS THE FRESH Franchise Contract<br/>Conditions guide and procedure introduction"/* 260604 번역 */ }, { title: "Apply for Partnership Consultation"/* 260604 번역 */, desc: "Receive the information disclosure document from the franchise headquarters<br/>GS THE FRESH Business Feasibility Review"/* 260604 번역 */ }, { title: "Consultation with the Responsible MD"/* 260604 번역 */, desc: "Applications can be submitted any time, Monday through Friday<br/>(Postal submission available)"/* 260604 번역 */ }, { title: "Proceed with Partnership Contract"/* 260604 번역 */, desc: "Conducting an interview based on the application,<br/>Conducted Business Feasibility Review"/* 260604 번역 */ }],
+                    NoticeList: [
+                        { id: 1, title: "2026 GS25 Store Partnership Consultation Guide"/* 260604 번역 */, date: "2026.02.10", views: "1234" },
+                        { id: 2, title: "GS THE FRESH New Store Location Guide"/* 260604 번역 */, date: "2026.02.10", views: "1234" }
+                    ],
+                    // 입점 안내 섹션 데이터 바인딩
+                    ProcessTitle: "Partnership Process Guide"/* 260604 번역 */,
+                    ProcessDesc: "<li>This is a guide to the partnership process, from consultation to contract signing.</li><li>For all partner companies wishing to do business with GS Retail to proceed with partnership consultation through a fair process, the partnership process is carried out according to the procedure below.</li>"/* 260604 번역 */,
+                    ContractSiteTitle: "Electronic Contract Site Guide"/* 260604 번역 */,
+                    ContractSiteDesc: [
+                        "In keeping with the era of electronic documents, GS Retail implements electronic signatures—which carry the same legal effect as a seal—not only for online consultations but also at the time of contract signing, in order to ensure fairness, transparency, and reliability in transactions."/* 260604 번역 */,
+                        "Existing partner companies whose information is already registered can log in to the consultation system as a returning visitor, or access and use the electronic contract menu directly."/* 260604 번역 */
+                    ],
+                    AuthTableTitle: "Accredited Electronic Certification Authorities"/* 260604 번역 */,
+                    AuthTableHeader: ["Company Name"/* 260604 번역 */, "Site Name"/* 260604 번역 */, "Company Name"/* 260604 번역 */, "Site Name"/* 260604 번역 */],
+                    AuthAgencies: [
+                        { name1: "Korea Information Certificate Authority"/* 260604 번역 */, url1: "https://www.signgate.com", name2: "National Computerization Agency"/* 260604 번역 */, url2: "http://sign.nca.or.kr/" },
+                        { name1: "Korea Securities Computer Corporation"/* 260604 번역 */, url1: "http://www.signkorea.com/", name2: "Korea Electronic Certification Authority"/* 260604 번역 */, url2: "http://gca.crosscert.com/" },
+                        { name1: "Korea Financial Telecommunications & Clearings Institute"/* 260604 번역 */, url1: "http://www.yessign.or.kr/", name2: "Korea Trade Network (KTNET)"/* 260604 번역 */, url2: "http://www.tradesign.net/" }
+                    ],
+                    AuthTableHeader_mo: ["Company Name"/* 260604 번역 */, "Site"/* 260604 번역 */],
+                    AuthAgencies_mo: [
+                        { name1: "Korea Information Certificate Authority"/* 260604 번역 */, url1: "https://www.signgate.com", name2: "National Computerization Agency"/* 260604 번역 */, url2: "http://sign.nca.or.kr/" },
+                        { name1: "Korea Securities Computer Corporation"/* 260604 번역 */, url1: "http://www.signkorea.com/", name2: "Korea Electronic Certification Authority"/* 260604 번역 */, url2: "http://gca.crosscert.com/" },
+                        { name1: "Korea Financial Telecommunications & Clearings Institute"/* 260604 번역 */, url1: "http://www.yessign.or.kr/", name2: "Korea Trade Network (KTNET)"/* 260604 번역 */, url2: "http://www.tradesign.net/" }
+                    ],
+                    RelatedSitesTitle: "Other Related Sites"/* 260604 번역 */,
+                    RelatedSites: [
+                        { num: "01", name: "Accredited Electronic Certification Authorities"/* 260604 번역 */, desc: "This is the internet purchasing system site through which GS Retail purchases and procures products and services fairly, transparently, and at reasonable prices."/* 260604 번역 */ },
+                        { num: "02", name: "eSCM21", desc: "This is a site that supports efficient operations by allowing business processing (ordering/receiving, payment settlement, tax invoices, inventory/sales information, etc.) with partner companies that trade with GS Retail to be handled online via the DACOM network."/* 260604 번역 */ }
+                    ],
+                    HelpDeskTitle: "HELP DESK",
+                    HelpDeskDesc: "If you have any questions or concerns regarding the Partner Consultation Support Center, please contact us at the number below and we will be happy to assist you."/* 260604 번역 */,
+                    HelpDeskItems: [
+                        { brand: "GS25", tel: "1644-5425", note: "GS25 Startup Consultation Inquiry"/* 260604 번역 */, link: "/gsrst02010101", imgName: "gsrst01_gs25.png" },
+                        { brand: "GS THE FRESH", tel: "1833-9779", note: "GS THE FRESH Franchise Consultation Inquiry"/* 260604 번역 */, link: "/gsrst01010101", imgName: "gsrst01_fresh.png" }
+                    ],
+                    BtnGoDetail: "Go >",
+                    FaqList: [
+                        { 
+                            question: "How much does it cost to open a store?"/* 260604 번역 */, 
+                            answer: "Partnership costs vary depending on the brand, floor area, and region. <br/>You can receive accurate cost information through a consultation request."/* 260604 번역 */,
+                            isOpen: true // 첫 번째 항목 기본 오픈
+                        },
+                        { 
+                            question: "Is renovation of an existing store also possible?"/* 260604 번역 */, 
+                            answer: "Yes, consultations for renovating existing stores are also available. For details, please consult with the responsible MD."/* 260604 번역 */,
+                            isOpen: false 
+                        },
+                        { 
+                            question: "How do I receive operational support after opening?"/* 260604 번역 */, 
+                            answer: "We provide regular refresher training and operational guides, and an assigned SV provides support."/* 260604 번역 */,
+                            isOpen: false 
+                        },
+                        { 
+                            question: "How long is the contract period?"/* 260604 번역 */, 
+                            answer: "The basic contract period varies by brand and is generally renewed every two years."/* 260604 번역 */,
+                            isOpen: false 
+                        },
+                        { 
+                            question: "Can I cancel a partnership consultation?"/* 260604 번역 */, 
+                            answer: "Even after completing your application, you can request cancellation from My Page or the consultation inquiry menu."/* 260604 번역 */,
+                            isOpen: false 
+                        }
+                    ],
+                    counselTitle:"Consultation Application"/* 260604 번역 */,
+                    listening: {
+                        Txt:"We will always put ourselves in our customers' shoes and listen even to the smallest voice.",
+                        Title: "Inquiries Related to Brand Store Use",
+                        Desc: "We will always listen attentively to even the smallest voice, putting ourselves in our customers' position.<br />Inquiries Related to Brand Store Use<br />Please leave your comments, compliments, complaints, or suggestions regarding your experience visiting our stores.",
+                        Consents: [
+
+                            {
+                                title: "Consent to Collection and Use of Personal Information",
+                                items: [
+                                    "The information you enter is used solely for partnership consultation. The collected items, use and purpose, and retention and use period are as follows. For other personal information handling matters, please refer to the 'Privacy Policy' at the bottom of the website."/* 260604 번역 */,
+                                    "Personal information collected: name, mobile phone number, date of birth"/* 260604 번역 */,
+                                    "Collection and purpose: The collected personal information is used for identity verification and to confirm and respond to inquiries."/* 260604 번역 */,
+                                    "- Retention and Use Period: One year after receipt"
+                                ],
+                                guide: "You have the right to refuse this consent; however, if you do not consent,<br/> Writing an inquiry is not possible."/* 260604 번역 */
+                            }
+                        ],
+                        InputWrapcont: {
+                            part1: {
+                                title: "Customer Information",
+                                requiredText: "* Required fields",
+                                nameLabel: "Name",
+                                namePlaceholder: "Please enter your name"/* 260604 번역 */,
+                                emailLabel: "Email",
+                                emailOptions: [{ value: 'naver.com', label: 'naver.com' }, { value: 'gmail.com', label: 'gmail.com' }],
+                                telLabel: "Mobile phone"/* 260604 번역 */,
+                                companyname :"Company Name"/* 260604 번역 */,
+                                department:"Department / Position"/* 260604 번역 */,
+                                department_1:"Department",
+                                rank:"Position"/* 260604 번역 */,
+                                
+
+                            },
+                            part2: {
+                                title: "Business Information"/* 260604 번역 */,
+                                사업자등록번호: "Business Registration Number"/* 260604 번역 */,
+                                placeholder_1:" Enter numbers without '-'"/* 260604 번역 */,
+                                회사명:"Company Name "/* 260604 번역 */,
+                                사업자구분: "Business Type"/* 260604 번역 */,
+                                대표자성명: "Representative's Name"/* 260604 번역 */,
+                                placeholder_2:"Representative's Name"/* 260604 번역 */,
+                                업태: "Business Condition"/* 260604 번역 */,
+                                업종:"Business Category"/* 260604 번역 */,
+                                대표브랜드:"Flagship Brand"/* 260604 번역 */,
+                                주소:"Address",
+                                placeholder_3_1:" Address field 1 (region, street name)"/* 260604 번역 */,
+                                placeholder_3_2:" Address field 2 (detailed address)"/* 260604 번역 */,
+                                placeholder_3_3:" Postal Code field"/* 260604 번역 */,
+                                설립일자:"Establishment Date"/* 260604 번역 */
+                            },
+                            part3: {
+                                title: "Application Information"/* 260604 번역 */,
+                                입점부문: "Partnership Division"/* 260604 번역 */,
+                                신청상품군:"Product Category Applied For"/* 260604 번역 */,
+                                신청상세품목: "Detailed Items Applied For"/* 260604 번역 */,
+                                상품명: "Plan Name",
+                                납품원가: "Supply Cost (KRW)"/* 260604 번역 */,
+                                판매희망가: "Desired Selling Price (KRW)"/* 260604 번역 */,
+                                상품규격 : "Product Specifications (unit omitted)"/* 260604 번역 */,
+                                상품규격상세: "Width x Length x Height cm, Weight kg"/* 260604 번역 */,
+                                첨부파일:"Attach Product Image"/* 260604 번역 */,
+                                첨부_desc:"(000x000 px)",
+                                입점제안서:"Attach Partnership Proposal"/* 260604 번역 */,
+                                입점_desc:"(Max 00MB)"/* 260604 번역 */,
+                                신청제목:"Application Title"/* 260604 번역 */,
+                                신청내용:"Application Details"/* 260604 번역 */,
+                                파일추가:"Add File"/* 260604 번역 */,
+                                btnSubmit: "Consultation Request"/* 260604 번역 */,
+                                btnCancel: "Rewrite"/* 260604 번역 */
+                            }
+                        }
+                    },
+                    ViewCountText: "View"/* 260604 번역 */,
+                    ExternalMoveText: "Redirecting to the GS SHOP partnership consultation page."/* 260604 번역 */,
+                    SystemLinks: [
+                        { title: "GS Retail Electronic Contract System"/* 260604 번역 */, url: "https://partner.gsretail.com:7300/web/main/index.jsp" },
+                        { title: "GS Retail Partner Company Portal"/* 260604 번역 */, url: "https://gs.escm21.net/escm21/home/index.jsp" }
+                    ],
+                    GsShopUrl: "https://withgs.gsshop.com/sug/suggest"
                 }
             }
         };

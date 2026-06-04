@@ -140,6 +140,46 @@ export default {
                         ]
                     ],
                     ListBack: "목록으로 돌아가기"
+                },
+                en: {
+                    Visual: {
+                        img: require("@/assets/images/dummy/gsrbr04.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr04_mo.png"),
+                        alt: "Convenience stores and supermarkets in one—Our Neighborhood GS, GS Retail's O4O integrated app"/* 260604 번역 */,
+                        subContent_1: "Convenience stores and supermarkets in one"/* 260604 번역 */,
+                        subContent_2: "GS Retail Integrated O4O App"/* 260604 번역 */,
+                        subContent_3: "Our Neighborhood GS",
+                    },
+                    SubTitle: "About the Brand",
+                    SubContent_1: "Convenience stores and supermarkets—now all in one 'Our Neighborhood GS' app.<br/> From stock checks, delivery, and pickup at GS25 and GS THE FRESH nationwide<br/> From 'My Fridge' for storing free gifts to 'Wine25 Plus' for smart alcohol ordering.<br/><br class='m_br'/> Bringing nearby stores even closer, with no boundary between inside and outside the store, we propose a closer everyday life."/* 260604 번역 */,
+                    // SubContent_2: "증정품 보관 '나만의 냉장고'·주류 스마트오더 '와인25플러스'로, 편의점의 경계를 넘는 생활을 제안합니다.",
+                    Bi: {
+                        title: "Our Neighborhood GS App"/* 260604 번역 */,
+                        sub_desc: `From checking nearby store inventory to delivery and pick-up, storing complimentary items, and booking delivery services — all in one place! Handle everything you need with the Our Neighborhood GS app.`,
+                        img: require("@/assets/images/dummy/gsrbr04_brand.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr04_brand_mo.png"),
+                        alt: "Our Neighborhood GS App"/* 260604 번역 */
+                    },
+                    Intro: {
+                        qrTitle: "Download the Our Neighborhood GS app"/* 260604 번역 */,
+                        qrDesc: "Download the Our Neighborhood GS app and discover a variety of events and exclusive products.<br/>Scanning the QR code takes you to the app download page."/* 260604 번역 */,
+                        qrDesc_mo: "GS25's diverse events and distinctive products"/* 260604 번역 */,
+                    },
+                    BenefitTitle: "On the 'Our Neighborhood GS' app <br/>Take care of everything in your daily life."/* 260604 번역 */,
+                    BenefitRows: [
+                        [
+                            { title: "Stock Finder and Search", desc: "Easily check real-time inventory and remaining stock at stores nationwide.", popId: "gsrbr0403", popType: "lg", popCont: "gsrbr0403"},
+                            { title: "My Refrigerator", desc: "You can store giveaways or prizes received at GS25, as well as pre-ordered products from GS THE FRESH, and pick them up whenever you like."/* 260604 번역 */ },
+                            { title: "Delivery and Pick-up", desc: "Get popular products from GS25 and GS THE FRESH delivered or ready for pick-up! Download the 'Our Neighborhood GS' app for exclusive events and extra discounts!", popId: "gsrbr0401", popType: "lg", popCont: "gsrbr0401"},
+                            { title: "Pre-Order", desc: "The Our Neighborhood GS app offers a pre-order service that lets you pick up items at the store and time of your choice." },
+                            { title: "Wine25Plus", desc: "Order from over 5,000 wine varieties and a wide selection of alcoholic beverages, and pick them up at convenience stores and supermarkets nationwide.", popId: "gsrbr0402", popType: "lg", popCont: "gsrbr0402" },
+                            { title: "Easy Payment and Easy Login", desc: "Easy payment and login are available through a variety of methods." },
+                            { title: "Membership Benefits", desc: "The Our Neighborhood GS app offers a pre-order service that lets you pick up items at the store and time of your choice." },
+                            { title: "Delivery Service", desc: "Order from over 5,000 wine varieties and a wide selection of alcoholic beverages, and pick them up at convenience stores and supermarkets nationwide." },
+                            { title: "Events & Promotions", desc: "Easy payment and login are available through a variety of methods.", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" }
+                        ]
+                    ],
+                    ListBack: "← Back to Brand List"
                 }
             }
         };

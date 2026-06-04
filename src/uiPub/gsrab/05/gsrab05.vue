@@ -135,7 +135,47 @@ const langData = {
         },
     },
     en: {
-
+        pageTitle: "Directions"/* 260604 번역 */,
+        location: {
+            title: "GS Tower",
+            addressLabel: "Address",
+            address: "508 Nonhyeon-ro, Gangnam-gu, Seoul (679 Yeoksam-dong, GS Tower)",
+            subwayLabel: "Subway",
+            subwayDesc: "Line 2, Yeoksam Station, Exit 7 (via GS Tower underground passageway)",
+            busLabel: "Bus",
+            busMainLabel: "Trunk / Circular Line"/* 260604 번역 */,
+            busMainRoutes: "146, 147, 341, 360, 740, 41",
+            busExpressLabel: "Direct / Express"/* 260604 번역 */,
+            busExpressRoutes: "1100, 1700, 2000, 7007, 8001",
+            mapAriaLabel: "GS Tower location map area (publishing image)"/* 260604 번역 */,
+        },
+        location2: {
+            title: "GS Gangseo Tower / GS Gangseo N Tower",
+            addressLabel: "Address",
+            addressLine1Label: "Gangseo Tower"/* 260604 번역 */,
+            addressLine2Label: "Gangseo N Tower"/* 260604 번역 */,
+            addressLine1: "Gangseo Tower: 75 Seonyu-ro, Yeongdeungpo-gu, Seoul (GS Gangseo Tower)",
+            addressLine2: "Gangseo N Tower: 82 Seonyu-ro, Yeongdeungpo-gu, Seoul (GS Gangseo N Tower)",
+            subwayLabel: "Subway",
+            subwayLine1: "Line 2, Munrae Station, Exit 3 (7-minute walk from exit)",
+            subwayLine2: "Line 5, Yangpyeong Station, Exit 2 (15-minute walk from exit)",
+            busLabel: "Bus",
+            busGanLabel: "Trunk Line"/* 260604 번역 */,
+            busGanNums: "640, 650",
+            busExpressLabel: "Direct / Express"/* 260604 번역 */,
+            busItems: [
+                { stop: "Yeongdeungpo Machinery Mall Stop (toward Yeongdeungpo Station)", express: "6211, 6628, 6629, 6625, 6640, 6630, 5012" },
+                { stop: "Yeongdeungpo Machinery Mall Stop (toward Omokgyo Station)", express: "5616, 6211, 6628, 6629, 6625, 6640, 6630, 5012" },
+                { stop: "Yangnam-dong Rotary", express: "5616, 6211, 6628, 6629, 6640, 6630, 5012" },
+            ],
+            carLabel: "By Car",
+            carItems: [
+                { route: "Olympic Expressway", desc: "Go straight from the south end of Yanghwa Bridge toward Munrae-dong Intersection, approximately a 10-minute drive" },
+                { route: "Gangbyeon Expressway", desc: "Go straight from Yeongdeungpo Market toward Omokgyo Station; turn left at Yangnam Intersection and continue straight for 50m" },
+            ],
+            mapAriaLabel1: "GS Gangseo Tower location map area (publishing image)"/* 260604 번역 */,
+            mapAriaLabel2: "GS Gangseo N Tower location map area (publishing image)"/* 260604 번역 */,
+        },
     }
 };
 

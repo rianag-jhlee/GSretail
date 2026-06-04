@@ -175,6 +175,71 @@ export default {
                         {txt:"GS SHOP에서 이용하기", link:"https://www.gsshop.com/index.gs"}
                     ],
                     ListBack: "목록으로 돌아가기"
+                },
+                en: {
+                    Visual: {
+                        img: require("@/assets/images/sub/gsrbr05/gsrbr05.png"),
+                        imgMo: require("@/assets/images/sub/gsrbr05/gsrbr05_mo.png"),
+                        alt: "GS Pay, the fast and secure integrated easy-payment service"/* 260604 번역 */,
+                        subContent_1: "Fast and secure"/* 260604 번역 */,
+                        subContent_2: "Easy Payment Service",
+                        subContent_3: "GS Pay",
+                    },
+                    SubTitle: "About the Brand",
+                    SubContent_1: "GS Pay is GS Retail's own integrated easy-payment service that can be used across all GS Retail brands.<br/><br class='m_br'/> You can pay quickly and securely with a single QR code scan offline and a single click online.<br/> Points are earned with every payment, enabling even smarter spending."/* 260604 번역 */,
+                    Bi: {
+                        title: "BI Logo"/* 260604 번역 */,
+                        img: require("@/assets/images/dummy/gsrbr05_bi.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr05_bi_mo.png"),
+                        alt: "GS Pay BI Logo"/* 260604 번역 */
+                    },
+                    // SubContent_2: "QR코드 스캔 한 번으로 빠르고 안전하게 결제한 수 있습니다. 결제할 때마다 포인트가 적립되어 더욱 알뜰한 소비가 가능합니다.",
+                    BenefitTitle: "Easy and simple GS Pay"/* 260604 번역 */,
+                    BenefitRows: [
+                        [
+                            { num: "01", title: "2% Back Every Time You Spend", desc: "Earn GS ALL Points at 2%<br />every time you pay with GS Pay", bullets: ["*Linked bank account payments only: base 0.1% + additional 1.9%"] },
+                            { num: "02", title: "Exclusive to GS Pay!", desc: "Offered at affordable prices through joint purchasing with GS THE FRESH", bullets: ["*Promotional items and participating brands vary each month"] }
+                        ],
+                        [
+                            { num: "03", title: "Benefits You'll Never Miss", desc: "Points, coupons, and even carrier discounts!<br/>and up to 10% off with POP card"/* 260604 번역 */, bullets: ["*For in-store (offline) payments"] },
+                            { num: "04", title: "Safe & Fast!", desc: "Set up one-click payment once<br />and pay instantly without any additional authentication.", bullets: ["When paying by card"/* 260604 번역 */]  }
+                        ]
+                    ],
+                    BrandTitle: "Participating Brands",
+                    BrandDesc: "All GS Retail brand affiliates (online and offline)",
+                    BrandLogos: [
+                        require("@/assets/images/dummy/gsrbr05_logo_gs25.png"),
+                        require("@/assets/images/dummy/gsrbr05_logo_gsshop.png"),
+                        require("@/assets/images/dummy/gsrbr05_logo_gsfresh.png"),
+                    ],
+                    BrandLogosMo: [
+                        require("@/assets/images/dummy/gsrbr05_logo_gs25_mo.png"),
+                        require("@/assets/images/dummy/gsrbr05_logo_gsshop_mo.png"),
+                        require("@/assets/images/dummy/gsrbr05_logo_gsfresh_mo.png"),
+                    ],
+                    StepTitle: "How to Use GS Pay",
+                    StepGroups: [
+                        {
+                            title: "Online",
+                            steps: [
+                                { label: "Step 1", text: "Register GS Pay<br />as a Payment Method<br />in Your Order Form", img: require("@/assets/images/dummy/gsrbr05_on_1.png"), imgMo: require("@/assets/images/dummy/gsrbr05_on_1_mo.png") },
+                                { label: "Step 2", text: "Pay with Your<br />Registered Card or Account", img: require("@/assets/images/dummy/gsrbr05_on_2.png"), imgMo: require("@/assets/images/dummy/gsrbr05_on_2_mo.png") }
+                            ]
+                        },
+                        {
+                            title: "In-Store (Offline)",
+                            steps: [
+                                { label: "Step 1", text: "Sign Up for GS Pay<br />through Our Neighborhood GS App", img: require("@/assets/images/dummy/gsrbr05_op_1.png"), imgMo: require("@/assets/images/dummy/gsrbr05_op_1_mo.png") },
+                                { label: "Step 2", text: "Easily Register<br />Your Card or Account", img: require("@/assets/images/dummy/gsrbr05_op_2.png"), imgMo: require("@/assets/images/dummy/gsrbr05_op_2_mo.png") },
+                                { label: "Step 3", text: "Pay & Earn Points with GS Pay<br />at the Store", img: require("@/assets/images/dummy/gsrbr05_op_3.png"), imgMo: require("@/assets/images/dummy/gsrbr05_op_3_mo.png"), isPhone: true }
+                            ]
+                        }
+                    ],
+                    AppButtons: [
+                        {txt:"Use in Our Neighborhood GS App (In-Store) >", link:"http://gs25.gsretail.com/gscvs/ko/store-services/woodongs"},
+                        {txt:"Use at GS SHOP >", link:"https://www.gsshop.com/index.gs"}
+                    ],
+                    ListBack: "← Back to Brand List"
                 }
             }
         };

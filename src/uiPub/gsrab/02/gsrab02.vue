@@ -116,7 +116,26 @@ const langData = {
         ],
     },
     en: {
-
+        MainTitle: "Company Overview",
+        SubTitle:'Our Vision',
+        VisionSub: "A platform that connects all customer experiences, understands customers through data, and is trusted for its products and services",
+        VisionAlt: "GS Retail vision diagram expressing connection, empathy, and trust"/* 260604 번역 */,
+        valueHeading: "GS Value",
+        valueSub: "GS Retail's Unique Values",
+        valueItems: [
+            { title: "Fair", desc: "We uphold fairness and\ncontribute to society and the environment."/* 260604 번역 */, img: require("@/assets/images/sub/gsrab/img_value_01.png") },
+            { title: "Friendly", desc: "We recognize diversity and\nrespect one another."/* 260604 번역 */, img: require("@/assets/images/sub/gsrab/img_value_02.png") },
+            { title: "Fresh", desc: "By encouraging creativity and challenge,\nthe company and individuals grow together."/* 260604 번역 */, img: require("@/assets/images/sub/gsrab/img_value_03.png") },
+            { title: "Fun", desc: "Fun – We enjoy our work in a flexible and autonomous environment", img: require("@/assets/images/sub/gsrab/img_value_04.png") },
+        ],
+        wayHeading: "GS Way",
+        waySub: "GS Retail's Way of Working",
+        wayItems: [
+            { title: "01 Customer First", desc: "# Every aspect of our work begins and ends with the customer.\n# For our customers, we always look for a way to make it work." },
+            { title: "02 Growth Mindset", desc: "# We start small, move fast, and build on every success.\n# We pursue growth and continuous improvement every day." },
+            { title: "03 Open Communication", desc: "# We get on the same page by sharing clear goals and progress.\n# We debate passionately and deliver as One Team." },
+            { title: "04 AX Execution", desc: "# We let data guide both our reasoning and our decisions.\n# We continuously improve how we work through digital and AI tools." },
+        ],
     }
 };
 

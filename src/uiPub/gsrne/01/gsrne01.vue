@@ -92,7 +92,23 @@ export default {
                     { thumb: require("@/assets/images/dummy/thumb_news_01-6.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
                 ],
             },
-            en: {},
+            en: {
+                MainTitle: "Press Releases",
+                SearchOptions: [
+                    { value: "all", label: "All" },
+                    { value: "title", label: "Title" },
+                    { value: "content", label: "Details" },
+                ],
+                placeholder: "검색어 입력",
+                ListData: [
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-1.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-2.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-3.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-4.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-5.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                    { thumb: require("@/assets/images/dummy/thumb_news_01-6.png"), title: "GS샵, '스타일NOW 더김동은' 앞세워 프리미엄 패션 경쟁력 강화 프리미엄 패션 경쟁력 강", cate: "GS SHOP", date: "2026.02.22" },
+                ],
+            },
         };
 
         const t = computed(() => {

@@ -380,6 +380,158 @@ export default {
                         
                     }
 
+                },
+                en: {
+                    MainTitle: "Environmental Management",
+                    MainsubTitle: "Environmental Management",
+                    Tabs1: [{ item: "Environmental Management" }, { item: "Eco-Friendly Activities" }, { item: "Addressing Climate Change Together" }],
+                    InnerTabs: [{ item: "Green Value Chain" }, { item: "Green Store" }, { item: "Green Product" }],
+                    MoreBtn: "Learn More",
+                    sealink:`https://www.badasoom.com/`,
+                    Images: {
+                        StrategyImg: require("@/assets/images/dummy/gsrsu0201_1.png"),
+                        SystemImg: require("@/assets/images/dummy/gsrsu0201_2.png"),
+                        SeaBreathImg: require("@/assets/images/dummy/gsrsu020104_1.png"),
+                        StrategyImgMo: require("@/assets/images/dummy/mo/gsrsu0201_1_mo.png"),
+                        SystemImgMo: require("@/assets/images/dummy/mo/gsrsu0201_2_mo.png"),
+                    },
+                    IntroTitle: "Green Together<br />Working together to protect the planet.",
+                    IntroDesc: "Environmental issues such as climate change and pollution are spreading worldwide.<br />Environmental management has now become an essential business activity and a corporate responsibility toward both present and future generations.<br />As an integrated retail platform, GS Retail is committed to identifying and minimizing the environmental impact across all value chains and business activities experienced by its customers.",
+                    PolicyTitle: "Environmental Management Policy",
+                    PolicySub: "GS Retail has established an environmental management policy for sustainable environmental management."/* 260604 번역 */,
+                    PolicyItems: [
+                        { tit: "One. Compliance with environment-related laws and regulations:"/* 260604 번역 */, desc: "We conduct periodic monitoring and training of executives and employees to ensure compliance with environment-related laws and regulations, thereby minimizing potential risks."/* 260604 번역 */ },
+                        { tit: "One. Systematic management of environmental performance:"/* 260604 번역 */, desc: "We give top priority to the environment in our decision-making process and do our utmost to ensure that the environmental management system is systematically managed."/* 260604 번역 */ },
+                        { tit: "One. Energy reduction and waste management:"/* 260604 번역 */, desc: "At our headquarters as well as our stores, we will seek out and expand ways to use energy efficiently, and we will reduce environmental impact through the reuse and reduction of waste."/* 260604 번역 */ },
+                        { tit: "One. Expansion of eco-friendly products:"/* 260604 번역 */, desc: "As a distributor, we will continue to define and expand eco-friendly products so that customers can easily access them."/* 260604 번역 */ },
+                        { tit: "One. Disclosure of environmental information:"/* 260604 번역 */, desc: "We practice transparent environmental management by disclosing environmental information to the public in accordance with relevant statutes."/* 260604 번역 */ }
+                    ],
+                    StrategyTitle: "Three Core Strategies for Environmental Management",
+                    StrategyDesc: "GS Retail has established three core environmental management strategies: Green Value Chain, aimed at strengthening environmental management foundations across the entire business value chain; Green Store, pursued through eco-friendly store expansion and resource circularity; and Green Product, focused on expanding sustainable products and responsible raw material sourcing.",
+                    SystemTitle: "Environmental Management Framework",
+                    SystemDesc: "Through its environmental management strategies, GS Retail establishes implementation plans for each business unit and conducts progress monitoring and impact assessments through the Environmental Management Evaluation Committee.<br />An environmental management framework has also been established to enable progress reporting to the ESG Promotion Council and the ESG Committee.",
+                    ClimateIntro: "GS Retail recognizes the severity of climate change and will make every effort to address climate-related challenges together with all stakeholders.",
+                    SeaBreathTitle: "Bada-sum Project",
+                    SeaBreathDesc: "The Bada-sum Project is GS Retail's environmental protection initiative, which involves collecting marine waste along the migration routes of sea turtles to raise awareness about the importance of marine ecosystem conservation.<br />GS Retail continues to carry out field-based ecological conservation activities that bring together employees and local communities to protect sea turtles and marine life threatened by ocean waste.<br />GS Retail is committed to building a sustainable future in coexistence with the sea.",
+                    EcoProjects: [
+                        // {
+                        //     tit: "에코 크리에이터: 환경영상제작지원",
+                        //     img: require("@/assets/images/dummy/gsrsu020104_2.png"),
+                        //     desc: "환경재단과 협업하여 영상미디어 컨텐츠 분야의 ESG활동을 실천하고 청소년 및 일반 시민들의 환경 영상 제작 지원을 위해 멘토링, 전문가 강연 등 다양한 기회를 제공하고 있습니다.<br/>2020년 부터 현재까지 18억을 지원하여 460명의 에코크리에이터를 양성하였으며, 10만 명 이상의 지역사회 시민과 친환경 캠페인을 진행해 환경부 우수환경 프로그램으로도 지정되었습니다.<br/><br/>또한 서울시교육청과 연계한 전국 17개 시·도교육청에 환경교육을 진행하였고 서대문 자연사박물관 외 지역사회 환경활동에도 기여하였습니다."
+                        // },
+                        // {
+                        //     tit: "에코 소셜임팩트: 환경분야 제조 소셜벤처 창업지원",
+                        //     img: require("@/assets/images/dummy/gsrsu020104_3.png"),
+                        //     desc: "지속 가능한 에코제조 분야의 소셜벤처를 양성하기 위해 창업팀을 발굴하고 사업화를 위한 맞춤 성장을 지원하고 있습니다. 2018년부터 현재까지 20억 5천만원을 기부하고 65개의 5년 미만 창업기업에 맞춤형 창업교육, 시제품 제작 지원금, GS리테일 임직원 및 전문가 멘토링 코칭 등을 제공하여 소규모 에코 제조 기업의 브랜드 정체성 확립, 판로 확대 및 라인업 확장에 기여하였습니다.<br/><br/>또한 참여기업간 협업과 네트워킹, 멘토링 지원과 상품품평회 등을 통해 차별화된 GS리테일의 연계형 인큐베이팅 및 유통 판로의 개척을 지원하고 있습니다."
+                        // },
+                        {
+                            tit: "Upcycling Friend Campaign: Customer Goods Donation",
+                            img: require("@/assets/images/dummy/gsrsu020104_4.png"),
+                            desc: `GS Retail runs a "Saving the Earth the Eco-Friendly Way" campaign in which employees and customers donate goods that are crafted into upcycled environmental education kits and delivered to underprivileged children.<br />In 2024, GS Retail received 46,789 donated items from a total of 1,704 people, and delivered environmental education materials to 331 children.<br />This was equivalent to planting 967 pine trees.`
+                        },
+                        {
+                            tit: "Resource Circulation Day event: a campaign for collecting waste home appliances with the participation of executives and employees"/* 260604 번역 */,
+                            img: require("@/assets/images/dummy/gsrsu020104_5.png"),
+                            desc: "Since 2024, GS Retail has conducted an employee-participation waste electronics collection campaign every year to mark Resource Circulation Day. Waste electronics generated at convenience store outlets are collected by E-Cycle Governance, and the funds raised through this process are donated as part of our resource circulation activities.<br /><br /> Through the waste home appliance collection campaign, we support the internalization of resource circulation among executives and employees.  "/* 260604 번역 */
+                        }
+                    ],
+                    GreenValueChain: [
+                        {
+                            tit: "Green Logistics"/* 260604 번역 */,
+                            img: require("@/assets/images/dummy/gsrsu020101_1.png"),
+                            desc: "GS Retail transports products from manufacturers through distribution centers to convenience stores and supermarkets across the country. Every day, delivery vehicles traveling to stores nationwide cover a distance equivalent to circling the globe ten times.<br />In order to reduce the environmental impact generated at the logistics stage, GS Retail has established and operates an eco-friendly logistics system, earning Green Logistics Certification."
+                        },
+                        {
+                            tit: "New and renewable energy"/* 260604 번역 */,
+                            img: require("@/assets/images/dummy/gsrsu020101_2.png"),
+                            desc: "GS Retail has begun constructing solar power generation facilities in the idle spaces of its Gongju and Jinju distribution centers and is currently generating electricity.<br />Solar power generation equipment has also been installed at Mullae-dong Gangseo N Tower, contributing to electricity generation."
+                        },
+                        {
+                            tit: "In-House Environmental Activities – Paperless and Mug Usage Campaign",
+                            img: require("@/assets/images/dummy/gsrsu020101_3.png"),
+                            desc: "Since 2018, GS Retail has established document management standards and has been fostering a paperless culture that minimizes printing for internal reporting and other business processes.<br />In addition, the Company encourages employees to refrain from using disposable cups in the office and to use reusable mugs, running campaigns that include offering free coffee when employees use a mug."
+                        },
+                        {
+                            tit: "Employee Environmental Training",
+                            img: require("@/assets/images/dummy/gsrsu020101_4.png"),
+                            desc: "To enhance environmental awareness and capabilities among all employees, ESG and environmental training is offered as mandatory education for all staff. In addition to environmental training, GS Retail has been running hands-on initiatives that employees can directly experience and connect with, such as an annual used home appliance collection campaign on Resource Recycling Day starting in 2024, to strengthen employees' environmental competencies."
+                        }
+                    ],
+                    GreenStore: {
+                        // 상단 인트로
+                        IntroImg: require("@/assets/images/dummy/gsrsu020102_1.png"),
+                        Title: "Green Store Certification",
+                        Desc: "GS Retail is working to build eco-friendly stores in order to reduce the environmental impact generated at its retail locations. Eco-friendly technologies, materials, and designs are incorporated throughout the interior and exterior of these stores, organized around three themes: Energy Saving and Natural Recycling, Safety and Assurance Technology, and Green Eco Design.<br />In 2021, three GS25 stores received Green Store Certification, and one store obtained Green Building Certification. In particular, GS25 Dongducheon Songnae Branch became the first private-sector remodeled building to receive the highest grade, 'Excellent (Green Grade 1)', under the Green Building Certification. GS Retail will continue to expand its eco-friendly store network.",
+                        
+                        // 3대 핵심 테마 카드
+                        Features: [
+                            {
+                                tit: "Energy Saving and Natural Recycling",
+                                desc: "Solar power generators, SEMS, parallel energy-saving devices, automatic lighting and illuminance sensors, high-efficiency energy-saving refrigeration units, refrigeration eco-covers, and Low-E glass",
+                            },
+                            {
+                                tit: "Safety and Assurance Technology",
+                                desc: "Eco-friendly materials, sterilizers, air purifiers, refrigeration units with eco-friendly refrigerants, and disability assistance call buttons",
+                            },
+                            {
+                                tit: "Green Eco Design",
+                                desc: "Eco-friendly installations and green activity videos displayed on in-store signage",
+                            }
+                        ],
+
+                        // 하단 상세 시스템
+                        Systems: [
+                            {
+                                tit: "SEMS (Smart store Energy Management System)",
+                                img: require("@/assets/images/dummy/gsrsu020102_2.png"),
+                                desc: "This smart energy management system integrates IoT technology with electrical equipment and devices in stores, enabling headquarters' main server or franchise owners/staff to manage store power consumption anytime, anywhere via smartphone. It plays a crucial role in environmental management by remotely controlling heating and cooling systems to regulate indoor temperature, and by managing total energy consumption through alerts for power anomalies."
+                            },
+                            {
+                                tit: "Convenience Store Auto DR (Demand Response)",
+                                img: require("@/assets/images/dummy/gsrsu020102_3.png"),
+                                desc: "The 'Demand Response (DR)' system is a scheme in which the Korea Power Exchange requests reductions in electricity usage during peak demand periods, and participating users receive incentives accordingly. The 'Automatic Demand Response (Auto DR)' system introduced at GS25 stores is an advanced form of this scheme, characterized by its ability to automatically control in-store facilities through integration with IoT-enabled remote control devices (SEMS). The automated system enhances operational efficiency during demand control periods, while also contributing to franchisee profitability by providing demand reduction incentives in addition to the electricity savings benefits."
+                            }
+                        ] 
+                    },
+                    GreenProduct:{
+                        greenSave : {
+                            img: require("@/assets/images/dummy/gsrsu020103_1.png"),
+                            tit: `Sustainable Products`,
+                            sesc1: `GS Retail strives to promote customers' green consumption through the development and introduction of environmentally friendly products. In particular, among the products it handles, GS Retail has defined as 'sustainable products' those that have obtained third-party eco-friendly certifications for the inherent characteristics of the product itself or its packaging. Sustainable products consist of products with low environmental impact arising from their raw materials, packaging, or entire product life cycle.`/* 260604 번역 */,
+                            sesc2: `In addition, we have created an integrated eco-friendly activity identity called Green Save, and have established standards for improving our own packaging, striving to expand green products.`/* 260604 번역 */,
+                        },
+                        ecofriendly : {
+                            img: require("@/assets/images/dummy/gsrsu020103_2.png"),
+                            tit: `Eco-Friendly Packaging`,
+                            sesc1: `To minimize the environmental impact of product delivery, GS Retail has introduced FSC-certified eco-friendly delivery boxes and is currently operating them.`,
+                            sesc2: `For same-day delivery, reusable bags are used, and the Company is expanding its efforts to reduce environmental impact by enabling customers to reuse them according to their needs.`,
+                        },
+                        originmana : {
+                            img: require("@/assets/images/dummy/gsrsu020103_3.png"),
+                            tit: `Origin Management System`,
+                            sesc1: `As the first in the retail industry to apply blockchain technology to specific agricultural products, GS Retail systematically manages the complete traceability record from production to distribution. First applied to 'Sanjiae Apples', this technology enables verification of the apple's origin, grower, and cultivation, storage, sorting, and packaging conditions can be verified.<br />Origin tracking systems are also partially applied to livestock and seafood products. In addition, for some health food products, raw material inspections are conducted to ensure product safety.`,
+                        },
+                        procurementpolicy : {
+                            img: require("@/assets/images/dummy/gsrsu020103_4.png"),
+                            tit: `Responsible Raw Materials: Sustainable Procurement Policy`,
+                            sesc1: `GS Retail has established and strives to comply with a sustainable procurement policy in order to fulfill its social responsibilities throughout the procurement of consumables and raw materials.`,
+                        },
+                        guideline : {
+                            tit: `Sustainable Procurement Policy`,
+                            desc:`In order to actively practice ESG management through green purchasing activities, we comply with the following policies.`/* 260604 번역 */,
+                            num1:`First`/* 260604 번역 */,
+                            txt1:`Through active green purchasing activities, we establish and expand environmental management, providing eco-friendly value to our customers and fulfilling our social responsibility and role as a leading eco-friendly company.`/* 260604 번역 */,
+                            num2:`Second`/* 260604 번역 */,
+                            txt2:`We share and encourage our green purchasing policy with Partner Companies and partner companies.`/* 260604 번역 */,
+                            num3:`Third`/* 260604 번역 */,
+                            txt3:`All purchasing activities shall give priority to green purchasing. However, cases where green purchasing is not possible (e.g., unavailability of supply, deterioration of quality, absence of eco-friendly/green products) shall be exceptions.`/* 260604 번역 */,
+                            num4:`Fourth`/* 260604 번역 */,
+                            txt4:`We conduct regular monitoring and evaluation of green purchasing activities and make improvements where necessary.`/* 260604 번역 */,
+                            btn_txt:`View Full Text >`
+                        }
+                        
+                    }
+
                 }
             }
         };

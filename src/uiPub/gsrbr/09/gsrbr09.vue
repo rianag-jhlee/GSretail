@@ -85,6 +85,31 @@ export default {
                         img_2: require("@/assets/images/dummy/gsrbr09_2.png")
                     },
                     ListBack:`목록으로 돌아가기`
+                },
+                en: {
+                    Visual: { // 대문자 유지
+                        img: require("@/assets/images/dummy/gsrbr09.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr09_mo.png"),
+                        alt: "GS THE FRESH Main Visual"/* 260604 번역 */,
+                        subContent_1: "Value beyond price,"/* 260604 번역 */,
+                        subContent_2: "REAL Price",
+                    },
+                    SubTitle: `About the Brand`,
+                    SubContent_1: `REAL Price is GS Retail's exclusive private-brand label that leverages its expertise in sourcing top-quality manufacturers and accumulated product development know-how to deliver products of proven quality at reasonable prices.`,
+                    Bi: {
+                        txt: `BI Logo`/* 260604 번역 */,
+                        img: require("@/assets/images/dummy/gsrbr09_real_bi.png"),
+                        imgMo: require("@/assets/images/dummy/gsrbr09_real_bi_mo.png"),
+                        alt: "REAL price BI Image"/* 260604 번역 */
+                    },
+                    desc: {
+                        title: `Value Beyond the Price: REAL Price`,
+                        text_1: `Under the brand slogan 'Value Beyond Price, REAL price,' we produce high-quality products discovered by strict standards, infused with our development expertise.`/* 260604 번역 */,
+                        text_2: `Now, start shopping smart with REAL price.`/* 260604 번역 */,
+                        img_1: require("@/assets/images/dummy/gsrbr09_1.png"),
+                        img_2: require("@/assets/images/dummy/gsrbr09_2.png")
+                    },
+                    ListBack:`← Back to Brand List`
                 }
             }
         };

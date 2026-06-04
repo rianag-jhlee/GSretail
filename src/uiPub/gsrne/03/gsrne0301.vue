@@ -94,6 +94,41 @@ export default {
                         }
                     ],
                     ListBack: "목록으로 돌아가기"
+                },
+                en: {
+                    title: "GS Shop's Buntroy unveils its S/S collection on AI models, blurring the line between workwear and everyday wear"/* 260604 번역 */,
+                    cate: "GS SHOP",
+                    date: "2026.02.05",
+                    summaryText: "This is where the summary of all content appears."/* 260604 번역 */,
+                    summaryList: [
+                        "A list of items like this could also appear."/* 260604 번역 */,
+                        "A list of items like this could also appear."/* 260604 번역 */
+                    ],
+                    tocTitle: "Table of Contents",
+                    tocList: ["Table of Contents Item Title 1"/* 260604 번역 */, "Table of Contents Item Title 2"/* 260604 번역 */, "Table of Contents Item Title 3"/* 260604 번역 */, "Table of Contents Item Title 4"/* 260604 번역 */],
+                    contentSections: [
+                        {
+                            title: "This is where Table of Contents Item Title 1 appears."/* 260604 번역 */,
+                            text1: "Buntroy showcases performance workwear for the S/S season with enhanced durability and mobility added to its existing concept. Overcoming spatial constraints to broaden customer choice, with a made-to-order approach offering more reasonable prices as a key highlight. This marks the first official launch of a menswear line among GS Shop's own fashion brands, with all content produced using AI male models."/* 260604 번역 */,
+                            text2: "Buntroy showcases performance workwear for the S/S season with enhanced durability and mobility added to its existing concept. Overcoming spatial constraints to broaden customer choice, with a made-to-order approach offering more reasonable prices as a key highlight."/* 260604 번역 */
+                        },
+                        {
+                            title: "This is where Table of Contents Item Title 2 appears."/* 260604 번역 */,
+                            text1: "Buntroy showcases performance workwear for the S/S season with enhanced durability and mobility added to its existing concept. Overcoming spatial constraints to broaden customer choice, with a made-to-order approach offering more reasonable prices as a key highlight. This marks the first official launch of a menswear line among GS Shop's own fashion brands, with all content produced using AI male models."/* 260604 번역 */,
+                            text2: "Buntroy showcases performance workwear for the S/S season with enhanced durability and mobility added to its existing concept. Overcoming spatial constraints to broaden customer choice, with a made-to-order approach offering more reasonable prices as a key highlight."/* 260604 번역 */
+                        },
+                        {
+                            title: "This is where Table of Contents Item Title 3 appears."/* 260604 번역 */,
+                            text1: "Buntroy showcases performance workwear for the S/S season with enhanced durability and mobility added to its existing concept. Overcoming spatial constraints to broaden customer choice, with a made-to-order approach offering more reasonable prices as a key highlight. This marks the first official launch of a menswear line among GS Shop's own fashion brands, with all content produced using AI male models."/* 260604 번역 */,
+                            text2: "Buntroy showcases performance workwear for the S/S season with enhanced durability and mobility added to its existing concept. Overcoming spatial constraints to broaden customer choice, with a made-to-order approach offering more reasonable prices as a key highlight."/* 260604 번역 */
+                        },
+                        {
+                            title: "This is where Table of Contents Item Title 4 appears."/* 260604 번역 */,
+                            text1: "Buntroy showcases performance workwear for the S/S season with enhanced durability and mobility added to its existing concept. Overcoming spatial constraints to broaden customer choice, with a made-to-order approach offering more reasonable prices as a key highlight. This marks the first official launch of a menswear line among GS Shop's own fashion brands, with all content produced using AI male models."/* 260604 번역 */,
+                            text2: "Buntroy showcases performance workwear for the S/S season with enhanced durability and mobility added to its existing concept. Overcoming spatial constraints to broaden customer choice, with a made-to-order approach offering more reasonable prices as a key highlight."/* 260604 번역 */
+                        }
+                    ],
+                    ListBack: "← Back to Brand List"
                 }
             }
         };

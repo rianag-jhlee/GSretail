@@ -677,6 +677,224 @@ export default {
                             { subject: '한국SGS(공인인증기관)' }
                         ]
                     }
+                },
+                en: {
+                    tabs: [ //탭 아이템 배열
+                        { item: "Partner company hygiene management"/* 260604 번역 */ },
+                        { item: "FF Factory Sanitation Management"/* 260604 번역 */ },
+                        { item: "Food Safety Management Agreement with the Gyeonggi Provincial Government"/* 260604 번역 */ },
+                        { item: "Safety inspection of agricultural and fishery products"/* 260604 번역 */ },
+                        { item: "Microbiological testing"/* 260604 번역 */ },
+                        { item: "Hazardous substance testing"/* 260604 번역 */ }
+                    ],
+                    MainTitle: "Safety and Hygiene Management Programs",
+                    intro: `Explore GS Retail's safety and hygiene management programs.`,
+                    section11: {
+                        title: 'Background',
+                        desc: 'Through our own hygiene diagnosis of partner companies that supply or wish to supply goods to us, we monitor hazardous factors throughout the entire production process,\nselecting only companies that are hygienic and operate a sound quality management system, so that we are supplied with only safe products\nand provide them to our customers.'/* 260604 번역 */
+                    },
+                    section12: {
+                        title: 'Hygiene Management Process',
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img01.png"),
+                            alt: 'Hygiene Management Process'
+                        }
+                    },
+                    section13: {
+                        title: 'Hygiene Support Items',
+                        activities: [
+                            { subject: '1. Verification of compliance with statutory management requirements'/* 260604 번역 */, content: '- Food Sanitation Act, etc. (product manufacturing report, business registration, etc.)'/* 260604 번역 */ },
+                            { subject: '2. On-site management verification'/* 260604 번역 */, content: '- Hazard factors'/* 260604 번역 */ }
+                        ]
+                    },
+                    section14: {
+                        title: 'Support Frequency',
+                        activities: [
+                            { subject: '1. PB suppliers'/* 260604 번역 */, content: '- Food Sanitation Act, Livestock Products Sanitary Control Act, etc.'/* 260604 번역 */ },
+                            { subject: '2. Other than PB'/* 260604 번역 */, content: '- Differentiated support by grade'/* 260604 번역 */ }
+                        ]
+                    },
+                    section15: {
+                        title: 'Supporting Organization',
+                        desc: 'GS Retail Quality Control Team, SGS Korea (accredited certification body)'/* 260604 번역 */,
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img02.png"),
+                            alt: 'GS Retail Quality Control Team, SGS Korea (accredited certification body)'/* 260604 번역 */
+                        }
+                    },
+                    section21: {
+                        title: 'Background',
+                        desc: 'The GS Retail Quality Control Team conducts sanitation management of the entire FF factory manufacturing process, on-site microbiological testing, and safety testing of raw materials used, semi-finished products, etc. As the first convenience store FF factory to obtain HACCP certification, it has introduced a systematic and efficient management system and plays a leading role so that consumers can purchase and eat hygienic and sufficiently safe food with peace of mind.'/* 260604 번역 */
+                    },
+                    section22: {
+                        title: 'Hygiene Management Process',
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img03.png"),
+                            alt: 'Hygiene Management Process'
+                        }
+                    },
+                    section23: {
+                        title: 'Hygiene Support Items',
+                        activities: [
+                            { subject: '1. Verification of compliance with statutory management requirements'/* 260604 번역 */, content: '- Food Sanitation Act, etc. (product manufacturing report, business registration, etc.)'/* 260604 번역 */ },
+                            { subject: '2. On-site management verification'/* 260604 번역 */, content: '- Hazard factors'/* 260604 번역 */ }
+                        ]
+                    },
+                    section24: {
+                        title: 'Support Frequency',
+                        activities: [
+                            { subject: 'Provided once a month'/* 260604 번역 */ }
+                        ]
+                    },
+                    section25: {
+                        title: 'Supporting Organization',
+                        activities: [
+                            { subject: 'GS Retail Quality Management Team' }
+                        ],
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img04.png"),
+                            alt: 'GS Retail Quality Management Team'
+                        }
+                    },
+                    section31: {
+                        title: 'Background',
+                        desc: 'In collaboration with the Gyeonggi Provincial Government and the Gyeongnam Provincial Government, we conduct food safety inspections (for residual pesticides, heavy metals, etc.) of the agricultural, livestock, and fishery products we handle, and we provide safe food to our customers by blocking non-conforming agricultural, livestock, and fishery products at the distribution stage.'/* 260604 번역 */
+                    },
+                    section32: {
+                        title: 'Hygiene Management Process',
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img05.png"),
+                            alt: 'Hygiene Management Process'
+                        }
+                    },
+                    section33: {
+                        title: 'Hygiene Support Items',
+                        activities: [
+                            { subject: 'Agricultural products: 18 items (218 types of residual pesticides, 2 types of heavy metals'/* 260604 번역 */ },
+                            { subject: 'Fishery products: 4 items (3 types of heavy metals)' },
+                            { subject: 'Livestock products: 4 items (residual antibiotics, 34 types of pesticides)' }
+                        ],
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img06.png"),
+                            alt: 'Hygiene Management Process'
+                        }
+                    },
+                    section34: {
+                        title: 'Support Frequency',
+                        activities: [
+                            { subject: 'Collection and inspection of agricultural, fishery, and livestock products'/* 260604 번역 */, content: '- Monthly'/* 260604 번역 */ }
+                        ]
+                    },
+                    section35: {
+                        title: 'Supporting Organization',
+                        activities: [
+                            { subject: 'Public Health and Environment Research Institute (agricultural and fishery products)'},
+                            { subject: 'Animal Hygiene Testing Institute (livestock products)' }
+                        ]
+                    },
+                    section41: {
+                        title: 'Background',
+                        desc: 'In addition to the monthly agricultural product inspections conducted in collaboration with local governments, during seasons when primary agricultural products are consumed in large quantities (e.g., Lunar New Year, Chuseok), we commission accredited testing and analysis institutions to monitor compliance with standards and specifications in order to ensure food safety. To respond to radioactive contamination issues, we conduct simple radioactivity tests on high-consumption fishery products at our distribution centers, operating a process whereby only fishery products verified as safe can be shipped.'/* 260604 번역 */
+                    },
+                    section42: {
+                        title: 'Hygiene Management Process',
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img07.png"),
+                            alt: 'Hygiene Management Process'
+                        }
+                    },
+                    section43: {
+                        title: 'Hygiene Support Items',
+                        activities: [
+                            { subject: 'Agricultural products: 463 types of residual pesticides, 2 types of heavy metals' },
+                            { subject: 'Fishery products: heavy metals, benzo[a]pyrene, PCBs' },
+                            { subject: 'Livestock products: food additives, VBN (volatile basic nitrogen)' }
+                        ],
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img08.png"),
+                            alt: 'Hygiene Support Items'
+                        }
+                    },
+                    section44: {
+                        title: 'Support Frequency',
+                        activities: [
+                            { subject: '1. Standard specification testing for primary agricultural products (SGS Korea, accredited certification body) — Seasonal' },
+                            { subject: '2. Simplified radiation testing for fishery products (company distribution centers) — Weekly' }
+                        ]
+                    },
+                    section45: {
+                        title: 'Supporting Organization',
+                        activities: [
+                            { subject: 'SGS Korea (accredited certification body)' }
+                        ]
+                    },
+                    section51: {
+                        title: 'Background',
+                        desc: 'Providing high-quality, safe products can be said to be a social responsibility that goes beyond customer satisfaction, and to fulfill this,\nthe GS Retail Quality Control Team conducts preliminary inspections throughout the entire distribution process until products are finally sold, creating a safe and reassuring store atmosphere\nand playing a leading role in reducing complaints by ensuring product safety.'/* 260604 번역 */
+                    },
+                    section52: {
+                        title: 'Hygiene Management Process',
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img09.png"),
+                            alt: 'Hygiene Management Process'
+                        }
+                    },
+                    section53: {
+                        title: 'Hygiene Support Items',
+                        activities: [
+                            { subject: 'Total bacteria, coliform bacteria, Escherichia coli\nFood poisoning bacteria (Staphylococcus aureus, Salmonella, etc.)\nSurface microorganism contamination measurement' }
+                        ],
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img10.png"),
+                            alt: 'Hygiene Support Items'
+                        }
+                    },
+                    section54: {
+                        title: 'Support Frequency',
+                        activities: [
+                            { subject: 'Monthly pre-research activities to identify high-risk items' },
+                            { subject: 'Rotation-based inspections across all business areas for preventive monitoring' }
+                        ]
+                    },
+                    section55: {
+                        title: 'Supporting Organization',
+                        activities: [
+                            { subject: 'GS Retail Quality Management Team\nSGS Korea (accredited certification body)' }
+                        ]
+                    },
+                    section61: {
+                        title: 'Background',
+                        desc: 'As the excessive use of various food additives and the proliferation of highly deceptive products have brought desensitization toward food safety to the fore as a social issue,\nthe GS Retail Quality Control Team conducts testing for hazardous substances such as melamine, preservatives, and artificial sweeteners, and, through thorough monitoring activities,\nis making its utmost efforts to fundamentally block the distribution channels of fraudulent and defective products.'/* 260604 번역 */
+                    },
+                    section62: {
+                        title: 'Hygiene Management Process',
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img11.png"),
+                            alt: 'Hygiene Management Process'
+                        }
+                    },
+                    section63: {
+                        title: 'Hygiene Support Items',
+                        activities: [
+                            { subject: 'Sulfur dioxide, synthetic preservatives, tar dyes, antibiotics,\nevaporation residues, acid value, peroxide value, artificial sweeteners, mycotoxins, etc.'/* 260604 번역 */ }
+                        ],
+                        image: {
+                            src: require("@/assets/images/dummy/safe_fresh_img12.png"),
+                            alt: 'Hygiene Support Items'
+                        }
+                    },
+                    section64: {
+                        title: 'Support Frequency',
+                        activities: [
+                            { subject: 'In addition to regular inspections conducted on a monthly basis, we maintain a rapid-response inspection system\nin the event of an issue'/* 260604 번역 */ }
+                        ]
+                    },
+                    section65: {
+                        title: 'Supporting Organization',
+                        activities: [
+                            { subject: 'SGS Korea (accredited certification body)' }
+                        ]
+                    }
                 }
             }
         };

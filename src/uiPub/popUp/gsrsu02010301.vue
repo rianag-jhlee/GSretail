@@ -116,6 +116,46 @@ export default {
                             { id: '04', title: '4단계<br>실적관리 및 공시', details: ['구매 제품별 품질, 서비스 등에 대한 모니터링 및 점검', '점검에 따른 보완/실적 관리'] }
                         ]
                     }
+                },
+                en: {
+                    MainTitle: "GS Retail Sustainable Procurement Policy",
+                    section1: {
+                        title: 'Purpose',
+                        content: `The purpose of GS Retail's Sustainable Procurement Policy is to actively encourage and promote the procurement of sustainable consumables and raw materials, thereby preventing resource waste and environmental pollution and contributing to greenhouse gas reduction, so as to contribute to the sustainable development of the national economy.`/* 260604 번역 */
+                    },
+                    section2: {
+                        title: 'Definitions',
+                        items: [
+                            { label: 'Sustainable Procurement: Consumables', content: 'This means giving top priority to purchasing/using products defined by domestic law related to eco-friendly/green products, or products that have obtained equivalent domestic or international eco-friendly/green certifications.'/* 260604 번역 */ },
+                            { label: 'Sustainable Procurement: Raw Materials', content: 'This means carrying out responsible purchasing activities through the purchase/sourcing of raw materials that have obtained domestic and international global certifications related to raw materials.'/* 260604 번역 */ }
+                        ]
+                    },
+                    section3: {
+                        title: 'Scope of Application',
+                        items: [
+                            { label: 'Consumables', content: 'Facility-related consumables and fixtures used in stores and other locations<br>Office supplies used for business purposes in offices and the like (desks, chairs, copiers, simple consumables, etc.)<br>Interior building materials (timber, paint, etc.)'/* 260604 번역 */ },
+                            { label: 'Raw Materials', content: 'Raw materials that are distributed/sold (agricultural, livestock, and fishery products, dairy products, etc.) and all raw materials used in processed foods'/* 260604 번역 */ }
+                        ]
+                    },
+                    section4: {
+                        title: 'Sustainable Procurement Policy',
+                        intro: 'In order to actively practice ESG management through green purchasing activities, we comply with the following policies.'/* 260604 번역 */,
+                        items: [
+                            { step: 'First,'/* 260604 번역 */, text: 'Through active green purchasing activities, we establish and expand environmental management, providing eco-friendly value to our customers and fulfilling our social responsibility and role as a leading eco-friendly company.'/* 260604 번역 */ },
+                            { step: 'Second,'/* 260604 번역 */, text: 'We share and encourage our green purchasing policy with Partner Companies and partner companies.'/* 260604 번역 */ },
+                            { step: 'Third,'/* 260604 번역 */, text: 'All purchasing activities shall give priority to green purchasing. However, cases where green purchasing is not possible (e.g., unavailability of supply, deterioration of quality, absence of eco-friendly/green products) shall be exceptions.'/* 260604 번역 */ },
+                            { step: 'Fourth,'/* 260604 번역 */, text: 'We conduct regular monitoring and evaluation of green purchasing activities and make improvements where necessary.'/* 260604 번역 */ }
+                        ]
+                    },
+                    section5: {
+                        title: 'Sustainable Procurement Procedure',
+                        steps: [
+                            { id: '01', title: 'Step 1<br>Green Procurement Review', details: ['Identify whether items required for purchase include certified products eligible for green procurement'] },
+                            { id: '02', title: 'Step 2<br>Feasibility Review for Green Product Adoption', details: ['Conduct pilot operation of the green product to be introduced', 'Report pilot results and discuss operational plans'] },
+                            { id: '03', title: 'Step 3<br>Green Procurement Implementation and Contract', details: ['Execute contracts and place orders for green procurement products'] },
+                            { id: '04', title: 'Step 4<br>Performance Management and Disclosure', details: ['Monitor and inspect the quality and service of each purchased product', 'Supplementation and performance management following inspection'/* 260604 번역 */] }
+                        ]
+                    }
                 }
             }
         };
