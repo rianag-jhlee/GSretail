@@ -138,7 +138,7 @@ const langData = {
         ],
         skybanner: [
             { txt:'창업안내', link:"#none" },
-            { txt:'입점상담', link:"#none" },
+            { txt:'입점상담', link:"gsrse01" },
             { txt:'고객센터', link:"gsrcu01" }
         ]
     },

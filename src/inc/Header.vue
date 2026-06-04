@@ -1,7 +1,14 @@
 <template>
-    <header id="header">
+    <header id="header" :class="{ sub_header: isSubPage }"><!-- 26.06.04 Edit 이종환 : sub페이지의 경우 h1숨김, 이전버튼 노출 기능 위한 sub_header 클래스 추가 -->
         <div class="inner">
             <h1><a href="/">GS리테일</a></h1>
+            
+            <!-- mo 이전 버튼 -->
+            <div class="btn_prev_wrap">
+                <button>이전</button>
+                <strong>페이지명</strong>
+            </div>
+            <!-- //mo 이전 버튼 -->
 
             <nav id="gnb_nav">
                 <ul class="depth1">
@@ -213,6 +220,8 @@ export default {
                 } else {
                     header.classList.remove("head_black");
                 }
+            } else {
+                header.classList.add("head_black");
             }
 
             // 2. [추가] 최상단 바운스 방지: 스크롤 위치가 0보다 작으면(iOS 반동) 무조건 노출
@@ -332,6 +341,12 @@ export default {
             // handleScroll(); 
         };
 
+        /* 퍼블 테스트용 : 파라미터를 이용한 sub page h1, 이전버튼 노출 숨김 처리 */
+        const isSubPage = computed(() => {
+            return window.location.pathname !== "/";
+        });
+        /* //퍼블 테스트용 : 파라미터를 이용한 sub page h1, 이전버튼 노출 숨김 처리 */
+
         onMounted(() => {
             window.addEventListener("scroll", handleScroll);
             window.addEventListener("resize", handleResize);
@@ -359,6 +374,33 @@ export default {
                     }
                 });
             }
+
+            /* 26.06.04 Add 이종환 : mo header 상단 비주얼 확인하여 head_black 클래스 추가/제거 */
+            const width = window.innerWidth;
+
+            if(width <= 768){
+                setTimeout(() => {
+                    const header = document.getElementById("header");
+                    const visual = document.querySelector(".top_visual");
+
+                    const isVisible =
+                        visual &&
+                        window.getComputedStyle(visual).display !== "none";
+
+                    isSubPage.value = !isVisible;
+
+                    if(!isVisible){
+                        header.classList.add('head_black');
+                    }
+
+                    console.log("visual:", visual);
+                    console.log("display:", visual ? window.getComputedStyle(visual).display : "not found");
+                    console.log("isVisible:", isVisible);
+                    console.log("isSubPage:", isSubPage.value);
+                }, 100);
+                console.log('mo');
+            }
+            /* //26.06.04 Add 이종환 : mo header 상단 비주얼 확인하여 head_black 클래스 추가/제거 */
         });
 
         onUnmounted(() => {
@@ -383,7 +425,9 @@ export default {
             mo_menuToggle,
             handleResize,
 
-            isDesktop
+            isDesktop,
+
+            isSubPage //[퍼블테스트용] 파라미터로 서브 구분
         };
     },
 };

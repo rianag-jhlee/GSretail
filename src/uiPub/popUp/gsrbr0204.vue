@@ -17,9 +17,9 @@
                         <strong>{{ item.tit }}</strong>
                     </div>
                     <p class="card_desc" v-html="item.desc"></p>
-                    <Buttons btn-class="btn_icon btn_big border">
+                    <a :href="item.link" class="btn_icon btn_big border">
                         {{ item.Btn }}
-                    </Buttons>
+                    </a>
                 </li>
             </ul>
 
@@ -51,8 +51,8 @@ export default {
                 ko: {
                     MainTitle: "입지제안",
                     cards: [
-                        { imgSrc: img01, alt: "GS25 로고", tit: "추천기준", desc: "지역 : 전국<br/>규모: 영업면적 10평 이상 임차점포", Btn:"입지제안 바로가기" },
-                        { imgSrc: img02, alt: "GS THE FRESH 로고", tit: "추천기준", desc: "지역 : 전국<br/>규모: 전용면적 50평 이상", Btn:"입지제안 바로가기" },
+                        { imgSrc: img01, alt: "GS25 로고", tit: "추천기준", desc: "지역 : 전국<br/>규모: 영업면적 10평 이상 임차점포", Btn:"입지제안 바로가기", link:"gsrst02010101" },
+                        { imgSrc: img02, alt: "GS THE FRESH 로고", tit: "추천기준", desc: "지역 : 전국<br/>규모: 전용면적 50평 이상", Btn:"입지제안 바로가기",link:"gsrst01010101" },
                     ],
                     check: "확인",
                 },
