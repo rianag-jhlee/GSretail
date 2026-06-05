@@ -76,6 +76,11 @@
         <div class="modal_container"></div>
     </div>
 
+    <!-- 고정형 영상정보처리기기 운영·관리 방침 -->
+    <div id="gsrcm0103" class="modal_wrap">
+        <div class="modal_container"></div>
+    </div>
+
 
 </template>
 
@@ -114,7 +119,11 @@ const langData = {
                 type: "lg",
                 cont: "gsrcm0102",
             },
-            { text: "영상정보처리기기 운영 관리방침", link: "#none" },
+            { text: "영상정보처리기기 운영 관리방침",
+              popId: "gsrcm0103",
+              type: "lg",
+              cont: "gsrcm0103",
+            },
         ],
         yearOptions: [
             { value: "2026", label: "2026" },

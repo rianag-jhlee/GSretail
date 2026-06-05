@@ -1,0 +1,139 @@
+<template>
+    <div class="modal_cont gsrcm0103">
+        <div class="modal_header">
+            <span class="tit_pc" v-html="t.title"></span>
+            <span class="tit_mo" v-html="t.titleMoHeader"></span>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
+        </div>
+
+        <div class="modal_content">
+            <header class="mo_content_tit">
+                <h2 v-html="t.title"></h2>
+            </header>
+
+            <ol class="ft_sec_list">
+                <li v-for="(section, sIdx) in t.sections" :key="'sec-' + sIdx">
+                    <article>
+                        <h4>{{ section.title }}</h4>
+                        <div class="ft_stack">
+                            <p v-if="section.lead">{{ section.lead }}</p>
+                            <div v-if="section.desc?.length" class="desc_group">
+                                <p v-for="(line, dIdx) in section.desc" :key="'desc-' + sIdx + '-' + dIdx">{{ line }}</p>
+                            </div>
+                            <ul v-if="section.items" class="plain_list">
+                                <li v-for="(row, rIdx) in section.items" :key="'row-' + sIdx + '-' + rIdx">
+                                    <p>{{ row.title }}</p>
+                                    <ul v-if="row.details">
+                                        <li v-for="(detail, dIdx) in row.details" :key="'detail-' + sIdx + '-' + rIdx + '-' + dIdx">{{ detail }}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <nav v-if="section.btns">
+                                <Buttons
+                                    v-for="(btn, bIdx) in section.btns"
+                                    :key="'btn-' + sIdx + '-' + bIdx"
+                                    tag="a"
+                                    btn-class="btn_icon_arrow btn_big border after"
+                                    :href="btn.link"
+                                >
+                                    <span class="txt_pc">{{ btn.textPc }}</span>
+                                    <span class="txt_mo">{{ btn.textMo }}</span>
+                                </Buttons>
+                            </nav>
+                        </div>
+                    </article>
+                </li>
+            </ol>
+        </div>
+
+        <div class="modal_bototm">
+            <Buttons btn-class="btn_big fill gray" @click="closeModal">{{ t.submitLabel }}</Buttons>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { computed, defineProps } from "vue";
+import modal from "@/assets/js/modal";
+import Buttons from "@/components/Buttons.vue";
+
+const props = defineProps({
+    lang: { type: String, default: "ko" },
+});
+
+const langData = {
+    ko: {
+        title: "고정형 영상정보처리기기 운영·관리 방침",
+        titleMoHeader: "운영·관리 방침",
+        closeLabel: "닫기",
+        submitLabel: "확인",
+        sections: [
+            {
+                title: "2026.3.27 개정판 고시",
+                lead: "GS 리테일(이하 회사라 함)은 고정형 영상정보처리기기 운영·관리 방침을 통해 회사에서 처리하는 개인영상정보가 어떠한 용도와 방식으로 이용·관리되고 있는지 알려드립니다.",
+            },
+            {
+                title: "9. 고정형 영상정보처리기기 운영·관리방침 변경에 관한 사항",
+                lead: "법령ㆍ정책 또는 보안기술의 변경에 따라 내용의 추가ㆍ삭제 및 수정이 있을 시에는 회사 홈페이지를 통해 변경내용 등을 공지하도록 하겠습니다.",
+                desc: [
+                    "공고일자 : 2026년 3월 27일",
+                    "시행일자 : 2026년 3월 27일",
+                ],
+                btns: [
+                    { textPc: "2025.11.06 ~ 2026.03.26 이전방침 보러가기", textMo: "2025.11.06 ~ 2026.03.26 이전방침", link: "#none" },
+                    { textPc: "2024.07.24 ~ 2025.11.05 이전방침 보러가기", textMo: "2024.07.24 ~ 2025.11.05 이전방침", link: "#none" },
+                    { textPc: "2021.07.01 ~ 2024.07.23 이전방침 보러가기", textMo: "2021.07.01 ~ 2024.07.23 이전방침", link: "#none" },
+                ],
+            },
+        ],
+    },
+    en: {},
+};
+
+const t = computed(() => {
+    const selected = langData[props.lang];
+    return selected && Object.keys(selected).length ? selected : langData.ko;
+});
+
+function closeModal(event) {
+    modal.close(event.currentTarget);
+}
+</script>
+
+<style scoped>
+.modal_header{margin-bottom:80px;}
+.modal_header > .tit_mo { display: none; }
+.mo_content_tit { display: none; }
+.ft_sec_list{gap:60px;}
+.ft_sec_list > li > article{gap:40px;}
+.ft_stack{padding-left:0;}
+.ft_stack p{margin:0;}
+.ft_stack > .desc_group { margin-top: 30px; }
+.ft_stack > nav { margin-top:30px; display: inline-flex; flex-direction: column; gap: 8px; }
+.ft_stack > nav :deep(.txt_mo) { display: none; }
+.ft_stack p + .img_scroll{margin-top:20px;}
+.ft_stack > .img_scroll { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ft_stack > .img_scroll > figure.img_box { width: 961px; min-width: 961px; height: 670px; flex-shrink: 0; background-color: #e5e5e9; background-repeat: no-repeat; background-position: left top; background-size: 961px auto; border-radius: 12px; }
+.ft_stack > .img_scroll > figure.img_box.is_sm { height: 152px; background-size: 961px auto; }
+.modal_bototm { margin-top: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.modal_bototm > :deep(.btn_big) { width: 134px; text-align: center; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.ft_sec_list{padding:0;}
+
+
+@media (min-width: 769px ) {
+    .ft_sec_list > li > article > h4{font-size: 2.4rem;}
+
+}
+@media (max-width: 768px) {
+    .modal_header{margin-bottom:40px;}
+    .modal_header > .tit_pc { display: none; }
+    .modal_header > .tit_mo { display: block; }
+    .ft_stack p{font-size: 1.4rem;line-height: 1.4;}
+    .mo_content_tit { display: block; }
+    .mo_content_tit > h2 { margin-bottom: 80px; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .ft_stack > nav :deep(.txt_pc) { display: none; }
+    .ft_stack > nav :deep(.txt_mo) { display: inline; }
+    .modal_bototm { justify-content: center; }
+    .modal_bototm > :deep(.btn_big) { width: 100%; flex: 1; }
+}
+</style>
