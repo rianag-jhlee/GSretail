@@ -3,7 +3,7 @@
         <div class="modal_header">
             <span class="tit_pc" v-html="t.title"></span>
             <span class="tit_mo" v-html="t.titleMoHeader"></span>
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -15,13 +15,12 @@
                 <p>{{ t.intro.lead }}</p>
             </header>
 
-        
-            <div class="article_wrap">  
+            <div class="article_wrap">
                 <article
                     v-for="(sec, sIdx) in t.sections"
                     :key="'sec-' + sIdx"
                     class="info_sec"
-                    :class="[sec.type, sec.secClass, { is_accent: sec.accent }]"
+                    :class="[sec.type, sec.secClass]"
                 >
                     <h3 class="tit" v-html="sec.title"></h3>
     
@@ -67,6 +66,7 @@ const langData = {
     ko: {
         title: "알기 쉬운 개인정보 처리방침<br />(개인정보 처리방침 인포그래픽 버전)",
         titleMoHeader: "알기 쉬운 개인정보 처리방침",
+        closeLabel: "닫기",
         submitLabel: "확인",
         intro: {
             lead: "GS리테일이 고객님의 개인정보를 보호하는 정책을 한눈에 알기 쉽게 안내해드립니다.",
@@ -76,7 +76,6 @@ const langData = {
                 type: "points",
                 secClass: "sec_collect",
                 title: "GS리테일은 <span class='txt_primary'>최소한의 개인정보</span>를 수집합니다",
-                hasDivider: true,
                 points: [
                     {
                         title: "회원 가입 시",
@@ -119,7 +118,6 @@ const langData = {
             {
                 type: "cards",
                 secClass: "sec_provide",
-                accent: true,
                 title: "개인정보 <span class='txt_primary'>제공</span>은 고객 <span class='txt_primary'>동의</span> 혹은 <span class='txt_primary'>법적</span> 근거에 따라 처리합니다.",
                 cols: 3,
                 cards: [
@@ -159,7 +157,6 @@ const langData = {
                 type: "points",
                 secClass: "sec_protect",
                 title: "고객님의 <span class='txt_primary'>개인정보는 안전하게 보호</span>하기 위해 GS리테일은<br /> 다음과 같은 노력을 하고 있습니다.",
-                isBox: true,
                 points: [
                     {
                         title: "개인정보 보관",
@@ -180,6 +177,9 @@ const langData = {
                 ],
             },
         ],
+    },
+    en: {
+
     },
 };
 
