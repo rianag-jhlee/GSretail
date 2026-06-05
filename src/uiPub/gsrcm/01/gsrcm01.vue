@@ -70,6 +70,13 @@
     <div id="gsrcm0101" class="modal_wrap">
         <div class="modal_container"></div>
     </div>
+
+    <!-- 위치기반서비스 이용약관 -->
+    <div id="gsrcm0102" class="modal_wrap">
+        <div class="modal_container"></div>
+    </div>
+
+
 </template>
 
 <script setup>
@@ -101,7 +108,12 @@ const langData = {
                 type: "lg",
                 cont: "gsrcm0101",
             },
-            { text: "위치기반서비스 이용약관", link: "#none" },
+            { 
+                text: "위치기반서비스 이용약관", 
+                popId: "gsrcm0102",
+                type: "lg",
+                cont: "gsrcm0102",
+            },
             { text: "영상정보처리기기 운영 관리방침", link: "#none" },
         ],
         yearOptions: [
@@ -164,17 +176,9 @@ const selectedVersion = ref("20260422");
 
 const t = computed(() => langData[props.lang] || langData.ko);
 
-function openModal(event) {
-    const el = event.currentTarget;
-    const popId = el.dataset.popid;
-    const type = el.dataset.type || "default";
-    if (!popId) return;
-    modal.open(popId, type, el);
-}
-
 function onQuickBtnClick(event, btn) {
     if (btn.popId) {
-        openModal(event);
+        modal.open(btn.popId, btn.type || "default", { dataset: { cont: btn.cont } });
         return;
     }
     if (btn.link && btn.link !== "#none") {
