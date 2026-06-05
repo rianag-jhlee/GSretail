@@ -9,7 +9,10 @@
                 v-for="(btn, bIdx) in t.quickBtns"
                 :key="'quick-' + bIdx"
                 btn-class="btn_icon_arrow btn_big border after"
-                @click="handleQuickLink(btn.link)"
+                :data-popid="btn.popId" 
+                :data-type="btn.type"
+                :data-cont="btn.cont"
+                @click.prevent="onQuickBtnClick($event, btn)"
             >
                 {{ btn.text }}
             </Buttons>
@@ -60,10 +63,18 @@
             </div>
         </section>
     </div>
+
+
+
+    <!-- modal_wrap · 알기 쉬운 개인정보 처리방침 -->
+    <div id="gsrcm0101" class="modal_wrap">
+        <div class="modal_container"></div>
+    </div>
 </template>
 
 <script setup>
 import { ref, computed, defineProps } from "vue";
+import modal from "@/assets/js/modal";
 import Buttons from "@/components/Buttons.vue";
 import SelectBox from "@/components/SelectBox.vue";
 import imgGsrcm0101 from "@/assets/images/dummy/gsrcm01_01.png";
@@ -84,7 +95,12 @@ const langData = {
             "GS리테일(이하 ‘회사’)은 정보주체의 자유와 권리 보호를 위해 ｢개인정보 보호법｣및 관계 법령이 정한 바를 준수하여, 적법하게 개인정보를 처리하고 안전하게 관리하고 있습니다. 이에 ｢개인정보 보호법｣ 제30조에 따라 정보주체에게 개인정보 처리에 관한 절차 및 기준을 안내하고, 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립•공개합니다.",
         tocTitle: "목차",
         quickBtns: [
-            { text: "알기 쉬운 개인정보 처리방침", link: "#none" },
+            {
+                text: "알기 쉬운 개인정보 처리방침",
+                popId: "gsrcm0101",
+                type: "lg",
+                cont: "gsrcm0101",
+            },
             { text: "위치기반서비스 이용약관", link: "#none" },
             { text: "영상정보처리기기 운영 관리방침", link: "#none" },
         ],
@@ -148,9 +164,21 @@ const selectedVersion = ref("20260422");
 
 const t = computed(() => langData[props.lang] || langData.ko);
 
-function handleQuickLink(link) {
-    if (link && link !== "#none") {
-        window.open(link, "_blank");
+function openModal(event) {
+    const el = event.currentTarget;
+    const popId = el.dataset.popid;
+    const type = el.dataset.type || "default";
+    if (!popId) return;
+    modal.open(popId, type, el);
+}
+
+function onQuickBtnClick(event, btn) {
+    if (btn.popId) {
+        openModal(event);
+        return;
+    }
+    if (btn.link && btn.link !== "#none") {
+        window.open(btn.link, "_blank");
     }
 }
 </script>
