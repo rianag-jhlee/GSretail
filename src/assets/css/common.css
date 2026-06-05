@@ -63,13 +63,13 @@ select {width:100%; height:52px; padding:12px 40px 12px 12px; font-size:1.4rem; 
 .btn_small {height:32px; padding:0 8px; }
 .btn_file{height: 38px;padding: 0 27px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;border: 1px solid #67676F;border-radius: 4px;background-color: #ffffff;}
 
-/* @media screen and (max-width:768px) {
+@media screen and (max-width:768px) {
     .btn_xl {height:52px; padding:0 16px;}
     .btn_big {height:44px; padding:0 16px; }
     .btn_mid {height:38px; padding:0 12px;}
     .btn_base {height:32px; padding:0 8px;}
     .btn_small {height:26px; padding:0 8px;}
-} */
+}
 
 /* button color */
 [class*="btn_"][class*="fill"] {color:#fff; background-color:#222;}
