@@ -1,6 +1,6 @@
 <template>
     <div class="main-container">
-        <div class="title_wrap">
+        <div class="title_wrap top_visual"> <!-- 클래스 top_visual 추가 26.06.08 add 정다희 -->
             <h2 class="page-title">{{ t.MainTitle }}</h2>
         </div>
 
@@ -128,10 +128,7 @@ export default {
             currentPage.value = page;
         };
 
-        onMounted(() => {
-            const header = document.getElementById("header");
-            header?.classList.add("head_black");
-        });
+        // 26.06.08 delete head_block 클래스 추가하는는 스크립트 삭제 
 
         return { isGuide, lang, setLang, searchData, currentPage, t, handleSearch, onPageChange };
     },
@@ -141,7 +138,10 @@ export default {
 <style scoped>
 
 .main-container { width: 100%; position: relative; }
-.title_wrap { width: 100%; padding: 10.91% 0 0; text-align: center; position: relative; display: block; }
+/* title_wrap css수정 26.06.08 edit 정다희 */
+.title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrne01_bg.png') no-repeat center 57% / cover; text-align: center; position: relative; display: block;}
+.title_wrap::before{content:''; display:block; width:100%; height:100%; background:rgba(0,0,0,0.4); position:absolute; top:0; left:0; z-index:1;}
+.title_wrap > h2{color:#fff; position: relative; z-index:2;}
 .page-title { color: #111; font-size: 72px; font-weight: 700; line-height:124%; letter-spacing:-0.02em;}
 .visual-sub { margin-top: 10px; color: #111; font-size: 24px; font-weight: 400; line-height:150%; }
 
@@ -157,7 +157,6 @@ export default {
 
 @media screen and (max-width: 767px) {
     .title_wrap {display: none;}
-    .title_wrap h2 {display:none;}
     .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
     .search_filter_area{margin-top:0;}
     .board_wrap.type_gallery .body {margin-top:-48px;}
