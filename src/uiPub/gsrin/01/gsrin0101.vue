@@ -1018,7 +1018,7 @@ export default {
 .img {width: 100%; height:auto; position: relative; align-self: stretch;}
 .div-3 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; align-self: stretch; flex: 0 0 auto;}
 .text-wrapper-4 {width: fit-content; margin-top: -1.00px; padding: 0; color: #161618; font-size: 16px; font-weight: 700; letter-spacing: -0.16px; line-height: 24px; position: relative; white-space: nowrap;}
-.text-wrapper-5 {width: fit-content; padding: 0; color: #161618; font-size: 28px; font-weight: 700; font-style: normal; letter-spacing: -0.28px; line-height: 135.0000023841858%; position: relative; white-space: nowrap;}
+.text-wrapper-5 {width: fit-content; padding: 0; color: #161618; font-size: 2.8rem; font-weight: 700; font-style: normal; letter-spacing: -0.28px; line-height: 135.0000023841858%; position: relative; white-space: nowrap;}
 .div-4 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; align-self: stretch; flex: 0 0 auto;}
 .text-wrapper-6 {width: 100%; margin-top: -1.00px; padding: 0; color: #242428; font-size: 1.8rem; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; align-self: stretch;}
 .text-wrapper-7 {width: 100%; padding: 0; color: #67676f; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: -0.14px; line-height: 139.9999976158142%; position: relative; align-self: stretch;}
@@ -1133,7 +1133,7 @@ export default {
     .title_wrap {display:none;}
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
-    .title-sub-text {padding: 60px 0 80px; font-size: 28px; line-height: 1.3; text-align:left;}
+    .title-sub-text {padding: 60px 0 80px; font-size: 2.8rem; line-height: 1.3; text-align:left;}
     .gsrin0102 > * {margin-top: 80px;}
     :deep(.title-sub-text br) {display:block !important;}
     .view-3 {flex-direction: column; align-items: center; gap: 40px;}

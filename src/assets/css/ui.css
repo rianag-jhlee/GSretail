@@ -484,7 +484,7 @@ h5 {font-size:1.8rem;}
     .board_wrap table.type_list .view_cell::before {margin-right: 4px;}
 
     /* 게시물 상세 */
-    .board_detail_wrap{padding-top:64px;}
+    .board_detail_wrap{padding-top:70px;}
     .board_detail_wrap .detail_title {padding-bottom:24px;}
     .board_detail_wrap .tit {font-size:2.4rem; line-height:135%;}
     .warning_box { margin-top: 24px; padding: 16px 20px; }

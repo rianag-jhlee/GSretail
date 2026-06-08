@@ -279,7 +279,7 @@ section { padding-bottom: 80px; }
     .notice_bar p {font-size:12px !important; font-weight:400 !important;}
     .notice_bar p::before {top:-2px;}
     section { padding-bottom:60px; }
-    .tip_section h3 { font-size: 28px; }
+    .tip_section h3 { font-size: 2.8rem; }
     .tip_section ul { flex-wrap: wrap; gap: 20px 8px; }
     .tip_section ul li { flex: 0 0 calc(33.33% - 8px); }
     .tip_section ul li p { font-size: 12px; }

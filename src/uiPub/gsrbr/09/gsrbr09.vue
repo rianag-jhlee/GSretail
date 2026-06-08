@@ -70,7 +70,7 @@ export default {
                         subContent_2: "리얼 프라이스",
                     },
                     SubTitle: `브랜드 소개`,
-                    SubContent_1: `리얼프라이스는 우수 제조사 발굴 역량과 상품 개발 노하우를 바탕으로<br/>검증된 품질의 상품을 합리적인 가격으로 선보이는 GS리테일만의 PB 브랜드입니다.’`,
+                    SubContent_1: `리얼프라이스는 우수 제조사 발굴 역량과 상품 개발 노하우를 바탕으로<br/>검증된 품질의 상품을 합리적인 가격으로 선보이는 GS리테일만의 PB 브랜드입니다.`,
                     Bi: {
                         txt: `BI 로고`,
                         img: require("@/assets/images/dummy/gsrbr09_real_bi.png"),

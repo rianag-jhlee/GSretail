@@ -36,7 +36,7 @@
                         <div class="btn_group">
                             <div class="links">
                                 <button type="button" class="btn_link ico_location" @click="openModal" data-popid="gsrbr0204" data-type="lg" data-cont="gsrbr0204">{{ t.Buttons.proposal }}</button>
-                                <button type="button" class="btn_link btn_store_find" @click.prevent="openModal" data-popid="pop_store_find" data-type="lg" data-cont="gsrbr0106">{{ t.Buttons.findStore }}</button><!-- 26.05.11 Edit 이종환 : class -->
+                                <button type="button" class="btn_link btn_store_find" @click="openModal" data-popid="pop_store_find" data-type="lg" data-cont="gsrbr0603">{{ t.Buttons.findStore }}</button><!-- 26.05.11 Edit 이종환 : class --><!-- 26.06.08 Edit 이종환 : 호출팝업명 수정 -->
 
                                 <!-- 26.05.11 Edit 이종환 : sns 버튼 통일 -->
                                 <a href="https://www.instagram.com/gsthefresh" class="btn_sns btn_sns_insta" :aria-label="t.Sns.insta" target="_blank"></a>
@@ -1018,10 +1018,13 @@ export default {
 .sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden; }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px); }
+
 /* 26.06.02 Edit 정다희 */
 @media (max-width: 1024px) {
-.sec_brand_visual{height:200vh}
-.sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
+    .sec_brand_visual{height:200vh}
+    .sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) }
+}
+
 .bg_wrap > .bg { width: 100%; height: 100%; background-image: url("@/assets/images/dummy/gsrbr020101_main.png"); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out; }
 .bg_wrap.active > .bg { transform: scale(1); }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s; }
@@ -1047,8 +1050,8 @@ export default {
 .value_title { width: 100%; margin-bottom: 64px; display: flex; align-items: flex-end; justify-content: space-between; }
 .title_text { color: #161616; font-size: 48px; font-weight: 700; line-height: 1.3; }
 
-.btn_group { display: flex; align-items: center; gap: 10px; }
-.links { display: flex; align-items: center; gap: 24px; }
+.btn_group {padding:0; display: flex; align-items: center; gap: 10px; }
+.links { display: flex; align-items: center; gap: 16px; }
 
 /* common.css로 이동
 .btn_sns { width: 56px; height: 56px; background-color: #f8f8f8; border: 1px solid #e5e5e9; border-radius: 99px; display: flex; align-items: center; justify-content: center; }
@@ -1073,12 +1076,12 @@ export default {
 .origin_section { width: 100%; position: relative; display: block; }
 .mt40 { margin-top: 40px; }
 .origin_tabs_2depth { width: 100%; margin: 60px 0 0; }
-.empty_cont { padding: 100px 0; text-align: center; color: #67676f; font-size: 20px; background-color: #f8f8f8; border-radius: 12px; }
+.empty_cont { padding: 100px 0; text-align: center; color: #67676f; font-size: 2rem; background-color: #f8f8f8; border-radius: 12px; }
 
 /* 지자체 컨텐츠 디자인 */
 .production_bg { background-image: url('@/assets/images/sub/gsrbr02/gsrbr020101_6.png'); background-size: cover; }/* 26.06.08 Edit 이종환 : [확정] 경로 수정 */
 .partnership_bg { background-image: url('@/assets/images/dummy/gsrbr020101_5.png'); background-size: cover; }
-.sub_title { margin-bottom: 40px; color: #161616; font-size: 28px; font-weight: 700; }
+.sub_title { margin-bottom: 40px; color: #161616; font-size: 2.8rem; font-weight: 700; }
 .mou_grid { display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 40px; column-gap: 20px; }
 .mou_item { border-radius: 12px; text-align: center; }
 .mou_logo { width: 100%; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
@@ -1090,8 +1093,8 @@ export default {
 .mou_info { margin-top: 8px; color: #67676f; font-size: 14px; line-height: 1.6; }
 
 .mou_products { margin-top: 100px; }
-.mou_table { width: 100%; border-top: 1px solid #161616; border-collapse: collapse; }
-.mou_table th, .mou_table td { padding: 24px; border-bottom: 1px solid #e5e5e3; text-align: left; font-size: 1.8rem; line-height: 1.6; }
+.mou_table { width: 100%; border-top: 1px solid #E5E5E9; border-collapse: collapse; }
+.mou_table th, .mou_table td { padding: 24px; border-bottom: 1px solid #E5E5E9; text-align: left; font-size: 1.8rem; line-height: 1.6; }
 .mou_table th { background-color: #f8f8f8; color: #161616; font-weight: 700; }
 .mou_table td { color: #67676f; }
 
@@ -1102,18 +1105,20 @@ export default {
 .origin_intro .text_box { margin-left: 0; margin-right: auto; }
 .origin_intro .text_box p { margin-top: 16px; font-size: 24px; line-height: 1.4; display:flex; flex-direction:column; gap:16px;}
 .origin_intro .text_box p:last-of-type {margin-top:0px;}
-.origin_intro .text_box p :deep(span) {color:#67676F !important; font-size:20px !important;}
+.origin_intro .text_box p :deep(span) {color:#67676F !important; font-size:2rem !important;}
 
 .origin_content_wrap { width: 100%; display: flex; align-items: flex-start; }
 .origin_lnb { width: 200px; position: sticky; top: 100px; }
-.origin_lnb button { width: 100%; height: 64px; color: #4c4c53; font-size: 20px; font-weight: 700; text-align: left; background: none; border: 0; cursor: pointer; }
+.origin_lnb ul {margin-top:-18.5px;}
+.origin_lnb button { width: 100%; height: 64px; color: #4c4c53; font-size: 2rem; font-weight: 700; text-align: left; background: none; border: 0; cursor: pointer; }
 .origin_lnb ul li.active button { color: #161616; }
 
 .origin_list_box { flex: 1; }
 .origin_group { padding-top: 100px; scroll-margin-top: 100px; }
 .origin_group:first-of-type { padding-top: 0; }
 .group_header { margin-bottom: 40px; }
-.group_title { margin-bottom: 12px; color: #161616; font-size: 28px; font-weight: 700; }
+.group_title { margin-bottom: 12px; color: #161616; font-size: 2.8rem; font-weight: 700; }
+.group_desc {font-size:2rem; line-height:135%; letter-spacing:-0.01em;}
 .item_grid { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .origin_item { width: 100%; }
 .item_thumb { width: 100%; height: 198px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; }
@@ -1121,7 +1126,7 @@ export default {
 .item_name { width: 100%; margin-top: 16px; color: #67676f; font-size: 1.8rem; text-align: center; }
 
 /* common.css로 이동
-.btn_back { padding-left: 28px; color: #161616; font-size: 20px; background: none; border: 0; cursor: pointer; position: relative; }
+.btn_back { padding-left: 28px; color: #161616; font-size: 2rem; background: none; border: 0; cursor: pointer; position: relative; }
 .btn_back::before { width: 16px; height: 16px; background-color: red; content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
 */
 
@@ -1140,8 +1145,8 @@ export default {
 /* Node Sections */
 .tm-node-section { width: 100%; margin-bottom: 120px; display: flex; flex-direction: column; gap: 40px; }
 .tm-node-section:last-of-type {margin-bottom:0;}
-.tm-section-title { font-size: 28px; font-weight: 700; color: #161616; letter-spacing: -0.28px; }
-.tm-section-subtext { font-size: 20px; color: #161616; margin-top: 12px; }
+.tm-section-title { font-size: 2.8rem; font-weight: 700; color: #161616; letter-spacing: -0.28px; }
+.tm-section-subtext { font-size: 2rem; color: #161616; margin-top: 12px; }
 
 /* Steps */
 .tm-steps-wrap { width: 100%; background-color: #F8F8F8; border-radius: 12px; padding: 56px 64px; }
@@ -1149,7 +1154,7 @@ export default {
 .tm-step-item { display: flex; flex-direction: column; gap: 20px; }
 .tm-step-icon { width: 40px; height: 40px; }
 .tm-step-num { font-size: 1.8rem; font-weight: 700; color: #107AF2; display: block; margin-bottom: 6px; }
-.tm-step-tit {margin-bottom:16px; font-size: 20px; font-weight: 700; color: #161616; display: block; }
+.tm-step-tit {margin-bottom:16px; font-size: 2rem; font-weight: 700; color: #161616; display: block; }
 .tm-step-text { font-size: 16px; color: #67676F; line-height: 1.5; }
 
 .tm-step-num::before {content:''; width:40px; height:40px; margin-bottom:20px; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat; display:block;}
@@ -1165,7 +1170,7 @@ export default {
 .swiper-slide.tm-principle-card:last-of-type {margin-right:0 !important;}
 .tm-card-header {display:flex; flex-direction:column; gap:8px;}
 .tm-card-num { font-size: 1.8rem; font-weight: 700; color: #107AF2; }
-.tm-card-tit { font-size: 20px; font-weight: 700; color: #161616; }
+.tm-card-tit { font-size: 2rem; font-weight: 700; color: #161616; }
 .tm-card-main-text { margin-bottom:8px; font-size: 1.8rem; font-weight: 700; color: #67676F; line-height: 1.5; }
 .tm-card-sub-text { font-size: 16px; color: #67676F; line-height: 1.5; }
 
@@ -1173,7 +1178,7 @@ export default {
 .tm-product-layout { display: flex; width: 100%; align-items: flex-start; }
 .tm-lnb-side { width: 200px; padding-right: 20px; position:sticky; top:100px;}
 .tm-lnb-item { height: 64px; display: flex; align-items: center; }
-.tm-lnb-item button { font-size: 20px; font-weight: 700; color: #4C4C53; background: none; border: 0; cursor: pointer; text-align: left; width: 100%; }
+.tm-lnb-item button { font-size: 2rem; font-weight: 700; color: #4C4C53; background: none; border: 0; cursor: pointer; text-align: left; width: 100%; }
 .tm-lnb-item.is-active button { color: #161616; }
 
 .tm-product-main { flex: 1; padding-top: 16px; }
@@ -1223,6 +1228,9 @@ export default {
     .txt_area > p > span { font-size: 3.2rem; }
     /* .sec_brand_about { padding: 100px 20px; } */
     .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
+
+    .visual_img_small {height:auto; padding-top:64%;}
+    .production_bg { background-image: url('@/assets/images/sub/gsrbr02/gsrbr020101_6_mo.png'); background-size: cover; }
 }
 
 @media screen and (max-width: 767px) {
@@ -1238,11 +1246,11 @@ export default {
     .origin_group { padding-top:40px;}
     .origin_lnb {display:none;}
     .origin_intro {padding-top:20px;}
-    .origin_intro .title { font-size: 28px; }
+    .origin_intro .title { font-size: 2.8rem; }
     .origin_intro .text_box p :deep(span) {font-size:14px !important;}
     .sub_title {font-size:24px;}
     .group_header { margin-bottom:24px; }
-    .group_title {font-size:20px;}
+    .group_title {font-size:2rem;}
     .group_title + p {font-size:16px; line-height:1.5;}
     .visual_img_small { height: 200px; }
     .item_grid { grid-template-columns: repeat(2, 1fr); }
@@ -1255,7 +1263,7 @@ export default {
     .tm-node-section:last-of-type {margin-bottom:0px;}
     .tm-lnb-side {display:none;}
     .tm-product-main {width:100%;}
-    .tm-main-title { font-size: 28px; }
+    .tm-main-title { font-size: 2.8rem; }
     .tm-card-tit {font-size:18px;}
     .tm-main-desc, .tm-step-num, .tm-step-tit, .tm-section-subtext, .tm-card-main-text { font-size: 16px; }
     .tm-step-text {font-size:14px;}
@@ -1271,7 +1279,8 @@ export default {
     .mou_logo {justify-content:flex-start;}
     .mou_logo img {width:100%;}
     .mou_logo.fipa_logo {justify-content:center;}
-    .btn_link {font-size:14px;}
+    .links {gap:14px;}
+    .btn_link {padding:0; font-size:14px;}
     .btn_sns { width:40px; height:40px;}
     .btn_link::before {width:20px; height:20px;} 
     .origin_tabs_2depth {margin:0px;}

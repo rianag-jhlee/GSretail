@@ -86,6 +86,18 @@
         <div id="gsrbr0404" class="modal_wrap">
             <div class="modal_container"></div>
         </div>
+
+        <!-- 26.06.08 Add 이종환 : 팝업 추가 -->
+        <!-- 나만의 냉장고 -->
+        <div id="gsrbr0405" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+
+        <!-- 사전예약 -->
+        <div id="gsrbr0406" class="modal_wrap">
+            <div class="modal_container"></div>
+        </div>
+        <!-- //26.06.08 Add 이종환 : 팝업 추가 -->
     </div>
 </template>
 
@@ -129,9 +141,9 @@ export default {
                     BenefitRows: [
                         [
                             { title: "재고찾기/검색", desc: "전국 매장별 실시간 상품 재고 현황 및 잔여 수량을 간편하게 확인할 수 있습니다.", popId: "gsrbr0403", popType: "lg", popCont: "gsrbr0403"},
-                            { title: "나만의 냉장고", desc: "GS25에서 받은 증정품이나 경품, GS THE FRESH의 사전예약 상품을 보관하고 원하는 때에 찾아갈 수 있습니다." },
+                            { title: "나만의 냉장고", desc: "GS25에서 받은 증정품이나 경품, GS THE FRESH의 사전예약 상품을 보관하고 원하는 때에 찾아갈 수 있습니다." , popId: "gsrbr0405", popType: "lg", popCont: "gsrbr0405"}, //26.06.08 Edit 이종환 : 나만의 냉장고 팝업 (gsrbr0405) 추가
                             { title: "배달/픽업", desc: "GS25,GS THE FRESH의 인기상품을 배달/픽업으로 간편하게 만나보세요!", popId: "gsrbr0401", popType: "lg", popCont: "gsrbr0401"},
-                            { title: "사전예약", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다." },
+                            { title: "사전예약", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다.",  popId: "gsrbr0406", popType: "lg", popCont: "gsrbr0406"}, //26.06.08 Edit 이종환 : 사전예약 팝업 (gsrbr0405) 추가
                             { title: "와인25플러스", desc: "5천여 종의 와인과 다양한 주류를 주문하고 전국 편의점/수퍼 매장에서 손 쉽게 수령할 수 있습니다.", popId: "gsrbr0402", popType: "lg", popCont: "gsrbr0402" },
                             { title: "간편결제, 간편 로그인", desc: "다양한 수단으로 간편결제 및 간편 로그인 서비스를 지원합니다." },
                             { title: "멤버십 혜택", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다." },
@@ -169,9 +181,9 @@ export default {
                     BenefitRows: [
                         [
                             { title: "Stock Finder and Search", desc: "Easily check real-time inventory and remaining stock at stores nationwide.", popId: "gsrbr0403", popType: "lg", popCont: "gsrbr0403"},
-                            { title: "My Refrigerator", desc: "You can store giveaways or prizes received at GS25, as well as pre-ordered products from GS THE FRESH, and pick them up whenever you like."/* 260604 번역 */ },
+                            { title: "My Refrigerator", desc: "You can store giveaways or prizes received at GS25, as well as pre-ordered products from GS THE FRESH, and pick them up whenever you like."/* 260604 번역 */  , popId: "gsrbr0405", popType: "lg", popCont: "gsrbr0405"}, //26.06.08 Edit 이종환 : 나만의 냉장고 팝업 (gsrbr0405) 추가},
                             { title: "Delivery and Pick-up", desc: "Get popular products from GS25 and GS THE FRESH delivered or ready for pick-up! Download the 'Our Neighborhood GS' app for exclusive events and extra discounts!", popId: "gsrbr0401", popType: "lg", popCont: "gsrbr0401"},
-                            { title: "Pre-Order", desc: "The Our Neighborhood GS app offers a pre-order service that lets you pick up items at the store and time of your choice." },
+                            { title: "Pre-Order", desc: "The Our Neighborhood GS app offers a pre-order service that lets you pick up items at the store and time of your choice.",  popId: "gsrbr0406", popType: "lg", popCont: "gsrbr0406"}, //26.06.08 Edit 이종환 : 사전예약 팝업 (gsrbr0405) 추가
                             { title: "Wine25Plus", desc: "Order from over 5,000 wine varieties and a wide selection of alcoholic beverages, and pick them up at convenience stores and supermarkets nationwide.", popId: "gsrbr0402", popType: "lg", popCont: "gsrbr0402" },
                             { title: "Easy Payment and Easy Login", desc: "Easy payment and login are available through a variety of methods." },
                             { title: "Membership Benefits", desc: "The Our Neighborhood GS app offers a pre-order service that lets you pick up items at the store and time of your choice." },

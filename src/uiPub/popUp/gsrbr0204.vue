@@ -6,7 +6,6 @@
         </div>
 
         <div class="modal_content">
-            <h3 class="sub_title">{{ t.SubTitle }}</h3>
 
             <ul class="card_grid owner_card_layout">
                 <li v-for="(item, idx) in t.cards" :key="'owner-feat-'+idx" class="strategy_card">
@@ -82,7 +81,7 @@ export default {
 
 <style scoped>
 .sub_title { font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 32px; color: #161616; }
-.card_grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.card_grid { display: flex; gap: 20px; }
 .strategy_card { padding: 40px; background: #F8F8F8; border-radius: 12px; flex: 1;}
 .card_head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
 .card_head .image_wrap { margin-bottom: 24px; }
@@ -91,7 +90,7 @@ export default {
 .modal_bottom { margin-top: 60px; }
 .modal_bottom .btn_big { min-width: 134px; }
 @media screen and (max-width: 1024px) {
-    .card_grid { grid-template-columns: repeat(1, 1fr); }
+    .card_grid {margin-bottom:20px; flex-direction:column;}
     .modal_bottom { display: none }
 }
 </style>

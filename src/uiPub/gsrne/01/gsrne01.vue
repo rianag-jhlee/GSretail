@@ -159,7 +159,7 @@ export default {
     .title_wrap {display: none;}
     .title_wrap h2 {display:none;}
     .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
-    .search_filter_area{margin-top:0;}
+    .search_filter_area{margin-top:70px;}
     .board_wrap.type_gallery .body {margin-top:-48px;}
     .board_wrap.type_gallery .body > li {width:100%; padding-top:48px;}
     .board_wrap.type_gallery .item .thumb {padding-top:60.895522%;}

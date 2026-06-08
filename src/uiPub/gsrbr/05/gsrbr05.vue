@@ -302,8 +302,8 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
 .benefit_row + .benefit_row .benefit_item:nth-child(1) .info:after {background-position:-500px -346px;}
 .benefit_row + .benefit_row .benefit_item:nth-child(2) .info:after {background-position:-20px -346px;}
 /* //26.05.12 Edit 이종환 */
-.info .point_color { color: #107af2; font-size: 28px; font-weight: 700; display: block; margin-bottom: 4px; }
-.info .tit { font-size: 28px; font-weight: 700; color: #161616; display: block; margin-bottom: 16px; }
+.info .point_color { color: #107af2; font-size: 2.8rem; font-weight: 700; display: block; margin-bottom: 4px; }
+.info .tit { font-size: 2.8rem; font-weight: 700; color: #161616; display: block; margin-bottom: 16px; }
 .info .desc { font-size: 20px; font-weight: 700; color: #67676b; line-height: 1.35; margin-bottom: 16px; }
 .benefit_container {margin-top:64px;}
 

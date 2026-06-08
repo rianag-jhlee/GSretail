@@ -164,13 +164,15 @@
                     v-for="card in programCardList"
                     :key="card.key"
                 >
+                    <!-- 26.06.08 Edit 이종환 : 모바일 이미지 분리 -->
                     <CardItem
-                        :thumb-src="card.image"
+                        :thumb-src="isMobileView && card.image_mo ? card.image_mo : card.image"
                         :thumb-alt="card.imgAlt || ''"
                     >
                         <template v-if="card.title" #title>{{ card.title }}</template>
                         <p v-if="card.desc" v-html="card.desc"></p>
                     </CardItem>
+                    <!-- //26.06.08 Edit 이종환 : 모바일 이미지 분리 -->
                 </li>
             </ul>
 
@@ -217,12 +219,20 @@ import imgCh01 from "@/assets/images/sub/gsrbr03/gsrbr0301_10.png";
 import imgCh02 from "@/assets/images/sub/gsrbr03/gsrbr0301_11.png";
 import imgCh03 from "@/assets/images/sub/gsrbr03/gsrbr0301_12.png";
 import imgCh04 from "@/assets/images/sub/gsrbr03/gsrbr0301_13.png";
+
 import imgPr01 from "@/assets/images/sub/gsrbr03/gsrbr0301_14.png";
 import imgPr02 from "@/assets/images/sub/gsrbr03/gsrbr0301_15.png";
 import imgPr03 from "@/assets/images/sub/gsrbr03/gsrbr0301_16.png";
 import imgPr04 from "@/assets/images/sub/gsrbr03/gsrbr0301_17.png";
 import imgPr05 from "@/assets/images/sub/gsrbr03/gsrbr0301_18.png";
 import imgPr06 from "@/assets/images/sub/gsrbr03/gsrbr0301_19.png";
+
+import imgPr01_mo from "@/assets/images/sub/gsrbr03/gsrbr0301_14_mo.png";
+import imgPr02_mo from "@/assets/images/sub/gsrbr03/gsrbr0301_15_mo.png";
+import imgPr03_mo from "@/assets/images/sub/gsrbr03/gsrbr0301_16_mo.png";
+import imgPr04_mo from "@/assets/images/sub/gsrbr03/gsrbr0301_17_mo.png";
+import imgPr05_mo from "@/assets/images/sub/gsrbr03/gsrbr0301_18_mo.png";
+import imgPr06_mo from "@/assets/images/sub/gsrbr03/gsrbr0301_19_mo.png";
 
 
 
@@ -370,6 +380,7 @@ const langData = {
                 {
                     key: "pr-05",
                     image: imgPr05,
+                    image_mo: imgPr05_mo,
                     imgAlt: "대표 브랜드 프로그램 5",
                     title: "쇼미더트렌드",
                     desc: "트렌드를 스타일링하다<br />매주 토요일 저녁 9시 35분",
@@ -377,6 +388,7 @@ const langData = {
                 {
                     key: "pr-04",
                     image: imgPr04,
+                    image_mo: imgPr04_mo,
                     imgAlt: "대표 브랜드 프로그램 4",
                     title: "더컬렉션",
                     desc: "더 럭셔리 프리미엄 편집샵<br />매주 토요일 오전 9시 20분",
@@ -384,6 +396,7 @@ const langData = {
                 {
                     key: "pr-01",
                     image: imgPr01,
+                    image_mo: imgPr01_mo,
                     imgAlt: "대표 브랜드 프로그램 1",
                     title: "소유진쇼",
                     desc: "차원이 다른 쇼핑<br />매주 금요일 저녁 8시 35분",
@@ -391,6 +404,7 @@ const langData = {
                 {
                     key: "pr-06",
                     image: imgPr06,
+                    image_mo: imgPr06_mo,
                     imgAlt: "대표 브랜드 프로그램 6",
                     title: "신상뷰티찬스",
                     desc: "화제의 뷰티템 이달의 신상<br />격주 토요일 낮 11시 50분",
@@ -398,6 +412,7 @@ const langData = {
                 {
                     key: "pr-02",
                     image: imgPr02,
+                    image_mo: imgPr02_mo,
                     imgAlt: "대표 브랜드 프로그램 3",
                     title: "지금 백지연",
                     desc: "프리미엄 큐레이션의 시작<br />매주 목요일 저녁 8시45분",
@@ -405,6 +420,7 @@ const langData = {
                 {
                     key: "pr-03",
                     image: imgPr03,
+                    image_mo: imgPr03_mo,
                     imgAlt: "대표 브랜드 프로그램 3",
                     title: "스타일나우; 더 김동은",
                     desc: "지금, 더 나다워지는 순간<br/> 매주 화요일 오전 8시 15분",
@@ -545,6 +561,7 @@ const langData = {
                 {
                     key: "pr-05",
                     image: imgPr05,
+                    image_mo: imgPr05_mo,
                     imgAlt: "Flagship Brand Program 5"/* 260604 번역 */,
                     title: "Show Me the Trend",
                     desc: "Styling the Trend<br />Every Saturday at 9:35 PM",
@@ -552,6 +569,7 @@ const langData = {
                 {
                     key: "pr-04",
                     image: imgPr04,
+                    image_mo: imgPr04_mo,
                     imgAlt: "Flagship Brand Program 4"/* 260604 번역 */,
                     title: "The Collection",
                     desc: "The Luxury Premium Edit<br />Every Saturday at 9:20 AM",
@@ -559,6 +577,7 @@ const langData = {
                 {
                     key: "pr-01",
                     image: imgPr01,
+                    image_mo: imgPr01_mo,
                     imgAlt: "Flagship Brand Program 1"/* 260604 번역 */,
                     title: "The So Yoo-Jin Show",
                     desc: "A Shopping Experience Like No Other <br />Every Friday at 8:35 PM",
@@ -566,6 +585,7 @@ const langData = {
                 {
                     key: "pr-06",
                     image: imgPr06,
+                    image_mo: imgPr06_mo,
                     imgAlt: "Flagship Brand Program 6"/* 260604 번역 */,
                     title: "New Beauty Chance",
                     desc: "This Month's Hottest New Beauty Picks <br />Every Other Saturday at 11:50 AM",
@@ -573,6 +593,7 @@ const langData = {
                 {
                     key: "pr-02",
                     image: imgPr02,
+                    image_mo: imgPr02_mo,
                     imgAlt: "Flagship Brand Program 3"/* 260604 번역 */,
                     title: "Baek Ji-Yeon Now",
                     desc: "Where Premium Curation Begins <br />Every Thursday at 8:45 PM",
@@ -580,6 +601,7 @@ const langData = {
                 {
                     key: "pr-03",
                     image: imgPr03,
+                    image_mo: imgPr03_mo,
                     imgAlt: "Flagship Brand Program 3"/* 260604 번역 */,
                     title: "Style Now; The Kim Dong-eun"/* 260604 번역 */,
                     desc: "Now, the moment you become more yourself<br/> Every Tuesday at 8:15 AM"/* 260604 번역 */,
@@ -940,13 +962,15 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
     .sec_brand_channel .card_list :deep(.card_thumb) { aspect-ratio: 335 / 190;}
     .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 20px; display: block;}
     .sec_brand_channel .card_list :deep(.card_item .card_body .card_num),
-    .sec_brand_channel .card_list :deep(.card_item .card_body .card_tit) { display: inline-block; margin: 0 0 0 5px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-    .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 16px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    .sec_brand_channel .card_list :deep(.card_item .card_body .card_tit) { display: inline-block; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 16px; margin-left:27px; font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+
+    .sec_brand_channel .card_list :deep(.card_item .card_body .card_num) {margin-right:6px;}
 
     /* 프로그램 */
     .sec_brand_program .str_header_program { margin-bottom: 40px }
     .sec_brand_program .card_list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 10px }
-    .sec_brand_program .card_list :deep(.card_thumb) {aspect-ratio: 162 / 114;}
+    .sec_brand_program .card_list :deep(.card_thumb) {background-size:cover; aspect-ratio: 162 / 114;}
     .sec_brand_program .card_list :deep(.card_item .card_body) { padding-top: 20px; }
     .sec_brand_program .card_list :deep(.card_desc) { margin-top: 8px; }
     .sec_brand_program .card_list :deep(.card_desc p) { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }

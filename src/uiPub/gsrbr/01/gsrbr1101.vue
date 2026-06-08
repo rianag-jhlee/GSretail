@@ -636,7 +636,7 @@ export default {
 .content_title { margin-bottom:16px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
 .sub_title { color: #161616; font-size: 24px; font-weight: 700; }
 .text_list { margin-top: 16px; }
-.text_item {width: 100%; margin-bottom:16px; padding-left: 24px; color: #161616; font-size: 28px; line-height: 1.6; text-indent: -24px;}
+.text_item {width: 100%; margin-bottom:16px; padding-left: 24px; color: #161616; font-size: 2.8rem; line-height: 1.6; text-indent: -24px;}
 .mall_content .content_title {margin-top:40px; margin-bottom:100px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
 .mall_content .content_title a {margin-left:16px; font-size:18px; font-weight:500; display:inline-flex; gap:8px; align-items:center;}
 .mall_content .content_title a::before {content: ''; display: inline-block; width:24px; height:24px; background:url('@/assets/images/common/icon_set_20.png') -454px -112px no-repeat;}
@@ -696,7 +696,7 @@ export default {
     .text_box .desc_box { margin-top: 24px; }
     .text_box .summary, .text_box .desc { font-size: 1.8rem; line-height: 1.5; }
     .detail_content { margin-top: 60px; }
-    .content_title {font-size: 28px !important; }
+    .content_title {font-size: 2.8rem !important; }
     .sub_title { font-size: 20px; }
     .text_item { font-size: 1.8rem; line-height: 1.6; }
     .map_area { height: 400px; }

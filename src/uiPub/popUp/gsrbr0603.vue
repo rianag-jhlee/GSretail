@@ -143,7 +143,7 @@ export default {
 .store_search_popup { padding: 10px 0; }
 .intro_box { margin-bottom: 32px; }
 .intro_text { font-size: 24px; font-weight: 700; line-height: 1.4; color: #161616; }
-.filter_search_wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+.filter_search_wrap {position:relative; display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
 .filter_search_wrap .btn_icon_search {display:flex; align-items:center;}
 .filter_search_wrap .btn_icon_search:before {width:16px; height:16px; margin-right:10px; background:url('@/assets/images/common/icon_set_16.png') -496px -14px; filter: brightness(0) invert(1); content:''; display:block;}
 .input_group { display: flex; flex: 1; gap: 8px; }
@@ -176,7 +176,24 @@ export default {
     .store_map_mobile { display: block; width: 100%; margin-top: 20px; } 
     .store_map_mobile .map_box { width: 100%; height: 250px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e5e9; } 
     .store_map_mobile .map_box img { width: 100%; height: 100%; object-fit: cover; } 
-    .filter_search_wrap { flex-direction: column; align-items: flex-start; gap: 20px; } 
+    .filter_search_wrap { flex-direction: column; align-items: flex-start; gap: 20px; }
+
     .input_group { width: 100%; flex-wrap:wrap;} 
+}
+
+@media screen and (max-width:768px) {
+    .base_select {flex:1;}
+    .base_input_wrap {width:100%; flex:1 auto;}
+
+    .filter_search_wrap :deep(.input input) {height:42px; padding-right:60px;}
+    .filter_search_wrap :deep(.input_wrap label.input i) {font-size:1.4rem; top:21px;}
+    .filter_search_wrap :deep(label.select select) {height:42px; font-size:1.4rem; line-height:1.3;}
+    .filter_search_wrap :deep(label.select > div:after) {width:8px; height:8px; margin-top:-3px;}
+
+    .filter_search_wrap .btn_group {height:auto; position:absolute; bottom:12px; right:16px; z-index:1; gap:10px;}
+    .filter_search_wrap .btn_group .btn_big {width:16px; height:16px; padding:0; font-size:0; background-color:#fff; border:0; border-radius:0;}
+    .filter_search_wrap .btn_group .btn_big:before {width:16px; height:16px; background-image:url('@/assets/images/common/icon_set_16.png'); content:''; filter:initial; display:block;}
+    .filter_search_wrap .btn_group .btn_icon_search:before {margin-right:0; background-position:-496px -14px;}
+    .filter_search_wrap .btn_group .btn_big.gray:before {background-position:-896px -14px;}
 }
 </style>

@@ -137,7 +137,7 @@ const langData = {
             { value: 'https://www.elysian.co.kr/intro', label: '엘리시안강촌' }
         ],
         skybanner: [
-            { txt:'창업안내', link:"#none" },
+            { txt:'창업안내', link:"gsrst_smain" },
             { txt:'입점상담', link:"gsrse01" },
             { txt:'고객센터', link:"gsrcu01" }
         ]

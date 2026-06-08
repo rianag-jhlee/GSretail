@@ -3707,14 +3707,14 @@ export default {
     .result { color: #107AF2; }
     .result .year { display: block; font-size: 24px; font-weight: 700; }
     .result strong { font-size: 32px; font-weight: 700; }
-    .index_title strong { font-size: 28px; color: #161616; }
+    .index_title strong { font-size: 2.8rem; color: #161616; }
     .btn_xl {font-weight:700;}
     .bullet_01 li {font-size:16px;}
     .index_box strong {margin-top:20px; font-size:2.8rem; font-weight:700; display:block;}
     .strategy_box .diagram_img_wrap {margin:0;}
 
     /* 금융지원 */
-    .text_summary_sub { margin-bottom:80px; font-size: 28px; font-weight: 700; color: #90909A;}
+    .text_summary_sub { margin-bottom:80px; font-size: 2.8rem; font-weight: 700; color: #90909A;}
     .section_title_sub {margin-bottom:16px; font-size: 40px; font-weight: 700; color: #161616; }
     .wide_info_box { display: flex; gap: 40px; align-items: flex-start; }
     .img_frame {height: 360px; max-height:100%; border-radius: 12px; overflow: hidden; }
@@ -3799,7 +3799,7 @@ export default {
     /* 공통 폰트 및 컬러 변수 활용 */
     .csr_outline .view_box { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
     .csr_outline .text_xl_bold { font-size: 40px; font-weight: 700; color: #161616; }
-    .csr_outline .text_l_bold { font-size: 28px; font-weight: 700; color: #161616; }
+    .csr_outline .text_l_bold { font-size: 2.8rem; font-weight: 700; color: #161616; }
     .csr_outline .label_blue { font-size: 20px; font-weight: 700; color: #107AF2; margin-bottom: 8px; display: block; }
     .strategy_grid { margin-bottom:80px; display: flex; gap: 24px; }
     .strategy_info { flex: 1; border-radius: 12px; }
@@ -3866,7 +3866,7 @@ export default {
     .talent_vision .circle_item span { font-size: 1.8rem; margin-top: 8px; opacity: 0.9; }
     .value_detail_grid {width:100%; padding:40px 0; background:#fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display:flex; justify-content:space-evenly;}
     .value_detail_grid .detail_card { width:100%; max-width:400px; }
-    .card_title { font-size: 28px; font-weight: 700; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid #E5E5E9; }
+    .card_title { font-size: 2.8rem; font-weight: 700; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid #E5E5E9; }
     .value_list li, .way_list li { margin-bottom: 24px; display: flex; align-items: flex-start; }
     .way_list li {gap:30px;}
     .value_list strong, .way_list strong { min-width: 100px; font-size: 20px; font-weight: 700; color: #161616; }
@@ -4001,8 +4001,8 @@ export default {
 
     .safety_management_wrap .system_item:first-of-type .text_box::before {top:0px;}
     .safety_management_wrap .system_item:nth-of-type(2) .text_box::before {top:0px;}
-    .safety_management_wrap .system_item .num { font-size: 28px; font-weight: 700; color: #107af2; display: block; }
-    .safety_management_wrap .system_item .tit { font-size: 28px; font-weight: 700; color: #161616; }
+    .safety_management_wrap .system_item .num { font-size: 2.8rem; font-weight: 700; color: #107af2; display: block; }
+    .safety_management_wrap .system_item .tit { font-size: 2.8rem; font-weight: 700; color: #161616; }
     .safety_management_wrap .system_item .sub { font-size: 20px; color: #67676f; margin-top: 8px; display: block; }
     .input_wrap {display:flex; align-items:center; justify-content:flex-end;}
     .noti_non_member {padding:24px; background:#F9F2EA; border-radius:12px;}
