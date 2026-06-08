@@ -75,7 +75,7 @@ img {
     font-size: 1.4rem;
     font-weight: 400;
     line-height: 1.4;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
 }
 
 @media (max-width: 768px) {
