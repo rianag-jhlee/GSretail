@@ -366,64 +366,7 @@
                         </article>
                     </div>
                 </section>
-                <!-- 상담 받고 싶은 지역 -->
-                <section class="sec_region_counsel" >
-                    <header class="section_header ac">
-                        <h2>{{ regionCounselPanel.title }}</h2>
-                        <p>{{ regionCounselPanel.lead }}</p>
-                    </header>
-                    <Tabs
-                        :tab-items="regionCounselTabs"
-                        tab-class="type_02"
-                        v-model="activeRegionTab"
-                        :tab-slide="true"
-                    />
-                    <!-- 지역 선택: 담당자 목록 닫기 시 region_counsel_panel. 지도 API 연동 후 onRegionCounselMapStubClick 제거 -->
-                    <div class="region_counsel_board" :class="{ is_staff: regionCounselBoardIsStaff }">
-                        <div
-                            class="region_counsel_map"
-                            role="region"
-                            :aria-label="t.regionCounselMapAriaLabel"
-                            :tabindex="regionCounselBoardIsStaff ? -1 : 0"
-                            @click="onRegionCounselMapStubClick"
-                            @keydown.enter.prevent="onRegionCounselMapStubClick"
-                            @keydown.space.prevent="onRegionCounselMapStubClick"
-                        ></div>
-                        <div class="region_counsel_side">
-                            <aside v-show="!regionCounselBoardIsStaff" class="region_counsel_panel">
-                                <span class="icon"></span>
-                                <p class="tit">{{ regionCounselEmpty.title }}</p>
-                                <p class="desc" v-html="regionCounselEmpty.desc"></p>
-                                <p class="hint">{{ regionCounselEmpty.hint }}</p>
-                            </aside>
-                            <div v-show="regionCounselBoardIsStaff" class="region_counsel_staff_body">
-                                <header>
-                                    <span class="ico_pin" aria-hidden="true"></span>
-                                    <h3>{{ regionCounselStaff.regionName }}</h3>
-                                    <span class="badge">{{ regionCounselStaff.countLabel }}</span>
-                                    <button type="button" class="btn_close" @click="closeRegionCounselStaff">{{ t.closeLabel }}</button>
-                                </header>
-                                <ul>
-                                    <li v-for="(manager, mi) in regionCounselStaff.managers" :key="mi">
-                                        <article>
-                                            <figure class="photo" aria-hidden="true">
-                                                <img src="@/assets/images/dummy/gsrst01050101_01.png" alt="" />
-                                            </figure>
-                                            <div>
-                                                <p class="name">{{ manager.name }}</p>
-                                                <p class="area">{{ manager.area }}</p>
-                                                <p class="phone">
-                                                    <span class="ico_phone" aria-hidden="true"></span>
-                                                    <a :href="`tel:${manager.phoneDial}`">{{ manager.phone }}</a>
-                                                </p>
-                                            </div>
-                                        </article>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <!-- 26.06.08 Del 이종환 : [상담 받고 싶은 지역] 상담 및 신청으로 이동 -->
             </div>
 
             <!-- FAQ -->
@@ -1104,165 +1047,8 @@
             </div>
             <!-- //추천 점포 찾기 -->
 
-            <!-- 상담 및 신청 -->
-            <div class="panel" v-show="activeD1 === 3 && activeD2 === 0" :aria-label="t.consultFormTexts.startupPanelAria">
-                <section class="sec_consult_startup">
-                    <div class="consent_box" :aria-label="t.consultFormTexts.privacyConsentTitle">
-                        <h3>{{ t.consultFormTexts.privacyConsentTitle }}</h3>
-                        <ul v-if="t.startupConsentItems.length" class="consent_list">
-                            <li v-for="(item, idx) in t.startupConsentItems" :key="idx">
-                                <p v-html="item"></p>
-                            </li>
-                        </ul>
-
-                        <div class="consent_notice_area">
-                            <p>{{ t.consultFormTexts.startupConsentNotice }}</p>
-                            <div class="consent_radio">
-                                <Inputs type="checkbox" v-model="startupConsentAgreed" :text="t.consultFormTexts.agreeText" />
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="apply_form">
-                        <div class="form_body">
-                            <div class="form_row col_02">
-                                <div class="col_item">
-                                    <div class="form_label">{{ t.consultFormTexts.nameLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
-                                    <div class="form_field">
-                                        <Inputs type="text" v-model="startupConsultForm.name" />
-                                    </div>
-                                </div>
-                                <div class="col_item">
-                                    <div class="form_label">{{ t.consultFormTexts.contactLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
-                                    <div class="form_field form_field_phone">
-                                        <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
-                                        <span class="form_sep">-</span>
-                                        <Inputs type="text" v-model="startupConsultForm.phone2" />
-                                        <span class="form_sep">-</span>
-                                        <Inputs type="text" v-model="startupConsultForm.phone3" />
-                                    </div>
-                                </div>
-                            
-                            </div> 
-                            <div class="form_row">
-                                <div class="form_label">{{ t.consultFormTexts.birthLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
-                                <div class="form_field form_field_birth">
-                                    <SelectBox :options="startupBirthYearOptions" v-model="startupConsultForm.birthYear" :initMsg="t.consultFormTexts.yearInit" />
-                                    <SelectBox :options="startupBirthMonthOptions" v-model="startupConsultForm.birthMonth" :initMsg="t.consultFormTexts.monthInit" />
-                                    <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" :initMsg="t.consultFormTexts.dayInit" />
-                                </div>
-                            </div>
-                            <div class="form_row col_02">
-                                <div class="col_item">
-                                    <div class="form_label">{{ t.consultFormTexts.storeOwnershipLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
-                                    <div class="form_field form_field_radio">
-                                        <Inputs
-                                            v-for="opt in startupStoreOwnershipOptions"
-                                            :key="opt.value"
-                                            type="radio"
-                                            name="startup_store_ownership"
-                                            :value="opt.value"
-                                            v-model="startupConsultForm.storeOwnership"
-                                            :text="opt.label"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="col_item">
-                                    <div class="form_label">{{ t.consultFormTexts.investAmountLabel }}</div>
-                                    <div class="form_field">
-                                        <Inputs type="text" v-model="startupConsultForm.investAmount" />
-                                    </div>
-                                </div>
-                            
-                            </div>
-                            <div class="form_row">
-                                <div class="form_label">{{ t.consultFormTexts.openScheduleLabel }}</div>
-                                <div class="form_field form_field_open">
-                                    <Inputs type="text" v-model="startupConsultForm.openYear" />
-                                    <span class="form_unit">{{ t.consultFormTexts.yearUnit }}</span>
-                                    <Inputs type="text" v-model="startupConsultForm.openMonth" />
-                                    <span class="form_unit">{{ t.consultFormTexts.monthUnit }}</span>
-                                </div>
-                            </div>
-                            <div class="form_row form_row_radio">
-                                <div class="form_label">{{ t.consultFormTexts.cvsExperienceLabel }}</div>
-                                <div class="form_field form_field_radio form_field_checkbox_card">
-                                    <Inputs
-                                        v-for="opt in startupCvsExperienceOptions"
-                                        :key="opt.value"
-                                        class="checkbox_card"
-                                        type="checkbox"
-                                        name="startup_cvs_experience"
-                                        :value="opt.value"
-                                        v-model="startupConsultForm.cvsExperience"
-                                        :text="opt.label"
-                                    />
-                                </div>
-                            </div>
-                            <div class="form_row form_row_textarea">
-                                <div class="form_label">{{ t.consultFormTexts.inquiryLabel }}</div>
-                                <div class="form_field">
-                                    <Textarea
-                                        v-model="startupConsultForm.inquiry"
-                                        :placeholder="t.consultFormTexts.startupInquiryPlaceholder"
-                                        :rows="6"
-                                    />
-                                </div>
-                            </div>
-                            <div class="form_row form_row_region">
-                                <div class="form_label">
-                                    <span>{{ t.consultFormTexts.interestRegionLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></span>
-                                    <p class="form_label_note">{{ t.consultFormTexts.interestRegionNote }}</p>
-                                </div>
-                                <div class="form_field form_field_region">
-                                    <SelectBox :options="startupRegionSidoOptions" v-model="startupConsultForm.regionSido" :initMsg="t.consultFormTexts.sidoInit" @update:modelValue="startupConsultForm.regionSigungu = ''" />
-                                    <SelectBox :options="startupRegionSigunguOptions" v-model="startupConsultForm.regionSigungu" :initMsg="t.consultFormTexts.sigunguInit" :disabled="!startupConsultForm.regionSido" />
-                                </div>
-                            </div>
-                            <div class="form_row form_row_calendar">
-                                <div class="form_label">{{ t.consultFormTexts.consultDateLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
-                                <div class="form_field form_field_calendar">
-                                    <Inputs type="text" v-model="startupConsultForm.consultDate" :is-readonly="true" :placeholder="t.consultFormTexts.selectRegionFirstPlaceholder" />
-                                </div>
-                            </div>
-                            <div class="form_row form_row_calendar">
-                                <div class="form_label">{{ t.consultFormTexts.consultTimeLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
-                                <div class="form_field form_field_calendar">
-                                    <Inputs type="text" v-model="startupConsultForm.consultTime" :is-readonly="true" :placeholder="t.consultFormTexts.selectRegionFirstPlaceholder" />
-                                </div>
-                            </div>
-                            <article class="manager_card" :aria-label="t.consultFormTexts.managerInfoAria">
-                                <figure class="consult_manager_photo" aria-hidden="true">
-                                    <img src="@/assets/images/sub/gsrst02010101/img_gs25fr0401_01.png" :alt="t.consultFormTexts.managerAlt">
-                                </figure>
-                                <div class="manager_body">
-                                    <p class="manager_name">{{ startupConsultManager.name }}</p>
-                                    <div class="manager_office">
-                                        <span class="manager_icon" aria-hidden="true"></span>
-                                        <div class="manager_addr">
-                                            <p class="tit">{{ startupConsultManager.office }}</p>
-                                            <p class="addr">{{ startupConsultManager.address }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            <div class="form_row form_row_calendar">
-                                <div class="form_label">{{ t.consultFormTexts.consultDateLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
-                                <ConsultCalendar v-model="startupConsultForm.consultDate" />
-                            </div>
-                            <div class="form_row form_row_calendar">
-                                <div class="form_label">{{ t.consultFormTexts.consultTimeLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
-                                <ConsultTimePicker v-model="startupConsultForm.consultTime" />
-                            </div>
-                        </div>
-                        <div class="button_area">
-                            <Buttons btn-class="btn_xl primary">{{ t.consultFormTexts.reserveButton }}</Buttons>
-                        </div>
-                    </div>
-                  
-                </section>
-            </div>
-            <div class="panel" v-show="activeD1 === 3 && activeD2 === 1" :aria-label="t.consultFormTexts.seminarPanelAria">
+            <!-- 상담 및 신청 > 창업 설명회 신청 -->
+            <div class="panel" v-show="activeD1 === 3 && activeD2 === 0" :aria-label="t.consultFormTexts.seminarPanelAria">
                 <section class="sec_consult_seminar">
                     <div class="consult_search_box">
                         <strong class="ac" v-html="t.consultFormTexts.seminarGuide"></strong>
@@ -1422,6 +1208,232 @@
                     </div>
                 </section>
             </div>
+
+            <!-- 상담 및 신청 > 창업 상담 신청 -->
+            <div class="panel" v-show="activeD1 === 3 && activeD2 === 1" :aria-label="t.consultFormTexts.startupPanelAria">
+                <!-- 26.06.08 Edit 이종환 : 창업알아보기에서 이동 -->
+                <!-- 상담 받고 싶은 지역 -->
+                <section class="sec_region_counsel" >
+                    <header class="section_header ac">
+                        <h2>{{ regionCounselPanel.title }}</h2>
+                        <p>{{ regionCounselPanel.lead }}</p>
+                    </header>
+                    <Tabs
+                        :tab-items="regionCounselTabs"
+                        tab-class="type_02"
+                        v-model="activeRegionTab"
+                        :tab-slide="true"
+                    />
+                    <!-- 지역 선택: 담당자 목록 닫기 시 region_counsel_panel. 지도 API 연동 후 onRegionCounselMapStubClick 제거 -->
+                    <div class="region_counsel_board" :class="{ is_staff: regionCounselBoardIsStaff }">
+                        <div
+                            class="region_counsel_map"
+                            role="region"
+                            :aria-label="t.regionCounselMapAriaLabel"
+                            :tabindex="regionCounselBoardIsStaff ? -1 : 0"
+                            @click="onRegionCounselMapStubClick"
+                            @keydown.enter.prevent="onRegionCounselMapStubClick"
+                            @keydown.space.prevent="onRegionCounselMapStubClick"
+                        ></div>
+                        <div class="region_counsel_side">
+                            <aside v-show="!regionCounselBoardIsStaff" class="region_counsel_panel">
+                                <span class="icon"></span>
+                                <p class="tit">{{ regionCounselEmpty.title }}</p>
+                                <p class="desc" v-html="regionCounselEmpty.desc"></p>
+                                <p class="hint">{{ regionCounselEmpty.hint }}</p>
+                            </aside>
+                            <div v-show="regionCounselBoardIsStaff" class="region_counsel_staff_body">
+                                <header>
+                                    <span class="ico_pin" aria-hidden="true"></span>
+                                    <h3>{{ regionCounselStaff.regionName }}</h3>
+                                    <span class="badge">{{ regionCounselStaff.countLabel }}</span>
+                                    <button type="button" class="btn_close" @click="closeRegionCounselStaff">{{ t.closeLabel }}</button>
+                                </header>
+                                <ul>
+                                    <li v-for="(manager, mi) in regionCounselStaff.managers" :key="mi">
+                                        <article>
+                                            <figure class="photo" aria-hidden="true">
+                                                <img src="@/assets/images/dummy/gsrst01050101_01.png" alt="" />
+                                            </figure>
+                                            <div>
+                                                <p class="name">{{ manager.name }}</p>
+                                                <p class="area">{{ manager.area }}</p>
+                                                <p class="phone">
+                                                    <span class="ico_phone" aria-hidden="true"></span>
+                                                    <a :href="`tel:${manager.phoneDial}`">{{ manager.phone }}</a>
+                                                </p>
+                                            </div>
+                                        </article>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- //26.06.08 Edit 이종환 : 창업알아보기에서 이동-->
+
+                <section class="sec_consult_startup">
+                    <div class="consent_box" :aria-label="t.consultFormTexts.privacyConsentTitle">
+                        <h3>{{ t.consultFormTexts.privacyConsentTitle }}</h3>
+                        <ul v-if="t.startupConsentItems.length" class="consent_list">
+                            <li v-for="(item, idx) in t.startupConsentItems" :key="idx">
+                                <p v-html="item"></p>
+                            </li>
+                        </ul>
+
+                        <div class="consent_notice_area">
+                            <p>{{ t.consultFormTexts.startupConsentNotice }}</p>
+                            <div class="consent_radio">
+                                <Inputs type="checkbox" v-model="startupConsentAgreed" :text="t.consultFormTexts.agreeText" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="apply_form">
+                        <div class="form_body">
+                            <div class="form_row col_02">
+                                <div class="col_item">
+                                    <div class="form_label">{{ t.consultFormTexts.nameLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                    <div class="form_field">
+                                        <Inputs type="text" v-model="startupConsultForm.name" />
+                                    </div>
+                                </div>
+                                <div class="col_item">
+                                    <div class="form_label">{{ t.consultFormTexts.contactLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                    <div class="form_field form_field_phone">
+                                        <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
+                                        <span class="form_sep">-</span>
+                                        <Inputs type="text" v-model="startupConsultForm.phone2" />
+                                        <span class="form_sep">-</span>
+                                        <Inputs type="text" v-model="startupConsultForm.phone3" />
+                                    </div>
+                                </div>
+                            
+                            </div> 
+                            <div class="form_row">
+                                <div class="form_label">{{ t.consultFormTexts.birthLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                <div class="form_field form_field_birth">
+                                    <SelectBox :options="startupBirthYearOptions" v-model="startupConsultForm.birthYear" :initMsg="t.consultFormTexts.yearInit" />
+                                    <SelectBox :options="startupBirthMonthOptions" v-model="startupConsultForm.birthMonth" :initMsg="t.consultFormTexts.monthInit" />
+                                    <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" :initMsg="t.consultFormTexts.dayInit" />
+                                </div>
+                            </div>
+                            <div class="form_row col_02">
+                                <div class="col_item">
+                                    <div class="form_label">{{ t.consultFormTexts.storeOwnershipLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                    <div class="form_field form_field_radio">
+                                        <Inputs
+                                            v-for="opt in startupStoreOwnershipOptions"
+                                            :key="opt.value"
+                                            type="radio"
+                                            name="startup_store_ownership"
+                                            :value="opt.value"
+                                            v-model="startupConsultForm.storeOwnership"
+                                            :text="opt.label"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col_item">
+                                    <div class="form_label">{{ t.consultFormTexts.investAmountLabel }}</div>
+                                    <div class="form_field">
+                                        <Inputs type="text" v-model="startupConsultForm.investAmount" />
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <div class="form_row">
+                                <div class="form_label">{{ t.consultFormTexts.openScheduleLabel }}</div>
+                                <div class="form_field form_field_open">
+                                    <Inputs type="text" v-model="startupConsultForm.openYear" />
+                                    <span class="form_unit">{{ t.consultFormTexts.yearUnit }}</span>
+                                    <Inputs type="text" v-model="startupConsultForm.openMonth" />
+                                    <span class="form_unit">{{ t.consultFormTexts.monthUnit }}</span>
+                                </div>
+                            </div>
+                            <div class="form_row form_row_radio">
+                                <div class="form_label">{{ t.consultFormTexts.cvsExperienceLabel }}</div>
+                                <div class="form_field form_field_radio form_field_checkbox_card">
+                                    <Inputs
+                                        v-for="opt in startupCvsExperienceOptions"
+                                        :key="opt.value"
+                                        class="checkbox_card"
+                                        type="checkbox"
+                                        name="startup_cvs_experience"
+                                        :value="opt.value"
+                                        v-model="startupConsultForm.cvsExperience"
+                                        :text="opt.label"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form_row form_row_textarea">
+                                <div class="form_label">{{ t.consultFormTexts.inquiryLabel }}</div>
+                                <div class="form_field">
+                                    <Textarea
+                                        v-model="startupConsultForm.inquiry"
+                                        :placeholder="t.consultFormTexts.startupInquiryPlaceholder"
+                                        :rows="6"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form_row form_row_region">
+                                <div class="form_label">
+                                    <span>{{ t.consultFormTexts.interestRegionLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></span>
+                                    <p class="form_label_note">{{ t.consultFormTexts.interestRegionNote }}</p>
+                                </div>
+                                <div class="form_field form_field_region">
+                                    <SelectBox :options="startupRegionSidoOptions" v-model="startupConsultForm.regionSido" :initMsg="t.consultFormTexts.sidoInit" @update:modelValue="startupConsultForm.regionSigungu = ''" />
+                                    <SelectBox :options="startupRegionSigunguOptions" v-model="startupConsultForm.regionSigungu" :initMsg="t.consultFormTexts.sigunguInit" :disabled="!startupConsultForm.regionSido" />
+                                </div>
+                            </div>
+                            <div class="form_row form_row_calendar">
+                                <div class="form_label">{{ t.consultFormTexts.consultDateLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                <div class="form_field form_field_calendar">
+                                    <Inputs type="text" v-model="startupConsultForm.consultDate" :is-readonly="true" :placeholder="t.consultFormTexts.selectRegionFirstPlaceholder" />
+                                </div>
+                            </div>
+                            <div class="form_row form_row_calendar">
+                                <div class="form_label">{{ t.consultFormTexts.consultTimeLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                <div class="form_field form_field_calendar">
+                                    <Inputs type="text" v-model="startupConsultForm.consultTime" :is-readonly="true" :placeholder="t.consultFormTexts.selectRegionTimePlaceholder" />
+                                </div>
+                            </div>
+                            <article class="manager_card" :aria-label="t.consultFormTexts.managerInfoAria">
+                                <!-- 26.06.08 Del 이종환 <figure class="consult_manager_photo" aria-hidden="true">
+                                    <img src="@/assets/images/sub/gsrst02010101/img_gs25fr0401_01.png" :alt="t.consultFormTexts.managerAlt">
+                                </figure> -->
+                                <div class="manager_body">
+                                    <span>{{ startupConsultManager.explain }}</span>
+                                    <p class="manager_name">{{ startupConsultManager.name }}</p>
+                                    <div class="manager_office">
+                                        <span class="manager_icon" aria-hidden="true"></span>
+                                        <div class="manager_addr">
+                                            <p class="tit">{{ startupConsultManager.office }}</p>
+                                            <p class="addr">{{ startupConsultManager.address }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <div class="form_row form_row_calendar">
+                                <div class="form_label">{{ t.consultFormTexts.consultDateLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                <ConsultCalendar v-model="startupConsultForm.consultDate" />
+                            </div>
+                            <div class="form_row form_row_calendar">
+                                <div class="form_label">{{ t.consultFormTexts.consultTimeLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                <ConsultTimePicker v-model="startupConsultForm.consultTime" />
+                            </div>
+
+                            <p class="explain">{{ t.consult_explain }}</p>
+                        </div>
+                        <div class="button_area">
+                            <Buttons btn-class="btn_xl primary">{{ t.consultFormTexts.reserveButton }}</Buttons>
+                        </div>
+                    </div>
+                  
+                </section>
+            </div>
+
+            <!-- 상담 및 신청 > 입점 제안/브랜드 전환 상담 -->
             <div class="panel" v-show="activeD1 === 3 && activeD2 === 2" :aria-label="t.consultFormTexts.entryPanelAria">
                 <section class="sec_consult_entry">
                     <header class="section_header">
@@ -2515,7 +2527,7 @@ const franchiseRoleColumns = [
 
 /* ── [D1=0 D2=3] FAQ ── */
 const startupFaqPanel = {
-    title: "창업 FAQ TOP 5",
+    title: "자주 묻는 창업질문 TOP5",
 };
 const startupFaqDummyAnswer =
     "답변 내용이 들어오는 부분입니다. 답변 내용이 들어오는 부분 입니다. 답변 내용이 들어오는 부분 입니다.";
@@ -2777,7 +2789,7 @@ watch(gs25FaqTotalPages, (total) => {
 
 /* ── [D1=2] 추천 점포 찾기 — 지역별 창업 상담(지도) ── */
 const regionCounselPanel = {
-    title: "지금 바로 상담을 받고 싶으신가요?",
+    title: "간단한 문의는 전화 상담으로 편하게 문의하세요.",
     lead: "지도에서 원하시는 지역을 클릭하시면 해당 지역 담당자 정보를 바로 확인하실 수 있습니다.",
 };
 const regionCounselEmpty = {
@@ -3077,6 +3089,7 @@ const startupRegionSigunguOptions = computed(() => startupRegionSigunguMap[start
 const consultEntryConsultantOptions = computed(() => consultEntryConsultantMap[startupConsultForm.entryRegion] || []);
 
 const startupConsultManager = {
+    explain: "※ 창업희망 지역 담당자와 상담 장소를 확인해주세요",
     name: "담당자 : 이은정(02-2006-3565)",
     office: "GS25 서부사무소",
     address: "서울특별시 마포구 월드컵북로 396",
@@ -3137,7 +3150,7 @@ const langData = {
             { item: "GS25 브랜드 소개" },
             { item: "차별화된 경쟁력" },
             { item: "편의점 창업 이해" },
-            { item: "FAQ" },
+            { item: "Q&A" },
         ],
         depth2TabsPrepare: [
             { item: "창업 절차" },
@@ -3240,8 +3253,8 @@ const langData = {
         storeRegions,
         franchiseTypes,
         depth2TabsConsult: [
-            { item: "창업 상담 신청" },
             { item: "창업 설명회 신청" },
+            { item: "창업 상담 신청" },
             { item: "입점 제안/브랜드 전환 상담" }
         ],
         consultFormTexts: {
@@ -3353,7 +3366,8 @@ const langData = {
             sigunguInit: "구/시 선택",
             consultDateLabel: "상담 날짜 선택",
             consultTimeLabel: "상담 시간 선택",
-            selectRegionFirstPlaceholder: "먼저 관심 지역을 선택해주세요.",
+            selectRegionFirstPlaceholder: "먼저 관심 지역을 선택 해 주세요.",
+            selectRegionTimePlaceholder: "먼저 날짜를 선택 해 주세요.",
             managerInfoAria: "담당자 정보",
             managerAlt: "담당자",
             regionSelectAria: "지역 선택",
@@ -3392,6 +3406,7 @@ const langData = {
         startupRegionSigunguMap,
         consultTypeOptions,
         startupConsultManager,
+        consult_explain: "※ 대면상담은 약 1시간 진행 예정입니다."
     },
     en: {
         pageHeaderTitle: "GS25 Startup Guide"/* 260604 번역 */,
@@ -3447,7 +3462,7 @@ const langData = {
             { item: "Introduction to the GS25 Brand"/* 260604 번역 */ },
             { item: "Differentiated competitiveness"/* 260604 번역 */ },
             { item: "Understanding convenience store startup"/* 260604 번역 */ },
-            { item: "FAQ" },
+            { item: "Q&A" },
         ],
         depth2TabsPrepare: [
             { item: "Startup procedure"/* 260604 번역 */ },
@@ -3550,8 +3565,8 @@ const langData = {
         storeRegions,
         franchiseTypes,
         depth2TabsConsult: [
-            { item: "Apply for startup consultation"/* 260604 번역 */ },
             { item: "Apply for startup briefing"/* 260604 번역 */ },
+            { item: "Apply for startup consultation"/* 260604 번역 */ },
             { item: "Store entry proposal/brand conversion consultation"/* 260604 번역 */ }
         ],
         consultFormTexts: {
@@ -3664,6 +3679,7 @@ const langData = {
             consultDateLabel: "Select Consultation Date"/* 260604 번역 */,
             consultTimeLabel: "Select Consultation Time"/* 260604 번역 */,
             selectRegionFirstPlaceholder: "Please first select your area of interest."/* 260604 번역 */,
+            selectRegionTimePlaceholder: "",
             managerInfoAria: "Contact Person Information"/* 260604 번역 */,
             managerAlt: "Contact Person",
             regionSelectAria: "Select Region",
@@ -4088,14 +4104,14 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_define .franchise_role_grid > article > ul > li { display: flex; align-items: center; gap: 12px; }
 .sec_franchise_define .franchise_role_grid > article > ul > li > span { width: 24px; height: 24px; flex-shrink: 0; background-color: #d0d0d8; display: block; }
 .sec_franchise_define .franchise_role_grid > article > ul > li > strong { color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_franchise_define .franchise_role_grid > article:nth-of-type(1) > ul > li:nth-of-type(1) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc2_04.png') no-repeat center / contain;}
-.sec_franchise_define .franchise_role_grid > article:nth-of-type(1) > ul > li:nth-of-type(2) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0102_sc6_01.png') no-repeat center / contain;}
-.sec_franchise_define .franchise_role_grid > article:nth-of-type(1) > ul > li:nth-of-type(3) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc2_06.png') no-repeat center / contain;}
-.sec_franchise_define .franchise_role_grid > article:nth-of-type(1) > ul > li:nth-of-type(4) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc2_07.png') no-repeat center / contain;}
-.sec_franchise_define .franchise_role_grid > article:nth-of-type(2) > ul > li:nth-of-type(1) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc2_08.png') no-repeat center / contain;}
-.sec_franchise_define .franchise_role_grid > article:nth-of-type(2) > ul > li:nth-of-type(2) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0102_sc6_11.png') no-repeat center / contain;}
-.sec_franchise_define .franchise_role_grid > article:nth-of-type(2) > ul > li:nth-of-type(3) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc2_10.png') no-repeat center / contain;}
-.sec_franchise_define .franchise_role_grid > article:nth-of-type(2) > ul > li:nth-of-type(4) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc2_11.png') no-repeat center / contain;}
+.sec_franchise_define .franchise_role_grid > article:nth-of-type(1) > ul > li:nth-of-type(1) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc3_01.png') no-repeat center / contain;}
+.sec_franchise_define .franchise_role_grid > article:nth-of-type(1) > ul > li:nth-of-type(2) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc3_02.png') no-repeat center / contain;}
+.sec_franchise_define .franchise_role_grid > article:nth-of-type(1) > ul > li:nth-of-type(3) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc3_03.png') no-repeat center / contain;}
+.sec_franchise_define .franchise_role_grid > article:nth-of-type(1) > ul > li:nth-of-type(4) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc3_04.png') no-repeat center / contain;}
+.sec_franchise_define .franchise_role_grid > article:nth-of-type(2) > ul > li:nth-of-type(1) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc3_05.png') no-repeat center / contain;}
+.sec_franchise_define .franchise_role_grid > article:nth-of-type(2) > ul > li:nth-of-type(2) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc3_06.png') no-repeat center / contain;}
+.sec_franchise_define .franchise_role_grid > article:nth-of-type(2) > ul > li:nth-of-type(3) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc3_07.png') no-repeat center / contain;}
+.sec_franchise_define .franchise_role_grid > article:nth-of-type(2) > ul > li:nth-of-type(4) > span {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0103_sc3_08.png') no-repeat center / contain;}
 .sec_franchise_define .franchise_role_grid strong, .sec_franchise_define .franchise_role_grid p { word-break: keep-all; }
 /* --- D2=3 · FAQ (activeD2 === 3) --- */
 .sec_startup_faq .section_header.ac, .sec_gs25_faq .section_header.ac { text-align: left !important; }
@@ -4460,6 +4476,9 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .apply_form .form_body {padding-top:12px; border-bottom: 1px solid #E5E5E9;}
 .apply_form .form_body .form_row { min-height: auto; padding: 12px 0; display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
 .apply_form .form_body + .button_area{margin-top:40px;}
+
+.apply_form .form_body p.explain {color:#ED3030; font-size:1.6rem; letter-spacing:-0.01em; line-height:150%;}
+
 /* --- D2=2 · 입점 제안/브랜드 전환 상담 (activeD2 === 2) --- */
 .row_layout.apply_form{border:0;}
 .row_layout.apply_form article{border-bottom:1px solid #E5E5E9;}
@@ -4523,12 +4542,13 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .manager_card .manager_header + .btn_close{width:20px; height:20px; text-indent:-9999px; background:url('@/assets/images/common/icon_set_20.png') no-repeat -627px -24px; }
 .consult_manager_photo { width: 80px; height: 80px; margin: 0; background-color: #c4c4d0; border-radius: 50%; flex-shrink: 0; }
 .manager_body { min-width: 0; flex: 1; }
+.manager_body > span {margin-bottom:12px; color:#ED3030; font-size:1.6rem; letter-spacing:-0.01em; line-height:150%; display:block;}
 .manager_name { margin: 0; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
 .manager_office { margin-top: 8px; display: flex; align-items: flex-start; gap: 4px; }
-.manager_icon { width: 16px; height: 16px; margin-top: 2px; background-color: #161616; border-radius: 2px; flex-shrink: 0; background: url(@/assets/images/sub/icon_map_16.png) no-repeat center / contain; }
+.manager_icon { width: 24px; height: 24px; margin-top: 2px; background-color: #161616; border-radius: 2px; flex-shrink: 0; background: url(@/assets/images/sub/icon_map_24.png) no-repeat center / contain; }
 .manager_addr { min-width: 0; }
-.manager_addr > .tit { margin: 0; color: #161616; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
-.manager_addr > .addr { margin: 2px 0 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.manager_addr > .tit { margin: 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+.manager_addr > .addr { margin: 2px 0 0; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 .sec_consult_seminar > .section_header{margin-bottom:48px;}
 /* 창업 설명회 신청청 */
 .consult_search_box{padding:32px 24px;border-radius:12px; border:1px solid #D7D7DF;}
@@ -4600,7 +4620,10 @@ letter-spacing: -0.01em;
 
 }
 /* ========== Mobile 768px 이하 ========== */
-@media (max-width: 768px) { :deep(.m_br) { display: block; }
+@media (max-width: 768px) {
+    .wrap_gsrst {margin-top:70px;}
+
+    :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
     section + section { padding-top: 80px; }
     .list_dotted > li { padding-left: 6px; }
@@ -4939,6 +4962,8 @@ letter-spacing: -0.01em;
     .manager_card { max-width: none; margin-top: 0; padding: 16px; gap: 16px; }
     .consult_manager_photo { width: 50px; height: 50px; }
     .manager_name { font-size: 1.6rem; line-height: 1.24; }
+    .manager_addr > .tit, .manager_addr > .addr {font-size:1.6rem;}
+    .manager_icon {width:16px; height:16px; background:url('@/assets/images/sub/icon_map_16.png');}
     .row_layout.apply_form .form_body{padding:40px 0 0; }
     .row_layout.apply_form .form_body .form_row { min-height: auto; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
     .row_layout.apply_form .form_body .form_row .form_label { margin-bottom: 16px; }
@@ -4974,6 +4999,7 @@ letter-spacing: -0.01em;
     .seminar_table tbody td { padding: 12px 16px; font-size: 1.6rem; line-height: 1.5; }
     .seminar_table tbody td p{font-size: 1.6rem; line-height: 1.5;}
     .seminar_table col.seminar_col_label { width:70px }
+    .apply_form .form_body p.explain {font-size:1.4rem;}
     .sec_consult_entry .section_header > .stit{
 margin-top:40px;
 font-weight: 700;
@@ -4993,6 +5019,8 @@ letter-spacing: -0.01em;
     
     /* 우측 하단 sticky 메뉴 */
     /* .quick_menu { display: none; } */
+
+    .manager_body > span {font-size:1.4rem;}
 }
 </style>
 

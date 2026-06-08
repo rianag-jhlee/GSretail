@@ -3,7 +3,7 @@
         <div class="inner">
             <nav>
                 <dl v-for="item in menuList" :key="item.title">
-                    <dt><a href="#none">{{ item.title }}</a></dt>
+                    <dt><a :href="item.path">{{ item.title }}</a></dt>
                     <dd>
                         <ul v-for="(group, i) in chunk(item.children || [])" :key="i">
                             <li v-for="s_item in group" :key="s_item.title">
