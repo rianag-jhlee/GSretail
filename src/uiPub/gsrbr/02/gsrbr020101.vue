@@ -1076,7 +1076,7 @@ export default {
 .empty_cont { padding: 100px 0; text-align: center; color: #67676f; font-size: 20px; background-color: #f8f8f8; border-radius: 12px; }
 
 /* 지자체 컨텐츠 디자인 */
-.production_bg { background-image: url('@/assets/images/dummy/gsrbr020101_6.png'); background-size: cover; }
+.production_bg { background-image: url('@/assets/images/sub/gsrbr02/gsrbr020101_6.png'); background-size: cover; }/* 26.06.08 Edit 이종환 : [확정] 경로 수정 */
 .partnership_bg { background-image: url('@/assets/images/dummy/gsrbr020101_5.png'); background-size: cover; }
 .sub_title { margin-bottom: 40px; color: #161616; font-size: 28px; font-weight: 700; }
 .mou_grid { display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 40px; column-gap: 20px; }
