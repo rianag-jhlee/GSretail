@@ -3344,6 +3344,7 @@ const langData = {
                 },
                 {
                     title: "Advantages of Operating Fresh Concept Stores",
+                    // 26.06.08 add 정다희 : 컨텐츠 수정으로 영문 삭제
                     advantageCards: [
 
                     ],
