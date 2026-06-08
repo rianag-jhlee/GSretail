@@ -519,17 +519,38 @@
                 </div>
                 <!-- //26.05.27 Edit 이종환 : 타사 신선 배송 방식 추가 -->
 
-                <!-- 운영 장점 체크리스트 카드 -->
-                <div v-if="sec.advantages" class="info_card">
-                    <ul class="info_list">
-                        <li v-for="(item, ii) in sec.advantages.items" :key="ii">
-                            <div>
-                                <span>{{ item.text }}</span> 
-                                <span v-if="item.note" class="info_check_note">{{ item.note }}</span>
-                            </div>
-                        </li> 
-                    </ul>
-                </div>
+                <!-- 26.06.08 add 정다희 : 운영 장점 카드 컨텐츠 수정정-->
+                <ul v-if="sec.advantageCards" class="sinsen_advantage_grid">
+                    <li v-for="(card, ci) in sec.advantageCards" :key="ci" class="sinsen_advantage_card">
+                        <header>
+                            <strong>{{ card.title }}</strong>
+                            <p v-if="card.desc" v-html="card.desc"></p>
+                        </header>
+                        <table v-if="card.table" class="sinsen_compare_table">
+                            <thead>
+                                <tr>
+                                    <th v-for="(head, hi) in card.table.headers" :key="hi" scope="col">{{ head }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(row, ri) in card.table.rows" :key="ri">
+                                    <td scope="row" v-html="row.label"></td>
+                                    <td v-for="(col, coli) in row.cols" :key="coli" v-html="col"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul v-if="card.items" class="sinsen_advantage_items">
+                            <li v-for="(item, ii) in card.items" :key="ii">
+                                <p v-if="item.desc" v-html="item.desc"></p>
+                                <figure>
+                                    <img :src="isMobileView && item.imgMo ? item.imgMo : item.img" alt="" />   <!-- 26.06.08 add 정다희 : 운영 장점 카드 이미지 모바일 추가 -->
+                                    <figcaption v-if="item.caption">{{ item.caption }}</figcaption>
+                                </figure>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- //26.06.08 add 정다희 : 운영 장점 카드 컨텐츠 수정-->
             </section>
         </div>
 
@@ -1609,8 +1630,21 @@ import imgPhone1 from "@/assets/images/dummy/gopizza_phone_01.png";
 import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 
 /* 신선강화점 이미지 */
-import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
-import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
+// 26.06.08 add정다희 이미지 imgSinsen01 ~ imgSinsen06 추가, imgFlow삭제
+// import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
+// import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
+import imgSinsen01 from "@/assets/images/sub/gsrbr010101/sinsen_01.png";
+import imgSinsen02 from "@/assets/images/sub/gsrbr010101/sinsen_02.png";
+import imgSinsen03 from "@/assets/images/sub/gsrbr010101/sinsen_03.png";
+import imgSinsen04 from "@/assets/images/sub/gsrbr010101/sinsen_04.png";
+import imgSinsen05 from "@/assets/images/sub/gsrbr010101/sinsen_05.png";
+import imgSinsen06 from "@/assets/images/sub/gsrbr010101/sinsen_06.png";
+import imgSinsen01Mo from "@/assets/images/sub/gsrbr010101/sinsen_01_mo.png";
+import imgSinsen02Mo from "@/assets/images/sub/gsrbr010101/sinsen_02_mo.png";
+import imgSinsen03Mo from "@/assets/images/sub/gsrbr010101/sinsen_03_mo.png";
+import imgSinsen04Mo from "@/assets/images/sub/gsrbr010101/sinsen_04_mo.png";
+import imgSinsen05Mo from "@/assets/images/sub/gsrbr010101/sinsen_05_mo.png";
+import imgSinsen06Mo from "@/assets/images/sub/gsrbr010101/sinsen_06_mo.png";
 
 /* 매장/서비스 이미지 */
 import imgHero5 from "@/assets/images/sub/gsrbr010101/brand_bg_06.png";
@@ -1949,17 +1983,48 @@ const langData = {
                 },
                 {
                     title: "신선강화점 운영의 장점",
-                    advantages: {
-                        items: [
-                            { text: "전용상품을 통한 다양한 상품 구색(약 400SKU)" },
-                            { text: "신선강화점 전용 행사 운영 (신선 & 가공)" },
-                            { text: "신선식품에 신선함을 더해주는 전용 장비 운영" },
-                            { text: "전자가격표시기(ESL)를 활용한 신선 가격대응 자동화" },
-                            { text: "마감할인 라벨프린터 운영으로 폐기 최소화" },
-                            { text: "내/외부 전용 홍보물을 통한 홍보 강화" },
-                            { text: "기존 GS25 → 신선강화 컨셉 도입 시 효과성 검증!", note: "\u201C도입 후 일평균 매출 기존대비 약 12.6% 증가, 일평균 고객 수 21명 증가\u201D" },
-                        ],
-                    },
+                    // 26.06.08 add 정다희 : advantageCards 컨텐츠 수정
+                    advantageCards: [
+                        {
+                            title: "일반 편의점 대비 다양한 상품 구색",
+                            desc: "신선강화 편의점 전용상품 400 ~ 500 종류<br class=\"m_br\" /> 추가 운영<br />(신선상품, 두부/나물, 조미료 등 장보기 연관상품)",
+                            table: {
+                                headers: ["구분", "신선상품", "공산품"],
+                                rows: [
+                                    {
+                                        label: "상품<br />구색",
+                                        cols: [
+                                            "편의점 상품 +<br />전용 상품 190<br class=\"m_br\" />종류",
+                                            "편의점 상품 +<br />전용 상품 220<br class=\"m_br\" />종류",
+                                        ],
+                                    },
+                                ],
+                            },
+                        },
+                        {
+                            title: "신선상품 운영 효율화",
+                            items: [
+                                { desc: "전자가격 표시기 도입으로 <br class=\"p_br\"/>가격표 변경 업무 효율 증대", img: imgSinsen01, imgMo: imgSinsen01Mo },
+                                { desc: "신선상품 폐기 부담 완화를 위한 <br class=\"p_br\"/>마감 할인 프린터 운영", img: imgSinsen02, imgMo: imgSinsen02Mo },
+                            ],
+                        },
+                        {
+                            title: "신선상품 전용 장비 운영",
+                            desc: "냉장/상온 전용 집기를 지원하여, 타 편의점에서 운영하기<br class=\"p_br\" />어려운 신선상품(대용량 과일/정육/수산 등) 운영 가능",
+                            items: [
+                                { img: imgSinsen03, imgMo: imgSinsen03Mo, caption: "[냉장 전용 집기]" },
+                                { img: imgSinsen04, imgMo: imgSinsen04Mo, caption: "[상온 전용 집기]" },
+                            ],
+                        },
+                        {
+                            title: "신선강화점 전용 행사 운영",
+                            desc: "정기행사에 외 격주 단위 신선강화점 전용 행사<br />추가 운영(신선상품 &amp; 공산품)",
+                            items: [
+                                { img: imgSinsen05, imgMo: imgSinsen05Mo, caption: "[신선 전단 행사]" },
+                                { img: imgSinsen06, imgMo: imgSinsen06Mo, caption: "[공산 전단 행사]" },
+                            ],
+                        },
+                    ],
                 },
             ],
         },
@@ -3279,17 +3344,9 @@ const langData = {
                 },
                 {
                     title: "Advantages of Operating Fresh Concept Stores",
-                    advantages: {
-                        items: [
-                            { text: "A diverse product assortment through exclusive items (approx. 400 SKUs)" },
-                            { text: "Exclusive Fresh Concept Store promotions (fresh and processed)" },
-                            { text: "Dedicated equipment to keep fresh products at peak freshness" },
-                            { text: "Real-time fresh product price management using electronic shelf labels" },
-                            { text: "Waste minimized through end-of-day discount label printing" },
-                            { text: "Enhanced visibility through dedicated in-store and external promotional materials" },
-                            { text: "Verifying effectiveness when introducing the fresh-enhanced concept to an existing GS25!"/* 260604 번역 */, note: "\u201CAfter adoption, average daily sales increased by approximately 12.6% compared to before, and the average number of daily customers increased by 21.\u201D"/* 260604 번역 */ },
-                        ],
-                    },
+                    advantageCards: [
+
+                    ],
                 },
             ],
         },
@@ -4941,9 +4998,29 @@ button { background-color: #fff }
 .info_card { padding: 32px; background-color: #f8f8f8; border-radius: 12px }
 .info_card strong { margin-bottom:8px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
 .info_card span { font-size: 1.8rem; line-height: 1.4 }
-.info_card > p {margin-top:14px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em }
+.info_card > p {margin-top:14px; color: #67676f; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em }
 .info_card > strong + p {margin-top:0; margin-bottom:32px;}
 .sinsen_flow_img { width: 100%; max-height:372px; margin-top: 24px; display: block; border-radius: 10px }
+/* 26.06.08 add 정다희 :sinsen_advantge영역 css 추가  */
+.sinsen_advantage_grid { width: 100%; display: flex; flex-wrap: wrap; align-items: stretch; gap: 16px; }
+.sinsen_advantage_card { flex: 1 1 calc(50% - 8px); min-width: 0; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
+.sinsen_advantage_card:nth-child(1) header > p{margin-bottom:40px;}
+.sinsen_advantage_card:nth-child(2) .sinsen_advantage_items{margin-top:40px;}
+.sinsen_advantage_card > header > strong { margin: 0 0 16px; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sinsen_advantage_card > header > strong > em { margin-right: 8px; color: #107af2; font-size: 1.8rem; font-style: normal; font-weight: 700; line-height: 1.5; }
+.sinsen_advantage_card > header > p { margin: 0 0 16px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
+.sinsen_compare_table { width: 100%; margin: 0; border-top: 1px solid #e5e5e9; border-collapse: collapse; table-layout: fixed; }
+.sinsen_compare_table th, .sinsen_compare_table td { padding: 18px 24px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; text-align: center; border-bottom: 1px solid #e5e5e9; vertical-align: middle; }
+.sinsen_compare_table td {padding:30px 24px;}
+.sinsen_compare_table thead th { font-weight: 700; background-color: #fff; }
+.sinsen_compare_table tbody th { font-weight: 400; background-color: #fff; }
+/* .sinsen_compare_table th:first-child, .sinsen_compare_table td:first-child { width: 200px; } */
+.sinsen_advantage_items { width: 100%; margin: 0; padding: 0; list-style: none; display: flex; gap: 16px; }
+.sinsen_advantage_items > li { min-width: 0; flex: 1; }
+.sinsen_advantage_items > li > p { margin: 0 0 16px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
+.sinsen_advantage_items > li > figure { margin: 0; }
+.sinsen_advantage_items > li > figure > img { width: 100%; height: 175px; display: block; object-fit: contain; background-color: #fff; border-radius: 8px; }
+.sinsen_advantage_items > li > figure > figcaption { margin-top: 16px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
 
 .info_list > li { padding-bottom: 12px; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 8px }
 .info_list > li:last-child { padding-bottom: 0 }
@@ -5102,6 +5179,7 @@ button { background-color: #fff }
   .acc_inner { padding: 28px 40px }
   .acc_item.is_open .acc_inner { grid-template-columns: 1fr 280px; column-gap: 28px }
   .acc_img_wrap > img { width: 100% }
+  .sinsen_advantage_card{flex: 1 1 100%;}
 }
 
 @media (max-width: 768px) {
@@ -5188,6 +5266,7 @@ button { background-color: #fff }
   .com_table thead th { padding: 14px 0 }
   .com_table tbody th { padding: 14px 24px }
   .com_table_col td { padding: 11px 13px; font-size: 1.4rem }
+  .info_card{padding:24px;}
   .info_card strong { font-size: 1.8rem; line-height: 150%; letter-spacing: 0% }
   .sinsen_feature :deep(.feature_card_item) { min-height: 227px }
   .info_card span { font-size: 1.4rem; letter-spacing: -0.01em }
@@ -5199,6 +5278,21 @@ button { background-color: #fff }
   :deep(.tab_wrap ul.type_01 li .item) {white-space:nowrap;}
 
   .info_card_flow {flex-direction:column;}
+  /* 26.06.08 add 정다희 : sinsen_advantage MO (Figma 857:8893) */
+  .sinsen_advantage_grid { flex-direction: column; gap: 16px; }
+  .sinsen_advantage_card { flex: 1 1 100%; width: 100%; padding: 32px 24px; }
+  .sinsen_advantage_card > header > strong { margin: 0 0 16px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+  .sinsen_advantage_card > header > strong > em { font-size: 1.8rem; line-height: 1.5; }
+  .sinsen_advantage_card > header > p { margin: 0 0 16px; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+  .sinsen_compare_table th, .sinsen_compare_table td { padding: 22px 5px; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+  .sinsen_compare_table td { padding: 25px 9px; }
+  .sinsen_compare_table thead th { font-weight: 700; }
+  .sinsen_compare_table thead th:first-child { font-weight: 600; }
+  .sinsen_compare_table th:first-child, .sinsen_compare_table td:first-child { width: 48px; }
+  .sinsen_advantage_items { flex-direction: row; gap: 16px; }
+  .sinsen_advantage_items > li > p { margin: 0 0 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+  .sinsen_advantage_items > li > figure > img { height: 175px; border-radius: 0; }
+  .sinsen_advantage_items > li > figure > figcaption { margin-top: 16px; font-size: 1.4rem;  line-height: 1.4; letter-spacing: -0.01em; }
 }
 
 
