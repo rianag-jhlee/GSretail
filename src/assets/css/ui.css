@@ -16,6 +16,8 @@
 #header nav .depth2_wrap > ul + ul {margin-left:80px;}
 #header nav li:hover .depth2_wrap, nav li.is-open .depth2_wrap {height:auto !important; padding:40px 20px; overflow:initial !important; display:flex;}
 
+#header.hide nav li:hover .depth2_wrap, #header.hide nav li.is-open .depth2_wrap {height:0 !important; padding:0 !important; overflow:hidden !important;}
+
 #header nav ul.depth2 > li > a, #header nav ul.depth2 > li > span {padding:10px 0; color:#111; font-size:1.8rem; line-height:140%; display:block;}
 #header nav li:hover ul, nav li.is-open ul {height:auto !important; overflow:initial !important; display:block;}
 #header nav ul.depth3 {display:none !important;}
