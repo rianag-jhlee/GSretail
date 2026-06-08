@@ -1541,10 +1541,11 @@
                             </h4>
                             <p v-if="item.desc" class="imgcard_desc" v-html="item.desc"></p>
                         </div>
-                        <div v-if="sec.advantages" class="info_card">
-                            <strong v-if="sec.advantages.title" class="info_card_title">{{ sec.advantages.title }}</strong>
+                        <!-- 26.06.08 add 정다희 : 밀박스25/스낵바 카드별 info_card 분기 (item.advantages) -->
+                        <div v-if="item.advantages" class="info_card">
+                            <strong v-if="item.advantages.title" class="info_card_title">{{ item.advantages.title }}</strong>
                             <ul class="info_list">
-                                <li v-for="(adv, ai) in sec.advantages.items" :key="ai">
+                                <li v-for="(adv, ai) in item.advantages.items" :key="ai">
                                     <div>
                                         <span>{{ adv.text }}</span>
                                         <span v-if="adv.note" class="info_check_note">{{ adv.note }}</span>
@@ -1552,6 +1553,7 @@
                                 </li>
                             </ul>
                         </div>
+                        <!-- //26.06.08 add 정다희 : 밀박스25/스낵바 카드별 info_card 분기 (item.advantages) -->
                     </li>
                 </ul>
             </section>
@@ -3016,21 +3018,31 @@ const langData = {
                             name: "밀박스25",
                             desc: "GS25에서 제공하는 기업/단체 대상 간편식 정기 제공 서비스 입니다.<br class=\"p_br\" />주식부터 디저트, 음료까지 매일 새로운 구성으로 운영 됩니다.<br class=\"p_br\" />HACCP 인증, 개별 포장으로 위생적이고 맛있는 한끼를 제공합니다.",
                             link: "https://www.mealbox25.com/mealbox25-introduce",
+                            // 26.06.08 add 정다희 : 밀박스25 info_card 추천 문구
+                            advantages: {
+                                title: "이런 분들에게 추천 드립니다.",
+                                items: [
+                                    { text: "정기적 조식/간식 서비스가 필요할 때" },
+                                    { text: "합리적 가격의 복지 서비스가 필요할 때" },
+                                    { text: "급식 인프라가 없어 정기적인 간편식 공급이 필요할 때" },
+                                ],
+                            },
                         },
                         {
                             bgColor: "#C7C7C7",
                             name: "스낵바",
                             desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다. 사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.",
+                            // 26.06.08 add 정다희 : 스낵바 info_card 추천 문구 분기
+                            advantages: {
+                                title: "이런 분들에게 추천 드립니다.",
+                                items: [
+                                    { text: "직원들을 위한 최적의 F&B 복지가 필요할 때" },
+                                    { text: "교대근무로 식사 시간이 일정하지 않을 때" },
+                                    { text: "고객 및 근무자를 위한 준비된 간식이 필요할 때" },
+                                ],
+                            },
                         },
                     ],
-                    advantages: {
-                        title: "이런 분들에게 추천 드립니다.",
-                        items: [
-                            { text: "정기적 조식/간식 서비스가 필요할 때" },
-                            { text: "합리적 가격의 복지 서비스가 필요할 때" },
-                            { text: "급식 인프라가 없어 정기적인 간편식 공급이 필요할 때" },
-                        ],
-                    },
                 },
             ],
         },
@@ -4339,21 +4351,26 @@ const langData = {
                             name: "Meal Box 25",
                             desc: "A regular meal delivery service for corporations and groups, provided by GS25. Featuring a fresh new lineup every day, from staple dishes to desserts and beverages. With HACCP certification and individual packaging, every meal is hygienic and delicious.",
                             link: "https://www.mealbox25.com/mealbox25-introduce",
+                            // 26.06.08 add 정다희 : 밀박스25 info_card 추천 문구
+                            advantages: {
+                                title: "Recommended for:",
+                                items: [
+                                    { text: "When you need a regular breakfast or snack service"/* 260604 번역 */ },
+                                    { text: "When you need welfare services at a reasonable price"/* 260604 번역 */ },
+                                    { text: "When you have no catering infrastructure and need a regular supply of convenient meals"/* 260604 번역 */ },
+                                ],
+                            },
                         },
                         {
                             img: require("@/assets/images/sub/gsrbr010101/img_snackbar.png"),
                             name: "Snack bar"/* 260604 번역 */,
                             desc: "A curated snack service that regularly delivers on-trend GS25 products to corporations and groups. Bring GS25 to your office and elevate your employee welfare benefits.",
+                            // 26.06.08 add 정다희 : 스낵바 info_card 추천 문구 분기
+                            advantages: {
+                              
+                            },
                         },
                     ],
-                    advantages: {
-                        title: "Recommended for:",
-                        items: [
-                            { text: "Those who need a regular breakfast or snack service / Those looking for a cost-effective employee welfare benefit / Those without cafeteria infrastructure who need a regular meal supply" },
-                            { text: "When you need welfare services at a reasonable price"/* 260604 번역 */ },
-                            { text: "When you have no catering infrastructure and need a regular supply of convenient meals"/* 260604 번역 */ },
-                        ],
-                    },
                 },
             ],
         },
