@@ -2,7 +2,7 @@
     <div class="main-container">
         <div class="title_wrap tac top_visual">
             <h2 class="page_title">{{ t.MainTitle }}</h2>
-            <p class="visual_sub">{{ t.MainsubTitle }}</p>
+            <!-- 26.06.08 add 정다희 : MainsubTitle 삭제  -->
         </div>
 
         <!-- gsrbr010101 맥락: brand_content ≈ content, Tabs 나열 후 v-show 패널 -->
@@ -412,7 +412,7 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "지속가능경영",
-                    MainsubTitle: "Sustainable management",
+                    // 26.06.08 add 정다희 : MainsubTitle 삭제 
                     MainDesc: "GS리테일은 통합 GS리테일 출범 이후 지속가능한 기업의 가치창출을 위해\n‘Green Life Together’라는 ESG비전을 수립하였습니다.\n이 중장기 비전이 실행될 수 있도록 환경과 사회의 세부전략 및 과제를 추진하고 있으며,\n이행현황과 지속가능한 경영의 성과를 이해관계자와 지속 소통해가겠습니다.",
                     Tabs1: [{ item: "비전&전략" }, { item: "ESG 자료실" }, { item: "지속가능경영보고서" }],
                     TabsEsgArchive: [
@@ -708,7 +708,6 @@ export default {
                 },
                 en: {
                     MainTitle: "Sustainability Management",
-                    MainsubTitle: "Sustainable management",
                     MainDesc: "Following the launch of the integrated GS Retail, the Company established the ESG vision 'Green Life Together' to create sustainable corporate value.\nTo realize this mid-to-long-term vision, we are pursuing detailed environmental and social strategies and initiatives,\nand we will continue to communicate our implementation status and sustainable management performance with our stakeholders."/* 260604 번역 */,
                     Tabs1: [{ item: "Vision and Strategy" }, { item: "ESG Resource Center" }, { item: "Sustainability Report" }],
                     TabsEsgArchive: [
