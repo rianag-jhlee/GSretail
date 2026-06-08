@@ -17,11 +17,14 @@
             <div class="cont_area">
                 <div class="cont_inner">
                     <h3>{{ t.SubTitle }}</h3>
-                    <div>
-                        <p v-html="t.SubContent_1"></p>
-                        <!-- <p v-html="t.SubContent_2"></p> -->
-                        <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a><!-- 26.05.12 Edit 이종환 : 클래스 추가 -->
-                    </div>
+                    <ul>
+                        <li>
+                            <p v-html="t.SubContent_1"></p>
+                        </li>
+                        <li>
+                            <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a>
+                        </li>
+                    </ul>
                     <!-- 26.06.08 add 정다희 : bi_box 추가 ul> li 구조 div > div 구조로 수정정-->
                     <div class="bi_box">
                         <div class="bi_section">
@@ -153,10 +156,10 @@ img {width:100%;}
 .body_wrap .cont_area {padding:10.41% 0; background:#F8F8F8;}
 .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
 /* 26.06.08 add 정다희 : bi_box 추가 ul> li 구조 div > div 구조로 수정*/
+.body_wrap .cont_area .cont_inner ul { margin-bottom: 64px; display: flex; justify-content: space-between; align-items: flex-end; }
+.body_wrap .cont_area .cont_inner ul li p { color: #161616; font-size: 24px; font-weight: 600; line-height: 1.3; }
+.body_wrap .cont_area .cont_inner ul li a { color: #161616; font-size: 18px; display: flex; align-items: center; }
 .body_wrap .cont_area .cont_inner .bi_box { padding: 56px 64px; background: #fff; border-radius: 12px; }
-.body_wrap .cont_area .cont_inner h3 + div { margin-bottom: 60px; position: relative; }
-.body_wrap .cont_area .cont_inner h3 + div a { position: absolute; right: 0; bottom: 0; }
-.body_wrap .cont_area .cont_inner h3 + div p { color: #161616; font-size: 24px; font-weight: 600; line-height: 1.3; }
 .bi_box > .bi_section { width: 100%; }
 .bi_box > .bi_section > h4 { margin-bottom: 40px; font-size: 3.2rem; font-weight: 700; }
 .bi_box > .bi_section > span { width: 100%; display: block; }
@@ -168,10 +171,11 @@ img {width:100%;}
 /* Bottom Buttons */
 .bottom_btns { max-width: 1460px; margin: 100px auto 0; padding:0 20px; text-align: left;}
 
+@media screen and (max-width: 1160px) {
+    .body_wrap .cont_area .cont_inner ul { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
 @media screen and (max-width: 1024px) {
-    /* 26.06.08 add 정다희 : bi_box 추가 ul> li 구조 div > div 구조로 수정*/
     .body_wrap .cont_area { padding: 10.41% 20px; }
-    .body_wrap .cont_area .cont_inner h3 + div a { right: auto; left: 0; bottom: -40px; }
 }
 @media screen and (max-width: 767px) {
     .text_box span { margin-bottom: 10px; color: #fff; font-size: 28px; font-weight: 700; text-align: center; display: block; }
@@ -180,10 +184,10 @@ img {width:100%;}
     .body_wrap .cont_inner h3 { margin-bottom: 16px; color: #161616; font-size: 24px; font-weight: 700; }
     .body_wrap .cont_area .cont_inner .bi_box { padding: 32px; }
     .bi_box > .bi_section > h4 { margin-bottom: 24px; font-size: 1.8rem; }
-    .body_wrap .cont_area .cont_inner h3 + div { margin-bottom: 80px; }
-    .body_wrap .cont_area .cont_inner h3 + div p { font-size: 16px; font-weight: 400; line-height: 1.3; }
-    .body_wrap .cont_area :deep(.cont_inner) h3 + div p br { display: none; }
-    .body_wrap .cont_area .cont_inner h3 + div a { font-size: 1.4rem; right: auto; left: 0; bottom: -40px; }
+    .body_wrap .cont_area .cont_inner ul { margin-bottom: 40px; align-items: flex-start; }
+    .body_wrap .cont_area .cont_inner ul li p { font-size: 16px; font-weight: 400; line-height: 1.5; }
+    .body_wrap .cont_area .cont_inner ul li p br { display: none; }
+    .body_wrap .cont_area .cont_inner ul li a { font-size: 1.4rem; line-height: 1.4; }
     .btn_list_back span { font-size: 16px; }
     .bottom_btns { display: none; }
     /* 26.06.08 add 정다희 : DiffQrRow 컴포넌트 css 추가가 */
