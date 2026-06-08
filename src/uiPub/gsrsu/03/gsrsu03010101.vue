@@ -2572,7 +2572,7 @@ export default {
                                 img: require("@/assets/images/dummy/gsrsu030305_2.png"),
                                 imgMo: require("@/assets/images/dummy/gsrsu030305_2_mo.png"),
                                 CommitteeImg: "gsrsu030305_2",
-                                Notice: "※이사회(ESG위원회) 정기보고"
+                                Notice: "이사회(ESG위원회) 정기보고" // 텍스트 수정 : 26.06.08 add 정다희 
                             },
                             Policy: {
                                 Title: "정보보호 및 개인정보보호 정책",
@@ -4055,9 +4055,11 @@ export default {
     .information_protection_management .protection_section {display: flex; flex-direction: column; }
     .information_protection_management .section_title_sub {font-size: 40px; font-weight: 700; color: #161616; letter-spacing: -0.4px; line-height: 1.3; }
     .information_protection_management .p_desc {font-size: 24px; font-weight: 400; color: #161616; letter-spacing: -0.24px; line-height: 1.5; }
-    .information_protection_management .diagram_box_wrap { width: 100%; padding: 60px 80px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; }
+    .information_protection_management .diagram_box_wrap { width: 100%; padding: 60px 80px; background-color: #f8f8f8;  display: flex; flex-direction: column; align-items: center; }
     .information_protection_management .diagram_box_wrap.scroll { width: 100%; max-width:100%; background-color: #f8f8f8; overflow: hidden; }
-    .information_protection_management .diagram_box_wrap figcaption {display:block; margin-top:20px; width: 100%; color: #67676F;}
+    /* 26.06.08 add 정다희 : diagram_box_wrap figcaption 수정  */
+    .information_protection_management .diagram_box_wrap figcaption { width: 100%; margin-top: 20px; padding-left: 30px; min-height: 20px; color: #67676F; font-size: 1.4rem; line-height: 20px; letter-spacing: -0.01em; display: block; position: relative; }
+    .information_protection_management .diagram_box_wrap figcaption::before{content:'1';width:20px;height:20px; border-radius:50%;color:#fff;font-weight: 700;font-size: 1.2rem;text-align: center;background-color:#9FCAFA;display:inline-flex; align-items:center; justify-content:center; position:absolute; top:0; left:0; z-index:1;}
     .information_protection_management .visual_area img { max-width: 100%; height: auto; }
     .information_protection_management .notice_text { font-size: 14px; color: #67676f; }
     .information_protection_management .policy_wrap { width: 100%; margin-top: 0; border-top: 2px solid #161616; }
@@ -4144,6 +4146,8 @@ export default {
         .information_protection_management .mark_item_group .brand_grid.mt60 {margin-top:0px !important}
 
         .listening_form_wrap .form_row {flex-direction:column;}
+        /* 26.06.08 add 정다희 : diagram_box_wrap figcaption 수정  */
+        .information_protection_management .diagram_box_wrap figcaption { margin-left: 20px; font-size: 1.2rem; line-height: 20px; min-height: 20px; }
     }
 
     @media screen and (max-width:768px){

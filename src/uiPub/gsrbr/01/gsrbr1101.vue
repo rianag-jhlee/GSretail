@@ -13,17 +13,7 @@
         </section>
 
         <div class="body_wrap">
-            <div class="cont_area">
-                <div class="cont_inner">
-                    <ul>
-                        <li>
-                            <p>{{ t.SubContent_1 }}</p>
-                            <p v-html="t.SubContent_2"></p>
-                            <p v-html="t.SubContent_3"></p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <!-- 26.06.08 add 정다희 : cont_area 삭제 -->
             <div class="cont_inner">
                 <div class="category_tabs">
                     <Tabs 
@@ -48,7 +38,8 @@
                     <section v-if="CTabIdx === 0 && t?.SubwayData" class="tab_content subway_content">
                         <div class="inner_cont">
                             <div class="info_section">
-                                <h3 class="content_title" v-html="t.SubwayData.title"></h3>
+                                <!-- 26.06.08 add 정다희 : content_title 태그 수정 -->
+                                <h2 class="content_title" v-html="t.SubwayData.title"></h2> 
                                 <div class="contact_left pc">
                                     <div class="info_item">
                                         <em>{{ t.Labels.phone }}</em>
@@ -70,7 +61,7 @@
                                 <component 
                                     :is="isMobile ? 'swiper' : 'div'"
                                     :slides-per-view="isMobile ? '1.1' : undefined"
-                                    :space-between="isMobile ? 20 : 0"
+                                    :space-between="isMobile ? 8 : 0" 
                                     :breakpoints="{ 768: { allowTouchMove: false } }"
                                     class="principles_swiper_wrapper"
                                 >
@@ -105,7 +96,7 @@
                             </div>
 
                             <div class="tell_area mo">
-                                <h3 class="content_title">{{ t.SubwayData.contact.연락처 }}</h3>
+                                <h3 class="main_title">{{ t.SubwayData.contact.연락처 }}</h3> <!-- 26.06.08 add 정다희 : 클래스 수정 -->
                                 <ul>
                                     <li>
                                         <strong>{{ t.SubwayData.contact.전화 }}</strong>
@@ -121,7 +112,7 @@
                             </div>
 
                             <div class="lease_condition_section">
-                                <h3 class="content_title">{{ t.Labels.conditionInfo }}</h3>
+                                <h3 class="main_title">{{ t.Labels.conditionInfo }}</h3> <!-- 26.06.08 add 정다희 : 클래스 수정 -->
                                 <div class="condition_grid">
                                     <div v-for="(cond, cIdx) in t.SubwayData.conditions" :key="cIdx" class="condition_item">
                                         <!-- <div class="visual_img_small">
@@ -165,7 +156,7 @@
                                             <component 
                                                 :is="isMobile ? 'swiper' : 'div'"
                                                 :slides-per-view="isMobile ? '1.1' : undefined"
-                                                :space-between="isMobile ? 20 : 0"
+                                                :space-between="isMobile ? 8 : 0"
                                                 :breakpoints="{ 768: { allowTouchMove: false } }"
                                                 class="principles_swiper_wrapper"
                                             >
@@ -196,7 +187,7 @@
                                 <div class="map_section">
                                     <div class="contact_info_wrap">
                                         <div class="contact_left">
-                                            <strong>{{ t.mall_txt }}</strong>
+                                            <strong class="main_title">{{ t.mall_txt }}</strong> <!-- 26.06.08 add 정다희 : 클래스 추가 -->
                                             <div class="info_item">
                                                 <span>{{ mall.contact.snsLabel || t.Labels.sns }}</span>
                                                 <span class="val">{{ mall.contact.instatxt }}</span>
@@ -240,12 +231,12 @@
                 </div>
 
                 <div class="lease_section">
-                    <h4 class="sub_title">{{ t.lease_subtitle }}</h4>
+                    <h3 class="main_title">{{ t.lease_subtitle }}</h3> <!-- 26.06.08 add 정다희 : 클래스 수정정 -->
                     <div class="principles_card_container">
                         <component 
                             :is="isMobile ? 'swiper' : 'div'"
                             :slides-per-view="'1.1'"
-                            :space-between="isMobile ? 20 : 0"
+                            :space-between="isMobile ? 8 : 0"
                             :breakpoints="{ 768: { allowTouchMove: false } }"
                             class="principles_swiper_wrapper"
                         >
@@ -325,10 +316,10 @@ export default {
                     SubwayData: {
                         img: require("@/assets/images/dummy/gsrbr1101_subway.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr1101_subway_mo.png"),
-                        title: `신분당선 1, 2단계 <br/> 임대상가 모집`,
+                        title: `신분당선 1, 2단계 임대상가 모집`,
                         principles: [
                             { subTitle: `최단시간 강남접근`, desc: [`강남역 ~ 정자역 16분대 운행 (기존 분당선 대비 약 30분 단축)`, `광역버스 및 자가용 이용 통근자의 교통 체증 난(難) 해소`] },
-                            { subTitle: `풍부한 유동성`, desc: [`총 6개역 중 4개 역사가 환승역사`, `강남 최고의 오피스/상업 밀집지인 강남역 연결`], txt:[`강남(2호선), 양재(3호선), 판교, 정자(분당선)`,`강남(2호선), 양재(3호선), 판교, 정자(분당선)`] },
+                            { subTitle: `풍부한 유동성`, desc: [`총 6개역 중 4개 역사가 환승역사 <br />강남(2호선), 양재(3호선), 판교, 정자(분당선)`, `강남 최고의 오피스/상업 밀집지인 강남역 연결`]}, // <!-- 26.06.08 add 정다희 : 텍스트 수정 -->
                             { subTitle: `최적화된 역사 환경`, desc: [`현대적 감각의 인테리어 구현 및 높은 층고(3.6M)로 개방감 확보`] }
                         ],
                         routeMapImg: require("@/assets/images/dummy/gsrbr1101_subway.png"),
@@ -354,8 +345,8 @@ export default {
                             {
                                 name: `키오스크`, img: require("@/assets/images/dummy/subway_kiosk.png"),
                                 table: [
-                                    { th: `월 집기 사용료`, td: `업체 제안 방식` },
-                                    { th: `사용료 납입`, td: `6개월 선납 방식` },
+                                    { th: `월 임대료`, td: `업체 제안 방식` }, // <!-- 26.06.08 add 정다희 : th 텍스트 수정 -->
+                                    { th: `임대 보증금`, td: `6개월 선납 방식` },  // <!-- 26.06.08 add 정다희 : th 텍스트 수정 -->
                                     { th: `계약기간`, td: `6개월 단위` },
                                     { th: `예치보증금`, td: `사용료 3개월 분` },
                                     { th: `추천업종`, td: `악세사리, 잡화 등` }
@@ -385,7 +376,7 @@ export default {
                                 {title:`고객 경헝에 특화된 MD 구성`,desc:`갤러리, 카페, 식음, 소품 등 다양한 매장이 거리를 형성하고, 전통 문화 지역 특성을 준수하여 고객 경험에 특화된 MD 구성`},
                                 {title:`차별화된 시설`,desc:`상권 내 차별화된 시설(나인트리 호텔 숙박 연계 및 주차 공간 제공) 등 국내외 방문객의 장시간 체류 가능 (호캉스+몰캉스)`}
                             ], 
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
+                            // mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.1734625641543!2d126.98088067587412!3d37.574532872036556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ef4127fbcd%3A0xdff366a8dbc227d6!2z7JWI64WV7J247IKs64-Z!5e0!3m2!1sko!2skr!4v1775627958896!5m2!1sko!2skr`,
                             contact: { phone: `02-6954-2991`, email1: `anyounginsadong@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
                             type:`card_type`
@@ -401,7 +392,7 @@ export default {
                                 {title:`넉넉한 주차, 전면 테리스형<br/> 쾌적한 휴식공간`},
                                 {title:`생활편의(클리닉, 편의점)<br />리테일 매장 완비`}
                             ], 
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
+                            // mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
                             contact: { phone: `02-2006-3199`, email1: `sigar11@gsretail.com`, snsLabel: `SNS`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
                             type:`card_type`
@@ -415,7 +406,7 @@ export default {
                                 파미어스몰은 연면적 약 7만 7천평 규모의 복합시설로 315실의 '나인트리 호텔', 785세대의 '오피스텔', 5개기업의 오피스로 사용되고,<br/> 약 8,653평의 저층부에는 극장, 메디컬, 키즈, 쇼핑, 카페, 레스토랑 등 지역 주민들의 풍요로운 하루를 완성할 수 있는 다양한 상업 및 문화시설이 자리잡았습니다.
                                 '`,
                             ], 
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"),
+                            // mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
                             contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
                         },
@@ -426,7 +417,7 @@ export default {
                                 `<b>미식일상은 오시리아 관광단지 중심부에 위치한 약 3,000평 규모의 복합문화시설로,<br />2021년 6월 준공 이후 F&B와 다채로운 체험 콘텐츠가 결합된 독보적인 '문화복합시설'로의 재도약을 준비중입니다.</b>`,
                                 `오시리아 관광단지는 연간 약 4천만 명 방문하는 지역으로 차량 1시간 이내의 근거리 방문객으로 구성되어 있어,<br />일회성 관광객을 넘어 높은 재방문율과 지속적인 소비력을 갖춘 ‘안정적인 배후 수요 상권’ 입니다.<br />특히, 미식일상은 롯데아울렛〮롯데월드〮루지〮바운스유니버스 사이에 위치하여 주변 시설을 연결하는 집객력과 확장성을 보유하고 있는 시설입니다.`
                             ], 
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"),
+                            // mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
                             contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` }
                         }
@@ -603,6 +594,7 @@ export default {
 <style scoped>
 .gsrbr1101 { width: 100%; position: relative; display: block; }
 .mo {display:none;}
+.bullet_01 li + li{margin-top:4px;}
 .principles_card_container { width: 100%; margin-top:40px; }
 .principles_swiper_wrapper { display: flex; gap: 20px; width: 100%; }
 .principle_card_item { flex: 1; display: flex; flex-direction: column; gap: 24px; padding: 40px 32px 48px; background-color: #f8f8f8; border-radius: 12px; box-sizing: border-box; position: relative; }
@@ -620,35 +612,43 @@ export default {
 .visual_section { width:100%; position: relative; overflow: hidden; }
 .visual_content {width: 100%; position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 2; }
 .text_box span {margin-bottom:10px; color:#fff; font-size:72px; font-weight:700; display: block;  }
-.body_wrap .cont_area {padding:10.41%; background:#F8F8F8;}
-.body_wrap .cont_area .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
-.body_wrap .cont_area .cont_inner ul {display:flex; justify-content:space-between; align-items:flex-end;}
-.body_wrap :deep(.cont_area) .cont_inner ul li p {color:#161616; font-size:24px; font-weight:600; line-height:1.;}
-.body_wrap :deep(.cont_area) .cont_inner ul li p br {display:none;}
-.body_wrap .cont_area .cont_inner ul li a {color:#161616; font-size:18px; display:flex; align-items:center;}
+/* cont_area 삭제 26.06.08 정다희  */
+
 .sub_tabs { margin-top: 24px; }
+.policy_wrap * {word-break: break-word;}
 .detail_content { margin-top:64px; }
 .tab_content { width: 100%; display: block; }
 .inner_cont { width: 100%; position: relative; }
 .visual_img { width: 100%;}
-.visual_img img { width: 100%; height: 100%; object-fit: cover; display: block;  }
+.visual_img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .info_section { margin-bottom:100px; }
-.content_title { margin-bottom:16px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
-.sub_title { color: #161616; font-size: 24px; font-weight: 700; }
+.content_title{margin-bottom:16px;font-size: 4rem;line-height: 1.3;letter-spacing: -0.01em;}
+.visual_img + .info_section{margin-top:40px;}
+.main_title { margin-bottom:16px; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.3; }
+.sub_title { color: #161616; font-size: 2.4rem; font-weight: 700; }
 .text_list { margin-top: 16px; }
+<<<<<<< HEAD
 .text_item {width: 100%; margin-bottom:16px; padding-left: 24px; color: #161616; font-size: 2.8rem; line-height: 1.6; text-indent: -24px;}
 .mall_content .content_title {margin-top:40px; margin-bottom:100px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
 .mall_content .content_title a {margin-left:16px; font-size:18px; font-weight:500; display:inline-flex; gap:8px; align-items:center;}
 .mall_content .content_title a::before {content: ''; display: inline-block; width:24px; height:24px; background:url('@/assets/images/common/icon_set_20.png') -454px -112px no-repeat;}
+=======
+.text_item {width: 100%; margin-bottom:16px; padding-left: 24px; color: #161616; font-size: 28px; line-height: 1.6; text-indent: -24px;}
+.mall_content .visual_img { width: 100%; height: 340px; background-color: #D9D9D9; border-radius: 12px; overflow: hidden; }
+.mall_content .visual_img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mall_content .main_title {margin-bottom:100px; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; }
+.mall_content .main_title a {margin-left:16px; font-size:18px; font-weight:500; display:inline-flex; gap:8px; align-items:center;}
+.mall_content .main_title a::before {content: ''; display: inline-block; width:24px; height:24px; background:url('@/assets/images/common/icon_set_20.png') -454px -112px no-repeat;}
+>>>>>>> 49dbfa0b1f0fa012493edcc1e6864064509c6b7e
 .mall-type-2 .text_item, .mall-type-3 .text_item {padding-left:0px; color:#90909A; font-size:18px; text-indent:0px;}
 .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b) {color:#161616; font-size:24px; font-weight:700;}
 .lease_condition_section { width: 100%; margin-top: 120px; }
-.condition_grid { width: 100%; margin-top: 40px; display: flex; gap: 20px; }
+.condition_grid { width: 100%; margin-top: 40px; display: flex; gap: 140px; }
 .condition_item { flex: 1; }
 .visual_img_small { width: 100%; height: 420px; margin-bottom:30px; border-radius: 12px; overflow: hidden; }
 .visual_img_small img { width: 100%; height: 100%; object-fit: cover; }
 .policy_wrap {margin-top:24px;}
-.policy_wrap table { width: 100%; margin-top: 16px; border-top: 1px solid #e5e5e9; }
+.policy_wrap table { width: 100%; border-top: 1px solid #e5e5e9; }
 .policy_wrap table th { padding: 18px 24px; color: #161616; font-size: 1.8rem; font-weight: 700; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; border-top:0; border-left:0; border-right:0; text-align:left; }
 .policy_wrap table td { padding: 18px 24px; color: #161616; font-size: 1.8rem; border-bottom: 1px solid #e5e5e9; border-left:0; border-right:0;}
 .map_section {display:flex; gap:60px;}
@@ -656,8 +656,9 @@ export default {
 .contact_left { display: flex; gap: 40px; }
 .mall_content .contact_info_wrap {width:calc(100% - 940px);}
 .mall_content .contact_left {flex-direction:column; align-items:flex-start; gap:0px}
-.mall_content .contact_left strong {margin-bottom:24px; color:#000; font-size:28px; font-weight:700;}
+.mall_content .contact_left strong {margin-bottom:24px; }
 .mall_content .contact_left .info_item {width:100%; padding-top:16px; padding-bottom:16px; border-bottom:1px solid #E5E5E9; position:relative; display: flex; flex-direction:column; align-items:flex-start; gap:4px;}
+
 .btn_sns.ico_insta {width:24px; height:24px; background:url('@/assets/images/common/icon_set_16.png') -855px -14px no-repeat; position:absolute; top:50%; right:0; display:inline-flex; transform:translateY(-50%);}
 .mall_content .contact_left .info_item span {color:#161616; font-size:18px; font-weight:700;}
 .mall_content .contact_left .info_item .val {color:#67676F; font-size:18px; font-weight:400; line-height:1.4; display:flex; flex-direction:column; gap:4px;}
@@ -672,12 +673,13 @@ export default {
 .tell_area.mo ul li:first-of-type + li {padding-top:16px;}
 .tell_area.mo ul li * {font-size:16px;}
 .tell_area.mo ul li p {margin-top:4px; color:#67676F; line-height:1.5;}
+.tell_area.mo ul li p + p{margin-top:8px;}
 .mall_intro_cards .desc_sub_text {color:#67676F; font-size:16px; line-height:1.5;}
 .mall-type-1 .principles_swiper_wrapper {display: grid; grid-template-columns: repeat(3, 1fr);}
-.lease_section { width: 100%; margin-top:40px; }
+.lease_section { width: 100%; margin-top:120px; }
 .fee_tip_box {margin-top:40px;}
 .fee_tip_box strong {margin-bottom:8px; padding-left:32px; color:#67676F; font-size:18px; font-weight:700; display:block; position:relative;}
-.fee_tip_box strong::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_20.png') -930px -23px no-repeat; display:inline-flex; position:absolute; left:0; top:50%; transform:translateY(-50%);}
+.fee_tip_box strong::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -496px -56px no-repeat; display:inline-flex; position:absolute; left:0; top:50%; transform:translateY(-50%);}
 .fee_tip_box p {color:#67676F; font-size:16px; font-weight:400; line-height:1.5;}
 .lease_section .principles_card_container .principle_card_item {width:340px; flex:none;}
 .bottom_btns { width: 100%; margin-top: 100px; text-align: left; }
@@ -687,16 +689,22 @@ export default {
 .ac { text-align: center; }
 
 @media screen and (min-width: 1024px) {
-    :deep(.subway_content) .content_title br {display:none;}
+    :deep(.subway_content) .main_title br {display:none;}
 }
 @media screen and (max-width: 1024px) {
     .visual_wrap { padding: 80px 0; }
     .intro_content { flex-direction: column; align-items: flex-start; gap: 40px; }
+    .visual_img + .info_section{margin-top:24px;}
+    .visual_img + .info_section > .content_title{margin-bottom:64px;}
     .text_box .title { font-size: 36px; }
     .text_box .desc_box { margin-top: 24px; }
     .text_box .summary, .text_box .desc { font-size: 1.8rem; line-height: 1.5; }
     .detail_content { margin-top: 60px; }
+<<<<<<< HEAD
     .content_title {font-size: 2.8rem !important; }
+=======
+    .main_title {font-size: 28px; }
+>>>>>>> 49dbfa0b1f0fa012493edcc1e6864064509c6b7e
     .sub_title { font-size: 20px; }
     .text_item { font-size: 1.8rem; line-height: 1.6; }
     .map_area { height: 400px; }
@@ -708,7 +716,6 @@ export default {
     .lease_section { margin-top: 24px; }
     .fee_tip_box {flex-direction: column; align-items: flex-start; gap: 16px; }
     .val_txt { font-size: 16px; word-break: keep-all; }
-    .bottom_btns { margin-top: 60px; }
     .btn_list_back span { height: 50px; justify-content: center; }
     /* .principles_swiper_wrapper { flex-direction: column; gap: 16px; } */
     .principle_card_item {height:auto; padding: 32px; display:block; flex:none;}
@@ -719,24 +726,41 @@ export default {
     .mo {display:block;}
     
     .info_section { margin-bottom:40px; }
-    .body_wrap .cont_area {padding:140px 0;}
-    .body_wrap .cont_area .cont_inner ul li p {font-size:16px;}
-    .body_wrap .cont_area .cont_inner ul li p {margin-bottom:20px;}
-    .body_wrap :deep(.cont_area) .cont_inner ul li p br {display:none;}
+    .condition_grid{gap:40px;}
+    .content_title{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
     .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .text_box .title { font-size: 30px; letter-spacing: -0.5px; }
     .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b),.mall-type-2 .text_item, .mall-type-3 .text_item {font-size: 16px; }
-    .mall_content .visual_img {height:240px;}
-    .mall_content .content_title {margin-bottom:60px; margin-left:0px; margin-top:16px; display:flex; flex-direction:column;}
-    .mall_content .content_title a {margin-left:0px; margin-top:16px; font-size:14px;}
+    .mall_content .visual_img { width:calc(100% + 40px); height: 240px; margin:0 -20px; border-radius: 0;}
+    .mall_content .main_title {margin-bottom:60px; margin-left:0px;font-size:2.4rem;line-height:1.35; display:flex; flex-direction:column;}
+    .mall_content .main_title a {margin-left:0px; margin-top:16px; font-size:14px;}
     .mall-type-2 .text_item :deep(b br) , .mall-type-3 .text_item :deep(b br) {display:none;}
-    .content_title { font-size: 24px; }
+    .main_title { font-size: 24px; }
     .condition_grid {flex-direction:column; margin-top:24px;}
-    .principles_card_container { margin-top: 40px; }
-    .principle_card_item .card_title {margin-bottom:16px; font-size: 20px; }
-    .principle_card_item .bullet_text { font-size: 15px; }
+    .principles_card_container { margin-top: 24px; }
+    .principles_swiper_wrapper{width:calc(100% + 20px); padding-right:20px;}
+    .principle_card_item .card_header{gap:6px;}
+    .principle_card_item .card_num{font-size:1.8rem; line-height:1.5;}
+    .principle_card_item .card_title{margin-bottom:16px; font-size:1.8rem; line-height:1.5;}
+    .principle_card_item .bullet_text, .principle_card_item .sub_desc { font-size: 1.4rem; line-height:1.4; }
+    .bullet_01 li + li{margin-top:6px;}
+    .bullet_01 li{padding-left:6px;}
+    .bullet_01 li::before{width:2px; height:2px;}
     .lease_condition_section {margin-top:80px; }
+    .policy_wrap table { table-layout: fixed; }
+    .policy_wrap table colgroup col:first-child { width: 113px; }
+    .lease_section{margin-top:80px;}
     .lease_section .principles_card_container .principle_card_item {width:100%;}
+    .contact_left .info_item:first-of-type{border-top:1px solid #E5E5E9;}
     /* .mall-type-1 .principles_swiper_wrapper {display:block;} */
-}
+    .policy_wrap{margin-top:8px;}
+    .policy_wrap table th{padding:22px 20px;font-size: 1.6rem;line-height: 1.24;letter-spacing: 0%;}
+    .policy_wrap table td{padding:20px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    .policy_wrap table td p {font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    .fee_tip_box{margin-top:24px;}
+    .fee_tip_box strong{font-size: 1.6rem;line-height: 1.24;letter-spacing: 0%;}
+    .fee_tip_box p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .bottom_btns { margin-top: 60px; }
+    }
+ 
 </style>

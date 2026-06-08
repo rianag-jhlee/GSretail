@@ -17,17 +17,24 @@
             <div class="cont_area">
                 <div class="cont_inner">
                     <h3>{{ t.SubTitle }}</h3>
-                    <div>
-                        <p v-html="t.SubContent_1"></p>
-                        <!-- <p v-html="t.SubContent_2"></p> -->
-                        <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a><!-- 26.05.12 Edit 이종환 : 클래스 추가 -->
-                    </div>
                     <ul>
-                        <li class="bi_section">
-                            <h4 class="">{{ t.Bi.txt }}</h4>
-                            <span><img :src="isMobile ? t.Bi.imgMo : t.Bi.img" :alt="t.Bi.alt"></span>
+                        <li>
+                            <p v-html="t.SubContent_1"></p>
+                        </li>
+                        <li>
+                            <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a>
                         </li>
                     </ul>
+                    <!-- 26.06.08 add 정다희 : bi_box 추가 ul> li 구조 div > div 구조로 수정정-->
+                    <div class="bi_box">
+                        <div class="bi_section">
+                            <h4>{{ t.Bi.txt }}</h4>
+                            <span><img :src="isMobile ? t.Bi.imgMo : t.Bi.img" :alt="t.Bi.alt" /></span>
+                        </div>
+                        <!-- 26.06.08 add 정다희 : DiffQrRow 컴포넌트 추가 -->
+                        <DiffQrRow :title="t.Qr.title" :desc="t.Qr.desc" :mobile-desc="t.Qr.mobileDesc" />
+                    </div>
+                    <!-- //26.06.08 add 정다희 : bi_box 추가 ul> li 구조 div > div 구조로 수정정-->
                 </div>
             </div>
 
@@ -43,8 +50,11 @@
 </template>
 
 <script>
+import DiffQrRow from "@/components/DiffQrRow.vue"; // 26.06.08 add 정다희 : DiffQrRow 컴포넌트 추가 
+
 export default {
     name: "gsrbr08",
+    components: { DiffQrRow }, // 26.06.08 add 정다희 : DiffQrRow 컴포넌트 추가 
     props: {
         lang: { type: String, default: "ko" }
     },
@@ -72,6 +82,12 @@ export default {
                         imgMo: require("@/assets/images/dummy/gsrbr07_bi_mo.png"),
                         alt: "Real price BI 이미지"
                     },
+                    // <!-- 26.06.08 add 정다희 : DiffQrRow 컴포넌트 추가 -->
+                    Qr: {
+                        title: `우리동네GS 앱 다운로드`,
+                        desc: `우리동네GS 앱을 다운로드하고, 팝카드를 등록하세요!<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.`,
+                        mobileDesc: `우리동네GS 앱을 다운로드하고, 팝카드를 등록하세요!<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.`,
+                    },
                     ListBack:`목록으로 돌아가기`
                 },
                 en: {
@@ -93,6 +109,9 @@ export default {
                         img: require("@/assets/images/dummy/gsrbr07_bi.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr07_bi_mo.png"),
                         alt: "REAL price BI Image"/* 260604 번역 */
+                    },
+                    Qr: {
+                    
                     },
                     ListBack:`Back to Brand List`
                 }
@@ -126,8 +145,6 @@ export default {
 <style scoped>
 .gsrbr07 { width: 100%; position: relative; display: block; }
 img {width:100%;}
-h4 {margin-bottom:40px; font-size:32px;}
-
 /* Visual Section */
 .visual_section { width:100%; position: relative; overflow: hidden; }
 .visual_img { width: 100%; height: auto; }
@@ -138,45 +155,45 @@ h4 {margin-bottom:40px; font-size:32px;}
 /* body_wrap Section */
 .body_wrap .cont_area {padding:10.41% 0; background:#F8F8F8;}
 .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:48px; font-weight:700;}
-.body_wrap .cont_area .cont_inner ul {margin-bottom:40px; padding:50px; background:#fff; border-radius:12px;}
-.body_wrap .cont_area .cont_inner h3 + div {margin-bottom:60px; position:relative;}
-.body_wrap .cont_area .cont_inner h3 + div a {position:absolute; right:0; bottom:0;}
-.body_wrap .cont_area .cont_inner h3 + div p {color:#161616; font-size:24px; font-weight:600; line-height:1.3;}
-.bi_section {margin-top:0px !important;}
-.bi_section {width:100%; margin-top:60px;}
-.bi_section span {widows:100%; display:block;}
-.bi_section span img {width:100%; display:block; object-fit:cover;}
-ul li strong {margin-bottom:12px; color:#A4A4B0; font-size:20px; font-weight:700; display:block;}
-ul li strong br {display:none;}
+/* 26.06.08 add 정다희 : bi_box 추가 ul> li 구조 div > div 구조로 수정*/
+.body_wrap .cont_area .cont_inner ul { margin-bottom: 64px; display: flex; justify-content: space-between; align-items: flex-end; }
+.body_wrap .cont_area .cont_inner ul li p { color: #161616; font-size: 24px; font-weight: 600; line-height: 1.3; }
+.body_wrap .cont_area .cont_inner ul li a { color: #161616; font-size: 18px; display: flex; align-items: center; }
+.body_wrap .cont_area .cont_inner .bi_box { padding: 56px 64px; background: #fff; border-radius: 12px; }
+.bi_box > .bi_section { width: 100%; }
+.bi_box > .bi_section > h4 { margin-bottom: 40px; font-size: 3.2rem; font-weight: 700; }
+.bi_box > .bi_section > span { width: 100%; display: block; }
+.bi_box > .bi_section > span > img { width: 100%; display: block; object-fit: cover; }
+.bi_box :deep(.diff_qr_row) { margin-top: 40px; align-items: flex-start;}
+
 
 
 /* Bottom Buttons */
 .bottom_btns { max-width: 1460px; margin: 100px auto 0; padding:0 20px; text-align: left;}
 
+@media screen and (max-width: 1160px) {
+    .body_wrap .cont_area .cont_inner ul { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
 @media screen and (max-width: 1024px) {
-    .body_wrap .cont_area {padding:10.41% 20px;}
-    .body_wrap .cont_inner:nth-of-type(2) ul {width:100%; display:flex; flex-direction:column; gap:20px}
-    .body_wrap .cont_inner:nth-of-type(2) ul li {width:100%;}
-    .body_wrap .cont_inner:nth-of-type(2) ul li img {width:100%; display:block;}
-    .body_wrap .cont_area .cont_inner h3 + div a {right:auto; left:0; bottom:-40px;}
-    .bi_section {padding:0px;}
+    .body_wrap .cont_area { padding: 10.41% 20px; }
 }
 @media screen and (max-width: 767px) {
-    h4 {margin-bottom:30px; font-size:18px;}
-    .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
-    .body_wrap .cont_area {padding:60px 0px;}
-    .bi_section {padding:0px;}
-    .body_wrap .cont_inner h3 {margin-bottom:16px; color:#161616; font-size:24px; font-weight:700;}
-    .body_wrap .cont_area .cont_inner ul {padding:30px; display:flex; justify-content:space-between; align-items:flex-start;}
-    .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:18px; font-weight:400; line-height:1.5;}
-    .body_wrap .cont_inner:nth-of-type(2) {padding-top:80px; padding-bottom:80px;}
-    .body_wrap .cont_area .cont_inner h3 + div {margin-bottom:80px;}
-    .body_wrap .cont_area .cont_inner h3 + div p {font-size:16px; font-weight:400; line-height:1.3;}
-    .body_wrap .cont_area :deep(.cont_inner) h3 + div p br {display:none;}
-    .body_wrap .cont_area .cont_inner h3 + div a {font-size:1.4rem; right:auto; left:0; bottom:-40px;}
-    ul li strong {font-size:16px;}
-    ul li strong br {display:block !important;}
-    .btn_list_back span {font-size:16px;}
-    .bottom_btns {display:none;}
+    .text_box span { margin-bottom: 10px; color: #fff; font-size: 28px; font-weight: 700; text-align: center; display: block; }
+    /* 26.06.08 add 정다희 : bi_box 추가 ul> li 구조 div > div 구조로 수정*/
+    .body_wrap .cont_area { padding: 60px 0; }
+    .body_wrap .cont_inner h3 { margin-bottom: 16px; color: #161616; font-size: 24px; font-weight: 700; }
+    .body_wrap .cont_area .cont_inner .bi_box { padding: 32px; }
+    .bi_box > .bi_section > h4 { margin-bottom: 24px; font-size: 1.8rem; }
+    .body_wrap .cont_area .cont_inner ul { margin-bottom: 40px; align-items: flex-start; }
+    .body_wrap .cont_area .cont_inner ul li p { font-size: 16px; font-weight: 400; line-height: 1.5; }
+    .body_wrap .cont_area .cont_inner ul li p br { display: none; }
+    .body_wrap .cont_area .cont_inner ul li a { font-size: 1.4rem; line-height: 1.4; }
+    .btn_list_back span { font-size: 16px; }
+    .bottom_btns { display: none; }
+    /* 26.06.08 add 정다희 : DiffQrRow 컴포넌트 css 추가가 */
+    .bi_box :deep(.diff_qr_row) { margin-top: 24px; padding: 0; }
+    .bi_box :deep(.diff_qr_row::after) { display: none; }
+    .bi_box :deep(.diff_qr_row > div > strong){margin:0 0 4px; position: relative;display: inline-block;}
+    .bi_box :deep(.diff_qr_row > div > strong::after){content:'';width: 20px;height: 20px;background:url('@/assets/images/common/icon_set_20.png') -979px -24px no-repeat;position: absolute;top: 50%;right: -24px;transform: translateY(-50%);}
 }
 </style>

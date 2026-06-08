@@ -550,7 +550,7 @@ h2+.explain {
 
 .main_visual .slide {
     height: 100vh;
-    padding: 60px 120px;
+    /* padding: 60px 120px; */
     background-position: 50%;
     background-size: cover;
     position:relative;
@@ -564,6 +564,12 @@ h2+.explain {
     right:0;
     bottom:0;
     left:0;
+}
+
+.main_visual .slide .video_wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .main_copy strong {
@@ -741,9 +747,9 @@ section {
         margin-bottom: 40px;
     }
 
-    .sec03 .slide .thumb {
+    /* .sec03 .slide .thumb {
         width: 50%;
-    }
+    } */
 }
 
 /* --- [Mobile: 768px 이하] --- */

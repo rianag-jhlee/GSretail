@@ -2,18 +2,35 @@
     <div class="main-container">
         <div class="title_wrap ac top_visual">
             <h2 class="page-title">{{ t.MainTitle }}</h2>
-            <p class="visual-sub">{{ t.MainsubTitle }}</p>
+            <!-- 26.06.08 delete: visual-sub 삭제  -->
         </div>
 
         <section class="section-investor">
             <div class="cont_inner">
                 <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
-                
-                <p class="title-sub-text" v-html="t.MainDesc[CTabIdx]"></p>
-
+                <!-- 26.06.08 : title-sub-text if문으로 수정 add 정다희희  -->
+                <p v-if="CTabIdx !== 0" class="title-sub-text" v-html="t.MainDesc[CTabIdx]"></p>
+                <!-- //26.06.08 : title-sub-text if문으로 수정 add 정다희희  -->
                 <div class="tab_content_wrap">
-                    <!-- pageid:gsrin0101 -->
+                    <!-- 26.06.08 add 정다희 -->
                     <section class="tab_content gsrin0101" v-if="CTabIdx === 0" :aria-label="t.Tabs1[0].item">
+                        <article class="sec_chairman">
+                            <div class="chairman_intro">
+                                <figure class="chairman_visual"></figure>
+                                <figcaption v-if="t.ChairmanRole || t.ChairmanName" class="chairman_profile">
+                                    <p v-if="t.ChairmanRole">{{ t.ChairmanRole }}</p>
+                                    <strong v-if="t.ChairmanName">{{ t.ChairmanName }}</strong>
+                                </figcaption>
+                            </div>
+                            <div v-if="t.ChairmanGreeting || t.ChairmanBody?.length" class="chairman_content">
+                                <h3 v-if="t.ChairmanGreeting" v-html="t.ChairmanGreeting"></h3>
+                                <p v-for="(para, pIdx) in t.ChairmanBody" :key="'chairman-' + pIdx">{{ para }}</p>
+                            </div>
+                        </article>
+                    </section>
+                    <!-- //26.06.08 add 정다희 -->
+                    <!-- pageid:gsrin0101 -->
+                    <section class="tab_content gsrin0101" v-if="CTabIdx === 1" :aria-label="t.Tabs1[1].item">
                         <div class="subtit_wrap ac">
                             <h3 class="section-sub-title">{{ t.CharterTitle }}</h3>
                             <p class="section-date mt15">{{ t.CharterDate }}</p>
@@ -40,7 +57,7 @@
                     </section>
                     
                     <!-- pageid:gsrin0102 -->
-                    <section class="tab_content gsrin0102" v-if="CTabIdx === 1" :aria-label="t.Tabs1[1].item">
+                    <section class="tab_content gsrin0102" v-if="CTabIdx === 2" :aria-label="t.Tabs1[2].item">
                         <!-- 1. 이사회 구성 현황 -->
                         <div class="view-2">
                             <div class="sub-title">
@@ -216,7 +233,7 @@
                     </section>
 
                     <!-- pageid:gsrin0103 이사회평가 -->
-                    <section class="tab_content gsrin0103" v-if="CTabIdx === 2" :aria-label="t.Tabs1[2].item">
+                    <section class="tab_content gsrin0103" v-if="CTabIdx === 3" :aria-label="t.Tabs1[3].item">
                         <div class="eval_item_group">
                             <div class="eval_title_box ac">
                                 <h3 class="section-sub-title">{{ t.EvalSystemTitle }}</h3>
@@ -292,7 +309,7 @@
                     </section>
 
                     <!-- gsrin0104 -->
-                    <section class="tab_content gsrin0104" v-if="CTabIdx === 3" :aria-label="t.Tabs1[3].item">
+                    <section class="tab_content gsrin0104" v-if="CTabIdx === 4" :aria-label="t.Tabs1[4].item">
                         <div class="diff_table_wrap ">
                             <div class="policy_wrap">
                                 <table>
@@ -343,15 +360,26 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "기업지배구조",
-                    MainsubTitle: "CORPORATE GOVERNANCE",
                     MainDesc: [
                         "GS리테일은<br/> 기업지배구조헌장에 의거, <br/>건전한 지배구조를 <br/>확립하고 있습니다",
                         "GS리테일은<br/> 투명한 경영 문화 정착을 위해,<br/>이사회 중심 경영을<br/> 실천하고 있습니다.",
                         "GS리테일은<br/> 이사회 운영 개선 및 지배구조 신뢰성 제고를 위하여<br/>2021년 12월 개최된 정기이사회에서<br/> 이사회 평가제도를 도입하였습니다.",
                         "GS리테일은<br/> 지속가능한 경영을 위해,<br/> 지배구조건전성을 <br/>지속 개선해 나아가겠습니다."
                     ],
-                    Tabs1: [{ item: "지배구조헌장" }, { item: "이사회 및 위원회 구성" }, { item: "이사회 평가" }, { item: "지배구조 모범규준과의 차이" }],
-                    
+                    Tabs1: [{ item: "이사회 의장 인사말" }, { item: "지배구조헌장" }, { item: "이사회 및 위원회 구성" }, { item: "이사회 평가" }, { item: "지배구조 모범규준과의 차이" }], //26. 06.08 add: 정다희희
+                    // 이사회 의장 인사말 탭 컨텐츠 추가 26.06.08 add 정다희
+                    ChairmanRole: "㈜GS리테일 이사회 의장",
+                    ChairmanName: "사외이사 이성락",
+                    ChairmanGreeting: "존경하는 GS리테일 주주 여러분 안녕하십니까?<br />GS리테일 이사회 의장<br class='m_br'/>이성락입니다.",
+                    ChairmanBody: [
+                        "우리 회사는 투명한 지배구조 확립을 위해, 2020년 11월부터 대표이사와 이사회 의장을 분리하여 이사회를 운영하고 있습니다.",
+                        "저는 이사회 의장으로서 GS리테일 주주의 권리 보호 및 공정한 대우를 통해 주주의 기본권을 최대한 보장하고, 주주와의 신뢰 구축을 바탕으로 기업 가치를 극대화하고자 노력하고 있습니다.",
+                        "또한, 의사결정의 효율성을 위해 전문성을 갖춘 유능한 인사로 이사회를 구성하여, 주주가치 제고를 위해 최선을 다하고 있으며, 특히 감사위원회는 전원 사외이사 및 2인 이상의 재무 · 회계 전문가로 구성하고, 경영진과 지배주주로부터 독립적인 경영활동이 보장될 수 있도록 하고 있습니다.",
+                        "더불어 ESG관점의 지속가능경영 강화를 위해 ESG위원회, 보상위원회를 설치하는 등 이사회 내 5개의 위원회를 운영하며, 의사결정의 독립성과 전문성을 제고하기 위해 노력하고 있습니다.",
+                        "이 밖에도 다양한 이해관계자의 권리 보호, 공정한 거래 문화 확립, 지역 사회와의 상생 등 기업의 사회적 책임을 다하는 한편, GS리테일이 지속 성장하는 기업이 될 수 있도록 최선의 노력을 다하겠습니다.",
+                        "앞으로도 GS리테일을 향한 많은 관심과 사랑 부탁드립니다. 감사합니다.",
+                    ],
+
                     // [Tab 1] 지배구조헌장 전체 데이터 (KO)
                     CharterTitle: "㈜GS리테일 기업지배구조헌장", 
                     CharterDate: "제정 2021.02.08",
@@ -645,14 +673,18 @@ export default {
                 },
                 en: {
                     MainTitle: "Corporate Governance",
-                    MainsubTitle: "CORPORATE GOVERNANCE",
                     MainDesc: [
                         "GS Retail establishes a sound corporate governance structure in accordance with its Corporate Governance Charter.",
                         "GS Retail is committed to board-centric management to foster a culture of transparent governance.",
                         "To improve board operations and enhance governance credibility, GS Retail introduced a board evaluation system at the regular board meeting held in December 2021.",
                         "GS Retail is committed to continuously strengthening its corporate governance in pursuit of sustainable management."
                     ],
-                    Tabs1: [{ item: "Corporate Governance Charter" }, { item: "Board and Committee Composition" }, { item: "Board Evaluation" }, { item: "Differences from Governance Best Practice Guidelines" }],
+                    // 26.06.08 add 정다희
+                    Tabs1: [{ item: "" }, { item: "Corporate Governance Charter" }, { item: "Board and Committee Composition" }, { item: "Board Evaluation" }, { item: "Differences from Governance Best Practice Guidelines" }],
+                    ChairmanRole: "",
+                    ChairmanName: "",
+                    ChairmanGreeting: "",
+                    ChairmanBody: [],
                     
                     // [Tab 1] 지배구조헌장 전체 데이터 (KO)
                     CharterTitle: "GS Retail Corporate Governance Charter", 
@@ -993,7 +1025,18 @@ export default {
 .title-sub-text {width: 100%; padding: 100px 0; color: #161616; font-size: 48px; font-weight: 700; text-align: center; line-height: 1.4;}
 :deep(.title-sub-text br:not(:nth-of-type(2))) {display: none;}
 .subtit_wrap {width: 100%; padding: 60px 40px; background: #F2F2F4; border-radius: 16px; text-align: center; display: flex; flex-direction: column; justify-content: center;}
-.gsrin0101 .section-sub-title {color: #161616; font-size: 40px; font-weight: 700; text-align: center;}
+/* 이사회 의장 인사말 탭 관련 css 추가 26.06.08 add 정다희 */
+.gsrin0101 .sec_chairman { padding-top:100px; }
+.gsrin0101 .chairman_intro { width: 100%; position: relative; }
+.gsrin0101 .chairman_intro > figure.chairman_visual { width: 100%; height: 658px; background: url('@/assets/images/dummy/gsrin0101_01.png') no-repeat center top / cover; }
+.gsrin0101 .chairman_intro > figcaption.chairman_profile { position: absolute; bottom: 30.7%; left: 11.97%; }
+.gsrin0101 .chairman_intro > figcaption.chairman_profile > p { color: #000; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.gsrin0101 .chairman_intro > figcaption.chairman_profile > strong { margin-top: 11px; color: #000; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; display: block; }
+.gsrin0101 .chairman_content { width: 100%; margin-top: 80px; }
+.gsrin0101 .chairman_content > h3 { color: #161616; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.gsrin0101 .chairman_content > p { margin-top: 10px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.gsrin0101 .chairman_content > h3 + p { margin-top: 10px; }
+/* //이사회 의장 인사말 탭 관련 css 추가 26.06.08 add 정다희 */
 .section-date {margin-top: 15px; color: #161616; font-size: 1.8rem; text-align: center; display: block;}
 .gsrin0101 .policy_wrap {padding-top: 60px;}
 .gsrin0101 .policy_wrap dt {margin-top: 60px; color: #161616; font-size: 24px; font-weight: 700;}
@@ -1128,8 +1171,9 @@ export default {
 
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     .cont_inner {padding-top:80px;}
+    .tab_wrap{margin-bottom:0;}
     .title_wrap {display:none;}
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
@@ -1155,6 +1199,16 @@ export default {
     .p {font-size:18px;}
     .frame-6 {flex-direction:column; align-items:flex-start;}
     .gsrin0101 .section-sub-title {font-size:28px;}
+    /* 이사회 의장 인사말 탭 관련 css 추가 26.06.08 add 정다희 */
+    .gsrin0101 .sec_chairman { padding-top:60px; }
+    .gsrin0101 .chairman_intro > figure.chairman_visual { height: auto;min-height: 400px; background-position: 57% center;  }
+    .gsrin0101 .chairman_intro > figcaption.chairman_profile { position: static; margin-top: 60px; padding: 0; }
+    .gsrin0101 .chairman_intro > figcaption.chairman_profile > p { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .gsrin0101 .chairman_intro > figcaption.chairman_profile > strong { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; }
+    .gsrin0101 .chairman_content { margin-top: 40px; }
+    .gsrin0101 .chairman_content > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .gsrin0101 .chairman_content > p { font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+    /* //이사회 의장 인사말 탭 관련 css 추가 26.06.08 add 정다희 */
     .gsrin0101 .policy_wrap {padding:30px 0;}
     .gsrin0102 .view-2:first-of-type {margin-top:0;}
     .gsrin0103 .section-sub-title {font-size:24px; text-align:left;}

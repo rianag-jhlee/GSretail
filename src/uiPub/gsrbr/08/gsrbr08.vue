@@ -20,7 +20,7 @@
                     <div>
                         <p>{{ t.SubContent_1 }}</p>
                         <p>{{ t.SubContent_2 }}</p>
-                        <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a><!-- 26.05.12 Edit 이종환 : 클래스 추가 -->
+                        <!-- 26.06.08 add 정다희 : 홈페이지 삭제  -->
                     </div>
                     <ul>
                         <li class="bi_section">
@@ -105,7 +105,7 @@ export default {
                         subContent_3: "유어스",
                     },
                     HopageLink: `https://www.gsrbr.com/`,
-                    HopageText: `홈페이지`,
+                    // 26.06.08 add 정다희 : 홈페이지 삭제 
                     SubTitle: `브랜드 소개`,
                     SubContent_1: `유어스는 우수한 품질의 상품을 기반으로 일상 속 작은 즐거움과 새로운 라이프스타일을`,
                     SubContent_2: `제안하는 GS리테일만의 라이프스타일 PB 브랜드입니다.`,
@@ -156,7 +156,7 @@ export default {
                         subContent_3: "YOUUS",
                     },
                     HopageLink: `https://www.gsrbr.com/`,
-                    HopageText: `Homepage`,
+                    // 26.06.08 add 정다희 : 홈페이지 삭제 
                     SubTitle: `About the Brand`,
                     SubContent_1: `Based on high-quality products, YOUUS offers small everyday joys and a new lifestyle`/* 260604 번역 */,
                     SubContent_2: `It is GS Retail's own lifestyle private brand.`/* 260604 번역 */,
