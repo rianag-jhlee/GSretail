@@ -1,6 +1,6 @@
 <template>
     <div class="main-container">
-        <div class="title_wrap">
+        <div class="title_wrap top_visual"> <!-- 클래스 top_visual 추가 26.06.08 add 정다희 -->
             <h2 class="page-title">{{ t.MainTitle }}</h2>
             <p class="visual-sub" v-html="t.MainsubTitle"></p>
         </div>
@@ -184,7 +184,11 @@ export default {
 <style scoped>
 /* 제공해주신 CSS 그대로 유지 (수정 없음) */
 .main-container { width: 100%; position: relative; }
-.title_wrap { width: 100%; padding: 10.91% 0 0; text-align: center; position: relative; display: block; }
+/* title_wrap css수정 26.06.08 edit 정다희 */
+.title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrne01_bg.png') no-repeat center 57% / cover; text-align: center; position: relative; display: block;}
+.title_wrap::before{content:''; display:block; width:100%; height:100%; background:rgba(0,0,0,0.4); position:absolute; top:0; left:0; z-index:1;}
+.title_wrap > h2{color:#fff; position: relative; z-index:2;}
+.title_wrap > p{color:#fff; position: relative; z-index:2;}
 .page-title { color: #111; font-size: 72px; font-weight: 700; line-height:124%; letter-spacing:-0.02em;}
 .visual-sub { margin-top: 10px; color: #111; font-size: 24px; font-weight: 400; line-height:150%; }
 
@@ -204,10 +208,8 @@ export default {
 .board_wrap.type_gallery.type_long .item .thumb {padding-top:177.727272%;}
 
 @media screen and (max-width: 767px) {
-    .title_wrap {margin-top:48px; padding:0 20px; text-align:initial;}
-    .title_wrap h2 {display:none;}
-    .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
-
+    /* 26.06.08 edit 정다희 : title_wrap css 수정  */
+    .title_wrap {display: none;}
     .board_wrap.type_gallery .body {margin-top:-48px;}
     .board_wrap.type_gallery .body > li {width:100%; padding-top:48px;}
     .board_wrap.type_gallery .item .thumb {padding-top:60.895522%;}
