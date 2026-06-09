@@ -68,7 +68,7 @@ const MainTabIdx = ref(0);
 
 const langData = {
     ko: {
-        MainTitle: "수상이력",
+        MainTitle: "수상 이력",
         MainTabs: [
             { item: "현재 - 2024" }, 
             { item: "2023 - 2021" }, 
