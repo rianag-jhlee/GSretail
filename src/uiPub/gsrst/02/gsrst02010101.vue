@@ -4940,7 +4940,7 @@ letter-spacing: -0.01em;
     .consent_radio > span { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .sec_consult_startup { max-width: none; }
     
-    .apply_form .form_body{margin-bottom:40px;padding: 30px 0 10px; }
+    .apply_form .form_body{margin-bottom:40px;padding: 30px 0; }
     .apply_form .form_body > .form_row:first-child > .col_item:first-child{padding:0 0 20px 0;}
     .apply_form .form_body .form_row.col_02 .col_item .forn_field_radio{padding:0;}
     .apply_form .form_body .form_row.col_02 { max-width: none; padding:0; grid-template-columns: 1fr; gap: 0; }
