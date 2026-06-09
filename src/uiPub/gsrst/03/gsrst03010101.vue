@@ -3213,7 +3213,9 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_franchise_type > .franchise_type_list > li { max-width: none; }
 }
 
-@media (max-width: 768px) { :deep(.m_br) { display: block; }
+@media (max-width: 768px) {
+
+    :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
     section + section { padding-top: 80px; }
     .list_dotted > li { padding-left: 6px; }

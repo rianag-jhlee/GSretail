@@ -1124,13 +1124,16 @@
                                         </div>
                                         <div class="col_item">
                                             <div class="form_label">{{ t.consultFormTexts.contactLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
-                                            <div class="form_field form_field_phone">
-                                                <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
+                                            <!-- 26.06.09 Edit 이종환 : 전화번호 입력 폼 변경에 따른 클래스 제거 및 입력폼 수정 -->
+                                            <div class="form_field">
+                                                <Inputs type="text" v-model="startupConsultForm.phone2" />
+                                                <!-- <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
                                                 <span class="form_sep">-</span>
                                                 <Inputs type="text" v-model="startupConsultForm.phone2" />
                                                 <span class="form_sep">-</span>
-                                                <Inputs type="text" v-model="startupConsultForm.phone3" />
+                                                <Inputs type="text" v-model="startupConsultForm.phone3" /> -->
                                             </div>
+                                            <!-- //26.06.09 Edit 이종환 : 전화번호 입력 폼 변경에 따른 클래스 제거 및 입력폼 수정 -->
                                         </div>
                                     
                                     </div> 
@@ -1142,6 +1145,18 @@
                                             <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" :initMsg="t.consultFormTexts.dayInit" />
                                         </div>
                                     </div>
+                                    <!-- 투자가능금액 / 기대소득 -->
+                                    <div class="form_row col_02">
+                                        <div class="col_item">
+                                            <div class="form_label">{{ t.consultFormTexts.investAmountLabel }}</div>
+                                            <SelectBox />
+                                        </div>                   
+                                        <div class="col_item">
+                                            <div class="form_label">{{ t.consultFormTexts.price01 }}</div>
+                                            <SelectBox />
+                                        </div>             
+                                    </div>
+                                    <!-- //투자가능금액 / 기대소득 -->
                                     <div class="form_row col_02">
                                         <div class="col_item">
                                             <div class="form_label">{{ t.consultFormTexts.storeOwnershipLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
@@ -1158,22 +1173,26 @@
                                             </div>
                                         </div>
                                         <div class="col_item">
-                                            <div class="form_label">{{ t.consultFormTexts.investAmountLabel }}</div>
-                                            <div class="form_field">
-                                                <Inputs type="text" v-model="startupConsultForm.investAmount" />
+                                            <div class="form_label">{{ t.consultFormTexts.openScheduleLabel }}</div>
+                                            <div class="form_field form_field_open">
+                                                <SelectBox />
+                                                <SelectBox />
                                             </div>
                                         </div>
                                     
                                     </div>
+                                    <!-- 관심지역 -->
                                     <div class="form_row">
-                                        <div class="form_label">{{ t.consultFormTexts.openScheduleLabel }}</div>
+                                        <div class="form_label">{{ t.consultFormTexts.localLabel }}
+                                            <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span>
+                                            <span class="explain">{{ t.consultFormTexts.localLabel_explain }}</span>
+                                        </div>
                                         <div class="form_field form_field_open">
-                                            <Inputs type="text" v-model="startupConsultForm.openYear" />
-                                            <span class="form_unit">{{ t.consultFormTexts.yearUnit }}</span>
-                                            <Inputs type="text" v-model="startupConsultForm.openMonth" />
-                                            <span class="form_unit">{{ t.consultFormTexts.monthUnit }}</span>
+                                            <SelectBox />
+                                            <SelectBox />
                                         </div>
                                     </div>
+                                    <!-- //관심지역 -->
                                     <div class="form_row form_row_radio">
                                         <div class="form_label">{{ t.consultFormTexts.cvsExperienceLabel }}</div>
                                         <div class="form_field form_field_radio form_field_checkbox_card">
@@ -3351,7 +3370,10 @@ const langData = {
             consultTypeLabel: "상담 형태",
             storeOwnershipLabel: "점포 소유 및 임차",
             investAmountLabel: "투자가능금액 (만원)",
+            price01: "기대소득",
             openScheduleLabel: "오픈 희망 시기",
+            localLabel: "관심 지역",
+            localLabel_explain: "*상세 지역 선택 시 담당 컨설턴트가 배정됩니다.",
             yearInit: "년도",
             monthInit: "월",
             dayInit: "일",
@@ -4514,6 +4536,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 /* .row_layout.apply_form .form_body .form_row:last-of-type { border-bottom: 1px solid #E5E5E9;  } */
 .apply_form .button_area :deep(.primary){width:100%; max-width:250px;}
 .apply_form .form_body .form_row .form_label { margin-bottom: 12px; font-weight:400}
+.apply_form .form_body .form_row .form_label .explain {margin-left:12px; font-size:1.2rem;}
 .apply_form .form_body .form_row .form_field { width: 100%; }
 .apply_form .form_body .form_row_radio, .apply_form .form_body .form_row_textarea,
 .apply_form .form_body .form_row_textarea .form_field,

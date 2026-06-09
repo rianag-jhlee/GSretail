@@ -395,8 +395,42 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(row, ri) in item.rows" :key="ri">
-                                            <td scope="row">{{ row.label }}</td>
-                                            <td>{{ row.value }}</td>
+                                            <template v-if="isMobile && ri === 3">
+                                                <td colspan="2">
+                                                    <ul class="schedule_list">
+                                                        <li
+                                                            v-for="(list, idx) in row.value"
+                                                            :key="idx"
+                                                            :class="{ disabled: list.state === 'false' }"
+                                                        >
+                                                            <span>{{ list.date }} {{ list.time }}</span>
+                                                            <button>{{ list.btnTxt }}</button>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </template>
+
+                                            <template v-else>
+                                                <td scope="row">{{ row.label }}</td>
+                                                <td>
+                                                    <template v-if="Array.isArray(row.value)">
+                                                        <ul class="schedule_list">
+                                                            <li
+                                                                v-for="(list, idx) in row.value"
+                                                                :key="idx"
+                                                                :class="{ disabled: list.state === 'false' }"
+                                                            >
+                                                                <span>{{ list.date }} {{ list.time }}</span>
+                                                                <button>{{ list.btnTxt }}</button>
+                                                            </li>
+                                                        </ul>
+                                                    </template>
+
+                                                    <span v-else>
+                                                        {{ row.value }}
+                                                    </span>
+                                                </td>
+                                            </template>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -404,6 +438,145 @@
                         </div>
                     </li>
                 </ul>
+
+                <!-- 26.06.09 Add 이종환 : 설명회 신청 -->
+                <div class="seminar_region_pick" :aria-label="t.consultFormTexts.regionSelectAria">
+                    <div ref="seminarWrapRef" class="seminar_wrap">
+                        <article class="manager_card type_02" :aria-label="t.consultFormTexts.managerInfoAria">
+                            <div class="manager_header">
+                                <p>{{ t.consultFormTexts.selectedSeminarLabel }}</p>
+                                <strong>{{ t.consultFormTexts.selectedSeminarValue }}</strong>
+                            </div>
+                            <button type="button" class="btn_close" :aria-label="t.consultFormTexts.closeButton">{{ t.consultFormTexts.closeButton }}</button>
+                        </article>
+                        <div class="consent_box" :aria-label="t.consultFormTexts.privacyConsentTitle">
+                            <h3>{{ t.consultFormTexts.privacyConsentTitle }}</h3>
+                            <ul v-if="seminarConsentItems.length" class="consent_list">
+                                <li v-for="(item, idx) in seminarConsentItems" :key="idx">
+                                    <p v-html="item"></p>
+                                </li>
+                            </ul>
+
+                            <div class="consent_notice_area">
+                                <p>{{ t.consultFormTexts.seminarConsentNotice }}</p>
+                                <div class="consent_radio">
+                                    <Inputs type="checkbox" v-model="startupConsentAgreed" :text="t.consultFormTexts.agreeText" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="apply_form">
+                            <div class="form_body">
+                                <div class="form_row col_02">
+                                    <div class="col_item">
+                                        <div class="form_label">{{ t.consultFormTexts.nameLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                        <div class="form_field">
+                                            <Inputs type="text" v-model="startupConsultForm.name" />
+                                        </div>
+                                    </div>
+                                    <div class="col_item">
+                                        <div class="form_label">{{ t.consultFormTexts.contactLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                        <!-- 26.06.09 Edit 이종환 : 전화번호 입력 폼 변경에 따른 클래스 제거 및 입력폼 수정 -->
+                                        <div class="form_field">
+                                            <Inputs type="text" v-model="startupConsultForm.phone2" />
+                                            <!-- <SelectBox :options="phoneOptions" v-model="startupConsultForm.phone1" />
+                                            <span class="form_sep">-</span>
+                                            <Inputs type="text" v-model="startupConsultForm.phone2" />
+                                            <span class="form_sep">-</span>
+                                            <Inputs type="text" v-model="startupConsultForm.phone3" /> -->
+                                        </div>
+                                        <!-- //26.06.09 Edit 이종환 : 전화번호 입력 폼 변경에 따른 클래스 제거 및 입력폼 수정 -->
+                                    </div>
+                                
+                                </div> 
+                                <div class="form_row">
+                                    <div class="form_label">{{ t.consultFormTexts.birthLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                    <div class="form_field form_field_birth">
+                                        <SelectBox :options="startupBirthYearOptions" v-model="startupConsultForm.birthYear" :initMsg="t.consultFormTexts.yearInit" />
+                                        <SelectBox :options="startupBirthMonthOptions" v-model="startupConsultForm.birthMonth" :initMsg="t.consultFormTexts.monthInit" />
+                                        <SelectBox :options="startupBirthDayOptions" v-model="startupConsultForm.birthDay" :initMsg="t.consultFormTexts.dayInit" />
+                                    </div>
+                                </div>
+                                <!-- 투자가능금액 / 기대소득 -->
+                                <div class="form_row col_02">
+                                    <div class="col_item">
+                                        <div class="form_label">{{ t.consultFormTexts.investAmountLabel }}</div>
+                                        <SelectBox />
+                                    </div>                   
+                                    <div class="col_item">
+                                        <div class="form_label">{{ t.consultFormTexts.price01 }}</div>
+                                        <SelectBox />
+                                    </div>             
+                                </div>
+                                <!-- //투자가능금액 / 기대소득 -->
+                                <div class="form_row col_02">
+                                    <div class="col_item">
+                                        <div class="form_label">{{ t.consultFormTexts.storeOwnershipLabel }} <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span></div>
+                                        <div class="form_field form_field_radio">
+                                            <Inputs
+                                                v-for="opt in startupStoreOwnershipOptions"
+                                                :key="opt.value"
+                                                type="radio"
+                                                name="startup_store_ownership"
+                                                :value="opt.value"
+                                                v-model="startupConsultForm.storeOwnership"
+                                                :text="opt.label"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col_item">
+                                        <div class="form_label">{{ t.consultFormTexts.openScheduleLabel }}</div>
+                                        <div class="form_field form_field_open">
+                                            <SelectBox />
+                                            <SelectBox />
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <!-- 관심지역 -->
+                                <div class="form_row">
+                                    <div class="form_label">{{ t.consultFormTexts.localLabel }}
+                                        <span class="form_required">{{ t.consultFormTexts.requiredInput }}</span>
+                                        <span class="explain">{{ t.consultFormTexts.localLabel_explain }}</span>
+                                    </div>
+                                    <div class="form_field form_field_open">
+                                        <SelectBox />
+                                        <SelectBox />
+                                    </div>
+                                </div>
+                                <!-- //관심지역 -->
+                                <div class="form_row form_row_radio">
+                                    <div class="form_label">{{ t.consultFormTexts.cvsExperienceLabel }}</div>
+                                    <div class="form_field form_field_radio form_field_checkbox_card">
+                                        <Inputs
+                                            v-for="opt in startupCvsExperienceOptions"
+                                            :key="opt.value"
+                                            class="checkbox_card"
+                                            type="checkbox"
+                                            name="startup_cvs_experience"
+                                            :value="opt.value"
+                                            v-model="startupConsultForm.cvsExperience"
+                                            :text="opt.label"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form_row form_row_textarea">
+                                    <div class="form_label">{{ t.consultFormTexts.inquiryLabel }}</div>
+                                    <div class="form_field">
+                                        <Textarea
+                                            v-model="startupConsultForm.inquiry"
+                                            :placeholder="t.consultFormTexts.startupInquiryPlaceholder"
+                                            :rows="6"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button_area">
+                                <Buttons btn-class="btn_xl primary">{{ t.consultFormTexts.reserveButton }}</Buttons>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <!-- //26.06.09 Add 이종환 : 설명회 신청 -->
             </section>
 
             
@@ -874,6 +1047,78 @@ const props = defineProps({
     },
 });
 
+/* 26.06.09 Add 이종환 사업설명회 신청 관련 */
+const seminarConsentItems =[
+    "- 입력하신 정보는 창업상담을 위해서만 사용합니다.",
+    "- 수집하는 개인정보 항목: 이름, 이메일, 휴대폰번호, 자택주소(시, 구/군)",
+    "- 수집 및 목적: 본인 식별 및 문의사항 확인 및 답변",
+    "- 보유 및 이용기간: 접수 후 1년",
+]
+const startupStoreOwnershipOptions = [
+    { value: "yes", label: "있음" },
+    { value: "no", label: "없음" },
+];
+const startupCvsExperienceOptions = [
+    { value: "none", label: "없음" },
+    { value: "", label: "Gs더프레시 근무자" },
+    { value: "", label: "ssm 근무자" },
+    { value: "", label: "ssm 경영주" },
+    { value: "", label: "개인수퍼" },
+];
+const seminarWrapRef = ref(null);
+const startupConsentAgreed = ref(false);
+
+const startupRegionSidoOptions = [
+    { value: "서울", label: "서울" },
+    { value: "경기", label: "경기" },
+    { value: "인천", label: "인천" },
+    { value: "충청", label: "충청" },
+    { value: "강원", label: "강원" },
+    { value: "제주", label: "제주" },
+    { value: "전라", label: "전라" },
+    { value: "경상", label: "경상" },
+];
+
+const consultEntryRegionOptions = startupRegionSidoOptions;
+
+const startupConsultForm = reactive({
+    name: "",
+    phone1: "010",
+    phone2: "",
+    phone3: "",
+    emailId: "",
+    emailDomain: "",
+    emailDomainCustom: "",
+    consultType: "",
+    brandConsultZipCode: "",
+    brandConsultAddrBasic: "",
+    brandConsultAddrDetail1: "",
+    brandConsultAddrDetail2: "",
+    brandConsultAreaContract: "",
+    brandConsultAreaPrivate: "",
+    brandConsultStoreName: "",
+    brandConsultCommercialFeature: "",
+    brandConsultLandlordRelation: "",
+    storeOwnership: "",
+    investAmount: "",
+    openYear: "",
+    openMonth: "",
+    cvsExperience: [],
+    birthYear: "",
+    birthMonth: "",
+    birthDay: "",
+    inquiry: "",
+    regionSido: "",
+    regionSigungu: "",
+    consultDate: "",
+    consultTime: "",
+    seminarEntryRegion: "",
+    seminarEntryConsultant: "",
+    entryRegion: "",
+    entryConsultant: "",
+});
+/* //26.06.09 Add 이종환 사업설명회 신청 관련 */
+
 const langData = { 
     ko: {
         headerTitle: "GS THE FRESH 창업안내",
@@ -1024,31 +1269,37 @@ const langData = {
                 {
                     title: "수도 사업설명회",
                     rows: [
-                        { label: "일시", value: "매월 2회" },
-                        { label: "대상", value: "서울, 경기, 인천 GS THE FRESH 창업을 희망하는 분" },
-                        { label: "준비물", value: "필기도구" },
                         { label: "장소", value: "서울 강남구 논현로508 GS타워 지하 1층" },
-                        { label: "기타", value: "문의 02-2006-2954,2933" },
+                        { label: "대상", value: "서울, 경기, 인천 GS THE FRESH 창업을 희망하는 분" },
+                        { label: "문의", value: "02-2006-2363" },
+                        { label: "신청", value: [
+                            {date:"2/10(화)", time:"14:00", state:"false", btnTxt:"신청마감"},
+                            {date:"2/10(화)", time:"14:00", state:"true", btnTxt:"신청"}
+                        ] },
                     ],
                 },
                 {
                     title: "중부 사업설명회",
                     rows: [
-                        { label: "일시", value: "매월 1회" },
-                        { label: "대상", value: "충청, 강원, 제주 GS THE FRESH 창업을 희망하는 분" },
-                        { label: "준비물", value: "필기도구" },
                         { label: "장소", value: "대전 중구 대종로167 모임공간 국보 3층" },
-                        { label: "기타", value: "문의 010-2141-2816 (문자 OR 카톡)" },
+                        { label: "대상", value: "충청도 GS THE FRESH 창업을 희망하는 분" },
+                        { label: "문의", value: "02-2006-2933" },
+                        { label: "신청", value: [
+                            {date:"2/10(화)", time:"14:00", state:"false", btnTxt:"신청마감"},
+                            {date:"2/10(화)", time:"14:00", state:"true", btnTxt:"신청"}
+                        ] },
                     ],
                 },
                 {
-                    title: "영남/호남 사업설명회",
+                    title: "영남 사업설명회",
                     rows: [
-                        { label: "일시", value: "매월 1회" },
-                        { label: "대상", value: "전라도, 경상도 GS THE FRESH 창업을 희망하는 분" },
-                        { label: "준비물", value: "필기도구" },
                         { label: "장소", value: "부산 연제구 월드컵대로190 신현빌딩2층" },
-                        { label: "기타", value: "문의 02-2006-2363" },
+                        { label: "대상", value: "부산, 경상도, 전라도 GS THE FRESH 창업을 희망하는 분" },
+                        { label: "문의", value: "02-2006-2954" },
+                        { label: "신청", value: [
+                            {date:"2/10(화)", time:"14:00", state:"false", btnTxt:"신청마감"},
+                            {date:"2/10(화)", time:"14:00", state:"true", btnTxt:"신청"}
+                        ] },
                     ],
                 },
             ],
@@ -1333,6 +1584,147 @@ const langData = {
             inquiryPlaceholder: "문의내용을 입력해주세요.",
         },
         quickMenu: ["창업안내", "입점상담", "고객센터"],
+
+        //사업설명회 신청 폼
+        consultFormTexts: {
+            startupPanelAria: "창업 상담 신청",
+            seminarPanelAria: "창업 설명회 신청",
+            entryPanelAria: "입점 제안/브랜드 전환 상담",
+            requiredLabel: "* 필수 입력사항",
+            requiredInput: "(필수 입력)",
+            faqTypePeriodNote: "* 타입별/기간별 개월 수",
+            compareTypeHeader: "가맹타입",
+            compareGs1Desc: "직접 임차하고, 수익 배분율이 가장 높아요",
+            compareGs2Desc: "본사와 임차비용 공동 부담해요",
+            compareGs3Desc: "임차비용 부담 없이 시작해요",
+            compareInvestAmount: "투자 금액",
+            compareCommonInvestAmount: "공<br />통<br />투<br />자<br />금<br />액",
+            compareProductPrep: "상품 준비금",
+            compareSupplyPrep: "소모품 준비금",
+            compareFranchiseFee: "가맹비",
+            compareSubtotal: "상품 + 소모품 + 가맹비",
+            compareAmount1400: "1,400만원",
+            compareAmount100: "100만원",
+            compareAmount770Vat: "770만원(VAT포함)",
+            compareAmount2270: "2,270만원",
+            compareRentCost: "점포 임차비용",
+            compareOwnerInvest: "경영주 투자",
+            compareHeadInvest: "본부 투자",
+            compareHeadDeposit: "본부 보증금",
+            compareSubleaseDeposit: "전대보증금",
+            compareEscrowDeposit: "예치보증금",
+            compareMin3000: "최소 3,000만원",
+            compareFacilityInterior: "시설/인테리어",
+            compareHeadSupport: "본부 지원",
+            compareSpecialNote: "(※ 수익추구 특약: 경영주 투자)",
+            compareTotalInvest: "총 투자금액",
+            compareTotalGs1: "점포 임차비용 + 공통 투자비 2,270만원",
+            compareTotalGs2Main: "최소 5,270만원",
+            compareTotalGs2Sub: "(전대보증금 + 공통 투자비)",
+            compareTotalGs3Main: "최소 5,270만원",
+            compareTotalGs3Sub: "(예치보증금 + 공통 투자비)",
+            compareContract: "계약",
+            compareCondition: "조건",
+            compareFinalProfitShare: "최종 경영주 수익 배분율",
+            compareMax71: "최대 71%",
+            compareMax65: "최대 65%",
+            compareMax46: "최대 46%",
+            compareProfitShare: "경영주 수익 배분율",
+            compare24hSupport: "24시간 영업장려금",
+            compareContractPeriod: "계약기간",
+            comparePeriod5y: "5년",
+            comparePeriod4y: "4년",
+            compareCollateral: "담보 설정",
+            compareCollateral5000: "5,000만원",
+            compareCollateral2000: "2,000만원",
+            compareSupportSystem: "각종지원제도",
+            compareSupportSystemDesc: "상생 인센티브 / 상품 판매·발주 장려금 / 미오출 보상금",
+            compareProfitSpecial: "수익추구특약",
+            compareMax81: "최대 81%",
+            compareSpecialPercentNote: "(※ GS1 수익배분율 71% + 특약 10%)",
+            compareSafeOpAmount: "안심운영지원 기준금액",
+            compareSupportPeriod: "(지원기간: 1년)",
+            compareSafeOpGs1: "24시간 운영: 月 최대 800만원<br />18시간 운영: 月 최대 550만원",
+            compareSafeOpGs2: "24시간 운영: 月 최대 750만원<br />18시간 운영: 月 최대 500만원",
+            compareSafeOpGs3: "24시간 운영: 月 최대 700만원<br />18시간 운영: 月 최대 450만원",
+            compareNote1: "* GS1 Type 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년",
+            compareNote2: "* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다",
+            compareNote3: "* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href=\"#\">신선강화점 자세히 알아보기</a>)",
+            compareNote4: "* 안심운영제도란? 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우,<br/>경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. (<a href=\"#\">안심운영제도 자세히 알아보기</a>)",
+            benefitPolicyNote: "* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.",
+            storeTableRegion: "지역",
+            storeTableType: "타입",
+            storeTableCategory: "유형",
+            storeTableInvestment: "투자비",
+            storeTableHashtag: "해시태그",
+            storeTableArea: "면적",
+            storeTableDate: "등록일",
+            storeTableDetail: "상세",
+            youthBadge: "청년",
+            privacyConsentTitle: "개인정보 수집·이용 동의",
+            startupConsentNotice: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 상담 글 작성이 불가능합니다.",
+            seminarConsentNotice: "동의하지 않으실 경우 상담 글 작성이 불가능합니다.",
+            entryConsentNotice: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 입지제안 신청 글 작성이 불가능합니다.",
+            agreeText: "동의합니다.",
+            reserveButton: "상담 예약 신청하기",
+            seminarGuide: "GS25 창업설명회는 정기설명회 및 컨설턴트 상담으로 운영되며, 각 지역 사무소에서 진행됩니다. <br />지역별 창업설명회 일정이 상이하므로 확인 후 신청해 주세요.",
+            seminarSelectRegionGuide: "창업 설명회 개설 지역을 선택해 주세요.",
+            regionConsultantTitle: "지역 및 컨설턴트 선택",
+            regionConsultantLabel: "지역/컨설턴트",
+            customerInfoTitle: "고객정보",
+            nameLabel: "이름",
+            contactLabel: "연락처",
+            birthLabel: "생년월일",
+            emailLabel: "이메일",
+            mobileLabel: "휴대폰",
+            consultTypeLabel: "상담 형태",
+            storeOwnershipLabel: "점포 소유 및 임차",
+            openday: "오픈 희망 시기",
+            price01: "기대소득",
+            investAmountLabel: "투자가능금액 (만원)",
+            openScheduleLabel: "오픈 희망 시기",
+            localLabel: "관심 지역",
+            localLabel_explain: "*상세 지역 선택 시 담당 컨설턴트가 배정됩니다.",
+            yearInit: "년도",
+            monthInit: "월",
+            dayInit: "일",
+            yearUnit: "년",
+            monthUnit: "월",
+            cvsExperienceLabel: "슈퍼 근무경험",
+            inquiryLabel: "문의 내용",
+            startupInquiryPlaceholder: "창업 관련 궁금한 사항을 입력해주세요.",
+            interestRegionLabel: "관심 지역",
+            interestRegionNote: "지역 선택 시 담당자가 배정되며, 담당자별로 예약 가능 시간이 다릅니다.",
+            sidoInit: "시/도 선택",
+            sigunguInit: "구/시 선택",
+            consultDateLabel: "상담 날짜 선택",
+            consultTimeLabel: "상담 시간 선택",
+            selectRegionFirstPlaceholder: "먼저 관심 지역을 선택 해 주세요.",
+            selectRegionTimePlaceholder: "먼저 날짜를 선택 해 주세요.",
+            managerInfoAria: "담당자 정보",
+            managerAlt: "담당자",
+            regionSelectAria: "지역 선택",
+            selectedSeminarLabel: "선택한 설명회",
+            selectedSeminarValue: "부산 영남권 · 2/19(목) 15:00",
+            closeButton: "닫기",
+            entryConsultTitle: "입점 제안/브랜드 전환 상담",
+            recommendedStoreLocationLabel: "추천점포 소재지",
+            recommendedStoreAreaLabel: "추천 점포 면적",
+            contractAreaLabel: "계약면적",
+            privateAreaLabel: "전용면적",
+            areaUnit: "평",
+            storeNameLabel: "점포 상호",
+            commercialFeatureLabel: "상권 특징",
+            landlordRelationLabel: "건물주와의 관계",
+            regionSelectInit: "지역선택",
+            consultantSelectInit: "컨설턴트 선택",
+            searchButton: "조회",
+            applyButton: "신청",
+            directInputPlaceholder: "직접입력",
+            findZipButton: "우편번호 찾기",
+            commercialFeaturePlaceholder: "상권 특징을 입력해 주세요.",
+        },
+        seminarConsentItems
     },
     en: {
         headerTitle: "GS THE FRESH Startup Guide"/* 260604 번역 */,
@@ -2232,6 +2624,14 @@ function toggleCard(id) {
 .seminar_table thead th { padding: 47px 24px; background-color: #f8f8f8; border: 0; font-size: 1.8rem; font-weight: 600; text-align: left; line-height: 1.4; letter-spacing: -0.02em; }
 .seminar_table tbody td { padding: 13px 24px; border-bottom: 1px solid #e5e5e9; font-size: 1.8rem; line-height: 1.6; letter-spacing: -0.01em; min-width: 0; text-align: left; }
 
+.seminar_table tbody td .schedule_list li {padding:12px 16px; background-color:#F8F8F8; border-radius:12px; display:flex; align-items:center; justify-content:space-between;}
+.seminar_table tbody td .schedule_list li + li {margin-top:10px;}
+.seminar_table tbody td .schedule_list li span {font-size:1.6rem; display:flex; align-items:center;}
+.seminar_table tbody td .schedule_list li span:before {width:16px; height:16px; margin-right:4px; background:url('@/assets/images/common/icon_set_16.png') -56px -43px no-repeat; content:''; display:block;}
+.seminar_table tbody td .schedule_list li button {padding:5px 12px 4px; color:#fff; font-size:1.4rem; font-weight:700; letter-spacing:-0.01em; line-height:140%; background-color:#107AF2; border-radius:100px;}
+.seminar_table tbody td .schedule_list li.disabled span {color:#67676F; text-decoration:line-through;}
+.seminar_table tbody td .schedule_list li.disabled button {color:#67676F; background-color:#E5E5E9; pointer-events: none;}
+
 /* 추천 점포 찾기 */
 .sec_store { padding-top: 40px; }
 .tab_intro { margin-bottom:64px; font-size: 2.4rem; color: #161616; line-height: 1.5; letter-spacing: -0.01em; }
@@ -2459,6 +2859,65 @@ function toggleCard(id) {
 .quick_menu li:nth-of-type(2) button::before {background-position: -15px -114px;}
 .quick_menu li:nth-of-type(3) button::before {background: url(@/assets/images/sub/icon_quick3.png) no-repeat 0 0;}
 
+/* 26.06.09 Add 이종환 : 사업설명회 신청 */
+.seminar_wrap{max-width:1000px; margin:80px auto 0; scroll-margin-top: 24px; box-sizing:border-box;}
+
+.manager_card { width: 100%; max-width: 740px; margin: 12px 0; padding: 40px; background-color: #E8F8F1; border: 1px solid #15B874; border-radius: 12px; display: flex; align-items: center; gap: 32px;  }
+.manager_card.type_02{max-width:100%;display:flex; justify-content: space-between;}
+.manager_card .manager_header > p{color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+.manager_card .manager_header > strong{margin-top:2px; font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;display:block;}
+.manager_card .manager_header + .btn_close{width:20px; height:20px; text-indent:-9999px; background:url('@/assets/images/common/icon_set_20.png') no-repeat -627px -24px; }
+
+.consent_box { width: 100%; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
+.consent_box + .consent_box { margin-top: 40px; }
+.consent_box > h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.consent_list { margin-top: 24px; }
+.consent_list > li { padding-left: 10px; position: relative; }
+.consent_list > li + li { margin-top: 8px; }
+.consent_list > li > p { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.consent_notice_area { margin-top: 24px; padding-top: 24px; border-top: 1px solid #d7d7df; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.consent_notice_area > p { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+.consent_radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.consent_radio :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
+/* .consent_radio > input { width: 24px; height: 24px; margin: 0; padding: 0; background-color: #ffffff; border: 1px solid #c4c4d0; border-radius: 8px; position: relative; appearance: none; }
+.consent_radio > input:checked { background-color: #107af2; border-color: #107af2; }
+.consent_radio > input:checked::after { width: 10px; height: 10px; background-color: #ffffff; border-radius: 50%; position: absolute; top: 50%; left: 50%; content: ""; transform: translate(-50%, -50%); } */
+.consent_radio > span { color: #161616; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+.apply_form {border-top:1px solid #242428;}
+.apply_form .form_body {padding-top:12px; border-bottom: 1px solid #E5E5E9;}
+.apply_form .form_body .form_row { min-height: auto; padding: 12px 0; display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
+.apply_form .form_body + .button_area{margin-top:40px; display:flex; justify-content: center;}
+
+.apply_form .form_body p.explain {color:#ED3030; font-size:1.6rem; letter-spacing:-0.01em; line-height:150%;}
+
+.apply_form .button_area :deep(.primary){width:100%; max-width:250px;}
+.apply_form .form_body .form_row .form_label { margin-bottom: 12px; font-weight:400}
+.apply_form .form_body .form_row .form_label .explain {margin-left:12px; font-size:1.2rem;}
+.apply_form .form_body .form_row .form_field { width: 100%; }
+.apply_form .form_body .form_row_radio, .apply_form .form_body .form_row_textarea,
+.apply_form .form_body .form_row_textarea .form_field,
+.apply_form .form_body .form_row_calendar :deep(.consult_calendar),
+.apply_form .form_body .form_row_calendar :deep(.consult_time_picker) { width: 100%; max-width: 1000px; }
+.apply_form .form_body .form_row_textarea .form_field :deep(Textarea){resize:none;}
+.apply_form .form_body .form_row.col_02 { width: 100%; max-width:720px;  padding: 12px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));  gap: 20px; align-items: start; }
+.apply_form .form_body .form_row.col_02 .col_item { min-width: 0; }
+.apply_form .form_body .form_label { margin-bottom: 12px; }
+.apply_form .form_body .form_row.col_02 .col_item .form_field { width: 100%; }
+.apply_form .form_body .form_row.col_02 .col_item .forn_field_radio{padding:12px 0;}
+.apply_form .form_field { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.apply_form .form_field .flex1 {flex:1;}
+.apply_form .form_field_phone .select{flex:1;}
+.form_field_phone label.select select,
+.form_field_phone label.select .input_wrap {max-width:134px;}
+.apply_form .form_field_birth { flex-wrap: nowrap; }
+.apply_form .form_field_birth :deep(.select) { max-width:150px;flex: 1; min-width: 0; }
+.apply_form .form_field_open :deep(.input_wrap){max-width: 150px;}
+.apply_form .form_row_region :deep(.select){max-width:220px; flex: 1; min-width: 0; }
+.apply_form .form_field_calendar :deep(.input_wrap){max-width:700px;}
+.form_label_note { margin-top: 4px; color: #67676f; font-size: 1.2rem; line-height: 1.2; }
+
+/* //26.06.09 Add 이종환 : 사업설명회 신청 */
+
 @media (max-width: 1200px) {
     .consult_card_list { grid-template-columns: repeat(2, 1fr); }
 
@@ -2498,6 +2957,8 @@ function toggleCard(id) {
 
 /* Mobile */
 @media (max-width: 768px) {
+    .wrap_gsrst {margin-top:70px;}
+
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
     .page_header { display: none; }
@@ -2718,5 +3179,67 @@ function toggleCard(id) {
     .form_row + .consent_box { margin-top: 32px; }
     .button_wrap { margin-top: 32px; justify-content: center; gap: 8px; max-width: 100%; min-width: 0; }
     .button_wrap :deep(button) { width: calc(50% - 4px); flex: 1 1 auto; min-width: 0; max-width: calc(50% - 4px); box-sizing: border-box; }
+
+    .apply_form .form_body{margin-bottom:40px;padding: 30px 0 10px; }
+    .apply_form .form_body > .form_row:first-child > .col_item:first-child{padding:0 0 20px 0;}
+    .apply_form .form_body .form_row.col_02 .col_item .forn_field_radio{padding:0;}
+    .apply_form .form_body .form_row.col_02 { max-width: none; padding:0; grid-template-columns: 1fr; gap: 0; }
+    .apply_form .form_body .form_row .form_label { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .apply_form .form_body .form_row_calendar :deep(.consult_calendar),
+    .apply_form .form_body .form_row_calendar :deep(.consult_time_picker) { max-width: none; }
+    .apply_form .form_field :deep(.input_wrap),
+    .apply_form .form_field :deep(.select) { width: 100%; max-width: none; }
+    .apply_form .form_field_phone { display: flex; align-items: center; gap: 8px; }
+    .apply_form .form_field_phone .form_sep { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; }
+    .apply_form .form_field_phone :deep(.select),
+    .apply_form .form_field_phone :deep(.input_wrap) { width: auto; max-width: none; min-width: 0; flex: 1 1 0; }
+    .apply_form .form_row_textarea .form_field :deep(.textarea_wrap) { width: 100%; max-width: none; }
+    .apply_form .form_field_birth :deep(.select) { max-width: none; flex: 1; min-width: 0; }
+    .apply_form .form_field_open :deep(.input_wrap) { max-width: none; flex: 1; min-width: 0; }
+    .apply_form .form_field_region { flex-direction: column; align-items: stretch; }
+    .apply_form .form_row_region :deep(.select) { max-width: none; flex: 1 1 100%; width: 100%; }
+    .apply_form .form_field_calendar :deep(.input_wrap) { max-width: none; }
+    .manager_card { max-width: none; margin-top: 0; padding: 16px; gap: 16px; }
+    .consult_manager_photo { width: 50px; height: 50px; }
+    .manager_name { font-size: 1.6rem; line-height: 1.24; }
+    .manager_addr > .tit, .manager_addr > .addr {font-size:1.6rem;}
+    .manager_icon {width:16px; height:16px; background:url('@/assets/images/sub/icon_map_16.png');}
+    .row_layout.apply_form .form_body{padding:40px 0 0; }
+    .row_layout.apply_form .form_body .form_row { min-height: auto; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
+    .row_layout.apply_form .form_body .form_row .form_label { margin-bottom: 16px; }
+    /* .row_layout.apply_form .form_body .form_row .form_field_consult_entry { flex-direction: column; align-items: stretch; } */
+    .row_layout.apply_form .form_body .form_row .form_field_consult_entry :deep(.select) { width: 100%; max-width: none; flex: 1 1 100%; }
+    .row_layout.apply_form .form_body .cb_area{gap:8px;}
+    .row_layout.apply_form .form_body .cb_area .cb_area_item { flex: 1 1 0; min-width: 0; max-width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; box-sizing: border-box; }
+
+    .row_layout.apply_form .form_body .cb_area .cb_area_item > span { flex-shrink: 0; white-space: nowrap; }
+    .row_layout.apply_form .form_body .cb_faddr,
+    .row_layout.apply_form .form_body .cb_zip,
+    .row_layout.apply_form .form_body .cb_ast,
+    .row_layout.apply_form .form_body .cb_a1,
+    .row_layout.apply_form .form_body .cb_a1 :deep(.input_wrap),
+    .row_layout.apply_form .form_body .cb_a2,
+    .row_layout.apply_form .form_body .cb_a2 :deep(.input_wrap),
+    .row_layout.apply_form .form_body .cb_area,
+    .row_layout.apply_form .form_body .cb_store :deep(.input_wrap),
+    .row_layout.apply_form .form_body .cb_feat .form_field :deep(.textarea_wrap),
+    .row_layout.apply_form .form_body .cb_rel :deep(.input_wrap) { max-width: none; }
+    .row_layout.apply_form .form_body .cb_area .cb_area_item :deep(.input_wrap) { flex: 1; max-width: none; width: 100%; min-width: 0; box-sizing: border-box; }
+    .apply_form .form_body .form_row{padding:20px 0;}
+    .row_layout.apply_form article + article{margin-top:60px;}
+    .apply_form .form_body .form_row.col_02 .col_item{padding:20px 0px;}
+    .apply_form .button_area :deep(.primary){width:100%; max-width:100%; }
+    .consult_search_box strong{font-size: 1.65rem;line-height: 124%;letter-spacing: 0%;}
+    .consult_search_box > div :deep(button){width:80px;}
+    .consult_search_box > div > p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .consult_search_box .flex{margin-top:12px;}
+    .seminar_list { gap: 40px; }
+    .seminar_item_body { flex-direction: column; height: auto; gap: 16px; }
+    .seminar_map { flex: none; height: clamp(183.36px, 50.933vw, 260px); border-radius: 12px; }
+    .seminar_table thead th { padding: 21px 24px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; font-weight: 700; }
+    .seminar_table tbody td { padding: 12px 16px; font-size: 1.6rem; line-height: 1.5; }
+    .seminar_table tbody td p{font-size: 1.6rem; line-height: 1.5;}
+    .seminar_table col.seminar_col_label { width:70px }
+    .apply_form .form_body p.explain {font-size:1.4rem;}
 }
 </style>

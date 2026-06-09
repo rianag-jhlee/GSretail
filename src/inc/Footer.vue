@@ -62,6 +62,12 @@
         <div class="modal_container"></div>
     </div>
     <!-- //입지제안 팝업 -->
+
+    <!-- 26.06.09 Add 이종환 : 멤버십 팝업 -->
+    <div id="gsrcu0101" class="modal_wrap">
+        <div class="modal_container"></div>
+    </div>
+    <!-- //26.06.09 Add 이종환 : 멤버십 팝업 -->
 </template>
 
 <script setup>
@@ -110,7 +116,7 @@ const langData = {
             { title: "개인정보처리방침", path: "#none" },
             { title: "채용안내", path: "https://gsretail.recruiter.co.kr/career/home", blank: true },
             { title: "입점상담", path: "gsrse01" },
-            { title: "멤버십/홈페이지문의", path: "#none" },
+            { title: "멤버십/홈페이지문의", path: "gsrcu0101", pop:true, popId:"gsrcu0101", popType:'lg' }, //, type: "popup", popId: "gsrcu0101", cont: "gsrcu0101"
             { title: "입지제안", path: "gsrbr0204", pop:true, popId:"gsrbr0204", popType:'lg' },
             { title: "임대상가안내", path: "gsrbr1101" },
             { title: "정도경영제보", path: "gsrsu040101" },
