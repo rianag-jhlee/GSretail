@@ -5,7 +5,6 @@
         </div>
         <div class="cont_inner">
             <Tabs v-model="MainTabIdx" :tab-items="t.MainTabs" tab-class="type_01" :tab-slide="true" />
-            <!-- 26.06.08 add 정다희 : 수상내역 하이라이트 (탭 컨텐츠 외부, Figma 862:3557) -->
             <section class="sec_award_highlight" aria-label="주요 수상내역">
                 <div class="award_highlight_scroll">
                     <ul class="award_highlight_list">
@@ -18,8 +17,7 @@
                     </ul>
                 </div>
             </section>
-            <!-- //26.06.08 add 정다희 : 수상내역 하이라이트 -->
-            <div v-show="MainTabIdx <= 8" class="panel" :aria-label="t.MainTabs?.[MainTabIdx]?.item || ''">
+            <div v-show="MainTabIdx < t.MainTabs.length" class="panel" :aria-label="t.MainTabs?.[MainTabIdx]?.item || ''">
                 <section v-for="(section, sIdx) in currentHistorySections" :key="'history-tab-' + MainTabIdx + '-sec-' + sIdx" class="sec_history">
                     <div class="history_intro">
                         <header>
@@ -29,17 +27,16 @@
                         </header>
                     </div>
                     <ul class="history_list">
-                        <li v-for="item in section.items" :key="item.period" class="history_item" :data-period="item.period">
+                        <li v-for="item in section.items" :key="item.period" class="history_item">
                             <div>
                                 <strong class="history_period">{{ item.period }}</strong>
-                                <p v-if="item.summary" class="history_summary">{{ item.summary }}</p>
                             </div>
                             <div class="history_body">
                                 <ul class="history_detail_list">
                                     <li v-for="(detail, idx) in item.details" :key="item.period + '-' + idx" class="history_detail_row">
-                                        <dl v-for="(pair, pairIdx) in getDetailPairs(detail)" :key="item.period + '-' + idx + '-pair-' + pairIdx" class="history_detail_content">
-                                            <dt v-if="pairIdx === 0" class="history_term_primary">{{ getPrimaryTerm(detail) }}</dt>
-                                            <dd v-html="pair.desc"></dd>
+                                        <dl class="history_detail_content">
+                                            <dt class="history_term_primary">{{ getPrimaryTerm(detail) }}</dt>
+                                            <dd v-html="detail.desc"></dd>
                                         </dl>
                                     </li>
                                 </ul>
@@ -527,32 +524,18 @@ const langData = {
 
         ],
     },
-    en: {
+    en:{
 
     }
 };
 
 const t = computed(() => langData[props.lang] || langData.ko);
-const currentHistorySections = computed(() => {
-    const tab = t.value.HistoryTabs?.[MainTabIdx.value];
-    if (!tab) return [];
-    if (Array.isArray(tab.sections)) return tab.sections;
-    if (tab.items) return [tab];
-    return [];
-});
+const currentHistorySections = computed(() => t.value.HistoryTabs?.[MainTabIdx.value]?.sections ?? []);
 
-const getTerms = (detail) => {
-    if (Array.isArray(detail?.terms)) return detail.terms.filter(Boolean);
-    if (Array.isArray(detail?.term)) return detail.term.filter(Boolean);
-    if (detail?.term) return [detail.term];
-    return [];
-};
-
-const getPrimaryTerm = (detail) => getTerms(detail)[0] ?? "";
-const getSecondaryTerms = (detail) => getTerms(detail).slice(1);
-const getDetailPairs = (detail) => {
-    if (Array.isArray(detail?.subDetails) && detail.subDetails.length) return detail.subDetails;
-    return [{ term: getSecondaryTerms(detail)[0] ?? "", desc: detail.desc ?? "" }];
+const getPrimaryTerm = (detail) => {
+    if (Array.isArray(detail?.term)) return detail.term[0] ?? "";
+    if (detail?.term) return detail.term;
+    return "";
 };
 
 const getSectionMoTitle = (section) => {
@@ -586,25 +569,22 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
 .history_intro > header > p { margin-bottom: 8px; color: #67676f; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .history_intro > header > h3 { font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all;}
 .history_intro > header > .history_intro_tit_mo { display: none; }
-.sec_history:first-of-type .history_list{padding-top:50px;}
+.sec_history .history_list { margin: 0; padding: 0; list-style: none; }
+.sec_history:first-of-type .history_list { padding-top: 50px; }
 .sec_history .history_item { display: flex; gap: 32px; position: relative; }
 .sec_history .history_period {  font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex-shrink: 0; display: block; }
 .sec_history .history_body { width: 100%; padding-bottom: 100px; }
 .sec_history .history_item:last-child .history_body { padding-bottom: 0; }
-.sec_history .history_summary { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_history .history_detail_list { display: flex; flex-direction: column; gap: 16px; }
+.sec_history .history_detail_list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 16px; }
 .sec_history .history_detail_row { display: flex; flex-direction: column; gap: 0; }
 .sec_history .history_detail_content { display: grid; grid-template-columns: 50px minmax(0, 1fr); column-gap: 20px; align-items: start; }
 .sec_history .history_detail_content > dt.history_term_primary { color: #90909a; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_history .history_detail_content > dd { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; word-break: keep-all; }
-.sec_history .history_detail_content > dd:only-child { grid-column: 1 / -1; }
+.sec_history .history_detail_content > dd { margin: 0; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; word-break: keep-all; }
 
 @media screen and (max-width: 1024px) {
-    .sec_history{ grid-template-columns: minmax(0, 1fr);}
-    .history_intro > header{min-height: 0;}
-    .sec_history .history_list{padding:0;}
-    .sec_history .history_detail_content { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
-    .sec_history:first-of-type .history_list{padding:0;}
+    .sec_history { grid-template-columns: minmax(0, 1fr); }
+    .sec_history .history_list { padding: 0; }
+    .sec_history:first-of-type .history_list { padding: 0; }
 }
 
 @media screen and (max-width: 768px) {
@@ -622,12 +602,8 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
     .sec_history .history_list {padding:0;}
     .sec_history .history_item { gap: 32px; flex-direction: column; }
     .sec_history .history_item > div:not(.history_body) { display: none; }
-    .sec_history .history_item::before { width: 8px; height: 8px; border-width: 8px; left: -48px; }
-    .sec_history .history_item:not(:last-child)::after { left: -36px; }
-    .sec_history .history_period { width: 100%; font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; }
     .sec_history .history_body { margin: 0; padding-bottom: 94px; }
     .sec_history .history_item:last-child .history_body { padding-bottom: 0; }
-    .sec_history .history_summary { font-size: 1.4rem; line-height: 1.4; }
     .sec_history .history_detail_row { gap: 12px; padding: 0; }
     .sec_history .history_detail_content { grid-template-columns: 40px minmax(0, 1fr); column-gap: 10px; row-gap: 12px; }
     .sec_history .history_detail_content > dt.history_term_primary, .sec_history .history_detail_content > dd { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
