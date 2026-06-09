@@ -23,8 +23,9 @@
                 <section v-for="(section, sIdx) in currentHistorySections" :key="'history-tab-' + MainTabIdx + '-sec-' + sIdx" class="sec_history">
                     <div class="history_intro">
                         <header>
-                            <p>{{ section.period }}</p>
-                            <h3 v-html="section.title"></h3>
+                            <p v-if="section.period">{{ section.period }}</p>
+                            <h3 class="history_intro_tit_pc" v-html="section.title"></h3>
+                            <h3 class="history_intro_tit_mo" v-html="getSectionMoTitle(section)"></h3>
                         </header>
                     </div>
                     <ul class="history_list">
@@ -36,13 +37,10 @@
                             <div class="history_body">
                                 <ul class="history_detail_list">
                                     <li v-for="(detail, idx) in item.details" :key="item.period + '-' + idx" class="history_detail_row">
-                                        <p class="history_term_primary">{{ getPrimaryTerm(detail) }}</p>
-                                        <div class="history_detail_group">
-                                            <dl v-for="(pair, pairIdx) in getDetailPairs(detail)" :key="item.period + '-' + idx + '-pair-' + pairIdx" class="history_detail_content">
-                                                <dt v-if="pair.term">{{ pair.term }}</dt>
-                                                <dd v-html="pair.desc"></dd>
-                                            </dl>
-                                        </div>
+                                        <dl v-for="(pair, pairIdx) in getDetailPairs(detail)" :key="item.period + '-' + idx + '-pair-' + pairIdx" class="history_detail_content">
+                                            <dt v-if="pairIdx === 0" class="history_term_primary">{{ getPrimaryTerm(detail) }}</dt>
+                                            <dd v-html="pair.desc"></dd>
+                                        </dl>
                                     </li>
                                 </ul>
                             </div>
@@ -98,7 +96,7 @@ const langData = {
                 sections: [
                     {
                         period: "현재 ~ 2024",
-                        title: "공정거래 자율준수프로그램(CP)<br class='p_br'/>등급평가 ‘AA’ 등급 획득",
+                        title: "공정거래 자율준수프로그램<br class='m_br'/>(CP)<br class='p_br'/>등급평가 ‘AA’ 등급 획득",
                         items: [
                             { period: "2025", details: [
                                 { term: ["12월"], desc: "공정거래 자율준수프로그램(CP) 등급평가 ‘AA’ 등급 획득" },
@@ -195,7 +193,7 @@ const langData = {
                         ],
                     },
                     {
-                        title: "GS리테일 한국서비스대상 종합유통부문 최초 명예의 전당 헌정",
+                        title: "GS리테일 한국서비스대상<br />종합유통부문 최초 명예의 전당 헌정",
                         items: [
                             { period: "2019", details: [
                                 { term: ["12월"], desc: "GS fresh, 2019 대한민국 브랜드대상 대통령상 수상 – 산업통상자원부<br />GS SHOP, 방송통신위원회 유공자 표창, 방송통신위원회 위원장 표창<br />- 방송통신위원회<br />GS SHOP, 소비자의 날 기념식, 공정거래위원회 위원장 표창 - 공정거래위원회" },
@@ -209,7 +207,7 @@ const langData = {
                         ],
                     },
                     {
-                        title: "GS리테일 한국서비스대상 종합대상(5년 연속)",
+                        title: "GS리테일 한국서비스대상<br />종합대상(5년 연속)",
                         items: [
                             { period: "2018", details: [
                                 { term: ["11월"], desc: "2018 대한민국 봉사대상, 보건복지부 장관상 등 3개상 수상<br />한국산업의 고객만족도 편의점, 대형슈퍼 부문 1위 (KCSI GS25 편의점부문16년 연속1위(총19회1위),<br />GS수퍼마켓 대형슈퍼부문 1위 (2013년 4년 연속 1위 이후 2016년부터 다시 연속 3년 1위 / 총 7회) - 한국능률협회컨설팅(KMAC)" },
@@ -229,7 +227,7 @@ const langData = {
                 sections: [
                     {
                         period: "2017 ~ 2015",
-                        title: "GS리테일 한국서비스대상 종합대상(4년 연속)",
+                        title: "GS리테일 한국서비스대상<br />종합대상(4년 연속)",
                         items: [
                             { period: "2017", details: [
                                 { term: ["12월"], desc: "GS SHOP, 식약청 유공자 표창, 서울지방식품 의약품안전청 청장 표창<br />- 서울지방식품 의약품안전청" },
@@ -242,11 +240,11 @@ const langData = {
                         ],
                     },
                     {
-                        title: "GS리테일 한국서비스대상 종합대상(3년 연속)",
+                        title: "GS리테일 한국서비스대상<br />종합대상(3년 연속)",
                         items: [
                             { period: "2016", details: [
                                 { term: ["12월"], desc: "2016 한국의 경영대상 고객만족 경영대상 6년 연속 수상(명예의 전당) (총8회)<br />- 한국능률협회컨설팅(KMAC)<br />GS SHOP, TV홈쇼핑 서비스 만족도 비교 조사, 2개 부문 1위 - 한국소비자원<br />GS SHOP, 2016 국가고객만족도 조사, TV홈쇼핑 부문 1위 - 한국생산성본부" },
-                                { term: ["10월"], desc: "한국산업의 고객만족도 편의점, 대형슈퍼 부문 1위 (KCSI GS25<br /><br />편의점부문14년연속1위(총17회1위)) - 한국능률협회컨설팅(KMAC)<br />GS수퍼마켓 대형슈퍼부문 1위 (2013년 4년 연속 1위 이후 다시 1위)<br />- 한국능률협회컨설팅(KMAC)<br />GS SHOP, 2016 브랜드 고객만족도 조사, TV홈쇼핑 부문 1위 - 한국마케팅 협회"},
+                                { term: ["10월"], desc: "한국산업의 고객만족도 편의점, 대형슈퍼 부문 1위 (KCSI GS25<br />편의점부문14년연속1위(총17회1위)) - 한국능률협회컨설팅(KMAC)<br />GS수퍼마켓 대형슈퍼부문 1위 (2013년 4년 연속 1위 이후 다시 1위)<br />- 한국능률협회컨설팅(KMAC)<br />GS SHOP, 2016 브랜드 고객만족도 조사, TV홈쇼핑 부문 1위 - 한국마케팅 협회"},
                                 { term: ["7월"], desc: "한국서비스 품질지수(KS-SQI) (GS25 총 13회 수상, GS수퍼마켓)<br />- 한국표준협회<br />2016년 한국서비스대상 종합대상(종합대상 연속3회) - 한국표준협회" },
                                 { term: ["2월"], desc: "한국에서 가장 존경받는 기업 13년 연속 1위 - 한국능률협회컨설팅(KMAC)" },
                                 { term: ["1월"], desc: "GS SHOP, 2016 아시아 소비자 대상, TV홈쇼핑 부문 대상 - 아시아경제" },
@@ -255,7 +253,7 @@ const langData = {
                         ],
                     },
                     {
-                        title: "GS리테일 한국서비스대상 종합대상(2년 연속)",
+                        title: "GS리테일 한국서비스대상<br />종합대상(2년 연속)",
                         items: [
                             { period: "2015", details: [
                                 { term: ["12월"], desc: "GS리테일, 2015 유통산업 상생협력문화 확산유공 포상 - 대한상공회의소<br />GS리테일, 도로명 주소 활용 우수기업 국무총리 표창 - 행정자치부<br />GS리테일, 2015 웹어워드 마케팅이노베이션 대상<br />- 한국인터넷전문가 협회(미래창조과학부 후원)<br />GS SHOP, 제20회 한국유통대상, 대통령 표창 - 산업통상자원부" },
@@ -278,7 +276,7 @@ const langData = {
                 sections: [
                     {
                         period: "2014 ~ 2012",
-                        title: "GS리테일 고객만족경영대상 종합대상 수상(6회째)",
+                        title: "GS리테일 고객만족경영대상<br />종합대상 수상(6회째)",
                         items: [
                             { period: "2014", details: [
                                 { term: ["10월"], desc: "GS25, 한국산업의 고객만족도 1위 (KCSI) – 한국능률협회컨설팅<br />GS리테일, 고객만족 경영대상 종합대상 수상 - 한국능률협회컨설팅" },
@@ -289,7 +287,7 @@ const langData = {
                         ],
                     },
                     {
-                        title: "GS리테일 한국유통대상 산업통상자원부 장관상 수상",
+                        title: "GS리테일 한국유통대상<br />산업통상자원부 장관상 수상",
                         items: [
                             { period: "2013", details: [
                                 { term: ["12월"], desc: "GS SHOP, 전자거래발전 세미나, 미래창조과학부 장관표창 - 미래창조과학부<br />GS SHOP, 식약청유공자 표창, 서울지방식품의약품 안전청장 표창 - 서울지방식품의약품안전청<br />GS SHOP, e-Trust 인증 대상, 미래창조과학부 장관표창<br />- 미래창조과학부" },
@@ -303,7 +301,7 @@ const langData = {
                         ],
                     },
                     {
-                        title: "GS리테일 공생을 위한 사회책임경영(CSR) 리더 수상",
+                        title: "GS리테일 공생을 위한<br />사회책임경영(CSR) 리더 수상",
                         items: [
                             { period: "2012", details: [
                                 { term: ["12월"], desc: "GS SHOP, 제15회 소비자의 날기념 표창, 공정거래위원장 표창(소비자 권익우수기업) - 공정거래위원회" },
@@ -325,7 +323,7 @@ const langData = {
                 sections: [
                     {
                         period: "2011 ~ 2009",
-                        title: "GS25 소비자가 뽑은 가장 신뢰하는 브랜드 대상",
+                        title: "GS25 소비자가 뽑은<br />가장 신뢰하는 브랜드 대상",
                         items: [
                             { period: "2011", details: [
                                 { term: ["12월"], desc: "GS SHOP, 제16회농업인의 날 기념 표창, 농림수산식품부장관 표창(농축산물 산지유통 활성화 기여) - 농림수산식품부<br />GS SHOP, 제1회SBS 희망나눔대상, 기업부문 - SBS, 보건복지부,사랑의 열매" },
@@ -355,7 +353,7 @@ const langData = {
                         ],
                     },
                     {
-                        title: "GS리테일 고객만족 경영대상 종합대상 수상",
+                        title: "GS리테일 고객만족 경영대상<br />종합대상 수상",
                         items: [
                             { period: "2009", details: [
                                 { term: ["12월"], desc: "GS SHOP, 2009년 공정거래 자율준수프로그램(CP) 등급평가 ‘AA’ 등급 획득<br />GS리테일, 2009 기부식품 제공 사업‘ 보건복지가족부 장관 표창 - 보건복지부<br />GS SHOP, 제1４회 소비자의 날기념 표창, 대통령 표창(소비자 권익우수기업)<br />- 공정거래위원회" },
@@ -376,7 +374,7 @@ const langData = {
                 sections: [
                     {
                         period: "2008 ~ 2006",
-                        title: "GS25 소비자가 뽑은 가장 신뢰하는 브랜드 대상",
+                        title: "GS25 소비자가 뽑은<br />가장 신뢰하는 브랜드 대상",
                         items: [
                             { period: "2008", details: [
                                 { term: ["12월"], desc: "GS리테일, 웹어워드 코리아 2008 - 웹어워드 위원회" },
@@ -557,6 +555,12 @@ const getDetailPairs = (detail) => {
     return [{ term: getSecondaryTerms(detail)[0] ?? "", desc: detail.desc ?? "" }];
 };
 
+const getSectionMoTitle = (section) => {
+    const year = section.items?.[0]?.period;
+    if (!year) return section.title ?? "";
+    return `${year}<br />${section.title ?? ""}`;
+};
+
 </script>
 <style scoped>
 img { width: 100%; height: auto; object-fit: cover; display: block; }
@@ -572,49 +576,49 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
 .award_highlight_list { width: 1420px;  display: flex; flex-wrap: nowrap; gap: 12px; }
 .award_highlight_list > li { flex: 0 0 274px; }
 .award_highlight_card { width: 274px; height: 186px; padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-.award_highlight_card > figure { width: 100%; height: 60px; margin: 0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.award_highlight_card > figure { width: 100%; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .award_highlight_card > figure > img { width: auto; max-width: 100%; height: auto; max-height: 60px; object-fit: contain; }
-.award_highlight_card > p { width: 100%; margin: 0; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
+.award_highlight_card > p { width: 100%; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
 
 .sec_history { padding: 100px 0; display: grid; grid-template-columns: clamp(280px, 30.67vw, 460px) minmax(0, 1fr); gap: 32px; align-items: start; }
 .sec_history:last-child{padding-bottom:0;}
 .sec_history + .sec_history { border-top: 1px solid #E5E5E9; }
-.history_intro > header { min-height: 230px; }
 .history_intro > header > p { margin-bottom: 8px; color: #67676f; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.history_intro > header > h3 { font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.sec_history .history_list {  position: relative;}
+.history_intro > header > h3 { font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all;}
+.history_intro > header > .history_intro_tit_mo { display: none; }
 .sec_history:first-of-type .history_list{padding-top:50px;}
 .sec_history .history_item { display: flex; gap: 32px; position: relative; }
 .sec_history .history_period {  font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; flex-shrink: 0; display: block; }
 .sec_history .history_body { width: 100%; padding-bottom: 100px; }
 .sec_history .history_item:last-child .history_body { padding-bottom: 0; }
 .sec_history .history_summary { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_history .history_detail_list { display: flex; flex-direction: column; gap:16px;}
-.sec_history .history_detail_row {  display: grid; grid-template-columns: 50px minmax(0, 1fr); column-gap: 20px; align-items: start; }
-.sec_history .history_term_primary { color: #90909a; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_history .history_detail_group { display: flex; flex-direction: column; }
-.sec_history .history_detail_content {  display: grid; grid-template-columns: max-content minmax(0, 1fr); row-gap: 0; column-gap: 0; align-items: start; }
-.sec_history .history_detail_content > dt { margin: 0; color: #90909a; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_history .history_detail_content > dd { margin: 0 0 0 12px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; word-break: keep-all; }
-.sec_history .history_detail_content > dd:only-child { grid-column: 1 / -1; margin-left: 0; }
+.sec_history .history_detail_list { display: flex; flex-direction: column; gap: 16px; }
+.sec_history .history_detail_row { display: flex; flex-direction: column; gap: 0; }
+.sec_history .history_detail_content { display: grid; grid-template-columns: 50px minmax(0, 1fr); column-gap: 20px; align-items: start; }
+.sec_history .history_detail_content > dt.history_term_primary { color: #90909a; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_history .history_detail_content > dd { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; word-break: keep-all; }
+.sec_history .history_detail_content > dd:only-child { grid-column: 1 / -1; }
 
 @media screen and (max-width: 1024px) {
     .sec_history{ grid-template-columns: minmax(0, 1fr);}
     .history_intro > header{min-height: 0;}
     .sec_history .history_list{padding:0;}
     .sec_history .history_detail_content { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
+    .sec_history:first-of-type .history_list{padding:0;}
 }
 
 @media screen and (max-width: 768px) {
     :deep(.p_br) { display: none; }
     :deep(.m_br) { display: block; }
+    :deep(.tab_wrap.tabSlide ul > li){flex:0 0 93px;}
     .title_wrap { display: none; }
     .sec_award_highlight { margin: 60px -20px 0; padding: 0 20px; }
     .award_highlight_scroll { width: calc(100% + 20px); padding-right: 20px; }
     .sec_history { padding: 60px 0; grid-template-columns: minmax(0, 1fr); gap: 60px; }
     .history_intro > header { min-height: 0; }
     .history_intro > header > p { display: none; }
-    .history_intro > header > h3 { margin-top: 0; font-size: 2.8rem; line-height: 1.35; }
+    .history_intro > header > .history_intro_tit_pc { display: none; }
+    .history_intro > header > .history_intro_tit_mo { display: block; margin-top: 0; font-size: 2.8rem; line-height: 1.35; }
     .sec_history .history_list {padding:0;}
     .sec_history .history_item { gap: 32px; flex-direction: column; }
     .sec_history .history_item > div:not(.history_body) { display: none; }
@@ -624,11 +628,8 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
     .sec_history .history_body { margin: 0; padding-bottom: 94px; }
     .sec_history .history_item:last-child .history_body { padding-bottom: 0; }
     .sec_history .history_summary { font-size: 1.4rem; line-height: 1.4; }
-    .sec_history .history_detail_row { row-gap: 4px; column-gap: 0; gap: 12px; padding: 0; }
-    .sec_history .history_term_primary {  font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-    .sec_history .history_detail_group { gap: 0; }
-    .sec_history .history_detail_content { grid-template-columns: max-content minmax(0, 1fr); row-gap: 12px; }
-    .sec_history .history_detail_content > dt, .sec_history .history_detail_content > dd { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-    .sec_history .history_detail_content > dd { margin: 0; }
+    .sec_history .history_detail_row { gap: 12px; padding: 0; }
+    .sec_history .history_detail_content { grid-template-columns: 40px minmax(0, 1fr); column-gap: 10px; row-gap: 12px; }
+    .sec_history .history_detail_content > dt.history_term_primary, .sec_history .history_detail_content > dd { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
 }
 </style>
