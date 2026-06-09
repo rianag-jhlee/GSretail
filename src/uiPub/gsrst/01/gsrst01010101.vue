@@ -1060,10 +1060,10 @@ const startupStoreOwnershipOptions = [
 ];
 const startupCvsExperienceOptions = [
     { value: "none", label: "없음" },
-    { value: "gs25_staff", label: "GS25 근무자" },
-    { value: "gs25_owner", label: "GS25 경영주" },
-    { value: "other_staff", label: "타사 근무자" },
-    { value: "other_owner", label: "타사 경영주" },
+    { value: "", label: "Gs더프레시 근무자" },
+    { value: "", label: "ssm 근무자" },
+    { value: "", label: "ssm 경영주" },
+    { value: "", label: "개인수퍼" },
 ];
 const seminarWrapRef = ref(null);
 const startupConsentAgreed = ref(false);
@@ -1690,7 +1690,7 @@ const langData = {
             dayInit: "일",
             yearUnit: "년",
             monthUnit: "월",
-            cvsExperienceLabel: "편의점 근무경험",
+            cvsExperienceLabel: "슈퍼 근무경험",
             inquiryLabel: "문의 내용",
             startupInquiryPlaceholder: "창업 관련 궁금한 사항을 입력해주세요.",
             interestRegionLabel: "관심 지역",
