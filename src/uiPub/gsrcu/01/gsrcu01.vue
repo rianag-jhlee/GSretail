@@ -123,7 +123,7 @@ export default {
                         { title: "정도경영목소리", btnLabel: "정도경영목소리", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target:"/gsrsu040101" },
                         { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
                         { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
-                        { title: "멤버십/홈페이지문의", btnLabel: "멤버십/홈페이지문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target: "https://with.gsshop.com/cust/custCent/main.gs?lseq=380732-1&dseq=0&gsid=gnb-AU380732-AU380732-1" }
+                        { title: "멤버십/홈페이지문의", btnLabel: "멤버십/홈페이지문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" } //26.06.09 Edit 이종환
                     ],
                     전화번호:'전화번호',
                     운영시간:'운영시간'
