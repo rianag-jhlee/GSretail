@@ -48,7 +48,7 @@
                             <p v-if="step.desc" class="txt_sub">{{ step.desc }}</p>
                         </div>
                         <figure>
-                            <img :src="step.img" :alt="'Step ' + step.num">
+                            <img :src="isMobile ? step.imgMo : step.img" :alt="'Step ' + step.num"> <!-- 26.06.10 add 정다희 : 이미지 모바일 전용 추가 -->
                         </figure>
                     </li>
                 </ul>
@@ -123,8 +123,7 @@ export default {
     },
     data() {
         return {
-            // 26.06.10 del 정다희 : isMobile 미사용
-            // isMobile: false,
+            isMobile: false,
             langData: {
                 ko: {
                     MainTitle: "배달·픽업",
@@ -141,10 +140,10 @@ export default {
                     DiscountDesc: "소비기한 임박상품을 할인된 가격으로 픽업하고 환경도 보호하는 착한 서비스 입니다.",
                     DiscountSubDesc: "*소비기한 45분 전까지 구매 가능(소비 기한 이후 픽업 불가)",
                     DiscountSteps: [
-                        { num: "혜택 안내", text: "GS ALL 포인트 적립, 통신사 할인,<br />장바구니 쿠폰 이용 가능", desc: "*단 타 할인행사와 중복 적용 불가", img: require("@/assets/images/dummy/gsrbr0401_sale_01.png") },
-                        { num: "대상 품목", text: "마감할인 대상 품목 안내<br />샌드위치, 도시락, 햄버거, 삼각김밥, 김밥", img: require("@/assets/images/dummy/gsrbr0401_sale_02.png") },
-                        { num: "구매 시간", text: "마감할인 상품 구매 가능 시간", img: require("@/assets/images/dummy/gsrbr0401_sale_03.png") },
-                        { num: "마감할인 이용 꿀TIP", text: "다른 지역도 확인하고 싶다면<br />마감할인 알림 받고 빠르게 구매하세요!", img: require("@/assets/images/dummy/gsrbr0401_sale_04.png") }
+                        { num: "혜택 안내", text: "GS ALL 포인트 적립, 통신사 할인,<br />장바구니 쿠폰 이용 가능", desc: "*단 타 할인행사와 중복 적용 불가", img: require("@/assets/images/dummy/gsrbr0401_sale_01.png"), imgMo: require("@/assets/images/dummy/gsrbr0401_sale_01_mo.png") },
+                        { num: "대상 품목", text: "마감할인 대상 품목 안내<br />샌드위치, 도시락, 햄버거, 삼각김밥, 김밥", img: require("@/assets/images/dummy/gsrbr0401_sale_02.png"), imgMo: require("@/assets/images/dummy/gsrbr0401_sale_02_mo.png") },
+                        { num: "구매 시간", text: "마감할인 상품 구매 가능 시간", img: require("@/assets/images/dummy/gsrbr0401_sale_03.png"), imgMo: require("@/assets/images/dummy/gsrbr0401_sale_03_mo.png") },
+                        { num: "마감할인 이용 꿀TIP", text: "다른 지역도 확인하고 싶다면<br />마감할인 알림 받고 빠르게 구매하세요!", img: require("@/assets/images/dummy/gsrbr0401_sale_04.png"), imgMo: require("@/assets/images/dummy/gsrbr0401_sale_04_mo.png") }
                     ],
                     Steps_2: [
                         { num: "01", text: "우리동네GS 접속 후<br />'아동급식' 아이콘 선택" },
@@ -237,17 +236,15 @@ export default {
     computed: {
         t() { return this.langData[this.lang] || this.langData.ko; }
     },
-    // 26.06.10 del 정다희 : isMobile/checkMobile 미사용
-    // mounted() {
-    //     this.checkMobile();
-    //     window.addEventListener('resize', this.checkMobile);
-    // },
-    // beforeUnmount() {
-    //     window.removeEventListener('resize', this.checkMobile);
-    // },
+    mounted() {
+        this.checkMobile();
+        window.addEventListener("resize", this.checkMobile);
+    },
+    beforeUnmount() {
+        window.removeEventListener("resize", this.checkMobile);
+    },
     methods: {
-        // 26.06.10 del 정다희 : checkMobile 미사용
-        // checkMobile() { this.isMobile = window.innerWidth < 768; },
+        checkMobile() { this.isMobile = window.innerWidth < 768; },
         closeModal(event) { modal.close(event.currentTarget); }
     }
 };
@@ -360,6 +357,7 @@ section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6re
 
     /* 26.06.10 add 정다희 */
     .how_to_list { grid-template-columns: 1fr; }
-    .how_to_list > li > figure { height: 270px; }
+    .discount_section .how_to_list > li > figure { height: auto; }
+    .discount_section .how_to_list > li > figure > img { height: auto; }
 }
 </style>
