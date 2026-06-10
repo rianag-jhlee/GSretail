@@ -28,6 +28,15 @@
 
                 <div class="store_layout_flex">
                     <div class="store_list_side">
+
+                        <!-- 26.06.09 Edit 이종환 :  모바일 지도 영역 -->
+                        <div class="store_map_mobile">
+                            <div class="map_box">
+                                <!-- <img :src="store.mapImg" :alt="store.name + ' 지도'" /> -->
+                            </div>
+                        </div>
+                        <!-- //26.06.09 Edit 이종환 :  모바일 지도 영역 -->
+
                         <div v-for="(store, idx) in t.storeData" :key="idx" class="store_item" :class="{ 'active': selectedIdx === idx }">
                             <div class="item_info">
                                 <div class="item_header">
@@ -44,12 +53,6 @@
                                     <dd>{{ store.tel }}</dd>
                                 </dl>
                                 <button type="button" class="btn_leaflet">{{ t.BtnLeaflet }}</button>
-                            </div>
-
-                            <div class="store_map_mobile" v-if="selectedIdx === idx">
-                                <div class="map_box">
-                                    <img :src="store.mapImg" :alt="store.name + ' 지도'" />
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -170,20 +173,26 @@ export default {
 .store_map_mobile { display: none; }
 .pagination_area { margin-top: 32px; display: flex; justify-content: center; }
 .btn_group { padding: 0; display: flex; gap: 8px; }
+
 @media screen and (max-width: 1024px) { 
-    .store_layout_flex { flex-direction: column; } 
     .store_map_pc { display: none; } 
     .store_map_mobile { display: block; width: 100%; margin-top: 20px; } 
     .store_map_mobile .map_box { width: 100%; height: 250px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e5e9; } 
     .store_map_mobile .map_box img { width: 100%; height: 100%; object-fit: cover; } 
-    .filter_search_wrap { flex-direction: column; align-items: flex-start; gap: 20px; }
 
     .input_group { width: 100%; flex-wrap:wrap;} 
+
+    .store_item.active {background-color:#fff;}
 }
 
 @media screen and (max-width:768px) {
+
+    .intro_box {display:none;}
+
     .base_select {flex:1;}
     .base_input_wrap {width:100%; flex:1 auto;}
+
+    .filter_search_wrap { flex-direction: column; align-items: flex-start; gap: 20px; }
 
     .filter_search_wrap :deep(.input input) {height:42px; padding-right:60px;}
     .filter_search_wrap :deep(.input_wrap label.input i) {font-size:1.4rem; top:21px;}
@@ -195,5 +204,10 @@ export default {
     .filter_search_wrap .btn_group .btn_big:before {width:16px; height:16px; background-image:url('@/assets/images/common/icon_set_16.png'); content:''; filter:initial; display:block;}
     .filter_search_wrap .btn_group .btn_icon_search:before {margin-right:0; background-position:-496px -14px;}
     .filter_search_wrap .btn_group .btn_big.gray:before {background-position:-896px -14px;}
+
+    .store_map_mobile {margin-top:0; padding-top:133.333333%; background-color:gray; position:fixed; top:61.2px; right:0; left:0; z-index:1;}
+    .store_map_mobile .map_box {height:auto; border:0; border-radius:0; position:absolute; top:0; right:0; bottom:0; left:0;}
+
+    .modal_content {padding-top:calc(133.3333% - 20px);}
 }
 </style>

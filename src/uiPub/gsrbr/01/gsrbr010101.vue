@@ -487,7 +487,11 @@
 
         <!-- depth1 = 1: 신선강화점 -->
         <div v-if="depth1ActiveIdx === 1" class="brand_panel sinsen_panel">
-            <figure class="brand_panel_bg" role="img" :aria-label="sinsen.heroAlt"></figure>
+            <!-- 26.06.09 Edit 이종환 -->
+            <figure class="brand_panel_bg" role="img" :aria-label="sinsen.heroAlt">
+                <img :src="sinsen.hero" :alt="sinsen.heroalt">
+            </figure>
+            <!-- //26.06.09 Edit 이종환 -->
             <header v-if="sinsen.title" class="brand_panel_title">
                 <h2 v-html="sinsen.title"></h2>
                 <p v-if="sinsen.subtitle" v-html="sinsen.subtitle" />
@@ -1635,6 +1639,7 @@ import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 // 26.06.08 add정다희 이미지 imgSinsen01 ~ imgSinsen06 추가, imgFlow삭제
 // import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 // import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
+import imgSinsen00 from "@/assets/images/sub/gsrbr010101/brand_bg_05.png";
 import imgSinsen01 from "@/assets/images/sub/gsrbr010101/sinsen_01.png";
 import imgSinsen02 from "@/assets/images/sub/gsrbr010101/sinsen_02.png";
 import imgSinsen03 from "@/assets/images/sub/gsrbr010101/sinsen_03.png";
@@ -1960,6 +1965,7 @@ const langData = {
             },
         ],
         sinsen: {
+            hero: imgSinsen00,
             heroAlt: "신선강화점",
             title: "신선강화점",
             subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br /><br class=\"m_br\" />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
@@ -3331,6 +3337,7 @@ const langData = {
             },
         ],
         sinsen: {
+            hero: imgSinsen00,
             heroAlt: "Fresh Concept Store",
             title: "Fresh Concept Store",
             subtitle: "Fresh Concept Stores are designed for the growing trend of single- and two-person households and convenient, small-quantity shopping, offering one-stop grocery shopping 24 hours a day, 365 days a year. Combining the convenience of a convenience store with the freshness of a supermarket, this distinctive concept delivers fresh products (fruits, vegetables, meat, and seafood) every single day.",
