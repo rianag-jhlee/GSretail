@@ -328,7 +328,7 @@ section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6re
 .how_to_list .card_tit > span.num {margin-bottom:6px;color: #107af2; font-size: 1.6rem; font-weight: 700; line-height: 1.24; display: block;}
 .how_to_list .card_tit > strong { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; display: block;}
 .how_to_list > li p.txt_sub{margin-top:6px;}
-.how_to_list > li > figure { width: 100%; height: 260px; margin-top: 40px; }
+.how_to_list > li > figure { width: 100%; height: auto; margin-top: 40px; }
 .how_to_list > li > figure > img { width: 100%; height: 100%; object-fit: contain; }
 
 /* Responsive */
@@ -357,7 +357,5 @@ section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6re
 
     /* 26.06.10 add 정다희 */
     .how_to_list { grid-template-columns: 1fr; }
-    .discount_section .how_to_list > li > figure { height: auto; }
-    .discount_section .how_to_list > li > figure > img { height: auto; }
 }
 </style>
