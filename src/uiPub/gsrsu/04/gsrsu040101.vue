@@ -2,7 +2,7 @@
     <div class="main-container">
         <div class="title_wrap ac top_visual">
             <h2 class="page_title">{{ t.MainTitle }}</h2>
-            <p class="visual_sub">{{ t.MainsubTitle }}</p>
+            <!-- 26.06.10 Del 이종환 <p class="visual_sub">{{ t.MainsubTitle }}</p> -->
         </div>
 
 
