@@ -189,7 +189,7 @@
         "link": "/gsrab01" ,
         "startDate": "",
         "endDate": "",
-        "status": "ing",
+        "status": "com",
         "note": ""
     },
     {
@@ -199,7 +199,7 @@
         "link": "/gsrab02" ,
         "startDate": "",
         "endDate": "",
-        "status": "ing",
+        "status": "com",
         "note": ""
     },
     {
@@ -209,7 +209,7 @@
         "link": "/gsrab03" ,
         "startDate": "",
         "endDate": "",
-        "status": "ing",
+        "status": "com",
         "note": ""
     },
     {
@@ -219,7 +219,7 @@
         "link": "/gsrab04" ,
         "startDate": "",
         "endDate": "",
-        "status": "ing",
+        "status": "com",
         "note": ""
     },
     {
@@ -229,9 +229,20 @@
         "link": "/gsrab05" ,
         "startDate": "",
         "endDate": "",
+        "status": "com",
+        "note": ""
+    },
+    {
+        "depth1": "", "depth2": "수상이력", "depth3": "", "depth4": "", "depth5": "", "depth6": "",
+        "type": "page",
+        "path": "gsrab/06/gsrab06",
+        "link": "/gsrab06" ,
+        "startDate": "",
+        "endDate": "",
         "status": "ing",
         "note": ""
     },
+
 
     {
         "depth1": "BRAND", "depth2": "", "depth3": "", "depth4": "", "depth5": "", "depth6": "",

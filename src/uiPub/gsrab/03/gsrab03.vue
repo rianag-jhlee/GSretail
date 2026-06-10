@@ -6,13 +6,14 @@
         <div class="cont_inner">
             <Tabs v-model="MainTabIdx" :tab-items="t.MainTabs" tab-class="type_01" :tab-slide="true" />
             <div v-show="MainTabIdx <= 5" class="panel" :aria-label="t.MainTabs?.[MainTabIdx]?.item || ''">
-                <section ref="sectionRef" class="sec_history" :key="'history-tab-' + MainTabIdx">
+                <section class="sec_history" :key="'history-tab-' + MainTabIdx"> <!-- 26.06.09 add 정다희 :  ref="sectionRef" 삭제 -->
                     <div class="history_intro">
                         <header>
                             <p>{{ currentHistoryTab.period }}</p>
                             <h3 v-html="currentHistoryTab.title"></h3>
                         </header>
-                        <!-- 26.05.26 Del 이종환 <ul ref="introImagesRef" class="history_intro_images">
+                        <!-- 26.05.26 Del 이종환 -->
+                        <!--  <ul ref="introImagesRef" class="history_intro_images">
                             <li v-for="(img, idx) in currentHistoryTab.images" :key="'history-img-' + MainTabIdx + '-' + idx" :style="{ top: (imagePositions[idx] || 0) + 'px' }">
                                 <img :src="img.src" :alt="img.alt" />
                             </li>
@@ -25,30 +26,10 @@
     </div>
 </template>
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick, watch } from "vue";
+import { ref, computed } from "vue"; // 26.06.09 add 정다희 : onMounted, onUnmounted, nextTick, watch 라이브러리 삭제
 import Tabs from "@/components/Tabs.vue";
 import HistoryTimeline from "@/components/HistoryTimeline.vue";
-
-// 이미지 리소스 선언부
-import imgHistory1 from "@/assets/images/dummy/gsrab03_01.png";
-import imgHistory2 from "@/assets/images/dummy/gsrab03_02.png";
-import imgHistory3 from "@/assets/images/dummy/gsrab03_03.png";
-import imgHistory4 from "@/assets/images/dummy/gsrab03_04.png";
-import imgHistory5 from "@/assets/images/dummy/gsrab03_05.png";
-import imgHistory6 from "@/assets/images/dummy/gsrab03_06.png";
-import imgHistory7 from "@/assets/images/dummy/gsrab03_07.png";
-import imgHistory8 from "@/assets/images/dummy/gsrab03_08.png";
-import imgHistory9 from "@/assets/images/dummy/gsrab03_09.png";
-import imgHistory10 from "@/assets/images/dummy/gsrab03_10.png";
-import imgHistory11 from "@/assets/images/dummy/gsrab03_11.png";
-import imgHistory12 from "@/assets/images/dummy/gsrab03_12.png";
-import imgHistory13 from "@/assets/images/dummy/gsrab03_13.png";
-import imgHistory14 from "@/assets/images/dummy/gsrab03_14.png";
-import imgHistory15 from "@/assets/images/dummy/gsrab03_15.png";
-import imgHistory16 from "@/assets/images/dummy/gsrab03_16.png";
-import imgHistory17 from "@/assets/images/dummy/gsrab03_17.png";
-import imgHistory18 from "@/assets/images/dummy/gsrab03_18.png";
-import imgHistory19 from "@/assets/images/dummy/gsrab03_19.png";
+// 26.06.09 add 정다희 : 이미지 리소스 삭제
 
 const props = defineProps({
     lang: {
@@ -58,11 +39,8 @@ const props = defineProps({
 });
 
 const MainTabIdx = ref(0);
-const sectionRef = ref(null);
-const introImagesRef = ref(null);
-const imagePositions = ref([]);
-const MOBILE_BP = 768;
-let resizeObserver = null;
+// 26.06.09 add 정다희 : 안쓰이는 변수 삭제 
+
 
 const langData = {
     ko: {
@@ -79,14 +57,15 @@ const langData = {
             {
                 period: "현재-2019",
                 title: "라이프스타일 <br />플랫폼으로 도약",
-                images: [
-                    { period: "2025", entryIdx: 6, src: imgHistory1, alt: "2025년 GS리테일 연혁 이미지" },
-                    { period: "2024", entryIdx: 5, src: imgHistory2, alt: "2024년 GS리테일 연혁 이미지" },
-                    { period: "2023", entryIdx: 4, src: imgHistory3, alt: "2023년 GS리테일 연혁 이미지" },
-                    { period: "2022", entryIdx: 4, src: imgHistory4, alt: "2022년 GS리테일 연혁 이미지" },
-                    { period: "2021", entryIdx: 0, src: imgHistory5, alt: "2021년 GS리테일 연혁 이미지" },
-                    { period: "2020", entryIdx: 0, src: imgHistory6, alt: "2020년 GS리테일 연혁 이미지" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "2025", entryIdx: 6, src: imgHistory1, alt: "2025년 GS리테일 연혁 이미지" },
+                //     { period: "2024", entryIdx: 5, src: imgHistory2, alt: "2024년 GS리테일 연혁 이미지" },
+                //     { period: "2023", entryIdx: 4, src: imgHistory3, alt: "2023년 GS리테일 연혁 이미지" },
+                //     { period: "2022", entryIdx: 4, src: imgHistory4, alt: "2022년 GS리테일 연혁 이미지" },
+                //     { period: "2021", entryIdx: 0, src: imgHistory5, alt: "2021년 GS리테일 연혁 이미지" },
+                //     { period: "2020", entryIdx: 0, src: imgHistory6, alt: "2020년 GS리테일 연혁 이미지" },
+                // ],
                 items: [
                     { period: "2025", details: [
                         { term: ["12월", "GS리테일"], desc: "'1천만불 수출의 탑' 수상 공정거래 자율준수프로그램(CP) 등급평가 <br /> 'AA' 등급 획득" },
@@ -198,14 +177,15 @@ const langData = {
             {
                 period: "2018-2011",
                 title: "글로벌 <br />시장진출",
-                images: [                   
-                    { period: "2017", entryIdx: 0, src: imgHistory7, alt: "2017년 GS리테일 연혁 이미지" },
-                    { period: "2016", entryIdx: 0, src: imgHistory8, alt: "2016년 GS리테일 연혁 이미지" },
-                    { period: "2015", entryIdx: 0, src: imgHistory9, alt: "2015년 GS리테일 연혁 이미지" },
-                    { period: "2014", entryIdx: 0, src: imgHistory10, alt: "2014년 GS리테일 연혁 이미지" },
-                    { period: "2012", entryIdx: 0, src: imgHistory11, alt: "2012년 GS리테일 연혁 이미지" },
-                    { period: "2011", entryIdx: 0, src: imgHistory12, alt: "2011년 GS리테일 연혁 이미지" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "2017", entryIdx: 0, src: imgHistory7, alt: "2017년 GS리테일 연혁 이미지" },
+                //     { period: "2016", entryIdx: 0, src: imgHistory8, alt: "2016년 GS리테일 연혁 이미지" },
+                //     { period: "2015", entryIdx: 0, src: imgHistory9, alt: "2015년 GS리테일 연혁 이미지" },
+                //     { period: "2014", entryIdx: 0, src: imgHistory10, alt: "2014년 GS리테일 연혁 이미지" },
+                //     { period: "2012", entryIdx: 0, src: imgHistory11, alt: "2012년 GS리테일 연혁 이미지" },
+                //     { period: "2011", entryIdx: 0, src: imgHistory12, alt: "2011년 GS리테일 연혁 이미지" },
+                // ],
                 items: [
                     { period: "2018", details: [
                         { term: ["12월", "GS리테일"], desc: "GSPark24 인수" },
@@ -288,12 +268,13 @@ const langData = {
             {
                 period: "2010-2004",
                 title: "업계 최고 차별화 <br />경쟁력 확보",
-                images: [
-                    { period: "2009", entryIdx: 0, src: imgHistory13, alt: "2009년 GS리테일 연혁 이미지" },
-                    { period: "2007", entryIdx: 0, src: imgHistory14, alt: "2007년 GS리테일 연혁 이미지" },
-                    { period: "2005", entryIdx: 0, src: imgHistory15, alt: "2005년 GS리테일 연혁 이미지" },
-                    { period: "2004", entryIdx: 0, src: imgHistory16, alt: "2004년 GS리테일 연혁 이미지" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "2009", entryIdx: 0, src: imgHistory13, alt: "2009년 GS리테일 연혁 이미지" },
+                //     { period: "2007", entryIdx: 0, src: imgHistory14, alt: "2007년 GS리테일 연혁 이미지" },
+                //     { period: "2005", entryIdx: 0, src: imgHistory15, alt: "2005년 GS리테일 연혁 이미지" },
+                //     { period: "2004", entryIdx: 0, src: imgHistory16, alt: "2004년 GS리테일 연혁 이미지" },
+                // ],
                 items: [
                     { period: "2010", details: [
                         { term: ["5월", "GS25"], desc: "해군PX 운영자로 선정" },
@@ -347,9 +328,10 @@ const langData = {
             {
                 period: "2002-1999",
                 title: "새로운 유통업 <br />강자로의 발돋움",
-                images: [
-                    { period: "2000", entryIdx: 0, src: imgHistory17, alt: "2000년 GS리테일 연혁 이미지" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "2000", entryIdx: 0, src: imgHistory17, alt: "2000년 GS리테일 연혁 이미지" },
+                // ],
                 items: [
                     { period: "2002", details: [
                         { term: ["9월"], subDetails: [
@@ -371,9 +353,10 @@ const langData = {
             {
                 period: "1997-1990",
                 title: "종합유통사로의 <br />도약",
-                images: [
-                    { period: "1996", entryIdx: 0, src: imgHistory18, alt: "1996년 GS리테일 연혁 이미지" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "1996", entryIdx: 0, src: imgHistory18, alt: "1996년 GS리테일 연혁 이미지" },
+                // ],
                 items: [
                     { period: "1997", details: [
                         { term: ["3월", "GS SHOP"], desc: "LG홈쇼핑으로 사명 변경" },
@@ -405,9 +388,10 @@ const langData = {
             {
                 period: "1987-1971",
                 title: "유통업의 <br />기반을 다지다",
-                images: [
-                    { period: "1984", entryIdx: 0, src: imgHistory19, alt: "1984년 GS리테일 연혁 이미지" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "1984", entryIdx: 0, src: imgHistory19, alt: "1984년 GS리테일 연혁 이미지" },
+                // ],
                 items: [
                     { period: "1987", details: [ 
                         { term: ["7월", "GS리테일"], desc: "Food Service 사업 1호점 트윈타워 사원 식당 운영 개시" },
@@ -450,14 +434,15 @@ const langData = {
             {
                 period: "Present-2019",
                 title: "Leaping Forward as a <br />Lifestyle Platform",
-                images: [
-                    { period: "2025", entryIdx: 6, src: imgHistory1, alt: "GS Retail History Image 2025" },
-                    { period: "2024", entryIdx: 5, src: imgHistory2, alt: "GS Retail History Image 2024" },
-                    { period: "2023", entryIdx: 4, src: imgHistory3, alt: "GS Retail History Image 2023" },
-                    { period: "2022", entryIdx: 4, src: imgHistory4, alt: "GS Retail History Image 2022" },
-                    { period: "2021", entryIdx: 0, src: imgHistory5, alt: "GS Retail History Image 2021" },
-                    { period: "2020", entryIdx: 0, src: imgHistory6, alt: "GS Retail History Image 2020" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "2025", entryIdx: 6, src: imgHistory1, alt: "GS Retail History Image 2025" },
+                //     { period: "2024", entryIdx: 5, src: imgHistory2, alt: "GS Retail History Image 2024" },
+                //     { period: "2023", entryIdx: 4, src: imgHistory3, alt: "GS Retail History Image 2023" },
+                //     { period: "2022", entryIdx: 4, src: imgHistory4, alt: "GS Retail History Image 2022" },
+                //     { period: "2021", entryIdx: 0, src: imgHistory5, alt: "GS Retail History Image 2021" },
+                //     { period: "2020", entryIdx: 0, src: imgHistory6, alt: "GS Retail History Image 2020" },
+                // ],
                 items: [
                     { period: "2025", details: [
                         { term: ["Dec", "GS Retail"], desc: "Awarded '$10 Million Export Tower' & <br />Achieved 'AA' grade in Compliance Program (CP) evaluation" },
@@ -569,14 +554,15 @@ const langData = {
             {
                 period: "2018-2011",
                 title: "Global Market <br />Expansion",
-                images: [                   
-                    { period: "2017", entryIdx: 0, src: imgHistory7, alt: "GS Retail History Image 2017" },
-                    { period: "2016", entryIdx: 0, src: imgHistory8, alt: "GS Retail History Image 2016" },
-                    { period: "2015", entryIdx: 0, src: imgHistory9, alt: "GS Retail History Image 2015" },
-                    { period: "2014", entryIdx: 0, src: imgHistory10, alt: "GS Retail History Image 2014" },
-                    { period: "2012", entryIdx: 0, src: imgHistory11, alt: "GS Retail History Image 2012" },
-                    { period: "2011", entryIdx: 0, src: imgHistory12, alt: "GS Retail History Image 2011" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "2017", entryIdx: 0, src: imgHistory7, alt: "GS Retail History Image 2017" },
+                //     { period: "2016", entryIdx: 0, src: imgHistory8, alt: "GS Retail History Image 2016" },
+                //     { period: "2015", entryIdx: 0, src: imgHistory9, alt: "GS Retail History Image 2015" },
+                //     { period: "2014", entryIdx: 0, src: imgHistory10, alt: "GS Retail History Image 2014" },
+                //     { period: "2012", entryIdx: 0, src: imgHistory11, alt: "GS Retail History Image 2012" },
+                //     { period: "2011", entryIdx: 0, src: imgHistory12, alt: "GS Retail History Image 2011" },
+                // ],
                 items: [
                     { period: "2018", details: [
                         { term: ["Dec", "GS Retail"], desc: "Acquired GSPark24" },
@@ -659,12 +645,13 @@ const langData = {
             {
                 period: "2010-2004",
                 title: "Securing Top-tier <br />Differentiated Competitiveness",
-                images: [
-                    { period: "2009", entryIdx: 0, src: imgHistory13, alt: "GS Retail History Image 2009" },
-                    { period: "2007", entryIdx: 0, src: imgHistory14, alt: "GS Retail History Image 2007" },
-                    { period: "2005", entryIdx: 0, src: imgHistory15, alt: "GS Retail History Image 2005" },
-                    { period: "2004", entryIdx: 0, src: imgHistory16, alt: "GS Retail History Image 2004" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "2009", entryIdx: 0, src: imgHistory13, alt: "GS Retail History Image 2009" },
+                //     { period: "2007", entryIdx: 0, src: imgHistory14, alt: "GS Retail History Image 2007" },
+                //     { period: "2005", entryIdx: 0, src: imgHistory15, alt: "GS Retail History Image 2005" },
+                //     { period: "2004", entryIdx: 0, src: imgHistory16, alt: "GS Retail History Image 2004" },
+                // ],
                 items: [
                     { period: "2010", details: [
                         { term: ["May", "GS25"], desc: "Selected as the official operator for Navy PX" },
@@ -718,9 +705,10 @@ const langData = {
             {
                 period: "2002-1999",
                 title: "Emerging as a New Power <br />in the Retail Industry",
-                images: [
-                    { period: "2000", entryIdx: 0, src: imgHistory17, alt: "GS Retail History Image 2000" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "2000", entryIdx: 0, src: imgHistory17, alt: "GS Retail History Image 2000" },
+                // ],
                 items: [
                     { period: "2002", details: [
                         { term: ["Sep"], subDetails: [
@@ -742,9 +730,10 @@ const langData = {
             {
                 period: "1997-1990",
                 title: "Leaping into a Comprehensive <br />Retail Enterprise",
-                images: [
-                    { period: "1996", entryIdx: 0, src: imgHistory18, alt: "GS Retail History Image 1996" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "1996", entryIdx: 0, src: imgHistory18, alt: "GS Retail History Image 1996" },
+                // ],
                 items: [
                     { period: "1997", details: [
                         { term: ["Mar", "GS SHOP"], desc: "Changed company name to LG Home Shopping" },
@@ -776,9 +765,10 @@ const langData = {
             {
                 period: "1987-1971",
                 title: "Laying the Foundations <br />of Retail Business",
-                images: [
-                    { period: "1984", entryIdx: 0, src: imgHistory19, alt: "GS Retail History Image 1984" },
-                ],
+                // 26.06.09 Del 정다희 : images 배열 삭제 (history_intro_images 미사용)
+                // images: [
+                //     { period: "1984", entryIdx: 0, src: imgHistory19, alt: "GS Retail History Image 1984" },
+                // ],
                 items: [
                     { period: "1987", details: [ 
                         { term: ["Jul", "GS Retail"], desc: "Started Food Service business at the Twin Towers cafeteria" },
@@ -810,51 +800,10 @@ const langData = {
 };
 
 const t = computed(() => langData[props.lang] || langData.ko);
-const currentHistoryTab = computed(() => t.value.HistoryTabs?.[MainTabIdx.value] || { period: "", title: "", images: [], items: [] });
-
-const updateImagePositions = () => {
-    const sec = sectionRef.value;
-    const intro = introImagesRef.value;
-    if (!sec || !intro) return;
-    if (typeof window !== "undefined" && window.innerWidth <= MOBILE_BP) return;
-
-    const introTop = intro.getBoundingClientRect().top;
-    const next = currentHistoryTab.value.images.map((img) => {
-        const row = sec.querySelector(`.history_item[data-period="${img.period}"]`);
-        if (!row) return 0;
-        let target = row;
-        if (typeof img.entryIdx === "number") {
-            const entries = row.querySelectorAll(".history_detail_row");
-            target = entries[img.entryIdx] || row;
-        }
-        const offset = target.getBoundingClientRect().top - introTop;
-        return Math.max(0, offset);
-    });
-    imagePositions.value = next;
-};
-
-onMounted(async () => {
-    await nextTick();
-    updateImagePositions();
-    if (typeof ResizeObserver !== "undefined" && sectionRef.value) {
-        resizeObserver = new ResizeObserver(updateImagePositions);
-        resizeObserver.observe(sectionRef.value);
-    }
-    window.addEventListener("resize", updateImagePositions);
-});
-
-onUnmounted(() => {
-    resizeObserver?.disconnect();
-    window.removeEventListener("resize", updateImagePositions);
-});
-
-watch([() => props.lang, MainTabIdx], async () => {
-    await nextTick();
-    updateImagePositions();
-});
+const currentHistoryTab = computed(() => t.value.HistoryTabs?.[MainTabIdx.value] || { period: "", title: "", items: [] });
+// 26.06.09 add 정다희 : 이미지 관련 스크립트 삭제
 </script>
 <style scoped>
-img { width: 100%; height: auto; object-fit: cover; display: block; }
 .main-container { width: 100%; position: relative; display: block; }
 .title_wrap { width: 100%; max-height: 480px; padding: 10.91% 0 11.25%; text-align: center; position: relative; display: block; background-color: transparent; background-image: url("@/assets/images/dummy/gsrab02_01.png"); background-repeat: no-repeat; background-size: cover; background-position: center -90px; }
 .title_wrap::after { content: ""; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); position: absolute; left: 0; top: 0; z-index: 1; }
@@ -864,8 +813,6 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
 .history_intro > header { min-height: 230px; }
 .history_intro > header > p { margin: 0; color: #67676f; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .history_intro > header > h3 { margin: 8px 0 0; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.history_intro_images { margin: 0; padding: 0; position: relative; }
-.history_intro_images > li { width: 100%; max-width: 432px; aspect-ratio: 432/294; border-radius: 12px; position: absolute; left: 0; top: 0; overflow: hidden; }
 .sec_history :deep(.history_period) { width: auto; padding:7px 0;}
 .sec_history :deep(.history_detail_row) { grid-template-columns: 40px minmax(0, 1fr); }
 .sec_history :deep(.history_detail_content) { min-height:72px; padding:14.5px 0 30.5px;gap:0; }
@@ -877,13 +824,14 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
 }
 
 @media screen and (max-width: 768px) {
+    .main-container{padding-top:84px;} /* 26.06.09 add 정다희 : 모바일 스타일 적용 */
+    :deep(.tab_wrap){margin:0;}
     .title_wrap { display: none; }
     .panel { padding: 60px 0 100px; }
     .sec_history { grid-template-columns: minmax(0, 1fr); gap: 60px; }
     .history_intro > header { min-height: 0; }
     .history_intro > header > p { display: none; }
     .history_intro > header > h3 { margin-top: 0; font-size: 2.8rem; line-height: 1.35; }
-    .history_intro_images { display: none; }
     .sec_history :deep(.history_period) { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; }
     .sec_history :deep(.history_body) { margin: 0; padding-bottom: 94px; }
     .sec_history :deep(.history_detail_list) { gap: 0; }
