@@ -575,54 +575,54 @@ export default {
 
 
                     ],
-                    BoardSectionTitle2: "이사회 역량 구성표(Board Skills Matrix)로 표기",
+                    BoardSectionTitle2: "이사회 역량 구성표 (Board Skills Matrix)",
                     SkillsList: [
-                        { type: "사내이사/대표이사", name: "허서홍", appointDate: "2025.03 선임", tags: [{text: "경영·리더십", class:""}, {text: "리스크관리·ESG", class:""}] },
-                        { type: "사내이사", name: "오진석", appointDate: "2024.03 선임", tags: [{text: "경영·리더십", class:""}, {text: "유통·관련산업", class:""}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:""}, {text: "보상위원회", class:"TAG-3"}] },
-                        { type: "기타 비상무이사", name: "홍순기", appointDate: "2021.07 선임", tags: [{text: "경영·리더십", class:""}, {text: "재무·회계", class:""}, {text: "리스크관리·ESG", class:""}, {text: "ESG위원회", class:"TAG-3"}] },
+                        { type: "사내이사/대표이사", name: "허서홍", appointDate: "2025.03 선임", tags: [{text: "경영·리더십", class:""}, {text: "리스크관리·ESG", class:""}, {text: "유통·관련산업", class:""}] },
+                        { type: "사내이사", name: "오진석", appointDate: "2024.03 선임", tags: [{text: "경영·리더십", class:""}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:""}, {text: "보상위원회", class:"TAG-3"}] },
+                        { type: "기타 비상무이사", name: "홍순기", appointDate: "2021.07 선임", tags: [{text: "경영·리더십", class:""}, {text: "재무·회계", class:""}, {text: "리스크관리·ESG", class:""}, {text: "ESG위", class:"TAG-3"}] },
                         { type: "사외이사", name: "이성락", appointDate: "2022.03 선임", tags: [{text: "경영·리더십", class:"TAG-2"}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:"TAG-2"}, {text: "독립성", class:"TAG-2"}, {text: "내부거래위", class:"TAG-4"}, {text: "사외이사추천위", class:"TAG-4"}, {text: "감사위원회", class:"TAG-4"}] },
-                        { type: "사외이사", name: "이인무", appointDate: "2021.07 선임", tags: [{text: "재무·회계", class:"TAG-2"}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:"TAG-2"}, {text: "독립성", class:"TAG-2"}, {text: "사외이사추천위", class:"TAG-4"}, {text: "감사위원회", class:"TAG-4"}, {text: "ESG위원회", class:"TAG-4"}, {text: "보상위원회", class:"TAG-4"}] },
-                        { type: "사외이사", name: "이상규", appointDate: "2023.03 선임", tags: [{text: "유통·관련산업", class:""}, {text: "리스크관리·ESG", class:""}, {text: "독립성", class:"TAG-2"}, {text: "내부거래위", class:"TAG-3"}, {text: "사외이사추천위", class:"TAG-3"}, {text: "ESG위원회", class:"TAG-3"}] },
-                        { type: "사외이사", name: "윤윤진", appointDate: "2025.03 선임", tags: [{text: "IT·디지털", class:""}, {text: "리스크관리·ESG", class:""}, {text: "독립성", class:""}, {text: "사외이사추천위", class:"TAG-3"}, {text: "감사위원회", class:"TAG-3"}, {text: "ESG위원회", class:"TAG-3"}, {text: "보상위원회", class:"TAG-3"}] }
+                        { type: "사외이사", name: "안동현", appointDate: "2026.03 선임", tags: [{text: "재무·회계", class:"TAG-2"}, {text: "금융", class:"TAG-2"}, {text: "리스크관리·ESG", class:"TAG-2"}, {text: "독립성", class:"TAG-2"}] },
+                        { type: "사외이사", name: "이상규", appointDate: "2023.03 선임", tags: [{text: "유통·관련산업", class:""}, {text: "리스크관리·ESG", class:""}, {text: "독립성", class:"TAG-2"}, {text: "경영·리더십", class:"TAG-2"}, {text: "내부거래위", class:"TAG-3"}, {text: "사외이사추천위", class:"TAG-3"}, {text: "ESG위", class:"TAG-3"}] },
+                        { type: "사외이사", name: "윤윤진", appointDate: "2025.03 선임", tags: [{text: "IT", class:""}, {text: "리스크관리·ESG", class:""}, {text: "독립성", class:""}, {text: "감사위", class:"TAG-3"}, {text: "ESG위", class:"TAG-3"}, {text: "보상위", class:"TAG-3"}, {text: "내부거래위", class:"TAG-3"}] }
                     ],
                     BoardSectionTitle3: "이사회 내 위원회 현황",
                     ChairLabel: "위원장", MemberLabel: "위원",
                     CommitteeTable: [
                         { title: "내부거래위원회", chair: "이상규", members: "이성락, 윤윤진" },
-                        { title: "사외이사후보추천위원회", chair: "이상규", members: "이성락, 이인무" },
-                        { title: "감사위원회", chair: "이인무", members: "이성락, 윤윤진" },
-                        { title: "ESG위원회", chair: "이인무", members: "이상규, 윤윤진, 홍순기" },
-                        { title: "보상위원회", chair: "윤윤진", members: "이인무, 오진석" }
+                        { title: "사외이사후보추천위원회", chair: "안동현", members: "이성락, 이상규" },
+                        { title: "감사위원회", chair: "안동현", members: "이성락, 윤윤진" },
+                        { title: "ESG위원회", chair: "이상규", members: "윤윤진, 안동현, 홍순기" },
+                        { title: "보상위원회", chair: "윤윤진", members: "안동현, 오진석" }
                     ],
                     // [Tab 2] BoardDownloadBtns 데이터 부분
                     BoardDownloadBtns: [
                         { 
                             text: "(주)GS리테일 정관", 
-                            link: require("@/assets/download/gsr_incorporation_1.pdf").default || require("@/assets/download/gsr_incorporation_1.pdf") 
+                            link: "https://hpimg.gsretail.com/_ui/desktop/common/docs/gsr_incorporation.pdf" 
                         },
                         { 
                             text: "이사회 규정", 
-                            link: require("@/assets/download/boardCharter_2.pdf").default || require("@/assets/download/boardCharter_2.pdf") 
+                            link: "https://hpimg.gsretail.com/_ui/desktop/common/docs/boardCharter.pdf" 
                         },
                         { 
                             text: "감사위원회 규정", 
-                            link: require("@/assets/download/directors_audit_committee_3.pdf").default || require("@/assets/download/directors_audit_committee_3.pdf") 
+                            link: "https://hpimg.gsretail.com/_ui/desktop/common/docs/directors_audit_committee.pdf" 
                         },
                         { 
                             text: "사외이사후보 추천위원회 규정", 
-                            link: require("@/assets/download/Outside_Director_4.pdf").default || require("@/assets/download/Outside_Director_4.pdf") 
+                            link: "https://hpimg.gsretail.com/_ui/desktop/common/docs/%EC%82%AC%EC%99%B8%EC%9D%B4%EC%82%AC%ED%9B%84%EB%B3%B4%20%EC%B6%94%EC%B2%9C%EC%9C%84%EC%9B%90%ED%9A%8C%20%EA%B7%9C%EC%A0%95.pdf"
                         },
                         { 
                             text: "내부거래위원회 운영규정", 
-                            link: require("@/assets/download/internal_trade_commission_rule_5.pdf").default || require("@/assets/download/internal_trade_commission_rule_5.pdf") 
+                            link: "https://hpimg.gsretail.com/_ui/desktop/common/docs/internal_trade_commission_rule.pdf"
                         },
                         { 
                             text: "ESG 위원회 운영 규정", 
-                            link: require("@/assets/download/ESG_6.pdf").default || require("@/assets/download/ESG_6.pdf") 
+                            link: "https://hpimg.gsretail.com/_ui/desktop/common/docs/ESG%20%EC%9C%84%EC%9B%90%ED%9A%8C%20%EC%9A%B4%EC%98%81%20%EA%B7%9C%EC%A0%95.pdf"
                         },
                         { 
                             text: "보상위원회 운영규정", 
-                            link: require("@/assets/download/compensation_7.pdf").default || require("@/assets/download/compensation_7.pdf") 
+                            link: "https://hpimg.gsretail.com/_ui/desktop/common/docs/%EB%B3%B4%EC%83%81%EC%9C%84%EC%9B%90%ED%9A%8C%20%EC%9A%B4%EC%98%81%20%EA%B7%9C%EC%A0%95.pdf"
                         }
                     ],
                     SelectMsg: "위원회 선택", SelectOptions: [{value:'', label:'위원회 선택'}, {value:'0', label:'감사위원회'}, {value:'1', label:'ESG위원회'}],

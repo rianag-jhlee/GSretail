@@ -191,8 +191,8 @@
                                             <div class="info_item">
                                                 <span>{{ mall.contact.snsLabel || t.Labels.sns }}</span>
                                                 <span class="val">{{ mall.contact.instatxt }}</span>
-                                                <a v-if="mall.contact.insta" :href="mall.contact.insta" target="_blank" class="btn_sns small ico_insta"> 
-                                                </a>
+                                                <!-- 26.06.10 Del 이종환 <a v-if="mall.contact.insta" :href="mall.contact.insta" target="_blank" class="btn_sns small ico_insta"> 
+                                                </a> -->
                                             </div>
                                             <div v-if="mall.contact.blog" class="info_item">
                                                 <span>{{ t.Labels.blog }}</span>
@@ -627,19 +627,12 @@ export default {
 .main_title { margin-bottom:16px; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.3; }
 .sub_title { color: #161616; font-size: 2.4rem; font-weight: 700; }
 .text_list { margin-top: 16px; }
-<<<<<<< HEAD
-.text_item {width: 100%; margin-bottom:16px; padding-left: 24px; color: #161616; font-size: 2.8rem; line-height: 1.6; text-indent: -24px;}
-.mall_content .content_title {margin-top:40px; margin-bottom:100px; color: #161616; font-size: 40px; font-weight: 700; line-height: 1.3; }
-.mall_content .content_title a {margin-left:16px; font-size:18px; font-weight:500; display:inline-flex; gap:8px; align-items:center;}
-.mall_content .content_title a::before {content: ''; display: inline-block; width:24px; height:24px; background:url('@/assets/images/common/icon_set_20.png') -454px -112px no-repeat;}
-=======
 .text_item {width: 100%; margin-bottom:16px; padding-left: 24px; color: #161616; font-size: 28px; line-height: 1.6; text-indent: -24px;}
 .mall_content .visual_img { width: 100%; height: 340px; background-color: #D9D9D9; border-radius: 12px; overflow: hidden; }
 .mall_content .visual_img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .mall_content .main_title {margin-bottom:100px; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; }
 .mall_content .main_title a {margin-left:16px; font-size:18px; font-weight:500; display:inline-flex; gap:8px; align-items:center;}
 .mall_content .main_title a::before {content: ''; display: inline-block; width:24px; height:24px; background:url('@/assets/images/common/icon_set_20.png') -454px -112px no-repeat;}
->>>>>>> 49dbfa0b1f0fa012493edcc1e6864064509c6b7e
 .mall-type-2 .text_item, .mall-type-3 .text_item {padding-left:0px; color:#90909A; font-size:18px; text-indent:0px;}
 .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b) {color:#161616; font-size:24px; font-weight:700;}
 .lease_condition_section { width: 100%; margin-top: 120px; }
@@ -659,7 +652,7 @@ export default {
 .mall_content .contact_left strong {margin-bottom:24px; }
 .mall_content .contact_left .info_item {width:100%; padding-top:16px; padding-bottom:16px; border-bottom:1px solid #E5E5E9; position:relative; display: flex; flex-direction:column; align-items:flex-start; gap:4px;}
 
-.btn_sns.ico_insta {width:24px; height:24px; background:url('@/assets/images/common/icon_set_16.png') -855px -14px no-repeat; position:absolute; top:50%; right:0; display:inline-flex; transform:translateY(-50%);}
+/* 26.06.10 Del 이종환 .btn_sns.ico_insta {width:24px; height:24px; background:url('@/assets/images/common/icon_set_16.png') -855px -14px no-repeat; position:absolute; top:50%; right:0; display:inline-flex; transform:translateY(-50%);}*/
 .mall_content .contact_left .info_item span {color:#161616; font-size:18px; font-weight:700;}
 .mall_content .contact_left .info_item .val {color:#67676F; font-size:18px; font-weight:400; line-height:1.4; display:flex; flex-direction:column; gap:4px;}
 .mall_content .contact_left .info_item a {color:#67676F; font-size:18px; font-weight:400; line-height:1.4;}
@@ -700,11 +693,8 @@ export default {
     .text_box .desc_box { margin-top: 24px; }
     .text_box .summary, .text_box .desc { font-size: 1.8rem; line-height: 1.5; }
     .detail_content { margin-top: 60px; }
-<<<<<<< HEAD
     .content_title {font-size: 2.8rem !important; }
-=======
     .main_title {font-size: 28px; }
->>>>>>> 49dbfa0b1f0fa012493edcc1e6864064509c6b7e
     .sub_title { font-size: 20px; }
     .text_item { font-size: 1.8rem; line-height: 1.6; }
     .map_area { height: 400px; }

@@ -469,7 +469,7 @@ h5 {font-size:1.8rem;}
 
     .search_filter_area {margin-top:32px; gap:8px;}
     .search_filter_area .search_wrap {width:100%; flex-direction:column;}
-    .search_filter_area .search_wrap .select, .search_filter_area .search_wrap .input_search_wrap {width:100%;}
+    .search_filter_area .search_wrap .select, .search_filter_area .search_wrap .input_search_wrap {width:100%; min-width:initial;}
 
     .search_filter_area .filter_group, .search_filter_area .filter_group .select {width:100%;}
 

@@ -89,6 +89,8 @@ export default {
 .card_desc { margin-bottom: 20px; font-size: 18px; color: #67676F; line-height: 140%; }
 .modal_bottom { margin-top: 60px; }
 .modal_bottom .btn_big { min-width: 134px; }
+
+img {max-width:100%;}
 @media screen and (max-width: 1024px) {
     .card_grid {margin-bottom:20px; flex-direction:column;}
     .modal_bottom { display: none }
