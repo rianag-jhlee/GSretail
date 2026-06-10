@@ -1,12 +1,42 @@
 <template>
-    <div class="modal_cont gsrbr0601">
+    <div class="modal_cont pre_order_modal">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
-            준비중
+            <section class="gs25_section">
+                <h3 class="sec_tit">{{ t.Gs25SectionTitle }}</h3>
+                <div class="brand_intro">
+                    <!-- <h4>GS25</h4> -->
+                    <div class="brand_intro_txt">
+                        <p>{{ t.Gs25Title }}</p>
+                        <p class="txt_sub">{{ t.Gs25Desc }}</p>
+                    </div>
+                </div>
+
+                <div class="tip_box">
+                    <ul>
+                        <li v-for="(item, idx) in t.Gs25Categories" :key="idx">
+                            <figure><img :src="item.img" :alt="item.name"></figure>
+                            <p>{{ item.name }}</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="notice_bar">
+                    <p>{{ t.NoticeTxt }}</p>
+                </div>
+            </section>
+
+            <section class="gsfresh_section">
+                <h3 class="sec_tit">{{ t.FreshSectionTitle }}</h3>
+                <div class="brand_intro">
+                    <p>{{ t.FreshTitle }}</p>
+                    <p class="txt_sub" v-html="t.FreshDesc"></p>
+                </div>
+            </section>
         </div>
     </div>
 </template>
@@ -15,17 +45,34 @@
 import modal from "@/assets/js/modal";
 
 export default {
-    name: "gsrbr0404",
-    components: {
+    name: "gsrbr0406",
+    props: {
+        lang: { type: String, default: "ko" }
     },
     data() {
         return {
             langData: {
                 ko: {
-                    MainTitle: "사전예약"
+                    closeLabel: "닫기",
+                    MainTitle: "사전예약",
+                    Gs25SectionTitle: "GS25 사전예약",
+                    Gs25Title: "도시락, 샌드위치 등 먹거리 상품을 원하는 시간, 원하는 점포에서 찾아가기",
+                    Gs25Desc: "우리동네GS 앱에서 품절 걱정없이, 원하는 상품을 미리 주문하고 원하는 날짜에 수령할 수 있는 사전예약 서비스.",
+                    Gs25Categories: [
+                        { name: "도시락/김밥", img: require("@/assets/images/dummy/gsrbr0401_food1.png") },
+                        { name: "햄버거", img: require("@/assets/images/dummy/gsrbr0401_food2.png") },
+                        { name: "샌드위치", img: require("@/assets/images/dummy/gsrbr0401_food3.png") },
+                        { name: "조리면", img: require("@/assets/images/dummy/gsrbr0401_food4.png") },
+                        { name: "요리/반찬", img: require("@/assets/images/dummy/gsrbr0401_food5.png") },
+                        { name: "샐러드", img: require("@/assets/images/dummy/gsrbr0401_food6.png") }
+                    ],
+                    NoticeTxt: "사전예약 기획전 택배 배송 행사도 발 빠르게 확인하세요!",
+                    FreshSectionTitle: "GS THE FRESH 사전예약",
+                    FreshTitle: "사전예약으로 더 알뜰한 장보기!",
+                    FreshDesc: "가장 맛있는 제철 상품과 대용량 상품까지, 이제 사전예약으로 선점하고 편하게 수령하세요.<br />원하는 날짜에 집 앞 매장에서 직접 받거나, 택배로 집 앞까지 편리하게 만나보실 수 있습니다."
                 },
                 en: {
-                    MainTitle: "Pre-Order"
+                 
                 }
             }
         };
@@ -33,62 +80,49 @@ export default {
     computed: {
         t() { return this.langData[this.lang] || this.langData.ko; }
     },
-    mounted() {
-        this.checkMobile();
-        window.addEventListener('resize', this.checkMobile);
-    },
-    beforeUnmount() {
-        window.removeEventListener('resize', this.checkMobile);
-    },
     methods: {
-        checkMobile() { this.isMobile = window.innerWidth < 768; },
-        closeModal(event) { modal.close(event.currentTarget); },
+        closeModal(event) { modal.close(event.currentTarget); }
     }
 };
 </script>
 
 <style scoped>
-.modal_header { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding-bottom: 40px; font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 40px; color: #161616; border-bottom: 0; }
-.modal_content { flex: 1; overflow-y: auto; padding-right: 10px; }
-h3 { margin-bottom: 60px; color: #161616; font-size: 32px; font-weight: 700; }
-h4 {margin-top:24px; color:#161616; font-size:32px; font-weight:700;}
-span {margin:8px 0; color:#161616; font-size:18px; font-weight:700; display:block;}
-span img {max-width:100%; object-fit:cover;}
-section > p {display:flex; flex-direction:column; gap:4px;}
-:deep(.gs25_event p em), :deep(.gsfresh_event p em) { color:#67676F; font-size:16px;}
-.event_icon_list { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; margin-top: 40px; margin-bottom: 24px; list-style: none; }
-.event_icon_list li { display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: calc((100% - (8px * 3)) / 4); }
-.event_icon_list li .img_box { display: flex; align-items: center; justify-content: center; width: 100%; height: 142px; padding: 20px; background: #F8F8F8; border-radius: 12px; text-align: center; }
-.event_icon_list li .img_box img { max-width: 64px; max-height: 64px; object-fit: contain; }
-.event_icon_list li em { margin-top: 8px; color: #67676F; font-size: 16px; font-style: normal; }
-/* i {padding:16px 16px 16px 42px; color:#161616; font-size:16px; background:#F8F8F8; border-radius:6px; display:flex; position:relative;}
-i::before {content:''; width:20px; height:20px; background:red; position:absolute; top:50%; left:16px; display:inline-block; transform:translateY(-50%);} */
-section.gsfresh_event {margin-top:80px;}
+section { padding-bottom: 80px; }
+.sec_tit {color: #161616; font-size: 3.2rem; line-height:1.3; letter-spacing:-0.01em; font-weight: 700; }
+.brand_intro { margin-bottom: 40px; }
+.brand_intro > h4 { margin-bottom: 8px; color: #161616; font-size: 3.2rem; font-weight: 700; }
+.brand_intro_txt > p { color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; }
+.brand_intro_txt > p.txt_sub { margin-top: 8px; color: #67676f; font-weight: 400; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.gsfresh_section .brand_intro > p { margin-top:8px;color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; }
+.gsfresh_section .brand_intro > p.txt_sub { margin-top: 8px; color: #67676f; font-weight: 400; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+.gs25_section .tip_box { padding-bottom: 0; }
+.tip_box ul { display: flex; gap: 8px; list-style: none; }
+.tip_box li { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.tip_box li > figure { display: flex; align-items: center; justify-content: center; width: 100%; height: 136px; background: #f8f8f8; border-radius: 12px; overflow: hidden; }
+.tip_box li > figure > img {  object-fit: contain; }
+.tip_box li > p { color: #67676f; font-size: 1.6rem; line-height: 1.5; text-align: center; }
+.notice_bar { margin-top:24px; padding: 16px; background: #f8f8f8; border-radius: 6px; display: flex; align-items: center; gap: 6px; }
+.notice_bar > p { margin: 0; padding-left: 26px; color: #161616; font-size: 1.6rem; position: relative; }
+.notice_bar > p::before { content: ""; display: inline-block; position: absolute; top: 0; left: 0; width: 20px; height: 20px; background: url("@/assets/images/common/icon_set_20.png") -935px -24px no-repeat; }
+.gsfresh_section { padding-bottom: 0; }
+.gsfresh_section .brand_intro { margin-bottom: 0; }
 
-/* Notice Bar */
-.notice_bar { padding: 16px !important; background: #f8f8f8; border-radius: 6px;  display: flex; align-items: center; gap: 6px;}
-.notice_bar p {margin-bottom:0px !important; padding-left: 26px; color: #161616; font-size: 16px; position: relative; }
-.notice_bar p::before { content: ''; display: inline-block; position: absolute; top: 0; left: 0; width: 20px; height: 20px; background: url('@/assets/images/common/icon_set_20.png') -935px -24px no-repeat; }
-
-/* 반응형 */
 
 @media screen and (max-width: 1024px) {
-    .modal_header { font-size: 32px; }
-    /* 태블릿 환경 필요시 2열 조정 */
-    .event_icon_list li { width: calc((100% - 8px) / 2); }
+    .tip_box ul { flex-wrap: wrap; gap: 20px 8px; }
+    .tip_box li { flex: 0 0 calc(33.33% - 8px); }
 }
 
-@media screen and (max-width: 767px) {
-    .modal_header { font-size:18px; }
-    /* 모바일 2열 유지 및 간격 조정 */
-    .event_icon_list { gap: 12px 8px; }
-    .event_icon_list li { width: calc((100% - 8px) / 2); }
-    .event_icon_list li .img_box {padding: 33px; }
-    h4 {margin-top:24px; color:#161616; font-size:24px; font-weight:700;}
-    span {margin:8px 0; color:#161616; font-size:18px; font-weight:700; display:block;}
-    span img {height:200px;}
-    :deep(.gs25_event p em), :deep(.gsfresh_event p em) {line-height:1.5;}
-    .notice_bar p {font-size:12px !important; font-weight:400 !important;}
-    .notice_bar p::before {top:-2px;}
+@media screen and (max-width: 768px) {
+    .gs25_section .brand_intro_txt > p:not(.txt_sub){ display: none; }
+    section { padding-bottom: 60px; }
+    .sec_tit { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0;}
+    .brand_intro > h4 { font-size: 2.4rem; }
+    .tip_box ul { gap: 20px 8px; }
+    .tip_box li { flex: 0 0 calc(50% - 4px); }
+    .notice_bar > p { padding-left: 22px; font-size: 1.2rem; font-weight: 400; line-height: 1.2; }
+    .notice_bar > p::before { content: ""; width: 16px; height: 16px; background: url("@/assets/images/common/icon_set_16.png") -736px -14px no-repeat; }
+    .gsfresh_section { padding-bottom: 80px; }
+    .gsfresh_section .sec_tit{font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
 }
 </style>
