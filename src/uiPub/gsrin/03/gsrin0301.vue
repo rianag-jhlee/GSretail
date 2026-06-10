@@ -27,7 +27,7 @@
                     </div>
 
                     <section class="tab_content gsrin0301" v-if="CTabIdx === 0">
-                        <h4 class="content_title">{{ t.Tabs1[0].item }}</h4>
+                        <h4 class="content_title">{{ t.ContentTitle[0].item }}</h4> <!-- 26.06.10 edit 정다희 : Tabs1[0] 탭명과 분리, ContentTitle[0] 공고 제목 -->
                         
                         <div class="search_filter_area">
                             <div class="filter_group">
@@ -82,7 +82,7 @@
                         </div>
                         <!-- gsrin030201 -->
                         <section class="tab_content gsrin030201" v-if="InnerTabIdx === 0">
-                            <h4 class="content_title">{{ t.InnerTabs[0].item }}</h4>
+                            <h4 class="content_title">{{ t.ContentTitle[1].item }}</h4> <!-- 26.06.10 edit 정다희 : InnerTabs[0] 탭명과 분리, ContentTitle[1] 분기보고서 제목 -->
                             <div class="search_filter_area">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
@@ -111,7 +111,7 @@
                         </section>
                         <!-- gsrin030202 -->
                         <section class="tab_content gsrin030202" v-if="InnerTabIdx === 1">
-                            <h4 class="content_title">{{ t.InnerTabs[1].item }}</h4>
+                            <h4 class="content_title">{{ t.ContentTitle[2].item }}</h4> <!-- 26.06.10 edit 정다희 : InnerTabs[1] 탭명과 분리, ContentTitle[2] 사업보고서 제목 -->
                             <div class="search_filter_area">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
@@ -140,7 +140,7 @@
                         </section>
                         <!-- gsrin030203 -->
                         <section class="tab_content gsrin030203" v-if="InnerTabIdx === 2">
-                            <h4 class="content_title">{{ t.InnerTabs[2].item }}</h4>
+                            <h4 class="content_title">{{ t.ContentTitle[3].item }}</h4> <!-- 26.06.10 edit 정다희 : InnerTabs[2] 탭명과 분리, ContentTitle[3] 감사보고서 제목 -->
                             <div class="search_filter_area">
                                 <Search v-model="searchData" :search_opt="t.options" @search="handleSearch" />
                             </div>
@@ -186,8 +186,13 @@
                                 {{ t.GeneralText }}
                             </Buttons>
                         </div>
-                       
-
+                        <!-- 26.06.10 add 정다희 : 공시정보(CTabIdx 2) 목록 영역 제목 + 주주보호 정책 버튼 -->
+                        <h4 class="content_title">
+                            <span>{{ t.ContentTitle[4].item }}</span><!-- ContentTitle[4] 주주총회 공시 -->
+                            <Buttons class="btn_big primary btn_icon_arrow after" btn-class="btn_icon"><!-- ShareholderPolicyBtn 주주보호 정책 및 관련 제도 정보 -->
+                                {{ t.ShareholderPolicyBtn }}
+                            </Buttons>
+                        </h4>
                         <div class="search_filter_area">
                             <div class="filter_group">
                                 <span class="filter_label">{{ t.YearSelectLabel }}</span>
@@ -265,7 +270,10 @@ export default {
                     MainTitle: "공시정보",
                     MainsubTitle: "Disclosure Information",
                     Tabs1: [{ item: "공고" }, { item: "사업/감사보고서" }, { item: "공시정보" }],
-                    InnerTabs: [{ item: "분/반기보고서" }, { item: "사업보고서" }, { item: "감사보고서" }],
+                    // 26.06.10 edit 정다희 : 상단 Tabs1·InnerTabs 탭명과 분리된 콘텐츠 영역 제목 ([0]공고 [1]분기보고서 [2]사업보고서 [3]감사보고서 [4]주주총회 공시)
+                    ContentTitle: [{ item: "공고" }, { item: "분기보고서" }, { item: "사업보고서" }, { item: "감사보고서" }, { item: "주주총회 공시" }],
+                    ShareholderPolicyBtn: "주주보호 정책 및 관련 제도 정보", // 26.06.10 add 정다희 : 공시정보 탭 목록 우측 버튼 문구
+                    InnerTabs: [{ item: "분/반기보고서" }, { item: "사업보고서" }, { item: "감사보고서" }], // 26.06.10 edit 정다희 : 사업/감사보고서(CTabIdx 1) 하위 탭 명칭
                     DartDesc: "GS리테일의 공시자료는 금융감독원의 DART(전자공시시스템)를 통해 제공하고 있습니다.",
                     DartBtnText: "공시자료 바로가기",
                     GeneralText: "공시자료 바로가기",
@@ -301,6 +309,9 @@ export default {
                     MainTitle: "Disclosure",
                     MainsubTitle: "Disclosure Information",
                     Tabs1: [{ item: "Announcement"/* 260604 번역 */ }, { item: "Business/Audit Report"/* 260604 번역 */ }, { item: "Disclosure" }],
+                    // 26.06.10 edit 정다희 : 상단 Tabs1·InnerTabs 탭명과 분리된 콘텐츠 영역 제목 ([0]~[4] ko ContentTitle 대응)
+                    ContentTitle: [{ item: "Announcement"/* 260604 번역 */ }, { item: "Business Report"/* 260604 번역 */ }, { item: "Audit Report"/* 260604 번역 */ }, { item: "Shareholders' Meeting Disclosure"/* 260604 번역 */ }, { item: "Disclosure" }],
+                    ShareholderPolicyBtn: "Shareholder Protection Policy and Related Systems"/* 260604 번역 */, // 26.06.10 add 정다희 : 공시정보 탭 목록 우측 버튼 문구
                     InnerTabs: [{ item: "Quarterly/Semi-annual Report"/* 260604 번역 */ }, { item: "Business Report"/* 260604 번역 */ }, { item: "Audit Report"/* 260604 번역 */ }],
                     DartDesc: "GS Retail's disclosure materials are provided through the Financial Supervisory Service's DART (Data Analysis, Retrieval and Transfer System)."/* 260604 번역 */,
                     DartBtnText: "Go to Disclosure Materials"/* 260604 번역 */,
