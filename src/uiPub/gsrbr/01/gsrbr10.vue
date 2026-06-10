@@ -25,7 +25,7 @@
                         <li>
                             <div class="btn_group">
                                 <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a>
-                                <a href="youtube.com/watch?v=YeVhN9bCeP4&feature=youtu.be" class="btn_sns btn_sns_yt" target="_blank"></a><!-- 26.06.10 Add 이종환 -->
+                                <a href="https://www.youtube.com/watch?v=YeVhN9bCeP4&feature=youtu.be" class="btn_sns btn_sns_yt" target="_blank"></a><!-- 26.06.10 Add 이종환 -->
                             </div>
                         </li>
                     </ul>
