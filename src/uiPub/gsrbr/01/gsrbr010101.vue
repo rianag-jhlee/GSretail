@@ -568,8 +568,8 @@
             <!-- 3depth 탭 네비 -->
             <nav class="service_tab_wrap" ref="serviceWrapEl" role="tablist" aria-label="생활 서비스">
                 <div class="service_tab_list" ref="serviceListEl" :style="serviceTransformStyle"
-                    @touchstart.passive="serviceOnTouchStart" @touchmove.passive="serviceOnTouchMove"
-                    @mousedown="serviceOnMouseDown">
+                     @touchstart.passive="serviceOnTouchStart" @touchmove.passive="serviceOnTouchMove"
+                     @mousedown="serviceOnMouseDown">
                     <button
                         v-for="(tab, i) in store.tabs[0].serviceTabs"
                         :key="i"
@@ -595,13 +595,13 @@
 
                 <!-- 26.05.15 Edit 이종환 : 그 외 패널: 기본 구조를 각 패널로 다시 분리 -->
                 <template v-if="i === 0">
-                        <figure v-if="tab.hero" class="brand_panel_bg">
-                            <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
-                        </figure>
-                        <header v-if="tab.title" class="brand_panel_title">
-                            <h2 v-html="tab.title"></h2>
-                            <p v-if="tab.desc" v-html="tab.desc" />
-                        </header>
+                    <figure v-if="tab.hero" class="brand_panel_bg">
+                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                    </figure>
+                    <header v-if="tab.title" class="brand_panel_title">
+                        <h2 v-html="tab.title"></h2>
+                        <p v-if="tab.desc" v-html="tab.desc" />
+                    </header>
                     <section>
                         <div class="usage_group">
                             <h4 class="usage_group_title is_compact">{{ tab.sub_item.title }}</h4>
@@ -618,13 +618,13 @@
                 </template>
 
                 <template v-else-if="i === 1">
-                        <figure v-if="tab.hero" class="brand_panel_bg">
-                            <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
-                        </figure>
-                        <header v-if="tab.title" class="brand_panel_title">
-                            <h2 v-html="tab.title"></h2>
-                            <p v-if="tab.desc" v-html="tab.desc" />
-                        </header>
+                    <figure v-if="tab.hero" class="brand_panel_bg">
+                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                    </figure>
+                    <header v-if="tab.title" class="brand_panel_title">
+                        <h2 v-html="tab.title"></h2>
+                        <p v-if="tab.desc" v-html="tab.desc" />
+                    </header>
                     <section>
                         <div v-if="tab.table" class="com_table_wrap">
                             <table class="com_table">
@@ -862,13 +862,14 @@
                             <button type="button" class="gift_brand_nav gift_brand_prev" :aria-label="t.common.prevAria">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </button>
+                             <!-- 26.06.11 edit 정다희 : gift_brand_slider Swiper space-between 20px -->
                             <Swiper
                                 :modules="[Pagination, Navigation]"
                                 :slides-per-view="3"
                                 :slides-per-group="3"
-                                :space-between="14"
+                                :space-between="20"
                                 :breakpoints="{
-                                    769: { slidesPerView: 6, slidesPerGroup: 6, spaceBetween: 12 }
+                                    769: { slidesPerView: 6, slidesPerGroup: 6, spaceBetween: 20 }
                                 }"
                                 :speed="700"
                                 :observer="true"
@@ -1182,8 +1183,8 @@
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel delivery_panel">
             <nav class="service_tab_wrap" ref="deliveryWrapEl" role="tablist" aria-label="택배&픽업 서비스">
                 <div class="service_tab_list" ref="deliveryListEl" :style="deliveryTransformStyle"
-                    @touchstart.passive="deliveryOnTouchStart" @touchmove.passive="deliveryOnTouchMove"
-                    @mousedown="deliveryOnMouseDown">
+                     @touchstart.passive="deliveryOnTouchStart" @touchmove.passive="deliveryOnTouchMove"
+                     @mousedown="deliveryOnMouseDown">
                     <button
                         v-for="(tab, i) in store.tabs[1].serviceTabs"
                         :key="i"
@@ -1353,7 +1354,7 @@
                         <div v-if="tab.partnerBtnText" class="link_wrap">
                             <a :href="tab.partnerBtnText_link" target="_blank" class="btn_big primary btn_icon_arrow after">{{ tab.partnerBtnText }}</a>
                         </div>
-                            <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 -->     
+                        <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 --> <!-- 택배&픽업 -->     
                         <!-- <section v-if="tab.shoppingItems && tab.shoppingItems.length" class="sec_delivery_shopping">
                             <header class="sec_header">
 
@@ -1467,8 +1468,8 @@
             <!-- 3depth 탭 네비 -->
             <nav class="service_tab_wrap" ref="winwinWrapEl" role="tablist" aria-label="운영지원제도">
                 <div class="service_tab_list" ref="winwinListEl" :style="winwinTransformStyle"
-                    @touchstart.passive="winwinOnTouchStart" @touchmove.passive="winwinOnTouchMove"
-                    @mousedown="winwinOnMouseDown">
+                     @touchstart.passive="winwinOnTouchStart" @touchmove.passive="winwinOnTouchMove"
+                     @mousedown="winwinOnMouseDown">
                     <button
                         v-for="(tab, i) in winwin.tabs[0].serviceTabs"
                         :key="i"
@@ -1535,7 +1536,8 @@
                 <FeatureCards v-if="sec.type === 'feature' && sec.items && sec.items.length" :items="sec.items" type="icon" class="milbox_feature" />
                 <ul v-if="sec.type === 'imgcard' && sec.items && sec.items.length" class="imgcard_list">
                     <li v-for="(item, ii) in sec.items" :key="ii" class="imgcard_item">
-                        <figure class="imgcard_img" :style="item.bgColor ? { backgroundColor: item.bgColor } : null">
+                        <!-- 26.06.10 add 정다희 : 밀박스25/스낵바 카드별 이미지 분기 (item.img) -->
+                        <figure class="imgcard_img">
                             <img v-if="item.img" :src="item.img" :alt="item.name" />
                         </figure>
                         <div class="imgcard_body">
@@ -1664,12 +1666,16 @@ import imgHero10Mo from "@/assets/images/sub/gsrbr010101/brand_bg_11_mo.png";
 import imgHero11 from "@/assets/images/sub/gsrbr010101/brand_bg_11-1.png"; 
 import imgHero11Mo from "@/assets/images/sub/gsrbr010101/brand_bg_11-1_mo.png"; 
 import imgHero11_1 from "@/assets/images/sub/gsrbr010101/brand_bg_11-2.png"; 
-import imgHero12 from "@/assets/images/sub/gsrbr010101/brand_bg_13.png"; 
+import imgHero12 from "@/assets/images/sub/gsrbr010101/brand_bg_13.png";
+/* 26.06.10 add 정다희 : 밀박스25/스낵바 카드 이미지 */
+import imgMilbox01 from "@/assets/images/sub/gsrbr010101/milbox_01.png";
+import imgMilbox02 from "@/assets/images/sub/gsrbr010101/milbox_02.png";
 import imgPopCard1 from "@/assets/images/dummy/pop_card_01.png";
+/* 26.06.10 edit 정다희 : pop_card_02 PC/MO 이미지 경로 변경 (sub/gsrbr010101) */
 import imgPopCard2 from "@/assets/images/sub/gsrbr010101/pop_card_02.png";
 import imgPopCard3 from "@/assets/images/dummy/pop_card_03.png";
 import imgPopCard1Mo from "@/assets/images/dummy/mo/pop_card_01_mo.png";
-import imgPopCard2Mo from "@/assets/images/dummy/mo/pop_card_02_mo.png";
+import imgPopCard2Mo from "@/assets/images/sub/gsrbr010101/pop_card_02_mo.png";
 import imgPopCard3Mo from "@/assets/images/dummy/mo/pop_card_03_mo.png";
 import imgPoint1 from "@/assets/images/dummy/point_01.png";
 import imgPoint2 from "@/assets/images/dummy/point_02.png"; 
@@ -2227,6 +2233,7 @@ const langData = {
                                     ],
                                 },
                                 {
+                                    // 26.06.10 edit 정다희 : pop_card_02 이미지 경로 변경 적용
                                     img:      imgPopCard2,
                                     imgMo:    imgPopCard2Mo,
                                     name:     "멤버십 팝카드",
@@ -3020,7 +3027,8 @@ const langData = {
                     title: "서비스 소개",
                     items: [
                         {
-                            bgColor: "#C7C7C7",
+                            // 26.06.10 add 정다희 : bgColor삭제, 이미지 추가
+                            img: imgMilbox01,
                             name: "밀박스25",
                             desc: "GS25에서 제공하는 기업/단체 대상 간편식 정기 제공 서비스 입니다.<br class=\"p_br\" />주식부터 디저트, 음료까지 매일 새로운 구성으로 운영 됩니다.<br class=\"p_br\" />HACCP 인증, 개별 포장으로 위생적이고 맛있는 한끼를 제공합니다.",
                             link: "https://www.mealbox25.com/mealbox25-introduce",
@@ -3035,7 +3043,8 @@ const langData = {
                             },
                         },
                         {
-                            bgColor: "#C7C7C7",
+                             // 26.06.10 add 정다희 : bgColor삭제, 이미지 추가
+                            img: imgMilbox02,
                             name: "스낵바",
                             desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다. 사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.",
                             // 26.06.08 add 정다희 : 스낵바 info_card 추천 문구 분기
@@ -3561,6 +3570,7 @@ const langData = {
                                     ],
                                 },
                                 {
+                                    // 26.06.10 edit 정다희 : pop_card_02 이미지 경로 변경 적용
                                     img:      imgPopCard2,
                                     imgMo:    imgPopCard2Mo,
                                     name:     "Membership POP Card",
@@ -4354,7 +4364,8 @@ const langData = {
                     title: "About the service"/* 260604 번역 */,
                     items: [
                         {
-                            img: require("@/assets/images/sub/gsrbr010101/img_mealbox.png"),
+                            // 26.06.10 add 정다희 : 이미지적용 
+                            img: imgMilbox01,
                             name: "Meal Box 25",
                             desc: "A regular meal delivery service for corporations and groups, provided by GS25. Featuring a fresh new lineup every day, from staple dishes to desserts and beverages. With HACCP certification and individual packaging, every meal is hygienic and delicious.",
                             link: "https://www.mealbox25.com/mealbox25-introduce",
@@ -4369,7 +4380,8 @@ const langData = {
                             },
                         },
                         {
-                            img: require("@/assets/images/sub/gsrbr010101/img_snackbar.png"),
+                             // 26.06.10 add 정다희 :  이미지 적용
+                            img: imgMilbox02,
                             name: "Snack bar"/* 260604 번역 */,
                             desc: "A curated snack service that regularly delivers on-trend GS25 products to corporations and groups. Bring GS25 to your office and elevate your employee welfare benefits.",
                             // 26.06.08 add 정다희 : 스낵바 info_card 추천 문구 분기
@@ -4858,7 +4870,8 @@ function goBack() {
 .brand_panel_title > h2 :deep(a:before) {width:24px; height:24px; margin-right:8px; background:url('@/assets/images/common/icon_set_24.png') -1168px -56px no-repeat; content:''; display:block;}
 
 .brand_panel_title > p { margin: 0; color: #161618; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_header { padding-bottom: 40px; }
+/* 26.06.11 edit 정다희 : sec_header·feature_card·step_bullets 텍스트 font-weight 700 */
+.sec_header { padding-bottom: 40px; font-weight: 700;}
 .sec_header > h3 { margin: 0; color: #161618; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_header > h3 + p,
 .sec_header > h3 + .sec_header_desc,
@@ -4877,6 +4890,7 @@ function goBack() {
 
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
 .brand_panel_title > p{font-weight: 700;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;}
+:deep(.feature_card_desc), :deep(.step_bullets > li){font-weight:700;}
 @media (max-width: 1024px) {
 .sec_brand_visual{height:200vh}
 .sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
@@ -4942,7 +4956,7 @@ button { background-color: #fff }
 .diff_card > figure > img { height: 100%; object-fit: cover }
 .diff_card > div { min-height: 200px; padding: 32px; background-color: #f8f8f8 }
 .diff_card > div > h3 { margin: 0 0 16px; color: #161618; font-size: 2.8rem; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em }
-.diff_card > div > p { margin: 0; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em }
+.diff_card > div > p { margin: 0; color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em } /* 26.06.11 edit 정다희 : diff_card 설명 font-weight 700 */
 .cafe25_card_list { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, calc((100% - 40px) / 3)); gap: 20px }
 .cafe25_card_list > li { min-width: 0; overflow: hidden }
 .cafe25_card_list > li > div { width: 100% }
@@ -4957,18 +4971,18 @@ button { background-color: #fff }
 .tbl_mo th { padding: 18px 24px; background-color: #F8F8F8 }
 .tbl_mo th > span { color: #161618; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0 }
 .tbl_mo td { padding: 16px 20px }
-.tbl_mo td > span { color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.24; letter-spacing: 0 }
+.tbl_mo td > span { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0 } /* 26.06.11 edit 정다희 : tbl_mo td 텍스트 font-weight 700 */
 .tbl_mo td .flag_icon { display: inline-block; vertical-align: middle; margin-right: 8px }
 .tbl_mo tr:first-child th, .tbl_mo tr:first-child td { border-top: 1px solid #E5E5E9 }
 .cafe25_table_pagination, .gopizza_table_pagination { margin-top: 20px; display: flex; justify-content: center; gap: 10px }
 .cafe25_table_pagination :deep(.swiper-pagination-bullet), .gopizza_table_pagination :deep(.swiper-pagination-bullet) { width: 6px; height: 6px; background-color: #D7D7DF; border-radius: 50%; opacity: 1; cursor: pointer; display: block }
 .cafe25_table_pagination :deep(.swiper-pagination-bullet-active), .gopizza_table_pagination :deep(.swiper-pagination-bullet-active) { background-color: #161616 }
 .cafe25_table th, .cafe25_table td { height: 56px; padding: 0 24px; border-bottom: 1px solid #e5e5e9; vertical-align: middle; white-space: nowrap }
-.cafe25_table th > span, .cafe25_table td > span { color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em }
+.cafe25_table th > span, .cafe25_table td > span { color: #161618; font-size: 1.8rem; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em } /* 26.06.11 edit 정다희 : cafe25_table th/td 텍스트 font-weight 700 */
 .cafe25_table th:first-child, .cafe25_table td:first-child { border-left: 0 }
 .cafe25_table th:last-child, .cafe25_table td:last-child { border-right: 0 }
 .cafe25_table th { background-color: #f8f8f8; border-top: 0 }
-.cafe25_table th > span { font-weight: 600 }
+.cafe25_table th > span { font-weight: 700 } /* 26.06.11 edit 정다희 : cafe25_table th font-weight 700 */
 
 .cafe25_table > tbody > tr > td > .flag_icon { width: 24px; height: 24px; margin-right: 8px; border-radius: 50%; vertical-align: middle; display: inline-block; object-fit: cover }
 .img_grid { margin-top: 120px; padding: 0; display: grid; grid-template-columns: repeat(2, calc((100% - 20px) / 2)); gap: 20px }
@@ -4989,17 +5003,19 @@ button { background-color: #fff }
 .gopizza_menu_tag + .gopizza_menu_tag::before { content: ""; width: 1px; height: 8px; margin-right: 8px; background-color: #d7d7df; display: inline-block }
 .com_table_wrap { overflow-x: auto }
 .com_table { width: 100%; border-collapse: collapse; border-top: 1px solid #e5e5e9 }
-.com_table th, .com_table td { padding: 18px 24px; color: #161618; font-size: 1.8rem; line-height: 1.6; letter-spacing: -0.01em; border-bottom: 1px solid #e5e5e9; vertical-align: middle }
-.com_table td { font-weight: 400; text-align: left }
-.com_table thead th { padding: 11px 13px; font-weight: 600; background-color: #f8f8f8 }
+/* 26.06.11 edit 정다희 : com_table th/td/thead th 텍스트 font-weight 700 통일 */
+.com_table th, .com_table td { padding: 18px 24px; color: #161618; font-size: 1.8rem; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em; border-bottom: 1px solid #e5e5e9; vertical-align: middle }
+.com_table td { text-align: left }
+.com_table thead th { padding: 11px 13px; font-weight: 700; background-color: #f8f8f8 }
 .com_table tbody th { font-weight: 700; background-color: #f8f8f8; text-align: left; white-space: normal; word-break: keep-all; padding-top: 18px; padding-bottom: 18px; vertical-align: middle }
 .com_table_col thead th { text-align: center }
 .com_table_col td { padding: 15px 24px; text-align: center }
 
 .gopizza_menu_name { display: flex; align-items: center; gap: 6px }
-.gopizza_badge_best { padding: 2px 6px; color: #fb4516; font-size: 1.1rem; font-weight: 600; font-style: normal; letter-spacing: -0.02em; background-color: #ffe9e3; border-radius: 4px }
+.gopizza_badge_best { padding: 2px 6px; color: #fb4516; font-size: 1.1rem; font-weight: 700; font-style: normal; letter-spacing: -0.02em; background-color: #ffe9e3; border-radius: 4px } /* 26.06.11 edit 정다희 : com_table 내 BEST 뱃지 font-weight 700 */
 .diff_bottom_row { margin-top:40px;display: flex; gap: 32px }
 .diff_bottom_row > .diff_qr_row { flex: 1 }
+:deep(.diff_qr_row > div > strong + p ){font-weight:700;} /* 26.06.11 edit 정다희 : diff_qr_row 설명 font-weight 700 */
 .gopizza_link { min-width: 0; display: flex; align-items: center; flex: 1; gap: 20px; text-decoration: none }
 .gopizza_link > figure { width: 90px; height: 90px; margin: 0; padding: 8px; background-color: #fff; border: 1px solid #e5e5e9; border-radius: 10px; flex-shrink: 0; display: none }
 .gopizza_link > figure > img { width: 100%; display: block }
@@ -5022,7 +5038,7 @@ button { background-color: #fff }
 
 .info_card { padding: 32px; background-color: #f8f8f8; border-radius: 12px }
 .info_card strong { margin-bottom:8px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
-.info_card span { font-size: 1.8rem; line-height: 1.4 }
+.info_card span { font-size: 1.8rem; line-height: 1.4; font-weight:700; }
 .info_card > p {margin-top:14px; color: #67676f; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em }
 .info_card > strong + p {margin-top:0; margin-bottom:32px;}
 .sinsen_flow_img { width: 100%; max-height:372px; margin-top: 24px; display: block; border-radius: 10px }
@@ -5035,10 +5051,11 @@ button { background-color: #fff }
 .sinsen_advantage_card > header > strong > em { margin-right: 8px; color: #107af2; font-size: 1.8rem; font-style: normal; font-weight: 700; line-height: 1.5; }
 .sinsen_advantage_card > header > p { margin: 0 0 16px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
 .sinsen_compare_table { width: 100%; margin: 0; border-top: 1px solid #e5e5e9; border-collapse: collapse; table-layout: fixed; }
-.sinsen_compare_table th, .sinsen_compare_table td { padding: 18px 24px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; text-align: center; border-bottom: 1px solid #e5e5e9; vertical-align: middle; }
+/* 26.06.11 edit 정다희 : sinsen_compare_table th/td/tbody th font-weight 700 통일 */
+.sinsen_compare_table th, .sinsen_compare_table td { padding: 18px 24px; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.4; text-align: center; border-bottom: 1px solid #e5e5e9; vertical-align: middle; }
 .sinsen_compare_table td {padding:30px 24px;}
 .sinsen_compare_table thead th { font-weight: 700; background-color: #fff; }
-.sinsen_compare_table tbody th { font-weight: 400; background-color: #fff; }
+.sinsen_compare_table tbody th { font-weight: 700; background-color: #fff; }
 /* .sinsen_compare_table th:first-child, .sinsen_compare_table td:first-child { width: 200px; } */
 .sinsen_advantage_items { width: 100%; margin: 0; padding: 0; list-style: none; display: flex; gap: 16px; }
 .sinsen_advantage_items > li { min-width: 0; flex: 1; }
@@ -5113,9 +5130,9 @@ button { background-color: #fff }
 .usim_use :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-260px -103px;}
 .usim_use :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-20px -103px;}
 .usim_use :deep(.step_list .step_item:nth-of-type(4) span) {background-position:-340px -103px;}
-.hi_pass :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-180px -20px;}
-.hi_pass :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-180px -103px;}
-.hi_pass :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-420px -103px;}
+.hi_pass :deep(.step_list .step_item:nth-of-type(1) >  span) {background-position:-180px -20px;}
+.hi_pass :deep(.step_list .step_item:nth-of-type(2) > span) {background-position:-180px -103px;}
+.hi_pass :deep(.step_list .step_item:nth-of-type(3) >span) {background-position:-420px -103px;}
 .sec_unpaid_method :deep(.step_list .step_item:nth-of-type(1) span) {background-position:-500px -103px;}
 .sec_unpaid_method :deep(.step_list .step_item:nth-of-type(2) span) {background-position:-580px -103px;}
 .sec_unpaid_method :deep(.step_list .step_item:nth-of-type(3) span) {background-position:-660px -103px;}
@@ -5221,7 +5238,7 @@ button { background-color: #fff }
   .sec_header .sec_cite { margin-top: 4px; margin-left: 0; display: block; }
   .brand_panel_bg { width: calc(100% + 40px);margin: 0 -20px 24px; border-radius: 0; }
   .brand_panel_title { padding: 0 0 64px; }
-  .brand_panel_bg > img { max-height: 240px;  }
+  .brand_panel_bg > img { max-height: 245px;  }
   .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display:block;}
 
   .brand_panel_title > h2 :deep(a) {margin-top:16px; margin-left:0; font-size:1.4rem; font-weight:500; line-height:140%;}
@@ -5276,7 +5293,8 @@ button { background-color: #fff }
   .diff_card > figure { height:220px }
   
   .cafe25_table th, .cafe25_table td { padding: 16px 24px }
-  .cafe25_table th > span, .cafe25_table td > span { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
+  /* 26.06.11 edit 정다희 : cafe25_table MO 텍스트 font-weight 700 */
+  .cafe25_table th > span, .cafe25_table td > span { font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em }
   .cafe25_table th > span { font-weight: 700 }
   .diff_card > figure > img{width:100%;}
   
@@ -5286,7 +5304,7 @@ button { background-color: #fff }
   .gopizza_menu_title { gap:4px; flex-direction: column; align-items: flex-start }
   .gopizza_menu_title > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
 
-  .com_table th, .com_table td { font-size: 1.6rem; line-height: 1.24 }
+  .com_table th, .com_table td { font-size: 1.6rem; font-weight: 700; line-height: 1.24 } /* 26.06.11 edit 정다희 : com_table MO font-weight 700 */
   .com_table td { padding: 14px 20px; font-size: 1.4rem; letter-spacing: 0.01em }
   .com_table thead th { padding: 14px 0 }
   .com_table tbody th { padding: 14px 24px }
@@ -5309,10 +5327,11 @@ button { background-color: #fff }
   .sinsen_advantage_card > header > strong { margin: 0 0 16px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
   .sinsen_advantage_card > header > strong > em { font-size: 1.8rem; line-height: 1.5; }
   .sinsen_advantage_card > header > p { margin: 0 0 16px; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
-  .sinsen_compare_table th, .sinsen_compare_table td { padding: 22px 5px; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+  /* 26.06.11 edit 정다희 : sinsen_compare_table MO font-weight 700 */
+  .sinsen_compare_table th, .sinsen_compare_table td { padding: 22px 5px; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
   .sinsen_compare_table td { padding: 25px 9px; }
   .sinsen_compare_table thead th { font-weight: 700; }
-  .sinsen_compare_table thead th:first-child { font-weight: 600; }
+  .sinsen_compare_table thead th:first-child { font-weight: 700; }
   .sinsen_compare_table th:first-child, .sinsen_compare_table td:first-child { width: 48px; }
   .sinsen_advantage_items { flex-direction: row; gap: 16px; }
   .sinsen_advantage_items > li > p { margin: 0 0 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
@@ -5325,7 +5344,7 @@ button { background-color: #fff }
 .pop_card_thumb { width: 100%; display: block }
 .pop_card_thumb img { width: auto; height: auto }
 .pop_card_body { padding-top: 24px; display: flex; flex-direction: column; flex: 1 }
-.pop_card_desc { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; white-space: pre-line }
+.pop_card_desc { color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; font-weight:700; white-space: pre-line } /* 26.06.11 edit 정다희 : pop_card_desc font-weight 700 */
 
 .pop_card_note { margin-top: 8px; color: #67676f; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.02em }
 .pop_card_note.is_warn { color: #f95823 }
@@ -5367,12 +5386,12 @@ button { background-color: #fff }
     
     .pop_card_desc { font-size: 1.4rem; line-height: 1.4 }
     
-    .pop_card_logos { padding-top: 0 }
-    .pop_sec_acc :deep(dd.acc_panel) { border-bottom: 1px solid #D7D7DF; }
+    .pop_card_logos { padding-top: 0; flex-wrap:nowrap;}
+    .pop_sec_acc :deep(dd.acc_panel) { padding: 0 32px; border-bottom: 1px solid #D7D7DF; }
 
     .pop_sec_acc :deep(.acc_panel_cont .pop_sec) { padding: 0 !important }
-    .pop_sec_acc :deep(.acc_panel_cont #pop-sec-1), .pop_sec_acc :deep(.acc_panel_cont #pop-sec-2) { padding: 12px 32px 24px !important }
-    .pop_sec_acc :deep(#pop-sec-0 > header) { padding: 12px 32px 24px }
+    .pop_sec_acc :deep(.acc_panel_cont #pop-sec-1), .pop_sec_acc :deep(.acc_panel_cont #pop-sec-2) { padding: 12px 0 24px !important }
+    .pop_sec_acc :deep(#pop-sec-0 > header) { padding: 12px 0 24px }
     .pop_sec_acc :deep(#pop-sec-0 > header > h3) { display: none }
     .pop_sec_acc :deep(.pop_sec:not(#pop-sec-0) > header), .pop_sec_acc :deep(.pop_sec > .usage_header > header) { display: none }
 }
@@ -5382,21 +5401,21 @@ button { background-color: #fff }
 
 @media (max-width: 768px) {
   .charging_service_list { display: none }
-  .charging_service_swiper { display: block; overflow: hidden; margin-top: 24px; padding: 0 32px }
-  .charging_service_swiper :deep(.swiper-slide) { width: 28vw !important; height: 28vw !important; flex: none }
+  .charging_service_swiper { width:calc(100% + 64px); margin:24px -32px 0; padding:0 32px; display: block; overflow: hidden; }
+  .charging_service_swiper :deep(.swiper-slide) { width: 29.333vw !important; height: 29.333vw !important; flex: none }
 }
 .charging_service_item { max-width: 220px; aspect-ratio: 1 / 1; border-radius: 12px; flex: 1; display: flex; align-items: center; justify-content: center; background: #F8F8F8 }
 @media (max-width: 768px) {
   .charging_service_item { max-width: none; width: 100%; height: 100%; aspect-ratio: unset }
 }
 .charging_service_item > img { max-width: 80%; max-height: 80%; width: auto; height: auto; display: block }
-.charging_service_note { margin-top: 16px; color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
+.charging_service_note { margin-top: 16px; color: #67676f; font-size: 1.6rem; line-height: 1.5; font-weight:700; letter-spacing: -0.01em } /* 26.06.11 edit 정다희 : charging_service_note font-weight 700 */
 @media (max-width: 768px) {
-  .charging_service_note { margin-top: 24px; margin-bottom: 8px; padding: 0 32px 24px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
+  .charging_service_note {  margin: 24px 0; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 }
 .charging_note_label { padding-right: 8px; color: #7c7c86; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em }
 @media (max-width: 768px) {
-  .charging_note_label { font-size: 1.4rem; line-height: 1.4; margin-top: 8px }
+  .charging_note_label { font-size: 1.6rem; line-height: 1.5; display:block; }
 }
 .usage_header { display: flex; align-items: center; gap: 20px; margin-bottom: 40px }
 @media (max-width: 768px) {
@@ -5420,7 +5439,8 @@ button { background-color: #fff }
 @media (max-width: 768px) {
   .usage_def_list > dd { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 }
-.usage_group .list_dotted > li { color: #67676f }
+/* 26.06.11 edit 정다희 : usage·list_dotted·caution 등 font-weight 700 */
+.usage_group .list_dotted > li { color: #67676f; font-weight:700;}
 .usage_group .list_dotted > li::before { background-color: #67676f }
 
 .explain + .retail_note {margin-top:8px;}
@@ -5435,7 +5455,8 @@ button { background-color: #fff }
 .pop_lnb > ul > li > button { width: 100%; min-height: 64px; padding: 17px 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; box-sizing: border-box; text-align: left }
 .pop_content { flex: 1; min-width: 0 }
 .list_caution { margin: 8px 0 0; padding: 0 }
-.list_caution > li { color: #161616; font-size: 1.8rem; line-height: 1.4; letter-spacing: -0.01em; color:#67676F }
+.list_caution > li { color: #161616; font-size: 1.8rem; font-weight:700; line-height: 1.4; letter-spacing: -0.01em; color:#67676F }
+:deep(.num_info_body .list_dotted > li > p){font-weight:700;}
 @media (max-width: 768px) {
   .list_caution > li { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
 }
@@ -5443,6 +5464,7 @@ button { background-color: #fff }
 .sec_note { margin: 8px 0 0; color: #f95823; font-size: 1.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.02em }
 .milbox_feature :deep(.feature_card_item) { min-height: 163px !important; max-width: 340px }
 @media (max-width: 768px) {
+   :deep(.feature_card_swiper){width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px;}
   .milbox_feature :deep(.feature_card_swiper .swiper-slide) { min-height: 171px; }
   .milbox_feature :deep(.feature_card_swiper .swiper-slide) > .feature_card_item { min-height: 171px; }
   .milbox_feature :deep(.feature_card_item) { min-height: 171px; max-width: 100%; }
@@ -5450,7 +5472,8 @@ button { background-color: #fff }
 .brand_panel_title .list_dotted { margin: 16px 0 0 }
 .brand_panel_title + section { padding-top: 0 }
 .brand_panel_title .list_dotted > li::before { background-color: #67676f }
-.brand_panel_title .list_dotted > li > p { color: #67676f }
+.list_dotted > li > p {font-weight:700; color:#161616;}
+.brand_panel_title .list_dotted > li > p { color: #67676f; font-weight:700;}
 .note_sub, .brand_panel_title .list_dotted > li > p.note_sub { color: #f95823 }
 .sec_unpaid_advantage :deep(.feature_card_item), .sec_mall_payment_advantage :deep(.feature_card_item) { min-height: 260px }
 .sec_delivery_caution :deep(.feature_card_item) { min-height: 211px }
@@ -5491,7 +5514,7 @@ button { background-color: #fff }
 .imgcard_img > img { width: 100%; height: 100%; object-fit: cover }
 .imgcard_body { padding: 32px 0; flex: 1 }
 .imgcard_body > h4 { margin-bottom: 16px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }
-.imgcard_body > p { color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; white-space: pre-line }
+.imgcard_body > p { color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; white-space: pre-line } /* 26.06.11 edit 정다희 : imgcard_body 설명 font-weight 700 */
 .imgcard_sublist { display: flex; flex-direction: column; gap: 8px }
 
 /* 26.05.15 Edit 이종환 : 아이콘 공통화 */
@@ -5499,38 +5522,41 @@ button { background-color: #fff }
 .imgcard_sublist > li:before { content: ""; width: 16px; height: 16px; background:url('@/assets/images/common/icon_bullet_checkmark.png') 0 0 no-repeat; border-radius: 50%; position: relative; top: 2px; flex-shrink: 0 }
 /* .imgcard_icon { width: 16px; height: 16px; background-color: #0059fe; border-radius: 50%; flex-shrink: 0 } */
 /* 26.05.15 Edit 이종환 : 아이콘 공통화 */
-
-.imgcard_sublist > li > span:last-child { color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4 }
+.imgcard_sublist > li > span{font-weight:700;}
+.imgcard_sublist > li > span:last-child { color: #161616; font-size: 1.8rem; line-height: 1.4 }
 .hipass_terminal_img > img { width: auto; max-width: 100%; height: auto; display: block }
 @media (max-width: 768px) {
   .hipass_terminal_img > img { width: 100% }
   .imgcard_list { flex-direction: column; gap:40px }
-  .imgcard_img { height: 220px }
+  .imgcard_img { height: 216px }
   .imgcard_body { padding: 24px 0 }
   .imgcard_body > h4 { margin-bottom:8px; font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0 }
   .imgcard_sublist > li > span:last-child { font-size: 1.6rem; line-height: 1.5; letter-spacing: 0 }
 }
 .usim_phone_list { margin: 0; padding: 0 }
 .usim_phone_list dt { margin-bottom:6px; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em }
-.usim_phone_list dd { margin-bottom: 32px; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0 }
+.usim_phone_list dd { margin-bottom: 32px; color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.4; letter-spacing: 0 } /* 26.06.11 edit 정다희 : usim_phone_list dd font-weight 700 */
 @media (max-width: 768px) {
   .usim_phone_list dt { margin-bottom:8px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0 }
   .usim_phone_list dd { margin-bottom:12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: 0 }
 }
 .usim_plan_table_wrap { overflow-x: auto }
 .usim_plan_table { width: 100%; min-width: 860px; border-collapse: collapse }
-.usim_plan_table th { padding: 14.5px 24px; background-color: #f8f8f8; border-right: none; border-bottom: 1px solid #e5e5e9; color: #161616; font-size: 1.8rem; font-weight: 600; line-height: 1.5; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: break-word; text-align: center; vertical-align: middle }
+/* 26.06.11 edit 정다희 : usim_plan_table th/td/할인 텍스트 font-weight 700 통일 */
+.usim_plan_table th { padding: 14.5px 24px; background-color: #f8f8f8; border-right: none; border-bottom: 1px solid #e5e5e9; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: break-word; text-align: center; vertical-align: middle }
 .usim_plan_table thead tr:nth-child(2) th { padding: 10.5px 24px }
 .usim_plan_table thead tr:nth-child(1) th:first-child, .usim_plan_table thead tr:nth-child(1) th[colspan="3"] { border-right: 1px solid #e5e5e9 }
 .usim_plan_table thead tr:nth-child(2) th:last-child { border-right: 1px solid #e5e5e9 }
-.usim_plan_table td { padding: 15px 24px; border-right: none; border-bottom: 1px solid #e5e5e9; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: break-word; text-align: center; vertical-align: middle }
+.usim_plan_table td { padding: 15px 24px; border-right: none; border-bottom: 1px solid #e5e5e9; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: break-word; text-align: center; vertical-align: middle }
 .usim_plan_table tbody td:first-child, .usim_plan_table tbody td:nth-child(4) { border-right: 1px solid #e5e5e9 }
-.usim_plan_data_sub { font-size: 1.4rem }
-.usim_plan_dc { color: #107af2; font-size: 1.4rem; font-style: normal; font-weight: 600 }
+.usim_plan_data_sub { font-size: 1.4rem; font-weight: 700 }
+.usim_plan_dc { color: #107af2; font-size: 1.4rem; font-style: normal; font-weight: 700 }
 @media (max-width: 768px) {
-  .usim_plan_table th, .usim_plan_table td { padding: 10px 8px; font-size: 1.3rem }
+  /* 26.06.11 edit 정다희 : usim_plan_table MO font-weight 700 */
+  .usim_plan_table th, .usim_plan_table td { padding: 10px 8px; font-size: 1.3rem; font-weight: 700 }
   .usim_plan_dc { font-size: 1.3rem }
 }
+.usage_group {font-weight:700;} /* 26.06.11 edit 정다희 : usage_group font-weight 700 */
 .usim_advantage_cards :deep(.feature_card_item) { min-height: 212px }
 .gift_advantage_cards :deep(.feature_card_item) { min-height: 271px }
 .gift_usage_wrap { display: flex; flex-direction: column; gap: 40px }
@@ -5541,7 +5567,7 @@ button { background-color: #fff }
     .gift_usage_wrap .gift_usage_group :deep(.step_list .step_item) {align-items:flex-start; flex-direction:row;}
     .gift_usage_wrap .gift_usage_group :deep(.step_list .step_item span),
     .usim_use :deep(.step_list .step_item span),
-    .hi_pass :deep(.step_list .step_item span),
+    .hi_pass :deep(.step_list .step_item > span),
     .sec_unpaid_method :deep(.step_list .step_item span),
     .sec_mall_payment_method :deep(.step_list .step_item span),
     .delivery_panel :deep(.step_list .step_item span) { background-color: transparent; background-image: url('@/assets/images/sub/icon_cont_32.png'); background-repeat: no-repeat; }
@@ -5555,10 +5581,11 @@ button { background-color: #fff }
 .gift_step_header { margin-bottom: 8px; display: flex; align-items: center; gap: 8px }
 .gift_step_num { color: #107af2; font-size: 2.4rem; font-weight: 600; font-style: normal; letter-spacing: -0.01em }
 .gift_step_title { color: #161616; font-size: 2.4rem; font-weight: 600; letter-spacing: -0.01em }
+.gift_step_desc{font-weight:700;} /* 26.06.11 edit 정다희 : gift_step_desc font-weight 700 */
 @media (max-width: 768px) {
   .gift_step_header { gap:6px; margin-bottom: 4px }
   .gift_step_title { font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
-  .gift_step_desc { padding-left:36px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
+  .gift_step_desc { padding-left:36px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em}
   .gift_step_num { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0 }
 }
 .gift_step_desc { margin: 0; padding-left: 38px; color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
@@ -5569,9 +5596,9 @@ button { background-color: #fff }
 .gift_brand_slider { position: relative; width: 100%; display: flex; align-items: center; gap: 16px }
 @media (max-width: 768px) {
   .brand_panel section.sec_gift_brand { padding-left: 0; padding-right:0 }
-  .brand_panel section.sec_gift_brand :deep(header) { padding: 0 20px }
+  /* .brand_panel section.sec_gift_brand :deep(header) { padding: 0 20px } */
 }
-.gift_brand_swiper { width: 100%; padding: 0 20px; overflow: hidden }
+.gift_brand_swiper { width: 100%;  overflow: hidden }
 @media (min-width: 769px) {
   .gift_brand_swiper { max-width: none; flex: 1; min-width: 0 }
 }
@@ -5686,17 +5713,19 @@ button { background-color: #fff }
   .gopizza_link > div { padding: 0 }
   .gopizza_link > div > strong { font-size: 1.6rem }
   .gopizza_link > div > strong:after { display:none }
-  .gopizza_link::after { content: ""; width: 16px; height: 16px; position: absolute; top: 50%; right: 16px; transform: translateY(-50%); background-color: #e5e5e9 }
+  .gopizza_link::after { content: ""; width: 16px; height: 16px; position: absolute; top: 50%; right: 16px; transform: translateY(-50%); background: url("@/assets/images/common/arrow_set_16.png") -56px -20px no-repeat; }
   .info_list > li { padding-bottom: 4px }
   .pop_lnb { display:none }
-  .pop_card_swiper { padding: 12px 32px 40px; overflow: hidden }
+  .pop_card_swiper {width: calc(100% + 64px); margin: 0 -32px; padding: 12px 32px 40px; overflow: hidden }
   .pop_card_swiper :deep(.swiper-slide) { width: 56vw !important; height: auto !important; flex: none }
   .logo_list { grid-template-columns: repeat(2, 1fr) }
   .gift_brand_card > img { width: 100%; height: auto; max-width: 100%; aspect-ratio: 106 / 165 }
   .gift_brand_card > figcaption { font-size: 1.2rem }
   .gift_purchase_wrap { flex-direction: column }
   .gift_purchase_img { width: 100% }
-  .gift_purchase_steps { width: 100% }
+  .gift_purchase_steps { width: 100%; padding:0; }
+  .gift_usage_wrap{margin-top:24px;}
+  .pop_wrap{width:calc(100% + 40px); margin:0 -20px;}
 }
 .tax_group_list { display: grid; grid-template-columns: 1fr }
 .tax_group_list > dd { margin: 0 0 40px }
@@ -5706,9 +5735,10 @@ button { background-color: #fff }
 }
 .tax_group_list .list_dotted > li + li { margin-top: 6px }
 .tax_group_list .list_dotted > li::before { background-color: #67676f }
-.tax_group_list .list_dotted > li p { color:#67676F }
+/* 26.06.11 edit 정다희 : tax_group·voucher 텍스트 font-weight 700 */
+.tax_group_list .list_dotted > li p { color:#67676F; font-weight:700; }
 .tax_group_subtitle { margin-bottom: 16px; font-size: 2.4rem; font-weight: 700; color: #161616; line-height: 1.35; letter-spacing: -0.01em }
-.tax_group_desc, .tax_group_list .list_dotted > li p { font-size: 1.8rem; color: #67676f; line-height: 1.4 }
+.tax_group_desc, .tax_group_list .list_dotted > li p { font-size: 1.8rem; font-weight:700; color: #67676f; line-height: 1.4 }
 @media (max-width: 768px) {
   .tax_group_desc, .tax_group_list .list_dotted > li p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
 }
@@ -5722,15 +5752,16 @@ button { background-color: #fff }
   .voucher_name { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
 }
 .voucher_tags { margin-bottom: 16px; letter-spacing: -0.01em; line-height: 1.4; display: flex; gap: 4px }
-.voucher_tag { padding: 2px 8px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; border-radius: 4px }
+.voucher_tag { padding: 2px 8px; font-size: 1.4rem; font-weight:700; line-height: 1.4; letter-spacing: -0.01em; border-radius: 4px }
 .tag_blue { background-color: #e7f2fe; color: #0d62c2 }
 .tag_green { background-color: #dff5ec; color: #0d6e46 }
 .tag_orange { background-color: #f9f2ea; color: #ca5028 }
-.voucher_desc { font-size: 1.6rem; color: #67676f; line-height: 1.5; letter-spacing: -0.01em }
+.voucher_desc { font-size: 1.6rem; font-weight:700; color: #67676f; line-height: 1.5; letter-spacing: -0.01em }
 @media (max-width: 768px) {
   .tax_group_subtitle { margin-bottom:12px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
   .brand_panel section.sec_voucher { padding: 0 !important }
-  .brand_panel section.sec_voucher header { padding: 0 20px }
+  /* .brand_panel section.sec_voucher header { padding: 0 20px } */
+  .voucher_swiper{width:calc(100% + 40px); margin:24px -20px 0; padding:0 20px;}
   .voucher_swiper .swiper-slide { width: 69.33vw }
 }
 .link_wrap { margin-top: 64px; display: flex; justify-content: center }
