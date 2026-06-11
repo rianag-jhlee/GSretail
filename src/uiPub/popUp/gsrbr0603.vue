@@ -161,7 +161,7 @@ export default {
 .store_item + .store_item {border-top: 1px solid #e5e5e9; }
 .store_item.active { background-color: #f8f9fb; }
 .store_name { font-size: 24px; font-weight: 700; display: block; margin-bottom: 12px; cursor: pointer; display:flex; align-items:center;}
-.store_name::after { content: ''; width: 20px; height: 20px; margin-left: 8px; background:url('@/assets/images/common/icon_set_20.png') -324px -25px no-repeat; display: inline-block; vertical-align: middle; }
+/* 26.06.10 Del 이종환 .store_name::after { content: ''; width: 20px; height: 20px; margin-left: 8px; background:url('@/assets/images/common/icon_set_20.png') -324px -25px no-repeat; display: inline-block; vertical-align: middle; }*/
 .info_details { display: grid; grid-template-columns: 70px 1fr; gap: 8px 12px; font-size: 15px; }
 .info_details dt { color: #67676f; }
 .info_details dd { color: #161616; }

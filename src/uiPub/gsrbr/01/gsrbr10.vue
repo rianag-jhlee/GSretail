@@ -23,7 +23,10 @@
                             <p>{{ t.SubContent_2 }}</p>
                         </li>
                         <li>
-                            <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a>
+                            <div class="btn_group">
+                                <a :href="t.HopageLink" class="btn_website" target="_blank">{{ t.HopageText }}</a>
+                                <a href="https://www.youtube.com/watch?v=YeVhN9bCeP4&feature=youtu.be" class="btn_sns btn_sns_yt" target="_blank"></a><!-- 26.06.10 Add 이종환 -->
+                            </div>
                         </li>
                     </ul>
                     <!-- 26.06.08 add 정다희 : bi_box 추가-->
@@ -145,6 +148,8 @@ export default {
 .body_wrap .cont_area .cont_inner ul {margin-bottom:64px; display:flex; justify-content:space-between; align-items:flex-end;}
 .body_wrap .cont_area .cont_inner ul li p {color:#161616; font-size:24px; font-weight:600; line-height:1.;}
 .body_wrap .cont_area .cont_inner ul li a {color:#161616; font-size:18px; display:flex; align-items:center;}
+
+.btn_group {display:flex; align-items:center; gap:24px;}
 
 /* 26.06.08 add 정다희 : bi_box 추가*/
 .body_wrap .cont_area .cont_inner .bi_box { padding: 56px 64px; background: #fff; border-radius: 12px; }

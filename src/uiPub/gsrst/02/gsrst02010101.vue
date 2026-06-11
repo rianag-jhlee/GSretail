@@ -54,7 +54,7 @@
                             <source media="(max-width: 768px)" srcset="@/assets/images/dummy/mo/gsrst02010101_04_mo.png" />
                             <img src="@/assets/images/dummy/gsrst02010101_04.png" :alt="t.brandBannerImageAlt">
                         </picture>
-                        <Buttons type="button" btn-class="btn_icon_arrow btn_mid after border">{{ t.brandMoreButton }}</Buttons>
+                        <Buttons type="button" btn-class="btn_icon_arrow btn_mid after border" @click="setTab(1)">{{ t.brandMoreButton }}</Buttons><!-- 26.06.10 Edit 이종환 : click 추가 -->
                     </div>
                 </section>
                 <section class="sec_band">
@@ -1670,6 +1670,7 @@ const props = defineProps({
         default: "ko",
     },
 });
+/* //26.06.10 Add 이종환 : 탭이동 및 스크롤 top 기능 추가 */
 
 /* ── 탭 상태 (activeD1 / activeD2 / activeD3) ──
  * D1: 0=알아보기 · 1=준비하기 · 2=추천점포 · 3=상담신청 · 4=가맹계약(미구현)
@@ -1691,6 +1692,16 @@ const isCompetitiveTab = computed(() => activeD1.value === 0 && activeD2.value =
 const conceptStoreSpaceBetween = computed(() => (isMobileView.value ? 10 : 20));
 const productHitSwiperInsts = ref([]);
 let productHitRefreshFrame = 0;
+
+/* 26.06.10 Add 이종환 : 탭이동 및 스크롤 top 기능 추가 */
+const setTab = (index) => {
+  activeD2.value = index
+
+  window.scrollTo({
+    top: 0
+  })
+}
+/* //26.06.10 Add 이종환 : 탭이동 및 스크롤 top 기능 추가 */
 
 /* [D1=0 D2=1] 메가히트 상품 Swiper — 모바일에서 슬라이드 폭·위치 재계산 */
 function refreshProductHitSwipers() {

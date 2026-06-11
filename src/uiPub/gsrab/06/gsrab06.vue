@@ -1,6 +1,6 @@
 <template>
     <div class="main-container">
-        <div class="title_wrap ac">
+        <div class="title_wrap top_visual"><!-- 26.06.10 Edit 이종환 : top_visual 클래스 추가 -->
             <h2 class="page_title">{{ t.MainTitle }}</h2>
         </div>
         <div class="cont_inner">

@@ -172,8 +172,8 @@ export default {
         };
 
         onMounted(() => {
-            const header = document.getElementById("header");
-            header?.classList.add("head_black");
+            // const header = document.getElementById("header");
+            // header?.classList.add("head_black");
         });
 
         return { isGuide, lang, setLang, searchData, currentPage, tabIdx, t, handleSearch, onPageChange, onTabChange };
