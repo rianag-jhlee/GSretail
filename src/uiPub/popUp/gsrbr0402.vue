@@ -63,7 +63,7 @@ export default {
                 ko: {
                     MainTitle: "와인25플러스",
                     IntroTitle: "내 손 안의 주류 플랫폼, <br/>와인25플러스",
-                    IntroDesc: "와인, 양주, 맥주, 전통/기타주류, 페어링물(안주류)<br/>원하는 주류를 원하는 날짜에, 원하는 매장에서 예약, 수령할 수 있는 서비스 (전국 GS25 편의점, GS THE FRESH 수퍼)",
+                    IntroDesc: "와인, 양주, 맥주, 전통/기타주류, 페어링물(안주류)<br />원하는 주류를 원하는 날짜에, 원하는 매장에서 예약, 수령할 수 있는 서비스 (전국 GS25 편의점, GS THE FRESH 수퍼)",
                     IntroNotice: "*일부 매장은 와인25플러스 서비스를 제공하지 않을 수 있습니다.",
                     Features: [
                         { img: require("@/assets/images/dummy/gsrbr0402_1.png"), text: "<span>5,000여종</span>의<br/>다양한 주류" },
@@ -123,44 +123,36 @@ export default {
 </script>
 
 <style scoped>
-/* CSS 선언 규칙: Layout -> Box Model -> Background -> Typography -> Others */
-
-/* Modal Basic */
-.modal_header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 40px; color: #161616; font-size: 40px; font-weight: 700; border-bottom:0 !important; }
-.modal_content { flex: 1; overflow-y: auto; }
-
 /* Intro Section */
 .intro_section { padding-bottom: 80px; }
 .title_area { display: flex; flex-direction: column; gap: 16px; padding-bottom: 40px; }
-.title_area h3 { color: #161616; font-size: 32px; font-weight: 700; }
+.title_area h3 { color: #161616; font-size: 3.2rem; font-weight: 700; }
 :deep(.title_area) h3 br {display:none; }
 .desc_group { display: flex; flex-direction: column; gap: 8px; }
 .main_desc { color: #161616; font-size: 1.8rem; line-height: 1.4; }
-.sub_notice { color: #fb6432; font-size: 14px; }
+.sub_notice { color: #fb6432; font-size: 1.4rem; }
 
 /* Feature List (3 Column) */
 .feature_list { display: flex; gap: 8px; list-style: none; }
 .feature_list li { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.img_box { overflow: hidden; width: 100%; height: 280px; border-radius: 12px; }
-.img_box.bg_01 { background-color: #f8f8f8; }
-.img_box.bg_02 { background-color: #f0e9e2; }
-.img_box.bg_03 { background-color: #eee; }
-.img_box img { width: 100%; height: 100%; object-fit: cover; }
-.feature_txt { color: #67676f; font-size: 16px; text-align: center; line-height: 1.5; }
+.img_box { overflow: hidden; width: 100%; height:auto; border-radius: 12px; }
+
+.img_box img { width: 100%; height: 100%; object-fit: cover; display: block;}
+.feature_txt { color: #67676f; font-size: 1.6rem; text-align: center; line-height: 1.5; }
 :deep(.feature_txt span) { font-weight: 700; }
 
 /* Guide Section */
 .guide_section { padding-bottom: 40px; }
 .section_tit { padding-bottom: 40px; }
-.section_tit h4 { margin-bottom: 8px; color: #161616; font-size: 24px; font-weight: 700; }
-.section_tit p { color: #161616; font-size: 16px; }
+.section_tit h4 { margin-bottom: 8px; color: #161616; font-size: 2.4rem; font-weight: 700; }
+.section_tit p { color: #161616; font-size: 1.6rem; }
 
 /* How-to Grid (PC 3x2) */
 .how_to_grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; list-style: none; }
 .how_to_grid li { display: flex; flex-direction: column; gap: 40px; padding: 32px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; }
 .card_tit { display: flex; flex-direction: column; gap: 6px; }
-.card_tit .num { color: #107af2; font-size: 16px; font-weight: 700; }
-.card_tit strong { color: #161616; font-size: 16px; font-weight: 700; line-height: 1.3; }
+.card_tit .num { color: #107af2; font-size: 1.6rem; font-weight: 700; }
+.card_tit strong { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.3; }
 .step_img { position: relative; width: 100%; height: 280px; margin: 0; }
 .step_img img { width: 100%; height: 100%; object-fit: contain; }
 .gradient { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; background: linear-gradient(180deg, rgba(248, 248, 248, 0) 0%, #f8f8f8 100%); }
@@ -172,14 +164,16 @@ export default {
     .how_to_grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media screen and (max-width: 767px) {
-    .modal_header { font-size: 1.8rem; padding-bottom: 24px; }
-    .title_area h3 { font-size: 24px; line-height:1.3;}
+@media screen and (max-width: 768px) {
+    .main_desc{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    .intro_section{padding-bottom:140px;}
+    .title_area h3 { font-size: 2.4rem; line-height:1.3;}
     :deep(.title_area) h3 br {display:block; }
     .feature_list { flex-direction: column; gap:20px; }
     .img_box { height:auto; }
     .how_to_grid { grid-template-columns: 1fr; }
     .step_img { height: 280px; }
-    :deep(.main_desc br) {display:none;}
+    .sub_notice{font-size:1.2rem;}
+    /* :deep(.main_desc br) {display:none;} */
 }
 </style>
