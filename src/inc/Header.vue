@@ -12,24 +12,28 @@
 
             <nav id="gnb_nav">
                 <ul class="depth1">
-                    <li v-for="item1 in chunkedMenuList" :key="item1.title" @focusin="setFocus($event)"
+                    <!-- 26.06.12 Edit 정다희 : chunkedMenuList → menuList 변경 (depth2 3개씩 묶기 로직 삭제) -->
+                    <li v-for="item1 in menuList" :key="item1.title" @focusin="setFocus($event)"
                         @focusout="removeFocus($event)" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
 
                         <!-- <a :href="getLink(item1)" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a> -->
                         <!-- 26.06.01 Edit 이종환 : 모바일에서 depth1에 하위메뉴가 있으면 링크 없애고 하위메뉴 펼침닫힘 기능 -->
+                        <!-- 26.06.12 Edit 정다희 : chunkedChildren → children 변경 -->
                         <a
-                            :href="!isDesktop() && item1.chunkedChildren?.length
+                            :href="!isDesktop() && item1.children?.length
                                 ? '#'
                                 : getLink(item1)"
                             :target="item1.blank ? '_blank' : null"
-                            @click="!isDesktop() && item1.chunkedChildren?.length ? toggleMenu($event) : null"
+                            @click="!isDesktop() && item1.children?.length ? toggleMenu($event) : null"
                         >
                             {{ item1.title }}
                         </a>
 
-                        <div class="depth2_wrap" v-if="item1.chunkedChildren && item1.chunkedChildren.length">
-                            <ul class="depth2" v-for="(group, idx) in item1.chunkedChildren" :key="idx">
-                                <li v-for="item2 in group" :key="item2.title">
+                        <!-- 26.06.12 Edit 정다희 : depth2_wrap을 a 밖 li 형제로 분리 (a 중첩 방지) -->
+                        <!-- 26.06.12 Edit 정다희 : depth2_wrap 내 ul.depth2 단일 구조 (children 직접 순회) -->
+                        <div class="depth2_wrap" v-if="item1.children && item1.children.length">
+                            <ul class="depth2">
+                                <li v-for="item2 in item1.children" :key="item2.title">
                                     <!-- 3Depth 미노출로 span 제거 <span v-if="item2.children && item2.children.length">{{ item2.title }}</span> -->
                                     <a :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{
                                         item2.title }}</a>
@@ -43,6 +47,21 @@
                                 </li>
                             </ul>
                         </div>
+
+                        <!-- 26.06.12 delete 정다희 : depth2 3개씩 묶기 로직 삭제
+                        <div class="depth2_wrap" v-if="item1.chunkedChildren && item1.chunkedChildren.length">
+                            <ul class="depth2" v-for="(group, idx) in item1.chunkedChildren" :key="idx">
+                                <li v-for="item2 in group" :key="item2.title">
+                                    <a :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{ item2.title }}</a>
+                                    <ul class="depth3" v-if="item2.children && item2.children.length">
+                                        <li v-for="item3 in item2.children" :key="item3.title">
+                                            <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{ item3.title }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        -->
                     </li>
                 </ul>
             </nav>
@@ -122,12 +141,24 @@ export default {
         const isDesktop = () => windowWidth.value > 768;
         /* //26.06.01 Add 이종환 : 반응형으로 리사이징 isDesktop 체크 */
 
+        // 26.06.12 Add 정다희 : 2depth 풀폭 패널 — 활성 1depth li 왼쪽 정렬 (Figma 878:4160, --menu-left)
+        const setDepth2Position = (li) => {
+            const depth2 = li.querySelector(".depth2_wrap");
+            if (depth2) depth2.style.setProperty("--menu-left", `${li.getBoundingClientRect().left}px`);
+        };
+        // 26.06.12 Add 정다희 : 열린 메뉴 전체 좌표 재계산 (리사이즈·스크롤·초기 로드 시)
+        const updateOpenDepth2Position = () => {
+            document.querySelectorAll("#gnb_nav ul.depth1 > li.is-open").forEach(setDepth2Position);
+        };
+
         // 기존 hover/focus 기능
         const handleMouseEnter = (e) => {
             // 768px 이하(모바일)이면 로직 실행 안 함
             if (!isDesktop()) return;
 
-            e.currentTarget.classList.add("is-open");
+            const li = e.currentTarget;
+            li.classList.add("is-open");
+            setDepth2Position(li); // 26.06.12 Add 정다희 : 호버 시 2depth 패널 --menu-left 설정
             const header = document.getElementById("header");
             if (header) header.classList.add('add_bg');
         }
@@ -158,22 +189,29 @@ export default {
             }
         }
 
+        // 26.06.12 Edit 정다희 : 키보드 focusin — closeTimer로 focusout/focusin 순서 깜빡임 방지 + 2depth 좌표 설정
         const setFocus = (e) => {
             const li = e.currentTarget;
+            const FOCUS_DELAY = 150; // focusout 직후 activeElement 이동 대기 (BreadCrumb.vue 동일 패턴)
             if (li.closeTimer) clearTimeout(li.closeTimer);
             li.closeTimer = setTimeout(() => {
-                if (li.contains(document.activeElement)) li.classList.add("is-open");
+                if (li.contains(document.activeElement)) {
+                    li.classList.add("is-open");
+                    setDepth2Position(li); // Tab 포커스로 열 때도 --menu-left 정렬
+                }
                 li.closeTimer = null;
-            }, 150);
+            }, FOCUS_DELAY);
         };
 
+        // 26.06.12 Edit 정다희 : 키보드 focusout — li 밖으로 포커스가 나갔을 때만 is-open 제거
         const removeFocus = (e) => {
             const li = e.currentTarget;
+            const FOCUS_DELAY = 150;
             if (li.closeTimer) clearTimeout(li.closeTimer);
             li.closeTimer = setTimeout(() => {
                 if (!li.contains(document.activeElement)) li.classList.remove("is-open");
                 li.closeTimer = null;
-            }, 150);
+            }, FOCUS_DELAY);
         };
 
         // language change for publish
@@ -254,8 +292,13 @@ export default {
             }
 
             lastScrollY = currentScrollY;
+
+            // 26.06.12 Add 정다희 : 스크롤 후에도 열린 2depth 패널 좌표 유지
+            if (window.innerWidth > 768) updateOpenDepth2Position();
         };
 
+        // 26.06.12 delete 정다희 : depth2 3개씩 묶기 로직 삭제
+        /*
         // 2depth 아이템을 3개씩 나누는 함수
         const chunkArray = (array, size) => {
             const result = [];
@@ -278,6 +321,7 @@ export default {
                 return item;
             });
         });
+        */
 
         /* mo 전체메뉴 펼침/닫힘 */
         const mo_menuToggle = () => {
@@ -337,6 +381,9 @@ export default {
                 }
             }
 
+            // 26.06.12 Add 정다희 : 리사이즈 시 열린 2depth 패널 좌표 재계산
+            if (width > 768) updateOpenDepth2Position();
+
             // 이전 답변에서 드린 header hide 로직 호출 (필요 시)
             // handleScroll(); 
         };
@@ -351,6 +398,11 @@ export default {
             window.addEventListener("scroll", handleScroll);
             window.addEventListener("resize", handleResize);
             handleResize(); // 초기 로드 시 1회 실행
+
+            // 26.06.12 Add 정다희 : 폰트/레이아웃 로드 후 2depth 좌표 보정
+            if (window.innerWidth > 768) {
+                setTimeout(updateOpenDepth2Position, 100);
+            }
 
             // ✅ 복제된 요소의 클릭 이벤트를 처리하기 위한 이벤트 위임
             const gnbNav = document.getElementById("gnb_nav");
@@ -421,7 +473,8 @@ export default {
             currentLang,
 
             toggleMenu,
-            chunkedMenuList, // 템플릿에서 사용할 새로운 변수
+            // 26.06.12 delete 정다희 : depth2 3개씩 묶기 로직 삭제
+            // chunkedMenuList, // 템플릿에서 사용할 새로운 변수
             mo_menuToggle,
             handleResize,
 
