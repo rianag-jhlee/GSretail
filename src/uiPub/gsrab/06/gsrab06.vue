@@ -80,7 +80,7 @@ const langData = {
             { item: "2005 - 2003" },
             { item: "2002 - 2000" },
         ],
-        // 26.06.08 add 정다희 : 수상내역 하이라이트 (Figma 862:3557)
+        // 26.06.08 add 정다희 : 수상내역 하이라이트 
         awardHighlights: [
             { img: imgAward01, desc: "한국의경영대상<br />명예의전당 헌액" },
             { img: imgAward02, desc: "한국서비스대상 종합유통부문<br />최초 명예의 전당 헌정" },
@@ -591,6 +591,7 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
     :deep(.p_br) { display: none; }
     :deep(.m_br) { display: block; }
     :deep(.tab_wrap.tabSlide ul > li){flex:0 0 93px;}
+    #container{padding-top:84px;}
     .title_wrap { display: none; }
     .sec_award_highlight { margin: 60px -20px 0; padding: 0 20px; }
     .award_highlight_scroll { width: calc(100% + 20px); padding-right: 20px; }
