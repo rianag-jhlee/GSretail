@@ -61,7 +61,7 @@
                 <section class="how_to_section">
                     <h3>{{ t.StepTitle }}</h3>
                     
-                    <div class="step_group mt64" v-for="(group, gIdx) in t.StepGroups" :key="'group-' + gIdx">
+                    <div class="step_group" v-for="(group, gIdx) in t.StepGroups" :key="'group-' + gIdx">
                         <h4>{{ group.title }}</h4>
                         <ul class="step_box">
                             <li class="step_unit" v-for="(step, sIdx) in group.steps" :key="'step-' + sIdx">
@@ -74,7 +74,7 @@
                         </ul>
                     </div>
 
-                    <div class="btn-group mt64">
+                    <div class="btn-group">
                         <a :href="btn.link"
                             v-for="(btn, bIdx) in t.AppButtons" 
                             :key="bIdx"
@@ -267,20 +267,20 @@ export default {
 
 .gsrbr05 { width: 100%; position: relative; }
 img { width: 100%; display: block; }
-h3 { margin-bottom:16px; color: #161616; font-size: 48px; font-weight: 700; }
-h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
+h3 { margin-bottom:16px; color: #161616; font-size: 4.8rem; font-weight: 700; }
+h4 { font-size: 3.2rem; font-weight: 700; color: #161616; margin-bottom: 40px;}
 
 .cont_area + .cont_inner {margin-top:200px;}
 
 /* Visual Section */
 .visual_section { width: 100%; position: relative; overflow: hidden; }
 .visual_content { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 100%; z-index: 2; }
-.text_box span { color: #fff; font-size: 72px; font-weight: 700; display: block; line-height: 1.2; }
+.text_box span { color: #fff; font-size: 7.2rem; font-weight: 700; display: block; line-height: 1.2; }
 
 /* Body Content Area */
 .body_wrap .cont_area { padding: 200px 0; background: #F8F8F8; }
 .intro_text {margin-bottom:64px;}
-.intro_text p { color: #161616; font-size: 24px; font-weight: 700; line-height: 1.35; }
+.intro_text p { color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; }
 .body_wrap .cont_area .cont_inner .intro_text + ul {margin-bottom:40px; padding:50px; background:#fff; border-radius: 12px;}
 .bi_section {margin-top:0px !important;}
 .bi_section {width:100%; margin-top:60px;}
@@ -290,7 +290,6 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
 /* Benefits */
 .benefit_row { display: flex; gap: 20px; padding-bottom: 64px; border-bottom: 1px solid #e5e5e9; }
 .benefit_row + .benefit_row { border-bottom: 0; padding-bottom: 0; margin-top: 64px; }
-/* .benefit_row.mt64 { border-bottom: 0; padding-bottom: 0; margin-top: 64px; } */
 .benefit_item { flex: 1; display: flex; gap: 24px; align-items: flex-start; }
 .info {padding-left:104px; position:relative;}
 /* 26.05.12 Edit 이종환 */
@@ -304,42 +303,45 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
 /* //26.05.12 Edit 이종환 */
 .info .point_color { color: #107af2; font-size: 2.8rem; font-weight: 700; display: block; margin-bottom: 4px; }
 .info .tit { font-size: 2.8rem; font-weight: 700; color: #161616; display: block; margin-bottom: 16px; }
-.info .desc { font-size: 20px; font-weight: 700; color: #67676b; line-height: 1.35; margin-bottom: 16px; }
+.info .desc { font-size: 2rem; font-weight: 700; color: #67676b; line-height: 1.35; margin-bottom: 16px; }
 .benefit_container {margin-top:64px;}
 
 /* Brand Logos */
 .brand_section, .how_to_section {margin-top:200px;}
 .brand_section h3 {margin-bottom:18px;}
-.brand_sub_txt { font-size: 24px; font-weight: 700; color: #161616; margin-bottom: 16px; }
-.logo_flex {margin-top:60px; padding:0; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;}
+.brand_sub_txt { font-size: 2.4rem; font-weight: 700; color: #161616; margin-bottom: 16px; }
+.logo_flex {margin-top:64px; padding:0; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;}
 .logo_flex li {width:calc((100% - (20px * 2)) / 3); height: 180px; padding:20px; background:#F8F8F8; border-radius:12px; text-align:center; display:flex; align-items:center;}
 .logo_flex img { max-width: 100%; max-height:32px; margin:0 auto; object-fit: contain; }
 
 /* Steps */
+.how_to_section > h3{margin-top:64px;}
+/* .step_group{margin-top:64px;} */
+.step_group + .step_group {margin-top:80px;}
 .step_box { display: flex; gap: 20px; padding: 56px 64px; background: #f8f8f8; border-radius: 12px;}
 .step_unit { flex: 1; display: flex; flex-direction: column; gap: 24px; }
-.unit_info .point_color { color: #107af2; font-size: 20px; font-weight: 700; display: block; margin-bottom: 6px; }
-.unit_info p { font-size: 24px; font-weight: 700; color: #161616; line-height: 1.35; }
+.unit_info .point_color { color: #107af2; font-size: 2rem; font-weight: 700; display: block; margin-bottom: 6px; }
+.unit_info p { font-size: 2.4rem; font-weight: 700; color: #161616; line-height: 1.35; }
 .unit_img { position: relative; width: 100%; height: 340px; overflow: hidden; margin: 0; }
 .unit_img.phone_bg { background: #c4c4c4; border: 5px solid #000; border-radius: 34px; }
 .unit_img .inner_img { width: 260px; margin: 58px auto 0; }
 .gradient { position: absolute; bottom: 0; left: 0; width: 100%; height: 90px; background: linear-gradient(180deg, rgba(248, 248, 248, 0) 0%, rgba(248, 248, 248, 1) 100%); }
 
 /* Buttons Area */
-.btn-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.btn-group { margin-top:64px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .btn-group > * {width:320px;}
 .btn_list_back { background: transparent; padding: 0; border: 0; cursor: pointer; }
-.btn_list_back span { color: #161616; font-size: 20px; display: flex; align-items: center; gap: 12px; }
+.btn_list_back span { color: #161616; font-size: 2rem; display: flex; align-items: center; gap: 12px; }
 .btn_list_back span::before { width: 16px; height: 16px; background-color: red; content: ''; display: inline-block; }
 .btn_mid.border {display:none;}
 .bottom_btns + .btn_big.border {display:none;}
-.sub_btn_group button {margin-right:24px; padding:6px 4px; color:#161616; font-size:14px; background:transparent; display:flex; align-items:center; gap:8px;}
+.sub_btn_group button {margin-right:24px; padding:6px 4px; color:#161616; font-size:1.4rem; background:transparent; display:flex; align-items:center; gap:8px;}
 .sub_btn_group button:last-of-type {margin-right:0;}
 .sub_btn_group button::after {content:''; width:16px; height:16px; background:red; display:inline-flex;}
 
 /* Mobile Responsive */
 @media screen and (max-width: 1024px) {
-    h4 {margin-bottom:24px; font-size:20px;}
+    h4 {margin-bottom:24px; font-size:2rem;}
     .logo_flex li {width: calc((100% - 20px) / 2);}
     .benefit_row { flex-direction: column; }
     .step_box { flex-direction: column; padding:32px; }
@@ -349,36 +351,41 @@ h4 { font-size: 32px; font-weight: 700; color: #161616; margin-bottom: 40px;}
     :deep(.p_br) { display: none; }
     :deep(.m_br) { display: block; }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
+
     .intro_text {margin-bottom:40px;}
-    .intro_text p {font-size:16px; font-weight:400; line-height:1.5;}
+    .intro_text p {font-size:1.6rem; font-weight:400; line-height:1.5;}
     .intro_text p:first-of-type {margin-bottom:20px;}
     .body_wrap .cont_area .cont_inner .intro_text + ul {padding:32px; border-radius:12px;}
     .benefit_container {margin-top:0;}
     .logo_flex {margin-top: 0px; gap: 12px;}
     .logo_flex li {width: 100%; height:70px; padding: 15px;}
     .logo_flex img {max-height:23px;}
-    .text_box span { font-size: 32px; text-align:center;}
+    .text_box span { font-size: 3.2rem; text-align:center;}
     .body_wrap .cont_area {padding:60px 0;}
     .cont_area + .cont_inner {margin-top:80px;}
     .info {padding-left:76px;}
-    .info .tit {font-size:18px;}
+    .info .tit{margin-bottom:6px;}
+    .info .tit {font-size:1.8rem;}
     .info::before {width:60px; height:60px;}
     .info::after {width:32px; height:32px; background-image:url('@/assets/images/sub/icon_cont_32.png'); top:14px; left:14px;}
-    .point_color, .point_color + p, .info .desc, .bullet_01 li, .brand_sub_txt {font-size:18px !important;}
-    :deep(.point_color) + p br {display:none;}
-    .benefit_row {padding-bottom:0; border-bottom:0; gap:40px}
+    .point_color, .point_color + p, .info .desc, .bullet_01 li, .brand_sub_txt {font-size:1.6rem !important;}
+    .brand_sub_txt{margin-bottom:24px;}
+    .bullet_01 li{padding-left: 6px;}
+    .bullet_01 li::before{width:2px; height:2px;}
+    .step_group + .step_group {margin-top:40px;}
+    .benefit_row {margin-top:24px;padding-bottom:0; border-bottom:0; gap:40px}
     .benefit_row + .benefit_row {margin-top:40px;}
-    /* .benefit_row.mt64 {margin-top:40px;} */
-    h3 { font-size: 24px; margin-bottom: 30px; }
+    h3 { font-size: 2.4rem; margin-bottom: 24px; }
     .unit_img { height: 280px; }
     .unit_info + img {width:80%; margin:0 auto;}
     .step_box {gap:40px;}
+    .btn-group{margin-top:77px;}
     .btn-group > * {width:100%;}
     .bottom_btns + .btn_big.border {margin-top:0px; margin-bottom:80px; display:flex; justify-content: center;}
     .step_group {margin-bottom:40px;}
     .step_group:last-of-type {margin-bottom:0px;}
-
     .brand_section, .how_to_section {margin-top:80px;}
+    .brand_section h3{margin-bottom:8px;}
 }
 </style>
