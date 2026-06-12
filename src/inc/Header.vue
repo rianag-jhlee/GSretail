@@ -13,6 +13,8 @@
             <nav id="gnb_nav">
                 <ul class="depth1">
                     <!-- 26.06.12 Edit 정다희 : chunkedMenuList → menuList 변경 (depth2 3개씩 묶기 로직 삭제) -->
+                    <!-- [개발] 현재 페이지 1depth — URL/라우트(또는 페이지 파라미터) 기준 해당 li에 class="current" 추가 (is-open과 동일 활성 스타일, ui.css 참고) -->
+                    <!-- 예) <li class="current" ...> 또는 :class="{ current: isCurrentDepth1(item1) }" -->
                     <li v-for="item1 in menuList" :key="item1.title" @focusin="setFocus($event)"
                         @focusout="removeFocus($event)" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
 
@@ -33,6 +35,7 @@
                         <!-- 26.06.12 Edit 정다희 : depth2_wrap 내 ul.depth2 단일 구조 (children 직접 순회) -->
                         <div class="depth2_wrap" v-if="item1.children && item1.children.length">
                             <ul class="depth2">
+                                <!-- [개발] 현재 페이지 2depth — 해당 li에 class="current" 추가 시 1depth와 동일 color:#107af2 적용 -->
                                 <li v-for="item2 in item1.children" :key="item2.title">
                                     <!-- 3Depth 미노출로 span 제거 <span v-if="item2.children && item2.children.length">{{ item2.title }}</span> -->
                                     <a :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{
