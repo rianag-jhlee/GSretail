@@ -251,9 +251,6 @@ export default {
 </script>
 
 <style scoped>
-/* Common Layout */
-.modal_header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 40px; color: #161616; font-size: 40px; font-weight: 700; border-bottom: 0 !important; }
-.modal_content { flex: 1; overflow-y: auto; }
 section { padding-bottom: 80px; }
 section h4 + p{margin-top:8px; font-weight: 700;font-size: 1.8rem;line-height: 1.5;}
 section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
@@ -340,7 +337,6 @@ section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6re
     /* .product_category li { flex: 0 0 calc(33.33% - 8px); } */
 }
 @media screen and (max-width: 768px) {
-    .modal_header { font-size: 1.8rem; padding-bottom: 24px; }
     /* 26.06.10 del 정다희 : notice_bar 반응형 미사용 */
     /* .notice_bar p {font-size:12px !important; font-weight:400 !important;} */
     /* .notice_bar p::before {top:-2px;} */
