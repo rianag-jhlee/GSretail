@@ -351,7 +351,7 @@ h5 {font-size:1.8rem;}
 
 @media screen and (max-width:768px) {
     #header .inner {padding:14px 20px; display:flex; align-items:center; justify-content:space-between;}
-
+    #header nav .depth2_wrap:after{display: none;}
     #header h1 {margin-top:0; margin-right:0; z-index:1;}
     #header h1 a {width:102px; transition-delay:0s;}
     #header .btn_allMenu {width:32px; height:32px; font-size:0; background-color:transparent; border-radius:0; position:relative; display:block;}
