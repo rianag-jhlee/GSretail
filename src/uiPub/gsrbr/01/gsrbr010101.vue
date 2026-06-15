@@ -489,7 +489,8 @@
         <div v-if="depth1ActiveIdx === 1" class="brand_panel sinsen_panel">
             <!-- 26.06.09 Edit 이종환 -->
             <figure class="brand_panel_bg" role="img" :aria-label="sinsen.heroAlt">
-                <img :src="sinsen.hero" :alt="sinsen.heroalt">
+                <!-- 26.06.15 add 정다희 : heroMo 이미지 추가 -->
+                <img :src="isMobileView && sinsen.heroMo ? sinsen.heroMo : sinsen.hero" :alt="sinsen.heroAlt">
             </figure>
             <!-- //26.06.09 Edit 이종환 -->
             <header v-if="sinsen.title" class="brand_panel_title">
@@ -1642,6 +1643,7 @@ import imgPhone2 from "@/assets/images/dummy/gopizza_phone_02.png";
 // import imgFlow from "@/assets/images/dummy/sinsen_flow.png";
 // import imgFlowMo from "@/assets/images/dummy/mo/sinsen_flow_mo.png";
 import imgSinsen00 from "@/assets/images/sub/gsrbr010101/brand_bg_05.png";
+import imgSinsen00Mo from "@/assets/images/sub/gsrbr010101/brand_bg_05_mo.png"; //26.06.15 add 정다희 : heroMo 이미지 추가
 import imgSinsen01 from "@/assets/images/sub/gsrbr010101/sinsen_01.png";
 import imgSinsen02 from "@/assets/images/sub/gsrbr010101/sinsen_02.png";
 import imgSinsen03 from "@/assets/images/sub/gsrbr010101/sinsen_03.png";
@@ -1972,6 +1974,7 @@ const langData = {
         ],
         sinsen: {
             hero: imgSinsen00,
+            heroMo: imgSinsen00Mo, // 26.06.15 add 정다희 : heroMo 이미지 추가 
             heroAlt: "신선강화점",
             title: "신선강화점",
             subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br /><br class=\"m_br\" />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
@@ -3347,6 +3350,7 @@ const langData = {
         ],
         sinsen: {
             hero: imgSinsen00,
+            heroMo: imgSinsen00Mo, // 26.06.15 add 정다희 : heroMo 이미지 추가 
             heroAlt: "Fresh Concept Store",
             title: "Fresh Concept Store",
             subtitle: "Fresh Concept Stores are designed for the growing trend of single- and two-person households and convenient, small-quantity shopping, offering one-stop grocery shopping 24 hours a day, 365 days a year. Combining the convenience of a convenience store with the freshness of a supermarket, this distinctive concept delivers fresh products (fruits, vegetables, meat, and seafood) every single day.",
@@ -4861,7 +4865,7 @@ function goBack() {
 
 <style scoped>
 .brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
-.sinsen_panel > .brand_panel_bg { min-height: 340px; background-color: #b3b3b3; }
+/* .sinsen_panel > .brand_panel_bg { min-height: 340px; background-color: #b3b3b3; } */
 .brand_panel_bg > img { width: 100%; max-height:340px; display: block; object-fit: cover; }
 .brand_panel_title { padding: 0 0 100px;}
 .brand_panel_title > h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; display:flex; align-items:center;}
@@ -5238,7 +5242,7 @@ button { background-color: #fff }
   .sec_header .sec_cite { margin-top: 4px; margin-left: 0; display: block; }
   .brand_panel_bg { width: calc(100% + 40px);margin: 0 -20px 24px; border-radius: 0; }
   .brand_panel_title { padding: 0 0 64px; }
-  .brand_panel_bg > img { max-height: 245px;  }
+  .brand_panel_bg > img { height: 245px;  }
   .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display:block;}
 
   .brand_panel_title > h2 :deep(a) {margin-top:16px; margin-left:0; font-size:1.4rem; font-weight:500; line-height:140%;}
@@ -5249,7 +5253,7 @@ button { background-color: #fff }
   .chicken_panel .brand_panel_bg > img { object-position: 34% top; transform: scale(1.35);  }
   .gopizza_panel .brand_panel_bg > img { object-position: center bottom; }
   .gopizza_panel .diff_bottom_row { margin-top: 120px; }
-  .sinsen_panel > .brand_panel_bg { min-height: 245px; background-color: #b3b3b3; }
+  /* .sinsen_panel > .brand_panel_bg { min-height: 245px; background-color: #b3b3b3; } */
   .delivery_panel_3 .brand_panel_bg > img{ object-position: 70% bottom; }
   .info_card_flow .info_card:nth-child(1){flex:0 0 auto; }
   .info_card_flow .info_card:nth-child(2){flex:0 0 auto; }
