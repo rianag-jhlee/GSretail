@@ -8,11 +8,14 @@
         </div>
         <nav id="gnb_nav">
             <ul class="depth1">
+                <!-- 26.06.15 Add 정다희 : 퍼블 테스트용 current — URL 앞 5글자(gsrab, gsrbr 등)와 item1.path 매칭 시 li.current 적용 (is-open과 동일 활성 스타일, ui.css 참고) -->
+                <!-- [개발] 2depth current도 필요 시 ul.depth2 > li에 class="current" 부여 -->
                 <li v-for="item1 in menuList" :key="item1.title"
                     :class="{ current: currentDepth1Key && item1.path?.startsWith(currentDepth1Key) }"
                     @focusin="setFocus($event)"
                     @focusout="removeFocus($event)" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
 
+                    <!-- 26.06.01 Edit 이종환 : 모바일에서 depth1에 하위메뉴가 있으면 링크 없애고 하위메뉴 펼침닫힘 기능 -->
                     <a
                         :href="!isDesktop() && item1.children?.length
                             ? '#'
@@ -23,7 +26,10 @@
                         {{ item1.title }}
                     </a>
 
+                    <!-- 26.06.12 Edit 정다희 : depth2_wrap을 1depth a 밖 li 형제로 분리 (a 중첩 방지 + Figma 878:4160 풀폭 패널) -->
+                    <!-- 26.06.12 Edit 정다희 : JS setDepth2Position() — li 좌표를 --menu-left로 전달해 2depth 콘텐츠 정렬 -->
                     <div class="depth2_wrap" v-if="item1.children && item1.children.length">
+                        <!-- 26.06.12 Edit 정다희 : depth2 3개씩 묶기(chunkedChildren) 삭제 → children 직접 순회 -->
                         <ul class="depth2">
                             <li v-for="item2 in item1.children" :key="item2.title">
                                 <a :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{
@@ -119,6 +125,7 @@ export default {
         // 26.06.12 Add 정다희 : 2depth 풀폭 패널 — 활성 1depth li 왼쪽 정렬 (Figma 878:4160, --menu-left)
         const setDepth2Position = (li) => {
             const depth2 = li.querySelector(".depth2_wrap");
+            // li.getBoundingClientRect().left → CSS var(--menu-left)로 전달 (ui.css depth2_wrap padding/margin 연동)
             if (depth2) depth2.style.setProperty("--menu-left", `${li.getBoundingClientRect().left}px`);
         };
         // 26.06.12 Add 정다희 : 열린 메뉴 전체 좌표 재계산 (리사이즈·스크롤·초기 로드 시)
@@ -126,28 +133,61 @@ export default {
             document.querySelectorAll("#gnb_nav ul.depth1 > li.is-open").forEach(setDepth2Position);
         };
 
-        // 기존 hover/focus 기능
+        // 26.06.15 Add 정다희 : GNB 열림 시 팝업과 동일 딤 처리 (.gnb_dim — ui.css, z-index:98 / header:99)
+        const updateGnbDim = () => {
+            const dim = document.querySelector(".gnb_dim");
+            if (!isDesktop()) {
+                dim?.remove(); // 26.06.15 Add 정다희 : 모바일(768px 이하)에서는 GNB 딤 미사용 → body 잔여 요소 제거
+                return;
+            }
+            const hasOpen = document.querySelector("#gnb_nav ul.depth1 > li.is-open");
+            if (hasOpen) {
+                if (!dim) {
+                    const el = document.createElement("div");
+                    el.className = "gnb_dim"; // .modal_dim과 동일 rgba(0,0,0,0.6) — modal.js와 클래스 분리(충돌 방지)
+                    el.setAttribute("aria-hidden", "true");
+                    document.body.appendChild(el); // header 밖 body에 삽입 — 전체 화면 딤
+                }
+            } else {
+                dim?.remove(); // 26.06.15 Add 정다희 : 열린 1depth 없으면 딤 제거
+            }
+        };
+        // 26.06.15 Add 정다희 : GNB 열림 상태 통합 — add_bg(헤더 흰배경) + gnb_dim 동기화
+        const syncHeaderOpenState = () => {
+            const header = document.getElementById("header");
+            if (!header || !isDesktop()) {
+                header?.classList.remove("add_bg"); // 모바일·비PC 구간에서는 add_bg 해제
+                updateGnbDim();
+                return;
+            }
+            const hasOpen = document.querySelector("#gnb_nav ul.depth1 > li.is-open");
+            if (hasOpen) header.classList.add("add_bg"); // 2depth 패널 열림 시 header 배경 흰색 전환
+            else header.classList.remove("add_bg");
+            updateGnbDim(); // is-open 유무에 따라 .gnb_dim 생성/제거
+        };
+
+        // 26.06.12 Edit 정다희 : PC GNB hover — is-open + --menu-left + add_bg + gnb_dim
         const handleMouseEnter = (e) => {
             // 768px 이하(모바일)이면 로직 실행 안 함
             if (!isDesktop()) return;
 
             const li = e.currentTarget;
             li.classList.add("is-open");
-            setDepth2Position(li); // 26.06.12 Add 정다희 : 호버 시 2depth 패널 --menu-left 설정
-            const header = document.getElementById("header");
-            if (header) header.classList.add('add_bg');
+            setDepth2Position(li);
+            syncHeaderOpenState();
         }
+        // 26.06.12 Edit 정다희 : PC GNB mouseleave — li 밖으로 나갈 때만 is-open 해제 후 상태 동기화
         const handleMouseLeave = (e) => {
             // 768px 이하(모바일)이면 로직 실행 안 함
             if (!isDesktop()) return;
 
             const li = e.currentTarget;
+            // relatedTarget: 2depth_wrap 내부로 이동 시 contains → true, is-open 유지
             if (!li.contains(e.relatedTarget)) {
                 li.classList.remove("is-open");
             }
 
-            const header = document.getElementById("header");
-            if (header) header.classList.remove('add_bg');
+            syncHeaderOpenState();
         };
 
         // quick menu
@@ -164,7 +204,7 @@ export default {
             }
         }
 
-        // 26.06.12 Edit 정다희 : 키보드 focusin — closeTimer로 focusout/focusin 순서 깜빡임 방지 + 2depth 좌표 설정
+        // 26.06.12 Edit 정다희 : 키보드 focusin — closeTimer로 focusout/focusin 순서 깜빡임 방지 + 2depth 좌표·딤 동기화
         const setFocus = (e) => {
             const li = e.currentTarget;
             const FOCUS_DELAY = 150; // focusout 직후 activeElement 이동 대기 (BreadCrumb.vue 동일 패턴)
@@ -173,18 +213,22 @@ export default {
                 if (li.contains(document.activeElement)) {
                     li.classList.add("is-open");
                     setDepth2Position(li); // Tab 포커스로 열 때도 --menu-left 정렬
+                    syncHeaderOpenState(); // 26.06.15 Add 정다희 : 키보드 포커스 시 add_bg + gnb_dim
                 }
                 li.closeTimer = null;
             }, FOCUS_DELAY);
         };
 
-        // 26.06.12 Edit 정다희 : 키보드 focusout — li 밖으로 포커스가 나갔을 때만 is-open 제거
+        // 26.06.12 Edit 정다희 : 키보드 focusout — li 밖으로 포커스가 나갔을 때만 is-open·딤 해제
         const removeFocus = (e) => {
             const li = e.currentTarget;
             const FOCUS_DELAY = 150;
             if (li.closeTimer) clearTimeout(li.closeTimer);
             li.closeTimer = setTimeout(() => {
-                if (!li.contains(document.activeElement)) li.classList.remove("is-open");
+                if (!li.contains(document.activeElement)) {
+                    li.classList.remove("is-open");
+                    syncHeaderOpenState(); // 26.06.15 Add 정다희 : 포커스 이탈 시 add_bg + gnb_dim 제거
+                }
                 li.closeTimer = null;
             }, FOCUS_DELAY);
         };
@@ -363,8 +407,11 @@ export default {
                 });
             }
 
-            // 26.06.12 Add 정다희 : 리사이즈 시 열린 2depth 패널 좌표 재계산
+            // 26.06.12 Add 정다희 : 리사이즈 시 열린 2depth 패널 --menu-left 재계산
             if (width > 768) updateOpenDepth2Position();
+
+            // 26.06.15 Add 정다희 : 리사이즈·PC/모바일 전환 시 add_bg·gnb_dim 동기화
+            syncHeaderOpenState();
 
             // 이전 답변에서 드린 header hide 로직 호출 (필요 시)
             // handleScroll(); 
@@ -440,6 +487,8 @@ export default {
         onUnmounted(() => {
             window.removeEventListener("resize", handleResize);
             window.removeEventListener("scroll", handleScroll);
+            // 26.06.15 Add 정다희 : SPA 전환·컴포넌트 해제 시 body에 남은 .gnb_dim 제거 (modal_dim과 별도 관리)
+            document.querySelector(".gnb_dim")?.remove();
         });
 
         return {
