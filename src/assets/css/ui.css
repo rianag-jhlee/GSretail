@@ -13,8 +13,12 @@
 #header nav ul.depth1 > li {flex-shrink:0; position:relative;}
 #header nav ul.depth1 > li.is-open, #header nav ul.depth1 > li.current {z-index:2;}
 #header nav ul.depth1 > li > a {padding:0 45px 46px; color:#fff; font-size:var(--depth1-font); font-weight:700; line-height:140%; letter-spacing:0.02em; position:relative; display:flex;}
+
 /* 26.06.12 Edit 정다희 : [개발] 현재 페이지 — URL/라우트 기준 해당 depth1 > li에 class="current" 부여 (is-open과 동일 활성 스타일) */
-#header nav ul.depth1 > li.is-open > a::before, #header nav ul.depth1 > li.current > a::before {width:70px; height:4px; background-color:#107AF2; position:absolute; bottom:0; left:50%; content:''; transform:translateX(-50%);}
+#header nav ul.depth1 > li.is-open > a::before, #header nav ul.depth1 > li.current > a::before {height:4px; background-color:#fff; position:absolute; right:45px; bottom:0; left:45px; content:'';}
+#header.head_black nav ul.depth1 > li.is-open > a::before, #header.head_black nav ul.depth1 > li.current > a::before {background-color:#107AF2;}
+#header.add_bg nav ul.depth1 > li.is-open > a::before, #header.add_bg nav ul.depth1 > li.current > a::before {background-color:#107AF2;}
+
 #header nav .depth2_wrap {width:100vw; height:0; box-sizing:border-box; margin-left:calc(-1 * var(--menu-left, 0px)); padding:0 20px 0 var(--menu-left, 20px); background-color:#fff; position:absolute; top:100%; left:0; z-index:10; display:flex; overflow:hidden;}
 #header nav .depth2_wrap > ul + ul {margin-left:80px;}
 #header nav li:hover .depth2_wrap, #header nav li.is-open .depth2_wrap {height:auto !important; min-height:150px; padding-top:40px; padding-bottom:40px; display:flex; overflow:initial !important;}
@@ -28,7 +32,7 @@
 #header nav ul.depth3 {display:none !important;}
 
 @media screen and (min-width:769px) {
-    #header nav li:hover > a, #header nav li.is-open > a, #header nav li.current > a, #header nav li:hover > span, #header nav li.is-open > span, #header nav li.current > span {color:#107af2 !important;}
+    #header.head_black nav li:hover > a, #header.head_black nav li.is-open > a, #header.head_black nav li.current > a, #header.head_black nav li:hover > span, #header.head_black nav li.is-open > span, #header.head_black nav li.current > span {color:#107af2 !important;}
 }
 
 #header .quick_wrap {margin-left:auto; flex-shrink:0; display:flex; align-items:center;}
