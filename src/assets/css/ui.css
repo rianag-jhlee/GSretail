@@ -13,9 +13,12 @@
 #header nav ul.depth1 > li {flex-shrink:0; position:relative;}
 #header nav ul.depth1 > li.is-open, #header nav ul.depth1 > li.current {z-index:2;} /* 26.06.12 Edit 정다희 : 2depth 패널·current 메뉴 겹침 방지 */
 #header nav ul.depth1 > li > a {padding:0 45px 46px; color:#fff; font-size:var(--depth1-font); font-weight:700; line-height:140%; letter-spacing:0.02em; position:relative; display:flex;}
-/* 26.06.12 Edit 정다희 : is-open/current 1depth 활성 — 하단 4px 바 (Figma 878:4160) / [개발] li.current는 URL·라우트 기준 부여 */
-#header nav ul.depth1 > li.is-open > a::before, #header nav ul.depth1 > li.current > a::before {width:70px; height:4px; background-color:#107AF2; position:absolute; bottom:0; left:50%; content:''; transform:translateX(-50%);}
-/* 26.06.12 Edit 정다희 : 2depth 풀폭 패널 — width:100vw + --menu-left(JS)로 활성 1depth 왼쪽 정렬 */
+
+/* 26.06.12 Edit 정다희 : [개발] 현재 페이지 — URL/라우트 기준 해당 depth1 > li에 class="current" 부여 (is-open과 동일 활성 스타일) */
+#header nav ul.depth1 > li.is-open > a::before, #header nav ul.depth1 > li.current > a::before {height:4px; background-color:#fff; position:absolute; right:45px; bottom:0; left:45px; content:'';}
+#header.head_black nav ul.depth1 > li.is-open > a::before, #header.head_black nav ul.depth1 > li.current > a::before {background-color:#107AF2;}
+#header.add_bg nav ul.depth1 > li.is-open > a::before, #header.add_bg nav ul.depth1 > li.current > a::before {background-color:#107AF2;}
+
 #header nav .depth2_wrap {width:100vw; height:0; box-sizing:border-box; margin-left:calc(-1 * var(--menu-left, 0px)); padding:0 20px 0 var(--menu-left, 20px); background-color:#fff; position:absolute; top:100%; left:0; z-index:10; display:flex; overflow:hidden;}
 #header nav .depth2_wrap > ul + ul {margin-left:80px;}
 /* 26.06.12 Edit 정다희 : hover/focus(is-open) 시 2depth 패널 노출 */
