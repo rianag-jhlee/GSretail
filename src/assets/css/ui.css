@@ -60,6 +60,12 @@
 
 #header .btn_allMenu, #header .btn_prev_wrap {display:none;}
 
+
+html[lang="en"] #gnb_nav .depth1 > li > a {
+    letter-spacing: -0.5px; /* 자간 축소로 가로폭 확보 */
+}
+
+
 /* header color */
 #header.add_bg {background-color:#fff;}
 #header.add_bg h1 a {background-image:url('@/assets/images/common/h1_logo_black.png');}
