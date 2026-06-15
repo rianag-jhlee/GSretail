@@ -250,7 +250,7 @@ const props = defineProps({
 const langData = {
     ko: {
         visual: {
-            lines: ["고객의 모든 순간을", "가치 있게 만드는 중심"],
+            lines: ["고객의 라이프스타일을 가치 있게 만드는"], /*텍스트 수정 26.06.15*/ 
             logoAlt: "GS SHOP",
         },
         about: [

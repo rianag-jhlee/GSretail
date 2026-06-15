@@ -357,7 +357,7 @@ export default {
                     brand: {
                         visual: {
                             lines: [
-                                "신선한 행복을<br class=\"m_br\" />주는 브랜드",
+                                "신선한 행복을 만나다", /*텍스트 수정 26.06.15*/ 
                             ],
                             logoAlt:  "GS THE FRESH 메인 비주얼",
                         },
