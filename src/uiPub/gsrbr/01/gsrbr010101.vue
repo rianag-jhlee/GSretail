@@ -4898,7 +4898,7 @@ function goBack() {
 @media (max-width: 1024px) {
 .sec_brand_visual{height:200vh}
 .sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.jpg); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
 
 .bg_wrap.active > .bg { transform: scale(1) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
@@ -5260,7 +5260,7 @@ button { background-color: #fff }
   /* .sec_brand_visual { height: 100vh } */
   .sticky { height: 100vh; top: 0 }
 
-  .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(@/assets/images/dummy/brand_main_bg.jpg); transform: scale(1.25); background-position: 54% 50px }
+  .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(@/assets/images/dummy/brand_main_bg_mo.png); transform: scale(1.25);}
 
   .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
   .txt_area > p { margin-bottom: 0 }
