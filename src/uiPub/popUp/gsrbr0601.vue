@@ -96,7 +96,7 @@ export default {
                             "본인인증이 안돼요. 어떻게 해야하나요?"
                         ],
                         desc: [
-                            "<span>GS ALL 멤버십은 GS리테일의 3개 브랜드(GS25, GS SHOP, GS THE FRESH)를 통합한 GS리테일 통합 멤버십입니다. 하나의 브랜드에서만 등급을 달성해도 3개 브랜드 등급혜택을 모두 받아보실 수 있습니다.</span><span>GS ALL 멤버십에 대한 자세한 내용은 각 앱별 마이페이지에서 확인하실 수 있습니다.</span>",
+                            "<span>GS ALL 멤버십은 GS리테일의 3개 브랜드(GS25, GS SHOP, GS THE FRESH)를 통합한 GS리테일 통합 멤버십입니다. 하나의 브랜드에서만 등급을 달성해도 3개 브랜드 등급혜택을 모두 받아보실 수 있습니다.</span><br /><br /><span>GS ALL 멤버십에 대한 자세한 내용은 각 앱별 마이페이지에서 확인하실 수 있습니다.</span>",
                             "<span>개명하신 경우 통신사 실명인증 정보를 먼저 변경하신 후, 앱 내 개인정보 수정 메뉴에서 본인인증을 다시 진행해 주시기 바랍니다.</span>",
                             "<span>가족이나 친구와 함께 포인트를 합산하여 사용할 수 있는 공유 서비스입니다.</span>",
                             "<span>기존 번호로 로그인 후 마이페이지의 '휴대폰 번호 변경' 메뉴를 이용하세요.</span>",
@@ -185,9 +185,11 @@ export default {
 <style scoped>
 :deep(.modal_content) h3 {margin-bottom:64px;}
 :deep(.modal_content) h3 br {display:none;}
-
 .accodian_sec {margin-bottom:80px;}
 .board_type_toggle {margin-top:24px;}
+:deep(.board_type_toggle dt + dd) {border-bottom:1px solid #D7D7DF;}
+:deep(.board_type_toggle dt > a.acc_tit_btn){border-bottom:0;}
+:deep(.board_type_toggle.type_faq dt > a.acc_tit_open){border-bottom:0;}
 .btn_mid {padding:10px 23px;}
 
 /* 안내 박스 영역 */
