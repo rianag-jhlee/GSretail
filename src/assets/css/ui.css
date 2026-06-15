@@ -11,7 +11,7 @@
 #header nav {min-width:0; flex:1; --depth1-font:2rem; position:relative; display:flex; align-items:center;}
 #header nav ul.depth1 {display:flex;}
 #header nav ul.depth1 > li {flex-shrink:0; position:relative;}
-#header nav ul.depth1 > li.is-open, #header nav ul.depth1 > li.current {z-index:2;}
+#header nav ul.depth1 > li.is-open, #header nav ul.depth1 > li.current {z-index:2;} /* 26.06.12 Edit 정다희 : 2depth 패널·current 메뉴 겹침 방지 */
 #header nav ul.depth1 > li > a {padding:0 45px 46px; color:#fff; font-size:var(--depth1-font); font-weight:700; line-height:140%; letter-spacing:0.02em; position:relative; display:flex;}
 
 /* 26.06.12 Edit 정다희 : [개발] 현재 페이지 — URL/라우트 기준 해당 depth1 > li에 class="current" 부여 (is-open과 동일 활성 스타일) */
@@ -21,16 +21,18 @@
 
 #header nav .depth2_wrap {width:100vw; height:0; box-sizing:border-box; margin-left:calc(-1 * var(--menu-left, 0px)); padding:0 20px 0 var(--menu-left, 20px); background-color:#fff; position:absolute; top:100%; left:0; z-index:10; display:flex; overflow:hidden;}
 #header nav .depth2_wrap > ul + ul {margin-left:80px;}
+/* 26.06.12 Edit 정다희 : hover/focus(is-open) 시 2depth 패널 노출 */
 #header nav li:hover .depth2_wrap, #header nav li.is-open .depth2_wrap {height:auto !important; min-height:150px; padding-top:40px; padding-bottom:40px; display:flex; overflow:initial !important;}
 
 #header.hide nav li:hover .depth2_wrap, #header.hide nav li.is-open .depth2_wrap {height:0 !important; min-height:0 !important; padding:0 !important; overflow:hidden !important;}
 
-#header nav ul.depth2 {width:100%; max-width:845px; padding-left:45px; display:flex; flex-wrap:wrap; gap:20px;}
+#header nav ul.depth2 {width:100%; padding-left:45px; display:flex; flex-wrap:wrap; gap:20px;}
 #header nav ul.depth2 > li > a, #header nav ul.depth2 > li > span {padding:0; color:#161616; font-size:calc(var(--depth1-font) - 0.2rem); font-weight:400; line-height:1.4; white-space:nowrap; display:block;}
 #header nav ul.depth2 > li > a:hover, #header nav ul.depth2 > li > a:focus {color:#107af2;}
 #header nav li:hover ul.depth2, #header nav li.is-open ul.depth2 {height:auto !important; overflow:initial !important;}
 #header nav ul.depth3 {display:none !important;}
 
+/* 26.06.12 Edit 정다희 : PC(769px~) hover/is-open/current 활성 color — 모바일(768px↓) 미적용 */
 @media screen and (min-width:769px) {
     #header.head_black nav li:hover > a, #header.head_black nav li.is-open > a, #header.head_black nav li.current > a, #header.head_black nav li:hover > span, #header.head_black nav li.is-open > span, #header.head_black nav li.current > span {color:#107af2 !important;}
 }
@@ -71,6 +73,7 @@ html[lang="en"] #gnb_nav .depth1 > li > a {
 
 
 /* header color */
+/* 26.06.12 Edit 정다희 : GNB 2depth 열림(is-open) 시 header 배경·로고·메뉴색 전환 — JS syncHeaderOpenState()에서 add_bg 부여 */
 #header.add_bg {background-color:#fff;}
 #header.add_bg h1 a {background-image:url('@/assets/images/common/h1_logo_black.png');}
 #header.add_bg nav ul.depth1 > li > a {color:#111;}
@@ -198,6 +201,7 @@ h5 {font-size:1.8rem;}
 .modal_wrap { text-align: center; opacity: 0; position: fixed; top: 50%; right: 50%; bottom: 50%; left: 50%; z-index: 1; display: block; overflow: hidden; transition: opacity 0.15s ease-out; }
 .modal_wrap.active { opacity: 1; top: 0; right: 0; bottom: 0; left: 0; }
 .modal_dim { background-color: rgba(0,0,0,0.6); position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 99; }
+.gnb_dim { background-color: rgba(0,0,0,0.6); position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 98; }
 
 /* 1. 컨테이너에 최대 높이를 설정하고 내부 요소들을 세로로 정렬(Flex)합니다. */
 .modal_wrap .modal_container { display: flex; flex-direction: column; max-height: 90vh; padding: 48px 42px; background-color: #fff; text-align: left; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-sizing: border-box; overflow: hidden;}/* 26.05.11 Edit 이종환 : modal_content만 스크롤되고 modal_header와 modal_bottom는 고정 */
@@ -251,7 +255,7 @@ h5 {font-size:1.8rem;}
 .board_type_toggle dt > a.acc_tit_btn::after {content: ""; display: block; flex-shrink: 0; width: 24px; height: 24px; background:url('@/assets/images/common/icon_set_24.png') -208px -15px no-repeat; transition:transform 0.25s;}
 .board_type_toggle dt > a.acc_tit_open::after {transform:rotate(180deg);}
 .board_type_toggle dd.acc_panel {overflow: hidden; height: 0; transition: height 0.35s ease; box-sizing: border-box;}
-.board_type_toggle dd.acc_panel > .acc_panel_inner > .acc_panel_cont {font-size: 16px; line-height: 1.6; color: #444;}
+.board_type_toggle dd.acc_panel > .acc_panel_inner > .acc_panel_cont {font-size: 16px; line-height: 1.6; color: #67676F;}
 
 .board_type_toggle.type_faq {border-top:1px solid #161616;}
 .board_type_toggle.type_faq.no_bor {border-top:0;}
@@ -340,7 +344,7 @@ h5 {font-size:1.8rem;}
     #header .inner {padding:46px 20px 0;}
     #header nav {--depth1-font:1.6rem;}
     #header nav ul.depth1 > li > a {padding-left:12px; padding-right:15px;}
-    #header nav ul.depth2 {max-width:687px; padding-left:12px;}
+    #header nav ul.depth2 { padding-left:12px;}
     #header .quick > li:first-child > * {padding:2px 8px; font-size:1.4rem;}
     #header .language button {padding:2px 8px; font-size:1.4rem;}
     footer .quick li:last-child a {padding-right:0;}
@@ -371,7 +375,8 @@ h5 {font-size:1.8rem;}
     #header nav li.is-open .depth2_wrap {width:100%; min-height:auto; margin-left:0; padding:20px 0; background-color:#f8f8f8; display:flex;}
     #header nav .depth2_wrap > ul > li > a, #header nav .depth2_wrap > ul > li > span {padding:10px 40px; color:#161616; font-size:calc(var(--depth1-font) - 0.2rem); white-space:normal;}
     #header nav ul.depth2 {max-width:none; padding:0; display:flex; flex-direction:column; flex-wrap:nowrap; gap:0;}
-    #header nav ul.depth1 > li.is-open > a::before, #header nav ul.depth1 > li.current > a::before{display:none;}
+    /* 26.06.12 Edit 정다희 : 모바일 — PC용 is-open/current 하단 바(::before) 숨김 */
+    #header nav ul.depth1 > li.is-open > a::before, #header nav ul.depth1 > li.current > a::before {display:none;}
     #header.mo_open h1 a {background-image:url('@/assets/images/common/h1_logo_black.png'); transition-delay:0.25s;}
     #header.mo_open .btn_allMenu {position:fixed; top:14px; right:20px;}
     #header.mo_open .btn_allMenu:after {background-position:-640px -15px;}
