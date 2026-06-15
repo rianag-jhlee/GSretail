@@ -1,111 +1,77 @@
 <template>
-    <header id="header" :class="{ sub_header: isSubPage }"><!-- 26.06.04 Edit 이종환 : sub페이지의 경우 h1숨김, 이전버튼 노출 기능 위한 sub_header 클래스 추가 -->
-        <div class="inner">
-            <h1><a href="/">GS리테일</a></h1>
+    <header id="header" :class="{ sub_header: isSubPage }"><div class="inner">
+        <h1><a href="/">GS리테일</a></h1>
             
-            <!-- mo 이전 버튼 -->
-            <div class="btn_prev_wrap">
-                <button>이전</button>
-                <strong>페이지명</strong>
-            </div>
-            <!-- //mo 이전 버튼 -->
+        <div class="btn_prev_wrap">
+            <button>이전</button>
+            <strong>페이지명</strong>
+        </div>
+        <nav id="gnb_nav">
+            <ul class="depth1">
+                <li v-for="item1 in menuList" :key="item1.title"
+                    :class="{ current: currentDepth1Key && item1.path?.startsWith(currentDepth1Key) }"
+                    @focusin="setFocus($event)"
+                    @focusout="removeFocus($event)" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
 
-            <nav id="gnb_nav">
-                <ul class="depth1">
-                    <!-- 26.06.12 Edit 정다희 : chunkedMenuList → menuList 변경 (depth2 3개씩 묶기 로직 삭제) -->
-                    <!-- [개발] 현재 페이지 1depth — URL/라우트(또는 페이지 파라미터) 기준 해당 li에 class="current" 추가 (is-open과 동일 활성 스타일, ui.css 참고) -->
-                    <!-- 예) <li class="current" ...> 또는 :class="{ current: isCurrentDepth1(item1) }" -->
-                    <li v-for="item1 in menuList" :key="item1.title" @focusin="setFocus($event)"
-                        @focusout="removeFocus($event)" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
+                    <a
+                        :href="!isDesktop() && item1.children?.length
+                            ? '#'
+                            : getLink(item1)"
+                        :target="item1.blank ? '_blank' : null"
+                        @click="!isDesktop() && item1.children?.length ? toggleMenu($event) : null"
+                    >
+                        {{ item1.title }}
+                    </a>
 
-                        <!-- <a :href="getLink(item1)" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a> -->
-                        <!-- 26.06.01 Edit 이종환 : 모바일에서 depth1에 하위메뉴가 있으면 링크 없애고 하위메뉴 펼침닫힘 기능 -->
-                        <!-- 26.06.12 Edit 정다희 : chunkedChildren → children 변경 -->
-                        <a
-                            :href="!isDesktop() && item1.children?.length
-                                ? '#'
-                                : getLink(item1)"
-                            :target="item1.blank ? '_blank' : null"
-                            @click="!isDesktop() && item1.children?.length ? toggleMenu($event) : null"
-                        >
-                            {{ item1.title }}
-                        </a>
-
-                        <!-- 26.06.12 Edit 정다희 : depth2_wrap을 a 밖 li 형제로 분리 (a 중첩 방지) -->
-                        <!-- 26.06.12 Edit 정다희 : depth2_wrap 내 ul.depth2 단일 구조 (children 직접 순회) -->
-                        <div class="depth2_wrap" v-if="item1.children && item1.children.length">
-                            <ul class="depth2">
-                                <!-- [개발] 현재 페이지 2depth — 해당 li에 class="current" 추가 시 1depth와 동일 color:#107af2 적용 -->
-                                <li v-for="item2 in item1.children" :key="item2.title">
-                                    <!-- 3Depth 미노출로 span 제거 <span v-if="item2.children && item2.children.length">{{ item2.title }}</span> -->
-                                    <a :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{
-                                        item2.title }}</a>
-
-                                    <ul class="depth3" v-if="item2.children && item2.children.length">
-                                        <li v-for="item3 in item2.children" :key="item3.title">
-                                            <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{
-                                                item3.title }}</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- 26.06.12 delete 정다희 : depth2 3개씩 묶기 로직 삭제
-                        <div class="depth2_wrap" v-if="item1.chunkedChildren && item1.chunkedChildren.length">
-                            <ul class="depth2" v-for="(group, idx) in item1.chunkedChildren" :key="idx">
-                                <li v-for="item2 in group" :key="item2.title">
-                                    <a :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{ item2.title }}</a>
-                                    <ul class="depth3" v-if="item2.children && item2.children.length">
-                                        <li v-for="item3 in item2.children" :key="item3.title">
-                                            <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{ item3.title }}</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        -->
-                    </li>
-                </ul>
-            </nav>
-
-            <!-- quick : 국문에서만 노출 -->
-            <div class="quick_wrap">
-                <ul class="quick">
-                    <li v-for="item1 in quickMenu" :key="item1.title">
-                        <strong v-if="item1.children && item1.children.length" @click="toggleMenu($event)">{{
-                            item1.title }}</strong>
-                        <a v-else :href="item1.path" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a>
-                        <ul v-if="item1.children && item1.children.length">
+                    <div class="depth2_wrap" v-if="item1.children && item1.children.length">
+                        <ul class="depth2">
                             <li v-for="item2 in item1.children" :key="item2.title">
-                                <strong v-if="item2.children && item2.children.length">{{ item2.title }}</strong>
-                                <a v-else :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{ item2.title
-                                }}</a>
-                                <!-- 3depth -->
+                                <a :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{
+                                    item2.title }}</a>
+
                                 <ul class="depth3" v-if="item2.children && item2.children.length">
                                     <li v-for="item3 in item2.children" :key="item3.title">
-                                        <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{ item3.title
-                                        }}</a>
+                                        <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{
+                                            item3.title }}</a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
 
-                <!-- select language -->
-                <ul class="language">
-                    <li><button @click="changeLang('ko')" :class="{ 'current': currentLang === 'ko' }">KO</button></li>
-                    <li><button @click="changeLang('en')" :class="{ 'current': currentLang === 'en' }">EN</button></li>
-                </ul>
-                <!-- //select language -->
-            </div>
-            <!-- //quick -->
+                </li>
+            </ul>
+        </nav>
 
-            <!-- 26-04-30 이종환 Add -->
-            <button class="btn_allMenu" @click="mo_menuToggle();">전체메뉴</button>
-            <!-- //26-04-30 이종환 Add -->
+        <div class="quick_wrap">
+            <ul class="quick">
+                <li v-for="item1 in quickMenu" :key="item1.title">
+                    <strong v-if="item1.children && item1.children.length" @click="toggleMenu($event)">{{
+                        item1.title }}</strong>
+                    <a v-else :href="item1.path" :target="item1.blank ? '_blank' : null">{{ item1.title }}</a>
+                    <ul v-if="item1.children && item1.children.length">
+                        <li v-for="item2 in item1.children" :key="item2.title">
+                            <strong v-if="item2.children && item2.children.length">{{ item2.title }}</strong>
+                            <a v-else :href="getLink(item2)" :target="item2.blank ? '_blank' : null">{{ item2.title
+                            }}</a>
+                            <ul class="depth3" v-if="item2.children && item2.children.length">
+                                <li v-for="item3 in item2.children" :key="item3.title">
+                                    <a :href="getLink(item3)" :target="item3.blank ? '_blank' : null">{{ item3.title
+                                    }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="language">
+                <li><button @click="changeLang('ko')" :class="{ 'current': currentLang === 'ko' }">KO</button></li>
+                <li><button @click="changeLang('en')" :class="{ 'current': currentLang === 'en' }">EN</button></li>
+            </ul>
         </div>
+        <button class="btn_allMenu" @click="mo_menuToggle();">전체메뉴</button>
+    </div>
     </header>
 </template>
 
@@ -129,6 +95,12 @@ export default {
         // 메뉴 목록 computed
         const menuList = computed(() => {
             return props.lang === "en" ? menuEn : menuKo;
+        });
+
+        // 26.06.15 Add 정다희 : 현재 URL에서 앞 5글자 키워드(gsrab, gsrbr 등) 추출
+        const currentDepth1Key = computed(() => {
+            const path = window.location.pathname.replace(/^\//, ""); // 앞 슬래시 제거
+            return path.length >= 5 ? path.substring(0, 5) : null;
         });
 
         // 링크 처리: blank 또는 lang 기반 경로
@@ -382,6 +354,13 @@ export default {
                 if (clonedQuick) {
                     clonedQuick.remove();
                 }
+
+                // 26.06.15 Edit 정다희 : PC형태로 복귀 시 모바일용 style 잔재 및 펼침 클래스 강제 제거 방어
+                document.querySelectorAll("#gnb_nav ul.depth1 > li").forEach(li => {
+                    if (!li.contains(document.activeElement)) {
+                        li.classList.remove("is-open");
+                    }
+                });
             }
 
             // 26.06.12 Add 정다희 : 리사이즈 시 열린 2depth 패널 좌표 재계산
@@ -465,6 +444,7 @@ export default {
 
         return {
             menuList,
+            currentDepth1Key, // 26.06.15 Edit 정다희 : 누락되었던 리턴 스코프 추가 보완
             quickMenu,
             getLink,
             handleMouseEnter,
@@ -488,5 +468,3 @@ export default {
     },
 };
 </script>
-
-<style></style>
