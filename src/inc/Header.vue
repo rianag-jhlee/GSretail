@@ -8,8 +8,6 @@
         </div>
         <nav id="gnb_nav">
             <ul class="depth1">
-                <!-- 26.06.15 Add 정다희 : 퍼블 테스트용 current — URL 앞 5글자(gsrab, gsrbr 등)와 item1.path 매칭 시 li.current 적용 (is-open과 동일 활성 스타일, ui.css 참고) -->
-                <!-- [개발] 2depth current도 필요 시 ul.depth2 > li에 class="current" 부여 -->
                 <li v-for="item1 in menuList" :key="item1.title"
                     :class="{ current: currentDepth1Key && item1.path?.startsWith(currentDepth1Key) }"
                     @focusin="setFocus($event)"
@@ -26,8 +24,7 @@
                         {{ item1.title }}
                     </a>
 
-                    <!-- 26.06.12 Edit 정다희 : depth2_wrap을 1depth a 밖 li 형제로 분리 (a 중첩 방지 + Figma 878:4160 풀폭 패널) -->
-                    <!-- 26.06.12 Edit 정다희 : JS setDepth2Position() — li 좌표를 --menu-left로 전달해 2depth 콘텐츠 정렬 -->
+                    <!-- 26.06.12 Edit 정다희 : depth2_wrap을 1depth a 밖 li 형제로 분리 -->
                     <div class="depth2_wrap" v-if="item1.children && item1.children.length">
                         <!-- 26.06.12 Edit 정다희 : depth2 3개씩 묶기(chunkedChildren) 삭제 → children 직접 순회 -->
                         <ul class="depth2">
@@ -103,10 +100,10 @@ export default {
             return props.lang === "en" ? menuEn : menuKo;
         });
 
-        // 26.06.15 Add 정다희 : 현재 URL에서 앞 5글자 키워드(gsrab, gsrbr 등) 추출
+        // 26.06.15 Add 정다희 : 퍼블 테스트용 — URL pathname 앞 5글자로 1depth current 매칭 (개발 시 라우트 기준으로 교체)
         const currentDepth1Key = computed(() => {
             const path = window.location.pathname.replace(/^\//, ""); // 앞 슬래시 제거
-            return path.length >= 5 ? path.substring(0, 5) : null;
+            return path.length >= 5 ? path.substring(0, 5) : null; // 예: /gsrbr/01/... → "gsrbr"
         });
 
         // 링크 처리: blank 또는 lang 기반 경로
@@ -122,7 +119,7 @@ export default {
         const isDesktop = () => windowWidth.value > 768;
         /* //26.06.01 Add 이종환 : 반응형으로 리사이징 isDesktop 체크 */
 
-        // 26.06.12 Add 정다희 : 2depth 풀폭 패널 — 활성 1depth li 왼쪽 정렬 (Figma 878:4160, --menu-left)
+        // 26.06.12 Add 정다희 : 2depth 풀폭 패널 — 활성 1depth li 왼쪽 정렬
         const setDepth2Position = (li) => {
             const depth2 = li.querySelector(".depth2_wrap");
             // li.getBoundingClientRect().left → CSS var(--menu-left)로 전달 (ui.css depth2_wrap padding/margin 연동)
