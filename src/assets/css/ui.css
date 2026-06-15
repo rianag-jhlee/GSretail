@@ -31,7 +31,7 @@
 
 /* 26.06.12 Edit 정다희 : PC(769px~) hover/is-open/current 활성 color — 모바일(768px↓) 미적용 */
 @media screen and (min-width:769px) {
-    #header nav li:hover > a, #header nav li.is-open > a, #header nav li.current > a, #header nav li:hover > span, #header nav li.is-open > span, #header nav li.current > span {color:#107af2 !important;}
+    #header.head_black nav li:hover > a, #header.head_black nav li.is-open > a, #header.head_black nav li.current > a, #header.head_black nav li:hover > span, #header.head_black nav li.is-open > span, #header.head_black nav li.current > span {color:#107af2 !important;}
 }
 
 #header .quick_wrap {margin-left:auto; flex-shrink:0; display:flex; align-items:center;}
