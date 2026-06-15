@@ -1,6 +1,7 @@
 <template>
     <div class="main-container">
-        <header class="title_wrap ac">
+        <!-- 26.06.15 add 정다희 : top_visual 클래스 추가 -->
+        <header class="title_wrap ac top_visual">
             <h2 class="page_title">{{ t.pageTitle }}</h2>
         </header>
         <main class="cont_inner">
