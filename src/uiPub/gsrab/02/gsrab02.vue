@@ -24,7 +24,7 @@
                 <ul v-if="!isMobileView" class="value_list">
                     <li v-for="item in t.valueItems" :key="item.title">
                         <div class="item">
-                            <span class="thumb"><em><img :src="item.img" /></em></span>
+                            <span class="thumb"><em><img :src="item.img" :alt="item.title" /></em></span>   <!-- 260616 add 정다희 : 웹접근성 alt 추가 -->
                             <p>
                                 <strong>{{ item.title }}</strong>
                                 <span>{{ item.desc }}</span>

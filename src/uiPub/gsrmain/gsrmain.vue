@@ -12,7 +12,7 @@
                             <!-- 26.06.02 Add 이종환 : 영상 추가 -->
                             <div class="video_wrap">
                                 <video autoplay muted playsinline>
-                                    <source :src="item.vod" type="video/mp4">
+                                    <source :src="item.vod" type="video/mp4" />
                                 </video>
                             </div>
                             <!-- //26.06.02 Add 이종환 : 영상 추가 -->
@@ -33,10 +33,12 @@
                             <div class="swiper-slide" v-for="item in t.sec03.items" :key="item.img">
                                 <div class="slide">
                                     <span class="thumb">
-                                        <em><img :src="item.img" /></em>
+                                        <!-- 260616 add 정다희 : 웹접근성 alt 추가 -->
+                                        <em><img :src="item.img" :alt="item.brand" /></em>
                                     </span>
                                     <div>
-                                        <em><img :src="item.sub" /></em>
+                                        <!-- 260616 add 정다희 : 웹접근성 alt 추가 -->
+                                        <em><img :src="item.sub" :alt="item.brand + ' 로고'" /></em>
                                         <p>
                                             <strong>{{ item.brand }}</strong>
                                             <span>{{ item.txt }}</span>
@@ -63,7 +65,8 @@
                         <div class="swiper-slide" v-for="(item, i) in t.sec04.items" :key="i">
                             <a :href="item.link" class="slide">
                                 <span class="thumb">
-                                    <em><img :src="item.img" /></em>
+                                    <!-- 260616 add 정다희 : 웹접근성 alt 추가 -->
+                                    <em><img :src="item.img" :alt="item.title.replace(/<[^>]*>/g, '')" /></em>
                                 </span>
 
                                 <div class="txt">
