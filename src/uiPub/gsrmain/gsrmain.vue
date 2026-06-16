@@ -11,7 +11,7 @@
                             </p> -->
                             <!-- 26.06.02 Add 이종환 : 영상 추가 -->
                             <div class="video_wrap">
-                                <video autoplay muted playsinline>
+                                <video autoplay muted playsinline loop> <!-- 26.06. 16 Add 정다희 : 영상 루핑 -->
                                     <source :src="item.vod" type="video/mp4" />
                                 </video>
                             </div>
@@ -62,7 +62,8 @@
 
                 <div class="swiper" ref="sec04Swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" v-for="(item, i) in t.sec04.items" :key="i">
+                        <!-- 260616 edit 정다희 : sec04SwiperItems — loop 버퍼용 슬라이드(데스크톱 14개)  -->
+                        <div class="swiper-slide" v-for="(item, i) in sec04SwiperItems" :key="i">
                             <a :href="item.link" class="slide">
                                 <span class="thumb">
                                     <!-- 260616 add 정다희 : 웹접근성 alt 추가 -->
@@ -111,6 +112,9 @@ export default {
 
             /* swiper 인스턴스 */
             swipers: {},
+
+            /* 260616 add 정다희 : sec04 loop — 데스크톱/모바일 분기(모바일은 슬라이드 복제 없이 세로 리스트) */
+            isDesktopView: typeof window !== "undefined" ? window.innerWidth > 768 : true,
 
             /* language contents */
             langData: {
@@ -367,12 +371,24 @@ export default {
     computed: {
         t() {
             return this.langData[this.lang] || this.langData.ko;
-        }
+        },
+
+        /* 260616 add 정다희 : loop 버퍼용 슬라이드 복제(데스크톱만) — 원본 7개로는 넓은 화면 loop 우측 공백 발생 */
+        sec04SwiperItems() {
+            const items = this.t?.sec04?.items ?? [];
+
+            if (!items.length) return [];
+
+            return this.isDesktopView ? items.concat(items) : items;
+        },
     },
 
     mounted() {
 
-        this.handleSwiper();
+        /* 260616 add 정다희 : DOM 렌더 후 swiper 초기화 */
+        this.$nextTick(() => {
+            this.handleSwiper();
+        });
 
         window.addEventListener(
             "resize",
@@ -468,6 +484,63 @@ export default {
             });
         },
 
+        /* 260616 add 정다희 : sec04 무한 loop swiper — centeredSlides 제거, 슬라이드 복제 후 재생성 */
+        initSec04Swiper() {
+
+            const el = this.$refs.sec04Swiper;
+
+            if (!el) return;
+
+            this.destroySwiper("sec04");
+
+            this.swipers.sec04 = new Swiper(el, {
+                loop: true,
+                slidesPerView: "auto",
+                spaceBetween: 12,
+                speed: 800,
+                watchSlidesProgress: true,
+                on: {
+                    /* 260616 add 정다희 : 초기 렌더 시 우측 빈 영역 방지 — layout 확정 후 update·첫 슬라이드 이동 */
+                    init(swiper) {
+                        requestAnimationFrame(() => {
+                            swiper.update();
+                            swiper.slideToLoop(0, 0, false);
+                        });
+                    },
+                },
+            });
+
+            this.syncSec04Swiper();
+        },
+
+        /* 260616 add 정다희 : sec04 이미지 로드·리사이즈 후 swiper 위치 재계산 */
+        syncSec04Swiper() {
+
+            const swiper = this.swipers.sec04;
+            const el = this.$refs.sec04Swiper;
+
+            if (!swiper || !el) return;
+
+            const refresh = () => {
+                swiper.update();
+                swiper.slideToLoop(swiper.realIndex || 0, 0, false);
+            };
+
+            const imgs = el.querySelectorAll("img");
+            let pending = 0;
+
+            imgs.forEach((img) => {
+                if (img.complete) return;
+                pending += 1;
+                img.addEventListener("load", () => {
+                    pending -= 1;
+                    if (pending <= 0) refresh();
+                }, { once: true });
+            });
+
+            refresh();
+        },
+
         /* =========================
            반응형 swiper
         ========================= */
@@ -475,6 +548,9 @@ export default {
         handleSwiper() {
 
             const width = window.innerWidth;
+
+            /* 260616 add 정다희 : sec04SwiperItems 복제 여부 갱신 */
+            this.isDesktopView = width > 768;
 
             /* 메인 비주얼 */
             this.createSwiper(
@@ -488,7 +564,7 @@ export default {
             );
 
             /* desktop */
-            if (width > 768) {
+            if (this.isDesktopView) {
 
                 this.createSwiper(
                     "sec03",
@@ -501,20 +577,10 @@ export default {
                     }
                 );
 
-                this.createSwiper(
-                    "sec04",
-                    this.$refs.sec04Swiper,
-                    {
-                        loop: true,
-                        slidesPerView: "auto", // 260616 add 정다희 : 모바일에서는 자동으로 슬라이드 개수에 맞게 조절
-                        spaceBetween: 12,
-                        centeredSlides: true,
-                        speed: 800,
-                        observer: true,
-                        observeParents: true,
-                        resizeObserver: true,
-                    }
-                );
+                /* 260616 add 정다희 : 슬라이드 DOM(복제본) 반영 후 sec04 swiper 생성 */
+                this.$nextTick(() => {
+                    this.initSec04Swiper();
+                });
 
             } else {
 
@@ -695,16 +761,16 @@ section {
     margin-top: 80px;
 }
 
-.sec04 .swiper-slide {
-    width: auto;
-    flex-shrink:0;
-}
+.sec04 .swiper { width: 100%; overflow: hidden; }
+
+/* 260616 add 정다희 : slidesPerView auto — 슬라이드 552px 고정(loop 초기 복제·우측 공백 방지), thumb는 slide 너비 100% */
+.sec04 .swiper-slide { width: 552px; flex-shrink: 0; }
 
 .sec04 .slide {
     position: relative;
 }
-.sec04 .slide .thumb em{width:552px;}
-.sec04 .slide .thumb img{width:100%; height:550px; display:block;}
+.sec04 .slide .thumb em { width: 100%; display: block; }
+.sec04 .slide .thumb img{width:100%; height:550px; object-fit: cover;display:block;}
 .sec04 .slide .txt {
     padding: 30px 20px 0;
     display: flex;
