@@ -7,6 +7,7 @@
                     <div class="visual_inner">
                         <div class="txt_area">
                             <p ref="textParaRef">
+                                <!-- 26.06.16 edit 정다희 : v-html 적용 — lines 내 <br class="m_br"/> 모바일 줄바꿈 렌더링 -->
                                 <span v-for="(line, index) in t.visual.lines" :key="index" v-html="line"></span>
                             </p>
                             <div ref="logoWrapRef" class="logo_wrap">
@@ -43,53 +44,7 @@
                         </div>
                     </div>
                 </header>
-                <!-- <div class="str_bi">
-                    <div class="str_bi_sec str_bi_sec_logo" aria-labelledby="str_bi_logo_tit">
-                        <div class="str_bi_header">
-                            <h3 class="str_bi_tit">{{ t.bi.logoTitle }}</h3>
-                            <p class="str_bi_desc" v-html="t.bi.logoDesc"></p>
-                        </div>
-                        <div class="str_bi_logo_figs">
-                            <figure class="str_bi_fig">
-                                <img :src="imgBi01" :alt="t.bi.logoSymbolAlt" />
-                            </figure>
-                            <figure class="str_bi_fig">
-                                <img :src="imgBi02" :alt="t.bi.logoWordmarkAlt" />
-                            </figure>
-                        </div>
-                    </div>
-
-                    <div class="str_bi_sec str_bi_sec_color" aria-labelledby="str-bi-color-tit">
-                        <h3 class="str_bi_tit">{{ t.bi.colorTitle }}</h3>
-                        <div class="str_bi_color_figs">
-                            <h4 class="str_bi_caption">{{ t.bi.coreColorsTitle }}</h4>
-                            <ul class="str_color_core" role="list">
-                                <li>
-                                    <img :src="isBiColorMobile ? imgBi03Mo : imgBi03" :alt="t.bi.coreColorAlt1" />
-                                </li>
-                                <li>
-                                    <img :src="isBiColorMobile ? imgBi04Mo : imgBi04" :alt="t.bi.coreColorAlt2" />
-                                </li>
-                            </ul>
-                            <h4 class="str_bi_caption">{{ t.bi.supportingColorsTitle }}</h4>
-                            <ul class="str_color_sup" role="list">
-                                <li>
-                                    <img :src="isBiColorMobile ? imgBi05Mo : imgBi05" :alt="t.bi.supportingColorAlt1" />
-                                </li>
-                                <li>
-                                    <img :src="isBiColorMobile ? imgBi06Mo : imgBi06" :alt="t.bi.supportingColorAlt2" />
-                                </li>
-                                <li>
-                                    <img :src="isBiColorMobile ? imgBi07Mo : imgBi07" :alt="t.bi.supportingColorAlt3" />
-                                </li>
-                                <li>
-                                    <img :src="isBiColorMobile ? imgBi08Mo : imgBi08" :alt="t.bi.supportingColorAlt4" />
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div> -->
+                <!-- 26.06.16 del 정다희 : str_bi(브랜드 아이덴티티·BI 로고/색상) 영역 제거 -->
             </div>
         </section>
         <section class="sec_brand_competency str_inner">
@@ -196,22 +151,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import FeatureCards from "@/components/FeatureCards.vue";
 import CardItem from "@/components/CardItem.vue";
 import imgLogo from "@/assets/images/dummy/brand_gsshop_logo.png";
-import imgBi01 from "@/assets/images/dummy/gsrbr0301_01.png";
-import imgBi02 from "@/assets/images/dummy/gsrbr0301_02.png";
-import imgBi03 from "@/assets/images/dummy/gsrbr0301_03.png";
-import imgBi04 from "@/assets/images/dummy/gsrbr0301_04.png";
-import imgBi05 from "@/assets/images/dummy/gsrbr0301_05.png";
-import imgBi06 from "@/assets/images/dummy/gsrbr0301_06.png";
-import imgBi07 from "@/assets/images/dummy/gsrbr0301_07.png";
-import imgBi08 from "@/assets/images/dummy/gsrbr0301_08.png";
+/* 26.06.16 edit 정다희 : str_bi 제거 — BI 이미지(imgBi01~08) 삭제, 핵심역량(imgBi09)만 유지 */
 import imgBi09 from "@/assets/images/dummy/gsrbr0301_09.png";
 import imgBi09Mo from "@/assets/images/dummy/mo/gsrbr0301_09_mo.png";
-import imgBi03Mo from "@/assets/images/dummy/mo/gsrbr0301_03_mo.png";
-import imgBi04Mo from "@/assets/images/dummy/mo/gsrbr0301_04_mo.png";
-import imgBi05Mo from "@/assets/images/dummy/mo/gsrbr0301_05_mo.png";
-import imgBi06Mo from "@/assets/images/dummy/mo/gsrbr0301_06_mo.png";
-import imgBi07Mo from "@/assets/images/dummy/mo/gsrbr0301_07_mo.png";
-import imgBi08Mo from "@/assets/images/dummy/mo/gsrbr0301_08_mo.png";
 import imgCert01 from "@/assets/images/dummy/cert_logo_01.png";
 import imgCert02 from "@/assets/images/dummy/cert_logo_02.png";
 import imgCert03 from "@/assets/images/dummy/cert_logo_03.png";
@@ -272,21 +214,7 @@ const langData = {
             snsInstaAria: "인스타그램",
             snsYtAria: "유튜브",
         },
-        bi: {
-            logoTitle: "BI 로고",
-            logoDesc: "GS SHOP이 지향하는 핵심가치인 ‘Real(진정성)’ 이 <br class=\"p_br\"/>괄호 안에 담겨있음을 형상화한 것입니다. <br class=\"m_br\"/><br class=\"m_br\"/>GS SHOP은 가치가 있는 상품과 서비스에 진심을 담아,<br class=\"p_br\"/>고객의 가장 좋은 선택을 만듭니다.",
-            logoSymbolAlt: "GS SHOP BI 심볼",
-            logoWordmarkAlt: "GS SHOP BI 워드마크",
-            colorTitle: "BI 색상",
-            coreColorsTitle: "CORE COLORS",
-            supportingColorsTitle: "SUPPORTING COLORS",
-            coreColorAlt1: "Dynamic Blue 핵심 색상",
-            coreColorAlt2: "Mist Gray 핵심 색상",
-            supportingColorAlt1: "Bright Pink 보조 색상",
-            supportingColorAlt2: "Sunshine Orange 보조 색상",
-            supportingColorAlt3: "Forest Green 보조 색상",
-            supportingColorAlt4: "Ocean Navy 보조 색상",
-        },
+        /* 26.06.16 del 정다희 : bi(브랜드 아이덴티티) langData 제거 */
         competency: {
             title: "GS SHOP의 비즈니스 핵심역량",
             imageAlt: "GS SHOP의 비즈니스 핵심역량",
@@ -453,21 +381,7 @@ const langData = {
             snsInstaAria: "Instagram"/* 260604 번역 */,
             snsYtAria: "YouTube"/* 260604 번역 */,
         },
-        bi: {
-            logoTitle: "BI Logo"/* 260604 번역 */,
-            logoDesc: "This represents GS SHOP's core value of 'Real (authenticity),' symbolized by the parentheses in the logo. GS SHOP puts genuine heart into products and services of real value, guiding customers to their best choice.",
-            logoSymbolAlt: "GS SHOP BI Symbol"/* 260604 번역 */,
-            logoWordmarkAlt: "GS SHOP BI Wordmark"/* 260604 번역 */,
-            colorTitle: "BI Color"/* 260604 번역 */,
-            coreColorsTitle: "CORE COLORS",
-            supportingColorsTitle: "SUPPORTING COLORS",
-            coreColorAlt1: "Dynamic Blue Primary Color"/* 260604 번역 */,
-            coreColorAlt2: "Mist Gray Primary Color"/* 260604 번역 */,
-            supportingColorAlt1: "Bright Pink Secondary Color"/* 260604 번역 */,
-            supportingColorAlt2: "Sunshine Orange Secondary Color"/* 260604 번역 */,
-            supportingColorAlt3: "Forest Green Secondary Color"/* 260604 번역 */,
-            supportingColorAlt4: "Ocean Navy Secondary Color"/* 260604 번역 */,
-        },
+        /* 26.06.16 del 정다희 : bi(브랜드 아이덴티티) langData 제거 */
         competency: {
             title: "GS SHOP's Core Business Competencies"/* 260604 번역 */,
             imageAlt: "GS SHOP's Core Business Competencies"/* 260604 번역 */,
@@ -625,12 +539,11 @@ const textParaRef = ref(null);
 const logoWrapRef = ref(null);
 const aboutSectionRef = ref(null);
 
-
-const isBiColorMobile = ref(false);
-const isBiCompetencyMobile = isBiColorMobile;
-let biColorMql = null;
-function onBiColorMqlChange(e) {
-    isBiColorMobile.value = e.matches;
+/* 26.06.16 edit 정다희 : isBiColorMobile → isBiCompetencyMobile (str_bi 제거 후 핵심역량 이미지 PC/모바일 전환용) */
+const isBiCompetencyMobile = ref(false);
+let biCompetencyMql = null;
+function onBiCompetencyMqlChange(e) {
+    isBiCompetencyMobile.value = e.matches;
 }
 
 
@@ -773,9 +686,10 @@ function initBrandGsap() {
 
 onMounted(() => {
     isMobileView.value = _getIsMobile();
-    biColorMql = window.matchMedia("(max-width: 768px)");
-    isBiColorMobile.value = biColorMql.matches;
-    biColorMql.addEventListener("change", onBiColorMqlChange);
+    /* 26.06.16 edit 정다희 : 핵심역량(sec_brand_competency) 이미지 모바일 분기 */
+    biCompetencyMql = window.matchMedia("(max-width: 768px)");
+    isBiCompetencyMobile.value = biCompetencyMql.matches;
+    biCompetencyMql.addEventListener("change", onBiCompetencyMqlChange);
     // 26.06.02 Edit 정다희
     window.addEventListener("resize", onBrandResize);
     nextTick(() => {
@@ -784,9 +698,10 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-    if (biColorMql) {
-        biColorMql.removeEventListener("change", onBiColorMqlChange);
-        biColorMql = null;
+    /* 26.06.16 edit 정다희 : 핵심역량 이미지 matchMedia 해제 */
+    if (biCompetencyMql) {
+        biCompetencyMql.removeEventListener("change", onBiCompetencyMqlChange);
+        biCompetencyMql = null;
     }
     window.removeEventListener("resize", onBrandResize);
     // 26.06.02 Edit 정다희
@@ -842,26 +757,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .str_header h2 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;text-align: left; }
 .str_header p {margin-top: 16px;}
 .str_header .str_actions { margin-left:auto; display: flex; align-items: center; gap: 24px }
-.str_bi { width: 100% }
-.str_bi_sec {padding:56px 64px; background-color: #fff; border-radius: 12px; }
-.str_bi_sec + .str_bi_sec { margin-top: 40px }
-.str_bi_header {margin-bottom: 40px; display: flex; justify-content: space-between;gap:16px;}
-.str_bi_sec_color .str_bi_tit{margin-bottom: 40px;}
-.str_bi_tit {font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; flex: 1 }
-.str_bi_desc { color: #67676F; flex:1; }
-.str_bi_logo_figs { width: 100%; display: flex; flex-direction: column; gap: 24px }
-.str_bi_fig { width: 100% }
-.str_bi_fig:nth-child(2){padding:92px 0;}
-.str_bi_fig:nth-child(2) > img{width:auto; vertical-align: middle; margin: 0 auto;}
-.str_bi_fig img { width: 100%; height: auto; border-radius: 12px; display: block; object-fit: cover }
-.str_bi_caption { color:#A4A4B0; font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
-.str_color_core { width: 100%; margin: 12px 0 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px }
-.str_color_core + .str_bi_caption { margin-top: 64px; }
-.str_color_core li { min-width: 0 }
-.str_color_core img { border-radius: 12px; display: block; }
-.str_color_sup { width: 100%; margin: 12px 0 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px }
-.str_color_sup li { min-width: 0 }
-.str_color_sup img { width: 100%; height: auto; display: block; }
+/* 26.06.16 del 정다희 : .str_bi, .str_color_core, .str_color_sup 스타일 제거 */
 .sns_wrap { display: flex; align-items: center; gap: 6px }
 .str_biz_fig { padding:32px; background-color: #F8F8F8; border-radius: 12px; }
 .str_biz_fig_inner{display: flex; align-items: center; justify-content: space-between;}
@@ -925,21 +821,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
     .str_header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px }
     .str_header h2 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em }
     .str_header p{margin-top:12px; }
-    .str_bi_header{margin-bottom:20px; flex-direction: column; gap:8px; justify-content: flex-start;}
-    .str_bi_tit { font-family: Pretendard, sans-serif; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .str_header .str_actions { margin-left:0; gap:14px; flex: none; justify-content: flex-start }
-    .str_bi_fig:nth-child(2){padding:0 46px;}
-    .str_bi_fig:nth-child(1) > img {min-height: 80px;}
-    .str_bi_fig:nth-child(2) > img {width: 100%;} 
-    .str_bi_sec{padding:32px}
-    .str_bi_sec + .str_bi_sec { margin-top: 48px }
-    .str_bi_logo_figs { gap: 20px }
-    .str_bi_sec_color .str_bi_tit { margin-bottom: 24px }
-    .str_bi_color_figs { display: flex; flex-direction: column; align-items: stretch }
-    .str_bi_caption { font-size: 1.6rem; line-height: 1.42; letter-spacing: 0; }
-    .str_color_core { grid-template-columns: 1fr; }
-    .str_color_core + .str_bi_caption { margin-top: 40px; }
-    .str_color_sup { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 10px; }
     .sns_wrap { gap: 16px }
     .str_biz_fig_img{min-width:60px; padding:0;}
     section.sec_brand_biz.str_inner .str_header p {font-weight: 700; line-height: 1.24; letter-spacing: 0; }
