@@ -506,7 +506,7 @@ export default {
                     this.$refs.sec04Swiper,
                     {
                         loop: true,
-                        slidesPerView: 3.2,
+                        slidesPerView: "auto", // 260616 add 정다희 : 모바일에서는 자동으로 슬라이드 개수에 맞게 조절
                         spaceBetween: 12,
                         centeredSlides: true,
                         speed: 800,
@@ -703,7 +703,8 @@ section {
 .sec04 .slide {
     position: relative;
 }
-
+.sec04 .slide .thumb em{width:552px;}
+.sec04 .slide .thumb img{width:100%; height:550px; display:block;}
 .sec04 .slide .txt {
     padding: 30px 20px 0;
     display: flex;
