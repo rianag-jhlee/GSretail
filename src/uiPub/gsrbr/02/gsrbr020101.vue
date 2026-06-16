@@ -1025,15 +1025,15 @@ export default {
     .sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) }
 }
 
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url("@/assets/images/dummy/gsrbr020101_main.png"); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out; }
-.bg_wrap.active > .bg { transform: scale(1); }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url("@/assets/images/dummy/gsrbr020101_main.png"); background-size: cover; background-position: center top; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out; }
+.bg_wrap.active > .bg { transform: scale(0.8); }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s; }
 .bg_wrap > .bg::before { background-color: #00000066; z-index: 2; }
 .bg_wrap > .bg::after { background: linear-gradient(180deg, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .3) 48.27%, rgba(0, 0, 0, 0) 90.33%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1; }
 .bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible; }
 .bg_wrap > .visual_inner { width: 100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
 .bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center; }
-.logo_wrap { width:100%; margin: 0 auto; padding:0 60px;}
+.logo_wrap { width:100%; max-width:693px; margin: 0 auto; }
 .logo_wrap > img { width: 100%; margin: 0 auto; display: block }
 
 
@@ -1224,7 +1224,8 @@ export default {
     :deep(.m_br) { display: inline  }
 /* .sec_brand_visual { height: 100vh; } */
     .sticky { height: 100vh; top: 0; }
-    .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("@/assets/images/dummy/gsrbr020101_main.png"); background-position: center;transform: scale(1.55);background-position: 91% -66px;}
+    /* .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("@/assets/images/dummy/gsrbr020101_main.png"); } */
+    .txt_area > p {margin-bottom:10px;}
     .txt_area > p > span { font-size: 3.2rem; }
     /* .sec_brand_about { padding: 100px 20px; } */
     .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
@@ -1236,8 +1237,8 @@ export default {
 @media screen and (max-width: 767px) {
     .brand_value_section { padding: 100px 0; }
     .title_text { font-size: 24px; }
-    /* .logo_wrap{width:100%;padding:0 60px;}
-    .logo_wrap > img{width:100%;} */
+    .logo_wrap{width:100%; max-width:255px;  }
+    .logo_wrap > img{width:100%;}
     .acc_btn { font-size: 1.8rem; line-height: 1.5; letter-spacing: -0.01em; }
     .acc_inner { padding: 24px; }
     .acc_desc { font-size: 1.6rem; line-height: 1.5; }

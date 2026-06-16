@@ -7,7 +7,7 @@
                     <div class="visual_inner">
                         <div class="txt_area">
                             <p ref="textParaRef">
-                                <span v-for="(line, index) in t.visual.lines" :key="index">{{ line }}</span>
+                                <span v-for="(line, index) in t.visual.lines" :key="index" v-html="line"></span>
                             </p>
                             <div ref="logoWrapRef" class="logo_wrap">
                                 <img :src="imgLogo" :alt="t.visual.logoAlt" />
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </header>
-                <div class="str_bi">
+                <!-- <div class="str_bi">
                     <div class="str_bi_sec str_bi_sec_logo" aria-labelledby="str_bi_logo_tit">
                         <div class="str_bi_header">
                             <h3 class="str_bi_tit">{{ t.bi.logoTitle }}</h3>
@@ -89,7 +89,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
             </div>
         </section>
         <section class="sec_brand_competency str_inner">
@@ -250,7 +250,7 @@ const props = defineProps({
 const langData = {
     ko: {
         visual: {
-            lines: ["고객의 라이프스타일을 가치 있게 만드는"], /*텍스트 수정 26.06.15*/ 
+            lines: ["고객의 라이프스타일을<br class=\"m_br\"/>가치 있게 만드는"], /*텍스트 수정 26.06.15*/ 
             logoAlt: "GS SHOP",
         },
         about: [
@@ -816,8 +816,8 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 @media (max-width: 1024px) {
 .sec_brand_visual { height: 200vh }
 .sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/sub/gsrbr03/gs_shop_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
-.bg_wrap.active > .bg { transform: scale(1) }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/sub/gsrbr03/gs_shop_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out }
+.bg_wrap.active > .bg { transform: scale(0.8) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
 .bg_wrap > .bg::before { background-color: #00000066; z-index: 2 }
 .bg_wrap > .bg::after { background: linear-gradient(180deg, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .3) 48.27%, rgba(0, 0, 0, 0) 90.33%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
@@ -836,7 +836,7 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .str_inner { width: 1460px; max-width: 100%; margin: 0 auto; padding: 200px 20px 0; box-sizing: border-box; }
 .sec_brand_str { padding: 200px 0; background-color: #f8f8f8; }
 .sec_brand_str .str_inner {padding: 0 20px;}
-.sec_brand_str .str_header {margin-bottom:40px;flex-wrap:wrap;}
+.sec_brand_str .str_header {flex-wrap:wrap; margin:0;}
 section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: block; }
 .str_header {margin-bottom: 64px; display: flex; justify-content: space-between; align-items: flex-end }
 .str_header h2 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;text-align: left; }
@@ -919,7 +919,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
     .sec_brand_about { padding: 140px 0; }
     .sec_brand_about > .about_inner { width: 100%; padding: 0 20px; }
     .sec_brand_about > .about_inner > .about_txt > p > span { display: block; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-    .sec_brand_str{padding: 60px 0;}
+    .sec_brand_str{padding: 60px 0 52px;}
     section.str_inner { padding: 80px 20px 0;}
 
     .str_header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px }
