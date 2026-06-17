@@ -835,8 +835,8 @@ h2+.explain {
 .hero_message ul > li dl > dd .num_count > .num_motion_wrap { display: inline-block; overflow: hidden; vertical-align: bottom; flex-shrink: 0; }
 .hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { display: inline-block; font-weight: 700; font-size: 7.2rem; letter-spacing: -0.02em; line-height: 1.24; }
 .hero_message ul > li dl > dd .num_count > .num_unit_wrap { display: none; vertical-align: bottom; flex-shrink: 0; }
-.hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit{display: inline-block;font-weight: 600; font-size: 3.2rem;line-height: 1.84;letter-spacing: -0.03em;}
-.hero_message ul > li dl > dd .num_count + .num_desc{margin-left: clamp(12px, 1.25vw, 18px);padding: 5px 0;color:#4C4C53;font-weight: 400;font-size: 2rem;line-height: 1.35;letter-spacing: 0%;min-width: 0;flex-shrink: 1;}
+.hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit{margin-left:4px;margin-bottom:10px; display: inline-block;font-weight: 600; font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.03em;}
+.hero_message ul > li dl > dd .num_count + .num_desc{margin-left: clamp(12px, 1.25vw, 18px);padding: 13px 0;color:#4C4C53;font-weight: 400;font-size: 2rem;line-height: 1.35;letter-spacing: 0%;min-width: 0;flex-shrink: 1;}
 .hero_message ul > li:last-child dl > dd .num_count + .num_desc{padding:17px 32px 17px 0;}
 .hero_message ul > li:last-child dl > dd .num_count + .num_desc{margin-left: clamp(12px, 1.25vw, 18px);}
 .section_wrap {
@@ -1010,7 +1010,7 @@ section {
     .hero_message ul > li dl > dd .num_count { flex-shrink: 0; }
     .hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { font-size: 4.8rem; line-height: 1.24; }
     .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit { font-size: 2.4rem; }
-    .hero_message ul > li dl > dd .num_count + .num_desc { margin-left: 16px; padding: 8px 0 8px 4px; font-size: 1.6rem; flex-shrink: 1; min-width: 0; }
+    .hero_message ul > li dl > dd .num_count + .num_desc { margin-left: 16px; font-size: 1.6rem; flex-shrink: 1; min-width: 0; }
     .hero_message ul > li:last-child dl > dd .num_count + .num_desc { margin-left: 14px; padding: 12px 0;}
 
     .sec03 h2 {
@@ -1066,8 +1066,8 @@ section {
     .hero_message ul > li dl > dt { width: 100%; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em;}
     .hero_message ul > li dl > dd { width: 100%; justify-content: flex-start; align-items:flex-start; flex-wrap: wrap; gap: 4px; }
     .hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { font-size: 4rem; line-height: 1.3; letter-spacing: -0.01em;}
-    .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit { font-size: 2rem; letter-spacing: -0.01em;}
-    .hero_message ul > li dl > dd .num_count + .num_desc { margin:0; padding:24px 0 13px; font-size: 1.2rem; line-height: 1.2;letter-spacing: 0;}
+    .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit { margin-bottom:10px; font-size: 2rem; letter-spacing: -0.01em; line-height: 1.35;}
+    .hero_message ul > li dl > dd .num_count + .num_desc { margin:0; padding:22px 0 16px; font-size: 1.2rem; line-height: 1.2;letter-spacing: 0;}
     .hero_message ul > li:last-child dl > dd { align-items: center; }
     .sec03 {
         padding-top: 50px;
