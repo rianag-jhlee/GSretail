@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="chart_img">
                                         <picture>
-                                            <source :srcset="require(`@/assets/images/dummy/${chart.imgName}_mo.png`)" media="(max-width: 767px)">
+                                            <source :srcset="require(`@/assets/images/dummy/${chart.imgName}_mo.png`)" media="(max-width: 767px) /">
                                             <img :src="require(`@/assets/images/dummy/${chart.imgName}.png`)" :alt="chart.title">
                                         </picture>
                                     </div>
