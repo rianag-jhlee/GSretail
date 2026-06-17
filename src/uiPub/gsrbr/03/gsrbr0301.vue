@@ -728,22 +728,24 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
 /* 26.06.02 Edit 정다희 */
-@media (max-width: 1024px) {
-.sec_brand_visual { height: 200vh }
-.sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) } }
+
 .bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/sub/gsrbr03/gs_shop_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out }
 .bg_wrap.active > .bg { transform: scale(0.8) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
-.bg_wrap > .bg::before { background-color: #00000066; z-index: 2 }
-.bg_wrap > .bg::after { background: linear-gradient(180deg, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .3) 48.27%, rgba(0, 0, 0, 0) 90.33%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
+.bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
 .bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible }
 .bg_wrap > .visual_inner { width:100%;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center }
 .bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center }
 .logo_wrap{max-width: 382px; margin:0 auto;}
 .txt_area > p { width: 100%; margin-bottom: 48px; overflow: hidden }
 .txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block }
-/* .txt_area > .logo_wrap { overflow: hidden }
-.txt_area > .logo_wrap > img { width: auto; margin: 0 auto; display: block } */
+
+@media (max-width: 1024px) {
+.sec_brand_visual { height: 200vh }
+.sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)) }
+.bg_wrap > .bg { transform: none; transition: none; }
+.bg_wrap.active > .bg { transform: none; }
+}
 .sec_brand_about { padding: 200px 20px; }
 .sec_brand_about > .about_inner { max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
 .sec_brand_about > .about_inner > .about_txt > p { overflow: hidden }
@@ -806,7 +808,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
     /* 26.06.02 Edit 정다희 */
     /* .sec_brand_visual { height: 100vh } */
     .sticky { height: 100vh; top: 0 }
-    .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(@/assets/images/dummy/gs_shop_bg.png); background-position: 10% 17px }
+    .bg_wrap > .bg {  background-position: 10% 17px }
     .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
     .txt_area > p { margin-bottom: 0 }
     .txt_area > p > span { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; }

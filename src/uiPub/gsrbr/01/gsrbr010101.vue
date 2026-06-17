@@ -4896,7 +4896,7 @@ function goBack() {
 .brand_panel_title > p{font-weight: 700;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;}
 :deep(.feature_card_desc), :deep(.step_bullets > li){font-weight:700;}
 
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.png); background-size: cover; background-position: center -75px; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.png); background-size: cover; background-position: center top; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out }
 .bg_wrap.active > .bg { transform: scale(0.8) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
 .bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
@@ -5265,11 +5265,6 @@ button { background-color: #fff }
   /* .sec_brand_visual { height: 100vh } */
   .sticky { height: 100vh; top: 0 }
 
-  .bg_wrap > .bg { background-image: url(@/assets/images/dummy/brand_main_bg_mo.png);}
-  .bg_wrap > .bg::before { background-color: transparent; }
-  .bg_wrap > .bg::after { background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-  .bg_wrap.active > .bg::before,
-  .bg_wrap.active > .bg::after { opacity: 0; visibility: hidden; }
   .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
   .txt_area > p { margin-bottom: 0 }
   .txt_area > p > span, .txt_area > p > span em { color:#fff; font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center }
