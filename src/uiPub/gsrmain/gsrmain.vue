@@ -1011,7 +1011,7 @@ section {
     .hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { font-size: 4.8rem; line-height: 1.24; }
     .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit { font-size: 2.4rem; }
     .hero_message ul > li dl > dd .num_count + .num_desc { margin-left: 16px; padding: 8px 0 8px 4px; font-size: 1.6rem; flex-shrink: 1; min-width: 0; }
-    .hero_message ul > li:last-child dl > dd .num_count + .num_desc { margin-left: 16px; }
+    .hero_message ul > li:last-child dl > dd .num_count + .num_desc { margin-left: 14px; padding: 12px 0;}
 
     .sec03 h2 {
         position: relative;
