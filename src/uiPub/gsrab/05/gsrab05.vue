@@ -25,8 +25,9 @@
                             <p><span class="bus_tag_reg">{{ t.location.busExpressLabel }}</span> {{ t.location.busExpressRoutes }}</p>
                         </div>
                     </div>
-                    <div class="map_area" role="map" :aria-label="t.location.mapAriaLabel">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.2584135599163!2d127.03451977629449!3d37.50182292783558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3fee398641d%3A0x237e08643e54191d!2zR1Mg7YOA7JuM!5e0!3m2!1sko!2skr!4v1779151657505!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <!-- 26.06.17 edit 정다희 : 웹접근성 대응 iframe title 적용 -->
+                    <div class="map_area">
+                        <iframe :title="t.location.mapTitle" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.2584135599163!2d127.03451977629449!3d37.50182292783558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3fee398641d%3A0x237e08643e54191d!2zR1Mg7YOA7JuM!5e0!3m2!1sko!2skr!4v1779151657505!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </article>
             </section>
@@ -67,12 +68,13 @@
                             </ul>
                         </div>
                     </div>
+                    <!-- 26.06.17 edit 정다희 : 웹접근성 대응 iframe title 적용 -->
                     <div class="map_stack">
-                        <div class="map_area" role="map" :aria-label="t.location2.mapAriaLabel1">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101262.58408041636!2d126.73666359726565!3d37.52075259999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e8cae0efbf5%3A0xa6a88cc52747434a!2zR1PqsJXshJztg4Dsm4w!5e0!3m2!1sko!2skr!4v1779151880978!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="map_area">
+                            <iframe :title="t.location2.mapTitle1" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101262.58408041636!2d126.73666359726565!3d37.52075259999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e8cae0efbf5%3A0xa6a88cc52747434a!2zR1PqsJXshJztg4Dsm4w!5e0!3m2!1sko!2skr!4v1779151880978!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
-                        <div class="map_area" role="map" :aria-label="t.location2.mapAriaLabel2">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.4355804119828!2d126.88768577629516!3d37.52122822672419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9ef339ed8173%3A0x58fcaf41d3848615!2zR1PqsJXshJxO7YOA7JuM!5e0!3m2!1sko!2skr!4v1779151949828!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="map_area">
+                            <iframe :title="t.location2.mapTitle2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.4355804119828!2d126.88768577629516!3d37.52122822672419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9ef339ed8173%3A0x58fcaf41d3848615!2zR1PqsJXshJxO7YOA7JuM!5e0!3m2!1sko!2skr!4v1779151949828!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </article>
@@ -105,7 +107,7 @@ const langData = {
             busMainRoutes: "146, 147, 341, 360, 740, 41",
             busExpressLabel: "직행/급행",
             busExpressRoutes: "1100, 1700, 2000, 7007, 8001",
-            mapAriaLabel: "GS타워 위치 지도 영역(퍼블용 이미지)",
+            mapTitle: "GS타워 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : mapAriaLabel -> mapTitle 키 변경 */
         },
         location2: {
             title: "GS강서타워/GS강서N타워",
@@ -131,8 +133,8 @@ const langData = {
                 { route: "올림픽대로", desc: "양화대교 남단에서 문래동 사거리 방향으로 직진, 약 10분 소요" },
                 { route: "강변북로", desc: "영등포 시장에서 오목교 방향으로 직진, 양남사거리에서 좌회전 후 50m 직진" },
             ],
-            mapAriaLabel1: "GS강서타워 위치 지도 영역(퍼블용 이미지)",
-            mapAriaLabel2: "GS강서N타워 위치 지도 영역(퍼블용 이미지)",
+            mapTitle1: "GS강서타워 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : mapAriaLabel1 -> mapTitle1 키 변경 */
+            mapTitle2: "GS강서N타워 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : mapAriaLabel2 -> mapTitle2 키 변경 */
         },
     },
     en: {
@@ -148,7 +150,7 @@ const langData = {
             busMainRoutes: "146, 147, 341, 360, 740, 41",
             busExpressLabel: "Direct / Express"/* 260604 번역 */,
             busExpressRoutes: "1100, 1700, 2000, 7007, 8001",
-            mapAriaLabel: "GS Tower location map area (publishing image)"/* 260604 번역 */,
+            mapTitle: "GS Tower location map area (publishing image)"/* 260604 번역, 26.06.17 edit 정다희 : mapAriaLabel -> mapTitle 키 변경 */,
         },
         location2: {
             title: "GS Gangseo Tower / GS Gangseo N Tower",
@@ -174,8 +176,8 @@ const langData = {
                 { route: "Olympic Expressway", desc: "Go straight from the south end of Yanghwa Bridge toward Munrae-dong Intersection, approximately a 10-minute drive" },
                 { route: "Gangbyeon Expressway", desc: "Go straight from Yeongdeungpo Market toward Omokgyo Station; turn left at Yangnam Intersection and continue straight for 50m" },
             ],
-            mapAriaLabel1: "GS Gangseo Tower location map area (publishing image)"/* 260604 번역 */,
-            mapAriaLabel2: "GS Gangseo N Tower location map area (publishing image)"/* 260604 번역 */,
+            mapTitle1: "GS Gangseo Tower location map area (publishing image)"/* 260604 번역, 26.06.17 edit 정다희 : mapAriaLabel1 -> mapTitle1 키 변경 */,
+            mapTitle2: "GS Gangseo N Tower location map area (publishing image)"/* 260604 번역, 26.06.17 edit 정다희 : mapAriaLabel2 -> mapTitle2 키 변경 */,
         },
     }
 };
