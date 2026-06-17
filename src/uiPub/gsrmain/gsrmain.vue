@@ -49,24 +49,50 @@
 
                     <div class="swiper Swiper" ref="sec03Swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" v-for="item in t.sec03.items" :key="item.img">
-                                <div class="slide">
+                            <div class="swiper-slide" v-for="(item, index) in t.sec03.items" :key="item.img">
+                                <div class="slide" :class="item.class" @mouseenter="hoverIndex = index">
+                                <!-- <div class="slide" :class="item.class" @mouseenter="console.log('enter', index)"> -->
+                                    <!-- 26.06.17 Add 이종환 -->
+                                    <strong class="cate">{{ item.cate }}</strong>
+                                    
                                     <span class="thumb">
                                         <!-- 260616 add 정다희 : 웹접근성 alt 추가 -->
                                         <em><img :src="item.img" :alt="item.brand" /></em>
                                     </span>
                                     <div>
                                         <!-- 260616 add 정다희 : 웹접근성 alt 추가 -->
-                                        <em><img :src="item.sub" :alt="item.brand + ' 로고'" /></em>
+                                        <!-- 26.06.17 Del 이종환 <em><img :src="item.sub" :alt="item.brand + ' 로고'" /></em> -->
                                         <p>
-                                            <strong>{{ item.brand }}</strong>
-                                            <span>{{ item.txt }}</span>
+                                            <strong><img :src="item.sub" :alt="item.brand + ' 로고'" /></strong>
+                                            <span v-html="item.txt"></span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- 26.06.17 Add 이종환 : 각 사업 hover 시 노출되는 layer-->
+                    <div class="hover_layer" :class="{ active: hoverIndex !== null }" @mouseleave="hoverIndex = null">
+                        <ul>
+                            <li
+                                v-for="(item, index) in t.sec03.items"
+                                :key="index" @mouseenter="hoverIndex = index" :class="item.class" :style="hoverIndex !== null ? { backgroundImage: `url(${require('@/assets/images/main/img_hover_layer_' + t.sec03.items[hoverIndex].class + '_' + (index + 1) + '.png')})` } : {}">
+                                <a :href="item.link" v-if="hoverIndex === index">
+                                    <p>
+                                        <strong>
+                                            <img
+                                                :src="item.sub"
+                                                :alt="item.brand + ' 로고'"
+                                            />
+                                        </strong>
+                                        <span v-html="item.txt"></span>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>                     
+                    </div>
+                    <!-- //26.06.17 Add 이종환 : 각 사업 hover 시 노출되는 layer-->
                 </div>
             </section>
 
@@ -128,7 +154,6 @@ export default {
 
     data() {
         return {
-
             /* swiper 인스턴스 */
             swipers: {},
 
@@ -198,19 +223,28 @@ export default {
                                 img: require("@/assets/images/main/main_sec03_01.png"),
                                 sub: require("@/assets/images/main/main_sec03_01-1.png"),
                                 brand: "GS25",
-                                txt: "일상생활의 중심, 하루의 시작"
+                                txt: "일상생활의 중심,<br/> 하루의 시작",
+                                cate: "편의점",
+                                class: "gs25",
+                                link: "/gsrbr010101"
                             },
                             {
                                 img: require("@/assets/images/main/main_sec03_02.png"),
                                 sub: require("@/assets/images/main/main_sec03_02-1.png"),
                                 brand: "GS THE FRESH",
-                                txt: "신선한 행복을 만나다"
+                                txt: "신선한 행복을<br/> 만나다",
+                                cate: "수퍼",
+                                class: "fresh",
+                                link: "/gsrbr020101"
                             },
                             {
                                 img: require("@/assets/images/main/main_sec03_03.png"),
                                 sub: require("@/assets/images/main/main_sec03_03-1.png"),
                                 brand: "GS SHOP",
-                                txt: "고객의 라이프스타일을 가치 있게 만드는"
+                                txt: "고객의 라이프스타일을<br/> 가치 있게 만드는",
+                                cate: "홈쇼핑",
+                                class: "shopping",
+                                link: "/gsrbr0301"
                             },
                         ]
                     },
@@ -418,7 +452,10 @@ export default {
                         ]
                     }
                 }
-            }
+            },
+
+            /* 26.06.17 Add 이종환 : 사업소개 hover 인덱스 */
+            hoverIndex: null,
         };
     },
 
@@ -868,7 +905,7 @@ section {
 }
 
 .sec03 .slide .thumb {
-    padding-top:126.811594%;
+    padding-top:117.210144%;
     border-radius:12px;
     display:block;
 
@@ -879,25 +916,33 @@ section {
     top:0; right:0; bottom:0; left:0;
 }
 
-.sec03 .slide div {padding:30px; position:absolute; right:0; bottom:0; left:0; flex: 1;
+.sec03 .slide div {padding:60px 30px; position:absolute; right:0; bottom:0; left:0; flex: 1;
     display: flex;
     align-items: center;
     gap: 20px;}
 
 .sec03 .slide div em {display:flex; align-items:center;}
 
+.sec03 .slide .cate {color:#fff; font-size:5.6rem; letter-spacing:-0.01em; line-height:130%; position:absolute; top:50%; left:50%; z-index:1; transform:translate(-50%, -50%);}
+
 .sec03 .slide p {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap:2px;
 }
 
 .sec03 .slide p strong {
-    color: #fff;
-    font-size: 4rem;
-    letter-spacing: -0.01em;
-    line-height: 130%;
+    margin-bottom:6px;
+    display:block;
+}
+
+.sec03 .slide.gs25 p strong {width:86px;}
+.sec03 .slide.fresh p strong {width:240px;}
+.sec03 .slide.shopping p strong {width:140px;}
+
+.sec03 .slide p strong img {
+    width:100%;
+    display:block;
 }
 
 .sec03 .slide p span {
@@ -906,6 +951,24 @@ section {
     letter-spacing: -0.01em;
     line-height: 150%;
 }
+.sec03 .slide p span br {display:none;}
+
+.sec03 .hover_layer {position:absolute; bottom:0; right:20px; left:20px; z-index:10;}
+.sec03 .hover_layer.active {opacity:1;}
+.sec03 .hover_layer ul {display:flex;}
+.sec03 .hover_layer li {width:calc(33.3333% - 6px); background-position:50% 0; background-repeat:no-repeat; background-size:cover; border-radius:12px; border-radius:12px; opacity:0; transition:background 0.3s, opacity 0.25s ease;}
+.sec03 .hover_layer.active li {opacity:1; transition:background 0.25s, opacity 0.25s ease;}
+.sec03 .hover_layer li + li {margin-left:12px;}
+.sec03 .hover_layer.active li a {padding-top:117.210144%; position:relative; display:block;}
+.sec03 .hover_layer.active li p {padding-bottom:31.702898%; position:absolute; top:0; right:0; bottom:0; left:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:20px;}
+.sec03 .hover_layer.active li p strong {display:block;}
+.sec03 .hover_layer.active li p strong img {width:100%; display:block;}
+.sec03 .hover_layer.active li p span {color:#fff; font-size:3.2rem; font-weight:700; letter-spacing:-0.01em; line-height:130%; text-align:center; display:flex; flex-direction:column; align-items:center;}
+.sec03 .hover_layer.active li p span:after {width:56px; height:56px; margin-top:20px; background:url('@/assets/images/main/icon_brand_arrow.png') 0 0 no-repeat; content:''; display:block;}
+
+.sec03 .hover_layer.active li.gs25 p strong {width:124px;}
+.sec03 .hover_layer.active li.fresh p strong {width:396px;}
+.sec03 .hover_layer.active li.shopping p strong {width:218px;}
 
 .sec04 .explain {
     margin-top: 24px;
@@ -1020,6 +1083,15 @@ section {
         margin-bottom: 40px;
     }
 
+    .sec03 .slide .cate {font-size:4rem;}
+    .sec03 .slide div {padding:38px 15px;}
+
+    .sec03 .slide.gs25 p strong {width:62px;}
+    .sec03 .slide.fresh p strong {width:198px;}
+    .sec03 .slide.shopping p strong {width:109px;}
+
+    .sec03 .slide p span {font-size:1.6rem;}
+
     /* .sec03 .slide .thumb {
         width: 50%;
     } */
@@ -1092,17 +1164,31 @@ section {
 
     .sec03 .slide .thumb {
         width: 100%;
+        padding-top:125.373134%;
     }
 
     .sec03 .slide p strong {
-        font-size: 2.8rem;
-        line-height:135%;
+        margin-bottom:6px;
+    }
+
+    .sec03 .slide.gs25 p strong {
+        width:62px;
+    }
+
+    .sec03 .slide.fresh p strong {
+        width:198px;
+    }
+
+    .sec03 .slide.shopping p strong {
+        width:109px;
     }
 
     .sec03 .slide p span {
         font-size: 1.6rem;
         line-height:124%;
     }
+
+    .sec03 .slide .cate {font-size:4rem;}
 
     /* Section 04 (세로 리스트화) */
     .sec04 {
