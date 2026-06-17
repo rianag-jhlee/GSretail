@@ -21,9 +21,28 @@
                 </div>
             </div>
         </div>
-
+        <!-- 26.06.17 Add 정다희 : Hero message 영역 추가 -->
+        <div class="hero_message" ref="heroMessageRef" v-if="t.heroMessage">
+            <div class="inner">
+                <p v-html="t.heroMessage.title"></p>
+                <ul>
+                    <li v-for="(item, index) in t.heroMessage.items" :key="index">
+                        <dl>
+                            <dt>{{ item.dt }}</dt>
+                            <dd>
+                                <strong class="num_count">
+                                    <span class="num_motion_wrap"><span class="num_motion">{{ item.num }}</span></span>
+                                    <span class="num_unit_wrap"><span class="num_unit">{{ item.unit }}</span></span>
+                                </strong>
+                                <span class="num_desc" v-html="item.desc"></span>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /Hero message -->
         <div class="section_wrap">
-
             <section v-if="t.sec03" class="sec03">
                 <div class="inner">
                     <h2 v-html="t.sec03.title"></h2>
@@ -113,6 +132,11 @@ export default {
             /* swiper 인스턴스 */
             swipers: {},
 
+            /* 260616 add 정다희 : num_motion GSAP 컨텍스트 */
+            gsapCtx: null,
+            numMotionPlayed: false,
+            numMotionScrollTrigger: null,
+
             /* 260616 add 정다희 : sec04 loop — 데스크톱/모바일 분기(모바일은 슬라이드 복제 없이 세로 리스트) */
             isDesktopView: typeof window !== "undefined" ? window.innerWidth > 768 : true,
 
@@ -139,6 +163,31 @@ export default {
                             //     img: require("@/assets/images/dummy/main_visual_03.png")
                             // }
                         ]
+                    },
+
+                    /* 260616 add 정다희 : hero_message */
+                    heroMessage: {
+                        title: '고객의 모든 <span class="txt_orange">경험</span>을 연결하고, <br />데이터로 <span class="txt_green">공감</span>하며,<br />상품과 서비스로 <span class="txt_blue">신뢰</span>받는 플랫폼',
+                        items: [
+                            {
+                                dt: "전국 오프라인 점포 수",
+                                num: "18,600+",
+                                unit: "점",
+                                desc: "(2025.12 기준)",
+                            },
+                            {
+                                dt: "GS ALL 멤버십 가입자 수",
+                                num: "2,344+",
+                                unit: "만명",
+                                desc: "(2026. 1분기 기준)",
+                            },
+                            {
+                                dt: "고객 만족도&서비스 품질",
+                                num: "1",
+                                unit: "위",
+                                desc: "2025 한국산업의 고객 만족도 (편의점, 수퍼)<br />2025 한국서비스 품질지수 (편의점, 수퍼, 홈쇼핑)",
+                            },
+                        ],
                     },
 
                     sec03: {
@@ -264,6 +313,11 @@ export default {
                         ]
                     },
 
+                    /* 260616 add 정다희 : hero_message */
+                    heroMessage: {
+                       
+                    },
+
                     sec03: {
                         title: "GS Retail's<br/> Introducing our businesses."/* 260604 번역 */,
 
@@ -385,9 +439,10 @@ export default {
 
     mounted() {
 
-        /* 260616 add 정다희 : DOM 렌더 후 swiper 초기화 */
+        /* 260616 add 정다희 : DOM 렌더 후 swiper · num_motion 초기화 */
         this.$nextTick(() => {
             this.handleSwiper();
+            this.initNumMotion();
         });
 
         window.addEventListener(
@@ -408,9 +463,116 @@ export default {
             "sec03",
             "sec04"
         ]);
+
+        /* 260616 add 정다희 : num_motion ScrollTrigger · 타임라인 정리 */
+        if (this.numMotionScrollTrigger) {
+            this.numMotionScrollTrigger.kill();
+            this.numMotionScrollTrigger = null;
+        }
+
+        if (this.gsapCtx) {
+            this.gsapCtx.revert();
+            this.gsapCtx = null;
+        }
     },
 
     methods: {
+
+        /* =========================
+           num_motion 숫자 애니메이션
+        ========================= */
+
+        /* 260616 add 정다희 : 목표 텍스트(18,600+ 등) 파싱 */
+        parseNumMotionValue(text) {
+            const suffix = text.endsWith("+") ? "+" : "";
+            const value = parseInt(text.replace(/[^0-9]/g, ""), 10) || 0;
+            const useComma = text.includes(",");
+
+            return { value, suffix, useComma };
+        },
+
+        /* 260616 add 정다희 : 카운트업 표시 포맷 */
+        formatNumMotionValue(num, useComma, suffix) {
+            const formatted = useComma
+                ? Math.round(num).toLocaleString("en-US")
+                : String(Math.round(num));
+
+            return `${formatted}${suffix}`;
+        },
+
+        /* 260616 add 정다희 : hero_message 진입 시 슬라이드업(0) → 카운트업 (1회 재생) */
+        initNumMotion() {
+            if (this.numMotionPlayed || this.gsapCtx) return;
+
+            const heroEl = this.$refs.heroMessageRef;
+
+            if (!heroEl) return;
+
+            const numEls = heroEl.querySelectorAll(".num_motion");
+
+            if (!numEls.length) return;
+
+            const timelines = [];
+
+            const playNumMotion = () => {
+                if (this.numMotionPlayed) return;
+
+                this.numMotionPlayed = true;
+
+                timelines.forEach((tl) => {
+                    if (!tl.isActive()) tl.play(0);
+                });
+
+                if (this.numMotionScrollTrigger) {
+                    this.numMotionScrollTrigger.kill();
+                    this.numMotionScrollTrigger = null;
+                }
+            };
+
+            this.gsapCtx = gsap.context(() => {
+                numEls.forEach((el) => {
+                    const targetText = el.textContent.trim();
+                    const { value, suffix, useComma } = this.parseNumMotionValue(targetText);
+                    const counter = { val: 0 };
+                    const unitWrap = el.closest(".num_count")?.querySelector(".num_unit_wrap");
+
+                    el.textContent = "0";
+                    gsap.set(el, { y: "100%", opacity: 0, willChange: "transform, opacity" });
+                    if (unitWrap) unitWrap.style.display = "none";
+
+                    const tl = gsap.timeline({ paused: true, repeat: 0 });
+
+                    tl.to(el, {
+                        y: "0%",
+                        opacity: 1,
+                        duration: 0.6,
+                        ease: "power2.out",
+                    }).to(counter, {
+                        val: value,
+                        duration: value > 100 ? 1.8 : 1,
+                        ease: "power2.out",
+                        onStart: () => {
+                            if (unitWrap) unitWrap.style.display = "inline-block";
+                        },
+                        onUpdate: () => {
+                            el.textContent = this.formatNumMotionValue(counter.val, useComma, suffix);
+                        },
+                        onComplete: () => {
+                            gsap.set(el, { willChange: "auto" });
+                        },
+                    }, ">");
+
+                    timelines.push(tl);
+                });
+
+                this.numMotionScrollTrigger = ScrollTrigger.create({
+                    trigger: heroEl,
+                    start: "top 80%",
+                    once: true,
+                    onEnter: playNumMotion,
+                });
+            }, this.$el);
+        },
 
         /* =========================
            Swiper 생성
@@ -655,6 +817,28 @@ h2+.explain {
     display: block;
 }
 
+
+.hero_message{padding-top:210px;background-color: #fff;position: relative;}
+.hero_message .inner{max-width: 1720px;margin: 0 auto;padding: 0 20px;}
+.hero_message p{font-weight: 700;font-size: 6.8rem;line-height: 1.24;letter-spacing: -0.02em;}
+.hero_message p span{font-weight: 800;}
+.hero_message p span.txt_orange{color: #FB6432;}
+.hero_message p span.txt_green{color: #15B874;}
+.hero_message p span.txt_blue{color: #248BFF;}
+.hero_message ul{max-width:1045px;margin-top:90px;margin-left: auto;;}
+.hero_message ul > li{padding: 20px 8px;border-bottom: 1px solid #000;}
+.hero_message ul > li:first-child{border-top: 1px solid #000;}
+.hero_message ul > li dl{display: grid;grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);column-gap: clamp(32px, 6vw, 120px);align-items: center;}
+.hero_message ul > li dl > dt{width: auto;font-weight: 600;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.03em;}
+.hero_message ul > li dl > dd{display: flex;align-items: flex-end;flex-wrap: nowrap;min-width: 0;}
+.hero_message ul > li dl > dd .num_count { display: inline-flex; align-items: flex-end; flex-wrap: nowrap; flex-shrink: 0; white-space: nowrap; }
+.hero_message ul > li dl > dd .num_count > .num_motion_wrap { display: inline-block; overflow: hidden; vertical-align: bottom; flex-shrink: 0; }
+.hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { display: inline-block; font-weight: 700; font-size: 7.2rem; letter-spacing: -0.02em; line-height: 1.24; }
+.hero_message ul > li dl > dd .num_count > .num_unit_wrap { display: none; vertical-align: bottom; flex-shrink: 0; }
+.hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit{display: inline-block;font-weight: 600; font-size: 3.2rem;line-height: 1.84;letter-spacing: -0.03em;}
+.hero_message ul > li dl > dd .num_count + .num_desc{margin-left: clamp(12px, 1.25vw, 18px);padding: 5px 0;color:#4C4C53;font-weight: 400;font-size: 2rem;line-height: 1.35;letter-spacing: 0%;min-width: 0;flex-shrink: 1;}
+.hero_message ul > li:last-child dl > dd .num_count + .num_desc{padding:17px 32px 17px 0;}
+.hero_message ul > li:last-child dl > dd .num_count + .num_desc{margin-left: clamp(12px, 1.25vw, 18px);}
 .section_wrap {
     background-color: #fff;
     position: relative;
@@ -804,11 +988,30 @@ section {
     overflow: hidden;
 }
 
+/* --- [Small PC: 1300px 이하] --- */
+@media screen and (max-width: 1300px) {
+    .hero_message ul > li dl {grid-template-columns: minmax(200px, 232px) minmax(0, 1fr);column-gap: clamp(20px, 3vw, 56px); }
+    .hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { font-size:6.6rem }
+    .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit { font-size: 3rem }
+}
+
 /* --- [Tablet: 769px ~ 1024px] --- */
 @media screen and (max-width: 1024px) {
     h2 {
         font-size: 5.2rem;
     }
+
+    .hero_message p { font-size: 5.2rem; line-height: 1.2; word-break: keep-all; }
+    .hero_message ul { max-width: 100%; margin-top: 64px; }
+    .hero_message ul > li { padding: 18px 0; }
+    .hero_message ul > li dl { flex-direction: column; gap: 16px; }
+    .hero_message ul > li dl > dt { width: 100%; font-size: 2rem; }
+    .hero_message ul > li dl > dd { width: 100%; margin-left: 0; flex-wrap: nowrap; }
+    .hero_message ul > li dl > dd .num_count { flex-shrink: 0; }
+    .hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { font-size: 4.8rem; line-height: 1.24; }
+    .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit { font-size: 2.4rem; }
+    .hero_message ul > li dl > dd .num_count + .num_desc { margin-left: 16px; padding: 8px 0 8px 4px; font-size: 1.6rem; flex-shrink: 1; min-width: 0; }
+    .hero_message ul > li:last-child dl > dd .num_count + .num_desc { margin-left: 16px; }
 
     .sec03 h2 {
         position: relative;
@@ -854,7 +1057,18 @@ section {
     .main_copy span {
         font-size: 2.4rem;
     }
-
+    
+    .hero_message{padding-top:130px; padding-bottom:100px;}
+    .hero_message p{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
+    .hero_message ul{margin-top:50px;}
+    .hero_message ul > li{padding:22px 0 28px}
+    .hero_message ul > li dl { display: grid; grid-template-columns: 1fr; row-gap: 10px; align-items: start; }
+    .hero_message ul > li dl > dt { width: 100%; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em;}
+    .hero_message ul > li dl > dd { width: 100%; justify-content: flex-start; align-items:flex-start; flex-wrap: wrap; gap: 4px; }
+    .hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { font-size: 4rem; line-height: 1.3; letter-spacing: -0.01em;}
+    .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit { font-size: 2rem; letter-spacing: -0.01em;}
+    .hero_message ul > li dl > dd .num_count + .num_desc { margin:0; padding:24px 0 13px; font-size: 1.2rem; line-height: 1.2;letter-spacing: 0;}
+    .hero_message ul > li:last-child dl > dd { align-items: center; }
     .sec03 {
         padding-top: 50px;
         padding-bottom: 100px;
