@@ -5037,15 +5037,7 @@ letter-spacing: -0.01em;
     .seminar_table tbody td p{font-size: 1.6rem; line-height: 1.5;}
     .seminar_table col.seminar_col_label { width:70px }
     .apply_form .form_body p.explain {font-size:1.4rem;}
-    .sec_consult_entry .section_header > .stit{
-margin-top:40px;
-font-weight: 700;
-font-size: 2rem;
-line-height: 1.35;
-letter-spacing: -0.01em;
-
-        
-    }
+    .sec_consult_entry .section_header > .stit{margin-top:40px;font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;     }
     /* .seminar_table col.seminar_col_value { width: 84%; } */
     .seminar_wrap{margin-top:40px; scroll-margin-top:20px;}
     .manager_card .manager_header > p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
