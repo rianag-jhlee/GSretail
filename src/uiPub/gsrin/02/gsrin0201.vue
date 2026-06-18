@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="chart_img">
                                         <picture>
-                                            <source :srcset="require(`@/assets/images/dummy/${chart.imgName}_mo.png`)" media="(max-width: 767px) /">
+                                            <source :srcset="require(`@/assets/images/dummy/${chart.imgName}_mo.png`)" media="(max-width: 768px)" /><!-- 26.06.18 edit 정다희 : 접근성오류 source 닫는태그 수정 -->
                                             <img :src="require(`@/assets/images/dummy/${chart.imgName}.png`)" :alt="chart.title">
                                         </picture>
                                     </div>
