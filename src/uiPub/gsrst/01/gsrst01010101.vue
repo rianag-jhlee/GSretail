@@ -735,8 +735,7 @@
                             <div class="form_field form_field_address">
                                 <div class="form_zip_row">
                                     <Inputs type="text" v-model="consultForm.proposalZipCode" />
-                                    <!-- 26.06.18 edit 정다희 : 버튼 클래스 수정 */ -->
-                                    <Buttons type="button" btn-class="btn_big gray" @click.prevent="onProposalZipSearch">{{ t.proposalCustomerForm.zipButtonLabel }}</Buttons>
+                                    <Buttons type="button" btn-class="btn_big border" @click.prevent="onProposalZipSearch">{{ t.proposalCustomerForm.zipButtonLabel }}</Buttons>
                                 </div>
                             </div>
                         </div>
@@ -2927,7 +2926,7 @@ function toggleCard(id) {
 .apply_form .form_field { display: flex; gap: 8px; flex-wrap: wrap; min-width: 0; }
 .apply_form .form_field .flex1 {flex:1;}
 .apply_form .form_field_phone :deep(label.select),
-.apply_form .form_field_phone :deep(.input_wrap) { max-width: 134px; flex: 1; min-width: 0; }
+/* .apply_form .form_field_phone :deep(.input_wrap) { max-width: 134px; flex: 1; min-width: 0; } */
 .apply_form .form_field_birth { flex-wrap: nowrap; }
 .apply_form .form_field_birth :deep(.select) { max-width:150px;flex: 1; min-width: 0; }
 .apply_form .form_field_open :deep(.input_wrap){max-width: 150px;}
