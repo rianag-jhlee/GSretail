@@ -209,9 +209,11 @@
                         </div>
                         <!-- 검색 -->
                         <div class="search_group search_group_input">
-                            <span class="search_group_label">{{ t.store.searchLabel }}</span>
+                            <!-- 26.06.17 edit 정다희 : 웹접근성 대응 label for 적용 -->
+                            <label class="search_group_label" for="storeSearchInput">{{ t.store.searchLabel }}</label>
                             <div class="store_search_input_wrap">
                                 <input
+                                    id="storeSearchInput"
                                     type="text"
                                     class="store_search_input"
                                     :placeholder="t.store.searchPlaceholder"

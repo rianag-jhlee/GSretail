@@ -22,7 +22,7 @@
                                 <li v-for="item in t.ListData" :key="item">
                                     <div class="item">
                                         <a href="/gsrne0101">
-                                            <span class="thumb"><em><img :src="item.thumb" /></em></span>
+                                            <span class="thumb"><em><img :src="item.thumb" alt="" /></em></span><!-- 26. 06. 17 add 정다희 : 대체텍스트 추가   -->
                                         </a>
                                         <a href="#none" class="cont">
                                             <strong>{{ item.title }}</strong>

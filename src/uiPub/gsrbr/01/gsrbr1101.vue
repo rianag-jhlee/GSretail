@@ -221,8 +221,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- 26.06.17 edit 정다희 : 웹접근성 대응 iframe title 적용 -->
                                     <div class="map_area">
-                                        <iframe :src="mall.mapUrl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        <iframe :title="mall.mapTitle" :src="mall.mapUrl" width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </div>
                                 </div>
                             </div>
@@ -378,6 +379,7 @@ export default {
                             ], 
                             // mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.1734625641543!2d126.98088067587412!3d37.574532872036556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ef4127fbcd%3A0xdff366a8dbc227d6!2z7JWI64WV7J247IKs64-Z!5e0!3m2!1sko!2skr!4v1775627958896!5m2!1sko!2skr`,
+                            mapTitle: "안녕인사동 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `02-6954-2991`, email1: `anyounginsadong@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
                             type:`card_type`
                         },
@@ -394,6 +396,7 @@ export default {
                             ], 
                             // mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
+                            mapTitle: "구로 지밸리몰 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `02-2006-3199`, email1: `sigar11@gsretail.com`, snsLabel: `SNS`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
                             type:`card_type`
                         },
@@ -408,6 +411,7 @@ export default {
                             ], 
                             // mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
+                            mapTitle: "판교 파미어스몰 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
                         },
                         { 
@@ -419,6 +423,7 @@ export default {
                             ], 
                             // mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
+                            mapTitle: "동부산 미식일상 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` }
                         }
                     ],
@@ -511,6 +516,7 @@ export default {
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.1734625641543!2d126.98088067587412!3d37.574532872036556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ef4127fbcd%3A0xdff366a8dbc227d6!2z7JWI64WV7J247IKs64-Z!5e0!3m2!1sko!2skr!4v1775627958896!5m2!1sko!2skr`,
+                            mapTitle: "Anyoung Insadong location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `02-6954-2991`, email1: `anyounginsadong@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
                             type:`card_type`
                         },
@@ -527,6 +533,7 @@ export default {
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
+                            mapTitle: "Guro G-Valley Mall location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `02-2006-3199`, email1: `sigar11@gsretail.com`, snsLabel: `SNS`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
                             type:`card_type`
                         },
@@ -539,6 +546,7 @@ export default {
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
+                            mapTitle: "Pangyo Pameus Mall location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
                         },
                         { 
@@ -550,6 +558,7 @@ export default {
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
+                            mapTitle: "East Busan Misik Ilsang location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` }
                         }
                     ],

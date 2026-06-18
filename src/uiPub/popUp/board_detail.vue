@@ -21,8 +21,7 @@
                 <div class="board_detail_cont">
 
                     <!-- editor 내용 노출 -->
-                    <p><img src="@/assets/images/dummy/sample_news_detail_01.png" /></p>
-
+                    <p><img src="@/assets/images/dummy/sample_news_detail_01.png" alt="" /></p> <!-- 26.06.17 add 정다희 : 상단 제목과 중복되어 장식 이미지 처리 -->
                     <p>{{ t.detail }}</p>
                     <!-- editor 내용 노출 -->
 
