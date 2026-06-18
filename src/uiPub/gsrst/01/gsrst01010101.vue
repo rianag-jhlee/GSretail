@@ -90,7 +90,8 @@
             <div class="panel sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
                 <div class="link_wrap">
-                    <Buttons tag="a" :href="t.procedure.buttonHref" btn-class="btn_icon btn_xl">{{ t.procedure.buttonLabel }}</Buttons>
+                    <!-- 26.06.18 edit 정다희 : 버튼 클래스 수정 */ -->
+                    <Buttons tag="a" :href="t.procedure.buttonHref" btn-class="btn_xl primary">{{ t.procedure.buttonLabel }}</Buttons>
                 </div>
             </div>
  
@@ -608,7 +609,8 @@
                             </li>
                         </ul>
                     </div>
-                    <Buttons btn-class="btn_icon fill btn_xl primary after" :href="t.consult.locationConsultHref" target="_blank">{{ t.consult.proposalButtonLabel }}</Buttons>
+                     <!-- 26.06.18 edit 정다희 : 버튼 클래스 수정 */ -->
+                    <Buttons btn-class="btn_icon_arrow fill btn_xl primary after" :href="t.consult.locationConsultHref" target="_blank">{{ t.consult.proposalButtonLabel }}</Buttons>
                 </header>
                 <ul class="caution_list consult_caution_mo">
                     <li v-for="(item, index) in t.consult.caution" :key="`consult-caution-mo-${index}`">
@@ -695,7 +697,8 @@
                 </div>
                 <ConsentInfoBox :title="t.consent2.title" :items="t.consent2.items" :notice-html="t.consent2.noticeHtml" />
                 <!-- 고객정보 폼 -->
-                <div class="apply_form">
+                <!-- 26.06.18 edit 정다희 : col_layout 클래스 추가 */ -->
+                <div class="apply_form col_layout">
                     <div class="form_head">
                         <h3 class="form_head_title">{{ t.proposalCustomerForm.title }}</h3>
                         <span class="form_required_note">{{ t.requiredNote }}</span>
@@ -808,7 +811,8 @@
                 <!-- 개인정보 동의 -->
                 <ConsentInfoBox :title="t.consent.title" :items="t.consent.items" :notice-html="t.consent.noticeHtml" />
                 <!-- 고객정보 폼 -->
-                <div class="apply_form">
+                <!-- 26.06.18 edit 정다희 : col_layout 클래스 추가 */ -->
+                <div class="apply_form col_layout">
                     <div class="form_head">
                         <h3 class="form_head_title">{{ t.customerForm.title }}</h3>
                         <span class="form_required_note">{{ t.requiredNote }}</span>
@@ -850,14 +854,16 @@
                     </div>
                 </div>
                 <!-- 상담내용 폼 (점포 소유 시에만 표시) -->
-                <div class="apply_form" v-show="hasStore === true">
+                <!-- 26.06.18 edit 정다희 : col_layout 클래스 추가 */ -->
+                <div class="apply_form col_layout" v-show="hasStore === true">
                     <div class="form_head">
                         <h3 class="form_head_title">{{ t.consultForm.title }}</h3>
                         <span class="form_required_note">{{ t.requiredNote }}</span>
                     </div>
                     <div class="form_body">
                         <div class="form_row form_row_area">
-                            <div class="form_label">{{ t.consultForm.areaLabel }}</div>
+                            <!-- 26.06.18 edit 정다희 : area_label클래스 추가 */ -->
+                            <div class="form_label area_label">{{ t.consultForm.areaLabel }}</div>
                             <div class="form_field form_field_area">
                                 <div class="form_sub_group">
                                     <span class="form_sub_label">{{ t.consultForm.contractAreaLabel }}</span>
@@ -877,7 +883,8 @@
                             </div>
                         </div>
                         <div class="form_row check_row">
-                            <div class="form_label">{{ t.consultForm.superOperatorLabel }}</div>
+                            <!-- 26.06.18 edit 정다희 : area_label 클래스 추가 */ -->
+                            <div class="form_label area_label">{{ t.consultForm.superOperatorLabel }}</div>
                             <div class="form_field form_field_check">
                                 <div class="form_sub_group">
                                     <span class="form_sub_label">{{ t.consultForm.itemCheckLabel }}</span>
@@ -892,7 +899,8 @@
                             </div>
                         </div>
                         <div class="form_row contract_row">
-                            <div class="form_label">{{ t.consultForm.contractLabel }}</div>
+                            <!-- 26.06.18 edit 정다희 : area_label 클래스 추가 */ -->
+                            <div class="form_label area_label">{{ t.consultForm.contractLabel }}</div>
                             <div class="form_field form_field_contract">
                                 <div class="form_sub_group">
                                     <span class="form_sub_label">{{ t.consultForm.contractPeriodLabel }}</span>
@@ -919,7 +927,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="apply_form" v-show="hasStore === false">
+                <!-- 26.06.18 edit 정다희 : col_layout 클래스 추가 */ -->
+                <div class="apply_form col_layout" v-show="hasStore === false">
                     <div class="form_head">
                         <h3 class="form_head_title">{{ t.consultFormNoStore.title }}</h3>
                         <span class="form_required_note">{{ t.requiredNote }}</span>
@@ -2545,8 +2554,8 @@ function toggleCard(id) {
 
 /* depth3 탭 */
 .tab_d3_wrap { padding-top: 0; }
-.tab_type { display: flex; border: 1px solid #c4c4d0; border-radius: 4px; overflow: hidden; }
-.tab_type > button { flex: 1; height: 60px; color: #90909a; font-size: 1.8rem; background-color: #fff; border: none; border-right: 1px solid #c4c4d0; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+.tab_type { display: flex; border: 1px solid #c4c4d0; overflow: hidden; }
+.tab_type > button { flex: 1; height: 60px; color: #90909a; font-size: 1.8rem; background-color: #fff; border: none; border-right: 1px solid #c4c4d0; cursor: pointer;  }
 .tab_type > button:last-child { border-right: none; }
 .tab_type > button.active { background-color: var(--color-brand-primary); color: #fff; border: 0; }
 
@@ -2590,7 +2599,7 @@ function toggleCard(id) {
 /* 가맹/창업 절차 */
 .link_wrap { margin-top: 40px; display: flex; justify-content: center; }
 .link_wrap > a { margin: 0 auto; padding: 18px 32px; color: #fff; font-weight: 700; font-size: 1.8rem; line-height: 1.5; text-align: center; background-color: var(--color-brand-primary); border-radius: 10px; display: inline-block; }
-.link_wrap > a.btn_xl { height: 64px; padding: 0 32px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.link_wrap > a.btn_xl {  padding: 0 32px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
 
 /* 창업 전 필수 확인사항 */
 .precaution_title, .precaution_intro > h3 { color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
@@ -2784,13 +2793,17 @@ function toggleCard(id) {
 .button_wrap { margin-top: 40px; display: flex; gap: 8px; justify-content: flex-end;}
 .button_wrap :deep(button){ width:134px;}
 .button_wrap :deep(button.primary){ background-color:#15B874; }
+.apply_form.col_layout{border:0 !important; }
+.apply_form.col_layout .form_body .form_row {grid-template-columns: 134px 1fr; gap:8px;}
 .form_row_name .form_field :deep(.input_wrap){max-width:205px;}
 .consult_box + .form_row, .form_row + .consent_box{margin-top:64px}
-.check_list { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.check_list { display: flex; flex-wrap: wrap; gap: 8px; }
 .check_list :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
 .form_field_email :deep(.input_wrap){max-width:205px;}
+.form_field_email span + :deep(.input_wrap){max-width:180px;}
 .form_field_email :deep(.input_wrap + label.select){width:100%; max-width:180px;}
-.form_field_phone :deep(.input_wrap){max-width:134px;}
+.form_field_phone :deep(label.select),
+.form_field_phone :deep(.input_wrap) { max-width: 134px; flex: 1; min-width: 0; }
 .form_field_select_220 :deep(label.select){width:100%; max-width:220px;}
 .form_field_region :deep(label.select){width:100%; max-width:220px;}
 .form_field_area :deep(.input_wrap){max-width:134px;}
@@ -2817,7 +2830,7 @@ function toggleCard(id) {
 .form_row_area > .form_label{height: 52px; line-height: 52px;}
 .form_field_franchise { display: flex; flex-wrap: wrap; gap: 12px 20px; }
 .franchise_type_item { display: inline-flex; align-items: center; gap: 8px; }
-.franchise_type_item :deep(.input_wrap) { margin: 0; }
+.franchise_type_item :deep(.input_wrap) { width:auto; flex: none; }
 .franchise_type_item :deep(button) { min-width: 56px; }
 .apply_form textarea { width: 100%; height: 120px; padding: 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 10px; resize: vertical; box-sizing: border-box; }
 .apply_form textarea::placeholder { color: #a4a4b0; }
@@ -2892,10 +2905,10 @@ function toggleCard(id) {
 
 .apply_form .form_body p.explain {color:#ED3030; font-size:1.6rem; letter-spacing:-0.01em; line-height:150%;}
 
-.apply_form .button_area :deep(.primary){width:100%; max-width:250px;}
+.apply_form .button_area :deep(.primary){width:100%; max-width:250px; background-color:#15B874;}
 .apply_form .form_body .form_row .form_label { margin-bottom: 12px; font-weight:400}
 .apply_form .form_body .form_row .form_label .explain {margin-left:12px; font-size:1.2rem;}
-.apply_form .form_body .form_row .form_field { width: 100%; }
+/* .apply_form .form_body .form_row .form_field { width: 100%; } */
 .apply_form .form_body .form_row_radio, .apply_form .form_body .form_row_textarea,
 .apply_form .form_body .form_row_textarea .form_field,
 .apply_form .form_body .form_row_calendar :deep(.consult_calendar),
@@ -2906,11 +2919,10 @@ function toggleCard(id) {
 .apply_form .form_body .form_label { margin-bottom: 12px; }
 .apply_form .form_body .form_row.col_02 .col_item .form_field { width: 100%; }
 .apply_form .form_body .form_row.col_02 .col_item .forn_field_radio{padding:12px 0;}
-.apply_form .form_field { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.apply_form .form_field { display: flex; gap: 8px; flex-wrap: wrap; min-width: 0; }
 .apply_form .form_field .flex1 {flex:1;}
-.apply_form .form_field_phone .select{flex:1;}
-.form_field_phone label.select select,
-.form_field_phone label.select .input_wrap {max-width:134px;}
+.apply_form .form_field_phone :deep(label.select),
+.apply_form .form_field_phone :deep(.input_wrap) { max-width: 134px; flex: 1; min-width: 0; }
 .apply_form .form_field_birth { flex-wrap: nowrap; }
 .apply_form .form_field_birth :deep(.select) { max-width:150px;flex: 1; min-width: 0; }
 .apply_form .form_field_open :deep(.input_wrap){max-width: 150px;}
@@ -2949,7 +2961,7 @@ function toggleCard(id) {
     .brand_panel_title > p { font-size: 2rem; }
 
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
-    .apply_form .form_field_email { flex-wrap: wrap; }
+    /* .apply_form .form_field_email { flex-wrap: wrap; } */
     .apply_form .form_field_area .form_sub_input_wrap { flex-wrap: wrap; }
     .apply_form .form_field_area .form_sub_input_wrap :deep(.input_wrap) { min-width: 0; max-width: 100%; }
     .apply_form .form_field_area .form_sub_input_wrap .area_note,
@@ -3114,7 +3126,10 @@ function toggleCard(id) {
     .apply_form .form_row:first-child { padding-top: 0; }
     .apply_form .form_row:last-child { padding-bottom: 0; }
     .apply_form .form_label { margin-bottom: 16px; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; }
-    .apply_form .form_field { width: 100%; min-width: 0; max-width: 100%; align-items: stretch; gap: 12px; flex-wrap: wrap; box-sizing: border-box; }
+    .apply_form .form_field{gap:16px;}
+    /* .apply_form .form_field { width: 100%; min-width: 0; max-width: 100%; align-items: stretch; gap: 12px; flex-wrap: wrap; box-sizing: border-box; } */
+    .apply_form.col_layout .form_body .form_row{grid-template-columns:1fr; gap:0;}
+    .apply_form.col_layout .form_body{padding:10px 0;}
     /* .apply_form .form_row_name .form_field :deep(.input_wrap),
     .apply_form .form_field_store :deep(.input_wrap),
     .apply_form .form_field_select_220 :deep(label.select),
@@ -3122,15 +3137,16 @@ function toggleCard(id) {
     .apply_form .form_field :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; box-sizing: border-box; } */
     .apply_form .form_field :deep(input),
     .apply_form .form_field :deep(select) { max-width: 100%; box-sizing: border-box; }
-    .apply_form .form_field_email { flex-direction: column; align-items: stretch; gap: 12px; }
-    .apply_form .form_field_email .form_sep { display: none; }
-    .apply_form .form_field_email :deep(.input_wrap),
+    .form_field_email :deep(.input_wrap + label.select){ max-width:none;}
+    /* .apply_form .form_field_email { flex-direction: column; align-items: stretch; gap: 12px; } */
+    /* .apply_form .form_field_email .form_sep { display: none; } */
+    /* .apply_form .form_field_email :deep(.input_wrap),
     .apply_form .form_field_email :deep(.input_wrap + label.select),
-    .apply_form .form_field_email :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; }
+    .apply_form .form_field_email :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; } */
     .apply_form .form_field_phone { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; align-items: center; }
     .apply_form .form_field_phone .form_sep { display: none; }
     .apply_form .form_field_phone :deep(label.select),
-    .apply_form .form_field_phone :deep(.input_wrap) { width: 100%; max-width: 100%; min-width: 0; flex: none; }
+    .apply_form .form_field_phone :deep(.input_wrap) { width: 100%; max-width: 100%; min-width: 0; flex: 1; }
     .apply_form .form_field_region { flex-direction: column; flex-wrap: wrap; }
     .apply_form .form_field_region :deep(label.select) { width: 100%; max-width: 100%; min-width: 0; }
     .apply_form .form_field_address { width: 100%; min-width: 0; max-width: 100%; }
@@ -3157,16 +3173,16 @@ function toggleCard(id) {
     .apply_form .form_field_contract .form_sub_group { width: 100%; min-width: 0; }
     .apply_form .form_field_check .check_etc { width: 100%; min-width: 0; }
     .apply_form .form_field_check .check_etc :deep(.input_wrap) { max-width: 100%; width: 100%; min-width: 0; }
-    .apply_form .check_list { gap: 8px 12px; max-width: 100%; min-width: 0; }
-    .apply_form .check_list :deep(.input_wrap) { max-width: 100%; min-width: 0; }
+    .apply_form .check_list{gap:20px;}
+    .apply_form .check_list :deep(.input_wrap){width:auto !important;}
     .apply_form .form_sub_inputs { width: 100%; min-width: 0; flex-wrap: wrap; }
-    .apply_form .form_sub_inputs :deep(.input_wrap) { flex: 1 1 calc(50% - 4px); max-width: 100%; min-width: 0; }
-    .apply_form .contract_rent { width: 100%; min-width: 0; flex-direction: column; align-items: stretch; gap: 12px; }
+    .apply_form .form_sub_inputs :deep(.input_wrap) {  max-width: 100%; min-width: 0; }
+    .apply_form .contract_rent { width: 100%;}
     .apply_form .contract_rent :deep(.input_wrap) { flex: 1 1 100%; max-width: 100%; width: 100%; min-width: 0; }
     .apply_form .form_field_franchise { flex-direction: column; align-items: stretch; gap: 12px; min-width: 0; max-width: 100%; }
-    .apply_form .franchise_type_item { width: 100%; min-width: 0;  gap: 8px; }
+    /* .apply_form .franchise_type_item { width: 100%; min-width: 0;  gap: 8px; }
     .apply_form .franchise_type_item :deep(.input_wrap){width:auto;flex:0 1 auto;}
-    .apply_form .franchise_type_item :deep(button) { min-width: 0; flex-shrink: 1; }
+    .apply_form .franchise_type_item :deep(button) { min-width: 0; flex-shrink: 1; } */
     .apply_form .form_row_textarea .form_field { min-width: 0; max-width: 100%; }
     .apply_form .form_row_textarea .form_field :deep(.textarea_wrap),
     .apply_form .form_row_textarea .form_field :deep(.textarea_field),
@@ -3175,7 +3191,7 @@ function toggleCard(id) {
     .apply_form .check_row,
     .apply_form .contract_row { align-items: flex-start; }
     .middle_bts_wrap { margin-top: 60px; gap: 8px; max-width: 100%; min-width: 0; }
-    .middle_bts_wrap > button { width: 100%; height: auto; min-height: 48px; padding: 12px 16px; font-size: 1.6rem; line-height: 1.4; white-space: normal; word-break: keep-all; }
+    .middle_bts_wrap > button { width: 100%; height: auto; min-height: 48px; padding: 12px 5px; font-size: 1.6rem; letter-spacing:-0.02em; }
     .middle_bts_wrap + :deep(.consent_box) { margin-top: 24px; }
     .consult_box + .form_row,
     .form_row + .consent_box { margin-top: 32px; }
@@ -3187,10 +3203,12 @@ function toggleCard(id) {
     .apply_form .form_body .form_row.col_02 .col_item .forn_field_radio{padding:0;}
     .apply_form .form_body .form_row.col_02 { max-width: none; padding:0; grid-template-columns: 1fr; gap: 0; }
     .apply_form .form_body .form_row .form_label { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .apply_form.col_layout .form_body .form_row .form_label.area_label{margin-bottom:16px;font-weight: 700;}
+    .form_sub_label{color:#161616;}
     .apply_form .form_body .form_row_calendar :deep(.consult_calendar),
     .apply_form .form_body .form_row_calendar :deep(.consult_time_picker) { max-width: none; }
     .apply_form .form_field :deep(.input_wrap),
-    .apply_form .form_field :deep(.select) { width: 100%; max-width: none; }
+    .apply_form .form_field :deep(.select) { max-width: none; }
     .apply_form .form_field_phone { display: flex; align-items: center; gap: 8px; }
     .apply_form .form_field_phone .form_sep { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; }
     .apply_form .form_field_phone :deep(.select),
