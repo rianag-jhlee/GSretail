@@ -112,11 +112,12 @@
                         <!-- 2. 사외이사 및 위원회 구성 -->
                         <div class="view-2">
                             <div class="view-3 res-swiper-container" v-if="t">
+                                <!-- 26.06.19 add 정다희 : class 수정  -->
                                 <component 
                                     :is="isMobile ? 'swiper' : 'div'"
                                     :slides-per-view="'auto'"
                                     :space-between="20"
-                                    class="sub-member-swiper-wrapper"
+                                    class="board-swiper-wrapper"
                                 >
                                     <component 
                                         :is="isMobile ? 'swiper-slide' : 'div'"
@@ -1080,8 +1081,11 @@ export default {
 .frame-6 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
 .frame-6 .div-6 {display:flex; gap:8px;}
 
-.skill-swiper-wrapper,.board-swiper-wrapper, .eval-usage-swiper-wrapper {display: grid; grid-template-columns: repeat(3, 1fr); gap:20px 20px;}
-.sub-member-swiper-wrapper {display: grid; grid-template-columns: repeat(4, 1fr); gap:20px 20px;}
+.skill-swiper-wrapper, .eval-usage-swiper-wrapper {display: grid; grid-template-columns: repeat(3, 1fr); gap:20px 20px;}
+.board-swiper-wrapper {display: flex; flex-direction: row; align-items: stretch; gap: 0; width: 100%; }
+.gsrin0102 .board-swiper-wrapper > .div-2{ flex: 0 1 312px; min-width: 0; position: relative; box-sizing: border-box; }
+.gsrin0102 .board-swiper-wrapper > .div-2:not(:last-child){ margin-right: 57px; }
+.gsrin0102 .board-swiper-wrapper > .div-2:not(:last-child)::after{ width: 1px; height: 100%; background-color: #f2f2f4; content: ""; position: absolute; top: 0; right: -28px; }
 
 .text-wrapper-10 {width: fit-content; margin-top: -1.00px; padding: 0; color: #161618; font-size: 22px; font-weight: 400; letter-spacing: -0.24px; line-height: 36px; position: relative; white-space: nowrap;}
 .text-wrapper-11 {width: fit-content; padding: 0; color: #161618; font-size: 24px; font-weight: 700; font-style: normal; letter-spacing: -0.24px; line-height: 135.0000023841858%; position: relative; white-space: nowrap;}
@@ -1167,7 +1171,12 @@ export default {
     .gsrin0104 .banner_text { font-size: 32px; }
     .gsrin0104 .policy_wrap th, .gsrin0104 .policy_wrap td { padding: 12px 15px; font-size: 16px; }
     .skill-swiper-wrapper, .eval-usage-swiper-wrapper {grid-template-columns: repeat(2, 1fr);}
-    .sub-member-swiper-wrapper,.board-swiper-wrapper {display: grid; grid-template-columns: repeat(2, 1fr); gap:20px 20px;}
+    .board-swiper-wrapper {display: grid; grid-template-columns: repeat(2, 1fr); gap:20px 20px;}
+
+    /* 추가 css */
+    .gsrin0102 .board-swiper-wrapper { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 100%; }
+    .gsrin0102 .board-swiper-wrapper > .div-2{ width: 100%; margin-right: 0; }
+    .gsrin0102 .board-swiper-wrapper > .div-2::after { display: none; }
 
 }
 
