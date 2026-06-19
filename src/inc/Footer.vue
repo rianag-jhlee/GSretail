@@ -112,21 +112,21 @@ const observer = ref(null);
 // =====================
 const langData = {
     ko: {
-        quick: [
+        quick: [ //메뉴 수정 26.06.19 Edit 이종환
             { title: "개인정보처리방침", path: "#none" },
-            { title: "채용안내", path: "https://gsretail.recruiter.co.kr/career/home", blank: true },
-            { title: "입점상담", path: "gsrse01" },
-            { title: "멤버십/홈페이지문의", path: "gsrcu0101", pop:true, popId:"gsrcu0101", popType:'lg' }, //, type: "popup", popId: "gsrcu0101", cont: "gsrcu0101"
-            { title: "입지제안", path: "gsrbr0204", pop:true, popId:"gsrbr0204", popType:'lg' },
-            { title: "임대상가안내", path: "gsrbr1101" },
-            { title: "정도경영제보", path: "gsrsu040101" },
-            { title: "고객센터", path: "gsrcu01" },
+            // { title: "채용안내", path: "https://gsretail.recruiter.co.kr/career/home", blank: true },
+            // { title: "입점상담", path: "gsrse01" },
+            // { title: "멤버십/홈페이지문의", path: "gsrcu0101", pop:true, popId:"gsrcu0101", popType:'lg' }, //, type: "popup", popId: "gsrcu0101", cont: "gsrcu0101"
+            // { title: "입지제안", path: "gsrbr0204", pop:true, popId:"gsrbr0204", popType:'lg' },
+            // { title: "임대상가안내", path: "gsrbr1101" },
+            // { title: "정도경영제보", path: "gsrsu040101" },
+            // { title: "고객센터", path: "gsrcu01" },
             { title: "GS SHOP 시청자 관련", path: "gsrcm0401" },
             { title: "공지사항", path: "gsrnotice" }
         ],
         info: {
             logo: "(주)GS리테일",
-            address: "서울시 강남구 논현로 508, 13층 (역삼동, GS강남타워)",
+            address: "서울시 강남구 논현로 508(역삼동 679번지 GS강남타워)",
             ceo: "대표이사 허서홍",
             brn: "사업자등록번호 116-81-18746",
             copyright: "Copyright ⓒGS Retail. All rights reserved."
@@ -142,9 +142,9 @@ const langData = {
             { value: 'https://www.gsenc.com/', label: 'GS건설' }, 
             { value: 'https://www.elysian.co.kr/intro', label: '엘리시안강촌' }
         ],
-        skybanner: [
-            { txt:'창업안내', link:"gsrst_smain" },
-            { txt:'입점상담', link:"gsrse01" },
+        skybanner: [ // 26.06.19 Edit 이종환 : 문구수정
+            { txt:'점포 창업 안내', link:"gsrst_smain" },
+            { txt:'상품 입점 상담', link:"gsrse01" },
             { txt:'고객센터', link:"gsrcu01" }
         ]
     },
