@@ -9,7 +9,8 @@
             <div class="cont_inner">
                 <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
                 <!-- 26.06.08 : title-sub-text if문으로 수정 add 정다희희  -->
-                <p v-if="CTabIdx !== 0" class="title-sub-text" v-html="t.MainDesc[CTabIdx]"></p>
+                <!-- 26.06.19 add 정다희 : 탭 두번째부터 렌더링 v-html="t.MainDesc[CTabIdx - 1]" 수정 -->
+                <p v-if="CTabIdx !== 0" class="title-sub-text" v-html="t.MainDesc[CTabIdx - 1]"></p>
                 <!-- //26.06.08 : title-sub-text if문으로 수정 add 정다희희  -->
                 <div class="tab_content_wrap">
                     <!-- 26.06.08 add 정다희 -->
@@ -1025,6 +1026,7 @@ export default {
 <style scoped>
 /*::::::::::::::::::::::::::::::: PC Style (정제됨) :::::::::::::::::::::::::::::::*/
 /* gsrin0101 전용 스타일 */
+:deep(.m_br) { display: none; }
 .main-container {width: 100%; position: relative; display: block;}
 .section-investor {width: 100%; position: relative; display: block;}
 .title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrin0101_bg.png') no-repeat center / cover; text-align: center; position: relative; display: block;}
@@ -1043,7 +1045,7 @@ export default {
 .gsrin0101 .chairman_content { width: 100%; margin-top: 80px; }
 .gsrin0101 .chairman_content > h3 { color: #161616; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .gsrin0101 .chairman_content > p { margin-top: 10px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.gsrin0101 .chairman_content > h3 + p { margin-top: 10px; }
+.gsrin0101 .chairman_content > h3 + p { margin-top: 16px; }
 /* //이사회 의장 인사말 탭 관련 css 추가 26.06.08 add 정다희 */
 .section-date {margin-top: 15px; color: #161616; font-size: 1.8rem; text-align: center; display: block;}
 .gsrin0101 .policy_wrap {padding-top: 60px;}
@@ -1189,12 +1191,14 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+    :deep(.m_br) { display: block; }
     .cont_inner {padding-top:80px;}
     .tab_wrap{margin-bottom:0;}
     .title_wrap {display:none;}
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
     .title-sub-text {padding: 60px 0 80px; font-size: 2.8rem; line-height: 1.3; text-align:left;}
+    .gsrin0101 .chairman_content > h3 + p {margin-top:8px;}
     /* .gsrin0102 > * {margin-top: 80px;} */
     .view-2 + .view-2{margin-top:100px;}
     :deep(.title-sub-text br) {display:block !important;}
