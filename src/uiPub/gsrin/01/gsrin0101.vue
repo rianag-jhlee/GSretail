@@ -202,26 +202,33 @@
                         </div>
                         <div class="view-2">
                             <div class="sub-title"><div class="text-wrapper-3">{{ t.BoardSectionTitle3 }}</div></div>
-                            <div class="table">
-                                <template v-for="(committee, cIdx) in t.CommitteeTable" :key="'comm-'+cIdx">
-                                    <div class="column">
-                                        <div class="table-cell"><div class="text-wrapper-19">{{ committee.title }}</div></div>
-                                        <div class="view-wrapper">
+                            <!-- 26.06.19 add 정다희 : table 구조로 수정 -->
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th v-for="(committee, cIdx) in t.CommitteeTable" :key="'comm-th-' + cIdx" scope="col" class="table-cell">
+                                            <span class="text-wrapper-19">{{ committee.title }}</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td v-for="(committee, cIdx) in t.CommitteeTable" :key="'comm-td-' + cIdx" class="view-wrapper" :data-title="committee.title">
                                             <div class="view-7">
                                                 <div class="view-8">
-                                                    <div class="text-wrapper-20">{{ t.ChairLabel }}</div>
-                                                    <div class="text-wrapper-21">{{ committee.chair }}</div>
+                                                    <span class="text-wrapper-20">{{ t.ChairLabel }}</span>
+                                                    <span class="text-wrapper-21">{{ committee.chair }}</span>
                                                 </div>
                                                 <div class="view-8">
-                                                    <div class="text-wrapper-20">{{ t.MemberLabel }}</div>
-                                                    <div class="text-wrapper-21">{{ committee.members }}</div>
+                                                    <span class="text-wrapper-20">{{ t.MemberLabel }}</span>
+                                                    <span class="text-wrapper-21">{{ committee.members }}</span>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div v-if="cIdx < t.CommitteeTable.length - 1" class="divider-2"></div>
-                                </template>
-                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- //26.06.19 add 정다희 : table 구조로 수정 -->
                             <div class="button-group">
                                 <button v-for="(btn, bIdx) in t.BoardDownloadBtns" :key="'btn-'+bIdx" class="btn_mid btn_icon_file after" @click="handleDownload(btn.link)">
                                     <div class="view-9">
@@ -1044,14 +1051,15 @@ export default {
 .policy_wrap dt:first-child {margin-top: 0;}
 .gsrin0101 .policy_wrap dd {margin-top: 20px; padding-bottom:32px; color: #444444; font-size: 1.8rem; line-height: 1.8; border-bottom:1px solid #D7D7DF;}
 .bullet_title {margin-top:32px; color: #161616; font-size: 20px; font-weight: 700; display: block;}
-.bullet_01 li {font-size:18px;}
+.bullet_01 li {font-size:18px; word-break: keep-all;}
 .bullet_01 li.point {color:#242428}
 :deep(.gsrin0101) .policy_wrap dd .desc {font-size:16px;}
 
 /* gsrin0102 전용 스타일 */
-.gsrin0102 > * {margin-top: 100px;}
+/* .gsrin0102 > * {margin-top: 100px;} */
 .view {width: 100%; padding: 20px 0; position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
 .view-2 {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 32px; align-self: stretch; flex: 0 0 auto;}
+.view-2 + .view-2{margin-top:100px;}
 .sub-title {width: 100%; padding: 0; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
 .text-wrapper-3 {width: 100%; margin-top: -1.00px; padding: 0; color: #161618; font-size: 40px; font-weight: 700; font-style: normal; letter-spacing: -0.4px; line-height: 129.99999523162842%; position: relative; align-self: stretch;}
 .p {width: 100%; padding: 0; color: #242428; font-size: 24px; font-weight: 500; font-style: normal; letter-spacing: -0.24px; line-height: 150%; position: relative; align-self: stretch;}
@@ -1081,7 +1089,7 @@ export default {
 .frame-6 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
 .frame-6 .div-6 {display:flex; gap:8px;}
 
-.skill-swiper-wrapper, .eval-usage-swiper-wrapper {display: grid; grid-template-columns: repeat(3, 1fr); gap:20px 20px;}
+.skill-swiper-wrapper, .eval-usage-swiper-wrapper {display: grid; grid-template-columns: repeat(3, 1fr); gap:12px;}
 .board-swiper-wrapper {display: flex; flex-direction: row; align-items: stretch; gap: 0; width: 100%; }
 .gsrin0102 .board-swiper-wrapper > .div-2{ flex: 0 1 312px; min-width: 0; position: relative; box-sizing: border-box; }
 .gsrin0102 .board-swiper-wrapper > .div-2:not(:last-child){ margin-right: 57px; }
@@ -1099,16 +1107,16 @@ export default {
 .TAG-4 .text-wrapper-13 {color: #67676f;}
 .TAG-4 {min-width: 64px; background-color: #f2f2f4; border-color: #c4c4d0;}
 .text-wrapper-13 {width: fit-content; margin-top: -1.00px; padding: 0; color: #107af2; font-size: 16px; font-weight: 400; font-style: normal; letter-spacing: -0.16px; line-height: 150%; position: relative; white-space: nowrap;}
-.table {width: 100%; padding: 0; border-top: 1px solid #161618; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; align-self: stretch; flex: 0 0 auto;}
-.column {padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; flex: 1; flex-grow: 1;}
-.table-cell {width: 100%; height: 82px; padding: 12px 24px; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; position: relative; display: flex; align-items: center; gap: 10px; align-self: stretch;}
-.text-wrapper-19 {padding: 0; color: #161618; font-size: 1.8rem; font-weight: 600; font-style: normal; text-align: center; letter-spacing: -0.18px; line-height: 139.9999976158142%; position: relative; flex: 1;}
-.view-wrapper {width: 100%; padding: 12px 24px; border-bottom: 1px solid #e5e5e9; position: relative; display: flex; align-items: center; gap: 12px; align-self: stretch; flex: 0 0 auto;}
+.table {width: 100%; border-top: 1px solid #161618; border-collapse: collapse; table-layout: fixed;}
+.table th.table-cell {width: 20%; height: 82px; padding: 12px 24px; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; border-left: 1px solid #e5e5e9; vertical-align: middle; text-align: center;}
+.table th.table-cell:first-child {border-left: 0;}
+.text-wrapper-19 {padding: 0; color: #161618; font-size: 1.8rem; font-weight: 600; font-style: normal; text-align: center; letter-spacing: -0.18px; line-height: 139.9999976158142%; position: relative;}
+.table td.view-wrapper {width: 20%; padding: 12px 24px; border-bottom: 1px solid #e5e5e9; border-left: 1px solid #e5e5e9; vertical-align: top;}
+.table td.view-wrapper:first-child {border-left: 0;}
 .view-7 {padding: 0; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px; flex: 1; flex-grow: 1;}
 .view-8 {width: 100%; padding: 0; position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; align-self: stretch; flex: 0 0 auto;}
 .text-wrapper-20 {width: fit-content; margin-top: -1.00px; padding: 0; color: #67676f; font-size: 1.8rem; font-weight: 400; font-style: normal; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; white-space: nowrap;}
 .text-wrapper-21 {margin-top: -1.00px; padding: 0; color: #242428; font-size: 1.8rem; font-weight: 400; font-style: normal; text-align: right; letter-spacing: -0.18px; line-height: 160.0000023841858%; position: relative; flex: 1;}
-.divider-2 {width: 1px; background-color: #e5e5e9; position: relative; align-self: stretch;}
 
 .button-group {width: 100%; padding: 0; position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 12px; flex: 0 0 auto; align-self: stretch;}
 
@@ -1187,7 +1195,8 @@ export default {
     .page-title {font-size: 40px;}
     .visual-sub {font-size: 20px;}
     .title-sub-text {padding: 60px 0 80px; font-size: 2.8rem; line-height: 1.3; text-align:left;}
-    .gsrin0102 > * {margin-top: 80px;}
+    /* .gsrin0102 > * {margin-top: 80px;} */
+    .view-2 + .view-2{margin-top:100px;}
     :deep(.title-sub-text br) {display:block !important;}
     .view-3 {flex-direction: column; align-items: center; gap: 40px;}
     .div-2 {max-width:312px; width:100%;} /* 1열 배치 및 최대너비 제한 */
@@ -1199,9 +1208,10 @@ export default {
     .policy_wrap {padding: 30px 20px;}
     .policy_wrap dt {margin-top: 40px; font-size: 20px;}
     .policy_wrap dd {font-size: 16px;}
-    .table {flex-direction: column;}
-    .column {width: 100%;}
-    .divider-2 {width: 100%; height: 1px;}
+    .table thead { position: absolute; width: 1px; height: 1px; clip: rect(0, 0, 0, 0); overflow: hidden; }
+    .table tbody tr { display: block; width: 100%; }
+    .table td.view-wrapper { display: block; width: 100%; border-left: 0; box-sizing: border-box; }
+    .table td.view-wrapper::before { content: attr(data-title); display: block; margin: -12px -24px 12px; padding: 12px 24px; background-color: #f8f8f8; border-bottom: 1px solid #e5e5e9; color: #161618; font-size: 1.8rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.018rem; text-align: center; }
     .button-group {gap: 8px;}
     .text-wrapper-3 {font-size:24px;}
     .bullet_01 li {font-size:16px;}
