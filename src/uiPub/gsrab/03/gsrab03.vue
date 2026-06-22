@@ -88,7 +88,7 @@ const langData = {
                     ] },
                     { period: "2024", details: [
                         { term: ["11월", "GS리테일"], desc: "허서홍 신임 대표 내정" },
-                        { term: ["10월", "GS리테일"], desc: "동반성장지수 '최우수' 등급 획득 <br />ESG통합 'A+' 등급 획득" },
+                        { term: ["10월", "GS리테일"], desc: "- 동반성장지수 '최우수' 등급 획득 <br />- ESG통합 'A+' 등급 획득" }, /* 20260622 edit 이소라 : 텍스트수정 */
                         { term: ["9월", "GS SHOP"], desc: "'AI 라이프스타일 커머스' 앱으로 개편" },
                         { term: ["8월"], subDetails: [
                             { term: "GS SHOP", desc: "업계 최초 생성형 'AI 스튜디오' 구현" },
@@ -107,7 +107,7 @@ const langData = {
                         { term: ["12월", "GS SHOP"], desc: "소비자중심경영(CCM) 7회차 재인증 획득" },
                         { term: ["11월", "GS25"], desc: "편의점 업계 최초로 ESG 환경분야 평가 A+(매우 우수) 획득" },
                         { term: ["9월"], subDetails: [
-                            { term: "GS리테일", desc: "'우리동네GS' MAU 283만 돌파 (9월 기준 오프라인 유통사 앱 중 1위 기록)" },
+                            { term: "GS리테일", desc: "'우리동네GS' MAU, 오프라인 유통사 앱 중 1위 달성" }, /* 20260622 edit 이소라 : 텍스트수정 */
                             { term: "GS SHOP", desc: "홈쇼핑 업계 최초 네트워크 기반 방송시스템(NDI) 구축" }
                         ] },
                         { term: ["6월", "GS THE FRESH"], desc: "400호점 돌파" },
@@ -465,7 +465,7 @@ const langData = {
                     ] },
                     { period: "2024", details: [
                         { term: ["Nov", "GS Retail"], desc: "Nominated new CEO Seo Hong Hur" },
-                        { term: ["Oct", "GS Retail"], desc: "Achieved 'Best' grade in Win-Win Growth Index <br />& 'A+' integrated grade in ESG" },
+                        { term: ["Oct", "GS Retail"], desc: "- Achieved 'Best' grade in Win-Win Growth Index <br />- 'A+' integrated grade in ESG" }, /* 20260622 edit 이소라 : 텍스트수정 */
                         { term: ["Sep", "GS SHOP"], desc: "Reorganized into 'AI Lifestyle Commerce' application" },
                         { term: ["Aug"], subDetails: [
                             { term: "GS SHOP", desc: "Implemented the industry's first generative 'AI Studio'" },
@@ -484,7 +484,7 @@ const langData = {
                         { term: ["Dec", "GS SHOP"], desc: "Acquired the 7th Consumer Centered Management (CCM) re-certification" },
                         { term: ["Nov", "GS25"], desc: "First in the convenience store industry to achieve an A+ (Excellent) grade in ESG Environmental evaluation" },
                         { term: ["Sep"], subDetails: [
-                            { term: "GS Retail", desc: "'Our Neighborhood GS' surpassed 2.83M MAU (Ranked 1st among offline retailers' apps as of September)" },
+                            { term: "GS Retail", desc: "'Our Neighborhood GS' MAU. Achieves No. 1 Among Offline Retailer Apps" },  /* 20260622 edit 이소라 : 텍스트수정 */
                             { term: "GS SHOP", desc: "First in the home shopping industry to build a network-based broadcast system (NDI)" }
                         ] },
                         { term: ["Jun", "GS THE FRESH"], desc: "Surpassed 400 stores" },
@@ -816,7 +816,9 @@ const currentHistoryTab = computed(() => t.value.HistoryTabs?.[MainTabIdx.value]
 .history_intro > header > h3 { margin: 8px 0 0; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .sec_history :deep(.history_period) { width: auto; padding:7px 0;}
 .sec_history :deep(.history_detail_row) { grid-template-columns: 40px minmax(0, 1fr); }
-.sec_history :deep(.history_detail_content) { min-height:72px; padding:14.5px 0 30.5px;gap:0; }
+.sec_history :deep(.history_detail_content) { padding-top:14.5px;gap:0; }
+.sec_history :deep(.history_detail_content:last-child) { padding-bottom:30.5px; }
+.sec_history :deep(.history_detail_content + .history_detail_content) { padding-top:4.5px; }
 .sec_history :deep(.history_detail_content > dd) { margin-left:12px; }
 .sec_history :deep(.history_term_primary) { padding:14.5px 0;}
 
@@ -843,6 +845,7 @@ const currentHistoryTab = computed(() => t.value.HistoryTabs?.[MainTabIdx.value]
     .sec_history :deep(.history_detail_row) { gap: 10px; padding: 0; }
     .sec_history :deep(.history_term_primary) { padding: 16px 0; }
     .sec_history :deep(.history_detail_content) { min-height: 95px; padding: 16px 0; row-gap: 12px; }
+    .sec_history :deep(.history_detail_content + .history_detail_content) { padding-top:16px; }
     .sec_history :deep(.history_detail_content > dt), .sec_history :deep(.history_detail_content > dd) { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; }
     .sec_history :deep(.history_detail_content > dd) { margin: 0; }
 }

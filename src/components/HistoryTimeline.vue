@@ -59,7 +59,7 @@ const getDetailPairs = (detail) => {
 .history_term_primary { margin: 0; padding: 14px 0; color: #90909a; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .history_detail_group { display: flex; flex-direction: column; }
 .history_detail_content { margin: 0; padding: 14px 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); row-gap: 0; column-gap: 0; align-items: start; }
-.history_detail_content > dt { margin: 0; color: #90909a; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.history_detail_content > dt { min-width: 150px; margin: 0; color: #90909a; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .history_detail_content > dd { margin: 0; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; word-break: keep-all; }
 
 @media (max-width: 768px) {
