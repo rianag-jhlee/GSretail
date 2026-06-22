@@ -39,7 +39,7 @@
                                 <button type="button" class="btn_link btn_store_find" @click="openModal" data-popid="pop_store_find" data-type="lg" data-cont="gsrbr0603">{{ t.Buttons.findStore }}</button><!-- 26.05.11 Edit 이종환 : class --><!-- 26.06.08 Edit 이종환 : 호출팝업명 수정 -->
 
                                 <!-- 26.05.11 Edit 이종환 : sns 버튼 통일 -->
-                                <a href="https://www.instagram.com/gsthefresh" class="btn_sns btn_sns_insta" :aria-label="t.Sns.insta" target="_blank"></a>
+                                <a href="https://www.instagram.com/gsthefresh_official/" class="btn_sns btn_sns_insta" :aria-label="t.Sns.insta" target="_blank"></a> <!-- 26.06.22 add 정다희 : 인스타그램 링크 수정 -->
                                 <a href="https://www.youtube.com/gsthefresh" class="btn_sns btn_sns_yt" :aria-label="t.Sns.facebook" target="_blank"></a>
                                 <!-- //26.05.11 Edit 이종환 : sns 버튼 통일 -->
                             </div>
@@ -369,20 +369,20 @@ export default {
                                 '"GS THE FRESH"로 새롭게 태어나게 되었습니다.',
                             ],
                             [
-                                '새롭게 태어난 GS THE FRESH은 Friendly, Fresh, Fun 가치와 함께',
+                                '새롭게 태어난 GS THE FRESH는 Friendly, Fresh, Fun 가치와 함께', // 26.06.22 add 정다희 : 오타수정
                                 '고객의 생활에 늘 가까이 있는 점포로서',
                                 '신선하고 다양한 상품을 제공함과 동시에 더욱 친근한 서비스를 바탕으로',
                                 '고객과 함께하는 친근하고, 신속하며, 편리하고 즐거운 쇼핑문화를 지향합니다.'
                             ],
                             [
-                                '새로운 이름으로 고객님과 다시 만나는 GS THE FRESH은',
+                                '새로운 이름으로 고객님과 다시 만나는 GS THE FRESH는', // 26.06.22 add 정다희 : 오타수정
                                 '신선한 행복을 주는 쇼핑문화의 장을 펼칠 것이며,',
                                 '고객님께 더 큰 만족을 드릴 것을 약속합니다.'
                             ]
                         ],
                     },
                     ValueTitle: "가족과 함께하는 행복<br/>쇼핑 산지의 신선함 그대로 가정으로 배달합니다.",
-                    Buttons: {
+                    Buttons: {  
                         proposal: "입지 제안",
                         findStore: "매장 찾기",
                         backToList: "목록으로 돌아가기"
@@ -1043,7 +1043,7 @@ export default {
 .txt_area > p { width: 100%; margin-bottom: 48px; overflow: hidden; }
 .txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block; }
 .txt_area > p > span :deep(strong) { color: #fff; font-weight: 800; }
-.sec_brand_about { padding: 200px 20px; background-color: #f8f8f8; }
+.sec_brand_about { padding: clamp(140px, 10.42vw, 200px) 20px; background-color: #f8f8f8; }
 .sec_brand_about > .about_inner { max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
 .sec_brand_about > .about_inner > .about_txt > p { overflow: hidden; }
 .sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block; }
@@ -1229,7 +1229,7 @@ export default {
     .sticky { height: 100vh; top: 0; }
     .txt_area > p {margin-bottom:10px;}
     .txt_area > p > span { font-size: 3.2rem; }
-    /* .sec_brand_about { padding: 100px 20px; } */
+    .sec_brand_about { padding: clamp(119px, 37.33vw, 140px) 20px; }
     .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
 
     .visual_img_small {height:auto; padding-top:64%;}
