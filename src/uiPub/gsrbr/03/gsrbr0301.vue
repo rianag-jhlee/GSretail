@@ -28,7 +28,7 @@
         </section>
         <section class="sec_brand_str">
             <div class="str_inner">
-                <!-- 26.06.22 add 정다희 :div삭제 -->
+                <!-- 26.06.22 add 정다희 :기존 div> h2+p삭제, h2 headerTitle적용  -->
                 <!-- <div>
                     <h2>{{ t.str.title }}</h2>
                     <p v-html="t.str.desc"></p>
