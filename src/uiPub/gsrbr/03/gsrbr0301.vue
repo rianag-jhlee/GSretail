@@ -758,7 +758,7 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_brand_about > .about_inner > .about_txt > p  { overflow: hidden }
 .sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
 .str_inner { width: 1460px; max-width: 100%; margin: 0 auto; padding: 200px 20px 0; box-sizing: border-box; }
-.sec_brand_str .str_inner { padding: clamp(140px, 10.42vw, 200px) 20px; }
+.sec_brand_str .str_inner { padding:200px 20px; }
 /* .sec_brand_str .str_inner {padding: 0 20px;} */
 .sec_brand_str .str_header {flex-wrap:wrap; margin:0;}
 
@@ -825,8 +825,9 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
     .sec_brand_about { padding: clamp(119px, 37.33vw, 140px) 20px; }
     .sec_brand_about > .about_inner { gap: 40px }
     .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
-    .sec_brand_str .str_inner{padding: clamp(119px, 37.33vw, 140px) 20px; }
+    .sec_brand_str .str_inner{padding: 140px 20px; }
     section.str_inner { padding: 80px 20px 0;}
+    .sec_brand_competency.str_inner, .sec_brand_biz.str_inner{padding: 40px 20px 0;}
     .sec_brand_str .str_header h2{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
     .str_header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px }
     .str_header h2 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em }
