@@ -261,13 +261,21 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 .benefit_list {margin-top:64px; display: flex; flex-wrap: wrap; gap:40px;}
 .benefit_list li { position: relative; width: calc((100% - (40px * 2)) / 3); padding-top: 104px; }
 .benefit_list li::before { position: absolute; top: 0; left: 0; width: 80px; height: 80px; background-color: #eee; border-radius: 50%; content: ''; }
-.benefit_list li::after {width:40px; height:40px; background: url('@/assets/images/sub/icon_br04_search_40.png') 0 0 no-repeat; background-size:cover; content:''; position:absolute; top:20px; left:20px; display:block;}
+.benefit_list li::after {width:40px; height:40px; background-repeat:no-repeat; background-position:center; background-size:cover; content:''; position:absolute; top:20px; left:20px; display:block;}
 /* 아이콘 규칙 수립 후 수정 */
-.benefit_list li:nth-child(2)::after, .benefit_list li:nth-child(3)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_cart_40.png') 0 0 no-repeat; background-size:cover; content:''; position:absolute; top:20px; left:20px; display:block;}
+.benefit_list li:nth-child(1)::after{background-image: url('@/assets/images/sub/icon_br04_inventory_40.png');}
+.benefit_list li:nth-child(2)::after{background-image: url('@/assets/images/sub/icon_br04_refrigerator_40.png');}
+.benefit_list li:nth-child(3)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_delivery_40.png');}
+.benefit_list li:nth-child(4)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_reservation_40.png');}
+.benefit_list li:nth-child(5)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_wineplus_40.png');}
+.benefit_list li:nth-child(6)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_easypayment_40.png');}
+.benefit_list li:nth-child(7)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_membership_40.png');}
+.benefit_list li:nth-child(8)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_parcel_40.png');}
+.benefit_list li:nth-child(9)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_event_40.png');}
 
 .benefit_info .tit_area { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .benefit_info .tit_area strong { color: #161616; font-size: 24px; font-weight: 700; }
-.benefit_info .btn_link { color: #107af2; font-size: 14px; text-decoration: underline; }
+.benefit_info .btn_link {padding:0; color: #107af2; font-size: 14px; text-decoration: underline; }
 .benefit_info .desc { display: block; color: #67676f; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 /* 26.05.11 제거
 .benefit_info a {font-size:0px;}
