@@ -4,13 +4,13 @@
         "path": "gsrab01",
         "children": [
             {
-                "title": "CEO 인사말",
-                "path": "gsrab01",
+                "title": "경영이념 및 가치체계",
+                "path": "gsrab02",
                 "children": []
             },
             {
-                "title": "회사 소개",
-                "path": "gsrab02",
+                "title": "CEO 인사말",
+                "path": "gsrab01",
                 "children": []
             },
             {
@@ -19,7 +19,7 @@
                 "children": []
             },
             {
-                "title": "수상이력",
+                "title": "수상 이력",
                 "path": "gsrab06",
                 "children": []
             },
@@ -36,7 +36,7 @@
         ]
     },
     {
-        "title": "사업소개",
+        "title": "사업영역",
         "path": "gsrbr_smain",
         "children": [
             {
@@ -67,7 +67,7 @@
                 "children": []
             },
             {
-                "title": "우리동네 GS",
+                "title": "우리동네GS",
                 "path": "gsrbr04",
                 "children": [
                     { "title": "배달·픽업", "path": "#none" },

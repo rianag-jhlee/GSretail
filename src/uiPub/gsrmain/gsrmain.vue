@@ -198,7 +198,7 @@ export default {
                                 dt: "전국 오프라인 점포 수",
                                 num: "18,600+",
                                 unit: "점",
-                                desc: "(2025.12 기준)",
+                                desc: "(2025. 12 기준)",
                             },
                             {
                                 dt: "GS ALL 멤버십 가입자 수",
@@ -873,8 +873,8 @@ h2+.explain {
 .hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { display: inline-block; font-weight: 700; font-size: 7.2rem; letter-spacing: -0.02em; line-height: 1.24; }
 .hero_message ul > li dl > dd .num_count > .num_unit_wrap { display: none; vertical-align: bottom; flex-shrink: 0; }
 .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit{margin-left:4px;margin-bottom:10px; display: inline-block;font-weight: 600; font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.03em;}
-.hero_message ul > li dl > dd .num_count + .num_desc{margin-left: clamp(12px, 1.25vw, 18px);padding: 13px 0;color:#4C4C53;font-weight: 400;font-size: 2rem;line-height: 1.35;letter-spacing: 0%;min-width: 0;flex-shrink: 1;}
-.hero_message ul > li:last-child dl > dd .num_count + .num_desc{padding:17px 32px 17px 0;}
+.hero_message ul > li dl > dd .num_count + .num_desc{margin-bottom:10px; margin-left: clamp(12px, 1.25vw, 18px);color:#4C4C53;font-weight: 400;font-size: 2rem;line-height: 1.35;letter-spacing: 0%;min-width: 0;flex-shrink: 1;}
+/* .hero_message ul > li:last-child dl > dd .num_count + .num_desc{padding:17px 32px 17px 0;} */
 .hero_message ul > li:last-child dl > dd .num_count + .num_desc{margin-left: clamp(12px, 1.25vw, 18px);}
 .section_wrap {
     background-color: #fff;
@@ -1074,7 +1074,7 @@ section {
     .hero_message ul > li dl > dd .num_count > .num_motion_wrap > .num_motion { font-size: 4.8rem; line-height: 1.24; }
     .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit { font-size: 2.4rem; }
     .hero_message ul > li dl > dd .num_count + .num_desc { margin-left: 16px; font-size: 1.6rem; flex-shrink: 1; min-width: 0; }
-    .hero_message ul > li:last-child dl > dd .num_count + .num_desc { margin-left: 14px; padding: 12px 0;}
+    .hero_message ul > li:last-child dl > dd .num_count + .num_desc { margin-left: 14px;/* padding: 12px 0;*/}
 
     .sec03 h2 {
         position: relative;
@@ -1133,7 +1133,8 @@ section {
     .hero_message{padding-top:130px; padding-bottom:100px;}
     .hero_message p{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
     .hero_message ul{margin-top:50px;}
-    .hero_message ul > li{padding:22px 0 28px}
+    .hero_message ul > li{padding:20px;}
+    .hero_message ul > li:last-child {padding-bottom:4px;}
     .hero_message ul > li dl { display: grid; grid-template-columns: 1fr; row-gap: 10px; align-items: start; }
     .hero_message ul > li dl > dt { width: 100%; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em;}
     .hero_message ul > li dl > dd { width: 100%; justify-content: flex-start; align-items:flex-start; flex-wrap: wrap; gap: 4px; }
@@ -1141,6 +1142,7 @@ section {
     .hero_message ul > li dl > dd .num_count > .num_unit_wrap > .num_unit { margin-bottom:10px; font-size: 2rem; letter-spacing: -0.01em; line-height: 1.35;}
     .hero_message ul > li dl > dd .num_count + .num_desc { margin:0; padding:22px 0 16px; font-size: 1.2rem; line-height: 1.2;letter-spacing: 0;}
     .hero_message ul > li:last-child dl > dd { align-items: center; }
+
     .sec03 {
         padding-top: 50px;
         padding-bottom: 100px;
