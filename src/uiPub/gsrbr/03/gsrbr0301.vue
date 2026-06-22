@@ -42,8 +42,10 @@
                             class="btn_website"
                          target="_blank">{{ t.str.websiteLabel }}</a><!-- 26.05.11 Edit 이종환 : class 수정 -->
                         <div class="sns_wrap">
-                            <a href="https://www.youtube.com/channel/UCFR22SdPEC3XmU7nIygGjXw" class="btn_sns btn_sns_insta" :aria-label="t.str.snsInstaAria" target="_blank"></a>
-                            <a href="https://www.instagram.com/gsshop_story/" class="btn_sns btn_sns_yt" :aria-label="t.str.snsYtAria" target="_blank"></a>
+                            <!-- 26.06.22 add 정다희 : 인스타그램, 유튜브 링크 주소 순서 변경(링크가 바뀌어져있음.) -->
+                            <a href="https://www.instagram.com/gsshop_story/" class="btn_sns btn_sns_insta" :aria-label="t.str.snsInstaAria" target="_blank"></a>
+                            <a href="https://www.youtube.com/channel/UCFR22SdPEC3XmU7nIygGjXw" class="btn_sns btn_sns_yt" :aria-label="t.str.snsYtAria" target="_blank"></a>
+                            <!-- //26.06.22 add 정다희 : 인스타그램, 유튜브 링크주소 순서 변경(링크가 바뀌어져있음.) -->
                         </div>
                     </div>
                 </header>
