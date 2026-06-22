@@ -1237,7 +1237,7 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-    .brand_value_section { padding: 100px 0; }
+    .brand_value_section { padding: 140px 0; }
     .title_text { font-size: 24px; }
     .logo_wrap{width:100%; max-width:255px;  }
     .logo_wrap > img{width:100%;}
