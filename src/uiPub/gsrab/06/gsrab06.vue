@@ -561,7 +561,7 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
 .award_highlight_card { width: 274px; height: 186px; padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
 .award_highlight_card > figure { width: 100%; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .award_highlight_card > figure > img { width: auto; max-width: 100%; height: auto; max-height: 60px; object-fit: contain; }
-.award_highlight_card > p { width: 100%; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
+.award_highlight_card > p { width: 100%; margin-top: 6px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
 
 .sec_history { padding: 100px 0; display: grid; grid-template-columns: clamp(280px, 30.67vw, 460px) minmax(0, 1fr); gap: 32px; align-items: start; }
 .sec_history:last-child{padding-bottom:0;}

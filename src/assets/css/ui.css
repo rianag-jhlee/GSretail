@@ -6,30 +6,30 @@
 #header {position:fixed; top:0; right:0; left:0; z-index:99;/* transition:background 0.25s, transform 0.25s ease-in-out;*/}
 #header.hide {transform:translateY(-100%);}
 
-#header .inner {width:100%; max-width:1720px; margin:0 auto; padding:46px 40px 0; display:flex; align-items:flex-start;}
+#header .inner {width:100%; max-width:1720px; margin:0 auto; padding:36px 40px 0; display:flex; align-items:flex-start;}
 /* 26.06.12 Edit 정다희 : nav 영역 유동 축소 + quick 고정 */
 #header nav {min-width:0; flex:1; --depth1-font:2rem; position:relative; display:flex; align-items:center;}
 #header nav ul.depth1 {display:flex;}
 #header nav ul.depth1 > li {flex-shrink:0; position:relative;}
 #header nav ul.depth1 > li.is-open, #header nav ul.depth1 > li.current {z-index:2;} /* 26.06.12 Edit 정다희 : 2depth 패널·current 메뉴 겹침 방지 */
-#header nav ul.depth1 > li > a {padding:0 45px 46px; color:#fff; font-size:var(--depth1-font); font-weight:700; line-height:140%; letter-spacing:0.02em; position:relative; display:flex;}
+#header nav ul.depth1 > li > a {padding:0 45px 36px; color:#fff; font-size:var(--depth1-font); font-weight:700; line-height:140%; letter-spacing:0.02em; position:relative; display:flex;}
 
 /* 26.06.12 Edit 정다희 : [개발] 현재 페이지 — URL/라우트 기준 해당 depth1 > li에 class="current" 부여 (is-open과 동일 활성 스타일) */
 #header nav ul.depth1 > li.is-open > a::before, #header nav ul.depth1 > li.current > a::before {height:4px; background-color:#fff; position:absolute; right:45px; bottom:0; left:45px; content:'';}
 #header.head_black nav ul.depth1 > li.is-open > a::before, #header.head_black nav ul.depth1 > li.current > a::before {background-color:#107AF2;}
 #header.add_bg nav ul.depth1 > li.is-open > a::before, #header.add_bg nav ul.depth1 > li.current > a::before {background-color:#107AF2;}
 
-#header nav .depth2_wrap {width:100vw; height:0; box-sizing:border-box; margin-left:calc(-1 * var(--menu-left, 0px)); padding:0 20px 0 var(--menu-left, 20px); background-color:#fff; position:absolute; top:100%; left:0; z-index:10; display:flex; overflow:hidden;}
+#header nav .depth2_wrap {width:100vw; max-height: 0; box-sizing:border-box; margin-left:calc(-1 * var(--menu-left, 0px)); padding:0 20px 0 var(--menu-left, 20px); background-color:#fff; position:absolute; top:100%; left:0; z-index:10; display:flex; overflow:hidden; /*transition: max-height 0.3s ease, padding 0.5s ease;*/}
 #header nav .depth2_wrap > ul + ul {margin-left:80px;}
 /* 26.06.12 Edit 정다희 : hover/focus(is-open) 시 2depth 패널 노출 */
-#header nav li:hover .depth2_wrap, #header nav li.is-open .depth2_wrap {height:auto !important; min-height:150px; padding-top:40px; padding-bottom:40px; display:flex; overflow:initial !important;}
+#header nav li:hover .depth2_wrap, #header nav li.is-open .depth2_wrap {max-height: 120px; min-height:100px; padding-top:37px; padding-bottom:36px; overflow: hidden !important;}
 
 #header.hide nav li:hover .depth2_wrap, #header.hide nav li.is-open .depth2_wrap {height:0 !important; min-height:0 !important; padding:0 !important; overflow:hidden !important;}
 
-#header nav ul.depth2 {width:100%; padding-left:45px; display:flex; flex-wrap:wrap; gap:20px;}
-#header nav ul.depth2 > li > a, #header nav ul.depth2 > li > span {padding:0; color:#161616; font-size:calc(var(--depth1-font) - 0.2rem); font-weight:400; line-height:1.4; white-space:nowrap; display:block;}
+#header nav ul.depth2 {width:100%; padding-left:45px; display:flex; flex-wrap:wrap; gap:12px 80px; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.2s ease, opacity 0.2s ease;}
+#header nav ul.depth2 > li > a, #header nav ul.depth2 > li > span {padding:0; color:#161616; font-size:calc(var(--depth1-font) - 0.2rem); font-weight:700; line-height:1.5; white-space:nowrap; display:block;}
 #header nav ul.depth2 > li > a:hover, #header nav ul.depth2 > li > a:focus {color:#107af2;}
-#header nav li:hover ul.depth2, #header nav li.is-open ul.depth2 {height:auto !important; overflow:initial !important;}
+#header nav li:hover ul.depth2, #header nav li.is-open ul.depth2 {overflow:initial !important; grid-template-rows: 1fr; opacity: 1;}
 #header nav ul.depth3 {display:none !important;}
 
 /* 26.06.12 Edit 정다희 : PC(769px~) hover/is-open/current 활성 color — 모바일(768px↓) 미적용 */
@@ -333,7 +333,7 @@ h5 {font-size:1.8rem;}
     #header h1 {margin-right:25px;}
     #header nav {--depth1-font:2rem;}
     #header nav ul.depth1 > li > a {padding-left:15px; padding-right:15px;}
-    #header nav ul.depth2 {padding-left:20px;}
+    #header nav ul.depth2 {padding-left:20px; gap:20px }
     footer .info { flex-wrap:wrap; }
     footer .info label.select { position:relative; bottom:auto; right:auto; left:-12px; }
 }
@@ -344,7 +344,7 @@ h5 {font-size:1.8rem;}
     #header .inner {padding:46px 20px 0;}
     #header nav {--depth1-font:1.6rem;}
     #header nav ul.depth1 > li > a {padding-left:12px; padding-right:15px;}
-    #header nav ul.depth2 { padding-left:12px;}
+    #header nav ul.depth2 { padding-left:12px; }
     #header .quick > li:first-child > * {padding:2px 8px; font-size:1.4rem;}
     #header .language button {padding:2px 8px; font-size:1.4rem;}
     footer .quick li:last-child a {padding-right:0;}
