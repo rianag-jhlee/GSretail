@@ -195,7 +195,7 @@ export default {
 
                     /* 260616 add 정다희 : hero_message */
                     heroMessage: {
-                        title: '고객의 모든 <span class="txt_orange">경험</span>을 연결하고, <br />데이터로 <span class="txt_green">공감</span>하며,<br />상품과 서비스로 <span class="txt_blue">신뢰</span>받는 플랫폼',
+                        title: '고객의 모든 경험을 <span class="txt_orange">연결</span>하고, <br />데이터로 <span class="txt_green">공감</span>하며,<br />상품과 서비스로 <span class="txt_blue">신뢰</span>받는 플랫폼',
                         link: '/gsrab02',
                         items: [
                             {
@@ -245,7 +245,7 @@ export default {
                                 img: require("@/assets/images/main/main_sec03_03.png"),
                                 sub: require("@/assets/images/main/main_sec03_03-1.png"),
                                 brand: "GS SHOP",
-                                txt: "고객의 라이프스타일을<br/> 가치 있게 만드는",
+                                txt: "고객의 라이프스타일을<br/> 가치 있게",
                                 cate: "홈쇼핑",
                                 class: "shopping",
                                 link: "/gsrbr0301"

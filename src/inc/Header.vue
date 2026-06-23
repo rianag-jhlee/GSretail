@@ -130,6 +130,76 @@ export default {
             document.querySelectorAll("#gnb_nav ul.depth1 > li.is-open").forEach(setDepth2Position);
         };
 
+        // 26.06.23 Add 이소라 : GNB 2depth 슬라이드 — depth2_wrap 내부 ul.depth2 height 전환
+        const depth2SlideTokens = new WeakMap();
+        const getDepth2SlideEl = (li) => li?.querySelector(".depth2_wrap > ul.depth2");
+        const resetDepth2Slide = (slideEl) => {
+            if (!slideEl) return;
+            depth2SlideTokens.set(slideEl, (depth2SlideTokens.get(slideEl) || 0) + 1);
+            slideEl.classList.remove("is-slide-open", "is-sliding");
+            slideEl.style.height = "";
+            slideEl.style.overflow = "";
+        };
+        const resetAllDepth2Slides = () => {
+            document.querySelectorAll("#gnb_nav ul.depth2").forEach(resetDepth2Slide);
+        };
+        const openDepth2Slide = (li) => {
+            const slideEl = getDepth2SlideEl(li);
+            if (!slideEl) return;
+            if (slideEl.classList.contains("is-slide-open") && slideEl.style.height === "auto") return;
+            const token = (depth2SlideTokens.get(slideEl) || 0) + 1;
+            depth2SlideTokens.set(slideEl, token);
+            slideEl.classList.add("is-sliding", "is-slide-open");
+            slideEl.style.overflow = "hidden";
+            slideEl.style.height = "auto";
+            const heightPx = `${slideEl.scrollHeight}px`;
+            slideEl.style.height = "0px";
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    if (depth2SlideTokens.get(slideEl) !== token) return;
+                    slideEl.style.height = heightPx;
+                });
+            });
+            const onEnd = (e) => {
+                if (e.target !== slideEl || e.propertyName !== "height") return;
+                if (depth2SlideTokens.get(slideEl) !== token) return;
+                slideEl.style.height = "auto";
+                slideEl.classList.remove("is-sliding");
+            };
+            slideEl.addEventListener("transitionend", onEnd, { once: true });
+        };
+        const closeDepth2Slide = (li, onComplete) => {
+            const slideEl = getDepth2SlideEl(li);
+            if (!slideEl || !slideEl.classList.contains("is-slide-open")) {
+                onComplete?.();
+                return;
+            }
+            const token = (depth2SlideTokens.get(slideEl) || 0) + 1;
+            depth2SlideTokens.set(slideEl, token);
+            slideEl.classList.add("is-sliding");
+            slideEl.style.overflow = "hidden";
+            const currentHeight = slideEl.scrollHeight;
+            if (currentHeight === 0) {
+                resetDepth2Slide(slideEl);
+                onComplete?.();
+                return;
+            }
+            slideEl.style.height = `${currentHeight}px`;
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    if (depth2SlideTokens.get(slideEl) !== token) return;
+                    slideEl.style.height = "0px";
+                });
+            });
+            const onEnd = (e) => {
+                if (e.target !== slideEl || e.propertyName !== "height") return;
+                if (depth2SlideTokens.get(slideEl) !== token) return;
+                resetDepth2Slide(slideEl);
+                onComplete?.();
+            };
+            slideEl.addEventListener("transitionend", onEnd, { once: true });
+        };
+
         // 26.06.15 Add 정다희 : GNB 열림 시 팝업과 동일 딤 처리 (.gnb_dim — ui.css, z-index:98 / header:99)
         const updateGnbDim = () => {
             const dim = document.querySelector(".gnb_dim");
@@ -162,29 +232,38 @@ export default {
             else header.classList.remove("add_bg");
             updateGnbDim(); // is-open 유무에 따라 .gnb_dim 생성/제거
         };
+        const switchDepth1Menu = (targetLi) => {
+            if (!targetLi || !isDesktop()) return;
+            const slideEl = getDepth2SlideEl(targetLi);
+            if (!slideEl) return;
+            const openLi = document.querySelector("#gnb_nav ul.depth1 > li.is-open");
+            if (openLi === targetLi && slideEl.classList.contains("is-slide-open") && slideEl.style.height === "auto") return;
+            document.querySelectorAll("#gnb_nav ul.depth1 > li.is-open").forEach((li) => {
+                if (li === targetLi) return;
+                li.classList.remove("is-open");
+                closeDepth2Slide(li);
+            });
+            targetLi.classList.add("is-open");
+            setDepth2Position(targetLi);
+            resetDepth2Slide(slideEl);
+            openDepth2Slide(targetLi);
+            syncHeaderOpenState();
+        };
 
         // 26.06.12 Edit 정다희 : PC GNB hover — is-open + --menu-left + add_bg + gnb_dim
         const handleMouseEnter = (e) => {
-            // 768px 이하(모바일)이면 로직 실행 안 함
             if (!isDesktop()) return;
-
-            const li = e.currentTarget;
-            li.classList.add("is-open");
-            setDepth2Position(li);
-            syncHeaderOpenState();
+            switchDepth1Menu(e.currentTarget);
         }
         // 26.06.12 Edit 정다희 : PC GNB mouseleave — li 밖으로 나갈 때만 is-open 해제 후 상태 동기화
         const handleMouseLeave = (e) => {
-            // 768px 이하(모바일)이면 로직 실행 안 함
             if (!isDesktop()) return;
-
             const li = e.currentTarget;
             // relatedTarget: 2depth_wrap 내부로 이동 시 contains → true, is-open 유지
-            if (!li.contains(e.relatedTarget)) {
-                li.classList.remove("is-open");
-            }
-
-            syncHeaderOpenState();
+            if (li.contains(e.relatedTarget)) return;
+            if (e.relatedTarget?.closest?.("#gnb_nav ul.depth1 > li")) return;
+            li.classList.remove("is-open");
+            closeDepth2Slide(li, () => syncHeaderOpenState());
         };
 
         // quick menu
@@ -194,10 +273,22 @@ export default {
 
         // const openMenu = ref(null);
         const toggleMenu = (e) => {
-            if (e.currentTarget.parentElement.classList.contains("is-open")) {
-                e.currentTarget.parentElement.classList.remove("is-open");
+            e.preventDefault();
+            const li = e.currentTarget.parentElement;
+            if (li.classList.contains("is-open")) {
+                closeDepth2Slide(li, () => {
+                    li.classList.remove("is-open");
+                });
+            } else if (isDesktop()) {
+                switchDepth1Menu(li);
             } else {
-                e.currentTarget.parentElement.classList.add("is-open");
+                document.querySelectorAll("#gnb_nav ul.depth1 > li.is-open").forEach((openLi) => {
+                    if (openLi === li) return;
+                    openLi.classList.remove("is-open");
+                    closeDepth2Slide(openLi);
+                });
+                li.classList.add("is-open");
+                openDepth2Slide(li);
             }
         }
 
@@ -208,9 +299,7 @@ export default {
             if (li.closeTimer) clearTimeout(li.closeTimer);
             li.closeTimer = setTimeout(() => {
                 if (li.contains(document.activeElement)) {
-                    li.classList.add("is-open");
-                    setDepth2Position(li); // Tab 포커스로 열 때도 --menu-left 정렬
-                    syncHeaderOpenState(); // 26.06.15 Add 정다희 : 키보드 포커스 시 add_bg + gnb_dim
+                    switchDepth1Menu(li);
                 }
                 li.closeTimer = null;
             }, FOCUS_DELAY);
@@ -223,8 +312,10 @@ export default {
             if (li.closeTimer) clearTimeout(li.closeTimer);
             li.closeTimer = setTimeout(() => {
                 if (!li.contains(document.activeElement)) {
-                    li.classList.remove("is-open");
-                    syncHeaderOpenState(); // 26.06.15 Add 정다희 : 포커스 이탈 시 add_bg + gnb_dim 제거
+                    closeDepth2Slide(li, () => {
+                        li.classList.remove("is-open");
+                        syncHeaderOpenState(); // 26.06.15 Add 정다희 : 포커스 이탈 시 add_bg + gnb_dim 제거
+                    });
                 }
                 li.closeTimer = null;
             }, FOCUS_DELAY);
@@ -301,6 +392,11 @@ export default {
                 if (currentScrollY > lastScrollY) {
                     // 아래로 스크롤 중
                     header.classList.add("hide");
+                    document.querySelectorAll("#gnb_nav ul.depth1 > li.is-open").forEach((openLi) => {
+                        openLi.classList.remove("is-open");
+                        resetDepth2Slide(getDepth2SlideEl(openLi));
+                    });
+                    syncHeaderOpenState();
                 } else {
                     // 위로 스크롤 중
                     header.classList.remove("hide");
@@ -402,6 +498,11 @@ export default {
                         li.classList.remove("is-open");
                     }
                 });
+                resetAllDepth2Slides();
+            }
+
+            if (width <= 768) {
+                resetAllDepth2Slides();
             }
 
             // 26.06.12 Add 정다희 : 리사이즈 시 열린 2depth 패널 --menu-left 재계산
