@@ -57,7 +57,8 @@
                 <h2>{{ t.competency.title }}</h2>
             </header>
             <figure class="sec_brand_competency_fig">
-                <img :src="isBiCompetencyMobile ? imgBi09Mo : imgBi09" :alt="t.competency.imageAlt" />
+                <!-- 26.06.23 add 정다희 : 핵심역량 이미지 — ko/en · PC/MO 분기 -->
+                <img :src="competencyImgSrc" :alt="t.competency.imageAlt" />
             </figure>
         </section>
         <section class="sec_brand_biz str_inner" :aria-label="t.biz.ariaLabel">
@@ -159,6 +160,10 @@ import imgLogo from "@/assets/images/dummy/brand_gsshop_logo.png";
 /* 26.06.16 edit 정다희 : str_bi 제거 — BI 이미지(imgBi01~08) 삭제, 핵심역량(imgBi09)만 유지 */
 import imgBi09 from "@/assets/images/dummy/gsrbr0301_09.png";
 import imgBi09Mo from "@/assets/images/dummy/mo/gsrbr0301_09_mo.png";
+import imgBi09En from "@/assets/images/dummy/gsrbr0301_09_en.png"; /* 26.06.23 add 정다희 : 영문 이미지 추가 */ 
+import imgBi09EnMo from "@/assets/images/dummy/mo/gsrbr0301_09_en_mo.png"; /* 26.06.23 add 정다희 : 영문 이미지 추가 */ 
+
+
 import imgCert01 from "@/assets/images/dummy/cert_logo_01.png";
 import imgCert02 from "@/assets/images/dummy/cert_logo_02.png";
 import imgCert03 from "@/assets/images/dummy/cert_logo_03.png";
@@ -197,7 +202,7 @@ const props = defineProps({
 const langData = {
     ko: {
         visual: {
-            lines: ["고객의 라이프스타일을 <br class=\"m_br\"/>가치 있게"], /*26.06.23 edit 정다희 : 띄어쓰기 수정*/ 
+            lines: ["고객의 라이프스타일을 <br class=\"m_br\"/>가치 있게"], /*26.06.23 edit 정다희 : 띄어쓰기*/ 
             logoAlt: "GS SHOP",
         },
         about: [
@@ -554,6 +559,15 @@ let biCompetencyMql = null;
 function onBiCompetencyMqlChange(e) {
     isBiCompetencyMobile.value = e.matches;
 }
+
+// 26.06.23 add 정다희 : 핵심역량 이미지 — ko/en · PC/MO 분기
+const competencyImgSrc = computed(() => {
+    const isEn = props.lang === "en";
+    if (isBiCompetencyMobile.value) {
+        return isEn ? imgBi09EnMo : imgBi09Mo;
+    }
+    return isEn ? imgBi09En : imgBi09;
+});
 
 
 const ccmCertDlItems = computed(() => t.value.biz.certItems);
