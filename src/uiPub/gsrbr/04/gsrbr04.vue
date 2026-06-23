@@ -117,8 +117,8 @@ export default {
                     Visual: {
                         img: require("@/assets/images/dummy/gsrbr04.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr04_mo.png"),
-                        alt: "편의점·슈퍼마켓을 하나로 GS리테일 O4O 통합 앱 우리동네GS",
-                        subContent_1: "편의점·슈퍼마켓을 하나로",
+                        alt: "편의점·수퍼마켓을 하나로 GS리테일 O4O 통합 앱 우리동네GS", /*26.06.22 add 정다희 : 오타수정*/ 
+                        subContent_1: "편의점·수퍼마켓을 하나로",/*26.06.22 add 정다희 : 오타수정*/ 
                         subContent_2: "GS리테일 O4O 통합 앱",
                         subContent_3: "우리동네GS",
                     },
@@ -127,7 +127,7 @@ export default {
                     // SubContent_2: "증정품 보관 '나만의 냉장고'·주류 스마트오더 '와인25플러스'로, 편의점의 경계를 넘는 생활을 제안합니다.",
                     Bi: {
                         title: "우리동네GS App",
-                        sub_desc: `<span>가까운 매장 재고 확인부터 배달·픽업은 물론</span><span>증정품 보관과 택배 예약까지 한 번에!</span><span>우리동네GS 앱 하나로 필요한 모든 것을 해결하세요.</span>`,
+                        sub_desc: `<span>가까운 매장 재고 확인부터 배달·픽업은 물론 증정품 보관과 택배 예약까지 한 번에!</span><span>우리동네GS 앱 하나로 필요한 모든 것을 해결하세요.</span>`, /*26.06.22 del 정다희 : 2번째 span 삭제*/ 
                         img: require("@/assets/images/dummy/gsrbr04_brand.png"),
                         imgMo: require("@/assets/images/dummy/gsrbr04_brand_mo.png"),
                         alt: "우리동네GS App"
@@ -146,9 +146,9 @@ export default {
                             { title: "사전예약", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다.",  popId: "gsrbr0406", popType: "lg", popCont: "gsrbr0406"}, //26.06.08 Edit 이종환 : 사전예약 팝업 (gsrbr0405) 추가
                             { title: "와인25플러스", desc: "5천여 종의 와인과 다양한 주류를 주문하고 전국 편의점/수퍼 매장에서 손 쉽게 수령할 수 있습니다.", popId: "gsrbr0402", popType: "lg", popCont: "gsrbr0402" },
                             { title: "간편결제, 간편 로그인", desc: "다양한 수단으로 간편결제 및 간편 로그인 서비스를 지원합니다." },
-                            { title: "멤버십 혜택", desc: "우리동네GS 앱에서 원하는 매장, 원하는 시간에 수령해갈 수 있는 사전예약 서비스를 지원합니다." },
-                            { title: "택배 서비스", desc: "5천여 종의 와인과 다양한 주류를 주문하고 전국 편의점/수퍼 매장에서 손 쉽게 수령할 수 있습니다." },
-                            { title: "행사/이벤트", desc: "다양한 수단으로 간편결제 및 간편 로그인 서비스를 지원합니다.", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" }
+                            { title: "멤버십 혜택", desc: "GS리테일 통합 멤버십 'GS ALL', 우리동네GS앱에서 나의 멤버십 등급과 브랜드별 혜택 쿠폰을 한눈에 확인할 수 있습니다." }, /*26.06.22 add 정다희 : 내용 수정*/ 
+                            { title: "택배 서비스", desc: "가까운 GS25에서 국내택배∙반값택배를 접수하세요. 앱으로 미리 예약하고 매장에서 간편하게 접수할 수 있습니다." }, /*26.06.22 add 정다희 : 내용 수정*/ 
+                            { title: "행사/이벤트", desc: "현재 진행 중인 행사와 이벤트를 확인하고 참여 내역도 조회 할 수 있습니다.", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" } /*26.06.22 add 정다희 : 내용 수정*/ 
                         ]
                     ],
                     ListBack: "목록으로 돌아가기"
@@ -186,9 +186,9 @@ export default {
                             { title: "Pre-Order", desc: "The Our Neighborhood GS app offers a pre-order service that lets you pick up items at the store and time of your choice.",  popId: "gsrbr0406", popType: "lg", popCont: "gsrbr0406"}, //26.06.08 Edit 이종환 : 사전예약 팝업 (gsrbr0405) 추가
                             { title: "Wine25Plus", desc: "Order from over 5,000 wine varieties and a wide selection of alcoholic beverages, and pick them up at convenience stores and supermarkets nationwide.", popId: "gsrbr0402", popType: "lg", popCont: "gsrbr0402" },
                             { title: "Easy Payment and Easy Login", desc: "Easy payment and login are available through a variety of methods." },
-                            { title: "Membership Benefits", desc: "The Our Neighborhood GS app offers a pre-order service that lets you pick up items at the store and time of your choice." },
-                            { title: "Delivery Service", desc: "Order from over 5,000 wine varieties and a wide selection of alcoholic beverages, and pick them up at convenience stores and supermarkets nationwide." },
-                            { title: "Events & Promotions", desc: "Easy payment and login are available through a variety of methods.", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" }
+                            { title: "Membership Benefits", desc: "" }, /*26.06.22 add 정다희 : 내용 수정으로 영문 번역 작업 요망*/ 
+                            { title: "Delivery Service", desc: "" }, /*26.06.22 add 정다희 : 내용 수정으로 영문 번역 작업 요망*/ 
+                            { title: "Events & Promotions", desc: "", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" } /*26.06.22 add 정다희 : 내용 수정으로 영문 번역 작업 요망*/ 
                         ]
                     ],
                     ListBack: "Back to Brand List"
@@ -228,7 +228,7 @@ export default {
 .benefit_section { padding-top: 200px; }
 img { display: block; width: 100%; }
 h3 { margin-bottom:16px; color: #161616; font-size: 48px; font-weight: 700; }
-h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
+h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 
 /* Visual Section */
 .visual_section { position: relative; width: 100%; overflow: hidden; }
@@ -244,7 +244,7 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 .bi_section { position: relative; width: 100%; margin-top: 0 !important; }
 .bi_section span { display: block; width: 100%; }
 .bi_section span img { display: block; width: 100%; object-fit: cover; }
-.bi_section h4 p {width: 50%; color: #67676F; font-size: 20px; font-weight: 400; display: flex; flex-direction: column; }
+.bi_section h4 p {width: 50%; margin-top:16px; color: #67676F; font-size: 20px; font-weight: 400; display: flex; flex-direction: column; }
 
 .qr_download_area { display: flex; align-items: center; margin-top: 40px; }
 .pc.qr_download_area::before { display: inline-block; width: 90px; height: 90px; background: url('@/assets/images/dummy/gsrbr06_qr.png') no-repeat center / cover; content: ''; }
@@ -258,17 +258,25 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
 .mo.qr_download_area a strong::after {content: ""; width: 24px; height: 24px; background-image: url(http://localhost:8080/img/icon_set_24.5b5c044c.png); background-repeat: no-repeat; background-size: auto 95px; background-position: -832px -15px; flex-shrink: 0; display: block;}
 
 /* Benefit Section */
-.benefit_list {padding-top:48px; display: flex; flex-wrap: wrap; gap:80px 20px;}
-.benefit_list li { position: relative; width: calc((100% - (20px * 2)) / 3); padding-top: 104px; }
+.benefit_list {margin-top:64px; display: flex; flex-wrap: wrap; gap:40px;}
+.benefit_list li { position: relative; width: calc((100% - (40px * 2)) / 3); padding-top: 104px; }
 .benefit_list li::before { position: absolute; top: 0; left: 0; width: 80px; height: 80px; background-color: #eee; border-radius: 50%; content: ''; }
-.benefit_list li::after {width:40px; height:40px; background: url('@/assets/images/sub/icon_br04_search_40.png') 0 0 no-repeat; background-size:cover; content:''; position:absolute; top:20px; left:20px; display:block;}
+.benefit_list li::after {width:40px; height:40px; background-repeat:no-repeat; background-position:center; background-size:cover; content:''; position:absolute; top:20px; left:20px; display:block;}
 /* 아이콘 규칙 수립 후 수정 */
-.benefit_list li:nth-child(2)::after, .benefit_list li:nth-child(3)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_cart_40.png') 0 0 no-repeat; background-size:cover; content:''; position:absolute; top:20px; left:20px; display:block;}
+.benefit_list li:nth-child(1)::after{background-image: url('@/assets/images/sub/icon_br04_inventory_40.png');}
+.benefit_list li:nth-child(2)::after{background-image: url('@/assets/images/sub/icon_br04_refrigerator_40.png');}
+.benefit_list li:nth-child(3)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_delivery_40.png');}
+.benefit_list li:nth-child(4)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_reservation_40.png');}
+.benefit_list li:nth-child(5)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_wineplus_40.png');}
+.benefit_list li:nth-child(6)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_easypayment_40.png');}
+.benefit_list li:nth-child(7)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_membership_40.png');}
+.benefit_list li:nth-child(8)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_parcel_40.png');}
+.benefit_list li:nth-child(9)::after {width:40px; height:40px; background:url('@/assets/images/sub/icon_br04_event_40.png');}
 
 .benefit_info .tit_area { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .benefit_info .tit_area strong { color: #161616; font-size: 24px; font-weight: 700; }
-.benefit_info .btn_link { color: #107af2; font-size: 14px; text-decoration: underline; }
-.benefit_info .desc { display: block; color: #67676f; font-size: 1.8rem; line-height: 1.5; }
+.benefit_info .btn_link {padding:0; color: #107af2; font-size: 14px; text-decoration: underline; }
+.benefit_info .desc { display: block; color: #67676f; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 /* 26.05.11 제거
 .benefit_info a {font-size:0px;}
 .benefit_info a::after {content:''; width:24px; height:24px; background:red; display:inline-block;}
@@ -296,13 +304,13 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
     .benefit_list { gap: 40px 15px; }
     .benefit_list li { width: calc((100% - 15px) / 2); padding-top: 70px; }
     .benefit_info .tit_area strong { font-size:18px; }
-    .benefit_info .desc { font-size: 16px; }
-        .benefit_list li::before { position: absolute; top: 0; left: 0; width: 60px; height: 60px; background-color: #eee; border-radius: 50%; content: ''; }
+    .benefit_info .desc { font-size: 1.4rem; line-height: 1.4;  }
+    .benefit_list li::before { position: absolute; top: 0; left: 0; width: 60px; height: 60px; background-color: #eee; border-radius: 50%; content: ''; }
     .benefit_list li::after {top:10px; left:10px;}
     .benefit_list li:nth-child(2)::after, .benefit_list li:nth-child(3)::after {top:10px; left:10px;}
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     :deep(.p_br) { display: none; }
     :deep(.m_br) { display: block; }
 
@@ -313,8 +321,8 @@ h4 { display: flex; justify-content: space-between; margin-bottom: 40px; color: 
     .text_box span { font-size: 32px; text-align:center; }
     .body_wrap .cont_area { padding: 60px 0; }
     .benefit_section { padding-top: 80px; }
-    .benefit_list { gap: 32px 10px; }
-    .benefit_list li { width: calc((100% - 10px) / 2); }
+    .benefit_list { margin-top:24px; gap: 40px 20px; }
+    .benefit_list li { width: calc((100% - 20px) / 2); }
     .bottom_btns + .btn_big.border { display: flex; justify-content: center; margin-top: 100px; margin-bottom: 80px; }
     .bi_section h4 {flex-direction:column;}
     .body_wrap .cont_area .cont_inner .intro_text + ul {margin-top:40px; margin-bottom:0; padding:32px;}

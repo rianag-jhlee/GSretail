@@ -2765,9 +2765,9 @@ const langData = {
                                 { step: "Step 3", title: "물건 도착 SMS를 받고<br />편의점 방문 수령"},
                             ],
                             shoppingTitle: "픽업서비스 제휴쇼핑몰",
-                            shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
+                            shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr/post-service/pick-up/use/contentsid/222/index.do\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],/*26.06.22 edit 정다희 : 링크 주소 수정*/
                             partnerBtnText: "픽업 제휴쇼핑몰 확인하기",
-                            partnerBtnText_link: "https://www.cvsnet.co.kr"
+                            partnerBtnText_link: "https://www.cvsnet.co.kr/post-service/pick-up/use/contentsid/222/index.do" /*26.06.22 edit 정다희 : 링크 주소 수정*/
                         },
                         {
                             label:   "쇼핑몰거래",
@@ -2786,9 +2786,9 @@ const langData = {
                                 { step: "Step 3", title: "운송장 출력 후<br />접수" },
                             ],
                             shoppingTitle: "이용가능 제휴처",
-                            shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],
+                            shoppingItems: [ { text: "제휴 쇼핑몰은 <a href=\"https://www.cvsnet.co.kr/post-service/shopping-mall/use/contentsid/225/index.do\" target=\"_blank\" rel=\"noopener noreferrer\">www.cvsnet.co.kr</a>에서 확인" } ],/*26.06.22 edit 정다희 : 링크 주소 수정*/ 
                             partnerBtnText: "이용가능 제휴처 확인하기",
-                            partnerBtnText_link: "https://www.cvsnet.co.kr"
+                            partnerBtnText_link: "https://www.cvsnet.co.kr/post-service/shopping-mall/use/contentsid/225/index.do"/*26.06.22 edit 정다희 : 링크 주소 수정*/ 
                         },
                     ],
                 },
@@ -3051,6 +3051,8 @@ const langData = {
                             name: "스낵바",
                             desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다. 사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.",
                             // 26.06.08 add 정다희 : 스낵바 info_card 추천 문구 분기
+                            // 26.06.22 add 정다희 : 링크 추가
+                            link: "https://www.mealbox25.com/Snackbar-introduce",
                             advantages: {
                                 title: "이런 분들에게 추천 드립니다.",
                                 items: [
@@ -3096,7 +3098,7 @@ const langData = {
                     },
                     {
                         title: 'GS25만의 차별화된<br class="p_br" /> 상품과<br class="m_br" />서비스 제공',
-                        desc: '안전하고 맛있는 후레쉬푸드 상품 등 고품질의 먹거리 상품 개발과<br class="p_br" />좋은 품질, 합리적 가격의 PB브랜드 \'YOUUS\',<br class="p_br" />GS리테일의 전용 어플리케이션 우리동네GS 등 차별화된 상품과 서비스를 통해 고객에게 새로운 가치를 제공하고 있습니다.',
+                        desc: '안전하고 맛있는 후레쉬푸드 상품 등 고품질의 먹거리 상품 개발과<br class="p_br" />좋은 품질, 합리적 가격의 PB브랜드 \'유어스\',<br class="p_br" />GS리테일의 전용 어플리케이션 우리동네GS 등 차별화된 상품과 서비스를 통해 고객에게 새로운 가치를 제공하고 있습니다.',/*26.06.22 edit 정다희 : 유어스 텍스트 국문으로 수정*/
                     },
                     {
                         title: '경영주와의 끊임없는 소통과<br class="m_br" />협력을 통한 <br class="p_br" />단단한 파트너십',
@@ -4917,7 +4919,7 @@ function goBack() {
 .txt_area > .logo_wrap { overflow: hidden }
 .txt_area > .logo_wrap > img { width: auto; margin: 0 auto; display: block }
 .m_gs25 { font-style: normal; display: none }
-.sec_brand_about { padding: 200px 20px; background-color: #f8f8f8 }
+.sec_brand_about { padding: clamp(140px, 10.42vw, 200px) 20px; background-color: #f8f8f8; }
 .sec_brand_about > .about_inner { width:100%; max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
 .sec_brand_about > .about_inner > .about_txt > p  { overflow: hidden }
 .sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
@@ -5271,9 +5273,9 @@ button { background-color: #fff }
   .txt_area > .logo_wrap { display: none }
   .m_gs25 { display: inline }
   .txt_area > p > span:first-child::after { content: "," }
+  .sec_brand_about { padding: clamp(119px, 37.33vw, 140px) 20px; }
   .sec_brand_about > .about_inner { gap: 40px }
   .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
-  .sec_brand_about { padding: 140px 20px;}
 
   .str_header { flex-direction: column; align-items: flex-start; gap: 16px; padding-bottom: 40px }
   .str_header > h2 { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em }

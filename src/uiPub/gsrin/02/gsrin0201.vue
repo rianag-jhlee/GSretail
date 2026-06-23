@@ -9,7 +9,7 @@
             <div class="cont_inner">
                 <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
                 
-                
+                <!--  -->
                 <div class="tab_content_wrap">
                     <section class="tab_content gsrin0201" v-if="CTabIdx === 0" :aria-label="t.Tabs1[0].item">
                         <div class="performance_charts">
@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="chart_img">
                                         <picture>
-                                            <source :srcset="require(`@/assets/images/dummy/${chart.imgName}_mo.png`)" media="(max-width: 767px) /">
+                                            <source :srcset="require(`@/assets/images/dummy/${chart.imgName}_mo.png`)" media="(max-width: 768px)" /><!-- 26.06.18 edit 정다희 : 접근성오류 source 닫는태그 수정 -->
                                             <img :src="require(`@/assets/images/dummy/${chart.imgName}.png`)" :alt="chart.title">
                                         </picture>
                                     </div>

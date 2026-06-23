@@ -6,6 +6,13 @@
         </div>
 
         <div class="modal_content">
+            <!-- 26.06.22 add 정다희 : header 추가 -->
+            <header>
+                <h2 v-html="t.HeaderTitle"></h2>
+                <p>{{ t.HeaderDesc }}</p>
+                <p>{{ t.HeaderSubDesc }}</p>
+            </header>
+            <!-- //26.06.22 add 정다희 : header 추가 -->
             <section class="tip_section">
                 <h3 v-html="t.TipTitle"></h3>
                 <ul>
@@ -96,13 +103,15 @@
                 </div>
             </section>
 
-            <section class="brand_intro_section">
+            <!-- 26.06.22 delete 정다희 : GS THE FRESH 배달 픽업 문구 영역 삭제 -->
+            <!-- <section class="brand_intro_section">
                 <div>
                     <h4>GS THE FRESH</h4>
                     <p>{{ t.FreshTitle }}</p>
                     <p class="txt_sub" v-html="t.FreshDesc"></p>
                 </div>
-            </section>
+            </section> -->
+            <!-- //26.06.22 delete 정다희 : GS THE FRESH 배달 픽업 문구 영역 삭제 -->
         </div>
     </div>
 </template>
@@ -127,7 +136,12 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "배달·픽업",
-                    TipTitle: "우리동네GS<br/> 배달·픽업 활용 팁",
+                    // 26.06. 22 add 정다희: header 컨텐츠 추가
+                    HeaderTitle: "간식부터 장보기까지,<br class=\"m_br\"> 내 폰 안의 편의점·수퍼",
+                    HeaderDesc: "스낵/음료, 간편식, 신선식품, 생필품",
+                    HeaderSubDesc: "편의점과 수퍼 매장의 상품을 원하는 곳으로 배달받거나, 원하는 시간에 대기 없이 픽업하는 서비스 (전국 GS25, GS THE FRESH)",
+                    // //26.06. 22 add 정다희: header 컨텐츠 추가
+                    TipTitle: "우리동네GS <br class='m_br'/>배달·픽업 활용 팁",
                     Tips: [
                         { text: "KT, LGU+<br/>통신사 할인" },
                         { text: "GS ALL 포인트<br/> 적립/사용" },
@@ -168,8 +182,9 @@ export default {
                     AccTitle: "아동급식 사전예약 이용방법",
                  
                     AccTitle_2: "아동급식 사전예약 수령방법",
-                    FreshTitle: "사전예약으로 더 알뜰한 장보기!",
-                    FreshDesc: "산지의 신선함을 집 앞까지 배송하는 사전예약 서비스는 제철 상품을 합리적인 가격으로 제공하여 많은 사랑을 받고 있습니다.<br />주문한 상품을 매장에서 수령할 수 있고, 주문 방법이 어렵다면 매장으로 문의 바랍니다.",
+                    // 26.06.22 del 정다희 : GS THE FRESH 섹션 삭제 (FreshTitle, FreshDesc 미사용)
+                    // FreshTitle: "사전예약으로 더 알뜰한 장보기!",
+                    // FreshDesc: "산지의 신선함을 집 앞까지 배송하는 사전예약 서비스는 제철 상품을 합리적인 가격으로 제공하여 많은 사랑을 받고 있습니다.<br />주문한 상품을 매장에서 수령할 수 있고, 주문 방법이 어렵다면 매장으로 문의 바랍니다.",
                     Steps_3: [
                         { num: "01", text: "우리동네GS 접속 후<br/>'나만의 냉장고' 또는 '주문내역' 선택" },
                         { num: "02", text: "나만의 냉장고 선택 시, '아동급식 사전예약 상품' 선택" },
@@ -179,6 +194,11 @@ export default {
                 },
                 en: { 
                     MainTitle: "Delivery & Pickup",
+                    // 26.06. 22 add 정다희: header 컨텐츠 추가부분 영문작업 요망
+                    HeaderTitle: "",
+                    HeaderDesc: "",
+                    HeaderSubDesc: "",
+                    // //26.06. 22 add 정다희: header 컨텐츠 추가부분 영문작업 요망
                     TipTitle: "Our Neighborhood GS Delivery & Pickup Tips",
                     Tips: [
                         { text: "KT and LG U+ <br />Carrier Discounts" },
@@ -209,9 +229,9 @@ export default {
                     ChildFoodNotice: "* Local governments serviced by Shinhan Card: Seoul, Incheon, Busan, Chuncheon, Wonju, Sokcho\n* Local governments serviced by NH Bank: Gyeonggi-do, Gyeongsangbuk-do, Gyeongsangnam-do, Chungcheongbuk-do, Chungcheongnam-do, Daejeon, Ulsan, Jeju Special Self-Governing Province"/* 260604 번역 */,
                     AccTitle: "How to Use the Children's Meal Card Pre-Order Service",
                     AccTitle_2: "How to Collect Children's Meal Card Pre-Orders",
-                    FreshTitle: "Smarter Grocery Shopping with Pre-Orders!",
-                    // 26.06.10 del 정다희 : FreshDesc 미사용
-                    // FreshDesc: "산지의 신선함을 집 앞까지 배송하는 사전예약 서비스는 제철 상품을 합리적인 가격으로 제공하여 많은 사랑을 받고 있습니다. 주문한 상품을 매장에서 수령할 수 있고, 주문 방법이 어렵다면 매장으로 문의 바랍니다."
+                    // 26.06.22 del 정다희 : GS THE FRESH 섹션 삭제 (FreshTitle, FreshDesc 미사용)
+                    // FreshTitle: "Smarter Grocery Shopping with Pre-Orders!",
+                    // FreshDesc: "산지의 신선함을 집 앞까지 배송하는 사전예약 서비스는 제철 상품을 합리적인 가격으로 제공하여 많은 사랑을 받고 있습니다. 주문한 상품을 매장에서 수령할 수 있고, 주문 방법이 어렵다면 매장으로 문의 바랍니다.",
                     Steps_2: [
                         { num: "01", text: "Open Our Neighborhood GS<br />and select the 'Children's Meal' icon" },
                         { num: "02", text: "Set a GS25 store in your Children's Meal Card area <br />as your pickup store" },
@@ -251,9 +271,17 @@ export default {
 </script>
 
 <style scoped>
+:deep(.p_br) { display: block }
+:deep(.m_br) { display: none }
 section { padding-bottom: 80px; }
 section h4 + p{margin-top:8px; font-weight: 700;font-size: 1.8rem;line-height: 1.5;}
 section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+
+/* 26.06.22 add 정다희 */
+.modal_content > header{margin-bottom:40px;}
+.modal_content > header h2{margin-bottom: 16px; font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;}
+.modal_content > header p{font-size: 1.8rem;line-height: 1.4;}
+.modal_content > header p + p{margin-top:8px;}
 /* Tip Section */
 .tip_section h3 { margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 .tip_section ul { display: flex; gap: 8px; list-style: none; }
@@ -269,11 +297,12 @@ section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6re
 .tip_section li:nth-of-type(5)::after {background-image:url('@/assets/images/sub/gsrbr04/icon_tip_05.png');}
 .tip_section li:nth-of-type(6)::after {background-image:url('@/assets/images/sub/gsrbr04/icon_tip_06.png');}
 
+/* 26.06.22 del 정다희 : GS THE FRESH 섹션 삭제 (brand_intro_section 미사용) */
 /* Brand Header Area */
-.brand_intro_section div { display: block; padding-bottom: 0; margin-bottom: 24px; }
-.brand_intro_section h4 {margin-bottom: 8px; color: #161616; font-size: 24px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;}
-.brand_intro_section div p:nth-of-type(1) { margin-bottom: 8px; color: #161616; font-size: 1.8rem;}
-.brand_intro_section div p:nth-of-type(2) { color: #67676f; font-size: 16px; line-height: 1.5; }
+/* .brand_intro_section div { display: block; padding-bottom: 0; margin-bottom: 24px; } */
+/* .brand_intro_section h4 {margin-bottom: 8px; color: #161616; font-size: 24px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;} */
+/* .brand_intro_section div p:nth-of-type(1) { margin-bottom: 8px; color: #161616; font-size: 1.8rem;} */
+/* .brand_intro_section div p:nth-of-type(2) { color: #67676f; font-size: 16px; line-height: 1.5; } */
 
 /* 26.06.10 del 정다희 : product_category 미사용 (GS25 섹션 주석 처리) */
 /* .product_category { display: flex; gap: 8px; margin-bottom: 24px; list-style: none; } */
@@ -340,6 +369,11 @@ section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6re
     /* 26.06.10 del 정다희 : notice_bar 반응형 미사용 */
     /* .notice_bar p {font-size:12px !important; font-weight:400 !important;} */
     /* .notice_bar p::before {top:-2px;} */
+    :deep(.p_br) { display: none }
+    :deep(.m_br) { display: inline }
+    .modal_content > header{margin-bottom:60px;}
+    .modal_content > header h2{margin-bottom:12px;font-size: 2.8rem;line-height: 1.35;}
+    .modal_content > header p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
     section { padding-bottom:60px; }
     .tip_section h3 { font-size: 2.8rem; }
     .tip_section ul { flex-wrap: wrap; gap: 20px 8px; }

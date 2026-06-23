@@ -90,7 +90,8 @@
             <div class="panel sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
                 <div class="link_wrap">
-                    <Buttons tag="a" :href="t.procedure.buttonHref" btn-class="btn_icon btn_xl">{{ t.procedure.buttonLabel }}</Buttons>
+                    <!-- 26.06.18 edit 정다희 : 버튼 클래스 수정 */ -->
+                    <Buttons tag="a" :href="t.procedure.buttonHref" btn-class="btn_xl primary">{{ t.procedure.buttonLabel }}</Buttons>
                 </div>
             </div>
  
@@ -608,7 +609,8 @@
                             </li>
                         </ul>
                     </div>
-                    <Buttons btn-class="btn_icon fill btn_xl primary after" :href="t.consult.locationConsultHref" target="_blank">{{ t.consult.proposalButtonLabel }}</Buttons>
+                     <!-- 26.06.18 edit 정다희 : 버튼 클래스 수정 */ -->
+                    <Buttons btn-class="btn_icon_arrow fill btn_xl primary after" :href="t.consult.locationConsultHref" target="_blank">{{ t.consult.proposalButtonLabel }}</Buttons>
                 </header>
                 <ul class="caution_list consult_caution_mo">
                     <li v-for="(item, index) in t.consult.caution" :key="`consult-caution-mo-${index}`">
@@ -695,7 +697,8 @@
                 </div>
                 <ConsentInfoBox :title="t.consent2.title" :items="t.consent2.items" :notice-html="t.consent2.noticeHtml" />
                 <!-- 고객정보 폼 -->
-                <div class="apply_form">
+                <!-- 26.06.18 edit 정다희 : col_layout 클래스 추가 */ -->
+                <div class="apply_form col_layout">
                     <div class="form_head">
                         <h3 class="form_head_title">{{ t.proposalCustomerForm.title }}</h3>
                         <span class="form_required_note">{{ t.requiredNote }}</span>
@@ -737,7 +740,8 @@
                             </div>
                         </div>
                         <div class="form_row form_row_area">
-                            <div class="form_label">{{ t.proposalCustomerForm.storeAreaLabel }}<span class="form_required">*</span></div>
+                            <!-- 26.06.18 edit 정다희 : area_label 클래스 추가 */ -->
+                            <div class="form_label area_label">{{ t.proposalCustomerForm.storeAreaLabel }}<span class="form_required">*</span></div>
                             <div class="form_field form_field_area">
                                 <div class="form_sub_group">
                                     <span class="form_sub_label">{{ t.proposalCustomerForm.contractAreaLabel }}</span>
@@ -795,9 +799,15 @@
                     <div class="consult_intro">
                         <div class="consult_head">
                             <div class="consult_img_wrap"></div>
-                            <h3 v-html="t.consultBox.title"></h3>
+                           <!-- 26.06.18 add 정다희 : div.consult_intro_txt pc_only / mo_only 구조 추가 */ -->
+                            <div class="consult_intro_txt pc_only">
+                                <h3 v-html="t.consultBox.title"></h3>
+                                <p v-html="t.consultBox.desc"></p>
+                            </div>
+                            <h3 class="mo_only" v-html="t.consultBox.title"></h3>
                         </div>
-                        <p v-html="t.consultBox.desc"></p>
+                        <p class="mo_only" v-html="t.consultBox.desc"></p>
+                        <!-- //26.06.18 add 정다희 : div.consult_intro_txt pc_only / mo_only 구조 추가 */ -->
                     </div>
                 </div>
                 <!-- 점포 소유 여부 선택 -->
@@ -808,7 +818,8 @@
                 <!-- 개인정보 동의 -->
                 <ConsentInfoBox :title="t.consent.title" :items="t.consent.items" :notice-html="t.consent.noticeHtml" />
                 <!-- 고객정보 폼 -->
-                <div class="apply_form">
+                <!-- 26.06.18 edit 정다희 : col_layout 클래스 추가 */ -->
+                <div class="apply_form col_layout">
                     <div class="form_head">
                         <h3 class="form_head_title">{{ t.customerForm.title }}</h3>
                         <span class="form_required_note">{{ t.requiredNote }}</span>
@@ -850,14 +861,16 @@
                     </div>
                 </div>
                 <!-- 상담내용 폼 (점포 소유 시에만 표시) -->
-                <div class="apply_form" v-show="hasStore === true">
+                <!-- 26.06.18 edit 정다희 : col_layout 클래스 추가 */ -->
+                <div class="apply_form col_layout" v-show="hasStore === true">
                     <div class="form_head">
                         <h3 class="form_head_title">{{ t.consultForm.title }}</h3>
                         <span class="form_required_note">{{ t.requiredNote }}</span>
                     </div>
                     <div class="form_body">
                         <div class="form_row form_row_area">
-                            <div class="form_label">{{ t.consultForm.areaLabel }}</div>
+                            <!-- 26.06.18 edit 정다희 : area_label클래스 추가 */ -->
+                            <div class="form_label area_label">{{ t.consultForm.areaLabel }}</div>
                             <div class="form_field form_field_area">
                                 <div class="form_sub_group">
                                     <span class="form_sub_label">{{ t.consultForm.contractAreaLabel }}</span>
@@ -877,7 +890,8 @@
                             </div>
                         </div>
                         <div class="form_row check_row">
-                            <div class="form_label">{{ t.consultForm.superOperatorLabel }}</div>
+                            <!-- 26.06.18 edit 정다희 : area_label 클래스 추가 */ -->
+                            <div class="form_label area_label">{{ t.consultForm.superOperatorLabel }}</div>
                             <div class="form_field form_field_check">
                                 <div class="form_sub_group">
                                     <span class="form_sub_label">{{ t.consultForm.itemCheckLabel }}</span>
@@ -892,7 +906,8 @@
                             </div>
                         </div>
                         <div class="form_row contract_row">
-                            <div class="form_label">{{ t.consultForm.contractLabel }}</div>
+                            <!-- 26.06.18 edit 정다희 : area_label 클래스 추가 */ -->
+                            <div class="form_label area_label">{{ t.consultForm.contractLabel }}</div>
                             <div class="form_field form_field_contract">
                                 <div class="form_sub_group">
                                     <span class="form_sub_label">{{ t.consultForm.contractPeriodLabel }}</span>
@@ -919,7 +934,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="apply_form" v-show="hasStore === false">
+                <!-- 26.06.18 edit 정다희 : col_layout 클래스 추가 */ -->
+                <div class="apply_form col_layout" v-show="hasStore === false">
                     <div class="form_head">
                         <h3 class="form_head_title">{{ t.consultFormNoStore.title }}</h3>
                         <span class="form_required_note">{{ t.requiredNote }}</span>
@@ -2545,8 +2561,8 @@ function toggleCard(id) {
 
 /* depth3 탭 */
 .tab_d3_wrap { padding-top: 0; }
-.tab_type { display: flex; border: 1px solid #c4c4d0; border-radius: 4px; overflow: hidden; }
-.tab_type > button { flex: 1; height: 60px; color: #90909a; font-size: 1.8rem; background-color: #fff; border: none; border-right: 1px solid #c4c4d0; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+.tab_type { display: flex; border: 1px solid #c4c4d0; overflow: hidden; }
+.tab_type > button { flex: 1; height: 60px; color: #90909a; font-size: 1.8rem; background-color: #fff; border: none; border-right: 1px solid #c4c4d0; cursor: pointer;  }
 .tab_type > button:last-child { border-right: none; }
 .tab_type > button.active { background-color: var(--color-brand-primary); color: #fff; border: 0; }
 
@@ -2590,7 +2606,7 @@ function toggleCard(id) {
 /* 가맹/창업 절차 */
 .link_wrap { margin-top: 40px; display: flex; justify-content: center; }
 .link_wrap > a { margin: 0 auto; padding: 18px 32px; color: #fff; font-weight: 700; font-size: 1.8rem; line-height: 1.5; text-align: center; background-color: var(--color-brand-primary); border-radius: 10px; display: inline-block; }
-.link_wrap > a.btn_xl { height: 64px; padding: 0 32px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.link_wrap > a.btn_xl {  padding: 0 32px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
 
 /* 창업 전 필수 확인사항 */
 .precaution_title, .precaution_intro > h3 { color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
@@ -2708,11 +2724,10 @@ function toggleCard(id) {
 .store_accordion_list { display: none; }
 .store_accordion_list :deep(.board_type_toggle) { border-top: 1px solid #d7d7df; }
 .store_accordion_list :deep(dt > a.acc_tit_btn) { min-height: auto; padding: 16px 20px; font-size: inherit; font-weight: inherit; border-bottom: 1px solid #d7d7df; }
-.store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open) { border: 1px solid #161616; border-bottom: none; }
-.store_accordion_list :deep(dt > a.acc_tit_btn::after) { width: 24px; height: 24px; background:url('@/assets/images/common/icon_set_20.png') no-repeat -191px -25px; transform: rotate(0deg); transform-origin: center; transition: transform 0.2s ease; }
+.store_accordion_list :deep(dt > a.acc_tit_btn::after) { width: 24px; height: 24px; transform: rotate(0deg); transform-origin: center; transition: transform 0.2s ease; }
 .store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open::after) { transform: rotate(180deg); }
-.store_accordion_list :deep(dd.acc_panel.acc_show) { border: 1px solid #161616; border-top: none; }
 .store_accordion_list :deep(.acc_panel_cont) { padding: 0; }
+
 
 /* 아코디언 헤드 */
 .accordion_head_info { flex: 1; min-width: 0; }
@@ -2756,13 +2771,11 @@ function toggleCard(id) {
 
 /* 가맹/창업 상담 상담 폼 */
 .consult_box { padding: 56px 40px; background-color: #f8f8f8; border-radius: 12px; }
-.consult_box_apply { display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 40px; }
-.consult_box_apply .consult_intro { flex: 1; min-width: 0; order: 1; }
+.consult_box_apply { display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 40px; flex-wrap:wrap;}
 .consult_box_apply .consult_selector_wrap { width: 360px; flex: 0 0 360px; order: 2; }
 .consult_box_apply .consult_head { display: flex; align-items: flex-start; gap: 20px; }
-.consult_box_apply .consult_head > h3 { flex: 1; min-width: 0; margin: 0; color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.consult_box_apply .consult_intro > p { margin: 16px 0 0; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.consult_intro { min-width: 0; }
+.consult_box_apply .consult_head  h3 { flex: 1; min-width: 0; margin: 0; color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.consult_box_apply .consult_intro p { margin: 16px 0 0; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .consult_img_wrap { width: 114px; height: 152px; border: 1px solid #000; flex-shrink: 0; overflow: hidden; }
 .consult_intro_txt { flex: 1; min-width: 0; }
 .consult_intro_txt > h3 { color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
@@ -2774,7 +2787,7 @@ function toggleCard(id) {
 .consult_selector_hint::before { width: 20px; height: 20px; content: ""; background: url("@/assets/images/common/icon_set_20.png") no-repeat -1155px -69px; position: absolute; top: 0; left: 0; }
 .list_caution { list-style: none; margin: 0; padding: 0; }
 .list_caution > li > p { color: #67676f; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
-.middle_bts_wrap { margin-top: 40px; display: flex; gap: 8px; }
+.middle_bts_wrap { margin-top: 64px; display: flex; gap: 8px; }
 .middle_bts_wrap > button { height: 52px; padding: 0 16px; background: #fff; border: 1px solid #90909a; border-radius: 10px; font-size: 1.8rem; font-weight: 700; cursor: pointer; transition: border-color 0.15s, color 0.15s; color: #161616; }
 .middle_bts_wrap > button:hover, .middle_bts_wrap > button.active { border-color: #107af2; color: #107af2; }
 .middle_bts_wrap + :deep(.consent_box){margin-top:30px;}
@@ -2784,17 +2797,22 @@ function toggleCard(id) {
 .button_wrap { margin-top: 40px; display: flex; gap: 8px; justify-content: flex-end;}
 .button_wrap :deep(button){ width:134px;}
 .button_wrap :deep(button.primary){ background-color:#15B874; }
+.apply_form.col_layout{border:0 !important; }
+.apply_form.col_layout .form_body .form_row {grid-template-columns: 134px 1fr; gap:8px;}
 .form_row_name .form_field :deep(.input_wrap){max-width:205px;}
 .consult_box + .form_row, .form_row + .consent_box{margin-top:64px}
-.check_list { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.check_list { display: flex; flex-wrap: wrap; gap: 8px; }
 .check_list :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
 .form_field_email :deep(.input_wrap){max-width:205px;}
+.form_field_email span + :deep(.input_wrap){max-width:180px;}
 .form_field_email :deep(.input_wrap + label.select){width:100%; max-width:180px;}
-.form_field_phone :deep(.input_wrap){max-width:134px;}
+.form_field_phone :deep(label.select),
+.form_field_phone :deep(.input_wrap) { max-width: 134px; flex: 1; min-width: 0; }
 .form_field_select_220 :deep(label.select){width:100%; max-width:220px;}
 .form_field_region :deep(label.select){width:100%; max-width:220px;}
+.apply_form .form_field.form_field_area{gap:24px;}
 .form_field_area :deep(.input_wrap){max-width:134px;}
-.form_field_area .form_sub_input_wrap { flex-wrap: nowrap; align-items: center; gap: 8px; max-width: 100%; }
+.form_field_area .form_sub_input_wrap { flex-wrap: wrap; align-items: center; gap: 8px; max-width: 100%; }
 .form_field_area .form_sub_input_wrap :deep(.input_wrap) { flex: 0 0 auto; max-width: 134px; min-width: 134px; }
 .form_field_area .form_sub_input_wrap .form_sub_unit { flex-shrink: 0; }
 .form_field_area .form_sub_input_wrap .area_note { flex: 0 0 auto; flex-shrink: 0; white-space: nowrap; }
@@ -2817,7 +2835,7 @@ function toggleCard(id) {
 .form_row_area > .form_label{height: 52px; line-height: 52px;}
 .form_field_franchise { display: flex; flex-wrap: wrap; gap: 12px 20px; }
 .franchise_type_item { display: inline-flex; align-items: center; gap: 8px; }
-.franchise_type_item :deep(.input_wrap) { margin: 0; }
+.franchise_type_item :deep(.input_wrap) { width:auto; flex: none; }
 .franchise_type_item :deep(button) { min-width: 56px; }
 .apply_form textarea { width: 100%; height: 120px; padding: 16px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 10px; resize: vertical; box-sizing: border-box; }
 .apply_form textarea::placeholder { color: #a4a4b0; }
@@ -2827,7 +2845,7 @@ function toggleCard(id) {
 .brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
 .brand_panel_bg > img { width: 100%; display: block; object-fit: cover; }
 .brand_panel_title { padding: 0 0 100px; }
-.brand_panel_title.flex{display: flex;justify-content: space-between; align-items: center;}
+.brand_panel_title.flex{display: flex;justify-content: space-between; align-items: center; gap:40px; flex-wrap:wrap;}
 .brand_panel_title h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .brand_panel_title p { margin: 0; color: #161618; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_owner_support.tab_page { padding-left: 0; padding-right: 0; }
@@ -2862,9 +2880,9 @@ function toggleCard(id) {
 .quick_menu li:nth-of-type(3) button::before {background: url(@/assets/images/sub/icon_quick3.png) no-repeat 0 0;}
 
 /* 26.06.09 Add 이종환 : 사업설명회 신청 */
-.seminar_wrap{max-width:1000px; margin:80px auto 0; scroll-margin-top: 24px; box-sizing:border-box;}
+.seminar_wrap{max-width:1000px; margin:60px auto 0; scroll-margin-top: 24px; box-sizing:border-box;}
 
-.manager_card { width: 100%; max-width: 740px; margin: 12px 0; padding: 40px; background-color: #E8F8F1; border: 1px solid #15B874; border-radius: 12px; display: flex; align-items: center; gap: 32px;  }
+.manager_card { width: 100%; max-width: 740px; margin:0 0 40px; padding: 40px; background-color: #E8F8F1; border: 1px solid #15B874; border-radius: 12px; display: flex; align-items: center; gap: 32px;  }
 .manager_card.type_02{max-width:100%;display:flex; justify-content: space-between;}
 .manager_card .manager_header > p{color:#67676F;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 .manager_card .manager_header > strong{margin-top:2px; font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;display:block;}
@@ -2881,10 +2899,9 @@ function toggleCard(id) {
 .consent_notice_area > p { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
 .consent_radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
 .consent_radio :deep(.input_wrap) { width: auto; flex: 0 0 auto; }
-/* .consent_radio > input { width: 24px; height: 24px; margin: 0; padding: 0; background-color: #ffffff; border: 1px solid #c4c4d0; border-radius: 8px; position: relative; appearance: none; }
-.consent_radio > input:checked { background-color: #107af2; border-color: #107af2; }
-.consent_radio > input:checked::after { width: 10px; height: 10px; background-color: #ffffff; border-radius: 50%; position: absolute; top: 50%; left: 50%; content: ""; transform: translate(-50%, -50%); } */
 .consent_radio > span { color: #161616; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+:deep(.consent_box) + .apply_form{margin-top:40px;}
+.apply_form.col_layout{margin-top:64px;} 
 .apply_form {border-top:1px solid #242428;}
 .apply_form .form_body {padding-top:12px; border-bottom: 1px solid #E5E5E9;}
 .apply_form .form_body .form_row { min-height: auto; padding: 12px 0; display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
@@ -2892,10 +2909,10 @@ function toggleCard(id) {
 
 .apply_form .form_body p.explain {color:#ED3030; font-size:1.6rem; letter-spacing:-0.01em; line-height:150%;}
 
-.apply_form .button_area :deep(.primary){width:100%; max-width:250px;}
+.apply_form .button_area :deep(.primary){width:100%; max-width:250px; background-color:#15B874;}
 .apply_form .form_body .form_row .form_label { margin-bottom: 12px; font-weight:400}
 .apply_form .form_body .form_row .form_label .explain {margin-left:12px; font-size:1.2rem;}
-.apply_form .form_body .form_row .form_field { width: 100%; }
+/* .apply_form .form_body .form_row .form_field { width: 100%; } */
 .apply_form .form_body .form_row_radio, .apply_form .form_body .form_row_textarea,
 .apply_form .form_body .form_row_textarea .form_field,
 .apply_form .form_body .form_row_calendar :deep(.consult_calendar),
@@ -2906,11 +2923,10 @@ function toggleCard(id) {
 .apply_form .form_body .form_label { margin-bottom: 12px; }
 .apply_form .form_body .form_row.col_02 .col_item .form_field { width: 100%; }
 .apply_form .form_body .form_row.col_02 .col_item .forn_field_radio{padding:12px 0;}
-.apply_form .form_field { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.apply_form .form_field { display: flex; gap: 8px; flex-wrap: wrap; min-width: 0; }
 .apply_form .form_field .flex1 {flex:1;}
-.apply_form .form_field_phone .select{flex:1;}
-.form_field_phone label.select select,
-.form_field_phone label.select .input_wrap {max-width:134px;}
+.apply_form .form_field_phone :deep(label.select),
+/* .apply_form .form_field_phone :deep(.input_wrap) { max-width: 134px; flex: 1; min-width: 0; } */
 .apply_form .form_field_birth { flex-wrap: nowrap; }
 .apply_form .form_field_birth :deep(.select) { max-width:150px;flex: 1; min-width: 0; }
 .apply_form .form_field_open :deep(.input_wrap){max-width: 150px;}
@@ -2947,14 +2963,13 @@ function toggleCard(id) {
     .seminar_table thead th, .seminar_table tbody th, .seminar_table tbody td { font-size: 1.6rem; }
     .brand_panel_title > h2 { font-size: 3.2rem; }
     .brand_panel_title > p { font-size: 2rem; }
-
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
-    .apply_form .form_field_email { flex-wrap: wrap; }
-    .apply_form .form_field_area .form_sub_input_wrap { flex-wrap: wrap; }
+    /* :deep(.consent_box + .apply_form){margin-top:40px;} */
+    /* .apply_form .form_field_area .form_sub_input_wrap { flex-wrap: wrap; }
     .apply_form .form_field_area .form_sub_input_wrap :deep(.input_wrap) { min-width: 0; max-width: 100%; }
     .apply_form .form_field_area .form_sub_input_wrap .area_note,
     .apply_form .form_field_area .form_sub_input_wrap .form_field_note { white-space: normal; }
-    .apply_form .form_zip_row { flex-wrap: wrap; max-width: 100%; min-width: 0; }
+    .apply_form .form_zip_row { flex-wrap: wrap; max-width: 100%; min-width: 0; } */
 }
 
 /* Mobile */
@@ -3023,10 +3038,10 @@ function toggleCard(id) {
     .consult_caution_mo { display: block; margin-top: 0; margin-bottom: 20px; padding: 0 20px; }
     .consult_box { padding:0; background-color: #fff; }
     .consult_box_apply { padding:0;display: flex; flex-direction: column; align-items: stretch; gap: 0; }
-    .consult_box_apply .consult_selector_wrap { order: 1; width: 100%; flex: none; margin: 0 0 20px; }
+    .consult_box_apply .consult_selector_wrap { order: 1; width: 100%; flex: none; margin: 0 0 32px; }
     .consult_box_apply .consult_selector_wrap :deep(.select select) { height: 52px; padding: 0 48px 0 16px; font-size: 1.6rem; border-radius: 12px; }
     .consult_box_apply .consult_intro { order: 2; display: block; }
-    .consult_box_apply .consult_head { display: flex; align-items: center; gap: 16px; }
+    .consult_box_apply .consult_head { display: flex; align-items: center; gap: 12px; }
     .consult_box_apply .consult_img_wrap { width: 90px; height: 120px; }
     .consult_box_apply .consult_head > h3 { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
     .consult_box_apply .consult_intro > p { margin: 12px 0 0; font-size: 1.6rem; line-height: 1.5; }
@@ -3070,11 +3085,9 @@ function toggleCard(id) {
     .detail_panel { padding: 16px; }
     .store_card_detail_row { margin-top: 0; }
     .store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_open), .store_accordion_list :deep(dt > a.acc_tit_btn.acc_tit_btn) { border: 0; }
-    .store_accordion_list :deep(.board_type_toggle) { border-top: 1px solid #161616; }
-    .store_accordion_list :deep(dt) { border-bottom: 1px solid #d7d7df; }
-    .store_accordion_list :deep(.detail_card) { padding: 20px; border-radius: 12px; border: 0; }
+    .store_accordion_list :deep(dt + dd){border-bottom:1px solid #D7D7DF;}
+    .store_accordion_list :deep(.detail_card) { padding: 20px; border: 0; border-radius: 12px; }
     .store_accordion_list :deep(dd.acc_panel > .acc_panel_inner > .acc_panel_cont) { padding: 30px 20px !important; background-color: #F8F8F8 !important; }
-    .store_accordion_list :deep(dd.acc_panel.acc_show) { border: 0; }
     .accordion_badges { margin-top: 6px; }
 
     /* Swiper: cont_inner 좌우 20px 패딩 상쇄 — sec_owner_support에 overflow-x:hidden 주면 margin -20px 확장이 잘림 */
@@ -3114,23 +3127,13 @@ function toggleCard(id) {
     .apply_form .form_row:first-child { padding-top: 0; }
     .apply_form .form_row:last-child { padding-bottom: 0; }
     .apply_form .form_label { margin-bottom: 16px; font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; word-break: keep-all; overflow-wrap: anywhere; }
-    .apply_form .form_field { width: 100%; min-width: 0; max-width: 100%; align-items: stretch; gap: 12px; flex-wrap: wrap; box-sizing: border-box; }
-    /* .apply_form .form_row_name .form_field :deep(.input_wrap),
-    .apply_form .form_field_store :deep(.input_wrap),
-    .apply_form .form_field_select_220 :deep(label.select),
-    .apply_form .form_field :deep(.input_wrap),
-    .apply_form .form_field :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; box-sizing: border-box; } */
+    .apply_form.col_layout {margin-top:40px;}
+    .apply_form.col_layout +.apply_form.col_layout{margin-top:60px;}
+    .apply_form.col_layout .form_body .form_row{grid-template-columns:1fr; gap:0;}
+    .apply_form.col_layout .form_body{padding:10px 0;}
     .apply_form .form_field :deep(input),
     .apply_form .form_field :deep(select) { max-width: 100%; box-sizing: border-box; }
-    .apply_form .form_field_email { flex-direction: column; align-items: stretch; gap: 12px; }
-    .apply_form .form_field_email .form_sep { display: none; }
-    .apply_form .form_field_email :deep(.input_wrap),
-    .apply_form .form_field_email :deep(.input_wrap + label.select),
-    .apply_form .form_field_email :deep(label.select) { width: 100%; max-width: 100%; flex: 1 1 100%; min-width: 0; }
-    .apply_form .form_field_phone { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; align-items: center; }
-    .apply_form .form_field_phone .form_sep { display: none; }
-    .apply_form .form_field_phone :deep(label.select),
-    .apply_form .form_field_phone :deep(.input_wrap) { width: 100%; max-width: 100%; min-width: 0; flex: none; }
+    .form_field_email :deep(.input_wrap + label.select){ max-width:none;}
     .apply_form .form_field_region { flex-direction: column; flex-wrap: wrap; }
     .apply_form .form_field_region :deep(label.select) { width: 100%; max-width: 100%; min-width: 0; }
     .apply_form .form_field_address { width: 100%; min-width: 0; max-width: 100%; }
@@ -3157,16 +3160,13 @@ function toggleCard(id) {
     .apply_form .form_field_contract .form_sub_group { width: 100%; min-width: 0; }
     .apply_form .form_field_check .check_etc { width: 100%; min-width: 0; }
     .apply_form .form_field_check .check_etc :deep(.input_wrap) { max-width: 100%; width: 100%; min-width: 0; }
-    .apply_form .check_list { gap: 8px 12px; max-width: 100%; min-width: 0; }
-    .apply_form .check_list :deep(.input_wrap) { max-width: 100%; min-width: 0; }
+    .apply_form .check_list{gap:20px;}
+    .apply_form .check_list :deep(.input_wrap){width:auto !important;}
     .apply_form .form_sub_inputs { width: 100%; min-width: 0; flex-wrap: wrap; }
-    .apply_form .form_sub_inputs :deep(.input_wrap) { flex: 1 1 calc(50% - 4px); max-width: 100%; min-width: 0; }
-    .apply_form .contract_rent { width: 100%; min-width: 0; flex-direction: column; align-items: stretch; gap: 12px; }
+    .apply_form .form_sub_inputs :deep(.input_wrap) {  max-width: 100%; min-width: 0; }
+    .apply_form .contract_rent { width: 100%;}
     .apply_form .contract_rent :deep(.input_wrap) { flex: 1 1 100%; max-width: 100%; width: 100%; min-width: 0; }
     .apply_form .form_field_franchise { flex-direction: column; align-items: stretch; gap: 12px; min-width: 0; max-width: 100%; }
-    .apply_form .franchise_type_item { width: 100%; min-width: 0;  gap: 8px; }
-    .apply_form .franchise_type_item :deep(.input_wrap){width:auto;flex:0 1 auto;}
-    .apply_form .franchise_type_item :deep(button) { min-width: 0; flex-shrink: 1; }
     .apply_form .form_row_textarea .form_field { min-width: 0; max-width: 100%; }
     .apply_form .form_row_textarea .form_field :deep(.textarea_wrap),
     .apply_form .form_row_textarea .form_field :deep(.textarea_field),
@@ -3175,8 +3175,8 @@ function toggleCard(id) {
     .apply_form .check_row,
     .apply_form .contract_row { align-items: flex-start; }
     .middle_bts_wrap { margin-top: 60px; gap: 8px; max-width: 100%; min-width: 0; }
-    .middle_bts_wrap > button { width: 100%; height: auto; min-height: 48px; padding: 12px 16px; font-size: 1.6rem; line-height: 1.4; white-space: normal; word-break: keep-all; }
-    .middle_bts_wrap + :deep(.consent_box) { margin-top: 24px; }
+    .middle_bts_wrap > button { width: 100%; height: auto; min-height: 48px; padding: 12px 5px; font-size: 1.6rem; letter-spacing:-0.02em; }
+    .middle_bts_wrap + :deep(.consent_box) { margin-top: 40px; }
     .consult_box + .form_row,
     .form_row + .consent_box { margin-top: 32px; }
     .button_wrap { margin-top: 32px; justify-content: center; gap: 8px; max-width: 100%; min-width: 0; }
@@ -3187,10 +3187,12 @@ function toggleCard(id) {
     .apply_form .form_body .form_row.col_02 .col_item .forn_field_radio{padding:0;}
     .apply_form .form_body .form_row.col_02 { max-width: none; padding:0; grid-template-columns: 1fr; gap: 0; }
     .apply_form .form_body .form_row .form_label { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .apply_form.col_layout .form_body .form_row .form_label.area_label{margin-bottom:16px;font-weight: 700;}
+    .form_sub_label{color:#161616;}
     .apply_form .form_body .form_row_calendar :deep(.consult_calendar),
     .apply_form .form_body .form_row_calendar :deep(.consult_time_picker) { max-width: none; }
     .apply_form .form_field :deep(.input_wrap),
-    .apply_form .form_field :deep(.select) { width: 100%; max-width: none; }
+    .apply_form .form_field :deep(.select) { max-width: none; }
     .apply_form .form_field_phone { display: flex; align-items: center; gap: 8px; }
     .apply_form .form_field_phone .form_sep { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; }
     .apply_form .form_field_phone :deep(.select),
@@ -3206,29 +3208,7 @@ function toggleCard(id) {
     .manager_name { font-size: 1.6rem; line-height: 1.24; }
     .manager_addr > .tit, .manager_addr > .addr {font-size:1.6rem;}
     .manager_icon {width:16px; height:16px; background:url('@/assets/images/sub/icon_map_16.png');}
-    .row_layout.apply_form .form_body{padding:40px 0 0; }
-    .row_layout.apply_form .form_body .form_row { min-height: auto; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
-    .row_layout.apply_form .form_body .form_row .form_label { margin-bottom: 16px; }
-    /* .row_layout.apply_form .form_body .form_row .form_field_consult_entry { flex-direction: column; align-items: stretch; } */
-    .row_layout.apply_form .form_body .form_row .form_field_consult_entry :deep(.select) { width: 100%; max-width: none; flex: 1 1 100%; }
-    .row_layout.apply_form .form_body .cb_area{gap:8px;}
-    .row_layout.apply_form .form_body .cb_area .cb_area_item { flex: 1 1 0; min-width: 0; max-width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; box-sizing: border-box; }
-
-    .row_layout.apply_form .form_body .cb_area .cb_area_item > span { flex-shrink: 0; white-space: nowrap; }
-    .row_layout.apply_form .form_body .cb_faddr,
-    .row_layout.apply_form .form_body .cb_zip,
-    .row_layout.apply_form .form_body .cb_ast,
-    .row_layout.apply_form .form_body .cb_a1,
-    .row_layout.apply_form .form_body .cb_a1 :deep(.input_wrap),
-    .row_layout.apply_form .form_body .cb_a2,
-    .row_layout.apply_form .form_body .cb_a2 :deep(.input_wrap),
-    .row_layout.apply_form .form_body .cb_area,
-    .row_layout.apply_form .form_body .cb_store :deep(.input_wrap),
-    .row_layout.apply_form .form_body .cb_feat .form_field :deep(.textarea_wrap),
-    .row_layout.apply_form .form_body .cb_rel :deep(.input_wrap) { max-width: none; }
-    .row_layout.apply_form .form_body .cb_area .cb_area_item :deep(.input_wrap) { flex: 1; max-width: none; width: 100%; min-width: 0; box-sizing: border-box; }
     .apply_form .form_body .form_row{padding:20px 0;}
-    .row_layout.apply_form article + article{margin-top:60px;}
     .apply_form .form_body .form_row.col_02 .col_item{padding:20px 0px;}
     .apply_form .button_area :deep(.primary){width:100%; max-width:100%; }
     .consult_search_box strong{font-size: 1.65rem;line-height: 124%;letter-spacing: 0%;}
