@@ -249,7 +249,7 @@ export default {
 ======================== */
 .file_list_wrap { 
     width: 600px;
-    height: 240px;
+    max-height: 240px; /* 260623 edit 이소라 */
     margin-top: 8px;
     padding: 16px;
     border: 1px solid #E5E5E9;
@@ -257,7 +257,7 @@ export default {
     background: #F8F8F8;
 }
 .file_list_inner {
-    height: 208px;
+    max-height: 208px; /* 260623 edit 이소라 */
     overflow-y: auto;
 }
 .file_list_header {

@@ -25,7 +25,7 @@
                             </div>
                             <div v-if="t.ChairmanGreeting || t.ChairmanBody?.length" class="chairman_content">
                                 <h3 v-if="t.ChairmanGreeting" v-html="t.ChairmanGreeting"></h3>
-                                <p v-for="(para, pIdx) in t.ChairmanBody" :key="'chairman-' + pIdx">{{ para }}</p>
+                                <p v-for="(para, pIdx) in t.ChairmanBody" :key="'chairman-' + pIdx" v-html="para"></p>
                             </div>
                         </article>
                     </section>
@@ -382,11 +382,11 @@ export default {
                     ChairmanGreeting: "존경하는 GS리테일 주주 여러분 안녕하십니까?<br />GS리테일 이사회 의장<br class='m_br'/>이성락입니다.",
                     ChairmanBody: [
                         "우리 회사는 투명한 지배구조 확립을 위해, 2020년 11월부터 대표이사와 이사회 의장을 분리하여 이사회를 운영하고 있습니다.",
-                        "저는 이사회 의장으로서 GS리테일 주주의 권리 보호 및 공정한 대우를 통해 주주의 기본권을 최대한 보장하고, 주주와의 신뢰 구축을 바탕으로 기업 가치를 극대화하고자 노력하고 있습니다.",
-                        "또한, 의사결정의 효율성을 위해 전문성을 갖춘 유능한 인사로 이사회를 구성하여, 주주가치 제고를 위해 최선을 다하고 있으며, 특히 감사위원회는 전원 사외이사 및 2인 이상의 재무 · 회계 전문가로 구성하고, 경영진과 지배주주로부터 독립적인 경영활동이 보장될 수 있도록 하고 있습니다.",
-                        "더불어 ESG관점의 지속가능경영 강화를 위해 ESG위원회, 보상위원회를 설치하는 등 이사회 내 5개의 위원회를 운영하며, 의사결정의 독립성과 전문성을 제고하기 위해 노력하고 있습니다.",
-                        "이 밖에도 다양한 이해관계자의 권리 보호, 공정한 거래 문화 확립, 지역 사회와의 상생 등 기업의 사회적 책임을 다하는 한편, GS리테일이 지속 성장하는 기업이 될 수 있도록 최선의 노력을 다하겠습니다.",
-                        "앞으로도 GS리테일을 향한 많은 관심과 사랑 부탁드립니다. 감사합니다.",
+                        "저는 이사회 의장으로서 GS리테일 주주의 권리 보호 및 공정한 대우를 통해 주주의 기본권을 최대한 보장하고, <br />주주와의 신뢰 구축을 바탕으로 기업 가치를 극대화하고자 노력하고 있습니다.",
+                        "또한, 의사결정의 효율성을 위해 전문성을 갖춘 유능한 인사로 이사회를 구성하여, 주주가치 제고를 위해 최선을 다하고 있으며, <br />특히 감사위원회는 전원 사외이사 및 2인 이상의 재무 · 회계 전문가로 구성하고, 경영진과 지배주주로부터 독립적인 경영활동이 보장될 수 있도록 하고 있습니다.",
+                        "더불어 ESG관점의 지속가능경영 강화를 위해 ESG위원회, 보상위원회를 설치하는 등 이사회 내 5개의 위원회를 운영하며, <br />의사결정의 독립성과 전문성을 제고하기 위해 노력하고 있습니다.",
+                        "이 밖에도 다양한 이해관계자의 권리 보호, 공정한 거래 문화 확립, 지역 사회와의 상생 등 기업의 사회적 책임을 다하는 한편, <br />GS리테일이 지속 성장하는 기업이 될 수 있도록 최선의 노력을 다하겠습니다.",
+                        "앞으로도 GS리테일을 향한 많은 관심과 사랑 부탁드립니다. <br />감사합니다.",
                     ],
 
                     // [Tab 1] 지배구조헌장 전체 데이터 (KO)
@@ -1044,8 +1044,8 @@ export default {
 .gsrin0101 .chairman_intro > figcaption.chairman_profile > strong { margin-top: 11px; color: #000; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; display: block; }
 .gsrin0101 .chairman_content { width: 100%; margin-top: 80px; }
 .gsrin0101 .chairman_content > h3 { color: #161616; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.gsrin0101 .chairman_content > p { margin-top: 10px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.gsrin0101 .chairman_content > h3 + p { margin-top: 16px; }
+.gsrin0101 .chairman_content > p { margin-top: 40px; color: #161616; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; white-space: pre-line; }
+
 /* //이사회 의장 인사말 탭 관련 css 추가 26.06.08 add 정다희 */
 .section-date {margin-top: 15px; color: #161616; font-size: 1.8rem; text-align: center; display: block;}
 .gsrin0101 .policy_wrap {padding-top: 60px;}
@@ -1230,7 +1230,7 @@ export default {
     .gsrin0101 .chairman_intro > figcaption.chairman_profile > strong { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; }
     .gsrin0101 .chairman_content { margin-top: 40px; }
     .gsrin0101 .chairman_content > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
-    .gsrin0101 .chairman_content > p { font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+    .gsrin0101 .chairman_content > p { margin-top: 10px; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     /* //이사회 의장 인사말 탭 관련 css 추가 26.06.08 add 정다희 */
     .gsrin0101 .policy_wrap {padding:30px 0;}
     .gsrin0102 .view-2:first-of-type {margin-top:0;}

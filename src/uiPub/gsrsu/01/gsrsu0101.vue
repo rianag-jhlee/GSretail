@@ -81,14 +81,14 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="bnbp_sub">
+                        <!--<div class="bnbp_sub">
                             <h4>{{ t.esgChangwonTitle }}</h4>
                             <div class="txt_box">
                                 <p v-for="(item, idx) in t.esgChangwonContents" :key="idx">
                                     {{ item }}
                                 </p>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </section>
             </div>
@@ -492,8 +492,8 @@ export default {
                         },
                         {
                             title: "ESG 추진협의회",
-                            meta: "CEO 및 C레벨 8인",
-                            desc: "분기 1회 CEO 주재 추진협의회를 통해 ESG관련 사항 의사결정",
+                            meta: "CEO 및 C레벨 10인",
+                            desc: "CEO 주재 추진협의회를 통해 ESG관련 사항 의사결정",
                             connectorLeft: "의사결정",
                             connectorRight: "의안상정",
                         },
@@ -528,8 +528,8 @@ export default {
                     ],
                     esgTableRightItems: [
                         "[파트너사] 파트너사 간담회",
-                        "[개인정보] 정보보안대책위원회",
-                        "[사회공헌] 사회공헌 심사위원회",
+                        "[개인정보] 정보보안위원회", /* 260604 edit 이소라 */
+                        "[사회공헌] 사회공헌 심의위원회", /* 260604 edit 이소라 */
                     ],
                     bnbpTitle: "BNBP(Biz N Biodiversity Platform) 이니셔티브",
                     esgCommitteeDetailImageAlt: "BNBP 로고 이미지",
@@ -787,8 +787,8 @@ export default {
                         },
                         {
                             title: "ESG Promotion Council",
-                            meta: "CEO and 8 C-Level Executives",
-                            desc: "Decision-making on ESG-related matters through a quarterly CEO-led Promotion Council",
+                            meta: "CEO and 10 C-Level Executives", /* 260604 edit 이소라 */
+                            desc: "Decision-making on ESG-related matters through a CEO-led Promotion Council", /* 260604 edit 이소라 */
                             connectorLeft: "Decision-Making",
                             connectorRight: "Agenda Submission",
                         },
@@ -823,8 +823,8 @@ export default {
                     ],
                     esgTableRightItems: [
                         "[Partners] Partner Briefing Session [Personal Data] Information Security Council [Social Contribution] Social Contribution Review Committee",
-                        "[Personal Information] Information Security Countermeasures Committee"/* 260604 번역 */,
-                        "[Social Contribution] Social Contribution Review Committee"/* 260604 번역 */,
+                        "[Personal Information] Information Security Committee"/* 260604 번역 */, /* 260604 edit 이소라 */
+                        "[Social Contribution] Social Contribution Review Committee"/* 260604 번역 */, 
                     ],
                     bnbpTitle: "BNBP (Biz N Biodiversity Platform) Initiative",
                     esgCommitteeDetailImageAlt: "BNBP logo image"/* 260604 번역 */,

@@ -18,6 +18,9 @@
 
             <!-- 가맹 조건 안내 (D2=0) -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
+                <header class="sub_header">
+                    <h3>{{ t.franchise.title }}</h3>
+                </header>
                 <!-- Depth 3: 타입 탭 -->
                 <div class="tab_d3_wrap">
                     <div class="inner">
@@ -1142,9 +1145,8 @@ const langData = {
         headerTitle: "GS THE FRESH 창업안내",
         depth1Tabs: [
             { item: "GS THE FRESH 창업 알아보기" },
-            { item: "사업설명회" },
+            { item: "창업 준비하기" },
             { item: "추천 점포 찾기" },
-            { item: "경영주 지원제도" },
             { item: "상담 및 신청" },
             { item: "가맹계약시스템" },
         ],
@@ -1154,6 +1156,7 @@ const langData = {
             { item: "창업 전 필수 확인사항" },
         ],
         franchise: {
+            title: "GS리테일의 환경 경영과 관련된 실적 자료를 열람하실 수 있습니다.",
             tabAria: "가맹 타입",
             tableHead: {
                 item: "항목",
@@ -1748,9 +1751,8 @@ const langData = {
         headerTitle: "GS THE FRESH Startup Guide"/* 260604 번역 */,
         depth1Tabs: [
             { item: "Learn About GS THE FRESH Startup"/* 260604 번역 */ },
-            { item: "Business Briefing Session"/* 260604 번역 */ },
+            { item: "Preparing for Startup"/* 260604 번역 */ },
             { item: "Find recommended stores"/* 260604 번역 */ },
-            { item: "Store Owner Support Programs" },
             { item: "Consultation and Application"/* 260604 번역 */ },
             { item: "Franchise Contract System"/* 260604 번역 */ },
         ],
@@ -2554,6 +2556,7 @@ function toggleCard(id) {
 .page_header::after{content:'';width: 100%;height:100%;position:absolute;left:0;right:0;top:0;bottom:0; background-color: rgba(0, 0, 0, 0.6);}
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
+.sub_header h3 { padding: 100px 0; color: #161616; font-weight: 700; font-size: 4.8rem; line-height: 1.4; letter-spacing: -0.01em; text-align: center; white-space: pre-line; }
 
 /* BODY — PC: 좌우 20px / 모바일: 가로 패딩은 tab_page·Tabs 등에서 (아래 모바일 미디어쿼리 참고) */
 .cont_inner { max-width: 1460px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }

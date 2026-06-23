@@ -148,7 +148,7 @@
                                                 <div class="text_area mt32">
                                                     <h4>{{ item.tit }}</h4>
                                                     <p v-html="item.desc"></p>
-                                                    <strong v-html="item.desc2"></strong>
+                                                    <!-- <strong v-html="item.desc2"></strong> 20260623 delete 이소라 -->
                                                 </div>
                                             </div>
                                         </section>
@@ -1974,20 +1974,20 @@ export default {
                                         "나눔키트 지원 (2020~)",
                                         "업사이클링 친구캠페인(2021~)",
                                         "사랑의 이불 기부 (2022)",
-                                        "사랑의 마스크 기부(2020)"
+                                        "사랑의 마스크 기부(2020)",
+                                        "에코크리에이터(2019~2025)",
+                                        "에코소셜임팩트(2017~2025)",
                                     ]
                                 },
                                 {
                                     year: "2019",
                                     items: [
-                                        "에코크리에이터(2019~)",
                                         "사랑의 떡국 기부(2019)",
                                         "GS25 늘봄스토어 오픈 (장애인훈련형 점포, 2017~ )",
                                         "GS25 내일스토어 오픈 (취업이 어려운 이웃을 지원하는 사회공헌형 편의점, 2017~)",
                                         "독립군 알리기 도시락 (2017~)",
                                         "GS아동안전지킴이 / GS안전지킴이 심폐소생술교육(2017~)",
-                                        "에코소셜임팩트(2017~)",
-                                        "러브러브펀드 지역아동센터 식사지원(2016~)",
+                                        "마음모아펀드 지역아동센터 식사지원(2016~)",
                                         "해외봉사(2016~2017)",
                                         "사랑의 연탄 기부(2016~2024)",
                                         "저소득 화상환자 지원(2015~)",
@@ -2059,11 +2059,11 @@ export default {
                             Projects: [
                                 { 
                                     tit: "GS나누미 봉사", 
-                                    desc: "2006년부터 전국 70여 개의 봉사처에서 임직원, 경영주, 고객이 함께 나눔을 실천하고 있습니다.",
+                                    desc: "2006년부터 전국 30여 개의 봉사처에서 임직원, 경영주, 고객이 함께 나눔을 실천하고 있습니다.", /* 20260623 edit 이소라 */
                                     img: require("@/assets/images/dummy/gsrsu030203_1.png") 
                                 },
                                 { 
-                                    tit: "임원 현충원 봉사", 
+                                    tit: "임원/임직원 현충원 봉사",  /* 20260623 edit 이소라 */
                                     desc: "호국보훈의 달엔 임원의 현충원 환경정화 봉사활동과 함께 순국선열의 숭고함을 기립니다.",
                                     img: require("@/assets/images/dummy/gsrsu030203_2.png") 
                                 },
@@ -2083,13 +2083,13 @@ export default {
                                     img: require("@/assets/images/dummy/gsrsu030203_5.png") 
                                 },
                                 { 
-                                    tit: "러브러브 펀드", 
-                                    desc: "임직원이 기부한 금액과 동일하게 회사에서 기부하는 매칭그랜트로 지역아동센터 어린이 식사를 위한 식재료와 요기요 상품권 등을 지원합니다.",
+                                    tit: "마음모아펀드", 
+                                    desc: "임직원이 기부한 금액과 동일하게 회사가 기부하는 매칭그랜트로 영양부족 식사를 하고있는 취약계층 아동들에게 신선한 먹거리와 과일 등 '든든한 한 끼' 를 지원합니다.",
                                     img: require("@/assets/images/dummy/gsrsu030203_6.png") 
                                 },
                                 { 
-                                    tit: "북드림캠페인 / 헌혈캠페인", 
-                                    desc: "기부받은 도서는 지역아동센터 및 어려운 이웃을 위한 도서관에 전달하고 있으며 헌혈캠페인으로 백혈병, 소아암 환아에게 따뜻한 지원을 이어나가고 있습니다.",
+                                    tit: "헌혈캠페인", 
+                                    desc: "매년 헌혈캠페인을 진행하여 백혈병, 소아암 환아 등에게 따뜻한 지원을 이어나가고 있습니다.",
                                     img: require("@/assets/images/dummy/gsrsu030203_7.png") 
                                 },
                                 { 
@@ -2956,7 +2956,7 @@ export default {
                                 MissionLabel:"Mission"/* 260604 번역 */
                             },
                             HistoryTitle: "Milestones",
-                            History: [
+                            History: [ /* 260623 edit 이소라 */
                                 {
                                     year: "2025",
                                     items: [
@@ -2969,46 +2969,46 @@ export default {
                                         "Sharing Kit support (2020~)",
                                         "Upcycling Friend Campaign (2021~)",
                                         "Blanket of Love donation (2022)",
-                                        "Mask of Love donation (2020)"
+                                        "Mask of Love donation (2020)",
+                                        "Eco Creator (2019~2025)",
+                                        "Eco Social Impact (2017~2025)",
                                     ]
                                 },
                                 {
                                     year: "2019",
                                     items: [
-                                        "- Eco Creator (2019~)",
-                                        "- Rice Cake Soup of Love donation (2019)",
-                                        "- GS25 Neulbom Store opening (disability training-type store, 2017~)",
-                                        "- GS25 Naeil Store opening (community-serving convenience store supporting neighbors who have difficulty finding employment, 2017~)",
-                                        "- Independence Army Awareness Lunchbox (2017~)",
-                                        "- GS Child Safety Guardian and GS Safety Guardian CPR education",
-                                        "- Eco Social Impact (2017~)",
-                                        "- Love Love Fund community children's center meal support (2016~)",
-                                        "- Overseas volunteering (2016~2017)",
-                                        "- Coal Briquette of Love donation (2016~2024)",
-                                        "- Low-income burn patient support (2015~)",
-                                        "- Sharing Store goods support (2013~)",
-                                        "- Kimchi of Love donation (2013~)",
-                                        "- Social enterprise distribution channel support project (2013~2023)",
-                                        "- FC Seoul multicultural family children's soccer school support (2013~)",
-                                        "- Book Dream book donation campaign (2012~2024)"
+                                        "Rice Cake Soup of Love donation (2019)",
+                                        "GS25 Neulbom Store opening (disability training-type store, 2017~)",
+                                        "GS25 Naeil Store opening (community-serving convenience store supporting neighbors who have difficulty finding employment, 2017~)",
+                                        "Independence Army Awareness Lunchbox (2017~)",
+                                        "GS Child Safety Guardian and GS Safety Guardian CPR education",
+                                        "Hearts Together Fund community children's center meal support (2016~)",
+                                        "Overseas volunteering (2016~2017)",
+                                        "Coal Briquette of Love donation (2016~2024)",
+                                        "Low-income burn patient support (2015~)",
+                                        "Sharing Store goods support (2013~)",
+                                        "Kimchi of Love donation (2013~)",
+                                        "Social enterprise distribution channel support project (2013~2023)",
+                                        "FC Seoul multicultural family children's soccer school support (2013~)",
+                                        "Book Dream book donation campaign (2012~2024)"
                                     ]
                                 },
                                 {
                                     year: "2011",
                                     items: [
-                                        "- Blood donation certificate leukemia and childhood cancer patient support",
-                                        "- Food bank donation (2011~)",
-                                        "- Taean oil spill accident support (2008)",
-                                        "- Scholarship and kit support (2007~)"
+                                        "Blood donation certificate leukemia and childhood cancer patient support",
+                                        "Food bank donation (2011~)",
+                                        "Taean oil spill accident support (2008)",
+                                        "Scholarship and kit support (2007~)"
                                     ]
                                 },
                                 {
                                     year: "2006",
                                     items: [
-                                        "- GS Nanumi Volunteer Corps established (2006~)",
-                                        "- Rainbow Box children's music education program (2006~)",
-                                        "- Disaster and Emergency Relief support process established",
-                                        "- Korean Red Cross blood donation agreement signed"
+                                        "GS Nanumi Volunteer Corps established (2006~)",
+                                        "Rainbow Box children's music education program (2006~)",
+                                        "Disaster and Emergency Relief support process established",
+                                        "Korean Red Cross blood donation agreement signed"
                                     ]
                                 }
                             ]
@@ -3053,43 +3053,43 @@ export default {
                             // 2열 그리드 활용 (기존 program_grid 스타일 재활용)
                             Projects: [
                                 { 
-                                    tit: "Executive Volunteer Service at National Cemetery", 
-                                    desc: "Image",
+                                    tit: "GS Nanumi Volunteer Service", 
+                                    desc: "Since 2006, employees, store owners, and customers have been practicing sharing together at over 30 volunteer centers nationwide.",
                                     img: require("@/assets/images/dummy/gsrsu030203_1.png") 
                                 },
                                 { 
-                                    tit: "Every year-end, volunteer groups across the country take part in relay volunteering to share a united spirit of warmth for the winter season.", 
-                                    desc: "Food Bank Donation",
+                                    tit: "Executive and employees Volunteer Service at National Cemetery",  
+                                    desc: "Every year-end, volunteer groups across the country take part in relay volunteering to share a united spirit of warmth for the winter season.",
                                     img: require("@/assets/images/dummy/gsrsu030203_2.png") 
                                 },
                                 { 
-                                    tit: "GS Retail fosters a culture of sharing through community volunteering, donations, and social enterprise support.", 
-                                    desc: "Mutual Growth Management",
+                                    tit: "Year-End Theme Volunteer Service", 
+                                    desc: "Every year-end, volunteer groups across the country take part in relay volunteering to share a united spirit of warmth for the winter season.",
                                     img: require("@/assets/images/dummy/gsrsu030203_3.png") 
                                 },
                                 { 
-                                    tit: "Rights and Interests Protection", 
-                                    desc: "Children and Socially Vulnerable Group Support",
+                                    tit: "Food Bank Donation", 
+                                    desc: "GS THE FRESH food donations are provided through food banks to support warm meals for neighbors in need.",
                                     img: require("@/assets/images/dummy/gsrsu030203_4.png") 
                                 },
                                 { 
                                     tit: "CPR Training and AED Support", 
-                                    desc: "CPR Training and AED Support<br />To protect precious lives in emergency situations, employees voluntarily participate in CPR training and, in collaboration with the Korean Red Cross, provide AED units and experiential education vehicles.",
+                                    desc: "To protect precious lives in emergency situations, employees voluntarily participate in CPR training and, in collaboration with the Korean Red Cross, provide AED units and experiential education vehicles.",
                                     img: require("@/assets/images/dummy/gsrsu030203_5.png") 
                                 },
                                 { 
-                                    tit: "Love Love Fund", 
-                                    desc: "Love Love Fund<br />A matching grant program in which the Company contributes an equal amount to what employees donate, providing food ingredients and Yogiyo gift vouchers for meals at community children's centers.",
+                                    tit: "Hearts Together Fund", 
+                                    desc: "Through a matching grant system where the company donates an equal amount to employee contributions, we provide fresh food and fruits for a 'hearty meal' to underprivileged children suffering from nutritional deficiencies.",
                                     img: require("@/assets/images/dummy/gsrsu030203_6.png") 
                                 },
                                 { 
-                                    tit: "Book Dream Campaign and Blood Donation Campaign", 
-                                    desc: "Book Dream Campaign and Blood Donation Campaign<br />GS Retail delivers donated books to community children's centers and libraries for those in need, while the blood donation campaign provides warm support to leukemia and childhood cancer patients.",
+                                    tit: "Blood Donation Campaign", 
+                                    desc: "Every year, we conduct a blood donation campaign to provide warm support for patients with leukemia, childhood cancer, and more.",
                                     img: require("@/assets/images/dummy/gsrsu030203_7.png") 
                                 },
                                 { 
                                     tit: "Disaster and Emergency Relief Support", 
-                                    desc: "Disaster and Emergency Relief Support<br />In the event of a disaster or emergency, GS Retail ensures that emergency relief supplies are delivered to affected residents as quickly as possible.",
+                                    desc: "In the event of a disaster or emergency, GS Retail ensures that emergency relief supplies are delivered to affected residents as quickly as possible.",
                                     img: require("@/assets/images/dummy/gsrsu030203_8.png") 
                                 }
                             ],

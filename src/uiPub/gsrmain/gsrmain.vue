@@ -236,7 +236,7 @@ export default {
                                 img: require("@/assets/images/main/main_sec03_02.png"),
                                 sub: require("@/assets/images/main/main_sec03_02-1.png"),
                                 brand: "GS THE FRESH",
-                                txt: "신선한 행복을<br/> 만나다",
+                                txt: "신선한 행복을<br/> 채우다",
                                 cate: "수퍼",
                                 class: "fresh",
                                 link: "/gsrbr020101"
