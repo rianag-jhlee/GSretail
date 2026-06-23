@@ -25,6 +25,8 @@
         <div class="hero_message" ref="heroMessageRef" v-if="t.heroMessage">
             <div class="inner">
                 <p v-html="t.heroMessage.title"></p>
+                <!-- 26.06.17 Add 이소라 : 버튼 영역 추가 -->
+                <a :href="t.heroMessage.link"><span class="blind">새창 열기</span></a>
                 <ul>
                     <li v-for="(item, index) in t.heroMessage.items" :key="index">
                         <dl>
@@ -59,14 +61,15 @@
                                         <!-- 260616 add 정다희 : 웹접근성 alt 추가 -->
                                         <em><img :src="item.img" :alt="item.brand" /></em>
                                     </span>
-                                    <div>
-                                        <!-- 260616 add 정다희 : 웹접근성 alt 추가 -->
-                                        <!-- 26.06.17 Del 이종환 <em><img :src="item.sub" :alt="item.brand + ' 로고'" /></em> -->
+                                    <!-- 260622 delete 이소라
+                                        <div>
+                                         260616 add 정다희 : 웹접근성 alt 추가 
+                                         26.06.17 Del 이종환 <em><img :src="item.sub" :alt="item.brand + ' 로고'" /></em> 
                                         <p>
                                             <strong><img :src="item.sub" :alt="item.brand + ' 로고'" /></strong>
                                             <span v-html="item.txt"></span>
                                         </p>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -199,13 +202,13 @@ export default {
                                 dt: "전국 오프라인 점포 수",
                                 num: "18,600+",
                                 unit: "점",
-                                desc: "(2025. 12 기준)",
+                                desc: "(2025. 12기준)", /* 260622 edit 이소라 : 텍스트 수정 */
                             },
                             {
                                 dt: "GS ALL 멤버십 가입자 수",
                                 num: "2,344+",
                                 unit: "만명",
-                                desc: "(2026. 1분기 기준)",
+                                desc: "(2026. 1분기) 기준", /* 260622 edit 이소라 : 텍스트 수정 */
                             },
                             {
                                 dt: "고객 만족도&서비스 품질",
@@ -217,7 +220,7 @@ export default {
                     },
 
                     sec03: {
-                        title: "GS리테일의<br/> 사업을 소개합니다.",
+                        title: "GS리테일의 사업을 소개합니다.",/* 260622 edit 이소라 : 줄바꿈 제거 */
 
                         items: [
                             {
@@ -242,7 +245,7 @@ export default {
                                 img: require("@/assets/images/main/main_sec03_03.png"),
                                 sub: require("@/assets/images/main/main_sec03_03-1.png"),
                                 brand: "GS SHOP",
-                                txt: "고객의 라이프스타일을<br/> 가치 있게 만드는",
+                                txt: "고객의 라이프스타일을<br/> 가치 있게",
                                 cate: "홈쇼핑",
                                 class: "shopping",
                                 link: "/gsrbr0301"
@@ -251,7 +254,7 @@ export default {
                     },
 
                     sec04: {
-                        title: "GS리테일의<br/> 소식을 전합니다.",
+                        title: "GS리테일의 소식을 전합니다.",/* 260622 edit 이소라 : 줄바꿈 제거 */
 
                         quick: [
                             { link: "#none", txt: "보도자료" },
@@ -265,7 +268,7 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: '01GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                title: '02GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
                                 link:'/gsrne0101'
                             },
                             {
@@ -854,16 +857,16 @@ h2+.explain {
     font-size: 4rem;
     display: block;
 }
-
-
+.blind { position: absolute; width: 1px; height: 1px; clip: rect(0, 0, 0, 0); overflow: hidden; }
 .hero_message{padding-top:210px;background-color: #fff;position: relative;}
 .hero_message .inner{max-width: 1720px;margin: 0 auto;padding: 0 20px;}
-.hero_message p{font-weight: 700;font-size: 6.8rem;line-height: 1.24;letter-spacing: -0.02em;}
+.hero_message p{font-weight: 700;font-size: 6.8rem;line-height: 1.4;letter-spacing: -0.02em;}
 .hero_message p span{font-weight: 800;}
 .hero_message p span.txt_orange{color: #FB6432;}
 .hero_message p span.txt_green{color: #15B874;}
 .hero_message p span.txt_blue{color: #248BFF;}
-.hero_message ul{max-width:1045px;margin-top:90px;margin-left: auto;;}
+.hero_message p + a {width:50px; height:50px; margin-top:3em; display:inline-block; background:url('@/assets/images/main/icon_brand_arrow2.png') no-repeat center; background-size:contain;}
+.hero_message ul{max-width:1045px;margin-top:20px;margin-left: auto;;}
 .hero_message ul > li{padding: 20px 8px;border-bottom: 1px solid #000;}
 .hero_message ul > li:first-child{border-top: 1px solid #000;}
 .hero_message ul > li dl{display: grid;grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);column-gap: clamp(32px, 6vw, 120px);align-items: center;}

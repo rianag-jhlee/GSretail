@@ -38,6 +38,7 @@
     {
         "title": "사업영역",
         "path": "gsrbr010101",
+        "path": "gsrbr010101",
         "children": [
             {
                 "title": "GS25",
@@ -52,6 +53,7 @@
                 ]
             },
             {
+                "title": "GS THE FRESH",
                 "title": "GS THE FRESH",
                 "path": "gsrbr020101",
                 "children": [
@@ -104,7 +106,7 @@
                 "children": []
             },
             {
-                "title": "컴플라이언스",
+                "title": "정도경영",
                 "path": "gsrsu040101",
                 "children": []
             }
@@ -146,12 +148,12 @@
                 "children": []
             },
             {
-                "title": "GS리테일 Newsroom",
+                "title": "뉴스룸",
                 "path": "gsrne02",
                 "children": []
             },
             {
-                "title": "GS리테일 factbook",
+                "title": "스토리", 
                 "path": "gsrne03",
                 "children": []
             }

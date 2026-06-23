@@ -6,30 +6,29 @@
 #header {position:fixed; top:0; right:0; left:0; z-index:99;/* transition:background 0.25s, transform 0.25s ease-in-out;*/}
 #header.hide {transform:translateY(-100%);}
 
-#header .inner {width:100%; max-width:1720px; margin:0 auto; padding:46px 40px 0; display:flex; align-items:flex-start;}
+#header .inner {width:100%; max-width:1720px; margin:0 auto; padding:36px 40px 0; display:flex; align-items:flex-start;}
 /* 26.06.12 Edit 정다희 : nav 영역 유동 축소 + quick 고정 */
 #header nav {min-width:0; flex:1; --depth1-font:2rem; position:relative; display:flex; align-items:center;}
 #header nav ul.depth1 {display:flex;}
 #header nav ul.depth1 > li {flex-shrink:0; position:relative;}
 #header nav ul.depth1 > li.is-open, #header nav ul.depth1 > li.current {z-index:2;} /* 26.06.12 Edit 정다희 : 2depth 패널·current 메뉴 겹침 방지 */
-#header nav ul.depth1 > li > a {padding:0 45px 46px; color:#fff; font-size:var(--depth1-font); font-weight:700; line-height:140%; letter-spacing:0.02em; position:relative; display:flex;}
+#header nav ul.depth1 > li > a {padding:0 45px 36px; color:#fff; font-size:var(--depth1-font); font-weight:700; line-height:140%; letter-spacing:0.02em; position:relative; display:flex;}
 
 /* 26.06.12 Edit 정다희 : [개발] 현재 페이지 — URL/라우트 기준 해당 depth1 > li에 class="current" 부여 (is-open과 동일 활성 스타일) */
 #header nav ul.depth1 > li.is-open > a::before, #header nav ul.depth1 > li.current > a::before {height:4px; background-color:#fff; position:absolute; right:45px; bottom:0; left:45px; content:'';}
 #header.head_black nav ul.depth1 > li.is-open > a::before, #header.head_black nav ul.depth1 > li.current > a::before {background-color:#107AF2;}
 #header.add_bg nav ul.depth1 > li.is-open > a::before, #header.add_bg nav ul.depth1 > li.current > a::before {background-color:#107AF2;}
 
-#header nav .depth2_wrap {width:100vw; height:0; box-sizing:border-box; margin-left:calc(-1 * var(--menu-left, 0px)); padding:0 20px 0 var(--menu-left, 20px); background-color:#fff; position:absolute; top:100%; left:0; z-index:10; display:flex; overflow:hidden;}
+#header nav .depth2_wrap {width:100vw; height:0; box-sizing:border-box; margin-left:calc(-1 * var(--menu-left, 0px)); padding:0 20px 0 var(--menu-left, 20px); background-color:#fff; position:absolute; top:100%; left:0; z-index:10; display:flex; overflow:hidden; pointer-events:none;}
 #header nav .depth2_wrap > ul + ul {margin-left:80px;}
-/* 26.06.12 Edit 정다희 : hover/focus(is-open) 시 2depth 패널 노출 */
-#header nav li:hover .depth2_wrap, #header nav li.is-open .depth2_wrap {height:auto !important; min-height:150px; padding-top:40px; padding-bottom:40px; display:flex; overflow:initial !important;}
+/* 26.06.23 Edit : depth2_wrap은 is-open 시 즉시 노출, ul.depth2만 JS 슬라이드 */
+#header nav li.is-open .depth2_wrap {height:auto !important; min-height:100px; padding-top:37px; padding-bottom:36px; display:flex; overflow:hidden; pointer-events:auto;}
 
-#header.hide nav li:hover .depth2_wrap, #header.hide nav li.is-open .depth2_wrap {height:0 !important; min-height:0 !important; padding:0 !important; overflow:hidden !important;}
+#header.hide nav li.is-open .depth2_wrap {height:0 !important; min-height:0 !important; padding:0 !important; overflow:hidden !important;}
 
-#header nav ul.depth2 {width:100%; padding-left:45px; display:flex; flex-wrap:wrap; gap:20px;}
-#header nav ul.depth2 > li > a, #header nav ul.depth2 > li > span {padding:0; color:#161616; font-size:calc(var(--depth1-font) - 0.2rem); font-weight:400; line-height:1.4; white-space:nowrap; display:block;}
+#header nav ul.depth2 {width:100%; height:0; padding-left:45px; overflow:hidden; transition:height 0.3s ease-in-out; display:flex; flex-wrap:wrap; gap:12px 80px;}
+#header nav ul.depth2 > li > a, #header nav ul.depth2 > li > span {padding:0; color:#161616; font-size:calc(var(--depth1-font) - 0.2rem); font-weight:700; line-height:1.5; white-space:nowrap; display:block;}
 #header nav ul.depth2 > li > a:hover, #header nav ul.depth2 > li > a:focus {color:#107af2;}
-#header nav li:hover ul.depth2, #header nav li.is-open ul.depth2 {height:auto !important; overflow:initial !important;}
 #header nav ul.depth3 {display:none !important;}
 
 /* 26.06.12 Edit 정다희 : PC(769px~) hover/is-open/current 활성 color — 모바일(768px↓) 미적용 */
@@ -333,7 +332,7 @@ h5 {font-size:1.8rem;}
     #header h1 {margin-right:25px;}
     #header nav {--depth1-font:2rem;}
     #header nav ul.depth1 > li > a {padding-left:15px; padding-right:15px;}
-    #header nav ul.depth2 {padding-left:20px;}
+    #header nav ul.depth2 {padding-left:20px; gap:20px }
     footer .info { flex-wrap:wrap; }
     footer .info label.select { position:relative; bottom:auto; right:auto; left:-12px; }
 }
@@ -344,7 +343,7 @@ h5 {font-size:1.8rem;}
     #header .inner {padding:46px 20px 0;}
     #header nav {--depth1-font:1.6rem;}
     #header nav ul.depth1 > li > a {padding-left:12px; padding-right:15px;}
-    #header nav ul.depth2 { padding-left:12px;}
+    #header nav ul.depth2 { padding-left:12px; }
     #header .quick > li:first-child > * {padding:2px 8px; font-size:1.4rem;}
     #header .language button {padding:2px 8px; font-size:1.4rem;}
     footer .quick li:last-child a {padding-right:0;}
@@ -372,9 +371,9 @@ h5 {font-size:1.8rem;}
     #header nav ul.depth1 > li > a:after {width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -208px -15px no-repeat; display:block; content:'';}
     #header nav ul.depth1 > li.is-open > a:after {transform:rotate(180deg);}
     #header nav li:hover .depth2_wrap {display:none;}
-    #header nav li.is-open .depth2_wrap {width:100%; min-height:auto; margin-left:0; padding:20px 0; background-color:#f8f8f8; display:flex;}
+    #header nav li.is-open .depth2_wrap {width:100%; min-height:auto; margin-left:0; padding:20px 0; background-color:#f8f8f8; display:flex; overflow:hidden;}
     #header nav .depth2_wrap > ul > li > a, #header nav .depth2_wrap > ul > li > span {padding:10px 40px; color:#161616; font-size:calc(var(--depth1-font) - 0.2rem); white-space:normal;}
-    #header nav ul.depth2 {max-width:none; padding:0; display:flex; flex-direction:column; flex-wrap:nowrap; gap:0;}
+    #header nav ul.depth2 {max-width:none; height:0; padding:0; overflow:hidden; transition:height 0.35s ease-in-out; display:flex; flex-direction:column; flex-wrap:nowrap; gap:0;}
     /* 26.06.12 Edit 정다희 : 모바일 — PC용 is-open/current 하단 바(::before) 숨김 */
     #header nav ul.depth1 > li.is-open > a::before, #header nav ul.depth1 > li.current > a::before {display:none;}
     #header.mo_open h1 a {background-image:url('@/assets/images/common/h1_logo_black.png'); transition-delay:0.25s;}
