@@ -113,7 +113,8 @@
             :tab-slide="true"
         />
 
-        <!-- 탭 0: 차별화 상품 -->
+        <!-- 26.06.23 del 정다희 : 차별화상품 탭 삭제 -->
+        <!--
         <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel">
             <figure v-if="tab0.hero" class="brand_panel_bg">
                 <img :src="tab0.hero" :alt="tab0.heroAlt || ''" width="1420" height="340" />
@@ -155,11 +156,12 @@
                 </SwiperSlide>
             </Swiper>
 
-            <!-- <DiffQrRow v-if="tab0.qr" :title="tab0.qr.title" :desc="tab0.qr.desc" /> -->
+            <DiffQrRow v-if="tab0.qr" :title="tab0.qr.title" :desc="tab0.qr.desc" />
         </div>
+        -->
 
-        <!-- 탭 1: CAFE25 -->
-        <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel cafe_panel">
+        <!-- 탭 0: CAFE25 -->
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel cafe_panel">
             <figure v-if="tab1.hero" class="brand_panel_bg" :style="{ backgroundColor: '#fff' }">
                 <img :src="tab1.hero" :alt="tab1.heroAlt || ''" width="1420" height="340" />
             </figure>
@@ -283,7 +285,8 @@
         </div>
 
         <!-- 탭 2: CHICKEN25 -->
-        <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel chicken_panel">
+        <!-- 탭 1: 치킨25 -->
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel chicken_panel">
             <figure v-if="tab2.hero" class="brand_panel_bg">
                 <img :src="tab2.hero" :alt="tab2.heroAlt || ''" width="1420" height="340" />
             </figure>
@@ -328,7 +331,8 @@
         </div>
 
         <!-- 탭 3: GOPIZZA -->
-        <div v-show="depth1ActiveIdx === 0 && activeTab === 3" class="brand_panel gopizza_panel">
+        <!-- 탭 2: GOPIZZA -->
+        <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel gopizza_panel">
             <figure v-if="tab3.hero" class="brand_panel_bg">
                 <img :src="tab3.hero" :alt="tab3.heroAlt || ''" width="1420" height="340" />
             </figure>
@@ -373,7 +377,7 @@
                 <ul v-else-if="sec.type === 'menu'" class="gopizza_menu">
                     <li v-for="(pnl, pi) in sec.panels" :key="pi" class="gopizza_menu_panel">
                         <div>
-                            <img v-if="pnl.image" :src="pnl.image" :alt="pnl.size" />
+                            <img v-if="pnl.image" :src="pnl.image" alt="" />
                         </div>
                         <div class="gopizza_menu_info">
                             <div class="gopizza_menu_title">
@@ -382,7 +386,6 @@
                                     <span v-for="(tag, ti) in pnl.tags" :key="ti" class="gopizza_menu_tag">{{ tag }}</span>
                                 </div>
                             </div>
-                            <!-- PC: 기존 테이블 -->
                             <div v-if="!isMobileView" class="com_table_wrap">
                                 <table class="com_table com_table_col">
                                     <thead>
@@ -412,7 +415,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Mobile: row별 Swiper -->
                             <template v-if="isMobileView">
                                 <Swiper
                                     :modules="[Pagination]"
@@ -439,7 +441,7 @@
                                 </Swiper>
                                 <div :class="`gopizza_menu_pagi_${pnl.size.replace(/[^a-z0-9]/gi, '')} gopizza_table_pagination`"></div>
                             </template>
-                        </div>
+                        </div>                   
                     </li>
                 </ul>
 
@@ -560,12 +562,13 @@
         </div>
 
         <!-- depth1 = 2: 매장/서비스 -->
-        <!-- 우리동네GS -->
+        <!-- 26.06.23 del 정다희 : 매장/서비스 > 우리동네GS 탭 삭제 -->
+        <!--
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 0" class="brand_panel pop_panel"></div>
-        <!-- //우리동네GS -->
+        -->
 
         <!-- 생활 서비스 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel pop_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 0" class="brand_panel pop_panel">
             <!-- 3depth 탭 네비 -->
             <nav class="service_tab_wrap" ref="serviceWrapEl" role="tablist" aria-label="생활 서비스">
                 <div class="service_tab_list" ref="serviceListEl" :style="serviceTransformStyle"
@@ -1181,7 +1184,7 @@
         </div>
 
         <!-- 택배&픽업 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel delivery_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel delivery_panel">
             <nav class="service_tab_wrap" ref="deliveryWrapEl" role="tablist" aria-label="택배&픽업 서비스">
                 <div class="service_tab_list" ref="deliveryListEl" :style="deliveryTransformStyle"
                      @touchstart.passive="deliveryOnTouchStart" @touchmove.passive="deliveryOnTouchMove"
@@ -1374,7 +1377,7 @@
         </div>
 
         <!-- 공공요금수납 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 2" class="brand_panel">
             <figure v-if="store.tabs[2].hero" class="brand_panel_bg">
                 <img :src="store.tabs[2].hero" :alt="store.tabs[2].heroAlt || ''" width="1420" height="340" />
             </figure>
@@ -1411,7 +1414,7 @@
         </div>
 
         <!-- 상품권 판매 -->
-        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 4" class="brand_panel">
+        <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
             <figure v-if="store.tabs[3].hero" class="brand_panel_bg">
                 <img :src="store.tabs[3].hero" :alt="store.tabs[3].heroAlt || ''" width="1420" height="340" />
             </figure>
@@ -1605,9 +1608,10 @@ import imgAcc02 from "@/assets/images/dummy/brand_accordion_02.png";
 import imgAcc03 from "@/assets/images/sub/gsrbr010101/brand_accordion_03.png";
 
 /* 탭 0 이미지 */
-import imgHero0 from "@/assets/images/sub/gsrbr010101/img_01-01-01.png"; //26.05.15 Edit 이종환
-import imgCard1 from "@/assets/images/sub/gsrbr010101/img_01-01-02.png";
-import imgCard2 from "@/assets/images/sub/gsrbr010101/img_01-01-03.png";
+// 26.06.23 del 정다희 : 차별화상품 탭 삭제
+// import imgHero0 from "@/assets/images/sub/gsrbr010101/img_01-01-01.png"; //26.05.15 Edit 이종환
+// import imgCard1 from "@/assets/images/sub/gsrbr010101/img_01-01-02.png";
+// import imgCard2 from "@/assets/images/sub/gsrbr010101/img_01-01-03.png";
 
 /* 탭 1 이미지 */
 import imgHero1 from "@/assets/images/dummy/brand_bg_02.png";
@@ -1748,13 +1752,15 @@ const langData = {
                 { item: "밀박스/스낵바\n (기업 정기 서비스)" }, //26.05.15 Edit 이종환
             ],
             depth2: [
-                { item: "차별화 상품" },
+                // 26.06.23 del 정다희 : 차별화상품 탭 삭제
+                // { item: "차별화 상품" },
                 { item: "CAFE25" },
                 { item: "치킨25" },
                 { item: "고피자" },
             ],
             depth2Store: [
-                { item: "우리동네GS" }, //26.05.27 Add 이종환
+                // 26.06.23 del 정다희 : 매장/서비스 > 우리동네GS 탭 삭제
+                // { item: "우리동네GS" }, //26.05.27 Add 이종환
                 { item: "생활 서비스" },
                 { item: "택배&픽업" },
                 { item: "공공요금수납" },
@@ -1766,30 +1772,31 @@ const langData = {
             ],
         },
         tabs: [
-            {
-                hero: imgHero0,
-                heroAlt: "",
-                title: "차별화 상품",
-                subtitle: "합리적인 가격, 믿을 수 있는 품질, 삶의 가치를 높이는 새로운 상품까지 생활 속 기쁨을 누릴 수 있도록 늘 함께 합니다.",
-                cards: [
-                    {
-                        image: imgCard1,
-                        alt: "",
-                        title: "김혜자 도시락",
-                        desc: "정성 가득한 한끼를 위한 프리미엄 도시락 라인으로, 높은 고객 만족도를 자랑하는 GS25 대표 차별화 상품입니다.",
-                    },
-                    {
-                        image: imgCard2,
-                        alt: "",
-                        title: "유어스",
-                        desc: "유어스는 좋은 품질과 합리적인 가치를 기본으로 하며, 오직 GS리테일에서만 만날 수 있는 재미와 즐거움을 제공합니다.",
-                    },
-                ],
-                qr: {
-                    title: "우리동네GS 앱 다운로드",
-                    desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요. QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
-                },
-            },
+            // 26.06.23 del 정다희 : 차별화상품 탭 삭제
+            // {
+            //     hero: imgHero0,
+            //     heroAlt: "",
+            //     title: "차별화 상품",
+            //     subtitle: "합리적인 가격, 믿을 수 있는 품질, 삶의 가치를 높이는 새로운 상품까지 생활 속 기쁨을 누릴 수 있도록 늘 함께 합니다.",
+            //     cards: [
+            //         {
+            //             image: imgCard1,
+            //             alt: "",
+            //             title: "김혜자 도시락",
+            //             desc: "정성 가득한 한끼를 위한 프리미엄 도시락 라인으로, 높은 고객 만족도를 자랑하는 GS25 대표 차별화 상품입니다.",
+            //         },
+            //         {
+            //             image: imgCard2,
+            //             alt: "",
+            //             title: "유어스",
+            //             desc: "유어스는 좋은 품질과 합리적인 가치를 기본으로 하며, 오직 GS리테일에서만 만날 수 있는 재미와 즐거움을 제공합니다.",
+            //         },
+            //     ],
+            //     qr: {
+            //         title: "우리동네GS 앱 다운로드",
+            //         desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요. QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+            //     },
+            // },
             {
                 hero: imgHero1,
                 heroAlt: "",
@@ -1920,9 +1927,9 @@ const langData = {
                                 image: imgMenu1,
                                 size: "REGULAR (27cm)",
                                 tags: ["식사대용", "일반피자 4조각 분량"],
+                                 // 26.06.23 del 정다희 : price 키삭제
                                 columns: [
                                     { key: "name",  label: "메뉴명",       align: "left"  },
-                                    { key: "price", label: "금액(원)",      align: "right" },
                                     { key: "kcal",  label: "칼로리(kcal)", align: "right" },
                                 ],
                                 rows: [
@@ -1936,9 +1943,9 @@ const langData = {
                                 image: imgMenu2,
                                 size: "GRAB (20cm)",
                                 tags: ["간식용", "일반피자 2조각 분량"],
+                                 // 26.06.23 del 정다희 : price 키삭제
                                 columns: [
                                     { key: "name",  label: "메뉴명",       align: "left"  },
-                                    { key: "price", label: "금액(원)",      align: "right" },
                                     { key: "kcal",  label: "칼로리(kcal)", align: "right" },
                                 ],
                                 rows: [
@@ -3078,11 +3085,11 @@ const langData = {
                 [
                     '대한민국 토종 브랜드의 <br class="m_br" />자존심을 지키고 있는 GS25는',
                     "'수익을 낼 수 있는 가맹점을 늘린다'는 <br class=\"m_br\" />프랜차이즈 사업의 대원칙을",
-                    '변함없이 지켜온 결과, <br class="m_br" />개발점 수익성이 가장 높은 국내 최고의<br class="m_br" /> 편의점 브랜드로 <br class="p_br" />자리매김하였습니다.',
+                    '변함없이 지켜온 결과, <br class="m_br" />개별점 수익성이 가장 높은 국내 최고의<br class="m_br" /> 편의점 브랜드로 <br class="p_br" />자리매김하였습니다.', //26.06.23 edit 정다희 : 오타 수정
                 ],
                 [
                     "'한국에서 가장 존경받는 기업' 16년 연속 1위,",
-                    '한국서비스 품질지수(KS-SQI) 1위 <br class="m_br" />총 19회 수상 등 공신력 있는 대외 기관의',
+                    '한국서비스 품질지수(KS-SQI) 1위 <br class="m_br" />총 22회 수상 등 공신력 있는 대외 기관의',//26.06.23 edit 정다희 : 오타 수정
                     "평가 결과로 이어지고 있습니다.",
                 ],
             ],
@@ -3126,13 +3133,15 @@ const langData = {
                 { item: "Meal Box/Snack Bar\n (Corporate Subscription Service)"/* 260604 번역 */ }, //26.05.15 Edit 이종환
             ],
             depth2: [
-                { item: "Differentiated Products" },
+                // 26.06.23 del 정다희 : 차별화상품 탭 삭제
+                // { item: "Differentiated Products" },
                 { item: "CAFE25" },
                 { item: "Chicken25" },
                 { item: "GoPizza" },
             ],
             depth2Store: [
-                { item: "Our Neighborhood GS" }, //26.05.27 Add 이종환
+                // 26.06.23 del 정다희 : 매장/서비스 > 우리동네GS 탭 삭제
+                // { item: "Our Neighborhood GS" }, //26.05.27 Add 이종환
                 { item: "Everyday Services" },
                 { item: "Delivery & Pickup" },
                 { item: "Bill and Tax Payment" },
@@ -3144,30 +3153,31 @@ const langData = {
             ],
         },
         tabs: [
-            {
-                hero: imgHero0,
-                heroAlt: "",
-                title: "Differentiated Products",
-                subtitle: "From reasonable prices and reliable quality to new products that enhance the value of life, we are always with you so you can enjoy the joys of everyday living."/* 260604 번역 */,
-                cards: [
-                    {
-                        image: imgCard1,
-                        alt: "",
-                        title: "Kim Hye-ja Lunch Box",
-                        desc: "A premium lunch box line crafted for a heartfelt, wholesome meal, the Kim Hye-ja Lunch Box is GS25's signature exclusive product, beloved for its consistently high customer satisfaction.",
-                    },
-                    {
-                        image: imgCard2,
-                        alt: "",
-                        title: "YOUUS",
-                        desc: "YOUUS is built on great quality and honest value, offering the kind of fun and delight you can only find at GS Retail.",
-                    },
-                ],
-                qr: {
-                    title: "Download the Our Neighborhood GS app"/* 260604 번역 */,
-                    desc: "Download the Our Neighborhood GS app and discover GS25's various events and exclusive products. Scan the QR code to go to the app download page."/* 260604 번역 */,
-                },
-            },
+            // 26.06.23 del 정다희 : 차별화상품 탭 삭제
+            // {
+            //     hero: imgHero0,
+            //     heroAlt: "",
+            //     title: "Differentiated Products",
+            //     subtitle: "From reasonable prices and reliable quality to new products that enhance the value of life, we are always with you so you can enjoy the joys of everyday living."/* 260604 번역 */,
+            //     cards: [
+            //         {
+            //             image: imgCard1,
+            //             alt: "",
+            //             title: "Kim Hye-ja Lunch Box",
+            //             desc: "A premium lunch box line crafted for a heartfelt, wholesome meal, the Kim Hye-ja Lunch Box is GS25's signature exclusive product, beloved for its consistently high customer satisfaction.",
+            //         },
+            //         {
+            //             image: imgCard2,
+            //             alt: "",
+            //             title: "YOUUS",
+            //             desc: "YOUUS is built on great quality and honest value, offering the kind of fun and delight you can only find at GS Retail.",
+            //         },
+            //     ],
+            //     qr: {
+            //         title: "Download the Our Neighborhood GS app"/* 260604 번역 */,
+            //         desc: "Download the Our Neighborhood GS app and discover GS25's various events and exclusive products. Scan the QR code to go to the app download page."/* 260604 번역 */,
+            //     },
+            // },
             {
                 hero: imgHero1,
                 heroAlt: "",
@@ -3296,6 +3306,7 @@ const langData = {
                         panels: [
                             {
                                 image: imgMenu1,
+                                // 26.06.23 del 정다희 : gopizza_menu_info 삭제
                                 size: "REGULAR (27cm)",
                                 tags: ["Meal replacement"/* 260604 번역 */, "Equivalent to 4 slices of a regular pizza"/* 260604 번역 */],
                                 columns: [
@@ -3312,6 +3323,7 @@ const langData = {
                             },
                             {
                                 image: imgMenu2,
+                                // 26.06.23 del 정다희 : gopizza_menu_info 삭제
                                 size: "GRAB (20cm)",
                                 tags: ["For snacks"/* 260604 번역 */, "Equivalent to 2 slices of a regular pizza"/* 260604 번역 */],
                                 columns: [
@@ -4415,7 +4427,7 @@ const langData = {
                 ],
                 [
                     "Ranked No. 1 as 'Korea's Most Admired Company' for 16 consecutive years,"/* 260604 번역 */,
-                    'No. 1 in the Korean Service Quality Index (KS-SQI) <br class="m_br" />from credible external organizations, including a total of 19 awards,'/* 260604 번역 */,
+                    'No. 1 in the Korean Service Quality Index (KS-SQI) <br class="m_br" />from credible external organizations, including a total of 22 awards,'/* 260604 번역 */,
                     "leading to these evaluation results."/* 260604 번역 */,
                 ],
             ],
@@ -4464,10 +4476,11 @@ const sinsen = computed(() => t.value.sinsen);
 const store = computed(() => t.value.store);
 const winwin = computed(() => t.value.winwin);
 const milbox = computed(() => t.value.milbox);
-const tab0 = computed(() => t.value.tabs[0]);
-const tab1 = computed(() => t.value.tabs[1]);
-const tab2 = computed(() => t.value.tabs[2]);
-const tab3 = computed(() => t.value.tabs[3]);
+// 26.06.23 del 정다희 : 차별화상품 탭 삭제
+// const tab0 = computed(() => t.value.tabs[0]);
+const tab1 = computed(() => t.value.tabs[0]);
+const tab2 = computed(() => t.value.tabs[1]);
+const tab3 = computed(() => t.value.tabs[2]);
 
 const depth1ActiveIdx = ref(2); // 26.05.18 : 1depth 활성화탭 선언
 const depth1Tabs = computed(() => t.value.nav.depth1);
@@ -4475,7 +4488,7 @@ const depth2Tabs = computed(() => t.value.nav.depth2);
 const storeTabs = computed(() => t.value.nav.depth2Store);
 const winwinTabs = computed(() => t.value.nav.depth2Winwin);
 
-const storeActiveTab = ref(1); //매장/서비스 2Depth 활성화탭
+const storeActiveTab = ref(0); //매장/서비스 2Depth 활성화탭 (26.06.23 del 정다희 : 우리동네GS 탭 삭제 후 생활 서비스 기본)
 const winwinActiveTab = ref(0); //상생협력 2Depth 활성화탭
 const winwinServiceActiveTab = ref(0); //상생협력 3Depth 활성화탭
 const giftSwiperInst = ref(null);
@@ -4898,7 +4911,7 @@ function goBack() {
 .brand_panel_title > p{font-weight: 700;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;}
 :deep(.feature_card_desc), :deep(.step_bullets > li){font-weight:700;}
 
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.png); background-size: cover; background-position: center top; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.png); background-size: cover; background-position: center bottom; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out }
 .bg_wrap.active > .bg { transform: scale(0.8) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
 .bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
@@ -4960,14 +4973,14 @@ button { background-color: #fff }
 .brand_panel section { padding-bottom: 120px }
 
 .brand_panel section:last-of-type { padding-bottom: 0 }
-.diff_card_grid { padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 460px)); gap: 20px }
-.diff_card { margin: 0; padding: 0; background-color: #fff; border-radius: 12px; overflow: hidden }
-.diff_card > figure { margin: 0; padding: 0; background-color: #e8e8ec; overflow: hidden }
-
-.diff_card > figure > img { height: 100%; object-fit: cover }
-.diff_card > div { min-height: 200px; padding: 32px; background-color: #f8f8f8 }
-.diff_card > div > h3 { margin: 0 0 16px; color: #161618; font-size: 2.8rem; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em }
-.diff_card > div > p { margin: 0; color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em } /* 26.06.11 edit 정다희 : diff_card 설명 font-weight 700 */
+/* 26.06.23 del 정다희 : 차별화상품 탭 삭제 */
+/* .diff_card_grid { padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 460px)); gap: 20px } */
+/* .diff_card { margin: 0; padding: 0; background-color: #fff; border-radius: 12px; overflow: hidden } */
+/* .diff_card > figure { margin: 0; padding: 0; background-color: #e8e8ec; overflow: hidden } */
+/* .diff_card > figure > img { height: 100%; object-fit: cover } */
+/* .diff_card > div { min-height: 200px; padding: 32px; background-color: #f8f8f8 } */
+/* .diff_card > div > h3 { margin: 0 0 16px; color: #161618; font-size: 2.8rem; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em } */
+/* .diff_card > div > p { margin: 0; color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em } */
 .cafe25_card_list { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, calc((100% - 40px) / 3)); gap: 20px }
 .cafe25_card_list > li { min-width: 0; overflow: hidden }
 .cafe25_card_list > li > div { width: 100% }
@@ -4985,9 +4998,12 @@ button { background-color: #fff }
 .tbl_mo td > span { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0 } /* 26.06.11 edit 정다희 : tbl_mo td 텍스트 font-weight 700 */
 .tbl_mo td .flag_icon { display: inline-block; vertical-align: middle; margin-right: 8px }
 .tbl_mo tr:first-child th, .tbl_mo tr:first-child td { border-top: 1px solid #E5E5E9 }
-.cafe25_table_pagination, .gopizza_table_pagination { margin-top: 20px; display: flex; justify-content: center; gap: 10px }
-.cafe25_table_pagination :deep(.swiper-pagination-bullet), .gopizza_table_pagination :deep(.swiper-pagination-bullet) { width: 6px; height: 6px; background-color: #D7D7DF; border-radius: 50%; opacity: 1; cursor: pointer; display: block }
-.cafe25_table_pagination :deep(.swiper-pagination-bullet-active), .gopizza_table_pagination :deep(.swiper-pagination-bullet-active) { background-color: #161616 }
+.cafe25_table_pagination { margin-top: 20px; display: flex; justify-content: center; gap: 10px }
+.cafe25_table_pagination :deep(.swiper-pagination-bullet) { width: 6px; height: 6px; background-color: #D7D7DF; border-radius: 50%; opacity: 1; cursor: pointer; display: block }
+.cafe25_table_pagination :deep(.swiper-pagination-bullet-active) { background-color: #161616 }
+.gopizza_table_pagination { margin-top: 20px; display: flex; justify-content: center; gap: 10px } 
+.gopizza_table_pagination :deep(.swiper-pagination-bullet) { width: 6px; height: 6px; background-color: #D7D7DF; border-radius: 50%; opacity: 1; cursor: pointer; display: block } 
+.gopizza_table_pagination :deep(.swiper-pagination-bullet-active) { background-color: #161616 } 
 .cafe25_table th, .cafe25_table td { height: 56px; padding: 0 24px; border-bottom: 1px solid #e5e5e9; vertical-align: middle; white-space: nowrap }
 .cafe25_table th > span, .cafe25_table td > span { color: #161618; font-size: 1.8rem; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em } /* 26.06.11 edit 정다희 : cafe25_table th/td 텍스트 font-weight 700 */
 .cafe25_table th:first-child, .cafe25_table td:first-child { border-left: 0 }
@@ -5005,13 +5021,13 @@ button { background-color: #fff }
 .gopizza_menu_panel { min-width: 0; flex: 1 }
 .gopizza_menu_panel img { width: 100%; border-radius: 12px; object-fit: cover }
 
-.gopizza_menu_info { padding-top: 24px }
-.gopizza_menu_title { margin-bottom: 16px; display: flex; align-items: center; gap: 8px }
-.gopizza_menu_title > strong { color: #161618; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }
 
-.gopizza_menu_tag { color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em }
-.gopizza_menu_tag + .gopizza_menu_tag { margin-left: 8px }
-.gopizza_menu_tag + .gopizza_menu_tag::before { content: ""; width: 1px; height: 8px; margin-right: 8px; background-color: #d7d7df; display: inline-block }
+ .gopizza_menu_info { padding-top: 24px } 
+ .gopizza_menu_title { margin-bottom: 16px; display: flex; align-items: center; gap: 8px } 
+ .gopizza_menu_title > strong { color: #161618; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em } 
+ .gopizza_menu_tag { color: #67676f; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em } 
+ .gopizza_menu_tag + .gopizza_menu_tag { margin-left: 8px } 
+ .gopizza_menu_tag + .gopizza_menu_tag::before { content: ""; width: 1px; height: 8px; margin-right: 8px; background-color: #d7d7df; display: inline-block } 
 .com_table_wrap { overflow-x: auto }
 .com_table { width: 100%; border-collapse: collapse; border-top: 1px solid #e5e5e9 }
 /* 26.06.11 edit 정다희 : com_table th/td/thead th 텍스트 font-weight 700 통일 */
@@ -5022,8 +5038,9 @@ button { background-color: #fff }
 .com_table_col thead th { text-align: center }
 .com_table_col td { padding: 15px 24px; text-align: center }
 
-.gopizza_menu_name { display: flex; align-items: center; gap: 6px }
-.gopizza_badge_best { padding: 2px 6px; color: #fb4516; font-size: 1.1rem; font-weight: 700; font-style: normal; letter-spacing: -0.02em; background-color: #ffe9e3; border-radius: 4px } /* 26.06.11 edit 정다희 : com_table 내 BEST 뱃지 font-weight 700 */
+
+.gopizza_menu_name { display: flex; align-items: center; gap: 12px } 
+.gopizza_badge_best { padding: 2px 6px; color: #fb4516; font-size: 1.1rem; font-weight: 700; font-style: normal; letter-spacing: -0.02em; background-color: #ffe9e3; border-radius: 4px } 
 .diff_bottom_row { margin-top:40px;display: flex; gap: 32px }
 .diff_bottom_row > .diff_qr_row { flex: 1 }
 :deep(.diff_qr_row > div > strong + p ){font-weight:700;} /* 26.06.11 edit 정다희 : diff_qr_row 설명 font-weight 700 */
@@ -5056,21 +5073,21 @@ button { background-color: #fff }
 /* 26.06.08 add 정다희 :sinsen_advantge영역 css 추가  */
 .sinsen_advantage_grid { width: 100%; display: flex; flex-wrap: wrap; align-items: stretch; gap: 16px; }
 .sinsen_advantage_card { flex: 1 1 calc(50% - 8px); min-width: 0; padding: 32px; background-color: #f8f8f8; border-radius: 12px; }
-.sinsen_advantage_card:nth-child(1) header > p{margin-bottom:40px;}
-.sinsen_advantage_card:nth-child(2) .sinsen_advantage_items{margin-top:40px;}
+.sinsen_advantage_card:nth-child(1) header > p{margin-bottom:42px;}
+/* .sinsen_advantage_card:nth-child(2) .sinsen_advantage_items{margin-top:40px;} */
 .sinsen_advantage_card > header > strong { margin: 0 0 16px; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sinsen_advantage_card > header > strong > em { margin-right: 8px; color: #107af2; font-size: 1.8rem; font-style: normal; font-weight: 700; line-height: 1.5; }
-.sinsen_advantage_card > header > p { margin: 0 0 16px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
+.sinsen_advantage_card > header > p { margin: 0 0 40px; color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.5;  }
 .sinsen_compare_table { width: 100%; margin: 0; border-top: 1px solid #e5e5e9; border-collapse: collapse; table-layout: fixed; }
 /* 26.06.11 edit 정다희 : sinsen_compare_table th/td/tbody th font-weight 700 통일 */
-.sinsen_compare_table th, .sinsen_compare_table td { padding: 18px 24px; color: #161616; font-size: 1.8rem; font-weight: 700; line-height: 1.4; text-align: center; border-bottom: 1px solid #e5e5e9; vertical-align: middle; }
+.sinsen_compare_table th, .sinsen_compare_table td { padding: 18px 24px; color: #161616; font-size: 1.8rem; line-height: 1.4; text-align: center; border-bottom: 1px solid #e5e5e9; vertical-align: middle; }
 .sinsen_compare_table td {padding:30px 24px;}
 .sinsen_compare_table thead th { font-weight: 700; background-color: #fff; }
 .sinsen_compare_table tbody th { font-weight: 700; background-color: #fff; }
 /* .sinsen_compare_table th:first-child, .sinsen_compare_table td:first-child { width: 200px; } */
 .sinsen_advantage_items { width: 100%; margin: 0; padding: 0; list-style: none; display: flex; gap: 16px; }
 .sinsen_advantage_items > li { min-width: 0; flex: 1; }
-.sinsen_advantage_items > li > p { margin: 0 0 16px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
+.sinsen_advantage_items > li > p { margin: 0 0 42px; color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
 .sinsen_advantage_items > li > figure { margin: 0; }
 .sinsen_advantage_items > li > figure > img { width: 100%; height: 175px; display: block; object-fit: contain; background-color: #fff; border-radius: 8px; }
 .sinsen_advantage_items > li > figure > figcaption { margin-top: 16px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
@@ -5298,20 +5315,21 @@ button { background-color: #fff }
   .usage_select_box { width: 100%; font-size: 1.4rem; line-height: 1.4 }
   
   .brand_panel section { padding: 0 0 80px }
-  
-  .diff_card > figure { height:220px }
-  
+  /* 26.06.23 GOPIZZA 메뉴 소개(3번째 section) 하단 여백 — nth-child(3)은 figure/header 때문에 1번째 section만 매칭됨 */
+  .gopizza_panel.brand_panel > section:nth-of-type(3) { padding-bottom: 100px; }
+  /* .diff_card > figure { height:220px } */
+  /* .diff_card > figure > img{width:100%;} */
+
   .cafe25_table th, .cafe25_table td { padding: 16px 24px }
   /* 26.06.11 edit 정다희 : cafe25_table MO 텍스트 font-weight 700 */
   .cafe25_table th > span, .cafe25_table td > span { font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em }
   .cafe25_table th > span { font-weight: 700 }
-  .diff_card > figure > img{width:100%;}
-  
-  .gopizza_menu_panel + .gopizza_menu_panel { margin-top: 100px }
+  .gopizza_menu_panel + .gopizza_menu_panel {margin-top:100px;}
   .gopizza_menu_panel img { min-height: 240px }
   
-  .gopizza_menu_title { gap:4px; flex-direction: column; align-items: flex-start }
-  .gopizza_menu_title > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
+
+.gopizza_menu_title { gap:4px; flex-direction: column; align-items: flex-start } 
+.gopizza_menu_title > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% } 
 
   .com_table th, .com_table td { font-size: 1.6rem; font-weight: 700; line-height: 1.24 } /* 26.06.11 edit 정다희 : com_table MO font-weight 700 */
   .com_table td { padding: 14px 20px; font-size: 1.4rem; letter-spacing: 0.01em }
@@ -5333,9 +5351,9 @@ button { background-color: #fff }
   /* 26.06.08 add 정다희 : sinsen_advantage MO (Figma 857:8893) */
   .sinsen_advantage_grid { flex-direction: column; gap: 16px; }
   .sinsen_advantage_card { flex: 1 1 100%; width: 100%; padding: 32px 24px; }
-  .sinsen_advantage_card > header > strong { margin: 0 0 16px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+  .sinsen_advantage_card > header > strong { margin: 0 0 6px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
   .sinsen_advantage_card > header > strong > em { font-size: 1.8rem; line-height: 1.5; }
-  .sinsen_advantage_card > header > p { margin: 0 0 16px; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+  .sinsen_advantage_card > header > p { margin: 0 0 20px; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
   /* 26.06.11 edit 정다희 : sinsen_compare_table MO font-weight 700 */
   .sinsen_compare_table th, .sinsen_compare_table td { padding: 22px 5px; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
   .sinsen_compare_table td { padding: 25px 9px; }
@@ -5343,7 +5361,7 @@ button { background-color: #fff }
   .sinsen_compare_table thead th:first-child { font-weight: 700; }
   .sinsen_compare_table th:first-child, .sinsen_compare_table td:first-child { width: 48px; }
   .sinsen_advantage_items { flex-direction: row; gap: 16px; }
-  .sinsen_advantage_items > li > p { margin: 0 0 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+  .sinsen_advantage_items > li > p { margin: 40px 0 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
   .sinsen_advantage_items > li > figure > img { height: 175px; border-radius: 0; }
   .sinsen_advantage_items > li > figure > figcaption { margin-top: 16px; font-size: 1.4rem;  line-height: 1.4; letter-spacing: -0.01em; }
 }
@@ -5642,7 +5660,8 @@ button { background-color: #fff }
   .service_tab_wrap::after { content:''; width:clamp(64px, 8vw, 88px); height:100%; background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); position:absolute; top:0; right:0; pointer-events:none; z-index:1 }
   .pop_lnb { width: 160px }
   .pop_lnb > ul > li > button { font-size: 1.6rem; min-height: 52px }
-  .diff_card_grid { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  /* 26.06.23 del 정다희 : 차별화상품 탭 삭제 */
+  /* .diff_card_grid { grid-template-columns: repeat(2, minmax(0, 1fr)) } */
   .usage_header { gap: 12px; margin-bottom: 24px }
   .usage_select_box { width: 160px }
 }
@@ -5696,10 +5715,11 @@ button { background-color: #fff }
 
 @media (max-width: 768px) {
   .cont_inner {overflow-x: clip;}
-  .diff_card_swiper { overflow: visible }
-  .diff_card > div { min-height: 163px; padding: 20px }
-  .diff_card > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
-  .diff_card > div > h3 { font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0%; margin-bottom: 8px }
+  /* 26.06.23 del 정다희 : 차별화상품 탭 삭제 */
+  /* .diff_card_swiper { overflow: visible } */
+  /* .diff_card > div { min-height: 163px; padding: 20px } */
+  /* .diff_card > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em } */
+  /* .diff_card > div > h3 { font-weight: 700; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0%; margin-bottom: 8px } */
   .cafe25_img_wrap { max-width: none; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch }
   .cafe25_img_wrap > img { max-width: none; display: block }
   .cafe25_card_swiper { overflow: visible; margin-bottom: 20px }
