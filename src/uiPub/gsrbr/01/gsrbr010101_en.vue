@@ -4775,9 +4775,9 @@ function goBack() {
   .sticky { height: 100vh; top: 0 }
 }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.jpg); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.png); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.2); transition: transform 0.7s ease-out }
 @media (max-width: 768px) {
-  .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(@/assets/images/dummy/brand_main_bg.jpg); transform: scale(1.25); background-position: 54% 50px }
+  .bg_wrap > .bg { background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(@/assets/images/dummy/brand_main_bg.png); transform: scale(1.25); background-position: 54% 50px }
 }
 .bg_wrap.active > .bg { transform: scale(1) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
