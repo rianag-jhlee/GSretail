@@ -1156,7 +1156,7 @@ export default {
 .tm-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px 20px; }
 .tm-step-item { display: flex; flex-direction: column; gap: 20px; }
 .tm-step-icon { width: 40px; height: 40px; }
-.tm-step-num { font-size: 1.8rem; font-weight: 700; color: #107AF2; display: block; margin-bottom: 6px; }
+.tm-step-num { font-size: 1.8rem; font-weight: 700; color: #11935D; display: block; margin-bottom: 6px; }
 .tm-step-tit {margin-bottom:16px; font-size: 2rem; font-weight: 700; color: #161616; display: block; }
 .tm-step-text { font-size: 16px; color: #67676F; line-height: 1.5; }
 
@@ -1172,7 +1172,7 @@ export default {
 .swiper-slide.tm-principle-card {height:stretch; margin-right:20px;}
 .swiper-slide.tm-principle-card:last-of-type {margin-right:0 !important;}
 .tm-card-header {display:flex; flex-direction:column; gap:8px;}
-.tm-card-num { font-size: 1.8rem; font-weight: 700; color: #107AF2; }
+.tm-card-num { font-size: 1.8rem; font-weight: 700; color: #11935D; }
 .tm-card-tit { font-size: 2rem; font-weight: 700; color: #161616; }
 .tm-card-main-text { margin-bottom:8px; font-size: 1.8rem; font-weight: 700; color: #67676F; line-height: 1.5; }
 .tm-card-sub-text { font-size: 16px; color: #67676F; line-height: 1.5; }
