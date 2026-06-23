@@ -351,6 +351,7 @@ export default {
             currentCat: 0,
             currentTasteCat: 0,
             gsapCtx: null,
+            originScrollRaf: null, // 26.06.23 add 정다희 : origin_lnb 스크롤 스파이 requestAnimationFrame id
             imgLogo,
             langData: {
                 ko: {
@@ -777,11 +778,15 @@ export default {
         this.$nextTick(() => {
             setTimeout(() => {
                 this.initVisualInteraction();
+                // 26.06.23 add 정다희 : origin_lnb — 스크롤 위치에 따라 currentCat(active) 동기화
+                this.setupOriginSpy();
             }, 100);
         });
     },
     beforeUnmount() {
         window.removeEventListener("resize", this._onResize);
+        // 26.06.23 add 정다희 : origin_lnb 스크롤 스파이 리스너 해제
+        this.teardownOriginSpy();
         // 26.06.02 Edit 정다희
         syncVisualClip = null;
         if (this.gsapCtx) {
@@ -793,9 +798,49 @@ export default {
         onTabChange1(idx) {
             this.originTabIdx1 = idx;
             this.originTabIdx2 = 0;
+            // 26.06.23 add 정다희 : 1depth 탭 전환 시 스크롤 스파이 재등록(전국 우수 산지 탭에서만 동작)
+            this.$nextTick(() => this.setupOriginSpy());
         },
         onTabChange2(idx) {
             this.originTabIdx2 = idx;
+            // 26.06.23 add 정다희 : 2depth 탭 전환 시 스크롤 스파이 재등록
+            this.$nextTick(() => this.setupOriginSpy());
+        },
+        // 26.06.23 add 정다희 : origin_lnb 스크롤 스파이 — 신선 산지 안내 > 전국 우수 산지 구간에서만 scroll 이벤트 등록
+        setupOriginSpy() {
+            this.teardownOriginSpy();
+            if (this.originTabIdx1 !== 0 || this.originTabIdx2 !== 0) return;
+            this._updateOriginActive();
+            window.addEventListener("scroll", this._onOriginScroll, { passive: true });
+        },
+        // 26.06.23 add 정다희 : origin_lnb 스크롤 스파이 해제
+        teardownOriginSpy() {
+            window.removeEventListener("scroll", this._onOriginScroll);
+            if (this.originScrollRaf) {
+                cancelAnimationFrame(this.originScrollRaf);
+                this.originScrollRaf = null;
+            }
+        },
+        // 26.06.23 add 정다희 : scroll 이벤트 rAF 스로틀 — 스크롤 중 currentCat 갱신
+        _onOriginScroll() {
+            if (this.originScrollRaf) return;
+            this.originScrollRaf = requestAnimationFrame(() => {
+                this.originScrollRaf = null;
+                this._updateOriginActive();
+            });
+        },
+        // 26.06.23 add 정다희 : 뷰포트 상단(offset)을 지난 마지막 origin_group 기준으로 li.active(currentCat) 결정 — offset은 .origin_group scroll-margin-top(100px)와 동일
+        _updateOriginActive() {
+            if (this.originTabIdx1 !== 0 || this.originTabIdx2 !== 0) return;
+            const targets = this.$refs.originRefs;
+            if (!targets) return;
+            const sections = Array.isArray(targets) ? targets : [targets];
+            const offset = 101; // .origin_group scroll-margin-top 100px + 1
+            let activeIdx = 0;
+            for (let i = 0; i < sections.length; i++) {
+                if (sections[i].getBoundingClientRect().top <= offset) activeIdx = i;
+            }
+            if (this.currentCat !== activeIdx) this.currentCat = activeIdx;
         },
         scrollToSection(idx) {
             this.currentCat = idx;
@@ -1114,7 +1159,7 @@ export default {
 .origin_lnb { width: 200px; position: sticky; top: 100px; }
 .origin_lnb ul {margin-top:-18.5px;}
 .origin_lnb button { width: 100%; height: 64px; color: #4c4c53; font-size: 2rem; font-weight: 700; text-align: left; background: none; border: 0; cursor: pointer; }
-.origin_lnb ul li.active button { color: #161616; }
+.origin_lnb ul li.active button { color: #11935D; }
 
 .origin_list_box { flex: 1; }
 .origin_group { padding-top: 100px; scroll-margin-top: 100px; }
@@ -1208,7 +1253,7 @@ export default {
     .origin_lnb { width: 100%; position: static; margin-bottom: 40px; }
     .origin_lnb ul { display: flex; flex-wrap: wrap; gap: 10px; }
     .origin_lnb button { width: auto; height: 40px; padding: 0 20px; border: 1px solid #e5e5e9; border-radius: 20px; font-size: 16px; }
-    .origin_lnb ul li.active button { background-color: #161616; color: #fff; }
+    .origin_lnb ul li.active button { background-color: #161616;  }
     .item_grid { grid-template-columns: repeat(2, 1fr); }
     .mou_grid { grid-template-columns: repeat(2, 1fr); }
     .tm-steps-grid { grid-template-columns: repeat(2, 1fr); }
