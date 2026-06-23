@@ -192,7 +192,8 @@ export default {
 
                     /* 260616 add 정다희 : hero_message */
                     heroMessage: {
-                        title: '고객의 모든 <span class="txt_orange">경험</span>을 연결하고, <br />데이터로 <span class="txt_green">공감</span>하며,<br />상품과 서비스로 <span class="txt_blue">신뢰</span>받는 플랫폼',
+                        // 260623 edit 정다희 : span.txt_orange 위치수정 (경험 -> 연결)
+                        title: '고객의 모든 경험을 <span class="txt_orange">연결</span>하고, <br />데이터로 <span class="txt_green">공감</span>하며,<br />상품과 서비스로 <span class="txt_blue">신뢰</span>받는 플랫폼',
                         items: [
                             {
                                 dt: "전국 오프라인 점포 수",
