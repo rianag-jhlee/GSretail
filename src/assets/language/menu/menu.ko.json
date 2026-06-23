@@ -37,7 +37,7 @@
     },
     {
         "title": "사업영역",
-        "path": "gsrbr_smain",
+        "path": "gsrbr010101",
         "children": [
             {
                 "title": "GS25",
@@ -52,7 +52,7 @@
                 ]
             },
             {
-                "title": "GS더프레시",
+                "title": "GS THE FRESH",
                 "path": "gsrbr020101",
                 "children": [
                     { "title": "신선 산지 안내", "path": "#none" },
@@ -76,36 +76,7 @@
                     { "title": "행사/이벤트", "path": "#none" }
                 ]
             },
-            {
-                "title": "우딜",
-                "path": "gsrbr10",
-                "children": []
-            },
-            {
-                "title": "GS PAY",
-                "path": "gsrbr05",
-                "children": []
-            },
-            {
-                "title": "GS ALL",
-                "path": "gsrbr06",
-                "children": []
-            },
-            {
-                "title": "POP",
-                "path": "gsrbr07",
-                "children": []
-            },
-            {
-                "title": "유어스",
-                "path": "gsrbr08",
-                "children": []
-            },
-            {
-                "title": "리얼프라이스",
-                "path": "gsrbr09",
-                "children": []
-            },
+
             {
                 "title": "개발/임대 사업",
                 "path": "gsrbr1101",

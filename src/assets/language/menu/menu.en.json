@@ -32,7 +32,7 @@
     },
     {
         "title": "BRAND",
-        "path": "gsrbr_smain",
+        "path": "gsrbr010101",
         "children": [
             {
                 "title": "GS25",
@@ -70,36 +70,6 @@
                     { "title": "재고찾기", "path": "#none" },
                     { "title": "행사/이벤트", "path": "#none" }
                 ]
-            },
-            {
-                "title": "Our Neighborhood Delivery",
-                "path": "gsrbr10",
-                "children": []
-            },
-            {
-                "title": "GS PAY",
-                "path": "gsrbr05",
-                "children": []
-            },
-            {
-                "title": "GS ALL",
-                "path": "gsrbr06",
-                "children": []
-            },
-            {
-                "title": "POP",
-                "path": "gsrbr07",
-                "children": []
-            },
-            {
-                "title": "YOUUS",
-                "path": "gsrbr08",
-                "children": []
-            },
-            {
-                "title": "REAL price",
-                "path": "gsrbr09",
-                "children": []
             },
             {
                 "title": "Development/Leasing Business",
