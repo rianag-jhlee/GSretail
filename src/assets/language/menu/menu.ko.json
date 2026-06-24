@@ -38,6 +38,7 @@
     {
         "title": "사업영역",
         "path": "gsrbr010101",
+        "path": "gsrbr010101",
         "children": [
             {
                 "title": "GS25",
@@ -52,6 +53,7 @@
                 ]
             },
             {
+                "title": "GS THE FRESH",
                 "title": "GS THE FRESH",
                 "path": "gsrbr020101",
                 "children": [
@@ -76,6 +78,7 @@
                     { "title": "행사/이벤트", "path": "#none" }
                 ]
             },
+
             {
                 "title": "개발/임대 사업",
                 "path": "gsrbr1101",
