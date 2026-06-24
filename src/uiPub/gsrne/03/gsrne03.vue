@@ -1,16 +1,16 @@
 <template>
     <div class="main-container">
-        <div class="title_wrap">
+        <div class="title_wrap top_visual"> <!-- 26.06.24 add 정다희 : top_visual 클래스 추가 -->
             <h2 class="page-title">{{ t.MainTitle }}</h2>
-            <p class="visual-sub" v-html="t.MainsubTitle"></p>
+            <!-- <p class="visual-sub" v-html="t.MainsubTitle"></p> -->  <!-- 26.06.24 del 정다희 : MainsubTitle 삭제 / 위치이동 -->
         </div>
 
         <section>
             <div class="cont_inner">
-
                 <!-- <Tabs @change="onTabChange1" v-model="t.TabIdx" :tab-items="t.tabs" tab-class="type_02 ac" :tab-slide="false" /> -->
-                
-                
+                <!-- 26.06.24 add 정다희 : visual-sub_pc, visual-sub_mo 클래스 추가 / 모바일 화면에서는 visual-sub_mo 클래스 사용 -->
+                <p class="visual-sub visual-sub_pc" v-html="t.MainsubTitle"></p>
+                <p class="visual-sub visual-sub_mo">{{ t.MainsubTitleMo }}</p>
                 <section>
                     <div class="element">
                         <div class="search_filter_area">
@@ -81,19 +81,18 @@ export default {
             /* 4. 언어별 텍스트 데이터 */
             langData: {
                 ko: {
-                    MainTitle: "GS리테일 Factbook",
+                    MainTitle: "스토리", /* 26.06.23 add 정다희 : 스토리 타이틀 국문 변경 */ 
                     MainsubTitle: "궁금했던 GS리테일의 모든 것, 이제 여기저기 찾지 마세요.<br/> 여러분이 가장 많이 묻는 질문에 대한 정답을 한눈에 보기 쉽게 정리했습니다.",
+                    MainsubTitleMo: "궁금했던 GS리테일의 모든것, 한눈에 보기 쉽게 정리해드립니다.", /*26.06.24 add 정다희 :MainsubTitleMo 추가 **/
 
                     sTabIdx: 0, //최초 선택된 탭 index
+                    // 26.06.24 edit 정다희 : subTabs 아이템 텍스트 수정 
                     subTabs: [ //탭 아이템 배열
                         { item: "전체" },
-                        { item: "카테고리1" },
-                        { item: "카테고리2" },
-                        { item: "카테고리3" },
-                        { item: "카테고리4" },
-                        { item: "카테고리5" },
-                        { item: "카테고리6" },
-                        { item: "카테고리7" }
+                        { item: "GS리테일" },
+                        { item: "GS25" },
+                        { item: "GS SHOP" },
+                        { item: "GS THE FRESH" },
                     ],
 
                     /* Search 컴포넌트 전용 옵션 (props: search_opt) */
@@ -119,19 +118,18 @@ export default {
                     ]
                 },
                 en: {
-                    MainTitle: "GS Retail Factbook",
+                    MainTitle: "Story", /* 26.06.23 add 정다희 : 스토리 타이틀 영문 변경    */ 
                     MainsubTitle: "Everything you were curious about GS Retail — no need to search here and there anymore.<br/> We have organized clear answers to the questions you ask most often in an easy-to-read format."/* 260604 번역 */,
+                    MainsubTitleMo: "Everything you were curious about GS Retail, organized at a glance for easy reading."/* 26.06.24 add 정다희 : MainsubTitleMo 추가 */,
 
                     sTabIdx: 0, //최초 선택된 탭 index
+                    // 26.06.24 edit 정다희 : subTabs 아이템 텍스트 수정 
                     subTabs: [ //탭 아이템 배열
                         { item: "All" },
-                        { item: "Category 1"/* 260604 번역 */ },
-                        { item: "Category 2"/* 260604 번역 */ },
-                        { item: "Category 3"/* 260604 번역 */ },
-                        { item: "Category 4"/* 260604 번역 */ },
-                        { item: "Category 5"/* 260604 번역 */ },
-                        { item: "Category 6"/* 260604 번역 */ },
-                        { item: "Category 7"/* 260604 번역 */ }
+                        { item: "GS Retail"/* 260604 번역 */ },
+                        { item: "GS25"/* 260604 번역 */ },
+                        { item: "GS SHOP"/* 260604 번역 */ },
+                        { item: "GS THE FRESH"/* 260604 번역 */ },
                     ],
 
                     /* Search 컴포넌트 전용 옵션 (props: search_opt) */
@@ -189,13 +187,17 @@ export default {
 <style scoped>
 /* 제공해주신 CSS 그대로 유지 (수정 없음) */
 .main-container { width: 100%; position: relative; }
-.title_wrap { width: 100%; padding: 10.91% 0 0; text-align: center; position: relative; display: block; }
+.title_wrap {width: 100%; height:460px; padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrne01_bg.png') no-repeat center 57% / cover; text-align: center; position: relative; display: block;}
+.title_wrap::before{content:''; display:block; width:100%; height:100%; background:rgba(0,0,0,0.4); position:absolute; top:0; left:0; z-index:1;}
+.title_wrap > h2{color:#fff; position: relative; z-index:2;}
+.title_wrap > p{color:#fff; position: relative; z-index:2;}
 .page-title { color: #111; font-size: 72px; font-weight: 700; line-height:124%; letter-spacing:-0.02em;}
-.visual-sub { margin-top: 10px; color: #111; font-size: 24px; font-weight: 400; line-height:150%; }
+.visual-sub {margin-top:80px; font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;text-align: center;}
+.visual-sub_mo { display: none; }
 
-.tab_wrap :deep(ul.type_full) li {flex:1;}
-.tab_wrap :deep(ul.type_full) li a {padding:16.5px 5px; color:#90909A; font-size:1.8rem; line-height:140%; border:1px solid #C4C4D0; text-align:center;}
-.tab_wrap :deep(ul.type_full) li.current a {color:#fff; background-color:#90909A; border-color:#90909A;}
+.tab_wrap.tabSlide :deep(ul.type_full) li { flex:1; }
+.tab_wrap.tabSlide :deep(ul.type_full) li a {padding:16.5px 5px; color:#90909A; font-size:1.8rem; line-height:140%; border:1px solid #C4C4D0; text-align:center;}
+.tab_wrap.tabSlide :deep(ul.type_full) li.current a {color:#fff; background-color:#90909A; border-color:#90909A;}
 
 /* board_wrap */
 .board_wrap.type_gallery .body {margin-top:-54px; margin-left:-50px; display:flex; flex-wrap:wrap;}
@@ -212,13 +214,15 @@ export default {
 
 .board_wrap.type_gallery.type_long .item .thumb {padding-top:177.727272%;}
 
-@media screen and (max-width: 767px) {
-    .title_wrap {margin-top:70px; padding:0 20px; text-align:initial;}
-    .title_wrap h2 {display:none;}
-    .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
-
+@media screen and (max-width: 768px) {
+    .main-container{padding-top:60px;}
+    .title_wrap {display: none;}
+    .visual-sub_pc { display: none; }
+    .tab_wrap.tabSlide :deep(ul.type_full) li a { padding: 16.5px 16px; white-space: nowrap; }
+    .visual-sub_mo { display: block; margin-top: 60px; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; text-align: left;}
     .board_wrap.type_gallery .body {margin-top:-48px;}
     .board_wrap.type_gallery .body > li {width:100%; padding-top:48px;}
     .board_wrap.type_gallery .item .thumb {padding-top:60.895522%;}
+    .tab_wrap.tabSlide :deep(ul.type_full) li a{padding:8px; font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
 }
 </style>
