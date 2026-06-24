@@ -152,6 +152,7 @@
                                 <div class="form_row">
                                     <div class="label_item">
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.replyLabel }}</span>
+                                        <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
                                         <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" :initMsg="t.listening.InputWrapcont.part2.replyInitMsg" class="w428"/>
@@ -225,6 +226,7 @@
                                 <div class="form_row">
                                     <div class="label_item">
                                         <span class="label_text">{{ t.listening.InputWrapcont.membershipForm.replyLabel }}</span>
+                                        <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
                                         <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" :initMsg="t.listening.InputWrapcont.membershipForm.replyInitMsg" class="w428" />
@@ -309,7 +311,7 @@ export default {
                         Nonmember: {
                             title: "고객정보의 연락처를 확인해 주세요.",
                             items: [
-                                "문의에 대한 답변은 ‘등록하신 연락처(문자, 전화) 또는 이메일을 통해서만’ 확인하실 수 있습니다. 연락처를 정확하게 입력해주세요. <br/>(홈페이지 내에서 이전 문의이력 확인 불가)",
+                                "문의에 대한 답변은 ‘등록하신 연락처(문자, 전화) 또는 이메일을 통해서만’ 확인하실 수 있습니다. 연락처를 정확하게 입력해주세요. (홈페이지 내에서 이전 문의이력 확인 불가)", /* 260623 edit 이소라 */
                             ]
                         },
                         InputWrapcont: {

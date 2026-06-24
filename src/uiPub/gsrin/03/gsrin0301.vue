@@ -39,11 +39,13 @@
                         </div>
 
                         <div class="policy_wrap">
+                            <!-- 260623 edit 이소라 -->
                             <table class="base_table">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="ac">{{ t.TableHeader.col1 }}</th>
                                         <th scope="col" class="ac">{{ t.TableHeader.col2 }}</th>
+                                        <th scope="col" class="ac">{{ t.TableHeader.col4 }}</th>
                                         <th scope="col" class="ac">{{ t.TableHeader.col3 }}</th>
                                     </tr>
                                 </thead>
@@ -53,17 +55,19 @@
                                         <td class="al">
                                             <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
                                         </td>
+                                        <td class="ac">{{ item.date }}</td>
                                         <td class="ac">
                                             <button type="button" class="btn_download_file" @click="handleDownload(item.link)">
-                                                <span class="file_type_text">PDF</span>
+                                                <!--<span class="file_type_text">PDF</span>-->
                                             </button>
                                         </td>
                                     </tr>
                                     <tr v-if="t.IRListData.length === 0">
-                                        <td colspan="3" class="ac py80">{{ t.NoDataText }}</td>
+                                        <td colspan="4" class="ac py80">{{ t.NoDataText }}</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <!-- /260623 edit 이소라 -->
                         </div>
                     </section>
 
@@ -203,6 +207,7 @@
                         </div>
                         
                         <div class="policy_wrap">
+                            <!-- 260623 edit 이소라 -->
                             <table class="base_table">
                                 <thead>
                                     <tr>
@@ -294,13 +299,13 @@ export default {
                         { value: "title", label: "제목" },
                         { value: "content", label: "내용" }
                     ],
-                    TableHeader: { col1: "구분", col2: "제목", col3: "다운로드" },
+                    TableHeader: { col1: "구분", col2: "제목", col3: "다운로드", col4: "등록일" },
                     IRListData: [
-                        { id: "60", title: "2025년도 재무제표 결산공고", link: "#" },
-                        { id: "59", title: "제55기 사업연도 배당기준일 설정 공고", link: "#" },
-                        { id: "58", title: "2024년도 재무제표 결산공고", link: "#" },
-                        { id: "57", title: "제54기 사업연도 배당기준일 설정 공고", link: "#" },
-                        { id: "56", title: "외부감사계약 체결 공고", link: "#" }
+                        { id: "60", title: "2025년도 재무제표 결산공고", date: "2026.06.23", link: "#" },
+                        { id: "59", title: "제55기 사업연도 배당기준일 설정 공고", date: "2026.06.22", link: "#" },
+                        { id: "58", title: "2024년도 재무제표 결산공고", date: "2025.06.23", link: "#" },
+                        { id: "57", title: "제54기 사업연도 배당기준일 설정 공고", date: "2025.06.22", link: "#" },
+                        { id: "56", title: "외부감사계약 체결 공고", date: "2024.06.23", link: "#" }
                     ],
                     MeetingListData: [],
                     NoDataText: "조회된 데이터가 없습니다."
@@ -333,13 +338,13 @@ export default {
                         { value: "title", label: "Title" },
                         { value: "content", label: "Details" }
                     ],
-                    TableHeader: { col1: "Category", col2: "Title", col3: "Download ↓" },
+                    TableHeader: { col1: "Category", col2: "Title", col3: "Date", col4: "Download ↓" },
                     IRListData: [
-                        { id: "60", title: "FY2025 Financial Statements Settlement Announcement"/* 260604 번역 */, link: "#" },
-                        { id: "59", title: "Notice of Setting the Dividend Record Date for the 55th Fiscal Year"/* 260604 번역 */, link: "#" },
-                        { id: "58", title: "FY2024 Financial Statements Settlement Announcement"/* 260604 번역 */, link: "#" },
-                        { id: "57", title: "Notice of Setting the Dividend Record Date for the 54th Fiscal Year"/* 260604 번역 */, link: "#" },
-                        { id: "56", title: "Notice of External Audit Contract Conclusion"/* 260604 번역 */, link: "#" }
+                        { id: "60", title: "FY2025 Financial Statements Settlement Announcement"/* 260604 번역 */, date: "2026.06.23", link: "#" },
+                        { id: "59", title: "Notice of Setting the Dividend Record Date for the 55th Fiscal Year"/* 260604 번역 */, date: "2026.06.22", link: "#" },
+                        { id: "58", title: "FY2024 Financial Statements Settlement Announcement"/* 260604 번역 */, date: "2025.06.23", link: "#" },
+                        { id: "57", title: "Notice of Setting the Dividend Record Date for the 54th Fiscal Year"/* 260604 번역 */, date: "2025.06.22", link: "#" },
+                        { id: "56", title: "Notice of External Audit Contract Conclusion"/* 260604 번역 */, date: "2024.06.23", link: "#" }
                     ],
                     MeetingListData: [],
                     NoDataText: "There is no data found."/* 260604 번역 */

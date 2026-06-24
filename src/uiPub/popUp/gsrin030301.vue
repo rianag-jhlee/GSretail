@@ -55,7 +55,7 @@ export default {
                         "임직원 윤리 규정 및 기업지배구조 헌장 제정",
                         "기업지배구조와 모범규준과의 차이 공개",
                         "지배구조 5개년 등급 공개",
-                        "배당금 증가 ('18년 650원, '19년 750원, '20년 900원, '21년 1200원)"
+                        "안정적인 배당금 지급" /* 260623 edit 이소라 */
                     ]
                 },
                 en: {
@@ -75,7 +75,7 @@ export default {
                         "Establishment of an Employee Code of Ethics and a Corporate Governance Charter"/* 260604 번역 */,
                         "Disclosure of Differences from Corporate Governance Best Practice Standards"/* 260604 번역 */,
                         "Disclosure of 5-Year Governance Ratings"/* 260604 번역 */,
-                        "Dividend increase (KRW 650 in '18, KRW 750 in '19, KRW 900 in '20, KRW 1,200 in '21)"/* 260604 번역 */
+                        "Stable Dividend Payments"/* 260623 edit 이소라 */
                     ]
                 }
             }

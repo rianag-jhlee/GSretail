@@ -1155,9 +1155,9 @@ const ethicsReportForm = ref({
 
 const langData = {
     ko: {
-        MainTitle: "컴플라이언스",
+        MainTitle: "정도경영", /* 20260623 edit 이소라 */
         MainsubTitle: "Compliance",
-        Tabs1: [{ item: "정도경영" }, { item: "준법경영" }],
+        Tabs1: [{ item: "윤리경영" }, { item: "준법경영" }], /* 20260623 edit 이소라 */
         TabsEsgArchive: [
             { item: "소개" },
             { item: "지침" },
@@ -4304,7 +4304,7 @@ const langData = {
     en: {
         MainTitle: "Compliance",
         MainsubTitle: "Compliance",
-        Tabs1: [{ item: "Ethics Management" }, { item: "Legal Compliance" }],
+        Tabs1: [{ item: "Ethical Management" }, { item: "Legal Compliance" }], /* 20260623 edit 이소라 */
         TabsEsgArchive: [
             { item: "Introduction" },
             { item: "Guidelines" },
