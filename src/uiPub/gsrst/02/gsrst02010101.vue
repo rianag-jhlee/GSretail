@@ -18,31 +18,51 @@
             <Tabs v-show="activeD1 === 3" :tab-items="t.depth2TabsConsult" tab-class="type_02" v-model="activeD2" :tab-slide="true" />
 
             <!-- GS25 브랜드 소개 (D2=0) -->
+
+
+
+
+            
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
                 <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg2})` }">
                     <header>
-                        <span class="tit">{{ t.brandIntro.badge }}</span>
-                        <h3>{{ t.brandIntro.title }}</h3>
-                        <p class="desc" v-html="t.brandIntro.desc"></p>
+                        <!-- <span class="tit">{{ t.brandIntro.badge }}</span> -->    <!-- 26.06.23 edit 정다희 : tit 삭제 -->
+                        <!-- hero_title : 26.06.23 add 정다희 : GS25 로고 추가 -->
+                        <div class="hero_title">
+                            <h3>{{ t.brandIntro.title }}</h3>
+                            <div>
+                                <img src="@/assets/images/dummy/gsrst_gs25_logo.png" alt="GS25">
+                            </div>
+                        </div>
+                        <!-- //hero_title : 26.06.23 add 정다희 : GS25 로고 추가 -->
+                        <!-- <p class="desc" v-html="t.brandIntro.desc"></p> -->  
                     </header>
+                    <!-- 26.06.23 edit 정다희 : action_list — Figma 908:19853 카드형(제목 + pill 버튼) -->
                     <ul class="action_list">
                         <li v-for="(item, i) in t.brandApplyLinks" :key="i">
-                            <a :href="item.url" class="btn_icon_arrow primary after">
+                            <a :href="item.url" class="action_card btn_icon_arrow primary after">
                                 <strong v-html="item.title"></strong>
-                                <span v-html="item.desc"></span>
+                                <span class="action_card_btn"><em>{{ item.btnLabel }}</em></span>
                             </a>
                         </li>
                     </ul>
+                    <!-- 26.06.23 add 정다희 : desc_list 추가 -->
+                    <ol class="desc_list">
+                        <template v-for="(item, i) in t.brandApplyDesc" :key="i">
+                            <li v-if="item">- {{ item }}</li>
+                        </template>
+                    </ol>
+                    <!-- //26.06.23 add 정다희 : desc_list 추가 -->
                     <ul class="metric_list">
                         <li v-for="(item, i) in t.brandStats" :key="i">
                             <strong>{{ item.value }}</strong>
-                            <span>{{ item.label }}</span>
+                            <span v-html="item.label"></span>
                         </li>
                     </ul>
                 </section>
                 <section class="sec_num_list">
                     <header class="section_header">
-                        <span class="tit">{{ t.successPointPanel.badge }}</span>
+                        <!-- <span class="tit">{{ t.successPointPanel.badge }}</span> -->  <!-- 26.06.23 edit 정다희 : badge 삭제 -->
                         <h2 v-html="t.successPointPanel.title"></h2>
                         <p>{{ t.successPointPanel.desc }}</p>
                     </header>
@@ -54,18 +74,18 @@
                             <source media="(max-width: 768px)" srcset="@/assets/images/dummy/mo/gsrst02010101_04_mo.png" />
                             <img src="@/assets/images/dummy/gsrst02010101_04.png" :alt="t.brandBannerImageAlt">
                         </picture>
-                        <Buttons type="button" btn-class="btn_icon_arrow btn_mid after border" @click="setTab(1)">{{ t.brandMoreButton }}</Buttons><!-- 26.06.10 Edit 이종환 : click 추가 -->
+                        <Buttons type="button" btn-class="btn_icon_arrow btn_big after primary" @click="setTab(1)">{{ t.brandMoreButton }}</Buttons><!-- 26.06.10 Edit 이종환 : click 추가 -->
                     </div>
                 </section>
                 <section class="sec_band">
                     <div class="inner">
                         <header class="section_header ac">
-                            <h2 v-html="brandSolutionPanel.title"></h2>
-                            <p>{{ brandSolutionPanel.desc }}</p>
+                            <h2 v-html="t.brandSolutionPanel.title"></h2>
+                            <p>{{ t.brandSolutionPanel.desc }}</p>
                         </header>
                         <ul class="link_grid">
-                            <li v-for="(item, i) in brandSolutionCards" :key="i">
-                                <a :href="item.url" class="btn_icon_arrow after">
+                            <li v-for="(item, i) in t.brandSolutionCards" :key="i">
+                                <a :href="item.url" class="btn_icon_arrow primary after">
                                     <span class="thumb" aria-hidden="true"></span>
                                     <span class="txt">
                                         <strong>{{ item.title }}</strong>
@@ -82,10 +102,10 @@
             <div class="panel sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <section class="sec_overlap">
                     <header class="section_header ac no_desc">
-                        <h2 v-html="competitivePanel.title"></h2>
+                        <h2 v-html="t.competitivePanel.title"></h2>
                     </header>
                     <ul class="overlap_grid">
-                        <li v-for="(item, i) in competitiveCards" :key="i">
+                        <li v-for="(item, i) in t.competitiveCards" :key="i">
                             <article>
                                 <span class="icon" aria-hidden="true"></span>
                                 <strong v-html="item.title"></strong>
@@ -96,17 +116,17 @@
                 <section class="sec_split">
                     <div class="inner">
                         <header class="section_header ac">
-                            <span class="tit">{{ storeOpenPanel.badge }}</span>
-                            <h2>{{ storeOpenPanel.title }}</h2>
-                            <p>{{ storeOpenPanel.desc }}</p>
+                            <!-- <span class="tit">{{ t.storeOpenPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제*/ !-->
+                            <h2>{{ t.storeOpenPanel.title }}</h2>
+                            <p>{{ t.storeOpenPanel.desc }}</p>
                         </header>
                         <div class="split_layout">
                             <dl class="info_card is_end">
                                 <dt>
-                                    <strong>{{ storeOpenCards[0].title }}</strong>
+                                    <strong>{{ t.storeOpenCards[0].title }}</strong>
                                     <span class="icon" aria-hidden="true"></span>
                                 </dt>
-                                <dd>{{ storeOpenCards[0].desc }}</dd>
+                                <dd>{{ t.storeOpenCards[0].desc }}</dd>
                             </dl>
                             <figure class="split_media">
                                 <img :src="imgStoreOpen" alt="" />
@@ -114,27 +134,27 @@
                             <dl class="info_card is_start">
                                 <dt>
                                     <span class="icon" aria-hidden="true"></span>
-                                    <strong>{{ storeOpenCards[1].title }}</strong>
+                                    <strong>{{ t.storeOpenCards[1].title }}</strong>
                                 </dt>
-                                <dd>{{ storeOpenCards[1].desc }}</dd>
+                                <dd>{{ t.storeOpenCards[1].desc }}</dd>
                             </dl>
                         </div>
                     </div>
                 </section>
                 <section class="sec_stack">
                     <header class="section_header ac">
-                        <span class="tit">{{ productConceptPanel.badge }}</span>
-                        <h2>{{ productConceptPanel.title }}</h2>
-                        <p>{{ productConceptPanel.desc }}</p>
+                        <!-- <span class="tit">{{ t.productConceptPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제*/ !-->
+                        <h2>{{ t.productConceptPanel.title }}</h2>
+                        <p>{{ t.productConceptPanel.desc }}</p>
                     </header>
                     <div class="highlight_block">
                         <header class="sub_header">
-                            <h3>{{ megaHitPanel.title }}</h3>
-                            <strong>{{ megaHitPanel.subtitle }}</strong>
-                            <p v-html="megaHitPanel.desc"></p>
+                            <h3>{{ t.megaHitPanel.title }}</h3>
+                            <strong>{{ t.megaHitPanel.subtitle }}</strong>
+                            <p v-html="t.megaHitPanel.desc"></p>
                         </header>
                         <div class="highlight_body">
-                            <div v-for="(group, gi) in megaHitGroups" :key="gi">
+                            <div v-for="(group, gi) in t.megaHitGroups" :key="gi">
                                 <h4>{{ group.title }}</h4>
                                 <ul v-if="!isMobileView" role="list">
                                     <li v-for="(item, i) in group.items" :key="i">
@@ -176,9 +196,9 @@
                         </div>
                     </div>
                     <div class="dual_panel">
-                        <article v-for="(item, i) in freshFfCards" :key="i">
+                        <article v-for="(item, i) in t.freshFfCards" :key="i">
                             <header class="sub_header">
-                                <span class="tit">{{ item.badge }}</span>
+                                <span v-if="item.badge" class="tit">{{ item.badge }}</span>  <!-- 26.06.24 edit 정다희 : badge if문 추가  -->
                                 <h3>{{ item.title }}</h3>
                                 <p>{{ item.desc }}</p>
                             </header>
@@ -207,8 +227,8 @@
                     </div>                    
                     <div class="sub_block">
                         <header class="sub_header ac">
-                            <h3>{{ conceptStorePanel.title }}</h3>
-                            <p>{{ conceptStorePanel.desc }}</p>
+                            <h3>{{ t.conceptStorePanel.title }}</h3>
+                            <p>{{ t.conceptStorePanel.desc }}</p>
                         </header>
                         <Swiper
                             class="sub_swiper swiper_edge"
@@ -217,7 +237,7 @@
                             wrapper-tag="ul"
                             @swiper="onConceptStoreSwiper"
                         >
-                            <SwiperSlide v-for="(item, i) in conceptStoreCards" :key="i" tag="li">
+                            <SwiperSlide v-for="(item, i) in t.conceptStoreCards" :key="i" tag="li">
                                 <article>
                                     <figure :style="{ backgroundImage: `url(${item.image})` }" aria-hidden="true"></figure>
                                     <span>{{ item.badge }}</span>
@@ -251,12 +271,12 @@
                 </section>-->
                 <section class="sec_tri_grid">
                     <header class="section_header ac">
-                        <span class="tit">{{ operationSupportPanel.badge }}</span>
-                        <h2>{{ operationSupportPanel.title }}</h2>
-                        <p>{{ operationSupportPanel.desc }}</p>
+                        <!-- <span class="tit">{{ t.operationSupportPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제*/ !-->
+                        <h2>{{ t.operationSupportPanel.title }}</h2>
+                        <p>{{ t.operationSupportPanel.desc }}</p>
                     </header>
                     <ul>
-                        <li v-for="(card, i) in operationSupportCards" :key="i">
+                        <li v-for="(card, i) in t.operationSupportCards" :key="i">
                             <h3>{{ card.title }}</h3>
                             <dl>
                                 <template v-for="(item, j) in card.items" :key="j">
@@ -1648,7 +1668,7 @@ import Textarea from "@/components/Textarea.vue";
 import ConsultCalendar from "@/components/ConsultCalendar.vue";
 import ConsultTimePicker from "@/components/ConsultTimePicker.vue";
 import imgBg from "@/assets/images/dummy/gsrst02010101_01.png";
-import imgBg2 from "@/assets/images/dummy/gsrst02010101_02.jpg";
+import imgBg2 from "@/assets/images/dummy/gsrst02010101_02.png";
 import imgStoreOpen from "@/assets/images/dummy/gsrst02010101_03.png";
 import imgProduct01 from "@/assets/images/dummy/gsrst02010101_p_01.png"; 
 import imgProduct02 from "@/assets/images/dummy/gsrst02010101_p_02.png";
@@ -1818,29 +1838,6 @@ function onProductHitSwiper(swiper, index) {
 //         desc: "메가히트 상품부터 신선강화형 매장까지 GS25만의 차별화 컨셉으로 매출이 올라갑니다.",
 //     },
 // ];
-
-const brandSolutionPanel = {
-    title: "처음이어도 창업 가능한가요? <br class='m_br'/><span class='txt_blue'>그럼요!</span>",
-    desc: "경영주님 상황에 맞는 맞춤 솔루션을 찾아드립니다.",
-};
-
-const brandSolutionCards = [
-    {
-        title: "가맹 타입 소개",
-        desc: "나에게 딱 맞는 3가지 타입",
-        url: "#none",
-    },
-    {
-        title: "창업 절차 안내",
-        desc: "내 점포 오픈까지, 최소 30일!",
-        url: "#none",
-    },
-    {
-        title: "추천 점포",
-        desc: "지역, 상권, 투자비용에 맞는 추천 점포 확인",
-        url: "#none",
-    },
-];
 
 /* ── [D1=1 D2=0] 창업 절차 타임라인 ── */
 const startupProcessSteps = [
@@ -2301,19 +2298,19 @@ const benefitLifeRows = Array.from(
 );
 
 const competitivePanel = {
-    title: "수익성 중심 점포 오픈부터 스마트한 시스템과 밀착 지원까지<br /><span class='txt_blue'>1등 브랜드로 창업을 시작하세요.</span>",
+    title: "철저한 수익성 분석부터 오픈 후 밀착 지원까지<br /><span class='txt_blue'>1등 브랜드로 창업을 시작하세요.</span>", /*26.06.24 edit 정다희 : 타이틀 수정*/ 
 };
 
 const competitiveCards = [
     { title: "수익성 중심의<br />점포 오픈" },
-    { title: "고객에게 사랑받는<br />상품/컨셉" },
+    { title: "차별화 상품과<br />매장 컨셉" }, /**26.06.24 edit 정다희 : 타이틀 수정*/
     { title: "스마트한 시스템과<br />밀착 지원" },
 ];
 
 const storeOpenPanel = {
-    badge: "점포개발",
+    // badge: "점포개발", /**26.06.24 del 정다희 : badge 삭제*/ 
     title: "수익성 중심의 신규 점포 오픈",
-    desc: "점포 수 확장에만 집중하지 않아요. 경영주님과 본사 모두 수익성이 보이는 자리에 오픈합니다.",
+    desc: "경영주님과 본사 모두 수익성이 보이는 자리에 오픈합니다.", /**26.06.24 edit 정다희 : desc 수정*/
 };
 
 const storeOpenCards = [
@@ -2328,8 +2325,8 @@ const storeOpenCards = [
 ];
 
 const productConceptPanel = {
-    badge: "상품 & 컨셉",
-    title: "경쟁력 있는 상품과 차별화 컨셉",
+    // badge: "상품 & 컨셉", /**26.06.24 del 정다희 : badge 삭제*/ 
+    title: "차별화 상품과 매장 컨셉", /**26.06.24 edit 정다희 : 타이틀 수정*/ 
     desc: "메가 히트 상품부터 신선강화 매장까지 GS25만의 차별화된 컨셉으로 점포 수익성을 강화합니다.",
 };
 
@@ -2362,8 +2359,8 @@ const megaHitGroups = [
 const freshFfCards = [
     {
         badge: "GS25 Only",
-        title: "신성강화점",
-        desc: "편의점의 편리함 + 슈퍼의 신선함, 두 마리 토끼를 잡는 원스톱 장보기 매장",
+        title: "신선강화점", /**26.06.24 edit 정다희 : 오타 수정*/ 
+        desc: "편의점의 편리함 + 수퍼의 신선함, 두 마리 토끼를 잡는 원스톱 장보기 매장", /**26.06.24 edit 정다희 : 오타 수정*/ 
         points: [
             "365일, 24시간 언제 어디서나 신선식품 장보는 편의점",
             "1~2인 가구를 위한 소용량 소포장 장보기 상품 판매",
@@ -2372,7 +2369,7 @@ const freshFfCards = [
         linkText: "신선강화점 자세히 알아보기",
     },
     {
-        badge: "카운터 FF",
+        // badge: "카운터 FF", /**26.06.24 del 정다희 : badge 삭제*/ 
         title: "카운터 FF로 매출을 더하다",
         desc: "편의점에서 즐기는 전문점 퀄리티!",
         brands: [
@@ -2455,8 +2452,8 @@ const marketingCards = [
 ];
 
 const operationSupportPanel = {
-    badge: "운영 지원",
-    title: "든든한 운영 지원 & 스마트 인프라",
+    // badge: "운영 지원", /**26.06.24 del 정다희 : badge 삭제*/ 
+    title: "든든하고 편리한 지원시스템", /**26.06.24 edit 정다희 : 타이틀 수정*/ 
     desc: "창업이 처음이라도 걱정하지 마세요. 점포 오픈부터 안정적인 운영까지, GS25가 함께합니다.",
 };
 
@@ -2473,7 +2470,7 @@ const operationSupportCards = [
     {
         title: "스마트한 점포 운영 시스템",
         items: [
-            { term: "AI 자동발주", desc: "내 점포 판매 데이터와 결품 이력을 분석을 통한 발주 최적화" },
+            { term: "AI 자동발주", desc: "우리 점포 판매와 기회 손실 분석을 통한 자동발주 시스템 제공" }, /**26.06.24 edit 정다희 : desc 수정*/ 
             { term: "모바일 관리 시스템", desc: "언제 어디서나 발주·매출 실시간 확인" },
             { term: "직관적인 POS", desc: "누구나 배우기 쉽고 간편한 결제 시스템" },
         ],
@@ -3191,40 +3188,49 @@ const langData = {
             { item: "창업 혜택" },
         ],
         brandIntro: {
-            badge: "4년 연속, 편의점 매출 1위 브랜드 (22년~25년)",
-            title: "비교할수록 결국, GS25.",
-            desc: "점포당 매출 1위 브랜드<br class='p_br'/>함께 성장하기 위해, 점포의 숫자보다 경영주님의 수익을 먼저<br class='m_br'/>생각합니다.",
+            // badge: "4년 연속, 편의점 매출 1위 브랜드 (22년~25년)", //26.06.23 edit 정다희 : badge 삭제 
+            title: "새로운 시작의 기준,", //26.06.23 edit 정다희 : 타이틀 수정
+            // desc: "점포당 매출 1위 브랜드<br class='p_br'/>함께 성장하기 위해, 점포의 숫자보다 경영주님의 수익을 먼저<br class='m_br'/>생각합니다.", //26.06.23 edit 정다희 : desc 삭제 
         },
         brandApplyLinks: [
             {
                 title: "창업설명회 신청",
-                desc: "창업 전반에 대한 정보를 한 번에 안내드려요",
+                // desc: "창업 전반에 대한 정보를 한 번에 안내드려요", //26.06.23 del 정다희 : desc 삭제 
+                btnLabel: "신청하기", //26.06.23 edit 정다희 : btnLabel 추가
                 url: "#none",
             },
             {
                 title: "창업상담 신청",
-                desc: "창업에 대한 궁금증을 1:1 상담해 드려요",
+                // desc: "창업에 대한 궁금증을 1:1 상담해 드려요",  //26.06.23 del 정다희 : desc 삭제 
+                btnLabel: "신청하기", //26.06.23 edit 정다희 : btnLabel 추가
                 url: "#none",
             },
             {
-                title: "입점 제안/<br class='p_br'/>브랜드 전환 문의",
-                desc: "보유 자리 입점 제안 또는 브랜드 전환을 <br class='m_br'/>상담해드려요",
+                title: "입점 제안/브랜드 전환 문의",
+                // desc: "보유 자리 입점 제안 또는 브랜드 전환을 <br class='m_br'/>상담해드려요",  //26.06.23 del 정다희 : desc 삭제 
+                btnLabel: "신청하기", //26.06.23 edit 정다희 : btnLabel 추가
                 url: "#none",
             },
         ],
+        // 26.06.23 add 정다희 : brandApplyDesc 추가
+        brandApplyDesc: [
+            "창업 전반에 대한 정보를 한 번에 안내드려요.",
+            "창업에 대한 궁금증을 1:1 상담해 드려요.",
+            "보유 자리 입지 제안 또는 브랜드 전환을 상담해드려요.",
+        ],
+        // 26.06.23 edit 정다희 : brandStats 수정
         brandStats: [
-            { value: "18,000+", label: "전국 점포수" },
-            { value: "편의점 매출 1위", label: "점포당 연매출 6.4억+" },
-            { value: "470만명", label: "전국 일평균 방문 고객" },
+            { value: "18,000+ 점", label: "전국 점포수<br class='m_br'>(2025.12 기준)" },
+            { value: "점포당 매출 1위", label: "점포당 연매출 6.4억<br class='m_br'>(2025년)" },
         ],
         successPointPanel: {
-            badge: "SUCCESS POINT",
-            title: "경영주님이 편한 GS25<br /><span class='txt_blue'>창업 성공 포인트</span>",
-            desc: "GS25와 함께라면, 성공적인 창업이 가능합니다.",
+            // badge: "SUCCESS POINT", //26.06.23 edit 정다희 : badge 삭제 
+            title: "처음부터 끝까지 든든한 GS25<br /><span class='txt_blue'>창업 성공 포인트</span>", /*26.06.24 edit 정다희 : 타이틀 수정*/ 
+            desc: "GS25와 함께라면, 첫 창업은 확신으로 운영은 편리함으로 바뀝니다.", /*26.06.24 edit 정다희 : desc 수정*/
         },
         successPointCards: [
             {
-                em: "수익성 분석",
+                // em: "수익성 분석", /**26.06.24 del 정다희 : em 삭제*/ 
                 title: "수익성 중심의 신규 점포 오픈",
                 desc: "점포 개발 전문가의 현장분석과 데이터를 기반으로 수익성이 보이는 점포만 오픈합니다.",
             },
@@ -3239,8 +3245,28 @@ const langData = {
                 desc: "메가히트 상품부터 신선강화형 매장까지 GS25만의 차별화 컨셉으로 매출이 올라갑니다.",
             },
         ],
-        brandSolutionPanel,
-        brandSolutionCards,
+        // 26.06.23 edit 정다희 : brandSolutionPanel langData 분기
+        brandSolutionPanel: {
+            title: "창업이 처음이라도 걱정하지 마세요.",
+            desc: "경영주님 상황에 맞는 맞춤 솔루션을 찾아드립니다.",
+        },
+        brandSolutionCards: [
+            {
+                title: "가맹 타입 소개",
+                desc: "나에게 딱 맞는 3가지 타입",
+                url: "#none",
+            },
+            {
+                title: "창업 절차 안내",
+                desc: "내 점포 오픈까지, 최소 30일!",
+                url: "#none",
+            },
+            {
+                title: "추천 점포",
+                desc: "지역, 상권, 투자비용에 맞는 추천 점포 확인",
+                url: "#none",
+            },
+        ],
         startupProcessSteps,
         franchiseTypeGroups,
         consultEntryPanel,
@@ -3506,26 +3532,32 @@ const langData = {
             { item: "Startup benefits"/* 260604 번역 */ },
         ],
         brandIntro: {
-            badge: "No. 1 convenience store brand in sales for 4 consecutive years (2022 to 2025)"/* 260604 번역 */,
-            title: "The more you compare, the more it's GS25."/* 260604 번역 */,
-            desc: "No. 1 brand in sales per store<br class='p_br'/>To grow together, we put the store owner's profit before the number of stores<br class='m_br'/>we believe."/* 260604 번역 */,
+            // badge: "No. 1 convenience store brand in sales for 4 consecutive years (2022 to 2025)"/* 260604 번역 */, /*26.06.23 del 정다희  */
+            title: "The standard for a new beginning,"/* 260604 번역 */,
+            //desc: "No. 1 brand in sales per store<br class='p_br'/>To grow together, we put the store owner's profit before the number of stores<br class='m_br'/>we believe."/* 260604 번역 */,
         },
         brandApplyLinks: [
             {
                 title: "Apply for startup briefing"/* 260604 번역 */,
-                desc: "We provide information on the entire startup process all at once"/* 260604 번역 */,
+                btnLabel: "Apply"/* 260604 번역 */,
                 url: "#none",
             },
             {
                 title: "Apply for startup consultation"/* 260604 번역 */,
-                desc: "We offer 1:1 consultation for your questions about starting a business"/* 260604 번역 */,
+                btnLabel: "Apply"/* 260604 번역 */,
                 url: "#none",
             },
             {
-                title: "Store entry proposal/<br class='p_br'/>Brand Switch Inquiry"/* 260604 번역 */,
-                desc: "Proposal to open a store at your location or to switch brands <br class='m_br'/>We're here to help"/* 260604 번역 */,
+                title: "Location proposal/Brand conversion inquiry"/* 260604 번역 */,
+                btnLabel: "Inquire"/* 260604 번역 */,
                 url: "#none",
             },
+        ],
+        // 26.06.23 add 정다희 : brandApplyDesc 추가 (영문 번역 대기)
+        brandApplyDesc: [
+            "We guide you through all startup information at once.",
+            "We provide 1:1 consultation for your startup questions.",
+            "We consult on location proposals or brand conversion for your property.",
         ],
         brandStats: [
             { value: "18,000+", label: "Number of stores nationwide"/* 260604 번역 */ },
@@ -3533,7 +3565,7 @@ const langData = {
             { value: "4.7 million people"/* 260604 번역 */, label: "Nationwide average daily visiting customers"/* 260604 번역 */ },
         ],
         successPointPanel: {
-            badge: "SUCCESS POINT",
+            // badge: "SUCCESS POINT", //26.06.23 del 정다희 
             title: "GS25, comfortable for store owners<br /><span class='txt_blue'>Keys to startup success</span>"/* 260604 번역 */,
             desc: "With GS25, a successful startup is possible."/* 260604 번역 */,
         },
@@ -3554,8 +3586,28 @@ const langData = {
                 desc: "From mega-hit products to fresh-focused stores, GS25's unique differentiated concepts drive up sales."/* 260604 번역 */,
             },
         ],
-        brandSolutionPanel,
-        brandSolutionCards,
+        // 26.06.23 edit 정다희 : brandSolutionPanel langData 분기
+        brandSolutionPanel: {
+            title: "Don't worry even if it's your first startup.",
+            desc: "We'll find customized solutions that fit your situation.",
+        },
+        brandSolutionCards: [
+            {
+                title: "Franchise type introduction"/* 260604 번역 */,
+                desc: "3 types that fit you perfectly"/* 260604 번역 */,
+                url: "#none",
+            },
+            {
+                title: "Startup process guide"/* 260604 번역 */,
+                desc: "Minimum 30 days until your store opens!"/* 260604 번역 */,
+                url: "#none",
+            },
+            {
+                title: "Recommended stores"/* 260604 번역 */,
+                desc: "Check recommended stores by region, commercial area, and investment cost"/* 260604 번역 */,
+                url: "#none",
+            },
+        ],
         startupProcessSteps,
         franchiseTypeGroups,
         consultEntryPanel,
@@ -3567,20 +3619,164 @@ const langData = {
         benefitLifePanel,
         benefitLifeItems,
         benefitLifeNote,
-        competitivePanel,
-        competitiveCards,
-        storeOpenPanel,
-        storeOpenCards,
-        productConceptPanel,
-        megaHitPanel,
-        megaHitGroups,
-        freshFfCards,
-        conceptStorePanel,
-        conceptStoreCards,
-        marketingPanel,
-        marketingCards,
-        operationSupportPanel,
-        operationSupportCards,
+        competitivePanel: {
+            title: "From thorough profitability analysis to close post-opening support<br /><span class='txt_blue'>Start your business with the No. 1 brand.</span>",
+        },
+        competitiveCards: [
+            { title: "Profitability-focused<br />store opening" },
+            { title: "Differentiated products<br />and store concepts" },
+            { title: "Smart systems and<br />close support" },
+        ],
+        storeOpenPanel: {
+            // badge: "Store Development", /**26.06.24 del 정다희 : badge 삭제*/ 
+            title: "Profitability-focused new store opening",
+            desc: "Both the franchise owner and headquarters open locations where profitability is visible.", /**26.06.24 edit 정다희 : desc 수정*/ 
+        },
+        storeOpenCards: [
+            {
+                title: "Data-driven commercial area analysis",
+                desc: "Precise commercial area analysis using industry-leading geographic information systems and big data.",
+            },
+            {
+                title: "On-site verification of commercial area vitality",
+                desc: "Profitable stores are developed through on-site verification and systematic analysis by store development experts (RFC).",
+            },
+        ],
+        productConceptPanel: {
+            // badge: "Products & Concept", /**26.06.24 del 정다희 : badge 삭제*/ 
+            title: "Differentiated products and store concept", /**26.06.24 edit 정다희 : 타이틀 수정*/ 
+            desc: "From mega-hit products to fresh-focused stores, GS25's unique concepts strengthen store profitability.",
+        },
+        megaHitPanel: {
+            title: "Mega Hit Products",
+            subtitle: "New products every week!",
+            desc: "From steady sellers to SNS-popular items,<br />we capture customer foot traffic.",
+        },
+        megaHitGroups: [
+            {
+                title: "Steady Sellers",
+                items: [
+                    { label: "The icon of value lunch boxes", title: "Generous Lunch Box", image: imgProduct01 },
+                    { label: "Cumulative sales exceed 100 million units", title: "Omori Kimchi Stew Ramen", image: imgProduct02 },
+                    { label: "From GS25 exclusive brand to overseas expansion", title: "YOUUS", image: imgProduct03 },
+                    { label: "No. 1 coffee rated by baristas", title: "Cafe25", image: imgProduct04 },
+                ],
+            },
+            {
+                title: "SNS Popular Products",
+                items: [
+                    { label: "", title: "Mochi Roll", image: imgProduct05 },
+                    { label: "", title: "Ice Brulee Series", image: imgProduct06 },
+                    { label: "", title: "Matsamchon Strawberry Sandwich", image: imgProduct07 },
+                ],
+            },
+        ],
+        freshFfCards: [
+            {
+                badge: "GS25 Only",
+                title: "Fresh-Focused Store",
+                desc: "Convenience of a convenience store + freshness of a supermarket—a one-stop grocery store.",
+                points: [
+                    "A convenience store where you can buy fresh food anytime, anywhere, 365 days a year, 24 hours a day.",
+                    "Small-portion grocery products for 1–2 person households.",
+                ],
+                images: [imgSinsen01, imgSinsen02],
+                linkText: "Learn more about fresh-focused stores",
+            },
+            {
+                // badge: "Counter FF", /**26.06.24 del 정다희 : badge 삭제*/ 
+                title: "Boost sales with Counter FF",
+                desc: "Specialty-store quality at a convenience store!",
+                brands: [
+                    {
+                        title: "CAFE25",
+                        desc: "GS25's bean coffee made with premium coffee machines and beans at reasonable prices.",
+                        image: imgCounter01,
+                    },
+                    {
+                        title: "CHICKEN25",
+                        desc: "Specialty-level chicken freshly prepared at the convenience store.",
+                        image: imgCounter02,
+                    },
+                    {
+                        title: "GO PIZZA",
+                        desc: "Specialty-quality freshly baked pizza anytime, anywhere.",
+                        image: imgCounter03,
+                    },
+                ],
+            },
+        ],
+        conceptStorePanel: {
+            title: "Commercial area-tailored concept stores",
+            desc: "We operate differentiated stores optimized for local commercial areas and customer characteristics.",
+        },
+        conceptStoreCards: [
+            { badge: "#Traditional Flagship Store", title: "GS25 Suwon Haengnigungil Store", image: imgStore01 },
+            { badge: "#Digital Solution Specialty", title: "GS25 DXLAB Store", image: imgStore02 },
+            { badge: "#Hanwha Eagles Collaboration #Sports Specialty", title: "GS25 Hanwha Life Ballpark", image: imgStore03 },
+            { badge: "#LG Twins Collaboration #Sports Specialty", title: "GS25 Jamsil Tower Store", image: imgStore04 },
+        ],
+        marketingPanel: {
+            badge: "Marketing & Membership",
+            title: "Marketing and membership that build regular customers",
+            desc: "From the 'Our Neighborhood GS' app to SNS channels with 1 million subscribers—creating reasons customers return.",
+            desc2: "Marketing support that drives sales growth",
+        },
+        marketingCards: [
+            {
+                em: "No. 1 convenience store app downloads in Korea",
+                title: "Our Neighborhood GS",
+                desc: "From promotional product storage to ordering from 5,000+ wines and liquors",
+            },
+            {
+                em: "No. 1 convenience store app downloads in Korea",
+                title: "GS ALL Membership",
+                desc: "Earn and use points at GS25, GS The Fresh, and GS SHOP",
+            },
+            {
+                em: "No. 1 convenience store app downloads in Korea",
+                title: "Membership Card / Prepaid Card",
+                desc: "Carrier membership discounts, GS ALL point accumulation, Pop Card promotions, and more",
+            },
+            {
+                em: "Each surpassing 1 million followers and subscribers",
+                title: "GS25 Instagram / YouTube",
+                desc: "Expand customer touchpoints with new product news, events, and talk content",
+            },
+        ],
+        operationSupportPanel: {
+            // badge: "Operation Support", /**26.06.24 del 정다희 : badge 삭제*/ 
+            title: "A solid and convenient support system", /**26.06.24 edit 정다희 : 타이틀 수정*/ 
+            desc: "Don't worry even if it's your first startup. GS25 is with you from store opening to stable operations.",
+        },
+        operationSupportCards: [
+            {
+                title: "'Close Care' system for new entrepreneurs",
+                items: [
+                    { term: "Customized Consulting", desc: "Optimal store matching through consultation with startup consultants" },
+                    { term: "One-Stop Opening Support", desc: "Support for complex procedures including facilities/interior, new owner training, startup loans, and permit guidance" },
+                    { term: "On-Site Close Care", desc: "Dedicated staff on-site for 4 days after opening to support initial settlement" },
+                    { term: "Post-Adaptation Management", desc: "Peace-of-mind companion service for difficult adaptation periods to stabilize operations" },
+                ],
+            },
+            {
+                title: "Smart store operation system",
+                items: [
+                    { term: "AI Auto-Ordering", desc: "Providing an automatic ordering system through sales and opportunity loss analysis of our stores" }, /**26.06.24 edit 정다희 : desc 수정*/ 
+                    { term: "Mobile Management System", desc: "Check orders and sales in real time anytime, anywhere" },
+                    { term: "Intuitive POS", desc: "Easy-to-learn, simple payment system for anyone" },
+                ],
+            },
+            {
+                title: "Ongoing operation support after opening",
+                items: [
+                    { term: "1:1 Dedicated Management", desc: "On-site visits and customized solutions from sales experts" },
+                    { term: "24-Hour Call Center", desc: "24/7, year-round support without gaps" },
+                    { term: "KakaoTalk Chatbot Support", desc: "KakaoTalk chatbot Joy for store owner and staff work support" },
+                    { term: "Education Platform Support", desc: "Online academy for store operation skills and communication" },
+                ],
+            },
+        ],
         convenienceDefinePanel,
         convenienceEvolutionCore,
         convenienceEvolutionStages,
@@ -3948,22 +4144,34 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 
 /* ========== D1=0 · GS25 창업 알아보기 (activeD1 === 0) ========== */
 /* --- D2=0 · GS25 브랜드 소개 (activeD2 === 0) --- */
-.sec_hero { min-height: 700px; padding: 97px 100px 77px; background-size: cover; background-position: center; border-radius: 20px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
-.sec_hero::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); position: absolute; top: 0; left: 0; content: ''; }
-.sec_hero > header, .sec_hero > .action_list, .sec_hero > .metric_list { position: relative; z-index: 1; }
-.sec_hero > header > .tit { width: fit-content; margin: 0; padding: 8px 16px; color: #fff; font-size: 1.4rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; background-color: rgba(255,255,255,0.2); border: 0; border-radius: 99px; }
-.sec_hero > header > h3 { margin: 8px 0 0; color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
-.sec_hero > header > .desc { color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
-.sec_hero > .action_list { width: 100%; max-width: 540px; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
-.sec_hero > .action_list > li > a { width: 100%; min-height: 51px; padding: 12px 20px; color: #fff; background-color: rgba(16,122,242,0.8); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.sec_hero > .action_list > li:last-child > a { min-height: 64px; align-items: center; }
-.sec_hero > .action_list > li > a > strong { flex: 0 0 114px; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
-.sec_hero > .action_list > li:last-child > a > strong { flex-basis: 114px; font-size: 1.6rem; line-height: 1.24; }
-.sec_hero > .action_list > li > a > span { min-width: 0; flex: 1; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_hero > .metric_list { width: 100%; max-width: 647px; margin-top: 50px; display: flex; gap: 10px; }
-.sec_hero > .metric_list > li { min-width: 0; min-height: 95px; flex: 1; padding: 20px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
+.sec_hero { height: 700px; padding: 100px 100px 107px; background-size: cover; background-position: center; border-radius: 20px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+.sec_hero::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.6);backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);position: absolute; top: 0; left: 0; content: ''; }
+.sec_hero > header, 
+.sec_hero > .action_list,
+.sec_hero > .metric_list,
+.sec_hero > .desc_list { position: relative; z-index: 1; }
+.sec_hero > header .tit { width: fit-content; margin: 0; padding: 8px 16px; color: #fff; font-size: 1.4rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; background-color: rgba(255,255,255,0.2); border: 0; border-radius: 99px; }
+.sec_hero > header h3 {color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.sec_hero > header .desc { color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
+.sec_hero > header .hero_title { display: flex; align-items: center; }
+.sec_hero > header .hero_title > div{width:155px;margin-left:12px;}
+.sec_hero > header .hero_title img {width:100%;height:auto; display: block;}
+.sec_hero > .action_list { width: 100%; margin-top: 30px; display: flex; align-items: stretch; gap: 10px; }
+.sec_hero > .action_list > li { min-width: 0; max-width:300px; flex: 1; display: flex; }
+/* 26.06.23 edit 정다희 : — 카드형 바로가기 */
+.sec_hero > .action_list > li > a.action_card { width: 100%; height: 100%; flex: 1; padding: 30px 20px; color: #fff; background-color: rgba(16,122,242,0.8); border-radius: 12px; text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.sec_hero > .action_list > li > a.action_card > strong { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_hero > .action_list > li:last-child > a.action_card > strong { width: 100%; text-align: center; }
+.sec_hero > .action_list > li > a.action_card > .action_card_btn { font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 8px; }
+.sec_hero > .action_list > li > a.action_card > .action_card_btn > em { font-style: normal; }
+.sec_hero > .action_list > li > a.action_card > .action_card_btn::after { width: 20px; height: 20px; background: url('@/assets/images/common/chevron_icon_20.png') no-repeat center; content: ''; display: block; flex-shrink: 0; }
+.sec_hero > .action_list > li > a.action_card::after{display: none;}
+.sec_hero > .desc_list { margin-top: 20px; display: flex; flex-direction: column; }
+.sec_hero > .desc_list li{color:#fff;font-weight: 700;font-size: 1.8rem;line-height: 1.5;}
+.sec_hero > .metric_list { width: 100%; margin-top: 40px; display: flex; gap: 10px; }
+.sec_hero > .metric_list > li { min-width: 0; flex: 0 0 230px; padding: 20px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
 .sec_hero > .metric_list > li > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_hero > .metric_list > li > span { color: rgba(255,255,255,0.8); font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+.sec_hero > .metric_list > li > span { color: #fff; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
 .sec_num_list :deep(.num_info_item) { padding: 0; border-bottom: 0; }
 .sec_num_list :deep(.num_info_num) { margin-bottom: 8px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
@@ -3972,19 +4180,20 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_num_list :deep(.num_info_title) { margin-bottom: 8px; }
 .sec_num_list :deep(.num_info_title > strong) { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_num_list :deep(.num_info_body > p) { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_img_banner > div { padding:70px 70px 30px; background:#F8F8F8; text-align: center; }
+.sec_img_banner > div { padding:70px 70px 30px; background:#F8F8F8; text-align: center; border-radius: 16px;}
 .sec_img_banner .image_wrap { display:block; margin-bottom:32px; }
 .sec_band > .inner > .link_grid { display: flex; align-items: stretch; gap: 20px; }
 .sec_band > .inner > .link_grid > li { min-width: 0; flex: 1; display: flex; }
-.sec_band > .inner > .link_grid > li > a { width: 100%; min-height: 144px; padding: 32px 24px; background-color: #fff; border-radius: 12px; display: flex; align-items: center; gap: 20px; }
-.sec_band > .inner > .link_grid > li > a > .thumb { position: relative; width: 80px; height: 80px; flex-shrink: 0; background-color: #f8f8f8; border-radius: 12px; }
+.sec_band > .inner > .link_grid > li > a { width: 100%; height: 144px; padding: 32px 24px; background-color: #107AF2; border-radius: 12px; display: flex; align-items: center; gap: 20px; }
+.sec_band > .inner > .link_grid > li > a::after{width: 24px; height:24px; margin:0; background: url('@/assets/images/common/arrow_set_24.png') no-repeat -64px -20px; filter: brightness(0) invert(1); content: ''; display: block; flex-shrink: 0; }
+.sec_band > .inner > .link_grid > li > a > .thumb { position: relative; width: 80px; height: 80px; flex-shrink: 0; background-color: #E7F2FE; border-radius: 12px; }
 .sec_band > .inner > .link_grid > li > a > .thumb:before {content:''; width: 40px; height: 40px; background: url('@/assets/images/sub/icon_cont_40.png') no-repeat; display: block; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);}
-.sec_band > .inner > .link_grid > li:nth-of-type(1) > a > .thumb:before { background-position: -260px -20px; }
-.sec_band > .inner > .link_grid > li:nth-of-type(2) > a > .thumb:before { background-position: -580px -343px; }
-.sec_band > .inner > .link_grid > li:nth-of-type(3) > a > .thumb:before { background: url('@/assets/images/sub/icon_cont2_40.png') no-repeat; background-position: 0 -1140px; }
+.sec_band > .inner > .link_grid > li:nth-of-type(1) > a > .thumb:before {background-image: url('@/assets/images/sub/guide_icon_blue01.png'); }
+.sec_band > .inner > .link_grid > li:nth-of-type(2) > a > .thumb:before {background-image: url('@/assets/images/sub/guide_icon_blue02.png'); }
+.sec_band > .inner > .link_grid > li:nth-of-type(3) > a > .thumb:before {background-image: url('@/assets/images/sub/guide_icon_blue03.png'); }
 .sec_band > .inner > .link_grid > li > a > .txt { min-width: 0; flex: 1; }
-.sec_band > .inner > .link_grid > li > a > .txt > strong { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
-.sec_band > .inner > .link_grid > li > a > .txt > .desc { margin-top: 6px; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
+.sec_band > .inner > .link_grid > li > a > .txt > strong { color:#fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_band > .inner > .link_grid > li > a > .txt > .desc { margin-top: 6px; color: #fff; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
 .sec_overlap > .overlap_grid { width: 100%; max-width: 1040px; margin: 0 auto; display: flex; justify-content: center; }
 .sec_overlap > .overlap_grid > li { max-width: 100%; min-width: 0; flex: 0 1 260px; position: relative; }
 .sec_overlap > .overlap_grid > li + li { margin-left: -30px; }
@@ -4007,7 +4216,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_split > .inner > .split_layout > .info_card { width: 100%; max-width: 500px; min-height: 164px; margin: 0; padding: 32px 24px; background-color: #fff; border-radius: 20px; }
 .sec_split > .inner > .split_layout > .info_card > dt { display: flex; align-items: center; gap: 8px; }
 .sec_split > .inner > .split_layout > .info_card > dt > .icon { width: 32px; height: 32px; flex-shrink: 0; background: url('@/assets/images/sub/icon_cont_32.png') no-repeat; }
-.sec_split > .inner > .split_layout > .info_card > dt > strong { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_split > .inner > .split_layout > .info_card > dt > strong { font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_split > .inner > .split_layout > .info_card > dd { margin: 20px 0 0; color: #67676f; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_split > .inner > .split_layout > .info_card.is_end > dt { justify-content: flex-end; }
 .sec_split > .inner > .split_layout > .info_card.is_end > dt > .icon { background-position: -978px -186px; filter: brightness(0) saturate(100%) invert(34%) sepia(93%) saturate(3995%) hue-rotate(202deg) brightness(104%) contrast(90%); }
@@ -4046,15 +4255,15 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .dual_panel > article > .stack_list > li > .thumb { width: 77px; height: 77px; flex-shrink: 0; background-color: #d9d9d9; background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 12px; }
 .sec_stack > .dual_panel > article > .stack_list > li > div { min-width: 0; flex: 1; }
 .sec_stack > .dual_panel > article > .stack_list > li > div > strong { font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
-.sec_stack > .dual_panel > article > .stack_list > li > div > p { margin-top: 2px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_stack > .dual_panel > article > .stack_list > li > div > p { margin-top: 6px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_stack > .dual_panel > article > .btn_mid { margin-top: 24px; }
 .sec_stack > .dual_panel > article > ul > li { font-size: 1.8rem }
 .sec_stack > .sub_block { margin-top: 60px; }
 .sec_stack > .sub_block > .sub_swiper { margin-top: 40px; overflow: hidden; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-wrapper) { align-items: stretch; }
-.sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) { width: 360px; height: auto; }
-.sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > figure { width: 100%; aspect-ratio: 360/240; margin: 0; background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 12px; overflow: hidden; }
-.sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { width: fit-content; margin-top: 16px; padding: 3px 6px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 4px; display: inline-block; }
+.sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) { width: 340px; height: auto; }
+.sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > figure { width: 100%; aspect-ratio: 340/277; margin: 0; background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 12px; overflow: hidden; }
+.sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { width: fit-content; margin-top: 24px; padding: 3px 6px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 4px; display: inline-block; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong { margin-top: 6px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_icon_grid > .inner > .icon_grid { margin: 0; padding: 0; display: grid; align-items: stretch; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .sec_icon_grid > .inner > .icon_grid > li { height: 100%; }
@@ -4653,7 +4862,12 @@ letter-spacing: -0.01em;
     .seminar_list { gap: 48px; }
     .seminar_item_body { flex-direction: column; min-height: 0; gap: 16px; }
     .seminar_map { flex: none; height: clamp(220px, 34vw, 320px); border-radius: 12px; }
-   
+    /* 26.06.23 add 정다희 : sec_hero hero_title 태블릿 최적화 */
+    .sec_hero { height: auto; min-height: 600px; padding: 60px 40px 80px; }
+    .sec_hero > header .hero_title { flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+    .sec_hero > header h3 { font-size: 4.2rem; line-height: 1.3; letter-spacing: -0.01em; }
+    .sec_hero > header .hero_title > h3 { min-width: 0; flex: 1 1 auto; }
+    .sec_hero > header .hero_title > div { width: 130px; margin-left: 0; flex-shrink: 0; }
 
 }
 /* ========== Mobile 768px 이하 ========== */
@@ -4704,20 +4918,27 @@ letter-spacing: -0.01em;
     .sec_gs25_faq :deep(.tab_wrap ul.type_01 li.current .item) { color: #107af2; background-color: #e7f2fe; border-color: #107af2; }
     :deep(.faq_acc_badge.board_type_toggle.type_faq dt > a.acc_tit_btn > .badge) { padding: 4px 8px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_gs25_faq :deep(.pagination) { margin-top: 40px; }
-    .sec_hero { max-height: none; min-height: 640px; padding: 50px 20px; border-radius: 20px; gap: 0; }
+    .sec_hero { max-height: none; height: 640px; padding: 59px 20px; border-radius: 20px; gap: 0; }
     .sec_hero > header { text-align: center; }
+    .sec_hero > header .hero_title{flex-direction: column;gap: 8px;}
+    .sec_hero > header .hero_title > div{width:124px;}
+    .sec_hero > header h3{font-size: 3.2rem;}
     .sec_hero > header > .tit { margin: 0 auto; padding: 8px 16px; font-size: 1.2rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_hero > header > h3 { margin: 8px 0 0; font-size: 3rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
     .sec_hero > header > .desc { margin-top: 4px; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
-    .sec_hero > .action_list { width: 100%; max-width: none; margin-top: 50px; gap: 10px; }
-    .sec_hero > .action_list > li > a { min-height: 62px; padding: 12px 16px; padding-right: 40px; position: relative; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; }
-    .sec_hero > .action_list > li:last-child > a { min-height: 76px; align-items: flex-start; }
-    .sec_hero > .action_list > li > a > strong { width: 100%; flex: none; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
-    .sec_hero > .action_list > li:last-child > a > strong { flex-basis: auto; font-size: 1.6rem; line-height: 1.24; }
-    .sec_hero > .action_list > li > a > span { width: 100%; font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
-    .sec_hero > .action_list > li > a::after { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); }
-    .sec_hero > .metric_list { width: 100%; max-width: none; margin-top: 24px; flex-direction: row; gap: 10px; }
-    .sec_hero > .metric_list > li { min-width: 0; min-height: 103px; flex: 1; padding: 16px 10px; gap: 3px; }
+    .sec_hero > .action_list { width: 100%; max-width: none; margin-top: 60px; flex-direction: column; }
+    .sec_hero > .action_list > li{max-width:none;}
+    .sec_hero > .action_list > li > a.action_card{flex-direction: row;}
+    .sec_hero > .action_list > li > a.action_card::after{display: block;}
+    .sec_hero > .action_list > li > a.action_card { min-height: auto; padding: 12px 16px; gap: 0; justify-content: center; }
+    .sec_hero > .action_list > li > a.action_card > strong { width: 100%; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_hero > .action_list > li:last-child > a.action_card > strong { text-align: left; }
+    .sec_hero > .action_list > li > a.action_card > .action_card_btn { display: none; }
+    
+    .sec_hero > .desc_list{margin-top:16px;}
+    .sec_hero > .desc_list li{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    .sec_hero > .metric_list { width: 100%; max-width: none; margin-top: 40px; flex-direction: row; gap: 10px; }
+    .sec_hero > .metric_list > li { min-width: 0; flex: 1; padding: 16px 10px; gap: 3px; }
     .sec_hero > .metric_list > li > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
     .sec_hero > .metric_list > li > span { font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
     .sec_num_list .section_header > h2 + p { color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
@@ -4734,11 +4955,11 @@ letter-spacing: -0.01em;
     .sec_band > .inner { padding: 40px 20px; }
     .sec_band > .inner > .link_grid { margin-top: 32px; gap: 10px; }
     .sec_band > .inner > .link_grid > li > a { height: auto; min-height: 0; padding: 16px; gap: 16px; }
-    .sec_band > .inner > .link_grid > li > a > .thumb { width: 64px; height: 64px; }
-    .sec_band > .inner > .link_grid > li > a > .thumb:before {width: 32px; height: 32px; ;}
-    .sec_band > .inner > .link_grid > li:nth-of-type(1) > a > .thumb:before { background-image: url('@/assets/images/sub/icon_cont_32.png');}
+    .sec_band > .inner > .link_grid > li > a > .thumb { width: 60px; height: 60px; }
+    .sec_band > .inner > .link_grid > li > a > .thumb:before {width: 32px; height: 32px; background-size: cover;}
+    /* .sec_band > .inner > .link_grid > li:nth-of-type(1) > a > .thumb:before { background-image: url('@/assets/images/sub/icon_cont_32.png');}
     .sec_band > .inner > .link_grid > li:nth-of-type(2) > a > .thumb:before { background-position: -453px -268px; background-size: 1000px auto; }
-    .sec_band > .inner > .link_grid > li:nth-of-type(3) > a > .thumb:before { background-position: 0 -828px; background-size: 32px auto;}
+    .sec_band > .inner > .link_grid > li:nth-of-type(3) > a > .thumb:before { background-position: 0 -828px; background-size: 32px auto;} */
     .sec_band > .inner > .link_grid > li > a > .txt > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .sec_band > .inner > .link_grid > li > a > .txt > .desc { font-size: 1.4rem; line-height: 1.4; }
     .sec_overlap > .overlap_grid { width: 100%; max-width: 335px; margin: 0 auto; flex-wrap: wrap; align-content: flex-start; justify-content: flex-start; gap: 0; }
