@@ -3,6 +3,7 @@
         <section class="visual top_visual">
             <strong v-html="t.VisualTitle"></strong>
             <p v-html="t.ceo"></p>
+            ㄴㅇㄹㄴㄴㅇㄹㄴㅇ
         </section>
 
         <!-- 26.05.26 Del 이종환 <section class="about">
