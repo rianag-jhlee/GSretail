@@ -489,7 +489,7 @@
                                 <div>
                                     <p v-if="step.lead" class="lead">{{ step.lead }}</p>
                                     <h3>{{ step.title }}</h3>
-                                    <p class="desc">{{ step.desc }}</p>
+                                    <p class="desc" v-html="step.desc"></p> <!-- 26.06.24 edit 정다희 : v-html로 수정 -->
                                     <button
                                         v-if="hasProcessMore(step)"
                                         href="#none"
@@ -1894,7 +1894,7 @@ const startupProcessSteps = [
         num: 6,
         lead: "GS25의 노하우, 여기서 다 배워요!",
         title: "신규 경영주 교육",
-        desc: "총 7일(영업일 기준) 코스로 온라인 강의부터 매장 실습까지, 점포 운영에 필요한 모든 것을 배워요",
+        desc: "총 7일(영업일 기준) 코스로 온라인 강의부터 매장 실습까지, 점포 운영에<br class='p_br'/>필요한 모든 것을 배워요",
         moreLink: true,
         moreList: ["전국의 교육장에서 교육 전문가와 함께 수업이 진행돼요"],
     },
@@ -1921,13 +1921,14 @@ const startupProcessSteps = [
         moreLink: true,
         moreList: ["개점 하루 전 경영주님의 최종 검수가 진행됩니다."],
     },
+    /* 26.06.24 edit 정다희 : D-Day 타이틀 및 설명 수정 */
     {
         theme: "dday",
         dayLabel: "D-Day",
         num: 9,
         lead: "",
-        title: "드디어 개점! 축하합니다!",
-        desc: "이제 GS25 경영주님으로 새로운 시작입니다. 앞으로도 GS25가 늘 곁에서 함께합니다!",
+        title: "점포 오픈! 축하합니다!",
+        desc: "이제 GS25 경영주님으로 새로운 시작입니다.<br />앞으로도 GS25가 늘 곁에서 함께합니다!<br />점포 운영에 필요한 모든것을 배워요.!",
         moreLink: false,
     },
 ];
@@ -1951,7 +1952,7 @@ const franchiseTypeGroups = [
         key: "stable",
         themeClass: "is_stable",
         title: "본부 임차형",
-        desc: "본부가 임차한 점포에서 합리적인 투자금으로 시작해보세요.",
+        desc: "본부가 임차한 점포에서 합리적인 투자금과 배분율로 시작해보세요.", /*26.06.24 edit 정다희 : 설명 수정*/ 
         cards: [
             {
                 badge: "GS 2 Type",
@@ -3132,7 +3133,7 @@ const langData = {
         franchiseFormulaAriaLabel: "프랜차이즈 성공 공식",
         regionCounselMapAriaLabel: "지도 연동 예정 영역",
         closeLabel: "닫기",
-        startupProcessTitle: "상담 신청부터 개점까지, <br />약 30일이면 나만의 GS25를 오픈할 수 있어요!",
+        startupProcessTitle: "상담 신청부터 개점까지, <br />최소 30일이면 나만의 GS25를 오픈할 수 있어요!", /*26.06.24 edit 정다희 : 타이틀 수정*/
         processMoreOpenLabel: "더 알아보기",
         processMoreCloseLabel: "접기",
         franchiseTypeTitle: "내 자금과 상황에 딱 맞게! <br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요",
@@ -3379,7 +3380,7 @@ const langData = {
             compareNote1: "* GS1 Type 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년",
             compareNote2: "* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다",
             compareNote3: "* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href=\"#\">신선강화점 자세히 알아보기</a>)",
-            compareNote4: "* 안심운영제도란? 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우,<br/>경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. (<a href=\"#\">안심운영제도 자세히 알아보기</a>)",
+            compareNote4: "* 안심운영제도란?<br /> 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우, 경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. ", /*26.06.24 edit 정다희 : br 위치 수정, 링크삭제*/
             benefitPolicyNote: "* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.",
             storeTableRegion: "지역",
             storeTableType: "타입",
@@ -4263,7 +4264,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li:nth-of-type(8) > article > .icon:before {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0201_08.png') no-repeat center / contain;}
 .sec_startup_process .process_timeline > li:nth-of-type(9) > article > .icon:before {background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0201_09.png') no-repeat center / contain;}
 .sec_startup_process .process_timeline > li > article > div { min-width: 0; flex: 1 1 auto; }
-.sec_startup_process .process_timeline > li > article > div > .lead { margin: 0 0 2px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_startup_process .process_timeline > li > article > div > .lead { margin: 0 0 2px; color: #107af2; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_startup_process .process_timeline > li > article > div > h3 { margin: 0 0 2px; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_startup_process .process_timeline > li > article > div > .desc { margin: 0; color: #67676f; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
 .sec_startup_process .process_timeline > li > article >  div > .link_more { margin-top: 12px; color: #107af2; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; background: transparent; display: inline-flex; align-items: center; gap: 4px; }
@@ -4275,37 +4276,29 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li + li { margin-top: 4px; }
 .sec_startup_process .process_timeline > li > article > div > .process_more.acc_panel > .acc_panel_inner > .acc_panel_cont > .list_dotted > li::before { width: 4px; height: 4px; background-color: #666; top: 9px; }
 .sec_startup_process .process_timeline > li:not([data-theme="dday"]) > article:hover { box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.25); }
-.sec_startup_process .process_timeline > li[data-theme="start"] > article:hover { border-color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="none"] > article:hover { border-color: #00D4EA; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > article:hover { border-color: #01C1EF; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > article:hover { border-color: #01B3F2; }
-.sec_startup_process .process_timeline > li[data-theme="d14"] > article:hover { border-color: #4095f5; }
-.sec_startup_process .process_timeline > li[data-theme="d14_7"] > article:hover { border-color: #01A9F5; }
-.sec_startup_process .process_timeline > li[data-theme="d11"] > article:hover { border-color: #009EF7; }
+.sec_startup_process .process_timeline > li[data-theme="start"] > article:hover { border-color: #76BDFF; }
+.sec_startup_process .process_timeline > li[data-theme="none"] > article:hover { border-color: #60B2FF; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > article:hover { border-color: #47A3FA; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > article:hover { border-color: #359AF8; }
+.sec_startup_process .process_timeline > li[data-theme="d14"] > article:hover { border-color: #2B94F6; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > article:hover { border-color: #228EF3; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > article:hover { border-color: #0093F9; }
 .sec_startup_process .process_timeline > li[data-theme="d2_1"] > article:hover { border-color: #008BFB; }
 .sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .day { color: #107AF2; }
-.sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .step_track > .num { background-color: #107AF2; }
-.sec_startup_process .process_timeline > li[data-theme="start"] > article > div > .lead { color: #107AF2; }
-.sec_startup_process .process_timeline > li[data-theme="none"] > .step_meta > .step_track > .num { background-color: #00D4EA; }
-.sec_startup_process .process_timeline > li[data-theme="none"] > article > div > .lead { color: #107AF2; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .day { color: #01C1EF; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .step_track > .num { background-color: #01C1EF; }
-.sec_startup_process .process_timeline > li[data-theme="d30"] > article > div > .lead { color: #107AF2; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .day { color: #01B3F2; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .step_track > .num { background-color: #01B3F2; }
-.sec_startup_process .process_timeline > li[data-theme="d29"] > article > div > .lead { color: #107AF2; }
-.sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .day { color: #01A9F5; }
-.sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .step_track > .num { background-color: #4095f5; }
-.sec_startup_process .process_timeline > li[data-theme="d14"] > article > div > .lead { color: #107af2; }
-.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .day { color: #009EF7; }
-.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .step_track > .num { background-color: #01A9F5; }
-.sec_startup_process .process_timeline > li[data-theme="d14_7"] > article > div > .lead { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="start"] > .step_meta > .step_track > .num { background-color: #76BDFF; }
+.sec_startup_process .process_timeline > li[data-theme="none"] > .step_meta > .step_track > .num { background-color: #60B2FF; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .day { color: #47A3FA; }
+.sec_startup_process .process_timeline > li[data-theme="d30"] > .step_meta > .step_track > .num { background-color: #47A3FA; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .day { color: #359AF8; }
+.sec_startup_process .process_timeline > li[data-theme="d29"] > .step_meta > .step_track > .num { background-color: #359AF8; }
+.sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .day { color: #2B94F6; }
+.sec_startup_process .process_timeline > li[data-theme="d14"] > .step_meta > .step_track > .num { background-color: #2B94F6; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .day { color: #228EF3; }
+.sec_startup_process .process_timeline > li[data-theme="d14_7"] > .step_meta > .step_track > .num { background-color: #228EF3; }
 .sec_startup_process .process_timeline > li[data-theme="d11"] > .step_meta > .day { color: #0093F9; }
-.sec_startup_process .process_timeline > li[data-theme="d11"] > .step_meta > .step_track > .num { background-color: #009EF7; }
-.sec_startup_process .process_timeline > li[data-theme="d11"] > article > div > .lead { color: #107AF2; }
+.sec_startup_process .process_timeline > li[data-theme="d11"] > .step_meta > .step_track > .num { background-color: #0093F9; }
 .sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .day { color: #008BFB; }
 .sec_startup_process .process_timeline > li[data-theme="d2_1"] > .step_meta > .step_track > .num { background-color: #008BFB; }
-.sec_startup_process .process_timeline > li[data-theme="d2_1"] > article > div > .lead { color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .day { color: #107AF2; font-size: 2.4rem; line-height: 1.35; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > .step_meta > .step_track > .num { background-color: #107AF2; }
 .sec_startup_process .process_timeline > li[data-theme="dday"] > article { background-color: #107AF2; border-color: #107AF2; }
@@ -4328,17 +4321,17 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_type > .franchise_type_list > li.is_stable > article > header { background-color: #107AF2; }
 .sec_franchise_type > .franchise_type_list > li.is_stable > article > header > .icon { position: relative; background-color: #fff; }
 .sec_franchise_type > .franchise_type_list > li.is_stable > article > header > .icon:before { content: ''; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; transform: translateX(-50%) translateY(-50%); background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0202_02.png') no-repeat center / contain; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { flex: 1 1 auto; padding: 32px 40px; background-color: #fff; border-radius: 0 0 20px 20px; display: flex; gap: 20px; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { flex: 1 1 auto; padding: 32px 40px; background-color: #fff; border-radius: 0 0 20px 20px; display: flex; gap: 10px; }
 .sec_franchise_type > .franchise_type_list > li.is_profit > article > .franchise_type_body { border: 2px solid #01C1EF; }
 .sec_franchise_type > .franchise_type_list > li.is_stable > article > .franchise_type_body { border: 2px solid #107AF2; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { min-width: 0; flex: 1 1 0; padding: 32px 24px; border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 4px 16px; color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; border-radius: 99px; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { min-width: 0; flex: 1 1 0; padding: 40px; border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 14px 16px; color: #fff; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; border-radius: 99px; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .card_icon { width: 40px; height: 40px; flex-shrink: 0; margin-top: 20px; background-color: #d9d9d9; border-radius: 50%; display: block; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > strong { margin-top: 16px; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { margin: 4px 0 0; color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 { background-color: #E8F8F1; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p {  color: #161616; font-size: 2rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 { background-color: #ECF7FA; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs1 > .badge { background-color: #01C1EF; }
-.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 { background-color: #E8F8F1; }
+.sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 { background-color: #E7F2FE; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs2 > .badge { background-color: #4095F5; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 { background-color: #E8F8F1; }
 .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card.is_gs3 > .badge { background-color: #42C68F; }
@@ -4356,7 +4349,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_compare .franchise_compare_table thead td.is_gs1 > strong { color: #01C1EF; }
 .sec_franchise_compare .franchise_compare_table thead td.is_gs2 > strong { color: #107AF2; }
 .sec_franchise_compare .franchise_compare_table thead td.is_gs3 > strong { color: #15B874; }
-.sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 1.8rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.01em; display: block; }
+.sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 2.8rem; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-weight: 400; background-color: #f8f8f8; }
 .sec_franchise_compare .franchise_compare_table tbody th[scope="row"] { font-weight: 400; background-color: #f8f8f8; }
 .sec_franchise_compare .franchise_compare_table tbody th > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
@@ -4364,7 +4357,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_compare .franchise_compare_table td > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
 .list_note { margin-top: 32px; }
 .list_note > li + li { margin-top: 8px; }
-.list_note > li > p { margin: 0; color: #67676F; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.list_note > li > p { margin: 0; color: #67676F; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .list_note > li > p.txt_link { color: #161616; }
 .list_note > li > p > a { color: #107AF2; text-decoration: underline; }
 .sec_operation .section_header, .sec_life .section_header { margin-bottom: 80px; }
@@ -4960,10 +4953,10 @@ letter-spacing: -0.01em;
     .sec_franchise_type > .franchise_type_list > li > article > header > div > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body { padding: 24px; gap: 10px; }
     .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card { padding: 20px 12px; border-radius: 16px; }
-    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 4px 16px; font-size: 1.6rem; line-height: 1.24; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .badge { padding: 10px 16px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > .card_icon { width: 32px; height: 32px; margin-top: 12px; }
     .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > strong { margin-top: 12px; font-size: 1.6rem; line-height: 1.24; }
-    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_type > .franchise_type_list > li > article > .franchise_type_body > .type_card > p { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .sec_franchise_compare > .franchise_compare_wrap { margin-top: 32px; margin-right: -20px; margin-left: -20px; padding: 0 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .sec_franchise_compare .franchise_compare_table { min-width: 852px; }
     .sec_franchise_compare .franchise_compare_table col.col_group { width: 7%; }
@@ -4972,7 +4965,7 @@ letter-spacing: -0.01em;
     .sec_franchise_compare .franchise_compare_table th,
     .sec_franchise_compare .franchise_compare_table td { padding: 12px 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table thead th > strong { font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
-    .sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+    .sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table thead td > span { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
