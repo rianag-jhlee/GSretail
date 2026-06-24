@@ -2,7 +2,7 @@
     <div class="main-container">
         <div class="title_wrap top_visual"> <!-- 클래스 top_visual 추가 26.06.08 add 정다희 -->
             <h2 class="page-title">{{ t.MainTitle }}</h2>
-            <p class="visual-sub" v-html="t.MainsubTitle"></p>
+            <!-- <p class="visual-sub" v-html="t.MainsubTitle"></p> -->  <!-- 26.06.23 del 정다희 : MainsubTitle 삭제 -->
         </div>
 
         <section>
@@ -99,8 +99,8 @@ export default {
 
         const langData = {
             ko: {
-                MainTitle: "GS리테일 Newsroom",
-                MainsubTitle: "GS리테일 공식 유튜브 채널",
+                MainTitle: "뉴스룸", /* 26.06.23 add 정다희 : 뉴스룸 타이틀 국문 변경 */ 
+                // MainsubTitle: "GS리테일 공식 유튜브 채널", <!-- 26.06.23 del 정다희 : MainsubTitle 삭제 -->
                 tabs: [
                     { item: "롱폼" },
                     { item: "숏폼" },
@@ -124,8 +124,8 @@ export default {
                 ],
             },
             en: {
-                MainTitle: "GS Retail Newsroom",
-                MainsubTitle: "GS리테일 공식 유튜브 채널",
+                MainTitle: "Newsroom", /* 26.06.23 add 정다희 : 뉴스룸 타이틀 영문 변경 */ 
+                // MainsubTitle: "GS리테일 공식 유튜브 채널", <!-- 26.06.23 del 정다희 : MainsubTitle 삭제 -->
                 tabs: [
                     { item: "롱폼" },
                     { item: "숏폼" },
@@ -185,7 +185,7 @@ export default {
 /* 제공해주신 CSS 그대로 유지 (수정 없음) */
 .main-container { width: 100%; position: relative; }
 /* title_wrap css수정 26.06.08 edit 정다희 */
-.title_wrap {width: 100%; height:480px;  padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrne01_bg.png') no-repeat center 57% / cover; text-align: center; position: relative; display: block;}
+.title_wrap {width: 100%; height:460px; padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrne01_bg.png') no-repeat center 57% / cover; text-align: center; position: relative; display: block;}
 .title_wrap::before{content:''; display:block; width:100%; height:100%; background:rgba(0,0,0,0.4); position:absolute; top:0; left:0; z-index:1;}
 .title_wrap > h2{color:#fff; position: relative; z-index:2;}
 .title_wrap > p{color:#fff; position: relative; z-index:2;}
