@@ -273,7 +273,7 @@ export default {
                         //     desc: "지속 가능한 에코제조 분야의 소셜벤처를 양성하기 위해 창업팀을 발굴하고 사업화를 위한 맞춤 성장을 지원하고 있습니다. 2018년부터 현재까지 20억 5천만원을 기부하고 65개의 5년 미만 창업기업에 맞춤형 창업교육, 시제품 제작 지원금, GS리테일 임직원 및 전문가 멘토링 코칭 등을 제공하여 소규모 에코 제조 기업의 브랜드 정체성 확립, 판로 확대 및 라인업 확장에 기여하였습니다.<br/><br/>또한 참여기업간 협업과 네트워킹, 멘토링 지원과 상품품평회 등을 통해 차별화된 GS리테일의 연계형 인큐베이팅 및 유통 판로의 개척을 지원하고 있습니다."
                         // },
                         {
-                            tit: "Upcycling 친구 캠페인 : 고객 참여 물품기부",
+                            tit: "Upcycling 친구 캠페인 : 고객 및 임직원 참여 물품기부", /* 260623 edit 이소라 */
                             img: require("@/assets/images/dummy/gsrsu020104_4.png"),
                             desc: "GS리테일 임직원 및 고객이 직접 물품을 기부하면 업사이클링 환경교육키트로 제작하여 취약계층 아동에게 전달하는 ‘친환경으로 지구 구하기’ 캠페인을 진행하고 있습니다.<br/><br/>2024년 GS리테일은 총 1,704명으로부터 46,789개의 물품을 기부 받아 331명의 아동에게 환경교육 자료를 전달하였습니다. 이를 통해 소나무 967그루를 심은 효과를 창출했습니다."
                         },
@@ -425,7 +425,7 @@ export default {
                         //     desc: "지속 가능한 에코제조 분야의 소셜벤처를 양성하기 위해 창업팀을 발굴하고 사업화를 위한 맞춤 성장을 지원하고 있습니다. 2018년부터 현재까지 20억 5천만원을 기부하고 65개의 5년 미만 창업기업에 맞춤형 창업교육, 시제품 제작 지원금, GS리테일 임직원 및 전문가 멘토링 코칭 등을 제공하여 소규모 에코 제조 기업의 브랜드 정체성 확립, 판로 확대 및 라인업 확장에 기여하였습니다.<br/><br/>또한 참여기업간 협업과 네트워킹, 멘토링 지원과 상품품평회 등을 통해 차별화된 GS리테일의 연계형 인큐베이팅 및 유통 판로의 개척을 지원하고 있습니다."
                         // },
                         {
-                            tit: "Upcycling Friend Campaign: Customer Goods Donation",
+                            tit: "Upcycling Friend Campaign: Customer and Employee Goods Donation", /* 260623 edit 이소라 */
                             img: require("@/assets/images/dummy/gsrsu020104_4.png"),
                             desc: `GS Retail runs a "Saving the Earth the Eco-Friendly Way" campaign in which employees and customers donate goods that are crafted into upcycled environmental education kits and delivered to underprivileged children.<br />In 2024, GS Retail received 46,789 donated items from a total of 1,704 people, and delivered environmental education materials to 331 children.<br />This was equivalent to planting 967 pine trees.`
                         },

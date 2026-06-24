@@ -60,15 +60,13 @@
                             >
                                 {{ link.btnLabel }}
                             </Buttons>
-                            <!-- 26.06.24 edit 정다희 : Buttons 컴포넌트로 변경 -->
-                            <Buttons 
+                            <a 
                                 v-else 
                                 @click.stop.prevent="handleLink(link.target)" 
                                 btn-class="btn_mid gray btn_icon_arrow after"
                             >
                                 {{ link.btnLabel }}
-                            </Buttons>
-                            <!-- //26.06.24 edit 정다희 : Buttons 컴포넌트로 변경 -->
+                            </a>
                         </div>
                     </li>
                 </ul>
@@ -122,11 +120,10 @@ export default {
                         }
                     ],
                     BottomLinks: [
-                        // 26.06.24 edit 정다희 : btnLabel 텍스트 수정 
-                        { title: "정도경영목소리", btnLabel: "문의하기", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target:"/gsrsu040101" }, 
-                        { title: "입점상담", btnLabel: "문의하기", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
-                        // { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" }, <!-- 26.06.24 del 정다희 : 채용문의 삭제 -->
-                        { title: "기타문의", btnLabel: "문의하기", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" } //26.06.09 Edit 이종환 // 26.06.24 edit 정다희 : title 텍스트 수정 
+                        { title: "정도경영목소리", btnLabel: "정도경영목소리", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target:"/gsrsu040101" },
+                        { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
+                        { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
+                        { title: "멤버십/홈페이지문의", btnLabel: "멤버십/홈페이지문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" } //26.06.09 Edit 이종환
                     ],
                     전화번호:'전화번호',
                     운영시간:'운영시간'
@@ -157,11 +154,10 @@ export default {
                         }
                     ],
                     BottomLinks: [
-                        // 26.06.24 edit 정다희 : btnLabel 텍스트 수정 
-                        { title: "Ethics Hotline", btnLabel: "Contact Us", desc: "We will always put ourselves in our customers' shoes and listen even to the smallest voice.", type: "link", target:"/gsrsu040101" },
-                        { title: "Business Inquiry", btnLabel: "Contact Us", desc: "The first meeting between GS Retail and its partners,<br/>Welcome aboard"/* 260604 번역 */, type: "link", target: "/gsrse01" },
-                        // { title: "Recruitment Inquiry >", btnLabel: "Recruitment Inquiry >", desc: "Together with GS Retail,<br/>We look forward to you, who will build a better tomorrow."/* 260604 번역 */, type: "link", target: "https://gsretail.recruiter.co.kr/career/home" }, <!-- 26.06.24 del 정다희 : 채용문의 삭제 -->
-                        { title: "Other Inquiry", btnLabel: "Contact Us", desc: "We will always put ourselves in our customers' shoes and listen even to the smallest voice.", type: "link", target: "https://with.gsshop.com/cust/custCent/main.gs?lseq=380732-1&dseq=0&gsid=gnb-AU380732-AU380732-1" } // 26.06.24 edit 정다희 : title 텍스트 수정 
+                        { title: "Ethics Hotline", btnLabel: "Ethics Hotline", desc: "We will always put ourselves in our customers' shoes and listen even to the smallest voice.", type: "link", target:"/gsrsu040101" },
+                        { title: "Business Inquiry", btnLabel: "Business Inquiry", desc: "The first meeting between GS Retail and its partners,<br/>Welcome aboard"/* 260604 번역 */, type: "link", target: "/gsrse01" },
+                        { title: "Recruitment Inquiry >", btnLabel: "Recruitment Inquiry >", desc: "Together with GS Retail,<br/>We look forward to you, who will build a better tomorrow."/* 260604 번역 */, type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
+                        { title: "Membership/Website Inquiry", btnLabel: "Membership/Website Inquiry", desc: "We will always put ourselves in our customers' shoes and listen even to the smallest voice.", type: "link", target: "https://with.gsshop.com/cust/custCent/main.gs?lseq=380732-1&dseq=0&gsid=gnb-AU380732-AU380732-1" }
                     ],
                     전화번호:'Phone Number',
                     운영시간:'Operating Hours'/* 260604 번역 */
@@ -254,7 +250,7 @@ h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
     h3 {font-size:28px;}
     h4 {font-size:18px;}
     .tel-number {font-size:24px;}
-    .cont_inner article {padding:30px 0; background:transparent; display:flex; flex-direction:column; gap:40px;}
+    .cont_inner article {padding:40px 24px; background:transparent; display:flex; flex-direction:column; gap:40px;}
     .intro-summary {width:100%;}
     .brand-card-group {width:100%; padding:30px 24px; background-color: #f8f8f8; border-radius:8px; display:flex; flex-direction:column; gap:20px;}
     .service-link-list {padding:30px 0; display:flex; flex-direction:column; gap:40px;}

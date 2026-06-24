@@ -827,6 +827,18 @@
                         </div>
                         <!-- 구분선 -->
                     
+                        <!-- 26.06.24 add 정다희 : 지역선택 영역 추가 -->
+                         <div class="search_bottom_row">
+                             <div class="search_group">
+                                 <span class="search_group_label">{{ t.storeSearch.regionLabel }}</span>
+                                 <div class="search_group_input">
+                                     <SelectBox :options="startupRegionSidoOptions" v-model="filterRegionSido" :initMsg="t.storeSearch.sidoInit" @update:modelValue="filterRegionSigungu = ''" />
+                                     <SelectBox :options="storeRegionSigunguOptions" v-model="filterRegionSigungu" :initMsg="t.storeSearch.sigunguInit" />
+                                 </div>
+                             </div>
+                         </div>
+                        <!-- //26.06.24 add 정다희 : 지역선택 영역 추가 -->
+
                         <!-- 하단 row -->
                         <div class="search_bottom_row">
                             <!-- 가맹타입 -->
@@ -2120,7 +2132,7 @@ const benefitStoreItems = [
             { label: "안내", text: "적용 가능 점포는 담당자에게 별도 문의" },
         ],
         link: {
-            text: "청년창업 혜택으로 오픈한 경영주님 성공기 보러가기",
+            text: "경영주님 성공기 보러가기", /*26.06.24 edit 정다희 : 텍스트  수정*/
             url: "#none",
         },
     },
@@ -2130,13 +2142,13 @@ const benefitStoreItems = [
     },
     {
         title: "다점포 할인 제도",
-        desc: "GS25 경영주님이 추가 점포 창업 시 가맹비 일부 할인",
+        desc: "GS25 경영주님이 추가 점포 창업 시 가맹비 할인", /**26.06.24 edit 정다희 : 설명 수정*/
     },
 ];
 
 /* activeD3=1 든든한 점포 운영 */
 const benefitOperationPanel = {
-    title: "업계 최고 수준의 GS25 상생 지원제도",
+    title: "업계 최고 수준의 상생제도를 지원합니다.", /**26.06.24 edit 정다희 : 타이틀 수정*/
     desc: "인센티브, 경조/보험, 노무/법률, 스토어매니저 채용까지! 경영주님이 점포 운영에만 집중할 수 있도록 GS25가 지원해드려요.",
 };
 
@@ -2275,7 +2287,7 @@ const benefitOperationGroups = [
 
 /* activeD3=2 편안한 경영주 생활 */
 const benefitLifePanel = {
-    title: "경영주님들을 위한 다양한 제휴 혜택",
+    title: "경영주님들을 위한 다양한 제휴 혜택을 지원합니다.", /**26.06.24 edit 정다희 : 타이틀 수정*/
     desc: "건강, 복지, 여가까지! 점포 밖에서도 GS25가 함께합니다.",
 };
 
@@ -2858,11 +2870,15 @@ const regionCounselStaff = {
 
 /* 점포 검색·필터·목록 */
 const filterRegion = ref("");
+const filterRegionSido = ref("");
+const filterRegionSigungu = ref("");
 const filterFranchiseType = ref("");
 const filterStoreType = ref("");
 const filterYouth = ref(false);
 const storeSearchQuery = ref("");
 const youthPopoverVisible = ref(false);
+
+const storeRegionSigunguOptions = computed(() => startupRegionSigunguMap[filterRegionSido.value] || []);
 
 const storeRegions = [
     { value: "서울", label: "서울", count: 4 },
@@ -3144,10 +3160,12 @@ const langData = {
             life: "편안한 경영주 생활",
         },
         storeSectionAriaLabel: "추천 점포 찾기",
-        storeIntro: "안정적인 수입이 기대되는 최적의 입지! 성공 확률을 높이는 GS25 추천 점포를 만나보세요",
+        storeIntro: "체계적인 상권 분석으로 선정한 GS25 추천점포를 확인해보세요", /**26.06.24 edit 정다희 : 설명 수정*/
         storeSearch: {
             regionLabel: "지역",
             allLabel: "전체",
+            sidoInit: "시/도 선택",
+            sigunguInit: "구/군 선택",
             franchiseTypeLabel: "가맹타입",
             storeTypeYouthLabel: "점포유형/청년창업",
             newStoreLabel: "신규점",
@@ -3492,6 +3510,8 @@ const langData = {
         storeSearch: {
             regionLabel: "Region"/* 260604 번역 */,
             allLabel: "All",
+            sidoInit: "Select City/Province"/* 260624 번역 */,
+            sigunguInit: "Select District/County"/* 260624 번역 */,
             franchiseTypeLabel: "Franchise Type"/* 260604 번역 */,
             storeTypeYouthLabel: "Store type/youth startup"/* 260604 번역 */,
             newStoreLabel: "New Store"/* 260604 번역 */,
@@ -4355,7 +4375,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_compare .franchise_compare_table tbody th > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
 .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 2rem; }
 .sec_franchise_compare .franchise_compare_table td > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
-.list_note { margin-top: 32px; }
+.list_note { margin-top: 20px; }
 .list_note > li + li { margin-top: 8px; }
 .list_note > li > p { margin: 0; color: #67676F; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .list_note > li > p.txt_link { color: #161616; }
@@ -4367,6 +4387,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .icon_card_topic .sub_header { margin-bottom: 32px; }
 .icon_card_topic + .icon_card_topic { margin-top: 80px; }
 .icon_card_list { display: flex; flex-direction: column; gap: 20px; }
+.icon_card_list .button_area{justify-content:flex-start;}
 .icon_card_list.col_02 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .icon_card_list.col_03 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .icon_card_list.col_02 > li, .icon_card_list.col_03 > li { min-width: 0; }
@@ -4413,7 +4434,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .icon_card_list > li > article > div > dl > dd { margin: 0; }
 .icon_card_list > li > article > div > dl > dt { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .icon_card_list > li > article > div > dl > dt + dd { margin-top: 8px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.02em; }
-.icon_card_list > li > article > div > ul.list_note { margin: 18px 0 0; }
+.icon_card_list > li > article > div > ul.list_note { margin: 16px 0 0; }
 .icon_card_list > li > article > div > ul.list_note > li > p {  color: #fb6432; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 .icon_card_list > li > article > div > .button_area .btn_mid { margin-top: 18px; }
 .sec_franchise_compare .franchise_compare_table tbody .note { color: #67676F; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
@@ -4456,7 +4477,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_store :deep(.detail_card) { --color-brand-primary: #107AF2; }
 .sec_store :deep(.store_card) { --color-brand-primary: #107AF2; }
 .sec_store :deep(.detail_card [class*="btn_"][class*="fill"][class*="primary"]) { color: #fff; background-color: #107AF2; }
-.tab_intro { margin-bottom: 64px; font-size: 2.4rem; color: #161616; line-height: 1.5; letter-spacing: -0.01em; }
+.tab_intro { margin-bottom: 64px; font-size: 4rem; color: #161616; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; text-align:center; }
 .tab_intro span { color: #11935D; }
 .store_search { padding: 48px 42px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; gap: 0; }
 .search_group { display: flex; flex-direction: column; gap: 12px; }
@@ -4474,7 +4495,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .layer_tooltip > a { margin-top: 16px; color: #107AF2; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; text-decoration: underline; display: block; }
 .layer_tooltip_close { width: 20px; height: 20px; background: none; border: none; cursor: pointer; position: absolute; top: 32px; right: 32px; background:url('@/assets/images/common/icon_set_20.png') -627px -25px no-repeat; }
 .youth_popover { top: calc(100% + 8px); left: -119px; right: -166px; }
-.search_group_input { min-width: 280px; flex: 1; }
+.search_group_input { min-width: 280px; flex: 1; display: flex; gap: 10px; align-items: center; }
+.store_search .search_group_input :deep(.select) { flex: 1; min-width: 0; }
 .store_search_input_wrap { position: relative; }
 .store_search_input { width: 100%; height: 40px; padding: 0 16px; color: #161616; font-size: 1.6rem; letter-spacing: -0.01em; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 12px;  outline: none; }
 .store_search_input::placeholder { color: #a4a4b0; }
@@ -4980,9 +5002,9 @@ letter-spacing: -0.01em;
     .icon_card_list > li > article > .icon:before { width: 32px; height: 32px; }
     .icon_card_list > li > article > div > dl > dt { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .icon_card_list > li > article > div > dl > dt + dd { margin-top: 8px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-    .icon_card_list > li > article > div > ul.list_note > li > p {  font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; }
-    .icon_card_list > li > article > div > .button_area { display: flex; justify-content: flex-end; }
-    .icon_card_list > li > article > div > .button_area .btn_mid { width: 230px; height: 62px; margin-top: 16px; margin-left: auto; padding: 7px 12px; justify-content: flex-end; }
+    /* .icon_card_list > li > article > div > ul.list_note > li > p {  font-size: 1.2rem; line-height: 1.2; letter-spacing: 0; } */
+    /* .icon_card_list > li > article > div > .button_area { display: flex; justify-content: flex-end; } */
+    /* .icon_card_list > li > article > div > .button_area .btn_mid { width: 230px; height: 62px; margin-top: 16px; margin-left: auto; padding: 7px 12px; justify-content: flex-end; } */
     .icon_card_list.type_02 { border: 0; }
     .icon_card_row:first-child .icon_card_list.type_02 > li > article { padding: 24px 0; }
     .icon_card_row:first-child .icon_card_list.type_02 > li:first-child > article:first-child { padding: 0 0 24px; }
@@ -5012,7 +5034,7 @@ letter-spacing: -0.01em;
     .sec_region_counsel .region_counsel_staff_body .phone a { font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
     /* D1=2 · 추천 점포 찾기 */
     .store_list_wrap { margin-top: 60px; }
-    .tab_intro { margin-bottom: 60px; font-size: 1.8rem; line-height: 1.4; }
+    .tab_intro { margin-bottom: 60px; font-size: 2.4rem; line-height: 1.35; }
     .store_count { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .store_count > strong { font-weight: 400; }
     .store_search { padding: 30px 20px; }
