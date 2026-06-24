@@ -102,10 +102,10 @@
             <div class="panel sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
                 <section class="sec_overlap">
                     <header class="section_header ac no_desc">
-                        <h2 v-html="t.competitivePanel.title"></h2>
+                        <h2 v-html="competitivePanel.title"></h2>
                     </header>
                     <ul class="overlap_grid">
-                        <li v-for="(item, i) in t.competitiveCards" :key="i">
+                        <li v-for="(item, i) in competitiveCards" :key="i">
                             <article>
                                 <span class="icon" aria-hidden="true"></span>
                                 <strong v-html="item.title"></strong>
@@ -116,17 +116,17 @@
                 <section class="sec_split">
                     <div class="inner">
                         <header class="section_header ac">
-                            <!-- <span class="tit">{{ t.storeOpenPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제*/ !-->
-                            <h2>{{ t.storeOpenPanel.title }}</h2>
-                            <p>{{ t.storeOpenPanel.desc }}</p>
+                            <!-- <span class="tit">{{ storeOpenPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제 -->
+                            <h2>{{ storeOpenPanel.title }}</h2>
+                            <p>{{ storeOpenPanel.desc }}</p>
                         </header>
                         <div class="split_layout">
                             <dl class="info_card is_end">
                                 <dt>
-                                    <strong>{{ t.storeOpenCards[0].title }}</strong>
+                                    <strong>{{ storeOpenCards[0].title }}</strong>
                                     <span class="icon" aria-hidden="true"></span>
                                 </dt>
-                                <dd>{{ t.storeOpenCards[0].desc }}</dd>
+                                <dd>{{ storeOpenCards[0].desc }}</dd>
                             </dl>
                             <figure class="split_media">
                                 <img :src="imgStoreOpen" alt="" />
@@ -134,27 +134,27 @@
                             <dl class="info_card is_start">
                                 <dt>
                                     <span class="icon" aria-hidden="true"></span>
-                                    <strong>{{ t.storeOpenCards[1].title }}</strong>
+                                    <strong>{{ storeOpenCards[1].title }}</strong>
                                 </dt>
-                                <dd>{{ t.storeOpenCards[1].desc }}</dd>
+                                <dd>{{ storeOpenCards[1].desc }}</dd>
                             </dl>
                         </div>
                     </div>
                 </section>
                 <section class="sec_stack">
                     <header class="section_header ac">
-                        <!-- <span class="tit">{{ t.productConceptPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제*/ !-->
-                        <h2>{{ t.productConceptPanel.title }}</h2>
-                        <p>{{ t.productConceptPanel.desc }}</p>
+                        <!-- <span class="tit">{{ productConceptPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제 -->
+                        <h2>{{ productConceptPanel.title }}</h2>
+                        <p>{{ productConceptPanel.desc }}</p>
                     </header>
                     <div class="highlight_block">
                         <header class="sub_header">
-                            <h3>{{ t.megaHitPanel.title }}</h3>
-                            <strong>{{ t.megaHitPanel.subtitle }}</strong>
-                            <p v-html="t.megaHitPanel.desc"></p>
+                            <h3>{{ megaHitPanel.title }}</h3>
+                            <strong>{{ megaHitPanel.subtitle }}</strong>
+                            <p v-html="megaHitPanel.desc"></p>
                         </header>
                         <div class="highlight_body">
-                            <div v-for="(group, gi) in t.megaHitGroups" :key="gi">
+                            <div v-for="(group, gi) in megaHitGroups" :key="gi">
                                 <h4>{{ group.title }}</h4>
                                 <ul v-if="!isMobileView" role="list">
                                     <li v-for="(item, i) in group.items" :key="i">
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     <div class="dual_panel">
-                        <article v-for="(item, i) in t.freshFfCards" :key="i">
+                        <article v-for="(item, i) in freshFfCards" :key="i">
                             <header class="sub_header">
                                 <span v-if="item.badge" class="tit">{{ item.badge }}</span>  <!-- 26.06.24 edit 정다희 : badge if문 추가  -->
                                 <h3>{{ item.title }}</h3>
@@ -227,8 +227,8 @@
                     </div>                    
                     <div class="sub_block">
                         <header class="sub_header ac">
-                            <h3>{{ t.conceptStorePanel.title }}</h3>
-                            <p>{{ t.conceptStorePanel.desc }}</p>
+                            <h3>{{ conceptStorePanel.title }}</h3>
+                            <p>{{ conceptStorePanel.desc }}</p>
                         </header>
                         <Swiper
                             class="sub_swiper swiper_edge"
@@ -237,7 +237,7 @@
                             wrapper-tag="ul"
                             @swiper="onConceptStoreSwiper"
                         >
-                            <SwiperSlide v-for="(item, i) in t.conceptStoreCards" :key="i" tag="li">
+                            <SwiperSlide v-for="(item, i) in conceptStoreCards" :key="i" tag="li">
                                 <article>
                                     <figure :style="{ backgroundImage: `url(${item.image})` }" aria-hidden="true"></figure>
                                     <span>{{ item.badge }}</span>
@@ -271,12 +271,12 @@
                 </section>-->
                 <section class="sec_tri_grid">
                     <header class="section_header ac">
-                        <!-- <span class="tit">{{ t.operationSupportPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제*/ !-->
-                        <h2>{{ t.operationSupportPanel.title }}</h2>
-                        <p>{{ t.operationSupportPanel.desc }}</p>
+                        <!-- <span class="tit">{{ operationSupportPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제 -->
+                        <h2>{{ operationSupportPanel.title }}</h2>
+                        <p>{{ operationSupportPanel.desc }}</p>
                     </header>
                     <ul>
-                        <li v-for="(card, i) in t.operationSupportCards" :key="i">
+                        <li v-for="(card, i) in operationSupportCards" :key="i">
                             <h3>{{ card.title }}</h3>
                             <dl>
                                 <template v-for="(item, j) in card.items" :key="j">
@@ -336,8 +336,7 @@
                         </header>
                         <article class="franchise_define_card">
                             <header class="sub_header ac">
-
-                                <span class="tit">{{ franchiseDefineCard.chip }}</span>
+                                <!-- <span class="tit">{{ franchiseDefineCard.chip }}</span> -->    <!-- 26.06.24 edit 정다희 : chip 삭제 -->
                                 <h3>{{ franchiseDefineCard.title }}</h3>
                                 <p>{{ franchiseDefineCard.desc }}</p>
                             </header>
@@ -2520,7 +2519,7 @@ const franchiseDefinePanel = {
 };
 
 const franchiseDefineCard = {
-    chip: "GS25 Franchise",
+    // chip: "GS25 Franchise", /*26.06.24 del 정다희*/ 
     title: "프랜차이즈의 성공",
     desc: "가맹본부와 가맹점이 함께 만드는 상생의 파트너십",
 };
@@ -3619,164 +3618,20 @@ const langData = {
         benefitLifePanel,
         benefitLifeItems,
         benefitLifeNote,
-        competitivePanel: {
-            title: "From thorough profitability analysis to close post-opening support<br /><span class='txt_blue'>Start your business with the No. 1 brand.</span>",
-        },
-        competitiveCards: [
-            { title: "Profitability-focused<br />store opening" },
-            { title: "Differentiated products<br />and store concepts" },
-            { title: "Smart systems and<br />close support" },
-        ],
-        storeOpenPanel: {
-            // badge: "Store Development", /**26.06.24 del 정다희 : badge 삭제*/ 
-            title: "Profitability-focused new store opening",
-            desc: "Both the franchise owner and headquarters open locations where profitability is visible.", /**26.06.24 edit 정다희 : desc 수정*/ 
-        },
-        storeOpenCards: [
-            {
-                title: "Data-driven commercial area analysis",
-                desc: "Precise commercial area analysis using industry-leading geographic information systems and big data.",
-            },
-            {
-                title: "On-site verification of commercial area vitality",
-                desc: "Profitable stores are developed through on-site verification and systematic analysis by store development experts (RFC).",
-            },
-        ],
-        productConceptPanel: {
-            // badge: "Products & Concept", /**26.06.24 del 정다희 : badge 삭제*/ 
-            title: "Differentiated products and store concept", /**26.06.24 edit 정다희 : 타이틀 수정*/ 
-            desc: "From mega-hit products to fresh-focused stores, GS25's unique concepts strengthen store profitability.",
-        },
-        megaHitPanel: {
-            title: "Mega Hit Products",
-            subtitle: "New products every week!",
-            desc: "From steady sellers to SNS-popular items,<br />we capture customer foot traffic.",
-        },
-        megaHitGroups: [
-            {
-                title: "Steady Sellers",
-                items: [
-                    { label: "The icon of value lunch boxes", title: "Generous Lunch Box", image: imgProduct01 },
-                    { label: "Cumulative sales exceed 100 million units", title: "Omori Kimchi Stew Ramen", image: imgProduct02 },
-                    { label: "From GS25 exclusive brand to overseas expansion", title: "YOUUS", image: imgProduct03 },
-                    { label: "No. 1 coffee rated by baristas", title: "Cafe25", image: imgProduct04 },
-                ],
-            },
-            {
-                title: "SNS Popular Products",
-                items: [
-                    { label: "", title: "Mochi Roll", image: imgProduct05 },
-                    { label: "", title: "Ice Brulee Series", image: imgProduct06 },
-                    { label: "", title: "Matsamchon Strawberry Sandwich", image: imgProduct07 },
-                ],
-            },
-        ],
-        freshFfCards: [
-            {
-                badge: "GS25 Only",
-                title: "Fresh-Focused Store",
-                desc: "Convenience of a convenience store + freshness of a supermarket—a one-stop grocery store.",
-                points: [
-                    "A convenience store where you can buy fresh food anytime, anywhere, 365 days a year, 24 hours a day.",
-                    "Small-portion grocery products for 1–2 person households.",
-                ],
-                images: [imgSinsen01, imgSinsen02],
-                linkText: "Learn more about fresh-focused stores",
-            },
-            {
-                // badge: "Counter FF", /**26.06.24 del 정다희 : badge 삭제*/ 
-                title: "Boost sales with Counter FF",
-                desc: "Specialty-store quality at a convenience store!",
-                brands: [
-                    {
-                        title: "CAFE25",
-                        desc: "GS25's bean coffee made with premium coffee machines and beans at reasonable prices.",
-                        image: imgCounter01,
-                    },
-                    {
-                        title: "CHICKEN25",
-                        desc: "Specialty-level chicken freshly prepared at the convenience store.",
-                        image: imgCounter02,
-                    },
-                    {
-                        title: "GO PIZZA",
-                        desc: "Specialty-quality freshly baked pizza anytime, anywhere.",
-                        image: imgCounter03,
-                    },
-                ],
-            },
-        ],
-        conceptStorePanel: {
-            title: "Commercial area-tailored concept stores",
-            desc: "We operate differentiated stores optimized for local commercial areas and customer characteristics.",
-        },
-        conceptStoreCards: [
-            { badge: "#Traditional Flagship Store", title: "GS25 Suwon Haengnigungil Store", image: imgStore01 },
-            { badge: "#Digital Solution Specialty", title: "GS25 DXLAB Store", image: imgStore02 },
-            { badge: "#Hanwha Eagles Collaboration #Sports Specialty", title: "GS25 Hanwha Life Ballpark", image: imgStore03 },
-            { badge: "#LG Twins Collaboration #Sports Specialty", title: "GS25 Jamsil Tower Store", image: imgStore04 },
-        ],
-        marketingPanel: {
-            badge: "Marketing & Membership",
-            title: "Marketing and membership that build regular customers",
-            desc: "From the 'Our Neighborhood GS' app to SNS channels with 1 million subscribers—creating reasons customers return.",
-            desc2: "Marketing support that drives sales growth",
-        },
-        marketingCards: [
-            {
-                em: "No. 1 convenience store app downloads in Korea",
-                title: "Our Neighborhood GS",
-                desc: "From promotional product storage to ordering from 5,000+ wines and liquors",
-            },
-            {
-                em: "No. 1 convenience store app downloads in Korea",
-                title: "GS ALL Membership",
-                desc: "Earn and use points at GS25, GS The Fresh, and GS SHOP",
-            },
-            {
-                em: "No. 1 convenience store app downloads in Korea",
-                title: "Membership Card / Prepaid Card",
-                desc: "Carrier membership discounts, GS ALL point accumulation, Pop Card promotions, and more",
-            },
-            {
-                em: "Each surpassing 1 million followers and subscribers",
-                title: "GS25 Instagram / YouTube",
-                desc: "Expand customer touchpoints with new product news, events, and talk content",
-            },
-        ],
-        operationSupportPanel: {
-            // badge: "Operation Support", /**26.06.24 del 정다희 : badge 삭제*/ 
-            title: "A solid and convenient support system", /**26.06.24 edit 정다희 : 타이틀 수정*/ 
-            desc: "Don't worry even if it's your first startup. GS25 is with you from store opening to stable operations.",
-        },
-        operationSupportCards: [
-            {
-                title: "'Close Care' system for new entrepreneurs",
-                items: [
-                    { term: "Customized Consulting", desc: "Optimal store matching through consultation with startup consultants" },
-                    { term: "One-Stop Opening Support", desc: "Support for complex procedures including facilities/interior, new owner training, startup loans, and permit guidance" },
-                    { term: "On-Site Close Care", desc: "Dedicated staff on-site for 4 days after opening to support initial settlement" },
-                    { term: "Post-Adaptation Management", desc: "Peace-of-mind companion service for difficult adaptation periods to stabilize operations" },
-                ],
-            },
-            {
-                title: "Smart store operation system",
-                items: [
-                    { term: "AI Auto-Ordering", desc: "Providing an automatic ordering system through sales and opportunity loss analysis of our stores" }, /**26.06.24 edit 정다희 : desc 수정*/ 
-                    { term: "Mobile Management System", desc: "Check orders and sales in real time anytime, anywhere" },
-                    { term: "Intuitive POS", desc: "Easy-to-learn, simple payment system for anyone" },
-                ],
-            },
-            {
-                title: "Ongoing operation support after opening",
-                items: [
-                    { term: "1:1 Dedicated Management", desc: "On-site visits and customized solutions from sales experts" },
-                    { term: "24-Hour Call Center", desc: "24/7, year-round support without gaps" },
-                    { term: "KakaoTalk Chatbot Support", desc: "KakaoTalk chatbot Joy for store owner and staff work support" },
-                    { term: "Education Platform Support", desc: "Online academy for store operation skills and communication" },
-                ],
-            },
-        ],
+        competitivePanel,
+        competitiveCards,
+        storeOpenPanel,
+        storeOpenCards,
+        productConceptPanel,
+        megaHitPanel,
+        megaHitGroups,
+        freshFfCards,
+        conceptStorePanel,
+        conceptStoreCards,
+        marketingPanel,
+        marketingCards,
+        operationSupportPanel,
+        operationSupportCards,
         convenienceDefinePanel,
         convenienceEvolutionCore,
         convenienceEvolutionStages,
@@ -4292,7 +4147,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_tri_grid > ul > li:nth-of-type(3) > dl > dt:nth-of-type(4) > .icon { background: url('@/assets/images/sub/gsrst02010101/icon_gs25fr0102_sc6_11.png') no-repeat 0 0; }
 .sec_tri_grid > ul > li > dl > dd { margin: 4px 0 0; padding-left: 32px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_tri_grid > ul > li > dl > dd + dt { margin-top: 56px; }
-.sec_diagram > .diagram_shell { min-width: 0; padding: clamp(16px, 1.667vw, 32px); background-color: #107af2; border: 1px solid #d7d7df; border-radius: 9999px; display: flex; align-items: center; gap: clamp(24px, 3.125vw, 60px); }
+.sec_diagram > .diagram_shell { min-width: 0; padding: clamp(16px, 1.667vw, 32px); background-color: #107af2; border: 1px solid #d7d7df; border-radius: 9999px; display: flex; align-items: center; }
 .sec_diagram > .diagram_shell > .diagram_track { width: 100%; min-width: 0; flex: 1 1 0; }
 .sec_diagram > .diagram_shell > .diagram_track .diagram_ring { min-width: 0; border-radius: clamp(20px, 8vw, 999px); display: flex; align-items: center; justify-content: center; }
 .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer { width: 100%; max-width: min(100%, 940px); min-width: 0; min-height: clamp(140px, 12.76vw, 245px); padding: clamp(14px, 1.667vw, 32px); background-color: #9fcafa; border-radius: 999px; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content: center; gap: clamp(12px, 1.25vw, 24px); container-type: inline-size; }
@@ -4307,8 +4162,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring { max-width: 100%; min-width: 0; flex: 1 1 clamp(140px, 14vw, 240px); text-align: center; }
 .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > strong { color: #0a4991; font-size: clamp(2rem, 1.67vw, 2.4rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_diagram > .diagram_shell > .diagram_track > .diagram_ring.layer_outer > article.node_ring > p { margin-top: 2px; color: #0a4991; font-size: clamp(1.4rem, 0.83vw, 1.6rem); font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
-.sec_diagram > .diagram_shell > article.node_aside { width: clamp(200px, 16.25vw, 312px); min-width: 0; flex: 0 1 auto; text-align: center; }
-.sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: clamp(2.4rem, 2.08vw, 3.2rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_diagram > .diagram_shell > article.node_aside { flex: 0 1 clamp(200px, 21.67vw, 416px); min-width: 0; text-align: center; }
+    .sec_diagram > .diagram_shell > article.node_aside > strong { color: #fff; font-size: clamp(2.4rem, 2.08vw, 3.2rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_diagram > .diagram_shell > article.node_aside > p { margin-top: clamp(4px, 0.42vw, 8px); color: #fff; font-size: clamp(1.4rem, 0.83vw, 1.6rem); font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .sec_diagram > .diagram_shell article strong, .sec_diagram > .diagram_shell article span, .sec_diagram > .diagram_shell article p { word-break: keep-all; }
 .sec_diagram header { margin-bottom: 40px; }
