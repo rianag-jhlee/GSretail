@@ -53,7 +53,7 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide" v-for="(item, index) in t.sec03.items" :key="item.img">
                                 <div class="slide" :class="item.class" @mouseenter="hoverIndex = index">
-                                <!-- <div class="slide" :class="item.class" @mouseenter="console.log('enter', index)"> -->
+                                    <!-- <div class="slide" :class="item.class" @mouseenter="console.log('enter', index)"> -->
                                     <!-- 26.06.17 Add 이종환 -->
                                     <strong class="cate">{{ item.cate }}</strong>
                                     
@@ -195,8 +195,7 @@ export default {
 
                     /* 260616 add 정다희 : hero_message */
                     heroMessage: {
-                        // 260623 edit 정다희 : span.txt_orange 위치수정 (경험 -> 연결)
-                        title: '고객의 모든 경험을 <span class="txt_orange">연결</span>하고, <br />데이터로 <span class="txt_green">공감</span>하며,<br />상품과 서비스로 <span class="txt_blue">신뢰</span>받는 플랫폼',
+                        title: '고객의 모든 <span class="txt_orange">경험</span>을 연결하고, <br />데이터로 <span class="txt_green">공감</span>하며,<br />상품과 서비스로 <span class="txt_blue">신뢰</span>받는 플랫폼',
                         items: [
                             {
                                 dt: "전국 오프라인 점포 수",
@@ -220,7 +219,7 @@ export default {
                     },
 
                     sec03: {
-                        title: "GS리테일의 <br class='m_br'>사업을 소개합니다.",/* 260622 edit 이소라 : 줄바꿈 제거 */
+                        title: "GS리테일의 사업을 소개합니다.",/* 260622 edit 이소라 : 줄바꿈 제거 */
 
                         items: [
                             {
@@ -236,7 +235,7 @@ export default {
                                 img: require("@/assets/images/main/main_sec03_02.png"),
                                 sub: require("@/assets/images/main/main_sec03_02-1.png"),
                                 brand: "GS THE FRESH",
-                                txt: "신선한 행복을<br/> 채우다",
+                                txt: "신선한 행복을<br/> 만나다",
                                 cate: "수퍼",
                                 class: "fresh",
                                 link: "/gsrbr020101"
@@ -254,7 +253,7 @@ export default {
                     },
 
                     sec04: {
-                        title: "GS리테일의 <br class='m_br'>소식을 전합니다.",/* 260622 edit 이소라 : 줄바꿈 제거 */
+                        title: "GS리테일의 소식을 전합니다.",/* 260622 edit 이소라 : 줄바꿈 제거 */
 
                         quick: [
                             { link: "#none", txt: "보도자료" },
@@ -268,16 +267,7 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: 'GS25, 1300만 유튜버 쯔양과<br/> 공동 개발한 ‘대식가 시리즈’ 론칭"',
-                                link:'/gsrne0101'
-                            },
-                            {
-                                img: require("@/assets/images/dummy/main_news_00.png"),
-                                item: [
-                                    { cate: "GS리테일" },
-                                    { cate: "보도자료" }
-                                ],
-                                title: 'GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                title: '02GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
                                 link:'/gsrne0101'
                             },
                             {
@@ -286,7 +276,7 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: 'GS25, 1300만 유튜버 쯔양과<br/> 공동 개발한 ‘대식가 시리즈’ 론칭"',
+                                title: '02GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
                                 link:'/gsrne0101'
                             },
                             {
@@ -295,7 +285,7 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: 'GS25, 1300만 유튜버 쯔양과<br/> 공동 개발한 ‘대식가 시리즈’ 론칭"',
+                                title: '03GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
                                 link:'/gsrne0101'
                             },
                             {
@@ -304,7 +294,7 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: 'GS25, 1300만 유튜버 쯔양과<br/> 공동 개발한 ‘대식가 시리즈’ 론칭"',
+                                title: '04GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
                                 link:'/gsrne0101'
                             },
                             {
@@ -313,7 +303,7 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: 'GS25, 1300만 유튜버 쯔양과<br/> 공동 개발한 ‘대식가 시리즈’ 론칭"',
+                                title: '05GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
                                 link:'/gsrne0101'
                             },
                             {
@@ -322,7 +312,16 @@ export default {
                                     { cate: "GS25" },
                                     { cate: "보도자료" }
                                 ],
-                                title: 'GS25, 1300만 유튜버 쯔양과<br/> 공동 개발한 ‘대식가 시리즈’ 론칭"',
+                                title: '06GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
+                                link:'/gsrne0101'
+                            },
+                            {
+                                img: require("@/assets/images/dummy/main_news_00.png"),
+                                item: [
+                                    { cate: "GS25" },
+                                    { cate: "보도자료" }
+                                ],
+                                title: '07GS리테일, 상반기 공개채용 돌입…<br/> "청년 채용 물꼬 튼다!"',
                                 link:'/gsrne0101'
                             },
                         ]
@@ -357,7 +356,7 @@ export default {
                     },
 
                     sec03: {
-                        title: "GS Retail's<br class='m_br'> Introducing our businesses."/* 260604 번역 */,
+                        title: "GS Retail's<br/> Introducing our businesses."/* 260604 번역 */,
 
                         items: [
                             {
@@ -382,7 +381,7 @@ export default {
                     },
 
                     sec04: {
-                        title: "GS Retail's<br class='m_br'> Sharing our news."/* 260604 번역 */,
+                        title: "GS Retail's<br/> Sharing our news."/* 260604 번역 */,
 
                         quick: [
                             { link: "#none", txt: "Press Releases" },
@@ -798,7 +797,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scope>
 h2 {
     font-size: 7.2rem;
     font-weight: 700;
@@ -862,9 +861,9 @@ h2+.explain {
 .hero_message .inner{max-width: 1720px;margin: 0 auto;padding: 0 20px;}
 .hero_message p{font-weight: 700;font-size: 6.8rem;line-height: 1.4;letter-spacing: -0.02em;}
 .hero_message p span{font-weight: 800;}
-.hero_message p :deep(.txt_orange){color: #FB6432;}
-.hero_message p :deep(.txt_green){color: #15B874;}
-.hero_message p :deep(.txt_blue){color: #248BFF;}
+.hero_message p span.txt_orange{color: #FB6432;}
+.hero_message p span.txt_green{color: #15B874;}
+.hero_message p span.txt_blue{color: #248BFF;}
 .hero_message p + a {width:50px; height:50px; margin-top:3em; display:inline-block; background:url('@/assets/images/main/icon_brand_arrow2.png') no-repeat center; background-size:contain;}
 .hero_message ul{max-width:1045px;margin-top:20px;margin-left: auto;;}
 .hero_message ul > li{padding: 20px 8px;border-bottom: 1px solid #000;}
@@ -986,11 +985,10 @@ section {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-top:40px;
 }
 
 .sec04 .quick a {
-    padding: 0 24px;
+    padding: 20px 24px;
     color: #000;
     font-size: 2.4rem;
     font-weight: 700;
@@ -1002,15 +1000,15 @@ section {
 }
 
 .sec04 .quick a:after {
-    width: 28px;
-    height: 28px;
-    background:#F2F2F4 url('@/assets/images/main/icon_arrow.png') center no-repeat;
+    width: 16px;
+    height: 16px;
+    background:url('@/assets/images/main/icon_arrow.png') 0 0 no-repeat;
     content: '';
     display: block;
 }
 
 .sec03 .swiper, .sec04 .swiper {
-    margin-top:40px;
+    margin-top: 80px;
 }
 
 .sec04 .swiper { width: 100%; overflow: hidden; }
@@ -1054,10 +1052,6 @@ section {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-}
-
-@media screen and (min-width: 769px) {
-    :deep(.m_br) { display: none }
 }
 
 /* --- [Small PC: 1300px 이하] --- */
@@ -1222,16 +1216,16 @@ section {
     }
 
     .sec04 .quick {
-        margin-top: 48px;
+        margin-top: 22px;
     }
 
     .sec04 .quick a {
-        padding: 0 10px;
+        padding: 26px 10px;
         font-size: 1.6rem;
     }
 
     .sec04 .swiper {
-        margin-top: 46px;
+        margin-top: 60px;
     }
 
     .sec04 .swiper-wrapper {
