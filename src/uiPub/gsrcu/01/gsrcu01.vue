@@ -60,13 +60,13 @@
                             >
                                 {{ link.btnLabel }}
                             </Buttons>
-                            <a 
+                            <Buttons 
                                 v-else 
                                 @click.stop.prevent="handleLink(link.target)" 
-                                btn-class="btn_mid gray btn_icon_arrow after"
+                                class="btn_mid gray btn_icon_arrow after"
                             >
                                 {{ link.btnLabel }}
-                            </a>
+                            </Buttons>
                         </div>
                     </li>
                 </ul>
@@ -120,10 +120,10 @@ export default {
                         }
                     ],
                     BottomLinks: [
-                        { title: "정도경영목소리", btnLabel: "정도경영목소리", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target:"/gsrsu040101" },
-                        { title: "입점상담", btnLabel: "입점상담", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
-                        { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
-                        { title: "멤버십/홈페이지문의", btnLabel: "멤버십/홈페이지문의", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" } //26.06.09 Edit 이종환
+                        { title: "정도경영목소리", btnLabel: "문의하기", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "link", target:"/gsrsu040101" },
+                        { title: "입점상담", btnLabel: "문의하기", desc: "GS리테일과 파트너사의 첫 만남,<br/>입점을 환영합니다", type: "link", target: "/gsrse01" },
+                        // 260623 delete 이소라 { title: "채용문의", btnLabel: "채용문의", desc: "GS리테일과 함께,<br/>더 좋은 내일을 만들어갈 당신을 기다립니다.", type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
+                        { title: "기타문의", btnLabel: "문의하기", desc: "언제나 고객님의 입장이 되어 <br/>작은 소리에도 귀를 기울이겠습니다.", type: "popup", popId: "gsrcu0101", cont: "gsrcu0101" } //26.06.09 Edit 이종환
                     ],
                     전화번호:'전화번호',
                     운영시간:'운영시간'
@@ -154,10 +154,10 @@ export default {
                         }
                     ],
                     BottomLinks: [
-                        { title: "Ethics Hotline", btnLabel: "Ethics Hotline", desc: "We will always put ourselves in our customers' shoes and listen even to the smallest voice.", type: "link", target:"/gsrsu040101" },
-                        { title: "Business Inquiry", btnLabel: "Business Inquiry", desc: "The first meeting between GS Retail and its partners,<br/>Welcome aboard"/* 260604 번역 */, type: "link", target: "/gsrse01" },
-                        { title: "Recruitment Inquiry >", btnLabel: "Recruitment Inquiry >", desc: "Together with GS Retail,<br/>We look forward to you, who will build a better tomorrow."/* 260604 번역 */, type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
-                        { title: "Membership/Website Inquiry", btnLabel: "Membership/Website Inquiry", desc: "We will always put ourselves in our customers' shoes and listen even to the smallest voice.", type: "link", target: "https://with.gsshop.com/cust/custCent/main.gs?lseq=380732-1&dseq=0&gsid=gnb-AU380732-AU380732-1" }
+                        { title: "Ethics Hotline", btnLabel: "Inquiry", desc: "We will always put ourselves in our customers' shoes and listen even to the smallest voice.", type: "link", target:"/gsrsu040101" },
+                        { title: "Business Inquiry", btnLabel: "Inquiry", desc: "The first meeting between GS Retail and its partners,<br/>Welcome aboard"/* 260604 번역 */, type: "link", target: "/gsrse01" },
+                        // 260623 delete 이소라 { title: "Recruitment Inquiry >", btnLabel: "Inquiry >", desc: "Together with GS Retail,<br/>We look forward to you, who will build a better tomorrow."/* 260604 번역 */, type: "link", target: "https://gsretail.recruiter.co.kr/career/home" },
+                        { title: "Etc Inquiry", btnLabel: "Inquiry", desc: "We will always put ourselves in our customers' shoes and listen even to the smallest voice.", type: "link", target: "https://with.gsshop.com/cust/custCent/main.gs?lseq=380732-1&dseq=0&gsid=gnb-AU380732-AU380732-1" }
                     ],
                     전화번호:'Phone Number',
                     운영시간:'Operating Hours'/* 260604 번역 */
@@ -198,7 +198,7 @@ export default {
 </script>
 
 <style scoped>
-.title_wrap {width:100%; padding:7% 0 2.5%; justify-content:center;}
+.title_wrap {width:100%; padding:200px 0 100px; justify-content:center;}
 .title_wrap h2 {font-size:72px;}
 .blind {width:1px; height:1px; position:absolute; top:0; left:0; overflow:hidden; z-index:-1;}
 .page-top-title {margin-bottom:48px; text-align:center;}
@@ -225,22 +225,25 @@ h4 {margin-bottom:24px; color:#161616; font-size:20px; font-weight:700; line-hei
 .working-hours {font-size:14px; color:#67676F; line-height:1.5}
 .working-hours + .working-hours {margin-top:6px;}
 .brand-btn-group {width:100%; display:flex; gap:8px;}
-.service-link-list {width:100%; padding:100px 0 0; display:flex; gap:20px;}
-.service-link-list li {width:100%; flex: 0 1 340px; display:flex; flex-direction:column; gap:20px;}
+.service-link-list {width:100%; padding:100px 0 0; display:flex; gap:20px; list-style:none;}
+.service-link-list li {width:100%; display:flex; flex-direction:column; gap:20px; flex-basis:25%;}
 .service-icon-box img {width:40px; height:40px;}
 
-.service-link-list li > div {width:100%; padding-top:60px; position:relative;}
+.service-link-list li > div {width:100%; padding-top:60px; position:relative; display:flex; flex-direction:column; gap:30px;}
 .service-link-list li > div::before {content:''; width:40px; height:40px; background-image:url('@/assets/images/sub/icon_cont_40.png'); background-repeat:no-repeat; position:absolute; top:0; left:0; display:block;}
 .service-link-list li:nth-of-type(1) > div::before {background-position:-580px -342.86px;}
 .service-link-list li:nth-of-type(2) > div::before {background-position:-20px -20px;}
-.service-link-list li:nth-of-type(3) > div::before {background-position:-100px -266px;}
-.service-link-list li:nth-of-type(4) > div::before {background-position:-900px -186px;}
+.service-link-list li:nth-of-type(3) > div::before {background-position:-900px -186px;} /* 260625 edit 이소라 */
 
 h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
-.service-link-list p {margin-top:6px; min-height:3em; color:#161616; font-size:16px; font-weight:400; line-height:1.5; letter-spacing:-0.16px;}
+.service-link-list p {min-height:3em; color:#161616; font-size:16px; font-weight:400; line-height:1.5; letter-spacing:-0.16px;}
 .brand-card-group .btn_mid {padding:0 9px; border-radius:4px;}
-.service-link-list :deep(button.btn_mid.gray) {margin-top:30px;width:fit-content;}
-
+.service-link-list a.btn_mid.gray {width:fit-content;}
+.service-link-list :deep(button.btn_mid.gray) {width:fit-content;}
+@media screen and (max-width: 1400px) and (min-width: 769px) {
+    .brand-card-group {overflow-x: auto;}
+    .brand-card-group li {min-width: 285px;}
+}
 @media screen and (max-width: 1200px) {
     .cont_inner article {padding:60px 40px; flex-direction:column;}
     /* .brand-btn-group, .brand-card-group {flex-direction:column;} */
@@ -250,14 +253,14 @@ h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
     h3 {font-size:28px;}
     h4 {font-size:18px;}
     .tel-number {font-size:24px;}
-    .cont_inner article {padding:40px 24px; background:transparent; display:flex; flex-direction:column; gap:40px;}
+    .cont_inner article {padding:100px 0px 0px; background:transparent; display:flex; flex-direction:column; gap:40px;} /* 260625 edit 이소라 */
     .intro-summary {width:100%;}
     .brand-card-group {width:100%; padding:30px 24px; background-color: #f8f8f8; border-radius:8px; display:flex; flex-direction:column; gap:20px;}
-    .service-link-list {padding:30px 0; display:flex; flex-direction:column; gap:40px;}
-    .service-link-list li {width:100%; flex:none;display:flex; flex-direction:row; gap:16px; align-items:flex-start;}
-    .service-link-list li > div {width:100%; padding-top:0; padding-left:80px;}
+    .service-link-list {padding:40px 20px 0; display:flex; flex-direction:column; gap:48px;}
+    .service-link-list li {width:100%; display:flex; flex-direction:row; gap:16px; align-items:flex-start;}
+    .service-link-list li > div {width:100%; padding-top:0; padding-left:80px; display:flex; flex-direction:column; align-items: baseline; gap:16px;}
     .service-link-list li > div::before {left:20px;}
-    .btn_mid.gray {}
-    .service-link-list :deep(button.btn_mid.gray){width:auto; margin-top:16px;}
+    .service-link-list p {min-height:auto; margin-top:-8px;}
+    .btn_mid.gray {width:auto;}
 }
 </style>

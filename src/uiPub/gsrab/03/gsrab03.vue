@@ -69,13 +69,13 @@ const langData = {
                 // ],
                 items: [
                     { period: "2025", details: [
-                        { term: ["12월", "GS리테일"], desc: "'1천만불 수출의 탑' 수상 공정거래 자율준수프로그램(CP) 등급평가 <br /> 'AA' 등급 획득" },
+                        { term: ["12월", "GS리테일"], desc: "'1천만불 수출의 탑' 수상 공정거래 자율준수프로그램(CP) 등급평가 'AA' 등급 획득" }, /* 260624 edit 이소라 */
                         { term: ["11월"], subDetails: [
                             { term: "GS25", desc: "베트남 전역 400호점·하노이 50호점 돌파" },
                             { term: "GS리테일", desc: "ESG평가 2년 연속 'A+' 등급 획득" }
                         ] },
                         { term: ["10월", "GS25"], desc: "인스타그램 100만 팔로워 돌파" },
-                        { term: ["9월", "GS SHOP"], desc: "시그니처 프로그램 '지금 백지연' 론칭 BI리뉴얼" },
+                        { term: ["9월", "GS SHOP"], desc: "- GS SHOP 시그니처 프로그램 '지금 백지연' 론칭 <br />- BI 리뉴얼" }, /* 260624 edit 이소라 */
                         { term: ["8월", "GS SHOP"], desc: "르네크루 리브랜딩 론칭" },
                         { term: ["6월", "GS25"], desc: "태국 방콕 'THAIFEX 2025' 박람회 참가" },
                         { term: ["5월", "GS25"], desc: "PB·차별화 상품 일본 돈키호테 수출" },
@@ -446,13 +446,13 @@ const langData = {
                 // ],
                 items: [
                     { period: "2025", details: [
-                        { term: ["Dec", "GS Retail"], desc: "Awarded '$10 Million Export Tower' & <br />Achieved 'AA' grade in Compliance Program (CP) evaluation" },
+                        { term: ["Dec", "GS Retail"], desc: "Awarded '$10 Million Export Tower' & Achieved 'AA' grade in Compliance Program (CP) evaluation" }, /* 260624 edit 이소라 */
                         { term: ["Nov"], subDetails: [
                             { term: "GS25", desc: "Surpassed 400 stores nationwide in Vietnam & 50 stores in Hanoi" },
                             { term: "GS Retail", desc: "Achieved 'A+' grade in ESG evaluation for two consecutive years" }
                         ] },
                         { term: ["Oct", "GS25"], desc: "Surpassed 1 million followers on Instagram" },
-                        { term: ["Sep", "GS25"], desc: "Launched signature program 'Now Baek Ji-yeon' & Remodeled BI" },
+                        { term: ["Sep", "GS25"], desc: "- GS SHOP Signature Program 'Jigeum Baek Ji-yeon' Launch <br />- BI Renewal" }, /* 260624 edit 이소라 */
                         { term: ["Aug", "GS SHOP"], desc: "Launched 'RENEECRU' rebranding" },
                         { term: ["Jun", "GS SHOP"], desc: "Participated in 'THAIFEX 2025' exhibition in Bangkok, Thailand" },
                         { term: ["May", "GS25"], desc: "Exported PB and differentiated products to Don Quijote in Japan" },

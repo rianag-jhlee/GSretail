@@ -40,9 +40,9 @@
                                 <div class="esg_flow_card" :class="{ final: idx === t.esgFlowItems.length - 1 }">
                                     <header class="esg_flow_card_head">
                                         <strong class="esg_flow_card_title" v-html="item.title"></strong>
-                                        <p v-if="item.meta" class="esg_flow_card_meta">{{ item.meta }}</p>
+                                        <p v-if="item.meta" class="esg_flow_card_meta" v-html="item.meta"></p>
                                     </header>
-                                    <p class="esg_flow_card_desc" v-html="item.desc"></p>
+                                    <p class="esg_flow_card_desc" v-html="item.desc"></p><!-- 260624 edit 이소라 -->
                                 </div>
                                 <div v-if="idx < t.esgFlowItems.length - 1" class="esg_flow_connector" aria-hidden="true">
                                     <p><span class="esg_flow_connector_text">{{ item.connectorLeft }}</span></p>
@@ -88,7 +88,7 @@
                                     {{ item }}
                                 </p>
                             </div>
-                        </div>-->
+                        </div> 260624 delete 이소라 -->
                     </div>
                 </section>
             </div>
@@ -492,14 +492,14 @@ export default {
                         },
                         {
                             title: "ESG 추진협의회",
-                            meta: "CEO 및 C레벨 10인",
-                            desc: "CEO 주재 추진협의회를 통해 ESG관련 사항 의사결정",
+                            meta: "CEO 및 C레벨 10인", /* 260624 edit 이소라 */
+                            desc: "CEO 주재 추진협의회를 통해 ESG관련 사항 의사결정", /* 260624 edit 이소라 */
                             connectorLeft: "의사결정",
                             connectorRight: "의안상정",
                         },
                         {
                             title: "ESG 총괄사무국",
-                            meta: "지속가능경영부문/ESG파트",
+                            meta: "지속가능경영부문/<br class='m_br'>ESG파트", /* 260624 edit 이소라 */
                             desc: "ESG 전담 실행 부서",
                             connectorLeft: "결과 공유",
                             connectorRight: "과제취합",
@@ -528,8 +528,8 @@ export default {
                     ],
                     esgTableRightItems: [
                         "[파트너사] 파트너사 간담회",
-                        "[개인정보] 정보보안위원회", /* 260604 edit 이소라 */
-                        "[사회공헌] 사회공헌 심의위원회", /* 260604 edit 이소라 */
+                        "[개인정보] 정보보안위원회", /* 260624 edit 이소라 */
+                        "[사회공헌] 사회공헌 심의위원회", /* 260624 edit 이소라 */
                     ],
                     bnbpTitle: "BNBP(Biz N Biodiversity Platform) 이니셔티브",
                     esgCommitteeDetailImageAlt: "BNBP 로고 이미지",
@@ -787,8 +787,8 @@ export default {
                         },
                         {
                             title: "ESG Promotion Council",
-                            meta: "CEO and 10 C-Level Executives", /* 260604 edit 이소라 */
-                            desc: "Decision-making on ESG-related matters through a CEO-led Promotion Council", /* 260604 edit 이소라 */
+                            meta: "CEO and 10 C-Level Executives", /* 260624 edit 이소라 */
+                            desc: "Decision-making on ESG-related matters through a CEO-led Promotion Council", /* 260624 edit 이소라 */
                             connectorLeft: "Decision-Making",
                             connectorRight: "Agenda Submission",
                         },
@@ -823,7 +823,7 @@ export default {
                     ],
                     esgTableRightItems: [
                         "[Partners] Partner Briefing Session [Personal Data] Information Security Council [Social Contribution] Social Contribution Review Committee",
-                        "[Personal Information] Information Security Committee"/* 260604 번역 */, /* 260604 edit 이소라 */
+                        "[Personal Information] Information Security Committee"/* 260604 번역 */, /* 260624 edit 이소라 */
                         "[Social Contribution] Social Contribution Review Committee"/* 260604 번역 */, 
                     ],
                     bnbpTitle: "BNBP (Biz N Biodiversity Platform) Initiative",
@@ -1218,7 +1218,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .sec_vision_together { margin-top: 50px; }
     .esg_process { margin-top: 28px; }
     .esg_flow_card { min-height: 102px; padding: 16px;  gap:16px;}
-    .esg_flow_card_head { width: 120px; min-height: 0; padding: 15px; text-align: center;}
+    .esg_flow_card_head { width: 120px; min-height: 0; padding: 15px 10px; text-align: center;}
     .esg_flow_card_title { font-size: 1.4rem; line-height: 1.4; }
     .esg_flow_card_meta { margin-top: 4px; font-size: 1.2rem;  line-height: 1.2;}
     .esg_flow_card_desc {  margin-left: 0; font-size: 1.3rem; line-height: 1.4; }
@@ -1237,5 +1237,8 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .bnbp_sub h4 { margin-bottom: 16px; font-size: 2.2rem; }
     .bnbp_sub > .txt_box p { margin-top: 12px; }
     .social_award_wrap :deep(dl dt > a.acc_tit_btn){min-height: 64px;padding: 0 20px;font-weight: 700;font-size: 1.8rem;line-height: 1.4;letter-spacing: 0;}
+}
+@media screen and (min-width: 769px) {
+    :deep(.m_br) { display: none }
 }
 </style>

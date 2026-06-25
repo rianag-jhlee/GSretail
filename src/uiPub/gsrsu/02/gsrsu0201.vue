@@ -260,7 +260,7 @@ export default {
                     SystemDesc: "환경경영 전략과제를 통해 각 사업별 실행전략을 수립하고, 환경경영 평가위원회를 통해 진행 현황 관리 및 영향평가를 진행합니다.<br/>또한, ESG추진협의회 및 ESG위원회에 진행사항을 보고할 수 있도록 하는 환경경영 체계를 구축하였습니다.",
                     ClimateIntro: "GS리테일은 기후변화의 심각성을 인지하고, 모든 이해관계자들과 함께 <br/>기후변화 문제에 대한 적극적인 대응을 위해 최선의 노력을 다하겠습니다.",
                     SeaBreathTitle: "바다숨 프로젝트",
-                    SeaBreathDesc: "바다숨 프로젝트는 바다거북의 이동 경로를 따라 해양 쓰레기를 수거하며 해양 생태계 보전의 중요성을 알리는 GS리테일의 환경 보호 활동입니다.<br/><br/>해양 폐기물로 위협받는 바다거북과 바다의 생명을 지키기 위해 임직원과 지역사회가 함께 참여하는 현장 중심의 생태 보전 활동을 이어가고 있습니다. GS리테일은 바다와 공존하는 지속가능한 미래를 만들어가고자 합니다.",
+                    SeaBreathDesc: "바다숨 프로젝트는 GS25, GS THE FRESH에서 수거한 폐가전을 E-순환거버넌스를 통해 재활용하고, 이를 기부금으로 전환해 해양생태계를 보전하는 활동입니다. 2023년 기획을 시작으로 2025년부터 본격 운영되며, 해양 전문 NGO 동아시아바다공동체 오션, 팀부스터와 함께하고 있습니다.<br/><br/>2025년에는 바다거북의 이동 경로를 따라 해양 폐기물을 수거했으며, 2026년에는 잘피 서식지 보전 활동을 진행할 예정입니다. GS리테일은 바다와 공존하는 지속가능한 미래를 만들어가고자 합니다.", /* 260624 edit 이소라 */
                     EcoProjects: [
                         // {
                         //     tit: "에코 크리에이터: 환경영상제작지원",
@@ -412,7 +412,7 @@ export default {
                     SystemDesc: "Through its environmental management strategies, GS Retail establishes implementation plans for each business unit and conducts progress monitoring and impact assessments through the Environmental Management Evaluation Committee.<br />An environmental management framework has also been established to enable progress reporting to the ESG Promotion Council and the ESG Committee.",
                     ClimateIntro: "GS Retail recognizes the severity of climate change and will make every effort to address climate-related challenges together with all stakeholders.",
                     SeaBreathTitle: "Bada-sum Project",
-                    SeaBreathDesc: "The Bada-sum Project is GS Retail's environmental protection initiative, which involves collecting marine waste along the migration routes of sea turtles to raise awareness about the importance of marine ecosystem conservation.<br />GS Retail continues to carry out field-based ecological conservation activities that bring together employees and local communities to protect sea turtles and marine life threatened by ocean waste.<br />GS Retail is committed to building a sustainable future in coexistence with the sea.",
+                    SeaBreathDesc: "The Badasoom Project collects discarded home appliances from GS25 and GS THE FRESH, recycles them through E-Cycle Governance, and converts the proceeds into donations to preserve marine ecosystems. Launched in planning in 2023 and in full operation from 2025, the project partners with marine NGO Ocean, the East Asian Seas Community, and Team Booster. <br><br>In 2025, marine waste was collected along sea turtle migration routes, and in 2026, seagrass habitat conservation activities are planned. <br>GS Retail is committed to building a sustainable future in harmony with the ocean.", /* 260624 edit 이소라 */
                     EcoProjects: [
                         // {
                         //     tit: "에코 크리에이터: 환경영상제작지원",

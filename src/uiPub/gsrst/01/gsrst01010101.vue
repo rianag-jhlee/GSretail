@@ -18,9 +18,11 @@
 
             <!-- 가맹 조건 안내 (D2=0) -->
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
+                <!-- 260624 add 이소라 -->
                 <header class="sub_header">
                     <h3>{{ t.franchise.title }}</h3>
                 </header>
+                
                 <!-- Depth 3: 타입 탭 -->
                 <div class="tab_d3_wrap">
                     <div class="inner">
@@ -588,7 +590,9 @@
             
             <!-- 경영주 지원제도 (activeD1 === 3) -->
             <section class="sec_owner_support panel" v-show="activeD1 === 3">
-                <p class="tab_intro" v-html="t.support.intro"></p>
+                <header class="sub_header">
+                    <h3 v-html="t.support.intro"></h3>
+                </header>
                 <figure class="brand_panel_bg">
                     <img :src="imgBg02" alt="" width="1420" height="340" />
                 </figure>
@@ -1147,6 +1151,7 @@ const langData = {
             { item: "GS THE FRESH 창업 알아보기" },
             { item: "창업 준비하기" },
             { item: "추천 점포 찾기" },
+            { item: "경영주 지원제도" },
             { item: "상담 및 신청" },
             { item: "가맹계약시스템" },
         ],
@@ -1156,7 +1161,7 @@ const langData = {
             { item: "창업 전 필수 확인사항" },
         ],
         franchise: {
-            title: "GS리테일의 환경 경영과 관련된 실적 자료를 열람하실 수 있습니다.",
+            title: "GS THE FRESH만의 3가지 맞춤형 가맹 타입을 만나보세요.",
             tabAria: "가맹 타입",
             tableHead: {
                 item: "항목",
@@ -1390,7 +1395,7 @@ const langData = {
         },
         support: {
             intro: "GS THE FRESH는 <br class=\"m_br\"/><span class='txt_green'>경영주와의 공동의 발전</span>을 위해 <br />다양한 상생 제도를 운영하고 있습니다.",
-            panelTitle: "운영지원제도",
+            panelTitle: "경영주 운영 지원 제도",
             panelDesc: "GS THE FRESH 경영주님의 원활한 점포 운영을 위한 지원 제도 입니다.",
             cards: [
                 { num: "01", title: "최소 운영 보조", desc: "계약양식 조건에 따라, 개점일로부터 정해진 기간에 한해 경영주 총수입을 기준으로 하여 일정 금액이 보장될 수 있도록 본부지원금을 통해 최소 운영 보조를 지원하고 있습니다." },
@@ -1753,6 +1758,7 @@ const langData = {
             { item: "Learn About GS THE FRESH Startup"/* 260604 번역 */ },
             { item: "Preparing for Startup"/* 260604 번역 */ },
             { item: "Find recommended stores"/* 260604 번역 */ },
+            { item: "Store Owner Support Programs" },
             { item: "Consultation and Application"/* 260604 번역 */ },
             { item: "Franchise Contract System"/* 260604 번역 */ },
         ],
@@ -2553,10 +2559,9 @@ function toggleCard(id) {
 
 /* HEADER */
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
-.page_header::after{content:'';width: 100%;height:100%;position:absolute;left:0;right:0;top:0;bottom:0; background-color: rgba(0, 0, 0, 0.6);}
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
-.sub_header h3 { padding: 100px 0; color: #161616; font-weight: 700; font-size: 4.8rem; line-height: 1.4; letter-spacing: -0.01em; text-align: center; white-space: pre-line; }
+.sub_header h3 { padding: 0 0 64px; color: #161616; font-weight: 700; font-size: 4rem; line-height: 1.3; letter-spacing: -0.1%; text-align: center; white-space: pre-line; } /* 260624 add 이소라 */
 
 /* BODY — PC: 좌우 20px / 모바일: 가로 패딩은 tab_page·Tabs 등에서 (아래 모바일 미디어쿼리 참고) */
 .cont_inner { max-width: 1460px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
@@ -2948,6 +2953,7 @@ function toggleCard(id) {
 @media (max-width: 1024px) {
     .page_header { height: 360px; }
     .header_title { font-size: 5.2rem; }
+    .sub_header h3 { padding: 0 0 24px; font-size: 2.4rem;} /* 260624 add 이소라 */
     .tab_type > button { font-size: 1.6rem; }
     .type_info_bar { font-size: 1.6rem; }
     .type_table thead th, .type_table tbody th, .type_table tbody td { font-size: 1.6rem;}

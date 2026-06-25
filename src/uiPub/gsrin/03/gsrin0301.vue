@@ -45,7 +45,6 @@
                                     <tr>
                                         <th scope="col" class="ac">{{ t.TableHeader.col1 }}</th>
                                         <th scope="col" class="ac">{{ t.TableHeader.col2 }}</th>
-                                        <th scope="col" class="ac">{{ t.TableHeader.col4 }}</th>
                                         <th scope="col" class="ac">{{ t.TableHeader.col3 }}</th>
                                     </tr>
                                 </thead>
@@ -55,15 +54,14 @@
                                         <td class="al">
                                             <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
                                         </td>
-                                        <td class="ac">{{ item.date }}</td>
                                         <td class="ac">
                                             <button type="button" class="btn_download_file" @click="handleDownload(item.link)">
-                                                <!--<span class="file_type_text">PDF</span>-->
+                                                <span class="file_type_text">PDF</span>
                                             </button>
                                         </td>
                                     </tr>
                                     <tr v-if="t.IRListData.length === 0">
-                                        <td colspan="4" class="ac py80">{{ t.NoDataText }}</td>
+                                        <td colspan="3" class="ac py80">{{ t.NoDataText }}</td>
                                     </tr>
                                 </tbody>
                             </table>

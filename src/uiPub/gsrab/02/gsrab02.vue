@@ -94,7 +94,7 @@ onUnmounted(() => {
 // 다국어 데이터셋 객체로 완전 통합
 const langData = {
     ko: {
-        MainTitle: "회사소개",
+        MainTitle: "경영이념 및 가치체계", /* 260624 edit 이소라 */
         SubTitle:'Our Vision',
         VisionSub: "고객의 모든 경험을 연결하고, 데이터로 공감하며, 상품과 서비스로 신뢰받는 플랫폼",
         VisionAlt: "연결, 공감, 신뢰를 표현한 GS리테일 비전 다이어그램",
@@ -116,7 +116,7 @@ const langData = {
         ],
     },
     en: {
-        MainTitle: "Company Overview",
+        MainTitle: "Management Philosophy and Value System", /* 260624 edit 이소라 */
         SubTitle:'Our Vision',
         VisionSub: "A platform that connects all customer experiences, understands customers through data, and is trusted for its products and services",
         VisionAlt: "GS Retail vision diagram expressing connection, empathy, and trust"/* 260604 번역 */,

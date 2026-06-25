@@ -130,7 +130,7 @@
                                         <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.subjectPlaceholder" class="w428"/>
                                     </div>
                                 </div>
-                                <div class="form_row top"> <!-- 26.06.24 add 정다희 : top class 추가 -->
+                                <div class="form_row ai_start">
                                     <div class="label_item">
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.contentLabel }}</span>
                                         <span class="required_mark">*</span>
@@ -152,6 +152,7 @@
                                 <div class="form_row">
                                     <div class="label_item">
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.replyLabel }}</span>
+                                        <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
                                         <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" :initMsg="t.listening.InputWrapcont.part2.replyInitMsg" class="w428"/>
@@ -204,7 +205,7 @@
                                         <Inputs type="text" v-model="formData.subject" class="w428" />
                                     </div>
                                 </div>
-                                <div class="form_row">
+                                <div class="form_row ai_start">
                                     <div class="label_item">
                                         <span class="label_text">{{ t.listening.InputWrapcont.membershipForm.contentLabel }}</span>
                                         <span class="required_mark">*</span>
@@ -310,7 +311,7 @@ export default {
                         Nonmember: {
                             title: "고객정보의 연락처를 확인해 주세요.",
                             items: [
-                                "문의에 대한 답변은 ‘등록하신 연락처(문자, 전화) 또는 이메일을 통해서만’ 확인하실 수 있습니다. 연락처를 정확하게 입력해주세요. <br/>(홈페이지 내에서 이전 문의이력 확인 불가)",
+                                "문의에 대한 답변은 ‘등록하신 연락처(문자, 전화) 또는 이메일을 통해서만’ 확인하실 수 있습니다. <br>연락처를 정확하게 입력해주세요. (홈페이지 내에서 이전 문의이력 확인 불가)", /* 260624 edit 이소라 */
                             ]
                         },
                         InputWrapcont: {
@@ -413,7 +414,7 @@ export default {
                         Nonmember: {
                             title: "Please verify the contact information in your customer details."/* 260604 번역 */,
                             items: [
-                                "Responses to inquiries can only be checked through the contact information (SMS, phone) or email you registered. Please enter your contact information accurately. <br/>(Previous inquiry history cannot be checked on the website)"/* 260604 번역 */,
+                                "Responses to inquiries can only be checked through the contact information (SMS, phone) or email you registered. <br>Please enter your contact information accurately. (Previous inquiry history cannot be checked on the website)", /* 260624 edit 이소라 */
                             ]
                         },
                         InputWrapcont: {
@@ -535,7 +536,7 @@ export default {
 .listening_form_area .consent_list li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 1px; background-color: #67676f; }
 .listening_form_area .form_table { border-top: 1px solid #242428; }
 .listening_form_area .form_row { display: flex; align-items: center; }
-.listening_form_area .form_row.top { align-items:flex-start; }
+.listening_form_area .form_row.ai_start { align-items: flex-start; }
 .listening_form_area .form_row .label { width: 134px; padding: 24px; font-size: 16px; color: #161616; }
 .listening_form_area .required { color: #fb6432; }
 .listening_form_area input, .listening_form_area textarea { width: 100%; padding: 14px 16px; border: 1px solid #c4c4d0; border-radius: 12px; font-size: 16px; }
@@ -547,7 +548,7 @@ export default {
 .listening_form_wrap .form_header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #242428; }
 .listening_form_wrap .form_title { font-size: 24px; font-weight: 700; color: #161616; }
 .listening_form_wrap .required_guide { font-size: 14px; color: #fb6432; }
-.form_section + .form_section {margin-top:64px;}
+.form_section:first-of-type {margin-bottom:64px;}
 .listening_form_wrap .form_body {padding:10px 0 12px; border-bottom: 1px solid #e5e5e9; }
 .listening_form_wrap .form_row { display: flex; align-items: center; gap: 8px; padding: 12px 0; }
 .listening_form_wrap .label_item { display: flex; width: 134px; align-items: center; gap: 4px;}
@@ -577,9 +578,7 @@ export default {
 }
 @media screen and (max-width: 768px) {
     .modal_header {font-size:18px;}
-    .modal_cont{padding-bottom:14px;}
     .input_item, .input_complex, .input_wrap, .w428 {width:100%;}
-    .form_section + .form_section{margin-top:60px;}
     .section_title_sub {font-size:16px !important;}
     .p_desc {font-size:14px;}
     .listening_form_area i {font-weight:700;}
@@ -589,7 +588,7 @@ export default {
     .section_title_area h4{font-size: 1.6rem;line-height: 1.24;letter-spacing: 0%;}
     .listening_form_wrap .form_row{gap:12px;align-items: flex-start;}
     .listening_form_area .consent_box {padding:30px 20px;}
-    .listening_form_area article{margin-top:60px;}
+    .listening_form_area article{margin-top:20px;}
     .listening_form_wrap .input_group.email {flex-direction:column; align-items:stretch;}
     .consent_agree {flex-direction:column; align-items:flex-start; gap:15px;}
     .guide_text + .input_wrap {justify-content:flex-start;}

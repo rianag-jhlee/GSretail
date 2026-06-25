@@ -121,11 +121,11 @@ import Buttons from "@/components/Buttons.vue";
 
 // 이미지 자원 선언부
 import imgCiLogo from "@/assets/images/dummy/gsrab04_02.png";
-import imgCiBiLogo1 from "@/assets/images/dummy/gsrab04_03.png";
-import imgCiBiLogo2 from "@/assets/images/dummy/gsrab04_04.png";
-import imgCiBiLogo3 from "@/assets/images/dummy/gsrab04_05.png";
-import imgCiBiLogo4 from "@/assets/images/dummy/gsrab04_06.png";
-
+import imgCiBiLogo1 from "@/assets/images/sub/gsrab/img_ci_logo_01.png";  /* 260624 edit 이소라 */
+import imgCiBiLogo2 from "@/assets/images/sub/gsrab/img_ci_logo_02.png";  /* 260624 edit 이소라 */
+import imgCiBiLogo3 from "@/assets/images/sub/gsrab/img_ci_logo_03.png";  /* 260624 edit 이소라 */
+import imgCiBiLogo4 from "@/assets/images/sub/gsrab/img_ci_logo_04.png";  /* 260624 edit 이소라 */
+ 
 const props = defineProps({
     lang: {
         type: String,
@@ -155,7 +155,7 @@ const langData = {
             noticeList: [
                 "CI (Corporate Identity) / BI (Brand Identity)<br />(참조) 상표법 제 93조 ~ 상표권 및 전용사용권의 침해행위를 한 자는 7년 이하의 징역 또는 1억원 이하의 벌금에 처한다. (개정 2001년 2월 3일)",
             ],
-            downloadLabel: "CI 및 BI 다운로드(AI, JPG)",
+            downloadLabel: "CI 및 BI 다운로드(PNG)", /* 260624 edit 이소라 */
         },
         ciBiLogos: [
             { src: imgCiBiLogo1, alt: "GS리테일 로고" },
@@ -170,7 +170,7 @@ const langData = {
         },
         colorRegList: [
             {
-                logo: require("@/assets/images/sub/gsrab/img_ci_logo_01.png"),
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_01_s.png"),  /* 260624 edit 이소라 */
                 logo_alt:"GS리테일",
                 pantones: [
                     { name: "PANTONE <br />166 C", details: ["C 0", "M 65", "Y 100", "K 0"], bg: "#f47920" },
@@ -180,7 +180,7 @@ const langData = {
                 ],
             },
             {
-                logo: require("@/assets/images/sub/gsrab/img_ci_logo_02.png"),
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_02_s.png"),  /* 260624 edit 이소라 */
                 logo_alt:"GS25",
                 pantones: [
                     { name: "PANTONE <br />285 C", details: ["C 100", "M 39", "Y 0", "K 0"], bg: "#007ec6" },
@@ -188,14 +188,14 @@ const langData = {
                 ],
             },
             {
-                logo: require("@/assets/images/sub/gsrab/img_ci_logo_03.png"),
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_03_s.png"),  /* 260624 edit 이소라 */
                 logo_alt:"GS SHOP",
                 pantones: [
                     { name: "PANTONE <br />2173 C", details: ["C 72", "M 27", "Y 0", "K 0"], bg: "#3698d4" },
                 ],
             },
             {
-                logo: require("@/assets/images/sub/gsrab/img_ci_logo_04.png"),
+                logo: require("@/assets/images/sub/gsrab/img_ci_logo_04_s.png"),  /* 260624 edit 이소라 */
                 logo_alt:"GS THE FRESH",
                 pantones: [
                     { name: "PANTONE <br />7484 C", details: ["C 91", "M 14", "Y 78", "K 60"], bg: "#005133" },
@@ -399,7 +399,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
         .sec_color_reg .color_reg_list_wrap { padding: 0 0 40px; }
         .sec_color_reg .reg_card { max-width: 100%; margin: 0; padding:0 20px 36px; flex-direction: column; align-items: stretch; }
         .sec_color_reg .reg_card > header { width: 100%; padding: 36px 0 20px; }
-        .sec_color_reg .reg_card > header > h4 { margin: 0 0 20px; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+        .sec_color_reg .reg_card > header > h4 { margin: 0; font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; } /* 260624 edit 이소라 */
         .sec_color_reg .reg_card > .color_list { width: 100%; grid-template-columns: minmax(0, 1fr); }
         .sec_color_reg .reg_card > .color_list > li { width: 100%; min-height: 180px; height: auto; padding: 24px; gap: 26px; }
         .sec_color_reg .reg_list > li:first-child .reg_card > .color_list > li { min-height: 180px; }

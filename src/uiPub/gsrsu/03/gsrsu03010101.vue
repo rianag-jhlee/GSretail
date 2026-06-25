@@ -1961,11 +1961,14 @@ export default {
                                 MissionLabel:"미션"
                             },
                             HistoryTitle: "발자취",
+                            /* 260624 edit 이소라 */
                             History: [
                                 {
                                     year: "2025",
                                     items: [
                                         "백혈병소아암환아 치료비 등 지원사업 (2025~)",
+                                        "에코크리에이터(2019~2025)",
+                                        "에코소셜임팩트(2017~2025)",
                                         "식품 사막화 지역 물품지원 (2024~)",
                                         "이주배경 아동 지원사업 (2024~)",
                                         "저소득학대아동 가족심리 지원사업 (2022~2024)",
@@ -1975,8 +1978,6 @@ export default {
                                         "업사이클링 친구캠페인(2021~)",
                                         "사랑의 이불 기부 (2022)",
                                         "사랑의 마스크 기부(2020)",
-                                        "에코크리에이터(2019~2025)",
-                                        "에코소셜임팩트(2017~2025)",
                                     ]
                                 },
                                 {
@@ -2056,14 +2057,15 @@ export default {
                         communitysupport: {
                             Summary: "지역사회봉사, 기부 및 사회적 기업 지원을 통해 <br/>함께하는 나눔을 실천합니다.",
                             // 2열 그리드 활용 (기존 program_grid 스타일 재활용)
+                            /* 20260624 edit 이소라 */
                             Projects: [
                                 { 
                                     tit: "GS나누미 봉사", 
-                                    desc: "2006년부터 전국 30여 개의 봉사처에서 임직원, 경영주, 고객이 함께 나눔을 실천하고 있습니다.", /* 20260623 edit 이소라 */
+                                    desc: "2006년부터 전국 30여 개의 봉사처에서 임직원, 경영주, 고객이 함께 나눔을 실천하고 있습니다.", 
                                     img: require("@/assets/images/dummy/gsrsu030203_1.png") 
                                 },
                                 { 
-                                    tit: "임원/임직원 현충원 봉사",  /* 20260623 edit 이소라 */
+                                    tit: "임원/임직원 현충원 봉사",  
                                     desc: "호국보훈의 달엔 임원의 현충원 환경정화 봉사활동과 함께 순국선열의 숭고함을 기립니다.",
                                     img: require("@/assets/images/dummy/gsrsu030203_2.png") 
                                 },
@@ -2084,12 +2086,12 @@ export default {
                                 },
                                 { 
                                     tit: "마음모아펀드", 
-                                    desc: "임직원이 기부한 금액과 동일하게 회사가 기부하는 매칭그랜트로 영양부족 식사를 하고있는 취약계층 아동들에게 신선한 먹거리와 과일 등 '든든한 한 끼' 를 지원합니다.",
+                                    desc: "임직원이 기부한 금액과 동일하게 회사가 기부하는 매칭그랜트로 영양부족 식사를 하고있는 취약계층 아동들에게 신선한 먹거리와 과일 등 '든든한 한 끼' 를 지원합니다.", 
                                     img: require("@/assets/images/dummy/gsrsu030203_6.png") 
                                 },
                                 { 
                                     tit: "헌혈캠페인", 
-                                    desc: "매년 헌혈캠페인을 진행하여 백혈병, 소아암 환아 등에게 따뜻한 지원을 이어나가고 있습니다.",
+                                    desc: "매년 헌혈캠페인을 진행하여 백혈병, 소아암 환아 등에게 따뜻한 지원을 이어나가고 있습니다.", 
                                     img: require("@/assets/images/dummy/gsrsu030203_7.png") 
                                 },
                                 { 
@@ -2956,11 +2958,14 @@ export default {
                                 MissionLabel:"Mission"/* 260604 번역 */
                             },
                             HistoryTitle: "Milestones",
-                            History: [ /* 260623 edit 이소라 */
+                            /* 260624 edit 이소라 */
+                            History: [ 
                                 {
                                     year: "2025",
                                     items: [
                                         "Leukemia and childhood cancer patient treatment support program (2025~)",
+                                        "Eco Creator (2019~2025)",
+                                        "Eco Social Impact (2017~2025)",
                                         "Food supply support for food desert areas (2024~)",
                                         "Support program for children of migrant backgrounds (2024~)",
                                         "Family Psychological Support Project for Low-Income Abused Children (2022–2024)"/* 260604 번역 */,
@@ -2970,8 +2975,6 @@ export default {
                                         "Upcycling Friend Campaign (2021~)",
                                         "Blanket of Love donation (2022)",
                                         "Mask of Love donation (2020)",
-                                        "Eco Creator (2019~2025)",
-                                        "Eco Social Impact (2017~2025)",
                                     ]
                                 },
                                 {
@@ -3051,6 +3054,7 @@ export default {
                         communitysupport: {
                             Summary: "GS Retail fosters a culture of sharing through community volunteering, donations, and social enterprise support.",
                             // 2열 그리드 활용 (기존 program_grid 스타일 재활용)
+                            /* 20260624 edit 이소라 */
                             Projects: [
                                 { 
                                     tit: "GS Nanumi Volunteer Service", 
@@ -3794,7 +3798,6 @@ export default {
     .policy_item .label { font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; line-height: 1.45; }
     .policy_item .desc { font-size: 20px; font-weight: 400; color: #161616; line-height: 1.45; }
     .supplychain_policy .system_bg {display: block; margin-top:0; padding: 60px; background-color: #F8F8F8; border-radius: 12px; display: flex; justify-content: center; align-items: center; }
-    .supplychain_policy .system_bg img {padding:60px 95px; background:#fff;}
 
     /* 공통 폰트 및 컬러 변수 활용 */
     .csr_outline .view_box { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }

@@ -547,6 +547,16 @@
         "note": "gsrbr1101 포함됨 "
     },
     {
+        "depth1": "INVESTORS", "depth2": "기업지배구조", "depth3": "이사회 의장 인사말", "depth4": "", "depth5": "", "depth6": "",
+        "type": "Page",
+        "path": "gsrin/01/gsrin0100",
+        "link": "/gsrin0100",
+        "startDate": "26-06-24",
+        "endDate": "26-06-24",
+        "status": "com",
+        "note": ""
+    },
+    {
         "depth1": "INVESTORS", "depth2": "기업지배구조", "depth3": "지배구조헌장", "depth4": "", "depth5": "", "depth6": "",
         "type": "tab",
         "path": "gsrin/01/gsrin0101",

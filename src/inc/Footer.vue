@@ -27,12 +27,6 @@
             </div>
 
             <div class="info">
-                <SelectBox 
-                    @change="navigateToLink" 
-                    :options="t.familyOptions" 
-                    v-model="familySiteRef"
-                    initMsg="FAMILY SITE" 
-                />
                 <div>
                     <strong>{{ t.info.logo }}</strong>
                     <span>{{ t.info.address }}</span>
@@ -43,6 +37,17 @@
             </div>
 
             <button class="go_top" :class="{ hide: isTop, isStatic: isFooterVisible }" @click="scrollTop">Go to top</button>
+
+            <div class="family_site_wrap">
+                <button class="family_site_btn" @click="toggleFamilySite">
+                    FAMILY SITE
+                </button>
+                <ul class="family_site_list" v-if="isFamilyOpen">
+                    <li v-for="option in t.familyOptions" :key="option.value" @click="navigateToLink(option.value)" :class="option.class">
+                        {{ option.label }}
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <!-- 26.06.02 Add 이종환 : sky quick 공통처리 및 수정 -->
@@ -92,6 +97,7 @@ const footerEl = ref(null);
 const quickWrap = ref(null);
 const quickList = ref(null);
 const familySiteRef = ref("");
+const isFamilyOpen = ref(false); // 26.06.25 Add 이소라
 
 const showQuickMenu = ref(true); //26.06.01 Add 이종환 : 
 const isActive = ref(false); //26.06.02 Add 이종환 : 
@@ -132,15 +138,24 @@ const langData = {
             copyright: "Copyright ⓒGS Retail. All rights reserved."
         },
         familyOptions: [
-            { value: 'https://www.gs.co.kr/ko/main', label: '(주)GS' }, 
-            { value: 'https://gsnws.co.kr/', label: 'GS네트웍스' }, 
-            { value: 'https://www.gscaltex.com/kr/', label: 'GS칼텍스(Kixx)' }, 
-            { value: 'https://www.gsnetvision.com/', label: 'GS넷비전' }, 
-            { value: 'https://www.gsmbiz.com/', label: 'GS엠비즈' }, 
-            { value: 'https://www.fcseoul.com/', label: 'GS스포츠' }, 
-            { value: 'https://www.gseps.com/kor/main/main.aspx', label: 'GS EPS' }, 
-            { value: 'https://www.gsenc.com/', label: 'GS건설' }, 
-            { value: 'https://www.elysian.co.kr/intro', label: '엘리시안강촌' }
+            { value: '', label: 'GS SHOP' }, 
+            { value: '', label: '밀박스25' }, 
+            { value: '', label: 'GS25 베트남' }, 
+            { value: '', label: 'GS25 몽골' }, 
+            { class: 'fs_line' }, 
+            { value: '', label: 'GS네트웍스' }, 
+            { value: '', label: 'GS넷비전' }, 
+            { value: '', label: 'GS텔레서비스' }, 
+            { class: 'fs_line' }, 
+            { value: '', label: '(주)GS' }, 
+            { value: '', label: 'GS에너지' }, 
+            { value: '', label: 'GS칼텍스' }, 
+            { value: '', label: 'GS EPS' }, 
+            { value: '', label: 'GS E&R' }, 
+            { value: '', label: 'GS P&L' }, 
+            { value: '', label: 'GS스포츠' }, 
+            { value: '', label: 'GS건설' }, 
+            { value: '', label: 'GS글로벌' }
         ],
         skybanner: [ // 26.06.19 Edit 이종환 : 문구수정
             { txt:'점포 창업 안내', link:"gsrst_smain" },
@@ -276,12 +291,24 @@ const initQuickSlide = () => {
 // =====================
 // family site
 // =====================
+const toggleFamilySite = () => {
+    isFamilyOpen.value = !isFamilyOpen.value;
+};
+
 const navigateToLink = (value) => {
     if (value) {
         window.open(value, '_blank');
+        isFamilyOpen.value = false;
         nextTick(() => {
             familySiteRef.value = "";
         });
+    }
+};
+
+// 외부 클릭 시 드롭다운 닫기
+const handleOutsideClick = (e) => {
+    if (!e.target.closest('.family_site_wrap')) {
+        isFamilyOpen.value = false;
     }
 };
 
@@ -313,13 +340,16 @@ onMounted(() => {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", checkQuickSlide);
+    document.addEventListener("click", handleOutsideClick); // 추가: 외부 클릭 감지
 });
 
 onBeforeUnmount(() => {
     observer.value?.disconnect();
     window.removeEventListener("scroll", handleScroll);
     window.removeEventListener("resize", checkQuickSlide);
+    document.removeEventListener("click", handleOutsideClick); // 추가: 이벤트 제거
 });
 </script>
 
-<style></style>
+<style>
+</style>
