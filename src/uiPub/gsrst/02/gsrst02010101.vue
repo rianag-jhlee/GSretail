@@ -2555,7 +2555,7 @@ const franchiseDefineCard = {
 const franchiseFormula = {
     franchisee: { title: "성실한 운영", label: "가맹점 (Franchisee)" },
     franchisor: { title: "체계적 지원", label: "가맹본부 (Franchisor)" },
-    result: { title: "함께 성장", label: "GS25 Franchise" },
+    result: { title: "함께 성장" }, /*26.06.25 del 이소라*/ 
 };
 
 /* 가맹점/본부 역할 2열 카드 */
