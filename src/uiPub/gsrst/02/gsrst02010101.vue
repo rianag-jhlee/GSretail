@@ -24,8 +24,7 @@
 
             
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
-                <!-- ref brandMetricRef : ScrollTrigger 트리거·num_motion 초기화 대상 (sec_hero) -->
-                <section class="sec_hero" ref="brandMetricRef" :style="{ backgroundImage: `url(${imgBg2})` }">
+                <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg2})` }">
                     <header>
                         <!-- <span class="tit">{{ t.brandIntro.badge }}</span> -->    <!-- 26.06.23 edit 정다희 : tit 삭제 -->
                         <!-- hero_title : 26.06.23 add 정다희 : GS25 로고 추가 -->
@@ -54,19 +53,12 @@
                         </template>
                     </ol>
                     <!-- //26.06.23 add 정다희 : desc_list 추가 -->
-                    <!-- 26.06.24 add 정다희 : brandStats 지표 카드 (num_motion 숫자 애니메이션 · gsrmain.vue 동일 구조) -->
                     <ul class="metric_list">
                         <li v-for="(item, i) in t.brandStats" :key="i">
-                            <!-- num_prefix: 숫자 앞 고정 문구 · num_motion: 카운트업 · num_unit: 숫자 뒤 단위 -->
-                            <strong class="num_count">
-                                <span v-if="item.num_prefix" class="num_prefix">{{ item.num_prefix }}</span>
-                                <span class="num_motion_wrap"><span class="num_motion">{{ item.num }}</span></span>
-                                <span class="num_unit_wrap"><span class="num_unit">{{ item.unit }}</span></span>
-                            </strong>
-                            <span class="num_desc" v-html="item.desc"></span>
+                            <strong>{{ item.value }}</strong>
+                            <span v-html="item.label"></span>
                         </li>
                     </ul>
-                    <!-- //26.06.24 add 정다희 : brandStats 지표 카드 -->
                 </section>
                 <section class="sec_num_list">
                     <header class="section_header">
@@ -853,14 +845,13 @@
                             <div class="search_group">
                                 <span class="search_group_label">{{ t.storeSearch.franchiseTypeLabel }}</span>
                                 <div class="chip_list">
-                                    <!-- 26.06.25 add 정다희 : 가맹타입 중복 선택 — filterFranchiseType 배열 · includes로 active · toggleChipFilter 토글 -->
                                     <button
                                         v-for="t in franchiseTypes"
                                         :key="t.value"
                                         type="button"
                                         class="chip"
-                                        :class="{ active: filterFranchiseType.includes(t.value) }"
-                                        @click="toggleFranchiseType(t.value)"
+                                        :class="{ active: filterFranchiseType === t.value }"
+                                        @click="filterFranchiseType = filterFranchiseType === t.value ? '' : t.value"
                                     >{{ t.label }}</button>
                                 </div>
                             </div>
@@ -868,19 +859,17 @@
                             <div class="search_group">
                                 <span class="search_group_label">{{ t.storeSearch.storeTypeYouthLabel }}</span>
                                 <div class="chip_list">
-                                    <!-- 26.06.25 add 정다희 : 점포유형(신규점) 중복 선택 — filterStoreType 배열 · includes로 active · toggleChipFilter 토글 -->
                                     <button
                                         type="button"
                                         class="chip"
-                                        :class="{ active: filterStoreType.includes('신규점') }"
-                                        @click="toggleStoreType('신규점')"
+                                        :class="{ active: filterStoreType === '신규점' }"
+                                        @click="filterStoreType = filterStoreType === '신규점' ? '' : '신규점'"
                                     >{{ t.storeSearch.newStoreLabel }}</button>
-                                    <!-- 26.06.25 add 정다희 : 점포유형(기존점) 중복 선택 — 신규점과 동시 선택 가능 -->
                                     <button
                                         type="button"
                                         class="chip"
-                                        :class="{ active: filterStoreType.includes('기존점') }"
-                                        @click="toggleStoreType('기존점')"
+                                        :class="{ active: filterStoreType === '기존점' }"
+                                        @click="filterStoreType = filterStoreType === '기존점' ? '' : '기존점'"
                                     >{{ t.storeSearch.existingStoreLabel }}</button>
                                     <span class="chip_sep_v"></span>
                                     <span class="chip_youth_wrap">
@@ -1671,11 +1660,6 @@
 
 <script setup>
 import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick, defineProps } from "vue";
-/* 26.06.24 add 정다희 : 플러그인 추가 num_motion 숫자 애니메이션 */
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
-/* //26.06.24 add 정다희 : 플러그인 추가 num_motion 숫자 애니메이션 */
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
@@ -2903,31 +2887,13 @@ const regionCounselStaff = {
 const filterRegion = ref("");
 const filterRegionSido = ref("");
 const filterRegionSigungu = ref("");
-const filterFranchiseType = ref([]); /* 26.06.25 add 정다희 : 빈배열 추가*/ 
-const filterStoreType = ref([]);  /* 26.06.25 add 정다희 : 빈배열 추가*/ 
+const filterFranchiseType = ref("");
+const filterStoreType = ref("");
 const filterYouth = ref(false);
 const storeSearchData = ref({ type: "", keyword: "" });
 const youthPopoverVisible = ref(false);
 
 function handleStoreSearch() {}
-
-/* 26.06.25 add 정다희 : 가맹타입·점포유형 칩 중복 선택 토글 (템플릿 ref unwrap 대응 — ref는 script에서 직접 참조) */
-function toggleChipFilterValue(filterRef, value) {
-    const idx = filterRef.value.indexOf(value);
-    if (idx > -1) {
-        filterRef.value = filterRef.value.filter((v) => v !== value);
-    } else {
-        filterRef.value = [...filterRef.value, value];
-    }
-}
-
-function toggleFranchiseType(value) {
-    toggleChipFilterValue(filterFranchiseType, value);
-}
-
-function toggleStoreType(value) {
-    toggleChipFilterValue(filterStoreType, value);
-}
 
 const storeRegionSigunguOptions = computed(() => startupRegionSigunguMap[filterRegionSido.value] || []);
 
@@ -3287,11 +3253,9 @@ const langData = {
             "창업에 대한 궁금증을 1:1 상담해 드려요.",
             "보유 자리 입지 제안 또는 브랜드 전환을 상담해드려요.",
         ],
-        // 26.06.24 edit 정다희 : num / unit / desc 구조 분리 (num_motion 애니메이션 대비)
-        // num_prefix: 숫자 앞 고정 문구 · num: 카운트업 대상 · unit: 숫자 뒤 단위 · desc: 하단 설명
         brandStats: [
-            { num: "18,000+", unit: "점", desc: "전국 점포수<br class='m_br'>(2025.12 기준)" },
-            { num_prefix: "점포당 매출", num: "1", unit: "위", desc: "점포당 연매출 6.4억<br class='m_br'>(2025년)" },
+            { value: "18,000+ 점", label: "전국 점포수<br class='m_br'>(2025.12 기준)" },
+            { value: "점포당 매출 1위", label: "점포당 연매출 6.4억<br class='m_br'>(2025년)" },
         ],
         successPointPanel: {
             // badge: "SUCCESS POINT", //26.06.23 edit 정다희 : badge 삭제 
@@ -3634,10 +3598,9 @@ const langData = {
             "We provide 1:1 consultation for your startup questions.",
             "We consult on location proposals or brand conversion for your property.",
         ],
-        // 26.06.24 edit 정다희 : brandStats — num_motion 구조 (ko 동일)
         brandStats: [
-            { num: "18,000+", unit: "", desc: "Number of stores nationwide"/* 260604 번역 */ },
-            { num_prefix: "No.", num: "1", unit: "in convenience store sales"/* 260604 번역 */, desc: "Annual sales per store of 640 million won+"/* 260604 번역 */ },
+            { value: "18,000+", label: "Number of stores nationwide"/* 260604 번역 */ },
+            { value: "No. 1 in convenience store sales", label: "Annual sales per store of 640 million won+"/* 260604 번역 */ },
         ],
         successPointPanel: {
             // badge: "SUCCESS POINT", //26.06.23 del 정다희 
@@ -3996,156 +3959,8 @@ function onMqMobileChangeWithQuickMenu(e) {
 
 /* ────────────── [quick_menu · script] 끝 ────────────── */
 
-/* ────────────── [brandStats · num_motion 숫자 애니메이션] ────────────── */
-/* 26.06.24 add 정다희 : gsrmain.vue hero_message num_motion과 동일 패턴 */
-
-const brandMetricRef = ref(null); /* sec_hero — ScrollTrigger 트리거·DOM 조회 기준 */
-let brandNumMotionCtx = null; /* GSAP context — revert 시 타임라인·set 일괄 정리 */
-let brandNumMotionPlayed = false; /* 1회 재생 플래그 */
-let brandNumMotionScrollTrigger = null; /* 뷰포트 노출 감지용 ScrollTrigger 인스턴스 */
-
-/* 26.06.24 add 정다희 : 요소가 뷰포트에 보이는 비율 계산 (0~1) */
-function getElementVisibleRatio(el) {
-    const rect = el.getBoundingClientRect();
-    const vh = window.innerHeight;
-    const visibleHeight = Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0));
-    return rect.height > 0 ? visibleHeight / rect.height : 0;
-}
-
-/* 26.06.24 add 정다희 : sec_hero가 뷰포트에 80% 이상 보일 때 재생 조건 충족 여부 */
-function shouldPlayBrandNumMotion(el) {
-    const visibleRatio = getElementVisibleRatio(el);
-    const maxRatio = Math.min(el.offsetHeight, window.innerHeight) / el.offsetHeight; /* 뷰포트보다 큰 경우 상한 */
-    const threshold = Math.min(0.8, maxRatio);
-    return visibleRatio >= threshold - 0.01;
-}
-
-/* 26.06.24 add 정다희 : 목표 텍스트(18,000+ · 1 등) 파싱 — 카운트업 목표값·콤마·접미사(+) */
-function parseNumMotionValue(text) {
-    const suffix = text.endsWith("+") ? "+" : "";
-    const value = parseInt(text.replace(/[^0-9]/g, ""), 10) || 0;
-    const useComma = text.includes(",");
-    return { value, suffix, useComma };
-}
-
-/* 26.06.24 add 정다희 : 카운트업 중·완료 시 표시 포맷 */
-function formatNumMotionValue(num, useComma, suffix) {
-    const formatted = useComma ? Math.round(num).toLocaleString("en-US") : String(Math.round(num));
-    return `${formatted}${suffix}`;
-}
-
-/* 26.06.24 add 정다희 : ScrollTrigger · GSAP context 정리 */
-function destroyBrandNumMotion() {
-    if (brandNumMotionScrollTrigger) {
-        brandNumMotionScrollTrigger.kill();
-        brandNumMotionScrollTrigger = null;
-    }
-    if (brandNumMotionCtx) {
-        brandNumMotionCtx.revert();
-        brandNumMotionCtx = null;
-    }
-}
-
-/* 26.06.24 add 정다희 : sec_hero 진입 시 슬라이드업(0) → 카운트업 (1회 재생) */
-function initBrandNumMotion() {
-    if (brandNumMotionPlayed || brandNumMotionCtx) return;
-    if (activeD1.value !== 0 || activeD2.value !== 0) return; /* 브랜드 소개 탭(D1=0, D2=0)에서만 */
-
-    const heroEl = brandMetricRef.value;
-    if (!heroEl || !heroEl.offsetHeight) return; /* v-show 숨김·미렌더 시 스킵 */
-
-    const metricItems = heroEl.querySelectorAll(".metric_list > li");
-    if (!metricItems.length) return;
-
-    const timelines = [];
-
-    /* 26.06.24 add 정다희 : 노출 조건 충족 시 모든 metric 타임라인 동시 재생 */
-    const playBrandNumMotion = () => {
-        if (brandNumMotionPlayed) return;
-        brandNumMotionPlayed = true;
-        timelines.forEach((tl) => {
-            if (!tl.isActive()) tl.play(0);
-        });
-        if (brandNumMotionScrollTrigger) {
-            brandNumMotionScrollTrigger.kill();
-            brandNumMotionScrollTrigger = null;
-        }
-    };
-
-    brandNumMotionCtx = gsap.context(() => {
-        metricItems.forEach((item) => {
-            const el = item.querySelector(".num_motion");
-            const unitWrap = item.querySelector(".num_unit_wrap");
-            if (!el) return;
-
-            const targetText = el.textContent.trim();
-
-            /* num 없음 — unit만 슬라이드업 (현재 미사용, 확장 대비) */
-            if (!targetText) {
-                if (unitWrap) {
-                    gsap.set(unitWrap, { y: "100%", opacity: 0, willChange: "transform, opacity" });
-                    unitWrap.style.display = "inline-block";
-                    const tl = gsap.timeline({ paused: true, repeat: 0 });
-                    tl.to(unitWrap, { y: "0%", opacity: 1, duration: 0.6, ease: "power2.out", onComplete: () => gsap.set(unitWrap, { willChange: "auto" }) });
-                    timelines.push(tl);
-                }
-                return;
-            }
-
-            const { value, suffix, useComma } = parseNumMotionValue(targetText);
-            const counter = { val: 0 };
-
-            /* 초기 상태: 0 표시 · 아래로 숨김 · unit은 카운트 시작 전까지 숨김 */
-            el.textContent = "0";
-            gsap.set(el, { y: "100%", opacity: 0, willChange: "transform, opacity" });
-            if (unitWrap) unitWrap.style.display = "none";
-
-            const tl = gsap.timeline({ paused: true, repeat: 0 });
-            /* 1) 슬라이드업 2) 카운트업 — unit은 onStart에서 노출 */
-            tl.to(el, { y: "0%", opacity: 1, duration: 0.6, ease: "power2.out" }).to(counter, {
-                val: value,
-                duration: value > 100 ? 1.8 : 1,
-                ease: "power2.out",
-                onStart: () => {
-                    if (unitWrap) unitWrap.style.display = "inline-block";
-                },
-                onUpdate: () => {
-                    el.textContent = formatNumMotionValue(counter.val, useComma, suffix);
-                },
-                onComplete: () => {
-                    gsap.set(el, { willChange: "auto" });
-                },
-            }, ">");
-            timelines.push(tl);
-        });
-
-        /* sec_hero가 뷰포트에 80% 이상 보일 때 playBrandNumMotion 호출 */
-        brandNumMotionScrollTrigger = ScrollTrigger.create({
-            trigger: heroEl,
-            start: "top bottom",
-            end: "bottom top",
-            invalidateOnRefresh: true,
-            onUpdate: () => {
-                if (brandNumMotionPlayed) return;
-                if (shouldPlayBrandNumMotion(heroEl)) playBrandNumMotion();
-            },
-        });
-
-        /* 마운트 시점에 이미 80% 이상 보이는 경우 즉시 재생 */
-        if (!brandNumMotionPlayed && shouldPlayBrandNumMotion(heroEl)) playBrandNumMotion();
-    }, heroEl);
-}
-/* ────────────── [brandStats · num_motion 숫자 애니메이션] 끝 ────────────── */
-
 watch([activeD1, activeD2], () => {
     refreshQuickMenu();
-    nextTick(() => {
-        /* 브랜드 소개 탭 복귀 시 num_motion 초기화·ScrollTrigger 위치 갱신 */
-        if (activeD1.value === 0 && activeD2.value === 0) {
-            initBrandNumMotion();
-            ScrollTrigger.refresh();
-        }
-    });
 });
 
 /* [공통] 리사이즈 — 반응형·Swiper */
@@ -4168,7 +3983,6 @@ onMounted(() => {
     window.addEventListener("scroll", onQuickMenuScroll, { passive: true });
     nextTick(() => {
         initQuickMenu();
-        initBrandNumMotion(); /* 26.06.24 add 정다희 : brandStats num_motion 초기화 */
     });
 });
 /* [공통] 언마운트 — 리스너·quick_menu 정리 */
@@ -4186,7 +4000,6 @@ onUnmounted(() => {
         quickMenuRefreshTimer = null;
     }
     resetQuickMenuState();
-    destroyBrandNumMotion(); /* 26.06.24 add 정다희 : num_motion ScrollTrigger · 타임라인 정리 */
 });
 
 </script>
@@ -4256,14 +4069,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_hero > .desc_list li{color:#fff;font-weight: 700;font-size: 1.8rem;line-height: 1.5;}
 .sec_hero > .metric_list { width: 100%; margin-top: 40px; display: flex; gap: 10px; }
 .sec_hero > .metric_list > li { min-width: 0; flex: 0 0 230px; padding: 20px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
-/* 26.06.24 add 정다희 : brandStats num_motion — gsrmain.vue num_count 구조 동일 */
-.sec_hero > .metric_list > li > .num_count { display: inline-flex; align-items: flex-end; flex-wrap: nowrap; color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_hero > .metric_list > li > .num_count > .num_prefix { display: inline-block; margin-right: 4px; } /* 숫자 앞 고정 문구(점포당 매출 등) */
-.sec_hero > .metric_list > li > .num_count > .num_motion_wrap { display: inline-block; overflow: hidden; vertical-align: bottom; } /* 슬라이드업 마스크 */
-.sec_hero > .metric_list > li > .num_count > .num_motion_wrap > .num_motion { display: inline-block; } /* 카운트업 대상 숫자 */
-.sec_hero > .metric_list > li > .num_count > .num_unit_wrap { display: none; vertical-align: bottom; } /* 초기 숨김 — 카운트 시작 시 JS에서 inline-block */
-.sec_hero > .metric_list > li > .num_count > .num_unit_wrap > .num_unit { display: inline-block; margin-left: 4px; } /* 숫자 뒤 단위(점, 위 등) */
-.sec_hero > .metric_list > li > .num_desc { color: #fff; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; } /* 지표 하단 설명 */
+.sec_hero > .metric_list > li > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_hero > .metric_list > li > span { color: #fff; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
 .sec_num_list :deep(.num_info_item) { padding: 0; border-bottom: 0; }
 .sec_num_list :deep(.num_info_num) { margin-bottom: 8px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
@@ -4577,7 +4384,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_compare > .franchise_compare_wrap { margin-top: 40px; overflow-x: auto; }
 .sec_franchise_compare .franchise_compare_table { width: 100%; min-width: 1000px; border-top: 1px solid #161616; border-collapse: collapse; table-layout: fixed; }
 .sec_franchise_compare .franchise_compare_table col.col_group { width: 8.7%; }
-.sec_franchise_compare .franchise_compare_table col.col_group2 { width: 66px; }
+.sec_franchise_compare .franchise_compare_table col.col_group2 { width: 60px; }
 .sec_franchise_compare .franchise_compare_table col.col_label { width: auto; }
 .sec_franchise_compare .franchise_compare_table col.col_gs { width: 23%; }
 .sec_franchise_compare .franchise_compare_table th, .sec_franchise_compare .franchise_compare_table td { padding: 16px 24px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; word-break: keep-all; border: 1px solid #e5e5e9; text-align: center; vertical-align: middle; }
@@ -4883,25 +4690,9 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .consult_search_box{padding:32px 24px;border-radius:12px;}
 .consult_search_box strong{font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em; text-align:center;display:block;}
 .consult_search_box > div {margin-top:24px;padding-top:24px;}
-.consult_search_box > div > p{
-text-align: center;
-font-size: 2rem;
-line-height: 1.35;
-letter-spacing: -0.01em;
-}
-.consult_search_box > div{
-    margin-top:24px;
-    border-top:1px solid #D7D7DF;
-}
-.consult_search_box .flex{
-    margin-top:24px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-
-}
-
+.consult_search_box > div > p{text-align: center;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
+.consult_search_box > div{margin-top:24px;border-top:1px solid #D7D7DF;}
+.consult_search_box .flex{margin-top:24px;display:flex;justify-content:center;align-items:center;gap:10px;}
 .consult_search_box > div:deep(.select){width:100%;max-width:250px;}
 .consult_search_box > div:deep(button){width:141px;}
 /* --- D2=1 · 창업 설명회 신청 (activeD2 === 1) --- */
@@ -5025,9 +4816,8 @@ letter-spacing: -0.01em;
     .sec_hero > .desc_list li{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .sec_hero > .metric_list { width: 100%; max-width: none; margin-top: 40px; flex-direction: row; gap: 10px; }
     .sec_hero > .metric_list > li { min-width: 0; flex: 1; padding: 16px 10px; gap: 3px; }
-    /* 26.06.24 add 정다희 : brandStats num_motion — 모바일 */
-    .sec_hero > .metric_list > li > .num_count { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
-    .sec_hero > .metric_list > li > .num_desc { font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+    .sec_hero > .metric_list > li > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+    .sec_hero > .metric_list > li > span { font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
     .sec_num_list .section_header > h2 + p { color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .sec_num_list :deep(.num_info_list) { grid-template-columns: 1fr; gap: 40px; }
     .sec_num_list :deep(.num_info_item > article) { flex-direction: row; align-items: flex-start; gap: 16px; }
@@ -5044,9 +4834,7 @@ letter-spacing: -0.01em;
     .sec_band > .inner > .link_grid > li > a { height: auto; min-height: 0; padding: 16px; gap: 16px; }
     .sec_band > .inner > .link_grid > li > a > .thumb { width: 60px; height: 60px; }
     .sec_band > .inner > .link_grid > li > a > .thumb:before {width: 32px; height: 32px; background-size: cover;}
-    /* .sec_band > .inner > .link_grid > li:nth-of-type(1) > a > .thumb:before { background-image: url('@/assets/images/sub/icon_cont_32.png');}
-    .sec_band > .inner > .link_grid > li:nth-of-type(2) > a > .thumb:before { background-position: -453px -268px; background-size: 1000px auto; }
-    .sec_band > .inner > .link_grid > li:nth-of-type(3) > a > .thumb:before { background-position: 0 -828px; background-size: 32px auto;} */
+   
     .sec_band > .inner > .link_grid > li > a > .txt > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .sec_band > .inner > .link_grid > li > a > .txt > .desc { font-size: 1.4rem; line-height: 1.4; }
     .sec_overlap > .overlap_grid { width: 100%; max-width: 335px; margin: 0 auto; flex-wrap: wrap; align-content: flex-start; justify-content: flex-start; gap: 0; }
@@ -5199,6 +4987,7 @@ letter-spacing: -0.01em;
     .sec_franchise_compare > .franchise_compare_wrap { margin-top: 32px; margin-right: -20px; margin-left: -20px; padding: 0 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .sec_franchise_compare .franchise_compare_table { min-width: 852px; }
     .sec_franchise_compare .franchise_compare_table col.col_group { width: 7%; }
+    .sec_franchise_compare .franchise_compare_table col.col_group2{width:35px;}
     .sec_franchise_compare .franchise_compare_table col.col_label { width: 17.6%; }
     .sec_franchise_compare .franchise_compare_table col.col_gs { width: 25.1%; }
     .sec_franchise_compare .franchise_compare_table th,
@@ -5207,6 +4996,7 @@ letter-spacing: -0.01em;
     .sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table thead td > span { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table tbody th:nth-child(2){padding-left:11px; padding-right:11px;}
     .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .sec_operation .section_header, .sec_life .section_header { margin-bottom: 60px; }
     .sec_life .icon_card_list.col_02 { gap: 0; }
