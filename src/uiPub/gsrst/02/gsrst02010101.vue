@@ -4161,7 +4161,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_stack > .sub_block > .sub_swiper { margin-top: 40px; overflow: hidden; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-wrapper) { align-items: stretch; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) { width: 340px; height: auto; }
-.sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > figure { width: 100%; aspect-ratio: 340/277; margin: 0; background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 12px; overflow: hidden; }
+.sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > figure { width: 100%; aspect-ratio: 340/227; margin: 0; background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 12px; overflow: hidden; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { width: fit-content; margin-top: 24px; padding: 3px 6px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; background-color: #f2f2f4; border-radius: 4px; display: inline-block; }
 .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong { margin-top: 6px; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
 .sec_icon_grid > .inner > .icon_grid { margin: 0; padding: 0; display: grid; align-items: stretch; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
