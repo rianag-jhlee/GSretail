@@ -862,9 +862,9 @@ h2+.explain {
 .hero_message .inner{max-width: 1720px;margin: 0 auto;padding: 0 20px;}
 .hero_message p{font-weight: 700;font-size: 6.8rem;line-height: 1.4;letter-spacing: -0.02em;}
 .hero_message p span{font-weight: 800;}
-.hero_message p span.txt_orange{color: #FB6432;}
-.hero_message p span.txt_green{color: #15B874;}
-.hero_message p span.txt_blue{color: #248BFF;}
+.hero_message p :deep(.txt_orange){color: #FB6432;}
+.hero_message p :deep(.txt_green){color: #15B874;}
+.hero_message p :deep(.txt_blue){color: #248BFF;}
 .hero_message p + a {width:50px; height:50px; margin-top:3em; display:inline-block; background:url('@/assets/images/main/icon_brand_arrow2.png') no-repeat center; background-size:contain;}
 .hero_message ul{max-width:1045px;margin-top:20px;margin-left: auto;;}
 .hero_message ul > li{padding: 20px 8px;border-bottom: 1px solid #000;}
