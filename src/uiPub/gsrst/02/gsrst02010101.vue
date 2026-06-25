@@ -24,7 +24,8 @@
 
             
             <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
-                <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg2})` }">
+                <!-- ref brandMetricRef : ScrollTrigger 트리거·num_motion 초기화 대상 (sec_hero) -->
+                <section class="sec_hero" ref="brandMetricRef" :style="{ backgroundImage: `url(${imgBg2})` }">
                     <header>
                         <!-- <span class="tit">{{ t.brandIntro.badge }}</span> -->    <!-- 26.06.23 edit 정다희 : tit 삭제 -->
                         <!-- hero_title : 26.06.23 add 정다희 : GS25 로고 추가 -->
@@ -40,7 +41,7 @@
                     <!-- 26.06.23 edit 정다희 : action_list — Figma 908:19853 카드형(제목 + pill 버튼) -->
                     <ul class="action_list">
                         <li v-for="(item, i) in t.brandApplyLinks" :key="i">
-                            <a :href="item.url" class="action_card btn_icon_arrow primary after">
+                            <a href="#none" class="action_card btn_icon_arrow primary after" @click.prevent="goToConsultTab(item.consultD2)">
                                 <strong v-html="item.title"></strong>
                                 <span class="action_card_btn"><em>{{ item.btnLabel }}</em></span>
                             </a>
@@ -53,12 +54,19 @@
                         </template>
                     </ol>
                     <!-- //26.06.23 add 정다희 : desc_list 추가 -->
+                    <!-- 26.06.24 add 정다희 : brandStats 지표 카드 (num_motion 숫자 애니메이션 · gsrmain.vue 동일 구조) -->
                     <ul class="metric_list">
                         <li v-for="(item, i) in t.brandStats" :key="i">
-                            <strong>{{ item.value }}</strong>
-                            <span v-html="item.label"></span>
+                            <!-- num_prefix: 숫자 앞 고정 문구 · num_motion: 카운트업 · num_unit: 숫자 뒤 단위 -->
+                            <strong class="num_count">
+                                <span v-if="item.num_prefix" class="num_prefix">{{ item.num_prefix }}</span>
+                                <span class="num_motion_wrap"><span class="num_motion">{{ item.num }}</span></span>
+                                <span class="num_unit_wrap"><span class="num_unit">{{ item.unit }}</span></span>
+                            </strong>
+                            <span class="num_desc" v-html="item.desc"></span>
                         </li>
                     </ul>
+                    <!-- //26.06.24 add 정다희 : brandStats 지표 카드 -->
                 </section>
                 <section class="sec_num_list">
                     <header class="section_header">
@@ -85,7 +93,7 @@
                         </header>
                         <ul class="link_grid">
                             <li v-for="(item, i) in t.brandSolutionCards" :key="i">
-                                <a :href="item.url" class="btn_icon_arrow primary after">
+                                <a href="#none" class="btn_icon_arrow primary after" @click.prevent="goToSolutionTab(item.d1, item.d2)"> <!--26.06.25 add 정다희 : 클릭이벤트: brandSolutionCards 1depth·2depth 탭 이동 -->
                                     <span class="thumb" aria-hidden="true"></span>
                                     <span class="txt">
                                         <strong>{{ item.title }}</strong>
@@ -845,13 +853,14 @@
                             <div class="search_group">
                                 <span class="search_group_label">{{ t.storeSearch.franchiseTypeLabel }}</span>
                                 <div class="chip_list">
+                                    <!-- 26.06.25 add 정다희 : 가맹타입 중복 선택 — filterFranchiseType 배열 · includes로 active · toggleChipFilter 토글 -->
                                     <button
                                         v-for="t in franchiseTypes"
                                         :key="t.value"
                                         type="button"
                                         class="chip"
-                                        :class="{ active: filterFranchiseType === t.value }"
-                                        @click="filterFranchiseType = filterFranchiseType === t.value ? '' : t.value"
+                                        :class="{ active: filterFranchiseType.includes(t.value) }"
+                                        @click="toggleFranchiseType(t.value)"
                                     >{{ t.label }}</button>
                                 </div>
                             </div>
@@ -859,17 +868,19 @@
                             <div class="search_group">
                                 <span class="search_group_label">{{ t.storeSearch.storeTypeYouthLabel }}</span>
                                 <div class="chip_list">
+                                    <!-- 26.06.25 add 정다희 : 점포유형(신규점) 중복 선택 — filterStoreType 배열 · includes로 active · toggleChipFilter 토글 -->
                                     <button
                                         type="button"
                                         class="chip"
-                                        :class="{ active: filterStoreType === '신규점' }"
-                                        @click="filterStoreType = filterStoreType === '신규점' ? '' : '신규점'"
+                                        :class="{ active: filterStoreType.includes('신규점') }"
+                                        @click="toggleStoreType('신규점')"
                                     >{{ t.storeSearch.newStoreLabel }}</button>
+                                    <!-- 26.06.25 add 정다희 : 점포유형(기존점) 중복 선택 — 신규점과 동시 선택 가능 -->
                                     <button
                                         type="button"
                                         class="chip"
-                                        :class="{ active: filterStoreType === '기존점' }"
-                                        @click="filterStoreType = filterStoreType === '기존점' ? '' : '기존점'"
+                                        :class="{ active: filterStoreType.includes('기존점') }"
+                                        @click="toggleStoreType('기존점')"
                                     >{{ t.storeSearch.existingStoreLabel }}</button>
                                     <span class="chip_sep_v"></span>
                                     <span class="chip_youth_wrap">
@@ -893,7 +904,7 @@
                                         >   
                                             <strong>{{ t.storeSearch.youthStartupTitle }}</strong>
                                             <p>{{ t.storeSearch.youthStartupDesc }}</p>
-                                            <a href="#">{{ t.storeSearch.youthStartupLinkText }}</a>
+                                            <a href="#none" @click.prevent="youthPopoverVisible = false; goToSolutionTab(1, 2)">{{ t.storeSearch.youthStartupLinkText }}</a><!-- 26.06.25 add 정다희 : 창업 준비하기 > 창업 혜택 이동 -->
                                             <button
                                                 type="button"
                                                 class="layer_tooltip_close"
@@ -906,19 +917,15 @@
                             </div>
                             <!-- 검색 -->
                             <div class="search_group search_group_input">
-                                <!-- 26.06.17 edit 정다희 : 웹접근성 대응 label for 적용 -->
-                                <label class="search_group_label" for="storeSearchInput">{{ t.storeSearch.searchLabel }}</label>
-                                <div class="store_search_input_wrap">
-                                    <input
-                                        id="storeSearchInput"
-                                        type="text"
-                                        class="store_search_input"
-                                        :placeholder="t.storeSearch.searchPlaceholder"
-                                        v-model="storeSearchQuery"
-                                    />
-                                    <button type="button" class="store_search_btn" :aria-label="t.storeSearch.searchButtonAriaLabel">
-                                    </button>
-                                </div>
+                                <!-- 26.06.25 add 정다희 : 검색 라벨 span으로 수정, store_search_input_wrap 포함 input+button을  공통 컴포넌트 Search로 수정 -->
+                                <span class="search_group_label">{{ t.storeSearch.searchLabel }}</span>
+                                <Search
+                                    v-model="storeSearchData"
+                                    :use-select="false"
+                                    :placeholder="t.storeSearch.searchPlaceholder"
+                                    @search="handleStoreSearch"
+                                />
+                                <!-- //26.06.25 add 정다희 : 검색 라벨 span으로 수정, store_search_input_wrap 포함 input+button을  공통 컴포넌트 Search로 수정 -->
                             </div>
                         </div>
                     </div>
@@ -1528,6 +1535,7 @@
                                             :initMsg="t.consultFormTexts.consultantSelectInit"
                                             :disabled="!startupConsultForm.entryRegion"
                                         />
+                                        <p>* 입지(점포) 지역을 선택하시면, 해당 지역 담당자가 연락드리겠습니다. </p>
                                     </div>
                                 </div>
                             </article>
@@ -1663,6 +1671,11 @@
 
 <script setup>
 import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick, defineProps } from "vue";
+/* 26.06.24 add 정다희 : 플러그인 추가 num_motion 숫자 애니메이션 */
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+/* //26.06.24 add 정다희 : 플러그인 추가 num_motion 숫자 애니메이션 */
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
@@ -1675,6 +1688,7 @@ import StoreCard from "@/components/StoreCard.vue";
 import StoreCardDetail from "@/components/StoreCardDetail.vue";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
+import Search from "@/components/Search.vue"; // 26.06.25 add 정다희 : 검색 컴포넌트 추가
 import Textarea from "@/components/Textarea.vue";
 import ConsultCalendar from "@/components/ConsultCalendar.vue";
 import ConsultTimePicker from "@/components/ConsultTimePicker.vue";
@@ -1735,7 +1749,24 @@ const setTab = (index) => {
     top: 0
   })
 }
-/* //26.06.10 Add 이종환 : 탭이동 및 스크롤 top 기능 추가 */
+
+/* 26.06.25 add 정다희 : 상담 및 신청(D1=3) 2depth 탭 이동 */
+function goToConsultTab(d2Index) {
+    activeD1.value = 3;
+    nextTick(() => {
+        activeD2.value = d2Index;
+        window.scrollTo({ top: 0 });
+    });
+}
+/* 26.06.25 add 정다희 : brandSolutionCards 1depth·2depth 탭 이동 */
+function goToSolutionTab(d1Index, d2Index = 0) {
+    activeD1.value = d1Index;
+    nextTick(() => {
+        activeD2.value = d2Index;
+        window.scrollTo({ top: 0 });
+    });
+}
+/* //26.06.25 add 정다희 : brandSolutionCards 1depth·2depth 탭 이동 */
 
 /* [D1=0 D2=1] 메가히트 상품 Swiper — 모바일에서 슬라이드 폭·위치 재계산 */
 function refreshProductHitSwipers() {
@@ -1954,7 +1985,7 @@ const franchiseTypeGroups = [
         desc: "직접 임차한 점포에서 더 높은 수익배분 혜택을 누려보세요.",
         cards: [
             {
-                badge: "GS 1 Type",
+                badge: "GS1 Type", /*26.06.25 edit 정다희 : 띄어쓰기 수정 */ 
                 cardClass: "is_gs1",
                 desc: "경영주가 직접 임차하여 운영",
             },
@@ -1967,12 +1998,12 @@ const franchiseTypeGroups = [
         desc: "본부가 임차한 점포에서 합리적인 투자금과 배분율로 시작해보세요.", /*26.06.24 edit 정다희 : 설명 수정*/ 
         cards: [
             {
-                badge: "GS 2 Type",
+                badge: "GS2 Type", /*26.06.25 edit 정다희 : 띄어쓰기 수정 */ 
                 cardClass: "is_gs2",
                 desc: "본사와 임차비용 공동 부담",
             },
             {
-                badge: "GS 3 Type",
+                badge: "GS3 Type", /*26.06.25 edit 정다희 : 띄어쓰기 수정 */ 
                 cardClass: "is_gs3",
                 desc: "임차비용 부담 없이 시작",
             },
@@ -2316,7 +2347,7 @@ const competitivePanel = {
 const competitiveCards = [
     { title: "수익성 중심의<br />점포 오픈" },
     { title: "차별화 상품과<br />매장 컨셉" }, /**26.06.24 edit 정다희 : 타이틀 수정*/
-    { title: "스마트한 시스템과<br />밀착 지원" },
+    { title: "든든하고 편리한<br />지원시스템" },
 ];
 
 const storeOpenPanel = {
@@ -2872,11 +2903,31 @@ const regionCounselStaff = {
 const filterRegion = ref("");
 const filterRegionSido = ref("");
 const filterRegionSigungu = ref("");
-const filterFranchiseType = ref("");
-const filterStoreType = ref("");
+const filterFranchiseType = ref([]); /* 26.06.25 add 정다희 : 빈배열 추가*/ 
+const filterStoreType = ref([]);  /* 26.06.25 add 정다희 : 빈배열 추가*/ 
 const filterYouth = ref(false);
-const storeSearchQuery = ref("");
+const storeSearchData = ref({ type: "", keyword: "" });
 const youthPopoverVisible = ref(false);
+
+function handleStoreSearch() {}
+
+/* 26.06.25 add 정다희 : 가맹타입·점포유형 칩 중복 선택 토글 (템플릿 ref unwrap 대응 — ref는 script에서 직접 참조) */
+function toggleChipFilterValue(filterRef, value) {
+    const idx = filterRef.value.indexOf(value);
+    if (idx > -1) {
+        filterRef.value = filterRef.value.filter((v) => v !== value);
+    } else {
+        filterRef.value = [...filterRef.value, value];
+    }
+}
+
+function toggleFranchiseType(value) {
+    toggleChipFilterValue(filterFranchiseType, value);
+}
+
+function toggleStoreType(value) {
+    toggleChipFilterValue(filterStoreType, value);
+}
 
 const storeRegionSigunguOptions = computed(() => startupRegionSigunguMap[filterRegionSido.value] || []);
 
@@ -3152,8 +3203,8 @@ const langData = {
         startupProcessTitle: "상담 신청부터 개점까지, <br />최소 30일이면 나만의 GS25를 오픈할 수 있어요!", /*26.06.24 edit 정다희 : 타이틀 수정*/
         processMoreOpenLabel: "더 알아보기",
         processMoreCloseLabel: "접기",
-        franchiseTypeTitle: "내 자금과 상황에 딱 맞게! <br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요",
-        franchiseCompareTitle: "한눈에 비교하고, 나에게 유리한 타입을 찾아보세요!",
+        franchiseTypeTitle: "내 조건에 딱 맞게!<br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요", /*26.06.25 edit 정다희 : 타이틀 수정*/ 
+        franchiseCompareTitle: "GS25의 가맹타입을 한 눈에 비교해보세요!", /*26.06.25 edit 정다희 : 타이틀 수정*/ 
         benefitPanelAria: {
             store: "탄탄한 점포",
             operation: "든든한 점포 운영",
@@ -3162,7 +3213,7 @@ const langData = {
         storeSectionAriaLabel: "추천 점포 찾기",
         storeIntro: "체계적인 상권 분석으로 선정한 GS25 추천점포를 확인해보세요", /**26.06.24 edit 정다희 : 설명 수정*/
         storeSearch: {
-            regionLabel: "지역",
+            regionLabel: "지역선택",
             allLabel: "전체",
             sidoInit: "시/도 선택",
             sigunguInit: "구/군 선택",
@@ -3191,8 +3242,8 @@ const langData = {
             { item: "GS25 창업 알아보기" },
             { item: "창업 준비하기" },
             { item: "추천 점포 찾기" },
-            { item: "상담 및 신청" },
-            { item: "가맹계약시스템" }
+            { item: "창업상담 및 신청" },  /*26.06.25 edit 정다희 : 내용 수정*/ 
+            { item: "가맹계약시스템", link: "https://contract.gsretail.com:7200/web/main/index.jsp", target: "_blank" } /*26.06.25 add 정다희 : 가맹계약시스템 링크 추가*/ 
         ],
         depth2Tabs: [
             { item: "GS25 브랜드 소개" },
@@ -3215,19 +3266,19 @@ const langData = {
                 title: "창업설명회 신청",
                 // desc: "창업 전반에 대한 정보를 한 번에 안내드려요", //26.06.23 del 정다희 : desc 삭제 
                 btnLabel: "신청하기", //26.06.23 edit 정다희 : btnLabel 추가
-                url: "#none",
+                consultD2: 0, //26.06.25 add 정다희 : 상담 및 신청 > 창업 설명회 신청
             },
             {
                 title: "창업상담 신청",
                 // desc: "창업에 대한 궁금증을 1:1 상담해 드려요",  //26.06.23 del 정다희 : desc 삭제 
                 btnLabel: "신청하기", //26.06.23 edit 정다희 : btnLabel 추가
-                url: "#none",
+                consultD2: 1, //26.06.25 add 정다희 : 상담 및 신청 > 창업 상담 신청
             },
             {
                 title: "입점 제안/브랜드 전환 문의",
                 // desc: "보유 자리 입점 제안 또는 브랜드 전환을 <br class='m_br'/>상담해드려요",  //26.06.23 del 정다희 : desc 삭제 
                 btnLabel: "신청하기", //26.06.23 edit 정다희 : btnLabel 추가
-                url: "#none",
+                consultD2: 2, //26.06.25 add 정다희 : 상담 및 신청 > 입점 제안/브랜드 전환 상담
             },
         ],
         // 26.06.23 add 정다희 : brandApplyDesc 추가
@@ -3236,10 +3287,11 @@ const langData = {
             "창업에 대한 궁금증을 1:1 상담해 드려요.",
             "보유 자리 입지 제안 또는 브랜드 전환을 상담해드려요.",
         ],
-        // 26.06.23 edit 정다희 : brandStats 수정
+        // 26.06.24 edit 정다희 : num / unit / desc 구조 분리 (num_motion 애니메이션 대비)
+        // num_prefix: 숫자 앞 고정 문구 · num: 카운트업 대상 · unit: 숫자 뒤 단위 · desc: 하단 설명
         brandStats: [
-            { value: "18,000+ 점", label: "전국 점포수<br class='m_br'>(2025.12 기준)" },
-            { value: "점포당 매출 1위", label: "점포당 연매출 6.4억<br class='m_br'>(2025년)" },
+            { num: "18,000+", unit: "점", desc: "전국 점포수<br class='m_br'>(2025.12 기준)" },
+            { num_prefix: "점포당 매출", num: "1", unit: "위", desc: "점포당 연매출 6.4억<br class='m_br'>(2025년)" },
         ],
         successPointPanel: {
             // badge: "SUCCESS POINT", //26.06.23 edit 정다희 : badge 삭제 
@@ -3272,17 +3324,20 @@ const langData = {
             {
                 title: "가맹 타입 소개",
                 desc: "나에게 딱 맞는 3가지 타입",
-                url: "#none",
+                d1: 1, //26.06.25 add 정다희 : 창업 준비하기 > 가맹 타입
+                d2: 1, //26.06.25 add 정다희 : 창업 준비하기 > 가맹 타입
             },
             {
                 title: "창업 절차 안내",
                 desc: "내 점포 오픈까지, 최소 30일!",
-                url: "#none",
+                d1: 1, //26.06.25 add 정다희 : 창업 준비하기 > 창업절차
+                d2: 0, //26.06.25 add 정다희 : 창업 준비하기 > 창업 절차
             },
             {
                 title: "추천 점포",
                 desc: "지역, 상권, 투자비용에 맞는 추천 점포 확인",
-                url: "#none",
+                d1: 2, //26.06.25 add 정다희 : 추천점포 찾기
+                d2: 0, //26.06.25 add 정다희 : 추천 점포 찾기
             },
         ],
         startupProcessSteps,
@@ -3414,11 +3469,11 @@ const langData = {
             seminarConsentNotice: "동의하지 않으실 경우 상담 글 작성이 불가능합니다.",
             entryConsentNotice: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 입지제안 신청 글 작성이 불가능합니다.",
             agreeText: "동의합니다.",
-            reserveButton: "상담 예약 신청하기",
+            reserveButton: "상담 신청하기", /*26.06.25 edit 정다희 : 내용 수정 */ 
             seminarGuide: "GS25 창업설명회는 정기설명회 및 컨설턴트 상담으로 운영되며, 각 지역 사무소에서 진행됩니다. <br />지역별 창업설명회 일정이 상이하므로 확인 후 신청해 주세요.",
             seminarSelectRegionGuide: "창업 설명회 개설 지역을 선택해 주세요.",
-            regionConsultantTitle: "지역 및 컨설턴트 선택",
-            regionConsultantLabel: "지역/컨설턴트",
+            regionConsultantTitle: "입지(점포) 지역 선택", /*26.06.25 edit 정다희 : 타이틀 내용 수정 */ 
+            regionConsultantLabel: "지역",
             customerInfoTitle: "고객정보",
             nameLabel: "이름",
             contactLabel: "연락처",
@@ -3463,8 +3518,8 @@ const langData = {
             storeNameLabel: "점포 상호",
             commercialFeatureLabel: "상권 특징",
             landlordRelationLabel: "건물주와의 관계",
-            regionSelectInit: "지역선택",
-            consultantSelectInit: "컨설턴트 선택",
+            regionSelectInit: "시/도 선택",
+            consultantSelectInit: "구/군 선택",
             searchButton: "조회",
             applyButton: "신청",
             directInputPlaceholder: "직접입력",
@@ -3537,8 +3592,8 @@ const langData = {
             { item: "Learn About GS25 Startup"/* 260604 번역 */ },
             { item: "Preparing to start a business"/* 260604 번역 */ },
             { item: "Find recommended stores"/* 260604 번역 */ },
-            { item: "Consultation and Application"/* 260604 번역 */ },
-            { item: "Franchise Contract System"/* 260604 번역 */ }
+            { item: "Startup Consultation and Application"/* 260604 번역 */ }, /*26.06.25 edit 정다희 : 내용 수정*/ 
+            { item: "Franchise Contract System", link: "https://contract.gsretail.com:7200/web/main/index.jsp", target: "_blank" } /*26.06.25 add 정다희 : 가맹계약시스템 링크 추가*/ 
         ],
         depth2Tabs: [
             { item: "Introduction to the GS25 Brand"/* 260604 번역 */ },
@@ -3560,17 +3615,17 @@ const langData = {
             {
                 title: "Apply for startup briefing"/* 260604 번역 */,
                 btnLabel: "Apply"/* 260604 번역 */,
-                url: "#none",
+                consultD2: 0, /*26.06.25 add 정다희 :consultD2 추가 */
             },
             {
                 title: "Apply for startup consultation"/* 260604 번역 */,
                 btnLabel: "Apply"/* 260604 번역 */,
-                url: "#none",
+                consultD2: 1, /*26.06.25 add 정다희 :consultD2 추가 */
             },
             {
                 title: "Location proposal/Brand conversion inquiry"/* 260604 번역 */,
                 btnLabel: "Inquire"/* 260604 번역 */,
-                url: "#none",
+                consultD2: 2, /*26.06.25 add 정다희 :consultD2 추가 */
             },
         ],
         // 26.06.23 add 정다희 : brandApplyDesc 추가 (영문 번역 대기)
@@ -3579,10 +3634,10 @@ const langData = {
             "We provide 1:1 consultation for your startup questions.",
             "We consult on location proposals or brand conversion for your property.",
         ],
+        // 26.06.24 edit 정다희 : brandStats — num_motion 구조 (ko 동일)
         brandStats: [
-            { value: "18,000+", label: "Number of stores nationwide"/* 260604 번역 */ },
-            { value: "No. 1 in convenience store sales"/* 260604 번역 */, label: "Annual sales per store of 640 million won+"/* 260604 번역 */ },
-            { value: "4.7 million people"/* 260604 번역 */, label: "Nationwide average daily visiting customers"/* 260604 번역 */ },
+            { num: "18,000+", unit: "", desc: "Number of stores nationwide"/* 260604 번역 */ },
+            { num_prefix: "No.", num: "1", unit: "in convenience store sales"/* 260604 번역 */, desc: "Annual sales per store of 640 million won+"/* 260604 번역 */ },
         ],
         successPointPanel: {
             // badge: "SUCCESS POINT", //26.06.23 del 정다희 
@@ -3615,17 +3670,20 @@ const langData = {
             {
                 title: "Franchise type introduction"/* 260604 번역 */,
                 desc: "3 types that fit you perfectly"/* 260604 번역 */,
-                url: "#none",
+                d1: 1,
+                d2: 1,
             },
             {
                 title: "Startup process guide"/* 260604 번역 */,
                 desc: "Minimum 30 days until your store opens!"/* 260604 번역 */,
-                url: "#none",
+                d1: 1,
+                d2: 0,
             },
             {
                 title: "Recommended stores"/* 260604 번역 */,
                 desc: "Check recommended stores by region, commercial area, and investment cost"/* 260604 번역 */,
-                url: "#none",
+                d1: 2,
+                d2: 0,
             },
         ],
         startupProcessSteps,
@@ -3938,8 +3996,156 @@ function onMqMobileChangeWithQuickMenu(e) {
 
 /* ────────────── [quick_menu · script] 끝 ────────────── */
 
+/* ────────────── [brandStats · num_motion 숫자 애니메이션] ────────────── */
+/* 26.06.24 add 정다희 : gsrmain.vue hero_message num_motion과 동일 패턴 */
+
+const brandMetricRef = ref(null); /* sec_hero — ScrollTrigger 트리거·DOM 조회 기준 */
+let brandNumMotionCtx = null; /* GSAP context — revert 시 타임라인·set 일괄 정리 */
+let brandNumMotionPlayed = false; /* 1회 재생 플래그 */
+let brandNumMotionScrollTrigger = null; /* 뷰포트 노출 감지용 ScrollTrigger 인스턴스 */
+
+/* 26.06.24 add 정다희 : 요소가 뷰포트에 보이는 비율 계산 (0~1) */
+function getElementVisibleRatio(el) {
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const visibleHeight = Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0));
+    return rect.height > 0 ? visibleHeight / rect.height : 0;
+}
+
+/* 26.06.24 add 정다희 : sec_hero가 뷰포트에 80% 이상 보일 때 재생 조건 충족 여부 */
+function shouldPlayBrandNumMotion(el) {
+    const visibleRatio = getElementVisibleRatio(el);
+    const maxRatio = Math.min(el.offsetHeight, window.innerHeight) / el.offsetHeight; /* 뷰포트보다 큰 경우 상한 */
+    const threshold = Math.min(0.8, maxRatio);
+    return visibleRatio >= threshold - 0.01;
+}
+
+/* 26.06.24 add 정다희 : 목표 텍스트(18,000+ · 1 등) 파싱 — 카운트업 목표값·콤마·접미사(+) */
+function parseNumMotionValue(text) {
+    const suffix = text.endsWith("+") ? "+" : "";
+    const value = parseInt(text.replace(/[^0-9]/g, ""), 10) || 0;
+    const useComma = text.includes(",");
+    return { value, suffix, useComma };
+}
+
+/* 26.06.24 add 정다희 : 카운트업 중·완료 시 표시 포맷 */
+function formatNumMotionValue(num, useComma, suffix) {
+    const formatted = useComma ? Math.round(num).toLocaleString("en-US") : String(Math.round(num));
+    return `${formatted}${suffix}`;
+}
+
+/* 26.06.24 add 정다희 : ScrollTrigger · GSAP context 정리 */
+function destroyBrandNumMotion() {
+    if (brandNumMotionScrollTrigger) {
+        brandNumMotionScrollTrigger.kill();
+        brandNumMotionScrollTrigger = null;
+    }
+    if (brandNumMotionCtx) {
+        brandNumMotionCtx.revert();
+        brandNumMotionCtx = null;
+    }
+}
+
+/* 26.06.24 add 정다희 : sec_hero 진입 시 슬라이드업(0) → 카운트업 (1회 재생) */
+function initBrandNumMotion() {
+    if (brandNumMotionPlayed || brandNumMotionCtx) return;
+    if (activeD1.value !== 0 || activeD2.value !== 0) return; /* 브랜드 소개 탭(D1=0, D2=0)에서만 */
+
+    const heroEl = brandMetricRef.value;
+    if (!heroEl || !heroEl.offsetHeight) return; /* v-show 숨김·미렌더 시 스킵 */
+
+    const metricItems = heroEl.querySelectorAll(".metric_list > li");
+    if (!metricItems.length) return;
+
+    const timelines = [];
+
+    /* 26.06.24 add 정다희 : 노출 조건 충족 시 모든 metric 타임라인 동시 재생 */
+    const playBrandNumMotion = () => {
+        if (brandNumMotionPlayed) return;
+        brandNumMotionPlayed = true;
+        timelines.forEach((tl) => {
+            if (!tl.isActive()) tl.play(0);
+        });
+        if (brandNumMotionScrollTrigger) {
+            brandNumMotionScrollTrigger.kill();
+            brandNumMotionScrollTrigger = null;
+        }
+    };
+
+    brandNumMotionCtx = gsap.context(() => {
+        metricItems.forEach((item) => {
+            const el = item.querySelector(".num_motion");
+            const unitWrap = item.querySelector(".num_unit_wrap");
+            if (!el) return;
+
+            const targetText = el.textContent.trim();
+
+            /* num 없음 — unit만 슬라이드업 (현재 미사용, 확장 대비) */
+            if (!targetText) {
+                if (unitWrap) {
+                    gsap.set(unitWrap, { y: "100%", opacity: 0, willChange: "transform, opacity" });
+                    unitWrap.style.display = "inline-block";
+                    const tl = gsap.timeline({ paused: true, repeat: 0 });
+                    tl.to(unitWrap, { y: "0%", opacity: 1, duration: 0.6, ease: "power2.out", onComplete: () => gsap.set(unitWrap, { willChange: "auto" }) });
+                    timelines.push(tl);
+                }
+                return;
+            }
+
+            const { value, suffix, useComma } = parseNumMotionValue(targetText);
+            const counter = { val: 0 };
+
+            /* 초기 상태: 0 표시 · 아래로 숨김 · unit은 카운트 시작 전까지 숨김 */
+            el.textContent = "0";
+            gsap.set(el, { y: "100%", opacity: 0, willChange: "transform, opacity" });
+            if (unitWrap) unitWrap.style.display = "none";
+
+            const tl = gsap.timeline({ paused: true, repeat: 0 });
+            /* 1) 슬라이드업 2) 카운트업 — unit은 onStart에서 노출 */
+            tl.to(el, { y: "0%", opacity: 1, duration: 0.6, ease: "power2.out" }).to(counter, {
+                val: value,
+                duration: value > 100 ? 1.8 : 1,
+                ease: "power2.out",
+                onStart: () => {
+                    if (unitWrap) unitWrap.style.display = "inline-block";
+                },
+                onUpdate: () => {
+                    el.textContent = formatNumMotionValue(counter.val, useComma, suffix);
+                },
+                onComplete: () => {
+                    gsap.set(el, { willChange: "auto" });
+                },
+            }, ">");
+            timelines.push(tl);
+        });
+
+        /* sec_hero가 뷰포트에 80% 이상 보일 때 playBrandNumMotion 호출 */
+        brandNumMotionScrollTrigger = ScrollTrigger.create({
+            trigger: heroEl,
+            start: "top bottom",
+            end: "bottom top",
+            invalidateOnRefresh: true,
+            onUpdate: () => {
+                if (brandNumMotionPlayed) return;
+                if (shouldPlayBrandNumMotion(heroEl)) playBrandNumMotion();
+            },
+        });
+
+        /* 마운트 시점에 이미 80% 이상 보이는 경우 즉시 재생 */
+        if (!brandNumMotionPlayed && shouldPlayBrandNumMotion(heroEl)) playBrandNumMotion();
+    }, heroEl);
+}
+/* ────────────── [brandStats · num_motion 숫자 애니메이션] 끝 ────────────── */
+
 watch([activeD1, activeD2], () => {
     refreshQuickMenu();
+    nextTick(() => {
+        /* 브랜드 소개 탭 복귀 시 num_motion 초기화·ScrollTrigger 위치 갱신 */
+        if (activeD1.value === 0 && activeD2.value === 0) {
+            initBrandNumMotion();
+            ScrollTrigger.refresh();
+        }
+    });
 });
 
 /* [공통] 리사이즈 — 반응형·Swiper */
@@ -3960,7 +4166,10 @@ onMounted(() => {
     window.addEventListener("resize", onWindowResize);
     window.addEventListener("resize", refreshQuickMenu);
     window.addEventListener("scroll", onQuickMenuScroll, { passive: true });
-    nextTick(() => initQuickMenu());
+    nextTick(() => {
+        initQuickMenu();
+        initBrandNumMotion(); /* 26.06.24 add 정다희 : brandStats num_motion 초기화 */
+    });
 });
 /* [공통] 언마운트 — 리스너·quick_menu 정리 */
 onUnmounted(() => {
@@ -3977,6 +4186,7 @@ onUnmounted(() => {
         quickMenuRefreshTimer = null;
     }
     resetQuickMenuState();
+    destroyBrandNumMotion(); /* 26.06.24 add 정다희 : num_motion ScrollTrigger · 타임라인 정리 */
 });
 
 </script>
@@ -4046,8 +4256,14 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_hero > .desc_list li{color:#fff;font-weight: 700;font-size: 1.8rem;line-height: 1.5;}
 .sec_hero > .metric_list { width: 100%; margin-top: 40px; display: flex; gap: 10px; }
 .sec_hero > .metric_list > li { min-width: 0; flex: 0 0 230px; padding: 20px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
-.sec_hero > .metric_list > li > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_hero > .metric_list > li > span { color: #fff; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+/* 26.06.24 add 정다희 : brandStats num_motion — gsrmain.vue num_count 구조 동일 */
+.sec_hero > .metric_list > li > .num_count { display: inline-flex; align-items: flex-end; flex-wrap: nowrap; color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_hero > .metric_list > li > .num_count > .num_prefix { display: inline-block; margin-right: 4px; } /* 숫자 앞 고정 문구(점포당 매출 등) */
+.sec_hero > .metric_list > li > .num_count > .num_motion_wrap { display: inline-block; overflow: hidden; vertical-align: bottom; } /* 슬라이드업 마스크 */
+.sec_hero > .metric_list > li > .num_count > .num_motion_wrap > .num_motion { display: inline-block; } /* 카운트업 대상 숫자 */
+.sec_hero > .metric_list > li > .num_count > .num_unit_wrap { display: none; vertical-align: bottom; } /* 초기 숨김 — 카운트 시작 시 JS에서 inline-block */
+.sec_hero > .metric_list > li > .num_count > .num_unit_wrap > .num_unit { display: inline-block; margin-left: 4px; } /* 숫자 뒤 단위(점, 위 등) */
+.sec_hero > .metric_list > li > .num_desc { color: #fff; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; } /* 지표 하단 설명 */
 .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
 .sec_num_list :deep(.num_info_item) { padding: 0; border-bottom: 0; }
 .sec_num_list :deep(.num_info_num) { margin-bottom: 8px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
@@ -4379,7 +4595,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .list_note > li + li { margin-top: 8px; }
 .list_note > li > p { margin: 0; color: #67676F; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .list_note > li > p.txt_link { color: #161616; }
-.list_note > li > p > a { color: #107AF2; text-decoration: underline; }
+.txt_link :deep(a) { color: #107AF2 !important; text-decoration: underline !important; }
 .sec_operation .section_header, .sec_life .section_header { margin-bottom: 80px; }
 .icon_card_row:first-child .icon_card_list.type_02 > li > article { padding: 0 0 72px; }
 .icon_card_list.type_02 { border-bottom: 1px solid #E5E5E9; }
@@ -4495,13 +4711,9 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .layer_tooltip > a { margin-top: 16px; color: #107AF2; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; text-decoration: underline; display: block; }
 .layer_tooltip_close { width: 20px; height: 20px; background: none; border: none; cursor: pointer; position: absolute; top: 32px; right: 32px; background:url('@/assets/images/common/icon_set_20.png') -627px -25px no-repeat; }
 .youth_popover { top: calc(100% + 8px); left: -119px; right: -166px; }
-.search_group_input { min-width: 280px; flex: 1; display: flex; gap: 10px; align-items: center; }
-.store_search .search_group_input :deep(.select) { flex: 1; min-width: 0; }
-.store_search_input_wrap { position: relative; }
-.store_search_input { width: 100%; height: 40px; padding: 0 16px; color: #161616; font-size: 1.6rem; letter-spacing: -0.01em; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 12px;  outline: none; }
-.store_search_input::placeholder { color: #a4a4b0; }
-.store_search_input:focus { border-color: #107AF2; }
-.store_search_btn { width: 20px; height: 20px; padding: 0; background: none; border: none; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.search_group_input { flex: 1; display: flex; gap: 8px; }
+.store_search .search_group_input :deep(.select) { width:200px; flex: 1; min-width: 0; }
+.store_search .search_group.search_group_input .search_wrap { width: 100%; }
 .type_table_wrap { margin-top: 20px; border-top: 1px solid #161616; overflow-x: auto; }
 .type_table { width: 100%; border-collapse: collapse; }
 .type_table thead th { padding: 28px 24px; font-size: 1.8rem; line-height: 1.4; text-align: center; background-color: #f8f8f8; border: 1px solid #e5e5e9; }
@@ -4605,6 +4817,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .col_layout.apply_form .form_body .form_row .form_name_field{max-width:448px;}
 .col_layout.apply_form .form_body .form_row .form_field_consult_entry { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .col_layout.apply_form .form_body .form_row .form_field_consult_entry :deep(.select) { width: 200px; max-width: 200px; flex: 0 0 auto; min-width: 0; }
+.col_layout.apply_form .form_body .form_row .form_field_consult_entry > p { width: 100%; margin-top: 16px; flex-basis: 100%; } /* 26.06.25 add 정다희 : 안내 문구만 하단 줄 배치 */
 .col_layout.apply_form .form_body .form_row .form_field_phone :deep(label.select),
 .col_layout.apply_form .form_body .form_row .form_field_phone :deep(.input_wrap){max-width:134px;}
 .col_layout.apply_form .form_body h3{margin-bottom:16px; font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;display: flex; align-items:center;}
@@ -4667,7 +4880,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .manager_addr > .addr { margin: 2px 0 0; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 .sec_consult_seminar > .section_header{margin-bottom:48px;}
 /* 창업 설명회 신청청 */
-.consult_search_box{padding:32px 24px;border-radius:12px; border:1px solid #D7D7DF;}
+.consult_search_box{padding:32px 24px;border-radius:12px;}
 .consult_search_box strong{font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em; text-align:center;display:block;}
 .consult_search_box > div {margin-top:24px;padding-top:24px;}
 .consult_search_box > div > p{
@@ -4766,8 +4979,11 @@ letter-spacing: -0.01em;
     section > .inner { padding-top: 40px; padding-bottom: 40px; }
     .search_bottom_row { margin-top: 24px; padding-top: 24px; border-top: 1px solid #D7D7DF; flex-direction: column; gap: 50px; }
     .search_group_input { width: 100%; }
+    .store_search .search_bottom_row > .search_group { width: 100%; }
+    .store_search .search_group > .search_group_input { width: 100%; flex-direction: column; align-items: stretch; gap: 8px; }
+    .store_search .search_group > .search_group_input :deep(.select) { width: 100%; max-width: none; flex: none; }
     .chip_list { position: relative; }
-
+   
 
     :deep(.check em){font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
     :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 64px; padding: 8px 0 8px 40px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
@@ -4809,8 +5025,9 @@ letter-spacing: -0.01em;
     .sec_hero > .desc_list li{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .sec_hero > .metric_list { width: 100%; max-width: none; margin-top: 40px; flex-direction: row; gap: 10px; }
     .sec_hero > .metric_list > li { min-width: 0; flex: 1; padding: 16px 10px; gap: 3px; }
-    .sec_hero > .metric_list > li > strong { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
-    .sec_hero > .metric_list > li > span { font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+    /* 26.06.24 add 정다희 : brandStats num_motion — 모바일 */
+    .sec_hero > .metric_list > li > .num_count { font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
+    .sec_hero > .metric_list > li > .num_desc { font-size: 1.2rem; font-weight: 400; line-height: 1.2; letter-spacing: 0; }
     .sec_num_list .section_header > h2 + p { color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
     .sec_num_list :deep(.num_info_list) { grid-template-columns: 1fr; gap: 40px; }
     .sec_num_list :deep(.num_info_item > article) { flex-direction: row; align-items: flex-start; gap: 16px; }
@@ -5038,10 +5255,8 @@ letter-spacing: -0.01em;
     .store_count { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .store_count > strong { font-weight: 400; }
     .store_search { padding: 30px 20px; }
-    .store_search_input { height: 52px; }
     .layer_tooltip { left: -20px; right: auto; transform: none; width: calc(100vw - 40px); max-width: 335px; }
     .youth_popover { top: calc(100% + 8px); }
-    .chip_youth_wrap { position: static; }
     .store_list_bar { height: auto; margin-bottom: 16px; align-items: flex-end; gap: 12px; }
     .store_bar_right { justify-content: flex-end; }
     .sort_btn { height: 32px; padding: 0 10px; font-size: 1.3rem; }
@@ -5094,8 +5309,9 @@ letter-spacing: -0.01em;
     .col_layout.apply_form .form_body{padding:40px 0 0; }
     .col_layout.apply_form .form_body .form_row { min-height: auto; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
     .col_layout.apply_form .form_body .form_row .form_label { margin-bottom: 16px; }
-    /* .col_layout.apply_form .form_body .form_row .form_field_consult_entry { flex-direction: column; align-items: stretch; } */
+    .col_layout.apply_form .form_body .form_row .form_field_consult_entry {gap:12px; }
     .col_layout.apply_form .form_body .form_row .form_field_consult_entry :deep(.select) { width: 100%; max-width: none; flex: 1 1 100%; }
+    .col_layout.apply_form .form_body .form_row .form_field_consult_entry > p{margin-top:0;}
     .col_layout.apply_form .form_body .cb_area{gap:8px;}
     .col_layout.apply_form .form_body .cb_area .cb_area_item { flex: 1 1 0; min-width: 0; max-width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; box-sizing: border-box; }
     .col_layout.apply_form .form_body .cb_area .cb_area_item > span { flex-shrink: 0; white-space: nowrap; }
