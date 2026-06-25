@@ -1227,7 +1227,7 @@ export default {
 .tm-lnb-side { width: 200px; padding-right: 20px; position:sticky; top:100px;}
 .tm-lnb-item { height: 64px; display: flex; align-items: center; }
 .tm-lnb-item button { font-size: 2rem; font-weight: 700; color: #4C4C53; background: none; border: 0; cursor: pointer; text-align: left; width: 100%; }
-.tm-lnb-item.is-active button { color: #161616; }
+.tm-lnb-item.is-active button { color: #11935D; }/* 260625 edit 이소라 */
 
 .tm-product-main { flex: 1; padding-top: 16px; }
 .tm-group-title { font-size: 24px; font-weight: 700; color: #161616; margin-bottom: 24px; }
