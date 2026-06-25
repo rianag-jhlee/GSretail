@@ -8,9 +8,17 @@
             <li 
                 v-for="(item, index) in tabItems" 
                 :key="index" 
-                :class="{ current: currentTab === index }"
+                :class="{ current: currentTab === index && !item.link }"
             >
-                <a href="javascript:void(0);" class="item" @click="selectTab(index)">{{ item.item }}</a>
+                <!-- 26.06.25 add 정다희 : link 있으면 외부 이동, 없으면 기존 탭 전환 -->
+                <a
+                    v-if="item.link"
+                    :href="item.link"
+                    :target="item.target || '_blank'"
+                    rel="noopener noreferrer"
+                    class="item"
+                >{{ item.item }}</a>
+                <a v-else href="javascript:void(0);" class="item" @click="selectTab(index)">{{ item.item }}</a>
             </li>
         </ul>
     </div>

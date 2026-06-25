@@ -40,7 +40,7 @@
                     <!-- 26.06.23 edit 정다희 : action_list — Figma 908:19853 카드형(제목 + pill 버튼) -->
                     <ul class="action_list">
                         <li v-for="(item, i) in t.brandApplyLinks" :key="i">
-                            <a :href="item.url" class="action_card btn_icon_arrow primary after">
+                            <a href="#none" class="action_card btn_icon_arrow primary after" @click.prevent="goToConsultTab(item.consultD2)">
                                 <strong v-html="item.title"></strong>
                                 <span class="action_card_btn"><em>{{ item.btnLabel }}</em></span>
                             </a>
@@ -85,7 +85,7 @@
                         </header>
                         <ul class="link_grid">
                             <li v-for="(item, i) in t.brandSolutionCards" :key="i">
-                                <a :href="item.url" class="btn_icon_arrow primary after">
+                                <a href="#none" class="btn_icon_arrow primary after" @click.prevent="goToSolutionTab(item.d1, item.d2)"> <!--26.06.25 add 정다희 : 클릭이벤트: brandSolutionCards 1depth·2depth 탭 이동 -->
                                     <span class="thumb" aria-hidden="true"></span>
                                     <span class="txt">
                                         <strong>{{ item.title }}</strong>
@@ -893,7 +893,7 @@
                                         >   
                                             <strong>{{ t.storeSearch.youthStartupTitle }}</strong>
                                             <p>{{ t.storeSearch.youthStartupDesc }}</p>
-                                            <a href="#">{{ t.storeSearch.youthStartupLinkText }}</a>
+                                            <a href="#none" @click.prevent="youthPopoverVisible = false; goToSolutionTab(1, 2)">{{ t.storeSearch.youthStartupLinkText }}</a><!-- 26.06.25 add 정다희 : 창업 준비하기 > 창업 혜택 이동 -->
                                             <button
                                                 type="button"
                                                 class="layer_tooltip_close"
@@ -906,19 +906,15 @@
                             </div>
                             <!-- 검색 -->
                             <div class="search_group search_group_input">
-                                <!-- 26.06.17 edit 정다희 : 웹접근성 대응 label for 적용 -->
-                                <label class="search_group_label" for="storeSearchInput">{{ t.storeSearch.searchLabel }}</label>
-                                <div class="store_search_input_wrap">
-                                    <input
-                                        id="storeSearchInput"
-                                        type="text"
-                                        class="store_search_input"
-                                        :placeholder="t.storeSearch.searchPlaceholder"
-                                        v-model="storeSearchQuery"
-                                    />
-                                    <button type="button" class="store_search_btn" :aria-label="t.storeSearch.searchButtonAriaLabel">
-                                    </button>
-                                </div>
+                                <!-- 26.06.25 add 정다희 : 검색 라벨 span으로 수정, store_search_input_wrap 포함 input+button을  공통 컴포넌트 Search로 수정 -->
+                                <span class="search_group_label">{{ t.storeSearch.searchLabel }}</span>
+                                <Search
+                                    v-model="storeSearchData"
+                                    :use-select="false"
+                                    :placeholder="t.storeSearch.searchPlaceholder"
+                                    @search="handleStoreSearch"
+                                />
+                                <!-- //26.06.25 add 정다희 : 검색 라벨 span으로 수정, store_search_input_wrap 포함 input+button을  공통 컴포넌트 Search로 수정 -->
                             </div>
                         </div>
                     </div>
@@ -1528,6 +1524,7 @@
                                             :initMsg="t.consultFormTexts.consultantSelectInit"
                                             :disabled="!startupConsultForm.entryRegion"
                                         />
+                                        <p>* 입지(점포) 지역을 선택하시면, 해당 지역 담당자가 연락드리겠습니다. </p>
                                     </div>
                                 </div>
                             </article>
@@ -1675,6 +1672,7 @@ import StoreCard from "@/components/StoreCard.vue";
 import StoreCardDetail from "@/components/StoreCardDetail.vue";
 import Inputs from "@/components/Inputs.vue";
 import SelectBox from "@/components/SelectBox.vue";
+import Search from "@/components/Search.vue"; // 26.06.25 add 정다희 : 검색 컴포넌트 추가
 import Textarea from "@/components/Textarea.vue";
 import ConsultCalendar from "@/components/ConsultCalendar.vue";
 import ConsultTimePicker from "@/components/ConsultTimePicker.vue";
@@ -1735,7 +1733,24 @@ const setTab = (index) => {
     top: 0
   })
 }
-/* //26.06.10 Add 이종환 : 탭이동 및 스크롤 top 기능 추가 */
+
+/* 26.06.25 add 정다희 : 상담 및 신청(D1=3) 2depth 탭 이동 */
+function goToConsultTab(d2Index) {
+    activeD1.value = 3;
+    nextTick(() => {
+        activeD2.value = d2Index;
+        window.scrollTo({ top: 0 });
+    });
+}
+/* 26.06.25 add 정다희 : brandSolutionCards 1depth·2depth 탭 이동 */
+function goToSolutionTab(d1Index, d2Index = 0) {
+    activeD1.value = d1Index;
+    nextTick(() => {
+        activeD2.value = d2Index;
+        window.scrollTo({ top: 0 });
+    });
+}
+/* //26.06.25 add 정다희 : brandSolutionCards 1depth·2depth 탭 이동 */
 
 /* [D1=0 D2=1] 메가히트 상품 Swiper — 모바일에서 슬라이드 폭·위치 재계산 */
 function refreshProductHitSwipers() {
@@ -1954,7 +1969,7 @@ const franchiseTypeGroups = [
         desc: "직접 임차한 점포에서 더 높은 수익배분 혜택을 누려보세요.",
         cards: [
             {
-                badge: "GS 1 Type",
+                badge: "GS1 Type", /*26.06.25 edit 정다희 : 띄어쓰기 수정 */ 
                 cardClass: "is_gs1",
                 desc: "경영주가 직접 임차하여 운영",
             },
@@ -1967,12 +1982,12 @@ const franchiseTypeGroups = [
         desc: "본부가 임차한 점포에서 합리적인 투자금과 배분율로 시작해보세요.", /*26.06.24 edit 정다희 : 설명 수정*/ 
         cards: [
             {
-                badge: "GS 2 Type",
+                badge: "GS2 Type", /*26.06.25 edit 정다희 : 띄어쓰기 수정 */ 
                 cardClass: "is_gs2",
                 desc: "본사와 임차비용 공동 부담",
             },
             {
-                badge: "GS 3 Type",
+                badge: "GS3 Type", /*26.06.25 edit 정다희 : 띄어쓰기 수정 */ 
                 cardClass: "is_gs3",
                 desc: "임차비용 부담 없이 시작",
             },
@@ -2316,7 +2331,7 @@ const competitivePanel = {
 const competitiveCards = [
     { title: "수익성 중심의<br />점포 오픈" },
     { title: "차별화 상품과<br />매장 컨셉" }, /**26.06.24 edit 정다희 : 타이틀 수정*/
-    { title: "스마트한 시스템과<br />밀착 지원" },
+    { title: "든든하고 편리한<br />지원시스템" },
 ];
 
 const storeOpenPanel = {
@@ -2875,8 +2890,10 @@ const filterRegionSigungu = ref("");
 const filterFranchiseType = ref("");
 const filterStoreType = ref("");
 const filterYouth = ref(false);
-const storeSearchQuery = ref("");
+const storeSearchData = ref({ type: "", keyword: "" });
 const youthPopoverVisible = ref(false);
+
+function handleStoreSearch() {}
 
 const storeRegionSigunguOptions = computed(() => startupRegionSigunguMap[filterRegionSido.value] || []);
 
@@ -3152,8 +3169,8 @@ const langData = {
         startupProcessTitle: "상담 신청부터 개점까지, <br />최소 30일이면 나만의 GS25를 오픈할 수 있어요!", /*26.06.24 edit 정다희 : 타이틀 수정*/
         processMoreOpenLabel: "더 알아보기",
         processMoreCloseLabel: "접기",
-        franchiseTypeTitle: "내 자금과 상황에 딱 맞게! <br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요",
-        franchiseCompareTitle: "한눈에 비교하고, 나에게 유리한 타입을 찾아보세요!",
+        franchiseTypeTitle: "내 조건에 딱 맞게!<br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요", /*26.06.25 edit 정다희 : 타이틀 수정*/ 
+        franchiseCompareTitle: "GS25의 가맹타입을 한 눈에 비교해보세요!", /*26.06.25 edit 정다희 : 타이틀 수정*/ 
         benefitPanelAria: {
             store: "탄탄한 점포",
             operation: "든든한 점포 운영",
@@ -3162,7 +3179,7 @@ const langData = {
         storeSectionAriaLabel: "추천 점포 찾기",
         storeIntro: "체계적인 상권 분석으로 선정한 GS25 추천점포를 확인해보세요", /**26.06.24 edit 정다희 : 설명 수정*/
         storeSearch: {
-            regionLabel: "지역",
+            regionLabel: "지역선택",
             allLabel: "전체",
             sidoInit: "시/도 선택",
             sigunguInit: "구/군 선택",
@@ -3191,8 +3208,8 @@ const langData = {
             { item: "GS25 창업 알아보기" },
             { item: "창업 준비하기" },
             { item: "추천 점포 찾기" },
-            { item: "상담 및 신청" },
-            { item: "가맹계약시스템" }
+            { item: "창업상담 및 신청" },  /*26.06.25 edit 정다희 : 내용 수정*/ 
+            { item: "가맹계약시스템", link: "https://contract.gsretail.com:7200/web/main/index.jsp", target: "_blank" } /*26.06.25 add 정다희 : 가맹계약시스템 링크 추가*/ 
         ],
         depth2Tabs: [
             { item: "GS25 브랜드 소개" },
@@ -3215,19 +3232,19 @@ const langData = {
                 title: "창업설명회 신청",
                 // desc: "창업 전반에 대한 정보를 한 번에 안내드려요", //26.06.23 del 정다희 : desc 삭제 
                 btnLabel: "신청하기", //26.06.23 edit 정다희 : btnLabel 추가
-                url: "#none",
+                consultD2: 0, //26.06.25 add 정다희 : 상담 및 신청 > 창업 설명회 신청
             },
             {
                 title: "창업상담 신청",
                 // desc: "창업에 대한 궁금증을 1:1 상담해 드려요",  //26.06.23 del 정다희 : desc 삭제 
                 btnLabel: "신청하기", //26.06.23 edit 정다희 : btnLabel 추가
-                url: "#none",
+                consultD2: 1, //26.06.25 add 정다희 : 상담 및 신청 > 창업 상담 신청
             },
             {
                 title: "입점 제안/브랜드 전환 문의",
                 // desc: "보유 자리 입점 제안 또는 브랜드 전환을 <br class='m_br'/>상담해드려요",  //26.06.23 del 정다희 : desc 삭제 
                 btnLabel: "신청하기", //26.06.23 edit 정다희 : btnLabel 추가
-                url: "#none",
+                consultD2: 2, //26.06.25 add 정다희 : 상담 및 신청 > 입점 제안/브랜드 전환 상담
             },
         ],
         // 26.06.23 add 정다희 : brandApplyDesc 추가
@@ -3236,7 +3253,6 @@ const langData = {
             "창업에 대한 궁금증을 1:1 상담해 드려요.",
             "보유 자리 입지 제안 또는 브랜드 전환을 상담해드려요.",
         ],
-        // 26.06.23 edit 정다희 : brandStats 수정
         brandStats: [
             { value: "18,000+ 점", label: "전국 점포수<br class='m_br'>(2025.12 기준)" },
             { value: "점포당 매출 1위", label: "점포당 연매출 6.4억<br class='m_br'>(2025년)" },
@@ -3272,17 +3288,20 @@ const langData = {
             {
                 title: "가맹 타입 소개",
                 desc: "나에게 딱 맞는 3가지 타입",
-                url: "#none",
+                d1: 1, //26.06.25 add 정다희 : 창업 준비하기 > 가맹 타입
+                d2: 1, //26.06.25 add 정다희 : 창업 준비하기 > 가맹 타입
             },
             {
                 title: "창업 절차 안내",
                 desc: "내 점포 오픈까지, 최소 30일!",
-                url: "#none",
+                d1: 1, //26.06.25 add 정다희 : 창업 준비하기 > 창업절차
+                d2: 0, //26.06.25 add 정다희 : 창업 준비하기 > 창업 절차
             },
             {
                 title: "추천 점포",
                 desc: "지역, 상권, 투자비용에 맞는 추천 점포 확인",
-                url: "#none",
+                d1: 2, //26.06.25 add 정다희 : 추천점포 찾기
+                d2: 0, //26.06.25 add 정다희 : 추천 점포 찾기
             },
         ],
         startupProcessSteps,
@@ -3414,11 +3433,11 @@ const langData = {
             seminarConsentNotice: "동의하지 않으실 경우 상담 글 작성이 불가능합니다.",
             entryConsentNotice: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우 입지제안 신청 글 작성이 불가능합니다.",
             agreeText: "동의합니다.",
-            reserveButton: "상담 예약 신청하기",
+            reserveButton: "상담 신청하기", /*26.06.25 edit 정다희 : 내용 수정 */ 
             seminarGuide: "GS25 창업설명회는 정기설명회 및 컨설턴트 상담으로 운영되며, 각 지역 사무소에서 진행됩니다. <br />지역별 창업설명회 일정이 상이하므로 확인 후 신청해 주세요.",
             seminarSelectRegionGuide: "창업 설명회 개설 지역을 선택해 주세요.",
-            regionConsultantTitle: "지역 및 컨설턴트 선택",
-            regionConsultantLabel: "지역/컨설턴트",
+            regionConsultantTitle: "입지(점포) 지역 선택", /*26.06.25 edit 정다희 : 타이틀 내용 수정 */ 
+            regionConsultantLabel: "지역",
             customerInfoTitle: "고객정보",
             nameLabel: "이름",
             contactLabel: "연락처",
@@ -3463,8 +3482,8 @@ const langData = {
             storeNameLabel: "점포 상호",
             commercialFeatureLabel: "상권 특징",
             landlordRelationLabel: "건물주와의 관계",
-            regionSelectInit: "지역선택",
-            consultantSelectInit: "컨설턴트 선택",
+            regionSelectInit: "시/도 선택",
+            consultantSelectInit: "구/군 선택",
             searchButton: "조회",
             applyButton: "신청",
             directInputPlaceholder: "직접입력",
@@ -3537,8 +3556,8 @@ const langData = {
             { item: "Learn About GS25 Startup"/* 260604 번역 */ },
             { item: "Preparing to start a business"/* 260604 번역 */ },
             { item: "Find recommended stores"/* 260604 번역 */ },
-            { item: "Consultation and Application"/* 260604 번역 */ },
-            { item: "Franchise Contract System"/* 260604 번역 */ }
+            { item: "Startup Consultation and Application"/* 260604 번역 */ }, /*26.06.25 edit 정다희 : 내용 수정*/ 
+            { item: "Franchise Contract System", link: "https://contract.gsretail.com:7200/web/main/index.jsp", target: "_blank" } /*26.06.25 add 정다희 : 가맹계약시스템 링크 추가*/ 
         ],
         depth2Tabs: [
             { item: "Introduction to the GS25 Brand"/* 260604 번역 */ },
@@ -3560,17 +3579,17 @@ const langData = {
             {
                 title: "Apply for startup briefing"/* 260604 번역 */,
                 btnLabel: "Apply"/* 260604 번역 */,
-                url: "#none",
+                consultD2: 0, /*26.06.25 add 정다희 :consultD2 추가 */
             },
             {
                 title: "Apply for startup consultation"/* 260604 번역 */,
                 btnLabel: "Apply"/* 260604 번역 */,
-                url: "#none",
+                consultD2: 1, /*26.06.25 add 정다희 :consultD2 추가 */
             },
             {
                 title: "Location proposal/Brand conversion inquiry"/* 260604 번역 */,
                 btnLabel: "Inquire"/* 260604 번역 */,
-                url: "#none",
+                consultD2: 2, /*26.06.25 add 정다희 :consultD2 추가 */
             },
         ],
         // 26.06.23 add 정다희 : brandApplyDesc 추가 (영문 번역 대기)
@@ -3581,8 +3600,7 @@ const langData = {
         ],
         brandStats: [
             { value: "18,000+", label: "Number of stores nationwide"/* 260604 번역 */ },
-            { value: "No. 1 in convenience store sales"/* 260604 번역 */, label: "Annual sales per store of 640 million won+"/* 260604 번역 */ },
-            { value: "4.7 million people"/* 260604 번역 */, label: "Nationwide average daily visiting customers"/* 260604 번역 */ },
+            { value: "No. 1 in convenience store sales", label: "Annual sales per store of 640 million won+"/* 260604 번역 */ },
         ],
         successPointPanel: {
             // badge: "SUCCESS POINT", //26.06.23 del 정다희 
@@ -3615,17 +3633,20 @@ const langData = {
             {
                 title: "Franchise type introduction"/* 260604 번역 */,
                 desc: "3 types that fit you perfectly"/* 260604 번역 */,
-                url: "#none",
+                d1: 1,
+                d2: 1,
             },
             {
                 title: "Startup process guide"/* 260604 번역 */,
                 desc: "Minimum 30 days until your store opens!"/* 260604 번역 */,
-                url: "#none",
+                d1: 1,
+                d2: 0,
             },
             {
                 title: "Recommended stores"/* 260604 번역 */,
                 desc: "Check recommended stores by region, commercial area, and investment cost"/* 260604 번역 */,
-                url: "#none",
+                d1: 2,
+                d2: 0,
             },
         ],
         startupProcessSteps,
@@ -3960,7 +3981,9 @@ onMounted(() => {
     window.addEventListener("resize", onWindowResize);
     window.addEventListener("resize", refreshQuickMenu);
     window.addEventListener("scroll", onQuickMenuScroll, { passive: true });
-    nextTick(() => initQuickMenu());
+    nextTick(() => {
+        initQuickMenu();
+    });
 });
 /* [공통] 언마운트 — 리스너·quick_menu 정리 */
 onUnmounted(() => {
@@ -4361,7 +4384,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_compare > .franchise_compare_wrap { margin-top: 40px; overflow-x: auto; }
 .sec_franchise_compare .franchise_compare_table { width: 100%; min-width: 1000px; border-top: 1px solid #161616; border-collapse: collapse; table-layout: fixed; }
 .sec_franchise_compare .franchise_compare_table col.col_group { width: 8.7%; }
-.sec_franchise_compare .franchise_compare_table col.col_group2 { width: 66px; }
+.sec_franchise_compare .franchise_compare_table col.col_group2 { width: 60px; }
 .sec_franchise_compare .franchise_compare_table col.col_label { width: auto; }
 .sec_franchise_compare .franchise_compare_table col.col_gs { width: 23%; }
 .sec_franchise_compare .franchise_compare_table th, .sec_franchise_compare .franchise_compare_table td { padding: 16px 24px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; word-break: keep-all; border: 1px solid #e5e5e9; text-align: center; vertical-align: middle; }
@@ -4379,7 +4402,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .list_note > li + li { margin-top: 8px; }
 .list_note > li > p { margin: 0; color: #67676F; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .list_note > li > p.txt_link { color: #161616; }
-.list_note > li > p > a { color: #107AF2; text-decoration: underline; }
+.txt_link :deep(a) { color: #107AF2 !important; text-decoration: underline !important; }
 .sec_operation .section_header, .sec_life .section_header { margin-bottom: 80px; }
 .icon_card_row:first-child .icon_card_list.type_02 > li > article { padding: 0 0 72px; }
 .icon_card_list.type_02 { border-bottom: 1px solid #E5E5E9; }
@@ -4495,13 +4518,9 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .layer_tooltip > a { margin-top: 16px; color: #107AF2; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; text-decoration: underline; display: block; }
 .layer_tooltip_close { width: 20px; height: 20px; background: none; border: none; cursor: pointer; position: absolute; top: 32px; right: 32px; background:url('@/assets/images/common/icon_set_20.png') -627px -25px no-repeat; }
 .youth_popover { top: calc(100% + 8px); left: -119px; right: -166px; }
-.search_group_input { min-width: 280px; flex: 1; display: flex; gap: 10px; align-items: center; }
-.store_search .search_group_input :deep(.select) { flex: 1; min-width: 0; }
-.store_search_input_wrap { position: relative; }
-.store_search_input { width: 100%; height: 40px; padding: 0 16px; color: #161616; font-size: 1.6rem; letter-spacing: -0.01em; background-color: #fff; border: 1px solid #c4c4d0; border-radius: 12px;  outline: none; }
-.store_search_input::placeholder { color: #a4a4b0; }
-.store_search_input:focus { border-color: #107AF2; }
-.store_search_btn { width: 20px; height: 20px; padding: 0; background: none; border: none; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.search_group_input { flex: 1; display: flex; gap: 8px; }
+.store_search .search_group_input :deep(.select) { width:200px; flex: 1; min-width: 0; }
+.store_search .search_group.search_group_input .search_wrap { width: 100%; }
 .type_table_wrap { margin-top: 20px; border-top: 1px solid #161616; overflow-x: auto; }
 .type_table { width: 100%; border-collapse: collapse; }
 .type_table thead th { padding: 28px 24px; font-size: 1.8rem; line-height: 1.4; text-align: center; background-color: #f8f8f8; border: 1px solid #e5e5e9; }
@@ -4605,6 +4624,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .col_layout.apply_form .form_body .form_row .form_name_field{max-width:448px;}
 .col_layout.apply_form .form_body .form_row .form_field_consult_entry { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .col_layout.apply_form .form_body .form_row .form_field_consult_entry :deep(.select) { width: 200px; max-width: 200px; flex: 0 0 auto; min-width: 0; }
+.col_layout.apply_form .form_body .form_row .form_field_consult_entry > p { width: 100%; margin-top: 16px; flex-basis: 100%; } /* 26.06.25 add 정다희 : 안내 문구만 하단 줄 배치 */
 .col_layout.apply_form .form_body .form_row .form_field_phone :deep(label.select),
 .col_layout.apply_form .form_body .form_row .form_field_phone :deep(.input_wrap){max-width:134px;}
 .col_layout.apply_form .form_body h3{margin-bottom:16px; font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em;display: flex; align-items:center;}
@@ -4667,28 +4687,12 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .manager_addr > .addr { margin: 2px 0 0; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 .sec_consult_seminar > .section_header{margin-bottom:48px;}
 /* 창업 설명회 신청청 */
-.consult_search_box{padding:32px 24px;border-radius:12px; border:1px solid #D7D7DF;}
+.consult_search_box{padding:32px 24px;border-radius:12px;}
 .consult_search_box strong{font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em; text-align:center;display:block;}
 .consult_search_box > div {margin-top:24px;padding-top:24px;}
-.consult_search_box > div > p{
-text-align: center;
-font-size: 2rem;
-line-height: 1.35;
-letter-spacing: -0.01em;
-}
-.consult_search_box > div{
-    margin-top:24px;
-    border-top:1px solid #D7D7DF;
-}
-.consult_search_box .flex{
-    margin-top:24px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-
-}
-
+.consult_search_box > div > p{text-align: center;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
+.consult_search_box > div{margin-top:24px;border-top:1px solid #D7D7DF;}
+.consult_search_box .flex{margin-top:24px;display:flex;justify-content:center;align-items:center;gap:10px;}
 .consult_search_box > div:deep(.select){width:100%;max-width:250px;}
 .consult_search_box > div:deep(button){width:141px;}
 /* --- D2=1 · 창업 설명회 신청 (activeD2 === 1) --- */
@@ -4766,8 +4770,11 @@ letter-spacing: -0.01em;
     section > .inner { padding-top: 40px; padding-bottom: 40px; }
     .search_bottom_row { margin-top: 24px; padding-top: 24px; border-top: 1px solid #D7D7DF; flex-direction: column; gap: 50px; }
     .search_group_input { width: 100%; }
+    .store_search .search_bottom_row > .search_group { width: 100%; }
+    .store_search .search_group > .search_group_input { width: 100%; flex-direction: column; align-items: stretch; gap: 8px; }
+    .store_search .search_group > .search_group_input :deep(.select) { width: 100%; max-width: none; flex: none; }
     .chip_list { position: relative; }
-
+   
 
     :deep(.check em){font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
     :deep(.faq_acc.board_type_toggle.type_faq dt > a.acc_tit_btn) { min-height: 64px; padding: 8px 0 8px 40px; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
@@ -4827,9 +4834,7 @@ letter-spacing: -0.01em;
     .sec_band > .inner > .link_grid > li > a { height: auto; min-height: 0; padding: 16px; gap: 16px; }
     .sec_band > .inner > .link_grid > li > a > .thumb { width: 60px; height: 60px; }
     .sec_band > .inner > .link_grid > li > a > .thumb:before {width: 32px; height: 32px; background-size: cover;}
-    /* .sec_band > .inner > .link_grid > li:nth-of-type(1) > a > .thumb:before { background-image: url('@/assets/images/sub/icon_cont_32.png');}
-    .sec_band > .inner > .link_grid > li:nth-of-type(2) > a > .thumb:before { background-position: -453px -268px; background-size: 1000px auto; }
-    .sec_band > .inner > .link_grid > li:nth-of-type(3) > a > .thumb:before { background-position: 0 -828px; background-size: 32px auto;} */
+   
     .sec_band > .inner > .link_grid > li > a > .txt > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
     .sec_band > .inner > .link_grid > li > a > .txt > .desc { font-size: 1.4rem; line-height: 1.4; }
     .sec_overlap > .overlap_grid { width: 100%; max-width: 335px; margin: 0 auto; flex-wrap: wrap; align-content: flex-start; justify-content: flex-start; gap: 0; }
@@ -4982,6 +4987,7 @@ letter-spacing: -0.01em;
     .sec_franchise_compare > .franchise_compare_wrap { margin-top: 32px; margin-right: -20px; margin-left: -20px; padding: 0 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .sec_franchise_compare .franchise_compare_table { min-width: 852px; }
     .sec_franchise_compare .franchise_compare_table col.col_group { width: 7%; }
+    .sec_franchise_compare .franchise_compare_table col.col_group2{width:35px;}
     .sec_franchise_compare .franchise_compare_table col.col_label { width: 17.6%; }
     .sec_franchise_compare .franchise_compare_table col.col_gs { width: 25.1%; }
     .sec_franchise_compare .franchise_compare_table th,
@@ -4990,6 +4996,7 @@ letter-spacing: -0.01em;
     .sec_franchise_compare .franchise_compare_table thead td > strong { font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table thead td > span { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+    .sec_franchise_compare .franchise_compare_table tbody th:nth-child(2){padding-left:11px; padding-right:11px;}
     .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
     .sec_operation .section_header, .sec_life .section_header { margin-bottom: 60px; }
     .sec_life .icon_card_list.col_02 { gap: 0; }
@@ -5038,10 +5045,8 @@ letter-spacing: -0.01em;
     .store_count { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .store_count > strong { font-weight: 400; }
     .store_search { padding: 30px 20px; }
-    .store_search_input { height: 52px; }
     .layer_tooltip { left: -20px; right: auto; transform: none; width: calc(100vw - 40px); max-width: 335px; }
     .youth_popover { top: calc(100% + 8px); }
-    .chip_youth_wrap { position: static; }
     .store_list_bar { height: auto; margin-bottom: 16px; align-items: flex-end; gap: 12px; }
     .store_bar_right { justify-content: flex-end; }
     .sort_btn { height: 32px; padding: 0 10px; font-size: 1.3rem; }
@@ -5094,8 +5099,9 @@ letter-spacing: -0.01em;
     .col_layout.apply_form .form_body{padding:40px 0 0; }
     .col_layout.apply_form .form_body .form_row { min-height: auto; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0; }
     .col_layout.apply_form .form_body .form_row .form_label { margin-bottom: 16px; }
-    /* .col_layout.apply_form .form_body .form_row .form_field_consult_entry { flex-direction: column; align-items: stretch; } */
+    .col_layout.apply_form .form_body .form_row .form_field_consult_entry {gap:12px; }
     .col_layout.apply_form .form_body .form_row .form_field_consult_entry :deep(.select) { width: 100%; max-width: none; flex: 1 1 100%; }
+    .col_layout.apply_form .form_body .form_row .form_field_consult_entry > p{margin-top:0;}
     .col_layout.apply_form .form_body .cb_area{gap:8px;}
     .col_layout.apply_form .form_body .cb_area .cb_area_item { flex: 1 1 0; min-width: 0; max-width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; box-sizing: border-box; }
     .col_layout.apply_form .form_body .cb_area .cb_area_item > span { flex-shrink: 0; white-space: nowrap; }
