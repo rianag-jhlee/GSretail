@@ -39,12 +39,13 @@
                         </div>
 
                         <div class="policy_wrap">
-                            <!-- 260623 edit 이소라 -->
+                            <!-- 26.06.26 edit 이소라 -->
                             <table class="base_table">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="ac">{{ t.TableHeader.col1 }}</th>
                                         <th scope="col" class="ac">{{ t.TableHeader.col2 }}</th>
+                                        <th scope="col" class="ac">{{ t.TableHeader.col4 }}</th>
                                         <th scope="col" class="ac">{{ t.TableHeader.col3 }}</th>
                                     </tr>
                                 </thead>
@@ -54,14 +55,13 @@
                                         <td class="al">
                                             <a href="javascript:void(0);" class="link_title">{{ item.title }}</a>
                                         </td>
+                                        <td class="ac">{{ item.date }}</td>
                                         <td class="ac">
-                                            <button type="button" class="btn_download_file" @click="handleDownload(item.link)">
-                                                <span class="file_type_text">PDF</span>
-                                            </button>
+                                            <button type="button" class="btn_download_file" @click="handleDownload(item.link)"></button>
                                         </td>
                                     </tr>
                                     <tr v-if="t.IRListData.length === 0">
-                                        <td colspan="3" class="ac py80">{{ t.NoDataText }}</td>
+                                        <td colspan="4" class="ac py80">{{ t.NoDataText }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -297,8 +297,8 @@ export default {
                         { value: "title", label: "제목" },
                         { value: "content", label: "내용" }
                     ],
-                    TableHeader: { col1: "구분", col2: "제목", col3: "다운로드", col4: "등록일" },
-                    IRListData: [
+                    TableHeader: { col1: "구분", col2: "제목", col3: "다운로드", col4: "등록일" }, /* 26.06.26 edit 이소라 */
+                    IRListData: [/* 26.06.26 edit 이소라 */
                         { id: "60", title: "2025년도 재무제표 결산공고", date: "2026.06.23", link: "#" },
                         { id: "59", title: "제55기 사업연도 배당기준일 설정 공고", date: "2026.06.22", link: "#" },
                         { id: "58", title: "2024년도 재무제표 결산공고", date: "2025.06.23", link: "#" },
@@ -396,6 +396,12 @@ export default {
 .policy_wrap th { border-left: 0; border-right: 0; }
 .policy_wrap td a { font-size: 1.8rem; color: #161616; text-decoration: none; }
 .policy_wrap td a:hover { text-decoration: underline; }
+
+@media screen and (min-width: 769px) {
+    .policy_wrap thead th:nth-of-type(1) {width:150px;}
+    .policy_wrap thead th:nth-of-type(3),
+    .policy_wrap thead th:nth-last-of-type(1) {width:200px;}
+}
 
 @media screen and (max-width: 768px) {
     h3.section-sub-title, h4.content_title {font-size:2.4rem;}
