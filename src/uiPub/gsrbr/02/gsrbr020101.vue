@@ -382,7 +382,7 @@ export default {
                             ]
                         ],
                     },
-                    ValueTitle: "가족과 함께하는 행복<br/>쇼핑 산지의 신선함 그대로 가정으로 배달합니다.",
+                    ValueTitle:"가족과 함께하는 행복<br/>쇼핑 산지의 신선함을 그대로 고객님께 전해드립니다.", /*26.06.26 edit 정다희 : 텍스트 수정*/
                     Buttons: {  
                         proposal: "입지 제안",
                         findStore: "매장 찾기",
