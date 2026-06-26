@@ -259,6 +259,7 @@ function handleDownload(link) {
 }
 
 @media screen and (max-width: 768px) {
+    .cont_inner {padding-top: 84px;}  /* 26.06.26 edit 이소라 */
     .title_wrap { display: none;}
     .panel { padding-top:60px; }
     .sec_viewer + .sec_viewer { margin-top: 80px; }

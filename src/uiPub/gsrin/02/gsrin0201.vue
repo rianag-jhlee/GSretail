@@ -607,7 +607,8 @@ tr.bold td, tr.bold th { font-weight: 700 !important; }
     .gsrin0203 .policy_wrap thead {display:none;}
     .policy_desc{font-size: 1.8rem;line-height: 1.4;}
     .table_section {margin-top:80px;}
-    .tab_content_wrap{padding-top:60px;}
+    .cont_inner > .tab_wrap.tabSlide {margin-top: 84px;}  /* 26.06.26 add 이소라 */
+    .tab_content_wrap{padding-top:36px;} /* 26.06.26 add 이소라 */
     .search_filter_area + .table_container .base_table{margin:0;} 
 }
 </style>

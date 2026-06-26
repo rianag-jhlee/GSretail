@@ -136,7 +136,7 @@ export default {
 .board_wrap.type_gallery .item .cont strong {font-size:2rem; line-height:135%; letter-spacing:-0.01em; display:block;}
 
 @media screen and (max-width: 767px) {
-    .title_wrap {margin-top:48px; padding:0 20px; text-align:initial;}
+    .title_wrap {margin-top:100px; padding:0 20px; text-align:initial;} /* 26.06.26 edit 이소라 */
     .title_wrap h2 {display:none;}
     .title_wrap .visual-sub {font-size:2.8rem; font-weight:700; line-height:135%; letter-spacing:-0.01em;}
 

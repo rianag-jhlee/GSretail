@@ -373,11 +373,12 @@ const t = computed(() => langData[props.lang] || langData.ko);
     @media screen and (max-width: 768px) {
         .title_wrap { display: none; }
         .visual_sub { font-size: 2rem; }
-        section{padding: 60px 0 0;}
+        section{padding: 60px 0 0; gap: 60px;}  /* 26.06.26 edit 이소라 */
         section + section { padding: 60px 0 0; }
         .header h3 { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; text-align: left; }
         .header p { margin: 12px 0 0; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
         .header.center h3, .header.center p { text-align: left; }
+        .sec_ci_intro { padding-top: 120px; }  /* 26.06.26 edit 이소라 */
         .sec_color_reg > .header p {margin-bottom:64px; font-weight:400;}
         .cont_box { padding: 36px 20px; }
         .cont_box_row { display: flex; flex-direction: column; gap: 12px; }
