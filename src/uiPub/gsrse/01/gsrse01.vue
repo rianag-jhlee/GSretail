@@ -1045,6 +1045,7 @@ export default {
     .pc {display:none;}
     .mt100 {margin-top:60px !important}
     .mb100 {margin-bottom:60px !important}
+    .cont_inner {padding-top:84px;} /* 26.06.26 add 이소라 */
     :deep(.tab_wrap) ul.type_02 {padding-left:0px !important;}
     .text-wrapper { font-size: 2.4rem;}
     .title_wrap  {display:none;}

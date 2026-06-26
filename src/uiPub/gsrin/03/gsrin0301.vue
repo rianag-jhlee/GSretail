@@ -411,5 +411,8 @@ export default {
     .btn_big {font-size:16px;}
     .policy_wrap td a {font-size:16px;}
     .inner_tabs_wrap + .tab_content{margin-top:80px;}
+    .cont_inner > .tab_wrap.tabSlide {margin-top: 84px;} /* 26.06.26 add 이소라 */
+    .tab_content_wrap{margin:0;padding-top:36px;} /* 26.06.26 add 이소라 */
+    .pagination_area.mt100 {margin-top: 0 !important;} /* 26.06.26 add 이소라 */
 }
 </style>

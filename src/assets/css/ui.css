@@ -520,4 +520,6 @@ h5 {font-size:1.8rem;}
     .warning_box > p { font-size: 1.4rem; line-height: 1.4; }
 
     .board_detail_wrap .board _detail_cont {padding-top:40px;}
+
+    .content > .board_detail_wrap{padding-top:100px;}
 }

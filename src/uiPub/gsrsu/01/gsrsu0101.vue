@@ -1185,6 +1185,7 @@ background-color: #F8F8F8; border-bottom: 1px solid #E5E5E9;}
     .table_wrap.type1 { overflow-x: visible; }
     .table_wrap.type1 table { min-width: 0; table-layout: fixed; }
     .content .tab_wrap {margin-top:24px}
+    .content .tab_wrap:nth-of-type(1) {margin-top:84px} /* 26.06.26 add 이소라 */
     /* 지속가능 보고서 목록 — 모바일 카드형(가로 스크롤 없음) */
     .panel_sustainability_report .sec_sustain_report_hero > figure {width: 100%;}
     .panel_sustainability_report .sec_sustain_report_hero > article > .sustain_report_hero_actions { flex-wrap: nowrap; }

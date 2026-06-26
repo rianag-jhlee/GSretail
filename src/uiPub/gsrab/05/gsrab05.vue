@@ -224,6 +224,7 @@ const t = computed(() => langData[props.lang] || langData.ko);
         section + section { padding: 60px 0 0; }
         .header h3 { font-size: 2.4rem; line-height: 1.35; text-align: left; }
         .sec_location { gap: 30px; }
+        .sec_location:nth-of-type(1) { padding-top: 120px; } /* 26.06.26 edit 이소라 */
         .sec_location > .location_panel { padding: 30px 0 36px; flex-direction: column; flex-wrap: nowrap; gap: 0; align-items: stretch; border-top: 1px solid #e5e5e9; }
         .sec_location .location_info { order: 2; flex: none; padding-top: 30px; gap: 36px; }
         .sec_location .location_panel > .map_area, .sec_location .location_panel > .map_stack { order: 1; max-width: 100%;}

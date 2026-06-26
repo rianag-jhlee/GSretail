@@ -2451,14 +2451,14 @@ watch([isCompetitiveTab, isMobileView], ([isActive]) => {
 const marketingPanel = {
     badge: "마케팅 & 멤버십",
     title: "단골 고객을 만드는 마케팅과 멤버십",
-    desc: "‘우리동네 GS’ 앱부터 100만 구독자 SNS 채널까지, 고객이 다시 찾는 이유를 만듭니다.",
+    desc: "‘우리동네GS’ 앱부터 100만 구독자 SNS 채널까지, 고객이 다시 찾는 이유를 만듭니다.", /* 26.06.26 edit 이소라 */
     desc2: "매출이 오르는 마케팅 지원",
 };
 
 const marketingCards = [
     {
         em: "국내 편의점 다운로드수 1위 어플",
-        title: "우리동네 GS",
+        title: "우리동네GS", /* 26.06.26 edit 이소라 */
         desc: "증정상품 보관부터 5천여종의 와인과 주류 주문까지",
     },
     {
