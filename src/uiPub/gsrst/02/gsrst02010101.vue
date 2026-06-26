@@ -222,7 +222,8 @@
                                     </div>
                                 </li>
                             </ul>
-                            <Buttons v-if="item.linkText" tag="a" href="#none" btn-class="btn_mid fill btn_icon_arrow after primary primary_green">{{ item.linkText }}</Buttons>
+                            <!-- 26.06.26 add 정다희 : 클릭이벤트 추가 -->
+                            <Buttons v-if="item.linkText" tag="a" href="#none" btn-class="btn_mid fill btn_icon_arrow after primary primary_green" @click.prevent="goToSinsenBrand">{{ item.linkText }}</Buttons> 
                         </article>
                     </div>                    
                     <div class="sub_block">
@@ -1660,6 +1661,8 @@
 
 <script setup>
 import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick, defineProps } from "vue";
+// 26.06.26 add 정다희 : 라우터 추가
+import { useRouter } from "vue-router";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
@@ -1702,6 +1705,14 @@ const props = defineProps({
         default: "ko",
     },
 });
+
+const router = useRouter();
+/* 26.06.26 add 정다희 : 신선강화점 탭 이동 (gsrbr010101 depth1=1) */
+function goToSinsenBrand() {
+    router.push({ path: "/gsrbr010101", query: { depth1: "1" } });
+}
+/* //26.06.26 add 정다희 : 신선강화점 탭 이동 */
+
 /* //26.06.10 Add 이종환 : 탭이동 및 스크롤 top 기능 추가 */
 
 /* ── 탭 상태 (activeD1 / activeD2 / activeD3) ──
@@ -2137,7 +2148,7 @@ const benefitStorePanel = {
 const benefitStoreItems = [
     {
         title: "우수 근무자 할인 제도",
-        desc: "GS25에서 근무하는 우수 근무자 창업 시 본부 보증금 및 가맹비 일부 할인",
+        desc: "GS25에서 근무하는 우수 근무자 창업 시 본부 보증금 및 가맹비 할인", /*26.06.26 edit 정다희 : 설명 수정*/
     },
     {
         title: "청년 창업 제도",
@@ -2153,7 +2164,7 @@ const benefitStoreItems = [
     },
     {
         title: "다자녀 할인 제도",
-        desc: "만 18세 미만 자녀 2인 이상인 경우 가맹비 일부 할인",
+        desc: "만 18세 미만 자녀 2인 이상인 경우 가맹비 할인", /*26.06.26 edit 정다희 : 설명 수정*/
     },
     {
         title: "다점포 할인 제도",
@@ -3416,7 +3427,7 @@ const langData = {
             compareSafeOpGs3: "24시간 운영: 月 최대 700만원<br />18시간 운영: 月 최대 450만원",
             compareNote1: "* GS1 Type 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년",
             compareNote2: "* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다",
-            compareNote3: "* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href=\"#\">신선강화점 자세히 알아보기</a>)",
+            compareNote3: "* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href=\"/gsrbr010101?depth1=1\">신선강화점 자세히 알아보기</a>)", /*26.06.26 add 정다희 : 링크 추가*/
             compareNote4: "* 안심운영제도란?<br /> 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우, 경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. ", /*26.06.24 edit 정다희 : br 위치 수정, 링크삭제*/
             benefitPolicyNote: "* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.",
             storeTableRegion: "지역",
@@ -3761,7 +3772,7 @@ const langData = {
             compareSafeOpGs3: "24-hour operation: up to 7 million won/month<br />18-hour operation: up to 4.5 million won/month"/* 260604 번역 */,
             compareNote1: "* GS1 Type profit-pursuit special agreement: store owner invests in facility interior and equipment usage fees; franchise contract period 7 years"/* 260604 번역 */,
             compareNote2: "* For GS3 Type, the profit distribution rate may be set differently by mutual agreement before concluding the franchise contract"/* 260604 번역 */,
-            compareNote3: `* When opening as a fresh-food-enhanced store, the merchandise reserve is increased by 6 million won and the collateral setting is increased by 10 million won. (<a href=\"#\">Learn More About Fresh-Focused Stores</a>)`/* 260604 번역 */,
+            compareNote3: `* When opening as a fresh-food-enhanced store, the merchandise reserve is increased by 6 million won and the collateral setting is increased by 10 million won. (<a href="/gsrbr010101?depth1=1">Learn More About Fresh-Focused Stores</a>)`/* 260604 번역 */, /*26.06.26 add 정다희 : 링크 추가*/
             compareNote4: `* What is the Worry-Free Operation System? When the store owner complies with the terms set in the contract and operates the store year-round for 18 or more hours per day,<br/>This is a system in which the company subsidizes the store owner's operating costs only when the store owner's income falls short of the Worry-Free Operation support fund standard. (<a href=\"#\">Learn More About the Worry-Free Operation Program</a>)`/* 260604 번역 */,
             benefitPolicyNote: "* This system may be partially changed/deleted depending on the company's management conditions and operating policies."/* 260604 번역 */,
             storeTableRegion: "Region"/* 260604 번역 */,
