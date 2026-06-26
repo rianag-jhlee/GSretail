@@ -210,7 +210,7 @@ export default {
 @media screen and (max-width: 767px) {
 
     /* 26.06.08 Add 이종환 */
-    .cont_inner {margin-top:70px;}
+    .cont_inner {margin-top:84px;} /* 26.06.26 edit 이소라 */
 
     /* 26.06.08 edit 정다희 : title_wrap css 수정  */
     .title_wrap {display: none;}
