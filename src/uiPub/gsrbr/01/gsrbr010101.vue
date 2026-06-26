@@ -163,7 +163,9 @@
         <!-- 탭 0: CAFE25 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 0" class="brand_panel cafe_panel">
             <figure v-if="tab1.hero" class="brand_panel_bg" :style="{ backgroundColor: '#fff' }">
-                <img :src="tab1.hero" :alt="tab1.heroAlt || ''" width="1420" height="340" />
+                <!-- 26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 (brand_bg_02_mo.png) -->
+                <img :src="isMobileView && tab1.heroMo ? tab1.heroMo : tab1.hero" :alt="tab1.heroAlt || ''" width="1420" height="340" />
+                <!-- //26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 -->
             </figure>
             <header v-if="tab1.title" class="brand_panel_title">
                 <h2 v-html="tab1.title"></h2>
@@ -216,11 +218,12 @@
                         <table class="cafe25_table">
                             <thead>
                                 <tr>
+                                    <!-- 26.06.26 Add 정다희 : :style 수정 width 스타일삭제 -->
                                     <th
                                         v-for="(col, ci) in sec.columns"
                                         :key="ci"
                                         scope="col"
-                                        :style="{ width: col.width + 'px', textAlign: col.align }"
+                                        :style="{ textAlign: col.align }" 
                                     ><span>{{ col.label }}</span></th>
                                 </tr>
                             </thead>
@@ -288,7 +291,9 @@
         <!-- 탭 1: 치킨25 -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 1" class="brand_panel chicken_panel">
             <figure v-if="tab2.hero" class="brand_panel_bg">
-                <img :src="tab2.hero" :alt="tab2.heroAlt || ''" width="1420" height="340" />
+                <!-- 26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 (differentiated_bg_03_mo.png) -->
+                <img :src="isMobileView && tab2.heroMo ? tab2.heroMo : tab2.hero" :alt="tab2.heroAlt || ''" width="1420" height="340" />
+                <!-- //26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 -->
             </figure>
             <header v-if="tab2.title" class="brand_panel_title">
                 <h2 v-html="tab2.title"></h2>
@@ -334,7 +339,9 @@
         <!-- 탭 2: GOPIZZA -->
         <div v-show="depth1ActiveIdx === 0 && activeTab === 2" class="brand_panel gopizza_panel">
             <figure v-if="tab3.hero" class="brand_panel_bg">
-                <img :src="tab3.hero" :alt="tab3.heroAlt || ''" width="1420" height="340" />
+                <!-- 26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 (differentiated_bg_04_mo.png) -->
+                <img :src="isMobileView && tab3.heroMo ? tab3.heroMo : tab3.hero" :alt="tab3.heroAlt || ''" width="1420" height="340" />
+                <!-- //26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 -->
             </figure>
             <header v-if="tab3.title" class="brand_panel_title">
                 <h2 v-html="tab3.title"></h2>
@@ -600,7 +607,9 @@
                 <!-- 26.05.15 Edit 이종환 : 그 외 패널: 기본 구조를 각 패널로 다시 분리 -->
                 <template v-if="i === 0">
                     <figure v-if="tab.hero" class="brand_panel_bg">
-                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- 26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
+                        <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- //26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
                     </figure>
                     <header v-if="tab.title" class="brand_panel_title">
                         <h2 v-html="tab.title"></h2>
@@ -623,7 +632,9 @@
 
                 <template v-else-if="i === 1">
                     <figure v-if="tab.hero" class="brand_panel_bg">
-                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- 26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
+                        <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- //26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
                     </figure>
                     <header v-if="tab.title" class="brand_panel_title">
                         <h2 v-html="tab.title"></h2>
@@ -839,7 +850,9 @@
                 <!-- 기프트카드 패널 -->
                 <template v-else-if="i === 3">
                     <figure v-if="tab.hero" class="brand_panel_bg">
-                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- 26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
+                        <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- //26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
                     </figure>
                     <header v-if="tab.title" class="brand_panel_title">
                         <h2 v-html="tab.title"></h2>
@@ -942,7 +955,9 @@
                 <!-- GS25 유심 요금제 패널 -->
                 <template v-else-if="i === 4">
                     <figure v-if="tab.hero" class="brand_panel_bg">
-                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- 26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
+                        <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- //26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
                     </figure>
                     <header v-if="tab.title" class="brand_panel_title">
                         <h2 v-html="tab.title"></h2>
@@ -1049,7 +1064,9 @@
                 <!-- 하이패스 카드/단말기 패널 -->
                 <template v-else-if="i === 5">
                     <figure v-if="tab.hero" class="brand_panel_bg">
-                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- 26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
+                        <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- //26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
                     </figure>
                     <header v-if="tab.title" class="brand_panel_title">
                         <h2 v-html="tab.title"></h2>
@@ -1093,7 +1110,9 @@
                 <!-- 고속도로 미납 통행료 납부 패널 -->
                 <template v-else-if="i === 6">
                     <figure v-if="tab.hero" class="brand_panel_bg">
-                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- 26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
+                        <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- //26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
                     </figure>
                     <header v-if="tab.title" class="brand_panel_title">
                         <h2 v-html="tab.title"></h2>
@@ -1122,7 +1141,9 @@
                 <!-- 온라인몰 편의점 결제 패널 (Figma 97:16410, 97:16422) -->
                 <template v-else-if="i === 7">
                     <figure v-if="tab.hero" class="brand_panel_bg">
-                        <img :src="tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- 26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
+                        <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                        <!-- //26.06.26 edit 정다희 : 생활 서비스 serviceTabs — 모바일 heroMo 이미지 분기 -->
                     </figure>
                     <header v-if="tab.title" class="brand_panel_title">
                         <h2 v-html="tab.title"></h2>
@@ -1208,7 +1229,9 @@
                 <template v-for="(tab, i) in store.tabs[1].serviceTabs" :key="i">
                     <div v-show="deliveryActiveTab === i" :class="['service_panel', `delivery_panel_${i+1}`]">
                         <figure v-if="tab.hero" class="brand_panel_bg">
-                            <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" /> 
+                            <!-- 26.06.26 edit 정다희 : 택배&픽업 serviceTabs — 모바일 heroMo 이미지 분기 -->
+                            <img :src="isMobileView && tab.heroMo ? tab.heroMo : tab.hero" :alt="tab.heroAlt || ''" width="1420" height="340" />
+                            <!-- //26.06.26 edit 정다희 : 택배&픽업 serviceTabs — 모바일 heroMo 이미지 분기 -->
                         </figure>
                         <header v-if="tab.title" class="brand_panel_title">
                             <h2 v-html="tab.title"></h2>
@@ -1512,7 +1535,9 @@
         <!-- 상생협력: 참여제도 -->
         <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 1" class="brand_panel">
             <figure v-if="winwin.tabs[1].hero" class="brand_panel_bg">
-                <img :src="winwin.tabs[1].hero" :alt="winwin.tabs[1].heroAlt || ''" width="1420" height="340" />
+                <!-- 26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 (brand_bg_12_mo.png) -->
+                <img :src="isMobileView && winwin.tabs[1].heroMo ? winwin.tabs[1].heroMo : winwin.tabs[1].hero" :alt="winwin.tabs[1].heroAlt || ''" width="1420" height="340" />
+                <!-- //26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 -->
             </figure>
             <header v-if="winwin.tabs[1].title" class="brand_panel_title">
                 <h2 v-html="winwin.tabs[1].title"></h2>
@@ -1526,7 +1551,9 @@
         <!-- depth1 = 4: 밀박스/스낵바 -->
         <div v-if="depth1ActiveIdx === 4" class="brand_panel milbox_panel">
             <figure v-if="milbox.hero" class="brand_panel_bg">
-                <img :src="milbox.hero" :alt="milbox.heroAlt || ''" width="1420" height="340" />
+                <!-- 26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 (brand_bg_13_mo.png) -->
+                <img :src="isMobileView && milbox.heroMo ? milbox.heroMo : milbox.hero" :alt="milbox.heroAlt || ''" width="1420" height="340" />
+                <!-- //26.06.26 edit 정다희 : 모바일 heroMo 이미지 분기 -->
             </figure>
             <header v-if="milbox.title" class="brand_panel_title">
                 <h2 v-html="milbox.title"></h2>
@@ -1585,7 +1612,9 @@
 import { ref, computed, defineProps, nextTick, watch, onMounted, onBeforeUnmount } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRouter } from "vue-router";
+/* 26.06.26 add 정다희 : useRouter — 탭 라우팅 · useRoute — query(depth1) 탭 초기화 */
+import { useRouter, useRoute } from "vue-router";
+/* //26.06.26 add 정다희 : useRouter · useRoute */
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -1615,6 +1644,7 @@ import imgAcc03 from "@/assets/images/sub/gsrbr010101/brand_accordion_03.png";
 
 /* 탭 1 이미지 */
 import imgHero1 from "@/assets/images/dummy/brand_bg_02.png";
+import imgHero1Mo from "@/assets/images/dummy/mo/brand_bg_02_mo.png"; /* 26.06.26 add 정다희 : CAFE25 모바일 히어로 */
 import imgCoffeeMachine01 from "@/assets/images/dummy/coffee_machine_01.png";
 import imgCoffeeMachine02 from "@/assets/images/dummy/coffee_machine_02.png";
 import imgCoffeeMachine03 from "@/assets/images/dummy/coffee_machine_03.png";
@@ -1629,11 +1659,13 @@ import imgCafeMenuMo from "@/assets/images/sub/gsrbr010101/cafe25_menu_mo.png";
 
 /* 탭 2 이미지 */
 import imgHero2 from "@/assets/images/dummy/differentiated_bg_03.png";
+import imgHero2Mo from "@/assets/images/dummy/mo/differentiated_bg_03_mo.png"; /* 26.06.26 add 정다희 : CHICKEN25 모바일 히어로 */
 import imgChickenLeft from "@/assets/images/dummy/chicken25_card_01.png";
 import imgChickenRight from "@/assets/images/dummy/chicken25_card_02.png";
 
 /* 탭 3 이미지 */
 import imgHero3 from "@/assets/images/dummy/differentiated_bg_04.png";
+import imgHero3Mo from "@/assets/images/dummy/mo/differentiated_bg_04_mo.png"; /* 26.06.26 add 정다희 : GOPIZZA 모바일 히어로 */
 import imgGoben1 from "@/assets/images/dummy/gopizza_goben_01.png";
 import imgGoben2 from "@/assets/images/dummy/gopizza_goben_02.png";
 import imgDough from "@/assets/images/dummy/gopizza_dough.png";
@@ -1663,16 +1695,23 @@ import imgSinsen06Mo from "@/assets/images/sub/gsrbr010101/sinsen_06_mo.png";
 
 /* 매장/서비스 이미지 */
 import imgHero5 from "@/assets/images/sub/gsrbr010101/brand_bg_06.png";
+import imgHero5Mo from "@/assets/images/dummy/mo/brand_bg_06_mo.png"; /* 26.06.26 edit 정다희 : dummy/mo 경로 변경 */
 import imgHero6 from "@/assets/images/dummy/brand_bg_07.png";
-import imgHero7 from "@/assets/images/dummy/brand_bg_08.png"; 
-import imgHero8 from "@/assets/images/sub/gsrbr010101/brand_bg_09.png"; 
-import imgHero9 from "@/assets/images/sub/gsrbr010101/brand_bg_10.png"; 
-import imgHero10 from "@/assets/images/sub/gsrbr010101/brand_bg_11.png"; 
-import imgHero10Mo from "@/assets/images/sub/gsrbr010101/brand_bg_11_mo.png"; 
-import imgHero11 from "@/assets/images/sub/gsrbr010101/brand_bg_11-1.png"; 
-import imgHero11Mo from "@/assets/images/sub/gsrbr010101/brand_bg_11-1_mo.png"; 
-import imgHero11_1 from "@/assets/images/sub/gsrbr010101/brand_bg_11-2.png"; 
+import imgHero6Mo from "@/assets/images/dummy/mo/brand_bg_07_mo.png"; /* 26.06.26 add 정다희 : 모바일 히어로 */
+import imgHero7 from "@/assets/images/dummy/brand_bg_08.png";
+import imgHero7Mo from "@/assets/images/dummy/mo/brand_bg_08_mo.png"; /* 26.06.26 add 정다희 : 모바일 히어로 */
+import imgHero8 from "@/assets/images/sub/gsrbr010101/brand_bg_09.png";
+import imgHero8Mo from "@/assets/images/dummy/mo/brand_bg_09_mo.png"; /* 26.06.26 add 정다희 : 모바일 히어로 */
+import imgHero9 from "@/assets/images/sub/gsrbr010101/brand_bg_10.png";
+import imgHero9Mo from "@/assets/images/dummy/mo/brand_bg_10_mo.png"; /* 26.06.26 add 정다희 : 모바일 히어로 */
+import imgHero10 from "@/assets/images/sub/gsrbr010101/brand_bg_11.png";
+import imgHero10Mo from "@/assets/images/dummy/mo/brand_bg_11_mo.png"; /* 26.06.26 edit 정다희 : dummy/mo 경로 변경 */
+import imgHero11 from "@/assets/images/sub/gsrbr010101/brand_bg_11-1.png";
+import imgHero11Mo from "@/assets/images/sub/gsrbr010101/brand_bg_11-1_mo.png"; /* 26.06.26 add 정다희 : 쇼핑몰거래 모바일 히어로 */
+import imgHero11_1 from "@/assets/images/sub/gsrbr010101/brand_bg_11-2.png";
+import imgHero11_1Mo from "@/assets/images/dummy/mo/brand_bg_12_mo.png"; /* 26.06.26 add 정다희 : 모바일 히어로 (brand_bg_11-2) */
 import imgHero12 from "@/assets/images/sub/gsrbr010101/brand_bg_13.png";
+import imgHero12Mo from "@/assets/images/dummy/mo/brand_bg_13_mo.png"; /* 26.06.26 add 정다희 : 모바일 히어로 */
 /* 26.06.10 add 정다희 : 밀박스25/스낵바 카드 이미지 */
 import imgMilbox01 from "@/assets/images/sub/gsrbr010101/milbox_01.png";
 import imgMilbox02 from "@/assets/images/sub/gsrbr010101/milbox_02.png";
@@ -1730,7 +1769,8 @@ import imgGiftCerti03 from "@/assets/images/dummy/gift_certi_03.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const router = useRouter();
+const router = useRouter(); /* 26.06.26 add 정다희 : 1depth 탭 변경 시 라우트 이동 */
+const route = useRoute(); /* 26.06.26 add 정다희 : URL query(depth1/tab)로 탭 초기화 */
 
 function openModal(event) {
     const el = event.currentTarget;
@@ -1799,6 +1839,7 @@ const langData = {
             // },
             {
                 hero: imgHero1,
+                heroMo: imgHero1Mo, /* 26.06.26 add 정다희 : CAFE25 모바일 히어로 */
                 heroAlt: "",
                 title: "CAFE25",
                 subtitle: "최고급 커피머신과 스페셜티 블렌딩 원두를 사용하여 최상의 커피를 합리적인 가격으로 제공하는 GS25의 차별화 원두커피 전문 존입니다.",
@@ -1864,6 +1905,7 @@ const langData = {
             },
             {
                 hero: imgHero2,
+                heroMo: imgHero2Mo, /* 26.06.26 add 정다희 : CHICKEN25 모바일 히어로 */
                 heroAlt: "",
                 title: "CHICKEN25",
                 subtitle: "최고의 원재료를 사용하여 즉석에서 조리한 튀김을 합리적인 가격으로 제공하는 GS25만의 차별화 먹거리입니다. <br class=\"p_br\" />편의점에서도 치킨25와 함께 전문점 수준의 치킨을 즐길 수 있습니다.",
@@ -1899,6 +1941,7 @@ const langData = {
             },
             {
                 hero: imgHero3,
+                heroMo: imgHero3Mo, /* 26.06.26 add 정다희 : GOPIZZA 모바일 히어로 */
                 heroAlt: "",
                 title: "GOPIZZA",
                 subtitle: "한 판의 즐거움! 한 손의 간편함! 고피자는 1인 피자의 선두 브랜드로, 빠르고 맛있는 피자를 제공합니다.<br />이제 가까운 GS25에서도 고피자의 대표 메뉴를 만나볼 수 있습니다.",
@@ -2064,6 +2107,7 @@ const langData = {
                         {
                             label:   "현금인출기\n서비스",
                             hero:    imgHero5,
+                            heroMo: imgHero5Mo, /* 26.06.26 add 정다희 : brand_bg_06_mo */
                             heroAlt: "",
                             title:   "현금인출기 서비스",
                             desc:    "현금인출, 계좌 이체 등 금융서비스 외에도 프로스포츠(야구, 축구, 배구, 농구) 정규리그 입장권(즉시 입장), 에버랜드 자유이용권의 발권도 가능합니다.<br />그 밖에 하이패스 충전(신용카드 결제), 알뜰폰 판매 등 다양한 생활 편의 서비스를 제공하고 있습니다.",
@@ -2264,6 +2308,7 @@ const langData = {
                         {
                             label:          "기프트\n카드",
                             hero:           imgHero6,
+                            heroMo: imgHero6Mo, /* 26.06.26 add 정다희 : brand_bg_07_mo */
                             heroAlt:        "",
                             title:          "기프트카드",
                             desc:           "GS25는 기프트카드를 운영하고 있으며, 전국 어디에서나 충전 및 사용이 가능합니다.<br />다양한 기프트카드를 소중한 친구, 가족, 지인들에게 선물할 수 있습니다. (단,일부 매장에서는 충전 및 사용이 불가합니다.)",
@@ -2575,6 +2620,7 @@ const langData = {
                         {
                             label:   "국내택배",
                             hero:  imgHero7,
+                            heroMo: imgHero7Mo, /* 26.06.26 add 정다희 : brand_bg_08_mo */
                             heroAlt: "",
                             title:   "국내택배 서비스",
                             desc:    "365일 24시간 가까운 GS25에서 택배 접수가 가능합니다.",
@@ -2644,6 +2690,7 @@ const langData = {
                         {
                             label: "반값택배",
                             hero: imgHero8,
+                            heroMo: imgHero8Mo, /* 26.06.26 add 정다희 : brand_bg_09_mo */
                             heroAlt: "",
                             title: "반값택배 서비스",
                             desc: "편의점 최초! 국내유일 공휴일 배송! 최저가택배 GS25에서 보내고 GS25에서 받아보세요.",
@@ -2716,6 +2763,7 @@ const langData = {
                         {
                             label: "국제택배",
                             hero:    imgHero9,
+                            heroMo: imgHero9Mo, /* 26.06.26 add 정다희 : brand_bg_10_mo */
                             heroAlt: "",
                             title: "국제택배 서비스",
                             desc: "365일 24시간 가까운 GS25에서 국제택배 접수가 가능 합니다. (SFExpress, 우체국EMS, DHL)",
@@ -2753,7 +2801,7 @@ const langData = {
                         {
                             label: "배달 픽업",
                             hero: imgHero10,
-                            heroMo: imgHero10Mo, 
+                            heroMo: imgHero10Mo, /* 26.06.26 edit 정다희 : brand_bg_11_mo (dummy/mo) */
                             heroAlt: "",
                             title: "픽업 서비스",
                             desc: "쇼핑몰에서 상품주문 후, 가까운 GS25에서 물건을 찾아가세요.",
@@ -2779,7 +2827,7 @@ const langData = {
                         {
                             label:   "쇼핑몰거래",
                             hero:    imgHero11,
-                            heroMo: imgHero11Mo, 
+                            heroMo: imgHero11Mo, /* 26.06.26 add 정다희 : brand_bg_11-1_mo — 쇼핑몰거래 */
                             heroAlt: "",
                             title:   "쇼핑몰 거래 서비스",
                             desc:    "홈쇼핑 반품, 오픈마켓, 온라인 쇼핑몰 등 편리하게 이용하실 수 있는 서비스입니다.",
@@ -2989,6 +3037,7 @@ const langData = {
                 },
                 {
                     hero: imgHero11_1,
+                    heroMo: imgHero11_1Mo, /* 26.06.26 add 정다희 : brand_bg_12_mo */
                     heroAlt: "",
                     title: "참여제도",
                     desc: "GS25에서는 다양한 의견 수렴, 제안 검토 및 반영하는 등 경영주님께서 참여할 수 있는 제도가 마련되어 있습니다.",
@@ -3019,6 +3068,7 @@ const langData = {
         },
         milbox: {
             hero: imgHero12,
+            heroMo: imgHero12Mo, /* 26.06.26 add 정다희 : brand_bg_13_mo */
             heroAlt: "",
             title: "밀박스/스낵바 (기업 정기 서비스) <a href='https://www.mealbox25.com/' target='_blank'>홈페이지</a>",
             sections: [
@@ -3180,6 +3230,7 @@ const langData = {
             // },
             {
                 hero: imgHero1,
+                heroMo: imgHero1Mo, /* 26.06.26 add 정다희 : CAFE25 모바일 히어로 */
                 heroAlt: "",
                 title: "CAFE25",
                 subtitle: "It is GS25's distinctive specialty coffee zone, using top-of-the-line coffee machines and specialty blended beans to offer the finest coffee at a reasonable price."/* 260604 번역 */,
@@ -3245,6 +3296,7 @@ const langData = {
             },
             {
                 hero: imgHero2,
+                heroMo: imgHero2Mo, /* 26.06.26 add 정다희 : CHICKEN25 모바일 히어로 */
                 heroAlt: "",
                 title: "CHICKEN25",
                 subtitle: `It is GS25's distinctive food offering, serving freshly fried foods made with the finest ingredients at a reasonable price. <br class=\"p_br\" />Now you can enjoy specialty-shop-quality chicken with CHICKEN25 at convenience stores, too.`/* 260604 번역 */,
@@ -3280,7 +3332,8 @@ const langData = {
             },
             {
                 hero: imgHero3,
-                heroAlt: "",
+                heroMo: imgHero3Mo, /* 26.06.26 add 정다희 : GOPIZZA 모바일 히어로 */
+                heroAlt: "", 
                 title: "GOPIZZA",
                 subtitle: "The joy of a whole pizza! The convenience of one hand! GOPIZZA, the leading brand in single-serve pizza, serves fast and delicious pizza.<br />Now you can enjoy GOPIZZA's signature menu at your nearby GS25, too."/* 260604 번역 */,
                 sections: [
@@ -3409,6 +3462,7 @@ const langData = {
                         {
                             label:   "ATM Services",
                             hero:    imgHero5,
+                            heroMo: imgHero5Mo, /* 26.06.26 add 정다희 : brand_bg_06_mo */
                             heroAlt: "",
                             title:   "ATM Services",
                             desc:    "In addition to financial services such as cash withdrawals and account transfers, you can also issue regular-season tickets for professional sports (baseball, soccer, volleyball, basketball) for immediate entry, as well as Everland day passes.<br />In addition, we provide various everyday convenience services such as Hi-Pass recharge (credit card payment) and budget mobile (MVNO) sales."/* 260604 번역 */,
@@ -3609,6 +3663,7 @@ const langData = {
                         {
                             label:          "Gift\nCard"/* 260604 번역 */,
                             hero:           imgHero6,
+                            heroMo: imgHero6Mo, /* 26.06.26 add 정다희 : brand_bg_07_mo */
                             heroAlt:        "",
                             title:          "Gift Cards",
                             desc:           "GS25 offers gift cards that can be reloaded and used at any location nationwide. Choose from a wide variety of gift cards for the cherished friends, family, and loved ones in your life. (Note: reloading and use may not be available at select stores.)",
@@ -3920,6 +3975,7 @@ const langData = {
                         {
                             label:   "Domestic Delivery",
                             hero:  imgHero7,
+                            heroMo: imgHero7Mo, /* 26.06.26 add 정다희 : brand_bg_08_mo */
                             heroAlt: "",
                             title:   "Domestic Delivery Service",
                             desc:    "Delivery services are available 365 days a year, 24 hours a day at your nearest GS25.",
@@ -3989,6 +4045,7 @@ const langData = {
                         {
                             label: "Half-Price Delivery",
                             hero: imgHero8,
+                            heroMo: imgHero8Mo, /* 26.06.26 add 정다희 : brand_bg_09_mo */
                             heroAlt: "",
                             title: "Half-Price Delivery Service",
                             desc: "First in the convenience store industry! Korea's only public holiday delivery service! Send from GS25, receive at GS25 — at the lowest price.",
@@ -4061,6 +4118,7 @@ const langData = {
                         {
                             label: "International Delivery",
                             hero:    imgHero9,
+                            heroMo: imgHero9Mo, /* 26.06.26 add 정다희 : brand_bg_10_mo */
                             heroAlt: "",
                             title: "International Delivery Service",
                             desc: "Drop off your international deliveries at your nearest GS25, 24 hours a day, 365 days a year. (SF Express, EMS, DHL)",
@@ -4098,7 +4156,7 @@ const langData = {
                         {
                             label: "Delivery & Pickup", //26.05.27 Edit 이종환
                             hero: imgHero10,
-                            heroMo: imgHero10Mo, //26.06.02 Edit 정다희
+                            heroMo: imgHero10Mo, /* 26.06.26 edit 정다희 : brand_bg_11_mo (dummy/mo) */
                             heroAlt: "",
                             title: "Pick-up Service",
                             desc: "After ordering products from an online shopping mall, pick them up at your nearest GS25.",
@@ -4124,7 +4182,7 @@ const langData = {
                         {
                             label:   "Online Shopping Payment",
                             hero:    imgHero11,
-                            heroMo: imgHero11Mo, //26.06.02 Edit 정다희
+                            heroMo: imgHero11Mo, /* 26.06.26 add 정다희 : brand_bg_11-1_mo — 쇼핑몰거래 */ //26.06.02 Edit 정다희
                             heroAlt: "",
                             title:   "Online Shopping Service",
                             desc:    "A convenient service for home shopping returns, open marketplace purchases, and online shopping mall transactions.",
@@ -4334,6 +4392,7 @@ const langData = {
                 },
                 {
                     hero: imgHero11_1,
+                    heroMo: imgHero11_1Mo, /* 26.06.26 add 정다희 : brand_bg_12_mo */
                     heroAlt: "",
                     title: "Partner Programs",
                     desc: "GS25 has systems in place that allow owners to participate, such as gathering diverse opinions and reviewing and reflecting suggestions."/* 260604 번역 */,
@@ -4364,6 +4423,7 @@ const langData = {
         },
         milbox: {
             hero: imgHero12,
+            heroMo: imgHero12Mo, /* 26.06.26 add 정다희 : brand_bg_13_mo */
             heroAlt: "",
             title: "Meal Box/Snack Bar (Corporate Subscription Service) <a href='https://www.mealbox25.com/' target='_blank'>Website</a>"/* 260604 번역 */,
             sections: [
@@ -4641,9 +4701,14 @@ const _onResize = () => {
     }, 150);
 };
 
+/* 26.06.26 add 정다희 : URL query(depth1)로 1depth 탭 초기화 — 신선강화점 등 외부 링크 진입 */
+watch(() => [route.query.depth1, route.query.tab], syncDepth1FromRoute);
+/* //26.06.26 add 정다희 : URL query(depth1)로 1depth 탭 초기화 */
+
 let popSecObserver = null;
 let _syncVisualClip = null;
 onMounted(() => {
+    syncDepth1FromRoute(); /* 26.06.26 add 정다희 : 마운트 시 query(depth1) 탭 동기화 */
     isMobileView.value = _getIsMobile();
     window.addEventListener("resize", _onResize);
 
@@ -4863,6 +4928,22 @@ let gsapCtx = null;
 
 const depth1Routes = ["/gsrbr010101", null, null, null, null];
 
+/* 26.06.26 add 정다희 : URL query(depth1)로 1depth 탭 초기화 — 신선강화점 등 외부 링크 진입 */
+function syncDepth1FromRoute() {
+    const tabKey = route.query.tab;
+    if (tabKey === "sinsen") {
+        depth1ActiveIdx.value = 1;
+        return;
+    }
+    const raw = route.query.depth1;
+    if (raw === undefined || raw === null || raw === "") return;
+    const idx = Number(raw);
+    if (Number.isInteger(idx) && idx >= 0 && idx < depth1Tabs.value.length) {
+        depth1ActiveIdx.value = idx;
+    }
+}
+/* //26.06.26 add 정다희 : URL query(depth1)로 1depth 탭 초기화 */
+
 function onDepth1Change(idx) {
     depth1ActiveIdx.value = idx;
     const route = depth1Routes[idx];
@@ -4984,10 +5065,19 @@ button { background-color: #fff }
 .cafe25_card_list { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, calc((100% - 40px) / 3)); gap: 20px }
 .cafe25_card_list > li { min-width: 0; overflow: hidden }
 .cafe25_card_list > li > div { width: 100% }
+.cafe25_card_list > li > div img{width:100%;}
 .cafe25_img_wrap { max-width: 938px; margin: 0; padding: 0; background-color: #f8f8f8; border-radius: 12px; overflow: hidden }
-.cafe25_split { display: flex; gap: 20px; align-items: flex-start }
-.cafe25_split > div { width: calc(50% - 10px); min-width: 0 }
-.cafe25_split_table { overflow-x: auto }
+.cafe25_img_wrap > img{width:100%;}
+.cafe25_split { display: flex; gap: clamp(10px, 1.25vw, 20px); align-items: flex-start; }
+.cafe25_split > div { flex: 1 1 0; min-width: 0; width: auto; }
+.cafe25_split_img > img { width: 100%; height: auto; display: block; }
+.cafe25_split_table { min-width: 0; overflow-x: auto; }
+.cafe25_split_table .cafe25_table { width: 100%; min-width: 0; }
+.cafe25_split_table .cafe25_table th:nth-child(1), .cafe25_split_table .cafe25_table td:nth-child(1) { width: 37.14%; }
+.cafe25_split_table .cafe25_table th:nth-child(2), .cafe25_split_table .cafe25_table td:nth-child(2) { width: 31.43%; }
+.cafe25_split_table .cafe25_table th:nth-child(3), .cafe25_split_table .cafe25_table td:nth-child(3) { width: 31.43%; }
+.cafe25_split_table .cafe25_table th, .cafe25_split_table .cafe25_table td { height: auto; min-height: 56px; padding: clamp(8px, 1.25vw, 24px); white-space: normal; word-break: keep-all; }
+.cafe25_split_table .cafe25_table th > span, .cafe25_split_table .cafe25_table td > span { font-size: clamp(1.2rem, 0.94vw, 1.8rem); line-height: 1.4; letter-spacing: -0.01em; }
 .cafe25_table_wrap { overflow-x: auto }
 .cafe25_table { border-collapse: collapse; table-layout: fixed }
 .tbl_mo { width: 100%; border-collapse: collapse }
@@ -5250,10 +5340,10 @@ button { background-color: #fff }
   .acc_item.is_open .acc_inner { grid-template-columns: 1fr 280px; column-gap: 28px }
   .acc_img_wrap > img { width: 100% }
   .sinsen_advantage_card{flex: 1 1 100%;}
+  .cafe25_split_table .cafe25_table th, .cafe25_split_table .cafe25_table td { min-height: 48px; }
 }
 
 @media (max-width: 768px) {
-  .cafe25_split_img > img { width: 100% }
   .chicken_panel .img_grid_swiper { margin-top: 60px }
 
   .sec_header { padding-bottom: 0; }
@@ -5264,16 +5354,16 @@ button { background-color: #fff }
   .sec_header > h3.h3_steps { margin-bottom: 24px; }
   .sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc { margin-bottom: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
   .sec_header .sec_cite { margin-top: 4px; margin-left: 0; display: block; }
-  .brand_panel_bg { width: calc(100% + 40px);margin: 0 -20px 24px; border-radius: 0; }
+  .brand_panel_bg { width: calc(100% + 40px); margin: 0 -20px 24px; border-radius: 0; }
+  .brand_panel_bg > img { width: 100%; height: 100%; max-height: none; object-fit: cover; }
   .brand_panel_title { padding: 0 0 64px; }
-  .brand_panel_bg > img { height: 245px;  }
   .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display:block;}
 
   .brand_panel_title > h2 :deep(a) {margin-top:16px; margin-left:0; font-size:1.4rem; font-weight:500; line-height:140%;}
   .brand_panel_title > h2 :deep(a:before) {width:20px; height:20px; background-image:url('@/assets/images/common/icon_set_20.png'); background-position:-454px -115px;}
 
   .brand_panel_title > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-  .cafe_panel .brand_panel_bg > img { object-position: -348px center; }
+  /* .cafe_panel .brand_panel_bg > img { object-position: -348px center; } */
   .chicken_panel .brand_panel_bg > img { object-position: 34% top; transform: scale(1.35);  }
   .gopizza_panel .brand_panel_bg > img { object-position: center bottom; }
   .gopizza_panel .diff_bottom_row { margin-top: 120px; }
@@ -5726,9 +5816,9 @@ button { background-color: #fff }
   .cafe25_card_swiper .swiper-slide { width: 42vw }
   .cafe25_card_slide { width: 42vw; height: 42vw; overflow: hidden; border-radius: 12px }
   .cafe25_card_slide > img { width: 100%; height: 100%; object-fit: cover; display: block }
-  .cafe25_split { flex-direction: column }
-  .cafe25_split > div { width: 100% }
-  .cafe25_split > img { width: 100% }
+  .cafe25_split { flex-direction: column; }
+  .cafe25_split > div { width: 100%; flex: none; }
+  .cafe25_split_table .cafe25_table th > span, .cafe25_split_table .cafe25_table td > span { font-size: 1.6rem; line-height: 1.5; }
   .brand_panel:first-of-type section:not(:first-of-type) :deep(header) { padding-bottom: 40px }
   .img_grid_swiper {overflow: visible }
   .img_grid_swiper :deep(.swiper-slide) { width: 84vw }
