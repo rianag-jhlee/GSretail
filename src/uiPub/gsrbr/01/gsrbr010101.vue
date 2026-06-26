@@ -699,7 +699,7 @@
                                                 <strong class="pop_card_name">{{ card.name }}</strong>
                                                 <figure class="pop_card_thumb">
                                                     <picture>
-                                                        <source v-if="card.imgMo" media="(max-width: 768px)" :srcset="card.imgMo" />
+                                                        <source v-if="card.imgMo" media="(max-width: 1024px)" :srcset="card.imgMo" /> <!-- 26.06.26 edit 정다희 : 태블릿 MO 이미지 적용 -->
                                                         <img :src="card.img" :alt="card.name" />
                                                     </picture>
                                                 </figure>
@@ -5201,8 +5201,7 @@ button { background-color: #fff }
 .service_panel { min-height: 200px }
 .service_panel .sec_header_only > .sec_header { margin-bottom: 0; padding: 0; }
 .pop_exclude { margin-top: 8px; color: #f95823; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
-.pop_card_item { overflow: hidden; display: flex; flex-direction: column }
-
+.pop_card_item { display: flex; flex-direction: column; min-width: 0; } /* 26.06.26 edit 정다희 : overflow hidden 제거·min-width 0 — 태블릿 이미지 잘림 방지 */
 /* 매장/서비스 > 생활 서비스 탭 아이콘 */
 .pop_panel .service_tab_list .service_tab_item:nth-child(1) .service_tab_icon {background-position:-65px -24px;}
 .pop_panel .service_tab_list .service_tab_item:nth-child(2) .service_tab_icon {background-position:-243px -24px;}
@@ -5363,12 +5362,8 @@ button { background-color: #fff }
   .brand_panel_title > h2 :deep(a:before) {width:20px; height:20px; background-image:url('@/assets/images/common/icon_set_20.png'); background-position:-454px -115px;}
 
   .brand_panel_title > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
-  /* .cafe_panel .brand_panel_bg > img { object-position: -348px center; } */
-  .chicken_panel .brand_panel_bg > img { object-position: 34% top; transform: scale(1.35);  }
-  .gopizza_panel .brand_panel_bg > img { object-position: center bottom; }
+
   .gopizza_panel .diff_bottom_row { margin-top: 120px; }
-  /* .sinsen_panel > .brand_panel_bg { min-height: 245px; background-color: #b3b3b3; } */
-  .delivery_panel_3 .brand_panel_bg > img{ object-position: 70% bottom; }
   .info_card_flow .info_card:nth-child(1){flex:0 0 auto; }
   .info_card_flow .info_card:nth-child(2){flex:0 0 auto; }
   /* .sec_brand_visual { height: 100vh } */
@@ -5471,7 +5466,7 @@ button { background-color: #fff }
 
 @media (min-width: 769px) {
     .pop_card_swiper { overflow: visible }
-    .pop_card_swiper :deep(.swiper-wrapper) { gap: 20px; transform: none !important }
+    .pop_card_swiper :deep(.swiper-wrapper) { transform: none !important }
     .pop_card_swiper :deep(.swiper-slide) { width: auto !important; height: auto !important; flex: 1 }
 
     .pop_sec_acc :deep(.acc_tit_btn) { display: none }
@@ -5798,7 +5793,7 @@ button { background-color: #fff }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .pop_wrap { gap: 24px }
-  .pop_card_swiper :deep(.swiper-wrapper) { gap: 16px }
+  /* .pop_card_swiper :deep(.swiper-wrapper) { gap: 16px } */
   .gift_brand_nav { width: 40px; height: 40px }
   .gift_brand_slider { gap: 12px }
 }
@@ -5836,7 +5831,7 @@ button { background-color: #fff }
   .info_list > li { padding-bottom: 4px }
   .pop_lnb { display:none }
   .pop_card_swiper {width: calc(100% + 64px); margin: 0 -32px; padding: 12px 32px 40px; overflow: hidden }
-  .pop_card_swiper :deep(.swiper-slide) { width: 56vw !important; height: auto !important; flex: none }
+  .pop_card_swiper :deep(.swiper-slide) { width: 58.6vw !important; height: auto !important; flex: none }
   .logo_list { grid-template-columns: repeat(2, 1fr) }
   .gift_brand_card > img { width: 100%; height: auto; max-width: 100%; aspect-ratio: 106 / 165 }
   .gift_brand_card > figcaption { font-size: 1.2rem }
@@ -5862,7 +5857,7 @@ button { background-color: #fff }
   .tax_group_desc, .tax_group_list .list_dotted > li p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
 }
 .voucher_list { display: flex; gap: 20px }
-.voucher_item { max-width: 340px; flex: 1 }
+.voucher_item {  flex: 1 }
 .voucher_img { height: 200px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center }
 .voucher_img > img { width: auto }
 .voucher_info { padding-top: 24px }
