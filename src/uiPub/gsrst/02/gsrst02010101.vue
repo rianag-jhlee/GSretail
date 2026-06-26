@@ -679,6 +679,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <!-- 26.06.26 add 정다희 : 가맹타입 비교 테이블 가로 스크롤 안내 추가 -->
+                    <p class="franchise_compare_scroll_hint">{{ t.consultFormTexts.compareScrollHint }}</p>
+                    <!-- //26.06.26 add 정다희 : 가맹타입 비교 테이블 가로 스크롤 안내 추가 -->
                     <ul class="list_note">
                         <li>
                             <p>{{ t.consultFormTexts.compareNote1 }}</p>
@@ -3429,6 +3432,7 @@ const langData = {
             compareNote2: "* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다",
             compareNote3: "* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href=\"/gsrbr010101?depth1=1\">신선강화점 자세히 알아보기</a>)", /*26.06.26 add 정다희 : 링크 추가*/
             compareNote4: "* 안심운영제도란?<br /> 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우, 경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. ", /*26.06.24 edit 정다희 : br 위치 수정, 링크삭제*/
+            compareScrollHint: "좌우로 스크롤하여 전체 내용을 확인하실 수 있습니다.", /*26.06.24 add 정다희 : 가맹타입 비교 테이블 가로 스크롤 안내*/
             benefitPolicyNote: "* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.",
             storeTableRegion: "지역",
             storeTableType: "타입",
@@ -3774,6 +3778,7 @@ const langData = {
             compareNote2: "* For GS3 Type, the profit distribution rate may be set differently by mutual agreement before concluding the franchise contract"/* 260604 번역 */,
             compareNote3: `* When opening as a fresh-food-enhanced store, the merchandise reserve is increased by 6 million won and the collateral setting is increased by 10 million won. (<a href="/gsrbr010101?depth1=1">Learn More About Fresh-Focused Stores</a>)`/* 260604 번역 */, /*26.06.26 add 정다희 : 링크 추가*/
             compareNote4: `* What is the Worry-Free Operation System? When the store owner complies with the terms set in the contract and operates the store year-round for 18 or more hours per day,<br/>This is a system in which the company subsidizes the store owner's operating costs only when the store owner's income falls short of the Worry-Free Operation support fund standard. (<a href=\"#\">Learn More About the Worry-Free Operation Program</a>)`/* 260604 번역 */,
+            compareScrollHint: "You can scroll left and right to view the full content."/* 260604 번역 */, /*26.06.24 add 정다희 : 가맹타입 비교 테이블 가로 스크롤 안내*/
             benefitPolicyNote: "* This system may be partially changed/deleted depending on the company's management conditions and operating policies."/* 260604 번역 */,
             storeTableRegion: "Region"/* 260604 번역 */,
             storeTableType: "Type"/* 260604 번역 */,
@@ -4393,6 +4398,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .button_area{display:flex; justify-content: center;}
 .sec_franchise_compare { width: 100%; max-width: 1420px; margin: 0 auto; }
 .sec_franchise_compare > .franchise_compare_wrap { margin-top: 40px; overflow-x: auto; }
+.sec_franchise_compare > .franchise_compare_scroll_hint { display: none; margin: 0; padding: 0; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; text-align: center; } /*26.06.24 add 정다희 : 가로 스크롤 안내 — 태블릿·모바일에서만 노출*/
 .sec_franchise_compare .franchise_compare_table { width: 100%; min-width: 1000px; border-top: 1px solid #161616; border-collapse: collapse; table-layout: fixed; }
 .sec_franchise_compare .franchise_compare_table col.col_group { width: 8.7%; }
 .sec_franchise_compare .franchise_compare_table col.col_group2 { width: 60px; }
@@ -4409,7 +4415,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_compare .franchise_compare_table tbody th > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
 .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 2rem; }
 .sec_franchise_compare .franchise_compare_table td > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
-.list_note { margin-top: 20px; }
+.list_note { margin-top: 24px; }
 .list_note > li + li { margin-top: 8px; }
 .list_note > li > p { margin: 0; color: #67676F; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .list_note > li > p.txt_link { color: #161616; }
@@ -4753,6 +4759,9 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_hero > header h3 { font-size: 4.2rem; line-height: 1.3; letter-spacing: -0.01em; }
     .sec_hero > header .hero_title > h3 { min-width: 0; flex: 1 1 auto; }
     .sec_hero > header .hero_title > div { width: 130px; margin-left: 0; flex-shrink: 0; }
+    .sec_franchise_compare > .franchise_compare_scroll_hint { margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; } /*26.06.24 add 정다희*/
+    .sec_franchise_compare > .franchise_compare_scroll_hint::before { content: "↔"; flex-shrink: 0; opacity:0.7 } /*26.06.24 add 정다희*/
+
 
 }
 /* ========== Mobile 768px 이하 ========== */
@@ -4958,7 +4967,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong { margin-top: 4px; font-size: 2rem; line-height: 1.325; letter-spacing: -0.01em; }
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { padding: 6px; font-size: 1.2rem; line-height: 1.2; }
     .sec_diagram header { margin-bottom: 32px; }
-    .list_note{margin-top: 16px;}
+    .list_note{margin-top: 24px;}
     .list_note li >  p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     /* D1=1 · 창업 준비하기 */
     .sec_startup_process .process_timeline { align-items: stretch; gap: 20px; }
@@ -4999,7 +5008,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_franchise_compare .franchise_compare_table { min-width: 852px; }
     .sec_franchise_compare .franchise_compare_table col.col_group { width: 7%; }
     .sec_franchise_compare .franchise_compare_table col.col_group2{width:35px;}
-    .sec_franchise_compare .franchise_compare_table col.col_label { width: 17.6%; }
+    .sec_franchise_compare .franchise_compare_table col.col_label { width: 115px; }
     .sec_franchise_compare .franchise_compare_table col.col_gs { width: 25.1%; }
     .sec_franchise_compare .franchise_compare_table th,
     .sec_franchise_compare .franchise_compare_table td { padding: 12px 16px; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
@@ -5009,6 +5018,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table tbody th:nth-child(2){padding-left:11px; padding-right:11px;}
     .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .sec_franchise_compare > .franchise_compare_scroll_hint { margin-top: 10px; font-size: 1.2rem; gap: 4px; } /*26.06.24 add 정다희*/
     .sec_operation .section_header, .sec_life .section_header { margin-bottom: 60px; }
     .sec_life .icon_card_list.col_02 { gap: 0; }
     .icon_card_topic .sub_header { margin-bottom: 24px; }
