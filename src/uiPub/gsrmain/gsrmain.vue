@@ -256,8 +256,8 @@ export default {
                         title: "GS리테일의 소식을 전합니다.",/* 260622 edit 이소라 : 줄바꿈 제거 */
 
                         quick: [
-                            { link: "#none", txt: "보도자료" },
-                            { link: "#none", txt: "GS리테일 Newsroom" },
+                            { link: "/gsrne01", txt: "보도자료" }, /* 26.06.29 edit 이소라 */
+                            { link: "/gsrne02", txt: "뉴스룸" }, /* 26.06.29 edit 이소라 */
                         ],
 
                         items: [
@@ -1000,12 +1000,13 @@ section {
 }
 
 .sec04 .quick a:after {
-    width: 16px;
-    height: 16px;
-    background:url('@/assets/images/main/icon_arrow.png') 0 0 no-repeat;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: #F2F2F4 url('@/assets/images/main/icon_arrow.png') center no-repeat;
     content: '';
     display: block;
-}
+} /* 26.06.29 edit 이소라 */
 
 .sec03 .swiper, .sec04 .swiper {
     margin-top: 80px;
