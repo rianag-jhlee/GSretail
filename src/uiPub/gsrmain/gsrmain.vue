@@ -24,9 +24,9 @@
         <!-- 26.06.17 Add 정다희 : Hero message 영역 추가 -->
         <div class="hero_message" ref="heroMessageRef" v-if="t.heroMessage">
             <div class="inner">
-                <p v-html="t.heroMessage.title"></p>
                 <!-- 26.06.17 Add 이소라 : 버튼 영역 추가 -->
                 <a :href="t.heroMessage.link"><span class="blind">새창 열기</span></a>
+                <p v-html="t.heroMessage.title"></p>
                 <ul>
                     <li v-for="(item, index) in t.heroMessage.items" :key="index">
                         <dl>
@@ -195,7 +195,7 @@ export default {
 
                     /* 260616 add 정다희 : hero_message */
                     heroMessage: {
-                        title: '고객의 모든 <span class="txt_orange">경험</span>을 연결하고, <br />데이터로 <span class="txt_green">공감</span>하며,<br />상품과 서비스로 <span class="txt_blue">신뢰</span>받는 플랫폼',
+                        title: '고객의 모든 경험을 <span class="txt_orange">연결</span>하고, <br />데이터로 <span class="txt_green">공감</span>하며,<br />상품과 서비스로 <span class="txt_blue">신뢰</span>받는 플랫폼',
                         items: [
                             {
                                 dt: "전국 오프라인 점포 수",
@@ -216,6 +216,7 @@ export default {
                                 desc: "2025 한국산업의 고객 만족도 (편의점, 수퍼)<br />2025 한국서비스 품질지수 (편의점, 수퍼, 홈쇼핑)",
                             },
                         ],
+                        link: "/gsrab02", /* 260622 edit 이소라 : 버튼 링크 수정 */
                     },
 
                     sec03: {
@@ -235,7 +236,7 @@ export default {
                                 img: require("@/assets/images/main/main_sec03_02.png"),
                                 sub: require("@/assets/images/main/main_sec03_02-1.png"),
                                 brand: "GS THE FRESH",
-                                txt: "신선한 행복을<br/> 만나다",
+                                txt: "신선한 행복을<br/> 채우다",
                                 cate: "수퍼",
                                 class: "fresh",
                                 link: "/gsrbr020101"
@@ -857,15 +858,15 @@ h2+.explain {
     display: block;
 }
 .blind { position: absolute; width: 1px; height: 1px; clip: rect(0, 0, 0, 0); overflow: hidden; }
-.hero_message{padding-top:210px;background-color: #fff;position: relative;}
+.hero_message{padding-top:100px;background-color: #fff;position: relative;}
 .hero_message .inner{max-width: 1720px;margin: 0 auto;padding: 0 20px;}
+.hero_message .inner > a {width:50px; height:50px; margin-bottom:10px; display:inline-block; background:url('@/assets/images/main/icon_brand_arrow2.png') no-repeat center; background-size:contain;}
 .hero_message p{font-weight: 700;font-size: 6.8rem;line-height: 1.4;letter-spacing: -0.02em;}
 .hero_message p span{font-weight: 800;}
 .hero_message p span.txt_orange{color: #FB6432;}
 .hero_message p span.txt_green{color: #15B874;}
 .hero_message p span.txt_blue{color: #248BFF;}
-.hero_message p + a {width:50px; height:50px; margin-top:3em; display:inline-block; background:url('@/assets/images/main/icon_brand_arrow2.png') no-repeat center; background-size:contain;}
-.hero_message ul{max-width:1045px;margin-top:20px;margin-left: auto;;}
+.hero_message ul{max-width:1045px;margin-top:100px;margin-left: auto;;}
 .hero_message ul > li{padding: 20px 8px;border-bottom: 1px solid #000;}
 .hero_message ul > li:first-child{border-top: 1px solid #000;}
 .hero_message ul > li dl{display: grid;grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);column-gap: clamp(32px, 6vw, 120px);align-items: center;}
@@ -985,10 +986,11 @@ section {
     display: flex;
     justify-content: center;
     gap: 12px;
+    margin-top: 40.5px;
 }
 
 .sec04 .quick a {
-    padding: 20px 24px;
+    padding: 0 24px;
     color: #000;
     font-size: 2.4rem;
     font-weight: 700;
@@ -1008,8 +1010,12 @@ section {
     display: block;
 } /* 26.06.29 edit 이소라 */
 
-.sec03 .swiper, .sec04 .swiper {
+.sec03 .swiper{
     margin-top: 80px;
+}
+
+ .sec04 .swiper {
+    margin-top: 40.5px;
 }
 
 .sec04 .swiper { width: 100%; overflow: hidden; }
@@ -1134,7 +1140,7 @@ section {
         font-size: 2.4rem;
     }
     
-    .hero_message{padding-top:130px; padding-bottom:100px;}
+    .hero_message{padding-bottom:100px;}
     .hero_message p{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
     .hero_message ul{margin-top:50px;}
     .hero_message ul > li{padding:20px;}
@@ -1217,16 +1223,16 @@ section {
     }
 
     .sec04 .quick {
-        margin-top: 22px;
+        margin-top: 48px;
     }
 
     .sec04 .quick a {
-        padding: 26px 10px;
+        padding: 0 10px;
         font-size: 1.6rem;
     }
 
     .sec04 .swiper {
-        margin-top: 60px;
+        margin-top: 46px;
     }
 
     .sec04 .swiper-wrapper {
