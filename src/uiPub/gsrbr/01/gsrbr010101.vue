@@ -1441,7 +1441,8 @@
             </section>
         </div>
 
-        <!-- 상품권 판매 -->
+        <!-- 26.06.29 del 정다희 : 상품권 판매 탭 삭제 -->
+        <!--
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 3" class="brand_panel">
             <figure v-if="store.tabs[3].hero" class="brand_panel_bg">
                 <img :src="store.tabs[3].hero" :alt="store.tabs[3].heroAlt || ''" width="1420" height="340" />
@@ -1456,7 +1457,6 @@
                     <h3 v-html="store.tabs[3].voucherTitle"></h3>
 
                 </header>
-                <!-- PC -->
                 <ul v-if="!isMobileView" class="voucher_list">
                     <li v-for="(item, vi) in store.tabs[3].voucherItems" :key="vi" class="voucher_item">
                         <div class="voucher_img">
@@ -1471,7 +1471,6 @@
                         </div>
                     </li>
                 </ul>
-                <!-- 모바일 Swiper -->
                 <Swiper
                     v-else
                     class="voucher_swiper"
@@ -1495,6 +1494,8 @@
                 </Swiper>
             </section>
         </div>
+        -->
+        <!-- //26.06.29 del 정다희 : 상품권 판매 탭 삭제 -->
         <!-- 상생협력: 운영지원제도 -->
         <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 0" class="brand_panel winwin_panel">
             <!-- 3depth 탭 네비 -->
@@ -1768,9 +1769,10 @@ import imgServiceDesc03    from "@/assets/images/dummy/service_desc_03.png";
 import imgServiceDesc04    from "@/assets/images/dummy/service_desc_04.png";
 import imgServiceDesc05    from "@/assets/images/dummy/service_desc_05.png";
 import imgServiceDesc06    from "@/assets/images/dummy/service_desc_06.png";
-import imgGiftCerti01 from "@/assets/images/dummy/gift_certi_01.png";
-import imgGiftCerti02 from "@/assets/images/dummy/gift_certi_02.png";
-import imgGiftCerti03 from "@/assets/images/dummy/gift_certi_03.png";
+// 26.06.29 del 정다희 : 상품권 판매 탭 삭제
+// import imgGiftCerti01 from "@/assets/images/dummy/gift_certi_01.png";
+// import imgGiftCerti02 from "@/assets/images/dummy/gift_certi_02.png";
+// import imgGiftCerti03 from "@/assets/images/dummy/gift_certi_03.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1809,7 +1811,8 @@ const langData = {
                 { item: "생활 서비스" },
                 { item: "택배&픽업" },
                 { item: "공공요금수납" },
-                { item: "상품권 판매" },
+                // 26.06.29 del 정다희 : 상품권 판매 탭 삭제
+                // { item: "상품권 판매" },
             ],
             depth2Winwin: [
                 { item: "운영지원제도" },
@@ -2090,7 +2093,7 @@ const langData = {
                         },
                         {
                             title: "신선강화점 전용 행사 운영",
-                            desc: "정기행사에 외 격주 단위 신선강화점 전용 행사<br />추가 운영(신선상품 &amp; 공산품)",
+                            desc: "정기행사에 외 주 단위 신선강화점 전용 행사<br />추가 운영(신선상품 &amp; 공산품)",  /*26.06.29 edit 정다희: 텍스트 수정 */ 
                             items: [
                                 { img: imgSinsen05, imgMo: imgSinsen05Mo, caption: "[신선 전단 행사]" },
                                 { img: imgSinsen06, imgMo: imgSinsen06Mo, caption: "[공산 전단 행사]" },
@@ -2886,45 +2889,46 @@ const langData = {
                         },
                     ],
                 },
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "상품권 판매",
-                    subtitle: "상품권 판매 서비스",
-                    desc: "문화상품권, 금강제화, GS칼텍스 상품권 등을 판매하고 있습니다.",
-                    sections: [],
-                    voucherTitle: "상품권 종류",
-                    voucherItems: [
-                        {
-                            img: imgGiftCerti01,
-                            name: "문화상품권",
-                            tags: [
-                                { text: "5천원권", type: "blue" },
-                                { text: "1만원권", type: "green" },
-                            ],
-                            desc: "도서음반, 영화티켓구입, 외식(일부), 인터넷(게임, 포털)에서 사용 가능한 상품권",
-                        },
-                        {
-                            img: imgGiftCerti02,
-                            name: "금강제화상품권",
-                            tags: [
-                                { text: "5만원권", type: "orange" },
-                                { text: "10만원권", type: "orange" },
-                            ],
-                            desc: "전국 1300여개 도시 4000여 매장 (~5만원권, 10만원권)/(금강, 버팔로, PGA, LPGA, 금강핸드백 등) 어디서나 사용 가능한 실속 있는 상품권",
-                        },
-                        {
-                            img: imgGiftCerti03,
-                            name: "GS칼텍스상품권",
-                            tags: [
-                                { text: "1만원권", type: "green" },
-                                { text: "5만원권", type: "orange" },
-                                { text: "10만원권", type: "orange" },
-                            ],
-                            desc: "주유소,백화점,외식,마트,호텔,여행사 등에서 사용 가능한 상품권",
-                        },
-                    ],
-                },
+                // 26.06.29 del 정다희 : 상품권 판매 탭 삭제
+                // {
+                //     hero: null,
+                //     heroAlt: "",
+                //     title: "상품권 판매",
+                //     subtitle: "상품권 판매 서비스",
+                //     desc: "문화상품권, 금강제화, GS칼텍스 상품권 등을 판매하고 있습니다.",
+                //     sections: [],
+                //     voucherTitle: "상품권 종류",
+                //     voucherItems: [
+                //         {
+                //             img: imgGiftCerti01,
+                //             name: "문화상품권",
+                //             tags: [
+                //                 { text: "5천원권", type: "blue" },
+                //                 { text: "1만원권", type: "green" },
+                //             ],
+                //             desc: "도서음반, 영화티켓구입, 외식(일부), 인터넷(게임, 포털)에서 사용 가능한 상품권",
+                //         },
+                //         {
+                //             img: imgGiftCerti02,
+                //             name: "금강제화상품권",
+                //             tags: [
+                //                 { text: "5만원권", type: "orange" },
+                //                 { text: "10만원권", type: "orange" },
+                //             ],
+                //             desc: "전국 1300여개 도시 4000여 매장 (~5만원권, 10만원권)/(금강, 버팔로, PGA, LPGA, 금강핸드백 등) 어디서나 사용 가능한 실속 있는 상품권",
+                //         },
+                //         {
+                //             img: imgGiftCerti03,
+                //             name: "GS칼텍스상품권",
+                //             tags: [
+                //                 { text: "1만원권", type: "green" },
+                //                 { text: "5만원권", type: "orange" },
+                //                 { text: "10만원권", type: "orange" },
+                //             ],
+                //             desc: "주유소,백화점,외식,마트,호텔,여행사 등에서 사용 가능한 상품권",
+                //         },
+                //     ],
+                // },
             ],
         },
         winwin: {
@@ -3202,7 +3206,8 @@ const langData = {
                 { item: "Everyday Services" },
                 { item: "Delivery & Pickup" },
                 { item: "Bill and Tax Payment" },
-                { item: "Gift Voucher Sales" },
+                // 26.06.29 del 정다희 : 상품권 판매 탭 삭제
+                // { item: "Gift Voucher Sales" },
             ],
             depth2Winwin: [
                 { item: "Operations Support Programs" },
@@ -4243,45 +4248,46 @@ const langData = {
                         },
                     ],
                 },
-                {
-                    hero: null,
-                    heroAlt: "",
-                    title: "Gift Voucher Sales",
-                    subtitle: "Gift Card Sales",
-                    desc: "Culture Gift Cards, Kumkang Shoe gift cards, GS Caltex gift cards, and more are available.",
-                    sections: [],
-                    voucherTitle: "Gift certificate types"/* 260604 번역 */,
-                    voucherItems: [
-                        {
-                            img: imgGiftCerti01,
-                            name: "Culture Gift Voucher"/* 260604 번역 */,
-                            tags: [
-                                { text: "5,000 KRW voucher"/* 260604 번역 */, type: "blue" },
-                                { text: "10,000 KRW voucher"/* 260604 번역 */, type: "green" },
-                            ],
-                            desc: "Redeemable for books and music, movie tickets, dining (select locations), and online services (gaming and portals)",
-                        },
-                        {
-                            img: imgGiftCerti02,
-                            name: "Kumkang Shoes Gift Voucher"/* 260604 번역 */,
-                            tags: [
-                                { text: "50,000 KRW voucher"/* 260604 번역 */, type: "orange" },
-                                { text: "100,000 KRW voucher"/* 260604 번역 */, type: "orange" },
-                            ],
-                            desc: "A great-value gift card accepted at over 4,000 stores across 1,300+ cities nationwide (KRW 50,000 and KRW 100,000 denominations), redeemable at Kumkang, Buffalo, PGA, LPGA, Kumkang Handbag, and more",
-                        },
-                        {
-                            img: imgGiftCerti03,
-                            name: "GS Caltex Gift Voucher"/* 260604 번역 */,
-                            tags: [
-                                { text: "10,000 KRW voucher"/* 260604 번역 */, type: "green" },
-                                { text: "50,000 KRW voucher"/* 260604 번역 */, type: "orange" },
-                                { text: "100,000 KRW voucher"/* 260604 번역 */, type: "orange" },
-                            ],
-                            desc: "Redeemable at gas stations, department stores, restaurants, supermarkets, hotels, travel agencies, and more",
-                        },
-                    ],
-                },
+                // 26.06.29 del 정다희 : 상품권 판매 탭 삭제
+                // {
+                //     hero: null,
+                //     heroAlt: "",
+                //     title: "Gift Voucher Sales",
+                //     subtitle: "Gift Card Sales",
+                //     desc: "Culture Gift Cards, Kumkang Shoe gift cards, GS Caltex gift cards, and more are available.",
+                //     sections: [],
+                //     voucherTitle: "Gift certificate types"/* 260604 번역 */,
+                //     voucherItems: [
+                //         {
+                //             img: imgGiftCerti01,
+                //             name: "Culture Gift Voucher"/* 260604 번역 */,
+                //             tags: [
+                //                 { text: "5,000 KRW voucher"/* 260604 번역 */, type: "blue" },
+                //                 { text: "10,000 KRW voucher"/* 260604 번역 */, type: "green" },
+                //             ],
+                //             desc: "Redeemable for books and music, movie tickets, dining (select locations), and online services (gaming and portals)",
+                //         },
+                //         {
+                //             img: imgGiftCerti02,
+                //             name: "Kumkang Shoes Gift Voucher"/* 260604 번역 */,
+                //             tags: [
+                //                 { text: "50,000 KRW voucher"/* 260604 번역 */, type: "orange" },
+                //                 { text: "100,000 KRW voucher"/* 260604 번역 */, type: "orange" },
+                //             ],
+                //             desc: "A great-value gift card accepted at over 4,000 stores across 1,300+ cities nationwide (KRW 50,000 and KRW 100,000 denominations), redeemable at Kumkang, Buffalo, PGA, LPGA, Kumkang Handbag, and more",
+                //         },
+                //         {
+                //             img: imgGiftCerti03,
+                //             name: "GS Caltex Gift Voucher"/* 260604 번역 */,
+                //             tags: [
+                //                 { text: "10,000 KRW voucher"/* 260604 번역 */, type: "green" },
+                //                 { text: "50,000 KRW voucher"/* 260604 번역 */, type: "orange" },
+                //                 { text: "100,000 KRW voucher"/* 260604 번역 */, type: "orange" },
+                //             ],
+                //             desc: "Redeemable at gas stations, department stores, restaurants, supermarkets, hotels, travel agencies, and more",
+                //         },
+                //     ],
+                // },
             ],
         },
         winwin: {
@@ -5868,34 +5874,34 @@ button { background-color: #fff }
 }
 .tax_group_list .list_dotted > li + li { margin-top: 6px }
 .tax_group_list .list_dotted > li::before { background-color: #67676f }
-/* 26.06.11 edit 정다희 : tax_group·voucher 텍스트 font-weight 700 */
+/* 26.06.11 edit 정다희 : tax_group 텍스트 font-weight 700 */
 .tax_group_list .list_dotted > li p { color:#67676F; font-weight:700; }
 .tax_group_subtitle { margin-bottom: 16px; font-size: 2.4rem; font-weight: 700; color: #161616; line-height: 1.35; letter-spacing: -0.01em }
 .tax_group_desc, .tax_group_list .list_dotted > li p { font-size: 1.8rem; font-weight:700; color: #67676f; line-height: 1.4 }
 @media (max-width: 768px) {
   .tax_group_desc, .tax_group_list .list_dotted > li p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
 }
-.voucher_list { display: flex; gap: 20px }
-.voucher_item {  flex: 1 }
-.voucher_img { height: 200px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center }
-.voucher_img > img { width: auto }
-.voucher_info { padding-top: 24px }
-.voucher_name { margin-bottom: 8px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; font-weight: 700; color: #000; display: block }
-@media (max-width: 768px) {
-  .voucher_name { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
-}
-.voucher_tags { margin-bottom: 16px; letter-spacing: -0.01em; line-height: 1.4; display: flex; gap: 4px }
-.voucher_tag { padding: 2px 8px; font-size: 1.4rem; font-weight:700; line-height: 1.4; letter-spacing: -0.01em; border-radius: 4px }
-.tag_blue { background-color: #e7f2fe; color: #0d62c2 }
-.tag_green { background-color: #dff5ec; color: #0d6e46 }
-.tag_orange { background-color: #f9f2ea; color: #ca5028 }
-.voucher_desc { font-size: 1.6rem; font-weight:700; color: #67676f; line-height: 1.5; letter-spacing: -0.01em }
+/* 26.06.29 del 정다희 : 상품권 판매 탭 삭제 */
+/* .voucher_list { display: flex; gap: 20px } */
+/* .voucher_item {  flex: 1 } */
+/* .voucher_img { height: 200px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center } */
+/* .voucher_img > img { width: auto } */
+/* .voucher_info { padding-top: 24px } */
+/* .voucher_name { margin-bottom: 8px; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; font-weight: 700; color: #000; display: block } */
+/* @media (max-width: 768px) { */
+/*   .voucher_name { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% } */
+/* } */
+/* .voucher_tags { margin-bottom: 16px; letter-spacing: -0.01em; line-height: 1.4; display: flex; gap: 4px } */
+/* .voucher_tag { padding: 2px 8px; font-size: 1.4rem; font-weight:700; line-height: 1.4; letter-spacing: -0.01em; border-radius: 4px } */
+/* .tag_blue { background-color: #e7f2fe; color: #0d62c2 } */
+/* .tag_green { background-color: #dff5ec; color: #0d6e46 } */
+/* .tag_orange { background-color: #f9f2ea; color: #ca5028 } */
+/* .voucher_desc { font-size: 1.6rem; font-weight:700; color: #67676f; line-height: 1.5; letter-spacing: -0.01em } */
 @media (max-width: 768px) {
   .tax_group_subtitle { margin-bottom:12px; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0% }
-  .brand_panel section.sec_voucher { padding: 0 !important }
-  /* .brand_panel section.sec_voucher header { padding: 0 20px } */
-  .voucher_swiper{width:calc(100% + 40px); margin:24px -20px 0; padding:0 20px;}
-  .voucher_swiper .swiper-slide { width: 69.33vw }
+  /* .brand_panel section.sec_voucher { padding: 0 !important } */
+  /* .voucher_swiper{width:calc(100% + 40px); margin:24px -20px 0; padding:0 20px;} */
+  /* .voucher_swiper .swiper-slide { width: 69.33vw } */
 }
 .link_wrap { margin-top: 64px; display: flex; justify-content: center }
 .link_wrap > .btn_pickup { height: 64px; padding: 20px 32px; color: #fff; text-align: center; font-size: 1.8rem; line-height: 1.4; background-color: #107AF2; border-radius: 10px; border:0; gap:8px }
