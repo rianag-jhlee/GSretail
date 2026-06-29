@@ -830,7 +830,7 @@ const currentHistoryTab = computed(() => t.value.HistoryTabs?.[MainTabIdx.value]
     .main-container{padding-top:84px;} /* 26.06.09 add 정다희 : 모바일 스타일 적용 */
     :deep(.tab_wrap){margin:0;}
     .title_wrap { display: none; }
-    .panel { padding: 60px 0 100px; }
+    .panel { padding: 60px 0 0; }  /* 26.06.26 edit 이소라 */
     .sec_history { grid-template-columns: minmax(0, 1fr); gap: 60px; }
     .history_intro > header { min-height: 0; }
     .history_intro > header > p { display: none; }

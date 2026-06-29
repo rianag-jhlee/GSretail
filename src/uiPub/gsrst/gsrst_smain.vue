@@ -120,7 +120,7 @@ const t = computed(() => {
 }
 @media (max-width: 768px) {
     :deep(.m_br) { display: block; }
-    .sec_franchise { padding: 60px 0 0; overflow-x: hidden; }
+    .sec_franchise { overflow-x: hidden; } /* 26.06.26 edit 이소라 */
     .sec_inner { padding: 0 20px; }
     .sec_franchise_head {margin-bottom:40px; padding: 0;  }
     .sec_franchise_head > h2 { display: none; }

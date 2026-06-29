@@ -137,7 +137,7 @@ export default {
                         qrDesc: "우리동네GS 앱을 다운로드하고, 다양한 이벤트와 차별화 상품을 만나보세요.<br/>QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
                         qrDesc_mo: "GS25의 다양한 이벤트와 차별화 상품",
                     },
-                    BenefitTitle: "‘우리동네 GS’ 앱에서 <br/>일상의 모든 것을 해결하세요.",
+                    BenefitTitle: "‘우리동네GS’ 앱에서 <br/>일상의 모든 것을 해결하세요.", /* 26.06.26 edit 이소라 */
                     BenefitRows: [
                         [
                             { title: "재고찾기/검색", desc: "전국 매장별 실시간 상품 재고 현황 및 잔여 수량을 간편하게 확인할 수 있습니다.", popId: "gsrbr0403", popType: "lg", popCont: "gsrbr0403"},

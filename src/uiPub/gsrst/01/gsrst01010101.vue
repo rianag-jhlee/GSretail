@@ -2983,7 +2983,7 @@ function toggleCard(id) {
 
 /* Mobile */
 @media (max-width: 768px) {
-    .wrap_gsrst {margin-top:70px;}
+    .wrap_gsrst {margin-top:84px;} /* 26.06.26 edit 이소라 */
 
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }

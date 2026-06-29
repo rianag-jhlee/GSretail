@@ -193,6 +193,7 @@ section > header{margin-bottom:100px;}
     .header {margin-bottom:24px;}
     .header h3 { font-size: 2.4rem; }
     .header p { margin-top: 12px; font-weight: 400; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sec_vision {padding-top: 120px; } /* 26.06.26 edit 이소라 */
     .sec_vision .img_wrap picture img{max-width: 335px;}
     .swiper{width: calc(100% + 40px); margin: 0 -20px;padding: 0 20px;}
     .sec_value :deep(.value_swiper .swiper-slide) { width: 84.53vw; }
