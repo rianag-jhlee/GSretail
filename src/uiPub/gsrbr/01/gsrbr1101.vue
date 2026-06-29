@@ -200,10 +200,12 @@
                                                     {{ mall.contact.blog }}
                                                 </a>
                                             </div>
-                                            <div v-if="mall.contact.phone" class="info_item">
+                                            <div v-if="mall.contact.phone || mall.contact.phone1" class="info_item"> <!-- 26.06.29 edit 정다희 :  v-if문 수정 -->
                                                 <span>{{ t.Labels.phoneNum }}</span>
-                                                <span class="val">{{ mall.contact.phone }}</span>
-                                                <span class="val">{{ mall.contact.phone1 }}</span>
+                                                <!-- 26.06.29 edit 정다희 : span에 v-if문 추가 -->
+                                                <span v-if="mall.contact.phone" class="val">{{ mall.contact.phone }}</span>
+                                                <span v-if="mall.contact.phone1" class="val">{{ mall.contact.phone1 }}</span>
+                                                <!-- //26.06.29 edit 정다희 : span에 v-if문 추가 -->
                                             </div>
                                             <div v-if="mall.contact.email1 || mall.contact.email2 || mall.contact.email3" class="info_item">
                                                 <span>{{ t.Labels.email }}</span>
@@ -252,9 +254,11 @@
                                     <strong class="card_title">{{ p.subTitle }}</strong>
                                 </div>
                                 
-                                <div v-if="p.subtxt" class="card_body_sub">
+                                <!-- 26.06.29 del 정다희 : card_body_sub 삭제 -->
+                                <!-- <div v-if="p.subtxt" class="card_body_sub">
                                     <p class="desc_sub_text">{{ p.subtxt }}</p>
-                                </div>
+                                </div> -->
+                                <!-- //26.06.29 del 정다희 : card_body_sub 삭제 -->
                             </component>
                         </component>
                     </div>
@@ -266,7 +270,26 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- 26.06.29 add 정다희 : help_desk_area 추가 -->
+                <div class="help_desk_area">
+                    <div class="guide_header">
+                        <h4 class="text-wrapper mb12">{{ t.HelpDeskTitle }}</h4>
+                        <p class="div_desc">{{ t.HelpDeskDesc }}</p>
+                    </div>
+                    <ul>
+                        <li v-for="(help, hIdx) in t.HelpDeskItems" :key="'help-'+hIdx">
+                            <div class="info">
+                                <span class="brand">{{ help.brand }}</span>
+                                <strong class="tel">{{ help.tel }}</strong>
+                                <p class="note">※ {{ help.note }}</p>
+                                <a :href="help.link" class="btn_big border btn_icon_arrow after mt20" target="_blank">
+                                    {{ t.BtnGoDetail }}
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //26.06.29 add 정다희 : help_desk_area 추가  -->
                 <div class="bottom_btns">
                     <button class="btn_back" @click="handleBack">{{ t.backLabel }}</button>
                 </div>
@@ -335,19 +358,21 @@ export default {
                         conditions: [
                             {
                                 name: `임대상가`, img: require("@/assets/images/dummy/subway_shop.png"),
+                                // table 26.06.29 edit 정다희 : 테이블 내용 수정 
                                 table: [
-                                    { th: `월 임대료`, td: `업체 제안 방식` },
-                                    { th: `임대 보증금`, td: `월 임대료 * 12개월` },
-                                    { th: `계약기간`, td: `<p>1단계 : 2026년 12월 31일까지 가능</p><p>2단계 : 2028년 08월 15일까지 가능</p>` },
+                                    { th: `월 임대료`, td: `계약 기간 전체 선납` },
+                                    // { th: `임대 보증금`, td: `월 임대료 * 12개월` },  // table 26.06.29 del 정다희 : th 삭제 
+                                    { th: `계약기간`, td: `3개월 이상 ~ 12개월 이하` },
                                     { th: `면적`, td: `각 역사별 상이` },
                                     { th: `추천업종`, td: `의류, 편의서비스, 생활잡화, 디저트 등` }
                                 ]
                             },
                             {
                                 name: `키오스크`, img: require("@/assets/images/dummy/subway_kiosk.png"),
+                                // table 26.06.29 edit 정다희 : 테이블 내용 수정 
                                 table: [
-                                    { th: `월 임대료`, td: `업체 제안 방식` }, // <!-- 26.06.08 add 정다희 : th 텍스트 수정 -->
-                                    { th: `임대 보증금`, td: `6개월 선납 방식` },  // <!-- 26.06.08 add 정다희 : th 텍스트 수정 -->
+                                    { th: `월 집기 사용료`, td: `업체 제안 방식` }, // <!-- 26.06.08 add 정다희 : th 텍스트 수정 -->
+                                    { th: `사용료 납입`, td: `6개월 선납 방식` },  // <!-- 26.06.08 add 정다희 : th 텍스트 수정 -->
                                     { th: `계약기간`, td: `6개월 단위` },
                                     { th: `예치보증금`, td: `사용료 3개월 분` },
                                     { th: `추천업종`, td: `악세사리, 잡화 등` }
@@ -361,11 +386,23 @@ export default {
                     lease_subtitle_desc:{
                         principles: [
                             { subTitle: `보증금/고정 월세`},
-                            { subTitle: '보증금/변동 월세 (수수료 방식)', subtxt: '(수수료 방식)' }
+                            { subTitle: '보증금/변동 월세 (수수료 방식)'} /* 26.06.29 edit 정다희 : subtxt 삭제 */
                         ],
                     },
+
                     fee_tip_title: `수수료방식이란?`, 
                     fee_tip_desc_1: `월 순매출의 일정 비율을 임대인에게 임대로로 지급하는 방식. 예) 월 순매출금액 x 수수료율 (VAT별도)`,    
+                    
+                    // 26.06.29 add 정다희 : help_desk_area 추가 
+                    HelpDeskTitle: "GS25, GS THE FRESH 창업 문의",
+                    HelpDeskDesc: "GS25, GS THE FRESH 창업 문의는 창업안내의 상담 및 신청 메뉴에서 진행하실 수 있습니다.",
+                    HelpDeskItems: [
+                        { brand: "GS25", tel: "1644-5425", note: "GS25 창업상담 문의", link: "/gsrst02010101" },
+                        { brand: "GS THE FRESH (GS수퍼마켓)", tel: "1833-9779", note: "GS THE FRESH 가맹상담 문의", link: "/gsrst01010101" }
+                    ],
+                    BtnGoDetail: "바로가기",
+                    // //26.06.29 add 정다희 : help_desk_area 추가 
+
                     mall_txt:'연락처',
                     MallData: [
                         { 
@@ -374,7 +411,7 @@ export default {
                             intro: [
                                 {title:`인사동 랜드마크`,desc:`인사동 쌈지길 맞은편에 위치한 복합문화상업시설로 2019년 10월 그랜드 오픈 후 인사동의 랜드마크로 자리매김함`},
                                 {title:`상시밀집 지역`,desc:`직장인/외국인/가족나들이/관광객 등이 상시 밀집하며, 인사동-익선동으로 이어지는 우수한 도보 접근성 및 신비로운 건물 가시성`},
-                                {title:`고객 경헝에 특화된 MD 구성`,desc:`갤러리, 카페, 식음, 소품 등 다양한 매장이 거리를 형성하고, 전통 문화 지역 특성을 준수하여 고객 경험에 특화된 MD 구성`},
+                                {title:`고객 경험에 특화된 MD 구성`,desc:`갤러리, 카페, 식음, 소품 등 다양한 매장이 거리를 형성하고, 전통 문화 지역 특성을 준수하여 고객 경험에 특화된 MD 구성`}, /*26.06.29 edit 정다희 : title 오타 수정 */
                                 {title:`차별화된 시설`,desc:`상권 내 차별화된 시설(나인트리 호텔 숙박 연계 및 주차 공간 제공) 등 국내외 방문객의 장시간 체류 가능 (호캉스+몰캉스)`}
                             ], 
                             // mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
@@ -386,14 +423,15 @@ export default {
                         { 
                             홈페이지:'홈페이지',
                             name: `구로 지밸리몰`, contentTitle: `구로 지밸리 비즈플라자 지밸리몰`,
+                            // 26.06.29 edit 정다희: intro - title 내용수정, desc 추가 
                             intro: [
-                                {title:`구로에서 만나는<br/> 최신 트렌드의 HOT브랜드`},
-                                {title:`구로디지털단지 최대 규모의<br/> 아케이드몰`},
-                                {title:`가족모임/커뮤니티/비즈니스<br/> 다이닝/병,의원/헬스케어`},
-                                {title:`문화 공연/ 전시/ 커뮤니티가 있는<br/> 공간`},
-                                {title:`넉넉한 주차, 전면 테리스형<br/> 쾌적한 휴식공간`},
-                                {title:`생활편의(클리닉, 편의점)<br />리테일 매장 완비`}
+                                {title:`구로디지털단지 최대 규모의<br/>복합 라이프스타일몰`, desc:"업무·의료·뷰티·식음·휴식까지 한곳에서 누리는 생활 복합 공간"},
+                                {title:`다양한 전문 의료시설이 모인<br/>메디컬 특화 공간`, desc:"산부인과·피부과·안과·한의원·마취통증의학과 등 일상 가까이에서 누리는 건강 케어"},
+                                {title:`뷰티·운동·교육이 어우러진<br />라이프스타일 공간`, desc:"네일샵·헬스장·PT샵·발레학원 등 취향과 자기관리를 위한 다양한 선택"},
+                                {title:`카페와 식당가가 함께하는<br />편안한 만남과 휴식 공간`, desc:"커피숍과 다양한 식음 매장으로 일상 속 여유와 즐거움을 더하는 공간"},
                             ], 
+                            // //26.06.29 edit 정다희: intro - title 내용수정, desc 추가 
+
                             // mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
                             mapTitle: "구로 지밸리몰 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
@@ -411,20 +449,20 @@ export default {
                             ], 
                             // mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
-                            mapTitle: "판교 파미어스몰 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
-                            contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
+                            mapTitle: "판교 파미어스몰 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */ 
+                            contact: { phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` } /* 26.06.29 del 정다희 : phone 삭제 */ 
                         },
                         { 
                             홈페이지:'홈페이지',
                             name: `동부산 미식일상`, contentTitle: `동부산 미식일상`,
                             intro: [
-                                `<b>미식일상은 오시리아 관광단지 중심부에 위치한 약 3,000평 규모의 복합문화시설로,<br />2021년 6월 준공 이후 F&B와 다채로운 체험 콘텐츠가 결합된 독보적인 '문화복합시설'로의 재도약을 준비중입니다.</b>`,
-                                `오시리아 관광단지는 연간 약 4천만 명 방문하는 지역으로 차량 1시간 이내의 근거리 방문객으로 구성되어 있어,<br />일회성 관광객을 넘어 높은 재방문율과 지속적인 소비력을 갖춘 ‘안정적인 배후 수요 상권’ 입니다.<br />특히, 미식일상은 롯데아울렛〮롯데월드〮루지〮바운스유니버스 사이에 위치하여 주변 시설을 연결하는 집객력과 확장성을 보유하고 있는 시설입니다.`
+                                `<b>미식일상은 오시리아 관광단지 중심부에 위치한 약 3,000평 규모의 복합문화시설로,<br />2021년 6월 오픈 이후 F&B와 다채로운 체험 콘텐츠가 결합된 독보적인 '문화복합시설'로의 재도약을 준비중입니다.</b>`, /*26.06.29 edit 정다희 : 텍스트 수정 */ 
+                                `오시리아 관광단지는 연간 약 4천만명이 방문하는 지역으로 일회성 방문지가 아닌 높은 재방문율과 지속적인 소비력을 갖춘 '안정적인 배후 수요의 상권' 입니다.<br />특히, 미식일상은 롯데아울렛/롯데월드/스카이라인루지/바운스유니버스의 중심부에 위치하여 주변시설을 연결하는 집객력과 확장성을 보유하고 있는 시설입니다.` /*26.06.29 edit 정다희 : 텍스트 수정 */ 
                             ], 
                             // mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
                             mapTitle: "동부산 미식일상 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
-                            contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` }
+                            contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`,email3: `foodhallbusan@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` } /*26.06.29 add 정다희 : email3 추가*/ 
                         }
                     ],
                     backLabel : '목록으로 돌아가기'
@@ -498,11 +536,20 @@ export default {
                     lease_subtitle_desc:{
                         principles: [
                             { subTitle: `- Security deposit / Fixed monthly rent`},
-                            { subTitle: '- Security deposit / Variable monthly rent (commission-based)', subtxt: '(Commission-based)'/* 260604 번역 */ }
+                            { subTitle: '- Security deposit / Variable monthly rent (commission-based)' } /* 26.06.29 edit 정다희 : subtxt 삭제 */
                         ],
                     },
                     fee_tip_title: `What is the Commission-Based Lease?`, 
-                    fee_tip_desc_1: `A method of paying the landlord rent as a set percentage of monthly net sales. e.g., monthly net sales x commission rate (VAT excluded)`/* 260604 번역 */,    
+                    fee_tip_desc_1: `A method of paying the landlord rent as a set percentage of monthly net sales. e.g., monthly net sales x commission rate (VAT excluded)`/* 260604 번역 */,
+                    // 26.06.29 add 정다희 : help_desk_area 추가
+                    HelpDeskTitle: "GS25, GS THE FRESH Franchise Inquiries",
+                    HelpDeskDesc: "For GS25 and GS THE FRESH franchise inquiries, please use the Consultation and Application menu in the Franchise Guide section.",
+                    HelpDeskItems: [
+                        { brand: "GS25", tel: "1644-5425", note: "GS25 Franchise Consultation", link: "/gsrst02010101" },
+                        { brand: "GS THE FRESH (GS Supermarket)", tel: "1833-9779", note: "GS THE FRESH Franchise Consultation", link: "/gsrst01010101" }
+                    ],
+                    BtnGoDetail: "Go",
+                    // //26.06.29 add 정다희 : help_desk_area 추가
                     mall_txt:'Contact',
                     MallData: [
                         { 
@@ -523,14 +570,14 @@ export default {
                         { 
                             홈페이지:'Homepage',
                             name: `Guro G-Valley Mall`, contentTitle: `Guro G-Valley Biz Plaza — G-Valley Mall`,
+                            // 26.06.29 edit 정다희: intro title 내용수정, desc 추가
                             intro: [
-                                {title:`01. The hottest trending brands in Guro`},
-                                {title:`The largest in Guro Digital Complex<br/> Arcade mall`/* 260604 번역 */},
-                                {title:`Family Gatherings/Community/Business<br/> Dining/Clinics & Hospitals/Healthcare`/* 260604 번역 */},
-                                {title:`04. A space for cultural performances, exhibitions, and community events`},
-                                {title:`05. Ample parking and a comfortable front terrace for relaxation`},
-                                {title:`Lifestyle conveniences (clinics, convenience stores)<br />Fully equipped with retail stores`/* 260604 번역 */}
-                            ], 
+                                {title:`The largest mixed-use lifestyle mall<br/>in Guro Digital Complex`, desc:"A comprehensive living complex where work, medical care, beauty, dining, and relaxation come together in one place"},
+                                {title:`A medical-specialized space<br/>with diverse professional healthcare facilities`, desc:"Everyday health care close at hand — obstetrics & gynecology, dermatology, ophthalmology, Korean medicine, pain medicine, and more"},
+                                {title:`A lifestyle space where beauty,<br />fitness, and education come together`, desc:"A wide range of choices for your taste and self-care — nail salons, gyms, PT studios, ballet academies, and more"},
+                                {title:`A comfortable space for gatherings<br />and relaxation with cafes and dining`, desc:"Coffee shops and various dining options that add ease and enjoyment to everyday life"},
+                            ],
+                            // //26.06.29 edit 정다희: intro title 내용수정, desc 추가
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
                             mapTitle: "Guro G-Valley Mall location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
@@ -547,19 +594,19 @@ export default {
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
                             mapTitle: "Pangyo Pameus Mall location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
-                            contact: { phone: `031-755-5878`, phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` }
+                            contact: { phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` } /*26.06.29 del 정다희 : phone 삭제*/
                         },
                         { 
                             홈페이지:'Homepage',
                             name: `East Busan Misik Ilsang`, contentTitle: `East Busan Misik Ilsang`,
                             intro: [
-                                `<b>Misik Ilsang is a cultural complex of approximately 3,000 pyeong located at the center of the Osiria Tourism Complex,<br />Since its completion in June 2021, it has been preparing to take a new leap forward as an unrivaled 'cultural complex' that combines F&B with diverse experiential content.</b>`/* 260604 번역 */,
-                                `The Osiria Tourism Complex draws approximately 40 million visitors annually, made up largely of nearby visitors who arrive within an hour by car,<br />It is a 'stable backbone demand commercial area' that goes beyond one-time tourists, with a high revisit rate and sustained spending power.<br />In particular, Misik Ilsang is situated among Lotte Outlets, Lotte World, the Luge, and Bounce Universe, giving it the drawing power and scalability to connect the surrounding facilities.`/* 260604 번역 */
+                                `<b>Misik Ilsang is a cultural complex of approximately 3,000 pyeong located at the center of the Osiria Tourism Complex,<br />and since opening in June 2021, it has been preparing to take a new leap forward as an unrivaled 'cultural complex' that combines F&B with diverse experiential content.</b>`/* 260604 번역 */, /*26.06.29 edit 정다희 : 오픈 이후 텍스트 수정*/
+                                `Osiria Tourism Complex is an area visited by approximately 40 million people annually — not a one-time destination, but a stable commercial district with a captive demand base, characterized by high return visit rates and sustained spending power.<br />In particular, Misik Ilsang is located at the heart of Lotte Outlet / Lotte World / Skyline Luge / Bounce Universe, making it a facility with strong customer-drawing power and scalability that connects the surrounding attractions.`/* 260604 번역 */ /* 26.06.29 edit 정다희 : 텍스트 수정 */
                             ], 
                             mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"),
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
                             mapTitle: "East Busan Misik Ilsang location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
-                            contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` }
+                            contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`,email3: `foodhallbusan@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` } /*26.06.29 add 정다희 : email3 추가*/ 
                         }
                     ],
                     backLabel : 'Back to Brand List'
@@ -677,13 +724,29 @@ export default {
 .tell_area.mo ul li p {margin-top:4px; color:#67676F; line-height:1.5;}
 .tell_area.mo ul li p + p{margin-top:8px;}
 .mall_intro_cards .desc_sub_text {color:#67676F; font-size:16px; line-height:1.5;}
-.mall-type-1 .principles_swiper_wrapper {display: grid; grid-template-columns: repeat(3, 1fr);}
-.lease_section { width: 100%; margin-top:120px; }
+.mall-type-1 .principles_swiper_wrapper {display: grid; grid-template-columns: repeat(2, 1fr);}
+.lease_section, .help_desk_area { width: 100%; margin-top:120px; }
 .fee_tip_box {margin-top:40px;}
 .fee_tip_box strong {margin-bottom:8px; padding-left:32px; color:#67676F; font-size:18px; font-weight:700; display:block; position:relative;}
 .fee_tip_box strong::before {content:''; width:24px; height:24px; background:url('@/assets/images/common/icon_set_24.png') -496px -56px no-repeat; display:inline-flex; position:absolute; left:0; top:50%; transform:translateY(-50%);}
 .fee_tip_box p {color:#67676F; font-size:16px; font-weight:400; line-height:1.5;}
 .lease_section .principles_card_container .principle_card_item {width:340px; flex:none;}
+/* 26.06.29 add 정다희 : help_desk_area 추가 */
+.help_desk_area { width: 100%; }
+.help_desk_area ul { margin-top:40px; padding: 0; display: flex; gap:20px; list-style: none; }
+.help_desk_area ul li {width:calc(100% / 2 - 10px ); padding: 32px; background-color: #f8f8f8; border-radius: 10px; position: relative; }
+.text-wrapper { font-size: 2.8rem; font-weight: 700; color: #161616; }
+.div_desc { font-size: 2rem; line-height: 1.4; color: #161616; }
+/* li::before를 이용한 브랜드 로고 처리 */
+.help_desk_area ul li::before { content: ''; width: 160px; height: 160px; margin-right:40px; background-repeat: no-repeat; background-position: center; background-size: contain; display:inline-block; flex-shrink: 0; }
+.help_desk_area ul li:nth-child(1)::before { background-image: url('@/assets/images/dummy/gsrst01_gs25.png'); }
+.help_desk_area ul li:nth-child(2)::before { background-image: url('@/assets/images/dummy/gsrst01_fresh.png'); }
+
+.help_desk_area .info {vertical-align:top; display:inline-block;}
+.help_desk_area .brand { font-size: 1.8rem; font-weight: 700; color: #161616; }
+.help_desk_area .tel { font-size: 2.8rem; font-weight: 700; color: #161616; margin: 4px 0; display: block; }
+.help_desk_area .note { font-size: 1.6rem; color: #67676f; }
+
 .bottom_btns { width: 100%; margin-top: 100px; text-align: left; }
 .btn_list_back { background: transparent; padding: 0; border: 0; cursor: pointer; }
 .btn_list_back span { color: #161616; font-size: 20px; display: flex; align-items: center; gap: 12px; }
@@ -692,6 +755,7 @@ export default {
 
 @media screen and (min-width: 1024px) {
     :deep(.subway_content) .main_title br {display:none;}
+  
 }
 @media screen and (max-width: 1024px) {
     .visual_wrap { padding: 80px 0; }
@@ -712,13 +776,21 @@ export default {
     .contact_info_wrap { padding: 0; flex-direction: column; align-items: flex-start; gap: 24px; }
     .contact_left { flex-direction: column; gap: 12px; }
     .sns_right { width: 100%; margin-top: 10px; justify-content: flex-start; }
-    .lease_section { margin-top: 24px; }
+    .lease_section, .help_desk_area { margin-top: 80px; }
     .fee_tip_box {flex-direction: column; align-items: flex-start; gap: 16px; }
     .val_txt { font-size: 16px; word-break: keep-all; }
     .btn_list_back span { height: 50px; justify-content: center; }
     /* .principles_swiper_wrapper { flex-direction: column; gap: 16px; } */
     .principle_card_item {height:auto; padding: 32px; display:block; flex:none;}
     .principles_swiper_wrapper, .mall-type-1 .principles_swiper_wrapper {display: grid; grid-template-columns: repeat(2, 1fr);}
+    
+    /* 26.06.29 add 정다희 : help_desk_area */
+    .help_desk_area ul { flex-direction: column; grid-template-columns: 1fr; }
+    .help_desk_area ul li { width:100%; padding:20px; flex-direction:column;}
+    .help_desk_area .info .brand { font-size: 1.4rem;}
+    .help_desk_area .info .tel { font-size: 2rem;}
+    .help_desk_area .info .note { font-size: 1.2rem;}
+    .help_desk_area .info .btn_big {height:38px; font-size: 1.6rem;}
 }
 @media screen and (max-width: 768px) {
     .pc {display:none;}
@@ -759,7 +831,17 @@ export default {
     .fee_tip_box{margin-top:24px;}
     .fee_tip_box strong{font-size: 1.6rem;line-height: 1.24;letter-spacing: 0%;}
     .fee_tip_box p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+    /* 26.06.29 add 정다희 : help_desk_area */
+    .help_desk_area ul {margin-top:24px;}
+    .help_desk_area ul li { width:100%; padding:20px; display:flex; flex-direction:row; gap:20px; align-items:center;}
+    .help_desk_area ul li::before {width:100px; margin-right:0;}
+    .help_desk_area .info .brand { font-size: 1.4rem;}
+    .help_desk_area .info .tel { font-size: 2rem;}
+    .help_desk_area .info .note { font-size: 1.2rem;}
+    .help_desk_area .info .btn_big {height:38px; font-size: 1.6rem;}
+    .div_desc :deep(li), .div_desc { font-size: 1.8rem; margin-top:12px; }
     .bottom_btns { margin-top: 60px; }
+    .text-wrapper{font-size: 2.4rem; line-height: 1.35;}
     }
  
 </style>
