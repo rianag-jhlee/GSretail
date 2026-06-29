@@ -10,7 +10,7 @@
                 <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
                 <!-- 26.06.08 : title-sub-text if문으로 수정 add 정다희희  -->
                 <!-- 26.06.19 add 정다희 : 탭 두번째부터 렌더링 v-html="t.MainDesc[CTabIdx - 1]" 수정 -->
-                <p v-if="CTabIdx !== 0" class="title-sub-text" v-html="t.MainDesc[CTabIdx - 0]"></p> <!-- 26.06.26 edit 이소라 -->
+                <p v-if="CTabIdx !== 0" class="title-sub-text" v-html="t.MainDesc[CTabIdx - 1]"></p> <!-- 26.06.26 edit 이소라 -->
                 <!-- //26.06.08 : title-sub-text if문으로 수정 add 정다희희  -->
                 <div class="tab_content_wrap">
                     <!-- //26.06.08 add 정다희 -->
