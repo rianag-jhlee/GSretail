@@ -526,7 +526,12 @@
                 <div v-if="sec.flow" class="info_card_flow">
                     <div class="info_card" v-for="item in sec.flow_cont" :key="item">
                         <strong v-if="item.flowTitle">{{ item.flowTitle }}</strong>
-                        <p v-if="item.flowNote">{{ item.flowNote }}</p>
+                        <p v-if="item.flowNote" v-html="item.flowNote"></p>
+                        <!-- 26.06.29 add 정다희 : num_list 추가-->
+                        <ol v-if="item.flowList && item.flowList.length" class="num_list">
+                            <li v-for="(line, li) in item.flowList" :key="li"><p v-html="line"></p></li>
+                        </ol>
+                        <!-- //26.06.29 add 정다희 : num_list 추가-->
                         <img :src="isMobileView ? item.mo_img : item.img" alt="" class="sinsen_flow_img" />
                         <p v-if="item.flowNote2">{{ item.flowNote2 }}</p>
                     </div>
@@ -2030,7 +2035,7 @@ const langData = {
             subtitle: "신선강화점은 1~2인 가구 및 근거리/소용량 쇼핑 증가 트렌드에 맞춰, 24시간 365일 한번에 장보기를 구현한 신선강화형 편의점입니다.<br /><br class=\"m_br\" />편의점의 간편함과 수퍼마켓의 신선함을 결합한 차별화 컨셉 모델로 매일매일 신선한 신선상품(과일, 채소, 정육, 수산)을 제공합니다.",
             sections: [
                 {
-                    title: "GS25 신선상품 특징",
+                    title: "신선강화점 특징", /*26.06.29 edit 정다희 : 타이틀 텍스트 수정*/ 
                     desc: "GS더프레시와 통합 구매를 통해 상품 경쟁력을 확보 하여 타 편의점 대비 다양한 신선상품을 운영합니다.",
                     features: [
                         { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정 콜드체인 시스템 적용으로 신선도 유지" },
@@ -2044,8 +2049,8 @@ const langData = {
                     desc: "업계 유일의 신선식품 전용 물류센터를 운영중이며,<br/> 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
                     flow: true,
                     flow_cont:[
-                        {flowTitle: "GS25 신선 배송 방식", flowNote: "*신선센터를 거치지 않는 운영 구조에서는 상품 검품, 물류비, 신선도 관리 방식에 차이가 발생할 수 있습니다.", flowNote2:"파트너사 → 단일 센터 입고로 물류비 절감 → 원가 경쟁력↑. 신선 단일센터 검품 관리로 점포 입고 전 1차 선도관리 진행", img:require("@/assets/images/sub/gsrbr010101/sinsen_flow.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow_mo.png"), alt:""},
-                        {flowTitle: "타사 신선 배송 방식", flowNote: "신선 전용 물류센터를 거치지 않는 운영 구조", img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2_mo.png"), alt:""}
+                        {flowTitle: "GS25 신선 배송 방식", flowNote: "신선센터를 거쳐 각 저온센터로 배송하는 구조.", flowList: ["파트너사 → 단일 센터 입고로 물류비 절감 → 가격 경쟁력 ↑", "신선 센터 입고 시 신선상품 검품을 통해 1차 선도관리 진행"], flowNote2:"파트너사 → 단일 센터 입고로 물류비 절감 → 원가 경쟁력↑. 신선 단일센터 검품 관리로 점포 입고 전 1차 선도관리 진행", img:require("@/assets/images/sub/gsrbr010101/sinsen_flow.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow_mo.png"), alt:""}, /*26.06.29 add 정다희 : flowList 추가, flowNote 텍스트 수정*/ 
+                        {flowTitle: "타사 신선 배송 방식", flowNote: "신선센터를 거치지 않고 각 저온센터로 배송하는 구조", flowList: ["파트너사 → 각 저온센터 입고로 물류비 증가 → 가격 경쟁력 ↓", "각 저온센터 입고 시 신선상품 검품 및 선도관리 제약"], img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2_mo.png"), alt:""} /*26.06.29 add 정다희 : flowList 추가, flowNote 텍스트 수정*/ 
                     ],
                 },
                 {
@@ -3001,7 +3006,7 @@ const langData = {
                                 { num: "03", title: "경영주 열린아카데미", desc: "경영주 역량 강화", bullets: ["월 2회 실시간 라이브 교육 운영", "다시보기 영상 제공","점포 운영에 필요한 실무 중심 콘텐츠 교육\n (노무, 세무, 가맹정산, 판촉노하우 등)"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F"},
                                 { num: "04", title: "GS클래스", desc: "언제든 학습 가능한 경영주 전용 교육 사이트", bullets: ["점포 운영에 필요한 양질의 교육 콘텐츠\n (매뉴얼, 운영 노하우, 강의 다시보기 등)","온라인 라이브 교육","우수점 연구소(우수경영주, 성공사례, 팁)"] },
                                 { num: "05", title: "신규 경영주 입문교육", desc: null, bullets: ["운영 교육(POS, 점포경영, 시스템","서비스 교육","온라인 교육과정(GS클래스)"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F" },
-                                { num: "06", title: "스토어매니저 클래스", desc: "근무자 교육 지원", bullets: ["POS 교육","청결 교육","접객서비스 교육"] , link: "http://hpimg.gsretail.com/images/gs25/winwin/web/store_manager_map.html" },
+                                { num: "06", title: "스토어매니저 클래스", desc: "스토어매니저 교육 지원", bullets: ["POS 교육","청결 교육","접객서비스 교육"] , link: "http://hpimg.gsretail.com/images/gs25/winwin/web/store_manager_map.html" }, /*26.06.29 edit 정다희 : 텍스트 수정*/ 
                                 { num: "07", title: "벤치마킹 교육", desc: "경영주 역량 강화", bullets: ["우수 가맹점 현장 방문 교육","우수 가맹점별 특화된 교육 콘텐츠","우수 경영주 노하우 공유"] },
                             ],
                         },
@@ -3014,7 +3019,7 @@ const langData = {
                             items: [
                                 { num: "01", title: "상생나눔 플랫폼 운영", desc: "사회적 약자를 위한 사회공헌형 점포 운영", bullets: ["사회취약계층 자활을 위한 내일스토어", "노인 계층 일자리를 위한 시니어스토어", "장애인의 취업과 자활을 지원하는 늘봄스토어"] },
                                 // 26.05.27 Del 이종환 { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
-                                { num: "02", title: "GS 히어로상", desc: "사회적으로 귀감이 되는 경영주,근무자에게 지원", bullets: ["모범상","귀감상","나눔상"] },
+                                { num: "02", title: "GS 히어로상", desc: "사회적으로 귀감이 되는 경영주,스토어매니저에게 지원", bullets: ["모범상","귀감상","나눔상"] }, /*26.06.29 edit 정다희 : 텍스트 수정*/ 
                                 { num: "03", title: "화재예방 소화기 공유", desc: "점포 인근 화재발생 시 소화기 공유를 통한 화재예방", bullets: ["점포인근 화재발생 시 점포 소화기 공유", "사용 후 교환 지원"] },
                             ],
                         },
@@ -3079,7 +3084,7 @@ const langData = {
                     items: [
                         { title: "트렌디한 상품" },
                         { title: "합리적인 가격" },
-                        { title: "약 1,200개 기업 이용중" },
+                        { title: "누계 이용 고객사 1,200개" },/*26.06.29 edit 정다희 : 텍스트 수정 */
                     ],
                 },
                 {
@@ -3096,9 +3101,10 @@ const langData = {
                             advantages: {
                                 title: "이런 분들에게 추천 드립니다.",
                                 items: [
-                                    { text: "정기적 조식/간식 서비스가 필요할 때" },
-                                    { text: "합리적 가격의 복지 서비스가 필요할 때" },
-                                    { text: "급식 인프라가 없어 정기적인 간편식 공급이 필요할 때" },
+                                    // 26.06.029 edit 정다희 : text 수정 
+                                    { text: "정기적 조식/간식 서비스가 필요할 때직원 조식/간식을 정기적으로 운영하고 싶을 때" },
+                                    { text: "합리적인 비용으로 직원 만족도를 높이고 싶을 때" },
+                                    { text: "사내 급식 인프라가 없어 간편식 공급이 필요 할 때" },
                                 ],
                             },
                         },
@@ -3106,16 +3112,17 @@ const langData = {
                              // 26.06.10 add 정다희 : bgColor삭제, 이미지 추가
                             img: imgMilbox02,
                             name: "스낵바",
-                            desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다. 사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.",
+                            desc: "GS25에서 운영하는 트렌디한 상품을 정기적으로 기업/단체에 제공하는 간식 큐레이팅 서비스입니다.<br />사내 복지 향상을 위해 GS25의 상품을 이제는 회사에서 즐기세요.", /*26.06.29 edit 정다희: br추가 */ 
                             // 26.06.08 add 정다희 : 스낵바 info_card 추천 문구 분기
                             // 26.06.22 add 정다희 : 링크 추가
                             link: "https://www.mealbox25.com/Snackbar-introduce",
                             advantages: {
                                 title: "이런 분들에게 추천 드립니다.",
                                 items: [
-                                    { text: "직원들을 위한 최적의 F&B 복지가 필요할 때" },
-                                    { text: "교대근무로 식사 시간이 일정하지 않을 때" },
-                                    { text: "고객 및 근무자를 위한 준비된 간식이 필요할 때" },
+                                    // 26.06.029 edit 정다희 : text 수정 
+                                    { text: "직원 복지 향상을 위한 간식 서비스가 필요할 때" },
+                                    { text: "사내 휴게공간의 만족도를 높이고 싶을 때" },
+                                    { text: "언제든 편리하게 이용 가능한 간식 복지를 운영하고 싶을 때" },
                                 ],
                             },
                         },
@@ -3437,8 +3444,8 @@ const langData = {
                     desc: "We operate the industry's only dedicated fresh product logistics center, maintaining freshness through end-to-end temperature management across the entire supply chain from suppliers to stores.",
                     flow: true,
                     flow_cont:[
-                        {flowTitle: "GS25 Fresh Delivery System", flowNote: "In operations that bypass the fresh center, <br />differences may arise <br />in product inspection, logistics costs, <br />and freshness management.", flowNote2:"Partner companies → reduced logistics costs through single-center receiving → higher cost competitiveness. Initial freshness management is carried out before in-store delivery through quality inspection at the single fresh-food center."/* 260604 번역 */, img:require("@/assets/images/sub/gsrbr010101/sinsen_flow.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow_mo.png"), alt:""},
-                        {flowTitle: "Other companies' fresh-delivery method"/* 260604 번역 */, flowNote: "An operating structure that does not go through a dedicated fresh-food distribution center"/* 260604 번역 */, img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2_mo.png"), alt:""}
+                        {flowTitle: "GS25 Fresh Delivery System", flowNote: "A delivery structure that goes through the fresh center to each cold-chain center."/* 260604 번역 */, flowList: ["Partner companies → reduced logistics costs through single-center receiving → higher price competitiveness ↑", "Initial freshness management is carried out through quality inspection of fresh products upon arrival at the fresh center"]/* 260604 번역 */, flowNote2:"Partner companies → reduced logistics costs through single-center receiving → higher cost competitiveness. Initial freshness management is carried out before in-store delivery through quality inspection at the single fresh-food center."/* 260604 번역 */, img:require("@/assets/images/sub/gsrbr010101/sinsen_flow.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow_mo.png"), alt:""}, /*26.06.29 add 정다희 : flowList 추가, flownote 텍스트 수정*/
+                        {flowTitle: "Other companies' fresh-delivery method"/* 260604 번역 */, flowNote: "A delivery structure that goes to each cold-chain center without going through the fresh center"/* 260604 번역 */, flowList: ["Partner companies → increased logistics costs through receiving at each cold-chain center → lower price competitiveness ↓", "Constraints on quality inspection and freshness management of fresh products upon receiving at each cold-chain center"]/* 260604 번역 */, img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2.png"), mo_img:require("@/assets/images/sub/gsrbr010101/sinsen_flow2_mo.png"), alt:""}, /*26.06.29 add 정다희 : flowList 추가, flownote 텍스트 수정*/
                     ],
                 },
                 {
@@ -4356,7 +4363,7 @@ const langData = {
                                 { num: "03", title: "Owners' Open Academy"/* 260604 번역 */, desc: "Store Owner Professional Development", bullets: ["Hosting real-time live training twice a month"/* 260604 번역 */, "Replay videos provided"/* 260604 번역 */,"Practical, hands-on training content needed for store operations\n (labor, taxation, franchise settlement, promotion know-how, etc.)"/* 260604 번역 */] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F"},
                                 { num: "04", title: "GS Class"/* 260604 번역 */, desc: "A dedicated training site for store owners, available to learn anytime"/* 260604 번역 */, bullets: ["High-quality training content needed for store operations\n (manuals, operational know-how, lecture replays, etc.)"/* 260604 번역 */,"Online live training"/* 260604 번역 */,"Outstanding Store Lab"] },
                                 { num: "05", title: "Onboarding Training for New Store Owners", desc: null, bullets: ["- Operations Training (POS, Store Management, Systems)","- Service Training","- Online courses (GS Class)"] , link: "https://gs25.getsmart.co.kr/members/login?returnUrl=http%3A%2F%2Fgs25.getsmart.co.kr%2F" },
-                                { num: "06", title: "Store Manager Class", desc: "Staff Training Support", bullets: ["POS Training","Cleanliness Training","Customer Service Training"] , link: "http://hpimg.gsretail.com/images/gs25/winwin/web/store_manager_map.html" },
+                                { num: "06", title: "Store Manager Class", desc: "Store Manager Training Support", bullets: ["POS Training","Cleanliness Training","Customer Service Training"] , link: "http://hpimg.gsretail.com/images/gs25/winwin/web/store_manager_map.html" }, /*26.06.29 edit 정다희 : 타이틀 텍스트 수정*/ 
                                 { num: "07", title: "Benchmarking Training"/* 260604 번역 */, desc: "Store Owner Professional Development", bullets: ["On-site visit training for outstanding franchise stores"/* 260604 번역 */,"Specialized training content tailored to each outstanding franchise store"/* 260604 번역 */,"Sharing the know-how of outstanding store owners"/* 260604 번역 */] },
                             ],
                         },
@@ -4369,7 +4376,7 @@ const langData = {
                             items: [
                                 { num: "01", title: "Mutual Growth & Sharing Platform Operations", desc: "Community-serving stores <br />for the socially vulnerable", bullets: ["Naeil Store, supporting the self-reliance of socially vulnerable groups"/* 260604 번역 */, "Senior Stores providing jobs for the elderly"/* 260604 번역 */, "Neulbom Store, supporting the employment and self-reliance of people with disabilities"/* 260604 번역 */] },
                                 // 26.05.27 Del 이종환 { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
-                                { num: "02", title: "GS Hero Award", desc: "Recognition and support for store owners and staff <br />who serve as community role models", bullets: ["Exemplary Award","Role Model Award","Community Spirit Award"] },
+                                { num: "02", title: "GS Hero Award", desc: "Recognition and support for store owners and managers <br />who serve as community role models", bullets: ["Exemplary Award","Role Model Award","Community Spirit Award"] }, /*26.06.29 edit 정다희 : desc 텍스트 수정*/ 
                                 { num: "03", title: "Fire Prevention: Fire Extinguisher Sharing", desc: "Fire prevention through fire extinguisher sharing <br />when fires break out near the store", bullets: ["Fire extinguisher sharing when a fire breaks out near the store", "Replacement support after use"] },
                             ],
                         },
@@ -4434,7 +4441,7 @@ const langData = {
                     items: [
                         { title: "Trendy products"/* 260604 번역 */ },
                         { title: "Affordable Prices" },
-                        { title: "Used by approximately 1,200 companies"/* 260604 번역 */ },
+                        { title: "Cumulative client companies: 1,200"/* 260604 번역 */ }, /*26.06.29 edit 정다희 : 텍스트 수정 */ 
                     ],
                 },
                 {
@@ -4451,9 +4458,10 @@ const langData = {
                             advantages: {
                                 title: "Recommended for:",
                                 items: [
-                                    { text: "When you need a regular breakfast or snack service"/* 260604 번역 */ },
-                                    { text: "When you need welfare services at a reasonable price"/* 260604 번역 */ },
-                                    { text: "When you have no catering infrastructure and need a regular supply of convenient meals"/* 260604 번역 */ },
+                                    // 26.06.29 edit 정다희 : text 수정 
+                                    { text: "When regular breakfast/snack services are needed for employees" },
+                                    { text: "When looking to boost employee satisfaction at a reasonable cost" },
+                                    { text: "When there is no in-house cafeteria infrastructure and ready-made meal supply is required" },
                                 ],
                             },
                         },
@@ -4464,7 +4472,13 @@ const langData = {
                             desc: "A curated snack service that regularly delivers on-trend GS25 products to corporations and groups. Bring GS25 to your office and elevate your employee welfare benefits.",
                             // 26.06.08 add 정다희 : 스낵바 info_card 추천 문구 분기
                             advantages: {
-                              
+                                // 26.06.29 add 정다희 : title, items 추가 
+                                title: "Recommended for:",
+                                items: [
+                                    { text: "When snack services are needed to enhance employee welfare" },
+                                    { text: "When looking to improve satisfaction in in-house break rooms" },
+                                    { text: "When seeking to operate a snack welfare program that is conveniently accessible at any time" },
+                                ],
                             },
                         },
                     ],
@@ -5158,7 +5172,12 @@ button { background-color: #fff }
 .info_card strong { margin-bottom:8px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
 .info_card span { font-size: 1.8rem; line-height: 1.4; font-weight:700; }
 .info_card > p {margin-top:14px; color: #67676f; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em }
-.info_card > strong + p {margin-top:0; margin-bottom:32px;}
+.info_card > strong + p {margin-top:0; margin-bottom:8px;}
+.info_card > p + .num_list {margin-bottom:32px;}
+.info_card > p + .num_list li{padding-left:24px;}
+.info_card > p + .num_list li + li {margin-top:4px;}
+.info_card > p + .num_list li > p {font-size: 1.4rem;line-height: 1.6;letter-spacing: -0.01em;}
+.info_card > p + .num_list li::before{width:16px; height:16px;}
 .sinsen_flow_img { width: 100%; max-height:372px; margin-top: 24px; display: block; border-radius: 10px }
 /* 26.06.08 add 정다희 :sinsen_advantge영역 css 추가  */
 .sinsen_advantage_grid { width: 100%; display: flex; flex-wrap: wrap; align-items: stretch; gap: 16px; }
