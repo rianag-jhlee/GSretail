@@ -221,7 +221,7 @@ const langData = {
             // 26.06.22 del 정다희 : title, desc 미사용 (div 삭제)
             // title: "브랜드 소개",
             // desc: "GS SHOP은 TV쇼핑과 모바일/인터넷쇼핑몰 등에 개별적으로 사용되던 브랜드를 <br class=\"p_br\"/>고객의 더 나은 쇼핑을 돕기 위해 하나로 통합한 브랜드입니다.",
-            headerTitle: "GS SHOP은<br class=\"m_br\"/> TV쇼핑과 모바일/인터넷쇼핑몰 등에<br class=\"p_br\"/> 개별적으로 사용되던 브랜드를<br class=\"p_br\"/> 고객의 더 나은 쇼핑을 돕기 위해 하나로 <br class=\"p_br\"/>통합한 브랜드입니다.",
+            headerTitle: "고객의 더 나은 쇼핑 경험을 위해<br />TV쇼핑·모바일·인터넷 쇼핑을 하나로 통합한 브랜드입니다.", /*26.06.26 edit 정다희 : 텍스트 수정*/ 
             websiteLabel: "홈페이지",
             snsInstaAria: "인스타그램",
             snsYtAria: "유튜브",
@@ -285,7 +285,7 @@ const langData = {
                     imgAlt: "TV 홈쇼핑",
                     em: "01",
                     title: "TV 홈쇼핑",
-                    desc: "국내 최초로 홈쇼핑 방송을 선보인 GS SHOP은 최초 홈쇼핑 채널만의 콘텐츠 제작 역량을 바탕으로 24시간 고객에게 차별화된 쇼핑 경험을 제공하고 있습니다.",
+                    desc: "국내 최초로 홈쇼핑 방송을 선보인 GS SHOP은 최초 홈쇼핑 채널만의 콘텐츠 제작 역량을 바탕으로 생동감 있는 Live 방송을 통해 고객에게 차별화된 쇼핑 경험을 제공하고 있습니다.", /*26.06.26 edit 정다희 : 텍스트 수정*/ 
                 },
                 {
                     key: "ch-online",
@@ -390,7 +390,7 @@ const langData = {
             // 26.06.22 del 정다희 : title, desc 미사용 (div 삭제)
             // title: "About the Brand",
             // desc: "GS SHOP is a unified brand that brings together what were previously separate brands for TV shopping and mobile and internet shopping, to provide customers with a better shopping experience.",
-            headerTitle: "",
+            headerTitle: "It is a brand that integrates TV shopping, mobile, and internet shopping into one for a better customer shopping experience.", /*26.06.26 edit 정다희 : 텍스트 수정*/
             websiteLabel: "Homepage",
             snsInstaAria: "Instagram"/* 260604 번역 */,
             snsYtAria: "YouTube"/* 260604 번역 */,
@@ -454,7 +454,7 @@ const langData = {
                     imgAlt: "TV Home Shopping",
                     em: "01",
                     title: "TV Home Shopping",
-                    desc: "As Korea's first home shopping broadcaster, GS SHOP provides customers with a distinctive shopping experience around the clock, drawing on the unique content production capabilities that come with being first in the industry.",
+                    desc: "GS SHOP, the first to introduce home shopping broadcasting in Korea, leverages its unique content production capabilities as the pioneering home shopping channel to deliver a differentiated shopping experience to customers through vibrant live broadcasts.", /*26.06.26 edit 정다희 : 텍스트 수정*/
                 },
                 {
                     key: "ch-online",
@@ -812,7 +812,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
 .sec_brand_channel .card_list :deep(.card_thumb) { aspect-ratio: 690 / 380; border-radius: 12px;  background-size:cover;background-blend-mode: multiply;}
 .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 24px;}
 .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 8px; }
-
+.sec_brand_channel .card_list :deep(.card_desc p){font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
 /* 프로그램 */
 .sec_brand_program .str_header_program { display: block; margin-bottom: 64px }
 .sec_brand_program .card_list { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 80px 20px; align-items: stretch }
@@ -843,7 +843,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
     .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
     .sec_brand_str .str_inner{padding: 140px 20px; }
     section.str_inner { padding: 80px 20px 0;}
-    .sec_brand_competency.str_inner, .sec_brand_biz.str_inner{padding: 40px 20px 0;}
+    .sec_brand_competency.str_inner, .sec_brand_biz.str_inner{padding: 80px 20px 0;}
     .sec_brand_str .str_header h2{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
     .str_header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px }
     .str_header h2 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em }
@@ -872,8 +872,8 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
     .sec_brand_channel .card_list :deep(.card_item .card_body) { padding-top: 20px; display: block;}
     .sec_brand_channel .card_list :deep(.card_item .card_body .card_num),
     .sec_brand_channel .card_list :deep(.card_item .card_body .card_tit) { display: inline-block; font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
-    .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 16px; margin-left:27px; font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-
+    .sec_brand_channel .card_list :deep(.card_desc) { margin-top: 4px; margin-left:27px; font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
+    .sec_brand_channel .card_list :deep(.card_desc p){font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
     .sec_brand_channel .card_list :deep(.card_item .card_body .card_num) {margin-right:6px;}
 
     /* 프로그램 */

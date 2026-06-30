@@ -508,6 +508,12 @@
                 <div v-if="sec.flow" class="info_card info_card_flow">
                     <strong v-if="sec.flowTitle">{{ sec.flowTitle }}</strong>
                     <p v-if="sec.flowNote">{{ sec.flowNote }}</p>
+                    <!-- 26.06.29 add 정다희 : num_list 추가--> 
+                    <ol class="num_list">
+                        <li><p>파트너사 → 단일 센터 입고로 물류비 절감 → 가격 경쟁력 ↑</p></li>
+                        <li><p>신선 센터 입고 시 신선상품 검품을 통해 1차 선도관리 진행</p></li>
+                    </ol>
+                    <!-- //26.06.29 add 정다희 : num_list 추가--> 
                     <img :src="isMobileView ? imgFlowMo : imgFlow" alt="" class="sinsen_flow_img" />
                 </div>
 
@@ -1928,7 +1934,7 @@ const langData = {
                 desc: "GSTHEFRESH 통합 구매를 통한 상품 경쟁력을 확보하여 타 편의점 대비 다양한 신선·장보기 상품을 운영합니다. <br /><br class=\"m_br\" />업계 유일의 신선상품 전용 물류센터를 운영중이며, 파트너사에서 점포까지 전 구간 선도관리를 통해 신선상품의 신선도를 유지합니다.",
                 flow: true,
                 flowTitle: "GS25 신선 배송 방식",
-                flowNote: "*신선센터를 거치지 않는 운영 구조에서는 상품 검품, 물류비, 신선도 관리 방식에 차이가 발생할 수 있습니다.",
+                flowNote: "*신선센터를 거쳐 각 저온센터로 배송하는 구조",
             },
             {
                 title: "신선강화점 운영의 장점",

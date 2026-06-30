@@ -740,14 +740,10 @@
                                 </article>
                             </li>
                         </ul>
-                        <ul class="list_note">
-                            <li>
-                                <p>{{ t.consultFormTexts.benefitPolicyNote }}</p>
-                            </li>
-                        </ul>
+                        <!-- 26.06.29 add 정다희 : list_note 삭제(위치이동) line:770-->
                     </section>
                 </div>
-                <div v-show="activeD3 === 1" class="panel_third_depth" :aria-label="t.benefitPanelAria.operation"> 
+                <div v-show="activeD3 === 1" class="panel_third_depth" :aria-label="t.benefitPanelAria.operation">
                     <section class="sec_operation">
                         <header class="section_header ac">
                             <h2>{{ benefitOperationPanel.title }}</h2>
@@ -771,6 +767,11 @@
                                     </article>
                                 </li>
                             </ul>
+                            <!-- 26.06.29 add 정다희 : 기타 운영 지원 하단 안내 문구 -->
+                            <ul v-if="group.policyNote" class="list_note">
+                                <li><p>{{ t.consultFormTexts.benefitPolicyNote }}</p></li>
+                            </ul>
+                            <!-- //26.06.29 add 정다희 : 기타 운영 지원 하단 안내 문구 -->
                         </div>
                     </section>
                 </div>
@@ -832,15 +833,15 @@
                         <!-- 구분선 -->
                     
                         <!-- 26.06.24 add 정다희 : 지역선택 영역 추가 -->
-                         <div class="search_bottom_row">
-                             <div class="search_group">
-                                 <span class="search_group_label">{{ t.storeSearch.regionLabel }}</span>
-                                 <div class="search_group_input">
-                                     <SelectBox :options="startupRegionSidoOptions" v-model="filterRegionSido" :initMsg="t.storeSearch.sidoInit" @update:modelValue="filterRegionSigungu = ''" />
-                                     <SelectBox :options="storeRegionSigunguOptions" v-model="filterRegionSigungu" :initMsg="t.storeSearch.sigunguInit" />
-                                 </div>
-                             </div>
-                         </div>
+                        <div class="search_bottom_row">
+                            <div class="search_group">
+                                <span class="search_group_label">{{ t.storeSearch.regionLabel }}</span>
+                                <div class="search_group_input">
+                                    <SelectBox :options="startupRegionSidoOptions" v-model="filterRegionSido" :initMsg="t.storeSearch.sidoInit" @update:modelValue="filterRegionSigungu = ''" />
+                                    <SelectBox :options="storeRegionSigunguOptions" v-model="filterRegionSigungu" :initMsg="t.storeSearch.sigunguInit" />
+                                </div>
+                            </div>
+                        </div>
                         <!-- //26.06.24 add 정다희 : 지역선택 영역 추가 -->
 
                         <!-- 하단 row -->
@@ -1741,11 +1742,11 @@ let productHitRefreshFrame = 0;
 
 /* 26.06.10 Add 이종환 : 탭이동 및 스크롤 top 기능 추가 */
 const setTab = (index) => {
-  activeD2.value = index
+    activeD2.value = index
 
-  window.scrollTo({
-    top: 0
-  })
+    window.scrollTo({
+        top: 0
+    })
 }
 
 /* 26.06.25 add 정다희 : 상담 및 신청(D1=3) 2depth 탭 이동 */
@@ -2208,7 +2209,7 @@ const benefitOperationGroups = [
         items: [
             {
                 title: "경조사 지원",
-                desc: "경조금, 점포운영지원금, 장례용품, 경조화환,출산용품 지급",
+                desc: "경조금, 점포운영지원금, 장례용품, 경조화환, 출산용품 지급", /*26.06.29 edit 정다희 : 띄어쓰기 수정*/
             },
             {
                 title: "추석 선물 지급",
@@ -2231,11 +2232,11 @@ const benefitOperationGroups = [
             },
             {
                 title: "20주년 혜택",
-                desc: "건강검진권",
+                desc: "기념패, 건강검진권, 여행상품권",  /*26.06.29 edit 정다희 : 내용 수정*/ 
             },
             {
                 title: "30주년 혜택",
-                desc: "기념패, 30주년 행사 지원, 여행상품권, 건강검진권",
+                desc: "기념패, 건강검진권, 여행상품권, 점포 세레머니 및 기념 행사", /*26.06.29 edit 정다희 : 내용 수정*/ 
             },
         ],
     },
@@ -2246,7 +2247,7 @@ const benefitOperationGroups = [
         items: [
             {
                 title: "치킨25 운영 지원",
-                desc: "판매이익 인센티브 및 통수비용/튀김기름/필터 등 지원",
+                desc: "판매이익 인센티브 및 통수비용/튀김기름/필터 등 일부 지원", /*26.06.29 edit 정다희 : 내용 수정*/ 
             },
             {
                 title: "카페25 운영 지원",
@@ -2311,6 +2312,7 @@ const benefitOperationGroups = [
                 desc: "사회적 귀감이 되는 경영주, 스토어매니저 포상",
             },
         ],
+        policyNote: true, /*26.06.29 add 정다희 : 하단 list_note 노출 플래그*/
     },
 ];
 
@@ -2549,7 +2551,7 @@ const convenienceEvolutionStages = [
     },
     {
         title: "라이프스타일 플랫폼",
-        desc: "커피구독 서비스, 전기차 충전,<br />아동/여성안전 지킴이, 우리 동네GS APP",
+        desc: "커피구독 서비스, 전기차 충전,<br />아동/여성안전 지킴이, 우리동네GS APP", /*26.06.29 edit 정다희 : 띄어쓰기 수정*/
     },
 ];
 
@@ -2578,7 +2580,7 @@ const franchiseRoleColumns = [
         title: "점포 운영",
         label: "가맹점<br class='m_br' />(Franchisee)",
         lines: [
-            "내 가게를 책임감 있게 운영해요",
+            "내 점포를 책임감 있게 운영해요", /*26.06.29 edit 정다희 : 텍스트 수정*/
             "고객에게 친절한 점포를 만들어요",
             "GS25 브랜드 가치를 함께 지켜요",
             "상품 관리와 진열을 신경 써요",
@@ -2588,7 +2590,7 @@ const franchiseRoleColumns = [
         title: "운영 지원",
         label: "가맹본부<br class='m_br' />(Franchisor)",
         lines: [
-            "성공 창업을 위한 전략을 세워요",
+            "가맹 사업 성공을 위한 전략을 세워요", /*26.06.29 edit 정다희 : 텍스트 수정*/
             "교육과 노하우를 아낌없이 전해요",
             "설비 설치와 상품 공급을 책임져요",
             "매출 올리는 마케팅을 지원해요",
@@ -4059,7 +4061,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 
 /* ========== D1=0 · GS25 창업 알아보기 (activeD1 === 0) ========== */
 /* --- D2=0 · GS25 브랜드 소개 (activeD2 === 0) --- */
-.sec_hero { height: 700px; padding: 100px 100px 107px; background-size: cover; background-position: center; border-radius: 20px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+.sec_hero { padding: 100px; background-size: cover; background-position: center; border-radius: 20px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
 .sec_hero::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.6);backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);position: absolute; top: 0; left: 0; content: ''; }
 .sec_hero > header, 
 .sec_hero > .action_list,
@@ -4072,11 +4074,11 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_hero > header .hero_title > div{width:155px;margin-left:12px;}
 .sec_hero > header .hero_title img {width:100%;height:auto; display: block;}
 .sec_hero > .action_list { width: 100%; margin-top: 30px; display: flex; align-items: stretch; gap: 10px; }
-.sec_hero > .action_list > li { min-width: 0; max-width:300px; flex: 1; display: flex; }
+.sec_hero > .action_list > li { min-width: 0; max-width:300px; height:154px; flex: 1; display: flex; }
 /* 26.06.23 edit 정다희 : — 카드형 바로가기 */
-.sec_hero > .action_list > li > a.action_card { width: 100%; height: 100%; flex: 1; padding: 30px 20px; color: #fff; background-color: rgba(16,122,242,0.8); border-radius: 12px; text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.sec_hero > .action_list > li > a.action_card { width: 100%; height: 100%; flex: 1; padding: 30px 20px; color: #fff; background-color: rgba(16,122,242,0.8); border-radius: 12px; text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; }
 .sec_hero > .action_list > li > a.action_card > strong { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_hero > .action_list > li:last-child > a.action_card > strong { width: 100%; text-align: center; }
+/* .sec_hero > .action_list > li:last-child > a.action_card > strong { width: 100%; text-align: center; } */
 .sec_hero > .action_list > li > a.action_card > .action_card_btn { font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 8px; }
 .sec_hero > .action_list > li > a.action_card > .action_card_btn > em { font-style: normal; }
 .sec_hero > .action_list > li > a.action_card > .action_card_btn::after { width: 20px; height: 20px; background: url('@/assets/images/common/chevron_icon_20.png') no-repeat center; content: ''; display: block; flex-shrink: 0; }
@@ -4084,7 +4086,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_hero > .desc_list { margin-top: 20px; display: flex; flex-direction: column; }
 .sec_hero > .desc_list li{color:#fff;font-weight: 700;font-size: 1.8rem;line-height: 1.5;}
 .sec_hero > .metric_list { width: 100%; margin-top: 40px; display: flex; gap: 10px; }
-.sec_hero > .metric_list > li { min-width: 0; flex: 0 0 230px; padding: 20px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
+.sec_hero > .metric_list > li { min-width: 0; flex: 0 0 230px; padding: 24px 32px; background-color: rgba(255,255,255,0.22); border-radius: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
 .sec_hero > .metric_list > li > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_hero > .metric_list > li > span { color: #fff; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
 .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
