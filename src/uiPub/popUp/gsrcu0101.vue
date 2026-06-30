@@ -341,7 +341,7 @@ export default {
                                 subjectLabel: "제목",
                                 subjectPlaceholder: "제목을 입력해주세요",
                                 contentLabel: "내용",
-                                contentPlaceholder: "입점 관련 궁금한 사항을 입력 해 주세요",
+                                contentPlaceholder: "문의사항을 입력해주세요.",
                                 noticeText: `
                                     <span>GS25 매장관련문의를 하시는 경우, 정확한 점포명/방문(구매)날짜, 시간을 함께 작성해주셔야 보다 원활한 답변을 받아보실 수 있습니다.</span>
                                     <span>내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.</span>

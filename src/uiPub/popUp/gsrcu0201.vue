@@ -251,7 +251,7 @@ export default {
                                 storeGuide: "* 단, 점포명을 모르시는 경우 점포위치를 적어주세요",
                                 subjectLabel: "제목",
                                 contentLabel: "내용",
-                                contentPlaceholder: "입점 관련 궁금한 사항을 입력 해 주세요",
+                                contentPlaceholder: "문의사항을 입력해주세요.",
                                 fileLabel: "파일첨부",
                                 fileNotice: "* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)",
                                 replyLabel: "회신방법",

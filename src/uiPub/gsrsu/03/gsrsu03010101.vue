@@ -2544,7 +2544,7 @@ export default {
                                         storeGuide: "* 단, 점포명을 모르시는 경우 점포위치를 적어주세요",
                                         subjectLabel: "제목",
                                         contentLabel: "내용",
-                                        contentPlaceholder: "입점 관련 궁금한 사항을 입력 해 주세요",
+                                        contentPlaceholder: "문의사항을 입력해주세요.",
                                         noticeText: "<span>※ 매장 관련 제보내용은 정확한 점포명을 작성해 주셔야 보다 원할한 답변을 받아보실수 있습니다.</span><span>※ 내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.</span><span>※ 제보내용에 욕설이나 비속어가 포함되어 있으면 답변 되지 않을 수 있습니다.</span>",
                                         fileLabel: "파일첨부",
                                         fileNotice: "* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)",
