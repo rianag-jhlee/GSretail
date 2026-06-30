@@ -10,7 +10,7 @@
                 <Tabs v-model="CTabIdx" :tab-items="t.Tabs1" tab-class="type_01" :tab-slide="true" @change="onTabChange1" />
                 <!-- 26.06.08 : title-sub-text if문으로 수정 add 정다희희  -->
                 <!-- 26.06.19 add 정다희 : 탭 두번째부터 렌더링 v-html="t.MainDesc[CTabIdx - 1]" 수정 -->
-                <p v-if="CTabIdx !== 0" class="title-sub-text" v-html="t.MainDesc[CTabIdx - 1]"></p>
+                <p v-if="CTabIdx !== 0" class="title-sub-text" v-html="t.MainDesc[CTabIdx - 0]"></p> <!-- 26.06.26 edit 이소라 -->
                 <!-- //26.06.08 : title-sub-text if문으로 수정 add 정다희희  -->
                 <div class="tab_content_wrap">
                     <!-- //26.06.08 add 정다희 -->
@@ -446,33 +446,35 @@ export default {
                                 ]}
                             ]
                         },
+                        /* 26.06.29 edit 이소라 */
                         {
                             title: "IV. 이해관계자",
                             content: [
-                                { subTitle: "1. 회사는 고객, 주주, 임직원 등 모든 이해관계자의 권리 보호를 위한 사회적 책임을 충실히 이행한다.", list: [] },
-                                { subTitle: "2. 회사는 근로기준법 등 노동관련 법령을 성실히 준수하고, 근로조건의 유지 개선에 노력한다.", list: [] },
-                                { subTitle: "3. 회사는 법령이 허용하는 범위 내에서 이해관계자의 권리보호에 필요한 정보를 제공하며, 이해관계자의 관련정보 접근을 지원한다.", list: [] }
+                                { subTitle: "", list: ["1. 회사는 고객, 주주, 임직원 등 모든 이해관계자의 권리 보호를 위한 사회적 책임을 충실히 이행한다."] },
+                                { subTitle: "", list: ["2. 회사는 근로기준법 등 노동관계 법령을 성실히 준수하고, 근로조건의 유지 개선에 노력한다."] },
+                                { subTitle: "", list: ["3. 회사는 법령이 허용하는 범위 내에서 이해관계자의 권리보호에 필요한 정보를 제공하며, 이해관계자의 관련정보 접근을 지원한다."] }
                             ]
                         },
                         {
                             title: "V. 공 시",
                             content: [
-                                { subTitle: "1. 회사는 정기적으로 사업보고서, 분기보고서 및 반기보고서 등을 작성하여 공시하며, 법령에서 요구하는 공시 사항과 주주 및 이해관계자에게 중대한 영향을 미칠 수 있는 사항은 신속하고 정확하게 공시한다.", list: [] },
-                                { subTitle: "2. 회사는 중요한 기업 정보의 공개 범위나 공개 시기에 있어 특정인을 우대하거나 차별하지 않으며, 모든 이해관계자들이 동시에 접근할 수 있도록 공시한다.", list: [] }
+                                { subTitle: "", list: ["1. 회사는 정기적으로 사업보고서, 분기보고서 및 반기보고서 등을 작성하여 공시하며, 법령에서 요구하는 공시 사항과 주주 및 이해관계자에게 중대한 영향을 미칠 수 있는 사항은 신속하고 정확하게 공시한다."] },
+                                { subTitle: "", list: ["2. 회사는 중요한 기업 정보의 공개 범위나 공개 시기에 있어 특정인을 우대하거나 차별하지 않으며, 모든 이해관계자들이 동시에 접근할 수 있도록 공시한다."] }
                             ]
                         },
                         {
                             title: "부 칙(2021.2.8)",
                             content: [
-                                { subTitle: "제 1 조(시행일) 이 헌장은 2021년 2월 8일부터 시행한다.", list: [] }
+                                { subTitle: "", list: ["제 1 조(시행일) 이 헌장은 2021년 2월 8일부터 시행한다."] }
                             ]
                         }
+                        /* //26.06.29 edit 이소라 */
                     ],
                     // [Tab 2] 이사회 구성 현황 데이터 (KO)
                     BoardSectionTitle1: `이사회 구성 현황`,
-                    BoardSectionDesc1: `사내이사, 사외이사, 기타 비상무이사로 구성된 이사회 현황입니다.<br />독립성과 전문선을 갖춘 사외이사를 통해 투명성과 견제 기능을 강화하고 있습니다.`,
+                    BoardSectionDesc1: `사내이사, 사외이사, 기타 비상무이사로 구성된 이사회 현황입니다.<br />독립성과 전문성을 갖춘 사외이사를 통해 투명성과 견제 기능을 강화하고 있습니다.`, /* 26.06.29 edit 이소라 */
                     BoardSectionTitleSub: `사외이사 및 위원회 구성`,
-                    BoardSectionDescSub: `독립성과 전문성을 갖춘 사외이사를 통해 경영 투명성과 견제 기능을 강화하고 있습니다.`,
+                    BoardSectionDescSub: `독립성과 전문성을 갖춘 사외이사를 통해 경영 투명성과 견제 기능을 강화하고 있습니다.`, 
                     BoardMemberList: [
                         {
                             pos: "대표이사", name: "허서홍", 
@@ -499,7 +501,7 @@ export default {
                         {
                             pos: "기타 비상무이사", name: "홍순기", 
                             img: require("@/assets/images/dummy/gsrin0102_3.png"),
-                            term: "2025.03.21~2027.03.20", firstDate: "2021.07.01 최초선임",
+                            term: "2024.03.21~2027.03.20", firstDate: "2021.07.01 최초선임", /* 26.06.29 edit 이소라 */
                             careers: [
                                 { text: "연세대", class: "" },
                                 { text: "2017년 (주)GS 재무팀장", class: "" },
@@ -511,7 +513,7 @@ export default {
                         {
                             pos: "사외이사 / 이사회의장", name: "이성락", 
                             img: require("@/assets/images/dummy/gsrin0102_4.png"),
-                            term: "2025.03.20~2028.03.19", firstDate: "2023.03.25 최초선임",
+                            term: "2025.03.20~2028.03.19", firstDate: "2022.03.25 최초선임", /* 26.06.29 edit 이소라 */
                             careers: [
                                 { text: "건국대", class: "" },
                                 { text: "2009년 (주)신한은행 부행장", class: "" },
@@ -522,7 +524,7 @@ export default {
                         {
                             pos: "사외이사", name: "이상규", 
                             img: require("@/assets/images/dummy/gsrin0102_6.png"),
-                            term: "2023.03.23~2026.03.22", firstDate: "2023.03.23 최초선임",
+                            term: "2026.03.19~2029.03.18", firstDate: "2023.03.23 최초선임", /* 26.06.29 edit 이소라 */
                             careers: [
                                 { text: "美 워싱턴대", class: "" },
                                 { text: "2012년 LG전자(주) 한국B2C 그룹장", class: "" },
@@ -545,12 +547,12 @@ export default {
                         {
                             pos: "사외이사", name: "안동현", 
                             img: require("@/assets/images/dummy/gsrin0102_5.png"),
-                            term: "2026.3.19~2029.3.18", firstDate: "2026.3.19 최초선임",
+                            term: "2026.03.19~2029.03.18", firstDate: "2026.03.19 최초선임", /* 26.06.29 edit 이소라 */
                             careers: [
                                 { text: "美 뉴욕대", class: "" },
                                 { text: "2015년 공적자금관리 위원회<br />매각위원장", class: "" },
                                 { text: "2016년 자본시장연구원 원장", class: "" },
-                                { text: "2022년 금융발전 심의위원회 위원장", class: "" },
+                                { text: "2022년 금융발전 심의회 위원장", class: "" }, /* 26.06.29 edit 이소라 */
                                 { text: "現) 서울대학교 경제학부 교수", class: "point" }
                             ]
                         },

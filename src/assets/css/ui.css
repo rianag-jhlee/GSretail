@@ -141,15 +141,15 @@ footer .family_site_list li.fs_line:hover:after {display: none;}
 .sky_quick > .btn_toggle:before {width:20px; height:20px; margin-top:-10px; margin-left:-10px; background:url('@/assets/images/common/icon_set_20.png') -148px -25px no-repeat; content:''; position:absolute; top:50%; left:50%; filter: brightness(0) invert(1);}
 
 .sky_quick .quick_menu { display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); align-items:flex-end;}
-.sky_quick .quick_menu li{position:relative;}
-.sky_quick .quick_menu li > * {height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 20px; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:500; letter-spacing:-0.01em; background-color:rgba(229, 229, 229, 1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border:0; border-radius:99px; text-align:center; opacity:0.8; display:inline-flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px); transition:all 0.18s;}
+.sky_quick .quick_menu li{position:relative; min-width: 130px;}
+.sky_quick .quick_menu li > * {width: 100%; height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 20px; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:500; letter-spacing:-0.01em; background-color:rgba(229, 229, 229, 1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border:0; border-radius:99px; text-align:center; opacity:0.8; display:inline-flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px); transition:all 0.18s;}
 /* 26.06.19 Del 이종환 .sky_quick .quick_menu li > *::before, .sky_quick .quick_menu li > *:after {content:''; width:20px; height:20px; background: url(@/assets/images/common/icon_set_20.png) no-repeat; display:block; filter: brightness(0) invert(0); transition: all 0.18s;} */
 
-.sky_quick .quick_menu li > *:after {margin-left:-20px; opacity:0;}
+.sky_quick .quick_menu li > *:after {content:''; display:none; width:20px; height:20px; margin-left:5px; background:url('@/assets/images/common/icon_set_20.png') -324px -25px no-repeat;}
 
 .sky_quick .quick_menu li > *:hover {color:#fff; background-color:rgba(16, 122, 242, 1)}
 .sky_quick .quick_menu li > *:hover:before, .sky_quick .quick_menu li > *:hover:after {filter: brightness(0) invert(1);}
-.sky_quick .quick_menu li > *:hover:after {margin-left:0; background-position:-324px -25px; opacity:1;}
+.sky_quick .quick_menu li > *:hover:after {display:inline-block;}
 
 .sky_quick .quick_menu li:nth-of-type(1) > *::before {background-position: -1155px -70px;}
 .sky_quick .quick_menu li:nth-of-type(2) > *::before {background-position: -15px -114px;}
