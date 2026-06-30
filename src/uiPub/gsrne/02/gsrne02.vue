@@ -185,7 +185,7 @@ export default {
 /* 제공해주신 CSS 그대로 유지 (수정 없음) */
 .main-container { width: 100%; position: relative; }
 /* title_wrap css수정 26.06.08 edit 정다희 */
-.title_wrap {width: 100%; height:460px; padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrne01_bg.png') no-repeat center 57% / cover; text-align: center; position: relative; display: block;}
+.title_wrap {width: 100%; height:460px; padding:10.91% 0 11.25%; background: url('/src/assets/images/dummy/gsrne02_bg.png') no-repeat center 47% / cover; text-align: center; position: relative; display: block;}
 .title_wrap::before{content:''; display:block; width:100%; height:100%; background:rgba(0,0,0,0.4); position:absolute; top:0; left:0; z-index:1;}
 .title_wrap > h2{color:#fff; position: relative; z-index:2;}
 .title_wrap > p{color:#fff; position: relative; z-index:2;}
