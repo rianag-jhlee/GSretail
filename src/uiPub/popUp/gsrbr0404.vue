@@ -17,11 +17,11 @@
                         <em>{{ t.icontxt[idx] }}</em>
                     </li>
                 </ul>
-                <!-- 26.06.26 del 정다희 : 삭제-->
-                <!-- <div class="notice_bar">
+                <!-- 26.06.30 add 정다희 : 재추가-->
+                <div class="notice_bar">
                     <p>{{ t.app_desc }}</p>
-                </div> -->
-                <!-- //26.06.26 del 정다희 : 삭제-->
+                </div>
+                <!-- 26.06.30 add 정다희 : 재추가-->
                 <!-- <i>{{t.app_desc}}</i> -->
             </section>
             <section class="gsfresh_event">
@@ -70,7 +70,7 @@ export default {
                     sub_title2: "GS THE FRESH",
                     sub_desc2:"매주 달라지는 행사 미리보기",
                     sub_detail_2:`<em>우리동네GS 앱에서 단골 매장의 <span>주간 행사 상품과 행사전단</span>을 편리하게 확인할 수 있습니다.</em>`, /*26.06.26 edit 정다희 : 텍스트 수정*/
-                    // app_desc:`온라인앱 전용 행사 상품들도 발 빠르게 확인하세요!` /*26.06.26 del 정다희 : 삭제*/
+                    app_desc:`매장 방문 전, 우리동네GS 앱에서 가까운 편의점의 행사 상품/재고를 미리 확인해 보세요!` /*26.06.30 add 정다희 : 텍스트 재추가 및 내용수정*/
                 },
                 en: {
                     closeLabel: "Close",
@@ -97,8 +97,8 @@ export default {
                     icontxt: [`1+1`, `2+1`, `Bonus Gift`, `Price Discount`],
                     sub_title2: "GS THE FRESH",
                     sub_desc2:"Weekly Promotions Preview",
-                    sub_detail_2:`<em>You can conveniently check your regular store's <span>weekly promotional items and promotional flyers</span> on the Woori Dongne GS app.</em>` /*26.06.26 edit 정다희 : 텍스트 수정*/ 
-                    // app_desc:`Stay up to date on online app-exclusive promotional products, too!`/* 260604 번역 */ /*26.06.26 del 정다희 : 삭제*/
+                    sub_detail_2:`<em>You can conveniently check your regular store's <span>weekly promotional items and promotional flyers</span> on the Woori Dongne GS app.</em>`, /*26.06.26 edit 정다희 : 텍스트 수정*/ 
+                    app_desc:`Before visiting the store, check out sale items and stock at your nearest convenience store in advance on the Our Neighborhood GS app!`/* 260604 번역 */ /*26.06.30 edit 정다희 : 텍스트 재추가 및 수정 */
                 }
             }
         };
@@ -123,9 +123,9 @@ export default {
 <style scoped>
 h3 { margin-bottom: 60px; color: #161616; font-size: 3.2rem; font-weight: 700; }
 h4 {margin-top:24px; color:#161616; font-size:3.2rem; font-weight:700;}
-span {margin:8px 0; color:#161616; font-size:1.8rem; font-weight:700; display:block;}
+span { color:#161616; font-size:1.8rem; font-weight:700; display:block;}
 span img {max-width:100%; object-fit:cover; border-radius:12px; }
-.gs25_event h4 + span{margin: 16px 0 8px;}
+section h4 + span{margin: 16px 0 8px;}
 section > p {display:flex; flex-direction:column; gap:4px;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 :deep(.gs25_event p em), :deep(.gsfresh_event p em) { color:#67676F; font-size:1.6rem;}
 :deep(.gs25_event p em span), :deep(.gsfresh_event p em span) { font-weight:700; }
@@ -139,7 +139,7 @@ i::before {content:''; width:20px; height:20px; background:red; position:absolut
 section.gsfresh_event {margin-top:80px;}
 
 /* Notice Bar */
-.notice_bar { padding: 16px !important; background: #f8f8f8; border-radius: 6px;  display: flex; align-items: center; gap: 6px;}
+.notice_bar { margin-top:24px; padding: 16px !important; background: #f8f8f8; border-radius: 6px;  display: flex; align-items: center; gap: 6px;}
 .notice_bar p {margin-bottom:0px !important; padding-left: 26px; color: #161616; font-size: 1.6rem; position: relative; }
 .notice_bar p::before { content: ''; display: inline-block; position: absolute; top: 0; left: 0; width: 20px; height: 20px; background: url('@/assets/images/common/icon_set_20.png') -935px -24px no-repeat; }
 
@@ -155,8 +155,9 @@ section.gsfresh_event {margin-top:80px;}
     .event_icon_list { margin:20px 0; gap: 12px 8px; }
     .event_icon_list li { width: calc((100% - 8px) / 2); }
     .event_icon_list li .img_box {padding: 33px; }
-    h4 {margin-top:24px; color:#161616; font-size:2.4rem; font-weight:700;}
-    span {margin:8px 0; color:#161616; font-size:1.8rem; font-weight:700; display:block;}
+    h4 {margin-top:40px; color:#161616; font-size:2.4rem; font-weight:700;}
+    span { color:#161616; font-size:1.8rem; font-weight:700; display:block;}
+    section h4 + span{margin: 8px 0;}
     span img {height:200px;}
     :deep(.gs25_event p em), :deep(.gsfresh_event p em) {line-height:1.5;}
     .notice_bar p {font-size:1.2rem !important; font-weight:400 !important;}

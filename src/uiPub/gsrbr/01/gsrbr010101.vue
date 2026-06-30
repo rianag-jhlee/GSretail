@@ -3023,7 +3023,7 @@ const langData = {
                             items: [
                                 { num: "01", title: "상생나눔 플랫폼 운영", desc: "사회적 약자를 위한 사회공헌형 점포 운영", bullets: ["사회취약계층 자활을 위한 내일스토어", "노인 계층 일자리를 위한 시니어스토어", "장애인의 취업과 자활을 지원하는 늘봄스토어"] },
                                 // 26.05.27 Del 이종환 { num: "02", title: "자연재해 피해 위로금", desc: "자연재해 피해를 입은 점포에 위로금 지급", bullets: ["자연재해","화재","가옥/전/답 피해"] },
-                                { num: "02", title: "GS 히어로상", desc: "사회적으로 귀감이 되는 경영주,스토어매니저에게 지원", bullets: ["모범상","귀감상","나눔상"] }, /*26.06.29 edit 정다희 : 텍스트 수정*/ 
+                                { num: "02", title: "GS 히어로상", desc: "사회적으로 귀감이 되는 경영주, 스토어매니저에게 지원", bullets: ["모범상","귀감상","나눔상"] }, /*26.06.29 edit 정다희 : 텍스트 수정*/ 
                                 { num: "03", title: "화재예방 소화기 공유", desc: "점포 인근 화재발생 시 소화기 공유를 통한 화재예방", bullets: ["점포인근 화재발생 시 점포 소화기 공유", "사용 후 교환 지원"] },
                             ],
                         },
@@ -3106,7 +3106,7 @@ const langData = {
                                 title: "이런 분들에게 추천 드립니다.",
                                 items: [
                                     // 26.06.029 edit 정다희 : text 수정 
-                                    { text: "정기적 조식/간식 서비스가 필요할 때직원 조식/간식을 정기적으로 운영하고 싶을 때" },
+                                    { text: "직원 조식/간식을 정기적으로 운영하고 싶을 때" }, /*26.06.30 edit 정다희 : 텍스트 수정*/ 
                                     { text: "합리적인 비용으로 직원 만족도를 높이고 싶을 때" },
                                     { text: "사내 급식 인프라가 없어 간편식 공급이 필요 할 때" },
                                 ],
@@ -4464,9 +4464,9 @@ const langData = {
                             advantages: {
                                 title: "Recommended for:",
                                 items: [
-                                    // 26.06.29 edit 정다희 : text 수정 
-                                    { text: "When regular breakfast/snack services are needed for employees" },
-                                    { text: "When looking to boost employee satisfaction at a reasonable cost" },
+                                    // 26.06.29 edit 정다희 : text 수정
+                                    { text: "When you want to regularly provide breakfast and snacks for your employees" }, /*26.06.30 edit 정다희 : 텍스트 수정*/
+                                    { text: "When you want to increase employee satisfaction at a reasonable cost" },
                                     { text: "When there is no in-house cafeteria infrastructure and ready-made meal supply is required" },
                                 ],
                             },
@@ -4982,7 +4982,7 @@ function goBack() {
 <style scoped>
 .brand_panel_bg { margin: 0 0 40px; padding: 0; background-color: #e8e8ec; border-radius: 12px; overflow: hidden; }
 /* .sinsen_panel > .brand_panel_bg { min-height: 340px; background-color: #b3b3b3; } */
-.brand_panel_bg > img { width: 100%; max-height:340px; display: block; object-fit: cover; }
+.brand_panel_bg > img { width: 100%; height:340px; object-fit: cover; display: block;}
 .brand_panel_title { padding: 0 0 100px;}
 .brand_panel_title > h2 { margin: 0 0 16px; color: #161618; font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; display:flex; align-items:center;}
 
@@ -5165,6 +5165,7 @@ button { background-color: #fff }
 
 /* 26.05.15 Add 이종환 : 신선강화점 특징 아이콘 */
 .sinsen_feature :deep(.feature_card_item .feature_card_icon) {width:40px; height:40px; background-color:transparent; background-position:50%; background-repeat:no-repeat; background-size:cover;}
+/* 26.06.24 edit 정다희 : PC — feature_card_item nth-child (sinsen_feature·feature_card_list 동일 루트) */
 .sinsen_feature :deep(.feature_card_item:nth-child(1) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_01.png');}
 .sinsen_feature :deep(.feature_card_item:nth-child(2) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_02.png');}
 .sinsen_feature :deep(.feature_card_item:nth-child(3) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_03.png');}
@@ -5175,15 +5176,15 @@ button { background-color: #fff }
 .info_card_flow .info_card:nth-child(2){flex:0 1 606px; }
 
 .info_card { padding: 32px; background-color: #f8f8f8; border-radius: 12px }
-.info_card strong { margin-bottom:8px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
+.info_card strong { margin-bottom:16px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
 .info_card span { font-size: 1.8rem; line-height: 1.4; font-weight:700; }
 .info_card > p {margin-top:14px; color: #67676f; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em }
 .info_card > strong + p {margin-top:0; margin-bottom:8px;}
 .info_card > p + .num_list {margin-bottom:32px;}
 .info_card > p + .num_list li{padding-left:24px;}
 .info_card > p + .num_list li + li {margin-top:4px;}
-.info_card > p + .num_list li > p {font-size: 1.4rem;line-height: 1.6;letter-spacing: -0.01em;}
-.info_card > p + .num_list li::before{width:16px; height:16px;}
+.info_card > p + .num_list li > p {font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+.info_card > p + .num_list li::before{width:16px; height:16px;top:2px;}
 .sinsen_flow_img { width: 100%; max-height:372px; margin-top: 24px; display: block; border-radius: 10px }
 /* 26.06.08 add 정다희 :sinsen_advantge영역 css 추가  */
 .sinsen_advantage_grid { width: 100%; display: flex; flex-wrap: wrap; align-items: stretch; gap: 16px; }
@@ -5204,11 +5205,11 @@ button { background-color: #fff }
 .sinsen_advantage_items > li { min-width: 0; flex: 1; }
 .sinsen_advantage_items > li > p { margin: 0 0 42px; color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
 .sinsen_advantage_items > li > figure { margin: 0; }
-.sinsen_advantage_items > li > figure > img { width: 100%; height: 175px; display: block; object-fit: contain; background-color: #fff; border-radius: 8px; }
+.sinsen_advantage_items > li > figure > img { width: 100%; height: 175px; display: block; object-fit: contain; border-radius: 8px; }
 .sinsen_advantage_items > li > figure > figcaption { margin-top: 16px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
 
-.info_list > li { padding-bottom: 12px; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 8px }
-.info_list > li:last-child { padding-bottom: 0 }
+.info_list > li { margin-bottom: 8px; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 8px }
+.info_list > li:last-child { margin-bottom: 0 }
 .info_list > li::before { content: ""; width: 16px; height: 16px; background:url('@/assets/images/common/icon_bullet_checkmark.png') 0 0 no-repeat; border-radius: 50%; position: relative; top: 2px; flex-shrink: 0 }
 .info_list > li > div { display: flex; flex-direction: column; gap: 2px }
 .info_check_note { color: #67676f }
@@ -5379,7 +5380,7 @@ button { background-color: #fff }
   .sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc { margin-bottom: 12px; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
   .sec_header .sec_cite { margin-top: 4px; margin-left: 0; display: block; }
   .brand_panel_bg { width: calc(100% + 40px); margin: 0 -20px 24px; border-radius: 0; }
-  .brand_panel_bg > img { width: 100%; height: 100%; max-height: none; object-fit: cover; }
+  .brand_panel_bg > img {height: auto; min-height:245px;}
   .brand_panel_title { padding: 0 0 64px; }
   .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display:block;}
 
@@ -5447,11 +5448,11 @@ button { background-color: #fff }
   .com_table tbody th { padding: 14px 24px }
   .com_table_col td { padding: 11px 13px; font-size: 1.4rem }
   .info_card{padding:24px;}
-  .info_card strong { font-size: 1.8rem; line-height: 150%; letter-spacing: 0% }
+  .info_card strong {margin-bottom:12px; font-size: 1.8rem; line-height: 150%; letter-spacing: 0% }
   .sinsen_feature :deep(.feature_card_item) { min-height: 227px }
   .info_card span { font-size: 1.4rem; letter-spacing: -0.01em }
   .info_card > p { margin-bottom:12px }
-  
+  .info_card > p + .num_list li > p{font-size:1.4rem; }
   .sinsen_flow_img {aspect-ratio: 287/147; }
   .info_card:nth-child(2) .sinsen_flow_img{ aspect-ratio:287/169;}
 
@@ -5504,6 +5505,12 @@ button { background-color: #fff }
 
 @media (max-width: 768px) {
     .pop_card_body { min-height: 196px; padding-right: 8px }
+
+    /* 26.06.24 add 정다희 : 신선강화점 특징 아이콘 — MO Swiper(sinsen_feature 루트 = feature_card_swiper) 슬라이드별 적용 */
+    .sinsen_feature :deep(.swiper-slide:nth-of-type(1) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_01.png');}
+    .sinsen_feature :deep(.swiper-slide:nth-of-type(2) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_02.png');}
+    .sinsen_feature :deep(.swiper-slide:nth-of-type(3) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_03.png');}
+    .sinsen_feature :deep(.swiper-slide:nth-of-type(4) .feature_card_icon) {background-image:url('@/assets/images/sub/gsrbr010101/icon_sinsen_feature_40_04.png');}
 
     .delivery_panel .service_panel :deep(.feature_card_item .feature_card_icon) {background-color:transparent; background-image:url('@/assets/images/sub/icon_cont_32.png'); background-repeat:no-repeat;}
     .delivery_panel .service_panel.delivery_panel_1 :deep(.swiper-slide:nth-of-type(1) .feature_card_icon) {background-position:-420px -186px;}
@@ -5853,7 +5860,7 @@ button { background-color: #fff }
   .gopizza_link > div > strong { font-size: 1.6rem }
   .gopizza_link > div > strong:after { display:none }
   .gopizza_link::after { content: ""; width: 16px; height: 16px; position: absolute; top: 50%; right: 16px; transform: translateY(-50%); background: url("@/assets/images/common/arrow_set_16.png") -56px -20px no-repeat; }
-  .info_list > li { padding-bottom: 4px }
+  .info_list > li { margin-bottom: 4px }
   .pop_lnb { display:none }
   .pop_card_swiper {width: calc(100% + 64px); margin: 0 -32px; padding: 12px 32px 40px; overflow: hidden }
   .pop_card_swiper :deep(.swiper-slide) { width: 58.6vw !important; height: auto !important; flex: none }
