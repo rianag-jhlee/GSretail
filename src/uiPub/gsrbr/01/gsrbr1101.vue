@@ -137,10 +137,11 @@
                     <section v-if="CTabIdx === 1 && t?.MallData" class="tab_content mall_content" :class="'mall-type-' + SUBTabIdx">
                         <template v-for="(mall, mIdx) in t.MallData" :key="mIdx">
                             <div v-if="SUBTabIdx === mIdx" class="inner_cont">
+                                <!-- 26.06.30 edit 정다희 : 쇼핑몰 2depth 탭 콘텐츠 visual_img — MallData mainImg/mainImgMo, isMobile 분기, no_img 삭제 -->
                                 <div class="visual_img">
-                                    <img v-if="mall.mainImg" :src="mall.mainImg" :alt="mall.name" />
-                                    <div v-else class="no_img">상세 이미지를 준비 중입니다.</div>
+                                    <img :src="isMobile ? mall.mainImgMo : mall.mainImg" :alt="mall.name" />
                                 </div>
+                                <!-- //26.06.30 edit 정다희 : 쇼핑몰 2depth 탭 콘텐츠 visual_img -->
 
                                 <div class="info_section">
                                     <h3 class="content_title">
@@ -270,8 +271,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- 26.06.29 add 정다희 : help_desk_area 추가 -->
-                <div class="help_desk_area">
+
+                <!-- 26.06.24 edit 정다희 : help_desk_area — 지하철 탭만, 공통 lease_section 하단 -->
+                <div v-if="CTabIdx === 0" class="help_desk_area">
                     <div class="guide_header">
                         <h4 class="text-wrapper mb12">{{ t.HelpDeskTitle }}</h4>
                         <p class="div_desc">{{ t.HelpDeskDesc }}</p>
@@ -289,7 +291,8 @@
                         </li>
                     </ul>
                 </div>
-                <!-- //26.06.29 add 정다희 : help_desk_area 추가  -->
+                <!-- //26.06.24 edit 정다희 : help_desk_area -->
+
                 <div class="bottom_btns">
                     <button class="btn_back" @click="handleBack">{{ t.backLabel }}</button>
                 </div>
@@ -302,6 +305,23 @@
 import Tabs from "@/components/Tabs.vue";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
+/* 26.06.30 add 정다희 : 쇼핑몰 2depth 탭 visual_img 이미지 import (gsrbr1101_01~04 PC / mo 01~04_mo) */
+import imgGsrbr1101Mall01 from "@/assets/images/dummy/gsrbr1101_01.png";
+import imgGsrbr1101Mall02 from "@/assets/images/dummy/gsrbr1101_02.png";
+import imgGsrbr1101Mall03 from "@/assets/images/dummy/gsrbr1101_03.png";
+import imgGsrbr1101Mall04 from "@/assets/images/dummy/gsrbr1101_04.png";
+import imgGsrbr1101Mall01Mo from "@/assets/images/dummy/mo/gsrbr1101_01_mo.png";
+import imgGsrbr1101Mall02Mo from "@/assets/images/dummy/mo/gsrbr1101_02_mo.png";
+import imgGsrbr1101Mall03Mo from "@/assets/images/dummy/mo/gsrbr1101_03_mo.png";
+import imgGsrbr1101Mall04Mo from "@/assets/images/dummy/mo/gsrbr1101_04_mo.png";
+
+/* 26.06.30 add 정다희 : SUBTabIdx별 visual 매핑 — 0:안녕인사동(01), 1:구로(02), 2:판교(03), 3:동부산(04) */
+const mallVisualList = [
+    { mainImg: imgGsrbr1101Mall01, mainImgMo: imgGsrbr1101Mall01Mo },
+    { mainImg: imgGsrbr1101Mall02, mainImgMo: imgGsrbr1101Mall02Mo },
+    { mainImg: imgGsrbr1101Mall03, mainImgMo: imgGsrbr1101Mall03Mo },
+    { mainImg: imgGsrbr1101Mall04, mainImgMo: imgGsrbr1101Mall04Mo },
+];
 
 export default {
     name: "gsrbr1101",
@@ -414,7 +434,7 @@ export default {
                                 {title:`고객 경험에 특화된 MD 구성`,desc:`갤러리, 카페, 식음, 소품 등 다양한 매장이 거리를 형성하고, 전통 문화 지역 특성을 준수하여 고객 경험에 특화된 MD 구성`}, /*26.06.29 edit 정다희 : title 오타 수정 */
                                 {title:`차별화된 시설`,desc:`상권 내 차별화된 시설(나인트리 호텔 숙박 연계 및 주차 공간 제공) 등 국내외 방문객의 장시간 체류 가능 (호캉스+몰캉스)`}
                             ], 
-                            // mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
+                            mainImg: mallVisualList[0].mainImg, mainImgMo: mallVisualList[0].mainImgMo, /* 26.06.30 add 정다희 : visual_img — 안녕인사동 gsrbr1101_01 */
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.1734625641543!2d126.98088067587412!3d37.574532872036556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ef4127fbcd%3A0xdff366a8dbc227d6!2z7JWI64WV7J247IKs64-Z!5e0!3m2!1sko!2skr!4v1775627958896!5m2!1sko!2skr`,
                             mapTitle: "안녕인사동 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `02-6954-2991`, email1: `anyounginsadong@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
@@ -432,7 +452,7 @@ export default {
                             ], 
                             // //26.06.29 edit 정다희: intro - title 내용수정, desc 추가 
 
-                            // mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
+                            mainImg: mallVisualList[1].mainImg, mainImgMo: mallVisualList[1].mainImgMo, /* 26.06.30 add 정다희 : visual_img — 구로 지밸리몰 gsrbr1101_02 */
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
                             mapTitle: "구로 지밸리몰 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `02-2006-3199`, email1: `sigar11@gsretail.com`, snsLabel: `SNS`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
@@ -447,7 +467,7 @@ export default {
                                 파미어스몰은 연면적 약 7만 7천평 규모의 복합시설로 315실의 '나인트리 호텔', 785세대의 '오피스텔', 5개기업의 오피스로 사용되고,<br/> 약 8,653평의 저층부에는 극장, 메디컬, 키즈, 쇼핑, 카페, 레스토랑 등 지역 주민들의 풍요로운 하루를 완성할 수 있는 다양한 상업 및 문화시설이 자리잡았습니다.
                                 '`,
                             ], 
-                            // mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
+                            mainImg: mallVisualList[2].mainImg, mainImgMo: mallVisualList[2].mainImgMo, /* 26.06.30 add 정다희 : visual_img — 판교 파미어스몰 gsrbr1101_03 */
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
                             mapTitle: "판교 파미어스몰 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */ 
                             contact: { phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` } /* 26.06.29 del 정다희 : phone 삭제 */ 
@@ -459,7 +479,7 @@ export default {
                                 `<b>미식일상은 오시리아 관광단지 중심부에 위치한 약 3,000평 규모의 복합문화시설로,<br />2021년 6월 오픈 이후 F&B와 다채로운 체험 콘텐츠가 결합된 독보적인 '문화복합시설'로의 재도약을 준비중입니다.</b>`, /*26.06.29 edit 정다희 : 텍스트 수정 */ 
                                 `오시리아 관광단지는 연간 약 4천만명이 방문하는 지역으로 일회성 방문지가 아닌 높은 재방문율과 지속적인 소비력을 갖춘 '안정적인 배후 수요의 상권' 입니다.<br />특히, 미식일상은 롯데아울렛/롯데월드/스카이라인루지/바운스유니버스의 중심부에 위치하여 주변시설을 연결하는 집객력과 확장성을 보유하고 있는 시설입니다.` /*26.06.29 edit 정다희 : 텍스트 수정 */ 
                             ], 
-                            // mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"), // <!-- 26.06.08 add 정다희 : 이미지 주석처리 (수급예정) -->
+                            mainImg: mallVisualList[3].mainImg, mainImgMo: mallVisualList[3].mainImgMo, /* 26.06.30 add 정다희 : visual_img — 동부산 미식일상 gsrbr1101_04 */
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
                             mapTitle: "동부산 미식일상 위치 지도 영역(퍼블용 이미지)",/* 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`,email3: `foodhallbusan@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` } /*26.06.29 add 정다희 : email3 추가*/ 
@@ -561,7 +581,7 @@ export default {
                                 {title:`MD lineup specialized for the customer experience`/* 260604 번역 */,desc:`03. A diverse mix of galleries, cafes, dining, and specialty stores creates a vibrant streetscape, with tenant mix curated to reflect the area's traditional cultural character and enhance customer experience.`},
                                 {title:`Differentiated facilities`/* 260604 번역 */,desc:`04. Distinctive facilities including a Nine Tree Hotel stay package and parking, enabling extended visits by domestic and international guests (staycation + mallcation)`}
                             ], 
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
+                            mainImg: mallVisualList[0].mainImg, mainImgMo: mallVisualList[0].mainImgMo, /* 26.06.30 add 정다희 : visual_img — 안녕인사동 gsrbr1101_01 */
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.1734625641543!2d126.98088067587412!3d37.574532872036556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3ef4127fbcd%3A0xdff366a8dbc227d6!2z7JWI64WV7J247IKs64-Z!5e0!3m2!1sko!2skr!4v1775627958896!5m2!1sko!2skr`,
                             mapTitle: "Anyoung Insadong location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `02-6954-2991`, email1: `anyounginsadong@gsretail.com`, instatxt:`anyounginsadong`, blog:``, insta: `#`, homepage: `` },
@@ -578,7 +598,7 @@ export default {
                                 {title:`A comfortable space for gatherings<br />and relaxation with cafes and dining`, desc:"Coffee shops and various dining options that add ease and enjoyment to everyday life"},
                             ],
                             // //26.06.29 edit 정다희: intro title 내용수정, desc 추가
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall02.png"),
+                            mainImg: mallVisualList[1].mainImg, mainImgMo: mallVisualList[1].mainImgMo, /* 26.06.30 add 정다희 : visual_img — 구로 지밸리몰 gsrbr1101_02 */
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.9672616045955!2d126.89372737714335!3d37.485098928791544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e24b5094a57%3A0x548819319c910b57!2z6rWs66Gc7KeA67C466as66qw!5e0!3m2!1sko!2skr!4v1775628029310!5m2!1sko!2skr`,
                             mapTitle: "Guro G-Valley Mall location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `02-2006-3199`, email1: `sigar11@gsretail.com`, snsLabel: `SNS`, instatxt:`g_valley`, blog:``, insta: `https://www.instagram.com/g_valley/ `, homepage: `` },
@@ -591,7 +611,7 @@ export default {
                                 `With your children, with friends, with your partner — <br />we invite you to Pameus Mall in Pangyo, where you can enjoy it your own way or all together.`,
                                 `South Korea's premier self-sufficient new town of Pangyo is home to 'PAMEUS MALL' — a mixed-use cultural and commercial space where diverse lifestyles harmoniously converge. PAMEUS MALL is part of a complex spanning approximately 254,545㎡ of total floor area, encompassing a 315-room Nine Tree Hotel, 785 serviced apartments, and offices for five companies. The lower floors, spanning approximately 28,596㎡, house a rich variety of commercial and cultural facilities including a cinema, medical center, kids' zone, shopping, cafes, and restaurants — offering everything local residents need for a fulfilling day.`,
                             ], 
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall03.png"),
+                            mainImg: mallVisualList[2].mainImg, mainImgMo: mallVisualList[2].mainImgMo, /* 26.06.30 add 정다희 : visual_img — 판교 파미어스몰 gsrbr1101_03 */
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.017687225739!2d127.09543847714181!3d37.41305683291176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca7d57f7c5fdb%3A0x3205f726fd596acf!2z7YyM66-47Ja07Iqk66qw!5e0!3m2!1sko!2skr!4v1775628062277!5m2!1sko!2skr`,
                             mapTitle: "Pangyo Pameus Mall location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone1: `031-759-0429`, email1: `jhpyo@gsretail.com`, email2: `pameus@gsretail.com`, snsLabel: `SNS`, instatxt:`pameusmall`, blog:``, insta: `https://www.instagram.com/pameusmall/`, homepage: `http://www.pameusmall.com/pameus/main/main.php` } /*26.06.29 del 정다희 : phone 삭제*/
@@ -603,7 +623,7 @@ export default {
                                 `<b>Misik Ilsang is a cultural complex of approximately 3,000 pyeong located at the center of the Osiria Tourism Complex,<br />and since opening in June 2021, it has been preparing to take a new leap forward as an unrivaled 'cultural complex' that combines F&B with diverse experiential content.</b>`/* 260604 번역 */, /*26.06.29 edit 정다희 : 오픈 이후 텍스트 수정*/
                                 `Osiria Tourism Complex is an area visited by approximately 40 million people annually — not a one-time destination, but a stable commercial district with a captive demand base, characterized by high return visit rates and sustained spending power.<br />In particular, Misik Ilsang is located at the heart of Lotte Outlet / Lotte World / Skyline Luge / Bounce Universe, making it a facility with strong customer-drawing power and scalability that connects the surrounding attractions.`/* 260604 번역 */ /* 26.06.29 edit 정다희 : 텍스트 수정 */
                             ], 
-                            mainImg: require("@/assets/images/dummy/gsrbr1101_mall04.png"),
+                            mainImg: mallVisualList[3].mainImg, mainImgMo: mallVisualList[3].mainImgMo, /* 26.06.30 add 정다희 : visual_img — 동부산 미식일상 gsrbr1101_04 */
                             mapUrl: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5041907160903!2d129.2118041770898!3d35.19390825658788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35688d0870d1aba7%3A0x236d755155fb1b70!2z66-47Iud7J287IOBIO2RuOuTnO2ZgA!5e0!3m2!1sko!2skr!4v1775628088485!5m2!1sko!2skr`,
                             mapTitle: "East Busan Misik Ilsang location map area (publishing image)",/* 260604 번역, 26.06.17 edit 정다희 : 웹접근성 iframe title */
                             contact: { phone: `051-722-8155`, email1: `wlssoddl@gsretail.com`, email2: `kjk5774@gsretail.com`,email3: `foodhallbusan@gsretail.com`, snsLabel: `SNS`, instatxt:`busan_foodhall`, blog:`https://blog.naver.com/busanfoodhall`, insta: `https://www.instagram.com/busan_foodhall/`, homepage: `https://blog.naver.com/busanfoodhall` } /*26.06.29 add 정다희 : email3 추가*/ 
@@ -802,7 +822,7 @@ export default {
     .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .text_box .title { font-size: 30px; letter-spacing: -0.5px; }
     .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b),.mall-type-2 .text_item, .mall-type-3 .text_item {font-size: 16px; }
-    .mall_content .visual_img { width:calc(100% + 40px); height: 240px; margin:0 -20px; border-radius: 0;}
+    .mall_content .visual_img { width:calc(100% + 40px); height: 245px; margin:0 -20px; border-radius: 0;}
     .mall_content .main_title {margin-bottom:60px; margin-left:0px;font-size:2.4rem;line-height:1.35; display:flex; flex-direction:column;}
     .mall_content .main_title a {margin-left:0px; margin-top:16px; font-size:14px;}
     .mall-type-2 .text_item :deep(b br) , .mall-type-3 .text_item :deep(b br) {display:none;}
