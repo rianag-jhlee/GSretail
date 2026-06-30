@@ -12,19 +12,35 @@
                         </ul>
                     </dd>
                 </dl>
+
+                <!-- 26.06.30 Add 이종환 : 사이트맵 숨김 버튼 -->
+                <button class="sitemapCloser" :aria-label="t.sitemapCloseTxt" @click="closeSitemap()">Close</button>
+                <!-- //26.06.30 Add 이종환 : 사이트맵 숨김 버튼 -->
             </nav>
 
             <div class="quick" v-if="t.quick" ref="quickWrap">
                 <ul ref="quickList" :style="quickStyle">
-                    <li v-for="item in t.quick" :key="item.title">
+                    <li v-for="item in t.quick" :key="item.title" :class="item.class"><!-- 26.06.30 Edit 이종환 : mo에서 사이트맵 숨김 -->
                         <button v-if="item.pop" @click="openModal" 
                             :data-popid="item.popId" 
                             :data-type="item.popType" 
                             :data-cont="item.path">{{ item.title }}</button>
-                        <a v-else :href="item.path" :target="item.blank ? '_blank' : '_self'">{{ item.title }}</a>
+                        <a v-else :href="item.path" :target="item.blank ? '_blank' : '_self'" @click="e => e.currentTarget.parentElement.classList.contains('sitemap') && openSitemap()">{{ item.title }}</a>
                     </li>
                 </ul>
             </div>
+
+            <!-- 26.06.30 Add 이종환 -->
+            <div class="cs_info">
+                <strong class="tit">{{ t.cscenter.title }}</strong>
+                <div>
+                    <dl v-for="item in t.cscenter.info" :key="item.brand">
+                        <dt>{{ item.brand }}</dt>
+                        <dd>{{ item.tel }}</dd>
+                    </dl>
+                </div>
+            </div>
+            <!-- //26.06.30 Add 이종환 -->             
 
             <div class="info">
                 <div>
@@ -51,7 +67,7 @@
         </div>
 
         <!-- 26.06.02 Add 이종환 : sky quick 공통처리 및 수정 -->
-        <div class="sky_quick" :class="{ istop: isTop, isStatic: isFooterVisible , active: isActive}">
+        <div class="sky_quick sub" :class="{ istop: isTop, isStatic: isFooterVisible , active: isActive}">
             <ul class="quick_menu">
                 <li v-for="item in t.skybanner" :key="item"><a :href="item.link">{{ item.txt }}</a></li>
                 <!-- <li><button type="button">입점상담</button></li>
@@ -125,10 +141,11 @@ const langData = {
             // { title: "멤버십/홈페이지문의", path: "gsrcu0101", pop:true, popId:"gsrcu0101", popType:'lg' }, //, type: "popup", popId: "gsrcu0101", cont: "gsrcu0101"
             // { title: "입지제안", path: "gsrbr0204", pop:true, popId:"gsrbr0204", popType:'lg' },
             // { title: "임대상가안내", path: "gsrbr1101" },
-            // { title: "정도경영제보", path: "gsrsu040101" },
             // { title: "고객센터", path: "gsrcu01" },
             { title: "GS SHOP 시청자 관련", path: "gsrcm0401" },
-            { title: "공지사항", path: "gsrnotice" }
+            { title: "정도경영제보", path: "gsrsu040101" },
+            { title: "공지사항", path: "gsrnotice" },
+            { title: "사이트맵", path: "#none", class:'sitemap' } //26.06.30 Add 이종환
         ],
         info: {
             logo: "(주)GS리테일",
@@ -161,7 +178,17 @@ const langData = {
             { txt:'점포 창업 안내', link:"gsrst_smain" },
             { txt:'상품 입점 상담', link:"gsrse01" },
             { txt:'고객센터', link:"gsrcu01" }
-        ]
+        ],
+        // 26.06.30 Add 이종환
+        cscenter: {
+            title: "※ 고객센터 대표전화",
+            info: [
+                {brand:"GS25", tel:"080-999-5425"},
+                {brand:"GS SHOP", tel:"080-414-4545"},
+                {brand:"GS THE FRESH", tel:"080-345-7700"}
+            ]
+        },
+        sitemapCloseTxt:'사이트맵 닫기'
     },
     en: {
         quick: [
@@ -320,6 +347,22 @@ const openModal=event => {
     const cont = el.dataset.cont;
     modal.open(popId, type, el, cont);
 }
+
+//26.06.30 Add 이종환 : 사이트맵 클릭 시 푸터 메뉴 오픈
+const openSitemap = () => {
+    footerEl.value?.classList.add("open");
+    
+    nextTick(() => {
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: "smooth"
+        });
+    });
+};
+
+const closeSitemap = () => {
+    footerEl.value?.classList.remove("open");
+};
 
 // =====================
 // lifecycle

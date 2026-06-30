@@ -93,14 +93,20 @@ html[lang="en"] #gnb_nav .depth1 > li > a {
 
 
 /* footer */
-footer {padding-top:59px; padding-bottom:24px; border-top:1px solid #E5E5E9; position:relative; z-index:1;}
+footer {position:relative; z-index:1;}
+footer.open {padding-top:59px; border-top:1px solid #E5E5E9; position:relative; z-index:1;}
+
 footer .inner {max-width:1720px; margin:0 auto; padding:0 20px; position:relative;}
 footer .go_top {color:#000; font-size:1.6rem; font-weight:600; letter-spacing:-0.02em; line-height:150%; background-color:transparent; position:fixed; right:max(20px, calc((100vw - 1720px) / 2 + 20px)); bottom:50px; z-index:101; display:flex; align-items:center; gap:6px;}
 footer .go_top.hide {display:none;}
 footer .go_top:after {width:16px; height:16px; background:url('@/assets/images/common/arrow_set_16.png') -92px -20px no-repeat; content:''; display:block;}
-footer .go_top.isStatic {position:absolute; top:0; right:20px; bottom:initial;}
+footer .go_top.isStatic {position:absolute; top:-64px; right:20px; bottom:initial;}
+footer.open .go_top.isStatic {top:0;}
 
-footer nav {display:flex;}
+footer nav {display:none;}
+footer nav .sitemapCloser {font-size:1.6rem; font-weight:700; line-height:124%; background-color:transparent; position:absolute; top:0; left:100%; display:flex; align-items:center; gap:6px;}
+footer nav .sitemapCloser:after {width:16px; height:16px; background:url('@/assets/images/common/arrow_set_16.png') -190px -19.71px no-repeat; content:''; display:block;}
+footer.open nav {position:relative; display:inline-flex;}
 footer nav a {letter-spacing:-0.02em; line-height:150%; display:block;}
 footer nav dt a {color:#000; font-size:1.6rem; font-weight:600;}
 footer nav dd {margin-top:9px; display:flex;}
@@ -116,15 +122,26 @@ footer .quick li:first-child a {padding-left:0;}
 footer .quick.slide ul {transition:transform 0.4s cubic-bezier(0.1, 0.57, 0.1, 1);}
 
 footer .info * {color:#999; font-size:1.4rem; font-weight:700; letter-spacing:-0.01em; line-height:150%;}
+
+/* 26.06.30 Add 이종환 */
+footer .cs_info {padding-top:19px; border-top:1px solid #E5E5E9;}
+footer .cs_info .tit {font-size:1.4rem; letter-spacing:-0.01em; line-height:140%;}
+footer .cs_info div {margin:20px 0; display:flex;}
+footer .cs_info dl + dl {margin-left:30px; padding-left:30px; position:relative;}
+footer .cs_info dl + dl:before {border-left:1px solid #E5E5E9; content:''; position:absolute; top:0; bottom:0; left:0; display:block;}
+footer .cs_info dt {color:#999; font-size:1.4rem; font-weight:700; letter-spacing:-0.01em; line-height:140%;}
+footer .cs_info dd {margin-top:10px; color:#000; font-size:1.6rem; font-weight:400; letter-spacing:-0.01em; line-height:150%;}
+
 footer .info div {display:flex; align-items:center; gap:0 32px; flex-wrap:wrap;}
 footer .info div * {padding:19px 0 20px;}
 footer .info div strong {font-weight:600;}
 footer .info {display:flex; align-items:center; justify-content:space-between;}
 footer .info label.select { position:absolute; right:20px; bottom:64px; }
-footer .family_site_wrap { position:absolute; right:20px; top:253px; height:28px; z-index:102; }
+footer .family_site_wrap { position:absolute; right:20px; top:16px; height:28px; z-index:102; }
+footer.open .family_site_wrap {top:253px;}
 footer .family_site_btn { position:relative; z-index:1; height:28px; margin-right:40px; border:0; font-size:1.6rem; color:#000; font-weight:700; line-height:20px; background:none; }
 footer .family_site_btn:after { content:''; display:inline-block; vertical-align:top; width:16px; height:16px; margin-top:2px; margin-left:6px; border:0; background:url('@/assets/images/common/arrow_set_16.png') -159px -20px no-repeat; }
-footer .family_site_list { position: absolute; bottom: 45px; left: 0; background: #F8F8F8; min-width: 140px; list-style: none; padding: 8px 0; margin: 0; z-index: 100; border-radius: 8px; }
+footer .family_site_list {min-width: 140px; max-height:250px; margin: 0; padding: 8px 0; background: #F8F8F8; border-radius: 8px; overflow:auto; z-index: 100; position: absolute; bottom: 45px; left: 0; }
 footer .family_site_list li { padding: 10px 20px; color: #67676F; font-size: 14px; line-height: 1.4em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
 footer .family_site_list li:after { content: ''; display: none; vertical-align: top; width: 12px; height: 16px; margin-left: 10px; background: url('@/assets/images/common/arrow_set_16.png') -37px -11px no-repeat; background-size: auto 38px; }
 footer .family_site_list li:hover { color: #000; }
@@ -135,13 +152,20 @@ footer .family_site_list li.fs_line:hover:after {display: none;}
 /* skybanner */
 .sky_quick {position:fixed; bottom:100px; right: clamp(24px, calc(50% - 1420px / 2 - 160px), 800px); z-index:100; display:flex; flex-direction:column; align-items:flex-end; transition:opacity 0.35s ease;}
 .sky_quick.istop {bottom:60px;}
-.sky_quick.isStatic {position:absolute; bottom:calc(100% + 20px);}
+.sky_quick.isStatic {position:absolute; bottom:calc(100% + 100px);}
+footer.open .sky_quick.isStatic {bottom:calc(100% + 20px);}
 
 .sky_quick > .btn_toggle {width:50px; height:50px; border-radius:50%; background-color:#107AF2; position:relative; display:none;}
-.sky_quick > .btn_toggle:before {width:20px; height:20px; margin-top:-10px; margin-left:-10px; background:url('@/assets/images/common/icon_set_20.png') -148px -25px no-repeat; content:''; position:absolute; top:50%; left:50%; filter: brightness(0) invert(1);}
+.sky_quick > .btn_toggle:before {width:20px; height:20px; margin-top:-10px; margin-left:-10px; background:url('@/assets/images/common/icon_set_20.png') -148px -25px no-repeat; content:''; position:absolute; top:50%; left:50%; filter: brightness(0) invert(1); transition:transform 0.2s;}
+.sky_quick.active > .btn_toggle:before {transform:rotate(45deg);}
+
+.sky_quick.sub > .btn_toggle {display:block;}
+.sky_quick.sub .quick_menu {padding-right:0; overflow:hidden; position:absolute; bottom:65px; right:0; transition:right 0.18s ease-in-out;}
+.sky_quick.sub .quick_menu li {min-width:130px; margin-right:-180px; position:relative; transition:margin 0.18s ease-in-out;}
+.sky_quick.sub.active .quick_menu li {margin-right:0;}
 
 .sky_quick .quick_menu { display:flex; flex-direction:column; gap:clamp(8px, 0.5208vw, 10px); align-items:flex-end;}
-.sky_quick .quick_menu li{position:relative; min-width: 130px;}
+
 .sky_quick .quick_menu li > * {width: 100%; height:clamp(48px, 3.125vw, 60px); padding:clamp(12px, 0.9375vw, 18px) 20px; color:#161616; font-size:clamp(1.3rem, 0.8333vw, 1.6rem); font-weight:500; letter-spacing:-0.01em; background-color:rgba(229, 229, 229, 1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border:0; border-radius:99px; text-align:center; opacity:0.8; display:inline-flex; align-items:center; justify-content:center; gap:clamp(8px, 0.5208vw, 10px); transition:all 0.18s;}
 /* 26.06.19 Del 이종환 .sky_quick .quick_menu li > *::before, .sky_quick .quick_menu li > *:after {content:''; width:20px; height:20px; background: url(@/assets/images/common/icon_set_20.png) no-repeat; display:block; filter: brightness(0) invert(0); transition: all 0.18s;} */
 
@@ -406,8 +430,8 @@ h5 {font-size:1.8rem;}
     #header.sub_header.head_black .btn_prev_wrap button {filter:initial;}
     #header.sub_header.head_black .btn_prev_wrap strong {color:#161616;}
 
-    footer {padding-top:80px;}
-    footer nav {display:none;}
+    footer {padding-top:80px; border-top:0 !important;}
+    footer nav, footer.open nav {display:none;}
     footer .quick {margin-top:0; margin-right:-20px; margin-left:-20px; padding:13px 0 14px; border:0; position:relative;}
     footer .quick:before, footer .quick:after {border:1px solid #E5E5E9; content:''; position:absolute; right:20px; left:20px; display:block;}
     footer .quick:before {top:-1px;}
@@ -416,16 +440,21 @@ h5 {font-size:1.8rem;}
     footer .quick a {padding:0 16px; font-size:1.4rem;}
     footer .quick li:first-child a {padding-left:0;}
     footer .quick li:last-child a {padding-right:20px;}
+    footer .quick li.sitemap {display:none;}
+
+    footer .cs_info {display:none;}
 
     footer .info div {display:block; padding-top:72px;}
     footer .info div * {padding:0; font-weight:700; line-height:140%; display:block !important;}
     footer .info div span {margin-top:4px;}
     footer .info div span + span {margin-left:0;}
     footer .info p {margin-top:24px;}
-    footer .family_site_wrap { right:auto; top:70px; left:20px; }
+    footer .family_site_wrap { right:auto; top:70px !important; left:20px; }
 
     footer .go_top {line-height:124%;}
-    footer .go_top.isStatic {margin-top:-52px;}
+    footer .go_top.isStatic {margin-top:-52px; top:0;}
+
+    .sky_quick.isStatic {bottom:calc(100% + 20px);}
 
     .sky_quick {padding-right:20px; right:0;}
     .sky_quick.istop {bottom:30px;}
@@ -440,8 +469,12 @@ h5 {font-size:1.8rem;}
 
     .sky_quick.istop > .btn_toggle {display:none;}
     .sky_quick.istop .quick_menu {bottom:0;}
-    .sky_quick.istop .quick_menu > li, .sky_quick.active .quick_menu > li {margin-right:0;}
-    .sky_quick.active > .btn_toggle:before {transform:rotate(45deg);}
+    .sky_quick.istop .quick_menu > li {margin-right:0;}
+    .sky_quick.active .quick_menu > li {margin-right:0 !important;}
+
+    .sky_quick.sub.istop > .btn_toggle {display:block;}
+    .sky_quick.sub.istop .quick_menu {bottom:65px;}
+    .sky_quick.sub.istop .quick_menu > li {margin-right:-180px;}
 
     #container {padding-bottom:100px;}
 
