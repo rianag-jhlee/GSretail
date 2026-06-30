@@ -698,7 +698,9 @@ export default {
 .visual_img { width: 100%;}
 .visual_img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .info_section { margin-bottom:100px; }
-.content_title{margin-bottom:16px;font-size: 4rem;line-height: 1.3;letter-spacing: -0.01em;}
+.content_title{margin-bottom:16px;font-size: 4rem;line-height: 1.3;letter-spacing: -0.01em;display: flex; align-items: center;}
+.content_title > a {margin-left:16px; padding:4px; font-size:1.8rem; font-weight:400; letter-spacing:-0.01em; line-height:160%; display:flex; align-items:center;}
+.content_title > a::before{width:24px; height:24px; margin-right:8px; background:url('@/assets/images/common/icon_set_24.png') -1168px -56px no-repeat; content:''; display:block;}
 .visual_img + .info_section{margin-top:40px;}
 .main_title { margin-bottom:16px; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.3; }
 .sub_title { color: #161616; font-size: 2.4rem; font-weight: 700; }
@@ -786,7 +788,7 @@ export default {
     .text_box .desc_box { margin-top: 24px; }
     .text_box .summary, .text_box .desc { font-size: 1.8rem; line-height: 1.5; }
     .detail_content { margin-top: 60px; }
-    .content_title {font-size: 2.8rem !important; }
+    .content_title {font-size: 2.8rem !important; display: block;}
     .main_title {font-size: 28px; }
     .sub_title { font-size: 20px; }
     .text_item { font-size: 1.8rem; line-height: 1.6; }
@@ -819,6 +821,8 @@ export default {
     .info_section { margin-bottom:40px; }
     .condition_grid{gap:40px;}
     .content_title{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
+    .content_title > a {margin-top:16px; margin-left:0; font-size:1.4rem; font-weight:500; line-height:140%;}
+    .content_title > a::before{width:20px; height:20px; background-image:url('@/assets/images/common/icon_set_20.png'); background-position:-454px -115px;}
     .text_box span {margin-bottom:10px; color:#fff; font-size:28px; font-weight:700; text-align:center; display: block;  }
     .text_box .title { font-size: 30px; letter-spacing: -0.5px; }
     .text_item, .mall-type-2 .text_item :deep(b), .mall-type-3 .text_item :deep(b),.mall-type-2 .text_item, .mall-type-3 .text_item {font-size: 16px; }
