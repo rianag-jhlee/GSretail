@@ -223,7 +223,7 @@
                                 </li>
                             </ul>
                             <!-- 26.06.26 add 정다희 : 클릭이벤트 추가 -->
-                            <Buttons v-if="item.linkText" tag="a" href="#none" btn-class="btn_mid fill btn_icon_arrow after primary primary_green" @click.prevent="goToSinsenBrand">{{ item.linkText }}</Buttons> 
+                            <Buttons v-if="item.linkText" tag="a" href="#none" btn-class="btn_mid fill btn_icon_arrow after primary" @click.prevent="goToSinsenBrand">{{ item.linkText }}</Buttons>   <!-- 26.06.30 edit 정다희 : 클래스 primary_green 삭제 --> 
                         </article>
                     </div>                    
                     <div class="sub_block">
@@ -740,7 +740,6 @@
                                 </article>
                             </li>
                         </ul>
-                        <!-- 26.06.29 add 정다희 : list_note 삭제(위치이동) line:770-->
                     </section>
                 </div>
                 <div v-show="activeD3 === 1" class="panel_third_depth" :aria-label="t.benefitPanelAria.operation">
@@ -767,11 +766,7 @@
                                     </article>
                                 </li>
                             </ul>
-                            <!-- 26.06.29 add 정다희 : 기타 운영 지원 하단 안내 문구 -->
-                            <ul v-if="group.policyNote" class="list_note">
-                                <li><p>{{ t.consultFormTexts.benefitPolicyNote }}</p></li>
-                            </ul>
-                            <!-- //26.06.29 add 정다희 : 기타 운영 지원 하단 안내 문구 -->
+                            <!-- 26.06.30 del 정다희 : 하단 안내 문구 위치 이동 -->
                         </div>
                     </section>
                 </div>
@@ -797,12 +792,16 @@
                                     </li>
                                 </ul>
                             </div>
-                            <ul class="list_note">
-                                <li><p>{{ benefitLifeNote }}</p></li>
-                            </ul>
+                            <!-- 26.06.30 del 정다희 : 하단 안내 문구 위치 이동 -->
+
                         </div>
                     </section>
                 </div>
+                <!-- 26.06.30 add 정다희 : 창업 혜택 3depth 탭 공통 하단 안내 -->
+                <ul class="list_note benefit_panel_note">
+                    <li><p>{{ benefitLifeNote }}</p></li>
+                </ul>
+                <!-- //26.06.30 add 정다희 : 창업 혜택 3depth 탭 공통 하단 안내 -->
             </div>
 
             <!-- 추천 점포 찾기 -->
@@ -2312,7 +2311,7 @@ const benefitOperationGroups = [
                 desc: "사회적 귀감이 되는 경영주, 스토어매니저 포상",
             },
         ],
-        policyNote: true, /*26.06.29 add 정다희 : 하단 list_note 노출 플래그*/
+        //26.06.29 del 정다희 : 노출 플래그 삭제
     },
 ];
 
@@ -3432,7 +3431,7 @@ const langData = {
             compareSafeOpGs3: "24시간 운영: 月 최대 700만원<br />18시간 운영: 月 최대 450만원",
             compareNote1: "* GS1 Type 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년",
             compareNote2: "* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다",
-            compareNote3: "* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. (<a href=\"/gsrbr010101?depth1=1\">신선강화점 자세히 알아보기</a>)", /*26.06.26 add 정다희 : 링크 추가*/
+            compareNote3: "* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다.", /*26.06.30 del 정다희 : '신선강화점 자세히 알아보기' 링크 삭제*/ 
             compareNote4: "* 안심운영제도란?<br /> 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우, 경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. ", /*26.06.24 edit 정다희 : br 위치 수정, 링크삭제*/
             compareScrollHint: "좌우로 스크롤하여 전체 내용을 확인하실 수 있습니다.", /*26.06.24 add 정다희 : 가맹타입 비교 테이블 가로 스크롤 안내*/
             benefitPolicyNote: "* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.",
@@ -4417,7 +4416,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .sec_franchise_compare .franchise_compare_table tbody th > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
 .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 2rem; }
 .sec_franchise_compare .franchise_compare_table td > span { margin-top: 4px; color: #67676f; font-size: 1.4rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; display: block; }
-.list_note { margin-top: 24px; }
+.list_note { margin-top: 32px; }
 .list_note > li + li { margin-top: 8px; }
 .list_note > li > p { margin: 0; color: #67676F; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .list_note > li > p.txt_link { color: #161616; }
@@ -4761,8 +4760,8 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_hero > header h3 { font-size: 4.2rem; line-height: 1.3; letter-spacing: -0.01em; }
     .sec_hero > header .hero_title > h3 { min-width: 0; flex: 1 1 auto; }
     .sec_hero > header .hero_title > div { width: 130px; margin-left: 0; flex-shrink: 0; }
-    .sec_franchise_compare > .franchise_compare_scroll_hint { margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; } /*26.06.24 add 정다희*/
-    .sec_franchise_compare > .franchise_compare_scroll_hint::before { content: "↔"; flex-shrink: 0; opacity:0.7 } /*26.06.24 add 정다희*/
+    .sec_franchise_compare > .franchise_compare_scroll_hint { margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 3px; } /*26.06.24 add 정다희*/
+    .sec_franchise_compare > .franchise_compare_scroll_hint::before { width:20px; height: 20px; background:url('@/assets/images/common/icon_scroll_20.png') center no-repeat; content: ""; display:block;} /*26.06.24 add 정다희*/
 
 
 }
@@ -4969,7 +4968,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > strong { margin-top: 4px; font-size: 2rem; line-height: 1.325; letter-spacing: -0.01em; }
     .sec_stack > .sub_block > .sub_swiper :deep(.swiper-slide) > article > span { padding: 6px; font-size: 1.2rem; line-height: 1.2; }
     .sec_diagram header { margin-bottom: 32px; }
-    .list_note{margin-top: 24px;}
+    .list_note{margin-top: 16px;}
     .list_note li >  p{font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     /* D1=1 · 창업 준비하기 */
     .sec_startup_process .process_timeline { align-items: stretch; gap: 20px; }
@@ -5020,7 +5019,7 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
     .sec_franchise_compare .franchise_compare_table tbody th[scope="rowgroup"] { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
     .sec_franchise_compare .franchise_compare_table tbody th:nth-child(2){padding-left:11px; padding-right:11px;}
     .sec_franchise_compare .franchise_compare_table tbody td .txt_emphasis { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
-    .sec_franchise_compare > .franchise_compare_scroll_hint { margin-top: 10px; font-size: 1.2rem; gap: 4px; } /*26.06.24 add 정다희*/
+    .sec_franchise_compare > .franchise_compare_scroll_hint { font-size: 1.2rem; gap: 4px; } /*26.06.24 add 정다희*/
     .sec_operation .section_header, .sec_life .section_header { margin-bottom: 60px; }
     .sec_life .icon_card_list.col_02 { gap: 0; }
     .icon_card_topic .sub_header { margin-bottom: 24px; }
