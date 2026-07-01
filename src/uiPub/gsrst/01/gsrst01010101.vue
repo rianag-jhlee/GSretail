@@ -18,7 +18,63 @@
             <Tabs v-show="activeD1 === 3" :tab-items="consultDepth2Tabs" tab-class="type_02" v-model="activeConsultD2" :tab-slide="true" /> <!-- 26.07.01 edit 정다희 : activeD1 4===>3 수정 -->
 
             <!-- GS THE FRESH 창업 알아보기 (activeD1 === 0) -->
-            <div class="panel" v-show="activeD1 === 0"></div>
+            <!-- 26.07.01 add 정다희 : GS THE FRESH 창업 알아보기 탭 이동 및 새로운 내용 추가 -->
+            <div class="panel" v-show="activeD1 === 0">
+                <section class="sec_hero" :style="{ backgroundImage: `url(${imgBg2})` }">
+                    <header>
+                        <div class="hero_title">
+                            <h3>{{ t.brandIntro.title }}</h3>
+                            <div>
+                                <img src="@/assets/images/dummy/gsrst_fresh_logo.png" alt="gs the fresh">
+                            </div>
+                        </div>
+                    </header>
+                    <p class="hero_desc" v-html="t.brandIntro.desc"></p>
+                    <ul class="action_list">
+                        <li v-for="(item, i) in t.brandApplyLinks" :key="i">
+                            <a href="#none" class="action_card btn_icon_arrow primary after" @click.prevent="goToConsultTab(item.consultD2)">
+                                <strong v-html="item.title"></strong>
+                                <span class="action_card_btn"><em>{{ item.btnLabel }}</em></span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <section class="sec_num_list">
+                    <header class="section_header">
+                        <h2 v-html="t.successPointPanel.title"></h2>
+                        <p>{{ t.successPointPanel.desc }}</p>
+                    </header>
+                    <NumberedInfoList :items="t.successPointCards" :show-icon="true" desc-class="num_info_desc_light" />
+                </section>
+                <!-- <section class="sec_img_banner">
+                    <div>
+                        <picture class="image_wrap">
+                            <source media="(max-width: 768px)" srcset="@/assets/images/dummy/mo/gsrst02010101_04_mo.png" />
+                            <img src="@/assets/images/dummy/gsrst02010101_04.png" :alt="t.brandBannerImageAlt">
+                        </picture>
+                        <Buttons type="button" btn-class="btn_icon_arrow btn_big after primary" @click="setTab(1)">{{ t.brandMoreButton }}</Buttons>
+                    </div>
+                </section> -->
+                <section class="sec_band">
+                    <div class="inner">
+                        <header class="section_header ac">
+                            <h2 v-html="t.brandSolutionPanel.title"></h2>
+                        </header>
+                        <ul class="link_grid">
+                            <li v-for="(item, i) in t.brandSolutionCards" :key="i">
+                                <a href="#none" class="btn_icon_arrow primary after" @click.prevent="goToSolutionTab(item.d1, item.d2)">
+                                    <span class="thumb" aria-hidden="true"></span>
+                                    <span class="txt">
+                                        <strong>{{ item.title }}</strong>
+                                        <span class="desc" v-html="item.desc"></span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            <!-- //26.07.01 add 정다희 : GS THE FRESH 창업 알아보기 탭 이동 및 새로운 내용 추가 -->
 
             <!-- 창업 절차 (activeD1 === 1, activeD2 === 0) -->
             <!-- 26.07.01 move 정다희 : GS THE FRESH 창업 알아보기(activeD1 === 0) → 창업 준비하기(activeD1 === 1) 이동 -->
@@ -1066,8 +1122,10 @@ import StoreCard from "@/components/StoreCard.vue";
 import StoreCardDetail from "@/components/StoreCardDetail.vue";
 import Accordion from "@/components/Accordion.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
+import NumberedInfoList from "@/components/NumberedInfoList.vue"; /** 26.07.01 add 정다희 : 번호 리스트 컴포넌트 추가 */
 import modal from "@/assets/js/modal";
 import imgBg from "@/assets/images/dummy/gsrst01010101_bg.png";
+import imgBg2 from "@/assets/images/dummy/gsrst02010101_02.jpg"; /** 26.07.01 add 정다희 : 이미지 추가 */
 import imgBg02 from "@/assets/images/dummy/gsrst01010101_bg_02.png";
 import imgGph01 from "@/assets/images/dummy/gsrst01010101_gph_01.png";
 import imgGph01Mo from "@/assets/images/dummy/mo/gsrst01010101_gph_01_mo.png";
@@ -1172,6 +1230,73 @@ const langData = {
             { item: "가맹 조건 안내" }, /*26.07.01 eidt 정다희 : 텍스트 수정*/
             { item: "창업 혜택" }, /*26.07.01 eidt 정다희 : 텍스트 수정*/
         ],
+        /** 26.07.01 add 정다희 : GS THE FRESH 창업 알아보기 내용 추가 */
+        brandIntro: {
+            title: "대한민국 수퍼의 기준,",
+            desc: "합리적인 투자와 체계적인 지원으로<br class='m_br'>안정적인 창업을 함께하겠습니다.",
+        },
+        brandApplyLinks: [
+            {
+                title: "사업설명회 신청",
+                btnLabel: "신청하기",
+                consultD2: 0,
+            },
+            {
+                title: "가맹/창업상담 신청",
+                btnLabel: "신청하기",
+                consultD2: 1,
+            },
+            {
+                title: "입지제안 상담 신청",
+                btnLabel: "신청하기",
+                consultD2: 2,
+            },
+        ],
+        successPointPanel: {
+            title: "<span class='txt_point'>고객이 먼저 찾는<br class='m_br'>GS THE FRESH</span><br />창업 성공 포인트",
+            desc: "GS25와 함께라면, 첫 창업은 확신으로 운영은 편리함으로 바뀝니다.",
+        },
+        successPointCards: [
+            {
+                em: "검증된 입지",
+                title: "입지분석을 통한 신규 점포 오픈",
+                desc: "점포 개발 전문가의 현장분석과 데이터를 기반으로<br class='p_br'/>수익성이 보이는 점포만 오픈합니다.",
+            },
+            {
+                em: "편리한 시스템",
+                title: "체계적이고 스마트한 지원시스템",
+                desc: "정확한 데이터를 기반으로 한 시스템과, 영업전문가의<br class='p_br'/>1:1 맞춤관리까지!  첫 창업이어도 걱정마세요.",
+            },
+            {
+                em: "물류 인프라",
+                title: "안정된 상품운영",
+                desc: "오랜 수퍼 경험을 바탕으로 한 체계적인 물류시스템이<br class='p_br'/>경영주님의 안정된 점포운영을 가능하게 합니다.",
+            },
+        ],
+        brandSolutionPanel: {
+            title: "<span class='txt_point'>GS THE FRESH가 궁금하신가요?</span> <br />경영주님 상황에 맞는 상담 도와드리겠습니다.",
+        },
+        brandSolutionCards: [
+            {
+                title: "가맹 타입 소개",
+                desc: "나의 투자 여력에 딱 맞는<br />가맹 타입 확인하기",
+                d1: 1,
+                d2: 1,
+            },
+            {
+                title: "창업 절차 안내",
+                desc: "상담부터 내 점포 오픈까지,<br />체계적인 밀착 지원 내용 확인하기",
+                d1: 1,
+                d2: 0,
+            },
+            {
+                title: "1:1 상담신청",
+                desc: "지역별 창업전문가의 무료 상담,<br />지금 바로 신청하기",
+                d1: 2,
+                d2: 0,
+            },
+        ],
+        /** //26.07.01 add 정다희 : GS THE FRESH 창업 알아보기 내용 추가 */
         franchise: {
             title: "GS THE FRESH만의 3가지 맞춤형 가맹 타입을 만나보세요.",
             tabAria: "가맹 타입",
@@ -1778,6 +1903,83 @@ const langData = {
             { item: "Franchise Terms Guide"/* 260604 번역 */ }, /*26.07.01 edit 정다희 : 텍스트 수정*/
             { item: "Startup Benefits"/* 260604 번역 */ }, /*26.07.01 edit 정다희 : 텍스트 수정*/
         ],
+         /** 26.07.01 add 정다희 : GS THE FRESH 창업 알아보기 내용 추가 */
+        brandIntro: {
+            title: "The standard for a new beginning,"/* 260604 번역 */,
+            desc: "We will partner with you for a stable startup through reasonable investment and systematic support."/* 260604 번역 */,
+        },
+        brandApplyLinks: [
+            {
+                title: "Apply for startup briefing"/* 260604 번역 */,
+                btnLabel: "Apply"/* 260604 번역 */,
+                consultD2: 0,
+            },
+            {
+                title: "Apply for startup consultation"/* 260604 번역 */,
+                btnLabel: "Apply"/* 260604 번역 */,
+                consultD2: 1,
+            },
+            {
+                title: "Location proposal/Brand conversion inquiry"/* 260604 번역 */,
+                btnLabel: "Inquire"/* 260604 번역 */,
+                consultD2: 2,
+            },
+        ],
+        brandApplyDesc: [
+            "We guide you through all startup information at once.",
+            "We provide 1:1 consultation for your startup questions.",
+            "We consult on location proposals or brand conversion for your property.",
+        ],
+        brandStats: [
+            { value: "18,000+", label: "Number of stores nationwide"/* 260604 번역 */ },
+            { value: "No. 1 in convenience store sales", label: "Annual sales per store of 640 million won+"/* 260604 번역 */ },
+        ],
+        successPointPanel: {
+            title: "GS25, comfortable for store owners<br /><span class='txt_blue'>Keys to startup success</span>"/* 260604 번역 */,
+            desc: "With GS25, a successful startup is possible."/* 260604 번역 */,
+        },
+        successPointCards: [
+            {
+                em: "Profitability Analysis"/* 260604 번역 */,
+                title: "Profitability-focused new store opening"/* 260604 번역 */,
+                desc: "We open only stores with visible profitability, based on store development experts' on-site analysis and data."/* 260604 번역 */,
+            },
+            {
+                em: "Smart Operation"/* 260604 번역 */,
+                title: "A Reliable and Convenient Support System"/* 260604 번역 */,
+                desc: "With a smart operation system and one-on-one customized management from sales experts, you don't have to worry even if it's your first business."/* 260604 번역 */,
+            },
+            {
+                em: "Differentiation concept"/* 260604 번역 */,
+                title: "Competitive products/concepts"/* 260604 번역 */,
+                desc: "From mega-hit products to fresh-focused stores, GS25's unique differentiated concepts drive up sales."/* 260604 번역 */,
+            },
+        ],
+        brandSolutionPanel: {
+            title: "Don't worry even if it's your first startup.",
+            desc: "We'll find customized solutions that fit your situation.",
+        },
+        brandSolutionCards: [
+            {
+                title: "Franchise type introduction"/* 260604 번역 */,
+                desc: "3 types that fit you perfectly"/* 260604 번역 */,
+                d1: 1,
+                d2: 1,
+            },
+            {
+                title: "Startup process guide"/* 260604 번역 */,
+                desc: "Minimum 30 days until your store opens!"/* 260604 번역 */,
+                d1: 1,
+                d2: 0,
+            },
+            {
+                title: "Recommended stores"/* 260604 번역 */,
+                desc: "Check recommended stores by region, commercial area, and investment cost"/* 260604 번역 */,
+                d1: 2,
+                d2: 0,
+            },
+        ],
+         /** //26.07.01 add 정다희 : GS THE FRESH 창업 알아보기 내용 추가 */
         franchise: {
             tabAria: "Franchise Type"/* 260604 번역 */,
             tableHead: {
@@ -2238,6 +2440,33 @@ const activeD3 = ref(0);
 const activeConsultD2 = ref(0);
 const showConsultApplyPage = ref(false);
 
+/* 26.07.01 add 정다희 : GS THE FRESH 창업 알아보기 탭 이동 */
+function setTab(d2Index) {
+    activeD1.value = 1;
+    nextTick(() => {
+        activeD2.value = d2Index;
+        window.scrollTo({ top: 0 });
+    });
+}
+
+function goToConsultTab(d2Index) {
+    activeD1.value = 3;
+    nextTick(() => {
+        activeConsultD2.value = d2Index;
+        showConsultApplyPage.value = false;
+        window.scrollTo({ top: 0 });
+    });
+}
+
+function goToSolutionTab(d1Index, d2Index = 0) {
+    activeD1.value = d1Index;
+    nextTick(() => {
+        activeD2.value = d2Index;
+        window.scrollTo({ top: 0 });
+    });
+}
+/* //26.07.01 add 정다희 : GS THE FRESH 창업 알아보기 탭 이동 */
+
 const depth1Tabs = computed(() => t.value.depth1Tabs);
 const depth2Tabs = computed(() => t.value.depth2Tabs);
 const franchiseGuideTypes = computed(() => t.value.franchise.guideTypes);
@@ -2561,10 +2790,11 @@ function toggleCard(id) {
 
 <style scoped>
 /* 브랜드 색 */
-.wrap_gsrst { --color-brand-primary: #15b874; position: relative; }
+.wrap_gsrst { --color-brand-primary: #15b874; position: relative; overflow-x: clip;}
 .wrap_gsrst :deep([class*="btn_"][class*="fill"][class*="primary"]) { color: #fff; background-color: var(--color-brand-primary); }
 .txt_warning { color: #ED3030 !important; }
 :deep(.txt_green){color:#11935D}
+:deep(.txt_point){color:#15B874}
 :deep(.m_br) { display: none; }
 :deep(.p_br) { display: block; }
 
@@ -2588,6 +2818,58 @@ function toggleCard(id) {
 /* 탭 페이지 공통 */
 .panel { padding: 64px 0 0; }
 .tab_content_wrap { padding-top: 40px; }
+
+/* GS THE FRESH 창업 알아보기 (activeD1 === 0) — 26.07.01 add 정다희 : gsrst02010101 이동 */
+.section_header { margin-bottom: 64px; }
+.section_header.ac { text-align: center; }
+.section_header > .tit + h2 { margin-top: 16px; }
+.section_header > h2 { font-size: 4rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.section_header > p { margin-top: 16px; font-size: 2.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
+.panel > section + section { padding-top: 100px; }
+.panel > section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50%); background-color: #f8f8f8; }
+.sec_hero { min-height:700px; padding: 150px 100px; background-size: cover; background-position: 0 -55px; border-radius: 20px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+.sec_hero::before { width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); position: absolute; top: 0; left: 0; content: ''; }
+.sec_hero > header, .sec_hero > .action_list { position: relative; z-index: 1; }
+.sec_hero > header .tit { width: fit-content; margin: 0; padding: 8px 16px; color: #fff; font-size: 1.4rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; background-color: rgba(255,255,255,0.2); border: 0; border-radius: 99px; }
+.sec_hero > header h3 { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.sec_hero > header .desc { color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: 0; }
+.sec_hero > header .hero_title { display: flex; align-items: center; }
+.sec_hero > header .hero_title > div { width: 489px; margin-left: 12px; }
+.sec_hero > header .hero_title img { width: 100%; height: auto; display: block; }
+.sec_hero > header + .hero_desc { margin-top: 10px; color: #fff; font-size: 1.8rem; font-weight: 700; line-height: 1.5; z-index: 1; position: relative; }
+.sec_hero > .action_list { width: 100%; margin-top: 30px; display: flex; align-items: stretch; gap: 10px; }
+.sec_hero > .action_list > li { min-width: 0; max-width: 300px; height: 154px; flex: 1; display: flex; }
+.sec_hero > .action_list > li > a.action_card { width: 100%; height: 100%; flex: 1; padding: 30px 20px; color: #fff; background-color: rgba(21, 184, 116, 0.8); border-radius: 12px; text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; }
+.sec_hero > .action_list > li > a.action_card > strong { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_hero > .action_list > li > a.action_card > .action_card_btn { font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 8px; }
+.sec_hero > .action_list > li > a.action_card > .action_card_btn > em { font-style: normal; }
+.sec_hero > .action_list > li > a.action_card > .action_card_btn::after { width: 20px; height: 20px; background: url('@/assets/images/common/chevron_icon_20.png') no-repeat center; content: ''; display: block; flex-shrink: 0; }
+.sec_hero > .action_list > li > a.action_card::after { display: none; }
+.sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.sec_num_list :deep(.num_info_item) { padding: 0; border-bottom: 0; }
+.sec_num_list :deep(.num_info_num) { margin-bottom: 8px; color: #15B874;font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+.sec_num_list :deep(.num_info_item article) { display: flex; flex-direction: column; gap: 24px; }
+.sec_num_list :deep(.num_info_icon) { width: 80px; height: 80px; }
+.sec_num_list :deep(.num_info_item .num_info_icon::before){width:40px; height:40px; background-repeat: no-repeat; background-size: cover; background-position: center; filter: none;}  
+.sec_num_list :deep(.num_info_item:nth-of-type(1) .num_info_icon::before) {width:48px; height:48px; background-image: url('@/assets/images/sub/icon_gsrst01_01.png'); }
+.sec_num_list :deep(.num_info_item:nth-of-type(2) .num_info_icon::before) { background-image: url('@/assets/images/sub/icon_gsrst01_02.png'); }
+.sec_num_list :deep(.num_info_item:nth-of-type(3) .num_info_icon::before) { background-image: url('@/assets/images/sub/icon_gsrst01_03.png'); }
+.sec_num_list :deep(.num_info_title) { margin-bottom: 8px; }
+.sec_num_list :deep(.num_info_title > strong) { font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_num_list :deep(.num_info_body > p) { font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_band > .inner > .link_grid { display: flex; align-items: stretch; gap: 20px; }
+.sec_band > .inner > .link_grid > li { min-width: 0; flex: 1; display: flex; }
+.sec_band > .inner > .link_grid > li > a { width: 100%; height: 144px; padding: 32px 24px; background-color: #15B874; border-radius: 12px; display: flex; align-items: center; gap: 20px; }
+.sec_band > .inner > .link_grid > li > a::after { width: 24px; height: 24px; margin: 0; background: url('@/assets/images/common/arrow_set_24.png') no-repeat -64px -20px; filter: brightness(0) invert(1); content: ''; display: block; flex-shrink: 0; }
+.sec_band > .inner > .link_grid > li > a > .thumb { position: relative; width: 80px; height: 80px; flex-shrink: 0; background-color: #E8F8F1; border-radius: 12px; }
+.sec_band > .inner > .link_grid > li > a > .thumb:before { content: ''; width: 40px; height: 40px; background: url('@/assets/images/sub/icon_cont_40.png') no-repeat; display: block; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); }
+.sec_band > .inner > .link_grid > li:nth-of-type(1) > a > .thumb:before { background-image: url('@/assets/images/sub/guide_icon_green_01.png'); }
+.sec_band > .inner > .link_grid > li:nth-of-type(2) > a > .thumb:before { background-image: url('@/assets/images/sub/guide_icon_green_02.png'); }
+.sec_band > .inner > .link_grid > li:nth-of-type(3) > a > .thumb:before { background-image: url('@/assets/images/sub/guide_icon_green_03.png'); }
+.sec_band > .inner > .link_grid > li > a > .txt { min-width: 0; flex: 1; }
+.sec_band > .inner > .link_grid > li > a > .txt > strong { color: #fff; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block; }
+.sec_band > .inner > .link_grid > li > a > .txt > .desc { margin-top: 6px; color: #E8F8F1; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: block; }
+/* //GS THE FRESH 창업 알아보기 */
 
 /* type_info_bar */
 .type_info_bar { padding: 17px 24px; background-color: #e8f8f1; border: 1px solid #d2ede2; border-radius: 6px; color: #11935d; font-size: 1.8rem; line-height: 1.4; }
@@ -2986,6 +3268,13 @@ function toggleCard(id) {
     .brand_panel_title > h2 { font-size: 3.2rem; }
     .brand_panel_title > p { font-size: 2rem; }
     .store_card_row { grid-template-columns: repeat(3, 1fr); }
+    .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; }
+    .sec_band > .inner > .link_grid { flex-direction: column; }
+    .sec_hero { height: auto; min-height: 600px; padding: 60px 40px 80px; }
+    .sec_hero > header .hero_title { flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+    .sec_hero > header h3 { font-size: 4.2rem; line-height: 1.3; letter-spacing: -0.01em; }
+    .sec_hero > header .hero_title > h3 { min-width: 0; flex: 1 1 auto; }
+    .sec_hero > header .hero_title > div { width: 130px; margin-left: 0; flex-shrink: 0; }
     /* :deep(.consent_box + .apply_form){margin-top:40px;} */
     /* .apply_form .form_field_area .form_sub_input_wrap { flex-wrap: wrap; }
     .apply_form .form_field_area .form_sub_input_wrap :deep(.input_wrap) { min-width: 0; max-width: 100%; }
@@ -3001,6 +3290,43 @@ function toggleCard(id) {
     :deep(.m_br) { display: block; }
     :deep(.p_br) { display: none; }
     .page_header { display: none; }
+    .section_header, .sub_header { margin-bottom: 32px; }
+    .section_header > h2, .sub_header > h3 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
+    .section_header > p, .sub_header > p { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .section_header > p { margin-top: 12px; }
+    .panel > section + section { padding-top: 80px; }
+    .panel > section > .inner { padding-top: 40px; padding-bottom: 40px; }
+    .sec_hero { max-height: none; height: 640px; padding: 60px 20px; border-radius: 20px; gap: 0; }
+    .sec_hero > header { text-align: center; }
+    .sec_hero > header .hero_title { flex-direction: column; gap: 8px; }
+    .sec_hero > header .hero_title > div { width: 295px; }
+    .sec_hero > header h3 { font-size: 3.2rem; }
+    .sec_hero > header + .hero_desc{text-align: center;}
+    .sec_hero > .action_list { width: 100%; max-width: none; margin-top: 60px; flex-direction: column; }
+    .sec_hero > .action_list > li { max-width: none; }
+    .sec_hero > .action_list > li > a.action_card { flex-direction: row; min-height: auto; padding: 12px 16px; gap: 0; justify-content: center; }
+    .sec_hero > .action_list > li > a.action_card::after { display: block; }
+    .sec_hero > .action_list > li > a.action_card > strong { width: 100%; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+    .sec_hero > .action_list > li:last-child > a.action_card > strong { text-align: left; }
+    .sec_hero > .action_list > li > a.action_card > .action_card_btn { display: none; }
+    .sec_num_list .section_header > h2 + p { color: #67676f; font-size: 1.8rem; line-height: 1.4; letter-spacing: 0; }
+    .sec_num_list :deep(.num_info_item .num_info_icon::before){width:32px; height:32px;}
+    .sec_num_list :deep(.num_info_item:nth-of-type(1) .num_info_icon::before){width:40px; height:40px;}
+    .sec_num_list :deep(.num_info_list) { grid-template-columns: 1fr; gap: 40px; }
+    .sec_num_list :deep(.num_info_item > article) { flex-direction: row; align-items: flex-start; gap: 16px; }
+    .sec_num_list :deep(.num_info_icon) { width: 60px; height: 60px; }
+    .sec_num_list :deep(.num_info_content) { min-width: 0; flex: 1; }
+    .sec_num_list :deep(.num_info_num) { margin-bottom: 6px; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+    .sec_num_list :deep(.num_info_title) { margin-bottom: 6px; }
+    .sec_num_list :deep(.num_info_title > strong) { font-size: 2rem; line-height: 1.35; }
+    .sec_num_list :deep(.num_info_body > p) { font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    .sec_band > .inner { padding: 40px 20px; }
+    .sec_band > .inner > .link_grid { margin-top: 32px; gap: 10px; }
+    .sec_band > .inner > .link_grid > li > a { height: auto; min-height: 0; padding: 16px; gap: 16px; }
+    .sec_band > .inner > .link_grid > li > a > .thumb { width: 60px; height: 60px; }
+    .sec_band > .inner > .link_grid > li > a > .thumb:before { width: 32px; height: 32px; background-size: cover; }
+    .sec_band > .inner > .link_grid > li > a > .txt > strong { font-size: 1.8rem; line-height: 1.5; letter-spacing: 0; }
+    .sec_band > .inner > .link_grid > li > a > .txt > .desc { font-size: 1.4rem; line-height: 1.4; }
     .sec_body { padding: 24px 0 40px; }
     .header_title { font-size: 3.6rem; }
     .panel { padding: 60px 0 80px; }
