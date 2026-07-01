@@ -83,7 +83,7 @@
                 <!-- 26.07.01 add 정다희 : 창업 절차 추가 : 창업 절차(activeD1 === 1 && activeD2 === 0) -->
                 <section class="sec_precaution">
                     <header class="sub_header">
-                        <h3>창업전 필수 확인 사항</h3>
+                        <h3>{{ t.precaution.subHeaderTitle }}</h3>
                     </header>
                     <h3 class="precaution_title mo_only" v-html="t.precaution.title"></h3>
                     <div class="sec_precaution_inner">
@@ -1582,6 +1582,7 @@ const langData = {
             ],
         },
         precaution: {
+            subHeaderTitle: "창업전 필수 확인 사항", /* 26.07.01 add 정다희 */
             title: "가맹 해약<br class=\"p_br\">수수료",
             blockTitle1: "GSF1, GSF2 타입",
             blockTitle2: "GSF3 타입",
@@ -2219,7 +2220,7 @@ const langData = {
             guideTypes: [
                 {
                     tab: "Comprehensive Guide by Type"/* 26.07.01 add 정다희 */,
-                    isCompare: true, /* 26.07.01 add 정다희 */,
+                    isCompare: true, /* 26.07.01 add 정다희 */
                 },
                 {
                     tab: "GSF1 Type"/* 260604 번역 */,
@@ -2324,6 +2325,7 @@ const langData = {
             ],
         },
         precaution: {
+            subHeaderTitle: "Essential Items to Confirm Before Startup"/* 260604 번역 */, /* 26.07.01 add 정다희 */
             title: `Franchise Termination<br class=\"p_br\">Fee`/* 260604 번역 */,
             blockTitle1: "GSF1, GSF2 Type"/* 260604 번역 */,
             blockTitle2: "GSF3 Type"/* 260604 번역 */,
