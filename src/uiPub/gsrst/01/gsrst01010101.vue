@@ -12,12 +12,55 @@
             <!-- Depth 1: 페이지 탭 (type_01: 하단 보더 언더라인) -->
             <Tabs :tab-items="depth1Tabs" tab-class="type_01" v-model="activeD1" :tab-slide="true" />
 
-            <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) --> 
-            <Tabs v-show="activeD1 === 0" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
-            <Tabs v-show="activeD1 === 4" :tab-items="consultDepth2Tabs" tab-class="type_02" v-model="activeConsultD2" :tab-slide="true" />
+            <!-- Depth 2: 섹션 탭 (type_02: pill 스타일) -->
+            <!-- 26.07.01 move 정다희 : GS THE FRESH 창업 알아보기(activeD1 === 0) 2depth 탭 → 창업 준비하기(activeD1 === 1) 이동 -->
+            <Tabs v-show="activeD1 === 1" :tab-items="depth2Tabs" tab-class="type_02" v-model="activeD2" :tab-slide="true"/>
+            <Tabs v-show="activeD1 === 3" :tab-items="consultDepth2Tabs" tab-class="type_02" v-model="activeConsultD2" :tab-slide="true" /> <!-- 26.07.01 edit 정다희 : activeD1 4===>3 수정 -->
 
-            <!-- 가맹 조건 안내 (D2=0) -->
-            <div class="panel" v-show="activeD1 === 0 && activeD2 === 0">
+            <!-- GS THE FRESH 창업 알아보기 (activeD1 === 0) -->
+            <div class="panel" v-show="activeD1 === 0"></div>
+
+            <!-- 창업 절차 (activeD1 === 1, activeD2 === 0) -->
+            <!-- 26.07.01 move 정다희 : GS THE FRESH 창업 알아보기(activeD1 === 0) → 창업 준비하기(activeD1 === 1) 이동 -->
+            <div class="panel sec_procedure" v-show="activeD1 === 1 && activeD2 === 0">
+                <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
+                <!-- 26.07.01 add 정다희 : 창업 절차 추가 : 창업 절차(activeD1 === 1 && activeD2 === 0) -->
+                <section class="sec_precaution">
+                    <header class="sub_header">
+                        <h3>창업전 필수 확인 사항</h3>
+                    </header>
+                    <h3 class="precaution_title mo_only" v-html="t.precaution.title"></h3>
+                    <div class="sec_precaution_inner">
+                        <aside class="precaution_intro">
+                            <h3 class="pc_only" v-html="t.precaution.title"></h3>
+                        </aside>
+                        <div class="precaution_main">
+                            <div class="precaution_block precaution_block_sm">
+                                <h4>{{ t.precaution.blockTitle1 }}</h4>
+                                <FeatureCards type="num" :items="precautionCards1" :no-swipe="true" />
+                            </div>
+                            <div class="precaution_block">
+                                <h4>{{ t.precaution.blockTitle2 }}</h4>
+                                <p v-if="t.precaution.blockTitle2Desc" class="block_desc">{{ t.precaution.blockTitle2Desc }}</p>
+                                <FeatureCards type="num" :items="precautionCards2" :no-swipe="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list_caution">
+                        <li v-for="(caution, cautionIndex) in t.precaution.cautions" :key="cautionIndex"><p>{{ caution }}</p></li>
+                    </ul>
+                </section>
+                <!-- 26.07.01 add 정다희 : 버튼 이동 -->
+                <div class="link_wrap">
+                    <!-- 26.06.18 edit 정다희 : 버튼 클래스 수정 */ -->
+                    <Buttons tag="a" :href="t.procedure.buttonHref" btn-class="btn_xl primary">{{ t.procedure.buttonLabel }}</Buttons>
+                </div>
+            </div>
+             <!-- //26.07.01 move 정다희 : GS THE FRESH 창업 알아보기(activeD1 === 0) → 창업 준비하기(activeD1 === 1) 이동 -->
+
+            <!-- 가맹 조건 안내 (activeD1 === 1, activeD2 === 1) -->
+            <!-- 26.07.01 move 정다희 : GS THE FRESH 창업 알아보기(activeD1 === 0) → 창업 준비하기(activeD1 === 1) 이동 -->
+            <div class="panel" v-show="activeD1 === 1 && activeD2 === 1">
                 <!-- 260624 add 이소라 -->
                 <header class="sub_header">
                     <h3>{{ t.franchise.title }}</h3>
@@ -89,42 +132,24 @@
                     </div>
                 </div>
 
-            </div><!-- /panel D2=0 -->
+            </div><!-- /panel activeD2 === 1 -->
 
-            <!-- 가맹/창업 절차 -->
-            <div class="panel sec_procedure" v-show="activeD1 === 0 && activeD2 === 1">
-                <Steps type="2" :items="procedureSteps" :cols="5" row-gap="100px" />
-                <div class="link_wrap">
-                    <!-- 26.06.18 edit 정다희 : 버튼 클래스 수정 */ -->
-                    <Buttons tag="a" :href="t.procedure.buttonHref" btn-class="btn_xl primary">{{ t.procedure.buttonLabel }}</Buttons>
-                </div>
-            </div>
- 
-            <!-- 창업 전 필수 확인사항 -->
-            <div class="panel" v-show="activeD1 === 0 && activeD2 === 2">
-                <section class="sec_precaution">
-                    <h3 class="precaution_title mo_only" v-html="t.precaution.title"></h3>
-                    <div class="sec_precaution_inner">
-                        <aside class="precaution_intro">
-                            <h3 class="pc_only" v-html="t.precaution.title"></h3>
-                        </aside>
-                        <div class="precaution_main">
-                            <div class="precaution_block precaution_block_sm">
-                                <h4>{{ t.precaution.blockTitle1 }}</h4>
-                                <FeatureCards type="num" :items="precautionCards1" :no-swipe="true" />
-                            </div>
-                            <div class="precaution_block">
-                                <h4>{{ t.precaution.blockTitle2 }}</h4>
-                                <p v-if="t.precaution.blockTitle2Desc" class="block_desc">{{ t.precaution.blockTitle2Desc }}</p>
-                                <FeatureCards type="num" :items="precautionCards2" :no-swipe="true" />
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="list_caution">
-                        <li v-for="(caution, cautionIndex) in t.precaution.cautions" :key="cautionIndex"><p>{{ caution }}</p></li>
-                    </ul>
-                </section>
-            </div>
+            <!-- 창업 혜택 (activeD1 === 1, activeD2 === 2) -->
+            <!-- 26.07.01 move 정다희 : 경영주 지원제도(activeD1 === 3) → 창업 준비하기 > 창업 혜택(activeD1 === 1, activeD2 === 2) 이동 -->
+            <section class="sec_owner_support panel" v-show="activeD1 === 1 && activeD2 === 2">
+                <header class="sub_header">
+                    <h3 v-html="t.support.intro"></h3>
+                </header>
+                <figure class="brand_panel_bg">
+                    <img :src="imgBg02" alt="" width="1420" height="340" />
+                </figure>
+                <header class="brand_panel_title">
+                    <h2 v-html="t.support.panelTitle"></h2>
+                    <p v-if="t.support.panelDesc" v-html="t.support.panelDesc"></p>
+                </header>
+                <FeatureCards type="num" :items="supportCards" :swiper-space-between="0" />
+            </section>
+            <!-- //26.07.01 move 정다희 : 경영주 지원제도(activeD1 === 3) → 창업 준비하기 > 창업 혜택(activeD1 === 1, activeD2 === 2) 이동 -->
 
             <!-- 추천 점포 찾기 (activeD1 === 2) -->
             <section class="sec_store panel" v-show="activeD1 === 2">
@@ -380,8 +405,8 @@
                 </div>
             </section>
 
-            <!-- 사업설명회 (activeD1 === 1) -->
-            <section class="sec_seminar panel" v-show="activeD1 === 1">
+            <!-- 26.07.01 add 정다희 : 탭 추가 : 창업설명회(activeD1 === 3, activeConsultD2 === 0) -->
+            <section class="sec_seminar panel" v-show="activeD1 === 3 && activeConsultD2 === 0">
                 <div class="seminar_head">
                     <p v-html="t.seminar.headDesc"></p>
                     <Buttons btn-class="btn_big fill primary btn_icon_arrow after" data-popid="gsrst010201" data-type="lg" data-cont="gsrst010201" @click.prevent="openModal">{{ t.seminar.applyButtonLabel }}</Buttons>
@@ -587,25 +612,11 @@
                 <!-- //26.06.09 Add 이종환 : 설명회 신청 -->
             </section>
 
-            
-            <!-- 경영주 지원제도 (activeD1 === 3) -->
-            <section class="sec_owner_support panel" v-show="activeD1 === 3">
-                <header class="sub_header">
-                    <h3 v-html="t.support.intro"></h3>
-                </header>
-                <figure class="brand_panel_bg">
-                    <img :src="imgBg02" alt="" width="1420" height="340" />
-                </figure>
-                <header class="brand_panel_title">
-                    <h2 v-html="t.support.panelTitle"></h2>
-                    <p v-if="t.support.panelDesc" v-html="t.support.panelDesc"></p>
-                </header>
-                <FeatureCards type="num" :items="supportCards" :swiper-space-between="0" />
-            </section>
-                
-                
-            <!-- 상담 및 신청 > 가맹/창업 상담 -->
-            <section class="sec_consult panel" v-show="activeD1 === 4 && activeConsultD2 === 0 && !showConsultApplyPage">
+            <!-- 26.07. -->
+
+            <!-- 상담 및 신청 > 창업 상담 신청 -->
+            <!-- 26.07.01 add 정다희 :activeConsultD2 수정 : 창업 상담 신청(activeD1 === 3, activeConsultD2 === 1) -->
+            <section class="sec_consult panel" v-show="activeD1 === 3 && activeConsultD2 === 1 && !showConsultApplyPage">
                 <header class="brand_panel_title flex">
                     <div>
                         <h2 v-html="t.consult.panelTitle"></h2>
@@ -616,7 +627,7 @@
                             </li>
                         </ul>
                     </div>
-                     <!-- 26.06.18 edit 정다희 : 버튼 클래스 수정 */ -->
+                    <!-- 26.06.18 edit 정다희 : 버튼 클래스 수정 */ -->
                     <Buttons btn-class="btn_icon_arrow fill btn_xl primary after" :href="t.consult.locationConsultHref" target="_blank">{{ t.consult.proposalButtonLabel }}</Buttons>
                 </header>
                 <ul class="caution_list consult_caution_mo">
@@ -680,7 +691,8 @@
             </section>
 
             <!-- 상담 및 신청 > 입지제안 상담 -->
-            <section class="sec_consult panel" v-show="activeD1 === 4 && activeConsultD2 === 1 && !showConsultApplyPage">
+            <!-- 26.07.01 add 정다희 :activeConsultD2 수정 : 입지제안 상담(activeD1 === 3, activeConsultD2 === 2) -->
+            <section class="sec_consult panel" v-show="activeD1 === 3 && activeConsultD2 === 2 && !showConsultApplyPage">
                 <div class="consult_box">
                     <div class="consult_intro">
                         <div class="consult_intro_txt">
@@ -797,7 +809,8 @@
                 </div>
             </section>
 
-            <section class="sec_consult_apply panel" v-show="activeD1 === 4 && activeConsultD2 === 0 && showConsultApplyPage">
+            <!-- 26.07.01 add 정다희 :activeConsultD2 수정 : 창업 상담 신청(activeD1 === 3, activeConsultD2 === 1) -->
+            <section class="sec_consult_apply panel" v-show="activeD1 === 3 && activeConsultD2 === 1 && showConsultApplyPage">
                 <!-- 컨설턴트와 1:1 상담 -->
                 <div class="consult_box consult_box_apply">
                     <div class="consult_selector_wrap">
@@ -806,7 +819,7 @@
                     <div class="consult_intro">
                         <div class="consult_head">
                             <div class="consult_img_wrap"></div>
-                           <!-- 26.06.18 add 정다희 : div.consult_intro_txt pc_only / mo_only 구조 추가 */ -->
+                            <!-- 26.06.18 add 정다희 : div.consult_intro_txt pc_only / mo_only 구조 추가 */ -->
                             <div class="consult_intro_txt pc_only">
                                 <h3 v-html="t.consultBox.title"></h3>
                                 <p v-html="t.consultBox.desc"></p>
@@ -1151,14 +1164,13 @@ const langData = {
             { item: "GS THE FRESH 창업 알아보기" },
             { item: "창업 준비하기" },
             { item: "추천 점포 찾기" },
-            { item: "경영주 지원제도" },
-            { item: "상담 및 신청" },
+            { item: "창업 상담 및 신청" }, /**26.07.01 edit 정다희 : 텍스트 수정*/ 
             { item: "가맹계약시스템" },
-        ],
+        ], /**26.07.01 delete 정다희 : 경영주 지원제도 탭 삭제  */
         depth2Tabs: [
-            { item: "가맹 조건 안내" },
-            { item: "가맹/창업 절차" },
-            { item: "창업 전 필수 확인사항" },
+            { item: "창업 절차" }, /*26.07.01 eidt 정다희 : 텍스트 수정*/ 
+            { item: "가맹 조건 안내" }, /*26.07.01 eidt 정다희 : 텍스트 수정*/
+            { item: "창업 혜택" }, /*26.07.01 eidt 정다희 : 텍스트 수정*/
         ],
         franchise: {
             title: "GS THE FRESH만의 3가지 맞춤형 가맹 타입을 만나보세요.",
@@ -1401,11 +1413,11 @@ const langData = {
                 { num: "01", title: "최소 운영 보조", desc: "계약양식 조건에 따라, 개점일로부터 정해진 기간에 한해 경영주 총수입을 기준으로 하여 일정 금액이 보장될 수 있도록 본부지원금을 통해 최소 운영 보조를 지원하고 있습니다." },
                 { num: "02", title: "복리후생", desc: "경조사 발생시(가맹점 실경영주 기준 결혼 또는 조위) 경조금 및 화환 등을 지급하고 있습니다." },
                 { num: "03", title: "스토어매니저(근무자) 구인사이트 지원", desc: "GS THE FRESH 전용 배너 업체(알바천국) 운영" },
-                { num: "04", title: "기타 운영지원 제도", desc: "부진 점포에 한해, 본사 지원 활동으로 '보전점 케어활동'을 진행하며, 상권 특성 및 각종 이슈 사항으로 경제적지원금이 필요한 경우 특정점에 한해 '신규점 조기 정착 지원금'을 운영합니다. 또한, 필요시 영수도점 매출 향상을 위한 지원금을 지급하고 매년 가맹지원제도를 수립 및 운영하고 있습니다." },
+                { num: "04", title: "기타 운영지원 제도", desc: "부진 점포에 한해, 본사 지원 활동으로 '부진점 케어활동'을 진행하며, 상권 특성 및 각종 이슈 사항으로 경제적지원금이 필요한 경우 특정점에 한해 '신규점 조기 정착 지원금'을 운영합니다. 또한, 필요시 양수도점 매출 향상을 위한 지원금을 지급하고 매년 가맹지원제도를 수립 및 운영하고 있습니다." }, /*26.06.30 edit 정다희 : 오타 수정*/ 
             ],
         },
         consult: {
-            depth2Tabs: [{ item: "가맹/창업 상담" }, { item: "입지제안 상담" }],
+            depth2Tabs: [{ item: "창업 설명회 신청" }, { item: "창업 상담 신청" }, { item: "입지제안 상담 신청" }], /**26.07.01 add 정다희 : 탭 추가, 탭 내용 수정*/ 
             panelTitle: "컨설턴트와 1:1 상담",
             panelDesc: "가맹/창업 컨설턴트가 1:1로 상담해 드립니다. <br /> 가맹/창업 컨설턴트에게 문의하시면 자세한 상담을 받으실 수 있습니다.",
             caution: ["※ 주말 및 공휴일은 연락이 불가하며 평일 09:00~17:30 사이에 연락 부탁드립니다."],
@@ -1758,14 +1770,13 @@ const langData = {
             { item: "Learn About GS THE FRESH Startup"/* 260604 번역 */ },
             { item: "Preparing for Startup"/* 260604 번역 */ },
             { item: "Find recommended stores"/* 260604 번역 */ },
-            { item: "Store Owner Support Programs" },
             { item: "Consultation and Application"/* 260604 번역 */ },
             { item: "Franchise Contract System"/* 260604 번역 */ },
-        ],
+        ], /**26.07.01 delete 정다희 : Store Owner Support Programs 탭 삭제 → Preparing for Startup > Startup Benefits 탭으로 이동 */
         depth2Tabs: [
-            { item: "Franchise Terms Guide"/* 260604 번역 */ },
-            { item: "Franchise/Startup Procedure"/* 260604 번역 */ },
-            { item: "Essential items to check before starting a business"/* 260604 번역 */ },
+            { item: "Startup Procedure"/* 260604 번역 */ },/*26.07.01 edit 정다희 : 텍스트 수정*/
+            { item: "Franchise Terms Guide"/* 260604 번역 */ }, /*26.07.01 edit 정다희 : 텍스트 수정*/
+            { item: "Startup Benefits"/* 260604 번역 */ }, /*26.07.01 edit 정다희 : 텍스트 수정*/
         ],
         franchise: {
             tabAria: "Franchise Type"/* 260604 번역 */,
@@ -2005,7 +2016,7 @@ const langData = {
             ],
         },
         consult: {
-            depth2Tabs: [{ item: "Franchise/Startup Consultation"/* 260604 번역 */ }, { item: "Location proposal consultation"/* 260604 번역 */ }],
+            depth2Tabs: [{ item: "Startup Briefing Application"/* 260604 번역 */ }, { item: "Franchise/Startup Consultation"/* 260604 번역 */ }, { item: "Location proposal consultation"/* 260604 번역 */ }], /**26.07.01 add 정다희 : 탭 추가, 탭 내용 수정*/ 
             panelTitle: "1:1 consultation with a consultant"/* 260604 번역 */,
             panelDesc: "A franchise/startup consultant will provide a 1:1 consultation. <br /> If you inquire with a franchise/startup consultant, you can receive a detailed consultation."/* 260604 번역 */,
             caution: ["※ Contact is not available on weekends and public holidays; please contact us on weekdays between 09:00 and 17:30."/* 260604 번역 */],
@@ -2561,7 +2572,7 @@ function toggleCard(id) {
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
-.sub_header h3 { padding: 0 0 64px; color: #161616; font-weight: 700; font-size: 4rem; line-height: 1.3; letter-spacing: -0.1%; text-align: center; white-space: pre-line; } /* 260624 add 이소라 */
+.sub_header h3 { margin: 0 0 64px; color: #161616; font-weight: 700; font-size: 4rem; line-height: 1.3; letter-spacing: -0.1%; text-align: center; white-space: pre-line; } /* 260624 add 이소라 */
 
 /* BODY — PC: 좌우 20px / 모바일: 가로 패딩은 tab_page·Tabs 등에서 (아래 모바일 미디어쿼리 참고) */
 .cont_inner { max-width: 1460px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
@@ -2616,9 +2627,11 @@ function toggleCard(id) {
 .link_wrap > a { margin: 0 auto; padding: 18px 32px; color: #fff; font-weight: 700; font-size: 1.8rem; line-height: 1.5; text-align: center; background-color: var(--color-brand-primary); border-radius: 10px; display: inline-block; }
 .link_wrap > a.btn_xl {  padding: 0 32px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
 
-/* 창업 전 필수 확인사항 */
+/* 창업혜택 */
 .precaution_title, .precaution_intro > h3 { color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .mo_only { display: none; }
+.sec_precaution{margin-top: 64px;}
+.sec_precaution .sub_header h3{margin-bottom: 40px; text-align: left;}
 .sec_precaution_inner { padding: 64px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; }
 .precaution_intro { flex: 0 1 clamp(200px, 28%, 296px); min-width: 0; max-width: 296px; }
 .precaution_intro > h3 { margin-bottom: 16px; }
@@ -2793,7 +2806,7 @@ function toggleCard(id) {
 .consult_selector_wrap :deep(.select select) { width: 100%; height: 62px; padding: 0 56px 0 20px; border: 1px solid #c4c4d0; border-radius: 14px; color: #a4a4b0; font-size: 1.8rem; font-weight: 400; line-height: 1.4; background-color: #fff; }
 .consult_selector_hint { margin-top: 8px; padding-left: 24px; color: #4c4c53; font-size: 1.4rem; font-weight: 400; line-height: 1.4; position: relative; }
 .consult_selector_hint::before { width: 20px; height: 20px; content: ""; background: url("@/assets/images/common/icon_set_20.png") no-repeat -1155px -69px; position: absolute; top: 0; left: 0; }
-.list_caution { list-style: none; margin: 0; padding: 0; }
+.list_caution { margin-top:32px; }
 .list_caution > li > p { color: #67676f; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
 .middle_bts_wrap { margin-top: 64px; display: flex; gap: 8px; }
 .middle_bts_wrap > button { height: 52px; padding: 0 16px; background: #fff; border: 1px solid #90909a; border-radius: 10px; font-size: 1.8rem; font-weight: 700; cursor: pointer; transition: border-color 0.15s, color 0.15s; color: #161616; }
@@ -2953,7 +2966,7 @@ function toggleCard(id) {
 @media (max-width: 1024px) {
     .page_header { height: 360px; }
     .header_title { font-size: 5.2rem; }
-    .sub_header h3 { padding: 0 0 24px; font-size: 2.4rem;} /* 260624 add 이소라 */
+    .sub_header h3 { margin: 0 0 24px; font-size: 2.4rem;} /* 260624 add 이소라 */
     .tab_type > button { font-size: 1.6rem; }
     .type_info_bar { font-size: 1.6rem; }
     .type_table thead th, .type_table tbody th, .type_table tbody td { font-size: 1.6rem;}
