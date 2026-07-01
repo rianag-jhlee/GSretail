@@ -142,8 +142,8 @@
                     </div>
                 </section>
                 <section class="sec_stack">
-                    <header class="section_header ac">
-                        <!-- <span class="tit">{{ productConceptPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제 -->
+                    <!-- 26.07.01 Del 이종환 <header class="section_header ac">
+                        !-- <span class="tit">{{ productConceptPanel.badge }}</span> --> <!-- 26.06.24 del 정다희 : badge 삭제 --
                         <h2>{{ productConceptPanel.title }}</h2>
                         <p>{{ productConceptPanel.desc }}</p>
                     </header>
@@ -194,7 +194,7 @@
                                 </Swiper>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="dual_panel">
                         <article v-for="(item, i) in freshFfCards" :key="i">
                             <header class="sub_header">
@@ -2402,7 +2402,7 @@ const freshFfCards = [
     {
         badge: "GS25 Only",
         title: "신선강화점", /**26.06.24 edit 정다희 : 오타 수정*/ 
-        desc: "편의점의 편리함 + 수퍼의 신선함, 두 마리 토끼를 잡는 원스톱 장보기 매장", /**26.06.24 edit 정다희 : 오타 수정*/ 
+        desc: "GS더프레시의 운영노하우와 인프라를 담은 논스톱 장보기 편의점입니다.", /**26.06.24 edit 정다희 : 오타 수정, 26.07.01 Edit 이종환 : 문구수정*/ 
         points: [
             "365일, 24시간 언제 어디서나 신선식품 장보는 편의점",
             "1~2인 가구를 위한 소용량 소포장 장보기 상품 판매",
@@ -2412,8 +2412,8 @@ const freshFfCards = [
     },
     {
         // badge: "카운터 FF", /**26.06.24 del 정다희 : badge 삭제*/ 
-        title: "카운터 FF로 매출을 더하다",
-        desc: "편의점에서 즐기는 전문점 퀄리티!",
+        title: "편의점에서 즐기는 전문점 퀄리티", //26.07.01 Edit 이종환 : 문구수정
+        desc: "전문점 퀄리티의 커피, 치킨, 피자를 제공하여 점포 경쟁력을 높입니다.", //26.07.01 Edit 이종환 : 문구수정
         brands: [
             {
                 title: "CAFE25",
