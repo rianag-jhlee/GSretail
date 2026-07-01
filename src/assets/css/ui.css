@@ -6,7 +6,8 @@
 #header {position:fixed; top:0; right:0; left:0; z-index:99;/* transition:background 0.25s, transform 0.25s ease-in-out;*/}
 #header.hide {transform:translateY(-100%);}
 
-#header .inner {width:100%; max-width:1720px; margin:0 auto; padding:36px 40px 0; display:flex; align-items:flex-start;}
+/* 26.07.01 Edit 이종환 : max-width:1720px; 제거 / padding좌우 40 → 80px; */
+#header .inner {width:100%; margin:0 auto; padding:36px 80px 0; display:flex; align-items:flex-start;}
 /* 26.06.12 Edit 정다희 : nav 영역 유동 축소 + quick 고정 */
 #header nav {min-width:0; flex:1; --depth1-font:2rem; position:relative; display:flex; align-items:center;}
 #header nav ul.depth1 {display:flex;}
@@ -150,7 +151,8 @@ footer .family_site_list li.fs_line { padding:0; margin:0 20px; height:1px; bord
 footer .family_site_list li.fs_line:hover:after {display: none;}
 
 /* skybanner */
-.sky_quick {position:fixed; bottom:100px; right: clamp(24px, calc(50% - 1420px / 2 - 160px), 800px); z-index:100; display:flex; flex-direction:column; align-items:flex-end; transition:opacity 0.35s ease;}
+/* 26.07.01 Edit 이종환 : 우측 80px위치로 이동 (right: clamp(24px, calc(50% - 1420px / 2 - 160px), 800px) → right: 80px; */
+.sky_quick {position:fixed; bottom:100px; right: 80px; z-index:100; display:flex; flex-direction:column; align-items:flex-end; transition:opacity 0.35s ease;}
 .sky_quick.istop {bottom:60px;}
 .sky_quick.isStatic {position:absolute; bottom:calc(100% + 100px);}
 footer.open .sky_quick.isStatic {bottom:calc(100% + 20px);}

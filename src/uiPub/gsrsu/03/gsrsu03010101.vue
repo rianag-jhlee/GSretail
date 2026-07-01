@@ -4154,6 +4154,8 @@ export default {
     }
 
     @media screen and (max-width:768px){
+        .cont_inner {padding-top:80px;} /* 26.07.01 Add 이종환 : 탭 헤더 겹침 수정 */
+
         .title_wrap {display:none;}
         .type_02 {margin-right:-20px; margin-left:-20px; padding:0 20px;}
 
