@@ -52,7 +52,7 @@
                     <div class="swiper Swiper" ref="sec03Swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide" v-for="(item, index) in t.sec03.items" :key="item.img">
-                                <div class="slide" :class="item.class" @mouseenter="hoverIndex = index">
+                                <a :href="item.link" class="slide" :class="item.class" @mouseenter="hoverIndex = index"><!-- 26.07.01 Edit 이종환 : 링크 위해 테그 수정 -->
                                     <!-- <div class="slide" :class="item.class" @mouseenter="console.log('enter', index)"> -->
                                     <!-- 26.06.17 Add 이종환 -->
                                     <strong class="cate">{{ item.cate }}</strong>
@@ -70,7 +70,7 @@
                                             <span v-html="item.txt"></span>
                                         </p>
                                     </div>-->
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -906,6 +906,7 @@ section {
 
 .sec03 .slide {
     position: relative;
+    display:block;
 }
 
 .sec03 .slide .thumb {
@@ -1201,6 +1202,8 @@ section {
     }
 
     .sec03 .slide .cate {font-size:4rem;}
+
+    .sec03 .hover_layer {display:none;}
 
     /* Section 04 (세로 리스트화) */
     .sec04 {

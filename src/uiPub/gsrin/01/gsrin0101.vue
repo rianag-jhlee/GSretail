@@ -513,7 +513,7 @@ export default {
                         {
                             pos: "사외이사 / 이사회의장", name: "이성락", 
                             img: require("@/assets/images/dummy/gsrin0102_4.png"),
-                            term: "2025.03.20~2028.03.19", firstDate: "2022.03.25 최초선임", /* 26.06.29 edit 이소라 */
+                            term: "2022.03.25~2028.03.19", firstDate: "2022.03.25 최초선임", /* 26.06.29 edit 이소라 */
                             careers: [
                                 { text: "건국대", class: "" },
                                 { text: "2009년 (주)신한은행 부행장", class: "" },
