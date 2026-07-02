@@ -1,75 +1,119 @@
 <template>
     <div class="gsrbr04" v-if="t">
-        <section class="visual_section top_visual">
-            <div class="visual_img">
-                <img :src="isMobile ? t.Visual.imgMo : t.Visual.img" :alt="t.Visual.alt" />
-            </div>
-            <div class="visual_content">
-                <div class="text_box cont_inner">
-                    <span>{{ t.Visual.subContent_1 }}</span>
-                    <span>{{ t.Visual.subContent_2 }}</span>
-                    <span>{{ t.Visual.subContent_3 }}</span>
+        <!-- 26.07.02 edit 정다희 :sec_brand_visual과 동일 구조·GSAP 스크롤 인터랙션 적용 -->
+        <section ref="sectionRef" class="sec_brand_visual top_visual">
+            <div class="sticky">
+                <div ref="bgWrapRef" class="bg_wrap">
+                    <div class="bg"></div>
+                    <div class="visual_inner">
+                        <div class="txt_area">
+                            <p ref="textParaRef">
+                                <span v-for="(line, vi) in t.brand.visual.lines" :key="vi" v-html="line"></span>
+                            </p>
+                            <div ref="logoWrapRef" class="logo_wrap">
+                                <img :src="t.brand.visual.logoImg" :alt="t.brand.visual.logoAlt" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+        <section class="brand_kv"></section>
 
+        <section ref="aboutSectionRef" class="sec_brand_about">
+            <div class="about_inner">
+                <div v-for="(block, bi) in t.brand.about" :key="bi" class="about_txt">
+                    <template v-if="isMobile && block.length > 1">
+                        <p><span v-html="block.slice(0, -1).join(' ')"></span></p>
+                        <p><span v-html="block[block.length - 1]"></span></p>
+                    </template>
+                    <template v-else>
+                        <p v-for="(line, li) in block" :key="li"><span v-html="line"></span></p>
+                    </template>
+                </div>
+            </div>
+        </section>
+        <!-- //26.07.02 edit 정다희 :sec_brand_visual과 동일 구조·GSAP 스크롤 인터랙션 적용 -->
+
+        <!-- 26.07.02 add 정다희 : sec_brand_str 추가 -->
+        <section class="sec_brand_str">
+            <div class="str_inner">
+                <header class="str_header">
+                    <div>
+                        <h2 v-html="t.str.headerTitle"></h2>
+                        <p class="str_desc" v-html="t.str.desc"></p>
+                    </div>
+                    <div class="str_actions">
+                        <a
+                            :href="t.str.websiteUrl"
+                            class="btn_website"
+                            target="_blank"
+                        >{{ t.str.websiteLabel }}</a>
+                    </div>
+                </header>
+                <div class="str_content">
+                    <img :src="isMobile ? t.str.imgMo : t.str.img" :alt="t.str.alt">
+                </div>
+            </div>
+        </section>
+        <!-- //26.07.02 add 정다희 : sec_brand_str 추가 -->
         <section class="body_wrap">
             <div class="cont_area">
                 <article class="cont_inner">
-                    <h3>{{ t.SubTitle }}</h3>
-                    <div class="intro_text">
-                        <p v-html="t.SubContent_1"></p>
-                        <!-- 26.05.27 Del 이종환 <p>{{ t.SubContent_2 }}</p> -->
+                    <h3 v-html="t.SubTitle"></h3>
+                    <!-- 26.07.02 edit 정다희 : QR 다운로드 영역 이동 -->
+                    <div class="qr_download_area pc">
+                        <div class="qr_info">
+                            <strong class="qr_title">{{ t.Intro.qrTitle }}</strong>
+                            <p class="qr_desc" v-html="t.Intro.qrDesc"></p>
+                        </div>
                     </div>
-                    <ul>
-                        <li class="bi_section">
-                            <h4>{{ t.Bi.title }}
-                                <p v-html="t.Bi.sub_desc"></p>
-                            </h4>
-                            <span><img :src="isMobile ? t.Bi.imgMo : t.Bi.img" :alt="t.Bi.alt"></span>
-                        </li>
-                        <li>
-                            <div class="qr_download_area pc">
-                                <div class="qr_info">
-                                    <strong class="qr_title">{{ t.Intro.qrTitle }}</strong>
-                                    <p class="qr_desc" v-html="t.Intro.qrDesc"></p>
+                    <!-- //26.07.02 edit 정다희 : QR 다운로드 영역 이동 -->
+                     <div class="bi_section">
+                        <img :src="isMobile ? t.Bi.imgMo : t.Bi.img" :alt="t.Bi.alt">
+                     </div>
+                    <!-- 26.07.02 add 정다희 : qr_download_area 위치 이동-->
+                    <div class="qr_download_area mo">
+                        <a href="javascript:void(0);">
+                            <strong>{{ t.Intro.qrTitle }}</strong>
+                            <span>{{ t.Intro.qrDesc_mo }}</span>
+                        </a>
+                    </div>
+                    <!-- //26.07.02 add 정다희 : qr_download_area 위치 이동-->
+
+                     <!-- 26.07.02 del 정다희 : ul 삭제 -->
+                     
+                     <!-- 26.07.02 add 정다희 : benefit_list 위치 이동-->
+                     <div v-for="(row, rIdx) in t.BenefitRows" :key="'row-' + rIdx">
+                        <ul class="benefit_list">
+                            <li v-for="(item, iIdx) in row" :key="'item-' + iIdx">
+                                <div class="benefit_info">
+                                    <p class="tit_area">
+                                        <strong>{{ item.title }}</strong>
+                                        <a v-if="item.popId" class="btn_link ico_link" @click="openModal" :data-popid="item.popId" :data-type="item.popType" :data-cont="item.popCont"></a>
+                                    </p>
+                                    <span class="desc">{{ item.desc }}</span>
                                 </div>
-                            </div>
-                            <div class="qr_download_area mt40 mo">
-                                <a href="javascript:void(0);">
-                                    <strong>{{ t.Intro.qrTitle }}</strong>
-                                    <span>{{ t.Intro.qrDesc_mo }}</span>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                     </div>
+                    <!-- //26.07.02 add 정다희 : benefit_list 위치 이동-->
                 </article>
             </div>
-
-            <div class="cont_inner benefit_section">
+            <!-- 26.07.02 add 정다희 : cont_inner benefit_section 삭제 -->
+            <!-- <div class="cont_inner benefit_section">
                 <h3 v-html="t.BenefitTitle"></h3>  
                 <div v-for="(row, rIdx) in t.BenefitRows" :key="'row-' + rIdx">
-                    <ul class="benefit_list">
-                        <li v-for="(item, iIdx) in row" :key="'item-' + iIdx">
-                            <div class="benefit_info">
-                                <p class="tit_area">
-                                    <strong>{{ item.title }}</strong>
-                                    <a v-if="item.popId" class="btn_link ico_link" @click="openModal" :data-popid="item.popId" :data-type="item.popType" :data-cont="item.popCont"></a>
-                                </p>
-                                <span class="desc">{{ item.desc }}</span>
-                            </div>
-                        </li>
-                    </ul>
+
                 </div>
 
-                <!-- 26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
                 <div class="bottom_btns">
                     <button class="btn_back" @click="handleBack">{{ t.ListBack }}</button>
                 </div>
-                <!-- //26.05.11 Edit 이종환 : 하단 목록 버튼 통일 -->
-            </div>
-
+            </div> -->
+            <!-- //26.07.02 add 정다희 : cont_inner benefit_section 삭제 -->
         </section>
+
 
 
         <div id="gsrbr0401" class="modal_wrap">
@@ -103,6 +147,14 @@
 
 <script>
 import modal from "@/assets/js/modal";
+import gsap from "gsap"; /**26.07.02 add 정다희 : 플러그인 추가 */ 
+import { ScrollTrigger } from "gsap/ScrollTrigger"; /**26.07.02 add 정다희 : 플러그인 추가 */ 
+import imgDelivery from "@/assets/images/dummy/gsrbr04_delivery.png"; /**26.07.02 add 정다희 : 배달 이미지 추가*/
+import imgDeliveryMo from "@/assets/images/dummy/mo/gsrbr04_delivery_mo.png"; /**26.07.02 add 정다희 : 배달 모바일 이미지 추가*/
+
+gsap.registerPlugin(ScrollTrigger); /**26.07.02 add 정다희 : 플러그인 추가 */ 
+
+let syncVisualClip = null; /**26.07.02 add 정다희 : 변수 추가 */ 
 
 export default {
     name: "gsrbr04",
@@ -112,19 +164,34 @@ export default {
     data() {
         return {
             isMobile: false,
+            gsapCtx: null, /**26.07.02 add 정다희 : 변수 추가 */
+            visualResizeTimer: null, /**26.07.02 add 정다희 : 변수 추가 */
             langData: {
                 ko: {
-                    Visual: {
-                        img: require("@/assets/images/dummy/gsrbr04.png"),
-                        imgMo: require("@/assets/images/dummy/gsrbr04_mo.png"),
-                        alt: "편의점·수퍼마켓을 하나로 GS리테일 O4O 통합 앱 우리동네GS", /*26.06.22 add 정다희 : 오타수정*/ 
-                        subContent_1: "편의점·수퍼마켓을 하나로",/*26.06.22 add 정다희 : 오타수정*/ 
-                        subContent_2: "GS리테일 O4O 통합 앱",
-                        subContent_3: "우리동네GS",
+                    /* 26.07.02 edit 정다희 : brand.visual·brand.about  */
+                    brand: {
+                        visual: {
+                            lines: [
+                                "편의점·수퍼마켓을 하나로", /*26.06.22 add 정다희 : 오타수정*/
+                                "GS리테일 O4O 통합 앱 우리동네GS",  // 26.07.02 edit 정다희 : lines 텍스트 수정
+                            ],
+                            logoImg: require("@/assets/images/dummy/gsrbr04_logo.png"),
+                            logoAlt: "편의점·수퍼마켓을 하나로 GS리테일 O4O 통합 앱 우리동네GS", /*26.06.22 add 정다희 : 오타수정*/
+                        },
+                        about: [
+                            [
+                                "편의점도, 수퍼마켓도, 이제 하나의 ‘우리동네GS’ 앱으로.",
+                                "전국 GS25 · GS THE FRESH의 재고확인, 배달, 픽업부터",
+                                "증정품 보관 '나만의 냉장고’, 주류 스마트오더 '와인25플러스’까지. ",
+                                "가까운 매장이 더 가깝게, 매장 안팎의 경계 없이,<br class=\"m_br\"/>더 가까운 일상을 제안합니다."
+                            ],
+                        ],
+                        
                     },
-                    SubTitle: "브랜드 소개",
-                    SubContent_1: "편의점도, 수퍼마켓도, 이제 하나의 ‘우리동네GS’ 앱으로.<br/> 전국 GS25 · GS THE FRESH의 재고확인, 배달, 픽업부터<br/> 증정품 보관 '나만의 냉장고’, 주류 스마트오더 '와인25플러스’까지.<br/><br class='m_br'/> 가까운 매장이 더 가깝게, 매장 안팎의 경계 없이, 더 가까운 일상을 제안합니다.",
-                    // SubContent_2: "증정품 보관 '나만의 냉장고'·주류 스마트오더 '와인25플러스'로, 편의점의 경계를 넘는 생활을 제안합니다.",
+                    /* //26.07.02 edit 정다희 : brand.visual·brand.about  */
+                    
+                    /* //26.07.02 edit 정다희 : brand.visual·brand.about */
+                    SubTitle: "‘우리동네 GS’ 앱에서<br/>일상의 모든 것을 해결하세요.",
                     Bi: {
                         title: "우리동네GS App",
                         sub_desc: `<span>가까운 매장 재고 확인부터 배달·픽업은 물론 증정품 보관과 택배 예약까지 한 번에!</span><span>우리동네GS 앱 하나로 필요한 모든 것을 해결하세요.</span>`, /*26.06.22 del 정다희 : 2번째 span 삭제*/ 
@@ -151,20 +218,39 @@ export default {
                             { title: "행사/이벤트", desc: "현재 진행 중인 행사와 이벤트를 확인하고 참여 내역도 조회할 수 있습니다.", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" } /*26.06.23 add 정다희 : 내용 수정*/ 
                         ]
                     ],
-                    ListBack: "목록으로 돌아가기"
+                    ListBack: "목록으로 돌아가기",
+                    /* 26.07.02 add 정다희 : sec_brand_str 추가 */
+                    str: {
+                        headerTitle: "언제 어디서나 산책하며<br />돈 버는 즐거움<br class=\"m_br\">우리동네 딜리버리",
+                        desc: "우리동네 GS25, GS THE FRESH의<br class=\"m_br\"/>상품과 식품, 맛집 배달까지<br />별도의 장비 없이 성인이라면 누구나 손쉽게<br class=\"m_br\"/>배달 가능한 서비스입니다.",
+                        websiteLabel: "홈페이지",
+                        websiteUrl: "#",
+                        img: imgDelivery,
+                        imgMo: imgDeliveryMo,
+                        alt: "우리동네 딜리버리",
+                    },
+                    /* //26.07.02 add 정다희 : sec_brand_str 추가 */
                 },
                 en: {
-                    Visual: {
-                        img: require("@/assets/images/dummy/gsrbr04.png"),
-                        imgMo: require("@/assets/images/dummy/gsrbr04_mo.png"),
-                        alt: "Convenience stores and supermarkets in one—Our Neighborhood GS, GS Retail's O4O integrated app"/* 260604 번역 */,
-                        subContent_1: "Convenience stores and supermarkets in one"/* 260604 번역 */,
-                        subContent_2: "GS Retail Integrated O4O App"/* 260604 번역 */,
-                        subContent_3: "Our Neighborhood GS",
+                    brand: {
+                        visual: {
+                            lines: [
+                                "Convenience stores and supermarkets in one"/* 260604 번역 */,
+                                "GS Retail Integrated O4O App"/* 260604 번역 */,
+                            ],
+                            logoImg: require("@/assets/images/dummy/gsrbr04_logo.png"),
+                            logoAlt: "Convenience stores and supermarkets in one—Our Neighborhood GS, GS Retail's O4O integrated app"/* 260604 번역 */,
+                        },
+                        about: [
+                            [
+                                "Convenience stores and supermarkets—now all in one 'Our Neighborhood GS' app."/* 260604 번역 */,
+                                "From stock checks, delivery, and pickup at GS25 and GS THE FRESH nationwide"/* 260604 번역 */,
+                                "From 'My Fridge' for storing free gifts to 'Wine25 Plus' for smart alcohol ordering."/* 260604 번역 */,
+                                "Bringing nearby stores even closer, with no boundary between inside and outside the store,<br class=\"m_br\"/>we propose a closer everyday life."/* 260604 번역 */,
+                            ],
+                        ],
                     },
-                    SubTitle: "About the Brand",
-                    SubContent_1: "Convenience stores and supermarkets—now all in one 'Our Neighborhood GS' app.<br/> From stock checks, delivery, and pickup at GS25 and GS THE FRESH nationwide<br/> From 'My Fridge' for storing free gifts to 'Wine25 Plus' for smart alcohol ordering.<br/><br class='m_br'/> Bringing nearby stores even closer, with no boundary between inside and outside the store, we propose a closer everyday life."/* 260604 번역 */,
-                    // SubContent_2: "증정품 보관 '나만의 냉장고'·주류 스마트오더 '와인25플러스'로, 편의점의 경계를 넘는 생활을 제안합니다.",
+                    SubTitle: "Handle everything in your everyday life, all in the 'Our Neighborhood GS' app.", /** 26.07.02 edit 정다희 : 제목 수정 */
                     Bi: {
                         title: "Our Neighborhood GS App"/* 260604 번역 */,
                         sub_desc: `From checking nearby store inventory to delivery and pick-up, storing complimentary items, and booking delivery services — all in one place! Handle everything you need with the Our Neighborhood GS app.`,
@@ -191,7 +277,12 @@ export default {
                             { title: "Events & Promotions", desc: "", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" } /*26.06.22 add 정다희 : 내용 수정으로 영문 번역 작업 요망*/ 
                         ]
                     ],
-                    ListBack: "Back to Brand List"
+                    ListBack: "Back to Brand List",
+                    str: {
+                        headerTitle: "GS Retail's integrated O4O app 'Our Neighborhood GS'<br />connecting nearby stores to everyday life.",
+                        websiteLabel: "Homepage",
+                        websiteUrl: "https://www.gsretail.com",
+                    },
                 }
             }
         };
@@ -201,13 +292,145 @@ export default {
     },
     mounted() {
         this.checkMobile();
-        window.addEventListener('resize', this.checkMobile);
+        window.addEventListener("resize", this.checkMobile);
+        /* 26.07.02 add 정다희 :  GSAP 비주얼 인터랙션 초기화 */
+        window.addEventListener("resize", this._onVisualResize);
+        this.$nextTick(() => {
+            setTimeout(() => {
+                this.initVisualInteraction();
+            }, 100);
+        });
     },
     beforeUnmount() {
-        window.removeEventListener('resize', this.checkMobile);
+        window.removeEventListener("resize", this.checkMobile);
+        /* 26.07.02 add 정다희 : GSAP·ScrollTrigger 정리 */
+        window.removeEventListener("resize", this._onVisualResize);
+        syncVisualClip = null;
+        if (this.gsapCtx) {
+            this.gsapCtx.revert();
+            this.gsapCtx = null;
+        }
     },
     methods: {
         checkMobile() { this.isMobile = window.innerWidth < 768; },
+        /* 26.07.02 add 정다희 : 리사이즈 시 clip-path·ScrollTrigger 동기화  */
+        _onVisualResize() {
+            this.checkMobile();
+            const syncClip = () => {
+                if (typeof syncVisualClip === "function") syncVisualClip();
+            };
+            syncClip();
+            requestAnimationFrame(syncClip);
+            clearTimeout(this.visualResizeTimer);
+            this.visualResizeTimer = setTimeout(() => {
+                ScrollTrigger.refresh();
+                syncClip();
+            }, 150);
+        },
+        /* 26.07.02 add 정다희 : 스크롤 clip + 텍스트·로고 페이드인  */
+        initVisualInteraction() {
+            const section = this.$refs.sectionRef;
+            const bgWrap = this.$refs.bgWrapRef;
+            const textPara = this.$refs.textParaRef;
+            const logoWrap = this.$refs.logoWrapRef;
+            const aboutSection = this.$refs.aboutSectionRef;
+
+            if (!section || !bgWrap || !textPara || !logoWrap || !aboutSection) return;
+
+            this.gsapCtx = gsap.context(() => {
+                const spans = textPara.querySelectorAll("span");
+                const PHASE1_PX = 400;
+                const DESIGN_W = 1920;
+                const DESIGN_H = 1080;
+                const INSET_X = 250;
+                const INSET_Y = 140;
+                const TABLET_BP = 1024;
+                const TABLET_CLIP_V = 35;
+                const TABLET_CLIP_H = 20;
+                const TABLET_CLIP_RADIUS = 8;
+
+                const applyBgClip = (p) => {
+                    if (window.innerWidth <= TABLET_BP) {
+                        bgWrap.style.setProperty("--bgClip", `${p * TABLET_CLIP_V}px ${p * TABLET_CLIP_H}px round ${p * TABLET_CLIP_RADIUS}px`);
+                        bgWrap.style.clipPath = "";
+                        bgWrap.style.webkitClipPath = "";
+                    } else {
+                        bgWrap.style.removeProperty("--bgClip");
+                        const bw = bgWrap.offsetWidth;
+                        const bh = bgWrap.offsetHeight;
+                        const hInset = p * (bw * INSET_X) / DESIGN_W;
+                        const vInset = p * (bh * INSET_Y) / DESIGN_H;
+                        const clip = `inset(${vInset}px ${hInset}px round ${p * 20}px)`;
+                        bgWrap.style.clipPath = clip;
+                        bgWrap.style.webkitClipPath = clip;
+                    }
+                    bgWrap.classList.toggle("active", p >= 1);
+                };
+
+                const visualSt = ScrollTrigger.create({
+                    trigger: section,
+                    start: "top top",
+                    end: `+=${PHASE1_PX}`,
+                    scrub: 1.5,
+                    onUpdate(self) {
+                        applyBgClip(self.progress);
+                    },
+                });
+                syncVisualClip = () => {
+                    visualSt.update();
+                    applyBgClip(visualSt.progress);
+                };
+                applyBgClip(visualSt.progress);
+
+                gsap.set([...spans, logoWrap], { opacity: 0, y: 40 });
+
+                const textTl = gsap.timeline({ paused: true });
+                textTl
+                    .to(spans, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        stagger: 0.2,
+                        ease: "power2.out",
+                    })
+                    .to(logoWrap, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power2.out",
+                    }, "-=0.3");
+
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: `top+=${PHASE1_PX} top`,
+                    once: false,
+                    onEnter: () => textTl.play(),
+                    onLeaveBack: () => textTl.reverse(),
+                });
+
+                /* 26.07.02 add 정다희 : about 섹션 스크롤 페이드인  */
+                const aboutSpans = aboutSection.querySelectorAll("span");
+                gsap.set(aboutSpans, { y: 200, opacity: 0, willChange: "transform, opacity" });
+                ScrollTrigger.create({
+                    trigger: aboutSection,
+                    start: "top 75%",
+                    once: true,
+                    onEnter: () => {
+                        gsap.to(aboutSpans, {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            stagger: 0.1,
+                            ease: "power3.out",
+                            onComplete() {
+                                gsap.set(aboutSpans, { willChange: "auto" });
+                            },
+                        });
+                    },
+                });
+            }, this.$el);
+        },
+        /* //26.07.02 add 정다희 : 스크롤 clip + 텍스트·로고 페이드인 */
         handleBack() { this.$router.back(); },
         openModal(event) {
             const el = event.currentTarget;
@@ -224,41 +447,73 @@ export default {
 :deep(.p_br) { display: block; }
 :deep(.m_br) { display: none; }
 
-.gsrbr04 { position: relative; width: 100%; }
+.gsrbr04 { position: relative; width: 100%; max-width: 100%; overflow-x: clip; }
 .benefit_section { padding-top: 200px; }
 img { display: block; width: 100%; }
 h3 { margin-bottom:16px; color: #161616; font-size: 48px; font-weight: 700; }
 h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 
-/* Visual Section */
-.visual_section { position: relative; width: 100%; overflow: hidden; }
-.visual_content { position: absolute; top: 50%; left: 0; z-index: 2; width: 100%; transform: translateY(-50%); }
-.text_box span { display: block; color: #fff; font-size: 72px; font-weight: 700; line-height: 1.2; }
+/* 26.07.01 add 정다희 : sec_brand_visual*/
+.sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
+.sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden; }
+.bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px); }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url("@/assets/images/dummy/gsrbr04.png"); background-size: cover; background-position: center bottom; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out; }
+.bg_wrap.active > .bg { transform: scale(0.8); }
+.bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s; }
+.bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1; }
+.bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible; }
+.bg_wrap > .visual_inner {width:100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 20px)); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
+.bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center; }
+.txt_area > p { width: 100%; overflow: hidden; }
+.txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block; }
+.txt_area > .logo_wrap { width: 100%; max-width: 264px; margin: 48px auto 0; overflow: hidden; }
+.txt_area > .logo_wrap > img { width:100%; height:auto; display: block; }
+@media (max-width: 1024px) {
+    .sec_brand_visual { height: 200vh; }
+    .sec_brand_visual .bg_wrap { --bgClip: 0px 0px round 0px; clip-path: inset(var(--bgClip)); -webkit-clip-path: inset(var(--bgClip)); }
+    .bg_wrap > .bg { transform: none; transition: none; }
+    .bg_wrap.active > .bg { transform: none; }
+}
+/* //26.07.02 add 정다희 : sec_brand_visual */
 
+/* 26.07.02 add 정다희 : sec_brand_about  */
+.sec_brand_about { padding: clamp(140px, 10.42vw, 200px) 20px; background-color: #f8f8f8; }
+.sec_brand_about > .about_inner { width: 100%; max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+.sec_brand_about > .about_inner > .about_txt > p { overflow: hidden; }
+.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block; }
+/* //26.07.02 add 정다희 : sec_brand_about */
+
+/* 26.07.02 add 정다희 : sec_brand_str 스타일 */
+.sec_brand_str .str_inner {  width: 1460px; max-width: 100%; margin: 0 auto; padding:200px 20px; }
+.sec_brand_str .str_header {flex-wrap:wrap; margin:0;}
+.str_header {margin-bottom: 64px; display: flex; justify-content: space-between; align-items: flex-end }
+.str_header h2 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;text-align: left; }
+.str_header p {margin-top: 16px;font-weight: 600;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
+.str_header .str_actions { margin-left:auto; display: flex; align-items: center; gap: 24px }
+.str_content{margin-top: 40px; padding:56px 64px; background-color:#F8F8F8;}
+.str_content > img{display: block; width: 100%;}
 /* Body Content Area */
 /* .body_wrap {padding-bottom:200px;} */
-.body_wrap .cont_area { padding: 200px 0; background: #F8F8F8; }
-.intro_text p { color: #161616; font-size: 24px; font-weight:600; line-height: 1.35; }
-.body_wrap .cont_area .cont_inner .intro_text + ul { margin-top: 65px; margin-bottom: 40px; padding: 50px; background: #fff; border-radius: 12px; }
+/* .body_wrap .cont_area .cont_inner > ul { margin-top: 65px; margin-bottom: 40px; border-radius: 12px; } */
 
-.bi_section { position: relative; width: 100%; margin-top: 0 !important; }
+.bi_section { margin-top:40px; position: relative; width: 100%; }
 .bi_section span { display: block; width: 100%; }
 .bi_section span img { display: block; width: 100%; object-fit: cover; }
 .bi_section h4 p {width: 50%; margin-top:16px; color: #67676F; font-size: 20px; font-weight: 400; display: flex; flex-direction: column; }
 
-.qr_download_area { display: flex; align-items: center; margin-top: 40px; }
+.qr_download_area { margin-top: 64px;  display: flex; align-items: center;}
 .pc.qr_download_area::before { display: inline-block; width: 90px; height: 90px; background: url('@/assets/images/dummy/gsrbr06_qr.png') no-repeat center / cover; content: ''; }
 .pc.qr_download_area .qr_info { display: flex; flex-direction: column; padding-left: 20px; }
 .pc.qr_download_area .qr_info strong { margin-bottom: 8px; color: #161616; font-size: 20px; font-weight: 700; }
 .pc.qr_download_area .qr_info p { color: #67676F; font-size: 14px; }
 
 .qr_download_area.mo a { display: flex; flex-direction: column; gap: 4px; padding-left: 60px; position: relative; text-decoration: none; }
-.qr_download_area.mo a::before { display: inline-block; position: absolute; top: -5px; left: 0; width: 48px; height: 48px; background: url('@/assets/images/dummy/gsrbr06_app_icon.png') no-repeat center / cover; content: ''; }
+.qr_download_area.mo a::before { display: inline-block; position: absolute; left: 0; width: 48px; height: 48px; background: url('@/assets/images/dummy/gsrbr06_app_icon.png') no-repeat center / cover; content: ''; }
 .mo.qr_download_area a strong { display: flex; align-items: center; gap: 4px; color: #161616; font-size: 16px; font-weight: 700; }
 .mo.qr_download_area a strong::after {content: ""; width: 24px; height: 24px; background-image: url(http://localhost:8080/img/icon_set_24.5b5c044c.png); background-repeat: no-repeat; background-size: auto 95px; background-position: -832px -15px; flex-shrink: 0; display: block;}
-
+.mo.qr_download_area a span{color: #67676F;}
 /* Benefit Section */
-.benefit_list {margin-top:64px; display: flex; flex-wrap: wrap; gap:40px;}
+.benefit_list {margin-top:64px; display: flex; flex-wrap: wrap; gap:80px 40px;}
 .benefit_list li { position: relative; width: calc((100% - (40px * 2)) / 3); padding-top: 104px; }
 .benefit_list li::before { position: absolute; top: 0; left: 0; width: 80px; height: 80px; background-color: #eee; border-radius: 50%; content: ''; }
 .benefit_list li::after {width:40px; height:40px; background-repeat:no-repeat; background-position:center; background-size:cover; content:''; position:absolute; top:20px; left:20px; display:block;}
@@ -315,17 +570,37 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     :deep(.m_br) { display: block; }
 
     h3 {font-size:24px;}
-    .intro_text { margin-bottom: 40px; }
-    .intro_text p { font-size: 16px; font-weight: 400; line-height: 1.5; }
-    .intro_text p:first-of-type { margin-bottom:0px; }
-    .text_box span { font-size: 32px; text-align:center; }
-    .body_wrap .cont_area { padding: 60px 0; }
+    /* 26.07.02 add 정다희 : 배경 */
+    .sticky { height: 100vh; top: 0; }
+    .bg_wrap > .bg { background-image: url("@/assets/images/dummy/gsrbr04_mo.png"); background-position: center; }
+    .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto;  }
+    .txt_area > p { width:100%; margin-bottom: 0; }
+    .txt_area > p > span, .txt_area > .logo_wrap > .logo_txt { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; }
+    .txt_area > p > span:first-child::after { content: ","; }
+    .txt_area > .logo_wrap{max-width:116px; margin-top:10px;}
+    /* //26.07.02 add 정다희 : 배경 */
+
+    /* 26.07.02 add 정다희 : sec_about  */
+    .sec_brand_about { padding: clamp(119px, 37.33vw, 140px) 20px; }
+    .sec_brand_about > .about_inner { gap: 40px; }
+    .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; display: block; word-break: keep-all; }
+    .sec_brand_about > .about_inner > .about_txt > p:last-child { margin-top: 40px; }
+   
+   /* 26.07.02 add 정다희 : sec_brand_str  */
+    .sec_brand_str .str_inner{width:100%; padding: 140px 20px; }
+    .sec_brand_str .str_header h2{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
+    .str_header p{margin-top:8px; font-weight: 700;font-size: 1.6rem;line-height: 1.24;}
+    .str_header .str_actions { margin-left:0; margin-top:16px; gap:14px; flex: none; justify-content: flex-start }
+    .str_content{padding:0;}
+
     .benefit_section { padding-top: 80px; }
-    .benefit_list { margin-top:24px; gap: 40px 20px; }
+    .benefit_list { margin-top:40px; gap: 40px 20px; }
     .benefit_list li { width: calc((100% - 20px) / 2); }
     .bottom_btns + .btn_big.border { display: flex; justify-content: center; margin-top: 100px; margin-bottom: 80px; }
     .bi_section h4 {flex-direction:column;}
-    .body_wrap .cont_area .cont_inner .intro_text + ul {margin-top:40px; margin-bottom:0; padding:32px;}
+    /* .body_wrap .cont_area .cont_inner > ul { margin-top: 40px; margin-bottom: 0; padding: 32px; } */
+    .bi_section{margin-top:24px; }
     .bi_section h4 p {width:100%; margin-top:8px; font-size:16px; line-height:1.5; flex-direction:column;}
+    .qr_download_area{margin-top:24px; }
 }
 </style>
