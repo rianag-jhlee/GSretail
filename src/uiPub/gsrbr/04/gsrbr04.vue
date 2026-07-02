@@ -457,7 +457,7 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 .sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden; }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px); }
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url("@/assets/images/dummy/gsrbr04.png"); background-size: cover; background-position: center bottom; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out; }
+.bg_wrap > .bg { width: 100%; height: 100%; background-image: url("@/assets/images/dummy/gsrbr04.png"); background-size: cover; background-position: center top; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out; }
 .bg_wrap.active > .bg { transform: scale(0.8); }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s; }
 .bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1; }
@@ -572,7 +572,7 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     h3 {font-size:24px;}
     /* 26.07.02 add 정다희 : 배경 */
     .sticky { height: 100vh; top: 0; }
-    .bg_wrap > .bg { background-image: url("@/assets/images/dummy/gsrbr04_mo.png"); background-position: center; }
+    .bg_wrap > .bg { background-position: center; }
     .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto;  }
     .txt_area > p { width:100%; margin-bottom: 0; }
     .txt_area > p > span, .txt_area > .logo_wrap > .logo_txt { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; }
