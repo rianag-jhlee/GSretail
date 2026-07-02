@@ -69,9 +69,9 @@
                         </div>
                     </div>
                     <!-- //26.07.02 edit 정다희 : QR 다운로드 영역 이동 -->
-                     <div class="bi_section">
+                    <div class="bi_section">
                         <img :src="isMobile ? t.Bi.imgMo : t.Bi.img" :alt="t.Bi.alt">
-                     </div>
+                    </div>
                     <!-- 26.07.02 add 정다희 : qr_download_area 위치 이동-->
                     <div class="qr_download_area mo">
                         <a href="javascript:void(0);">
@@ -81,10 +81,10 @@
                     </div>
                     <!-- //26.07.02 add 정다희 : qr_download_area 위치 이동-->
 
-                     <!-- 26.07.02 del 정다희 : ul 삭제 -->
-                     
-                     <!-- 26.07.02 add 정다희 : benefit_list 위치 이동-->
-                     <div v-for="(row, rIdx) in t.BenefitRows" :key="'row-' + rIdx">
+                    <!-- 26.07.02 del 정다희 : ul 삭제 -->
+                    
+                    <!-- 26.07.02 add 정다희 : benefit_list 위치 이동-->
+                    <div v-for="(row, rIdx) in t.BenefitRows" :key="'row-' + rIdx">
                         <ul class="benefit_list">
                             <li v-for="(item, iIdx) in row" :key="'item-' + iIdx">
                                 <div class="benefit_info">
@@ -96,7 +96,7 @@
                                 </div>
                             </li>
                         </ul>
-                     </div>
+                    </div>
                     <!-- //26.07.02 add 정다희 : benefit_list 위치 이동-->
                 </article>
             </div>
@@ -272,16 +272,22 @@ export default {
                             { title: "Pre-Order", desc: "The Our Neighborhood GS app offers a pre-order service that lets you pick up items at the store and time of your choice.",  popId: "gsrbr0406", popType: "lg", popCont: "gsrbr0406"}, //26.06.08 Edit 이종환 : 사전예약 팝업 (gsrbr0405) 추가
                             { title: "Wine25Plus", desc: "Order from over 5,000 wine varieties and a wide selection of alcoholic beverages, and pick them up at convenience stores and supermarkets nationwide.", popId: "gsrbr0402", popType: "lg", popCont: "gsrbr0402" },
                             { title: "Easy Payment and Easy Login", desc: "Easy payment and login are available through a variety of methods." },
-                            { title: "Membership Benefits", desc: "" }, /*26.06.22 add 정다희 : 내용 수정으로 영문 번역 작업 요망*/ 
-                            { title: "Delivery Service", desc: "" }, /*26.06.22 add 정다희 : 내용 수정으로 영문 번역 작업 요망*/ 
-                            { title: "Events & Promotions", desc: "", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" } /*26.06.22 add 정다희 : 내용 수정으로 영문 번역 작업 요망*/ 
+                            { title: "Membership Benefits", desc: "GS Retail's integrated membership 'GS ALL'. Check your membership tier and brand benefit coupons at a glance in the Our Neighborhood GS app." }, /*26.07.02 add 정다희 : 영문 누락 번역 추가*/ 
+                            { title: "Delivery Service", desc: "Request domestic parcel and half-price delivery services at nearby GS25 stores. Reserve in the app first, then complete drop-off quickly at the store." }, /*26.07.02 add 정다희 : 영문 누락 번역 추가*/ 
+                            { title: "Events & Promotions", desc: "You can check ongoing promotions and events and review your participation history.", popId: "gsrbr0404", popType: "lg", popCont: "gsrbr0404" } /*26.07.02 add 정다희 : 영문 누락 번역 추가*/ 
                         ]
                     ],
                     ListBack: "Back to Brand List",
                     str: {
                         headerTitle: "GS Retail's integrated O4O app 'Our Neighborhood GS'<br />connecting nearby stores to everyday life.",
+                        /* 26.07.02 add 정다희 : 영문 sec_brand_str 설명 문구 추가 */
+                        desc: "From products and food at GS25 and GS THE FRESH<br class=\"m_br\"/>to local restaurant delivery,<br />any adult can easily deliver without special equipment<br class=\"m_br\"/>through Our Neighborhood Delivery service.",
                         websiteLabel: "Homepage",
                         websiteUrl: "https://www.gsretail.com",
+                        /* 26.07.02 add 정다희 : 영문 sec_brand_str 이미지/대체텍스트 추가 */
+                        img: imgDelivery,
+                        imgMo: imgDeliveryMo,
+                        alt: "Our Neighborhood Delivery",
                     },
                 }
             }
