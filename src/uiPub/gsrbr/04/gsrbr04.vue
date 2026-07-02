@@ -173,7 +173,7 @@ export default {
                         visual: {
                             lines: [
                                 "편의점·수퍼마켓을 하나로", /*26.06.22 add 정다희 : 오타수정*/
-                                "GS리테일 O4O 통합 앱 우리동네GS",  // 26.07.02 edit 정다희 : lines 텍스트 수정
+                                "GS리테일 O4O 통합 앱<br class=\"m_br\"/>우리동네GS",  // 26.07.02 edit 정다희 : lines 텍스트 수정
                             ],
                             logoImg: require("@/assets/images/dummy/gsrbr04_logo.png"),
                             logoAlt: "편의점·수퍼마켓을 하나로 GS리테일 O4O 통합 앱 우리동네GS", /*26.06.22 add 정다희 : 오타수정*/
@@ -468,7 +468,7 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s; }
 .bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1; }
 .bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible; }
-.bg_wrap > .visual_inner {width:100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 20px)); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
+.bg_wrap > .visual_inner {width:100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 10px)); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
 .bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center; }
 .txt_area > p { width: 100%; overflow: hidden; }
 .txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block; }
@@ -579,7 +579,7 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     /* 26.07.02 add 정다희 : 배경 */
     .sticky { height: 100vh; top: 0; }
     .bg_wrap > .bg { background-position: center; }
-    .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto;  }
+    .bg_wrap > .visual_inner {transform: translate(-50%, calc(-50% - 10px));}
     .txt_area > p { width:100%; margin-bottom: 0; }
     .txt_area > p > span, .txt_area > .logo_wrap > .logo_txt { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; }
     .txt_area > p > span:first-child::after { content: ","; }

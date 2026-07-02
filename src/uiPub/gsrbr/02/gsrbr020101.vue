@@ -1071,7 +1071,7 @@ export default {
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s; }
 .bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
 .bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible; }
-.bg_wrap > .visual_inner { width: 100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
+.bg_wrap > .visual_inner {width:100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
 .bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center; }
 .logo_wrap { width:100%; max-width:693px; margin: 0 auto; }
 .logo_wrap > img { width: 100%; margin: 0 auto; display: block }
@@ -1276,7 +1276,7 @@ export default {
     .txt_area > p > span { font-size: 3.2rem; }
     .sec_brand_about { padding: clamp(119px, 37.33vw, 140px) 20px; }
     .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0%; display: block }
-
+    .bg_wrap > .visual_inner {transform: translate(-50%, calc(-50% - 10px));}
     .visual_img_small {height:auto; padding-top:64%;}
     .production_bg { background-image: url('@/assets/images/sub/gsrbr02/gsrbr020101_6_mo.png'); background-size: cover; }
 }

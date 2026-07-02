@@ -3138,7 +3138,7 @@ const langData = {
             visual: {
                 lines: [
                     "일상생활의 중심",
-                    '하루의 시작', /*26.06.16 텍스트 수정 */ 
+                    '하루의 시작 GS25', /*26.06.16 텍스트 수정 */  /**26.07.02 edit 정다희 : 텍스트 GS25 추가 */
                 ],
                 logoAlt: "GS25",
             },
@@ -5017,7 +5017,7 @@ function goBack() {
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
 .bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
 .bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible }
-.bg_wrap > .visual_inner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center }
+.bg_wrap > .visual_inner {width:100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 10px)); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
 .bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center }
 
 @media (max-width: 1024px) {
@@ -5370,6 +5370,7 @@ button { background-color: #fff }
 
 @media (max-width: 768px) {
   .chicken_panel .img_grid_swiper { margin-top: 60px }
+  .bg_wrap > .visual_inner { transform: translate(-50%, calc(-50% - 10px));  }
 
   .sec_header { padding-bottom: 0; }
   .sec_header > p,
@@ -5383,7 +5384,6 @@ button { background-color: #fff }
   .brand_panel_bg > img {height: auto; min-height:245px;}
   .brand_panel_title { padding: 0 0 64px; }
   .brand_panel_title > h2 { margin-bottom: 12px; font-family: Pretendard; font-size: 2.8rem; line-height: 1.35; letter-spacing: -0.01em; display:block;}
-
   .brand_panel_title > h2 :deep(a) {margin-top:16px; margin-left:0; font-size:1.4rem; font-weight:500; line-height:140%;}
   .brand_panel_title > h2 :deep(a:before) {width:20px; height:20px; background-image:url('@/assets/images/common/icon_set_20.png'); background-position:-454px -115px;}
 
@@ -5395,7 +5395,6 @@ button { background-color: #fff }
   /* .sec_brand_visual { height: 100vh } */
   .sticky { height: 100vh; top: 0 }
 
-  .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
   .txt_area > p { margin-bottom: 0 }
   .txt_area > p > span, .txt_area > p > span em { color:#fff; font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center }
   .txt_area > .logo_wrap { display: none }

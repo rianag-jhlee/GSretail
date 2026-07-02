@@ -757,7 +757,7 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
 .bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
 .bg_wrap.active > .bg::before, .bg_wrap.active > .bg::after { opacity: 1; visibility: visible }
-.bg_wrap > .visual_inner { width:100%;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 20px; display: flex; align-items: center; justify-content: center }
+.bg_wrap > .visual_inner {width:100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 10px)); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
 .bg_wrap .visual_inner > .txt_area { position: relative; z-index: 3; text-align: center }
 .logo_wrap{max-width: 382px; margin:0 auto;}
 .txt_area > p { width: 100%; margin-bottom: 48px; overflow: hidden }
@@ -833,7 +833,7 @@ section.sec_brand_biz.str_inner .str_header { margin-bottom: 24px; display: bloc
     /* .sec_brand_visual { height: 100vh } */
     .sticky { height: 100vh; top: 0 }
     .bg_wrap > .bg {  background-position: 10% 17px }
-    .bg_wrap > .visual_inner { width: calc(100% - 40px); height: auto; top: 358px; bottom: 318px; transform: translateX(-50%) }
+    .bg_wrap > .visual_inner {transform: translate(-50%, calc(-50% - 10px));  }
     .txt_area > p { margin-bottom: 0 }
     .txt_area > p > span { font-size: 3.2rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; }
     .txt_area > .logo_wrap { max-width: 219px; margin:10px auto 0; }
