@@ -11,7 +11,7 @@
                             </p> -->
                             <!-- 26.06.02 Add 이종환 : 영상 추가 -->
                             <div class="video_wrap">
-                                <video autoplay muted playsinline loop> <!-- 26.06. 16 Add 정다희 : 영상 루핑 -->
+                                <video autoplay muted playsinline loop ref="heroVideo"> <!-- 26.06. 16 Add 정다희 : 영상 루핑 / 26.07.02 Edit 이종환 : ref 추가 -->
                                     <source :src="item.vod" type="video/mp4" />
                                 </video>
                             </div>
@@ -460,6 +460,10 @@ export default {
 
             /* 26.06.17 Add 이종환 : 사업소개 hover 인덱스 */
             hoverIndex: null,
+
+            /* 26.07.02 Add 이종환 : hero message 스클롤 기능 관련 */
+            hasTriggered: false,
+            userScrolling: false
         };
     },
 
@@ -490,6 +494,24 @@ export default {
             "resize",
             this.handleSwiper
         );
+
+        /* 26.07.03 Add 이종환 : hero message 스크롤 관련 */
+        let scrollTimeout = null;
+
+        window.addEventListener("scroll", () => {
+            this.userScrolling = true;
+
+            clearTimeout(scrollTimeout);
+
+            scrollTimeout = setTimeout(() => {
+                this.userScrolling = false;
+            }, 150);
+        });
+
+        this.$nextTick(() => {
+            this.initVideoScrollDelay();
+        });
+        /* //26.07.03 Add 이종환 : hero message 스크롤 관련 */
     },
 
     beforeUnmount() {
@@ -793,7 +815,68 @@ export default {
                     "sec04"
                 ]);
             }
+        },
+
+        /* 26.07.02 Add 이종환 : hero message 스크롤 관련 */
+        initVideoScrollDelay() {
+            this.$nextTick(() => {
+
+                const video = this.$el.querySelector(".swiper-slide-active video");
+                const hero = this.$refs.heroMessageRef;
+
+                console.log("[video]", video);
+                console.log("[hero]", hero);
+
+                if (!(video instanceof HTMLVideoElement)) {
+                    console.warn("[ERROR] video is not HTMLVideoElement");
+                    return;
+                }
+
+                if (!hero) return;
+
+                let triggered = false;
+
+                const start = () => {
+                    if (triggered) return;
+
+                    triggered = true;
+
+                    setTimeout(() => {
+                        const rect = hero.getBoundingClientRect();
+                        const targetTop = window.scrollY + rect.top - 400;
+
+                        if (window.scrollY >= targetTop) return;
+
+                        this.scrollHeroMessage();
+                    }, 5000); //비디오 1회 loop 시간
+                };
+
+                if (video.readyState >= 3) {
+                    start();
+                } else {
+                    video.addEventListener("canplay", start, { once: true });
+                }
+            });
+        },
+
+        scrollHeroMessage() {
+            const p = this.$refs.heroMessageRef?.querySelector("p");
+
+            if (!p) return;
+
+            const rect = p.getBoundingClientRect();
+
+            const targetTop =
+                window.scrollY +
+                rect.top -
+                (window.innerHeight - p.offsetHeight - 40);
+
+            window.scrollTo({
+                top: targetTop,
+                behavior: "smooth"
+            });
         }
+        /* //26.07.02 Add 이종환 : hero message 스크롤 관련 */
     }
 };
 </script>
