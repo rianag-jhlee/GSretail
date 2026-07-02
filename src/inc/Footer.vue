@@ -67,7 +67,7 @@
         </div>
 
         <!-- 26.06.02 Add 이종환 : sky quick 공통처리 및 수정 -->
-        <div class="sky_quick sub" :class="{ istop: isTop, isStatic: isFooterVisible , active: isActive}">
+        <div class="sky_quick sub" :class="{ istop: isTop, isStatic: isFooterVisible , active: isActive}"><!-- 26.07.01 Edit 이종환 : 메인페이지가 아닌 경우 "sub"클래스 추가 -->
             <ul class="quick_menu">
                 <li v-for="item in t.skybanner" :key="item"><a :href="item.link">{{ item.txt }}</a></li>
                 <!-- <li><button type="button">입점상담</button></li>

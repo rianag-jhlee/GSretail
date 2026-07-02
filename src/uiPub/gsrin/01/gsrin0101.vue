@@ -149,9 +149,9 @@
                             <div class="sub-title">
                                 <h3 class="text-wrapper-3">{{ t.BoardSectionTitle2 }}</h3>
                             </div>
-                            <div class="div-4">
+                            <!-- 26.07.02 Del 이종환 <div class="div-4">
                                 <div class="view-6 res-swiper-container">
-                                    <!-- 모바일일 때만 swiper, PC/태블릿은 div로 렌더링 -->
+                                    !-- 모바일일 때만 swiper, PC/태블릿은 div로 렌더링 --
                                     <component 
                                         :is="isMobile ? 'swiper' : 'div'"
                                         :slides-per-view="'auto'"
@@ -181,12 +181,61 @@
                                         </component>
                                     </component>
                                 </div>
-                            </div>
+                            </div> -->
                             
+                            <!-- 26.07.02 Add 이종환 : table로 변경 -->
+                            <div class="table_wrap type_open">
+                                <div class="inner">
+                                    <table class="ac" style="min-width:800px;">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2">{{t.MatrixTable.title}}</th>
+
+                                                <th
+                                                    v-for="group in t.MatrixTable.columns"
+                                                    :key="group.type"
+                                                    :colspan="group.list.length"
+                                                >
+                                                    {{ group.type }}
+                                                </th>
+                                            </tr>
+
+                                            <tr>
+                                                <template v-for="group in t.MatrixTable.columns" :key="group.type">
+                                                    <th
+                                                        v-for="item in group.list"
+                                                        :key="item.title"
+                                                    >
+                                                        {{ item.title }}
+                                                    </th>
+                                                </template>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr
+                                                v-for="row in t.MatrixTable.rows"
+                                                :key="row.title"
+                                            >
+                                                <td v-html="row.title"></td>
+
+                                                <td
+                                                    v-for="item in row.list"
+                                                    :key="item.name"
+                                                    v-html="item.name">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- //26.07.02 Add 이종환 : table로 변경 -->
 
                         </div>
+
                         <div class="view-2">
-                            <div class="sub-title"><div class="text-wrapper-3">{{ t.BoardSectionTitle3 }}</div></div>
+                            <div class="sub-title"><div class="text-wrapper-3">{{ t.BoardSectionTitle3 }}</div>
+                        </div>
                             <!-- 26.06.19 add 정다희 : table 구조로 수정 -->
                             <table class="table">
                                 <thead>
@@ -571,6 +620,160 @@ export default {
                     ],
                     BoardSectionTitle3: "이사회 내 위원회 현황",
                     ChairLabel: "위원장", MemberLabel: "위원",
+
+                    /* 26.07.02 Add 이종환 : 이사회 역량 구성표 테이블 데이터 */
+                    MatrixTable: {
+                        title: "구분",
+                        columns: [
+                            {
+                            type: "사내이사",
+                            list: [
+                                { title: "허서홍" },
+                                { title: "오진석" }
+                            ]
+                            },
+                            {
+                            type: "기타 비상무이사",
+                            list: [
+                                { title: "홍순기" }
+                            ]
+                            },
+                            {
+                            type: "사외이사",
+                            list: [
+                                { title: "이성락" },
+                                { title: "이상규" },
+                                { title: "윤윤진" },
+                                { title: "안동현" }
+                            ]
+                            }
+                        ],
+
+                        rows: [
+                            {
+                            title: "경영·리더십",
+                            list: [
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "" },
+                                { name: "" }
+                            ]
+                            },
+                            {
+                            title: "유통·관련산업",
+                            list: [
+                                { name: "O" },
+                                { name: "" },
+                                { name: "" },
+                                { name: "" },
+                                { name: "O" },
+                                { name: "" },
+                                { name: "" }
+                            ]
+                            },
+                            {
+                            title: "재무·회계",
+                            list: [
+                                { name: "" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "" },
+                                { name: "" }
+                            ]
+                            },
+                            {
+                            title: "금융",
+                            list: [
+                                { name: "" },
+                                { name: "O" },
+                                { name: "" },
+                                { name: "O" },
+                                { name: "" },
+                                { name: "" },
+                                { name: "O" }
+                            ]
+                            },
+                            {
+                            title: "IT",
+                            list: [
+                                { name: "" },
+                                { name: "" },
+                                { name: "" },
+                                { name: "" },
+                                { name: "" },
+                                { name: "" },
+                                { name: "O" }
+                            ]
+                            },
+                            {
+                            title: "리스크관리·ESG",
+                            list: [
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" }
+                            ]
+                            },
+                            {
+                            title: "독립성",
+                            list: [
+                                { name: "" },
+                                { name: "" },
+                                { name: "" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" },
+                                { name: "O" }
+                            ]
+                            },
+                            {
+                            title: "최초 선임일",
+                            list: [
+                                { name: "2025.03" },
+                                { name: "2024.03" },
+                                { name: "2021.07" },
+                                { name: "2022.03" },
+                                { name: "2023.03" },
+                                { name: "2025.03" },
+                                { name: "2026.03" }
+                            ]
+                            },
+                            {
+                            title: "소속 위원회",
+                            list: [
+                                { name: "-" },
+                                { name: "보상위" },
+                                { name: "ESG위" },
+                                { name: "내부위<br/> 사추위<br/> 감사위" },
+                                { name: "내부위<br/> 사추위<br/> ESG위" },
+                                { name: "내부위<br/> 감사위<br/> ESG위<br/> 보상위" },
+                                { name: "사추위<br/> 감사위<br/> ESG위<br/> 보상위" }
+                            ]
+                            },
+                            {
+                            title: "성별",
+                            list: [
+                                { name: "남" },
+                                { name: "남" },
+                                { name: "남" },
+                                { name: "남" },
+                                { name: "남" },
+                                { name: "여" },
+                                { name: "남" }
+                            ]
+                            }
+                        ]
+                    },
+                    /* //26.07.02 Add 이종환 : 이사회 역량 구성표 테이블 데이터 */
+
                     CommitteeTable: [
                         { title: "내부거래위원회", chair: "이상규", members: "이성락, 윤윤진" },
                         { title: "사외이사후보추천위원회", chair: "안동현", members: "이성락, 이상규" },

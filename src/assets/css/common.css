@@ -314,6 +314,16 @@ label.select.err > em {display:block;}
 .list_dotted > li > p { margin: 0; color: #67676f; font-size: 1.8rem; line-height: 1.4; }
 .list_dotted > li > p a { color: #107af2; font-size: 1.8rem; line-height: 1.4; text-decoration: underline; }
 
+/* 26.07.02 Add 이종환 : 일반 테이블형태 추가 */
+.table_wrap {width:100%;}
+.table_wrap.type_open {overflow:hidden;}
+.table_wrap.type_open .inner {width:calc(100% + 2px); margin:0 -1px; overflow:auto;}
+.table_wrap table {width:100%; border-collapse:collapse;}
+.table_wrap table th, .table_wrap table td {padding:12px 24px; font-size:1.8rem; border:1px solid #E5E5E9;}
+.table_wrap table th {font-weight:700; background-color:#f8f8f8;}
+.table_wrap table thead th {padding:14px 24px; line-height:150%;}
+.table_wrap table td {line-height:140%;}
+
 @media screen and (max-width:1024px) {
 }
 
@@ -370,6 +380,9 @@ label.select.err > em {display:block;}
     .list_dotted > li::before { top: 9px; width: 2px; height: 2px; }
     .list_dotted > li + li { margin-top: 8px; }
     .list_dotted > li > p { font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
+
+    .table_wrap table th, .table_wrap table td {padding:4px 10px; font-size:1.6rem;}
+    .table_wrap table thead th {padding:8px 14px;}
 }
 
 @media screen and (max-width:767px) {
