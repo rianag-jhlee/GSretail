@@ -36,16 +36,20 @@
                                         btn-class="btn_base border btn_icon_arrow after">
                                         {{ btn.label }}
                                     </Buttons>
-                                    <Buttons v-else @click="handleLink(btn.target)" btn-class="btn_base border btn_icon_arrow after">
+                                    <!-- 26.07.03 Del 이종환 <Buttons v-else @click="handleLink(btn.target)" btn-class="btn_base border btn_icon_arrow after">
                                         {{ btn.label }}
-                                    </Buttons>
+                                    </Buttons> -->
                                 </template>
                             </div>
                         </li>
                     </ul>
                 </article>
 
-                <ul class="service-link-list">
+                <div class="btnSection bottom">
+                    <Buttons btn-class="btn_xl border btn_icon_arrow after">기타 문의하기</Buttons>
+                </div>
+
+                <!-- 26.07.03 Del 이종환 <ul class="service-link-list">
                     <li v-for="(link, idx) in t.BottomLinks" :key="idx">
                         <div>
                             <h5>{{ link.title }}</h5>
@@ -69,7 +73,7 @@
                             </Buttons>
                         </div>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </section>
 
@@ -240,6 +244,10 @@ h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
 .brand-card-group .btn_mid {padding:0 9px; border-radius:4px;}
 .service-link-list a.btn_mid.gray {width:fit-content;}
 .service-link-list :deep(button.btn_mid.gray) {width:fit-content;}
+
+.btnSection.bottom {margin-top:40px; text-align:right;}
+.btnSection.bottom button {font-weight:700;}
+
 @media screen and (max-width: 1400px) and (min-width: 769px) {
     .brand-card-group {overflow-x: auto;}
     .brand-card-group li {min-width: 285px;}
@@ -249,7 +257,7 @@ h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
     /* .brand-btn-group, .brand-card-group {flex-direction:column;} */
     .intro-summary {width:100%;}
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     h3 {font-size:28px;}
     h4 {font-size:18px;}
     .tel-number {font-size:24px;}
@@ -262,5 +270,8 @@ h5 {color:#161616; font-size:18px; font-weight:700; line-height:1.5;}
     .service-link-list li > div::before {left:20px;}
     .service-link-list p {min-height:auto; margin-top:-8px;}
     .btn_mid.gray {width:auto;}
+
+    .btnSection.bottom {margin-top:60px;}
+    .btnSection.bottom button {width:100%; font-weight:400;}
 }
 </style>

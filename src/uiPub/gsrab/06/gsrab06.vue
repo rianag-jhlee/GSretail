@@ -558,10 +558,10 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
 .award_highlight_scroll { width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
 .award_highlight_list { width: 1420px;  display: flex; flex-wrap: nowrap; gap: 12px; }
 .award_highlight_list > li { flex: 0 0 274px; }
-.award_highlight_card { width: 274px; height: 186px; padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+.award_highlight_card { width: 274px; height: 200px; padding: 24px; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .award_highlight_card > figure { width: 100%; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .award_highlight_card > figure > img { width: auto; max-width: 100%; height: auto; max-height: 60px; object-fit: contain; }
-.award_highlight_card > p { width: 100%; margin-top: 6px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; text-align: center; } /* 260624 edit 이소라 */
+.award_highlight_card > p { width: 100%; margin-top: 17.2px; color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; text-align: center; } /* 260624 edit 이소라 */
 
 .sec_history { padding: 100px 0; display: grid; grid-template-columns: clamp(280px, 30.67vw, 460px) minmax(0, 1fr); gap: 32px; align-items: start; }
 .sec_history:last-child{padding-bottom:0;}
@@ -609,5 +609,7 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
     .sec_history .history_detail_row { gap: 12px; padding: 0; }
     .sec_history .history_detail_content { grid-template-columns: 40px minmax(0, 1fr); column-gap: 10px; row-gap: 12px; }
     .sec_history .history_detail_content > dt.history_term_primary, .sec_history .history_detail_content > dd { font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; }
+
+    .award_highlight_card > p {margin-top:6px;}
 }
 </style>

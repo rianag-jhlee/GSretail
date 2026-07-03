@@ -244,7 +244,7 @@ img { width: 100%; height: auto; object-fit: cover; display: block; }
     .prepare .inner > .prepare_photos > li:first-child > .img_wrap { aspect-ratio: 335 / 480; }
     .prepare .inner > .prepare_photos > li:not(:first-child) { align-self: stretch; }
     .prepare .inner > .prepare_photos > li:not(:first-child) > .img_wrap { aspect-ratio: 157.5 / 130; }
-    .sustain { padding: 200px 0 320px; }
+    .sustain {min-height:400px; padding: 80px 0; }
     .growth { padding: 100px 0 190px; }
     .growth .inner > .growth_row { flex-direction: column; gap: 40px; }
     .growth .inner > .growth_row > .growth_visual { width: 100%; }
