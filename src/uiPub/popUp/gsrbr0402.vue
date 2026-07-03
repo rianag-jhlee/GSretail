@@ -124,7 +124,7 @@ export default {
 
 <style scoped>
 /* Intro Section */
-.intro_section { padding-bottom: 80px; }
+section + section{ margin-top: 80px; }
 .title_area { display: flex; flex-direction: column; gap: 16px; padding-bottom: 40px; }
 .title_area h3 { color: #161616; font-size: 3.2rem; font-weight: 700; }
 :deep(.title_area) h3 br {display:none; }
@@ -142,7 +142,6 @@ export default {
 :deep(.feature_txt span) { font-weight: 700; }
 
 /* Guide Section */
-.guide_section { padding-bottom: 40px; }
 .section_tit { padding-bottom: 40px; }
 .section_tit h4 { margin-bottom: 8px; color: #161616; font-size: 2.4rem; font-weight: 700; }
 .section_tit p { color: #161616; font-size: 1.6rem; }
@@ -165,8 +164,9 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+    .modal_content { padding-bottom: 100px; }
     .main_desc{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-    .intro_section{padding-bottom:140px;}
+    section + section{margin-top:60px;}
     .title_area h3 { font-size: 2.4rem; line-height:1.3;}
     :deep(.title_area) h3 br {display:block; }
     .feature_list { flex-direction: column; gap:20px; }

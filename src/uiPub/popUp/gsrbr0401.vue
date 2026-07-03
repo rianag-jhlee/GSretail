@@ -273,7 +273,7 @@ export default {
 <style scoped>
 :deep(.p_br) { display: block }
 :deep(.m_br) { display: none }
-section { padding-bottom: 80px; }
+section + seciton{ margin-top: 80px; }
 section h4 + p{margin-top:8px; font-weight: 700;font-size: 1.8rem;line-height: 1.5;}
 section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 
@@ -371,10 +371,11 @@ section p.txt_sub{margin-top:8px;color:#67676F;font-weight: 400;font-size: 1.6re
     /* .notice_bar p::before {top:-2px;} */
     :deep(.p_br) { display: none }
     :deep(.m_br) { display: inline }
+    .modal_content { padding-bottom: 100px; }
     .modal_content > header{margin-bottom:60px;}
     .modal_content > header h2{margin-bottom:12px;font-size: 2.8rem;line-height: 1.35;}
     .modal_content > header p{font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
-    section { padding-bottom:60px; }
+    section + section { margin-top:60px; }
     .tip_section h3 { font-size: 2.8rem; }
     .tip_section ul { flex-wrap: wrap; gap: 20px 8px; }
     .tip_section ul li { flex: 0 0 calc(33.33% - 8px); }
