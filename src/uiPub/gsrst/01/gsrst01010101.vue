@@ -3048,7 +3048,7 @@ function toggleCard(id) {
 .page_header { width: 100%; height: 480px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
 .header_inner { position: relative; z-index: 1; text-align: center; }
 .header_title { color: #fff; font-size: 7.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.24; }
-.sub_header h3 { margin: 0 0 64px; color: #161616; font-weight: 700; font-size: 4rem; line-height: 1.3; letter-spacing: -0.1%; text-align: center; white-space: pre-line; } /* 260624 add 이소라 */
+.sub_header h3 { margin: 0 0 64px; color: #161616; font-weight: 700; font-size: 4rem; line-height: 1.3; letter-spacing: -0.01em; text-align: center; white-space: pre-line; } /* 260624 add 이소라 */
 
 /* BODY — PC: 좌우 20px / 모바일: 가로 패딩은 tab_page·Tabs 등에서 (아래 모바일 미디어쿼리 참고) */
 .cont_inner { max-width: 1460px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
