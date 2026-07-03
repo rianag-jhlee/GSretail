@@ -462,7 +462,6 @@ export default {
             hoverIndex: null,
 
             /* 26.07.02 Add 이종환 : hero message 스클롤 기능 관련 */
-            hasTriggered: false,
             userScrolling: false
         };
     },
@@ -630,7 +629,7 @@ export default {
 
                 this.numMotionScrollTrigger = ScrollTrigger.create({
                     trigger: heroEl,
-                    start: "top 80%",
+                    start: "top 35%",
                     once: true,
                     onEnter: playNumMotion,
                 });
