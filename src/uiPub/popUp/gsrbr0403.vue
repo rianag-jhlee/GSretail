@@ -98,6 +98,7 @@ export default {
 /* 26.06.09 add 정다희 : 모바일 m_br 표시, 이용방법 1열, 이미지 높이 조정 */
 @media screen and (max-width: 768px) {
     :deep(.m_br) { display: block; }
+    .modal_content { padding-bottom: 100px; }
     .gs25_event > h4 { font-size: 2.8rem; }
     .gs25_event > p.desc { margin: 12px 0; font-size: 1.6rem; }
     .how_to_list { grid-template-columns: 1fr; }

@@ -152,6 +152,7 @@ section.gsfresh_event {margin-top:80px;}
 
 @media screen and (max-width: 767px) {
     /* 모바일 2열 유지 및 간격 조정 */
+    .modal_content { padding-bottom: 100px; }
     .event_icon_list { margin:20px 0; gap: 12px 8px; }
     .event_icon_list li { width: calc((100% - 8px) / 2); }
     .event_icon_list li .img_box {padding: 33px; }
@@ -162,7 +163,7 @@ section.gsfresh_event {margin-top:80px;}
     :deep(.gs25_event p em), :deep(.gsfresh_event p em) {line-height:1.5;}
     .notice_bar p {font-size:1.2rem !important; font-weight:400 !important;}
     .notice_bar p::before {top:-2px;}
-    section.gsfresh_event {margin-top:60px; padding-bottom:40px;}
+    section.gsfresh_event {margin-top:60px; }
 
 }
 </style>
