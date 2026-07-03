@@ -1602,10 +1602,10 @@ const langData = {
         },
         seminar: {
             headDesc: "GS THE FRESH(GS수퍼마켓) 가맹 사업에 대한<br class=\"p_br\">자세하고 다양한 정보를 얻을 수 있는 사업설명회에 참여해 보세요.",
-            applyButtonLabel: "사업 설명회 신청",
+            applyButtonLabel: "창업 설명회 신청", /** 26.07.03 edit 정다희 : 텍스트 수정 */ 
             list: [
                 {
-                    title: "수도 사업설명회",
+                    title: "수도 사업 창업회", /** 26.07.03 edit 정다희 : 텍스트 수정 */ 
                     rows: [
                         { label: "장소", value: "서울 강남구 논현로508 GS타워 지하 1층" },
                         { label: "대상", value: "서울, 경기, 인천 GS THE FRESH 창업을 희망하는 분" },
@@ -1617,7 +1617,7 @@ const langData = {
                     ],
                 },
                 {
-                    title: "중부 사업설명회",
+                    title: "중부 사업창업회", /** 26.07.03 edit 정다희 : 텍스트 수정 */
                     rows: [
                         { label: "장소", value: "대전 중구 대종로167 모임공간 국보 3층" },
                         { label: "대상", value: "충청도 GS THE FRESH 창업을 희망하는 분" },
@@ -1629,7 +1629,7 @@ const langData = {
                     ],
                 },
                 {
-                    title: "영남 사업설명회",
+                    title: "영남 사업창업회", /** 26.07.03 edit 정다희 : 텍스트 수정 */
                     rows: [
                         { label: "장소", value: "부산 연제구 월드컵대로190 신현빌딩2층" },
                         { label: "대상", value: "부산, 경상도, 전라도 GS THE FRESH 창업을 희망하는 분" },
@@ -2043,7 +2043,7 @@ const langData = {
             managerAlt: "담당자",
             regionSelectAria: "지역 선택",
             selectedSeminarLabel: "선택한 설명회",
-            selectedSeminarValue: "부산 영남권 · 2/19(목) 15:00",
+            selectedSeminarValue: "수도 창업 설명회", /** 26.07.03 edit 정다희 : 텍스트 수정 */ 
             closeButton: "닫기",
             entryConsultTitle: "입점 제안/브랜드 전환 상담",
             recommendedStoreLocationLabel: "추천점포 소재지",
