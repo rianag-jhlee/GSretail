@@ -1,12 +1,47 @@
 <template>
-    <div class="modal_cont gsrbr0601">
+    <div class="modal_cont fridge_modal">
         <div class="modal_header">
             {{ t.MainTitle }}
             <a href="#none" @click="closeModal" class="btn_close">닫기</a>
         </div>
 
         <div class="modal_content">
-            준비중
+            <section v-if="t.CaseSteps?.length" class="discount_section">
+                <div>
+                    <h4 v-html="t.CaseTitle"></h4>
+                </div>
+                <ul class="how_to_list">
+                    <li v-for="(step, idx) in t.CaseSteps" :key="idx">
+                        <div class="card_tit">
+                            <span class="num">{{ step.num }}</span>
+                            <strong v-html="step.text"></strong>
+                        </div>
+                        <figure>
+                            <img :src="isMobile ? step.imgMo : step.img" :alt="step.num">
+                        </figure>
+                        <p v-if="step.desc" class="txt_sub" v-html="step.desc"></p>
+                        <p v-if="step.notice" class="txt_sub txt_notice" v-html="step.notice"></p>
+                    </li>
+                </ul>
+            </section>
+
+            <section v-if="t.TipSteps?.length" class="discount_section">
+                <div>
+                    <h4>{{ t.TipSectionTitle }}</h4>
+                </div>
+                <ul class="how_to_list">
+                    <li v-for="(step, idx) in t.TipSteps" :key="idx">
+                        <div class="card_tit">
+                            <span class="num">{{ step.num }}</span>
+                            <strong v-html="step.text"></strong>
+                        </div>
+                        <figure>
+                            <img :src="isMobile ? step.imgMo : step.img" :alt="step.num">
+                        </figure>
+                        <p v-if="step.desc" class="txt_sub" v-html="step.desc"></p>
+                    </li>
+                </ul>
+            </section>
         </div>
     </div>
 </template>
@@ -15,17 +50,92 @@
 import modal from "@/assets/js/modal";
 
 export default {
-    name: "gsrbr0404",
-    components: {
+    name: "gsrbr0405",
+    props: {
+        lang: { type: String, default: "ko" }
     },
     data() {
         return {
+            isMobile: false,
             langData: {
                 ko: {
-                    MainTitle: "나만의 냉장고"
+                    MainTitle: "나만의 냉장고",
+                    CaseTitle: "나만의 냉장고 100% 활용법",
+                    CaseSteps: [
+                        {
+                            num: "CASE 01",
+                            text: "+1 혜택은 받고 싶고<br />한번에 필요하지 않을 때",
+                            desc: "1+1, 2+1 상품 결제 후 지금 필요한<br /><strong>하나'만 가져가고 나머지는 냉장고 보관!</strong>",
+                            img: require("@/assets/images/dummy/gsrbr0405_01.png"),
+                            imgMo: require("@/assets/images/dummy/mo/gsrbr0405_01_mo.png"),
+                        },
+                        {
+                            num: "CASE 02",
+                            text: "재고가 부족해도<br />OK!",
+                            desc: "점포에 재고가 하나만 있어도 OK!<br /><strong>부족한 수량은 냉장고에 저장하고 재고가 있는 가까운 점포에서 꺼내기!</strong>",
+                            notice: "*나만의 냉장고 보관은 구매품 최소 1개 수령 후 나머지 상품 보관 가능해요.",
+                            img: require("@/assets/images/dummy/gsrbr0405_02.png"),
+                            imgMo: require("@/assets/images/dummy/mo/gsrbr0405_02_mo.png"),
+                        },
+                    ],
+                    TipSectionTitle: "더 편리하게 이용하는 꿀팁",
+                    TipSteps: [
+                        {
+                            num: "TIP 01",
+                            text: "GS25 배달/픽업<br />주문시에도 가능해요",
+                            desc: "1+1, 2+1 상품을 담고 주문할 때<br /><strong>증정품 선택에서 '보관하기'</strong>하면 냉장고로 쏙~>",
+                            img: require("@/assets/images/dummy/gsrbr0405_03.png"),
+                            imgMo: require("@/assets/images/dummy/mo/gsrbr0405_03_mo.png"),
+                        },
+                        {
+                            num: "TIP 02",
+                            text: "보관 상품으로<br />마음을 전해요",
+                            desc: "나만의 냉장고 <strong>보관 중인 상품은 선물하기도 가능!</strong><br />따뜻한 메시지와 함께 마음을 전해요",
+                            img: require("@/assets/images/dummy/gsrbr0405_04.png"),
+                            imgMo: require("@/assets/images/dummy/mo/gsrbr0405_04_mo.png"),
+                        },
+                    ],
                 },
                 en: {
-                    MainTitle: "My Refrigerator"
+                    MainTitle: "My Refrigerator",
+                    CaseTitle: "From storing free gifts to gifting them",
+                    CaseDesc: "100% My Fridge utilization tips",
+                    CaseSubDesc: "*You can store remaining items in My Fridge only after picking up at least one purchased item.",
+                    CaseSteps: [
+                        {
+                            num: "CASE 01",
+                            text: "When you want the +1 benefit<br />but do not need everything at once",
+                            desc: "After paying for 1+1 or 2+1 items,<br />take only what you need now and store the rest in My Fridge!",
+                            img: require("@/assets/images/dummy/gsrbr0405_01.png"),
+                            imgMo: require("@/assets/images/dummy/mo/gsrbr0405_01_mo.png"),
+                        },
+                        {
+                            num: "CASE 02",
+                            text: "Low stock?<br />OK!",
+                            desc: "Even if a store has only one item in stock,<br />store the rest in My Fridge and pick them up at a nearby store with inventory!",
+                            notice: "*You can store remaining items in My Fridge only after picking up at least one purchased item.",
+                            img: require("@/assets/images/dummy/gsrbr0405_02.png"),
+                            imgMo: require("@/assets/images/dummy/mo/gsrbr0405_02_mo.png"),
+                        },
+                    ],
+                    /* 26.07.03 add 정다희 : Figma 943:10098 — TIP section EN */
+                    TipSectionTitle: "Tips for more convenient use",
+                    TipSteps: [
+                        {
+                            num: "TIP 01",
+                            text: "Available for GS25<br />delivery and pickup orders too",
+                            desc: "When adding 1+1 or 2+1 items to your order,<br />select 'Store' for free gifts and they go straight into My Fridge!",
+                            img: require("@/assets/images/dummy/gsrbr0405_03.png"),
+                            imgMo: require("@/assets/images/dummy/mo/gsrbr0405_03_mo.png"),
+                        },
+                        {
+                            num: "TIP 02",
+                            text: "Share your heart<br />with stored items",
+                            desc: "Items stored in My Fridge can be gifted too!<br />Send a warm message along with your gift.",
+                            img: require("@/assets/images/dummy/gsrbr0405_04.png"),
+                            imgMo: require("@/assets/images/dummy/mo/gsrbr0405_04_mo.png"),
+                        },
+                    ],
                 }
             }
         };
@@ -35,10 +145,10 @@ export default {
     },
     mounted() {
         this.checkMobile();
-        window.addEventListener('resize', this.checkMobile);
+        window.addEventListener("resize", this.checkMobile);
     },
     beforeUnmount() {
-        window.removeEventListener('resize', this.checkMobile);
+        window.removeEventListener("resize", this.checkMobile);
     },
     methods: {
         checkMobile() { this.isMobile = window.innerWidth < 768; },
@@ -48,47 +158,32 @@ export default {
 </script>
 
 <style scoped>
-.modal_header { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding-bottom: 40px; font-family: "Pretendard", Helvetica; font-weight: 700; font-size: 40px; color: #161616; border-bottom: 0; }
-.modal_content { flex: 1; overflow-y: auto; padding-right: 10px; }
-h3 { margin-bottom: 60px; color: #161616; font-size: 32px; font-weight: 700; }
-h4 {margin-top:24px; color:#161616; font-size:32px; font-weight:700;}
-span {margin:8px 0; color:#161616; font-size:18px; font-weight:700; display:block;}
-span img {max-width:100%; object-fit:cover;}
-section > p {display:flex; flex-direction:column; gap:4px;}
-:deep(.gs25_event p em), :deep(.gsfresh_event p em) { color:#67676F; font-size:16px;}
-.event_icon_list { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; margin-top: 40px; margin-bottom: 24px; list-style: none; }
-.event_icon_list li { display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: calc((100% - (8px * 3)) / 4); }
-.event_icon_list li .img_box { display: flex; align-items: center; justify-content: center; width: 100%; height: 142px; padding: 20px; background: #F8F8F8; border-radius: 12px; text-align: center; }
-.event_icon_list li .img_box img { max-width: 64px; max-height: 64px; object-fit: contain; }
-.event_icon_list li em { margin-top: 8px; color: #67676F; font-size: 16px; font-style: normal; }
-/* i {padding:16px 16px 16px 42px; color:#161616; font-size:16px; background:#F8F8F8; border-radius:6px; display:flex; position:relative;}
-i::before {content:''; width:20px; height:20px; background:red; position:absolute; top:50%; left:16px; display:inline-block; transform:translateY(-50%);} */
-section.gsfresh_event {margin-top:80px;}
+:deep(.p_br) { display: block; }
+:deep(.m_br) { display: none; }
 
-/* Notice Bar */
-.notice_bar { padding: 16px !important; background: #f8f8f8; border-radius: 6px;  display: flex; align-items: center; gap: 6px;}
-.notice_bar p {margin-bottom:0px !important; padding-left: 26px; color: #161616; font-size: 16px; position: relative; }
-.notice_bar p::before { content: ''; display: inline-block; position: absolute; top: 0; left: 0; width: 20px; height: 20px; background: url('@/assets/images/common/icon_set_20.png') -935px -24px no-repeat; }
+.modal_content { flex: 1; overflow-y: auto; }
+section + section{margin-top : 80px;}
+section h4 + p { margin-top: 8px; font-weight: 700; font-size: 1.8rem; line-height: 1.5; }
+section p.txt_sub { margin-top: 8px; color: #161616; font-weight: 400; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+section p.txt_notice { color: #fb6432; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; }
 
-/* 반응형 */
+.how_to_list { margin-top: 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.how_to_list > li { padding: 32px; background-color: #f8f8f8; border-radius: 12px; overflow: hidden; }
+.how_to_list .card_tit > span.num { margin-bottom: 6px; color: #107af2; font-size: 1.6rem; font-weight: 700; line-height: 1.24; display: block; }
+.how_to_list .card_tit > strong { color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; display: block; }
+.how_to_list > li p.txt_sub { margin-top: 20px; }
+.how_to_list > li p.txt_sub :deep(strong) { font-weight: 700; line-height: 1.24; display: inline-block;}
+.discount_section:nth-child(2) .how_to_list > li p.txt_sub { margin-top: 40px; }
+.how_to_list > li p.txt_sub + p{margin-top : 12px;}
+.how_to_list > li > figure { width: 100%; margin-top: 40px; }
+.how_to_list > li > figure > img { width: 100%; height: auto; object-fit: cover; display:block;}
 
-@media screen and (max-width: 1024px) {
-    .modal_header { font-size: 32px; }
-    /* 태블릿 환경 필요시 2열 조정 */
-    .event_icon_list li { width: calc((100% - 8px) / 2); }
-}
+@media screen and (max-width: 768px) {
+    :deep(.p_br) { display: none; }
+    :deep(.m_br) { display: inline; }
+    .modal_content { padding-bottom: 100px; }
+    section + section{ margin-top : 60px; }
+    .how_to_list { margin-top:24px; grid-template-columns: 1fr; }
 
-@media screen and (max-width: 767px) {
-    .modal_header { font-size:18px; }
-    /* 모바일 2열 유지 및 간격 조정 */
-    .event_icon_list { gap: 12px 8px; }
-    .event_icon_list li { width: calc((100% - 8px) / 2); }
-    .event_icon_list li .img_box {padding: 33px; }
-    h4 {margin-top:24px; color:#161616; font-size:24px; font-weight:700;}
-    span {margin:8px 0; color:#161616; font-size:18px; font-weight:700; display:block;}
-    span img {height:200px;}
-    :deep(.gs25_event p em), :deep(.gsfresh_event p em) {line-height:1.5;}
-    .notice_bar p {font-size:12px !important; font-weight:400 !important;}
-    .notice_bar p::before {top:-2px;}
 }
 </style>
