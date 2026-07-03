@@ -851,6 +851,12 @@ export default {
                         if (window.scrollY >= targetTop) return;
 
                         this.scrollHeroMessage();
+
+                        setTimeout(() => {
+                            const header = document.getElementById("header");
+                            header?.classList.remove("hide");
+                        }, 500);
+                        
                     }, 5000); //비디오 1회 loop 시간
                 };
 
