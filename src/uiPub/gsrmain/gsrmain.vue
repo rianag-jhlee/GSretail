@@ -821,6 +821,10 @@ export default {
         initVideoScrollDelay() {
             this.$nextTick(() => {
 
+                if (window.innerWidth <= 768) {
+                    return;
+                }
+
                 const video = this.$el.querySelector(".swiper-slide-active video");
                 const hero = this.$refs.heroMessageRef;
 
