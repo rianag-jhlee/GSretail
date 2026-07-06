@@ -362,24 +362,24 @@ export default {
                             ],
                             logoAlt:  "GS THE FRESH 메인 비주얼",
                         },
-                        about: [
+                        about: [/* 2026.07.06 edit 이소라 */
                             [
                                 '1974년 럭키수퍼체인(주)로 출범한 LG수퍼마켓은',
                                 "GS그룹의 출범에 따라 GS수퍼마켓으로 변경되고,",
-                                "이후 2019년 '삶의 가치를 누리는 라이프 스타일 마켓' 으로의 변화를 위해",
+                                "이후 2019년 '삶의 가치를 누리는 라이프스타일 마켓'으로의 변화를 위해",
                                 '"GS THE FRESH"로 새롭게 태어나게 되었습니다.',
                             ],
                             [
                                 '새롭게 태어난 GS THE FRESH는 Friendly, Fresh, Fun 가치와 함께', // 26.06.22 add 정다희 : 오타수정
-                                '고객의 생활에 늘 가까이 있는 점포로서',
-                                '신선하고 다양한 상품을 제공함과 동시에 더욱 친근한 서비스를 바탕으로',
-                                '고객과 함께하는 친근하고, 신속하며, 편리하고 즐거운 쇼핑문화를 지향합니다.'
+                                '고객의 생활에 늘 가까이 있는 점포로서 신선하고 다양한 상품을 제공함과',
+                                '동시에 더욱 친근한 서비스를 바탕으로 고객과 함께하는',
+                                '친근하고, 신속하며, 편리하고 즐거운 쇼핑문화를 지향합니다.'
                             ],
-                            [
+                            /*[
                                 '새로운 이름으로 고객님과 다시 만나는 GS THE FRESH는', // 26.06.22 add 정다희 : 오타수정
                                 '신선한 행복을 주는 쇼핑문화의 장을 펼칠 것이며,',
                                 '고객님께 더 큰 만족을 드릴 것을 약속합니다.'
-                            ]
+                            ] */
                         ],
                     },
                     ValueTitle:"가족과 함께하는 행복<br/>쇼핑 산지의 신선함을 그대로 고객님께 전해드립니다.", /*26.06.26 edit 정다희 : 텍스트 수정*/
@@ -392,15 +392,15 @@ export default {
                         insta: "인스타그램",
                         facebook: "페이스북"
                     },
-                    AccordionList: [
+                    AccordionList: [/* 2026.07.06 edit 이소라 */
                         {
-                            title: "신선, 맛, 서비스 대한민국 NO.1을 약속합니다.",
-                            desc: "전국의 우수 산지에서 가장 신선하고 맛있는 상품만을 선별하고, <br/>GS더프레시만의 엄격한 추가 검품과정을 통해 최고의 상품 서비스를 제공하고 있습니다.<br/><br/>또한 고객중심의 차별화된 서비스로 한국서비스품질지수(KS-SQI) 10년 <br/>연속 1위를 수상하는 등 고객을 위한 매장을 만들어 가고 있습니다.",
+                            title: "신선, 맛, 서비스<br/> 대한민국 NO.1을 향한 약속",
+                            desc: "전국의 우수 산지에서 가장 신선하고 맛있는 상품만을 선별하고, <br/>GS THE FRESH만의 엄격한 추가 검품 과정을 통해 최고의 상품 서비스를 제공하고 있습니다.<br/><br/>또한 고객 중심의 차별화된 서비스로 한국서비스품질지수(KS-SQI) 10년 <br/>연속 1위를 수상하는 등 고객을 위한 매장을 만들어가고 있습니다.",
                             img: require("@/assets/images/sub/gsrbr020101/gsrbr020101_3.png")
                         },
                         {
-                            title: "GS더프레시만의 차별화된 컨텐츠로 업계를 선도합니다.",
-                            desc: "상품성을 갖춘 우수중소업체의 상품을 발굴해<br/>일반상품 가격의 7~80%수준 가격으로 판매하는 '리얼프라이스'와<br/>우수산지에서 선도, 당도를 엄선한 신선식품 전용 브랜드 '신선특별시' 등<br/>차별화된 상품과 서비스로 국내 수퍼마켓 업계를 선도하고 있습니다.",
+                            title: "GS THE FRESH만의<br/> 차별화된 컨텐츠로 업계 선도",
+                            desc: "상품성을 갖춘 우수 중소업체의 상품을 발굴해<br/> 일반상품 가격의 7~80% 수준 가격으로 판매하는 '리얼프라이스'와<br/> 우수산지에서 선도, 당도를 엄선한 신선식품 전용 브랜드 '신선특별시' 등<br/> 차별화된 상품과 서비스로 국내 수퍼마켓 업계를 선도하고 있습니다.",
                             img: require("@/assets/images/sub/gsrbr020101/gsrbr020101_4.png")
                         }
                     ],
@@ -1089,9 +1089,9 @@ export default {
 .txt_area > p > span { color: #fff; font-size: 5.6rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all; word-wrap: break-word; display: block; }
 .txt_area > p > span :deep(strong) { color: #fff; font-weight: 800; }
 .sec_brand_about { padding: clamp(140px, 10.42vw, 200px) 20px; background-color: #f8f8f8; }
-.sec_brand_about > .about_inner { max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+.sec_brand_about > .about_inner { margin: 0 auto; display: flex; flex-direction: column; gap: 40px; text-align: center; }
 .sec_brand_about > .about_inner > .about_txt > p { overflow: hidden; }
-.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block; }
+.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 3.6rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; will-change: transform, opacity; display: block; }
 
 /* Brand Value */
 .brand_value_section { width: 100%; padding: 200px 0; position: relative; display: block; }

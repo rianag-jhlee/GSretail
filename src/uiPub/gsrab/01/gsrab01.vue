@@ -103,8 +103,8 @@ const langData = {
         AboutTitle: `GS리테일은 대한민국을 대표하는<br />Lifestyle Platform 입니다.`,
         AboutDesc: `GS리테일은 다양한 생활 밀착형 플랫폼을 운영하며<br />고객의 Lifestyle을 선도하고 있습니다.`,
         PrepareTitle: `GS리테일은 고객 감동을 위해<br />한 걸음 먼저 준비합니다.`,
-        PrepareDesc1: `GS리테일은 1971년 창업 이래 고객 감동을 최우선으로<br class="p_br"/>최고의 상품과 서비스를 제공하고 있습니다.`,
-        PrepareDesc2: `고객의 삶을 더욱 편리하고 가치 있게 만들기 위해 한 걸음 더 움직이고<br class="p_br"/>한 걸음 먼저 준비하겠습니다.`,
+        PrepareDesc1: `GS리테일은 1971년 창업 이래 고객 감동을 최우선으로<br class="p_br"/> 최고의 상품과 서비스를 제공하고 있습니다.`, /* 2026.07.06 edit 이소라 */
+        PrepareDesc2: `고객의 삶을 더욱 편리하고 가치 있게 만들기 위해<br class="p_br"/> 한 걸음 더 움직이고 한 걸음 먼저 준비하겠습니다.`, /* 2026.07.06 edit 이소라 */
         prepare_photos:[
             {img: require("@/assets/images/sub/gsrab/prepare_photos_01.png"), alt:""},
             {img: require("@/assets/images/sub/gsrab/prepare_photos_02.png"), alt:""},
@@ -112,9 +112,9 @@ const langData = {
             {img: require("@/assets/images/sub/gsrab/prepare_photos_04.png"), alt:""},
             {img: require("@/assets/images/sub/gsrab/prepare_photos_05.png"), alt:""},
         ],
-        SustainTitle: `GS리테일은 지속 가능 경영을<br />적극 실천하고 있습니다.`,
-        SustainDesc1: `GS리테일은 친환경 상품을 확대하고 자원 순환 활성화를 통해<br class="p_br"/>환경 경영을 실천하고 있습니다.`,
-        SustainDesc2: `또한 경영주·임직원·파트너사·지역사회와 함께 성장하기 위해<br class="p_br"/>다양한 제도와 정책을 운영하고 있습니다.<br class="m_br"/>지속 가능한 미래를 위해<br class="p_br"/>ESG 경영을 적극 실천하며<br class="m_br"/>신뢰받는 기업이 되겠습니다.`,
+        SustainTitle: `GS리테일은 지속 가능 경영을<br />적극 실천하고 있습니다.`, /* 2026.07.06 edit 이소라 */
+        SustainDesc1: `GS리테일은 친환경 상품을 확대하고 자원 순환 활성화를 통해<br class="p_br"/> 환경 경영을 실천하고 있습니다.`, /* 2026.07.06 edit 이소라 */
+        SustainDesc2: `또한 경영주·임직원·파트너사·지역사회와 함께 성장하기 위해<br class="p_br"/> 다양한 제도와 정책을 운영하고 있습니다.<br class="m_br"/> 지속 가능한 미래를 위해<br class="p_br"/> ESG 경영을 적극 실천하며<br class="m_br"/> 신뢰받는 기업이 되겠습니다.`, /* 2026.07.06 edit 이소라 */
         GrowthRow1: "GS리테일은",
         GrowthRow2: "고객과 함께 성장하며",
         GrowthRow3: "더 나은 미래를<br />만들어가겠습니다.",

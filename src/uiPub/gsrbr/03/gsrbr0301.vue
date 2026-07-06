@@ -770,9 +770,9 @@ p { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .bg_wrap.active > .bg { transform: none; }
 }
 .sec_brand_about { padding: clamp(140px, 10.42vw, 200px) 20px; background-color: #f8f8f8; }
-.sec_brand_about > .about_inner { width:100%; max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
+.sec_brand_about > .about_inner { width:100%; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; text-align: center; }
 .sec_brand_about > .about_inner > .about_txt > p  { overflow: hidden }
-.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
+.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 3.6rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
 .str_inner { width: 1460px; max-width: 100%; margin: 0 auto; padding: 200px 20px 0; box-sizing: border-box; }
 .sec_brand_str .str_inner { padding:200px 20px; }
 /* .sec_brand_str .str_inner {padding: 0 20px;} */

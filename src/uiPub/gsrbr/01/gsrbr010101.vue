@@ -2039,10 +2039,10 @@ const langData = {
             sections: [
                 {
                     title: "신선강화점 특징", /*26.06.29 edit 정다희 : 타이틀 텍스트 수정*/ 
-                    desc: "GS더프레시와 통합 구매를 통해 상품 경쟁력을 확보 하여 타 편의점 대비 다양한 신선상품을 운영합니다.",
+                    desc: "GS THE FRESH와 통합 구매를 통해 상품 경쟁력을 확보하여<br /> 타 편의점 대비 다양한 신선상품을 운영합니다.", /* 2026.07.06 edit 이소라 */
                     features: [
-                        { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정 콜드체인 시스템 적용으로 신선도 유지" },
-                        { title: "합리적인 가격", desc: "GS 더프레시와의 통합 구매를 통해 합리적인 가격에 판매" },
+                        { title: "신선한 상품",   desc: "물류부터 진열 판매까지 전 과정<br /> 콜드체인 시스템 적용으로 신선도 유지" }, /* 2026.07.06 edit 이소라 */
+                        { title: "합리적인 가격", desc: "GS 더프레시와의 통합 구매를 통해<br /> 합리적인 가격에 판매" }, /* 2026.07.06 edit 이소라 */
                         { title: "소용량 소포장", desc: "1인가구 및 2~3인 가구에 적합한<br/> 소용량·소포장 상품 구성" },
                         { title: "전용 상품 브랜드", desc: "신선식품 전문 브랜드<br/> 신선특별시 운영" },
                     ],
@@ -2118,7 +2118,7 @@ const langData = {
                             heroMo: imgHero5Mo, /* 26.06.26 add 정다희 : brand_bg_06_mo */
                             heroAlt: "",
                             title:   "현금인출기 서비스",
-                            desc:    "현금인출, 계좌 이체 등 금융서비스 외에도 프로스포츠(야구, 축구, 배구, 농구) 정규리그 입장권(즉시 입장), 에버랜드 자유이용권의 발권도 가능합니다.<br />그 밖에 하이패스 충전(신용카드 결제), 알뜰폰 판매 등 다양한 생활 편의 서비스를 제공하고 있습니다.",
+                            desc:    "현금인출, 계좌이체 등 금융 서비스 외에도 프로스포츠(야구, 축구, 배구, 농구) 정규리그 입장권(즉시 입장), 에버랜드 자유이용권의 발권도 가능합니다.<br />그 밖에 하이패스 충전(신용카드 결제), 알뜰폰 판매 등 다양한 생활편의 서비스를 제공하고 있습니다.", /* 2026.07.06 edit 이소라 */
                             sub_item: {
                                 title: "현금인출 수수료 0원 서비스",
                                 explain: "신한은행 / KB국민은행 / 우리은행 / Kakaobank / K bank / 토스뱅크 / SC제일은행 / 광주은행 / SB저축은행 / 삼성증권 / NH투자증권 계좌에서 현금인출시 수수료 0원!",
@@ -2143,11 +2143,11 @@ const langData = {
                             hero:    null,
                             heroAlt: "",
                             title:   "편의점 캐시 구입/충전 서비스",
-                            desc:    "편의점캐시는 온라인콘텐츠, 쇼핑몰, 게임캐시, 국제전화카드를 편의점에서 구입/충전 할 수 있는 서비스입니다.",
+                            desc:    "편의점캐시는 온라인 콘텐츠, 쇼핑몰, 게임캐시, 국제전화카드를 편의점에서 구입/충전할 수 있는 서비스입니다.", /* 2026.07.06 edit 이소라 */
                             table: {
-                                rows: [
-                                    { head: "게임 · 상품권 · 통신", text: "(알뜰폰/국제전화/모바일 데이터) 등 다양한 서비스를 편의점에서 실시간으로 구입, 충전 할 수 있는 서비스 영수증형 PIN 구입과 국제전화카드 충전 이외에 스마트폰 APP를 통한 실시간 잔액 충전 가능" },
-                                    { head: "게임캐시",         text: "N코인(엔씨소프트), 넥슨, 월드오브워크레프트, 리그오브레전드, 틴캐시, 한게임, 퍼니카드, 한빛소프트 등" },
+                                rows: [ /* 2026.07.06 edit 이소라 */
+                                    { head: "게임 · 상품권 · 통신", text: "(알뜰폰/국제전화/모바일 데이터) 등 다양한 서비스를 편의점에서 실시간으로 구입, 충전할 수 있는 서비스 영수증형 PIN 구입과 국제전화카드 충전 이외에 스마트폰 APP를 통한 실시간 잔액 충전 가능" },
+                                    { head: "게임캐시",         text: "N코인(엔씨소프트), 넥슨, 월드 오브 워크레프트, 리그 오브 레전드, 틴캐시, 한게임, 퍼니카드, 한빛소프트 등" },
                                     { head: "상품권",           text: "문화상품권, 스마트문화상품권, 해피머니상품권, 도서문화상품권 등" },
                                     { head: "스마트폰 APP충전", text: "넥슨플레이, 컬쳐랜드" },
                                     { head: "알뜰폰",           text: "EG CARD, 7mobile, 아이즈, 모빙, M모바일, free C/T, 이야기 모바일 등" },
@@ -2266,7 +2266,7 @@ const langData = {
                                 etc:           { title: "기타",        bullets: ["고속도로 휴게소 : 진영휴게소, 영천휴게소", "개그스토리 마트 (일부점)","문구점 색연필 (일부점)", "비디오 대여점 영화마을 (일부점)"] },
                             },
                             pageTitle: "교통카드 충전서비스(팝티머니,마이비,캐시비(EZL),한페이)",
-                            pageDesc:  "GS25는 대중교통을 이용하는 고객님을 위해 교통카드 충전 서비스를 실행하고있습니다.<br />또한, GS25에서 상품을 구매할 수 있어 결제수단의 편의성을 제공하고있는 유익한 서비스입니다. (복권, 로또, 토토, 택배 등 일부상품제외)",
+                            pageDesc:  "GS25는 대중교통을 이용하는 고객님을 위해 교통카드 충전 서비스를 실행하고 있습니다.<br />또한, GS25에서 상품을 구매할 수 있어 결제 수단의 편의성을 제공하고있는 유익한 서비스입니다. (복권, 로또, 토토, 택배 등 일부 상품 제외)", /* 2026.07.06 edit 이소라 */
                             popTitle:   "팝카드란?",
                             popDesc:    "이제 팝 하세요! <br />다양한 결제 수단과 결합하여 혜택은 더 크게, 소비는 더 합리적으로, 사용은 더 편리하게 할 수 있도록 팝카드만의 차별화된 서비스를 제공합니다.",
                             popExclude: "팝카드 사용 제외 매장 : 디몰점, 영풍종로점, 부천세이브존점, 동대문현대시티아울렛점, 서면NC점, 현대시티몰가든파이브점, 모란NC점, 대구이월드점, 동아쇼핑NC점, 이천NC점, 동수원NC점, 야탑NC점",
@@ -2286,7 +2286,7 @@ const langData = {
                                     img:   imgPopCard1,
                                     imgMo: imgPopCard1Mo,
                                     name:  "팝티머니",
-                                    desc:  "하나의 카드로 관리가능한 멀티멤버십의 혜택까지!\n팝티머니는 T-money와 팝카드의 기능을 동시에\n사용할 수 있는 차별화된 서비스입니다.",
+                                    desc:  "하나의 카드로 관리 가능한 멀티멤버십의 혜택까지!\n팝티머니는 T-money와 팝카드의 기능을 동시에\n사용할 수 있는 차별화된 서비스입니다.",  /* 2026.07.06 edit 이소라 */
                                     logos: [
                                         { src: imgPoint1, w: 28, h: 36 },
                                         { src: imgPoint2, w: 44, h: 24 },
@@ -2299,7 +2299,7 @@ const langData = {
                                     img:      imgPopCard2,
                                     imgMo:    imgPopCard2Mo,
                                     name:     "멤버십 팝카드",
-                                    desc:     "멤버십팝카드는 GS ALL 포인트와 팝카드가 결합되어 GS25, GS THE FRESH에서 결제와 동시에 포인트가 적립되고, 600여 온라인쇼핑, 게임 등에서 결제가 가능한 혜택이 많은 선불카드입니다.",
+                                    desc:     "멤버십팝카드는 GS ALL 포인트와 팝카드가 결합되어 GS25, GS THE FRESH에서 결제와 동시에 포인트가 적립되고, 600여 온라인 쇼핑, 게임 등에서 결제가 가능한 혜택이 많은 선불카드입니다.",  /* 2026.07.06 edit 이소라 */
                                     note:     "*교통기능 없음",
                                     noteWarn: true,
                                     logos:    [{ src: imgPoint2, w: 44, h: 24 }],
@@ -2341,13 +2341,13 @@ const langData = {
                                 { img: imgGiftCard5, name: "스타벅스" },
                                 { img: imgGiftCard6, name: "올레WiFi" },
                             ],
-                            purchaseTitle: "POSA 기프트카드 구매방법",
-                            purchaseNote:  "기프트 카드별로 사용방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용방법을 참고하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.",
+                            purchaseTitle: "POSA 기프트카드 구매 방법",
+                            purchaseNote:  "기프트카드별로 사용 방법이 다르므로 카드와 카드 캐리어 뒷면에 기재된 사용 방법을 참고하시고, 자세한 사항은 카드에 기재된 고객센터로 문의하시기 바랍니다.", /* 2026.07.06 edit 이소라 */
                             purchaseImg:   imgGiftPurchase,
                             purchaseSteps: [
                                 { num: "01", title: "판매처 방문",    desc: "가까운 GS25 편의점에 방문하세요." },
                                 { num: "02", title: "기프트카드 선택", desc: "원하는 브랜드의 기프트카드를 선택하세요." },
-                                { num: "03", title: "사용설명 확인",   desc: "구매하신 카드 뒷면 사용설명을<br class=\"m_br\" />잘 확인하시고 사용하세요." },
+                                { num: "03", title: "사용 설명 확인",   desc: "구매하신 카드 뒷면 사용설명을<br class=\"m_br\" />잘 확인하시고 사용하세요." }, /* 2026.07.06 edit 이소라 */
                                 { num: "04", title: "계산",           desc: "계산대에서 계산을 완료하시면 활성화되어 사용 가능한 상태가 됩니다." },
                             ],
                             usageTitle:   "POSA 기프트카드 사용방법",
@@ -2369,16 +2369,16 @@ const langData = {
                                 { step: "Step 4", title: "결제완료" },
                             ],
                             advantageTitle: "POSA 기프트카드 장점",
-                            advantages: [
+                            advantages: [/* 2026.07.06 edit 이소라 */
                                 {
                                     num:   "01",
-                                    title: "신용카드와 함께\n지갑속에 쏙!",
+                                    title: "신용카드와 함께\n지갑 속에 쏙!",
                                     desc:  "신용카드처럼 작아서 지갑에 보관하기 편리하며, 결제해야만 사용할 수 있기에 판매점의 관리 부담이 적습니다.",
                                 },
                                 {
                                     num:   "02",
                                     title: "온/오프라인\n다양한 브랜드 제공",
-                                    desc:  "외식, 게임, 레저, 영화, 커피, 도서 등 오프라인과 온라인의 다양한 브랜드를 제공하기에 선물 받는 사람의 기호와 특성에 따라 최고의 만족도를 함께 드릴 수 있습니다.",
+                                    desc:  "외식, 게임, 레저, 영화, 커피, 도서 등 오프라인과 온라인의 다양한 브랜드를 제공하기에 선물받는 사람의 기호와 특성에 따라 최고의 만족도를 함께 드릴 수 있습니다.",
                                 },
                                 {
                                     num:   "03",
@@ -2397,7 +2397,7 @@ const langData = {
                             hero:           null,
                             heroAlt:        "",
                             title:          "유심 요금제",
-                            desc:           "U+ 알뜰모바일과 GS25가 만나 획기적으로 낮춘 휴대폰 요금제로 GS25편의점 및 GS25 온라인사이트에서 유심칩 구매 가능합니다.",
+                            desc:           "U+ 알뜰모바일과 GS25가 만나 획기적으로 낮춘 휴대폰 요금제로 GS25 편의점 및 GS25 온라인 사이트에서 유심칩 구매 가능합니다.", /* 2026.07.06 edit 이소라 */
                             advantageTitle: "GS25 요금제 장점",
                             advantages: [
                                 { num: "01", title: "간편하게 가입하는 요금제", desc: "가까운 GS25에서 구매 가능 전용 사이트에서<br /> 간편하게 가입하는 요금제" },
@@ -2505,13 +2505,13 @@ const langData = {
                                     step:    "Step 1",
                                     title:   "셀프형 자동충전카드 구매",
                                     bullets: [
-                                        "가까운 GS25에서 하이패스 카드 구매",
+                                        "가까운 GS25에서 하이패스카드 구매", /* 2026.07.06 edit 이소라 */
                                         "카드 구입비: 5,000원",
                                     ],
                                 },
                                 {
                                     step:    "Step 2",
-                                    title:   "카드등록 및 결제정보등록",
+                                    title:   "카드 등록 및 결제 정보 등록", /* 2026.07.06 edit 이소라 */
                                     bullets: [
                                         "홈페이지에서 카드번호 및 결제정보등록<br />(계좌 or 신용카드)",
                                         "<span style=\"color: #fb6432\">카드등록 후 24시간 이후 사용 가능</span>",
@@ -2519,7 +2519,7 @@ const langData = {
                                 },
                                 {
                                     step:    "Step 3",
-                                    title:   "하이패스 카드 이용",
+                                    title:   "하이패스카드 이용", /* 2026.07.06 edit 이소라 */
                                     bullets: [
                                         "하이패스 단말기에 삽입하여 사용",
                                         "등록된 결제방식을 통해 자동 충전됨",
@@ -2528,7 +2528,7 @@ const langData = {
                                 
                             ],
                             hipassChargeTitle: "하이패스 카드 충전",
-                            hipassChargeDesc: "하이플러스카드에서 출시한 모든 카드 충전가능 ('도로공사', 'EX' 기재된 카드 충전불가)",
+                            hipassChargeDesc: "하이플러스카드에서 출시한 모든 카드 충전 가능 ('도로공사', 'EX' 기재된 카드 충전 불가)", /* 2026.07.06 edit 이소라 */
                             hipassTerminalTitle: "하이패스단말기 판매",
                             hipassTerminalDesc: "한국도로공사가 인증하고 2년 연속 한국품질만족도 1위 'GPASS' 단말기 판매",
                             hipassTerminalImg:    imgHipassTerminal,
@@ -2560,10 +2560,10 @@ const langData = {
                             ],
                             unpaidTitle: "고속도로 미납통행료 납부 방법",
                             unpaidSteps: [
-                                { step: "Step 1", title: "GS25 편의점에게<br />납부요청",
+                                { step: "Step 1", title: "GS25 편의점에게<br />납부 요청", /* 2026.07.06 edit 이소라 */
                                 },
                                 { step: "Step 2", title: "차량번호 입력" },
-                                { step: "Step 3", title: "개인정보제공동의" },
+                                { step: "Step 3", title: "개인정보 제공 동의" }, /* 2026.07.06 edit 이소라 */
                                 { step: "Step 4", title: "생년월일 입력" },
                                 { step: "Step 5", title: "결제(현금/신용카드)" },
                             ],
@@ -2573,13 +2573,13 @@ const langData = {
                             hero:    null,
                             heroAlt: "",
                             title:   "온라인몰 편의점 결제",
-                            desc:    "온라인몰(쇼핑, 게임, 항공사, 기타)에서 구매할 때 '편의점결제'를 선택하고 문자로 수납번호나 바코드를 받아 GS25에서 현금 결제할 수 있는 서비스입니다.",
+                            desc:    "온라인몰(쇼핑, 게임, 항공사, 기타)에서 구매할 때 '편의점 결제'를 선택하고 문자로 수납번호나 바코드를 받아 GS25에서 현금 결제할 수 있는 서비스입니다.", /* 2026.07.06 edit 이소라 */
                             serviceTitle: "편의점 결제의 장점",
                             serviceAdvantages: [
                                 {
                                     num:   "01",
                                     title: "보편성",
-                                    desc:  "은행보다 많고 가까운 집 근처 편의점에서 24시간 결제 가능<br /><span class=\"txt_point\">전국 모든 GS25 점포에서 수납 대행</span><br />(실시간 입금확인, 대면 거래)",
+                                    desc:  "은행보다 많고 가까운 집 근처 편의점에서 24시간 결제 가능<br /><span class=\"txt_point\">전국 모든 GS25 점포에서 수납 대행</span><br />(실시간 입금 확인, 대면 거래)", /* 2026.07.06 edit 이소라 */
                                 },
                                 {
                                     num:   "02",
@@ -2594,7 +2594,7 @@ const langData = {
                                 {
                                     num:   "04",
                                     title: "안전성",
-                                    desc:  "복잡한 공인인증서나 보안 카드가 필요 없고, 결제정보 노출 방지<br />대면 거래에 따른 전자금융사고 (스미싱)<br />예방",
+                                    desc:  "복잡한 공인인증서나 보안 카드가 필요 없고,<br /> 결제정보 노출 방지<br />대면 거래에 따른 전자금융사고 (스미싱) 예방",
                                 },
                             ],
                             mallPaymentTitle: "편의점 결제 이용 방법",
@@ -2859,10 +2859,10 @@ const langData = {
                     hero: null,
                     heroAlt: "",
                     title: "공공요금수납 서비스",
-                    desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.",
+                    desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25 편의점에서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.",
                     sections: [],
                     panelExtra: {
-                        desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25편의점에 서 24시간 365일 세금, 4대보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.<br class=\"m_br\" /><br class=\"m_br\" />기존지로 납부 외 휴대폰을 통한 모바일수납도 가능하며,납부공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부가능합니다.",
+                        desc: "지로고지서에 편의점 수납용 바코드가 있다면 GS25 편의점에서 24시간 365일 세금, 4대 보험료 및 공과금의 편리한 납부가 가능한 서비스입니다.<br /> 기존지로 납부 외 휴대폰을 통한 모바일 수납도 가능하며,납부 공과금에 따라 현금과 계좌이체 및 신용카드까지 다양한 수단으로 납부 가능합니다.", /* 2026.07.06 edit 이소라 */
                     },
                     taxTitle: "납부가능 세금 및 공과금",
                     taxGroups: [
@@ -3146,31 +3146,31 @@ const langData = {
                 [
                     '대한민국 토종 브랜드의 <br class="m_br" />자존심을 지키고 있는 GS25는',
                     "'수익을 낼 수 있는 가맹점을 늘린다'는 <br class=\"m_br\" />프랜차이즈 사업의 대원칙을",
-                    '변함없이 지켜온 결과, <br class="m_br" />개별점 수익성이 가장 높은 국내 최고의<br class="m_br" /> 편의점 브랜드로 <br class="p_br" />자리매김하였습니다.', //26.06.23 edit 정다희 : 오타 수정
+                    '변함없이 지켜온 결과, <br class="m_br" />개별점 수익성이 가장 높은<br class="p_br" /> 국내 최고의<br class="m_br" /> 편의점 브랜드로 자리매김하였습니다.', //26.06.23 edit 정다희 : 오타 수정
                 ],
-                [
+                /*[
                     "'한국에서 가장 존경받는 기업' 16년 연속 1위,",
                     '한국서비스 품질지수(KS-SQI) 1위 <br class="m_br" />총 22회 수상 등 공신력 있는 대외 기관의',//26.06.23 edit 정다희 : 오타 수정
                     "평가 결과로 이어지고 있습니다.",
-                ],
+                ], 2026.07.06 del 이소라 */
             ],
             str: {
                 title: "당신 곁에는 언제나<br />GS25가 있습니다.",
                 storeFind: "매장 찾기",
                 snsInstaAria: "인스타그램",
                 snsYtAria: "유튜브",
-                items: [
+                items: [ /* 2026.07.06 edit 이소라 */
                     {
-                        title: "업계 최고<br />점포 당 매출액 달성",
-                        desc: '점포 경쟁력을<br class="m_br" />강화하고 고객중심의 상품서비스 제공을 통해<br />편의점 업계 최고의 매출액을 달성하고 있습니다.',
+                        title: "업계 최고<br />점포당 매출액 달성",
+                        desc: '점포 경쟁력을 강화하고<br class="m_br" /> 고객 중심의 상품·서비스 제공을 통해<br />편의점 업계 최고의 매출액을 달성하고 있습니다.',
                     },
                     {
-                        title: 'GS25만의 차별화된<br class="p_br" /> 상품과<br class="m_br" />서비스 제공',
-                        desc: '안전하고 맛있는 후레쉬푸드 상품 등 고품질의 먹거리 상품 개발과<br class="p_br" />좋은 품질, 합리적 가격의 PB브랜드 \'유어스\',<br class="p_br" />GS리테일의 전용 어플리케이션 우리동네GS 등 차별화된 상품과 서비스를 통해 고객에게 새로운 가치를 제공하고 있습니다.',/*26.06.22 edit 정다희 : 유어스 텍스트 국문으로 수정*/
+                        title: 'GS25만의 차별화된<br class="p_br" /> 상품과<br class="m_br" /> 서비스 제공',
+                        desc: '안전하고 맛있는 후레쉬푸드 상품 등 고품질의 먹거리 상품 개발과<br class="p_br" /> 좋은 품질, 합리적 가격의 PB 브랜드 \'유어스\',<br class="p_br" /> GS리테일의 전용 어플리케이션 우리동네GS 등<br class="p_br" /> 차별화된 상품과 서비스를 통해 고객에게 새로운 가치를 제공하고 있습니다.',/*26.06.22 edit 정다희 : 유어스 텍스트 국문으로 수정*/
                     },
                     {
-                        title: '경영주와의 끊임없는 소통과<br class="m_br" />협력을 통한 <br class="p_br" />단단한 파트너십',
-                        desc: "경영주와 본부의 파트너십 구축을 위해 다양한 소통창구와 상생제도를 도입하여 운영중에 있습니다. Refresh 휴가지원, GS25 20's Club 등을 업계 최초로 개발하여 경영주의 만족과 자부심을 높이고 있습니다.",
+                        title: '경영주와의 끊임없는 소통과<br /> 협력을 통한 단단한 파트너십',
+                        desc: "경영주와 본부의 파트너십 구축을 위해 다양한 소통 창구와 상생 제도를 도입하여 운영 중에 있습니다.<br /> Refresh 휴가 지원, GS25 20's Club 등을 업계 최초로 개발하여 경영주의 만족과 자부심을 높이고 있습니다.",
                     },
                 ],
             },
@@ -4997,7 +4997,7 @@ function goBack() {
 .sec_header > h3 + .sec_header_desc,
 .sec_header > h3 + .sec_note,
 .sec_header > h3 + .pop_exclude { margin-top: 12px; }
-.sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc {font-weight: 700;font-size: 2rem;line-height: 1.35;letter-spacing: -0.01em;}
+.sec_header > .sec_header_desc, .sec_header > .sec_mobile_desc {font-weight: 700;font-size: 2rem;line-height: 1.5;letter-spacing: -0.01em;}
 .sec_header .sec_cite { margin-left: 16px; color: #67676f; font-size: 1.4rem; font-weight: 500; font-style: normal; letter-spacing: -0.01em; }
 
 .cafe_panel .brand_panel_bg > img { object-position: center bottom }
@@ -5010,7 +5010,7 @@ function goBack() {
 
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px) }
 .brand_panel_title > p{font-weight: 700;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;}
-:deep(.feature_card_desc), :deep(.step_bullets > li){font-weight:700;}
+:deep(.feature_card_desc), :deep(.step_bullets > li){font-size:1.8rem}  /* 2026.07.06 edit 이소라 */
 
 .bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.png); background-size: cover; background-position: center bottom; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out }
 .bg_wrap.active > .bg { transform: scale(0.8) }
@@ -5034,9 +5034,9 @@ function goBack() {
 .txt_area > .logo_wrap > img { width: auto; margin: 0 auto; display: block }
 .m_gs25 { font-style: normal; display: none }
 .sec_brand_about { padding: clamp(140px, 10.42vw, 200px) 20px; background-color: #f8f8f8; }
-.sec_brand_about > .about_inner { width:100%; max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px }
+.sec_brand_about > .about_inner { width:100%; max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; text-align: center;}
 .sec_brand_about > .about_inner > .about_txt > p  { overflow: hidden }
-.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block }
+.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 3.6rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; will-change: transform, opacity; display: block } /* 2026.07.06 edit 이소라 */
 .sec_brand_str > .str_inner { max-width: 1460px; margin: 0 auto; padding: 200px 20px; }
 .str_header { padding-bottom: 80px; display: flex; justify-content: space-between; align-items: flex-end }
 .str_header > h2 { color: #161616; font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em }
@@ -5178,12 +5178,12 @@ button { background-color: #fff }
 .info_card { padding: 32px; background-color: #f8f8f8; border-radius: 12px }
 .info_card strong { margin-bottom:16px; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; display: block }
 .info_card span { font-size: 1.8rem; line-height: 1.4; font-weight:700; }
-.info_card > p {margin-top:14px; color: #67676f; font-size: 1.4rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em }
+.info_card > p {margin-top:14px; color: #67676f; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em }
 .info_card > strong + p {margin-top:0; margin-bottom:8px;}
 .info_card > p + .num_list {margin-bottom:32px;}
 .info_card > p + .num_list li{padding-left:24px;}
 .info_card > p + .num_list li + li {margin-top:4px;}
-.info_card > p + .num_list li > p {font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
+.info_card > p + .num_list li > p {font-size: 1.6rem;line-height: 1.5;letter-spacing: -0.01em;}
 .info_card > p + .num_list li::before{width:16px; height:16px;top:2px;}
 .sinsen_flow_img { width: 100%; max-height:372px; margin-top: 24px; display: block; border-radius: 10px }
 /* 26.06.08 add 정다희 :sinsen_advantge영역 css 추가  */
