@@ -1183,16 +1183,17 @@ const langData = {
             "GS리테일은 책임을 바탕으로 한 자유경쟁의 원칙에 따라 상호 신뢰와 협력으로 <br class=\"p_br\" />공동의 발전을 도모하기 위해 자율적으로 공정거래를 실천하고 있습니다.",
         // ComplianceProgramLead:
         //     "GS리테일은 자율적 공정거래를 적극 실천하기 위해 ‘자율준수 프로그램’을 운영하고 있습니다.",
+        /* 2026.07.06 edit 이소라 */
         ComplianceProgramFeatureItems: [
             {
                 num: "01",
-                title: "CP기준과 절차 마련 및 시행",
+                title: "CP 기준과 절차 마련 및 시행",
                 desc: "전사 구성원들이 공정거래 관련 법규 준수사항을 명확하게 인지하고 실천할 수 있도록 필요한 업무기준과 절차를 마련하고 시행하고 있습니다.",
             },
             {
                 num: "02",
                 title: "최고경영자의 자율준수 의지 및 지원",
-                desc: "최고경영자는 회사의 모든 구성원, 고객 및 이해관계자가 쉽게 인지할 수 있도록 자율준수 의지를 공개적으로 표명하고 CP운영을 적극적으로 지원하고 있습니다.",
+                desc: "최고경영자는 회사의 모든 구성원, 고객 및 이해관계자가 쉽게 인지할 수 있도록 자율준수 의지를 공개적으로 표명하고 CP 운영을 적극적으로 지원하고 있습니다.",
             },
             {
                 num: "03",
@@ -1207,22 +1208,22 @@ const langData = {
             {
                 num: "05",
                 title: "지속적이고 체계적인 자율준수 교육 실시",
-                desc: "공정거래 관련법규 준수 사항 등에 대하여 최고 경영자를 포함한 전 구성원을 대상으로 효과적인 교육을 정기적으로 실시하고 있습니다.",
+                desc: "공정거래 관련법규 준수 사항 등에 대하여 최고경영자를 포함한 전 구성원을 대상으로 효과적인 교육을 정기적으로 실시하고 있습니다.",
             },
             {
                 num: "06",
                 title: "내부감시체계 구축",
-                desc: "내부감시체계를 통해 취약점을 식별하고, 제도개선을 통해 투명한 공정거래 환경을 구축해 나가고 있습니다.",
+                desc: "내부감시체계를 통해 취약점을 식별하고, 제도 개선을 통해 투명한 공정거래 환경을 구축해 나가고 있습니다.",
             },
             {
                 num: "07",
                 title: "공정거래 관련 법규 위반 임직원에 대한 제재",
-                desc: "공정거래 관련 법규 위반 정도에 상응하는 제재 조치를 규정한 사규를 운영하고 있으며 구성원의 법 위반 발견 시, 적극 대응하고<br />향후 유사 행위가 재발하지 않도록 예방활동을 하고 있습니다.",
+                desc: "공정거래 관련 법규 위반 정도에 상응하는 제재 조치를 규정한 사규를 운영하고 있으며 구성원의 법 위반 발견 시, 적극 대응하고 향후 유사 행위가 재발하지 않도록 예방 활동을 하고 있습니다.",
             },
             {
                 num: "08",
-                title: "효과성 평가와 개선조치",
-                desc: "CP가 효과적이고 지속적으로 운영될 수 있도록 CP의 기준, 절차 및 운용 등에 대한 점검과 평가 등을 실시하고 그에 따라 제도개선 조치 등을 시행하고 있습니다.",
+                title: "효과성 평가와 개선 조치",
+                desc: "CP가 효과적이고 지속적으로 운영될 수 있도록 CP의 기준, 절차 및 운용 등에 대한 점검과 평가 등을 실시하고 그에 따라 제도 개선 조치 등을 시행하고 있습니다.",
             },
         ],
         ComplianceManagerRoleFeatureItems: [
@@ -4072,13 +4073,13 @@ const langData = {
                 desc: "-제보자 신분노출(예상)시, 당사자는 경영진단팀에 통보. 경영진단팀은 신분노출 경로를 조사하여, 관련자를 전사 윤리위원회에 상정함.<br />-제보자 본인이 원할 경우, 경영진단팀 면담을 요청할 수 있으며, 이 경우 경영진단팀은 CEO 보고 후, 해당 색출시도 임직원에 대해 즉시 보직변경/이동 발령 등 인사조치 권고를 할 수 있음.",
             },
         ],
-        ReportIntroTitle: "GS리테일 임직원 및 파트너사의 <span class='txt_blue'>부정/불공정 행위 제보와 개선제안</span>에 대한 의견을 쓰는 곳입니다.",
-        ReportIntroDesc: "아래 각 메뉴별 안내사항을 참고 하셔서 작성하여 주시기 바랍니다.",
+        ReportIntroTitle: "GS리테일 임직원 및 파트너사의 <span class='txt_blue'>부정/불공정 행위 제보와 개선 제안</span>에 대한 <br/>의견을 쓰는 곳입니다.", /* 2026.07.06 edit 이소라 */
+        ReportIntroDesc: "아래 각 메뉴별 안내 사항을 참고하셔서 작성하여 주시기 바랍니다.", /* 2026.07.06 edit 이소라 */
         ReportChannelItems: [
             {
                 key: "voice",
                 title: "고객의 소리",
-                desc: "GS25/GS SHOP/GS THE FRESH/ 이용 중<br />고객불만/불편/칭찬사항은 고객의 소리에 접수하시면 관련부서에서 신속히 처리가 됩니다.",
+                desc: "GS25/GS SHOP/GS THE FRESH 이용 중<br />고객불만/불편/칭찬사항은 고객의 소리에 접수하시면 관련부서에서 신속히 처리가 됩니다.", /* 2026.07.06 edit 이소라 */
                 btnText: "고객의 소리 바로가기",
             },
             {
@@ -7512,7 +7513,7 @@ section + section { padding-top:120px; }
 .sub_header h3 { font-weight: 700; font-size: 4rem; line-height: 1.35; letter-spacing: -0.01em; }
 .sub_header p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
 .tab_header { margin-bottom:80px; padding: 20px 0; text-align: center; }
-.tab_header > h2 { font-weight: 700;font-size: 3.2rem;line-height: 1.3;letter-spacing: -0.01em; }
+.tab_header > h2 { font-weight: 700;font-size: 4rem;line-height: 1.3;letter-spacing: -0.01em; } /* 2026.07.06 edit 이소라 */
 .tab_header > p { margin-top: 16px; font-size: 2.4rem; line-height: 1.5; letter-spacing: -0.01em; }
 
 :deep(.feature_cards_grid.feature_card_list) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
@@ -7523,7 +7524,7 @@ section + section { padding-top:120px; }
 :deep(.law_feature_cards .feature_card_item){width: 100%; min-height:140px;}
 :deep(.law_feature_cards .feature_card_num), .law_feature_cards :deep(.feature_card_title) { margin-bottom:6px; }
 
-.purpose_feature_cards :deep(.feature_card_desc), .law_feature_cards :deep(.feature_card_desc) { color:#161616; }
+.purpose_feature_cards :deep(.feature_card_desc), .law_feature_cards :deep(.feature_card_desc) { color:#161616; font-size: 1.8rem; line-height: 1.4;}
 .cp_manager_role_cards :deep(.feature_card_item) { min-height: 140px; }
 .ft_acc_wrap :deep(dl.board_type_toggle) { border-top: 1px solid #161616; }
 .ft_acc_wrap :deep(dl.board_type_toggle > dd) { border-bottom: 1px solid #d7d7df; }
@@ -7571,7 +7572,7 @@ section + section { padding-top:120px; }
 .report_form_wrap .apply_form .form_field_file .file_row { display: flex; align-items: center; gap: 10px; }
 .report_form_wrap .apply_form .form_field_file .file_row > span { color: #161616; font-size: 1.4rem; line-height: 1.4; }
 .purpose_feature_cards :deep(.feature_card_item) { min-height: 194px; padding: 32px; }
-.purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 6px; font-size: 1.8rem; line-height: 1.5; }
+.purpose_feature_cards :deep(.feature_card_title) { margin-bottom: 6px; font-size: 2rem; line-height: 1.35; } /* 2026.07.06 edit 이소라 */
 .purpose_feature_cards :deep(.feature_card_desc) { color: #161616; font-weight: 700; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em; }
 @media screen and (min-width: 769px) {
 }

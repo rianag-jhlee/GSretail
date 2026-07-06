@@ -1685,11 +1685,11 @@ export default {
                         },
                         Strategy: {
                             Title: "추진전략",
-                            Cards: [
-                                { num: "01", tit: "공정한 거래문화 정착", list: ["공정거래 법규 준수", "불공정거래 사전예방 시스템", "공정한 거래기회 제공"] },
-                                { num: "02", tit: "실질적 경영지원", list: ["금융지원 / 대금조기 지급", "업무역량 지원", "기타/복리후생 지원"] },
-                                { num: "03", tit: "지속적 성장추구", list: ["공동상품개발 확대", "브랜드마케팅 지원", "성과공유제 도입/운용"] },
-                                { num: "04", tit: "열린소통", list: ["정기적 간담회 운영", "문화교류 (Family-Day)", "파트너사 만족도 개선"] }
+                            Cards: [/* 2026.07.06 edit 이소라 */
+                                { num: "01", tit: "공정한 거래 문화 정착", list: ["공정거래 법규 준수", "불공정거래 사전 예방 시스템", "공정한 거래 기회 제공"] },
+                                { num: "02", tit: "실질적 경영지원", list: ["금융지원 / 대금조기 지급", "업무 역량 지원", "기타/복리후생 지원"] },
+                                { num: "03", tit: "지속적 성장 추구", list: ["공동 상품 개발 확대", "브랜드마케팅 지원", "성과공유제 도입/운용"] },
+                                { num: "04", tit: "열린소통", list: ["정기적 간담회 운영", "문화 교류 (Family-Day)", "파트너사 만족도 개선"] }
                             ],
                             img: require("@/assets/images/dummy/gsrsu03010101_1.png"),
                             imgMo: require("@/assets/images/sub/gsrsu/gsrsu03010101_1_mo.png"),
@@ -3795,7 +3795,7 @@ export default {
     .policy_box_wrap { padding: 60px; background-color: #F8F8F8; border-radius: 20px; }
     .policy_list { display: flex; flex-direction: column; gap: 24px; }
     .policy_item { display: flex; align-items: flex-start; gap: 12px; }
-    .policy_item .label { font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; line-height: 1.45; }
+    .policy_item .label { min-width: 35px; font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; line-height: 1.45; }
     .policy_item .desc { font-size: 20px; font-weight: 400; color: #161616; line-height: 1.45; }
     .supplychain_policy .system_bg {display: block; margin-top:0; padding: 60px; background-color: #F8F8F8; border-radius: 12px; display: flex; justify-content: center; align-items: center; }
 
@@ -3887,6 +3887,7 @@ export default {
     /* 섹션 공통 */
     .talent_indicators .support_section .section_head {margin-bottom:40px;}
     .talent_indicators .support_section + .support_section {margin-top:100px;}
+      .talent_indicators .support_section .section_head p {font-size: 24px;} /* 2026.07.06 edit 이소라 */
     .talent_indicators .section_title_sub { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
     .talent_indicators .support_section.award_section .award_row {padding: 9px 0;}
     /* 2열 그리드 레이아웃 */
@@ -3930,7 +3931,7 @@ export default {
     .talent_indicators .item_inner .tit_area { margin-bottom: 24px; }
     .talent_indicators .item_inner .num { display: block; margin-bottom:4px; color: #107AF2; font-size: 2.8rem; font-weight: 700; line-height:130% }
     .talent_indicators .item_inner .tit { color: #000; font-size: 2.8rem; font-weight: 600; line-height:130% }
-    .talent_indicators .item_inner .desc { color: #666; font-size: 1.6rem; line-height: 1.5; }
+    .talent_indicators .item_inner .desc { color: #666; font-size: 2.4rem; line-height: 1.5; } /* 2026.07.06 edit 이소라 */
 
     /* 수상 이력 리스트 (하단) */
     .award_list {margin-top:20px;}
@@ -3982,7 +3983,7 @@ export default {
     .safety_management_wrap .p_desc { font-size: 24px; font-weight: 400; color: #161616; line-height: 1.5; word-break: keep-all; }
     .safety_management_wrap .policy_list_wrap { display: flex; flex-direction: column; gap: 24px; }
     .safety_management_wrap .policy_item { display: flex; align-items: flex-start; gap: 8px; }
-    .safety_management_wrap .item_label { font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; }
+    .safety_management_wrap .item_label { min-width: 35px; font-size: 20px; font-weight: 700; color: #161616; white-space: nowrap; } /* 2026.07.06 edit 이소라 */
     .safety_management_wrap .item_text { font-size: 20px; color: #161616; line-height: 1.35; }
     .safety_management_wrap .diagram_box_wrap { width: 100%; padding: 60px 0; background-color: #f8f8f8; border-radius: 12px; display: flex; flex-direction: column; align-items: center; }
     .safety_management_wrap .notice_text { font-size: 14px; color: #67676f; }

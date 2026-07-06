@@ -138,7 +138,7 @@ const langData = {
         },
     },
     en: {
-        pageTitle: "Directions"/* 260604 번역 */,
+        pageTitle: "Location"/* 2026.07.06 edit 이소라 */,
         location: {
             title: "GS Tower",
             addressLabel: "Address",

@@ -682,18 +682,18 @@
                     <!-- 26.06.26 add 정다희 : 가맹타입 비교 테이블 가로 스크롤 안내 추가 -->
                     <p class="franchise_compare_scroll_hint">{{ t.consultFormTexts.compareScrollHint }}</p>
                     <!-- //26.06.26 add 정다희 : 가맹타입 비교 테이블 가로 스크롤 안내 추가 -->
-                    <ul class="list_note">
+                    <ul class="list_note flex">
                         <li>
-                            <p>{{ t.consultFormTexts.compareNote1 }}</p>
+                            <em>*</em><p>{{ t.consultFormTexts.compareNote1 }}</p>
                         </li>
                         <li>
-                            <p>{{ t.consultFormTexts.compareNote2 }}</p>
+                            <em>*</em><p>{{ t.consultFormTexts.compareNote2 }}</p>
                         </li>
                         <li>
-                            <p class="txt_link" v-html="t.consultFormTexts.compareNote3"></p>
+                            <em>*</em><p v-html="t.consultFormTexts.compareNote3"></p>
                         </li>
                         <li>
-                            <p class="txt_link" v-html="t.consultFormTexts.compareNote4"></p>
+                            <em>*</em><p v-html="t.consultFormTexts.compareNote4"></p>
                         </li>
                     </ul>
                 </section>
@@ -1969,7 +1969,7 @@ const startupProcessSteps = [
         num: 9,
         lead: "",
         title: "점포 오픈! 축하합니다!",
-        desc: "이제 GS25 경영주님으로 새로운 시작입니다.<br />앞으로도 GS25가 늘 곁에서 함께합니다!<br />점포 운영에 필요한 모든것을 배워요.!",
+        desc: "이제 GS25 경영주님으로 새로운 시작입니다.<br />앞으로도 GS25가 늘 곁에서 함께합니다!<br />점포 운영에 필요한 모든것을 배워요!", /* 2026.07.06 edit 이소라 */
         moreLink: false,
     },
 ];
@@ -2203,7 +2203,7 @@ const benefitOperationGroups = [
     },
     {
         title: "경조/보험 지원",
-        desc: "예기치 못한 순간에도 GS25가 함께해요",
+        desc: "예기치 못한 순간에도 GS25가 함께해요.", /* 2026.07.06 edit 이소라 */
         cols: 3,
         items: [
             {
@@ -2221,8 +2221,8 @@ const benefitOperationGroups = [
         ],
     },
     {
-        title: "장기운영 혜택",
-        desc: "오래 함께한 경영주님에게 더 큰 감사를 전해요",
+        title: "장기 운영 혜택", /* 2026.07.06 edit 이소라 */
+        desc: "오래 함께한 경영주님에게 더 큰 감사를 전해요.", /* 2026.07.06 edit 이소라 */
         cols: 3,
         items: [
             {
@@ -2241,7 +2241,7 @@ const benefitOperationGroups = [
     },
     {
         title: "카운터FF 운영 지원",
-        desc: "치킨25, 카페25 운영을 위한 실질적인 지원을 받아보세요",
+        desc: "치킨25, 카페25 운영을 위한 실질적인 지원을 받아보세요.", /* 2026.07.06 edit 이소라 */
         cols: 3,
         items: [
             {
@@ -3184,7 +3184,7 @@ const langData = {
         startupProcessTitle: "상담 신청부터 개점까지, <br />최소 30일이면 나만의 GS25를 오픈할 수 있어요!", /*26.06.24 edit 정다희 : 타이틀 수정*/
         processMoreOpenLabel: "더 알아보기",
         processMoreCloseLabel: "접기",
-        franchiseTypeTitle: "내 조건에 딱 맞게!<br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요", /*26.06.25 edit 정다희 : 타이틀 수정*/ 
+        franchiseTypeTitle: "내 조건에 딱 맞게!<br />GS25만의 3가지 맞춤형 가맹 타입을 만나보세요.", /* 2026.07.06 edit 이소라 */
         franchiseCompareTitle: "GS25의 가맹타입을 한 눈에 비교해보세요!", /*26.06.25 edit 정다희 : 타이틀 수정*/ 
         benefitPanelAria: {
             store: "탄탄한 점포",
@@ -3192,14 +3192,14 @@ const langData = {
             life: "편안한 경영주 생활",
         },
         storeSectionAriaLabel: "추천 점포 찾기",
-        storeIntro: "체계적인 상권 분석으로 선정한 GS25 추천점포를 확인해보세요", /**26.06.24 edit 정다희 : 설명 수정*/
+        storeIntro: "체계적인 상권 분석으로 선정한 GS25 추천 점포를 확인해보세요", /* 2026.07.06 edit 이소라 */
         storeSearch: {
-            regionLabel: "지역선택",
+            regionLabel: "지역 선택", /* 2026.07.06 edit 이소라 */
             allLabel: "전체",
             sidoInit: "시/도 선택",
             sigunguInit: "구/군 선택",
-            franchiseTypeLabel: "가맹타입",
-            storeTypeYouthLabel: "점포유형/청년창업",
+            franchiseTypeLabel: "가맹 타입", /* 2026.07.06 edit 이소라 */
+            storeTypeYouthLabel: "점포 유형/청년창업", /* 2026.07.06 edit 이소라 */
             newStoreLabel: "신규점",
             existingStoreLabel: "기존점",
             youthStartupLabel: "청년창업",
@@ -3279,7 +3279,7 @@ const langData = {
         },
         successPointCards: [
             {
-                // em: "수익성 분석", /**26.06.24 del 정다희 : em 삭제*/ 
+                em: "수익성 분석", /* 2026.07.06 edit 이소라 */
                 title: "수익성 중심의 신규 점포 오픈",
                 desc: "점포 개발 전문가의 현장분석과 데이터를 기반으로 수익성이 보이는 점포만 오픈합니다.",
             },
@@ -3429,10 +3429,10 @@ const langData = {
             compareSafeOpGs1: "24시간 운영: 月 최대 800만원<br />18시간 운영: 月 최대 550만원",
             compareSafeOpGs2: "24시간 운영: 月 최대 750만원<br />18시간 운영: 月 최대 500만원",
             compareSafeOpGs3: "24시간 운영: 月 최대 700만원<br />18시간 운영: 月 최대 450만원",
-            compareNote1: "* GS1 Type 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년",
-            compareNote2: "* GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다",
-            compareNote3: "* 신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다.", /*26.06.30 del 정다희 : '신선강화점 자세히 알아보기' 링크 삭제*/ 
-            compareNote4: "* 안심운영제도란?<br /> 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우, 경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. ", /*26.06.24 edit 정다희 : br 위치 수정, 링크삭제*/
+            compareNote1: "GS1 Type 수익추구 특약 : 시설 인테리어 및 장비 사용료 경영주 투자, 가맹계약기간 7년", /* 2026.07.06 edit 이소라 */
+            compareNote2: "GS3 Type은 가맹계약 체결 전 상호 협의에 따라 수익배분율을 달리 정할 수 있습니다",  /* 2026.07.06 edit 이소라 */
+            compareNote3: "신선강화점으로 오픈하는 경우, 상품준비금은 600만원 상향, 담보 설정은 1,000만원 상향됩니다. <br /><a href='#' target='_blank' class='btn_icon_arrow btn_base after primary'>신선강화점 자세히 알아보기</a>", /*26.06.30 del 정다희 : '신선강화점 자세히 알아보기' 링크 삭제*/  /* 2026.07.06 edit 이소라 */
+            compareNote4: "안심운영제도란?<br /> 경영주가 계약서에서 정한 내용을 준수하고 연중무휴, 1일 18시간 이상 점포 운영할 경우, 경영주의 수입이 안심 운영 지원금 기준에 미달한 경우에 한하여 회사가 경영주의 운영비를 보조하는 제도입니다. ", /*26.06.24 edit 정다희 : br 위치 수정, 링크삭제*/  /* 2026.07.06 edit 이소라 */
             compareScrollHint: "좌우로 스크롤하여 전체 내용을 확인하실 수 있습니다.", /*26.06.24 add 정다희 : 가맹타입 비교 테이블 가로 스크롤 안내*/
             benefitPolicyNote: "* 해당 제도는 회사 경영여건 및 운영 방침에 따라 일부 변경/삭제될 수 있습니다.",
             storeTableRegion: "지역",
@@ -3508,8 +3508,8 @@ const langData = {
         },
         startupConsentItems: [
             "- 입력하신 정보는 창업상담을 위해서만 사용합니다. 수집항목, 이용 및 목적, 보유 및 이용기간은 다음과 같으며, 기타 개인정보 취급사항은 홈페이지 하단의 '개인정보 처리방침'을 참고하시기 바랍니다.",
-            "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 생년월일,",
-            "- 수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용,",
+            "- 수집하는 개인정보 항목: 이름, 휴대폰번호, 이메일, 생년월일, 관심지역 및 문의 내용", /* 2026.07.06 edit 이소라 */
+            "- 수집 및 목적: 수집한 개인정보를 본인 식별 및 문의사항 확인 및 답변을 위해 활용",
             "- 보유 및 이용기간: 접수 후 1년",
         ],
         seminarConsentItems,
@@ -3775,10 +3775,10 @@ const langData = {
             compareSafeOpGs1: "24-hour operation: up to 8 million won/month<br />18-hour operation: up to 5.5 million won/month"/* 260604 번역 */,
             compareSafeOpGs2: "24-hour operation: up to 7.5 million won/month<br />18-hour operation: up to 5 million won/month"/* 260604 번역 */,
             compareSafeOpGs3: "24-hour operation: up to 7 million won/month<br />18-hour operation: up to 4.5 million won/month"/* 260604 번역 */,
-            compareNote1: "* GS1 Type profit-pursuit special agreement: store owner invests in facility interior and equipment usage fees; franchise contract period 7 years"/* 260604 번역 */,
-            compareNote2: "* For GS3 Type, the profit distribution rate may be set differently by mutual agreement before concluding the franchise contract"/* 260604 번역 */,
-            compareNote3: `* When opening as a fresh-food-enhanced store, the merchandise reserve is increased by 6 million won and the collateral setting is increased by 10 million won. (<a href="/gsrbr010101?depth1=1">Learn More About Fresh-Focused Stores</a>)`/* 260604 번역 */, /*26.06.26 add 정다희 : 링크 추가*/
-            compareNote4: `* What is the Worry-Free Operation System? When the store owner complies with the terms set in the contract and operates the store year-round for 18 or more hours per day,<br/>This is a system in which the company subsidizes the store owner's operating costs only when the store owner's income falls short of the Worry-Free Operation support fund standard. (<a href=\"#\">Learn More About the Worry-Free Operation Program</a>)`/* 260604 번역 */,
+            compareNote1: "GS1 Type profit-pursuit special agreement: store owner invests in facility interior and equipment usage fees; franchise contract period 7 years"/* 260604 번역 */,
+            compareNote2: "For GS3 Type, the profit distribution rate may be set differently by mutual agreement before concluding the franchise contract"/* 260604 번역 */,
+            compareNote3: `When opening as a fresh-food-enhanced store, the merchandise reserve is increased by 6 million won and the collateral setting is increased by 10 million won. (<a href="/gsrbr010101?depth1=1">Learn More About Fresh-Focused Stores</a>)`/* 260604 번역 */, /*26.06.26 add 정다희 : 링크 추가*/
+            compareNote4: `What is the Worry-Free Operation System? When the store owner complies with the terms set in the contract and operates the store year-round for 18 or more hours per day,<br/>This is a system in which the company subsidizes the store owner's operating costs only when the store owner's income falls short of the Worry-Free Operation support fund standard. (<a href=\"#\">Learn More About the Worry-Free Operation Program</a>)`/* 260604 번역 */,
             compareScrollHint: "You can scroll left and right to view the full content."/* 260604 번역 */, /*26.06.24 add 정다희 : 가맹타입 비교 테이블 가로 스크롤 안내*/
             benefitPolicyNote: "* This system may be partially changed/deleted depending on the company's management conditions and operating policies."/* 260604 번역 */,
             storeTableRegion: "Region"/* 260604 번역 */,
@@ -4420,6 +4420,10 @@ section > .inner { margin-inline: calc(50% - 50vw); padding: 80px calc(50vw - 50
 .list_note > li + li { margin-top: 8px; }
 .list_note > li > p { margin: 0; color: #67676F; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }
 .list_note > li > p.txt_link { color: #161616; }
+.list_note.flex > li {display:flex; align-items:flex-start; gap:8px;}
+.list_note.flex > li em {color: #161616; font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em;}
+.list_note.flex > li p {color: #161616;}
+.list_note.flex > li p :deep(a) {margin-top: 6px; cursor: pointer;}
 .txt_link :deep(a) { color: #107AF2 !important; text-decoration: underline !important; }
 .sec_operation .section_header, .sec_life .section_header { margin-bottom: 80px; }
 .icon_card_row:first-child .icon_card_list.type_02 > li > article { padding: 0 0 72px; }
