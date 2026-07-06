@@ -2706,7 +2706,7 @@ function goToSolutionTab(d1Index, d2Index = 0) {
         } else {
             activeD2.value = d2Index;
         }
-         /* //26.07.01 edit 정다희 : 창업 상담 및 신청(activeD1 === 3)은 activeConsultD2 사용  */
+        /* //26.07.01 edit 정다희 : 창업 상담 및 신청(activeD1 === 3)은 activeConsultD2 사용  */
         window.scrollTo({ top: 0 });
     });
 }
