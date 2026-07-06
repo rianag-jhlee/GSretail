@@ -918,7 +918,7 @@
 
                             <h3 v-html="tab.purchaseTitle"></h3>
 
-                            <p v-if="tab.purchaseNote" class="sec_header_desc" v-html="tab.purchaseNote" />
+                            <!-- 26.07.06 Del 이종환 <p v-if="tab.purchaseNote" class="sec_header_desc" v-html="tab.purchaseNote" /> -->
 
                         </header>
                         <div class="gift_purchase_wrap">
