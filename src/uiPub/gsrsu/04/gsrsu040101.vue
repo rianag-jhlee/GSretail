@@ -7583,6 +7583,8 @@ section + section { padding-top:120px; }
     .cp_manager_banner figcaption {max-width: 300px;}
 }
 @media screen and (max-width: 768px) {
+    .cont_inner {padding-top:80px;}
+
     :deep(.feature_cards_grid.feature_card_swiper) { width: calc(100% + 40px); padding: 0 20px; margin: 0 -20px; }
     .purpose_feature_cards :deep(.feature_card_item) { padding:32px 20px; min-height: 171px !important; }
     :deep(.purpose_feature_cards.feature_card_swiper .swiper-slide) { width: 80vw; box-sizing: border-box; }

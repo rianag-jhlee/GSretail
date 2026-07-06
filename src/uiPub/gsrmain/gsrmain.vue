@@ -462,7 +462,6 @@ export default {
             hoverIndex: null,
 
             /* 26.07.02 Add 이종환 : hero message 스클롤 기능 관련 */
-            hasTriggered: false,
             userScrolling: false
         };
     },
@@ -630,7 +629,7 @@ export default {
 
                 this.numMotionScrollTrigger = ScrollTrigger.create({
                     trigger: heroEl,
-                    start: "top 80%",
+                    start: "top 35%",
                     once: true,
                     onEnter: playNumMotion,
                 });
@@ -821,6 +820,10 @@ export default {
         initVideoScrollDelay() {
             this.$nextTick(() => {
 
+                if (window.innerWidth <= 768) {
+                    return;
+                }
+
                 const video = this.$el.querySelector(".swiper-slide-active video");
                 const hero = this.$refs.heroMessageRef;
 
@@ -848,6 +851,12 @@ export default {
                         if (window.scrollY >= targetTop) return;
 
                         this.scrollHeroMessage();
+
+                        setTimeout(() => {
+                            const header = document.getElementById("header");
+                            header?.classList.remove("hide");
+                        }, 500);
+                        
                     }, 5000); //비디오 1회 loop 시간
                 };
 

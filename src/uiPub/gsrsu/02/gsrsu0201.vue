@@ -230,7 +230,7 @@ export default {
             InnerTabIdx: 0,
             langData: {
                 ko: {
-                    MainTitle: "환경경영",
+                    MainTitle: "환경",
                     MainsubTitle: "Environmental Management",
                     Tabs1: [{ item: "환경경영" }, { item: "친환경 활동" }, { item: "함께하는 기후변화 대응" }],
                     InnerTabs: [{ item: "그린 밸류체인" }, { item: "그린 스토어" }, { item: "그린 프로덕트" }],
@@ -677,6 +677,8 @@ p { color: #161616; font-size: 20px; line-height: 1.45; word-break: keep-all; }
     .green_product li.one_divide .image_wrap, .green_product li.two_divide .image_wrap { flex: 0 0 auto; width: 100%; height: auto;}
 }
 @media screen and (max-width: 768px) {
+    .cont_inner {padding-top:80px;}
+    
     .title_wrap {display:none;}
     .tab_wrap :deep(ul.type_02){margin-top:16px;}
     .panel{margin-top:60px;}
