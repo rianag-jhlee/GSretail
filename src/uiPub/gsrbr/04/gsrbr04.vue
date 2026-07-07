@@ -35,28 +35,6 @@
         </section>
         <!-- //26.07.02 edit 정다희 :sec_brand_visual과 동일 구조·GSAP 스크롤 인터랙션 적용 -->
 
-        <!-- 26.07.02 add 정다희 : sec_brand_str 추가 -->
-        <section class="sec_brand_str">
-            <div class="str_inner">
-                <header class="str_header">
-                    <div>
-                        <h2 v-html="t.str.headerTitle"></h2>
-                        <p class="str_desc" v-html="t.str.desc"></p>
-                    </div>
-                    <div class="str_actions">
-                        <a
-                            :href="t.str.websiteUrl"
-                            class="btn_website"
-                            target="_blank"
-                        >{{ t.str.websiteLabel }}</a>
-                    </div>
-                </header>
-                <div class="str_content">
-                    <img :src="isMobile ? t.str.imgMo : t.str.img" :alt="t.str.alt">
-                </div>
-            </div>
-        </section>
-        <!-- //26.07.02 add 정다희 : sec_brand_str 추가 -->
         <section class="body_wrap">
             <div class="cont_area">
                 <article class="cont_inner">
@@ -100,6 +78,28 @@
                     <!-- //26.07.02 add 정다희 : benefit_list 위치 이동-->
                 </article>
             </div>
+
+            <!-- 26.07.02 add 정다희 : sec_brand_str 추가 -->
+            <section class="sec_brand_str">
+                <div class="str_inner">
+                    <header class="str_header">
+                        <h2 v-html="t.str.headerTitle"></h2>
+                    </header>
+                    <div class="str_content">
+                        <h3 v-html="t.str.contTitle"></h3>
+                        <p class="str_desc" v-html="t.str.desc"></p>
+                        <img :src="isMobile ? t.str.imgMo : t.str.img" :alt="t.str.alt">
+                        <div class="str_actions">
+                            <a
+                                :href="t.str.websiteUrl"
+                                class="btn_icon_arrow btn_xl border after"
+                                target="_blank"
+                            >{{ t.str.websiteLabel }}</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- //26.07.02 add 정다희 : sec_brand_str 추가 -->
             <!-- 26.07.02 add 정다희 : cont_inner benefit_section 삭제 -->
             <!-- <div class="cont_inner benefit_section">
                 <h3 v-html="t.BenefitTitle"></h3>  
@@ -221,9 +221,10 @@ export default {
                     ListBack: "목록으로 돌아가기",
                     /* 26.07.02 add 정다희 : sec_brand_str 추가 */
                     str: {
-                        headerTitle: "언제 어디서나 산책하며<br />돈 버는 즐거움<br class=\"m_br\">우리동네 딜리버리",
+                        headerTitle: "우리동네 딜리버리",
+                        contTitle: "언제 어디서나 산책하며 돈 버는 즐거움",
                         desc: "우리동네 GS25, GS THE FRESH의<br class=\"m_br\"/>상품과 식품, 맛집 배달까지<br />별도의 장비 없이 성인이라면 누구나 손쉽게<br class=\"m_br\"/>배달 가능한 서비스입니다.",
-                        websiteLabel: "홈페이지",
+                        websiteLabel: "우리동네 딜리버리",
                         websiteUrl: "#",
                         img: imgDelivery,
                         imgMo: imgDeliveryMo,
@@ -460,6 +461,7 @@ h3 { margin-bottom:16px; color: #161616; font-size: 48px; font-weight: 700; }
 h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 
 /* 26.07.01 add 정다희 : sec_brand_visual*/
+.cont_inner {padding-top: 200px;}
 .sec_brand_visual { position: relative; height: calc(100vh + 800px); max-width: 100%; }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100%; width: 100%; max-width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden; }
 .bg_wrap { width: 100%; height: 100%; position: relative; z-index: 1; overflow: hidden; clip-path: inset(0% round 0px); -webkit-clip-path: inset(0% round 0px); }
@@ -490,14 +492,15 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 /* //26.07.02 add 정다희 : sec_brand_about */
 
 /* 26.07.02 add 정다희 : sec_brand_str 스타일 */
-.sec_brand_str .str_inner {  width: 1460px; max-width: 100%; margin: 0 auto; padding:200px 20px; }
-.sec_brand_str .str_header {flex-wrap:wrap; margin:0;}
-.str_header {margin-bottom: 64px; display: flex; justify-content: space-between; align-items: flex-end }
+.sec_brand_str .str_inner {  width: 1460px; max-width: 100%; margin: 0 auto; padding:200px 20px 0; }
+.sec_brand_str .str_header {margin:0;}
+.str_header {margin-bottom: 64px; }
 .str_header h2 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;text-align: left; }
-.str_header p {margin-top: 16px;font-weight: 600;font-size: 2.4rem;line-height: 1.35;letter-spacing: -0.01em;}
-.str_header .str_actions { margin-left:auto; display: flex; align-items: center; gap: 24px }
-.str_content{margin-top: 40px; padding:56px 64px; background-color:#F8F8F8;}
-.str_content > img{display: block; width: 100%;}
+.str_content {position:relative; margin-top: 40px; padding:60px; background-color:#E7F2FE; border-radius:20px; }
+.str_content h3 {margin-bottom: 16px; color: #161616; font-size: 32px; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em;}
+.str_content p {margin-top: 16px; color: #161616; font-weight: 400; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em;}
+.str_content > img{display: block; width: 100%; margin-top: 40px;}
+.str_content .str_actions { position:absolute; top:82px; right:60px; }
 /* Body Content Area */
 /* .body_wrap {padding-bottom:200px;} */
 /* .body_wrap .cont_area .cont_inner > ul { margin-top: 65px; margin-bottom: 40px; border-radius: 12px; } */
@@ -569,6 +572,10 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     .benefit_list li::before { position: absolute; top: 0; left: 0; width: 60px; height: 60px; background-color: #eee; border-radius: 50%; content: ''; }
     .benefit_list li::after {top:10px; left:10px;}
     .benefit_list li:nth-child(2)::after, .benefit_list li:nth-child(3)::after {top:10px; left:10px;}
+    
+    .str_content > img {margin-bottom: 40px;}
+    .str_content .str_actions {position:static;}
+    .str_content .str_actions a {position:static; width:100%}
 }
 
 @media screen and (max-width: 768px) {
@@ -576,6 +583,7 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     :deep(.m_br) { display: block; }
 
     h3 {font-size:24px;}
+    .cont_inner {padding-top: 40px;}
     /* 26.07.02 add 정다희 : 배경 */
     .sticky { height: 100vh; top: 0; }
     .bg_wrap > .bg { background-position: center; }
@@ -595,9 +603,10 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
    /* 26.07.02 add 정다희 : sec_brand_str  */
     .sec_brand_str .str_inner{width:100%; padding: 140px 20px; }
     .sec_brand_str .str_header h2{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
-    .str_header p{margin-top:8px; font-weight: 700;font-size: 1.6rem;line-height: 1.24;}
-    .str_header .str_actions { margin-left:0; margin-top:16px; gap:14px; flex: none; justify-content: flex-start }
-    .str_content{padding:0;}
+    .str_content {margin-top: 24px; padding:32px 20px;}
+    .str_content h3 {font-size:2rem;}
+    .str_content p {margin-top:8px; font-size: 1.6rem; line-height: 1.5;}
+    .str_content > img {margin: 8px 0 24px;}
 
     .benefit_section { padding-top: 80px; }
     .benefit_list { margin-top:40px; gap: 40px 20px; }
