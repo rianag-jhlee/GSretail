@@ -50,8 +50,8 @@
                             <div class="info">
                                 <p>{{ member.role }}</p>
                                 <strong>{{ member.name }}</strong>
-                                <p class="org">{{ member.org }}</p>
-                                <p class="position">{{ member.position }}</p>
+                                <p class="org" v-html="member.org"></p>
+                                <p class="position" v-html="member.position"></p>
                             </div>
                         </article>
                     </li>
@@ -160,17 +160,17 @@ const langData = {
                 { text: "시청자위원회 관련법규 다운로드", link: "#none" },
             ],
             rosterTitle: "명단",
-            members: [
-                { role: "위원장", name: "최정혜", org: "연세대학교", position: "경영대학 교수" },
-                { role: "부위원장", name: "한명삼", org: "기아대책", position: "행복한나눔 본부장" },
-                { role: "위원", name: "심재웅", org: "숙명여자대학교", position: "미디어학부 교수" },
-                { role: "위원", name: "정사강", org: "이화여대", position: "커뮤니케이션 미디어연구소 교수" },
-                { role: "위원", name: "신영수", org: "경북대학교", position: "법과대학 교수" },
-                { role: "위원", name: "서현선", org: "한양대학교", position: "사회혁신 융합전공 겸임교수" },
-                { role: "위원", name: "김민정", org: "충북대학교", position: "사회복지학과 교수" },
-                { role: "위원", name: "김다래", org: "한국소비자단체협의회", position: "물가감시센터 팀장" },
-                { role: "위원", name: "박상오", org: "법무법인 바른", position: "변호사" },
-                { role: "위원", name: "김현호", org: "법무법인 이제", position: "변호사" },
+            members: [ /* 2026.07.07 edit 이소라 */
+                { img: require("@/assets/images/dummy/gsrcm0401_member01.png"), role: "위원장", name: "최정혜", org: "연세대학교", position: "경영대학 교수" },
+                { img: require("@/assets/images/dummy/gsrcm0401_member02.png"), role: "부위원장", name: "한명삼", org: "기아대책", position: "행복한나눔 본부장" },
+                { img: require("@/assets/images/dummy/gsrcm0401_member03.png"), role: "위원", name: "심재웅", org: "숙명여자대학교", position: "미디어학부 교수" },
+                { img: require("@/assets/images/dummy/gsrcm0401_member04.png"), role: "위원", name: "정사강", org: "이화여대", position: "커뮤니케이션 미디어연구소 교수" },
+                { img: require("@/assets/images/dummy/gsrcm0401_member05.png"), role: "위원", name: "신영수", org: "경북대학교", position: "법과대학 교수" },
+                { img: require("@/assets/images/dummy/gsrcm0401_member06.png"), role: "위원", name: "서현선", org: "한양대학교", position: "사회혁신 융합전공 겸임교수" },
+                { img: require("@/assets/images/dummy/gsrcm0401_member07.png"), role: "위원", name: "김민정", org: "충북대학교", position: "사회복지학과 교수" },
+                { img: require("@/assets/images/dummy/gsrcm0401_member08.png"), role: "위원", name: "김다래", org: "한국소비자단체<br/>협의회", position: "물가감시센터 팀장" },
+                { img: require("@/assets/images/dummy/gsrcm0401_member09.png"), role: "위원", name: "박상오", org: "법무법인 바른", position: "변호사" },
+                { img: require("@/assets/images/dummy/gsrcm0401_member10.png"), role: "위원", name: "김현호", org: "법무법인 이제", position: "변호사" },
             ],
         },
         meeting: {
@@ -227,17 +227,18 @@ function handleDownload(link) {
 .sec_duty > ul > li { padding-left: 24px; color: #161616; font-size: 1.8rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; position: relative; }
 .sec_duty > ul > li::before { width: 16px; height: 16px; background: url("@/assets/images/common/icon_bullet_checkmark.png") 0 0 no-repeat; position: absolute; top: 4px; left: 0; content: ""; }
 .sec_viewer > .button_wrap { width: 100%; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+/* 26.07.07 edit 이소라 */
 .sec_roster > ul { width: 100%; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 40px; column-gap: 28px;}
-.sec_roster > ul > li { min-width: 0; padding-right: 28px; border-right: 1px solid #f2f2f4; }
-.sec_roster > ul > li:nth-child(4n) { padding-right: 0; border-right: none; }
-.sec_roster > ul > li > article { height: 100%; display: flex; flex-direction: column; }
-.sec_roster > ul > li > article > figure { width: 100%; height: 160px; margin: 0; padding: 0; background-color: #f2f2f4; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sec_roster > ul > li { min-width: 0; padding-right:20px; }
+.sec_roster > ul > li > article { height: 100%; display: flex; gap:32px; align-items: center; } 
+.sec_roster > ul > li > article > figure { width: 151px; height: 148px; margin: 0; padding: 0; background-color: #f2f2f4; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .sec_roster > ul > li > article > figure > img { width: 100%; height: 100%; object-fit: cover; }
 .sec_roster > ul > li > article > .info { min-width: 0; display: flex; flex-direction: column; }
-.sec_roster > ul > li > article > .info > p { margin: 32px 0 0; color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.24; letter-spacing: 0; }
-.sec_roster > ul > li > article > .info > strong { margin: 2px 0 0; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_roster > ul > li > article > .info > p.org { margin: 16px 0 0; color: #242428; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
-.sec_roster > ul > li > article > .info > p.org + p.position { margin: 0; color: #242428; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
+.sec_roster > ul > li > article > .info > p { margin: 0; color: #161616; font-size: 1.6rem; font-weight: 700; line-height: 1.3; letter-spacing: 0; }
+.sec_roster > ul > li > article > .info > strong { margin: 2px 0 0; color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.sec_roster > ul > li > article > .info > p.org { margin: 16px 0 0; color: #242428; font-size: 1.8rem; font-weight: 400; line-height: 1.3; letter-spacing: -0.01em; }
+.sec_roster > ul > li > article > .info > p.org + p.position { margin: 0; color: #242428; font-size: 1.8rem; font-weight: 400; line-height: 1.3; letter-spacing: -0.01em; }
+/* //26.07.07 edit 이소라 */
 .policy_wrap { margin-top: 100px; }
 .policy_wrap table { width: 100%; border-collapse: collapse; border-top: 0; }
 .policy_wrap td { height: 82px; padding: 18px 24px; color: #161616; font-size: 1.8rem; vertical-align: middle; border-bottom: 1px solid #E5E5E9; border-left: 0; border-right: 0; }
@@ -249,14 +250,17 @@ function handleDownload(link) {
 .btn_download_file { display: inline-flex; align-items: center; gap: 12px; background: none; border: 0; cursor: pointer; }
 .btn_download_file::before { content: ""; width: 24px; height: 24px; background: url("@/assets/images/common/icon_set_24.png") -832px -56px no-repeat; display: inline-block; }
 
+/* 26.07.07 edit 이소라 */
+@media screen and (max-width: 1600px) {
+    .sec_roster > ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .sec_roster > ul > li > article > .info > p :deep(br) { display: none; }
+}
 
 @media screen and (max-width: 1024px) {
     .policy_wrap td, .policy_wrap td a { font-size: 1.6rem !important; }
     .sec_roster > ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .sec_roster > ul > li { padding-right: 28px; border-right: 1px solid #f2f2f4; }
-    .sec_roster > ul > li:nth-child(4n) { padding-right: 28px; border-right: 1px solid #f2f2f4; }
-    .sec_roster > ul > li:nth-child(2n) { padding-right: 0; border-right: none; }
 }
+/* //26.07.07 edit 이소라 */
 
 @media screen and (max-width: 768px) {
     .cont_inner {padding-top: 84px;}  /* 26.06.26 edit 이소라 */
@@ -269,6 +273,7 @@ function handleDownload(link) {
     .sec_duty > ul > li { padding-left:20px; font-size: 1.4rem;line-height: 1.4;letter-spacing: -0.01em;}
     .sec_viewer > .button_wrap { margin-top: 24px; }
     .policy_wrap{margin-top:80px;}
+    /* 26.07.07 add 이소라 */
     .sec_roster > ul { grid-template-columns: 1fr; row-gap: 20px; }
     .sec_roster > ul > li { padding-right: 0; border-right: none; }
     .sec_roster > ul > li > article { min-height: 160px; flex-direction: row; align-items:flex-end; gap: 32px; }
@@ -278,6 +283,7 @@ function handleDownload(link) {
     .sec_roster > ul > li > article > .info > strong { margin: 3px 0 0; font-size: 2.8rem; line-height: 1.35; }
     .sec_roster > ul > li > article > .info > p.org { margin: 3px 0 0; color: #242428; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
     .sec_roster > ul > li > article > .info > p.org + p.position { margin: 0; color: #242428; font-size: 1.6rem; line-height: 1.5; letter-spacing: -0.01em; }
+    /* //26.07.07 add 이소라 */
     .base_table tbody tr td:first-of-type { display: none; }
     .base_table tbody,.base_table tr,.base_table td { display: block; width: 100%; height: auto; border: 0; }
     .base_table tr { padding: 12px 10px; border-bottom: 1px solid #EEE; display: flex; flex-wrap: wrap; align-items: center; }
