@@ -285,6 +285,8 @@
                     </template>
                 </div>
             </section>
+
+            <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" /><!-- 26.07.07 add 이소라 -->
         </div>
 
         <!-- 탭 2: CHICKEN25 -->
@@ -533,7 +535,7 @@
                         </ol>
                         <!-- //26.06.29 add 정다희 : num_list 추가-->
                         <img :src="isMobileView ? item.mo_img : item.img" alt="" class="sinsen_flow_img" />
-                        <p v-if="item.flowNote2">{{ item.flowNote2 }}</p>
+                        <!--<p v-if="item.flowNote2">{{ item.flowNote2 }}</p> 26.07.07 del 이소라 -->
                     </div>
                 </div>
                 <!-- //26.05.27 Edit 이종환 : 타사 신선 배송 방식 추가 -->
@@ -571,6 +573,8 @@
                 </ul>
                 <!-- //26.06.08 add 정다희 : 운영 장점 카드 컨텐츠 수정-->
             </section>
+
+            <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" /><!-- 26.07.07 add 이소라 -->
         </div>
 
         <!-- depth1 = 2: 매장/서비스 -->
@@ -1207,6 +1211,8 @@
                     </section>
                 </template>
             </div>
+            
+            <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" /><!-- 26.07.07 add 이소라 -->
         </div>
 
         <!-- 택배&픽업 -->
@@ -1402,6 +1408,8 @@
                     </div>
                 </template>
             </div>
+
+            <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" /><!-- 26.07.07 add 이소라 -->
         </div>
 
         <!-- 공공요금수납 -->
@@ -1910,6 +1918,10 @@ const langData = {
                         ],
                     },
                 ],
+                qr: {
+                    title: "우리동네GS 앱 다운로드",
+                    desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+                },
             },
             {
                 hero: imgHero2,
@@ -5096,7 +5108,7 @@ button { background-color: #fff }
 .cafe25_split_table .cafe25_table th:nth-child(1), .cafe25_split_table .cafe25_table td:nth-child(1) { width: 37.14%; }
 .cafe25_split_table .cafe25_table th:nth-child(2), .cafe25_split_table .cafe25_table td:nth-child(2) { width: 31.43%; }
 .cafe25_split_table .cafe25_table th:nth-child(3), .cafe25_split_table .cafe25_table td:nth-child(3) { width: 31.43%; }
-.cafe25_split_table .cafe25_table th, .cafe25_split_table .cafe25_table td { height: auto; min-height: 56px; padding: clamp(8px, 1.25vw, 24px); white-space: normal; word-break: keep-all; }
+.cafe25_split_table .cafe25_table th, .cafe25_split_table .cafe25_table td { height: auto; min-height: 56px; padding: clamp(8px, 1.25vw, 15px); white-space: normal; word-break: keep-all; } /* 26.07.07 edit 이소라 */
 .cafe25_split_table .cafe25_table th > span, .cafe25_split_table .cafe25_table td > span { font-size: clamp(1.2rem, 0.94vw, 1.8rem); line-height: 1.4; letter-spacing: -0.01em; }
 .cafe25_table_wrap { overflow-x: auto }
 .cafe25_table { border-collapse: collapse; table-layout: fixed }

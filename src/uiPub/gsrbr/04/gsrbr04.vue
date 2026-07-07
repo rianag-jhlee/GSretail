@@ -171,9 +171,9 @@ export default {
                     /* 26.07.02 edit 정다희 : brand.visual·brand.about  */
                     brand: {
                         visual: {
-                            lines: [
-                                "편의점·수퍼마켓을 하나로", /*26.06.22 add 정다희 : 오타수정*/
-                                "GS리테일 O4O 통합 앱<br class=\"m_br\"/>우리동네GS",  // 26.07.02 edit 정다희 : lines 텍스트 수정
+                            lines: [ /* 26.07.07 edit 이소라 */
+                                "편의점•슈퍼마켓을 하나로", /*26.06.22 add 정다희 : 오타수정*/
+                                "GS리테일 O4O 통합 앱",  // 26.07.02 edit 정다희 : lines 텍스트 수정
                             ],
                             logoImg: require("@/assets/images/dummy/gsrbr04_logo.png"),
                             logoAlt: "편의점·수퍼마켓을 하나로 GS리테일 O4O 통합 앱 우리동네GS", /*26.06.22 add 정다희 : 오타수정*/

@@ -80,6 +80,7 @@
                     </ul>
                 </div>
             </div>
+            
         </section>
 
         <section class="origin_section">
@@ -292,6 +293,7 @@
                     </div>
                 </div>
 
+                <DiffQrRow v-if="t.qr" :title="t.qr.title" :desc="t.qr.desc" /><!-- 26.07.07 add 이소라 -->
                 <div class="bottom_btns">
                     <button type="button" class="btn_back" @click="handleBack">{{ t.Buttons.backToList }}</button>
                 </div>
@@ -321,6 +323,7 @@
 <script>
 import Tabs from "@/components/Tabs.vue";
 import modal from "@/assets/js/modal";
+import DiffQrRow from "@/components/DiffQrRow.vue"; /* 26.07.07 add 이소라 */
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -338,7 +341,8 @@ export default {
     components: {
         Tabs,
         Swiper,
-        SwiperSlide
+        SwiperSlide,
+        DiffQrRow
     },
     data() {
         return {
@@ -556,7 +560,11 @@ export default {
                                 ]
                             }
                         ]
-                    }
+                    },
+                    qr: { /* 26.07.07 add 이소라 */
+                        title: "우리동네GS 앱 다운로드",
+                        desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+                    },
                     
                 },
                 en: {
@@ -761,8 +769,11 @@ export default {
                                 ]
                             }
                         ]
-                    }
-                    
+                    },
+                    qr: { /* 26.07.07 add 이소라 */
+                        title: "Download the Our Neighborhood GS app"/* 260604 번역 */,
+                        desc: "Download the Our Neighborhood GS app and discover GS25's various events and exclusive products.<br />Scanning the QR code takes you to the app download page."/* 260604 번역 */,
+                    },
                 }
             }
         };
