@@ -79,27 +79,6 @@
                 </article>
             </div>
 
-            <!-- 26.07.02 add 정다희 : sec_brand_str 추가 -->
-            <section class="sec_brand_str">
-                <div class="str_inner">
-                    <header class="str_header">
-                        <h2 v-html="t.str.headerTitle"></h2>
-                    </header>
-                    <div class="str_content">
-                        <h3 v-html="t.str.contTitle"></h3>
-                        <p class="str_desc" v-html="t.str.desc"></p>
-                        <img :src="isMobile ? t.str.imgMo : t.str.img" :alt="t.str.alt">
-                        <div class="str_actions">
-                            <a
-                                :href="t.str.websiteUrl"
-                                class="btn_icon_arrow btn_xl border after"
-                                target="_blank"
-                            >{{ t.str.websiteLabel }}</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- //26.07.02 add 정다희 : sec_brand_str 추가 -->
             <!-- 26.07.02 add 정다희 : cont_inner benefit_section 삭제 -->
             <!-- <div class="cont_inner benefit_section">
                 <h3 v-html="t.BenefitTitle"></h3>  
@@ -114,28 +93,27 @@
             <!-- //26.07.02 add 정다희 : cont_inner benefit_section 삭제 -->
         </section>
 
-        <!-- 26.07.07 Edit 이종환 : 위치 이동, 26.07.02 add 정다희 : sec_brand_str 추가 -->
+        <!-- 26.07.07 Edit 이소라 : 위치 이동, 26.07.02 add 정다희 : sec_brand_str 추가 -->
         <section class="sec_brand_str">
             <div class="str_inner">
                 <header class="str_header">
-                    <div>
-                        <h2 v-html="t.str.headerTitle"></h2>
-                        <p class="str_desc" v-html="t.str.desc"></p>
-                    </div>
+                    <h2 v-html="t.str.headerTitle"></h2>
+                </header>
+                <div class="str_content">
+                    <h3 v-html="t.str.contTitle"></h3>
+                    <p class="str_desc" v-html="t.str.desc"></p>
+                    <img :src="isMobile ? t.str.imgMo : t.str.img" :alt="t.str.alt">
                     <div class="str_actions">
                         <a
                             :href="t.str.websiteUrl"
-                            class="btn_website"
+                            class="btn_icon_arrow btn_xl border after"
                             target="_blank"
                         >{{ t.str.websiteLabel }}</a>
                     </div>
-                </header>
-                <div class="str_content">
-                    <img :src="isMobile ? t.str.imgMo : t.str.img" :alt="t.str.alt">
                 </div>
             </div>
         </section>
-        <!-- //26.07.07 Edit 이종환 : 위치 이동, 26.07.02 add 정다희 : sec_brand_str 추가 -->
+        <!-- //26.07.07 Edit 이소라 : 위치 이동, 26.07.02 add 정다희 : sec_brand_str 추가 -->
 
 
         <div id="gsrbr0401" class="modal_wrap">
