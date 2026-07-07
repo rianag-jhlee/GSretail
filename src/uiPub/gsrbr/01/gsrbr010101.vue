@@ -535,7 +535,7 @@
                         </ol>
                         <!-- //26.06.29 add 정다희 : num_list 추가-->
                         <img :src="isMobileView ? item.mo_img : item.img" alt="" class="sinsen_flow_img" />
-                        <p v-if="item.flowNote2">{{ item.flowNote2 }}</p>
+                        <!--<p v-if="item.flowNote2">{{ item.flowNote2 }}</p> 26.07.07 del 이소라 -->
                     </div>
                 </div>
                 <!-- //26.05.27 Edit 이종환 : 타사 신선 배송 방식 추가 -->
