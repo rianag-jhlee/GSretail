@@ -35,28 +35,6 @@
         </section>
         <!-- //26.07.02 edit 정다희 :sec_brand_visual과 동일 구조·GSAP 스크롤 인터랙션 적용 -->
 
-        <!-- 26.07.02 add 정다희 : sec_brand_str 추가 -->
-        <section class="sec_brand_str">
-            <div class="str_inner">
-                <header class="str_header">
-                    <div>
-                        <h2 v-html="t.str.headerTitle"></h2>
-                        <p class="str_desc" v-html="t.str.desc"></p>
-                    </div>
-                    <div class="str_actions">
-                        <a
-                            :href="t.str.websiteUrl"
-                            class="btn_website"
-                            target="_blank"
-                        >{{ t.str.websiteLabel }}</a>
-                    </div>
-                </header>
-                <div class="str_content">
-                    <img :src="isMobile ? t.str.imgMo : t.str.img" :alt="t.str.alt">
-                </div>
-            </div>
-        </section>
-        <!-- //26.07.02 add 정다희 : sec_brand_str 추가 -->
         <section class="body_wrap">
             <div class="cont_area">
                 <article class="cont_inner">
@@ -114,6 +92,28 @@
             <!-- //26.07.02 add 정다희 : cont_inner benefit_section 삭제 -->
         </section>
 
+        <!-- 26.07.07 Edit 이종환 : 위치 이동, 26.07.02 add 정다희 : sec_brand_str 추가 -->
+        <section class="sec_brand_str">
+            <div class="str_inner">
+                <header class="str_header">
+                    <div>
+                        <h2 v-html="t.str.headerTitle"></h2>
+                        <p class="str_desc" v-html="t.str.desc"></p>
+                    </div>
+                    <div class="str_actions">
+                        <a
+                            :href="t.str.websiteUrl"
+                            class="btn_website"
+                            target="_blank"
+                        >{{ t.str.websiteLabel }}</a>
+                    </div>
+                </header>
+                <div class="str_content">
+                    <img :src="isMobile ? t.str.imgMo : t.str.img" :alt="t.str.alt">
+                </div>
+            </div>
+        </section>
+        <!-- //26.07.07 Edit 이종환 : 위치 이동, 26.07.02 add 정다희 : sec_brand_str 추가 -->
 
 
         <div id="gsrbr0401" class="modal_wrap">
@@ -483,10 +483,10 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 /* //26.07.02 add 정다희 : sec_brand_visual */
 
 /* 26.07.02 add 정다희 : sec_brand_about  */
-.sec_brand_about { padding: clamp(140px, 10.42vw, 200px) 20px; background-color: #f8f8f8; }
-.sec_brand_about > .about_inner { width: 100%; max-width: 940px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+.sec_brand_about { padding: clamp(140px, 10.42vw, 200px) 20px; background-color: #f8f8f8; text-align:center;}
+.sec_brand_about > .about_inner { width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
 .sec_brand_about > .about_inner > .about_txt > p { overflow: hidden; }
-.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 2.8rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; will-change: transform, opacity; display: block; }
+.sec_brand_about > .about_inner > .about_txt > p > span { color: #161616; font-size: 3.6rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; will-change: transform, opacity; display: block; }
 /* //26.07.02 add 정다희 : sec_brand_about */
 
 /* 26.07.02 add 정다희 : sec_brand_str 스타일 */
@@ -499,7 +499,7 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 .str_content{margin-top: 40px; padding:56px 64px; background-color:#F8F8F8;}
 .str_content > img{display: block; width: 100%;}
 /* Body Content Area */
-/* .body_wrap {padding-bottom:200px;} */
+.body_wrap {padding-top:200px;}
 /* .body_wrap .cont_area .cont_inner > ul { margin-top: 65px; margin-bottom: 40px; border-radius: 12px; } */
 
 .bi_section { margin-top:40px; position: relative; width: 100%; }
@@ -591,9 +591,11 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     .sec_brand_about > .about_inner { gap: 40px; }
     .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; display: block; word-break: keep-all; }
     .sec_brand_about > .about_inner > .about_txt > p:last-child { margin-top: 40px; }
+
+    .body_wrap {padding-top:0;}
    
    /* 26.07.02 add 정다희 : sec_brand_str  */
-    .sec_brand_str .str_inner{width:100%; padding: 140px 20px; }
+    .sec_brand_str .str_inner{width:100%; padding: 150px 20px; }
     .sec_brand_str .str_header h2{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
     .str_header p{margin-top:8px; font-weight: 700;font-size: 1.6rem;line-height: 1.24;}
     .str_header .str_actions { margin-left:0; margin-top:16px; gap:14px; flex: none; justify-content: flex-start }

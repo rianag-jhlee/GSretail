@@ -3089,7 +3089,7 @@ function toggleCard(id) {
 .sec_hero > .action_list > li > a.action_card > strong { font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
 .sec_hero > .action_list > li > a.action_card > .action_card_btn { font-size: 1.6rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 8px; }
 .sec_hero > .action_list > li > a.action_card > .action_card_btn > em { font-style: normal; }
-.sec_hero > .action_list > li > a.action_card > .action_card_btn::after { width: 20px; height: 20px; background: url('@/assets/images/common/chevron_icon_20.png') no-repeat center; content: ''; display: block; flex-shrink: 0; }
+.sec_hero > .action_list > li > a.action_card > .action_card_btn::after { width: 20px; height: 20px; background: url('@/assets/images/common/chevron_icon_20_fresh.png') no-repeat center; content: ''; display: block; flex-shrink: 0; }
 .sec_hero > .action_list > li > a.action_card::after { display: none; }
 .sec_num_list :deep(.num_info_list) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
 .sec_num_list :deep(.num_info_item) { padding: 0; border-bottom: 0; }
@@ -3189,7 +3189,7 @@ function toggleCard(id) {
 /* 창업절차 */
 .precaution_title, .precaution_intro > h3 { color: #161616; font-size: 3.2rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
 .mo_only { display: none; }
-.sec_precaution{margin-top: 64px;}
+.sec_precaution{margin-top: 120px;}
 :deep(.feature_card_desc_list li + li){margin-top:6px;}
 .sec_precaution .sub_header h3{margin-bottom: 40px; text-align: left;}
 .sec_precaution_inner { padding: 64px; background-color: #f8f8f8; border-radius: 12px; display: flex; align-items: flex-start; }
@@ -3240,7 +3240,7 @@ function toggleCard(id) {
 .search_group_label { font-size: 1.6rem; font-weight: 700; color: #161616; line-height: 1.24; }
 .chip_list { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .chip { min-width: 78px; height: 40px; padding: 0 18px; border: 1px solid #161616; border-radius: 99px; background-color: transparent; color: #161616; font-size: 1.6rem; font-weight: 400; letter-spacing: -0.01em; cursor: pointer; white-space: nowrap; transition: background-color 0.15s, border-color 0.15s, color 0.15s; }
-.chip.active { background-color: #e7f2fe; border-color: #107af2; color: #107af2; }
+.chip.active { background-color: #E8F8F1; border-color: #15B874; color: #15B874; }
 .search_bottom_row { margin-top: 24px; padding-top: 24px; border-top: 1px solid #D7D7DF; display: flex; align-items: flex-start; gap: 32px; flex-wrap: wrap; }
 .chip_sep_v { display: inline-block; width: 1px; height: 24px; background-color: #c4c4d0; flex-shrink: 0; align-self: center; }
 .chip_youth_wrap { position: relative; display: inline-flex; align-items: center; }
@@ -3255,7 +3255,7 @@ function toggleCard(id) {
 .layer_tooltip { position: absolute; background-color: #fff; border: 1px solid #C6C6C6; border-radius: 16px; padding: 32px; z-index: 10; }
 .layer_tooltip > strong { font-weight: 700; font-size: 1.6rem; line-height: 1.24; }
 .layer_tooltip > p { margin-top: 24px; font-size: 1.6rem; color: #161616; line-height: 1.5; letter-spacing: -0.01em; }
-.layer_tooltip > a { margin-top: 16px; color: #107AF2; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; text-decoration: underline; display: block; }
+.layer_tooltip > a { margin-top: 16px; color: #15B874; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em; text-decoration: underline; display: block; }
 .layer_tooltip_close { width: 20px; height: 20px; background: none; border: none; cursor: pointer; position: absolute; top: 32px; right: 32px; background:url('@/assets/images/common/icon_set_20.png') -627px -25px no-repeat; }
 
 .youth_popover { top: calc(100% + 8px); left: -119px; right: -166px; }
@@ -3272,16 +3272,16 @@ function toggleCard(id) {
 .sort_btn { height: 40px; padding: 0 12px; background: #fff; border: 1px solid #90909a; font-size: 1.4rem; font-weight: 700; color: #90909a; cursor: pointer; white-space: nowrap; position: relative; z-index: 0; margin-left: -1px; }
 .sort_btn:first-child { margin-left: 0; border-radius: 8px 0 0 8px; }
 .sort_btn:last-child { border-radius: 0 8px 8px 0; }
-.sort_btn.active { color: #107af2; border-color: #107af2; z-index: 1; }
+.sort_btn.active { color: #15B874; border-color: #15B874; z-index: 1; }
 
 /* 뷰 토글 버튼 */
 .store_view_group { display: flex; gap: 8px; }
 .view_btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid #90909a; border-radius: 8px; color: #107af2; cursor: pointer; }
 .view_btn::before { content: ""; width: 20px; height: 20px; background:url('@/assets/images/sub/icon_view_type_list.png') no-repeat 0 0; display: inline-block; }
-.view_btn.active { border-color: #107af2; color: #107af2; }
-.view_btn.active::before { background:url('@/assets/images/sub/icon_view_type_list_on.png') no-repeat 0 0; }
+.view_btn.active { border-color: #15B874; color: #15B874; }
+.view_btn.active::before { background:url('@/assets/images/sub/icon_view_type_list_on_fresh.png') no-repeat 0 0; }
 .store_view_group .view_btn:last-child:before {background-image: url('@/assets/images/sub/icon_view_type_card.png')}
-.store_view_group .view_btn.active:last-child:before {background-image: url('@/assets/images/sub/icon_view_type_card_on.png')}
+.store_view_group .view_btn.active:last-child:before {background-image: url('@/assets/images/sub/icon_view_type_card_on_fresh.png')}
 
 /* 타입 뱃지 */
 .type_badge { display: inline-block; padding: 3px 6px; border-radius: 4px; font-size: 1.4rem; }
@@ -3731,6 +3731,8 @@ function toggleCard(id) {
     .store_accordion_list :deep(.detail_card) { padding: 20px; border: 0; border-radius: 12px; }
     .store_accordion_list :deep(dd.acc_panel > .acc_panel_inner > .acc_panel_cont) { padding: 30px 20px !important; background-color: #F8F8F8 !important; }
     .accordion_badges { margin-top: 6px; }
+
+    .store_card_row > li :deep(.card_cost) {color:#15B874;}
 
     /* Swiper: cont_inner 좌우 20px 패딩 상쇄 — sec_owner_support에 overflow-x:hidden 주면 margin -20px 확장이 잘림 */
     .sec_owner_support :deep(.brand_panel_bg) { margin: 0 0 80px; }
