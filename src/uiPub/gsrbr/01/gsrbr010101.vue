@@ -5218,7 +5218,7 @@ button { background-color: #fff }
 .sinsen_advantage_items > li > p { margin: 0 0 42px; color: #67676f; font-size: 1.8rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; }
 .sinsen_advantage_items > li > figure { margin: 0; }
 .sinsen_advantage_items > li > figure > img { width: 100%; height: 175px; display: block; object-fit: contain; border-radius: 8px; }
-.sinsen_advantage_items > li > figure > figcaption { margin-top: 16px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
+.sinsen_advantage_items > li > figure > figcaption { margin-top: 6px; color: #67676f; font-size: 1.6rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; text-align: center; }
 
 .info_list > li { margin-bottom: 8px; color: #161618; font-size: 1.8rem; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 8px }
 .info_list > li:last-child { margin-bottom: 0 }
@@ -5369,6 +5369,9 @@ button { background-color: #fff }
 .milbox_panel .milbox_feature :deep(.feature_card_item:nth-of-type(2) .feature_card_icon) {background-position:-100px -186px;}
 .milbox_panel .milbox_feature :deep(.feature_card_item:nth-of-type(3) .feature_card_icon) {background-position:-1140px -20px;}
 
+@media (max-width: 1200px) {
+    .sinsen_advantage_items > li > p :deep(br) {display:none;}
+}
 @media (max-width: 1024px) {
   .brand_panel_title > h2 { font-size: 3.2rem; }
   .brand_panel_title > p { font-size: 2rem; }
@@ -5511,7 +5514,12 @@ button { background-color: #fff }
     .pop_sec_acc :deep(.acc_panel + dt) {padding-top:120px;}
     .pop_sec_acc :deep(.acc_item) { border: none; padding-bottom: 120px }
     .pop_sec_acc :deep(.acc_item:last-child) { padding-bottom: 0 }
-    .pop_sec_acc :deep(.acc_panel_cont) { padding: 0 }
+    .pop_sec_acc :deep(.acc_panel_cont) { padding: 0 }    
+    
+    .sinsen_advantage_card:nth-child(2) .sinsen_advantage_items > li > figure { padding: 0 15px; border: 1px solid #E5E5E9; }
+    .sinsen_advantage_card:nth-child(3) .sinsen_advantage_items,
+    .sinsen_advantage_card:nth-child(4) .sinsen_advantage_items { padding: 0 6.5px; border: 1px solid #E5E5E9; height: 245px; align-items: center; border: 1px solid #E5E5E9; }
+
 }
 
 @media (max-width: 768px) {
