@@ -455,45 +455,30 @@
                 </ul>
 
                 <!-- 배달·픽업 앱 (2열) -->
-                <ul v-else-if="sec.type === 'phone_grid' && !isMobileView" class="img_grid" role="list">
+                <!-- 26.07.08 edit 정다희 : isMobileView 삭제 -->
+                <ul v-else-if="sec.type === 'phone_grid'" class="img_grid" role="list">
                     <li v-for="(item, ii) in sec.items" :key="ii">
                         <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
+                        <!-- 26.07.08 add 정다희 : li 마지막 요소로 DiffQrRow 배치 (0: 앱, 1: gopizza) -->
+                        <DiffQrRow
+                            v-if="ii === 0 && tab3.qr"
+                            :title="tab3.qr.title"
+                            :desc="tab3.qr.desc"
+                            :mobile-desc="tab3.qr.descMo"
+                        />
+                        <DiffQrRow
+                            v-else-if="ii === 1 && tab3.link"
+                            variant="gopizza"
+                            :title="tab3.link.title"
+                            :desc="tab3.link.desc"
+                            :mobile-desc="tab3.link.descMo"
+                        />
                     </li>
                 </ul>
-                <Swiper
-                    v-else-if="sec.type === 'phone_grid' && isMobileView"
-                    class="img_grid_swiper"
-                    slides-per-view="auto"
-                    :space-between="8"
-                >
-                    <SwiperSlide v-for="(item, ii) in sec.items" :key="ii">
-                        <div class="img_grid_slide">
-                            <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
-                        </div>
-                    </SwiperSlide>
-                </Swiper>
+                <!-- 26.07.08 edit 정다희 : 모바일 swiper 제거 -->
             </section>
-
-            <div class="diff_bottom_row">
-                <div v-if="tab3.qr" class="diff_qr_row">
-                    <figure aria-hidden="true">
-                        <img :src="isMobileView ? imgQrMo : imgQrPc" alt="앱 다운로드 QR코드" width="74" height="74" />
-                    </figure>
-                    <div>
-                        <strong>{{ tab3.qr.title }}</strong>
-                        <p v-html="isMobileView && tab3.qr.descMo ? tab3.qr.descMo : tab3.qr.desc"></p>
-                    </div>
-                </div>
-                <a v-if="tab3.link" :href="tab3.link.url" class="gopizza_link" target="_blank" rel="noopener noreferrer">
-                    <figure aria-hidden="true">
-                        <img v-if="isMobileView" :src="imgQrMo" alt="" />
-                    </figure>
-                    <div>
-                        <strong>{{ tab3.link.title }}</strong>
-                        <p v-html="isMobileView && tab3.link.descMo ? tab3.link.descMo : tab3.link.desc" />
-                    </div>
-                </a>
-            </div>
+    
+           
         </div>
 
         <!-- depth1 = 1: 신선강화점 -->
@@ -1212,7 +1197,8 @@
                 </template>
             </div>
             
-            <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" /><!-- 26.07.07 add 이소라 -->
+            <!-- 26.07.08 edit 정다희 : 생활서비스 3depth 중 현금인출기(serviceActiveTab===0)에서만 노출 -->
+            <DiffQrRow v-if="tab2.qr && serviceActiveTab === 0" :title="tab2.qr.title" :desc="tab2.qr.desc" /><!-- 26.07.07 add 이소라 -->
         </div>
 
         <!-- 택배&픽업 -->
@@ -1409,7 +1395,8 @@
                 </template>
             </div>
 
-            <DiffQrRow v-if="tab2.qr" :title="tab2.qr.title" :desc="tab2.qr.desc" /><!-- 26.07.07 add 이소라 -->
+            <!-- 26.07.08 edit 정다희 : 택배&픽업 3depth 중 국내택배(deliveryActiveTab===0)에서만 노출 -->
+            <DiffQrRow v-if="tab2.qr && deliveryActiveTab === 0" :title="tab2.qr.title" :desc="tab2.qr.desc" /><!-- 26.07.07 add 이소라 -->
         </div>
 
         <!-- 공공요금수납 -->
@@ -1635,8 +1622,8 @@ import "swiper/css";
 import Tabs from "@/components/Tabs.vue";
 import Buttons from "@/components/Buttons.vue";
 import DiffQrRow from "@/components/DiffQrRow.vue";
-import imgQrMo from "@/assets/images/dummy/qr_app.png";
-import imgQrPc from "@/assets/images/dummy/qr-app-download.svg";
+/* 26.07.08 del 정다희 : QR 이미지 import 제거 → DiffQrRow 컴포넌트 내부에서 관리 */
+
 import Steps from "@/components/Steps.vue";
 import FeatureCards from "@/components/FeatureCards.vue";
 import NumberedInfoList from "@/components/NumberedInfoList.vue";
@@ -2031,12 +2018,12 @@ const langData = {
                 ],
                 qr: {
                     title: "우리동네GS 앱 다운로드",
-                    desc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+                    desc: "우리동네GS 앱을 다운로드하고, 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",  /**26.07.08 edit 정다희 : desc 문구 수정 */
                     descMo: "GS25의 다양한 이벤트와 차별화 상품",
                 },
                 link: {
                     title: "GOPIZZA 홈페이지 바로가기",
-                    desc: "GOPIZZA 홈페이지에서 내 주변 매장 찾고 합리적인 가격과 차별화된 맛을 경험해보세요.<br />버튼을 클릭하면 해당 홈페이지로 이동합니다.",
+                    desc: "우리동네GS 앱을 다운로드하고, 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.", /**26.07.08 edit 정다희 : desc 문구 수정 */
                     descMo: "합리적인 가격과 차별화된 맛 GOPIZZA",
                     url: "https://gopizza.kr",
                 },
@@ -2573,6 +2560,10 @@ const langData = {
                             unpaidTitle: "고속도로 미납통행료 납부 방법",
                             unpaidSteps: [
                                 { step: "Step 1", title: "GS25 편의점에게<br />납부 요청", /* 2026.07.06 edit 이소라 */
+                                    bullets: [ /* 26.07.08 add 정다희 : bullets 추가 */
+                                        "가까운 GS25에서 하이패스 카드 구매",
+                                        "카드 구입비: 5,000 원",
+                                    ],
                                 },
                                 { step: "Step 2", title: "차량번호 입력" },
                                 { step: "Step 3", title: "개인정보 제공 동의" }, /* 2026.07.06 edit 이소라 */
@@ -2612,6 +2603,10 @@ const langData = {
                             mallPaymentTitle: "편의점 결제 이용 방법",
                             mallPaymentSteps: [
                                 { step: "Step 1", title: "온라인몰에서<br />상품/서비스 구매",
+                                bullets: [ /* 26.07.08 add 정다희 : bullets 추가 */
+                                    "가까운 GS25에서 하이패스 카드 구매",
+                                    "카드 구입비: 5,000 원",
+                                ],
                                 },
                                 { step: "Step 2", title: "'편의점결제' 선택" },
                                 { step: "Step 3", title: "가까운 GS25에서<br />24시간 결제" },
@@ -5069,7 +5064,7 @@ function goBack() {
 .acc_btn::after { content: ""; width: 20px; height: 20px; flex-shrink: 0; background:url('@/assets/images/common/icon_set_20.png') -539px -24px no-repeat; background-size:auto 159px; display:block }
 .acc_item.is_open .acc_btn::after { opacity: 0 }
 .acc_desc_wrap { overflow: hidden; height: 0; box-sizing: border-box; transition: height 0.35s ease }
-.acc_desc { padding-top: 16px; color: #67676f; font-size: 2rem; font-weight: 400; line-height: 1.35; letter-spacing: -0.01em }
+.acc_desc { padding-top: 16px; color: #67676f; font-size: 2rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em }
 :deep(.p_br) { display: block }
 :deep(.m_br) { display: none }
 .acc_img_wrap { overflow: hidden; height: 0; transition: height 0.65s ease }
@@ -5135,7 +5130,7 @@ button { background-color: #fff }
 
 .cafe25_table > tbody > tr > td > .flag_icon { width: 24px; height: 24px; margin-right: 8px; border-radius: 50%; vertical-align: middle; display: inline-block; object-fit: cover }
 .img_grid { margin-top: 120px; padding: 0; display: grid; grid-template-columns: repeat(2, calc((100% - 20px) / 2)); gap: 20px }
-.img_grid > li { min-width: 0; border-radius: 12px; overflow: hidden }
+.img_grid > li { min-width: 0;  overflow: hidden }
 .img_grid img { width: 100%; object-fit: cover }
 .gopizza_img_wrap { height: 440px; margin: 0; padding: 0; border-radius: 12px; overflow: hidden }
 .gopizza_img_wrap > img { height: 100%; object-fit: cover }
@@ -5866,10 +5861,13 @@ button { background-color: #fff }
   .cafe25_split > div { width: 100%; flex: none; }
   .cafe25_split_table .cafe25_table th > span, .cafe25_split_table .cafe25_table td > span { font-size: 1.6rem; line-height: 1.5; }
   .brand_panel:first-of-type section:not(:first-of-type) :deep(header) { padding-bottom: 40px }
+  .img_grid { grid-template-columns: 1fr; gap: 40px; margin-top: 60px } /* 26.07.08 add 정다희 : phone_grid 모바일 1열 stack */
   .img_grid_swiper {overflow: visible }
   .img_grid_swiper :deep(.swiper-slide) { width: 84vw }
-  .img_grid_slide { width: 84vw; overflow: hidden; border-radius: 12px }
+  .img_grid_slide { width: 84vw; overflow: hidden; }
   .img_grid_slide > img { width: 100%; height: 100%; object-fit: cover; display: block }
+  .img_grid :deep(.diff_qr_row),
+  .img_grid_swiper + :deep(.diff_qr_row){margin-top:24px;}
   .gopizza_img_wrap { height: 260px }
   .diff_bottom_row { flex-direction: column; gap: 20px }
   .gopizza_link { padding: 0 16px; position: relative; gap: 12px }

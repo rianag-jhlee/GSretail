@@ -39,26 +39,55 @@
             <div class="cont_area">
                 <article class="cont_inner">
                     <h3 v-html="t.SubTitle"></h3>
-                    <!-- 26.07.02 edit 정다희 : QR 다운로드 영역 이동 -->
-                    <div class="qr_download_area pc">
+                    <!-- 26.07.02 del 정다희 : QR 다운로드 영역 삭제 -->
+                    <!-- <div class="qr_download_area pc">
                         <div class="qr_info">
                             <strong class="qr_title">{{ t.Intro.qrTitle }}</strong>
                             <p class="qr_desc" v-html="t.Intro.qrDesc"></p>
                         </div>
+                    </div> -->
+                    <!-- //26.07.02 del 정다희 : QR 다운로드 영역 삭제 -->
+
+                    <!-- 26.07.02 add 정다희 : QR 다운로드 영역 추가 (gsrbr 다운로드 영역 공통화) -->
+                    <div class="diff_bottom_row pc">
+                        <a v-if="t.Intro" class="diff_qr_row">
+                            <figure aria-hidden="true">
+                                <img :src="imgQr" alt="앱 다운로드 QR코드" width="90" height="90" />
+                            </figure>
+                            <figure aria-hidden="true">
+                                <img :src="imgGs" alt="우리동네 GS 앱" width="90" height="90" />
+                            </figure>
+                            <div>
+                                <strong>{{ t.Intro.qrTitle }}</strong>
+                                <p v-html="isMobile && t.Intro.qrDesc_mo ? t.Intro.qrDesc_mo : t.Intro.qrDesc"></p>
+                            </div>
+                        </a>
                     </div>
-                    <!-- //26.07.02 edit 정다희 : QR 다운로드 영역 이동 -->
+                    <!-- //26.07.02 add 정다희 : QR 다운로드 영역 추가 (gsrbr 다운로드 영역 공통화) -->
                     <div class="bi_section">
                         <img :src="isMobile ? t.Bi.imgMo : t.Bi.img" :alt="t.Bi.alt">
                     </div>
-                    <!-- 26.07.02 add 정다희 : qr_download_area 위치 이동-->
-                    <div class="qr_download_area mo">
+                    <!-- 26.07.02 del 정다희 : qr_download_area 삭제-->
+                    <!-- <div class="qr_download_area mo">
                         <a href="javascript:void(0);">
                             <strong>{{ t.Intro.qrTitle }}</strong>
                             <span>{{ t.Intro.qrDesc_mo }}</span>
                         </a>
+                    </div> -->
+                    <!-- //26.07.02 add 정다희 : qr_download_area 삭제-->
+                    <!-- 26.07.08 add 정다희 : diff_bottom_row mo 추가 (gsrbr 다운로드 영역 공통화) -->
+                    <div class="diff_bottom_row mo">
+                        <div v-if="t.Intro" class="diff_qr_row">
+                            <figure aria-hidden="true">
+                                <img :src="imgGsMo" alt="우리동네 GS 앱" width="90" height="90" />
+                            </figure>
+                            <div>
+                                <strong>{{ t.Intro.qrTitle }}</strong>
+                                <p v-html="isMobile && t.Intro.qrDesc_mo ? t.Intro.qrDesc_mo : t.Intro.qrDesc"></p>
+                            </div>
+                        </div>
+                        <!-- //26.07.08 add 정다희 : diff_bottom_row mo 추가 (gsrbr 다운로드 영역 공통화) -->
                     </div>
-                    <!-- //26.07.02 add 정다희 : qr_download_area 위치 이동-->
-
                     <!-- 26.07.02 del 정다희 : ul 삭제 -->
                     
                     <!-- 26.07.02 add 정다희 : benefit_list 위치 이동-->
@@ -100,9 +129,22 @@
                     <h2 v-html="t.str.headerTitle"></h2>
                 </header>
                 <div class="str_content">
-                    <h3 v-html="t.str.contTitle"></h3>
-                    <p class="str_desc" v-html="t.str.desc"></p>
-                    <img :src="isMobile ? t.str.imgMo : t.str.img" :alt="t.str.alt">
+                    <!-- 26.07.08 add 정다희 : img_wrap pc 추가 -->
+                    <div class="img_wrap pc">
+                        <img :src=" t.str.img" :alt="t.str.alt">
+                    </div>
+                    <!-- //26.07.08 add 정다희 : img_wrap pc 추가 -->
+                    <!-- 26.07.08 add 정다희 : div 추가 (content 영역) -->
+                    <div>
+                        <h3 v-html="t.str.contTitle"></h3>
+                        <p class="str_desc" v-html="t.str.desc"></p>
+                    </div>
+                    <!-- //26.07.08 add 정다희 : div 추가 (content 영역) -->
+                    <!-- 26.07.08 add 정다희 : img_wrap mo 추가 -->
+                    <div class="img_wrap mo">
+                        <img :src=" t.str.img" :alt="t.str.alt">
+                    </div>
+                    <!-- //26.07.08 add 정다희 : img_wrap mo 추가 -->
                     <div class="str_actions">
                         <a
                             :href="t.str.websiteUrl"
@@ -151,7 +193,9 @@ import gsap from "gsap"; /**26.07.02 add 정다희 : 플러그인 추가 */
 import { ScrollTrigger } from "gsap/ScrollTrigger"; /**26.07.02 add 정다희 : 플러그인 추가 */ 
 import imgDelivery from "@/assets/images/dummy/gsrbr04_delivery.png"; /**26.07.02 add 정다희 : 배달 이미지 추가*/
 import imgDeliveryMo from "@/assets/images/dummy/mo/gsrbr04_delivery_mo.png"; /**26.07.02 add 정다희 : 배달 모바일 이미지 추가*/
-
+import imgQr from "@/assets/images/dummy/qr-app-download.svg"; /**26.07.08 add 정다희 : QR 이미지 추가 */
+import imgGs from "@/assets/images/dummy/qr_app.png"; /**26.07.08 add 정다희 : 우리동네 GS 이미지 추가 */
+import imgGsMo from "@/assets/images/dummy/mo/qr_app_mo.png"; /**26.07.08 add 정다희 : 우리동네 GS 모바일 이미지 추가 */
 gsap.registerPlugin(ScrollTrigger); /**26.07.02 add 정다희 : 플러그인 추가 */ 
 
 let syncVisualClip = null; /**26.07.02 add 정다희 : 변수 추가 */ 
@@ -164,6 +208,9 @@ export default {
     data() {
         return {
             isMobile: false,
+            imgQr, /**26.07.08 add 정다희 : QR 이미지 추가 */
+            imgGs, /**26.07.08 add 정다희 : 우리동네 GS 이미지 추가 */
+            imgGsMo, /**26.07.08 add 정다희 : 우리동네 GS 모바일 이미지 추가 */
             gsapCtx: null, /**26.07.02 add 정다희 : 변수 추가 */
             visualResizeTimer: null, /**26.07.02 add 정다희 : 변수 추가 */
             langData: {
@@ -201,7 +248,7 @@ export default {
                     },
                     Intro: {
                         qrTitle: "우리동네GS 앱 다운로드",
-                        qrDesc: "우리동네GS 앱을 다운로드하고, 다양한 이벤트와 차별화 상품을 만나보세요.<br/>QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
+                        qrDesc: "우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.<br />QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.",
                         qrDesc_mo: "GS25의 다양한 이벤트와 차별화 상품",
                     },
                     BenefitTitle: "‘우리동네GS’ 앱에서 <br/>일상의 모든 것을 해결하세요.", /* 26.06.26 edit 이소라 */
@@ -222,8 +269,8 @@ export default {
                     /* 26.07.02 add 정다희 : sec_brand_str 추가 */
                     str: {
                         headerTitle: "우리동네 딜리버리",
-                        contTitle: "언제 어디서나 산책하며 돈 버는 즐거움",
-                        desc: "우리동네 GS25, GS THE FRESH의<br class=\"m_br\"/>상품과 식품, 맛집 배달까지<br />별도의 장비 없이 성인이라면 누구나 손쉽게<br class=\"m_br\"/>배달 가능한 서비스입니다.",
+                        contTitle: "언제 어디서나 산책하며<br class=\"m_br\"/>돈 버는 즐거움", /**26.07.08 add 정다희 : br 추가*/
+                        desc: "우리동네 GS25, GS THE FRESH의 상품과 식품, 맛집 배달까지<br />별도의 장비 없이 성인이라면 누구나 손쉽게 배달 가능한 서비스입니다.",  /**26.07.08 add 정다희 : (class=\"m_br\") 삭제*/
                         websiteLabel: "우리동네 딜리버리",
                         websiteUrl: "#",
                         img: imgDelivery,
@@ -261,7 +308,7 @@ export default {
                     },
                     Intro: {
                         qrTitle: "Download the Our Neighborhood GS app"/* 260604 번역 */,
-                        qrDesc: "Download the Our Neighborhood GS app and discover a variety of events and exclusive products.<br/>Scanning the QR code takes you to the app download page."/* 260604 번역 */,
+                        qrDesc: "Download the Our Neighborhood GS app and discover GS25's various events and exclusive products.<br />Scanning the QR code takes you to the app download page."/* 260604 번역 */,
                         qrDesc_mo: "GS25's diverse events and distinctive products"/* 260604 번역 */,
                     },
                     BenefitTitle: "On the 'Our Neighborhood GS' app <br/>Take care of everything in your daily life."/* 260604 번역 */,
@@ -295,7 +342,7 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[this.lang] || this.langData.ko; },
     },
     mounted() {
         this.checkMobile();
@@ -496,21 +543,32 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 .sec_brand_str .str_header {margin:0;}
 .str_header {margin-bottom: 64px; }
 .str_header h2 { font-size: 4.8rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;text-align: left; }
-.str_content {position:relative; margin-top: 40px; padding:60px; background-color:#E7F2FE; border-radius:20px; }
-.str_content h3 {margin-bottom: 16px; color: #161616; font-size: 32px; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em;}
-.str_content p {margin-top: 16px; color: #161616; font-weight: 400; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em;}
-.str_content > img{display: block; width: 100%; margin-top: 40px;}
-.str_content .str_actions { position:absolute; top:82px; right:60px; }
+.str_content { margin-top: 40px; padding:60px; background-color:#E7F2FE; border-radius:20px; display:flex; align-items:flex-start; flex-wrap:wrap; gap: 40px;}
+.str_content .img_wrap.mo{display:none;}
+.str_content .img_wrap.pc{display:block;}
+.str_content .img_wrap { max-width:149px; flex-shrink:0;}
+.str_content > div:not([class]){ flex:1; min-width:0;}
+.str_content > img{ width: 100%; margin-top: 40px;display: block;}
+.str_content h3 {margin-bottom: 12px; color: #161616; font-size: 32px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;}
+.str_content p {color: #161616; font-weight: 400; font-size: 2rem; line-height: 1.35; letter-spacing: -0.01em;}
+.str_content .str_actions { margin-left:auto; flex-shrink:0; }
+.str_content .str_actions a{font-weight:700 ;}
 /* Body Content Area */
 .body_wrap {padding-top:200px;}
 /* .body_wrap .cont_area .cont_inner > ul { margin-top: 65px; margin-bottom: 40px; border-radius: 12px; } */
+
+/* 26.07.08 add 정다희 : gsrbr010101 diff_bottom_row 스타일 */
+.diff_bottom_row { margin-top: 40px; display: flex; gap: 32px; }
+.diff_bottom_row.mo{display:none;}
+.diff_bottom_row > .diff_qr_row { flex: 1; }
+/* //26.07.08 add 정다희 : gsrbr010101 diff_bottom_row 스타일 */
 
 .bi_section { margin-top:40px; position: relative; width: 100%; }
 .bi_section span { display: block; width: 100%; }
 .bi_section span img { display: block; width: 100%; object-fit: cover; }
 .bi_section h4 p {width: 50%; margin-top:16px; color: #67676F; font-size: 20px; font-weight: 400; display: flex; flex-direction: column; }
 
-.qr_download_area { margin-top: 64px;  display: flex; align-items: center;}
+.qr_download_area { margin-top: 64px; padding:20px; border-radius: 8px; background-color: #F2F2F4; display: flex; align-items: center; }
 .pc.qr_download_area::before { display: inline-block; width: 90px; height: 90px; background: url('@/assets/images/dummy/gsrbr06_qr.png') no-repeat center / cover; content: ''; }
 .pc.qr_download_area .qr_info { display: flex; flex-direction: column; padding-left: 20px; }
 .pc.qr_download_area .qr_info strong { margin-bottom: 8px; color: #161616; font-size: 20px; font-weight: 700; }
@@ -572,10 +630,10 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     .benefit_list li::before { position: absolute; top: 0; left: 0; width: 60px; height: 60px; background-color: #eee; border-radius: 50%; content: ''; }
     .benefit_list li::after {top:10px; left:10px;}
     .benefit_list li:nth-child(2)::after, .benefit_list li:nth-child(3)::after {top:10px; left:10px;}
-    
+    .str_content {gap:24px;}
     .str_content > img {margin-bottom: 40px;}
-    .str_content .str_actions {position:static;}
-    .str_content .str_actions a {position:static; width:100%}
+    .str_content .str_actions {width:100%; margin-left:0; flex-basis:100%;}
+    .str_content .str_actions a {width:100%; height:52px;}
 }
 
 @media screen and (max-width: 768px) {
@@ -605,7 +663,12 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
    /* 26.07.02 add 정다희 : sec_brand_str  */
     .sec_brand_str .str_inner{width:100%; padding: 150px 20px; }
     .sec_brand_str .str_header h2{font-size: 2.8rem;line-height: 1.35;letter-spacing: -0.01em;}
-    .str_content {margin-top: 24px; padding:32px 20px;}
+    .str_content {margin-top: 24px; padding:32px 20px; flex-direction: column;}
+    .str_content .img_wrap.pc{display:none;}
+    .str_content .img_wrap.mo{display:block;}
+    .diff_bottom_row.mo{display:flex;}
+    .diff_bottom_row.pc{display: none;}
+    .str_content .img_wrap {max-width:120px; margin: 0 auto;}
     .str_content h3 {font-size:2rem;}
     .str_content p {margin-top:8px; font-size: 1.6rem; line-height: 1.5;}
     .str_content > img {margin: 8px 0 24px;}
@@ -619,5 +682,13 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     .bi_section{margin-top:24px; }
     .bi_section h4 p {width:100%; margin-top:8px; font-size:16px; line-height:1.5; flex-direction:column;}
     .qr_download_area{margin-top:24px; }
+    /* 26.07.08 add 정다희 : diff_bottom_row 모바일 스타일 */
+    .diff_bottom_row {margin-top:24px; flex-direction: column; gap: 20px; }
+    .diff_qr_row::after{display:none;}
+    .diff_qr_row > div > strong{display:flex; align-items:center; gap:4px;}
+    .diff_qr_row > div > strong::after{content:'';width:20px;height:20px;background-image:url('@/assets/images/common/icon_set_20.png');background-position:-979px -24px; cursor:pointer; display:block;}
+    /* //26.07.08 add 정다희 : diff_bottom_row 모바일 스타일 */
+
+    .str_content .str_actions a{height:38px; padding:7px 0; font-size:1.6rem; font-weight: 400;}
 }
 </style>
