@@ -554,11 +554,10 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 .str_content .str_actions { margin-left:auto; flex-shrink:0; }
 .str_content .str_actions a{font-weight:700 ;}
 /* Body Content Area */
-.body_wrap {padding-top:200px;}
 /* .body_wrap .cont_area .cont_inner > ul { margin-top: 65px; margin-bottom: 40px; border-radius: 12px; } */
 
 /* 26.07.08 add 정다희 : gsrbr010101 diff_bottom_row 스타일 */
-.diff_bottom_row { margin-top: 40px; display: flex; gap: 32px; }
+.diff_bottom_row { margin-top: 64px; display: flex; gap: 32px; }
 .diff_bottom_row.mo{display:none;}
 .diff_bottom_row > .diff_qr_row { flex: 1; }
 /* //26.07.08 add 정다희 : gsrbr010101 diff_bottom_row 스타일 */
@@ -613,16 +612,14 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 .mt40 { margin-top: 40px; }
 
 /* Mobile Responsive */
-@media screen and (min-width: 1024px) {
+/* @media screen and (min-width: 1024px) {
     :deep(.qr_download_area).pc { display: flex; }
     :deep(.qr_download_area).mo { display: none; }
-}
+} */
 
 @media screen and (max-width: 1024px) {
     h4 { font-size: 1.8rem; }
     .bi_section { padding: 0; }
-    .pc { display: none; }
-    .mo { display: flex; }
     .benefit_list { gap: 40px 15px; }
     .benefit_list li { width: calc((100% - 15px) / 2); padding-top: 70px; }
     .benefit_info .tit_area strong { font-size:18px; }
@@ -639,7 +636,8 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 @media screen and (max-width: 768px) {
     :deep(.p_br) { display: none; }
     :deep(.m_br) { display: block; }
-
+    .pc { display: none; }
+    .mo { display: flex; }
     h3 {font-size:24px;}
     .cont_inner {padding-top: 40px;}
     /* 26.07.02 add 정다희 : 배경 */
@@ -658,7 +656,6 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     .sec_brand_about > .about_inner > .about_txt > p > span { font-weight: 700; font-size: 1.6rem; line-height: 1.24; letter-spacing: 0; display: block; word-break: keep-all; }
     .sec_brand_about > .about_inner > .about_txt > p:last-child { margin-top: 40px; }
 
-    .body_wrap {padding-top:0;}
    
    /* 26.07.02 add 정다희 : sec_brand_str  */
     .sec_brand_str .str_inner{width:100%; padding: 150px 20px; }
