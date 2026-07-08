@@ -559,6 +559,7 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
 
 /* 26.07.08 add 정다희 : gsrbr010101 diff_bottom_row 스타일 */
 .diff_bottom_row { margin-top: 40px; display: flex; gap: 32px; }
+.diff_bottom_row.mo{display:none;}
 .diff_bottom_row > .diff_qr_row { flex: 1; }
 /* //26.07.08 add 정다희 : gsrbr010101 diff_bottom_row 스타일 */
 
@@ -665,6 +666,8 @@ h4 {  margin-bottom: 40px; color: #161616; font-size: 32px; font-weight: 700; }
     .str_content {margin-top: 24px; padding:32px 20px; flex-direction: column;}
     .str_content .img_wrap.pc{display:none;}
     .str_content .img_wrap.mo{display:block;}
+    .diff_bottom_row.mo{display:flex;}
+    .diff_bottom_row.pc{display: none;}
     .str_content .img_wrap {max-width:120px; margin: 0 auto;}
     .str_content h3 {font-size:2rem;}
     .str_content p {margin-top:8px; font-size: 1.6rem; line-height: 1.5;}
