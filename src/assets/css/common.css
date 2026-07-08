@@ -412,6 +412,29 @@ label.select.err > em {display:block;}
 
     .table_wrap table th, .table_wrap table td {padding:4px 10px; font-size:1.6rem;}
     .table_wrap table thead th {padding:8px 14px;}
+
+    /* 26.07.08 Add 이종환 : policy_wrap type_pop (팝업 타입) */
+    .policy_wrap.type_pop {font-size:1.4rem; line-height:140%; letter-spacing:-0.01em;}
+
+    .policy_wrap.type_pop .policy_tit strong {font-size:1.8rem;}
+    .policy_wrap.type_pop .policy_tit p {margin-top:30px; color:#67676F;}
+
+    .policy_wrap.type_pop .inner > * + * {margin-top:40px;}
+    .policy_wrap.type_pop .inner > dl > dt {font-size:1.8rem; font-weight:700;}
+    .policy_wrap.type_pop .inner > dl > dt + dd {margin-top:40px;}
+    .policy_wrap.type_pop .inner > dl > dd + dt {margin-top:60px;}
+    .policy_wrap.type_pop .inner > dl > dd {color:#67676F;}
+    .policy_wrap.type_pop .notice_date {margin-top:30px; color:#67676F;}
+    .policy_wrap.type_pop .notice_date li + li {margin-top:0;}
+    .policy_wrap.type_pop nav {margin-top:30px; display:inline-flex; flex-direction:column; gap:8px;}
+    .policy_wrap.type_pop nav > * {padding:0 16px;}
+    .policy_wrap.type_pop .txt_pc {display:block;}
+    .policy_wrap.type_pop .txt_mo {display:none;}
+
+    .policy_wrap.type_pop .explain {font-size:1.6rem;}
+
+    .policy_wrap.type_pop dd .bullet_02 li {padding-left:10px; font-size:1.8rem; line-height:140%;}
+    .policy_wrap.type_pop .bullet_02 li + li {margin-top:4px;}
 }
 
 @media screen and (max-width:767px) {
