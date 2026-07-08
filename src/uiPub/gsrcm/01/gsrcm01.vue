@@ -80,6 +80,15 @@
     <div id="gsrcm0103" class="modal_wrap">
         <div class="modal_container"></div>
     </div>
+    <div id="gsrcm0103-1" class="modal_wrap">
+        <div class="modal_container"></div>
+    </div>
+    <div id="gsrcm0103-2" class="modal_wrap">
+        <div class="modal_container"></div>
+    </div>
+    <div id="gsrcm0103-3" class="modal_wrap">
+        <div class="modal_container"></div>
+    </div>
 
 
 </template>
@@ -185,14 +194,25 @@ const selectedVersion = ref("20260422");
 
 const t = computed(() => langData[props.lang] || langData.ko);
 
+// function onQuickBtnClick(event, btn) {
+//     if (btn.popId) {
+//         modal.open(btn.popId, btn.type || "default", { dataset: { cont: btn.cont } });
+//         return;
+//     }
+//     if (btn.link && btn.link !== "#none") {
+//         window.open(btn.link, "_blank");
+//     }
+// }
+
 function onQuickBtnClick(event, btn) {
-    if (btn.popId) {
-        modal.open(btn.popId, btn.type || "default", { dataset: { cont: btn.cont } });
-        return;
-    }
-    if (btn.link && btn.link !== "#none") {
-        window.open(btn.link, "_blank");
-    }
+    const el = event.currentTarget;
+
+    modal.open(
+        btn.popId,
+        btn.type || "default",
+        el,
+        btn.cont
+    );
 }
 </script>
 

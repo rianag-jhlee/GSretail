@@ -11,6 +11,8 @@ a {color:#161616; text-decoration:none;}
 a:visited {color:#161616;}
 button {cursor:pointer;}
 
+caption {display:none;}
+
 /* align */
 .al {text-align:left !important;}
 .ac {text-align:center !important;}
@@ -266,6 +268,33 @@ label.select.err > em {display:block;}
 .bullet_01 li { position: relative; padding-left: 15px; color: #67676f; font-size: 20px; line-height: 1.6; }
 .bullet_01 li::before { content: ""; position: absolute; left: 0; top: 12px; width: 4px; height: 4px; background: #67676f; border-radius: 50%; }
 .bullet_01.no_type li::before {content:none !important;}
+
+.bullet_02 li { position: relative; padding-left: 15px; color: #67676f; font-size: 20px; line-height: 1.6; }
+.bullet_02 li::before { content: ""; position: absolute; left: 0; top: 12px; width:4px; height:1px; background: #67676f; border-radius: 50%; }
+.bullet_02.no_type li::before {content:none !important;}
+
+/* 26.07.08 Add 이종환 : policy_wrap type_pop (팝업 타입) */
+.policy_wrap.type_pop {font-size:1.8rem; line-height:140%;}
+
+.policy_wrap.type_pop .policy_tit strong {font-size:2.4rem;}
+.policy_wrap.type_pop .policy_tit p {margin-top:30px; color:#67676F;}
+
+.policy_wrap.type_pop .inner > * + * {margin-top:40px;}
+.policy_wrap.type_pop .inner > dl > dt {font-size:2.4rem; font-weight:700;}
+.policy_wrap.type_pop .inner > dl > dt + dd {margin-top:40px;}
+.policy_wrap.type_pop .inner > dl > dd + dt {margin-top:60px;}
+.policy_wrap.type_pop .inner > dl > dd {color:#67676F;}
+.policy_wrap.type_pop .notice_date {margin-top:30px; color:#67676F;}
+.policy_wrap.type_pop .notice_date li + li {margin-top:0;}
+.policy_wrap.type_pop nav {margin-top:30px; display:inline-flex; flex-direction:column; gap:8px;}
+.policy_wrap.type_pop nav > * {padding:0 16px;}
+.policy_wrap.type_pop .txt_pc {display:block;}
+.policy_wrap.type_pop .txt_mo {display:none;}
+
+.policy_wrap.type_pop .explain {font-size:1.6rem;}
+
+.policy_wrap.type_pop dd .bullet_02 li {padding-left:10px; font-size:1.8rem; line-height:140%;}
+.policy_wrap.type_pop .bullet_02 li + li {margin-top:4px;}
 
 .thumb {overflow:hidden; position:relative;}
 .thumb img {width:100%; height:100%; object-fit:cover; display:block;}
