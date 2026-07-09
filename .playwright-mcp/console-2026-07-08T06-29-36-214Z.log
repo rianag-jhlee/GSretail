@@ -1,0 +1,1 @@
+[     539ms] [ERROR] Access to font at 'http://fastly.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff' from origin 'http://www.gsretail.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ http://www.gsretail.com/gsretail/ko/company:1894

@@ -2,7 +2,7 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -105,6 +105,7 @@ export default {
         return {
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "GS리테일 소비자권익보호 정책",
                     section1: {
                         title: '1. 제정목적',
@@ -164,6 +165,7 @@ export default {
                     }
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "GS Retail Consumer Rights Protection Policy",
                     section1: {
                         title: 'Purpose of Establishment',
@@ -228,7 +230,7 @@ export default {
     computed: { 
         t() { 
             // langData가 없거나, 해당 언어 데이터가 없을 경우를 모두 대비
-            const data = this.langData[this.lang] || this.langData.ko;
+            const data = this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko;
             return data || {}; 
         } 
     },
@@ -248,9 +250,9 @@ export default {
 .smp_announcement_pop .section.first {padding-top:0}
 .smp_announcement_pop .section:last-child {border-bottom:0}
 .smp_announcement_pop .section .desc {font-size:15px;line-height:25px;white-space:pre-line;}
-.smp_announcement_pop .section .smp_announcement>dl {overflow:hidden;margin-top:10px}
-.smp_announcement_pop .section .smp_announcement>dl dt {float:left;background:#0072bc;border-radius:15px;color:#fff;text-align:center;width:42px;font-size:13px;line-height:19px}
-.smp_announcement_pop .section .smp_announcement>dl dd {padding-left:50px;margin-bottom:7px;padding-bottom:7px;line-height:19px;font-size:15px}
+.smp_announcement_pop .section .smp_announcement>dl {display:grid;grid-template-columns:auto 1fr;gap:7px 12px;margin-top:10px;align-items:start}
+.smp_announcement_pop .section .smp_announcement>dl dt {justify-self:start;background:#0072bc;border-radius:15px;color:#fff;text-align:center;min-width:42px;padding:0 8px;box-sizing:border-box;font-size:13px;line-height:19px;white-space:nowrap}
+.smp_announcement_pop .section .smp_announcement>dl dd {line-height:19px;font-size:15px}
 .smp_announcement_pop .section .desc + .title {padding-top:20px}
 .smp_announcement_pop .image_wrap {margin:30px 0; text-align:center;}
 .smp_announcement_pop .image_wrap img {width:100%; max-width:676px;}

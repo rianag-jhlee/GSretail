@@ -46,7 +46,7 @@
                 </article>
 
                 <div class="btnSection bottom">
-                    <Buttons btn-class="btn_xl border btn_icon_arrow after">기타 문의하기</Buttons>
+                    <Buttons btn-class="btn_xl border btn_icon_arrow after">{{ t.OtherInquiry }}</Buttons>
                 </div>
 
                 <!-- 26.07.03 Del 이종환 <ul class="service-link-list">
@@ -100,6 +100,7 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "고객센터",
+                    OtherInquiry: "기타 문의하기",
                     IntroTitle: `안녕하세요! <br/><span class="point-blue">GS리테일 고객센터</span><br/>입니다.`,
                     IntroDesc: "고객님 한분 한분의 의견을 소중하게 여기며,<br/>고객님의 값진 한마디로 더욱 새롭게 거듭나겠습니다.",
                     CallCenterGuide: "※ 고객센터 대표전화 (무료)",
@@ -134,6 +135,7 @@ export default {
                 },
                 en: {
                     MainTitle: "Customer Service",
+                    OtherInquiry: "Other Inquiries"/* 260708 번역 */,
                     IntroTitle: `Hello! Welcome to the GS Retail Customer Service Center.`,
                     IntroDesc: "We value every opinion from each and every one of our customers.<br/>Your valuable words will help us continually improve and grow.",
                     CallCenterGuide: "※ Customer Service Center Representative Number (Toll-Free)",

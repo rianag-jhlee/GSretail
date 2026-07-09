@@ -1,0 +1,225 @@
+- generic [ref=f40e3]:
+  - list [ref=f40e4]:
+    - listitem [ref=f40e5]:
+      - link "본문 바로가기" [ref=f40e6] [cursor=pointer]:
+        - /url: "#content_wrap"
+    - listitem [ref=f40e7]:
+      - link "주메뉴 바로가기" [ref=f40e8] [cursor=pointer]:
+        - /url: "#gnb_nav"
+  - banner [ref=f40e9]:
+    - generic [ref=f40e10]:
+      - heading "GS리테일" [level=1] [ref=f40e11]:
+        - link "GS리테일" [ref=f40e12] [cursor=pointer]:
+          - /url: /
+      - navigation [ref=f40e13]:
+        - list [ref=f40e14]:
+          - listitem [ref=f40e15]:
+            - link "회사소개" [ref=f40e16] [cursor=pointer]:
+              - /url: /gsrab01
+            - generic:
+              - list:
+                - listitem:
+                  - link "경영이념 및 가치체계":
+                    - /url: /gsrab02
+                - listitem:
+                  - link "CEO 인사말":
+                    - /url: /gsrab01
+                - listitem:
+                  - link "기업 연혁":
+                    - /url: /gsrab03
+                - listitem:
+                  - link "수상 이력":
+                    - /url: /gsrab06
+                - listitem:
+                  - link "기업 CI/BI":
+                    - /url: /gsrab04
+                - listitem:
+                  - link "오시는 길":
+                    - /url: /gsrab05
+          - listitem [ref=f40e17]:
+            - link "사업영역" [ref=f40e18] [cursor=pointer]:
+              - /url: /gsrbr010101
+            - generic:
+              - list:
+                - listitem:
+                  - link "GS25":
+                    - /url: /gsrbr010101
+                - listitem:
+                  - link "GS THE FRESH":
+                    - /url: /gsrbr020101
+                - listitem:
+                  - link "GS SHOP":
+                    - /url: /gsrbr0301
+                - listitem:
+                  - link "우리동네GS":
+                    - /url: /gsrbr04
+                - listitem:
+                  - link "개발/임대 사업":
+                    - /url: /gsrbr1101
+          - listitem [ref=f40e19]:
+            - link "지속가능경영" [ref=f40e20] [cursor=pointer]:
+              - /url: /gsrsu0101
+            - generic:
+              - list:
+                - listitem:
+                  - link "지속가능경영":
+                    - /url: /gsrsu0101
+                - listitem:
+                  - link "환경":
+                    - /url: /gsrsu0201
+                - listitem:
+                  - link "사회적 책임":
+                    - /url: /gsrsu03010101
+                - listitem:
+                  - link "정도경영":
+                    - /url: /gsrsu040101
+          - listitem [ref=f40e21]:
+            - link "투자정보" [ref=f40e22] [cursor=pointer]:
+              - /url: /gsrin0100
+            - generic:
+              - list:
+                - listitem:
+                  - link "이사회 의장 인사말":
+                    - /url: /gsrin0100
+                - listitem:
+                  - link "기업지배구조":
+                    - /url: /gsrin0101
+                - listitem:
+                  - link "경영성과":
+                    - /url: /gsrin0201
+                - listitem:
+                  - link "공시정보":
+                    - /url: /gsrin0301
+                - listitem:
+                  - link "IR자료실":
+                    - /url: /gsrin04
+          - listitem [ref=f40e23]:
+            - link "미디어" [ref=f40e24] [cursor=pointer]:
+              - /url: /gsrne01
+            - generic:
+              - list:
+                - listitem:
+                  - link "보도자료":
+                    - /url: /gsrne01
+                - listitem:
+                  - link "뉴스룸":
+                    - /url: /gsrne02
+                - listitem:
+                  - link "스토리":
+                    - /url: /gsrne03
+      - generic [ref=f40e25]:
+        - list [ref=f40e26]:
+          - listitem [ref=f40e27]:
+            - link "채용문의" [ref=f40e28] [cursor=pointer]:
+              - /url: https://gsretail.recruiter.co.kr/career/home
+        - list [ref=f40e29]:
+          - listitem [ref=f40e30]:
+            - button "KO" [ref=f40e31] [cursor=pointer]
+          - listitem [ref=f40e32]:
+            - button "EN" [ref=f40e33] [cursor=pointer]
+  - generic [ref=f40e36]:
+    - heading "환경" [level=2] [ref=f40e38]
+    - generic [ref=f40e40]:
+      - list [ref=f40e42]:
+        - listitem [ref=f40e43]:
+          - link "환경경영" [ref=f40e44] [cursor=pointer]:
+            - /url: javascript:void(0);
+        - listitem [ref=f40e45]:
+          - link "친환경 활동" [ref=f40e46] [cursor=pointer]:
+            - /url: javascript:void(0);
+        - listitem [ref=f40e47]:
+          - link "함께하는 기후변화 대응" [ref=f40e48] [cursor=pointer]:
+            - /url: javascript:void(0);
+      - article [ref=f40e50]:
+        - generic [ref=f40e51]:
+          - generic [ref=f40e52]:
+            - heading "Green Together 지구를 지키기 위한 노력을 함께 합니다." [level=3] [ref=f40e53]:
+              - text: Green Together
+              - text: 지구를 지키기 위한 노력을 함께 합니다.
+            - paragraph [ref=f40e54]:
+              - text: 전 세계적으로 기후 변화, 환경오염 등 환경 관련 이슈가 확산되고 있습니다.
+              - text: 이제 환경경영은 현재의 우리와 미래 후손들을 위해 기업이 사회적 책임을 가져야 할 필수 경영 활동이 되었습니다.
+              - text: GS리테일은 종합 유통 플랫폼으로써 고객이 경험하는 모든 밸류체인 및 경영 활동 전반에 걸친 환경 영향도를 파악하고
+              - text: 최소화하고자 최선의 노력을 다하겠습니다.
+          - generic [ref=f40e55]:
+            - generic [ref=f40e56]:
+              - heading "환경경영방침" [level=4] [ref=f40e57]
+              - paragraph [ref=f40e58]: GS리테일은 지속가능한 환경경영을 위해, 환경경영 방침을 수립하였습니다.
+            - list [ref=f40e59]:
+              - listitem [ref=f40e60]:
+                - strong [ref=f40e61]: "하나. 환경 관련 법령 준수 :"
+                - generic [ref=f40e62]: 환경 관련 법령을 준수할 수 있도록 주기적인 모니터링 및 임직원 교육을 진행하여 발생 가능한 리스크를 최소화 하고 있습니다.
+              - listitem [ref=f40e63]:
+                - strong [ref=f40e64]: "하나. 환경 성과의 체계적 관리 :"
+                - generic [ref=f40e65]: 의사결정 과정에서 환경을 최우선으로 생각하며 환경경영시스템이 체계적으로 관리되도록 최선을 다합니다.
+              - listitem [ref=f40e66]:
+                - strong [ref=f40e67]: "하나. 에너지 저감 및 폐기물 관리 :"
+                - generic [ref=f40e68]: 본사를 비롯한 매장에서도 에너지의 효율적 사용 방안을 모색하고 확대하며, 폐기물 재사용 및 축소를 통해 환경영향을 축소하겠습니다.
+              - listitem [ref=f40e69]:
+                - strong [ref=f40e70]: "하나. 친환경 제품의 확대 :"
+                - generic [ref=f40e71]: 유통사로써 고객이 손쉽게 친환경 상품을 접할 수 있도록 친환경 상품의 정의 및 확대를 지속하겠습니다.
+              - listitem [ref=f40e72]:
+                - strong [ref=f40e73]: "하나. 환경 정보 공개 :"
+                - generic [ref=f40e74]: 관계 법령에 따라 환경 정보를 대중에 공개하여 투명한 환경경영을 실천합니다.
+          - generic [ref=f40e75]:
+            - generic [ref=f40e76]:
+              - heading "환경경영 3대 전략" [level=4] [ref=f40e77]
+              - paragraph [ref=f40e78]: 사업의 밸류체인 전반에 걸친 환경경영 기반을 강화하기 위한 그린 밸류체인, 친환경매장 및 자원 선순환 등 진행을 통한 그린스토어, 지속가능 제품의 확대 및 책임있는 원재료 조달에 대한 그린 프로덕트 등 환경경영 3대 전략과제를 수립하였습니다.
+            - img "환경경영 3대 전략" [ref=f40e80]
+          - generic [ref=f40e81]:
+            - generic [ref=f40e82]:
+              - heading "환경경영 운영체계" [level=4] [ref=f40e83]
+              - paragraph [ref=f40e84]:
+                - text: 환경경영 전략과제를 통해 각 사업별 실행전략을 수립하고, 환경경영 평가위원회를 통해 진행 현황 관리 및 영향평가를 진행합니다.
+                - text: 또한, ESG추진협의회 및 ESG위원회에 진행사항을 보고할 수 있도록 하는 환경경영 체계를 구축하였습니다.
+            - img "환경경영 운영체계" [ref=f40e86]
+  - contentinfo [ref=f40e88]:
+    - generic [ref=f40e89]:
+      - list [ref=f40e91]:
+        - listitem [ref=f40e92]:
+          - link "개인정보처리방침" [ref=f40e93] [cursor=pointer]:
+            - /url: "#none"
+        - listitem [ref=f40e94]:
+          - link "GS SHOP 시청자 관련" [ref=f40e95] [cursor=pointer]:
+            - /url: gsrcm0401
+        - listitem [ref=f40e96]:
+          - link "정도경영제보" [ref=f40e97] [cursor=pointer]:
+            - /url: gsrsu040101
+        - listitem [ref=f40e98]:
+          - link "공지사항" [ref=f40e99] [cursor=pointer]:
+            - /url: gsrnotice
+        - listitem [ref=f40e100]:
+          - link "사이트맵" [ref=f40e101] [cursor=pointer]:
+            - /url: "#none"
+      - generic [ref=f40e102]:
+        - strong [ref=f40e103]: ※ 고객센터 대표전화
+        - generic [ref=f40e104]:
+          - generic [ref=f40e105]:
+            - term [ref=f40e106]: GS25
+            - definition [ref=f40e107]: 080-999-5425
+          - generic [ref=f40e108]:
+            - term [ref=f40e109]: GS SHOP
+            - definition [ref=f40e110]: 080-414-4545
+          - generic [ref=f40e111]:
+            - term [ref=f40e112]: GS THE FRESH
+            - definition [ref=f40e113]: 080-345-7700
+      - generic [ref=f40e114]:
+        - generic [ref=f40e115]:
+          - strong [ref=f40e116]: (주)GS리테일
+          - generic [ref=f40e117]: 서울시 강남구 논현로 508(역삼동 679번지 GS강남타워)
+          - generic [ref=f40e118]: 대표이사 허서홍
+          - generic [ref=f40e119]: 사업자등록번호 116-81-18746
+        - paragraph [ref=f40e120]: Copyright ⓒGS Retail. All rights reserved.
+      - button "FAMILY SITE" [ref=f40e122] [cursor=pointer]
+    - generic [ref=f40e123]:
+      - list:
+        - listitem [ref=f40e124]:
+          - link "점포 창업 안내" [ref=f40e125] [cursor=pointer]:
+            - /url: gsrst_smain
+        - listitem [ref=f40e126]:
+          - link "상품 입점 상담" [ref=f40e127] [cursor=pointer]:
+            - /url: gsrse01
+        - listitem [ref=f40e128]:
+          - link "고객센터" [ref=f40e129] [cursor=pointer]:
+            - /url: gsrcu01
+      - button [ref=f40e130] [cursor=pointer]

@@ -54,10 +54,17 @@ export default {
                 },
                 en: {
                     MainTitle: "Message from the Chairman of the Board of Directors",
-                    ChairmanRole: "",
-                    ChairmanName: "",
-                    ChairmanGreeting: "",
-                    ChairmanBody: [],
+                    ChairmanRole: "Chairman of the Board of Directors, GS Retail Co., Ltd."/* 260708 번역 */,
+                    ChairmanName: "Lee Sung-rak, Outside Director"/* 260708 번역 */,
+                    ChairmanGreeting: "Dear valued shareholders of GS Retail,<br />I am Lee Sung-rak, <br class='m_br'/>Chairman of the Board of Directors of GS Retail."/* 260708 번역 */,
+                    ChairmanBody: [
+                        "To establish transparent corporate governance, our company has separated the roles of CEO and Chairman of the Board, operating its board on this basis since November 2020."/* 260708 번역 */,
+                        "As Chairman of the Board, I strive to protect the rights of GS Retail's shareholders and, through fair treatment, guarantee their fundamental rights to the fullest, <br />while working to maximize corporate value on the foundation of trust built with our shareholders."/* 260708 번역 */,
+                        "In addition, to ensure efficient decision-making, we have composed the Board with competent members of professional expertise and are doing our utmost to enhance shareholder value. <br />In particular, the Audit Committee is composed entirely of outside directors along with at least one financial and accounting expert, ensuring management activities that remain <br />independent of the management and the controlling shareholder."/* 260708 번역 */,
+                        "Furthermore, to strengthen sustainable management from an ESG perspective, we operate five committees within the Board, including the ESG Committee and the Compensation Committee, <br />striving to enhance the independence and expertise of our decision-making."/* 260708 번역 */,
+                        "Beyond this, we will fulfill our corporate social responsibilities—protecting the rights of diverse stakeholders, establishing a fair trade culture, and pursuing mutual growth with local communities—<br />while making our utmost efforts to ensure that GS Retail becomes a company of sustained growth."/* 260708 번역 */,
+                        "We sincerely ask for your continued interest in and support for GS Retail. <br />Thank you."/* 260708 번역 */,
+                    ],
                 }
             }
         };

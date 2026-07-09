@@ -25,7 +25,7 @@
         <div class="hero_message" ref="heroMessageRef" v-if="t.heroMessage">
             <div class="inner">
                 <!-- 26.06.17 Add 이소라 : 버튼 영역 추가 -->
-                <a :href="t.heroMessage.link"><span class="blind">새창 열기</span></a>
+                <a :href="t.heroMessage.link"><span class="blind">{{ t.newWindow }}</span></a>
                 <p v-html="t.heroMessage.title"></p>
                 <ul>
                     <li v-for="(item, index) in t.heroMessage.items" :key="index">
@@ -86,7 +86,7 @@
                                         <strong>
                                             <img
                                                 :src="item.sub"
-                                                :alt="item.brand + ' 로고'"
+                                                :alt="item.brand + t.logoSuffix"
                                             />
                                         </strong>
                                         <span v-html="item.txt"></span>
@@ -171,6 +171,8 @@ export default {
             /* language contents */
             langData: {
                 ko: {
+                    newWindow: "새창 열기",
+                    logoSuffix: " 로고",
                     mainVisual: {
                         items: [
                             {
@@ -329,6 +331,8 @@ export default {
                     }
                 },
                 en: {
+                    newWindow: "Open in new window"/* 260708 번역 */,
+                    logoSuffix: " Logo"/* 260708 번역 */,
                     mainVisual: {
                         items: [
                             {
@@ -353,7 +357,28 @@ export default {
 
                     /* 260616 add 정다희 : hero_message */
                     heroMessage: {
-                       
+                        title: 'A platform that <span class="txt_orange">connects</span> every customer experience, <br /><span class="txt_green">empathizes</span> through data, <br />and earns <span class="txt_blue">trust</span> through its products and services'/* 260708 번역 */,
+                        items: [
+                            {
+                                dt: "Offline stores nationwide"/* 260708 번역 */,
+                                num: "18,600+",
+                                unit: "stores"/* 260708 번역 */,
+                                desc: "(As of Dec. 2025)"/* 260708 번역 */,
+                            },
+                            {
+                                dt: "GS ALL Membership members"/* 260708 번역 */,
+                                num: "23.44M+",
+                                unit: "members"/* 260708 번역 */,
+                                desc: "(As of Q1 2026)"/* 260708 번역 */,
+                            },
+                            {
+                                dt: "Customer satisfaction & service quality"/* 260708 번역 */,
+                                num: "1",
+                                unit: "st"/* 260708 번역 */,
+                                desc: "2025 Korea Customer Satisfaction Index (convenience stores, supermarkets)<br />2025 Korea Service Quality Index (convenience stores, supermarkets, home shopping)"/* 260708 번역 */,
+                            },
+                        ],
+                        link: "/gsrab02",
                     },
 
                     sec03: {

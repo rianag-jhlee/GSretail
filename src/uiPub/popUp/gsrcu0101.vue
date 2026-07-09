@@ -276,6 +276,7 @@ export default {
             },
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "고객의 소리",
                     common: {
                         close: "닫기",
@@ -379,6 +380,7 @@ export default {
                     }
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "Customer Feedback",
                     common: {
                         close: "Close"/* 260604 번역 */,
@@ -486,7 +488,7 @@ export default {
     },
     computed: {
         t() {
-            const currentLang = this.langData[this.lang];
+            const currentLang = this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')];
             return currentLang && currentLang.common && currentLang.listening ? currentLang : this.langData.ko;
         }
     },

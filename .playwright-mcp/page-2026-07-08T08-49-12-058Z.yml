@@ -1,0 +1,266 @@
+- generic [ref=f75e3]:
+  - list [ref=f75e4]:
+    - listitem [ref=f75e5]:
+      - link "본문 바로가기" [ref=f75e6] [cursor=pointer]:
+        - /url: "#content_wrap"
+    - listitem [ref=f75e7]:
+      - link "주메뉴 바로가기" [ref=f75e8] [cursor=pointer]:
+        - /url: "#gnb_nav"
+  - banner [ref=f75e9]:
+    - generic [ref=f75e10]:
+      - heading "GS리테일" [level=1] [ref=f75e11]:
+        - link "GS리테일" [ref=f75e12] [cursor=pointer]:
+          - /url: /
+      - navigation [ref=f75e13]:
+        - list [ref=f75e14]:
+          - listitem [ref=f75e15]:
+            - link "회사소개" [ref=f75e16] [cursor=pointer]:
+              - /url: /gsrab01
+            - generic:
+              - list:
+                - listitem:
+                  - link "경영이념 및 가치체계":
+                    - /url: /gsrab02
+                - listitem:
+                  - link "CEO 인사말":
+                    - /url: /gsrab01
+                - listitem:
+                  - link "기업 연혁":
+                    - /url: /gsrab03
+                - listitem:
+                  - link "수상 이력":
+                    - /url: /gsrab06
+                - listitem:
+                  - link "기업 CI/BI":
+                    - /url: /gsrab04
+                - listitem:
+                  - link "오시는 길":
+                    - /url: /gsrab05
+          - listitem [ref=f75e17]:
+            - link "사업영역" [ref=f75e18] [cursor=pointer]:
+              - /url: /gsrbr010101
+            - generic:
+              - list:
+                - listitem:
+                  - link "GS25":
+                    - /url: /gsrbr010101
+                - listitem:
+                  - link "GS THE FRESH":
+                    - /url: /gsrbr020101
+                - listitem:
+                  - link "GS SHOP":
+                    - /url: /gsrbr0301
+                - listitem:
+                  - link "우리동네GS":
+                    - /url: /gsrbr04
+                - listitem:
+                  - link "개발/임대 사업":
+                    - /url: /gsrbr1101
+          - listitem [ref=f75e19]:
+            - link "지속가능경영" [ref=f75e20] [cursor=pointer]:
+              - /url: /gsrsu0101
+            - generic:
+              - list:
+                - listitem:
+                  - link "지속가능경영":
+                    - /url: /gsrsu0101
+                - listitem:
+                  - link "환경":
+                    - /url: /gsrsu0201
+                - listitem:
+                  - link "사회적 책임":
+                    - /url: /gsrsu03010101
+                - listitem:
+                  - link "정도경영":
+                    - /url: /gsrsu040101
+          - listitem [ref=f75e21]:
+            - link "투자정보" [ref=f75e22] [cursor=pointer]:
+              - /url: /gsrin0100
+            - generic:
+              - list:
+                - listitem:
+                  - link "이사회 의장 인사말":
+                    - /url: /gsrin0100
+                - listitem:
+                  - link "기업지배구조":
+                    - /url: /gsrin0101
+                - listitem:
+                  - link "경영성과":
+                    - /url: /gsrin0201
+                - listitem:
+                  - link "공시정보":
+                    - /url: /gsrin0301
+                - listitem:
+                  - link "IR자료실":
+                    - /url: /gsrin04
+          - listitem [ref=f75e23]:
+            - link "미디어" [ref=f75e24] [cursor=pointer]:
+              - /url: /gsrne01
+            - generic:
+              - list:
+                - listitem:
+                  - link "보도자료":
+                    - /url: /gsrne01
+                - listitem:
+                  - link "뉴스룸":
+                    - /url: /gsrne02
+                - listitem:
+                  - link "스토리":
+                    - /url: /gsrne03
+      - generic [ref=f75e25]:
+        - list [ref=f75e26]:
+          - listitem [ref=f75e27]:
+            - link "채용문의" [ref=f75e28] [cursor=pointer]:
+              - /url: https://gsretail.recruiter.co.kr/career/home
+        - list [ref=f75e29]:
+          - listitem [ref=f75e30]:
+            - button "KO" [ref=f75e31] [cursor=pointer]
+          - listitem [ref=f75e32]:
+            - button "EN" [ref=f75e33] [cursor=pointer]
+  - generic [ref=f75e36]:
+    - heading "사회적 책임" [level=2] [ref=f75e38]
+    - generic [ref=f75e40]:
+      - list [ref=f75e42]:
+        - listitem [ref=f75e43]:
+          - link "상생경영" [ref=f75e44] [cursor=pointer]:
+            - /url: javascript:void(0);
+        - listitem [ref=f75e45]:
+          - link "나눔경영" [ref=f75e46] [cursor=pointer]:
+            - /url: javascript:void(0);
+        - listitem [ref=f75e47]:
+          - link "권익보호" [ref=f75e48] [cursor=pointer]:
+            - /url: javascript:void(0);
+      - article [ref=f75e50]:
+        - list [ref=f75e52]:
+          - listitem [ref=f75e53]:
+            - link "동반성장" [ref=f75e54] [cursor=pointer]:
+              - /url: javascript:void(0);
+          - listitem [ref=f75e55]:
+            - link "파트너사 지원제도" [ref=f75e56] [cursor=pointer]:
+              - /url: javascript:void(0);
+          - listitem [ref=f75e57]:
+            - link "경영주 지원제도" [ref=f75e58] [cursor=pointer]:
+              - /url: javascript:void(0);
+          - listitem [ref=f75e59]:
+            - link "지역사회 참여정책" [ref=f75e60] [cursor=pointer]:
+              - /url: javascript:void(0);
+          - listitem [ref=f75e61]:
+            - link "공급망 지속가능성 관리정책" [ref=f75e62] [cursor=pointer]:
+              - /url: javascript:void(0);
+        - generic [ref=f75e64]:
+          - heading "GS리테일의 동반성장 철학과 추진전략을 확인하실 수 있습니다." [level=3] [ref=f75e66]
+          - generic [ref=f75e67]:
+            - generic [ref=f75e68]:
+              - heading "동반성장철학" [level=3] [ref=f75e69]
+              - list [ref=f75e71]:
+                - listitem [ref=f75e72]:
+                  - generic [ref=f75e73]:
+                    - strong [ref=f75e74]: Win-Win
+                    - paragraph [ref=f75e75]:
+                      - text: 어느 일방의 희생이 아닌
+                      - text: 상생 협력체계 구축
+                  - generic [ref=f75e76]:
+                    - strong [ref=f75e77]: 신뢰
+                    - paragraph [ref=f75e78]:
+                      - text: 끊임 없는 소통과 경청을
+                      - text: 통한 신뢰를 기반
+                  - generic [ref=f75e79]:
+                    - strong [ref=f75e80]: 미래지향
+                    - paragraph [ref=f75e81]:
+                      - text: 일회성, 단기적 성과보다
+                      - text: 지속 가능한 성장 추구
+                - listitem [ref=f75e82]:
+                  - button "동반성장 활동보기" [ref=f75e83] [cursor=pointer]
+            - generic [ref=f75e84]:
+              - heading "추진전략" [level=4] [ref=f75e85]
+              - generic [ref=f75e86]:
+                - img "동반성장 추진전략 다이어그램" [ref=f75e88]
+                - list [ref=f75e89]:
+                  - listitem [ref=f75e90]:
+                    - generic [ref=f75e91]:
+                      - generic [ref=f75e92]: "01"
+                      - strong [ref=f75e93]: 공정한 거래 문화 정착
+                    - list [ref=f75e94]:
+                      - listitem [ref=f75e95]: 공정거래 법규 준수
+                      - listitem [ref=f75e96]: 불공정거래 사전 예방 시스템
+                      - listitem [ref=f75e97]: 공정한 거래 기회 제공
+                  - listitem [ref=f75e98]:
+                    - generic [ref=f75e99]:
+                      - generic [ref=f75e100]: "02"
+                      - strong [ref=f75e101]: 실질적 경영지원
+                    - list [ref=f75e102]:
+                      - listitem [ref=f75e103]: 금융지원 / 대금조기 지급
+                      - listitem [ref=f75e104]: 업무 역량 지원
+                      - listitem [ref=f75e105]: 기타/복리후생 지원
+                  - listitem [ref=f75e106]:
+                    - generic [ref=f75e107]:
+                      - generic [ref=f75e108]: "03"
+                      - strong [ref=f75e109]: 지속적 성장 추구
+                    - list [ref=f75e110]:
+                      - listitem [ref=f75e111]: 공동 상품 개발 확대
+                      - listitem [ref=f75e112]: 브랜드마케팅 지원
+                      - listitem [ref=f75e113]: 성과공유제 도입/운용
+                  - listitem [ref=f75e114]:
+                    - generic [ref=f75e115]:
+                      - generic [ref=f75e116]: "04"
+                      - strong [ref=f75e117]: 열린소통
+                    - list [ref=f75e118]:
+                      - listitem [ref=f75e119]: 정기적 간담회 운영
+                      - listitem [ref=f75e120]: 문화 교류 (Family-Day)
+                      - listitem [ref=f75e121]: 파트너사 만족도 개선
+            - generic [ref=f75e122]:
+              - heading "동반성장지수" [level=3] [ref=f75e123]
+              - generic [ref=f75e124]:
+                - figure [ref=f75e125]:
+                  - img "동반성장지수 최우수 등급" [ref=f75e126]
+                - strong [ref=f75e127]: 동반성장부문 2023 최우수
+  - contentinfo [ref=f75e136]:
+    - generic [ref=f75e137]:
+      - list [ref=f75e139]:
+        - listitem [ref=f75e140]:
+          - link "개인정보처리방침" [ref=f75e141] [cursor=pointer]:
+            - /url: "#none"
+        - listitem [ref=f75e142]:
+          - link "GS SHOP 시청자 관련" [ref=f75e143] [cursor=pointer]:
+            - /url: gsrcm0401
+        - listitem [ref=f75e144]:
+          - link "정도경영제보" [ref=f75e145] [cursor=pointer]:
+            - /url: gsrsu040101
+        - listitem [ref=f75e146]:
+          - link "공지사항" [ref=f75e147] [cursor=pointer]:
+            - /url: gsrnotice
+        - listitem [ref=f75e148]:
+          - link "사이트맵" [ref=f75e149] [cursor=pointer]:
+            - /url: "#none"
+      - generic [ref=f75e150]:
+        - strong [ref=f75e151]: ※ 고객센터 대표전화
+        - generic [ref=f75e152]:
+          - generic [ref=f75e153]:
+            - term [ref=f75e154]: GS25
+            - definition [ref=f75e155]: 080-999-5425
+          - generic [ref=f75e156]:
+            - term [ref=f75e157]: GS SHOP
+            - definition [ref=f75e158]: 080-414-4545
+          - generic [ref=f75e159]:
+            - term [ref=f75e160]: GS THE FRESH
+            - definition [ref=f75e161]: 080-345-7700
+      - generic [ref=f75e162]:
+        - generic [ref=f75e163]:
+          - strong [ref=f75e164]: (주)GS리테일
+          - generic [ref=f75e165]: 서울시 강남구 논현로 508(역삼동 679번지 GS강남타워)
+          - generic [ref=f75e166]: 대표이사 허서홍
+          - generic [ref=f75e167]: 사업자등록번호 116-81-18746
+        - paragraph [ref=f75e168]: Copyright ⓒGS Retail. All rights reserved.
+      - button "FAMILY SITE" [ref=f75e170] [cursor=pointer]
+    - generic [ref=f75e171]:
+      - list:
+        - listitem [ref=f75e172]:
+          - link "점포 창업 안내" [ref=f75e173] [cursor=pointer]:
+            - /url: gsrst_smain
+        - listitem [ref=f75e174]:
+          - link "상품 입점 상담" [ref=f75e175] [cursor=pointer]:
+            - /url: gsrse01
+        - listitem [ref=f75e176]:
+          - link "고객센터" [ref=f75e177] [cursor=pointer]:
+            - /url: gsrcu01
+      - button [ref=f75e178] [cursor=pointer]

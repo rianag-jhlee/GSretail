@@ -2,7 +2,7 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -461,6 +461,7 @@ export default {
             selectedFilter: "",  
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     tabs: [ //탭 아이템 배열
                         { item: "협력업체위생관리" },
                         { item: "FF공장위생관리" },
@@ -679,6 +680,7 @@ export default {
                     }
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     tabs: [ //탭 아이템 배열
                         { item: "Partner company hygiene management"/* 260604 번역 */ },
                         { item: "FF Factory Sanitation Management"/* 260604 번역 */ },
@@ -902,7 +904,7 @@ export default {
     computed: { 
         t() { 
             // langData가 없거나, 해당 언어 데이터가 없을 경우를 모두 대비
-            const data = this.langData[this.lang] || this.langData.ko;
+            const data = this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko;
             return data || {}; 
         } 
     },

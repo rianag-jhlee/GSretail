@@ -1,0 +1,342 @@
+- generic [ref=f70e3]:
+  - list [ref=f70e4]:
+    - listitem [ref=f70e5]:
+      - link "본문 바로가기" [ref=f70e6] [cursor=pointer]:
+        - /url: "#content_wrap"
+    - listitem [ref=f70e7]:
+      - link "주메뉴 바로가기" [ref=f70e8] [cursor=pointer]:
+        - /url: "#gnb_nav"
+  - banner [ref=f70e9]:
+    - generic [ref=f70e10]:
+      - heading "GS리테일" [level=1] [ref=f70e11]:
+        - link "GS리테일" [ref=f70e12] [cursor=pointer]:
+          - /url: /
+      - navigation [ref=f70e13]:
+        - list [ref=f70e14]:
+          - listitem [ref=f70e15]:
+            - link "회사소개" [ref=f70e16] [cursor=pointer]:
+              - /url: /gsrab01
+            - generic:
+              - list:
+                - listitem:
+                  - link "경영이념 및 가치체계":
+                    - /url: /gsrab02
+                - listitem:
+                  - link "CEO 인사말":
+                    - /url: /gsrab01
+                - listitem:
+                  - link "기업 연혁":
+                    - /url: /gsrab03
+                - listitem:
+                  - link "수상 이력":
+                    - /url: /gsrab06
+                - listitem:
+                  - link "기업 CI/BI":
+                    - /url: /gsrab04
+                - listitem:
+                  - link "오시는 길":
+                    - /url: /gsrab05
+          - listitem [ref=f70e17]:
+            - link "사업영역" [ref=f70e18] [cursor=pointer]:
+              - /url: /gsrbr010101
+            - generic:
+              - list:
+                - listitem:
+                  - link "GS25":
+                    - /url: /gsrbr010101
+                - listitem:
+                  - link "GS THE FRESH":
+                    - /url: /gsrbr020101
+                - listitem:
+                  - link "GS SHOP":
+                    - /url: /gsrbr0301
+                - listitem:
+                  - link "우리동네GS":
+                    - /url: /gsrbr04
+                - listitem:
+                  - link "개발/임대 사업":
+                    - /url: /gsrbr1101
+          - listitem [ref=f70e19]:
+            - link "지속가능경영" [ref=f70e20] [cursor=pointer]:
+              - /url: /gsrsu0101
+            - generic:
+              - list:
+                - listitem:
+                  - link "지속가능경영":
+                    - /url: /gsrsu0101
+                - listitem:
+                  - link "환경":
+                    - /url: /gsrsu0201
+                - listitem:
+                  - link "사회적 책임":
+                    - /url: /gsrsu03010101
+                - listitem:
+                  - link "정도경영":
+                    - /url: /gsrsu040101
+          - listitem [ref=f70e21]:
+            - link "투자정보" [ref=f70e22] [cursor=pointer]:
+              - /url: /gsrin0100
+            - generic:
+              - list:
+                - listitem:
+                  - link "이사회 의장 인사말":
+                    - /url: /gsrin0100
+                - listitem:
+                  - link "기업지배구조":
+                    - /url: /gsrin0101
+                - listitem:
+                  - link "경영성과":
+                    - /url: /gsrin0201
+                - listitem:
+                  - link "공시정보":
+                    - /url: /gsrin0301
+                - listitem:
+                  - link "IR자료실":
+                    - /url: /gsrin04
+          - listitem [ref=f70e23]:
+            - link "미디어" [ref=f70e24] [cursor=pointer]:
+              - /url: /gsrne01
+            - generic:
+              - list:
+                - listitem:
+                  - link "보도자료":
+                    - /url: /gsrne01
+                - listitem:
+                  - link "뉴스룸":
+                    - /url: /gsrne02
+                - listitem:
+                  - link "스토리":
+                    - /url: /gsrne03
+      - generic [ref=f70e25]:
+        - list [ref=f70e26]:
+          - listitem [ref=f70e27]:
+            - link "채용문의" [ref=f70e28] [cursor=pointer]:
+              - /url: https://gsretail.recruiter.co.kr/career/home
+        - list [ref=f70e29]:
+          - listitem [ref=f70e30]:
+            - button "KO" [ref=f70e31] [cursor=pointer]
+          - listitem [ref=f70e32]:
+            - button "EN" [ref=f70e33] [cursor=pointer]
+  - generic [ref=f70e36]:
+    - generic [ref=f70e42]:
+      - paragraph [ref=f70e43]:
+        - generic [ref=f70e44]: 신선한 행복을 채우다
+      - img "GS THE FRESH 메인 비주얼" [ref=f70e46]
+    - generic [ref=f70e48]:
+      - generic [ref=f70e49]:
+        - paragraph [ref=f70e50]:
+          - generic [ref=f70e51]: 1974년 럭키수퍼체인(주)로 출범한 LG수퍼마켓은
+        - paragraph [ref=f70e52]:
+          - generic [ref=f70e53]: GS그룹의 출범에 따라 GS수퍼마켓으로 변경되고,
+        - paragraph [ref=f70e54]:
+          - generic [ref=f70e55]: 이후 2019년 '삶의 가치를 누리는 라이프스타일 마켓'으로의 변화를 위해
+        - paragraph [ref=f70e56]:
+          - generic [ref=f70e57]: "\"GS THE FRESH\"로 새롭게 태어나게 되었습니다."
+      - generic [ref=f70e58]:
+        - paragraph [ref=f70e59]:
+          - generic [ref=f70e60]: 새롭게 태어난 GS THE FRESH는 Friendly, Fresh, Fun 가치와 함께
+        - paragraph [ref=f70e61]:
+          - generic [ref=f70e62]: 고객의 생활에 늘 가까이 있는 점포로서 신선하고 다양한 상품을 제공함과
+        - paragraph [ref=f70e63]:
+          - generic [ref=f70e64]: 동시에 더욱 친근한 서비스를 바탕으로 고객과 함께하는
+        - paragraph [ref=f70e65]:
+          - generic [ref=f70e66]: 친근하고, 신속하며, 편리하고 즐거운 쇼핑문화를 지향합니다.
+    - generic [ref=f70e69]:
+      - generic [ref=f70e70]:
+        - heading "가족과 함께하는 행복 쇼핑 산지의 신선함을 그대로 고객님께 전해드립니다." [level=3] [ref=f70e71]:
+          - text: 가족과 함께하는 행복
+          - text: 쇼핑 산지의 신선함을 그대로 고객님께 전해드립니다.
+        - generic [ref=f70e73]:
+          - button "입지 제안" [ref=f70e74] [cursor=pointer]
+          - button "매장 찾기" [ref=f70e75] [cursor=pointer]
+          - link "인스타그램" [ref=f70e76] [cursor=pointer]:
+            - /url: https://www.instagram.com/gsthefresh_official/
+          - link "페이스북" [ref=f70e77] [cursor=pointer]:
+            - /url: https://www.youtube.com/gsthefresh
+      - list [ref=f70e78]:
+        - listitem [ref=f70e79]:
+          - generic [ref=f70e80]:
+            - generic [ref=f70e81]:
+              - button "신선, 맛, 서비스 대한민국 NO.1을 향한 약속" [ref=f70e82] [cursor=pointer]:
+                - text: 신선, 맛, 서비스
+                - text: 대한민국 NO.1을 향한 약속
+              - paragraph [ref=f70e83]:
+                - text: 전국의 우수 산지에서 가장 신선하고 맛있는 상품만을 선별하고,
+                - text: GS THE FRESH만의 엄격한 추가 검품 과정을 통해 최고의 상품 서비스를 제공하고 있습니다.
+                - text: 또한 고객 중심의 차별화된 서비스로 한국서비스품질지수(KS-SQI) 10년
+                - text: 연속 1위를 수상하는 등 고객을 위한 매장을 만들어가고 있습니다.
+            - img "신선, 맛, 서비스<br/> 대한민국 NO.1을 향한 약속" [ref=f70e84]
+        - listitem [ref=f70e85]:
+          - generic [ref=f70e86]:
+            - generic [ref=f70e87]:
+              - button "GS THE FRESH만의 차별화된 컨텐츠로 업계 선도" [ref=f70e88] [cursor=pointer]:
+                - text: GS THE FRESH만의
+                - text: 차별화된 컨텐츠로 업계 선도
+              - paragraph [ref=f70e89]:
+                - text: 상품성을 갖춘 우수 중소업체의 상품을 발굴해
+                - text: 일반상품 가격의 7~80% 수준 가격으로 판매하는 '리얼프라이스'와
+                - text: 우수산지에서 선도, 당도를 엄선한 신선식품 전용 브랜드 '신선특별시' 등
+                - text: 차별화된 상품과 서비스로 국내 수퍼마켓 업계를 선도하고 있습니다.
+            - img "GS THE FRESH만의<br/> 차별화된 컨텐츠로 업계 선도" [ref=f70e90]
+    - generic [ref=f70e92]:
+      - list [ref=f70e95]:
+        - listitem [ref=f70e96]:
+          - link "신선 산지 안내" [ref=f70e97] [cursor=pointer]:
+            - /url: javascript:void(0);
+        - listitem [ref=f70e98]:
+          - link "맛/선도 관리" [ref=f70e99] [cursor=pointer]:
+            - /url: javascript:void(0);
+      - generic [ref=f70e100]:
+        - list [ref=f70e103]:
+          - listitem [ref=f70e104]:
+            - link "전국 우수 산지" [ref=f70e105] [cursor=pointer]:
+              - /url: javascript:void(0);
+          - listitem [ref=f70e106]:
+            - link "함께하는 지자체" [ref=f70e107] [cursor=pointer]:
+              - /url: javascript:void(0);
+        - generic [ref=f70e108]:
+          - generic [ref=f70e111]:
+            - heading "전국 우수 산지" [level=3] [ref=f70e112]
+            - paragraph [ref=f70e113]: GS리테일은 고객에게 항상 신선하고 우수한 품질의 상품을 제공하고자 노력하고 있습니다.
+            - paragraph [ref=f70e114]: 지속적인 발굴과 지원을 통해 우수산지를 확보하고, 우수산지에서 생산된 최고 품질의 상품을 고객에게 제공해 드리고 있습니다.
+          - generic [ref=f70e115]:
+            - complementary [ref=f70e116]:
+              - list [ref=f70e117]:
+                - listitem [ref=f70e118]:
+                  - button "과일" [ref=f70e119] [cursor=pointer]
+                - listitem [ref=f70e120]:
+                  - button "수산" [ref=f70e121] [cursor=pointer]
+                - listitem [ref=f70e122]:
+                  - button "채소" [ref=f70e123] [cursor=pointer]
+                - listitem [ref=f70e124]:
+                  - button "양곡" [ref=f70e125] [cursor=pointer]
+                - listitem [ref=f70e126]:
+                  - button "축산" [ref=f70e127] [cursor=pointer]
+            - generic [ref=f70e128]:
+              - generic [ref=f70e129]:
+                - generic [ref=f70e130]:
+                  - heading "과일" [level=4] [ref=f70e131]
+                  - paragraph [ref=f70e132]: 달콤함이 가득한 제철의 정수, 전국 산지에서 갓 수확한 프리미엄 과일
+                - generic [ref=f70e133]:
+                  - generic [ref=f70e134]:
+                    - img "영흥섬 포도" [ref=f70e136]
+                    - paragraph [ref=f70e137]: 영흥섬 포도
+                  - generic [ref=f70e138]:
+                    - img "제주 감귤" [ref=f70e140]
+                    - paragraph [ref=f70e141]: 제주 감귤
+                  - generic [ref=f70e142]:
+                    - img "하동 딸기" [ref=f70e144]
+                    - paragraph [ref=f70e145]: 하동 딸기
+                  - generic [ref=f70e146]:
+                    - img "안동 사과" [ref=f70e148]
+                    - paragraph [ref=f70e149]: 안동 사과
+              - generic [ref=f70e150]:
+                - generic [ref=f70e151]:
+                  - heading "수산" [level=4] [ref=f70e152]
+                  - paragraph [ref=f70e153]: 청정 해역의 신선함을 그대로, 산지 직송 수산물
+                - generic [ref=f70e154]:
+                  - generic [ref=f70e155]:
+                    - img "부산 생물고등어" [ref=f70e157]
+                    - paragraph [ref=f70e158]: 부산 생물고등어
+                  - generic [ref=f70e159]:
+                    - img "대부도 바지락" [ref=f70e161]
+                    - paragraph [ref=f70e162]: 대부도 바지락
+                  - generic [ref=f70e163]:
+                    - img "제주도 갈치" [ref=f70e165]
+                    - paragraph [ref=f70e166]: 제주도 갈치
+                  - generic [ref=f70e167]:
+                    - img "완도 전복" [ref=f70e169]
+                    - paragraph [ref=f70e170]: 완도 전복
+              - generic [ref=f70e171]:
+                - generic [ref=f70e172]:
+                  - heading "채소" [level=4] [ref=f70e173]
+                  - paragraph [ref=f70e174]: 땅의 기운을 담은 신선한 채소, 건강한 밥상의 시작
+                - generic [ref=f70e175]:
+                  - generic [ref=f70e176]:
+                    - img "금산 깻잎" [ref=f70e178]
+                    - paragraph [ref=f70e179]: 금산 깻잎
+                  - generic [ref=f70e180]:
+                    - img "해남 고구마" [ref=f70e182]
+                    - paragraph [ref=f70e183]: 해남 고구마
+                  - generic [ref=f70e184]:
+                    - img "제주 깐마늘" [ref=f70e186]
+                    - paragraph [ref=f70e187]: 제주 깐마늘
+                  - generic [ref=f70e188]:
+                    - img "해남 절임배추" [ref=f70e190]
+                    - paragraph [ref=f70e191]: 해남 절임배추
+                  - generic [ref=f70e192]:
+                    - img "참타리버섯" [ref=f70e194]
+                    - paragraph [ref=f70e195]: 참타리버섯
+              - generic [ref=f70e196]:
+                - generic [ref=f70e197]:
+                  - heading "양곡" [level=4] [ref=f70e198]
+                  - paragraph [ref=f70e199]: 고슬고슬 밥맛 좋은 우리 곡식
+                - generic [ref=f70e201]:
+                  - img "당진 쌀" [ref=f70e203]
+                  - paragraph [ref=f70e204]: 당진 쌀
+              - generic [ref=f70e205]:
+                - generic [ref=f70e206]:
+                  - heading "축산" [level=4] [ref=f70e207]
+                  - paragraph [ref=f70e208]: 풍부한 육즙의 고품질 축산물
+                - generic [ref=f70e210]:
+                  - img "우월 한우" [ref=f70e212]
+                  - paragraph [ref=f70e213]: 우월 한우
+      - generic [ref=f70e214]:
+        - figure [ref=f70e215]:
+          - img [ref=f70e216]
+        - generic [ref=f70e217]:
+          - strong [ref=f70e218]: 우리동네GS 앱 다운로드
+          - paragraph [ref=f70e219]:
+            - text: 우리동네GS 앱을 다운로드하고, GS25의 다양한 이벤트와 차별화 상품을 만나보세요.
+            - text: QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.
+      - button "목록으로 돌아가기" [ref=f70e221] [cursor=pointer]
+  - contentinfo [ref=f70e226]:
+    - generic [ref=f70e227]:
+      - list [ref=f70e229]:
+        - listitem [ref=f70e230]:
+          - link "개인정보처리방침" [ref=f70e231] [cursor=pointer]:
+            - /url: "#none"
+        - listitem [ref=f70e232]:
+          - link "GS SHOP 시청자 관련" [ref=f70e233] [cursor=pointer]:
+            - /url: gsrcm0401
+        - listitem [ref=f70e234]:
+          - link "정도경영제보" [ref=f70e235] [cursor=pointer]:
+            - /url: gsrsu040101
+        - listitem [ref=f70e236]:
+          - link "공지사항" [ref=f70e237] [cursor=pointer]:
+            - /url: gsrnotice
+        - listitem [ref=f70e238]:
+          - link "사이트맵" [ref=f70e239] [cursor=pointer]:
+            - /url: "#none"
+      - generic [ref=f70e240]:
+        - strong [ref=f70e241]: ※ 고객센터 대표전화
+        - generic [ref=f70e242]:
+          - generic [ref=f70e243]:
+            - term [ref=f70e244]: GS25
+            - definition [ref=f70e245]: 080-999-5425
+          - generic [ref=f70e246]:
+            - term [ref=f70e247]: GS SHOP
+            - definition [ref=f70e248]: 080-414-4545
+          - generic [ref=f70e249]:
+            - term [ref=f70e250]: GS THE FRESH
+            - definition [ref=f70e251]: 080-345-7700
+      - generic [ref=f70e252]:
+        - generic [ref=f70e253]:
+          - strong [ref=f70e254]: (주)GS리테일
+          - generic [ref=f70e255]: 서울시 강남구 논현로 508(역삼동 679번지 GS강남타워)
+          - generic [ref=f70e256]: 대표이사 허서홍
+          - generic [ref=f70e257]: 사업자등록번호 116-81-18746
+        - paragraph [ref=f70e258]: Copyright ⓒGS Retail. All rights reserved.
+      - button "FAMILY SITE" [ref=f70e260] [cursor=pointer]
+    - generic [ref=f70e261]:
+      - list:
+        - listitem [ref=f70e262]:
+          - link "점포 창업 안내" [ref=f70e263] [cursor=pointer]:
+            - /url: gsrst_smain
+        - listitem [ref=f70e264]:
+          - link "상품 입점 상담" [ref=f70e265] [cursor=pointer]:
+            - /url: gsrse01
+        - listitem [ref=f70e266]:
+          - link "고객센터" [ref=f70e267] [cursor=pointer]:
+            - /url: gsrcu01
+      - button [ref=f70e268] [cursor=pointer]

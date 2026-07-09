@@ -2,7 +2,7 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -74,6 +74,7 @@ export default {
         return {
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "GS리테일 지역사회 참여 정책",
                     intro: 'GS리테일은 지역 경제 활성화 및 지역사회 성장 기반 마련을 목적으로 지역사회 지원 활동을 하고 있습니다. 특히 유통업의 특성을 살린 다양한 판로 지원 활동을 통해 상생의 문화를 만들어 나가는 중입니다.',
                     section1: {
@@ -110,6 +111,7 @@ export default {
                     }
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "GS Retail Community Engagement Policy",
                     intro: 'GS Retail carries out community support activities with the aim of revitalizing the local economy and laying the foundation for community growth. In particular, we are building a culture of mutual growth through various sales channel support activities that leverage the characteristics of the distribution industry.'/* 260604 번역 */,
                     section1: {
@@ -151,7 +153,7 @@ export default {
     computed: { 
         t() { 
             // langData가 없거나, 해당 언어 데이터가 없을 경우를 모두 대비
-            const data = this.langData[this.lang] || this.langData.ko;
+            const data = this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko;
             return data || {}; 
         } 
     },
@@ -170,9 +172,9 @@ export default {
 .smp_announcement_pop .section {padding:35px 0;border-bottom:1px solid #dfdfdf}
 .smp_announcement_pop .section:last-child {border-bottom:0}
 .smp_announcement_pop .section .desc {font-size:15px;line-height:25px}
-.smp_announcement_pop .section .smp_announcement>dl {overflow:hidden;margin-top:10px}
-.smp_announcement_pop .section .smp_announcement>dl dt {float:left;background:#0072bc;border-radius:15px;color:#fff;text-align:center;width:42px;font-size:13px;line-height:19px}
-.smp_announcement_pop .section .smp_announcement>dl dd {padding-left:50px;margin-bottom:7px;padding-bottom:7px;line-height:19px;font-size:15px}
+.smp_announcement_pop .section .smp_announcement>dl {display:grid;grid-template-columns:auto 1fr;gap:7px 12px;margin-top:10px;align-items:start}
+.smp_announcement_pop .section .smp_announcement>dl dt {justify-self:start;background:#0072bc;border-radius:15px;color:#fff;text-align:center;min-width:42px;padding:0 8px;box-sizing:border-box;font-size:13px;line-height:19px;white-space:nowrap}
+.smp_announcement_pop .section .smp_announcement>dl dd {line-height:19px;font-size:15px}
 .smp_announcement_pop .image_wrap {margin:30px 0}
 .smp_announcement_pop .image_wrap img {width:100%}
 

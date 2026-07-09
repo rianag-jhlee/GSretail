@@ -344,6 +344,7 @@ export default {
         SwiperSlide,
         DiffQrRow
     },
+    props: { lang: { type: String, default: "ko" } },
     data() {
         return {
             openAcc: -1,
@@ -780,7 +781,7 @@ export default {
     },
     computed: {
         t() {
-            return this.langData.ko;
+            return this.langData[this.lang] || this.langData.ko;
         }
     },
     mounted() {

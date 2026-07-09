@@ -2,7 +2,7 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -81,6 +81,7 @@ export default {
         return {
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "GS리테일 인권경영 정책",
                     section1: {
                         title: '1. 제정목적',
@@ -124,6 +125,7 @@ export default {
                     }
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "GS Retail Human Rights Management Policy",
                     section1: {
                         title: 'Purpose of Establishment',
@@ -172,7 +174,7 @@ export default {
     computed: { 
         t() { 
             // langData가 없거나, 해당 언어 데이터가 없을 경우를 모두 대비
-            const data = this.langData[this.lang] || this.langData.ko;
+            const data = this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko;
             return data || {}; 
         } 
     },

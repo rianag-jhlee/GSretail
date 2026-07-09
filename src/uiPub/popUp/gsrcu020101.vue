@@ -2,7 +2,7 @@
     <div class="modal_cont delivery_modal">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -37,12 +37,14 @@ export default {
             isMobile: false,
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     desc1: "제휴 및 협력문의 상담 신청이 완료 되었습니다.",
                     desc2: "빠른 시일 내에 회신 드리도록 하겠습니다.",
                     desc3:"(평균 1~2일 이내)",
                     check:"확인"
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     desc1: "Your partnership and collaboration inquiry has been completed.",
                     desc2: "We will reply as soon as possible.",
                     desc3:"(Average: within 1–2 business days)",
@@ -52,7 +54,7 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     mounted() {
         this.checkMobile();

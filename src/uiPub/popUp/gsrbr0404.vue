@@ -104,7 +104,7 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     mounted() {
         this.checkMobile();

@@ -72,13 +72,29 @@ export default {
                     FreshDesc: "가장 맛있는 제철 상품과 대용량 상품까지, 이제 사전예약으로 선점하고 편하게 수령하세요.<br />원하는 날짜에 집 앞 매장에서 직접 받거나, 택배로 집 앞까지 편리하게 만나보실 수 있습니다."
                 },
                 en: {
-                 
+                    closeLabel: "Close"/* 260708 번역 */,
+                    MainTitle: "Pre-Order"/* 260708 번역 */,
+                    Gs25SectionTitle: "GS25 Pre-Order"/* 260708 번역 */,
+                    Gs25Title: "Pick up food items such as lunch boxes and sandwiches at your preferred time and store"/* 260708 번역 */,
+                    Gs25Desc: "A pre-order service on the Our Neighborhood GS app that lets you order the products you want in advance—without worrying about sold-outs—and pick them up on your desired date."/* 260708 번역 */,
+                    Gs25Categories: [
+                        { name: "Lunch Box/Gimbap"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0401_food1.png") },
+                        { name: "Hamburger"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0401_food2.png") },
+                        { name: "Sandwich"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0401_food3.png") },
+                        { name: "Cooked Noodles"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0401_food4.png") },
+                        { name: "Dishes/Side Dishes"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0401_food5.png") },
+                        { name: "Salad"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0401_food6.png") }
+                    ],
+                    NoticeTxt: "Be quick to check out pre-order special exhibitions and parcel delivery events, too!"/* 260708 번역 */,
+                    FreshSectionTitle: "GS THE FRESH Pre-Order"/* 260708 번역 */,
+                    FreshTitle: "Smarter grocery shopping with pre-orders!"/* 260708 번역 */,
+                    FreshDesc: "From the most delicious seasonal products to large-volume items, secure them in advance with pre-orders and pick them up with ease.<br />Receive them in person at your neighborhood store on your desired date, or have them conveniently delivered right to your door."/* 260708 번역 */
                 }
             }
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     methods: {
         closeModal(event) { modal.close(event.currentTarget); }

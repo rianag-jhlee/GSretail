@@ -2,7 +2,7 @@
     <div class="modal_cont delivery_modal">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -21,7 +21,7 @@
                         </ul>
                         <div class="consent_agree">
                             <p class="guide_text" v-html="consent.guide"></p>
-                            <Inputs type="checkbox" text="동의합니다." v-model="formData.agreements[cIdx]" />
+                            <Inputs type="checkbox" :text="t.agreeLabel" v-model="formData.agreements[cIdx]" />
                         </div>
                     </article>
                 </div>
@@ -58,11 +58,11 @@
                                     </div>
                                     <div class="input_group email">
                                         <div class="group_wrap">
-                                            <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" placeholder="이메일 아이디" /></div>
+                                            <div class="input_flex_item"><Inputs type="text" v-model="formData.emailId" :placeholder="t.listening.InputWrapcont.part1.emailIdPlaceholder" /></div>
                                             <span class="unit">@</span>
-                                            <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="도메인 입력" /></div>
+                                            <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" :placeholder="t.listening.InputWrapcont.part1.emailDomainPlaceholder" /></div>
                                         </div>
-                                        <SelectBox :options="t.listening.InputWrapcont.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
+                                        <SelectBox :options="t.listening.InputWrapcont.part1.emailOptions" v-model="formData.emailSelect" :initMsg="t.listening.InputWrapcont.part1.directInput" />
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="input_group">
                                         <div class="input_flex_item">
-                                            <SelectBox :options="t.listening.InputWrapcont.part1.telOptions" v-model="formData.tel1" initMsg="선택" />
+                                            <SelectBox :options="t.listening.InputWrapcont.part1.telOptions" v-model="formData.tel1" :initMsg="t.selectDefault" />
                                         </div>
                                         <span class="unit">-</span>
                                         <div class="input_flex_item"><Inputs type="text" v-model="formData.tel2" /></div>
@@ -94,7 +94,7 @@
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.Inquirytype }}</span>
                                     </div>
                                     <div class="input_item full">
-                                        <span>제휴 및 협력문의</span>
+                                        <span>{{ t.hp01 }}</span>
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -103,7 +103,7 @@
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
-                                        <SelectBox :options="t.listening.InputWrapcont.part2.categoryOptions" v-model="formData.Inquiry" initMsg="상담구분 선택" class="w428" />
+                                        <SelectBox :options="t.listening.InputWrapcont.part2.categoryOptions" v-model="formData.Inquiry" :initMsg="t.listening.InputWrapcont.part2.Consulting" class="w428" />
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -112,7 +112,7 @@
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
-                                        <SelectBox :options="t.listening.InputWrapcont.part2.ConsultingyOptions" v-model="formData.category" initMsg="선택해주세요." class="w428" />
+                                        <SelectBox :options="t.listening.InputWrapcont.part2.ConsultingyOptions" v-model="formData.category" :initMsg="t.listening.InputWrapcont.part2.selectPlaceholder" class="w428" />
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -121,7 +121,7 @@
                                         <span class="required_mark">*</span>
                                     </div>
                                     <div class="input_item full">
-                                        <Inputs type="text" v-model="formData.subject" placeholder="제목을 입력해주세요" class="w428"/>
+                                        <Inputs type="text" v-model="formData.subject" :placeholder="t.listening.InputWrapcont.part2.subjectPlaceholder" class="w428"/>
                                     </div>
                                 </div>
                                 <div class="form_row">
@@ -147,7 +147,7 @@
                                         <span class="label_text">{{ t.listening.InputWrapcont.part2.replyLabel }}</span>
                                     </div>
                                     <div class="input_item full">
-                                        <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" initMsg="회신방법 선택" class="w428"/>
+                                        <SelectBox :options="t.listening.InputWrapcont.part2.replyOptions" v-model="formData.replyType" :initMsg="t.listening.InputWrapcont.part2.replySelect" class="w428"/>
                                     </div>
                                 </div>
                             </div>
@@ -193,6 +193,10 @@ export default {
             },
             langData: {
                 ko: {
+                    hp01: "제휴 및 협력문의",
+                    closeLabel: "닫기",
+                    agreeLabel: "동의합니다.",
+                    selectDefault: "선택",
                     MainTitle: "고객의 소리",
                     listening: {
                         Txt:"언제나 고객님의 입장이 되어<br/> 작은 소리에도 귀를 기울이겠습니다.",
@@ -233,6 +237,9 @@ export default {
                             part1: {
                                 title: "고객정보",
                                 requiredText: "* 필수 입력사항",
+                                directInput: "직접입력",
+                                emailIdPlaceholder: "이메일 아이디",
+                                emailDomainPlaceholder: "도메인 입력",
                                 nameLabel: "이름",
                                 namePlaceholder: "이름을 입력해주세요",
                                 emailLabel: "이메일",
@@ -246,6 +253,9 @@ export default {
                                 categoryLabel: "구분",
                                 categoryOptions: [{ value: 'store', label: '편의점/수퍼' }, { value: 'home', label: '홈쇼핑' }],
                                 Consulting:"상담구분 선택",
+                                selectPlaceholder: "선택해주세요.",
+                                subjectPlaceholder: "제목을 입력해주세요",
+                                replySelect: "회신방법 선택",
                                 ConsultingyOptions: [{ value: 'store', label: '편의점/수퍼' }, { value: 'home', label: '홈쇼핑' }],
                                 storeLabel: "매장명",
                                 storeGuide: "* 단, 점포명을 모르시는 경우 점포위치를 적어주세요",
@@ -263,6 +273,10 @@ export default {
                     }
                 },
                 en: {
+                    hp01: "Partnership & Cooperation Inquiry"/* 260708 번역 */,
+                    closeLabel: "Close"/* 260708 번역 */,
+                    agreeLabel: "I agree."/* 260708 번역 */,
+                    selectDefault: "Select"/* 260708 번역 */,
                     MainTitle: "Customer Feedback",
                     listening: {
                         Txt:"We will always put ourselves in our customers' shoes and listen even to the smallest voice.",
@@ -303,6 +317,9 @@ export default {
                             part1: {
                                 title: "Customer Information",
                                 requiredText: "* Required fields",
+                                directInput: "Direct input"/* 260708 번역 */,
+                                emailIdPlaceholder: "Email ID"/* 260708 번역 */,
+                                emailDomainPlaceholder: "Enter domain"/* 260708 번역 */,
                                 nameLabel: "Name",
                                 namePlaceholder: "Please enter your name"/* 260604 번역 */,
                                 emailLabel: "Email",
@@ -316,6 +333,9 @@ export default {
                                 categoryLabel: "Category",
                                 categoryOptions: [{ value: 'store', label: 'Convenience store/supermarket'/* 260604 번역 */ }, { value: 'home', label: 'Home Shopping' }],
                                 Consulting:"Select Consultation Category",
+                                selectPlaceholder: "Please select."/* 260708 번역 */,
+                                subjectPlaceholder: "Please enter a title"/* 260708 번역 */,
+                                replySelect: "Select reply method"/* 260708 번역 */,
                                 ConsultingyOptions: [{ value: 'store', label: 'Convenience store/supermarket'/* 260604 번역 */ }, { value: 'home', label: 'Home Shopping' }],
                                 storeLabel: "Store Name",
                                 storeGuide: "If you do not know the store name, please write the store location.",
@@ -336,7 +356,7 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     mounted() {
         this.checkMobile();

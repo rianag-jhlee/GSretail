@@ -2,7 +2,7 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -147,6 +147,7 @@ export default {
         return {
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "파트너사 선정·운영 가이드 라인",
                     intro: '2021.04.\nGS리테일\n\n 파트너사의 공정한 선정·운영을 위한 실천사항',
                     section1: {
@@ -235,6 +236,7 @@ export default {
                     }
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "Partner Company Selection and Operation Guidelines"/* 260604 번역 */,
                     intro: '2021.04.\nGS Retail\n\nGuidelines for the Fair Selection and Operation of Partner Companies',
                     section1: {
@@ -325,12 +327,15 @@ export default {
             }
         };
     },
-    computed: { 
-        t() { 
-            // langData가 없거나, 해당 언어 데이터가 없을 경우를 모두 대비
-            const data = this.langData[this.lang] || this.langData.ko;
-            return data || {}; 
-        } 
+    computed: {
+        t() {
+            // 260708 임시: 팝업은 공통 modal.js가 lang을 안 넘겨 항상 ko로 뜨는 문제 →
+            // 현재 언어를 헤더 활성버튼에서 직접 읽어 처리 (공통 modal.js 불변). 개발팀이 modal.js에서 lang 전달하면 이 부분 원복 가능.
+            const curBtn = document.querySelector(".language button.current");
+            const lang = curBtn ? curBtn.textContent.trim().toLowerCase() : (this.lang || "ko");
+            const data = this.langData[lang] || this.langData.ko;
+            return data || {};
+        }
     },
     methods: {
         closeModal(event) { modal.close(event.currentTarget); }

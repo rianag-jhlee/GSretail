@@ -1,0 +1,250 @@
+- generic [ref=f87e3]:
+  - list [ref=f87e4]:
+    - listitem [ref=f87e5]:
+      - link "본문 바로가기" [ref=f87e6] [cursor=pointer]:
+        - /url: "#content_wrap"
+    - listitem [ref=f87e7]:
+      - link "주메뉴 바로가기" [ref=f87e8] [cursor=pointer]:
+        - /url: "#gnb_nav"
+  - banner [ref=f87e9]:
+    - generic [ref=f87e10]:
+      - heading "GS리테일" [level=1] [ref=f87e11]:
+        - link "GS리테일" [ref=f87e12] [cursor=pointer]:
+          - /url: /
+      - navigation [ref=f87e13]:
+        - list [ref=f87e14]:
+          - listitem [ref=f87e15]:
+            - link "회사소개" [ref=f87e16] [cursor=pointer]:
+              - /url: /gsrab01
+            - generic:
+              - list:
+                - listitem:
+                  - link "경영이념 및 가치체계":
+                    - /url: /gsrab02
+                - listitem:
+                  - link "CEO 인사말":
+                    - /url: /gsrab01
+                - listitem:
+                  - link "기업 연혁":
+                    - /url: /gsrab03
+                - listitem:
+                  - link "수상 이력":
+                    - /url: /gsrab06
+                - listitem:
+                  - link "기업 CI/BI":
+                    - /url: /gsrab04
+                - listitem:
+                  - link "오시는 길":
+                    - /url: /gsrab05
+          - listitem [ref=f87e17]:
+            - link "사업영역" [ref=f87e18] [cursor=pointer]:
+              - /url: /gsrbr010101
+            - generic:
+              - list:
+                - listitem:
+                  - link "GS25":
+                    - /url: /gsrbr010101
+                - listitem:
+                  - link "GS THE FRESH":
+                    - /url: /gsrbr020101
+                - listitem:
+                  - link "GS SHOP":
+                    - /url: /gsrbr0301
+                - listitem:
+                  - link "우리동네GS":
+                    - /url: /gsrbr04
+                - listitem:
+                  - link "개발/임대 사업":
+                    - /url: /gsrbr1101
+          - listitem [ref=f87e19]:
+            - link "지속가능경영" [ref=f87e20] [cursor=pointer]:
+              - /url: /gsrsu0101
+            - generic:
+              - list:
+                - listitem:
+                  - link "지속가능경영":
+                    - /url: /gsrsu0101
+                - listitem:
+                  - link "환경":
+                    - /url: /gsrsu0201
+                - listitem:
+                  - link "사회적 책임":
+                    - /url: /gsrsu03010101
+                - listitem:
+                  - link "정도경영":
+                    - /url: /gsrsu040101
+          - listitem [ref=f87e21]:
+            - link "투자정보" [ref=f87e22] [cursor=pointer]:
+              - /url: /gsrin0100
+            - generic:
+              - list:
+                - listitem:
+                  - link "이사회 의장 인사말":
+                    - /url: /gsrin0100
+                - listitem:
+                  - link "기업지배구조":
+                    - /url: /gsrin0101
+                - listitem:
+                  - link "경영성과":
+                    - /url: /gsrin0201
+                - listitem:
+                  - link "공시정보":
+                    - /url: /gsrin0301
+                - listitem:
+                  - link "IR자료실":
+                    - /url: /gsrin04
+          - listitem [ref=f87e23]:
+            - link "미디어" [ref=f87e24] [cursor=pointer]:
+              - /url: /gsrne01
+            - generic:
+              - list:
+                - listitem:
+                  - link "보도자료":
+                    - /url: /gsrne01
+                - listitem:
+                  - link "뉴스룸":
+                    - /url: /gsrne02
+                - listitem:
+                  - link "스토리":
+                    - /url: /gsrne03
+      - generic [ref=f87e25]:
+        - list [ref=f87e26]:
+          - listitem [ref=f87e27]:
+            - link "채용문의" [ref=f87e28] [cursor=pointer]:
+              - /url: https://gsretail.recruiter.co.kr/career/home
+        - list [ref=f87e29]:
+          - listitem [ref=f87e30]:
+            - button "KO" [ref=f87e31] [cursor=pointer]
+          - listitem [ref=f87e32]:
+            - button "EN" [ref=f87e33] [cursor=pointer]
+  - generic [ref=f87e36]:
+    - generic [ref=f87e42]:
+      - paragraph [ref=f87e43]:
+        - generic [ref=f87e44]: 편의점•슈퍼마켓을 하나로
+        - generic [ref=f87e45]: GS리테일 O4O 통합 앱
+      - img "편의점·수퍼마켓을 하나로 GS리테일 O4O 통합 앱 우리동네GS" [ref=f87e47]
+    - generic [ref=f87e50]:
+      - paragraph [ref=f87e51]:
+        - generic [ref=f87e52]: 편의점도, 수퍼마켓도, 이제 하나의 ‘우리동네GS’ 앱으로.
+      - paragraph [ref=f87e53]:
+        - generic [ref=f87e54]: 전국 GS25 · GS THE FRESH의 재고확인, 배달, 픽업부터
+      - paragraph [ref=f87e55]:
+        - generic [ref=f87e56]: 증정품 보관 '나만의 냉장고’, 주류 스마트오더 '와인25플러스’까지.
+      - paragraph [ref=f87e57]:
+        - generic [ref=f87e58]: 가까운 매장이 더 가깝게, 매장 안팎의 경계 없이, 더 가까운 일상을 제안합니다.
+    - article [ref=f87e61]:
+      - heading "‘우리동네 GS’ 앱에서 일상의 모든 것을 해결하세요." [level=3] [ref=f87e62]:
+        - text: ‘우리동네 GS’ 앱에서
+        - text: 일상의 모든 것을 해결하세요.
+      - generic [ref=f87e64]:
+        - strong [ref=f87e65]: 우리동네GS 앱 다운로드
+        - paragraph [ref=f87e66]:
+          - text: 우리동네GS 앱을 다운로드하고, 다양한 이벤트와 차별화 상품을 만나보세요.
+          - text: QR코드를 스캔하면 앱 다운로드 페이지로 이동합니다.
+      - img "우리동네GS App" [ref=f87e68]
+      - list [ref=f87e70]:
+        - listitem [ref=f87e71]:
+          - generic [ref=f87e72]:
+            - paragraph [ref=f87e73]:
+              - strong [ref=f87e74]: 재고찾기/검색
+            - generic [ref=f87e76]: 전국 매장별 실시간 상품 재고 현황 및 잔여 수량을 간편하게 확인할 수 있습니다.
+        - listitem [ref=f87e77]:
+          - generic [ref=f87e78]:
+            - paragraph [ref=f87e79]:
+              - strong [ref=f87e80]: 나만의 냉장고
+            - generic [ref=f87e82]: GS25에서 받은 증정품이나 경품, GS THE FRESH의 사전예약 상품을 보관하고 원하는 때에 찾아갈 수 있습니다.
+        - listitem [ref=f87e83]:
+          - generic [ref=f87e84]:
+            - paragraph [ref=f87e85]:
+              - strong [ref=f87e86]: 배달/픽업
+            - generic [ref=f87e88]: GS25,GS THE FRESH의 인기상품을 배달/픽업으로 간편하게 만나보세요!
+        - listitem [ref=f87e89]:
+          - generic [ref=f87e90]:
+            - paragraph [ref=f87e91]:
+              - strong [ref=f87e92]: 사전예약
+            - generic [ref=f87e94]: 품절 걱정없이, 원하는 상품을 미리 주문하고 원하는 매장·시간에 수령하세요. 점포에서 판매하지 않는 기획전 단독 상품도 사전예약으로 만나볼 수 있습니다.
+        - listitem [ref=f87e95]:
+          - generic [ref=f87e96]:
+            - paragraph [ref=f87e97]:
+              - strong [ref=f87e98]: 와인25플러스
+            - generic [ref=f87e100]: 와인은 물론 위스키 맥주, 사케까지. 다양한 주류를 앱에서 주문하고 전국 편의점·수퍼에서 스마트하게 수령할 수 있습니다.
+        - listitem [ref=f87e101]:
+          - generic [ref=f87e102]:
+            - paragraph [ref=f87e103]:
+              - strong [ref=f87e104]: GS Pay/QR결제
+            - generic [ref=f87e105]: GS Pay 또는 QR코드 한 번으로 전국 GS25, GS THE FRESH 매장에서 빠르게 결제할 수 있습니다. 우리동네GS 앱 하나로 로그인부터 결제까지 한 번에.
+        - listitem [ref=f87e106]:
+          - generic [ref=f87e107]:
+            - paragraph [ref=f87e108]:
+              - strong [ref=f87e109]: 멤버십 혜택
+            - generic [ref=f87e110]: GS리테일 통합 멤버십 'GS ALL'. 우리동네GS 앱에서 나의 멤버십 등급과 브랜드별 혜택 쿠폰을 한눈에 확인할 수 있습니다.
+        - listitem [ref=f87e111]:
+          - generic [ref=f87e112]:
+            - paragraph [ref=f87e113]:
+              - strong [ref=f87e114]: 택배 서비스
+            - generic [ref=f87e115]: 가까운 GS25에서 국내택배·반값택배를 접수하세요. 앱으로 미리 예약하고 매장에서 간편하게 접수할 수 있습니다.
+        - listitem [ref=f87e116]:
+          - generic [ref=f87e117]:
+            - paragraph [ref=f87e118]:
+              - strong [ref=f87e119]: 행사/이벤트
+            - generic [ref=f87e121]: 현재 진행 중인 행사와 이벤트를 확인하고 참여 내역도 조회할 수 있습니다.
+    - generic [ref=f87e123]:
+      - heading "우리동네 딜리버리" [level=2] [ref=f87e125]
+      - generic [ref=f87e126]:
+        - heading "언제 어디서나 산책하며 돈 버는 즐거움" [level=3] [ref=f87e127]
+        - paragraph [ref=f87e128]:
+          - text: 우리동네 GS25, GS THE FRESH의 상품과 식품, 맛집 배달까지
+          - text: 별도의 장비 없이 성인이라면 누구나 손쉽게 배달 가능한 서비스입니다.
+        - img "우리동네 딜리버리" [ref=f87e129]
+        - link "우리동네 딜리버리" [ref=f87e131] [cursor=pointer]:
+          - /url: "#"
+  - contentinfo [ref=f87e138]:
+    - generic [ref=f87e139]:
+      - list [ref=f87e141]:
+        - listitem [ref=f87e142]:
+          - link "개인정보처리방침" [ref=f87e143] [cursor=pointer]:
+            - /url: "#none"
+        - listitem [ref=f87e144]:
+          - link "GS SHOP 시청자 관련" [ref=f87e145] [cursor=pointer]:
+            - /url: gsrcm0401
+        - listitem [ref=f87e146]:
+          - link "정도경영제보" [ref=f87e147] [cursor=pointer]:
+            - /url: gsrsu040101
+        - listitem [ref=f87e148]:
+          - link "공지사항" [ref=f87e149] [cursor=pointer]:
+            - /url: gsrnotice
+        - listitem [ref=f87e150]:
+          - link "사이트맵" [ref=f87e151] [cursor=pointer]:
+            - /url: "#none"
+      - generic [ref=f87e152]:
+        - strong [ref=f87e153]: ※ 고객센터 대표전화
+        - generic [ref=f87e154]:
+          - generic [ref=f87e155]:
+            - term [ref=f87e156]: GS25
+            - definition [ref=f87e157]: 080-999-5425
+          - generic [ref=f87e158]:
+            - term [ref=f87e159]: GS SHOP
+            - definition [ref=f87e160]: 080-414-4545
+          - generic [ref=f87e161]:
+            - term [ref=f87e162]: GS THE FRESH
+            - definition [ref=f87e163]: 080-345-7700
+      - generic [ref=f87e164]:
+        - generic [ref=f87e165]:
+          - strong [ref=f87e166]: (주)GS리테일
+          - generic [ref=f87e167]: 서울시 강남구 논현로 508(역삼동 679번지 GS강남타워)
+          - generic [ref=f87e168]: 대표이사 허서홍
+          - generic [ref=f87e169]: 사업자등록번호 116-81-18746
+        - paragraph [ref=f87e170]: Copyright ⓒGS Retail. All rights reserved.
+      - button "FAMILY SITE" [ref=f87e172] [cursor=pointer]
+    - generic [ref=f87e173]:
+      - list:
+        - listitem [ref=f87e174]:
+          - link "점포 창업 안내" [ref=f87e175] [cursor=pointer]:
+            - /url: gsrst_smain
+        - listitem [ref=f87e176]:
+          - link "상품 입점 상담" [ref=f87e177] [cursor=pointer]:
+            - /url: gsrse01
+        - listitem [ref=f87e178]:
+          - link "고객센터" [ref=f87e179] [cursor=pointer]:
+            - /url: gsrcu01
+      - button [ref=f87e180] [cursor=pointer]
