@@ -195,7 +195,8 @@ const langData = {
             { title: "Privacy Policy", path: "#none" },
             { title: "Store Franchise", path: "#none" },
             { title: "Partnership", path: "#none" },
-            { title: "Customer Center", path: "#none" }
+            { title: "Customer Center", path: "#none" },
+            { title: "Sitemap", path: "#none", class:'sitemap' }
         ],
         info: {
             logo: "GS Retail",
