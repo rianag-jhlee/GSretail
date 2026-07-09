@@ -222,7 +222,7 @@
                             <Search 
                                 v-model="searchData" 
                                 :search_opt="t.options"  @search="handleSearch"
-                                placeholder="검색어 입력"
+                                :placeholder="t.searchPlaceholder"
                             />
                         </div>
 
@@ -285,6 +285,7 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "경영성과",
+                    searchPlaceholder: "검색어 입력",
                     MainsubTitle: "Business Performance",
                     MainDesc: ["투명한 GS리테일<br/> 경영성과 입니다.", "배당정책", "투명한 GS리테일<br/> 경영성과 입니다."],
                     Tabs1: [{ item: "재무현황" }, { item: "배당 정보" }, { item: "실적자료 등" }],
@@ -401,6 +402,7 @@ export default {
                 },
                 en: {
                     MainTitle: "Financial Performance",
+                    searchPlaceholder: "Enter search term"/* 260708 번역 */,
                     MainsubTitle: "Business Performance",
                     MainDesc: ["Transparent GS Retail<br/> These are the business results."/* 260604 번역 */, "Dividend Policy"/* 260604 번역 */, "Transparent GS Retail<br/> These are the business results."/* 260604 번역 */],
                     Tabs1: [{ item: "Financial Status"/* 260604 번역 */ }, { item: "Dividend Information"/* 260604 번역 */ }, { item: "Performance Materials, etc."/* 260604 번역 */ }],

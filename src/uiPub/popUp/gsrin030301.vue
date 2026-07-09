@@ -2,7 +2,7 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -39,6 +39,7 @@ export default {
         return {
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "주주보호 정책 및 관련 제도 정보",
                     IntroText: "GS리테일은 대한민국을 대표하는 유통플랫폼 기업으로서 지속적인 성장동력을 발굴하고 있으며 이해관계자의 의견을 반영한 투명하고 건전한 지배구조를 확보함으로써 주주의 투자수익 극대화를 위해 지속 노력하고 있습니다.",
                     PolicyList: [
@@ -59,6 +60,7 @@ export default {
                     ]
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "Shareholder Protection Policies and Related System Information"/* 260604 번역 */,
                     IntroText: "As a leading retail platform company representing Korea, GS Retail continuously seeks new growth engines and strives to maximize shareholder investment returns by securing a transparent and sound governance structure that reflects stakeholders' opinions."/* 260604 번역 */,
                     PolicyList: [
@@ -83,7 +85,7 @@ export default {
     },
     computed: {
         t() {
-            return this.langData.ko;
+            return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko;
         }
     },
     methods: {

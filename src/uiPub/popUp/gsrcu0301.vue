@@ -2,7 +2,7 @@
     <div class="modal_cont delivery_modal">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -58,7 +58,7 @@
                         <AccordionItem item-key="child-food-receive">
                             <template #title>{{ t.AccTitle_2 }}</template>
                             <div class="receive_info">
-                                <p>주문하신 상품은 선택하신 GS25 매장에서 아동급식카드 실물 또는 모바일 앱 바코드를 제시하여 수령하실 수 있습니다.</p>
+                                <p>{{ t.pickupNotice }}</p>
                             </div>
                         </AccordionItem>
                     </Accordion>
@@ -95,6 +95,8 @@ export default {
             isMobile: false,
             langData: {
                 ko: {
+                    closeLabel: "닫기",
+                    pickupNotice: "주문하신 상품은 선택하신 GS25 매장에서 아동급식카드 실물 또는 모바일 앱 바코드를 제시하여 수령하실 수 있습니다.",
                     MainTitle: "배달·픽업",
                     TipTitle: "우리동네GS<br/> 배달·픽업 활용 팁",
                     Tips: [
@@ -131,6 +133,8 @@ export default {
                     FreshDesc: "산지의 신선함을 집 앞까지 배송하는 사전예약 서비스는 제철 상품을 합리적인 가격으로 제공하여 많은 사랑을 받고 있습니다. 주문한 상품을 매장에서 수령할 수 있고, 주문 방법이 어렵다면 매장으로 문의 바랍니다."
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
+                    pickupNotice: "You can pick up your ordered items by presenting a physical Child Meal Card or the mobile app barcode at the selected GS25 store."/* 260708 번역 */,
                     MainTitle: "Delivery & Pickup",
                     TipTitle: "Our Neighborhood GS Delivery & Pickup Tips",
                     Tips: [
@@ -170,7 +174,7 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     mounted() {
         this.checkMobile();

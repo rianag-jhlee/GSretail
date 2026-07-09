@@ -28,11 +28,11 @@
                 <!-- 소개 -->
                 <div v-show="CTabIdxEsgArchive === 0" class="panel_inner" :aria-label="t.TabsEsgArchive?.[0]?.item || ''">
                     <header class="tab_header">
-                        <h2>GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
+                        <h2>{{ t.hc10 }} <br class="p_br" />{{ t.hc38 }}</h2>
                     </header>
                     <section>
                         <header class="sub_header">
-                            <h3>목적과 취지</h3>
+                            <h3>{{ t.hc31 }}</h3>
                         </header>
                         <FeatureCards
                             class="purpose_feature_cards feature_cards_grid"
@@ -41,10 +41,10 @@
                             :no-swipe="false"
                         />
                     </section>
-                    <section class="sec_history" aria-label="정도경영 연혁">
+                    <section class="sec_history" :aria-label="t.hcAriaHistory">
                         <header class="sub_header">
-                            <h3>연혁</h3>
-                            <p>GS그룹의 정도경영 추진 방침에 따라 당사도 1995년도부터 해당 방침에 따른 다양한 활동을 전개 해 나가고 있습니다.</p>
+                            <h3>{{ t.hc42 }}</h3>
+                            <p>{{ t.hc04 }}</p>
                         </header>
                         <HistoryTimeline :items="t.HistoryItems" />
                     </section>
@@ -52,14 +52,14 @@
                 <!-- 지침 -->
                 <div v-show="CTabIdxEsgArchive === 1" class="panel_inner" :aria-label="t.TabsEsgArchive?.[1]?.item || ''">
                     <header class="tab_header">
-                        <h2> GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class="p_br" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.</h2>
+                        <h2 v-html="t.EthicsMainTitle"></h2>
                     </header>
                     <section class="gray_box">
                         <header class="sub_header">
-                            <h3>GS리테일 윤리규범</h3>
-                            <p>GS리테일은 상호 신뢰와 협력을 토대로 모든 이해관계자와 공동의 이익을 추구함으로써 모두가 선망하는 Value No.1 기업으로 발전하기 위해 올바른 행동과 가치 판단의 기준으로 윤리규범을 제정하고 정도경영의 길을 걷습니다.</p>
+                            <h3>{{ t.EthicsCodeTitle }}</h3>
+                            <p>{{ t.EthicsCodeDesc }}</p>
                         </header>
-                        <div class="button_area"><Buttons tag="a" href="#none" btn-class="btn_icon_arrow btn_xl after border">㈜GS리테일 윤리규범</Buttons></div>
+                        <div class="button_area"><Buttons tag="a" href="#none" btn-class="btn_icon_arrow btn_xl after border">{{ t.EthicsCodeBtn }}</Buttons></div>
                     </section>
                     <section class="sec_ethics_cards">
                         <ul class="card_list" role="list">
@@ -73,11 +73,11 @@
                     </section>
                     <section>
                         <header class="sub_header">
-                            <h3>GS리테일 실천지침</h3>
-                            <p>본 내용은 정직과 공정의 신조직문화 창출을 위하여 GS리테일인으로서 지켜야 할 ‘임직원의 기본윤리’를 구체적으로 해설하고 실천에 용이하도록 제도화한 내용입니다.</p>
+                            <h3>{{ t.EthicsGuideTitle }}</h3>
+                            <p>{{ t.EthicsGuideDesc }}</p>
                         </header>
                         <!-- 세부실천지침 -->
-                        <h4 class="practice_title">세부실천지침</h4>
+                        <h4 class="practice_title">{{ t.EthicsPracticeSubTitle }}</h4>
                         <ol class="base_list">
                             <li v-for="(item, idx) in t.EthicsPracticeItems" :key="item.key" class="base_item">
                                 <em>{{ String(idx + 1).padStart(2, "0") }}</em>
@@ -88,8 +88,8 @@
                     </section>
                     <section>
                         <header class="sub_header">
-                            <h3>윤리규범 실천서약</h3>
-                            <p>정도경영을 위한 임직원의 기본 윤리를 숙지하고 회사업무를 수행함에 있어 GS리테일인으로서 아래의 행위를 하지 않는다.</p>
+                            <h3>{{ t.EthicsPledgeTitle }}</h3>
+                            <p>{{ t.EthicsPledgeDesc }}</p>
                         </header>
                         <ol class="base_list type02">
                             <li v-for="(item, idx) in t.EthicsPracticeItems" :key="item.key" class="base_item">
@@ -101,12 +101,12 @@
                             <div>
                                 <p>{{ t.EthicsPledgeText }}</p>
                                 <dl>
-                                    <dt>일시 : {{ t.EthicsPledgeMeta }}</dt>
-                                    <dd>소속 : {{ t.EthicsPledgeCompany }}</dd>
-                                    <dd>성명 : {{ t.EthicsPledgeName }}</dd>
+                                    <dt>{{ t.EthicsPledgeDateLabel }} : {{ t.EthicsPledgeMeta }}</dt>
+                                    <dd>{{ t.EthicsPledgeDeptLabel }} : {{ t.EthicsPledgeCompany }}</dd>
+                                    <dd>{{ t.EthicsPledgeNameLabel }} : {{ t.EthicsPledgeName }}</dd>
                                 </dl>
                             </div>
-                            <span>주식회사 GS리테일 귀중</span>
+                            <span>{{ t.EthicsPledgeToCompany }}</span>
 
                         </div> 
                     </section>
@@ -123,7 +123,7 @@
                     </div>
                     <div v-show="CTabIdxEsgSystem === 0" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[0]?.item || ''">
                         <!-- <header class="sub_header">
-                            <h3>제보이용안내</h3>
+                            <h3>{{ t.hc62 }}</h3>
                         </header> -->
                         <ol class="base_list">
                             <li v-for="(row, idx) in t.WhistleGuideSections" :key="row.key" class="base_item">
@@ -132,15 +132,15 @@
                                 <p v-html="row.desc"></p>
                                 <div v-if="row.key === 'wg-04'" class="button_area">
                                     <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon_arrow after" @click="goToWhistleTab(1)">
-                                        제보자 포상제도
+                                        {{ t.hc64 }}
                                     </Buttons>
                                     <Buttons tag="button" type="button" btn-class="btn_xl border btn_icon_arrow after" @click="goToWhistleTab(2)">
-                                        제보자 보호제도
+                                        {{ t.hc63 }}
                                     </Buttons>
                                 </div>
                                 <template v-if="row.key === 'wg-05'">
                                     <div class="gray_box">
-                                        <div role="list" aria-label="제보 처리 단계" class="process_flow">
+                                        <div role="list" :aria-label="t.hc75" class="process_flow">
                                             <template v-for="(stepLabel, sIdx) in t.WhistleProcessSteps" :key="stepLabel">
                                                 <p role="listitem">{{ stepLabel }}</p>
                                                 <ProcessFlowArrow v-if="sIdx < t.WhistleProcessSteps.length - 1" />
@@ -149,7 +149,7 @@
                                     </div>
                                 </template>
                                 <div v-if="row.key === 'wg-06'" class="button_area">
-                                    <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon_arrow after">제보하기</Buttons>
+                                    <Buttons tag="a" href="#none" btn-class="btn_xl border btn_icon_arrow after">{{ t.hc65 }}</Buttons>
                                 </div>
                             </li>
                         </ol>
@@ -188,7 +188,7 @@
                             </li>
                         </ol>
                         <div class="button_area reward_report_btn">
-                            <Buttons tag="a" href="#none" btn-class="btn_xl primary btn_icon_arrow after">제보하기</Buttons>
+                            <Buttons tag="a" href="#none" btn-class="btn_xl primary btn_icon_arrow after">{{ t.hc65 }}</Buttons>
                         </div>
                     </div>
                     <div v-show="CTabIdxEsgSystem === 2" class="panel_third_depth" :aria-label="t.TabsEsgSystem?.[2]?.item || ''">
@@ -248,32 +248,32 @@
                     </template>
                     <template v-else>
                         <header class="tab_header">
-                            <h2>정도경영 목소리</h2>
-                            <p>언제나 고객님의 입장이 되어 작은 소리에도 귀를 기울이겠습니다.</p>
+                            <h2>{{ t.hc56 }}</h2>
+                            <p>{{ t.hc40 }}</p>
                         </header>
                         <section>
                             <header class="sub_header">
-                                <h3>정도경영 사이버 신문고</h3>
-                                <p class="txt_blue">정도경영 목소리에는 임직원 또는 협력업체 직원의 불공정 행위들 (금품수수, 향응접대, 매출누락, 불공정거래, 기타 부정행위)에 대한 제보뿐만 아니라, 정도경영을 위한 좋은 의견들도 함께 접수하고 있습니다.</p>
+                                <h3>{{ t.hc58 }}</h3>
+                                <p class="txt_blue">{{ t.hc57 }}</p>
                             </header>
                             <ul class="list_dotted">
                                 <li>
-                                    <p>이곳에서 접수되는 모든 글들은 철저한 보안과 안전 속에서 처리됨을 알려드립니다.</p>
+                                    <p>{{ t.hc45 }}</p>
                                 </li>
                                 <li>
-                                    <p>상담이나 제보를 하신 분에 대하여서는 어떠한 불이익도 발생하지 않도록 하겠습니다.</p>
+                                    <p>{{ t.hc34 }}</p>
                                 </li>
                                 <li>
-                                    <p>가급적 6하원칙에 입각하여 작성해 주시고, 내용이 부정확한 경우에는 조사대상에서 제외될 수도 있습니다.</p>
+                                    <p>{{ t.hc13 }}</p>
                                 </li>
                                 <li>
-                                    <p>허위 사실을 신고하여 개인의 명예를 훼손시키는 행위는 절대 삼가 바랍니다.</p>
+                                    <p>{{ t.hc69 }}</p>
                                 </li>
                             </ul>
                         </section>
                         <section>
                             <header class="sub_header">
-                                <h3>GS리테일 정도경영 제보 대상</h3>
+                                <h3>{{ t.hc06 }}</h3>
                             </header>
                             <NumberedInfoList
                                 class="ethics_target_list"
@@ -284,29 +284,33 @@
                         <section>
                             <ConsentInfoBox
                                 :required="t.EthicsConsentRequired"
+                                :title="t.EthicsConsentTitle"
+                                :notice-html="t.EthicsConsentNotice"
                                 :items="t.EthicsConsentItems"
                                 v-model="isEthicsConsentAgreed"
                             />
                             <ConsentInfoBox
                                 :required="t.EthicsConsentRequired2"
+                                :title="t.EthicsConsentTitle"
+                                :notice-html="t.EthicsConsentNotice"
                                 :items="t.EthicsConsentItems2"
                                 v-model="isEthicsConsentAgreed2"
                             />
                             <div class="report_form_wrap">
                                 <div class="apply_form">
                                     <div class="form_head">
-                                        <h3 class="form_head_title">고객정보</h3>
-                                        <span class="form_required_note">* 필수 입력사항</span>
+                                        <h3 class="form_head_title">{{ t.hc16 }}</h3>
+                                        <span class="form_required_note">{{ t.hc02 }}</span>
                                     </div>
                                     <div class="form_body">
                                         <div class="form_row">
-                                            <div class="form_label">이름<span class="form_required">*</span></div>
+                                            <div class="form_label">{{ t.hc46 }}<span class="form_required">*</span></div>
                                             <div class="form_field form_field_name">
                                                 <Inputs type="text" v-model="ethicsReportForm.name" />
                                             </div>
                                         </div>
                                         <div class="form_row">
-                                            <div class="form_label">이메일<span class="form_required">*</span></div>
+                                            <div class="form_label">{{ t.hcEmailLabel }}<span class="form_required">*</span></div>
                                             <div class="form_field form_field_email">
                                                 <Inputs type="text" v-model="ethicsReportForm.emailId" />
                                                 <span class="form_sep">@</span>
@@ -321,7 +325,7 @@
                                             </div>
                                         </div>
                                         <div class="form_row">
-                                            <div class="form_label">연락처<span class="form_required">*</span></div>
+                                            <div class="form_label">{{ t.hc41 }}<span class="form_required">*</span></div>
                                             <div class="form_field form_field_phone">
                                                 <Inputs type="text" v-model="ethicsReportForm.phonePrefix" is-disabled="true" />
                                                 <span class="form_sep">-</span>
@@ -335,12 +339,12 @@
     
                                 <div class="apply_form">
                                     <div class="form_head">
-                                        <h3 class="form_head_title">제보내용</h3>
-                                        <span class="form_required_note">* 필수 입력사항</span>
+                                        <h3 class="form_head_title">{{ t.hc61 }}</h3>
+                                        <span class="form_required_note">{{ t.hc02 }}</span>
                                     </div>
                                     <div class="form_body">
                                         <div class="form_row">
-                                            <div class="form_label">구분<span class="form_required">*</span></div>
+                                            <div class="form_label">{{ t.hc24 }}<span class="form_required">*</span></div>
                                             <div class="form_field">
                                                 <label class="select">
                                                     <div>
@@ -352,7 +356,7 @@
                                             </div>
                                         </div>
                                         <div class="form_row">
-                                            <div class="form_label">제보구분<span class="form_required">*</span></div>
+                                            <div class="form_label">{{ t.hc60 }}<span class="form_required">*</span></div>
                                             <div class="form_field">
                                                 <label class="select">
                                                     <div>
@@ -364,36 +368,36 @@
                                             </div>
                                         </div>
                                         <div class="form_row">
-                                            <div class="form_label">매장명<span class="form_required">*</span></div>
+                                            <div class="form_label">{{ t.hc28 }}<span class="form_required">*</span></div>
                                             <div class="form_field form_field_store">
                                                 <Inputs type="text" v-model="ethicsReportForm.storeName" />
                                             </div>
                                         </div>
                                         <div class="form_row">
-                                            <div class="form_label">제목<span class="form_required">*</span></div>
+                                            <div class="form_label">{{ t.hc59 }}<span class="form_required">*</span></div>
                                             <div class="form_field">
                                                 <Inputs type="text" v-model="ethicsReportForm.title" />
                                             </div>
                                         </div>
                                         <div class="form_row form_row_content">
-                                            <div class="form_label">내용<span class="form_required">*</span></div>
+                                            <div class="form_label">{{ t.hc27 }}<span class="form_required">*</span></div>
                                             <div class="form_field form_field_content">
                                                 <textarea
                                                     v-model="ethicsReportForm.content"
-                                                    placeholder="1.누가 :&#10;2.언제 :&#10;3.어디서 :&#10;4.내용 :&#10;5.아는 사람 :&#10;6.확인 방법 :"
+                                                    :placeholder="t.hcPlaceholder5W1H"
                                                 />
-                                                <p class="form_field_note">※ 내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.</p>
+                                                <p class="form_field_note">{{ t.hc12 }}</p>
                                             </div>
                                         </div>
                                         <div class="form_row">
-                                            <div class="form_label">파일첨부</div>
+                                            <div class="form_label">{{ t.hc67 }}</div>
                                             <div class="form_field form_field_file">
                                                 <FileUpload :lang="lang" :multiple="true" accept="*" @update:files="onFiles" />
-                                                <p class="form_field_note">* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)</p>
+                                                <p class="form_field_note">{{ t.hc01 }}</p>
                                             </div>
                                         </div>
                                         <div class="form_row">
-                                            <div class="form_label">회신방법</div>
+                                            <div class="form_label">{{ t.hc70 }}</div>
                                             <div class="form_field">
                                                 <label class="select">
                                                     <div>
@@ -408,9 +412,9 @@
                                 </div>
 
                                 <div class="form_action_area">
-                                    <Buttons btn-class="btn_big primary">신청</Buttons>
+                                    <Buttons btn-class="btn_big primary">{{ t.hc37 }}</Buttons>
                                     <Buttons tag="button" type="button" btn-class="btn_big gray" @click="closeEthicsInquiry">
-                                        취소
+                                        {{ t.hc66 }}
                                     </Buttons>
                                 </div>
                             </div>
@@ -452,14 +456,14 @@
                     </div>
                 </div>
                 <div v-show="CTabIdxCompliance === 1" class="panel_inner" :aria-label="t.TabsCompliance?.[1]?.item || ''">
-                    <!-- 자율준수 관리자 안내 -->
+                    <!-- {{ t.hc48 }} 안내 -->
                     <header class="tab_header ac">
-                        <h2>GS리테일은 협력사와의 신뢰와 협력을 통해 공동의 발전 도모와 자율준수 프로그램의 <br />
-                            적극적 실천을 위해 기준과 절차에 따라 ‘자율준수관리자’를 임명하여 운영하고 있습니다.</h2>
+                        <h2>{{ t.hc11 }} <br />
+                            {{ t.hc54 }}</h2>
                     </header>
                     <section>
                         <header class="sub_header">
-                            <h3>자율준수 관리자 역할</h3>
+                            <h3>{{ t.hc50 }}</h3>
                         </header>
                         <FeatureCards
                             class="law_feature_cards feature_cards_grid cp_manager_role_cards"
@@ -470,10 +474,10 @@
                     </section>
                     <section>
                         <header class="sub_header">
-                            <h3>자율준수 관리자 선임절차</h3>
+                            <h3>{{ t.hc49 }}</h3>
                         </header>
                         <div class="cp_appoint_board">
-                            <div role="list" aria-label="자율준수 관리자 선임 절차" class="process_flow">
+                            <div role="list" :aria-label="t.hcAriaOfficerProc" class="process_flow">
                                 <template v-for="(step, sIdx) in t.ComplianceAppointmentSteps" :key="step.key">
                                     <article role="listitem">
                                         <h4 v-html="step.title"></h4>
@@ -486,59 +490,59 @@
                     </section>
                     <section>
                         <header class="sub_header">
-                            <h3>자율준수 관리자</h3>
+                            <h3>{{ t.hc48 }}</h3>
                         </header>
                         <figure class="cp_manager_banner">
                             <figcaption>
-                                <strong>GS리테일은<br />공정거래 자율준수 <br />모범기업입니다.</strong>
-                                <p>공정거래 자율준수를 통한 올바른 업무 수행을 통해 위험을 줄이고 지속 가능한 <br />성장을 이룰 수 있습니다.<br /><br />
-                                    법규 위반으로부터 GS리테일과 임직원을 안전하게 보호하고,<br />
-                                    고객과 파트너사 등으로부터 신뢰를 얻어 지속적으로 성장하도록 임직원 여러분의 <br />
-                                    적극적인 자율준수 실천을 당부드립니다.
+                                <strong>{{ t.hc08 }}<br />{{ t.hc19 }} <br />{{ t.hc30 }}</strong>
+                                <p>{{ t.hc22 }} <br />{{ t.hc36 }}<br /><br />
+                                    {{ t.hc32 }}<br />
+                                    {{ t.hc15 }} <br />
+                                    {{ t.hc55 }}
                                 </p>
                                 <div class="cp_manager_banner_content">
                                     <dl>
-                                        <dt>GS리테일 지속가능경영부분</dt>
-                                        <dd>상무 <strong>곽창헌</strong></dd>
+                                        <dt>{{ t.hc07 }}</dt>
+                                        <dd>{{ t.hc35 }} <strong>{{ t.hc23 }}</strong></dd>
                                     </dl>
                                     <div>
-                                        <img src="@/assets/images/dummy/gsrsu040101_11.png" alt="곽창헌 사인">
+                                        <img src="@/assets/images/dummy/gsrsu040101_11.png" :alt="t.hcAltSign">
                                     </div>
                                 </div>
                             </figcaption>
                         </figure>
                         <p>
-                            GS리테일 임직원 여러분! <br />
-                            안녕하십니까. 자율준수 관리자 곽창헌 상무입니다.<br /><br />
+                            {{ t.hc05 }} <br />
+                            {{ t.hc39 }}<br /><br />
 
-                            이윤 극대화를 추구하는 기업활동의 속성에도 불구하고,<br />
-                            오늘날에는 사회적 책임의 이행과 공정하고 투명한 경영체계의 확립이 기업의 지속적 성장 가능성을 판가름하는 핵심 요소로 자리 잡았습니다.<br />
-                            그렇기에 기업과 구성원이 공정한 경쟁에 관하여 정해진 법규를 스스로 준수하는 것은 선택사항이 아니라 필수 불가결한 사항입니다.<br /><br />
+                            {{ t.hc47 }}<br />
+                            {{ t.hc43 }}<br />
+                            {{ t.hc25 }}<br /><br />
 
-                            공정거래 자율준수 프로그램(CP: Compliance Program)은<br />
-                            기업이 공정거래 관련 법규를 스스로 준수하기 위해 운영하는 준법시스템으로서, <br />
-                            공정거래 관련 법규 위반을 사전에 예방함은 물론 조기에 위반 여부를 발견하고 시정할 수 있도록 하는 제도입니다.<br /><br />
+                            {{ t.hc20 }}<br />
+                            {{ t.hc26 }} <br />
+                            {{ t.hc18 }}<br /><br />
 
-                            편의점, 수퍼 및 홈쇼핑 사업을 견인하는 우리 GS리테일은 공정한 기업활동에 대한 시대적 요구에 부응하고자<br />
-                            1995년부터 이미 투명한 거래 의지를 대내외에 천명하고 공정거래를 자율적으로 실천해 왔으며,<br />
-                            자율준수 문화의 정착과 확산에 힘을 쏟고 있는 공정거래 자율준수 모범 기업입니다.<br /><br />
+                            {{ t.hc68 }}<br />
+                            {{ t.hc03 }}<br />
+                            {{ t.hc52 }}<br /><br />
 
-                            공정거래 자율준수 프로그램은 자율준수 관리자와 CP 주관부서만의 업무가 아니라<br />
-                            모든 임직원이 일상 업무를 수행함에 있어 지켜야 할 원칙이자 기준입니다.<br />
-                            자율준수를 통한 올바른 업무 수행을 통해 위험을 줄이고 지속 가능한 성장을 이룰 수 있습니다.<br /><br />
+                            {{ t.hc21 }}<br />
+                            {{ t.hc29 }}<br />
+                            {{ t.hc53 }}<br /><br />
 
-                            법규 위반으로부터 GS리테일과 임직원을 안전하게 보호하고, 고객과 파트너사 등으로부터 신뢰를 얻어<br />
-                            우리 GS리테일이 지속적으로 성장하도록 임직원 여러분의 적극적인 자율준수 실천을 당부 드립니다.<br /><br />
-                            자율준수 관리자와 CP 주관부서가 최선을 다해 임직원 여러분을 돕겠습니다.<br /><br />
+                            {{ t.hc33 }}<br />
+                            {{ t.hc44 }}<br /><br />
+                            {{ t.hc51 }}<br /><br />
 
-                            감사합니다.
+                            {{ t.hc14 }}
                         </p>
                     </section>
                 </div>
                 <div v-show="CTabIdxCompliance === 2" class="panel_inner" :aria-label="t.TabsCompliance?.[2]?.item || ''">
                     <!-- 공정거래 4대 가이드라인 (Figma 491:13910) -->
                     <header class="tab_header">
-                        <h2>GS리테일은 투명하고 거래질서 확립과 자율준수 프로그램의 지속적 실천을 위해<br />공정거래 4대 가이드라인을 도입, 적용하고 있습니다.</h2>
+                        <h2>{{ t.hc09 }}<br />{{ t.hc17 }}</h2>
                     </header>
                     <section>
                         <FeatureCards
@@ -1121,8 +1125,8 @@ function getTableCellBulletParagraphs(cell) {
 }
 function isFairTradeAddendumSection(section) {
     if (!section) return false;
-    if (section.no === "부칙" || section.no === "부속지침") return true;
-    return Boolean(section.addendumText && section.title === "부칙" && (section.no === "" || section.no == null));
+    if (section.no === "부칙" || section.no === "부속지침" || section.no === "Supplementary Provisions"/* 260708 번역 */) return true;
+    return Boolean(section.addendumText && (section.title === "부칙" || section.title === "Supplementary Provisions"/* 260708 번역 */) && (section.no === "" || section.no == null));
 }
 
 const CTabIdx = ref(0);
@@ -1133,24 +1137,32 @@ const CTabIdxFairTradeBiz = ref(0);
 const isEthicsInquiryOpen = ref(false);
 const isEthicsConsentAgreed = ref(false);
 const isEthicsConsentAgreed2 = ref(false);
-const ethicsEmailDomainOptions = ["직접입력", "naver.com", "gmail.com", "hanmail.net"];
-const ethicsDivisionOptions = ["사업부 선택", "GS25", "GS THE FRESH", "GS SHOP", "기타"];
-const ethicsReportTypeOptions = ["제보구분 선택", "부정행위", "불공정거래", "인권침해", "기타"];
-const ethicsReplyTypeOptions = ["이메일", "전화"];
+const ethicsEmailDomainOptions = computed(() => props.lang === "en"
+    ? ["Direct input"/* 260708 번역 */, "naver.com", "gmail.com", "hanmail.net"]
+    : ["직접입력", "naver.com", "gmail.com", "hanmail.net"]);
+const ethicsDivisionOptions = computed(() => props.lang === "en"
+    ? ["Select division"/* 260708 번역 */, "GS25", "GS THE FRESH", "GS SHOP", "Other"/* 260708 번역 */]
+    : ["사업부 선택", "GS25", "GS THE FRESH", "GS SHOP", "기타"]);
+const ethicsReportTypeOptions = computed(() => props.lang === "en"
+    ? ["Select report type"/* 260708 번역 */, "Misconduct"/* 260708 번역 */, "Unfair trade"/* 260708 번역 */, "Human rights violation"/* 260708 번역 */, "Other"/* 260708 번역 */]
+    : ["제보구분 선택", "부정행위", "불공정거래", "인권침해", "기타"]);
+const ethicsReplyTypeOptions = computed(() => props.lang === "en"
+    ? ["Email"/* 260708 번역 */, "Phone"/* 260708 번역 */]
+    : ["이메일", "전화"]);
 const ethicsReportForm = ref({
     name: "",
     emailId: "",
     emailDomain: "",
-    emailDomainSelect: "직접입력",
+    emailDomainSelect: props.lang === "en" ? "Direct input"/* 260708 번역 */ : "직접입력",
     phonePrefix: "010",
     phoneMid: "",
     phoneTail: "",
-    division: "사업부 선택",
-    reportType: "제보구분 선택",
+    division: props.lang === "en" ? "Select division"/* 260708 번역 */ : "사업부 선택",
+    reportType: props.lang === "en" ? "Select report type"/* 260708 번역 */ : "제보구분 선택",
     storeName: "",
     title: "",
     content: "",
-    replyType: "이메일",
+    replyType: props.lang === "en" ? "Email"/* 260708 번역 */ : "이메일",
 });
 
 const langData = {
@@ -4132,6 +4144,8 @@ const langData = {
             },
         ],
         EthicsConsentRequired: "[선택]",
+        EthicsConsentTitle: "개인정보 제공 동의",
+        EthicsConsentNotice: "고객님께서는 본 동의에 거부하실 권리가 있으나, 동의하지 않으실 경우<br />확인해야 하는 문의에 대해 정확하고 신속한 답변을 받으시는데 어려움이 있습니다.",
         EthicsConsentItems: [
             "- 입력하신 정보는 신속하고 정확한 처리를 위해 관련 부서(담당자)에게 전달되며 문의 및 컴플레인 응대를 위해서 사용됩니다.",
             "- 제공받는 자: 고객님이 문의 신청한 GS리테일 점포 관리자, GS리테일 자회사, GS리테일에 입점 된 상품 제조사의 관리자(처리자)",
@@ -4241,6 +4255,99 @@ const langData = {
         EthicsPledgeMeta: "20**. 01. 01",
         EthicsPledgeCompany: "*****부문 ***점 *********",
         EthicsPledgeName: "홍길동 (서명)",
+        hcEmailLabel: "이메일",
+        hcAriaHistory: "정도경영 연혁",
+        hcAriaOfficerProc: "자율준수 관리자 선임 절차",
+        hcAltSign: "곽창헌 사인",
+        hcPlaceholder5W1H: "1.누가 :\n2.언제 :\n3.어디서 :\n4.내용 :\n5.아는 사람 :\n6.확인 방법 :",
+        hc01: "* 여러 개의 파일 업로드 시 zip파일로 압축하여 올려주세요 (*용량제한 20MB)",
+        hc02: "* 필수 입력사항",
+        hc03: "1995년부터 이미 투명한 거래 의지를 대내외에 천명하고 공정거래를 자율적으로 실천해 왔으며,",
+        hc04: "GS그룹의 정도경영 추진 방침에 따라 당사도 1995년도부터 해당 방침에 따른 다양한 활동을 전개 해 나가고 있습니다.",
+        hc05: "GS리테일 임직원 여러분!",
+        hc06: "GS리테일 정도경영 제보 대상",
+        hc07: "GS리테일 지속가능경영부분",
+        hc08: "GS리테일은",
+        hc09: "GS리테일은 투명하고 거래질서 확립과 자율준수 프로그램의 지속적 실천을 위해",
+        hc10: "GS리테일은 투명하고, 공정하며, 합리적인 사고와",
+        hc11: "GS리테일은 협력사와의 신뢰와 협력을 통해 공동의 발전 도모와 자율준수 프로그램의",
+        hc12: "※ 내용 입력 시 개인정보보호를 위해 연락처, 주소 등의 개인정보를 작성하지 않도록 주의 부탁드립니다.",
+        hc13: "가급적 6하원칙에 입각하여 작성해 주시고, 내용이 부정확한 경우에는 조사대상에서 제외될 수도 있습니다.",
+        hc14: "감사합니다.",
+        hc15: "고객과 파트너사 등으로부터 신뢰를 얻어 지속적으로 성장하도록 임직원 여러분의",
+        hc16: "고객정보",
+        hc17: "공정거래 4대 가이드라인을 도입, 적용하고 있습니다.",
+        hc18: "공정거래 관련 법규 위반을 사전에 예방함은 물론 조기에 위반 여부를 발견하고 시정할 수 있도록 하는 제도입니다.",
+        hc19: "공정거래 자율준수",
+        hc20: "공정거래 자율준수 프로그램(CP: Compliance Program)은",
+        hc21: "공정거래 자율준수 프로그램은 자율준수 관리자와 CP 주관부서만의 업무가 아니라",
+        hc22: "공정거래 자율준수를 통한 올바른 업무 수행을 통해 위험을 줄이고 지속 가능한",
+        hc23: "곽창헌",
+        hc24: "구분",
+        hc25: "그렇기에 기업과 구성원이 공정한 경쟁에 관하여 정해진 법규를 스스로 준수하는 것은 선택사항이 아니라 필수 불가결한 사항입니다.",
+        hc26: "기업이 공정거래 관련 법규를 스스로 준수하기 위해 운영하는 준법시스템으로서,",
+        hc27: "내용",
+        hc28: "매장명",
+        hc29: "모든 임직원이 일상 업무를 수행함에 있어 지켜야 할 원칙이자 기준입니다.",
+        hc30: "모범기업입니다.",
+        hc31: "목적과 취지",
+        hc32: "법규 위반으로부터 GS리테일과 임직원을 안전하게 보호하고,",
+        hc33: "법규 위반으로부터 GS리테일과 임직원을 안전하게 보호하고, 고객과 파트너사 등으로부터 신뢰를 얻어",
+        hc34: "상담이나 제보를 하신 분에 대하여서는 어떠한 불이익도 발생하지 않도록 하겠습니다.",
+        hc35: "상무",
+        hc36: "성장을 이룰 수 있습니다.",
+        hc37: "신청",
+        hc38: "실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.",
+        hc39: "안녕하십니까. 자율준수 관리자 곽창헌 상무입니다.",
+        hc40: "언제나 고객님의 입장이 되어 작은 소리에도 귀를 기울이겠습니다.",
+        hc41: "연락처",
+        hc42: "연혁",
+        hc43: "오늘날에는 사회적 책임의 이행과 공정하고 투명한 경영체계의 확립이 기업의 지속적 성장 가능성을 판가름하는 핵심 요소로 자리 잡았습니다.",
+        hc44: "우리 GS리테일이 지속적으로 성장하도록 임직원 여러분의 적극적인 자율준수 실천을 당부 드립니다.",
+        hc45: "이곳에서 접수되는 모든 글들은 철저한 보안과 안전 속에서 처리됨을 알려드립니다.",
+        hc46: "이름",
+        hc47: "이윤 극대화를 추구하는 기업활동의 속성에도 불구하고,",
+        hc48: "자율준수 관리자",
+        hc49: "자율준수 관리자 선임절차",
+        hc50: "자율준수 관리자 역할",
+        hc51: "자율준수 관리자와 CP 주관부서가 최선을 다해 임직원 여러분을 돕겠습니다.",
+        hc52: "자율준수 문화의 정착과 확산에 힘을 쏟고 있는 공정거래 자율준수 모범 기업입니다.",
+        hc53: "자율준수를 통한 올바른 업무 수행을 통해 위험을 줄이고 지속 가능한 성장을 이룰 수 있습니다.",
+        hc54: "적극적 실천을 위해 기준과 절차에 따라 ‘자율준수관리자’를 임명하여 운영하고 있습니다.",
+        hc55: "적극적인 자율준수 실천을 당부드립니다.",
+        hc56: "정도경영 목소리",
+        hc57: "정도경영 목소리에는 임직원 또는 협력업체 직원의 불공정 행위들 (금품수수, 향응접대, 매출누락, 불공정거래, 기타 부정행위)에 대한 제보뿐만 아니라, 정도경영을 위한 좋은 의견들도 함께 접수하고 있습니다.",
+        hc58: "정도경영 사이버 신문고",
+        hc59: "제목",
+        hc60: "제보구분",
+        hc61: "제보내용",
+        hc62: "제보이용안내",
+        hc63: "제보자 보호제도",
+        hc64: "제보자 포상제도",
+        hc65: "제보하기",
+        hc66: "취소",
+        hc67: "파일첨부",
+        hc68: "편의점, 수퍼 및 홈쇼핑 사업을 견인하는 우리 GS리테일은 공정한 기업활동에 대한 시대적 요구에 부응하고자",
+        hc69: "허위 사실을 신고하여 개인의 명예를 훼손시키는 행위는 절대 삼가 바랍니다.",
+        hc70: "회신방법",
+        hc71: "1.누가 :&#10;2.언제 :&#10;3.어디서 :&#10;4.내용 :&#10;5.아는 사람 :&#10;6.확인 방법 :",
+        hc72: "곽창헌 사인",
+        hc73: "자율준수 관리자 선임 절차",
+        hc74: "정도경영 연혁",
+        hc75: "제보 처리 단계",
+        EthicsMainTitle: "GS리테일은 투명하고, 공정하며, 합리적인 사고와 <br class=\"p_br\" />실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.",
+        EthicsCodeTitle: "GS리테일 윤리규범",
+        EthicsCodeDesc: "GS리테일은 상호 신뢰와 협력을 토대로 모든 이해관계자와 공동의 이익을 추구함으로써 모두가 선망하는 Value No.1 기업으로 발전하기 위해 올바른 행동과 가치 판단의 기준으로 윤리규범을 제정하고 정도경영의 길을 걷습니다.",
+        EthicsCodeBtn: "㈜GS리테일 윤리규범",
+        EthicsGuideTitle: "GS리테일 실천지침",
+        EthicsGuideDesc: "본 내용은 정직과 공정의 신조직문화 창출을 위하여 GS리테일인으로서 지켜야 할 ‘임직원의 기본윤리’를 구체적으로 해설하고 실천에 용이하도록 제도화한 내용입니다.",
+        EthicsPracticeSubTitle: "세부실천지침",
+        EthicsPledgeTitle: "윤리규범 실천서약",
+        EthicsPledgeDesc: "정도경영을 위한 임직원의 기본 윤리를 숙지하고 회사업무를 수행함에 있어 GS리테일인으로서 아래의 행위를 하지 않는다.",
+        EthicsPledgeDateLabel: "일시",
+        EthicsPledgeDeptLabel: "소속",
+        EthicsPledgeNameLabel: "성명",
+        EthicsPledgeToCompany: "주식회사 GS리테일 귀중",
         PurposeFeatureItems: [
             {
                 title: "정당성 획득",
@@ -7279,6 +7386,8 @@ const langData = {
             },
         ],
         EthicsConsentRequired: "[Optional]"/* 260604 번역 */,
+        EthicsConsentTitle: "Consent to Provision of Personal Information"/* 260708 번역 */,
+        EthicsConsentNotice: "You have the right to refuse this consent; however, if you do not consent, you may have difficulty receiving accurate and prompt answers to inquiries that require verification."/* 260708 번역 */,
         EthicsConsentItems: [
             "The information you enter will be transmitted to the relevant department (person in charge) for prompt and accurate processing and will be used to respond to inquiries and complaints.",
             "- Recipients: the manager of the GS Retail store to which you submitted your inquiry, GS Retail subsidiaries, and the manager (handler) of the manufacturer of products carried by GS Retail"/* 260604 번역 */,
@@ -7388,6 +7497,99 @@ const langData = {
         EthicsPledgeMeta: "20**. 01. 01",
         EthicsPledgeCompany: "***** Division *** Points *********"/* 260604 번역 */,
         EthicsPledgeName: "Hong Gil-dong (signature)"/* 260604 번역 */,
+        hcEmailLabel: "Email"/* 260708 번역 */,
+        hcAriaHistory: "Integrity Management History"/* 260708 번역 */,
+        hcAriaOfficerProc: "Compliance Officer Appointment Procedure"/* 260708 번역 */,
+        hcAltSign: "Kwak Chang-heon's signature"/* 260708 번역 */,
+        hcPlaceholder5W1H: "1. Who:\n2. When:\n3. Where:\n4. Details:\n5. Persons aware:\n6. Means of verification:"/* 260708 번역 */,
+        hc01: "* When uploading multiple files, please compress them into a zip file before uploading (*Size limit: 20MB)"/* 260708 번역 */,
+        hc02: "* Required fields"/* 260708 번역 */,
+        hc03: "Since 1995, we have declared our commitment to transparent transactions both internally and externally and have voluntarily practiced fair trade,"/* 260708 번역 */,
+        hc04: "In accordance with GS Group's integrity management policy, our company has also been carrying out various activities in line with this policy since 1995."/* 260708 번역 */,
+        hc05: "Dear employees of GS Retail!"/* 260708 번역 */,
+        hc06: "Scope of GS Retail Integrity Management Reporting"/* 260708 번역 */,
+        hc07: "GS Retail Sustainability Management Division"/* 260708 번역 */,
+        hc08: "GS Retail is"/* 260708 번역 */,
+        hc09: "In order to establish a transparent transaction order and continuously implement its voluntary compliance program, GS Retail"/* 260708 번역 */,
+        hc10: "With transparent, fair, and reasonable thinking and"/* 260708 번역 */,
+        hc11: "Through trust and cooperation with its partner companies, GS Retail pursues mutual development and, for the"/* 260708 번역 */,
+        hc12: "※ When entering details, please refrain from writing personal information such as contact numbers or addresses in order to protect personal data."/* 260708 번역 */,
+        hc13: "Please write your report based on the 5W1H principle wherever possible; if the content is inaccurate, it may be excluded from investigation."/* 260708 번역 */,
+        hc14: "Thank you."/* 260708 번역 */,
+        hc15: "so that we may earn the trust of our customers and partner companies and continue to grow, we ask for your"/* 260708 번역 */,
+        hc16: "Customer Information"/* 260708 번역 */,
+        hc17: "we have adopted and applied the Four Major Fair Trade Guidelines."/* 260708 번역 */,
+        hc18: "It is a system designed not only to prevent violations of fair trade laws and regulations in advance, but also to detect and correct any violations at an early stage."/* 260708 번역 */,
+        hc19: "Fair Trade Voluntary Compliance"/* 260708 번역 */,
+        hc20: "The Fair Trade Voluntary Compliance Program (CP: Compliance Program) is"/* 260708 번역 */,
+        hc21: "The Fair Trade Voluntary Compliance Program is not solely the responsibility of the Compliance Officer and the CP administrative department,"/* 260708 번역 */,
+        hc22: "Through proper business conduct based on fair trade voluntary compliance, we can reduce risk and achieve sustainable"/* 260708 번역 */,
+        hc23: "Kwak Chang-heon"/* 260708 번역 */,
+        hc24: "Category"/* 260708 번역 */,
+        hc25: "Therefore, it is not an option but an indispensable requirement for a company and its members to voluntarily comply with the established laws and regulations governing fair competition."/* 260708 번역 */,
+        hc26: "It is a compliance system operated by a company to voluntarily comply with fair trade laws and regulations,"/* 260708 번역 */,
+        hc27: "Details"/* 260708 번역 */,
+        hc28: "Store Name"/* 260708 번역 */,
+        hc29: "It is the principle and standard that all employees must observe in carrying out their daily work."/* 260708 번역 */,
+        hc30: "an exemplary company."/* 260708 번역 */,
+        hc31: "Purpose and Intent"/* 260708 번역 */,
+        hc32: "protects GS Retail and its employees from violations of laws and regulations, and"/* 260708 번역 */,
+        hc33: "It protects GS Retail and its employees from violations of laws and regulations and earns the trust of customers and partner companies,"/* 260708 번역 */,
+        hc34: "We will ensure that no disadvantage of any kind arises for those who seek consultation or make a report."/* 260708 번역 */,
+        hc35: "Executive Vice President"/* 260708 번역 */,
+        hc36: "growth."/* 260708 번역 */,
+        hc37: "Submit"/* 260708 번역 */,
+        hc38: "strong execution, we realize ethical management as our foremost fundamental value."/* 260708 번역 */,
+        hc39: "Hello. I am Kwak Chang-heon, Executive Vice President and Compliance Officer."/* 260708 번역 */,
+        hc40: "We will always put ourselves in our customers' shoes and listen to even the smallest voices."/* 260708 번역 */,
+        hc41: "Contact"/* 260708 번역 */,
+        hc42: "History"/* 260708 번역 */,
+        hc43: "Today, fulfilling social responsibility and establishing a fair and transparent management system have become key factors in determining a company's potential for sustainable growth."/* 260708 번역 */,
+        hc44: "We ask for your active practice of voluntary compliance so that GS Retail may continue to grow."/* 260708 번역 */,
+        hc45: "Please be assured that all submissions received here are handled with thorough security and safety."/* 260708 번역 */,
+        hc46: "Name"/* 260708 번역 */,
+        hc47: "Despite the inherent nature of business activities that pursue profit maximization,"/* 260708 번역 */,
+        hc48: "Compliance Officer"/* 260708 번역 */,
+        hc49: "Compliance Officer Appointment Procedure"/* 260708 번역 */,
+        hc50: "Role of the Compliance Officer"/* 260708 번역 */,
+        hc51: "The Compliance Officer and the CP administrative department will do their utmost to assist all employees."/* 260708 번역 */,
+        hc52: "an exemplary company in fair trade voluntary compliance, dedicated to establishing and spreading a culture of voluntary compliance."/* 260708 번역 */,
+        hc53: "Through proper business conduct based on voluntary compliance, we can reduce risk and achieve sustainable growth."/* 260708 번역 */,
+        hc54: "for its active implementation, GS Retail has appointed and operates a ‘Compliance Officer’ in accordance with established standards and procedures."/* 260708 번역 */,
+        hc55: "active practice of voluntary compliance."/* 260708 번역 */,
+        hc56: "Voice of Integrity Management"/* 260708 번역 */,
+        hc57: "Voice of Integrity Management accepts not only reports of unfair practices by employees or partner company staff (accepting money or valuables, entertainment and hospitality, omission of sales, unfair trade, and other misconduct), but also constructive opinions for integrity management."/* 260708 번역 */,
+        hc58: "Integrity Management Cyber Ombudsman"/* 260708 번역 */,
+        hc59: "Title"/* 260708 번역 */,
+        hc60: "Report Category"/* 260708 번역 */,
+        hc61: "Report Details"/* 260708 번역 */,
+        hc62: "Reporting Guidelines"/* 260708 번역 */,
+        hc63: "Whistleblower Protection System"/* 260708 번역 */,
+        hc64: "Whistleblower Reward System"/* 260708 번역 */,
+        hc65: "Submit a Report"/* 260708 번역 */,
+        hc66: "Cancel"/* 260708 번역 */,
+        hc67: "Attach File"/* 260708 번역 */,
+        hc68: "GS Retail, a leader in the convenience store, supermarket, and home shopping businesses, in order to meet the demands of the times for fair business practices,"/* 260708 번역 */,
+        hc69: "Please absolutely refrain from any act that damages an individual's reputation by reporting false facts."/* 260708 번역 */,
+        hc70: "Method of Reply"/* 260708 번역 */,
+        hc71: "1. Who:&#10;2. When:&#10;3. Where:&#10;4. Details:&#10;5. Persons aware:&#10;6. Means of verification:"/* 260708 번역 */,
+        hc72: "Kwak Chang-heon's signature"/* 260708 번역 */,
+        hc73: "Compliance Officer Appointment Procedure"/* 260708 번역 */,
+        hc74: "Integrity Management History"/* 260708 번역 */,
+        hc75: "Report Processing Stages"/* 260708 번역 */,
+        EthicsMainTitle: "GS Retail realizes ethical management as its foremost core value through transparent, fair, and rational thinking and execution."/* 260708 번역 */,
+        EthicsCodeTitle: "GS Retail Code of Ethics"/* 260708 번역 */,
+        EthicsCodeDesc: "Based on mutual trust and cooperation, GS Retail pursues shared interests with all stakeholders and, to grow into the admired Value No.1 company, has established its Code of Ethics as the standard for right conduct and value judgment, walking the path of integrity management."/* 260708 번역 */,
+        EthicsCodeBtn: "GS Retail Co., Ltd. Code of Ethics"/* 260708 번역 */,
+        EthicsGuideTitle: "GS Retail Practice Guidelines"/* 260708 번역 */,
+        EthicsGuideDesc: "This content specifically explains the \"Basic Ethics of Employees\" that GS Retail members must uphold to create a new organizational culture of honesty and fairness, and is institutionalized for ease of practice."/* 260708 번역 */,
+        EthicsPracticeSubTitle: "Detailed Practice Guidelines"/* 260708 번역 */,
+        EthicsPledgeTitle: "Code of Ethics Practice Pledge"/* 260708 번역 */,
+        EthicsPledgeDesc: "Having fully understood the basic ethics of employees for integrity management, as a member of GS Retail I shall not engage in the following acts in performing company duties."/* 260708 번역 */,
+        EthicsPledgeDateLabel: "Date"/* 260708 번역 */,
+        EthicsPledgeDeptLabel: "Affiliation"/* 260708 번역 */,
+        EthicsPledgeNameLabel: "Name"/* 260708 번역 */,
+        EthicsPledgeToCompany: "To GS Retail Co., Ltd."/* 260708 번역 */,
         PurposeFeatureItems: [
             {
                 title: "Gaining Legitimacy",

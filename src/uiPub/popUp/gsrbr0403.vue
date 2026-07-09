@@ -2,7 +2,7 @@
     <div class="modal_cont gsrbr0601">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -43,6 +43,7 @@ export default {
             isMobile: false, // 26.06.09 add 정다희 : 반응형 분기용 isMobile 추가
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "재고찾기",
                     sub_Title1: "품절 걱정 끝!<br class=\"m_br\" />전국 매장 실시간 재고 확인", // 26.06.09 add 정다희 : 서브 타이틀 모바일 전용 줄바꿈(m_br) 데이터
                     sub_desc1: "전국 GS25 · GS THE FRESH 매장별,\n 원하는 상품의 실시간 재고 현황 및 잔여 수량을 간편하게 확인할 수 있습니다.",
@@ -55,18 +56,22 @@ export default {
                     ]
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "Stock Finder",
                     sub_Title1: "No more worrying about sold-out items! Real-time stock checks at stores nationwide"/* 260604 번역 */,
                     sub_desc1:"For each GS25 and GS THE FRESH store nationwide,\n you can easily check the real-time stock status and remaining quantity of the products you want."/* 260604 번역 */,
                     Steps: [
-                      
+                        { num: "01", text: "On the home screen of the Our Neighborhood GS app,<br/>tap [Stock Finder]"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0403_01.png") },
+                        { num: "02", text: "Search for trending new products<br/>or items you want to buy right now!"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0403_02.png") },
+                        { num: "03", text: "Check stock at nearby GS25 or<br />GS THE FRESH stores based on your current location"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0403_03.png") },
+                        { num: "04", text: "Want to check other areas?<br />Search your desired area directly!"/* 260708 번역 */, img: require("@/assets/images/dummy/gsrbr0403_04.png") }
                     ]
                 }
             }
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     mounted() {
         this.checkMobile();

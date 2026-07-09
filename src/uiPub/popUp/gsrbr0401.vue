@@ -2,7 +2,7 @@
     <div class="modal_cont delivery_modal">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -87,7 +87,7 @@
                             <template #title>{{ t.AccTitle_2 }}</template>
                             <!-- 26.06.10 del 정다희 : 수령방법 안내 문구 미사용 -->
                             <!-- <div class="receive_info">
-                                <p>주문하신 상품은 선택하신 GS25 매장에서 아동급식카드 실물 또는 모바일 앱 바코드를 제시하여 수령하실 수 있습니다.</p>
+                                <p>{{ t.pickupNotice }}</p>
                             </div> -->
                             <!-- 26.06.10 add 정다희 : 클래스 수정 및 stpes2 > steps_3 데이터 사용 -->
                             <ul class="how_to_list">
@@ -135,6 +135,8 @@ export default {
             isMobile: false,
             langData: {
                 ko: {
+                    closeLabel: "닫기",
+                    pickupNotice: "주문하신 상품은 선택하신 GS25 매장에서 아동급식카드 실물 또는 모바일 앱 바코드를 제시하여 수령하실 수 있습니다.",
                     MainTitle: "배달·픽업",
                     // 26.06. 22 add 정다희: header 컨텐츠 추가
                     HeaderTitle: "간식부터 장보기까지,<br class=\"m_br\"> 내 폰 안의 편의점·수퍼",
@@ -192,13 +194,13 @@ export default {
                         { num: "04", text: "점원에게 바코드 제시" }
                     ]
                 },
-                en: { 
+                en: {
+                    closeLabel: "Close"/* 260708 번역 */,
+                    pickupNotice: "You can pick up your ordered items by presenting a physical Child Meal Card or the mobile app barcode at the selected GS25 store."/* 260708 번역 */, 
                     MainTitle: "Delivery & Pickup",
-                    // 26.06. 22 add 정다희: header 컨텐츠 추가부분 영문작업 요망
-                    HeaderTitle: "",
-                    HeaderDesc: "",
-                    HeaderSubDesc: "",
-                    // //26.06. 22 add 정다희: header 컨텐츠 추가부분 영문작업 요망
+                    HeaderTitle: "From snacks to grocery shopping,<br class=\"m_br\"> a convenience store and supermarket in your phone"/* 260708 번역 */,
+                    HeaderDesc: "Snacks/beverages, ready meals, fresh food, daily necessities"/* 260708 번역 */,
+                    HeaderSubDesc: "A service that delivers products from convenience stores and supermarkets to wherever you want, or lets you pick them up at your chosen time without waiting (GS25 and GS THE FRESH nationwide)"/* 260708 번역 */,
                     TipTitle: "Our Neighborhood GS Delivery & Pickup Tips",
                     Tips: [
                         { text: "KT and LG U+ <br />Carrier Discounts" },
@@ -254,7 +256,7 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     mounted() {
         this.checkMobile();

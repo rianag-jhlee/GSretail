@@ -1,0 +1,3 @@
+[     272ms] [WARNING] [Vue Router warn]: The route named "Guide_wrap" has a child without a name and an empty path. Using that name won't render the empty path child so you probably want to move the name to the child instead. If this is intentional, add a name to the child route to remove the warning. @ webpack-internal:///./node_modules/vue-router/dist/devtools-EWN81iOl.mjs:142
+[   13666ms] [WARNING] [Vue warn]: There is already an app instance mounted on the host container.
+ If you want to mount another app on the same host container, you need to unmount the previous app by calling `app.unmount()` first. @ webpack-internal:///./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js:252

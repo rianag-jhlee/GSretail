@@ -2,7 +2,7 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -38,6 +38,7 @@ export default {
         return {
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "맛, 선도 지킴이",
                     intro: '신선, 맛, NO.1을 위한 GS리테일의 선도 지킴이 활동을 확인해보세요.\nGS리테일은 가장 맛있고 신선하며 안전이 검증된, 차별화된 상품만을 엄선하여 고객님께 제공합니다.',
                     steps: [
@@ -49,6 +50,7 @@ export default {
                     ]
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "Guardian of Taste and Freshness"/* 260604 번역 */,
                     intro: `Discover GS Retail's Freshness Guardian program, dedicated to being No. 1 in freshness, taste, and quality. GS Retail carefully selects only the most delicious, fresh, and safety-verified products for our customers.`,
                     steps: [
@@ -65,7 +67,7 @@ export default {
     computed: { 
         t() { 
             // langData가 없거나, 해당 언어 데이터가 없을 경우를 모두 대비
-            const data = this.langData[this.lang] || this.langData.ko;
+            const data = this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko;
             return data || {}; 
         } 
     },

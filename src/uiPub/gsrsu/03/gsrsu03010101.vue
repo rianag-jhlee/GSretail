@@ -322,7 +322,7 @@
 
                                         <section class="support_item ">
                                             <figure class="img_frame">
-                                                <img src="@/assets/images/dummy/gsrsu0301010206_1.png" alt="파트너사 소통 채널 비주얼">
+                                                <img src="@/assets/images/dummy/gsrsu0301010206_1.png" :alt="t.aChannelVisual">
                                             </figure>
                                         </section>
 
@@ -1333,7 +1333,7 @@
                                                                         <span class="unit">@</span>
                                                                         <div class="input_flex_item"><Inputs type="text" v-model="formData.emailDomain" placeholder="" /></div>
                                                                     </div>
-                                                                    <SelectBox :options="lp.part1.emailOptions" v-model="formData.emailSelect" initMsg="직접입력" />
+                                                                    <SelectBox :options="lp.part1.emailOptions" v-model="formData.emailSelect" :initMsg="t.phDirectInput" />
                                                                 </div>
                                                             </div>
                                                             <div class="form_row">
@@ -1364,7 +1364,7 @@
                                                                     <span class="required_mark">*</span>
                                                                 </div>
                                                                 <div class="input_item full">
-                                                                    <SelectBox :options="lp.part2.categoryOptions" v-model="formData.category" initMsg="사업장 선택" class="w428" />
+                                                                    <SelectBox :options="lp.part2.categoryOptions" v-model="formData.category" :initMsg="t.phSelectWorkplace" class="w428" />
                                                                 </div>
                                                             </div>
                                                             <div class="form_row">
@@ -1414,7 +1414,7 @@
                                                                     <span class="label_text">{{ lp.part2.replyLabel }}</span>
                                                                 </div>
                                                                 <div class="input_item full">
-                                                                    <SelectBox :options="lp.part2.replyOptions" v-model="formData.replyType" initMsg="회신방법 선택" class="w428"/>
+                                                                    <SelectBox :options="lp.part2.replyOptions" v-model="formData.replyType" :initMsg="t.phSelectReply" class="w428"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1490,7 +1490,7 @@
                                         
                                         <div class="policy_wrap">
                                             <table>
-                                                <caption class="blind">정보보호 활동 상세 리스트</caption>
+                                                <caption class="blind">{{ t.capProtectList }}</caption>
                                                 <colgroup>
                                                     <col style="width: 350px;">
                                                     <col style="width: auto;">
@@ -1516,7 +1516,7 @@
                                                 <li>
                                                     <figure class="brand_img_box">
                                                         <!-- 각 마크의 이미지 바인딩 -->
-                                                        <img :src="t.protect.informationprotection.Certification.Img" alt="ISMS-P 인증">
+                                                        <img :src="t.protect.informationprotection.Certification.Img" :alt="t.aIsmsp">
                                                     </figure>
                                                 </li>
                                             </ul>
@@ -1613,6 +1613,13 @@ export default {
                 ko: {
                     MainTitle: "사회적 책임",
                     MainsubTitle: "Social responsibility",
+                    aChannelVisual: "파트너사 소통 채널 비주얼",
+                    phDirectInput: "직접입력",
+                    phSelectWorkplace: "사업장 선택",
+                    phSelectReply: "회신방법 선택",
+                    capProtectList: "정보보호 활동 상세 리스트",
+                    aIsmsp: "ISMS-P 인증",
+                    alertNoFile: "연결된 파일이 없습니다.",
                     // 1depth
                     Tabs1: [
                         { item: "상생경영" }, 
@@ -1678,9 +1685,9 @@ export default {
                             Title: "동반성장철학",
                             Btn: "동반성장 활동보기",
                             Items: [
-                                { tit: "Win-Win", desc: "어느 일방의 희생이 아닌<br/>상생 협력체계 구축" },
-                                { tit: "신뢰", desc: "끊임 없는 소통과 경청을<br/>통한 신뢰를 기반"},
-                                { tit: "미래지향", desc: "일회성, 단기적 성과보다<br/>지속 가능한 성장 추구"}
+                                { tit: "Win-Win", desc: "어느 일방의 희생이 아닌 상생 협력체계 구축" },
+                                { tit: "신뢰", desc: "끊임 없는 소통과 경청을 통한 신뢰를 기반"},
+                                { tit: "미래지향", desc: "일회성, 단기적 성과보다 지속 가능한 성장 추구"}
                             ]
                         },
                         Strategy: {
@@ -1710,10 +1717,10 @@ export default {
                                 Desc: "파트너사가 경영/운영상의 긴급 자금이 필요할 때 상생펀드를 활용해 저리의 자금을 대출 받을 수 있는 제도입니다.",
                                 ProcessTitle: "신청절차",
                                 Steps: [
-                                    { tit: "추천의뢰<br/>(파트너사→MD)" },
-                                    { tit: "추천서 작성<br/>(MD)" },
-                                    { tit: "지원신청<br/>(GS리테일→은행)" },
-                                    { tit: "대출지원<br/>(은행심사 후 대출실행)"}
+                                    { tit: "추천의뢰 (파트너사→MD)" },
+                                    { tit: "추천서 작성 (MD)" },
+                                    { tit: "지원신청 (GS리테일→은행)" },
+                                    { tit: "대출지원 (은행심사 후 대출실행)"}
                                 ]
                             },
                             SubFunds: [
@@ -1730,10 +1737,10 @@ export default {
                                 }
                             ],
                             Cards: [
-                                { tit: "네트워크론<br/>/패밀리론", desc: "기업은행과 협약을 맺고 파트너사와의 거래내역, 보증, 담보 등의 제공 또는 추천을 통해 저리 대출 제공" },
-                                { tit: "선급금<br/>지급", desc: "FF 생산공장의 재료 수급과 공급의 안정성 및 설비 관리를 위한 단기자금 조달 등 지원을 위해 파트너사에 선급금 지원" },
-                                { tit: "명절 조기 지급<br/>/100% 현금결제", desc: "파트너사 및 경영주의 원활한 자금 유동성 확보를 위해 년 2회 명절에 물품대금 및 정산금을 조기지급" },
-                                { tit: "수수료<br/>환급제도", desc: "GS SHOP은 분기별 목표 대비 실적이 기준에 미치지 못한 협력사를 대상으로 수취 수수료의 일부를 환급하는 제도를 운영" }
+                                { tit: "네트워크론 /패밀리론", desc: "기업은행과 협약을 맺고 파트너사와의 거래내역, 보증, 담보 등의 제공 또는 추천을 통해 저리 대출 제공" },
+                                { tit: "선급금 지급", desc: "FF 생산공장의 재료 수급과 공급의 안정성 및 설비 관리를 위한 단기자금 조달 등 지원을 위해 파트너사에 선급금 지원" },
+                                { tit: "명절 조기 지급 /100% 현금결제", desc: "파트너사 및 경영주의 원활한 자금 유동성 확보를 위해 년 2회 명절에 물품대금 및 정산금을 조기지급" },
+                                { tit: "수수료 환급제도", desc: "GS SHOP은 분기별 목표 대비 실적이 기준에 미치지 못한 협력사를 대상으로 수취 수수료의 일부를 환급하는 제도를 운영" }
                             ]
                         }
                     },
@@ -1766,7 +1773,7 @@ export default {
                                 desc: "지정농장 운영을 통해 농장은 유통망이 갖춰진 GS리테일이라는 안정적인 판로를 공급받고, 상품의 작목·사육 등에만 집중할 수 있으며 GS리테일은 보다 경쟁력 있는 상품을 고객에게 제공하게 됩니다.<br/><br/>지정농장의 투자비 부담 축소를 위한 상생대출 지원, 위생교육 등을 지원하며, 지역 농가 활성화를 위해 지역특산물 판매·기획전을 정기개최 합니다." 
                             },
                             { 
-                                tit: "수수료 인하 방송<br/>(TV홈쇼핑 및 DATA홈쇼핑)", 
+                                tit: "수수료 인하 방송 (TV홈쇼핑 및 DATA홈쇼핑)", 
                                 img: require("@/assets/images/dummy/gsrsu0301010202_2_4.png"),
                                 desc: "GS SHOP은 신규 아이템 파일럿 테스트 및 기존 방송상품 재고 소진을 ‘I love 중소기업’ 프로그램을 통해 지원합니다. 또한, 모바일/인터넷 판매 협력사 등 신규 소상공인, 영세 기업의 홈쇼핑 시장 진입 기회를 ‘꿈꾸는 가게’ 프로그램을 통해 제공합니다." 
                             }
@@ -2438,8 +2445,8 @@ export default {
                                     { year: "2016", month: "9월", desc: "GS리테일, 한국의 경영대상 명예의 전당 헌액 (한국능률협회)" }
                                 ],
                                 Marks: [
-                                    { img: require("@/assets/images/dummy/gsrsu030303_logo1.png"), tit: "ISO9001 인증획득 <br/>(한국기업인증원)", date: "2021. 05" },
-                                    { img: require("@/assets/images/dummy/gsrsu030303_logo2.png"), tit: "대한민국브랜드 대상 <br/>(산업통상자원부)", date: "2019. 12" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo1.png"), tit: "ISO9001 인증획득 (한국기업인증원)", date: "2021. 05" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo2.png"), tit: "대한민국브랜드 대상 (산업통상자원부)", date: "2019. 12" },
                                     { img: require("@/assets/images/dummy/gsrsu030303_logo3.png"), tit: "GS리테일, 한국서비스대상 종합유통부문 최초 명예의 전당 헌액 (한국표준협회)", date: "2019. 07" },
                                     { img: require("@/assets/images/dummy/gsrsu030303_logo4.png"), tit: "국가서비스대상 신선식품 쇼핑몰 부분 대상 (산업정책연구원)", date: "2019. 06" },
                                     { img: require("@/assets/images/dummy/gsrsu030303_logo5.png"), tit: "GS리테일, 한국의 경영대상 명예의 전당 헌액 (한국능률협회)", date: "2016. 09" }
@@ -2590,7 +2597,7 @@ export default {
                                     { tit: "서비스 보안 검토", desc: "신규 및 변경되는 서비스에 대하여 개발보안 프로세스를 운영하고 있습니다. 서비스 기획 단계에서 중요도평가를 통해 보안요구사항을 정의하고 이를 프로젝트 각 단계에 반영하고 있으며, 오픈 전 보안요구사항에 맞도록 개인정보생명주기, 개발보안, 어플리케이션 보안, 소스코드 및 인프라점검, 웹/앱 취약점 점검 등 전반적인 보안점검을 수행하고 식별된 취약점에 대한 조치를 진행하고 있습니다." },
                                     { tit: "정보보호 교육", desc: "전사 임직원을 대상으로 개인정보보호 교육과, 정보보호 교육을 실시하고 있으며, 위치정보 및 다량의 개인정보를 취급하는 임직원 대상으로 별도의 심화교육을 실시하고 있습니다." },
                                     { tit: "정보보호 인식제고", desc: "임직원의 정보보호 인식을 향상시키기 위해 개인정보보호의 날·정보보호의 날 캠페인을 운영하며, 꼭 지켜야 하는 사항 등에 대해 정기 메일링을 진행하고 있습니다." },
-                                    { tit: "모의훈련", desc: "임직원 대상으로 악성메일 모의훈련을 실시하여, 악성메일에 대한 보안인식을 향상시키고 있습니다.<br/>또한, 개인정보 유·노출 사고에 대한 모의훈련을 실시하여, 실제 사고 발생 시 고객분들께 발생하는 개인정보침해를 줄이기 위해 노력하고 있습니다." },
+                                    { tit: "모의훈련", desc: "임직원 대상으로 악성메일 모의훈련을 실시하여, 악성메일에 대한 보안인식을 향상시키고 있습니다. 또한, 개인정보 유·노출 사고에 대한 모의훈련을 실시하여, 실제 사고 발생 시 고객분들께 발생하는 개인정보침해를 줄이기 위해 노력하고 있습니다." },
                                     { tit: "위험관리", desc: "정보자산(인프라 등) 및 프로세스 등에서 발생하는 위험을 관리하기 위해 매년 취약점 점검 및 위험평가를 실시하고 있으며, 도출된 위험에 대해 관리할 수 있는 계획을 수립하여 운영하고 있습니다." }
                                 ],
                                 BtnText: "정보보호 공시 바로가기",
@@ -2610,6 +2617,13 @@ export default {
                 en: {
                     MainTitle: "Social Responsibility",
                     MainsubTitle: "Social responsibility",
+                    aChannelVisual: "Partner company communication channel visual"/* 260708 번역 */,
+                    phDirectInput: "Direct input"/* 260708 번역 */,
+                    phSelectWorkplace: "Select workplace"/* 260708 번역 */,
+                    phSelectReply: "Select reply method"/* 260708 번역 */,
+                    capProtectList: "Information protection activity detail list"/* 260708 번역 */,
+                    aIsmsp: "ISMS-P Certification"/* 260708 번역 */,
+                    alertNoFile: "No file attached."/* 260708 번역 */,
                     // 1depth
                     Tabs1: [
                         { item: "Mutual Growth Management" }, 
@@ -2675,17 +2689,17 @@ export default {
                             Title: "Co-Growth Philosophy",
                             Btn: "View Co-Growth Activities",
                             Items: [
-                                { tit: "Win-Win", desc: "Win-Win<br />Building a cooperative framework that benefits all parties, <br />not at the expense of any one" },
-                                { tit: "Trust", desc: "Trust<br />Built on trust through constant <br />communication and active listening"},
-                                { tit: "Future-Oriented", desc: "Future-Oriented<br />Pursuing sustainable growth <br />over short-term, one-off gains"}
+                                { tit: "Win-Win", desc: "Win-Win Building a cooperative framework that benefits all parties, not at the expense of any one" },
+                                { tit: "Trust", desc: "Trust Built on trust through constant communication and active listening"},
+                                { tit: "Future-Oriented", desc: "Future-Oriented Pursuing sustainable growth over short-term, one-off gains"}
                             ]
                         },
                         Strategy: {
                             Title: "Implementation Strategy",
                             Cards: [
                                 { num: "01", tit: "1. Establishing a Fair Trade Culture", list: ["- Compliance with fair trade laws and regulations", "- Proactive unfair trade prevention system", "- Provision of fair trading opportunities"] },
-                                { num: "02", tit: "Substantive<br />Business Support", list: ["- Financial support and early payment of fees", "- Operational capability support", "- Other welfare and benefits support"] },
-                                { num: "03", tit: "Pursuit of<br />Continuous Growth", list: ["- Expansion of joint product development", "- Brand marketing support", "- Introduction and operation of profit-sharing programs"] },
+                                { num: "02", tit: "Substantive Business Support", list: ["- Financial support and early payment of fees", "- Operational capability support", "- Other welfare and benefits support"] },
+                                { num: "03", tit: "Pursuit of Continuous Growth", list: ["- Expansion of joint product development", "- Brand marketing support", "- Introduction and operation of profit-sharing programs"] },
                                 { num: "04", tit: "Open Communication", list: ["- Regular roundtable meetings", "- Cultural exchange (Family Day)", "- Partner satisfaction improvement"] }
                             ],
                             img: require("@/assets/images/dummy/gsrsu03010101_1.png"),
@@ -2707,10 +2721,10 @@ export default {
                                 Desc: "Mutual Growth Fund<br />A program that allows partners to obtain low-interest loans through the Mutual Growth Fund when they need emergency funds for business or operational purposes.",
                                 ProcessTitle: "Application Procedure",
                                 Steps: [
-                                    { tit: "Referral Request<br />(Partner → MD)" },
-                                    { tit: "Referral Letter Preparation<br />(MD)" },
-                                    { tit: "Loan Application<br />(GS Retail → Bank)" },
-                                    { tit: "Loan Support<br />(Loan executed after bank review)"}
+                                    { tit: "Referral Request (Partner → MD)" },
+                                    { tit: "Referral Letter Preparation (MD)" },
+                                    { tit: "Loan Application (GS Retail → Bank)" },
+                                    { tit: "Loan Support (Loan executed after bank review)"}
                                 ]
                             },
                             SubFunds: [
@@ -2727,10 +2741,10 @@ export default {
                                 }
                             ],
                             Cards: [
-                                { tit: "Network Loan and Family Loan", desc: "Network Loan and Family Loan<br />Low-interest loans provided through an agreement with IBK Industrial Bank, using transaction records with partners, guarantees, and collateral as support or referrals" },
-                                { tit: "Advance Payment", desc: "Advance Payment<br />Advance payments provided to partners to support material procurement, supply stability, and equipment management at FF production facilities, including short-term financing" },
-                                { tit: "Holiday Early Payment and 100% Cash Settlement<br/>/100% cash payment"/* 260604 번역 */, desc: "Holiday Early Payment and 100% Cash Settlement<br />Early payment of goods fees and settlement amounts is made twice a year at major holidays to ensure smooth cash flow for partners and store owners" },
-                                { tit: "Commission Refund Program", desc: "Commission Refund Program<br />GS SHOP operates a program that refunds a portion of commissions collected from partner companies that fall short of quarterly performance targets" }
+                                { tit: "Network Loan and Family Loan", desc: "Network Loan and Family Loan Low-interest loans provided through an agreement with IBK Industrial Bank, using transaction records with partners, guarantees, and collateral as support or referrals" },
+                                { tit: "Advance Payment", desc: "Advance Payment Advance payments provided to partners to support material procurement, supply stability, and equipment management at FF production facilities, including short-term financing" },
+                                { tit: "Holiday Early Payment and 100% Cash Settlement /100% cash payment"/* 260604 번역 */, desc: "Holiday Early Payment and 100% Cash Settlement Early payment of goods fees and settlement amounts is made twice a year at major holidays to ensure smooth cash flow for partners and store owners" },
+                                { tit: "Commission Refund Program", desc: "Commission Refund Program GS SHOP operates a program that refunds a portion of commissions collected from partner companies that fall short of quarterly performance targets" }
                             ]
                         }
                     },
@@ -2892,7 +2906,7 @@ export default {
                                     img: require("@/assets/images/dummy/gsrsu03010103_1_3.png")
                                 },
                                 {
-                                    tit: "Store Manager (Staff)<br />Job Posting Insight Support",
+                                    tit: "Store Manager (Staff) Job Posting Insight Support",
                                     desc: "Dedicated Banner Service for GS THE FRESH (Albachunguk)",
                                     img: require("@/assets/images/dummy/gsrsu03010103_1_4.png")
                                 }
@@ -3397,7 +3411,7 @@ export default {
                                 Title: "Key Customer Satisfaction Management Activities",
                                 Items: [
                                     { img: require("@/assets/images/dummy/gsrsu030303_1.png"), tit: "TOTAL Service", subTit: "Fundamental problem-solving through customer relationship management"/* 260604 번역 */, desc: "GS Retail carries out activities to meet customer expectations at each stage of the value chain from store entry to exit, and continually improves based on Customer Feedback." },
-                                    { img: require("@/assets/images/dummy/gsrsu030303_2.png"), tit: "Value Sharing and Communication", subTit: "Establishing Value Sharing and an Open Communication Culture", desc: "Establishing Value Sharing and an Open Communication Culture<br />All leaders at GS Retail hold a weekly Morning Talk and a monthly Connecting Day with their members." },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_2.png"), tit: "Value Sharing and Communication", subTit: "Establishing Value Sharing and an Open Communication Culture", desc: "Establishing Value Sharing and an Open Communication Culture All leaders at GS Retail hold a weekly Morning Talk and a monthly Connecting Day with their members." },
                                     { img: require("@/assets/images/dummy/gsrsu030303_3.png"), tit: "Service Boom-Up Activities", subTit: "Conducting various service programs involving the participation of customers and employees"/* 260604 번역 */, desc: "Under the philosophy that satisfied employees deliver exceptional service, various pride-building programs are conducted." },
                                     { img: require("@/assets/images/dummy/gsrsu030303_4.png"), tit: "Internal Employee Satisfaction", subTit: "Various Pride-Building Projects", desc: "Under the philosophy that satisfied employees deliver exceptional service, various pride-building programs are conducted." }
                                 ]
@@ -3435,8 +3449,8 @@ export default {
                                     { year: "2016", month: "September"/* 260604 번역 */, desc: "GS Retail Inducted into the Korea Management Awards Hall of Fame (Korea Management Association)"/* 260604 번역 */ }
                                 ],
                                 Marks: [
-                                    { img: require("@/assets/images/dummy/gsrsu030303_logo1.png"), tit: "ISO 9001 Certification Obtained <br/>(Korea Management Registrar Inc.)"/* 260604 번역 */, date: "2021. 05" },
-                                    { img: require("@/assets/images/dummy/gsrsu030303_logo2.png"), tit: "Korea Brand Award <br/>(Ministry of Trade, Industry and Energy)"/* 260604 번역 */, date: "2019. 12" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo1.png"), tit: "ISO 9001 Certification Obtained (Korea Management Registrar Inc.)"/* 260604 번역 */, date: "2021. 05" },
+                                    { img: require("@/assets/images/dummy/gsrsu030303_logo2.png"), tit: "Korea Brand Award (Ministry of Trade, Industry and Energy)"/* 260604 번역 */, date: "2019. 12" },
                                     { img: require("@/assets/images/dummy/gsrsu030303_logo3.png"), tit: "GS Retail Inducted into the Hall of Fame in the Comprehensive Distribution Category at the Korea Service Awards for the First Time (Korean Standards Association)"/* 260604 번역 */, date: "2019. 07" },
                                     { img: require("@/assets/images/dummy/gsrsu030303_logo4.png"), tit: "Grand Prize in the Fresh Food Shopping Mall Category at the National Service Awards (Institute for Industrial Policy Studies)"/* 260604 번역 */, date: "2019. 06" },
                                     { img: require("@/assets/images/dummy/gsrsu030303_logo5.png"), tit: "GS Retail Inducted into the Korea Management Awards Hall of Fame (Korea Management Association)"/* 260604 번역 */, date: "2016. 09" }
@@ -3635,7 +3649,7 @@ export default {
         },
         handleDownload(link) {
             if (!link) {
-                alert("연결된 파일이 없습니다.");
+                alert(this.t.alertNoFile);
                 return;
             }
             window.open(link, '_blank');

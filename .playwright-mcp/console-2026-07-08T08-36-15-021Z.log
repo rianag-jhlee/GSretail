@@ -1,0 +1,7 @@
+[     604ms] [WARNING] [Vue Router warn]: The route named "Guide_wrap" has a child without a name and an empty path. Using that name won't render the empty path child so you probably want to move the name to the child instead. If this is intentional, add a name to the child route to remove the warning. @ webpack-internal:///./node_modules/vue-router/dist/devtools-EWN81iOl.mjs:142
+[     713ms] [WARNING] [Vue warn]: Property "lang" was accessed during render but is not defined on instance. 
+  at <GsTheFreshBrand onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< undefined > lang="ko" > 
+  at <RouterView> 
+  at <App onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< undefined > lang="ko" > 
+  at <RouterView> 
+  at <App> @ webpack-internal:///./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js:252

@@ -2,7 +2,7 @@
     <div class="modal_cont fridge_modal">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -59,6 +59,7 @@ export default {
             isMobile: false,
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "나만의 냉장고",
                     CaseTitle: "나만의 냉장고 100% 활용법",
                     CaseSteps: [
@@ -97,6 +98,7 @@ export default {
                     ],
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "My Refrigerator",
                     CaseTitle: "From storing free gifts to gifting them",
                     CaseDesc: "100% My Fridge utilization tips",
@@ -141,7 +143,7 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     mounted() {
         this.checkMobile();

@@ -1,0 +1,340 @@
+- generic [ref=f26e3]:
+  - list [ref=f26e4]:
+    - listitem [ref=f26e5]:
+      - link "본문 바로가기" [ref=f26e6] [cursor=pointer]:
+        - /url: "#content_wrap"
+    - listitem [ref=f26e7]:
+      - link "주메뉴 바로가기" [ref=f26e8] [cursor=pointer]:
+        - /url: "#gnb_nav"
+  - banner [ref=f26e9]:
+    - generic [ref=f26e10]:
+      - heading "GS리테일" [level=1] [ref=f26e11]:
+        - link "GS리테일" [ref=f26e12] [cursor=pointer]:
+          - /url: /
+      - navigation [ref=f26e13]:
+        - list [ref=f26e14]:
+          - listitem [ref=f26e15]:
+            - link "회사소개" [ref=f26e16] [cursor=pointer]:
+              - /url: /gsrab01
+            - generic:
+              - list:
+                - listitem:
+                  - link "경영이념 및 가치체계":
+                    - /url: /gsrab02
+                - listitem:
+                  - link "CEO 인사말":
+                    - /url: /gsrab01
+                - listitem:
+                  - link "기업 연혁":
+                    - /url: /gsrab03
+                - listitem:
+                  - link "수상 이력":
+                    - /url: /gsrab06
+                - listitem:
+                  - link "기업 CI/BI":
+                    - /url: /gsrab04
+                - listitem:
+                  - link "오시는 길":
+                    - /url: /gsrab05
+          - listitem [ref=f26e17]:
+            - link "사업영역" [ref=f26e18] [cursor=pointer]:
+              - /url: /gsrbr010101
+            - generic:
+              - list:
+                - listitem:
+                  - link "GS25":
+                    - /url: /gsrbr010101
+                - listitem:
+                  - link "GS THE FRESH":
+                    - /url: /gsrbr020101
+                - listitem:
+                  - link "GS SHOP":
+                    - /url: /gsrbr0301
+                - listitem:
+                  - link "우리동네GS":
+                    - /url: /gsrbr04
+                - listitem:
+                  - link "개발/임대 사업":
+                    - /url: /gsrbr1101
+          - listitem [ref=f26e19]:
+            - link "지속가능경영" [ref=f26e20] [cursor=pointer]:
+              - /url: /gsrsu0101
+            - generic:
+              - list:
+                - listitem:
+                  - link "지속가능경영":
+                    - /url: /gsrsu0101
+                - listitem:
+                  - link "환경":
+                    - /url: /gsrsu0201
+                - listitem:
+                  - link "사회적 책임":
+                    - /url: /gsrsu03010101
+                - listitem:
+                  - link "정도경영":
+                    - /url: /gsrsu040101
+          - listitem [ref=f26e21]:
+            - link "투자정보" [ref=f26e22] [cursor=pointer]:
+              - /url: /gsrin0100
+            - generic:
+              - list:
+                - listitem:
+                  - link "이사회 의장 인사말":
+                    - /url: /gsrin0100
+                - listitem:
+                  - link "기업지배구조":
+                    - /url: /gsrin0101
+                - listitem:
+                  - link "경영성과":
+                    - /url: /gsrin0201
+                - listitem:
+                  - link "공시정보":
+                    - /url: /gsrin0301
+                - listitem:
+                  - link "IR자료실":
+                    - /url: /gsrin04
+          - listitem [ref=f26e23]:
+            - link "미디어" [ref=f26e24] [cursor=pointer]:
+              - /url: /gsrne01
+            - generic:
+              - list:
+                - listitem:
+                  - link "보도자료":
+                    - /url: /gsrne01
+                - listitem:
+                  - link "뉴스룸":
+                    - /url: /gsrne02
+                - listitem:
+                  - link "스토리":
+                    - /url: /gsrne03
+      - generic [ref=f26e25]:
+        - list [ref=f26e26]:
+          - listitem [ref=f26e27]:
+            - link "채용문의" [ref=f26e28] [cursor=pointer]:
+              - /url: https://gsretail.recruiter.co.kr/career/home
+        - list [ref=f26e29]:
+          - listitem [ref=f26e30]:
+            - button "KO" [ref=f26e31] [cursor=pointer]
+          - listitem [ref=f26e32]:
+            - button "EN" [ref=f26e33] [cursor=pointer]
+  - generic [ref=f26e36]:
+    - heading "정도경영" [level=2] [ref=f26e38]
+    - generic [ref=f26e39]:
+      - list [ref=f26e41]:
+        - listitem [ref=f26e42]:
+          - link "윤리경영" [ref=f26e43] [cursor=pointer]:
+            - /url: javascript:void(0);
+        - listitem [ref=f26e44]:
+          - link "준법경영" [ref=f26e45] [cursor=pointer]:
+            - /url: javascript:void(0);
+      - list [ref=f26e47]:
+        - listitem [ref=f26e48]:
+          - link "소개" [ref=f26e49] [cursor=pointer]:
+            - /url: javascript:void(0);
+        - listitem [ref=f26e50]:
+          - link "지침" [ref=f26e51] [cursor=pointer]:
+            - /url: javascript:void(0);
+        - listitem [ref=f26e52]:
+          - link "제도" [ref=f26e53] [cursor=pointer]:
+            - /url: javascript:void(0);
+        - listitem [ref=f26e54]:
+          - link "제보" [ref=f26e55] [cursor=pointer]:
+            - /url: javascript:void(0);
+      - generic "윤리경영" [ref=f26e56]:
+        - generic "소개" [ref=f26e57]:
+          - banner [ref=f26e58]:
+            - heading "GS리테일은 투명하고, 공정하며, 합리적인 사고와 실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다." [level=2] [ref=f26e59]:
+              - text: GS리테일은 투명하고, 공정하며, 합리적인 사고와
+              - text: 실행력을 통해 윤리경영을 최우선 기본 가치로 실현합니다.
+          - generic [ref=f26e60]:
+            - heading "목적과 취지" [level=3] [ref=f26e62]
+            - list [ref=f26e63]:
+              - listitem [ref=f26e64]:
+                - strong [ref=f26e65]: 정당성 획득
+                - paragraph [ref=f26e66]:
+                  - text: 기업의 존재가치에 대한 사회적
+                  - text: 정당성 획득의 기반을 갖춘다.
+              - listitem [ref=f26e67]:
+                - strong [ref=f26e68]: 경쟁력 향상
+                - paragraph [ref=f26e69]:
+                  - text: 장기적인 측면에서 기업 및
+                  - text: 국가의 경쟁력을 향상시킨다.
+              - listitem [ref=f26e70]:
+                - strong [ref=f26e71]: 마찰과 갈등해소
+                - paragraph [ref=f26e72]:
+                  - text: 행동에 대한 올바른 기본을
+                  - text: 제시함으로써 구성원간의 마찰과
+                  - text: 갈등을 해소할 수 있다.
+          - region "정도경영 연혁" [ref=f26e73]:
+            - generic [ref=f26e74]:
+              - heading "연혁" [level=3] [ref=f26e75]
+              - paragraph [ref=f26e76]: GS그룹의 정도경영 추진 방침에 따라 당사도 1995년도부터 해당 방침에 따른 다양한 활동을 전개 해 나가고 있습니다.
+            - list [ref=f26e77]:
+              - listitem [ref=f26e78]:
+                - strong [ref=f26e80]: 2016 ~ 현재
+                - list [ref=f26e82]:
+                  - listitem [ref=f26e83]:
+                    - paragraph [ref=f26e84]: 당사주요활동
+                    - generic [ref=f26e86]:
+                      - term
+                      - definition [ref=f26e87]: 상시모니터링 시스템 도입
+                  - listitem [ref=f26e88]:
+                    - paragraph [ref=f26e89]
+                    - generic [ref=f26e91]:
+                      - term
+                      - definition [ref=f26e92]: Fair DNA 캠페인 진행
+                  - listitem [ref=f26e93]:
+                    - paragraph [ref=f26e94]
+                    - generic [ref=f26e96]:
+                      - term
+                      - definition [ref=f26e97]: 자회사 정도경영 활동 지원
+                  - listitem [ref=f26e98]:
+                    - paragraph [ref=f26e99]
+                    - generic [ref=f26e101]:
+                      - term
+                      - definition [ref=f26e102]: 윤리규범 및 청렴규정 제정('21.7월)
+                  - listitem [ref=f26e103]:
+                    - paragraph [ref=f26e104]
+                    - generic [ref=f26e106]:
+                      - term
+                      - definition [ref=f26e107]: 전사 직책자 대상 정도경영 항목 평가 반영('21~)
+              - listitem [ref=f26e108]:
+                - generic [ref=f26e109]:
+                  - strong [ref=f26e110]: 2003 ~ 2015
+                  - paragraph [ref=f26e111]: 지속적인 추진
+                - list [ref=f26e113]:
+                  - listitem [ref=f26e114]:
+                    - paragraph [ref=f26e115]: 그룹주요활동
+                    - generic [ref=f26e117]:
+                      - term
+                      - definition [ref=f26e118]: 정도경영 TFT 발족 ('03.4월)
+                  - listitem [ref=f26e119]:
+                    - paragraph [ref=f26e120]
+                    - generic [ref=f26e122]:
+                      - term
+                      - definition [ref=f26e123]: 윤리규범 실천 및 자매사의 공정/투명성 감사 강화
+                  - listitem [ref=f26e124]:
+                    - paragraph [ref=f26e125]: 당사주요활동
+                    - generic [ref=f26e127]:
+                      - term
+                      - definition [ref=f26e128]: 부정비리적발감사에서 사전업무 진단위주로 업무전환
+                  - listitem [ref=f26e129]:
+                    - paragraph [ref=f26e130]
+                    - generic [ref=f26e132]:
+                      - term
+                      - definition [ref=f26e133]: 정도경영 사이트 구축('03. 7월)
+                  - listitem [ref=f26e134]:
+                    - paragraph [ref=f26e135]
+                    - generic [ref=f26e137]:
+                      - term
+                      - definition [ref=f26e138]: GS리테일 포브스 경영품질 대상 윤리경영부문 1위('07.8월)
+              - listitem [ref=f26e139]:
+                - generic [ref=f26e140]:
+                  - strong [ref=f26e141]: 2002 ~ 2003
+                  - paragraph [ref=f26e142]: 윤리규범 실천기반 조성
+                - list [ref=f26e144]:
+                  - listitem [ref=f26e145]:
+                    - paragraph [ref=f26e146]: 그룹주요활동
+                    - generic [ref=f26e148]:
+                      - term
+                      - definition [ref=f26e149]: 평가 반영 시스템 운영
+                  - listitem [ref=f26e150]:
+                    - paragraph [ref=f26e151]
+                    - generic [ref=f26e153]:
+                      - term
+                      - definition [ref=f26e154]: 윤리규범 준수 실천 여부에 대한 확인 감사
+                  - listitem [ref=f26e155]:
+                    - paragraph [ref=f26e156]: 당사주요활동
+                    - generic [ref=f26e158]:
+                      - term
+                      - definition [ref=f26e159]: "'02년 7월 3사 통합 후 윤리규범 세무실천지침 제정 후 공포 ('02.8월)"
+                  - listitem [ref=f26e160]:
+                    - paragraph [ref=f26e161]
+                    - generic [ref=f26e163]:
+                      - term
+                      - definition [ref=f26e164]: 전 임직원 윤리규범실천서약
+                  - listitem [ref=f26e165]:
+                    - paragraph [ref=f26e166]
+                    - generic [ref=f26e168]:
+                      - term
+                      - definition [ref=f26e169]: 경력 및 신입사원 윤리규범교육 지속 실시
+              - listitem [ref=f26e170]:
+                - generic [ref=f26e171]:
+                  - strong [ref=f26e172]: 1995 ~ 2001
+                  - paragraph [ref=f26e173]: 윤리규범 실천기반 조성
+                - list [ref=f26e175]:
+                  - listitem [ref=f26e176]:
+                    - paragraph [ref=f26e177]: 그룹주요활동
+                    - generic [ref=f26e179]:
+                      - term
+                      - definition [ref=f26e180]: "'93년 공정, 정직, 성실 보고"
+                  - listitem [ref=f26e181]:
+                    - paragraph [ref=f26e182]
+                    - generic [ref=f26e184]:
+                      - term
+                      - definition [ref=f26e185]: "'95년 윤리규범 제정 선포공정거래제도 완비"
+                  - listitem [ref=f26e186]:
+                    - paragraph [ref=f26e187]: 당사주요활동
+                    - generic [ref=f26e189]:
+                      - term
+                      - definition [ref=f26e190]: "윤리규범 추진부서 : 감사팀('96)"
+                  - listitem [ref=f26e191]:
+                    - paragraph [ref=f26e192]
+                    - generic [ref=f26e194]:
+                      - term
+                      - definition [ref=f26e195]: "'96.4月 윤리규범 교육 및 실천의지 다짐 : 전사 대리이상"
+                  - listitem [ref=f26e196]:
+                    - paragraph [ref=f26e197]
+                    - generic [ref=f26e199]:
+                      - term
+                      - definition [ref=f26e200]: 불공정사례 신고센터 운영 부정, 비리관련 내부감사 지속
+  - contentinfo [ref=f26e205]:
+    - generic [ref=f26e206]:
+      - list [ref=f26e208]:
+        - listitem [ref=f26e209]:
+          - link "개인정보처리방침" [ref=f26e210] [cursor=pointer]:
+            - /url: "#none"
+        - listitem [ref=f26e211]:
+          - link "GS SHOP 시청자 관련" [ref=f26e212] [cursor=pointer]:
+            - /url: gsrcm0401
+        - listitem [ref=f26e213]:
+          - link "정도경영제보" [ref=f26e214] [cursor=pointer]:
+            - /url: gsrsu040101
+        - listitem [ref=f26e215]:
+          - link "공지사항" [ref=f26e216] [cursor=pointer]:
+            - /url: gsrnotice
+        - listitem [ref=f26e217]:
+          - link "사이트맵" [ref=f26e218] [cursor=pointer]:
+            - /url: "#none"
+      - generic [ref=f26e219]:
+        - strong [ref=f26e220]: ※ 고객센터 대표전화
+        - generic [ref=f26e221]:
+          - generic [ref=f26e222]:
+            - term [ref=f26e223]: GS25
+            - definition [ref=f26e224]: 080-999-5425
+          - generic [ref=f26e225]:
+            - term [ref=f26e226]: GS SHOP
+            - definition [ref=f26e227]: 080-414-4545
+          - generic [ref=f26e228]:
+            - term [ref=f26e229]: GS THE FRESH
+            - definition [ref=f26e230]: 080-345-7700
+      - generic [ref=f26e231]:
+        - generic [ref=f26e232]:
+          - strong [ref=f26e233]: (주)GS리테일
+          - generic [ref=f26e234]: 서울시 강남구 논현로 508(역삼동 679번지 GS강남타워)
+          - generic [ref=f26e235]: 대표이사 허서홍
+          - generic [ref=f26e236]: 사업자등록번호 116-81-18746
+        - paragraph [ref=f26e237]: Copyright ⓒGS Retail. All rights reserved.
+      - button "FAMILY SITE" [ref=f26e239] [cursor=pointer]
+    - generic [ref=f26e240]:
+      - list:
+        - listitem [ref=f26e241]:
+          - link "점포 창업 안내" [ref=f26e242] [cursor=pointer]:
+            - /url: gsrst_smain
+        - listitem [ref=f26e243]:
+          - link "상품 입점 상담" [ref=f26e244] [cursor=pointer]:
+            - /url: gsrse01
+        - listitem [ref=f26e245]:
+          - link "고객센터" [ref=f26e246] [cursor=pointer]:
+            - /url: gsrcu01
+      - button [ref=f26e247] [cursor=pointer]

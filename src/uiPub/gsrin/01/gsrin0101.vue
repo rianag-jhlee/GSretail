@@ -402,6 +402,7 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "기업지배구조",
+                    PreparingFile: "파일을 준비 중입니다.",
                     MainDesc: [
                         "GS리테일은<br/> 기업지배구조헌장에 의거, <br/>건전한 지배구조를 <br/>확립하고 있습니다",
                         "GS리테일은<br/> 투명한 경영 문화 정착을 위해,<br/>이사회 중심 경영을<br/> 실천하고 있습니다.",
@@ -860,6 +861,7 @@ export default {
                 },
                 en: {
                     MainTitle: "Corporate Governance",
+                    PreparingFile: "The file is being prepared."/* 260708 번역 */,
                     MainDesc: [
                         "GS Retail establishes a sound corporate governance structure in accordance with its Corporate Governance Charter.",
                         "GS Retail is committed to board-centric management to foster a culture of transparent governance.",
@@ -867,7 +869,7 @@ export default {
                         "GS Retail is committed to continuously strengthening its corporate governance in pursuit of sustainable management."
                     ],
                     // 26.06.08 add 정다희
-                    Tabs1: [{ item: "" }, { item: "Corporate Governance Charter" }, { item: "Board and Committee Composition" }, { item: "Board Evaluation" }, { item: "Differences from Governance Best Practice Guidelines" }],
+                    Tabs1: [{ item: "Message from the Chairman of the Board of Directors"/* 260708 번역 */ }, { item: "Corporate Governance Charter" }, { item: "Board and Committee Composition" }, { item: "Board Evaluation" }, { item: "Differences from Governance Best Practice Guidelines" }],
                     tab1Url: "gsrin0100",
                     
                     // [Tab 1] 지배구조헌장 전체 데이터 (KO)
@@ -972,7 +974,7 @@ export default {
                         {
                             title: "Supplementary Provisions (2021.2.8)",
                             content: [
-                                { subTitle: "Supplementary Provisions (2021.2.8)<br />Article 1 (Effective Date) This Charter shall take effect from February 8, 2021.", list: [] }
+                                { subTitle: "Supplementary Provisions (2021.2.8) Article 1 (Effective Date) This Charter shall take effect from February 8, 2021.", list: [] }
                             ]
                         }
                     ],
@@ -1192,7 +1194,7 @@ export default {
         },
         handleDownload(link) {
             if (!link || link === "#") {
-                alert("파일을 준비 중입니다.");
+                alert(this.t.PreparingFile);
                 return;
             }
 

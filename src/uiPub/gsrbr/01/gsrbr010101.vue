@@ -477,7 +477,7 @@
             <div class="diff_bottom_row">
                 <div v-if="tab3.qr" class="diff_qr_row">
                     <figure aria-hidden="true">
-                        <img :src="isMobileView ? imgQrMo : imgQrPc" alt="앱 다운로드 QR코드" width="74" height="74" />
+                        <img :src="isMobileView ? imgQrMo : imgQrPc" :alt="t.aQr" width="74" height="74" />
                     </figure>
                     <div>
                         <strong>{{ tab3.qr.title }}</strong>
@@ -586,7 +586,7 @@
         <!-- 생활 서비스 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 0" class="brand_panel pop_panel">
             <!-- 3depth 탭 네비 -->
-            <nav class="service_tab_wrap" ref="serviceWrapEl" role="tablist" aria-label="생활 서비스">
+            <nav class="service_tab_wrap" ref="serviceWrapEl" role="tablist" :aria-label="t.aLifeService">
                 <div class="service_tab_list" ref="serviceListEl" :style="serviceTransformStyle"
                      @touchstart.passive="serviceOnTouchStart" @touchmove.passive="serviceOnTouchMove"
                      @mousedown="serviceOnMouseDown">
@@ -674,7 +674,7 @@
                         <p v-if="tab.pageDesc" v-html="tab.pageDesc" />
                     </header>
                     <div class="pop_wrap">
-                        <nav class="pop_lnb" aria-label="팝카드 메뉴">
+                        <nav class="pop_lnb" :aria-label="t.aPopcard">
                             <ul>
                                 <li v-for="(lnb, li) in tab.lnbItems" :key="li">
                                     <button
@@ -1081,8 +1081,8 @@
                         <h2 v-html="tab.title"></h2>
                         <p v-if="tab.desc" v-html="tab.desc" />
                         <ul class="list_caution">
-                            <li>* 하이플러스카드에서 출시한 모든 카드를 충전하실 수 있습니다. (http://www.hipluscard.co.kr/)</li>
-                            <li>* 하이패스카드(자동충전) 및 단말기를 구매하실 수 있습니다.</li>
+                            <li>{{ t.hipassCharge1 }}</li>
+                            <li>{{ t.hipassCharge2 }}</li>
                         </ul>
                     </header>
                     <section class="hi_pass">
@@ -1217,7 +1217,7 @@
 
         <!-- 택배&픽업 -->
         <div v-show="depth1ActiveIdx === 2 && storeActiveTab === 1" class="brand_panel delivery_panel">
-            <nav class="service_tab_wrap" ref="deliveryWrapEl" role="tablist" aria-label="택배&픽업 서비스">
+            <nav class="service_tab_wrap" ref="deliveryWrapEl" role="tablist" :aria-label="t.aDelivery">
                 <div class="service_tab_list" ref="deliveryListEl" :style="deliveryTransformStyle"
                      @touchstart.passive="deliveryOnTouchStart" @touchmove.passive="deliveryOnTouchMove"
                      @mousedown="deliveryOnMouseDown">
@@ -1507,7 +1507,7 @@
         <!-- 상생협력: 운영지원제도 -->
         <div v-show="depth1ActiveIdx === 3 && winwinActiveTab === 0" class="brand_panel winwin_panel">
             <!-- 3depth 탭 네비 -->
-            <nav class="service_tab_wrap" ref="winwinWrapEl" role="tablist" aria-label="운영지원제도">
+            <nav class="service_tab_wrap" ref="winwinWrapEl" role="tablist" :aria-label="t.aWinwin">
                 <div class="service_tab_list" ref="winwinListEl" :style="winwinTransformStyle"
                      @touchstart.passive="winwinOnTouchStart" @touchmove.passive="winwinOnTouchMove"
                      @mousedown="winwinOnMouseDown">
@@ -1588,7 +1588,7 @@
                         <div class="imgcard_body">
                             <h4>
                                 {{ item.name }}
-                                <a v-if="item.link" :href="item.link" target="_blank" class="imgcard_link" aria-label="링크 바로가기"></a>
+                                <a v-if="item.link" :href="item.link" target="_blank" class="imgcard_link" :aria-label="t.aLink"></a>
                             </h4>
                             <p v-if="item.desc" class="imgcard_desc" v-html="item.desc"></p>
                         </div>
@@ -1798,6 +1798,14 @@ const ph = (n) => Array.from({ length: n }, () => ({ brand: "", logo: null }));
 
 const langData = {
     ko: {
+        aQr: "앱 다운로드 QR코드",
+        aLifeService: "생활 서비스",
+        aPopcard: "팝카드 메뉴",
+        aDelivery: "택배&픽업 서비스",
+        aWinwin: "운영지원제도",
+        aLink: "링크 바로가기",
+        hipassCharge1: "* 하이플러스카드에서 출시한 모든 카드를 충전하실 수 있습니다. (http://www.hipluscard.co.kr/)",
+        hipassCharge2: "* 하이패스카드(자동충전) 및 단말기를 구매하실 수 있습니다.",
         nav: {
             depth1: [
                 { item: "차별화 상품" },
@@ -3197,6 +3205,14 @@ const langData = {
         backLabel: "목록으로 돌아가기",
     },
     en: {
+        aQr: "App download QR code"/* 260708 번역 */,
+        aLifeService: "Living Services"/* 260708 번역 */,
+        aPopcard: "Pop Card Menu"/* 260708 번역 */,
+        aDelivery: "Delivery & Pickup Services"/* 260708 번역 */,
+        aWinwin: "Operation Support System"/* 260708 번역 */,
+        aLink: "Go to link"/* 260708 번역 */,
+        hipassCharge1: "* You can recharge all cards issued by Hi-plus Card. (http://www.hipluscard.co.kr/)"/* 260708 번역 */,
+        hipassCharge2: "* You can purchase Hi-pass cards (auto-recharge) and terminals."/* 260708 번역 */,
         nav: {
             depth1: [
                 { item: "Differentiated Products" },
@@ -3467,9 +3483,46 @@ const langData = {
                 },
                 {
                     title: "Advantages of Operating Fresh Concept Stores",
-                    // 26.06.08 add 정다희 : 컨텐츠 수정으로 영문 삭제
                     advantageCards: [
-
+                        {
+                            title: "A wider product assortment than typical convenience stores"/* 260708 번역 */,
+                            desc: "Additionally offers 400–500 items exclusive to fresh concept stores<br class=\"m_br\" /><br />(fresh products and grocery-related items such as tofu, namul, and seasonings)"/* 260708 번역 */,
+                            table: {
+                                headers: ["Category", "Fresh Products", "Manufactured Goods"]/* 260708 번역 */,
+                                rows: [
+                                    {
+                                        label: "Product<br />Assortment"/* 260708 번역 */,
+                                        cols: [
+                                            "Convenience store items +<br />190 exclusive<br class=\"m_br\" />items"/* 260708 번역 */,
+                                            "Convenience store items +<br />220 exclusive<br class=\"m_br\" />items"/* 260708 번역 */,
+                                        ],
+                                    },
+                                ],
+                            },
+                        },
+                        {
+                            title: "Improved efficiency in fresh product operations"/* 260708 번역 */,
+                            items: [
+                                { desc: "Increased efficiency in price-tag updates <br class=\"p_br\"/>through the introduction of electronic shelf labels"/* 260708 번역 */, img: imgSinsen01, imgMo: imgSinsen01Mo },
+                                { desc: "Operating closing-discount printers <br class=\"p_br\"/>to ease the burden of fresh product disposal"/* 260708 번역 */, img: imgSinsen02, imgMo: imgSinsen02Mo },
+                            ],
+                        },
+                        {
+                            title: "Operating equipment dedicated to fresh products"/* 260708 번역 */,
+                            desc: "By providing refrigerated and room-temperature dedicated fixtures, it is possible to handle fresh products <br class=\"p_br\" />that are difficult to manage at other convenience stores (bulk fruit, meat, seafood, etc.)"/* 260708 번역 */,
+                            items: [
+                                { img: imgSinsen03, imgMo: imgSinsen03Mo, caption: "[Refrigerated fixtures]"/* 260708 번역 */ },
+                                { img: imgSinsen04, imgMo: imgSinsen04Mo, caption: "[Room-temperature fixtures]"/* 260708 번역 */ },
+                            ],
+                        },
+                        {
+                            title: "Running promotions exclusive to fresh concept stores"/* 260708 번역 */,
+                            desc: "In addition to regular promotions, weekly promotions exclusive to fresh concept stores<br />are also run (fresh products &amp; manufactured goods)"/* 260708 번역 */,
+                            items: [
+                                { img: imgSinsen05, imgMo: imgSinsen05Mo, caption: "[Fresh flyer promotion]"/* 260708 번역 */ },
+                                { img: imgSinsen06, imgMo: imgSinsen06Mo, caption: "[Manufactured goods flyer promotion]"/* 260708 번역 */ },
+                            ],
+                        },
                     ],
                 },
             ],

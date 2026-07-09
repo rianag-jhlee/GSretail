@@ -1,0 +1,218 @@
+- generic [ref=f50e3]:
+  - list [ref=f50e4]:
+    - listitem [ref=f50e5]:
+      - link "본문 바로가기" [ref=f50e6] [cursor=pointer]:
+        - /url: "#content_wrap"
+    - listitem [ref=f50e7]:
+      - link "주메뉴 바로가기" [ref=f50e8] [cursor=pointer]:
+        - /url: "#gnb_nav"
+  - banner [ref=f50e9]:
+    - generic [ref=f50e10]:
+      - heading "GS리테일" [level=1] [ref=f50e11]:
+        - link "GS리테일" [ref=f50e12] [cursor=pointer]:
+          - /url: /
+      - navigation [ref=f50e13]:
+        - list [ref=f50e14]:
+          - listitem [ref=f50e15]:
+            - link "회사소개" [ref=f50e16] [cursor=pointer]:
+              - /url: /gsrab01
+            - generic:
+              - list:
+                - listitem:
+                  - link "경영이념 및 가치체계":
+                    - /url: /gsrab02
+                - listitem:
+                  - link "CEO 인사말":
+                    - /url: /gsrab01
+                - listitem:
+                  - link "기업 연혁":
+                    - /url: /gsrab03
+                - listitem:
+                  - link "수상 이력":
+                    - /url: /gsrab06
+                - listitem:
+                  - link "기업 CI/BI":
+                    - /url: /gsrab04
+                - listitem:
+                  - link "오시는 길":
+                    - /url: /gsrab05
+          - listitem [ref=f50e17]:
+            - link "사업영역" [ref=f50e18] [cursor=pointer]:
+              - /url: /gsrbr010101
+            - generic:
+              - list:
+                - listitem:
+                  - link "GS25":
+                    - /url: /gsrbr010101
+                - listitem:
+                  - link "GS THE FRESH":
+                    - /url: /gsrbr020101
+                - listitem:
+                  - link "GS SHOP":
+                    - /url: /gsrbr0301
+                - listitem:
+                  - link "우리동네GS":
+                    - /url: /gsrbr04
+                - listitem:
+                  - link "개발/임대 사업":
+                    - /url: /gsrbr1101
+          - listitem [ref=f50e19]:
+            - link "지속가능경영" [ref=f50e20] [cursor=pointer]:
+              - /url: /gsrsu0101
+            - generic:
+              - list:
+                - listitem:
+                  - link "지속가능경영":
+                    - /url: /gsrsu0101
+                - listitem:
+                  - link "환경":
+                    - /url: /gsrsu0201
+                - listitem:
+                  - link "사회적 책임":
+                    - /url: /gsrsu03010101
+                - listitem:
+                  - link "정도경영":
+                    - /url: /gsrsu040101
+          - listitem [ref=f50e21]:
+            - link "투자정보" [ref=f50e22] [cursor=pointer]:
+              - /url: /gsrin0100
+            - generic:
+              - list:
+                - listitem:
+                  - link "이사회 의장 인사말":
+                    - /url: /gsrin0100
+                - listitem:
+                  - link "기업지배구조":
+                    - /url: /gsrin0101
+                - listitem:
+                  - link "경영성과":
+                    - /url: /gsrin0201
+                - listitem:
+                  - link "공시정보":
+                    - /url: /gsrin0301
+                - listitem:
+                  - link "IR자료실":
+                    - /url: /gsrin04
+          - listitem [ref=f50e23]:
+            - link "미디어" [ref=f50e24] [cursor=pointer]:
+              - /url: /gsrne01
+            - generic:
+              - list:
+                - listitem:
+                  - link "보도자료":
+                    - /url: /gsrne01
+                - listitem:
+                  - link "뉴스룸":
+                    - /url: /gsrne02
+                - listitem:
+                  - link "스토리":
+                    - /url: /gsrne03
+      - generic [ref=f50e25]:
+        - list [ref=f50e26]:
+          - listitem [ref=f50e27]:
+            - link "채용문의" [ref=f50e28] [cursor=pointer]:
+              - /url: https://gsretail.recruiter.co.kr/career/home
+        - list [ref=f50e29]:
+          - listitem [ref=f50e30]:
+            - button "KO" [ref=f50e31] [cursor=pointer]
+          - listitem [ref=f50e32]:
+            - button "EN" [ref=f50e33] [cursor=pointer]
+  - generic [ref=f50e36]:
+    - heading "고객센터" [level=2] [ref=f50e38]
+    - generic [ref=f50e40]:
+      - article [ref=f50e41]:
+        - generic [ref=f50e42]:
+          - heading "안녕하세요! GS리테일 고객센터 입니다." [level=3] [ref=f50e43]:
+            - text: 안녕하세요!
+            - text: GS리테일 고객센터
+            - text: 입니다.
+          - paragraph [ref=f50e44]:
+            - text: 고객님 한분 한분의 의견을 소중하게 여기며,
+            - text: 고객님의 값진 한마디로 더욱 새롭게 거듭나겠습니다.
+          - emphasis [ref=f50e45]: ※ 고객센터 대표전화 (무료)
+        - list [ref=f50e46]:
+          - listitem [ref=f50e47]:
+            - generic [ref=f50e48]:
+              - heading "GS25" [level=4] [ref=f50e49]
+              - generic [ref=f50e50]:
+                - term [ref=f50e51]: 전화번호
+                - definition [ref=f50e52]: 080-999-5425
+                - term [ref=f50e53]: 운영시간
+                - definition [ref=f50e54]: · 평일 09:00~18:00 (공휴일 휴무)
+                - definition [ref=f50e55]:
+                  - text: · 픽업/배달 문의 10:00~23:00
+                  - text: (연중무휴)
+            - button "1:1 상담" [ref=f50e57] [cursor=pointer]
+          - listitem [ref=f50e58]:
+            - generic [ref=f50e59]:
+              - heading "GS SHOP" [level=4] [ref=f50e60]
+              - generic [ref=f50e61]:
+                - term [ref=f50e62]: 전화번호
+                - definition [ref=f50e63]: 080-414-4545
+                - term [ref=f50e64]: 운영시간
+                - definition [ref=f50e65]: · 24시간 콜센터
+                - definition
+            - button "1:1 상담" [ref=f50e67] [cursor=pointer]
+          - listitem [ref=f50e68]:
+            - generic [ref=f50e69]:
+              - heading "GS THE FRESH" [level=4] [ref=f50e70]
+              - generic [ref=f50e71]:
+                - term [ref=f50e72]: 전화번호
+                - definition [ref=f50e73]: 080-345-7700
+                - term [ref=f50e74]: 운영시간
+                - definition [ref=f50e75]:
+                  - text: · 평일, 주말, 공휴일 10:00~19:00
+                  - text: (명절 당일은 휴무)
+                - definition
+            - button "1:1 상담" [ref=f50e77] [cursor=pointer]
+      - button "기타 문의하기" [ref=f50e79] [cursor=pointer]
+  - contentinfo [ref=f50e81]:
+    - generic [ref=f50e82]:
+      - list [ref=f50e84]:
+        - listitem [ref=f50e85]:
+          - link "개인정보처리방침" [ref=f50e86] [cursor=pointer]:
+            - /url: "#none"
+        - listitem [ref=f50e87]:
+          - link "GS SHOP 시청자 관련" [ref=f50e88] [cursor=pointer]:
+            - /url: gsrcm0401
+        - listitem [ref=f50e89]:
+          - link "정도경영제보" [ref=f50e90] [cursor=pointer]:
+            - /url: gsrsu040101
+        - listitem [ref=f50e91]:
+          - link "공지사항" [ref=f50e92] [cursor=pointer]:
+            - /url: gsrnotice
+        - listitem [ref=f50e93]:
+          - link "사이트맵" [ref=f50e94] [cursor=pointer]:
+            - /url: "#none"
+      - generic [ref=f50e95]:
+        - strong [ref=f50e96]: ※ 고객센터 대표전화
+        - generic [ref=f50e97]:
+          - generic [ref=f50e98]:
+            - term [ref=f50e99]: GS25
+            - definition [ref=f50e100]: 080-999-5425
+          - generic [ref=f50e101]:
+            - term [ref=f50e102]: GS SHOP
+            - definition [ref=f50e103]: 080-414-4545
+          - generic [ref=f50e104]:
+            - term [ref=f50e105]: GS THE FRESH
+            - definition [ref=f50e106]: 080-345-7700
+      - generic [ref=f50e107]:
+        - generic [ref=f50e108]:
+          - strong [ref=f50e109]: (주)GS리테일
+          - generic [ref=f50e110]: 서울시 강남구 논현로 508(역삼동 679번지 GS강남타워)
+          - generic [ref=f50e111]: 대표이사 허서홍
+          - generic [ref=f50e112]: 사업자등록번호 116-81-18746
+        - paragraph [ref=f50e113]: Copyright ⓒGS Retail. All rights reserved.
+      - button "FAMILY SITE" [ref=f50e115] [cursor=pointer]
+    - generic [ref=f50e116]:
+      - list:
+        - listitem [ref=f50e117]:
+          - link "점포 창업 안내" [ref=f50e118] [cursor=pointer]:
+            - /url: gsrst_smain
+        - listitem [ref=f50e119]:
+          - link "상품 입점 상담" [ref=f50e120] [cursor=pointer]:
+            - /url: gsrse01
+        - listitem [ref=f50e121]:
+          - link "고객센터" [ref=f50e122] [cursor=pointer]:
+            - /url: gsrcu01
+      - button [ref=f50e123] [cursor=pointer]

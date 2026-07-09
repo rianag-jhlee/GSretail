@@ -2,7 +2,7 @@
     <div class="modal_cont wine25_modal">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -61,6 +61,7 @@ export default {
             isMobile: false,
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "와인25플러스",
                     IntroTitle: "내 손 안의 주류 플랫폼, <br/>와인25플러스",
                     IntroDesc: "와인, 양주, 맥주, 전통/기타주류, 페어링물(안주류)<br />원하는 주류를 원하는 날짜에, 원하는 매장에서 예약, 수령할 수 있는 서비스 (전국 GS25 편의점, GS THE FRESH 수퍼)",
@@ -82,6 +83,7 @@ export default {
                     ]
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "Wine25Plus",
                     IntroTitle: "Wine25Plus: Your Personal Alcohol Platform, Right at Your Fingertips",
                     IntroDesc: "Reserve and pick up wine, spirits, beer, traditional and other liquors, and food pairings (snacks) at your preferred store on your chosen date<br /> — available at GS25 and GS THE FRESH locations nationwide.",
@@ -106,7 +108,7 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData[this.lang] || this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     mounted() {
         this.checkMobile();

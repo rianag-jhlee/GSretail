@@ -280,6 +280,7 @@ export default {
                     ],
                     ListBack: "Back to Brand List",
                     str: {
+                        contTitle: "The joy of earning money while taking a walk, anytime and anywhere"/* 260708 번역 */,
                         headerTitle: "GS Retail's integrated O4O app 'Our Neighborhood GS'<br />connecting nearby stores to everyday life.",
                         /* 26.07.02 add 정다희 : 영문 sec_brand_str 설명 문구 추가 */
                         desc: "From products and food at GS25 and GS THE FRESH<br class=\"m_br\"/>to local restaurant delivery,<br />any adult can easily deliver without special equipment<br class=\"m_br\"/>through Our Neighborhood Delivery service.",

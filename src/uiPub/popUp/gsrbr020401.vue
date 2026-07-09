@@ -2,7 +2,7 @@
     <div class="modal_cont gsrbr020401">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -86,12 +86,12 @@
                             <label class="row_label">{{ t.LabelArea }}</label>
                             <div class="row_content area_row">
                                 <div class="area_item">
-                                    <span>계약면적</span>
+                                    <span>{{ t.hp01 }}</span>
                                     <Inputs type="text" v-model="form.areaContract" class="w134" />
                                     <span class="unit">m²</span>
                                 </div>
                                 <div class="area_item">
-                                    <span>전용면적</span>
+                                    <span>{{ t.hp02 }}</span>
                                     <Inputs type="text" v-model="form.areaPrivate" class="w134" />
                                     <span class="unit">m²</span>
                                 </div>
@@ -110,8 +110,8 @@
                                 <Textarea
                                     v-model="body"
                                     name="inquiry_body"
-                                    placeholder="내용을 입력해 주세요"
-                                    hint="최대 500자까지 입력할 수 있습니다."
+                                    :placeholder="t.PlaceholderBody"
+                                    :hint="t.HintBody"
                                     :rows="6"
                                     :maxlength="500"
                                 />
@@ -160,6 +160,7 @@ export default {
             },
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "입지제안",
                     Greeting: "안녕하세요!<br/>GS THE FRESH 입지상담 담당자입니다.",
                     SubDesc: "아래의 상담 신청서를 작성하시면 귀하만의 상담을 받아 보실 수 있습니다.<br/>상담신청 시, 담당자 확인 후 연락드리겠습니다.",
@@ -178,6 +179,8 @@ export default {
                     LabelName: "이름", LabelEmail: "이메일", LabelPhone: "휴대폰",
                     LabelAddress: "추천점포 소재지", LabelArea: "추천점포 면적", LabelStoreName: "점포상호", LabelFeature: "상권특징", LabelRelation: "건물주와의 관계",
                     BtnZip: "우편번호 찾기", BtnSubmit: "상담신청", BtnReset: "다시작성",
+                    hp01: "계약면적", hp02: "전용면적",
+                    PlaceholderBody: "내용을 입력해 주세요", HintBody: "최대 500자까지 입력할 수 있습니다.", AlertAgree: "동의 항목에 체크해주세요.",
                     PlaceholderAddrBasic: "기본주소", PlaceholderAddrDetail: "상세주소", PlaceholderRelation: "예: 본인 소유, 임차인 등",
                     AreaGuide: "* m² = (기준)평 x 3.3",
                     EmailOptions: [{ value: "", label: "직접입력" }, { value: "naver.com", label: "naver.com" }, { value: "gmail.com", label: "gmail.com" }],
@@ -187,6 +190,7 @@ export default {
                     FeatureOptions: [{ value: "", label: "선택하세요" }, { value: "feat01", label: "상권A" }]
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "Location Inquiry",
                     Greeting: "Hello!<br/>I am a GS THE FRESH location consultation representative."/* 260604 번역 */,
                     SubDesc: "Fill out the consultation request form below to receive a consultation tailored just for you.<br/>Once you submit your consultation request, our representative will review it and contact you."/* 260604 번역 */,
@@ -205,6 +209,8 @@ export default {
                     LabelName: "Name", LabelEmail: "Email", LabelPhone: "Mobile phone"/* 260604 번역 */,
                     LabelAddress: "Recommended store location"/* 260604 번역 */, LabelArea: "Recommended store area"/* 260604 번역 */, LabelStoreName: "Store name"/* 260604 번역 */, LabelFeature: "Commercial Area Characteristics"/* 260604 번역 */, LabelRelation: "Relationship with the Building Owner"/* 260604 번역 */,
                     BtnZip: "Find postal code"/* 260604 번역 */, BtnSubmit: "Consultation Request"/* 260604 번역 */, BtnReset: "Rewrite"/* 260604 번역 */,
+                    hp01: "Contract Area"/* 260708 번역 */, hp02: "Exclusive Area"/* 260708 번역 */,
+                    PlaceholderBody: "Please enter your content"/* 260708 번역 */, HintBody: "You can enter up to 500 characters."/* 260708 번역 */, AlertAgree: "Please check the consent items."/* 260708 번역 */,
                     PlaceholderAddrBasic: "Base Address"/* 260604 번역 */, PlaceholderAddrDetail: "Detailed address"/* 260604 번역 */, PlaceholderRelation: "e.g., owner-occupied, tenant, etc."/* 260604 번역 */,
                     AreaGuide: "* m² = (standard) pyeong x 3.3"/* 260604 번역 */,
                     EmailOptions: [{ value: "", label: "Enter directly" }, { value: "naver.com", label: "naver.com" }, { value: "gmail.com", label: "gmail.com" }],
@@ -217,13 +223,13 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     methods: {
         closeModal(event) { modal.close(event.currentTarget); },
         searchPost() { console.log("우편번호 찾기"); },
         submitForm() {
-            if (!this.form.isAgree) { alert("동의 항목에 체크해주세요."); return; }
+            if (!this.form.isAgree) { alert(this.t.AlertAgree); return; }
             console.log("제출", this.form);
         },
         resetForm() { this.form = { isAgree: false, name: "", emailId: "", emailDomain: "", emailDomainSelect: "", phone1: "010", phone2: "", phone3: "", zipCode: "", addrBasic: "", addrDetail: "", areaContract: "", areaPrivate: "", storeName: "", feature: "", relation: "" }; }

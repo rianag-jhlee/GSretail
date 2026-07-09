@@ -2,7 +2,7 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -32,7 +32,7 @@
                         <!-- 26.06.09 Edit 이종환 :  모바일 지도 영역 -->
                         <div class="store_map_mobile">
                             <div class="map_box">
-                                <!-- <img :src="store.mapImg" :alt="store.name + ' 지도'" /> -->
+                                <!-- <img :src="store.mapImg" :alt="store.name + t.mapSuffix" /> -->
                             </div>
                         </div>
                         <!-- //26.06.09 Edit 이종환 :  모바일 지도 영역 -->
@@ -59,8 +59,8 @@
 
                     <div class="store_map_pc" v-if="selectedIdx !== null">
                         <div class="map_box_sticky">
-                            <img :src="t.storeData[selectedIdx].mapImg" :alt="t.storeData[selectedIdx].name + ' 지도'" />
-                            <button type="button" class="btn_map_close" @click="selectedIdx = null">지도 닫기</button>
+                            <img :src="t.storeData[selectedIdx].mapImg" :alt="t.storeData[selectedIdx].name + t.mapSuffix" />
+                            <button type="button" class="btn_map_close" @click="selectedIdx = null">{{ t.mapClose }}</button>
                         </div>
                     </div>
                 </div>
@@ -101,6 +101,9 @@ export default {
             searchForm: { city: "서울", district: "", keyword: "" },
             langData: {
                 ko: {
+                    closeLabel: "닫기",
+                    mapClose: "지도 닫기",
+                    mapSuffix: " 지도",
                     MainTitle: "GS THE FRESH 매장찾기",
                     IntroText: "빠르고 편리하게 <br/>우리동네 GS THE FRESH(GS수퍼마켓)을 찾아보세요!",
                     CityOptions: [{ value: "서울", label: "서울" }, { value: "경기도", label: "경기도" }],
@@ -114,6 +117,9 @@ export default {
                     ]
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
+                    mapClose: "Close Map"/* 260708 번역 */,
+                    mapSuffix: " Map"/* 260708 번역 */,
                     MainTitle: "Find a GS THE FRESH Store",
                     IntroText: "Find your nearest GS THE FRESH (GS Supermarket) quickly and easily!",
                     CityOptions: [{ value: "Seoul", label: "Seoul" }, { value: "Gyeonggi Province", label: "Gyeonggi Province" }],
@@ -130,7 +136,7 @@ export default {
         };
     },
     computed: {
-        t() { return this.langData.ko; }
+        t() { return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko; }
     },
     methods: {
         closeModal(event) { modal.close(event.currentTarget); },

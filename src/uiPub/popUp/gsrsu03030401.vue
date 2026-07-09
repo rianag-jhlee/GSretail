@@ -2,7 +2,7 @@
     <div class="modal_cont">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -44,6 +44,7 @@ export default {
         return {
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "안전·보건 경영방침",
                     intro: 'GS리테일은 안전한 근무환경을 조성하여 사고 및 재해를 예방하고,\n모든 구성원(임직원, 협력사), 시민(고객, 일반시민)의 건강한\n삶의 질 향상을 위해 경영방침을 적극 실천한다.',
                     section1: {
@@ -62,6 +63,7 @@ export default {
                     
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "Safety and Health Management Policy",
                     intro: 'GS Retail is actively implementing its management policy to create a safe working environment, prevent accidents and disasters, and improve the quality of life and health of all members (employees and partner companies) and citizens (customers and the genal public).',
                     section1: {
@@ -85,7 +87,7 @@ export default {
     computed: { 
         t() { 
             // langData가 없거나, 해당 언어 데이터가 없을 경우를 모두 대비
-            const data = this.langData[this.lang] || this.langData.ko;
+            const data = this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko;
             return data || {}; 
         } 
     },
@@ -104,9 +106,9 @@ export default {
 .pop_space .section.first {padding-top:0}
 .pop_space .section:last-child {border-bottom:0}
 .pop_space .section .desc {font-size:15px;line-height:25px;white-space:pre-line;}
-.pop_space .section .smp_announcement>dl {overflow:hidden;margin-top:10px}
-.pop_space .section .smp_announcement>dl dt {float:left;background:#0072bc;border-radius:15px;color:#fff;text-align:center;width:42px;font-size:13px;line-height:19px}
-.pop_space .section .smp_announcement>dl dd {padding-left:50px;margin-bottom:7px;padding-bottom:7px;line-height:19px;font-size:15px}
+.pop_space .section .smp_announcement>dl {display:grid;grid-template-columns:auto 1fr;gap:7px 12px;margin-top:10px;align-items:start}
+.pop_space .section .smp_announcement>dl dt {justify-self:start;background:#0072bc;border-radius:15px;color:#fff;text-align:center;min-width:42px;padding:0 8px;box-sizing:border-box;font-size:13px;line-height:19px;white-space:nowrap}
+.pop_space .section .smp_announcement>dl dd {line-height:19px;font-size:15px}
 
 /* 모달 레이아웃 */
 .modal_cont {background-color: #fff;}

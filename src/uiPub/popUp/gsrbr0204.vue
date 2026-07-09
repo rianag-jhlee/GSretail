@@ -2,7 +2,7 @@
     <div class="modal_cont gsrbr0204">
         <div class="modal_header">
             {{ t.MainTitle }}
-            <a href="#none" @click="closeModal" class="btn_close">닫기</a>
+            <a href="#none" @click="closeModal" class="btn_close">{{ t.closeLabel }}</a>
         </div>
 
         <div class="modal_content">
@@ -48,6 +48,7 @@ export default {
         return {
             langData: {
                 ko: {
+                    closeLabel: "닫기",
                     MainTitle: "입지제안",
                     cards: [
                         { imgSrc: img01, alt: "GS25 로고", tit: "추천기준", desc: "지역 : 전국<br/>규모: 영업면적 10평 이상 임차점포", Btn:"입지제안 바로가기", link:"gsrst02010101" },
@@ -56,6 +57,7 @@ export default {
                     check: "확인",
                 },
                 en: {
+                    closeLabel: "Close"/* 260708 번역 */,
                     MainTitle: "Location Inquiry",
                     cards: [
                         { imgSrc: img01, alt: "GS25 Logo"/* 260604 번역 */, tit: "Recommendation criteria"/* 260604 번역 */, desc: "Region: Nationwide<br/>Size: Leased store with a business area of 10 pyeong or more"/* 260604 번역 */, Btn:"Go to location proposal"/* 260604 번역 */ },
@@ -68,7 +70,7 @@ export default {
     },
     computed: {
         t() {
-            return this.langData.ko;
+            return this.langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || this.langData.ko;
         }
     },
     methods: {

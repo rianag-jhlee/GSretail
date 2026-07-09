@@ -16,7 +16,8 @@
         <!-- //content -->
 
         <!-- footer -->
-        <Footer v-if="!isGuide" :lang="lang" />
+        <!-- 260708 임시(영문 확인용): Footer.vue en 블록 미완성으로 EN 전환 시 크래시 → EN에서 Footer 잠시 숨김. 개발팀이 Footer en 블록 완성하면 이 조건 원복(&& lang !== 'en' 제거). -->
+        <Footer v-if="!isGuide && lang !== 'en'" :lang="lang" />
     </div>
 </template>
 

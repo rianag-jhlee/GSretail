@@ -35,7 +35,7 @@
                                 <SelectBox v-model="selectedYear1" :options="t.YearOptions" />
                             </div>
 
-                            <Search v-model="searchData" :search_opt="t.options" @search="handleSearch"  placeholder="검색어 입력"/>
+                            <Search v-model="searchData" :search_opt="t.options" @search="handleSearch"  :placeholder="t.searchPlaceholder"/>
                         </div>
 
                         <div class="policy_wrap">
@@ -271,6 +271,7 @@ export default {
             langData: {
                 ko: {
                     MainTitle: "공시정보",
+                    searchPlaceholder: "검색어 입력",
                     MainsubTitle: "Disclosure Information",
                     Tabs1: [{ item: "공고" }, { item: "사업/감사보고서" }, { item: "공시정보" }],
                     // 26.06.10 edit 정다희 : 상단 Tabs1·InnerTabs 탭명과 분리된 콘텐츠 영역 제목 ([0]공고 [1]분기보고서 [2]사업보고서 [3]감사보고서 [4]주주총회 공시)
@@ -310,6 +311,7 @@ export default {
                 },
                 en: {
                     MainTitle: "Disclosure",
+                    searchPlaceholder: "Enter search term"/* 260708 번역 */,
                     MainsubTitle: "Disclosure Information",
                     Tabs1: [{ item: "Announcement"/* 260604 번역 */ }, { item: "Business/Audit Report"/* 260604 번역 */ }, { item: "Disclosure" }],
                     // 26.06.10 edit 정다희 : 상단 Tabs1·InnerTabs 탭명과 분리된 콘텐츠 영역 제목 ([0]~[4] ko ContentTitle 대응)

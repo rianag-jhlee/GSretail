@@ -3,7 +3,7 @@
     <div class="modal_cont store_find_modal">
         <div class="modal_header">
             {{ t.title }}
-            <button type="button" class="btn_close" aria-label="닫기" @click="closeModal"></button>
+            <button type="button" class="btn_close" :aria-label="t.closeLabel" @click="closeModal"></button>
         </div>
 
         <div class="modal_content">
@@ -12,33 +12,33 @@
                     v-model="selSido"
                     class="sf_select"
                     :class="{ sf_is_placeholder: !selSido }"
-                    aria-label="시·도"
+                    :aria-label="t.hp03"
                 >
-                    <option value="" disabled>시·도</option>
+                    <option value="" disabled>{{ t.hp03 }}</option>
                     <option v-for="o in optionsSido" :key="o" :value="o">{{ o }}</option>
                 </select>
                 <select
                     v-model="selSigungu"
                     class="sf_select"
                     :class="{ sf_is_placeholder: !selSigungu }"
-                    aria-label="시·군·구"
+                    :aria-label="t.hp02"
                 >
-                    <option value="" disabled>시/군/구</option>
+                    <option value="" disabled>{{ t.hp02 }}</option>
                     <option v-for="o in optionsSigungu" :key="o" :value="o">{{ o }}</option>
                 </select>
                 <select
                     v-model="selDong"
                     class="sf_select"
                     :class="{ sf_is_placeholder: !selDong }"
-                    aria-label="동"
+                    :aria-label="t.hp01"
                 >
-                    <option value="" disabled>동 선택</option>
+                    <option value="" disabled>{{ t.hp01 }}</option>
                     <option v-for="o in optionsDong" :key="o" :value="o">{{ o }}</option>
                 </select>
             </div>
 
             <!-- 26.05.11 Edit 이종환 : search component로 변경 -->
-            <Search v-model="searchData" :search_opt="options" @search="handleSearch" :placeholder="placeholder" :useSelect="false" />
+            <Search v-model="searchData" :search_opt="options" @search="handleSearch" :placeholder="t.hp05" :useSelect="false" />
 
             <!-- <div class="sf_row sf_row_input">
                 <div class="sf_input_wrap">
@@ -46,7 +46,7 @@
                         v-model="keyword"
                         type="search"
                         class="sf_input"
-                        placeholder="찾으시려는 매장명을 입력하세요."
+                        :placeholder="t.hp05"
                         autocomplete="off"
                     />
                     <span class="sf_input_trailing" aria-hidden="true"></span>
@@ -60,7 +60,7 @@
                     :aria-expanded="filterExpanded"
                     @click="filterExpanded = !filterExpanded"
                 >
-                    <span class="sf_filter_label">필터</span>
+                    <span class="sf_filter_label">{{ t.hp04 }}</span>
                     <span class="sf_chevron" :class="{ is_collapsed: !filterExpanded }"></span>
                 </button>
                 <div v-show="filterExpanded" class="sf_chip_wrap">
@@ -82,7 +82,7 @@
                 <!-- 26.05.19 Del iframe 제거 <iframe
                     class="sf_map_iframe"
                     src=""
-                    title="매장 위치 지도"
+                    :title="t.hp06"
                     frameborder="0"
                     allowfullscreen
                 ></iframe> -->
@@ -147,6 +147,13 @@ const props = defineProps({
 // =====================
 const langData = {
     ko: {
+                    hp01: "동 선택",
+                    hp02: "시/군/구",
+                    hp03: "시·도",
+                    hp04: "필터",
+                    hp05: "찾으시려는 매장명을 입력하세요.",
+                    hp06: "매장 위치 지도",
+                    closeLabel: "닫기",
         title: "GS25 매장찾기",
         chips: [
             { id: "c1", label: "스포츠 토토", selected: true },
@@ -196,6 +203,13 @@ const langData = {
     },
 
     en: {
+                    hp01: "Select Dong"/* 260708 번역 */,
+                    hp02: "City/County/District"/* 260708 번역 */,
+                    hp03: "City/Province"/* 260708 번역 */,
+                    hp04: "Filter"/* 260708 번역 */,
+                    hp05: "Enter the store name you are looking for."/* 260708 번역 */,
+                    hp06: "Store Location Map"/* 260708 번역 */,
+                    closeLabel: "Close"/* 260708 번역 */,
         chips: [
             { id: "c1", label: "Sports Toto", selected: true },
             { id: "c2", label: "CAFE25", selected: false },
@@ -222,9 +236,9 @@ const langData = {
 // =====================
 // computed
 // =====================
-// const t = computed(() => langData[props.lang] || langData.ko);
+// const t = computed(() => langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || langData.ko);
 const t = computed(() => {
-    const base = langData[props.lang] || langData.ko;
+    const base = langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || langData.ko;
 
     return {
         ...base,
@@ -238,14 +252,14 @@ const t = computed(() => {
 
 const chips = ref(
     structuredClone(
-        (langData[props.lang] || langData.ko).chips
+        (langData[(document.querySelector('.language button.current')?.textContent.trim().toLowerCase()||'ko')] || langData.ko).chips
     )
 );
 
 // =====================
 // state
 // =====================
-const placeholder = "찾으시려는 매장명을 입력하세요.";
+
 
 const searchData = ref("");
 const options = ref([]);

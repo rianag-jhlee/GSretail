@@ -12,7 +12,7 @@
                 <div class="img_wrap">
                     <picture>
                         <source media="(max-width: 768px)" :srcset="imgVisionMo" />
-                        <img :src="imgVision" alt="연결, 공감, 신뢰를 표현한 GS리테일 비전 다이어그램" />
+                        <img :src="imgVision" :alt="t.VisionAlt" />
                     </picture>
                 </div>
             </section>
