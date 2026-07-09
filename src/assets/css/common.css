@@ -463,7 +463,7 @@ label.select.err > em {display:block;}
 .btn_sns.small:before {display:none;}
 
 /* diff_qr_row (앱 다운로드 QR) */
-.diff_qr_row { max-width: 100%; padding:20px;background-color:#F2F2F4; border-radius:8px; display: flex; align-items: center; gap: 10px; cursor:pointer; }
+.diff_qr_row { max-width: 100%; padding:20px;background-color:#F2F2F4; border-radius:8px; display: flex; align-items: center; gap: 10px; }
 .diff_qr_row > figure { width: 90px; height: 90px; margin: 0; border-radius: 10px; flex-shrink: 0; }
 .diff_qr_row > figure > img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .diff_qr_row > div { min-width: 0; margin-left:10px; flex: 1; }
