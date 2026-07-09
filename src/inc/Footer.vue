@@ -31,7 +31,7 @@
             </div>
 
             <!-- 26.06.30 Add 이종환 -->
-            <div class="cs_info">
+            <div class="cs_info" v-if="t.cscenter"><!-- 26.07.09 Edit 이종환 : 영문관련 조건 추가 -->
                 <strong class="tit">{{ t.cscenter.title }}</strong>
                 <div>
                     <dl v-for="item in t.cscenter.info" :key="item.brand">

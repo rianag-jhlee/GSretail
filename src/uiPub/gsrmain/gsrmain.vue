@@ -389,19 +389,22 @@ export default {
                                 img: require("@/assets/images/main/main_sec03_01.png"),
                                 sub: require("@/assets/images/main/main_sec03_01-1.png"),
                                 brand: "GS25",
-                                txt: "The center of daily life, the start of the day"/* 260604 번역 */
+                                txt: "The center of daily life, the start of the day",/* 260604 번역 */
+                                class: "gs25",
                             },
                             {
                                 img: require("@/assets/images/main/main_sec03_02.png"),
                                 sub: require("@/assets/images/main/main_sec03_02-1.png"),
                                 brand: "GS THE FRESH",
-                                txt: "Meet Fresh Happiness"/* 260604 번역 */
+                                txt: "Meet Fresh Happiness",/* 260604 번역 */
+                                class: "fresh",
                             },
                             {
                                 img: require("@/assets/images/main/main_sec03_03.png"),
                                 sub: require("@/assets/images/main/main_sec03_03-1.png"),
                                 brand: "GS SHOP",
-                                txt: "Adding value to customers' lifestyles"/* 260604 번역 */
+                                txt: "Adding value to customers' lifestyles",/* 260604 번역 */
+                                class: "shopping",
                             },
                         ]
                     },
