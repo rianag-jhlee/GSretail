@@ -5011,6 +5011,8 @@ function goBack() {
 .chicken_panel .img_grid_swiper { margin-top: 120px }
 
 .gopizza_panel .img_grid, .gopizza_panel .img_grid_swiper { margin-top: 0; padding:0 }
+.gopizza_panel .img_grid > li { display: flex; flex-direction: column; } 
+.gopizza_panel .img_grid > li :deep(.diff_qr_row) { height: 100%; }
 
 .sec_brand_visual { position: relative; height: calc(100vh + 800px) }
 .sticky { --base-ratio: 0.75; --base-size: 1536; --base-percent: 100vw; width: 100%; height: calc(100vh + max(calc(2px * var(--base-ratio)), calc(calc(2 / var(--base-size)) * var(--base-percent)))); position: -webkit-sticky; position: sticky; top: max(calc(1 / var(--base-size) * var(--base-percent) * -1)); left: 0; overflow: hidden }
@@ -5858,7 +5860,7 @@ button { background-color: #fff }
   .cafe25_card_slide { width: 42vw; height: 42vw; overflow: hidden; border-radius: 12px }
   .cafe25_card_slide > img { width: 100%; height: 100%; object-fit: cover; display: block }
   .cafe25_split { flex-direction: column; }
-  .cafe25_split > div { width: 100%; flex: none; }
+  .cafe25_split > div { flex: none; }
   .cafe25_split_table .cafe25_table th > span, .cafe25_split_table .cafe25_table td > span { font-size: 1.6rem; line-height: 1.5; }
   .brand_panel:first-of-type section:not(:first-of-type) :deep(header) { padding-bottom: 40px }
   .img_grid { grid-template-columns: 1fr; gap: 40px; margin-top: 60px } /* 26.07.08 add 정다희 : phone_grid 모바일 1열 stack */
@@ -5868,7 +5870,6 @@ button { background-color: #fff }
   .img_grid_slide > img { width: 100%; height: 100%; object-fit: cover; display: block }
   .img_grid :deep(.diff_qr_row),
   .img_grid_swiper + :deep(.diff_qr_row){margin-top:24px;}
-  .gopizza_img_wrap { height: 260px }
   .diff_bottom_row { flex-direction: column; gap: 20px }
   .gopizza_link { padding: 0 16px; position: relative; gap: 12px }
   .gopizza_link > figure { width: 48px; height: 48px; padding: 0; border: 0; display:block }
