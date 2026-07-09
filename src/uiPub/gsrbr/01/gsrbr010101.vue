@@ -5021,7 +5021,7 @@ function goBack() {
 .brand_panel_title > p{font-weight: 700;font-size: 2.4rem;line-height: 1.5;letter-spacing: -0.01em;}
 :deep(.feature_card_desc), :deep(.step_bullets > li){font-size:1.8rem}  /* 2026.07.06 edit 이소라 */
 
-.bg_wrap > .bg { width: 100%; height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.png); background-size: cover; background-position: center bottom; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out }
+.bg_wrap > .bg { width: 100%;  height: 100%; background-image: url(@/assets/images/dummy/brand_main_bg.png); background-size: cover; background-position: center bottom; position: absolute; top: 0; left: 0; z-index: -1; transform: scale(1.0); transition: transform 0.7s ease-out } 
 .bg_wrap.active > .bg { transform: scale(0.8) }
 .bg_wrap > .bg::before, .bg_wrap > .bg::after { content: ""; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: 0.7s }
 .bg_wrap > .bg::after { background: rgba(0, 0, 0, 0.4); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1 }
@@ -5488,7 +5488,7 @@ button { background-color: #fff }
   .sinsen_advantage_items > li > figure > figcaption { margin-top: 16px; font-size: 1.4rem;  line-height: 1.4; letter-spacing: -0.01em; }
 }
 
-
+.pop_sec_acc :deep(dd.acc_panel > .acc_panel_inner > .acc_panel_cont) { color: #161616; } /**26.07.09 add 정다희 */
 .pop_card_name { margin-bottom: 12px; color: #161616; font-size: 2.4rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; display: block }
 .pop_card_thumb { width: 100%; display: block }
 .pop_card_thumb img { width: auto; height: auto }
@@ -5602,7 +5602,7 @@ button { background-color: #fff }
 /* 26.06.11 edit 정다희 : usage·list_dotted·caution 등 font-weight 700 */
 .usage_group .list_dotted > li { color: #67676f; font-weight:700;}
 .usage_group .list_dotted > li::before { background-color: #67676f }
-
+.explain{font-size:2rem; line-height:1.35; letter-spacing: -0.01em;} /**26.07.09 add 정다희 */
 .explain + .retail_note {margin-top:8px;}
 
 .retail_note { margin: 0 0 24px; color: #f95823; font-size: 1.4rem; line-height: 1.4; letter-spacing: -0.01em }
